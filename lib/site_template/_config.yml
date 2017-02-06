@@ -27,8 +27,14 @@ github_username:  jekyll
 # Build settings
 markdown: kramdown
 theme: minima
-gems:
-  - jekyll-feed
+
+# Plugins
+#   Either list the plugins required by your site here or under
+#   the `:jekyll_plugins` group in your `Gemfile`.
+#
+# gems:
+#   - jekyll-feed
+
 exclude:
   - Gemfile
   - Gemfile.lock
