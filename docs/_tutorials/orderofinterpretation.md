@@ -16,7 +16,10 @@ Jekyll converts your site in the following order:
 
 1. **Site variables**. Jekyll looks across your files and populates [site variables]({% link _docs/variables.md %}), such as `site`, `page`, `post`, and collection objects. (From these objects, Jekyll determines the values for permalinks, tags, categories, and other details.)
 
-2. **Liquid**. Jekyll processes any Liquid formatting in pages that contain [front matter]({% link _docs/frontmatter.md %}). All Liquid tags, such as `include`, `highlight`, or `assign` tags, are rendered. (Anything in Jekyll with `{% raw %}{{ }}{% endraw %}` curly braces or `{% raw %}{% %}{% endraw %}` is usually a Liquid filter or tag.)
+2. **Liquid**. Jekyll processes any [Liquid](https://github.com/Shopify/liquid) formatting in pages that contain [front matter]({% link _docs/frontmatter.md %}). You can identify Liquid as follows:
+   * **Liguid tags** start with `{% raw %}{%{% endraw %}` and end with a `{% raw %}%}{% endraw %}`. For example: `{% raw %}{% highlight %}{% endraw %}` or `{% raw %}{% seo %}{% endraw %}`. Tags can define blocks or be inline. Block-defining tags will also come with a corresponding end tag &mdash; for example, `{% raw %}{% endhighlight %}{% endraw %}`.
+   * **Liquid variables** start and end with double curly braces. For example: `{% raw %}{{ site.myvariable }}{% endraw %}` or `{% raw %}{{ content }}{% endraw %}`.
+   * **Liquid filters** start with a pipe character (`|`) and can only be used within **Liquid variables** after the variable string. For example: the `relative_url` filter in `{% raw %}{{ "css/main.css" | relative_url }}{% endraw %}`.
 
 3. **Markdown**. Jekyll converts Markdown to HTML using the Markdown filter specified in your config file. Files must have a Markdown file extension and front matter in order for Jekyll to convert them.
 
@@ -28,7 +31,7 @@ Jekyll converts your site in the following order:
 
 For the most part, you don't have to think about the order of interpretation when building your Jekyll site. These details only become important to know when something isn't rendering.
 
-The following scenarios highlight potential problems you might encounter. These problems stem from misunderstanding the order of interpretation and can be easily fixed.
+The following scenarios highlight potential problems you might encounter. These problems come from misunderstanding the order of interpretation and can be easily fixed.
 
 ### Variable on page not rendered because variable is assigned in layout
 
@@ -137,4 +140,4 @@ On a page, you try to insert the value:
 {% raw %}{{ site.data.mydata.myvalue }}{% endraw %}
 ```
 
-This would render as a string rather than a code sample with syntax highlighting. To make the code render, you might use an include instead.
+This would render only as a string rather than a code sample with syntax highlighting. To make the code render, consider using an include instead.
