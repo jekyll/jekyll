@@ -4,6 +4,7 @@ module Jekyll
     extend self
     autoload :Ansi, "jekyll/utils/ansi"
     autoload :Exec, "jekyll/utils/exec"
+    autoload :Internet, "jekyll/utils/internet"
     autoload :Platforms, "jekyll/utils/platforms"
     autoload :WinTZ, "jekyll/utils/win_tz"
 

@@ -396,4 +396,10 @@ class TestUtils < JekyllUnitTest
       assert_equal "bom|utf-8", opts["encoding"]
     end
   end
+
+  context "Utils::Internet.connected?" do
+    should "return true if there's internet" do
+      assert Utils::Internet.connected?
+    end
+  end
 end
