@@ -148,8 +148,9 @@ class TestStaticFile < JekyllUnitTest
         "extname"       => ".txt",
         "modified_time" => @static_file.modified_time,
         "path"          => "/static_file.txt",
+        "collection"    => nil
       }
-      assert_equal expected, @static_file.to_liquid
+      assert_equal expected, @static_file.to_liquid.to_h
     end
   end
 end
