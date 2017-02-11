@@ -10,6 +10,7 @@
   * Install troubleshooting on Ubuntu (#5817)
   * Add Termux section on troubleshooting (#5837)
   * fix ial css classes in theme doc (#5876)
+  * Update installation.md (#5880)
 
 ### Development Fixes
 
