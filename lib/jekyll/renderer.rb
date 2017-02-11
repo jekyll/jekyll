@@ -5,6 +5,18 @@ module Jekyll
     attr_reader :document, :site
     attr_writer :layouts, :payload
 
+    class << self
+      def stats
+        @stats ||= {}
+      end
+
+      def record_action(action, filename, duration)
+        stats[filename] ||= {}
+        stats[filename][action] ||= 0
+        stats[filename][action] += duration
+      end
+    end
+
     def initialize(site, document, site_payload = nil)
       @site     = site
       @document = document
@@ -68,8 +80,9 @@ module Jekyll
       payload["highlighter_prefix"] = converters.first.highlighter_prefix
       payload["highlighter_suffix"] = converters.first.highlighter_suffix
 
-      Jekyll.logger.debug "Pre-Render Hooks:", document.relative_path
-      document.trigger_hooks(:pre_render, payload)
+      #debug_duration "Pre-Render Hooks", document.relative_path do
+        document.trigger_hooks(:pre_render, payload)
+        #end
 
       info = {
         :registers => { :site => site, :page => payload["page"] }
@@ -78,24 +91,35 @@ module Jekyll
       output = document.content
 
       if document.render_with_liquid?
-        Jekyll.logger.debug "Rendering Liquid:", document.relative_path
-        output = render_liquid(output, payload, info, document.path)
+        debug_duration "Rendering Liquid", document.relative_path do
+          output = render_liquid(output, payload, info, document.path)
+        end
       end
 
-      Jekyll.logger.debug "Rendering Markup:", document.relative_path
-      output = convert(output)
-      document.content = output
+      debug_duration "Rendering Markup", document.relative_path do
+        output = convert(output)
+        document.content = output
+      end
 
       if document.place_in_layout?
-        Jekyll.logger.debug "Rendering Layout:", document.relative_path
-        place_in_layouts(
-          output,
-          payload,
-          info
-        )
+        debug_duration "Rendering Layout", document.relative_path do
+          place_in_layouts(
+            output,
+            payload,
+            info
+          )
+        end
       else
         output
       end
+    end
+
+    def debug_duration(action, filename)
+      start = Time.now
+      yield
+      duration = Time.now - start
+      Jekyll.logger.debug "#{action}:", "#{filename} (%f seconds)" % duration
+      self.class.record_action(action, filename, duration)
     end
 
     # Convert the given content using the converters which match this renderer's document.

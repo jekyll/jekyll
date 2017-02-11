@@ -76,6 +76,9 @@ module Jekyll
       if @config["profile"]
         puts @liquid_renderer.stats_table
       end
+      puts JSON.pretty_generate(Hash[Jekyll::Renderer.stats.select { |filename, data|
+        data["Rendering Markup"].to_f >= 0.2 || data["Rendering Liquid"].to_f >= 0.2 || data["Rendering Layout"].to_f >= 0.2
+      }])
     end
 
     # Reset Site details.
