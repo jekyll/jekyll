@@ -96,9 +96,11 @@ module Jekyll
 
         def proper_site_url?(site)
           url = site.config["url"]
-          url_exists?(url) &&
-            url_valid?(url) &&
-            url_absolute(url)
+          [
+            url_exists?(url),
+            url_valid?(url),
+            url_absolute(url),
+          ].all?
         end
 
         private
