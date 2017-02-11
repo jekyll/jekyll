@@ -3,6 +3,7 @@
 ### Minor Enhancements
 
   * Upgrade to Liquid v4 (#4362)
+  * Convert StaticFile liquid representation to a Drop & add front matter defaults support to StaticFiles (#5871)
 
 ### Documentation
 
