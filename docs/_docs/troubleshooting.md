@@ -65,6 +65,12 @@ sudo emerge -av dev-ruby/rubygems
 On Windows, you may need to install [RubyInstaller
 DevKit](https://wiki.github.com/oneclick/rubyinstaller/development-kit).
 
+On Android (with Termux) you can install all requirements by running: 
+
+```sh
+apt update && apt install libffi-dev clang ruby-dev make
+```
+
 On macOS, you may need to update RubyGems (using `sudo` only if necessary):
 
 ```sh

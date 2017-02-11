@@ -8,7 +8,7 @@ rvm:
   - &ruby1 2.4.0
   - &ruby2 2.3.3
   - &ruby3 2.2.6
-  - &ruby4 2.1.9
+  - &ruby4 2.1.10
   - &jruby jruby-9.1.7.0
 
 matrix:

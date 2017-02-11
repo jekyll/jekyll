@@ -28,6 +28,10 @@ module Jekyll
       @collection = collection
       @relative_path = File.join(*[@dir, @name].compact)
       @extname = File.extname(@name)
+
+      data.default_proc = proc do |_, key|
+        site.frontmatter_defaults.find(relative_path, type, key)
+      end
     end
     # rubocop: enable ParameterLists
 
@@ -96,13 +100,15 @@ module Jekyll
     end
 
     def to_liquid
-      {
-        "basename"      => File.basename(name, extname),
-        "name"          => name,
-        "extname"       => extname,
-        "modified_time" => modified_time,
-        "path"          => File.join("", relative_path),
-      }
+      @to_liquid ||= Drops::StaticFileDrop.new(self)
+    end
+
+    def data
+      @data ||= {}
+    end
+
+    def basename
+      File.basename(name, extname)
     end
 
     def placeholders

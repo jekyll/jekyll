@@ -3,12 +3,29 @@
 ### Minor Enhancements
 
   * Upgrade to Liquid v4 (#4362)
+  * Convert StaticFile liquid representation to a Drop & add front matter defaults support to StaticFiles (#5871)
 
 ### Documentation
 
   * Install troubleshooting on Ubuntu (#5817)
+  * Add Termux section on troubleshooting (#5837)
+  * fix ial css classes in theme doc (#5876)
 
-## 3.4.0 / 2016-01-27
+### Development Fixes
+
+  * [Rubocop] add missing comma (#5835)
+
+### Site Enhancements
+
+  * Corrected date for version 3.4.0 (#5842)
+  * Add the correct year to the 3.4.0 release date (#5858)
+  * Add documentation about order of interpretation (#5834)
+
+### Bug Fixes
+
+  * Exclude Gemfile by default (#5860)
+
+## 3.4.0 / 2017-01-27
 
 ### Minor Enhancements
 
