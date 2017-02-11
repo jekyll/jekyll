@@ -261,9 +261,11 @@ module Jekyll
           read_post_data
         rescue SyntaxError => e
           Jekyll.logger.error "Error:", "YAML Exception reading #{path}: #{e.message}"
+          raise e if self.site.config["strict_front_matter"]
         rescue => e
           raise e if e.is_a? Jekyll::Errors::FatalException
           Jekyll.logger.error "Error:", "could not read file #{path}: #{e.message}"
+          raise e if self.site.config["strict_front_matter"]
         end
       end
     end
