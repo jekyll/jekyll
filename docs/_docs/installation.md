@@ -36,7 +36,7 @@ Before you start, make sure your system has the following:
 <div class="note info">
   <h5>Running Jekyll on Windows</h5>
   <p>
-    While Windows is not officially supported, it is possible to get it running
+    While Windows is not officially supported, it is possible to get Jekyll running
     on Windows. Special instructions can be found on our
     <a href="../windows/#installation">Windows-specific docs page</a>.
   </p>
