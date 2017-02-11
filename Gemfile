@@ -3,12 +3,7 @@ gemspec :name => "jekyll"
 
 gem "rake", "~> 12.0"
 
-if RUBY_VERSION >= '2.4'
-  gem "json", "~> 2.0"
-  gem "pygments.rb", "~> 1.1"
-else
-  gem "pygments.rb", "~> 0.6.0" unless RUBY_ENGINE == "jruby"
-end
+gem "pygments.rb", "~> 1.1"
 
 # Dependency of jekyll-mentions. RubyGems in Ruby 2.1 doesn't shield us from this.
 gem "activesupport", "~> 4.2", :groups => [:test_legacy, :site] if RUBY_VERSION < "2.2.2"
