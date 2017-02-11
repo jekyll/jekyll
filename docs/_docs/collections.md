@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Collections
 permalink: /docs/collections/
 ---
@@ -12,7 +11,13 @@ namespace.
 
 ## Using Collections
 
-### Step 1: Tell Jekyll to read in your collection
+To start using collections, follow these 3 steps:
+
+* [Step 1: Tell Jekyll to read in your collection](#step1)
+* [Step 2: Add your content](#step2)
+* [Step 3: Optionally render your collection's documents into independent files](#step3)
+
+### Step 1: Tell Jekyll to read in your collection {#step1}
 
 Add the following to your site's `_config.yml` file, replacing `my_collection`
 with the name of your collection:
@@ -41,12 +46,12 @@ defaults:
       layout: page
 ```
 
-### Step 2: Add your content
+### Step 2: Add your content {#step2}
 
 Create a corresponding folder (e.g. `<source>/_my_collection`) and add
-documents. YAML Front Matter is read in as data if it exists, and everything
-after it is stuck in the Document's `content` attribute. If no YAML Front
-Matter is provided, Jekyll will not generate the file in your collection.
+documents. YAML front matter is processed if the front matter exists, and everything
+after the front matter is pushed into the document's `content` attribute. If no YAML front
+matter is provided, Jekyll will not generate the file in your collection.
 
 <div class="note info">
   <h5>Be sure to name your directories correctly</h5>
@@ -56,7 +61,7 @@ your <code>_config.yml</code> file, with the addition of the preceding <code>_</
   </p>
 </div>
 
-### Step 3: Optionally render your collection's documents into independent files
+### Step 3: Optionally render your collection's documents into independent files {#step3}
 
 If you'd like Jekyll to create a public-facing, rendered version of each
 document in your collection, set the `output` key to `true` in your collection
@@ -73,19 +78,6 @@ For example, if you have `_my_collection/some_subdir/some_doc.md`,
 it will be rendered using Liquid and the Markdown converter of your
 choice and written out to `<dest>/my_collection/some_subdir/some_doc.html`.
 
-As for posts with [Permalinks](../permalinks/), the document
-URL can be customized by setting `permalink` metadata for the collection:
-
-```yaml
-collections:
-  my_collection:
-    output: true
-    permalink: /awesome/:path/
-```
-
-For example, if you have `_my_collection/some_subdir/some_doc.md`, it will be
-written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
-
 <div class="note info">
   <h5>Don't forget to add YAML for processing</h5>
   <p>
@@ -94,6 +86,21 @@ written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
   output location without processing.
   </p>
 </div>
+
+## Configuring permalinks for collections {#permalinks}
+
+You can customize the [Permalinks](../permalinks/) for your collection's documents by setting `permalink` property in the collection's configuration as follows:
+
+```yaml
+collections:
+  my_collection:
+    output: true
+    permalink: /awesome/:path/:title.:output_ext
+```
+
+In this example, the collection documents will the have the URL of `awesome` followed by the path to the document and its file extension.
+
+Collections have the following template variables available for permalinks:
 
 <div class="mobile-side-scroller">
 <table>
@@ -149,15 +156,92 @@ written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
 </table>
 </div>
 
+## Permalink examples for collections
+
+Depending on how you declare the permalinks in your configuration file, the permalinks and paths get written differently in the `_site` folder. A few examples will help clarify the options.
+
+Let's say your collection is called `apidocs` with `doc1.md` in your collection. `doc1.md` is grouped inside a folder called `mydocs`. Your project's source directory for the collection looks this:
+
+```
+├── \_apidocs
+│   └── mydocs
+│       └── doc1.md
+```
+
+Based on this scenario, here are a few permalink options.
+
+**Permalink configuration 1**: [Nothing configured] <br/>
+**Output**:
+
+```
+├── apidocs
+│   └── mydocs
+│       └── doc1.html
+```
+
+**Permalink configuration 2**: `/:collection/:path/:title:output_ext`  <br/>
+**Output**:
+
+```
+├── apidocs
+│   └── mydocs
+│       └── doc1.html
+```
+
+**Permalink configuration 3**: No collection permalinks configured, but `pretty` configured for pages/posts. <br/>
+**Output**:
+
+```
+├── apidocs
+│   └── mydocs
+│       └── doc1
+│           └── index.html
+```
+
+**Permalink configuration 4**: `/awesome/:path/:title.html`   <br/>
+**Output**:
+
+```
+├── awesome
+│   └── mydocs
+│       └── doc1.html
+```
+
+**Permalink configuration 5**: `/awesome/:path/:title/`  <br/>
+**Output**:
+
+```
+├── awesome
+│   └── mydocs
+│       └── doc1
+│           └── index.html
+```
+
+**Permalink configuration 6**: `/awesome/:title.html` <br/>
+**Output**:  
+
+```
+├── awesome
+│   └── doc1.html
+```
+
+**Permalink configuration 7**: `:title.html`
+**Output**:
+
+```
+├── doc1.html
+```
+
 ## Liquid Attributes
 
 ### Collections
 
-Each collection is accessible via the `site` Liquid variable. For example, if
+Each collection is accessible as a field on the `site` variable. For example, if
 you want to access the `albums` collection found in `_albums`, you'd use
-`site.albums`. Each collection is itself an array of documents
-(e.g. `site.albums` is an array of documents, much like `site.pages` and
-`site.posts`). See below for how to access attributes of those documents.
+`site.albums`. 
+
+Each collection is itself an array of documents (e.g., `site.albums` is an array of documents, much like `site.pages` and
+`site.posts`). See the table below for how to access attributes of those documents.
 
 The collections are also available under `site.collections`, with the metadata
 you specified in your `_config.yml` (if present) and the following information:
@@ -335,7 +419,7 @@ file, each document has the following attributes:
 
 Attributes from the YAML front matter can be accessed as data anywhere in the
 site. Using the above example for configuring a collection as `site.albums`,
-one might have front matter in an individual file structured as follows (which
+you might have front matter in an individual file structured as follows (which
 must use a supported markup format, and cannot be saved with a `.yaml`
 extension):
 

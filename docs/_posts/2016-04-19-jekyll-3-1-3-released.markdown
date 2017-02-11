@@ -1,5 +1,4 @@
 ---
-layout: news_item
 title: 'Jekyll 3.1.3 Released'
 date: 2016-04-19 10:26:16 -0700
 author: parkr
@@ -15,4 +14,3 @@ v3.1.3 is a patch release which fixes the follow two issues:
 Both of these issues have been resolved. For more information, check out [the full history](/docs/history/#v3-1-3).
 
 Happy Jekylling!
-

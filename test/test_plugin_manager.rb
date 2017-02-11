@@ -68,7 +68,7 @@ class TestPluginManager < JekyllUnitTest
     should "require plugin files" do
       site = double({ :safe          => false,
                       :config        => { "plugins_dir" => "_plugins" },
-                      :in_source_dir => "/tmp/" })
+                      :in_source_dir => "/tmp/", })
       plugin_manager = PluginManager.new(site)
 
       expect(Jekyll::External).to receive(:require_with_graceful_fail)
@@ -98,9 +98,9 @@ class TestPluginManager < JekyllUnitTest
     should "call site's in_source_dir" do
       site = double({
         :config        => {
-          "plugins_dir" => Jekyll::Configuration::DEFAULTS["plugins_dir"]
+          "plugins_dir" => Jekyll::Configuration::DEFAULTS["plugins_dir"],
         },
-        :in_source_dir => "/tmp/"
+        :in_source_dir => "/tmp/",
       })
       plugin_manager = PluginManager.new(site)
 
@@ -132,7 +132,7 @@ class TestPluginManager < JekyllUnitTest
 
     should "print no deprecation warning if jekyll-paginate is present" do
       site = double({
-        :config => { "paginate" => true, "gems" => ["jekyll-paginate"] }
+        :config => { "paginate" => true, "gems" => ["jekyll-paginate"] },
       })
       plugin_manager = PluginManager.new(site)
 

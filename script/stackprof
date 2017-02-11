@@ -10,13 +10,17 @@ esac
 export BENCHMARK=true
 command -v stackprof > /dev/null || script/bootstrap
 
-TEST_SCRIPT="Jekyll::Commands::Build.process({'source' => 'site'})"
+TEST_SCRIPT="Jekyll::Commands::Build.process({'source' => 'docs'})"
 PROF_OUTPUT_FILE=tmp/stackprof-${STACKPROF_MODE}-$(date +%Y%m%d%H%M).dump
+
+GC_BEFORE="puts 'GC Stats:'; puts JSON.pretty_generate(GC.stat); GC.disable"
+GC_AFTER="puts 'GC Stats:'; GC.start(full_mark: true, immediate_sweep: false); puts JSON.pretty_generate(GC.stat);"
 
 echo Stackprof Mode: $STACKPROF_MODE
 test -f "$PROF_OUTPUT_FILE" || {
-  bundle exec ruby -r./lib/jekyll -rstackprof \
-    -e "StackProf.run(mode: :${STACKPROF_MODE}, interval: 100, out: '${PROF_OUTPUT_FILE}') { ${TEST_SCRIPT} }"
+  bundle exec ruby -r./lib/jekyll -rstackprof -rjson \
+    -e "StackProf.run(mode: :${STACKPROF_MODE}, interval: 100, out: '${PROF_OUTPUT_FILE}') { ${GC_BEFORE}; ${TEST_SCRIPT}; ${GC_AFTER}; }"
 }
 
-bundle exec stackprof $PROF_OUTPUT_FILE $@
+set -x
+bundle exec stackprof $PROF_OUTPUT_FILE $@ --sort-total

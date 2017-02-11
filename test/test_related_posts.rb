@@ -28,7 +28,7 @@ class TestRelatedPosts < JekyllUnitTest
 
       allow_any_instance_of(Jekyll::RelatedPosts).to receive(:display)
       @site = fixture_site({
-        "lsi" => true
+        "lsi" => true,
       })
 
       @site.reset

@@ -18,7 +18,8 @@ module Jekyll
       "safe"              => false,
       "include"           => [".htaccess"],
       "exclude"           => %w(
-        node_modules vendor/bundle/ vendor/cache/ vendor/gems/ vendor/ruby/
+        Gemfile Gemfile.lock node_modules vendor/bundle/ vendor/cache/ vendor/gems/
+        vendor/ruby/
       ),
       "keep_files"        => [".git", ".svn"],
       "encoding"          => "utf-8",
@@ -58,15 +59,15 @@ module Jekyll
       "defaults"          => [],
 
       "liquid"            => {
-        "error_mode" => "warn"
+        "error_mode" => "warn",
       },
 
       "rdiscount"         => {
-        "extensions" => []
+        "extensions" => [],
       },
 
       "redcarpet"         => {
-        "extensions" => []
+        "extensions" => [],
       },
 
       "kramdown"          => {
@@ -76,8 +77,8 @@ module Jekyll
         "smart_quotes"  => "lsquo,rsquo,ldquo,rdquo",
         "input"         => "GFM",
         "hard_wrap"     => false,
-        "footnote_nr"   => 1
-      }
+        "footnote_nr"   => 1,
+      },
     }.map { |k, v| [k, v.freeze] }].freeze
 
     class << self
