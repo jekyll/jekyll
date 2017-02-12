@@ -203,6 +203,6 @@ Setting up Kickster is very easy, just install the gem and you are good to go. M
 
 ## Aerobatic
 
-[Aerobatic](https://www.aerobatic.com) is an add-on for Bitbucket that brings GitHub Pages style functionality to Bitbucket users. It includes continuous deployment, custom domains with a wildcard SSL cert, CDN, basic auth, and staging branches all in the box.
+[Aerobatic](https://www.aerobatic.com) has custom domains, global CDN distribution, basic auth, CORS proxying, and a growling list of plugins all included.
 
-Automating the build and deployment of a Jekyll site is just as simple as GitHub Pages - push your changes to your repo (excluding the `_site` directory) and within seconds a build will be triggered and your built site deployed to our highly- available, globally distributed hosting service. The build process will even install and execute custom Ruby plugins. See our [Jekyll docs](https://www.aerobatic.com/docs/static-generators#jekyll) for more details.
+Automating the deployment of a Jekyll site is simple. See our [Jekyll docs](https://www.aerobatic.com/docs/static-site-generators/#jekyll) for more details. Your built site deployed to our highly-available, globally distributed hosting service.
