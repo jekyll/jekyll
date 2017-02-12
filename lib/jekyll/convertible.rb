@@ -69,7 +69,7 @@ module Jekyll
     end
 
     def validate_permalink!(filename)
-      if self.data["permalink"] && self.data["permalink"].empty?
+      if self.data["permalink"] && self.data["permalink"].to_s.empty?
         raise Errors::InvalidPermalinkError, "Invalid permalink in #{filename}"
       end
     end
