@@ -203,6 +203,6 @@ Setting up Kickster is very easy, just install the gem and you are good to go. M
 
 ## Aerobatic
 
-[Aerobatic](https://www.aerobatic.com) has custom domains, global CDN distribution, basic auth, CORS proxying, and a growling list of plugins all included.
+[Aerobatic](https://www.aerobatic.com) has custom domains, global CDN distribution, basic auth, CORS proxying, and a growing list of plugins all included.
 
 Automating the deployment of a Jekyll site is simple. See our [Jekyll docs](https://www.aerobatic.com/docs/static-site-generators/#jekyll) for more details. Your built `_site` folder is deployed to our highly-available, globally distributed hosting service.
