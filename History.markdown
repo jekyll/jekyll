@@ -12,6 +12,7 @@
   * fix ial css classes in theme doc (#5876)
   * Update installation.md (#5880)
   * Update Aerobatic docs (#5883)
+  * Add note to collections doc on hard-coded collections. (#5882)
 
 ### Development Fixes
 
