@@ -37,7 +37,7 @@ Gem::Specification.new do |s|
   # Before 3.0 drops, phase the following gems out as dev dependencies
   # and gracefully handle their absence.
   s.add_runtime_dependency('pygments.rb', '~> 0.6.0')
-  s.add_runtime_dependency('redcarpet', '~> 3.1')
+  s.add_runtime_dependency('redcarpet', '~> 3.3\', \'>= 3.3.2')
   s.add_runtime_dependency('toml', '~> 0.1.0')
   s.add_runtime_dependency('jekyll-paginate', '~> 1.0')
   s.add_runtime_dependency('jekyll-gist', '~> 1.0')
