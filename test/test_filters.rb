@@ -391,6 +391,19 @@ class TestFilters < JekyllUnitTest
         assert_equal "http://example.com/", filter.absolute_url(page_url)
       end
 
+      should "not append a forward slash if input is '/' with nil 'baseurl'" \
+             " and finally passed to xml_escape filter" do
+        page_url = "/"
+        filter = make_filter_mock({
+          "url"     => "http://example.com",
+          "baseurl" => nil,
+        })
+        assert_equal(
+          "http://example.com/",
+          filter.xml_escape(filter.absolute_url(page_url))
+        )
+      end
+
       should "normalize international URLs" do
         page_url = ""
         filter = make_filter_mock({
