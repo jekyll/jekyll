@@ -109,8 +109,7 @@ eos
       end
 
       def render_rouge(code)
-        Jekyll::External.require_with_graceful_fail("rouge")
-        formatter = Rouge::Formatters::HTMLLegacy.new(
+        formatter = Jekyll::Utils::RougeFormatter.html(
           :line_numbers => @highlight_options[:linenos],
           :wrap         => false,
           :css_class    => "highlight",

@@ -55,7 +55,7 @@ class Jekyll::Converters::Markdown::RedcarpetParser
 
     protected
     def rouge_formatter(_lexer)
-      Rouge::Formatters::HTMLLegacy.new(:wrap => false)
+      Jekyll::Utils::RougeFormatter.html(:wrap => false)
     end
   end
 

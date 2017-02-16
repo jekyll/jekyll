@@ -5,6 +5,7 @@ module Jekyll
     autoload :Ansi, "jekyll/utils/ansi"
     autoload :Exec, "jekyll/utils/exec"
     autoload :Platforms, "jekyll/utils/platforms"
+    autoload :RougeFormatter, "jekyll/utils/rouge_formatter"
     autoload :WinTZ, "jekyll/utils/win_tz"
 
     # Constants for use in #slugify
