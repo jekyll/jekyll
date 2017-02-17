@@ -12,5 +12,6 @@ module Jekyll
     InvalidDateError      = Class.new(FatalException)
     InvalidPostNameError  = Class.new(FatalException)
     PostURLError          = Class.new(FatalException)
+    InvalidURLError       = Class.new(FatalException)
   end
 end
