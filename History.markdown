@@ -13,6 +13,7 @@
   * Update installation.md (#5880)
   * Update Aerobatic docs (#5883)
   * Add note to collections doc on hard-coded collections. (#5882)
+  * Makes uri_escape template docs more specific. (#5887)
 
 ### Development Fixes
 
