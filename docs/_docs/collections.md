@@ -321,6 +321,15 @@ you specified in your `_config.yml` (if present) and the following information:
 </table>
 </div>
 
+<div class="note info">
+  <h5>A Hard-Coded Collection</h5>
+  <p>In addition to any collections you create yourself, the 
+  <code>posts</code> collection is hard-coded into Jekyll. It exists whether 
+  you have a <code>_posts</code> directory or not. This is something to note 
+  when iterating through <code>site.collections</code> as you may need to 
+  filter it out.</p>
+</div>
+
 
 ### Documents
 

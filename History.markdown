@@ -3,11 +3,17 @@
 ### Minor Enhancements
 
   * Upgrade to Liquid v4 (#4362)
+  * Convert StaticFile liquid representation to a Drop & add front matter defaults support to StaticFiles (#5871)
 
 ### Documentation
 
   * Install troubleshooting on Ubuntu (#5817)
   * Add Termux section on troubleshooting (#5837)
+  * fix ial css classes in theme doc (#5876)
+  * Update installation.md (#5880)
+  * Update Aerobatic docs (#5883)
+  * Add note to collections doc on hard-coded collections. (#5882)
+  * Makes uri_escape template docs more specific. (#5887)
 
 ### Development Fixes
 
@@ -17,6 +23,12 @@
 
   * Corrected date for version 3.4.0 (#5842)
   * Add the correct year to the 3.4.0 release date (#5858)
+  * Add documentation about order of interpretation (#5834)
+
+### Bug Fixes
+
+  * Exclude Gemfile by default (#5860)
+  * Convertible#validate_permalink!: ensure the return value of data["permalink"] is a string before asking if it is empty (#5878)
 
 ## 3.4.0 / 2017-01-27
 

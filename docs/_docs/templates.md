@@ -194,15 +194,15 @@ common tasks easier.
       <td>
         <p class="name"><strong>URI Escape</strong></p>
         <p>
-          URI escape a string.
+          Percent encodes any special characters in a URI.
         </p>
       </td>
       <td class="align-center">
         <p>
-         <code class="filter">{% raw %}{{ "foo, bar \baz?" | uri_escape }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ "http://foo.com/?query=foo, bar \baz?" | uri_escape }}{% endraw %}</code>
         </p>
         <p>
-          <code class="output">foo,%20bar%20%5Cbaz?</code>
+          <code class="output">http://foo.com/?query=foo,%20bar%20%5Cbaz?</code>
         </p>
       </td>
     </tr>
