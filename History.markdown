@@ -14,6 +14,7 @@
   * Update Aerobatic docs (#5883)
   * Add note to collections doc on hard-coded collections. (#5882)
   * Makes uri_escape template docs more specific. (#5887)
+  * Remove duplicate footnote_nr from default config (#5891)
 
 ### Development Fixes
 
