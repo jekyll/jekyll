@@ -225,16 +225,24 @@ If you do preview your theme locally, be sure to add `/_site` to your theme's `.
 
 Themes are published via [RubyGems.org](https://rubygems.org). You will need a RubyGems account, which you can [create for free](https://rubygems.org/sign_up).
 
-1. First, package your theme, by running the following command, replacing `jekyll-theme-awesome` with the name of your theme:
+1. First, you need to have it in a git repository:
+
+   ```sh
+   git init # Only the first time
+   git add -A
+   git commit -m "Init commit"
+   ```
+
+2. Next, package your theme, by running the following command, replacing `jekyll-theme-awesome` with the name of your theme:
 
    ```sh
    gem build jekyll-theme-awesome.gemspec
    ```
 
-2. Next, push your packaged theme up to the RubyGems service, by running the following command, again replacing `jekyll-theme-awesome` with the name of your theme:
+3. Finally, push your packaged theme up to the RubyGems service, by running the following command, again replacing `jekyll-theme-awesome` with the name of your theme:
 
    ```sh
    gem push jekyll-theme-awesome-*.gem
    ```
 
-3. To release a new version of your theme, update the version number in the gemspec file, ( `jekyll-theme-awesome.gemspec` in this example ), and then repeat Steps 1 & 2 above. We recommend that you follow [Semantic Versioning](http://semver.org/) while bumping your theme-version.
+4. To release a new version of your theme, update the version number in the gemspec file, ( `jekyll-theme-awesome.gemspec` in this example ), and then repeat Steps 1 - 3 above. We recommend that you follow [Semantic Versioning](http://semver.org/) while bumping your theme-version.
