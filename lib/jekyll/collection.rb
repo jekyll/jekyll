@@ -211,9 +211,9 @@ module Jekyll
     private
 
     def sort_docs!
-      sort_by ||= @metadata["sort_by"]
-      if sort_by
-        docs.sort! { |x, y| x.data[sort_by] <=> y.data[sort_by] }
+      sort_key ||= @metadata["sort_by"]
+      if sort_key
+        docs.sort_by! { |d| d.data[sort_key] }
       else
         docs.sort!
       end
