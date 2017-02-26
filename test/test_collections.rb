@@ -175,7 +175,7 @@ class TestCollections < JekyllUnitTest
     setup do
       @site = fixture_site({
         "collections" => {
-          "methods" => {
+          "methods"   => {
             "output" => true,
           },
           "tutorials" => {
