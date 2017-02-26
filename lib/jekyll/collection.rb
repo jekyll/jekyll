@@ -62,7 +62,7 @@ module Jekyll
           read_static_file(file_path, full_path)
         end
       end
-      docs.sort!
+      sort_docs!
     end
 
     # All the entries in this collection.
@@ -209,6 +209,15 @@ module Jekyll
     end
 
     private
+
+    def sort_docs!
+      sort_by ||= @metadata["sort_by"]
+      if sort_by
+        docs.sort! { |x, y| x.data[sort_by] <=> y.data[sort_by] }
+      else
+        docs.sort!
+      end
+    end
 
     def read_static_file(file_path, full_path)
       relative_dir = Jekyll.sanitized_path(
