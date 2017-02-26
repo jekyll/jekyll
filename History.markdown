@@ -16,6 +16,7 @@
   * Makes uri_escape template docs more specific. (#5887)
   * Remove duplicate footnote_nr from default config (#5891)
   * Fixed tutorial for publishing gem to include repo. (#5900)
+  * update broken links (#5905)
 
 ### Development Fixes
 
