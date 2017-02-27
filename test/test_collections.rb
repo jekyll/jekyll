@@ -219,8 +219,8 @@ class TestCollections < JekyllUnitTest
             "output" => true,
           },
           "tutorials" => {
-            "output"  => true,
-            "order"   => [
+            "output" => true,
+            "order"  => [
               "getting-started.md",
               "lets-roll.md",
               "dive-in-and-publish-already.md",
