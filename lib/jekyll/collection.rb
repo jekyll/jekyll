@@ -211,12 +211,26 @@ module Jekyll
     private
 
     def sort_docs!
-      sort_key ||= @metadata["sort_by"]
-      if sort_key
-        docs.sort_by! { |d| d.data[sort_key] }
+      if @metadata["order"] && @metadata["order"].is_a?(Array)
+        rearrange_docs!
+      elsif @metadata["sort_by"]
+        docs.sort_by! { |d| d.data[@metadata["sort_by"]] }
       else
         docs.sort!
       end
+    end
+
+    def rearrange_docs!
+      @metadata["order"].each do |o|
+        doc_path = "_#{@label}/#{o}"
+        doc = docs.find { |d| d.relative_path == doc_path }
+        if File.exist?(@site.in_source_dir(doc_path))
+          doc.data["sort_index"] = @metadata["order"].index(o)
+        else
+          Jekyll.logger.warn "Error:", "#{o} not found in '#{@label}' collection!"
+        end
+      end
+      docs.sort_by! { |d| d.data["sort_index"] }
     end
 
     def read_static_file(file_path, full_path)
