@@ -17,6 +17,7 @@
   * Remove duplicate footnote_nr from default config (#5891)
   * Fixed tutorial for publishing gem to include repo. (#5900)
   * update broken links (#5905)
+  * Fix typo in contribution information (#5910)
 
 ### Development Fixes
 
