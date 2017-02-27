@@ -128,6 +128,7 @@ end
 Given(%r!^I have fixture collections$!) do
   FileUtils.cp_r Paths.source_dir.join("test", "source", "_methods"), source_dir
   FileUtils.cp_r Paths.source_dir.join("test", "source", "_thanksgiving"), source_dir
+  FileUtils.cp_r Paths.source_dir.join("test", "source", "_tutorials"), source_dir
 end
 
 #

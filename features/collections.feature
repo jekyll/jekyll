@@ -162,6 +162,79 @@ Feature: Collections
     And I should see "Collections: this is a test!, Collection#entries, Jekyll.configuration, Jekyll.escape, Jekyll.sanitized_path, Site#generate, Initialize, Site#generate, YAML with Dots" in "_site/index.html" unless Windows
     And I should see "Collections: this is a test!, Collection#entries, Jekyll.configuration, Jekyll.escape, Jekyll.sanitized_path, Site#generate, Initialize, YAML with Dots" in "_site/index.html" if on Windows
 
+  Scenario: Sort entries by Front Matter key
+    Given I have an "index.html" page that contains "Collections: {% assign tutorials = site.tutorials %}{{ tutorials | map:"title" | join: ", " }}"
+    And I have fixture collections
+    And I have a _layouts directory
+    And I have a "_layouts/tuts.html" file with content:
+    """
+    {% if page.previous %}Previous: {{ page.previous.title }}{% endif %}
+
+    {% if page.next %}Next: {{ page.next.title }}{% endif %}
+    """
+    And I have a "_config.yml" file with content:
+    """
+    defaults:
+      - scope:
+          path: ""
+          type: tutorials
+        values:
+          layout: tuts
+
+    collections:
+      tutorials:
+        output: true
+        sort_by: lesson
+
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    Then the _site directory should exist
+    And I should see "Collections: Getting Started, Let's Roll!, Dive-In and Publish Already!, Tip of the Iceberg, Graduation Day" in "_site/index.html"
+    And I should not see "Previous: Graduation Day" in "_site/tutorials/lets-roll.html"
+    And I should not see "Next: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
+    But I should see "Previous: Getting Started" in "_site/tutorials/lets-roll.html"
+    And I should see "Next: Dive-In and Publish Already!" in "_site/tutorials/lets-roll.html"
+
+  Scenario: Manually sort entries
+    Given I have an "index.html" page that contains "Collections: {% assign tutorials = site.tutorials %}{{ tutorials | map:"title" | join: ", " }}"
+    And I have fixture collections
+    And I have a _layouts directory
+    And I have a "_layouts/tuts.html" file with content:
+    """
+    {% if page.previous %}Previous: {{ page.previous.title }}{% endif %}
+
+    {% if page.next %}Next: {{ page.next.title }}{% endif %}
+    """
+    And I have a "_config.yml" file with content:
+    """
+    defaults:
+      - scope:
+          path: ""
+          type: tutorials
+        values:
+          layout: tuts
+
+    collections:
+      tutorials:
+        output: true
+        order:
+          - getting-started.md
+          - lets-roll.md
+          - dive-in-and-publish-already.md
+          - tip-of-the-iceberg.md
+          - graduation-day.md
+
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    Then the _site directory should exist
+    And I should see "Collections: Getting Started, Let's Roll!, Dive-In and Publish Already!, Tip of the Iceberg, Graduation Day" in "_site/index.html"
+    And I should not see "Previous: Graduation Day" in "_site/tutorials/lets-roll.html"
+    And I should not see "Next: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
+    But I should see "Previous: Getting Started" in "_site/tutorials/lets-roll.html"
+    And I should see "Next: Dive-In and Publish Already!" in "_site/tutorials/lets-roll.html"
+
   Scenario: Rendered collection with date/dateless filename
     Given I have an "index.html" page that contains "Collections: {% for method in site.thanksgiving %}{{ method.title }} {% endfor %}"
     And I have fixture collections
