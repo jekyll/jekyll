@@ -407,6 +407,11 @@ module Jekyll
     private
     def read_content(opts)
       self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
+      detached_front_matter_path = Utils.detect_detached_front_matter(path)
+      if detached_front_matter_path
+        data_file = SafeYAML.load_file(detached_front_matter_path)
+        merge_data!(data_file, :source => "detached YAML front matter") if data_file
+      end
       if content =~ YAML_FRONT_MATTER_REGEXP
         self.content = $POSTMATCH
         data_file = SafeYAML.load(Regexp.last_match(1))

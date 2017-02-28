@@ -11,7 +11,7 @@ class TestGeneratedSite < JekyllUnitTest
     end
 
     should "ensure post count is as expected" do
-      assert_equal 51, @site.posts.size
+      assert_equal 53, @site.posts.size
     end
 
     should "insert site.posts into the index" do
@@ -59,6 +59,23 @@ class TestGeneratedSite < JekyllUnitTest
   - /symlink-test/symlinked-dir/screen.css last edited at #{time_regexp} with extname .css
 OUTPUT
       assert_match expected_output, File.read(dest_dir("static_files.html"))
+    end
+
+    context "handling detached front matter files" do
+      should "read pages with detached YAML front matter" do
+        path = "detached_front_matter/detached_front_matter.html"
+        abs_path = File.expand_path(path, @site.source)
+        assert_equal true, Utils.has_yaml_header?(abs_path)
+      end
+
+      should "not include detached YAML front matter files" do
+        @site.each_site_file do |item|
+          if item.respond_to?(:path)
+            assert !Utils.detached_front_matter?(item.path),
+                   "#{item.path} should be filtered out"
+          end
+        end
+      end
     end
   end
 

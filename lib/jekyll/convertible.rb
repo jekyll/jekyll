@@ -28,6 +28,54 @@ module Jekyll
       !(data.key?("published") && data["published"] == false)
     end
 
+    def validate_data!(data, filename)
+      unless data.is_a?(Hash)
+        raise Errors::InvalidYAMLFrontMatterError,
+              "Invalid YAML front matter in #{filename}, expected a hash, "\
+              "instead got '#{data.inspect}'"
+      end
+    end
+
+    def read_detached_front_matter(path)
+      detached_path = Utils.detect_detached_front_matter(path)
+      if detached_path
+        data = SafeYAML.load_file(detached_path)
+        data = {} if data.nil? # empty front matter is fine
+        data = {} if data == false # https://github.com/ruby/psych/issues/149
+        validate_data!(data, detached_path)
+        return data
+      end
+    rescue SyntaxError => e
+      Jekyll.logger.warn "YAML Exception reading #{detached_path}: #{e.message}"
+      nil
+    rescue Errors::InvalidYAMLFrontMatterError => e
+      raise e
+    rescue => e
+      Jekyll.logger.warn "Error reading file #{detached_path}: #{e.message}"
+      nil
+    end
+
+    def process_inline_front_matter!(path)
+      if self.content =~ Document::YAML_FRONT_MATTER_REGEXP
+        self.content = $POSTMATCH
+        data = SafeYAML.load(Regexp.last_match(1), path)
+        data = {} if data.nil? # empty front matter is fine
+        data = {} if data == false # https://github.com/ruby/psych/issues/149
+        validate_data!(data, path)
+        return data
+      end
+    rescue Errors::InvalidYAMLFrontMatterError => e
+      raise e
+    rescue SyntaxError => e
+      Jekyll.logger.warn "YAML Exception reading #{path}: #{e.message}"
+      nil
+    rescue Errors::InvalidYAMLFrontMatterError => e
+      raise e
+    rescue => e
+      Jekyll.logger.warn "Error reading file #{path}: #{e.message}"
+      nil
+    end
+
     # Read the YAML frontmatter.
     #
     # base - The String path to the dir containing the file.
@@ -35,37 +83,26 @@ module Jekyll
     # opts - optional parameter to File.read, default at site configs
     #
     # Returns nothing.
-    # rubocop:disable Metrics/AbcSize
     def read_yaml(base, name, opts = {})
       filename = File.join(base, name)
+      content_path = @path || site.in_source_dir(base, name)
+      read_opts = Utils.merged_file_read_opts(site, opts)
 
       begin
-        self.content = File.read(@path || site.in_source_dir(base, name),
-                                 Utils.merged_file_read_opts(site, opts))
-        if content =~ Document::YAML_FRONT_MATTER_REGEXP
-          self.content = $POSTMATCH
-          self.data = SafeYAML.load(Regexp.last_match(1))
-        end
-      rescue SyntaxError => e
-        Jekyll.logger.warn "YAML Exception reading #{filename}: #{e.message}"
+        self.content = File.read(content_path, read_opts)
       rescue => e
         Jekyll.logger.warn "Error reading file #{filename}: #{e.message}"
       end
 
-      self.data ||= {}
+      inline_front_matter_data = process_inline_front_matter!(content_path) || {}
+      detached_front_matter_data = read_detached_front_matter(content_path) || {}
 
-      validate_data! filename
+      self.data = Utils.deep_merge_hashes(detached_front_matter_data,
+                                          inline_front_matter_data)
+
       validate_permalink! filename
 
       self.data
-    end
-    # rubocop:enable Metrics/AbcSize
-
-    def validate_data!(filename)
-      unless self.data.is_a?(Hash)
-        raise Errors::InvalidYAMLFrontMatterError,
-          "Invalid YAML front matter in #{filename}"
-      end
     end
 
     def validate_permalink!(filename)

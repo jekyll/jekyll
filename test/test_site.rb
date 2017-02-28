@@ -204,6 +204,7 @@ class TestSite < JekyllUnitTest
         coffeescript.coffee
         contacts.html
         deal.with.dots.html
+        detached_front_matter.html
         dynamic_file.php
         environment.html
         exploit.md
@@ -228,7 +229,8 @@ class TestSite < JekyllUnitTest
       @site.posts.docs.concat(PostReader.new(@site).read_posts(""))
       posts = Dir[source_dir("_posts", "**", "*")]
       posts.delete_if do |post|
-        File.directory?(post) && !(post =~ Document::DATE_FILENAME_MATCHER)
+        (File.directory?(post) && !(post =~ Document::DATE_FILENAME_MATCHER)) ||
+          Utils.detached_front_matter?(post)
       end
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
     end
@@ -257,7 +259,8 @@ class TestSite < JekyllUnitTest
 
       posts = Dir[source_dir("**", "_posts", "**", "*")]
       posts.delete_if do |post|
-        File.directory?(post) && !(post =~ Document::DATE_FILENAME_MATCHER)
+        (File.directory?(post) && !(post =~ Document::DATE_FILENAME_MATCHER)) ||
+          Utils.detached_front_matter?(post)
       end
       categories = %w(
         2013 bar baz category foo z_category MixedCase Mixedcase publish_test win

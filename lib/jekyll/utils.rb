@@ -134,14 +134,46 @@ module Jekyll
       raise Errors::InvalidDateError, "Invalid date '#{input}': #{msg}"
     end
 
-    # Determines whether a given file has
+    # Checks if given path is detached YAML front matter file
     #
-    # Returns true if the YAML front matter is present.
+    # Returns true if path matches detached YAML front matter naming convetion.
+    def detached_front_matter?(path)
+      path =~ %r!\.fm\.ya?ml$!
+    end
+
+    # Detects existence of detached YAML front matter file
+    #
+    # Returns path to detached front matter file if exists.
+    def detect_detached_front_matter(file)
+      ["#{file}.fm.yaml", "#{file}.fm.yml"].find { |path| File.exist?(path) }
+    end
+
+    # Determines whether a given file has detached YAML front matter
+    #
+    # Returns true if the YAML front matter is present as a detached YAML file.
     # rubocop: disable PredicateName
-    def has_yaml_header?(file)
+    def has_detached_yaml_header?(file)
+      !detect_detached_front_matter(file).nil?
+    end
+    # rubocop: enable PredicateName
+
+    # Determines whether a given file has inline YAML front matter
+    #
+    # Returns true if the YAML front matter is present inline.
+    # rubocop: disable PredicateName
+    def has_inline_yaml_header?(file)
       !!(File.open(file, "rb", &:readline) =~ %r!\A---\s*\r?\n!)
     rescue EOFError
       false
+    end
+    # rubocop: enable PredicateName
+
+    # Determines whether a given file has YAML front matter
+    #
+    # Returns true if a YAML front matter is present either inline or as a separate file.
+    # rubocop: disable PredicateName
+    def has_yaml_header?(file)
+      has_inline_yaml_header?(file) || has_detached_yaml_header?(file)
     end
     # rubocop: enable PredicateName
 
