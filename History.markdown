@@ -28,6 +28,7 @@
   * Corrected date for version 3.4.0 (#5842)
   * Add the correct year to the 3.4.0 release date (#5858)
   * Add documentation about order of interpretation (#5834)
+  * Documentation on how to build navigation (#5698)
 
 ### Bug Fixes
 
