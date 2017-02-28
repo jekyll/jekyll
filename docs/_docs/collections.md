@@ -89,18 +89,59 @@ choice and written out to `<dest>/my_collection/some_subdir/some_doc.html`.
 
 ## Configuring permalinks for collections {#permalinks}
 
-You can customize the [Permalinks](../permalinks/) for your collection's documents by setting `permalink` property in the collection's configuration as follows:
+You can specify a pattern for the URLs where your Collection documents will reside with the [`permalink` property](../permalinks/):
 
 ```yaml
 collections:
-  my_collection:
-    output: true
-    permalink: /awesome/:path/:title.:output_ext
+  categories:
+    output: true                  # without this flag, this Collection's documents will not be generated at build time
+    permalink: /category/:name    # custom permalink definition
 ```
 
-In this example, the collection documents will the have the URL of `awesome` followed by the path to the document and its file extension.
+### Examples
 
-Collections have the following template variables available for permalinks:
+For a collection named `apidocs` with the following source file structure,
+
+```
+├── _apidocs
+│   └── archive
+│       └── deprecated.md
+```
+
+the examples below present various `permalink` configurations and the document structures they produce under the `_site` directory.
+
+* **Default**  
+  Same as `permalink: /:collection/:path`.
+  ```
+  ├── apidocs
+  │   └── archive
+  │       └── deprecated.html
+  ```
+* `permalink: pretty`  
+  Same as `permalink: /:collection/:path/`.
+  ```
+  ├── apidocs
+  │   └── archive
+  │       └── deprecated
+  │           └── index.html
+  ```
+* `permalink: /doc/:path`
+  ```
+  ├── doc
+  │   └── archive
+  │       └── deprecated.html
+  ```
+* `permalink: /doc/:name`
+  ```
+  ├── doc
+  │   └── deprecated.html
+  ```
+* `permalink: /:name`
+  ```
+  ├── deprecated.html
+  ```
+
+### Template Variables
 
 <div class="mobile-side-scroller">
 <table>
@@ -113,7 +154,7 @@ Collections have the following template variables available for permalinks:
   <tbody>
     <tr>
       <td>
-        <p><code>collection</code></p>
+        <p><code>:collection</code></p>
       </td>
       <td>
         <p>Label of the containing collection.</p>
@@ -121,7 +162,7 @@ Collections have the following template variables available for permalinks:
     </tr>
     <tr>
       <td>
-        <p><code>path</code></p>
+        <p><code>:path</code></p>
       </td>
       <td>
         <p>Path to the document relative to the collection's directory.</p>
@@ -129,7 +170,7 @@ Collections have the following template variables available for permalinks:
     </tr>
     <tr>
       <td>
-        <p><code>name</code></p>
+        <p><code>:name</code></p>
       </td>
       <td>
         <p>The document's base filename, with every sequence of spaces
@@ -138,7 +179,7 @@ Collections have the following template variables available for permalinks:
     </tr>
     <tr>
       <td>
-        <p><code>title</code></p>
+        <p><code>:title</code></p>
       </td>
       <td>
         <p>The document's lowercase title (as defined in its <a href="/docs/frontmatter/">front matter</a>), with every sequence of spaces and non-alphanumeric characters replaced by a hyphen. If the document does not define a title in its <a href="/docs/frontmatter/">front matter</a>, this is equivalent to <code>name</code>.</p>
@@ -146,91 +187,15 @@ Collections have the following template variables available for permalinks:
     </tr>
     <tr>
       <td>
-        <p><code>output_ext</code></p>
+        <p><code>:output_ext</code></p>
       </td>
       <td>
-        <p>Extension of the output file.</p>
+        <p>Extension of the output file. (Included by default and usually unnecessary.)</p>
       </td>
     </tr>
   </tbody>
 </table>
 </div>
-
-## Permalink examples for collections
-
-Depending on how you declare the permalinks in your configuration file, the permalinks and paths get written differently in the `_site` folder. A few examples will help clarify the options.
-
-Let's say your collection is called `apidocs` with `doc1.md` in your collection. `doc1.md` is grouped inside a folder called `mydocs`. Your project's source directory for the collection looks this:
-
-```
-├── \_apidocs
-│   └── mydocs
-│       └── doc1.md
-```
-
-Based on this scenario, here are a few permalink options.
-
-**Permalink configuration 1**: [Nothing configured] <br/>
-**Output**:
-
-```
-├── apidocs
-│   └── mydocs
-│       └── doc1.html
-```
-
-**Permalink configuration 2**: `/:collection/:path/:title:output_ext`  <br/>
-**Output**:
-
-```
-├── apidocs
-│   └── mydocs
-│       └── doc1.html
-```
-
-**Permalink configuration 3**: No collection permalinks configured, but `pretty` configured for pages/posts. <br/>
-**Output**:
-
-```
-├── apidocs
-│   └── mydocs
-│       └── doc1
-│           └── index.html
-```
-
-**Permalink configuration 4**: `/awesome/:path/:title.html`   <br/>
-**Output**:
-
-```
-├── awesome
-│   └── mydocs
-│       └── doc1.html
-```
-
-**Permalink configuration 5**: `/awesome/:path/:title/`  <br/>
-**Output**:
-
-```
-├── awesome
-│   └── mydocs
-│       └── doc1
-│           └── index.html
-```
-
-**Permalink configuration 6**: `/awesome/:title.html` <br/>
-**Output**:  
-
-```
-├── awesome
-│   └── doc1.html
-```
-
-**Permalink configuration 7**: `:title.html`
-**Output**:
-
-```
-├── doc1.html
-```
 
 ## Liquid Attributes
 
