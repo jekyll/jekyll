@@ -18,6 +18,7 @@
   * Fixed tutorial for publishing gem to include repo. (#5900)
   * update broken links (#5905)
   * Fix typo in contribution information (#5910)
+  * update plugin repo URL to reflect repo move (#5916)
 
 ### Development Fixes
 
