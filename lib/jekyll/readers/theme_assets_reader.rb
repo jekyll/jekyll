@@ -29,7 +29,7 @@ module Jekyll
           Jekyll::Page.new(site, base, dir, name)
       else
         append_unless_exists site.static_files,
-          Jekyll::StaticFile.new(site, base, dir, name)
+          Jekyll::StaticFile.new(site, base, "/#{dir}", name)
       end
     end
 
