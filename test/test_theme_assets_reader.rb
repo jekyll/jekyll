@@ -45,8 +45,13 @@ class TestThemeAssetsReader < JekyllUnitTest
       @site.read
 
       file = @site.pages.find { |f| f.relative_path == "assets/application.coffee" }
+      static_script = File.read(
+        @site.static_files.find { |f| f.relative_path == "assets/base.js" }.path
+      )
       refute_nil file
+      refute_nil static_script
       assert_includes file.content, "alert \"From your site.\""
+      assert_includes static_script, "alert(\"From your site.\");"
     end
   end
 
