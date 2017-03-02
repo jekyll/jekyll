@@ -109,7 +109,7 @@ eos
       end
 
       def render_rouge(code)
-        formatter = Jekyll::Utils::RougeFormatter.html(
+        formatter = Jekyll::Utils::Rouge.html_formatter(
           :line_numbers => @highlight_options[:linenos],
           :wrap         => false,
           :css_class    => "highlight",
