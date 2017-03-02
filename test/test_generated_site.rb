@@ -7,11 +7,14 @@ class TestGeneratedSite < JekyllUnitTest
 
       @site = fixture_site
       @site.process
-      @index = File.read(dest_dir("index.html"))
+      @index = File.read(
+        dest_dir("index.html"),
+        Utils.merged_file_read_opts(@site, {})
+      )
     end
 
     should "ensure post count is as expected" do
-      assert_equal 51, @site.posts.size
+      assert_equal 52, @site.posts.size
     end
 
     should "insert site.posts into the index" do
@@ -46,6 +49,13 @@ class TestGeneratedSite < JekyllUnitTest
     should "process other static files and generate correct permalinks" do
       assert_exist dest_dir("contacts.html")
       assert_exist dest_dir("dynamic_file.php")
+    end
+
+    should "include a post with a abbreviated dates" do
+      refute_nil @site.posts.index { |post|
+        post.relative_path == "_posts/2017-2-5-i-dont-like-zeroes.md"
+      }
+      assert_exist dest_dir("2017", "02", "05", "i-dont-like-zeroes.html")
     end
 
     should "print a nice list of static files" do
