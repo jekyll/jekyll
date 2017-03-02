@@ -35,6 +35,7 @@
 
   * Exclude Gemfile by default (#5860)
   * Convertible#validate_permalink!: ensure the return value of data["permalink"] is a string before asking if it is empty (#5878)
+  * Allow abbreviated post dates (#5920)
 
 ## 3.4.0 / 2017-01-27
 
