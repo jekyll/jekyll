@@ -28,7 +28,7 @@ branches:
   only:
     - master
     - themes
-    - 3.4-stable
+    - 3.4-stable*
 
 notifications:
   slack:
