@@ -1,3 +1,7 @@
+## 3.4.1 / 2017-03-02
+
+  * Backport #5920 for v3.4.x: Allow abbreviated post dates (#5924)
+
 ## 3.4.0 / 2016-01-27
 
 ### Minor Enhancements
