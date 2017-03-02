@@ -6,7 +6,8 @@
 
 desc "Release #{name} v#{version}"
 task :release => :build do
-  unless `git branch` =~ %r!^\* master$!
+  current_branch = `git branch`.to_s.strip.match(%r!^\* (.+)$!)[1]
+  unless current_branch == "master" || current_branch.end_with?("-stable")
     puts "You must be on the master branch to release!"
     exit!
   end
