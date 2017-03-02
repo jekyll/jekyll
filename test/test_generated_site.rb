@@ -7,7 +7,10 @@ class TestGeneratedSite < JekyllUnitTest
 
       @site = fixture_site
       @site.process
-      @index = File.read(dest_dir("index.html"))
+      @index = File.read(
+        dest_dir("index.html"),
+        Utils.merged_file_read_opts(@site, {})
+      )
     end
 
     should "ensure post count is as expected" do
