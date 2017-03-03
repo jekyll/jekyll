@@ -214,10 +214,21 @@ module Jekyll
       if @metadata["order"] && @metadata["order"].is_a?(Array)
         rearrange_docs!
       elsif @metadata["sort_by"]
-        docs.sort_by! { |d| d.data[@metadata["sort_by"]] }
+        sort_docs_by_key!
       else
         docs.sort!
       end
+    end
+
+    def sort_docs_by_key!
+      meta_key = @metadata["sort_by"]
+      docs.sort_by! { |d| d.data[meta_key] }
+    rescue
+      docs.select { |entry| entry.data[meta_key].nil? }.each do |e|
+        Jekyll.logger.warn "Error:", "'#{meta_key}' not defined in '#{e.relative_path}'"
+      end
+      Jekyll.logger.warn "Error:",
+        "Custom sorting skipped due to inconsistent key definition."
     end
 
     def rearrange_docs!
