@@ -220,19 +220,19 @@ Feature: Collections
         output: true
         order:
           - getting-started.md
+          - tip-of-the-iceberg.md
           - lets-roll.md
           - dive-in-and-publish-already.md
-          - tip-of-the-iceberg.md
           - graduation-day.md
 
     """
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
-    And I should see "Collections: Getting Started, Let's Roll!, Dive-In and Publish Already!, Tip of the Iceberg, Graduation Day" in "_site/index.html"
+    And I should see "Collections: Getting Started, Tip of the Iceberg, Let's Roll!, Dive-In and Publish Already!, Graduation Day" in "_site/index.html"
     And I should not see "Previous: Graduation Day" in "_site/tutorials/lets-roll.html"
     And I should not see "Next: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
-    But I should see "Previous: Getting Started" in "_site/tutorials/lets-roll.html"
+    But I should see "Previous: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
     And I should see "Next: Dive-In and Publish Already!" in "_site/tutorials/lets-roll.html"
 
   Scenario: Rendered collection with date/dateless filename
