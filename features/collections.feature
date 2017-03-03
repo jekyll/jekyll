@@ -196,6 +196,39 @@ Feature: Collections
     But I should see "Previous: Getting Started" in "_site/tutorials/lets-roll.html"
     And I should see "Next: Dive-In and Publish Already!" in "_site/tutorials/lets-roll.html"
 
+  Scenario: Sort some entries by Front Matter key
+    Given I have an "index.html" page that contains "Collections: {% assign tutorials = site.tutorials %}{{ tutorials | map:"title" | join: ", " }}"
+    And I have fixture collections
+    And I have a _layouts directory
+    And I have a "_layouts/tuts.html" file with content:
+    """
+    {% if page.previous %}Previous: {{ page.previous.title }}{% endif %}
+
+    {% if page.next %}Next: {{ page.next.title }}{% endif %}
+    """
+    And I have a "_config.yml" file with content:
+    """
+    defaults:
+      - scope:
+          path: ""
+          type: tutorials
+        values:
+          layout: tuts
+
+    collections:
+      tutorials:
+        output: true
+        sort_by: time
+
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    Then the _site directory should exist
+    And I should see "'time' not defined" in the build output
+    And I should see "Collections: Dive-In and Publish Already!, Getting Started, Graduation Day, Let's Roll!, Tip of the Iceberg" in "_site/index.html"
+    And I should see "Previous: Graduation Day" in "_site/tutorials/lets-roll.html"
+    And I should see "Next: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
+
   Scenario: Manually sort entries
     Given I have an "index.html" page that contains "Collections: {% assign tutorials = site.tutorials %}{{ tutorials | map:"title" | join: ", " }}"
     And I have fixture collections
@@ -233,6 +266,45 @@ Feature: Collections
     And I should not see "Previous: Graduation Day" in "_site/tutorials/lets-roll.html"
     And I should not see "Next: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
     But I should see "Previous: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
+    And I should see "Next: Dive-In and Publish Already!" in "_site/tutorials/lets-roll.html"
+
+  Scenario: Manually sort some entries
+    Given I have an "index.html" page that contains "Collections: {% assign tutorials = site.tutorials %}{{ tutorials | map:"title" | join: ", " }}"
+    And I have fixture collections
+    And I have a _layouts directory
+    And I have a "_layouts/tuts.html" file with content:
+    """
+    {% if page.previous %}Previous: {{ page.previous.title }}{% endif %}
+
+    {% if page.next %}Next: {{ page.next.title }}{% endif %}
+    """
+    And I have a "_config.yml" file with content:
+    """
+    defaults:
+      - scope:
+          path: ""
+          type: tutorials
+        values:
+          layout: tuts
+
+    collections:
+      tutorials:
+        output: true
+        order:
+          - getting-started.md
+          - lets-roll.md
+          - dive-in-and-publish-already.md
+          - graduation-day.md
+
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    Then the _site directory should exist
+    And I should see "Collections: Getting Started, Let's Roll!, Dive-In and Publish Already!, Graduation Day, Tip of the Iceberg" in "_site/index.html"
+    And I should not see "Previous: Graduation Day" in "_site/tutorials/lets-roll.html"
+    And I should not see "Previous: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
+    And I should not see "Next: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
+    But I should see "Previous: Getting Started" in "_site/tutorials/lets-roll.html"
     And I should see "Next: Dive-In and Publish Already!" in "_site/tutorials/lets-roll.html"
 
   Scenario: Rendered collection with date/dateless filename

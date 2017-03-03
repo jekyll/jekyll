@@ -1,6 +1,7 @@
 ---
 title: "Dive-In and Publish Already!"
 lesson: 3
+time: 30 mins
 ---
 
 Jekyll converts Markdown documents to HTML by default. Don't know what's Markdown?

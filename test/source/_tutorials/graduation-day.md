@@ -1,6 +1,7 @@
 ---
 title: "Graduation Day"
 lesson: 5
+time: 10 mins
 ---
 
 Congratualtions! You now know enough to start Jekylling!
