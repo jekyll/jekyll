@@ -190,7 +190,7 @@ Feature: Collections
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
-    And I should see "Collections: Getting Started, Let's Roll!, Dive-In and Publish Already!, Tip of the Iceberg, Graduation Day" in "_site/index.html"
+    And I should see "Collections: Getting Started, Let's Roll!, Dive-In and Publish Already!, Tip of the Iceberg, Extending with Plugins, Graduation Day" in "_site/index.html"
     And I should not see "Previous: Graduation Day" in "_site/tutorials/lets-roll.html"
     And I should not see "Next: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
     But I should see "Previous: Getting Started" in "_site/tutorials/lets-roll.html"
@@ -225,7 +225,7 @@ Feature: Collections
     Then I should get a zero exit status
     Then the _site directory should exist
     And I should see "'time' not defined" in the build output
-    And I should see "Collections: Dive-In and Publish Already!, Getting Started, Graduation Day, Let's Roll!, Tip of the Iceberg" in "_site/index.html"
+    And I should see "Collections: Dive-In and Publish Already!, Extending with Plugins, Getting Started, Graduation Day, Let's Roll!, Tip of the Iceberg" in "_site/index.html"
     And I should see "Previous: Graduation Day" in "_site/tutorials/lets-roll.html"
     And I should see "Next: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
 
@@ -257,12 +257,13 @@ Feature: Collections
           - lets-roll.md
           - dive-in-and-publish-already.md
           - graduation-day.md
+          - extending-with-plugins
 
     """
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
-    And I should see "Collections: Getting Started, Tip of the Iceberg, Let's Roll!, Dive-In and Publish Already!, Graduation Day" in "_site/index.html"
+    And I should see "Collections: Getting Started, Tip of the Iceberg, Let's Roll!, Dive-In and Publish Already!, Graduation Day, Extending with Plugins" in "_site/index.html"
     And I should not see "Previous: Graduation Day" in "_site/tutorials/lets-roll.html"
     And I should not see "Next: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
     But I should see "Previous: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
@@ -300,7 +301,7 @@ Feature: Collections
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
-    And I should see "Collections: Getting Started, Let's Roll!, Dive-In and Publish Already!, Graduation Day, Tip of the Iceberg" in "_site/index.html"
+    And I should see "Collections: Getting Started, Let's Roll!, Dive-In and Publish Already!, Graduation Day, Extending with Plugins, Tip of the Iceberg" in "_site/index.html"
     And I should not see "Previous: Graduation Day" in "_site/tutorials/lets-roll.html"
     And I should not see "Previous: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
     And I should not see "Next: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"

@@ -1,6 +1,6 @@
 ---
 title: "Graduation Day"
-lesson: 5
+lesson: 6
 time: 10 mins
 ---
 

@@ -194,6 +194,7 @@ class TestCollections < JekyllUnitTest
            "FrontMatter key 'lesson'" do
       default_tuts_array = %w(
         _tutorials/dive-in-and-publish-already.md
+        _tutorials/extending-with-plugins.md
         _tutorials/getting-started.md
         _tutorials/graduation-day.md
         _tutorials/lets-roll.md
@@ -204,6 +205,7 @@ class TestCollections < JekyllUnitTest
         _tutorials/lets-roll.md
         _tutorials/dive-in-and-publish-already.md
         _tutorials/tip-of-the-iceberg.md
+        _tutorials/extending-with-plugins.md
         _tutorials/graduation-day.md
       )
       refute_equal default_tuts_array, @actual_array
@@ -226,6 +228,7 @@ class TestCollections < JekyllUnitTest
               "dive-in-and-publish-already.md",
               "tip-of-the-iceberg.md",
               "graduation-day.md",
+              "extending-with-plugins.md",
             ],
           },
         },
@@ -236,10 +239,10 @@ class TestCollections < JekyllUnitTest
       @actual_array = @tutorials_collection.docs.map(&:relative_path)
     end
 
-    should "sort documents in a collection with 'sort_by' metadata set to a " \
-           "FrontMatter key 'lesson'" do
+    should "sort documents in a collection in the order outlined in the config file" do
       default_tuts_array = %w(
         _tutorials/dive-in-and-publish-already.md
+        _tutorials/extending-with-plugins.md
         _tutorials/getting-started.md
         _tutorials/graduation-day.md
         _tutorials/lets-roll.md
@@ -251,6 +254,7 @@ class TestCollections < JekyllUnitTest
         _tutorials/dive-in-and-publish-already.md
         _tutorials/tip-of-the-iceberg.md
         _tutorials/graduation-day.md
+        _tutorials/extending-with-plugins.md
       )
       refute_equal default_tuts_array, @actual_array
       assert_equal tuts_rearranged_in_config_array, @actual_array
