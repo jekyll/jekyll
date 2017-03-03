@@ -224,26 +224,38 @@ module Jekyll
       meta_key = @metadata["sort_by"]
       docs.sort_by! { |d| d.data[meta_key] }
     rescue
+      # Inform which document doesn't have the required key defined, and proceed
+      # with the default sort function.
+      #
+      # But if the user defines the key with a different Class type, (e.g. Integer
+      # instead of a String), simply skip custom sorting, and proceed.
       docs.select { |entry| entry.data[meta_key].nil? }.each do |e|
         Jekyll.logger.warn "Error:", "'#{meta_key}' not defined in '#{e.relative_path}'"
       end
+
       Jekyll.logger.warn "Error:",
         "Custom sorting skipped due to inconsistent key definition."
     end
 
     def rearrange_docs!
-      @metadata["order"].each do |o|
-        doc_path = "_#{@label}/#{o}"
+      @metadata["order"].each do |entry|
+        doc_path = "_#{@label}/#{entry}"
         doc = docs.find { |d| d.relative_path == doc_path }
+
         if File.exist?(@site.in_source_dir(doc_path))
-          doc.data["sort_index"] = @metadata["order"].index(o)
+          doc.data["sort_index"] = @metadata["order"].index(entry)
         else
-          Jekyll.logger.warn "Error:", "#{o} not found in '#{@label}' collection!"
+          Jekyll.logger.warn "Error:", "#{entry} not found in '#{@label}' collection!"
         end
       end
 
       docs.sort_by! { |d| d.data["sort_index"] }
     rescue
+      # Collect all documents without the virtual `sort_index` key defined and assign
+      # the key with a value equal to the total no. of documents in the main collection.
+      #
+      # Such documents will be sorted alphabetically and appear at the end of the custom
+      # array.
       docs.select { |d| d.data["sort_index"].nil? }.each do |doc|
         doc.data["sort_index"] = docs.size
       end
