@@ -230,6 +230,13 @@ module Jekyll
           Jekyll.logger.warn "Error:", "#{o} not found in '#{@label}' collection!"
         end
       end
+
+      docs.sort_by! { |d| d.data["sort_index"] }
+    rescue
+      docs.select { |d| d.data["sort_index"].nil? }.each do |doc|
+        doc.data["sort_index"] = docs.size
+      end
+
       docs.sort_by! { |d| d.data["sort_index"] }
     end
 
