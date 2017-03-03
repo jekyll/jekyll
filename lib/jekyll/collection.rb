@@ -249,18 +249,23 @@ module Jekyll
         end
       end
 
+      assign_sort_index(docs)
       docs.sort_by! { |d| d.data["sort_index"] }
-    rescue
-      # Collect all documents without the virtual `sort_index` key defined and assign
-      # the key with a value equal to the total no. of documents in the main collection.
-      #
-      # Such documents will be sorted alphabetically and appear at the end of the custom
-      # array.
-      docs.select { |d| d.data["sort_index"].nil? }.each do |doc|
-        doc.data["sort_index"] = docs.size
-      end
+    end
 
-      docs.sort_by! { |d| d.data["sort_index"] }
+    # Assign a virtual `sort_index` to all Jekyll::Document objects in the current
+    # collection.
+    #
+    # Collect all documents without the virtual `sort_index` key defined and assign
+    # the key with a value equal to the total no. of documents in the main collection.
+    # Such documents will be sorted alphabetically and appear at the end of the custom
+    # array.
+    #
+    # documents - the array of Jekyll::Document objects from the current Collection
+    def assign_sort_index(documents)
+      documents.select { |d| d.data["sort_index"].nil? }.each do |document|
+        document.data["sort_index"] = documents.size
+      end
     end
 
     def read_static_file(file_path, full_path)
