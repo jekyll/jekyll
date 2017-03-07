@@ -24,6 +24,7 @@
 
   * [Rubocop] add missing comma (#5835)
   * Appease classifier-reborn (#5934)
+  * Allow releases & development on *-stable branches (#5926)
 
 ### Site Enhancements
 
