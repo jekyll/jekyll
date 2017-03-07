@@ -31,6 +31,7 @@
   * Add documentation about order of interpretation (#5834)
   * Documentation on how to build navigation (#5698)
   * Navigation has been moved out from docs (#5927)
+  * Make links in sidebar for current page more prominent (#5820)
 
 ### Bug Fixes
 
