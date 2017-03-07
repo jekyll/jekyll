@@ -4,7 +4,7 @@
 #
 # Backports a PR into a release branch:
 #
-#   # backport PR #123 into 1.1-stable-backport-1023
+#   # backport PR #1023 into 1.1-stable-backport-1023
 #   $ git checkout master
 #   $ git pull
 #   $ script/backport-pr 1.1 1023
