@@ -263,7 +263,8 @@ module Jekyll
     #
     # documents - the array of Jekyll::Document objects from the current Collection
     def assign_sort_index(documents)
-      documents.select { |d| d.data["sort_index"].nil? }.each do |document|
+      documents.each do |document|
+        next unless document.data["sort_index"].nil?
         document.data["sort_index"] = documents.size
       end
     end
