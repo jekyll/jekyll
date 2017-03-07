@@ -32,11 +32,9 @@ module Jekyll
 
     def require_theme_deps
       if site.theme.runtime_dependencies
-        dependencies = site.theme.runtime_dependencies.select do |dep|
-          plugin_allowed?(dep.name)
-        end
-        dependencies.each do |dep|
-          External.require_with_graceful_fail(dep.name) unless dep.name == "jekyll"
+        site.theme.runtime_dependencies.each do |dep|
+          next if dep.name == "jekyll"
+          External.require_with_graceful_fail(dep.name) if plugin_allowed?(dep.name)
         end
       end
     end
