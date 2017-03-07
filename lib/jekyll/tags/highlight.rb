@@ -84,7 +84,7 @@ eos
       end
 
       def render_pygments(code, is_safe)
-        Jekyll::External.require_with_graceful_fail("pygments")
+        Jekyll::External.require_with_graceful_fail("pygments") unless defined?(Pygments)
 
         highlighted_code = Pygments.highlight(
           code,
@@ -109,12 +109,12 @@ eos
       end
 
       def render_rouge(code)
-        Jekyll::External.require_with_graceful_fail("rouge")
-        formatter = Rouge::Formatters::HTML.new(
+        Jekyll::External.require_with_graceful_fail("rouge") unless defined?(::Rouge)
+        formatter = ::Rouge::Formatters::HTML.new(
           :line_numbers => @highlight_options[:linenos],
           :wrap         => false
         )
-        lexer = Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
+        lexer = ::Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
         formatter.format(lexer.lex(code))
       end
 
