@@ -23,6 +23,7 @@
 ### Development Fixes
 
   * [Rubocop] add missing comma (#5835)
+  * Appease classifier-reborn (#5934)
 
 ### Site Enhancements
 
