@@ -13,7 +13,7 @@ task :release => :build do
   end
   sh "git commit --allow-empty -m 'Release :gem: #{version}'"
   sh "git tag v#{version}"
-  sh "git push origin master"
+  sh "git push origin #{current_branch}"
   sh "git push origin v#{version}"
   sh "gem push pkg/#{name}-#{version}.gem"
 end
