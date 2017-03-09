@@ -1,3 +1,8 @@
+## 3.4.2 / 2017-03-09
+
+  * Backport #5871 for v3.4.x: Convert StaticFile liquid representation to
+    a Drop & add front matter defaults support to StaticFiles (#5940)
+
 ## 3.4.1 / 2017-03-02
 
   * Backport #5920 for v3.4.x: Allow abbreviated post dates (#5924)

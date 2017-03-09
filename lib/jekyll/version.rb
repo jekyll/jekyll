@@ -1,3 +1,3 @@
 module Jekyll
-  VERSION = "3.4.1".freeze
+  VERSION = "3.4.2".freeze
 end
