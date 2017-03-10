@@ -206,6 +206,12 @@ Your theme's styles can be included in the user's stylesheet using the `@import`
 {% raw %}@import "{{ site.theme }}";{% endraw %}
 ```
 
+### Theme-gem dependencies
+
+From `v3.5`, Jekyll will automatically require all `whitelist`-ed `runtime_dependencies` of your theme-gem even if they're not explicitly included under the `gems` array in the site's config file. (NOTE: `whitelist`-ing is only required when `build`-ing or `serve`-ing with the `--safe` option.)
+
+With this, the end-user need not keep track of the plugins required to be included in their config file for their theme-gem to work as intended.
+
 ### Documenting your theme
 
 Your theme should include a `/README.md` file, which explains how site authors can install and use your theme. What layouts are included? What includes? Do they need to add anything special to their site's configuration file?
