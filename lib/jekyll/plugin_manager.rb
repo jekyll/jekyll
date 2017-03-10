@@ -30,12 +30,14 @@ module Jekyll
       )
     end
 
+    # Require each of the runtime_dependencies specified by the theme's gemspec.
+    #
+    # Returns false only if no dependencies have been specified, otherwise nothing.
     def require_theme_deps
-      if site.theme.runtime_dependencies
-        site.theme.runtime_dependencies.each do |dep|
-          next if dep.name == "jekyll"
-          External.require_with_graceful_fail(dep.name) if plugin_allowed?(dep.name)
-        end
+      return false unless site.theme.runtime_dependencies
+      site.theme.runtime_dependencies.each do |dep|
+        next if dep.name == "jekyll"
+        External.require_with_graceful_fail(dep.name) if plugin_allowed?(dep.name)
       end
     end
 
