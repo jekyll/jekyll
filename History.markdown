@@ -19,6 +19,7 @@
   * update broken links (#5905)
   * Fix typo in contribution information (#5910)
   * update plugin repo URL to reflect repo move (#5916)
+  * Update exclude array in configuration.md (#5947)
 
 ### Development Fixes
 
@@ -45,8 +46,7 @@
 
 ## 3.4.2 / 2017-03-09
 
-  * Backport #5871 for v3.4.x: Convert StaticFile liquid representation to
-    a Drop & add front matter defaults support to StaticFiles (#5940)
+  * Backport #5871 for v3.4.x: Convert StaticFile liquid representation to a Drop & add front matter defaults support to StaticFiles (#5940)
 
 ## 3.4.1 / 2017-03-02
 
