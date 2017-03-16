@@ -317,6 +317,11 @@ class TestFilters < JekyllUnitTest
       assert_equal "my%20things", @filter.uri_escape("my things")
     end
 
+    should "escape colon" do
+      assert_equal "foo:bar", @filter.uri_escape("foo:bar")
+      assert_equal "foo%20bar:baz", @filter.uri_escape("foo bar:baz")
+    end
+
     context "absolute_url filter" do
       should "produce an absolute URL from a page URL" do
         page_url = "/about/my_favorite_page/"
