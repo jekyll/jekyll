@@ -317,7 +317,7 @@ class TestFilters < JekyllUnitTest
       assert_equal "my%20things", @filter.uri_escape("my things")
     end
 
-    should "escape colon" do
+    should "allow colons in URI" do
       assert_equal "foo:bar", @filter.uri_escape("foo:bar")
       assert_equal "foo%20bar:baz", @filter.uri_escape("foo bar:baz")
     end
