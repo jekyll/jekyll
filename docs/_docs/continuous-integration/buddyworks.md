@@ -39,7 +39,7 @@ If you prefer configuration as code over GUI, you can generate `buddy.yml` that 
     docker_image_name: "jekyll/jekyll"
     docker_image_tag: "latest"
     execute_commands:
-    - "# Working directory with cloned repository: /srv/jekyll"
+    - "chown jekyll:jekyll $WORKING_DIR"
     - "jekyll build"
 ```
 
