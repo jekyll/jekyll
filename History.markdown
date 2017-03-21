@@ -45,6 +45,9 @@
   * Convertible#validate_permalink!: ensure the return value of data["permalink"] is a string before asking if it is empty (#5878)
   * Allow abbreviated post dates (#5920)
   * Remove dependency on include from default about.md (#5903)
+  * Allow colons in `uri_escape` filter
+
+Fixes #5954 (#5957)
 
 ## 3.4.2 / 2017-03-09
 
