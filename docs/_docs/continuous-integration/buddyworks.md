@@ -27,7 +27,7 @@ Whenever you make a push to the selected branch, the Jekyll action runs `jekyll 
 
 ## 3. Using YAML for configuration
 
-If you prefer configuration as code over GUI, you can generate `buddy.yml` that will create a pipeline with the Jekyll action once you push it to the target branch:
+If you prefer configuration as code over GUI, you can generate a `buddy.yml` that will create a pipeline with the Jekyll action once you push it to the target branch:
 
 ```ruby
 - pipeline: "Build and Deploy Jekyll site"
