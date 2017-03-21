@@ -70,7 +70,7 @@ Note that in the above table, `file` can be anything. It's simply an arbitrarily
 
 ## Add front matter to static files
 
-Although you can't directly add front matter values to static files, you can actually set front matter values through the [defaults property](../configuration/#front-matter-defaults) in your configuration file. When Jekyll builds the site, it will use the front matter values you set. 
+Although you can't directly add front matter values to static files, you can set front matter values through the [defaults property](../configuration/#front-matter-defaults) in your configuration file. When Jekyll builds the site, it will use the front matter values you set. 
 
 Here's an example: 
 
@@ -89,10 +89,9 @@ This assumes that your Jekyll site has a folder path of `assets/img` where  you 
 Suppose you want to list all your image assets as contained in `assets/img`. You could use this for loop to look in the `static_files` object and get all static files that have this front matter property:
 
 ```liquid
-{% raw %}{% for myfile in site.static_files %}
-   {% if myfile.image == true %}
-     {{ myfile.path }}
-   {% endif %}
+{% raw %}{% assign image_files = site.static_files | where: "image", true %}
+{% for myimage in image_files %}
+  {{ myimage.path }}
 {% endfor %}{% endraw %}
 ```
 
