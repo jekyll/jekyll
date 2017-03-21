@@ -21,6 +21,7 @@
   * update plugin repo URL to reflect repo move (#5916)
   * Update exclude array in configuration.md (#5947)
   * Fixed path in "Improve this page" link in Tutorials section (#5951)
+  * Corrected permalink (#5949)
 
 ### Development Fixes
 
