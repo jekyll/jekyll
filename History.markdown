@@ -1,3 +1,7 @@
+## 3.4.3 / 2017-03-21
+
+  * Backport #5957 for v3.4.x: Allow colons in `uri_escape` filter (#5968)
+
 ## 3.4.2 / 2017-03-09
 
   * Backport #5871 for v3.4.x: Convert StaticFile liquid representation to
