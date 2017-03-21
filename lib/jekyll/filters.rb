@@ -152,7 +152,7 @@ module Jekyll
     #
     # Returns the escaped String.
     def uri_escape(input)
-      Addressable::URI.encode(input)
+      Addressable::URI.normalize_component(input)
     end
 
     # Replace any whitespace in the input string with a single space
