@@ -26,7 +26,7 @@
 
   * [Rubocop] add missing comma (#5835)
   * Appease classifier-reborn (#5934)
-  * Allow releases & development on *-stable branches (#5926)
+  * Allow releases & development on `*-stable` branches (#5926)
   * Add script/backport-pr (#5925)
   * Prefer .yaml over .toml (#5966)
 
@@ -45,9 +45,7 @@
   * Convertible#validate_permalink!: ensure the return value of data["permalink"] is a string before asking if it is empty (#5878)
   * Allow abbreviated post dates (#5920)
   * Remove dependency on include from default about.md (#5903)
-  * Allow colons in `uri_escape` filter
-
-Fixes #5954 (#5957)
+  * Allow colons in `uri_escape` filter (#5957)
 
 ## 3.4.2 / 2017-03-09
 
