@@ -2,12 +2,12 @@
 title: "BuddyWorks"
 ---
 
-[BuddyWorks][0] is a [Docker][1]-based CI server that you can set up in 15-20 minutes to build, test, and deploy your Jekyll websites. It supports [GitHub][2], [Bitbucket][3], and [GitLab][4] repositories, can be installed on-premises or in cloud. The following guide will show you how to set up a free environment to build and test your Jekyll project.
+[BuddyWorks][0] is a [Docker][1]-based CI server that you can set up in 15-20 minutes to build, test, and deploy your Jekyll websites. It supports [GitHub][2], [Bitbucket][3], and [GitLab][4] repositories, and can be installed on-premises or used in cloud. The following guide will show you how to set up a free environment to build and test your Jekyll project.
 
 [0]: https://buddy.works
 [1]: https://www.docker.com/
 [2]: https://github.com
-[3]: https://https://bitbucket.org/
+[3]: https://bitbucket.org/
 [4]: https://gitlab.com
 
 ## 1. Getting started
@@ -15,19 +15,19 @@ title: "BuddyWorks"
 1. Log in at https://buddy.works with your GitHub/Bitbucket account or email
 2. Choose your Git provider and select or push your Jekyll Project
 3. Create a new pipeline and set the trigger mode to 'On every push'
-4. Add the Jekyll action and save the pipeline
+4. Add and configure the Jekyll action and save the pipeline
 
 ## 2. How it works
 
-Whenever you make a push to the selected branch, the Jekyll action runs `jekyll build` in an isolated [Jekyll Docker image][0]. The output is generated to the `/filesystem` directory, and can be further deployed to FTP/SFTP and Cloud services. You can add your own commands, install additional packages, attach services, and run Selenium tests, as well as add other actions down the pipeline, eg. a Slack notification or an SSH script that will restart your server.
+Whenever you make a push to the selected branch, the Jekyll action runs `jekyll build` in an isolated [Jekyll Docker image][5]. The output is generated to the `/filesystem` directory, and can be further deployed to FTP/SFTP and IaaS services. You can add your own commands, install additional packages, attach services, and run Selenium tests, as well as add other actions down the pipeline, eg. a Slack notification or an SSH script that will restart your server.
 
 ![Jekyll Build](https://buddy.works/data/blog/_images/buddyworks-jekyll-small.png)
 
-[0]: https://hub.docker.com/r/jekyll/jekyll/
+[5]: https://hub.docker.com/r/jekyll/jekyll/
 
 ## 3. Using YAML for configuration
 
-If you prefer configuration as code over GUI, you can generate `buddy.yml` that will create a pipeline with the Jekyll action once pushed to the repository:
+If you prefer configuration as code over GUI, you can generate `buddy.yml` that will create a pipeline with the Jekyll action once you push it to the target branch:
 
 ```ruby
 - pipeline: "Build and Deploy Jekyll site"
@@ -45,19 +45,18 @@ If you prefer configuration as code over GUI, you can generate `buddy.yml` that 
 
 ## 4. Setting up on-premises server
 
-The self-hosted version of BuddyWorks can be installed on any type of server supporting Docker, including [Linux][1], [Mac][2], [AWS EC2][3], [DigitalOcean][4], and [Microsoft Azure][5].
+The self-hosted version of BuddyWorks can be installed on any type of server supporting Docker, including [Linux][6], [Mac][7], [AWS EC2][8], [DigitalOcean][9], and [Microsoft Azure][10].
 
-[0]: https://buddy.works/buddy-go
-[1]: https://buddy.works/knowledge/standalone/installation-linux
-[2]: https://buddy.works/knowledge/standalone/installation-mac-osx
-[3]: https://buddy.works/knowledge/standalone/installation-amazon-ec2
-[4]: https://buddy.works/knowledge/standalone/installation-digitalocean
-[5]: https://buddy.works/knowledge/standalone/installation-azure
+[6]: https://buddy.works/knowledge/standalone/installation-linux
+[7]: https://buddy.works/knowledge/standalone/installation-mac-osx
+[8]: https://buddy.works/knowledge/standalone/installation-amazon-ec2
+[9]: https://buddy.works/knowledge/standalone/installation-digitalocean
+[10]: https://buddy.works/knowledge/standalone/installation-azure
 
 ## 5. Questions?
 
-This entire guide is open-source. Go ahead and [edit it][0] if you want to expand it or have a fix or [ask for help][1] if you run into trouble and need assistance. BuddyWorks also has an [online community][2] for help.
+This entire guide is open-source. Go ahead and [edit it][11] if you want to expand it or have a fix or [ask for help][12] if you run into trouble and need assistance. BuddyWorks also has an [online community][13] for help.
 
-[0]: https://github.com/jekyll/jekyll/edit/master/docs/_docs/continuous-integration/buddyworks.md
-[1]: https://jekyllrb.com/help/
-[2]: http://forum.buddy.works/
+[11]: https://github.com/jekyll/jekyll/edit/master/docs/_docs/continuous-integration/buddyworks.md
+[12]: https://jekyllrb.com/help/
+[13]: http://forum.buddy.works/
