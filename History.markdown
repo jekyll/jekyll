@@ -24,6 +24,7 @@
   * Corrected permalink (#5949)
   * Included more details about adding defaults to static files (#5971)
   * Create buddyworks (#5962)
+  * added (buddyworks) to ci list (#5965)
 
 ### Development Fixes
 
