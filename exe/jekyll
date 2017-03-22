@@ -25,13 +25,13 @@ Mercenary.program(:jekyll) do |p|
     "Layouts directory (defaults to ./_layouts)"
   p.option "profile", "--profile", "Generate a Liquid rendering profile"
 
-  Jekyll::External.require_if_present(Jekyll::External.blessed_gems) do |g|
+  Jekyll::External.require_if_present(Jekyll::External.blessed_gems) do |g, ver_constraint|
     cmd = g.split("-").last
     p.command(cmd.to_sym) do |c|
       c.syntax cmd
       c.action do
         Jekyll.logger.abort_with "You must install the '#{g}' gem" \
-          " to use the 'jekyll #{cmd}' command."
+          " version #{ver_constraint} to use the 'jekyll #{cmd}' command."
       end
     end
   end
