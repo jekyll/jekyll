@@ -23,6 +23,7 @@
   * Fixed path in "Improve this page" link in Tutorials section (#5951)
   * Corrected permalink (#5949)
   * Included more details about adding defaults to static files (#5971)
+  * Create buddyworks (#5962)
 
 ### Development Fixes
 
