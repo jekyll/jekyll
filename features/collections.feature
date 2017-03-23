@@ -17,12 +17,12 @@ Feature: Collections
     And I have an "collection_metadata.html" page that contains "Methods metadata: {{ site.collections[0].foo }} {{ site.collections[0] }}"
     And I have fixture collections
     And I have a "_config.yml" file with content:
-    """
-    collections:
-      methods:
-        output: true
-        foo:   bar
-    """
+      """
+      collections:
+        methods:
+          output: true
+          foo:   bar
+      """
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
@@ -35,12 +35,12 @@ Feature: Collections
     Given I have an "index.html" page that contains "Collections: {{ site.collections }}"
     And I have fixture collections
     And I have a "_config.yml" file with content:
-    """
-    collections:
-      methods:
-        output: true
-        permalink: /:collection/:path/
-    """
+      """
+      collections:
+        methods:
+          output: true
+          permalink: /:collection/:path/
+      """
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
@@ -51,12 +51,12 @@ Feature: Collections
     And I have a default layout that contains "<div class='title'>Tom Preston-Werner</div> {{content}}"
     And I have fixture collections
     And I have a "_config.yml" file with content:
-    """
-    collections:
-      methods:
-        output: true
-        foo:   bar
-    """
+      """
+      collections:
+        methods:
+          output: true
+          foo:   bar
+      """
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
@@ -70,10 +70,10 @@ Feature: Collections
     Given I have an "index.html" page that contains "Collections: {% for method in site.methods %}{{ method.relative_path }} {% endfor %}"
     And I have fixture collections
     And I have a "_config.yml" file with content:
-    """
-    collections:
-    - methods
-    """
+      """
+      collections:
+      - methods
+      """
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
@@ -84,10 +84,10 @@ Feature: Collections
     Given I have an "index.html" page that contains "Collections: {% for method in site.methods %}{{ method.relative_path }} {% endfor %}"
     And I have fixture collections
     And I have a "_config.yml" file with content:
-    """
-    collections:
-    - methods
-    """
+      """
+      collections:
+      - methods
+      """
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
@@ -98,10 +98,10 @@ Feature: Collections
     Given I have an "index.html" page that contains "All documents: {% for doc in site.documents %}{{ doc.relative_path }} {% endfor %}"
     And I have fixture collections
     And I have a "_config.yml" file with content:
-    """
-    collections:
-    - methods
-    """
+      """
+      collections:
+      - methods
+      """
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
@@ -112,10 +112,10 @@ Feature: Collections
     Given I have an "index.html" page that contains "Second document's output: {{ site.documents[2].output }}"
     And I have fixture collections
     And I have a "_config.yml" file with content:
-    """
-    collections:
-    - methods
-    """
+      """
+      collections:
+      - methods
+      """
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
@@ -125,10 +125,10 @@ Feature: Collections
     Given I have an "index.html" page that contains "{% assign items = site.methods | where: 'whatever','foo.bar' %}Item count: {{ items.size }}"
     And I have fixture collections
     And I have a "_config.yml" file with content:
-    """
-    collections:
-    - methods
-    """
+      """
+      collections:
+      - methods
+      """
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
@@ -138,10 +138,10 @@ Feature: Collections
     Given I have an "index.html" page that contains "{% assign items = site.methods | sort: 'title' %}2. of {{ items.size }}: {{ items[1].output }}"
     And I have fixture collections
     And I have a "_config.yml" file with content:
-    """
-    collections:
-    - methods
-    """
+      """
+      collections:
+      - methods
+      """
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
@@ -152,10 +152,10 @@ Feature: Collections
     Given I have an "index.html" page that contains "Collections: {% assign methods = site.methods | sort: 'relative_path' %}{{ methods | map:"title" | join: ", " }}"
     And I have fixture collections
     And I have a "_config.yml" file with content:
-    """
-    collections:
-    - methods
-    """
+      """
+      collections:
+      - methods
+      """
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
@@ -166,11 +166,11 @@ Feature: Collections
     Given I have an "index.html" page that contains "Collections: {% for method in site.thanksgiving %}{{ method.title }} {% endfor %}"
     And I have fixture collections
     And I have a "_config.yml" file with content:
-    """
-    collections:
-      thanksgiving:
-        output: true
-    """
+      """
+      collections:
+        thanksgiving:
+          output: true
+      """
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist

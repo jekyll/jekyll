@@ -5,24 +5,24 @@ Feature: Hooks
   Scenario: Run some code after site reset
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
-    """
-    Jekyll::Hooks.register :site, :after_reset do |site|
-      pageklass = Class.new(Jekyll::Page) do
-        def initialize(site, base)
-          @site = site
-          @base = base
-          @data = {}
-          @dir = '/'
-          @name = 'foo.html'
-          @content = 'mytinypage'
+      """
+      Jekyll::Hooks.register :site, :after_reset do |site|
+        pageklass = Class.new(Jekyll::Page) do
+          def initialize(site, base)
+            @site = site
+            @base = base
+            @data = {}
+            @dir = '/'
+            @name = 'foo.html'
+            @content = 'mytinypage'
 
-          self.process(@name)
+            self.process(@name)
+          end
         end
-      end
 
-      site.pages << pageklass.new(site, site.source)
-    end
-    """
+        site.pages << pageklass.new(site, site.source)
+      end
+      """
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
@@ -32,11 +32,11 @@ Feature: Hooks
     Given I have a _plugins directory
     And I have a "index.html" page that contains "{{ site.injected }}!"
     And I have a "_plugins/ext.rb" file with content:
-    """
-    Jekyll::Hooks.register :site, :pre_render do |site, payload|
-      payload['site']['injected'] = 'myparam'
-    end
-    """
+      """
+      Jekyll::Hooks.register :site, :pre_render do |site, payload|
+        payload['site']['injected'] = 'myparam'
+      end
+      """
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
@@ -47,11 +47,11 @@ Feature: Hooks
     And I have a "page1.html" page that contains "page1"
     And I have a "page2.html" page that contains "page2"
     And I have a "_plugins/ext.rb" file with content:
-    """
-    Jekyll::Hooks.register :site, :post_read do |site|
-      site.pages.delete_if { |p| p.name == 'page1.html' }
-    end
-    """
+      """
+      Jekyll::Hooks.register :site, :post_read do |site|
+        site.pages.delete_if { |p| p.name == 'page1.html' }
+      end
+      """
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
@@ -61,13 +61,13 @@ Feature: Hooks
   Scenario: Work with the site files after they've been written to disk
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
-    """
-    Jekyll::Hooks.register :site, :post_write do |site|
-      firstpage = site.pages.first
-      content = File.read firstpage.destination(site.dest)
-      File.write(File.join(site.dest, 'firstpage.html'), content)
-    end
-    """
+      """
+      Jekyll::Hooks.register :site, :post_write do |site|
+        firstpage = site.pages.first
+        content = File.read firstpage.destination(site.dest)
+        File.write(File.join(site.dest, 'firstpage.html'), content)
+      end
+      """
     And I have a "page1.html" page that contains "page1"
     When I run jekyll build
     Then I should get a zero exit status
@@ -77,12 +77,12 @@ Feature: Hooks
   Scenario: Alter a page right after it is initialized
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
-    """
-    Jekyll::Hooks.register :pages, :post_init do |page|
-      page.name = 'renamed.html'
-      page.process(page.name)
-    end
-    """
+      """
+      Jekyll::Hooks.register :pages, :post_init do |page|
+        page.name = 'renamed.html'
+        page.process(page.name)
+      end
+      """
     And I have a "page1.html" page that contains "page1"
     When I run jekyll build
     Then I should get a zero exit status
@@ -92,11 +92,11 @@ Feature: Hooks
   Scenario: Alter the payload for one page but not another
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
-    """
-    Jekyll::Hooks.register :pages, :pre_render do |page, payload|
-      payload['page']['myparam'] = 'special' if page.name == 'page1.html'
-    end
-    """
+      """
+      Jekyll::Hooks.register :pages, :pre_render do |page, payload|
+        payload['page']['myparam'] = 'special' if page.name == 'page1.html'
+      end
+      """
     And I have a "page1.html" page that contains "{{ page.myparam }}"
     And I have a "page2.html" page that contains "{{ page.myparam }}"
     When I run jekyll build
@@ -107,11 +107,11 @@ Feature: Hooks
     Given I have a _plugins directory
     And I have a "index.html" page that contains "WRAP ME"
     And I have a "_plugins/ext.rb" file with content:
-    """
-    Jekyll::Hooks.register :pages, :post_render do |page|
-      page.output = "{{{{{ #{page.output.chomp} }}}}}"
-    end
-    """
+      """
+      Jekyll::Hooks.register :pages, :post_render do |page|
+        page.output = "{{{{{ #{page.output.chomp} }}}}}"
+      end
+      """
     When I run jekyll build
     Then I should see "{{{{{ WRAP ME }}}}}" in "_site/index.html"
 
@@ -119,25 +119,25 @@ Feature: Hooks
     Given I have a _plugins directory
     And I have a "index.html" page that contains "HELLO FROM A PAGE"
     And I have a "_plugins/ext.rb" file with content:
-    """
-    Jekyll::Hooks.register :pages, :post_write do |page|
-      require 'fileutils'
-      filename = page.destination(page.site.dest)
-      FileUtils.mv(filename, "#{filename}.moved")
-    end
-    """
+      """
+      Jekyll::Hooks.register :pages, :post_write do |page|
+        require 'fileutils'
+        filename = page.destination(page.site.dest)
+        FileUtils.mv(filename, "#{filename}.moved")
+      end
+      """
     When I run jekyll build
     Then I should see "HELLO FROM A PAGE" in "_site/index.html.moved"
 
   Scenario: Alter a post right after it is initialized
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
-    """
-    Jekyll::Hooks.register :posts, :post_init do |post|
-      post.data['harold'] = "content for entry1.".tr!('abcdefghijklmnopqrstuvwxyz',
-            'nopqrstuvwxyzabcdefghijklm')
-    end
-    """
+      """
+      Jekyll::Hooks.register :posts, :post_init do |post|
+        post.data['harold'] = "content for entry1.".tr!('abcdefghijklmnopqrstuvwxyz',
+              'nopqrstuvwxyzabcdefghijklm')
+      end
+      """
     And I have a _posts directory
     And I have the following posts:
       | title  | date       | layout | content               |
@@ -150,17 +150,17 @@ Feature: Hooks
   Scenario: Alter the payload for certain posts
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
-    """
-    # Add myvar = 'old' to posts before 2015-03-15, and myvar = 'new' for
-    # others
-    Jekyll::Hooks.register :posts, :pre_render do |post, payload|
-      if post.date < Time.new(2015, 3, 15)
-        payload['myvar'] = 'old'
-      else
-        payload['myvar'] = 'new'
+      """
+      # Add myvar = 'old' to posts before 2015-03-15, and myvar = 'new' for
+      # others
+      Jekyll::Hooks.register :posts, :pre_render do |post, payload|
+        if post.date < Time.new(2015, 3, 15)
+          payload['myvar'] = 'old'
+        else
+          payload['myvar'] = 'new'
+        end
       end
-    end
-    """
+      """
     And I have a _posts directory
     And I have the following posts:
       | title  | date       | layout | content          |
@@ -173,12 +173,12 @@ Feature: Hooks
   Scenario: Modify post contents before writing to disk
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
-    """
-    # Replace content after rendering
-    Jekyll::Hooks.register :posts, :post_render do |post|
-      post.output.gsub! /42/, 'the answer to life, the universe and everything'
-    end
-    """
+      """
+      # Replace content after rendering
+      Jekyll::Hooks.register :posts, :post_render do |post|
+        post.output.gsub! /42/, 'the answer to life, the universe and everything'
+      end
+      """
     And I have a _posts directory
     And I have the following posts:
       | title  | date       | layout | content             |
@@ -191,15 +191,15 @@ Feature: Hooks
   Scenario: Work with a post after writing it to disk
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
-    """
-    # Log all post filesystem writes
-    Jekyll::Hooks.register :posts, :post_write do |post|
-      filename = post.destination(post.site.dest)
-      open('_site/post-build.log', 'a') do |f|
-        f.puts "Wrote #{filename} at #{Time.now}"
+      """
+      # Log all post filesystem writes
+      Jekyll::Hooks.register :posts, :post_write do |post|
+        filename = post.destination(post.site.dest)
+        open('_site/post-build.log', 'a') do |f|
+          f.puts "Wrote #{filename} at #{Time.now}"
+        end
       end
-    end
-    """
+      """
     And I have a _posts directory
     And I have the following posts:
       | title  | date       | layout | content   |
@@ -212,11 +212,11 @@ Feature: Hooks
   Scenario: Register a hook on multiple owners at the same time
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
-    """
-    Jekyll::Hooks.register [:pages, :posts], :post_render do |owner|
-      owner.output = "{{{{{ #{owner.output.chomp} }}}}}"
-    end
-    """
+      """
+      Jekyll::Hooks.register [:pages, :posts], :post_render do |owner|
+        owner.output = "{{{{{ #{owner.output.chomp} }}}}}"
+      end
+      """
     And I have a "index.html" page that contains "WRAP ME"
     And I have a _posts directory
     And I have the following posts:
@@ -229,24 +229,24 @@ Feature: Hooks
   Scenario: Allow hooks to have a named priority
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
-    """
-    Jekyll::Hooks.register :pages, :post_render, priority: :normal do |owner|
-      # first normal runs second
-      owner.output = "1 #{owner.output.chomp}"
-    end
-    Jekyll::Hooks.register :pages, :post_render, priority: :high do |owner|
-      # high runs first
-      owner.output = "2 #{owner.output.chomp}"
-    end
-    Jekyll::Hooks.register :pages, :post_render do |owner|
-      # second normal runs third (normal is default)
-      owner.output = "3 #{owner.output.chomp}"
-    end
-    Jekyll::Hooks.register :pages, :post_render, priority: :low do |owner|
-      # low runs last 
-      owner.output = "4 #{owner.output.chomp}"
-    end
-    """
+      """
+      Jekyll::Hooks.register :pages, :post_render, priority: :normal do |owner|
+        # first normal runs second
+        owner.output = "1 #{owner.output.chomp}"
+      end
+      Jekyll::Hooks.register :pages, :post_render, priority: :high do |owner|
+        # high runs first
+        owner.output = "2 #{owner.output.chomp}"
+      end
+      Jekyll::Hooks.register :pages, :post_render do |owner|
+        # second normal runs third (normal is default)
+        owner.output = "3 #{owner.output.chomp}"
+      end
+      Jekyll::Hooks.register :pages, :post_render, priority: :low do |owner|
+        # low runs last 
+        owner.output = "4 #{owner.output.chomp}"
+      end
+      """
     And I have a "index.html" page that contains "WRAP ME"
     When I run jekyll build
     Then I should see "4 3 1 2 WRAP ME" in "_site/index.html"
@@ -254,25 +254,25 @@ Feature: Hooks
   Scenario: Alter a document right after it is initialized
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
-    """
-    Jekyll::Hooks.register :documents, :pre_render do |doc, payload|
-      doc.data['text'] = doc.data['text'] << ' are belong to us'
-    end
-    """
+      """
+      Jekyll::Hooks.register :documents, :pre_render do |doc, payload|
+        doc.data['text'] = doc.data['text'] << ' are belong to us'
+      end
+      """
     And I have a "_config.yml" file that contains "collections: [ memes ]"
     And I have a _memes directory
     And I have a "_memes/doc1.md" file with content:
-    """
-    ---
-    text: all your base
-    ---
-    """
+      """
+      ---
+      text: all your base
+      ---
+      """
     And I have an "index.md" file with content:
-    """
-    ---
-    ---
-    {{ site.memes.first.text }}
-    """
+      """
+      ---
+      ---
+      {{ site.memes.first.text }}
+      """
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
@@ -281,25 +281,25 @@ Feature: Hooks
   Scenario: Update a document after rendering it, but before writing it to disk
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
-    """
-    Jekyll::Hooks.register :documents, :post_render do |doc|
-      doc.output.gsub! /<p>/, '<p class="meme">'
-    end
-    """
+      """
+      Jekyll::Hooks.register :documents, :post_render do |doc|
+        doc.output.gsub! /<p>/, '<p class="meme">'
+      end
+      """
     And I have a "_config.yml" file with content:
-    """
-    collections:
-      memes:
-        output: true
-    """
+      """
+      collections:
+        memes:
+          output: true
+      """
     And I have a _memes directory
     And I have a "_memes/doc1.md" file with content:
-    """
-    ---
-    text: all your base are belong to us
-    ---
-    {{ page.text }}
-    """
+      """
+      ---
+      text: all your base are belong to us
+      ---
+      {{ page.text }}
+      """
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
@@ -308,27 +308,27 @@ Feature: Hooks
   Scenario: Perform an action after every document is written
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
-    """
-    Jekyll::Hooks.register :documents, :post_write do |doc|
-      open('_site/document-build.log', 'a') do |f|
-        f.puts "Wrote document #{doc.collection.docs.index doc} at #{Time.now}"
+      """
+      Jekyll::Hooks.register :documents, :post_write do |doc|
+        open('_site/document-build.log', 'a') do |f|
+          f.puts "Wrote document #{doc.collection.docs.index doc} at #{Time.now}"
+        end
       end
-    end
-    """
+      """
     And I have a "_config.yml" file with content:
-    """
-    collections:
-      memes:
-        output: true
-    """
+      """
+      collections:
+        memes:
+          output: true
+      """
     And I have a _memes directory
     And I have a "_memes/doc1.md" file with content:
-    """
-    ---
-    text: all your base are belong to us
-    ---
-    {{ page.text }}
-    """
+      """
+      ---
+      text: all your base are belong to us
+      ---
+      {{ page.text }}
+      """
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
@@ -337,11 +337,11 @@ Feature: Hooks
   Scenario: Set a custom payload['page'] property
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
-    """
-    Jekyll::Hooks.register :pages, :pre_render do |page, payload|
-        payload['page']['foo'] = "hello world"
-    end
-    """
+      """
+      Jekyll::Hooks.register :pages, :pre_render do |page, payload|
+          payload['page']['foo'] = "hello world"
+      end
+      """
     And I have a _layouts directory
     And I have a "_layouts/custom.html" file with content:
       """

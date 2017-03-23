@@ -2,15 +2,12 @@ Feature: frontmatter defaults
   Scenario: Use default for frontmatter variables internally
     Given I have a _layouts directory
     And I have a pretty layout that contains "THIS IS THE LAYOUT: {{content}}"
-
     And I have a _posts directory
     And I have the following post:
       | title             | date       | content          |
       | default layout    | 2013-09-11 | just some post   |
     And I have an "index.html" page with title "some title" that contains "just some page"
-
     And I have a configuration file with "defaults" set to "[{scope: {path: ""}, values: {layout: "pretty"}}]"
-
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
@@ -34,21 +31,17 @@ Feature: frontmatter defaults
     Given I have a _layouts directory
     And I have a root layout that contains "root: {{ content }}"
     And I have a subfolder layout that contains "subfolder: {{ content }}"
-
     And I have a _posts directory
     And I have the following post:
-      | title | date       | content               |
+      | title | date       | content                      |
       | about | 2013-10-14 | info on {{page.description}} |
     And I have a special/_posts directory
     And I have the following post in "special":
-      | title | date       | path  | content               |
+      | title | date       | path  | content                      |
       | about | 2013-10-14 | local | info on {{page.description}} |
-
     And I have an "index.html" page with title "overview" that contains "Overview for {{page.description}}"
     And I have an "special/index.html" page with title "section overview" that contains "Overview for {{page.description}}"
-
     And I have a configuration file with "defaults" set to "[{scope: {path: "special"}, values: {layout: "subfolder", description: "the special section"}}, {scope: {path: ""}, values: {layout: "root", description: "the webpage"}}]"
-
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
@@ -70,9 +63,7 @@ Feature: frontmatter defaults
       | title  | date       | path  | content                                        |
       | about1 | 2013-10-14 | local | content of site/special/2013/10/14/about1.html |
       | about2 | 2013-10-14 | local | content of site/special/2013/10/14/about2.html |
-
     And I have a configuration file with "defaults" set to "[{scope: {path: "special"}, values: {layout: "main"}}, {scope: {path: "special/_posts"}, values: {layout: "main"}}, {scope: {path: "_posts"}, values: {layout: "main"}}]"
-
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
@@ -83,18 +74,16 @@ Feature: frontmatter defaults
   Scenario: Use frontmatter scopes for subdirectories
     Given I have a _layouts directory
     And I have a main layout that contains "main: {{ content }}"
-
     And I have a _posts/en directory
     And I have the following post under "en":
-      | title | date       | content                               |
+      | title      | date       | content                               |
       | helloworld | 2014-09-01 | {{page.lang}} is the current language |
     And I have a _posts/de directory
     And I have the following post under "de":
-      | title  | date       | content                                        |
-      | hallowelt | 2014-09-01 | {{page.lang}} is the current language |
+      | title      | date       | content                               |
+      | hallowelt  | 2014-09-01 | {{page.lang}} is the current language |
 
     And I have a configuration file with "defaults" set to "[{scope: {path: "_posts/en"}, values: {layout: "main", lang: "en"}}, {scope: {path: "_posts/de"}, values: {layout: "main", lang: "de"}}]"
-
     When I run jekyll build
     Then the _site directory should exist
     And I should see "main: <p>en is the current language</p>" in "_site/2014/09/01/helloworld.html"
@@ -137,24 +126,24 @@ Feature: frontmatter defaults
     Given I have a _slides directory
     And I have a "index.html" file that contains "nothing"
     And I have a "_slides/slide1.html" file with content:
-    """
-    ---
-    ---
-    Value: {{ page.myval }}
-    """
+      """
+      ---
+      ---
+      Value: {{ page.myval }}
+      """
     And I have a "_config.yml" file with content:
-    """
-      collections:
-        slides:
-          output: true
-      defaults:
-        -
-          scope:
-            path: ""
-            type: slides
-          values:
-            myval: "Test"
-    """
+      """
+        collections:
+          slides:
+            output: true
+        defaults:
+          -
+            scope:
+              path: ""
+              type: slides
+            values:
+              myval: "Test"
+      """
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
@@ -164,25 +153,25 @@ Feature: frontmatter defaults
     Given I have a _slides directory
     And I have a "index.html" file that contains "nothing"
     And I have a "_slides/slide2.html" file with content:
-    """
-    ---
-    myval: Override
-    ---
-    Value: {{ page.myval }}
-    """
+      """
+      ---
+      myval: Override
+      ---
+      Value: {{ page.myval }}
+      """
     And I have a "_config.yml" file with content:
-    """
-      collections:
-        slides:
-          output: true
-      defaults:
-        -
-          scope:
-            path: ""
-            type: slides
-          values:
-            myval: "Test"
-    """
+      """
+        collections:
+          slides:
+            output: true
+        defaults:
+          -
+            scope:
+              path: ""
+              type: slides
+            values:
+              myval: "Test"
+      """
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist

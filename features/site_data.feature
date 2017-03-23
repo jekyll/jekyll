@@ -88,19 +88,19 @@ Feature: Site data
     And I should see "Yuengling" in "_site/index.html"
 
   Scenario: Order Posts by name when on the same date
-  Given I have a _posts directory
-  And I have an "index.html" page that contains "{% for post in site.posts %}{{ post.title }}:{{ post.previous.title}},{{ post.next.title}} {% endfor %}"
-  And I have the following posts:
-    | title | date       | content |
-    | first | 2009-02-26 | first   |
-    | A     | 2009-03-26 | A       |
-    | B     | 2009-03-26 | B       |
-    | C     | 2009-03-26 | C       |
-    | last  | 2009-04-26 | last    |
-  When I run jekyll build
-  Then I should get a zero exit status
-    And the _site directory should exist
-  And I should see "last:C, C:B,last B:A,C A:first,B first:,A" in "_site/index.html"
+    Given I have a _posts directory
+    And I have an "index.html" page that contains "{% for post in site.posts %}{{ post.title }}:{{ post.previous.title}},{{ post.next.title}} {% endfor %}"
+    And I have the following posts:
+      | title | date       | content |
+      | first | 2009-02-26 | first   |
+      | A     | 2009-03-26 | A       |
+      | B     | 2009-03-26 | B       |
+      | C     | 2009-03-26 | C       |
+      | last  | 2009-04-26 | last    |
+    When I run jekyll build
+    Then I should get a zero exit status
+      And the _site directory should exist
+    And I should see "last:C, C:B,last B:A,C A:first,B first:,A" in "_site/index.html"
 
   Scenario: Use configuration date in site payload
     Given I have an "index.html" page that contains "{{ site.url }}"
