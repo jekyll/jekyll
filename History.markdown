@@ -20,13 +20,21 @@
   * Fix typo in contribution information (#5910)
   * update plugin repo URL to reflect repo move (#5916)
   * Update exclude array in configuration.md (#5947)
+  * Fixed path in "Improve this page" link in Tutorials section (#5951)
+  * Corrected permalink (#5949)
+  * Included more details about adding defaults to static files (#5971)
+  * Create buddyworks (#5962)
+  * added (buddyworks) to ci list (#5965)
+  * Add a tutorial on serving custom Error 404 page (#5946)
+  * add custom 404 to tutorial navigation (#5978)
 
 ### Development Fixes
 
   * [Rubocop] add missing comma (#5835)
   * Appease classifier-reborn (#5934)
-  * Allow releases & development on *-stable branches (#5926)
+  * Allow releases & development on `*-stable` branches (#5926)
   * Add script/backport-pr (#5925)
+  * Prefer .yaml over .toml (#5966)
 
 ### Site Enhancements
 
@@ -43,6 +51,11 @@
   * Convertible#validate_permalink!: ensure the return value of data["permalink"] is a string before asking if it is empty (#5878)
   * Allow abbreviated post dates (#5920)
   * Remove dependency on include from default about.md (#5903)
+  * Allow colons in `uri_escape` filter (#5957)
+
+## 3.4.3 / 2017-03-21
+
+  * Backport #5957 for v3.4.x: Allow colons in `uri_escape` filter (#5968)
 
 ## 3.4.2 / 2017-03-09
 
