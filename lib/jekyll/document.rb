@@ -3,9 +3,12 @@
 module Jekyll
   class Document
     include Comparable
+    extend Forwardable
 
     attr_reader :path, :site, :extname, :collection
     attr_accessor :content, :output
+
+    def_delegator :self, :read_post_data, :post_read
 
     YAML_FRONT_MATTER_REGEXP = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m
     DATELESS_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.[^.]+)$!
@@ -255,7 +258,7 @@ module Jekyll
         begin
           merge_defaults
           read_content(opts)
-          post_read
+          read_post_data
         rescue SyntaxError => e
           Jekyll.logger.error "Error:", "YAML Exception reading #{path}: #{e.message}"
         rescue => e
