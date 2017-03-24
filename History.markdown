@@ -26,6 +26,7 @@
   * Create buddyworks (#5962)
   * added (buddyworks) to ci list (#5965)
   * Add a tutorial on serving custom Error 404 page (#5946)
+  * add custom 404 to tutorial navigation (#5978)
 
 ### Development Fixes
 
