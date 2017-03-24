@@ -25,6 +25,7 @@
   * Included more details about adding defaults to static files (#5971)
   * Create buddyworks (#5962)
   * added (buddyworks) to ci list (#5965)
+  * Add a tutorial on serving custom Error 404 page (#5946)
 
 ### Development Fixes
 
