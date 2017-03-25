@@ -27,6 +27,7 @@
   * added (buddyworks) to ci list (#5965)
   * Add a tutorial on serving custom Error 404 page (#5946)
   * add custom 404 to tutorial navigation (#5978)
+  * Add link to order of interpretation tutorial in Tutorials nav (#5952)
 
 ### Development Fixes
 
