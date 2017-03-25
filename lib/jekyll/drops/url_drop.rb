@@ -36,63 +36,67 @@ module Jekyll
       end
 
       def year
-        @obj.date.strftime("%Y")
+        @obj.date.strftime("%Y") # CCYY
       end
 
       def month
-        @obj.date.strftime("%m")
+        @obj.date.strftime("%m") # MM
       end
 
       def day
-        @obj.date.strftime("%d")
+        @obj.date.strftime("%d") # DD
       end
 
       def hour
-        @obj.date.strftime("%H")
+        @obj.date.strftime("%H") # hh
       end
 
       def minute
-        @obj.date.strftime("%M")
+        @obj.date.strftime("%M") # mm
       end
 
       def second
-        @obj.date.strftime("%S")
+        @obj.date.strftime("%S") # ss
       end
 
       def i_day
-        @obj.date.strftime("%-d")
+        @obj.date.strftime("%-d") # D
       end
 
       def i_month
-        @obj.date.strftime("%-m")
+        @obj.date.strftime("%-m") # M
       end
 
       def short_month
-        @obj.date.strftime("%b")
+        @obj.date.strftime("%^b") # MMM, uppercase
       end
 
       def long_month
-        @obj.date.strftime("%B")
+        @obj.date.strftime("%B") # MMMM, initial capital
       end
 
       def short_year
-        @obj.date.strftime("%y")
+        @obj.date.strftime("%y") # YY
+      end
+
+      def w_year
+        @obj.date.strftime("%G") # CCYYw, ISO week date, same as %Y except for the first and last week of the year
       end
 
       def week
-        @obj.date.strftime("%W")
+        @obj.date.strftime("%V") # WW, %W and %U do not comply with ISO 8601-1
       end
 
       def w_day
-        @obj.date.strftime("%j")
+        @obj.date.strftime("%u") # d, 1..7
       end
 
       def short_day
-        @obj.date.strftime("%a")
+        @obj.date.strftime("%^a") # dd, uppercase
       end
 
       def long_day
-        @obj.date.strftime("%A")
+        @obj.date.strftime("%A") # ddd, initial capital
       end
 
       private
