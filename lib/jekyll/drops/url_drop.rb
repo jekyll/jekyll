@@ -71,12 +71,28 @@ module Jekyll
         @obj.date.strftime("%b")
       end
 
+      def long_month
+        @obj.date.strftime("%B")
+      end
+
       def short_year
         @obj.date.strftime("%y")
       end
 
-      def y_day
+      def week
+        @obj.date.strftime("%W")
+      end
+
+      def w_day
         @obj.date.strftime("%j")
+      end
+
+      def short_day
+        @obj.date.strftime("%a")
+      end
+
+      def long_day
+        @obj.date.strftime("%A")
       end
 
       private
