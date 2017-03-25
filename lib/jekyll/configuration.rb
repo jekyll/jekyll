@@ -300,6 +300,8 @@ module Jekyll
         "/:categories/:year/:month/:day/:title:output_ext"
       when :ordinal
         "/:categories/:year/:y_day/:title:output_ext"
+      when :weekdate
+        "/:categories/:year/:week/:short_day/:title:output_ext"
       else
         permalink_style.to_s
       end
