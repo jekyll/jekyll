@@ -99,6 +99,10 @@ module Jekyll
         @obj.date.strftime("%A") # ddd, initial capital
       end
 
+      def y_day
+        @obj.date.strftime("%j") # DDD
+      end
+
       private
       def fallback_data
         {}
