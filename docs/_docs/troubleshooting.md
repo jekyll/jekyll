@@ -17,7 +17,7 @@ that might be of help. If the problem you’re experiencing isn’t covered belo
 ## Installation Problems
 
 If you encounter errors during gem installation, you may need to install
-the header files for compiling extension modules for Ruby 2.0.0. This
+the header files for compiling extension modules for Ruby 2.x This
 can be done on Ubuntu or Debian by running:
 
 ```sh
