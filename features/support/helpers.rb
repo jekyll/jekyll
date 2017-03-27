@@ -163,3 +163,14 @@ def seconds_agnostic_time(time)
   hour, minutes, = time.split(":")
   "#{hour}:#{minutes}"
 end
+
+# Helper method for Windows
+def dst_active?
+  config = Jekyll.configuration("quiet" => true)
+  ENV["TZ"] = config["timezone"]
+  dst = Time.now.isdst
+
+  # reset variable to default state on Windows
+  ENV["TZ"] = nil
+  dst
+end
