@@ -38,6 +38,7 @@
   * Allow releases & development on `*-stable` branches (#5926)
   * Add script/backport-pr (#5925)
   * Prefer .yaml over .toml (#5966)
+  * Fix Appveyor with DST-aware cucumber steps (#5961)
 
 ### Site Enhancements
 
