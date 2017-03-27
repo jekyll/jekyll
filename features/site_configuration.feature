@@ -23,9 +23,9 @@ Feature: Site configuration
     Given I have a blank site in "<source>"
     And I have an "<source>/index.md" page that contains "markdown"
     And I have a configuration file with:
-    | key         | value    |
-    | source      | <source> |
-    | destination | <dest>   |
+      | key         | value    |
+      | source      | <source> |
+      | destination | <dest>   |
     When I run jekyll build
     Then the <source> directory should exist
     And the "<dest>/index.html" file should <file_exist> exist
@@ -157,49 +157,49 @@ Feature: Site configuration
     And I should see "Post Layout: <p>content for entry1.</p>" in "_site/2007/12/31/entry1.html"
     And I should see "Post Layout: <p>content for entry2.</p>" in "_site/2020/01/31/entry2.html"
 
-    Scenario: Generate proper dates with explicitly set timezone (same as posts' time)
-      Given I have a _layouts directory
-      And I have a page layout that contains "Page Layout: {{ site.posts.size }}"
-      And I have a post layout that contains "Post Layout: {{ content }} built at {{ page.date | date_to_xmlschema }}"
-      And I have an "index.html" page with layout "page" that contains "site index page"
-      And I have a configuration file with:
-        | key         | value            |
-        | timezone    | America/New_York |
-      And I have a _posts directory
-      And I have the following posts:
-        | title     | date                   | layout  | content             |
-        | entry1    | 2013-04-09 23:22 -0400 | post    | content for entry1. |
-        | entry2    | 2013-04-10 03:14 -0400 | post    | content for entry2. |
-      When I run jekyll build
-      Then I should get a zero exit status
+  Scenario: Generate proper dates with explicitly set timezone (same as posts' time)
+    Given I have a _layouts directory
+    And I have a page layout that contains "Page Layout: {{ site.posts.size }}"
+    And I have a post layout that contains "Post Layout: {{ content }} built at {{ page.date | date_to_xmlschema }}"
+    And I have an "index.html" page with layout "page" that contains "site index page"
+    And I have a configuration file with:
+      | key         | value            |
+      | timezone    | America/New_York |
+    And I have a _posts directory
+    And I have the following posts:
+      | title     | date                   | layout  | content             |
+      | entry1    | 2013-04-09 23:22 -0400 | post    | content for entry1. |
+      | entry2    | 2013-04-10 03:14 -0400 | post    | content for entry2. |
+    When I run jekyll build
+    Then I should get a zero exit status
     And the _site directory should exist
-      And I should see "Page Layout: 2" in "_site/index.html"
-      And I should see "Post Layout: <p>content for entry1.</p>\n built at 2013-04-09T23:22:00-04:00" in "_site/2013/04/09/entry1.html" unless Windows
-      And I should see "Post Layout: <p>content for entry1.</p>\n built at 2013-04-09T22:22:00-05:00" in "_site/2013/04/09/entry1.html" if on Windows
-      And I should see "Post Layout: <p>content for entry2.</p>\n built at 2013-04-10T03:14:00-04:00" in "_site/2013/04/10/entry2.html" unless Windows
-      And I should see "Post Layout: <p>content for entry2.</p>\n built at 2013-04-10T02:14:00-05:00" in "_site/2013/04/10/entry2.html" if on Windows
+    And I should see "Page Layout: 2" in "_site/index.html"
+    And I should see "Post Layout: <p>content for entry1.</p>\n built at 2013-04-09T23:22:00-04:00" in "_site/2013/04/09/entry1.html" unless Windows
+    And I should see "Post Layout: <p>content for entry1.</p>\n built at 2013-04-09T22:22:00-05:00" in "_site/2013/04/09/entry1.html" if on Windows
+    And I should see "Post Layout: <p>content for entry2.</p>\n built at 2013-04-10T03:14:00-04:00" in "_site/2013/04/10/entry2.html" unless Windows
+    And I should see "Post Layout: <p>content for entry2.</p>\n built at 2013-04-10T02:14:00-05:00" in "_site/2013/04/10/entry2.html" if on Windows
 
-    Scenario: Generate proper dates with explicitly set timezone (different than posts' time)
-      Given I have a _layouts directory
-      And I have a page layout that contains "Page Layout: {{ site.posts.size }}"
-      And I have a post layout that contains "Post Layout: {{ content }} built at {{ page.date | date_to_xmlschema }}"
-      And I have an "index.html" page with layout "page" that contains "site index page"
-      And I have a configuration file with:
-        | key         | value                |
-        | timezone    | Pacific/Honolulu     |
-      And I have a _posts directory
-      And I have the following posts:
-        | title     | date                   | layout  | content             |
-        | entry1    | 2013-04-09 23:22 +0400 | post    | content for entry1. |
-        | entry2    | 2013-04-10 03:14 +0400 | post    | content for entry2. |
-      When I run jekyll build
-      Then I should get a zero exit status
+  Scenario: Generate proper dates with explicitly set timezone (different than posts' time)
+    Given I have a _layouts directory
+    And I have a page layout that contains "Page Layout: {{ site.posts.size }}"
+    And I have a post layout that contains "Post Layout: {{ content }} built at {{ page.date | date_to_xmlschema }}"
+    And I have an "index.html" page with layout "page" that contains "site index page"
+    And I have a configuration file with:
+      | key         | value                |
+      | timezone    | Pacific/Honolulu     |
+    And I have a _posts directory
+    And I have the following posts:
+      | title     | date                   | layout  | content             |
+      | entry1    | 2013-04-09 23:22 +0400 | post    | content for entry1. |
+      | entry2    | 2013-04-10 03:14 +0400 | post    | content for entry2. |
+    When I run jekyll build
+    Then I should get a zero exit status
     And the _site directory should exist
-      And I should see "Page Layout: 2" in "_site/index.html"
-      And the "_site/2013/04/09/entry1.html" file should exist
-      And the "_site/2013/04/09/entry2.html" file should exist
-      And I should see "Post Layout: <p>content for entry1.</p>\n built at 2013-04-09T09:22:00-10:00" in "_site/2013/04/09/entry1.html"
-      And I should see "Post Layout: <p>content for entry2.</p>\n built at 2013-04-09T13:14:00-10:00" in "_site/2013/04/09/entry2.html"
+    And I should see "Page Layout: 2" in "_site/index.html"
+    And the "_site/2013/04/09/entry1.html" file should exist
+    And the "_site/2013/04/09/entry2.html" file should exist
+    And I should see "Post Layout: <p>content for entry1.</p>\n built at 2013-04-09T09:22:00-10:00" in "_site/2013/04/09/entry1.html"
+    And I should see "Post Layout: <p>content for entry2.</p>\n built at 2013-04-09T13:14:00-10:00" in "_site/2013/04/09/entry2.html"
 
   Scenario: Limit the number of posts generated by most recent date
     Given I have a _posts directory
