@@ -29,6 +29,7 @@
   * add custom 404 to tutorial navigation (#5978)
   * Add link to order of interpretation tutorial in Tutorials nav (#5952)
   * Document Jekyll's Philosophy (#5792)
+  * Require Ruby > 2.1.0 (#5983)
 
 ### Development Fixes
 
