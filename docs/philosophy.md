@@ -16,8 +16,8 @@ action, the outcome should be easily understandable and focused.
 
 ### 2. It "Just Works"
 
-The out-of-the-box experience should be that it "just works." Run `gem
-install jekyll` and it should build any Jekyll site that it's given.
+The out-of-the-box experience should be that it "just works." Run
+`gem install jekyll` and it should build any Jekyll site that it's given.
 Features like auto-regeneration and settings like the markdown renderer
 should represent sane defaults that work perfectly for the vast majority of
 cases. The burden of initial configuration should not be placed on the user.
