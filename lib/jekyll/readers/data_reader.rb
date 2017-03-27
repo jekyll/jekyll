@@ -19,7 +19,7 @@ module Jekyll
       @content
     end
 
-    # Read and parse all .yaml, .yml, .json, and .csv
+    # Read and parse all .yaml, .yml, .json, .csv and .tsv
     # files under <dir> and add them to the <data> variable.
     #
     # dir - The string absolute path of the directory to read.
@@ -30,7 +30,7 @@ module Jekyll
       return unless File.directory?(dir) && !@entry_filter.symlink?(dir)
 
       entries = Dir.chdir(dir) do
-        Dir["*.{yaml,yml,json,csv}"] + Dir["*"].select { |fn| File.directory?(fn) }
+        Dir["*.{yaml,yml,json,csv,tsv}"] + Dir["*"].select { |fn| File.directory?(fn) }
       end
 
       entries.each do |entry|
@@ -53,6 +53,12 @@ module Jekyll
       case File.extname(path).downcase
       when ".csv"
         CSV.read(path, {
+          :headers  => true,
+          :encoding => site.config["encoding"],
+        }).map(&:to_hash)
+      when ".tsv"
+        CSV.read(path, {
+          :col_sep => "\t",
           :headers  => true,
           :encoding => site.config["encoding"],
         }).map(&:to_hash)
