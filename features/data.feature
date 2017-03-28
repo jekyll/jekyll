@@ -9,7 +9,7 @@ Feature: Data
       """
       - name: sugar
         price: 5.3
-      - name: sal
+      - name: salt
         price: 2.5
       """
     And I have an "index.html" page that contains "{% for product in site.data.products %}{{product.name}}{% endfor %}"
