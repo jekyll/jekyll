@@ -27,6 +27,9 @@
   * added (buddyworks) to ci list (#5965)
   * Add a tutorial on serving custom Error 404 page (#5946)
   * add custom 404 to tutorial navigation (#5978)
+  * Add link to order of interpretation tutorial in Tutorials nav (#5952)
+  * Document Jekyll's Philosophy (#5792)
+  * Require Ruby > 2.1.0 (#5983)
 
 ### Development Fixes
 
@@ -35,6 +38,7 @@
   * Allow releases & development on `*-stable` branches (#5926)
   * Add script/backport-pr (#5925)
   * Prefer .yaml over .toml (#5966)
+  * Fix Appveyor with DST-aware cucumber steps (#5961)
 
 ### Site Enhancements
 

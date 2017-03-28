@@ -246,6 +246,30 @@ end
 
 #
 
+Then(%r!^I should see date "(.*)" in "(.*)" unless Windows$!) do |text, file|
+  step %(the "#{file}" file should exist)
+  regexp = Regexp.new(text)
+  if Jekyll::Utils::Platforms.really_windows? && !dst_active?
+    expect(file_contents(file)).not_to match regexp
+  else
+    expect(file_contents(file)).to match regexp
+  end
+end
+
+#
+
+Then(%r!^I should see date "(.*)" in "(.*)" if on Windows$!) do |text, file|
+  step %(the "#{file}" file should exist)
+  regexp = Regexp.new(text)
+  if Jekyll::Utils::Platforms.really_windows? && !dst_active?
+    expect(file_contents(file)).to match regexp
+  else
+    expect(file_contents(file)).not_to match regexp
+  end
+end
+
+#
+
 Then(%r!^I should see exactly "(.*)" in "(.*)"$!) do |text, file|
   step %(the "#{file}" file should exist)
   expect(file_contents(file).strip).to eq text
