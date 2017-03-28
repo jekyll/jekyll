@@ -9,7 +9,7 @@ Feature: Data
       """
       - name: sugar
         price: 5.3
-      - name: salt
+      - name: sal
         price: 2.5
       """
     And I have an "index.html" page that contains "{% for product in site.data.products %}{{product.name}}{% endfor %}"
@@ -63,9 +63,9 @@ Feature: Data
     Given I have a _data directory
     And I have a "_data/members.tsv" file with content:
       """
-      name  age
-      Jack  28
-      Leon  34
+      name	age
+      Jack	28
+      Leon	34
       """
     And I have an "index.html" page that contains "{% for member in site.data.members %}{{member.name}}{% endfor %}"
     When I run jekyll build
