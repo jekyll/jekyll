@@ -58,7 +58,7 @@ module Jekyll
         }).map(&:to_hash)
       when ".tsv"
         CSV.read(path, {
-          :col_sep => "\t",
+          :col_sep  => "\t",
           :headers  => true,
           :encoding => site.config["encoding"],
         }).map(&:to_hash)
