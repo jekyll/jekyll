@@ -207,7 +207,7 @@ class TestConfiguration < JekyllUnitTest
         "pygments"    => true,
         "layouts"     => true,
         "data_source" => true,
-        "gems"        => []
+        "gems"        => [],
       }]
     end
     should "unset 'auto' and 'watch'" do
