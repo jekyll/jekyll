@@ -49,6 +49,7 @@ module Jekyll
         self.send("#{opt}=", config[opt])
       end
 
+      # keep using `gems` to avoid breaking change
       self.gems = config["plugins"]
 
       configure_plugins
