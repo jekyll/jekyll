@@ -141,7 +141,7 @@ To install a gem-based theme:
    bundle exec jekyll serve
    ```
 
-You can have multiple themes listed in your site's `Gemfile`, but only one theme can be selected in your site's `_config.yml`. 
+You can have multiple themes listed in your site's `Gemfile`, but only one theme can be selected in your site's `_config.yml`.
 {: .note .info }
 
 If you're publishing your Jekyll site on [GitHub Pages](https://pages.github.com/), note that GitHub Pages supports only some gem-based themes. See [Supported Themes](https://pages.github.com/themes/) in GitHub's documentation to see which themes are supported.
@@ -184,7 +184,7 @@ For example, if your theme has a `/_layouts/page.html` file, and a page has `lay
 
 Any file in `/assets` will be copied over to the user's site upon build unless they have a file with the same relative path. You can ship any kind of asset here: SCSS, an image, a webfont, etc. These files behave like pages and static files in Jekyll:
 
-- If the file has [YAML front matter](../docs/frontmatter/) at the top, it will be rendered.
+- If the file has [YAML front matter](/docs/frontmatter/) at the top, it will be rendered.
 - If the file does not have YAML front matter, it will simply be copied over into the resulting site.
 
 This allows theme creators to ship a default `/assets/styles.scss` file which their layouts can depend on as `/assets/styles.css`.
@@ -218,7 +218,7 @@ Themes are visual. Show users what your theme looks like by including a screensh
 
 To preview your theme as you're authoring it, it may be helpful to add dummy content in, for example, `/index.html` and `/page.html` files. This will allow you to use the `jekyll build` and `jekyll serve` commands to preview your theme, just as you'd preview a Jekyll site.
 
-If you do preview your theme locally, be sure to add `/_site` to your theme's `.gitignore` file to prevent the compiled site from also being included when you distribute your theme. 
+If you do preview your theme locally, be sure to add `/_site` to your theme's `.gitignore` file to prevent the compiled site from also being included when you distribute your theme.
 {: .info .note}
 
 ### Publishing your theme
