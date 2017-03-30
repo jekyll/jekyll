@@ -5,7 +5,7 @@ permalink: /tutorials/home/
 redirect_from: /tutorials/index.html
 ---
 
-In contrast to [Docs](../docs), Tutorials provide more detailed, narrative instruction that cover a variety of Jekyll topics and scenarios. Tutorials might contain the following:
+In contrast to [Docs](/docs/home/), Tutorials provide more detailed, narrative instruction that cover a variety of Jekyll topics and scenarios. Tutorials might contain the following:
 
 * Step-by-step processes through particular scenarios or challenges
 * Full walk-throughs using sample data, showing inputs and results from the sample data
