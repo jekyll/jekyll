@@ -5,7 +5,7 @@ language: ruby
 sudo: false
 
 rvm:
-  - &ruby1 2.4.0
+  - &ruby1 2.4.1
   - &ruby2 2.3.4
   - &ruby3 2.2.7
   - &ruby4 2.1.10
