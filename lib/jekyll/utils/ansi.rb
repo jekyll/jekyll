@@ -31,7 +31,7 @@ module Jekyll
       #
 
       def has?(str)
-        !!(str =~ MATCH)
+        !str !~ MATCH
       end
 
       # Reset the color back to the default color so that you do not leak any
