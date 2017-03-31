@@ -138,6 +138,8 @@ Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
+Style/SymbolArray:
+  Enabled: false
 Style/TrailingCommaInLiteral:
   EnforcedStyleForMultiline: consistent_comma
 Style/UnneededCapitalW:
