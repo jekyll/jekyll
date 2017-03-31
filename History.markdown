@@ -6,6 +6,7 @@
   * Convert StaticFile liquid representation to a Drop & add front matter defaults support to StaticFiles (#5871)
   * Add support for Tab-Separated Values data files (`*.tsv`) (#5985)
   * Specify version constraint in subcommand error message. (#5974)
+  * Add a template for custom 404 page (#5945)
 
 ### Documentation
 
