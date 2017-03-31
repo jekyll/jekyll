@@ -43,6 +43,7 @@
   * Prefer .yaml over .toml (#5966)
   * Fix Appveyor with DST-aware cucumber steps (#5961)
   * Use Rubocop v0.47.1 till we're ready for v0.48 (#5989)
+  * Test against Ruby 2.4.0 (#5687)
 
 ### Site Enhancements
 
