@@ -8,6 +8,7 @@
   * Specify version constraint in subcommand error message. (#5974)
   * Add a template for custom 404 page (#5945)
   * Require `runtime_dependencies` of a Gem-based theme from its `.gemspec` file (#5914)
+  * Don't raise an error if URL contains a colon (#5889)
 
 ### Documentation
 
