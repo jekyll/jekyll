@@ -32,6 +32,7 @@
   * Document Jekyll's Philosophy (#5792)
   * Require Ruby > 2.1.0 (#5983)
   * Fix broken link (#5994)
+  * Default options for script/proof (#5995)
 
 ### Development Fixes
 
