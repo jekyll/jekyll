@@ -67,8 +67,7 @@ module Jekyll
     # rubocop: disable AbcSize
     def render_document
       info = {
-        :filters   => [Jekyll::Filters],
-        :registers => { :site => site, :page => payload["page"] }
+        :registers => { :site => site, :page => payload["page"] },
       }
       output = document.content
       if document.render_with_liquid?
@@ -169,11 +168,12 @@ module Jekyll
     # Returns nothing
     private
     def validate_layout(layout)
+      return unless invalid_layout?(layout)
       Jekyll.logger.warn(
         "Build Warning:",
         "Layout '#{document.data["layout"]}' requested "\
         "in #{document.relative_path} does not exist."
-      ) if invalid_layout?(layout)
+      )
     end
 
     # Render layout content into document.output
@@ -194,10 +194,11 @@ module Jekyll
 
     private
     def add_regenerator_dependencies(layout)
+      return unless document.write?
       site.regenerator.add_dependency(
         site.in_source_dir(document.path),
         site.in_source_dir(layout.path)
-      ) if document.write?
+      )
     end
 
     # Set page content to payload and assign pager if document has one.

@@ -129,10 +129,10 @@ module Jekyll
     #
     # Returns String rendered page.
     def render(layouts, site_payload)
-      self.output = _renderer.tap do |renderer|
-        renderer.layouts = layouts
-        renderer.payload = site_payload
-      end.run
+      site_payload["page"] = to_liquid
+      site_payload["paginator"] = pager.to_liquid
+
+      do_layout(site_payload, layouts)
     end
 
     # The path to the source file
