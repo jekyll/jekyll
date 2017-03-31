@@ -3,8 +3,6 @@ gemspec :name => "jekyll"
 
 gem "rake", "~> 12.0"
 
-gem "pygments.rb", "~> 1.1"
-
 # Dependency of jekyll-mentions. RubyGems in Ruby 2.1 doesn't shield us from this.
 gem "activesupport", "~> 4.2", :groups => [:test_legacy, :site] if RUBY_VERSION < "2.2.2"
 
@@ -77,6 +75,8 @@ group :jekyll_optional_dependencies do
   platform :ruby, :mswin, :mingw, :x64_mingw do
     gem "classifier-reborn", "~> 2.1.0"
     gem "liquid-c", "~> 3.0"
+    gem "pygments.rb", "~> 0.6.0"
+    gem "yajl-ruby", git: "https://github.com/parkr/yajl-ruby", branch: "1.2.x-unify-fixnum-to-integer"
     gem "rdiscount", "~> 2.0"
     gem "redcarpet", "~> 3.2", ">= 3.2.3"
   end
