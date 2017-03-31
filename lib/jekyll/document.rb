@@ -3,9 +3,12 @@
 module Jekyll
   class Document
     include Comparable
+    extend Forwardable
 
     attr_reader :path, :site, :extname, :collection
     attr_accessor :content, :output
+
+    def_delegator :self, :read_post_data, :post_read
 
     YAML_FRONT_MATTER_REGEXP = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m
     DATELESS_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.[^.]+)$!
@@ -375,6 +378,38 @@ module Jekyll
       data.key?(method.to_s) || super
     end
 
+    # Add superdirectories of the special_dir to categories.
+    # In the case of es/_posts, 'es' is added as a category.
+    # In the case of _posts/es, 'es' is NOT added as a category.
+    #
+    # Returns nothing.
+    def categories_from_path(special_dir)
+      superdirs = relative_path.sub(%r!#{special_dir}(.*)!, "")
+        .split(File::SEPARATOR)
+        .reject do |c|
+        c.empty? || c == special_dir || c == basename
+      end
+      merge_data!({ "categories" => superdirs }, :source => "file path")
+    end
+
+    def populate_categories
+      merge_data!({
+        "categories" => (
+        Array(data["categories"]) + Utils.pluralized_array_from_hash(
+          data,
+          "category",
+          "categories"
+        )
+        ).map(&:to_s).flatten.uniq,
+      })
+    end
+
+    def populate_tags
+      merge_data!({
+        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten,
+      })
+    end
+
     private
     def merge_categories!(other)
       if other.key?("categories") && !other["categories"].nil?
@@ -443,41 +478,6 @@ module Jekyll
       if !data["date"] || data["date"].to_i == site.time.to_i
         merge_data!({ "date" => date }, :source => "filename")
       end
-    end
-
-    # Add superdirectories of the special_dir to categories.
-    # In the case of es/_posts, 'es' is added as a category.
-    # In the case of _posts/es, 'es' is NOT added as a category.
-    #
-    # Returns nothing.
-    private
-    def categories_from_path(special_dir)
-      superdirs = relative_path.sub(%r!#{special_dir}(.*)!, "")
-        .split(File::SEPARATOR)
-        .reject do |c|
-        c.empty? || c == special_dir || c == basename
-      end
-      merge_data!({ "categories" => superdirs }, :source => "file path")
-    end
-
-    private
-    def populate_categories
-      merge_data!({
-        "categories" => (
-        Array(data["categories"]) + Utils.pluralized_array_from_hash(
-          data,
-          "category",
-          "categories"
-        )
-        ).map(&:to_s).flatten.uniq,
-      })
-    end
-
-    private
-    def populate_tags
-      merge_data!({
-        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten,
-      })
     end
 
     private
