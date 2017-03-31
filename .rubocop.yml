@@ -35,6 +35,8 @@ Metrics/LineLength:
     - !ruby/regexp /features\/.*.rb/
     - Rakefile
     - rake/*.rake
+    - Gemfile
+    - jekyll.gemspec
   Max: 90
   Severity: warning
 Metrics/MethodLength:
