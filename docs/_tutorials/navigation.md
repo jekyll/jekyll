@@ -68,7 +68,7 @@ docs:
 </div>
 
 {: .note .info }
-For the results in these fictitious samples, `#` is manually substituted for the actual link value to avoid 404 errors.) 
+For the results in these fictitious samples, `#` is manually substituted for the actual link value to avoid 404 errors.)
 
 When you use a `for` loop, you choose how you want to refer to the items you're looping through. The variable you choose (in this case, `item`) becomes how you access the properties of each item in the list. Dot notation is used to get a property of the item (for example, `item.url`).
 
