@@ -7,6 +7,7 @@
   * Add support for Tab-Separated Values data files (`*.tsv`) (#5985)
   * Specify version constraint in subcommand error message. (#5974)
   * Add a template for custom 404 page (#5945)
+  * Require `runtime_dependencies` of a Gem-based theme from its `.gemspec` file (#5914)
 
 ### Documentation
 
