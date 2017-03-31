@@ -62,6 +62,7 @@
   * Allow abbreviated post dates (#5920)
   * Remove dependency on include from default about.md (#5903)
   * Allow colons in `uri_escape` filter (#5957)
+  * Re-surface missing public methods in `Jekyll::Document` (#5975)
 
 ## 3.4.3 / 2017-03-21
 
