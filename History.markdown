@@ -71,6 +71,10 @@
   * Allow colons in `uri_escape` filter (#5957)
   * Re-surface missing public methods in `Jekyll::Document` (#5975)
 
+### fix
+
+  * Filters#time helper: Duplicate time before calling #localtime. (#5996)
+
 ## 3.4.3 / 2017-03-21
 
   * Backport #5957 for v3.4.x: Allow colons in `uri_escape` filter (#5968)
