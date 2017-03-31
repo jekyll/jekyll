@@ -15,6 +15,7 @@ module Jekyll
     #
     # Returns nothing
     def conscientious_require
+      require_theme_deps if site.theme
       require_plugin_files
       require_gems
       deprecation_checks
@@ -27,6 +28,17 @@ module Jekyll
       Jekyll::External.require_with_graceful_fail(
         site.gems.select { |gem| plugin_allowed?(gem) }
       )
+    end
+
+    # Require each of the runtime_dependencies specified by the theme's gemspec.
+    #
+    # Returns false only if no dependencies have been specified, otherwise nothing.
+    def require_theme_deps
+      return false unless site.theme.runtime_dependencies
+      site.theme.runtime_dependencies.each do |dep|
+        next if dep.name == "jekyll"
+        External.require_with_graceful_fail(dep.name) if plugin_allowed?(dep.name)
+      end
     end
 
     def self.require_from_bundler
