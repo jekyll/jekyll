@@ -17,10 +17,6 @@ matrix:
       env: TEST_SUITE=fmt
     - rvm: *ruby1
       env: TEST_SUITE=default-site
-    - rvm: *ruby2
-      env: TEST_SUITE=fmt
-    - rvm: *ruby2
-      env: TEST_SUITE=default-site
   exclude:
     - rvm: *jruby
       env: TEST_SUITE=cucumber
