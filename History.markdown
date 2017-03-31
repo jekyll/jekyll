@@ -35,6 +35,7 @@
   * Fix broken link (#5994)
   * Default options for script/proof (#5995)
   * Mention Bash on Ubuntu on Windows (#5960)
+  * Document `--unpublished` flag introduced in 91e9ecf (#5959)
 
 ### Development Fixes
 
