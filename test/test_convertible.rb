@@ -33,7 +33,7 @@ class TestConvertible < JekyllUnitTest
       assert_match(%r!#{File.join(@base, name)}!, out)
     end
 
-    should "raise an error if there is a syntax error in the front matter and `strict_front_matter` config is set" do
+    should "raise for broken front matter with `strict_front_matter` set" do
       name = "broken_front_matter2.erb"
       @convertible.site.config["strict_front_matter"] = true
       assert_raises do
