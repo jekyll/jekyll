@@ -57,7 +57,9 @@ module Jekyll
 
       { :osx? => %r!darwin|mac os!, :unix? => %r!solaris|bsd! }.each do |k, v|
         define_method k do
-          !RbConfig::CONFIG["host_os"] !~ v
+          !!(
+            RbConfig::CONFIG["host_os"] =~ v
+          )
         end
       end
 

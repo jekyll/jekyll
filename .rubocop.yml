@@ -105,6 +105,8 @@ Style/IndentHeredoc:
   Enabled: false
 Style/IndentationWidth:
   Severity: error
+Style/InverseMethods:
+  Enabled: false
 Style/ModuleFunction:
   Enabled: false
 Style/MultilineMethodCallIndentation:
