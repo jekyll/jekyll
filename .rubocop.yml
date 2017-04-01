@@ -101,6 +101,8 @@ Style/IndentArray:
   EnforcedStyle: consistent
 Style/IndentHash:
   EnforcedStyle: consistent
+Style/IndentHeredoc:
+  Enabled: false
 Style/IndentationWidth:
   Severity: error
 Style/ModuleFunction:
