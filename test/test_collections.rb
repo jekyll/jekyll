@@ -217,7 +217,9 @@ class TestCollections < JekyllUnitTest
     end
 
     should "read document in subfolders with dots" do
-      assert @collection.docs.any? { |d| d.path.include?("all.dots") }
+      assert(
+        @collection.docs.any? { |d| d.path.include?("all.dots") }
+      )
     end
   end
 end
