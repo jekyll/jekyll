@@ -89,56 +89,67 @@ choice and written out to `<dest>/my_collection/some_subdir/some_doc.html`.
 
 ## Configuring permalinks for collections {#permalinks}
 
-You can specify a pattern for the URLs where your Collection documents will reside with the [`permalink` property](../permalinks/):
+If you wish to specify a custom pattern for the URLs where your Collection pages
+will reside, you may do so with the [`permalink` property](../permalinks/):
 
 ```yaml
 collections:
   categories:
-    output: true                  # without this flag, this Collection's documents will not be generated at build time
-    permalink: /category/:name    # custom permalink definition
+    output: true
+    permalink: /category/:name
 ```
 
 ### Examples
 
-For a collection named `apidocs` with the following source file structure,
+For a collection with the following source file structure,
 
 ```
-├── _apidocs
-│   └── archive
-│       └── deprecated.md
+_my_collection/
+└── some_subdir
+    └── some_doc.md
 ```
 
-the examples below present various `permalink` configurations and the document structures they produce under the `_site` directory.
+each of the following `permalink` configurations will produce the document structure shown below it.
 
 * **Default**  
   Same as `permalink: /:collection/:path`.
   ```
-  ├── apidocs
-  │   └── archive
-  │       └── deprecated.html
+  _site/
+  ├── my_collection
+  │   └── some_subdir
+  │       └── some_doc.html
+  ...
   ```
 * `permalink: pretty`  
   Same as `permalink: /:collection/:path/`.
   ```
-  ├── apidocs
-  │   └── archive
-  │       └── deprecated
+  _site/
+  ├── my_collection
+  │   └── some_subdir
+  │       └── some_doc
   │           └── index.html
+  ...
   ```
 * `permalink: /doc/:path`
   ```
+  _site/
   ├── doc
-  │   └── archive
-  │       └── deprecated.html
+  │   └── some_subdir
+  │       └── some_doc.html
+  ...
   ```
 * `permalink: /doc/:name`
   ```
+  _site/
   ├── doc
-  │   └── deprecated.html
+  │   └── some_doc.html
+  ...
   ```
 * `permalink: /:name`
   ```
-  ├── deprecated.html
+  _site/
+  ├── some_doc.html
+  ...
   ```
 
 ### Template Variables
