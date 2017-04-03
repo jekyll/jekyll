@@ -40,6 +40,7 @@
   * Mention Bash on Ubuntu on Windows (#5960)
   * Document `--unpublished` flag introduced in 91e9ecf (#5959)
   * Update upgrading.md to mention usage of `bundle update` (#5604)
+  * Fix missing quotation mark (#6002)
 
 ### Development Fixes
 
