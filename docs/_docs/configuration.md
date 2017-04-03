@@ -603,7 +603,7 @@ collections:
 # Handling Reading
 safe:         false
 include:      [".htaccess"]
-exclude:      ["Gemfile", "Gemfile.lock", node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/"]
+exclude:      ["Gemfile", "Gemfile.lock", "node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/"]
 keep_files:   [".git", ".svn"]
 encoding:     "utf-8"
 markdown_ext: "markdown,mkdown,mkdn,mkd,md"
