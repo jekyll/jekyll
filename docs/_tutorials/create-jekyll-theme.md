@@ -28,13 +28,7 @@ A simple Jekyll site might consist of just 3 files:
 └── index.md
 ```
 
-Manually create these 3 files in a folder called `myjekyllsite`. (Put `default.html` inside a folder called `_layouts`.) Then populate the content of the files as follows:
-
-**_config.yml**
-
-```
-markdown: kramdown
-```
+Manually create these 3 files in a folder called `myjekyllsite`. (Put `default.html` inside a folder called `_layouts`.) Then populate the content of the `default.html` and `index.md` files as follows:
 
 **_layouts/default.html**
 
@@ -67,7 +61,7 @@ When you build the site, you get a preview URL such as `http://127.0.0.1:4001/`.
 
 This is a Jekyll site at the most basic level. Here's what is happening:
 
-* The `_config.yml` file contains settings that Jekyll uses as it processes your site. This basic config file tells Jekyll to convert Markdown to HTML using the [kramdown Markdown filter](https://rubygems.org/gems/kramdown/).
+* The `_config.yml` file contains settings that Jekyll uses as it processes your site. An empty config file will use default values for building a Jekyll site. For example, to convert Markdown to HTML, Jekyll will automatically use the [kramdown Markdown filter](https://rubygems.org/gems/kramdown/), without any need to specify it.
 * Jekyll looks for files with [front matter tags]({% link _docs/frontmatter.md %}) (the two sets of dashed lines `---` like those in `index.md`) and processes the files (populating site variables, rendering any [Liquid](https://shopify.github.io/liquid/), and converting Markdown to HTML).
 * Jekyll pushes the content from all pages and posts into the `{% raw %}{{ content }}{% endraw %}` tags in the layout specified (`default`) in the front matter tags.
 * The processed files get written as `.html` files in the `_site` directory.
@@ -154,7 +148,7 @@ Create another page for testing called `about.md` with similar front matter tags
 
 ## 4. Add a configuration file
 
-Add a `_config.yml` file in your root directory. In `_config.yml`, specify the markdown filter you want (usually [kramdown](https://kramdown.gettalong.org/)):
+Add a `_config.yml` file in your root directory. In `_config.yml`, you can optionally specify the markdown filter you want. By default, [kramdown](https://kramdown.gettalong.org/)) is used (without the need to specify it). If no other filter is specified, your config file will automatically apply the following as a default setting:
 
 ```
 markdown: kramdown
