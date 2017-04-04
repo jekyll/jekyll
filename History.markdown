@@ -42,6 +42,7 @@
   * Update upgrading.md to mention usage of `bundle update` (#5604)
   * Fix missing quotation mark (#6002)
   * New tutorial: Convert an HTML site to Jekyll (#5881)
+  * Revamp Permalink section (#5912)
 
 ### Development Fixes
 
