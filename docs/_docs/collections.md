@@ -94,9 +94,9 @@ will reside, you may do so with the [`permalink` property](../permalinks/):
 
 ```yaml
 collections:
-  categories:
+  my_collection:
     output: true
-    permalink: /category/:name
+    permalink: /:collection/:name
 ```
 
 ### Examples
@@ -113,6 +113,7 @@ each of the following `permalink` configurations will produce the document struc
 
 * **Default**  
   Same as `permalink: /:collection/:path`.
+
   ```
   _site/
   ├── my_collection
@@ -122,6 +123,7 @@ each of the following `permalink` configurations will produce the document struc
   ```
 * `permalink: pretty`  
   Same as `permalink: /:collection/:path/`.
+
   ```
   _site/
   ├── my_collection
@@ -131,6 +133,7 @@ each of the following `permalink` configurations will produce the document struc
   ...
   ```
 * `permalink: /doc/:path`
+
   ```
   _site/
   ├── doc
@@ -139,6 +142,7 @@ each of the following `permalink` configurations will produce the document struc
   ...
   ```
 * `permalink: /doc/:name`
+
   ```
   _site/
   ├── doc
@@ -146,6 +150,7 @@ each of the following `permalink` configurations will produce the document struc
   ...
   ```
 * `permalink: /:name`
+
   ```
   _site/
   ├── some_doc.html
