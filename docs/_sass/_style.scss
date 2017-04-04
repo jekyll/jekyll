@@ -459,6 +459,9 @@ aside {
       top: 0;
       left: -30px;
     }
+    &.current a {
+        color: #f90;
+    }
   }
 }
 
@@ -1030,4 +1033,8 @@ code.output {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
+}
+
+.result {
+  padding: 12px;
 }

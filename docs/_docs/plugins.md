@@ -865,7 +865,7 @@ LESS.js files during generation.
 - [jekyll-figure](https://github.com/paulrobertlloyd/jekyll-figure): A liquid tag for Jekyll that generates `<figure>` elements.
 - [Jekyll Video Embed](https://github.com/eug/jekyll-video-embed): It provides several tags to easily embed videos (e.g. Youtube, Vimeo, UStream and Ted Talks)
 - [jekyll-i18n_tags](https://github.com/KrzysiekJ/jekyll-i18n_tags): Translate your templates.
-- [Jekyll Ideal Image Slider](https://github.com/xHN35RQ/jekyll-ideal-image-slider): Liquid tag plugin to create image sliders using [Ideal Image Slider](https://github.com/gilbitron/Ideal-Image-Slider).
+- [Jekyll Ideal Image Slider](https://github.com/jekylltools/jekyll-ideal-image-slider): Liquid tag plugin to create image sliders using [Ideal Image Slider](https://github.com/gilbitron/Ideal-Image-Slider).
 - [Jekyll Tags List Plugin](https://github.com/crispgm/jekyll-tags-list-plugin): A Liquid tag plugin that creates tags list in specific order.
 - [Jekyll Maps](https://github.com/ayastreb/jekyll-maps) by [Anatoliy Yastreb](https://github.com/ayastreb): A Jekyll plugin to easily embed maps with filterable locations.
 - [Jekyll Cloudinary](https://nhoizey.github.io/jekyll-cloudinary/) by [Nicolas Hoizey](https://nicolas-hoizey.com/): a Jekyll plugin adding a Liquid tag to ease the use of Cloudinary for responsive images in your Markdown/Kramdown posts.

@@ -69,7 +69,7 @@ module Jekyll
     end
 
     def validate_permalink!(filename)
-      if self.data["permalink"] && self.data["permalink"].empty?
+      if self.data["permalink"] && self.data["permalink"].to_s.empty?
         raise Errors::InvalidPermalinkError, "Invalid permalink in #{filename}"
       end
     end
@@ -78,7 +78,7 @@ module Jekyll
     #
     # Returns the transformed contents.
     def transform
-      _renderer.transform
+      _renderer.convert(content)
     end
 
     # Determine the extension depending on content_type.

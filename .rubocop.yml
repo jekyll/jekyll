@@ -4,7 +4,6 @@ AllCops:
   Include:
     - lib/**/*.rb
   Exclude:
-    - lib/jekyll/renderer.rb
     - bin/**/*
     - exe/**/*
     - benchmark/**/*
