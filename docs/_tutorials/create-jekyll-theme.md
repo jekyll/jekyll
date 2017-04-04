@@ -262,7 +262,7 @@ layout: home
 
 In this case, `home.md` will be pushed into the `{% raw %}{{ content }}{% endraw %}` tags in the `home` layout. Then the `home` layout will be pushed into the `{% raw %}{{ content }}{% endraw %}` tags of the `default` layout.
 
-## How layouts work
+### How layouts work
 
 When a layout specifies another layout, it means the content of the first layout will be stuffed into the `{% raw %}{{ content }}{% endraw %}` tag of the second layout. As an analogy, think of Russian dolls that fit into each other. Each layout fits into another layout that it specifies.
 
