@@ -70,6 +70,7 @@ You can read more about how Jekyll processes the files in [Order of Interpretati
 
 With this basic foundation of how a Jekyll site works, you can convert almost any HTML theme into a Jekyll site. The following sections will take you through a step-by-step tutorial on converting an HTML template into a Jekyll site.
 
+
 ## 1. Create a template for your default layout
 
 Find your HTML theme and save it as a default layout. If you're converting or cloning an existing site, you can right-click the page and view the source code.
@@ -118,6 +119,7 @@ Does your local `default.html` page look good in your browser? Are all images, s
 
 In the next section, you'll blank out the content of the layout and replace it with placeholder tags that get populated dynamically with your Jekyll pages.
 
+
 ## 2. Identify the content part of the layout
 
 In `default.html`, find where the page content begins (usually at `h1` or `h2` tags). Replace the title that appears inside these tags with `{% raw %}{{ page.title }}{% endraw %}`.
@@ -125,6 +127,7 @@ In `default.html`, find where the page content begins (usually at `h1` or `h2` t
 Remove the page content (but not code from the top nav, sidebar, or footer) and replace the page content with `{% raw %}{{ content }}{% endraw %}`.
 
 Check the layout again in your browser and make sure you didn't corrupt or alter it up by inadvertently removing a crucial `div` tag or other element. The only change should be to the title and page content, which are now blanked out or showing the placeholder tag.
+
 
 ## 3. Create a couple of files with front matter tags
 
@@ -146,6 +149,7 @@ Create another page for testing called `about.md` with similar front matter tags
 {: .note .info}
 **Note:** If you don't specify a layout in your pages, Jekyll will automatically use the template labeled `default`. We specify it here only to make it explicit what's happening.
 
+
 ## 4. Add a configuration file
 
 Add a `_config.yml` file in your root directory. In `_config.yml`, you can optionally specify the markdown filter you want. By default, [kramdown](https://kramdown.gettalong.org/)) is used (without the need to specify it). If no other filter is specified, your config file will automatically apply the following as a default setting:
@@ -163,6 +167,7 @@ kramdown:
  hard_wrap: false
  syntax_highlighter: rouge
 ```
+
 
 ## 5. Test your pages
 
@@ -182,6 +187,7 @@ layout: homepage
 This page would then use the `homepage.html` template in the `_layouts` folder.
 
 You can even set [default front matter tags](/docs/configuration/#front-matter-defaults) for pages, posts, or [collections]({% link _docs/collections.md %}) in your `_config.yml` file so that you don't have to specify the layout in your front matter tags. However, setting defaults is more advanced than this basic tutorial will cover.
+
 
 ## 6. Configure site variables
 
@@ -213,6 +219,7 @@ Stop your Jekyll server (**Ctrl + C**) and restart it. Verify that the `title` t
 **Note:** Every time you modify your config file, you have to restart Jekyll for the changes to take effect. When you modify other files, Jekyll automatically picks up the changes when it rebuilds.
 
 If you have other variables to populate in your site, do so following this same pattern.
+
 
 ## 7. Show posts on a page
 
@@ -262,6 +269,7 @@ layout: home
 
 In this case, `home.md` will be pushed into the `{% raw %}{{ content }}{% endraw %}` tags in the `home` layout. Then the `home` layout will be pushed into the `{% raw %}{{ content }}{% endraw %}` tags of the `default` layout.
 
+
 ### How layouts work
 
 When a layout specifies another layout, it means the content of the first layout will be stuffed into the `{% raw %}{{ content }}{% endraw %}` tag of the second layout. As an analogy, think of Russian dolls that fit into each other. Each layout fits into another layout that it specifies.
@@ -275,6 +283,7 @@ In this case, the content from a page that specifies the layout `page` gets push
 You don't need multiple layouts. You could just use one: `default`. You have options for how you design your site. In general, it's common to define one layout for pages and another layout for posts, but for both of these layouts to inherit the `default` template (which usually defines the top and bottom parts of the site).
 
 In your browser, go to `home.html` and see the list of posts. (Note that you didn't have to use the method described here. You could have simply added the `for` loop to any page, such as `index.md`, to display these posts. But given that you may have more complex logic for other features, it can be helpful to store your logic in templates separate from the page area where you frequently type your content.)
+
 
 ### For loops
 
@@ -292,6 +301,7 @@ We've only scratched the surface of what you can do with `for` loops in retrievi
 ```
 
 This loop would get the latest 3 posts that have a category called `podcasts` in the front matter.
+
 
 ## 8. Configure navigation
 
@@ -350,6 +360,7 @@ To print the list of pages from the data file, use code like this:
 
 If you have more sophisticated requirements around navigation, such as when building a documentation site, see the [detailed tutorial on navigation](/tutorials/navigation/).
 
+
 ## 9. Simplify your site with includes
 
 Let's suppose your `default.html` file is massive and hard to work with. You can break up your layout by putting some of the content in include files.
@@ -365,6 +376,7 @@ In place of sidebar code in `default.html`, pull in your include like this:
 ```
 
 You can break up other elements of your theme like this, such as your header or footer. Then you can apply these common elements to other layout files. This way you won't have duplicate code.
+
 
 ## 10. RSS feed
 
@@ -410,6 +422,7 @@ In your `default.html` layout, look for a reference to the RSS or Atom feed in y
 
 You can also auto-generate your feed by adding a gem called [`jekyll-feed`][jekyll-feed]. This gem will also work on GitHub Pages.
 
+
 ## 11. Add a sitemap
 
 Finally, add a [site map](https://www.sitemaps.org/protocol.html). Create a `sitemap.xml` file in your root directory and add this code:
@@ -448,6 +461,7 @@ Again, we're using a for loop here to iterate through all posts and pages to add
 
 You can also auto-generate your sitemap by adding a gem called [`jekyll-sitemap`][jekyll-sitemap]. This gem will also work on GitHub Pages.
 
+
 ## 12. Add external services
 
 For other services you might need (such as contact forms, search, comments, and more), look for third-party services. For example, you might use the following:
@@ -471,6 +485,7 @@ layout: null
 ---
 ```
 
+
 ## 13. Conclusion
 
 Although websites can implement more sophisticated features and functionality, we've covered the basics in this tutorial. You now have a fully functional Jekyll site.
@@ -478,6 +493,7 @@ Although websites can implement more sophisticated features and functionality, w
 To deploy your site, consider using [Github Pages](https://pages.github.com/), [Amazon AWS S3](https://aws.amazon.com/s3/) using the [s3_website plugin](https://github.com/laurilehmijoki/s3_website), or just FTP your files to your web server.
 
 You can also take your Jekyll theme to the next level by [packaging it as a Ruby gem](docs/themes/#creating-a-theme).
+
 
 ## Additional resources
 
