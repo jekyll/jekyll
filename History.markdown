@@ -56,6 +56,7 @@
   * Use Rubocop v0.47.1 till we're ready for v0.48 (#5989)
   * Test against Ruby 2.4.0 (#5687)
   * rubocop: lib/jekyll/renderer.rb complexity fixes (#5052)
+  * Use yajl-ruby 1.2.2 (now with 2.4 support) (#6007)
 
 ### Site Enhancements
 
