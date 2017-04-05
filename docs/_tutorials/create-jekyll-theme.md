@@ -152,7 +152,7 @@ If you don't specify a layout in your pages, Jekyll will simply render that page
 
 ## 4. Add a configuration file
 
-Add a `_config.yml` file in your root directory. In `_config.yml`, you can optionally specify the markdown filter you want. By default, [kramdown](https://kramdown.gettalong.org/)) is used (without the need to specify it). If no other filter is specified, your config file will automatically apply the following as a default setting:
+Add a `_config.yml` file in your root directory. In `_config.yml`, you can optionally specify the markdown filter you want. By default, [kramdown](https://kramdown.gettalong.org/) is used (without the need to specify it). If no other filter is specified, your config file will automatically apply the following as a default setting:
 
 ```
 markdown: kramdown
@@ -249,7 +249,8 @@ Now let's create a layout that will display the posts. Create a new file in `_la
 layout: default
 ---
 
-{% raw %}<ul class="myposts">
+{% raw %}{{ content}}
+<ul class="myposts">
 {% for post in site.posts %}
     <li><a href="{{ post.url }}">{{ post.title}}</a>
     <span class="postDate">{{ post.date | date: "%b %-d, %Y" }}</span>
@@ -267,7 +268,7 @@ layout: home
 ---
 ```
 
-In this case, `home.md` will be pushed into the `{% raw %}{{ content }}{% endraw %}` tags in the `home` layout. Then the `home` layout will be pushed into the `{% raw %}{{ content }}{% endraw %}` tags of the `default` layout.
+In this case, contents of `blog.md` will be pushed into the `{% raw %}{{ content }}{% endraw %}` tag in the `home` layout. Then the `home` layout will be pushed into the `{% raw %}{{ content }}{% endraw %}` tag of the `default` layout.
 
 
 ### How layouts work
@@ -282,7 +283,7 @@ In this case, the content from a page that specifies the layout `page` gets push
 
 You don't need multiple layouts. You could just use one: `default`. You have options for how you design your site. In general, it's common to define one layout for pages and another layout for posts, but for both of these layouts to inherit the `default` template (which usually defines the top and bottom parts of the site).
 
-In your browser, go to `home.html` and see the list of posts. (Note that you didn't have to use the method described here. You could have simply added the `for` loop to any page, such as `index.md`, to display these posts. But given that you may have more complex logic for other features, it can be helpful to store your logic in templates separate from the page area where you frequently type your content.)
+In your browser, go to `blog.html` and see the list of posts. <br />(Note that you don't have to use the method described here. You could have simply added the `for` loop to any page, such as `index.md`, to display these posts. But given that you may have more complex logic for other features, it can be helpful to store your logic in templates separate from the page area where you frequently type your content.)
 
 {: .note .info}
 At minimum, a layout should contain `{% raw %}{{ content }}{% endraw %}`, which acts as a receiver for the *content* to be rendered.
@@ -349,7 +350,7 @@ To manage page links this way, create a folder in your Jekyll project called `_d
   url: /sample3/
 ```
 
-(You can store additional properties for each item in this data file as desired. Arrange the list items in the order you want them to appear.
+You can store additional properties for each item in this data file as desired. Arrange the list items in the order you want them to appear.
 
 To print the list of pages from the data file, use code like this:
 
