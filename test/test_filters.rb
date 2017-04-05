@@ -402,6 +402,11 @@ class TestFilters < JekyllUnitTest
         })
         assert_equal "http://xn--mlaut-jva.example.org/", filter.absolute_url(page_url)
       end
+
+      should "not modify an absolute URL" do
+        page_url = "http://example.com/"
+        assert_equal "http://example.com/", @filter.absolute_url(page_url)
+      end
     end
 
     context "relative_url filter" do
