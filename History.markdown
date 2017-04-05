@@ -66,6 +66,7 @@
   * Documentation on how to build navigation (#5698)
   * Navigation has been moved out from docs (#5927)
   * Make links in sidebar for current page more prominent (#5820)
+  * Update normalize.css to v6.0.0 (#6008)
 
 ### Bug Fixes
 
