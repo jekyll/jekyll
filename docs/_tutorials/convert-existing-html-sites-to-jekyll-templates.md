@@ -1,25 +1,30 @@
 ---
 layout: tutorials
-permalink: /tutorials/create-jekyll-theme/
-title: Create your first Jekyll theme
+permalink: /tutorials/convert-existing-html-sites-to-jekyll-templates/
+title: Convert existing HTML sites to Jekyll Templates
 ---
 
 If you're looking for themes for your Jekyll site, you don't have to restrict yourself to existing Jekyll themes. It's pretty easy to convert almost any static HTML site into a Jekyll theme.
 
-In many ways, any site that is currently a static site *already* is a Jekyll site. Jekyll just allows you to automate parts of the site (like inserting pages into templates, rendering lists for navigation, generating feeds and sitemaps, and more) as it processes the files.
+In many ways, any site that is currently a static site is *already* a Jekyll site. Jekyll just allows you to automate parts of the site (like inserting pages into templates, rendering lists for navigation, generating feeds and sitemaps, and more) as it processes the files.
 
-Understanding how to convert any HTML site into a Jekyll website will open your world to many more options for Jekyll themes. Instead of searching online for "Jekyll themes," you can choose from the large variety of HTML templates for your site, quickly Jekyll-ize the HTML template as you need to, and build the output with Jekyll.
+Understanding how to convert any HTML site into a Jekyll template will open your world to many more options for Jekyll themes. Instead of searching online for "Jekyll themes," you can choose from the large variety of HTML templates for your site, quickly Jekyll-ize the HTML template as you need to, and build the output with Jekyll.
 
 Although websites can have sophisticated features and controls, we'll keep things simple in this tutorial. This tutorial contains the following sections:
 
 * TOC
 {:toc}
 
-## Understand a basic Jekyll site
+## Understanding a basic Jekyll site
 
 First, let's start with a grounding in the basics. Stripping a Jekyll site down to an extremely basic level will help clarify what happens in a Jekyll site. If you haven't already installed the jekyll gem, [install it]({% link _docs/installation.md %}).
 
-A simple Jekyll site might consist of just 3 files:
+A bare boned Jekyll Site consists of:
+
+  * an empty `_config.yml`
+  * an `index.html` containing the entire source-code for your site's homepage.
+
+But for this tutorial, we'll start with a *basic Jekyll site* consisting of 3 files:
 
 ```
 ├── _config.yaml
@@ -28,11 +33,12 @@ A simple Jekyll site might consist of just 3 files:
 └── index.md
 ```
 
-Manually create these 3 files in a folder called `myjekyllsite`. (Put `default.html` inside a folder called `_layouts`.) Then populate the content of the `default.html` and `index.md` files as follows:
+Manually create these 3 files in a folder called `myjekyllsite`. (Place `default.html` inside a folder named `_layouts`.) Then populate the content of the `default.html` and `index.md` files as follows:
 
 **_layouts/default.html**
 
 ```html
+<!DOCTYPE html>
 <html>
   <body>
      {% raw %}{{ content }}{% endraw %}
@@ -51,19 +57,19 @@ layout: default.html
 Some **bold** content.
 ```
 
-Now `cd` to `myjekyllsite` and build the site:
+Now `cd` to `myjekyllsite` and serve the site with the built-in server:
 
 ```
 jekyll serve
 ```
 
-When you build the site, you get a preview URL such as `http://127.0.0.1:4001/`. The site's files are built in the `_site` folder.
+When you serve the site, you get a preview URL such as `http://127.0.0.1:4001/` (which is the same as `http://localhost:4001/`). The site's files are built into the `_site` folder by default.
 
-This is a Jekyll site at the most basic level. Here's what is happening:
+This is a Jekyll site at the most basic functional level. Here's what is happening:
 
 * The `_config.yml` file contains settings that Jekyll uses as it processes your site. An empty config file will use default values for building a Jekyll site. For example, to convert Markdown to HTML, Jekyll will automatically use the [kramdown Markdown filter](https://rubygems.org/gems/kramdown/), without any need to specify it.
 * Jekyll looks for files with [front matter tags]({% link _docs/frontmatter.md %}) (the two sets of dashed lines `---` like those in `index.md`) and processes the files (populating site variables, rendering any [Liquid](https://shopify.github.io/liquid/), and converting Markdown to HTML).
-* Jekyll pushes the content from all pages and posts into the `{% raw %}{{ content }}{% endraw %}` tags in the layout specified (`default`) in the front matter tags.
+* Jekyll pushes the content from all pages and posts into the `{% raw %}{{ content }}{% endraw %}` tag in the layout specified (`default`) in the front matter tags.
 * The processed files get written as `.html` files in the `_site` directory.
 
 You can read more about how Jekyll processes the files in [Order of Interpretation](/tutorials/orderofinterpretation/).
