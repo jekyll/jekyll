@@ -78,7 +78,7 @@ Find your HTML theme and save it as a default layout. If you're converting or cl
 For example, suppose you're cloning your company site to create a documentation site with the same branding. Or suppose you have a personal site that you built with HTML and now want to make it a Jekyll theme. Get the HTML source code for your site.
 
 {: .note .info}
-**Note:** Regardless of the site, check the license and make sure you have permission to copy the code.
+Regardless of the site, do check the license and make sure you have permission to copy the code.
 
 Copy and paste the source code into a file called `default.html`. Put the `default.html` file inside a folder called `_layouts`. This will be the default layout template for your pages and posts &mdash; that is, each page or post will use this layout when Jekyll builds the site.
 
@@ -147,7 +147,7 @@ Some page content here...
 Create another page for testing called `about.md` with similar front matter tags.
 
 {: .note .info}
-**Note:** If you don't specify a layout in your pages, Jekyll will automatically use the template labeled `default`. We specify it here only to make it explicit what's happening.
+If you don't specify a layout in your pages, Jekyll will simply render that page as an unstyled basic HTML page.
 
 
 ## 4. Add a configuration file
@@ -216,7 +216,7 @@ Any properties you add in your `_config.yml` file are accessible through the `si
 Stop your Jekyll server (**Ctrl + C**) and restart it. Verify that the `title` tags are populating correctly.
 
 {: .note .info}
-**Note:** Every time you modify your config file, you have to restart Jekyll for the changes to take effect. When you modify other files, Jekyll automatically picks up the changes when it rebuilds.
+Every time you modify your config file, you have to restart Jekyll for the changes to take effect. When you modify other files, Jekyll automatically picks up the changes when it rebuilds.
 
 If you have other variables to populate in your site, do so following this same pattern.
 
@@ -283,6 +283,9 @@ In this case, the content from a page that specifies the layout `page` gets push
 You don't need multiple layouts. You could just use one: `default`. You have options for how you design your site. In general, it's common to define one layout for pages and another layout for posts, but for both of these layouts to inherit the `default` template (which usually defines the top and bottom parts of the site).
 
 In your browser, go to `home.html` and see the list of posts. (Note that you didn't have to use the method described here. You could have simply added the `for` loop to any page, such as `index.md`, to display these posts. But given that you may have more complex logic for other features, it can be helpful to store your logic in templates separate from the page area where you frequently type your content.)
+
+{: .note .info}
+At minimum, a layout should contain `{% raw %}{{ content }}{% endraw %}`, which acts as a receiver for the *content* to be rendered.
 
 
 ### For loops
