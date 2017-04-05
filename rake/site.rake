@@ -47,7 +47,7 @@ namespace :site do
   task :update_normalize_css do
     Dir.chdir("#{docs_folder}/_sass") do
       sh 'curl "https://necolas.github.io/normalize.css/latest/normalize.css" -o "normalize.scss"'
-      sh 'sass "normalize.scss":"_normalize.scss" --style compressed'
+      sh 'sass "normalize.scss":"_normalize.scss"'
       rm ["normalize.scss", Dir.glob("*.map")].flatten
     end
   end
