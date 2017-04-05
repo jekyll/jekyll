@@ -279,7 +279,7 @@ The following diagram shows how layouts work in Jekyll:
 
 <img src="../../img/jekylllayoutconcept.png" alt="Concept of Jekyll layouts" />
 
-In this case, the content from a page that specifies the layout `page` gets pushed into the `{% raw %}{{ content }}{% endraw %}` tag of the layout file named `page`. Because the `page` layout itself specifies another layout (`docs`), the content from `page` gets pushed into the `{% raw %}{{ content }}{% endraw %}` tag in the `docs` layout. Because the `docs` layout specifies another layout (`default`), the content from docs gets pushed into the `{% raw %}{{ content }}{% endraw %}` tag of the `default` layout.
+In this example, the content from a Markdown document `document.md` that specifies `layout: docs` gets pushed into the `{% raw %}{{ content }}{% endraw %}` tag of the layout file `docs.html`. Because the `docs` layout itself specifies `layout: page`, the content from `docs.html` gets pushed into the `{% raw %}{{ content }}{% endraw %}` tag in the layout file `page.html`. Finally because the `page` layout specifies `layout: default`, the content from `page.html` gets pushed into the `{% raw %}{{ content }}{% endraw %}` tag of the layout file `default.html`.
 
 You don't need multiple layouts. You could just use one: `default`. You have options for how you design your site. In general, it's common to define one layout for pages and another layout for posts, but for both of these layouts to inherit the `default` template (which usually defines the top and bottom parts of the site).
 
