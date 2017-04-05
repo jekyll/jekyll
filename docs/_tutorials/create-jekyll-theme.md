@@ -213,7 +213,7 @@ title: ACME Website
 
 Any properties you add in your `_config.yml` file are accessible through the `site` namespace. Similarly, any properties in your page's front matter are accessible through the `page` namespace. Use dot notation after `site` or `page` to access the value.
 
-Stop your Jekyll server (**Ctrl + C**) and restart it. Verify that the `title` tags are populating correctly.
+Stop your Jekyll server <kbd>Ctrl</kbd> + <kbd>C</kbd> and restart it. Verify that the `title` tags are populating correctly.
 
 {: .note .info}
 Every time you modify your config file, you have to restart Jekyll for the changes to take effect. When you modify other files, Jekyll automatically picks up the changes when it rebuilds.
@@ -223,7 +223,7 @@ If you have other variables to populate in your site, do so following this same 
 
 ## 7. Show posts on a page
 
-It's common to show a list of posts on the homepage. First, let's create some posts so that our loop will have something to display.
+It's common to show a list of posts on the homepage. First, let's create some posts so that we have something to showcase.
 
 Add some posts in a `_posts` folder following the standard `YYYY-MM-DD-title.md` post format:
 
@@ -242,7 +242,7 @@ layout: default
 Some sample content...
 ```
 
-Now let's create a layout that will display the posts. Create a new file in `_layouts` called `home.html`. In your `home.html` layout, add the following logic:
+Now let's create a layout that will display the posts. Create a new file in `_layouts` called `home.html` and add the following logic:
 
 ```
 ---
@@ -291,7 +291,7 @@ At minimum, a layout should contain `{% raw %}{{ content }}{% endraw %}`, which 
 
 ### For loops
 
-By the way, let's pause here to look at the `for` loop logic a little more closely. [For loops in Liquid](https://help.shopify.com/themes/liquid/tags/iteration-tags#for) are one of the most commonly used Liquid tags. For loops let you iterate through content in your Jekyll site and build out a result. The `for` loop also has [certain properties available](https://help.shopify.com/themes/liquid/objects/for-loops) (like first or last iteration) based on the loop's position in the loop as well.
+By the way, let's pause here to look at the `for` loop logic a little more closely. [For loops in Liquid](https://help.shopify.com/themes/liquid/tags/iteration-tags#for) are one of the most commonly used Liquid tags. *For loops* let you iterate through content in your Jekyll site and build out a result. The `for` loop also has [certain properties available](https://help.shopify.com/themes/liquid/objects/for-loops) (like first or last iteration) based on the loop's position in the loop as well.
 
 We've only scratched the surface of what you can do with `for` loops in retrieving posts. For example, if you wanted to display posts from a specific category, you could do so by adding a `categories` property to your post's front matter and then look in those categories. Further, you could limit the number of results by adding a `limit` property. Here's an example:
 
@@ -339,7 +339,7 @@ You could also iterate through a list of pages that you maintain in a separate d
 
 To manage page links this way, create a folder in your Jekyll project called `_data`. In this folder, create a file called `sidebar_links.yml` with this content:
 
-```
+```yaml
 - title: Sample page 1
   url: /sample1/
 
@@ -367,13 +367,13 @@ If you have more sophisticated requirements around navigation, such as when buil
 
 ## 9. Simplify your site with includes
 
-Let's suppose your `default.html` file is massive and hard to work with. You can break up your layout by putting some of the content in include files.
+Let's suppose your `default.html` file is massive and hard to work with. You can break up your layout by putting some of the HTML code in "include-files".
 
 Add a folder called `_includes` in your root directory. In that folder, add a file there called `sidebar.html`.
 
 Remove your sidebar code from your `default.html` layout and insert it into the `sidebar.html` file.
 
-In place of sidebar code in `default.html`, pull in your include like this:
+Where the sidebar code previously existed in `default.html`, pull in your "include" like this:
 
 ```liquid
 {% raw %}{% include sidebar.html %}{% endraw %}
@@ -479,7 +479,7 @@ For more details on services for static sites, see the [Third Parties](https://l
 
 Your Jekyll pages consist of HTML, CSS, and JavaScript, so pretty much any code you need to embed will work without a problem.
 
-As you integrate code for these services, not that if a page in your Jekyll site doesn't have front matter tags, Jekyll won't process any of the content. The page will just be passed to the `_site` folder when you build your site.
+As you integrate code for these services, note that **if a page in your Jekyll site doesn't have front matter tags, Jekyll won't process any of the content in that page.** The page will just be passed to the `_site` folder when you build your site.
 
 If you do want Jekyll to process some page content (for example, to populate a variable that you define in your site's config file), just add front matter tags to the page. If you don't want any layout applied to the page, specify `layout: null` like this:
 
