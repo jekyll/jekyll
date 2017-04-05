@@ -75,6 +75,7 @@
   * Remove dependency on include from default about.md (#5903)
   * Allow colons in `uri_escape` filter (#5957)
   * Re-surface missing public methods in `Jekyll::Document` (#5975)
+  * absolute_url should not mangle URL if called more than once (#5789)
 
 ### fix
 
