@@ -43,8 +43,6 @@ Metrics/MethodLength:
   CountComments: false
   Max: 20
   Severity: error
-  Exclude:
-    - lib/jekyll/command.rb
 Metrics/ModuleLength:
   Max: 240
 Metrics/ParameterLists:
