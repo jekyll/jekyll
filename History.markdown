@@ -9,6 +9,7 @@
   * Add a template for custom 404 page (#5945)
   * Require `runtime_dependencies` of a Gem-based theme from its `.gemspec` file (#5914)
   * Don't raise an error if URL contains a colon (#5889)
+  * Date filters should never raise an exception (#5722)
 
 ### Documentation
 
@@ -40,6 +41,9 @@
   * Mention Bash on Ubuntu on Windows (#5960)
   * Document `--unpublished` flag introduced in 91e9ecf (#5959)
   * Update upgrading.md to mention usage of `bundle update` (#5604)
+  * Fix missing quotation mark (#6002)
+  * New tutorial: Convert an HTML site to Jekyll (#5881)
+  * Revamp Permalink section (#5912)
 
 ### Development Fixes
 
@@ -52,6 +56,7 @@
   * Use Rubocop v0.47.1 till we're ready for v0.48 (#5989)
   * Test against Ruby 2.4.0 (#5687)
   * rubocop: lib/jekyll/renderer.rb complexity fixes (#5052)
+  * Use yajl-ruby 1.2.2 (now with 2.4 support) (#6007)
 
 ### Site Enhancements
 
@@ -61,6 +66,7 @@
   * Documentation on how to build navigation (#5698)
   * Navigation has been moved out from docs (#5927)
   * Make links in sidebar for current page more prominent (#5820)
+  * Update normalize.css to v6.0.0 (#6008)
 
 ### Bug Fixes
 
@@ -70,6 +76,11 @@
   * Remove dependency on include from default about.md (#5903)
   * Allow colons in `uri_escape` filter (#5957)
   * Re-surface missing public methods in `Jekyll::Document` (#5975)
+  * absolute_url should not mangle URL if called more than once (#5789)
+
+### fix
+
+  * Filters#time helper: Duplicate time before calling #localtime. (#5996)
 
 ## 3.4.3 / 2017-03-21
 
