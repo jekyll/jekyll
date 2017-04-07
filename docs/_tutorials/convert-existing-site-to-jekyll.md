@@ -16,7 +16,7 @@ Although websites can have sophisticated features and controls, we'll keep thing
 
 First, let's start with a grounding in the basics. Stripping a Jekyll site down to an extremely basic level will help clarify what happens in a Jekyll site. If you haven't already installed the jekyll gem, [install it]({% link _docs/installation.md %}).
 
-A bare boned Jekyll site consists of a bunch of HTML, CSS — or Sass — and JavaScript files. In this tutorial, we'll start with a *basic Jekyll site* consisting of three files:
+We'll start with a *basic Jekyll site* consisting of three files:
 
 ```
 ├── _config.yml
@@ -25,14 +25,14 @@ A bare boned Jekyll site consists of a bunch of HTML, CSS — or Sass — and Ja
 └── index.md
 ```
 
-Manually create these three files in a folder called `my_jekyll_site` or whatever suits you the most.
+Manually create these three files in a folder called `my_jekyll_site` or whatever suits you the most, and place `default.html` inside a folder named `_layouts`.
 
 ```sh
 $ touch _config.yml index.md default.html
 $ mkdir _layouts && mv default.html _layouts
 ```
 
-Place `default.html` inside a folder named `_layouts`. Fire up you favorite editor, then populate the content of the `default.html` and `index.md` files as follows:
+Fire up your favorite editor, and populate the contents of the `default.html` and `index.md` files as follows:
 
 **_config.yml**
 
@@ -59,14 +59,13 @@ title: My page
 layout: default.html
 ---
 
-# {{page.title}}
+# {% raw %}{{ page.title }}{% endraw %}
 
 Content is written in [Markdown](https://learnxinyminutes.com/docs/markdown/). Plain text format allows you to focus on your **content**.
 
-<!--You can use HTML elements in Markdown, such as the comment
-element, and they won't be affected by a markdown parser. However, if you
-create an HTML element in your markdown file, you cannot use markdown syntax
-within that element's contents.-->
+<!--
+You can use HTML elements in Markdown, such as the comment element, and they won't be affected by a markdown parser. However, if you create an HTML element in your markdown file, you cannot use markdown syntax within that element's contents.
+-->
 ```
 
 Now `cd` to `my_jekyll_site` and serve the site with the built-in server:
@@ -76,17 +75,17 @@ cd my_jekyll_site
 jekyll serve
 ```
 
-If you [use bundler]({% link _docs/quickstart.md %}#about-bundler) then type`bundle exec jekyll serve` instead.
+If you have a Gemfile, [use Bundler]({% link _docs/quickstart.md %}#about-bundler) by typing `bundle exec jekyll serve` instead.
 {: .note .info}
 
 When you serve the site, you get a preview URL such as `http://127.0.0.1:4000/` (which is the same as `http://localhost:4000/`). The site's files are built into the `_site` folder by default.
 
 This is a Jekyll site at the most basic functional level. Here's what is happening:
 
-*   The `_config.yml` file contains settings that Jekyll uses as it processes your site. An empty config file will use default values for building a Jekyll site. For example, to convert [Markdown](https://learnxinyminutes.com/docs/markdown/) to HTML, Jekyll will automatically use the [kramdown Markdown filter](https://rubygems.org/gems/kramdown/), without any need to specify it.
-*   Jekyll looks for files with [front matter tags]({% link _docs/frontmatter.md %}) (the two sets of dashed lines `---` like those in `index.md`) and processes the files (populating site variables, rendering any [Liquid](https://shopify.github.io/liquid/), and converting Markdown to HTML).
-*   Jekyll pushes the content from all pages and posts into the `{% raw %}{{ content }}{% endraw %}` variable in the layout specified (`default`) in the front matter tags.
-*   The processed files get written as `.html` files in the `_site` directory.
+  * The `_config.yml` file contains settings that Jekyll uses as it processes your site. An empty config file will use default values for building a Jekyll site. For example, to convert [Markdown](https://learnxinyminutes.com/docs/markdown/) to HTML, Jekyll will automatically use the [kramdown Markdown filter](https://rubygems.org/gems/kramdown/), without any need to specify it.
+  * Jekyll looks for files with [front matter tags]({% link _docs/frontmatter.md %}) (the two sets of dashed lines `---` like those in `index.md`) and processes the files (populating site variables, rendering any [Liquid](https://shopify.github.io/liquid/), and converting Markdown to HTML).
+  * Jekyll pushes the content from all pages and posts into the `{% raw %}{{ content }}{% endraw %}` variable in the layout specified (`default`) in the front matter tags.
+  * The processed files get written as `.html` files in the `_site` directory.
 
 You can read more about how Jekyll processes the files in [order of Interpretation]({% link _tutorials/orderofinterpretation.md %}).
 
