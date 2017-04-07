@@ -241,9 +241,9 @@ It's common to show a list of posts on the homepage. First, let's create some po
 
 Add some posts in a `_posts` folder following the standard `YYYY-MM-DD-title.md` post format:
 
-*   `2017-01-02-my-first-post.md`
-*   `2017-01-15-my-second-post.md`
-*   `2017-02-08-my-third-post.md`
+  * `2017-01-02-my-first-post.md`
+  * `2017-01-15-my-second-post.md`
+  * `2017-02-08-my-third-post.md`
 
 In each post, add some basic content:
 
@@ -483,10 +483,10 @@ You can also auto-generate your sitemap by adding a gem called [`jekyll-sitemap`
 
 For other services you might need (such as contact forms, search, comments, and more), look for third-party services. For example, you might use the following:
 
-*   For comments: [Disqus](https://disqus.com/)
-*   For a newsletter: [Tinyletter](https://tinyletter.com/)
-*   For contact forms: [Wufoo](https://www.wufoo.com/)
-*   For search: [Algolia Docsearch](https://community.algolia.com/docsearch/)
+  * For comments: [Disqus](https://disqus.com/)
+  * For a newsletter: [Tinyletter](https://tinyletter.com/)
+  * For contact forms: [Wufoo](https://www.wufoo.com/)
+  * For search: [Algolia Docsearch](https://community.algolia.com/docsearch/)
 
 For more details on services for static sites, see the [Third Parties](https://learn.cloudcannon.com/jekyll-third-parties/) list and tutorials from CloudCannon.
 
@@ -514,8 +514,8 @@ You can also package your layouts, includes and assets into a Ruby `gem` and [ma
 
 Here are some additional tutorials on creating Jekyll sites:
 
-*   [Convert a static site to Jekyll](http://jekyll.tips/jekyll-casts/converting-a-static-site-to-jekyll/)
-*   [Building a Jekyll Site – Part 1 of 3: Converting a Static Website To Jekyll](https://css-tricks.com/building-a-jekyll-site-part-1-of-3/)
+  * [Convert a static site to Jekyll](http://jekyll.tips/jekyll-casts/converting-a-static-site-to-jekyll/)
+  * [Building a Jekyll Site – Part 1 of 3: Converting a Static Website To Jekyll](https://css-tricks.com/building-a-jekyll-site-part-1-of-3/)
 
 [jekyll-sitemap]: https://help.github.com/articles/sitemaps-for-github-pages/
 [jekyll-feed]: https://help.github.com/articles/atom-rss-feeds-for-github-pages/
