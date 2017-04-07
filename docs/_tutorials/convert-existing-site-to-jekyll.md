@@ -403,7 +403,7 @@ Your Jekyll site needs an RSS feed. Here's the [basic RSS feed syntax](http://ww
 
 ```xml
 ---
-layout: nil
+layout: null
 ---
 
 {% raw %}<?xml version="1.0" encoding="UTF-8" ?>
@@ -447,7 +447,7 @@ Finally, add a [site map](https://www.sitemaps.org/protocol.html). Create a `sit
 
 ```xml
 ---
-layout: nil
+layout: null
 search: exclude
 ---
 
@@ -494,11 +494,11 @@ Your Jekyll pages consist of HTML, CSS, and JavaScript, so pretty much any code 
 
 As you integrate code for these services, note that **if a page in your Jekyll site doesn't have front matter tags, Jekyll won't process any of the content in that page.** The page will just be passed to the `_site` folder when you build your site.
 
-If you do want Jekyll to process some page content (for example, to populate a variable that you define in your site's config file), just add front matter tags to the page. If you don't want any layout applied to the page, specify `layout: nil` like this:
+If you do want Jekyll to process some page content (for example, to populate a variable that you define in your site's config file), just add front matter tags to the page. If you don't want any layout applied to the page, specify `layout: null` like this:
 
 ```
 ---
-layout: nil
+layout: null
 ---
 ```
 
