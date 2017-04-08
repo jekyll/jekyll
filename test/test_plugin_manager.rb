@@ -59,10 +59,22 @@ class TestPluginManager < JekyllUnitTest
 
   context "site is not marked as safe" do
     should "allow all plugins" do
-      site = double(:safe => false)
+      site = double({ :safe => false, :config => { "gems" => ["foobar"] } })
       plugin_manager = PluginManager.new(site)
 
       assert plugin_manager.plugin_allowed?("foobar")
+    end
+
+    should "not allow blacklisted plugin" do
+      site = double({ :safe   => false,
+                      :config => {
+                        "gems"      => %w(jemoji not_allowed_plugin),
+                        "blacklist" => ["not_allowed_plugin"],
+                      }, })
+      plugin_manager = PluginManager.new(site)
+
+      assert plugin_manager.plugin_allowed?("jemoji")
+      assert !plugin_manager.plugin_allowed?("not_allowed_plugin")
     end
 
     should "require plugin files" do

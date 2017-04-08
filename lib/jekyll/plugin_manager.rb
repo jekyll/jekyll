@@ -61,10 +61,21 @@ module Jekyll
     #
     # gem_name - the name of the gem
     #
-    # Returns true if the gem name is in the whitelist or if the site is not
-    #   in safe mode.
+    # Returns true if
+    #   the gem name is not in the blacklist (or)
+    #   the gem name is in the whitelist (or)
+    #   the site is not in safe mode.
     def plugin_allowed?(gem_name)
+      return false if blacklist.include?(gem_name)
       !site.safe || whitelist.include?(gem_name)
+    end
+
+    # Build an array of disallowed plugin gem names.
+    #
+    # Returns an array of strings, each string being the name of a gem name
+    #   that should not be used.
+    def blacklist
+      @blacklist ||= Array[site.config["blacklist"]].flatten
     end
 
     # Build an array of allowed plugin gem names.
