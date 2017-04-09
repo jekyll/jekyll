@@ -44,6 +44,7 @@
   * Fix missing quotation mark (#6002)
   * New tutorial: Convert an HTML site to Jekyll (#5881)
   * Revamp Permalink section (#5912)
+  * Fixup tutorial on creating theme from existing HTML templates (#6006)
 
 ### Development Fixes
 
