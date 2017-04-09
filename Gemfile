@@ -25,9 +25,9 @@ group :test do
   gem "nokogiri"
   gem "rspec"
   gem "rspec-mocks"
-  gem "rubocop", "~> 0.47.1"
-  gem "test-theme", :path => File.expand_path("./test/fixtures/test-theme", File.dirname(__FILE__))
+  gem "rubocop", "~> 0.48.1"
   gem "test-dependency-theme", :path => File.expand_path("./test/fixtures/test-dependency-theme", File.dirname(__FILE__))
+  gem "test-theme", :path => File.expand_path("./test/fixtures/test-theme", File.dirname(__FILE__))
 
   gem "jruby-openssl" if RUBY_ENGINE == "jruby"
 end
@@ -77,9 +77,9 @@ group :jekyll_optional_dependencies do
     gem "classifier-reborn", "~> 2.1.0"
     gem "liquid-c", "~> 3.0"
     gem "pygments.rb", "~> 0.6.0"
-    gem "yajl-ruby", "~> 1.2"
     gem "rdiscount", "~> 2.0"
     gem "redcarpet", "~> 3.2", ">= 3.2.3"
+    gem "yajl-ruby", "~> 1.2"
   end
 
   # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

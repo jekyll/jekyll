@@ -52,9 +52,11 @@ class TestGeneratedSite < JekyllUnitTest
     end
 
     should "include a post with a abbreviated dates" do
-      refute_nil @site.posts.index { |post|
-        post.relative_path == "_posts/2017-2-5-i-dont-like-zeroes.md"
-      }
+      refute_nil(
+        @site.posts.index do |post|
+          post.relative_path == "_posts/2017-2-5-i-dont-like-zeroes.md"
+        end
+      )
       assert_exist dest_dir("2017", "02", "05", "i-dont-like-zeroes.html")
     end
 
