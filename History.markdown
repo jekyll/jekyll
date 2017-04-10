@@ -4,6 +4,12 @@
 
   * Upgrade to Liquid v4 (#4362)
   * Convert StaticFile liquid representation to a Drop & add front matter defaults support to StaticFiles (#5871)
+  * Add support for Tab-Separated Values data files (`*.tsv`) (#5985)
+  * Specify version constraint in subcommand error message. (#5974)
+  * Add a template for custom 404 page (#5945)
+  * Require `runtime_dependencies` of a Gem-based theme from its `.gemspec` file (#5914)
+  * Don't raise an error if URL contains a colon (#5889)
+  * Date filters should never raise an exception (#5722)
 
 ### Documentation
 
@@ -19,10 +25,40 @@
   * update broken links (#5905)
   * Fix typo in contribution information (#5910)
   * update plugin repo URL to reflect repo move (#5916)
+  * Update exclude array in configuration.md (#5947)
+  * Fixed path in "Improve this page" link in Tutorials section (#5951)
+  * Corrected permalink (#5949)
+  * Included more details about adding defaults to static files (#5971)
+  * Create buddyworks (#5962)
+  * added (buddyworks) to ci list (#5965)
+  * Add a tutorial on serving custom Error 404 page (#5946)
+  * add custom 404 to tutorial navigation (#5978)
+  * Add link to order of interpretation tutorial in Tutorials nav (#5952)
+  * Document Jekyll's Philosophy (#5792)
+  * Require Ruby > 2.1.0 (#5983)
+  * Fix broken link (#5994)
+  * Default options for script/proof (#5995)
+  * Mention Bash on Ubuntu on Windows (#5960)
+  * Document `--unpublished` flag introduced in 91e9ecf (#5959)
+  * Update upgrading.md to mention usage of `bundle update` (#5604)
+  * Fix missing quotation mark (#6002)
+  * New tutorial: Convert an HTML site to Jekyll (#5881)
+  * Revamp Permalink section (#5912)
+  * Fixup tutorial on creating theme from existing HTML templates (#6006)
 
 ### Development Fixes
 
   * [Rubocop] add missing comma (#5835)
+  * Appease classifier-reborn (#5934)
+  * Allow releases & development on `*-stable` branches (#5926)
+  * Add script/backport-pr (#5925)
+  * Prefer .yaml over .toml (#5966)
+  * Fix Appveyor with DST-aware cucumber steps (#5961)
+  * Use Rubocop v0.47.1 till we're ready for v0.48 (#5989)
+  * Test against Ruby 2.4.0 (#5687)
+  * rubocop: lib/jekyll/renderer.rb complexity fixes (#5052)
+  * Use yajl-ruby 1.2.2 (now with 2.4 support) (#6007)
+  * Bump Rubocop to v0.48 (#5997)
 
 ### Site Enhancements
 
@@ -30,11 +66,35 @@
   * Add the correct year to the 3.4.0 release date (#5858)
   * Add documentation about order of interpretation (#5834)
   * Documentation on how to build navigation (#5698)
+  * Navigation has been moved out from docs (#5927)
+  * Make links in sidebar for current page more prominent (#5820)
+  * Update normalize.css to v6.0.0 (#6008)
 
 ### Bug Fixes
 
   * Exclude Gemfile by default (#5860)
   * Convertible#validate_permalink!: ensure the return value of data["permalink"] is a string before asking if it is empty (#5878)
+  * Allow abbreviated post dates (#5920)
+  * Remove dependency on include from default about.md (#5903)
+  * Allow colons in `uri_escape` filter (#5957)
+  * Re-surface missing public methods in `Jekyll::Document` (#5975)
+  * absolute_url should not mangle URL if called more than once (#5789)
+
+### fix
+
+  * Filters#time helper: Duplicate time before calling #localtime. (#5996)
+
+## 3.4.3 / 2017-03-21
+
+  * Backport #5957 for v3.4.x: Allow colons in `uri_escape` filter (#5968)
+
+## 3.4.2 / 2017-03-09
+
+  * Backport #5871 for v3.4.x: Convert StaticFile liquid representation to a Drop & add front matter defaults support to StaticFiles (#5940)
+
+## 3.4.1 / 2017-03-02
+
+  * Backport #5920 for v3.4.x: Allow abbreviated post dates (#5924)
 
 ## 3.4.0 / 2017-01-27
 

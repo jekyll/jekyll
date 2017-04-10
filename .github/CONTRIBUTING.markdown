@@ -28,7 +28,7 @@ Whether you're a developer, a designer, or just a Jekyll devotee, there are lots
 
 * The more information, the better. Make judicious use of the pull request body. Describe what changes were made, why you made them, and what impact they will have for users.
 
-* Pull request are easy and fun. If this is your first pull request, it may help to [understand GitHub Flow](https://guides.github.com/introduction/flow/).
+* Pull requests are easy and fun. If this is your first pull request, it may help to [understand GitHub Flow](https://guides.github.com/introduction/flow/).
 
 * If you're submitting a code contribution, be sure to read the [code contributions](#code-contributions) section below.
 

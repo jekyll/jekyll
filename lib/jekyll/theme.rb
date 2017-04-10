@@ -39,6 +39,10 @@ module Jekyll
       Sass.load_paths << sass_path
     end
 
+    def runtime_dependencies
+      gemspec.runtime_dependencies
+    end
+
     private
 
     def path_for(folder)

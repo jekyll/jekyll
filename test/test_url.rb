@@ -61,16 +61,6 @@ class TestURL < JekyllUnitTest
       ).to_s
     end
 
-    should "throw an exception if the URL contains a colon" do
-      url = URL.new(
-        :template     => "/:x/:y/:z",
-        :placeholders => { :x => "foo", :z => "bar" }
-      )
-      assert_raises Jekyll::Errors::InvalidURLError do
-        url.to_s
-      end
-    end
-
     should "check for key without trailing underscore" do
       _, matching_doc = fixture_document("_methods/configuration.md")
       assert_equal "/methods/configuration-configuration_methods_configuration", URL.new(

@@ -57,6 +57,13 @@ Feature: Writing themes
     And I should see "From your site." in "_site/assets/application.coffee"
     And I should see "From your site." in "_site/assets/base.js"
 
+  Scenario: Requiring dependencies of a theme
+    Given I have a configuration file with "theme" set to "test-dependency-theme"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And the "_site/test.txt" file should exist
+
   Scenario: Complicated site that puts it all together
     Given I have a configuration file with "theme" set to "test-theme"
     And I have a _posts directory

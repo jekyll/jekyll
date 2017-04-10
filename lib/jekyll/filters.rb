@@ -80,6 +80,7 @@ module Jekyll
     #
     # Returns the formatted String.
     def date_to_long_string(date)
+      return date if date.to_s.empty?
       time(date).strftime("%d %B %Y")
     end
 
@@ -94,6 +95,7 @@ module Jekyll
     #
     # Returns the formatted String.
     def date_to_xmlschema(date)
+      return date if date.to_s.empty?
       time(date).xmlschema
     end
 
@@ -108,6 +110,7 @@ module Jekyll
     #
     # Returns the formatted String.
     def date_to_rfc822(date)
+      return date if date.to_s.empty?
       time(date).rfc822
     end
 
@@ -152,7 +155,7 @@ module Jekyll
     #
     # Returns the escaped String.
     def uri_escape(input)
-      Addressable::URI.encode(input)
+      Addressable::URI.normalize_component(input)
     end
 
     # Replace any whitespace in the input string with a single space
@@ -352,7 +355,7 @@ module Jekyll
         raise Errors::InvalidDateError,
           "Invalid Date: '#{input.inspect}' is not a valid datetime."
       end
-      date.to_time.localtime
+      date.to_time.dup.localtime
     end
 
     private
