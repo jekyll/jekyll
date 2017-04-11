@@ -484,7 +484,7 @@ You can also auto-generate your sitemap by adding a gem called [`jekyll-sitemap`
 For other services you might need (such as contact forms, search, comments, and more), look for third-party services. For example, you might use the following:
 
   * For comments: [Disqus](https://disqus.com/)
-  * For Highlights: [txtpen](https://txtpen/)
+  * For Highlights: [txtpen](https://txtpen.com/)
   * For a newsletter: [Tinyletter](https://tinyletter.com/)
   * For contact forms: [Wufoo](https://www.wufoo.com/)
   * For search: [Algolia Docsearch](https://community.algolia.com/docsearch/)

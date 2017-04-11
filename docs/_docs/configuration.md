@@ -433,7 +433,6 @@ For example, suppose you set this conditional statement in your code:
 {% raw %}
 {% if jekyll.environment == "production" %}
    {% include disqus.html %}
-   {% include txtpen.html %}
 {% endif %}
 {% endraw %}
 ```
