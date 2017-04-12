@@ -10,7 +10,9 @@ may want to install, depending on how you plan to use Jekyll.
 
 Register your site with [txtpen](https://txtpen.com). Then append 
 
+```html
     <script src="https://txtpen.com/embed.js?site=<your site name>" />
+```
 
 to your template files in `/_layout` folder.
 
