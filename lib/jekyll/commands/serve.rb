@@ -88,6 +88,7 @@ module Jekyll
               index.rhtml
               index.cgi
               index.xml
+              index.json
             ),
           }
 
