@@ -46,6 +46,7 @@
   * Revamp Permalink section (#5912)
   * Fixup tutorial on creating theme from existing HTML templates (#6006)
   * Standardise on "URLs" without apostrophe in docs (#6018)
+  * Added txtpen in tutorial (#6021)
 
 ### Development Fixes
 
