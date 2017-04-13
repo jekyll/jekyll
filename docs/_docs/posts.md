@@ -8,7 +8,7 @@ exactly? Well, simply put, it means that blogging is baked into Jekyll’s
 functionality. If you write articles and publish them online, you can publish
 and maintain a blog simply by managing a folder of text-files on your computer.
 Compared to the hassle of configuring and maintaining databases and web-based
-CMS systems, this will be a welcome change!
+CMS systems, this will be a welcomed change!
 
 ## The Posts Folder
 
@@ -112,7 +112,7 @@ Linking to a PDF for readers to download:
 
 ## A typical post
 
-Jekyll can handle many different iterations of the idea you might associate with a "post," however a standard blog style post, including an Title, Layout, Publishing Date, and Categories might look like this:
+Jekyll can handle many different iterations of the idea you might associate with a "post," however a standard blog style post, including a Title, Layout, Publishing Date, and Categories might look like this:
 
 ```
 ---
