@@ -47,6 +47,7 @@
   * Fixup tutorial on creating theme from existing HTML templates (#6006)
   * Standardise on "URLs" without apostrophe in docs (#6018)
   * Added txtpen in tutorial (#6021)
+  * fix typo using past participle (#6026)
 
 ### Development Fixes
 
