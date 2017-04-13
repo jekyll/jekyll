@@ -112,7 +112,7 @@ Linking to a PDF for readers to download:
 
 ## A typical post
 
-Jekyll can handle many different iterations of the idea you might associate with a "post," however a standard blog style post, including an Title, Layout, Publishing Date, and Categories might look like this:
+Jekyll can handle many different iterations of the idea you might associate with a "post," however a standard blog style post, including a Title, Layout, Publishing Date, and Categories might look like this:
 
 ```
 ---
