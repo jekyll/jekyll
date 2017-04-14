@@ -48,6 +48,7 @@
   * Standardise on "URLs" without apostrophe in docs (#6018)
   * Added txtpen in tutorial (#6021)
   * fix typo using past participle (#6026)
+  * changed formatting to fit the style of the documentation (#6027)
 
 ### Development Fixes
 
