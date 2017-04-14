@@ -16,7 +16,7 @@ In contrast to [Docs](/docs/home/), Tutorials provide more detailed, narrative i
 In short, tutorials aren't the core reference information in docs. They walk users through processes from beginning to end.
 
 {: .info .note}
-**Note:** The Tutorials section is new, so there aren't many tutorials yet. You can add a tutorial here to help popular this section.
+**Note:** The Tutorials section is new, so there aren't many tutorials yet. You can add a tutorial here to help populate this section.
 
 Some of these techniques might even guide you through a supporting tool, script, service, or other hack used with your Jekyll site. Feel free to include tutorials involving external services with Jekyll as well. However, note that Jekyll in no way endorses any third-party tools mentioned in tutorials.
 
