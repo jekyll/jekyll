@@ -49,6 +49,7 @@
   * Added txtpen in tutorial (#6021)
   * fix typo using past participle (#6026)
   * changed formatting to fit the style of the documentation (#6027)
+  * doc fix typo word usage (#6028)
 
 ### Development Fixes
 
