@@ -51,6 +51,7 @@
   * fix typo using past participle (#6026)
   * changed formatting to fit the style of the documentation (#6027)
   * doc fix typo word usage (#6028)
+  * corrected reference to layout in index.md (#6032)
 
 ### Development Fixes
 
