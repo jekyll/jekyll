@@ -56,7 +56,7 @@ name: My Jekyll Website
 ```yaml
 ---
 title: My page
-layout: default.html
+layout: default
 ---
 
 # {% raw %}{{ page.title }}{% endraw %}
