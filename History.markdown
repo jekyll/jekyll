@@ -52,6 +52,7 @@
   * changed formatting to fit the style of the documentation (#6027)
   * doc fix typo word usage (#6028)
   * corrected reference to layout in index.md (#6032)
+  * (Minor) Update MathJax CDN (#6013)
 
 ### Development Fixes
 
