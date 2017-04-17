@@ -10,6 +10,7 @@
   * Require `runtime_dependencies` of a Gem-based theme from its `.gemspec` file (#5914)
   * Don't raise an error if URL contains a colon (#5889)
   * Date filters should never raise an exception (#5722)
+  * add `plugins` config key as replacement for `gems` (#5130)
 
 ### Documentation
 
