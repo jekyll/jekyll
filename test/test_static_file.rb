@@ -33,7 +33,7 @@ class TestStaticFile < JekyllUnitTest
     end
   end
 
-  context "A StaticFile" do
+  context "A Static File" do
     setup do
       clear_dest
       @site = fixture_site
