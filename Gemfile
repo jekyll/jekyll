@@ -15,7 +15,7 @@ group :development do
   end
 end
 
-#
+# Gems for Jekyll Test
 
 group :test do
   gem "codeclimate-test-reporter", "~> 1.0.5"
@@ -32,7 +32,7 @@ group :test do
   gem "jruby-openssl" if RUBY_ENGINE == "jruby"
 end
 
-#
+# Gems for Jekyll Test Lagacy
 
 group :test_legacy do
   if RUBY_PLATFORM =~ %r!cygwin! || RUBY_VERSION.start_with?("2.2")
@@ -47,7 +47,7 @@ group :test_legacy do
   gem "simplecov"
 end
 
-#
+# Gems for benchmark
 
 group :benchmark do
   if ENV["BENCHMARK"]
@@ -58,7 +58,7 @@ group :benchmark do
   end
 end
 
-#
+# Gems for Jekyll Optional Dependencies
 
 group :jekyll_optional_dependencies do
   gem "coderay", "~> 1.1.0"
@@ -86,7 +86,7 @@ group :jekyll_optional_dependencies do
   gem "tzinfo-data", :platforms => [:mingw, :mswin, :x64_mingw, :jruby]
 end
 
-#
+# Gems for Jekyll site
 
 group :site do
   if ENV["PROOF"]
