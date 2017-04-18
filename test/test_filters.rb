@@ -655,6 +655,17 @@ class TestFilters < JekyllUnitTest
         assert_equal 2, @filter.where(@array_of_objects, "color", "red").length
       end
 
+      should "filter properties with nil values and undefined properties appropriately" do
+        objects = [
+          {},
+          {"a" => nil},
+          {"a" => ""}
+        ]
+        assert_equal 3, @filter.where(objects, "a", nil).length
+        assert_equal 3, @filter.where(objects, "a", "").length
+        assert_equal 0, @filter.where(objects, "b", "something").length
+      end
+
       should "filter array properties appropriately" do
         hash = {
           "a" => { "tags"=>%w(x y) },
