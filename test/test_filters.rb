@@ -658,8 +658,8 @@ class TestFilters < JekyllUnitTest
       should "filter properties with nil values and undefined properties appropriately" do
         objects = [
           {},
-          {"a" => nil},
-          {"a" => ""}
+          { "a" => nil },
+          { "a" => "" },
         ]
         assert_equal 3, @filter.where(objects, "a", nil).length
         assert_equal 3, @filter.where(objects, "a", "").length
