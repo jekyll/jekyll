@@ -70,6 +70,7 @@
   * Use yajl-ruby 1.2.2 (now with 2.4 support) (#6007)
   * Bump Rubocop to v0.48 (#5997)
   * doc use example.com (#6031)
+  * fix typo (#6040)
 
 ### Site Enhancements
 
