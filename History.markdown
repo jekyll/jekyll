@@ -11,6 +11,7 @@
   * Don't raise an error if URL contains a colon (#5889)
   * Date filters should never raise an exception (#5722)
   * add `plugins` config key as replacement for `gems` (#5130)
+  * create configuration from options only once in the boot process (#5487)
 
 ### Documentation
 
