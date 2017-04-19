@@ -37,7 +37,7 @@ module Jekyll
               if Jekyll.env == "development"
                 config["url"] = default_url(config)
               end
-              build_and_serve(config)
+              [Build, Serve].each { |klass| klass.process(config) }
             end
           end
         end
@@ -69,14 +69,6 @@ module Jekyll
               end
             end
           end
-        end
-
-        #
-
-        private
-        def build_and_serve(config)
-          Build.process(config)
-          Serve.process(config)
         end
 
         #
