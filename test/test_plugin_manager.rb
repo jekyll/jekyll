@@ -47,11 +47,8 @@ class TestPluginManager < JekyllUnitTest
       expect(Jekyll::External).to(
         receive(:require_with_graceful_fail).with(gems).and_return(nil)
       )
-      site = double(:gems => gems)
+      site = double(:gems => gems, :safe => false)
       plugin_manager = PluginManager.new(site)
-
-      allow(plugin_manager).to receive(:plugin_allowed?).with("foobar").and_return(true)
-      allow(plugin_manager).to receive(:plugin_allowed?).with("jemojii").and_return(true)
 
       plugin_manager.require_gems
     end
@@ -74,6 +71,16 @@ class TestPluginManager < JekyllUnitTest
       expect(Jekyll::External).to receive(:require_with_graceful_fail)
       plugin_manager.require_plugin_files
     end
+
+    should "list plugins as enabled which are required" do
+      site = double({ :safe   => false,
+                      :gems   => ["jemoji"],
+                      :config => { "whitelist" => ["unused_plugin"] }, })
+      plugin_manager = PluginManager.new(site)
+
+      assert_includes plugin_manager.enabled_plugins, "jemoji"
+      refute_includes plugin_manager.enabled_plugins, "unused_plugin"
+    end
   end
 
   context "site is marked as safe" do
@@ -91,6 +98,19 @@ class TestPluginManager < JekyllUnitTest
 
       expect(Jekyll::External).to_not receive(:require_with_graceful_fail)
       plugin_manager.require_plugin_files
+    end
+
+    should "list plugins as enabled which are whitelisted and required" do
+      site = double({
+        :safe   => true,
+        :gems   => %w(not_allowed_plugin jemoji),
+        :config => { "whitelist" => %w(jemoji unused_plugin) },
+      })
+      plugin_manager = PluginManager.new(site)
+
+      assert_includes plugin_manager.enabled_plugins, "jemoji"
+      refute_includes plugin_manager.enabled_plugins, "not_allowed_plugin"
+      refute_includes plugin_manager.enabled_plugins, "unused_plugin"
     end
   end
 

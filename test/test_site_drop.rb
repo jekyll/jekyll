@@ -17,5 +17,12 @@ class TestSiteDrop < JekyllUnitTest
     should "find a key if it's in the collection of the drop" do
       assert @drop.key?("thanksgiving")
     end
+
+    should "return those plugins which are enabled" do
+      enabled_plugins = %w(jemojii jekyll_test_plugin)
+      allow(@site.plugin_manager).to receive(:enabled_plugins).and_return(enabled_plugins)
+
+      assert @drop.plugins, enabled_plugins
+    end
   end
 end

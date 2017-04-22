@@ -25,9 +25,7 @@ module Jekyll
     #
     # Returns nothing.
     def require_gems
-      Jekyll::External.require_with_graceful_fail(
-        site.gems.select { |plugin| plugin_allowed?(plugin) }
-      )
+      Jekyll::External.require_with_graceful_fail(enabled_plugins)
     end
 
     # Require each of the runtime_dependencies specified by the theme's gemspec.
@@ -55,6 +53,18 @@ module Jekyll
       else
         false
       end
+    end
+
+    # Build an array of enabled plugin names.
+    #
+    # Returns an array of strings, each string being the name of a plugin
+    #   that is specified (and whitelisted in case the site is in safe mode).
+    def enabled_plugins
+      @enabled_plugins ||= if site.safe
+                             site.gems & whitelist
+                           else
+                             site.gems
+                           end
     end
 
     # Check whether a gem plugin is allowed to be used during this build.
