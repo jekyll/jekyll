@@ -71,6 +71,7 @@
   * Bump Rubocop to v0.48 (#5997)
   * doc use example.com (#6031)
   * fix typo (#6040)
+  * Fix CI  (#6044)
 
 ### Site Enhancements
 
