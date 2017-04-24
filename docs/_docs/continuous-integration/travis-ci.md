@@ -17,8 +17,7 @@ Enabling Travis builds for your GitHub repository is pretty simple:
 2. Find the repository for which you're interested in enabling builds.
 3. Flick the repository switch on so that it turns blue.
 4. Optionally configure the build by clicking on the gear icon. Further
-   configuration happens via your `.travis.yml` file. More details on that
-   below.
+   configuration happens via your `.travis.yml` file. More details below.
 
 ## 2. The Test Script
 
