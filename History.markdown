@@ -55,6 +55,7 @@
   * corrected reference to layout in index.md (#6032)
   * (Minor) Update MathJax CDN (#6013)
   * Add MvvmCross to samples (#6035)
+  * Update travis-ci.md to correct procedure (#6043)
 
 ### Development Fixes
 
