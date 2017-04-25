@@ -59,6 +59,7 @@
   * fix sentence in documentation (#6048)
   * rephrase a sentence in posts.md to be more direct (#6049)
   * Compress Website Sass output (#6009)
+  * doc correct spelling error (#6050)
 
 ### Development Fixes
 
