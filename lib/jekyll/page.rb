@@ -23,7 +23,7 @@ module Jekyll
     # A set of extensions that are considered HTML or HTML-like so we
     # should not alter them,  this includes .xhtml through XHTM5.
 
-    HTML_EXTENSIONS = %w(
+    HTML_EXTENSIONS = %W(
       .html
       .xhtml
       .htm
@@ -40,11 +40,7 @@ module Jekyll
       @base = base
       @dir  = dir
       @name = name
-      @path = if site.in_theme_dir(base) == base # we're in a theme
-                site.in_theme_dir(base, dir, name)
-              else
-                site.in_source_dir(base, dir, name)
-              end
+      @path = site.in_source_dir(base, dir, name)
 
       process(name)
       read_yaml(File.join(base, dir), name)

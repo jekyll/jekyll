@@ -86,7 +86,7 @@ module Jekyll
         private
         def strip_coderay_prefix(hash)
           hash.each_with_object({}) do |(key, val), hsh|
-            cleaned_key = key.gsub(%r!\Acoderay_!, "")
+            cleaned_key = key.gsub(/\Acoderay_/, "")
 
             if key != cleaned_key
               Jekyll::Deprecator.deprecation_message(
@@ -104,7 +104,7 @@ module Jekyll
 
         private
         def modernize_coderay_config
-          unless @config["coderay"].empty?
+          if highlighter == "coderay"
             Jekyll::Deprecator.deprecation_message(
               "You are using 'kramdown.coderay' in your configuration, " \
               "please use 'syntax_highlighter_opts' instead."

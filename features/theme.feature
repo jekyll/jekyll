@@ -8,16 +8,10 @@ Feature: Writing themes
     Then I should get a zero exit status
     And the my-cool-theme directory should exist
 
-  Scenario: Generating a new theme scaffold with a code of conduct
-    When I run jekyll new-theme my-cool-theme --code-of-conduct
-    Then I should get a zero exit status
-    And the my-cool-theme directory should exist
-    And the "my-cool-theme/CODE_OF_CONDUCT.md" file should exist
-
   Scenario: A theme with SCSS
     Given I have a configuration file with "theme" set to "test-theme"
     And I have a css directory
-    And I have a "css/main.scss" page that contains "@import 'test-theme-black';"
+    And I have a "css/main.scss" page that contains "@import 'style';"
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist

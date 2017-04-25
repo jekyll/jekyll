@@ -166,7 +166,7 @@ class TestRegenerator < JekyllUnitTest
       assert_equal File.mtime(@path), @regenerator.metadata[@path]["mtime"]
     end
 
-    should "read legacy YAML metadata" do
+    should "read legacy yaml metadata" do
       metadata_file = source_dir(".jekyll-metadata")
       @regenerator = Regenerator.new(@site)
 
@@ -305,7 +305,7 @@ class TestRegenerator < JekyllUnitTest
     end
   end
 
-  context "when incremental regeneration is disabled" do
+  context "when incremental regen is disabled" do
     setup do
       FileUtils.rm_rf(source_dir(".jekyll-metadata"))
       @site = Site.new(Jekyll.configuration({

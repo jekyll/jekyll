@@ -2,14 +2,29 @@
 AllCops:
   TargetRubyVersion: 2.0
   Include:
-    - lib/**/*.rb
+  - lib/**/*.rb
   Exclude:
-    - lib/jekyll/renderer.rb
-    - bin/**/*
-    - exe/**/*
-    - benchmark/**/*
-    - script/**/*
-    - vendor/**/*
+  - lib/jekyll/collection.rb
+  - lib/jekyll/command.rb
+  - lib/jekyll/configuration.rb
+  - lib/jekyll/convertible.rb
+  - lib/jekyll/deprecator.rb
+  - lib/jekyll/document.rb
+  - lib/jekyll/filters.rb
+  - lib/jekyll/frontmatter_defaults.rb
+  - lib/jekyll/regenerator.rb
+  - lib/jekyll/renderer.rb
+  - lib/jekyll/site.rb
+  - lib/jekyll/static_file.rb
+  - lib/jekyll/theme.rb
+  - lib/jekyll/url.rb
+  - lib/jekyll/utils.rb
+  - lib/jekyll.rb
+  - features/step_definitions.rb
+  - bin/**/*
+  - benchmark/**/*
+  - script/**/*
+  - vendor/**/*
 Lint/EndAlignment:
   Severity: error
 Lint/UnreachableCode:
@@ -17,26 +32,22 @@ Lint/UnreachableCode:
 Lint/UselessAccessModifier:
   Enabled: false
 Metrics/AbcSize:
-  Max: 21
-Metrics/BlockLength:
-  Exclude:
-    - test/**/*.rb
-    - lib/jekyll/configuration.rb
+  Max: 20
 Metrics/ClassLength:
+  Max: 240
   Exclude:
-    - !ruby/regexp /features\/.*.rb$/
-    - !ruby/regexp /test\/.*.rb$/
-  Max: 300
+  - !ruby/regexp /features\/.*.rb$/
+  - !ruby/regexp /test\/.*.rb$/
 Metrics/CyclomaticComplexity:
-  Max: 9
+  Max: 8
 Metrics/LineLength:
-  Exclude:
-    - !ruby/regexp /features\/.*.rb/
   Max: 90
   Severity: warning
+  Exclude:
+  - !ruby/regexp /features\/.*.rb/
 Metrics/MethodLength:
-  CountComments: false
   Max: 20
+  CountComments: false
   Severity: error
 Metrics/ModuleLength:
   Max: 240
@@ -51,8 +62,8 @@ Style/AlignArray:
 Style/AlignHash:
   EnforcedHashRocketStyle: table
 Style/AlignParameters:
-  Enabled: false
   EnforcedStyle: with_fixed_indentation
+  Enabled: false
 Style/AndOr:
   Severity: error
 Style/Attr:
@@ -64,7 +75,7 @@ Style/ClassAndModuleChildren:
 Style/Documentation:
   Enabled: false
   Exclude:
-    - !ruby/regexp /features\/.*.rb$/
+  - !ruby/regexp /features\/.*.rb$/
 Style/DoubleNegation:
   Enabled: false
 Style/EmptyLinesAroundAccessModifier:
@@ -112,7 +123,7 @@ Style/RedundantReturn:
 Style/RedundantSelf:
   Enabled: false
 Style/RegexpLiteral:
-  EnforcedStyle: percent_r
+  EnforcedStyle: slashes
 Style/RescueModifier:
   Enabled: false
 Style/SignalException:

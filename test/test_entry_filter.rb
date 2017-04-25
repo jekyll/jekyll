@@ -17,7 +17,7 @@ class TestEntryFilter < JekyllUnitTest
     should "allow regexp filtering" do
       files = %w(README.md)
       @site.exclude = [
-        %r!README!
+        /README/
       ]
 
       assert_empty @site.reader.filter_entries(
@@ -82,9 +82,6 @@ class TestEntryFilter < JekyllUnitTest
 
     # rubocop:disable Performance/FixedSize
     should "include only safe symlinks in safe mode" do
-      # no support for symlinks on Windows
-      skip_if_windows "Jekyll does not currently support symlinks on Windows."
-
       site = Site.new(site_configuration("safe" => true))
       site.reader.read_directories("symlink-test")
 
@@ -94,9 +91,6 @@ class TestEntryFilter < JekyllUnitTest
     # rubocop:enable Performance/FixedSize
 
     should "include symlinks in unsafe mode" do
-      # no support for symlinks on Windows
-      skip_if_windows "Jekyll does not currently support symlinks on Windows."
-
       site = Site.new(site_configuration)
 
       site.reader.read_directories("symlink-test")

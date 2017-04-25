@@ -9,6 +9,7 @@ module Jekyll
           "detach"             => ["-B", "--detach", "Run the server in the background"],
           "ssl_key"            => ["--ssl-key [KEY]", "X.509 (SSL) Private Key."],
           "port"               => ["-P", "--port [PORT]", "Port to listen on"],
+          "baseurl"            => ["-b", "--baseurl [URL]", "Base URL"],
           "show_dir_listing"   => ["--show-dir-listing",
             "Show a directory listing instead of loading your index file."],
           "skip_initial_build" => ["skip_initial_build", "--skip-initial-build",
@@ -32,10 +33,7 @@ module Jekyll
             cmd.action do |_, opts|
               opts["serving"] = true
               opts["watch"  ] = true unless opts.key?("watch")
-              config = opts["config"]
-              opts["url"] = default_url(opts) if Jekyll.env == "development"
               Build.process(opts)
-              opts["config"] = config
               Serve.process(opts)
             end
           end
@@ -48,7 +46,11 @@ module Jekyll
           destination = opts["destination"]
           setup(destination)
 
-          start_up_webrick(opts, destination)
+          server = WEBrick::HTTPServer.new(webrick_opts(opts)).tap { |o| o.unmount("") }
+          server.mount(opts["baseurl"], Servlet, destination, file_handler_opts)
+          Jekyll.logger.info "Server address:", server_address(server, opts)
+          launch_browser server, opts if opts["open_url"]
+          boot_or_detach server, opts
         end
 
         # Do a base pre-setup of WEBRick so that everything is in place
@@ -98,17 +100,6 @@ module Jekyll
           opts
         end
 
-        #
-
-        private
-        def start_up_webrick(opts, destination)
-          server = WEBrick::HTTPServer.new(webrick_opts(opts)).tap { |o| o.unmount("") }
-          server.mount(opts["baseurl"], Servlet, destination, file_handler_opts)
-          Jekyll.logger.info "Server address:", server_address(server, opts)
-          launch_browser server, opts if opts["open_url"]
-          boot_or_detach server, opts
-        end
-
         # Recreate NondisclosureName under utf-8 circumstance
 
         private
@@ -124,35 +115,13 @@ module Jekyll
         #
 
         private
-        def server_address(server, options = {})
-          format_url(
-            server.config[:SSLEnable],
-            server.config[:BindAddress],
-            server.config[:Port],
-            options["baseurl"]
-          )
-        end
-
-        private
-        def format_url(ssl_enabled, address, port, baseurl = nil)
+        def server_address(server, opts)
           format("%{prefix}://%{address}:%{port}%{baseurl}", {
-            :prefix  => ssl_enabled ? "https" : "http",
-            :address => address,
-            :port    => port,
-            :baseurl => baseurl ? "#{baseurl}/" : ""
+            :prefix  => server.config[:SSLEnable] ? "https" : "http",
+            :baseurl => opts["baseurl"] ? "#{opts["baseurl"]}/" : "",
+            :address => server.config[:BindAddress],
+            :port    => server.config[:Port]
           })
-        end
-
-        #
-
-        private
-        def default_url(opts)
-          config = configuration_from_options(opts)
-          format_url(
-            config["ssl_cert"] && config["ssl_key"],
-            config["host"] == "127.0.0.1" ? "localhost" : config["host"],
-            config["port"]
-          )
         end
 
         #

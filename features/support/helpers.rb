@@ -1,5 +1,5 @@
 require "fileutils"
-require "jekyll"
+require "jekyll/utils"
 require "open3"
 require "time"
 require "safe_yaml/load"
@@ -8,13 +8,11 @@ class Paths
   SOURCE_DIR = Pathname.new(File.expand_path("../..", __dir__))
   def self.test_dir; source_dir.join("tmp", "jekyll"); end
 
-  def self.theme_gem_dir; source_dir.join("tmp", "jekyll", "my-cool-theme"); end
-
   def self.output_file; test_dir.join("jekyll_output.txt"); end
 
   def self.status_file; test_dir.join("jekyll_status.txt"); end
 
-  def self.jekyll_bin; source_dir.join("exe", "jekyll"); end
+  def self.jekyll_bin; source_dir.join("bin", "jekyll"); end
 
   def self.source_dir; SOURCE_DIR; end
 end
@@ -38,7 +36,7 @@ def file_content_from_hash(input_hash)
   Jekyll::Utils.strip_heredoc(<<-EOF)
     ---
     #{matter.gsub(
-      %r!\n!, "\n    "
+      /\n/, "\n    "
     )}
     ---
     #{content}
@@ -90,16 +88,10 @@ end
 
 #
 
-def run_rubygem(args)
-  run_in_shell("gem", *args.strip.split(" "))
-end
-
-#
-
 def run_jekyll(args)
   args = args.strip.split(" ") # Shellwords?
-  process = run_in_shell("ruby", Paths.jekyll_bin.to_s, *args, "--trace")
-  process.exitstatus.zero?
+  process = run_in_shell(Paths.jekyll_bin.to_s, *args, "--trace")
+  process.exitstatus == 0
 end
 
 #
@@ -129,7 +121,7 @@ end
 def slug(title = nil)
   if !title
     then Time.now.strftime("%s%9N") # nanoseconds since the Epoch
-  else title.downcase.gsub(%r![^\w]!, " ").strip.gsub(%r!\s+!, "-")
+  else title.downcase.gsub(/[^\w]/, " ").strip.gsub(/\s+/, "-")
   end
 end
 

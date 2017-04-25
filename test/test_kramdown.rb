@@ -28,7 +28,7 @@ class TestKramdown < JekyllUnitTest
     end
 
     should "run Kramdown" do
-      assert_equal "<h1>Some Header</h1>", @markdown.convert("# Some Header #").strip
+      assert_equal "<h1>Some Header</h1>", @markdown.convert('# Some Header #').strip
     end
 
     context "when asked to convert smart quotes" do

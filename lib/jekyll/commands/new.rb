@@ -11,7 +11,6 @@ module Jekyll
 
             c.option "force", "--force", "Force creation even if PATH already exists"
             c.option "blank", "--blank", "Creates scaffolding but with empty files"
-            c.option "skip-bundle", "--skip-bundle", "Skip 'bundle install'"
 
             c.action do |args, options|
               Jekyll::Commands::New.process(args, options)
@@ -35,7 +34,7 @@ module Jekyll
             create_site new_blog_path
           end
 
-          after_install(new_blog_path, options)
+          Jekyll.logger.info "New jekyll site installed in #{new_blog_path}."
         end
 
         def create_blank_site(path)
@@ -73,17 +72,14 @@ ruby RUBY_VERSION
 # Happy Jekylling!
 gem "jekyll", "#{Jekyll::VERSION}"
 
-# This is the default theme for new Jekyll sites. You may change this to anything you like.
-gem "minima", "~> 2.0"
-
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
 # uncomment the line below. To upgrade, run `bundle update github-pages`.
 # gem "github-pages", group: :jekyll_plugins
 
 # If you have any plugins, put them here!
-group :jekyll_plugins do
-   gem "jekyll-feed", "~> 0.6"
-end
+# group :jekyll_plugins do
+#   gem "jekyll-github-metadata", "~> 1.0"
+# end
 RUBY
         end
 
@@ -114,31 +110,6 @@ RUBY
 
         def scaffold_path
           "_posts/0000-00-00-welcome-to-jekyll.markdown.erb"
-        end
-
-        # After a new blog has been created, print a success notification and
-        # then automatically execute bundle install from within the new blog dir
-        # unless the user opts to generate a blank blog or skip 'bundle install'.
-
-        def after_install(path, options = {})
-          Jekyll.logger.info "New jekyll site installed in #{path.cyan}."
-          Jekyll.logger.info "Bundle install skipped." if options["skip-bundle"]
-
-          unless options["blank"] || options["skip-bundle"]
-            bundle_install path
-          end
-        end
-
-        def bundle_install(path)
-          Jekyll::External.require_with_graceful_fail "bundler"
-          Jekyll.logger.info "Running bundle install in #{path.cyan}..."
-          Dir.chdir(path) do
-            if ENV["CI"]
-              system("bundle", "install", "--quiet")
-            else
-              system("bundle", "install")
-            end
-          end
         end
       end
     end
