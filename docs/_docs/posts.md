@@ -78,7 +78,7 @@ digital assets along with your text content. While the syntax for linking to
 these resources differs between Markdown and Textile, the problem of working
 out where to store these files in your site is something everyone will face.
 
-Because of Jekyll’s flexibility, there are many solutions to how to do this.
+There are a number of ways to include digital assets in Jekyll. 
 One common solution is to create a folder in the root of the project directory
 called something like `assets` or `downloads`, into which any images, downloads
 or other resources are placed. Then, from within any post, they can be linked
