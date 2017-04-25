@@ -1,4 +1,4 @@
-require "uri"
+require 'uri'
 
 # Public: Methods that generate a URL for a resource such as a Post or a Page.
 #
@@ -35,15 +35,8 @@ module Jekyll
     # The generated relative URL of the resource
     #
     # Returns the String URL
-    # Raises a Jekyll::Errors::InvalidURLError if the relative URL contains a colon
     def to_s
-      sanitized_url = sanitize_url(generated_permalink || generated_url)
-      if sanitized_url.include?(":")
-        raise Jekyll::Errors::InvalidURLError,
-          "The URL #{sanitized_url} is invalid because it contains a colon."
-      else
-        sanitized_url
-      end
+      sanitize_url(generated_permalink || generated_url)
     end
 
     # Generates a URL from the permalink
@@ -74,54 +67,32 @@ module Jekyll
 
     def generate_url_from_hash(template)
       @placeholders.inject(template) do |result, token|
-        break result if result.index(":").nil?
+        break result if result.index(':').nil?
         if token.last.nil?
-          # Remove leading "/" to avoid generating urls with `//`
-          result.gsub(%r!/:#{token.first}!, "")
+          # Remove leading '/' to avoid generating urls with `//`
+          result.gsub(/\/:#{token.first}/, '')
         else
-          result.gsub(%r!:#{token.first}!, self.class.escape_path(token.last))
+          result.gsub(/:#{token.first}/, self.class.escape_path(token.last))
         end
-      end
-    end
-
-    # We include underscores in keys to allow for 'i_month' and so forth.
-    # This poses a problem for keys which are followed by an underscore
-    # but the underscore is not part of the key, e.g. '/:month_:day'.
-    # That should be :month and :day, but our key extraction regexp isn't
-    # smart enough to know that so we have to make it an explicit
-    # possibility.
-    def possible_keys(key)
-      if key.end_with?("_")
-        [key, key.chomp("_")]
-      else
-        [key]
       end
     end
 
     def generate_url_from_drop(template)
-      template.gsub(%r!:([a-z_]+)!) do |match|
-        pool = possible_keys(match.sub(":".freeze, "".freeze))
-
-        winner = pool.find { |key| @placeholders.key?(key) }
-        if winner.nil?
-          raise NoMethodError,
-            "The URL template doesn't have #{pool.join(" or ")} keys. "\
-              "Check your permalink template!"
+      template.gsub(/:([a-z_]+)/.freeze) do |match|
+        replacement = @placeholders.public_send(match.sub(':'.freeze, ''.freeze))
+        if replacement.nil?
+          ''.freeze
+        else
+          self.class.escape_path(replacement)
         end
-
-        value = @placeholders[winner]
-        value = "" if value.nil?
-        replacement = self.class.escape_path(value)
-
-        match.sub(":#{winner}", replacement)
-      end.gsub(%r!//!, "/".freeze)
+      end.gsub(/\/\//.freeze, '/'.freeze)
     end
 
     # Returns a sanitized String URL, stripping "../../" and multiples of "/",
     # as well as the beginning "/" so we can enforce and ensure it.
 
     def sanitize_url(str)
-      "/" + str.gsub(%r!/{2,}!, "/").gsub(%r!\.+/|\A/+!, "")
+      "/" + str.gsub(/\/{2,}/, "/").gsub(/\.+\/|\A\/+/, "")
     end
 
     # Escapes a path to be a valid URL path segment
@@ -135,7 +106,7 @@ module Jekyll
     #
     # Returns the escaped path.
     def self.escape_path(path)
-      # Because URI.escape doesn't escape "?", "[" and "]" by default,
+      # Because URI.escape doesn't escape '?', '[' and ']' by default,
       # specify unsafe string (except unreserved, sub-delims, ":", "@" and "/").
       #
       # URI path segment is defined in RFC 3986 as follows:
@@ -145,7 +116,7 @@ module Jekyll
       #   pct-encoded   = "%" HEXDIG HEXDIG
       #   sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
       #                 / "*" / "+" / "," / ";" / "="
-      URI.escape(path, %r{[^a-zA-Z\d\-._~!$&'()*+,;=:@\/]}).encode("utf-8")
+      URI.escape(path, /[^a-zA-Z\d\-._~!$&'()*+,;=:@\/]/).encode('utf-8')
     end
 
     # Unescapes a URL path segment
@@ -159,7 +130,7 @@ module Jekyll
     #
     # Returns the unescaped path.
     def self.unescape_path(path)
-      URI.unescape(path.encode("utf-8"))
+      URI.unescape(path.encode('utf-8'))
     end
   end
 end

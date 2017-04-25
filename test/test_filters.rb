@@ -8,34 +8,24 @@ class TestFilters < JekyllUnitTest
     attr_accessor :site, :context
 
     def initialize(opts = {})
-      @site = Jekyll::Site.new(opts.merge("skip_config_files" => true))
+      @site = Jekyll::Site.new(
+        Jekyll.configuration(opts.merge("skip_config_files" => true))
+      )
       @context = Liquid::Context.new({}, {}, { :site => @site })
     end
   end
 
-  def make_filter_mock(opts = {})
-    JekyllFilter.new(site_configuration(opts)).tap do |f|
-      tz = f.site.config["timezone"]
-      Jekyll.set_timezone(tz) if tz
-    end
-  end
-
-  class SelectDummy
-    def select; end
-  end
-
   context "filters" do
     setup do
-      @filter = make_filter_mock({
-        "timezone" => "UTC",
-        "url"      => "http://example.com",
-        "baseurl"  => "/base"
+      @filter = JekyllFilter.new({
+        "source"      => source_dir,
+        "destination" => dest_dir,
+        "timezone"    => "UTC"
       })
-      @sample_time = Time.utc(2013, 3, 27, 11, 22, 33)
+      @sample_time = Time.utc(2013, 03, 27, 11, 22, 33)
       @sample_date = Date.parse("2013-03-27")
       @time_as_string = "September 11, 2001 12:46:30 -0000"
       @time_as_numeric = 1_399_680_607
-      @integer_as_string = "142857"
       @array_of_objects = [
         { "color" => "red",  "size" => "large"  },
         { "color" => "red",  "size" => "medium" },
@@ -47,13 +37,6 @@ class TestFilters < JekyllUnitTest
       assert_equal(
         "<p>something <strong>really</strong> simple</p>\n",
         @filter.markdownify("something **really** simple")
-      )
-    end
-
-    should "markdownify with a number" do
-      assert_equal(
-        "<p>404</p>\n",
-        @filter.markdownify(404)
       )
     end
 
@@ -70,7 +53,7 @@ class TestFilters < JekyllUnitTest
       end
 
       should "escapes special characters when configured to do so" do
-        kramdown = make_filter_mock({ :kramdown => { :entity_output => :symbolic } })
+        kramdown = JekyllFilter.new({ :kramdown => { :entity_output => :symbolic } })
         assert_equal(
           "&ldquo;This filter&rsquo;s test&hellip;&rdquo;",
           kramdown.smartify(%q{"This filter's test..."})
@@ -97,13 +80,6 @@ class TestFilters < JekyllUnitTest
         assert_equal "3 &lt; 4", @filter.smartify("3 < 4")
         assert_equal "5 &gt; 4", @filter.smartify("5 > 4")
         assert_equal "This &amp; that", @filter.smartify("This & that")
-      end
-
-      should "convert a number to a string" do
-        assert_equal(
-          "404",
-          @filter.smartify(404)
-        )
       end
     end
 
@@ -141,35 +117,6 @@ class TestFilters < JekyllUnitTest
         "chunky, bacon, bits, and pieces",
         @filter.array_to_sentence_string(%w(chunky bacon bits pieces))
       )
-    end
-
-    should "convert array to sentence string with different connector" do
-      assert_equal "1 or 2", @filter.array_to_sentence_string([1, 2], "or")
-      assert_equal "1, 2, 3, or 4", @filter.array_to_sentence_string([1, 2, 3, 4], "or")
-    end
-
-    context "normalize_whitespace filter" do
-      should "replace newlines with a space" do
-        assert_equal "a b", @filter.normalize_whitespace("a\nb")
-        assert_equal "a b", @filter.normalize_whitespace("a\n\nb")
-      end
-
-      should "replace tabs with a space" do
-        assert_equal "a b", @filter.normalize_whitespace("a\tb")
-        assert_equal "a b", @filter.normalize_whitespace("a\t\tb")
-      end
-
-      should "replace multiple spaces with a single space" do
-        assert_equal "a b", @filter.normalize_whitespace("a  b")
-        assert_equal "a b", @filter.normalize_whitespace("a\t\nb")
-        assert_equal "a b", @filter.normalize_whitespace("a \t \n\nb")
-      end
-
-      should "strip whitespace from beginning and end of string" do
-        assert_equal "a", @filter.normalize_whitespace("a ")
-        assert_equal "a", @filter.normalize_whitespace(" a")
-        assert_equal "a", @filter.normalize_whitespace(" a ")
-      end
     end
 
     context "date filters" do
@@ -250,13 +197,6 @@ class TestFilters < JekyllUnitTest
             @filter.date_to_rfc822(@time_as_string)
           )
         end
-
-        should "convert a String to Integer" do
-          assert_equal(
-            142_857,
-            @filter.to_integer(@integer_as_string)
-          )
-        end
       end
 
       context "with a Numeric object" do
@@ -280,15 +220,6 @@ class TestFilters < JekyllUnitTest
             "Sat, 10 May 2014 00:10:07 +0000",
             @filter.date_to_rfc822(@time_as_numeric)
           )
-        end
-      end
-
-      context "without input" do
-        should "raise an error if input is nil" do
-          err = assert_raises Jekyll::Errors::InvalidDateError do
-            @filter.date_to_xmlschema(nil)
-          end
-          assert_equal "Invalid Date: 'nil' is not a valid datetime.", err.message
         end
       end
     end
@@ -315,113 +246,6 @@ class TestFilters < JekyllUnitTest
 
     should "escape space as %20" do
       assert_equal "my%20things", @filter.uri_escape("my things")
-    end
-
-    context "absolute_url filter" do
-      should "produce an absolute URL from a page URL" do
-        page_url = "/about/my_favorite_page/"
-        assert_equal "http://example.com/base#{page_url}", @filter.absolute_url(page_url)
-      end
-
-      should "ensure the leading slash" do
-        page_url = "about/my_favorite_page/"
-        assert_equal "http://example.com/base/#{page_url}", @filter.absolute_url(page_url)
-      end
-
-      should "ensure the leading slash for the baseurl" do
-        page_url = "about/my_favorite_page/"
-        filter = make_filter_mock({
-          "url"     => "http://example.com",
-          "baseurl" => "base"
-        })
-        assert_equal "http://example.com/base/#{page_url}", filter.absolute_url(page_url)
-      end
-
-      should "be ok with a blank but present 'url'" do
-        page_url = "about/my_favorite_page/"
-        filter = make_filter_mock({
-          "url"     => "",
-          "baseurl" => "base"
-        })
-        assert_equal "/base/#{page_url}", filter.absolute_url(page_url)
-      end
-
-      should "be ok with a nil 'url'" do
-        page_url = "about/my_favorite_page/"
-        filter = make_filter_mock({
-          "url"     => nil,
-          "baseurl" => "base"
-        })
-        assert_equal "/base/#{page_url}", filter.absolute_url(page_url)
-      end
-
-      should "be ok with a nil 'baseurl'" do
-        page_url = "about/my_favorite_page/"
-        filter = make_filter_mock({
-          "url"     => "http://example.com",
-          "baseurl" => nil
-        })
-        assert_equal "http://example.com/#{page_url}", filter.absolute_url(page_url)
-      end
-
-      should "not prepend a forward slash if input is empty" do
-        page_url = ""
-        filter = make_filter_mock({
-          "url"     => "http://example.com",
-          "baseurl" => "/base"
-        })
-        assert_equal "http://example.com/base", filter.absolute_url(page_url)
-      end
-
-      should "normalize international URLs" do
-        page_url = ""
-        filter = make_filter_mock({
-          "url"     => "http://ümlaut.example.org/",
-          "baseurl" => nil
-        })
-        assert_equal "http://xn--mlaut-jva.example.org/", filter.absolute_url(page_url)
-      end
-    end
-
-    context "relative_url filter" do
-      should "produce a relative URL from a page URL" do
-        page_url = "/about/my_favorite_page/"
-        assert_equal "/base#{page_url}", @filter.relative_url(page_url)
-      end
-
-      should "ensure the leading slash between baseurl and input" do
-        page_url = "about/my_favorite_page/"
-        assert_equal "/base/#{page_url}", @filter.relative_url(page_url)
-      end
-
-      should "ensure the leading slash for the baseurl" do
-        page_url = "about/my_favorite_page/"
-        filter = make_filter_mock({ "baseurl" => "base" })
-        assert_equal "/base/#{page_url}", filter.relative_url(page_url)
-      end
-
-      should "normalize international URLs" do
-        page_url = "错误.html"
-        assert_equal "/base/%E9%94%99%E8%AF%AF.html", @filter.relative_url(page_url)
-      end
-
-      should "be ok with a nil 'baseurl'" do
-        page_url = "about/my_favorite_page/"
-        filter = make_filter_mock({
-          "url"     => "http://example.com",
-          "baseurl" => nil
-        })
-        assert_equal "/#{page_url}", filter.relative_url(page_url)
-      end
-
-      should "not prepend a forward slash if input is empty" do
-        page_url = ""
-        filter = make_filter_mock({
-          "url"     => "http://example.com",
-          "baseurl" => "/base"
-        })
-        assert_equal "/base", filter.relative_url(page_url)
-      end
     end
 
     context "jsonify filter" do
@@ -580,9 +404,7 @@ class TestFilters < JekyllUnitTest
               g["items"].is_a?(Array),
               "The list of grouped items for 'default' is not an Array."
             )
-            # adjust array.size to ignore symlinked page in Windows
-            qty = Utils::Platforms.really_windows? ? 4 : 5
-            assert_equal qty, g["items"].size
+            assert_equal 5, g["items"].size
           when "nil"
             assert(
               g["items"].is_a?(Array),
@@ -594,9 +416,7 @@ class TestFilters < JekyllUnitTest
               g["items"].is_a?(Array),
               "The list of grouped items for '' is not an Array."
             )
-            # adjust array.size to ignore symlinked page in Windows
-            qty = Utils::Platforms.really_windows? ? 14 : 15
-            assert_equal qty, g["items"].size
+            assert_equal 13, g["items"].size
           end
         end
       end
@@ -672,11 +492,6 @@ class TestFilters < JekyllUnitTest
         assert_equal 1, results.length
         assert_equal 4.7, results[0]["rating"]
       end
-
-      should "always return an array if the object responds to `select`" do
-        results = @filter.where(SelectDummy.new, "obj", "1 == 1")
-        assert_equal [], results
-      end
     end
 
     context "where_exp filter" do
@@ -741,19 +556,6 @@ class TestFilters < JekyllUnitTest
         assert_equal "b", results[1]["id"]
         assert_equal "d", results[2]["id"]
       end
-
-      should "filter posts" do
-        site = fixture_site.tap(&:read)
-        posts = site.site_payload["site"]["posts"]
-        results = @filter.where_exp(posts, "obj", "obj.title == 'Foo Bar'")
-        assert_equal 1, results.length
-        assert_equal site.posts.find { |p| p.title == "Foo Bar" }, results.first
-      end
-
-      should "always return an array if the object responds to `select`" do
-        results = @filter.where_exp(SelectDummy.new, "obj", "1 == 1")
-        assert_equal [], results
-      end
     end
 
     context "sort filter" do
@@ -792,28 +594,6 @@ class TestFilters < JekyllUnitTest
       should "return sorted by property array with nils last" do
         assert_equal [{ "a" => 1 }, { "a" => 2 }, { "b" => 1 }],
           @filter.sort([{ "a" => 2 }, { "b" => 1 }, { "a" => 1 }], "a", "last")
-      end
-    end
-
-    context "to_integer filter" do
-      should "raise Exception when input is not integer or string" do
-        assert_raises NoMethodError do
-          @filter.to_integer([1, 2])
-        end
-      end
-      should "return 0 when input is nil" do
-        assert_equal 0, @filter.to_integer(nil)
-      end
-      should "return integer when input is boolean" do
-        assert_equal 0, @filter.to_integer(false)
-        assert_equal 1, @filter.to_integer(true)
-      end
-      should "return integers" do
-        assert_equal 0, @filter.to_integer(0)
-        assert_equal 1, @filter.to_integer(1)
-        assert_equal 1, @filter.to_integer(1.42857)
-        assert_equal(-1, @filter.to_integer(-1))
-        assert_equal(-1, @filter.to_integer(-1.42857))
       end
     end
 

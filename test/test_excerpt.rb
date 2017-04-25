@@ -77,7 +77,7 @@ class TestExcerpt < JekyllUnitTest
     end
 
     context "#to_liquid" do
-      should "contain the proper page data to mimic the post liquid" do
+      should "contain the proper page data to mimick the post liquid" do
         assert_equal "Post Excerpt with Layout", @excerpt.to_liquid["title"]
         url = "/bar/baz/z_category/mixedcase/2013/07/22/post-excerpt-with-layout.html"
         assert_equal url, @excerpt.to_liquid["url"]
@@ -93,12 +93,12 @@ class TestExcerpt < JekyllUnitTest
       context "before render" do
         should "be the first paragraph of the page" do
           expected = "First paragraph with [link ref][link].\n\n[link]: "\
-                     "https://jekyllrb.com/"
+                     "http://www.jekyllrb.com/"
           assert_equal expected, @excerpt.content
         end
 
         should "contain any refs at the bottom of the page" do
-          assert @excerpt.content.include?("[link]: https://jekyllrb.com/")
+          assert @excerpt.content.include?("[link]: http://www.jekyllrb.com/")
         end
       end
 
@@ -110,39 +110,13 @@ class TestExcerpt < JekyllUnitTest
         end
 
         should "be the first paragraph of the page" do
-          expected = "<p>First paragraph with <a href=\"https://jekyllrb.com/\">link "\
+          expected = "<p>First paragraph with <a href=\"http://www.jekyllrb.com/\">link "\
                      "ref</a>.</p>\n\n"
           assert_equal expected, @extracted_excerpt.output
         end
 
         should "link properly" do
-          assert @extracted_excerpt.content.include?("https://jekyllrb.com/")
-        end
-      end
-
-      context "with indented link references" do
-        setup do
-          @post = setup_post("2016-08-16-indented-link-references.markdown")
-          @excerpt = @post.excerpt
-        end
-
-        should "contain all refs at the bottom of the page" do
-          (0..3).each do |i|
-            assert_match "[link_#{i}]: www.example.com/#{i}", @excerpt.content
-          end
-        end
-
-        should "ignore indented code" do
-          refute_match "[fakelink]:", @excerpt.content
-        end
-
-        should "render links properly" do
-          @rendered_post = @post.dup
-          do_render(@rendered_post)
-          output = @rendered_post.data["excerpt"].output
-          (0..3).each do |i|
-            assert_includes output, "<a href=\"www.example.com/#{i}\">"
-          end
+          assert @extracted_excerpt.content.include?("http://www.jekyllrb.com/")
         end
       end
     end

@@ -3,7 +3,7 @@ class Jekyll::Converters::Markdown::RedcarpetParser
     def add_code_tags(code, lang)
       code = code.to_s
       code = code.sub(
-        %r!<pre>!,
+        /<pre>/,
         "<pre><code class=\"language-#{lang}\" data-lang=\"#{lang}\">"
       )
       code = code.sub(%r!</pre>!, "</code></pre>")

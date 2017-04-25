@@ -7,8 +7,7 @@ module Jekyll
     attr_writer   :output
 
     def_delegators :@doc, :site, :name, :ext, :relative_path, :extname,
-                          :render_with_liquid?, :collection, :related_posts,
-                          :url, :next_doc, :previous_doc
+                          :render_with_liquid?, :collection, :related_posts, :url
 
     # Initialize this Excerpt instance.
     #
@@ -118,7 +117,7 @@ module Jekyll
       if tail.empty?
         head
       else
-        "" << head << "\n\n" << tail.scan(%r!^ {0,3}\[[^\]]+\]:.+$!).join("\n")
+        "" << head << "\n\n" << tail.scan(/^\[[^\]]+\]:.+$/).join("\n")
       end
     end
   end

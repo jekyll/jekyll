@@ -43,7 +43,7 @@ module Jekyll
       str = ""
 
       row_data.each_with_index do |cell_data, cell_index|
-        str << if cell_index.zero?
+        str << if cell_index == 0
                  cell_data.ljust(widths[cell_index], " ")
                else
                  cell_data.rjust(widths[cell_index], " ")

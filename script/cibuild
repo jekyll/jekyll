@@ -6,10 +6,8 @@ set -e
 
 if [[ -z "$TEST_SUITE" ]]
 then
-  script/fmt
-  script/test ci
+  script/test  ci
   script/cucumber
-  script/default-site
 elif [[ -x "script/$TEST_SUITE" ]]
 then
   script/$TEST_SUITE

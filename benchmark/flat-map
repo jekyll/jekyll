@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 require 'benchmark/ips'
 
 enum = (0..50).to_a

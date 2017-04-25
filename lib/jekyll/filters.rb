@@ -1,13 +1,10 @@
-require "uri"
-require "json"
-require "date"
-require "liquid"
-
-require_all "jekyll/filters"
+require 'uri'
+require 'json'
+require 'date'
+require 'liquid'
 
 module Jekyll
   module Filters
-    include URLFilters
     # Convert a Markdown string into HTML output.
     #
     # input - The Markdown String to convert.
@@ -16,7 +13,7 @@ module Jekyll
     def markdownify(input)
       site = @context.registers[:site]
       converter = site.find_converter_instance(Jekyll::Converters::Markdown)
-      converter.convert(input.to_s)
+      converter.convert(input)
     end
 
     # Convert quotes into smart quotes.
@@ -27,7 +24,7 @@ module Jekyll
     def smartify(input)
       site = @context.registers[:site]
       converter = site.find_converter_instance(Jekyll::Converters::SmartyPants)
-      converter.convert(input.to_s)
+      converter.convert(input)
     end
 
     # Convert a Sass string into CSS output.
@@ -59,7 +56,7 @@ module Jekyll
     #
     # Returns the given filename or title as a lowercase URL String.
     # See Utils.slugify for more detail.
-    def slugify(input, mode = nil)
+    def slugify(input, mode=nil)
       Utils.slugify(input, :mode => mode)
     end
 
@@ -121,7 +118,7 @@ module Jekyll
     #
     # Returns the escaped String.
     def xml_escape(input)
-      input.to_s.encode(:xml => :attr).gsub(%r!\A"|"\Z!, "")
+      input.to_s.encode(:xml => :attr).gsub(/\A"|"\Z/, "")
     end
 
     # CGI escape a string for use in a URL. Replaces any special characters
@@ -136,7 +133,7 @@ module Jekyll
     #
     # Returns the escaped String.
     def cgi_escape(input)
-      CGI.escape(input)
+      CGI::escape(input)
     end
 
     # URI escape a string.
@@ -153,15 +150,6 @@ module Jekyll
       URI.escape(input)
     end
 
-    # Replace any whitespace in the input string with a single space
-    #
-    # input - The String on which to operate.
-    #
-    # Returns the formatted String
-    def normalize_whitespace(input)
-      input.to_s.gsub(%r!\s+!, " ").strip
-    end
-
     # Count the number of words in the input string.
     #
     # input - The String on which to operate.
@@ -175,7 +163,6 @@ module Jekyll
     # word "and" for the last one.
     #
     # array - The Array of Strings to join.
-    # connector - Word used to connect the last 2 items in the array
     #
     # Examples
     #
@@ -183,7 +170,8 @@ module Jekyll
     #   # => "apples, oranges, and grapes"
     #
     # Returns the formatted String.
-    def array_to_sentence_string(array, connector = "and")
+    def array_to_sentence_string(array)
+      connector = "and"
       case array.length
       when 0
         ""
@@ -192,7 +180,7 @@ module Jekyll
       when 2
         "#{array[0]} #{connector} #{array[1]}"
       else
-        "#{array[0...-1].join(", ")}, #{connector} #{array[-1]}"
+        "#{array[0...-1].join(', ')}, #{connector} #{array[-1]}"
       end
     end
 
@@ -215,14 +203,11 @@ module Jekyll
     #   "items" => [...] } # all the items where `property` == "larry"
     def group_by(input, property)
       if groupable?(input)
-        input.group_by { |item| item_property(item, property).to_s }
-          .each_with_object([]) do |item, array|
-            array << {
-              "name"  => item.first,
-              "items" => item.last,
-              "size"  => item.last.size
-            }
-          end
+        input.group_by do |item|
+          item_property(item, property).to_s
+        end.inject([]) do |memo, i|
+          memo << { "name" => i.first, "items" => i.last, "size" => i.last.size }
+        end
       else
         input
       end
@@ -236,11 +221,9 @@ module Jekyll
     #
     # Returns the filtered array of objects
     def where(input, property, value)
-      return input unless input.respond_to?(:select)
+      return input unless input.is_a?(Enumerable)
       input = input.values if input.is_a?(Hash)
-      input.select do |object|
-        Array(item_property(object, property)).map(&:to_s).include?(value.to_s)
-      end || []
+      input.select { |object| Array(item_property(object, property)).map(&:to_s).include?(value.to_s) }
     end
 
     # Filters an array of objects against an expression
@@ -251,7 +234,7 @@ module Jekyll
     #
     # Returns the filtered array of objects
     def where_exp(input, variable, expression)
-      return input unless input.respond_to?(:select)
+      return input unless input.is_a?(Enumerable)
       input = input.values if input.is_a?(Hash) # FIXME
 
       condition = parse_condition(expression)
@@ -260,18 +243,7 @@ module Jekyll
           @context[variable] = object
           condition.evaluate(@context)
         end
-      end || []
-    end
-
-    # Convert the input into integer
-    #
-    # input - the object string
-    #
-    # Returns the integer value
-    def to_integer(input)
-      return 1 if input == true
-      return 0 if input == false
-      input.to_i
+      end
     end
 
     # Sort an array of objects
@@ -283,21 +255,33 @@ module Jekyll
     # Returns the filtered array of objects
     def sort(input, property = nil, nils = "first")
       if input.nil?
-        raise ArgumentError, "Cannot sort a null object."
+        raise ArgumentError.new("Cannot sort a null object.")
       end
       if property.nil?
         input.sort
       else
-        if nils == "first"
+        case
+        when nils == "first"
           order = - 1
-        elsif nils == "last"
+        when nils == "last"
           order = + 1
         else
-          raise ArgumentError, "Invalid nils order: " \
-            "'#{nils}' is not a valid nils order. It must be 'first' or 'last'."
+          raise ArgumentError.new("Invalid nils order: " \
+            "'#{nils}' is not a valid nils order. It must be 'first' or 'last'.")
         end
 
-        sort_input(input, property, order)
+        input.sort do |apple, orange|
+          apple_property = item_property(apple, property)
+          orange_property = item_property(orange, property)
+
+          if !apple_property.nil? && orange_property.nil?
+            - order
+          elsif apple_property.nil? && !orange_property.nil?
+            + order
+          else
+            apple_property <=> orange_property
+          end
+        end
       end
     end
 
@@ -349,22 +333,6 @@ module Jekyll
     end
 
     private
-    def sort_input(input, property, order)
-      input.sort do |apple, orange|
-        apple_property = item_property(apple, property)
-        orange_property = item_property(orange, property)
-
-        if !apple_property.nil? && orange_property.nil?
-          - order
-        elsif apple_property.nil? && !orange_property.nil?
-          + order
-        else
-          apple_property <=> orange_property
-        end
-      end
-    end
-
-    private
     def time(input)
       case input
       when Time
@@ -376,17 +344,15 @@ module Jekyll
       when Numeric
         Time.at(input)
       else
-        raise Errors::InvalidDateError,
-          "Invalid Date: '#{input.inspect}' is not a valid datetime."
+        Jekyll.logger.error "Invalid Date:", "'#{input}' is not a valid datetime."
+        exit(1)
       end.localtime
     end
 
-    private
     def groupable?(element)
       element.respond_to?(:group_by)
     end
 
-    private
     def item_property(item, property)
       if item.respond_to?(:to_liquid)
         item.to_liquid[property.to_s]
@@ -397,7 +363,6 @@ module Jekyll
       end
     end
 
-    private
     def as_liquid(item)
       case item
       when Hash
@@ -421,7 +386,6 @@ module Jekyll
     end
 
     # Parse a string to a Liquid Condition
-    private
     def parse_condition(exp)
       parser = Liquid::Parser.new(exp)
       left_expr = parser.expression

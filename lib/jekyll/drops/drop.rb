@@ -102,8 +102,8 @@ module Jekyll
       #
       # Returns true if the given key is present
       def key?(key)
-        if self.class.mutable
-          @mutations.key?(key)
+        if self.class.mutable && @mutations.key?(key)
+          true
         else
           respond_to?(key) || fallback_data.key?(key)
         end
@@ -198,17 +198,6 @@ module Jekyll
             self[key] = other[key] unless other[key].nil?
           end
         end
-      end
-
-      # Imitate Hash.fetch method in Drop
-      #
-      # Returns value if key is present in Drop, otherwise returns default value
-      # KeyError is raised if key is not present and no default value given
-      def fetch(key, default = nil, &block)
-        return self[key] if key?(key)
-        raise KeyError, %(key not found: "#{key}") if default.nil? && block.nil?
-        return yield(key) unless block.nil?
-        return default unless default.nil?
       end
     end
   end

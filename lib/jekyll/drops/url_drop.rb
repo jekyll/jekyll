@@ -78,11 +78,6 @@ module Jekyll
       def y_day
         @obj.date.strftime("%j")
       end
-
-      private
-      def fallback_data
-        {}
-      end
     end
   end
 end

@@ -13,7 +13,6 @@
 /vendor
 Gemfile.lock
 _site/
-bin/
 bbin/
 coverage
 gh-pages/

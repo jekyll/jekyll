@@ -13,12 +13,12 @@ class TestRelatedPosts < JekyllUnitTest
       last_post     = @site.posts.last
       related_posts = Jekyll::RelatedPosts.new(last_post).build
 
-      last_ten_recent_posts = (@site.posts.docs.reverse - [last_post]).first(10)
-      assert_equal last_ten_recent_posts, related_posts
+      last_10_recent_posts = (@site.posts.docs.reverse - [last_post]).first(10)
+      assert_equal last_10_recent_posts, related_posts
     end
   end
 
-  context "building related posts with LSI" do
+  context "building related posts with lsi" do
     setup do
       if jruby?
         skip(
@@ -53,7 +53,7 @@ class TestRelatedPosts < JekyllUnitTest
       Jekyll::RelatedPosts.new(post).build
     end
 
-    should "use LSI for the related posts" do
+    should "use lsi for the related posts" do
       allow_any_instance_of(::ClassifierReborn::LSI).to \
         receive(:find_related).and_return(@site.posts[-1..-9])
       allow_any_instance_of(::ClassifierReborn::LSI).to receive(:build_index)

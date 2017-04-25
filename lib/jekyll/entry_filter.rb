@@ -2,7 +2,7 @@ module Jekyll
   class EntryFilter
     attr_reader :site
     SPECIAL_LEADING_CHARACTERS = [
-      ".", "_", "#", "~"
+      ".", "_", '#', "~"
     ].freeze
 
     def initialize(site, base_directory = nil)
@@ -36,7 +36,8 @@ module Jekyll
     end
 
     def included?(entry)
-      glob_include?(site.include, entry)
+      glob_include?(site.include,
+        entry)
     end
 
     def special?(entry)
@@ -49,14 +50,14 @@ module Jekyll
     end
 
     def excluded?(entry)
-      glob_include?(site.exclude, relative_to_source(entry)).tap do |excluded|
-        if excluded
-          Jekyll.logger.debug(
-            "EntryFilter:",
-            "excluded #{relative_to_source(entry)}"
-          )
-        end
+      excluded = glob_include?(site.exclude, relative_to_source(entry))
+      if excluded
+        Jekyll.logger.debug(
+          "EntryFilter:",
+          "excluded #{relative_to_source(entry)}"
+        )
       end
+      excluded
     end
 
     # --

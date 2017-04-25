@@ -28,7 +28,7 @@ class TestPage < JekyllUnitTest
     end
 
     context "processing pages" do
-      should "create URL based on filename" do
+      should "create url based on filename" do
         @page = setup_page("contacts.html")
         assert_equal "/contacts.html", @page.url
       end
@@ -38,18 +38,18 @@ class TestPage < JekyllUnitTest
         assert_equal false, @page.published?
       end
 
-      should "create URL with non-alphabetic characters" do
-        @page = setup_page("+", "%# +.md")
+      should "create url with non-alphabetic characters" do
+        @page = setup_page("+", '%# +.md')
         assert_equal "/+/%25%23%20+.html", @page.url
       end
 
       context "in a directory hierarchy" do
-        should "create URL based on filename" do
+        should "create url based on filename" do
           @page = setup_page("/contacts", "bar.html")
           assert_equal "/contacts/bar.html", @page.url
         end
 
-        should "create index URL based on filename" do
+        should "create index url based on filename" do
           @page = setup_page("/contacts", "index.html")
           assert_equal "/contacts/", @page.url
         end
@@ -105,7 +105,7 @@ class TestPage < JekyllUnitTest
           @site.permalink_style = :pretty
         end
 
-        should "return dir, URL, and destination correctly" do
+        should "return dir, url, and destination correctly" do
           @page = setup_page("contacts.html")
           @dest_file = dest_dir("contacts/index.html")
 
@@ -125,7 +125,7 @@ class TestPage < JekyllUnitTest
             assert_equal "/contacts/bar/", @page.url
           end
 
-          should "create index URL based on filename" do
+          should "create index url based on filename" do
             @page = setup_page("/contacts", "index.html")
             assert_equal "/contacts/", @page.url
           end
@@ -166,7 +166,7 @@ class TestPage < JekyllUnitTest
           @site.permalink_style = "/:title/"
         end
 
-        should "return URL and destination correctly" do
+        should "return url and destination correctly" do
           @page = setup_page("contacts.html")
           @dest_file = dest_dir("contacts/index.html")
           assert_equal "/contacts/", @page.url
@@ -179,7 +179,7 @@ class TestPage < JekyllUnitTest
           @site.permalink_style = "/:title:output_ext"
         end
 
-        should "return URL and destination correctly" do
+        should "return url and destination correctly" do
           @page = setup_page("contacts.html")
           @dest_file = dest_dir("contacts.html")
           assert_equal "/contacts.html", @page.url
@@ -192,7 +192,7 @@ class TestPage < JekyllUnitTest
           @site.permalink_style = "/:title"
         end
 
-        should "return URL and destination correctly" do
+        should "return url and destination correctly" do
           @page = setup_page("contacts.html")
           @dest_file = dest_dir("contacts.html")
           assert_equal "/contacts", @page.url
@@ -209,7 +209,7 @@ class TestPage < JekyllUnitTest
         end
       end
 
-      should "respect permalink in YAML front matter" do
+      should "respect permalink in yaml front matter" do
         file = "about.html"
         @page = setup_page(file)
 
@@ -268,12 +268,12 @@ class TestPage < JekyllUnitTest
       end
 
       should "write even when permalink has '%# +'" do
-        page = setup_page("+", "%# +.md")
+        page = setup_page("+", '%# +.md')
         do_render(page)
         page.write(dest_dir)
 
         assert File.directory?(dest_dir)
-        assert_exist dest_dir("+", "%# +.html")
+        assert_exist dest_dir("+", '%# +.html')
       end
 
       should "write properly without html extension" do
@@ -313,7 +313,7 @@ class TestPage < JekyllUnitTest
         page.write(dest_dir)
 
         assert_equal "/sitemap.xml", page.url
-        assert_nil page.url[%r!\.html$!]
+        assert_nil page.url[/\.html$/]
         assert File.directory?(dest_dir)
         assert_exist dest_dir("sitemap.xml")
       end

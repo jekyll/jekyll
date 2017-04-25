@@ -93,7 +93,7 @@ module Jekyll
 
       private
       def custom_class_allowed?(parser_name)
-        parser_name !~ %r![^A-Za-z0-9_]! && self.class.constants.include?(
+        parser_name !~ /[^A-Za-z0-9_]/ && self.class.constants.include?(
           parser_name.to_sym
         )
       end
