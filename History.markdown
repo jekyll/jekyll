@@ -57,6 +57,7 @@
   * Add MvvmCross to samples (#6035)
   * Update travis-ci.md to correct procedure (#6043)
   * fix sentence in documentation (#6048)
+  * rephrase a sentence in posts.md to be more direct (#6049)
 
 ### Development Fixes
 
