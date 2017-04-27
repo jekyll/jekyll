@@ -457,7 +457,7 @@ search: exclude
     {% for page in site.pages %}
     <url>
         <loc>{{page.url}}</loc>
-        <lastmod>{{site.time | date: '%Y-%B-%d' }}</lastmod>
+        <lastmod>{{site.time | date: '%Y-%m-%d' }}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
     </url>
@@ -466,7 +466,7 @@ search: exclude
     {% for post in site.posts %}
     <url>
         <loc>{{post.url}}</loc>
-        <lastmod>{{site.time | date: '%Y-%B-%d' }}</lastmod>
+        <lastmod>{{site.time | date: '%Y-%m-%d' }}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
     </url>
