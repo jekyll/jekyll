@@ -67,7 +67,7 @@ module Jekyll
       end
 
       def output_ext(_ext)
-        ".html"
+        @config["extension"]
       end
 
       def convert(content)

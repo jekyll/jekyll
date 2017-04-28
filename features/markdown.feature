@@ -32,3 +32,32 @@ Feature: Markdown
     And the _site directory should exist
     And I should see "Index" in "_site/index.html"
     And I should see "<h1 id=\"my-title\">My Title</h1>" in "_site/index.html"
+
+  Scenario: Markdown with custom extension in list on index
+    Given I have a configuration file with "extension" set to ".xhtml"
+    And I have an "index.html" page that contains "Index - {% for post in site.posts %} {{ post.content }} {% endfor %}"
+    And I have a _posts directory
+    And I have the following post:
+      | title   | date       | content    | type     |
+      | Hackers | 2009-03-27 | # My Title | markdown |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And the "_site/2009/03/27/hackers.xhtml" file should exist
+
+  Scenario: Markdown file converted to link with correct extension in pagination
+    Given I have a configuration file with:
+      | key       | value             |
+      | paginate  | 5                 |
+      | gems      | [jekyll-paginate] |
+      | extension | ".xhtml"          |
+    And I have an "index.html" page that contains "Index - {% for post in paginator.posts %} {{ post.url }} {% endfor %}"
+    And I have a _posts directory
+    And I have the following post:
+      | title   | date       | content    | type     |
+      | Hackers | 2009-03-27 | # My Title | markdown |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "Index" in "_site/index.html"
+    And I should see "hackers.xhtml" in "_site/index.html"
