@@ -35,8 +35,7 @@ module Jekyll
       end
 
       def sanitized_baseurl
-        baseurl = site.config["baseurl"]
-        return baseurl unless baseurl.nil? || (baseurl == "/")
+        site.config["baseurl"].chomp("/")
       end
 
       def ensure_leading_slash(input)
