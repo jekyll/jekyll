@@ -42,8 +42,12 @@ module Jekyll
       dot = Dir.chdir(base) { filter_entries(Dir.entries("."), base) }
       dot_dirs = dot.select { |file| File.directory?(@site.in_source_dir(base, file)) }
       dot_files = (dot - dot_dirs)
+
+      converters = site.converters.reject { |c| c.class == Converters::Identity }
       dot_pages = dot_files.select do |file|
-        Utils.has_yaml_header?(@site.in_source_dir(base, file))
+        Utils.has_yaml_header?(@site.in_source_dir(base, file)) ||
+          site.config["front_matter_optional"] &&
+            converters.any? { |c| c.matches(File.extname(file)) }
       end
       dot_static_files = dot_files - dot_pages
 
