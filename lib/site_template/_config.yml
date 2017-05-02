@@ -24,6 +24,13 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
 github_username:  jekyll
 
+# The configuration file also allows you to set site-wide variables that can be
+# accessed as `site.my_variable`. You'll notice in the default site layout,
+# these produce branded links to the corresponding Twitter and Github account.
+# The template `_include/footer.html` and `_include/icon-github.html` show you
+# how to use these: just reference the site.github_username to determine what
+# to include and how to construct the appropriate URLs.
+
 # Build settings
 markdown: kramdown
 theme: minima
