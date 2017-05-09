@@ -8,7 +8,7 @@ exactly? Well, simply put, it means that blogging is baked into Jekyll’s
 functionality. If you write articles and publish them online, you can publish
 and maintain a blog simply by managing a folder of text-files on your computer.
 Compared to the hassle of configuring and maintaining databases and web-based
-CMS systems, this will be a welcomed change!
+CMS systems, this will be a welcome change!
 
 ## The Posts Folder
 
