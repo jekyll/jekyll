@@ -66,6 +66,7 @@ module Jekyll
         c.option "quiet", "-q", "--quiet", "Silence output."
         c.option "verbose", "-V", "--verbose", "Print verbose output."
         c.option "incremental", "-I", "--incremental", "Enable incremental rebuild."
+        c.option "parallel", "-p", "--parallel", "Enable parallel multi-process builds."
       end
     end
   end

@@ -6,6 +6,7 @@ module Jekyll
 
     def initialize(site)
       @site = site
+      @filename_hashes = {}
 
       # Read metadata from file
       read_metadata
@@ -24,11 +25,7 @@ module Jekyll
       when Document
         regenerate_document?(document)
       else
-        source_path = document.respond_to?(:path) ? document.path : nil
-        dest_path = if document.respond_to?(:destination)
-                      document.destination(@site.dest)
-                    end
-        source_modified_or_dest_missing?(source_path, dest_path)
+        regenerate_other?(document)
       end
     end
 
@@ -162,7 +159,21 @@ module Jekyll
     end
 
     private
+    def regenerate_other?(document)
+      source_path = document.respond_to?(:path) ? document.path : nil
+
+      dest_path = if document.respond_to?(:destination)
+        document.destination(@site.dest)
+      end
+
+      return false unless current_process_responsible?(source_path)
+      source_modified_or_dest_missing?(source_path, dest_path)
+    end
+
+    private
     def regenerate_page?(document)
+      return false unless current_process_responsible?(document.relative_path)
+
       document.asset_file? || document.data["regenerate"] ||
         source_modified_or_dest_missing?(
           site.in_source_dir(document.relative_path), document.destination(@site.dest)
@@ -171,6 +182,8 @@ module Jekyll
 
     private
     def regenerate_document?(document)
+      return false unless current_process_responsible?(document.path)
+
       !document.write? || document.data["regenerate"] ||
         source_modified_or_dest_missing?(
           document.path, document.destination(@site.dest)
@@ -194,6 +207,21 @@ module Jekyll
         # If it has been modified, set it to true
         add(path)
       end
+    end
+
+    private
+    def current_process_responsible?(filename)
+      number_of_processes = ENV['JEKYLL_PROCESSES'].to_i
+      return true if number_of_processes == 0
+      current_process = ENV.fetch('JEKYLL_PROCESS').to_i
+
+      filename_hash = if filename
+        @filename_hashes[filename] ||= Digest::SHA1.hexdigest(filename).to_i(16)
+      else
+        0
+      end
+
+      filename_hash % number_of_processes == current_process
     end
   end
 end
