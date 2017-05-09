@@ -33,7 +33,7 @@ You want to return a basic list of pages.
 **YAML**
 
 ```yaml
-docs_list_title: Docs
+docs_list_title: ACME Documentation
 docs:
 
 - title: Introduction
