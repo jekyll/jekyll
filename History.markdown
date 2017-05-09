@@ -61,6 +61,7 @@
   * Compress Website Sass output (#6009)
   * doc correct spelling error (#6050)
   * adjusted date-format in sitemap (#6053)
+  * Typo fix (welcomed change -> welcome change). (#6070)
 
 ### Development Fixes
 
