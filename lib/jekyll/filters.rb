@@ -256,6 +256,16 @@ module Jekyll
       input.to_i
     end
 
+    # Find object in array of objects via index number
+    #
+    # input - the object array
+    # index - index number of requested object
+    #
+    # Returns the object
+    def at(input, index)
+      input[index]
+    end
+
     # Sort an array of objects
     #
     # input - the object array

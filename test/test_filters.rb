@@ -867,6 +867,12 @@ class TestFilters < JekyllUnitTest
       end
     end
 
+    context "at filter" do
+      should "return the second item of array" do
+        assert_equal @array_of_objects[1], @filter.at(@array_of_objects, 1)
+      end
+    end
+
     context "sort filter" do
       should "raise Exception when input is nil" do
         err = assert_raises ArgumentError do
