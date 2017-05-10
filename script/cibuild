@@ -4,6 +4,8 @@ script/branding
 
 set -e
 
+script/fmt
+
 if [[ -z "$TEST_SUITE" ]]
 then
   script/fmt
