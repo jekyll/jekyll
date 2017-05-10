@@ -236,8 +236,8 @@ module Jekyll
     private
     def permalink_ext
       if document.permalink && !document.permalink.end_with?("/")
-        permalink_ext = File.extname(document.permalink)
-        permalink_ext unless permalink_ext.empty?
+        ext_match = document.permalink.match(/\.[\w+-]+$/)
+        ext_match[0] unless ext_match.nil?
       end
     end
 
