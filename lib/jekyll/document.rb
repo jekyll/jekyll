@@ -259,11 +259,8 @@ module Jekyll
           merge_defaults
           read_content(opts)
           read_post_data
-        rescue SyntaxError => e
-          Jekyll.logger.error "Error:", "YAML Exception reading #{path}: #{e.message}"
         rescue => e
-          raise e if e.is_a? Jekyll::Errors::FatalException
-          Jekyll.logger.error "Error:", "could not read file #{path}: #{e.message}"
+          handle_read_error(e)
         end
       end
     end
@@ -455,6 +452,19 @@ module Jekyll
       populate_categories
       populate_tags
       generate_excerpt
+    end
+
+    private
+    def handle_read_error(error)
+      if error.is_a? SyntaxError
+        Jekyll.logger.error "Error:", "YAML Exception reading #{path}: #{error.message}"
+      else
+        Jekyll.logger.error "Error:", "could not read file #{path}: #{error.message}"
+      end
+
+      if site.config["strict_front_matter"] || error.is_a?(Jekyll::Errors::FatalException)
+        raise error
+      end
     end
 
     private
