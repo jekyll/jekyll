@@ -21,6 +21,10 @@ class TestGeneratedSite < JekyllUnitTest
       assert @index.include?("#{@site.posts.size} Posts")
     end
 
+    should "insert variable from layout into the index" do
+      assert @index.include?("variable from layout")
+    end
+
     should "render latest post's content" do
       assert @index.include?(@site.posts.last.content)
     end

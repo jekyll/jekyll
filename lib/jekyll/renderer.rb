@@ -54,6 +54,7 @@ module Jekyll
       assign_pages!
       assign_related_posts!
       assign_highlighter_options!
+      assign_layout_data!
 
       Jekyll.logger.debug "Pre-Render Hooks:", document.relative_path
       document.trigger_hooks(:pre_render, payload)
@@ -231,6 +232,14 @@ module Jekyll
     def assign_highlighter_options!
       payload["highlighter_prefix"] = converters.first.highlighter_prefix
       payload["highlighter_suffix"] = converters.first.highlighter_suffix
+    end
+
+    private
+    def assign_layout_data!
+      layout = layouts[document.data["layout"]]
+      if layout
+        payload["layout"] = Utils.deep_merge_hashes(layout.data, payload["layout"] || {})
+      end
     end
 
     private
