@@ -32,6 +32,15 @@ module Jekyll
       converter.convert(input.to_s)
     end
 
+    # Convert plain ASCII punctuation into “smart” typographic punctuation.
+    #
+    # input - The ASCII String to convert.
+    #
+    # Returns the HTML formatted String.
+    def smartypants(input)
+      Redcarpet::Render::SmartyPants.render(input)
+    end
+
     # Convert a Sass string into CSS output.
     #
     # input - The Sass String to convert.
