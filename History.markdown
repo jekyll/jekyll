@@ -65,6 +65,7 @@
   * Typo fix (welcomed change -> welcome change). (#6070)
   * Fixed documentation inconsistency (#6068)
   * Add own plugin -> Jekyll Brand Social Wall (#6064)
+  * Added plugin jekyll-analytics (#6042)
 
 ### Development Fixes
 
