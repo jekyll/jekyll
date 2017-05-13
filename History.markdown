@@ -83,6 +83,7 @@
   * doc use example.com (#6031)
   * fix typo (#6040)
   * Fix CI  (#6044)
+  * Remove `ruby RUBY_VERSION` from generated Gemfile (#5803)
 
 ### Site Enhancements
 
