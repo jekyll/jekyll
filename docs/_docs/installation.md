@@ -116,7 +116,7 @@ Check out [the extras page](../extras/) for more information.
 Before you start developing with Jekyll, you may want to check that you're up to date with the latest version. To find your version of Jekyll, run one of these commands:
 
 ```sh
-$ jekyll --version
+$ jekyll -version
 $ gem list jekyll
 ```
 
