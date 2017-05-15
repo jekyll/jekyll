@@ -161,12 +161,19 @@ module Jekyll
       !(coffeescript_file? || yaml_file?)
     end
 
+    # Determine whether the file should be rendered with a layout.
+    #
+    # Returns true if the Front Matter specifies that `layout` is set to `none`.
+    def no_layout?
+      data["layout"] == "none"
+    end
+
     # Determine whether the file should be placed into layouts.
     #
-    # Returns false if the document is either an asset file or a yaml file,
-    #   true otherwise.
+    # Returns false if the document is set to `layouts: none`, or is either an
+    #   asset file or a yaml file. Returns true otherwise.
     def place_in_layout?
-      !(asset_file? || yaml_file?)
+      !(asset_file? || yaml_file? || no_layout?)
     end
 
     # The URL template where the document would be accessible.
