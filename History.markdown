@@ -13,6 +13,7 @@
   * add `plugins` config key as replacement for `gems` (#5130)
   * create configuration from options only once in the boot process (#5487)
   * Add option to fail a build with front matter syntax errors (#5832)
+  * Disable default layouts for documents with a `layout: none` declaration (#5933)
 
 ### Documentation
 
