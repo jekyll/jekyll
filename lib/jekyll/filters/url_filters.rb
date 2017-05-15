@@ -37,7 +37,7 @@ module Jekyll
       # Returns a URL with the trailing `/index.html` removed
       def strip_index(input)
         return if input.nil?
-        input.sub(/\/\.index\.html?$/, '/')
+        input.sub(%r!/\.index\.html?$!, "/")
       end
 
       private
