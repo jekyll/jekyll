@@ -450,6 +450,28 @@ class TestFilters < JekyllUnitTest
       end
     end
 
+    context "strip_index filter" do
+      should "strip trailing /index.html" do
+        assert_equal `/foo/`, @filter.strip_index('/foo/index.html')
+      end
+
+      should "strip trailing /index.htm" do
+        assert_equal `/foo/`, @filter.strip_index('/foo/index.htm')
+      end
+
+      should "not strip HTML in the middle of URLs" do
+        assert_equal `/index.html/foo`, @filter.strip_index('/index.html/foo')
+      end
+
+      should "not raise an error on nil strings" do
+        assert_nil @filter.strip_index(nil)
+      end
+
+      should "not mangle other URLs" do
+        assert_equal `/foo/`, @filter.strip_index('/foo/')
+      end
+    end
+
     context "jsonify filter" do
       should "convert hash to json" do
         assert_equal "{\"age\":18}", @filter.jsonify({ :age => 18 })

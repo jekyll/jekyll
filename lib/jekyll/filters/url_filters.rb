@@ -30,6 +30,16 @@ module Jekyll
         ).normalize.to_s
       end
 
+      # Strips trailing `/index.html` from URLs to create pretty permalinks
+      #
+      # input - the URL with a possible `/index.html`
+      #
+      # Returns a URL with the trailing `/index.html` removed
+      def strip_index(input)
+        return if input.nil?
+        input.sub(/\/\.index\.html?$/, '/')
+      end
+
       private
       def ensure_leading_slash(input)
         return input if input.nil? || input.empty? || input.start_with?("/")
