@@ -452,15 +452,15 @@ class TestFilters < JekyllUnitTest
 
     context "strip_index filter" do
       should "strip trailing /index.html" do
-        assert_equal `/foo/`, @filter.strip_index('/foo/index.html')
+        assert_equal "/foo/", @filter.strip_index("/foo/index.html")
       end
 
       should "strip trailing /index.htm" do
-        assert_equal `/foo/`, @filter.strip_index('/foo/index.htm')
+        assert_equal "/foo/", @filter.strip_index("/foo/index.htm")
       end
 
       should "not strip HTML in the middle of URLs" do
-        assert_equal `/index.html/foo`, @filter.strip_index('/index.html/foo')
+        assert_equal "/index.html/foo", @filter.strip_index("/index.html/foo")
       end
 
       should "not raise an error on nil strings" do
@@ -468,7 +468,7 @@ class TestFilters < JekyllUnitTest
       end
 
       should "not mangle other URLs" do
-        assert_equal `/foo/`, @filter.strip_index('/foo/')
+        assert_equal "/foo/", @filter.strip_index("/foo/")
       end
     end
 
@@ -721,7 +721,7 @@ class TestFilters < JekyllUnitTest
         assert_equal 4.7, results[0]["rating"]
       end
 
-      should "always return an array if the object responds to `select`" do
+      should "always return an array if the object responds to 'select'" do
         results = @filter.where(SelectDummy.new, "obj", "1 == 1")
         assert_equal [], results
       end
@@ -798,7 +798,7 @@ class TestFilters < JekyllUnitTest
         assert_equal site.posts.find { |p| p.title == "Foo Bar" }, results.first
       end
 
-      should "always return an array if the object responds to `select`" do
+      should "always return an array if the object responds to 'select'" do
         results = @filter.where_exp(SelectDummy.new, "obj", "1 == 1")
         assert_equal [], results
       end
