@@ -91,9 +91,9 @@ class TestCollections < JekyllUnitTest
       @site = fixture_site({
         "collections" => {
           "methods" => {
-            "permalink" => "/awesome/:path/"
-          }
-        }
+            "permalink" => "/awesome/:path/",
+          },
+        },
       })
       @site.process
       @collection = @site.collections["methods"]
@@ -107,7 +107,7 @@ class TestCollections < JekyllUnitTest
   context "with a collection" do
     setup do
       @site = fixture_site({
-        "collections" => ["methods"]
+        "collections" => ["methods"],
       })
       @site.process
       @collection = @site.collections["methods"]
@@ -158,9 +158,9 @@ class TestCollections < JekyllUnitTest
         "collections" => {
           "methods" => {
             "foo" => "bar",
-            "baz" => "whoo"
-          }
-        }
+            "baz" => "whoo",
+          },
+        },
       })
       @site.process
       @collection = @site.collections["methods"]
@@ -175,7 +175,7 @@ class TestCollections < JekyllUnitTest
     setup do
       @site = fixture_site({
         "collections" => ["methods"],
-        "safe"        => true
+        "safe"        => true,
       })
       @site.process
       @collection = @site.collections["methods"]
@@ -198,7 +198,7 @@ class TestCollections < JekyllUnitTest
     setup do
       @site = fixture_site({
         "collections" => ["with.dots"],
-        "safe"        => true
+        "safe"        => true,
       })
       @site.process
       @collection = @site.collections["with.dots"]
@@ -217,7 +217,9 @@ class TestCollections < JekyllUnitTest
     end
 
     should "read document in subfolders with dots" do
-      assert @collection.docs.any? { |d| d.path.include?("all.dots") }
+      assert(
+        @collection.docs.any? { |d| d.path.include?("all.dots") }
+      )
     end
   end
 end

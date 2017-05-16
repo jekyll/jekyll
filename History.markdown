@@ -1,30 +1,228 @@
 ## HEAD
 
+### Minor Enhancements
+
+  * Upgrade to Liquid v4 (#4362)
+  * Convert StaticFile liquid representation to a Drop & add front matter defaults support to StaticFiles (#5871)
+  * Add support for Tab-Separated Values data files (`*.tsv`) (#5985)
+  * Specify version constraint in subcommand error message. (#5974)
+  * Add a template for custom 404 page (#5945)
+  * Require `runtime_dependencies` of a Gem-based theme from its `.gemspec` file (#5914)
+  * Don't raise an error if URL contains a colon (#5889)
+  * Date filters should never raise an exception (#5722)
+  * add `plugins` config key as replacement for `gems` (#5130)
+  * create configuration from options only once in the boot process (#5487)
+  * Add option to fail a build with front matter syntax errors (#5832)
+  * Disable default layouts for documents with a `layout: none` declaration (#5933)
+
+### Documentation
+
+  * Install troubleshooting on Ubuntu (#5817)
+  * Add Termux section on troubleshooting (#5837)
+  * fix ial css classes in theme doc (#5876)
+  * Update installation.md (#5880)
+  * Update Aerobatic docs (#5883)
+  * Add note to collections doc on hard-coded collections. (#5882)
+  * Makes uri_escape template docs more specific. (#5887)
+  * Remove duplicate footnote_nr from default config (#5891)
+  * Fixed tutorial for publishing gem to include repo. (#5900)
+  * update broken links (#5905)
+  * Fix typo in contribution information (#5910)
+  * update plugin repo URL to reflect repo move (#5916)
+  * Update exclude array in configuration.md (#5947)
+  * Fixed path in "Improve this page" link in Tutorials section (#5951)
+  * Corrected permalink (#5949)
+  * Included more details about adding defaults to static files (#5971)
+  * Create buddyworks (#5962)
+  * added (buddyworks) to ci list (#5965)
+  * Add a tutorial on serving custom Error 404 page (#5946)
+  * add custom 404 to tutorial navigation (#5978)
+  * Add link to order of interpretation tutorial in Tutorials nav (#5952)
+  * Document Jekyll's Philosophy (#5792)
+  * Require Ruby > 2.1.0 (#5983)
+  * Fix broken link (#5994)
+  * Default options for script/proof (#5995)
+  * Mention Bash on Ubuntu on Windows (#5960)
+  * Document `--unpublished` flag introduced in 91e9ecf (#5959)
+  * Update upgrading.md to mention usage of `bundle update` (#5604)
+  * Fix missing quotation mark (#6002)
+  * New tutorial: Convert an HTML site to Jekyll (#5881)
+  * Revamp Permalink section (#5912)
+  * Fixup tutorial on creating theme from existing HTML templates (#6006)
+  * Standardise on "URLs" without apostrophe in docs (#6018)
+  * Added txtpen in tutorial (#6021)
+  * fix typo using past participle (#6026)
+  * changed formatting to fit the style of the documentation (#6027)
+  * doc fix typo word usage (#6028)
+  * corrected reference to layout in index.md (#6032)
+  * (Minor) Update MathJax CDN (#6013)
+  * Add MvvmCross to samples (#6035)
+  * Update travis-ci.md to correct procedure (#6043)
+  * fix sentence in documentation (#6048)
+  * rephrase a sentence in posts.md to be more direct (#6049)
+  * Compress Website Sass output (#6009)
+  * doc correct spelling error (#6050)
+  * adjusted date-format in sitemap (#6053)
+  * Typo fix (welcomed change -> welcome change). (#6070)
+  * Fixed documentation inconsistency (#6068)
+  * Add own plugin -> Jekyll Brand Social Wall (#6064)
+  * Added plugin jekyll-analytics (#6042)
+
+### Development Fixes
+
+  * [Rubocop] add missing comma (#5835)
+  * Appease classifier-reborn (#5934)
+  * Allow releases & development on `*-stable` branches (#5926)
+  * Add script/backport-pr (#5925)
+  * Prefer .yaml over .toml (#5966)
+  * Fix Appveyor with DST-aware cucumber steps (#5961)
+  * Use Rubocop v0.47.1 till we're ready for v0.48 (#5989)
+  * Test against Ruby 2.4.0 (#5687)
+  * rubocop: lib/jekyll/renderer.rb complexity fixes (#5052)
+  * Use yajl-ruby 1.2.2 (now with 2.4 support) (#6007)
+  * Bump Rubocop to v0.48 (#5997)
+  * doc use example.com (#6031)
+  * fix typo (#6040)
+  * Fix CI  (#6044)
+  * Remove `ruby RUBY_VERSION` from generated Gemfile (#5803)
+
 ### Site Enhancements
 
+  * Corrected date for version 3.4.0 (#5842)
+  * Add the correct year to the 3.4.0 release date (#5858)
+  * Add documentation about order of interpretation (#5834)
+  * Documentation on how to build navigation (#5698)
+  * Navigation has been moved out from docs (#5927)
+  * Make links in sidebar for current page more prominent (#5820)
+  * Update normalize.css to v6.0.0 (#6008)
+
+### Bug Fixes
+
+  * Exclude Gemfile by default (#5860)
+  * Convertible#validate_permalink!: ensure the return value of data["permalink"] is a string before asking if it is empty (#5878)
+  * Allow abbreviated post dates (#5920)
+  * Remove dependency on include from default about.md (#5903)
+  * Allow colons in `uri_escape` filter (#5957)
+  * Re-surface missing public methods in `Jekyll::Document` (#5975)
+  * absolute_url should not mangle URL if called more than once (#5789)
+
+### fix
+
+  * Filters#time helper: Duplicate time before calling #localtime. (#5996)
+
+## 3.4.3 / 2017-03-21
+
+  * Backport #5957 for v3.4.x: Allow colons in `uri_escape` filter (#5968)
+
+## 3.4.2 / 2017-03-09
+
+  * Backport #5871 for v3.4.x: Convert StaticFile liquid representation to a Drop & add front matter defaults support to StaticFiles (#5940)
+
+## 3.4.1 / 2017-03-02
+
+  * Backport #5920 for v3.4.x: Allow abbreviated post dates (#5924)
+
+## 3.4.0 / 2017-01-27
+
+### Minor Enhancements
+
+  * Add connector param to `array_to_sentence_string` filter (#5597)
+  * Adds `group_by_exp` filter (#5513)
+  * Use Addressable instead of URI to decode (#5726)
+  * throw IncludeTagError if error occurs in included file (#5767)
+  * Write Jekyll::Utils::Exec.run for running shell commands. (#5640)
+  * Use the current year for the LICENSE of theme (#5712)
+  * Update License (#5713)
+
+### Bug Fixes
+
+  * Escaped regular expressions when using `post_url`. (#5605)
+  * fix date parsing in file names to be stricter (#5609)
+  * Add a module to re-define `ENV["TZ"]` in Windows (#5612)
+  * Use each instead of map to actually return nothing (#5668)
+  * include: fix 'no implicit conversion of nil to String' (#5750)
+  * Don't include the theme's includes_path if it is nil. (#5780)
+  * test double slash when input = '/' (#5542)
+  * use logger.info for related posts (#5822)
+
+### Site Enhancements
+
+  * Use only the used Font Awesome icons. (#5530)
+  * Switch to `https` when possible. (#5611)
+  * Update `_font-awesome.scss` to move .woff file before .ttf (#5614)
+  * Update documentation on updating FontAwesome Iconset (#5655)
+  * [site] Use defaults for docs and news-items (#5744)
+  * Sort gems in `docs/_config.yml` (#5746)
+  * Add missing class (#5791)
+  * Improve template docs (#5694)
+
+### Development Fixes
+
+  * clean unit-test names in `test/test_tags.rb` (#5608)
+  * Add cucumber feature to test for bonafide theme gems (#5384)
+  * Use `assert_nil` instead of `assert_equal nil` (#5652)
+  * Rubocop -a on lib/jekyll (#5666)
+  * Bump to rake 12.0 (#5670)
+  * Rubocop Gemfile (#5671)
+  * update Classifier-Reborn to 2.1.0 (#5711)
+  * Rubocop: fix Rakefile and gemspec (#5745)
+  * Use `assert_nil` (#5725)
+  * Sort gems in `jekyll.gemspec` (#5746)
+  * Rubocop: Require consistent comma in multiline literals (#5761)
+  * Bump rubocop (#5765)
+  * New rubocop security checks (#5768)
+  * test/helper: fix flaky plugin path test by removing calls to Dir.chdir without a block (#5779)
+  * Use latest jemoji gem (#5782)
+  * Bump htmlproofer (#5781)
+  * Bump rubies we test against (#5784)
+  * Bump rdoc to v5.0 (#5797)
+  * Bump codeclimate-test-reporter to v1.0.5 (#5798)
+
+### Documentation
+
+  * Improve quickstart docs (#5689)
+  * Add Jekyll-Post to list of plugins (#5705)
+  * Add jekyll-numbered-headings (#5688)
+  * Docs: move permalinks from documents into config (#5544)
+  * Improve collections docs (#5691)
+  * Fix #5730: add gcc and make to the list of requirements (#5731)
   * Remove instructions to install Jekyll 2 on Windows (#5582)
   * Fix example URL inconsistency (#5592)
   * Replace backticks within HTML blocks with HTML tags (#5435)
   * Add jekyll-migrate-permalink (#5600)
   * Fix bad config YAML in collections example (#5587)
   * Bring documentation on 'Directory Structure' up-to-date (#5573)
-  * Use only the used Font Awesome icons. (#5530)
-  * Switch to `https` when possible. (#5611)
-  * Update `_font-awesome.scss` to move .woff file before .ttf (#5614)
-
-### Minor Enhancements
-
-  * Add connector param to array_to_sentence_string filter (#5597)
-
-### Bug Fixes
-
-  * Escaped regular expressions when using post_url. (#5605)
-  * fix date parsing in file names to be stricter (#5609)
-
-### Development Fixes
-
-  * clean unit-test names in `test/test_tags.rb` (#5608)
-  * Add cucumber feature to test for bonafide theme gems (#5384)
+  * Fixed typo (#5632)
+  * use backticks for Gemfile for consistency since in the next sentence … (#5641)
+  * Update Core team list in the README file (#5643)
+  * Improve Permalinks documentation. (#5653)
+  * Fix typo in Variables doc page (#5657)
+  * Fix a couple of typos in the docs (#5658)
+  * Update windows.md (#5683)
+  * Improve permalinks docs (#5693)
+  * Document --unpublished build option (#5720)
+  * Improve pages docs (#5692)
+  * Added new includes.md topic to docs (#5696)
+  * Replace a dead link with a web-archived one (#5738)
+  * Remove duplicate paragraph. (#5740)
+  * Addition of a sample "typical post" (#5473)
+  * Fix a minor grammatical mistake on themes' document ### -dev (#5748)
+  * Correct comments in data_reader.rb (#5621)
+  * Add jekyll-pre-commit to plugins list (#5752)
+  * Update quickstart.md (#5758)
+  * Correct minor typo (#5764)
+  * Fix a markdown link to look properly on the web (#5769)
+  * [docs] Info about the help command usage (#5312)
+  * Add missing merge labels for jekyllbot (#5753)
+  * Fix broken links in documentation (#5736)
+  * Docs: add `match_regex` and `replace_regex` filters (#5799)
+  * Got that diaper money? (#5810)
+  * Sort content by popularity using Google Analytics (#5812)
+  * Rework CI doc to include multiple providers. (#5815)
+  * Improve theme docs (#5690)
+  * Add mention of classifier-reborn for LSI (#5811)
+  * Added note about --blank flag (#5802)
+  * Fixed inaccuracy in "Built-in permalink styles" docs (#5819)
 
 ## 3.3.1 / 2016-11-14
 
@@ -223,7 +421,7 @@
   * Add `show_dir_listing` option for serve command and fix index file names (#4533)
   * Site Template: write a Gemfile which is educational to the new site (#4542)
   * Site template: add explanation of site variables in the example `_config.yml` (#4704)
-  * Adds `link` Liquid tag to make generation of URL's easier (#4624)
+  * Adds `link` Liquid tag to make generation of URLs easier (#4624)
   * Allow static files to be symlinked in unsafe mode or non-prod environments (#4640)
   * Add `:after_init` hook & add `Site#config=` to make resetting config easy (#4703)
   * DocumentDrop: add `#<=>` which sorts by date (falling back to path) (#4741)
@@ -1006,7 +1204,7 @@
   * Fix Rouge's RedCarpet plugin interface integration (#2951)
   * Remove `--watch` from the site template blog post since it defaults to watching in in 2.4.0 (#2922)
   * Fix code for media query mixin in site template (#2946)
-  * Allow post URL's to have `.htm` extensions (#2925)
+  * Allow post URLs to have `.htm` extensions (#2925)
   * `Utils.slugify`: Don't create new objects when gsubbing (#2997)
   * The jsonify filter should deep-convert to Liquid when given an Array. (#3032)
   * Apply `jsonify` filter to Hashes deeply and effectively (#3063)

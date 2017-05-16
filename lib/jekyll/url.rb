@@ -1,4 +1,4 @@
-require "uri"
+require "addressable/uri"
 
 # Public: Methods that generate a URL for a resource such as a Post or a Page.
 #
@@ -35,15 +35,8 @@ module Jekyll
     # The generated relative URL of the resource
     #
     # Returns the String URL
-    # Raises a Jekyll::Errors::InvalidURLError if the relative URL contains a colon
     def to_s
-      sanitized_url = sanitize_url(generated_permalink || generated_url)
-      if sanitized_url.include?(":")
-        raise Jekyll::Errors::InvalidURLError,
-          "The URL #{sanitized_url} is invalid because it contains a colon."
-      else
-        sanitized_url
-      end
+      sanitize_url(generated_permalink || generated_url)
     end
 
     # Generates a URL from the permalink
@@ -145,7 +138,8 @@ module Jekyll
       #   pct-encoded   = "%" HEXDIG HEXDIG
       #   sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
       #                 / "*" / "+" / "," / ";" / "="
-      URI.escape(path, %r{[^a-zA-Z\d\-._~!$&'()*+,;=:@\/]}).encode("utf-8")
+      path = Addressable::URI.encode(path)
+      path.encode("utf-8").sub("#", "%23")
     end
 
     # Unescapes a URL path segment
@@ -159,7 +153,7 @@ module Jekyll
     #
     # Returns the unescaped path.
     def self.unescape_path(path)
-      URI.unescape(path.encode("utf-8"))
+      Addressable::URI.unencode(path.encode("utf-8"))
     end
   end
 end

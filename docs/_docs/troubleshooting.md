@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Troubleshooting
 permalink: /docs/troubleshooting/
 ---
@@ -18,7 +17,7 @@ that might be of help. If the problem you’re experiencing isn’t covered belo
 ## Installation Problems
 
 If you encounter errors during gem installation, you may need to install
-the header files for compiling extension modules for Ruby 2.0.0. This
+the header files for compiling extension modules for Ruby 2.x This
 can be done on Ubuntu or Debian by running:
 
 ```sh
@@ -37,6 +36,15 @@ If you installed the above - specifically on Fedora 23 - but the extensions woul
 sudo dnf install redhat-rpm-config
 ```
 
+On Ubuntu if you get stuck after `bundle exec jekyll serve` and see error
+messages like `Could not locate Gemfile` or `.bundle/ directory`, it's likely
+because all requirements have not been fully met. Recent stock Ubuntu
+distributions require the installation of both the `ruby` and `ruby-all-dev`
+packages:
+
+```sh
+sudo apt-get install ruby ruby-all-dev
+```
 
 On [NearlyFreeSpeech](https://www.nearlyfreespeech.net/) you need to run the
 following commands before installing Jekyll:
@@ -56,6 +64,12 @@ sudo emerge -av dev-ruby/rubygems
 
 On Windows, you may need to install [RubyInstaller
 DevKit](https://wiki.github.com/oneclick/rubyinstaller/development-kit).
+
+On Android (with Termux) you can install all requirements by running: 
+
+```sh
+apt update && apt install libffi-dev clang ruby-dev make
+```
 
 On macOS, you may need to update RubyGems (using `sudo` only if necessary):
 
@@ -181,10 +195,10 @@ That is: defaults are overridden by options specified in `_config.yml`,
 and flags specified at the command-line will override all other settings
 specified elsewhere.
 
-If you encounter an error in building the site, with the error message 
-"'0000-00-00-welcome-to-jekyll.markdown.erb' does not have a valid date in the 
-YAML front matter." try including the line `exclude: [vendor]` 
-in `_config.yml`. 
+If you encounter an error in building the site, with the error message
+"'0000-00-00-welcome-to-jekyll.markdown.erb' does not have a valid date in the
+YAML front matter." try including the line `exclude: [vendor]`
+in `_config.yml`.
 
 ## Markup Problems
 

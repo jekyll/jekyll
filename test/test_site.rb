@@ -20,7 +20,7 @@ class TestSite < JekyllUnitTest
 
     should "have an array for plugins if passed as an array" do
       site = Site.new(site_configuration({
-        "plugins_dir" => ["/tmp/plugins", "/tmp/otherplugins"]
+        "plugins_dir" => ["/tmp/plugins", "/tmp/otherplugins"],
       }))
       array = if Utils::Platforms.windows?
                 ["C:/tmp/plugins", "C:/tmp/otherplugins"]
@@ -48,6 +48,18 @@ class TestSite < JekyllUnitTest
     should "expose baseurl passed in from config" do
       site = Site.new(site_configuration({ "baseurl" => "/blog" }))
       assert_equal "/blog", site.baseurl
+    end
+
+    should "only include theme includes_path if the path exists" do
+      site = fixture_site({ "theme" => "test-theme" })
+      assert_equal [source_dir("_includes"), theme_dir("_includes")],
+        site.includes_load_paths
+
+      allow(File).to receive(:directory?).with(theme_dir("_sass")).and_return(true)
+      allow(File).to receive(:directory?).with(theme_dir("_layouts")).and_return(true)
+      allow(File).to receive(:directory?).with(theme_dir("_includes")).and_return(false)
+      site = fixture_site({ "theme" => "test-theme" })
+      assert_equal [source_dir("_includes")], site.includes_load_paths
     end
   end
   context "creating sites" do
@@ -268,6 +280,24 @@ class TestSite < JekyllUnitTest
           Site.new(site_configuration("destination" => File.join(source_dir, "..")))
         end
       end
+
+      should "raise for bad frontmatter if strict_front_matter is set" do
+        site = Site.new(site_configuration(
+          "collections"         => ["broken"],
+          "strict_front_matter" => true
+        ))
+        assert_raises do
+          site.process
+        end
+      end
+
+      should "not raise for bad frontmatter if strict_front_matter is not set" do
+        site = Site.new(site_configuration(
+          "collections"         => ["broken"],
+          "strict_front_matter" => false
+        ))
+        site.process
+      end
     end
 
     context "with orphaned files in destination" do
@@ -485,7 +515,7 @@ class TestSite < JekyllUnitTest
     context "manipulating the Jekyll environment" do
       setup do
         @site = Site.new(site_configuration({
-          "incremental" => false
+          "incremental" => false,
         }))
         @site.process
         @page = @site.pages.find { |p| p.name == "environment.html" }
@@ -499,7 +529,7 @@ class TestSite < JekyllUnitTest
         setup do
           ENV["JEKYLL_ENV"] = "production"
           @site = Site.new(site_configuration({
-            "incremental" => false
+            "incremental" => false,
           }))
           @site.process
           @page = @site.pages.find { |p| p.name == "environment.html" }
@@ -565,7 +595,7 @@ class TestSite < JekyllUnitTest
     context "incremental build" do
       setup do
         @site = Site.new(site_configuration({
-          "incremental" => true
+          "incremental" => true,
         }))
         @site.read
       end

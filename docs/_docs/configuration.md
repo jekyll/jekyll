@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Configuration
 permalink: /docs/configuration/
 ---
@@ -223,8 +222,18 @@ class="flag">flags</code> (specified on the command-line) that control them.
     </tr>
     <tr class="setting">
       <td>
+        <p class="name"><strong>Unpublished</strong></p>
+        <p class="description">Render posts that were marked as unpublished.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">unpublished: BOOL</code></p>
+        <p><code class="flag">--unpublished</code></p>
+      </td>
+    </tr>
+    <tr class="setting">
+      <td>
         <p class="name"><strong>LSI</strong></p>
-        <p class="description">Produce an index for related posts.</p>
+        <p class="description">Produce an index for related posts. Requires the <a href="http://www.classifier-reborn.com/">classifier-reborn</a> plugin.</p>
       </td>
       <td class="align-center">
         <p><code class="option">lsi: BOOL</code></p>
@@ -294,6 +303,18 @@ class="flag">flags</code> (specified on the command-line) that control them.
       <td class="align-center">
         <p><code class="option">profile: BOOL</code></p>
         <p><code class="flag">--profile</code></p>
+      </td>
+    </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>Strict Front Matter</strong></p>
+        <p class="description">
+            Cause a build to fail if there is a YAML syntax error in a page's front matter.
+        </p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">strict_front_matter: BOOL</code></p>
+        <p><code class="flag">--strict_front_matter</code></p>
       </td>
     </tr>
   </tbody>
@@ -592,12 +613,13 @@ collections:
     output:   true
 
 # Handling Reading
-safe:         false
-include:      [".htaccess"]
-exclude:      ["node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/"]
-keep_files:   [".git", ".svn"]
-encoding:     "utf-8"
-markdown_ext: "markdown,mkdown,mkdn,mkd,md"
+safe:                 false
+include:              [".htaccess"]
+exclude:              ["Gemfile", "Gemfile.lock", "node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/"]
+keep_files:           [".git", ".svn"]
+encoding:             "utf-8"
+markdown_ext:         "markdown,mkdown,mkdn,mkd,md"
+strict_front_matter: false
 
 # Filtering Content
 show_drafts: null
@@ -607,7 +629,7 @@ unpublished: false
 
 # Plugins
 whitelist: []
-gems:      []
+plugins:   []
 
 # Conversion
 markdown:    kramdown
@@ -644,7 +666,6 @@ redcarpet:
 
 kramdown:
   auto_ids:       true
-  footnote_nr:    1
   entity_output:  as_char
   toc_levels:     1..6
   smart_quotes:   lsquo,rsquo,ldquo,rdquo

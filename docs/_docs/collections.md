@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Collections
 permalink: /docs/collections/
 ---
@@ -12,7 +11,13 @@ namespace.
 
 ## Using Collections
 
-### Step 1: Tell Jekyll to read in your collection
+To start using collections, follow these 3 steps:
+
+* [Step 1: Tell Jekyll to read in your collection](#step1)
+* [Step 2: Add your content](#step2)
+* [Step 3: Optionally render your collection's documents into independent files](#step3)
+
+### Step 1: Tell Jekyll to read in your collection {#step1}
 
 Add the following to your site's `_config.yml` file, replacing `my_collection`
 with the name of your collection:
@@ -41,12 +46,12 @@ defaults:
       layout: page
 ```
 
-### Step 2: Add your content
+### Step 2: Add your content {#step2}
 
 Create a corresponding folder (e.g. `<source>/_my_collection`) and add
-documents. YAML Front Matter is read in as data if it exists, and everything
-after it is stuck in the Document's `content` attribute. If no YAML Front
-Matter is provided, Jekyll will not generate the file in your collection.
+documents. YAML front matter is processed if the front matter exists, and everything
+after the front matter is pushed into the document's `content` attribute. If no YAML front
+matter is provided, Jekyll will not generate the file in your collection.
 
 <div class="note info">
   <h5>Be sure to name your directories correctly</h5>
@@ -56,7 +61,7 @@ your <code>_config.yml</code> file, with the addition of the preceding <code>_</
   </p>
 </div>
 
-### Step 3: Optionally render your collection's documents into independent files
+### Step 3: Optionally render your collection's documents into independent files {#step3}
 
 If you'd like Jekyll to create a public-facing, rendered version of each
 document in your collection, set the `output` key to `true` in your collection
@@ -73,19 +78,6 @@ For example, if you have `_my_collection/some_subdir/some_doc.md`,
 it will be rendered using Liquid and the Markdown converter of your
 choice and written out to `<dest>/my_collection/some_subdir/some_doc.html`.
 
-As for posts with [Permalinks](../permalinks/), the document
-URL can be customized by setting `permalink` metadata for the collection:
-
-```yaml
-collections:
-  my_collection:
-    output: true
-    permalink: /awesome/:path/
-```
-
-For example, if you have `_my_collection/some_subdir/some_doc.md`, it will be
-written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
-
 <div class="note info">
   <h5>Don't forget to add YAML for processing</h5>
   <p>
@@ -94,6 +86,78 @@ written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
   output location without processing.
   </p>
 </div>
+
+## Configuring permalinks for collections {#permalinks}
+
+If you wish to specify a custom pattern for the URLs where your Collection pages
+will reside, you may do so with the [`permalink` property](../permalinks/):
+
+```yaml
+collections:
+  my_collection:
+    output: true
+    permalink: /:collection/:name
+```
+
+### Examples
+
+For a collection with the following source file structure,
+
+```
+_my_collection/
+└── some_subdir
+    └── some_doc.md
+```
+
+each of the following `permalink` configurations will produce the document structure shown below it.
+
+* **Default**  
+  Same as `permalink: /:collection/:path`.
+
+  ```
+  _site/
+  ├── my_collection
+  │   └── some_subdir
+  │       └── some_doc.html
+  ...
+  ```
+* `permalink: pretty`  
+  Same as `permalink: /:collection/:path/`.
+
+  ```
+  _site/
+  ├── my_collection
+  │   └── some_subdir
+  │       └── some_doc
+  │           └── index.html
+  ...
+  ```
+* `permalink: /doc/:path`
+
+  ```
+  _site/
+  ├── doc
+  │   └── some_subdir
+  │       └── some_doc.html
+  ...
+  ```
+* `permalink: /doc/:name`
+
+  ```
+  _site/
+  ├── doc
+  │   └── some_doc.html
+  ...
+  ```
+* `permalink: /:name`
+
+  ```
+  _site/
+  ├── some_doc.html
+  ...
+  ```
+
+### Template Variables
 
 <div class="mobile-side-scroller">
 <table>
@@ -106,7 +170,7 @@ written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
   <tbody>
     <tr>
       <td>
-        <p><code>collection</code></p>
+        <p><code>:collection</code></p>
       </td>
       <td>
         <p>Label of the containing collection.</p>
@@ -114,7 +178,7 @@ written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
     </tr>
     <tr>
       <td>
-        <p><code>path</code></p>
+        <p><code>:path</code></p>
       </td>
       <td>
         <p>Path to the document relative to the collection's directory.</p>
@@ -122,7 +186,7 @@ written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
     </tr>
     <tr>
       <td>
-        <p><code>name</code></p>
+        <p><code>:name</code></p>
       </td>
       <td>
         <p>The document's base filename, with every sequence of spaces
@@ -131,7 +195,7 @@ written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
     </tr>
     <tr>
       <td>
-        <p><code>title</code></p>
+        <p><code>:title</code></p>
       </td>
       <td>
         <p>The document's lowercase title (as defined in its <a href="/docs/frontmatter/">front matter</a>), with every sequence of spaces and non-alphanumeric characters replaced by a hyphen. If the document does not define a title in its <a href="/docs/frontmatter/">front matter</a>, this is equivalent to <code>name</code>.</p>
@@ -139,10 +203,10 @@ written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
     </tr>
     <tr>
       <td>
-        <p><code>output_ext</code></p>
+        <p><code>:output_ext</code></p>
       </td>
       <td>
-        <p>Extension of the output file.</p>
+        <p>Extension of the output file. (Included by default and usually unnecessary.)</p>
       </td>
     </tr>
   </tbody>
@@ -153,11 +217,12 @@ written out to `<dest>/awesome/some_subdir/some_doc/index.html`.
 
 ### Collections
 
-Each collection is accessible via the `site` Liquid variable. For example, if
+Each collection is accessible as a field on the `site` variable. For example, if
 you want to access the `albums` collection found in `_albums`, you'd use
-`site.albums`. Each collection is itself an array of documents
-(e.g. `site.albums` is an array of documents, much like `site.pages` and
-`site.posts`). See below for how to access attributes of those documents.
+`site.albums`. 
+
+Each collection is itself an array of documents (e.g., `site.albums` is an array of documents, much like `site.pages` and
+`site.posts`). See the table below for how to access attributes of those documents.
 
 The collections are also available under `site.collections`, with the metadata
 you specified in your `_config.yml` (if present) and the following information:
@@ -235,6 +300,15 @@ you specified in your `_config.yml` (if present) and the following information:
     </tr>
   </tbody>
 </table>
+</div>
+
+<div class="note info">
+  <h5>A Hard-Coded Collection</h5>
+  <p>In addition to any collections you create yourself, the 
+  <code>posts</code> collection is hard-coded into Jekyll. It exists whether 
+  you have a <code>_posts</code> directory or not. This is something to note 
+  when iterating through <code>site.collections</code> as you may need to 
+  filter it out.</p>
 </div>
 
 
@@ -335,7 +409,7 @@ file, each document has the following attributes:
 
 Attributes from the YAML front matter can be accessed as data anywhere in the
 site. Using the above example for configuring a collection as `site.albums`,
-one might have front matter in an individual file structured as follows (which
+you might have front matter in an individual file structured as follows (which
 must use a supported markup format, and cannot be saved with a `.yaml`
 extension):
 

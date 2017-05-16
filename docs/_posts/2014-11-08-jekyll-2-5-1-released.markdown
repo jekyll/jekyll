@@ -1,5 +1,4 @@
 ---
-layout: news_item
 title: 'Jekyll 2.5.1 Released'
 date: 2014-11-09 09:47:52 -0800
 author: parkr

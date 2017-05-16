@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: GitHub Pages
 permalink: /docs/github-pages/
 ---
@@ -12,21 +11,19 @@ content, they’re also a great way to host your Jekyll-powered website for free
 
 Never built a website with GitHub Pages before? [See this marvelous guide by
 Jonathan McGlone to get you up and running](http://jmcglone.com/guides/github-pages/).
-This guide will teach you what you need to know about Git, GitHub, and Jekyll to
-create your very own website on GitHub Pages.
+This guide will teach you what you need to know about Git, GitHub, and Jekyll to create your very own website on GitHub Pages.
 
 ### Project Page URL Structure
 
 Sometimes it's nice to preview your Jekyll site before you push your `gh-pages`
 branch to GitHub. However, the subdirectory-like URL structure GitHub uses for
-Project Pages complicates the proper resolution of URLs. In order to assure your
-site builds properly, use `site.github.url` in your URL's.
+Project Pages complicates the proper resolution of URLs. In order to assure your site builds properly, use `site.github.url` in your URLs.
 
 ```html
 {% raw %}
 <!-- Useful for styles with static names... -->
 <link href="{{ site.github.url }}/path/to/css.css" rel="stylesheet">
-<!-- and for documents/pages whose URL's can change... -->
+<!-- and for documents/pages whose URLs can change... -->
 [{{ page.title }}]("{{ page.url | prepend: site.github.url }}")
 {% endraw %}
 ```
@@ -91,7 +88,7 @@ gem 'github-pages'
 And be sure to run `bundle update` often.
 
 If you like to install `pages-gem` on Windows you can find instructions by Jens Willmer on
-[how to install github-pages gem on Windows (x64)]("https://jwillmer.de/blog/tutorial/how-to-install-jekyll-and-pages-gem-on-windows-10-x46#github-pages-and-plugins").
+[how to install github-pages gem on Windows (x64)](https://jwillmer.de/blog/tutorial/how-to-install-jekyll-and-pages-gem-on-windows-10-x46#github-pages-and-plugins).
 </div>
 
 <div class="note info">
@@ -132,14 +129,14 @@ stored in a specially named `gh-pages` branch or in a `docs` folder on the
 will become available under a subpath of your user pages subdomain, such as
 `username.github.io/project` (unless a custom domain is specified).
 
-The Jekyll project repository itself is a perfect example: the
-[master branch]({{ site.repository }}) contains the actual software project
-for Jekyll, however the Jekyll website (that you’re looking at right now) is
-contained in the [docs folder]({{ site.repository }}/tree/master/docs) of the
-same repository.
+The Jekyll project repository itself is a perfect example of this branch
+structure—the [master branch]({{ site.repository }}) contains the
+actual software project for Jekyll, and the Jekyll website that you’re
+looking at right now is contained in the [docs
+folder]({{ site.repository }}/tree/master/docs) of the same repository.
 
 Please refer to GitHub official documentation on
-[user, organization and projets pages](https://help.github.com/articles/user-organization-and-project-pages/)
+[user, organization and project pages](https://help.github.com/articles/user-organization-and-project-pages/)
 to see more detailed examples.
 
 <div class="note warning">

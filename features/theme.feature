@@ -46,6 +46,13 @@ Feature: Writing themes
     And I should see "default.html from test-theme: I'm content." in "_site/index.html"
     And I should see "post.html from the project: I'm more content." in "_site/post.html"
 
+  Scenario: Requiring dependencies of a theme
+    Given I have a configuration file with "theme" set to "test-dependency-theme"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And the "_site/test.txt" file should exist
+
   Scenario: Complicated site that puts it all together
     Given I have a configuration file with "theme" set to "test-theme"
     And I have a _posts directory

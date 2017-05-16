@@ -4,13 +4,13 @@ class TestExcerpt < JekyllUnitTest
   def setup_post(file)
     Document.new(@site.in_source_dir(File.join("_posts", file)), {
       :site       => @site,
-      :collection => @site.posts
+      :collection => @site.posts,
     }).tap(&:read)
   end
 
   def do_render(document)
     @site.layouts = {
-      "default" => Layout.new(@site, source_dir("_layouts"), "simple.html")
+      "default" => Layout.new(@site, source_dir("_layouts"), "simple.html"),
     }
     document.output = Jekyll::Renderer.new(@site, document, @site.site_payload).run
   end

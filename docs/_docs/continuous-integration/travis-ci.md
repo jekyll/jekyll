@@ -1,16 +1,13 @@
 ---
-layout: docs
-title: Continuous Integration
-permalink: /docs/continuous-integration/
+title: "Travis CI"
 ---
 
 You can easily test your website build against one or more versions of Ruby.
 The following guide will show you how to set up a free build environment on
-[Travis][0], with [GitHub][1] integration for pull requests. Paid
-alternatives exist for private repositories.
+[Travis][travis], with [GitHub][github] integration for pull requests.
 
-[0]: https://travis-ci.org/
-[1]: https://github.com/
+[travis]: https://travis-ci.org/
+[github]: https://github.com/
 
 ## 1. Enabling Travis and GitHub
 
@@ -18,10 +15,9 @@ Enabling Travis builds for your GitHub repository is pretty simple:
 
 1. Go to your profile on travis-ci.org: https://travis-ci.org/profile/username
 2. Find the repository for which you're interested in enabling builds.
-3. Click the slider on the right so it says "ON" and is a dark grey.
+3. Flick the repository switch on so that it turns blue.
 4. Optionally configure the build by clicking on the gear icon. Further
-   configuration happens in your `.travis.yml` file. More details on that
-   below.
+   configuration happens via your `.travis.yml` file. More details below.
 
 ## 2. The Test Script
 
@@ -29,7 +25,7 @@ The simplest test script simply runs `jekyll build` and ensures that Jekyll
 doesn't fail to build the site. It doesn't check the resulting site, but it
 does ensure things are built properly.
 
-When testing Jekyll output, there is no better tool than [html-proofer][2].
+When testing Jekyll output, there is no better tool than [html-proofer][html-proofer].
 This tool checks your resulting site to ensure all links and images exist.
 Utilize it either with the convenient `htmlproofer` command-line executable,
 or write a Ruby script which utilizes the gem.
@@ -71,7 +67,7 @@ Options are given as a second argument to `.new`, and are encoded in a
 symbol-keyed Ruby Hash. For more information about the configuration options,
 check out `html-proofer`'s README file.
 
-[2]: https://github.com/gjtorikian/html-proofer
+[html-proofer]: https://github.com/gjtorikian/html-proofer
 
 ## 3. Configuring Your Travis Builds
 
@@ -94,7 +90,7 @@ Your `.travis.yml` file should look like this:
 ```yaml
 language: ruby
 rvm:
-- 2.2.5
+- 2.3.3
 
 before_script:
  - chmod +x ./script/cibuild # or do this locally and commit
@@ -127,7 +123,7 @@ access to Bundler, RubyGems, and a Ruby runtime.
 
 ```yaml
 rvm:
-- 2.2.5
+- 2.3.3
 ```
 
 RVM is a popular Ruby Version Manager (like rbenv, chruby, etc). This
@@ -229,5 +225,5 @@ an entry in the `.gitignore` file to avoid it from being checked in again.
 This entire guide is open-source. Go ahead and [edit it][3] if you have a
 fix or [ask for help][4] if you run into trouble and need some help.
 
-[3]: https://github.com/jekyll/jekyll/edit/master/docs/_docs/continuous-integration.md
+[3]: https://github.com/jekyll/jekyll/edit/master/docs/_docs/continuous-integration/travis-ci.md
 [4]: https://jekyllrb.com/help/

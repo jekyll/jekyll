@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Deployment methods
 permalink: /docs/deployment-methods/
 ---
@@ -168,7 +167,7 @@ script executes.
 
 [Rack-Jekyll](https://github.com/adaoraul/rack-jekyll/) is an easy way to deploy your site on any Rack server such as Amazon EC2, Slicehost, Heroku, and so forth. It also can run with [shotgun](https://github.com/rtomayko/shotgun/), [rackup](https://github.com/rack/rack), [mongrel](https://github.com/mongrel/mongrel), [unicorn](https://github.com/defunkt/unicorn/), and [others](https://github.com/adaoraul/rack-jekyll#readme).
 
-Read [this post](http://andycroll.com/ruby/serving-a-jekyll-blog-using-heroku) on how to deploy to Heroku using Rack-Jekyll.
+Read [this post](http://andycroll.com/ruby/serving-a-jekyll-blog-using-heroku/) on how to deploy to Heroku using Rack-Jekyll.
 
 ## Jekyll-Admin for Rails
 
@@ -204,7 +203,6 @@ Setting up Kickster is very easy, just install the gem and you are good to go. M
 
 ## Aerobatic
 
-[Aerobatic](https://www.aerobatic.com) is an add-on for Bitbucket that brings GitHub Pages style functionality to Bitbucket users. It includes continuous deployment, custom domains with a wildcard SSL cert, CDN, basic auth, and staging branches all in the box.
+[Aerobatic](https://www.aerobatic.com) has custom domains, global CDN distribution, basic auth, CORS proxying, and a growing list of plugins all included.
 
-Automating the build and deployment of a Jekyll site is just as simple as GitHub Pages - push your changes to your repo (excluding the `_site` directory) and within seconds a build will be triggered and your built site deployed to our highly- available, globally distributed hosting service. The build process will even install and execute custom Ruby plugins. See our [Jekyll docs](https://www.aerobatic.com/docs/static-generators#jekyll) for more details.
-
+Automating the deployment of a Jekyll site is simple. See our [Jekyll docs](https://www.aerobatic.com/docs/static-site-generators/#jekyll) for more details. Your built `_site` folder is deployed to our highly-available, globally distributed hosting service.

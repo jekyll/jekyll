@@ -1,12 +1,12 @@
 ---
-layout: docs
 title: Jekyll on Windows
 permalink: /docs/windows/
 ---
 
 While Windows is not an officially-supported platform, it can be used to run
-Jekyll with the proper tweaks. This page aims to collect some of the general
-knowledge and lessons that have been unearthed by Windows users.
+Jekyll with the proper tweaks. If you are using Windows 10 Anniversary Update, 
+the easiest way to run Jekyll is to use the new [Bash on Ubuntu on Windows](https://msdn.microsoft.com/en-us/commandline/wsl/about?f=255&MSPPError=-2147217396).
+For older installations, this page aims to collect some of the general knowledge and lessons that have been unearthed by Windows users.
 
 ## Installation
 
@@ -15,6 +15,10 @@ A quick way to install Jekyll is to follow the [installation instructions by Dav
  1. Install a package manager for Windows called [Chocolatey](https://chocolatey.org/install)
  2. Install Ruby via Chocolatey: `choco install ruby -y`
  3. Reopen a command prompt and install Jekyll: `gem install jekyll`
+
+Updates in the infrastructure of Ruby may cause SSL errors when attempting to use `gem install` with versions of the RubyGems package older than 2.6. (The RubyGems package installed via the Chocolatey tool is version 2.3) If you have installed an older version, you can update the RubyGems package using the directions [here][ssl-certificate-update].
+
+[ssl-certificate-update]: http://guides.rubygems.org/ssl-certificate-update/#installing-using-update-packages
 
 For a more conventional way of installing Jekyll you can follow this [complete guide to install Jekyll 3 on Windows by Sverrir Sigmundarson][windows-installjekyll3].
 
@@ -32,6 +36,19 @@ the site generation process. It can be done with the following command:
 
 ```sh
 $ chcp 65001
+```
+
+## Timezone Management
+
+Since Windows doesn't have a native source of zoneinfo data, the Ruby Interpreter would not understand IANA Timezones and hence using them had the `TZ` environment variable default to UTC/GMT 00:00.
+Though Windows users could alternatively define their blog's timezone by setting the key to use POSIX format of defining timezones, it wasn't as user-friendly when it came to having the clock altered to changing DST-rules.
+
+Jekyll now uses a rubygem to internally configure Timezone based on established [IANA Timezone Database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+While 'new' blogs created with Jekyll v3.4 and greater, will have the following added to their 'Gemfile' by default, existing sites *will* have to update their 'Gemfile' (and installed) to enable development on Windows:
+
+```ruby
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 ```
 
 ## Auto-regeneration

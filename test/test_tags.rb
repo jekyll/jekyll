@@ -1,4 +1,5 @@
 # coding: utf-8
+
 require "helper"
 
 class TestTags < JekyllUnitTest
@@ -17,7 +18,7 @@ class TestTags < JekyllUnitTest
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
     @converter = site.converters.find { |c| c.class == converter_class }
     payload = { "highlighter_prefix" => @converter.highlighter_prefix,
-                "highlighter_suffix" => @converter.highlighter_suffix }
+                "highlighter_suffix" => @converter.highlighter_suffix, }
 
     @result = Liquid::Template.parse(content).render!(payload, info)
     @result = @converter.convert(@result)
@@ -46,8 +47,8 @@ CONTENT
     Jekyll::Tags::HighlightBlock.parse(
       "highlight",
       options_string,
-      ["test", "{% endhighlight %}", "\n"],
-      {}
+      Liquid::Tokenizer.new("test{% endhighlight %}\n"),
+      Liquid::ParseContext.new
     )
   end
 
@@ -487,7 +488,7 @@ CONTENT
         end
 
         create_post(@content, {
-          "markdown" => "rdiscount"
+          "markdown" => "rdiscount",
         })
       end
 
@@ -517,7 +518,7 @@ CONTENT
         end
 
         create_post(@content, {
-          "markdown" => "redcarpet"
+          "markdown" => "redcarpet",
         })
       end
 
@@ -541,7 +542,7 @@ CONTENT
         "permalink"   => "pretty",
         "source"      => source_dir,
         "destination" => dest_dir,
-        "read_posts"  => true
+        "read_posts"  => true,
       })
     end
 
@@ -567,7 +568,7 @@ CONTENT
         "permalink"   => "pretty",
         "source"      => source_dir,
         "destination" => dest_dir,
-        "read_posts"  => true
+        "read_posts"  => true,
       })
     end
 
@@ -596,7 +597,7 @@ CONTENT
         "permalink"   => "pretty",
         "source"      => source_dir,
         "destination" => dest_dir,
-        "read_posts"  => true
+        "read_posts"  => true,
       })
     end
 
@@ -628,7 +629,7 @@ CONTENT
         "permalink"   => "pretty",
         "source"      => source_dir,
         "destination" => dest_dir,
-        "read_posts"  => true
+        "read_posts"  => true,
       })
     end
 
@@ -642,7 +643,7 @@ CONTENT
 
     should "throw a deprecation warning" do
       deprecation_warning = "       Deprecation: A call to "\
-        "'{{ post_url 2008-11-21-nested }}' did not match a post using the new matching "\
+        "'{% post_url 2008-11-21-nested %}' did not match a post using the new matching "\
         "method of checking name (path-date-slug) equality. Please make sure that you "\
         "change this tag to match the post's name exactly."
       assert_includes Jekyll.logger.messages, deprecation_warning
@@ -664,7 +665,7 @@ CONTENT
           "permalink"   => "pretty",
           "source"      => source_dir,
           "destination" => dest_dir,
-          "read_posts"  => true
+          "read_posts"  => true,
         })
       end
     end
@@ -683,7 +684,7 @@ CONTENT
           "permalink"   => "pretty",
           "source"      => source_dir,
           "destination" => dest_dir,
-          "read_posts"  => true
+          "read_posts"  => true,
         })
       end
     end
@@ -703,7 +704,7 @@ CONTENT
       create_post(content, {
         "source"      => source_dir,
         "destination" => dest_dir,
-        "read_all"    => true
+        "read_all"    => true,
       })
     end
 
@@ -737,7 +738,7 @@ CONTENT
         "source"           => source_dir,
         "destination"      => dest_dir,
         "collections"      => { "methods" => { "output" => true } },
-        "read_collections" => true
+        "read_collections" => true,
       })
     end
 
@@ -764,7 +765,7 @@ CONTENT
         "source"           => source_dir,
         "destination"      => dest_dir,
         "collections"      => { "methods" => { "output" => true } },
-        "read_collections" => true
+        "read_collections" => true,
       })
     end
 
@@ -796,7 +797,7 @@ CONTENT
           "source"           => source_dir,
           "destination"      => dest_dir,
           "collections"      => { "methods" => { "output" => true } },
-          "read_collections" => true
+          "read_collections" => true,
         })
       end
     end
@@ -820,7 +821,7 @@ CONTENT
             "source"      => source_dir,
             "destination" => dest_dir,
             "read_posts"  => true,
-            "safe"        => true
+            "safe"        => true,
           })
         end
         @result ||= ""
@@ -842,7 +843,7 @@ CONTENT
             "source"      => source_dir,
             "destination" => dest_dir,
             "read_posts"  => true,
-            "safe"        => true
+            "safe"        => true,
           })
         end
         assert_match(
@@ -868,7 +869,7 @@ CONTENT
           "permalink"   => "pretty",
           "source"      => source_dir,
           "destination" => dest_dir,
-          "read_posts"  => true
+          "read_posts"  => true,
         })
       end
 
@@ -896,7 +897,7 @@ CONTENT
             "permalink"   => "pretty",
             "source"      => source_dir,
             "destination" => dest_dir,
-            "read_posts"  => true
+            "read_posts"  => true,
           })
         end
 
@@ -913,7 +914,7 @@ CONTENT
             "permalink"   => "pretty",
             "source"      => source_dir,
             "destination" => dest_dir,
-            "read_posts"  => true
+            "read_posts"  => true,
           })
         end
       end
@@ -932,7 +933,7 @@ CONTENT
           "permalink"   => "pretty",
           "source"      => source_dir,
           "destination" => dest_dir,
-          "read_posts"  => true
+          "read_posts"  => true,
         })
       end
 
@@ -959,7 +960,7 @@ CONTENT
           "permalink"   => "pretty",
           "source"      => source_dir,
           "destination" => dest_dir,
-          "read_posts"  => true
+          "read_posts"  => true,
         })
       end
 
@@ -982,7 +983,7 @@ CONTENT
           "permalink"    => "pretty",
           "source"       => source_dir,
           "destination"  => dest_dir,
-          "read_posts"   => true
+          "read_posts"   => true,
         })
       end
 
@@ -1004,7 +1005,7 @@ CONTENT
           "permalink"   => "pretty",
           "source"      => source_dir,
           "destination" => dest_dir,
-          "read_posts"  => true
+          "read_posts"  => true,
         })
       end
 
@@ -1030,7 +1031,7 @@ CONTENT
             "permalink"   => "pretty",
             "source"      => source_dir,
             "destination" => dest_dir,
-            "read_posts"  => true
+            "read_posts"  => true,
           })
         end
         assert_match(
@@ -1125,7 +1126,7 @@ CONTENT
               "permalink"   => "pretty",
               "source"      => source_dir,
               "destination" => dest_dir,
-              "read_posts"  => true
+              "read_posts"  => true,
             })
           end
           assert_match "Could not locate the included file 'missing.html' in any of " \
@@ -1150,7 +1151,7 @@ CONTENT
               "permalink"   => "pretty",
               "source"      => source_dir,
               "destination" => dest_dir,
-              "read_posts"  => true
+              "read_posts"  => true,
             })
           end
           assert_equal(
@@ -1180,7 +1181,7 @@ CONTENT
             "source"      => source_dir,
             "destination" => dest_dir,
             "read_posts"  => true,
-            "safe"        => true
+            "safe"        => true,
           })
         end
         @result ||= ""
@@ -1202,7 +1203,7 @@ CONTENT
             "source"      => source_dir,
             "destination" => dest_dir,
             "read_posts"  => true,
-            "safe"        => true
+            "safe"        => true,
           })
         end
         assert_match(

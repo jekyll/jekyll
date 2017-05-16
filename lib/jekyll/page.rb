@@ -58,7 +58,7 @@ module Jekyll
 
     # The generated directory into which the page will be placed
     # upon generation. This is derived from the permalink or, if
-    # permalink is absent, we be '/'
+    # permalink is absent, will be '/'
     #
     # Returns the String destination directory.
     def dir
@@ -98,7 +98,7 @@ module Jekyll
       @url ||= URL.new({
         :template     => template,
         :placeholders => url_placeholders,
-        :permalink    => permalink
+        :permalink    => permalink,
       }).to_s
     end
 
@@ -108,7 +108,7 @@ module Jekyll
       {
         :path       => @dir,
         :basename   => basename,
-        :output_ext => output_ext
+        :output_ext => output_ext,
       }
     end
 
@@ -127,7 +127,7 @@ module Jekyll
     # layouts      - The Hash of {"name" => "layout"}.
     # site_payload - The site payload Hash.
     #
-    # Returns nothing.
+    # Returns String rendered page.
     def render(layouts, site_payload)
       site_payload["page"] = to_liquid
       site_payload["paginator"] = pager.to_liquid

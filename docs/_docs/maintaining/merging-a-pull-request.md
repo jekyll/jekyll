@@ -1,7 +1,5 @@
 ---
 title: "Merging a Pull Request"
-layout: docs
-permalink: /docs/maintaining/merging-a-pull-request/
 ---
 
 **This guide is for maintainers.** These special people have **write access** to one or more of Jekyll's repositories and help merge the contributions of others. You may find what is written here interesting, but it’s definitely not for everyone.
@@ -39,8 +37,10 @@ The categories match the H3's in the history/changelog file, and they are:
 1. Major Enhancements (`+major`) – major updates or breaking changes to the code which necessitate a major version bump (v3 ~> v4)
 2. Minor Enhancements (`+minor`) – minor updates (feature, enhancement) which necessitate a minor version bump (v3.1 ~> v3.2)
 3. Bug Fixes (`+bug`) – corrections to code which do not change or add functionality, which necessitate a patch version bump (v3.1.0 ~> v3.1.1)
-4. Site Enhancements (`+site`) – changes to the source of https://jekyllrb.com, found in `site/`
-5. Development Fixes (`+dev`) – changes which do not affect user-facing functionality or documentation, such as test fixes or bumping internal dependencies
+4. Documentation (`+doc`) - changes to the documentation found in `docs/_docs/`
+5. Site Enhancements (`+site`) – changes to the source of [https://jekyllrb.com](https://jekyllrb.com) found in `docs/`
+6. Development Fixes (`+dev`) – changes which do not affect user-facing functionality or documentation, such as test fixes or bumping internal dependencies
+7. Forward Ports (`+port`) — bug fixes applied to a previous version of Jekyll pulled onto `master`, e.g. cherry-picked commits from `3-1-stable` to `master`
 
 Once @jekyllbot has merged the pull request, you should see three things:
 

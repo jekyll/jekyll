@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Writing posts
 permalink: /docs/posts/
 ---
@@ -43,8 +42,8 @@ file. For example, the following are examples of valid post filenames:
 <div class="note">
   <h5>ProTip™: Link to other posts</h5>
   <p>
-    Use the <a href="../templates/#post-url"><code>post_url</code></a>
-    tag to link to other posts without having to worry about the URL's
+    Use the <a href="../templates/#linking-to-posts"><code>post_url</code></a>
+    tag to link to other posts without having to worry about the URLs
     breaking when the site permalink style changes.
   </p>
 </div>
@@ -79,7 +78,7 @@ digital assets along with your text content. While the syntax for linking to
 these resources differs between Markdown and Textile, the problem of working
 out where to store these files in your site is something everyone will face.
 
-Because of Jekyll’s flexibility, there are many solutions to how to do this.
+There are a number of ways to include digital assets in Jekyll. 
 One common solution is to create a folder in the root of the project directory
 called something like `assets` or `downloads`, into which any images, downloads
 or other resources are placed. Then, from within any post, they can be linked
@@ -110,6 +109,24 @@ Linking to a PDF for readers to download:
     just <code>/path/file.jpg</code>.
   </p>
 </div>
+
+## A typical post
+
+Jekyll can handle many different iterations of the idea you might associate with a "post," however a standard blog style post, including a Title, Layout, Publishing Date, and Categories might look like this:
+
+```
+---
+layout: post
+title:  "Welcome to Jekyll!"
+date:   2015-11-17 16:16:01 -0600
+categories: jekyll update
+---
+You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `bundle exec jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
+
+To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+
+```
+Everything in between the first and second `---` are part of the YAML Front Matter, and everything after the second `---` will be rendered with Markdown and show up as "Content."
 
 ## Displaying an index of posts
 

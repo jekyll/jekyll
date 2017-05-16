@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Assets
 permalink: /docs/assets/
 ---
@@ -89,6 +88,6 @@ To enable Coffeescript in Jekyll 3.0 and up you must
 * Ensure that your `_config.yml` is up-to-date and includes the following:
 
 ```yaml
-gems:
+plugins:
  - jekyll-coffeescript
 ```

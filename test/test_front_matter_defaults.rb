@@ -7,12 +7,12 @@ class TestFrontMatterDefaults < JekyllUnitTest
         "defaults" => [{
           "scope"  => {
             "path" => "contacts",
-            "type" => "page"
+            "type" => "page",
           },
           "values" => {
-            "key" => "val"
-          }
-        }]
+            "key" => "val",
+          },
+        },],
       })
       @site.process
       @affected = @site.pages.find { |page| page.relative_path == "contacts/bar.html" }
@@ -21,7 +21,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
 
     should "affect only the specified path and type" do
       assert_equal @affected.data["key"], "val"
-      assert_equal @not_affected.data["key"], nil
+      assert_nil @not_affected.data["key"]
     end
   end
 
@@ -30,12 +30,12 @@ class TestFrontMatterDefaults < JekyllUnitTest
       @site = fixture_site({
         "defaults" => [{
           "scope"  => {
-            "path" => "index.html"
+            "path" => "index.html",
           },
           "values" => {
-            "key" => "val"
-          }
-        }]
+            "key" => "val",
+          },
+        },],
       })
 
       @site.process
@@ -45,7 +45,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
 
     should "affect only the specified path" do
       assert_equal @affected.data["key"], "val"
-      assert_equal @not_affected.data["key"], nil
+      assert_nil @not_affected.data["key"]
     end
   end
 
@@ -54,12 +54,12 @@ class TestFrontMatterDefaults < JekyllUnitTest
       @site = fixture_site({
         "defaults" => [{
           "scope"  => {
-            "path" => "win"
+            "path" => "win",
           },
           "values" => {
-            "key" => "val"
-          }
-        }]
+            "key" => "val",
+          },
+        },],
       })
 
       @site.process
@@ -69,7 +69,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
 
     should "affect only the specified path and all types" do
       assert_equal @affected.data["key"], "val"
-      assert_equal @not_affected.data["key"], nil
+      assert_nil @not_affected.data["key"]
     end
   end
 
@@ -78,12 +78,12 @@ class TestFrontMatterDefaults < JekyllUnitTest
       @site = fixture_site({
         "defaults" => [{
           "scope"  => {
-            "type" => "page"
+            "type" => "page",
           },
           "values" => {
-            "key" => "val"
-          }
-        }]
+            "key" => "val",
+          },
+        },],
       })
 
       @site.process
@@ -103,12 +103,12 @@ class TestFrontMatterDefaults < JekyllUnitTest
       @site = fixture_site({
         "defaults" => [{
           "scope"  => {
-            "type" => "pages"
+            "type" => "pages",
           },
           "values" => {
-            "key" => "val"
-          }
-        }]
+            "key" => "val",
+          },
+        },],
       })
       @site.process
       @affected = @site.pages
@@ -129,9 +129,9 @@ class TestFrontMatterDefaults < JekyllUnitTest
           "scope"  => {
           },
           "values" => {
-            "key" => "val"
-          }
-        }]
+            "key" => "val",
+          },
+        },],
       })
       @site.process
       @affected = @site.pages
@@ -149,9 +149,9 @@ class TestFrontMatterDefaults < JekyllUnitTest
       @site = fixture_site({
         "defaults" => [{
           "values" => {
-            "key" => "val"
-          }
-        }]
+            "key" => "val",
+          },
+        },],
       })
       @site.process
       @affected = @site.pages
@@ -171,9 +171,9 @@ class TestFrontMatterDefaults < JekyllUnitTest
         "destination" => dest_dir,
         "defaults"    => [{
           "values" => {
-            "date" => "2015-01-01 00:00:01"
-          }
-        }]
+            "date" => "2015-01-01 00:00:01",
+          },
+        },],
       }))
     end
 
@@ -184,8 +184,8 @@ class TestFrontMatterDefaults < JekyllUnitTest
     should "parse date" do
       @site.process
       date = Time.parse("2015-01-01 00:00:01")
-      assert @site.pages.find { |page| page.data["date"] == date }
-      assert @site.posts.find { |page| page.data["date"] == date }
+      assert(@site.pages.find { |page| page.data["date"] == date })
+      assert(@site.posts.find { |page| page.data["date"] == date })
     end
   end
 end

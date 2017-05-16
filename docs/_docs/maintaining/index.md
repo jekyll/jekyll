@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Maintaining Jekyll
 permalink: /docs/maintaining/
 ---

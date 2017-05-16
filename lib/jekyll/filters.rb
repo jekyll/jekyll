@@ -1,4 +1,4 @@
-require "uri"
+require "addressable/uri"
 require "json"
 require "date"
 require "liquid"
@@ -8,6 +8,8 @@ require_all "jekyll/filters"
 module Jekyll
   module Filters
     include URLFilters
+    include GroupingFilters
+
     # Convert a Markdown string into HTML output.
     #
     # input - The Markdown String to convert.
@@ -78,6 +80,7 @@ module Jekyll
     #
     # Returns the formatted String.
     def date_to_long_string(date)
+      return date if date.to_s.empty?
       time(date).strftime("%d %B %Y")
     end
 
@@ -92,6 +95,7 @@ module Jekyll
     #
     # Returns the formatted String.
     def date_to_xmlschema(date)
+      return date if date.to_s.empty?
       time(date).xmlschema
     end
 
@@ -106,6 +110,7 @@ module Jekyll
     #
     # Returns the formatted String.
     def date_to_rfc822(date)
+      return date if date.to_s.empty?
       time(date).rfc822
     end
 
@@ -150,7 +155,7 @@ module Jekyll
     #
     # Returns the escaped String.
     def uri_escape(input)
-      URI.escape(input)
+      Addressable::URI.normalize_component(input)
     end
 
     # Replace any whitespace in the input string with a single space
@@ -203,29 +208,6 @@ module Jekyll
     # Returns the converted json string
     def jsonify(input)
       as_liquid(input).to_json
-    end
-
-    # Group an array of items by a property
-    #
-    # input - the inputted Enumerable
-    # property - the property
-    #
-    # Returns an array of Hashes, each looking something like this:
-    #  {"name"  => "larry"
-    #   "items" => [...] } # all the items where `property` == "larry"
-    def group_by(input, property)
-      if groupable?(input)
-        input.group_by { |item| item_property(item, property).to_s }
-          .each_with_object([]) do |item, array|
-            array << {
-              "name"  => item.first,
-              "items" => item.last,
-              "size"  => item.last.size
-            }
-          end
-      else
-        input
-      end
     end
 
     # Filter an array of objects
@@ -301,10 +283,11 @@ module Jekyll
       end
     end
 
-    def pop(array, input = 1)
+    def pop(array, num = 1)
       return array unless array.is_a?(Array)
+      num = Liquid::Utils.to_integer(num)
       new_ary = array.dup
-      new_ary.pop(input.to_i || 1)
+      new_ary.pop(num)
       new_ary
     end
 
@@ -315,10 +298,11 @@ module Jekyll
       new_ary
     end
 
-    def shift(array, input = 1)
+    def shift(array, num = 1)
       return array unless array.is_a?(Array)
+      num = Liquid::Utils.to_integer(num)
       new_ary = array.dup
-      new_ary.shift(input.to_i || 1)
+      new_ary.shift(num)
       new_ary
     end
 
@@ -331,11 +315,11 @@ module Jekyll
 
     def sample(input, num = 1)
       return input unless input.respond_to?(:sample)
-      n = num.to_i rescue 1
-      if n == 1
+      num = Liquid::Utils.to_integer(num) rescue 1
+      if num == 1
         input.sample
       else
-        input.sample(n)
+        input.sample(num)
       end
     end
 
@@ -366,24 +350,12 @@ module Jekyll
 
     private
     def time(input)
-      case input
-      when Time
-        input.clone
-      when Date
-        input.to_time
-      when String
-        Time.parse(input) rescue Time.at(input.to_i)
-      when Numeric
-        Time.at(input)
-      else
+      date = Liquid::Utils.to_date(input)
+      unless date.respond_to?(:to_time)
         raise Errors::InvalidDateError,
           "Invalid Date: '#{input.inspect}' is not a valid datetime."
-      end.localtime
-    end
-
-    private
-    def groupable?(element)
-      element.respond_to?(:group_by)
+      end
+      date.to_time.dup.localtime
     end
 
     private
@@ -430,14 +402,17 @@ module Jekyll
       operator = parser.consume?(:comparison)
       condition =
         if operator
-          Liquid::Condition.new(left_expr, operator, parser.expression)
+          Liquid::Condition.new(Liquid::Expression.parse(left_expr),
+                                operator,
+                                Liquid::Expression.parse(parser.expression))
         else
-          Liquid::Condition.new(left_expr)
+          Liquid::Condition.new(Liquid::Expression.parse(left_expr))
         end
       parser.consume(:end_of_string)
 
       condition
     end
+
   end
 end
 

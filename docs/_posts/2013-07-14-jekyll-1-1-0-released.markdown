@@ -1,5 +1,4 @@
 ---
-layout: news_item
 title: "Jekyll 1.1.0 Released"
 date: "2013-07-14 19:38:02 +0200"
 author: parkr

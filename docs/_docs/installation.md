@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Installation
 permalink: /docs/installation/
 ---
@@ -11,21 +10,33 @@ encountered and how we might make the process easier.
 
 ### Requirements
 
-Installing Jekyll is easy and straight-forward, but there are a few
-requirements you’ll need to make sure your system has before you start.
+Installing Jekyll should be straight-forward if all requirements are met.
+Before you start, make sure your system has the following:
 
-- [Ruby](https://www.ruby-lang.org/en/downloads/) (including development
-  headers, v1.9.3 or above for Jekyll 2 and v2 or above for Jekyll 3)
+- GNU/Linux, Unix, or macOS
+- [Ruby](https://www.ruby-lang.org/en/downloads/) version 2.0 or above, including all development
+  headers
 - [RubyGems](https://rubygems.org/pages/download)
-- Linux, Unix, or macOS
-- [NodeJS](https://nodejs.org/), or another JavaScript runtime (Jekyll 2 and
-earlier, for CoffeeScript support).
-- [Python 2.7](https://www.python.org/downloads/) (for Jekyll 2 and earlier)
+- [GCC](https://gcc.gnu.org/install/) and [Make](https://www.gnu.org/software/make/) (in case your system doesn't have them installed, which you can check by running `gcc -v` and `make -v` in your system's command line interface)
+
+#### Only required for Jekyll 2 and earlier
+
+- [NodeJS](https://nodejs.org/), or another JavaScript runtime (for CoffeeScript support).
+- [Python 2.7](https://www.python.org/downloads/)
+
+<div class="note info">
+  <h5>Problems installing Jekyll?</h5>
+  <p>
+    Check out the <a href="../troubleshooting/">troubleshooting</a> page or
+    <a href="{{ site.repository }}/issues/new">report an issue</a> so the
+    Jekyll community can improve the experience for everyone.
+  </p>
+</div>
 
 <div class="note info">
   <h5>Running Jekyll on Windows</h5>
   <p>
-    While Windows is not officially supported, it is possible to get it running
+    While Windows is not officially supported, it is possible to get Jekyll running
     on Windows. Special instructions can be found on our
     <a href="../windows/#installation">Windows-specific docs page</a>.
   </p>
@@ -42,10 +53,7 @@ $ gem install jekyll
 ```
 
 All of Jekyll’s gem dependencies are automatically installed by the above
-command, so you won’t have to worry about them at all. If you have problems
-installing Jekyll, check out the [troubleshooting](../troubleshooting/) page or
-[report an issue]({{ site.repository }}/issues/new) so the Jekyll
-community can improve the experience for everyone.
+command, so you won’t have to worry about them at all.
 
 <div class="note info">
   <h5>Installing Xcode Command-Line Tools</h5>

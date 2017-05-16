@@ -10,6 +10,7 @@ module Jekyll
       # Returns the absolute URL as a String.
       def absolute_url(input)
         return if input.nil?
+        return input if Addressable::URI.parse(input).absolute?
         site = @context.registers[:site]
         return relative_url(input).to_s if site.config["url"].nil?
         Addressable::URI.parse(site.config["url"] + relative_url(input)).normalize.to_s

@@ -1,5 +1,4 @@
 ---
-layout: docs
 title: Front Matter
 permalink: /docs/frontmatter/
 ---
@@ -100,6 +99,14 @@ front matter of a page or post.
 </table>
 </div>
 
+<div class="note">
+  <h5>ProTip™: Render Posts Marked As Unpublished</h5>
+  <p>
+    To preview unpublished pages, simply run `jekyll serve` or `jekyll build`
+    with the `--unpublished` switch. Jekyll also has a handy <a href="../drafts/">drafts</a>
+    feature tailored specifically for blog posts.
+  </p>
+</div>
 
 ## Custom Variables
 

@@ -17,7 +17,7 @@ module Jekyll
         :yellow  => 33,
         :white   => 37,
         :blue    => 34,
-        :cyan    => 36
+        :cyan    => 36,
       }.freeze
 
       # Strip ANSI from the current string.  It also strips cursor stuff,

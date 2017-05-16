@@ -1,5 +1,4 @@
 ---
-layout: news_item
 title: "Jekyll Meet & Greet at GitHub HQ"
 date: "2015-01-20 19:23:12 -0800"
 author: parkr

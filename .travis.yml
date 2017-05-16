@@ -5,10 +5,11 @@ language: ruby
 sudo: false
 
 rvm:
-  - &ruby1 2.3.1
-  - &ruby2 2.2.5
-  - &ruby3 2.1.9
-  - &jruby jruby-9.1.2.0
+  - &ruby1 2.4.1
+  - &ruby2 2.3.4
+  - &ruby3 2.2.7
+  - &ruby4 2.1.10
+  - &jruby jruby-9.1.7.0
 
 matrix:
   include:
@@ -28,6 +29,7 @@ branches:
   only:
     - master
     - themes
+    - /*-stable/
 
 notifications:
   slack:
@@ -45,3 +47,9 @@ addons:
         DA4vsRURfABU0fIhwYkQuZqEcA3d8TL36BZcGEshG6MQ2AmnYsmFiTcxqV5bmlElHEqQuT\
         5SUFXLafgZPBnL0qDwujQcHukID41sE=\
       "
+# regular test configuration
+after_success:
+  - bundle exec codeclimate-test-reporter
+
+before_install:
+  - gem update --system

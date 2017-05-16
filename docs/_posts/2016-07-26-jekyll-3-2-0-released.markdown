@@ -1,5 +1,4 @@
 ---
-layout: news_item
 title: 'Jekyll turns 3.2'
 date: 2016-07-26 15:06:49 -0700
 author: parkr
@@ -23,7 +22,7 @@ Some other notable changes:
 - Explicit support for Ruby 2.0.x was dropped
 - Added an `:after_init` Hook
 - Added a `where_exp` filter to provide more powerful filtering
-- Added a `link` liquid tag which can be used to generate URL's for any
+- Added a `link` liquid tag which can be used to generate URLs for any
 post or document based on its path relative to the site source
 - ... and lots more!
 

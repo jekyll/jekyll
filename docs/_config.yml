@@ -1,5 +1,7 @@
 markdown: kramdown
 highlighter: rouge
+sass:
+  style: compressed
 
 gauges_id: 503c5af6613f5d0f19000027
 google_analytics_id: UA-50755011-1
@@ -10,11 +12,29 @@ help_url: https://github.com/jekyll/jekyll-help
 
 timezone: America/Los_Angeles
 
+defaults:
+  -
+    scope:
+      path: "_docs"
+      type: "docs"
+    values:
+      layout: "docs"
+  -
+    scope:
+      path: "_posts"
+      type: "posts"
+    values:
+      layout: "news_item"
+
+
 collections:
   docs:
+    permalink: /:collection/:path/
     output: true
   posts:
     permalink: /news/:year/:month/:day/:title/
+    output: true
+  tutorials:
     output: true
 
 name: Jekyll • Simple, blog-aware, static sites
@@ -27,14 +47,14 @@ twitter:
 logo: /img/logo-2x.png
 
 gems:
-  - jekyll-feed
-  - jekyll-redirect-from
-  - jemoji
-  - jekyll-sitemap
-  - jekyll-seo-tag
   - jekyll-avatar
+  - jekyll-feed
   - jekyll-mentions
+  - jekyll-redirect-from
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jemoji
 
 exclude:
-  - README.md
   - .gitignore
+  - README.md

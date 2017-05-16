@@ -12,6 +12,15 @@ Feature: Rendering
     Then  I should get a non-zero exit-status
     And   I should see "Liquid Exception" in the build output
 
+  Scenario: When receiving bad Liquid in included file
+    Given I have a _includes directory
+    And   I have a "_includes/invalid.html" file that contains "{% INVALID %}"
+    And   I have a "index.html" page with layout "simple" that contains "{% include invalid.html %}"
+    And   I have a simple layout that contains "{{ content }}"
+    When  I run jekyll build
+    Then  I should get a non-zero exit-status
+    And   I should see "Liquid Exception.*Unknown tag 'INVALID' in.*_includes/invalid\.html" in the build output
+
   Scenario: Render Liquid and place in layout
     Given I have a "index.html" page with layout "simple" that contains "Hi there, Jekyll {{ jekyll.environment }}!"
     And I have a simple layout that contains "{{ content }}Ahoy, indeed!"
@@ -30,6 +39,44 @@ Feature: Rendering
     And the _site directory should exist
     And I should not see "Ahoy, indeed!" in "_site/index.css"
     And I should not see "Ahoy, indeed!" in "_site/index.js"
+
+  Scenario: Ignore defaults and don't place documents with layout set to 'none'
+    Given I have a "index.md" page with layout "none" that contains "Hi there, {{ site.author }}!"
+    And I have a _trials directory
+    And I have a "_trials/no-layout.md" page with layout "none" that contains "Hi there, {{ site.author }}!"
+    And I have a "_trials/test.md" page with layout "null" that contains "Hi there, {{ site.author }}!"
+    And I have a none layout that contains "{{ content }}Welcome!"
+    And I have a page layout that contains "{{ content }}Check this out!"
+    And I have a configuration file with:
+    | key             | value                                          |
+    | author          | John Doe                                       |
+    | collections     | {trials: {output: true}}                       |
+    | defaults        | [{scope: {path: ""}, values: {layout: page}}]  |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should not see "Welcome!" in "_site/trials/no-layout.html"
+    And I should not see "Check this out!" in "_site/trials/no-layout.html"
+    But I should see "Check this out!" in "_site/trials/test.html"
+    And I should see "Welcome!" in "_site/index.html"
+
+  Scenario: Don't place documents with layout set to 'none'
+    Given I have a "index.md" page with layout "none" that contains "Hi there, {{ site.author }}!"
+    And I have a _trials directory
+    And I have a "_trials/no-layout.md" page with layout "none" that contains "Hi there, {{ site.author }}!"
+    And I have a "_trials/test.md" page with layout "page" that contains "Hi there, {{ site.author }}!"
+    And I have a none layout that contains "{{ content }}Welcome!"
+    And I have a page layout that contains "{{ content }}Check this out!"
+    And I have a configuration file with:
+    | key             | value                     |
+    | author          | John Doe                  |
+    | collections     | {trials: {output: true}}  |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should not see "Welcome!" in "_site/trials/no-layout.html"
+    But I should see "Check this out!" in "_site/trials/test.html"
+    And I should see "Welcome!" in "_site/index.html"
 
   Scenario: Render liquid in Sass
     Given I have an "index.scss" page that contains ".foo-bar { color:{{site.color}}; }"

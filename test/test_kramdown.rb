@@ -16,9 +16,9 @@ class TestKramdown < JekyllUnitTest
 
           "syntax_highlighter"      => "rouge",
           "syntax_highlighter_opts" => {
-            "bold_every" => 8, "css" => :class
-          }
-        }
+            "bold_every" => 8, "css" => :class,
+          },
+        },
       }
 
       @config = Jekyll.configuration(@config)
@@ -43,8 +43,8 @@ class TestKramdown < JekyllUnitTest
         override = {
           "highlighter" => nil,
           "kramdown"    => {
-            "smart_quotes" => "lsaquo,rsaquo,laquo,raquo"
-          }
+            "smart_quotes" => "lsaquo,rsaquo,laquo,raquo",
+          },
         }
 
         markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, override))
@@ -70,8 +70,8 @@ class TestKramdown < JekyllUnitTest
           "highlighter" => nil,
           "markdown"    => "kramdown",
           "kramdown"    => {
-            "syntax_highlighter" => :coderay
-          }
+            "syntax_highlighter" => :coderay,
+          },
         }
 
         markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, override))
@@ -89,8 +89,8 @@ class TestKramdown < JekyllUnitTest
         override = {
           "markdown" => "kramdown",
           "kramdown" => {
-            "enable_coderay" => true
-          }
+            "enable_coderay" => true,
+          },
         }
 
         @config.delete("highlighter")
@@ -115,9 +115,9 @@ class TestKramdown < JekyllUnitTest
         "kramdown"   => {
           "syntax_highlighter" => "coderay",
           "coderay"            => {
-            "hello" => "world"
-          }
-        }
+            "hello" => "world",
+          },
+        },
       }))
 
       expect(Kramdown::Document).to receive(:new) do |arg1, hash|

@@ -17,7 +17,7 @@ class TestEntryFilter < JekyllUnitTest
     should "allow regexp filtering" do
       files = %w(README.md)
       @site.exclude = [
-        %r!README!
+        %r!README!,
       ]
 
       assert_empty @site.reader.filter_entries(
