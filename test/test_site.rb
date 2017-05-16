@@ -2,11 +2,6 @@ require "helper"
 
 class TestSite < JekyllUnitTest
   context "configuring sites" do
-    should "have an array for plugins by default" do
-      site = Site.new default_configuration
-      assert_equal [File.join(Dir.pwd, "_plugins")], site.plugins
-    end
-
     should "look for plugins under the site directory by default" do
       site = Site.new(site_configuration)
       assert_equal [source_dir("_plugins")], site.plugins
