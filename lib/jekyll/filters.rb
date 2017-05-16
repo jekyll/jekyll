@@ -389,11 +389,9 @@ module Jekyll
     private
     def item_property(item, property)
       if item.respond_to?(:to_liquid)
-        res = item.to_liquid
-        property.to_s.split(".").each do |attr|
-          res = res[attr]
-        end
-        res
+        property.to_s.split(".").reduce(item.to_liquid) { |subvalue, property|
+          subvalue[property]
+        }
       elsif item.respond_to?(:data)
         item.data[property.to_s]
       else
