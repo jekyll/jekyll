@@ -399,7 +399,7 @@ of the filter. The return value will be the output of the filter.
 
 ```ruby
 module Jekyll
-  module AssetFilter
+  class AssetFilter
     def asset_url(input)
       "http://www.example.com/#{input}?#{Time.now.to_i}"
     end
