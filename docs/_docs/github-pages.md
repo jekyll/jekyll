@@ -158,3 +158,5 @@ to see more detailed examples.
     If all else fails, you should contact <a href="https://github.com/contact">GitHub Support</a>.
   </p>
 </div>
+</body>
+</html>
