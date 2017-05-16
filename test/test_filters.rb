@@ -906,9 +906,9 @@ class TestFilters < JekyllUnitTest
       end
       should "return sorted by subproperty array" do
         assert_equal [{ "a" => { "b" => 1 } }, { "a" => { "b" => 2 } },
-                      { "a" => { "b" => 3 } }],
+                      { "a" => { "b" => 3 } }, ],
           @filter.sort([{ "a" => { "b" => 2 } }, { "a" => { "b" => 1 } },
-                        { "a" => { "b" => 3 } }], "a.b")
+                        { "a" => { "b" => 3 } }, ], "a.b")
       end
     end
 
