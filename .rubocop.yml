@@ -44,6 +44,8 @@ Metrics/MethodLength:
   Max: 20
   Severity: error
 Metrics/ModuleLength:
+  Exclude:
+    - lib/jekyll/filters.rb
   Max: 240
 Metrics/ParameterLists:
   Max: 4

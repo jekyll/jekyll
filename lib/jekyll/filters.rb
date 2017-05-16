@@ -15,9 +15,13 @@ module Jekyll
     # input - The Markdown String to convert.
     #
     # Returns the HTML formatted String.
-    def markdownify(input)
+    def markdownify(input, mode = nil)
       site = @context.registers[:site]
-      converter = site.find_converter_instance(Jekyll::Converters::Markdown)
+      if mode.to_s == "inline"
+        converter = site.find_converter_instance(Jekyll::Converters::Markdown::Inline)
+      else
+        converter = site.find_converter_instance(Jekyll::Converters::Markdown)
+      end
       converter.convert(input.to_s)
     end
 
