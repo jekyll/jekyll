@@ -365,7 +365,7 @@ module Jekyll
           subvalue[attribute]
         end
       elsif item.respond_to?(:data)
-	item.data[property.to_s]
+        item.data[property.to_s]
       else
         item[property.to_s]
       end
