@@ -365,9 +365,7 @@ module Jekyll
           subvalue[attribute]
         end
       elsif item.respond_to?(:data)
-        property.to_s.split(".").reduce(item.data) do |subvalue, attribute|
-          subvalue[attribute]
-        end
+	item.data[property.to_s]
       else
         item[property.to_s]
       end
