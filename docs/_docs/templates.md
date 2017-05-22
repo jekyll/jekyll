@@ -178,15 +178,15 @@ common tasks easier.
         <p class="name"><strong>CGI Escape</strong></p>
         <p>
           CGI escape a string for use in a URL. Replaces any special characters
-          with appropriate %XX replacements.
+          with appropriate %XX replacements. CGI escape normally replaces a space with a plus (+) sign.
         </p>
       </td>
       <td class="align-center">
         <p>
-         <code class="filter">{% raw %}{{ "foo,bar;baz?" | cgi_escape }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ "foo, bar; baz?" | cgi_escape }}{% endraw %}</code>
         </p>
         <p>
-          <code class="output">foo%2Cbar%3Bbaz%3F</code>
+          <code class="output">foo%2C+bar%3B+baz%3F</code>
         </p>
       </td>
     </tr>
@@ -194,7 +194,7 @@ common tasks easier.
       <td>
         <p class="name"><strong>URI Escape</strong></p>
         <p>
-          Percent encodes any special characters in a URI.
+          Percent encodes any special characters in a URI. URI escape normally replaces a space with %20.
         </p>
       </td>
       <td class="align-center">
