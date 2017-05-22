@@ -11,6 +11,10 @@ Feature: Configuring and using plugins
     And I should see "Whatever" in "_site/index.html"
     And I should see "this is a test" in "_site/test.txt"
 
+  Scenario: Add a local command plugin
+    When I run jekyll stub
+    Then I should get a zero exit status
+
   Scenario: Add an empty whitelist to restrict all gems
     Given I have an "index.html" file that contains "Whatever"
     And I have a configuration file with:
