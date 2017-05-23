@@ -11,32 +11,10 @@ the site URLs to look, what data gets displayed in the layout, and more. This
 is all done through editing text files; the static web site is the final
 product.
 
-A basic Jekyll site usually looks something like this:
+A basic Jekyll site usually looks something like this: <br />
+<small><em>Note: If you see a collapsed folder-structure below, click on the folders to view their contents</em></small>
 
-```sh
-.
-├── _config.yml
-├── _data
-|   └── members.yml
-├── _drafts
-|   ├── begin-with-the-crazy-ideas.md
-|   └── on-simplicity-in-technology.md
-├── _includes
-|   ├── footer.html
-|   └── header.html
-├── _layouts
-|   ├── default.html
-|   └── post.html
-├── _posts
-|   ├── 2007-10-29-why-every-programmer-should-play-nethack.md
-|   └── 2009-04-26-barcamp-boston-4-roundup.md
-├── _sass
-|   ├── _base.scss
-|   └── _layout.scss
-├── _site
-├── .jekyll-metadata
-└── index.html # can also be an 'index.md' with valid YAML Frontmatter
-```
+{% include structure.html %}
 
 <div class="note info">
   <h5>Directory structure of Jekyll sites using gem-based themes</h5>

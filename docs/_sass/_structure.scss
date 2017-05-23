@@ -1,0 +1,43 @@
+.structure {
+  padding: 10px 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #cdcdcd;
+  background: #212121;
+
+  i {
+    min-width: 24px;
+    font-size: 1.3125em;
+    vertical-align: text-top;
+  }
+}
+.folder { color: #ffb300; }
+.folder-tree, .folder-tree ul {
+  margin: 5px;
+  padding-left: 15px;
+  list-style: none;
+}
+.folder-tree ul {
+  margin: 0 8px;
+  border-left: 1px dashed;
+}
+.folder-tree li {
+  margin: 0;
+  padding: 5px 0;
+}
+.name {
+  display: inline-block;
+  min-width: 110px;
+}
+.description {
+  display: inline;
+  color: #757575;
+}
+.description:before {
+  content: "#";
+  margin-left: 15px;
+  margin-right: 10px;
+}
+.accordion { cursor: pointer; }
+ul.shown { display: block; }
+.hidden { display: none; }
