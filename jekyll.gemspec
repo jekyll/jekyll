@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency("addressable",           "~> 2.4")
   s.add_runtime_dependency("colorator",             "~> 1.0")
+  s.add_runtime_dependency("jekyll-default-layout", "~> 0.1")
   s.add_runtime_dependency("jekyll-sass-converter", "~> 1.0")
   s.add_runtime_dependency("jekyll-watch",          "~> 1.1")
   s.add_runtime_dependency("kramdown",              "~> 1.3")

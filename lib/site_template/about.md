@@ -1,5 +1,11 @@
 ---
-layout: page
+#
+#   layout will be automatically set to "page" by the built-in
+#   plugin 'jekyll-default-layout'.
+#   Source code: https://github.com/benbalter/jekyll-default-layout
+#
+#   override by explicitly defining a 'layout' key below.
+#
 title: About
 permalink: /about/
 ---

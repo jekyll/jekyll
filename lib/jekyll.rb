@@ -190,3 +190,4 @@ require_all "jekyll/generators"
 require_all "jekyll/tags"
 
 require "jekyll-sass-converter"
+require "jekyll-default-layout"
