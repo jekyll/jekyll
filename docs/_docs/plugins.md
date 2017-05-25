@@ -872,6 +872,7 @@ LESS.js files during generation.
 - [jekyll-include-absolute-plugin](https://github.com/tnhu/jekyll-include-absolute-plugin) by [Tan Nhu](https://github.com/tnhu): A Jekyll plugin to include a file from its path relative to Jekyll's source folder.
 - [Jekyll Download Tag](https://github.com/mattg/jekyll-download-tag): A Liquid tag that acts like `include`, but for external resources.
 - [Jekyll Brand Social Wall](https://github.com/MediaComem/jekyll-brand-social-wall): A jekyll plugin to generate a social wall with your favorite social networks
+- [Jekyll If File Exists](https://github.com/k-funk/jekyll-if-file-exists): A Jekyll Plugin that checks if a file exists with an if/else block.
 
 #### Collections
 
