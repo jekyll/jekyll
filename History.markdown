@@ -68,6 +68,7 @@
   * Add own plugin -> Jekyll Brand Social Wall (#6064)
   * Added plugin jekyll-analytics (#6042)
   * Use more precise language when explaining links (#6078)
+  * Update plugins.md (#6088)
 
 ### Development Fixes
 
