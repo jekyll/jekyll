@@ -36,7 +36,8 @@ module Jekyll
     end
 
     def included?(entry)
-      glob_include?(site.include, entry)
+      glob_include?(site.include, entry) ||
+        glob_include?(site.include, File.basename(entry))
     end
 
     def special?(entry)
