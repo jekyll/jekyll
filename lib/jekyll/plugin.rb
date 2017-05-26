@@ -60,7 +60,7 @@ module Jekyll
     #
     # Returns the safety Boolean.
     def self.safe(safe = nil)
-      if !defined?(@safe) || !safe.nil?
+      unless defined?(@safe) && safe.nil?
         @safe = safe
       end
       @safe || false

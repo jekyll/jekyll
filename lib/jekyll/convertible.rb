@@ -160,7 +160,7 @@ module Jekyll
     #
     # Returns true if extname == .coffee, false otherwise.
     def coffeescript_file?
-      ".coffee" == ext
+      ext == ".coffee"
     end
 
     # Determine whether the file should be rendered with Liquid.
