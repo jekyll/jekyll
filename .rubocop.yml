@@ -26,6 +26,8 @@ Layout/ExtraSpacing:
   AllowForAlignment: true
 Layout/FirstParameterIndentation:
   EnforcedStyle: consistent
+Layout/IndentationWidth:
+  Severity: error
 Layout/IndentArray:
   EnforcedStyle: consistent
 Layout/IndentHash:
@@ -36,8 +38,6 @@ Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
-Layout/MultilineTernaryOperator:
-  Severity: error
 Layout/SpaceAroundOperators:
   Enabled: false
 Layout/SpaceInsideBrackets:
@@ -115,12 +115,12 @@ Style/HashSyntax:
   Severity: error
 Style/IfUnlessModifier:
   Enabled: false
-Style/IndentationWidth:
-  Severity: error
 Style/InverseMethods:
   Enabled: false
 Style/ModuleFunction:
   Enabled: false
+Style/MultilineTernaryOperator:
+  Severity: error
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
     "%q": "{}"
