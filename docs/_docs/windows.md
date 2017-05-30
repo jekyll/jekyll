@@ -52,8 +52,17 @@ sudo gem install jekyll bundler
 
 ```
 
+You can test by running:
+
+```
+jekyll new my_project
+```
+
+
 **And thats it!**
-*Please note* Bash on Ubuntu on Windows is still under development, so you may run into issues. If you see an error warning in your Bash instance, you can ignore it.
+If you cd into the folder, you can make sure time management is working by opening your "_posts"_ folder. You should see a markdown file with the current date listed.
+
+*Please note* Bash on Ubuntu on Windows is still under development, so you may run into issues. If you see an Auto-Regeneration error warning in your Bash instance, you can ignore it.
 
 ## Installation via Chocolatey
 
