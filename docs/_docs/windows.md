@@ -23,7 +23,7 @@ Your Command Prompt instance should now be a Bash instance. Now we must update o
 sudo apt-get update -y && sudo apt-get upgrade -y
 ```
 
-Now we can install Ruby(2.3). First we need to add the repository list from BrightBox.
+Now we can install Ruby. First we need to add the repository list from BrightBox.
 
 ```
 sudo apt-add-repository ppa:brightbox/ruby-ng
