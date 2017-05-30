@@ -8,7 +8,55 @@ Jekyll with the proper tweaks. If you are using Windows 10 Anniversary Update,
 the easiest way to run Jekyll is to use the new [Bash on Ubuntu on Windows](https://msdn.microsoft.com/en-us/commandline/wsl/about?f=255&MSPPError=-2147217396).
 For older installations, this page aims to collect some of the general knowledge and lessons that have been unearthed by Windows users.
 
-## Installation
+## Installation via Bash on Windows 10
+
+*Please note:* You must have [Bash on Ubuntu on Windows](https://msdn.microsoft.com/en-us/commandline/wsl/about?f=255&MSPPError=-2147217396) enabled.
+
+First lets make sure all our packages / repositories are up to date. Open a new Command Prompt instance, and type the following:
+
+```
+bash
+```
+Your Command Prompt instance should now be a Bash instance. Now we must update our repo lists and packages.
+
+```
+sudo apt-get update -y && sudo apt-get upgrade -y
+```
+
+Now we can install Ruby(2.3). First we need to add the repository list from BrightBox.
+
+```
+sudo apt-add-repository ppa:brightbox/ruby-ng
+sudo apt-get update
+sudo apt-get install ruby2.3 ruby2.3-dev build-essentials
+```
+
+Or you can install an old version of ruby (1.9.3).
+
+```
+sudo apt-get install build-essentials ruby-full
+
+```
+
+Next lets update our Ruby gems:
+
+```
+sudo gem update
+
+```
+
+Now all that is left to do is install Jekyll.
+
+```
+sudo gem install jekyll bundler
+
+```
+
+**And thats it!**
+*Please note* Bash on Ubuntu on Windows is still under development, so you may run into issues. If you see an error warning in your Bash instance, you can ignore it.
+
+## Installation via Chocolatey
+
 
 A quick way to install Jekyll is to follow the [installation instructions by David Burela](https://davidburela.wordpress.com/2015/11/28/easily-install-jekyll-on-windows-with-3-command-prompt-entries-and-chocolatey/):
 
