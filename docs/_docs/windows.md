@@ -30,14 +30,6 @@ sudo apt-add-repository ppa:brightbox/ruby-ng
 sudo apt-get update
 sudo apt-get install ruby2.3 ruby2.3-dev build-essentials
 ```
-
-Or you can install an old version of ruby (1.9.3).
-
-```
-sudo apt-get install build-essentials ruby-full
-
-```
-
 Next lets update our Ruby gems:
 
 ```
