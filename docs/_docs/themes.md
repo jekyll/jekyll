@@ -35,23 +35,15 @@ The goal of gem-based themes is to allow you to get all the benefits of a robust
 
 Jekyll themes set default layouts, includes, and stylesheets. However, you can override any of the theme defaults with your own site content.
 
+To replace layouts or includes in your theme, make a copy in your `_layouts` or `_includes` directory of the specific file you wish to modify, or create the file from scratch giving it the same name as the file you wish to override.
+
 For example, if your selected theme has a `page` layout, you can override the theme's layout by creating your own `page` layout in the `_layouts` directory (that is, `_layouts/page.html`).
 
-Jekyll will look first to your site's content before looking to the theme's defaults for any requested file in the following folders:
+To locate a theme's files on your computer:
 
-- `/assets`
-- `/_layouts`
-- `/_includes`
-- `/_sass`
+1. Run `bundle show` followed by the name of the theme's gem, e.g., `bundle show minima` for Jekyll's default theme.
 
-Refer to your selected theme's documentation and source repository for more information on what files you can override.
-{: .note .info}
-
-To locate theme's files on your computer:
-
-1. Run `bundle show` followed by the name of the theme's gem, e.g., `bundle show minima` for default Jekyll's theme.
-
-   This returns the location of the gem-based theme files. For example, Minima theme's files are located in `/usr/local/lib/ruby/gems/2.3.0/gems/minima-2.1.0` on macOS.
+   This returns the location of the gem-based theme files. For example, the Minima theme's files might be located in `/usr/local/lib/ruby/gems/2.3.0/gems/minima-2.1.0` on macOS.
 
 2. Open the theme's directory in Finder or Explorer:
 
@@ -92,9 +84,23 @@ To locate theme's files on your computer:
         └── main.scss
      ```
 
-     With a clear understanding of the theme's files, you can now override any theme file by creating a similarly named file in your Jekyll site directory.
+With a clear understanding of the theme's files, you can now override any theme file by creating a similarly named file in your Jekyll site directory.
 
-     Let's say you want to override Minima's footer. In your Jekyll site, create an `_includes` folder and add a file in it called `footer.html`. Jekyll will now use your site's `footer.html` file instead of the `footer.html` file from the Minima theme gem.
+Let's say, for a second example, you want to override Minima's footer. In your Jekyll site, create an `_includes` folder and add a file in it called `footer.html`. Jekyll will now use your site's `footer.html` file instead of the `footer.html` file from the Minima theme gem.
+
+To modify any stylesheet you must take the extra step of also copying the main sass file (`_sass/minima.scss` in the Minima theme) into the `_sass` directory in your site's source. 
+
+Jekyll will look first to your site's content before looking to the theme's defaults for any requested file in the following folders:
+
+- `/assets`
+- `/_layouts`
+- `/_includes`
+- `/_sass`
+
+Note that making copies of theme files will prevent you from receiving any theme updates on those files. An alternative, to continue getting theme updates on all stylesheets, is to use higher specificity CSS selectors in your own additional, originally named CSS files.
+
+Refer to your selected theme's documentation and source repository for more information on what files you can override.
+{: .note .info}
 
 ## Converting gem-based themes to regular themes
 
