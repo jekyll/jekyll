@@ -70,6 +70,7 @@
   * Use more precise language when explaining links (#6078)
   * Update plugins.md (#6088)
   * windows 10 tutorial (#6100)
+  * Explain how to override theme styles (#6107)
 
 ### Development Fixes
 
