@@ -111,6 +111,10 @@ Feature: Collections
     And the _site directory should exist
     And I should see "content for Rover" in "_site/puppies/rover.html"
     And the "_site/puppies/fido.html" file should not exist
+    When I run jekyll build --future
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And the "_site/puppies/fido.html" file should exist
 
   Scenario: Hidden collection with document with future date
     Given I have a _puppies directory
@@ -129,6 +133,10 @@ Feature: Collections
     Then I should get a zero exit status
     And the _site directory should exist
     And the "_site/puppies/rover.html" file should not exist
+    And the "_site/puppies/fido.html" file should not exist
+    When I run jekyll build --future
+    Then I should get a zero exit status
+    And the _site directory should exist
     And the "_site/puppies/fido.html" file should not exist
 
   Scenario: All the documents
