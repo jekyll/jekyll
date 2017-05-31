@@ -12,7 +12,7 @@ For older installations, this page aims to collect some of the general knowledge
 
 *Please note:* You must have [Bash on Ubuntu on Windows](https://msdn.microsoft.com/en-us/commandline/wsl/about?f=255&MSPPError=-2147217396) enabled.
 
-First lets make sure all our packages / repositories are up to date. Open a new Command Prompt instance, and type the following:
+First let's make sure all our packages / repositories are up to date. Open a new Command Prompt instance, and type the following:
 
 ```
 bash
@@ -23,14 +23,14 @@ Your Command Prompt instance should now be a Bash instance. Now we must update o
 sudo apt-get update -y && sudo apt-get upgrade -y
 ```
 
-Now we can install Ruby. First we need to add the repository list from BrightBox.
+Now we can install Ruby. To do this we will use a repository from [BrightBox](https://www.brightbox.com/docs/ruby/ubuntu/), which hosts optimized versions of Ruby for Ubuntu.
 
 ```
 sudo apt-add-repository ppa:brightbox/ruby-ng
 sudo apt-get update
 sudo apt-get install ruby2.3 ruby2.3-dev build-essentials
 ```
-Next lets update our Ruby gems:
+Next let's update our Ruby gems:
 
 ```
 sudo gem update
@@ -50,16 +50,15 @@ You can test by running:
 jekyll new my_project
 ```
 
-
-**And thats it!**
-If you cd into the folder, you can make sure time management is working by opening your "_posts"_ folder. You should see a markdown file with the current date listed.
+**And that's it!**
+If you `cd` into the folder, you can make sure time management is working by opening your `_posts` folder. You should see a markdown file with the current date listed.
 
 *Please note* Bash on Ubuntu on Windows is still under development, so you may run into issues. If you see an Auto-Regeneration error warning in your Bash instance, you can ignore it.
 
 ## Installation via Chocolatey
 
 
-A quick way to install Jekyll is to follow the [installation instructions by David Burela](https://davidburela.wordpress.com/2015/11/28/easily-install-jekyll-on-windows-with-3-command-prompt-entries-and-chocolatey/):
+A quick way to install Jekyll using Chocolatey is to follow the [installation instructions by David Burela](https://davidburela.wordpress.com/2015/11/28/easily-install-jekyll-on-windows-with-3-command-prompt-entries-and-chocolatey/):
 
  1. Install a package manager for Windows called [Chocolatey](https://chocolatey.org/install)
  2. Install Ruby via Chocolatey: `choco install ruby -y`
@@ -73,8 +72,6 @@ For a more conventional way of installing Jekyll you can follow this [complete g
 
 [windows-installjekyll3]: https://labs.sverrirs.com/jekyll/
 
-## Encoding
-
 If you use UTF-8 encoding, make sure that no `BOM` header
 characters exist in your files or very, very bad things will happen to
 Jekyll. This is especially relevant if you're running Jekyll on Windows.
@@ -86,9 +83,6 @@ the site generation process. It can be done with the following command:
 ```sh
 $ chcp 65001
 ```
-
-## Timezone Management
-
 Since Windows doesn't have a native source of zoneinfo data, the Ruby Interpreter would not understand IANA Timezones and hence using them had the `TZ` environment variable default to UTC/GMT 00:00.
 Though Windows users could alternatively define their blog's timezone by setting the key to use POSIX format of defining timezones, it wasn't as user-friendly when it came to having the clock altered to changing DST-rules.
 
@@ -99,8 +93,6 @@ While 'new' blogs created with Jekyll v3.4 and greater, will have the following 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 ```
-
-## Auto-regeneration
 
 As of v1.3.0, Jekyll uses the `listen` gem to watch for changes when the
 `--watch` switch is specified during a build or serve. While `listen` has
