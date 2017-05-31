@@ -18,24 +18,25 @@ A basic Jekyll site usually looks something like this:
 ├── _config.yml
 ├── _data
 |   └── members.yml
-├── _drafts
-|   ├── begin-with-the-crazy-ideas.md
-|   └── on-simplicity-in-technology.md
 ├── _includes
 |   ├── footer.html
 |   └── header.html
 ├── _layouts
 |   ├── default.html
 |   └── post.html
-├── _posts
-|   ├── 2007-10-29-why-every-programmer-should-play-nethack.md
-|   └── 2009-04-26-barcamp-boston-4-roundup.md
 ├── _sass
 |   ├── _base.scss
 |   └── _layout.scss
 ├── _site
 ├── .jekyll-metadata
-└── index.html # can also be an 'index.md' with valid YAML Frontmatter
+└── _sources
+    ├── about.md
+    ├── index.md # can also be an 'index.html' with valid YAML Frontmatter
+    ├── _drafts
+    |   ├── begin-with-the-crazy-ideas.md
+    |   └── on-simplicity-in-technology.md
+    └── _posts
+        └── 2017-05-31-welcome-to-jekyll.markdown
 ```
 
 <div class="note info">
@@ -165,6 +166,16 @@ An overview of what each of these does:
           This is where the generated site will be placed (by default) once
           Jekyll is done transforming it. It’s probably a good idea to add this
           to your <code>.gitignore</code> file.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>_sources</code></p>
+      </td>
+      <td>
+        <p>
+          This is where the sources of teh site are stored (by default).
         </p>
       </td>
     </tr>
