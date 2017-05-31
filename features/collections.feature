@@ -99,7 +99,7 @@ Feature: Collections
     And I have the following documents under the puppies collection:
       | title  | date       | content             |
       | Rover  | 2007-12-31 | content for Rover.  |
-      | Fido   | 2020-12-31 | content for Fido.   |
+      | Fido   | 2120-12-31 | content for Fido.   |
     And I have a "_config.yml" file with content:
     """
     collections:
@@ -121,7 +121,7 @@ Feature: Collections
     And I have the following documents under the puppies collection:
       | title  | date       | content             |
       | Rover  | 2007-12-31 | content for Rover.  |
-      | Fido   | 2020-12-31 | content for Fido.   |
+      | Fido   | 2120-12-31 | content for Fido.   |
     And I have a "_config.yml" file with content:
     """
     collections:
