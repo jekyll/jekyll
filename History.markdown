@@ -69,6 +69,7 @@
   * Added plugin jekyll-analytics (#6042)
   * Use more precise language when explaining links (#6078)
   * Update plugins.md (#6088)
+  * windows 10 tutorial (#6100)
 
 ### Development Fixes
 
