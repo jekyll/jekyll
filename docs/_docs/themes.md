@@ -88,7 +88,7 @@ With a clear understanding of the theme's files, you can now override any theme 
 
 Let's say, for a second example, you want to override Minima's footer. In your Jekyll site, create an `_includes` folder and add a file in it called `footer.html`. Jekyll will now use your site's `footer.html` file instead of the `footer.html` file from the Minima theme gem.
 
-To modify any stylesheet you must take the extra step of also copying the main sass file (`_sass/minima.scss`) into your source directory. 
+To modify any stylesheet you must take the extra step of also copying the main sass file (`_sass/minima.scss` in the Minima theme) into your source directory. 
 
 Jekyll will look first to your site's content before looking to the theme's defaults for any requested file in the following folders:
 
