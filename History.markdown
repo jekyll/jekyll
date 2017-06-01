@@ -72,6 +72,7 @@
   * windows 10 tutorial (#6100)
   * Explain how to override theme styles (#6107)
   * updated Bash on Ubuntu on Windows link in tutorial (#6111)
+  * Fix wording in _docs/templates.md links section (#6114)
 
 ### Development Fixes
 
