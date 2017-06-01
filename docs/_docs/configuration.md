@@ -305,6 +305,18 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p><code class="flag">--profile</code></p>
       </td>
     </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>Strict Front Matter</strong></p>
+        <p class="description">
+            Cause a build to fail if there is a YAML syntax error in a page's front matter.
+        </p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">strict_front_matter: BOOL</code></p>
+        <p><code class="flag">--strict_front_matter</code></p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -601,12 +613,13 @@ collections:
     output:   true
 
 # Handling Reading
-safe:         false
-include:      [".htaccess"]
-exclude:      ["Gemfile", "Gemfile.lock", node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/"]
-keep_files:   [".git", ".svn"]
-encoding:     "utf-8"
-markdown_ext: "markdown,mkdown,mkdn,mkd,md"
+safe:                 false
+include:              [".htaccess"]
+exclude:              ["Gemfile", "Gemfile.lock", "node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/"]
+keep_files:           [".git", ".svn"]
+encoding:             "utf-8"
+markdown_ext:         "markdown,mkdown,mkdn,mkd,md"
+strict_front_matter: false
 
 # Filtering Content
 show_drafts: null
@@ -616,7 +629,7 @@ unpublished: false
 
 # Plugins
 whitelist: []
-gems:      []
+plugins:   []
 
 # Conversion
 markdown:    kramdown

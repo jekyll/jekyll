@@ -1,4 +1,5 @@
 # encoding: UTF-8
+
 require "csv"
 
 module Jekyll
@@ -45,9 +46,12 @@ module Jekyll
       @config = config.clone
 
       %w(safe lsi highlighter baseurl exclude include future unpublished
-        show_drafts limit_posts keep_files gems).each do |opt|
+        show_drafts limit_posts keep_files).each do |opt|
         self.send("#{opt}=", config[opt])
       end
+
+      # keep using `gems` to avoid breaking change
+      self.gems = config["plugins"]
 
       configure_plugins
       configure_theme

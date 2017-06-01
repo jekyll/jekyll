@@ -424,9 +424,9 @@ class TestDocument < JekyllUnitTest
 
     context "with output overrides" do
       should "be output according its front matter" do
-        assert_nil @files.find { |doc|
-          doc.relative_path == "_slides/non-outputted-slide.html"
-        }
+        assert_nil(
+          @files.find { |doc| doc.relative_path == "_slides/non-outputted-slide.html" }
+        )
       end
     end
   end

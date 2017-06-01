@@ -1038,3 +1038,16 @@ code.output {
 .result {
   padding: 12px;
 }
+
+.image-description {
+  margin: -20px 0 20px;
+  padding: 10px 15px;
+  font-size: 0.81em;
+  text-align: justify;
+  background: #5c5c5c;
+
+  pre, code {
+    font-size: 0.75em;
+    background: #454545;
+  }
+}

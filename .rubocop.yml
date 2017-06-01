@@ -4,7 +4,6 @@ AllCops:
   Include:
     - lib/**/*.rb
   Exclude:
-    - lib/jekyll/renderer.rb
     - bin/**/*
     - exe/**/*
     - benchmark/**/*
@@ -36,6 +35,8 @@ Metrics/LineLength:
     - !ruby/regexp /features\/.*.rb/
     - Rakefile
     - rake/*.rake
+    - Gemfile
+    - jekyll.gemspec
   Max: 90
   Severity: warning
 Metrics/MethodLength:
@@ -83,6 +84,8 @@ Style/EmptyLinesAroundAccessModifier:
   Enabled: false
 Style/EmptyLinesAroundModuleBody:
   Enabled: false
+Style/EndOfLine:
+  EnforcedStyle: lf
 Style/ExtraSpacing:
   AllowForAlignment: true
 Style/FileName:
@@ -100,8 +103,12 @@ Style/IndentArray:
   EnforcedStyle: consistent
 Style/IndentHash:
   EnforcedStyle: consistent
+Style/IndentHeredoc:
+  Enabled: false
 Style/IndentationWidth:
   Severity: error
+Style/InverseMethods:
+  Enabled: false
 Style/ModuleFunction:
   Enabled: false
 Style/MultilineMethodCallIndentation:
@@ -139,6 +146,8 @@ Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
+Style/SymbolArray:
+  Enabled: false
 Style/TrailingCommaInLiteral:
   EnforcedStyleForMultiline: consistent_comma
 Style/UnneededCapitalW:
