@@ -100,6 +100,7 @@
   * Make links in sidebar for current page more prominent (#5820)
   * Update normalize.css to v6.0.0 (#6008)
   * Docs: rename `gems` to `plugins` (#6082)
+  * plugins -> gems (#6110)
 
 ### Bug Fixes
 
