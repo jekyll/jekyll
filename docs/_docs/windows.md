@@ -5,7 +5,7 @@ permalink: /docs/windows/
 
 While Windows is not an officially-supported platform, it can be used to run
 Jekyll with the proper tweaks. If you are using Windows 10 Anniversary Update, 
-the easiest way to run Jekyll is to use the new [Bash on Ubuntu on Windows](https://msdn.microsoft.com/en-us/commandline/wsl/about?f=255&MSPPError=-2147217396).
+the easiest way to run Jekyll is to use the new [Bash on Ubuntu on Windows](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide).
 For older installations, this page aims to collect some of the general knowledge and lessons that have been unearthed by Windows users.
 
 ## Installation via Bash on Windows 10
