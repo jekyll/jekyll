@@ -552,7 +552,7 @@ Note you cannot add filters to `link` tags. For example, you cannot append a str
 
 ### Linking to posts
 
-If you want like to include a link to a post on your site, the `post_url` tag will generate the correct permalink URL for the post you specify.
+If you want to include a link to a post on your site, the `post_url` tag will generate the correct permalink URL for the post you specify.
 
 ```liquid
 {% raw %}
