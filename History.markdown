@@ -74,6 +74,7 @@
   * updated Bash on Ubuntu on Windows link in tutorial (#6111)
   * Fix wording in _docs/templates.md links section (#6114)
   * Update windows.md (#6115)
+  * Added windows to docs.yml (#6109)
 
 ### Development Fixes
 
