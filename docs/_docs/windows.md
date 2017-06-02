@@ -28,7 +28,7 @@ Now we can install Ruby. To do this we will use a repository from [BrightBox](ht
 ```
 sudo apt-add-repository ppa:brightbox/ruby-ng
 sudo apt-get update
-sudo apt-get install ruby2.3 ruby2.3-dev build-essentials
+sudo apt-get install ruby2.3 ruby2.3-dev build-essential
 ```
 Next let's update our Ruby gems:
 
