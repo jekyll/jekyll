@@ -182,6 +182,7 @@ end
 
 require "jekyll/drops/drop"
 require "jekyll/drops/document_drop"
+require "jekyll/filters/asset_tag_filters"
 require_all "jekyll/commands"
 require_all "jekyll/converters"
 require_all "jekyll/converters/markdown"
