@@ -56,11 +56,26 @@ class Jekyll::ThemeBuilder
 
   def create_directories
     mkdir_p(SCAFFOLD_DIRECTORIES)
+    mkdir_p("_sass/#{name}")
   end
 
   def create_starter_files
     %w(page post default).each do |layout|
       write_file("_layouts/#{layout}.html", template("_layouts/#{layout}.html"))
+    end
+
+    %w(footer head header).each do |incl|
+      write_file("_includes/#{incl}.html", template("_includes/#{incl}.html"))
+    end
+
+    %w(github twitter).each do |icon|
+      write_file("_includes/icon-#{icon}.svg", template("_includes/icon-#{icon}.svg"))
+      write_file("_includes/icon-#{icon}.html", template("_includes/icon-#{icon}.html"))
+    end
+
+    write_file("_sass/#{name}.scss", template("_sass/theme.scss.erb"))
+    %w(base layout syntax-highlighting).each do |sass|
+      write_file("_sass/#{name}/_#{sass}.scss", template("_sass/theme/_#{sass}.scss"))
     end
   end
 
