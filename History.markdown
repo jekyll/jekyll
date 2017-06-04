@@ -75,6 +75,7 @@
   * Fix wording in _docs/templates.md links section (#6114)
   * Update windows.md (#6115)
   * Added windows to docs.yml (#6109)
+  * Be more specific on what to upload (#6119)
 
 ### Development Fixes
 
