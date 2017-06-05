@@ -448,7 +448,7 @@ module Jekyll
       self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
       if content =~ YAML_FRONT_MATTER_REGEXP
         self.content = $POSTMATCH
-        data_file = SafeYAML.load(Regexp.last_match(1))
+        data_file = SafeYAML.load(Regexp.last_match(2))
         merge_data!(data_file, :source => "YAML front matter") if data_file
       end
     end

@@ -378,6 +378,11 @@ class TestUtils < JekyllUnitTest
       assert_equal "-----B", File.open(file, "rb") { |f| f.read(6) }
       refute Utils.has_yaml_header?(file)
     end
+    should "process starting after the BOM" do
+      file = source_dir("_posts", "2017-01-18-i-haz-bom.md")
+      allow(File).to receive(:open).with(file, "rb").and_return("#{Utils::BOM}---\n")
+      assert Utils.has_yaml_header?(file)
+    end
   end
 
   context "The \`Utils.merged_file_read_opts\` method" do
