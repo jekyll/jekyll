@@ -100,6 +100,24 @@ Feature: Data
     Then the "_site/index.html" file should exist
     And I should see "Dairy Products" in "_site/index.html"
 
+  Scenario: load specific files in _data directory which are included in _config.yml
+    Given I have a _data directory
+    And I have a "foo" file that contains "bar"
+    And I have a "_data/members.json" file with content:
+      """
+      [{"name": "Jack", "age": 28},{"name": "Leon", "age": 34}]
+      """
+    And I have a configuration file with "include" set to:
+      | value               |
+      | foo                 |
+      | _data/members.json  |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And the "_site/foo" file should exist
+    And the _site/_data directory should exist
+    And the "_site/_data/members.json" file should exist
+
   Scenario: folders should have precedence over files with the same name
     Given I have a _data directory
     And I have a _data/categories directory
