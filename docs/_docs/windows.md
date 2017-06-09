@@ -34,14 +34,12 @@ Next let's update our Ruby gems:
 
 ```
 sudo gem update
-
 ```
 
 Now all that is left to do is install Jekyll.
 
 ```
 sudo gem install jekyll bundler
-
 ```
 
 You can test by running:
