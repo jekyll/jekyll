@@ -22,7 +22,11 @@ If you already have a full [Ruby](https://www.ruby-lang.org/en/downloads/) devel
 # Now browse to http://localhost:4000
 ```
 
-If you encounter any unexpected errors during the above, please refer to the already-mentioned [requirements](/docs/installation/#requirements) page, as you might be missing development headers or other prerequisites.
+If you encounter an error in building the site, with the error message
+"'0000-00-00-welcome-to-jekyll.markdown.erb' does not have a valid date in the
+YAML front matter." try including the line `exclude: [vendor]`
+in `_config.yml` (This is also documented on the [troubleshooting](/docs/troubleshooting/#configuration-problems) page).
+For any other unexpected errors during the above, please refer to the already-mentioned [requirements](/docs/installation/#requirements) page, as you might be missing development headers or other prerequisites.
 
 ## About Bundler
 
