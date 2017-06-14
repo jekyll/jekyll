@@ -74,7 +74,7 @@
   * windows 10 tutorial (#6100)
   * Explain how to override theme styles (#6107)
   * updated Bash on Ubuntu on Windows link in tutorial (#6111)
-  * Fix wording in _docs/templates.md links section (#6114)
+  * Fix wording in `_docs/templates.md` links section (#6114)
   * Update windows.md (#6115)
   * Added windows to docs.yml (#6109)
   * Be more specific on what to upload (#6119)
@@ -121,6 +121,7 @@
   * Re-surface missing public methods in `Jekyll::Document` (#5975)
   * absolute_url should not mangle URL if called more than once (#5789)
   * patch URLFilters to prevent `//` (#6058)
+  * add test to ensure variables work in `where_exp` condition (#5315)
 
 ### fix
 
