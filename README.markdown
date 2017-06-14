@@ -22,9 +22,9 @@ Jekyll is a simple, blog-aware, static site generator perfect for personal, proj
 
 Jekyll does what you tell it to do — no more, no less. It doesn't try to outsmart users by making bold assumptions, nor does it burden them with needless complexity and configuration. Put simply, Jekyll gets out of your way and allows you to concentrate on what truly matters: your content.
 
-## Having trouble with OS X El Capitan?
+## Having trouble with OSX/MacOS?
 
-See: https://jekyllrb.com/docs/troubleshooting/#jekyll-amp-mac-os-x-1011
+See: https://jekyllrb.com/docs/troubleshooting/
 
 ## Getting Started
 
