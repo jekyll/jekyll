@@ -101,6 +101,7 @@
   * Fix CI  (#6044)
   * Remove `ruby RUBY_VERSION` from generated Gemfile (#5803)
   * Test if hidden collections output a document with a future date (#6103)
+  * Add test for uri_escape on reserved characters (#6086)
 
 ### Site Enhancements
 
