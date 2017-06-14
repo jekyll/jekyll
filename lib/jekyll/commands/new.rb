@@ -108,6 +108,7 @@ RUBY
 
         def create_sample_files(path)
           FileUtils.cp_r site_template + "/.", path
+          FileUtils.chmod_R "u+w", path
           FileUtils.rm File.expand_path(scaffold_path, path)
         end
 
