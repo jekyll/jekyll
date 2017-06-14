@@ -17,6 +17,7 @@
   * In `jekyll new`, make copied site template user-writable (#6072)
   * Add top-level `layout` liquid variable to Documents (#6073)
   * Address reading non-binary static files in themes (#5918)
+  * Allow filters to sort & select based on subvalues (#5622)
 
 ### Documentation
 
