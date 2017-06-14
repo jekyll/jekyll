@@ -16,6 +16,7 @@
   * Disable default layouts for documents with a `layout: none` declaration (#5933)
   * In `jekyll new`, make copied site template user-writable (#6072)
   * Add top-level `layout` liquid variable to Documents (#6073)
+  * Address reading non-binary static files in themes (#5918)
 
 ### Documentation
 
