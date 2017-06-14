@@ -178,15 +178,15 @@ common tasks easier.
         <p class="name"><strong>CGI Escape</strong></p>
         <p>
           CGI escape a string for use in a URL. Replaces any special characters
-          with appropriate %XX replacements.
+          with appropriate <code>%XX</code> replacements. CGI escape normally replaces a space with a plus <code>+</code> sign.
         </p>
       </td>
       <td class="align-center">
         <p>
-         <code class="filter">{% raw %}{{ "foo,bar;baz?" | cgi_escape }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ "foo, bar; baz?" | cgi_escape }}{% endraw %}</code>
         </p>
         <p>
-          <code class="output">foo%2Cbar%3Bbaz%3F</code>
+          <code class="output">foo%2C+bar%3B+baz%3F</code>
         </p>
       </td>
     </tr>
@@ -194,15 +194,15 @@ common tasks easier.
       <td>
         <p class="name"><strong>URI Escape</strong></p>
         <p>
-          Percent encodes any special characters in a URI.
+          Percent encodes any special characters in a URI. URI escape normally replaces a space with <code>%20</code>. <a href="https://en.wikipedia.org/wiki/Percent-encoding#Types_of_URI_characters">Reserved characters</a> will not be escaped.
         </p>
       </td>
       <td class="align-center">
         <p>
-         <code class="filter">{% raw %}{{ "http://foo.com/?query=foo, bar \baz?" | uri_escape }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ "http://foo.com/?q=foo, \bar?" | uri_escape }}{% endraw %}</code>
         </p>
         <p>
-          <code class="output">http://foo.com/?query=foo,%20bar%20%5Cbaz?</code>
+          <code class="output">http://foo.com/?q=foo,%20%5Cbar?</code>
         </p>
       </td>
     </tr>
