@@ -123,6 +123,7 @@
   * absolute_url should not mangle URL if called more than once (#5789)
   * patch URLFilters to prevent `//` (#6058)
   * add test to ensure variables work in `where_exp` condition (#5315)
+  * Read explicitly included dot-files in collections. (#6092)
 
 ### fix
 
