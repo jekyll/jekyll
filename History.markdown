@@ -102,6 +102,7 @@
   * Remove `ruby RUBY_VERSION` from generated Gemfile (#5803)
   * Test if hidden collections output a document with a future date (#6103)
   * Add test for uri_escape on reserved characters (#6086)
+  * Allow you to specify the rouge version via an environment variable for testing (#6138)
 
 ### Site Enhancements
 
