@@ -131,6 +131,7 @@
   * patch URLFilters to prevent `//` (#6058)
   * add test to ensure variables work in `where_exp` condition (#5315)
   * Read explicitly included dot-files in collections. (#6092)
+  * Default `baseurl` to `nil` instead of empty string (#6137)
 
 ### fix
 
