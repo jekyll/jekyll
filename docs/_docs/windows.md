@@ -191,13 +191,6 @@ Please add the following to your Gemfile to avoid polling for changes:
     gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 ```
 
-But auto-regeneration still works fine.Its an outdated warning IMO.
+Auto-regeneration will work fine without including `gem 'wdm'`
 
-### time-zone
-
-Requires one gem:
-
-```shell
-gem install tzinfo-data
-```
-
+### [time-zone](/docs/windows/#timezone-management)
