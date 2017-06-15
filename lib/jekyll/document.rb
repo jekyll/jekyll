@@ -150,7 +150,7 @@ module Jekyll
     #
     # Returns true if extname == .coffee, false otherwise.
     def coffeescript_file?
-      ".coffee" == extname
+      extname == ".coffee"
     end
 
     # Determine whether the file should be rendered with Liquid.
@@ -371,7 +371,7 @@ module Jekyll
       if data.key?(method.to_s)
         Jekyll::Deprecator.deprecation_message "Document##{method} is now a key "\
                            "in the #data hash."
-        Jekyll::Deprecator.deprecation_message "Called by #{caller.first}."
+        Jekyll::Deprecator.deprecation_message "Called by #{caller(0..0)}."
         data[method.to_s]
       else
         super

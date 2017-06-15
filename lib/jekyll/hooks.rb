@@ -60,7 +60,7 @@ module Jekyll
 
     # register a single hook to be called later, internal API
     def self.register_one(owner, event, priority, &block)
-      @registry[owner] ||={
+      @registry[owner] ||= {
         :post_init   => [],
         :pre_render  => [],
         :post_render => [],

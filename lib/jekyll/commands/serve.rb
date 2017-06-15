@@ -136,7 +136,7 @@ module Jekyll
 
         private
         def format_url(ssl_enabled, address, port, baseurl = nil)
-          format("%{prefix}://%{address}:%{port}%{baseurl}", {
+          format("%<prefix>s://%<address>s:%<port>i%<baseurl>s", {
             :prefix  => ssl_enabled ? "https" : "http",
             :address => address,
             :port    => port,
