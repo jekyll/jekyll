@@ -171,3 +171,13 @@ In the future the installation process of the github-pages should be as simple a
 [Bundler]: http://bundler.io/ "Ruby Dependencie Manager"
 [nokogiriReleases]: https://github.com/sparklemotion/nokogiri/releases "Nokogiri Releases"
 [nokogiriFails]: https://github.com/sparklemotion/nokogiri/issues/1456#issuecomment-206481794 "Nokogiri fails to install on Ruby 2.3 for Windows"
+
+## Installation via RubyInstaller
+
+RubyInstaller is a self-contained Windows-based installer that includes the Ruby language, an execution environment, important documentation, and more.
+
+1. Install a package manager for Windows called [RubyInstaller](https://rubyinstaller.org/).
+2. Install Jekyll via RubyInstaller: `gem install bundler jekyll`
+3. Reopen a command prompt and run Jekyll: `jekyll -v`
+
+see [Autoinstall Jekyll for windows](https://github.com/KeJunMao/fastjekyll#autoinstall-jekyll-for-windows)
