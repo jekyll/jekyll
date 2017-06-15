@@ -873,6 +873,9 @@ LESS.js files during generation.
 - [Jekyll Download Tag](https://github.com/mattg/jekyll-download-tag): A Liquid tag that acts like `include`, but for external resources.
 - [Jekyll Brand Social Wall](https://github.com/MediaComem/jekyll-brand-social-wall): A jekyll plugin to generate a social wall with your favorite social networks
 - [Jekyll If File Exists](https://github.com/k-funk/jekyll-if-file-exists): A Jekyll Plugin that checks if a file exists with an if/else block.
+- [BibSonomy](https://github.com/rjoberon/bibsonomy-jekyll): Jekyll
+  plugin to generate publication lists from [BibSonomy](https://www.bibsonomy.org/).
+
 
 #### Collections
 
