@@ -177,7 +177,27 @@ In the future the installation process of the github-pages should be as simple a
 RubyInstaller is a self-contained Windows-based installer that includes the Ruby language, an execution environment, important documentation, and more.
 
 1. Install a package manager for Windows called [RubyInstaller](https://rubyinstaller.org/).
-2. Install Jekyll via RubyInstaller: `gem install bundler jekyll`
-3. Reopen a command prompt and run Jekyll: `jekyll -v`
+2. Install Jekyll and Bundler via a command prompt window: `gem install jekyll bundler`
+3. Check if the installation is accessible: `jekyll -v`
 
 see [Autoinstall Jekyll for windows](https://github.com/KeJunMao/fastjekyll#autoinstall-jekyll-for-windows)
+
+### auto-regeneration
+
+Although jekyll would suggest:
+
+```
+Please add the following to your Gemfile to avoid polling for changes:
+    gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+```
+
+But auto-regeneration still works fine.Its an outdated warning IMO.
+
+### time-zone
+
+Requires one gem:
+
+```shell
+gem install tzinfo-data
+```
+
