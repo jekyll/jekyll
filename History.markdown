@@ -103,6 +103,7 @@
   * Test if hidden collections output a document with a future date (#6103)
   * Add test for uri_escape on reserved characters (#6086)
   * Allow you to specify the rouge version via an environment variable for testing (#6138)
+  * Bump Rubocop to 0.49.1 (#6093)
 
 ### Site Enhancements
 
