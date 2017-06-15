@@ -28,6 +28,16 @@ module Jekyll
         ).normalize.to_s
       end
 
+      # Strips trailing `/index.html` from URLs to create pretty permalinks
+      #
+      # input - the URL with a possible `/index.html`
+      #
+      # Returns a URL with the trailing `/index.html` removed
+      def strip_index(input)
+        return if input.nil? || input.to_s.empty?
+        input.sub(%r!/index\.html?$!, "/")
+      end
+
       private
 
       def site
