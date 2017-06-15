@@ -22,11 +22,8 @@ group :test do
   gem "cucumber", "~> 2.1"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
-  if RUBY_VERSION > "2.1"
-    gem "nokogiri"
-  else
-    gem "nokogiri", "~> 1.7.0"
-  end
+  # nokogiri v1.8 does not work with ruby 2.1 and below
+  gem "nokogiri", RUBY_VERSION > "2.1" ? "~> 1.7" : "~> 1.7.0"
   gem "rspec"
   gem "rspec-mocks"
   gem "rubocop", "~> 0.48.1"
