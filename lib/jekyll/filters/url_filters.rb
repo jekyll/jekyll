@@ -45,7 +45,7 @@ module Jekyll
       end
 
       def sanitized_baseurl
-        site.config["baseurl"].chomp("/")
+        site.config["baseurl"].to_s.chomp("/")
       end
 
       def ensure_leading_slash(input)
