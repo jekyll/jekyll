@@ -646,7 +646,7 @@ class TestFilters < JekyllUnitTest
       end
 
       should "filter objects in a hash appropriately" do
-        hash = { "a"=>{ "color"=>"red" }, "b"=>{ "color"=>"blue" } }
+        hash = { "a" => { "color"=>"red" }, "b" => { "color"=>"blue" } }
         assert_equal 1, @filter.where(hash, "color", "red").length
         assert_equal [{ "color"=>"red" }], @filter.where(hash, "color", "red")
       end
@@ -711,7 +711,7 @@ class TestFilters < JekyllUnitTest
       end
 
       should "filter objects in a hash appropriately" do
-        hash = { "a"=>{ "color"=>"red" }, "b"=>{ "color"=>"blue" } }
+        hash = { "a" => { "color"=>"red" }, "b" => { "color"=>"blue" } }
         assert_equal 1, @filter.where_exp(hash, "item", "item.color == 'red'").length
         assert_equal(
           [{ "color"=>"red" }],
@@ -831,9 +831,9 @@ class TestFilters < JekyllUnitTest
 
       should "allow more complex filters" do
         items = [
-          { "version"=>"1.0", "result"=>"slow" },
-          { "version"=>"1.1.5", "result"=>"medium" },
-          { "version"=>"2.7.3", "result"=>"fast" },
+          { "version" => "1.0", "result" => "slow" },
+          { "version" => "1.1.5", "result" => "medium" },
+          { "version" => "2.7.3", "result" => "fast" },
         ]
 
         result = @filter.group_by_exp(items, "item", "item.version | split: '.' | first")

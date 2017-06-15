@@ -15,7 +15,6 @@ Layout/AlignHash:
   EnforcedHashRocketStyle: table
 Layout/AlignParameters:
   Enabled: false
-  EnforcedStyle: with_fixed_indentation
 Layout/EmptyLinesAroundAccessModifier:
   Enabled: false
 Layout/EmptyLinesAroundModuleBody:
@@ -39,7 +38,7 @@ Layout/MultilineMethodCallIndentation:
 Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
 Layout/SpaceAroundOperators:
-  Enabled: false
+  Enabled: true
 Layout/SpaceInsideBrackets:
   Enabled: false
 Lint/EndAlignment:
