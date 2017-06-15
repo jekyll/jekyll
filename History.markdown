@@ -83,6 +83,7 @@
   * Be more specific on what to upload (#6119)
   * Remove Blank Newlines from "Jekyll on Windows" Page (#6126)
   * Link the troubleshooting page in the quickstart page (#6134)
+  * add documentation about the &#34;pinned&#34; label (#6147)
 
 ### Development Fixes
 
