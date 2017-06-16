@@ -655,7 +655,7 @@ class TestFilters < JekyllUnitTest
         assert_equal 2, @filter.where(@array_of_objects, "color", "red").length
       end
 
-      should "filter properties with nil values and undefined properties appropriately" do
+      should "filter objects with missing/nil/empty-string properties appropriately" do
         objects = [
           {},
           { "a" => nil },
@@ -682,6 +682,27 @@ class TestFilters < JekyllUnitTest
           "c" => { "tags"=>%w(y z) },
         }
         assert_equal 2, @filter.where(hash, "tags", "x").length
+      end
+
+      should "filter array properties with missing/nil/empty-string values" do
+        objects = [
+          { "tags" => [] },
+          { "tags" => [nil] },
+          { "tags" => [""] },
+        ]
+        assert_equal 2, @filter.where(objects, "tags", nil).length
+        assert_equal 2, @filter.where(objects, "tags", "").length
+      end
+
+      should "filter array properties containing missing/nil/empty-string values" do
+        objects = [
+          { "tags" => ["x"] },
+          { "tags" => ["x", nil] },
+          { "tags" => ["x", ""] },
+        ]
+        assert_equal 2, @filter.where(objects, "tags", nil).length
+        assert_equal 2, @filter.where(objects, "tags", "").length
+        assert_equal 3, @filter.where(objects, "tags", "x").length
       end
 
       should "not match substrings" do
