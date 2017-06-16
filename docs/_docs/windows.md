@@ -12,7 +12,8 @@ For older installations, this page aims to collect some of the general knowledge
 
 *Please note:* You must have [Bash on Ubuntu on Windows](https://msdn.microsoft.com/en-us/commandline/wsl/about?f=255&MSPPError=-2147217396) enabled.
 
-First let's make sure all our packages / repositories are up to date. Open a new Command Prompt instance, and type the following:
+First let's make sure all our packages / repositories are up to date. 
+Open a new Command Prompt instance, and type the following:
 
 ```
 bash
@@ -42,16 +43,24 @@ Now all that is left to do is install Jekyll.
 sudo gem install jekyll bundler
 ```
 
-You can test by running:
+Check to see if your installation worked.
 
+```
+jekyll -v
+```
+
+**And that's it!**
+
+To start a new project, just run:
 ```
 jekyll new my_project
 ```
 
-**And that's it!**
+replacing `my_project` with the name of your website.
+
 If you `cd` into the folder, you can make sure time management is working by opening your `_posts` folder. You should see a markdown file with the current date listed.
 
-*Please note* Bash on Ubuntu on Windows is still under development, so you may run into issues. If you see an Auto-Regeneration error warning in your Bash instance, you can ignore it.
+*Please note* Bash on Ubuntu on Windows is still under development, so you may run into issues. If you see an Auto-Regeneration error warning in your Bash instance, you can ignore it. 
 
 ## Installation via Chocolatey
 
@@ -81,6 +90,7 @@ the site generation process. It can be done with the following command:
 ```sh
 $ chcp 65001
 ```
+#### Time-Zone Management (Chocolatey method)
 Since Windows doesn't have a native source of zoneinfo data, the Ruby Interpreter would not understand IANA Timezones and hence using them had the `TZ` environment variable default to UTC/GMT 00:00.
 Though Windows users could alternatively define their blog's timezone by setting the key to use POSIX format of defining timezones, it wasn't as user-friendly when it came to having the clock altered to changing DST-rules.
 
@@ -91,7 +101,7 @@ While 'new' blogs created with Jekyll v3.4 and greater, will have the following 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 ```
-
+#### Auto Regeneration (Chocolatey method)
 As of v1.3.0, Jekyll uses the `listen` gem to watch for changes when the
 `--watch` switch is specified during a build or serve. While `listen` has
 built-in support for UNIX systems, it requires an extra gem for compatibility
@@ -101,7 +111,7 @@ with Windows. Add the following to the Gemfile for your site:
 gem 'wdm', '~> 0.1.0' if Gem.win_platform?
 ```
 
-### How to install github-pages
+## How to install github-pages (Chocolatey Method)
 
 This section is part of an article written by [Jens Willmer][jwillmerPost]. To follow the instructions you need to have [Chocolatey][] installed on your system. If you already have a version of Ruby installed you need to uninstall it before you can continue.
 
@@ -145,7 +155,7 @@ This gem is also needed in the github-pages and to get it running on Windows x64
    --with-xslt-lib=C:\Chocolatey\lib\libxslt.redist.1.1.28.0\build\native\bin\v110\x64\Release\dynamic
 ```
 
-#### Install github-pages
+#### Install github-pages 
 
  * Open command prompt and install [Bundler][]: `gem install bundler`
  * Create a file called `Gemfile` without any extension in your root directory of your blog
@@ -180,17 +190,18 @@ RubyInstaller is a self-contained Windows-based installer that includes the Ruby
 2. Install Jekyll and Bundler via a command prompt window: `gem install jekyll bundler`
 3. Check if the installation is accessible: `jekyll -v`
 
-See [Autoinstall Jekyll for Windows](https://github.com/KeJunMao/fastjekyll#autoinstall-jekyll-for-windows)
+Optionally you can use [Autoinstall Jekyll for Windows](https://github.com/KeJunMao/fastjekyll#autoinstall-jekyll-for-windows).
 
-### Auto-regeneration
+#### Auto Regeneration (RubyInstaller method)
 
-Although jekyll would suggest:
+Although Jekyll would suggest:
 
 ```
 Please add the following to your Gemfile to avoid polling for changes:
     gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 ```
 
-Auto-regeneration will work fine without including `gem 'wdm'`
+Auto regeneration will work fine without including `gem 'wdm'`.
 
-### [time-zone](/docs/windows/#timezone-management)
+#### Time-Zone Management (RubyInstaller method)
+The [time-zone](/docs/windows/#timezone-management) documentation applies for this method.
