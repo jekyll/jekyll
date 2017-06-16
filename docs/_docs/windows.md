@@ -4,7 +4,7 @@ permalink: /docs/windows/
 ---
 
 While Windows is not an officially-supported platform, it can be used to run
-Jekyll with the proper tweaks. If you are using Windows 10 Anniversary Update, 
+Jekyll with the proper tweaks. If you are using Windows 10 Anniversary Update (1607) or newer, 
 the easiest way to run Jekyll is to use the new [Bash on Ubuntu on Windows](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide).
 For older installations, this page aims to collect some of the general knowledge and lessons that have been unearthed by Windows users.
 
@@ -45,6 +45,7 @@ sudo gem install jekyll bundler
 You can test by running:
 
 ```
+cd ~
 jekyll new my_project
 ```
 
