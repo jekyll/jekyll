@@ -222,7 +222,7 @@ module Jekyll
       input = input.values if input.is_a?(Hash)
       input.select do |object|
         item_value = item_property(object, property)
-        item_value = [item_value] unless item_value.respond_to?("map")
+        item_value = [item_value] unless item_value.respond_to?(:map)
         item_value.map(&:to_s).include?(value.to_s)
       end || []
     end
