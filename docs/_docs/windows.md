@@ -180,9 +180,9 @@ RubyInstaller is a self-contained Windows-based installer that includes the Ruby
 2. Install Jekyll and Bundler via a command prompt window: `gem install jekyll bundler`
 3. Check if the installation is accessible: `jekyll -v`
 
-see [Autoinstall Jekyll for windows](https://github.com/KeJunMao/fastjekyll#autoinstall-jekyll-for-windows)
+See [Autoinstall Jekyll for Windows](https://github.com/KeJunMao/fastjekyll#autoinstall-jekyll-for-windows)
 
-### auto-regeneration
+### Auto-regeneration
 
 Although jekyll would suggest:
 
