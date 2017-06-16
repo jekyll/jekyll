@@ -90,15 +90,6 @@ the site generation process. It can be done with the following command:
 ```sh
 $ chcp 65001
 ```
-#### Auto Regeneration (Chocolatey method)
-As of v1.3.0, Jekyll uses the `listen` gem to watch for changes when the
-`--watch` switch is specified during a build or serve. While `listen` has
-built-in support for UNIX systems, it requires an extra gem for compatibility
-with Windows. Add the following to the Gemfile for your site:
-
-```ruby
-gem 'wdm', '~> 0.1.0' if Gem.win_platform?
-```
 
 ## How to install github-pages (Chocolatey Method)
 
@@ -171,6 +162,19 @@ In the future the installation process of the github-pages should be as simple a
 [nokogiriReleases]: https://github.com/sparklemotion/nokogiri/releases "Nokogiri Releases"
 [nokogiriFails]: https://github.com/sparklemotion/nokogiri/issues/1456#issuecomment-206481794 "Nokogiri fails to install on Ruby 2.3 for Windows"
 
+
+
+## Installation via RubyInstaller
+
+RubyInstaller is a self-contained Windows-based installer that includes the Ruby language, an execution environment, important documentation, and more.
+
+1. Install a package manager for Windows called [RubyInstaller](https://rubyinstaller.org/).
+2. Install Jekyll and Bundler via a command prompt window: `gem install jekyll bundler`
+3. Check if the installation is accessible: `jekyll -v`
+
+Optionally you can use [Autoinstall Jekyll for Windows](https://github.com/KeJunMao/fastjekyll#autoinstall-jekyll-for-windows).
+
+
 ## Time-Zone Management 
 Since Windows doesn't have a native source of zoneinfo data, the Ruby Interpreter would not understand IANA Timezones and hence using them had the `TZ` environment variable default to UTC/GMT 00:00.
 Though Windows users could alternatively define their blog's timezone by setting the key to use POSIX format of defining timezones, it wasn't as user-friendly when it came to having the clock altered to changing DST-rules.
@@ -183,26 +187,14 @@ While 'new' blogs created with Jekyll v3.4 and greater, will have the following 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 ```
 
-## Installation via RubyInstaller
+## Auto Regeneration 
+As of v1.3.0, Jekyll uses the `listen` gem to watch for changes when the
+`--watch` switch is specified during a build or serve. While `listen` has
+built-in support for UNIX systems, it requires an extra gem for compatibility
+with Windows. Add the following to the Gemfile for your site:
 
-RubyInstaller is a self-contained Windows-based installer that includes the Ruby language, an execution environment, important documentation, and more.
-
-1. Install a package manager for Windows called [RubyInstaller](https://rubyinstaller.org/).
-2. Install Jekyll and Bundler via a command prompt window: `gem install jekyll bundler`
-3. Check if the installation is accessible: `jekyll -v`
-
-Optionally you can use [Autoinstall Jekyll for Windows](https://github.com/KeJunMao/fastjekyll#autoinstall-jekyll-for-windows).
-
-#### Auto Regeneration (RubyInstaller method)
-
-Although Jekyll would suggest:
-
-```
-Please add the following to your Gemfile to avoid polling for changes:
-    gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+```ruby
+gem 'wdm', '~> 0.1.0' if Gem.win_platform?
 ```
 
-Auto regeneration will work fine without including `gem 'wdm'`.
-
-#### Time-Zone Management (RubyInstaller method)
-The [time-zone](/docs/windows/#timezone-management) documentation applies for this method.
+```
