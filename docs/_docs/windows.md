@@ -90,7 +90,7 @@ the site generation process. It can be done with the following command:
 ```sh
 $ chcp 65001
 ```
-#### Time-Zone Management (Chocolatey method)
+#### Time-Zone Management 
 Since Windows doesn't have a native source of zoneinfo data, the Ruby Interpreter would not understand IANA Timezones and hence using them had the `TZ` environment variable default to UTC/GMT 00:00.
 Though Windows users could alternatively define their blog's timezone by setting the key to use POSIX format of defining timezones, it wasn't as user-friendly when it came to having the clock altered to changing DST-rules.
 
