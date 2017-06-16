@@ -171,3 +171,26 @@ In the future the installation process of the github-pages should be as simple a
 [Bundler]: http://bundler.io/ "Ruby Dependencie Manager"
 [nokogiriReleases]: https://github.com/sparklemotion/nokogiri/releases "Nokogiri Releases"
 [nokogiriFails]: https://github.com/sparklemotion/nokogiri/issues/1456#issuecomment-206481794 "Nokogiri fails to install on Ruby 2.3 for Windows"
+
+## Installation via RubyInstaller
+
+RubyInstaller is a self-contained Windows-based installer that includes the Ruby language, an execution environment, important documentation, and more.
+
+1. Install a package manager for Windows called [RubyInstaller](https://rubyinstaller.org/).
+2. Install Jekyll and Bundler via a command prompt window: `gem install jekyll bundler`
+3. Check if the installation is accessible: `jekyll -v`
+
+See [Autoinstall Jekyll for Windows](https://github.com/KeJunMao/fastjekyll#autoinstall-jekyll-for-windows)
+
+### Auto-regeneration
+
+Although jekyll would suggest:
+
+```
+Please add the following to your Gemfile to avoid polling for changes:
+    gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+```
+
+Auto-regeneration will work fine without including `gem 'wdm'`
+
+### [time-zone](/docs/windows/#timezone-management)
