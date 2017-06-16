@@ -196,5 +196,3 @@ with Windows. Add the following to the Gemfile for your site:
 ```ruby
 gem 'wdm', '~> 0.1.0' if Gem.win_platform?
 ```
-
-
