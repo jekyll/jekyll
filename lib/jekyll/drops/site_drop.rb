@@ -37,6 +37,10 @@ module Jekyll
         @site_collections ||= @obj.collections.values.sort_by(&:label).map(&:to_liquid)
       end
 
+      def plugins
+        @obj.plugin_manager.enabled_plugins
+      end
+
       private
       def_delegator :@obj, :config, :fallback_data
     end

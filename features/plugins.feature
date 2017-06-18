@@ -35,3 +35,22 @@ Feature: Configuring and using plugins
     And I should see "Whatever" in "_site/index.html"
     And the "_site/test.txt" file should exist
     And I should see "this is a test" in "_site/test.txt"
+
+  Scenario: Plugin is enabled
+    Given I have an "index.html" page that contains "{% if site.plugins contains "jekyll_test_plugin" %} plugin loaded {% endif %}"
+    And I have a configuration file with "gems" set to "[jekyll_test_plugin]"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "plugin loaded" in "_site/index.html"
+
+  Scenario: Plugin is not enabled
+    Given I have an "index.html" page that contains "{% if site.plugins contains "jekyll_test_plugin" %} plugin loaded {% endif %}"
+    And I have a configuration file with:
+    | key       | value                |
+    | gems      | [jekyll_test_plugin] |
+    | whitelist | []                   |
+    When I run jekyll build --safe
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should not see "plugin loaded" in "_site/index.html"
