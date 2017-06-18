@@ -93,6 +93,19 @@ end
 
 #
 
+Given(%r!^I have the following documents? under the (.*) collection:$!) do |folder, table|
+  table.hashes.each do |input_hash|
+    title = slug(input_hash["title"])
+    filename = "#{title}.md"
+    dest_folder = "_#{folder}"
+
+    path = File.join(dest_folder, filename)
+    File.write(path, file_content_from_hash(input_hash))
+  end
+end
+
+#
+
 Given(%r!^I have a configuration file with "(.*)" set to "(.*)"$!) do |key, value|
   config = \
     if source_dir.join("_config.yml").exist?
@@ -241,6 +254,30 @@ Then(%r!^I should (not )?see "(.*)" in "(.*)" unless Windows$!) do |negative, te
     else
       expect(file_contents(file)).to match regexp
     end
+  end
+end
+
+#
+
+Then(%r!^I should see date "(.*)" in "(.*)" unless Windows$!) do |text, file|
+  step %(the "#{file}" file should exist)
+  regexp = Regexp.new(text)
+  if Jekyll::Utils::Platforms.really_windows? && !dst_active?
+    expect(file_contents(file)).not_to match regexp
+  else
+    expect(file_contents(file)).to match regexp
+  end
+end
+
+#
+
+Then(%r!^I should see date "(.*)" in "(.*)" if on Windows$!) do |text, file|
+  step %(the "#{file}" file should exist)
+  regexp = Regexp.new(text)
+  if Jekyll::Utils::Platforms.really_windows? && !dst_active?
+    expect(file_contents(file)).to match regexp
+  else
+    expect(file_contents(file)).not_to match regexp
   end
 end
 

@@ -32,7 +32,7 @@ module Jekyll
 
       row_data.each_index do |cell_index|
         str << "-" * widths[cell_index]
-        str << "-+-" unless cell_index == row_data.length-1
+        str << "-+-" unless cell_index == row_data.length - 1
       end
 
       str << "\n"
@@ -49,7 +49,7 @@ module Jekyll
                  cell_data.rjust(widths[cell_index], " ")
                end
 
-        str << " | " unless cell_index == row_data.length-1
+        str << " | " unless cell_index == row_data.length - 1
       end
 
       str << "\n"

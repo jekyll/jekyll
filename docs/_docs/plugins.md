@@ -27,12 +27,12 @@ You have 3 options for installing plugins:
 1. In your site source root, make a `_plugins` directory. Place your plugins
 here. Any file ending in `*.rb` inside this directory will be loaded before
 Jekyll generates your site.
-2. In your `_config.yml` file, add a new array with the key `gems` and the
+2. In your `_config.yml` file, add a new array with the key `plugins` and the
 values of the gem names of the plugins you'd like to use. An example:
 
 
-        gems: [jekyll-coffeescript, jekyll-watch, jekyll-assets]
-        # This will require each of these gems automatically.
+        plugins: [jekyll-coffeescript, jekyll-watch, jekyll-assets]
+        # This will require each of these plugins automatically.
 
     Then install your plugins using `gem install jekyll-coffeescript jekyll-watch jekyll-assets`
 
@@ -865,12 +865,14 @@ LESS.js files during generation.
 - [jekyll-figure](https://github.com/paulrobertlloyd/jekyll-figure): A liquid tag for Jekyll that generates `<figure>` elements.
 - [Jekyll Video Embed](https://github.com/eug/jekyll-video-embed): It provides several tags to easily embed videos (e.g. Youtube, Vimeo, UStream and Ted Talks)
 - [jekyll-i18n_tags](https://github.com/KrzysiekJ/jekyll-i18n_tags): Translate your templates.
-- [Jekyll Ideal Image Slider](https://github.com/xHN35RQ/jekyll-ideal-image-slider): Liquid tag plugin to create image sliders using [Ideal Image Slider](https://github.com/gilbitron/Ideal-Image-Slider).
+- [Jekyll Ideal Image Slider](https://github.com/jekylltools/jekyll-ideal-image-slider): Liquid tag plugin to create image sliders using [Ideal Image Slider](https://github.com/gilbitron/Ideal-Image-Slider).
 - [Jekyll Tags List Plugin](https://github.com/crispgm/jekyll-tags-list-plugin): A Liquid tag plugin that creates tags list in specific order.
 - [Jekyll Maps](https://github.com/ayastreb/jekyll-maps) by [Anatoliy Yastreb](https://github.com/ayastreb): A Jekyll plugin to easily embed maps with filterable locations.
 - [Jekyll Cloudinary](https://nhoizey.github.io/jekyll-cloudinary/) by [Nicolas Hoizey](https://nicolas-hoizey.com/): a Jekyll plugin adding a Liquid tag to ease the use of Cloudinary for responsive images in your Markdown/Kramdown posts.
 - [jekyll-include-absolute-plugin](https://github.com/tnhu/jekyll-include-absolute-plugin) by [Tan Nhu](https://github.com/tnhu): A Jekyll plugin to include a file from its path relative to Jekyll's source folder.
 - [Jekyll Download Tag](https://github.com/mattg/jekyll-download-tag): A Liquid tag that acts like `include`, but for external resources.
+- [Jekyll Brand Social Wall](https://github.com/MediaComem/jekyll-brand-social-wall): A jekyll plugin to generate a social wall with your favorite social networks
+- [Jekyll If File Exists](https://github.com/k-funk/jekyll-if-file-exists): A Jekyll Plugin that checks if a file exists with an if/else block.
 
 #### Collections
 
@@ -880,6 +882,7 @@ LESS.js files during generation.
 
 #### Other
 
+- [Analytics for Jekyll](https://github.com/hendrikschneider/jekyll-analytics) by Hendrik Schneider: An effortless way to add  various trackers like Google Analytics, Piwik, etc. to your site
 - [ditaa-ditaa](https://github.com/tmthrgd/ditaa-ditaa) by Tom Thorogood: a drastic revision of jekyll-ditaa that renders diagrams drawn using ASCII art into PNG images.
 - [Pygments Cache Path by Raimonds Simanovskis](https://github.com/rsim/blog.rayapps.com/blob/master/_plugins/pygments_cache_patch.rb): Plugin to cache syntax-highlighted code from Pygments.
 - [Draft/Publish Plugin by Michael Ivey](https://gist.github.com/49630): Save posts as drafts.

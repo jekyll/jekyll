@@ -1,4 +1,5 @@
 # coding: utf-8
+
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "jekyll/version"
@@ -37,6 +38,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("liquid",                "~> 4.0")
   s.add_runtime_dependency("mercenary",             "~> 0.3.3")
   s.add_runtime_dependency("pathutil",              "~> 0.9")
-  s.add_runtime_dependency("rouge",                 ">= 1.7", "< 3")
+  s.add_runtime_dependency("rouge",                 "~> #{ENV["ROUGE_VERSION"] || "1.7"}")
   s.add_runtime_dependency("safe_yaml",             "~> 1.0")
 end

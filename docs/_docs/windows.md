@@ -4,12 +4,59 @@ permalink: /docs/windows/
 ---
 
 While Windows is not an officially-supported platform, it can be used to run
-Jekyll with the proper tweaks. This page aims to collect some of the general
-knowledge and lessons that have been unearthed by Windows users.
+Jekyll with the proper tweaks. If you are using Windows 10 Anniversary Update, 
+the easiest way to run Jekyll is to use the new [Bash on Ubuntu on Windows](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide).
+For older installations, this page aims to collect some of the general knowledge and lessons that have been unearthed by Windows users.
 
-## Installation
+## Installation via Bash on Windows 10
 
-A quick way to install Jekyll is to follow the [installation instructions by David Burela](https://davidburela.wordpress.com/2015/11/28/easily-install-jekyll-on-windows-with-3-command-prompt-entries-and-chocolatey/):
+*Please note:* You must have [Bash on Ubuntu on Windows](https://msdn.microsoft.com/en-us/commandline/wsl/about?f=255&MSPPError=-2147217396) enabled.
+
+First let's make sure all our packages / repositories are up to date. Open a new Command Prompt instance, and type the following:
+
+```
+bash
+```
+Your Command Prompt instance should now be a Bash instance. Now we must update our repo lists and packages.
+
+```
+sudo apt-get update -y && sudo apt-get upgrade -y
+```
+
+Now we can install Ruby. To do this we will use a repository from [BrightBox](https://www.brightbox.com/docs/ruby/ubuntu/), which hosts optimized versions of Ruby for Ubuntu.
+
+```
+sudo apt-add-repository ppa:brightbox/ruby-ng
+sudo apt-get update
+sudo apt-get install ruby2.3 ruby2.3-dev build-essential
+```
+Next let's update our Ruby gems:
+
+```
+sudo gem update
+```
+
+Now all that is left to do is install Jekyll.
+
+```
+sudo gem install jekyll bundler
+```
+
+You can test by running:
+
+```
+jekyll new my_project
+```
+
+**And that's it!**
+If you `cd` into the folder, you can make sure time management is working by opening your `_posts` folder. You should see a markdown file with the current date listed.
+
+*Please note* Bash on Ubuntu on Windows is still under development, so you may run into issues. If you see an Auto-Regeneration error warning in your Bash instance, you can ignore it.
+
+## Installation via Chocolatey
+
+
+A quick way to install Jekyll using Chocolatey is to follow the [installation instructions by David Burela](https://davidburela.wordpress.com/2015/11/28/easily-install-jekyll-on-windows-with-3-command-prompt-entries-and-chocolatey/):
 
  1. Install a package manager for Windows called [Chocolatey](https://chocolatey.org/install)
  2. Install Ruby via Chocolatey: `choco install ruby -y`
@@ -23,8 +70,6 @@ For a more conventional way of installing Jekyll you can follow this [complete g
 
 [windows-installjekyll3]: https://labs.sverrirs.com/jekyll/
 
-## Encoding
-
 If you use UTF-8 encoding, make sure that no `BOM` header
 characters exist in your files or very, very bad things will happen to
 Jekyll. This is especially relevant if you're running Jekyll on Windows.
@@ -36,9 +81,6 @@ the site generation process. It can be done with the following command:
 ```sh
 $ chcp 65001
 ```
-
-## Timezone Management
-
 Since Windows doesn't have a native source of zoneinfo data, the Ruby Interpreter would not understand IANA Timezones and hence using them had the `TZ` environment variable default to UTC/GMT 00:00.
 Though Windows users could alternatively define their blog's timezone by setting the key to use POSIX format of defining timezones, it wasn't as user-friendly when it came to having the clock altered to changing DST-rules.
 
@@ -49,8 +91,6 @@ While 'new' blogs created with Jekyll v3.4 and greater, will have the following 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 ```
-
-## Auto-regeneration
 
 As of v1.3.0, Jekyll uses the `listen` gem to watch for changes when the
 `--watch` switch is specified during a build or serve. While `listen` has
@@ -131,3 +171,26 @@ In the future the installation process of the github-pages should be as simple a
 [Bundler]: http://bundler.io/ "Ruby Dependencie Manager"
 [nokogiriReleases]: https://github.com/sparklemotion/nokogiri/releases "Nokogiri Releases"
 [nokogiriFails]: https://github.com/sparklemotion/nokogiri/issues/1456#issuecomment-206481794 "Nokogiri fails to install on Ruby 2.3 for Windows"
+
+## Installation via RubyInstaller
+
+RubyInstaller is a self-contained Windows-based installer that includes the Ruby language, an execution environment, important documentation, and more.
+
+1. Install a package manager for Windows called [RubyInstaller](https://rubyinstaller.org/).
+2. Install Jekyll and Bundler via a command prompt window: `gem install jekyll bundler`
+3. Check if the installation is accessible: `jekyll -v`
+
+See [Autoinstall Jekyll for Windows](https://github.com/KeJunMao/fastjekyll#autoinstall-jekyll-for-windows)
+
+### Auto-regeneration
+
+Although jekyll would suggest:
+
+```
+Please add the following to your Gemfile to avoid polling for changes:
+    gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+```
+
+Auto-regeneration will work fine without including `gem 'wdm'`
+
+### [time-zone](/docs/windows/#timezone-management)

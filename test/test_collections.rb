@@ -217,7 +217,38 @@ class TestCollections < JekyllUnitTest
     end
 
     should "read document in subfolders with dots" do
-      assert @collection.docs.any? { |d| d.path.include?("all.dots") }
+      assert(
+        @collection.docs.any? { |d| d.path.include?("all.dots") }
+      )
+    end
+  end
+
+  context "a collection with included dotfiles" do
+    setup do
+      @site = fixture_site({
+        "collections" => {
+          "methods" => {
+            "permalink" => "/awesome/:path/",
+          },
+        },
+        "include"     => %w(.htaccess .gitignore),
+      })
+      @site.process
+      @collection = @site.collections["methods"]
+    end
+
+    should "contain .htaccess file" do
+      assert(@collection.files.any? { |d| d.name == ".htaccess" })
+    end
+
+    should "contain .gitignore file" do
+      assert(@collection.files.any? { |d| d.name == ".gitignore" })
+    end
+
+    should "have custom URL in static file" do
+      assert(
+        @collection.files.any? { |d| d.url.include?("/awesome/with.dots/") }
+      )
     end
   end
 end

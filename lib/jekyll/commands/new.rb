@@ -61,7 +61,6 @@ module Jekyll
         def gemfile_contents
           <<-RUBY
 source "https://rubygems.org"
-ruby RUBY_VERSION
 
 # Hello! This is where you manage which Jekyll version is used to run.
 # When you want to use a different version, change it below, save the
@@ -109,6 +108,7 @@ RUBY
 
         def create_sample_files(path)
           FileUtils.cp_r site_template + "/.", path
+          FileUtils.chmod_R "u+w", path
           FileUtils.rm File.expand_path(scaffold_path, path)
         end
 

@@ -33,6 +33,14 @@ class TestConvertible < JekyllUnitTest
       assert_match(%r!#{File.join(@base, name)}!, out)
     end
 
+    should "raise for broken front matter with `strict_front_matter` set" do
+      name = "broken_front_matter2.erb"
+      @convertible.site.config["strict_front_matter"] = true
+      assert_raises do
+        @convertible.read_yaml(@base, name)
+      end
+    end
+
     should "not allow ruby objects in YAML" do
       out = capture_stderr do
         @convertible.read_yaml(@base, "exploit_front_matter.erb")

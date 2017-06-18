@@ -32,11 +32,12 @@ module Jekyll
             cmd.action do |_, opts|
               opts["serving"] = true
               opts["watch"  ] = true unless opts.key?("watch")
-              config = opts["config"]
-              opts["url"] = default_url(opts) if Jekyll.env == "development"
-              Build.process(opts)
-              opts["config"] = config
-              Serve.process(opts)
+
+              config = configuration_from_options(opts)
+              if Jekyll.env == "development"
+                config["url"] = default_url(config)
+              end
+              [Build, Serve].each { |klass| klass.process(config) }
             end
           end
         end
@@ -103,7 +104,7 @@ module Jekyll
         private
         def start_up_webrick(opts, destination)
           server = WEBrick::HTTPServer.new(webrick_opts(opts)).tap { |o| o.unmount("") }
-          server.mount(opts["baseurl"], Servlet, destination, file_handler_opts)
+          server.mount(opts["baseurl"].to_s, Servlet, destination, file_handler_opts)
           Jekyll.logger.info "Server address:", server_address(server, opts)
           launch_browser server, opts if opts["open_url"]
           boot_or_detach server, opts
@@ -135,7 +136,7 @@ module Jekyll
 
         private
         def format_url(ssl_enabled, address, port, baseurl = nil)
-          format("%{prefix}://%{address}:%{port}%{baseurl}", {
+          format("%<prefix>s://%<address>s:%<port>i%<baseurl>s", {
             :prefix  => ssl_enabled ? "https" : "http",
             :address => address,
             :port    => port,

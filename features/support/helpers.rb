@@ -55,7 +55,7 @@ end
 def all_steps_to_path(path)
   source = source_dir
   dest = Pathname.new(path).expand_path
-  paths  = []
+  paths = []
 
   dest.ascend do |f|
     break if f == source
@@ -162,4 +162,15 @@ def seconds_agnostic_time(time)
   time = time.strftime("%H:%M:%S") if time.is_a?(Time)
   hour, minutes, = time.split(":")
   "#{hour}:#{minutes}"
+end
+
+# Helper method for Windows
+def dst_active?
+  config = Jekyll.configuration("quiet" => true)
+  ENV["TZ"] = config["timezone"]
+  dst = Time.now.isdst
+
+  # reset variable to default state on Windows
+  ENV["TZ"] = nil
+  dst
 end

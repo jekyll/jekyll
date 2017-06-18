@@ -6,71 +6,72 @@ module Jekyll
     # Strings rather than symbols are used for compatibility with YAML.
     DEFAULTS = Configuration[{
       # Where things are
-      "source"            => Dir.pwd,
-      "destination"       => File.join(Dir.pwd, "_site"),
-      "plugins_dir"       => "_plugins",
-      "layouts_dir"       => "_layouts",
-      "data_dir"          => "_data",
-      "includes_dir"      => "_includes",
-      "collections"       => {},
+      "source"              => Dir.pwd,
+      "destination"         => File.join(Dir.pwd, "_site"),
+      "plugins_dir"         => "_plugins",
+      "layouts_dir"         => "_layouts",
+      "data_dir"            => "_data",
+      "includes_dir"        => "_includes",
+      "collections"         => {},
 
       # Handling Reading
-      "safe"              => false,
-      "include"           => [".htaccess"],
-      "exclude"           => %w(
+      "safe"                => false,
+      "include"             => [".htaccess"],
+      "exclude"             => %w(
         Gemfile Gemfile.lock node_modules vendor/bundle/ vendor/cache/ vendor/gems/
         vendor/ruby/
       ),
-      "keep_files"        => [".git", ".svn"],
-      "encoding"          => "utf-8",
-      "markdown_ext"      => "markdown,mkdown,mkdn,mkd,md",
+      "keep_files"          => [".git", ".svn"],
+      "encoding"            => "utf-8",
+      "markdown_ext"        => "markdown,mkdown,mkdn,mkd,md",
+      "strict_front_matter" => false,
 
       # Filtering Content
-      "show_drafts"       => nil,
-      "limit_posts"       => 0,
-      "future"            => false,
-      "unpublished"       => false,
+      "show_drafts"         => nil,
+      "limit_posts"         => 0,
+      "future"              => false,
+      "unpublished"         => false,
 
       # Plugins
-      "whitelist"         => [],
-      "gems"              => [],
+      "whitelist"           => [],
+      "plugins"             => [],
 
       # Conversion
-      "markdown"          => "kramdown",
-      "highlighter"       => "rouge",
-      "lsi"               => false,
-      "excerpt_separator" => "\n\n",
-      "incremental"       => false,
+      "markdown"            => "kramdown",
+      "highlighter"         => "rouge",
+      "lsi"                 => false,
+      "excerpt_separator"   => "\n\n",
+      "incremental"         => false,
 
       # Serving
-      "detach"            => false, # default to not detaching the server
-      "port"              => "4000",
-      "host"              => "127.0.0.1",
-      "baseurl"           => "",
-      "show_dir_listing"  => false,
+      "detach"              => false, # default to not detaching the server
+      "port"                => "4000",
+      "host"                => "127.0.0.1",
+      "baseurl"             => nil, # this mounts at /, i.e. no subdirectory
+      "show_dir_listing"    => false,
 
       # Output Configuration
-      "permalink"         => "date",
-      "paginate_path"     => "/page:num",
-      "timezone"          => nil, # use the local timezone
+      "permalink"           => "date",
+      "paginate_path"       => "/page:num",
+      "timezone"            => nil, # use the local timezone
 
-      "quiet"             => false,
-      "verbose"           => false,
-      "defaults"          => [],
+      "quiet"               => false,
+      "verbose"             => false,
+      "defaults"            => [],
 
-      "liquid"            => {
+      "liquid"              => {
         "error_mode" => "warn",
       },
 
-      "rdiscount"         => {
+      "rdiscount"           => {
         "extensions" => [],
       },
 
-      "redcarpet"         => {
+      "redcarpet"           => {
         "extensions" => [],
       },
 
-      "kramdown"          => {
+      "kramdown"            => {
         "auto_ids"      => true,
         "toc_levels"    => "1..6",
         "entity_output" => "as_char",
@@ -137,7 +138,7 @@ module Jekyll
         SafeYAML.load_file(filename) || {}
       else
         raise ArgumentError, "No parser for '#{filename}' is available.
-          Use a .toml or .y(a)ml file instead."
+          Use a .y(a)ml or .toml file instead."
       end
     end
 
@@ -229,9 +230,10 @@ module Jekyll
       # Provide backwards-compatibility
       check_auto(config)
       check_server(config)
+      check_plugins(config)
 
       renamed_key "server_port", "port", config
-      renamed_key "plugins", "plugins_dir", config
+      renamed_key "gems", "plugins", config
       renamed_key "layouts", "layouts_dir", config
       renamed_key "data_source", "data_dir", config
 
@@ -383,6 +385,25 @@ module Jekyll
           "We recommend you switch to Kramdown. To do this, replace " \
           "`markdown: maruku` with `markdown: kramdown` in your " \
           "`_config.yml` file."
+      end
+    end
+
+    # Private: Checks if the `plugins` config is a String
+    #
+    # config - the config hash
+    #
+    # Raises a Jekyll::Errors::InvalidConfigurationError if the config `plugins`
+    # is a string
+    private
+    def check_plugins(config)
+      if config.key?("plugins") && config["plugins"].is_a?(String)
+        Jekyll.logger.error "Configuration Error:", "You specified the" \
+          " `plugins` config in your configuration file as a string, please" \
+          " use an array instead. If you wanted to set the directory of your" \
+          " plugins, use the config key `plugins_dir` instead."
+        raise Jekyll::Errors::InvalidConfigurationError,
+          "'plugins' should not be a string, but was: " \
+          "#{config["plugins"].inspect}. Use 'plugins_dir' instead."
       end
     end
   end

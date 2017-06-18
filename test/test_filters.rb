@@ -9,7 +9,7 @@ class TestFilters < JekyllUnitTest
 
     def initialize(opts = {})
       @site = Jekyll::Site.new(opts.merge("skip_config_files" => true))
-      @context = Liquid::Context.new({}, {}, { :site => @site })
+      @context = Liquid::Context.new(@site.site_payload, {}, { :site => @site })
     end
   end
 
@@ -26,12 +26,13 @@ class TestFilters < JekyllUnitTest
 
   context "filters" do
     setup do
-      @filter = make_filter_mock({
-        "timezone" => "UTC",
-        "url"      => "http://example.com",
-        "baseurl"  => "/base",
-      })
       @sample_time = Time.utc(2013, 3, 27, 11, 22, 33)
+      @filter = make_filter_mock({
+        "timezone"               => "UTC",
+        "url"                    => "http://example.com",
+        "baseurl"                => "/base",
+        "dont_show_posts_before" => @sample_time,
+      })
       @sample_date = Date.parse("2013-03-27")
       @time_as_string = "September 11, 2001 12:46:30 -0000"
       @time_as_numeric = 1_399_680_607
@@ -284,11 +285,9 @@ class TestFilters < JekyllUnitTest
       end
 
       context "without input" do
-        should "raise an error if input is nil" do
-          err = assert_raises Jekyll::Errors::InvalidDateError do
-            @filter.date_to_xmlschema(nil)
-          end
-          assert_equal "Invalid Date: 'nil' is not a valid datetime.", err.message
+        should "return input" do
+          assert_nil(@filter.date_to_xmlschema(nil))
+          assert_equal("", @filter.date_to_xmlschema(""))
         end
       end
     end
@@ -315,6 +314,17 @@ class TestFilters < JekyllUnitTest
 
     should "escape space as %20" do
       assert_equal "my%20things", @filter.uri_escape("my things")
+    end
+
+    should "allow reserver characters in URI" do
+      assert_equal(
+        "foo!*'();:@&=+$,/?#[]bar",
+        @filter.uri_escape("foo!*'();:@&=+$,/?#[]bar")
+      )
+      assert_equal(
+        "foo%20bar!*'();:@&=+$,/?#[]baz",
+        @filter.uri_escape("foo bar!*'();:@&=+$,/?#[]baz")
+      )
     end
 
     context "absolute_url filter" do
@@ -391,6 +401,15 @@ class TestFilters < JekyllUnitTest
         assert_equal "http://example.com/", filter.absolute_url(page_url)
       end
 
+      should "not append a forward slash if both input and baseurl are simply '/'" do
+        page_url = "/"
+        filter = make_filter_mock({
+          "url"     => "http://example.com",
+          "baseurl" => "/",
+        })
+        assert_equal "http://example.com/", filter.absolute_url(page_url)
+      end
+
       should "normalize international URLs" do
         page_url = ""
         filter = make_filter_mock({
@@ -398,6 +417,11 @@ class TestFilters < JekyllUnitTest
           "baseurl" => nil,
         })
         assert_equal "http://xn--mlaut-jva.example.org/", filter.absolute_url(page_url)
+      end
+
+      should "not modify an absolute URL" do
+        page_url = "http://example.com/"
+        assert_equal "http://example.com/", @filter.absolute_url(page_url)
       end
     end
 
@@ -439,6 +463,55 @@ class TestFilters < JekyllUnitTest
           "baseurl" => "/base",
         })
         assert_equal "/base", filter.relative_url(page_url)
+      end
+
+      should "not prepend a forward slash if baseurl ends with a single '/'" do
+        page_url = "/css/main.css"
+        filter = make_filter_mock({
+          "url"     => "http://example.com",
+          "baseurl" => "/base/",
+        })
+        assert_equal "/base/css/main.css", filter.relative_url(page_url)
+      end
+
+      should "not return valid URI if baseurl ends with multiple '/'" do
+        page_url = "/css/main.css"
+        filter = make_filter_mock({
+          "url"     => "http://example.com",
+          "baseurl" => "/base//",
+        })
+        refute_equal "/base/css/main.css", filter.relative_url(page_url)
+      end
+
+      should "not prepend a forward slash if both input and baseurl are simply '/'" do
+        page_url = "/"
+        filter = make_filter_mock({
+          "url"     => "http://example.com",
+          "baseurl" => "/",
+        })
+        assert_equal "/", filter.relative_url(page_url)
+      end
+    end
+
+    context "strip_index filter" do
+      should "strip trailing /index.html" do
+        assert_equal "/foo/", @filter.strip_index("/foo/index.html")
+      end
+
+      should "strip trailing /index.htm" do
+        assert_equal "/foo/", @filter.strip_index("/foo/index.htm")
+      end
+
+      should "not strip HTML in the middle of URLs" do
+        assert_equal "/index.html/foo", @filter.strip_index("/index.html/foo")
+      end
+
+      should "not raise an error on nil strings" do
+        assert_nil @filter.strip_index(nil)
+      end
+
+      should "not mangle other URLs" do
+        assert_equal "/foo/", @filter.strip_index("/foo/")
       end
     end
 
@@ -638,7 +711,7 @@ class TestFilters < JekyllUnitTest
       end
 
       should "filter objects in a hash appropriately" do
-        hash = { "a"=>{ "color"=>"red" }, "b"=>{ "color"=>"blue" } }
+        hash = { "a" => { "color"=>"red" }, "b" => { "color"=>"blue" } }
         assert_equal 1, @filter.where(hash, "color", "red").length
         assert_equal [{ "color"=>"red" }], @filter.where(hash, "color", "red")
       end
@@ -691,7 +764,7 @@ class TestFilters < JekyllUnitTest
         assert_equal 4.7, results[0]["rating"]
       end
 
-      should "always return an array if the object responds to `select`" do
+      should "always return an array if the object responds to 'select'" do
         results = @filter.where(SelectDummy.new, "obj", "1 == 1")
         assert_equal [], results
       end
@@ -703,7 +776,7 @@ class TestFilters < JekyllUnitTest
       end
 
       should "filter objects in a hash appropriately" do
-        hash = { "a"=>{ "color"=>"red" }, "b"=>{ "color"=>"blue" } }
+        hash = { "a" => { "color"=>"red" }, "b" => { "color"=>"blue" } }
         assert_equal 1, @filter.where_exp(hash, "item", "item.color == 'red'").length
         assert_equal(
           [{ "color"=>"red" }],
@@ -768,9 +841,17 @@ class TestFilters < JekyllUnitTest
         assert_equal site.posts.find { |p| p.title == "Foo Bar" }, results.first
       end
 
-      should "always return an array if the object responds to `select`" do
+      should "always return an array if the object responds to 'select'" do
         results = @filter.where_exp(SelectDummy.new, "obj", "1 == 1")
         assert_equal [], results
+      end
+
+      should "filter by variable values" do
+        @filter.site.tap(&:read)
+        posts = @filter.site.site_payload["site"]["posts"]
+        results = @filter.where_exp(posts, "post",
+          "post.date > site.dont_show_posts_before")
+        assert_equal posts.select { |p| p.date > @sample_time }.count, results.length
       end
     end
 
@@ -823,9 +904,9 @@ class TestFilters < JekyllUnitTest
 
       should "allow more complex filters" do
         items = [
-          { "version"=>"1.0", "result"=>"slow" },
-          { "version"=>"1.1.5", "result"=>"medium" },
-          { "version"=>"2.7.3", "result"=>"fast" },
+          { "version" => "1.0", "result" => "slow" },
+          { "version" => "1.1.5", "result" => "medium" },
+          { "version" => "2.7.3", "result" => "fast" },
         ]
 
         result = @filter.group_by_exp(items, "item", "item.version | split: '.' | first")
@@ -895,6 +976,12 @@ class TestFilters < JekyllUnitTest
       should "return sorted by property array with nils last" do
         assert_equal [{ "a" => 1 }, { "a" => 2 }, { "b" => 1 }],
           @filter.sort([{ "a" => 2 }, { "b" => 1 }, { "a" => 1 }], "a", "last")
+      end
+      should "return sorted by subproperty array" do
+        assert_equal [{ "a" => { "b" => 1 } }, { "a" => { "b" => 2 } },
+                      { "a" => { "b" => 3 } }, ],
+          @filter.sort([{ "a" => { "b" => 2 } }, { "a" => { "b" => 1 } },
+                        { "a" => { "b" => 3 } }, ], "a.b")
       end
     end
 

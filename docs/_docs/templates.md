@@ -4,8 +4,8 @@ permalink: /docs/templates/
 ---
 
 Jekyll uses the [Liquid](https://shopify.github.io/liquid/) templating language to
-process templates. All of the standard Liquid [tags](https://shopify.github.io/liquid/tags/) and
-[filters](https://shopify.github.io/liquid/filters/) are
+process templates. All of the standard Liquid [tags](https://shopify.github.io/liquid/tags/control-flow/) and
+[filters](https://shopify.github.io/liquid/filters/abs/) are
 supported. Jekyll even adds a few handy filters and tags of its own to make
 common tasks easier.
 
@@ -178,15 +178,15 @@ common tasks easier.
         <p class="name"><strong>CGI Escape</strong></p>
         <p>
           CGI escape a string for use in a URL. Replaces any special characters
-          with appropriate %XX replacements.
+          with appropriate <code>%XX</code> replacements. CGI escape normally replaces a space with a plus <code>+</code> sign.
         </p>
       </td>
       <td class="align-center">
         <p>
-         <code class="filter">{% raw %}{{ "foo,bar;baz?" | cgi_escape }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ "foo, bar; baz?" | cgi_escape }}{% endraw %}</code>
         </p>
         <p>
-          <code class="output">foo%2Cbar%3Bbaz%3F</code>
+          <code class="output">foo%2C+bar%3B+baz%3F</code>
         </p>
       </td>
     </tr>
@@ -194,15 +194,15 @@ common tasks easier.
       <td>
         <p class="name"><strong>URI Escape</strong></p>
         <p>
-          URI escape a string.
+          Percent encodes any special characters in a URI. URI escape normally replaces a space with <code>%20</code>. <a href="https://en.wikipedia.org/wiki/Percent-encoding#Types_of_URI_characters">Reserved characters</a> will not be escaped.
         </p>
       </td>
       <td class="align-center">
         <p>
-         <code class="filter">{% raw %}{{ "foo, bar \baz?" | uri_escape }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ "http://foo.com/?q=foo, \bar?" | uri_escape }}{% endraw %}</code>
         </p>
         <p>
-          <code class="output">foo,%20bar%20%5Cbaz?</code>
+          <code class="output">http://foo.com/?q=foo,%20%5Cbar?</code>
         </p>
       </td>
     </tr>
@@ -542,7 +542,7 @@ You can also use the `link` tag to create a link in Markdown as follows:
 
 The path to the post, page, or collection is defined as the path relative to the root directory (where your config file is) to the file, not the path from your existing page to the other page.
 
-For example, suppose you're creating a link `page_a.md` (stored in `pages/folder1/folder2`) to `page_b.md` (stored in  `pages/folder1`). Your path in the link would not be `../page_b.html`. Instead, it would be `/pages/folder1/page_b.md`.
+For example, suppose you're creating a link in `page_a.md` (stored in `pages/folder1/folder2`) to `page_b.md` (stored in  `pages/folder1`). Your path in the link would not be `../page_b.html`. Instead, it would be `/pages/folder1/page_b.md`.
 
 If you're unsure of the path, add `{% raw %}{{ page.path }}{% endraw %}` to the page and it will display the path.
 
@@ -552,7 +552,7 @@ Note you cannot add filters to `link` tags. For example, you cannot append a str
 
 ### Linking to posts
 
-If you want like to include a link to a post on your site, the `post_url` tag will generate the correct permalink URL for the post you specify.
+If you want to include a link to a post on your site, the `post_url` tag will generate the correct permalink URL for the post you specify.
 
 ```liquid
 {% raw %}
