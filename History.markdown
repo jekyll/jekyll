@@ -108,6 +108,7 @@
   * Add test for uri_escape on reserved characters (#6086)
   * Allow you to specify the rouge version via an environment variable for testing (#6138)
   * Bump Rubocop to 0.49.1 (#6093)
+  * Lock nokogiri to 1.7.x for Ruby 2.1 (#6140)
 
 ### Site Enhancements
 
