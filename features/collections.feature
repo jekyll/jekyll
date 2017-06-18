@@ -128,16 +128,18 @@ Feature: Collections
       puppies:
         output: false
     """
-    And I have a "foo.txt" file that contains "random static file"
+    And I have a "index.html" page that contains "Newest puppy: {% assign puppy = site.puppies.last %}{{ puppy.title }}"
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
     And the "_site/puppies/rover.html" file should not exist
     And the "_site/puppies/fido.html" file should not exist
+    And I should see "Newest puppy: Rover" in "_site/index.html"
     When I run jekyll build --future
     Then I should get a zero exit status
     And the _site directory should exist
     And the "_site/puppies/fido.html" file should not exist
+    And I should see "Newest puppy: Fido" in "_site/index.html"
 
   Scenario: All the documents
     Given I have an "index.html" page that contains "All documents: {% for doc in site.documents %}{{ doc.relative_path }} {% endfor %}"
