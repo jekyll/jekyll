@@ -16,7 +16,7 @@ the wild. Some new shiny things you might want to test out:
 - The `gems` key in the `_config.yml` is now `plugins`. This is backwards-compatible, as Jekyll will gracefully upgrade `gems` to `plugins` if you use the former.
 - Filters like `sort` now allow you to sort based on a subvalue, e.g. `{% raw %}{% assign sorted = site.posts | sort: "image.alt_text" %}{% endraw %}`.
 - You can now create tab-separated data files.
-- Using `layout: none` will now produce a file with no layout. Equivalent to `layout: nil`, with the exception that `none` is a truthy value and won't be overwritten by front matter defaults.
+- Using `layout: none` will now produce a file with no layout. Equivalent to `layout: null`, with the exception that `none` is a truthy value and won't be overwritten by front matter defaults.
 - No more pesky errors if your URL contains a colon (sorry about those!)
 - We now automatically exclude the `Gemfile` from the site manifest when compiling your site. No more `_site/Gemfile`!
 - We fixed a bug where abbreviated post dates were ignored, e.g. `_posts/2016-4-4-april-fourth.md`.
