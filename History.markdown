@@ -1,4 +1,4 @@
-## HEAD
+## 3.5.0 / 2017-06-18
 
 ### Minor Enhancements
 
@@ -137,9 +137,6 @@
   * add test to ensure variables work in `where_exp` condition (#5315)
   * Read explicitly included dot-files in collections. (#6092)
   * Default `baseurl` to `nil` instead of empty string (#6137)
-
-### fix
-
   * Filters#time helper: Duplicate time before calling #localtime. (#5996)
 
 ## 3.4.4 / 2016-06-17
