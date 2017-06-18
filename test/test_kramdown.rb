@@ -62,8 +62,9 @@ class TestKramdown < JekyllUnitTest
         puts "Hello World"
         ~~~
       MARKDOWN
-
-      selector = "div.highlighter-rouge>pre.highlight>code"
+      div_highlight = ""
+      div_highlight = ">div.highlight" unless Utils::Rouge.old_api?
+      selector = "div.highlighter-rouge#{div_highlight}>pre.highlight>code"
       refute result.css(selector).empty?
     end
 
