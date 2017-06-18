@@ -21,8 +21,6 @@ environment:
     - RUBY_FOLDER_VER: "23"
       TEST_SUITE: "cucumber"
     - RUBY_FOLDER_VER: "23"
-      TEST_SUITE: "fmt"
-    - RUBY_FOLDER_VER: "23"
       TEST_SUITE: "default-site"
     - RUBY_FOLDER_VER: "23-x64"
       TEST_SUITE: "test"
