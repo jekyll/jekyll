@@ -25,7 +25,7 @@ module Jekyll
         site = @context.registers[:site]
         return ensure_leading_slash(input.to_s) if site.config["baseurl"].nil?
         Addressable::URI.parse(
-          ensure_leading_slash(site.config["baseurl"]) + ensure_leading_slash(input.to_s)
+          ensure_leading_slash(site.config["baseurl"].to_s) + ensure_leading_slash(input.to_s)
         ).normalize.to_s
       end
 

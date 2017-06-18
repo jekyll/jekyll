@@ -45,7 +45,7 @@ module Jekyll
       "detach"            => false, # default to not detaching the server
       "port"              => "4000",
       "host"              => "127.0.0.1",
-      "baseurl"           => "",
+      "baseurl"           => nil, # this mounts at /, i.e. no subdirectory
       "show_dir_listing"  => false,
 
       # Output Configuration

@@ -103,7 +103,7 @@ module Jekyll
         private
         def start_up_webrick(opts, destination)
           server = WEBrick::HTTPServer.new(webrick_opts(opts)).tap { |o| o.unmount("") }
-          server.mount(opts["baseurl"], Servlet, destination, file_handler_opts)
+          server.mount(opts["baseurl"].to_s, Servlet, destination, file_handler_opts)
           Jekyll.logger.info "Server address:", server_address(server, opts)
           launch_browser server, opts if opts["open_url"]
           boot_or_detach server, opts
