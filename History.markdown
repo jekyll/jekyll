@@ -85,6 +85,7 @@
   * Link the troubleshooting page in the quickstart page (#6134)
   * add documentation about the &#34;pinned&#34; label (#6147)
   * docs(JekyllOnWindows): Add a new Installation way (#6141)
+  * corrected windows.md (#6149)
 
 ### Development Fixes
 
