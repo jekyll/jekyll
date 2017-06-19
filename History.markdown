@@ -145,7 +145,7 @@
   * Default `baseurl` to `nil` instead of empty string (#6137)
   * Filters#time helper: Duplicate time before calling #localtime. (#5996)
 
-## 3.4.4 / 2016-06-17
+## 3.4.4 / 2017-06-17
 
   * Backport #6137 for v3.4.x: Default `baseurl` to `nil` instead of empty string (#6146)
 
