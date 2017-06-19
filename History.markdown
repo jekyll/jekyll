@@ -1,3 +1,9 @@
+## HEAD
+
+### Documentation
+
+  * Update reference to trouble with OS X/macOS (#6139)
+
 ## 3.5.0 / 2017-06-18
 
 ### Minor Enhancements
