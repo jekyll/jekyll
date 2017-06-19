@@ -4,6 +4,7 @@
 
   * Update reference to trouble with OS X/macOS (#6139)
   * added BibSonomy plugin (#6143)
+  * add plugins for multiple page pagination (#6055)
 
 ## 3.5.0 / 2017-06-18
 
