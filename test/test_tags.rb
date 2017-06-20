@@ -445,7 +445,7 @@ EOS
         skip "Skipped because using a newer version of Rouge" unless Utils::Rouge.old_api?
         expected = <<-EOS
 <p>This is not yet highlighted</p>\n
-<figure class="highlight"><pre><code class="language-php" data-lang="php"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>test<span class="w">\n
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>test<span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>\n
 <p>This should not be highlighted, right?</p>
 EOS
