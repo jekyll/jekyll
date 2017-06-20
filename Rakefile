@@ -4,7 +4,7 @@ require "rdoc"
 require "date"
 require "yaml"
 
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), "lib"))
+$LOAD_PATH.unshift File.expand_path("lib", __dir__)
 require "jekyll/version"
 
 Dir.glob("rake/**.rake").each { |f| import f }

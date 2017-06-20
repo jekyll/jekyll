@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 STDOUT.sync = true
 
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), "..", "lib"))
+$LOAD_PATH.unshift File.expand_path("../lib", __dir__)
 
 require "jekyll"
 require "mercenary"

@@ -113,7 +113,7 @@ RUBY
         end
 
         def site_template
-          File.expand_path("../../site_template", File.dirname(__FILE__))
+          File.expand_path("../../site_template", __dir__)
         end
 
         def scaffold_path

@@ -234,7 +234,7 @@ module Jekyll
 
         private
         def mime_types
-          file = File.expand_path("../mime.types", File.dirname(__FILE__))
+          file = File.expand_path("../mime.types", __dir__)
           WEBrick::HTTPUtils.load_mime_types(file)
         end
       end

@@ -1,4 +1,4 @@
-$LOAD_PATH.unshift File.dirname(__FILE__) # For use/testing when no gem is installed
+$LOAD_PATH.unshift __dir__ # For use/testing when no gem is installed
 
 # Require all of the Ruby files in the given directory.
 #
@@ -6,7 +6,7 @@ $LOAD_PATH.unshift File.dirname(__FILE__) # For use/testing when no gem is insta
 #
 # Returns nothing.
 def require_all(path)
-  glob = File.join(File.dirname(__FILE__), path, "*.rb")
+  glob = File.join(__dir__, path, "*.rb")
   Dir[glob].sort.each do |f|
     require f
   end
