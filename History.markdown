@@ -8,6 +8,10 @@
   * Update minimum Ruby version in installation.md (#6164)
   * [docs] Add information about finding a collection in `site.collections` (#6165)
 
+### Bug Fixes
+
+  * Backward compatiblize URLFilters module (#6163)
+
 ## 3.5.0 / 2017-06-18
 
 ### Minor Enhancements
