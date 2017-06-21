@@ -309,6 +309,8 @@ you specified in your `_config.yml` (if present) and the following information:
   you have a <code>_posts</code> directory or not. This is something to note 
   when iterating through <code>site.collections</code> as you may need to 
   filter it out.</p>
+  <p>You may wish to use filters to find your collection:
+  <code>{{ site.collections | where: "label", "myCollection" | first }}</code></p>
 </div>
 
 
