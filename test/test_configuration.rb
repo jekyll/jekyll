@@ -496,10 +496,16 @@ class TestConfiguration < JekyllUnitTest
   end
 
   context "folded YAML string" do
-    should "ignore newlines entirely" do
-      tester = Configuration.new
-      config_file = tester.read_config_file(source_dir("_config_folded.yml"))
-      config = Jekyll.configuration(config_file)
+    setup do
+      @tester = Configuration.new
+    end
+
+    should "ignore newlines in that string entirely from a sample file" do
+      config = Jekyll.configuration(
+        @tester.read_config_file(
+          source_dir("_config_folded.yml")
+        )
+      )
       assert_equal(
         config["folded_string"],
         "This string of text will ignore newlines till the next key.\n"
@@ -508,6 +514,16 @@ class TestConfiguration < JekyllUnitTest
         config["clean_folded_string"],
         "This string of text will ignore newlines till the next key."
       )
+    end
+
+    should "ignore newlines in that string entirely from the template file" do
+      config = Jekyll.configuration(
+        @tester.read_config_file(
+          File.expand_path("../lib/site_template/_config.yml", File.dirname(__FILE__))
+        )
+      )
+      assert_includes config["description"], "an awesome description"
+      refute_includes config["description"], "\n"
     end
   end
 end
