@@ -38,7 +38,7 @@ module Jekyll
             !deprecated_relative_permalinks(site),
             !conflicting_urls(site),
             !urls_only_differ_by_case(site),
-            proper_site_url?(site)
+            proper_site_url?(site),
           ].all?
         end
 
@@ -125,7 +125,8 @@ module Jekyll
 
         def url_exists?(url)
           return true unless url.nil? || url.empty?
-          Jekyll.logger.warn "Warning:", "Site URL does not appear to be set"
+          Jekyll.logger.warn "Warning:", "You didn't set an URL in the config file, "\
+              "you may encounter problems with some plugins."
           false
         end
 
@@ -133,14 +134,15 @@ module Jekyll
           Addressable::URI.parse(url)
           true
         rescue
-          Jekyll.logger.warn "Warning:", "Cannot parse site URL: #{url}"
+          Jekyll.logger.warn "Warning:", "The site URL does not seem to be valid, "\
+              "check the value of `url` in your config file."
           false
         end
 
         def url_absolute(url)
           return true if Addressable::URI.parse(url).absolute?
-          Jekyll.logger.warn "Warning:", "Site URL does not appear to be" \
-            " absolute: #{url}"
+          Jekyll.logger.warn "Warning:", "Your site URL does not seem to be absolute, "\
+              "check the value of `url` in your config file."
           false
         end
       end
