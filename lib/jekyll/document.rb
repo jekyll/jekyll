@@ -35,10 +35,6 @@ module Jekyll
         categories_from_path(collection.relative_directory)
       end
 
-      data.default_proc = proc do |_, key|
-        site.frontmatter_defaults.find(relative_path, collection.label, key)
-      end
-
       trigger_hooks(:post_init)
     end
 
@@ -47,7 +43,7 @@ module Jekyll
     # Returns a Hash containing the data. An empty hash is returned if
     #   no data was read.
     def data
-      @data ||= {}
+      @data ||= @site.frontmatter_defaults.all(@relative_path, @collection.label)
     end
 
     # Merge some data in with this document's data.
