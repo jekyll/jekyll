@@ -28,10 +28,6 @@ module Jekyll
       @collection = collection
       @relative_path = File.join(*[@dir, @name].compact)
       @extname = File.extname(@name)
-
-      data.default_proc = proc do |_, key|
-        site.frontmatter_defaults.find(relative_path, type, key)
-      end
     end
     # rubocop: enable ParameterLists
 
@@ -104,7 +100,7 @@ module Jekyll
     end
 
     def data
-      @data ||= {}
+      @data ||= @site.frontmatter_defaults.all(relative_path, type)
     end
 
     def basename
