@@ -135,7 +135,7 @@ module Jekyll
     #
     # Returns Boolean true if the layout is invalid, false if otherwise
     def invalid_layout?(layout)
-      !document.data["layout"].nil? && layout.nil? && !(document.is_a? Jekyll::Excerpt)
+      !document.data["layout"].nil? && layout.nil? && !(document.is_a? Jekyll::Excerpt) && !document.no_layout?
     end
 
     # Render layouts and place document content inside.
