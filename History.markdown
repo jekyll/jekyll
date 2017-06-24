@@ -12,6 +12,10 @@
 
   * Backward compatiblize URLFilters module (#6163)
 
+### Development Fixes
+
+  * Add jekyll doctor to GitHub Issue Template (#6169)
+
 ## 3.5.0 / 2017-06-18
 
 ### Minor Enhancements
