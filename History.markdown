@@ -1,5 +1,7 @@
 ## HEAD
 
+  * Added improved Pug plugin - removed 404 Jade plugin (#6174)
+
 ### Documentation
 
   * Update reference to trouble with OS X/macOS (#6139)
