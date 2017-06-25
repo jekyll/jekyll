@@ -7,6 +7,7 @@
   * add plugins for multiple page pagination (#6055)
   * Update minimum Ruby version in installation.md (#6164)
   * [docs] Add information about finding a collection in `site.collections` (#6165)
+  * Add {%raw%} to Liquid example on site (#6179)
 
 ### Bug Fixes
 
