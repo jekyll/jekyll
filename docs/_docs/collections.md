@@ -310,7 +310,7 @@ you specified in your `_config.yml` (if present) and the following information:
   when iterating through <code>site.collections</code> as you may need to 
   filter it out.</p>
   <p>You may wish to use filters to find your collection:
-  <code>{{ site.collections | where: "label", "myCollection" | first }}</code></p>
+  <code>{% raw %}{{ site.collections | where: "label", "myCollection" | first }}{% endraw %}</code></p>
 </div>
 
 
