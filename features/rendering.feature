@@ -40,7 +40,7 @@ Feature: Rendering
     And I should not see "Ahoy, indeed!" in "_site/index.css"
     And I should not see "Ahoy, indeed!" in "_site/index.js"
 
-  Scenario: Ignore defaults and don't place documents with layout set to 'none'
+  Scenario: Ignore defaults and don't place pages with layout set to 'none'
     Given I have a "index.md" page with layout "none" that contains "Hi there, {{ site.author }}!"
     And I have a _trials directory
     And I have a "_trials/no-layout.md" page with layout "none" that contains "Hi there, {{ site.author }}!"
@@ -60,7 +60,7 @@ Feature: Rendering
     But I should see "Check this out!" in "_site/trials/test.html"
     And I should see "Welcome!" in "_site/index.html"
 
-  Scenario: Don't place documents with layout set to 'none'
+  Scenario: Don't place pages with layout set to 'none'
     Given I have a "index.md" page with layout "none" that contains "Hi there, {{ site.author }}!"
     And I have a _trials directory
     And I have a "_trials/no-layout.md" page with layout "none" that contains "Hi there, {{ site.author }}!"
