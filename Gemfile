@@ -65,7 +65,7 @@ group :jekyll_optional_dependencies do
   gem "coderay", "~> 1.1.0"
   gem "jekyll-coffeescript"
   gem "jekyll-docs", :path => "../docs" if Dir.exist?("../docs") && ENV["JEKYLL_VERSION"]
-  gem "jekyll-feed"
+  gem "jekyll-feed", "~> 0.9"
   gem "jekyll-gist"
   gem "jekyll-paginate"
   gem "jekyll-redirect-from"
