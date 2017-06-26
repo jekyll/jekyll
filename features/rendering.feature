@@ -60,6 +60,7 @@ Feature: Rendering
     But I should see "Check this out!" in "_site/trials/test.html"
     And I should see "Hi there, John Doe!" in "_site/index.html"
     And I should not see "Welcome!" in "_site/index.html"
+    And I should not see "Build Warning:" in the build output
 
   Scenario: Don't place pages and documents with layout set to 'none'
     Given I have a "index.md" page with layout "none" that contains "Hi there, {{ site.author }}!"
@@ -79,6 +80,7 @@ Feature: Rendering
     And I should not see "Welcome!" in "_site/index.html"
     But I should see "Check this out!" in "_site/trials/test.html"
     And I should see "Hi there, John Doe!" in "_site/index.html"
+    And I should not see "Build Warning:" in the build output
 
   Scenario: Render liquid in Sass
     Given I have an "index.scss" page that contains ".foo-bar { color:{{site.color}}; }"

@@ -80,7 +80,7 @@ module Jekyll
       output = convert(output)
       document.content = output
 
-      if document.place_in_layout? && document.data["layout"] != "none"
+      if document.place_in_layout?
         Jekyll.logger.debug "Rendering Layout:", document.relative_path
         output = place_in_layouts(output, payload, info)
       end
