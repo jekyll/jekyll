@@ -19,6 +19,7 @@
 
   * Add jekyll doctor to GitHub Issue Template (#6169)
   * Test with Ruby 2.4.1-1 on AppVeyor (#6176)
+  * set minimum requirement for jekyll-feed (#6184)
 
 ## 3.5.0 / 2017-06-18
 
