@@ -23,9 +23,10 @@ module Jekyll
       # Returns a URL relative to the domain root as a String.
       def relative_url(input)
         return if input.nil?
-        return ensure_leading_slash(input.to_s) if sanitized_baseurl.nil?
+        site = @context.registers[:site]
+        parts = [sanitized_baseurl, input]
         Addressable::URI.parse(
-          ensure_leading_slash(sanitized_baseurl) + ensure_leading_slash(input.to_s)
+          parts.compact.map { |part| ensure_leading_slash(part.to_s) }.join
         ).normalize.to_s
       end
 
