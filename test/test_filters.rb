@@ -445,6 +445,15 @@ class TestFilters < JekyllUnitTest
         })
         assert_equal "/base", filter.relative_url(page_url)
       end
+
+      should "not return the url by reference" do
+        filter = make_filter_mock({ baseurl: nil })
+        page = Page.new(filter.site, test_dir("fixtures"), "", "front_matter.erb")
+        assert_equal "/front_matter.erb", page.url
+        url = filter.relative_url(page.url)
+        url << "foo"
+        assert_equal "/front_matter.erb", page.url
+      end
     end
 
     context "jsonify filter" do
