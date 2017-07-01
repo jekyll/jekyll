@@ -23,9 +23,9 @@ module Jekyll
       def relative_url(input)
         return if input.nil?
         site = @context.registers[:site]
-        return ensure_leading_slash(input.to_s) if site.config["baseurl"].nil?
+        parts = [site.config["baseurl"], input]
         Addressable::URI.parse(
-          ensure_leading_slash(site.config["baseurl"].to_s) + ensure_leading_slash(input.to_s)
+          parts.compact.map { |part| ensure_leading_slash(part.to_s) }.join
         ).normalize.to_s
       end
 
