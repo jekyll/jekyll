@@ -18,6 +18,7 @@
 
 - [ ] I believe this to be a bug, not a question about using Jekyll.
 - [ ] I updated to the latest Jekyll (or) if on GitHub Pages to the latest `github-pages`
+- [ ] I ran `jekyll doctor` to check my configuration
 - [ ] I read the CONTRIBUTION file at https://jekyllrb.com/docs/contributing/
 - [ ] This is a feature request.
 

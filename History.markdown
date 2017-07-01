@@ -1,10 +1,26 @@
 ## HEAD
 
+### Bug Fixes
+
+  * Backward compatiblize URLFilters module (#6163)
+  * Static files contain front matter default keys when `to_liquid`'d  (#6162)
+  * Always normalize the result of the `relative_url` filter (#6185)
+
 ### Documentation
 
   * Update reference to trouble with OS X/macOS (#6139)
   * added BibSonomy plugin (#6143)
   * add plugins for multiple page pagination (#6055)
+  * Update minimum Ruby version in installation.md (#6164)
+  * [docs] Add information about finding a collection in `site.collections` (#6165)
+  * Add {%raw%} to Liquid example on site (#6179)
+  * Added improved Pug plugin - removed 404 Jade plugin (#6174)
+
+### Development Fixes
+
+  * Add jekyll doctor to GitHub Issue Template (#6169)
+  * Test with Ruby 2.4.1-1 on AppVeyor (#6176)
+  * set minimum requirement for jekyll-feed (#6184)
 
 ## 3.5.0 / 2017-06-18
 
@@ -146,6 +162,10 @@
   * Read explicitly included dot-files in collections. (#6092)
   * Default `baseurl` to `nil` instead of empty string (#6137)
   * Filters#time helper: Duplicate time before calling #localtime. (#5996)
+
+## 3.4.5 / 2017-06-30
+
+  * Backport #6185 for v3.4.x: Always normalize the result of the `relative_url` filter (#6186)
 
 ## 3.4.4 / 2017-06-17
 

@@ -11,6 +11,7 @@ module Jekyll
       def absolute_url(input)
         return if input.nil?
         return input if Addressable::URI.parse(input).absolute?
+        site = @context.registers[:site]
         return relative_url(input).to_s if site.config["url"].nil?
         Addressable::URI.parse(site.config["url"] + relative_url(input)).normalize.to_s
       end
@@ -22,9 +23,9 @@ module Jekyll
       # Returns a URL relative to the domain root as a String.
       def relative_url(input)
         return if input.nil?
-        return ensure_leading_slash(input.to_s) if sanitized_baseurl.nil?
+        parts = [sanitized_baseurl, input]
         Addressable::URI.parse(
-          ensure_leading_slash(sanitized_baseurl) + ensure_leading_slash(input.to_s)
+          parts.compact.map { |part| ensure_leading_slash(part.to_s) }.join
         ).normalize.to_s
       end
 
@@ -40,11 +41,8 @@ module Jekyll
 
       private
 
-      def site
-        @context.registers[:site]
-      end
-
       def sanitized_baseurl
+        site = @context.registers[:site]
         site.config["baseurl"].to_s.chomp("/")
       end
 

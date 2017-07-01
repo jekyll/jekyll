@@ -1,6 +1,6 @@
 module Jekyll
   class StaticFile
-    attr_reader :relative_path, :extname, :name
+    attr_reader :relative_path, :extname, :name, :data
 
     class << self
       # The cache of last modification times [path] -> mtime.
@@ -28,6 +28,7 @@ module Jekyll
       @collection = collection
       @relative_path = File.join(*[@dir, @name].compact)
       @extname = File.extname(@name)
+      @data = @site.frontmatter_defaults.all(relative_path, type)
     end
     # rubocop: enable ParameterLists
 

@@ -758,10 +758,9 @@ LESS.js files during generation.
 
 #### Converters
 
+- [Pug plugin by Doug Beney](https://github.com/DougBeney/jekyll-pug): Pug (previously Jade) converter for Jekyll.
 - [Textile converter](https://github.com/jekyll/jekyll-textile-converter): Convert `.textile` files into HTML. Also includes the `textilize` Liquid filter.
 - [Slim plugin](https://github.com/slim-template/jekyll-slim): Slim converter and includes for Jekyll with support for Liquid tags.
-- [Jade plugin by John Papandriopoulos](https://github.com/snappylabs/jade-jekyll-plugin): Jade converter for Jekyll.
-- [Pug plugin by Josh Waller](https://github.com/mdxprograms/pug-jekyll-plugin): Pug (previously Jade) converter for Jekyll.
 - [HAML plugin by Sam Z](https://gist.github.com/517556): HAML converter for Jekyll.
 - [HAML-Sass Converter by Adam Pearson](https://gist.github.com/481456): Simple HAML-Sass converter for Jekyll. [Fork](https://gist.github.com/528642) by Sam X.
 - [Sass SCSS Converter by Mark Wolfe](https://gist.github.com/960150): Sass converter which uses the new CSS compatible syntax, based Sam X’s fork above.
