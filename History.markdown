@@ -14,6 +14,7 @@
 ### Bug Fixes
 
   * Backward compatiblize URLFilters module (#6163)
+  * Static files contain front matter default keys when to_liquid&#39;d  (#6162)
 
 ### Development Fixes
 
