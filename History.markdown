@@ -163,6 +163,10 @@
   * Default `baseurl` to `nil` instead of empty string (#6137)
   * Filters#time helper: Duplicate time before calling #localtime. (#5996)
 
+## 3.4.5 / 2017-06-30
+
+  * Backport #6185 for v3.4.x: Always normalize the result of the `relative_url` filter (#6186)
+
 ## 3.4.4 / 2017-06-17
 
   * Backport #6137 for v3.4.x: Default `baseurl` to `nil` instead of empty string (#6146)
