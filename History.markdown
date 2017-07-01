@@ -26,6 +26,10 @@
 
   * Use Warn for deprecation messages (#6192)
 
+### Site Enhancements
+
+  * Small correction in documentation for includes (#6193)
+
 ## 3.5.0 / 2017-06-18
 
 ### Minor Enhancements
