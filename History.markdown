@@ -22,6 +22,10 @@
   * Test with Ruby 2.4.1-1 on AppVeyor (#6176)
   * set minimum requirement for jekyll-feed (#6184)
 
+### Minor Enhancements
+
+  * Use Warn for deprecation messages (#6192)
+
 ## 3.5.0 / 2017-06-18
 
 ### Minor Enhancements
