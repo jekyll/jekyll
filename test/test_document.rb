@@ -132,6 +132,12 @@ class TestDocument < JekyllUnitTest
       assert_equal "slide", @document.data["layout"]
       assert_equal({ "key"=>"myval" }, @document.data["nested"])
     end
+
+    should "return front matter defaults via to_liquid" do
+      hash = @document.to_liquid
+      assert hash.key? "nested"
+      assert_equal({ "key"=>"myval" }, hash["nested"])
+    end
   end
 
   context "a document as part of a collection with overridden default values" do
