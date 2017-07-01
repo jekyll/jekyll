@@ -151,7 +151,7 @@ Here's an example. In the `_data` folder, suppose you have a YAML file called `p
 In the `_includes` folder, assume you have a file called `spotlight.html` with this code:
 
 ```liquid
-{% raw %}{% for person in {{ include.participants }} %}
+{% raw %}{% for person in include.participants %}
 {% if person.login_age == "new" %}
 {{ person.name }}
 {% endif %}
@@ -164,4 +164,4 @@ Now when you insert the `spotlight.html` include file, you can submit the YAML f
 {% raw %}{% include spotlight.html participants=site.data.profiles %}{% endraw %}
 ```
 
-In this instance, `site.data.profiles` gets inserted in place of {% raw %}`{{ include.participants }}`{% endraw %} in the include file, and the Liquid logic processes. The result will be `Jane Doe`.
+In this instance, `site.data.profiles` gets inserted in place of {% raw %}`include.participants`{% endraw %} in the include file, and the Liquid logic processes. The result will be `Jane Doe`.
