@@ -1,6 +1,9 @@
 ## HEAD
 
-  * Added improved Pug plugin - removed 404 Jade plugin (#6174)
+### Bug Fixes
+
+  * Backward compatiblize URLFilters module (#6163)
+  * Static files contain front matter default keys when `to_liquid`'d  (#6162)
 
 ### Documentation
 
@@ -10,11 +13,7 @@
   * Update minimum Ruby version in installation.md (#6164)
   * [docs] Add information about finding a collection in `site.collections` (#6165)
   * Add {%raw%} to Liquid example on site (#6179)
-
-### Bug Fixes
-
-  * Backward compatiblize URLFilters module (#6163)
-  * Static files contain front matter default keys when to_liquid&#39;d  (#6162)
+  * Added improved Pug plugin - removed 404 Jade plugin (#6174)
 
 ### Development Fixes
 
