@@ -100,6 +100,10 @@ module Jekyll
       @to_liquid ||= Drops::StaticFileDrop.new(self)
     end
 
+    def data
+      @data ||= @site.frontmatter_defaults.all(relative_path, type)
+    end
+
     def basename
       File.basename(name, extname)
     end
