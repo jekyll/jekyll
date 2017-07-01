@@ -38,7 +38,7 @@ module Jekyll
     end
 
     def deprecation_message(message)
-      Jekyll.logger.error "Deprecation:", message
+      Jekyll.logger.warn "Deprecation:", message
     end
 
     def defaults_deprecate_type(old, current)
