@@ -343,6 +343,42 @@ EOS
       end
     end
 
+    context "post content has raw tag" do
+      setup do
+        content = <<-CONTENT
+---
+title: This is a test
+---
+
+```liquid
+{% raw %}
+{{ site.baseurl }}{% link _collection/name-of-document.md %}
+{% endraw %}
+```
+CONTENT
+        create_post(content)
+      end
+
+      should "render markdown with rouge 1" do
+        skip "Skipped because using a newer version of Rouge" unless Utils::Rouge.old_api?
+
+        assert_match(
+          %(<div class="language-liquid highlighter-rouge"><pre class="highlight"><code>),
+          @result
+        )
+      end
+
+      should "render markdown with rouge 2" do
+        skip "Skipped because using an older version of Rouge" if Utils::Rouge.old_api?
+
+        assert_match(
+          %(<div class="language-liquid highlighter-rouge">) +
+            %(<div class="highlight"><pre class="highlight"><code>),
+          @result
+        )
+      end
+    end
+
     context "post content has highlight with file reference" do
       setup do
         fill_post("./jekyll.gemspec")
