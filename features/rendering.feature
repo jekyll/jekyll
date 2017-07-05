@@ -19,7 +19,16 @@ Feature: Rendering
     And   I have a simple layout that contains "{{ content }}"
     When  I run jekyll build
     Then  I should get a non-zero exit-status
-    And   I should see "Liquid Exception.*Unknown tag 'INVALID' in.*_includes/invalid\.html" in the build output
+    And   I should see "Liquid Exception.+_includes/invalid\.html.+included in index\.html" in the build output
+
+  Scenario: When receiving Liquid with incorrect syntax in included file
+    Given I have a _includes directory
+    And   I have a "_includes/invalid.html" file that contains "{{ site.title | prepend 'Prepended Text' }}"
+    And   I have a "index.html" page with layout "simple" that contains "{% include invalid.html %}"
+    And   I have a simple layout that contains "{{ content }}"
+    When  I run jekyll build
+    Then  I should get a non-zero exit-status
+    And   I should see "Liquid Exception.+_includes/invalid\.html.+included in index\.html" in the build output
 
   Scenario: Render Liquid and place in layout
     Given I have a "index.html" page with layout "simple" that contains "Hi there, Jekyll {{ jekyll.environment }}!"

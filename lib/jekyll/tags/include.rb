@@ -2,14 +2,6 @@
 
 module Jekyll
   module Tags
-    class IncludeTagError < StandardError
-      attr_accessor :path
-
-      def initialize(msg, path)
-        super(msg)
-        @path = path
-      end
-    end
 
     class IncludeTag < Liquid::Tag
       VALID_SYNTAX = %r!
@@ -135,7 +127,13 @@ eos
 
         context.stack do
           context["include"] = parse_params(context) if @params
-          partial.render!(context)
+          begin
+            partial.render!(context)
+          rescue Liquid::Error => ex
+            ex.template_name = path
+            ex.markup_context = "included " if ex.markup_context.nil?
+            raise ex
+          end
         end
       end
 
@@ -160,8 +158,10 @@ eos
             .file(path)
           begin
             cached_partial[path] = unparsed_file.parse(read_file(path, context))
-          rescue Liquid::SyntaxError => ex
-            raise IncludeTagError.new(ex.message, path)
+          rescue Liquid::Error => ex
+            ex.template_name = path
+            ex.markup_context = "included " if ex.markup_context.nil?
+            raise ex
           end
         end
       end
