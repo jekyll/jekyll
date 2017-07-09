@@ -30,6 +30,7 @@
 ### Site Enhancements
 
   * Small correction in documentation for includes (#6193)
+  * Fix docs site page margin (#6214)
 
 ## 3.5.0 / 2017-06-18
 
