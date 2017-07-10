@@ -26,6 +26,7 @@
 ### Minor Enhancements
 
   * Use Warn for deprecation messages (#6192)
+  * site template: Use plugins key instead of gems  (#6045)
 
 ### Site Enhancements
 
