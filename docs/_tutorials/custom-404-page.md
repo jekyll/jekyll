@@ -53,7 +53,7 @@ More info on configuring Apache Error Pages can found in [official documentation
 
 The procedure is just as simple as configuring Apache servers, but slightly different.
 
-Add the following to the ngnix configuration file, `nginx.conf`, which is usually located inside `/etc/nginx/` or `/etc/nginx/conf/`:
+Add the following to the nginx configuration file, `nginx.conf`, which is usually located inside `/etc/nginx/` or `/etc/nginx/conf/`:
 
 ```
 server {
