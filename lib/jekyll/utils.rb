@@ -129,7 +129,15 @@ module Jekyll
     # Returns the parsed date if successful, throws a FatalException
     # if not
     def parse_date(input, msg = "Input could not be parsed.")
-      Time.parse(input).localtime
+      # DateTime (in contrast to Time) defaults to UTC as demanded
+      # by the YAML spec. SafeYAML uses this method (minus correcting
+      # the time zone).
+      dt = DateTime.parse(input)
+      if Jekyll.preserve_timezones
+        dt.to_time.localtime(dt.zone)
+      else
+        dt.to_time.localtime()
+      end
     rescue ArgumentError
       raise Errors::InvalidDateError, "Invalid date '#{input}': #{msg}"
     end

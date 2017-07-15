@@ -24,6 +24,10 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
 github_username:  jekyll
 
+# Preserve the time zone of time stamps. This is the least surprising option,
+# but it is disabled by default for compatibility of existing installations.
+preserve_timezones: true
+
 # Build settings
 markdown: kramdown
 theme: minima

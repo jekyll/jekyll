@@ -33,6 +33,22 @@ require "colorator"
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
+# Monkey patch safe_yaml to preserve the time zone of dates.
+module SafeYAML
+  class Parse
+    class Date
+      def self.value(value)
+        d = DateTime.parse(value)
+        if Jekyll.preserve_timezones
+          d.to_time.localtime(d.zone)
+        else
+          d.to_time
+        end
+      end
+    end
+  end
+end
+
 module Jekyll
   # internal requires
   autoload :Cleaner,             "jekyll/cleaner"
@@ -90,6 +106,12 @@ module Jekyll
       ENV["JEKYLL_ENV"] || "development"
     end
 
+    # Public: Tells if timezones in dates should be preserved (true) or
+    # reset to the local timezone.
+    def preserve_timezones
+      @preserve_timezones
+    end
+
     # Public: Generate a Jekyll configuration Hash by merging the default
     # options with anything in _config.yml, and adding the given options on top.
     #
@@ -108,6 +130,9 @@ module Jekyll
 
       # Merge DEFAULTS < _config.yml < override
       Configuration.from(Utils.deep_merge_hashes(config, override)).tap do |obj|
+        if obj.key?("preserve_timezones")
+          @preserve_timezones = obj["preserve_timezones"] ? true : false
+        end
         set_timezone(obj["timezone"]) if obj["timezone"]
       end
     end
