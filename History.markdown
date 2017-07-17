@@ -1,4 +1,9 @@
-## HEAD
+## 3.5.1 / 2017-07-17
+
+### Minor Enhancements
+
+  * Use Warn for deprecation messages (#6192)
+  * site template: Use plugins key instead of gems  (#6045)
 
 ### Bug Fixes
 
@@ -16,22 +21,14 @@
   * Add {%raw%} to Liquid example on site (#6179)
   * Added improved Pug plugin - removed 404 Jade plugin (#6174)
   * Linking the link (#6210)
+  * Small correction in documentation for includes (#6193)
+  * Fix docs site page margin (#6214)
 
 ### Development Fixes
 
   * Add jekyll doctor to GitHub Issue Template (#6169)
   * Test with Ruby 2.4.1-1 on AppVeyor (#6176)
   * set minimum requirement for jekyll-feed (#6184)
-
-### Minor Enhancements
-
-  * Use Warn for deprecation messages (#6192)
-  * site template: Use plugins key instead of gems  (#6045)
-
-### Site Enhancements
-
-  * Small correction in documentation for includes (#6193)
-  * Fix docs site page margin (#6214)
 
 ## 3.5.0 / 2017-06-18
 
