@@ -9,6 +9,10 @@
   * Ignore final newline in folded YAML string (#6054)
   * Add URL checks to Doctor (#5760)
 
+### Bug Fixes
+
+  * deprecator.rb: fix typo for --serve command (#6229)
+
 ## 3.5.1 / 2017-07-17
 
 ### Minor Enhancements
