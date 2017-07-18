@@ -1,3 +1,9 @@
+## HEAD
+
+### Development Fixes
+
+  * Strip unnecessary leading whitespace in template (#6228)
+
 ## 3.5.1 / 2017-07-17
 
 ### Minor Enhancements
