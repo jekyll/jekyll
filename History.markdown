@@ -4,6 +4,10 @@
 
   * Strip unnecessary leading whitespace in template (#6228)
 
+### Minor Enhancements
+
+  * Ignore final newline in folded YAML string (#6054)
+
 ## 3.5.1 / 2017-07-17
 
 ### Minor Enhancements
