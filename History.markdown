@@ -7,6 +7,7 @@
 ### Minor Enhancements
 
   * Ignore final newline in folded YAML string (#6054)
+  * Add URL checks to Doctor (#5760)
 
 ## 3.5.1 / 2017-07-17
 
