@@ -47,8 +47,8 @@ module Jekyll
 
     def defaults_deprecate_type(old, current)
       Jekyll.logger.warn "Defaults:", "The '#{old}' type has become '#{current}'."
-      Jekyll.logger.warn "",
-        "Please update your front-matter defaults to use 'type: #{current}'."
+      Jekyll.logger.warn "", "Please update your front-matter defaults to " \
+        "use 'type: #{current}'."
     end
   end
 end
