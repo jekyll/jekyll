@@ -13,6 +13,10 @@
 
   * deprecator.rb: fix typo for --serve command (#6229)
 
+### Documentation
+
+  * Update custom-404-page.md - fix a typo (#6218)
+
 ## 3.5.1 / 2017-07-17
 
 ### Minor Enhancements
