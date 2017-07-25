@@ -9,7 +9,7 @@ class TestNewCommand < JekyllUnitTest
   end
 
   def site_template
-    File.expand_path("../lib/site_template", File.dirname(__FILE__))
+    File.expand_path("../lib/site_template", __dir__)
   end
 
   context "when args contains a path" do
