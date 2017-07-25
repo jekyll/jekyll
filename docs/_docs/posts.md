@@ -43,7 +43,7 @@ file. For example, the following are examples of valid post filenames:
   <h5>ProTip™: Link to other posts</h5>
   <p>
     Use the <a href="../templates/#linking-to-posts"><code>post_url</code></a>
-    tag to link to other posts without having to worry about the URL's
+    tag to link to other posts without having to worry about the URLs
     breaking when the site permalink style changes.
   </p>
 </div>
@@ -78,7 +78,7 @@ digital assets along with your text content. While the syntax for linking to
 these resources differs between Markdown and Textile, the problem of working
 out where to store these files in your site is something everyone will face.
 
-Because of Jekyll’s flexibility, there are many solutions to how to do this.
+There are a number of ways to include digital assets in Jekyll. 
 One common solution is to create a folder in the root of the project directory
 called something like `assets` or `downloads`, into which any images, downloads
 or other resources are placed. Then, from within any post, they can be linked
@@ -112,7 +112,7 @@ Linking to a PDF for readers to download:
 
 ## A typical post
 
-Jekyll can handle many different iterations of the idea you might associate with a "post," however a standard blog style post, including an Title, Layout, Publishing Date, and Categories might look like this:
+Jekyll can handle many different iterations of the idea you might associate with a "post," however a standard blog style post, including a Title, Layout, Publishing Date, and Categories might look like this:
 
 ```
 ---

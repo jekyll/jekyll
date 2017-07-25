@@ -93,6 +93,19 @@ end
 
 #
 
+Given(%r!^I have the following documents? under the (.*) collection:$!) do |folder, table|
+  table.hashes.each do |input_hash|
+    title = slug(input_hash["title"])
+    filename = "#{title}.md"
+    dest_folder = "_#{folder}"
+
+    path = File.join(dest_folder, filename)
+    File.write(path, file_content_from_hash(input_hash))
+  end
+end
+
+#
+
 Given(%r!^I have a configuration file with "(.*)" set to "(.*)"$!) do |key, value|
   config = \
     if source_dir.join("_config.yml").exist?

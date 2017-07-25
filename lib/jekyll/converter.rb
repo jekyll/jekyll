@@ -8,7 +8,7 @@ module Jekyll
     #
     # Returns the String prefix.
     def self.highlighter_prefix(highlighter_prefix = nil)
-      if !defined?(@highlighter_prefix) || !highlighter_prefix.nil?
+      unless defined?(@highlighter_prefix) && highlighter_prefix.nil?
         @highlighter_prefix = highlighter_prefix
       end
       @highlighter_prefix
@@ -22,7 +22,7 @@ module Jekyll
     #
     # Returns the String suffix.
     def self.highlighter_suffix(highlighter_suffix = nil)
-      if !defined?(@highlighter_suffix) || !highlighter_suffix.nil?
+      unless defined?(@highlighter_suffix) && highlighter_suffix.nil?
         @highlighter_suffix = highlighter_suffix
       end
       @highlighter_suffix

@@ -144,7 +144,7 @@ class TestPluginManager < JekyllUnitTest
 
     should "print no deprecation warning if jekyll-paginate is present" do
       site = double({
-        :config => { "paginate" => true, "gems" => ["jekyll-paginate"] },
+        :config => { "paginate" => true, "plugins" => ["jekyll-paginate"] },
       })
       plugin_manager = PluginManager.new(site)
 

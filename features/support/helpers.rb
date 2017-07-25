@@ -55,7 +55,7 @@ end
 def all_steps_to_path(path)
   source = source_dir
   dest = Pathname.new(path).expand_path
-  paths  = []
+  paths = []
 
   dest.ascend do |f|
     break if f == source

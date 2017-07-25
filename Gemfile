@@ -22,12 +22,13 @@ group :test do
   gem "cucumber", "~> 2.1"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
-  gem "nokogiri"
+  # nokogiri v1.8 does not work with ruby 2.1 and below
+  gem "nokogiri", RUBY_VERSION >= "2.2" ? "~> 1.7" : "~> 1.7.0"
   gem "rspec"
   gem "rspec-mocks"
-  gem "rubocop", "~> 0.47.1"
-  gem "test-theme", :path => File.expand_path("./test/fixtures/test-theme", File.dirname(__FILE__))
+  gem "rubocop", "~> 0.49.1"
   gem "test-dependency-theme", :path => File.expand_path("./test/fixtures/test-dependency-theme", File.dirname(__FILE__))
+  gem "test-theme", :path => File.expand_path("./test/fixtures/test-theme", File.dirname(__FILE__))
 
   gem "jruby-openssl" if RUBY_ENGINE == "jruby"
 end
@@ -64,7 +65,7 @@ group :jekyll_optional_dependencies do
   gem "coderay", "~> 1.1.0"
   gem "jekyll-coffeescript"
   gem "jekyll-docs", :path => "../docs" if Dir.exist?("../docs") && ENV["JEKYLL_VERSION"]
-  gem "jekyll-feed"
+  gem "jekyll-feed", "~> 0.9"
   gem "jekyll-gist"
   gem "jekyll-paginate"
   gem "jekyll-redirect-from"
@@ -77,9 +78,9 @@ group :jekyll_optional_dependencies do
     gem "classifier-reborn", "~> 2.1.0"
     gem "liquid-c", "~> 3.0"
     gem "pygments.rb", "~> 0.6.0"
-    gem "yajl-ruby", "~> 1.2"
     gem "rdiscount", "~> 2.0"
     gem "redcarpet", "~> 3.2", ">= 3.2.3"
+    gem "yajl-ruby", "~> 1.2"
   end
 
   # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

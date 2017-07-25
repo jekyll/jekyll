@@ -22,7 +22,7 @@ If you already have a full [Ruby](https://www.ruby-lang.org/en/downloads/) devel
 # Now browse to http://localhost:4000
 ```
 
-If you encounter any unexpected errors during the above, please refer to the already-mentioned [requirements](/docs/installation/#requirements) page, as you might be missing development headers or other prerequisites.
+If you encounter any unexpected errors during the above, please refer to the [troubleshooting](/docs/troubleshooting/#configuration-problems) page or the already-mentioned [requirements](/docs/installation/#requirements) page, as you might be missing development headers or other prerequisites.
 
 ## About Bundler
 

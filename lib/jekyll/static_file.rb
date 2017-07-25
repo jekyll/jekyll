@@ -1,6 +1,6 @@
 module Jekyll
   class StaticFile
-    attr_reader :relative_path, :extname, :name
+    attr_reader :relative_path, :extname, :name, :data
 
     class << self
       # The cache of last modification times [path] -> mtime.
@@ -28,10 +28,7 @@ module Jekyll
       @collection = collection
       @relative_path = File.join(*[@dir, @name].compact)
       @extname = File.extname(@name)
-
-      data.default_proc = proc do |_, key|
-        site.frontmatter_defaults.find(relative_path, type, key)
-      end
+      @data = @site.frontmatter_defaults.all(relative_path, type)
     end
     # rubocop: enable ParameterLists
 
@@ -101,10 +98,6 @@ module Jekyll
 
     def to_liquid
       @to_liquid ||= Drops::StaticFileDrop.new(self)
-    end
-
-    def data
-      @data ||= {}
     end
 
     def basename

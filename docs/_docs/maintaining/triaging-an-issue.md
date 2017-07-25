@@ -51,4 +51,4 @@ Is what they wanted to get something we want to happen? Sometimes a bug report i
 
 ### Staleness and automatic closure
 
-@jekyllbot will automatically mark issues as `stale` if no activity occurs for at least one month. @jekyllbot leaves a comment asking for information about reproducibility in current versions. If no one responds after another month, the issue is automatically closed.
+@jekyllbot will automatically mark issues as `stale` if no activity occurs for at least one month. @jekyllbot leaves a comment asking for information about reproducibility in current versions. If no one responds after another month, the issue is automatically closed. This behaviour can be suppressed by setting the [`pinned` label](../maintaining/special-labels.md/#pinned).

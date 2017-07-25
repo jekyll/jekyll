@@ -115,7 +115,7 @@ class TestDocument < JekyllUnitTest
       @site = fixture_site({
         "collections" => ["slides"],
         "defaults"    => [{
-          "scope"  => { "path"=>"", "type"=>"slides" },
+          "scope"  => { "path" => "", "type" => "slides" },
           "values" => {
             "nested" => {
               "key" => "myval",
@@ -132,6 +132,12 @@ class TestDocument < JekyllUnitTest
       assert_equal "slide", @document.data["layout"]
       assert_equal({ "key"=>"myval" }, @document.data["nested"])
     end
+
+    should "return front matter defaults via to_liquid" do
+      hash = @document.to_liquid
+      assert hash.key? "nested"
+      assert_equal({ "key"=>"myval" }, hash["nested"])
+    end
   end
 
   context "a document as part of a collection with overridden default values" do
@@ -139,7 +145,7 @@ class TestDocument < JekyllUnitTest
       @site = fixture_site({
         "collections" => ["slides"],
         "defaults"    => [{
-          "scope"  => { "path"=>"", "type"=>"slides" },
+          "scope"  => { "path" => "", "type" => "slides" },
           "values" => {
             "nested" => {
               "test1" => "default1",
@@ -156,7 +162,7 @@ class TestDocument < JekyllUnitTest
       assert_equal "Override title", @document.data["title"]
       assert_equal "slide", @document.data["layout"]
       assert_equal(
-        { "test1"=>"override1", "test2"=>"override2" },
+        { "test1" => "override1", "test2" => "override2" },
         @document.data["nested"]
       )
     end
@@ -167,7 +173,7 @@ class TestDocument < JekyllUnitTest
       @site = fixture_site({
         "collections" => ["slides"],
         "defaults"    => [{
-          "scope"  => { "path"=>"_slides", "type"=>"slides" },
+          "scope"  => { "path" => "_slides", "type" => "slides" },
           "values" => {
             "nested" => {
               "key" => "value123",
@@ -191,7 +197,7 @@ class TestDocument < JekyllUnitTest
       @site = fixture_site({
         "collections" => ["slides"],
         "defaults"    => [{
-          "scope"  => { "path"=>"somepath", "type"=>"slides" },
+          "scope"  => { "path" => "somepath", "type" => "slides" },
           "values" => {
             "nested" => {
               "key" => "myval",
@@ -424,9 +430,9 @@ class TestDocument < JekyllUnitTest
 
     context "with output overrides" do
       should "be output according its front matter" do
-        assert_nil @files.find { |doc|
-          doc.relative_path == "_slides/non-outputted-slide.html"
-        }
+        assert_nil(
+          @files.find { |doc| doc.relative_path == "_slides/non-outputted-slide.html" }
+        )
       end
     end
   end

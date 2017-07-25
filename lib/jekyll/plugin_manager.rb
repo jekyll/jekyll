@@ -26,7 +26,7 @@ module Jekyll
     # Returns nothing.
     def require_gems
       Jekyll::External.require_with_graceful_fail(
-        site.gems.select { |gem| plugin_allowed?(gem) }
+        site.gems.select { |plugin| plugin_allowed?(plugin) }
       )
     end
 
@@ -59,15 +59,15 @@ module Jekyll
 
     # Check whether a gem plugin is allowed to be used during this build.
     #
-    # gem_name - the name of the gem
+    # plugin_name - the name of the plugin
     #
     # Returns true if
-    #   the gem name is not in the blacklist (or)
-    #   the gem name is in the whitelist (or)
+    #   the plugin name is not in the blacklist (or)
+    #   the plugin name is in the whitelist (or)
     #   the site is not in safe mode.
-    def plugin_allowed?(gem_name)
-      return false if blacklist.include?(gem_name)
-      !site.safe || whitelist.include?(gem_name)
+    def plugin_allowed?(plugin_name)
+      return false if blacklist.include?(plugin_name)
+      !site.safe || whitelist.include?(plugin_name)
     end
 
     # Build an array of disallowed plugin gem names.
@@ -110,12 +110,12 @@ module Jekyll
     end
 
     def deprecation_checks
-      pagination_included = (site.config["gems"] || []).include?("jekyll-paginate") ||
+      pagination_included = (site.config["plugins"] || []).include?("jekyll-paginate") ||
         defined?(Jekyll::Paginate)
       if site.config["paginate"] && !pagination_included
         Jekyll::Deprecator.deprecation_message "You appear to have pagination " \
           "turned on, but you haven't included the `jekyll-paginate` gem. " \
-          "Ensure you have `gems: [jekyll-paginate]` in your configuration file."
+          "Ensure you have `plugins: [jekyll-paginate]` in your configuration file."
       end
     end
   end

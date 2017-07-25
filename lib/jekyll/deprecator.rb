@@ -5,7 +5,7 @@ module Jekyll
     def process(args)
       arg_is_present? args, "--server", "The --server command has been replaced by the \
                           'serve' subcommand."
-      arg_is_present? args, "--serve", "The --server command has been replaced by the \
+      arg_is_present? args, "--serve", "The --serve command has been replaced by the \
                           'serve' subcommand."
       arg_is_present? args, "--no-server", "To build Jekyll without launching a server, \
                           use the 'build' subcommand."
@@ -38,7 +38,7 @@ module Jekyll
     end
 
     def deprecation_message(message)
-      Jekyll.logger.error "Deprecation:", message
+      Jekyll.logger.warn "Deprecation:", message
     end
 
     def defaults_deprecate_type(old, current)
@@ -46,6 +46,5 @@ module Jekyll
       Jekyll.logger.warn "Defaults:", "Please update your front-matter defaults to use \
                         'type: #{current}'."
     end
-
   end
 end

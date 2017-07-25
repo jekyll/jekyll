@@ -12,7 +12,7 @@ title: "BuddyWorks"
 
 ## 1. Getting started
 
-1. Log in at https://buddy.works with your GitHub/Bitbucket account or email
+1. Log in at [https://buddy.works](https://buddy.works) with your GitHub/Bitbucket account or email
 2. Choose your Git provider and select or push your Jekyll Project
 3. Create a new pipeline and set the trigger mode to 'On every push'
 4. Add and configure the Jekyll action and save the pipeline

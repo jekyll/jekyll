@@ -34,7 +34,7 @@ module Jekyll
       if docs.respond_to?(method.to_sym)
         Jekyll.logger.warn "Deprecation:",
           "#{label}.#{method} should be changed to #{label}.docs.#{method}."
-        Jekyll.logger.warn "", "Called by #{caller.first}."
+        Jekyll.logger.warn "", "Called by #{caller(0..0)}."
         docs.public_send(method.to_sym, *args, &blck)
       else
         super
@@ -72,7 +72,7 @@ module Jekyll
     def entries
       return [] unless exists?
       @entries ||=
-        Utils.safe_glob(collection_dir, ["**", "*"]).map do |entry|
+        Utils.safe_glob(collection_dir, ["**", "*"], File::FNM_DOTMATCH).map do |entry|
           entry["#{collection_dir}/"] = ""
           entry
         end
