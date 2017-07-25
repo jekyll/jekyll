@@ -212,5 +212,7 @@ As of v1.3.0, Jekyll uses the `listen` gem to watch for changes when the `--watc
 Add the following to the Gemfile for your site if you have issues with auto-regeneration on Windows alone:
 
 ```ruby
-gem 'wdm', '~> 0.1.0' if Gem.win_platform?
+gem 'wdm', '~> 0.1.1' if Gem.win_platform?
 ```
+
+You may first have to download and install the [Ruby DevKit](https://rubyinstaller.org/downloads/) by following [the instructions here](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit).
