@@ -73,12 +73,12 @@ module Jekyll
       render
       cleanup
       write
-      print_stats if @config["profile"]
+      print_stats if config["profile"]
     end
 
     def print_stats
       # TODO: remove duplicate guard statement in next major version change
-      if @config["profile"]
+      if config["profile"]
         puts @liquid_renderer.stats_table
       end
     end
