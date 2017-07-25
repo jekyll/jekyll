@@ -15,6 +15,7 @@
 ### Bug Fixes
 
   * deprecator.rb: fix typo for --serve command (#6229)
+  * Reader#read_directories: guard against an entry not being a directory (#6226)
 
 ### Documentation
 
