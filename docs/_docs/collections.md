@@ -24,7 +24,7 @@ with the name of your collection:
 
 ```yaml
 collections:
-- my_collection
+  my_collection
 ```
 
 You can optionally specify metadata for your collection in the configuration:
