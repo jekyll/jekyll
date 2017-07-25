@@ -35,3 +35,15 @@ Feature: Configuring and using plugins
     And I should see "Whatever" in "_site/index.html"
     And the "_site/test.txt" file should exist
     And I should see "this is a test" in "_site/test.txt"
+
+  Scenario: Add a blacklist to restrict some gems when site is not marked safe
+    Given I have an "index.html" file that contains "Whatever"
+    And I have a configuration file with:
+      | key       | value                                              |
+      | gems      | [jekyll_test_plugin, jekyll_test_plugin_malicious] |
+      | blacklist | [jekyll_test_plugin_malicious]                     |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "Whatever" in "_site/index.html"
+    And the "_site/test.txt" file should exist
