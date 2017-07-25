@@ -10,6 +10,7 @@
 
   * Ignore final newline in folded YAML string (#6054)
   * Add URL checks to Doctor (#5760)
+  * Fix serving files that clash with directories (#6222) (#6231)
 
 ### Bug Fixes
 
