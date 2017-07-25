@@ -5,6 +5,7 @@
   * Strip unnecessary leading whitespace in template (#6228)
   * Users should be installing patch versions. (#6198)
   * fix tests (#6240)
+  * Define path with __dir__ (#6087)
 
 ### Minor Enhancements
 
