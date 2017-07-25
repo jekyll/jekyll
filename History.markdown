@@ -21,6 +21,10 @@
 
   * Update custom-404-page.md - fix a typo (#6218)
 
+### Site Enhancements
+
+  * Adding DevKit helpers (#6225)
+
 ## 3.5.1 / 2017-07-17
 
 ### Minor Enhancements
