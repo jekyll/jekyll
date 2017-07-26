@@ -35,3 +35,24 @@ Feature: Configuring and using plugins
     And I should see "Whatever" in "_site/index.html"
     And the "_site/test.txt" file should exist
     And I should see "this is a test" in "_site/test.txt"
+
+  Scenario: A template with liquid tags for injecting feed meta and seo meta without these plugins
+    Given I have an "index.html" page that contains "Whatever {% feed_meta %} and {% seo %}"
+    And I have a configuration file with:
+      | key       | value                |
+      | gems      | [jekyll_test_plugin] |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "Whatever  and " in "_site/index.html"
+
+  Scenario: A template with liquid tags for injecting feed meta and seo meta with these plugins
+    Given I have an "index.html" page that contains "Whatever {% feed_meta %} and {% seo %}"
+    And I have a configuration file with:
+      | key       | value                |
+      | gems      | [jekyll_test_plugin, jekyll-feed, jekyll-seo-tag] |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "atom" in "_site/index.html"
+    And I should see "Begin Jekyll SEO" in "_site/index.html"

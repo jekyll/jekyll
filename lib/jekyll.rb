@@ -188,6 +188,5 @@ require_all "jekyll/converters/markdown"
 require_all "jekyll/drops"
 require_all "jekyll/generators"
 require_all "jekyll/tags"
-require_all "jekyll/tags/plugin_tags"
 
 require "jekyll-sass-converter"
