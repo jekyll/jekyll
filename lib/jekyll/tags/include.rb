@@ -137,10 +137,10 @@ eos
           context["include"] = parse_params(context) if @params
           begin
             partial.render!(context)
-          rescue Liquid::Error => ex
-            ex.template_name = path
-            ex.markup_context = "included " if ex.markup_context.nil?
-            raise ex
+          rescue Liquid::Error => e
+            e.template_name = path
+            e.markup_context = "included " if e.markup_context.nil?
+            raise e
           end
         end
       end
@@ -166,10 +166,10 @@ eos
             .file(path)
           begin
             cached_partial[path] = unparsed_file.parse(read_file(path, context))
-          rescue Liquid::Error => ex
-            ex.template_name = path
-            ex.markup_context = "included " if ex.markup_context.nil?
-            raise ex
+          rescue Liquid::Error => e
+            e.template_name = path
+            e.markup_context = "included " if e.markup_context.nil?
+            raise e
           end
         end
       end
