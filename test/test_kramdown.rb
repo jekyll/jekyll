@@ -22,9 +22,14 @@ class TestKramdown < JekyllUnitTest
       }
 
       @config = Jekyll.configuration(@config)
-      @markdown = Converters::Markdown.new(
-        @config
-      )
+      @markdown = Converters::Markdown.new(@config)
+      @markdown.setup
+    end
+
+    should "allow keys to be strings when kramdown wants symbols" do
+      kramdown_config = @markdown.instance_variable_get(:@parser).instance_variable_get(:@config)
+      assert_equal kramdown_config["smart_quotes"], kramdown_config[:smart_quotes]
+      assert_equal kramdown_config["syntax_highlighter_opts"]["css"], kramdown_config[:syntax_highlighter_opts][:css]
     end
 
     should "run Kramdown" do
