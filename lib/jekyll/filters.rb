@@ -412,7 +412,11 @@ module Jekyll
 
       condition
     end
-
+    
+    private
+    def site
+      @context.registers[:site]
+    end
   end
 end
 
