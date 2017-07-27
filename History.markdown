@@ -6,6 +6,7 @@
   * Users should be installing patch versions. (#6198)
   * fix tests (#6240)
   * Define path with __dir__ (#6087)
+  * exit site.process sooner (#6239)
 
 ### Minor Enhancements
 
