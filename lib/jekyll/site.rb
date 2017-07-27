@@ -73,13 +73,11 @@ module Jekyll
       render
       cleanup
       write
-      print_stats
+      print_stats if config["profile"]
     end
 
     def print_stats
-      if @config["profile"]
-        puts @liquid_renderer.stats_table
-      end
+      puts @liquid_renderer.stats_table
     end
 
     # Reset Site details.
