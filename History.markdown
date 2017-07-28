@@ -28,6 +28,10 @@
 
   * Adding DevKit helpers (#6225)
 
+### fix
+
+  * kramdown: symbolize keys in-place (#6247)
+
 ## 3.5.1 / 2017-07-17
 
 ### Minor Enhancements
