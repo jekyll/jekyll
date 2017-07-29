@@ -52,7 +52,7 @@
   * add plugins for multiple page pagination (#6055)
   * Update minimum Ruby version in installation.md (#6164)
   * [docs] Add information about finding a collection in `site.collections` (#6165)
-  * Add {%raw%} to Liquid example on site (#6179)
+  * Add `{% raw %}` to Liquid example on site (#6179)
   * Added improved Pug plugin - removed 404 Jade plugin (#6174)
   * Linking the link (#6210)
   * Small correction in documentation for includes (#6193)
