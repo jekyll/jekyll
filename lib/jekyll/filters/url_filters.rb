@@ -12,7 +12,7 @@ module Jekyll
         return if input.nil?
         return input if Addressable::URI.parse(input.to_s).absolute?
         site = @context.registers[:site]
-        return relative_url(input) if site.config["url"].nil?
+        return relative_url(input).to_s if site.config["url"].nil?
         Addressable::URI.parse(
           site.config["url"].to_s + relative_url(input)
         ).normalize.to_s
