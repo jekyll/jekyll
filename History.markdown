@@ -32,6 +32,7 @@
 ### fix
 
   * kramdown: symbolize keys in-place (#6247)
+  * Call to_s on site.url before attempting to concatenate strings (#6253)
 
 ## 3.5.1 / 2017-07-17
 
