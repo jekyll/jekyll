@@ -13,26 +13,23 @@
   * Ignore final newline in folded YAML string (#6054)
   * Add URL checks to Doctor (#5760)
   * Fix serving files that clash with directories (#6222) (#6231)
-  * Bump supported Ruby version to &gt;= 2.1.0 (#6220)
+  * Bump supported Ruby version to `>= 2.1.0` (#6220)
 
 ### Bug Fixes
 
-  * deprecator.rb: fix typo for --serve command (#6229)
-  * Reader#read_directories: guard against an entry not being a directory (#6226)
+  * `Deprecator`: fix typo for `--serve` command (#6229)
+  * `Reader#read_directories`: guard against an entry not being a directory (#6226)
+  * kramdown: symbolize keys in-place (#6247)
+  * Call to_s on site.url before attempting to concatenate strings (#6253)
 
 ### Documentation
 
-  * Update custom-404-page.md - fix a typo (#6218)
+  * Fix a typo in `custom-404-page.md` (#6218)
   * Docs: fix links to issues in History.markdown (#6255)
 
 ### Site Enhancements
 
   * Adding DevKit helpers (#6225)
-
-### fix
-
-  * kramdown: symbolize keys in-place (#6247)
-  * Call to_s on site.url before attempting to concatenate strings (#6253)
 
 ## 3.5.1 / 2017-07-17
 
