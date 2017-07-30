@@ -13,6 +13,16 @@ class TestFilters < JekyllUnitTest
     end
   end
 
+  class Value
+    def initialize(value)
+      @value = value
+    end
+
+    def to_s
+      @value.respond_to?(:call) ? @value.call : @value.to_s
+    end
+  end
+
   def make_filter_mock(opts = {})
     JekyllFilter.new(site_configuration(opts)).tap do |f|
       tz = f.site.config["timezone"]
@@ -423,6 +433,12 @@ class TestFilters < JekyllUnitTest
         page_url = "http://example.com/"
         assert_equal "http://example.com/", @filter.absolute_url(page_url)
       end
+
+      should "transform the input URL to a string" do
+        page_url = "/my-page.html"
+        filter = make_filter_mock({ "url" => Value.new(proc { "http://example.org" }) })
+        assert_equal "http://example.org#{page_url}", filter.absolute_url(page_url)
+      end
     end
 
     context "relative_url filter" do
@@ -499,6 +515,12 @@ class TestFilters < JekyllUnitTest
         url = filter.relative_url(page.url)
         url << "foo"
         assert_equal "/front_matter.erb", page.url
+      end
+
+      should "transform the input baseurl to a string" do
+        page_url = "/my-page.html"
+        filter = make_filter_mock({ "baseurl" => Value.new(proc { "/baseurl/" }) })
+        assert_equal "/baseurl#{page_url}", filter.relative_url(page_url)
       end
     end
 
