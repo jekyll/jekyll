@@ -23,6 +23,7 @@
 ### Documentation
 
   * Update custom-404-page.md - fix a typo (#6218)
+  * Docs: fix links to issues in History.markdown (#6255)
 
 ### Site Enhancements
 
