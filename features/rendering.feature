@@ -28,7 +28,7 @@ Feature: Rendering
     And   I have a simple layout that contains "{{ content }}"
     When  I run jekyll build
     Then  I should get a non-zero exit-status
-    And   I should see "Liquid Exception: Liquid error \(.+/_includes/invalid\.html line 1\): wrong number of arguments \(given 1, expected 2\) included in index\.html" in the build output
+    And   I should see "Liquid Exception: Liquid error \(.+/_includes/invalid\.html line 1\): wrong number of arguments (\(given 1, expected 2\)|\(1 for 2\)) included in index\.html" in the build output
 
   Scenario: Render Liquid and place in layout
     Given I have a "index.html" page with layout "simple" that contains "Hi there, Jekyll {{ jekyll.environment }}!"
