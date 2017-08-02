@@ -785,6 +785,45 @@ CONTENT
     end
   end
 
+  context "simple page with dynamic linking to a page" do
+    setup do
+      content = <<CONTENT
+---
+title: linking
+---
+
+{% assign contacts_filename = 'contacts' %}
+{% assign contacts_ext = 'html' %}
+{% link {{contacts_filename}}.{{contacts_ext}} %}
+{% assign info_path = 'info.md' %}
+{% link {{\ info_path\ }} %}
+{% assign screen_css_path = '/css' %}
+{% link {{ screen_css_path }}/screen.css %}
+CONTENT
+      create_post(content, {
+        "source"      => source_dir,
+        "destination" => dest_dir,
+        "read_all"    => true,
+      })
+    end
+
+    should "not cause an error" do
+      refute_match(%r!markdown\-html\-error!, @result)
+    end
+
+    should "have the URL to the 'contacts' item" do
+      assert_match(%r!/contacts\.html!, @result)
+    end
+
+    should "have the URL to the 'info' item" do
+      assert_match(%r!/info\.html!, @result)
+    end
+
+    should "have the URL to the 'screen.css' item" do
+      assert_match(%r!/css/screen\.css!, @result)
+    end
+  end
+
   context "simple page with linking" do
     setup do
       content = <<CONTENT
@@ -793,6 +832,33 @@ title: linking
 ---
 
 {% link _methods/yaml_with_dots.md %}
+CONTENT
+      create_post(content, {
+        "source"           => source_dir,
+        "destination"      => dest_dir,
+        "collections"      => { "methods" => { "output" => true } },
+        "read_collections" => true,
+      })
+    end
+
+    should "not cause an error" do
+      refute_match(%r!markdown\-html\-error!, @result)
+    end
+
+    should "have the URL to the 'yaml_with_dots' item" do
+      assert_match(%r!/methods/yaml_with_dots\.html!, @result)
+    end
+  end
+
+  context "simple page with dynamic linking" do
+    setup do
+      content = <<CONTENT
+---
+title: linking
+---
+
+{% assign yaml_with_dots_path = '_methods/yaml_with_dots.md' %}
+{% link {{yaml_with_dots_path}} %}
 CONTENT
       create_post(content, {
         "source"           => source_dir,
@@ -850,6 +916,28 @@ title: Invalid linking
 ---
 
 {% link non-existent-collection-item %}
+CONTENT
+
+      assert_raises ArgumentError do
+        create_post(content, {
+          "source"           => source_dir,
+          "destination"      => dest_dir,
+          "collections"      => { "methods" => { "output" => true } },
+          "read_collections" => true,
+        })
+      end
+    end
+  end
+
+  context "simple page with invalid dynamic linking" do
+    should "cause an error" do
+      content = <<CONTENT
+---
+title: Invalid linking
+---
+
+{% assign non_existent_path = 'non-existent-collection-item' %}
+{% link {{\ non_existent_path\ }} %}
 CONTENT
 
       assert_raises ArgumentError do
