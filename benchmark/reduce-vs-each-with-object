@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "benchmark/ips"
+require "benchmark/memory"
+
+GC.disable
+
+PERIOD = "."
+PROPERTY_AS_HASH = ["hello", "there_oh", "friends"]
+property = "hello.there_oh.friends"
+item = Hash.new { |h, k| h[k] = Hash.new(&h.default_proc) }
+
+def candidate(property, item)
+  property.to_s.split(".".freeze).each_with_object(item) do |attribute, memo|
+    memo = memo[attribute]
+  end
+end
+
+def control(property, item)
+  property.to_s.split(".").reduce(item) do |subvalue, attribute|
+    subvalue[attribute]
+  end
+end
+
+Benchmark.ips do |x|
+  x.report("candidate") { candidate(property, item) }
+  x.report("control")   { control(property, item) }
+  x.compare!
+end
+
+Benchmark.memory do |x|
+  x.report("candidate") { candidate(property, item) }
+  x.report("control")   { control(property, item) }
+  x.compare!
+end
