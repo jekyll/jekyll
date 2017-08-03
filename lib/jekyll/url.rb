@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "addressable/uri"
 
 # Public: Methods that generate a URL for a resource such as a Post or a Page.
@@ -83,30 +85,18 @@ module Jekyll
     # That should be :month and :day, but our key extraction regexp isn't
     # smart enough to know that so we have to make it an explicit
     # possibility.
-    def possible_keys(key)
-      if key.end_with?("_")
-        [key, key.chomp("_")]
-      else
-        [key]
-      end
-    end
-
     def generate_url_from_drop(template)
       template.gsub(%r!:([a-z_]+)!) do |match|
-        pool = possible_keys(match.sub(":".freeze, "".freeze))
+        key = match[1..-1]
+        key = match[1..-2] if !@placeholders.key?(key) && key.end_with?("_")
 
-        winner = pool.find { |key| @placeholders.key?(key) }
-        if winner.nil?
+        unless @placeholders.key?(key)
           raise NoMethodError,
-            "The URL template doesn't have #{pool.join(" or ")} keys. "\
+            "The URL template doesn't have #{key} key. "\
               "Check your permalink template!"
         end
 
-        value = @placeholders[winner]
-        value = "" if value.nil?
-        replacement = self.class.escape_path(value)
-
-        match.sub(":#{winner}", replacement)
+        match.sub(":" + key, self.class.escape_path(@placeholders[key].to_s))
       end.gsub(%r!//!, "/".freeze)
     end
 
