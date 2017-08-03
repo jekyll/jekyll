@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class Collection
     attr_reader :site, :label, :metadata

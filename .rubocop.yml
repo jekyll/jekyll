@@ -9,6 +9,7 @@ AllCops:
     - benchmark/**/*
     - script/**/*
     - vendor/**/*
+    - tmp/**/*
 Layout/AlignArray:
   Enabled: false
 Layout/AlignHash:
@@ -99,6 +100,9 @@ Style/BracesAroundHashParameters:
   Enabled: false
 Style/ClassAndModuleChildren:
   Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  EnforcedStyle: always
 Style/Documentation:
   Enabled: false
   Exclude:

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #############################################################################
 #
 # Packaging tasks for jekyll-docs

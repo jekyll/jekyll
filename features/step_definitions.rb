@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before do
   FileUtils.rm_rf(Paths.test_dir) if Paths.test_dir.exist?
   FileUtils.mkdir_p(Paths.test_dir) unless Paths.test_dir.directory?
