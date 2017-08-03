@@ -380,17 +380,10 @@ module Jekyll
       when Array
         item.map { |i| as_liquid(i) }
       else
-        if item.respond_to?(:to_liquid)
-          liquidated = item.to_liquid
-          # prevent infinite recursion for simple types (which return `self`)
-          if liquidated == item
-            item
-          else
-            as_liquid(liquidated)
-          end
-        else
-          item
-        end
+        # prevent infinite recursion for simple types (which return `self`) when
+        #   `item` responds to :to_liquid
+        return item if !item.respond_to?(:to_liquid) || (item.to_liquid == item)
+        as_liquid(item.to_liquid)
       end
     end
 
