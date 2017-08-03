@@ -26,6 +26,7 @@
 
   * Fix a typo in `custom-404-page.md` (#6218)
   * Docs: fix links to issues in History.markdown (#6255)
+  * Update deprecated gems key to plugins. (#6262)
 
 ### Site Enhancements
 
