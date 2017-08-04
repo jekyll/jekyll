@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Kramdown::Parser::SmartyPants < Kramdown::Parser::Kramdown
   def initialize(source, options)
     super

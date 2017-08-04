@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "jekyll/liquid_renderer/file"
 require "jekyll/liquid_renderer/table"
 

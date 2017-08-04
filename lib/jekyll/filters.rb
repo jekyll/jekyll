@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "addressable/uri"
 require "json"
 require "date"

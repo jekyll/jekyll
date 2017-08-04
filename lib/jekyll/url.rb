@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "addressable/uri"
 
 # Public: Methods that generate a URL for a resource such as a Post or a Page.
@@ -93,7 +95,7 @@ module Jekyll
 
     def generate_url_from_drop(template)
       template.gsub(%r!:([a-z_]+)!) do |match|
-        pool = possible_keys(match.sub(":".freeze, "".freeze))
+        pool = possible_keys(match.sub(":", ""))
 
         winner = pool.find { |key| @placeholders.key?(key) }
         if winner.nil?

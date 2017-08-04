@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Gem::Specification.new do |s|
   s.name        = "test-theme"
   s.version     = "0.1.0"

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #############################################################################
 #
 # Site tasks - https://jekyllrb.com

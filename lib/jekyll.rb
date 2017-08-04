@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 $LOAD_PATH.unshift __dir__ # For use/testing when no gem is installed
 
 # Require all of the Ruby files in the given directory.
@@ -162,8 +164,9 @@ module Jekyll
     def sanitized_path(base_directory, questionable_path)
       return base_directory if base_directory.eql?(questionable_path)
 
-      questionable_path.insert(0, "/") if questionable_path.start_with?("~")
-      clean_path = File.expand_path(questionable_path, "/")
+      clean_path = questionable_path.dup
+      clean_path.insert(0, "/") if clean_path.start_with?("~")
+      clean_path = File.expand_path(clean_path, "/")
 
       return clean_path if clean_path.eql?(base_directory)
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class StaticFile
     attr_reader :relative_path, :extname, :name, :data
