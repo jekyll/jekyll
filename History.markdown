@@ -14,6 +14,7 @@
   * Add URL checks to Doctor (#5760)
   * Fix serving files that clash with directories (#6222) (#6231)
   * Bump supported Ruby version to `>= 2.1.0` (#6220)
+  * set `LiquidError#template_name` for errors in included file (#6206)
 
 ### Bug Fixes
 
