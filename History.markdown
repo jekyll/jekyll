@@ -21,6 +21,7 @@
   * `Reader#read_directories`: guard against an entry not being a directory (#6226)
   * kramdown: symbolize keys in-place (#6247)
   * Call to_s on site.url before attempting to concatenate strings (#6253)
+  * Enforce Style/FrozenStringLiteralComment (#6265)
 
 ### Documentation
 
