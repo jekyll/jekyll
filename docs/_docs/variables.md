@@ -193,9 +193,14 @@ following is a reference of the available data.
         <code>_config.yml</code> are available through the <code>site</code>
         variable. For example, if you have <code>url: http://mysite.com</code>
         in your configuration file, then in your Posts and Pages it will be
-        stored in <code>site.url</code>. Jekyll does not parse changes to
-        <code>_config.yml</code> in <code>watch</code> mode, you must restart
-        Jekyll to see changes to variables.
+        stored in <code>site.url</code>. But there is
+        <a href="/news/#3-siteurl-is-set-by-the-development-server">one exception</a>,
+        if you are running `jekyll serve` in a development environment
+        <code>site.url</code> will be set to the value of <code>host</code>,
+        <code>port</code>, and SSL-related options. This defaults to
+        <code>url: http://localhost:4000)</code>.
+        Jekyll does not parse changes to <code>_config.yml</code> in
+        <code>watch</code> mode, you must restart Jekyll to see changes to variables.
 
       </p></td>
     </tr>
