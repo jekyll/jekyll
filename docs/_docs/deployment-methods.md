@@ -7,7 +7,7 @@ Sites built using Jekyll can be deployed in a large number of ways due to the st
 
 ## Web hosting providers (FTP)
 
-Just about any traditional web hosting provider will let you upload files to their servers over FTP. To upload a Jekyll site to a web host using FTP, simply run the `jekyll build` command and copy the generated `_site` folder to the root folder of your hosting account. This is most likely to be the `httpdocs` or `public_html` folder on most hosting providers.
+Just about any traditional web hosting provider will let you upload files to their servers over FTP. To upload a Jekyll site to a web host using FTP, simply run the `jekyll build` command and copy the contents of the generated `_site` folder to the root folder of your hosting account. This is most likely to be the `httpdocs` or `public_html` folder on most hosting providers.
 
 ## Self-managed web server
 
@@ -78,7 +78,7 @@ Another way to deploy your Jekyll site is to use [Rake](https://github.com/ruby/
 
 ### scp
 
-Once you’ve generated the `_site` directory, you can easily scp it using a
+Once you’ve generated the `_site` directory, you can easily scp its content using a
 `tasks/deploy` shell script similar to [this deploy script][]. You’d obviously
 need to change the values to reflect your site’s details. There is even [a
 matching TextMate command][] that will help you run this script.
@@ -89,7 +89,7 @@ matching TextMate command][] that will help you run this script.
 
 ### rsync
 
-Once you’ve generated the `_site` directory, you can easily rsync it using a `tasks/deploy` shell script similar to [this deploy script here](https://github.com/vitalyrepin/vrepinblog/blob/master/transfer.sh). You’d obviously need to change the values to reflect your site’s details.
+Once you’ve generated the `_site` directory, you can easily rsync its content using a `tasks/deploy` shell script similar to [this deploy script here](https://github.com/vitalyrepin/vrepinblog/blob/master/transfer.sh). You’d obviously need to change the values to reflect your site’s details.
 
 Certificate-based authorization is another way to simplify the publishing
 process. It makes sense to restrict rsync access only to the directory which it is supposed to sync. This can be done using rrsync.

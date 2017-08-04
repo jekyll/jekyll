@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 require "colorator"
 
@@ -205,9 +207,9 @@ class TestConfiguration < JekyllUnitTest
         "exclude"     => "READ-ME.md, Gemfile,CONTRIBUTING.hello.markdown",
         "include"     => "STOP_THE_PRESSES.txt,.heloses, .git",
         "pygments"    => true,
-        "plugins"     => true,
         "layouts"     => true,
         "data_source" => true,
+        "gems"        => [],
       }]
     end
     should "unset 'auto' and 'watch'" do
@@ -242,15 +244,23 @@ class TestConfiguration < JekyllUnitTest
       assert_equal @config.backwards_compatibilize["highlighter"], "pygments"
     end
     should "adjust directory names" do
-      assert @config.key?("plugins")
-      assert !@config.backwards_compatibilize.key?("plugins")
-      assert @config.backwards_compatibilize["plugins_dir"]
       assert @config.key?("layouts")
       assert !@config.backwards_compatibilize.key?("layouts")
       assert @config.backwards_compatibilize["layouts_dir"]
       assert @config.key?("data_source")
       assert !@config.backwards_compatibilize.key?("data_source")
       assert @config.backwards_compatibilize["data_dir"]
+    end
+    should "raise an error if `plugins` key is a string" do
+      config = Configuration[{ "plugins" => "_plugin" }]
+      assert_raises Jekyll::Errors::InvalidConfigurationError do
+        config.backwards_compatibilize
+      end
+    end
+    should "set the `gems` config to `plugins`" do
+      assert @config.key?("gems")
+      assert !@config.backwards_compatibilize["gems"]
+      assert @config.backwards_compatibilize["plugins"]
     end
   end
   context "#fix_common_issues" do
@@ -484,6 +494,38 @@ class TestConfiguration < JekyllUnitTest
           },
         },
       })
+    end
+  end
+
+  context "folded YAML string" do
+    setup do
+      @tester = Configuration.new
+    end
+
+    should "ignore newlines in that string entirely from a sample file" do
+      config = Jekyll.configuration(
+        @tester.read_config_file(
+          source_dir("_config_folded.yml")
+        )
+      )
+      assert_equal(
+        config["folded_string"],
+        "This string of text will ignore newlines till the next key.\n"
+      )
+      assert_equal(
+        config["clean_folded_string"],
+        "This string of text will ignore newlines till the next key."
+      )
+    end
+
+    should "ignore newlines in that string entirely from the template file" do
+      config = Jekyll.configuration(
+        @tester.read_config_file(
+          File.expand_path("../lib/site_template/_config.yml", File.dirname(__FILE__))
+        )
+      )
+      assert_includes config["description"], "an awesome description"
+      refute_includes config["description"], "\n"
     end
   end
 end

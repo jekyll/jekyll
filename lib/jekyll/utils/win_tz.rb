@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   module Utils
     module WinTZ
@@ -46,7 +48,7 @@ module Jekyll
       #
       # Returns a rational number.
       def rational_hour(seconds)
-        seconds.to_r/3600
+        seconds.to_r / 3600
       end
 
       # Private: Convert given seconds to an hour as an absolute number.
@@ -56,7 +58,7 @@ module Jekyll
       #
       # Returns an integer.
       def absolute_hour(seconds)
-        seconds.abs/3600
+        seconds.abs / 3600
       end
 
       # Private: Perform a modulo operation on a given fraction.

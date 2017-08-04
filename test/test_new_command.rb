@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 require "jekyll/commands/new"
 
@@ -9,7 +11,7 @@ class TestNewCommand < JekyllUnitTest
   end
 
   def site_template
-    File.expand_path("../lib/site_template", File.dirname(__FILE__))
+    File.expand_path("../lib/site_template", __dir__)
   end
 
   context "when args contains a path" do
@@ -34,7 +36,7 @@ class TestNewCommand < JekyllUnitTest
       refute_exist @full_path
       capture_output { Jekyll::Commands::New.process(@args) }
       assert_exist gemfile
-      assert_match(%r!gem "jekyll", "#{Jekyll::VERSION}"!, File.read(gemfile))
+      assert_match(%r!gem "jekyll", "~> #{Jekyll::VERSION}"!, File.read(gemfile))
       assert_match(%r!gem "github-pages"!, File.read(gemfile))
     end
 

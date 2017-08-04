@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   module External
     class << self
@@ -23,10 +25,23 @@ module Jekyll
             require name
           rescue LoadError
             Jekyll.logger.debug "Couldn't load #{name}. Skipping."
-            yield(name) if block_given?
+            yield(name, version_constraint(name)) if block_given?
             false
           end
         end
+      end
+
+      #
+      # The version constraint required to activate a given gem.
+      # Usually the gem version requirement is "> 0," because any version
+      # will do. In the case of jekyll-docs, however, we require the exact
+      # same version as Jekyll.
+      #
+      # Returns a String version constraint in a parseable form for
+      # RubyGems.
+      def version_constraint(gem_name)
+        return "= #{Jekyll::VERSION}" if gem_name.to_s.eql?("jekyll-docs")
+        "> 0"
       end
 
       #

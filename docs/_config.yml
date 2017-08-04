@@ -1,5 +1,7 @@
 markdown: kramdown
 highlighter: rouge
+sass:
+  style: compressed
 
 gauges_id: 503c5af6613f5d0f19000027
 google_analytics_id: UA-50755011-1
@@ -31,6 +33,8 @@ collections:
     output: true
   posts:
     permalink: /news/:year/:month/:day/:title/
+    output: true
+  tutorials:
     output: true
 
 name: Jekyll • Simple, blog-aware, static sites

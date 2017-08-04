@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class PostReader
     attr_reader :site, :unfiltered_content

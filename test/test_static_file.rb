@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestStaticFile < JekyllUnitTest
@@ -107,6 +109,28 @@ class TestStaticFile < JekyllUnitTest
       assert(!static_file.write?,
         "static_file.write? should return false when _config.yml sets " \
         "`published: false`")
+    end
+
+    should "respect front matter defaults" do
+      defaults = [{
+        "scope"  => { "path" => "" },
+        "values" => { "front-matter" => "default" },
+      },]
+
+      static_file = setup_static_file_with_defaults "", "", "file.pdf", defaults
+      assert_equal "default", static_file.data["front-matter"]
+    end
+
+    should "include front matter defaults in to_liquid" do
+      defaults = [{
+        "scope"  => { "path" => "" },
+        "values" => { "front-matter" => "default" },
+      },]
+
+      static_file = setup_static_file_with_defaults "", "", "file.pdf", defaults
+      hash = static_file.to_liquid
+      assert hash.key? "front-matter"
+      assert_equal "default", hash["front-matter"]
     end
 
     should "know its last modification time" do

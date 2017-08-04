@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   module Tags
     class PostComparer
@@ -81,7 +83,7 @@ eos
         site.posts.docs.each do |p|
           next unless @post.deprecated_equality p
           Jekyll::Deprecator.deprecation_message "A call to "\
-            "'{{ post_url #{@post.name} }}' did not match " \
+            "'{% post_url #{@post.name} %}' did not match " \
             "a post using the new matching method of checking name " \
             "(path-date-slug) equality. Please make sure that you " \
             "change this tag to match the post's name exactly."

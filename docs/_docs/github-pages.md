@@ -17,13 +17,13 @@ This guide will teach you what you need to know about Git, GitHub, and Jekyll to
 
 Sometimes it's nice to preview your Jekyll site before you push your `gh-pages`
 branch to GitHub. However, the subdirectory-like URL structure GitHub uses for
-Project Pages complicates the proper resolution of URLs. In order to assure your site builds properly, use `site.github.url` in your URL's.
+Project Pages complicates the proper resolution of URLs. In order to assure your site builds properly, use `site.github.url` in your URLs.
 
 ```html
 {% raw %}
 <!-- Useful for styles with static names... -->
 <link href="{{ site.github.url }}/path/to/css.css" rel="stylesheet">
-<!-- and for documents/pages whose URL's can change... -->
+<!-- and for documents/pages whose URLs can change... -->
 [{{ page.title }}]("{{ page.url | prepend: site.github.url }}")
 {% endraw %}
 ```

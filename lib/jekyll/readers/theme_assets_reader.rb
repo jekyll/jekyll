@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class ThemeAssetsReader
     attr_reader :site
@@ -29,7 +31,7 @@ module Jekyll
           Jekyll::Page.new(site, base, dir, name)
       else
         append_unless_exists site.static_files,
-          Jekyll::StaticFile.new(site, base, dir, name)
+          Jekyll::StaticFile.new(site, base, "/#{dir}", name)
       end
     end
 

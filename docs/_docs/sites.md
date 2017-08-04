@@ -13,6 +13,8 @@ learning purposes.
     ([source](https://github.com/github/training-kit))
 - [Rasmus Andersson](https://rsms.me/)
     ([source](https://github.com/rsms/rsms.github.com))
+- [MvvmCross](https://mvvmcross.github.io/MvvmCross/)
+    ([source](https://github.com/MvvmCross/MvvmCross/tree/master/docs))
 
 If you would like to explore more examples, you can find a list of sites
 and their sources on the ["Sites" page in the Jekyll wiki][jekyll-sites].
