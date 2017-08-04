@@ -211,9 +211,9 @@ module Jekyll
     private
 
     def sort_docs!
-      if @metadata["order"] && @metadata["order"].is_a?(Array)
+      if metadata["order"] && metadata["order"].is_a?(Array)
         rearrange_docs!
-      elsif @metadata["sort_by"]
+      elsif metadata["sort_by"]
         sort_docs_by_key!
       else
         docs.sort!
@@ -221,7 +221,7 @@ module Jekyll
     end
 
     def sort_docs_by_key!
-      meta_key = @metadata["sort_by"]
+      meta_key = metadata["sort_by"]
       docs.sort_by! { |d| d.data[meta_key] }
     rescue
       # Inform which document doesn't have the required key defined, and proceed
@@ -238,14 +238,14 @@ module Jekyll
     end
 
     def rearrange_docs!
-      @metadata["order"].each do |entry|
-        doc_path = "_#{@label}/#{entry}"
+      metadata["order"].each do |entry|
+        doc_path = "_#{label}/#{entry}"
         doc = docs.find { |d| d.relative_path == doc_path }
 
-        if File.exist?(@site.in_source_dir(doc_path))
-          doc.data["sort_index"] = @metadata["order"].index(entry)
+        if File.exist?(site.in_source_dir(doc_path))
+          doc.data["sort_index"] = metadata["order"].index(entry)
         else
-          Jekyll.logger.warn "Error:", "#{entry} not found in '#{@label}' collection!"
+          Jekyll.logger.warn "Error:", "#{entry} not found in '#{label}' collection!"
         end
       end
 
