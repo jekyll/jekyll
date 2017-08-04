@@ -162,11 +162,11 @@ Feature: Collections
     And I should see "Collections: this is a test!, Collection#entries, Jekyll.configuration, Jekyll.escape, Jekyll.sanitized_path, Site#generate, Initialize, Site#generate, YAML with Dots" in "_site/index.html" unless Windows
     And I should see "Collections: this is a test!, Collection#entries, Jekyll.configuration, Jekyll.escape, Jekyll.sanitized_path, Site#generate, Initialize, YAML with Dots" in "_site/index.html" if on Windows
 
-  Scenario: Sort entries by Front Matter key
-    Given I have an "index.html" page that contains "Collections: {% assign tutorials = site.tutorials %}{{ tutorials | map:"title" | join: ", " }}"
+  Scenario: Sort all entries by a Front Matter key defined in all entries
+    Given I have an "index.html" page that contains "Collections: {{ site.tutorials | map:"title" | join: ", " }}"
     And I have fixture collections
     And I have a _layouts directory
-    And I have a "_layouts/tuts.html" file with content:
+    And I have a "_layouts/tutorial.html" file with content:
     """
     {% if page.previous %}Previous: {{ page.previous.title }}{% endif %}
 
@@ -179,7 +179,7 @@ Feature: Collections
           path: ""
           type: tutorials
         values:
-          layout: tuts
+          layout: tutorial
 
     collections:
       tutorials:
@@ -196,11 +196,11 @@ Feature: Collections
     But I should see "Previous: Getting Started" in "_site/tutorials/lets-roll.html"
     And I should see "Next: Dive-In and Publish Already!" in "_site/tutorials/lets-roll.html"
 
-  Scenario: Sort some entries by Front Matter key
-    Given I have an "index.html" page that contains "Collections: {% assign tutorials = site.tutorials %}{{ tutorials | map:"title" | join: ", " }}"
+  Scenario: Sort all entries by a Front Matter key defined in only some entries
+    Given I have an "index.html" page that contains "Collections: {{ site.tutorials | map:"title" | join: ", " }}"
     And I have fixture collections
     And I have a _layouts directory
-    And I have a "_layouts/tuts.html" file with content:
+    And I have a "_layouts/tutorial.html" file with content:
     """
     {% if page.previous %}Previous: {{ page.previous.title }}{% endif %}
 
@@ -213,27 +213,27 @@ Feature: Collections
           path: ""
           type: tutorials
         values:
-          layout: tuts
+          layout: tutorial
 
     collections:
       tutorials:
         output: true
-        sort_by: time
+        sort_by: approx_time
 
     """
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
-    And I should see "'time' not defined" in the build output
+    And I should see "'approx_time' not defined" in the build output
     And I should see "Collections: Dive-In and Publish Already!, Extending with Plugins, Getting Started, Graduation Day, Let's Roll!, Tip of the Iceberg" in "_site/index.html"
     And I should see "Previous: Graduation Day" in "_site/tutorials/lets-roll.html"
     And I should see "Next: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
 
   Scenario: Manually sort entries
-    Given I have an "index.html" page that contains "Collections: {% assign tutorials = site.tutorials %}{{ tutorials | map:"title" | join: ", " }}"
+    Given I have an "index.html" page that contains "Collections: {{ site.tutorials | map:"title" | join: ", " }}"
     And I have fixture collections
     And I have a _layouts directory
-    And I have a "_layouts/tuts.html" file with content:
+    And I have a "_layouts/tutorial.html" file with content:
     """
     {% if page.previous %}Previous: {{ page.previous.title }}{% endif %}
 
@@ -246,7 +246,7 @@ Feature: Collections
           path: ""
           type: tutorials
         values:
-          layout: tuts
+          layout: tutorial
 
     collections:
       tutorials:
@@ -270,10 +270,10 @@ Feature: Collections
     And I should see "Next: Dive-In and Publish Already!" in "_site/tutorials/lets-roll.html"
 
   Scenario: Manually sort some entries
-    Given I have an "index.html" page that contains "Collections: {% assign tutorials = site.tutorials %}{{ tutorials | map:"title" | join: ", " }}"
+    Given I have an "index.html" page that contains "Collections: {{ site.tutorials | map:"title" | join: ", " }}"
     And I have fixture collections
     And I have a _layouts directory
-    And I have a "_layouts/tuts.html" file with content:
+    And I have a "_layouts/tutorial.html" file with content:
     """
     {% if page.previous %}Previous: {{ page.previous.title }}{% endif %}
 
@@ -286,7 +286,7 @@ Feature: Collections
           path: ""
           type: tutorials
         values:
-          layout: tuts
+          layout: tutorial
 
     collections:
       tutorials:

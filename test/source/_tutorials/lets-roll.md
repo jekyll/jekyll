@@ -1,7 +1,7 @@
 ---
 title: "Let's Roll!"
 lesson: 2
-time: 1 min
+approx_time: 1 min
 ---
 
 Now that you have installed Ruby, Jekyll and Bundler, lets get Jekylling!
