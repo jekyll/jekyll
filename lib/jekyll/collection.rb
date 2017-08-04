@@ -223,17 +223,18 @@ module Jekyll
     def sort_docs_by_key!
       meta_key = metadata["sort_by"]
       docs.sort_by! { |d| d.data[meta_key] }
-    rescue
+    rescue ArgumentError
       # Inform which document doesn't have the required key defined, and proceed
       # with the default sort function.
       #
       # But if the user defines the key with a different Class type, (e.g. Integer
       # instead of a String), simply skip custom sorting, and proceed.
       docs.select { |entry| entry.data[meta_key].nil? }.each do |e|
-        Jekyll.logger.warn "Error:", "'#{meta_key}' not defined in '#{e.relative_path}'"
+        Jekyll.logger.error "Error:",
+          "Sort-by key '#{meta_key}' not defined in '#{e.relative_path}'"
       end
 
-      Jekyll.logger.warn "Error:",
+      Jekyll.logger.warn "Build Warning:",
         "Custom sorting skipped due to inconsistent key definition."
     end
 
