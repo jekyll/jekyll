@@ -71,6 +71,7 @@ group :jekyll_optional_dependencies do
   gem "jekyll-gist"
   gem "jekyll-paginate"
   gem "jekyll-redirect-from"
+  gem "jekyll-seo-tag"
   gem "kramdown", "~> 1.9"
   gem "mime-types", "~> 3.0"
   gem "rdoc", "~> 5.0"
@@ -98,7 +99,6 @@ group :site do
 
   gem "jekyll-avatar"
   gem "jekyll-mentions"
-  gem "jekyll-seo-tag"
   gem "jekyll-sitemap"
   gem "jemoji"
 end
