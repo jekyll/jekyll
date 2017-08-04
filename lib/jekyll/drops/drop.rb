@@ -177,13 +177,7 @@ module Jekyll
       end
 
       def merge(other, &block)
-        self.dup.tap do |me|
-          if block.nil?
-            me.merge!(other)
-          else
-            me.merge!(other, block)
-          end
-        end
+        self.class.new(@obj.merge(other, &block))
       end
 
       def merge!(other)
