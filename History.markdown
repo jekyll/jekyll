@@ -24,6 +24,7 @@
   * Call to_s on site.url before attempting to concatenate strings (#6253)
   * Enforce Style/FrozenStringLiteralComment (#6265)
   * Update theme-template README to note &#39;assets&#39; directory (#6257)
+  * Memoize the return value of Document#url (#6266)
 
 ### Documentation
 
