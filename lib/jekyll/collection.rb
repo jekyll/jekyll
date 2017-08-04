@@ -237,26 +237,32 @@ module Jekyll
         "Custom sorting skipped due to inconsistent key definition."
     end
 
+    # Rearrange the collection entries by assigning a virtual `#{label}_sort_index` key
+    # to all Jekyll::Document objects in the current collection.
+    #
+    # The `#{label}_sort_index` key will be removed at the end of operation.
+    #
+    # --------------------------------------------------------------------------------
+    # TODO: Warn user that any existing `#{label}_sort_index` key in the document will
+    #       not be available for rendering the document.
+    # --------------------------------------------------------------------------------
     def rearrange_docs!
       metadata["order"].each do |entry|
         doc_path = "_#{label}/#{entry}"
         doc = docs.find { |d| d.relative_path == doc_path }
 
         if File.exist?(site.in_source_dir(doc_path))
-          doc.data["sort_index"] = metadata["order"].index(entry)
+          doc.data["#{label}_sort_index"] = metadata["order"].index(entry)
         else
           Jekyll.logger.warn "Error:", "#{entry} not found in '#{label}' collection!"
         end
       end
 
       assign_sort_index(docs)
-      docs.sort_by! { |d| d.data["sort_index"] }
+      docs.sort_by! { |d| d.data.delete("#{label}_sort_index") }
     end
 
-    # Assign a virtual `sort_index` to all Jekyll::Document objects in the current
-    # collection.
-    #
-    # Collect all documents without the virtual `sort_index` key defined and assign
+    # Collect all documents without a `#{label}_sort_index` key defined and assign
     # the key with a value equal to the total no. of documents in the main collection.
     # Such documents will be sorted alphabetically and appear at the end of the custom
     # array.
@@ -264,8 +270,8 @@ module Jekyll
     # documents - the array of Jekyll::Document objects from the current Collection
     def assign_sort_index(documents)
       documents.each do |document|
-        next unless document.data["sort_index"].nil?
-        document.data["sort_index"] = documents.size
+        next unless document.data["#{label}_sort_index"].nil?
+        document.data["#{label}_sort_index"] = documents.size
       end
     end
 
