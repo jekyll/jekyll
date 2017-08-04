@@ -198,7 +198,7 @@ each of the following `permalink` configurations will produce the document struc
         <p><code>:title</code></p>
       </td>
       <td>
-        <p>The document's lowercase title (as defined in its <a href="/docs/frontmatter/">front matter</a>), with every sequence of spaces and non-alphanumeric characters replaced by a hyphen. If the document inside of a collection does not define a <code>slug</code> in its <a href="/docs/frontmatter/">front matter</a>, this is equivalent to <code>name</code>.</p>
+        <p>The document may define a value in the <a href="/docs/frontmatter/">front matter</a> for the variable <code>slug</code> (with every sequence of spaces and non-alphanumeric characters replaced by a hyphen), and it will be made available here through the <code>:title</code> Template Variable. If the document inside of a collection does not define a <code>slug</code> in its <a href="/docs/frontmatter/">front matter</a>, this is equivalent to the <code>:name</code> variable above.</p>
       </td>
     </tr>
     <tr>
