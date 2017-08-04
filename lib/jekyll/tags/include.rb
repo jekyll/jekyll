@@ -136,7 +136,13 @@ eos
 
         context.stack do
           context["include"] = parse_params(context) if @params
-          partial.render!(context)
+          begin
+            partial.render!(context)
+          rescue Liquid::Error => e
+            e.template_name = path
+            e.markup_context = "included " if e.markup_context.nil?
+            raise e
+          end
         end
       end
 
@@ -161,8 +167,10 @@ eos
             .file(path)
           begin
             cached_partial[path] = unparsed_file.parse(read_file(path, context))
-          rescue Liquid::SyntaxError => ex
-            raise IncludeTagError.new(ex.message, path)
+          rescue Liquid::Error => e
+            e.template_name = path
+            e.markup_context = "included " if e.markup_context.nil?
+            raise e
           end
         end
       end
