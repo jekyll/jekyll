@@ -25,6 +25,7 @@
   * Enforce Style/FrozenStringLiteralComment (#6265)
   * Update theme-template README to note &#39;assets&#39; directory (#6257)
   * Memoize the return value of Document#url (#6266)
+  * delegate `StaticFile#to_json` to `StaticFile#to_liquid` (#6273)
 
 ### Documentation
 
