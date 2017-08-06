@@ -134,7 +134,7 @@ class TestStaticFile < JekyllUnitTest
     end
 
     should "know its last modification time" do
-      assert_equal Time.new.to_i, @static_file.mtime
+      assert_equal File.stat(@static_file.path).mtime.to_i, @static_file.mtime
     end
 
     should "only set modified time if not a symlink" do
