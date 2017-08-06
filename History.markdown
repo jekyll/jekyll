@@ -7,6 +7,7 @@
   * fix tests (#6240)
   * Define path with __dir__ (#6087)
   * exit site.process sooner (#6239)
+  * make flakey test more robust (#6277)
 
 ### Minor Enhancements
 
