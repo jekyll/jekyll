@@ -64,7 +64,7 @@ module Jekyll
           read_static_file(file_path, full_path)
         end
       end
-      sort_docs!
+      sort_docs
     end
 
     # All the entries in this collection.
@@ -210,14 +210,9 @@ module Jekyll
       end
     end
 
-    def sort_docs!
-      if metadata["order"] && metadata["order"].is_a?(Array)
-        rearrange_docs!
-      elsif metadata["sort_by"]
-        sort_docs_by_key!
-      else
-        docs.sort!
-      end
+    def sort_docs
+      return docs.sort! unless metadata["sort_by"].is_a?(String)
+      sort_docs_by_key!
     end
 
     def sort_docs_by_key!
@@ -226,73 +221,16 @@ module Jekyll
     rescue ArgumentError
       # Inform which document doesn't have the required key defined, and proceed
       # with the default sort function.
-      #
-      # But if the user defines the key with a different Class type, (e.g. Integer
-      # instead of a String), simply skip custom sorting, and proceed.
-      docs.select { |entry| entry.data[meta_key].nil? }.each do |e|
+      docs.each do |doc|
+        next unless doc.data[meta_key].nil?
         Jekyll.logger.error "Error:",
-          "Sort-by key '#{meta_key}' not defined in '#{e.relative_path}'"
+          "Sort-by key '#{meta_key}' not defined in '#{doc.relative_path}'"
       end
 
       Jekyll.logger.warn "Build Warning:",
-        "Custom sorting skipped due to inconsistent key definition."
-    end
+        "Custom sort skipped due to inconsistent key definition."
 
-    # A virtual data key that will only exist to facilitate rearranging documents
-    # as listed under `metadata[order]`
-    #
-    # A front matter key that matches this key will not be available for rendering
-    # the document.
-    def custom_sort_key
-      "#{label}_sort_index"
-    end
-
-    # Rearrange the collection entries by assigning a virtual `custom_sort_key` to all
-    # Jekyll::Document objects in the current collection.
-    #
-    # The `custom_sort_key` key will be removed at the end of operation.
-    def rearrange_docs!
-      metadata["order"].each do |entry|
-        doc_path = File.join(relative_directory, entry)
-        doc = docs.find { |d| d.relative_path == doc_path }
-
-        validate_order_list(entry, doc_path, doc)
-      end
-
-      assign_sort_index(docs)
-      docs.sort_by! { |d| d.data.delete(custom_sort_key) }
-    end
-
-    # Validate an entry listed under `metadata["order"]`.
-    # If valid, assign `custom_sort_key` to document at path, otherwise proceed with
-    # a warning.
-    def validate_order_list(entry, doc_path, doc)
-      if File.exist? site.in_source_dir(doc_path)
-        sort_key_conflict_msg(doc_path) if doc.data[custom_sort_key]
-        doc.data[custom_sort_key] = metadata["order"].index(entry)
-      else
-        Jekyll.logger.warn "Error:", "#{entry} not found in '#{label}' collection!"
-      end
-    end
-
-    # Collect all documents without `custom_sort_key` defined and assign the key with
-    # a value equal to the total no. of documents in the main collection.
-    # Such documents will be sorted alphabetically and appear at the end of the custom
-    # array.
-    #
-    # documents - the array of Jekyll::Document objects from the current Collection
-    def assign_sort_index(documents)
-      documents.each do |document|
-        next unless document.data[custom_sort_key].nil?
-        document.data[custom_sort_key] = documents.size
-      end
-    end
-
-    def sort_key_conflict_msg(path)
-      Jekyll.logger.warn "Sort Conflict:",
-        "Front Matter key '#{custom_sort_key}' in '#{path}' is used internally " \
-        "to sort the documents as configured for this collection and will not be " \
-        "available for render. Please update document and, if necessary, its layout."
+      docs.sort!
     end
 
     def read_static_file(file_path, full_path)

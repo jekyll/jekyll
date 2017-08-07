@@ -215,54 +215,6 @@ class TestCollections < JekyllUnitTest
     end
   end
 
-  context "with a collection with metadata to rearrange items" do
-    setup do
-      @site = fixture_site({
-        "collections" => {
-          "methods"   => {
-            "output" => true,
-          },
-          "tutorials" => {
-            "output" => true,
-            "order"  => [
-              "getting-started.md",
-              "lets-roll.md",
-              "dive-in-and-publish-already.md",
-              "tip-of-the-iceberg.md",
-              "graduation-day.md",
-              "extending-with-plugins.md",
-            ],
-          },
-        },
-      })
-      @site.process
-      @tutorials_collection = @site.collections["tutorials"]
-
-      @actual_array = @tutorials_collection.docs.map(&:relative_path)
-    end
-
-    should "sort documents in a collection in the order outlined in the config file" do
-      default_tuts_array = %w(
-        _tutorials/dive-in-and-publish-already.md
-        _tutorials/extending-with-plugins.md
-        _tutorials/getting-started.md
-        _tutorials/graduation-day.md
-        _tutorials/lets-roll.md
-        _tutorials/tip-of-the-iceberg.md
-      )
-      tuts_rearranged_in_config_array = %w(
-        _tutorials/getting-started.md
-        _tutorials/lets-roll.md
-        _tutorials/dive-in-and-publish-already.md
-        _tutorials/tip-of-the-iceberg.md
-        _tutorials/graduation-day.md
-        _tutorials/extending-with-plugins.md
-      )
-      refute_equal default_tuts_array, @actual_array
-      assert_equal tuts_rearranged_in_config_array, @actual_array
-    end
-  end
-
   context "in safe mode" do
     setup do
       @site = fixture_site({
