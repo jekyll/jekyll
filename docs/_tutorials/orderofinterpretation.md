@@ -17,7 +17,7 @@ Jekyll converts your site in the following order:
 1. **Site variables**. Jekyll looks across your files and populates [site variables]({% link _docs/variables.md %}), such as `site`, `page`, `post`, and collection objects. (From these objects, Jekyll determines the values for permalinks, tags, categories, and other details.)
 
 2. **Liquid**. Jekyll processes any [Liquid](https://github.com/Shopify/liquid) formatting in pages that contain [front matter]({% link _docs/frontmatter.md %}). You can identify Liquid as follows:
-   * **Liguid tags** start with `{% raw %}{%{% endraw %}` and end with a `{% raw %}%}{% endraw %}`. For example: `{% raw %}{% highlight %}{% endraw %}` or `{% raw %}{% seo %}{% endraw %}`. Tags can define blocks or be inline. Block-defining tags will also come with a corresponding end tag &mdash; for example, `{% raw %}{% endhighlight %}{% endraw %}`.
+   * **Liquid tags** start with `{% raw %}{%{% endraw %}` and end with a `{% raw %}%}{% endraw %}`. For example: `{% raw %}{% highlight %}{% endraw %}` or `{% raw %}{% seo %}{% endraw %}`. Tags can define blocks or be inline. Block-defining tags will also come with a corresponding end tag &mdash; for example, `{% raw %}{% endhighlight %}{% endraw %}`.
    * **Liquid variables** start and end with double curly braces. For example: `{% raw %}{{ site.myvariable }}{% endraw %}` or `{% raw %}{{ content }}{% endraw %}`.
    * **Liquid filters** start with a pipe character (`|`) and can only be used within **Liquid variables** after the variable string. For example: the `relative_url` filter in `{% raw %}{{ "css/main.css" | relative_url }}{% endraw %}`.
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestSite < JekyllUnitTest
@@ -279,6 +281,24 @@ class TestSite < JekyllUnitTest
         assert_raises Jekyll::Errors::FatalException do
           Site.new(site_configuration("destination" => File.join(source_dir, "..")))
         end
+      end
+
+      should "raise for bad frontmatter if strict_front_matter is set" do
+        site = Site.new(site_configuration(
+          "collections"         => ["broken"],
+          "strict_front_matter" => true
+        ))
+        assert_raises do
+          site.process
+        end
+      end
+
+      should "not raise for bad frontmatter if strict_front_matter is not set" do
+        site = Site.new(site_configuration(
+          "collections"         => ["broken"],
+          "strict_front_matter" => false
+        ))
+        site.process
       end
     end
 

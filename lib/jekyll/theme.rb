@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class Theme
     extend Forwardable
@@ -37,6 +39,10 @@ module Jekyll
       return unless sass_path
       require "sass"
       Sass.load_paths << sass_path
+    end
+
+    def runtime_dependencies
+      gemspec.runtime_dependencies
     end
 
     private

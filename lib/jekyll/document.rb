@@ -1,11 +1,15 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 
 module Jekyll
   class Document
     include Comparable
+    extend Forwardable
 
     attr_reader :path, :site, :extname, :collection
     attr_accessor :content, :output
+
+    def_delegator :self, :read_post_data, :post_read
 
     YAML_FRONT_MATTER_REGEXP = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m
     DATELESS_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.[^.]+)$!
@@ -147,7 +151,7 @@ module Jekyll
     #
     # Returns true if extname == .coffee, false otherwise.
     def coffeescript_file?
-      ".coffee" == extname
+      extname == ".coffee"
     end
 
     # Determine whether the file should be rendered with Liquid.
@@ -158,12 +162,19 @@ module Jekyll
       !(coffeescript_file? || yaml_file?)
     end
 
+    # Determine whether the file should be rendered with a layout.
+    #
+    # Returns true if the Front Matter specifies that `layout` is set to `none`.
+    def no_layout?
+      data["layout"] == "none"
+    end
+
     # Determine whether the file should be placed into layouts.
     #
-    # Returns false if the document is either an asset file or a yaml file,
-    #   true otherwise.
+    # Returns false if the document is set to `layouts: none`, or is either an
+    #   asset file or a yaml file. Returns true otherwise.
     def place_in_layout?
-      !(asset_file? || yaml_file?)
+      !(asset_file? || yaml_file? || no_layout?)
     end
 
     # The URL template where the document would be accessible.
@@ -193,7 +204,7 @@ module Jekyll
     #
     # Returns the computed URL for the document.
     def url
-      @url = URL.new({
+      @url ||= URL.new({
         :template     => url_template,
         :placeholders => url_placeholders,
         :permalink    => permalink,
@@ -256,11 +267,8 @@ module Jekyll
           merge_defaults
           read_content(opts)
           read_post_data
-        rescue SyntaxError => e
-          Jekyll.logger.error "Error:", "YAML Exception reading #{path}: #{e.message}"
         rescue => e
-          raise e if e.is_a? Jekyll::Errors::FatalException
-          Jekyll.logger.error "Error:", "could not read file #{path}: #{e.message}"
+          handle_read_error(e)
         end
       end
     end
@@ -364,7 +372,7 @@ module Jekyll
       if data.key?(method.to_s)
         Jekyll::Deprecator.deprecation_message "Document##{method} is now a key "\
                            "in the #data hash."
-        Jekyll::Deprecator.deprecation_message "Called by #{caller.first}."
+        Jekyll::Deprecator.deprecation_message "Called by #{caller(0..0)}."
         data[method.to_s]
       else
         super
@@ -373,6 +381,38 @@ module Jekyll
 
     def respond_to_missing?(method, *)
       data.key?(method.to_s) || super
+    end
+
+    # Add superdirectories of the special_dir to categories.
+    # In the case of es/_posts, 'es' is added as a category.
+    # In the case of _posts/es, 'es' is NOT added as a category.
+    #
+    # Returns nothing.
+    def categories_from_path(special_dir)
+      superdirs = relative_path.sub(%r!#{special_dir}(.*)!, "")
+        .split(File::SEPARATOR)
+        .reject do |c|
+        c.empty? || c == special_dir || c == basename
+      end
+      merge_data!({ "categories" => superdirs }, :source => "file path")
+    end
+
+    def populate_categories
+      merge_data!({
+        "categories" => (
+        Array(data["categories"]) + Utils.pluralized_array_from_hash(
+          data,
+          "category",
+          "categories"
+        )
+        ).map(&:to_s).flatten.uniq,
+      })
+    end
+
+    def populate_tags
+      merge_data!({
+        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten,
+      })
     end
 
     private
@@ -423,6 +463,19 @@ module Jekyll
     end
 
     private
+    def handle_read_error(error)
+      if error.is_a? SyntaxError
+        Jekyll.logger.error "Error:", "YAML Exception reading #{path}: #{error.message}"
+      else
+        Jekyll.logger.error "Error:", "could not read file #{path}: #{error.message}"
+      end
+
+      if site.config["strict_front_matter"] || error.is_a?(Jekyll::Errors::FatalException)
+        raise error
+      end
+    end
+
+    private
     def populate_title
       if relative_path =~ DATE_FILENAME_MATCHER
         date, slug, ext = Regexp.last_match.captures
@@ -443,41 +496,6 @@ module Jekyll
       if !data["date"] || data["date"].to_i == site.time.to_i
         merge_data!({ "date" => date }, :source => "filename")
       end
-    end
-
-    # Add superdirectories of the special_dir to categories.
-    # In the case of es/_posts, 'es' is added as a category.
-    # In the case of _posts/es, 'es' is NOT added as a category.
-    #
-    # Returns nothing.
-    private
-    def categories_from_path(special_dir)
-      superdirs = relative_path.sub(%r!#{special_dir}(.*)!, "")
-        .split(File::SEPARATOR)
-        .reject do |c|
-        c.empty? || c == special_dir || c == basename
-      end
-      merge_data!({ "categories" => superdirs }, :source => "file path")
-    end
-
-    private
-    def populate_categories
-      merge_data!({
-        "categories" => (
-        Array(data["categories"]) + Utils.pluralized_array_from_hash(
-          data,
-          "category",
-          "categories"
-        )
-        ).map(&:to_s).flatten.uniq,
-      })
-    end
-
-    private
-    def populate_tags
-      merge_data!({
-        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten,
-      })
     end
 
     private

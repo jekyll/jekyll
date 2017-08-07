@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "addressable/uri"
 
 # Public: Methods that generate a URL for a resource such as a Post or a Page.
@@ -35,15 +37,8 @@ module Jekyll
     # The generated relative URL of the resource
     #
     # Returns the String URL
-    # Raises a Jekyll::Errors::InvalidURLError if the relative URL contains a colon
     def to_s
-      sanitized_url = sanitize_url(generated_permalink || generated_url)
-      if sanitized_url.include?(":")
-        raise Jekyll::Errors::InvalidURLError,
-          "The URL #{sanitized_url} is invalid because it contains a colon."
-      else
-        sanitized_url
-      end
+      sanitize_url(generated_permalink || generated_url)
     end
 
     # Generates a URL from the permalink
@@ -100,7 +95,7 @@ module Jekyll
 
     def generate_url_from_drop(template)
       template.gsub(%r!:([a-z_]+)!) do |match|
-        pool = possible_keys(match.sub(":".freeze, "".freeze))
+        pool = possible_keys(match.sub(":", ""))
 
         winner = pool.find { |key| @placeholders.key?(key) }
         if winner.nil?

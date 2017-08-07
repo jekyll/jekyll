@@ -1,4 +1,6 @@
-$LOAD_PATH.unshift File.dirname(__FILE__) # For use/testing when no gem is installed
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift __dir__ # For use/testing when no gem is installed
 
 # Require all of the Ruby files in the given directory.
 #
@@ -6,7 +8,7 @@ $LOAD_PATH.unshift File.dirname(__FILE__) # For use/testing when no gem is insta
 #
 # Returns nothing.
 def require_all(path)
-  glob = File.join(File.dirname(__FILE__), path, "*.rb")
+  glob = File.join(__dir__, path, "*.rb")
   Dir[glob].sort.each do |f|
     require f
   end
@@ -162,8 +164,9 @@ module Jekyll
     def sanitized_path(base_directory, questionable_path)
       return base_directory if base_directory.eql?(questionable_path)
 
-      questionable_path.insert(0, "/") if questionable_path.start_with?("~")
-      clean_path = File.expand_path(questionable_path, "/")
+      clean_path = questionable_path.dup
+      clean_path.insert(0, "/") if clean_path.start_with?("~")
+      clean_path = File.expand_path(clean_path, "/")
 
       return clean_path if clean_path.eql?(base_directory)
 

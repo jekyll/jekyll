@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "webrick"
 require "mercenary"
 require "helper"
@@ -82,16 +84,26 @@ class TestCommandsServe < JekyllUnitTest
       end
 
       should "keep config between build and serve" do
-        custom_options = {
+        options = {
           "config"  => %w(_config.yml _development.yml),
           "serving" => true,
           "watch"   => false, # for not having guard output when running the tests
           "url"     => "http://localhost:4000",
         }
+        config = Jekyll::Configuration.from(options)
 
-        expect(Jekyll::Commands::Serve).to receive(:process).with(custom_options)
-        @merc.execute(:serve, { "config" => %w(_config.yml _development.yml),
-                                "watch"  => false, })
+        allow(Jekyll::Command).to(
+          receive(:configuration_from_options).with(options).and_return(config)
+        )
+        allow(Jekyll::Command).to(
+          receive(:configuration_from_options).with(config).and_return(config)
+        )
+
+        expect(Jekyll::Commands::Build).to(
+          receive(:process).with(config).and_call_original
+        )
+        expect(Jekyll::Commands::Serve).to receive(:process).with(config)
+        @merc.execute(:serve, options)
       end
 
       context "in development environment" do
@@ -174,6 +186,13 @@ class TestCommandsServe < JekyllUnitTest
           assert_equal result[:SSLCertificate], "c1"
         end
       end
+    end
+
+    should "read `configuration` only once" do
+      allow(Jekyll::Commands::Serve).to receive(:start_up_webrick)
+
+      expect(Jekyll).to receive(:configuration).once.and_call_original
+      @merc.execute(:serve, { "watch" => false })
     end
   end
 end

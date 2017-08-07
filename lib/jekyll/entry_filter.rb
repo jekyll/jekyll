@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class EntryFilter
     attr_reader :site
@@ -36,7 +38,8 @@ module Jekyll
     end
 
     def included?(entry)
-      glob_include?(site.include, entry)
+      glob_include?(site.include, entry) ||
+        glob_include?(site.include, File.basename(entry))
     end
 
     def special?(entry)

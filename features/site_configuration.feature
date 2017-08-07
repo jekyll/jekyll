@@ -172,12 +172,14 @@ Feature: Site configuration
         | entry2    | 2013-04-10 03:14 -0400 | post    | content for entry2. |
       When I run jekyll build
       Then I should get a zero exit status
-    And the _site directory should exist
+      And the _site directory should exist
       And I should see "Page Layout: 2" in "_site/index.html"
-      And I should see "Post Layout: <p>content for entry1.</p>\n built at 2013-04-09T23:22:00-04:00" in "_site/2013/04/09/entry1.html" unless Windows
-      And I should see "Post Layout: <p>content for entry1.</p>\n built at 2013-04-09T22:22:00-05:00" in "_site/2013/04/09/entry1.html" if on Windows
-      And I should see "Post Layout: <p>content for entry2.</p>\n built at 2013-04-10T03:14:00-04:00" in "_site/2013/04/10/entry2.html" unless Windows
-      And I should see "Post Layout: <p>content for entry2.</p>\n built at 2013-04-10T02:14:00-05:00" in "_site/2013/04/10/entry2.html" if on Windows
+      And I should see "Post Layout: <p>content for entry1.</p>\n built at" in "_site/2013/04/09/entry1.html"
+      And I should see "Post Layout: <p>content for entry2.</p>\n built at" in "_site/2013/04/10/entry2.html"
+      And I should see date "2013-04-09T23:22:00-04:00" in "_site/2013/04/09/entry1.html" unless Windows
+      And I should see date "2013-04-09T22:22:00-05:00" in "_site/2013/04/09/entry1.html" if on Windows
+      And I should see date "2013-04-10T03:14:00-04:00" in "_site/2013/04/10/entry2.html" unless Windows
+      And I should see date "2013-04-10T02:14:00-05:00" in "_site/2013/04/10/entry2.html" if on Windows
 
     Scenario: Generate proper dates with explicitly set timezone (different than posts' time)
       Given I have a _layouts directory

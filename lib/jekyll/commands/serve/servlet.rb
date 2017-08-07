@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "webrick"
 
 module Jekyll
@@ -22,7 +24,7 @@ module Jekyll
 
         def search_file(req, res, basename)
           # /file.* > /file/index.html > /file.html
-          super || super(req, res, "#{basename}.html")
+          super || super(req, res, ".html") || super(req, res, "#{basename}.html")
         end
 
         # rubocop:disable Style/MethodName

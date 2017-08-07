@@ -1,4 +1,6 @@
 # encoding: UTF-8
+# frozen_string_literal: true
+
 require "csv"
 
 module Jekyll
@@ -45,9 +47,12 @@ module Jekyll
       @config = config.clone
 
       %w(safe lsi highlighter baseurl exclude include future unpublished
-        show_drafts limit_posts keep_files gems).each do |opt|
+        show_drafts limit_posts keep_files).each do |opt|
         self.send("#{opt}=", config[opt])
       end
+
+      # keep using `gems` to avoid breaking change
+      self.gems = config["plugins"]
 
       configure_plugins
       configure_theme
@@ -69,13 +74,11 @@ module Jekyll
       render
       cleanup
       write
-      print_stats
+      print_stats if config["profile"]
     end
 
     def print_stats
-      if @config["profile"]
-        puts @liquid_renderer.stats_table
-      end
+      puts @liquid_renderer.stats_table
     end
 
     # Reset Site details.

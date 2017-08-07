@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 $stdout.puts "# -------------------------------------------------------------"
 $stdout.puts "# SPECS AND TESTS ARE RUNNING WITH WARNINGS OFF."
 $stdout.puts "# SEE: https://github.com/Shopify/liquid/issues/730"
@@ -13,7 +15,7 @@ if ENV["CI"]
   require "simplecov"
   SimpleCov.start
 else
-  require File.expand_path("../simplecov_custom_profile", __FILE__)
+  require File.expand_path("simplecov_custom_profile", __dir__)
   SimpleCov.start "gem" do
     add_filter "/vendor/gem"
     add_filter "/vendor/bundle"
@@ -63,7 +65,7 @@ end
 
 module DirectoryHelpers
   def root_dir(*subdirs)
-    File.join(File.dirname(File.dirname(__FILE__)), *subdirs)
+    File.expand_path(File.join("..", *subdirs), __dir__)
   end
 
   def dest_dir(*subdirs)
