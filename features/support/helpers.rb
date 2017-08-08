@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "fileutils"
 require "jekyll"
 require "time"
@@ -107,7 +109,8 @@ def run_in_shell(*args)
 
   File.write(Paths.status_file, p.exitstatus)
   File.open(Paths.output_file, "wb") do |f|
-    f.puts "$ " << args.join(" ")
+    f.print "$ "
+    f.puts args.join(" ")
     f.puts output
     f.puts "EXIT STATUS: #{p.exitstatus}"
   end

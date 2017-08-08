@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Jekyll::ThemeBuilder
   SCAFFOLD_DIRECTORIES = %w(
     assets _layouts _includes _sass

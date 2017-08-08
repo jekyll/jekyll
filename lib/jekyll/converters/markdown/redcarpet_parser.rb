@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Jekyll::Converters::Markdown::RedcarpetParser
   module CommonMethods
     def add_code_tags(code, lang)
@@ -48,9 +50,7 @@ class Jekyll::Converters::Markdown::RedcarpetParser
     def block_code(code, lang)
       code = "<pre>#{super}</pre>"
 
-      output = "<div class=\"highlight\">"
-      output << add_code_tags(code, lang)
-      output << "</div>"
+      "<div class=\"highlight\">#{add_code_tags(code, lang)}</div>"
     end
 
     protected

@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 
 module Jekyll
   class Configuration < Hash
@@ -155,7 +156,7 @@ module Jekyll
       )
 
       # Get configuration from <source>/_config.yml or <source>/<config_file>
-      config_files = override.delete("config")
+      config_files = override["config"]
       if config_files.to_s.empty?
         default = %w(yml yaml).find(-> { "yml" }) do |ext|
           File.exist?(Jekyll.sanitized_path(source(override), "_config.#{ext}"))

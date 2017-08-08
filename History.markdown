@@ -7,6 +7,7 @@
   * fix tests (#6240)
   * Define path with __dir__ (#6087)
   * exit site.process sooner (#6239)
+  * make flakey test more robust (#6277)
 
 ### Minor Enhancements
 
@@ -14,6 +15,8 @@
   * Add URL checks to Doctor (#5760)
   * Fix serving files that clash with directories (#6222) (#6231)
   * Bump supported Ruby version to `>= 2.1.0` (#6220)
+  * set `LiquidError#template_name` for errors in included file (#6206)
+  * Access custom config array throughout session (#6200)
 
 ### Bug Fixes
 
@@ -21,11 +24,16 @@
   * `Reader#read_directories`: guard against an entry not being a directory (#6226)
   * kramdown: symbolize keys in-place (#6247)
   * Call to_s on site.url before attempting to concatenate strings (#6253)
+  * Enforce Style/FrozenStringLiteralComment (#6265)
+  * Update theme-template README to note &#39;assets&#39; directory (#6257)
+  * Memoize the return value of Document#url (#6266)
+  * delegate `StaticFile#to_json` to `StaticFile#to_liquid` (#6273)
 
 ### Documentation
 
   * Fix a typo in `custom-404-page.md` (#6218)
   * Docs: fix links to issues in History.markdown (#6255)
+  * Update deprecated gems key to plugins. (#6262)
 
 ### Site Enhancements
 

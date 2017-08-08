@@ -1,4 +1,5 @@
 # encoding: UTF-8
+# frozen_string_literal: true
 
 module Jekyll
   class Document
@@ -203,7 +204,7 @@ module Jekyll
     #
     # Returns the computed URL for the document.
     def url
-      @url = URL.new({
+      @url ||= URL.new({
         :template     => url_template,
         :placeholders => url_placeholders,
         :permalink    => permalink,

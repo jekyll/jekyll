@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class CollectionReader
     SPECIAL_COLLECTIONS = %w(posts data).freeze

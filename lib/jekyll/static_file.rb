@@ -1,6 +1,12 @@
+# frozen_string_literal: true
+
 module Jekyll
   class StaticFile
+    extend Forwardable
+
     attr_reader :relative_path, :extname, :name, :data
+
+    def_delegator :to_liquid, :to_json, :to_json
 
     class << self
       # The cache of last modification times [path] -> mtime.

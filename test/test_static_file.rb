@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestStaticFile < JekyllUnitTest
@@ -132,7 +134,7 @@ class TestStaticFile < JekyllUnitTest
     end
 
     should "know its last modification time" do
-      assert_equal Time.new.to_i, @static_file.mtime
+      assert_equal File.stat(@static_file.path).mtime.to_i, @static_file.mtime
     end
 
     should "only set modified time if not a symlink" do
@@ -173,6 +175,10 @@ class TestStaticFile < JekyllUnitTest
         "collection"    => nil,
       }
       assert_equal expected, @static_file.to_liquid.to_h
+    end
+
+    should "jsonify its liquid drop instead of itself" do
+      assert_equal @static_file.to_liquid.to_json, @static_file.to_json
     end
   end
 end
