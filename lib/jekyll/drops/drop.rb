@@ -72,7 +72,7 @@ module Jekyll
       def []=(key, val)
         if respond_to?("#{key}=")
           public_send("#{key}=", val)
-        elsif respond_to? key
+        elsif respond_to?(key.to_s)
           if self.class.mutable?
             @mutations[key] = val
           else
@@ -106,7 +106,7 @@ module Jekyll
         if self.class.mutable
           @mutations.key?(key)
         else
-          respond_to?(key) || fallback_data.key?(key)
+          !key.nil? && (respond_to?(key) || fallback_data.key?(key))
         end
       end
 
