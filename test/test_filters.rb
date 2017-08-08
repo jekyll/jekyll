@@ -442,7 +442,7 @@ class TestFilters < JekyllUnitTest
       end
 
       should "not raise a TypeError when passed a hash" do
-        assert @filter.absolute_url({"foo" => "bar"})
+        assert @filter.absolute_url({ "foo" => "bar" })
       end
     end
 
