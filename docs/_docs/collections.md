@@ -198,7 +198,13 @@ each of the following `permalink` configurations will produce the document struc
         <p><code>:title</code></p>
       </td>
       <td>
-        <p>The document's lowercase title (as defined in its <a href="/docs/frontmatter/">front matter</a>), with every sequence of spaces and non-alphanumeric characters replaced by a hyphen. If the document does not define a title in its <a href="/docs/frontmatter/">front matter</a>, this is equivalent to <code>name</code>.</p>
+        <p>
+          The <code>:title</code> template variable will take the
+          <code>slug</code> <a href="/docs/frontmatter/">front matter</a>
+          variable value if any is present in the document; if none is
+          defined then <code>:title</code> will be equivalent to
+          <code>:name</code>, aka the slug generated from the filename.
+        </p>
       </td>
     </tr>
     <tr>
