@@ -39,6 +39,7 @@
 ### Site Enhancements
 
   * Adding DevKit helpers (#6225)
+  * Customizing url in collection elements clarified (#6264)
 
 ## 3.5.1 / 2017-07-17
 
