@@ -9,7 +9,7 @@ categories: [release]
 Good news! Nearly 400 commits later, Jekyll 3.5.0 has been released into
 the wild. Some new shiny things you might want to test out:
 
-- Jekyll now uses Liquid 4, the latest! It comes with whitespace control, new filters `concat` annd `compact`, loop performance improvements and [many fixes](https://github.com/Shopify/liquid/blob/master/History.md#400--2016-12-14--branch-4-0-stable)
+- Jekyll now uses Liquid 4, the latest! It comes with whitespace control, new filters `concat` and `compact`, loop performance improvements and [many fixes](https://github.com/Shopify/liquid/blob/master/History.md#400--2016-12-14--branch-4-0-stable)
 - Themes can specify runtime dependencies (in their gemspecs) and we'll require those. This makes it easier for theme writers to use plugins.
 - Speaking of themes, we'll properly handle the discrepancy between a convertible file in the local site and a static file in the theme. Overriding a file locally now doesn't matter if it's convertible or static.
 - Pages, posts, and other documents can now access layout variables via `{% raw %}{{ layout }}{% endraw %}`.
