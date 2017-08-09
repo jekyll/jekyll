@@ -13,6 +13,10 @@ class TestDrop < JekyllUnitTest
       @drop = @document.to_liquid
     end
 
+    should "reject 'nil' key" do
+      refute @drop.key?(nil)
+    end
+
     should "raise KeyError if key is not found and no default provided" do
       assert_raises KeyError do
         @drop.fetch("not_existing_key")
