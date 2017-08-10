@@ -29,6 +29,7 @@
   * Memoize the return value of Document#url (#6266)
   * delegate `StaticFile#to_json` to `StaticFile#to_liquid` (#6273)
   * Fix Drop#key? so it can handle a nil argument (#6281)
+  * Guard against type error in absolute url (#6280)
 
 ### Documentation
 
