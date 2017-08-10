@@ -8,6 +8,7 @@
   * Define path with __dir__ (#6087)
   * exit site.process sooner (#6239)
   * make flakey test more robust (#6277)
+  * Add a quick test for DataReader (#6284)
 
 ### Minor Enhancements
 
