@@ -440,6 +440,10 @@ class TestFilters < JekyllUnitTest
         filter = make_filter_mock({ "url" => Value.new(proc { "http://example.org" }) })
         assert_equal "http://example.org#{page_url}", filter.absolute_url(page_url)
       end
+
+      should "not raise a TypeError when passed a hash" do
+        assert @filter.absolute_url({ "foo" => "bar" })
+      end
     end
 
     context "relative_url filter" do
