@@ -45,7 +45,7 @@ git clean -q -fdx
 git pull -q
 git checkout -q -f -B $prbranch
 
-commit=`git log -1 --pretty=%H "--grep=Merge pull request #$pr" "--grep=Merge branch '.*$headref'" master`
+commit=`git log -1 --pretty=%H "--grep=Merge pull request $pr" "--grep=Merge branch '.*$headref'" master`
 
 echo "Backporting:\n"
 
