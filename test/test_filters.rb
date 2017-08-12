@@ -1019,6 +1019,15 @@ class TestFilters < JekyllUnitTest
           @filter.sort([{ "a" => { "b" => 2 } }, { "a" => { "b" => 1 } },
                         { "a" => { "b" => 3 } }, ], "a.b")
       end
+      should "return sorted by property array with stable order" do
+        array_before_sort = [
+          { "a" => { "b" => 1, "c" => 9 } },
+          { "a" => { "b" => 1, "c" => 5 } },
+          { "a" => { "b" => 1, "c" => 17 } },
+          { "a" => { "b" => 1, "c" => 3 } },
+        ]
+        assert_equal(array_before_sort, @filter.sort(array_before_sort, "a.b"))
+      end
     end
 
     context "to_integer filter" do
