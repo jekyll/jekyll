@@ -174,5 +174,9 @@ class TestStaticFile < JekyllUnitTest
       }
       assert_equal expected, @static_file.to_liquid.to_h
     end
+
+    should "jsonify its liquid drop instead of itself" do
+      assert_equal @static_file.to_liquid.to_json, @static_file.to_json
+    end
   end
 end
