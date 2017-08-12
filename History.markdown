@@ -39,6 +39,7 @@
   * Docs: fix links to issues in History.markdown (#6255)
   * Update deprecated gems key to plugins. (#6262)
   * Fixes minor typo in post text (#6283)
+  * Execute build command using bundle. (#6274)
 
 ### Site Enhancements
 
