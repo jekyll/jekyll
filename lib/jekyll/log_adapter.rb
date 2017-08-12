@@ -48,8 +48,8 @@ module Jekyll
     # message - the message detail
     #
     # Returns nothing
-    def debug(topic, message = nil)
-      writer.debug(message(topic, message))
+    def debug(topic, message = nil, &block)
+      writer.debug(message(topic, message, &block))
     end
 
     # Public: Print a message
@@ -58,8 +58,8 @@ module Jekyll
     # message - the message detail
     #
     # Returns nothing
-    def info(topic, message = nil)
-      writer.info(message(topic, message))
+    def info(topic, message = nil, &block)
+      writer.info(message(topic, message, &block))
     end
 
     # Public: Print a message
@@ -69,7 +69,7 @@ module Jekyll
     #
     # Returns nothing
     def warn(topic, message = nil)
-      writer.warn(message(topic, message))
+      writer.warn(message(topic, message, &block))
     end
 
     # Public: Print an error message
@@ -79,7 +79,7 @@ module Jekyll
     #
     # Returns nothing
     def error(topic, message = nil)
-      writer.error(message(topic, message))
+      writer.error(message(topic, message, &block))
     end
 
     # Public: Print an error message and immediately abort the process
@@ -88,8 +88,8 @@ module Jekyll
     # message - the message detail (can be omitted)
     #
     # Returns nothing
-    def abort_with(topic, message = nil)
-      error(topic, message)
+    def abort_with(topic, message = nil, &block)
+      error(topic, message, &block)
       abort
     end
 
@@ -99,10 +99,15 @@ module Jekyll
     # message - the message detail
     #
     # Returns the formatted message
-    def message(topic, message)
-      msg = formatted_topic(topic) + message.to_s.gsub(%r!\s+!, " ")
-      messages << msg
-      msg
+    def message(topic, message = nil, &block)
+      raise ArgumentError, "block or message, not both" if block_given? && message
+      
+      message = block.call if block_given?
+      message = message.to_s.gsub(%r!\s+!, " ")
+      topic = formatted_topic(topic, block_given?)
+      out = topic + message
+      messages << out
+      out
     end
 
     # Internal: Format the topic
@@ -110,8 +115,8 @@ module Jekyll
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
     #
     # Returns the formatted topic statement
-    def formatted_topic(topic)
-      "#{topic} ".rjust(20)
+    def formatted_topic(topic, colon = false)
+      "#{topic}#{colon ? ": " : " "}".rjust(20)
     end
   end
 end
