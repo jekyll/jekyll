@@ -39,6 +39,8 @@ module Jekyll
     def read_directories(dir = "")
       base = site.in_source_dir(dir)
 
+      return unless File.directory?(base)
+
       dot = Dir.chdir(base) { filter_entries(Dir.entries("."), base) }
       dot_dirs = dot.select { |file| File.directory?(@site.in_source_dir(base, file)) }
       dot_files = (dot - dot_dirs)
