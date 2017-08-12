@@ -17,4 +17,7 @@ categories: [release]
 
 A [full history](/docs/history/#v3-5-2) is available for your perusal. As always, please file bugs if you encounter them! Opening a pull request with a failing test for your expected behaviour is the easiest way for us to address the issue since we have a reproducible example to test again. Short of that, please fill out our issue template to the best of your ability and we'll try to get to it quickly!
 
+Many thanks to our contributors without whom this release could not be
+possible: Ben Balter & Kyle Zhao.
+
 Happy Jekylling!
