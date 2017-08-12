@@ -53,7 +53,9 @@ git log -1 $commit
 
 conflicts=""
 
-git cherry-pick -x --allow-empty -m1 $commit &> /dev/null || {
+# If we used regular merges, we'd use the `-m 1` flag for the cherry-pick
+# command, but since we do squash-merges, we don't want this.
+git cherry-pick -x --allow-empty $commit &> /dev/null || {
   unmerged=$(git ls-files --unmerged --stage | cut -f 2 -d$'\t' | uniq)
   conflicts="\n\nConflicting files:"
   for file in $unmerged; do
