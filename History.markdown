@@ -1,3 +1,14 @@
+## 3.5.2 / 2017-08-12
+
+### Bug Fixes
+
+  * Backport #6281 for v3.5.x: Fix `Drop#key?` so it can handle a nil argument (#6288)
+  * Backport #6280 for v3.5.x: Guard against type error in `absolute_url` (#6287)
+  * Backport #6266 for v3.5.x: Memoize the return value of `Document#url` (#6301)
+  * Backport #6273 for v3.5.x: delegate `StaticFile#to_json` to `StaticFile#to_liquid` (#6302)
+  * Backport #6226 for v3.5.x: `Reader#read_directories`: guard against an entry not being a directory (#6304)
+  * Backport #6247 for v3.5.x: kramdown: symbolize keys in-place (#6303)
+
 ## 3.5.1 / 2017-07-17
 
 ### Minor Enhancements
