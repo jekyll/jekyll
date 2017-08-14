@@ -5,6 +5,14 @@ permalink: /docs/resources/
 
 Jekyll’s growing use is producing a wide variety of tutorials, frameworks, extensions, examples, and other resources that can be very helpful. Below is a collection of links to some of the most popular Jekyll resources.
 
+#### Editors
+
+- [sublime-jekyll](https://github.com/23maverick23/sublime-jekyll): A Sublime Text package for Jekyll static sites. This package should help creating Jekyll sites and posts easier by providing access to key template tags and filters, as well as common completions and a current date/datetime command (for dating posts). You can install this package manually via GitHub, or via [Package Control](https://packagecontrol.io/packages/Jekyll).
+- [vim-jekyll](https://github.com/parkr/vim-jekyll): A vim plugin to generate
+  new posts and run `jekyll build` all without leaving vim.
+- [markdown-writer](https://atom.io/packages/markdown-writer): An Atom package for Jekyll. It can create new posts/drafts, manage tags/categories, insert link/images and add many useful key mappings.
+- [Wordpress2Jekyll](https://wordpress.org/plugins/wp2jekyll/): A Wordpress plugin that allows you to use Wordpress as your editor and (automatically) export content in to Jekyll. WordPress2Jekyll attempts to marry these two systems together in order to make a site that can be easily managed from all devices.
+
 ### Useful Guides
 
 - [Jekyll Tips](http://jekyll.tips) is a set of resources created by [CloudCannon](https://cloudcannon.com) to help folks get up and running with Jekyll. They cover all skill levels, and even include some great video tutorials.
