@@ -68,7 +68,7 @@ module Jekyll
     # message - the message detail
     #
     # Returns nothing
-    def warn(topic, message = nil)
+    def warn(topic, message = nil, &block)
       writer.warn(message(topic, message, &block))
     end
 
@@ -78,7 +78,7 @@ module Jekyll
     # message - the message detail
     #
     # Returns nothing
-    def error(topic, message = nil)
+    def error(topic, message = nil, &block)
       writer.error(message(topic, message, &block))
     end
 
@@ -99,10 +99,10 @@ module Jekyll
     # message - the message detail
     #
     # Returns the formatted message
-    def message(topic, message = nil, &block)
+    def message(topic, message = nil)
       raise ArgumentError, "block or message, not both" if block_given? && message
-      
-      message = block.call if block_given?
+
+      message = yield if block_given?
       message = message.to_s.gsub(%r!\s+!, " ")
       topic = formatted_topic(topic, block_given?)
       out = topic + message
