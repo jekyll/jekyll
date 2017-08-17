@@ -19,7 +19,7 @@
   * Bump supported Ruby version to `>= 2.1.0` (#6220)
   * set `LiquidError#template_name` for errors in included file (#6206)
   * Access custom config array throughout session (#6200)
-  * [WIP] Add shim that works for both Rouge 1 and Rouge 2 (#5919)
+  * Add support for Rouge 2, in addition to Rouge 1 (#5919)
 
 ### Bug Fixes
 
