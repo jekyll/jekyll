@@ -2,7 +2,7 @@
 
 module Jekyll
   class LogAdapter
-    attr_reader :writer, :messages
+    attr_reader :writer, :messages, :level
 
     LOG_LEVELS = {
       :debug => ::Logger::DEBUG,
@@ -30,6 +30,7 @@ module Jekyll
     # Returns nothing
     def log_level=(level)
       writer.level = LOG_LEVELS.fetch(level)
+      @level = level
     end
 
     def adjust_verbosity(options = {})
@@ -49,6 +50,7 @@ module Jekyll
     #
     # Returns nothing
     def debug(topic, message = nil, &block)
+      return false unless write_message?(:debug)
       writer.debug(message(topic, message, &block))
     end
 
@@ -59,6 +61,7 @@ module Jekyll
     #
     # Returns nothing
     def info(topic, message = nil, &block)
+      return false unless write_message?(:info)
       writer.info(message(topic, message, &block))
     end
 
@@ -69,6 +72,7 @@ module Jekyll
     #
     # Returns nothing
     def warn(topic, message = nil, &block)
+      return false unless write_message?(:warn)
       writer.warn(message(topic, message, &block))
     end
 
@@ -79,6 +83,7 @@ module Jekyll
     #
     # Returns nothing
     def error(topic, message = nil, &block)
+      return false unless write_message?(:error)
       writer.error(message(topic, message, &block))
     end
 
@@ -117,6 +122,11 @@ module Jekyll
     # Returns the formatted topic statement
     def formatted_topic(topic, colon = false)
       "#{topic}#{colon ? ": " : " "}".rjust(20)
+    end
+
+    # Internal: Check if the message should be written given the log level.
+    def write_message?(level_of_message)
+      LOG_LEVELS.fetch(level) <= LOG_LEVELS.fetch(level_of_message)
     end
   end
 end
