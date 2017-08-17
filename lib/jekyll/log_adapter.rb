@@ -50,8 +50,7 @@ module Jekyll
     #
     # Returns nothing
     def debug(topic, message = nil, &block)
-      return false unless write_message?(:debug)
-      writer.debug(message(topic, message, &block))
+      write(:debug, topic, message, &block)
     end
 
     # Public: Print a message
@@ -61,8 +60,7 @@ module Jekyll
     #
     # Returns nothing
     def info(topic, message = nil, &block)
-      return false unless write_message?(:info)
-      writer.info(message(topic, message, &block))
+      write(:info, topic, message, &block)
     end
 
     # Public: Print a message
@@ -72,8 +70,7 @@ module Jekyll
     #
     # Returns nothing
     def warn(topic, message = nil, &block)
-      return false unless write_message?(:warn)
-      writer.warn(message(topic, message, &block))
+      write(:warn, topic, message, &block)
     end
 
     # Public: Print an error message
@@ -83,8 +80,7 @@ module Jekyll
     #
     # Returns nothing
     def error(topic, message = nil, &block)
-      return false unless write_message?(:error)
-      writer.error(message(topic, message, &block))
+      write(:error, topic, message, &block)
     end
 
     # Public: Print an error message and immediately abort the process
@@ -118,6 +114,7 @@ module Jekyll
     # Internal: Format the topic
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
+    # colon -
     #
     # Returns the formatted topic statement
     def formatted_topic(topic, colon = false)
@@ -125,8 +122,26 @@ module Jekyll
     end
 
     # Internal: Check if the message should be written given the log level.
+    #
+    # level_of_message - the Symbol level of message, one of :debug, :info, :warn, :error
+    #
+    # Returns whether the message should be written.
     def write_message?(level_of_message)
       LOG_LEVELS.fetch(level) <= LOG_LEVELS.fetch(level_of_message)
+    end
+
+    # Internal: Log a message.
+    #
+    # level_of_message - the Symbol level of message, one of :debug, :info, :warn, :error
+    # topic - the String topic or full message
+    # message - the String message (optional)
+    # block - a block containing the message (optional)
+    #
+    # Returns false if the message was not written, otherwise returns the value of calling
+    # the appropriate writer method, e.g. writer.info.
+    def write(level_of_message, topic, message = nil, &block)
+      return false unless write_message?(level_of_message)
+      writer.public_send(level_of_message, message(topic, message, &block))
     end
   end
 end
