@@ -14,6 +14,8 @@ rvm:
 matrix:
   include:
     - rvm: *ruby1
+      env: TEST_SUITE=test ROUGE=1.11.1
+    - rvm: *ruby1
       env: TEST_SUITE=fmt
     - rvm: *ruby1
       env: TEST_SUITE=default-site
