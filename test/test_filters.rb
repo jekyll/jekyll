@@ -295,6 +295,13 @@ class TestFilters < JekyllUnitTest
         end
       end
 
+      context "with whitespace" do
+        should "return input" do
+          assert_nil(@filter.date_to_xmlschema(nil))
+          assert_equal("  ", @filter.date_to_xmlschema(""))
+        end
+      end
+
       context "without input" do
         should "return input" do
           assert_nil(@filter.date_to_xmlschema(nil))
