@@ -41,6 +41,7 @@
   * Update deprecated gems key to plugins. (#6262)
   * Fixes minor typo in post text (#6283)
   * Execute build command using bundle. (#6274)
+  * name unification - buddy details (#6317)
 
 ### Site Enhancements
 
