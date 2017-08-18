@@ -45,6 +45,7 @@
   * Execute build command using bundle. (#6274)
   * name unification - buddy details (#6317)
   * name unification - application index (#6318)
+  * trim and relocate plugin info across docs (#6311)
 
 ### Site Enhancements
 
