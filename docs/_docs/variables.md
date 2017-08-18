@@ -194,7 +194,7 @@ following is a reference of the available data.
         in your configuration file, then in your Posts and Pages it will be
         stored in <code>site.url</code>. For the development environment there is
         <a href="/news/#3-siteurl-is-set-by-the-development-server">an exception</a>,
-        if you are running `jekyll serve` in a development environment
+        if you are running <code>jekyll serve</code> in a development environment
         <code>site.url</code> will be set to the value of <code>host</code>,
         <code>port</code>, and SSL-related options. This defaults to
         <code>url: http://localhost:4000)</code>.
