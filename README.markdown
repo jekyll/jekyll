@@ -22,7 +22,9 @@ Jekyll is a simple, blog-aware, static site generator perfect for personal, proj
 
 Jekyll does what you tell it to do — no more, no less. It doesn't try to outsmart users by making bold assumptions, nor does it burden them with needless complexity and configuration. Put simply, Jekyll gets out of your way and allows you to concentrate on what truly matters: your content.
 
-## Having trouble with OS X/macOS?
+See: https://jekyllrb.com/philosophy
+
+## Having trouble?
 
 See: https://jekyllrb.com/docs/troubleshooting/
 
@@ -43,7 +45,7 @@ conduct.
 Please adhere to this code of conduct in any interactions you have in the
 Jekyll community. It is strictly enforced on all official Jekyll
 repositories, websites, and resources. If you encounter someone violating
-these terms, please let a maintainer ([@parkr](https://github.com/parkr), [@envygeeks](https://github.com/envygeeks), [@mattr-](https://github.com/mattr-), or [@alfredxing](https://github.com/alfredxing)) know and we will address it as soon as possible.
+these terms, please let a [team captain](https://github.com/orgs/jekyll/teams/affinity-team-captains/members) know and we will address it as soon as possible.
 
 ## Diving In
 
