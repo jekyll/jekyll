@@ -1,6 +1,7 @@
 ## HEAD
 
   * update Jekyll&#39;s README (#6321)
+  * add SUPPORT file for GitHub (#6324)
 
 ### Development Fixes
 
