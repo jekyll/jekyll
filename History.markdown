@@ -1,5 +1,7 @@
 ## HEAD
 
+  * update Jekyll&#39;s README (#6321)
+
 ### Development Fixes
 
   * Strip unnecessary leading whitespace in template (#6228)
