@@ -10,9 +10,6 @@
   a generic usage question, please consider asking your question at
   https://talk.jekyllrb.com where non-bug questions go.
 
-  Please make sure to mention an affinity team whose responsibilities
-  most closely align with your issue.
-
   Thanks!
 -->
 
@@ -79,5 +76,3 @@
   The minimum should be personal information. Though we normally don't log
   anything like that so there should be no need to alter it.
 -->
-
-/cc include any Jekyll affinity teams here (see https://teams.jekyllrb.com/ for more info)
