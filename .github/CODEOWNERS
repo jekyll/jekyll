@@ -77,7 +77,6 @@ appveyor.yml                         @jekyll/stability
 
 # Special cases
 .github/                             @jekyll/affinity-team-captains
-CODEOWNERS                           @jekyll/affinity-team-captains
 CONDUCT.markdown                     @jekyll/affinity-team-captains
 History.markdown                     @jekyll/affinity-team-captains
 LICENSE                              @jekyll/affinity-team-captains   # This file should never change.
