@@ -21,6 +21,7 @@
   * set `LiquidError#template_name` for errors in included file (#6206)
   * Access custom config array throughout session (#6200)
   * Add support for Rouge 2, in addition to Rouge 1 (#5919)
+  * Allow `yield` to logger methods &amp; bail early on no-op messages (#6315)
 
 ### Bug Fixes
 
