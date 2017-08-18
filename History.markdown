@@ -42,6 +42,7 @@
   * Fixes minor typo in post text (#6283)
   * Execute build command using bundle. (#6274)
   * name unification - buddy details (#6317)
+  * name unification - application index (#6318)
 
 ### Site Enhancements
 
