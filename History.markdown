@@ -3,6 +3,7 @@
   * update Jekyll&#39;s README (#6321)
   * add SUPPORT file for GitHub (#6324)
   * Plugins is the new gems (#6326)
+  * Rename CODE_OF_CONDUCT to show in banner (#6325)
 
 ### Development Fixes
 
