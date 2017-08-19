@@ -46,7 +46,7 @@ twitter:
 
 logo: /img/logo-2x.png
 
-gems:
+plugins:
   - jekyll-avatar
   - jekyll-feed
   - jekyll-mentions
