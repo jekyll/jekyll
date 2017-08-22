@@ -49,7 +49,8 @@
   * update Jekyll&#39;s README (#6321)
   * add SUPPORT file for GitHub (#6324)
   * Rename CODE_OF_CONDUCT to show in banner (#6325)
-  
+  * Docs : illustrate page.id for a collection&#39;s document (#6329)
+
 ### Site Enhancements
 
   * Adding DevKit helpers (#6225)
