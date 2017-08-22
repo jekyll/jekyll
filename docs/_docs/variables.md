@@ -191,8 +191,8 @@ following is a reference of the available data.
 
         Contains the url of your site as it is configured in the <code>_config.yml</code>.
         For example, if you have <code>url: http://mysite.com</code>
-        in your configuration file, then in your Posts and Pages it will be
-        stored in <code>site.url</code>. For the development environment there is
+        in your configuration file, then it will be accessible in Liquid as
+        <code>site.url</code>. For the development environment there is
         <a href="/news/#3-siteurl-is-set-by-the-development-server">an exception</a>,
         if you are running <code>jekyll serve</code> in a development environment
         <code>site.url</code> will be set to the value of <code>host</code>,
@@ -208,8 +208,7 @@ following is a reference of the available data.
         All the variables set via the command line and your
         <code>_config.yml</code> are available through the <code>site</code>
         variable. For example, if you have <code>foo: bar</code>
-        in your configuration file, then in your Posts and Pages it will be
-        stored in <code>site.foo</code>.
+        in your configuration file, then it will be accessible in Liquid as <code>site.foo</code>.
         Jekyll does not parse changes to <code>_config.yml</code> in
         <code>watch</code> mode, you must restart Jekyll to see changes to variables.
 
