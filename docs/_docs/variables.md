@@ -265,8 +265,9 @@ following is a reference of the available data.
       <td><p><code>page.id</code></p></td>
       <td><p>
 
-        An identifier unique to the Post (useful in RSS feeds). e.g.
+        An identifier unique to a document in a Collection or a Post (useful in RSS feeds). e.g.
         <code>/2008/12/14/my-post</code>
+        <code>/my-collection/my-document</code>
 
       </p></td>
     </tr>
