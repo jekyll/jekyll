@@ -185,7 +185,7 @@ Jekyll. This is especially relevant when you're running Jekyll on Windows.
 Additionally, you might need to change the code page of the console window to UTF-8 in case you get a "Liquid Exception: Incompatible character encoding" error during the site generation process. It can be done with the following command:
 
 ```sh
-$ chcp 65001
+chcp 65001
 ```
 
 
