@@ -213,6 +213,8 @@ module Jekyll
         return default unless default.nil?
       end
 
+      private
+
       def fallback_data
         @fallback_data ||= {}
       end
