@@ -16,11 +16,6 @@ module Jekyll
       def site
         @site_drop ||= SiteDrop.new(@obj)
       end
-
-      private
-      def fallback_data
-        @fallback_data ||= {}
-      end
     end
   end
 end
