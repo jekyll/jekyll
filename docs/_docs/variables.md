@@ -197,7 +197,7 @@ following is a reference of the available data.
         if you are running <code>jekyll serve</code> in a development environment
         <code>site.url</code> will be set to the value of <code>host</code>,
         <code>port</code>, and SSL-related options. This defaults to
-        <code>url: http://localhost:4000)</code>.
+        <code>url: http://localhost:4000</code>.
 
       </p></td>
     </tr>
