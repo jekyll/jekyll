@@ -3,6 +3,7 @@ engines:
     enabled: false
   rubocop:
     enabled: true
+    channel: rubocop-0-49
 
 exclude_paths:
   - .codeclimate.yml
