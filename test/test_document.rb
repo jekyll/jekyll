@@ -8,10 +8,11 @@ class TestDocument < JekyllUnitTest
   end
 
   def setup_encoded_document(filename)
-    site = fixture_site
+    site = fixture_site("collections" => ["encodings"])
+    site.process
     Document.new(site.in_source_dir(File.join("_encodings", filename)), {
       :site       => site,
-      :collection => site.posts,
+      :collection => site.collections["encodings"],
     }).tap(&:read)
   end
 
