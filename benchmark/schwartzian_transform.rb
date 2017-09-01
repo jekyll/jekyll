@@ -92,6 +92,7 @@ Correctness.new(site_docs, "title".freeze).assert!
 
 # First, test with a property only a handful of documents have.
 Benchmark.ips do |x|
+  x.config(time: 10, warmup: 5)
   x.report('sort_by_property_directly with sparse property') do
     sort_by_property_directly(site_docs, "redirect_from".freeze)
   end
@@ -103,6 +104,7 @@ end
 
 # Next, test with a property they all have.
 Benchmark.ips do |x|
+  x.config(time: 10, warmup: 5)
   x.report('sort_by_property_directly with non-sparse property') do
     sort_by_property_directly(site_docs, "title".freeze)
   end
