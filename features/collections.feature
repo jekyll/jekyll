@@ -230,11 +230,10 @@ Feature: Collections
       tutorials:
         output: true
         sort_by: lesson
-
     """
     When I run jekyll build
     Then I should get a zero exit status
-    Then the _site directory should exist
+    And the _site directory should exist
     And I should see "Collections: Getting Started, Let's Roll!, Dive-In and Publish Already!, Tip of the Iceberg, Extending with Plugins, Graduation Day" in "_site/index.html"
     And I should not see "Previous: Graduation Day" in "_site/tutorials/lets-roll.html"
     And I should not see "Next: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
@@ -264,11 +263,10 @@ Feature: Collections
       tutorials:
         output: true
         sort_by: approx_time
-
     """
     When I run jekyll build
     Then I should get a zero exit status
-    Then the _site directory should exist
+    And the _site directory should exist
     And I should see "'approx_time' not defined" in the build output
     And I should see "Collections: Dive-In and Publish Already!, Extending with Plugins, Getting Started, Graduation Day, Let's Roll!, Tip of the Iceberg" in "_site/index.html"
     And I should see "Previous: Graduation Day" in "_site/tutorials/lets-roll.html"
