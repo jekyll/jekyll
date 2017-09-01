@@ -55,6 +55,7 @@
   * Docs: post&#39;s date can be overriden in YAML front matter (#6334)
   * Docs: `site.url` behavior on development and production environments (#6270)
   * Fix typo in site.url section of variables.md :-[ (#6337)
+  * Docs: updates (#6343)
 
 ### Site Enhancements
 
