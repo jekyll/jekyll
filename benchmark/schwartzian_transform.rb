@@ -48,11 +48,24 @@ def schwartzian_transform(docs, meta_key)
   }.collect { |d| d.last }
 end
 
+# First, test with a property only a handful of documents have.
 Benchmark.ips do |x|
-  x.report('sort_by_property_directly') do
+  x.report('sort_by_property_directly with sparse property') do
     sort_by_property_directly(site.collections["docs"].docs, "redirect_from".freeze)
   end
-  x.report('schwartzian_transform') do
+  x.report('schwartzian_transform with sparse property') do
     schwartzian_transform(site.collections["docs"].docs, "redirect_from".freeze)
   end
+  x.compare!
+end
+
+# Next, test with a property they all have.
+Benchmark.ips do |x|
+  x.report('sort_by_property_directly with non-sparse property') do
+    sort_by_property_directly(site.collections["docs"].docs, "title".freeze)
+  end
+  x.report('schwartzian_transform with non-sparse property') do
+    schwartzian_transform(site.collections["docs"].docs, "title".freeze)
+  end
+  x.compare!
 end
