@@ -267,7 +267,7 @@ Feature: Collections
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "'approx_time' not defined" in the build output
+    And I should see "Missing sort key 'approx_time'" in the build output
     And I should see "Collections: Dive-In and Publish Already!, Extending with Plugins, Getting Started, Graduation Day, Let's Roll!, Tip of the Iceberg" in "_site/index.html"
     And I should see "Previous: Graduation Day" in "_site/tutorials/lets-roll.html"
     And I should see "Next: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"

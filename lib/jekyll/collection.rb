@@ -217,20 +217,24 @@ module Jekyll
 
     def sort_docs_by_key!
       meta_key = metadata["sort_by"]
-      docs.sort_by! { |d| d.data[meta_key] }
-    rescue ArgumentError
-      # Inform which document doesn't have the required key defined, and proceed
-      # with the default sort function.
-      docs.each do |doc|
-        next unless doc.data[meta_key].nil?
-        Jekyll.logger.error "Error:",
-          "Sort-by key '#{meta_key}' not defined in '#{doc.relative_path}'"
-      end
-
-      Jekyll.logger.warn "Build Warning:",
-        "Custom sort skipped due to inconsistent key definition."
-
-      docs.sort!
+      docs.map! do |d|
+        Jekyll.logger.warn "Sort warning:",
+          "Missing sort key '#{meta_key}' on document #{d.relative_path}"
+        [d.data[meta_key], d]
+      end.sort! do |apple, orange|
+        if !apple.first.nil? && !orange.first.nil?
+          # If both documents have the property, sort by that property.
+          Jekyll.logger.debug "", "Sorting by the property"
+          apple.first <=> orange.first
+        elsif !apple.first.nil? && orange.first.nil?
+          -1
+        elsif apple.first.nil? && !orange.first.nil?
+          1
+        else
+          # Fall back to Document#<=> if both documents don't have the property.
+          apple.last <=> orange.last
+        end
+      end.map!(&:last)
     end
 
     def read_static_file(file_path, full_path)
