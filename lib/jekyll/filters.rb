@@ -342,7 +342,7 @@ module Jekyll
     # We also utilize the Schwartzian transform to make this more efficient.
     def sort_input(input, property, order)
       input.map { |item| [item_property(item, property), item] }
-        .sort do |apple_info, orange_info|
+        .sort! do |apple_info, orange_info|
           apple_property = apple_info.first
           orange_property = orange_info.first
 
@@ -354,7 +354,7 @@ module Jekyll
             apple_property <=> orange_property
           end
         end
-        .map(&:last)
+        .map!(&:last)
     end
 
     private

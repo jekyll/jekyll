@@ -20,9 +20,15 @@ require 'benchmark/ips'
 require 'minitest'
 require File.expand_path("../lib/jekyll", __dir__)
 
-site = Jekyll::Site.new(
-  Jekyll.configuration("source" => File.expand_path("../docs", __dir__))
-).tap(&:reset).tap(&:read)
+def site
+  @site ||= Jekyll::Site.new(
+    Jekyll.configuration("source" => File.expand_path("../docs", __dir__))
+  ).tap(&:reset).tap(&:read)
+end
+
+def site_docs
+  site.collections["docs"].docs.dup
+end
 
 def sort_by_property_directly(docs, meta_key)
   docs.sort! do |apple, orange|
@@ -81,16 +87,16 @@ class Correctness
   end
 end
 
-Correctness.new(site.collections["docs"].docs, "redirect_from".freeze).assert!
-Correctness.new(site.collections["docs"].docs, "title".freeze).assert!
+Correctness.new(site_docs, "redirect_from".freeze).assert!
+Correctness.new(site_docs, "title".freeze).assert!
 
 # First, test with a property only a handful of documents have.
 Benchmark.ips do |x|
   x.report('sort_by_property_directly with sparse property') do
-    sort_by_property_directly(site.collections["docs"].docs, "redirect_from".freeze)
+    sort_by_property_directly(site_docs, "redirect_from".freeze)
   end
   x.report('schwartzian_transform with sparse property') do
-    schwartzian_transform(site.collections["docs"].docs, "redirect_from".freeze)
+    schwartzian_transform(site_docs, "redirect_from".freeze)
   end
   x.compare!
 end
@@ -98,10 +104,10 @@ end
 # Next, test with a property they all have.
 Benchmark.ips do |x|
   x.report('sort_by_property_directly with non-sparse property') do
-    sort_by_property_directly(site.collections["docs"].docs, "title".freeze)
+    sort_by_property_directly(site_docs, "title".freeze)
   end
   x.report('schwartzian_transform with non-sparse property') do
-    schwartzian_transform(site.collections["docs"].docs, "title".freeze)
+    schwartzian_transform(site_docs, "title".freeze)
   end
   x.compare!
 end
