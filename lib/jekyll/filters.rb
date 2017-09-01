@@ -336,7 +336,7 @@ module Jekyll
 
     private
     def sort_input(input, property, order)
-      input.sort do |apple, orange|
+      input.each_with_index.sort do |(apple, apple_ix), (orange, orange_ix)|
         apple_property = item_property(apple, property)
         orange_property = item_property(orange, property)
 
@@ -344,10 +344,12 @@ module Jekyll
           - order
         elsif apple_property.nil? && !orange_property.nil?
           + order
+        elsif apple_property == orange_property
+          apple_ix <=> orange_ix
         else
           apple_property <=> orange_property
         end
-      end
+      end.map(&:first)
     end
 
     private
