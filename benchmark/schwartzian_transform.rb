@@ -17,6 +17,7 @@
 # it can be improved by using the Schwartzian transform. Thanks, Randall!
 
 require 'benchmark/ips'
+require 'minitest'
 require File.expand_path("../lib/jekyll", __dir__)
 
 site = Jekyll::Site.new(
@@ -24,12 +25,16 @@ site = Jekyll::Site.new(
 ).tap(&:reset).tap(&:read)
 
 def sort_by_property_directly(docs, meta_key)
-  docs.sort do |apple, orange|
+  docs.sort! do |apple, orange|
     apple_property = apple[meta_key]
     orange_property = orange[meta_key]
 
     if !apple_property.nil? && !orange_property.nil?
       apple_property <=> orange_property
+    elsif !apple_property.nil? && orange_property.nil?
+      -1
+    elsif apple_property.nil? && !orange_property.nil?
+      1
     else
       apple <=> orange
     end
@@ -37,16 +42,47 @@ def sort_by_property_directly(docs, meta_key)
 end
 
 def schwartzian_transform(docs, meta_key)
-  docs.collect { |d|
+  docs.collect! { |d|
     [d[meta_key], d]
-  }.sort { |apple, orange|
+  }.sort! { |apple, orange|
     if !apple.first.nil? && !orange.first.nil?
       apple.first <=> orange.first
+    elsif !apple.first.nil? && orange.first.nil?
+      -1
+    elsif apple.first.nil? && !orange.first.nil?
+      1
     else
       apple.last <=> orange.last
     end
-  }.collect { |d| d.last }
+  }.collect! { |d| d.last }
 end
+
+# Before we test efficiency, do they produce the same output?
+class Correctness
+  include Minitest::Assertions
+
+  require "pp"
+  define_method :mu_pp, &:pretty_inspect
+
+  attr_accessor :assertions
+
+  def initialize(docs, property)
+    @assertions = 0
+    @docs = docs
+    @property = property
+  end
+
+  def assert!
+    assert sort_by_property_directly(@docs, @property).is_a?(Array), "sort_by_property_directly must return an array"
+    assert schwartzian_transform(@docs, @property).is_a?(Array), "schwartzian_transform must return an array"
+    assert_equal sort_by_property_directly(@docs, @property),
+      schwartzian_transform(@docs, @property)
+    puts "Yeah, ok, correctness all checks out for property #{@property.inspect}"
+  end
+end
+
+Correctness.new(site.collections["docs"].docs, "redirect_from".freeze).assert!
+Correctness.new(site.collections["docs"].docs, "title".freeze).assert!
 
 # First, test with a property only a handful of documents have.
 Benchmark.ips do |x|
