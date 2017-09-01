@@ -51,16 +51,16 @@ def schwartzian_transform(docs, meta_key)
   docs.collect! { |d|
     [d[meta_key], d]
   }.sort! { |apple, orange|
-    if !apple.first.nil? && !orange.first.nil?
+    if !apple[0].nil? && !orange[0].nil?
       apple.first <=> orange.first
-    elsif !apple.first.nil? && orange.first.nil?
+    elsif !apple[0].nil? && orange[0].nil?
       -1
-    elsif apple.first.nil? && !orange.first.nil?
+    elsif apple[0].nil? && !orange[0].nil?
       1
     else
-      apple.last <=> orange.last
+      apple[-1] <=> orange[-1]
     end
-  }.collect! { |d| d.last }
+  }.collect! { |d| d[-1] }
 end
 
 # Before we test efficiency, do they produce the same output?
