@@ -189,7 +189,7 @@ class TestCollections < JekyllUnitTest
       @site.process
       @tutorials_collection = @site.collections["tutorials"]
 
-      @actual_array = @tutorials_collection.docs.map(&:relative_path)
+      @collection_docs_rel_paths = @tutorials_collection.docs.map(&:relative_path)
     end
 
     should "sort documents in a collection with 'sort_by' metadata set to a " \
@@ -210,8 +210,8 @@ class TestCollections < JekyllUnitTest
         _tutorials/extending-with-plugins.md
         _tutorials/graduation-day.md
       )
-      refute_equal default_tuts_array, @actual_array
-      assert_equal tuts_sorted_by_lesson_array, @actual_array
+      refute_equal default_tuts_array, @collection_docs_rel_paths
+      assert_equal tuts_sorted_by_lesson_array, @collection_docs_rel_paths
     end
   end
 
