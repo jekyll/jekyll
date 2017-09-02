@@ -215,28 +215,29 @@ module Jekyll
       sort_docs_by_key!
     end
 
+    # rubocop:disable Metrics/AbcSize
     def sort_docs_by_key!
       meta_key = metadata["sort_by"]
       docs.map! { |d| [d.data[meta_key], d] }.sort! do |apples, oranges|
-        sort_mapped_items(apples, oranges)
+        apple_property = apples[0]
+        orange_property = oranges[0]
+
+        if !apple_property.nil? && !orange_property.nil?
+          # If both documents have the property, sort by that property.
+          apple_property <=> orange_property
+        elsif !apple_property.nil? && orange_property.nil?
+          -1
+        elsif apple_property.nil? && !orange_property.nil?
+          1
+        else
+          # Fall back to Document#<=> if both documents don't have the property.
+          apples[-1] <=> oranges[-1]
+        end
+
+        # return the Document object
       end.map!(&:last)
     end
-
-    def sort_mapped_items(apples, oranges)
-      apple_property = apples[0]
-      orange_property = oranges[0]
-      if !apple_property.nil? && !orange_property.nil?
-        # If both documents have the property, sort by that property.
-        apple_property <=> orange_property
-      elsif !apple_property.nil? && orange_property.nil?
-        -1
-      elsif apple_property.nil? && !orange_property.nil?
-        1
-      else
-        # Fall back to Document#<=> if both documents don't have the property.
-        apples[-1] <=> oranges[-1]
-      end
-    end
+    # rubocop:enable Metrics/AbcSize
 
     def read_static_file(file_path, full_path)
       relative_dir = Jekyll.sanitized_path(
