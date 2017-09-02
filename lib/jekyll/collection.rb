@@ -219,8 +219,8 @@ module Jekyll
     def sort_docs_by_key!
       meta_key = metadata["sort_by"]
       docs.map! { |d| [d.data[meta_key], d] }.sort! do |apples, oranges|
-        apple_property = apples[0]
-        orange_property = oranges[0]
+        apple_property, apple_document = apples
+        orange_property, orange_document = oranges
 
         if !apple_property.nil? && !orange_property.nil?
           # If both documents have the property, sort by that property.
@@ -231,10 +231,10 @@ module Jekyll
           1
         else
           # Fall back to Document#<=> if both documents don't have the property.
-          apples[-1] <=> oranges[-1]
+          apple_document <=> orange_document
         end
 
-        # return the Document object
+        # and finally return the Document objects themselves
       end.map!(&:last)
     end
     # rubocop:enable Metrics/AbcSize
