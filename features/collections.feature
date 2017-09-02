@@ -267,9 +267,9 @@ Feature: Collections
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "Collections: Dive-In and Publish Already!, Extending with Plugins, Getting Started, Graduation Day, Let's Roll!, Tip of the Iceberg" in "_site/index.html"
-    And I should see "Previous: Graduation Day" in "_site/tutorials/lets-roll.html"
-    And I should see "Next: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
+    And I should see "Collections: Extending with Plugins, Let's Roll!, Getting Started, Graduation Day, Dive-In and Publish Already!, Tip of the Iceberg" in "_site/index.html"
+    And I should see "Previous: Extending with Plugins" in "_site/tutorials/lets-roll.html"
+    And I should see "Next: Getting Started" in "_site/tutorials/lets-roll.html"
 
   Scenario: Rendered collection with date/dateless filename
     Given I have an "index.html" page that contains "Collections: {% for method in site.thanksgiving %}{{ method.title }} {% endfor %}"
