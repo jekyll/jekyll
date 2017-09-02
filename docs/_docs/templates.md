@@ -6,8 +6,9 @@ permalink: /docs/templates/
 Jekyll uses the [Liquid](https://shopify.github.io/liquid/) templating language to
 process templates. All of the standard Liquid [tags](https://shopify.github.io/liquid/tags/control-flow/) and
 [filters](https://shopify.github.io/liquid/filters/abs/) are
-supported. Jekyll even adds a few handy filters and tags of its own to make
-common tasks easier.
+supported. To make common tasks easier, Jekyll even adds a few handy filters
+and tags of its own, all of which you can find on this page. Jekyll even lets
+you come up with your own tags via plugins.
 
 ## Filters
 
@@ -418,6 +419,11 @@ The default is `default`. They are as follows (with what they filter):
 
 ## Tags
 
+* [Includes](#includes)
+* [Code snippet highlighting](#code-snippet-highlighting)
+* [Linking to pages, collections and posts (the new and improved way)](#links)
+* [Linking to posts (the old way)](#linking-to-posts)
+
 ### Includes
 
 If you have small page snippets that you want to include in multiple places on your site, save the snippets as *include files* and insert them where required, by using the `include` tag:
@@ -488,27 +494,6 @@ site. If you use `linenos`, you might want to include an additional CSS class
 definition for the `.lineno` class in `syntax.css` to distinguish the line
 numbers from the highlighted code.
 
-### Gist
-
-Use the `gist` tag to easily embed a GitHub Gist onto your site. This works
-with public or secret gists:
-
-```liquid
-{% raw %}
-{% gist parkr/931c1c8d465a04042403 %}
-{% endraw %}
-```
-
-You may also optionally specify the filename in the gist to display:
-
-```liquid
-{% raw %}
-{% gist parkr/931c1c8d465a04042403 jekyll-private-gist.markdown %}
-{% endraw %}
-```
-
-To use the `gist` tag, you'll need to add the
-[jekyll-gist](https://github.com/jekyll/jekyll-gist) gem to your project.
 
 ## Links
 
@@ -546,7 +531,7 @@ For example, suppose you're creating a link in `page_a.md` (stored in `pages/fol
 
 If you're unsure of the path, add `{% raw %}{{ page.path }}{% endraw %}` to the page and it will display the path.
 
-One major benefit of using the `link` tag is link validation. If the link doesn't exist, Jekyll won't build your site. This is a good thing, as it will alert you to a broken link so you can fix it (rather than allowing you to build and deploy a site with broken links).
+One major benefit of using the `link` or `post_url` tag is link validation. If the link doesn't exist, Jekyll won't build your site. This is a good thing, as it will alert you to a broken link so you can fix it (rather than allowing you to build and deploy a site with broken links).
 
 Note you cannot add filters to `link` tags. For example, you cannot append a string using Liquid filters, such as `{% raw %}{% link mypage.html | append: "#section1" %} {% endraw %}`. To link to sections on a page, you will need to use regular HTML or Markdown linking techniques.
 

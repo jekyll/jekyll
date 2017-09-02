@@ -5,6 +5,8 @@ gemspec :name => "jekyll"
 
 gem "rake", "~> 12.0"
 
+gem "rouge", ENV["ROUGE"] if ENV["ROUGE"]
+
 # Dependency of jekyll-mentions. RubyGems in Ruby 2.1 doesn't shield us from this.
 gem "activesupport", "~> 4.2", :groups => [:test_legacy, :site] if RUBY_VERSION < "2.2.2"
 
@@ -71,7 +73,7 @@ group :jekyll_optional_dependencies do
   gem "jekyll-gist"
   gem "jekyll-paginate"
   gem "jekyll-redirect-from"
-  gem "kramdown", "~> 1.9"
+  gem "kramdown", "~> 1.14"
   gem "mime-types", "~> 3.0"
   gem "rdoc", "~> 5.0"
   gem "toml", "~> 0.1.0"

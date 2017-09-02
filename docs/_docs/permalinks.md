@@ -66,7 +66,10 @@ The following table lists the template variables available for permalinks. You c
         <p><code>year</code></p>
       </td>
       <td>
-        <p>Year from the post's filename</p>
+        <p>
+          Year from the post's filename. May be overridden via the document’s
+          <code>date</code> YAML front matter
+        </p>
       </td>
     </tr>
     <tr>
@@ -74,7 +77,10 @@ The following table lists the template variables available for permalinks. You c
         <p><code>month</code></p>
       </td>
       <td>
-        <p>Month from the post's filename</p>
+        <p>
+          Month from the post's filename. May be overridden via the document’s
+          <code>date</code> YAML front matter
+        </p>
       </td>
     </tr>
     <tr>
@@ -82,7 +88,10 @@ The following table lists the template variables available for permalinks. You c
         <p><code>i_month</code></p>
       </td>
       <td>
-        <p>Month from the post's filename without leading zeros.</p>
+        <p>
+          Month without leading zeros from the post's filename. May be
+          overridden via the document’s <code>date</code> YAML front matter
+        </p>
       </td>
     </tr>
     <tr>
@@ -90,7 +99,10 @@ The following table lists the template variables available for permalinks. You c
         <p><code>day</code></p>
       </td>
       <td>
-        <p>Day from the post's filename</p>
+        <p>
+          Day from the post's filename. May be overridden via the document’s
+          <code>date</code> YAML front matter
+        </p>
       </td>
     </tr>
     <tr>
@@ -98,7 +110,10 @@ The following table lists the template variables available for permalinks. You c
         <p><code>i_day</code></p>
       </td>
       <td>
-        <p>Day from the post's filename without leading zeros.</p>
+        <p>
+          Day without leading zeros from the post's filename. May be overridden
+          via the document’s <code>date</code> YAML front matter
+        </p>
       </td>
     </tr>
     <tr>
@@ -106,7 +121,10 @@ The following table lists the template variables available for permalinks. You c
         <p><code>short_year</code></p>
       </td>
       <td>
-        <p>Year from the post's filename without the century.</p>
+        <p>
+          Year without the century from the post's filename. May be overridden
+          via the document’s <code>date</code> YAML front matter
+        </p>
       </td>
     </tr>
     <tr>
@@ -115,7 +133,8 @@ The following table lists the template variables available for permalinks. You c
       </td>
       <td>
         <p>
-          Hour of the day, 24-hour clock, zero-padded from the post's <code>date</code> front matter. (00..23)
+          Hour of the day, 24-hour clock, zero-padded from the post's
+          <code>date</code> front matter. (00..23)
         </p>
       </td>
     </tr>

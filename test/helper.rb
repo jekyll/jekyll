@@ -32,7 +32,7 @@ require "minitest/profile"
 require "rspec/mocks"
 require_relative "../lib/jekyll.rb"
 
-Jekyll.logger = Logger.new(StringIO.new)
+Jekyll.logger = Logger.new(StringIO.new, :error)
 
 unless jruby?
   require "rdiscount"
@@ -168,12 +168,15 @@ class JekyllUnitTest < Minitest::Test
     ENV[key] = old_value
   end
 
-  def capture_output
+  def capture_output(level = :debug)
     buffer = StringIO.new
     Jekyll.logger = Logger.new(buffer)
+    Jekyll.logger.log_level = level
     yield
     buffer.rewind
     buffer.string.to_s
+  ensure
+    Jekyll.logger = Logger.new(StringIO.new, :error)
   end
   alias_method :capture_stdout, :capture_output
   alias_method :capture_stderr, :capture_output

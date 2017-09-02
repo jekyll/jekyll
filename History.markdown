@@ -8,6 +8,10 @@
   * Define path with __dir__ (#6087)
   * exit site.process sooner (#6239)
   * make flakey test more robust (#6277)
+  * Add a quick test for DataReader (#6284)
+  * script/backport-pr: commit message no longer includes the `#` (#6289)
+  * Add Add CODEOWNERS file to help automate reviews. (#6320)
+  * Fix builds on codeclimate (#6333)
 
 ### Minor Enhancements
 
@@ -16,6 +20,10 @@
   * Fix serving files that clash with directories (#6222) (#6231)
   * Bump supported Ruby version to `>= 2.1.0` (#6220)
   * set `LiquidError#template_name` for errors in included file (#6206)
+  * Access custom config array throughout session (#6200)
+  * Add support for Rouge 2, in addition to Rouge 1 (#5919)
+  * Allow `yield` to logger methods &amp; bail early on no-op messages (#6315)
+  * Update mime-types. (#6336)
 
 ### Bug Fixes
 
@@ -27,16 +35,44 @@
   * Update theme-template README to note &#39;assets&#39; directory (#6257)
   * Memoize the return value of Document#url (#6266)
   * delegate `StaticFile#to_json` to `StaticFile#to_liquid` (#6273)
+  * Fix Drop#key? so it can handle a nil argument (#6281)
+  * Guard against type error in absolute url (#6280)
 
 ### Documentation
 
   * Fix a typo in `custom-404-page.md` (#6218)
   * Docs: fix links to issues in History.markdown (#6255)
   * Update deprecated gems key to plugins. (#6262)
+  * Fixes minor typo in post text (#6283)
+  * Execute build command using bundle. (#6274)
+  * name unification - buddy details (#6317)
+  * name unification - application index (#6318)
+  * trim and relocate plugin info across docs (#6311)
+  * update Jekyll&#39;s README (#6321)
+  * add SUPPORT file for GitHub (#6324)
+  * Rename CODE_OF_CONDUCT to show in banner (#6325)
+  * Docs : illustrate page.id for a collection&#39;s document (#6329)
+  * Docs: post&#39;s date can be overriden in YAML front matter (#6334)
+  * Docs: `site.url` behavior on development and production environments (#6270)
+  * Fix typo in site.url section of variables.md :-[ (#6337)
+  * Docs: updates (#6343)
 
 ### Site Enhancements
 
   * Adding DevKit helpers (#6225)
+  * Customizing url in collection elements clarified (#6264)
+  * Plugins is the new gems (#6326)
+
+## 3.5.2 / 2017-08-12
+
+### Bug Fixes
+
+  * Backport #6281 for v3.5.x: Fix `Drop#key?` so it can handle a nil argument (#6288)
+  * Backport #6280 for v3.5.x: Guard against type error in `absolute_url` (#6287)
+  * Backport #6266 for v3.5.x: Memoize the return value of `Document#url` (#6301)
+  * Backport #6273 for v3.5.x: delegate `StaticFile#to_json` to `StaticFile#to_liquid` (#6302)
+  * Backport #6226 for v3.5.x: `Reader#read_directories`: guard against an entry not being a directory (#6304)
+  * Backport #6247 for v3.5.x: kramdown: symbolize keys in-place (#6303)
 
 ## 3.5.1 / 2017-07-17
 

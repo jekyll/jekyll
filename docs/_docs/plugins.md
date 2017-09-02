@@ -31,21 +31,26 @@ Jekyll generates your site.
 values of the gem names of the plugins you'd like to use. An example:
 
 
-        plugins: [jekyll-coffeescript, jekyll-watch, jekyll-assets]
+        plugins:
+          - jekyll-gist
+          - jekyll-coffeescript
+          - jekyll-assets
+          - another-jekyll-plugin
         # This will require each of these plugins automatically.
 
-    Then install your plugins using `gem install jekyll-coffeescript jekyll-watch jekyll-assets`
+    Then install your plugins using `gem install jekyll-gist jekyll-coffeescript jekyll-assets another-jekyll-plugin`
 
 3. Add the relevant plugins to a Bundler group in your `Gemfile`. An
     example:
 
         group :jekyll_plugins do
-          gem "my-jekyll-plugin"
+          gem "jekyll-gist"
+          gem "jekyll-coffeescript"
+          gem "jekyll-assets"
           gem "another-jekyll-plugin"
         end
 
-    Now you need to install all plugins from your Bundler group by running single command `bundle install`
-
+    Now you need to install all plugins from your Bundler group by running single command `bundle install`.
 
 <div class="note info">
   <h5>
@@ -59,13 +64,15 @@ values of the gem names of the plugins you'd like to use. An example:
   </p>
 </div>
 
-In general, plugins you make will fall into one of five categories:
+In general, plugins you make will fall broadly into one of five categories:
 
 1. [Generators](#generators)
 2. [Converters](#converters)
 3. [Commands](#commands)
 4. [Tags](#tags)
 5. [Hooks](#hooks)
+
+See the bottom of the page for a [list of available plugins](#available-plugins)
 
 ## Generators
 
@@ -810,6 +817,9 @@ LESS.js files during generation.
 
 #### Tags
 
+You can find a few useful plugins at the following locations:
+
+- [Jekyll-gist](https://github.com/jekyll/jekyll-gist): Use the `gist` tag to easily embed a GitHub Gist onto your site. This works with public or secret gists.
 - [Asset Path Tag](https://github.com/samrayner/jekyll-asset-path-plugin) by [Sam Rayner](http://www.samrayner.com/): Allows organisation of assets into subdirectories by outputting a path for a given file relative to the current post or page.
 - [Delicious Plugin by Christian Hellsten](https://github.com/christianhellsten/jekyll-plugins): Fetches and renders bookmarks from delicious.com.
 - [Ultraviolet Plugin by Steve Alex](https://gist.github.com/480380): Jekyll tag for the [Ultraviolet](https://github.com/grosser/ultraviolet) code highligher.
@@ -929,14 +939,6 @@ LESS.js files during generation.
 - [Jekyll-Post](https://github.com/robcrocombe/jekyll-post): A CLI tool to easily draft, edit, and publish Jekyll posts.
 - [jekyll-numbered-headings](https://github.com/muratayusuke/jekyll-numbered-headings): Adds ordered number to headings.
 - [jekyll-pre-commit](https://github.com/mpchadwick/jekyll-pre-commit): A framework for running checks against your posts using a git pre-commit hook before you publish them.
-
-#### Editors
-
-- [sublime-jekyll](https://github.com/23maverick23/sublime-jekyll): A Sublime Text package for Jekyll static sites. This package should help creating Jekyll sites and posts easier by providing access to key template tags and filters, as well as common completions and a current date/datetime command (for dating posts). You can install this package manually via GitHub, or via [Package Control](https://packagecontrol.io/packages/Jekyll).
-- [vim-jekyll](https://github.com/parkr/vim-jekyll): A vim plugin to generate
-  new posts and run `jekyll build` all without leaving vim.
-- [markdown-writer](https://atom.io/packages/markdown-writer): An Atom package for Jekyll. It can create new posts/drafts, manage tags/categories, insert link/images and add many useful key mappings.
-- [Wordpress2Jekyll](https://wordpress.org/plugins/wp2jekyll/): A Wordpress plugin that allows you to use Wordpress as your editor and (automatically) export content in to Jekyll. WordPress2Jekyll attempts to marry these two systems together in order to make a site that can be easily managed from all devices.
 
 <div class="note info">
   <h5>Jekyll Plugins Wanted</h5>

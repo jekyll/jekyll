@@ -562,13 +562,13 @@ class TestSite < JekyllUnitTest
         end
         expected_msg = "Theme: value of 'theme' in config should be String " \
           "to use gem-based themes, but got Hash\n"
-        assert output.end_with?(expected_msg),
-          "Expected #{output.inspect} to end with #{expected_msg.inspect}"
+        assert_includes output, expected_msg
       end
 
       should "set a theme if the config is a string" do
-        expect($stderr).not_to receive(:puts)
-        expect($stdout).not_to receive(:puts)
+        [:debug, :info, :warn, :error].each do |level|
+          expect(Jekyll.logger.writer).not_to receive(level)
+        end
         site = fixture_site({ "theme" => "test-theme" })
         assert_instance_of Jekyll::Theme, site.theme
         assert_equal "test-theme", site.theme.name
