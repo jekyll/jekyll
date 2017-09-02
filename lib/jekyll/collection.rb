@@ -226,8 +226,10 @@ module Jekyll
           # If both documents have the property, sort by that property.
           apple_property <=> orange_property
         elsif !apple_property.nil? && orange_property.nil?
+          missing_sort_key_warning(meta_key, orange_document)
           -1
         elsif apple_property.nil? && !orange_property.nil?
+          missing_sort_key_warning(meta_key, apple_document)
           1
         else
           # Fall back to Document#<=> if both documents don't have the property.
@@ -238,6 +240,11 @@ module Jekyll
       end.map!(&:last)
     end
     # rubocop:enable Metrics/AbcSize
+
+    def missing_sort_key_warning(sort_key, document)
+      Jekyll.logger.warn "Sort warning:",
+        "Missing sort key '#{sort_key}' in document #{document.relative_path.cyan}"
+    end
 
     def read_static_file(file_path, full_path)
       relative_dir = Jekyll.sanitized_path(
