@@ -33,6 +33,12 @@ require "liquid"
 require "kramdown"
 require "colorator"
 
+# development
+begin
+  require "pry"
+rescue LoadError => _
+end
+
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
