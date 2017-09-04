@@ -57,6 +57,7 @@
   * Docs: `site.url` behavior on development and production environments (#6270)
   * Fix typo in site.url section of variables.md :-[ (#6337)
   * Docs: updates (#6343)
+  * Fix precedence docs (#6346)
 
 ### Site Enhancements
 
