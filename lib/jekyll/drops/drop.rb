@@ -212,12 +212,6 @@ module Jekyll
         return yield(key) unless block.nil?
         return default unless default.nil?
       end
-
-      private
-
-      def fallback_data
-        @fallback_data ||= {}
-      end
     end
   end
 end

@@ -8,6 +8,10 @@ class DropFixture < Jekyll::Drops::Drop
   def foo
     "bar"
   end
+
+  def fallback_data
+    @fallback_data ||= {}
+  end
 end
 
 class TestDrop < JekyllUnitTest
