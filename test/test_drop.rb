@@ -78,6 +78,13 @@ class TestDrop < JekyllUnitTest
       should "fetch default value from block first if both argument and block given" do
         assert_equal "baz", @document_drop.fetch("bar", "default") { "baz" }
       end
+
+      should "not change mutability when fetching" do
+        assert @drop.class.mutable?
+        @drop["foo"] = "baz"
+        assert_equal "baz", @drop.fetch("foo")
+        assert @drop.class.mutable?
+      end
     end
   end
 end
