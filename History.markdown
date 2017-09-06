@@ -25,6 +25,7 @@
   * Allow `yield` to logger methods &amp; bail early on no-op messages (#6315)
   * Update mime-types. (#6336)
   * Use a Schwartzian transform with custom sorting (#6342)
+  * Alias Drop#invoke_drop to Drop#[] (#6338)
 
 ### Bug Fixes
 
