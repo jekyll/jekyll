@@ -55,6 +55,7 @@ module Jekyll
           fallback_data[key]
         end
       end
+      alias_method :invoke_drop, :[]
 
       # Set a field in the Drop. If mutable, sets in the mutations and
       # returns. If not mutable, checks first if it's trying to override a
@@ -103,7 +104,7 @@ module Jekyll
       #
       # Returns true if the given key is present
       def key?(key)
-        if self.class.mutable
+        if self.class.mutable?
           @mutations.key?(key)
         else
           !key.nil? && (respond_to?(key) || fallback_data.key?(key))
