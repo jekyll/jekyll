@@ -118,6 +118,10 @@ If your contribution changes any Jekyll behavior, make sure to update the docume
 
 * Don't bump the Gem version in your pull request (if you don't know what that means, you probably didn't).
 
+* You can use the command `script/console` to start a REPL to explore the result of
+Jekyll's methods. It also provides you with helpful methods to quickly create a
+site or configuration. [Feel free to check it out!](https://github.com/jekyll/jekyll/blob/master/script/console)
+
 ## Running tests locally
 
 ### Test Dependencies
