@@ -124,19 +124,27 @@ If your contribution changes any Jekyll behavior, make sure to update the docume
 
 To run the test suite and build the gem you'll need to install Jekyll's dependencies by running the following command:
 
-<pre class="highlight"><code>$ script/bootstrap</code></pre>
+```sh
+script/bootstrap
+```
 
 Before you make any changes, run the tests and make sure that they pass (to confirm your environment is configured properly):
 
-<pre class="highlight"><code>$ script/cibuild</code></pre>
+```sh
+script/cibuild
+```
 
 If you are only updating a file in `test/`, you can use the command:
 
-<pre class="highlight"><code>$ script/test test/blah_test.rb</code></pre>
+```sh
+script/test test/blah_test.rb
+```
 
 If you are only updating a `.feature` file, you can use the command:
 
-<pre class="highlight"><code>$ script/cucumber features/blah.feature</code></pre>
+```sh
+script/cucumber features/blah.feature
+```
 
 Both `script/test` and `script/cucumber` can be run without arguments to
 run its entire respective suite.
