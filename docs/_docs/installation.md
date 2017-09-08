@@ -49,7 +49,7 @@ The best way to install Jekyll is via
 simply run the following command to install Jekyll:
 
 ```sh
-$ gem install jekyll
+gem install jekyll
 ```
 
 All of Jekyll’s gem dependencies are automatically installed by the above
@@ -86,11 +86,11 @@ more involved. This gives you the advantage of having the latest and greatest,
 but may be unstable.
 
 ```sh
-$ git clone git://github.com/jekyll/jekyll.git
-$ cd jekyll
-$ script/bootstrap
-$ bundle exec rake build
-$ ls pkg/*.gem | head -n 1 | xargs gem install -l
+git clone git://github.com/jekyll/jekyll.git
+cd jekyll
+script/bootstrap
+bundle exec rake build
+ls pkg/*.gem | head -n 1 | xargs gem install -l
 ```
 
 ## Optional Extras
@@ -116,20 +116,20 @@ Check out [the extras page](../extras/) for more information.
 Before you start developing with Jekyll, you may want to check that you're up to date with the latest version. To find your version of Jekyll, run one of these commands:
 
 ```sh
-$ jekyll --version
-$ gem list jekyll
+jekyll --version
+gem list jekyll
 ```
 
 You can also use [RubyGems](https://rubygems.org/gems/jekyll) to find the current versioning of any gem. But you can also use the `gem` command line tool:
 
 ```sh
-$ gem search jekyll --remote
+gem search jekyll --remote
 ```
 
 and you'll search for just the name `jekyll`, and in brackets will be latest version. Another way to check if you have the latest version is to run the command `gem outdated`. This will provide a list of all the gems on your system that need to be updated. If you aren't running the latest version, run this command:
 
 ```sh
-$ gem update jekyll
+gem update jekyll
 ```
 
 Now that you’ve got everything up-to-date and installed, let’s get to work!

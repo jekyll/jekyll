@@ -7,16 +7,16 @@ The Jekyll gem makes a `jekyll` executable available to you in your Terminal
 window. You can use this command in a number of ways:
 
 ```sh
-$ jekyll build
+jekyll build
 # => The current folder will be generated into ./_site
 
-$ jekyll build --destination <destination>
+jekyll build --destination <destination>
 # => The current folder will be generated into <destination>
 
-$ jekyll build --source <source> --destination <destination>
+jekyll build --source <source> --destination <destination>
 # => The <source> folder will be generated into <destination>
 
-$ jekyll build --watch
+jekyll build --watch
 # => The current folder will be generated into ./_site,
 #    watched for changes, and regenerated automatically.
 ```
@@ -52,11 +52,11 @@ Jekyll also comes with a built-in development server that will allow you to
 preview what the generated site will look like in your browser locally.
 
 ```sh
-$ jekyll serve
+jekyll serve
 # => A development server will run at http://localhost:4000/
 # Auto-regeneration: enabled. Use `--no-watch` to disable.
 
-$ jekyll serve --detach
+jekyll serve --detach
 # => Same as `jekyll serve` but will detach from the current terminal.
 #    If you need to kill the server, you can `kill -9 1234` where "1234" is the PID.
 #    If you cannot find the PID, then do, `ps aux | grep jekyll` and kill the instance.
@@ -70,7 +70,7 @@ $ jekyll serve --detach
 </div>
 
 ```sh
-$ jekyll serve --no-watch
+jekyll serve --no-watch
 # => Same as `jekyll serve` but will not watch for changes.
 ```
 
@@ -89,8 +89,8 @@ destination: _deploy
 Then the following two commands will be equivalent:
 
 ```sh
-$ jekyll build
-$ jekyll build --source _source --destination _deploy
+jekyll build
+jekyll build --source _source --destination _deploy
 ```
 
 For more about the possible configuration options, see the
