@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "addressable/uri"
+require "pathname"
 
 module Jekyll
   module Filters
@@ -31,6 +32,20 @@ module Jekyll
         Addressable::URI.parse(
           parts.compact.map { |part| ensure_leading_slash(part.to_s) }.join
         ).normalize.to_s
+      end
+
+      # Produces a path relative to the current page. For example, if the path
+      # `/images/me.jpg` is supplied, then the result could be, `me.jpg`,
+      # `images/me.jpg` or `../../images/me.jpg` depending on whether the current
+      # page lives in `/images`, `/` or `/sub/dir/` respectively.
+      #
+      # input - a path relative to the project root
+      #
+      # Returns the supplied path relativized to the current page.
+      def relativize_url(input)
+        pageUrl = @context.registers[:page]["url"]
+        pageDir = Pathname(pageUrl).parent
+        Pathname(input).relative_path_from(pageDir).to_s
       end
 
       # Strips trailing `/index.html` from URLs to create pretty permalinks
