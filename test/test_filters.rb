@@ -11,7 +11,10 @@ class TestFilters < JekyllUnitTest
     def initialize(opts = {})
       @site = Jekyll::Site.new(opts.merge("skip_config_files" => true))
       @page = Jekyll::Page.new(@site, "", "/some/dir", "test.md")
-      @context = Liquid::Context.new(@site.site_payload, {}, { :site => @site, :page => @page })
+      @context = Liquid::Context.new(@site.site_payload, {}, {
+        :site => @site,
+        :page => @page,
+      })
     end
   end
 
