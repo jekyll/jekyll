@@ -976,6 +976,26 @@ class TestFilters < JekyllUnitTest
       end
     end
 
+    context "sort_by_post_count filter" do
+      should "return sorted hash" do
+        # Desc
+        assert_equal(
+          {:baz => ["a", "b", "c"], :foo => ["a", "b"], :bar => ["a"]},
+          @filter.sort_by_post_count({:foo => ["a", "b"], :bar => ["a"], :baz => ["a", "b", "c"]})
+        )
+        # Asc
+        assert_equal(
+          {:bar => ["a"], :foo => ["a", "b"], :baz => ["a", "b", "c"]},
+          @filter.sort_by_post_count({:foo => ["a", "b"], :bar => ["a"], :baz => ["a", "b", "c"]}, "asc")
+        )
+      end
+      should "raise Exception with invalid dir" do
+        err = assert_raises ArgumentError do
+          @filter.sort_by_post_count({:foo => ["a"]}, "banana")
+        end
+      end
+    end
+
     context "sort filter" do
       should "raise Exception when input is nil" do
         err = assert_raises ArgumentError do

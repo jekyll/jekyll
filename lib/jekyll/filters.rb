@@ -332,9 +332,9 @@ module Jekyll
     #
     def sort_by_post_count(input, dir = "desc")
       if dir == "desc"
-        new_hash = input.sort_by { |_tag, posts| -posts.join.length }
+        new_hash = Hash[input.sort_by { |tag, posts| -posts.join.length }]
       elsif dir == "asc"
-        new_hash = input.sort_by { |_tag, posts| posts.join.length }
+        new_hash = Hash[input.sort_by { |tag, posts| posts.join.length }]
       else
         raise ArgumentError, "Invalid dir: " \
             "'#{dir}' is not a valid dir. It must be 'desc' or 'asc'."
