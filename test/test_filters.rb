@@ -550,6 +550,16 @@ class TestFilters < JekyllUnitTest
         page_url = "/some/dir/#{file}"
         assert_equal file, @filter.relativize_url(page_url)
       end
+
+      should "stay within site root" do
+        assert_equal "../..", @filter.relativize_url("/../../../../../")
+        assert_equal "../..", @filter.relativize_url("/a/b/../../..")
+      end
+
+      should "not malfunction for paths without leading slashes" do
+        path = "a/b/c"
+        assert_equal "../../#{path}", @filter.relativize_url(path)
+      end
     end
 
     context "strip_index filter" do
