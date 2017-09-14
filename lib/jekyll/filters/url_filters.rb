@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "addressable/uri"
-require "pathname"
 
 module Jekyll
   module Filters
