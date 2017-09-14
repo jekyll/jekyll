@@ -43,9 +43,10 @@ module Jekyll
       #
       # Returns the supplied path relativized to the current page.
       def relativize_url(input)
-        pageUrl = @context.registers[:page]["url"]
-        pageDir = Pathname(pageUrl).parent
-        Pathname(input).relative_path_from(pageDir).to_s
+        return if input.nil?
+        page_url = @context.registers[:page]["url"]
+        page_dir = Pathname(page_url).parent
+        Pathname(input).relative_path_from(page_dir).to_s
       end
 
       # Strips trailing `/index.html` from URLs to create pretty permalinks
