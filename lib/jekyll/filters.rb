@@ -325,6 +325,23 @@ module Jekyll
       end
     end
 
+    # Sort a post_attr_hash by number of posts
+    #
+    # input - The hash of posts
+    # dir ('desc' | 'asc') - Descending or ascending order
+    #
+    def sort_by_post_count(input, dir = "desc")
+      if dir == "desc"
+        new_hash = input.sort_by { |_tag, posts| -posts.join.length }
+      elsif dir == "asc"
+        new_hash = input.sort_by { |_tag, posts| posts.join.length }
+      else
+        raise ArgumentError, "Invalid dir: " \
+            "'#{dir}' is not a valid dir. It must be 'desc' or 'asc'."
+      end
+      new_hash
+    end
+
     # Convert an object into its String representation for debugging
     #
     # input - The Object to be converted
