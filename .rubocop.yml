@@ -21,7 +21,7 @@ Layout/EmptyLinesAroundAccessModifier:
 Layout/EmptyLinesAroundModuleBody:
   Enabled: false
 Layout/EndOfLine:
-  EnforcedStyle: lf
+  EnforcedStyle: native
 Layout/ExtraSpacing:
   AllowForAlignment: true
 Layout/FirstParameterIndentation:
@@ -44,9 +44,13 @@ Layout/SpaceInsideBrackets:
   Enabled: false
 Lint/EndAlignment:
   Severity: error
+Lint/RescueWithoutErrorClass:
+  Enabled: false
 Lint/UnreachableCode:
   Severity: error
 Lint/UselessAccessModifier:
+  Enabled: false
+Lint/Void:
   Enabled: false
 Metrics/AbcSize:
   Max: 21
@@ -82,6 +86,12 @@ Metrics/ParameterLists:
   Max: 4
 Metrics/PerceivedComplexity:
   Max: 8
+Naming/FileName:
+  Enabled: false
+Naming/HeredocDelimiterCase:
+  Enabled: false
+Naming/HeredocDelimiterNaming:
+  Enabled: false
 Security/MarshalLoad:
   Exclude:
     - !ruby/regexp /test\/.*.rb$/
@@ -109,7 +119,7 @@ Style/Documentation:
     - !ruby/regexp /features\/.*.rb$/
 Style/DoubleNegation:
   Enabled: false
-Style/FileName:
+Style/Encoding:
   Enabled: false
 Style/GuardClause:
   Enabled: false
