@@ -25,7 +25,7 @@ module Jekyll
 
     # Sorts posts, pages, and static files.
     def sort_files!
-      site.collections.values.each { |c| c.docs.sort! }
+      site.collections.each_value { |c| c.docs.sort! }
       site.pages.sort_by!(&:name)
       site.static_files.sort_by!(&:relative_path)
     end

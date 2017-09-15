@@ -43,7 +43,7 @@ module Jekyll
 
         private
         def make_accessible(hash = @config)
-          hash.keys.each do |key|
+          hash.each_key do |key|
             hash[key.to_sym] = hash[key]
             make_accessible(hash[key]) if hash[key].is_a?(Hash)
           end
