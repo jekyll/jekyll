@@ -88,8 +88,6 @@ Metrics/PerceivedComplexity:
   Max: 8
 Naming/FileName:
   Enabled: false
-Naming/HeredocDelimiterCase:
-  Enabled: false
 Naming/HeredocDelimiterNaming:
   Enabled: false
 Security/MarshalLoad:
