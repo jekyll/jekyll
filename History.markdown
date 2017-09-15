@@ -12,6 +12,7 @@
   * script/backport-pr: commit message no longer includes the `#` (#6289)
   * Add Add CODEOWNERS file to help automate reviews. (#6320)
   * Fix builds on codeclimate (#6333)
+  * Bump rubies on Travis (#6366)
 
 ### Minor Enhancements
 
