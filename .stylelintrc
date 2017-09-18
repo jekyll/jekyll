@@ -1,0 +1,12 @@
+{
+  "extends": "stylelint-config-primer",
+  "rules": {
+    "selector-max-type": null,
+    "at-rule-blacklist": null,
+    "declaration-property-value-blacklist": null,
+    "selector-no-qualifying-type": null,
+    "no-duplicate-selectors": null,
+    "primer/selector-no-utility": null,
+    "selector-max-compound-selectors": 4
+  }
+}
