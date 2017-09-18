@@ -65,10 +65,23 @@ front matter of a page or post.
 
           If set, this specifies the layout file to use. Use the layout file
           name without the file extension. Layout files must be placed in the
-          <code>_layouts</code> directory. Set this to <code>null</code> if you
-          don't want to use any layout file.
+          <code>_layouts</code> directory. 
 
         </p>
+        <ul>
+          <li>
+            Using <code>null</code> will produce a file without using a layout 
+            file. However this is overridden if the file is a post/document and has a 
+            layout defined in the <a href="../configuration/#front-matter-defaults">
+            frontmatter defaults</a>.
+          </li>
+          <li>
+            Starting from version 3.5.0, using <code>none</code> in a post/document will
+            produce a file without using a layout file regardless of frontmatter defaults.
+            Using <code>none</code> in a page, however, will cause Jekyll to attempt to
+            use a layout named "none".
+          </li>
+        </ul>
       </td>
     </tr>
     <tr>
