@@ -65,7 +65,8 @@ front matter of a page or post.
 
           If set, this specifies the layout file to use. Use the layout file
           name without the file extension. Layout files must be placed in the
-          <code>_layouts</code> directory.
+          <code>_layouts</code> directory. Set this to <code>null</code> if you
+          don't want to use any layout file.
 
         </p>
       </td>
