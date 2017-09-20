@@ -206,6 +206,19 @@ class TestPage < JekyllUnitTest
         end
       end
 
+      context "with custom permalink style with html extension" do
+        setup do
+          @site.permalink_style = ":categories/:year/:month/:day/:title.html"
+        end
+
+        should "create URL based on markdown filename and destination" do
+          @page = setup_page("info.md")
+          @dest_file = dest_dir("info.html")
+          assert_equal "/info.html", @page.url
+          assert_equal @dest_file, @page.destination(dest_dir)
+        end
+      end
+
       context "with any other permalink style" do
         should "return dir correctly" do
           @site.permalink_style = nil
