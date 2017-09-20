@@ -61,6 +61,7 @@
   * Docs: updates (#6343)
   * Fix precedence docs (#6346)
   * add note to contributing docs about `script/console` (#6349)
+  * Docs: Fix permalink example (#6375)
 
 ### Site Enhancements
 
