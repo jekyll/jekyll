@@ -60,6 +60,7 @@
   * Fix typo in site.url section of variables.md :-[ (#6337)
   * Docs: updates (#6343)
   * Fix precedence docs (#6346)
+  * add note to contributing docs about `script/console` (#6349)
 
 ### Site Enhancements
 
