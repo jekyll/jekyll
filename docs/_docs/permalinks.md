@@ -322,7 +322,7 @@ The permalink setting in your configuration file specifies the permalink style u
 
 For example:
 
-* A permalink style of `/:categories/:year/:month/:day/:title.html` for posts becomes `/:title.html` for pages and collections.
+* A permalink style of `/:categories/:year/:month/:day/:title.:output_ext` for posts becomes `/:title.html` for pages and collections.
 * A permalink style of `pretty` (or `/:categories/:year/:month/:day/:title/`), which omits the file extension and contains a trailing slash, will update page and collection permalinks to also omit the file extension and contain a trailing slash: `/:title/`.
 * A permalink style of `date`, which contains a trailing file extension, will update page permalinks to also contain a trailing file extension: `/:title.html`. But no time or category information will be included.
 
