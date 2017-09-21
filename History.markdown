@@ -1,18 +1,4 @@
-## HEAD
-
-### Development Fixes
-
-  * Strip unnecessary leading whitespace in template (#6228)
-  * Users should be installing patch versions. (#6198)
-  * fix tests (#6240)
-  * Define path with __dir__ (#6087)
-  * exit site.process sooner (#6239)
-  * make flakey test more robust (#6277)
-  * Add a quick test for DataReader (#6284)
-  * script/backport-pr: commit message no longer includes the `#` (#6289)
-  * Add Add CODEOWNERS file to help automate reviews. (#6320)
-  * Fix builds on codeclimate (#6333)
-  * Bump rubies on Travis (#6366)
+## 3.6.0 / 2017-09-21
 
 ### Minor Enhancements
 
@@ -26,22 +12,22 @@
   * Allow `yield` to logger methods &amp; bail early on no-op messages (#6315)
   * Update mime-types. (#6336)
   * Use a Schwartzian transform with custom sorting (#6342)
-  * Alias Drop#invoke_drop to Drop#[] (#6338)
+  * Alias `Drop#invoke_drop` to `Drop#[]` (#6338)
 
 ### Bug Fixes
 
   * `Deprecator`: fix typo for `--serve` command (#6229)
   * `Reader#read_directories`: guard against an entry not being a directory (#6226)
   * kramdown: symbolize keys in-place (#6247)
-  * Call to_s on site.url before attempting to concatenate strings (#6253)
+  * Call `to_s` on site.url before attempting to concatenate strings (#6253)
   * Enforce Style/FrozenStringLiteralComment (#6265)
   * Update theme-template README to note &#39;assets&#39; directory (#6257)
-  * Memoize the return value of Document#url (#6266)
+  * Memoize the return value of `Document#url` (#6266)
   * delegate `StaticFile#to_json` to `StaticFile#to_liquid` (#6273)
-  * Fix Drop#key? so it can handle a nil argument (#6281)
+  * Fix `Drop#key?` so it can handle a nil argument (#6281)
   * Guard against type error in absolute url (#6280)
   * Mutable drops should fallback to their own methods when a mutation isn&#39;t present (#6350)
-  * skip adding binary files as posts (#6344)
+  * Skip adding binary files as posts (#6344)
   * Don&#39;t break if bundler is not installed (#6377)
 
 ### Documentation
@@ -71,6 +57,21 @@
   * Adding DevKit helpers (#6225)
   * Customizing url in collection elements clarified (#6264)
   * Plugins is the new gems (#6326)
+
+### Development Fixes
+
+  * Strip unnecessary leading whitespace in template (#6228)
+  * Users should be installing patch versions. (#6198)
+  * Fix tests (#6240)
+  * Define path with `__dir__` (#6087)
+  * exit site.process sooner (#6239)
+  * make flakey test more robust (#6277)
+  * Add a quick test for DataReader (#6284)
+  * script/backport-pr: commit message no longer includes the `#` (#6289)
+  * Add Add CODEOWNERS file to help automate reviews. (#6320)
+  * Fix builds on codeclimate (#6333)
+  * Bump rubies on Travis (#6366)
+
 
 ## 3.5.2 / 2017-08-12
 
