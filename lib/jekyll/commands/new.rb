@@ -128,7 +128,12 @@ RUBY
 
         def after_install(path, options = {})
           unless options["blank"] || options["skip-bundle"]
-            bundle_install path
+            begin
+              require "bundler"
+              bundle_install path
+            rescue LoadError
+              Jekyll.logger.info "Could not load Bundler. Bundle install skipped."
+            end
           end
 
           Jekyll.logger.info "New jekyll site installed in #{path.cyan}."
@@ -136,7 +141,6 @@ RUBY
         end
 
         def bundle_install(path)
-          Jekyll::External.require_with_graceful_fail "bundler"
           Jekyll.logger.info "Running bundle install in #{path.cyan}..."
           Dir.chdir(path) do
             process, output = Jekyll::Utils::Exec.run("bundle", "install")
