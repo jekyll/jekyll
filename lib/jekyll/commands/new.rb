@@ -132,6 +132,7 @@ RUBY
               require "bundler"
               bundle_install path
             rescue LoadError
+              Jekyll.logger.info "Could not load Bundler. Bundle install skipped."
             end
           end
 
