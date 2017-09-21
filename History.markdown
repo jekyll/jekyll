@@ -42,6 +42,7 @@
   * Guard against type error in absolute url (#6280)
   * Mutable drops should fallback to their own methods when a mutation isn&#39;t present (#6350)
   * skip adding binary files as posts (#6344)
+  * Don&#39;t break if bundler is not installed (#6377)
 
 ### Documentation
 
