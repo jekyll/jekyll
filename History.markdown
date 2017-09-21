@@ -40,6 +40,7 @@
   * delegate `StaticFile#to_json` to `StaticFile#to_liquid` (#6273)
   * Fix Drop#key? so it can handle a nil argument (#6281)
   * Guard against type error in absolute url (#6280)
+  * Mutable drops should fallback to their own methods when a mutation isn&#39;t present (#6350)
 
 ### Documentation
 
