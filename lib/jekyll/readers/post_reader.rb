@@ -43,7 +43,7 @@ module Jekyll
               end
             end
           else
-            Jekyll.logger.debug "Skipping:", "#{doc.relative_path} is no valid UTF-8"
+            Jekyll.logger.debug "Skipping:", "#{doc.relative_path} is not valid UTF-8"
             false
           end
         end
