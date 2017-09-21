@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = %w(README.markdown LICENSE)
 
   s.add_runtime_dependency("addressable",           "~> 2.4")
+  s.add_runtime_dependency('bundler',               '~> 1.14')
   s.add_runtime_dependency("colorator",             "~> 1.0")
   s.add_runtime_dependency("jekyll-sass-converter", "~> 1.0")
   s.add_runtime_dependency("jekyll-watch",          "~> 1.1")
