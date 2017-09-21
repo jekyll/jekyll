@@ -41,6 +41,7 @@
   * Fix Drop#key? so it can handle a nil argument (#6281)
   * Guard against type error in absolute url (#6280)
   * Mutable drops should fallback to their own methods when a mutation isn&#39;t present (#6350)
+  * skip adding binary files as posts (#6344)
 
 ### Documentation
 
