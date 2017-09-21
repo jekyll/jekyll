@@ -128,7 +128,11 @@ RUBY
 
         def after_install(path, options = {})
           unless options["blank"] || options["skip-bundle"]
-            bundle_install path
+            begin
+              require "bundler"
+              bundle_install path
+            rescue LoadError
+            end
           end
 
           Jekyll.logger.info "New jekyll site installed in #{path.cyan}."
