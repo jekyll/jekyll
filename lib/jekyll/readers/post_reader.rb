@@ -36,10 +36,15 @@ module Jekyll
     def read_publishable(dir, magic_dir, matcher)
       read_content(dir, magic_dir, matcher).tap { |docs| docs.each(&:read) }
         .select do |doc|
-          site.publisher.publish?(doc).tap do |will_publish|
-            if !will_publish && site.publisher.hidden_in_the_future?(doc)
-              Jekyll.logger.debug "Skipping:", "#{doc.relative_path} has a future date"
+          if doc.content.valid_encoding?
+            site.publisher.publish?(doc).tap do |will_publish|
+              if !will_publish && site.publisher.hidden_in_the_future?(doc)
+                Jekyll.logger.debug "Skipping:", "#{doc.relative_path} has a future date"
+              end
             end
+          else
+            Jekyll.logger.debug "Skipping:", "#{doc.relative_path} is no valid UTF-8"
+            false
           end
         end
     end
