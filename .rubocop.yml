@@ -118,7 +118,7 @@ Style/Documentation:
 Style/DoubleNegation:
   Enabled: false
 Style/Encoding:
-  Enabled: false
+  EnforcedStyle: when_needed
 Style/GuardClause:
   Enabled: false
 Style/HashSyntax:
