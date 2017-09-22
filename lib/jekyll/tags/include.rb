@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # frozen_string_literal: true
 
 module Jekyll
@@ -61,7 +60,7 @@ module Jekyll
 
       def validate_file_name(file)
         if file !~ %r!^[a-zA-Z0-9_/\.-]+$! || file =~ %r!\./! || file =~ %r!/\.!
-          raise ArgumentError, <<-eos
+          raise ArgumentError, <<-MSG
 Invalid syntax for include tag. File contains invalid characters or sequences:
 
   #{file}
@@ -70,14 +69,14 @@ Valid syntax:
 
   #{syntax_example}
 
-eos
+MSG
         end
       end
 
       def validate_params
         full_valid_syntax = %r!\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z!
         unless @params =~ full_valid_syntax
-          raise ArgumentError, <<-eos
+          raise ArgumentError, <<-MSG
 Invalid syntax for include tag:
 
   #{@params}
@@ -86,7 +85,7 @@ Valid syntax:
 
   #{syntax_example}
 
-eos
+MSG
         end
       end
 

@@ -86,7 +86,7 @@ module Jekyll
         def urls_only_differ_by_case(site)
           urls_only_differ_by_case = false
           urls = case_insensitive_urls(site.pages + site.docs_to_write, site.dest)
-          urls.each do |_case_insensitive_url, real_urls|
+          urls.each_value do |real_urls|
             next unless real_urls.uniq.size > 1
             urls_only_differ_by_case = true
             Jekyll.logger.warn "Warning:", "The following URLs only differ" \
