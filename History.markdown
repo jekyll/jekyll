@@ -6,6 +6,7 @@
   * Update frontmatter.md (#6371)
   * Elaborate on excluding items from processing (#6136)
   * Docs: Style lists in tables (#6379)
+  * Docs: remove duplicate &#34;available&#34; (#6380)
 
 ### Development Fixes
 
