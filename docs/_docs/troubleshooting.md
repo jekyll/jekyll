@@ -195,10 +195,37 @@ That is: defaults are overridden by options specified in `_config.yml`,
 and flags specified at the command-line will override all other settings
 specified elsewhere.
 
-If you encounter an error in building the site, with the error message
-"'0000-00-00-welcome-to-jekyll.markdown.erb' does not have a valid date in the
-YAML front matter." try including the line `exclude: [vendor]`
-in `_config.yml`.
+**Note: From v3.3.0 onward, Jekyll does not process `node_modules` and certain subdirectories within `vendor`, by default. But, by having an `exclude:` array defined explicitly in the config file overrides this default setting, which results in some users to encounter an error in building the site, with the following error message:**
+
+```
+    ERROR: YOUR SITE COULD NOT BE BUILT:
+    ------------------------------------
+    Invalid date '<%= Time.now.strftime('%Y-%m-%d %H:%M:%S %z') %>':
+    Document 'vendor/bundle/gems/jekyll-3.4.3/lib/site_template/_posts/0000-00-00-welcome-to-jekyll.markdown.erb'
+    does not have a valid date in the YAML front matter.
+```
+
+Simply adding `vendor/bundle` to the `exclude:` list will solve this problem but will lead to having other sub-directories under `/vendor/` (and also `/node_modules/`, if present) be processed to the destination folder `_site`.
+
+
+The proper solution is to incorporate the default setting for `exclude:` rather than override it completely:
+
+For versions upto `v3.4.3`, the `exclude:` setting must look like following:
+
+```yaml
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - any_additional_item # any user-specific listing goes at the end
+```
+
+From `v3.5` onward, `Gemfile` and `Gemfile.lock` are also excluded by default. So, in most cases there is no need to define another `exclude:` array in the config file. So an existing definition can either be modified as above, or removed completely, or simply commented out to enable easy edits in future.
+
 
 ## Markup Problems
 
