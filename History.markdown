@@ -1,3 +1,9 @@
+## HEAD
+
+### Documentation
+
+  * Doc y_day in docs/permalinks (#6244)
+
 ## 3.6.0 / 2017-09-21
 
 ### Minor Enhancements
@@ -71,7 +77,6 @@
   * Add Add CODEOWNERS file to help automate reviews. (#6320)
   * Fix builds on codeclimate (#6333)
   * Bump rubies on Travis (#6366)
-
 
 ## 3.5.2 / 2017-08-12
 
