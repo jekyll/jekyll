@@ -813,7 +813,12 @@ tbody td {
   background-image: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%,rgba(255,255,255,0) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1affffff', endColorstr='#00ffffff',GradientType=0 );
 
-  p {
+  ul {
+    padding-left: 1em;
+  }
+
+  p,
+  ul {
     font-size: 16px;
 
     code { font-size: 14px; }
