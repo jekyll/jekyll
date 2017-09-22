@@ -118,6 +118,14 @@ The following table lists the template variables available for permalinks. You c
     </tr>
     <tr>
       <td>
+        <p><code>y_day</code></p>
+      </td>_
+      <td>
+        <p>Day of the year from the post's filename, with leading zeros.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p><code>short_year</code></p>
       </td>
       <td>
