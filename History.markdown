@@ -6,6 +6,10 @@
   * Update frontmatter.md (#6371)
   * Elaborate on excluding items from processing (#6136)
 
+### Development Fixes
+
+  * Bump rubocop to use `v0.50.x` (#6368)
+
 ## 3.6.0 / 2017-09-21
 
 ### Minor Enhancements
