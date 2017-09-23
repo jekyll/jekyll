@@ -15,6 +15,7 @@
 ### Minor Enhancements
 
   * Disable default layouts for Pages with a `layout: none` declaration (#6182)
+  * Upgrade to Rouge 3 (#6381)
 
 ## 3.6.0 / 2017-09-21
 
