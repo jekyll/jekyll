@@ -49,7 +49,7 @@ Feature: Rendering
     And I should not see "Ahoy, indeed!" in "_site/index.css"
     And I should not see "Ahoy, indeed!" in "_site/index.js"
 
-  Scenario: Ignore defaults and don't place documents with layout set to 'none'
+  Scenario: Ignore defaults and don't place pages and documents with layout set to 'none'
     Given I have a "index.md" page with layout "none" that contains "Hi there, {{ site.author }}!"
     And I have a _trials directory
     And I have a "_trials/no-layout.md" page with layout "none" that contains "Hi there, {{ site.author }}!"
@@ -67,9 +67,11 @@ Feature: Rendering
     And I should not see "Welcome!" in "_site/trials/no-layout.html"
     And I should not see "Check this out!" in "_site/trials/no-layout.html"
     But I should see "Check this out!" in "_site/trials/test.html"
-    And I should see "Welcome!" in "_site/index.html"
+    And I should see "Hi there, John Doe!" in "_site/index.html"
+    And I should not see "Welcome!" in "_site/index.html"
+    And I should not see "Build Warning:" in the build output
 
-  Scenario: Don't place documents with layout set to 'none'
+  Scenario: Don't place pages and documents with layout set to 'none'
     Given I have a "index.md" page with layout "none" that contains "Hi there, {{ site.author }}!"
     And I have a _trials directory
     And I have a "_trials/no-layout.md" page with layout "none" that contains "Hi there, {{ site.author }}!"
@@ -84,8 +86,10 @@ Feature: Rendering
     Then I should get a zero exit status
     And the _site directory should exist
     And I should not see "Welcome!" in "_site/trials/no-layout.html"
+    And I should not see "Welcome!" in "_site/index.html"
     But I should see "Check this out!" in "_site/trials/test.html"
-    And I should see "Welcome!" in "_site/index.html"
+    And I should see "Hi there, John Doe!" in "_site/index.html"
+    And I should not see "Build Warning:" in the build output
 
   Scenario: Render liquid in Sass
     Given I have an "index.scss" page that contains ".foo-bar { color:{{site.color}}; }"
