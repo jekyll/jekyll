@@ -12,6 +12,10 @@
 
   * Bump rubocop to use `v0.50.x` (#6368)
 
+### Minor Enhancements
+
+  * Disable default layouts for Pages with a `layout: none` declaration (#6182)
+
 ## 3.6.0 / 2017-09-21
 
 ### Minor Enhancements
