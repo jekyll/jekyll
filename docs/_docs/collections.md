@@ -46,6 +46,17 @@ defaults:
       layout: page
 ```
 
+**New**: You can optionally specify a directory if you want to store all your collections
+in the same place:
+
+```yaml
+collections:
+  collections_dir: my_collections
+```
+
+Then Jekyll will look in `my_collections/_books` for the `books` collection, and
+in `my_collections/_recipes` for the `recipes` collection.
+
 ### Step 2: Add your content {#step2}
 
 Create a corresponding folder (e.g. `<source>/_my_collection`) and add
@@ -111,7 +122,7 @@ _my_collection/
 
 each of the following `permalink` configurations will produce the document structure shown below it.
 
-* **Default**  
+* **Default**
   Same as `permalink: /:collection/:path`.
 
   ```
@@ -121,7 +132,7 @@ each of the following `permalink` configurations will produce the document struc
   │       └── some_doc.html
   ...
   ```
-* `permalink: pretty`  
+* `permalink: pretty`
   Same as `permalink: /:collection/:path/`.
 
   ```
@@ -225,7 +236,7 @@ each of the following `permalink` configurations will produce the document struc
 
 Each collection is accessible as a field on the `site` variable. For example, if
 you want to access the `albums` collection found in `_albums`, you'd use
-`site.albums`. 
+`site.albums`.
 
 Each collection is itself an array of documents (e.g., `site.albums` is an array of documents, much like `site.pages` and
 `site.posts`). See the table below for how to access attributes of those documents.
@@ -310,10 +321,10 @@ you specified in your `_config.yml` (if present) and the following information:
 
 <div class="note info">
   <h5>A Hard-Coded Collection</h5>
-  <p>In addition to any collections you create yourself, the 
-  <code>posts</code> collection is hard-coded into Jekyll. It exists whether 
-  you have a <code>_posts</code> directory or not. This is something to note 
-  when iterating through <code>site.collections</code> as you may need to 
+  <p>In addition to any collections you create yourself, the
+  <code>posts</code> collection is hard-coded into Jekyll. It exists whether
+  you have a <code>_posts</code> directory or not. This is something to note
+  when iterating through <code>site.collections</code> as you may need to
   filter it out.</p>
   <p>You may wish to use filters to find your collection:
   <code>{% raw %}{{ site.collections | where: "label", "myCollection" | first }}{% endraw %}</code></p>
