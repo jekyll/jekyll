@@ -602,12 +602,13 @@ file or on the command-line.
 
 ```yaml
 # Where things are
-source:       .
-destination:  ./_site
-plugins_dir:  _plugins
-layouts_dir:  _layouts
-data_dir:     _data
-includes_dir: _includes
+source:          .
+destination:     ./_site
+collections_dir: .
+plugins_dir:     _plugins
+layouts_dir:     _layouts
+data_dir:        _data
+includes_dir:    _includes
 collections:
   posts:
     output:   true
