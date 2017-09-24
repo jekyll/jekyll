@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Runs the `jekyll new-theme` command and initializes a theme-gem directory as a sanity check
+
+set -e
+
+echo "$0: setting up tmp directory"
+mkdir -p ./tmp
+rm -Rf ./tmp/testor
+
+echo "$0: creating new test-theme: TESTOR"
+cd tmp
+bundle exec jekyll new-theme testor
+cd ..
