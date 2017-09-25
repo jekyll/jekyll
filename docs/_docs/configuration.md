@@ -549,6 +549,21 @@ defaults:
 In this example, the `layout` is set to `default` inside the
 [collection](../collections/) with the name `my_collection`.
 
+It is also possible to use glob patterns when matching defaults. For example, it is possible to set specific layout for each `special-page.html` in any subfolder of `section` folder.
+
+```yaml
+collections:
+  my_collection:
+    output: true
+
+defaults:
+  -
+    scope:
+      path: "section/*/special-page.html"
+    values:
+      layout: "specific-layout"
+```
+
 ### Precedence
 
 Jekyll will apply all of the configuration settings you specify in the `defaults` section of your `_config.yml` file. However, you can choose to override settings from other scope/values pair by specifying a more specific path for the scope.
