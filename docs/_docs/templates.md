@@ -535,6 +535,23 @@ One major benefit of using the `link` or `post_url` tag is link validation. If t
 
 Note you cannot add filters to `link` tags. For example, you cannot append a string using Liquid filters, such as `{% raw %}{% link mypage.html | append: "#section1" %} {% endraw %}`. To link to sections on a page, you will need to use regular HTML or Markdown linking techniques.
 
+The name of the file you want to link can be specified as a variable instead of an actual file name. For example, suppose you defined a variable in your page's front matter like this:
+
+```yaml
+---
+title: My page
+my_variable: footer_company_a.html
+---
+```
+
+You could then reference that variable in your link:
+
+```liquid
+{% raw %}{% link {{ page.my_variable }} %}{% endraw %}
+```
+
+In this example, the link would add link to the file `footer_company_a.html`.
+
 ### Linking to posts
 
 If you want to include a link to a post on your site, the `post_url` tag will generate the correct permalink URL for the post you specify.
