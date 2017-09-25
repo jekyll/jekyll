@@ -24,6 +24,10 @@ your site. These files must be YAML, JSON, or CSV files (using either
 the `.yml`, `.yaml`, `.json` or `.csv` extension), and they will be
 accessible via `site.data`.
 
+<div class="videoWrapper" >
+     <iframe src="https://www.youtube.com/embed/M6b0KmLB-pM?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+
 ## Example: List of members
 
 Here is a basic example of using Data Files to avoid copy-pasting large chunks

@@ -22,6 +22,10 @@ static site.
 
 ### Creating Post Files
 
+<div class="videoWrapper" >
+     <iframe src="https://www.youtube.com/embed/gsYqPL9EFwQ?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+
 To create a new post, all you need to do is create a file in the `_posts`
 directory. How you name files in this folder is important. Jekyll requires blog
 post files to be named according to the following format:
@@ -78,7 +82,7 @@ digital assets along with your text content. While the syntax for linking to
 these resources differs between Markdown and Textile, the problem of working
 out where to store these files in your site is something everyone will face.
 
-There are a number of ways to include digital assets in Jekyll. 
+There are a number of ways to include digital assets in Jekyll.
 One common solution is to create a folder in the root of the project directory
 called something like `assets` or `downloads`, into which any images, downloads
 or other resources are placed. Then, from within any post, they can be linked

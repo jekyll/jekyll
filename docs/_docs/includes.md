@@ -11,6 +11,10 @@ The `include` tag allows you to include the content from another file stored in 
 
 Jekyll will look for the referenced file (in this case, `footer.html`) in the `_includes` directory at the root of your source directory and insert its contents.
 
+<div class="videoWrapper" >
+     <iframe src="https://www.youtube.com/embed/HfcJeRby2a8?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+
 ### Including files relative to another file
 
 You can choose to include file fragments relative to the current file by using the `include_relative` tag:

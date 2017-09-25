@@ -27,6 +27,11 @@ You have 3 options for installing plugins:
 1. In your site source root, make a `_plugins` directory. Place your plugins
 here. Any file ending in `*.rb` inside this directory will be loaded before
 Jekyll generates your site.
+
+     <div class="videoWrapper" >
+         <iframe src="https://www.youtube.com/embed/0N00nrwuMCY?rel=0" frameborder="0" allowfullscreen></iframe>
+     </div>
+     
 2. In your `_config.yml` file, add a new array with the key `plugins` and the
 values of the gem names of the plugins you'd like to use. An example:
 
