@@ -7,6 +7,7 @@
   * Elaborate on excluding items from processing (#6136)
   * Docs: Style lists in tables (#6379)
   * Docs: remove duplicate &#34;available&#34; (#6380)
+  * Docs: GitHub Pages instructions (#6384)
 
 ### Development Fixes
 
