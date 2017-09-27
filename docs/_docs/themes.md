@@ -125,8 +125,18 @@ To install a gem-based theme:
 
 1. Add the theme to your site's `Gemfile`:
 
-   ```sh
+   ```ruby
+   # ./Gemfile
+
    gem "jekyll-theme-awesome"
+   ```
+  Or if you've started with the `jekyll new` command, replace `gem "minima", "~> 2.0"` with your theme-gem:
+
+   ```diff
+   # ./Gemfile
+
+   - gem "minima", "~> 2.0"
+   + gem "jekyll-theme-awesome"
    ```
 
 2. Install the theme:
