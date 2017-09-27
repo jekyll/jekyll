@@ -1,0 +1,26 @@
+{
+  "name": "jekyll",
+  "private": true,
+  "description": "Jekyll is a simple, blog aware, static site generator.",
+  "scripts": {
+    "lint:sass": "stylelint docs/_sass/style.scss"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jekyll/jekyll.git"
+  },
+  "keywords": [
+    "ssg",
+    "static"
+  ],
+  "author": "Tom Preston-Werner and contributors",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jekyll/jekyll/issues"
+  },
+  "homepage": "https://github.com/jekyll/jekyll#readme",
+  "devDependencies": {
+    "stylelint": "^8.1.1",
+    "stylelint-config-primer": "^2.0.1"
+  }
+}
