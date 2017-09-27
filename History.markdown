@@ -8,6 +8,7 @@
   * Docs: Style lists in tables (#6379)
   * Docs: remove duplicate &#34;available&#34; (#6380)
   * Docs: GitHub Pages instructions (#6384)
+  * Improve documentation for theme-gem installation (#6387)
 
 ### Development Fixes
 
