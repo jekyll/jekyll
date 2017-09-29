@@ -22,6 +22,10 @@
   * Upgrade to Rouge 3 (#6381)
   * Allow the user to set collections_dir to put all collections under one subdirectory (#6331)
 
+### Site Enhancements
+
+  * Docs: Update instructions (#6396)
+
 ## 3.6.0 / 2017-09-21
 
 ### Minor Enhancements
