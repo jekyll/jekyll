@@ -37,6 +37,10 @@ Jekyll themes set default layouts, includes, and stylesheets. However, you can o
 
 To replace layouts or includes in your theme, make a copy in your `_layouts` or `_includes` directory of the specific file you wish to modify, or create the file from scratch giving it the same name as the file you wish to override.
 
+<div class="videoWrapper" >
+    <iframe src="https://www.youtube.com/embed/bDQsGdCWv4I?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+
 For example, if your selected theme has a `page` layout, you can override the theme's layout by creating your own `page` layout in the `_layouts` directory (that is, `_layouts/page.html`).
 
 To locate a theme's files on your computer:
@@ -88,7 +92,7 @@ With a clear understanding of the theme's files, you can now override any theme 
 
 Let's say, for a second example, you want to override Minima's footer. In your Jekyll site, create an `_includes` folder and add a file in it called `footer.html`. Jekyll will now use your site's `footer.html` file instead of the `footer.html` file from the Minima theme gem.
 
-To modify any stylesheet you must take the extra step of also copying the main sass file (`_sass/minima.scss` in the Minima theme) into the `_sass` directory in your site's source. 
+To modify any stylesheet you must take the extra step of also copying the main sass file (`_sass/minima.scss` in the Minima theme) into the `_sass` directory in your site's source.
 
 Jekyll will look first to your site's content before looking to the theme's defaults for any requested file in the following folders:
 
@@ -120,6 +124,10 @@ Now `bundle update` will no longer get updates for the theme gem.
 The `jekyll new <PATH>` command isn't the only way to create a new Jekyll site with a gem-based theme. You can also find gem-based themes online and incorporate them into your Jekyll project.
 
 For example, search for [jekyll theme on RubyGems](https://rubygems.org/search?utf8=%E2%9C%93&query=jekyll-theme) to find other gem-based themes. (Note that not all themes are using `jekyll-theme` as a convention in the theme name.)
+
+<div class="videoWrapper" >
+    <iframe src="https://www.youtube.com/embed/NoRS2D-cyko?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
 
 To install a gem-based theme:
 

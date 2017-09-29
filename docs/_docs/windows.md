@@ -72,6 +72,10 @@ You can make sure time management is working properly by inspecting your `_posts
 
 [RubyInstaller][] is a self-contained Windows-based installer that includes the Ruby language, an execution environment, important documentation, and more.
 
+<div class="videoWrapper" >
+     <iframe src="https://www.youtube.com/embed/LfP7Y9Ja6Qc?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+
 1. Download and Install a package manager version from [RubyInstaller Downloads][RubyInstaller-downloads].
 2. Install Jekyll and Bundler via a command prompt window: `gem install jekyll bundler`
 3. Check if Jekyll installed properly: `jekyll -v`
@@ -138,7 +142,7 @@ This gem is also needed in the github-pages and to get it running on Windows x64
    --with-xslt-lib=C:\Chocolatey\lib\libxslt.redist.1.1.28.0\build\native\bin\v110\x64\Release\dynamic
 ```
 
-#### Install github-pages 
+#### Install github-pages
 
   * Open command prompt and install [Bundler][]: `gem install bundler`
   * Create a file called `Gemfile` without any extension in your root directory of your blog
@@ -189,7 +193,7 @@ $ chcp 65001
 ```
 
 
-## Time-Zone Management 
+## Time-Zone Management
 
 Since Windows doesn't have a native source of zoneinfo data, the Ruby Interpreter would not understand IANA Timezones and hence using them had the `TZ` environment variable default to UTC/GMT 00:00.
 Though Windows users could alternatively define their blog's timezone by setting the key to use POSIX format of defining timezones, it wasn't as user-friendly when it came to having the clock altered to changing DST-rules.
@@ -205,7 +209,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 [IANA-database]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 
-## Auto Regeneration 
+## Auto Regeneration
 
 As of v1.3.0, Jekyll uses the `listen` gem to watch for changes when the `--watch` switch is specified during a build or serve. While `listen` has built-in support for UNIX systems, it may require an extra gem for compatibility with Windows.
 

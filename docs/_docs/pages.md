@@ -5,6 +5,10 @@ permalink: /docs/pages/
 
 In addition to [writing posts](../posts/), you might also want to add static pages (content that isn't date-based) to your Jekyll site. By taking advantage of the way Jekyll copies files and directories, this is easy to do.
 
+<div class="videoWrapper" >
+     <iframe src="https://www.youtube.com/embed/1na-IWfv08M?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+
 ## Homepage
 
 Just about every web server configuration you come across will look for an HTML

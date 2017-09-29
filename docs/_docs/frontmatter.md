@@ -22,6 +22,11 @@ then be available to you to access using Liquid tags both further down in the
 file and also in any layouts or includes that the page or post in question
 relies on.
 
+<div class="videoWrapper" >
+     <iframe src="https://www.youtube.com/embed/ZtEbGztktvc?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
 <div class="note warning">
   <h5>UTF-8 Character Encoding Warning</h5>
   <p>
@@ -65,13 +70,13 @@ front matter of a page or post.
 
           If set, this specifies the layout file to use. Use the layout file
           name without the file extension. Layout files must be placed in the
-          <code>_layouts</code> directory. 
+          <code>_layouts</code> directory.
 
         </p>
         <ul>
           <li>
-            Using <code>null</code> will produce a file without using a layout 
-            file. However this is overridden if the file is a post/document and has a 
+            Using <code>null</code> will produce a file without using a layout
+            file. However this is overridden if the file is a post/document and has a
             layout defined in the <a href="../configuration/#front-matter-defaults">
             frontmatter defaults</a>.
           </li>

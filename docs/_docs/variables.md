@@ -9,6 +9,10 @@ files, Jekyll makes a variety of data available via the [Liquid templating
 system](https://github.com/Shopify/liquid/wiki). The
 following is a reference of the available data.
 
+<div class="videoWrapper" >
+     <iframe src="https://www.youtube.com/embed/nLJBF2KiOZw?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+
 ## Global Variables
 
 <div class="mobile-side-scroller">

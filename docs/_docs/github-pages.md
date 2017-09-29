@@ -108,6 +108,10 @@ stored in a specially named `gh-pages` branch or in a `docs` folder on the
 will become available under a subpath of your user pages subdomain, such as
 `username.github.io/project` (unless a custom domain is specified).
 
+<div class="videoWrapper" >
+    <iframe src="https://www.youtube.com/embed/fqFjuX4VZmU?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+
 The Jekyll project repository itself is a perfect example of this branch
 structure—the [master branch]({{ site.repository }}) contains the
 actual software project for Jekyll, and the Jekyll website that you’re

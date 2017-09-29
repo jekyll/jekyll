@@ -8,6 +8,10 @@ Jekyll supports a flexible way to build permalinks, allowing you to leverage var
 
 You construct permalinks by creating a template URL where dynamic elements are represented by colon-prefixed keywords. The default template permalink is `/:categories/:year/:month/:day/:title.html`. Each of the colon-prefixed keywords is a template variable.
 
+<div class="videoWrapper" >
+     <iframe src="https://www.youtube.com/embed/938jDG_YPdc?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+
 ## Where to configure permalinks
 
 You can configure your site's permalinks through the [Configuration]({% link _docs/configuration.md %}) file or in the [Front Matter]({% link _docs/frontmatter.md %}) for each post, page, or collection.
