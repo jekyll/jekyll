@@ -14,6 +14,7 @@
 ### Development Fixes
 
   * Bump rubocop to use `v0.50.x` (#6368)
+  * Upgrade to Cucumber 3.0 (#6395)
 
 ### Minor Enhancements
 
