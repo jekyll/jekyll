@@ -25,6 +25,7 @@
 ### Site Enhancements
 
   * Docs: Update instructions (#6396)
+  * Add special styling for code-blocks run in shell (#6389)
 
 ## 3.6.0 / 2017-09-21
 
