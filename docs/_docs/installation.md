@@ -129,7 +129,16 @@ $ gem search jekyll --remote
 and you'll search for just the name `jekyll`, and in brackets will be latest version. Another way to check if you have the latest version is to run the command `gem outdated`. This will provide a list of all the gems on your system that need to be updated. If you aren't running the latest version, run this command:
 
 ```sh
+$ bundle update jekyll
+```
+
+Alternatively, if you don't have Bundler installed run:
+
+```sh
 $ gem update jekyll
 ```
+
+Please refer to our [upgrading section](../upgrading/) for major updates
+detailed instructions.
 
 Now that you’ve got everything up-to-date and installed, let’s get to work!
