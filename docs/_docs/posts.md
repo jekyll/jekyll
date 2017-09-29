@@ -78,7 +78,7 @@ digital assets along with your text content. While the syntax for linking to
 these resources differs between Markdown and Textile, the problem of working
 out where to store these files in your site is something everyone will face.
 
-There are a number of ways to include digital assets in Jekyll. 
+There are a number of ways to include digital assets in Jekyll.
 One common solution is to create a folder in the root of the project directory
 called something like `assets` or `downloads`, into which any images, downloads
 or other resources are placed. Then, from within any post, they can be linked
@@ -154,6 +154,38 @@ Note that the `post` variable only exists inside the `for` loop above. If
 you wish to access the currently-rendering page/posts's variables (the
 variables of the post/page that has the `for` loop in it), use the `page`
 variable instead.
+
+## Displaying post categories or tags
+
+Hey, that's pretty neat, but what about showing just some of your posts that are related to each other? For that you can use any of the [variables definable in Front Matter](https://jekyllrb.com/docs/frontmatter/). In the "typical post" section you can see how to define categories. Simply add the categories to your Front Matter as a [yaml list](https://en.wikipedia.org/wiki/YAML#Basic_components).
+
+Now that your posts have a category or multiple categories, you can make a page or a template displaying just the posts in those categories you specify. Here's a basic example of how to create a list of posts from a specific category.
+
+First, in the `_layouts` directory create a new file called `category.html` - in that file put (at least) the following:
+```
+---
+layout: page
+---
+{% for post in site.categories.[page.category] %}
+    <a href="{{ post.url | prepend: site.baseurl }}">
+      {{ post.title }}
+    </a>
+<hr>
+{% endfor %}
+```
+
+Next, in the root directory of your Jekyll install, create a new directory called `category` and then create a file for each category you want to list. For example, if you have a category `blog` then create a file in the new directory called `blog.html` with at least
+```
+---
+layout: category
+title: Blog
+category: blog
+---
+```
+
+In this case, the listing pages will be accessible at `{baseurl}/category/blog.html`
+
+While this example is done with categories, you can easily extend your lists to filter by tags or any other variable created with extensions.
 
 ## Post excerpts
 
