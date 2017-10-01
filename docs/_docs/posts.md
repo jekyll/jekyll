@@ -157,12 +157,20 @@ variable instead.
 
 ## Displaying post categories or tags
 
-Hey, that's pretty neat, but what about showing just some of your posts that are related to each other? For that you can use any of the [variables definable in Front Matter](https://jekyllrb.com/docs/frontmatter/). In the "typical post" section you can see how to define categories. Simply add the categories to your Front Matter as a [yaml list](https://en.wikipedia.org/wiki/YAML#Basic_components).
+Hey, that's pretty neat, but what about showing just some of your posts that are
+related to each other? For that you can use any of the [variables definable in
+Front Matter](https://jekyllrb.com/docs/frontmatter/). In the "typical post"
+section you can see how to define categories. Simply add the categories to your
+Front Matter as a [yaml
+list](https://en.wikipedia.org/wiki/YAML#Basic_components).
 
-Now that your posts have a category or multiple categories, you can make a page or a template displaying just the posts in those categories you specify. Here's a basic example of how to create a list of posts from a specific category.
+Now that your posts have a category or multiple categories, you can make a page
+or a template displaying just the posts in those categories you specify. Here's
+a basic example of how to create a list of posts from a specific category.
 
-First, in the `_layouts` directory create a new file called `category.html` - in that file put (at least) the following:
-```
+First, in the `_layouts` directory create a new file called `category.html` - in
+that file put (at least) the following:
+```html
 ---
 layout: page
 ---
@@ -174,8 +182,12 @@ layout: page
 {% endfor %}
 ```
 
-Next, in the root directory of your Jekyll install, create a new directory called `category` and then create a file for each category you want to list. For example, if you have a category `blog` then create a file in the new directory called `blog.html` with at least
-```
+Next, in the root directory of your Jekyll install, create a new directory
+called `category` and then create a file for each category you want to list. For
+example, if you have a category `blog` then create a file in the new directory
+called `blog.html` with at least
+
+```text
 ---
 layout: category
 title: Blog
@@ -185,7 +197,8 @@ category: blog
 
 In this case, the listing pages will be accessible at `{baseurl}/category/blog.html`
 
-While this example is done with categories, you can easily extend your lists to filter by tags or any other variable created with extensions.
+While this example is done with categories, you can easily extend your lists to
+filter by tags or any other variable created with extensions.
 
 ## Post excerpts
 
