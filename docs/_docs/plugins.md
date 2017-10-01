@@ -25,32 +25,36 @@ having to modify the Jekyll source itself.
 You have 3 options for installing plugins:
 
 1. In your site source root, make a `_plugins` directory. Place your plugins
-here. Any file ending in `*.rb` inside this directory will be loaded before
-Jekyll generates your site.
+   here. Any file ending in `*.rb` inside this directory will be loaded before
+   Jekyll generates your site.
+
 2. In your `_config.yml` file, add a new array with the key `plugins` and the
-values of the gem names of the plugins you'd like to use. An example:
+   values of the gem names of the plugins you'd like to use. An example:
 
+   ```yaml
+   # This will require each of these plugins automatically.
+   plugins:
+     - jekyll-gist
+     - jekyll-coffeescript
+     - jekyll-assets
+     - another-jekyll-plugin
+   ```
 
-        plugins:
-          - jekyll-gist
-          - jekyll-coffeescript
-          - jekyll-assets
-          - another-jekyll-plugin
-        # This will require each of these plugins automatically.
-
-    Then install your plugins using `gem install jekyll-gist jekyll-coffeescript jekyll-assets another-jekyll-plugin`
+   Then install your plugins using `gem install jekyll-gist jekyll-coffeescript jekyll-assets another-jekyll-plugin`
 
 3. Add the relevant plugins to a Bundler group in your `Gemfile`. An
-    example:
+   example:
 
-        group :jekyll_plugins do
-          gem "jekyll-gist"
-          gem "jekyll-coffeescript"
-          gem "jekyll-assets"
-          gem "another-jekyll-plugin"
-        end
+   ```ruby
+    group :jekyll_plugins do
+      gem "jekyll-gist"
+      gem "jekyll-coffeescript"
+      gem "jekyll-assets"
+      gem "another-jekyll-plugin"
+    end
+   ```
 
-    Now you need to install all plugins from your Bundler group by running single command `bundle install`.
+   Now you need to install all plugins from your Bundler group by running single command `bundle install`.
 
 <div class="note info">
   <h5>
@@ -117,7 +121,6 @@ This is a more complex generator that generates new pages:
 
 ```ruby
 module Jekyll
-
   class CategoryPage < Page
     def initialize(site, base, dir, category)
       @site = site
@@ -146,7 +149,6 @@ module Jekyll
       end
     end
   end
-
 end
 ```
 
