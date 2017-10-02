@@ -11,6 +11,7 @@
   * Improve documentation for theme-gem installation (#6387)
   * Fix diff syntax-highlighting (#6388)
   * Fix code-block highlighting in docs (#6398)
+  * Docs: Filtering Posts with categories, tags, or other variables (#6399)
 
 ### Development Fixes
 
