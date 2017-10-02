@@ -48,6 +48,7 @@ module Jekyll
   autoload :Excerpt,             "jekyll/excerpt"
   autoload :External,            "jekyll/external"
   autoload :FrontmatterDefaults, "jekyll/frontmatter_defaults"
+  autoload :FrontmatterWithDefaults, "jekyll/frontmatter_with_defaults"
   autoload :Hooks,               "jekyll/hooks"
   autoload :Layout,              "jekyll/layout"
   autoload :CollectionReader,    "jekyll/readers/collection_reader"
