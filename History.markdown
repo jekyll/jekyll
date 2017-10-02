@@ -12,6 +12,7 @@
   * Fix diff syntax-highlighting (#6388)
   * Fix code-block highlighting in docs (#6398)
   * Docs: Filtering Posts with categories, tags, or other variables (#6399)
+  * Fixes formatting on pre-formatted text. (#6405)
 
 ### Development Fixes
 
