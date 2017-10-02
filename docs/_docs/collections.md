@@ -454,7 +454,7 @@ works:
 
 Every album in the collection could be listed on a single page with a template:
 
-```html
+```liquid
 {% raw %}
 {% for album in site.albums %}
   <h2>{{ album.title }}</h2>

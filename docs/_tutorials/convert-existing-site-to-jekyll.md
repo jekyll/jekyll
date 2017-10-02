@@ -306,7 +306,7 @@ At minimum, a layout should contain `{% raw %}{{ content }}{% endraw %}`, which 
 
 ### For loops
 
-By the way, let's pause here to look at the `for` loop logic a little more closely. [For loops in Liquid](https://help.shopify.com/themes/liquid/tags/iteration-tags#for) are one of the most commonly used Liquid tags. *For loops* let you iterate through content in your Jekyll site and build out a result. The `for` loop also has [certain properties available](https://help.shopify.com/themes/liquid/objects/for-loops) (like first or last iteration) based on the loop's position in the loop as well.
+By the way, let's pause here to look at the `for` loop logic a little more closely. [For loops in Liquid](https://shopify.github.io/liquid/tags/iteration/) are one of the most commonly used Liquid tags. *For loops* let you iterate through content in your Jekyll site and build out a result. The `for` loop also has [certain properties available](https://help.shopify.com/themes/liquid/objects/for-loops) (like first or last iteration) based on the loop's position in the loop as well.
 
 We've only scratched the surface of what you can do with `for` loops in retrieving posts. For example, if you wanted to display posts from a specific category, you could do so by adding a `categories` property to your post's front matter and then look in those categories. Further, you could limit the number of results by adding a `limit` property. Here's an example:
 

@@ -65,7 +65,7 @@ sudo emerge -av dev-ruby/rubygems
 On Windows, you may need to install [RubyInstaller
 DevKit](https://wiki.github.com/oneclick/rubyinstaller/development-kit).
 
-On Android (with Termux) you can install all requirements by running: 
+On Android (with Termux) you can install all requirements by running:
 
 ```sh
 apt update && apt install libffi-dev clang ruby-dev make
@@ -261,7 +261,7 @@ The issue is caused by trying to copy a non-existing symlink.
 <div class="note">
   <h5>Please report issues you encounter!</h5>
   <p>
-  If you come across a bug, please <a href="{{ site.help_url }}/issues/new">create an issue</a>
+  If you come across a bug, please <a href="{{ site.repository }}/issues/new">create an issue</a>
   on GitHub describing the problem and any work-arounds you find so we can
   document it here for others.
   </p>
