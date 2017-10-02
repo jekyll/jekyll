@@ -10,6 +10,7 @@
   * Docs: GitHub Pages instructions (#6384)
   * Improve documentation for theme-gem installation (#6387)
   * Fix diff syntax-highlighting (#6388)
+  * Fix code-block highlighting in docs (#6398)
 
 ### Development Fixes
 
