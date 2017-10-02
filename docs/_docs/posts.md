@@ -170,7 +170,7 @@ a basic example of how to create a list of posts from a specific category.
 
 First, in the `_layouts` directory create a new file called `category.html` - in
 that file put (at least) the following:
-```html
+```
 ---
 layout: page
 ---
