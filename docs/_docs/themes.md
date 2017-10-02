@@ -47,7 +47,7 @@ To locate a theme's files on your computer:
 
 2. Open the theme's directory in Finder or Explorer:
 
-   ```shell
+   ```sh
    # On MacOS
    open $(bundle show minima)
    # On Windows
@@ -147,7 +147,7 @@ To install a gem-based theme:
 
 3. Add the following to your site's `_config.yml` to activate the theme:
 
-   ```sh
+   ```yaml
    theme: jekyll-theme-awesome
    ```
 
