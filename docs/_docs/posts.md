@@ -174,7 +174,7 @@ that file put (at least) the following:
 ---
 layout: page
 ---
-{% for post in site.categories.[page.category] %}
+{% for post in site.categories[page.category] %}
     <a href="{{ post.url | prepend: site.baseurl }}">
       {{ post.title }}
     </a>
