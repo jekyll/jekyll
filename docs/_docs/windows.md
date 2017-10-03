@@ -17,17 +17,17 @@ If you are using Windows 10 Anniversary Update, the easiest way to run Jekyll is
 
 First let's make sure all our packages / repositories are up to date. Open a new Command Prompt instance, and type the following:
 
-```shell
+```sh
 bash
 ```
 Your Command Prompt instance should now be a Bash instance. Now we must update our repo lists and packages.
 
-```shell
+```sh
 sudo apt-get update -y && sudo apt-get upgrade -y
 ```
 Now we can install Ruby. To do this we will use a repository from [BrightBox](https://www.brightbox.com/docs/ruby/ubuntu/), which hosts optimized versions of Ruby for Ubuntu.
 
-```shell
+```sh
 sudo apt-add-repository ppa:brightbox/ruby-ng
 sudo apt-get update
 sudo apt-get install ruby2.3 ruby2.3-dev build-essential
@@ -35,19 +35,19 @@ sudo apt-get install ruby2.3 ruby2.3-dev build-essential
 
 Next let's update our Ruby gems:
 
-```shell
+```sh
 sudo gem update
 ```
 
 Now all that is left to do is install Jekyll.
 
-```shell
+```sh
 sudo gem install jekyll bundler
 ```
 
 Check if Jekyll installed properly by running:
 
-```shell
+```sh
 jekyll -v
 ```
 
@@ -55,7 +55,7 @@ jekyll -v
 
 To start a new project named `my_blog`, just run:
 
-```shell
+```sh
 jekyll new my_blog
 ```
 
@@ -122,15 +122,13 @@ This gem is also needed in the github-pages and to get it running on Windows x64
 
 **Note:** In the current [pre release][nokogiriFails] it works out of the box with Windows x64 but this version is not referenced in the github-pages.
 
-```shell
+```sh
 choco install libxml2 -Source "https://www.nuget.org/api/v2/"
 
 choco install libxslt -Source "https://www.nuget.org/api/v2/"
 
 choco install libiconv -Source "https://www.nuget.org/api/v2/
-```
 
-```shell
 gem install nokogiri --^
    --with-xml2-include=C:\Chocolatey\lib\libxml2.2.7.8.7\build\native\include^
    --with-xml2-lib=C:\Chocolatey\lib\libxml2.redist.2.7.8.7\build\native\bin\v110\x64\Release\dynamic\cdecl^
@@ -183,7 +181,7 @@ Jekyll. This is especially relevant when you're running Jekyll on Windows.
 Additionally, you might need to change the code page of the console window to UTF-8 in case you get a "Liquid Exception: Incompatible character encoding" error during the site generation process. It can be done with the following command:
 
 ```sh
-$ chcp 65001
+chcp 65001
 ```
 
 
