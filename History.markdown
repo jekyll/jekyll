@@ -14,6 +14,7 @@
   * Docs: Filtering Posts with categories, tags, or other variables (#6399)
   * Fixes formatting on pre-formatted text. (#6405)
   * Docs: updates (#6407)
+  * Docs: Fix `collections_dir` example (#6408)
 
 ### Development Fixes
 
