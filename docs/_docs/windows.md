@@ -112,7 +112,7 @@ The development kit did not set the environment path for Ruby so we need to do i
 
  * Open command prompt in `C:\tools\DevKit2`
  * Execute `ruby dk.rb init` to create a file called `config.yml`
- * Edit the `config.yml` file and include the path to Ruby `- C:/tools/ruby22`
+ * Edit the `config.yml` file and include the path to Ruby `- C:/tools/ruby24`
  * Execute the following command to set the path: `ruby dk.rb install`
 
 
@@ -129,13 +129,12 @@ choco install libxslt -Source "https://www.nuget.org/api/v2/"
 
 choco install libiconv -Source "https://www.nuget.org/api/v2/
 
-gem install nokogiri --^
-   --with-xml2-include=C:\Chocolatey\lib\libxml2.2.7.8.7\build\native\include^
-   --with-xml2-lib=C:\Chocolatey\lib\libxml2.redist.2.7.8.7\build\native\bin\v110\x64\Release\dynamic\cdecl^
-   --with-iconv-include=C:\Chocolatey\lib\libiconv.1.14.0.11\build\native\include^
-   --with-iconv-lib=C:\Chocolatey\lib\libiconv.redist.1.14.0.11\build\native\bin\v110\x64\Release\dynamic\cdecl^
-   --with-xslt-include=C:\Chocolatey\lib\libxslt.1.1.28.0\build\native\include^
-   --with-xslt-lib=C:\Chocolatey\lib\libxslt.redist.1.1.28.0\build\native\bin\v110\x64\Release\dynamic
+gem install nokogiri -- --with-xml2-include=C:\Chocolatey\lib\libxml2.2.7.8.7\build\native\include
+gem install nokogiri -- --with-xml2-lib=C:\Chocolatey\lib\libxml2.redist.2.7.8.7\build\native\bin\v110\x64\Release\dynamic\cdecl
+gem install nokogiri -- --with-iconv-include=C:\Chocolatey\lib\libiconv.1.14.0.11\build\native\include
+gem install nokogiri -- --with-iconv-lib=C:\Chocolatey\lib\libiconv.redist.1.14.0.11\build\native\bin\v110\x64\Release\dynamic\cdecl
+gem install nokogiri -- --with-xslt-include=C:\Chocolatey\lib\libxslt.1.1.28.0\build\native\include
+gem install nokogiri -- --with-xslt-lib=C:\Chocolatey\lib\libxslt.redist.1.1.28.0\build\native\bin\v110\x64\Release\dynamic
 ```
 
 #### Install github-pages
