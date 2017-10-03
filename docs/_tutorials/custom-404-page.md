@@ -15,7 +15,7 @@ Simply add a `404.md` or `404.html` at the root of your site's source directory 
 
 If you plan to organize your files under subdirectories, the error page should have the following Front Matter Data, set: `permalink: /404.html`. This is to ensure that the compiled `404.html` resides at the root of your processed site, where it'll be picked by the server.
 
-```
+```markdown
 ---
 # example 404.md
 
@@ -34,19 +34,19 @@ Apache Web Servers load a configuration file named [`.htaccess`](http://www.htac
 
 Simply add the following to your `.htaccess` file.
 
-```
+```apache
 ErrorDocument 404 /404.html
 ```
 
 With an `.htaccess` file, you have the freedom to place your error page within a subdirectory.
 
-```
+```apache
 ErrorDocument 404 /error_pages/404.html
 ```
 
 Where the path is relative to your site's domain.
 
-More info on configuring Apache Error Pages can found in [official documentation](https://httpd.apache.org/docs/current/mod/core.html#errordocument). 
+More info on configuring Apache Error Pages can found in [official documentation](https://httpd.apache.org/docs/current/mod/core.html#errordocument).
 
 
 ## Hosting on Nginx server
@@ -55,7 +55,7 @@ The procedure is just as simple as configuring Apache servers, but slightly diff
 
 Add the following to the nginx configuration file, `nginx.conf`, which is usually located inside `/etc/nginx/` or `/etc/nginx/conf/`:
 
-```
+```nginx
 server {
   error_page 404 /404.html;
   location  /404.html {
@@ -63,4 +63,5 @@ server {
   }
 }
 ```
+
 The `location` directive prevents users from directly browsing the 404.html page.

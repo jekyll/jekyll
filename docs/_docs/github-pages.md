@@ -60,14 +60,14 @@ branch to GitHub. However, the subdirectory-like URL structure GitHub uses for
 Project Pages complicates the proper resolution of URLs. In order to assure your
 site builds properly, use the handy [URL filters](../templates/#filters):
 
-```html
 {% raw %}
+```liquid
 <!-- For styles with static names... -->
 <link href="{{ "/assets/css/style.css" | relative_url }}" rel="stylesheet">
 <!-- For documents/pages whose URLs can change... -->
 [{{ page.title }}]("{{ page.url | relative_url }}")
-{% endraw %}
 ```
+{% endraw %}
 
 This way you can preview your site locally from the site root on localhost,
 but when GitHub generates your pages from the `gh-pages` branch all the URLs

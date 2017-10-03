@@ -80,53 +80,52 @@ out where to store these files in your site is something everyone will face.
 
 There are a number of ways to include digital assets in Jekyll.
 One common solution is to create a folder in the root of the project directory
-called something like `assets` or `downloads`, into which any images, downloads
+called something like `assets`, into which any images, files
 or other resources are placed. Then, from within any post, they can be linked
 to using the site’s root as the path for the asset to include. Again, this will
 depend on the way your site’s (sub)domain and path are configured, but here are
-some examples (in Markdown) of how you could do this using the `site.url`
-variable in a post.
+some examples in Markdown of how you could do this using the `absolute_url`
+filter in a post.
 
 Including an image asset in a post:
 
-```text
+{% raw %}
+```markdown
 ... which is shown in the screenshot below:
-![My helpful screenshot]({% raw %}{{ site.url }}{% endraw %}/assets/screenshot.jpg)
+![My helpful screenshot]({{ "/assets/screenshot.jpg" | absolute_url }})
 ```
+{% endraw %}
 
 Linking to a PDF for readers to download:
 
-```text
-... you can [get the PDF]({% raw %}{{ site.url }}{% endraw %}/assets/mydoc.pdf) directly.
+{% raw %}
+```markdown
+... you can [get the PDF]({{ "/assets/mydoc.pdf" | absolute_url }}) directly.
 ```
+{% endraw %}
 
-<div class="note">
-  <h5>ProTip™: Link using just the site root URL</h5>
-  <p>
-    You can skip the <code>{% raw %}{{ site.url }}{% endraw %}</code> variable
-    if you <strong>know</strong> your site will only ever be displayed at the
-    root URL of your domain. In this case you can reference assets directly with
-    just <code>/path/file.jpg</code>.
-  </p>
+<div class="info">
+
 </div>
 
 ## A typical post
 
 Jekyll can handle many different iterations of the idea you might associate with a "post," however a standard blog style post, including a Title, Layout, Publishing Date, and Categories might look like this:
 
-```
+```markdown
 ---
 layout: post
 title:  "Welcome to Jekyll!"
 date:   2015-11-17 16:16:01 -0600
 categories: jekyll update
 ---
+
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `bundle exec jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
 To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
-
 ```
-Everything in between the first and second `---` are part of the YAML Front Matter, and everything after the second `---` will be rendered with Markdown and show up as "Content."
+
+Everything in between the first and second `---` are part of the YAML Front Matter, and everything after the second `---` will be rendered with Markdown and show up as "Content".
 
 ## Displaying an index of posts
 
@@ -136,15 +135,17 @@ you have a list of posts somewhere. Creating an index of posts on another page
 language](https://docs.shopify.com/themes/liquid/basics) and its tags. Here’s a
 basic example of how to create a list of links to your blog posts:
 
+{% raw %}
 ```html
 <ul>
-  {% raw %}{% for post in site.posts %}{% endraw %}
+  {% for post in site.posts %}
     <li>
-      <a href="{% raw %}{{ post.url }}{% endraw %}">{% raw %}{{ post.title }}{% endraw %}</a>
+      <a href="{{ post.url }}">{{ post.title }}</a>
     </li>
-  {% raw %}{% endfor %}{% endraw %}
+  {% endfor %}
 </ul>
 ```
+{% endraw %}
 
 Of course, you have full control over how (and where) you display your posts,
 and how you structure your site. You should read more about [how templates
@@ -170,24 +171,27 @@ a basic example of how to create a list of posts from a specific category.
 
 First, in the `_layouts` directory create a new file called `category.html` - in
 that file put (at least) the following:
-```
+
+{% raw %}
+```liquid
 ---
 layout: page
 ---
+
 {% for post in site.categories[page.category] %}
-    <a href="{{ post.url | prepend: site.baseurl }}">
+    <a href="{{ post.url | absolute_url }}">
       {{ post.title }}
     </a>
-<hr>
 {% endfor %}
 ```
+{% endraw %}
 
 Next, in the root directory of your Jekyll install, create a new directory
 called `category` and then create a file for each category you want to list. For
 example, if you have a category `blog` then create a file in the new directory
 called `blog.html` with at least
 
-```text
+```yaml
 ---
 layout: category
 title: Blog
@@ -208,31 +212,35 @@ Take the above example of an index of posts. Perhaps you want to include
 a little hint about the post's content by adding the first paragraph of each of
 your posts:
 
-```html
+{% raw %}
+```liquid
 <ul>
-  {% raw %}{% for post in site.posts %}{% endraw %}
+  {% for post in site.posts %}
     <li>
-      <a href="{% raw %}{{ post.url }}{% endraw %}">{% raw %}{{ post.title }}{% endraw %}</a>
-      {% raw %}{{ post.excerpt }}{% endraw %}
+      <a href="{{ post.url }}">{{ post.title }}</a>
+      {{ post.excerpt }}
     </li>
-  {% raw %}{% endfor %}{% endraw %}
+  {% endfor %}
 </ul>
 ```
+{% endraw %}
 
 Because Jekyll grabs the first paragraph you will not need to wrap the excerpt
 in `p` tags, which is already done for you. These tags can be removed with the
 following if you'd prefer:
 
-```html
-{% raw %}{{ post.excerpt | remove: '<p>' | remove: '</p>' }}{% endraw %}
+{% raw %}
+```liquid
+{{ post.excerpt | remove: '<p>' | remove: '</p>' }}
 ```
+{% endraw %}
 
 If you don't like the automatically-generated post excerpt, it can be
 explicitly overridden by adding an `excerpt` value to your post's YAML
 Front Matter. Alternatively, you can choose to define a custom
 `excerpt_separator` in the post's YAML front matter:
 
-```text
+```yaml
 ---
 excerpt_separator: <!--more-->
 ---
@@ -259,8 +267,9 @@ Jekyll also has built-in support for syntax highlighting of code snippets using
 either Pygments or Rouge, and including a code snippet in any post is easy.
 Just use the dedicated Liquid tag as follows:
 
-```text
-{% raw %}{% highlight ruby %}{% endraw %}
+{% raw %}
+```liquid
+{% highlight ruby %}
 def show
   @widget = Widget(params[:id])
   respond_to do |format|
@@ -268,8 +277,9 @@ def show
     format.json { render json: @widget }
   end
 end
-{% raw %}{% endhighlight %}{% endraw %}
+{% endhighlight %}
 ```
+{% endraw %}
 
 And the output will look like this:
 

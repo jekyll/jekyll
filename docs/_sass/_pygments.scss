@@ -8,7 +8,7 @@
   .n { color: #ffffff} /* Name */
   .o { color: #ffffff} /* Operator */
   .x { color: #ffffff} /* Other */
-  .p { color: #ffffff} /* Punctuation */
+  .p { color: #98b9ef} /* Punctuation */
   .cm { color: #87ceeb} /* Comment.Multiline */
   .cp { color: #cd5c5c} /* Comment.Preproc */
   .c1 { color: #87ceeb} /* Comment.Single */
@@ -45,7 +45,7 @@
   .nx { color: #ffffff} /* Name.Other */
   .py { color: #ffffff} /* Name.Property */
   .nt { color: #f0e68c} /* Name.Tag */
-  .nv { color: #98fb98} /* Name.Variable */
+  .nv { color: #88d472} /* Name.Variable */
   .ow { color: #ffffff} /* Operator.Word */
   .w { color: #ffffff} /* Text.Whitespace */
   .mf { color: #ffffff} /* Literal.Number.Float */
@@ -69,10 +69,6 @@
   .vi { color: #98fb98} /* Name.Variable.Instance */
   .il { color: #ffffff} /* Literal.Number.Integer.Long */
   .bash .nv {
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-         -o-user-select: none;
-            user-select: none;
+    user-select: none;
   }
 }

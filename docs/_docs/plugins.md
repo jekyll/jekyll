@@ -387,11 +387,11 @@ Liquid::Template.register_tag('render_time', Jekyll::RenderTimeTag)
 In the example above, we can place the following tag anywhere in one of our
 pages:
 
-```ruby
 {% raw %}
+```ruby
 <p>{% render_time page rendered at: %}</p>
-{% endraw %}
 ```
+{% endraw %}
 
 And we would get something like this on the page:
 
