@@ -46,12 +46,18 @@ defaults:
       layout: page
 ```
 
-**New**: You can optionally specify a directory if you want to store all your collections
+**From `v3.7.0`**: You can optionally specify a directory if you want to store all your collections
 in the same place:
 
 ```yaml
+collections_dir: my_collections
 collections:
-  collections_dir: my_collections
+  books:
+    foo: bar
+    output: true
+  recipes:
+    foo: baz
+    output: true
 ```
 
 Then Jekyll will look in `my_collections/_books` for the `books` collection, and
