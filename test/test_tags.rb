@@ -1,4 +1,5 @@
 # coding: utf-8
+# frozen_string_literal: true
 
 require "helper"
 
@@ -318,13 +319,62 @@ EOS
         )
       end
 
-      should "render markdown with rouge with line numbers" do
+      should "render markdown with rouge 2 with line numbers" do
+        skip "Skipped because using an older version of Rouge" if Utils::Rouge.old_api?
+        assert_match(
+          %(<table class="rouge-table"><tbody>) +
+            %(<tr><td class="gutter gl">) +
+            %(<pre class="lineno">1\n</pre></td>) +
+            %(<td class="code"><pre>test</pre></td></tr>) +
+            %(</tbody></table>),
+          @result
+        )
+      end
+
+      should "render markdown with rouge 1 with line numbers" do
+        skip "Skipped because using a newer version of Rouge" unless Utils::Rouge.old_api?
         assert_match(
           %(<table style="border-spacing: 0"><tbody>) +
             %(<tr><td class="gutter gl" style="text-align: right">) +
             %(<pre class="lineno">1</pre></td>) +
             %(<td class="code"><pre>test<span class="w">\n</span></pre></td></tr>) +
             %(</tbody></table>),
+          @result
+        )
+      end
+    end
+
+    context "post content has raw tag" do
+      setup do
+        content = <<-CONTENT
+---
+title: This is a test
+---
+
+```liquid
+{% raw %}
+{{ site.baseurl }}{% link _collection/name-of-document.md %}
+{% endraw %}
+```
+CONTENT
+        create_post(content)
+      end
+
+      should "render markdown with rouge 1" do
+        skip "Skipped because using a newer version of Rouge" unless Utils::Rouge.old_api?
+
+        assert_match(
+          %(<div class="language-liquid highlighter-rouge"><pre class="highlight"><code>),
+          @result
+        )
+      end
+
+      should "render markdown with rouge 2" do
+        skip "Skipped because using an older version of Rouge" if Utils::Rouge.old_api?
+
+        assert_match(
+          %(<div class="language-liquid highlighter-rouge">) +
+            %(<div class="highlight"><pre class="highlight"><code>),
           @result
         )
       end
@@ -417,13 +467,23 @@ This should not be highlighted, right?
 EOS
       end
 
-      should "should stop highlighting at boundary" do
+      should "should stop highlighting at boundary with rouge 2" do
+        skip "Skipped because using an older version of Rouge" if Utils::Rouge.old_api?
         expected = <<-EOS
-<p>This is not yet highlighted</p>
+<p>This is not yet highlighted</p>\n
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nx">test</span></pre></td></tr></tbody></table></code></pre></figure>\n
+<p>This should not be highlighted, right?</p>
+EOS
+        assert_match(expected, @result)
+      end
 
+      should "should stop highlighting at boundary with rouge 1" do
+        skip "Skipped because using a newer version of Rouge" unless Utils::Rouge.old_api?
+        expected = <<-EOS
+<p>This is not yet highlighted</p>\n
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>test<span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
+</span></pre></td></tr></tbody></table></code></pre></figure>\n
 <p>This should not be highlighted, right?</p>
 EOS
         assert_match(expected, @result)

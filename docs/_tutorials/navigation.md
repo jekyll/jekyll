@@ -33,7 +33,7 @@ You want to return a basic list of pages.
 **YAML**
 
 ```yaml
-docs_list_title: Docs
+docs_list_title: ACME Documentation
 docs:
 
 - title: Introduction
@@ -91,12 +91,14 @@ Suppose you wanted to sort the list by the `title`. To do this, convert the refe
 
 **Liquid**
 
+{% raw %}
 ```liquid
-{% raw %}{% assign doclist = site.data.samplelist.docs | sort: 'title'  %}
+{% assign doclist = site.data.samplelist.docs | sort: 'title'  %}
 {% for item in doclist %}
     <li><a href="{{ item.url }}" alt="{{ item.title }}">{{ item.title }}</a></li>
-{% endfor %}{% endraw %}
+{% endfor %}
 ```
+{% endraw %}
 
 **Result**
 
@@ -110,9 +112,11 @@ The items now appear in alphabetical order. The `sort` property in the Liquid fi
 
 See the [Liquid array filter](https://help.shopify.com/themes/liquid/filters/array-filters) for more filter options. Note that you can't simply use this syntax:
 
+{% raw %}
 ```liquid
-{% raw %}{% for item in site.data.samplelist.docs | sort: "title" %}{% endfor %}{% endraw %}
+{% for item in site.data.samplelist.docs | sort: "title" %}{% endfor %}
 ```
+{% endraw %}
 
 You have to convert `site.data.samplelist.docs` to a variable first using either `assign` or `capture` tags.
 
@@ -152,16 +156,18 @@ toc:
 
 **Liquid**
 
+{% raw %}
 ```liquid
-{% raw %}{% for item in site.data.samplelist.toc %}
+{% for item in site.data.samplelist.toc %}
     <h3>{{ item.title }}</h3>
       <ul>
         {% for entry in item.subfolderitems %}
           <li><a href="{{ entry.url }}">{{ entry.page }}</a></li>
         {% endfor %}
       </ul>
-  {% endfor %}{% endraw %}
+  {% endfor %}
 ```
+{% endraw %}
 
 **Result**
 <div class="highlight result">
@@ -242,8 +248,9 @@ toc2:
 
 **Liquid**
 
+{% raw %}
 ```liquid
-{% raw %}<div>
+<div>
 {% if site.data.samplelist.toc2[0] %}
   {% for item in site.data.samplelist.toc2 %}
     <h3>{{ item.title }}</h3>
@@ -263,8 +270,9 @@ toc2:
       {% endif %}
     {% endfor %}
 {% endif %}
-</div>{% endraw %}
+</div>
 ```
+{% endraw %}
 
 **Result**
 
@@ -327,13 +335,16 @@ sidebar: toc
 
 **Liquid**
 
+{% raw %}
 ```liquid
-{% raw %}<ul>
+<ul>
     {% for item in site.data.samplelist[page.sidebar] %}
       <li><a href="{{ item.url }}">{{ item.title }}</a></li>
     {% endfor %}
-</ul>{% endraw %}
+</ul>
 ```
+{% endraw %}
+
 **Result**
 
 <div class="highlight result">
@@ -361,13 +372,15 @@ In addition to inserting items from the YAML data file into your list, you also 
 ```
 **Liquid**
 
+{% raw %}
 ```liquid
-{% raw %}{% for item in site.data.samplelist.docs %}
+{% for item in site.data.samplelist.docs %}
     <li class="{% if item.url == page.url %}active{% endif %}">
       <a href="{{ item.url }}">{{ item.title }}</a>
     </li>
-{% endfor %}{% endraw %}
+{% endfor %}
 ```
+{% endraw %}
 
 **Result**
 
@@ -412,15 +425,17 @@ docs2:
 
 **Liquid**
 
+{% raw %}
 ```liquid
-{% raw %}<ul>
+<ul>
     {% for item in site.data.samplelist.docs2 %}
       {% if item.version == 1 %}
         <li><a href="{{ item.url }}">{{ item.title }}</a></li>
       {% endif %}
     {% endfor %}
-</ul>{% endraw %}
+</ul>
 ```
+{% endraw %}
 
 **Result**
 
@@ -491,16 +506,18 @@ Note that even though `category` is used in the doc front matter, `category` is 
 
 If you wanted to simply get all docs in the collection for a specific category, you could use a `for` loop with an `if` condition to check for a specific category:
 
+{% raw %}
 ```liquid
-{% raw %}<h3>Getting Started</h3>
+<h3>Getting Started</h3>
 <ul>
     {% for doc in site.docs %}
       {% if doc.category == "getting-started" %}
         <li><a href="{{ doc.url }}">{{ doc.title }}</a></li>
       {% endif %}
     {% endfor %}
-</ul>{% endraw %}
+</ul>
 ```
+{% endraw %}
 
 The result would be as follows:
 
@@ -523,8 +540,9 @@ Here's the code for getting lists of pages grouped under their corresponding cat
 
 **Liquid**
 
+{% raw %}
 ```liquid
-{% raw %}{% assign mydocs = site.docs | group_by: 'category' %}
+{% assign mydocs = site.docs | group_by: 'category' %}
 {% for cat in mydocs %}
 <h2>{{ cat.name | capitalize }}</h2>
     <ul>
@@ -533,8 +551,9 @@ Here's the code for getting lists of pages grouped under their corresponding cat
         <li><a href="{{ item.url }}">{{ item.title }}</a></li>
       {% endfor %}
     </ul>
-{% endfor %}{% endraw %}
+{% endfor %}
 ```
+{% endraw %}
 
 **Result**
 
@@ -574,6 +593,6 @@ After getting the category name, we assign the variable `items` for the docs and
 
 The `for item in items` loop looks through each `item` and gets the `title` and `url` to form the list item link.
 
-For more details on the `group_by` filter, see [Jekyll's Templates documentation](https://jekyllrb.com/docs/templates/) as well as [this Siteleaf tutorial](https://www.siteleaf.com/blog/advanced-liquid-group-by/). For more details on the `sort` filter, see [sort](https://help.shopify.com/themes/liquid/filters/array-filters#sort) in Liquid's documentation.
+For more details on the `group_by` filter, see [Jekyll's Templates documentation](https://jekyllrb.com/docs/templates/) as well as [this Siteleaf tutorial](https://www.siteleaf.com/blog/advanced-liquid-group-by/). For more details on the `sort` filter, see [sort](https://shopify.github.io/liquid/filters/sort/) in Liquid's documentation.
 
 Whether you use properties in your doc's front matter to retrieve your pages or a YAML data file, in both cases you can programmatically build a more robust navigation for your site.

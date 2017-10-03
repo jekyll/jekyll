@@ -186,16 +186,31 @@ following is a reference of the available data.
       </p></td>
     </tr>
     <tr>
+      <td><p><code>site.url</code></p></td>
+      <td><p>
+
+        Contains the url of your site as it is configured in the <code>_config.yml</code>.
+        For example, if you have <code>url: http://mysite.com</code>
+        in your configuration file, then it will be accessible in Liquid as
+        <code>site.url</code>. For the development environment there is
+        <a href="/news/#3-siteurl-is-set-by-the-development-server">an exception</a>,
+        if you are running <code>jekyll serve</code> in a development environment
+        <code>site.url</code> will be set to the value of <code>host</code>,
+        <code>port</code>, and SSL-related options. This defaults to
+        <code>url: http://localhost:4000</code>.
+
+      </p></td>
+    </tr>
+    <tr>
       <td><p><code>site.[CONFIGURATION_DATA]</code></p></td>
       <td><p>
 
         All the variables set via the command line and your
         <code>_config.yml</code> are available through the <code>site</code>
-        variable. For example, if you have <code>url: http://mysite.com</code>
-        in your configuration file, then in your Posts and Pages it will be
-        stored in <code>site.url</code>. Jekyll does not parse changes to
-        <code>_config.yml</code> in <code>watch</code> mode, you must restart
-        Jekyll to see changes to variables.
+        variable. For example, if you have <code>foo: bar</code>
+        in your configuration file, then it will be accessible in Liquid as <code>site.foo</code>.
+        Jekyll does not parse changes to <code>_config.yml</code> in
+        <code>watch</code> mode, you must restart Jekyll to see changes to variables.
 
       </p></td>
     </tr>
@@ -265,8 +280,9 @@ following is a reference of the available data.
       <td><p><code>page.id</code></p></td>
       <td><p>
 
-        An identifier unique to the Post (useful in RSS feeds). e.g.
+        An identifier unique to a document in a Collection or a Post (useful in RSS feeds). e.g.
         <code>/2008/12/14/my-post</code>
+        <code>/my-collection/my-document</code>
 
       </p></td>
     </tr>

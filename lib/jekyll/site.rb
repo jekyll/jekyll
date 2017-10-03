@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# frozen_string_literal: true
 
 require "csv"
 
@@ -73,24 +73,22 @@ module Jekyll
       render
       cleanup
       write
-      print_stats
+      print_stats if config["profile"]
     end
 
     def print_stats
-      if @config["profile"]
-        puts @liquid_renderer.stats_table
-      end
+      puts @liquid_renderer.stats_table
     end
 
     # Reset Site details.
     #
     # Returns nothing
     def reset
-      if config["time"]
-        self.time = Utils.parse_date(config["time"].to_s, "Invalid time in _config.yml.")
-      else
-        self.time = Time.now
-      end
+      self.time = if config["time"]
+                    Utils.parse_date(config["time"].to_s, "Invalid time in _config.yml.")
+                  else
+                    Time.now
+                  end
       self.layouts = {}
       self.pages = []
       self.static_files = []
@@ -239,7 +237,7 @@ module Jekyll
       posts.docs.each do |p|
         p.data[post_attr].each { |t| hash[t] << p } if p.data[post_attr]
       end
-      hash.values.each { |posts| posts.sort!.reverse! }
+      hash.each_value { |posts| posts.sort!.reverse! }
       hash
     end
 
@@ -450,7 +448,7 @@ module Jekyll
 
     private
     def render_docs(payload)
-      collections.each do |_, collection|
+      collections.each_value do |collection|
         collection.docs.each do |document|
           if regenerator.regenerate?(document)
             document.output = Jekyll::Renderer.new(self, document, payload).run

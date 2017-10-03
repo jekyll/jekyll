@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# frozen_string_literal: true
 
 module Jekyll
   class Document
@@ -150,7 +150,7 @@ module Jekyll
     #
     # Returns true if extname == .coffee, false otherwise.
     def coffeescript_file?
-      ".coffee" == extname
+      extname == ".coffee"
     end
 
     # Determine whether the file should be rendered with Liquid.
@@ -161,12 +161,19 @@ module Jekyll
       !(coffeescript_file? || yaml_file?)
     end
 
+    # Determine whether the file should be rendered with a layout.
+    #
+    # Returns true if the Front Matter specifies that `layout` is set to `none`.
+    def no_layout?
+      data["layout"] == "none"
+    end
+
     # Determine whether the file should be placed into layouts.
     #
-    # Returns false if the document is either an asset file or a yaml file,
-    #   true otherwise.
+    # Returns false if the document is set to `layouts: none`, or is either an
+    #   asset file or a yaml file. Returns true otherwise.
     def place_in_layout?
-      !(asset_file? || yaml_file?)
+      !(asset_file? || yaml_file? || no_layout?)
     end
 
     # The URL template where the document would be accessible.
@@ -196,7 +203,7 @@ module Jekyll
     #
     # Returns the computed URL for the document.
     def url
-      @url = URL.new({
+      @url ||= URL.new({
         :template     => url_template,
         :placeholders => url_placeholders,
         :permalink    => permalink,
@@ -259,11 +266,8 @@ module Jekyll
           merge_defaults
           read_content(opts)
           read_post_data
-        rescue SyntaxError => e
-          Jekyll.logger.error "Error:", "YAML Exception reading #{path}: #{e.message}"
         rescue => e
-          raise e if e.is_a? Jekyll::Errors::FatalException
-          Jekyll.logger.error "Error:", "could not read file #{path}: #{e.message}"
+          handle_read_error(e)
         end
       end
     end
@@ -367,7 +371,7 @@ module Jekyll
       if data.key?(method.to_s)
         Jekyll::Deprecator.deprecation_message "Document##{method} is now a key "\
                            "in the #data hash."
-        Jekyll::Deprecator.deprecation_message "Called by #{caller.first}."
+        Jekyll::Deprecator.deprecation_message "Called by #{caller(0..0)}."
         data[method.to_s]
       else
         super
@@ -455,6 +459,19 @@ module Jekyll
       populate_categories
       populate_tags
       generate_excerpt
+    end
+
+    private
+    def handle_read_error(error)
+      if error.is_a? SyntaxError
+        Jekyll.logger.error "Error:", "YAML Exception reading #{path}: #{error.message}"
+      else
+        Jekyll.logger.error "Error:", "could not read file #{path}: #{error.message}"
+      end
+
+      if site.config["strict_front_matter"] || error.is_a?(Jekyll::Errors::FatalException)
+        raise error
+      end
     end
 
     private

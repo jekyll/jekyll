@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #############################################################################
 #
 # Site tasks - https://jekyllrb.com
@@ -67,7 +69,7 @@ namespace :site do
       "redirect_from" => "/conduct/index.html",
       "editable"      => false,
     }
-    siteify_file("CONDUCT.markdown", front_matter)
+    siteify_file("CODE_OF_CONDUCT.markdown", front_matter)
   end
 
   desc "Copy the contributing file"

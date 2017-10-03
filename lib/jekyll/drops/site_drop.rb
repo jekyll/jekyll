@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# frozen_string_literal: true
 
 module Jekyll
   module Drops
@@ -36,6 +36,9 @@ module Jekyll
       def collections
         @site_collections ||= @obj.collections.values.sort_by(&:label).map(&:to_liquid)
       end
+
+      # return nil for `{{ site.config }}` even if --config was passed via CLI
+      def config; end
 
       private
       def_delegator :@obj, :config, :fallback_data

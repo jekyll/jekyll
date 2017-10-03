@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 require "colorator"
 
@@ -354,7 +356,10 @@ class TestConfiguration < JekyllUnitTest
         .and_return({ "baseurl" => "http://example.com" })
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
       assert_equal \
-        site_configuration({ "baseurl" => "http://example.com" }),
+        site_configuration({
+          "baseurl" => "http://example.com",
+          "config"  => @paths[:other],
+        }),
         Jekyll.configuration(test_config.merge({ "config" => @paths[:other] }))
     end
 
@@ -366,7 +371,10 @@ class TestConfiguration < JekyllUnitTest
         .and_return({ "baseurl" => "http://example.com" })
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
       assert_equal \
-        site_configuration({ "baseurl" => "http://example.com" }),
+        site_configuration({
+          "baseurl" => "http://example.com",
+          "config"  => @paths[:other],
+        }),
         Jekyll.configuration(test_config.merge({ :config => @paths[:other] }))
     end
 
@@ -374,15 +382,18 @@ class TestConfiguration < JekyllUnitTest
       allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return({})
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
       assert_equal \
-        site_configuration,
+        site_configuration({ "config" => [@paths[:empty]] }),
         Jekyll.configuration(test_config.merge({ "config" => [@paths[:empty]] }))
     end
 
     should "successfully load a TOML file" do
       Jekyll.logger.log_level = :warn
       assert_equal \
-        site_configuration({ "baseurl" => "/you-beautiful-blog-you",
-                             "title"   => "My magnificent site, wut", }),
+        site_configuration({
+          "baseurl" => "/you-beautiful-blog-you",
+          "title"   => "My magnificent site, wut",
+          "config"  => [@paths[:toml]],
+        }),
         Jekyll.configuration(test_config.merge({ "config" => [@paths[:toml]] }))
       Jekyll.logger.log_level = :info
     end
@@ -397,7 +408,9 @@ class TestConfiguration < JekyllUnitTest
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:toml]}")
       assert_equal(
-        site_configuration,
+        site_configuration({
+          "config" => [@paths[:default], @paths[:other], @paths[:toml]],
+        }),
         Jekyll.configuration(
           test_config.merge(
             { "config" => [@paths[:default], @paths[:other], @paths[:toml]] }
@@ -422,7 +435,10 @@ class TestConfiguration < JekyllUnitTest
         .to receive(:puts)
         .with("Configuration file: #{@paths[:other]}")
       assert_equal \
-        site_configuration({ "baseurl" => "http://example.com" }),
+        site_configuration({
+          "baseurl" => "http://example.com",
+          "config"  => [@paths[:default], @paths[:other]],
+        }),
         Jekyll.configuration(
           test_config.merge({ "config" => [@paths[:default], @paths[:other]] })
         )
@@ -492,6 +508,38 @@ class TestConfiguration < JekyllUnitTest
           },
         },
       })
+    end
+  end
+
+  context "folded YAML string" do
+    setup do
+      @tester = Configuration.new
+    end
+
+    should "ignore newlines in that string entirely from a sample file" do
+      config = Jekyll.configuration(
+        @tester.read_config_file(
+          source_dir("_config_folded.yml")
+        )
+      )
+      assert_equal(
+        config["folded_string"],
+        "This string of text will ignore newlines till the next key.\n"
+      )
+      assert_equal(
+        config["clean_folded_string"],
+        "This string of text will ignore newlines till the next key."
+      )
+    end
+
+    should "ignore newlines in that string entirely from the template file" do
+      config = Jekyll.configuration(
+        @tester.read_config_file(
+          File.expand_path("../lib/site_template/_config.yml", File.dirname(__FILE__))
+        )
+      )
+      assert_includes config["description"], "an awesome description"
+      refute_includes config["description"], "\n"
     end
   end
 end

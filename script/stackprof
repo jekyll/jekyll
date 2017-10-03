@@ -3,10 +3,10 @@
 require "bundler/setup"
 require "json"
 require "stackprof"
-require File.expand_path("../../lib/jekyll", __FILE__)
+require File.expand_path("../lib/jekyll", __dir__)
 
 MODE = ARGV.first || "cpu"
-PROF_OUTPUT_FILE = File.expand_path("../../tmp/stackprof-#{MODE}-#{Time.now.strftime("%Y%m%d%H%M")}.dump", __FILE__)
+PROF_OUTPUT_FILE = File.expand_path("../tmp/stackprof-#{MODE}-#{Time.now.strftime("%Y%m%d%H%M")}.dump", __dir__)
 
 puts "Stackprof Mode: #{MODE}"
 

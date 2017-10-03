@@ -25,27 +25,36 @@ having to modify the Jekyll source itself.
 You have 3 options for installing plugins:
 
 1. In your site source root, make a `_plugins` directory. Place your plugins
-here. Any file ending in `*.rb` inside this directory will be loaded before
-Jekyll generates your site.
+   here. Any file ending in `*.rb` inside this directory will be loaded before
+   Jekyll generates your site.
+
 2. In your `_config.yml` file, add a new array with the key `plugins` and the
-values of the gem names of the plugins you'd like to use. An example:
+   values of the gem names of the plugins you'd like to use. An example:
 
+   ```yaml
+   # This will require each of these plugins automatically.
+   plugins:
+     - jekyll-gist
+     - jekyll-coffeescript
+     - jekyll-assets
+     - another-jekyll-plugin
+   ```
 
-        plugins: [jekyll-coffeescript, jekyll-watch, jekyll-assets]
-        # This will require each of these plugins automatically.
-
-    Then install your plugins using `gem install jekyll-coffeescript jekyll-watch jekyll-assets`
+   Then install your plugins using `gem install jekyll-gist jekyll-coffeescript jekyll-assets another-jekyll-plugin`
 
 3. Add the relevant plugins to a Bundler group in your `Gemfile`. An
-    example:
+   example:
 
-        group :jekyll_plugins do
-          gem "my-jekyll-plugin"
-          gem "another-jekyll-plugin"
-        end
+   ```ruby
+    group :jekyll_plugins do
+      gem "jekyll-gist"
+      gem "jekyll-coffeescript"
+      gem "jekyll-assets"
+      gem "another-jekyll-plugin"
+    end
+   ```
 
-    Now you need to install all plugins from your Bundler group by running single command `bundle install`
-
+   Now you need to install all plugins from your Bundler group by running single command `bundle install`.
 
 <div class="note info">
   <h5>
@@ -59,13 +68,15 @@ values of the gem names of the plugins you'd like to use. An example:
   </p>
 </div>
 
-In general, plugins you make will fall into one of five categories:
+In general, plugins you make will fall broadly into one of five categories:
 
 1. [Generators](#generators)
 2. [Converters](#converters)
 3. [Commands](#commands)
 4. [Tags](#tags)
 5. [Hooks](#hooks)
+
+See the bottom of the page for a [list of available plugins](#available-plugins)
 
 ## Generators
 
@@ -110,7 +121,6 @@ This is a more complex generator that generates new pages:
 
 ```ruby
 module Jekyll
-
   class CategoryPage < Page
     def initialize(site, base, dir, category)
       @site = site
@@ -139,7 +149,6 @@ module Jekyll
       end
     end
   end
-
 end
 ```
 
@@ -378,11 +387,11 @@ Liquid::Template.register_tag('render_time', Jekyll::RenderTimeTag)
 In the example above, we can place the following tag anywhere in one of our
 pages:
 
-```ruby
 {% raw %}
+```ruby
 <p>{% render_time page rendered at: %}</p>
-{% endraw %}
 ```
+{% endraw %}
 
 And we would get something like this on the page:
 
@@ -754,13 +763,13 @@ LESS.js files during generation.
 - [AMP-Jekyll by Juuso Mikkonen](https://github.com/juusaw/amp-jekyll): Generate [Accelerated Mobile Pages](https://www.ampproject.org) of Jekyll posts.
 - [Jekyll Art Gallery plugin](https://github.com/alexivkin/Jekyll-Art-Gallery-Plugin): An advanced art/photo gallery generation plugin for creating galleries from a set of image folders. Supports image tagging, thumbnails, sorting, image rotation, post-processing (remove EXIF, add watermark), multiple collections and much more.
 - [jekyll-ga](https://github.com/developmentseed/jekyll-ga): A Jekyll plugin that downloads Google Analytics data and adds it to posts. Useful for making a site that lists "most popular" content. [Read the introduction](https://developmentseed.org/blog/google-analytics-jekyll-plugin/) post on the developmentSEED blog.
+- [jekyll-multi-paginate](https://github.com/fadhilnapis/jekyll-multi-paginate): Simple Jekyll paginator for multiple page. Ease you to make pagination on multiple page especially like multiple language.
 
 #### Converters
 
+- [Pug plugin by Doug Beney](https://github.com/DougBeney/jekyll-pug): Pug (previously Jade) converter for Jekyll.
 - [Textile converter](https://github.com/jekyll/jekyll-textile-converter): Convert `.textile` files into HTML. Also includes the `textilize` Liquid filter.
 - [Slim plugin](https://github.com/slim-template/jekyll-slim): Slim converter and includes for Jekyll with support for Liquid tags.
-- [Jade plugin by John Papandriopoulos](https://github.com/snappylabs/jade-jekyll-plugin): Jade converter for Jekyll.
-- [Pug plugin by Josh Waller](https://github.com/mdxprograms/pug-jekyll-plugin): Pug (previously Jade) converter for Jekyll.
 - [HAML plugin by Sam Z](https://gist.github.com/517556): HAML converter for Jekyll.
 - [HAML-Sass Converter by Adam Pearson](https://gist.github.com/481456): Simple HAML-Sass converter for Jekyll. [Fork](https://gist.github.com/528642) by Sam X.
 - [Sass SCSS Converter by Mark Wolfe](https://gist.github.com/960150): Sass converter which uses the new CSS compatible syntax, based Sam X’s fork above.
@@ -810,6 +819,9 @@ LESS.js files during generation.
 
 #### Tags
 
+You can find a few useful plugins at the following locations:
+
+- [Jekyll-gist](https://github.com/jekyll/jekyll-gist): Use the `gist` tag to easily embed a GitHub Gist onto your site. This works with public or secret gists.
 - [Asset Path Tag](https://github.com/samrayner/jekyll-asset-path-plugin) by [Sam Rayner](http://www.samrayner.com/): Allows organisation of assets into subdirectories by outputting a path for a given file relative to the current post or page.
 - [Delicious Plugin by Christian Hellsten](https://github.com/christianhellsten/jekyll-plugins): Fetches and renders bookmarks from delicious.com.
 - [Ultraviolet Plugin by Steve Alex](https://gist.github.com/480380): Jekyll tag for the [Ultraviolet](https://github.com/grosser/ultraviolet) code highligher.
@@ -871,6 +883,11 @@ LESS.js files during generation.
 - [Jekyll Cloudinary](https://nhoizey.github.io/jekyll-cloudinary/) by [Nicolas Hoizey](https://nicolas-hoizey.com/): a Jekyll plugin adding a Liquid tag to ease the use of Cloudinary for responsive images in your Markdown/Kramdown posts.
 - [jekyll-include-absolute-plugin](https://github.com/tnhu/jekyll-include-absolute-plugin) by [Tan Nhu](https://github.com/tnhu): A Jekyll plugin to include a file from its path relative to Jekyll's source folder.
 - [Jekyll Download Tag](https://github.com/mattg/jekyll-download-tag): A Liquid tag that acts like `include`, but for external resources.
+- [Jekyll Brand Social Wall](https://github.com/MediaComem/jekyll-brand-social-wall): A jekyll plugin to generate a social wall with your favorite social networks
+- [Jekyll If File Exists](https://github.com/k-funk/jekyll-if-file-exists): A Jekyll Plugin that checks if a file exists with an if/else block.
+- [BibSonomy](https://github.com/rjoberon/bibsonomy-jekyll): Jekyll
+  plugin to generate publication lists from [BibSonomy](https://www.bibsonomy.org/).
+
 
 #### Collections
 
@@ -880,6 +897,7 @@ LESS.js files during generation.
 
 #### Other
 
+- [Analytics for Jekyll](https://github.com/hendrikschneider/jekyll-analytics) by Hendrik Schneider: An effortless way to add  various trackers like Google Analytics, Piwik, etc. to your site
 - [ditaa-ditaa](https://github.com/tmthrgd/ditaa-ditaa) by Tom Thorogood: a drastic revision of jekyll-ditaa that renders diagrams drawn using ASCII art into PNG images.
 - [Pygments Cache Path by Raimonds Simanovskis](https://github.com/rsim/blog.rayapps.com/blob/master/_plugins/pygments_cache_patch.rb): Plugin to cache syntax-highlighted code from Pygments.
 - [Draft/Publish Plugin by Michael Ivey](https://gist.github.com/49630): Save posts as drafts.
@@ -923,14 +941,6 @@ LESS.js files during generation.
 - [Jekyll-Post](https://github.com/robcrocombe/jekyll-post): A CLI tool to easily draft, edit, and publish Jekyll posts.
 - [jekyll-numbered-headings](https://github.com/muratayusuke/jekyll-numbered-headings): Adds ordered number to headings.
 - [jekyll-pre-commit](https://github.com/mpchadwick/jekyll-pre-commit): A framework for running checks against your posts using a git pre-commit hook before you publish them.
-
-#### Editors
-
-- [sublime-jekyll](https://github.com/23maverick23/sublime-jekyll): A Sublime Text package for Jekyll static sites. This package should help creating Jekyll sites and posts easier by providing access to key template tags and filters, as well as common completions and a current date/datetime command (for dating posts). You can install this package manually via GitHub, or via [Package Control](https://packagecontrol.io/packages/Jekyll).
-- [vim-jekyll](https://github.com/parkr/vim-jekyll): A vim plugin to generate
-  new posts and run `jekyll build` all without leaving vim.
-- [markdown-writer](https://atom.io/packages/markdown-writer): An Atom package for Jekyll. It can create new posts/drafts, manage tags/categories, insert link/images and add many useful key mappings.
-- [Wordpress2Jekyll](https://wordpress.org/plugins/wp2jekyll/): A Wordpress plugin that allows you to use Wordpress as your editor and (automatically) export content in to Jekyll. WordPress2Jekyll attempts to marry these two systems together in order to make a site that can be easily managed from all devices.
 
 <div class="note info">
   <h5>Jekyll Plugins Wanted</h5>

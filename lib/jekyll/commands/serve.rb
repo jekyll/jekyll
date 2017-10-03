@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   module Commands
     class Serve < Command
@@ -104,7 +106,7 @@ module Jekyll
         private
         def start_up_webrick(opts, destination)
           server = WEBrick::HTTPServer.new(webrick_opts(opts)).tap { |o| o.unmount("") }
-          server.mount(opts["baseurl"], Servlet, destination, file_handler_opts)
+          server.mount(opts["baseurl"].to_s, Servlet, destination, file_handler_opts)
           Jekyll.logger.info "Server address:", server_address(server, opts)
           launch_browser server, opts if opts["open_url"]
           boot_or_detach server, opts
@@ -136,7 +138,7 @@ module Jekyll
 
         private
         def format_url(ssl_enabled, address, port, baseurl = nil)
-          format("%{prefix}://%{address}:%{port}%{baseurl}", {
+          format("%<prefix>s://%<address>s:%<port>i%<baseurl>s", {
             :prefix  => ssl_enabled ? "https" : "http",
             :address => address,
             :port    => port,
@@ -234,7 +236,7 @@ module Jekyll
 
         private
         def mime_types
-          file = File.expand_path("../mime.types", File.dirname(__FILE__))
+          file = File.expand_path("../mime.types", __dir__)
           WEBrick::HTTPUtils.load_mime_types(file)
         end
       end

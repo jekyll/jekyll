@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestGeneratedSite < JekyllUnitTest
@@ -19,6 +21,10 @@ class TestGeneratedSite < JekyllUnitTest
 
     should "insert site.posts into the index" do
       assert @index.include?("#{@site.posts.size} Posts")
+    end
+
+    should "insert variable from layout into the index" do
+      assert @index.include?("variable from layout")
     end
 
     should "render latest post's content" do
