@@ -16,6 +16,7 @@
   * Docs: updates (#6407)
   * Docs: Fix `collections_dir` example (#6408)
   * Docs: Renaming duplicate of &#34;Scenario 6&#34; to &#34;Scenario 7&#34; (#6411)
+  * Docs: Mark `collection_dir` as unreleased (#6412)
 
 ### Development Fixes
 
