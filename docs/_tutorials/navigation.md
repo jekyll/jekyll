@@ -401,7 +401,7 @@ In this case, assume `Deployment` is the current page.
 
 To make sure the `item.url` (stored in the YAML file) matches the `page.url`, it can be helpful to print the `{% raw %}{{ page.url }}{% endraw %}` to the page.
 
-## Scenario 6: Including items conditionally
+## Scenario 7: Including items conditionally
 
 You might want to include items conditionally in your list. For example, maybe you have multiple site outputs and only want to include the sidebar item for certain outputs. You can add properties in each list item and then use those properties to conditionally include the content.
 
@@ -448,7 +448,7 @@ docs2:
 
 The `Deployment` page is excluded because its `version` is `2`.
 
-## Scenario 7: Retrieving items based on front matter properties
+## Scenario 8: Retrieving items based on front matter properties
 
 If you don't want to store your navigation items in a YAML file in your `_data` folder, you can use `for` loops to look through the YAML front matter of each page or collection and get the content based on properties in the front matter.
 
