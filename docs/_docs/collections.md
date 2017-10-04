@@ -46,22 +46,14 @@ defaults:
       layout: page
 ```
 
-**From `v3.7.0`**: You can optionally specify a directory if you want to store all your collections
-in the same place:
+<div class="note unreleased">
+  <h5>Gather your collections</h5>
 
-```yaml
-collections_dir: my_collections
-collections:
-  books:
-    foo: bar
-    output: true
-  recipes:
-    foo: baz
-    output: true
-```
+  <p>From <code>v3.7.0</code> you can optionally specify a directory to store all your collections in the same place with <code>collections_dir: my_collections</code></p>
 
-Then Jekyll will look in `my_collections/_books` for the `books` collection, and
-in `my_collections/_recipes` for the `recipes` collection.
+  <p>Then Jekyll will look in <code>my_collections/_books</code> for the <code>books</code> collection, and
+  in <code>my_collections/_recipes</code> for the <code>recipes</code> collection.</p>
+</div>
 
 ### Step 2: Add your content {#step2}
 
