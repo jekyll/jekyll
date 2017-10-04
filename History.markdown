@@ -15,6 +15,7 @@
   * Fixes formatting on pre-formatted text. (#6405)
   * Docs: updates (#6407)
   * Docs: Fix `collections_dir` example (#6408)
+  * Docs: Renaming duplicate of &#34;Scenario 6&#34; to &#34;Scenario 7&#34; (#6411)
 
 ### Development Fixes
 
