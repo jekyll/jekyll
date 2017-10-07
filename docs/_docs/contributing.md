@@ -8,7 +8,7 @@ Hi there! Interested in contributing to Jekyll? We'd love your help. Jekyll is a
 
 ## Where to get help or report a problem
 
-See [the support guidelines](SUPPORT.md)
+See [the support guidelines]({{ site.baseurl }}{% link _docs/support.md %})
 
 ## Ways to contribute
 

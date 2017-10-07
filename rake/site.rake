@@ -7,7 +7,7 @@
 #############################################################################
 
 namespace :site do
-  task :generated_pages => [:history, :version_file, :conduct, :contributing]
+  task :generated_pages => [:history, :version_file, :conduct, :contributing, :support]
 
   desc "Generate and view the site locally"
   task :preview => :generated_pages do
@@ -75,6 +75,11 @@ namespace :site do
   desc "Copy the contributing file"
   task :contributing do
     siteify_file(".github/CONTRIBUTING.markdown", "title" => "Contributing")
+  end
+
+  desc "Copy the support file"
+  task :support do
+    siteify_file(".github/SUPPORT.md", "title" => "Support")
   end
 
   desc "Write the site latest_version.txt file"
