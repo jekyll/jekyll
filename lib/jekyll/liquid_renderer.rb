@@ -22,19 +22,16 @@ module Jekyll
       )
 
       LiquidRenderer::File.new(self, filename).tap do
-        @stats[filename] ||= {}
-        @stats[filename][:count] ||= 0
+        @stats[filename] ||= new_profile_hash
         @stats[filename][:count] += 1
       end
     end
 
     def increment_bytes(filename, bytes)
-      @stats[filename][:bytes] ||= 0
       @stats[filename][:bytes] += bytes
     end
 
     def increment_time(filename, time)
-      @stats[filename][:time] ||= 0.0
       @stats[filename][:time] += time
     end
 
@@ -44,6 +41,11 @@ module Jekyll
 
     def self.format_error(e, path)
       "#{e.message} in #{path}"
+    end
+
+    private
+    def new_profile_hash
+      Hash.new { |hash, key| hash[key] = 0 }
     end
   end
 end
