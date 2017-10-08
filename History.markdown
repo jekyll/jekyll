@@ -18,6 +18,7 @@
   * Docs: Renaming duplicate of &#34;Scenario 6&#34; to &#34;Scenario 7&#34; (#6411)
   * Docs: Mark `collection_dir` as unreleased (#6412)
   * Docs: Fix link to SUPPORT (#6415)
+  * Docs: Added new tutorial to tutorials section on docs (#6406)
 
 ### Development Fixes
 
