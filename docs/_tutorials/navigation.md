@@ -94,18 +94,22 @@ Suppose you wanted to sort the list by the `title`. To do this, convert the refe
 {% raw %}
 ```liquid
 {% assign doclist = site.data.samplelist.docs | sort: 'title'  %}
+<ol>
 {% for item in doclist %}
     <li><a href="{{ item.url }}" alt="{{ item.title }}">{{ item.title }}</a></li>
 {% endfor %}
+</ol>
 ```
 {% endraw %}
 
 **Result**
 
 <div class="highlight result">
-   <li><a href="#" alt="Configuration">Configuration</a></li>
-   <li><a href="#" alt="Deployment">Deployment</a></li>
-   <li><a href="#" alt="Introduction">Introduction</a></li>
+   <ol>
+      <li><a href="#" alt="Configuration">Configuration</a></li>
+      <li><a href="#" alt="Deployment">Deployment</a></li>
+      <li><a href="#" alt="Introduction">Introduction</a></li>
+   </ol>
 </div>
 
 The items now appear in alphabetical order. The `sort` property in the Liquid filter applies to the `title`, which is an actual property in the list. If `title` weren't a property, we would need to sort by another property.
@@ -427,7 +431,7 @@ docs2:
 
 {% raw %}
 ```liquid
-<ul>
+  <ul>
     {% for item in site.data.samplelist.docs2 %}
       {% if item.version == 1 %}
         <li><a href="{{ item.url }}">{{ item.title }}</a></li>
