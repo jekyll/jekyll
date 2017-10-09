@@ -31,6 +31,7 @@
   * Disable default layouts for Pages with a `layout: none` declaration (#6182)
   * Upgrade to Rouge 3 (#6381)
   * Allow the user to set collections_dir to put all collections under one subdirectory (#6331)
+  * Scope path glob (#6268)
 
 ### Site Enhancements
 
