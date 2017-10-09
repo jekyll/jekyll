@@ -19,6 +19,7 @@
   * Docs: Mark `collection_dir` as unreleased (#6412)
   * Docs: Fix link to SUPPORT (#6415)
   * Docs: Added new tutorial to tutorials section on docs (#6406)
+  * Fix list appearance by adding missing `ol` tag (#6421)
 
 ### Development Fixes
 
