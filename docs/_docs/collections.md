@@ -91,15 +91,15 @@ If you wish a specific page to be shown when accessing `/my_collection/`,
 simply add `permalink: /my_collection/index.html` to a page.
 To list items from the collection, on that page or any other, you can use:
 
-```liquid
 {% raw %}
+```liquid
 {% for item in site.my_collection %}
   <h2>{{ item.title }}</h2>
   <p>{{ item.description }}</p>
   <p><a href="{{ item.url }}">{{ item.title }}</a></p>
 {% endfor %}
-{% endraw %}
 ```
+{% endraw %}
 
 <div class="note info">
   <h5>Don't forget to add YAML for processing</h5>
