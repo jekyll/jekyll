@@ -887,6 +887,7 @@ You can find a few useful plugins at the following locations:
 - [Jekyll If File Exists](https://github.com/k-funk/jekyll-if-file-exists): A Jekyll Plugin that checks if a file exists with an if/else block.
 - [BibSonomy](https://github.com/rjoberon/bibsonomy-jekyll): Jekyll
   plugin to generate publication lists from [BibSonomy](https://www.bibsonomy.org/).
+- [github-cards](https://github.com/edward-shen/github-cards): Creates styleable Github cards for your Github projects.
 
 
 #### Collections
