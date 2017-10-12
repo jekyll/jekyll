@@ -21,6 +21,7 @@
   * Docs: Added new tutorial to tutorials section on docs (#6406)
   * Fix list appearance by adding missing `ol` tag (#6421)
   * Explain how to override output collection index page (#6424)
+  * Added github-cards to the list of plugins (#6425)
 
 ### Development Fixes
 
