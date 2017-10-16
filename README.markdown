@@ -45,7 +45,7 @@ conduct.
 Please adhere to this code of conduct in any interactions you have in the
 Jekyll community. It is strictly enforced on all official Jekyll
 repositories, websites, and resources. If you encounter someone violating
-these terms, please let a [team captain](https://github.com/orgs/jekyll/teams/affinity-team-captains/members) know and we will address it as soon as possible.
+these terms, please let one of our core team members [Olivia](mailto:olivia@jekyllrb.com?subject=Jekyll%20CoC%20Violation), [Pat](mailto:pat@jekyllrb.com?subject=Jekyll%20CoC%20Violation), [Matt](mailto:matt@jekyllrb.com?subject=Jekyll%20CoC%20Violation) or [Parker](mailto:parker@jekyllrb.com?subject=Jekyll%20CoC%20Violation) know and we will address it as soon as possible.
 
 ## Diving In
 
