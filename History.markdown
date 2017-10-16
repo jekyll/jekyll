@@ -28,6 +28,7 @@
   * Bump rubocop to use `v0.50.x` (#6368)
   * Upgrade to Cucumber 3.0 (#6395)
   * Provide a better default hash for tracking liquid stats (#6417)
+  * Docs: CoC violation correspondants (#6429)
 
 ### Minor Enhancements
 
