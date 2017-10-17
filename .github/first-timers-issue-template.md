@@ -12,11 +12,11 @@ Nothing. This issue is meant to welcome you to Open Source :) We are happy to wa
 
 - [ ] 👌 **Join the team**: Add yourself to a Jekyll affinity team.
 
-  Go to [teams.jekyllrb.com](https://teams.jekyllrb.com/) join a team that best fits your interests.
+  Go to [teams.jekyllrb.com](https://teams.jekyllrb.com/) join a team that best fits your interests. Once you click the link to join a team, you will soon recieve an email inviting you to join the Jekyll organization.
 
-- [ ] 🙋 **Claim this issue**: Assign this issue to yourself.
+- [ ] 🙋 **Claim this issue**: Comment below.
 
-  Once you have joined a Jekyll affinity team, assign this issue to yourself using the sidebar on the right.
+  Leave a comment that you have claimed this issue.
 
 - [ ] 📝 **Update** the file [$FILENAME]($BRANCH_URL) in the `$REPO` repository (press the little pen Icon) and edit the line as shown below.
 
