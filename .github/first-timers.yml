@@ -1,0 +1,5 @@
+repository: jekyll
+labels:
+  - good first issue
+  - help-wanted
+template: .github/first-timers-issue-template.md
