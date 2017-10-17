@@ -301,8 +301,8 @@ module Jekyll
     # and a given param
     def merged_file_read_opts(site, opts)
       merged = (site ? site.file_read_opts : {}).merge(opts)
-      if merged["encoding"] && !merged["encoding"].start_with?("bom|")
-        merged["encoding"] = "bom|#{merged["encoding"]}"
+      if merged[:encoding] && !merged[:encoding].start_with?("bom|")
+        merged[:encoding] = "bom|#{merged[:encoding]}"
       end
       merged
     end
