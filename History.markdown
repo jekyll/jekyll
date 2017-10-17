@@ -29,6 +29,7 @@
   * Upgrade to Cucumber 3.0 (#6395)
   * Provide a better default hash for tracking liquid stats (#6417)
   * Docs: CoC violation correspondants (#6429)
+  * add failing test for non-utf8 encoding (#6339)
 
 ### Minor Enhancements
 
