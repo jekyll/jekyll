@@ -304,6 +304,9 @@ module Jekyll
       if merged[:encoding] && !merged[:encoding].start_with?("bom|")
         merged[:encoding] = "bom|#{merged[:encoding]}"
       end
+      if merged["encoding"] && !merged["encoding"].start_with?("bom|")
+        merged["encoding"] = "bom|#{merged["encoding"]}"
+      end
       merged
     end
 

@@ -386,16 +386,19 @@ class TestUtils < JekyllUnitTest
     should "ignore encoding if it's not there" do
       opts = Utils.merged_file_read_opts(nil, {})
       assert_nil opts["encoding"]
+      assert_nil opts[:encoding]
     end
 
     should "add bom to encoding" do
-      opts = Utils.merged_file_read_opts(nil, { "encoding" => "utf-8" })
+      opts = Utils.merged_file_read_opts(nil, { "encoding" => "utf-8", encoding: "utf-8" })
       assert_equal "bom|utf-8", opts["encoding"]
+      assert_equal "bom|utf-8", opts[:encoding]
     end
 
     should "preserve bom in encoding" do
-      opts = Utils.merged_file_read_opts(nil, { "encoding" => "bom|utf-8" })
-      assert_equal "bom|utf-8", opts["encoding"]
+      opts = Utils.merged_file_read_opts(nil, { "encoding" => "bom|another", encoding: "bom|another" })
+      assert_equal "bom|another", opts["encoding"]
+      assert_equal "bom|another", opts[:encoding]
     end
   end
 end
