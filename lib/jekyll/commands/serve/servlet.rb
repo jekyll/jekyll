@@ -10,14 +10,14 @@ module Jekyll
       class SkipAnalyzer
         BAD_USER_AGENTS = [%r!MSIE!].freeze
 
-        def self.skip_processing?(req, res, options)
-          new(req, res, options).skip_processing?
+        def self.skip_processing?(request, response, options)
+          new(request, response, options).skip_processing?
         end
 
-        def initialize(req, res, options)
+        def initialize(request, response, options)
           @options = options
-          @req = req
-          @res = res
+          @request = request
+          @response = response
         end
 
         def skip_processing?
@@ -25,19 +25,19 @@ module Jekyll
         end
 
         def chunked?
-          @res["Transfer-Encoding"] == "chunked"
+          @response["Transfer-Encoding"] == "chunked"
         end
 
         def inline?
-          @res["Content-Disposition"] =~ %r!^inline!
+          @response["Content-Disposition"] =~ %r!^inline!
         end
 
         def bad_browser?
-          BAD_USER_AGENTS.any? { |pattern| @req["User-Agent"] =~ pattern }
+          BAD_USER_AGENTS.any? { |pattern| @request["User-Agent"] =~ pattern }
         end
 
         def html?
-          @res["Content-Type"] =~ %r!text/html!
+          @response["Content-Type"] =~ %r!text/html!
         end
       end
 

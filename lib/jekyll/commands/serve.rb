@@ -6,7 +6,7 @@ module Jekyll
   module Commands
     class Serve < Command
       # Similar to the pattern in Utils::ThreadEvent except we are maintaining the
-      # state of @running instead of just signaling and event.  We have to maintain this
+      # state of @running instead of just signaling an event.  We have to maintain this
       # state since Serve is just called via class methods instead of an instance
       # being created each time.
       @mutex = Mutex.new
@@ -50,14 +50,10 @@ module Jekyll
         ).freeze
 
         LIVERELOAD_PORT = 35_729
-        LIVERELOAD_DIR = File.join(File.dirname(__FILE__), "serve", "livereload_assets")
+        LIVERELOAD_DIR = File.join(__dir__, "serve", "livereload_assets")
 
-        attr_reader :mutex, :run_cond
-        #
-
-        def running?
-          @running
-        end
+        attr_reader :mutex, :run_cond, :running
+        alias_method :running?, :running
 
         def init_with_program(prog)
           prog.command(:serve) do |cmd|
@@ -72,6 +68,7 @@ module Jekyll
             end
 
             cmd.action do |_, opts|
+              opts["livereload_port"] ||= LIVERELOAD_PORT
               opts["serving"] = true
               opts["watch"  ] = true unless opts.key?("watch")
 
@@ -117,8 +114,9 @@ module Jekyll
         def validate_options(opts)
           if opts["livereload"]
             if opts["detach"]
-              Jekyll.logger.abort_with "Error:",
-                "--detach and --livereload are mutually exclusive"
+              Jekyll.logger.warn "Warning:",
+                "--detach and --livereload are mutually exclusive. Choosing --livereload"
+              opts["detach"] = false
             end
             if opts["ssl_cert"] || opts["ssl_key"]
               # This is not technically true.  LiveReload works fine over SSL, but
@@ -128,8 +126,8 @@ module Jekyll
               Jekyll.logger.abort_with "Error:", "LiveReload does not support SSL"
             end
             unless opts["watch"]
-              Jekyll.logger.warn "Using --livereload without --watch defeats the purpose"\
-                " of LiveReload."
+              # Using livereload logically implies you want to watch the files
+              opts["watch"] = true
             end
           elsif %w(livereload_min_delay
               livereload_max_delay
@@ -146,7 +144,7 @@ module Jekyll
         private
         # rubocop:disable Metrics/AbcSize
         def register_reload_hooks(opts)
-          require_relative "serve/websockets"
+          require_relative "serve/live_reload_reactor"
           @reload_reactor = LiveReloadReactor.new
 
           Jekyll::Hooks.register(:site, :post_render) do |site|
@@ -198,7 +196,6 @@ module Jekyll
         #
 
         private
-        # rubocop:disable Metrics/MethodLength
         def webrick_opts(opts)
           opts = {
             :JekyllOptions      => opts,
