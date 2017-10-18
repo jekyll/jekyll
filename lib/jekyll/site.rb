@@ -445,6 +445,7 @@ module Jekyll
     def configure_file_read_opts
       self.file_read_opts = {}
       self.file_read_opts[:encoding] = config["encoding"] if config["encoding"]
+      self.file_read_opts = Jekyll::Utils.merged_file_read_opts(self, {})
     end
 
     private
