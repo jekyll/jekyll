@@ -30,6 +30,7 @@
   * Provide a better default hash for tracking liquid stats (#6417)
   * Docs: CoC violation correspondants (#6429)
   * add failing test for non-utf8 encoding (#6339)
+  * Add configuration for first-timers bot (#6431)
 
 ### Minor Enhancements
 
