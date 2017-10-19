@@ -11,7 +11,7 @@ So yeah, there's a bunch of big problems plaguing open source. Fortunately, ther
 
 ## Add a Code of Conduct, and enforce it
 
-This might seem like one of the easiest steps to do, but it actually requires a lot of dedication to pull through with it. Basically, a Code of Conduct is a document detailing what is and what isn't acceptable behavior in your project. A good Code of Conduct also details enforcement procedures, that means, how the person violating the Code of Conduct gets dealt with. This is the point at which I've seen a looooot of projects fail at. It's easy enough to copy-paste a Code of Conduct into your project, but it's just, if not more important to be clear on how to enforce it. Inconsistent or worse, nonexistent enforcement is just going to scare off newcomers even more!
+This might seem like one of the easiest steps to do, but it actually requires a lot of dedication to pull through with. Basically, a Code of Conduct is a document detailing what is and what isn't acceptable behavior in your project. A good Code of Conduct also details enforcement procedures, that means how the person violating the Code of Conduct gets dealt with. This is the point at which I've seen a looooot of projects fail. It's easy enough to copy-paste a Code of Conduct into your project, but it's just, if not more important to be clear on how to enforce it. Inconsistent, or worse, nonexistent enforcement is just going to scare off newcomers even more!
 
 The most widely adopted Code of Conduct is the [Contributor Covenant](https://www.contributor-covenant.org/). It's a very good catch-all document, but it is a bit light in the enforcement section, so I'd recommend to flesh it out by yourself, be it by means of adding contact information or expanding the enforcement rules.
 
@@ -19,9 +19,9 @@ No matter which Code of Conduct you pick, the most important thing is to actuall
 
 ## Document your contributing workflow
 
-The problem that puts people off the most is incomplete or missing documentation, as revealed through GitHub's [open source survey](http://opensourcesurvey.org/2017). A very popular myth in programming is that good code explains itself, which might be true, but only for the person writing it. It's important, especially you put your code out there for the world to see, to document your code, but also the process by which you maintain your project. Otherwise, it's going to be extremely hard for newcomers to even figure out where to begin contributing to your project.
+The problem that puts people off the most is incomplete or missing documentation, as revealed through GitHub's [open source survey](http://opensourcesurvey.org/2017). A very popular myth in programming is that good code explains itself, which might be true, but only for the person writing it. It's important, especially once you put your project out there for the world to see, to document not only your code, but also the process by which you maintain it. Otherwise, it's going to be extremely hard for newcomers to even figure out where to begin contributing to your project.
 
-Jekyll has [an entire section of its docs](/docs/contributing) related to information on how to contribute for this very reason. Every documentation page has a link to directly edit and improve it on GitHub. It's important to realize that not all contributions are code. It can be documentation, it can be reviewing pull requests, but it can also just be weighing into issues, and all of this should be recognized in the same way.
+Jekyll has [an entire section of its docs](/docs/contributing) dedicated to information on how to contribute for this very reason. Every documentation page has a link to directly edit and improve it on GitHub. It's also important to realize that not all contributions are code. It can be documentation, it can be reviewing pull requests, but it can also just be weighing into issues, and all of this should be recognized in the same way.
 
 ## Create newcomer-friendly issues
 
@@ -33,9 +33,9 @@ For most people new to open source, by far the biggest hurdle is putting up the 
 
 (There's also an up-to-date listing of all of our first-timers only issues [here](https://github.com/jekyll/jekyll/issues?q=is%3Aissue+is%3Aopen+label%3Afirst-time-only))
 
-These issues are designed only to be done by someone who has had little to no exposure to contributing to open source before, and are offering full support from project maintainers in case a question arises.
+These issues are designed only to be taken on by someone who has had little to no exposure to contributing to open source before, and additionally, project maintainers offer support in case a question arises.
 
-Jekyll is a very big and popular open source project, and we hope that with these issues, we can help people who haven't contributed to open source before to catch a footing in these unsteady waters.
+Jekyll is a very big and popular open source project, and we hope that with these special issues, we can help people who haven't contributed to open source before to catch a footing in these unsteady waters.
 
 ## Be nice
 
