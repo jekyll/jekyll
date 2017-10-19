@@ -7,7 +7,7 @@ categories: [community]
 
 Open Source has a problem with diversity. GitHub recently conducted a [survey](http://opensourcesurvey.org/2017) that revealed that 95% of the respondents were male, making the demographic even worse than in tech overall. Every other week, I seem to hear of another case of a maintainer engaging in targeted harassment against minorities. People somehow deem it completely okay to let these things slide, though.
 
-So yeah, there's a bunch of big problems plaguing open source. Fortunately, there's a couple of things we can do to make it easier and more comfortable for people, especially minorities, that have never before contributed to any open source project before, to contribute to our project.
+So yeah, there's a bunch of big problems plaguing open source. Fortunately, there's a couple of things we can do to make it easier and more comfortable for people, especially minorities, that have never before contributed to any open source project before, to contribute to our projects.
 
 ## Add a Code of Conduct, and enforce it
 
