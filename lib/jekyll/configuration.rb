@@ -206,7 +206,7 @@ module Jekyll
       rescue ArgumentError => err
         Jekyll.logger.warn "WARNING:", "Error reading configuration. " \
                      "Using defaults (and options)."
-        $stderr.puts err
+        warn err
       end
 
       configuration.fix_common_issues.backwards_compatibilize.add_default_collections

@@ -1,6 +1,6 @@
 ---
 AllCops:
-  TargetRubyVersion: 2.0
+  TargetRubyVersion: 2.1
   Include:
     - lib/**/*.rb
   Exclude:
@@ -117,8 +117,6 @@ Style/Documentation:
     - !ruby/regexp /features\/.*.rb$/
 Style/DoubleNegation:
   Enabled: false
-Style/Encoding:
-  EnforcedStyle: when_needed
 Style/GuardClause:
   Enabled: false
 Style/HashSyntax:
