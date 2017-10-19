@@ -156,7 +156,7 @@ end
 When(%r!^I run jekyll(.*)$!) do |args|
   run_jekyll(args)
   if args.include?("--verbose") || ENV["DEBUG"]
-    $stderr.puts "\n#{jekyll_run_output}\n"
+    warn "\n#{jekyll_run_output}\n"
   end
 end
 
@@ -165,7 +165,7 @@ end
 When(%r!^I run bundle(.*)$!) do |args|
   run_bundle(args)
   if args.include?("--verbose") || ENV["DEBUG"]
-    $stderr.puts "\n#{jekyll_run_output}\n"
+    warn "\n#{jekyll_run_output}\n"
   end
 end
 
@@ -174,7 +174,7 @@ end
 When(%r!^I run gem(.*)$!) do |args|
   run_rubygem(args)
   if args.include?("--verbose") || ENV["DEBUG"]
-    $stderr.puts "\n#{jekyll_run_output}\n"
+    warn "\n#{jekyll_run_output}\n"
   end
 end
 
