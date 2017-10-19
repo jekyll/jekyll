@@ -47,6 +47,7 @@
 ### Bug Fixes
 
   * Problematic UTF+bom files (#6322)
+  * Always treat `data.layout` as a string (#6442)
 
 ## 3.6.0 / 2017-09-21
 
