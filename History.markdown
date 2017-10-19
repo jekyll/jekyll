@@ -32,6 +32,7 @@
   * add failing test for non-utf8 encoding (#6339)
   * Add configuration for first-timers bot (#6431)
   * Add test for layout as string (#6445)
+  * Update Rubocop to 0.51.0 (#6444)
 
 ### Minor Enhancements
 
