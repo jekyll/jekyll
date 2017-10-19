@@ -143,7 +143,7 @@ module Jekyll
     # Returns String rendered content
     def place_in_layouts(content, payload, info)
       output = content.dup
-      layout = layouts[document.data["layout"]]
+      layout = layouts[document.data["layout"].to_s]
       validate_layout(layout)
 
       used = Set.new([layout])
