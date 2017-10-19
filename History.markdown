@@ -31,6 +31,7 @@
   * Docs: CoC violation correspondants (#6429)
   * add failing test for non-utf8 encoding (#6339)
   * Add configuration for first-timers bot (#6431)
+  * Add test for layout as string (#6445)
 
 ### Minor Enhancements
 
