@@ -1,3 +1,9 @@
+## HEAD
+
+### Development Fixes
+
+  * Update Rubocop to 0.51.0 (#6444)
+
 ## 3.6.1 / 2017-10-20
 
 ### Documentation
