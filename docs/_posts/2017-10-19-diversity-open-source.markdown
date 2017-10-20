@@ -7,11 +7,11 @@ categories: [community]
 
 Open Source has a problem with diversity. GitHub recently conducted a [survey](http://opensourcesurvey.org/2017) that revealed that 95% of the respondents were male, making the demographic even worse than in tech overall. Every other week, I seem to hear of another case of a maintainer engaging in targeted harassment against minorities. People somehow deem it completely okay to let these things slide, though.
 
-So yeah, there's a bunch of big problems plaguing open source. Fortunately, there's a couple of things we can do to make it easier and more comfortable for people, especially minorities, that have never before contributed to any open source project before, to contribute to our projects.
+Fortunately, there's a couple of things we can do to make it easier and more comfortable for people that have never contributed to any open source project before, to contribute to our projects.
 
 ## Add a Code of Conduct, and enforce it
 
-This might seem like one of the easiest steps to do, but it actually requires a lot of dedication to pull through with. Basically, a Code of Conduct is a document detailing what is and what isn't acceptable behavior in your project. A good Code of Conduct also details enforcement procedures, that means how the person violating the Code of Conduct gets dealt with. This is the point at which I've seen a looooot of projects fail. It's easy enough to copy-paste a Code of Conduct into your project, but it's just, if not more important to be clear on how to enforce it. Inconsistent, or worse, nonexistent enforcement is just going to scare off newcomers even more!
+This might seem like one of the easiest steps to do, but it actually requires a lot of dedication to pull through with. Basically, a Code of Conduct is a document detailing what is and what isn't acceptable behavior in your project. A good Code of Conduct also details enforcement procedures, that means how the person violating the Code of Conduct gets dealt with. This is the point at which I've seen a looooot of projects fail. It's easy enough to copy-paste a Code of Conduct into your project, but it's more important to be clear on how to enforce it. Inconsistent —or worse, nonexistent— enforcement is just going to scare off newcomers even more!
 
 The most widely adopted Code of Conduct is the [Contributor Covenant](https://www.contributor-covenant.org/). It's a very good catch-all document, but it is a bit light in the enforcement section, so I'd recommend to flesh it out by yourself, be it by means of adding contact information or expanding the enforcement rules.
 
@@ -21,7 +21,7 @@ No matter which Code of Conduct you pick, the most important thing is to actuall
 
 The problem that puts people off the most is incomplete or missing documentation, as revealed through GitHub's [open source survey](http://opensourcesurvey.org/2017). A very popular myth in programming is that good code explains itself, which might be true, but only for the person writing it. It's important, especially once you put your project out there for the world to see, to document not only your code, but also the process by which you maintain it. Otherwise, it's going to be extremely hard for newcomers to even figure out where to begin contributing to your project.
 
-Jekyll has [an entire section of its docs](/docs/contributing) dedicated to information on how to contribute for this very reason. Every documentation page has a link to directly edit and improve it on GitHub. It's also important to realize that not all contributions are code. It can be documentation, it can be reviewing pull requests, but it can also just be weighing into issues, and all of this should be recognized in the same way.
+Jekyll has [an entire section of its docs](/docs/contributing) dedicated to information on how to contribute for this very reason. Every documentation page has a link to directly edit and improve it on GitHub. It's also important to realize that not all contributions are code. It can be documentation, it can be reviewing pull requests, but it can also just be weighing into issues, and all of this should be recognized in the same way. At Jekyll, out of 397 total merged pull requests in the last year, __204__ were documentation pull requests!
 
 ## Create newcomer-friendly issues
 
