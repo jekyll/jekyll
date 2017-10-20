@@ -1,12 +1,12 @@
-## HEAD
+## 3.6.1 / 2017-10-20
 
 ### Documentation
 
   * Doc y_day in docs/permalinks (#6244)
   * Update frontmatter.md (#6371)
   * Elaborate on excluding items from processing (#6136)
-  * Docs: Style lists in tables (#6379)
-  * Docs: remove duplicate &#34;available&#34; (#6380)
+  * Style lists in tables (#6379)
+  * Remove duplicate &#34;available&#34; (#6380)
 
 ### Development Fixes
 
