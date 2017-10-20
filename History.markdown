@@ -2,11 +2,6 @@
 
 ### Documentation
 
-  * Doc y_day in docs/permalinks (#6244)
-  * Update frontmatter.md (#6371)
-  * Elaborate on excluding items from processing (#6136)
-  * Docs: Style lists in tables (#6379)
-  * Docs: remove duplicate &#34;available&#34; (#6380)
   * Docs: GitHub Pages instructions (#6384)
   * Improve documentation for theme-gem installation (#6387)
   * Fix diff syntax-highlighting (#6388)
@@ -26,7 +21,6 @@
 
 ### Development Fixes
 
-  * Bump rubocop to use `v0.50.x` (#6368)
   * Upgrade to Cucumber 3.0 (#6395)
   * Provide a better default hash for tracking liquid stats (#6417)
   * Docs: CoC violation correspondants (#6429)
@@ -51,6 +45,20 @@
 
   * Problematic UTF+bom files (#6322)
   * Always treat `data.layout` as a string (#6442)
+
+## 3.6.1 / 2017-10-20
+
+### Documentation
+
+  * Doc y_day in docs/permalinks (#6244)
+  * Update frontmatter.md (#6371)
+  * Elaborate on excluding items from processing (#6136)
+  * Style lists in tables (#6379)
+  * Remove duplicate &#34;available&#34; (#6380)
+
+### Development Fixes
+
+  * Bump rubocop to use `v0.50.x` (#6368)
 
 ## 3.6.0 / 2017-09-21
 
