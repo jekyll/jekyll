@@ -3,6 +3,12 @@
 ### Development Fixes
 
   * Update Rubocop to 0.51.0 (#6444)
+  * Add test for layout as string (#6445)
+
+### Bug Fixes
+
+  * Problematic UTF+bom files (#6322)
+  * Always treat `data.layout` as a string (#6442)
 
 ## 3.6.1 / 2017-10-20
 
