@@ -5,7 +5,7 @@ author: pup
 categories: [community]
 ---
 
-Open Source has a problem with diversity. GitHub recently conducted a [survey](http://opensourcesurvey.org/2017) that revealed that 95% of the respondents were male, making the demographic even worse than in tech overall. Every other week, I seem to hear of another case of a maintainer engaging in targeted harassment against minorities. People somehow deem it completely okay to let these things slide, though.
+Open Source has a problem with diversity. GitHub recently conducted a [survey](http://opensourcesurvey.org/2017) which revealed that 95% of the respondents were identifying as male. This is even worse than in the tech industry overall, where the percentage is only about 76%. Every other week, there seems to be another case of a maintainer engaging in targeted harassment against minorities. People somehow deem it completely okay to let these things slide, though.
 
 Fortunately, there's a couple of things we can do to make it easier and more comfortable for people that have never contributed to any open source project before, to contribute to our projects.
 
@@ -25,15 +25,15 @@ Jekyll has [an entire section of its docs](/docs/contributing) dedicated to info
 
 ## Create newcomer-friendly issues
 
-For most people new to open source, by far the biggest hurdle is putting up the first pull request. That's why initiatives such as [YourFirstPR](https://twitter.com/yourfirstpr) and [First Timers Only](http://www.firsttimersonly.com/) were started. Recently, [a GitHub bot that automatically creates first-timer friendly issues](https://github.com/hoodiehq/first-timers-bot) was created, which makes it very easy to make small changes into viable pull requests that can be created by any newcomer! So we decided to give it a shot, and we've created a couple of very easy first timers only issues:
+For most people new to open source, the biggest hurdle is creating their first pull request. That's why initiatives such as [YourFirstPR](https://twitter.com/yourfirstpr) and [First Timers Only](http://www.firsttimersonly.com/) were started. Recently, [a GitHub bot that automatically creates first-timer friendly issues](https://github.com/hoodiehq/first-timers-bot) was launched, which makes it very easy for maintainers to convert otherwise small or trivial changes into viable pull requests that can be taken on by newcomers! So we decided to give it a shot, and we've created a couple of very easy `first timers only` issues:
 
 - [Issue #6437](https://github.com/jekyll/jekyll/issues/6437)
 - [Issue #6438](https://github.com/jekyll/jekyll/issues/6438)
 - [Issue #6439](https://github.com/jekyll/jekyll/issues/6439)
 
-(There's also an up-to-date listing of all of our first-timers only issues [here](https://github.com/jekyll/jekyll/issues?q=is%3Aissue+is%3Aopen+label%3Afirst-time-only))
+(There's also an up-to-date listing of all of our `first timers only` issues [here](https://github.com/jekyll/jekyll/issues?q=is%3Aissue+is%3Aopen+label%3Afirst-time-only))
 
-These issues are designed only to be taken on by someone who has had little to no exposure to contributing to open source before, and additionally, project maintainers offer support in case a question arises.
+These issues are designed to be taken on only by someone who has had little to no exposure to contributing to open source before, and additionally, project maintainers offer support in case a question arises.
 
 Jekyll is a very big and popular open source project, and we hope that with these special issues, we can help people who haven't contributed to open source before to catch a footing in these unsteady waters.
 
