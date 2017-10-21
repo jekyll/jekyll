@@ -1,4 +1,4 @@
-## HEAD
+## 3.6.2 / 2017-10-21
 
 ### Development Fixes
 
