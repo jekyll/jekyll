@@ -17,7 +17,7 @@ video series by Giraffe Academy](../tutorials/video-walkthroughs/) aimed at
 complete beginners. A big thank to Mike for this.
 
 And if you're wondering what happened to version 3.6.1, it was just our new
-release maintainer getting familiar with the release process 😄
+release maintainer getting familiar with the release process. 😄
 
 We try to release patch releases as quickly as possible and we're already
 working on the next minor version 3.7.0 that will allow you to store all your
@@ -36,7 +36,7 @@ _posts/2017-10-19-diversity-open-source.markdown %}) 👏
 
 As it's been nine years this week that Tom Preston-Werner started this project,
 I also wanna seize this opportunity to thank [all of the 732 contributors](https://github.com/jekyll/jekyll/graphs/contributors) who
-helped make it possible for Jekyll to power millions of  around the world
+helped make it possible for Jekyll to power millions of websites around the world
 today.
 
 Happy Birthday Jekyll! 🎂
