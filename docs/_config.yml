@@ -56,4 +56,6 @@ plugins:
 
 exclude:
   - .gitignore
-  - README.md
+  - CNAME
+  - icomoon-selection.json
+  - readme.md
