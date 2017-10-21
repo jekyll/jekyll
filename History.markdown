@@ -26,8 +26,6 @@
   * Docs: CoC violation correspondants (#6429)
   * add failing test for non-utf8 encoding (#6339)
   * Add configuration for first-timers bot (#6431)
-  * Add test for layout as string (#6445)
-  * Update Rubocop to 0.51.0 (#6444)
 
 ### Minor Enhancements
 
@@ -41,6 +39,13 @@
   * Docs: Update instructions (#6396)
   * Add special styling for code-blocks run in shell (#6389)
   * Update list of files excluded from Docs site (#6457)
+
+## 3.6.2 / 2017-10-21
+
+### Development Fixes
+
+  * Update Rubocop to 0.51.0 (#6444)
+  * Add test for layout as string (#6445)
 
 ### Bug Fixes
 
