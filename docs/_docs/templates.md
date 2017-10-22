@@ -469,6 +469,13 @@ you want to highlight, look for the “short name” on the [Rouge
 wiki](https://github.com/jayferd/rouge/wiki/List-of-supported-languages-and-lexers)
 or the [Pygments' Lexers page](http://pygments.org/docs/lexers/).
 
+<div class="note info">
+  <h5>Jekyll processes all Liquid filters in code blocks</h5>
+  <p>If you are using a language that contains curly braces, you
+    will likely need to place <code>{&#37; raw &#37;}</code> and
+    <code>{&#37; endraw &#37;}</code> tags around your code.</p>
+</div>
+
 #### Line numbers
 
 There is a second argument to `highlight` called `linenos` that is optional.
