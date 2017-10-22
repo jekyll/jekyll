@@ -14,7 +14,7 @@ if you want to avoid possible build problems with:
 
 Other changes include updates to our documentation, like this [complete
 video series by Giraffe Academy](../tutorials/video-walkthroughs/) aimed at
-complete beginners. A big thank to Mike for this.
+complete beginners. A big thanks to Mike for this.
 
 And if you're wondering what happened to version 3.6.1, it was just our new
 release maintainer getting familiar with the release process. 😄
