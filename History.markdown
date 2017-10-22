@@ -18,6 +18,7 @@
   * Explain how to override output collection index page (#6424)
   * Added github-cards to the list of plugins (#6425)
   * add post about diversity (#6447)
+  * Docs: Add a note about Liquid and syntax highlighting (#6466)
 
 ### Development Fixes
 
