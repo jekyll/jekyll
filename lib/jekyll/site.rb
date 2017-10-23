@@ -38,6 +38,7 @@ module Jekyll
 
     # Public: Set the site's configuration. This handles side-effects caused by
     # changing values in the configuration.
+    # In Jekyll 4.0, this will be changed to return void
     #
     # config - a Jekyll::Configuration, containing the new configuration.
     #
@@ -60,7 +61,7 @@ module Jekyll
 
       self.permalink_style = config["permalink"].to_sym
 
-      @config
+      return @config
     end
 
     # Public: Read, process, and write this Site to output.

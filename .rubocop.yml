@@ -46,11 +46,12 @@ Lint/EndAlignment:
   Severity: error
 Lint/RescueWithoutErrorClass:
   Enabled: false
+Lint/ReturnInVoidContext:
+  Exclude:
+    - lib/jekyll/site.rb
 Lint/UnreachableCode:
   Severity: error
 Lint/UselessAccessModifier:
-  Enabled: false
-Lint/Void:
   Enabled: false
 Metrics/AbcSize:
   Max: 21
