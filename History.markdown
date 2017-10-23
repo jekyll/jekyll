@@ -44,6 +44,7 @@
   * Add special styling for code-blocks run in shell (#6389)
   * Update list of files excluded from Docs site (#6457)
   * Update site History (#6460)
+  * Site: Add default twitter card image (#6476)
 
 ## 3.6.2 / 2017-10-21
 
