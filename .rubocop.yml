@@ -88,7 +88,10 @@ Metrics/ParameterLists:
 Metrics/PerceivedComplexity:
   Max: 8
 Naming/FileName:
-  Enabled: false
+  Exclude:
+    - Gemfile
+    - Rakefile
+    - lib/theme_template/Gemfile
 Naming/HeredocDelimiterNaming:
   Enabled: false
 Security/MarshalLoad:
