@@ -46,7 +46,7 @@ def normalize_bullets(markdown)
 end
 
 def linkify_prs(markdown)
-  markdown.gsub(%r!#(\d+)!) do |word|
+  markdown.gsub(%r!(?<\!&)#(\d+)!) do |word|
     "[#{word}]({{ site.repository }}/issues/#{word.delete("#")})"
   end
 end
