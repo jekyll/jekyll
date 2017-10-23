@@ -15,7 +15,7 @@ class TestSite < JekyllUnitTest
     @site.posts.docs.concat(PostReader.new(@site).read_posts(""))
     posts = Dir[source_dir("_posts", "**", "*")]
     posts.delete_if do |post|
-      File.directory?(post) && !(post =~ Document::DATE_FILENAME_MATCHER)
+      File.directory?(post) && post !~ Document::DATE_FILENAME_MATCHER
     end
   end
 
@@ -279,7 +279,7 @@ class TestSite < JekyllUnitTest
 
       posts = Dir[source_dir("**", "_posts", "**", "*")]
       posts.delete_if do |post|
-        File.directory?(post) && !(post =~ Document::DATE_FILENAME_MATCHER)
+        File.directory?(post) && post !~ Document::DATE_FILENAME_MATCHER
       end
       categories = %w(
         2013 bar baz category foo z_category MixedCase Mixedcase publish_test win

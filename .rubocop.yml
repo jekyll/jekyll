@@ -124,8 +124,6 @@ Style/HashSyntax:
   Severity: error
 Style/IfUnlessModifier:
   Enabled: false
-Style/InverseMethods:
-  Enabled: false
 Style/ModuleFunction:
   Enabled: false
 Style/MultilineTernaryOperator:
