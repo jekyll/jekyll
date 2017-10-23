@@ -1,4 +1,7 @@
----
+# Ruby linting configuration.
+#
+# If you disable a check, document why.
+
 AllCops:
   TargetRubyVersion: 2.1
   Include:
