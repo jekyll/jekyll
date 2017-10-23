@@ -29,6 +29,7 @@
   * Add configuration for first-timers bot (#6431)
   * Update first-timers-issue-template.md (#6472)
   * Site: Rename method (#6474)
+  * Do not linkify escaped characters as PRs in History (#6468)
 
 ### Minor Enhancements
 
