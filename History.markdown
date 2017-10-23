@@ -28,6 +28,7 @@
   * add failing test for non-utf8 encoding (#6339)
   * Add configuration for first-timers bot (#6431)
   * Update first-timers-issue-template.md (#6472)
+  * Site: Rename method (#6474)
 
 ### Minor Enhancements
 
