@@ -72,11 +72,11 @@ def custom_release_header_anchors(markdown)
     _, major, minor, patch = *release_notes.match(header_regexp)
     release_notes
       .gsub(header_regexp, "\\0\n{: #v\\1-\\2-\\3}")
-      .gsub(section_regexp) { |section| "#{section}\n{: ##{sluffigy(section)}-v#{major}-#{minor}-#{patch}}" }
+      .gsub(section_regexp) { |section| "#{section}\n{: ##{slugify(section)}-v#{major}-#{minor}-#{patch}}" }
   end.join("\n## ")
 end
 
-def sluffigy(header)
+def slugify(header)
   header.delete("#").strip.downcase.gsub(%r!\s+!, "-")
 end
 
