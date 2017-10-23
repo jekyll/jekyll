@@ -51,14 +51,8 @@ def linkify_prs(markdown)
   end
 end
 
-def linkify_users(markdown)
-  markdown.gsub(%r!(@\w+)!) do |username|
-    "[#{username}](https://github.com/#{username.delete("@")})"
-  end
-end
-
 def linkify(markdown)
-  linkify_users(linkify_prs(markdown))
+  linkify_prs(markdown)
 end
 
 def liquid_escape(markdown)
