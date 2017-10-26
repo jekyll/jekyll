@@ -92,6 +92,7 @@ module Jekyll
     # Convert the document using the converters which match this renderer's document.
     #
     # Returns String the converted content.
+    # rubocop:disable Lint/RescueWithoutErrorClass
     def convert(content)
       converters.reduce(content) do |output, converter|
         begin
@@ -105,6 +106,7 @@ module Jekyll
         end
       end
     end
+    # rubocop:enable Lint/RescueWithoutErrorClass
 
     # Render the given content with the payload and info
     #

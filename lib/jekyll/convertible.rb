@@ -36,6 +36,7 @@ module Jekyll
     #
     # Returns nothing.
     # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Lint/RescueWithoutErrorClass
     def read_yaml(base, name, opts = {})
       filename = File.join(base, name)
 
@@ -61,6 +62,7 @@ module Jekyll
 
       self.data
     end
+    # rubocop:enable Lint/RescueWithoutErrorClass
     # rubocop:enable Metrics/AbcSize
 
     def validate_data!(filename)

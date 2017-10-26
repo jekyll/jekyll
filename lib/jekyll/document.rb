@@ -256,6 +256,7 @@ module Jekyll
     # values
     #
     # Returns nothing.
+    # rubocop:disable Lint/RescueWithoutErrorClass
     def read(opts = {})
       Jekyll.logger.debug "Reading:", relative_path
 
@@ -271,6 +272,7 @@ module Jekyll
         end
       end
     end
+    # rubocop:enable Lint/RescueWithoutErrorClass
 
     # Create a Liquid-understandable version of this Document.
     #

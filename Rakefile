@@ -97,6 +97,7 @@ def converted_history(markdown)
   )
 end
 
+# rubocop:disable Lint/RescueWithoutErrorClass
 def siteify_file(file, overrides_front_matter = {})
   abort "You seem to have misplaced your #{file} file. I can haz?" unless File.exist?(file)
   title = begin
@@ -113,6 +114,7 @@ def siteify_file(file, overrides_front_matter = {})
   contents = "#{front_matter.to_yaml}---\n\n#{content_for(file)}"
   File.write("#{docs_folder}/_docs/#{slug}.md", contents)
 end
+# rubocop:enable Lint/RescueWithoutErrorClass
 
 def content_for(file)
   contents = File.read(file)
