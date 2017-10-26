@@ -228,13 +228,13 @@ CONTENT
 
     context "post content has highlight tag with preceding spaces & lines" do
       setup do
-        code = <<-EOS
+        code = <<-POST_CONTENT
 
 
      [,1] [,2]
 [1,] FALSE TRUE
 [2,] FALSE TRUE
-EOS
+POST_CONTENT
         fill_post(code, "highlighter" => "pygments")
       end
 
@@ -249,7 +249,7 @@ EOS
     context "post content has highlight tag " \
             "with preceding spaces & lines in several places" do
       setup do
-        code = <<-EOS
+        code = <<-POST_CONTENT
 
 
      [,1] [,2]
@@ -259,7 +259,7 @@ EOS
 [2,] FALSE TRUE
 
 
-EOS
+POST_CONTENT
         fill_post(code, "highlighter" => "pygments")
       end
 
@@ -288,11 +288,11 @@ EOS
 
     context "post content has highlight tag with only preceding spaces" do
       setup do
-        code = <<-EOS
+        code = <<-POST_CONTENT
      [,1] [,2]
 [1,] FALSE TRUE
 [2,] FALSE TRUE
-EOS
+POST_CONTENT
         fill_post(code, "highlighter" => "pygments")
       end
 
@@ -408,13 +408,13 @@ CONTENT
 
     context "post content has highlight tag with preceding spaces & lines" do
       setup do
-        fill_post <<-EOS
+        fill_post <<-POST_CONTENT
 
 
      [,1] [,2]
 [1,] FALSE TRUE
 [2,] FALSE TRUE
-EOS
+POST_CONTENT
       end
 
       should "only strip the preceding newlines" do
@@ -428,7 +428,7 @@ EOS
     context "post content has highlight tag with " \
             "preceding spaces & lines in several places" do
       setup do
-        fill_post <<-EOS
+        fill_post <<-POST_CONTENT
 
 
      [,1] [,2]
@@ -438,7 +438,7 @@ EOS
 [2,] FALSE TRUE
 
 
-EOS
+POST_CONTENT
       end
 
       should "only strip the newlines which precede and succeed the entire block" do
@@ -452,7 +452,7 @@ EOS
 
     context "post content has highlight tag with linenumbers" do
       setup do
-        create_post <<-EOS
+        create_post <<-POST_CONTENT
 ---
 title: This is a test
 ---
@@ -463,28 +463,28 @@ test
 {% endhighlight %}
 
 This should not be highlighted, right?
-EOS
+POST_CONTENT
       end
 
       should "should stop highlighting at boundary with rouge 2" do
         skip "Skipped because using an older version of Rouge" if Utils::Rouge.old_api?
-        expected = <<-EOS
+        expected = <<-POST_CONTENT
 <p>This is not yet highlighted</p>\n
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 </pre></td><td class="code"><pre><span class="nx">test</span></pre></td></tr></tbody></table></code></pre></figure>\n
 <p>This should not be highlighted, right?</p>
-EOS
+POST_CONTENT
         assert_match(expected, @result)
       end
 
       should "should stop highlighting at boundary with rouge 1" do
         skip "Skipped because using a newer version of Rouge" unless Utils::Rouge.old_api?
-        expected = <<-EOS
+        expected = <<-POST_CONTENT
 <p>This is not yet highlighted</p>\n
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>test<span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>\n
 <p>This should not be highlighted, right?</p>
-EOS
+POST_CONTENT
         assert_match(expected, @result)
       end
     end
@@ -505,11 +505,11 @@ EOS
 
     context "post content has highlight tag with only preceding spaces" do
       setup do
-        fill_post <<-EOS
+        fill_post <<-POST_CONTENT
      [,1] [,2]
 [1,] FALSE TRUE
 [2,] FALSE TRUE
-EOS
+POST_CONTENT
       end
 
       should "only strip the preceding newlines" do

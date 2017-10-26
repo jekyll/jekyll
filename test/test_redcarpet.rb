@@ -50,11 +50,11 @@ class TestRedcarpet < JekyllUnitTest
                      "data-lang=\"ruby\"><span class=\"nb\">puts</span> <span "\
                      "class=\"s2\">&quot;Hello world&quot;</span>\n</code></pre></div>",
                      @markdown.convert(
-                       <<-EOS
+                       <<-POST_CONTENT
 ```ruby
 puts "Hello world"
 ```
-EOS
+POST_CONTENT
                      ).strip
       end
     end
@@ -69,11 +69,11 @@ EOS
                      "data-lang=\"ruby\"><span class=\"nb\">puts</span> <span "\
                      "class=\"s2\">\"Hello world\"</span>\n</code></pre></div>",
                      @markdown.convert(
-                       <<-EOS
+                       <<-POST_CONTENT
 ```ruby
 puts "Hello world"
 ```
-          EOS
+          POST_CONTENT
                      ).strip
       end
     end
@@ -88,11 +88,11 @@ puts "Hello world"
                      "data-lang=\"ruby\">puts &quot;Hello world&quot;\n</code></pre>"\
                      "</figure>",
                      @markdown.convert(
-                       <<-EOS
+                       <<-POST_CONTENT
 ```ruby
 puts "Hello world"
 ```
-          EOS
+          POST_CONTENT
                      ).strip
       end
     end

@@ -48,14 +48,14 @@ def file_content_from_hash(input_hash)
         "#{input_hash["filter"]} }}"
     end
 
-  Jekyll::Utils.strip_heredoc(<<-EOF)
+  Jekyll::Utils.strip_heredoc(<<-FILE_CONTENT)
     ---
     #{matter.gsub(
       %r!\n!, "\n    "
     )}
     ---
     #{content}
-  EOF
+  FILE_CONTENT
 end
 
 #

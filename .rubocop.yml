@@ -85,8 +85,6 @@ Naming/FileName:
     - Gemfile
     - Rakefile
     - lib/theme_template/Gemfile
-Naming/HeredocDelimiterNaming:
-  Enabled: false
 Security/MarshalLoad:
   Exclude:
     - !ruby/regexp /test\/.*.rb$/
