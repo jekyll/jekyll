@@ -21,7 +21,7 @@ Layout/AlignHash:
 Layout/AlignParameters:
   Enabled: false
 Layout/EmptyLinesAroundAccessModifier:
-  Enabled: false
+  Enabled: false # Because we specify `private` per method, this would get ugly
 Layout/EmptyLinesAroundModuleBody:
   Enabled: false
 Layout/EndOfLine:
@@ -51,7 +51,7 @@ Lint/EndAlignment:
 Lint/UnreachableCode:
   Severity: error
 Lint/UselessAccessModifier:
-  Enabled: false
+  Enabled: false # Because we specify `private` per method
 Metrics/AbcSize:
   Max: 21
 Metrics/BlockLength:
