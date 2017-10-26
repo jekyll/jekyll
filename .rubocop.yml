@@ -19,7 +19,7 @@ Layout/AlignArray:
 Layout/AlignHash:
   EnforcedHashRocketStyle: table
 Layout/AlignParameters:
-  Enabled: false
+  Enabled: false # https://git.io/vFfR7
 Layout/EmptyLinesAroundAccessModifier:
   Enabled: false # Because we specify `private` per method, this would get ugly
 Layout/EmptyLinesAroundModuleBody:
@@ -102,7 +102,7 @@ Security/YAMLLoad:
     - !ruby/regexp /features\/.*.rb/
     - !ruby/regexp /test\/.*.rb$/
 Style/Alias:
-  Enabled: false
+  Enabled: false # We have no guidance on alias vs alias_method https://git.io/vFf0R
 Style/AndOr:
   Severity: error
 Style/Attr:
@@ -110,18 +110,18 @@ Style/Attr:
 Style/BracesAroundHashParameters:
   Enabled: false
 Style/ClassAndModuleChildren:
-  Enabled: false
+  Enabled: false # module X<\n>module Y is just as good as module X::Y. https://git.io/vFfEs
 Style/FrozenStringLiteralComment:
   Enabled: true
   EnforcedStyle: always
 Style/Documentation:
-  Enabled: false
+  Enabled: false # This *SHOULD* be enabled
   Exclude:
     - !ruby/regexp /features\/.*.rb$/
 Style/DoubleNegation:
-  Enabled: false
+  Enabled: false # This *SHOULD* be enabled
 Style/GuardClause:
-  Enabled: false
+  Enabled: false # This *SHOULD* be enabled
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
   Severity: error
@@ -143,7 +143,7 @@ Style/PercentLiteralDelimiters:
 Style/RedundantReturn:
   Enabled: false
 Style/RedundantSelf:
-  Enabled: false
+  Enabled: false # Sometimes a self.field is a bit more clear https://git.io/vFf00
 Style/RegexpLiteral:
   EnforcedStyle: percent_r
 Style/RescueModifier:
