@@ -450,35 +450,41 @@ class TestConfiguration < JekyllUnitTest
       conf = Configuration[default_configuration].tap do |c|
         c["collections"] = ["docs"]
       end
-      assert_equal conf.add_default_collections, conf.merge("collections" => {
-        "docs"  => {},
-        "posts" => {
-          "output"    => true,
-          "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
-        },
-      })
+      assert_equal conf.add_default_collections, conf.merge(
+        "collections" => {
+          "docs"  => {},
+          "posts" => {
+            "output"    => true,
+            "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
+          },
+        }
+      )
     end
 
     should "force collections.posts.output = true" do
       conf = Configuration[default_configuration].tap do |c|
         c["collections"] = { "posts" => { "output" => false } }
       end
-      assert_equal conf.add_default_collections, conf.merge("collections" => {
-        "posts" => {
-          "output"    => true,
-          "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
-        },
-      })
+      assert_equal conf.add_default_collections, conf.merge(
+        "collections" => {
+          "posts" => {
+            "output"    => true,
+            "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
+          },
+        }
+      )
     end
 
     should "set collections.posts.permalink if it's not set" do
       conf = Configuration[default_configuration]
-      assert_equal conf.add_default_collections, conf.merge("collections" => {
-        "posts" => {
-          "output"    => true,
-          "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
-        },
-      })
+      assert_equal conf.add_default_collections, conf.merge(
+        "collections" => {
+          "posts" => {
+            "output"    => true,
+            "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
+          },
+        }
+      )
     end
 
     should "leave collections.posts.permalink alone if it is set" do
@@ -488,12 +494,14 @@ class TestConfiguration < JekyllUnitTest
           "posts" => { "permalink" => posts_permalink },
         }
       end
-      assert_equal conf.add_default_collections, conf.merge("collections" => {
-        "posts" => {
-          "output"    => true,
-          "permalink" => posts_permalink,
-        },
-      })
+      assert_equal conf.add_default_collections, conf.merge(
+        "collections" => {
+          "posts" => {
+            "output"    => true,
+            "permalink" => posts_permalink,
+          },
+        }
+      )
     end
   end
 

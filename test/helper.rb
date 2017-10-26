@@ -114,11 +114,13 @@ class JekyllUnitTest < Minitest::Test
   end
 
   def fixture_document(relative_path)
-    site = fixture_site("collections" => {
-      "methods" => {
-        "output" => true,
-      },
-    })
+    site = fixture_site(
+      "collections" => {
+        "methods" => {
+          "output" => true,
+        },
+      }
+    )
     site.read
     matching_doc = site.collections["methods"].docs.find do |doc|
       doc.relative_path == relative_path
@@ -139,8 +141,10 @@ class JekyllUnitTest < Minitest::Test
   end
 
   def site_configuration(overrides = {})
-    full_overrides = build_configs(overrides, build_configs("destination" => dest_dir,
-                                                            "incremental" => false))
+    full_overrides = build_configs(overrides, build_configs(
+      "destination" => dest_dir,
+      "incremental" => false
+    ))
     Configuration.from(full_overrides.merge("source" => source_dir))
   end
 

@@ -90,11 +90,13 @@ class TestCollections < JekyllUnitTest
 
   context "a collection with permalink" do
     setup do
-      @site = fixture_site("collections" => {
-        "methods" => {
-          "permalink" => "/awesome/:path/",
-        },
-      })
+      @site = fixture_site(
+        "collections" => {
+          "methods" => {
+            "permalink" => "/awesome/:path/",
+          },
+        }
+      )
       @site.process
       @collection = @site.collections["methods"]
     end
@@ -152,12 +154,14 @@ class TestCollections < JekyllUnitTest
 
   context "with a collection with metadata" do
     setup do
-      @site = fixture_site("collections" => {
-        "methods" => {
-          "foo" => "bar",
-          "baz" => "whoo",
-        },
-      })
+      @site = fixture_site(
+        "collections" => {
+          "methods" => {
+            "foo" => "bar",
+            "baz" => "whoo",
+          },
+        }
+      )
       @site.process
       @collection = @site.collections["methods"]
     end
@@ -221,12 +225,14 @@ class TestCollections < JekyllUnitTest
 
   context "a collection with included dotfiles" do
     setup do
-      @site = fixture_site("collections" => {
-        "methods" => {
-          "permalink" => "/awesome/:path/",
+      @site = fixture_site(
+        "collections" => {
+          "methods" => {
+            "permalink" => "/awesome/:path/",
+          },
         },
-      },
-                           "include"     => %w(.htaccess .gitignore))
+        "include"     => %w(.htaccess .gitignore)
+      )
       @site.process
       @collection = @site.collections["methods"]
     end
