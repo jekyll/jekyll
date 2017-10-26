@@ -59,7 +59,7 @@ module Jekyll
         @orig_post = post.strip
         begin
           @post = PostComparer.new(@orig_post)
-        rescue => e
+        rescue StandardError => e
           raise Jekyll::Errors::PostURLError, <<-MSG
 Could not parse name of post "#{@orig_post}" in tag 'post_url'.
 

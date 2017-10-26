@@ -96,7 +96,7 @@ module Jekyll
       converters.reduce(content) do |output, converter|
         begin
           converter.convert output
-        rescue => e
+        rescue StandardError => e
           Jekyll.logger.error "Conversion error:",
             "#{converter.class} encountered an error while "\
             "converting '#{document.relative_path}':"
