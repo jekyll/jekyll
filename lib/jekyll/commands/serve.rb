@@ -85,7 +85,7 @@ module Jekyll
             :StartCallback      => start_callback(opts["detach"]),
             :BindAddress        => opts["host"],
             :Port               => opts["port"],
-            :DirectoryIndex     => %W(
+            :DirectoryIndex     => %w(
               index.htm
               index.html
               index.rhtml
