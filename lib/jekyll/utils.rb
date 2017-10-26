@@ -106,23 +106,39 @@ module Jekyll
       result
     end
 
+    # rubocop:disable Lint/RescueWithoutErrorClass
     # Apply #to_sym to all keys in the hash
     #
     # hash - the hash to which to apply this transformation
     #
     # Returns a new hash with symbolized keys
     def symbolize_hash_keys(hash)
-      transform_keys(hash) { |key| key.to_sym rescue key }
+      transform_keys(hash) do |key|
+        begin
+                                     key.to_sym
+                                   rescue
+                                     key
+                                   end
+      end
     end
+    # rubocop:enable Lint/RescueWithoutErrorClass
 
+    # rubocop:disable Lint/RescueWithoutErrorClass
     # Apply #to_s to all keys in the Hash
     #
     # hash - the hash to which to apply this transformation
     #
     # Returns a new hash with stringified keys
     def stringify_hash_keys(hash)
-      transform_keys(hash) { |key| key.to_s rescue key }
+      transform_keys(hash) do |key|
+        begin
+                                     key.to_s
+                                   rescue
+                                     key
+                                   end
+      end
     end
+    # rubocop:enable Lint/RescueWithoutErrorClass
 
     # Parse a date/time and throw an error if invalid
     #

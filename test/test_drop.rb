@@ -17,9 +17,7 @@ end
 class TestDrop < JekyllUnitTest
   context "Drops" do
     setup do
-      @site = fixture_site({
-        "collections" => ["methods"],
-      })
+      @site = fixture_site("collections" => ["methods"])
       @site.process
       @document = @site.collections["methods"].docs.detect do |d|
         d.relative_path == "_methods/configuration.md"

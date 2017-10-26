@@ -12,9 +12,11 @@ module Jekyll
           "ssl_key"            => ["--ssl-key [KEY]", "X.509 (SSL) Private Key."],
           "port"               => ["-P", "--port [PORT]", "Port to listen on"],
           "show_dir_listing"   => ["--show-dir-listing",
-            "Show a directory listing instead of loading your index file.",],
+                                   "Show a directory listing instead of loading your "\
+                                   "index file.",],
           "skip_initial_build" => ["skip_initial_build", "--skip-initial-build",
-            "Skips the initial site build which occurs before the server is started.",],
+                                   "Skips the initial site build which occurs before "\
+                                   "the server is started.",],
         }.freeze
 
         #
@@ -33,12 +35,10 @@ module Jekyll
 
             cmd.action do |_, opts|
               opts["serving"] = true
-              opts["watch"  ] = true unless opts.key?("watch")
+              opts["watch"] = true unless opts.key?("watch")
 
               config = configuration_from_options(opts)
-              if Jekyll.env == "development"
-                config["url"] = default_url(config)
-              end
+              config["url"] = default_url(config) if Jekyll.env == "development"
               [Build, Serve].each { |klass| klass.process(config) }
             end
           end
@@ -116,12 +116,10 @@ module Jekyll
 
         private
         def file_handler_opts
-          WEBrick::Config::FileHandler.merge({
-            :FancyIndexing     => true,
-            :NondisclosureName => [
-              ".ht*", "~*",
-            ],
-          })
+          WEBrick::Config::FileHandler.merge(:FancyIndexing     => true,
+                                             :NondisclosureName => [
+                                               ".ht*", "~*",
+                                             ])
         end
 
         #
@@ -138,12 +136,11 @@ module Jekyll
 
         private
         def format_url(ssl_enabled, address, port, baseurl = nil)
-          format("%<prefix>s://%<address>s:%<port>i%<baseurl>s", {
-            :prefix  => ssl_enabled ? "https" : "http",
-            :address => address,
-            :port    => port,
-            :baseurl => baseurl ? "#{baseurl}/" : "",
-          })
+          format("%<prefix>s://%<address>s:%<port>i%<baseurl>s",
+                 :prefix  => ssl_enabled ? "https" : "http",
+                 :address => address,
+                 :port    => port,
+                 :baseurl => baseurl ? "#{baseurl}/" : "")
         end
 
         #
@@ -215,12 +212,12 @@ module Jekyll
           require "openssl"
           require "webrick/https"
           source_key = Jekyll.sanitized_path(opts[:JekyllOptions]["source"], \
-                    opts[:JekyllOptions]["ssl_key" ])
+                    opts[:JekyllOptions]["ssl_key"])
           source_certificate = Jekyll.sanitized_path(opts[:JekyllOptions]["source"], \
                     opts[:JekyllOptions]["ssl_cert"])
           opts[:SSLCertificate] =
             OpenSSL::X509::Certificate.new(File.read(source_certificate))
-          opts[:SSLPrivateKey ] = OpenSSL::PKey::RSA.new(File.read(source_key))
+          opts[:SSLPrivateKey] = OpenSSL::PKey::RSA.new(File.read(source_key))
           opts[:SSLEnable] = true
         end
 

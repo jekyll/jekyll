@@ -49,7 +49,7 @@ module Jekyll
             Jekyll::Deprecator.deprecation_message "Your site still uses relative" \
                                 " permalinks, which was removed in" \
                                 " Jekyll v3.0.0."
-            return true
+            true
           end
         end
 

@@ -135,16 +135,16 @@ class TestKramdown < JekyllUnitTest
 
     should "move coderay to syntax_highlighter_opts" do
       original = Kramdown::Document.method(:new)
-      markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, {
-        "higlighter" => nil,
-        "markdown"   => "kramdown",
-        "kramdown"   => {
-          "syntax_highlighter" => "coderay",
-          "coderay"            => {
-            "hello" => "world",
-          },
-        },
-      }))
+      markdown = Converters::Markdown.new(Utils.deep_merge_hashes(
+        @config, "higlighter" => nil,
+                 "markdown"   => "kramdown",
+                 "kramdown"   => {
+                   "syntax_highlighter" => "coderay",
+                   "coderay"            => {
+                     "hello" => "world",
+                   },
+                 }
+      ))
 
       expect(Kramdown::Document).to receive(:new) do |arg1, hash|
         assert_equal hash["syntax_highlighter_opts"]["hello"], "world"

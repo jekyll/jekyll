@@ -88,9 +88,7 @@ module Jekyll
       return true if path.nil?
 
       # Check for path in cache
-      if cache.key? path
-        return cache[path]
-      end
+      return cache[path] if cache.key? path
 
       if metadata[path]
         # If we have seen this file before,
@@ -119,9 +117,7 @@ module Jekyll
     #
     # Returns nothing.
     def write_metadata
-      unless disabled?
-        File.binwrite(metadata_file, Marshal.dump(metadata))
-      end
+      File.binwrite(metadata_file, Marshal.dump(metadata)) unless disabled?
     end
 
     # Produce the absolute path of the metadata file
@@ -184,9 +180,7 @@ module Jekyll
       # If one of this file dependencies have been modified,
       # set the regeneration bit for both the dependency and the file to true
       metadata[path]["deps"].each do |dependency|
-        if modified?(dependency)
-          return cache[dependency] = cache[path] = true
-        end
+        return cache[dependency] = cache[path] = true if modified?(dependency)
       end
 
       if File.exist?(path) && metadata[path]["mtime"].eql?(File.mtime(path))

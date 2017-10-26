@@ -130,16 +130,12 @@ module Jekyll
     #
     # Returns the type of self.
     def type
-      if is_a?(Page)
-        :pages
-      end
+      :pages if is_a?(Page)
     end
 
     # returns the owner symbol for hook triggering
     def hook_owner
-      if is_a?(Page)
-        :pages
-      end
+      :pages if is_a?(Page)
     end
 
     # Determine whether the document is an asset file.

@@ -14,16 +14,12 @@ AllCops:
     - script/**/*
     - vendor/**/*
     - tmp/**/*
-Layout/AlignArray:
-  Enabled: false
 Layout/AlignHash:
   EnforcedHashRocketStyle: table
 Layout/AlignParameters:
   Enabled: false # https://git.io/vFfR7
 Layout/EmptyLinesAroundAccessModifier:
   Enabled: false # Because we specify `private` per method, this would get ugly
-Layout/EmptyLinesAroundModuleBody:
-  Enabled: false
 Layout/EndOfLine:
   EnforcedStyle: native
 Layout/ExtraSpacing:
@@ -44,8 +40,6 @@ Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
 Layout/SpaceAroundOperators:
   Enabled: true
-Layout/SpaceInsideBrackets:
-  Enabled: false
 Lint/EndAlignment:
   Severity: error
 Lint/UnreachableCode:
@@ -105,10 +99,6 @@ Style/Alias:
   Enabled: false # We have no guidance on alias vs alias_method https://git.io/vFf0R
 Style/AndOr:
   Severity: error
-Style/Attr:
-  Enabled: false
-Style/BracesAroundHashParameters:
-  Enabled: false
 Style/ClassAndModuleChildren:
   Enabled: false # module X<\n>module Y is just as good as module X::Y. https://git.io/vFfEs
 Style/FrozenStringLiteralComment:
@@ -125,8 +115,6 @@ Style/GuardClause:
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
   Severity: error
-Style/IfUnlessModifier:
-  Enabled: false
 Style/ModuleFunction:
   Enabled: false
 Style/MultilineTernaryOperator:
@@ -140,18 +128,12 @@ Style/PercentLiteralDelimiters:
     "%w": "()"
     "%W": "()"
     "%x": "()"
-Style/RedundantReturn:
-  Enabled: false
 Style/RedundantSelf:
   Enabled: false # Sometimes a self.field is a bit more clear https://git.io/vFf00
 Style/RegexpLiteral:
   EnforcedStyle: percent_r
-Style/RescueModifier:
-  Enabled: false
 Style/SignalException:
   EnforcedStyle: only_raise
-Style/SingleLineMethods:
-  Enabled: false
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/StringLiteralsInInterpolation:

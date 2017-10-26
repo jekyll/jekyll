@@ -7,17 +7,29 @@ require "safe_yaml/load"
 
 class Paths
   SOURCE_DIR = Pathname.new(File.expand_path("../..", __dir__))
-  def self.test_dir; source_dir.join("tmp", "jekyll"); end
+  def self.test_dir
+    source_dir.join("tmp", "jekyll")
+  end
 
-  def self.theme_gem_dir; source_dir.join("tmp", "jekyll", "my-cool-theme"); end
+  def self.theme_gem_dir
+    source_dir.join("tmp", "jekyll", "my-cool-theme")
+  end
 
-  def self.output_file; test_dir.join("jekyll_output.txt"); end
+  def self.output_file
+    test_dir.join("jekyll_output.txt")
+  end
 
-  def self.status_file; test_dir.join("jekyll_status.txt"); end
+  def self.status_file
+    test_dir.join("jekyll_status.txt")
+  end
 
-  def self.jekyll_bin; source_dir.join("exe", "jekyll"); end
+  def self.jekyll_bin
+    source_dir.join("exe", "jekyll")
+  end
 
-  def self.source_dir; SOURCE_DIR; end
+  def self.source_dir
+    SOURCE_DIR
+  end
 end
 
 #
@@ -49,7 +61,7 @@ end
 #
 
 def source_dir(*files)
-  return Paths.test_dir(*files)
+  Paths.test_dir(*files)
 end
 
 #
@@ -70,17 +82,13 @@ end
 #
 
 def jekyll_run_output
-  if Paths.output_file.file?
-    then return Paths.output_file.read
-  end
+  return Paths.output_file.read if Paths.output_file.file?
 end
 
 #
 
 def jekyll_run_status
-  if Paths.status_file.file?
-    then return Paths.status_file.read
-  end
+  return Paths.status_file.read if Paths.status_file.file?
 end
 
 #
@@ -136,13 +144,13 @@ def location(folder, direction)
   end
 
   [before || ".",
-    after || ".",]
+   after || ".",]
 end
 
 #
 
 def file_contents(path)
-  return Pathname.new(path).read
+  Pathname.new(path).read
 end
 
 #

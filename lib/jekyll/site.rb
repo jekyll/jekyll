@@ -37,6 +37,7 @@ module Jekyll
     end
 
     # rubocop:disable Lint/ReturnInVoidContext
+    # rubocop:disable Style/RedundantReturn
     # Public: Set the site's configuration. This handles side-effects caused by
     # changing values in the configuration.
     # In Jekyll 4.0, this will be changed to return void
@@ -48,7 +49,7 @@ module Jekyll
       @config = config.clone
 
       %w(safe lsi highlighter baseurl exclude include future unpublished
-        show_drafts limit_posts keep_files).each do |opt|
+         show_drafts limit_posts keep_files).each do |opt|
         self.send("#{opt}=", config[opt])
       end
 
@@ -64,6 +65,7 @@ module Jekyll
 
       return @config
     end
+    # rubocop:enable Style/RedundantReturn
     # rubocop:enable Lint/ReturnInVoidContext
 
     # Public: Read, process, and write this Site to output.

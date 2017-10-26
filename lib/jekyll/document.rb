@@ -203,11 +203,9 @@ module Jekyll
     #
     # Returns the computed URL for the document.
     def url
-      @url ||= URL.new({
-        :template     => url_template,
-        :placeholders => url_placeholders,
-        :permalink    => permalink,
-      }).to_s
+      @url ||= URL.new(:template     => url_template,
+                       :placeholders => url_placeholders,
+                       :permalink    => permalink).to_s
     end
 
     def [](key)
@@ -334,16 +332,12 @@ module Jekyll
 
     def next_doc
       pos = collection.docs.index { |post| post.equal?(self) }
-      if pos && pos < collection.docs.length - 1
-        collection.docs[pos + 1]
-      end
+      collection.docs[pos + 1] if pos && pos < collection.docs.length - 1
     end
 
     def previous_doc
       pos = collection.docs.index { |post| post.equal?(self) }
-      if pos && pos > 0
-        collection.docs[pos - 1]
-      end
+      collection.docs[pos - 1] if pos && pos > 0
     end
 
     def trigger_hooks(hook_name, *args)
@@ -399,21 +393,17 @@ module Jekyll
     end
 
     def populate_categories
-      merge_data!({
-        "categories" => (
+      merge_data!("categories" => (
         Array(data["categories"]) + Utils.pluralized_array_from_hash(
           data,
           "category",
           "categories"
         )
-        ).map(&:to_s).flatten.uniq,
-      })
+      ).map(&:to_s).flatten.uniq)
     end
 
     def populate_tags
-      merge_data!({
-        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten,
-      })
+      merge_data!("tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten)
     end
 
     private
@@ -501,9 +491,7 @@ module Jekyll
 
     private
     def generate_excerpt
-      if generate_excerpt?
-        data["excerpt"] ||= Jekyll::Excerpt.new(self)
-      end
+      data["excerpt"] ||= Jekyll::Excerpt.new(self) if generate_excerpt?
     end
   end
 end

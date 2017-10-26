@@ -41,7 +41,7 @@ class TestRedcarpet < JekyllUnitTest
     context "with pygments enabled" do
       setup do
         @markdown = Converters::Markdown.new @config.merge(
-          { "highlighter" => "pygments" }
+          "highlighter" => "pygments"
         )
       end
 
@@ -61,7 +61,7 @@ EOS
 
     context "with rouge enabled" do
       setup do
-        @markdown = Converters::Markdown.new @config.merge({ "highlighter" => "rouge" })
+        @markdown = Converters::Markdown.new @config.merge("highlighter" => "rouge")
       end
 
       should "render fenced code blocks with syntax highlighting" do
@@ -80,7 +80,7 @@ puts "Hello world"
 
     context "without any highlighter" do
       setup do
-        @markdown = Converters::Markdown.new @config.merge({ "highlighter" => nil })
+        @markdown = Converters::Markdown.new @config.merge("highlighter" => nil)
       end
 
       should "render fenced code blocks without syntax highlighting" do

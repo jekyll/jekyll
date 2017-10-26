@@ -15,13 +15,13 @@ class TestConfiguration < JekyllUnitTest
     end
 
     should "merge input over defaults" do
-      result = Configuration.from({ "source" => "blah" })
+      result = Configuration.from("source" => "blah")
       refute_equal result["source"], Configuration::DEFAULTS["source"]
       assert_equal result["source"], "blah"
     end
 
     should "fix common mistakes" do
-      result = Configuration.from({ "paginate" => 0 })
+      result = Configuration.from("paginate" => 0)
       assert_nil(
         result["paginate"],
         "Expected 'paginate' to be corrected to 'nil', " \
@@ -33,12 +33,10 @@ class TestConfiguration < JekyllUnitTest
       result = Configuration.from({})
       assert_equal(
         result["collections"],
-        {
-          "posts" => {
-            "output"    => true,
-            "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
-          },
-        }
+                  "posts" => {
+                    "output"    => true,
+                    "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
+                  }
       )
     end
 
@@ -77,7 +75,7 @@ class TestConfiguration < JekyllUnitTest
       assert_instance_of Hash, result["collections"]
       assert_equal(
         result["collections"],
-        { "posts" => { "output" => true }, "methods" => {} }
+        "posts" => { "output" => true }, "methods" => {}
       )
     end
 
@@ -86,17 +84,15 @@ class TestConfiguration < JekyllUnitTest
         .add_default_collections
       assert_equal(
         result["collections"],
-        {
-          "posts" => {
-            "output"    => true,
-            "permalink" => "/:categories/:year/:month/:day/:title/",
-          },
-        }
+                  "posts" => {
+                    "output"    => true,
+                    "permalink" => "/:categories/:year/:month/:day/:title/",
+                  }
       )
 
       result = Configuration[{ "permalink" => nil, "collections" => {} }]
         .add_default_collections
-      assert_equal result["collections"], { "posts" => { "output" => true } }
+      assert_equal result["collections"], "posts" => { "output" => true }
     end
 
     should "forces posts to output" do
@@ -191,7 +187,7 @@ class TestConfiguration < JekyllUnitTest
       allow(SafeYAML)
         .to receive(:load_file)
         .with("not_empty.yml")
-        .and_return({ "foo" => "bar", "include" => "", "exclude" => "" })
+        .and_return("foo" => "bar", "include" => "", "exclude" => "")
       Jekyll.logger.log_level = :warn
       read_config = @config.read_config_files(["empty.yml", "not_empty.yml"])
       Jekyll.logger.log_level = :info
@@ -324,7 +320,7 @@ class TestConfiguration < JekyllUnitTest
           "The configuration file '#{@user_config}' could not be found."
         ))
       assert_raises LoadError do
-        Jekyll.configuration({ "config" => [@user_config] })
+        Jekyll.configuration("config" => [@user_config])
       end
     end
 
@@ -353,14 +349,12 @@ class TestConfiguration < JekyllUnitTest
       allow(SafeYAML)
         .to receive(:load_file)
         .with(@paths[:other])
-        .and_return({ "baseurl" => "http://example.com" })
+        .and_return("baseurl" => "http://example.com")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
       assert_equal \
-        site_configuration({
-          "baseurl" => "http://example.com",
-          "config"  => @paths[:other],
-        }),
-        Jekyll.configuration(test_config.merge({ "config" => @paths[:other] }))
+        site_configuration("baseurl" => "http://example.com",
+                           "config"  => @paths[:other]),
+        Jekyll.configuration(test_config.merge("config" => @paths[:other]))
     end
 
     should "load different config if specified with symbol key" do
@@ -368,33 +362,29 @@ class TestConfiguration < JekyllUnitTest
       allow(SafeYAML)
         .to receive(:load_file)
         .with(@paths[:other])
-        .and_return({ "baseurl" => "http://example.com" })
+        .and_return("baseurl" => "http://example.com")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
       assert_equal \
-        site_configuration({
-          "baseurl" => "http://example.com",
-          "config"  => @paths[:other],
-        }),
-        Jekyll.configuration(test_config.merge({ :config => @paths[:other] }))
+        site_configuration("baseurl" => "http://example.com",
+                           "config"  => @paths[:other]),
+        Jekyll.configuration(test_config.merge(:config => @paths[:other]))
     end
 
     should "load default config if path passed is empty" do
       allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return({})
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
       assert_equal \
-        site_configuration({ "config" => [@paths[:empty]] }),
-        Jekyll.configuration(test_config.merge({ "config" => [@paths[:empty]] }))
+        site_configuration("config" => [@paths[:empty]]),
+        Jekyll.configuration(test_config.merge("config" => [@paths[:empty]]))
     end
 
     should "successfully load a TOML file" do
       Jekyll.logger.log_level = :warn
       assert_equal \
-        site_configuration({
-          "baseurl" => "/you-beautiful-blog-you",
-          "title"   => "My magnificent site, wut",
-          "config"  => [@paths[:toml]],
-        }),
-        Jekyll.configuration(test_config.merge({ "config" => [@paths[:toml]] }))
+        site_configuration("baseurl" => "/you-beautiful-blog-you",
+                           "title"   => "My magnificent site, wut",
+                           "config"  => [@paths[:toml]]),
+        Jekyll.configuration(test_config.merge("config" => [@paths[:toml]]))
       Jekyll.logger.log_level = :info
     end
 
@@ -408,12 +398,10 @@ class TestConfiguration < JekyllUnitTest
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:toml]}")
       assert_equal(
-        site_configuration({
-          "config" => [@paths[:default], @paths[:other], @paths[:toml]],
-        }),
+        site_configuration("config" => [@paths[:default], @paths[:other], @paths[:toml]]),
         Jekyll.configuration(
           test_config.merge(
-            { "config" => [@paths[:default], @paths[:other], @paths[:toml]] }
+            "config" => [@paths[:default], @paths[:other], @paths[:toml]]
           )
         )
       )
@@ -423,11 +411,11 @@ class TestConfiguration < JekyllUnitTest
       allow(SafeYAML)
         .to receive(:load_file)
         .with(@paths[:default])
-        .and_return({ "baseurl" => "http://example.dev" })
+        .and_return("baseurl" => "http://example.dev")
       allow(SafeYAML)
         .to receive(:load_file)
         .with(@paths[:other])
-        .and_return({ "baseurl" => "http://example.com" })
+        .and_return("baseurl" => "http://example.com")
       allow($stdout)
         .to receive(:puts)
         .with("Configuration file: #{@paths[:default]}")
@@ -435,12 +423,10 @@ class TestConfiguration < JekyllUnitTest
         .to receive(:puts)
         .with("Configuration file: #{@paths[:other]}")
       assert_equal \
-        site_configuration({
-          "baseurl" => "http://example.com",
-          "config"  => [@paths[:default], @paths[:other]],
-        }),
+        site_configuration("baseurl" => "http://example.com",
+                           "config"  => [@paths[:default], @paths[:other]]),
         Jekyll.configuration(
-          test_config.merge({ "config" => [@paths[:default], @paths[:other]] })
+          test_config.merge("config" => [@paths[:default], @paths[:other]])
         )
     end
   end
@@ -456,13 +442,11 @@ class TestConfiguration < JekyllUnitTest
       conf = Configuration[default_configuration].tap do |c|
         c["collections"] = ["docs"]
       end
-      assert_equal conf.add_default_collections, conf.merge({
-        "collections" => {
-          "docs"  => {},
-          "posts" => {
-            "output"    => true,
-            "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
-          },
+      assert_equal conf.add_default_collections, conf.merge("collections" => {
+        "docs"  => {},
+        "posts" => {
+          "output"    => true,
+          "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
         },
       })
     end
@@ -471,24 +455,20 @@ class TestConfiguration < JekyllUnitTest
       conf = Configuration[default_configuration].tap do |c|
         c["collections"] = { "posts" => { "output" => false } }
       end
-      assert_equal conf.add_default_collections, conf.merge({
-        "collections" => {
-          "posts" => {
-            "output"    => true,
-            "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
-          },
+      assert_equal conf.add_default_collections, conf.merge("collections" => {
+        "posts" => {
+          "output"    => true,
+          "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
         },
       })
     end
 
     should "set collections.posts.permalink if it's not set" do
       conf = Configuration[default_configuration]
-      assert_equal conf.add_default_collections, conf.merge({
-        "collections" => {
-          "posts" => {
-            "output"    => true,
-            "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
-          },
+      assert_equal conf.add_default_collections, conf.merge("collections" => {
+        "posts" => {
+          "output"    => true,
+          "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
         },
       })
     end
@@ -500,12 +480,10 @@ class TestConfiguration < JekyllUnitTest
           "posts" => { "permalink" => posts_permalink },
         }
       end
-      assert_equal conf.add_default_collections, conf.merge({
-        "collections" => {
-          "posts" => {
-            "output"    => true,
-            "permalink" => posts_permalink,
-          },
+      assert_equal conf.add_default_collections, conf.merge("collections" => {
+        "posts" => {
+          "output"    => true,
+          "permalink" => posts_permalink,
         },
       })
     end

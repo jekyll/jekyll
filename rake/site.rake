@@ -37,11 +37,9 @@ namespace :site do
   desc "Generate the site"
   task :generate => :generated_pages do
     require "jekyll"
-    Jekyll::Commands::Build.process({
-      "profile"     => true,
-      "source"      => File.expand_path(docs_folder),
-      "destination" => File.expand_path("#{docs_folder}/_site"),
-    })
+    Jekyll::Commands::Build.process("profile"     => true,
+                                    "source"      => File.expand_path(docs_folder),
+                                    "destination" => File.expand_path("#{docs_folder}/_site"))
   end
   task :build => :generate
 
@@ -60,7 +58,7 @@ namespace :site do
 
   desc "Create a nicely formatted history page for the jekyll site based on the repo history."
   task :history do
-    siteify_file("History.markdown", { "title" => "History" })
+    siteify_file("History.markdown", "title" => "History")
   end
 
   desc "Copy the Code of Conduct"

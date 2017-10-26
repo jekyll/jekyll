@@ -70,7 +70,7 @@ class TestStaticFile < JekyllUnitTest
         "root",
         "_foo/dir/subdir",
         "file.html",
-        { "output" => true }
+        "output" => true
       )
       assert_equal :foo, static_file.type
       assert_equal "/foo/dir/subdir/file.html", static_file.url
@@ -82,7 +82,7 @@ class TestStaticFile < JekyllUnitTest
         "root",
         "_foo/dir/subdir",
         "file.html",
-        { "output" => true, "permalink" => "/:path/" }
+        "output" => true, "permalink" => "/:path/"
       )
       assert_equal :foo, static_file.type
       assert_equal "/dir/subdir/file.html", static_file.url

@@ -34,9 +34,7 @@ module Jekyll
     end
 
     def arg_is_present?(args, deprecated_argument, message)
-      if args.include?(deprecated_argument)
-        deprecation_message(message)
-      end
+      deprecation_message(message) if args.include?(deprecated_argument)
     end
 
     def deprecation_message(message)

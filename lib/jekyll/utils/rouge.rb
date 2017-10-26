@@ -3,7 +3,6 @@
 module Jekyll
   module Utils
     module Rouge
-
       def self.html_formatter(*args)
         Jekyll::External.require_with_graceful_fail("rouge")
         if old_api?

@@ -97,11 +97,9 @@ module Jekyll
     #
     # Returns the String url.
     def url
-      @url ||= URL.new({
-        :template     => template,
-        :placeholders => url_placeholders,
-        :permalink    => permalink,
-      }).to_s
+      @url ||= URL.new(:template     => template,
+                       :placeholders => url_placeholders,
+                       :permalink    => permalink).to_s
     end
 
     # Returns a hash of URL placeholder names (as symbols) mapping to the
