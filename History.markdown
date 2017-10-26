@@ -30,6 +30,7 @@
   * Update first-timers-issue-template.md (#6472)
   * Site: Rename method (#6474)
   * Do not linkify escaped characters as PRs in History (#6468)
+  * Rely on jekyll-mentions for linking usernames (#6469)
 
 ### Minor Enhancements
 
