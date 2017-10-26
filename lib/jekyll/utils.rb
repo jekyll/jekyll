@@ -115,10 +115,10 @@ module Jekyll
     def symbolize_hash_keys(hash)
       transform_keys(hash) do |key|
         begin
-                                     key.to_sym
-                                   rescue
-                                     key
-                                   end
+          key.to_sym
+        rescue
+          key
+        end
       end
     end
     # rubocop:enable Lint/RescueWithoutErrorClass
@@ -132,10 +132,10 @@ module Jekyll
     def stringify_hash_keys(hash)
       transform_keys(hash) do |key|
         begin
-                                     key.to_s
-                                   rescue
-                                     key
-                                   end
+          key.to_s
+        rescue
+          key
+        end
       end
     end
     # rubocop:enable Lint/RescueWithoutErrorClass

@@ -176,13 +176,15 @@ class TestFrontMatterDefaults < JekyllUnitTest
 
   context "A site with front matter defaults with quoted date" do
     setup do
-      @site = Site.new(Jekyll.configuration("source"      => source_dir,
-                                            "destination" => dest_dir,
-                                            "defaults"    => [{
-                                              "values" => {
-                                                "date" => "2015-01-01 00:00:01",
-                                              },
-                                            },]))
+      @site = Site.new(Jekyll.configuration(
+        "source"      => source_dir,
+        "destination" => dest_dir,
+        "defaults"    => [{
+          "values" => {
+            "date" => "2015-01-01 00:00:01",
+          },
+        },]
+      ))
     end
 
     should "not raise error" do

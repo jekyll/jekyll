@@ -119,12 +119,13 @@ class TestCommandsServe < JekyllUnitTest
         end
 
         should "take `host`, `port` and `ssl` into consideration if set" do
-          @merc.execute(:serve, "watch"    => false,
-                                "host"     => "example.com",
-                                "port"     => "9999",
-                                "url"      => "https://jekyllrb.com/",
-                                "ssl_cert" => "foo",
-                                "ssl_key"  => "bar")
+          @merc.execute(:serve,
+                        "watch"    => false,
+                        "host"     => "example.com",
+                        "port"     => "9999",
+                        "url"      => "https://jekyllrb.com/",
+                        "ssl_cert" => "foo",
+                        "ssl_key"  => "bar")
 
           assert_equal 1, Jekyll.sites.count
           assert_equal "https://example.com:9999", Jekyll.sites.first.config["url"]
@@ -168,10 +169,12 @@ class TestCommandsServe < JekyllUnitTest
           expect(OpenSSL::X509::Certificate).to receive(:new).and_return("c1")
           allow(File).to receive(:read).and_return("foo")
 
-          result = custom_opts("ssl_cert"   => "foo",
-                               "source"     => "bar",
-                               "enable_ssl" => true,
-                               "ssl_key"    => "bar")
+          result = custom_opts(
+            "ssl_cert"   => "foo",
+            "source"     => "bar",
+            "enable_ssl" => true,
+            "ssl_key"    => "bar"
+          )
 
           assert result[:SSLEnable]
           assert_equal result[:SSLPrivateKey], "c2"

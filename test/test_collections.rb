@@ -169,8 +169,10 @@ class TestCollections < JekyllUnitTest
 
   context "in safe mode" do
     setup do
-      @site = fixture_site("collections" => ["methods"],
-                           "safe"        => true)
+      @site = fixture_site(
+        "collections" => ["methods"],
+        "safe"        => true
+      )
       @site.process
       @collection = @site.collections["methods"]
     end
@@ -190,8 +192,10 @@ class TestCollections < JekyllUnitTest
 
   context "with dots in the filenames" do
     setup do
-      @site = fixture_site("collections" => ["with.dots"],
-                           "safe"        => true)
+      @site = fixture_site(
+        "collections" => ["with.dots"],
+        "safe"        => true
+      )
       @site.process
       @collection = @site.collections["with.dots"]
     end

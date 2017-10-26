@@ -37,9 +37,11 @@ namespace :site do
   desc "Generate the site"
   task :generate => :generated_pages do
     require "jekyll"
-    Jekyll::Commands::Build.process("profile"     => true,
-                                    "source"      => File.expand_path(docs_folder),
-                                    "destination" => File.expand_path("#{docs_folder}/_site"))
+    Jekyll::Commands::Build.process(
+      "profile"     => true,
+      "source"      => File.expand_path(docs_folder),
+      "destination" => File.expand_path("#{docs_folder}/_site")
+    )
   end
   task :build => :generate
 

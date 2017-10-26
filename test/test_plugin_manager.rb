@@ -98,10 +98,12 @@ class TestPluginManager < JekyllUnitTest
 
   context "plugins_dir is set to the default" do
     should "call site's in_source_dir" do
-      site = double(:config        => {
-        "plugins_dir" => Jekyll::Configuration::DEFAULTS["plugins_dir"],
-      },
-                    :in_source_dir => "/tmp/")
+      site = double(
+        :config        => {
+          "plugins_dir" => Jekyll::Configuration::DEFAULTS["plugins_dir"],
+        },
+        :in_source_dir => "/tmp/"
+      )
       plugin_manager = PluginManager.new(site)
 
       expect(site).to receive(:in_source_dir).with("_plugins")

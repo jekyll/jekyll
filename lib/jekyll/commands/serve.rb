@@ -116,10 +116,10 @@ module Jekyll
 
         private
         def file_handler_opts
-          WEBrick::Config::FileHandler.merge(:FancyIndexing     => true,
-                                             :NondisclosureName => [
-                                               ".ht*", "~*",
-                                             ])
+          WEBrick::Config::FileHandler.merge(
+            :FancyIndexing     => true,
+            :NondisclosureName => [".ht*", "~*"]
+          )
         end
 
         #

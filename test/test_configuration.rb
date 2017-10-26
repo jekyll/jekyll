@@ -33,10 +33,10 @@ class TestConfiguration < JekyllUnitTest
       result = Configuration.from({})
       assert_equal(
         result["collections"],
-                  "posts" => {
-                    "output"    => true,
-                    "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
-                  }
+        "posts" => {
+          "output"    => true,
+          "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
+        }
       )
     end
 
@@ -84,10 +84,10 @@ class TestConfiguration < JekyllUnitTest
         .add_default_collections
       assert_equal(
         result["collections"],
-                  "posts" => {
-                    "output"    => true,
-                    "permalink" => "/:categories/:year/:month/:day/:title/",
-                  }
+        "posts" => {
+          "output"    => true,
+          "permalink" => "/:categories/:year/:month/:day/:title/",
+        }
       )
 
       result = Configuration[{ "permalink" => nil, "collections" => {} }]
@@ -352,8 +352,10 @@ class TestConfiguration < JekyllUnitTest
         .and_return("baseurl" => "http://example.com")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
       assert_equal \
-        site_configuration("baseurl" => "http://example.com",
-                           "config"  => @paths[:other]),
+        site_configuration(
+          "baseurl" => "http://example.com",
+          "config"  => @paths[:other]
+        ),
         Jekyll.configuration(test_config.merge("config" => @paths[:other]))
     end
 
@@ -365,8 +367,10 @@ class TestConfiguration < JekyllUnitTest
         .and_return("baseurl" => "http://example.com")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
       assert_equal \
-        site_configuration("baseurl" => "http://example.com",
-                           "config"  => @paths[:other]),
+        site_configuration(
+          "baseurl" => "http://example.com",
+          "config"  => @paths[:other]
+        ),
         Jekyll.configuration(test_config.merge(:config => @paths[:other]))
     end
 
@@ -381,9 +385,11 @@ class TestConfiguration < JekyllUnitTest
     should "successfully load a TOML file" do
       Jekyll.logger.log_level = :warn
       assert_equal \
-        site_configuration("baseurl" => "/you-beautiful-blog-you",
-                           "title"   => "My magnificent site, wut",
-                           "config"  => [@paths[:toml]]),
+        site_configuration(
+          "baseurl" => "/you-beautiful-blog-you",
+          "title"   => "My magnificent site, wut",
+          "config"  => [@paths[:toml]]
+        ),
         Jekyll.configuration(test_config.merge("config" => [@paths[:toml]]))
       Jekyll.logger.log_level = :info
     end
@@ -423,8 +429,10 @@ class TestConfiguration < JekyllUnitTest
         .to receive(:puts)
         .with("Configuration file: #{@paths[:other]}")
       assert_equal \
-        site_configuration("baseurl" => "http://example.com",
-                           "config"  => [@paths[:default], @paths[:other]]),
+        site_configuration(
+          "baseurl" => "http://example.com",
+          "config"  => [@paths[:default], @paths[:other]]
+        ),
         Jekyll.configuration(
           test_config.merge("config" => [@paths[:default], @paths[:other]])
         )

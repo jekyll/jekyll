@@ -37,10 +37,12 @@ class TestFilters < JekyllUnitTest
   context "filters" do
     setup do
       @sample_time = Time.utc(2013, 3, 27, 11, 22, 33)
-      @filter = make_filter_mock("timezone"               => "UTC",
-                                 "url"                    => "http://example.com",
-                                 "baseurl"                => "/base",
-                                 "dont_show_posts_before" => @sample_time)
+      @filter = make_filter_mock(
+        "timezone"               => "UTC",
+        "url"                    => "http://example.com",
+        "baseurl"                => "/base",
+        "dont_show_posts_before" => @sample_time
+      )
       @sample_date = Date.parse("2013-03-27")
       @time_as_string = "September 11, 2001 12:46:30 -0000"
       @time_as_numeric = 1_399_680_607
@@ -348,64 +350,82 @@ class TestFilters < JekyllUnitTest
 
       should "ensure the leading slash for the baseurl" do
         page_url = "about/my_favorite_page/"
-        filter = make_filter_mock("url"     => "http://example.com",
-                                  "baseurl" => "base")
+        filter = make_filter_mock(
+          "url"     => "http://example.com",
+          "baseurl" => "base"
+        )
         assert_equal "http://example.com/base/#{page_url}", filter.absolute_url(page_url)
       end
 
       should "be ok with a blank but present 'url'" do
         page_url = "about/my_favorite_page/"
-        filter = make_filter_mock("url"     => "",
-                                  "baseurl" => "base")
+        filter = make_filter_mock(
+          "url"     => "",
+          "baseurl" => "base"
+        )
         assert_equal "/base/#{page_url}", filter.absolute_url(page_url)
       end
 
       should "be ok with a nil 'url'" do
         page_url = "about/my_favorite_page/"
-        filter = make_filter_mock("url"     => nil,
-                                  "baseurl" => "base")
+        filter = make_filter_mock(
+          "url"     => nil,
+          "baseurl" => "base"
+        )
         assert_equal "/base/#{page_url}", filter.absolute_url(page_url)
       end
 
       should "be ok with a nil 'baseurl'" do
         page_url = "about/my_favorite_page/"
-        filter = make_filter_mock("url"     => "http://example.com",
-                                  "baseurl" => nil)
+        filter = make_filter_mock(
+          "url"     => "http://example.com",
+          "baseurl" => nil
+        )
         assert_equal "http://example.com/#{page_url}", filter.absolute_url(page_url)
       end
 
       should "not prepend a forward slash if input is empty" do
         page_url = ""
-        filter = make_filter_mock("url"     => "http://example.com",
-                                  "baseurl" => "/base")
+        filter = make_filter_mock(
+          "url"     => "http://example.com",
+          "baseurl" => "/base"
+        )
         assert_equal "http://example.com/base", filter.absolute_url(page_url)
       end
 
       should "not append a forward slash if input is '/'" do
         page_url = "/"
-        filter = make_filter_mock("url"     => "http://example.com",
-                                  "baseurl" => "/base")
+        filter = make_filter_mock(
+          "url"     => "http://example.com",
+          "baseurl" => "/base"
+        )
         assert_equal "http://example.com/base/", filter.absolute_url(page_url)
       end
 
       should "not append a forward slash if input is '/' and nil 'baseurl'" do
         page_url = "/"
-        filter = make_filter_mock("url"     => "http://example.com",
-                                  "baseurl" => nil)
+        filter = make_filter_mock(
+          "url"     => "http://example.com",
+          "baseurl" => nil
+        )
         assert_equal "http://example.com/", filter.absolute_url(page_url)
       end
 
       should "not append a forward slash if both input and baseurl are simply '/'" do
         page_url = "/"
-        filter = make_filter_mock("url"     => "http://example.com",
-                                  "baseurl" => "/")
+        filter = make_filter_mock(
+          "url"     => "http://example.com",
+          "baseurl" => "/"
+        )
         assert_equal "http://example.com/", filter.absolute_url(page_url)
       end
 
       should "normalize international URLs" do
         page_url = ""
-        filter = make_filter_mock("url"     => "http://ümlaut.example.org/",
-                                  "baseurl" => nil)
+        filter = make_filter_mock(
+          "url"     => "http://ümlaut.example.org/",
+          "baseurl" => nil
+        )
         assert_equal "http://xn--mlaut-jva.example.org/", filter.absolute_url(page_url)
       end
 
@@ -449,36 +469,46 @@ class TestFilters < JekyllUnitTest
 
       should "be ok with a nil 'baseurl'" do
         page_url = "about/my_favorite_page/"
-        filter = make_filter_mock("url"     => "http://example.com",
-                                  "baseurl" => nil)
+        filter = make_filter_mock(
+          "url"     => "http://example.com",
+          "baseurl" => nil
+        )
         assert_equal "/#{page_url}", filter.relative_url(page_url)
       end
 
       should "not prepend a forward slash if input is empty" do
         page_url = ""
-        filter = make_filter_mock("url"     => "http://example.com",
-                                  "baseurl" => "/base")
+        filter = make_filter_mock(
+          "url"     => "http://example.com",
+          "baseurl" => "/base"
+        )
         assert_equal "/base", filter.relative_url(page_url)
       end
 
       should "not prepend a forward slash if baseurl ends with a single '/'" do
         page_url = "/css/main.css"
-        filter = make_filter_mock("url"     => "http://example.com",
-                                  "baseurl" => "/base/")
+        filter = make_filter_mock(
+          "url"     => "http://example.com",
+          "baseurl" => "/base/"
+        )
         assert_equal "/base/css/main.css", filter.relative_url(page_url)
       end
 
       should "not return valid URI if baseurl ends with multiple '/'" do
         page_url = "/css/main.css"
-        filter = make_filter_mock("url"     => "http://example.com",
-                                  "baseurl" => "/base//")
+        filter = make_filter_mock(
+          "url"     => "http://example.com",
+          "baseurl" => "/base//"
+        )
         refute_equal "/base/css/main.css", filter.relative_url(page_url)
       end
 
       should "not prepend a forward slash if both input and baseurl are simply '/'" do
         page_url = "/"
-        filter = make_filter_mock("url"     => "http://example.com",
-                                  "baseurl" => "/")
+        filter = make_filter_mock(
+          "url"     => "http://example.com",
+          "baseurl" => "/"
+        )
         assert_equal "/", filter.relative_url(page_url)
       end
 
