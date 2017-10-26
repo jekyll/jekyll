@@ -153,11 +153,11 @@ class TestPluginManager < JekyllUnitTest
     expect(site).to receive(:theme).and_return(true)
     expect(site).to receive(:process).and_return(true)
     expect(plugin_manager).to(
-      receive_messages([
-        :require_theme_deps,
-        :require_plugin_files,
-        :require_gems,
-        :deprecation_checks,
+      receive_messages(%i[
+        require_theme_deps
+        require_plugin_files
+        require_gems
+        deprecation_checks
       ])
     )
     plugin_manager.conscientious_require

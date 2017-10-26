@@ -132,7 +132,7 @@ end
 #
 #############################################################################
 
-multitask :default => [:test, :features]
+multitask :default => %i[test features]
 
 task :spec => :test
 require "rake/testtask"

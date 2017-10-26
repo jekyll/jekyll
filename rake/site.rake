@@ -7,7 +7,7 @@
 #############################################################################
 
 namespace :site do
-  task :generated_pages => [:history, :version_file, :conduct, :contributing, :support]
+  task :generated_pages => %i[history version_file conduct contributing support]
 
   desc "Generate and view the site locally"
   task :preview => :generated_pages do

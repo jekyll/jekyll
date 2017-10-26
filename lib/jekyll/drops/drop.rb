@@ -5,7 +5,7 @@ module Jekyll
     class Drop < Liquid::Drop
       include Enumerable
 
-      NON_CONTENT_METHODS = [:fallback_data, :collapse_document].freeze
+      NON_CONTENT_METHODS = %i[fallback_data collapse_document].freeze
 
       # Get or set whether the drop class is mutable.
       # Mutability determines whether or not pre-defined fields may be
