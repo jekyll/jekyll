@@ -70,7 +70,7 @@ You have 3 options for installing plugins:
 
 ### The jekyll-plugins group
 
-Jekyll gives this particular group of gems in your `Gemfile`, a different
+Jekyll gives this particular group of gems in your `Gemfile` a different
 treatment. Any gem included in this group is loaded before Jekyll starts
 processing the rest of your source directory.
 
