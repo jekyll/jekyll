@@ -77,7 +77,7 @@ module Jekyll
 
         private
         def webrick_opts(opts)
-          directory_index = opts["directory_index_ext"].split(",").map do |e|
+          directory_index = (opts["directory_index_ext"] || "").split(",").map do |e|
             "index.#{e.downcase}"
           end
 
