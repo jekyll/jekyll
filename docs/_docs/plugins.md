@@ -58,21 +58,6 @@ You have 3 options for installing plugins:
 
 <div class="note info">
   <h5>
-    The <code>:jekyll_plugins</code> group in a <code>Gemfile</code>
-  </h5>
-  <p>
-    Jekyll treats this particular group of gems(s) with a special love. Any gem
-    included in this group is given a high priority and "loaded" way before
-    Jekyll starts processing the rest of your source directory.
-    <br/>
-    Because of the priority, a gem included here will be activated (even under
-    <code>--safe</code> mode), even if its not explicitly listed under the
-    <code>plugins:</code> key in your site's config file.
-  </p>
-</div>
-
-<div class="note info">
-  <h5>
     <code>_plugins</code>, <code>_config.yml</code> and <code>Gemfile</code>
     can be used simultaneously
   </h5>
@@ -82,6 +67,24 @@ You have 3 options for installing plugins:
     others.
   </p>
 </div>
+
+### The jekyll-plugins group
+
+Jekyll gives this particular group of gems in your `Gemfile`, a different
+treatment. Any gem included in this group is loaded before Jekyll starts
+processing the rest of your source directory.
+
+A gem included here will be activated even if its not explicitly listed under
+the `plugins:` key in your site's config file.
+
+<div class="note warning">
+  <p>
+    Gems included in the <code>:jekyll-plugins</code> group are activated
+    regardless of the <code>--safe</code> mode setting. Be careful of what
+    gems are included under this group!
+  </p>
+</div>
+
 
 In general, plugins you make will fall broadly into one of five categories:
 
