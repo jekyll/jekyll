@@ -80,7 +80,7 @@ the `plugins:` key in your site's config file.
 <div class="note warning">
   <p>
     Gems included in the <code>:jekyll-plugins</code> group are activated
-    regardless of the <code>--safe</code> mode setting. Be careful of what
+    regardless of the <code>--safe</code> mode setting. Be aware of what
     gems are included under this group!
   </p>
 </div>
