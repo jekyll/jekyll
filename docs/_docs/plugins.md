@@ -68,7 +68,7 @@ You have 3 options for installing plugins:
   </p>
 </div>
 
-### The jekyll-plugins group
+### The jekyll_plugins group
 
 Jekyll gives this particular group of gems in your `Gemfile` a different
 treatment. Any gem included in this group is loaded before Jekyll starts
