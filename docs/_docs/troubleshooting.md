@@ -74,7 +74,7 @@ apt update && apt install libffi-dev clang ruby-dev make
 On macOS, you may need to update RubyGems (using `sudo` only if necessary):
 
 ```sh
-sudo gem update --system
+gem update --system
 ```
 
 If you still have issues, you can download and install new Command Line
@@ -84,11 +84,11 @@ Tools (such as `gcc`) using the following command:
 xcode-select --install
 ```
 
-which may allow you to install native gems using this command (again using
+which may allow you to install native gems using this command (again, using
 `sudo` only if necessary):
 
 ```sh
-sudo gem install jekyll
+gem install jekyll
 ```
 
 Note that upgrading macOS does not automatically upgrade Xcode itself
@@ -103,10 +103,10 @@ With the introduction of System Integrity Protection, several directories
 that were previously writable are now considered system locations and are no
 longer available. Given these changes, there are a couple of simple ways to get
 up and running. One option is to change the location where the gem will be
-installed (again using `sudo` only if necessary):
+installed (again, using `sudo` only if necessary):
 
 ```sh
-sudo gem install -n /usr/local/bin jekyll
+gem install -n /usr/local/bin jekyll
 ```
 
 Alternatively, Homebrew can be installed and used to set up Ruby. This can be
