@@ -20,6 +20,7 @@
   * add post about diversity (#6447)
   * Docs: Add a note about Liquid and syntax highlighting (#6466)
   * Add a note on `:jekyll_plugins` group in the docs (#6488)
+  * Updated custom-404-page.md (#6489)
 
 ### Development Fixes
 
