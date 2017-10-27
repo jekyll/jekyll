@@ -48,6 +48,7 @@
   * Update list of files excluded from Docs site (#6457)
   * Update site History (#6460)
   * Site: Add default twitter card image (#6476)
+  * Update normalize.css to v7.0.0 (#6491)
 
 ## 3.6.2 / 2017-10-21
 
