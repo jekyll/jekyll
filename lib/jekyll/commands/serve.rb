@@ -77,6 +77,10 @@ module Jekyll
 
         private
         def webrick_opts(opts)
+          directory_index = opts["directory_index_ext"].split(",").map do |e|
+            "index.#{e.downcase}"
+          end
+
           opts = {
             :JekyllOptions      => opts,
             :DoNotReverseLookup => true,
@@ -85,13 +89,7 @@ module Jekyll
             :StartCallback      => start_callback(opts["detach"]),
             :BindAddress        => opts["host"],
             :Port               => opts["port"],
-            :DirectoryIndex     => %W(
-              index.htm
-              index.html
-              index.rhtml
-              index.cgi
-              index.xml
-            ),
+            :DirectoryIndex     => directory_index,
           }
 
           opts[:DirectoryIndex] = [] if opts[:JekyllOptions]["show_dir_listing"]
