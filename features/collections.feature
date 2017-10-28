@@ -128,17 +128,37 @@ Feature: Collections
       puppies:
         output: false
     """
-    And I have a "index.html" page that contains "Newest puppy: {% assign puppy = site.puppies.last %}{{ puppy.title }}"
+    And I have a "foo.txt" file that contains "random static file"
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
     And the "_site/puppies/rover.html" file should not exist
     And the "_site/puppies/fido.html" file should not exist
-    And I should see "Newest puppy: Rover" in "_site/index.html"
     When I run jekyll build --future
     Then I should get a zero exit status
     And the _site directory should exist
     And the "_site/puppies/fido.html" file should not exist
+
+  Scenario: Hidden collection with document with future date, accessed via Liquid
+    Given I have a _puppies directory
+    And I have the following documents under the puppies collection:
+      | title  | date       | content             |
+      | Rover  | 2007-12-31 | content for Rover.  |
+      | Fido   | 2120-12-31 | content for Fido.   |
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      puppies:
+        output: false
+    """
+    And I have a "index.html" page that contains "Newest puppy: {% assign puppy = site.puppies.last %}{{ puppy.title }}"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "Newest puppy: Rover" in "_site/index.html"
+    When I run jekyll build --future
+    Then I should get a zero exit status
+    And the _site directory should exist
     And I should see "Newest puppy: Fido" in "_site/index.html"
 
   Scenario: All the documents
