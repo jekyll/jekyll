@@ -54,6 +54,7 @@ module Jekyll
     end
 
     class PostUrl < Liquid::Tag
+      # rubocop:disable Lint/RescueWithoutErrorClass
       def initialize(tag_name, post, tokens)
         super
         @orig_post = post.strip
@@ -69,6 +70,7 @@ Make sure the post exists and the name is correct.
 MSG
         end
       end
+      # rubocop:enable Lint/RescueWithoutErrorClass
 
       def render(context)
         site = context.registers[:site]

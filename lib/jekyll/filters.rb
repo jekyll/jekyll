@@ -266,9 +266,7 @@ module Jekyll
     #
     # Returns the filtered array of objects
     def sort(input, property = nil, nils = "first")
-      if input.nil?
-        raise ArgumentError, "Cannot sort a null object."
-      end
+      raise ArgumentError, "Cannot sort a null object." if input.nil?
       if property.nil?
         input.sort
       else
@@ -315,15 +313,21 @@ module Jekyll
       new_ary
     end
 
+    # rubocop:disable Lint/RescueWithoutErrorClass
     def sample(input, num = 1)
       return input unless input.respond_to?(:sample)
-      num = Liquid::Utils.to_integer(num) rescue 1
+      num = begin
+              Liquid::Utils.to_integer(num)
+            rescue
+              1
+            end
       if num == 1
         input.sample
       else
         input.sample(num)
       end
     end
+    # rubocop:enable Lint/RescueWithoutErrorClass
 
     # Convert an object into its String representation for debugging
     #
@@ -421,7 +425,6 @@ module Jekyll
 
       condition
     end
-
   end
 end
 

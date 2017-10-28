@@ -36,6 +36,7 @@ module Jekyll
     #
     # Returns nothing.
     # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Lint/RescueWithoutErrorClass
     def read_yaml(base, name, opts = {})
       filename = File.join(base, name)
 
@@ -61,6 +62,7 @@ module Jekyll
 
       self.data
     end
+    # rubocop:enable Lint/RescueWithoutErrorClass
     # rubocop:enable Metrics/AbcSize
 
     def validate_data!(filename)
@@ -128,16 +130,12 @@ module Jekyll
     #
     # Returns the type of self.
     def type
-      if is_a?(Page)
-        :pages
-      end
+      :pages if is_a?(Page)
     end
 
     # returns the owner symbol for hook triggering
     def hook_owner
-      if is_a?(Page)
-        :pages
-      end
+      :pages if is_a?(Page)
     end
 
     # Determine whether the document is an asset file.

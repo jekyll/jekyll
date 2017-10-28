@@ -176,7 +176,7 @@ CONTENT
 
     context "post content has highlight tag" do
       setup do
-        fill_post("test", { "highlighter" => "pygments" })
+        fill_post("test", "highlighter" => "pygments")
       end
 
       should "not cause a markdown error" do
@@ -201,7 +201,7 @@ CONTENT
 
     context "post content has highlight with file reference" do
       setup do
-        fill_post("./jekyll.gemspec", { "highlighter" => "pygments" })
+        fill_post("./jekyll.gemspec", "highlighter" => "pygments")
       end
 
       should "not embed the file" do
@@ -215,7 +215,7 @@ CONTENT
 
     context "post content has highlight tag with UTF character" do
       setup do
-        fill_post("Æ", { "highlighter" => "pygments" })
+        fill_post("Æ", "highlighter" => "pygments")
       end
 
       should "render markdown with pygments line handling" do
@@ -228,14 +228,14 @@ CONTENT
 
     context "post content has highlight tag with preceding spaces & lines" do
       setup do
-        code = <<-EOS
+        code = <<-POST_CONTENT
 
 
      [,1] [,2]
 [1,] FALSE TRUE
 [2,] FALSE TRUE
-EOS
-        fill_post(code, { "highlighter" => "pygments" })
+POST_CONTENT
+        fill_post(code, "highlighter" => "pygments")
       end
 
       should "only strip the preceding newlines" do
@@ -249,7 +249,7 @@ EOS
     context "post content has highlight tag " \
             "with preceding spaces & lines in several places" do
       setup do
-        code = <<-EOS
+        code = <<-POST_CONTENT
 
 
      [,1] [,2]
@@ -259,8 +259,8 @@ EOS
 [2,] FALSE TRUE
 
 
-EOS
-        fill_post(code, { "highlighter" => "pygments" })
+POST_CONTENT
+        fill_post(code, "highlighter" => "pygments")
       end
 
       should "only strip the newlines which precede and succeed the entire block" do
@@ -275,7 +275,7 @@ EOS
     context "post content has highlight tag with " \
             "preceding spaces & Windows-style newlines" do
       setup do
-        fill_post "\r\n\r\n\r\n     [,1] [,2]", { "highlighter" => "pygments" }
+        fill_post "\r\n\r\n\r\n     [,1] [,2]", "highlighter" => "pygments"
       end
 
       should "only strip the preceding newlines" do
@@ -288,12 +288,12 @@ EOS
 
     context "post content has highlight tag with only preceding spaces" do
       setup do
-        code = <<-EOS
+        code = <<-POST_CONTENT
      [,1] [,2]
 [1,] FALSE TRUE
 [2,] FALSE TRUE
-EOS
-        fill_post(code, { "highlighter" => "pygments" })
+POST_CONTENT
+        fill_post(code, "highlighter" => "pygments")
       end
 
       should "only strip the preceding newlines" do
@@ -408,13 +408,13 @@ CONTENT
 
     context "post content has highlight tag with preceding spaces & lines" do
       setup do
-        fill_post <<-EOS
+        fill_post <<-POST_CONTENT
 
 
      [,1] [,2]
 [1,] FALSE TRUE
 [2,] FALSE TRUE
-EOS
+POST_CONTENT
       end
 
       should "only strip the preceding newlines" do
@@ -428,7 +428,7 @@ EOS
     context "post content has highlight tag with " \
             "preceding spaces & lines in several places" do
       setup do
-        fill_post <<-EOS
+        fill_post <<-POST_CONTENT
 
 
      [,1] [,2]
@@ -438,7 +438,7 @@ EOS
 [2,] FALSE TRUE
 
 
-EOS
+POST_CONTENT
       end
 
       should "only strip the newlines which precede and succeed the entire block" do
@@ -452,7 +452,7 @@ EOS
 
     context "post content has highlight tag with linenumbers" do
       setup do
-        create_post <<-EOS
+        create_post <<-POST_CONTENT
 ---
 title: This is a test
 ---
@@ -463,28 +463,28 @@ test
 {% endhighlight %}
 
 This should not be highlighted, right?
-EOS
+POST_CONTENT
       end
 
       should "should stop highlighting at boundary with rouge 2" do
         skip "Skipped because using an older version of Rouge" if Utils::Rouge.old_api?
-        expected = <<-EOS
+        expected = <<-POST_CONTENT
 <p>This is not yet highlighted</p>\n
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 </pre></td><td class="code"><pre><span class="nx">test</span></pre></td></tr></tbody></table></code></pre></figure>\n
 <p>This should not be highlighted, right?</p>
-EOS
+POST_CONTENT
         assert_match(expected, @result)
       end
 
       should "should stop highlighting at boundary with rouge 1" do
         skip "Skipped because using a newer version of Rouge" unless Utils::Rouge.old_api?
-        expected = <<-EOS
+        expected = <<-POST_CONTENT
 <p>This is not yet highlighted</p>\n
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>test<span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>\n
 <p>This should not be highlighted, right?</p>
-EOS
+POST_CONTENT
         assert_match(expected, @result)
       end
     end
@@ -505,11 +505,11 @@ EOS
 
     context "post content has highlight tag with only preceding spaces" do
       setup do
-        fill_post <<-EOS
+        fill_post <<-POST_CONTENT
      [,1] [,2]
 [1,] FALSE TRUE
 [2,] FALSE TRUE
-EOS
+POST_CONTENT
       end
 
       should "only strip the preceding newlines" do
@@ -546,9 +546,7 @@ CONTENT
           )
         end
 
-        create_post(@content, {
-          "markdown" => "rdiscount",
-        })
+        create_post(@content, "markdown" => "rdiscount")
       end
 
       should "parse correctly" do
@@ -576,9 +574,7 @@ CONTENT
           )
         end
 
-        create_post(@content, {
-          "markdown" => "redcarpet",
-        })
+        create_post(@content, "markdown" => "redcarpet")
       end
 
       should "parse correctly" do
@@ -597,12 +593,10 @@ title: Post linking
 
 {% post_url 2008-11-21-complex %}
 CONTENT
-      create_post(content, {
-        "permalink"   => "pretty",
-        "source"      => source_dir,
-        "destination" => dest_dir,
-        "read_posts"  => true,
-      })
+      create_post(content, "permalink"   => "pretty",
+                           "source"      => source_dir,
+                           "destination" => dest_dir,
+                           "read_posts"  => true)
     end
 
     should "not cause an error" do
@@ -623,12 +617,10 @@ title: Post linking
 
 {% post_url 2016-11-26-special-chars-(+) %}
 CONTENT
-      create_post(content, {
-        "permalink"   => "pretty",
-        "source"      => source_dir,
-        "destination" => dest_dir,
-        "read_posts"  => true,
-      })
+      create_post(content, "permalink"   => "pretty",
+                           "source"      => source_dir,
+                           "destination" => dest_dir,
+                           "read_posts"  => true)
     end
 
     should "not cause an error" do
@@ -652,12 +644,10 @@ title: Post linking
 - 3 {% post_url es/2008-11-21-nested %}
 - 4 {% post_url /es/2008-11-21-nested %}
 CONTENT
-      create_post(content, {
-        "permalink"   => "pretty",
-        "source"      => source_dir,
-        "destination" => dest_dir,
-        "read_posts"  => true,
-      })
+      create_post(content, "permalink"   => "pretty",
+                           "source"      => source_dir,
+                           "destination" => dest_dir,
+                           "read_posts"  => true)
     end
 
     should "not cause an error" do
@@ -684,12 +674,10 @@ title: Deprecated Post linking
 
 - 1 {% post_url 2008-11-21-nested %}
 CONTENT
-      create_post(content, {
-        "permalink"   => "pretty",
-        "source"      => source_dir,
-        "destination" => dest_dir,
-        "read_posts"  => true,
-      })
+      create_post(content, "permalink"   => "pretty",
+                           "source"      => source_dir,
+                           "destination" => dest_dir,
+                           "read_posts"  => true)
     end
 
     should "not cause an error" do
@@ -720,12 +708,10 @@ title: Invalid post name linking
 CONTENT
 
       assert_raises Jekyll::Errors::PostURLError do
-        create_post(content, {
-          "permalink"   => "pretty",
-          "source"      => source_dir,
-          "destination" => dest_dir,
-          "read_posts"  => true,
-        })
+        create_post(content,           "permalink"   => "pretty",
+                                       "source"      => source_dir,
+                                       "destination" => dest_dir,
+                                       "read_posts"  => true)
       end
     end
 
@@ -739,12 +725,10 @@ title: Invalid post name linking
 CONTENT
 
       assert_raises Jekyll::Errors::InvalidDateError do
-        create_post(content, {
-          "permalink"   => "pretty",
-          "source"      => source_dir,
-          "destination" => dest_dir,
-          "read_posts"  => true,
-        })
+        create_post(content,           "permalink"   => "pretty",
+                                       "source"      => source_dir,
+                                       "destination" => dest_dir,
+                                       "read_posts"  => true)
       end
     end
   end
@@ -760,11 +744,9 @@ title: linking
 {% link info.md %}
 {% link /css/screen.css %}
 CONTENT
-      create_post(content, {
-        "source"      => source_dir,
-        "destination" => dest_dir,
-        "read_all"    => true,
-      })
+      create_post(content, "source"      => source_dir,
+                           "destination" => dest_dir,
+                           "read_all"    => true)
     end
 
     should "not cause an error" do
@@ -793,12 +775,10 @@ title: linking
 
 {% link _methods/yaml_with_dots.md %}
 CONTENT
-      create_post(content, {
-        "source"           => source_dir,
-        "destination"      => dest_dir,
-        "collections"      => { "methods" => { "output" => true } },
-        "read_collections" => true,
-      })
+      create_post(content, "source"           => source_dir,
+                           "destination"      => dest_dir,
+                           "collections"      => { "methods" => { "output" => true } },
+                           "read_collections" => true)
     end
 
     should "not cause an error" do
@@ -820,12 +800,10 @@ title: linking
 - 1 {% link _methods/sanitized_path.md %}
 - 2 {% link _methods/site/generate.md %}
 CONTENT
-      create_post(content, {
-        "source"           => source_dir,
-        "destination"      => dest_dir,
-        "collections"      => { "methods" => { "output" => true } },
-        "read_collections" => true,
-      })
+      create_post(content, "source"           => source_dir,
+                           "destination"      => dest_dir,
+                           "collections"      => { "methods" => { "output" => true } },
+                           "read_collections" => true)
     end
 
     should "not cause an error" do
@@ -852,12 +830,10 @@ title: Invalid linking
 CONTENT
 
       assert_raises ArgumentError do
-        create_post(content, {
-          "source"           => source_dir,
-          "destination"      => dest_dir,
-          "collections"      => { "methods" => { "output" => true } },
-          "read_collections" => true,
-        })
+        create_post(content, "source"           => source_dir,
+                             "destination"      => dest_dir,
+                             "collections"      => { "methods" => { "output" => true } },
+                             "read_collections" => true)
       end
     end
   end
@@ -875,13 +851,11 @@ title: Include symlink
 {% include tmp/pages-test %}
 
 CONTENT
-          create_post(content, {
-            "permalink"   => "pretty",
-            "source"      => source_dir,
-            "destination" => dest_dir,
-            "read_posts"  => true,
-            "safe"        => true,
-          })
+          create_post(content, "permalink"   => "pretty",
+                               "source"      => source_dir,
+                               "destination" => dest_dir,
+                               "read_posts"  => true,
+                               "safe"        => true)
         end
         @result ||= ""
         refute_match(%r!SYMLINK TEST!, @result)
@@ -897,13 +871,11 @@ title: Include symlink
 {% include tmp/pages-test-does-not-exist %}
 
 CONTENT
-          create_post(content, {
-            "permalink"   => "pretty",
-            "source"      => source_dir,
-            "destination" => dest_dir,
-            "read_posts"  => true,
-            "safe"        => true,
-          })
+          create_post(content, "permalink"   => "pretty",
+                               "source"      => source_dir,
+                               "destination" => dest_dir,
+                               "read_posts"  => true,
+                               "safe"        => true)
         end
         assert_match(
           "Could not locate the included file 'tmp/pages-test-does-not-exist' " \
@@ -924,12 +896,10 @@ title: Include tag parameters
 
 {% include params.html param="value" %}
 CONTENT
-        create_post(content, {
-          "permalink"   => "pretty",
-          "source"      => source_dir,
-          "destination" => dest_dir,
-          "read_posts"  => true,
-        })
+        create_post(content, "permalink"   => "pretty",
+                             "source"      => source_dir,
+                             "destination" => dest_dir,
+                             "read_posts"  => true)
       end
 
       should "correctly output include variable" do
@@ -952,12 +922,10 @@ title: Invalid parameter syntax
 CONTENT
         assert_raises ArgumentError, "Did not raise exception on invalid " \
                                      '"include" syntax' do
-          create_post(content, {
-            "permalink"   => "pretty",
-            "source"      => source_dir,
-            "destination" => dest_dir,
-            "read_posts"  => true,
-          })
+          create_post(content,             "permalink"   => "pretty",
+                                           "source"      => source_dir,
+                                           "destination" => dest_dir,
+                                           "read_posts"  => true)
         end
 
         content = <<CONTENT
@@ -969,12 +937,10 @@ title: Invalid parameter syntax
 CONTENT
         assert_raises ArgumentError, "Did not raise exception on invalid " \
                                      '"include" syntax' do
-          create_post(content, {
-            "permalink"   => "pretty",
-            "source"      => source_dir,
-            "destination" => dest_dir,
-            "read_posts"  => true,
-          })
+          create_post(content,             "permalink"   => "pretty",
+                                           "source"      => source_dir,
+                                           "destination" => dest_dir,
+                                           "read_posts"  => true)
         end
       end
     end
@@ -988,12 +954,10 @@ title: multiple include parameters
 
 {% include params.html param1="new_value" param2="another" %}
 CONTENT
-        create_post(content, {
-          "permalink"   => "pretty",
-          "source"      => source_dir,
-          "destination" => dest_dir,
-          "read_posts"  => true,
-        })
+        create_post(content, "permalink"   => "pretty",
+                             "source"      => source_dir,
+                             "destination" => dest_dir,
+                             "read_posts"  => true)
       end
 
       should "list all parameters" do
@@ -1015,12 +979,10 @@ title: without parameters
 
 {% include params.html %}
 CONTENT
-        create_post(content, {
-          "permalink"   => "pretty",
-          "source"      => source_dir,
-          "destination" => dest_dir,
-          "read_posts"  => true,
-        })
+        create_post(content, "permalink"   => "pretty",
+                             "source"      => source_dir,
+                             "destination" => dest_dir,
+                             "read_posts"  => true)
       end
 
       should "include file with empty parameters" do
@@ -1037,13 +999,11 @@ title: custom includes directory
 
 {% include custom.html %}
 CONTENT
-        create_post(content, {
-          "includes_dir" => "_includes_custom",
-          "permalink"    => "pretty",
-          "source"       => source_dir,
-          "destination"  => dest_dir,
-          "read_posts"   => true,
-        })
+        create_post(content, "includes_dir" => "_includes_custom",
+                             "permalink"    => "pretty",
+                             "source"       => source_dir,
+                             "destination"  => dest_dir,
+                             "read_posts"   => true)
       end
 
       should "include file from custom directory" do
@@ -1060,12 +1020,10 @@ title: without parameters within if statement
 
 {% if true %}{% include params.html %}{% endif %}
 CONTENT
-        create_post(content, {
-          "permalink"   => "pretty",
-          "source"      => source_dir,
-          "destination" => dest_dir,
-          "read_posts"  => true,
-        })
+        create_post(content, "permalink"   => "pretty",
+                             "source"      => source_dir,
+                             "destination" => dest_dir,
+                             "read_posts"  => true)
       end
 
       should "include file with empty parameters within if statement" do
@@ -1086,12 +1044,10 @@ CONTENT
 
       should "raise error relative to source directory" do
         exception = assert_raises IOError do
-          create_post(@content, {
-            "permalink"   => "pretty",
-            "source"      => source_dir,
-            "destination" => dest_dir,
-            "read_posts"  => true,
-          })
+          create_post(@content, "permalink"   => "pretty",
+                                "source"      => source_dir,
+                                "destination" => dest_dir,
+                                "read_posts"  => true)
         end
         assert_match(
           "Could not locate the included file 'missing.html' in any of " \
@@ -1103,7 +1059,7 @@ CONTENT
 
     context "include tag with variable and liquid filters" do
       setup do
-        site = fixture_site({ "pygments" => true }).tap(&:read).tap(&:render)
+        site = fixture_site("pygments" => true).tap(&:read).tap(&:render)
         post = site.posts.docs.find do |p|
           p.basename.eql? "2013-12-17-include-variable-filters.markdown"
         end
@@ -1135,7 +1091,7 @@ CONTENT
 
   context "relative include tag with variable and liquid filters" do
     setup do
-      site = fixture_site({ "pygments" => true }).tap(&:read).tap(&:render)
+      site = fixture_site("pygments" => true).tap(&:read).tap(&:render)
       post = site.posts.docs.find do |p|
         p.basename.eql? "2014-09-02-relative-includes.markdown"
       end
@@ -1181,12 +1137,10 @@ CONTENT
 
         should "raise error relative to source directory" do
           exception = assert_raises IOError do
-            create_post(@content, {
-              "permalink"   => "pretty",
-              "source"      => source_dir,
-              "destination" => dest_dir,
-              "read_posts"  => true,
-            })
+            create_post(@content,               "permalink"   => "pretty",
+                                                "source"      => source_dir,
+                                                "destination" => dest_dir,
+                                                "read_posts"  => true)
           end
           assert_match "Could not locate the included file 'missing.html' in any of " \
                        "[\"#{source_dir}\"].", exception.message
@@ -1206,12 +1160,10 @@ CONTENT
 
         should "raise error relative to source directory" do
           exception = assert_raises ArgumentError do
-            create_post(@content, {
-              "permalink"   => "pretty",
-              "source"      => source_dir,
-              "destination" => dest_dir,
-              "read_posts"  => true,
-            })
+            create_post(@content,               "permalink"   => "pretty",
+                                                "source"      => source_dir,
+                                                "destination" => dest_dir,
+                                                "read_posts"  => true)
           end
           assert_equal(
             "Invalid syntax for include tag. File contains invalid characters or " \
@@ -1235,13 +1187,11 @@ title: Include symlink
 {% include_relative tmp/pages-test %}
 
 CONTENT
-          create_post(content, {
-            "permalink"   => "pretty",
-            "source"      => source_dir,
-            "destination" => dest_dir,
-            "read_posts"  => true,
-            "safe"        => true,
-          })
+          create_post(content, "permalink"   => "pretty",
+                               "source"      => source_dir,
+                               "destination" => dest_dir,
+                               "read_posts"  => true,
+                               "safe"        => true)
         end
         @result ||= ""
         refute_match(%r!SYMLINK TEST!, @result)
@@ -1257,13 +1207,11 @@ title: Include symlink
 {% include_relative tmp/pages-test-does-not-exist %}
 
 CONTENT
-          create_post(content, {
-            "permalink"   => "pretty",
-            "source"      => source_dir,
-            "destination" => dest_dir,
-            "read_posts"  => true,
-            "safe"        => true,
-          })
+          create_post(content, "permalink"   => "pretty",
+                               "source"      => source_dir,
+                               "destination" => dest_dir,
+                               "read_posts"  => true,
+                               "safe"        => true)
         end
         assert_match(
           "Ensure it exists in one of those directories and, if it is a symlink, does " \

@@ -10,17 +10,18 @@ class TestDocument < JekyllUnitTest
   def setup_encoded_document(filename)
     site = fixture_site("collections" => ["encodings"])
     site.process
-    Document.new(site.in_source_dir(File.join("_encodings", filename)), {
+    Document.new(
+      site.in_source_dir(
+        File.join("_encodings", filename)
+      ),
       :site       => site,
-      :collection => site.collections["encodings"],
-    }).tap(&:read)
+      :collection => site.collections["encodings"]
+    ).tap(&:read)
   end
 
   context "a document in a collection" do
     setup do
-      @site = fixture_site({
-        "collections" => ["methods"],
-      })
+      @site = fixture_site("collections" => ["methods"])
       @site.process
       @document = @site.collections["methods"].docs.detect do |d|
         d.relative_path == "_methods/configuration.md"
@@ -99,7 +100,7 @@ class TestDocument < JekyllUnitTest
 
     context "with YAML ending in three dots" do
       setup do
-        @site = fixture_site({ "collections" => ["methods"] })
+        @site = fixture_site("collections" => ["methods"])
         @site.process
         @document = @site.collections["methods"].docs.detect do |d|
           d.relative_path == "_methods/yaml_with_dots.md"
@@ -123,17 +124,15 @@ class TestDocument < JekyllUnitTest
 
   context "a document as part of a collection with front matter defaults" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => ["slides"],
         "defaults"    => [{
           "scope"  => { "path" => "", "type" => "slides" },
           "values" => {
-            "nested" => {
-              "key" => "myval",
-            },
+            "nested" => { "key" => "myval" },
           },
-        },],
-      })
+        },]
+      )
       @site.process
       @document = @site.collections["slides"].docs.select { |d| d.is_a?(Document) }.first
     end
@@ -153,7 +152,7 @@ class TestDocument < JekyllUnitTest
 
   context "a document as part of a collection with overridden default values" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => ["slides"],
         "defaults"    => [{
           "scope"  => { "path" => "", "type" => "slides" },
@@ -163,8 +162,8 @@ class TestDocument < JekyllUnitTest
               "test2" => "default1",
             },
           },
-        },],
-      })
+        },]
+      )
       @site.process
       @document = @site.collections["slides"].docs[1]
     end
@@ -181,17 +180,15 @@ class TestDocument < JekyllUnitTest
 
   context "a document as part of a collection with valid path" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => ["slides"],
         "defaults"    => [{
           "scope"  => { "path" => "_slides", "type" => "slides" },
           "values" => {
-            "nested" => {
-              "key" => "value123",
-            },
+            "nested" => { "key" => "value123" },
           },
-        },],
-      })
+        },]
+      )
       @site.process
       @document = @site.collections["slides"].docs.first
     end
@@ -205,17 +202,15 @@ class TestDocument < JekyllUnitTest
 
   context "a document as part of a collection with invalid path" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => ["slides"],
         "defaults"    => [{
           "scope"  => { "path" => "somepath", "type" => "slides" },
           "values" => {
-            "nested" => {
-              "key" => "myval",
-            },
+            "nested" => { "key" => "myval" },
           },
-        },],
-      })
+        },]
+      )
       @site.process
       @document = @site.collections["slides"].docs.first
     end
@@ -229,9 +224,7 @@ class TestDocument < JekyllUnitTest
 
   context "a document in a collection with a custom permalink" do
     setup do
-      @site = fixture_site({
-        "collections" => ["slides"],
-      })
+      @site = fixture_site("collections" => ["slides"])
       @site.process
       @document = @site.collections["slides"].docs[2]
       @dest_file = dest_dir("slide/3/index.html")
@@ -248,15 +241,15 @@ class TestDocument < JekyllUnitTest
 
   context "a document in a collection with custom filename permalinks" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "slides" => {
             "output"    => true,
             "permalink" => "/slides/test/:name",
           },
         },
-        "permalink"   => "pretty",
-      })
+        "permalink"   => "pretty"
+      )
       @site.process
       @document = @site.collections["slides"].docs[0]
       @dest_file = dest_dir("slides/test/example-slide-1.html")
@@ -277,13 +270,13 @@ class TestDocument < JekyllUnitTest
 
   context "a document in a collection with pretty permalink style" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "slides" => {
             "output" => true,
           },
-        },
-      })
+        }
+      )
       @site.permalink_style = :pretty
       @site.process
       @document = @site.collections["slides"].docs[0]
@@ -301,13 +294,13 @@ class TestDocument < JekyllUnitTest
 
   context "a document in a collection with cased file name" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "slides" => {
             "output" => true,
           },
-        },
-      })
+        }
+      )
       @site.permalink_style = :pretty
       @site.process
       @document = @site.collections["slides"].docs[7]
@@ -321,13 +314,13 @@ class TestDocument < JekyllUnitTest
 
   context "a document in a collection with cased file name" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "slides" => {
             "output" => true,
           },
-        },
-      })
+        }
+      )
       @site.process
       @document = @site.collections["slides"].docs[6]
       @dest_file = dest_dir("slides/example-slide-7.php")
@@ -352,14 +345,14 @@ class TestDocument < JekyllUnitTest
 
   context "documents in a collection with custom title permalinks" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "slides" => {
             "output"    => true,
             "permalink" => "/slides/:title",
           },
-        },
-      })
+        }
+      )
       @site.process
       @document = @site.collections["slides"].docs[3]
       @document_without_slug = @site.collections["slides"].docs[4]
@@ -397,9 +390,9 @@ class TestDocument < JekyllUnitTest
 
   context "document with a permalink with dots & a trailing slash" do
     setup do
-      @site = fixture_site({ "collections" => {
+      @site = fixture_site("collections" => {
         "with.dots" => { "output" => true },
-      }, })
+      })
       @site.process
       @document = @site.collections["with.dots"].docs.last
       @dest_file = dest_dir("with.dots", "permalink.with.slash.tho", "index.html")
@@ -420,13 +413,13 @@ class TestDocument < JekyllUnitTest
 
   context "documents in a collection" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "slides" => {
             "output" => true,
           },
-        },
-      })
+        }
+      )
       @site.process
       @files = @site.collections["slides"].docs
     end
@@ -450,13 +443,13 @@ class TestDocument < JekyllUnitTest
 
   context "a static file in a collection" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "slides" => {
             "output" => true,
           },
-        },
-      })
+        }
+      )
       @site.process
       @document = @site.collections["slides"].files.find do |doc|
         doc.relative_path == "_slides/octojekyll.png"
@@ -483,13 +476,13 @@ class TestDocument < JekyllUnitTest
 
   context "a document in a collection with non-alphabetic file name" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "methods" => {
             "output" => true,
           },
-        },
-      })
+        }
+      )
       @site.process
       @document = @site.collections["methods"].docs.find do |doc|
         doc.relative_path == "_methods/escape-+ #%20[].md"
@@ -512,13 +505,13 @@ class TestDocument < JekyllUnitTest
 
   context "a document in a collection with dash-separated numeric file name" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "methods" => {
             "output" => true,
           },
-        },
-      })
+        }
+      )
       @site.process
       @document = @site.collections["methods"].docs.find do |doc|
         doc.relative_path == "_methods/3940394-21-9393050-fifif1323-test.md"

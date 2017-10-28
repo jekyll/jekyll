@@ -4,7 +4,7 @@ class Kramdown::Parser::SmartyPants < Kramdown::Parser::Kramdown
   def initialize(source, options)
     super
     @block_parsers = [:block_html]
-    @span_parsers =  [:smart_quotes, :html_entity, :typographic_syms, :span_html]
+    @span_parsers =  %i[smart_quotes html_entity typographic_syms span_html]
   end
 end
 

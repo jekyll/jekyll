@@ -49,7 +49,7 @@ module Jekyll
             Jekyll::Deprecator.deprecation_message "Your site still uses relative" \
                                 " permalinks, which was removed in" \
                                 " Jekyll v3.0.0."
-            return true
+            true
           end
         end
 
@@ -132,6 +132,7 @@ module Jekyll
           false
         end
 
+        # rubocop:disable Lint/RescueWithoutErrorClass
         def url_valid?(url)
           Addressable::URI.parse(url)
           true
@@ -142,6 +143,7 @@ module Jekyll
               "check the value of `url` in your config file."
           false
         end
+        # rubocop:enable Lint/RescueWithoutErrorClass
 
         def url_absolute(url)
           return true if Addressable::URI.parse(url).absolute?

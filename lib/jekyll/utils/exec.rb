@@ -21,7 +21,6 @@ module Jekyll
         [stdin, stdout, stderr].each(&:close)
         [process.value, out + err]
       end
-
     end
   end
 end

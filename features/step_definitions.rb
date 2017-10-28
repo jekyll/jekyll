@@ -18,9 +18,7 @@ end
 #
 
 Given(%r!^I have a blank site in "(.*)"$!) do |path|
-  unless File.exist?(path)
-    then FileUtils.mkdir_p(path)
-  end
+  FileUtils.mkdir_p(path) unless File.exist?(path)
 end
 
 #
@@ -66,13 +64,12 @@ end
 #
 
 Given(%r!^I have an? (.*) directory$!) do |dir|
-  unless File.directory?(dir)
-    then FileUtils.mkdir_p(dir)
-  end
+  FileUtils.mkdir_p(dir) unless File.directory?(dir)
 end
 
 #
 
+# rubocop:disable Lint/RescueWithoutErrorClass
 Given(%r!^I have the following (draft|page|post)s?(?: (in|under) "([^"]+)")?:$!) do |status, direction, folder, table|
   table.hashes.each do |input_hash|
     title = slug(input_hash["title"])
@@ -84,7 +81,11 @@ Given(%r!^I have the following (draft|page|post)s?(?: (in|under) "([^"]+)")?:$!)
     dest_folder = "" if status == "page"
 
     if status == "post"
-      parsed_date = Time.xmlschema(input_hash["date"]) rescue Time.parse(input_hash["date"])
+      parsed_date = begin
+                      Time.xmlschema(input_hash["date"])
+                    rescue
+                      Time.parse(input_hash["date"])
+                    end
       filename = "#{parsed_date.strftime("%Y-%m-%d")}-#{title}.#{ext}"
     end
 
@@ -92,6 +93,7 @@ Given(%r!^I have the following (draft|page|post)s?(?: (in|under) "([^"]+)")?:$!)
     File.write(path, file_content_from_hash(input_hash))
   end
 end
+# rubocop:enable Lint/RescueWithoutErrorClass
 
 #
 
@@ -155,27 +157,21 @@ end
 
 When(%r!^I run jekyll(.*)$!) do |args|
   run_jekyll(args)
-  if args.include?("--verbose") || ENV["DEBUG"]
-    warn "\n#{jekyll_run_output}\n"
-  end
+  warn "\n#{jekyll_run_output}\n" if args.include?("--verbose") || ENV["DEBUG"]
 end
 
 #
 
 When(%r!^I run bundle(.*)$!) do |args|
   run_bundle(args)
-  if args.include?("--verbose") || ENV["DEBUG"]
-    warn "\n#{jekyll_run_output}\n"
-  end
+  warn "\n#{jekyll_run_output}\n" if args.include?("--verbose") || ENV["DEBUG"]
 end
 
 #
 
 When(%r!^I run gem(.*)$!) do |args|
   run_rubygem(args)
-  if args.include?("--verbose") || ENV["DEBUG"]
-    warn "\n#{jekyll_run_output}\n"
-  end
+  warn "\n#{jekyll_run_output}\n" if args.include?("--verbose") || ENV["DEBUG"]
 end
 
 #

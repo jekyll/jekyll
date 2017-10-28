@@ -90,13 +90,13 @@ class TestCollections < JekyllUnitTest
 
   context "a collection with permalink" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "methods" => {
             "permalink" => "/awesome/:path/",
           },
-        },
-      })
+        }
+      )
       @site.process
       @collection = @site.collections["methods"]
     end
@@ -108,9 +108,7 @@ class TestCollections < JekyllUnitTest
 
   context "with a collection" do
     setup do
-      @site = fixture_site({
-        "collections" => ["methods"],
-      })
+      @site = fixture_site("collections" => ["methods"])
       @site.process
       @collection = @site.collections["methods"]
     end
@@ -156,29 +154,29 @@ class TestCollections < JekyllUnitTest
 
   context "with a collection with metadata" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "methods" => {
             "foo" => "bar",
             "baz" => "whoo",
           },
-        },
-      })
+        }
+      )
       @site.process
       @collection = @site.collections["methods"]
     end
 
     should "extract the configuration collection information as metadata" do
-      assert_equal @collection.metadata, { "foo" => "bar", "baz" => "whoo" }
+      assert_equal @collection.metadata, "foo" => "bar", "baz" => "whoo"
     end
   end
 
   context "in safe mode" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => ["methods"],
-        "safe"        => true,
-      })
+        "safe"        => true
+      )
       @site.process
       @collection = @site.collections["methods"]
     end
@@ -198,10 +196,10 @@ class TestCollections < JekyllUnitTest
 
   context "with dots in the filenames" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => ["with.dots"],
-        "safe"        => true,
-      })
+        "safe"        => true
+      )
       @site.process
       @collection = @site.collections["with.dots"]
     end
@@ -227,14 +225,14 @@ class TestCollections < JekyllUnitTest
 
   context "a collection with included dotfiles" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "methods" => {
             "permalink" => "/awesome/:path/",
           },
         },
-        "include"     => %w(.htaccess .gitignore),
-      })
+        "include"     => %w(.htaccess .gitignore)
+      )
       @site.process
       @collection = @site.collections["methods"]
     end

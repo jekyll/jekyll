@@ -21,10 +21,8 @@ class Jekyll::Converters::Markdown::RedcarpetParser
       add_code_tags(
         Pygments.highlight(
           code,
-          {
-            :lexer   => lang,
-            :options => { :encoding => "utf-8" },
-          }
+          :lexer   => lang,
+          :options => { :encoding => "utf-8" }
         ),
         lang
       )

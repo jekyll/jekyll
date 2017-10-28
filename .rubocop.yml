@@ -1,4 +1,8 @@
----
+# Ruby linting configuration.
+#
+# If you can avoid disabling a check globally by disabling it for just a method
+# or file, that is prefered. If you disable a check, document why.
+
 AllCops:
   TargetRubyVersion: 2.1
   Include:
@@ -10,16 +14,12 @@ AllCops:
     - script/**/*
     - vendor/**/*
     - tmp/**/*
-Layout/AlignArray:
-  Enabled: false
 Layout/AlignHash:
   EnforcedHashRocketStyle: table
 Layout/AlignParameters:
-  Enabled: false
+  Enabled: false # https://git.io/vFfR7
 Layout/EmptyLinesAroundAccessModifier:
-  Enabled: false
-Layout/EmptyLinesAroundModuleBody:
-  Enabled: false
+  Enabled: false # Because we specify `private` per method, this would get ugly
 Layout/EndOfLine:
   EnforcedStyle: native
 Layout/ExtraSpacing:
@@ -40,16 +40,12 @@ Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
 Layout/SpaceAroundOperators:
   Enabled: true
-Layout/SpaceInsideBrackets:
-  Enabled: false
 Lint/EndAlignment:
   Severity: error
 Lint/UnreachableCode:
   Severity: error
 Lint/UselessAccessModifier:
-  Enabled: false
-Lint/Void:
-  Enabled: false
+  Enabled: false # Because we specify `private` per method
 Metrics/AbcSize:
   Max: 21
 Metrics/BlockLength:
@@ -85,9 +81,10 @@ Metrics/ParameterLists:
 Metrics/PerceivedComplexity:
   Max: 8
 Naming/FileName:
-  Enabled: false
-Naming/HeredocDelimiterNaming:
-  Enabled: false
+  Exclude:
+    - Gemfile
+    - Rakefile
+    - lib/theme_template/Gemfile
 Security/MarshalLoad:
   Exclude:
     - !ruby/regexp /test\/.*.rb$/
@@ -97,33 +94,25 @@ Security/YAMLLoad:
     - !ruby/regexp /features\/.*.rb/
     - !ruby/regexp /test\/.*.rb$/
 Style/Alias:
-  Enabled: false
+  Enabled: false # We have no guidance on alias vs alias_method https://git.io/vFf0R
 Style/AndOr:
   Severity: error
-Style/Attr:
-  Enabled: false
-Style/BracesAroundHashParameters:
-  Enabled: false
 Style/ClassAndModuleChildren:
-  Enabled: false
+  Enabled: false # module X<\n>module Y is just as good as module X::Y. https://git.io/vFfEs
 Style/FrozenStringLiteralComment:
   Enabled: true
   EnforcedStyle: always
 Style/Documentation:
-  Enabled: false
+  Enabled: false # This *SHOULD* be enabled
   Exclude:
     - !ruby/regexp /features\/.*.rb$/
 Style/DoubleNegation:
-  Enabled: false
+  Enabled: false # This *SHOULD* be enabled
 Style/GuardClause:
-  Enabled: false
+  Enabled: false # This *SHOULD* be enabled
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
   Severity: error
-Style/IfUnlessModifier:
-  Enabled: false
-Style/InverseMethods:
-  Enabled: false
 Style/ModuleFunction:
   Enabled: false
 Style/MultilineTernaryOperator:
@@ -137,25 +126,15 @@ Style/PercentLiteralDelimiters:
     "%w": "()"
     "%W": "()"
     "%x": "()"
-Style/RedundantReturn:
-  Enabled: false
 Style/RedundantSelf:
-  Enabled: false
+  Enabled: false # Sometimes a self.field is a bit more clear https://git.io/vFf00
 Style/RegexpLiteral:
   EnforcedStyle: percent_r
-Style/RescueModifier:
-  Enabled: false
 Style/SignalException:
   EnforcedStyle: only_raise
-Style/SingleLineMethods:
-  Enabled: false
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
-Style/SymbolArray:
-  Enabled: false
 Style/TrailingCommaInLiteral:
   EnforcedStyleForMultiline: consistent_comma
-Style/UnneededCapitalW:
-  Enabled: false

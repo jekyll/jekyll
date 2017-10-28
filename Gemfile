@@ -8,15 +8,13 @@ gem "rake", "~> 12.0"
 gem "rouge", ENV["ROUGE"] if ENV["ROUGE"]
 
 # Dependency of jekyll-mentions. RubyGems in Ruby 2.1 doesn't shield us from this.
-gem "activesupport", "~> 4.2", :groups => [:test_legacy, :site] if RUBY_VERSION < "2.2.2"
+gem "activesupport", "~> 4.2", :groups => %i[test_legacy site] if RUBY_VERSION < "2.2.2"
 
 group :development do
   gem "launchy", "~> 2.3"
   gem "pry"
 
-  unless RUBY_ENGINE == "jruby"
-    gem "pry-byebug"
-  end
+  gem "pry-byebug" unless RUBY_ENGINE == "jruby"
 end
 
 #
@@ -88,15 +86,13 @@ group :jekyll_optional_dependencies do
   end
 
   # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-  gem "tzinfo-data", :platforms => [:mingw, :mswin, :x64_mingw, :jruby]
+  gem "tzinfo-data", :platforms => %i[mingw mswin x64_mingw jruby]
 end
 
 #
 
 group :site do
-  if ENV["PROOF"]
-    gem "html-proofer", "~> 3.4"
-  end
+  gem "html-proofer", "~> 3.4" if ENV["PROOF"]
 
   gem "jekyll-avatar"
   gem "jekyll-mentions"

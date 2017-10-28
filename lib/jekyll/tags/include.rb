@@ -182,11 +182,13 @@ MSG
         safe && !realpath_prefixed_with?(path, dir)
       end
 
+      # rubocop:disable Lint/RescueWithoutErrorClass
       def realpath_prefixed_with?(path, dir)
         File.exist?(path) && File.realpath(path).start_with?(dir)
       rescue StandardError
         false
       end
+      # rubocop:enable Lint/RescueWithoutErrorClass
 
       # This method allows to modify the file content by inheriting from the class.
       def read_file(file, context)

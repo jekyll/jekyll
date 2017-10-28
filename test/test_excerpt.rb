@@ -4,10 +4,9 @@ require "helper"
 
 class TestExcerpt < JekyllUnitTest
   def setup_post(file)
-    Document.new(@site.in_source_dir(File.join("_posts", file)), {
-      :site       => @site,
-      :collection => @site.posts,
-    }).tap(&:read)
+    Document.new(@site.in_source_dir(File.join("_posts", file)),
+                 :site       => @site,
+                 :collection => @site.posts).tap(&:read)
   end
 
   def do_render(document)
