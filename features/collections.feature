@@ -139,7 +139,7 @@ Feature: Collections
     And the _site directory should exist
     And the "_site/puppies/fido.html" file should not exist
 
-  Scenario: Hidden collection with document with future date, accessed via Liquid
+  Scenario: Hidden collection has document with future date, accessed via Liquid
     Given I have a _puppies directory
     And I have the following documents under the puppies collection:
       | title  | date       | content             |
