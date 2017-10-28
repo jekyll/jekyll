@@ -44,8 +44,6 @@ Layout/SpaceInsideBrackets:
   Enabled: false
 Lint/EndAlignment:
   Severity: error
-Lint/RescueWithoutErrorClass:
-  Enabled: false
 Lint/UnreachableCode:
   Severity: error
 Lint/UselessAccessModifier:

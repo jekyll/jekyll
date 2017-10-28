@@ -49,7 +49,7 @@ module Jekyll
       rescue SyntaxError => e
         Jekyll.logger.warn "YAML Exception reading #{filename}: #{e.message}"
         raise e if self.site.config["strict_front_matter"]
-      rescue => e
+      rescue StandardError => e
         Jekyll.logger.warn "Error reading file #{filename}: #{e.message}"
         raise e if self.site.config["strict_front_matter"]
       end
