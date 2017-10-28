@@ -29,7 +29,7 @@ Whenever you make a push to the selected branch, the Jekyll action runs `jekyll 
 
 If you prefer configuration as code over GUI, you can generate a `buddy.yml` that will create a pipeline with the Jekyll action once you push it to the target branch:
 
-```ruby
+```yaml
 - pipeline: "Build and Deploy Jekyll site"
   trigger_mode: "ON_EVERY_PUSH"
   ref_name: "master"
