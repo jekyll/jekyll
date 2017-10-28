@@ -52,6 +52,10 @@
   * Site: Add default twitter card image (#6476)
   * Update normalize.css to v7.0.0 (#6491)
 
+### Bug Fixes
+
+  * Raise when theme root directory is not available (#6455)
+
 ## 3.6.2 / 2017-10-21
 
 ### Development Fixes
