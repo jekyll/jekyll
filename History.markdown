@@ -34,6 +34,7 @@
   * Site: Rename method (#6474)
   * Do not linkify escaped characters as PRs in History (#6468)
   * Rely on jekyll-mentions for linking usernames (#6469)
+  * Enable `Lint/RescueWithoutErrorClass` Cop (#6482)
 
 ### Minor Enhancements
 
