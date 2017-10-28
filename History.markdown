@@ -23,6 +23,7 @@
   * Updated custom-404-page.md (#6489)
   * Remove `sudo` from macOS troubleshooting instructions (#6486)
   * add formester to the list of saas form backend (#6059)
+  * Fix a few minor issues in the docs (#6494)
 
 ### Development Fixes
 
