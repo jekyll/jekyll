@@ -25,7 +25,7 @@ The easiest way to manage dependencies for a Jekyll project (with or without Cir
 
 [4]: http://bundler.io/gemfile.html
 
-```yaml
+```ruby
 source 'https://rubygems.org'
 
 ruby '2.4.0'
