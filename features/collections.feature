@@ -116,7 +116,7 @@ Feature: Collections
     And the _site directory should exist
     And the "_site/puppies/fido.html" file should exist
 
-  Scenario: Hidden collection with document with future date
+  Scenario: Hidden collection with future dated document
     Given I have a _puppies directory
     And I have the following documents under the puppies collection:
       | title  | date       | content             |
@@ -139,7 +139,7 @@ Feature: Collections
     And the _site directory should exist
     And the "_site/puppies/fido.html" file should not exist
 
-  Scenario: Hidden collection has document with future date, accessed via Liquid
+  Scenario: Access hidden collection with future dated document via Liquid
     Given I have a _puppies directory
     And I have the following documents under the puppies collection:
       | title  | date       | content             |
@@ -155,7 +155,8 @@ Feature: Collections
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "Newest puppy: Rover" in "_site/index.html"
+    And I should not see "Newest puppy: Fido" in "_site/index.html"
+    But I should see "Newest puppy: Rover" in "_site/index.html"
     When I run jekyll build --future
     Then I should get a zero exit status
     And the _site directory should exist
