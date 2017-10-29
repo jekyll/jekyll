@@ -38,6 +38,7 @@
   * Rely on jekyll-mentions for linking usernames (#6469)
   * Enable `Lint/RescueWithoutErrorClass` Cop (#6482)
   * Added direct collection access to future collection item feature test (#6151)
+  * Clean up Rubocop config (#6495)
 
 ### Minor Enhancements
 
