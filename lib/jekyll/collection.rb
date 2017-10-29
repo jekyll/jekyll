@@ -207,7 +207,7 @@ module Jekyll
     def read_document(full_path)
       doc = Jekyll::Document.new(full_path, :site => site, :collection => self)
       doc.read
-      if site.publisher.publish?(doc) || !write?
+      if site.publisher.publish?(doc)
         docs << doc
       else
         Jekyll.logger.debug "Skipped From Publishing:", doc.relative_path
