@@ -47,6 +47,7 @@
   * Upgrade to Rouge 3 (#6381)
   * Allow the user to set collections_dir to put all collections under one subdirectory (#6331)
   * Scope path glob (#6268)
+  * Allow plugins to modify the obsolete files. (#6502)
 
 ### Site Enhancements
 
