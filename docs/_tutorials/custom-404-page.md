@@ -58,7 +58,7 @@ Add the following to the nginx configuration file, `nginx.conf`, which is usuall
 ```nginx
 server {
   error_page 404 /404.html;
-  location  /404.html {
+  location = /404.html {
     internal;
   }
 }

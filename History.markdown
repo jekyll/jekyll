@@ -19,6 +19,11 @@
   * Added github-cards to the list of plugins (#6425)
   * add post about diversity (#6447)
   * Docs: Add a note about Liquid and syntax highlighting (#6466)
+  * Add a note on `:jekyll_plugins` group in the docs (#6488)
+  * Updated custom-404-page.md (#6489)
+  * Remove `sudo` from macOS troubleshooting instructions (#6486)
+  * add formester to the list of saas form backend (#6059)
+  * Fix a few minor issues in the docs (#6494)
 
 ### Development Fixes
 
@@ -31,6 +36,10 @@
   * Site: Rename method (#6474)
   * Do not linkify escaped characters as PRs in History (#6468)
   * Rely on jekyll-mentions for linking usernames (#6469)
+  * Enable `Lint/RescueWithoutErrorClass` Cop (#6482)
+  * Added direct collection access to future collection item feature test (#6151)
+  * Clean up Rubocop config (#6495)
+  * Fix #6498: Use Gem to discover the location of bundler. (#6499)
 
 ### Minor Enhancements
 
@@ -46,6 +55,11 @@
   * Update list of files excluded from Docs site (#6457)
   * Update site History (#6460)
   * Site: Add default twitter card image (#6476)
+  * Update normalize.css to v7.0.0 (#6491)
+
+### Bug Fixes
+
+  * Raise when theme root directory is not available (#6455)
 
 ## 3.6.2 / 2017-10-21
 

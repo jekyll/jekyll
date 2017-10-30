@@ -38,14 +38,10 @@ Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
-Layout/SpaceAroundOperators:
-  Enabled: true
 Layout/SpaceInsideBrackets:
   Enabled: false
 Lint/EndAlignment:
   Severity: error
-Lint/RescueWithoutErrorClass:
-  Enabled: false
 Lint/UnreachableCode:
   Severity: error
 Lint/UselessAccessModifier:
@@ -102,14 +98,11 @@ Style/Alias:
   Enabled: false
 Style/AndOr:
   Severity: error
-Style/Attr:
-  Enabled: false
 Style/BracesAroundHashParameters:
   Enabled: false
 Style/ClassAndModuleChildren:
   Enabled: false
 Style/FrozenStringLiteralComment:
-  Enabled: true
   EnforcedStyle: always
 Style/Documentation:
   Enabled: false

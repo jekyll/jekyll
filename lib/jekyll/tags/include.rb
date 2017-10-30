@@ -184,7 +184,7 @@ MSG
 
       def realpath_prefixed_with?(path, dir)
         File.exist?(path) && File.realpath(path).start_with?(dir)
-      rescue
+      rescue StandardError
         false
       end
 

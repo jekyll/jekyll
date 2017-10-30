@@ -143,10 +143,13 @@ RUBY
         def bundle_install(path)
           Jekyll.logger.info "Running bundle install in #{path.cyan}..."
           Dir.chdir(path) do
-            process, output = Jekyll::Utils::Exec.run("bundle", "install")
+            exe = Gem.bin_path("bundler", "bundle")
+            process, output = Jekyll::Utils::Exec.run("ruby", exe, "install")
+
             output.to_s.each_line do |line|
               Jekyll.logger.info("Bundler:".green, line.strip) unless line.to_s.empty?
             end
+
             raise SystemExit unless process.success?
           end
         end

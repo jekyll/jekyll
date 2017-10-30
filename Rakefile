@@ -95,7 +95,7 @@ def siteify_file(file, overrides_front_matter = {})
   abort "You seem to have misplaced your #{file} file. I can haz?" unless File.exist?(file)
   title = begin
             File.read(file).match(%r!\A# (.*)$!)[1]
-          rescue
+          rescue NoMethodError
             File.basename(file, ".*").downcase.capitalize
           end
   slug  = File.basename(file, ".markdown").downcase

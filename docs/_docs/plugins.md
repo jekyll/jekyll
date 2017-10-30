@@ -68,6 +68,24 @@ You have 3 options for installing plugins:
   </p>
 </div>
 
+### The jekyll_plugins group
+
+Jekyll gives this particular group of gems in your `Gemfile` a different
+treatment. Any gem included in this group is loaded before Jekyll starts
+processing the rest of your source directory.
+
+A gem included here will be activated even if its not explicitly listed under
+the `plugins:` key in your site's config file.
+
+<div class="note warning">
+  <p>
+    Gems included in the <code>:jekyll-plugins</code> group are activated
+    regardless of the <code>--safe</code> mode setting. Be aware of what
+    gems are included under this group!
+  </p>
+</div>
+
+
 In general, plugins you make will fall broadly into one of five categories:
 
 1. [Generators](#generators)
