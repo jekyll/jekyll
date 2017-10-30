@@ -20,17 +20,13 @@ module Jekyll
 
         def process(options)
           options = configuration_from_options(options)
-          destination = options["destination"]
-          metadata_file = File.join(options["source"], ".jekyll-metadata")
-          sass_cache = File.join(options["source"], ".sass-cache")
-
-          remove(destination, :checker_func => :directory?)
-          remove(metadata_file, :checker_func => :file?)
-          remove(sass_cache, :checker_func => :directory?)
+          remove(File.join(options["source"], ".sass-cache"))
+          remove(File.join(options["source"], ".jekyll-metadata"))
+          remove(options["destination"])
         end
 
-        def remove(filename, checker_func: :file?)
-          if File.public_send(checker_func, filename)
+        def remove(filename)
+          if File.exists?(filename)
             Jekyll.logger.info "Cleaner:", "Removing #{filename}..."
             FileUtils.rm_rf(filename)
           else
