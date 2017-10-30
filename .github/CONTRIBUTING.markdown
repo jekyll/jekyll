@@ -4,7 +4,7 @@ Hi there! Interested in contributing to Jekyll? We'd love your help. Jekyll is a
 
 ## Where to get help or report a problem
 
-See [the support guidelines](SUPPORT.md)
+See [the support guidelines](https://jekyllrb.com/docs/support/)
 
 ## Ways to contribute
 
@@ -111,25 +111,37 @@ If your contribution changes any Jekyll behavior, make sure to update the docume
 
 * Don't bump the Gem version in your pull request (if you don't know what that means, you probably didn't).
 
+* You can use the command `script/console` to start a REPL to explore the result of
+Jekyll's methods. It also provides you with helpful methods to quickly create a
+site or configuration. [Feel free to check it out!](https://github.com/jekyll/jekyll/blob/master/script/console)
+
 ## Running tests locally
 
 ### Test Dependencies
 
 To run the test suite and build the gem you'll need to install Jekyll's dependencies by running the following command:
 
-<pre class="highlight"><code>$ script/bootstrap</code></pre>
+```sh
+script/bootstrap
+```
 
 Before you make any changes, run the tests and make sure that they pass (to confirm your environment is configured properly):
 
-<pre class="highlight"><code>$ script/cibuild</code></pre>
+```sh
+script/cibuild
+```
 
 If you are only updating a file in `test/`, you can use the command:
 
-<pre class="highlight"><code>$ script/test test/blah_test.rb</code></pre>
+```sh
+script/test test/blah_test.rb
+```
 
 If you are only updating a `.feature` file, you can use the command:
 
-<pre class="highlight"><code>$ script/cucumber features/blah.feature</code></pre>
+```sh
+script/cucumber features/blah.feature
+```
 
 Both `script/test` and `script/cucumber` can be run without arguments to
 run its entire respective suite.

@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # frozen_string_literal: true
 
 module Jekyll
@@ -9,6 +8,7 @@ module Jekyll
       # Where things are
       "source"              => Dir.pwd,
       "destination"         => File.join(Dir.pwd, "_site"),
+      "collections_dir"     => "",
       "plugins_dir"         => "_plugins",
       "layouts_dir"         => "_layouts",
       "data_dir"            => "_data",
@@ -207,7 +207,7 @@ module Jekyll
       rescue ArgumentError => err
         Jekyll.logger.warn "WARNING:", "Error reading configuration. " \
                      "Using defaults (and options)."
-        $stderr.puts err
+        warn err
       end
 
       configuration.fix_common_issues.backwards_compatibilize.add_default_collections

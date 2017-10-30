@@ -17,17 +17,17 @@ If you are using Windows 10 Anniversary Update, the easiest way to run Jekyll is
 
 First let's make sure all our packages / repositories are up to date. Open a new Command Prompt instance, and type the following:
 
-```
+```sh
 bash
 ```
 Your Command Prompt instance should now be a Bash instance. Now we must update our repo lists and packages.
 
-```
+```sh
 sudo apt-get update -y && sudo apt-get upgrade -y
 ```
 Now we can install Ruby. To do this we will use a repository from [BrightBox](https://www.brightbox.com/docs/ruby/ubuntu/), which hosts optimized versions of Ruby for Ubuntu.
 
-```
+```sh
 sudo apt-add-repository ppa:brightbox/ruby-ng
 sudo apt-get update
 sudo apt-get install ruby2.3 ruby2.3-dev build-essential
@@ -35,19 +35,19 @@ sudo apt-get install ruby2.3 ruby2.3-dev build-essential
 
 Next let's update our Ruby gems:
 
-```
+```sh
 sudo gem update
 ```
 
 Now all that is left to do is install Jekyll.
 
-```
+```sh
 sudo gem install jekyll bundler
 ```
 
 Check if Jekyll installed properly by running:
 
-```
+```sh
 jekyll -v
 ```
 
@@ -55,7 +55,7 @@ jekyll -v
 
 To start a new project named `my_blog`, just run:
 
-```
+```sh
 jekyll new my_blog
 ```
 
@@ -122,14 +122,14 @@ This gem is also needed in the github-pages and to get it running on Windows x64
 
 **Note:** In the current [pre release][nokogiriFails] it works out of the box with Windows x64 but this version is not referenced in the github-pages.
 
-`choco install libxml2 -Source "https://www.nuget.org/api/v2/"`{:.language-ruby}
+```sh
+choco install libxml2 -Source "https://www.nuget.org/api/v2/"
 
-`choco install libxslt -Source "https://www.nuget.org/api/v2/"`{:.language-ruby}
+choco install libxslt -Source "https://www.nuget.org/api/v2/"
 
-`choco install libiconv -Source "https://www.nuget.org/api/v2/"`{:.language-ruby}
+choco install libiconv -Source "https://www.nuget.org/api/v2/
 
-```ruby
- gem install nokogiri --^
+gem install nokogiri --^
    --with-xml2-include=C:\Chocolatey\lib\libxml2.2.7.8.7\build\native\include^
    --with-xml2-lib=C:\Chocolatey\lib\libxml2.redist.2.7.8.7\build\native\bin\v110\x64\Release\dynamic\cdecl^
    --with-iconv-include=C:\Chocolatey\lib\libiconv.1.14.0.11\build\native\include^
@@ -138,7 +138,7 @@ This gem is also needed in the github-pages and to get it running on Windows x64
    --with-xslt-lib=C:\Chocolatey\lib\libxslt.redist.1.1.28.0\build\native\bin\v110\x64\Release\dynamic
 ```
 
-#### Install github-pages 
+#### Install github-pages
 
   * Open command prompt and install [Bundler][]: `gem install bundler`
   * Create a file called `Gemfile` without any extension in your root directory of your blog
@@ -165,13 +165,9 @@ In the future the installation process of the github-pages should be as simple a
 [Bundler]: http://bundler.io/ "Ruby Dependencie Manager"
 [nokogiriReleases]: https://github.com/sparklemotion/nokogiri/releases "Nokogiri Releases"
 
----
-
 For a more conventional way of installing Jekyll you can follow this [complete guide to install Jekyll 3 on Windows by Sverrir Sigmundarson][windows-installjekyll3].
 
 Optionally you can use [Autoinstall Jekyll for Windows][fastjekyll-autoinstall].
-
----
 
 [windows-installjekyll3]: https://labs.sverrirs.com/jekyll/
 [fastjekyll-autoinstall]: https://github.com/KeJunMao/fastjekyll#autoinstall-jekyll-for-windows
@@ -185,11 +181,11 @@ Jekyll. This is especially relevant when you're running Jekyll on Windows.
 Additionally, you might need to change the code page of the console window to UTF-8 in case you get a "Liquid Exception: Incompatible character encoding" error during the site generation process. It can be done with the following command:
 
 ```sh
-$ chcp 65001
+chcp 65001
 ```
 
 
-## Time-Zone Management 
+## Time-Zone Management
 
 Since Windows doesn't have a native source of zoneinfo data, the Ruby Interpreter would not understand IANA Timezones and hence using them had the `TZ` environment variable default to UTC/GMT 00:00.
 Though Windows users could alternatively define their blog's timezone by setting the key to use POSIX format of defining timezones, it wasn't as user-friendly when it came to having the clock altered to changing DST-rules.
@@ -205,9 +201,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 [IANA-database]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 
-## Auto Regeneration 
+## Auto Regeneration
 
-As of v1.3.0, Jekyll uses the `listen` gem to watch for changes when the `--watch` switch is specified during a build or serve. While `listen` has built-in support for UNIX systems, it may require an extra gem for compatibility with Windows.
+Jekyll uses the `listen` gem to watch for changes when the `--watch` switch is specified during a build or serve. While `listen` has built-in support for UNIX systems, it may require an extra gem for compatibility with Windows.
 
 Add the following to the Gemfile for your site if you have issues with auto-regeneration on Windows alone:
 

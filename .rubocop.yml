@@ -1,6 +1,6 @@
 ---
 AllCops:
-  TargetRubyVersion: 2.0
+  TargetRubyVersion: 2.1
   Include:
     - lib/**/*.rb
   Exclude:
@@ -21,7 +21,7 @@ Layout/EmptyLinesAroundAccessModifier:
 Layout/EmptyLinesAroundModuleBody:
   Enabled: false
 Layout/EndOfLine:
-  EnforcedStyle: lf
+  EnforcedStyle: native
 Layout/ExtraSpacing:
   AllowForAlignment: true
 Layout/FirstParameterIndentation:
@@ -38,8 +38,6 @@ Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
-Layout/SpaceAroundOperators:
-  Enabled: true
 Layout/SpaceInsideBrackets:
   Enabled: false
 Lint/EndAlignment:
@@ -47,6 +45,8 @@ Lint/EndAlignment:
 Lint/UnreachableCode:
   Severity: error
 Lint/UselessAccessModifier:
+  Enabled: false
+Lint/Void:
   Enabled: false
 Metrics/AbcSize:
   Max: 21
@@ -82,6 +82,10 @@ Metrics/ParameterLists:
   Max: 4
 Metrics/PerceivedComplexity:
   Max: 8
+Naming/FileName:
+  Enabled: false
+Naming/HeredocDelimiterNaming:
+  Enabled: false
 Security/MarshalLoad:
   Exclude:
     - !ruby/regexp /test\/.*.rb$/
@@ -94,22 +98,17 @@ Style/Alias:
   Enabled: false
 Style/AndOr:
   Severity: error
-Style/Attr:
-  Enabled: false
 Style/BracesAroundHashParameters:
   Enabled: false
 Style/ClassAndModuleChildren:
   Enabled: false
 Style/FrozenStringLiteralComment:
-  Enabled: true
   EnforcedStyle: always
 Style/Documentation:
   Enabled: false
   Exclude:
     - !ruby/regexp /features\/.*.rb$/
 Style/DoubleNegation:
-  Enabled: false
-Style/FileName:
   Enabled: false
 Style/GuardClause:
   Enabled: false

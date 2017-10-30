@@ -1,4 +1,3 @@
-# coding: utf-8
 # frozen_string_literal: true
 
 lib = File.expand_path("lib", __dir__)
@@ -39,7 +38,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("liquid",                "~> 4.0")
   s.add_runtime_dependency("mercenary",             "~> 0.3.3")
   s.add_runtime_dependency("pathutil",              "~> 0.9")
-  rouge_versions = ENV["ROUGE_VERSION"] ? ["~> #{ENV["ROUGE_VERSION"]}"] : [">= 1.7", "< 3"]
+  rouge_versions = ENV["ROUGE_VERSION"] ? ["~> #{ENV["ROUGE_VERSION"]}"] : [">= 1.7", "< 4"]
   s.add_runtime_dependency("rouge",                 *rouge_versions)
   s.add_runtime_dependency("safe_yaml",             "~> 1.0")
 end

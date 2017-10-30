@@ -1,17 +1,93 @@
 ## HEAD
 
+### Documentation
+
+  * Docs: GitHub Pages instructions (#6384)
+  * Improve documentation for theme-gem installation (#6387)
+  * Fix diff syntax-highlighting (#6388)
+  * Fix code-block highlighting in docs (#6398)
+  * Docs: Filtering Posts with categories, tags, or other variables (#6399)
+  * Fixes formatting on pre-formatted text. (#6405)
+  * Docs: updates (#6407)
+  * Docs: Fix `collections_dir` example (#6408)
+  * Docs: Renaming duplicate of &#34;Scenario 6&#34; to &#34;Scenario 7&#34; (#6411)
+  * Docs: Mark `collection_dir` as unreleased (#6412)
+  * Docs: Fix link to SUPPORT (#6415)
+  * Docs: Added new tutorial to tutorials section on docs (#6406)
+  * Fix list appearance by adding missing `ol` tag (#6421)
+  * Explain how to override output collection index page (#6424)
+  * Added github-cards to the list of plugins (#6425)
+  * add post about diversity (#6447)
+  * Docs: Add a note about Liquid and syntax highlighting (#6466)
+  * Add a note on `:jekyll_plugins` group in the docs (#6488)
+  * Updated custom-404-page.md (#6489)
+  * Remove `sudo` from macOS troubleshooting instructions (#6486)
+  * add formester to the list of saas form backend (#6059)
+  * Fix a few minor issues in the docs (#6494)
+
 ### Development Fixes
 
-  * Strip unnecessary leading whitespace in template (#6228)
-  * Users should be installing patch versions. (#6198)
-  * fix tests (#6240)
-  * Define path with __dir__ (#6087)
-  * exit site.process sooner (#6239)
-  * make flakey test more robust (#6277)
-  * Add a quick test for DataReader (#6284)
-  * script/backport-pr: commit message no longer includes the `#` (#6289)
-  * Add Add CODEOWNERS file to help automate reviews. (#6320)
-  * Fix builds on codeclimate (#6333)
+  * Upgrade to Cucumber 3.0 (#6395)
+  * Provide a better default hash for tracking liquid stats (#6417)
+  * Docs: CoC violation correspondants (#6429)
+  * add failing test for non-utf8 encoding (#6339)
+  * Add configuration for first-timers bot (#6431)
+  * Update first-timers-issue-template.md (#6472)
+  * Site: Rename method (#6474)
+  * Do not linkify escaped characters as PRs in History (#6468)
+  * Rely on jekyll-mentions for linking usernames (#6469)
+  * Enable `Lint/RescueWithoutErrorClass` Cop (#6482)
+  * Added direct collection access to future collection item feature test (#6151)
+  * Clean up Rubocop config (#6495)
+  * Fix #6498: Use Gem to discover the location of bundler. (#6499)
+
+### Minor Enhancements
+
+  * Disable default layouts for Pages with a `layout: none` declaration (#6182)
+  * Upgrade to Rouge 3 (#6381)
+  * Allow the user to set collections_dir to put all collections under one subdirectory (#6331)
+  * Scope path glob (#6268)
+
+### Site Enhancements
+
+  * Docs: Update instructions (#6396)
+  * Add special styling for code-blocks run in shell (#6389)
+  * Update list of files excluded from Docs site (#6457)
+  * Update site History (#6460)
+  * Site: Add default twitter card image (#6476)
+  * Update normalize.css to v7.0.0 (#6491)
+
+### Bug Fixes
+
+  * Raise when theme root directory is not available (#6455)
+
+## 3.6.2 / 2017-10-21
+
+### Development Fixes
+
+  * Update Rubocop to 0.51.0 (#6444)
+  * Add test for layout as string (#6445)
+
+### Bug Fixes
+
+  * Problematic UTF+bom files (#6322)
+  * Always treat `data.layout` as a string (#6442)
+
+## 3.6.1 / 2017-10-20
+
+### Documentation
+
+  * Doc y_day in docs/permalinks (#6244)
+  * Update frontmatter.md (#6371)
+  * Elaborate on excluding items from processing (#6136)
+  * Style lists in tables (#6379)
+  * Remove duplicate &#34;available&#34; (#6380)
+
+### Development Fixes
+
+  * Bump rubocop to use `v0.50.x` (#6368)
+
+## 3.6.0 / 2017-09-21
 
 ### Minor Enhancements
 
@@ -25,20 +101,23 @@
   * Allow `yield` to logger methods &amp; bail early on no-op messages (#6315)
   * Update mime-types. (#6336)
   * Use a Schwartzian transform with custom sorting (#6342)
-  * Alias Drop#invoke_drop to Drop#[] (#6338)
+  * Alias `Drop#invoke_drop` to `Drop#[]` (#6338)
 
 ### Bug Fixes
 
   * `Deprecator`: fix typo for `--serve` command (#6229)
   * `Reader#read_directories`: guard against an entry not being a directory (#6226)
   * kramdown: symbolize keys in-place (#6247)
-  * Call to_s on site.url before attempting to concatenate strings (#6253)
+  * Call `to_s` on site.url before attempting to concatenate strings (#6253)
   * Enforce Style/FrozenStringLiteralComment (#6265)
   * Update theme-template README to note &#39;assets&#39; directory (#6257)
-  * Memoize the return value of Document#url (#6266)
+  * Memoize the return value of `Document#url` (#6266)
   * delegate `StaticFile#to_json` to `StaticFile#to_liquid` (#6273)
-  * Fix Drop#key? so it can handle a nil argument (#6281)
+  * Fix `Drop#key?` so it can handle a nil argument (#6281)
   * Guard against type error in absolute url (#6280)
+  * Mutable drops should fallback to their own methods when a mutation isn&#39;t present (#6350)
+  * Skip adding binary files as posts (#6344)
+  * Don&#39;t break if bundler is not installed (#6377)
 
 ### Documentation
 
@@ -59,12 +138,28 @@
   * Fix typo in site.url section of variables.md :-[ (#6337)
   * Docs: updates (#6343)
   * Fix precedence docs (#6346)
+  * add note to contributing docs about `script/console` (#6349)
+  * Docs: Fix permalink example (#6375)
 
 ### Site Enhancements
 
   * Adding DevKit helpers (#6225)
   * Customizing url in collection elements clarified (#6264)
   * Plugins is the new gems (#6326)
+
+### Development Fixes
+
+  * Strip unnecessary leading whitespace in template (#6228)
+  * Users should be installing patch versions. (#6198)
+  * Fix tests (#6240)
+  * Define path with `__dir__` (#6087)
+  * exit site.process sooner (#6239)
+  * make flakey test more robust (#6277)
+  * Add a quick test for DataReader (#6284)
+  * script/backport-pr: commit message no longer includes the `#` (#6289)
+  * Add Add CODEOWNERS file to help automate reviews. (#6320)
+  * Fix builds on codeclimate (#6333)
+  * Bump rubies on Travis (#6366)
 
 ## 3.5.2 / 2017-08-12
 
@@ -1278,7 +1373,7 @@
 
 ### Site Enhancements
 
-  * Add `@alfredxing` to the `@jekyll/core` team. :tada: (#3218)
+  * Add @alfredxing to the @jekyll/core team. :tada: (#3218)
   * Document the `-q` option for the `build` and `serve` commands (#3149)
   * Fix some minor typos/flow fixes in documentation website content (#3165)
   * Add `keep_files` to configuration documentation (#3162)

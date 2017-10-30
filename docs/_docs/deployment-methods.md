@@ -20,7 +20,7 @@ Read this [Jekyll step-by-step guide](https://www.netlify.com/blog/2015/10/28/a-
 
 [Aerobatic](https://www.aerobatic.com) has custom domains, global CDN distribution, basic auth, CORS proxying, and a growing list of plugins all included.
 
-Automating the deployment of a Jekyll site is simple. See our [Jekyll docs](https://www.aerobatic.com/docs/static-site-generators/#jekyll) for more details. Your built `_site` folder is deployed to our highly-available, globally distributed hosting service.
+Automating the deployment of a Jekyll site is simple. See their [Jekyll docs](https://www.aerobatic.com/docs/static-site-generators/#jekyll) for more details. Your built `_site` folder is deployed to their highly-available, globally distributed hosting service.
 
 ## Kickster
 

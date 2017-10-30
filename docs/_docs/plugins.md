@@ -25,32 +25,36 @@ having to modify the Jekyll source itself.
 You have 3 options for installing plugins:
 
 1. In your site source root, make a `_plugins` directory. Place your plugins
-here. Any file ending in `*.rb` inside this directory will be loaded before
-Jekyll generates your site.
+   here. Any file ending in `*.rb` inside this directory will be loaded before
+   Jekyll generates your site.
+
 2. In your `_config.yml` file, add a new array with the key `plugins` and the
-values of the gem names of the plugins you'd like to use. An example:
+   values of the gem names of the plugins you'd like to use. An example:
 
+   ```yaml
+   # This will require each of these plugins automatically.
+   plugins:
+     - jekyll-gist
+     - jekyll-coffeescript
+     - jekyll-assets
+     - another-jekyll-plugin
+   ```
 
-        plugins:
-          - jekyll-gist
-          - jekyll-coffeescript
-          - jekyll-assets
-          - another-jekyll-plugin
-        # This will require each of these plugins automatically.
-
-    Then install your plugins using `gem install jekyll-gist jekyll-coffeescript jekyll-assets another-jekyll-plugin`
+   Then install your plugins using `gem install jekyll-gist jekyll-coffeescript jekyll-assets another-jekyll-plugin`
 
 3. Add the relevant plugins to a Bundler group in your `Gemfile`. An
-    example:
+   example:
 
-        group :jekyll_plugins do
-          gem "jekyll-gist"
-          gem "jekyll-coffeescript"
-          gem "jekyll-assets"
-          gem "another-jekyll-plugin"
-        end
+   ```ruby
+    group :jekyll_plugins do
+      gem "jekyll-gist"
+      gem "jekyll-coffeescript"
+      gem "jekyll-assets"
+      gem "another-jekyll-plugin"
+    end
+   ```
 
-    Now you need to install all plugins from your Bundler group by running single command `bundle install`.
+   Now you need to install all plugins from your Bundler group by running single command `bundle install`.
 
 <div class="note info">
   <h5>
@@ -63,6 +67,24 @@ values of the gem names of the plugins you'd like to use. An example:
     others.
   </p>
 </div>
+
+### The jekyll_plugins group
+
+Jekyll gives this particular group of gems in your `Gemfile` a different
+treatment. Any gem included in this group is loaded before Jekyll starts
+processing the rest of your source directory.
+
+A gem included here will be activated even if its not explicitly listed under
+the `plugins:` key in your site's config file.
+
+<div class="note warning">
+  <p>
+    Gems included in the <code>:jekyll-plugins</code> group are activated
+    regardless of the <code>--safe</code> mode setting. Be aware of what
+    gems are included under this group!
+  </p>
+</div>
+
 
 In general, plugins you make will fall broadly into one of five categories:
 
@@ -117,7 +139,6 @@ This is a more complex generator that generates new pages:
 
 ```ruby
 module Jekyll
-
   class CategoryPage < Page
     def initialize(site, base, dir, category)
       @site = site
@@ -146,7 +167,6 @@ module Jekyll
       end
     end
   end
-
 end
 ```
 
@@ -385,11 +405,11 @@ Liquid::Template.register_tag('render_time', Jekyll::RenderTimeTag)
 In the example above, we can place the following tag anywhere in one of our
 pages:
 
-```ruby
 {% raw %}
+```ruby
 <p>{% render_time page rendered at: %}</p>
-{% endraw %}
 ```
+{% endraw %}
 
 And we would get something like this on the page:
 
@@ -885,6 +905,7 @@ You can find a few useful plugins at the following locations:
 - [Jekyll If File Exists](https://github.com/k-funk/jekyll-if-file-exists): A Jekyll Plugin that checks if a file exists with an if/else block.
 - [BibSonomy](https://github.com/rjoberon/bibsonomy-jekyll): Jekyll
   plugin to generate publication lists from [BibSonomy](https://www.bibsonomy.org/).
+- [github-cards](https://github.com/edward-shen/github-cards): Creates styleable Github cards for your Github projects.
 
 
 #### Collections
