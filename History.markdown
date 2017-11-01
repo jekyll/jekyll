@@ -48,6 +48,7 @@
   * Allow the user to set collections_dir to put all collections under one subdirectory (#6331)
   * Scope path glob (#6268)
   * Allow plugins to modify the obsolete files. (#6502)
+  * .sass-cache doesn&#39;t *always* land in options[&#39;source&#39;] (#6500)
 
 ### Site Enhancements
 
