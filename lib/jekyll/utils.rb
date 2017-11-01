@@ -1,4 +1,3 @@
-
 # frozen_string_literal: true
 
 module Jekyll
@@ -211,6 +210,9 @@ module Jekyll
           # digits.
           SLUGIFY_ASCII_REGEXP
         end
+
+      # Try to ascii-fy latin characters. Everything else turns to ?
+      string = ::I18n.transliterate(string) if mode == "ascii"
 
       # Strip according to the mode
       slug = string.gsub(re, "-")

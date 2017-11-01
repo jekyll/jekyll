@@ -41,4 +41,5 @@ Gem::Specification.new do |s|
   rouge_versions = ENV["ROUGE_VERSION"] ? ["~> #{ENV["ROUGE_VERSION"]}"] : [">= 1.7", "< 4"]
   s.add_runtime_dependency("rouge",                 *rouge_versions)
   s.add_runtime_dependency("safe_yaml",             "~> 1.0")
+  s.add_runtime_dependency("activesupport",         "~> 4.2")
 end

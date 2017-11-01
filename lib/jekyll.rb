@@ -32,6 +32,7 @@ require "safe_yaml/load"
 require "liquid"
 require "kramdown"
 require "colorator"
+require "active_support/inflector"
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
