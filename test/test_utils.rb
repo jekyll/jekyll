@@ -203,7 +203,7 @@ class TestUtils < JekyllUnitTest
     should "replace everything else but ASCII characters" do
       assert_equal "the-config-yml-file",
         Utils.slugify("The _config.yml file?", :mode => "ascii")
-      assert_equal "f-rtive-glance",
+      assert_equal "furtive-glance",
         Utils.slugify("fürtive glance!!!!", :mode => "ascii")
     end
 
