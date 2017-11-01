@@ -7,7 +7,7 @@ module Jekyll
     attr_writer :dir
     attr_accessor :site, :pager
     attr_accessor :name, :ext, :basename
-    attr_accessor :data, :content, :output
+    attr_accessor :content, :output
 
     alias_method :extname, :ext
 
@@ -51,9 +51,7 @@ module Jekyll
       process(name)
       read_yaml(File.join(base, dir), name)
 
-      data.default_proc = proc do |_, key|
-        site.frontmatter_defaults.find(File.join(dir, name), type, key)
-      end
+      @data = {}
 
       Jekyll::Hooks.trigger :pages, :post_init, self
     end

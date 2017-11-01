@@ -23,6 +23,17 @@ module Jekyll
       content || ""
     end
 
+    # The Convertible's data.
+    def data
+      @data ||= {}
+      @data_shim ||= Jekyll::FrontmatterWithDefaults.new(self, site.frontmatter_defaults, @data)
+    end
+
+    def data=(new_data)
+      @data = new_data
+      @data_shim = nil
+    end
+
     # Whether the file is published or not, as indicated in YAML front-matter
     def published?
       !(data.key?("published") && data["published"] == false)
@@ -64,7 +75,7 @@ module Jekyll
     # rubocop:enable Metrics/AbcSize
 
     def validate_data!(filename)
-      unless self.data.is_a?(Hash)
+      unless self.data.is_a?(Hash) || self.data.is_a?(Jekyll::FrontmatterWithDefaults)
         raise Errors::InvalidYAMLFrontMatterError,
           "Invalid YAML front matter in #{filename}"
       end

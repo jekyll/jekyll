@@ -43,6 +43,19 @@ module Jekyll
       set
     end
 
+    # Determines whether the given setting is present in the defaults.
+    #
+    # path - the path (relative to the source) of the page,
+    # post or :draft the default is used in
+    # type - a symbol indicating whether a :page,
+    # a :post or a :draft calls this method
+    # setting - the setting key of interest
+    #
+    # Returns whether this setting is defined for the path/type combination.
+    def key?(path, type, setting)
+      matching_sets(path, type).flat_map { |set| set["values"].keys }.include?(setting)
+    end
+
     # Finds a default value for a given setting, filtered by path and type
     #
     # path - the path (relative to the source) of the page,

@@ -28,15 +28,12 @@ module Jekyll
       @extname = File.extname(path)
       @collection = relations[:collection]
       @has_yaml_header = nil
+      @data = {}
 
       if draft?
         categories_from_path("_drafts")
       else
         categories_from_path(collection.relative_directory)
-      end
-
-      data.default_proc = proc do |_, key|
-        site.frontmatter_defaults.find(relative_path, collection.label, key)
       end
 
       trigger_hooks(:post_init)
@@ -47,7 +44,7 @@ module Jekyll
     # Returns a Hash containing the data. An empty hash is returned if
     #   no data was read.
     def data
-      @data ||= {}
+      @data_shim ||= Jekyll::FrontmatterWithDefaults.new(site.frontmatter_defaults, self, @data)
     end
 
     # Merge some data in with this document's data.
