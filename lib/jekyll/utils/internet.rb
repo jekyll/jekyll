@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   module Utils
     module Internet
@@ -18,15 +20,17 @@ module Jekyll
       # Returns true if a DNS call can successfully be made, or false if not.
       module_function
       def connected?
-        !dns("google.com").nil?
+        !dns("example.com").nil?
       end
 
       private
+      module_function
       def dns(domain)
-        Net::DNS.new do |resolver|
-          resolver.get_address(domain)
+        require "resolv"
+        Resolv::DNS.open do |resolver|
+          resolver.getaddress(domain)
         end
-      rescue
+      rescue Resolv::ResolvError, Resolv::ResolvTimeout
         nil
       end
 
