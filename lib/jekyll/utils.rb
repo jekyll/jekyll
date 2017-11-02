@@ -188,7 +188,7 @@ module Jekyll
     #   slugify("The _config.yml file", "ascii")
     #   # => "the-config.yml-file"
     #
-    #   slugify("The _cönfig.yml file", "latin")
+    #   slugify("The _config.yml file", "latin")
     #   # => "the-config.yml-file"
     #
     # Returns the slugified string.
@@ -203,7 +203,7 @@ module Jekyll
       # Drop accent marks from latin characters. Everything else turns to ?
       string = ::I18n.transliterate(string) if mode == "latin"
 
-      slug = replace_character_sequence_with_hyphen(string, mode: mode)
+      slug = replace_character_sequence_with_hyphen(string, :mode => mode)
 
       # Remove leading/trailing hyphen
       slug.gsub!(%r!^\-|\-$!i, "")
