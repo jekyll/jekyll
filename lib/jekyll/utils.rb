@@ -332,13 +332,11 @@ module Jekyll
     # See Utils#slugify for a description of the character sequence specified
     # by each mode.
     private
-    def replace_character_sequence_with_hyphen(string, mode:)
-      re =
+    def replace_character_sequence_with_hyphen(string, mode: "default")
+      replaceable_char =
         case mode
         when "raw"
           SLUGIFY_RAW_REGEXP
-        when "default"
-          SLUGIFY_DEFAULT_REGEXP
         when "pretty"
           # "._~!$&'()+,;=@" is human readable (not URI-escaped) in URL
           # and is allowed in both extN and NTFS.
@@ -348,12 +346,12 @@ module Jekyll
           # method is to ditch anything else but latin letters and numeric
           # digits.
           SLUGIFY_ASCII_REGEXP
-        when "latin"
+        else
           SLUGIFY_DEFAULT_REGEXP
         end
 
       # Strip according to the mode
-      string.gsub(re, "-")
+      string.gsub(replaceable_char, "-")
     end
   end
 end
