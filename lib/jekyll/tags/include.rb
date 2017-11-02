@@ -2,15 +2,6 @@
 
 module Jekyll
   module Tags
-    class IncludeTagError < StandardError
-      attr_accessor :path
-
-      def initialize(msg, path)
-        super(msg)
-        @path = path
-      end
-    end
-
     class IncludeTag < Liquid::Tag
       VALID_SYNTAX = %r!
         ([\w-]+)\s*=\s*
