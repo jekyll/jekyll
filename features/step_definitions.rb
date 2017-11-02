@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before do
   FileUtils.rm_rf(Paths.test_dir) if Paths.test_dir.exist?
   FileUtils.mkdir_p(Paths.test_dir) unless Paths.test_dir.directory?
@@ -93,6 +95,19 @@ end
 
 #
 
+Given(%r!^I have the following documents? under the (.*) collection:$!) do |folder, table|
+  table.hashes.each do |input_hash|
+    title = slug(input_hash["title"])
+    filename = "#{title}.md"
+    dest_folder = "_#{folder}"
+
+    path = File.join(dest_folder, filename)
+    File.write(path, file_content_from_hash(input_hash))
+  end
+end
+
+#
+
 Given(%r!^I have a configuration file with "(.*)" set to "(.*)"$!) do |key, value|
   config = \
     if source_dir.join("_config.yml").exist?
@@ -141,7 +156,7 @@ end
 When(%r!^I run jekyll(.*)$!) do |args|
   run_jekyll(args)
   if args.include?("--verbose") || ENV["DEBUG"]
-    $stderr.puts "\n#{jekyll_run_output}\n"
+    warn "\n#{jekyll_run_output}\n"
   end
 end
 
@@ -150,7 +165,7 @@ end
 When(%r!^I run bundle(.*)$!) do |args|
   run_bundle(args)
   if args.include?("--verbose") || ENV["DEBUG"]
-    $stderr.puts "\n#{jekyll_run_output}\n"
+    warn "\n#{jekyll_run_output}\n"
   end
 end
 
@@ -159,7 +174,7 @@ end
 When(%r!^I run gem(.*)$!) do |args|
   run_rubygem(args)
   if args.include?("--verbose") || ENV["DEBUG"]
-    $stderr.puts "\n#{jekyll_run_output}\n"
+    warn "\n#{jekyll_run_output}\n"
   end
 end
 
@@ -241,6 +256,30 @@ Then(%r!^I should (not )?see "(.*)" in "(.*)" unless Windows$!) do |negative, te
     else
       expect(file_contents(file)).to match regexp
     end
+  end
+end
+
+#
+
+Then(%r!^I should see date "(.*)" in "(.*)" unless Windows$!) do |text, file|
+  step %(the "#{file}" file should exist)
+  regexp = Regexp.new(text)
+  if Jekyll::Utils::Platforms.really_windows? && !dst_active?
+    expect(file_contents(file)).not_to match regexp
+  else
+    expect(file_contents(file)).to match regexp
+  end
+end
+
+#
+
+Then(%r!^I should see date "(.*)" in "(.*)" if on Windows$!) do |text, file|
+  step %(the "#{file}" file should exist)
+  regexp = Regexp.new(text)
+  if Jekyll::Utils::Platforms.really_windows? && !dst_active?
+    expect(file_contents(file)).to match regexp
+  else
+    expect(file_contents(file)).not_to match regexp
   end
 end
 

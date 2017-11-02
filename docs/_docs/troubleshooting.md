@@ -17,7 +17,7 @@ that might be of help. If the problem you’re experiencing isn’t covered belo
 ## Installation Problems
 
 If you encounter errors during gem installation, you may need to install
-the header files for compiling extension modules for Ruby 2.0.0. This
+the header files for compiling extension modules for Ruby 2.x This
 can be done on Ubuntu or Debian by running:
 
 ```sh
@@ -65,7 +65,7 @@ sudo emerge -av dev-ruby/rubygems
 On Windows, you may need to install [RubyInstaller
 DevKit](https://wiki.github.com/oneclick/rubyinstaller/development-kit).
 
-On Android (with Termux) you can install all requirements by running: 
+On Android (with Termux) you can install all requirements by running:
 
 ```sh
 apt update && apt install libffi-dev clang ruby-dev make
@@ -74,7 +74,7 @@ apt update && apt install libffi-dev clang ruby-dev make
 On macOS, you may need to update RubyGems (using `sudo` only if necessary):
 
 ```sh
-sudo gem update --system
+gem update --system
 ```
 
 If you still have issues, you can download and install new Command Line
@@ -84,11 +84,11 @@ Tools (such as `gcc`) using the following command:
 xcode-select --install
 ```
 
-which may allow you to install native gems using this command (again using
+which may allow you to install native gems using this command (again, using
 `sudo` only if necessary):
 
 ```sh
-sudo gem install jekyll
+gem install jekyll
 ```
 
 Note that upgrading macOS does not automatically upgrade Xcode itself
@@ -103,10 +103,10 @@ With the introduction of System Integrity Protection, several directories
 that were previously writable are now considered system locations and are no
 longer available. Given these changes, there are a couple of simple ways to get
 up and running. One option is to change the location where the gem will be
-installed (again using `sudo` only if necessary):
+installed (again, using `sudo` only if necessary):
 
 ```sh
-sudo gem install -n /usr/local/bin jekyll
+gem install -n /usr/local/bin jekyll
 ```
 
 Alternatively, Homebrew can be installed and used to set up Ruby. This can be
@@ -195,10 +195,37 @@ That is: defaults are overridden by options specified in `_config.yml`,
 and flags specified at the command-line will override all other settings
 specified elsewhere.
 
-If you encounter an error in building the site, with the error message
-"'0000-00-00-welcome-to-jekyll.markdown.erb' does not have a valid date in the
-YAML front matter." try including the line `exclude: [vendor]`
-in `_config.yml`.
+**Note: From v3.3.0 onward, Jekyll does not process `node_modules` and certain subdirectories within `vendor`, by default. But, by having an `exclude:` array defined explicitly in the config file overrides this default setting, which results in some users to encounter an error in building the site, with the following error message:**
+
+```
+    ERROR: YOUR SITE COULD NOT BE BUILT:
+    ------------------------------------
+    Invalid date '<%= Time.now.strftime('%Y-%m-%d %H:%M:%S %z') %>':
+    Document 'vendor/bundle/gems/jekyll-3.4.3/lib/site_template/_posts/0000-00-00-welcome-to-jekyll.markdown.erb'
+    does not have a valid date in the YAML front matter.
+```
+
+Simply adding `vendor/bundle` to the `exclude:` list will solve this problem but will lead to having other sub-directories under `/vendor/` (and also `/node_modules/`, if present) be processed to the destination folder `_site`.
+
+
+The proper solution is to incorporate the default setting for `exclude:` rather than override it completely:
+
+For versions upto `v3.4.3`, the `exclude:` setting must look like following:
+
+```yaml
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - any_additional_item # any user-specific listing goes at the end
+```
+
+From `v3.5` onward, `Gemfile` and `Gemfile.lock` are also excluded by default. So, in most cases there is no need to define another `exclude:` array in the config file. So an existing definition can either be modified as above, or removed completely, or simply commented out to enable easy edits in future.
+
 
 ## Markup Problems
 
@@ -234,7 +261,7 @@ The issue is caused by trying to copy a non-existing symlink.
 <div class="note">
   <h5>Please report issues you encounter!</h5>
   <p>
-  If you come across a bug, please <a href="{{ site.help_url }}/issues/new">create an issue</a>
+  If you come across a bug, please <a href="{{ site.repository }}/issues/new">create an issue</a>
   on GitHub describing the problem and any work-arounds you find so we can
   document it here for others.
   </p>

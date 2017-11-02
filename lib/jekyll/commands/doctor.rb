@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+require "addressable/uri"
+
 module Jekyll
   module Commands
     class Doctor < Command
@@ -36,6 +40,7 @@ module Jekyll
             !deprecated_relative_permalinks(site),
             !conflicting_urls(site),
             !urls_only_differ_by_case(site),
+            proper_site_url?(site),
           ].all?
         end
 
@@ -81,7 +86,7 @@ module Jekyll
         def urls_only_differ_by_case(site)
           urls_only_differ_by_case = false
           urls = case_insensitive_urls(site.pages + site.docs_to_write, site.dest)
-          urls.each do |_case_insensitive_url, real_urls|
+          urls.each_value do |real_urls|
             next unless real_urls.uniq.size > 1
             urls_only_differ_by_case = true
             Jekyll.logger.warn "Warning:", "The following URLs only differ" \
@@ -89,6 +94,15 @@ module Jekyll
               " will be overwritten by the other: #{real_urls.join(", ")}"
           end
           urls_only_differ_by_case
+        end
+
+        def proper_site_url?(site)
+          url = site.config["url"]
+          [
+            url_exists?(url),
+            url_valid?(url),
+            url_absolute(url),
+          ].all?
         end
 
         private
@@ -109,6 +123,31 @@ module Jekyll
             dest = thing.destination(destination)
             (memo[dest.downcase] ||= []) << dest
           end
+        end
+
+        def url_exists?(url)
+          return true unless url.nil? || url.empty?
+          Jekyll.logger.warn "Warning:", "You didn't set an URL in the config file, "\
+              "you may encounter problems with some plugins."
+          false
+        end
+
+        def url_valid?(url)
+          Addressable::URI.parse(url)
+          true
+        # Addressable::URI#parse only raises a TypeError
+        # https://git.io/vFfbx
+        rescue TypeError
+          Jekyll.logger.warn "Warning:", "The site URL does not seem to be valid, "\
+              "check the value of `url` in your config file."
+          false
+        end
+
+        def url_absolute(url)
+          return true if Addressable::URI.parse(url).absolute?
+          Jekyll.logger.warn "Warning:", "Your site URL does not seem to be absolute, "\
+              "check the value of `url` in your config file."
+          false
         end
       end
     end

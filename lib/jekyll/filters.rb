@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "addressable/uri"
 require "json"
 require "date"
@@ -80,6 +82,7 @@ module Jekyll
     #
     # Returns the formatted String.
     def date_to_long_string(date)
+      return date if date.to_s.empty?
       time(date).strftime("%d %B %Y")
     end
 
@@ -94,6 +97,7 @@ module Jekyll
     #
     # Returns the formatted String.
     def date_to_xmlschema(date)
+      return date if date.to_s.empty?
       time(date).xmlschema
     end
 
@@ -108,6 +112,7 @@ module Jekyll
     #
     # Returns the formatted String.
     def date_to_rfc822(date)
+      return date if date.to_s.empty?
       time(date).rfc822
     end
 
@@ -152,7 +157,7 @@ module Jekyll
     #
     # Returns the escaped String.
     def uri_escape(input)
-      Addressable::URI.encode(input)
+      Addressable::URI.normalize_component(input)
     end
 
     # Replace any whitespace in the input string with a single space
@@ -330,19 +335,26 @@ module Jekyll
     end
 
     private
-    def sort_input(input, property, order)
-      input.sort do |apple, orange|
-        apple_property = item_property(apple, property)
-        orange_property = item_property(orange, property)
 
-        if !apple_property.nil? && orange_property.nil?
-          - order
-        elsif apple_property.nil? && !orange_property.nil?
-          + order
-        else
-          apple_property <=> orange_property
+    # Sort the input Enumerable by the given property.
+    # If the property doesn't exist, return the sort order respective of
+    # which item doesn't have the property.
+    # We also utilize the Schwartzian transform to make this more efficient.
+    def sort_input(input, property, order)
+      input.map { |item| [item_property(item, property), item] }
+        .sort! do |apple_info, orange_info|
+          apple_property = apple_info.first
+          orange_property = orange_info.first
+
+          if !apple_property.nil? && orange_property.nil?
+            - order
+          elsif apple_property.nil? && !orange_property.nil?
+            + order
+          else
+            apple_property <=> orange_property
+          end
         end
-      end
+        .map!(&:last)
     end
 
     private
@@ -352,13 +364,15 @@ module Jekyll
         raise Errors::InvalidDateError,
           "Invalid Date: '#{input.inspect}' is not a valid datetime."
       end
-      date.to_time.localtime
+      date.to_time.dup.localtime
     end
 
     private
     def item_property(item, property)
       if item.respond_to?(:to_liquid)
-        item.to_liquid[property.to_s]
+        property.to_s.split(".").reduce(item.to_liquid) do |subvalue, attribute|
+          subvalue[attribute]
+        end
       elsif item.respond_to?(:data)
         item.data[property.to_s]
       else

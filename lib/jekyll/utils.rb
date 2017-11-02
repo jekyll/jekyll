@@ -1,4 +1,6 @@
 
+# frozen_string_literal: true
+
 module Jekyll
   module Utils
     extend self
@@ -6,6 +8,7 @@ module Jekyll
     autoload :Exec, "jekyll/utils/exec"
     autoload :Internet, "jekyll/utils/internet"
     autoload :Platforms, "jekyll/utils/platforms"
+    autoload :Rouge, "jekyll/utils/rouge"
     autoload :WinTZ, "jekyll/utils/win_tz"
 
     # Constants for use in #slugify
@@ -248,6 +251,8 @@ module Jekyll
     #
     # Returns the updated permalink template
     def add_permalink_suffix(template, permalink_style)
+      template = template.dup
+
       case permalink_style
       when :pretty
         template << "/"
@@ -257,6 +262,7 @@ module Jekyll
         template << "/" if permalink_style.to_s.end_with?("/")
         template << ":output_ext" if permalink_style.to_s.end_with?(":output_ext")
       end
+
       template
     end
 
@@ -296,8 +302,11 @@ module Jekyll
     # and a given param
     def merged_file_read_opts(site, opts)
       merged = (site ? site.file_read_opts : {}).merge(opts)
+      if merged[:encoding] && !merged[:encoding].start_with?("bom|")
+        merged[:encoding] = "bom|#{merged[:encoding]}"
+      end
       if merged["encoding"] && !merged["encoding"].start_with?("bom|")
-        merged["encoding"].insert(0, "bom|")
+        merged["encoding"] = "bom|#{merged["encoding"]}"
       end
       merged
     end

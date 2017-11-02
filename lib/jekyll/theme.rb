@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class Theme
     extend Forwardable
@@ -14,7 +16,8 @@ module Jekyll
       # Otherwise, Jekyll.sanitized path with prepend the unresolved root
       @root ||= File.realpath(gemspec.full_gem_path)
     rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP
-      nil
+      raise "Path #{gemspec.full_gem_path} does not exist, is not accessible "\
+        "or includes a symbolic link loop"
     end
 
     def includes_path
@@ -37,6 +40,10 @@ module Jekyll
       return unless sass_path
       require "sass"
       Sass.load_paths << sass_path
+    end
+
+    def runtime_dependencies
+      gemspec.runtime_dependencies
     end
 
     private

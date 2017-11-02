@@ -56,8 +56,8 @@ determines the variable name).
 
 You can now render the list of members in a template:
 
-```html
 {% raw %}
+```liquid
 <ul>
 {% for member in site.data.members %}
   <li>
@@ -67,8 +67,11 @@ You can now render the list of members in a template:
   </li>
 {% endfor %}
 </ul>
-{% endraw %}
 ```
+{% endraw %}
+
+{: .note .info }
+If your Jekyll site has a lot of pages, such as with documentation websites, see the detailed examples in [how to build robust navigation for your site]({% link _tutorials/navigation.md %}).
 
 ## Example: Organizations
 
@@ -103,8 +106,8 @@ members:
 The organizations can then be accessed via `site.data.orgs`, followed by the
 file name:
 
-```html
 {% raw %}
+```liquid
 <ul>
 {% for org_hash in site.data.orgs %}
 {% assign org = org_hash[1] %}
@@ -116,8 +119,8 @@ file name:
   </li>
 {% endfor %}
 </ul>
-{% endraw %}
 ```
+{% endraw %}
 
 ## Example: Accessing a specific author
 
@@ -133,8 +136,8 @@ dave:
 
 The author can then be specified as a page variable in a post's frontmatter:
 
-```html
 {% raw %}
+```liquid
 ---
 title: sample post
 author: dave
@@ -146,6 +149,7 @@ author: dave
   title="{{ author.name }}">
     {{ author.name }}
 </a>
-
-{% endraw %}
 ```
+{% endraw %}
+
+For information on how to build robust navigation for your site (especially if you have a documentation website or another type of Jekyll site with a lot of pages to organize), see [Navigation](/tutorials/navigation).

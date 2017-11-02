@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   module Commands
     class Clean < Command
@@ -20,7 +22,7 @@ module Jekyll
           options = configuration_from_options(options)
           destination = options["destination"]
           metadata_file = File.join(options["source"], ".jekyll-metadata")
-          sass_cache = File.join(options["source"], ".sass-cache")
+          sass_cache = ".sass-cache"
 
           remove(destination, :checker_func => :directory?)
           remove(metadata_file, :checker_func => :file?)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #############################################################################
 #
 # Site tasks - https://jekyllrb.com
@@ -5,7 +7,7 @@
 #############################################################################
 
 namespace :site do
-  task :generated_pages => [:history, :version_file, :conduct, :contributing]
+  task :generated_pages => [:history, :version_file, :conduct, :contributing, :support]
 
   desc "Generate and view the site locally"
   task :preview => :generated_pages do
@@ -43,12 +45,10 @@ namespace :site do
   end
   task :build => :generate
 
-  desc "Update normalize.css library to the latest version and minify"
+  desc "Update normalize.css library to the latest version"
   task :update_normalize_css do
     Dir.chdir("#{docs_folder}/_sass") do
-      sh 'curl "https://necolas.github.io/normalize.css/latest/normalize.css" -o "normalize.scss"'
-      sh 'sass "normalize.scss":"_normalize.scss" --style compressed'
-      rm ["normalize.scss", Dir.glob("*.map")].flatten
+      sh 'curl "https://necolas.github.io/normalize.css/latest/normalize.css" -o "_normalize.scss"'
     end
   end
 
@@ -69,12 +69,17 @@ namespace :site do
       "redirect_from" => "/conduct/index.html",
       "editable"      => false,
     }
-    siteify_file("CONDUCT.markdown", front_matter)
+    siteify_file("CODE_OF_CONDUCT.markdown", front_matter)
   end
 
   desc "Copy the contributing file"
   task :contributing do
     siteify_file(".github/CONTRIBUTING.markdown", "title" => "Contributing")
+  end
+
+  desc "Copy the support file"
+  task :support do
+    siteify_file(".github/SUPPORT.markdown", "title" => "Support")
   end
 
   desc "Write the site latest_version.txt file"

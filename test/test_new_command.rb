@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 require "jekyll/commands/new"
 
@@ -9,7 +11,7 @@ class TestNewCommand < JekyllUnitTest
   end
 
   def site_template
-    File.expand_path("../lib/site_template", File.dirname(__FILE__))
+    File.expand_path("../lib/site_template", __dir__)
   end
 
   context "when args contains a path" do
@@ -20,7 +22,7 @@ class TestNewCommand < JekyllUnitTest
     end
 
     teardown do
-      FileUtils.rm_r @full_path
+      FileUtils.rm_r @full_path if File.directory?(@full_path)
     end
 
     should "create a new directory" do
@@ -34,13 +36,12 @@ class TestNewCommand < JekyllUnitTest
       refute_exist @full_path
       capture_output { Jekyll::Commands::New.process(@args) }
       assert_exist gemfile
-      assert_match(%r!gem "jekyll", "#{Jekyll::VERSION}"!, File.read(gemfile))
+      assert_match(%r!gem "jekyll", "~> #{Jekyll::VERSION}"!, File.read(gemfile))
       assert_match(%r!gem "github-pages"!, File.read(gemfile))
     end
 
     should "display a success message" do
-      Jekyll::Commands::New.process(@args)
-      output = Jekyll.logger.messages
+      output = capture_output { Jekyll::Commands::New.process(@args) }
       success_message = "New jekyll site installed in #{@full_path.cyan}. "
       bundle_message = "Running bundle install in #{@full_path.cyan}... "
       assert_includes output, success_message
@@ -86,8 +87,7 @@ class TestNewCommand < JekyllUnitTest
 
     should "create blank project" do
       blank_contents = %w(/_drafts /_layouts /_posts /index.html)
-      capture_output { Jekyll::Commands::New.process(@args, "--blank") }
-      output = Jekyll.logger.messages.last
+      output = capture_output { Jekyll::Commands::New.process(@args, "--blank") }
       bundle_message = "Running bundle install in #{@full_path.cyan}..."
       assert_same_elements blank_contents, dir_contents(@full_path)
       refute_includes output, bundle_message
@@ -96,12 +96,11 @@ class TestNewCommand < JekyllUnitTest
     should "force created folder" do
       capture_output { Jekyll::Commands::New.process(@args) }
       output = capture_output { Jekyll::Commands::New.process(@args, "--force") }
-      assert_match(%r!New jekyll site installed in!, output)
+      assert_match %r!New jekyll site installed in!, output
     end
 
     should "skip bundle install when opted to" do
-      capture_output { Jekyll::Commands::New.process(@args, "--skip-bundle") }
-      output = Jekyll.logger.messages.last
+      output = capture_output { Jekyll::Commands::New.process(@args, "--skip-bundle") }
       bundle_message = "Bundle install skipped."
       assert_includes output, bundle_message
     end

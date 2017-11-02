@@ -68,6 +68,20 @@ front matter of a page or post.
           <code>_layouts</code> directory.
 
         </p>
+        <ul>
+          <li>
+            Using <code>null</code> will produce a file without using a layout
+            file. However this is overridden if the file is a post/document and has a
+            layout defined in the <a href="../configuration/#front-matter-defaults">
+            frontmatter defaults</a>.
+          </li>
+          <li>
+            Starting from version 3.5.0, using <code>none</code> in a post/document will
+            produce a file without using a layout file regardless of frontmatter defaults.
+            Using <code>none</code> in a page, however, will cause Jekyll to attempt to
+            use a layout named "none".
+          </li>
+        </ul>
       </td>
     </tr>
     <tr>
@@ -99,6 +113,14 @@ front matter of a page or post.
 </table>
 </div>
 
+<div class="note">
+  <h5>ProTip™: Render Posts Marked As Unpublished</h5>
+  <p>
+    To preview unpublished pages, simply run `jekyll serve` or `jekyll build`
+    with the `--unpublished` switch. Jekyll also has a handy <a href="../drafts/">drafts</a>
+    feature tailored specifically for blog posts.
+  </p>
+</div>
 
 ## Custom Variables
 
@@ -107,14 +129,14 @@ data that is sent to the Liquid templating engine during the conversion. For
 instance, if you set a title, you can use that in your layout to set the page
 title:
 
-```html
+```liquid
 <!DOCTYPE HTML>
 <html>
   <head>
     <title>{% raw %}{{ page.title }}{% endraw %}</title>
   </head>
   <body>
-    ...
+    …
 ```
 
 ## Predefined Variables for Posts
@@ -145,7 +167,7 @@ These are available out-of-the-box to be used in the front matter for a post.
     </tr>
     <tr>
       <td>
-        <p style="margin-bottom: 5px;"><code>category</code></p>
+        <p><code>category</code></p>
         <p><code>categories</code></p>
       </td>
       <td>

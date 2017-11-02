@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class Command
     class << self
@@ -37,6 +39,7 @@ module Jekyll
       #
       # Returns a full Jekyll configuration
       def configuration_from_options(options)
+        return options if options.is_a?(Jekyll::Configuration)
         Jekyll.configuration(options)
       end
 
@@ -45,6 +48,7 @@ module Jekyll
       # c - the Jekyll::Command to add these options to
       #
       # Returns nothing
+      # rubocop:disable Metrics/MethodLength
       def add_build_options(c)
         c.option "config", "--config CONFIG_FILE[,CONFIG_FILE2,...]",
           Array, "Custom configuration file"
@@ -65,7 +69,10 @@ module Jekyll
         c.option "quiet", "-q", "--quiet", "Silence output."
         c.option "verbose", "-V", "--verbose", "Print verbose output."
         c.option "incremental", "-I", "--incremental", "Enable incremental rebuild."
+        c.option "strict_front_matter", "--strict_front_matter",
+          "Fail if errors are present in front matter"
       end
+      # rubocop:enable Metrics/MethodLength
     end
   end
 end

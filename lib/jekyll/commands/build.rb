@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   module Commands
     class Build < Command
@@ -94,7 +96,7 @@ module Jekyll
             )
           end
         end
-      end # end of class << self
+      end
     end
   end
 end

@@ -14,6 +14,10 @@ Known breaking changes are listed in the upgrading docs.
 
 Our guide to Jekyll covering installation, writing, customization, deployment, and more.
 
+### [Tutorials](/tutorials/home)
+
+Similar to documentation, but more detailed scenario-based walk-throughs covering a variety of topics.
+
 ### [View source](https://github.com/jekyll/jekyll/wiki/sites)
 
 Learn from the source of others' Jekyll-powered sites.

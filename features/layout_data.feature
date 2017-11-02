@@ -5,6 +5,26 @@ Feature: Layout data
 
   Scenario: Use custom layout data
     Given I have a _layouts directory
+    And I have a "_layouts/999.html" file with content:
+      """
+      ---
+      ---
+      {{ content }} layout content
+      """
+    And I have an "index.html" page with layout "custom" that contains "page content"
+    And I have an "index.html" file with content:
+      """
+      ---
+      layout: 999
+      ---
+      page content
+      """
+    When I run jekyll build
+    Then the "_site/index.html" file should exist
+    And I should see "page content layout content" in "_site/index.html"
+
+  Scenario: Use custom layout data
+    Given I have a _layouts directory
     And I have a "_layouts/custom.html" file with content:
       """
       ---

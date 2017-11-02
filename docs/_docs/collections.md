@@ -46,6 +46,15 @@ defaults:
       layout: page
 ```
 
+<div class="note unreleased">
+  <h5>Gather your collections</h5>
+
+  <p>From <code>v3.7.0</code> you can optionally specify a directory to store all your collections in the same place with <code>collections_dir: my_collections</code></p>
+
+  <p>Then Jekyll will look in <code>my_collections/_books</code> for the <code>books</code> collection, and
+  in <code>my_collections/_recipes</code> for the <code>recipes</code> collection.</p>
+</div>
+
 ### Step 2: Add your content {#step2}
 
 Create a corresponding folder (e.g. `<source>/_my_collection`) and add
@@ -78,6 +87,20 @@ For example, if you have `_my_collection/some_subdir/some_doc.md`,
 it will be rendered using Liquid and the Markdown converter of your
 choice and written out to `<dest>/my_collection/some_subdir/some_doc.html`.
 
+If you wish a specific page to be shown when accessing `/my_collection/`,
+simply add `permalink: /my_collection/index.html` to a page.
+To list items from the collection, on that page or any other, you can use:
+
+{% raw %}
+```liquid
+{% for item in site.my_collection %}
+  <h2>{{ item.title }}</h2>
+  <p>{{ item.description }}</p>
+  <p><a href="{{ item.url }}">{{ item.title }}</a></p>
+{% endfor %}
+```
+{% endraw %}
+
 <div class="note info">
   <h5>Don't forget to add YAML for processing</h5>
   <p>
@@ -89,18 +112,75 @@ choice and written out to `<dest>/my_collection/some_subdir/some_doc.html`.
 
 ## Configuring permalinks for collections {#permalinks}
 
-You can customize the [Permalinks](../permalinks/) for your collection's documents by setting `permalink` property in the collection's configuration as follows:
+If you wish to specify a custom pattern for the URLs where your Collection pages
+will reside, you may do so with the [`permalink` property](../permalinks/):
 
 ```yaml
 collections:
   my_collection:
     output: true
-    permalink: /awesome/:path/:title.:output_ext
+    permalink: /:collection/:name
 ```
 
-In this example, the collection documents will the have the URL of `awesome` followed by the path to the document and its file extension.
+### Examples
 
-Collections have the following template variables available for permalinks:
+For a collection with the following source file structure,
+
+```
+_my_collection/
+└── some_subdir
+    └── some_doc.md
+```
+
+each of the following `permalink` configurations will produce the document structure shown below it.
+
+* **Default**
+  Same as `permalink: /:collection/:path`.
+
+  ```
+  _site/
+  ├── my_collection
+  │   └── some_subdir
+  │       └── some_doc.html
+  ...
+  ```
+* `permalink: pretty`
+  Same as `permalink: /:collection/:path/`.
+
+  ```
+  _site/
+  ├── my_collection
+  │   └── some_subdir
+  │       └── some_doc
+  │           └── index.html
+  ...
+  ```
+* `permalink: /doc/:path`
+
+  ```
+  _site/
+  ├── doc
+  │   └── some_subdir
+  │       └── some_doc.html
+  ...
+  ```
+* `permalink: /doc/:name`
+
+  ```
+  _site/
+  ├── doc
+  │   └── some_doc.html
+  ...
+  ```
+* `permalink: /:name`
+
+  ```
+  _site/
+  ├── some_doc.html
+  ...
+  ```
+
+### Template Variables
 
 <div class="mobile-side-scroller">
 <table>
@@ -113,7 +193,7 @@ Collections have the following template variables available for permalinks:
   <tbody>
     <tr>
       <td>
-        <p><code>collection</code></p>
+        <p><code>:collection</code></p>
       </td>
       <td>
         <p>Label of the containing collection.</p>
@@ -121,7 +201,7 @@ Collections have the following template variables available for permalinks:
     </tr>
     <tr>
       <td>
-        <p><code>path</code></p>
+        <p><code>:path</code></p>
       </td>
       <td>
         <p>Path to the document relative to the collection's directory.</p>
@@ -129,7 +209,7 @@ Collections have the following template variables available for permalinks:
     </tr>
     <tr>
       <td>
-        <p><code>name</code></p>
+        <p><code>:name</code></p>
       </td>
       <td>
         <p>The document's base filename, with every sequence of spaces
@@ -138,99 +218,29 @@ Collections have the following template variables available for permalinks:
     </tr>
     <tr>
       <td>
-        <p><code>title</code></p>
+        <p><code>:title</code></p>
       </td>
       <td>
-        <p>The document's lowercase title (as defined in its <a href="/docs/frontmatter/">front matter</a>), with every sequence of spaces and non-alphanumeric characters replaced by a hyphen. If the document does not define a title in its <a href="/docs/frontmatter/">front matter</a>, this is equivalent to <code>name</code>.</p>
+        <p>
+          The <code>:title</code> template variable will take the
+          <code>slug</code> <a href="/docs/frontmatter/">front matter</a>
+          variable value if any is present in the document; if none is
+          defined then <code>:title</code> will be equivalent to
+          <code>:name</code>, aka the slug generated from the filename.
+        </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p><code>output_ext</code></p>
+        <p><code>:output_ext</code></p>
       </td>
       <td>
-        <p>Extension of the output file.</p>
+        <p>Extension of the output file. (Included by default and usually unnecessary.)</p>
       </td>
     </tr>
   </tbody>
 </table>
 </div>
-
-## Permalink examples for collections
-
-Depending on how you declare the permalinks in your configuration file, the permalinks and paths get written differently in the `_site` folder. A few examples will help clarify the options.
-
-Let's say your collection is called `apidocs` with `doc1.md` in your collection. `doc1.md` is grouped inside a folder called `mydocs`. Your project's source directory for the collection looks this:
-
-```
-├── \_apidocs
-│   └── mydocs
-│       └── doc1.md
-```
-
-Based on this scenario, here are a few permalink options.
-
-**Permalink configuration 1**: [Nothing configured] <br/>
-**Output**:
-
-```
-├── apidocs
-│   └── mydocs
-│       └── doc1.html
-```
-
-**Permalink configuration 2**: `/:collection/:path/:title:output_ext`  <br/>
-**Output**:
-
-```
-├── apidocs
-│   └── mydocs
-│       └── doc1.html
-```
-
-**Permalink configuration 3**: No collection permalinks configured, but `pretty` configured for pages/posts. <br/>
-**Output**:
-
-```
-├── apidocs
-│   └── mydocs
-│       └── doc1
-│           └── index.html
-```
-
-**Permalink configuration 4**: `/awesome/:path/:title.html`   <br/>
-**Output**:
-
-```
-├── awesome
-│   └── mydocs
-│       └── doc1.html
-```
-
-**Permalink configuration 5**: `/awesome/:path/:title/`  <br/>
-**Output**:
-
-```
-├── awesome
-│   └── mydocs
-│       └── doc1
-│           └── index.html
-```
-
-**Permalink configuration 6**: `/awesome/:title.html` <br/>
-**Output**:  
-
-```
-├── awesome
-│   └── doc1.html
-```
-
-**Permalink configuration 7**: `:title.html`
-**Output**:
-
-```
-├── doc1.html
-```
 
 ## Liquid Attributes
 
@@ -238,7 +248,7 @@ Based on this scenario, here are a few permalink options.
 
 Each collection is accessible as a field on the `site` variable. For example, if
 you want to access the `albums` collection found in `_albums`, you'd use
-`site.albums`. 
+`site.albums`.
 
 Each collection is itself an array of documents (e.g., `site.albums` is an array of documents, much like `site.pages` and
 `site.posts`). See the table below for how to access attributes of those documents.
@@ -319,6 +329,17 @@ you specified in your `_config.yml` (if present) and the following information:
     </tr>
   </tbody>
 </table>
+</div>
+
+<div class="note info">
+  <h5>A Hard-Coded Collection</h5>
+  <p>In addition to any collections you create yourself, the
+  <code>posts</code> collection is hard-coded into Jekyll. It exists whether
+  you have a <code>_posts</code> directory or not. This is something to note
+  when iterating through <code>site.collections</code> as you may need to
+  filter it out.</p>
+  <p>You may wish to use filters to find your collection:
+  <code>{% raw %}{{ site.collections | where: "label", "myCollection" | first }}{% endraw %}</code></p>
 </div>
 
 
@@ -445,7 +466,7 @@ works:
 
 Every album in the collection could be listed on a single page with a template:
 
-```html
+```liquid
 {% raw %}
 {% for album in site.albums %}
   <h2>{{ album.title }}</h2>
