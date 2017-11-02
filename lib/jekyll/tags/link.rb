@@ -21,8 +21,9 @@ module Jekyll
         site = context.registers[:site]
 
         site.each_site_file do |item|
-          rel_path = item.relative_path
-          return item.url if valid_paths.include?(rel_path)
+          # return `item.url` if `item.relative_path` equals either
+          # @relative path or @relative_path with a leading slash.
+          return item.url if valid_paths.include?(item.relative_path)
         end
 
         raise ArgumentError, <<-MSG
