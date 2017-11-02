@@ -403,4 +403,10 @@ class TestUtils < JekyllUnitTest
       assert_equal "bom|another", merged[:encoding]
     end
   end
+
+  context "Utils::Internet.connected?" do
+    should "return true if there's internet" do
+      assert Utils::Internet.connected?
+    end
+  end
 end
