@@ -293,6 +293,18 @@ you come up with your own tags via plugins.
         <p>
           <code class="output">the-_config.yml-file</code>
         </p>
+        <p>
+         <code class="filter">{% raw %}{{ "The _cönfig.yml file" | slugify: 'ascii' }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">the-c-nfig-yml-file</code>
+        </p>
+        <p>
+         <code class="filter">{% raw %}{{ "The cönfig.yml file" | slugify: 'latin' }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">the-config-yml-file</code>
+        </p>
       </td>
     </tr>
     <tr>
@@ -416,6 +428,8 @@ The default is `default`. They are as follows (with what they filter):
 - `raw`: spaces
 - `default`: spaces and non-alphanumeric characters
 - `pretty`: spaces and non-alphanumeric characters except for `._~!$&'()+,;=@`
+- `ascii`: spaces, non-alphanumeric, and non-ASCII characters
+- `latin`: like `default`, except Latin characters are first transliterated (e.g. `àèïòü` to `aeiou`)
 
 ## Tags
 
