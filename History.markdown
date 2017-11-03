@@ -49,6 +49,7 @@
   * Scope path glob (#6268)
   * Allow plugins to modify the obsolete files. (#6502)
   * .sass-cache doesn&#39;t *always* land in options[&#39;source&#39;] (#6500)
+  * Add Utils::Internet.connected? to determine whether host machine has internet connection. (#5870)
 
 ### Site Enhancements
 
