@@ -40,6 +40,7 @@
   * Added direct collection access to future collection item feature test (#6151)
   * Clean up Rubocop config (#6495)
   * Fix #6498: Use Gem to discover the location of bundler. (#6499)
+  * Remove unnecessary encoding comment (#6513)
 
 ### Minor Enhancements
 
