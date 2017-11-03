@@ -186,10 +186,10 @@ module Jekyll
     #   # => "The-_config.yml file"
     #
     #   slugify("The _config.yml file", "ascii")
-    #   # => "the-config.yml-file"
+    #   # => "the-config-yml-file"
     #
     #   slugify("The _config.yml file", "latin")
-    #   # => "the-config.yml-file"
+    #   # => "the-config-yml-file"
     #
     # Returns the slugified string.
     def slugify(string, mode: nil, cased: false)
