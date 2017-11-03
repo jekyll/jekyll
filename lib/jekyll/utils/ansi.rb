@@ -1,5 +1,4 @@
 # Frozen-string-literal: true
-# Copyright: 2015 Jekyll - MIT License
 
 module Jekyll
   module Utils
