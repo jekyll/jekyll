@@ -32,8 +32,10 @@ require "safe_yaml/load"
 require "liquid"
 require "kramdown"
 require "colorator"
+require "i18n"
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
+I18n.config.available_locales = :en
 
 module Jekyll
   # internal requires
