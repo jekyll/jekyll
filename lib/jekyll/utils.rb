@@ -1,4 +1,3 @@
-
 # frozen_string_literal: true
 
 module Jekyll
@@ -6,12 +5,13 @@ module Jekyll
     extend self
     autoload :Ansi, "jekyll/utils/ansi"
     autoload :Exec, "jekyll/utils/exec"
+    autoload :Internet, "jekyll/utils/internet"
     autoload :Platforms, "jekyll/utils/platforms"
     autoload :Rouge, "jekyll/utils/rouge"
     autoload :WinTZ, "jekyll/utils/win_tz"
 
     # Constants for use in #slugify
-    SLUGIFY_MODES = %w(raw default pretty ascii).freeze
+    SLUGIFY_MODES = %w(raw default pretty ascii latin).freeze
     SLUGIFY_RAW_REGEXP = Regexp.new('\\s+').freeze
     SLUGIFY_DEFAULT_REGEXP = Regexp.new("[^[:alnum:]]+").freeze
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
@@ -169,6 +169,10 @@ module Jekyll
     # When mode is "ascii", some everything else except ASCII characters
     # a-z (lowercase), A-Z (uppercase) and 0-9 (numbers) are not replaced with hyphen.
     #
+    # When mode is "latin", the input string is first preprocessed so that
+    # any letters with accents are replaced with the plain letter. Afterwards,
+    # it follows the "default" mode of operation.
+    #
     # If cased is true, all uppercase letters in the result string are
     # replaced with their lowercase counterparts.
     #
@@ -183,7 +187,10 @@ module Jekyll
     #   # => "The-_config.yml file"
     #
     #   slugify("The _config.yml file", "ascii")
-    #   # => "the-config.yml-file"
+    #   # => "the-config-yml-file"
+    #
+    #   slugify("The _config.yml file", "latin")
+    #   # => "the-config-yml-file"
     #
     # Returns the slugified string.
     def slugify(string, mode: nil, cased: false)
@@ -194,26 +201,10 @@ module Jekyll
         return cased ? string : string.downcase
       end
 
-      # Replace each character sequence with a hyphen
-      re =
-        case mode
-        when "raw"
-          SLUGIFY_RAW_REGEXP
-        when "default"
-          SLUGIFY_DEFAULT_REGEXP
-        when "pretty"
-          # "._~!$&'()+,;=@" is human readable (not URI-escaped) in URL
-          # and is allowed in both extN and NTFS.
-          SLUGIFY_PRETTY_REGEXP
-        when "ascii"
-          # For web servers not being able to handle Unicode, the safe
-          # method is to ditch anything else but latin letters and numeric
-          # digits.
-          SLUGIFY_ASCII_REGEXP
-        end
+      # Drop accent marks from latin characters. Everything else turns to ?
+      string = ::I18n.transliterate(string) if mode == "latin"
 
-      # Strip according to the mode
-      slug = string.gsub(re, "-")
+      slug = replace_character_sequence_with_hyphen(string, :mode => mode)
 
       # Remove leading/trailing hyphen
       slug.gsub!(%r!^\-|\-$!i, "")
@@ -335,6 +326,33 @@ module Jekyll
       target.each do |key, val|
         target[key] = val.dup if val.frozen? && duplicable?(val)
       end
+    end
+
+    # Replace each character sequence with a hyphen.
+    #
+    # See Utils#slugify for a description of the character sequence specified
+    # by each mode.
+    private
+    def replace_character_sequence_with_hyphen(string, mode: "default")
+      replaceable_char =
+        case mode
+        when "raw"
+          SLUGIFY_RAW_REGEXP
+        when "pretty"
+          # "._~!$&'()+,;=@" is human readable (not URI-escaped) in URL
+          # and is allowed in both extN and NTFS.
+          SLUGIFY_PRETTY_REGEXP
+        when "ascii"
+          # For web servers not being able to handle Unicode, the safe
+          # method is to ditch anything else but latin letters and numeric
+          # digits.
+          SLUGIFY_ASCII_REGEXP
+        else
+          SLUGIFY_DEFAULT_REGEXP
+        end
+
+      # Strip according to the mode
+      string.gsub(replaceable_char, "-")
     end
   end
 end
