@@ -28,8 +28,7 @@ module Jekyll
       # Returns a URL relative to the domain root as a String.
       def relative_url(input)
         return if input.nil?
-        uri = Addressable::URI.parse(input.to_s)
-        return uri.normalize.to_s if uri.absolute?
+        return input if Addressable::URI.parse(input.to_s).absolute?
 
         parts = [sanitized_baseurl, input]
         Addressable::URI.parse(

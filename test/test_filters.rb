@@ -537,9 +537,9 @@ class TestFilters < JekyllUnitTest
         assert_equal url, @filter.relative_url(url)
       end
 
-      should "normalize international URLs with scheme" do
+      should "not normalize absolute international URLs" do
         url = "https://example.com/错误"
-        assert_equal "https://example.com/%E9%94%99%E8%AF%AF", @filter.relative_url(url)
+        assert_equal "https://example.com/错误", @filter.relative_url(url)
       end
     end
 
