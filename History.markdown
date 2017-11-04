@@ -41,6 +41,7 @@
   * Clean up Rubocop config (#6495)
   * Fix #6498: Use Gem to discover the location of bundler. (#6499)
   * Remove unnecessary encoding comment (#6513)
+  * Suggest using Rubocop to automatically fix errors (#6514)
 
 ### Minor Enhancements
 
