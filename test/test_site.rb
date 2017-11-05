@@ -308,7 +308,7 @@ class TestSite < JekyllUnitTest
           "collections"         => ["broken"],
           "strict_front_matter" => true
         ))
-        assert_raises do
+        assert_raises(Psych::SyntaxError) do
           site.process
         end
       end
