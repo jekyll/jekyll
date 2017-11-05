@@ -53,6 +53,7 @@
   * .sass-cache doesn&#39;t *always* land in options[&#39;source&#39;] (#6500)
   * Add Utils::Internet.connected? to determine whether host machine has internet connection. (#5870)
   * Add latin mode to slugify (#6509)
+  * filter relative_url should keep absolute urls with scheme/authority (#6490)
 
 ### Site Enhancements
 
