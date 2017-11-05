@@ -56,6 +56,12 @@ class TestKramdown < JekyllUnitTest
       assert_equal "<h1>Some Header</h1>", @markdown.convert("# Some Header #").strip
     end
 
+    should "should log kramdown warnings" do
+      allow_any_instance_of(Kramdown::Document).to receive(:warnings).and_return(["foo"])
+      expect(Jekyll.logger).to receive(:warn).with("Kramdown warning:", "foo")
+      @markdown.convert("Something")
+    end
+
     context "when asked to convert smart quotes" do
       should "convert" do
         assert_match(
