@@ -56,4 +56,4 @@ after_success:
   - bundle exec codeclimate-test-reporter
 
 before_install:
-  - gem update --system
+  - gem update --system 2.6.14
