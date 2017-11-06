@@ -44,6 +44,7 @@
   * Suggest using Rubocop to automatically fix errors (#6514)
   * Assert raising Psych::SyntaxError when `&#34;strict_front_matter&#34;=&gt;true` (#6520)
   * [RuboCop] Enable `Style/UnneededCapitalW` cop (#6526)
+  * Use Kernel#Array instead of explicit Array check (#6525)
 
 ### Minor Enhancements
 
