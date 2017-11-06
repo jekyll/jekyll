@@ -50,6 +50,7 @@ module Jekyll
       "host"                => "127.0.0.1",
       "baseurl"             => nil, # this mounts at /, i.e. no subdirectory
       "show_dir_listing"    => false,
+      "directory_index_ext" => "htm,html,rhtml,cgi,xml",
 
       # Output Configuration
       "permalink"           => "date",

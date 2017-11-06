@@ -660,6 +660,7 @@ port:    4000
 host:    127.0.0.1
 baseurl: "" # does not include hostname
 show_dir_listing: false
+directory_index_ext: "htm,html,rhtml,cgi,xml"
 
 # Outputting
 permalink:     date
