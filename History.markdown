@@ -42,6 +42,7 @@
   * Fix #6498: Use Gem to discover the location of bundler. (#6499)
   * Remove unnecessary encoding comment (#6513)
   * Suggest using Rubocop to automatically fix errors (#6514)
+  * Assert raising Psych::SyntaxError when `&#34;strict_front_matter&#34;=&gt;true` (#6520)
 
 ### Minor Enhancements
 
