@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 $stdout.puts "# -------------------------------------------------------------"
 $stdout.puts "# SPECS AND TESTS ARE RUNNING WITH WARNINGS OFF."
 $stdout.puts "# SEE: https://github.com/Shopify/liquid/issues/730"
@@ -13,7 +15,7 @@ if ENV["CI"]
   require "simplecov"
   SimpleCov.start
 else
-  require File.expand_path("../simplecov_custom_profile", __FILE__)
+  require File.expand_path("simplecov_custom_profile", __dir__)
   SimpleCov.start "gem" do
     add_filter "/vendor/gem"
     add_filter "/vendor/bundle"
@@ -30,7 +32,7 @@ require "minitest/profile"
 require "rspec/mocks"
 require_relative "../lib/jekyll.rb"
 
-Jekyll.logger = Logger.new(StringIO.new)
+Jekyll.logger = Logger.new(StringIO.new, :error)
 
 unless jruby?
   require "rdiscount"
@@ -63,7 +65,7 @@ end
 
 module DirectoryHelpers
   def root_dir(*subdirs)
-    File.join(File.dirname(File.dirname(__FILE__)), *subdirs)
+    File.expand_path(File.join("..", *subdirs), __dir__)
   end
 
   def dest_dir(*subdirs)
@@ -166,12 +168,15 @@ class JekyllUnitTest < Minitest::Test
     ENV[key] = old_value
   end
 
-  def capture_output
+  def capture_output(level = :debug)
     buffer = StringIO.new
     Jekyll.logger = Logger.new(buffer)
+    Jekyll.logger.log_level = level
     yield
     buffer.rewind
     buffer.string.to_s
+  ensure
+    Jekyll.logger = Logger.new(StringIO.new, :error)
   end
   alias_method :capture_stdout, :capture_output
   alias_method :capture_stderr, :capture_output

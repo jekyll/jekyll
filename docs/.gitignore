@@ -2,3 +2,4 @@ _site/
 *.swp
 pkg/
 test/
+.idea/

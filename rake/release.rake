@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #############################################################################
 #
 # Packaging tasks
@@ -6,13 +8,14 @@
 
 desc "Release #{name} v#{version}"
 task :release => :build do
-  unless `git branch` =~ %r!^\* master$!
+  current_branch = `git branch`.to_s.strip.match(%r!^\* (.+)$!)[1]
+  unless current_branch == "master" || current_branch.end_with?("-stable")
     puts "You must be on the master branch to release!"
     exit!
   end
   sh "git commit --allow-empty -m 'Release :gem: #{version}'"
   sh "git tag v#{version}"
-  sh "git push origin master"
+  sh "git push origin #{current_branch}"
   sh "git push origin v#{version}"
   sh "gem push pkg/#{name}-#{version}.gem"
 end

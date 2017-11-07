@@ -5,9 +5,11 @@ permalink: /docs/includes/
 
 The `include` tag allows you to include the content from another file stored in the `_includes` folder:
 
+{% raw %}
 ```liquid
-{% raw %}{% include footer.html %}{% endraw %}
+{% include footer.html %}
 ```
+{% endraw %}
 
 Jekyll will look for the referenced file (in this case, `footer.html`) in the `_includes` directory at the root of your source directory and insert its contents.
 
@@ -15,9 +17,11 @@ Jekyll will look for the referenced file (in this case, `footer.html`) in the `_
 
 You can choose to include file fragments relative to the current file by using the `include_relative` tag:
 
+{% raw %}
 ```liquid
-{% raw %}{% include_relative somedir/footer.html %}{% endraw %}
+{% include_relative somedir/footer.html %}
 ```
+{% endraw %}
 
 You won't need to place your included content within the `_includes` directory. Instead,
 the inclusion is specifically relative to the file where the tag is being used. For example,
@@ -42,9 +46,11 @@ my_variable: footer_company_a.html
 
 You could then reference that variable in your include:
 
+{% raw %}
 ```liquid
-{% raw %}{% include {{ page.my_variable }} %}{% endraw %}
+{% include {{ page.my_variable }} %}
 ```
+{% endraw %}
 
 In this example, the include would insert the file `footer_company_a.html` from the `_includes/footer_company_a.html` directory.
 
@@ -52,18 +58,22 @@ In this example, the include would insert the file `footer_company_a.html` from 
 
 You can also pass parameters to an include. For example, suppose you have a file called `note.html` in your `_includes` folder that contains this formatting:
 
+{% raw %}
 ```liquid
-{% raw %}<div markdown="span" class="alert alert-info" role="alert">
+<div markdown="span" class="alert alert-info" role="alert">
 <i class="fa fa-info-circle"></i> <b>Note:</b>
 {{ include.content }}
-</div>{% endraw %}
+</div>
 ```
+{% endraw %}
 
 The `{% raw %}{{ include.content }}{% endraw %}` is a parameter that gets populated when you call the include and specify a value for that parameter, like this:
 
+{% raw %}
 ```liquid
-{% raw %}{% include note.html content="This is my sample note." %} {% endraw %}
+{% include note.html content="This is my sample note." %}
 ```
+{% endraw %}
 
 The value of `content` (which is `This is my sample note`) will be inserted into the {% raw %}`{{ include.content }}`{% endraw %} parameter.
 
@@ -82,14 +92,16 @@ For example, suppose you have a special image syntax with complex formatting, an
 
 You could templatize this content in your include and make each value available as a parameter, like this:
 
+{% raw %}
 ```liquid
-{% raw %}<figure>
+<figure>
    <a href="{{ include.url }}">
    <img src="{{ include.file }}" style="max-width: {{ include.max-width }};"
       alt="{{ include.alt }}"/>
    <figcaption>{{ include.caption }}</figcaption>
-</figure>{% endraw %}
+</figure>
 ```
+{% endraw %}
 
 This include contains 5 parameters:
 
@@ -101,15 +113,17 @@ This include contains 5 parameters:
 
 Here's an example that passes all the parameters to this include (the include file is named `image.html`):
 
+{% raw %}
 ```liquid
-{% raw %}{% include image.html url="http://jekyllrb.com"
+{% include image.html url="http://jekyllrb.com"
 max-width="200px" file="logo.png" alt="Jekyll logo"
-caption="This is the Jekyll logo." %} {% endraw %}
+caption="This is the Jekyll logo." %}
 ```
+{% endraw %}
 
 The result is the original HTML code shown earlier.
 
-To safeguard situations where users don't supply a value for the parameter, you can use [Liquid's default filter](https://help.shopify.com/themes/liquid/filters/additional-filters#default).
+To safeguard situations where users don't supply a value for the parameter, you can use [Liquid's default filter](https://shopify.github.io/liquid/filters/default/).
 
 Overall, you can create includes that act as templates for a variety of uses &mdash; inserting audio or video clips, alerts, special formatting, and more. However, note that you should avoid using too many includes, as this will slow down the build time of your site. For example, don't use includes every time you insert an image. (The above technique shows a use case for special images.)
 
@@ -121,16 +135,21 @@ The string you pass to your include parameter can't contain curly braces. For ex
 
 If you want to include this variable in your parameter that you pass to an include, you need to store the entire parameter as a variable before passing it to the include. You can use `capture` tags to create the variable:
 
+{% raw %}
 ```liquid
-{% raw %}{% capture download_note %}The latest version of
-{{ site.product_name }} is now available.{% endcapture %}{% endraw %}
+{% capture download_note %}
+The latest version of {{ site.product_name }} is now available.
+{% endcapture %}
 ```
+{% endraw %}
 
 Then pass this captured variable into the parameter for the include. Omit the quotation marks around the parameter content because it's no longer a string (it's a variable):
 
+{% raw %}
 ```liquid
-{% raw %}{% include note.html content=download_note %}{% endraw %}
+{% include note.html content=download_note %}
 ```
+{% endraw %}
 
 ### Passing references to YAML files as parameter values
 
@@ -150,18 +169,22 @@ Here's an example. In the `_data` folder, suppose you have a YAML file called `p
 
 In the `_includes` folder, assume you have a file called `spotlight.html` with this code:
 
+{% raw %}
 ```liquid
-{% raw %}{% for person in {{ include.participants }} %}
+{% for person in include.participants %}
 {% if person.login_age == "new" %}
 {{ person.name }}
 {% endif %}
-{% endfor %}{% endraw %}
+{% endfor %}
 ```
+{% endraw %}
 
 Now when you insert the `spotlight.html` include file, you can submit the YAML file as a parameter:
 
+{% raw %}
+```liquid
+{% include spotlight.html participants=site.data.profiles %}
 ```
-{% raw %}{% include spotlight.html participants=site.data.profiles %}{% endraw %}
-```
+{% endraw %}
 
-In this instance, `site.data.profiles` gets inserted in place of {% raw %}`{{ include.participants }}`{% endraw %} in the include file, and the Liquid logic processes. The result will be `Jane Doe`.
+In this instance, `site.data.profiles` gets inserted in place of {% raw %}`include.participants`{% endraw %} in the include file, and the Liquid logic processes. The result will be `Jane Doe`.

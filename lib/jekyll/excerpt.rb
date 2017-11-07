@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class Excerpt
     extend Forwardable
@@ -117,7 +119,7 @@ module Jekyll
       if tail.empty?
         head
       else
-        "" << head << "\n\n" << tail.scan(%r!^ {0,3}\[[^\]]+\]:.+$!).join("\n")
+        head.to_s.dup << "\n\n" << tail.scan(%r!^ {0,3}\[[^\]]+\]:.+$!).join("\n")
       end
     end
   end

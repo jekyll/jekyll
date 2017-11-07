@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 require "ostruct"
 
@@ -6,11 +8,11 @@ class TestConvertible < JekyllUnitTest
     setup do
       @convertible = OpenStruct.new(
         "site" => Site.new(Jekyll.configuration(
-          "source" => File.expand_path("../fixtures", __FILE__)
+          "source" => File.expand_path("fixtures", __dir__)
         ))
       )
       @convertible.extend Jekyll::Convertible
-      @base = File.expand_path("../fixtures", __FILE__)
+      @base = File.expand_path("fixtures", __dir__)
     end
 
     should "parse the front matter correctly" do
@@ -31,6 +33,14 @@ class TestConvertible < JekyllUnitTest
       end
       assert_match(%r!YAML Exception!, out)
       assert_match(%r!#{File.join(@base, name)}!, out)
+    end
+
+    should "raise for broken front matter with `strict_front_matter` set" do
+      name = "broken_front_matter2.erb"
+      @convertible.site.config["strict_front_matter"] = true
+      assert_raises(Psych::SyntaxError) do
+        @convertible.read_yaml(@base, name)
+      end
     end
 
     should "not allow ruby objects in YAML" do

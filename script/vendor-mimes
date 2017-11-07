@@ -5,7 +5,7 @@
 require 'json'
 require 'open-uri'
 
-config = File.expand_path "../lib/jekyll/mime.types", File.dirname(__FILE__)
+config = File.expand_path "../lib/jekyll/mime.types", __dir__
 
 # Create an array of vendored mimetype => [extensions]
 mimes = {}

@@ -7,3 +7,4 @@ Continuous Integration (CI) enables you to publish your Jekyll generated website
 
 * [Travis CI](travis-ci)
 * [CircleCI](circleci)
+* [Buddy](buddyworks)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestTheme < JekyllUnitTest
@@ -59,6 +61,27 @@ class TestTheme < JekyllUnitTest
 
       expected = theme_dir("_layouts")
       assert_equal expected, @theme.send(:path_for, :_symlink)
+    end
+  end
+
+  context "invalid theme" do
+    context "initializing" do
+      setup do
+        stub_gemspec = Object.new
+
+        # the directory for this theme should not exist
+        allow(stub_gemspec).to receive(:full_gem_path)
+          .and_return(File.expand_path("test/fixtures/test-non-existent-theme", __dir__))
+
+        allow(Gem::Specification).to receive(:find_by_name)
+          .with("test-non-existent-theme")
+          .and_return(stub_gemspec)
+      end
+
+      should "raise when getting theme root" do
+        error = assert_raises(RuntimeError) { Theme.new("test-non-existent-theme") }
+        assert_match(%r!fixtures\/test-non-existent-theme does not exist!, error.message)
+      end
     end
   end
 

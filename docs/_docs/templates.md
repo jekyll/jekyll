@@ -4,10 +4,11 @@ permalink: /docs/templates/
 ---
 
 Jekyll uses the [Liquid](https://shopify.github.io/liquid/) templating language to
-process templates. All of the standard Liquid [tags](https://shopify.github.io/liquid/tags/) and
-[filters](https://shopify.github.io/liquid/filters/) are
-supported. Jekyll even adds a few handy filters and tags of its own to make
-common tasks easier.
+process templates. All of the standard Liquid [tags](https://shopify.github.io/liquid/tags/control-flow/) and
+[filters](https://shopify.github.io/liquid/filters/abs/) are
+supported. To make common tasks easier, Jekyll even adds a few handy filters
+and tags of its own, all of which you can find on this page. Jekyll even lets
+you come up with your own tags via plugins.
 
 ## Filters
 
@@ -178,15 +179,15 @@ common tasks easier.
         <p class="name"><strong>CGI Escape</strong></p>
         <p>
           CGI escape a string for use in a URL. Replaces any special characters
-          with appropriate %XX replacements.
+          with appropriate <code>%XX</code> replacements. CGI escape normally replaces a space with a plus <code>+</code> sign.
         </p>
       </td>
       <td class="align-center">
         <p>
-         <code class="filter">{% raw %}{{ "foo,bar;baz?" | cgi_escape }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ "foo, bar; baz?" | cgi_escape }}{% endraw %}</code>
         </p>
         <p>
-          <code class="output">foo%2Cbar%3Bbaz%3F</code>
+          <code class="output">foo%2C+bar%3B+baz%3F</code>
         </p>
       </td>
     </tr>
@@ -194,15 +195,15 @@ common tasks easier.
       <td>
         <p class="name"><strong>URI Escape</strong></p>
         <p>
-          URI escape a string.
+          Percent encodes any special characters in a URI. URI escape normally replaces a space with <code>%20</code>. <a href="https://en.wikipedia.org/wiki/Percent-encoding#Types_of_URI_characters">Reserved characters</a> will not be escaped.
         </p>
       </td>
       <td class="align-center">
         <p>
-         <code class="filter">{% raw %}{{ "foo, bar \baz?" | uri_escape }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ "http://foo.com/?q=foo, \bar?" | uri_escape }}{% endraw %}</code>
         </p>
         <p>
-          <code class="output">foo,%20bar%20%5Cbaz?</code>
+          <code class="output">http://foo.com/?q=foo,%20%5Cbar?</code>
         </p>
       </td>
     </tr>
@@ -291,6 +292,18 @@ common tasks easier.
         </p>
         <p>
           <code class="output">the-_config.yml-file</code>
+        </p>
+        <p>
+         <code class="filter">{% raw %}{{ "The _cönfig.yml file" | slugify: 'ascii' }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">the-c-nfig-yml-file</code>
+        </p>
+        <p>
+         <code class="filter">{% raw %}{{ "The cönfig.yml file" | slugify: 'latin' }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">the-config-yml-file</code>
         </p>
       </td>
     </tr>
@@ -415,16 +428,25 @@ The default is `default`. They are as follows (with what they filter):
 - `raw`: spaces
 - `default`: spaces and non-alphanumeric characters
 - `pretty`: spaces and non-alphanumeric characters except for `._~!$&'()+,;=@`
+- `ascii`: spaces, non-alphanumeric, and non-ASCII characters
+- `latin`: like `default`, except Latin characters are first transliterated (e.g. `àèïòü` to `aeiou`)
 
 ## Tags
+
+* [Includes](#includes)
+* [Code snippet highlighting](#code-snippet-highlighting)
+* [Linking to pages, collections and posts (the new and improved way)](#links)
+* [Linking to posts (the old way)](#linking-to-posts)
 
 ### Includes
 
 If you have small page snippets that you want to include in multiple places on your site, save the snippets as *include files* and insert them where required, by using the `include` tag:
 
+{% raw %}
 ```liquid
-{% raw %}{% include footer.html %}{% endraw %}
+{% include footer.html %}
 ```
+{% endraw %}
 
 Jekyll expects all *include files* to be placed in an `_includes` directory at the root of your source directory. In the above example, this will embed the contents of `_includes/footer.html` into the calling file.
 
@@ -445,21 +467,28 @@ languages](http://pygments.org/languages/)
 
 To render a code block with syntax highlighting, surround your code as follows:
 
-```liquid
 {% raw %}
+```liquid
 {% highlight ruby %}
 def foo
   puts 'foo'
 end
 {% endhighlight %}
-{% endraw %}
 ```
+{% endraw %}
 
 The argument to the `highlight` tag (`ruby` in the example above) is the
 language identifier. To find the appropriate identifier to use for the language
 you want to highlight, look for the “short name” on the [Rouge
 wiki](https://github.com/jayferd/rouge/wiki/List-of-supported-languages-and-lexers)
 or the [Pygments' Lexers page](http://pygments.org/docs/lexers/).
+
+<div class="note info">
+  <h5>Jekyll processes all Liquid filters in code blocks</h5>
+  <p>If you are using a language that contains curly braces, you
+    will likely need to place <code>{&#37; raw &#37;}</code> and
+    <code>{&#37; endraw &#37;}</code> tags around your code.</p>
+</div>
 
 #### Line numbers
 
@@ -468,15 +497,15 @@ Including the `linenos` argument will force the highlighted code to include line
 numbers. For instance, the following code block would include line numbers next
 to each line:
 
-```liquid
 {% raw %}
+```liquid
 {% highlight ruby linenos %}
 def foo
   puts 'foo'
 end
 {% endhighlight %}
-{% endraw %}
 ```
+{% endraw %}
 
 #### Stylesheets for syntax highlighting
 
@@ -488,27 +517,6 @@ site. If you use `linenos`, you might want to include an additional CSS class
 definition for the `.lineno` class in `syntax.css` to distinguish the line
 numbers from the highlighted code.
 
-### Gist
-
-Use the `gist` tag to easily embed a GitHub Gist onto your site. This works
-with public or secret gists:
-
-```liquid
-{% raw %}
-{% gist parkr/931c1c8d465a04042403 %}
-{% endraw %}
-```
-
-You may also optionally specify the filename in the gist to display:
-
-```liquid
-{% raw %}
-{% gist parkr/931c1c8d465a04042403 jekyll-private-gist.markdown %}
-{% endraw %}
-```
-
-To use the `gist` tag, you'll need to add the
-[jekyll-gist](https://github.com/jekyll/jekyll-gist) gem to your project.
 
 ## Links
 
@@ -518,62 +526,62 @@ To link to a post, a page, collection item, or file, the `link` tag will generat
 
 You must include the file's original extension when using the `link` tag. Here are some examples:
 
-```liquid
 {% raw %}
+```liquid
 {{ site.baseurl }}{% link _collection/name-of-document.md %}
 {{ site.baseurl }}{% link _posts/2016-07-26-name-of-post.md %}
 {{ site.baseurl }}{% link news/index.html %}
 {{ site.baseurl }}{% link /assets/files/doc.pdf %}
-{% endraw %}
 ```
+{% endraw %}
 
 You can also use the `link` tag to create a link in Markdown as follows:
 
-```liquid
 {% raw %}
+```liquid
 [Link to a document]({{ site.baseurl }}{% link _collection/name-of-document.md %})
 [Link to a post]({{ site.baseurl }}{% link _posts/2016-07-26-name-of-post.md %})
 [Link to a page]({{ site.baseurl }}{% link news/index.html %})
 [Link to a file]({{ site.baseurl }}{% link /assets/files/doc.pdf %})
-{% endraw %}
 ```
+{% endraw %}
 
 (Including `{% raw %}{{ site.baseurl }}{% endraw %}` is optional &mdash; it depends on whether you want to preface the page URL with the `baseurl` value.)
 
 The path to the post, page, or collection is defined as the path relative to the root directory (where your config file is) to the file, not the path from your existing page to the other page.
 
-For example, suppose you're creating a link `page_a.md` (stored in `pages/folder1/folder2`) to `page_b.md` (stored in  `pages/folder1`). Your path in the link would not be `../page_b.html`. Instead, it would be `/pages/folder1/page_b.md`.
+For example, suppose you're creating a link in `page_a.md` (stored in `pages/folder1/folder2`) to `page_b.md` (stored in  `pages/folder1`). Your path in the link would not be `../page_b.html`. Instead, it would be `/pages/folder1/page_b.md`.
 
 If you're unsure of the path, add `{% raw %}{{ page.path }}{% endraw %}` to the page and it will display the path.
 
-One major benefit of using the `link` tag is link validation. If the link doesn't exist, Jekyll won't build your site. This is a good thing, as it will alert you to a broken link so you can fix it (rather than allowing you to build and deploy a site with broken links).
+One major benefit of using the `link` or `post_url` tag is link validation. If the link doesn't exist, Jekyll won't build your site. This is a good thing, as it will alert you to a broken link so you can fix it (rather than allowing you to build and deploy a site with broken links).
 
 Note you cannot add filters to `link` tags. For example, you cannot append a string using Liquid filters, such as `{% raw %}{% link mypage.html | append: "#section1" %} {% endraw %}`. To link to sections on a page, you will need to use regular HTML or Markdown linking techniques.
 
 ### Linking to posts
 
-If you want like to include a link to a post on your site, the `post_url` tag will generate the correct permalink URL for the post you specify.
+If you want to include a link to a post on your site, the `post_url` tag will generate the correct permalink URL for the post you specify.
 
-```liquid
 {% raw %}
+```liquid
 {{ site.baseurl }}{% post_url 2010-07-21-name-of-post %}
-{% endraw %}
 ```
+{% endraw %}
 
 If you organize your posts in subdirectories, you need to include subdirectory path to the post:
 
-```liquid
 {% raw %}
+```liquid
 {{ site.baseurl }}{% post_url /subdir/2010-07-21-name-of-post %}
-{% endraw %}
 ```
+{% endraw %}
 
 There is no need to include the file extension when using the `post_url` tag.
 
 You can also use this tag to create a link to a post in Markdown as follows:
 
-```liquid
 {% raw %}
+```liquid
 [Name of Link]({{ site.baseurl }}{% post_url 2010-07-21-name-of-post %})
-{% endraw %}
 ```
+{% endraw %}

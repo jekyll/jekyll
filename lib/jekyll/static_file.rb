@@ -1,6 +1,12 @@
+# frozen_string_literal: true
+
 module Jekyll
   class StaticFile
-    attr_reader :relative_path, :extname, :name
+    extend Forwardable
+
+    attr_reader :relative_path, :extname, :name, :data
+
+    def_delegator :to_liquid, :to_json, :to_json
 
     class << self
       # The cache of last modification times [path] -> mtime.
@@ -28,6 +34,7 @@ module Jekyll
       @collection = collection
       @relative_path = File.join(*[@dir, @name].compact)
       @extname = File.extname(@name)
+      @data = @site.frontmatter_defaults.all(relative_path, type)
     end
     # rubocop: enable ParameterLists
 
@@ -96,13 +103,11 @@ module Jekyll
     end
 
     def to_liquid
-      {
-        "basename"      => File.basename(name, extname),
-        "name"          => name,
-        "extname"       => extname,
-        "modified_time" => modified_time,
-        "path"          => File.join("", relative_path),
-      }
+      @to_liquid ||= Drops::StaticFileDrop.new(self)
+    end
+
+    def basename
+      File.basename(name, extname)
     end
 
     def placeholders

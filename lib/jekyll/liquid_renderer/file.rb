@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class LiquidRenderer
     class File

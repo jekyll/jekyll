@@ -55,7 +55,7 @@ By default, `baseurl` is set to `""` and therefore yields (never set to
 
 A result of `relative_url` will safely always produce a URL which is
 relative to the domain root. A similar principle applies to `absolute_url`.
-It prepends your `baseurl` and `url` values, making absolute URL's all the
+It prepends your `baseurl` and `url` values, making absolute URLs all the
 easier to make:
 
 {% highlight liquid %}
