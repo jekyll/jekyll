@@ -205,19 +205,21 @@ module Jekyll
         # forget to add one of the certificates.
 
         private
-        # rubocop:disable Metrics/AbcSize
         def enable_ssl(opts)
-          return if !opts[:JekyllOptions]["ssl_cert"] && !opts[:JekyllOptions]["ssl_key"]
-          if !opts[:JekyllOptions]["ssl_cert"] || !opts[:JekyllOptions]["ssl_key"]
-            # rubocop:disable Style/RedundantException
-            raise RuntimeError, "--ssl-cert or --ssl-key missing."
-          end
+          jekyll_options = opts[:JekyllOptions]
+          ssl_cert       = jekyll_options["ssl_cert"]
+          ssl_key        = jekyll_options["ssl_key"]
+          return if !ssl_cert && !ssl_key
+
+          # rubocop:disable Style/RedundantException
+          raise RuntimeError, "--ssl-cert or --ssl-key missing." if !ssl_cert || !ssl_key
+
           require "openssl"
           require "webrick/https"
-          source_key = Jekyll.sanitized_path(opts[:JekyllOptions]["source"], \
-                    opts[:JekyllOptions]["ssl_key" ])
-          source_certificate = Jekyll.sanitized_path(opts[:JekyllOptions]["source"], \
-                    opts[:JekyllOptions]["ssl_cert"])
+
+          source_key = Jekyll.sanitized_path(jekyll_options["source"], ssl_key)
+          source_certificate = Jekyll.sanitized_path(jekyll_options["source"], ssl_cert)
+
           opts[:SSLCertificate] =
             OpenSSL::X509::Certificate.new(File.read(source_certificate))
           opts[:SSLPrivateKey ] = OpenSSL::PKey::RSA.new(File.read(source_key))
@@ -225,7 +227,6 @@ module Jekyll
         end
 
         private
-
         def start_callback(detached)
           unless detached
             proc do
