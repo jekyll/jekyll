@@ -206,23 +206,20 @@ module Jekyll
 
         private
         def enable_ssl(opts)
-          jekyll_options = opts[:JekyllOptions]
-          ssl_cert       = jekyll_options["ssl_cert"]
-          ssl_key        = jekyll_options["ssl_key"]
-          return if !ssl_cert && !ssl_key
+          cert, key, src =
+            opts[:JekyllOptions].values_at("ssl_cert", "ssl_key", "source")
 
-          # rubocop:disable Style/RedundantException
-          raise RuntimeError, "--ssl-cert or --ssl-key missing." if !ssl_cert || !ssl_key
+          return if cert.nil? && key.nil?
+          unless cert && key
+            # rubocop:disable Style/RedundantException
+            raise RuntimeError, "Missing --ssl_cert or --ssl_key. Both are required."
+          end
 
           require "openssl"
           require "webrick/https"
 
-          source_key = Jekyll.sanitized_path(jekyll_options["source"], ssl_key)
-          source_certificate = Jekyll.sanitized_path(jekyll_options["source"], ssl_cert)
-
-          opts[:SSLCertificate] =
-            OpenSSL::X509::Certificate.new(File.read(source_certificate))
-          opts[:SSLPrivateKey ] = OpenSSL::PKey::RSA.new(File.read(source_key))
+          opts[:SSLCertificate] = OpenSSL::X509::Certificate.new(read_file(src, cert))
+          opts[:SSLPrivateKey ] = OpenSSL::PKey::RSA.new(read_file(src, key))
           opts[:SSLEnable] = true
         end
 
@@ -239,6 +236,11 @@ module Jekyll
         def mime_types
           file = File.expand_path("../mime.types", __dir__)
           WEBrick::HTTPUtils.load_mime_types(file)
+        end
+
+        private
+        def read_file(source_dir, file_path)
+          File.read(Jekyll.sanitized_path(source_dir, file_path))
         end
       end
     end
