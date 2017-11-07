@@ -210,10 +210,7 @@ module Jekyll
             opts[:JekyllOptions].values_at("ssl_cert", "ssl_key", "source")
 
           return if cert.nil? && key.nil?
-          unless cert && key
-            # rubocop:disable Style/RedundantException
-            raise RuntimeError, "Missing --ssl_cert or --ssl_key. Both are required."
-          end
+          raise "Missing --ssl_cert or --ssl_key. Both are required." unless cert && key
 
           require "openssl"
           require "webrick/https"
