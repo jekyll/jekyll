@@ -44,7 +44,7 @@ module Jekyll
       # are not in safe mode.)
 
       def valid_processors
-        %W(rdiscount kramdown redcarpet) + third_party_processors
+        %w(rdiscount kramdown redcarpet) + third_party_processors
       end
 
       # Public: A list of processors that you provide via plugins.

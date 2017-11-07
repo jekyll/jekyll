@@ -152,5 +152,3 @@ Style/SymbolArray:
   Enabled: false
 Style/TrailingCommaInLiteral:
   EnforcedStyleForMultiline: consistent_comma
-Style/UnneededCapitalW:
-  Enabled: false
