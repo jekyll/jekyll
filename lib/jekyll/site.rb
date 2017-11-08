@@ -122,10 +122,8 @@ module Jekyll
       dest_pathname = Pathname.new(dest)
       Pathname.new(source).ascend do |path|
         if path == dest_pathname
-          raise(
-            Errors::FatalException,
+          raise Errors::FatalException,
             "Destination directory cannot be or contain the Source directory."
-          )
         end
       end
     end
