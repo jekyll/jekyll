@@ -266,7 +266,7 @@ module Jekyll
           merge_defaults
           read_content(opts)
           read_post_data
-        rescue StandardError => e
+        rescue SyntaxError, StandardError, Errors::FatalException => e
           handle_read_error(e)
         end
       end
