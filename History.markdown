@@ -46,6 +46,7 @@
   * [RuboCop] Enable `Style/UnneededCapitalW` cop (#6526)
   * Use Kernel#Array instead of explicit Array check (#6525)
   * Refactor method to reduce ABC Metric size (#6529)
+  * Remove parentheses around arguments to raise (#6532)
 
 ### Minor Enhancements
 
