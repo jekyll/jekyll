@@ -59,6 +59,7 @@
   * Add Utils::Internet.connected? to determine whether host machine has internet connection. (#5870)
   * Add latin mode to slugify (#6509)
   * filter relative_url should keep absolute urls with scheme/authority (#6490)
+  * Log kramdown warnings if log level is WARN (#6522)
 
 ### Site Enhancements
 
