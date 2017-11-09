@@ -135,7 +135,9 @@ module Jekyll
         def url_valid?(url)
           Addressable::URI.parse(url)
           true
-        rescue
+        # Addressable::URI#parse only raises a TypeError
+        # https://git.io/vFfbx
+        rescue TypeError
           Jekyll.logger.warn "Warning:", "The site URL does not seem to be valid, "\
               "check the value of `url` in your config file."
           false

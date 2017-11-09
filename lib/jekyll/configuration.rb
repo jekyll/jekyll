@@ -164,8 +164,7 @@ module Jekyll
         config_files = Jekyll.sanitized_path(source(override), "_config.#{default}")
         @default_config_file = true
       end
-      config_files = [config_files] unless config_files.is_a? Array
-      config_files
+      Array(config_files)
     end
 
     # Public: Read configuration and return merged Hash
@@ -207,7 +206,7 @@ module Jekyll
       rescue ArgumentError => err
         Jekyll.logger.warn "WARNING:", "Error reading configuration. " \
                      "Using defaults (and options)."
-        $stderr.puts err
+        warn err
       end
 
       configuration.fix_common_issues.backwards_compatibilize.add_default_collections

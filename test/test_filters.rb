@@ -1,4 +1,3 @@
-# coding: utf-8
 # frozen_string_literal: true
 
 require "helper"
@@ -526,6 +525,21 @@ class TestFilters < JekyllUnitTest
         page_url = "/my-page.html"
         filter = make_filter_mock({ "baseurl" => Value.new(proc { "/baseurl/" }) })
         assert_equal "/baseurl#{page_url}", filter.relative_url(page_url)
+      end
+
+      should "transform protocol-relative url" do
+        url = "//example.com/"
+        assert_equal "/base//example.com/", @filter.relative_url(url)
+      end
+
+      should "not modify an absolute url with scheme" do
+        url = "file:///file.html"
+        assert_equal url, @filter.relative_url(url)
+      end
+
+      should "not normalize absolute international URLs" do
+        url = "https://example.com/错误"
+        assert_equal "https://example.com/错误", @filter.relative_url(url)
       end
     end
 

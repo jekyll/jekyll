@@ -65,7 +65,7 @@ sudo emerge -av dev-ruby/rubygems
 On Windows, you may need to install [RubyInstaller
 DevKit](https://wiki.github.com/oneclick/rubyinstaller/development-kit).
 
-On Android (with Termux) you can install all requirements by running: 
+On Android (with Termux) you can install all requirements by running:
 
 ```sh
 apt update && apt install libffi-dev clang ruby-dev make
@@ -74,7 +74,7 @@ apt update && apt install libffi-dev clang ruby-dev make
 On macOS, you may need to update RubyGems (using `sudo` only if necessary):
 
 ```sh
-sudo gem update --system
+gem update --system
 ```
 
 If you still have issues, you can download and install new Command Line
@@ -84,11 +84,11 @@ Tools (such as `gcc`) using the following command:
 xcode-select --install
 ```
 
-which may allow you to install native gems using this command (again using
+which may allow you to install native gems using this command (again, using
 `sudo` only if necessary):
 
 ```sh
-sudo gem install jekyll
+gem install jekyll
 ```
 
 Note that upgrading macOS does not automatically upgrade Xcode itself
@@ -103,10 +103,10 @@ With the introduction of System Integrity Protection, several directories
 that were previously writable are now considered system locations and are no
 longer available. Given these changes, there are a couple of simple ways to get
 up and running. One option is to change the location where the gem will be
-installed (again using `sudo` only if necessary):
+installed (again, using `sudo` only if necessary):
 
 ```sh
-sudo gem install -n /usr/local/bin jekyll
+gem install -n /usr/local/bin jekyll
 ```
 
 Alternatively, Homebrew can be installed and used to set up Ruby. This can be
@@ -261,7 +261,7 @@ The issue is caused by trying to copy a non-existing symlink.
 <div class="note">
   <h5>Please report issues you encounter!</h5>
   <p>
-  If you come across a bug, please <a href="{{ site.help_url }}/issues/new">create an issue</a>
+  If you come across a bug, please <a href="{{ site.repository }}/issues/new">create an issue</a>
   on GitHub describing the problem and any work-arounds you find so we can
   document it here for others.
   </p>

@@ -65,13 +65,13 @@ front matter of a page or post.
 
           If set, this specifies the layout file to use. Use the layout file
           name without the file extension. Layout files must be placed in the
-          <code>_layouts</code> directory. 
+          <code>_layouts</code> directory.
 
         </p>
         <ul>
           <li>
-            Using <code>null</code> will produce a file without using a layout 
-            file. However this is overridden if the file is a post/document and has a 
+            Using <code>null</code> will produce a file without using a layout
+            file. However this is overridden if the file is a post/document and has a
             layout defined in the <a href="../configuration/#front-matter-defaults">
             frontmatter defaults</a>.
           </li>
@@ -129,14 +129,14 @@ data that is sent to the Liquid templating engine during the conversion. For
 instance, if you set a title, you can use that in your layout to set the page
 title:
 
-```html
+```liquid
 <!DOCTYPE HTML>
 <html>
   <head>
     <title>{% raw %}{{ page.title }}{% endraw %}</title>
   </head>
   <body>
-    ...
+    …
 ```
 
 ## Predefined Variables for Posts
@@ -167,7 +167,7 @@ These are available out-of-the-box to be used in the front matter for a post.
     </tr>
     <tr>
       <td>
-        <p style="margin-bottom: 5px;"><code>category</code></p>
+        <p><code>category</code></p>
         <p><code>categories</code></p>
       </td>
       <td>

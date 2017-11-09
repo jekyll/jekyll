@@ -47,7 +47,7 @@ class Jekyll::Converters::Markdown::RedcarpetParser
   end
 
   module WithRouge
-    def block_code(code, lang)
+    def block_code(_code, lang)
       code = "<pre>#{super}</pre>"
 
       "<div class=\"highlight\">#{add_code_tags(code, lang)}</div>"

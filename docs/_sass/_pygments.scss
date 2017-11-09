@@ -8,16 +8,16 @@
   .n { color: #ffffff} /* Name */
   .o { color: #ffffff} /* Operator */
   .x { color: #ffffff} /* Other */
-  .p { color: #ffffff} /* Punctuation */
+  .p { color: #98b9ef} /* Punctuation */
   .cm { color: #87ceeb} /* Comment.Multiline */
   .cp { color: #cd5c5c} /* Comment.Preproc */
   .c1 { color: #87ceeb} /* Comment.Single */
   .cs { color: #87ceeb} /* Comment.Special */
-  .gd { color: #0000c0; font-weight: bold; background-color: #008080 } /* Generic.Deleted */
+  .gd { color: #ce342c} /* Generic.Deleted */
   .ge { color: #c000c0; text-decoration: underline} /* Generic.Emph */
   .gr { color: #c0c0c0; font-weight: bold; background-color: #c00000 } /* Generic.Error */
   .gh { color: #cd5c5c} /* Generic.Heading */
-  .gi { color: #ffffff; background-color: #0000c0 } /* Generic.Inserted */
+  .gi { color: #27b42c} /* Generic.Inserted */
   span.go { color: #add8e6; font-weight: bold; background-color: #4d4d4d } /* Generic.Output, qualified with span to prevent applying this style to the Go language, see #1153. */
   .gp { color: #ffffff} /* Generic.Prompt */
   .gs { color: #ffffff} /* Generic.Strong */
@@ -45,7 +45,7 @@
   .nx { color: #ffffff} /* Name.Other */
   .py { color: #ffffff} /* Name.Property */
   .nt { color: #f0e68c} /* Name.Tag */
-  .nv { color: #98fb98} /* Name.Variable */
+  .nv { color: #88d472} /* Name.Variable */
   .ow { color: #ffffff} /* Operator.Word */
   .w { color: #ffffff} /* Text.Whitespace */
   .mf { color: #ffffff} /* Literal.Number.Float */
@@ -69,10 +69,6 @@
   .vi { color: #98fb98} /* Name.Variable.Instance */
   .il { color: #ffffff} /* Literal.Number.Integer.Long */
   .bash .nv {
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-         -o-user-select: none;
-            user-select: none;
+    user-select: none;
   }
 }

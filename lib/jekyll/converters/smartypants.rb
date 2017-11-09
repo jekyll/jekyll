@@ -29,7 +29,12 @@ module Jekyll
       end
 
       def convert(content)
-        Kramdown::Document.new(content, @config).to_html.chomp
+        document = Kramdown::Document.new(content, @config)
+        html_output = document.to_html.chomp
+        document.warnings.each do |warning|
+          Jekyll.logger.warn "Kramdown warning:", warning
+        end
+        html_output
       end
     end
   end
