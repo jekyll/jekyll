@@ -72,6 +72,7 @@
   * Site: Add default twitter card image (#6476)
   * Update normalize.css to v7.0.0 (#6491)
   * add jekyll-pwa-plugin (#6533)
+  * [ImgBot] optimizes images (#6519)
 
 ### Bug Fixes
 
