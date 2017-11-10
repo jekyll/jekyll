@@ -2,21 +2,107 @@
 
 ### Documentation
 
-  * Doc y_day in docs/permalinks (#6244)
-  * Update frontmatter.md (#6371)
-  * Elaborate on excluding items from processing (#6136)
-  * Docs: Style lists in tables (#6379)
-  * Docs: remove duplicate &#34;available&#34; (#6380)
+  * Docs: GitHub Pages instructions (#6384)
+  * Improve documentation for theme-gem installation (#6387)
+  * Fix diff syntax-highlighting (#6388)
+  * Fix code-block highlighting in docs (#6398)
+  * Docs: Filtering Posts with categories, tags, or other variables (#6399)
+  * Fixes formatting on pre-formatted text. (#6405)
+  * Docs: updates (#6407)
+  * Docs: Fix `collections_dir` example (#6408)
+  * Docs: Renaming duplicate of &#34;Scenario 6&#34; to &#34;Scenario 7&#34; (#6411)
+  * Docs: Mark `collection_dir` as unreleased (#6412)
+  * Docs: Fix link to SUPPORT (#6415)
+  * Docs: Added new tutorial to tutorials section on docs (#6406)
+  * Fix list appearance by adding missing `ol` tag (#6421)
+  * Explain how to override output collection index page (#6424)
+  * Added github-cards to the list of plugins (#6425)
+  * add post about diversity (#6447)
+  * Docs: Add a note about Liquid and syntax highlighting (#6466)
+  * Add a note on `:jekyll_plugins` group in the docs (#6488)
+  * Updated custom-404-page.md (#6489)
+  * Remove `sudo` from macOS troubleshooting instructions (#6486)
+  * add formester to the list of saas form backend (#6059)
+  * Fix a few minor issues in the docs (#6494)
 
 ### Development Fixes
 
-  * Bump rubocop to use `v0.50.x` (#6368)
+  * Upgrade to Cucumber 3.0 (#6395)
+  * Provide a better default hash for tracking liquid stats (#6417)
+  * Docs: CoC violation correspondants (#6429)
+  * add failing test for non-utf8 encoding (#6339)
+  * Add configuration for first-timers bot (#6431)
+  * Update first-timers-issue-template.md (#6472)
+  * Site: Rename method (#6474)
+  * Do not linkify escaped characters as PRs in History (#6468)
+  * Rely on jekyll-mentions for linking usernames (#6469)
+  * Enable `Lint/RescueWithoutErrorClass` Cop (#6482)
+  * Added direct collection access to future collection item feature test (#6151)
+  * Clean up Rubocop config (#6495)
+  * Fix #6498: Use Gem to discover the location of bundler. (#6499)
+  * Remove unnecessary encoding comment (#6513)
+  * Suggest using Rubocop to automatically fix errors (#6514)
+  * Assert raising Psych::SyntaxError when `&#34;strict_front_matter&#34;=&gt;true` (#6520)
+  * [RuboCop] Enable `Style/UnneededCapitalW` cop (#6526)
+  * Use Kernel#Array instead of explicit Array check (#6525)
+  * Refactor method to reduce ABC Metric size (#6529)
+  * Remove parentheses around arguments to raise (#6532)
+  * Use double-quotes around gem name (#6535)
 
 ### Minor Enhancements
 
   * Disable default layouts for Pages with a `layout: none` declaration (#6182)
   * Upgrade to Rouge 3 (#6381)
   * Allow the user to set collections_dir to put all collections under one subdirectory (#6331)
+  * Scope path glob (#6268)
+  * Allow plugins to modify the obsolete files. (#6502)
+  * .sass-cache doesn&#39;t *always* land in options[&#39;source&#39;] (#6500)
+  * Add Utils::Internet.connected? to determine whether host machine has internet connection. (#5870)
+  * Add latin mode to slugify (#6509)
+  * filter relative_url should keep absolute urls with scheme/authority (#6490)
+  * Log kramdown warnings if log level is WARN (#6522)
+  * Allow URL filters to work directly with documents (#6478)
+
+### Site Enhancements
+
+  * Docs: Update instructions (#6396)
+  * Add special styling for code-blocks run in shell (#6389)
+  * Update list of files excluded from Docs site (#6457)
+  * Update site History (#6460)
+  * Site: Add default twitter card image (#6476)
+  * Update normalize.css to v7.0.0 (#6491)
+  * add jekyll-pwa-plugin (#6533)
+  * [ImgBot] optimizes images (#6519)
+
+### Bug Fixes
+
+  * Raise when theme root directory is not available (#6455)
+
+## 3.6.2 / 2017-10-21
+
+### Development Fixes
+
+  * Update Rubocop to 0.51.0 (#6444)
+  * Add test for layout as string (#6445)
+
+### Bug Fixes
+
+  * Problematic UTF+bom files (#6322)
+  * Always treat `data.layout` as a string (#6442)
+
+## 3.6.1 / 2017-10-20
+
+### Documentation
+
+  * Doc y_day in docs/permalinks (#6244)
+  * Update frontmatter.md (#6371)
+  * Elaborate on excluding items from processing (#6136)
+  * Style lists in tables (#6379)
+  * Remove duplicate &#34;available&#34; (#6380)
+
+### Development Fixes
+
+  * Bump rubocop to use `v0.50.x` (#6368)
 
 ## 3.6.0 / 2017-09-21
 
@@ -1304,7 +1390,7 @@
 
 ### Site Enhancements
 
-  * Add `@alfredxing` to the `@jekyll/core` team. :tada: (#3218)
+  * Add @alfredxing to the @jekyll/core team. :tada: (#3218)
   * Document the `-q` option for the `build` and `serve` commands (#3149)
   * Fix some minor typos/flow fixes in documentation website content (#3165)
   * Add `keep_files` to configuration documentation (#3162)

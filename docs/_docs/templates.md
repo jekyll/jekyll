@@ -293,6 +293,18 @@ you come up with your own tags via plugins.
         <p>
           <code class="output">the-_config.yml-file</code>
         </p>
+        <p>
+         <code class="filter">{% raw %}{{ "The _cönfig.yml file" | slugify: 'ascii' }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">the-c-nfig-yml-file</code>
+        </p>
+        <p>
+         <code class="filter">{% raw %}{{ "The cönfig.yml file" | slugify: 'latin' }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">the-config-yml-file</code>
+        </p>
       </td>
     </tr>
     <tr>
@@ -416,6 +428,8 @@ The default is `default`. They are as follows (with what they filter):
 - `raw`: spaces
 - `default`: spaces and non-alphanumeric characters
 - `pretty`: spaces and non-alphanumeric characters except for `._~!$&'()+,;=@`
+- `ascii`: spaces, non-alphanumeric, and non-ASCII characters
+- `latin`: like `default`, except Latin characters are first transliterated (e.g. `àèïòü` to `aeiou`)
 
 ## Tags
 
@@ -428,9 +442,11 @@ The default is `default`. They are as follows (with what they filter):
 
 If you have small page snippets that you want to include in multiple places on your site, save the snippets as *include files* and insert them where required, by using the `include` tag:
 
+{% raw %}
 ```liquid
-{% raw %}{% include footer.html %}{% endraw %}
+{% include footer.html %}
 ```
+{% endraw %}
 
 Jekyll expects all *include files* to be placed in an `_includes` directory at the root of your source directory. In the above example, this will embed the contents of `_includes/footer.html` into the calling file.
 
@@ -451,21 +467,28 @@ languages](http://pygments.org/languages/)
 
 To render a code block with syntax highlighting, surround your code as follows:
 
-```liquid
 {% raw %}
+```liquid
 {% highlight ruby %}
 def foo
   puts 'foo'
 end
 {% endhighlight %}
-{% endraw %}
 ```
+{% endraw %}
 
 The argument to the `highlight` tag (`ruby` in the example above) is the
 language identifier. To find the appropriate identifier to use for the language
 you want to highlight, look for the “short name” on the [Rouge
 wiki](https://github.com/jayferd/rouge/wiki/List-of-supported-languages-and-lexers)
 or the [Pygments' Lexers page](http://pygments.org/docs/lexers/).
+
+<div class="note info">
+  <h5>Jekyll processes all Liquid filters in code blocks</h5>
+  <p>If you are using a language that contains curly braces, you
+    will likely need to place <code>{&#37; raw &#37;}</code> and
+    <code>{&#37; endraw &#37;}</code> tags around your code.</p>
+</div>
 
 #### Line numbers
 
@@ -474,15 +497,15 @@ Including the `linenos` argument will force the highlighted code to include line
 numbers. For instance, the following code block would include line numbers next
 to each line:
 
-```liquid
 {% raw %}
+```liquid
 {% highlight ruby linenos %}
 def foo
   puts 'foo'
 end
 {% endhighlight %}
-{% endraw %}
 ```
+{% endraw %}
 
 #### Stylesheets for syntax highlighting
 
@@ -503,25 +526,25 @@ To link to a post, a page, collection item, or file, the `link` tag will generat
 
 You must include the file's original extension when using the `link` tag. Here are some examples:
 
-```liquid
 {% raw %}
+```liquid
 {{ site.baseurl }}{% link _collection/name-of-document.md %}
 {{ site.baseurl }}{% link _posts/2016-07-26-name-of-post.md %}
 {{ site.baseurl }}{% link news/index.html %}
 {{ site.baseurl }}{% link /assets/files/doc.pdf %}
-{% endraw %}
 ```
+{% endraw %}
 
 You can also use the `link` tag to create a link in Markdown as follows:
 
-```liquid
 {% raw %}
+```liquid
 [Link to a document]({{ site.baseurl }}{% link _collection/name-of-document.md %})
 [Link to a post]({{ site.baseurl }}{% link _posts/2016-07-26-name-of-post.md %})
 [Link to a page]({{ site.baseurl }}{% link news/index.html %})
 [Link to a file]({{ site.baseurl }}{% link /assets/files/doc.pdf %})
-{% endraw %}
 ```
+{% endraw %}
 
 (Including `{% raw %}{{ site.baseurl }}{% endraw %}` is optional &mdash; it depends on whether you want to preface the page URL with the `baseurl` value.)
 
@@ -539,26 +562,26 @@ Note you cannot add filters to `link` tags. For example, you cannot append a str
 
 If you want to include a link to a post on your site, the `post_url` tag will generate the correct permalink URL for the post you specify.
 
-```liquid
 {% raw %}
+```liquid
 {{ site.baseurl }}{% post_url 2010-07-21-name-of-post %}
-{% endraw %}
 ```
+{% endraw %}
 
 If you organize your posts in subdirectories, you need to include subdirectory path to the post:
 
-```liquid
 {% raw %}
+```liquid
 {{ site.baseurl }}{% post_url /subdir/2010-07-21-name-of-post %}
-{% endraw %}
 ```
+{% endraw %}
 
 There is no need to include the file extension when using the `post_url` tag.
 
 You can also use this tag to create a link to a post in Markdown as follows:
 
-```liquid
 {% raw %}
+```liquid
 [Name of Link]({{ site.baseurl }}{% post_url 2010-07-21-name-of-post %})
-{% endraw %}
 ```
+{% endraw %}

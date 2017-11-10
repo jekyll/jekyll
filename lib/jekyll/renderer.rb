@@ -96,7 +96,7 @@ module Jekyll
       converters.reduce(content) do |output, converter|
         begin
           converter.convert output
-        rescue => e
+        rescue StandardError => e
           Jekyll.logger.error "Conversion error:",
             "#{converter.class} encountered an error while "\
             "converting '#{document.relative_path}':"
@@ -143,7 +143,7 @@ module Jekyll
     # Returns String rendered content
     def place_in_layouts(content, payload, info)
       output = content.dup
-      layout = layouts[document.data["layout"]]
+      layout = layouts[document.data["layout"].to_s]
       validate_layout(layout)
 
       used = Set.new([layout])

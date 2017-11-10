@@ -7,6 +7,15 @@ class TestDocument < JekyllUnitTest
     assert_equal(one[key], other[key])
   end
 
+  def setup_encoded_document(filename)
+    site = fixture_site("collections" => ["encodings"])
+    site.process
+    Document.new(site.in_source_dir(File.join("_encodings", filename)), {
+      :site       => site,
+      :collection => site.collections["encodings"],
+    }).tap(&:read)
+  end
+
   context "a document in a collection" do
     setup do
       @site = fixture_site({
@@ -527,6 +536,26 @@ class TestDocument < JekyllUnitTest
 
     should "be output in the correct place" do
       assert_equal true, File.file?(@dest_file)
+    end
+  end
+
+  context "a document with UTF-8 CLRF" do
+    setup do
+      @document = setup_encoded_document "UTF8CRLFandBOM.md"
+    end
+
+    should "not throw an error" do
+      Jekyll::Renderer.new(@document.site, @document).render_document
+    end
+  end
+
+  context "a document with UTF-16LE CLRF" do
+    setup do
+      @document = setup_encoded_document "Unicode16LECRLFandBOM.md"
+    end
+
+    should "not throw an error" do
+      Jekyll::Renderer.new(@document.site, @document).render_document
     end
   end
 end

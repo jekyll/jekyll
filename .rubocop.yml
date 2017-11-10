@@ -1,6 +1,6 @@
 ---
 AllCops:
-  TargetRubyVersion: 2.0
+  TargetRubyVersion: 2.1
   Include:
     - lib/**/*.rb
   Exclude:
@@ -38,14 +38,10 @@ Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
-Layout/SpaceAroundOperators:
-  Enabled: true
 Layout/SpaceInsideBrackets:
   Enabled: false
 Lint/EndAlignment:
   Severity: error
-Lint/RescueWithoutErrorClass:
-  Enabled: false
 Lint/UnreachableCode:
   Severity: error
 Lint/UselessAccessModifier:
@@ -102,14 +98,11 @@ Style/Alias:
   Enabled: false
 Style/AndOr:
   Severity: error
-Style/Attr:
-  Enabled: false
 Style/BracesAroundHashParameters:
   Enabled: false
 Style/ClassAndModuleChildren:
   Enabled: false
 Style/FrozenStringLiteralComment:
-  Enabled: true
   EnforcedStyle: always
 Style/Documentation:
   Enabled: false
@@ -117,8 +110,6 @@ Style/Documentation:
     - !ruby/regexp /features\/.*.rb$/
 Style/DoubleNegation:
   Enabled: false
-Style/Encoding:
-  EnforcedStyle: when_needed
 Style/GuardClause:
   Enabled: false
 Style/HashSyntax:
@@ -161,5 +152,3 @@ Style/SymbolArray:
   Enabled: false
 Style/TrailingCommaInLiteral:
   EnforcedStyleForMultiline: consistent_comma
-Style/UnneededCapitalW:
-  Enabled: false
