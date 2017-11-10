@@ -47,6 +47,7 @@
   * Use Kernel#Array instead of explicit Array check (#6525)
   * Refactor method to reduce ABC Metric size (#6529)
   * Remove parentheses around arguments to raise (#6532)
+  * Use double-quotes around gem name (#6535)
 
 ### Minor Enhancements
 
