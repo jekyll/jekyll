@@ -48,6 +48,7 @@
   * Refactor method to reduce ABC Metric size (#6529)
   * Remove parentheses around arguments to raise (#6532)
   * Use double-quotes around gem name (#6535)
+  * Dependencies: upgrade to toml 0.2.0 (#6541)
 
 ### Minor Enhancements
 
