@@ -50,6 +50,7 @@
   * Remove parentheses around arguments to raise (#6532)
   * Use double-quotes around gem name (#6535)
   * Dependencies: upgrade to toml 0.2.0 (#6541)
+  * Lock to cucumber 3.0.1 on Ruby 2.1 (#6546)
 
 ### Minor Enhancements
 
