@@ -20,7 +20,7 @@ module Jekyll
   module Convertible
     # Returns the contents as a String.
     def to_s
-      content || ""
+      content || EMPTY_STR
     end
 
     # Whether the file is published or not, as indicated in YAML front-matter

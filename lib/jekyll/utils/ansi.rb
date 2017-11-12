@@ -23,7 +23,7 @@ module Jekyll
       # the other ANSI strippers don't.
 
       def strip(str)
-        str.gsub MATCH, ""
+        str.gsub MATCH, EMPTY_STR
       end
 
       #

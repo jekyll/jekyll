@@ -28,8 +28,8 @@ module Jekyll
         site.process
       rescue Jekyll::Errors::FatalException => e
         Jekyll.logger.error "ERROR:", "YOUR SITE COULD NOT BE BUILT:"
-        Jekyll.logger.error "", "------------------------------------"
-        Jekyll.logger.error "", e.message
+        Jekyll.logger.error EMPTY_STR, "------------------------------------"
+        Jekyll.logger.error EMPTY_STR, e.message
         exit(1)
       end
 

@@ -115,9 +115,9 @@ module Jekyll
         :collection => @collection.label,
         :path       => relative_path[
           @collection.relative_directory.size..relative_path.size],
-        :output_ext => "",
-        :name       => "",
-        :title      => "",
+        :output_ext => EMPTY_STR,
+        :name       => EMPTY_STR,
+        :title      => EMPTY_STR,
       }
     end
 
@@ -132,7 +132,7 @@ module Jekyll
                    :template     => @collection.url_template,
                    :placeholders => placeholders,
                  })
-               end.to_s.gsub(%r!/$!, "")
+               end.to_s.gsub(%r!/$!, EMPTY_STR)
     end
 
     # Returns the type of the collection if present, nil otherwise.

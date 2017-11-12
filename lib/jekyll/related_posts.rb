@@ -36,7 +36,7 @@ module Jekyll
 
         Jekyll.logger.info("Rebuilding index...")
         lsi.build_index
-        Jekyll.logger.info("")
+        Jekyll.logger.info EMPTY_STR
         lsi
       end
     end

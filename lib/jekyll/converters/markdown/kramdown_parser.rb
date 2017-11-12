@@ -88,7 +88,7 @@ module Jekyll
         private
         def strip_coderay_prefix(hash)
           hash.each_with_object({}) do |(key, val), hsh|
-            cleaned_key = key.to_s.gsub(%r!\Acoderay_!, "")
+            cleaned_key = key.to_s.gsub(%r!\Acoderay_!, EMPTY_STR)
 
             if key != cleaned_key
               Jekyll::Deprecator.deprecation_message(

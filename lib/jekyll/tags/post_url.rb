@@ -10,7 +10,7 @@ module Jekyll
       def initialize(name)
         @name = name
 
-        all, @path, @date, @slug = *name.sub(%r!^/!, "").match(MATCHER)
+        all, @path, @date, @slug = *name.sub(%r!^/!, EMPTY_STR).match(MATCHER)
         unless all
           raise Jekyll::Errors::InvalidPostNameError,
             "'#{name}' does not contain valid date and/or title."
@@ -45,7 +45,7 @@ module Jekyll
       # Returns the post slug with the subdirectory (relative to _posts)
       def post_slug(other)
         path = other.basename.split("/")[0...-1].join("/")
-        if path.nil? || path == ""
+        if path.nil? || path == EMPTY_STR
           other.data["slug"]
         else
           path + "/" + other.data["slug"]

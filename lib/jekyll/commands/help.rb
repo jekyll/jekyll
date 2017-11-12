@@ -10,7 +10,7 @@ module Jekyll
             c.description "Show the help message, optionally for a given subcommand."
 
             c.action do |args, _|
-              cmd = (args.first || "").to_sym
+              cmd = (args.first || EMPTY_STR).to_sym
               if args.empty?
                 puts prog
               elsif prog.has_command? cmd

@@ -70,7 +70,7 @@ module Jekyll
     end
 
     def sanitize_filename(name)
-      name.gsub(%r![^\w\s-]+|(?<=^|\b\s)\s+(?=$|\s?\b)!, "")
+      name.gsub(%r![^\w\s-]+|(?<=^|\b\s)\s+(?=$|\s?\b)!, EMPTY_STR)
         .gsub(%r!\s+!, "_")
     end
   end

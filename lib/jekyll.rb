@@ -38,6 +38,9 @@ SafeYAML::OPTIONS[:suppress_warnings] = true
 I18n.config.available_locales = :en
 
 module Jekyll
+  # Globally available constants
+  EMPTY_STR = "".freeze
+
   # internal requires
   autoload :Cleaner,             "jekyll/cleaner"
   autoload :Collection,          "jekyll/collection"
