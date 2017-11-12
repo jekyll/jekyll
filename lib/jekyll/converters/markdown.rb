@@ -12,12 +12,10 @@ module Jekyll
         unless (@parser = get_processor)
           Jekyll.logger.error "Invalid Markdown processor given:", @config["markdown"]
           if @config["safe"]
-            Jekyll.logger.info "", "Custom processors are not loaded in safe mode"
+            Jekyll.logger.info EMPTY_STR, "Custom processors are not loaded in safe mode"
           end
-          Jekyll.logger.error(
-            "",
+          Jekyll.logger.error EMPTY_STR,
             "Available processors are: #{valid_processors.join(", ")}"
-          )
           raise Errors::FatalException, "Bailing out; invalid Markdown processor."
         end
 

@@ -30,7 +30,7 @@ module Jekyll
     end
 
     def generate_table_head_border(row_data, widths)
-      str = String.new("")
+      str = String.new(EMPTY_STR)
 
       row_data.each_index do |cell_index|
         str << "-" * widths[cell_index]
@@ -42,7 +42,7 @@ module Jekyll
     end
 
     def generate_row(row_data, widths)
-      str = String.new("")
+      str = String.new(EMPTY_STR)
 
       row_data.each_with_index do |cell_data, cell_index|
         str << if cell_index.zero?

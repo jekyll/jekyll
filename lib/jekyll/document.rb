@@ -120,7 +120,9 @@ module Jekyll
     # Returns the cleaned relative path of the document.
     def cleaned_relative_path
       @cleaned_relative_path ||=
-        relative_path[0..-extname.length - 1].sub(collection.relative_directory, "")
+        relative_path[0..-extname.length - 1].sub(
+          collection.relative_directory, EMPTY_STR
+        )
     end
 
     # Determine whether the document is a YAML file.
@@ -388,7 +390,7 @@ module Jekyll
     #
     # Returns nothing.
     def categories_from_path(special_dir)
-      superdirs = relative_path.sub(%r!#{special_dir}(.*)!, "")
+      superdirs = relative_path.sub(%r!#{special_dir}(.*)!, EMPTY_STR)
         .split(File::SEPARATOR)
         .reject do |c|
         c.empty? || c == special_dir || c == basename

@@ -100,7 +100,7 @@ module Jekyll
           Jekyll.logger.error "Conversion error:",
             "#{converter.class} encountered an error while "\
             "converting '#{document.relative_path}':"
-          Jekyll.logger.error("", e.to_s)
+          Jekyll.logger.error(EMPTY_STR, e.to_s)
           raise e
         end
       end

@@ -8,7 +8,7 @@ module Jekyll
       # Where things are
       "source"              => Dir.pwd,
       "destination"         => File.join(Dir.pwd, "_site"),
-      "collections_dir"     => "",
+      "collections_dir"     => EMPTY_STR,
       "plugins_dir"         => "_plugins",
       "layouts_dir"         => "_layouts",
       "data_dir"            => "_data",

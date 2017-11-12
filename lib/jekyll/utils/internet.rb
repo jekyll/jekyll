@@ -13,7 +13,7 @@ module Jekyll
       #     Typhoeus.get("https://pages.github.com/versions.json")
       #   else
       #     Jekyll.logger.warn "Warning:", "Version check has been disabled."
-      #     Jekyll.logger.warn "", "Connect to the Internet to enable it."
+      #     Jekyll.logger.warn EMPTY_STR, "Connect to the Internet to enable it."
       #     nil
       #   end
       #

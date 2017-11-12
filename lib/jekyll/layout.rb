@@ -42,7 +42,7 @@ module Jekyll
         @base_dir = site.source
         @path = site.in_source_dir(base, name)
       end
-      @relative_path = @path.sub(@base_dir, "")
+      @relative_path = @path.sub(@base_dir, EMPTY_STR)
 
       self.data = {}
 

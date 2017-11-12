@@ -128,7 +128,7 @@ module Jekyll
     #
     # Returns the escaped String.
     def xml_escape(input)
-      input.to_s.encode(:xml => :attr).gsub(%r!\A"|"\Z!, "")
+      input.to_s.encode(:xml => :attr).gsub(%r!\A"|"\Z!, EMPTY_STR)
     end
 
     # CGI escape a string for use in a URL. Replaces any special characters
@@ -193,7 +193,7 @@ module Jekyll
     def array_to_sentence_string(array, connector = "and")
       case array.length
       when 0
-        ""
+        EMPTY_STR
       when 1
         array[0].to_s
       when 2

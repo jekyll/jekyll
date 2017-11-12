@@ -36,7 +36,7 @@ module Jekyll
     # dir - The String relative path of the directory to read. Default: ''.
     #
     # Returns nothing.
-    def read_directories(dir = "")
+    def read_directories(dir = EMPTY_STR)
       base = site.in_source_dir(dir)
 
       return unless File.directory?(base)
@@ -77,7 +77,7 @@ module Jekyll
       dot_dirs.each do |file|
         dir_path = site.in_source_dir(dir, file)
         rel_path = File.join(dir, file)
-        unless @site.dest.sub(%r!/$!, "") == dir_path
+        unless @site.dest.sub(%r!/$!, EMPTY_STR) == dir_path
           @site.reader.read_directories(rel_path)
         end
       end

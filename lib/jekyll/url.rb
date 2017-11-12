@@ -72,7 +72,7 @@ module Jekyll
         break result if result.index(":").nil?
         if token.last.nil?
           # Remove leading "/" to avoid generating urls with `//`
-          result.gsub(%r!/:#{token.first}!, "")
+          result.gsub(%r!/:#{token.first}!, EMPTY_STR)
         else
           result.gsub(%r!:#{token.first}!, self.class.escape_path(token.last))
         end
@@ -95,7 +95,7 @@ module Jekyll
 
     def generate_url_from_drop(template)
       template.gsub(%r!:([a-z_]+)!) do |match|
-        pool = possible_keys(match.sub(":", ""))
+        pool = possible_keys(match.sub(":", EMPTY_STR))
 
         winner = pool.find { |key| @placeholders.key?(key) }
         if winner.nil?
@@ -105,7 +105,7 @@ module Jekyll
         end
 
         value = @placeholders[winner]
-        value = "" if value.nil?
+        value = EMPTY_STR if value.nil?
         replacement = self.class.escape_path(value)
 
         match.sub(":#{winner}", replacement)
@@ -116,7 +116,7 @@ module Jekyll
     # as well as the beginning "/" so we can enforce and ensure it.
 
     def sanitize_url(str)
-      "/" + str.gsub(%r!/{2,}!, "/").gsub(%r!\.+/|\A/+!, "")
+      "/" + str.gsub(%r!/{2,}!, "/").gsub(%r!\.+/|\A/+!, EMPTY_STR)
     end
 
     # Escapes a path to be a valid URL path segment

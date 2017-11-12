@@ -19,7 +19,7 @@ module Jekyll
     end
 
     def derive_base_directory(site, base_dir)
-      base_dir[site.source] = "" if base_dir.start_with?(site.source)
+      base_dir[site.source] = EMPTY_STR if base_dir.start_with?(site.source)
       base_dir
     end
 

@@ -23,7 +23,7 @@ module Jekyll
     private
     def read_theme_asset(path)
       base = site.theme.root
-      dir = File.dirname(path.sub("#{site.theme.root}/", ""))
+      dir = File.dirname(path.sub("#{site.theme.root}/", EMPTY_STR))
       name = File.basename(path)
 
       if Utils.has_yaml_header?(path)

@@ -20,7 +20,10 @@ module Jekyll
     # Takes an indented string and removes the preceding spaces on each line
 
     def strip_heredoc(str)
-      str.gsub(%r!^[ \t]{#{(str.scan(%r!^[ \t]*(?=\S)!).min || "").size}}!, "")
+      str.gsub(
+        %r!^[ \t]{#{(str.scan(%r!^[ \t]*(?=\S)!).min || EMPTY_STR).size}}!,
+        EMPTY_STR
+      )
     end
 
     # Takes a slug and turns it into a simple title.
@@ -207,7 +210,7 @@ module Jekyll
       slug = replace_character_sequence_with_hyphen(string, :mode => mode)
 
       # Remove leading/trailing hyphen
-      slug.gsub!(%r!^\-|\-$!i, "")
+      slug.gsub!(%r!^\-|\-$!i, EMPTY_STR)
 
       slug.downcase! unless cased
       slug

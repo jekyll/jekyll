@@ -203,9 +203,9 @@ module Jekyll
     # Sanitizes the given path by removing a leading and adding a trailing slash
     def sanitize_path(path)
       if path.nil? || path.empty?
-        ""
+        EMPTY_STR
       else
-        path.gsub(%r!\A/|(?<=[^/])\z!, "".freeze)
+        path.gsub(%r!\A/|(?<=[^/])\z!, EMPTY_STR)
       end
     end
   end

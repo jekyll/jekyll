@@ -63,7 +63,7 @@ module Jekyll
             (incremental ? "enabled" : "disabled. Enable with --incremental")
           Jekyll.logger.info "Generating..."
           process_site(site)
-          Jekyll.logger.info "", "done in #{(Time.now - t).round(3)} seconds."
+          Jekyll.logger.info EMPTY_STR, "done in #{(Time.now - t).round(3)} seconds."
         end
 
         # Private: Watch for file changes and rebuild the site.
@@ -75,11 +75,11 @@ module Jekyll
         def watch(site, options)
           # Warn Windows users that they might need to upgrade.
           if Utils::Platforms.bash_on_windows?
-            Jekyll.logger.warn "",
+            Jekyll.logger.warn EMPTY_STR,
               "Auto-regeneration may not work on some Windows versions."
-            Jekyll.logger.warn "",
+            Jekyll.logger.warn EMPTY_STR,
               "Please see: https://github.com/Microsoft/BashOnWindows/issues/216"
-            Jekyll.logger.warn "",
+            Jekyll.logger.warn EMPTY_STR,
               "If it does not work, please upgrade Bash on Windows or "\
                 "run Jekyll with --no-watch."
           end

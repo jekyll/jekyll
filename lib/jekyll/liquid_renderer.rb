@@ -18,7 +18,7 @@ module Jekyll
     def file(filename)
       filename = @site.in_source_dir(filename).sub(
         %r!\A#{Regexp.escape(@site.source)}/!,
-        ""
+        EMPTY_STR
       )
 
       LiquidRenderer::File.new(self, filename).tap do

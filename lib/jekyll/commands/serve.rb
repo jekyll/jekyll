@@ -142,7 +142,7 @@ module Jekyll
             :prefix  => ssl_enabled ? "https" : "http",
             :address => address,
             :port    => port,
-            :baseurl => baseurl ? "#{baseurl}/" : "",
+            :baseurl => baseurl ? "#{baseurl}/" : EMPTY_STR,
           })
         end
 
