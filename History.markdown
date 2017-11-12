@@ -74,6 +74,7 @@
   * Update normalize.css to v7.0.0 (#6491)
   * add jekyll-pwa-plugin (#6533)
   * [ImgBot] optimizes images (#6519)
+  * Site: Back to original main navigation (#6544)
 
 ### Bug Fixes
 
