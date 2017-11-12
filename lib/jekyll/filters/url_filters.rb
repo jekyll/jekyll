@@ -12,6 +12,7 @@ module Jekyll
       # Returns the absolute URL as a String.
       def absolute_url(input)
         return if input.nil?
+        input = input.url if input.respond_to?(:url)
         return input if Addressable::URI.parse(input.to_s).absolute?
         site = @context.registers[:site]
         return relative_url(input) if site.config["url"].nil?
@@ -28,6 +29,7 @@ module Jekyll
       # Returns a URL relative to the domain root as a String.
       def relative_url(input)
         return if input.nil?
+        input = input.url if input.respond_to?(:url)
         return input if Addressable::URI.parse(input.to_s).absolute?
 
         parts = [sanitized_baseurl, input]

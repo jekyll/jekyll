@@ -37,7 +37,12 @@ module Jekyll
         end
 
         def convert(content)
-          Kramdown::Document.new(content, @config).to_html
+          document = Kramdown::Document.new(content, @config)
+          html_output = document.to_html
+          document.warnings.each do |warning|
+            Jekyll.logger.warn "Kramdown warning:", warning
+          end
+          html_output
         end
 
         private

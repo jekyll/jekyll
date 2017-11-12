@@ -45,6 +45,10 @@
   * Assert raising Psych::SyntaxError when `&#34;strict_front_matter&#34;=&gt;true` (#6520)
   * [RuboCop] Enable `Style/UnneededCapitalW` cop (#6526)
   * Use Kernel#Array instead of explicit Array check (#6525)
+  * Refactor method to reduce ABC Metric size (#6529)
+  * Remove parentheses around arguments to raise (#6532)
+  * Use double-quotes around gem name (#6535)
+  * Dependencies: upgrade to toml 0.2.0 (#6541)
 
 ### Minor Enhancements
 
@@ -57,6 +61,8 @@
   * Add Utils::Internet.connected? to determine whether host machine has internet connection. (#5870)
   * Add latin mode to slugify (#6509)
   * filter relative_url should keep absolute urls with scheme/authority (#6490)
+  * Log kramdown warnings if log level is WARN (#6522)
+  * Allow URL filters to work directly with documents (#6478)
 
 ### Site Enhancements
 
@@ -66,6 +72,8 @@
   * Update site History (#6460)
   * Site: Add default twitter card image (#6476)
   * Update normalize.css to v7.0.0 (#6491)
+  * add jekyll-pwa-plugin (#6533)
+  * [ImgBot] optimizes images (#6519)
 
 ### Bug Fixes
 
