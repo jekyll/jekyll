@@ -518,7 +518,7 @@ defaults:
   -
     scope:
       path: ""
-      type: "posts"
+      type: "pages"
     values:
       layout: "my-site"
   -
@@ -530,7 +530,7 @@ defaults:
       author: "Mr. Hyde"
 ```
 
-With these defaults, all posts would use the `my-site` layout. Any html files that exist in the `projects/` folder will use the `project` layout, if it exists. Those files will also have the `page.author` [liquid variable](../variables/) set to `Mr. Hyde`.
+With these defaults, all pages would use the `my-site` layout. Any html files that exist in the `projects/` folder will use the `project` layout, if it exists. Those files will also have the `page.author` [liquid variable](../variables/) set to `Mr. Hyde`.
 
 ```yaml
 collections:
@@ -549,11 +549,26 @@ defaults:
 In this example, the `layout` is set to `default` inside the
 [collection](../collections/) with the name `my_collection`.
 
+It is also possible to use glob patterns when matching defaults. For example, it is possible to set specific layout for each `special-page.html` in any subfolder of `section` folder.
+
+```yaml
+collections:
+  my_collection:
+    output: true
+
+defaults:
+  -
+    scope:
+      path: "section/*/special-page.html"
+    values:
+      layout: "specific-layout"
+```
+
 ### Precedence
 
 Jekyll will apply all of the configuration settings you specify in the `defaults` section of your `_config.yml` file. However, you can choose to override settings from other scope/values pair by specifying a more specific path for the scope.
 
-You can see that in the second to last example above. First, we set the default layout to `my-site`. Then, using a more specific path, we set the default layout for files in the `projects/` path to `project`. This can be done with any value that you would set in the page or post front matter.
+You can see that in the second to last example above. First, we set the default page layout to `my-site`. Then, using a more specific path, we set the default layout for pages in the `projects/` path to `project`. This can be done with any value that you would set in the page or post front matter.
 
 Finally, if you set defaults in the site configuration by adding a `defaults` section to your `_config.yml` file, you can override those settings in a post or page file. All you need to do is specify the settings in the post or page front matter. For example:
 
@@ -602,12 +617,13 @@ file or on the command-line.
 
 ```yaml
 # Where things are
-source:       .
-destination:  ./_site
-plugins_dir:  _plugins
-layouts_dir:  _layouts
-data_dir:     _data
-includes_dir: _includes
+source:          .
+destination:     ./_site
+collections_dir: .
+plugins_dir:     _plugins
+layouts_dir:     _layouts
+data_dir:        _data
+includes_dir:    _includes
 collections:
   posts:
     output:   true

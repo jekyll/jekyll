@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   module Tags
     class Link < Liquid::Tag
@@ -22,11 +24,11 @@ module Jekyll
           return item.url if item.relative_path == "/#{@relative_path}"
         end
 
-        raise ArgumentError, <<eos
+        raise ArgumentError, <<-MSG
 Could not find document '#{@relative_path}' in tag '#{self.class.tag_name}'.
 
 Make sure the document exists and the path is correct.
-eos
+MSG
       end
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #############################################################################
 #
 # Site tasks - https://jekyllrb.com
@@ -5,7 +7,7 @@
 #############################################################################
 
 namespace :site do
-  task :generated_pages => [:history, :version_file, :conduct, :contributing]
+  task :generated_pages => [:history, :version_file, :conduct, :contributing, :support]
 
   desc "Generate and view the site locally"
   task :preview => :generated_pages do
@@ -67,12 +69,17 @@ namespace :site do
       "redirect_from" => "/conduct/index.html",
       "editable"      => false,
     }
-    siteify_file("CONDUCT.markdown", front_matter)
+    siteify_file("CODE_OF_CONDUCT.markdown", front_matter)
   end
 
   desc "Copy the contributing file"
   task :contributing do
     siteify_file(".github/CONTRIBUTING.markdown", "title" => "Contributing")
+  end
+
+  desc "Copy the support file"
+  task :support do
+    siteify_file(".github/SUPPORT.markdown", "title" => "Support")
   end
 
   desc "Write the site latest_version.txt file"

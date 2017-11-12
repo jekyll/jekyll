@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Jekyll
   class LogAdapter
-    attr_reader :writer, :messages
+    attr_reader :writer, :messages, :level
 
     LOG_LEVELS = {
       :debug => ::Logger::DEBUG,
@@ -28,6 +30,7 @@ module Jekyll
     # Returns nothing
     def log_level=(level)
       writer.level = LOG_LEVELS.fetch(level)
+      @level = level
     end
 
     def adjust_verbosity(options = {})
@@ -46,8 +49,8 @@ module Jekyll
     # message - the message detail
     #
     # Returns nothing
-    def debug(topic, message = nil)
-      writer.debug(message(topic, message))
+    def debug(topic, message = nil, &block)
+      write(:debug, topic, message, &block)
     end
 
     # Public: Print a message
@@ -56,8 +59,8 @@ module Jekyll
     # message - the message detail
     #
     # Returns nothing
-    def info(topic, message = nil)
-      writer.info(message(topic, message))
+    def info(topic, message = nil, &block)
+      write(:info, topic, message, &block)
     end
 
     # Public: Print a message
@@ -66,8 +69,8 @@ module Jekyll
     # message - the message detail
     #
     # Returns nothing
-    def warn(topic, message = nil)
-      writer.warn(message(topic, message))
+    def warn(topic, message = nil, &block)
+      write(:warn, topic, message, &block)
     end
 
     # Public: Print an error message
@@ -76,8 +79,8 @@ module Jekyll
     # message - the message detail
     #
     # Returns nothing
-    def error(topic, message = nil)
-      writer.error(message(topic, message))
+    def error(topic, message = nil, &block)
+      write(:error, topic, message, &block)
     end
 
     # Public: Print an error message and immediately abort the process
@@ -86,8 +89,8 @@ module Jekyll
     # message - the message detail (can be omitted)
     #
     # Returns nothing
-    def abort_with(topic, message = nil)
-      error(topic, message)
+    def abort_with(topic, message = nil, &block)
+      error(topic, message, &block)
       abort
     end
 
@@ -97,19 +100,48 @@ module Jekyll
     # message - the message detail
     #
     # Returns the formatted message
-    def message(topic, message)
-      msg = formatted_topic(topic) + message.to_s.gsub(%r!\s+!, " ")
-      messages << msg
-      msg
+    def message(topic, message = nil)
+      raise ArgumentError, "block or message, not both" if block_given? && message
+
+      message = yield if block_given?
+      message = message.to_s.gsub(%r!\s+!, " ")
+      topic = formatted_topic(topic, block_given?)
+      out = topic + message
+      messages << out
+      out
     end
 
     # Internal: Format the topic
     #
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
+    # colon -
     #
     # Returns the formatted topic statement
-    def formatted_topic(topic)
-      "#{topic} ".rjust(20)
+    def formatted_topic(topic, colon = false)
+      "#{topic}#{colon ? ": " : " "}".rjust(20)
+    end
+
+    # Internal: Check if the message should be written given the log level.
+    #
+    # level_of_message - the Symbol level of message, one of :debug, :info, :warn, :error
+    #
+    # Returns whether the message should be written.
+    def write_message?(level_of_message)
+      LOG_LEVELS.fetch(level) <= LOG_LEVELS.fetch(level_of_message)
+    end
+
+    # Internal: Log a message.
+    #
+    # level_of_message - the Symbol level of message, one of :debug, :info, :warn, :error
+    # topic - the String topic or full message
+    # message - the String message (optional)
+    # block - a block containing the message (optional)
+    #
+    # Returns false if the message was not written, otherwise returns the value of calling
+    # the appropriate writer method, e.g. writer.info.
+    def write(level_of_message, topic, message = nil, &block)
+      return false unless write_message?(level_of_message)
+      writer.public_send(level_of_message, message(topic, message, &block))
     end
   end
 end

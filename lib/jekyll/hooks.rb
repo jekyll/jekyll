@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   module Hooks
     DEFAULT_PRIORITY = 20
@@ -36,6 +38,9 @@ module Jekyll
         :pre_render  => [],
         :post_render => [],
         :post_write  => [],
+      },
+      :clean     => {
+        :on_obsolete => [],
       },
     }
 

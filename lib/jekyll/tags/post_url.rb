@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   module Tags
     class PostComparer
@@ -57,14 +59,14 @@ module Jekyll
         @orig_post = post.strip
         begin
           @post = PostComparer.new(@orig_post)
-        rescue => e
-          raise Jekyll::Errors::PostURLError, <<-eos
+        rescue StandardError => e
+          raise Jekyll::Errors::PostURLError, <<-MSG
 Could not parse name of post "#{@orig_post}" in tag 'post_url'.
 
 Make sure the post exists and the name is correct.
 
 #{e.class}: #{e.message}
-eos
+MSG
         end
       end
 
@@ -88,11 +90,11 @@ eos
           return p.url
         end
 
-        raise Jekyll::Errors::PostURLError, <<-eos
+        raise Jekyll::Errors::PostURLError, <<-MSG
 Could not find post "#{@orig_post}" in tag 'post_url'.
 
 Make sure the post exists and the name is correct.
-eos
+MSG
       end
     end
   end

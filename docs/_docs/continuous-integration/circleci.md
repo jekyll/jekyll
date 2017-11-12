@@ -25,7 +25,7 @@ The easiest way to manage dependencies for a Jekyll project (with or without Cir
 
 [4]: http://bundler.io/gemfile.html
 
-```yaml
+```ruby
 source 'https://rubygems.org'
 
 ruby '2.4.0'
@@ -40,7 +40,7 @@ CircleCI detects when `Gemfile` is present is will automatically run `bundle ins
 
 The most basic test that can be run is simply seeing if `jekyll build` actually works. This is a blocker, a dependency if you will,  for other tests you might run on the generate site. So we'll run Jekyll, via Bundler, in the `dependencies` phase.
 
-```
+```yaml
 dependencies:
   post:
     - bundle exec jekyll build
@@ -63,7 +63,7 @@ test:
 
 When you put it all together, here's an example of what that `circle.yml` file could look like:
 
-```
+```yaml
 machine:
   environment:
     NOKOGIRI_USE_SYSTEM_LIBRARIES: true # speeds up installation of html-proofer

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "addressable/uri"
 require "json"
 require "date"
@@ -333,19 +335,26 @@ module Jekyll
     end
 
     private
-    def sort_input(input, property, order)
-      input.sort do |apple, orange|
-        apple_property = item_property(apple, property)
-        orange_property = item_property(orange, property)
 
-        if !apple_property.nil? && orange_property.nil?
-          - order
-        elsif apple_property.nil? && !orange_property.nil?
-          + order
-        else
-          apple_property <=> orange_property
+    # Sort the input Enumerable by the given property.
+    # If the property doesn't exist, return the sort order respective of
+    # which item doesn't have the property.
+    # We also utilize the Schwartzian transform to make this more efficient.
+    def sort_input(input, property, order)
+      input.map { |item| [item_property(item, property), item] }
+        .sort! do |apple_info, orange_info|
+          apple_property = apple_info.first
+          orange_property = orange_info.first
+
+          if !apple_property.nil? && orange_property.nil?
+            - order
+          elsif apple_property.nil? && !orange_property.nil?
+            + order
+          else
+            apple_property <=> orange_property
+          end
         end
-      end
+        .map!(&:last)
     end
 
     private

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class DataReader
     attr_reader :site, :content
@@ -68,8 +70,8 @@ module Jekyll
     end
 
     def sanitize_filename(name)
-      name.gsub!(%r![^\w\s-]+|(?<=^|\b\s)\s+(?=$|\s?\b)!, "".freeze)
-      name.gsub(%r!\s+!, "_")
+      name.gsub(%r![^\w\s-]+|(?<=^|\b\s)\s+(?=$|\s?\b)!, "")
+        .gsub(%r!\s+!, "_")
     end
   end
 end

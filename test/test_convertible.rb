@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 require "ostruct"
 
@@ -36,7 +38,7 @@ class TestConvertible < JekyllUnitTest
     should "raise for broken front matter with `strict_front_matter` set" do
       name = "broken_front_matter2.erb"
       @convertible.site.config["strict_front_matter"] = true
-      assert_raises do
+      assert_raises(Psych::SyntaxError) do
         @convertible.read_yaml(@base, name)
       end
     end

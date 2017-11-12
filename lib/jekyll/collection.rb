@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class Collection
     attr_reader :site, :label, :metadata
@@ -98,7 +100,9 @@ module Jekyll
     # Returns a String containing the directory name where the collection
     #   is stored on the filesystem.
     def relative_directory
-      @relative_directory ||= "_#{label}"
+      @relative_directory ||= Pathname.new(directory).relative_path_from(
+        Pathname.new(site.source)
+      ).to_s
     end
 
     # The full path to the directory containing the collection.
@@ -106,7 +110,9 @@ module Jekyll
     # Returns a String containing th directory name where the collection
     #   is stored on the filesystem.
     def directory
-      @directory ||= site.in_source_dir(relative_directory)
+      @directory ||= site.in_source_dir(
+        File.join(site.config["collections_dir"], "_#{label}")
+      )
     end
 
     # The full path to the directory containing the collection, with

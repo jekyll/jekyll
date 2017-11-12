@@ -1,6 +1,24 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestSite < JekyllUnitTest
+  def with_image_as_post
+    tmp_image_path = File.join(source_dir, "_posts", "2017-09-01-jekyll-sticker.jpg")
+    FileUtils.cp File.join(Dir.pwd, "docs", "img", "jekyll-sticker.jpg"), tmp_image_path
+    yield
+  ensure
+    FileUtils.rm tmp_image_path
+  end
+
+  def read_posts
+    @site.posts.docs.concat(PostReader.new(@site).read_posts(""))
+    posts = Dir[source_dir("_posts", "**", "*")]
+    posts.delete_if do |post|
+      File.directory?(post) && !(post =~ Document::DATE_FILENAME_MATCHER)
+    end
+  end
+
   context "configuring sites" do
     should "have an array for plugins by default" do
       site = Site.new default_configuration
@@ -225,12 +243,16 @@ class TestSite < JekyllUnitTest
     end
 
     should "read posts" do
-      @site.posts.docs.concat(PostReader.new(@site).read_posts(""))
-      posts = Dir[source_dir("_posts", "**", "*")]
-      posts.delete_if do |post|
-        File.directory?(post) && !(post =~ Document::DATE_FILENAME_MATCHER)
-      end
+      posts = read_posts
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
+    end
+
+    should "skip posts with invalid encoding" do
+      with_image_as_post do
+        posts = read_posts
+        num_invalid_posts = @num_invalid_posts + 1
+        assert_equal posts.size - num_invalid_posts, @site.posts.size
+      end
     end
 
     should "read pages with YAML front matter" do
@@ -286,7 +308,7 @@ class TestSite < JekyllUnitTest
           "collections"         => ["broken"],
           "strict_front_matter" => true
         ))
-        assert_raises do
+        assert_raises(Psych::SyntaxError) do
           site.process
         end
       end
@@ -560,13 +582,13 @@ class TestSite < JekyllUnitTest
         end
         expected_msg = "Theme: value of 'theme' in config should be String " \
           "to use gem-based themes, but got Hash\n"
-        assert output.end_with?(expected_msg),
-          "Expected #{output.inspect} to end with #{expected_msg.inspect}"
+        assert_includes output, expected_msg
       end
 
       should "set a theme if the config is a string" do
-        expect($stderr).not_to receive(:puts)
-        expect($stdout).not_to receive(:puts)
+        [:debug, :info, :warn, :error].each do |level|
+          expect(Jekyll.logger.writer).not_to receive(level)
+        end
         site = fixture_site({ "theme" => "test-theme" })
         assert_instance_of Jekyll::Theme, site.theme
         assert_equal "test-theme", site.theme.name

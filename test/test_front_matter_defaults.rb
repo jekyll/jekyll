@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestFrontMatterDefaults < JekyllUnitTest
@@ -7,6 +9,30 @@ class TestFrontMatterDefaults < JekyllUnitTest
         "defaults" => [{
           "scope"  => {
             "path" => "contacts",
+            "type" => "page",
+          },
+          "values" => {
+            "key" => "val",
+          },
+        },],
+      })
+      @site.process
+      @affected = @site.pages.find { |page| page.relative_path == "contacts/bar.html" }
+      @not_affected = @site.pages.find { |page| page.relative_path == "about.html" }
+    end
+
+    should "affect only the specified path and type" do
+      assert_equal @affected.data["key"], "val"
+      assert_nil @not_affected.data["key"]
+    end
+  end
+
+  context "A site with full front matter defaults (glob)" do
+    setup do
+      @site = fixture_site({
+        "defaults" => [{
+          "scope"  => {
+            "path" => "contacts/*.html",
             "type" => "page",
           },
           "values" => {

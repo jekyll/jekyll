@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# frozen_string_literal: true
 
 require "helper"
 
@@ -16,7 +16,10 @@ class TestKramdown < JekyllUnitTest
 
           "syntax_highlighter"      => "rouge",
           "syntax_highlighter_opts" => {
-            "bold_every" => 8, "css" => :class,
+            "bold_every" => 8,
+            "css"        => :class,
+            "css_class"  => "highlight",
+            "formatter"  => Jekyll::Utils::Rouge.html_formatter.class,
           },
         },
       }
@@ -53,6 +56,12 @@ class TestKramdown < JekyllUnitTest
       assert_equal "<h1>Some Header</h1>", @markdown.convert("# Some Header #").strip
     end
 
+    should "should log kramdown warnings" do
+      allow_any_instance_of(Kramdown::Document).to receive(:warnings).and_return(["foo"])
+      expect(Jekyll.logger).to receive(:warn).with("Kramdown warning:", "foo")
+      @markdown.convert("Something")
+    end
+
     context "when asked to convert smart quotes" do
       should "convert" do
         assert_match(
@@ -81,8 +90,9 @@ class TestKramdown < JekyllUnitTest
         puts "Hello World"
         ~~~
       MARKDOWN
-
-      selector = "div.highlighter-rouge>pre.highlight>code"
+      div_highlight = ""
+      div_highlight = ">div.highlight" unless Utils::Rouge.old_api?
+      selector = "div.highlighter-rouge#{div_highlight}>pre.highlight>code"
       refute result.css(selector).empty?
     end
 

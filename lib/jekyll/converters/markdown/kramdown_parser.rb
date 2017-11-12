@@ -1,5 +1,4 @@
 # Frozen-string-literal: true
-# Encoding: utf-8
 
 module Jekyll
   module Converters
@@ -38,16 +37,23 @@ module Jekyll
         end
 
         def convert(content)
-          Kramdown::Document.new(content, @config).to_html
+          document = Kramdown::Document.new(content, @config)
+          html_output = document.to_html
+          document.warnings.each do |warning|
+            Jekyll.logger.warn "Kramdown warning:", warning
+          end
+          html_output
         end
 
         private
+        # rubocop:disable Performance/HashEachMethods
         def make_accessible(hash = @config)
           hash.keys.each do |key|
             hash[key.to_sym] = hash[key]
             make_accessible(hash[key]) if hash[key].is_a?(Hash)
           end
         end
+        # rubocop:enable Performance/HashEachMethods
 
         # config[kramdown][syntax_higlighter] >
         #   config[kramdown][enable_coderay] >
