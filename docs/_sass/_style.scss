@@ -102,7 +102,9 @@ nav {
 }
 
 .mobile-nav {
-  padding: 0 5px;
+  padding: 5px;
+  border-bottom: 1px solid #232323;
+  background: #393939;
 
   ul {
     overflow: hidden;
@@ -110,23 +112,18 @@ nav {
     display: table;
   }
 
+  li { display: initial }
+
   a {
     float: left;
     width: 100%;
-    background-color: #333;
+    padding: 8px 5px;
     color: #fc0;
-    text-align: center;
-    text-transform: uppercase;
     font-size: 14px;
     font-weight: 900;
-    padding: 5px;
+    text-align: center;
+    text-transform: uppercase;
     @include border-radius(5px);
-  }
-
-  li {
-    display: table-cell;
-    width: 20%;
-    padding: 8px 2px;
   }
 
   .current {
