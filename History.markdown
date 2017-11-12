@@ -77,6 +77,7 @@
   * add jekyll-pwa-plugin (#6533)
   * [ImgBot] optimizes images (#6519)
   * Site: Back to original main navigation (#6544)
+  * Style mobile-docs select element (#6545)
 
 ### Bug Fixes
 
