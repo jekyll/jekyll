@@ -547,8 +547,22 @@ aside {
 }
 
 .docs-nav-mobile select {
-  color: #000;
+  padding: 5px;
   width: 100%;
+  font-size: 0.85em;
+  color: #000;
+  background: #ddd;
+  border-color: transparent;
+  @include border-radius(5px);
+
+  &:focus {
+    outline: none;
+  }
+
+  option {
+    font-size: 0.9em;
+    padding: 3px;
+  }
 }
 
 /* News */
