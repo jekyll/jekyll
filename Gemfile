@@ -23,7 +23,7 @@ end
 
 group :test do
   gem "codeclimate-test-reporter", "~> 1.0.5"
-  gem "cucumber", "~> 3.0"
+  gem "cucumber", RUBY_VERSION >= "2.2" ? "~> 3.0" : "3.0.1"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
   # nokogiri v1.8 does not work with ruby 2.1 and below

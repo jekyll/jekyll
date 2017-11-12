@@ -24,6 +24,7 @@
   * Remove `sudo` from macOS troubleshooting instructions (#6486)
   * add formester to the list of saas form backend (#6059)
   * Fix a few minor issues in the docs (#6494)
+  * Remove Jekyll-Smartify from plugins directory (#6548)
 
 ### Development Fixes
 
@@ -49,6 +50,7 @@
   * Remove parentheses around arguments to raise (#6532)
   * Use double-quotes around gem name (#6535)
   * Dependencies: upgrade to toml 0.2.0 (#6541)
+  * Lock to cucumber 3.0.1 on Ruby 2.1 (#6546)
 
 ### Minor Enhancements
 
@@ -74,6 +76,7 @@
   * Update normalize.css to v7.0.0 (#6491)
   * add jekyll-pwa-plugin (#6533)
   * [ImgBot] optimizes images (#6519)
+  * Site: Back to original main navigation (#6544)
 
 ### Bug Fixes
 

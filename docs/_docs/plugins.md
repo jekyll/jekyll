@@ -825,7 +825,6 @@ LESS.js files during generation.
 - [Deprecated articles keeper](https://github.com/kzykbys/JekyllPlugins) by [Kazuya Kobayashi](http://blog.kazuya.co/): A simple Jekyll filter which monitor how old an article is.
 - [Jekyll-jalali](https://github.com/mehdisadeghi/jekyll-jalali) by [Mehdi Sadeghi](http://mehdix.ir): A simple Gregorian to Jalali date converter filter.
 - [Jekyll Thumbnail Filter](https://github.com/matallo/jekyll-thumbnail-filter): Related posts thumbnail filter.
-- [Jekyll-Smartify](https://github.com/pathawks/jekyll-smartify): SmartyPants filter. Make &quot;quotes&quot; &ldquo;curly&rdquo;
 - [liquid-md5](https://github.com/pathawks/liquid-md5): Returns an MD5 hash. Helpful for generating Gravatars in templates.
 - [jekyll-roman](https://github.com/paulrobertlloyd/jekyll-roman): A liquid filter for Jekyll that converts numbers into Roman numerals.
 - [jekyll-typogrify](https://github.com/myles/jekyll-typogrify): A Jekyll plugin that brings the functions of [typogruby](http://avdgaag.github.io/typogruby/).

@@ -80,6 +80,13 @@ class TestFilters < JekyllUnitTest
         )
       end
 
+      should "convert not convert markdown to block HTML elements" do
+        assert_equal(
+          "#hashtag", # NOT "<h1>hashtag</h1>"
+          @filter.smartify("#hashtag")
+        )
+      end
+
       should "escapes special characters when configured to do so" do
         kramdown = make_filter_mock({ :kramdown => { :entity_output => :symbolic } })
         assert_equal(
