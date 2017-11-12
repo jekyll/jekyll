@@ -24,6 +24,7 @@
   * Remove `sudo` from macOS troubleshooting instructions (#6486)
   * add formester to the list of saas form backend (#6059)
   * Fix a few minor issues in the docs (#6494)
+  * Remove Jekyll-Smartify from plugins directory (#6548)
 
 ### Development Fixes
 
