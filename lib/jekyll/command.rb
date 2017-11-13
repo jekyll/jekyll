@@ -73,6 +73,29 @@ module Jekyll
           "Fail if errors are present in front matter"
       end
       # rubocop:enable Metrics/MethodLength
+
+      # Run ::process method in a given set of Jekyll::Command subclasses and suggest
+      # re-running the associated command with --trace switch to obtain any additional
+      # information or backtrace regarding the encountered Exception.
+      #
+      # cmd     - the Jekyll::Command to be handled
+      # options - configuration overrides
+      # klass   - an array of Jekyll::Command subclasses associated with the command
+      #
+      # rubocop: disable RescueException
+      def process_with_graceful_fail(cmd, options, *klass)
+        klass.each { |k| k.process(options) if k.respond_to?(:process) }
+      rescue Exception => e
+        raise e if cmd.trace
+
+        msg = " Please append `--trace` to the `#{cmd.name}` command "
+        dashes = "-" * msg.length
+        Jekyll.logger.error "", dashes
+        Jekyll.logger.error "Jekyll #{Jekyll::VERSION} ", msg
+        Jekyll.logger.error "", " for any additional information or backtrace. "
+        Jekyll.logger.abort_with "", dashes
+      end
+      # rubocop: enable RescueException
     end
   end
 end

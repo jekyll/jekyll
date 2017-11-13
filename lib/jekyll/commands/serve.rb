@@ -39,7 +39,7 @@ module Jekyll
               if Jekyll.env == "development"
                 config["url"] = default_url(config)
               end
-              [Build, Serve].each { |klass| klass.process(config) }
+              process_with_graceful_fail(cmd, config, Build, Serve)
             end
           end
         end
