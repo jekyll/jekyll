@@ -66,6 +66,7 @@
   * Allow plugins to modify the obsolete files. (#6502)
   * Add latin mode to slugify (#6509)
   * Log Kramdown warnings if log level is WARN (#6522)
+  * Add json extension to list of directory indices (#6550)
 
 ### Site Enhancements
 
