@@ -36,11 +36,11 @@ module Jekyll
           make_accessible
         end
 
-        def convert(content)
+        def convert(content, path)
           document = Kramdown::Document.new(content, @config)
           html_output = document.to_html
           document.warnings.each do |warning|
-            Jekyll.logger.warn "Kramdown warning:", warning
+            Jekyll.logger.warn "Kramdown warning:", "#{warning} in #{path}"
           end
           html_output
         end
