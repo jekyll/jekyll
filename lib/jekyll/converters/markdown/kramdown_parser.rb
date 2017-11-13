@@ -40,7 +40,8 @@ module Jekyll
           document = Kramdown::Document.new(content, @config)
           html_output = document.to_html
           document.warnings.each do |warning|
-            Jekyll.logger.warn "Kramdown warning:", "#{warning} in #{path}"
+            logged_msg = path.empty? ? warning : "#{warning} in #{path}"
+            Jekyll.logger.warn "Kramdown warning:", logged_msg
           end
           html_output
         end
