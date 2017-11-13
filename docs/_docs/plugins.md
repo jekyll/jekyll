@@ -785,7 +785,7 @@ LESS.js files during generation.
 
 #### Converters
 
-- [Pug plugin by Doug Beney](https://github.com/DougBeney/jekyll-pug): Pug (previously Jade) converter for Jekyll.
+- [Pug plugin by Doug Beney](http://jekyll-pug.dougie.io): Use the popular Pug (previously Jade) templating language in Jekyll. Complete with caching, includes support, and much more.
 - [Textile converter](https://github.com/jekyll/jekyll-textile-converter): Convert `.textile` files into HTML. Also includes the `textilize` Liquid filter.
 - [Slim plugin](https://github.com/slim-template/jekyll-slim): Slim converter and includes for Jekyll with support for Liquid tags.
 - [HAML plugin by Sam Z](https://gist.github.com/517556): HAML converter for Jekyll.
