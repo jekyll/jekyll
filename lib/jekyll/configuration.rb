@@ -80,6 +80,7 @@ module Jekyll
         "input"         => "GFM",
         "hard_wrap"     => false,
         "footnote_nr"   => 1,
+        "log_warnings"  => false,
       },
     }.map { |k, v| [k, v.freeze] }].freeze
 
