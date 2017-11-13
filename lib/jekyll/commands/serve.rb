@@ -17,6 +17,15 @@ module Jekyll
             "Skips the initial site build which occurs before the server is started.",],
         }.freeze
 
+        DIRECTORY_INDEX = %w(
+          index.htm
+          index.html
+          index.rhtml
+          index.cgi
+          index.xml
+          index.json
+        ).freeze
+
         #
 
         def init_with_program(prog)
@@ -85,13 +94,7 @@ module Jekyll
             :StartCallback      => start_callback(opts["detach"]),
             :BindAddress        => opts["host"],
             :Port               => opts["port"],
-            :DirectoryIndex     => %w(
-              index.htm
-              index.html
-              index.rhtml
-              index.cgi
-              index.xml
-            ),
+            :DirectoryIndex     => DIRECTORY_INDEX,
           }
 
           opts[:DirectoryIndex] = [] if opts[:JekyllOptions]["show_dir_listing"]
