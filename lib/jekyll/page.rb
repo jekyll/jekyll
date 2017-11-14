@@ -185,11 +185,12 @@ module Jekyll
     end
   end
 
+  # A Jekyll::Page subclass to handle processing files that exist outside the
+  # site's configured source directory.
+  # The resulting object will be processed by Liquid and rendered directly at
+  # the destination, without an intermediate reading to determine page-data
+  # and page-content based on Front Matter delimiters.
   class PageWithoutAFile < Page
-    # ---------------------------------------------------------------
-    # Extracted from official plugins, jekyll-feed and jekyll-sitemap
-    # ---------------------------------------------------------------
-
     def read_yaml(*)
       @data ||= {}
     end
