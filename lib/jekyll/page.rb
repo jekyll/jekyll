@@ -184,4 +184,14 @@ module Jekyll
       true
     end
   end
+
+  class PageWithoutAFile < Page
+    # ---------------------------------------------------------------
+    # Extracted from official plugins, jekyll-feed and jekyll-sitemap
+    # ---------------------------------------------------------------
+
+    def read_yaml(*)
+      @data ||= {}
+    end
+  end
 end
