@@ -1,0 +1,50 @@
+.searchbox {
+  .searchbox__input {
+    padding: 5px 5px 5px 29px;
+    border: none;
+    border-radius: 5px;
+    color: #444;
+
+    &::-webkit-input-placeholder {
+      color: #aaa;
+    }
+
+    &:-ms-input-placeholder {
+      color: #aaa;
+    }
+
+    &::placeholder {
+      color: #aaa;
+    }
+  }
+}
+
+.algolia-autocomplete {
+  .ds-dropdown-menu {
+    font-size: 1rem;
+    text-shadow: none;
+
+    .ds-suggestion.ds-cursor .algolia-docsearch-suggestion:not(.suggestion-layout-simple) .algolia-docsearch-suggestion--content {
+      background-color: rgba(221, 221, 221, 0.5);
+    }
+  }
+
+  .algolia-docsearch-suggestion--category-header {
+    background-color: #444;
+    color: #ddd;
+    padding: 0.35em;
+  }
+
+  .algolia-docsearch-suggestion--subcategory-column {
+    color: #444;
+  }
+
+  .algolia-docsearch-suggestion--highlight {
+    background-color: #fc0;
+    color: #222;
+  }
+
+  .algolia-docsearch-suggestion--text .algolia-docsearch-suggestion--highlight {
+    box-shadow: inset 0 -2px 0 0 #fc0;
+  }
+}
