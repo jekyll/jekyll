@@ -33,16 +33,20 @@ module Jekyll
           @config["syntax_highlighter_opts"] ||= {}
           @config["coderay"] ||= {} # XXX: Legacy.
           modernize_coderay_config
-          make_accessible
         end
 
         def convert(content)
-          document = Kramdown::Document.new(content, @config)
+          document = Kramdown::Document.new(content, symbolize_keys(@config))
           html_output = document.to_html
           document.warnings.each do |warning|
             Jekyll.logger.warn "Kramdown warning:", warning
           end
           html_output
+        end
+
+        private
+        def symbolize_keys(hash)
+          hash.reduce({}) { |hsh, (k, v)| hsh.merge(k.to_sym => v) }
         end
 
         private
