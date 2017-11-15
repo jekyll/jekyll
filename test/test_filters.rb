@@ -68,6 +68,20 @@ class TestFilters < JekyllUnitTest
       )
     end
 
+    should "markdownify with simple string in inline mode" do
+      assert_equal(
+        "one <em>simple</em> string",
+        @filter.markdownify("one _simple_ string", :inline)
+      )
+    end
+
+    should "markdownify with multi-line string in inline mode" do
+      assert_equal(
+        "first line\nsecond line",
+        @filter.markdownify("first line\n\nsecond line", :inline)
+      )
+    end
+
     context "smartify filter" do
       should "convert quotes and typographic characters" do
         assert_equal(
