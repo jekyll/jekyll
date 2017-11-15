@@ -79,6 +79,7 @@
   * (#6519) Optimize images
   * (#6544) Site: Back to original main navigation
   * (#6545) Style mobile-docs select element
+  * Site: Search with DocSearch by @Algolia (#6557)
 
 ### Bug Fixes
 
