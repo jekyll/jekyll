@@ -172,6 +172,10 @@ h6:hover .header-link {
   }
 }
 
+@media (max-width: 950px) {
+  .searchbox { display: none;}
+}
+
 /* Footer */
 
 footer {
