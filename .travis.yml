@@ -7,8 +7,6 @@ sudo: false
 rvm:
   - &ruby1 2.4.2
   - &ruby2 2.3.5
-  - &ruby3 2.2.8
-  - &ruby4 2.1.10
   - &jruby jruby-9.1.13.0
 
 matrix:
