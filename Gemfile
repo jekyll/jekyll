@@ -7,8 +7,8 @@ gem "rake", "~> 12.0"
 
 gem "rouge", ENV["ROUGE"] if ENV["ROUGE"]
 
-# Dependency of jekyll-mentions. RubyGems in Ruby 2.1 doesn't shield us from this.
-gem "activesupport", "~> 4.2", :groups => [:test_legacy, :site] if RUBY_VERSION < "2.2.2"
+# Dependency of jekyll-mentions.
+gem "activesupport", "~> 4.2", :groups => [:test_legacy, :site]
 
 group :development do
   gem "launchy", "~> 2.3"
@@ -23,11 +23,10 @@ end
 
 group :test do
   gem "codeclimate-test-reporter", "~> 1.0.5"
-  gem "cucumber", RUBY_VERSION >= "2.2" ? "~> 3.0" : "3.0.1"
+  gem "cucumber", "~> 3.0"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
-  # nokogiri v1.8 does not work with ruby 2.1 and below
-  gem "nokogiri", RUBY_VERSION >= "2.2" ? "~> 1.7" : "~> 1.7.0"
+  gem "nokogiri", "~> 1.7"
   gem "rspec"
   gem "rspec-mocks"
   gem "rubocop", "~> 0.51.0"
@@ -40,7 +39,7 @@ end
 #
 
 group :test_legacy do
-  if RUBY_PLATFORM =~ %r!cygwin! || RUBY_VERSION.start_with?("2.2")
+  if RUBY_PLATFORM =~ %r!cygwin!
     gem "test-unit"
   end
 
