@@ -71,16 +71,16 @@
 
 ### Site Enhancements
 
-  * (#6389) Add special styling for code-blocks run in shell
-  * (#6447) Add post about diversity
-  * (#6457) Update list of files excluded from Docs site
-  * (#6460) Update site History
-  * (#6476) Add default twitter card image
-  * (#6491) Update normalize.css to v7.0.0
-  * (#6519) Optimize images
-  * (#6544) Site: Back to original main navigation
-  * (#6545) Style mobile-docs select element
-  * Site: Search with DocSearch by @Algolia (#6557)
+  * Add special styling for code-blocks run in shell (#6389)
+  * Add post about diversity (#6447)
+  * Update list of files excluded from Docs site (#6457)
+  * Update site History (#6460)
+  * Add default twitter card image (#6476)
+  * Update normalize.css to v7.0.0 (#6491)
+  * Optimize images (#6519)
+  * Back to original main navigation (#6544)
+  * Styles: mobile-docs select element (#6545)
+  * Search with DocSearch by @Algolia (#6557)
 
 ### Bug Fixes
 
