@@ -3,9 +3,15 @@
 class Kramdown::Parser::SmartyPants < Kramdown::Parser::Kramdown
   def initialize(source, options)
     super
-    @block_parsers = [:block_html]
+    @block_parsers = [:block_html, :content]
     @span_parsers =  [:smart_quotes, :html_entity, :typographic_syms, :span_html]
   end
+
+  CONTENT_MATCH = %r!^.*\n!
+  def parse_content
+    add_text(@src.scan(CONTENT_MATCH), @tree)
+  end
+  define_parser(:content, %r!^!)
 end
 
 module Jekyll
