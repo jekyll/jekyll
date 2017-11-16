@@ -123,6 +123,12 @@ class TestFilters < JekyllUnitTest
           @filter.smartify(404)
         )
       end
+
+      should "not output any warnings" do
+        assert_empty(
+          capture_output { @filter.smartify("Test") }
+        )
+      end
     end
 
     should "sassify with simple string" do
