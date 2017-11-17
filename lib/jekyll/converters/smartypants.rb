@@ -7,11 +7,10 @@ class Kramdown::Parser::SmartyPants < Kramdown::Parser::Kramdown
     @span_parsers =  [:smart_quotes, :html_entity, :typographic_syms, :span_html]
   end
 
-  CONTENT_MATCH = %r!^.*\n!
   def parse_content
-    add_text(@src.scan(CONTENT_MATCH), @tree)
+    add_text @src.scan(%r!\A.*\n!)
   end
-  define_parser(:content, %r!^!)
+  define_parser(:content, %r!\A!)
 end
 
 module Jekyll
