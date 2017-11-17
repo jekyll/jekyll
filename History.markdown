@@ -85,6 +85,7 @@
 ### Bug Fixes
 
   * Raise when theme root directory is not available (#6455)
+  * Avoid block parser warning in SmartyPants (#6565)
 
 ## 3.6.2 / 2017-10-21
 
