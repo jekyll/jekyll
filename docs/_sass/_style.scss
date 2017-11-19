@@ -190,18 +190,14 @@ h6:hover .header-link {
 @media (max-width: 580px) {
   header {
     .flexbox { height: auto }
-    .logo img {
-      margin-top: 0;
-    }
+    .logo img { margin-top: 0 }
   }
-}
-@media (max-width: 890px) {
-  .meta { display: none }
 }
 @media (max-width: 768px) {
-  .main-nav ul {
-    text-align: right;
-  }
+  .main-nav ul { text-align: right }
+}
+@media (max-width: 799px) {
+  .searchbox { display: none }
 }
 @media (max-width: 830px) {
   .main-nav {
@@ -209,9 +205,8 @@ h6:hover .header-link {
     .hide-on-mobiles { display: none; }
   }
 }
-
-@media (max-width: 799px) {
-  .searchbox { display: none;}
+@media (max-width: 890px) {
+  .meta { display: none; }
 }
 
 /* Footer */
