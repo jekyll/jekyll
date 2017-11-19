@@ -81,6 +81,7 @@
   * Back to original main navigation (#6544)
   * Styles: mobile-docs select element (#6545)
   * Search with DocSearch by @Algolia (#6557)
+  * Site header redesign (#6567)
 
 ### Bug Fixes
 
