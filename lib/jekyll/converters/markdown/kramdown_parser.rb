@@ -36,7 +36,7 @@ module Jekyll
         end
 
         def convert(content)
-          document = Kramdown::Document.new(content, symbolize_keys(@config))
+          document = Kramdown::Document.new(content, symbolize_config)
           html_output = document.to_html
           document.warnings.each do |warning|
             Jekyll.logger.warn "Kramdown warning:", warning
@@ -45,8 +45,10 @@ module Jekyll
         end
 
         private
-        def symbolize_keys(hash)
-          hash.reduce({}) { |hsh, (k, v)| hsh.merge(k.to_sym => v) }
+        def symbolize_config
+          @config.keys.each_with_object({}) do |key, obj|
+            obj[key.to_sym] = @config[key]
+          end
         end
 
         private
