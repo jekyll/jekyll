@@ -1,6 +1,6 @@
 <header>
   <nav class="mobile-nav show-on-mobiles">
-    {% include primary-nav-items.html %}
+    {% include mobile-nav-items.html %}
   </nav>
   <div class="flexbox">
     <div class="center-on-mobiles">
@@ -16,6 +16,15 @@
     </nav>
     <div class="search hide-on-mobiles">
       {% include search/input.html %}
+
+      <ul class="meta">
+        <li>
+          <a href="#">v{{ jekyll.version }}</a>
+        </li>
+        <li>
+          <a href="{{ site.repository }}">GitHub</a>
+        </li>
+      </ul>
     </div>
   </div>
 </header>

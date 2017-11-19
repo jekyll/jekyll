@@ -82,7 +82,20 @@ nav {
   li { display: inline-block; }
 }
 
-.main-nav {
+.meta {
+  display: inline-block;
+  margin: 0;
+  margin-left: 10px;
+  padding: 0;
+  white-space: nowrap;
+
+  li {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.main-nav, .meta {
 
   li {
 
@@ -181,6 +194,9 @@ h6:hover .header-link {
       margin-top: 0;
     }
   }
+}
+@media (max-width: 890px) {
+  .meta { display: none }
 }
 @media (max-width: 768px) {
   .main-nav ul {
