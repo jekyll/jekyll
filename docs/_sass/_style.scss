@@ -70,7 +70,7 @@ header {
   .search .svg-icons { display: none }
 }
 
-nav {
+nav, .meta {
 
   ul {
     padding: 0;
@@ -82,17 +82,10 @@ nav {
   li { display: inline-block; }
 }
 
-.meta {
-  display: inline-block;
-  margin: 0;
+.meta ul {
   margin-left: 10px;
-  padding: 0;
-  white-space: nowrap;
 
-  li {
-    display: inline-block;
-    vertical-align: middle;
-  }
+  li { vertical-align: middle; }
 }
 
 .main-nav, .meta {
@@ -193,11 +186,11 @@ h6:hover .header-link {
     .logo img { margin-top: 0 }
   }
 }
+@media (max-width: 699px) {
+  .searchbox { display: none }
+}
 @media (max-width: 768px) {
   .main-nav ul { text-align: right }
-}
-@media (max-width: 799px) {
-  .searchbox { display: none }
 }
 @media (max-width: 830px) {
   .main-nav {
