@@ -82,6 +82,7 @@
   * Styles: mobile-docs select element (#6545)
   * Search with DocSearch by @Algolia (#6557)
   * Site header redesign (#6567)
+  * Move logo above site navigation on small screens (#6570)
 
 ### Bug Fixes
 
