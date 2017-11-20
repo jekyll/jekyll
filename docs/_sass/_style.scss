@@ -177,9 +177,6 @@ h6:hover .header-link {
   opacity: 1;
 }
 
-@media (max-width: 568px) {
-  header { padding-bottom: 0 }
-}
 @media (max-width: 580px) {
   header {
     .flexbox { height: auto }
