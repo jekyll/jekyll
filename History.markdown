@@ -88,6 +88,7 @@
 
   * Raise when theme root directory is not available (#6455)
   * Avoid block parser warning in SmartyPants (#6565)
+  * Fail gracefully if &#34;sass&#34; gem cannot be loaded (#6573)
 
 ## 3.6.2 / 2017-10-21
 
