@@ -46,7 +46,7 @@ module Jekyll
           self.content = $POSTMATCH
           self.data = SafeYAML.load(Regexp.last_match(1))
         end
-      rescue SyntaxError => e
+      rescue Psych::SyntaxError => e
         Jekyll.logger.warn "YAML Exception reading #{filename}: #{e.message}"
         raise e if self.site.config["strict_front_matter"]
       rescue StandardError => e
