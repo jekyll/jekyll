@@ -53,6 +53,7 @@
   * Dependencies: upgrade to toml 0.2.0 (#6541)
   * Lock to cucumber 3.0.1 on Ruby 2.1 (#6546)
   * Bump JRuby version in Travis config (#6561)
+  * Rescue from Psych::SyntaxError instead of SyntaxError after parsing YAML (#5828)
 
 ### Minor Enhancements
 
