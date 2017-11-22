@@ -100,6 +100,10 @@ class TestFilters < JekyllUnitTest
         assert_equal "“", @filter.smartify("&ldquo;")
       end
 
+      should "convert multiple lines" do
+        assert_equal "…\n…", @filter.smartify("...\n...")
+      end
+
       should "allow raw HTML passthrough" do
         assert_equal(
           "Span HTML is <em>not</em> escaped",
@@ -121,6 +125,12 @@ class TestFilters < JekyllUnitTest
         assert_equal(
           "404",
           @filter.smartify(404)
+        )
+      end
+
+      should "not output any warnings" do
+        assert_empty(
+          capture_output { @filter.smartify("Test") }
         )
       end
     end
