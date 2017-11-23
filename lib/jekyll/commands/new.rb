@@ -87,7 +87,7 @@ group :jekyll_plugins do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 RUBY
         end
@@ -128,7 +128,12 @@ RUBY
 
         def after_install(path, options = {})
           unless options["blank"] || options["skip-bundle"]
-            bundle_install path
+            begin
+              require "bundler"
+              bundle_install path
+            rescue LoadError
+              Jekyll.logger.info "Could not load Bundler. Bundle install skipped."
+            end
           end
 
           Jekyll.logger.info "New jekyll site installed in #{path.cyan}."
@@ -136,13 +141,15 @@ RUBY
         end
 
         def bundle_install(path)
-          Jekyll::External.require_with_graceful_fail "bundler"
           Jekyll.logger.info "Running bundle install in #{path.cyan}..."
           Dir.chdir(path) do
-            process, output = Jekyll::Utils::Exec.run("bundle", "install")
+            exe = Gem.bin_path("bundler", "bundle")
+            process, output = Jekyll::Utils::Exec.run("ruby", exe, "install")
+
             output.to_s.each_line do |line|
               Jekyll.logger.info("Bundler:".green, line.strip) unless line.to_s.empty?
             end
+
             raise SystemExit unless process.success?
           end
         end

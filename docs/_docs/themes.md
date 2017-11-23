@@ -47,7 +47,7 @@ To locate a theme's files on your computer:
 
 2. Open the theme's directory in Finder or Explorer:
 
-   ```shell
+   ```sh
    # On MacOS
    open $(bundle show minima)
    # On Windows
@@ -88,7 +88,7 @@ With a clear understanding of the theme's files, you can now override any theme 
 
 Let's say, for a second example, you want to override Minima's footer. In your Jekyll site, create an `_includes` folder and add a file in it called `footer.html`. Jekyll will now use your site's `footer.html` file instead of the `footer.html` file from the Minima theme gem.
 
-To modify any stylesheet you must take the extra step of also copying the main sass file (`_sass/minima.scss` in the Minima theme) into the `_sass` directory in your site's source. 
+To modify any stylesheet you must take the extra step of also copying the main sass file (`_sass/minima.scss` in the Minima theme) into the `_sass` directory in your site's source.
 
 Jekyll will look first to your site's content before looking to the theme's defaults for any requested file in the following folders:
 
@@ -125,8 +125,18 @@ To install a gem-based theme:
 
 1. Add the theme to your site's `Gemfile`:
 
-   ```sh
+   ```ruby
+   # ./Gemfile
+
    gem "jekyll-theme-awesome"
+   ```
+  Or if you've started with the `jekyll new` command, replace `gem "minima", "~> 2.0"` with your theme-gem:
+
+   ```diff
+   # ./Gemfile
+
+   - gem "minima", "~> 2.0"
+   + gem "jekyll-theme-awesome"
    ```
 
 2. Install the theme:
@@ -137,7 +147,7 @@ To install a gem-based theme:
 
 3. Add the following to your site's `_config.yml` to activate the theme:
 
-   ```sh
+   ```yaml
    theme: jekyll-theme-awesome
    ```
 
@@ -208,13 +218,15 @@ _sass
 
 Your theme's styles can be included in the user's stylesheet using the `@import` directive.
 
+{% raw %}
 ```css
-{% raw %}@import "{{ site.theme }}";{% endraw %}
+@import "{{ site.theme }}";
 ```
+{% endraw %}
 
 ### Theme-gem dependencies
 
-From `v3.5`, Jekyll will automatically require all whitelisted `runtime_dependencies` of your theme-gem even if they're not explicitly included under the `gems` array in the site's config file. (NOTE: whitelisting is only required when building or serving with the `--safe` option.)
+From `v3.5`, Jekyll will automatically require all whitelisted `runtime_dependencies` of your theme-gem even if they're not explicitly included under the `plugins` array in the site's config file. (Note: whitelisting is only required when building or serving with the `--safe` option.)
 
 With this, the end-user need not keep track of the plugins required to be included in their config file for their theme-gem to work as intended.
 

@@ -1,5 +1,3 @@
-markdown: kramdown
-highlighter: rouge
 sass:
   style: compressed
 
@@ -8,7 +6,6 @@ google_analytics_id: UA-50755011-1
 google_site_verification: onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY
 
 repository: https://github.com/jekyll/jekyll
-help_url: https://github.com/jekyll/jekyll-help
 
 timezone: America/Los_Angeles
 
@@ -25,7 +22,7 @@ defaults:
       type: "posts"
     values:
       layout: "news_item"
-
+      image: /img/twitter-card.png
 
 collections:
   docs:
@@ -57,4 +54,6 @@ plugins:
 
 exclude:
   - .gitignore
-  - README.md
+  - CNAME
+  - icomoon-selection.json
+  - readme.md

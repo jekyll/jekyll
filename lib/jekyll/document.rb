@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # frozen_string_literal: true
 
 module Jekyll
@@ -267,7 +266,7 @@ module Jekyll
           merge_defaults
           read_content(opts)
           read_post_data
-        rescue => e
+        rescue StandardError => e
           handle_read_error(e)
         end
       end
@@ -464,7 +463,7 @@ module Jekyll
 
     private
     def handle_read_error(error)
-      if error.is_a? SyntaxError
+      if error.is_a? Psych::SyntaxError
         Jekyll.logger.error "Error:", "YAML Exception reading #{path}: #{error.message}"
       else
         Jekyll.logger.error "Error:", "could not read file #{path}: #{error.message}"

@@ -17,6 +17,15 @@ module Jekyll
             "Skips the initial site build which occurs before the server is started.",],
         }.freeze
 
+        DIRECTORY_INDEX = %w(
+          index.htm
+          index.html
+          index.rhtml
+          index.cgi
+          index.xml
+          index.json
+        ).freeze
+
         #
 
         def init_with_program(prog)
@@ -85,13 +94,7 @@ module Jekyll
             :StartCallback      => start_callback(opts["detach"]),
             :BindAddress        => opts["host"],
             :Port               => opts["port"],
-            :DirectoryIndex     => %W(
-              index.htm
-              index.html
-              index.rhtml
-              index.cgi
-              index.xml
-            ),
+            :DirectoryIndex     => DIRECTORY_INDEX,
           }
 
           opts[:DirectoryIndex] = [] if opts[:JekyllOptions]["show_dir_listing"]
@@ -205,27 +208,22 @@ module Jekyll
         # forget to add one of the certificates.
 
         private
-        # rubocop:disable Metrics/AbcSize
         def enable_ssl(opts)
-          return if !opts[:JekyllOptions]["ssl_cert"] && !opts[:JekyllOptions]["ssl_key"]
-          if !opts[:JekyllOptions]["ssl_cert"] || !opts[:JekyllOptions]["ssl_key"]
-            # rubocop:disable Style/RedundantException
-            raise RuntimeError, "--ssl-cert or --ssl-key missing."
-          end
+          cert, key, src =
+            opts[:JekyllOptions].values_at("ssl_cert", "ssl_key", "source")
+
+          return if cert.nil? && key.nil?
+          raise "Missing --ssl_cert or --ssl_key. Both are required." unless cert && key
+
           require "openssl"
           require "webrick/https"
-          source_key = Jekyll.sanitized_path(opts[:JekyllOptions]["source"], \
-                    opts[:JekyllOptions]["ssl_key" ])
-          source_certificate = Jekyll.sanitized_path(opts[:JekyllOptions]["source"], \
-                    opts[:JekyllOptions]["ssl_cert"])
-          opts[:SSLCertificate] =
-            OpenSSL::X509::Certificate.new(File.read(source_certificate))
-          opts[:SSLPrivateKey ] = OpenSSL::PKey::RSA.new(File.read(source_key))
+
+          opts[:SSLCertificate] = OpenSSL::X509::Certificate.new(read_file(src, cert))
+          opts[:SSLPrivateKey ] = OpenSSL::PKey::RSA.new(read_file(src, key))
           opts[:SSLEnable] = true
         end
 
         private
-
         def start_callback(detached)
           unless detached
             proc do
@@ -238,6 +236,11 @@ module Jekyll
         def mime_types
           file = File.expand_path("../mime.types", __dir__)
           WEBrick::HTTPUtils.load_mime_types(file)
+        end
+
+        private
+        def read_file(source_dir, file_path)
+          File.read(Jekyll.sanitized_path(source_dir, file_path))
         end
       end
     end

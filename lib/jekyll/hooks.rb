@@ -39,6 +39,9 @@ module Jekyll
         :post_render => [],
         :post_write  => [],
       },
+      :clean     => {
+        :on_obsolete => [],
+      },
     }
 
     # map of all hooks and their priorities

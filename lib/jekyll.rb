@@ -32,8 +32,10 @@ require "safe_yaml/load"
 require "liquid"
 require "kramdown"
 require "colorator"
+require "i18n"
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
+I18n.config.available_locales = :en
 
 module Jekyll
   # internal requires
@@ -119,7 +121,7 @@ module Jekyll
     # timezone - the IANA Time Zone
     #
     # Returns nothing
-    # rubocop:disable Style/AccessorMethodName
+    # rubocop:disable Naming/AccessorMethodName
     def set_timezone(timezone)
       ENV["TZ"] = if Utils::Platforms.really_windows?
                     Utils::WinTZ.calculate(timezone)
@@ -127,7 +129,7 @@ module Jekyll
                     timezone
                   end
     end
-    # rubocop:enable Style/AccessorMethodName
+    # rubocop:enable Naming/AccessorMethodName
 
     # Public: Fetch the logger instance for this Jekyll process.
     #

@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # frozen_string_literal: true
 
 module Jekyll
@@ -104,11 +103,9 @@ module Jekyll
       #
       # Returns true if the given key is present
       def key?(key)
-        if self.class.mutable?
-          @mutations.key?(key)
-        else
-          !key.nil? && (respond_to?(key) || fallback_data.key?(key))
-        end
+        return false if key.nil?
+        return true if self.class.mutable? && @mutations.key?(key)
+        respond_to?(key) || fallback_data.key?(key)
       end
 
       # Generates a list of keys with user content as their values.

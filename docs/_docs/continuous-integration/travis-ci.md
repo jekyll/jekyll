@@ -49,7 +49,7 @@ Some options can be specified via command-line switches. Check out the
 For example to avoid testing external sites, use this command:
 
 ```sh
-$ bundle exec htmlproofer ./_site --disable-external
+bundle exec htmlproofer ./_site --disable-external
 ```
 
 ### The HTML Proofer Library
