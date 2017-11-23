@@ -53,6 +53,7 @@
   * Dependencies: upgrade to toml 0.2.0 (#6541)
   * Lock to cucumber 3.0.1 on Ruby 2.1 (#6546)
   * Bump JRuby version in Travis config (#6561)
+  * Rescue from Psych::SyntaxError instead of SyntaxError after parsing YAML (#5828)
 
 ### Minor Enhancements
 
@@ -88,6 +89,7 @@
 
   * Raise when theme root directory is not available (#6455)
   * Avoid block parser warning in SmartyPants (#6565)
+  * Fail gracefully if &#34;sass&#34; gem cannot be loaded (#6573)
 
 ## 3.6.2 / 2017-10-21
 
