@@ -1030,6 +1030,20 @@ code.output {
   text-shadow: 0 1px 0 rgba(255,255,255,.25);
 }
 
+/* Version badge */
+
+.version-badge {
+  margin-left: .25em;
+  padding: 0.2em;
+  font-size: .75em;
+  font-weight: 400;
+  background-color: #fc0;
+  color: #222;
+  text-shadow: none;
+  vertical-align: text-bottom;
+  border-radius: 3.75px;
+}
+
 /* Responsive tables */
 
 @media (max-width: 768px) {
