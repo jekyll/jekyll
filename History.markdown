@@ -85,6 +85,7 @@
   * Site header redesign (#6567)
   * Move logo above site navigation on small screens (#6570)
   * Docs: Include version badge for latest features (#6574)
+  * Use version-badge on an existing feature intro (#6575)
 
 ### Bug Fixes
 
