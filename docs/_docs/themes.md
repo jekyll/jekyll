@@ -224,9 +224,9 @@ Your theme's styles can be included in the user's stylesheet using the `@import`
 ```
 {% endraw %}
 
-### Theme-gem dependencies
+### Theme-gem dependencies {%- include docs_version_badge.html version="3.5.0" -%}
 
-From `v3.5`, Jekyll will automatically require all whitelisted `runtime_dependencies` of your theme-gem even if they're not explicitly included under the `plugins` array in the site's config file. (Note: whitelisting is only required when building or serving with the `--safe` option.)
+Jekyll will automatically require all whitelisted `runtime_dependencies` of your theme-gem even if they're not explicitly included under the `plugins` array in the site's config file. (Note: whitelisting is only required when building or serving with the `--safe` option.)
 
 With this, the end-user need not keep track of the plugins required to be included in their config file for their theme-gem to work as intended.
 
