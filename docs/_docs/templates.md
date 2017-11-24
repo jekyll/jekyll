@@ -429,7 +429,7 @@ The default is `default`. They are as follows (with what they filter):
 - `default`: spaces and non-alphanumeric characters
 - `pretty`: spaces and non-alphanumeric characters except for `._~!$&'()+,;=@`
 - `ascii`: spaces, non-alphanumeric, and non-ASCII characters
-- `latin`: like `default`, except Latin characters are first transliterated (e.g. `àèïòü` to `aeiou`)
+- `latin`: like `default`, except Latin characters are first transliterated (e.g. `àèïòü` to `aeiou`) {%- include docs_version_badge.html version="3.7.0" -%}
 
 ## Tags
 
