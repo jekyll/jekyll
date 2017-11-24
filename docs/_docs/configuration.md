@@ -549,7 +549,7 @@ defaults:
 In this example, the `layout` is set to `default` inside the
 [collection](../collections/) with the name `my_collection`.
 
-It is also possible to use glob patterns when matching defaults. For example, it is possible to set specific layout for each `special-page.html` in any subfolder of `section` folder.
+It is also possible to use glob patterns when matching defaults. For example, it is possible to set specific layout for each `special-page.html` in any subfolder of `section` folder. {%- include docs_version_badge.html version="3.7.0" -%}
 
 ```yaml
 collections:
