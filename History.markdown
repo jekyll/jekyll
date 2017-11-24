@@ -84,6 +84,7 @@
   * Search with DocSearch by @Algolia (#6557)
   * Site header redesign (#6567)
   * Move logo above site navigation on small screens (#6570)
+  * Docs: Include version badge for latest features (#6574)
 
 ### Bug Fixes
 
