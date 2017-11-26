@@ -21,6 +21,14 @@ class Jekyll::ThemeBuilder
     initialize_git_repo
   end
 
+  def user_name
+    @user_name ||= `git config user.name`.chomp
+  end
+
+  def user_email
+    @user_email ||= `git config user.email`.chomp
+  end
+
   private
 
   def root
@@ -83,14 +91,6 @@ class Jekyll::ThemeBuilder
     Jekyll.logger.info "initialize", path.join(".git").to_s
     Dir.chdir(path.to_s) { `git init` }
     write_file(".gitignore", template("gitignore"))
-  end
-
-  def user_name
-    @user_name ||= `git config user.name`.chomp
-  end
-
-  def user_email
-    @user_email ||= `git config user.email`.chomp
   end
 
   class ERBRenderer
