@@ -23,14 +23,14 @@ end
 
 group :test do
   gem "codeclimate-test-reporter", "~> 1.0.5"
-  gem "cucumber", "~> 2.1"
+  gem "cucumber", RUBY_VERSION >= "2.2" ? "~> 3.0" : "3.0.1"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
   # nokogiri v1.8 does not work with ruby 2.1 and below
   gem "nokogiri", RUBY_VERSION >= "2.2" ? "~> 1.7" : "~> 1.7.0"
   gem "rspec"
   gem "rspec-mocks"
-  gem "rubocop", "~> 0.50.0"
+  gem "rubocop", "~> 0.51.0"
   gem "test-dependency-theme", :path => File.expand_path("test/fixtures/test-dependency-theme", __dir__)
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)
 
@@ -76,7 +76,7 @@ group :jekyll_optional_dependencies do
   gem "kramdown", "~> 1.14"
   gem "mime-types", "~> 3.0"
   gem "rdoc", "~> 5.0"
-  gem "toml", "~> 0.1.0"
+  gem "toml", "~> 0.2.0"
 
   platform :ruby, :mswin, :mingw, :x64_mingw do
     gem "classifier-reborn", "~> 2.1.0"

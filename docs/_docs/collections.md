@@ -46,16 +46,14 @@ defaults:
       layout: page
 ```
 
-**New**: You can optionally specify a directory if you want to store all your collections
-in the same place:
+<div class="note">
+  <h5>Gather your collections {%- include docs_version_badge.html version="3.7.0" -%}</h5>
 
-```yaml
-collections:
-  collections_dir: my_collections
-```
+  <p>You can optionally specify a directory to store all your collections in the same place with <code>collections_dir: my_collections</code></p>
 
-Then Jekyll will look in `my_collections/_books` for the `books` collection, and
-in `my_collections/_recipes` for the `recipes` collection.
+  <p>Then Jekyll will look in <code>my_collections/_books</code> for the <code>books</code> collection, and
+  in <code>my_collections/_recipes</code> for the <code>recipes</code> collection.</p>
+</div>
 
 ### Step 2: Add your content {#step2}
 
@@ -88,6 +86,20 @@ This will produce a file for each document in the collection.
 For example, if you have `_my_collection/some_subdir/some_doc.md`,
 it will be rendered using Liquid and the Markdown converter of your
 choice and written out to `<dest>/my_collection/some_subdir/some_doc.html`.
+
+If you wish a specific page to be shown when accessing `/my_collection/`,
+simply add `permalink: /my_collection/index.html` to a page.
+To list items from the collection, on that page or any other, you can use:
+
+{% raw %}
+```liquid
+{% for item in site.my_collection %}
+  <h2>{{ item.title }}</h2>
+  <p>{{ item.description }}</p>
+  <p><a href="{{ item.url }}">{{ item.title }}</a></p>
+{% endfor %}
+```
+{% endraw %}
 
 <div class="note info">
   <h5>Don't forget to add YAML for processing</h5>
@@ -454,7 +466,7 @@ works:
 
 Every album in the collection could be listed on a single page with a template:
 
-```html
+```liquid
 {% raw %}
 {% for album in site.albums %}
   <h2>{{ album.title }}</h2>

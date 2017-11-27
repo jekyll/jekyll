@@ -360,7 +360,7 @@ Collections have their own way of setting permalinks. Additionally, collections 
 
 If you want to flatten your pages (pull them out of subfolders) in the `_site` directory when your site builds (similar to posts), add the `permalink` property to the front matter of each page, with no path specified:
 
-```
+```yaml
 ---
 title: My page
 permalink: mypageurl.html
