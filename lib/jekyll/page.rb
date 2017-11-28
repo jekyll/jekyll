@@ -184,15 +184,4 @@ module Jekyll
       true
     end
   end
-
-  # A Jekyll::Page subclass to handle processing files that exist outside the
-  # site's configured source directory.
-  # The resulting object will be processed by Liquid and rendered directly at
-  # the destination, without an intermediate reading to determine page-data
-  # and page-content based on Front Matter delimiters.
-  class PageWithoutAFile < Page
-    def read_yaml(*)
-      @data ||= {}
-    end
-  end
 end
