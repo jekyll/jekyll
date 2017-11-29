@@ -57,6 +57,7 @@
   * Drop forwarding to private methods by exposing those methods as public (#6577)
   * Upgrade pygments to v1.x (#5937)
   * Bump yajl-ruby (#6582)
+  * Cleanup test_redcarpet.rb (#6584)
 
 ### Minor Enhancements
 
