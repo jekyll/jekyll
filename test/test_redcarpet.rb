@@ -46,16 +46,17 @@ class TestRedcarpet < JekyllUnitTest
       end
 
       should "render fenced code blocks with syntax highlighting" do
-        assert_equal "<div class=\"highlight\"><pre><code class=\"language-ruby\" "\
-                     "data-lang=\"ruby\"><span class=\"nb\">puts</span> <span "\
-                     "class=\"s2\">&quot;Hello world&quot;</span>\n</code></pre></div>",
-                     @markdown.convert(
-                       <<-EOS
+        assert_equal \
+          "<div class=\"highlight\"><pre><code class=\"language-ruby\" " \
+          "data-lang=\"ruby\"><span></span><span class=\"nb\">puts</span> <span " \
+          "class=\"s2\">&quot;Hello world&quot;</span>\n</code></pre></div>",
+          @markdown.convert(
+            <<-EOS
 ```ruby
 puts "Hello world"
 ```
 EOS
-                     ).strip
+          ).strip
       end
     end
 
