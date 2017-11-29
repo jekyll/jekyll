@@ -1,20 +1,52 @@
 ---
 AllCops:
-  TargetRubyVersion: 2.0
+  TargetRubyVersion: 2.1
   Include:
     - lib/**/*.rb
   Exclude:
-    - lib/jekyll/renderer.rb
     - bin/**/*
     - exe/**/*
     - benchmark/**/*
     - script/**/*
     - vendor/**/*
+    - tmp/**/*
+Layout/AlignArray:
+  Enabled: false
+Layout/AlignHash:
+  EnforcedHashRocketStyle: table
+Layout/AlignParameters:
+  Enabled: false
+Layout/EmptyLinesAroundAccessModifier:
+  Enabled: false
+Layout/EmptyLinesAroundModuleBody:
+  Enabled: false
+Layout/EndOfLine:
+  EnforcedStyle: native
+Layout/ExtraSpacing:
+  AllowForAlignment: true
+Layout/FirstParameterIndentation:
+  EnforcedStyle: consistent
+Layout/IndentationWidth:
+  Severity: error
+Layout/IndentArray:
+  EnforcedStyle: consistent
+Layout/IndentHash:
+  EnforcedStyle: consistent
+Layout/IndentHeredoc:
+  Enabled: false
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: indented
+Layout/SpaceInsideBrackets:
+  Enabled: false
 Lint/EndAlignment:
   Severity: error
 Lint/UnreachableCode:
   Severity: error
 Lint/UselessAccessModifier:
+  Enabled: false
+Lint/Void:
   Enabled: false
 Metrics/AbcSize:
   Max: 21
@@ -36,6 +68,8 @@ Metrics/LineLength:
     - !ruby/regexp /features\/.*.rb/
     - Rakefile
     - rake/*.rake
+    - Gemfile
+    - jekyll.gemspec
   Max: 90
   Severity: warning
 Metrics/MethodLength:
@@ -48,6 +82,10 @@ Metrics/ParameterLists:
   Max: 4
 Metrics/PerceivedComplexity:
   Max: 8
+Naming/FileName:
+  Enabled: false
+Naming/HeredocDelimiterNaming:
+  Enabled: false
 Security/MarshalLoad:
   Exclude:
     - !ruby/regexp /test\/.*.rb$/
@@ -58,37 +96,20 @@ Security/YAMLLoad:
     - !ruby/regexp /test\/.*.rb$/
 Style/Alias:
   Enabled: false
-Style/AlignArray:
-  Enabled: false
-Style/AlignHash:
-  EnforcedHashRocketStyle: table
-Style/AlignParameters:
-  Enabled: false
-  EnforcedStyle: with_fixed_indentation
 Style/AndOr:
   Severity: error
-Style/Attr:
-  Enabled: false
 Style/BracesAroundHashParameters:
   Enabled: false
 Style/ClassAndModuleChildren:
   Enabled: false
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: always
 Style/Documentation:
   Enabled: false
   Exclude:
     - !ruby/regexp /features\/.*.rb$/
 Style/DoubleNegation:
   Enabled: false
-Style/EmptyLinesAroundAccessModifier:
-  Enabled: false
-Style/EmptyLinesAroundModuleBody:
-  Enabled: false
-Style/ExtraSpacing:
-  AllowForAlignment: true
-Style/FileName:
-  Enabled: false
-Style/FirstParameterIndentation:
-  EnforcedStyle: consistent
 Style/GuardClause:
   Enabled: false
 Style/HashSyntax:
@@ -96,18 +117,10 @@ Style/HashSyntax:
   Severity: error
 Style/IfUnlessModifier:
   Enabled: false
-Style/IndentArray:
-  EnforcedStyle: consistent
-Style/IndentHash:
-  EnforcedStyle: consistent
-Style/IndentationWidth:
-  Severity: error
+Style/InverseMethods:
+  Enabled: false
 Style/ModuleFunction:
   Enabled: false
-Style/MultilineMethodCallIndentation:
-  EnforcedStyle: indented
-Style/MultilineOperationIndentation:
-  EnforcedStyle: indented
 Style/MultilineTernaryOperator:
   Severity: error
 Style/PercentLiteralDelimiters:
@@ -131,15 +144,11 @@ Style/SignalException:
   EnforcedStyle: only_raise
 Style/SingleLineMethods:
   Enabled: false
-Style/SpaceAroundOperators:
-  Enabled: false
-Style/SpaceInsideBrackets:
-  Enabled: false
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
+Style/SymbolArray:
+  Enabled: false
 Style/TrailingCommaInLiteral:
   EnforcedStyleForMultiline: consistent_comma
-Style/UnneededCapitalW:
-  Enabled: false

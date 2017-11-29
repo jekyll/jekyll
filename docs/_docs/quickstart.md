@@ -4,25 +4,25 @@ permalink: /docs/quickstart/
 ---
 
 
-If you already have a full [Ruby](https://www.ruby-lang.org/en/downloads/) development environment with all headers and [RubyGems](https://rubygems.org/pages/download) installed (see Jekyll's [requirements](/docs/installation/#requirements/)), you can create a new Jekyll site by doing the following:
+If you already have a full [Ruby](https://www.ruby-lang.org/en/downloads/) development environment with all headers and [RubyGems](https://rubygems.org/pages/download) installed (see Jekyll's [requirements](/docs/installation/#requirements)), you can create a new Jekyll site by doing the following:
 
 ```sh
 # Install Jekyll and Bundler gems through RubyGems
-~ $ gem install jekyll bundler
+gem install jekyll bundler
 
 # Create a new Jekyll site at ./myblog
-~ $ jekyll new myblog
+jekyll new myblog
 
 # Change into your new directory
-~ $ cd myblog
+cd myblog
 
 # Build the site on the preview server
-~/myblog $ bundle exec jekyll serve
+bundle exec jekyll serve
 
 # Now browse to http://localhost:4000
 ```
 
-If you encounter any unexpected errors during the above, please refer to the already-mentioned [requirements](/docs/installation/#requirements/) page, as you might be missing development headers or other prerequisites.
+If you encounter any unexpected errors during the above, please refer to the [troubleshooting](/docs/troubleshooting/#configuration-problems) page or the already-mentioned [requirements](/docs/installation/#requirements) page, as you might be missing development headers or other prerequisites.
 
 ## About Bundler
 

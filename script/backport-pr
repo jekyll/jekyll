@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+# This script is pulled from https://github.com/git-lfs/git-lfs/blob/master/script/backport-pr
+# Many thanks, git-lfs team!
+#
+# Backports a PR into a release branch:
+#
+#   # backport PR #1023 into 1.1-stable-backport-1023
+#   $ git checkout master
+#   $ git pull
+#   $ script/backport-pr 1.1 1023
+
+usage() {
+  echo "usage: $0 <minor-release-version> <pull-number>"
+  echo "example: $0 3.4 5623"
+}
+
+if test -z "$1"; then
+  echo "fatal: no minor release version, e.g. '3.4'" > /dev/stderr
+  usage
+  exit 1
+fi
+
+if test -z "$2"; then
+  echo "fatal: no pull request number, e.g. '5623'" > /dev/stderr
+  usage
+  exit 1
+fi
+
+relversion="v$1.x"
+relbranch="$1-stable"
+pr="$2"
+prbranch="$relbranch-backport-$pr"
+pullsurl="https://api.github.com/repos/jekyll/jekyll/pulls"
+prurl="https://api.github.com/repos/jekyll/jekyll/pulls/$pr"
+prjson="$(curl -n $pullsurl/$pr 2>/dev/null)"
+headref="$(echo $prjson | jq -r -e ".head.ref")"
+[ "$?" -ne 0 ] && {
+  echo "PR #$pr is invalid."
+  exit 1
+}
+prtitle="$(echo $prjson | jq -r ".title" | sed "s/\"/'/g")"
+
+git checkout -q -f $relbranch
+git clean -q -fdx
+git pull -q
+git checkout -q -f -B $prbranch
+
+commit=`git log -1 --pretty=%H "--grep=Merge pull request $pr" "--grep=Merge branch '.*$headref'" master`
+
+echo "Backporting:\n"
+
+git log -1 $commit
+
+conflicts=""
+
+# If we used regular merges, we'd use the `-m 1` flag for the cherry-pick
+# command, but since we do squash-merges, we don't want this.
+git cherry-pick -x --allow-empty $commit &> /dev/null || {
+  unmerged=$(git ls-files --unmerged --stage | cut -f 2 -d$'\t' | uniq)
+  conflicts="\n\nConflicting files:"
+  for file in $unmerged; do
+    git add "$file"
+    conflicts="$conflicts\n- $file"
+  done
+  git commit -q --no-edit
+}
+
+commitmsg="Backport $headref from #$pr to $relbranch"
+if [ "$conflicts" ]; then
+  commitmsg="$commitmsg [merge conflicts]"
+fi
+
+git commit -q --allow-empty --amend -m "$commitmsg"
+git push -q -f origin $prbranch
+git checkout -q -f $relbranch
+git branch -q -D $prbranch
+
+curl -in $pullsurl -d "{
+  \"title\": \"Backport #$pr for $relversion: $prtitle\",
+  \"head\": \"$prbranch\",
+  \"base\": \"$relbranch\",
+  \"body\": \"This backports #$pr.$conflicts\"
+}" 2>/dev/null

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "erb"
 
 module Jekyll
@@ -61,7 +63,6 @@ module Jekyll
         def gemfile_contents
           <<-RUBY
 source "https://rubygems.org"
-ruby RUBY_VERSION
 
 # Hello! This is where you manage which Jekyll version is used to run.
 # When you want to use a different version, change it below, save the
@@ -71,7 +72,7 @@ ruby RUBY_VERSION
 #
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
-gem "jekyll", "#{Jekyll::VERSION}"
+gem "jekyll", "~> #{Jekyll::VERSION}"
 
 # This is the default theme for new Jekyll sites. You may change this to anything you like.
 gem "minima", "~> 2.0"
@@ -82,11 +83,11 @@ gem "minima", "~> 2.0"
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
-   gem "jekyll-feed", "~> 0.6"
+  gem "jekyll-feed", "~> 0.6"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 RUBY
         end
@@ -109,11 +110,12 @@ RUBY
 
         def create_sample_files(path)
           FileUtils.cp_r site_template + "/.", path
+          FileUtils.chmod_R "u+w", path
           FileUtils.rm File.expand_path(scaffold_path, path)
         end
 
         def site_template
-          File.expand_path("../../site_template", File.dirname(__FILE__))
+          File.expand_path("../../site_template", __dir__)
         end
 
         def scaffold_path
@@ -126,7 +128,12 @@ RUBY
 
         def after_install(path, options = {})
           unless options["blank"] || options["skip-bundle"]
-            bundle_install path
+            begin
+              require "bundler"
+              bundle_install path
+            rescue LoadError
+              Jekyll.logger.info "Could not load Bundler. Bundle install skipped."
+            end
           end
 
           Jekyll.logger.info "New jekyll site installed in #{path.cyan}."
@@ -134,13 +141,15 @@ RUBY
         end
 
         def bundle_install(path)
-          Jekyll::External.require_with_graceful_fail "bundler"
           Jekyll.logger.info "Running bundle install in #{path.cyan}..."
           Dir.chdir(path) do
-            process, output = Jekyll::Utils::Exec.run("bundle", "install")
+            exe = Gem.bin_path("bundler", "bundle")
+            process, output = Jekyll::Utils::Exec.run("ruby", exe, "install")
+
             output.to_s.each_line do |line|
               Jekyll.logger.info("Bundler:".green, line.strip) unless line.to_s.empty?
             end
+
             raise SystemExit unless process.success?
           end
         end

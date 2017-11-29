@@ -17,7 +17,7 @@ Jekyll converts your site in the following order:
 1. **Site variables**. Jekyll looks across your files and populates [site variables]({% link _docs/variables.md %}), such as `site`, `page`, `post`, and collection objects. (From these objects, Jekyll determines the values for permalinks, tags, categories, and other details.)
 
 2. **Liquid**. Jekyll processes any [Liquid](https://github.com/Shopify/liquid) formatting in pages that contain [front matter]({% link _docs/frontmatter.md %}). You can identify Liquid as follows:
-   * **Liguid tags** start with `{% raw %}{%{% endraw %}` and end with a `{% raw %}%}{% endraw %}`. For example: `{% raw %}{% highlight %}{% endraw %}` or `{% raw %}{% seo %}{% endraw %}`. Tags can define blocks or be inline. Block-defining tags will also come with a corresponding end tag &mdash; for example, `{% raw %}{% endhighlight %}{% endraw %}`.
+   * **Liquid tags** start with `{% raw %}{%{% endraw %}` and end with a `{% raw %}%}{% endraw %}`. For example: `{% raw %}{% highlight %}{% endraw %}` or `{% raw %}{% seo %}{% endraw %}`. Tags can define blocks or be inline. Block-defining tags will also come with a corresponding end tag &mdash; for example, `{% raw %}{% endhighlight %}{% endraw %}`.
    * **Liquid variables** start and end with double curly braces. For example: `{% raw %}{{ site.myvariable }}{% endraw %}` or `{% raw %}{{ content }}{% endraw %}`.
    * **Liquid filters** start with a pipe character (`|`) and can only be used within **Liquid variables** after the variable string. For example: the `relative_url` filter in `{% raw %}{{ "css/main.css" | relative_url }}{% endraw %}`.
 
@@ -37,15 +37,19 @@ The following scenarios highlight potential problems you might encounter. These 
 
 In your layout file (`_layouts/default.html`), suppose you have a variable assigned:
 
+{% raw %}
+```liquid
+{% assign myvar = "joe" %}
 ```
-{% raw %}{% assign myvar = "joe" %}{% endraw %}
-```
+{% endraw %}
 
 On a page that uses the layout, you reference that variable:
 
+{% raw %}
+```liquid
+{{ myvar }}
 ```
-{% raw %}{{ myvar }}{% endraw %}
-```
+{% endraw %}
 
 The variable won't render because the page's order of interpretation is to render Liquid first and later process the Layout. When the Liquid rendering happens, the variable assignment isn't available.
 
@@ -63,9 +67,11 @@ This is a list:
 
 You include the file into an HTML file as follows:
 
+{% raw %}
 ```liquid
-{% raw %}{% include mycontent.md %}{% endraw %}
+{% include mycontent.md %}
 ```
+{% endraw %}
 
 The Markdown is not processed because first the Liquid (`include` tag) gets processed, inserting `mycontent.md` into the HTML file. *Then* the Markdown would get processed.
 
@@ -75,11 +81,13 @@ To make the code work, use HTML formatting in includes that are inserted into HT
 
 Note that `highlight` tags don't require Markdown to process. Suppose your include contains the following:
 
+{% raw %}
 ```liquid
-{% raw %}{% highlight javascript %}
+{% highlight javascript %}
 console.log('alert');
-{% endhighlight %}{% endraw %}
+{% endhighlight %}
 ```
+{% endraw %}
 
 The `highlight` tag *is* Liquid. (Liquid passes the content to Rouge or Pygments for syntax highlighting.) As a result, this code will actually convert to HTML with syntax highlighting. Jekyll does not need the Markdown filter to process `highlight` tags.
 
@@ -87,8 +95,9 @@ The `highlight` tag *is* Liquid. (Liquid passes the content to Rouge or Pygments
 
 Suppose you try to mix Liquid's `assign` tag with JavaScript, like this:
 
+{% raw %}
 ```javascript
-{% raw %}<button onclick="someFunction()">Click me</button>
+<button onclick="someFunction()">Click me</button>
 
 <p id="intro"></p>
 
@@ -97,15 +106,17 @@ Suppose you try to mix Liquid's `assign` tag with JavaScript, like this:
 function someFunction() {
     document.getElementById("intro").innerHTML = someContent;
 }
-</script>{% endraw %}
+</script>
 ```
+{% endraw %}
 
 This won't work because the `assign` tag is only available during the Liquid rendering phase of the site. In this JavaScript example, the script executes when a user clicks a button ("Click me") on the HTML page. At that time, the Liquid logic is no longer available, so the `assign` tag wouldn't return anything.
 
 However, you can use Jekyll's site variables or Liquid to *populate* a script that is executed at a later time. For example, suppose you have the following property in your front matter: `someContent: "This is some content"`. You could do this:
 
+{% raw %}
 ```js
-{% raw %}<button onclick="someFunction()">Click me</button>
+<button onclick="someFunction()">Click me</button>
 
 <p id="intro"></p>
 
@@ -114,8 +125,9 @@ However, you can use Jekyll's site variables or Liquid to *populate* a script th
 function someFunction() {
     document.getElementById("intro").innerHTML = "{{ page.someContent }}";
 }
-</script>{% endraw %}
+</script>
 ```
+{% endraw %}
 
 When Jekyll builds the site, this `someContent` property populates the script's values, converting `{% raw %}{{ page.someContent }}{% endraw %}` to `"This is some content"`.
 
@@ -127,17 +139,21 @@ There's one more detail to remember: Liquid does not render when embedded in YAM
 
 For example, suppose you have a `highlight` tag in your `_data/mydata.yml` file:
 
-```
-{% raw %}myvalue: >
+{% raw %}
+```liquid
+myvalue: >
   {% highlight javascript %}
   console.log('alert');
-  {% endhighlight %}{% endraw %}
+  {% endhighlight %}
 ```
+{% endraw %}
 
 On a page, you try to insert the value:
 
+{% raw %}
+```liquid
+{{ site.data.mydata.myvalue }}
 ```
-{% raw %}{{ site.data.mydata.myvalue }}{% endraw %}
-```
+{% endraw %}
 
 This would render only as a string rather than a code sample with syntax highlighting. To make the code render, consider using an include instead.

@@ -9,7 +9,7 @@ multiple pages. Jekyll offers a pagination plugin, so you can automatically
 generate the appropriate files and folders you need for paginated listings.
 
 For Jekyll 3, include the `jekyll-paginate` plugin in your Gemfile and in
-your `_config.yml` under `gems`. For Jekyll 2, this is standard.
+your `_config.yml` under `plugins`. For Jekyll 2, this is standard.
 
 <div class="note info">
   <h5>Pagination only works within HTML files</h5>
@@ -24,7 +24,7 @@ your `_config.yml` under `gems`. For Jekyll 2, this is standard.
 
 ## Enable pagination
 
-To enable pagination for your blog, add a line to the `_config.yml` file that
+To enable pagination for posts on your blog, add a line to the `_config.yml` file that
 specifies how many items should be displayed per page:
 
 ```yaml
@@ -52,6 +52,14 @@ directory.
   <p>
     Setting a permalink in the front matter of your blog page will cause
     pagination to break. Just omit the permalink.
+  </p>
+</div>
+
+<div class="note info">
+  <h5>Pagination for categories, tags and collections</h5>
+  <p>
+    The more recent <a href="https://github.com/sverrirs/jekyll-paginate-v2">jekyll-paginate-v2</a> plugin supports more features. See the <a href="https://github.com/sverrirs/jekyll-paginate-v2/tree/master/examples">pagination examples</a> in the repository.
+    <strong>This plugin is not supported by GitHub Pages</strong>.
   </p>
 </div>
 
@@ -145,8 +153,8 @@ the `paginator` variable that will now be available to you. You’ll probably
 want to do this in one of the main pages of your site. Here’s one example of a
 simple way of rendering paginated Posts in a HTML file:
 
-```html
 {% raw %}
+```liquid
 ---
 layout: default
 title: My Blog
@@ -177,8 +185,8 @@ title: My Blog
     <span class="next ">Next</span>
   {% endif %}
 </div>
-{% endraw %}
 ```
+{% endraw %}
 
 <div class="note warning">
   <h5>Beware the page one edge-case</h5>
@@ -192,8 +200,8 @@ title: My Blog
 The following HTML snippet should handle page one, and render a list of each
 page with links to all but the current page.
 
-```html
 {% raw %}
+```liquid
 {% if paginator.total_pages > 1 %}
 <div class="pagination">
   {% if paginator.previous_page %}
@@ -219,5 +227,5 @@ page with links to all but the current page.
   {% endif %}
 </div>
 {% endif %}
-{% endraw %}
 ```
+{% endraw %}

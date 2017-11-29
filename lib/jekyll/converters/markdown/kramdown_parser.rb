@@ -1,5 +1,4 @@
 # Frozen-string-literal: true
-# Encoding: utf-8
 
 module Jekyll
   module Converters
@@ -38,20 +37,23 @@ module Jekyll
         end
 
         def convert(content)
-          Kramdown::Document.new(content, @config).to_html
+          document = Kramdown::Document.new(content, @config)
+          html_output = document.to_html
+          document.warnings.each do |warning|
+            Jekyll.logger.warn "Kramdown warning:", warning
+          end
+          html_output
         end
 
         private
+        # rubocop:disable Performance/HashEachMethods
         def make_accessible(hash = @config)
-          proc_ = proc { |hash_, key| hash_[key.to_s] if key.is_a?(Symbol) }
-          hash.default_proc = proc_
-
-          hash.each do |_, val|
-            make_accessible val if val.is_a?(
-              Hash
-            )
+          hash.keys.each do |key|
+            hash[key.to_sym] = hash[key]
+            make_accessible(hash[key]) if hash[key].is_a?(Hash)
           end
         end
+        # rubocop:enable Performance/HashEachMethods
 
         # config[kramdown][syntax_higlighter] >
         #   config[kramdown][enable_coderay] >
@@ -86,7 +88,7 @@ module Jekyll
         private
         def strip_coderay_prefix(hash)
           hash.each_with_object({}) do |(key, val), hsh|
-            cleaned_key = key.gsub(%r!\Acoderay_!, "")
+            cleaned_key = key.to_s.gsub(%r!\Acoderay_!, "")
 
             if key != cleaned_key
               Jekyll::Deprecator.deprecation_message(

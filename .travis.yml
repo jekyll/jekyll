@@ -5,17 +5,22 @@ language: ruby
 sudo: false
 
 rvm:
-  - &ruby1 2.3.3
-  - &ruby2 2.2.6
-  - &ruby3 2.1.10
-  - &jruby jruby-9.1.7.0
+  - &ruby1 2.4.2
+  - &ruby2 2.3.5
+  - &ruby3 2.2.8
+  - &ruby4 2.1.10
+  - &jruby jruby-9.1.14.0
 
 matrix:
   include:
     - rvm: *ruby1
+      env: TEST_SUITE=test ROUGE=1.11.1
+    - rvm: *ruby1
       env: TEST_SUITE=fmt
     - rvm: *ruby1
       env: TEST_SUITE=default-site
+    - rvm: *ruby1
+      env: ROUGE_VERSION=1.11.1 # runs everything with this version
   exclude:
     - rvm: *jruby
       env: TEST_SUITE=cucumber
@@ -28,6 +33,7 @@ branches:
   only:
     - master
     - themes
+    - /*-stable/
 
 notifications:
   slack:
@@ -48,3 +54,6 @@ addons:
 # regular test configuration
 after_success:
   - bundle exec codeclimate-test-reporter
+
+before_install:
+  - gem update --system

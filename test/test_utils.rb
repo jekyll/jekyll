@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestUtils < JekyllUnitTest
@@ -205,6 +207,17 @@ class TestUtils < JekyllUnitTest
         Utils.slugify("fürtive glance!!!!", :mode => "ascii")
     end
 
+    should "map accented latin characters to ASCII characters" do
+      assert_equal "the-config-yml-file",
+        Utils.slugify("The _config.yml file?", :mode => "latin")
+      assert_equal "furtive-glance",
+        Utils.slugify("fürtive glance!!!!", :mode => "latin")
+      assert_equal "aaceeiioouu",
+        Utils.slugify("àáçèéíïòóúü", :mode => "latin")
+      assert_equal "a-z",
+        Utils.slugify("Aあわれ鬱господинZ", :mode => "latin")
+    end
+
     should "only replace whitespace if mode is raw" do
       assert_equal(
         "the-_config.yml-file?",
@@ -384,16 +397,27 @@ class TestUtils < JekyllUnitTest
     should "ignore encoding if it's not there" do
       opts = Utils.merged_file_read_opts(nil, {})
       assert_nil opts["encoding"]
+      assert_nil opts[:encoding]
     end
 
     should "add bom to encoding" do
-      opts = Utils.merged_file_read_opts(nil, { "encoding" => "utf-8" })
-      assert_equal "bom|utf-8", opts["encoding"]
+      opts = { "encoding" => "utf-8", :encoding => "utf-8" }
+      merged = Utils.merged_file_read_opts(nil, opts)
+      assert_equal "bom|utf-8", merged["encoding"]
+      assert_equal "bom|utf-8", merged[:encoding]
     end
 
     should "preserve bom in encoding" do
-      opts = Utils.merged_file_read_opts(nil, { "encoding" => "bom|utf-8" })
-      assert_equal "bom|utf-8", opts["encoding"]
+      opts = { "encoding" => "bom|another", :encoding => "bom|another" }
+      merged = Utils.merged_file_read_opts(nil, opts)
+      assert_equal "bom|another", merged["encoding"]
+      assert_equal "bom|another", merged[:encoding]
+    end
+  end
+
+  context "Utils::Internet.connected?" do
+    should "return true if there's internet" do
+      assert Utils::Internet.connected?
     end
   end
 end

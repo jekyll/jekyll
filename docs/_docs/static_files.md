@@ -65,3 +65,36 @@ following metadata:
   </tbody>
 </table>
 </div>
+
+Note that in the above table, `file` can be anything. It's simply an arbitrarily set variable used in your own logic (such as in a for loop). It isn't a global site or page variable.
+
+## Add front matter to static files
+
+Although you can't directly add front matter values to static files, you can set front matter values through the [defaults property](../configuration/#front-matter-defaults) in your configuration file. When Jekyll builds the site, it will use the front matter values you set.
+
+Here's an example:
+
+In your `_config.yml` file, add the following values to the `defaults` property:
+
+```yaml
+defaults:
+  - scope:
+      path: "assets/img"
+    values:
+      image: true
+```
+
+This assumes that your Jekyll site has a folder path of `assets/img` where  you have images (static files) stored. When Jekyll builds the site, it will treat each image as if it had the front matter value of `image: true`.
+
+Suppose you want to list all your image assets as contained in `assets/img`. You could use this for loop to look in the `static_files` object and get all static files that have this front matter property:
+
+{% raw %}
+```liquid
+{% assign image_files = site.static_files | where: "image", true %}
+{% for myimage in image_files %}
+  {{ myimage.path }}
+{% endfor %}
+```
+{% endraw %}
+
+When you build your site, the output will list the path to each file that meets this front matter condition.

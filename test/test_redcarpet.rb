@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestRedcarpet < JekyllUnitTest
@@ -48,7 +50,8 @@ class TestRedcarpet < JekyllUnitTest
           "<div class=\"highlight\"><pre><code class=\"language-ruby\" " \
           "data-lang=\"ruby\"><span></span><span class=\"nb\">puts</span> <span " \
           "class=\"s2\">&quot;Hello world&quot;</span>\n</code></pre></div>",
-          @markdown.convert(<<-EOS
+          @markdown.convert(
+            <<-EOS
 ```ruby
 puts "Hello world"
 ```

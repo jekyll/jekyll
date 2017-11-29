@@ -3,6 +3,7 @@
   - home
   - quickstart
   - installation
+  - windows
   - usage
   - structure
   - configuration
@@ -26,7 +27,6 @@
   - includes
   - permalinks
   - pagination
-  - navigation
   - plugins
   - themes
   - extras

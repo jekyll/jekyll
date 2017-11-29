@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "webrick"
 
 module Jekyll
@@ -16,6 +18,10 @@ module Jekyll
           super
         end
 
+        def search_index_file(req, res)
+          super || search_file(req, res, ".html")
+        end
+
         # Add the ability to tap file.html the same way that Nginx does on our
         # Docker images (or on GitHub Pages.) The difference is that we might end
         # up with a different preference on which comes first.
@@ -25,7 +31,7 @@ module Jekyll
           super || super(req, res, "#{basename}.html")
         end
 
-        # rubocop:disable Style/MethodName
+        # rubocop:disable Naming/MethodName
         def do_GET(req, res)
           rtn = super
           validate_and_ensure_charset(req, res)

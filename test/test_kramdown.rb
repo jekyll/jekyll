@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# frozen_string_literal: true
 
 require "helper"
 
@@ -16,19 +16,50 @@ class TestKramdown < JekyllUnitTest
 
           "syntax_highlighter"      => "rouge",
           "syntax_highlighter_opts" => {
-            "bold_every" => 8, "css" => :class,
+            "bold_every" => 8,
+            "css"        => :class,
+            "css_class"  => "highlight",
+            "formatter"  => Jekyll::Utils::Rouge.html_formatter.class,
           },
         },
       }
+      @kramdown_config_keys = @config["kramdown"].keys
+      @syntax_highlighter_opts_config_keys = \
+        @config["kramdown"]["syntax_highlighter_opts"].keys
 
       @config = Jekyll.configuration(@config)
-      @markdown = Converters::Markdown.new(
-        @config
-      )
+      @markdown = Converters::Markdown.new(@config)
+      @markdown.setup
+    end
+
+    should "fill symbolized keys into config for compatibility with kramdown" do
+      kramdown_config = @markdown.instance_variable_get(:@parser)
+        .instance_variable_get(:@config)
+
+      @kramdown_config_keys.each do |key|
+        assert kramdown_config.key?(key.to_sym),
+          "Expected #{kramdown_config} to include key #{key.to_sym.inspect}"
+      end
+
+      @syntax_highlighter_opts_config_keys.each do |key|
+        assert kramdown_config["syntax_highlighter_opts"].key?(key.to_sym),
+          "Expected #{kramdown_config["syntax_highlighter_opts"]} to include " \
+          "key #{key.to_sym.inspect}"
+      end
+
+      assert_equal kramdown_config["smart_quotes"], kramdown_config[:smart_quotes]
+      assert_equal kramdown_config["syntax_highlighter_opts"]["css"],
+        kramdown_config[:syntax_highlighter_opts][:css]
     end
 
     should "run Kramdown" do
       assert_equal "<h1>Some Header</h1>", @markdown.convert("# Some Header #").strip
+    end
+
+    should "should log kramdown warnings" do
+      allow_any_instance_of(Kramdown::Document).to receive(:warnings).and_return(["foo"])
+      expect(Jekyll.logger).to receive(:warn).with("Kramdown warning:", "foo")
+      @markdown.convert("Something")
     end
 
     context "when asked to convert smart quotes" do
@@ -59,8 +90,9 @@ class TestKramdown < JekyllUnitTest
         puts "Hello World"
         ~~~
       MARKDOWN
-
-      selector = "div.highlighter-rouge>pre.highlight>code"
+      div_highlight = ""
+      div_highlight = ">div.highlight" unless Utils::Rouge.old_api?
+      selector = "div.highlighter-rouge#{div_highlight}>pre.highlight>code"
       refute result.css(selector).empty?
     end
 

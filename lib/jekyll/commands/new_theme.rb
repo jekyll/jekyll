@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "erb"
 
 class Jekyll::Commands::NewTheme < Jekyll::Command

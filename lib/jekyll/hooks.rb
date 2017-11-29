@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   module Hooks
     DEFAULT_PRIORITY = 20
@@ -37,6 +39,9 @@ module Jekyll
         :post_render => [],
         :post_write  => [],
       },
+      :clean     => {
+        :on_obsolete => [],
+      },
     }
 
     # map of all hooks and their priorities
@@ -60,7 +65,7 @@ module Jekyll
 
     # register a single hook to be called later, internal API
     def self.register_one(owner, event, priority, &block)
-      @registry[owner] ||={
+      @registry[owner] ||= {
         :post_init   => [],
         :pre_render  => [],
         :post_render => [],

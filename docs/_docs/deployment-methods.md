@@ -5,9 +5,34 @@ permalink: /docs/deployment-methods/
 
 Sites built using Jekyll can be deployed in a large number of ways due to the static nature of the generated output. A few of the most common deployment techniques are described below.
 
+<div class="note">
+  <h5>ProTip™: Use GitHub Pages for zero-hassle Jekyll hosting</h5>
+  <p>GitHub Pages are powered by Jekyll behind the scenes, so if you’re looking for a zero-hassle, zero-cost solution, GitHub Pages are a great way to <a href="../github-pages/">host your Jekyll-powered website for free</a>.</p>
+</div>
+
+## Netlify
+
+Netlify provides Global CDN, Continuous Deployment, one click HTTPS and [much more](https://www.netlify.com/features/), providing developers the most robust toolset available for modern web projects, without added complexity. Netlify supports custom plugins for Jekyll and has a free plan for open source projects.
+
+Read this [Jekyll step-by-step guide](https://www.netlify.com/blog/2015/10/28/a-step-by-step-guide-jekyll-3.0-on-netlify/) to setup your Jekyll site on Netlify.
+
+## Aerobatic
+
+[Aerobatic](https://www.aerobatic.com) has custom domains, global CDN distribution, basic auth, CORS proxying, and a growing list of plugins all included.
+
+Automating the deployment of a Jekyll site is simple. See their [Jekyll docs](https://www.aerobatic.com/docs/static-site-generators/#jekyll) for more details. Your built `_site` folder is deployed to their highly-available, globally distributed hosting service.
+
+## Kickster
+
+Use [Kickster](http://kickster.nielsenramon.com/) for easy (automated) deploys to GitHub Pages when using unsupported plugins on GitHub Pages.
+
+Kickster provides a basic Jekyll project setup packed with web best practises and useful optimization tools increasing your overall project quality. Kickster ships with automated and worry-free deployment scripts for GitHub Pages.
+
+Setting up Kickster is very easy, just install the gem and you are good to go. More documentation can here found [here](https://github.com/nielsenramon/kickster#kickster). If you do not want to use the gem or start a new project you can just copy paste the deployment scripts for [Travis CI](https://github.com/nielsenramon/kickster/tree/master/snippets/travis) or [Circle CI](https://github.com/nielsenramon/kickster#automated-deployment-with-circle-ci).
+
 ## Web hosting providers (FTP)
 
-Just about any traditional web hosting provider will let you upload files to their servers over FTP. To upload a Jekyll site to a web host using FTP, simply run the `jekyll build` command and copy the generated `_site` folder to the root folder of your hosting account. This is most likely to be the `httpdocs` or `public_html` folder on most hosting providers.
+Just about any traditional web hosting provider will let you upload files to their servers over FTP. To upload a Jekyll site to a web host using FTP, simply run the `jekyll build` command and copy the contents of the generated `_site` folder to the root folder of your hosting account. This is most likely to be the `httpdocs` or `public_html` folder on most hosting providers.
 
 ## Self-managed web server
 
@@ -47,7 +72,7 @@ TMP_GIT_CLONE=$HOME/tmp/myrepo
 PUBLIC_WWW=/var/www/myrepo
 
 git clone $GIT_REPO $TMP_GIT_CLONE
-jekyll build -s $TMP_GIT_CLONE -d $PUBLIC_WWW
+bundle exec jekyll build -s $TMP_GIT_CLONE -d $PUBLIC_WWW
 rm -Rf $TMP_GIT_CLONE
 exit
 ```
@@ -78,7 +103,7 @@ Another way to deploy your Jekyll site is to use [Rake](https://github.com/ruby/
 
 ### scp
 
-Once you’ve generated the `_site` directory, you can easily scp it using a
+Once you’ve generated the `_site` directory, you can easily scp its content using a
 `tasks/deploy` shell script similar to [this deploy script][]. You’d obviously
 need to change the values to reflect your site’s details. There is even [a
 matching TextMate command][] that will help you run this script.
@@ -89,7 +114,7 @@ matching TextMate command][] that will help you run this script.
 
 ### rsync
 
-Once you’ve generated the `_site` directory, you can easily rsync it using a `tasks/deploy` shell script similar to [this deploy script here](https://github.com/vitalyrepin/vrepinblog/blob/master/transfer.sh). You’d obviously need to change the values to reflect your site’s details.
+Once you’ve generated the `_site` directory, you can easily rsync its content using a `tasks/deploy` shell script similar to [this deploy script here](https://github.com/vitalyrepin/vrepinblog/blob/master/transfer.sh). You’d obviously need to change the values to reflect your site’s details.
 
 Certificate-based authorization is another way to simplify the publishing
 process. It makes sense to restrict rsync access only to the directory which it is supposed to sync. This can be done using rrsync.
@@ -187,22 +212,3 @@ low-volume blogs as you only pay for what you use.
 
 If you'd like to deploy your site to an OpenShift gear, there's [a cartridge
 for that](https://github.com/openshift-quickstart/jekyll-openshift).
-
-<div class="note">
-  <h5>ProTip™: Use GitHub Pages for zero-hassle Jekyll hosting</h5>
-  <p>GitHub Pages are powered by Jekyll behind the scenes, so if you’re looking for a zero-hassle, zero-cost solution, GitHub Pages are a great way to <a href="../github-pages/">host your Jekyll-powered website for free</a>.</p>
-</div>
-
-## Kickster
-
-Use [Kickster](http://kickster.nielsenramon.com/) for easy (automated) deploys to GitHub Pages when using unsupported plugins on GitHub Pages.
-
-Kickster provides a basic Jekyll project setup packed with web best practises and useful optimization tools increasing your overall project quality. Kickster ships with automated and worry-free deployment scripts for GitHub Pages.
-
-Setting up Kickster is very easy, just install the gem and you are good to go. More documentation can here found [here](https://github.com/nielsenramon/kickster#kickster). If you do not want to use the gem or start a new project you can just copy paste the deployment scripts for [Travis CI](https://github.com/nielsenramon/kickster/tree/master/snippets/travis) or [Circle CI](https://github.com/nielsenramon/kickster#automated-deployment-with-circle-ci).
-
-## Aerobatic
-
-[Aerobatic](https://www.aerobatic.com) has custom domains, global CDN distribution, basic auth, CORS proxying, and a growing list of plugins all included.
-
-Automating the deployment of a Jekyll site is simple. See our [Jekyll docs](https://www.aerobatic.com/docs/static-site-generators/#jekyll) for more details. Your built `_site` folder is deployed to our highly-available, globally distributed hosting service.

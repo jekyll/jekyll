@@ -60,7 +60,7 @@ If you have a lot of pages, you can organize those pages into subfolders. The sa
 
 If you have pages organized into subfolders in your source folder and want to flatten them in the root folder on build, you must add the [permalink]({% link _docs/permalinks.md %}) property directly in your page's front matter like this:
 
-```
+```yaml
 ---
 title: My page
 permalink: mypageurl.html

@@ -1,26 +1,49 @@
-#!/usr/bin/env bash
+#!/usr/bin/env ruby
 
-set -e
+require "bundler/setup"
+require "json"
+require "stackprof"
+require File.expand_path("../lib/jekyll", __dir__)
 
-case "$1" in
-  cpu|object) STACKPROF_MODE="$1"; shift ;;
-  *) STACKPROF_MODE="cpu" ;;
-esac
+MODE = ARGV.first || "cpu"
+PROF_OUTPUT_FILE = File.expand_path("../tmp/stackprof-#{MODE}-#{Time.now.strftime("%Y%m%d%H%M")}.dump", __dir__)
 
-export BENCHMARK=true
-command -v stackprof > /dev/null || script/bootstrap
+puts "Stackprof Mode: #{MODE}"
 
-TEST_SCRIPT="Jekyll::Commands::Build.process({'source' => 'docs'})"
-PROF_OUTPUT_FILE=tmp/stackprof-${STACKPROF_MODE}-$(date +%Y%m%d%H%M).dump
+unless File.exist?(PROF_OUTPUT_FILE)
+  StackProf.run(
+    mode: MODE.to_sym,
+    interval: 100,
+    raw: true,
+    out: PROF_OUTPUT_FILE
+  ) do
+    puts "GC Stats:", JSON.pretty_generate(GC.stat)
+    GC.disable
 
-GC_BEFORE="puts 'GC Stats:'; puts JSON.pretty_generate(GC.stat); GC.disable"
-GC_AFTER="puts 'GC Stats:'; GC.start(full_mark: true, immediate_sweep: false); puts JSON.pretty_generate(GC.stat);"
+    Jekyll::Commands::Build.process({'source' => 'docs'})
 
-echo Stackprof Mode: $STACKPROF_MODE
-test -f "$PROF_OUTPUT_FILE" || {
-  bundle exec ruby -r./lib/jekyll -rstackprof -rjson \
-    -e "StackProf.run(mode: :${STACKPROF_MODE}, interval: 100, out: '${PROF_OUTPUT_FILE}') { ${GC_BEFORE}; ${TEST_SCRIPT}; ${GC_AFTER}; }"
+    puts 'GC Stats:'
+    GC.start(full_mark: true, immediate_sweep: false)
+    puts JSON.pretty_generate(GC.stat)
+  end
+end
+
+options = {
+  sort: true,
+  limit: 30,
+  format: :text,
 }
 
-set -x
-bundle exec stackprof $PROF_OUTPUT_FILE $@ --sort-total
+# You can also do other things. Examples:
+# https://github.com/tmm1/stackprof/blob/master/bin/stackprof
+report = StackProf::Report.new(Marshal.load(IO.binread(PROF_OUTPUT_FILE)))
+report.print_text(
+  options[:sort],
+  options[:limit],
+  options[:select_files],
+  options[:reject_files],
+  options[:select_names],
+  options[:reject_names]
+)
+
+puts "Results stored in #{PROF_OUTPUT_FILE}"

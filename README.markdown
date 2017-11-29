@@ -22,9 +22,11 @@ Jekyll is a simple, blog-aware, static site generator perfect for personal, proj
 
 Jekyll does what you tell it to do — no more, no less. It doesn't try to outsmart users by making bold assumptions, nor does it burden them with needless complexity and configuration. Put simply, Jekyll gets out of your way and allows you to concentrate on what truly matters: your content.
 
-## Having trouble with OS X El Capitan?
+See: https://jekyllrb.com/philosophy
 
-See: https://jekyllrb.com/docs/troubleshooting/#jekyll-amp-mac-os-x-1011
+## Having trouble?
+
+See: https://jekyllrb.com/docs/troubleshooting/
 
 ## Getting Started
 
@@ -37,13 +39,13 @@ See: https://jekyllrb.com/docs/troubleshooting/#jekyll-amp-mac-os-x-1011
 ## Code of Conduct
 
 In order to have a more open and welcoming community, Jekyll adheres to a
-[code of conduct](CONDUCT.markdown) adapted from the Ruby on Rails code of
+[code of conduct](CODE_OF_CONDUCT.markdown) adapted from the Ruby on Rails code of
 conduct.
 
 Please adhere to this code of conduct in any interactions you have in the
 Jekyll community. It is strictly enforced on all official Jekyll
 repositories, websites, and resources. If you encounter someone violating
-these terms, please let a maintainer ([@parkr](https://github.com/parkr), [@envygeeks](https://github.com/envygeeks), [@mattr-](https://github.com/mattr-), or [@alfredxing](https://github.com/alfredxing)) know and we will address it as soon as possible.
+these terms, please let one of our core team members [Olivia](mailto:olivia@jekyllrb.com?subject=Jekyll%20CoC%20Violation), [Pat](mailto:pat@jekyllrb.com?subject=Jekyll%20CoC%20Violation), [Matt](mailto:matt@jekyllrb.com?subject=Jekyll%20CoC%20Violation) or [Parker](mailto:parker@jekyllrb.com?subject=Jekyll%20CoC%20Violation) know and we will address it as soon as possible.
 
 ## Diving In
 

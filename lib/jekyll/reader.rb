@@ -1,4 +1,5 @@
-# encoding: UTF-8
+# frozen_string_literal: true
+
 require "csv"
 
 module Jekyll
@@ -23,7 +24,7 @@ module Jekyll
 
     # Sorts posts, pages, and static files.
     def sort_files!
-      site.collections.values.each { |c| c.docs.sort! }
+      site.collections.each_value { |c| c.docs.sort! }
       site.pages.sort_by!(&:name)
       site.static_files.sort_by!(&:relative_path)
     end
@@ -37,6 +38,8 @@ module Jekyll
     # Returns nothing.
     def read_directories(dir = "")
       base = site.in_source_dir(dir)
+
+      return unless File.directory?(base)
 
       dot = Dir.chdir(base) { filter_entries(Dir.entries("."), base) }
       dot_dirs = dot.select { |file| File.directory?(@site.in_source_dir(base, file)) }

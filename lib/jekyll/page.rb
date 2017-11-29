@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class Page
     include Convertible
@@ -127,7 +129,7 @@ module Jekyll
     # layouts      - The Hash of {"name" => "layout"}.
     # site_payload - The site payload Hash.
     #
-    # Returns nothing.
+    # Returns String rendered page.
     def render(layouts, site_payload)
       site_payload["page"] = to_liquid
       site_payload["paginator"] = pager.to_liquid
