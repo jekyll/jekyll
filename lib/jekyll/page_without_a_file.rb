@@ -10,5 +10,9 @@ module Jekyll
     def read_yaml(*)
       @data ||= {}
     end
+
+    def inspect
+      "#<Jekyll:PageWithoutAFile @name=#{name.inspect}>"
+    end
   end
 end
