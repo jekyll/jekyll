@@ -12,6 +12,12 @@ class TestPageWithoutAFile < JekyllUnitTest
     klass.new(@site, base, dir, file)
   end
 
+  def render_and_write
+    @site.render
+    @site.cleanup
+    @site.write
+  end
+
   context "A PageWithoutAFile" do
     setup do
       clear_dest
@@ -111,12 +117,42 @@ class TestPageWithoutAFile < JekyllUnitTest
     end
 
     context "while processing" do
-      should "recieve content provided to it" do
-        page = setup_page("properties.html")
-        assert_nil page.content
+      setup do
+        clear_dest
+        @site.config["title"] = "Test Site"
+        @page = setup_page("physical.html", :base => test_dir("fixtures"))
+      end
 
-        page.content = "{{ site.title }}"
-        assert_equal "{{ site.title }}", page.content
+      should "recieve content provided to it" do
+        assert_nil @page.content
+
+        @page.content = "{{ site.title }}"
+        assert_equal "{{ site.title }}", @page.content
+      end
+
+      should "not be processed and written to disk at destination" do
+        @page.content = "Lorem ipsum dolor sit amet"
+        @page.data["permalink"] = "/virtual-about/"
+
+        render_and_write
+
+        refute_exist dest_dir("physical")
+        refute_exist dest_dir("virtual-about")
+        refute File.exist?(dest_dir("virtual-about", "index.html"))
+      end
+
+      should "be processed and written to destination when passed as "\
+        "an entry in 'site.pages' array" do
+        @page.content = "{{ site.title }}"
+        @page.data["permalink"] = "/virtual-about/"
+
+        @site.pages << @page
+        render_and_write
+
+        refute_exist dest_dir("physical")
+        assert_exist dest_dir("virtual-about")
+        assert File.exist?(dest_dir("virtual-about", "index.html"))
+        assert_equal "Test Site", File.read(dest_dir("virtual-about", "index.html"))
       end
     end
   end
