@@ -3,13 +3,13 @@
 require "helper"
 
 class TestPageWithoutAFile < JekyllUnitTest
-  def setup_page(*args)
+  def setup_page(*args, base: source_dir, klass: PageWithoutAFile)
     dir, file = args
     if file.nil?
       file = dir
       dir = ""
     end
-    @page = PageWithoutAFile.new(@site, source_dir, dir, file)
+    klass.new(@site, base, dir, file)
   end
 
   context "A PageWithoutAFile" do
@@ -22,7 +22,7 @@ class TestPageWithoutAFile < JekyllUnitTest
       }))
     end
 
-    context "on intialized" do
+    context "with default site configuration" do
       setup do
         @page = setup_page("properties.html")
       end
@@ -34,7 +34,7 @@ class TestPageWithoutAFile < JekyllUnitTest
       end
 
       should "have basic attributes defined in it" do
-        regular_page = Page.new(@site, source_dir, "", "properties.html")
+        regular_page = setup_page("properties.html", :klass => Page)
         basic_attrs = %w(dir name path url)
         attrs = {
           "content"   => "All the properties.\n",
@@ -103,7 +103,7 @@ class TestPageWithoutAFile < JekyllUnitTest
     context "with a path outside site.source" do
       should "not access its contents" do
         base = "../../../"
-        page = PageWithoutAFile.new(@site, base, "", "pwd")
+        page = setup_page("pwd", :base => base)
 
         assert_equal "pwd", page.path
         assert_nil page.content
