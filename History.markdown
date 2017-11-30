@@ -58,6 +58,7 @@
   * Upgrade pygments to v1.x (#5937)
   * Bump yajl-ruby (#6582)
   * Cleanup test_redcarpet.rb (#6584)
+  * Add PageWithoutAFile class from jekyll plugins (#6556)
 
 ### Minor Enhancements
 
