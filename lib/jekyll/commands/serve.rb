@@ -45,9 +45,7 @@ module Jekyll
               opts["watch"  ] = true unless opts.key?("watch")
 
               config = configuration_from_options(opts)
-              if Jekyll.env == "development"
-                config["url"] = default_url(config)
-              end
+
               [Build, Serve].each { |klass| klass.process(config) }
             end
           end
