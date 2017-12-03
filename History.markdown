@@ -74,6 +74,7 @@
   * Add latin mode to slugify (#6509)
   * Log Kramdown warnings if log level is WARN (#6522)
   * Add json extension to list of directory indices (#6550)
+  * Dependency: Bump jekyll-watch to 2.0 (#6589)
 
 ### Site Enhancements
 
