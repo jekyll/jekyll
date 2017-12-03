@@ -27,6 +27,8 @@ namespace :site do
     options = {
       "source"      => File.expand_path(docs_folder),
       "destination" => File.expand_path("#{docs_folder}/_site"),
+      "incremental" => true,
+      "profile"     => true,
       "watch"       => true,
       "serving"     => true,
     }
