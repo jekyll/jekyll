@@ -16,7 +16,9 @@ class Jekyll::Converters::Markdown::RedcarpetParser
   module WithPygments
     include CommonMethods
     def block_code(code, lang)
-      Jekyll::External.require_with_graceful_fail("pygments")
+      unless defined?(Pygments)
+        Jekyll::External.require_with_graceful_fail("pygments")
+      end
       lang = lang && lang.split.first || "text"
       add_code_tags(
         Pygments.highlight(
@@ -60,7 +62,9 @@ class Jekyll::Converters::Markdown::RedcarpetParser
   end
 
   def initialize(config)
-    Jekyll::External.require_with_graceful_fail("redcarpet")
+    unless defined?(Redcarpet)
+      Jekyll::External.require_with_graceful_fail("redcarpet")
+    end
     @config = config
     @redcarpet_extensions = {}
     @config["redcarpet"]["extensions"].each do |e|
