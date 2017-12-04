@@ -210,7 +210,7 @@ module Jekyll
       if site.publisher.publish?(doc) || !write?
         docs << doc
       else
-        Jekyll.logger.debug "Skipped From Publishing:", doc.relative_path
+        Jekyll.logger.debug "Skipped Publishing:", doc.relative_path
       end
     end
 
