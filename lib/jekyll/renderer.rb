@@ -93,13 +93,18 @@ module Jekyll
     #
     # Returns String the converted content.
     def convert(content)
+      doc_path = document.relative_path
       converters.reduce(content) do |output, converter|
         begin
-          converter.convert output
+          if converter.is_a?(Converters::Markdown)
+            converter.convert(output, doc_path)
+          else
+            converter.convert(output)
+          end
         rescue StandardError => e
           Jekyll.logger.error "Conversion error:",
             "#{converter.class} encountered an error while "\
-            "converting '#{document.relative_path}':"
+            "converting '#{doc_path}':"
           Jekyll.logger.error("", e.to_s)
           raise e
         end

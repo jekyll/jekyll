@@ -72,9 +72,14 @@ module Jekyll
         ".html"
       end
 
-      def convert(content)
+      def convert(content, path = "")
         setup
-        @parser.convert(content)
+        convert_arity = @parser.method(:convert).arity
+        if convert_arity == 2
+          @parser.convert(content, path)
+        else
+          @parser.convert(content)
+        end
       end
 
       private
