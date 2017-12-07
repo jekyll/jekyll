@@ -96,7 +96,7 @@ module Jekyll
       # problems and backwards-compatibility.
       def from(user_config)
         Utils.deep_merge_hashes(DEFAULTS, Configuration[user_config].stringify_keys)
-          .fix_common_issues.add_default_collections
+          .add_default_collections
       end
     end
 
@@ -209,7 +209,7 @@ module Jekyll
         warn err
       end
 
-      configuration.fix_common_issues.backwards_compatibilize.add_default_collections
+      configuration.backwards_compatibilize.add_default_collections
     end
 
     # Public: Split a CSV string into an array containing its values
@@ -241,20 +241,6 @@ module Jekyll
       check_include_exclude(config)
       check_coderay(config)
       check_maruku(config)
-
-      config
-    end
-
-    def fix_common_issues
-      config = clone
-
-      if config.key?("paginate") && (!config["paginate"].is_a?(Integer) ||
-             config["paginate"] < 1)
-
-        Jekyll.logger.warn "Config Warning:", "The `paginate` key must be a positive" \
-          " integer or nil. It's currently set to '#{config["paginate"].inspect}'."
-        config["paginate"] = nil
-      end
 
       config
     end
