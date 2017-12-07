@@ -13,7 +13,7 @@ class TestKramdown < JekyllUnitTest
           "toc_levels"              => "1..6",
           "auto_ids"                => false,
           "footnote_nr"             => 1,
-          "log_warnings"            => true,
+          "show_warnings"           => true,
 
           "syntax_highlighter"      => "rouge",
           "syntax_highlighter_opts" => {
