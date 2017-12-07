@@ -70,14 +70,14 @@ Feature: Incremental rebuild
   Scenario: A themed-site and incremental regeneration
     Given I have a configuration file with "theme" set to "test-theme"
     And I have an "index.md" page that contains "Themed site"
-    When I run jekyll build -IV
+    When I run jekyll build --incremental --verbose
     Then I should get a zero exit status
     And the _site directory should exist
     Then I should see "Rendering: index.md" in the build output
     And I should see "Themed site" in "_site/index.html"
     When I wait 1 second
     And I have an "about.md" page that contains "About Themed site"
-    When I run jekyll build -IV
+    When I run jekyll build --incremental --verbose
     Then I should get a zero exit status
     And the _site directory should exist
     Then I should not see "Rendering: index.md" in the build output
