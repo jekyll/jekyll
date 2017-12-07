@@ -33,21 +33,10 @@ module Jekyll
         end
 
         def handle_websockets_event(ws)
-          ws.onopen do |handshake|
-            connect(ws, handshake)
-          end
-
-          ws.onclose do
-            disconnect(ws)
-          end
-
-          ws.onmessage do |msg|
-            print_message(msg)
-          end
-
-          ws.onerror do |error|
-            log_error(error)
-          end
+          ws.onopen { |handshake| connect(ws, handshake) }
+          ws.onclose { disconnect(ws) }
+          ws.onmessage { |msg| print_message(msg) }
+          ws.onerror { |error| log_error(error) }
         end
 
         # rubocop:disable Metrics/MethodLength
@@ -56,9 +45,7 @@ module Jekyll
             # Use epoll if the kernel supports it
             EM.epoll
             EM.run do
-              EM.error_handler do |e|
-                log_error(e)
-              end
+              EM.error_handler { |e| log_error(e) }
 
               EM.start_server(
                 opts["host"],
@@ -70,13 +57,8 @@ module Jekyll
               end
 
               # Notify blocked threads that EventMachine has started or shutdown
-              EM.schedule do
-                @started_event.set
-              end
-
-              EM.add_shutdown_hook do
-                @stopped_event.set
-              end
+              EM.schedule { @started_event.set }
+              EM.add_shutdown_hook { @stopped_event.set }
 
               Jekyll.logger.info(
                 "LiveReload address:", "#{opts["host"]}:#{opts["livereload_port"]}"
@@ -98,9 +80,7 @@ module Jekyll
 
             Jekyll.logger.debug("LiveReload:", "Reloading #{p.url}")
             Jekyll.logger.debug(JSON.dump(msg))
-            @websockets.each do |ws|
-              ws.send(JSON.dump(msg))
-            end
+            @websockets.each { |ws| ws.send(JSON.dump(msg)) }
           end
         end
 
