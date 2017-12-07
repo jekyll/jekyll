@@ -25,7 +25,7 @@ module Jekyll
           # There is only one EventMachine instance per Ruby process so stopping
           # it here will stop the reactor thread we have running.
           EM.stop if EM.reactor_running?
-          Jekyll.logger.debug("LiveReload Server:", "halted")
+          Jekyll.logger.debug "LiveReload Server:", "halted"
         end
 
         def running?
@@ -60,9 +60,8 @@ module Jekyll
               EM.schedule { @started_event.set }
               EM.add_shutdown_hook { @stopped_event.set }
 
-              Jekyll.logger.info(
-                "LiveReload address:", "#{opts["host"]}:#{opts["livereload_port"]}"
-              )
+              Jekyll.logger.info "LiveReload address:",
+                "#{opts["host"]}:#{opts["livereload_port"]}"
             end
           end
           @thread.abort_on_exception = true
@@ -78,8 +77,8 @@ module Jekyll
               :liveCSS => true,
             }
 
-            Jekyll.logger.debug("LiveReload:", "Reloading #{p.url}")
-            Jekyll.logger.debug(JSON.dump(msg))
+            Jekyll.logger.debug "LiveReload:", "Reloading #{p.url}"
+            Jekyll.logger.debug JSON.dump(msg)
             @websockets.each { |ws| ws.send(JSON.dump(msg)) }
           end
         end
@@ -90,7 +89,7 @@ module Jekyll
           if @connections_count == 1
             message = "Browser connected"
             message += " over SSL/TLS" if handshake.secure?
-            Jekyll.logger.info("LiveReload:", message)
+            Jekyll.logger.info "LiveReload:", message
           end
           ws.send(
             JSON.dump(
@@ -114,7 +113,7 @@ module Jekyll
           # Not sure what the 'url' command even does in LiveReload.  The spec is silent
           # on its purpose.
           if msg["command"] == "url"
-            Jekyll.logger.info("LiveReload:", "Browser URL: #{msg["url"]}")
+            Jekyll.logger.info "LiveReload:", "Browser URL: #{msg["url"]}"
           end
         end
 
@@ -124,8 +123,8 @@ module Jekyll
             "LiveReload experienced an error. "\
             "Run with --verbose for more information."
           )
-          Jekyll.logger.debug("LiveReload Error:", e.message)
-          Jekyll.logger.debug("LiveReload Error:", e.backtrace.join("\n"))
+          Jekyll.logger.debug "LiveReload Error:", e.message
+          Jekyll.logger.debug "LiveReload Error:", e.backtrace.join("\n")
         end
       end
     end
