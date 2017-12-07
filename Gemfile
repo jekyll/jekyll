@@ -4,6 +4,7 @@ source "https://rubygems.org"
 gemspec :name => "jekyll"
 
 gem "rake", "~> 12.0"
+gem "require_all"
 
 gem "rouge", ENV["ROUGE"] if ENV["ROUGE"]
 

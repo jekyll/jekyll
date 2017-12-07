@@ -371,13 +371,24 @@ module Jekyll
     def item_property(item, property)
       if item.respond_to?(:to_liquid)
         property.to_s.split(".").reduce(item.to_liquid) do |subvalue, attribute|
-          subvalue[attribute]
+          parse_sort_input(subvalue[attribute])
         end
       elsif item.respond_to?(:data)
-        item.data[property.to_s]
+        parse_sort_input(item.data[property.to_s])
       else
-        item[property.to_s]
+        parse_sort_input(item[property.to_s])
       end
+    end
+
+    private
+    # return numeric values as numbers for proper sorting
+    def parse_sort_input(property)
+      if (Integer(property) && true rescue false)
+        property.to_i
+      elsif (Float(result) && true rescue false)
+        property.to_f
+      end
+      return property
     end
 
     private
