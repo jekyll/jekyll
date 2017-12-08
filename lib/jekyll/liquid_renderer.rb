@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require "jekyll/liquid_renderer/file"
-require "jekyll/liquid_renderer/table"
+require_relative "liquid_renderer/file"
+require_relative "liquid_renderer/table"
 
 module Jekyll
   class LiquidRenderer
