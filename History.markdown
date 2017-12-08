@@ -73,6 +73,7 @@
   * Allow plugins to modify the obsolete files. (#6502)
   * Add latin mode to slugify (#6509)
   * Log Kramdown warnings if log level is WARN (#6522)
+  * Add an option to configure kramdown warning output (#6554)
   * Add json extension to list of directory indices (#6550)
   * Dependency: Bump jekyll-watch to 2.0 (#6589)
   * Add LiveReload functionality to Jekyll. (#5142)
