@@ -12,9 +12,9 @@ module Jekyll
             c.action do |args, _|
               cmd = (args.first || "").to_sym
               if args.empty?
-                puts prog
+                Jekyll.logger.info prog
               elsif prog.has_command? cmd
-                puts prog.commands[cmd]
+                Jekyll.logger.info prog.commands[cmd]
               else
                 invalid_command(prog, cmd)
                 abort

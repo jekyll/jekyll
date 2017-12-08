@@ -77,7 +77,7 @@ module Jekyll
     end
 
     def print_stats
-      puts @liquid_renderer.stats_table
+      Jekyll.logger.info @liquid_renderer.stats_table
     end
 
     # Reset Site details.
