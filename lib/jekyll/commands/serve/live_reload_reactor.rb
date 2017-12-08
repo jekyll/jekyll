@@ -14,7 +14,6 @@ module Jekyll
         attr_reader :thread
 
         def initialize
-          @thread = nil
           @websockets = []
           @connections_count = 0
           @started_event = Utils::ThreadEvent.new
