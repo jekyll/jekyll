@@ -185,7 +185,8 @@ CONTENT
 
       should "render markdown with pygments" do
         assert_match(
-          %(<pre><code class="language-text" data-lang="text">test</code></pre>),
+          %(<pre><code class="language-text" data-lang="text">) +
+          %(<span></span>test</code></pre>),
           @result
         )
       end
@@ -193,7 +194,7 @@ CONTENT
       should "render markdown with pygments with line numbers" do
         assert_match(
           %(<pre><code class="language-text" data-lang="text">) +
-          %(<span class="lineno">1</span> test</code></pre>),
+          %(<span></span><span class="lineno">1 </span>test</code></pre>),
           @result
         )
       end
@@ -206,7 +207,7 @@ CONTENT
 
       should "not embed the file" do
         assert_match(
-          %(<pre><code class="language-text" data-lang="text">) +
+          %(<pre><code class="language-text" data-lang="text"><span></span>) +
           %(./jekyll.gemspec</code></pre>),
           @result
         )
@@ -220,7 +221,8 @@ CONTENT
 
       should "render markdown with pygments line handling" do
         assert_match(
-          %(<pre><code class="language-text" data-lang="text">Æ</code></pre>),
+          %(<pre><code class="language-text" data-lang="text">) +
+          %(<span></span>Æ</code></pre>),
           @result
         )
       end
@@ -240,7 +242,8 @@ EOS
 
       should "only strip the preceding newlines" do
         assert_match(
-          %(<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]),
+          %(<pre><code class=\"language-text\" data-lang=\"text\">) +
+          %(<span></span>     [,1] [,2]),
           @result
         )
       end
@@ -265,8 +268,8 @@ EOS
 
       should "only strip the newlines which precede and succeed the entire block" do
         assert_match(
-          "<pre><code class=\"language-text\" data-lang=\"text\">" \
-          "     [,1] [,2]\n\n\n[1,] FALSE TRUE\n[2,] FALSE TRUE</code></pre>",
+          %(<pre><code class=\"language-text\" data-lang=\"text\"><span></span>) +
+          %(     [,1] [,2]\n\n\n[1,] FALSE TRUE\n[2,] FALSE TRUE</code></pre>),
           @result
         )
       end
@@ -280,7 +283,8 @@ EOS
 
       should "only strip the preceding newlines" do
         assert_match(
-          %(<pre><code class="language-text" data-lang="text">     [,1] [,2]),
+          %(<pre><code class="language-text" data-lang="text"><span></span>) +
+          %(     [,1] [,2]),
           @result
         )
       end
@@ -298,7 +302,8 @@ EOS
 
       should "only strip the preceding newlines" do
         assert_match(
-          %(<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]),
+          %(<pre><code class=\"language-text\" data-lang=\"text\"><span></span>) +
+          %(     [,1] [,2]),
           @result
         )
       end

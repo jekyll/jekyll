@@ -23,7 +23,8 @@ end
 
 group :test do
   gem "codeclimate-test-reporter", "~> 1.0.5"
-  gem "cucumber", "~> 3.0"
+  gem "cucumber", RUBY_VERSION >= "2.2" ? "~> 3.0" : "3.0.1"
+  gem "httpclient"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
   # nokogiri v1.8 does not work with ruby 2.1 and below
@@ -76,15 +77,15 @@ group :jekyll_optional_dependencies do
   gem "kramdown", "~> 1.14"
   gem "mime-types", "~> 3.0"
   gem "rdoc", "~> 5.0"
-  gem "toml", "~> 0.1.0"
+  gem "toml", "~> 0.2.0"
 
   platform :ruby, :mswin, :mingw, :x64_mingw do
     gem "classifier-reborn", "~> 2.1.0"
     gem "liquid-c", "~> 3.0"
-    gem "pygments.rb", "~> 0.6.0"
+    gem "pygments.rb", "~> 1.0"
     gem "rdiscount", "~> 2.0"
     gem "redcarpet", "~> 3.2", ">= 3.2.3"
-    gem "yajl-ruby", "~> 1.2"
+    gem "yajl-ruby", "~> 1.3.1"
   end
 
   # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

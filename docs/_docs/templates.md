@@ -293,6 +293,18 @@ you come up with your own tags via plugins.
         <p>
           <code class="output">the-_config.yml-file</code>
         </p>
+        <p>
+         <code class="filter">{% raw %}{{ "The _cönfig.yml file" | slugify: 'ascii' }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">the-c-nfig-yml-file</code>
+        </p>
+        <p>
+         <code class="filter">{% raw %}{{ "The cönfig.yml file" | slugify: 'latin' }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">the-config-yml-file</code>
+        </p>
       </td>
     </tr>
     <tr>
@@ -416,6 +428,8 @@ The default is `default`. They are as follows (with what they filter):
 - `raw`: spaces
 - `default`: spaces and non-alphanumeric characters
 - `pretty`: spaces and non-alphanumeric characters except for `._~!$&'()+,;=@`
+- `ascii`: spaces, non-alphanumeric, and non-ASCII characters
+- `latin`: like `default`, except Latin characters are first transliterated (e.g. `àèïòü` to `aeiou`) {%- include docs_version_badge.html version="3.7.0" -%}
 
 ## Tags
 
@@ -468,6 +482,13 @@ language identifier. To find the appropriate identifier to use for the language
 you want to highlight, look for the “short name” on the [Rouge
 wiki](https://github.com/jayferd/rouge/wiki/List-of-supported-languages-and-lexers)
 or the [Pygments' Lexers page](http://pygments.org/docs/lexers/).
+
+<div class="note info">
+  <h5>Jekyll processes all Liquid filters in code blocks</h5>
+  <p>If you are using a language that contains curly braces, you
+    will likely need to place <code>{&#37; raw &#37;}</code> and
+    <code>{&#37; endraw &#37;}</code> tags around your code.</p>
+</div>
 
 #### Line numbers
 

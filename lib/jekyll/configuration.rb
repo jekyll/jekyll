@@ -80,6 +80,7 @@ module Jekyll
         "input"         => "GFM",
         "hard_wrap"     => false,
         "footnote_nr"   => 1,
+        "show_warnings" => false,
       },
     }.map { |k, v| [k, v.freeze] }].freeze
 
@@ -164,8 +165,7 @@ module Jekyll
         config_files = Jekyll.sanitized_path(source(override), "_config.#{default}")
         @default_config_file = true
       end
-      config_files = [config_files] unless config_files.is_a? Array
-      config_files
+      Array(config_files)
     end
 
     # Public: Read configuration and return merged Hash

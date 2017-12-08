@@ -1,5 +1,3 @@
-markdown: kramdown
-highlighter: rouge
 sass:
   style: compressed
 
@@ -24,7 +22,7 @@ defaults:
       type: "posts"
     values:
       layout: "news_item"
-
+      image: /img/twitter-card.png
 
 collections:
   docs:
@@ -56,4 +54,6 @@ plugins:
 
 exclude:
   - .gitignore
-  - README.md
+  - CNAME
+  - icomoon-selection.json
+  - readme.md

@@ -207,6 +207,17 @@ class TestUtils < JekyllUnitTest
         Utils.slugify("fürtive glance!!!!", :mode => "ascii")
     end
 
+    should "map accented latin characters to ASCII characters" do
+      assert_equal "the-config-yml-file",
+        Utils.slugify("The _config.yml file?", :mode => "latin")
+      assert_equal "furtive-glance",
+        Utils.slugify("fürtive glance!!!!", :mode => "latin")
+      assert_equal "aaceeiioouu",
+        Utils.slugify("àáçèéíïòóúü", :mode => "latin")
+      assert_equal "a-z",
+        Utils.slugify("Aあわれ鬱господинZ", :mode => "latin")
+    end
+
     should "only replace whitespace if mode is raw" do
       assert_equal(
         "the-_config.yml-file?",
@@ -401,6 +412,12 @@ class TestUtils < JekyllUnitTest
       merged = Utils.merged_file_read_opts(nil, opts)
       assert_equal "bom|another", merged["encoding"]
       assert_equal "bom|another", merged[:encoding]
+    end
+  end
+
+  context "Utils::Internet.connected?" do
+    should "return true if there's internet" do
+      assert Utils::Internet.connected?
     end
   end
 end

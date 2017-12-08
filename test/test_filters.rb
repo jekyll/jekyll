@@ -80,6 +80,13 @@ class TestFilters < JekyllUnitTest
         )
       end
 
+      should "convert not convert markdown to block HTML elements" do
+        assert_equal(
+          "#hashtag", # NOT "<h1>hashtag</h1>"
+          @filter.smartify("#hashtag")
+        )
+      end
+
       should "escapes special characters when configured to do so" do
         kramdown = make_filter_mock({ :kramdown => { :entity_output => :symbolic } })
         assert_equal(
@@ -91,6 +98,10 @@ class TestFilters < JekyllUnitTest
       should "convert HTML entities to unicode characters" do
         assert_equal "’", @filter.smartify("&rsquo;")
         assert_equal "“", @filter.smartify("&ldquo;")
+      end
+
+      should "convert multiple lines" do
+        assert_equal "…\n…", @filter.smartify("...\n...")
       end
 
       should "allow raw HTML passthrough" do
@@ -114,6 +125,12 @@ class TestFilters < JekyllUnitTest
         assert_equal(
           "404",
           @filter.smartify(404)
+        )
+      end
+
+      should "not output any warnings" do
+        assert_empty(
+          capture_output { @filter.smartify("Test") }
         )
       end
     end
@@ -443,6 +460,23 @@ class TestFilters < JekyllUnitTest
       should "not raise a TypeError when passed a hash" do
         assert @filter.absolute_url({ "foo" => "bar" })
       end
+
+      context "with a document" do
+        setup do
+          @site = fixture_site({
+            "collections" => ["methods"],
+          })
+          @site.process
+          @document = @site.collections["methods"].docs.detect do |d|
+            d.relative_path == "_methods/configuration.md"
+          end
+        end
+
+        should "make a url" do
+          expected = "http://example.com/base/methods/configuration.html"
+          assert_equal expected, @filter.absolute_url(@document)
+        end
+      end
     end
 
     context "relative_url filter" do
@@ -525,6 +559,21 @@ class TestFilters < JekyllUnitTest
         page_url = "/my-page.html"
         filter = make_filter_mock({ "baseurl" => Value.new(proc { "/baseurl/" }) })
         assert_equal "/baseurl#{page_url}", filter.relative_url(page_url)
+      end
+
+      should "transform protocol-relative url" do
+        url = "//example.com/"
+        assert_equal "/base//example.com/", @filter.relative_url(url)
+      end
+
+      should "not modify an absolute url with scheme" do
+        url = "file:///file.html"
+        assert_equal url, @filter.relative_url(url)
+      end
+
+      should "not normalize absolute international URLs" do
+        url = "https://example.com/错误"
+        assert_equal "https://example.com/错误", @filter.relative_url(url)
       end
     end
 

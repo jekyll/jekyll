@@ -46,10 +46,10 @@ defaults:
       layout: page
 ```
 
-<div class="note unreleased">
-  <h5>Gather your collections</h5>
+<div class="note">
+  <h5>Gather your collections {%- include docs_version_badge.html version="3.7.0" -%}</h5>
 
-  <p>From <code>v3.7.0</code> you can optionally specify a directory to store all your collections in the same place with <code>collections_dir: my_collections</code></p>
+  <p>You can optionally specify a directory to store all your collections in the same place with <code>collections_dir: my_collections</code></p>
 
   <p>Then Jekyll will look in <code>my_collections/_books</code> for the <code>books</code> collection, and
   in <code>my_collections/_recipes</code> for the <code>recipes</code> collection.</p>

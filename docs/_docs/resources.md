@@ -31,6 +31,7 @@ Jekyll's growing use is producing a wide variety of tutorials, frameworks, exten
   - [FormKeep](https://formkeep.com/guides/contact-form-jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=contact-form-jekyll)
   - [Simple Form](https://getsimpleform.com/)
   - [Formingo](https://www.formingo.co/guides/jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=Jekyll%20Documentation)
+  - [Formester](http://www.formester.com)
   - [Staticman](https://staticman.net): Add user-generated content to a Jekyll site (free and open source)
   - [Snipcart](https://snipcart.com/blog/static-site-e-commerce-part-2-integrating-snipcart-with-jekyll): Add a shopping cart to a Jekyll site
   - [Contentful](https://www.contentful.com/ecosystem/jekyll/): use Jekyll together with the API-driven Contentful CMS.

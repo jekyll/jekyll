@@ -21,6 +21,15 @@ jekyll build --watch
 #    watched for changes, and regenerated automatically.
 ```
 
+## Override default development settings
+
+Default URL is set to `http://localhost:4000` in development environment. {% include docs_version_badge.html version="3.3.0" %}
+
+If you want to build for your production environment:
+
+  - Set your production URL in `_config.yml` e.g. `url: https://example.com`.
+  - Run `JEKYLL_ENV=production bundle exec jekyll build`.
+
 <div class="note info">
   <h5>Changes to <code>_config.yml</code> are not included during automatic regeneration.</h5>
   <p>

@@ -68,6 +68,24 @@ You have 3 options for installing plugins:
   </p>
 </div>
 
+### The jekyll_plugins group
+
+Jekyll gives this particular group of gems in your `Gemfile` a different
+treatment. Any gem included in this group is loaded before Jekyll starts
+processing the rest of your source directory.
+
+A gem included here will be activated even if its not explicitly listed under
+the `plugins:` key in your site's config file.
+
+<div class="note warning">
+  <p>
+    Gems included in the <code>:jekyll-plugins</code> group are activated
+    regardless of the <code>--safe</code> mode setting. Be aware of what
+    gems are included under this group!
+  </p>
+</div>
+
+
 In general, plugins you make will fall broadly into one of five categories:
 
 1. [Generators](#generators)
@@ -767,7 +785,7 @@ LESS.js files during generation.
 
 #### Converters
 
-- [Pug plugin by Doug Beney](https://github.com/DougBeney/jekyll-pug): Pug (previously Jade) converter for Jekyll.
+- [Pug plugin by Doug Beney](http://jekyll-pug.dougie.io): Use the popular Pug (previously Jade) templating language in Jekyll. Complete with caching, includes support, and much more.
 - [Textile converter](https://github.com/jekyll/jekyll-textile-converter): Convert `.textile` files into HTML. Also includes the `textilize` Liquid filter.
 - [Slim plugin](https://github.com/slim-template/jekyll-slim): Slim converter and includes for Jekyll with support for Liquid tags.
 - [HAML plugin by Sam Z](https://gist.github.com/517556): HAML converter for Jekyll.
@@ -807,7 +825,6 @@ LESS.js files during generation.
 - [Deprecated articles keeper](https://github.com/kzykbys/JekyllPlugins) by [Kazuya Kobayashi](http://blog.kazuya.co/): A simple Jekyll filter which monitor how old an article is.
 - [Jekyll-jalali](https://github.com/mehdisadeghi/jekyll-jalali) by [Mehdi Sadeghi](http://mehdix.ir): A simple Gregorian to Jalali date converter filter.
 - [Jekyll Thumbnail Filter](https://github.com/matallo/jekyll-thumbnail-filter): Related posts thumbnail filter.
-- [Jekyll-Smartify](https://github.com/pathawks/jekyll-smartify): SmartyPants filter. Make &quot;quotes&quot; &ldquo;curly&rdquo;
 - [liquid-md5](https://github.com/pathawks/liquid-md5): Returns an MD5 hash. Helpful for generating Gravatars in templates.
 - [jekyll-roman](https://github.com/paulrobertlloyd/jekyll-roman): A liquid filter for Jekyll that converts numbers into Roman numerals.
 - [jekyll-typogrify](https://github.com/myles/jekyll-typogrify): A Jekyll plugin that brings the functions of [typogruby](http://avdgaag.github.io/typogruby/).
@@ -942,6 +959,7 @@ You can find a few useful plugins at the following locations:
 - [Jekyll-Post](https://github.com/robcrocombe/jekyll-post): A CLI tool to easily draft, edit, and publish Jekyll posts.
 - [jekyll-numbered-headings](https://github.com/muratayusuke/jekyll-numbered-headings): Adds ordered number to headings.
 - [jekyll-pre-commit](https://github.com/mpchadwick/jekyll-pre-commit): A framework for running checks against your posts using a git pre-commit hook before you publish them.
+- [jekyll-pwa-plugin](https://github.com/lavas-project/jekyll-pwa): A plugin provides PWA support for Jekyll. It generates a service worker in Jekyll build process and makes precache and runtime cache available in the runtime with Google Workbox.
 
 <div class="note info">
   <h5>Jekyll Plugins Wanted</h5>

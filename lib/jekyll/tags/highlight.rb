@@ -86,7 +86,7 @@ MSG
       end
 
       def render_pygments(code, is_safe)
-        Jekyll::External.require_with_graceful_fail("pygments")
+        Jekyll::External.require_with_graceful_fail("pygments") unless defined?(Pygments)
 
         highlighted_code = Pygments.highlight(
           code,
@@ -118,7 +118,7 @@ MSG
           :gutter_class => "gutter",
           :code_class   => "code"
         )
-        lexer = Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
+        lexer = ::Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
         formatter.format(lexer.lex(code))
       end
 
