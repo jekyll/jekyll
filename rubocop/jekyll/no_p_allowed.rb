@@ -6,7 +6,7 @@ module RuboCop
   module Cop
     module Jekyll
       class NoPAllowed < Cop
-        MSG = "Avoid using p to print things".freeze
+        MSG = "Avoid using `p` to print things. Use `Jekyll.logger` instead.".freeze
 
         def_node_search :p_called?, <<-PATTERN
         (send _ :p _)
