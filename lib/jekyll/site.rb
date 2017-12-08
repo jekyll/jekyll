@@ -80,12 +80,10 @@ module Jekyll
     end
 
     def print_stats
-      Jekyll.logger.info ""
-      Jekyll.logger.info "Liquid Rendering Profile"
+      Jekyll.logger.info "\nLiquid Rendering Profile"
       Jekyll.logger.info "------------------------"
       Jekyll.logger.info @liquid_renderer.stats_table
-      Jekyll.logger.info ""
-      Jekyll.logger.info "Markup Rendering Profile"
+      Jekyll.logger.info "\nMarkup Rendering Profile"
       Jekyll.logger.info "------------------------"
       Jekyll.logger.info "Markdown Parser:", config["markdown"]
       Jekyll.logger.info @converter_profiler.stats_table
