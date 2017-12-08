@@ -119,12 +119,8 @@ module Jekyll
 
         private
         def log_error(e)
-          Jekyll.logger.warn(
-            "LiveReload experienced an error. "\
-            "Run with --verbose for more information."
-          )
-          Jekyll.logger.debug "LiveReload Error:", e.message
-          Jekyll.logger.debug "LiveReload Error:", e.backtrace.join("\n")
+          raise e, "LiveReload experienced an error. " \
+            "Run with --trace for more information."
         end
       end
     end
