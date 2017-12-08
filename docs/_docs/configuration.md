@@ -688,6 +688,7 @@ kramdown:
   input:          GFM
   hard_wrap:      false
   footnote_nr:    1
+  show_warnings:  false
 ```
 
 ## Liquid Options
