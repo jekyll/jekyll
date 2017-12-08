@@ -1044,7 +1044,7 @@ class TestFilters < JekyllUnitTest
         # Hebrew
         assert_equal %w(אלף בית), @filter.sort(%w(בית אלף))
       end
-      should "return sorted by property array with string" do
+      should "return sorted by property array" do
         assert_equal [{ "a" => 1 }, { "a" => 2 }, { "a" => 3 }, { "a" => 4 }],
           @filter.sort([{ "a" => 4 }, { "a" => 3 }, { "a" => 1 }, { "a" => 2 }], "a")
       end
