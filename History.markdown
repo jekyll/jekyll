@@ -28,6 +28,7 @@
   * Add jekyll-pwa-plugin (#6533)
   * Remove Jekyll-Smartify from plugins directory (#6548)
   * Updated Jekyll-Pug listing to include official website (#6555)
+  * Remove link to severly outdated asset plugin (#6613)
 
 ### Development Fixes
 
