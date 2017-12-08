@@ -12,7 +12,8 @@ module Jekyll
                   :gems, :plugin_manager, :theme
 
     attr_accessor :converters, :generators, :reader
-    attr_reader   :regenerator, :liquid_renderer, :includes_load_paths
+    attr_reader   :regenerator, :liquid_renderer, :converter_profiler,
+                  :includes_load_paths
 
     # Public: Initialize a new Site.
     #
@@ -27,6 +28,8 @@ module Jekyll
       @reader          = Reader.new(self)
       @regenerator     = Regenerator.new(self)
       @liquid_renderer = LiquidRenderer.new(self)
+
+      @converter_profiler = LiquidRenderer.new(self)
 
       Jekyll.sites << self
 
@@ -77,7 +80,15 @@ module Jekyll
     end
 
     def print_stats
+      puts ""
+      puts "Liquid Rendering Profile"
+      puts "------------------------"
       puts @liquid_renderer.stats_table
+      puts ""
+      puts "Markup Rendering Profile"
+      puts "------------------------"
+      puts "  Markdown Parser: #{config["markdown"]}"
+      puts @converter_profiler.stats_table
     end
 
     # Reset Site details.
@@ -96,6 +107,7 @@ module Jekyll
       @collections = nil
       @regenerator.clear_cache
       @liquid_renderer.reset
+      @converter_profiler.reset
 
       if limit_posts < 0
         raise ArgumentError, "limit_posts must be a non-negative number"
