@@ -5,6 +5,11 @@ require "jekyll/liquid_renderer/table"
 
 module Jekyll
   class LiquidRenderer
+    extend Forwardable
+
+    def_delegator :@site, :in_source_dir, :source_dir
+    def_delegator :@site, :in_theme_dir, :theme_dir
+
     def initialize(site)
       @site = site
       Liquid::Template.error_mode = @site.config["liquid"]["error_mode"].to_sym
@@ -16,11 +21,8 @@ module Jekyll
     end
 
     def file(filename)
-      filename = @site.in_source_dir(filename).sub(
-        %r!\A#{Regexp.escape(@site.source)}/!,
-        ""
-      )
-
+      filename.match(filename_regex)
+      filename = Regexp.last_match(1)
       LiquidRenderer::File.new(self, filename).tap do
         @stats[filename] ||= new_profile_hash
         @stats[filename][:count] += 1
@@ -44,6 +46,11 @@ module Jekyll
     end
 
     private
+
+    def filename_regex
+      %r!\A(?:#{source_dir}/|#{theme_dir}/|\W*)(.*)!oi
+    end
+
     def new_profile_hash
       Hash.new { |hash, key| hash[key] = 0 }
     end
