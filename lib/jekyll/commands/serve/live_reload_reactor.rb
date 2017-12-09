@@ -38,7 +38,6 @@ module Jekyll
           ws.onerror { |error| log_error(error) }
         end
 
-        # rubocop:disable Metrics/MethodLength
         def start(opts)
           @thread = Thread.new do
             # Use epoll if the kernel supports it
@@ -60,7 +59,7 @@ module Jekyll
               EM.add_shutdown_hook { @stopped_event.set }
 
               Jekyll.logger.info "LiveReload address:",
-                "#{opts["host"]}:#{opts["livereload_port"]}"
+                "http://#{opts["host"]}:#{opts["livereload_port"]}"
             end
           end
           @thread.abort_on_exception = true
@@ -118,8 +117,9 @@ module Jekyll
 
         private
         def log_error(e)
-          raise e, "LiveReload experienced an error. " \
+          Jekyll.logger.error "LiveReload experienced an error. " \
             "Run with --trace for more information."
+          raise e
         end
       end
     end
