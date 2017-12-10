@@ -905,6 +905,7 @@ You can find a few useful plugins at the following locations:
 - [BibSonomy](https://github.com/rjoberon/bibsonomy-jekyll): Jekyll
   plugin to generate publication lists from [BibSonomy](https://www.bibsonomy.org/).
 - [github-cards](https://github.com/edward-shen/github-cards): Creates styleable Github cards for your Github projects.
+- [disqus-for-jekyll](https://github.com/kacperduras/disqus-for-jekyll): A Jekyll plugin to view the comments powered by Disqus.
 
 
 #### Collections
