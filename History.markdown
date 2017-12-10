@@ -30,6 +30,7 @@
   * Updated Jekyll-Pug listing to include official website (#6555)
   * Remove link to severly outdated asset plugin (#6613)
   * Default time zone depends upon server (#6617)
+  * Add `disqus-for-jekyll` to plugins. (#6618)
 
 ### Development Fixes
 
