@@ -108,7 +108,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
             <a href="https://en.wikipedia.org/wiki/Tz_database">IANA Time Zone
             Database</a> is valid, e.g. <code>America/New_York</code>. A list of all
             available values can be found <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">
-            here</a>. The default is the server time zone, where your Jekyll website is hosted.
+            here</a>. When serving on a local machine, the default time zone is set by your operating system. But when served on a remote host/server, the default time zone depends on the server's setting or location.
         </p>
       </td>
       <td class="align-center">
