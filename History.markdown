@@ -78,6 +78,7 @@
   * Add json extension to list of directory indices (#6550)
   * Dependency: Bump jekyll-watch to 2.0 (#6589)
   * Add LiveReload functionality to Jekyll. (#5142)
+  * Remove paginate check (#6606)
 
 ### Site Enhancements
 
