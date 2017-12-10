@@ -86,7 +86,7 @@ module Jekyll
         %w(liquid markdown).each do |type|
           row << file_stats[:"#{type}_count"].to_s
           row << format_bytes(file_stats[:"#{type}_bytes"])
-          row << format("%.3f", file_stats[:"#{type}_time"])
+          row << format("%.3fs", file_stats[:"#{type}_time"])
         end
 
         table << row
