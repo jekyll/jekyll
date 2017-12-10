@@ -49,14 +49,14 @@ module Jekyll
     #
     # Returns String rendered document output
     def run
-      Jekyll.logger.debug "Rendering:", document.relative_path
+      Jekyll.logger.debug "Rendering:", path_relative_to_source
 
       assign_pages!
       assign_related_posts!
       assign_highlighter_options!
       assign_layout_data!
 
-      Jekyll.logger.debug "Pre-Render Hooks:", document.relative_path
+      Jekyll.logger.debug "Pre-Render Hooks:", path_relative_to_source
       document.trigger_hooks(:pre_render, payload)
 
       render_document
@@ -72,16 +72,16 @@ module Jekyll
       }
       output = document.content
       if document.render_with_liquid?
-        Jekyll.logger.debug "Rendering Liquid:", document.relative_path
+        Jekyll.logger.debug "Rendering Liquid:", path_relative_to_source
         output = render_liquid(output, payload, info, document.path)
       end
 
-      Jekyll.logger.debug "Rendering Markup:", document.relative_path
+      Jekyll.logger.debug "Rendering Markup:", path_relative_to_source
       output = convert(output)
       document.content = output
 
       if document.place_in_layout?
-        Jekyll.logger.debug "Rendering Layout:", document.relative_path
+        Jekyll.logger.debug "Rendering Layout:", path_relative_to_source
         output = place_in_layouts(output, payload, info)
       end
 
@@ -99,7 +99,7 @@ module Jekyll
         rescue StandardError => e
           Jekyll.logger.error "Conversion error:",
             "#{converter.class} encountered an error while "\
-            "converting '#{document.relative_path}':"
+            "converting '#{path_relative_to_source}':"
           Jekyll.logger.error("", e.to_s)
           raise e
         end
@@ -118,13 +118,13 @@ module Jekyll
       template = site.liquid_renderer.file(path).parse(content)
       template.warnings.each do |e|
         Jekyll.logger.warn "Liquid Warning:",
-          LiquidRenderer.format_error(e, path || document.relative_path)
+          LiquidRenderer.format_error(e, path || path_relative_to_source)
       end
       template.render!(payload, info)
     # rubocop: disable RescueException
     rescue Exception => e
       Jekyll.logger.error "Liquid Exception:",
-        LiquidRenderer.format_error(e, path || document.relative_path)
+        LiquidRenderer.format_error(e, path || path_relative_to_source)
       raise e
     end
     # rubocop: enable RescueException
@@ -173,7 +173,7 @@ module Jekyll
       Jekyll.logger.warn(
         "Build Warning:",
         "Layout '#{document.data["layout"]}' requested "\
-        "in #{document.relative_path} does not exist."
+        "in #{path_relative_to_source} does not exist."
       )
     end
 
@@ -264,6 +264,16 @@ module Jekyll
       @output_exts ||= converters.map do |c|
         c.output_ext(document.extname)
       end.compact
+    end
+
+    private
+    # TODO: change method definition to `document.relative_path` when `:relative_path`
+    # in Jekyll::Excerpt instances return their `:path` relative to site.source, instead
+    # of the their parent-document's relative path.
+    #
+    # Refer https://github.com/jekyll/jekyll/pull/6597 for associated discussion.
+    def path_relative_to_source
+      document.path.sub(%r!\A#{site.source}/!o, "")
     end
   end
 end
