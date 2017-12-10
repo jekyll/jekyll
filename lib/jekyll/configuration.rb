@@ -246,6 +246,11 @@ module Jekyll
       config
     end
 
+    # DEPRECATED.
+    def fix_common_issues
+      self
+    end
+
     def add_default_collections
       config = clone
 

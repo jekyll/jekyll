@@ -20,6 +20,10 @@ class TestConfiguration < JekyllUnitTest
       assert_equal result["source"], "blah"
     end
 
+    should "return a valid Configuration instance" do
+      assert_instance_of Configuration, Configuration.from({}).fix_common_issues
+    end
+
     should "add default collections" do
       result = Configuration.from({})
       assert_equal(
