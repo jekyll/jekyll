@@ -12,7 +12,8 @@ module Jekyll
                   :gems, :plugin_manager, :theme
 
     attr_accessor :converters, :generators, :reader
-    attr_reader   :regenerator, :liquid_renderer, :includes_load_paths
+    attr_reader   :regenerator, :liquid_renderer, :converter_profiler,
+                  :includes_load_paths
 
     # Public: Initialize a new Site.
     #
@@ -77,7 +78,7 @@ module Jekyll
     end
 
     def print_stats
-      puts @liquid_renderer.stats_table
+      Jekyll.logger.info @liquid_renderer.stats_table
     end
 
     # Reset Site details.

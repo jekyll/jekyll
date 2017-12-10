@@ -17,9 +17,11 @@ module Jekyll
     def generate_table(data, widths)
       str = String.new("\n")
 
-      table_head = data.shift
-      str << generate_row(table_head, widths)
-      str << generate_table_head_border(table_head, widths)
+      header0 = data.shift
+      header1 = data.shift
+      str << generate_row(header0, widths)
+      str << generate_row(header1, widths)
+      str << generate_table_head_border(header0, widths)
 
       data.each do |row_data|
         str << generate_row(row_data, widths)
@@ -71,20 +73,39 @@ module Jekyll
     end
 
     def data_for_table(n)
-      sorted = @stats.sort_by { |_, file_stats| -file_stats[:time] }
+      sorted = @stats.sort_by { |_, file_stats| -file_stats[:liquid_time] }
       sorted = sorted.slice(0, n)
 
-      table = [%w(Filename Count Bytes Time)]
+      table = []
+      add_header(table)
 
       sorted.each do |filename, file_stats|
         row = []
         row << filename
-        row << file_stats[:count].to_s
-        row << format_bytes(file_stats[:bytes])
-        row << format("%.3f", file_stats[:time])
+
+        %w(liquid markdown).each do |type|
+          row << file_stats[:"#{type}_count"].to_s
+          row << format_bytes(file_stats[:"#{type}_bytes"])
+          row << format("%.3f", file_stats[:"#{type}_time"])
+        end
+
         table << row
       end
 
+      table
+    end
+
+    def add_header(table)
+      header0 = [""]
+      %w(Liquid Markdown).each do |type|
+        3.times { header0 << type }
+      end
+
+      header1 = ["Filename"]
+      2.times { header1 += %w(Count Bytes Time) }
+
+      table << header0
+      table << header1
       table
     end
 
