@@ -49,17 +49,19 @@ module Jekyll
     #
     # Returns String rendered document output
     def run
-      Jekyll.logger.debug "Rendering:", document.relative_path
+      site.profiler.measure_all(document.relative_path, :rendering) do
+        Jekyll.logger.debug "Rendering:", document.relative_path
 
-      assign_pages!
-      assign_related_posts!
-      assign_highlighter_options!
-      assign_layout_data!
+        assign_pages!
+        assign_related_posts!
+        assign_highlighter_options!
+        assign_layout_data!
 
-      Jekyll.logger.debug "Pre-Render Hooks:", document.relative_path
-      document.trigger_hooks(:pre_render, payload)
+        Jekyll.logger.debug "Pre-Render Hooks:", document.relative_path
+        document.trigger_hooks(:pre_render, payload)
 
-      render_document
+        render_document
+      end
     end
 
     # Render the document.
@@ -95,13 +97,24 @@ module Jekyll
     def convert(content)
       converters.reduce(content) do |output, converter|
         begin
-          converter.convert output
+          convert_output_and_profile(output, converter)
         rescue StandardError => e
           Jekyll.logger.error "Conversion error:",
             "#{converter.class} encountered an error while "\
             "converting '#{document.relative_path}':"
           Jekyll.logger.error("", e.to_s)
           raise e
+        end
+      end
+    end
+
+    def convert_output_and_profile(output, converter)
+      return converter.convert(output) unless converter.class.name.start_with?("Jekyll::Converters::Markdown")
+
+      site.profiler.increment_count(document.relative_path, :markdown)
+      site.profiler.measure_bytes(document.relative_path, :markdown) do
+        site.profiler.measure_time(document.relative_path, :markdown) do
+          converter.convert(output)
         end
       end
     end

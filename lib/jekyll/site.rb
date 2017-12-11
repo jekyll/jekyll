@@ -12,7 +12,7 @@ module Jekyll
                   :gems, :plugin_manager, :theme
 
     attr_accessor :converters, :generators, :reader
-    attr_reader   :regenerator, :liquid_renderer, :includes_load_paths
+    attr_reader   :regenerator, :liquid_renderer, :includes_load_paths, :profiler
 
     # Public: Initialize a new Site.
     #
@@ -27,6 +27,7 @@ module Jekyll
       @reader          = Reader.new(self)
       @regenerator     = Regenerator.new(self)
       @liquid_renderer = LiquidRenderer.new(self)
+      @profiler        = Profiler.new(self)
 
       Jekyll.sites << self
 
@@ -67,6 +68,7 @@ module Jekyll
     #
     # Returns nothing.
     def process
+      GC.disable
       reset
       read
       generate
@@ -77,7 +79,7 @@ module Jekyll
     end
 
     def print_stats
-      puts @liquid_renderer.stats_table
+      puts profiler.stats_table
     end
 
     # Reset Site details.
@@ -95,7 +97,7 @@ module Jekyll
       self.data = {}
       @collections = nil
       @regenerator.clear_cache
-      @liquid_renderer.reset
+      @profiler.reset
 
       if limit_posts < 0
         raise ArgumentError, "limit_posts must be a non-negative number"
@@ -205,7 +207,10 @@ module Jekyll
     # Returns nothing.
     def write
       each_site_file do |item|
-        item.write(dest) if regenerator.regenerate?(item)
+        next unless regenerator.regenerate?(item)
+        profiler.measure_all(item.relative_path, :writing) do
+          item.write(dest)
+        end
       end
       regenerator.write_metadata
       Jekyll::Hooks.trigger :site, :post_write, self

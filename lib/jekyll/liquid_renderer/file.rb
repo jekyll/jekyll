@@ -40,7 +40,7 @@ module Jekyll
 
       def measure_bytes
         yield.tap do |str|
-          @renderer.increment_bytes(@filename, str.bytesize)
+          @renderer.site.profiler.increment_bytes(@filename, :liquid, str.bytesize)
         end
       end
 
@@ -49,7 +49,7 @@ module Jekyll
         yield
       ensure
         after = Time.now
-        @renderer.increment_time(@filename, after - before)
+        @renderer.site.profiler.increment_time(@filename, :liquid, after - before)
       end
     end
   end
