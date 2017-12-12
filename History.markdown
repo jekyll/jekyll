@@ -31,6 +31,7 @@
   * Remove link to severly outdated asset plugin (#6613)
   * Default time zone depends upon server (#6617)
   * Add `disqus-for-jekyll` to plugins. (#6618)
+  * Update &#34;Requirements&#34; for Ruby version (#6623)
 
 ### Development Fixes
 
