@@ -38,8 +38,6 @@ Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
-Layout/SpaceInsideBrackets:
-  Enabled: false
 Lint/EndAlignment:
   Severity: error
 Lint/UnreachableCode:
