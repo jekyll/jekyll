@@ -19,6 +19,7 @@ module Jekyll
 
       header0 = data.shift
       header1 = data.shift
+      footer  = data.pop
       str << generate_row(header0, widths)
       str << generate_row(header1, widths)
       str << generate_table_head_border(header0, widths)
@@ -26,6 +27,9 @@ module Jekyll
       data.each do |row_data|
         str << generate_row(row_data, widths)
       end
+
+      str << generate_table_head_border(header0, widths)
+      str << generate_row(footer, widths)
 
       str << "\n"
       str
@@ -73,36 +77,52 @@ module Jekyll
     end
 
     def data_for_table(n)
-      sorted = @stats.sort_by { |_, file_stats| -file_stats[:liquid_time] }
-      sorted = sorted.slice(0, n)
+      sorted = @stats.sort_by { |_, file_stats| -file_stats[:liquid_time] }.slice(0, n)
+      types  = %w(liquid markdown)
+      gauges = %w(count bytes time)
+      total  = Hash.new { |hash, key| hash[key] = 0 }
 
-      table = []
-      add_header(table)
-
-      sorted.each do |filename, file_stats|
-        row = []
-        row << filename
-
-        %w(liquid markdown).each do |type|
-          row << file_stats[:"#{type}_count"].to_s
-          row << format_bytes(file_stats[:"#{type}_bytes"])
-          row << format("%.3fs", file_stats[:"#{type}_time"])
-        end
-
-        table << row
-      end
-
-      table
+      tabulate(sorted, types, gauges, total)
     end
 
-    def add_header(table)
+    def tabulate(sorted, types, gauges, total)
+      [].tap do |table|
+        add_header(table, types, gauges.map(&:capitalize))
+
+        sorted.each do |filename, file_stats|
+          table << [filename].tap do |row|
+            types.each do |type|
+              gauges.each do |metric|
+                key = "#{type}_#{metric}".to_sym
+                total[key] += file_stats[key]
+              end
+              data_for_row(file_stats, type, row)
+            end
+          end
+        end
+
+        table << ["TOTAL"].tap do |row|
+          types.each do |type|
+            data_for_row(total, type, row)
+          end
+        end
+      end
+    end
+
+    def data_for_row(hash, type, row)
+      row << hash[:"#{type}_count"].to_s
+      row << format_bytes(hash[:"#{type}_bytes"])
+      row << format("%.3fs", hash[:"#{type}_time"])
+    end
+
+    def add_header(table, types, gauges)
       header0 = [""]
-      %w(Liquid Markdown).each do |type|
-        3.times { header0 << type }
+      types.each do |type|
+        3.times { header0 << type.capitalize }
       end
 
       header1 = ["Filename"]
-      2.times { header1 += %w(Count Bytes Time) }
+      2.times { header1 += gauges }
 
       table << header0
       table << header1
