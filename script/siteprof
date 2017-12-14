@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+export BENCHMARK=1
+
+RUBY=$(cat <<RUBY
+  require 'method_profiler'
+
+  source_dir    = File.expand_path("docs", __dir__)
+  destination   = File.join(source_dir, "_site")
+  site_prof     = MethodProfiler.observe(Jekyll::Site)
+  renderer_prof = MethodProfiler.observe(Jekyll::Renderer)
+
+  Jekyll::Commands::Build.process(
+    'source'      => source_dir,
+    'destination' => destination
+  )
+
+  puts ''
+  puts site_prof.report.sort_by(:total_time).order(:desc)
+  puts ''
+  puts renderer_prof.report.sort_by(:total_time).order(:desc)
+RUBY
+)
+
+bundle exec ruby -r ./lib/jekyll -e "${RUBY}"
