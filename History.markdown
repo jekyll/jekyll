@@ -63,6 +63,7 @@
   * Bump yajl-ruby (#6582)
   * Cleanup test_redcarpet.rb (#6584)
   * Add PageWithoutAFile class from jekyll plugins (#6556)
+  * Cleanup LiveReloadReactor (#6607)
 
 ### Minor Enhancements
 
