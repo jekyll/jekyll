@@ -94,7 +94,7 @@ module Jekyll
     # Returns String the converted content.
     def convert(content)
       converters.reduce(content) do |output, converter|
-        profiler = site.liquid_renderer.file(document.path, "markdown")
+        profiler = site.liquid_renderer.file(document.path, "markup")
         begin
           profiler.render_with(converter, output)
         rescue StandardError => e

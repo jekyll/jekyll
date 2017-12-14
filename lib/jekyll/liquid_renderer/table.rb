@@ -78,7 +78,7 @@ module Jekyll
 
     def data_for_table(n)
       sorted = @stats.sort_by { |_, file_stats| -file_stats[:liquid_time] }.slice(0, n)
-      types  = %w(liquid markdown)
+      types  = %w(liquid markup)
       gauges = %w(count bytes time)
       total  = Hash.new { |hash, key| hash[key] = 0 }
 
