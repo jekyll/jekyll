@@ -83,6 +83,7 @@
   * Dependency: Bump jekyll-watch to 2.0 (#6589)
   * Add LiveReload functionality to Jekyll. (#5142)
   * Remove paginate check (#6606)
+  * update classifier-reborn to 2.2.0 (#6631)
 
 ### Site Enhancements
 
