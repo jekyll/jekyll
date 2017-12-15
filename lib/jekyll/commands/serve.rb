@@ -86,7 +86,6 @@ module Jekyll
           # a reactor created by a previous test when our test might not
           @reload_reactor = nil
 
-          register_reload_hooks(opts) if opts["livereload"]
           config = configuration_from_options(opts)
           if Jekyll.env == "development"
             config["url"] = default_url(config)
@@ -99,6 +98,7 @@ module Jekyll
         def process(opts)
           opts = configuration_from_options(opts)
           destination = opts["destination"]
+          register_reload_hooks(opts) if opts["livereload"]
           setup(destination)
 
           start_up_webrick(opts, destination)
