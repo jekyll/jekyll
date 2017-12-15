@@ -80,7 +80,7 @@ group :jekyll_optional_dependencies do
   gem "toml", "~> 0.2.0"
 
   platform :ruby, :mswin, :mingw, :x64_mingw do
-    gem "classifier-reborn", "~> 2.1.0"
+    gem "classifier-reborn", "~> 2.2.0"
     gem "liquid-c", "~> 3.0"
     gem "pygments.rb", "~> 1.0"
     gem "rdiscount", "~> 2.0"
