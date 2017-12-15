@@ -110,6 +110,7 @@
   * return correct file in dir if dir has same name as file (#6569)
   * Register reload hooks in Server#process (#6605)
   * Memoize path to metadata file (#6602)
+  * Use `require_relative` to load Jekyll classes (#6609)
 
 ## 3.6.2 / 2017-10-21
 
