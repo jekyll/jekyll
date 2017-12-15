@@ -56,9 +56,10 @@ end
 #
 
 group :benchmark do
+  gem "method_profiler"
+
   if ENV["BENCHMARK"]
     gem "benchmark-ips"
-    gem "method_profiler"
     gem "rbtrace"
     gem "ruby-prof"
     gem "stackprof"
