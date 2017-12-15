@@ -107,6 +107,7 @@
   * Avoid block parser warning in SmartyPants (#6565)
   * Fail gracefully if &#34;sass&#34; gem cannot be loaded (#6573)
   * return correct file in dir if dir has same name as file (#6569)
+  * Register reload hooks in Server#process (#6605)
 
 ## 3.6.2 / 2017-10-21
 
