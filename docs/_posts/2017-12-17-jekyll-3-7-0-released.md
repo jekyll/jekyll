@@ -1,7 +1,7 @@
 ---
 title: "Jekyll 3.7.0 Released"
 description: "Jekyll 3.7.0 brings livereload, a directory for your collections and much more…"
-date: 2017-12-15 12:31:40 +0100
+date: 2017-12-17 12:31:40 +0100
 author: dirtyf
 version: 3.7.0
 categories: [release]
@@ -9,10 +9,10 @@ categories: [release]
 
 We're happy to release a new minor update before Christmas!
 
-Here are a few of the latest gifts 🎁 from our contributors:
+Here are a few of the latest gifts :gift: from our contributors:
 
  * LiveReload is available as an option during development: with `jekyll serve --livereload` no more manual page refresh. A big thanks to @awood for this feature and to @andreyvit, livereload author.
- * New `collections_dir` configuration option allows you to store all your [collections](/docs/collections) in a single folder. Your source root folder should now look cleaner ✨.
+ * New `collections_dir` configuration option allows you to store all your [collections](/docs/collections) in a single folder. Your source root folder should now look cleaner :sparkles: .
  * If you're using a [gem-based theme](/docs/themes/) and the `--incremental` option, you should notice some significant speed during the regeneration process, we did see build time went down **from 12s to 2s** with @mmistakes [minimal-mistakes theme](https://github.com/mmistakes/minimal-mistakes) during our tests.
  * Jekyll will now check to determine whether host machine has internet connection.
  * A new `latin` option is available to better [handle URLs slugs](/docs/templates/#options-for-the-slugify-filter).
@@ -27,7 +27,7 @@ A big thanks to everyone!
 
 Oh, one last thing…
 
-### 🙏 upgrade your Ruby
+### :pray: upgrade your Ruby
 
 Prepare for the next major update, as next major version Jekyll 4.0 will drop support for Ruby 2.1 and 2.2.
 
@@ -35,4 +35,4 @@ Prepare for the next major update, as next major version Jekyll 4.0 will drop su
 
 We strongly encourage you to upgrade to at least Ruby 2.4.x [like our friends at GitHub Pages](https://pages.github.com/versions/) or even go with Ruby 2.5 that should be out in the coming days.
 
-🎄 A merry Christmas to all from the Jekyll team!
+:christmas_tree: A merry Christmas to all from the Jekyll team!
