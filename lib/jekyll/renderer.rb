@@ -196,7 +196,10 @@ module Jekyll
     private
     def add_regenerator_dependencies(layout)
       return unless document.write?
-      site.regenerator.add_dependency(document.path, layout.path)
+      site.regenerator.add_dependency(
+        site.in_source_dir(document.path),
+        layout.path
+      )
     end
 
     # Set page content to payload and assign pager if document has one.
