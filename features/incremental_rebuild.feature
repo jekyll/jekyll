@@ -73,13 +73,13 @@ Feature: Incremental rebuild
     When I run jekyll build --incremental --verbose
     Then I should get a zero exit status
     And the _site directory should exist
-    Then I should see "Rendering: index.md" in the build output
+    And I should see "Rendering: index.md" in the build output
     And I should see "Themed site" in "_site/index.html"
     When I wait 1 second
     And I have an "about.md" page that contains "About Themed site"
     When I run jekyll build --incremental --verbose
     Then I should get a zero exit status
     And the _site directory should exist
-    Then I should not see "Rendering: index.md" in the build output
+    And I should not see "Rendering: index.md" in the build output
     But I should see "Themed site" in "_site/index.html"
     And I should see "About Themed site" in "_site/about.html"

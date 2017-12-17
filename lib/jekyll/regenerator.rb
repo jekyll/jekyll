@@ -26,7 +26,6 @@ module Jekyll
       when Document
         regenerate_document?(document)
       else
-        return false if document.is_a?(String) && file_in_theme_dir?(document)
         source_path = document.respond_to?(:path) ? document.path : nil
         dest_path = if document.respond_to?(:destination)
                       document.destination(@site.dest)
@@ -87,9 +86,6 @@ module Jekyll
 
       # objects that don't have a path are always regenerated
       return true if path.nil?
-
-      # objects from theme-gem are never regenerated
-      return false if file_in_theme_dir?(path)
 
       # Check for path in cache
       if cache.key? path
@@ -200,17 +196,6 @@ module Jekyll
         # If it has been modified, set it to true
         add(path)
       end
-    end
-
-    private
-    def theme_root
-      @theme_root ||= site.theme.root
-    end
-
-    private
-    def file_in_theme_dir?(path)
-      return false unless site.theme
-      path.start_with?(theme_root)
     end
   end
 end
