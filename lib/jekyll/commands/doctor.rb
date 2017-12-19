@@ -36,12 +36,29 @@ module Jekyll
 
         def healthy?(site)
           [
+            outdated_dependency_check(site),
             fsnotify_buggy?(site),
             !deprecated_relative_permalinks(site),
             !conflicting_urls(site),
             !urls_only_differ_by_case(site),
             proper_site_url?(site),
           ].all?
+        end
+
+        def outdated_dependency_check(site)
+          return true unless testable?(site)
+
+          oudated_dep_regex = %r!\A\s*\*\s*!
+
+          Dir.chdir(site.source) do
+            exe = Gem.bin_path("bundler", "bundle")
+            _process, output = Jekyll::Utils::Exec.run("ruby", exe, "outdated")
+            output.to_s.each_line do |line|
+              next unless line =~ oudated_dep_regex
+              Jekyll.logger.warn "Outdated:", line.sub(oudated_dep_regex, "")
+            end
+            output.end_with? "Bundle up to date!"
+          end
         end
 
         def deprecated_relative_permalinks(site)
@@ -147,6 +164,19 @@ module Jekyll
           return true if Addressable::URI.parse(url).absolute?
           Jekyll.logger.warn "Warning:", "Your site URL does not seem to be absolute, "\
               "check the value of `url` in your config file."
+          false
+        end
+
+        def testable?(site)
+          Jekyll::Utils::Internet.connected? &&
+            File.exist?(site.in_source_dir("Gemfile")) &&
+            bundler_installed?
+        end
+
+        def bundler_installed?
+          require "bundler"
+          true
+        rescue LoadError
           false
         end
       end
