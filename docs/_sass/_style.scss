@@ -1129,22 +1129,22 @@ code.output {
   position: relative;
   &:before {
     display: table;
-    padding: 5px 8px;
+    padding: 8px;
     width: 100%;
-    color: #272727;
-    text-shadow: none;
-    font-size: 14px;
-    line-height: 1.25;
-    font-weight: 700;
+    color: #888;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
     content: "TERMINAL";
     text-align: center;
-    background: linear-gradient(#b3b3b3, #ededed);
+    background: linear-gradient(#f7f7f7 0%, #ddd 7%, #b3b3b3 100%);
     border: 1px solid #333;
     @include border-radius(5px 5px 0 0);
   }
   &:after {
     position: absolute;
-    top: 9px;
+    top: 12px;
     left: 9px;
     content: "";
     width: 10px;
