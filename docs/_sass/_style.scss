@@ -1126,6 +1126,7 @@ code.output {
 }
 
 .language-sh {
+  position: relative;
   &:before {
     display: table;
     padding: 5px 8px;
@@ -1136,11 +1137,26 @@ code.output {
     line-height: 1.25;
     font-weight: 700;
     content: "TERMINAL";
-    background: #7a7a7a;
+    text-align: center;
+    background: linear-gradient(#b3b3b3, #ededed);
     border: 1px solid #333;
     @include border-radius(5px 5px 0 0);
   }
+  &:after {
+    position: absolute;
+    top: 9px;
+    left: 9px;
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background: #fe5f57;
+    box-shadow: 15px 0 0 0 #ffbd2e, 30px 0px 0 0 #29c941;
+  }
   .highlight {
     @include border-radius(0 0 5px 5px);
+  }
+  pre.highlight {
+    background: #1c1c1c;
   }
 }
