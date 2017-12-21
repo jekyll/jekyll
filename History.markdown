@@ -33,6 +33,7 @@
   * Add `disqus-for-jekyll` to plugins. (#6618)
   * Update &#34;Requirements&#34; for Ruby version (#6623)
   * Fix: Update link to i18n_filter plugin (#6638)
+  * Correct WordPress capitalization (#6645)
 
 ### Development Fixes
 
