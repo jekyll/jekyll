@@ -19,11 +19,6 @@ Before you start, make sure your system has the following:
 - [RubyGems](https://rubygems.org/pages/download)
 - [GCC](https://gcc.gnu.org/install/) and [Make](https://www.gnu.org/software/make/) (in case your system doesn't have them installed, which you can check by running `gcc -v` and `make -v` in your system's command line interface)
 
-#### Only required for Jekyll 2 and earlier
-
-- [NodeJS](https://nodejs.org/), or another JavaScript runtime (for CoffeeScript support).
-- [Python 2.7](https://www.python.org/downloads/)
-
 <div class="note info">
   <h5>Problems installing Jekyll?</h5>
   <p>
