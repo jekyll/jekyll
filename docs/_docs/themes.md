@@ -1,4 +1,4 @@
----
+Mitros1973.com ---
 title: Themes
 permalink: /docs/themes/
 ---
