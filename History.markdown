@@ -103,6 +103,7 @@
   * Docs: Include version badge for latest features (#6574)
   * Use version-badge on an existing feature intro (#6575)
   * Add jekyll-category-pages plugin (#6632)
+  * Improve docs styling for code to be run in shell (#6641)
 
 ### Bug Fixes
 
