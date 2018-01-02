@@ -89,6 +89,7 @@
   * Remove paginate check (#6606)
   * update classifier-reborn to 2.2.0 (#6631)
   * Switch to an actively-maintained TOML parser. (#6652)
+  * Do not coerce layout paths in theme-gem to the source directory (#6603)
 
 ### Site Enhancements
 
