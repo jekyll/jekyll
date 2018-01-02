@@ -87,6 +87,7 @@
   * Add LiveReload functionality to Jekyll. (#5142)
   * Remove paginate check (#6606)
   * update classifier-reborn to 2.2.0 (#6631)
+  * Switch to an actively-maintained TOML parser. (#6652)
 
 ### Site Enhancements
 
