@@ -35,6 +35,7 @@
   * Fix: Update link to i18n_filter plugin (#6638)
   * Correct WordPress capitalization (#6645)
   * Add Tweetsert, Stickyposts, Paginate::Content (#6651)
+  * Post: Jekyll 3.7.0 released (#6634)
 
 ### Development Fixes
 
