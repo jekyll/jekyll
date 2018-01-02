@@ -107,6 +107,7 @@
   * Use version-badge on an existing feature intro (#6575)
   * Add jekyll-category-pages plugin (#6632)
   * Improve docs styling for code to be run in shell (#6641)
+  * Fix permalink icon markup in news-item layout (#6639)
 
 ### Bug Fixes
 
