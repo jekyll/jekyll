@@ -1,19 +1,18 @@
 ---
 title: "Jekyll 3.7.0 Released"
-description: "Jekyll 3.7.0 brings livereload, a directory for your collections and much more…"
-date: 2017-12-17 12:31:40 +0100
-author: dirtyf
+description: "Jekyll 3.7.0 brings LiveReload, a directory for your collections and much more…"
+date: 2017-01-02 12:31:40 +0100
+author: DirtyF
 version: 3.7.0
 categories: [release]
 ---
 
-We're happy to release a new minor update before Christmas!
+We're happy to release a new minor for the new year.
+Here are a few of the latest additions from our contributors:
 
-Here are a few of the latest gifts :gift: from our contributors:
-
- * LiveReload is available as an option during development: with `jekyll serve --livereload` no more manual page refresh. A big thanks to @awood for this feature and to @andreyvit, livereload author.
+ * LiveReload is available as an option during development: with `jekyll serve --livereload` no more manual page refresh. A big thanks to @awood for this feature and to @andreyvit, LiveReload author.
  * New `collections_dir` configuration option allows you to store all your [collections](/docs/collections) in a single folder. Your source root folder should now look cleaner :sparkles: .
- * If you're using a [gem-based theme](/docs/themes/) and the `--incremental` option, you should notice some significant speed during the regeneration process, we did see build time went down **from 12s to 2s** with @mmistakes [minimal-mistakes theme](https://github.com/mmistakes/minimal-mistakes) during our tests.
+ * If you're using a [gem-based theme](/docs/themes/) in coordination with the `--incremental` option, you should notice some significant speed during the regeneration process, we did see build time went down **from 12s to 2s** with @mmistakes [minimal-mistakes theme](https://github.com/mmistakes/minimal-mistakes) during our tests.
  * Jekyll will now check to determine whether host machine has internet connection.
  * A new `latin` option is available to better [handle URLs slugs](/docs/templates/#options-for-the-slugify-filter).
  * And of course many bug fixes and updates to our documentation — which you can now search thanks to our friends @Algolia.
@@ -33,6 +32,6 @@ Prepare for the next major update, as next major version Jekyll 4.0 will drop su
 
 > Ruby 2.2 is now under the state of the security maintenance phase, until the end of the March of 2018. After the date, maintenance of Ruby 2.2 will be ended. We recommend you start planning migration to newer versions of Ruby, such as 2.4 or 2.3. — [Ruby Core Team](https://www.ruby-lang.org/en/news/2017/12/14/ruby-2-2-9-released/)
 
-We strongly encourage you to upgrade to at least Ruby 2.4.x [like our friends at GitHub Pages](https://pages.github.com/versions/) or even go with Ruby 2.5 that should be out in the coming days.
+We strongly encourage you to upgrade to at least Ruby 2.4.x [like our friends at GitHub Pages](https://pages.github.com/versions/) or even go with [Ruby 2.5](https://www.ruby-lang.org/en/news/2017/12/25/ruby-2-5-0-released/).
 
-:christmas_tree: A merry Christmas to all from the Jekyll team!
+Happy new year to all from the Jekyll team!
