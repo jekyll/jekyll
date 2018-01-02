@@ -16,7 +16,7 @@ Here are a few of the latest additions from our contributors:
  * Jekyll will now check to determine whether host machine has internet connection.
  * A new `latin` option is available to better [handle URLs slugs](/docs/templates/#options-for-the-slugify-filter).
  * And of course many bug fixes and updates to our documentation — which you can now search thanks to our friends @Algolia.
- * [Full history is here]((/docs/history/#v3-7-0)).
+ * [Full history is here](/docs/history/#v3-7-0).
 
 This release wouldn't have been possible without all the following people:
 
