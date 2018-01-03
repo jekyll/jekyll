@@ -48,16 +48,13 @@ module Jekyll
         def outdated_dependency_check(site)
           return true unless testable?(site)
 
-          oudated_dep_regex = %r!\A\s*\*\s*!
-
           Dir.chdir(site.source) do
             exe = Gem.bin_path("bundler", "bundle")
-            _process, output = Jekyll::Utils::Exec.run("ruby", exe, "outdated")
+            output = Jekyll::Utils::Exec.run("ruby", exe, "outdated", "--parseable")[-1]
             output.to_s.each_line do |line|
-              next unless line =~ oudated_dep_regex
-              Jekyll.logger.warn "Outdated:", line.sub(oudated_dep_regex, "")
+              Jekyll.logger.warn "Outdated:", line
             end
-            output.end_with? "Bundle up to date!"
+            output.empty?
           end
         end
 
