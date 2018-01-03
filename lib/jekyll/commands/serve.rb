@@ -173,6 +173,7 @@ module Jekyll
             @changed_pages = nil
           end
         end
+        # rubocop:enable Metrics/AbcSize
 
         # Do a base pre-setup of WEBRick so that everything is in place
         # when we get ready to party, checking for an setting up an error page
