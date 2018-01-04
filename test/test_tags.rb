@@ -912,7 +912,9 @@ CONTENT
         end
         assert_match(
           "Could not locate the included file 'tmp/pages-test-does-not-exist' " \
-          "in any of [\"#{source_dir}/_includes\"].",
+          "in any of [\"#{source_dir}/_includes\"]. Ensure it exists in one of " \
+          "those directories and is not a symlink as those are not allowed in " \
+          "safe mode.",
           ex.message
         )
       end
@@ -1271,8 +1273,8 @@ CONTENT
           })
         end
         assert_match(
-          "Ensure it exists in one of those directories and, if it is a symlink, does " \
-          "not point outside your site source.",
+          "Ensure it exists in one of those directories and is not a symlink "\
+          "as those are not allowed in safe mode.",
           ex.message
         )
       end
