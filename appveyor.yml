@@ -28,8 +28,6 @@ environment:
       TEST_SUITE: "test"
     - RUBY_FOLDER_VER: "22"
       TEST_SUITE: "test"
-    - RUBY_FOLDER_VER: "21"
-      TEST_SUITE: "test"
 
 test_script:
   - ruby --version
