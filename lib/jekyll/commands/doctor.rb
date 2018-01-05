@@ -50,12 +50,17 @@ module Jekyll
 
           Dir.chdir(site.source) do
             exe = Gem.bin_path("bundler", "bundle")
-            output = Jekyll::Utils::Exec.run("ruby", exe, "outdated", "--parseable")[-1]
+            process, output = Jekyll::Utils::Exec.run(
+              "ruby", exe, "outdated", "--parseable"
+            )
+
+            raise SystemExit unless process.success?
+            return true if output.empty?
+
             output.to_s.each_line do |line|
               Jekyll.logger.warn "Outdated gem:", line
             end
 
-            return true if output.empty?
             Jekyll.logger.info "", "Found outdated site dependencies!".magenta
             Jekyll.logger.info "", "Run `bundle update` to use latest " \
                                    "versions of those gems in your site".magenta
