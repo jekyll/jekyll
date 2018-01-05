@@ -1,4 +1,68 @@
-## HEAD
+## 3.7.0 / 2018-01-02
+
+### Minor Enhancements
+
+  * Add LiveReload functionality to Jekyll. (#5142)
+  * Add Utils::Internet.connected? to determine whether host machine has internet connection. (#5870)
+  * Disable default layouts for Pages with a `layout: none` declaration (#6182)
+  * Scope path glob (#6268)
+  * Allow the user to set collections_dir to put all collections under one subdirectory (#6331)
+  * Upgrade to Rouge 3 (#6381)
+  * Allow URL filters to work directly with documents (#6478)
+  * filter relative_url should keep absolute urls with scheme/authority (#6490)
+  * `.sass-cache` doesn&#39;t *always* land in `options[&#39;source&#39;]` (#6500)
+  * Allow plugins to modify the obsolete files. (#6502)
+  * Add latin mode to `slugify` (#6509)
+  * Log Kramdown warnings if log level is WARN (#6522)
+  * Add an option to configure kramdown warning output (#6554)
+  * Add `json` extension to list of directory indices (#6550)
+  * Dependency: Bump jekyll-watch to 2.0 (#6589)
+  * Remove paginate check (#6606)
+  * update classifier-reborn to 2.2.0 (#6631)
+  * Switch to an actively-maintained TOML parser. (#6652)
+  * Do not coerce layout paths in theme-gem to the source directory (#6603)
+
+### Bug Fixes
+
+  * Raise when theme root directory is not available (#6455)
+  * Avoid block parser warning in SmartyPants (#6565)
+  * Fail gracefully if &#34;sass&#34; gem cannot be loaded (#6573)
+  * return correct file in dir if dir has same name as file (#6569)
+  * Register reload hooks in Server#process (#6605)
+  * Memoize path to metadata file (#6602)
+  * Use `require_relative` to load Jekyll classes (#6609)
+
+### Development Fixes
+
+  * Added direct collection access to future collection item feature test(#6151)
+  * add failing test for non-utf8 encoding (#6339)
+  * Upgrade to Cucumber 3.0 (#6395)
+  * Provide a better default hash for tracking liquid stats (#6417)
+  * Add configuration for first-timers bot (#6431)
+  * Do not linkify escaped characters as PRs in History (#6468)
+  * Rely on jekyll-mentions for linking usernames (#6469)
+  * Update first-timers-issue-template.md (#6472)
+  * Enable `Lint/RescueWithoutErrorClass` Cop (#6482)
+  * Clean up Rubocop config (#6495)
+  * Use Gem to discover the location of bundler (#6499)
+  * Remove unnecessary encoding comment (#6513)
+  * Suggest using Rubocop to automatically fix errors (#6514)
+  * Assert raising Psych::SyntaxError when`&#34;strict_front_matter&#34;=&gt;true` (#6520)
+  * Use Kernel#Array instead of explicit Array check (#6525)
+  * RuboCop: Enable `Style/UnneededCapitalW` cop (#6526)
+  * Refactor method to reduce ABC Metric size (#6529)
+  * Remove parentheses around arguments to raise (#6532)
+  * Use double-quotes around gem name (#6535)
+  * Dependencies: upgrade to toml 0.2.0 (#6541)
+  * Lock to cucumber 3.0.1 on Ruby 2.1 (#6546)
+  * Bump JRuby version in Travis config (#6561)
+  * Rescue from Psych::SyntaxError instead of SyntaxError after parsing YAML(#5828)
+  * Drop forwarding to private methods by exposing those methods as public(#6577)
+  * Upgrade pygments to v1.x (#5937)
+  * Bump yajl-ruby (#6582)
+  * Cleanup test_redcarpet.rb (#6584)
+  * Add PageWithoutAFile class from jekyll plugins (#6556)
+  * Cleanup LiveReloadReactor (#6607)
 
 ### Documentation
 
@@ -28,53 +92,14 @@
   * Add jekyll-pwa-plugin (#6533)
   * Remove Jekyll-Smartify from plugins directory (#6548)
   * Updated Jekyll-Pug listing to include official website (#6555)
-
-### Development Fixes
-
-  * Added direct collection access to future collection item feature test (#6151)
-  * add failing test for non-utf8 encoding (#6339)
-  * Upgrade to Cucumber 3.0 (#6395)
-  * Provide a better default hash for tracking liquid stats (#6417)
-  * Add configuration for first-timers bot (#6431)
-  * Do not linkify escaped characters as PRs in History (#6468)
-  * Rely on jekyll-mentions for linking usernames (#6469)
-  * Update first-timers-issue-template.md (#6472)
-  * Enable `Lint/RescueWithoutErrorClass` Cop (#6482)
-  * Clean up Rubocop config (#6495)
-  * Use Gem to discover the location of bundler (#6499)
-  * Remove unnecessary encoding comment (#6513)
-  * Suggest using Rubocop to automatically fix errors (#6514)
-  * Assert raising Psych::SyntaxError when `&#34;strict_front_matter&#34;=&gt;true` (#6520)
-  * Use Kernel#Array instead of explicit Array check (#6525)
-  * RuboCop: Enable `Style/UnneededCapitalW` cop (#6526)
-  * Refactor method to reduce ABC Metric size (#6529)
-  * Remove parentheses around arguments to raise (#6532)
-  * Use double-quotes around gem name (#6535)
-  * Dependencies: upgrade to toml 0.2.0 (#6541)
-  * Lock to cucumber 3.0.1 on Ruby 2.1 (#6546)
-  * Bump JRuby version in Travis config (#6561)
-  * Rescue from Psych::SyntaxError instead of SyntaxError after parsing YAML (#5828)
-  * Drop forwarding to private methods by exposing those methods as public (#6577)
-  * Upgrade pygments to v1.x (#5937)
-  * Bump yajl-ruby (#6582)
-  * Cleanup test_redcarpet.rb (#6584)
-  * Add PageWithoutAFile class from jekyll plugins (#6556)
-
-### Minor Enhancements
-
-  * Add Utils::Internet.connected? to determine whether host machine has internet connection. (#5870)
-  * Disable default layouts for Pages with a `layout: none` declaration (#6182)
-  * Scope path glob (#6268)
-  * Allow the user to set collections_dir to put all collections under one subdirectory (#6331)
-  * Upgrade to Rouge 3 (#6381)
-  * Allow URL filters to work directly with documents (#6478)
-  * filter relative_url should keep absolute urls with scheme/authority (#6490)
-  * .sass-cache doesn&#39;t *always* land in `options[&#39;source&#39;]` (#6500)
-  * Allow plugins to modify the obsolete files. (#6502)
-  * Add latin mode to slugify (#6509)
-  * Log Kramdown warnings if log level is WARN (#6522)
-  * Add json extension to list of directory indices (#6550)
-  * Dependency: Bump jekyll-watch to 2.0 (#6589)
+  * Remove link to severly outdated asset plugin (#6613)
+  * Default time zone depends upon server (#6617)
+  * Add `disqus-for-jekyll` to plugins. (#6618)
+  * Update &#34;Requirements&#34; for Ruby version (#6623)
+  * Fix: Update link to i18n_filter plugin (#6638)
+  * Correct WordPress capitalization (#6645)
+  * Add Tweetsert, Stickyposts, Paginate::Content (#6651)
+  * Post: Jekyll 3.7.0 released (#6634)
 
 ### Site Enhancements
 
@@ -92,13 +117,9 @@
   * Move logo above site navigation on small screens (#6570)
   * Docs: Include version badge for latest features (#6574)
   * Use version-badge on an existing feature intro (#6575)
-
-### Bug Fixes
-
-  * Raise when theme root directory is not available (#6455)
-  * Avoid block parser warning in SmartyPants (#6565)
-  * Fail gracefully if &#34;sass&#34; gem cannot be loaded (#6573)
-  * return correct file in dir if dir has same name as file (#6569)
+  * Add jekyll-category-pages plugin (#6632)
+  * Improve docs styling for code to be run in shell (#6641)
+  * Fix permalink icon markup in news-item layout (#6639)
 
 ## 3.6.2 / 2017-10-21
 

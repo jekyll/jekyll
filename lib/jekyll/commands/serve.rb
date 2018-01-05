@@ -1,20 +1,43 @@
 # frozen_string_literal: true
 
+require "thread"
+
 module Jekyll
   module Commands
     class Serve < Command
+      # Similar to the pattern in Utils::ThreadEvent except we are maintaining the
+      # state of @running instead of just signaling an event.  We have to maintain this
+      # state since Serve is just called via class methods instead of an instance
+      # being created each time.
+      @mutex = Mutex.new
+      @run_cond = ConditionVariable.new
+      @running = false
+
       class << self
         COMMAND_OPTIONS = {
-          "ssl_cert"           => ["--ssl-cert [CERT]", "X.509 (SSL) certificate."],
-          "host"               => ["host", "-H", "--host [HOST]", "Host to bind to"],
-          "open_url"           => ["-o", "--open-url", "Launch your site in a browser"],
-          "detach"             => ["-B", "--detach", "Run the server in the background"],
-          "ssl_key"            => ["--ssl-key [KEY]", "X.509 (SSL) Private Key."],
-          "port"               => ["-P", "--port [PORT]", "Port to listen on"],
-          "show_dir_listing"   => ["--show-dir-listing",
+          "ssl_cert"             => ["--ssl-cert [CERT]", "X.509 (SSL) certificate."],
+          "host"                 => ["host", "-H", "--host [HOST]", "Host to bind to"],
+          "open_url"             => ["-o", "--open-url", "Launch your site in a browser"],
+          "detach"               => ["-B", "--detach",
+            "Run the server in the background",],
+          "ssl_key"              => ["--ssl-key [KEY]", "X.509 (SSL) Private Key."],
+          "port"                 => ["-P", "--port [PORT]", "Port to listen on"],
+          "show_dir_listing"     => ["--show-dir-listing",
             "Show a directory listing instead of loading your index file.",],
-          "skip_initial_build" => ["skip_initial_build", "--skip-initial-build",
+          "skip_initial_build"   => ["skip_initial_build", "--skip-initial-build",
             "Skips the initial site build which occurs before the server is started.",],
+          "livereload"           => ["-l", "--livereload",
+            "Use LiveReload to automatically refresh browsers",],
+          "livereload_ignore"    => ["--livereload-ignore ignore GLOB1[,GLOB2[,...]]",
+            Array,
+            "Files for LiveReload to ignore. Remember to quote the values so your shell "\
+            "won't expand them",],
+          "livereload_min_delay" => ["--livereload-min-delay [SECONDS]",
+            "Minimum reload delay",],
+          "livereload_max_delay" => ["--livereload-max-delay [SECONDS]",
+            "Maximum reload delay",],
+          "livereload_port"      => ["--livereload-port [PORT]", Integer,
+            "Port for LiveReload to listen on",],
         }.freeze
 
         DIRECTORY_INDEX = %w(
@@ -26,7 +49,11 @@ module Jekyll
           index.json
         ).freeze
 
-        #
+        LIVERELOAD_PORT = 35_729
+        LIVERELOAD_DIR = File.join(__dir__, "serve", "livereload_assets")
+
+        attr_reader :mutex, :run_cond, :running
+        alias_method :running?, :running
 
         def init_with_program(prog)
           prog.command(:serve) do |cmd|
@@ -41,16 +68,29 @@ module Jekyll
             end
 
             cmd.action do |_, opts|
+              opts["livereload_port"] ||= LIVERELOAD_PORT
               opts["serving"] = true
               opts["watch"  ] = true unless opts.key?("watch")
 
-              config = configuration_from_options(opts)
-              if Jekyll.env == "development"
-                config["url"] = default_url(config)
-              end
-              [Build, Serve].each { |klass| klass.process(config) }
+              start(opts)
             end
           end
+        end
+
+        #
+
+        def start(opts)
+          # Set the reactor to nil so any old reactor will be GCed.
+          # We can't unregister a hook so in testing when Serve.start is
+          # called multiple times we don't want to inadvertently keep using
+          # a reactor created by a previous test when our test might not
+          @reload_reactor = nil
+
+          config = configuration_from_options(opts)
+          if Jekyll.env == "development"
+            config["url"] = default_url(config)
+          end
+          [Build, Serve].each { |klass| klass.process(config) }
         end
 
         #
@@ -58,9 +98,80 @@ module Jekyll
         def process(opts)
           opts = configuration_from_options(opts)
           destination = opts["destination"]
+          register_reload_hooks(opts) if opts["livereload"]
           setup(destination)
 
           start_up_webrick(opts, destination)
+        end
+
+        def shutdown
+          @server.shutdown if running?
+        end
+
+        # Perform logical validation of CLI options
+
+        private
+        def validate_options(opts)
+          if opts["livereload"]
+            if opts["detach"]
+              Jekyll.logger.warn "Warning:",
+                "--detach and --livereload are mutually exclusive. Choosing --livereload"
+              opts["detach"] = false
+            end
+            if opts["ssl_cert"] || opts["ssl_key"]
+              # This is not technically true.  LiveReload works fine over SSL, but
+              # EventMachine's SSL support in Windows requires building the gem's
+              # native extensions against OpenSSL and that proved to be a process
+              # so tedious that expecting users to do it is a non-starter.
+              Jekyll.logger.abort_with "Error:", "LiveReload does not support SSL"
+            end
+            unless opts["watch"]
+              # Using livereload logically implies you want to watch the files
+              opts["watch"] = true
+            end
+          elsif %w(livereload_min_delay
+              livereload_max_delay
+              livereload_ignore
+              livereload_port).any? { |o| opts[o] }
+            Jekyll.logger.abort_with "--livereload-min-delay, "\
+               "--livereload-max-delay, --livereload-ignore, and "\
+               "--livereload-port require the --livereload option."
+          end
+        end
+
+        #
+
+        private
+        # rubocop:disable Metrics/AbcSize
+        def register_reload_hooks(opts)
+          require_relative "serve/live_reload_reactor"
+          @reload_reactor = LiveReloadReactor.new
+
+          Jekyll::Hooks.register(:site, :post_render) do |site|
+            regenerator = Jekyll::Regenerator.new(site)
+            @changed_pages = site.pages.select do |p|
+              regenerator.regenerate?(p)
+            end
+          end
+
+          # A note on ignoring files: LiveReload errs on the side of reloading when it
+          # comes to the message it gets.  If, for example, a page is ignored but a CSS
+          # file linked in the page isn't, the page will still be reloaded if the CSS
+          # file is contained in the message sent to LiveReload.  Additionally, the
+          # path matching is very loose so that a message to reload "/" will always
+          # lead the page to reload since every page starts with "/".
+          Jekyll::Hooks.register(:site, :post_write) do
+            if @changed_pages && @reload_reactor && @reload_reactor.running?
+              ignore, @changed_pages = @changed_pages.partition do |p|
+                Array(opts["livereload_ignore"]).any? do |filter|
+                  File.fnmatch(filter, Jekyll.sanitized_path(p.relative_path))
+                end
+              end
+              Jekyll.logger.debug "LiveReload:", "Ignoring #{ignore.map(&:relative_path)}"
+              @reload_reactor.reload(@changed_pages)
+            end
+            @changed_pages = nil
+          end
         end
 
         # Do a base pre-setup of WEBRick so that everything is in place
@@ -92,6 +203,7 @@ module Jekyll
             :MimeTypes          => mime_types,
             :DocumentRoot       => opts["destination"],
             :StartCallback      => start_callback(opts["detach"]),
+            :StopCallback       => stop_callback(opts["detach"]),
             :BindAddress        => opts["host"],
             :Port               => opts["port"],
             :DirectoryIndex     => DIRECTORY_INDEX,
@@ -108,11 +220,16 @@ module Jekyll
 
         private
         def start_up_webrick(opts, destination)
-          server = WEBrick::HTTPServer.new(webrick_opts(opts)).tap { |o| o.unmount("") }
-          server.mount(opts["baseurl"].to_s, Servlet, destination, file_handler_opts)
-          Jekyll.logger.info "Server address:", server_address(server, opts)
-          launch_browser server, opts if opts["open_url"]
-          boot_or_detach server, opts
+          if opts["livereload"]
+            @reload_reactor.start(opts)
+          end
+
+          @server = WEBrick::HTTPServer.new(webrick_opts(opts)).tap { |o| o.unmount("") }
+          @server.mount(opts["baseurl"].to_s, Servlet, destination, file_handler_opts)
+
+          Jekyll.logger.info "Server address:", server_address(@server, opts)
+          launch_browser @server, opts if opts["open_url"]
+          boot_or_detach @server, opts
         end
 
         # Recreate NondisclosureName under utf-8 circumstance
@@ -227,7 +344,29 @@ module Jekyll
         def start_callback(detached)
           unless detached
             proc do
-              Jekyll.logger.info("Server running...", "press ctrl-c to stop.")
+              mutex.synchronize do
+                # Block until EventMachine reactor starts
+                @reload_reactor.started_event.wait unless @reload_reactor.nil?
+                @running = true
+                Jekyll.logger.info("Server running...", "press ctrl-c to stop.")
+                @run_cond.broadcast
+              end
+            end
+          end
+        end
+
+        private
+        def stop_callback(detached)
+          unless detached
+            proc do
+              mutex.synchronize do
+                unless @reload_reactor.nil?
+                  @reload_reactor.stop
+                  @reload_reactor.stopped_event.wait
+                end
+                @running = false
+                @run_cond.broadcast
+              end
             end
           end
         end

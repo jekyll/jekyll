@@ -80,6 +80,7 @@ module Jekyll
         "input"         => "GFM",
         "hard_wrap"     => false,
         "footnote_nr"   => 1,
+        "show_warnings" => false,
       },
     }.map { |k, v| [k, v.freeze] }].freeze
 
@@ -96,7 +97,7 @@ module Jekyll
       # problems and backwards-compatibility.
       def from(user_config)
         Utils.deep_merge_hashes(DEFAULTS, Configuration[user_config].stringify_keys)
-          .fix_common_issues.add_default_collections
+          .add_default_collections
       end
     end
 
@@ -133,8 +134,8 @@ module Jekyll
     def safe_load_file(filename)
       case File.extname(filename)
       when %r!\.toml!i
-        Jekyll::External.require_with_graceful_fail("toml") unless defined?(TOML)
-        TOML.load_file(filename)
+        Jekyll::External.require_with_graceful_fail("tomlrb") unless defined?(Tomlrb)
+        Tomlrb.load_file(filename)
       when %r!\.ya?ml!i
         SafeYAML.load_file(filename) || {}
       else
@@ -209,7 +210,7 @@ module Jekyll
         warn err
       end
 
-      configuration.fix_common_issues.backwards_compatibilize.add_default_collections
+      configuration.backwards_compatibilize.add_default_collections
     end
 
     # Public: Split a CSV string into an array containing its values
@@ -245,18 +246,9 @@ module Jekyll
       config
     end
 
+    # DEPRECATED.
     def fix_common_issues
-      config = clone
-
-      if config.key?("paginate") && (!config["paginate"].is_a?(Integer) ||
-             config["paginate"] < 1)
-
-        Jekyll.logger.warn "Config Warning:", "The `paginate` key must be a positive" \
-          " integer or nil. It's currently set to '#{config["paginate"].inspect}'."
-        config["paginate"] = nil
-      end
-
-      config
+      self
     end
 
     def add_default_collections

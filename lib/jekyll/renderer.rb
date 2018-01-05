@@ -198,7 +198,7 @@ module Jekyll
       return unless document.write?
       site.regenerator.add_dependency(
         site.in_source_dir(document.path),
-        site.in_source_dir(layout.path)
+        layout.path
       )
     end
 

@@ -8,6 +8,7 @@ module Jekyll
     autoload :Internet, "jekyll/utils/internet"
     autoload :Platforms, "jekyll/utils/platforms"
     autoload :Rouge, "jekyll/utils/rouge"
+    autoload :ThreadEvent, "jekyll/utils/thread_event"
     autoload :WinTZ, "jekyll/utils/win_tz"
 
     # Constants for use in #slugify
