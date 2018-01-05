@@ -1,3 +1,9 @@
+## HEAD
+
+### Development Fixes
+
+  * CI: Test against Ruby 2.5.0 (#6664)
+
 ## 3.7.0 / 2018-01-02
 
 ### Minor Enhancements
