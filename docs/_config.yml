@@ -1,12 +1,25 @@
 ---
-sass:
-  style: compressed
 version: 3.7.0
+name: Jekyll • Simple, blog-aware, static sites
+description: Transform your plain text into static websites and blogs
+url: https://jekyllrb.com
+repository: https://github.com/jekyll/jekyll
+timezone: America/Los_Angeles
+twitter:
+  username: jekyllrb
+logo: "/img/logo-2x.png"
 gauges_id: 503c5af6613f5d0f19000027
 google_analytics_id: UA-50755011-1
 google_site_verification: onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY
-repository: https://github.com/jekyll/jekyll
-timezone: America/Los_Angeles
+collections:
+  docs:
+    permalink: "/:collection/:path/"
+    output: true
+  posts:
+    permalink: "/news/:year/:month/:day/:title/"
+    output: true
+  tutorials:
+    output: true
 defaults:
 - scope:
     path: _docs
@@ -19,21 +32,6 @@ defaults:
   values:
     layout: news_item
     image: "/img/twitter-card.png"
-collections:
-  docs:
-    permalink: "/:collection/:path/"
-    output: true
-  posts:
-    permalink: "/news/:year/:month/:day/:title/"
-    output: true
-  tutorials:
-    output: true
-name: Jekyll • Simple, blog-aware, static sites
-description: Transform your plain text into static websites and blogs
-url: https://jekyllrb.com
-twitter:
-  username: jekyllrb
-logo: "/img/logo-2x.png"
 plugins:
 - jekyll-avatar
 - jekyll-feed
@@ -42,6 +40,8 @@ plugins:
 - jekyll-seo-tag
 - jekyll-sitemap
 - jemoji
+sass:
+  style: compressed
 exclude:
 - ".gitignore"
 - CNAME
