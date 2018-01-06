@@ -7,6 +7,7 @@
 ### Site Enhancements
 
   * Display latest version in header (#6676)
+  * Update version in `config.yml` via YAML load / dump (#6677)
 
 ## 3.7.0 / 2018-01-02
 
