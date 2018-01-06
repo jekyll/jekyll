@@ -4,6 +4,10 @@
 
   * CI: Test against Ruby 2.5.0 (#6664)
 
+### Site Enhancements
+
+  * Display latest version in header (#6676)
+
 ## 3.7.0 / 2018-01-02
 
 ### Minor Enhancements
