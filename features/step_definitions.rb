@@ -95,6 +95,19 @@ end
 
 #
 
+Given(%r!^I have the following posts? under (.*):$!) do |folder, table|
+  table.hashes.each do |input_hash|
+    title = slug(input_hash["title"])
+    parsed_date = Time.xmlschema(input_hash["date"]) rescue Time.parse(input_hash["date"])
+    filename = "#{parsed_date.strftime("%Y-%m-%d")}-#{title}.markdown"
+
+    path = File.join(folder, "_posts", filename)
+    File.write(path, file_content_from_hash(input_hash))
+  end
+end
+
+#
+
 Given(%r!^I have the following documents? under the (.*) collection:$!) do |folder, table|
   table.hashes.each do |input_hash|
     title = slug(input_hash["title"])
@@ -102,6 +115,16 @@ Given(%r!^I have the following documents? under the (.*) collection:$!) do |fold
     dest_folder = "_#{folder}"
 
     path = File.join(dest_folder, filename)
+    File.write(path, file_content_from_hash(input_hash))
+  end
+end
+
+#
+
+Given(%r!^I have the following documents? under the (.*) collection in (.*):$!) do |folder, directory, table|
+  table.hashes.each do |input_hash|
+    title = slug(input_hash["title"])
+    path = File.join(directory, "_#{folder}", "#{title}.md")
     File.write(path, file_content_from_hash(input_hash))
   end
 end
