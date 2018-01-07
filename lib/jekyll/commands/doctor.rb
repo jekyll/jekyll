@@ -41,7 +41,18 @@ module Jekyll
             !conflicting_urls(site),
             !urls_only_differ_by_case(site),
             proper_site_url?(site),
+            properly_gathered_posts?(site),
           ].all?
+        end
+
+        def properly_gathered_posts?(site)
+          return true if site.config["collections_dir"].empty?
+          posts_at_root = site.in_source_dir("_posts")
+          return true unless File.directory?(posts_at_root)
+          Jekyll.logger.warn "Warning:", "Contents of #{posts_at_root} will not be " \
+                             "processed since you have specified a custom directory " \
+                             "to house all collections."
+          false
         end
 
         def deprecated_relative_permalinks(site)
