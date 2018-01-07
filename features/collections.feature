@@ -164,6 +164,36 @@ Feature: Collections
     And the "_site/puppies/rover.html" file should exist
     And I should see "Totally nothing." in "_site/none-permalink-schema.html"
 
+  Scenario: Rendered collection with custom collections_dir and drafts
+    Given I have a collections/_puppies directory
+    And I have the following documents under the puppies collection in collections:
+      | title  | date       | content             |
+      | Rover  | 2007-12-31 | content for Rover.  |
+    And I have a collections/_posts directory
+    And I have the following post in collections directory:
+      | title                 | date       | content          |
+      | None Permalink Schema | 2009-03-27 | Totally nothing. |
+    And I have a _drafts directory
+    And I have the following draft:
+      | title                        | date       | content          |
+      | Drafts At The Root of Source | 2009-03-27 | This is a draft. |
+    And I have a "_config.yml" file with content:
+    """
+    permalink: none
+
+    collections:
+      puppies:
+        output: true
+
+    collections_dir: collections
+    """
+    When I run jekyll build --drafts
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And the "_site/puppies/rover.html" file should exist
+    And the "_site/drafts-at-the-root-of-source.html" file should exist
+    And I should see "Totally nothing." in "_site/none-permalink-schema.html"
+
   Scenario: Hidden collection with custom collections_dir and a post
     Given I have a collections/_puppies directory
     And I have the following documents under the puppies collection in collections:
