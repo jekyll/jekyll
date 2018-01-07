@@ -9,6 +9,10 @@
   * Display latest version in header (#6676)
   * Update version in `config.yml` via YAML load / dump (#6677)
 
+### Documentation
+
+  * Fix: Add note about posts in context of collections_dir (#6680)
+
 ## 3.7.0 / 2018-01-02
 
 ### Minor Enhancements
