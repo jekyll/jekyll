@@ -139,6 +139,32 @@ Feature: Collections
     And the _site directory should exist
     And the "_site/puppies/fido.html" file should not exist
 
+  Scenario: Hidden collection with custom collections_dir and post
+    Given I have a collections/_puppies directory
+    And I have the following documents under the puppies collection:
+      | title  | date       | content             |
+      | Rover  | 2007-12-31 | content for Rover.  |
+    And I have a _posts directory
+    And I have the following post:
+      | title                 | date       | content          |
+      | None Permalink Schema | 2009-03-27 | Totally nothing. |
+    And I have a "_config.yml" file with content:
+    """
+    permalink: none
+
+    collections:
+      puppies:
+        output: false
+
+    collections_dir: collections
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And the "_site/puppies/rover.html" file should not exist
+    And I should see "Totally nothing." in "_site/none-permalink-schema.html"
+    And the "_site/puppies/fido.html" file should not exist
+
   Scenario: All the documents
     Given I have an "index.html" page that contains "All documents: {% for doc in site.documents %}{{ doc.relative_path }} {% endfor %}"
     And I have fixture collections
