@@ -95,13 +95,13 @@ end
 
 #
 
-Given(%r!^I have the following posts? in (.*) directory:$!) do |folder, table|
+Given(%r!^I have the following (draft|post)s? in (.*) directory:$!) do |type, folder, table|
   table.hashes.each do |input_hash|
     title = slug(input_hash["title"])
     parsed_date = Time.xmlschema(input_hash["date"]) rescue Time.parse(input_hash["date"])
     filename = "#{parsed_date.strftime("%Y-%m-%d")}-#{title}.markdown"
 
-    path = File.join(folder, "_posts", filename)
+    path = File.join(folder, "_#{type}s", filename)
     File.write(path, file_content_from_hash(input_hash))
   end
 end
