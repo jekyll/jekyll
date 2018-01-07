@@ -249,6 +249,52 @@ Feature: Collections
     And the "_site/puppies/rover.html" file should not exist
     And I should see "Totally nothing." in "_site/none-permalink-schema.html"
 
+  Scenario: A complex site with various rendered collections and posts and drafts
+    Given I have a gathering/_puppies directory
+    And I have a gathering/_posts directory
+    And I have a gathering/_drafts directory
+    And I have a _puppies directory
+    And I have a _posts directory
+    And I have a _drafts directory
+    And I have the following document under the puppies collection in gathering:
+      | title               | date       | content            |
+      | Rover in Gathering  | 2007-12-31 | content for Rover. |
+    And I have the following document under the puppies collection:
+      | title               | date       | content            |
+      | Rover At Root       | 2007-12-31 | content for Rover. |
+    And I have the following post in gathering directory:
+      | title               | date       | content            |
+      | Post in Gathering   | 2009-03-27 | Totally nothing.   |
+    And I have the following post:
+      | title               | date       | content            |
+      | Post At Root        | 2009-03-27 | Totally nothing.   |
+    And I have the following draft in gathering directory:
+      | title               | date       | content            |
+      | Draft In Gathering  | 2009-03-27 | This is a draft.   |
+    And I have the following draft:
+      | title               | date       | content            |
+      | Draft At Root       | 2009-03-27 | This is a draft.   |
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      puppies:
+        output: true
+
+    collections_dir: gathering
+    """
+    When I run jekyll build --drafts
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And the "_site/puppies/rover-in-gathering.html" file should exist
+    And the "_site/2009/03/27/draft-at-root.html" file should exist
+    And the "_site/2009/03/27/post-in-gathering.html" file should exist
+    But the "_site/puppies/rover-at-root.html" file should not exist
+    And the "_site/2009/03/27/drafts-in-gathering.html" file should not exist
+    And the "_site/drafts-in-gathering.html" file should not exist
+    And the "_site/gathering/2009/03/27/drafts-in-gathering.html" file should not exist
+    And the _site/gathering directory should not exist
+    And the _site/_posts directory should not exist
+
   Scenario: All the documents
     Given I have an "index.html" page that contains "All documents: {% for doc in site.documents %}{{ doc.relative_path }} {% endfor %}"
     And I have fixture collections
