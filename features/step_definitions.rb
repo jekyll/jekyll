@@ -95,7 +95,7 @@ end
 
 #
 
-Given(%r!^I have the following posts? under (.*):$!) do |folder, table|
+Given(%r!^I have the following posts? in (.*) directory:$!) do |folder, table|
   table.hashes.each do |input_hash|
     title = slug(input_hash["title"])
     parsed_date = Time.xmlschema(input_hash["date"]) rescue Time.parse(input_hash["date"])

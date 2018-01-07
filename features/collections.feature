@@ -145,7 +145,7 @@ Feature: Collections
       | title  | date       | content             |
       | Rover  | 2007-12-31 | content for Rover.  |
     And I have a collections/_posts directory
-    And I have the following post under collections:
+    And I have the following post in collections directory:
       | title                 | date       | content          |
       | None Permalink Schema | 2009-03-27 | Totally nothing. |
     And I have a "_config.yml" file with content:
@@ -170,7 +170,7 @@ Feature: Collections
       | title  | date       | content             |
       | Rover  | 2007-12-31 | content for Rover.  |
     And I have a collections/_posts directory
-    And I have the following post under collections:
+    And I have the following post in collections directory:
       | title                 | date       | content          |
       | None Permalink Schema | 2009-03-27 | Totally nothing. |
     And I have a "_config.yml" file with content:
