@@ -49,9 +49,11 @@ module Jekyll
           return true if site.config["collections_dir"].empty?
           posts_at_root = site.in_source_dir("_posts")
           return true unless File.directory?(posts_at_root)
-          Jekyll.logger.warn "Warning:", "Contents of #{posts_at_root} will not be " \
-                             "processed since you have specified a custom directory " \
-                             "to house all collections."
+          Jekyll.logger.warn "Warning:",
+            "Detected '_posts' directory outside custom `collections_dir`!"
+          Jekyll.logger.warn "",
+            "Please move '#{posts_at_root}' into the custom directory at " \
+            "'#{site.in_source_dir(site.config["collections_dir"])}'"
           false
         end
 
