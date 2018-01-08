@@ -95,7 +95,7 @@ end
 
 #
 
-Given(%r!^I have the following (draft|post)s? in (.*) directory:$!) do |type, folder, table|
+Given(%r!^I have the following (draft|post)s? within the "(.*)" directory:$!) do |type, folder, table|
   table.hashes.each do |input_hash|
     title = slug(input_hash["title"])
     parsed_date = Time.xmlschema(input_hash["date"]) rescue Time.parse(input_hash["date"])
@@ -125,10 +125,10 @@ end
 
 #
 
-Given(%r!^I have the following documents? under the (.*) collection in (.*):$!) do |folder, directory, table|
+Given(%r!^I have the following documents? under the "(.*)" collection within the "(.*)" directory:$!) do |label, dir, table|
   table.hashes.each do |input_hash|
     title = slug(input_hash["title"])
-    path = File.join(directory, "_#{folder}", "#{title}.md")
+    path = File.join(dir, "_#{label}", "#{title}.md")
     File.write(path, file_content_from_hash(input_hash))
   end
 end
