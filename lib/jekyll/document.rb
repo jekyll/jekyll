@@ -83,7 +83,7 @@ module Jekyll
     # Returns a String path which represents the relative path
     #   from the site source to this document
     def relative_path
-      @relative_path ||= Pathutil.new(path).relative_path_from(site.source).to_s
+      @relative_path ||= Pathutil.new(path).relative_path_from(focal_point).to_s
     end
 
     # The output extension of the document.
@@ -399,11 +399,9 @@ module Jekyll
     def populate_categories
       merge_data!({
         "categories" => (
-        Array(data["categories"]) + Utils.pluralized_array_from_hash(
-          data,
-          "category",
-          "categories"
-        )
+          Array(data["categories"]) + Utils.pluralized_array_from_hash(
+            data, "category", "categories"
+          )
         ).map(&:to_s).flatten.uniq,
       })
     end
@@ -412,6 +410,13 @@ module Jekyll
       merge_data!({
         "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten,
       })
+    end
+
+    private
+    def focal_point
+      collections_dir = site.config["collections_dir"]
+      @focal_point ||=
+        collections_dir.empty? ? site.source : site.in_source_dir(collections_dir)
     end
 
     private
