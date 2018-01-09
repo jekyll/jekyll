@@ -61,7 +61,7 @@ Feature: Collections Directory
     Then I should get a zero exit status
     And the _site directory should exist
     And the "_site/puppies/rover.html" file should exist
-    And the "_site/post-at-root.html" file should not exist
+    And the "_site/2009/03/27/post-at-root.html" file should not exist
     And the _site/_posts directory should not exist
 
   Scenario: Rendered collection in custom collections_dir also containing drafts
@@ -150,8 +150,7 @@ Feature: Collections Directory
     And the "_site/puppies/rover-in-gathering.html" file should exist
     And the "_site/2009/03/27/post-in-gathering.html" file should exist
     And the "_site/2009/03/27/draft-in-gathering.html" file should exist
-    And the "_site/gathering/2009/03/27/draft-in-gathering.html" file should not exist
     And the "_site/2009/03/27/draft-at-root.html" file should not exist
-    But the "_site/puppies/rover-at-root.html" file should not exist
+    And the "_site/puppies/rover-at-root.html" file should not exist
     And the _site/gathering directory should not exist
     And the _site/_posts directory should not exist

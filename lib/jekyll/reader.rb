@@ -62,7 +62,7 @@ module Jekyll
     #
     # Returns nothing.
     def retrieve_posts(dir)
-      return if not_within_configured_directory?(dir)
+      return if outside_configured_directory?(dir)
       site.posts.docs.concat(PostReader.new(site).read_posts(dir))
       site.posts.docs.concat(PostReader.new(site).read_drafts(dir)) if site.show_drafts
     end
@@ -142,7 +142,7 @@ module Jekyll
     #
     # Returns true if a custom collections_dir has been set but current directory lies
     # outside that directory.
-    def not_within_configured_directory?(dir)
+    def outside_configured_directory?(dir)
       collections_dir = site.config["collections_dir"]
       !collections_dir.empty? && !dir.start_with?("/#{collections_dir}")
     end
