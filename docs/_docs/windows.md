@@ -72,12 +72,28 @@ You can make sure time management is working properly by inspecting your `_posts
 
 [RubyInstaller][] is a self-contained Windows-based installer that includes the Ruby language, an execution environment, important documentation, and more.
 
-1. Download and Install a package manager version from [RubyInstaller Downloads][RubyInstaller-downloads].
-2. Install Jekyll and Bundler via a command prompt window: `gem install jekyll bundler`
-3. Check if Jekyll installed properly: `jekyll -v`
+1. Download and Install Ruby version 2.4.3 from [RubyInstaller Downloads][RubyInstaller-downloads] (2.5 is not recommended by them at the time of writing and conflicts with dependency later).
+2. Let it install [MSYS2][] or do it yourself.
+3. Install Bundler via a command prompt `gem install bundler`.
+4. Install Jekyll `gem install jekyll` _or_ GitHub Pages `gem install github-pages` if you want it (includes `jekyll`).
+5. Check if Jekyll installed properly: `jekyll -v`.
+6. Create new site: `jekyll new myblog`
+7. If you want GitHub Pages version edit generated `Gemfile` to comment out `jekyll` line and uncomment `github-pages` line.
+8. `bundle install` (in `myblog`)
+9. `bundle exec jekyll serve` (in `myblog`)
+
+#### Fixing MSYS2 errors
+
+If `pacman` throws "invalid crypto" errors you might need to set `SigLevel = Never` in `c:\msys64\etc\pacman.conf` for `pacman -Syu` to complete.
+
+#### Fixing  libcurl errors
+
+If `jekyll-remote-theme` throws `'Could not open library 'libcurl'` errors you might need to get `libcurl.dll` from [this specific source](https://curl.haxx.se/gknw.net/7.40.0/dist-w64/) and place into `c:\Ruby24-x64\bin\` (via [this SO answer](https://stackoverflow.com/a/47755688/886380)).
+
 
 [RubyInstaller]: https://rubyinstaller.org/
 [RubyInstaller-downloads]: https://rubyinstaller.org/downloads/
+[MSYS2]: http://www.msys2.org/
 
 
 ### Installation via Chocolatey
