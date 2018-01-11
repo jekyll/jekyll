@@ -149,7 +149,9 @@ class JekyllUnitTest < Minitest::Test
     }))
     Configuration.from(full_overrides.merge({
       "source" => source_dir,
-    }))
+    })).tap do |obj|
+      Jekyll.set_timezone(obj["timezone"]) if obj["timezone"]
+    end
   end
 
   def clear_dest
