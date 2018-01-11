@@ -101,13 +101,15 @@ module Jekyll
       return true if !scope.key?("path") || scope["path"].empty?
 
       sanitized_path = Pathname.new(sanitize_path(path))
-
-      site_path = Pathname.new(@site.source)
+      site_path      = Pathname.new(@site.source)
       rel_scope_path = Pathname.new(scope["path"])
       abs_scope_path = File.join(@site.source, rel_scope_path)
-      Dir.glob(abs_scope_path).each do |scope_path|
-        scope_path = Pathname.new(scope_path).relative_path_from site_path
-        return true if path_is_subpath?(sanitized_path, scope_path)
+
+      if glob_pattern?(rel_scope_path)
+        Dir.glob(abs_scope_path).each do |scope_path|
+          scope_path = Pathname.new(scope_path).relative_path_from site_path
+          return true if path_is_subpath?(sanitized_path, scope_path)
+        end
       end
 
       path_is_subpath?(sanitized_path, rel_scope_path)
@@ -120,6 +122,13 @@ module Jekyll
         end
       end
 
+      false
+    end
+
+    def glob_pattern?(path)
+      path.each_filename do |str|
+        return true if str =~ %r!\*+|\?|\[.*\]|{.*}!
+      end
       false
     end
 
