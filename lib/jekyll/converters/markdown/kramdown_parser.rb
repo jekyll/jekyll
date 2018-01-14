@@ -14,7 +14,9 @@ module Jekyll
         }.freeze
 
         def initialize(config)
-          Jekyll::External.require_with_graceful_fail "kramdown"
+          unless defined?(Kramdown)
+            Jekyll::External.require_with_graceful_fail "kramdown"
+          end
           @main_fallback_highlighter = config["highlighter"] || "rouge"
           @config = config["kramdown"] || {}
           @highlighter = nil
