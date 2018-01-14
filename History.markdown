@@ -13,6 +13,7 @@
 ### Documentation
 
   * Fix: Add note about posts in context of collections_dir (#6680)
+  * Update deploy-script in documentation (#6666)
 
 ### Bug Fixes
 
