@@ -13,6 +13,10 @@
 
   * Fix: Add note about posts in context of collections_dir (#6680)
 
+### Bug Fixes
+
+  * inform that symlinks are not allowed in safe mode (#6670)
+
 ## 3.7.0 / 2018-01-02
 
 ### Minor Enhancements
