@@ -191,6 +191,8 @@ MSG
         File.read(file, file_read_opts(context))
       end
 
+      private
+
       def could_not_locate_message(file, includes_dirs, safe)
         message = "Could not locate the included file '#{file}' in any of "\
           "#{includes_dirs}. Ensure it exists in one of those directories and"
