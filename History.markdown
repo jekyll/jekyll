@@ -3,6 +3,7 @@
 ### Development Fixes
 
   * CI: Test against Ruby 2.5.0 (#6664)
+  * Bump rdoc to 6.0 (#6600)
 
 ### Site Enhancements
 
