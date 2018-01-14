@@ -17,6 +17,10 @@
 
   * inform that symlinks are not allowed in safe mode (#6670)
 
+### Minor Enhancements
+
+  * Require external library only if necessary (#6596)
+
 ## 3.7.0 / 2018-01-02
 
 ### Minor Enhancements
