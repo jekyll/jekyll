@@ -144,6 +144,9 @@ Feature: Collections Directory
 
     collections_dir: gathering
     """
+    And I have a "gathering/_puppies/static_file.txt" file that contains "Static content."
+    And I have a gathering/_puppies/nested directory
+    And I have a "gathering/_puppies/nested/static_file.txt" file that contains "Nested Static content."
     When I run jekyll build --drafts
     Then I should get a zero exit status
     And the _site directory should exist
@@ -152,5 +155,7 @@ Feature: Collections Directory
     And the "_site/2009/03/27/draft-in-gathering.html" file should exist
     And the "_site/2009/03/27/draft-at-root.html" file should not exist
     And the "_site/puppies/rover-at-root.html" file should not exist
+    And I should see exactly "Static content." in "_site/puppies/static_file.txt"
+    And I should see exactly "Nested Static content." in "_site/puppies/nested/static_file.txt"
     And the _site/gathering directory should not exist
     And the _site/_posts directory should not exist
