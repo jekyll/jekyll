@@ -9,7 +9,11 @@ class TestFilters < JekyllUnitTest
 
     def initialize(opts = {})
       @site = Jekyll::Site.new(opts.merge("skip_config_files" => true))
-      @context = Liquid::Context.new(@site.site_payload, {}, { :site => @site })
+      @page = Jekyll::Page.new(@site, "", "/some/dir", "test.md")
+      @context = Liquid::Context.new(@site.site_payload, {}, {
+        :site => @site,
+        :page => @page,
+      })
     end
   end
 
@@ -574,6 +578,35 @@ class TestFilters < JekyllUnitTest
       should "not normalize absolute international URLs" do
         url = "https://example.com/错误"
         assert_equal "https://example.com/错误", @filter.relative_url(url)
+      end
+    end
+
+    context "relativize_url filter" do
+      should "relativize a URL with no common path prefix" do
+        page_url = "/otherdir/otherpage.md"
+        assert_equal "../..#{page_url}", @filter.relativize_url(page_url)
+      end
+
+      should "relativize a URL with a common path prefix" do
+        file = "otherpage.md"
+        page_url = "/some/#{file}"
+        assert_equal "../#{file}", @filter.relativize_url(page_url)
+      end
+
+      should "relativize a URL in the same directory" do
+        file = "otherpage.md"
+        page_url = "/some/dir/#{file}"
+        assert_equal file, @filter.relativize_url(page_url)
+      end
+
+      should "stay within site root" do
+        assert_equal "../..", @filter.relativize_url("/../../../../../")
+        assert_equal "../..", @filter.relativize_url("/a/b/../../..")
+      end
+
+      should "not malfunction for paths without leading slashes" do
+        path = "a/b/c"
+        assert_equal "../../#{path}", @filter.relativize_url(path)
       end
     end
 
