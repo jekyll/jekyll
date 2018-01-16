@@ -85,6 +85,7 @@ Given(%r!^I have the following (draft|page|post)s?(?: (in|under) "([^"]+)")?:$!)
 
     if status == "post"
       parsed_date = Time.xmlschema(input_hash["date"]) rescue Time.parse(input_hash["date"])
+      input_hash["date"] = parsed_date
       filename = "#{parsed_date.strftime("%Y-%m-%d")}-#{title}.#{ext}"
     end
 
