@@ -17,12 +17,16 @@ class TestDocument < JekyllUnitTest
   end
 
   def setup_document_with_dates(filename)
-    site = fixture_site("collections" => ["dates"], "timezone" => "UTC")
+    site = fixture_site("collections" => ["dates"])
     site.process
-    Document.new(site.in_source_dir(File.join("_dates", filename)), {
-      :site       => site,
-      :collection => site.collections["dates"],
-    }).tap(&:read)
+    docs = nil
+    with_env('TZ', 'UTC') do
+      docs = Document.new(site.in_source_dir(File.join("_dates", filename)), {
+        :site       => site,
+        :collection => site.collections["dates"],
+      }).tap(&:read)
+    end
+    docs
   end
 
   context "a document in a collection" do
