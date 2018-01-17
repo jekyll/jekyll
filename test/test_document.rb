@@ -20,7 +20,7 @@ class TestDocument < JekyllUnitTest
     site = fixture_site("collections" => ["dates"])
     site.process
     docs = nil
-    with_env('TZ', 'UTC') do
+    with_env("TZ", "UTC") do
       docs = Document.new(site.in_source_dir(File.join("_dates", filename)), {
         :site       => site,
         :collection => site.collections["dates"],
@@ -578,7 +578,7 @@ class TestDocument < JekyllUnitTest
     end
 
     should "have the expected date" do
-      assert_equal "2015/09/30", @document.data['date'].strftime("%Y/%m/%d")
+      assert_equal "2015/09/30", @document.data["date"].strftime("%Y/%m/%d")
     end
   end
 
@@ -588,7 +588,7 @@ class TestDocument < JekyllUnitTest
     end
 
     should "have the expected date" do
-      assert_equal "2015/10/01", @document.data['date'].strftime("%Y/%m/%d")
+      assert_equal "2015/10/01", @document.data["date"].strftime("%Y/%m/%d")
     end
   end
 
@@ -598,7 +598,7 @@ class TestDocument < JekyllUnitTest
     end
 
     should "have the expected date" do
-      assert_equal "2015/10/01", @document.data['date'].strftime("%Y/%m/%d")
+      assert_equal "2015/10/01", @document.data["date"].strftime("%Y/%m/%d")
     end
   end
 end
