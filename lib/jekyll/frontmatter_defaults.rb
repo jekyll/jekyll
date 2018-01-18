@@ -112,9 +112,10 @@ module Jekyll
           Jekyll.logger.debug "Globbed Scope Path:", scope_path
           return true if path_is_subpath?(sanitized_path, scope_path)
         end
+        false
+      else
+        path_is_subpath?(sanitized_path, rel_scope_path)
       end
-
-      path_is_subpath?(sanitized_path, rel_scope_path)
     end
     # rubocop:enable Metrics/AbcSize
 
