@@ -569,10 +569,10 @@ defaults:
 <div class="note warning">
   <h5>Globbing and Performance</h5>
   <p>
-    Please note that globbing a path is a known performance-poison and is
-    currently not optimized, especially on Windows. Globbing a path will
-    increase your build times in proportion to the size of the associated
-    collection directory.
+    Please note that globbing a path is known to have a negative effect on
+    performance and is currently not optimized, especially on Windows.
+    Globbing a path will increase your build times in proportion to the size
+    of the associated collection directory.
   </p>
 </div>
 
