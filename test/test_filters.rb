@@ -1052,6 +1052,14 @@ class TestFilters < JekyllUnitTest
         assert_equal([{ "a" => ".5" }, { "a" => "0.65" }, { "a" => "10" }],
           @filter.sort([{ "a" => "10" }, { "a" => ".5" }, { "a" => "0.65" }], "a"))
       end
+      should "return sorted by property array with numeric strings first" do
+        assert_equal([{ "a" => ".5" }, { "a" => "0.6" }, { "a" => "twelve" }],
+          @filter.sort([{ "a" => "twelve" }, { "a" => ".5" }, { "a" => "0.6" }], "a"))
+      end
+      should "return sorted by property array with numbers and strings " do
+        assert_equal([{ "a" => "1" }, { "a" => "1abc" }, { "a" => "20" }],
+          @filter.sort([{ "a" => "20" }, { "a" => "1" }, { "a" => "1abc" }], "a"))
+      end
       should "return sorted by property array with nils first" do
         ary = [{ "a" => 2 }, { "b" => 1 }, { "a" => 1 }]
         assert_equal [{ "b" => 1 }, { "a" => 1 }, { "a" => 2 }], @filter.sort(ary, "a")

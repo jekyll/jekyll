@@ -342,16 +342,16 @@ module Jekyll
     # We also utilize the Schwartzian transform to make this more efficient.
     def sort_input(input, property, order)
       input.map { |item| [item_property(item, property), item] }
-        .sort! do |apple_info, orange_info|
-          apple_property = apple_info.first
-          orange_property = orange_info.first
+        .sort! do |a_info, b_info|
+          a_property = a_info.first
+          b_property = b_info.first
 
-          if !apple_property.nil? && orange_property.nil?
+          if !a_property.nil? && b_property.nil?
             - order
-          elsif apple_property.nil? && !orange_property.nil?
+          elsif a_property.nil? && !b_property.nil?
             + order
           else
-            apple_property <=> orange_property
+            a_property <=> b_property || a_property.to_s <=> b_property.to_s
           end
         end
         .map!(&:last)
