@@ -94,8 +94,9 @@ module Jekyll
     # Returns String the converted content.
     def convert(content)
       converters.reduce(content) do |output, converter|
+        profiler = site.converter_profiler.file(document.path)
         begin
-          converter.convert output
+          profiler.render_with(converter, output)
         rescue StandardError => e
           Jekyll.logger.error "Conversion error:",
             "#{converter.class} encountered an error while "\

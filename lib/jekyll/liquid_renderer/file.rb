@@ -16,6 +16,14 @@ module Jekyll
         self
       end
 
+      def render_with(converter, content)
+        measure_time do
+          measure_bytes do
+            converter.convert(content)
+          end
+        end
+      end
+
       def render(*args)
         measure_time do
           measure_bytes do
