@@ -16,7 +16,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
           },
         },],
       })
-      @site.process
+      @output = capture_output { @site.process }
       @affected = @site.pages.find { |page| page.relative_path == "contacts/bar.html" }
       @not_affected = @site.pages.find { |page| page.relative_path == "about.html" }
     end
@@ -24,6 +24,10 @@ class TestFrontMatterDefaults < JekyllUnitTest
     should "affect only the specified path and type" do
       assert_equal @affected.data["key"], "val"
       assert_nil @not_affected.data["key"]
+    end
+
+    should "not call Dir.glob block" do
+      refute_includes @output, "Globbed Scope Path:"
     end
   end
 
@@ -40,7 +44,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
           },
         },],
       })
-      @site.process
+      @output = capture_output { @site.process }
       @affected = @site.pages.find { |page| page.relative_path == "contacts/bar.html" }
       @not_affected = @site.pages.find { |page| page.relative_path == "about.html" }
     end
@@ -48,6 +52,10 @@ class TestFrontMatterDefaults < JekyllUnitTest
     should "affect only the specified path and type" do
       assert_equal @affected.data["key"], "val"
       assert_nil @not_affected.data["key"]
+    end
+
+    should "call Dir.glob block" do
+      assert_includes @output, "Globbed Scope Path:"
     end
   end
 
