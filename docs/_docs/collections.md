@@ -58,7 +58,7 @@ defaults:
 <div class="note warning">
   <h5>Be sure to move posts into custom collections directory</h5>
 
-  <p>If you specify a directory to store all your collections in the same place with <code>collections_dir: my_collections</code>, then you will need to move your <code>_posts</code> directory to <code>my_collections/_posts</code>.</p>
+  <p>If you specify a directory to store all your collections in the same place with <code>collections_dir: my_collections</code>, then you will need to move your <code>_posts</code> directory to <code>my_collections/_posts</code>. Note that, the name of your collections directory cannot start with an underscore (`_`).</p>
 </div>
 
 ### Step 2: Add your content {#step2}
