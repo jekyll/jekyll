@@ -20,6 +20,7 @@
 ### Bug Fixes
 
   * inform that symlinks are not allowed in safe mode (#6670)
+  * Glob scope path only if configured with a pattern (#6692)
 
 ### Minor Enhancements
 
