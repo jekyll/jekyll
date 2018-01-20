@@ -4,6 +4,7 @@ Before do
   FileUtils.rm_rf(Paths.test_dir) if Paths.test_dir.exist?
   FileUtils.mkdir_p(Paths.test_dir) unless Paths.test_dir.directory?
   Dir.chdir(Paths.test_dir)
+  @timezone_before_scenario = ENV["TZ"]
 end
 
 #
@@ -13,6 +14,7 @@ After do
   Paths.output_file.delete if Paths.output_file.exist?
   Paths.status_file.delete if Paths.status_file.exist?
   Dir.chdir(Paths.test_dir.parent)
+  ENV["TZ"] = @timezone_before_scenario
 end
 
 #
@@ -117,6 +119,7 @@ Given(%r!^I have a configuration file with "(.*)" set to "(.*)"$!) do |key, valu
       {}
     end
   config[key] = YAML.load(value)
+  Jekyll.set_timezone(value) if key == "timezone"
   File.write("_config.yml", YAML.dump(config))
 end
 
