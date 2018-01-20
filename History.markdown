@@ -17,6 +17,7 @@
   * Update deploy-script in documentation (#6666)
   * Add note about naming of collections_dir (#6703)
   * Update installation.md (#6694)
+  * Add `jekyll-html` to plugins. (#6654)
 
 ### Bug Fixes
 
