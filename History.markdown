@@ -5,6 +5,7 @@
   * CI: Test against Ruby 2.5.0 (#6664)
   * Bump rdoc to 6.0 (#6600)
   * Lint file and bump theme dependencies (#6698)
+  * Write a Rubocop Cop to ensure no `#p` or `#puts` calls get committed to master. (#6615)
 
 ### Site Enhancements
 
