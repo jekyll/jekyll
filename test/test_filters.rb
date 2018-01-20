@@ -779,7 +779,6 @@ class TestFilters < JekyllUnitTest
       should "include the size of each grouping" do
         grouping = @filter.group_by(@filter.site.pages, "layout")
         grouping.each do |g|
-          g
           assert_equal(
             g["items"].size,
             g["size"],
