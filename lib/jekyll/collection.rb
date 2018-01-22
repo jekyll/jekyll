@@ -110,7 +110,7 @@ module Jekyll
     #   is stored on the filesystem.
     def directory
       @directory ||= site.in_source_dir(
-        File.join(site.config["collections_dir"], relative_directory)
+        File.join(container, relative_directory)
       )
     end
 
@@ -124,7 +124,7 @@ module Jekyll
     #   is stored on the filesystem.
     def collection_dir(*files)
       return directory if files.empty?
-      site.in_source_dir(site.config["collections_dir"], relative_directory, *files)
+      site.in_source_dir(container, relative_directory, *files)
     end
 
     # Checks whether the directory "exists" for this collection.
@@ -199,6 +199,12 @@ module Jekyll
       else
         {}
       end
+    end
+
+    private
+
+    def container
+      @container ||= site.config["collections_dir"]
     end
 
     private

@@ -391,6 +391,15 @@ module Jekyll
       end
     end
 
+    # Public: The full path to the directory that houses all the collections registered
+    # with the current site.
+    #
+    # Returns the source directory or the absolute path to the custom collections_dir
+    def collections_path
+      dir_str = config["collections_dir"]
+      @collections_path ||= dir_str.empty? ? source : in_source_dir(dir_str)
+    end
+
     # Limits the current posts; removes the posts which exceed the limit_posts
     #
     # Returns nothing
