@@ -27,6 +27,7 @@
   * inform that symlinks are not allowed in safe mode (#6670)
   * Glob scope path only if configured with a pattern (#6692)
   * Add gem &#34;wdm&#34; to all newly generated Gemfiles (#6711)
+  * Fix timezone incosistencies between different ruby version (#6697)
 
 ### Minor Enhancements
 
