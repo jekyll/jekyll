@@ -98,6 +98,20 @@ end
 
 #
 
+Given(%r!^I have the following (draft|post)s? within the "(.*)" directory:$!) do |type, folder, table|
+  table.hashes.each do |input_hash|
+    title = slug(input_hash["title"])
+    parsed_date = Time.xmlschema(input_hash["date"]) rescue Time.parse(input_hash["date"])
+
+    filename = type == "draft" ? "#{title}.markdown" : "#{parsed_date.strftime("%Y-%m-%d")}-#{title}.markdown"
+
+    path = File.join(folder, "_#{type}s", filename)
+    File.write(path, file_content_from_hash(input_hash))
+  end
+end
+
+#
+
 Given(%r!^I have the following documents? under the (.*) collection:$!) do |folder, table|
   table.hashes.each do |input_hash|
     title = slug(input_hash["title"])
@@ -105,6 +119,16 @@ Given(%r!^I have the following documents? under the (.*) collection:$!) do |fold
     dest_folder = "_#{folder}"
 
     path = File.join(dest_folder, filename)
+    File.write(path, file_content_from_hash(input_hash))
+  end
+end
+
+#
+
+Given(%r!^I have the following documents? under the "(.*)" collection within the "(.*)" directory:$!) do |label, dir, table|
+  table.hashes.each do |input_hash|
+    title = slug(input_hash["title"])
+    path = File.join(dir, "_#{label}", "#{title}.md")
     File.write(path, file_content_from_hash(input_hash))
   end
 end
