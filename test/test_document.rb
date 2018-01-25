@@ -16,6 +16,19 @@ class TestDocument < JekyllUnitTest
     }).tap(&:read)
   end
 
+  def setup_document_with_dates(filename)
+    site = fixture_site("collections" => ["dates"])
+    site.process
+    docs = nil
+    with_env("TZ", "UTC") do
+      docs = Document.new(site.in_source_dir(File.join("_dates", filename)), {
+        :site       => site,
+        :collection => site.collections["dates"],
+      }).tap(&:read)
+    end
+    docs
+  end
+
   context "a document in a collection" do
     setup do
       @site = fixture_site({
@@ -556,6 +569,36 @@ class TestDocument < JekyllUnitTest
 
     should "not throw an error" do
       Jekyll::Renderer.new(@document.site, @document).render_document
+    end
+  end
+
+  context "a document with a date with timezone" do
+    setup do
+      @document = setup_document_with_dates "time_with_timezone.md"
+    end
+
+    should "have the expected date" do
+      assert_equal "2015/09/30", @document.data["date"].strftime("%Y/%m/%d")
+    end
+  end
+
+  context "a document with a date with time but without timezone" do
+    setup do
+      @document = setup_document_with_dates "time_without_timezone.md"
+    end
+
+    should "have the expected date" do
+      assert_equal "2015/10/01", @document.data["date"].strftime("%Y/%m/%d")
+    end
+  end
+
+  context "a document with a date without time" do
+    setup do
+      @document = setup_document_with_dates "date_without_time.md"
+    end
+
+    should "have the expected date" do
+      assert_equal "2015/10/01", @document.data["date"].strftime("%Y/%m/%d")
     end
   end
 end

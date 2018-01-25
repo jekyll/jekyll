@@ -426,7 +426,7 @@ module Jekyll
 
     private
     def merge_date!(source)
-      if data.key?("date") && !data["date"].is_a?(Time)
+      if data.key?("date")
         data["date"] = Utils.parse_date(
           data["date"].to_s,
           "Document '#{relative_path}' does not have a valid date in the #{source}."
