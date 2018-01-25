@@ -1,8 +1,8 @@
 ---
-title: "Jekyll 3.7.1 Released"
+title: "Jekyll 3.7.2 Released"
 date: 2018-01-25 22:22:22 +0530
 author: ashmaroli
-version: 3.7.1
+version: 3.7.2
 categories: [release]
 ---
 
@@ -10,7 +10,8 @@ Close on the heels of shipping 3.7.0, we were informed of a couple of
 regressions due to the changes made in that release. In due time, Team Jekyll
 set out to address those issues as early as possible.
 
-Days later here we're, announcing 3.7.1 that fixes numerous issues! :tada:
+Days later here we're, announcing 3.7.2 (sorry for skipping 3.7.1, 
+RubyGems didn't want to play nice) that fixes numerous issues! :tada:
 The highlights being:
 
   * A major regression in 3.7.0 was that when a Front Matter Default was
