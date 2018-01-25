@@ -21,6 +21,7 @@
   * Update installation.md (#6694)
   * Add `jekyll-html` to plugins. (#6654)
   * Update plugins.md (#6716)
+  * Release v3.7.1 (#6695)
 
 ### Bug Fixes
 
