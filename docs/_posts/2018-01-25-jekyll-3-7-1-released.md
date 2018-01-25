@@ -18,7 +18,7 @@ The highlights being:
     that directory for any subfolders and files, for each document in that
     `path`.
     Though this is intended, it increases build times in proportion to the size
-    of the said.
+    of the directory.
 
     We addressed this by having Jekyll scan the directory path only if the user
     explicitly configures the `scope["path"]` using wildcards.
