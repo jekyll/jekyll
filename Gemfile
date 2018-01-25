@@ -48,7 +48,6 @@ group :test_legacy do
   gem "minitest"
   gem "minitest-profile"
   gem "minitest-reporters"
-  gem "redgreen"
   gem "shoulda"
   gem "simplecov"
 end
