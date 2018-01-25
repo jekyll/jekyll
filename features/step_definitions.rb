@@ -4,6 +4,7 @@ Before do
   FileUtils.rm_rf(Paths.test_dir) if Paths.test_dir.exist?
   FileUtils.mkdir_p(Paths.test_dir) unless Paths.test_dir.directory?
   Dir.chdir(Paths.test_dir)
+  @timezone_before_scenario = ENV["TZ"]
 end
 
 #
@@ -13,6 +14,7 @@ After do
   Paths.output_file.delete if Paths.output_file.exist?
   Paths.status_file.delete if Paths.status_file.exist?
   Dir.chdir(Paths.test_dir.parent)
+  ENV["TZ"] = @timezone_before_scenario
 end
 
 #
@@ -85,10 +87,25 @@ Given(%r!^I have the following (draft|page|post)s?(?: (in|under) "([^"]+)")?:$!)
 
     if status == "post"
       parsed_date = Time.xmlschema(input_hash["date"]) rescue Time.parse(input_hash["date"])
+      input_hash["date"] = parsed_date
       filename = "#{parsed_date.strftime("%Y-%m-%d")}-#{title}.#{ext}"
     end
 
     path = File.join(before, dest_folder, after, filename)
+    File.write(path, file_content_from_hash(input_hash))
+  end
+end
+
+#
+
+Given(%r!^I have the following (draft|post)s? within the "(.*)" directory:$!) do |type, folder, table|
+  table.hashes.each do |input_hash|
+    title = slug(input_hash["title"])
+    parsed_date = Time.xmlschema(input_hash["date"]) rescue Time.parse(input_hash["date"])
+
+    filename = type == "draft" ? "#{title}.markdown" : "#{parsed_date.strftime("%Y-%m-%d")}-#{title}.markdown"
+
+    path = File.join(folder, "_#{type}s", filename)
     File.write(path, file_content_from_hash(input_hash))
   end
 end
@@ -108,6 +125,16 @@ end
 
 #
 
+Given(%r!^I have the following documents? under the "(.*)" collection within the "(.*)" directory:$!) do |label, dir, table|
+  table.hashes.each do |input_hash|
+    title = slug(input_hash["title"])
+    path = File.join(dir, "_#{label}", "#{title}.md")
+    File.write(path, file_content_from_hash(input_hash))
+  end
+end
+
+#
+
 Given(%r!^I have a configuration file with "(.*)" set to "(.*)"$!) do |key, value|
   config = \
     if source_dir.join("_config.yml").exist?
@@ -116,6 +143,7 @@ Given(%r!^I have a configuration file with "(.*)" set to "(.*)"$!) do |key, valu
       {}
     end
   config[key] = YAML.load(value)
+  Jekyll.set_timezone(value) if key == "timezone"
   File.write("_config.yml", YAML.dump(config))
 end
 

@@ -62,6 +62,7 @@ module Jekyll
     #
     # Returns nothing.
     def retrieve_posts(dir)
+      return if outside_configured_directory?(dir)
       site.posts.docs.concat(PostReader.new(site).read_posts(dir))
       site.posts.docs.concat(PostReader.new(site).read_drafts(dir)) if site.show_drafts
     end
@@ -129,6 +130,21 @@ module Jekyll
       return [] unless File.exist?(base)
       entries = Dir.chdir(base) { filter_entries(Dir["**/*"], base) }
       entries.delete_if { |e| File.directory?(site.in_source_dir(base, e)) }
+    end
+
+    private
+
+    # Internal
+    #
+    # Determine if the directory is supposed to contain posts and drafts.
+    # If the user has defined a custom collections_dir, then attempt to read
+    # posts and drafts only from within that directory.
+    #
+    # Returns true if a custom collections_dir has been set but current directory lies
+    # outside that directory.
+    def outside_configured_directory?(dir)
+      collections_dir = site.config["collections_dir"]
+      !collections_dir.empty? && !dir.start_with?("/#{collections_dir}")
     end
   end
 end

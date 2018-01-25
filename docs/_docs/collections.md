@@ -49,10 +49,16 @@ defaults:
 <div class="note">
   <h5>Gather your collections {%- include docs_version_badge.html version="3.7.0" -%}</h5>
 
-  <p>You can optionally specify a directory to store all your collections in the same place with <code>collections_dir: my_collections</code></p>
+  <p>You can optionally specify a directory to store all your collections in the same place with <code>collections_dir: my_collections</code>.</p>
 
   <p>Then Jekyll will look in <code>my_collections/_books</code> for the <code>books</code> collection, and
   in <code>my_collections/_recipes</code> for the <code>recipes</code> collection.</p>
+</div>
+
+<div class="note warning">
+  <h5>Be sure to move posts into custom collections directory</h5>
+
+  <p>If you specify a directory to store all your collections in the same place with <code>collections_dir: my_collections</code>, then you will need to move your <code>_posts</code> directory to <code>my_collections/_posts</code>. Note that, the name of your collections directory cannot start with an underscore (`_`).</p>
 </div>
 
 ### Step 2: Add your content {#step2}

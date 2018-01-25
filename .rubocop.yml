@@ -1,4 +1,12 @@
 ---
+
+require:
+  - ./rubocop/jekyll
+
+Jekyll/NoPutsAllowed:
+  Exclude:
+    - rake/*.rake
+
 AllCops:
   TargetRubyVersion: 2.1
   Include:

@@ -77,7 +77,7 @@ module Jekyll
     end
 
     def print_stats
-      puts @liquid_renderer.stats_table
+      Jekyll.logger.info @liquid_renderer.stats_table
     end
 
     # Reset Site details.
@@ -389,6 +389,15 @@ module Jekyll
       paths.reduce(dest) do |base, path|
         Jekyll.sanitized_path(base, path)
       end
+    end
+
+    # Public: The full path to the directory that houses all the collections registered
+    # with the current site.
+    #
+    # Returns the source directory or the absolute path to the custom collections_dir
+    def collections_path
+      dir_str = config["collections_dir"]
+      @collections_path ||= dir_str.empty? ? source : in_source_dir(dir_str)
     end
 
     # Limits the current posts; removes the posts which exceed the limit_posts

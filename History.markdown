@@ -3,11 +3,36 @@
 ### Development Fixes
 
   * CI: Test against Ruby 2.5.0 (#6664)
+  * Bump rdoc to 6.0 (#6600)
+  * Lint file and bump theme dependencies (#6698)
+  * Write a Rubocop Cop to ensure no `#p` or `#puts` calls get committed to master. (#6615)
+  * Remove redgreen gem (#6720)
 
 ### Site Enhancements
 
   * Display latest version in header (#6676)
   * Update version in `config.yml` via YAML load / dump (#6677)
+
+### Documentation
+
+  * Fix: Add note about posts in context of collections_dir (#6680)
+  * Update deploy-script in documentation (#6666)
+  * Add note about naming of collections_dir (#6703)
+  * Update installation.md (#6694)
+  * Add `jekyll-html` to plugins. (#6654)
+  * Update plugins.md (#6716)
+
+### Bug Fixes
+
+  * inform that symlinks are not allowed in safe mode (#6670)
+  * Glob scope path only if configured with a pattern (#6692)
+  * Add gem &#34;wdm&#34; to all newly generated Gemfiles (#6711)
+  * Fix timezone incosistencies between different ruby version (#6697)
+  * Refactor collections_dir feature for consistency (#6685)
+
+### Minor Enhancements
+
+  * Require external library only if necessary (#6596)
 
 ## 3.7.0 / 2018-01-02
 

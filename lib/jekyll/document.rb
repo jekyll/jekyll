@@ -78,12 +78,13 @@ module Jekyll
         collection.label == "posts"
     end
 
-    # The path to the document, relative to the site source.
+    # The path to the document, relative to the collections_dir.
     #
-    # Returns a String path which represents the relative path
-    #   from the site source to this document
+    # Returns a String path which represents the relative path from the collections_dir
+    # to this document.
     def relative_path
-      @relative_path ||= Pathutil.new(path).relative_path_from(site.source).to_s
+      @relative_path ||=
+        Pathutil.new(path).relative_path_from(site.collections_path).to_s
     end
 
     # The output extension of the document.
@@ -399,11 +400,9 @@ module Jekyll
     def populate_categories
       merge_data!({
         "categories" => (
-        Array(data["categories"]) + Utils.pluralized_array_from_hash(
-          data,
-          "category",
-          "categories"
-        )
+          Array(data["categories"]) + Utils.pluralized_array_from_hash(
+            data, "category", "categories"
+          )
         ).map(&:to_s).flatten.uniq,
       })
     end
@@ -426,7 +425,7 @@ module Jekyll
 
     private
     def merge_date!(source)
-      if data.key?("date") && !data["date"].is_a?(Time)
+      if data.key?("date")
         data["date"] = Utils.parse_date(
           data["date"].to_s,
           "Document '#{relative_path}' does not have a valid date in the #{source}."

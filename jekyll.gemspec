@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.homepage      = "https://github.com/jekyll/jekyll"
 
   all_files       = `git ls-files -z`.split("\x0")
-  s.files         = all_files.grep(%r!^(exe|lib)/|^.rubocop.yml$!)
+  s.files         = all_files.grep(%r!^(exe|lib|rubocop)/|^.rubocop.yml$!)
   s.executables   = all_files.grep(%r!^exe/!) { |f| File.basename(f) }
   s.bindir        = "exe"
   s.require_paths = ["lib"]
