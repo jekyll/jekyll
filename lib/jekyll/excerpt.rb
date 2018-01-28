@@ -116,11 +116,28 @@ module Jekyll
     def extract_excerpt(doc_content)
       head, _, tail = doc_content.to_s.partition(doc.excerpt_separator)
 
+      # append appropriate closing tag (to a Liquid block), to the "head" if the
+      # partitioning resulted in leaving the closing tag somewhere in the "tail"
+      # partition.
+      if head =~ %r!{%\s*(\w+).+\s*%}!
+        tag_name = Regexp.last_match(1)
+
+        if liquid_block?(tag_name) && head.match(%r!{%\s*end#{tag_name}.+\s*%}!).nil?
+          head << "\n{% end#{tag_name} %}"
+        end
+      end
+
       if tail.empty?
         head
       else
         head.to_s.dup << "\n\n" << tail.scan(%r!^ {0,3}\[[^\]]+\]:.+$!).join("\n")
       end
+    end
+
+    private
+
+    def liquid_block?(tag_name)
+      Liquid::Template.tags[tag_name].superclass == Liquid::Block
     end
   end
 end
