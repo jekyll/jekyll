@@ -1,3 +1,9 @@
+## HEAD
+
+### Development Fixes
+
+  * move duplicate code to a single private method (#6593)
+
 ## 3.7.2 / 2018-01-25
 
 ### Development Fixes
