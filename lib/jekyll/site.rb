@@ -463,10 +463,9 @@ module Jekyll
 
     private
     def render_regenerated(document, payload)
-      if regenerator.regenerate?(document)
-        document.output = Jekyll::Renderer.new(self, document, payload).run
-        document.trigger_hooks(:post_render)
-      end
+      return unless regenerator.regenerate?(document)
+      document.output = Jekyll::Renderer.new(self, document, payload).run
+      document.trigger_hooks(:post_render)
     end
   end
 end
