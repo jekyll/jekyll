@@ -68,8 +68,11 @@ module Jekyll
     # rubocop: disable AbcSize
     def render_document
       info = {
-        :registers => { :site => site, :page => payload["page"] },
+        :registers        => { :site => site, :page => payload["page"] },
+        :strict_filters   => site.config["liquid"]["strict_filters"],
+        :strict_variables => site.config["liquid"]["strict_variables"],
       }
+
       output = document.content
       if document.render_with_liquid?
         Jekyll.logger.debug "Rendering Liquid:", document.relative_path
