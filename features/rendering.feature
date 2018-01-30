@@ -37,7 +37,15 @@ Feature: Rendering
     And   I should not see "Liquid Exception:" in the build output
 
   Scenario: Rendering a custom site containing a file with a non-existent Liquid variable
-    Given I have a "index.html" page with title "Simple Test" that contains "{{ page.title }}\n\n{{ page.author }}"
+    Given I have a "index.html" file with content:
+    """
+    ---
+    title: Simple Test
+    ---
+    {{ page.title }}
+
+    {{ page.author }}
+    """
     And   I have a "_config.yml" file with content:
     """
     liquid:
@@ -45,10 +53,18 @@ Feature: Rendering
     """
     When  I run jekyll build
     Then  I should get a non-zero exit-status
-    And   I should see "undefined variable author in index.html" in the build output
+    And   I should see "Liquid error \(line 3\): undefined variable author in index.html" in the build output
 
   Scenario: Rendering a custom site containing a file with a non-existent Liquid filter
-    Given I have a "index.html" page with title "Simple Test" that contains "{{ page.title | foobar }}\n\n{{ page.author }}"
+    Given I have a "index.html" file with content:
+    """
+    ---
+    author: John Doe
+    ---
+    {{ page.title }}
+
+    {{ page.author | foobar }}
+    """
     And   I have a "_config.yml" file with content:
     """
     liquid:
@@ -56,7 +72,7 @@ Feature: Rendering
     """
     When  I run jekyll build
     Then  I should get a non-zero exit-status
-    And   I should see "undefined filter foobar in index.html" in the build output
+    And   I should see "Liquid error \(line 3\): undefined filter foobar in index.html" in the build output
 
   Scenario: Render Liquid and place in layout
     Given I have a "index.html" page with layout "simple" that contains "Hi there, Jekyll {{ jekyll.environment }}!"
