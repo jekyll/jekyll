@@ -684,7 +684,9 @@ verbose:  false
 defaults: []
 
 liquid:
-  error_mode: warn
+  error_mode:       warn
+  strict_filters:   false
+  strict_variables: false
 
 # Markdown Processors
 rdiscount:
@@ -712,6 +714,14 @@ options are
 - `lax` --- Ignore all errors.
 - `warn` --- Output a warning on the console for each error.
 - `strict` --- Output an error message and stop the build.
+
+You can also configure Liquid's renderer to catch non-assigned variables and
+non-existing filters by setting `strict_variables` and / or `strict_filters`
+to `true` respectively.
+
+Do note that while `error_mode` configures Liquid's parser, the `strict_variables`
+and `strict_filters` options configures Liquid's renderer and are consequently,
+mutually exclusive.
 
 ## Markdown Options
 
