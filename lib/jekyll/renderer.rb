@@ -69,8 +69,8 @@ module Jekyll
     def render_document
       info = {
         :registers        => { :site => site, :page => payload["page"] },
-        :strict_filters   => site.config["liquid"]["strict_filters"],
-        :strict_variables => site.config["liquid"]["strict_variables"],
+        :strict_filters   => liquid_options["strict_filters"],
+        :strict_variables => liquid_options["strict_variables"],
       }
 
       output = document.content
@@ -267,6 +267,11 @@ module Jekyll
       @output_exts ||= converters.map do |c|
         c.output_ext(document.extname)
       end.compact
+    end
+
+    private
+    def liquid_options
+      @liquid_options ||= site.config["liquid"]
     end
   end
 end
