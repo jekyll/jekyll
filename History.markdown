@@ -4,6 +4,10 @@
 
   * move duplicate code to a single private method (#6593)
 
+### Minor Enhancements
+
+  * Two massive performance improvements for large sites (#6730)
+
 ## 3.7.2 / 2018-01-25
 
 ### Development Fixes
