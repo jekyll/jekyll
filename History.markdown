@@ -3,6 +3,7 @@
 ### Development Fixes
 
   * move duplicate code to a single private method (#6593)
+  * Replace simple regex with a native Ruby method (#6732)
 
 ### Minor Enhancements
 
