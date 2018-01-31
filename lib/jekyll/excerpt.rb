@@ -119,7 +119,8 @@ module Jekyll
       # append appropriate closing tag (to a Liquid block), to the "head" if the
       # partitioning resulted in leaving the closing tag somewhere in the "tail"
       # partition.
-      if head =~ %r!{%\s*(\w+).+\s*%}!
+      if head.include?("{%")
+        head =~ %r!{%\s*(\w+).+\s*%}!
         tag_name = Regexp.last_match(1)
 
         if liquid_block?(tag_name) && head.match(%r!{%\s*end#{tag_name}.+\s*%}!).nil?
