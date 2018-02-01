@@ -1,5 +1,7 @@
 ## HEAD
 
+  * Adding the jekyll-algolia plugin to the list of plugins (#6737)
+
 ### Development Fixes
 
   * move duplicate code to a single private method (#6593)
