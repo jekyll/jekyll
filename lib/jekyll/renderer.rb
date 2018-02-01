@@ -77,7 +77,7 @@ module Jekyll
       end
 
       Jekyll.logger.debug "Rendering Markup:", document.relative_path
-      output = convert(output)
+      output = convert(output.to_s)
       document.content = output
 
       if document.place_in_layout?

@@ -157,9 +157,10 @@ module Jekyll
     # Determine whether the file should be rendered with Liquid.
     #
     # Returns false if the document is either an asset file or a yaml file,
+    #   or if the document doesn't contain any Liquid Tags or Variables,
     #   true otherwise.
     def render_with_liquid?
-      !(coffeescript_file? || yaml_file?)
+      !(coffeescript_file? || yaml_file? || !Utils.has_liquid_construct?(content))
     end
 
     # Determine whether the file should be rendered with a layout.
