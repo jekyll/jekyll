@@ -72,9 +72,9 @@ module Jekyll
         break result if result.index(":").nil?
         if token.last.nil?
           # Remove leading "/" to avoid generating urls with `//`
-          result.gsub(%r!/:#{token.first}!, "")
+          result.gsub("/:#{token.first}", "")
         else
-          result.gsub(%r!:#{token.first}!, self.class.escape_path(token.last))
+          result.gsub(":#{token.first}", self.class.escape_path(token.last))
         end
       end
     end
@@ -109,7 +109,7 @@ module Jekyll
         replacement = self.class.escape_path(value)
 
         match.sub(":#{winner}", replacement)
-      end.gsub(%r!//!, "/".freeze)
+      end.squeeze("/")
     end
 
     # Returns a sanitized String URL, stripping "../../" and multiples of "/",
