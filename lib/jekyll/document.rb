@@ -56,7 +56,7 @@ module Jekyll
     def merge_data!(other, source: "YAML front matter")
       merge_categories!(other)
       Utils.deep_merge_hashes!(data, other)
-      merge_date!(source)
+      data["date"] = data["date"].to_s if data.key?("date")
       data
     end
 
@@ -424,16 +424,6 @@ module Jekyll
     end
 
     private
-    def merge_date!(source)
-      if data.key?("date")
-        data["date"] = Utils.parse_date(
-          data["date"].to_s,
-          "Document '#{relative_path}' does not have a valid date in the #{source}."
-        )
-      end
-    end
-
-    private
     def merge_defaults
       defaults = @site.frontmatter_defaults.all(
         relative_path,
@@ -457,6 +447,7 @@ module Jekyll
       populate_title
       populate_categories
       populate_tags
+      validate_post_date
       generate_excerpt
     end
 
@@ -494,6 +485,15 @@ module Jekyll
       if !data["date"] || data["date"].to_i == site.time.to_i
         merge_data!({ "date" => date }, :source => "filename")
       end
+    end
+
+    private
+    def validate_post_date
+      return unless data.key?("date")
+      data["date"] = Utils.parse_date(
+        data["date"].to_s,
+        "Document '#{relative_path}' does not have a valid date."
+      )
     end
 
     private
