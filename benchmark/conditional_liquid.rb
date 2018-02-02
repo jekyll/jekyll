@@ -48,6 +48,12 @@ Aliquam vel ornare mauris. Suspendisse ornare diam tempor nulla facilisis
 aliquet. Sed ultrices placerat ultricies.
 LIQUID
 
+SUITE = {
+  :"plain text"  => WITHOUT_LIQUID,
+  :"tags n vars" => WITH_LIQUID,
+  :"just vars"   => WITH_JUST_LIQUID_VAR,
+}.freeze
+
 # Mimic how Jekyll's LiquidRenderer would process a non-static file, with
 # some dummy payload
 def always_liquid(content)
@@ -61,16 +67,32 @@ end
 # Mimic how the proposed change would first execute a couple of checks and
 # proceed to process with Liquid if necessary
 def conditional_liquid(content)
+  return content if content.nil? || content.empty?
   return content unless content.include?("{%") || content.include?("{{")
   always_liquid(content)
 end
 
+# Test https://github.com/jekyll/jekyll/pull/6735#discussion_r165499868
+# ------------------------------------------------------------------------
+def check_with_regex(content)
+  !%r!{[{%]!.match(content).nil?
+end
+
+def check_with_builtin(content)
+  content.include?("{%") || content.include?("{{")
+end
+
+SUITE.each_value do |text|
+  Benchmark.ips do |x|
+    x.report("regex-check") { check_with_regex(text) }
+    x.report("builtin-check") { check_with_builtin(text) }
+    x.compare!
+  end
+end
+# ------------------------------------------------------------------------
+
 # Let's roll!
-{
-  :"plain text"  => WITHOUT_LIQUID,
-  :"tags n vars" => WITH_LIQUID,
-  :"just vars"   => WITH_JUST_LIQUID_VAR,
-}.each do |key, text|
+SUITE.each do |key, text|
   Benchmark.ips do |x|
     x.report("always thru liquid - #{key}") { always_liquid(text) }
     x.report("conditional liquid - #{key}") { conditional_liquid(text) }
