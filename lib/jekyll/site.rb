@@ -311,7 +311,7 @@ module Jekyll
     #
     # Returns an Array of Documents which should be written
     def docs_to_write
-      documents.select(&:write?)
+      @docs_to_write ||= documents.select(&:write?)
     end
 
     # Get all the documents
