@@ -222,7 +222,7 @@ module Jekyll
     # Returns the full path to the output file of this document.
     def destination(base_directory)
       dest = site.in_dest_dir(base_directory)
-      path = site.in_dest_dir(dest, URL.unescape_path(url))
+      path = site.in_dest_dir(dest, unescaped_url)
       if url.end_with? "/"
         path = File.join(path, "index.html")
       else
@@ -494,6 +494,11 @@ module Jekyll
       if !data["date"] || data["date"].to_i == site.time.to_i
         merge_data!({ "date" => date }, :source => "filename")
       end
+    end
+
+    private
+    def unescaped_url
+      @unescaped_url ||= URL.unescape_path(url)
     end
 
     private
