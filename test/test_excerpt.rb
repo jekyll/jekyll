@@ -78,6 +78,15 @@ class TestExcerpt < JekyllUnitTest
       end
     end
 
+    context "#relative_path" do
+      should "return its document's relative path with '/#excerpt' appended" do
+        assert_equal "#{@excerpt.doc.relative_path}/#excerpt",
+          @excerpt.relative_path
+        assert_equal "_posts/2013-07-22-post-excerpt-with-layout.markdown/#excerpt",
+          @excerpt.relative_path
+      end
+    end
+
     context "#to_liquid" do
       should "contain the proper page data to mimic the post liquid" do
         assert_equal "Post Excerpt with Layout", @excerpt.to_liquid["title"]
