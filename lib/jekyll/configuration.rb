@@ -181,6 +181,7 @@ module Jekyll
     rescue SystemCallError
       if @default_config_file ||= nil
         Jekyll.logger.warn "Configuration file:", "none"
+        Jekyll.logger.debug "Default config:", file
         {}
       else
         Jekyll.logger.error "Fatal:", "The configuration file '#{file}'
