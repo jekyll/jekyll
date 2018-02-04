@@ -786,6 +786,7 @@ LESS.js files during generation.
 - [Tweetsert](https://github.com/ibrado/jekyll-tweetsert): Imports tweets (Twitter statuses) as new posts. Features multiple timeline support, hashtag import, filtering, automatic category and/or tags, optional retweets and replies.
 - [Stickyposts](https://github.com/ibrado/jekyll-stickyposts): Moves or copies (pins) posts marked `sticky: true` to the top of the list. Perfect for keeping important announcements on the home page, or giving collections a descriptive entry. Paginator friendly.
 - [Jekyll::Paginate::Content](https://github.com/ibrado/jekyll-paginate-content): Content paginator in the style of jekyll-paginator-v2 that splits pages, posts, and collection entries into several pages. Specify a separator or use HTML &lt;h1&gt; etc. headers. Automatic splitting, single-page view, pager/trail, self-adjusting links, multipage TOC, SEO support.
+- [jekyll-fontello](https://gist.github.com/ericcornelissen/c09b01259496922c64949ad1bb7e0559): A Jekyll plugin that automatically downloads your webfont from Fontello.
 
 #### Converters
 
