@@ -13,7 +13,7 @@ module Jekyll
       def absolute_url(input)
         return if input.nil?
         input = input.url if input.respond_to?(:url)
-        return input if Addressable::URI.parse(input.to_s).absolute?
+        return input if absolute?(input)
         site = @context.registers[:site]
         return relative_url(input) if site.config["url"].nil?
         Addressable::URI.parse(
@@ -30,7 +30,7 @@ module Jekyll
       def relative_url(input)
         return if input.nil?
         input = input.url if input.respond_to?(:url)
-        return input if Addressable::URI.parse(input.to_s).absolute?
+        return input if absolute?(input)
 
         parts = [sanitized_baseurl, ensure_leading_slash(input.to_s)]
         Addressable::URI.parse(
@@ -60,6 +60,10 @@ module Jekyll
       def ensure_leading_slash(input)
         return input if input.nil? || input.empty? || input.start_with?("/")
         "/#{input}"
+      end
+
+      def absolute?(input)
+        %r!\A[a-zA-Z+.-]+:/!.match(input.to_s)
       end
 
     end
