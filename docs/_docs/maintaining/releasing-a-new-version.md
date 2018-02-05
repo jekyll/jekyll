@@ -63,7 +63,9 @@ bundle exec rake release
 
 This will automatically build the new gem, make a release commit and tag and then push the new gem to RubyGems. Don't worry about creating a GitHub release, @jekyllbot should take care of that.
 
-And then, you're done! :tada: Feel free to celebrate! 
+And then, you're done! :tada: Feel free to celebrate!
+
+If you have access to the [@jekyllrb](https://twitter.com/jekyllrb) Twitter account, you should tweet the release post from there. If not, just ask another maintainer to do it or to give you access.
 
 ## For non-core gems
 
