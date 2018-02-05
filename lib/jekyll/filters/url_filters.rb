@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require "addressable/uri"
-
 module Jekyll
   module Filters
     module URLFilters
+      ABSOLUTE_URL = %r!\A(?:https?|file)://!
+
       # Produces an absolute URL based on site.url and site.baseurl.
       #
       # input - the URL to make absolute.
@@ -13,12 +13,11 @@ module Jekyll
       def absolute_url(input)
         return if input.nil?
         input = input.url if input.respond_to?(:url)
-        return input if Addressable::URI.parse(input.to_s).absolute?
+        return input if ABSOLUTE_URL.match(input)
         site = @context.registers[:site]
         return relative_url(input) if site.config["url"].nil?
-        Addressable::URI.parse(
-          site.config["url"].to_s + relative_url(input)
-        ).normalize.to_s
+
+        site.config["url"].to_s + relative_url(input)
       end
 
       # Produces a URL relative to the domain root based on site.baseurl
@@ -30,12 +29,9 @@ module Jekyll
       def relative_url(input)
         return if input.nil?
         input = input.url if input.respond_to?(:url)
-        return input if Addressable::URI.parse(input.to_s).absolute?
+        return input if ABSOLUTE_URL.match(input)
 
-        parts = [sanitized_baseurl, input]
-        Addressable::URI.parse(
-          parts.compact.map { |part| ensure_leading_slash(part.to_s) }.join
-        ).normalize.to_s
+        sanitized_baseurl + ensure_leading_slash(input)
       end
 
       # Strips trailing `/index.html` from URLs to create pretty permalinks
@@ -52,7 +48,7 @@ module Jekyll
 
       def sanitized_baseurl
         site = @context.registers[:site]
-        site.config["baseurl"].to_s.chomp("/")
+        ensure_leading_slash(site.config["baseurl"].to_s.chomp("/"))
       end
 
       def ensure_leading_slash(input)
