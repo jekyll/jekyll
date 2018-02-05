@@ -9,13 +9,7 @@ The most important thing to understand before making a release is that there's n
 
 ### Bump the version
 
-There's three main places where you have to update the version number manually:
-
-- In `lib/jekyll/version.rb`. This is the important one!
-- In `docs/latest_version.txt`. This is necessary for the site to update correctly.
-- In `docs/_config.yml` (the first element).
-
-Everything else should orient itself around these. Feel free to commit and push to `master` now.
+The only important place you need to manually bump the version is in `lib/jekyll/version.rb`. Adjust that, and everything else should work fine.
 
 ### Update the history document
 
@@ -34,7 +28,23 @@ Once you've done this, update the website's changelog by running the following c
 bundle exec rake site:history
 ```
 
-It's recommended that you go over the `History.markdown` manually one more time, in case there are any spelling errors or such. Feel free to fix those manually, and after you're done generating the website changelog, commit your changes.
+It's recommended that you go over the `History.markdown` file manually one more time, in case there are any spelling errors or such. Feel free to fix those manually, and after you're done generating the website changelog, commit your changes.
+
+## Write a release post
+
+In case this isn't done already, you can generate a new release post using the include `rake` command:
+
+```sh
+bundle exec rake site:releases:new[3.8.0]
+```
+
+where `3.8.0` should be replaced with the new version. Then, write the post. Be sure to thank all of the collaborators and maintainers who have contributed since the last release. You can generate a log of their names using the following command:
+
+```sh
+git shortlog -sn master...v3.7.2
+```
+
+where, again `v3.7.2` is the last release. Be sure to open a pull request for your release post.
 
 ### Push the version
 
