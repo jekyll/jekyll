@@ -22,11 +22,13 @@ Replace the first header of the history document with a version milestone. This 
 
 Adjust the version number and the date. Don't worry about removing the `HEAD` part, it'll be regenerated when the time comes.
 
-Once you've done this, update the website's changelog by running the following command:
+Once you've done this, update the website by running the following command:
 
 ```sh
-bundle exec rake site:history
+bundle exec rake site:generate
 ```
+
+This updates the website's changelog, and pushes the versions in various other places.
 
 It's recommended that you go over the `History.markdown` file manually one more time, in case there are any spelling errors or such. Feel free to fix those manually, and after you're done generating the website changelog, commit your changes.
 
