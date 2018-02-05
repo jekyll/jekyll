@@ -94,6 +94,7 @@ module Jekyll
       self.static_files = []
       self.data = {}
       @collections = nil
+      @docs_to_write = nil
       @regenerator.clear_cache
       @liquid_renderer.reset
 
