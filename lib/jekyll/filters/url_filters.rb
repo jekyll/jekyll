@@ -17,7 +17,11 @@ module Jekyll
         site = @context.registers[:site]
         return relative_url(input) if site.config["url"].nil?
         Addressable::URI.parse(
-          site.config["url"].to_s + relative_url(input)
+          [
+            site.config["url"].to_s,
+            sanitized_baseurl,
+            ensure_leading_slash(input.to_s),
+          ].join
         ).normalize.to_s
       end
 
@@ -31,10 +35,8 @@ module Jekyll
         return if input.nil?
         input = input.url if input.respond_to?(:url)
         return input if absolute?(input)
-
-        parts = [sanitized_baseurl, ensure_leading_slash(input.to_s)]
         Addressable::URI.parse(
-          parts.compact.map { |part| part }.join
+          [sanitized_baseurl, ensure_leading_slash(input.to_s)].join
         ).normalize.to_s
       end
 
