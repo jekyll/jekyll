@@ -20,7 +20,7 @@ Replace the first header of the history document with a version milestone. This 
 +## 3.7.1 / 2018-01-25
 ```
 
-Adjust the version number and the date. Don't worry about removing the `HEAD` part, it'll automatically be regenerated when the time comes.
+Adjust the version number and the date. Don't worry about removing the `HEAD` part, it'll be regenerated when the time comes.
 
 Once you've done this, update the website's changelog by running the following command:
 
@@ -32,7 +32,7 @@ It's recommended that you go over the `History.markdown` file manually one more 
 
 ## Write a release post
 
-In case this isn't done already, you can generate a new release post using the include `rake` command:
+In case this isn't done already, you can generate a new release post using the included `rake` command:
 
 ```sh
 bundle exec rake site:releases:new[3.8.0]
