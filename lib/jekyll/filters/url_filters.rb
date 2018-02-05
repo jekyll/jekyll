@@ -3,7 +3,7 @@
 module Jekyll
   module Filters
     module URLFilters
-      ABSOLUTE_URL = %r!\A(?:https?|file)://.+!
+      ABSOLUTE_URL = %r!\A(?:https?|file)://!
 
       # Produces an absolute URL based on site.url and site.baseurl.
       #
