@@ -1,6 +1,7 @@
 ## HEAD
 
   * Adding the jekyll-algolia plugin to the list of plugins (#6737)
+  * Added Premonition plugin to liste of plugins (#6750)
 
 ### Development Fixes
 
