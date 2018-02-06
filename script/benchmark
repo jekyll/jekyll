@@ -2,9 +2,13 @@
 
 set -e
 
+readonly BUNDLE_GEMFILE="$(pwd)/tmp/bench-site/Gemfile" bundle update
+
 function benchmark() {(
   cd tmp/bench-site
+  echo "travis_fold:start:bundle"
   bundle update
+  echo "travis_fold:end:bundle"
   time bundle exec jekyll build
 )}
 
@@ -15,10 +19,11 @@ git clone --depth 1 https://github.com/jekyll/benchmarking.git tmp/benchmark
 echo "travis_fold:end:setup"
 
 echo "travis_fold:start:generate_site.sh"
-tmp/benchmark/generate_site.sh 1000 tmp/bench-site
+tmp/benchmark/generate_site.sh 10 tmp/bench-site
 echo "travis_fold:end:generate_site.sh"
 
 cat > tmp/bench-site/Gemfile << EOF
+source "https://rubygems.org"
 gem "jekyll", :path => "../.."
 gem "minima"
 EOF
@@ -26,6 +31,7 @@ EOF
 benchmark
 
 cat > tmp/bench-site/Gemfile << EOF
+source "https://rubygems.org"
 gem "jekyll", :github => "jekyll/jekyll", branch: "master"
 gem "minima"
 EOF
