@@ -8,15 +8,18 @@ function benchmark() {(
   time bundle exec jekyll build
 )}
 
+echo "travis_fold:start:setup"
 rm -rf tmp/benchmark tmp/bench-site
 mkdir -p tmp/bench-site
-
 git clone --depth 1 https://github.com/jekyll/benchmarking.git tmp/benchmark
+echo "travis_fold:end:setup"
 
+echo "travis_fold:start:generate_site.sh"
 tmp/benchmark/generate_site.sh 1000 tmp/bench-site
+echo "travis_fold:end:generate_site.sh"
 
 cat > tmp/bench-site/Gemfile << EOF
-gem "jekyll", :path => "."
+gem "jekyll", :path => "../.."
 gem "minima"
 EOF
 
