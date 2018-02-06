@@ -11,7 +11,7 @@ Maintainers of Jekyll should be using it regularly. This is partly because you w
 
 # 2. No Guilt About Leaving
 
-All maintainers can stop working on Jekyll at any time without any guilt or explanation (like at a job). We may still ask for your help with questions after you leave but you are under no obligation to answer them. Like at a job, if you create a big mess and then leave you still have no obligations but we may think less of you (or, realistically, probably just revert the problematic work). Like at a job, you should probably take a break from Jekyll at least a few times a year.
+All maintainers can stop working on Jekyll at any time without any guilt or explanation (like at a job). We may still ask for your help with questions after you leave but you are under no obligation to answer them. If you create a big mess and then leave you still have no obligations but we may think less of you (or, realistically, probably just revert the problematic work). Also, you should probably take a break from Jekyll at least a few times a year.
 
 This also means contributors should be consumers. If a maintainer finds they are not using a project in the real-world, they should reconsider their involvement with the project.
 
