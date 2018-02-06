@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+set -e
+
+function benchmark() {(
+  cd tmp/bench-site
+  bundle update
+  time bundle exec jekyll build
+)}
+
+rm -rf tmp/benchmark tmp/bench-site
+
+if ! [[ -d tmp ]]; then
+  mkdir tmp
+fi
+
+if ! [[ -d tmp/bench-site ]]; then
+  mkdir tmp/bench-site
+fi
+
+git clone --depth 1 https://github.com/jekyll/benchmarking.git tmp/benchmark
+
+tmp/benchmark/generate_site.sh 1000 tmp/bench-site
+
+cat > tmp/bench-site/Gemfile << EOF
+gem "jekyll", :path => "."
+gem "minima"
+EOF
+
+benchmark
+
+cat > tmp/bench-site/Gemfile << EOF
+gem "jekyll", :github => "jekyll/jekyll", branch: "master"
+gem "minima"
+EOF
+
+benchmark

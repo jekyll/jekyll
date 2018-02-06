@@ -19,6 +19,8 @@ matrix:
       env: TEST_SUITE=default-site
     - rvm: *ruby1
       env: ROUGE_VERSION=1.11.1 # runs everything with this version
+    - rvm: *ruby1
+      env: TEST_SUITE=benchmark
   exclude:
     - rvm: *jruby
       env: TEST_SUITE=cucumber
