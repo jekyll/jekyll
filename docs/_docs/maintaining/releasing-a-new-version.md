@@ -20,7 +20,7 @@ Replace the first header of the history document with a version milestone. This 
 +## 3.7.1 / 2018-01-25
 ```
 
-Adjust the version number and the date. Don't worry about removing the `HEAD` part, it'll be regenerated when the time comes.
+Adjust the version number and the date. The `## HEAD` heading will be regenerated next time a pull request is merged.
 
 Once you've done this, update the website by running the following command:
 
@@ -73,11 +73,9 @@ If you have access to the [@jekyllrb](https://twitter.com/jekyllrb) Twitter acco
 
 If you're not a maintainer for `jekyll/jekyll`, the procedure is much simpler in a lot of cases. Generally, the procedure still looks like this:
 
-- Bump the gem version manually
+- Bump the gem version manually, usually in `lib/<plugin_name>/version.rb`
 - Adjust the history file
-- Create a release tag and/or commit
-- Build the gem
-- Push the gem
+- Run `bundle exec rake release` or `script/release`, depending on which of the two exists
 - Rejoice
 
 Be sure to ask your project's maintainers if you're unsure!
