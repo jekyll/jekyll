@@ -9,14 +9,7 @@ function benchmark() {(
 )}
 
 rm -rf tmp/benchmark tmp/bench-site
-
-if ! [[ -d tmp ]]; then
-  mkdir tmp
-fi
-
-if ! [[ -d tmp/bench-site ]]; then
-  mkdir tmp/bench-site
-fi
+mkdir -p tmp/bench-site
 
 git clone --depth 1 https://github.com/jekyll/benchmarking.git tmp/benchmark
 
