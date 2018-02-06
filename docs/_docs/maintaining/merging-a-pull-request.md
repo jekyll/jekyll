@@ -35,7 +35,7 @@ The merge request is made up of three things:
 The categories match the headings in the `History.markdown` file, and they are:
 
 1. Major Enhancements (`+major`) – major updates or breaking changes to the code which necessitate a major version bump (v3 ~> v4)
-2. Minor Enhancements (`+minor`) – minor updates (with the labels `feature` or `enhancements`) which necessitate a minor version bump (v3.1 ~> v3.2)
+2. Minor Enhancements (`+minor`) – minor updates (with the labels `feature` or `enhancement`) which necessitate a minor version bump (v3.1 ~> v3.2)
 3. Bug Fixes (`+bug`) – corrections to code which do not change or add functionality, which necessitate a patch version bump (v3.1.0 ~> v3.1.1)
 4. Documentation (`+doc`) - changes to the documentation found in `docs/_docs/`
 5. Site Enhancements (`+site`) – changes to the source of [https://jekyllrb.com](https://jekyllrb.com) found in `docs/`
