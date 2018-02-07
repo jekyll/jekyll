@@ -5,9 +5,9 @@ set -e
 readonly BUNDLE_GEMFILE="$(pwd)/tmp/bench-site/Gemfile" bundle update
 
 function fold() {
-  echo "travis_fold:start:$1"
+  if [[ $TRAVIS ]]; then echo "travis_fold:start:$1"; fi
   $@
-  echo "travis_fold:end:$1"
+  if [[ $TRAVIS ]]; then echo "travis_fold:end:$1"; fi
 }
 
 function benchmark() {(
