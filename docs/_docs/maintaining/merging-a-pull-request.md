@@ -30,7 +30,7 @@ The merge request is made up of three things:
 
 1. `@jekyllbot:` – this is the prefix our bot looks for when processing commands
 2. `merge` – the command
-3. `+dev` – the category to which the changes belong. The `+` is optional.
+3. `+dev` – the category to which the changes belong.
 
 The categories match the headings in the `History.markdown` file, and they are:
 
