@@ -14,10 +14,10 @@ function benchmark() {(
   cd tmp/bench-site
   fold bundle update
   echo "$1" > "../$1.txt"
-  start=`date +%s`
+  start=$(date +%s)
   bundle exec jekyll build
-  end=`date +%s`
-  echo "$((end-start)) seconds" >> "../$1.txt"
+  end=$(date +%s)
+  echo "$((end-start))" >> "../$1.txt"
 )}
 
 function gemfile() {
@@ -39,7 +39,12 @@ function generate_site() {
 }
 
 function display() {
+  THIS=$(tail -n 1 tmp/this.txt)
+  MASTER=$(tail -n 1 tmp/this.txt)
+  DIFF=$(echo "scale=4;($THIS-$MASTER)/($MASTER/100)" | bc)
   pr -m -t tmp/this.txt tmp/master.txt
+  echo "This is $DIFF% the speed of master"
+  echo "100% means no performance change, lower than 100% means this is faster."
 }
 
 fold setup
