@@ -16,6 +16,10 @@
   * Add document on releasing a new version (#6745)
   * Mention Talkyard, a new commenting system for Jekyll and others. (#6752)
 
+### Site Enhancements
+
+  * Remove links to Gists (#6751)
+
 ## 3.7.2 / 2018-01-25
 
 ### Development Fixes
