@@ -930,10 +930,9 @@ You can find a few useful plugins at the following locations:
 - [jekyll-algolia](https://community.algolia.com/jekyll-algolia/): Add fast and relevant search to your Jekyll site through the Algolia API.
 
 <div class="note info">
-  <h5>Jekyll Plugins Wanted</h5>
+  <h5>Submit your gem plugins</h5>
   <p>
-    If you have a Jekyll plugin that you would like to see added to this list,
-    you should <a href="../contributing/">read the contributing page</a> to find
+    You're encouraged to add your Jekyll gem plugins to this list, <a href="../contributing/">read the contributing page</a> to find
     out how to make that happen.
   </p>
 </div>
