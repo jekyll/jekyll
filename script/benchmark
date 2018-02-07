@@ -41,10 +41,14 @@ function generate_site() {
 function display() {
   THIS=$(tail -n 1 tmp/this.txt)
   MASTER=$(tail -n 1 tmp/this.txt)
-  DIFF=$(echo "scale=4;($THIS-$MASTER)/($MASTER/100)" | bc)
+  DIFF=$(echo "scale=2;($THIS-$MASTER)/($MASTER/100)" | bc)
+  if (( THIS < MASTER )); then
+    ADJECTIVE="\033[32mfaster\033[0m"
+  else
+    ADJECTIVE="\033[31mslower\033[0m"
+  fi
   pr -m -t tmp/this.txt tmp/master.txt
-  echo "This is $DIFF% the speed of master"
-  echo "100% means no performance change, lower than 100% means this is faster."
+  echo -e "This is ${DIFF/-/}% $ADJECTIVE than master"
 }
 
 fold setup
