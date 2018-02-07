@@ -124,6 +124,7 @@ module Jekyll
         tag_name = Regexp.last_match(1)
 
         if liquid_block?(tag_name) && head.match(%r!{%\s*end#{tag_name}\s*%}!).nil?
+          print_build_warning
           head << "\n{% end#{tag_name} %}"
         end
       end
@@ -139,6 +140,16 @@ module Jekyll
 
     def liquid_block?(tag_name)
       Liquid::Template.tags[tag_name].superclass == Liquid::Block
+    end
+
+    def print_build_warning
+      Jekyll.logger.warn "Warning:", "Excerpt modified in #{doc.relative_path}!"
+      Jekyll.logger.warn "",
+        "Found a Liquid block containing separator '#{doc.excerpt_separator}' and has " \
+        "been modified with the appropriate closing tag."
+      Jekyll.logger.warn "",
+        "Feel free to define a custom excerpt or excerpt_separator in the document's " \
+        "Front Matter if the generated excerpt is unsatisfactory."
     end
   end
 end
