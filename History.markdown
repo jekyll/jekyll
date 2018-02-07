@@ -12,6 +12,10 @@
 
   * Two massive performance improvements for large sites (#6730)
 
+### Documentation
+
+  * Add document on releasing a new version (#6745)
+
 ## 3.7.2 / 2018-01-25
 
 ### Development Fixes
