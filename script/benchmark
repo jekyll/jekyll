@@ -12,6 +12,14 @@ function benchmark() {(
   time bundle exec jekyll build
 )}
 
+function gemfile() {
+  cat > tmp/bench-site/Gemfile << EOF
+  source "https://rubygems.org"
+  gem "jekyll", $@
+  gem "minima"
+EOF
+}
+
 echo "travis_fold:start:setup"
 rm -rf tmp/benchmark tmp/bench-site
 mkdir -p tmp/bench-site
@@ -22,18 +30,8 @@ echo "travis_fold:start:generate_site.sh"
 tmp/benchmark/generate_site.sh 10 tmp/bench-site
 echo "travis_fold:end:generate_site.sh"
 
-cat > tmp/bench-site/Gemfile << EOF
-source "https://rubygems.org"
-gem "jekyll", :path => "../.."
-gem "minima"
-EOF
-
+gemfile ":path => '../..'"
 benchmark
 
-cat > tmp/bench-site/Gemfile << EOF
-source "https://rubygems.org"
-gem "jekyll", :github => "jekyll/jekyll", branch: "master"
-gem "minima"
-EOF
-
+gemfile ":github => 'jekyll/jekyll', branch: 'master'"
 benchmark
