@@ -27,7 +27,7 @@ git clone --depth 1 https://github.com/jekyll/benchmarking.git tmp/benchmark
 echo "travis_fold:end:setup"
 
 echo "travis_fold:start:generate_site.sh"
-tmp/benchmark/generate_site.sh 10 tmp/bench-site
+tmp/benchmark/generate_site.sh 10000 tmp/bench-site
 echo "travis_fold:end:generate_site.sh"
 
 gemfile ":path => '../..'"
