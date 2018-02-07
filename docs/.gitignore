@@ -3,3 +3,5 @@ _site/
 pkg/
 test/
 .idea/
+Gemfile
+Gemfile.lock

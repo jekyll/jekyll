@@ -1,4 +1,4 @@
-bundler_args: --without benchmark:site:development
+bundler_args: --without benchmark:development
 script: script/cibuild
 cache: bundler
 language: ruby
@@ -27,6 +27,7 @@ env:
   matrix:
     - TEST_SUITE=test
     - TEST_SUITE=cucumber
+    - TEST_SUITE=benchmark-pr
 branches:
   only:
     - master

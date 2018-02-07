@@ -9,6 +9,7 @@ then
   script/fmt
   script/test ci
   script/cucumber
+  script/benchmark-pr
   script/default-site
 elif [[ -x "script/$TEST_SUITE" ]]
 then
