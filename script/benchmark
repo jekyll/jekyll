@@ -13,7 +13,11 @@ function fold() {
 function benchmark() {(
   cd tmp/bench-site
   fold bundle update
-  time bundle exec jekyll build
+  echo "$1" > "../$1.txt"
+  start=`date +%s`
+  bundle exec jekyll build
+  end=`date +%s`
+  echo "$((end-start)) seconds" >> "../$1.txt"
 )}
 
 function gemfile() {
@@ -33,11 +37,18 @@ function setup() {
 function generate_site() {
   tmp/benchmark/generate_site.sh 10000 tmp/bench-site
 }
+
+function display() {
+  pr -m -t tmp/this.txt tmp/master.txt
+}
+
 fold setup
 fold generate_site
 
 gemfile ":path => '../..'"
-benchmark
+benchmark this
 
 gemfile ":github => 'jekyll/jekyll', branch: 'master'"
-benchmark
+benchmark master
+
+display
