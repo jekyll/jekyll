@@ -40,7 +40,7 @@ function generate_site() {
 
 function display() {
   THIS=$(tail -n 1 tmp/this.txt)
-  MASTER=$(tail -n 1 tmp/this.txt)
+  MASTER=$(tail -n 1 tmp/master.txt)
   DIFF=$(echo "scale=2;($THIS-$MASTER)/($MASTER/100)" | bc)
   if (( THIS < MASTER )); then
     ADJECTIVE="\033[32mfaster\033[0m"
