@@ -1,8 +1,5 @@
 ## HEAD
 
-  * Adding the jekyll-algolia plugin to the list of plugins (#6737)
-  * Added Premonition plugin to list of plugins (#6750)
-
 ### Development Fixes
 
   * move duplicate code to a single private method (#6593)
@@ -14,6 +11,8 @@
 
 ### Documentation
 
+  * Adding the jekyll-algolia plugin to the list of plugins (#6737)
+  * Added Premonition plugin to list of plugins (#6750)
   * Add document on releasing a new version (#6745)
 
 ## 3.7.2 / 2018-01-25
