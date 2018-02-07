@@ -57,7 +57,7 @@ fold generate_site
 gemfile ":path => '../..'"
 benchmark this
 
-gemfile ":github => 'jekyll/jekyll', branch: 'master'"
+gemfile ":git => 'https://github.com/jekyll/jekyll.git', branch: 'master'"
 benchmark master
 
 display
