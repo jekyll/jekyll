@@ -123,7 +123,7 @@ module Jekyll
         head =~ %r!{%\s*(\w+).+\s*%}!
         tag_name = Regexp.last_match(1)
 
-        if liquid_block?(tag_name) && head.match(%r!{%\s*end#{tag_name}.+\s*%}!).nil?
+        if liquid_block?(tag_name) && head.match(%r!{%\s*end#{tag_name}\s*%}!).nil?
           head << "\n{% end#{tag_name} %}"
         end
       end
