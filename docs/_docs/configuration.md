@@ -549,7 +549,9 @@ defaults:
 In this example, the `layout` is set to `default` inside the
 [collection](../collections/) with the name `my_collection`.
 
-It is also possible to use glob patterns when matching defaults. For example, it is possible to set specific layout for each `special-page.html` in any subfolder of `section` folder. {%- include docs_version_badge.html version="3.7.0" -%}
+### Glob patterns in Front Matter defaults
+
+It is also possible to use glob patterns (currently limited to patterns that contain `*`) when matching defaults. For example, it is possible to set specific layout for each `special-page.html` in any subfolder of `section` folder. {%- include docs_version_badge.html version="3.7.0" -%}
 
 ```yaml
 collections:
@@ -563,6 +565,17 @@ defaults:
     values:
       layout: "specific-layout"
 ```
+
+<div class="note warning">
+  <h5>Globbing and Performance</h5>
+  <p>
+    Please note that globbing a path is known to have a negative effect on
+    performance and is currently not optimized, especially on Windows.
+    Globbing a path will increase your build times in proportion to the size
+    of the associated collection directory.
+  </p>
+</div>
+
 
 ### Precedence
 

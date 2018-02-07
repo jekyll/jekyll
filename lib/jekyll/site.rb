@@ -77,7 +77,7 @@ module Jekyll
     end
 
     def print_stats
-      puts @liquid_renderer.stats_table
+      Jekyll.logger.info @liquid_renderer.stats_table
     end
 
     # Reset Site details.
@@ -391,6 +391,15 @@ module Jekyll
       end
     end
 
+    # Public: The full path to the directory that houses all the collections registered
+    # with the current site.
+    #
+    # Returns the source directory or the absolute path to the custom collections_dir
+    def collections_path
+      dir_str = config["collections_dir"]
+      @collections_path ||= dir_str.empty? ? source : in_source_dir(dir_str)
+    end
+
     # Limits the current posts; removes the posts which exceed the limit_posts
     #
     # Returns nothing
@@ -449,10 +458,7 @@ module Jekyll
     def render_docs(payload)
       collections.each_value do |collection|
         collection.docs.each do |document|
-          if regenerator.regenerate?(document)
-            document.output = Jekyll::Renderer.new(self, document, payload).run
-            document.trigger_hooks(:post_render)
-          end
+          render_regenerated(document, payload)
         end
       end
     end
@@ -460,11 +466,15 @@ module Jekyll
     private
     def render_pages(payload)
       pages.flatten.each do |page|
-        if regenerator.regenerate?(page)
-          page.output = Jekyll::Renderer.new(self, page, payload).run
-          page.trigger_hooks(:post_render)
-        end
+        render_regenerated(page, payload)
       end
+    end
+
+    private
+    def render_regenerated(document, payload)
+      return unless regenerator.regenerate?(document)
+      document.output = Jekyll::Renderer.new(self, document, payload).run
+      document.trigger_hooks(:post_render)
     end
   end
 end

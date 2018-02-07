@@ -16,7 +16,7 @@ All pull requests should be subject to code review. Code review is a [foundation
 We have [a helpful little bot](https://github.com/jekyllbot) which we use to merge pull requests. We don't use the GitHub.com interface for two reasons:
 
 1. You can't modify anything on mobile (e.g. titles, labels)
-2. Provide a consistent paper trail in the `History.markdown` file for each release
+2. We like to provide a consistent paper trail in the `History.markdown` file for each release
 
 To merge a pull request, leave a comment thanking the contributor, then add the special merge request:
 
@@ -30,12 +30,12 @@ The merge request is made up of three things:
 
 1. `@jekyllbot:` – this is the prefix our bot looks for when processing commands
 2. `merge` – the command
-3. `+dev` – the category to which the changes belong
+3. `+dev` – the category to which the changes belong.
 
-The categories match the H3's in the history/changelog file, and they are:
+The categories match the headings in the `History.markdown` file, and they are:
 
 1. Major Enhancements (`+major`) – major updates or breaking changes to the code which necessitate a major version bump (v3 ~> v4)
-2. Minor Enhancements (`+minor`) – minor updates (feature, enhancement) which necessitate a minor version bump (v3.1 ~> v3.2)
+2. Minor Enhancements (`+minor`) – minor updates (with the labels `feature` or `enhancement`) which necessitate a minor version bump (v3.1 ~> v3.2)
 3. Bug Fixes (`+bug`) – corrections to code which do not change or add functionality, which necessitate a patch version bump (v3.1.0 ~> v3.1.1)
 4. Documentation (`+doc`) - changes to the documentation found in `docs/_docs/`
 5. Site Enhancements (`+site`) – changes to the source of [https://jekyllrb.com](https://jekyllrb.com) found in `docs/`

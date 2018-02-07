@@ -115,9 +115,7 @@ MSG
           path = File.join(dir.to_s, file.to_s)
           return path if valid_include_file?(path, dir.to_s, safe)
         end
-        raise IOError, "Could not locate the included file '#{file}' in any of "\
-          "#{includes_dirs}. Ensure it exists in one of those directories and, "\
-          "if it is a symlink, does not point outside your site source."
+        raise IOError, could_not_locate_message(file, includes_dirs, safe)
       end
 
       def render(context)
@@ -191,6 +189,18 @@ MSG
       # This method allows to modify the file content by inheriting from the class.
       def read_file(file, context)
         File.read(file, file_read_opts(context))
+      end
+
+      private
+
+      def could_not_locate_message(file, includes_dirs, safe)
+        message = "Could not locate the included file '#{file}' in any of "\
+          "#{includes_dirs}. Ensure it exists in one of those directories and"
+        message + if safe
+                    " is not a symlink as those are not allowed in safe mode."
+                  else
+                    ", if it is a symlink, does not point outside your site source."
+                  end
       end
     end
 

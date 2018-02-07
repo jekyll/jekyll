@@ -97,21 +97,27 @@ module Jekyll
       applies_path?(scope, path) && applies_type?(scope, type)
     end
 
+    # rubocop:disable Metrics/AbcSize
     def applies_path?(scope, path)
       return true if !scope.key?("path") || scope["path"].empty?
 
       sanitized_path = Pathname.new(sanitize_path(path))
-
-      site_path = Pathname.new(@site.source)
+      site_path      = Pathname.new(@site.source)
       rel_scope_path = Pathname.new(scope["path"])
       abs_scope_path = File.join(@site.source, rel_scope_path)
-      Dir.glob(abs_scope_path).each do |scope_path|
-        scope_path = Pathname.new(scope_path).relative_path_from site_path
-        return true if path_is_subpath?(sanitized_path, scope_path)
-      end
 
-      path_is_subpath?(sanitized_path, rel_scope_path)
+      if scope["path"].to_s.include?("*")
+        Dir.glob(abs_scope_path).each do |scope_path|
+          scope_path = Pathname.new(scope_path).relative_path_from site_path
+          Jekyll.logger.debug "Globbed Scope Path:", scope_path
+          return true if path_is_subpath?(sanitized_path, scope_path)
+        end
+        false
+      else
+        path_is_subpath?(sanitized_path, rel_scope_path)
+      end
     end
+    # rubocop:enable Metrics/AbcSize
 
     def path_is_subpath?(path, parent_path)
       path.ascend do |ascended_path|
