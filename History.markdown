@@ -1,7 +1,5 @@
 ## HEAD
 
-  * Adding the jekyll-algolia plugin to the list of plugins (#6737)
-
 ### Development Fixes
 
   * move duplicate code to a single private method (#6593)
@@ -10,6 +8,17 @@
 ### Minor Enhancements
 
   * Two massive performance improvements for large sites (#6730)
+
+### Documentation
+
+  * Adding the jekyll-algolia plugin to the list of plugins (#6737)
+  * Added Premonition plugin to list of plugins (#6750)
+  * Add document on releasing a new version (#6745)
+  * Mention Talkyard, a new commenting system for Jekyll and others. (#6752)
+
+### Site Enhancements
+
+  * Remove links to Gists (#6751)
 
 ## 3.7.2 / 2018-01-25
 

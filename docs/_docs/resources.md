@@ -32,6 +32,7 @@ Jekyll's growing use is producing a wide variety of tutorials, frameworks, exten
   - [Simple Form](https://getsimpleform.com/)
   - [Formingo](https://www.formingo.co/guides/jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=Jekyll%20Documentation)
   - [Formester](http://www.formester.com)
+  - [Talkyard](https://www.talkyard.io/blog-comments): Embedded comments for Jekyll and others (free and open source, or hosted serverless)
   - [Staticman](https://staticman.net): Add user-generated content to a Jekyll site (free and open source)
   - [Snipcart](https://snipcart.com/blog/static-site-e-commerce-part-2-integrating-snipcart-with-jekyll): Add a shopping cart to a Jekyll site
   - [Contentful](https://www.contentful.com/ecosystem/jekyll/): use Jekyll together with the API-driven Contentful CMS.
@@ -40,6 +41,8 @@ Jekyll's growing use is producing a wide variety of tutorials, frameworks, exten
 ## Other commentary
 
 - [How I'm using Jekyll in 2016](https://mademistakes.com/articles/using-jekyll-2016/)
+
+- [Talkyard comments instructions for Jekyll](https://jekyll-demo.talkyard.io/2018/01/09/installation-instructions.html)
 
 - [Static Comments with Jekyll & Staticman](https://mademistakes.com/articles/improving-jekyll-static-comments/)
 
