@@ -216,7 +216,7 @@ module Jekyll
       Jekyll.logger.debug "Post-Render Hooks:", self.relative_path
       Jekyll::Hooks.trigger hook_owner, :post_render, self
     ensure
-      renderer = nil # this will allow the modifications above to disappear
+      @renderer = nil # this will allow the modifications above to disappear
     end
 
     # Write the generated page file to the destination directory.
