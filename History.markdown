@@ -15,6 +15,7 @@
   * Added Premonition plugin to list of plugins (#6750)
   * Add document on releasing a new version (#6745)
   * Mention Talkyard, a new commenting system for Jekyll and others. (#6752)
+  * Add &#39;jekyll-fontello&#39; to plugins (#6757)
 
 ### Site Enhancements
 
