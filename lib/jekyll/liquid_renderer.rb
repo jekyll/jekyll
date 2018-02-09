@@ -22,7 +22,12 @@ module Jekyll
 
     def file(filename)
       filename.match(filename_regex)
-      filename = Regexp.last_match(1)
+      filename =
+        if Regexp.last_match(1) == theme_dir("")
+          ::File.join(Regexp.last_match(1).split("/")[-1], Regexp.last_match(2))
+        else
+          Regexp.last_match(2)
+        end
       LiquidRenderer::File.new(self, filename).tap do
         @stats[filename] ||= new_profile_hash
         @stats[filename][:count] += 1
@@ -48,7 +53,7 @@ module Jekyll
     private
 
     def filename_regex
-      %r!\A(?:#{source_dir}/|#{theme_dir}/|\W*)(.*)!oi
+      %r!\A(#{source_dir}/|#{theme_dir}/|\W*)(.*)!oi
     end
 
     def new_profile_hash
