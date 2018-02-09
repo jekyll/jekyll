@@ -478,16 +478,11 @@ module Jekyll
     end
 
     private
-    def process_methods
-      %w(reset read generate render cleanup write)
-    end
-
-    private
     def profile_process
       profile_data = {}
       total_time = 0
 
-      process_methods.each do |method|
+      %w(reset read generate render cleanup write).each do |method|
         start_time = Time.now
         public_send(method)
         end_time = (Time.now - start_time).round(4)
