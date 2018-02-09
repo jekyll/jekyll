@@ -244,7 +244,7 @@ module Jekyll
       end
     end
 
-    def renderer(payload = site.site_payload)
+    def renderer(payload = nil)
       @renderer ||= Jekyll::Renderer.new(site, self, payload)
     end
 
