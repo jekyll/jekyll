@@ -155,7 +155,7 @@ module Jekyll
     #
     # Returns the destination file path String.
     def destination(dest)
-      path = site.in_dest_dir(dest, URL.unescape_path(url))
+      path = site.in_dest_dir(dest, unescaped_url)
       path = File.join(path, "index") if url.end_with?("/")
       path << output_ext unless path.end_with? output_ext
       path
@@ -182,6 +182,11 @@ module Jekyll
 
     def write?
       true
+    end
+
+    private
+    def unescaped_url
+      @unescaped_url ||= URL.unescape_path(url)
     end
   end
 end
