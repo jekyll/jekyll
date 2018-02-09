@@ -68,7 +68,12 @@ module Jekyll
     # Returns nothing.
     def process
       return profile_process if config["profile"]
-      process_methods.each { |method| public_send(method) }
+      reset
+      read
+      generate
+      render
+      cleanup
+      write
     end
 
     def print_stats
