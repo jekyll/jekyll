@@ -67,13 +67,8 @@ module Jekyll
     #
     # Returns nothing.
     def process
-      reset
-      read
-      generate
-      render
-      cleanup
-      write
-      print_stats if config["profile"]
+      return profile_process if config["profile"]
+      process_methods.each { |method| public_send(method) }
     end
 
     def print_stats
@@ -475,6 +470,31 @@ module Jekyll
       return unless regenerator.regenerate?(document)
       document.output = Jekyll::Renderer.new(self, document, payload).run
       document.trigger_hooks(:post_render)
+    end
+
+    private
+    def process_methods
+      %w(reset read generate render cleanup write)
+    end
+
+    private
+    def profile_process
+      profile_data = {}
+      total_time = 0
+
+      process_methods.each do |method|
+        start_time = Time.now
+        public_send(method)
+        end_time = (Time.now - start_time).round(4)
+        profile_data[method.upcase] = end_time
+        total_time += end_time
+      end
+
+      profile_data["TOTAL TIME"] = total_time
+
+      Jekyll.logger.info @liquid_renderer.print(profile_data).cyan
+      Jekyll.logger.info "\nSite Render Stats:\n------------------"
+      print_stats
     end
   end
 end
