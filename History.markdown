@@ -152,7 +152,7 @@
   * Add jekyll-pwa-plugin (#6533)
   * Remove Jekyll-Smartify from plugins directory (#6548)
   * Updated Jekyll-Pug listing to include official website (#6555)
-  * Remove link to severly outdated asset plugin (#6613)
+  * Remove link to severely outdated asset plugin (#6613)
   * Default time zone depends upon server (#6617)
   * Add `disqus-for-jekyll` to plugins. (#6618)
   * Update &#34;Requirements&#34; for Ruby version (#6623)
