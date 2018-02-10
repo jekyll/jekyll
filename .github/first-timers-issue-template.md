@@ -12,7 +12,7 @@ Nothing. This issue is meant to welcome you to Open Source :) We are happy to wa
 
 - [ ] 👌 **Join the team**: Add yourself to a Jekyll affinity team.
 
-  Go to [teams.jekyllrb.com](https://teams.jekyllrb.com/) and join a team that best fits your interests. Once you click the link to join a team, you will soon recieve an email inviting you to join the Jekyll organization.
+  Go to [teams.jekyllrb.com](https://teams.jekyllrb.com/) and join a team that best fits your interests. Once you click the link to join a team, you will soon receive an email inviting you to join the Jekyll organization.
 
 - [ ] 🙋 **Claim this issue**: Comment below.
 
