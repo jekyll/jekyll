@@ -731,7 +731,7 @@
   * Update Ruby versions in travis.yml (#5221)
   * Avoid installing unecessary gems for site testing (#5272)
   * Proposal: Affinity teams and their captains (#5273)
-  * Replace duplicate with postive local test in issue template (#5286)
+  * Replace duplicate with positive local test in issue template (#5286)
   * Update AppVeyor config. (#5240)
   * Execute jekyll from clone instead of defined binary when running 'script/default-site' (#5295)
   * rubocop: lib/jekyll/document.rb complexity fixes (#5045)
