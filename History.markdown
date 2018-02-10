@@ -16,6 +16,7 @@
   * Add document on releasing a new version (#6745)
   * Mention Talkyard, a new commenting system for Jekyll and others. (#6752)
   * Add &#39;jekyll-fontello&#39; to plugins (#6757)
+  * Update windows.md (#6765)
 
 ### Site Enhancements
 
