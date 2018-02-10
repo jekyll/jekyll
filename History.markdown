@@ -729,7 +729,7 @@
   * Update appveyor.yml and fix optional deps for Ruby x64 (#5180)
   * Improve tests for Jekyll::PluginManager (#5167)
   * Update Ruby versions in travis.yml (#5221)
-  * Avoid installing unecessary gems for site testing (#5272)
+  * Avoid installing unnecessary gems for site testing (#5272)
   * Proposal: Affinity teams and their captains (#5273)
   * Replace duplicate with positive local test in issue template (#5286)
   * Update AppVeyor config. (#5240)
