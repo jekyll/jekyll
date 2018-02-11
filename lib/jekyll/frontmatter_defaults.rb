@@ -198,7 +198,7 @@ module Jekyll
     # Returns an array of hashes
     def valid_sets
       sets = @site.config["defaults"]
-      return [] unless sets.is_a?(Array)
+      return [] if sets.empty? || !sets.is_a?(Array)
 
       sets.map do |set|
         if valid?(set)
