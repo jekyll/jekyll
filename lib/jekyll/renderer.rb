@@ -93,6 +93,8 @@ module Jekyll
     #
     # Returns String the converted content.
     def convert(content)
+      return content if content.empty?
+
       converters.reduce(content) do |output, converter|
         begin
           converter.convert output
