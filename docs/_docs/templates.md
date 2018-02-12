@@ -107,6 +107,20 @@ you come up with your own tags via plugins.
     </tr>
     <tr>
       <td>
+        <p class="name"><strong>Ordinal date</strong></p>
+        <p>Format a date to ordinal long format.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ site.time | ordinal_date }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">7th November 2008</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p class="name"><strong>Where</strong></p>
         <p>Select all the objects in an array where the key has the given value.</p>
       </td>

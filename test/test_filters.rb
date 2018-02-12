@@ -210,6 +210,10 @@ class TestFilters < JekyllUnitTest
           assert_equal "27 March 2013", @filter.date_to_long_string(@sample_time)
         end
 
+        should "format a date with ordinal format" do
+          assert_equal "27th March 2013", @filter.ordinal_date(@sample_time)
+        end
+
         should "format a time with xmlschema" do
           assert_equal(
             "2013-03-27T11:22:33+00:00",
@@ -241,6 +245,10 @@ class TestFilters < JekyllUnitTest
           assert_equal "27 March 2013", @filter.date_to_long_string(@sample_date)
         end
 
+        should "format a date with ordinal format" do
+          assert_equal "27th March 2013", @filter.ordinal_date(@sample_date)
+        end
+
         should "format a time with xmlschema" do
           assert_equal(
             "2013-03-27T00:00:00+00:00",
@@ -263,6 +271,10 @@ class TestFilters < JekyllUnitTest
 
         should "format a date with long format" do
           assert_equal "11 September 2001", @filter.date_to_long_string(@time_as_string)
+        end
+
+        should "format a date with ordinal format" do
+          assert_equal "11th September 2001", @filter.ordinal_date(@time_as_string)
         end
 
         should "format a time with xmlschema" do
@@ -294,6 +306,10 @@ class TestFilters < JekyllUnitTest
 
         should "format a date with long format" do
           assert_equal "10 May 2014", @filter.date_to_long_string(@time_as_numeric)
+        end
+
+        should "format a date with ordinal format" do
+          assert_equal "10th May 2014", @filter.ordinal_date(@time_as_numeric)
         end
 
         should "format a time with xmlschema" do
