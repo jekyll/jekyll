@@ -417,7 +417,7 @@ module Jekyll
     def merge_categories!(other)
       if other.key?("categories") && !other["categories"].nil?
         if other["categories"].is_a?(String)
-          other["categories"] = other["categories"].split(%r!\s+!).map(&:strip)
+          other["categories"] = other["categories"].split
         end
         other["categories"] = (data["categories"] || []) | other["categories"]
       end
