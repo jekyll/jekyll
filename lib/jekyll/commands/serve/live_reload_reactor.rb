@@ -82,6 +82,7 @@ module Jekyll
         end
 
         private
+
         def connect(ws, handshake)
           @connections_count += 1
           if @connections_count == 1
@@ -100,12 +101,10 @@ module Jekyll
           @websockets << ws
         end
 
-        private
         def disconnect(ws)
           @websockets.delete(ws)
         end
 
-        private
         def print_message(json_message)
           msg = JSON.parse(json_message)
           # Not sure what the 'url' command even does in LiveReload.  The spec is silent
@@ -115,7 +114,6 @@ module Jekyll
           end
         end
 
-        private
         def log_error(e)
           Jekyll.logger.error "LiveReload experienced an error. " \
             "Run with --trace for more information."
