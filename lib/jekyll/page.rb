@@ -186,7 +186,10 @@ module Jekyll
 
     private
     def unescaped_url
-      @unescaped_url ||= URL.unescape_path(url)
+      @url_stash ||= {}
+
+      @unescaped_url = nil unless @url_stash.key?(url)
+      @unescaped_url ||= @url_stash[url] = URL.unescape_path(url)
     end
   end
 end
