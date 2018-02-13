@@ -83,41 +83,42 @@ module Jekyll
     end
 
     # --
-    # Check if an entry matches a specific pattern and return true,false.
+    # Check if an entry matches a specific pattern and return true or false.
     # Returns true if path matches against any glob pattern.
     # --
     def glob_include?(enum, e)
-      entry = Pathutil.new(site.in_source_dir).join(e)
+      entry = retrieve_pathutil(site.in_source_dir(e))
       enum.any? do |exp|
-        # Users who send a Regexp knows what they want to
-        # exclude, so let them send a Regexp to exclude files,
-        # we will not bother caring if it works or not, it's
+        # Users who send a Regexp knows what they want to exclude, so let them send a
+        # Regexp to exclude files, we will not bother caring if it works or not, it's
         # on them at this point.
-
         if exp.is_a?(Regexp)
           entry =~ exp
-
         else
-          item = Pathutil.new(site.in_source_dir).join(exp)
-
-          # If it's a directory they want to exclude, AKA
-          # ends with a "/" then we will go on to check and
-          # see if the entry falls within that path and
-          # exclude it if that's the case.
-
+          item = site.in_source_dir(exp)
+          # If it's a directory they want to exclude, AKA ends with a "/" then we will
+          # go on to check and see if the entry falls within that path and exclude it
+          # if that's the case.
           if e.end_with?("/")
-            entry.in_path?(
-              item
-            )
-
+            entry.in_path?(item)
           else
-            File.fnmatch?(item, entry) ||
-              entry.to_path.start_with?(
-                item
-              )
+            File.fnmatch?(item, entry) || entry.to_s.start_with?(item)
           end
         end
       end
+    end
+
+    private
+    # Cache and retrieve a Pathutil instance to avoid creating multiple instances for
+    # the same path
+    def retrieve_pathutil(path)
+      return path_cache[path] if path_cache.key?(path)
+      path_cache[path] = Pathutil.new(path)
+    end
+
+    private
+    def path_cache
+      @path_cache ||= {}
     end
   end
 end
