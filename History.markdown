@@ -1,5 +1,7 @@
 ## HEAD
 
+  * Test against Ruby 2.5 on AppVeyor (#6668)
+
 ### Development Fixes
 
   * move duplicate code to a single private method (#6593)
