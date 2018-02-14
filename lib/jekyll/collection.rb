@@ -51,22 +51,6 @@ module Jekyll
       @files ||= []
     end
 
-    # Read the allowed documents into the collection's array of docs.
-    #
-    # Returns the sorted array of docs.
-    def read
-      filtered_entries.each do |file_path|
-        full_path = collection_dir(file_path)
-        next if File.directory?(full_path)
-        if Utils.has_yaml_header? full_path
-          read_document(full_path)
-        else
-          read_static_file(file_path, full_path)
-        end
-      end
-      docs.sort!
-    end
-
     # All the entries in this collection.
     #
     # Returns an Array of file paths to the documents in this collection
@@ -205,35 +189,6 @@ module Jekyll
 
     def container
       @container ||= site.config["collections_dir"]
-    end
-
-    private
-
-    def read_document(full_path)
-      doc = Jekyll::Document.new(full_path, :site => site, :collection => self)
-      doc.read
-      if site.publisher.publish?(doc) || !write?
-        docs << doc
-      else
-        Jekyll.logger.debug "Skipped Publishing:", doc.relative_path
-      end
-    end
-
-    private
-
-    def read_static_file(file_path, full_path)
-      relative_dir = Jekyll.sanitized_path(
-        relative_directory,
-        File.dirname(file_path)
-      ).chomp("/.")
-
-      files << StaticFile.new(
-        site,
-        site.source,
-        relative_dir,
-        File.basename(full_path),
-        self
-      )
     end
   end
 end

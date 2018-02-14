@@ -383,6 +383,22 @@ module Jekyll
       data.key?(method.to_s) || super
     end
 
+    def publishable?
+      return publishing_skipped unless content.valid_encoding?
+      return true unless collection.label == "posts"
+
+      site.publisher.publish?(self).tap do |will_publish|
+        if !will_publish && site.publisher.hidden_in_the_future?(self)
+          publishing_skipped("has a future date")
+        end
+      end
+    end
+
+    def publishing_skipped(msg = "is not a valid UTF-8 document")
+      Jekyll.logger.debug "Skipped Publishing:", "#{relative_path} #{msg}"
+      false
+    end
+
     # Add superdirectories of the special_dir to categories.
     # In the case of es/_posts, 'es' is added as a category.
     # In the case of _posts/es, 'es' is NOT added as a category.
@@ -414,6 +430,7 @@ module Jekyll
     end
 
     private
+
     def merge_categories!(other)
       if other.key?("categories") && !other["categories"].nil?
         if other["categories"].is_a?(String)
@@ -423,7 +440,6 @@ module Jekyll
       end
     end
 
-    private
     def merge_date!(source)
       if data.key?("date")
         data["date"] = Utils.parse_date(
@@ -433,7 +449,6 @@ module Jekyll
       end
     end
 
-    private
     def merge_defaults
       defaults = @site.frontmatter_defaults.all(
         relative_path,
@@ -442,7 +457,6 @@ module Jekyll
       merge_data!(defaults, :source => "front matter defaults") unless defaults.empty?
     end
 
-    private
     def read_content(opts)
       self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
       if content =~ YAML_FRONT_MATTER_REGEXP
@@ -452,7 +466,6 @@ module Jekyll
       end
     end
 
-    private
     def read_post_data
       populate_title
       populate_categories
@@ -460,7 +473,6 @@ module Jekyll
       generate_excerpt
     end
 
-    private
     def handle_read_error(error)
       if error.is_a? Psych::SyntaxError
         Jekyll.logger.error "Error:", "YAML Exception reading #{path}: #{error.message}"
@@ -473,7 +485,6 @@ module Jekyll
       end
     end
 
-    private
     def populate_title
       if relative_path =~ DATE_FILENAME_MATCHER
         date, slug, ext = Regexp.last_match.captures
@@ -489,14 +500,12 @@ module Jekyll
       data["ext"]   ||= ext
     end
 
-    private
     def modify_date(date)
       if !data["date"] || data["date"].to_i == site.time.to_i
         merge_data!({ "date" => date }, :source => "filename")
       end
     end
 
-    private
     def generate_excerpt
       if generate_excerpt?
         data["excerpt"] ||= Jekyll::Excerpt.new(self)
