@@ -18,7 +18,6 @@ module Jekyll
       read_directories
       sort_files!
       @site.data = DataReader.new(site).read(site.config["data_dir"])
-      CollectionReader.new(site).read
       ThemeAssetsReader.new(site).read
     end
 
@@ -49,22 +48,10 @@ module Jekyll
       end
       dot_static_files = dot_files - dot_pages
 
-      retrieve_posts(dir)
+      retrieve_documents(dir)
       retrieve_dirs(base, dir, dot_dirs)
       retrieve_pages(dir, dot_pages)
       retrieve_static_files(dir, dot_static_files)
-    end
-
-    # Retrieves all the posts(posts/drafts) from the given directory
-    # and add them to the site and sort them.
-    #
-    # dir - The String representing the directory to retrieve the posts from.
-    #
-    # Returns nothing.
-    def retrieve_posts(dir)
-      return if outside_configured_directory?(dir)
-      site.posts.docs.concat(PostReader.new(site).read_posts(dir))
-      site.posts.docs.concat(PostReader.new(site).read_drafts(dir)) if site.show_drafts
     end
 
     # Recursively traverse directories with the read_directories function.
@@ -82,6 +69,15 @@ module Jekyll
           @site.reader.read_directories(rel_path)
         end
       end
+    end
+
+    # Retrieve all collection entries(documents and static files) associated
+    # with current directory. Could be posts and drafts as well.
+    #
+    # dir - The String representing the directory to look for collection items.
+    def retrieve_documents(dir)
+      return if outside_configured_directory?(dir)
+      CollectionReader.new(site).read(dir)
     end
 
     # Retrieve all the pages from the current directory,

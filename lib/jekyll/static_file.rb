@@ -8,6 +8,9 @@ module Jekyll
 
     def_delegator :to_liquid, :to_json, :to_json
 
+    def_delegator :@collection, :label, :coll_label
+    def_delegator :@collection, :relative_directory, :coll_rel_dir
+
     class << self
       # The cache of last modification times [path] -> mtime.
       def mtimes
@@ -58,11 +61,7 @@ module Jekyll
     end
 
     def destination_rel_dir
-      if @collection
-        File.dirname(url)
-      else
-        @dir
-      end
+      @collection ? File.dirname(url) : @dir
     end
 
     def modified_time
@@ -117,12 +116,8 @@ module Jekyll
 
     def placeholders
       {
-        :collection => @collection.label,
-        :path       => relative_path[
-          @collection.relative_directory.size..relative_path.size],
-        :output_ext => "",
-        :name       => "",
-        :title      => "",
+        :category => url_category,
+        :name     => @name,
       }
     end
 
@@ -130,25 +125,35 @@ module Jekyll
     # the collection's URL template into account. The default URL template can
     # be overriden in the collection's configuration in _config.yml.
     def url
-      @url ||= if @collection.nil?
-                 relative_path
-               else
-                 ::Jekyll::URL.new({
-                   :template     => @collection.url_template,
-                   :placeholders => placeholders,
-                 })
-               end.to_s.gsub(%r!/$!, "")
+      @url ||= \
+        if @collection.nil?
+          relative_path
+        else
+          URL.new({
+            :template     => ":category/:name",
+            :placeholders => placeholders,
+          })
+        end.to_s.chomp("/")
     end
 
     # Returns the type of the collection if present, nil otherwise.
     def type
-      @type ||= @collection.nil? ? nil : @collection.label.to_sym
+      @type ||= @collection.nil? ? nil : coll_label.to_sym
     end
 
     # Returns the front matter defaults defined for the file's URL and/or type
     # as defined in _config.yml.
     def defaults
       @defaults ||= @site.frontmatter_defaults.all url, type
+    end
+
+    private
+    def url_category
+      if coll_label == "posts"
+        @dir.chomp("_posts").chomp("/")
+      else
+        File.join(coll_label, relative_path.gsub(coll_rel_dir, ""))
+      end
     end
 
     private

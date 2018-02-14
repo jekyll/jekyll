@@ -55,7 +55,6 @@ module Jekyll
   autoload :CollectionReader,    "jekyll/readers/collection_reader"
   autoload :DataReader,          "jekyll/readers/data_reader"
   autoload :LayoutReader,        "jekyll/readers/layout_reader"
-  autoload :PostReader,          "jekyll/readers/post_reader"
   autoload :PageReader,          "jekyll/readers/page_reader"
   autoload :StaticFileReader,    "jekyll/readers/static_file_reader"
   autoload :ThemeAssetsReader,   "jekyll/readers/theme_assets_reader"
