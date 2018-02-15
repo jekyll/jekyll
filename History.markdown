@@ -1,10 +1,9 @@
 ## HEAD
 
-  * Test against Ruby 2.5 on AppVeyor (#6668)
-
 ### Development Fixes
 
   * move duplicate code to a single private method (#6593)
+  * Test against Ruby 2.5 on AppVeyor (#6668)
   * Replace simple regex with a native Ruby method (#6732)
   * Codeclimate: exclude livereload.js (#6776)
 
