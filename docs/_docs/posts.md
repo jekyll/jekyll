@@ -216,10 +216,10 @@ your posts:
 {% raw %}
 ```liquid
 <ul>
-  {% for doc in site.posts %}
+  {% for post in site.posts %}
     <li>
-      <a href="{{ doc.url }}">{{ doc.title }}</a>
-      {{ doc.excerpt }}
+      <a href="{{ post.url }}">{{ post.title }}</a>
+      {{ post.excerpt }}
     </li>
   {% endfor %}
 </ul>
