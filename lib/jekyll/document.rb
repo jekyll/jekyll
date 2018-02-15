@@ -3,6 +3,7 @@
 module Jekyll
   class Document
     include Comparable
+    include Excerptible
     extend Forwardable
 
     attr_reader :path, :site, :extname, :collection
@@ -316,21 +317,6 @@ module Jekyll
       collection && collection.write?
     end
 
-    # The Document excerpt_separator, from the YAML Front-Matter or site
-    # default excerpt_separator value
-    #
-    # Returns the document excerpt_separator
-    def excerpt_separator
-      (data["excerpt_separator"] || site.config["excerpt_separator"]).to_s
-    end
-
-    # Whether to generate an excerpt
-    #
-    # Returns true if the excerpt separator is configured.
-    def generate_excerpt?
-      !excerpt_separator.empty?
-    end
-
     def next_doc
       pos = collection.docs.index { |post| post.equal?(self) }
       if pos && pos < collection.docs.length - 1
@@ -493,13 +479,6 @@ module Jekyll
     def modify_date(date)
       if !data["date"] || data["date"].to_i == site.time.to_i
         merge_data!({ "date" => date }, :source => "filename")
-      end
-    end
-
-    private
-    def generate_excerpt
-      if generate_excerpt?
-        data["excerpt"] ||= Jekyll::Excerpt.new(self)
       end
     end
   end
