@@ -3,6 +3,8 @@
 module Jekyll
   module Tags
     class Link < Liquid::Tag
+      include Jekyll::Filters::URLFilters
+
       class << self
         def tag_name
           self.name.split("::").last.downcase
@@ -12,18 +14,17 @@ module Jekyll
       def initialize(tag_name, relative_path, tokens)
         super
 
-        @tokens        = tokens
         @relative_path = relative_path.strip
       end
 
       def render(context)
+        @context = context
         site = context.registers[:site]
 
         site.each_site_file do |item|
-          template = Liquid::Variable.new("'#{item.url}' | relative_url", @tokens)
-          return template.render(context) if item.relative_path == @relative_path
+          return relative_url(item) if item.relative_path == @relative_path
           # This takes care of the case for static files that have a leading /
-          return template.render(context) if item.relative_path == "/#{@relative_path}"
+          return relative_url(item) if item.relative_path == "/#{@relative_path}"
         end
 
         raise ArgumentError, <<-MSG
