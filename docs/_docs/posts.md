@@ -207,7 +207,8 @@ filter by tags or any other variable created with extensions.
 ## Post excerpts
 
 Each post automatically takes the first block of text, from the beginning of
-the content to the first occurrence of `excerpt_separator`, and sets it as the `post.excerpt`.
+the content to the first occurrence of `excerpt_separator`, and sets it in the
+post's data hash.
 Take the above example of an index of posts. Perhaps you want to include
 a little hint about the post's content by adding the first paragraph of each of
 your posts:
@@ -215,10 +216,10 @@ your posts:
 {% raw %}
 ```liquid
 <ul>
-  {% for post in site.posts %}
+  {% for doc in site.posts %}
     <li>
-      <a href="{{ post.url }}">{{ post.title }}</a>
-      {{ post.excerpt }}
+      <a href="{{ doc.url }}">{{ doc.title }}</a>
+      {{ doc.excerpt }}
     </li>
   {% endfor %}
 </ul>
