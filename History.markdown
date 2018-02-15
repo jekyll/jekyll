@@ -6,6 +6,7 @@
 
   * move duplicate code to a single private method (#6593)
   * Replace simple regex with a native Ruby method (#6732)
+  * Codeclimate: exclude livereload.js (#6776)
 
 ### Minor Enhancements
 
