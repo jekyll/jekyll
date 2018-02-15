@@ -8,7 +8,7 @@ While Windows is not an officially-supported platform, it can be used to run Jek
 
 ## Installing Jekyll
 
-If you are using Windows 10 Anniversary Update, the easiest way to run Jekyll is by [installing][WSL-Guide] the new Bash on Ubuntu on Windows.
+If you are using Windows 10 Anniversary Update or later, the easiest way to run Jekyll is by [installing][WSL-Guide] the new Bash on Ubuntu on Windows.
 
 
 ### Installation via Bash on Windows 10
@@ -49,6 +49,12 @@ Check if Jekyll installed properly by running:
 
 ```sh
 jekyll -v
+```
+
+Configure the bundler/gem path so bundle doesn't prompt for sudo
+
+```sh
+bundle config path vendor/bundle
 ```
 
 **And that's it!**
