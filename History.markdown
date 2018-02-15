@@ -20,6 +20,7 @@
   * Add &#39;jekyll-fontello&#39; to plugins (#6757)
   * Install dh-autoreconf on Windows (#6765)
   * Fix common typos (#6764)
+  * Fix documentation for `{{ page.excerpt }}` (#6779)
 
 ### Site Enhancements
 
