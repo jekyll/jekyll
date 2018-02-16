@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class Theme
     extend Forwardable
@@ -16,25 +18,34 @@ module Jekyll
       # Otherwise, Jekyll.sanitized path with prepend the unresolved root
       @root ||= File.realpath(gemspec.full_gem_path)
     rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP
-      Jekyll.logger.warn "Invalid theme source:", gemspec.full_gem_path
+      raise "Path #{gemspec.full_gem_path} does not exist, is not accessible "\
+        "or includes a symbolic link loop"
     end
 
     def includes_path
-      @includes_path ||= path_for :includes
+      @includes_path ||= path_for "_includes".freeze
     end
 
     def layouts_path
-      @layouts_path ||= path_for :layouts
+      @layouts_path ||= path_for "_layouts".freeze
     end
 
     def sass_path
-      @sass_path ||= path_for :sass
+      @sass_path ||= path_for "_sass".freeze
+    end
+
+    def assets_path
+      @assets_path ||= path_for "assets".freeze
     end
 
     def configure_sass
       return unless sass_path
-      require "sass"
+      External.require_with_graceful_fail("sass") unless defined?(Sass)
       Sass.load_paths << sass_path
+    end
+
+    def runtime_dependencies
+      gemspec.runtime_dependencies
     end
 
     private
@@ -45,7 +56,7 @@ module Jekyll
     end
 
     def realpath_for(folder)
-      File.realpath(Jekyll.sanitized_path(root, "_#{folder}"))
+      File.realpath(Jekyll.sanitized_path(root, folder.to_s))
     rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP
       Jekyll.logger.warn "Invalid theme folder:", folder
     end

@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# frozen_string_literal: true
 
 module Jekyll
   module Drops
@@ -20,7 +20,7 @@ module Jekyll
       def to_h
         @to_h ||= {
           "version"     => version,
-          "environment" => environment
+          "environment" => environment,
         }
       end
 

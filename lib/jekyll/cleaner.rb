@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "set"
 
 module Jekyll
@@ -22,7 +24,9 @@ module Jekyll
     #
     # Returns an Array of the file and directory paths
     def obsolete_files
-      (existing_files - new_files - new_dirs + replaced_files).to_a
+      out = (existing_files - new_files - new_dirs + replaced_files).to_a
+      Jekyll::Hooks.trigger :clean, :on_obsolete, out
+      out
     end
 
     # Private: The metadata file storing dependency tree and build history

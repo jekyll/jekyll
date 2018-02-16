@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class Excerpt
     extend Forwardable
@@ -30,8 +32,7 @@ module Jekyll
       @data
     end
 
-    def trigger_hooks(*)
-    end
+    def trigger_hooks(*); end
 
     # 'Path' of the excerpt.
     #
@@ -118,7 +119,7 @@ module Jekyll
       if tail.empty?
         head
       else
-        "" << head << "\n\n" << tail.scan(%r!^\[[^\]]+\]:.+$!).join("\n")
+        head.to_s.dup << "\n\n" << tail.scan(%r!^ {0,3}\[[^\]]+\]:.+$!).join("\n")
       end
     end
   end

@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# frozen_string_literal: true
 
 module Jekyll
   module Drops
@@ -54,6 +54,7 @@ module Jekyll
           fallback_data[key]
         end
       end
+      alias_method :invoke_drop, :[]
 
       # Set a field in the Drop. If mutable, sets in the mutations and
       # returns. If not mutable, checks first if it's trying to override a
@@ -71,7 +72,7 @@ module Jekyll
       def []=(key, val)
         if respond_to?("#{key}=")
           public_send("#{key}=", val)
-        elsif respond_to? key
+        elsif respond_to?(key.to_s)
           if self.class.mutable?
             @mutations[key] = val
           else
@@ -102,11 +103,9 @@ module Jekyll
       #
       # Returns true if the given key is present
       def key?(key)
-        if self.class.mutable
-          @mutations.key?(key)
-        else
-          respond_to?(key) || fallback_data.key?(key)
-        end
+        return false if key.nil?
+        return true if self.class.mutable? && @mutations.key?(key)
+        respond_to?(key) || fallback_data.key?(key)
       end
 
       # Generates a list of keys with user content as their values.

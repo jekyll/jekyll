@@ -1,4 +1,5 @@
-# encoding: UTF-8
+# frozen_string_literal: true
+
 require "csv"
 
 module Jekyll
@@ -45,9 +46,12 @@ module Jekyll
       @config = config.clone
 
       %w(safe lsi highlighter baseurl exclude include future unpublished
-        show_drafts limit_posts keep_files gems).each do |opt|
+        show_drafts limit_posts keep_files).each do |opt|
         self.send("#{opt}=", config[opt])
       end
+
+      # keep using `gems` to avoid breaking change
+      self.gems = config["plugins"]
 
       configure_plugins
       configure_theme
@@ -69,24 +73,22 @@ module Jekyll
       render
       cleanup
       write
-      print_stats
+      print_stats if config["profile"]
     end
 
     def print_stats
-      if @config["profile"]
-        puts @liquid_renderer.stats_table
-      end
+      Jekyll.logger.info @liquid_renderer.stats_table
     end
 
     # Reset Site details.
     #
     # Returns nothing
     def reset
-      if config["time"]
-        self.time = Utils.parse_date(config["time"].to_s, "Invalid time in _config.yml.")
-      else
-        self.time = Time.now
-      end
+      self.time = if config["time"]
+                    Utils.parse_date(config["time"].to_s, "Invalid time in _config.yml.")
+                  else
+                    Time.now
+                  end
       self.layouts = {}
       self.pages = []
       self.static_files = []
@@ -120,10 +122,8 @@ module Jekyll
       dest_pathname = Pathname.new(dest)
       Pathname.new(source).ascend do |path|
         if path == dest_pathname
-          raise(
-            Errors::FatalException,
+          raise Errors::FatalException,
             "Destination directory cannot be or contain the Source directory."
-          )
         end
       end
     end
@@ -191,11 +191,7 @@ module Jekyll
       render_pages(payload)
 
       Jekyll::Hooks.trigger :site, :post_render, self, payload
-    # rubocop: disable HandleExceptions
-    rescue Errno::ENOENT
-      # ignore missing layout dir
     end
-    # rubocop: enable HandleExceptions
 
     # Remove orphaned files and empty directories in destination.
     #
@@ -239,7 +235,7 @@ module Jekyll
       posts.docs.each do |p|
         p.data[post_attr].each { |t| hash[t] << p } if p.data[post_attr]
       end
-      hash.values.each { |posts| posts.sort!.reverse! }
+      hash.each_value { |posts| posts.sort!.reverse! }
       hash
     end
 
@@ -306,7 +302,7 @@ module Jekyll
         Jekyll.logger.abort_with "Since v3.0, permalinks for pages" \
                                 " in subfolders must be relative to the" \
                                 " site source directory, not the parent" \
-                                " directory. Check http://jekyllrb.com/docs/upgrading/"\
+                                " directory. Check https://jekyllrb.com/docs/upgrading/"\
                                 " for more info."
       end
     end
@@ -395,6 +391,15 @@ module Jekyll
       end
     end
 
+    # Public: The full path to the directory that houses all the collections registered
+    # with the current site.
+    #
+    # Returns the source directory or the absolute path to the custom collections_dir
+    def collections_path
+      dir_str = config["collections_dir"]
+      @collections_path ||= dir_str.empty? ? source : in_source_dir(dir_str)
+    end
+
     # Limits the current posts; removes the posts which exceed the limit_posts
     #
     # Returns nothing
@@ -424,29 +429,36 @@ module Jekyll
     private
     def configure_theme
       self.theme = nil
-      self.theme = Jekyll::Theme.new(config["theme"]) if config["theme"]
+      return if config["theme"].nil?
+
+      self.theme =
+        if config["theme"].is_a?(String)
+          Jekyll::Theme.new(config["theme"])
+        else
+          Jekyll.logger.warn "Theme:", "value of 'theme' in config should be " \
+          "String to use gem-based themes, but got #{config["theme"].class}"
+          nil
+        end
     end
 
     private
     def configure_include_paths
       @includes_load_paths = Array(in_source_dir(config["includes_dir"].to_s))
-      @includes_load_paths << theme.includes_path if self.theme
+      @includes_load_paths << theme.includes_path if theme && theme.includes_path
     end
 
     private
     def configure_file_read_opts
       self.file_read_opts = {}
       self.file_read_opts[:encoding] = config["encoding"] if config["encoding"]
+      self.file_read_opts = Jekyll::Utils.merged_file_read_opts(self, {})
     end
 
     private
     def render_docs(payload)
-      collections.each do |_, collection|
+      collections.each_value do |collection|
         collection.docs.each do |document|
-          if regenerator.regenerate?(document)
-            document.output = Jekyll::Renderer.new(self, document, payload).run
-            document.trigger_hooks(:post_render)
-          end
+          render_regenerated(document, payload)
         end
       end
     end
@@ -454,11 +466,15 @@ module Jekyll
     private
     def render_pages(payload)
       pages.flatten.each do |page|
-        if regenerator.regenerate?(page)
-          page.output = Jekyll::Renderer.new(self, page, payload).run
-          page.trigger_hooks(:post_render)
-        end
+        render_regenerated(page, payload)
       end
+    end
+
+    private
+    def render_regenerated(document, payload)
+      return unless regenerator.regenerate?(document)
+      document.output = Jekyll::Renderer.new(self, document, payload).run
+      document.trigger_hooks(:post_render)
     end
   end
 end

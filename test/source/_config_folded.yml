@@ -1,0 +1,8 @@
+folded_string: >
+  This string of text will ignore
+  newlines till the next key.
+foo: bar
+clean_folded_string: >-
+  This string of text will ignore
+  newlines till the next key.
+baz: foo

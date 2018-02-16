@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   module Tags
     class HighlightBlock < Liquid::Block
@@ -8,7 +10,7 @@ module Jekyll
       # forms: name, name=value, or name="<quoted list>"
       #
       # <quoted list> is a space-separated list of numbers
-      SYNTAX = %r!^([a-zA-Z0-9.+#-]+)((\s+\w+(=(\w+|"([0-9]+\s)*[0-9]+"))?)*)$!
+      SYNTAX = %r!^([a-zA-Z0-9.+#_-]+)((\s+\w+(=(\w+|"([0-9]+\s)*[0-9]+"))?)*)$!
 
       def initialize(tag_name, markup, tokens)
         super
@@ -16,13 +18,13 @@ module Jekyll
           @lang = Regexp.last_match(1).downcase
           @highlight_options = parse_options(Regexp.last_match(2))
         else
-          raise SyntaxError, <<-eos
+          raise SyntaxError, <<-MSG
 Syntax Error in tag 'highlight' while parsing the following markup:
 
   #{markup}
 
 Valid syntax: highlight <lang> [linenos]
-eos
+MSG
         end
       end
 
@@ -54,7 +56,7 @@ eos
             [:hl_lines,    opts.fetch(:hl_lines, nil)],
             [:linenos,     opts.fetch(:linenos, nil)],
             [:encoding,    opts.fetch(:encoding, "utf-8")],
-            [:cssclass,    opts.fetch(:cssclass, nil)]
+            [:cssclass,    opts.fetch(:cssclass, nil)],
           ].reject { |f| f.last.nil? }]
         else
           opts
@@ -84,7 +86,7 @@ eos
       end
 
       def render_pygments(code, is_safe)
-        Jekyll::External.require_with_graceful_fail("pygments")
+        Jekyll::External.require_with_graceful_fail("pygments") unless defined?(Pygments)
 
         highlighted_code = Pygments.highlight(
           code,
@@ -93,14 +95,14 @@ eos
         )
 
         if highlighted_code.nil?
-          Jekyll.logger.error <<eos
+          Jekyll.logger.error <<-MSG
 There was an error highlighting your code:
 
 #{code}
 
 While attempting to convert the above code, Pygments.rb returned an unacceptable value.
 This is usually a timeout problem solved by running `jekyll build` again.
-eos
+MSG
           raise ArgumentError, "Pygments.rb returned an unacceptable value "\
           "when attempting to highlight some code."
         end
@@ -109,12 +111,14 @@ eos
       end
 
       def render_rouge(code)
-        Jekyll::External.require_with_graceful_fail("rouge")
-        formatter = Rouge::Formatters::HTML.new(
+        formatter = Jekyll::Utils::Rouge.html_formatter(
           :line_numbers => @highlight_options[:linenos],
-          :wrap         => false
+          :wrap         => false,
+          :css_class    => "highlight",
+          :gutter_class => "gutter",
+          :code_class   => "code"
         )
-        lexer = Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
+        lexer = ::Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
         formatter.format(lexer.lex(code))
       end
 
@@ -125,7 +129,7 @@ eos
       def add_code_tag(code)
         code_attributes = [
           "class=\"language-#{@lang.to_s.tr("+", "-")}\"",
-          "data-lang=\"#{@lang}\""
+          "data-lang=\"#{@lang}\"",
         ].join(" ")
         "<figure class=\"highlight\"><pre><code #{code_attributes}>"\
         "#{code.chomp}</code></pre></figure>"

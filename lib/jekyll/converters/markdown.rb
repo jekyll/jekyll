@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   module Converters
     class Markdown < Converter
@@ -25,7 +27,7 @@ module Jekyll
       # Rubocop does not allow reader methods to have names starting with `get_`
       # To ensure compatibility, this check has been disabled on this method
       #
-      # rubocop:disable Style/AccessorMethodName
+      # rubocop:disable Naming/AccessorMethodName
       def get_processor
         case @config["markdown"].downcase
         when "redcarpet" then return RedcarpetParser.new(@config)
@@ -35,14 +37,14 @@ module Jekyll
           custom_processor
         end
       end
-      # rubocop:enable Style/AccessorMethodName
+      # rubocop:enable Naming/AccessorMethodName
 
       # Public: Provides you with a list of processors, the ones we
       # support internally and the ones that you have provided to us (if you
       # are not in safe mode.)
 
       def valid_processors
-        %W(rdiscount kramdown redcarpet) + third_party_processors
+        %w(rdiscount kramdown redcarpet) + third_party_processors
       end
 
       # Public: A list of processors that you provide via plugins.

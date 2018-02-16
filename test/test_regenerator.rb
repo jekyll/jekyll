@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestRegenerator < JekyllUnitTest
@@ -8,10 +10,10 @@ class TestRegenerator < JekyllUnitTest
       @site = fixture_site({
         "collections" => {
           "methods" => {
-            "output" => true
-          }
+            "output" => true,
+          },
         },
-        "incremental" => true
+        "incremental" => true,
       })
 
       @site.read
@@ -92,7 +94,7 @@ class TestRegenerator < JekyllUnitTest
     setup do
       FileUtils.rm_rf(source_dir(".jekyll-metadata"))
       @site = fixture_site({
-        "incremental" => true
+        "incremental" => true,
       })
 
       @site.read
@@ -129,7 +131,7 @@ class TestRegenerator < JekyllUnitTest
       @site = Site.new(Jekyll.configuration({
         "source"      => source_dir,
         "destination" => dest_dir,
-        "incremental" => true
+        "incremental" => true,
       }))
 
       @site.process
@@ -311,7 +313,7 @@ class TestRegenerator < JekyllUnitTest
       @site = Site.new(Jekyll.configuration({
         "source"      => source_dir,
         "destination" => dest_dir,
-        "incremental" => false
+        "incremental" => false,
       }))
 
       @site.process

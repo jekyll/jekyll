@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   module Tags
     class Link < Liquid::Tag
@@ -16,15 +18,17 @@ module Jekyll
       def render(context)
         site = context.registers[:site]
 
-        site.docs_to_write.each do |document|
-          return document.url if document.relative_path == @relative_path
+        site.each_site_file do |item|
+          return item.url if item.relative_path == @relative_path
+          # This takes care of the case for static files that have a leading /
+          return item.url if item.relative_path == "/#{@relative_path}"
         end
 
-        raise ArgumentError, <<eos
+        raise ArgumentError, <<-MSG
 Could not find document '#{@relative_path}' in tag '#{self.class.tag_name}'.
 
 Make sure the document exists and the path is correct.
-eos
+MSG
       end
     end
   end

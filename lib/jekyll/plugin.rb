@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class Plugin
     PRIORITIES = {
@@ -5,7 +7,7 @@ module Jekyll
       :highest => 100,
       :lowest  => -100,
       :normal  => 0,
-      :high    => 10
+      :high    => 10,
     }.freeze
 
     #
@@ -60,7 +62,7 @@ module Jekyll
     #
     # Returns the safety Boolean.
     def self.safe(safe = nil)
-      if !defined?(@safe) || !safe.nil?
+      unless defined?(@safe) && safe.nil?
         @safe = safe
       end
       @safe || false

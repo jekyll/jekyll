@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class LiquidRenderer::Table
     def initialize(stats)
@@ -13,7 +15,7 @@ module Jekyll
     private
 
     def generate_table(data, widths)
-      str = "\n"
+      str = String.new("\n")
 
       table_head = data.shift
       str << generate_row(table_head, widths)
@@ -28,11 +30,11 @@ module Jekyll
     end
 
     def generate_table_head_border(row_data, widths)
-      str = ""
+      str = String.new("")
 
       row_data.each_index do |cell_index|
         str << "-" * widths[cell_index]
-        str << "-+-" unless cell_index == row_data.length-1
+        str << "-+-" unless cell_index == row_data.length - 1
       end
 
       str << "\n"
@@ -40,7 +42,7 @@ module Jekyll
     end
 
     def generate_row(row_data, widths)
-      str = ""
+      str = String.new("")
 
       row_data.each_with_index do |cell_data, cell_index|
         str << if cell_index.zero?
@@ -49,7 +51,7 @@ module Jekyll
                  cell_data.rjust(widths[cell_index], " ")
                end
 
-        str << " | " unless cell_index == row_data.length-1
+        str << " | " unless cell_index == row_data.length - 1
       end
 
       str << "\n"

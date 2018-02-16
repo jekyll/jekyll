@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class LayoutReader
     attr_reader :site

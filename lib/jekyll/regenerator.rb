@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class Regenerator
     attr_reader :site, :metadata, :cache
@@ -40,7 +42,7 @@ module Jekyll
 
       metadata[path] = {
         "mtime" => File.mtime(path),
-        "deps"  => []
+        "deps"  => [],
       }
       cache[path] = true
     end
@@ -126,7 +128,7 @@ module Jekyll
     #
     # Returns the String path of the file.
     def metadata_file
-      site.in_source_dir(".jekyll-metadata")
+      @metadata_file ||= site.in_source_dir(".jekyll-metadata")
     end
 
     # Check if metadata has been disabled

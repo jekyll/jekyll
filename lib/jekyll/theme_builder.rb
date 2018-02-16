@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Jekyll::ThemeBuilder
   SCAFFOLD_DIRECTORIES = %w(
-    _layouts _includes _sass
+    assets _layouts _includes _sass
   ).freeze
 
   attr_reader :name, :path, :code_of_conduct
@@ -19,6 +21,14 @@ class Jekyll::ThemeBuilder
     initialize_git_repo
   end
 
+  def user_name
+    @user_name ||= `git config user.name`.chomp
+  end
+
+  def user_email
+    @user_email ||= `git config user.email`.chomp
+  end
+
   private
 
   def root
@@ -28,7 +38,7 @@ class Jekyll::ThemeBuilder
   def template_file(filename)
     [
       root.join("theme_template", "#{filename}.erb"),
-      root.join("theme_template", filename.to_s)
+      root.join("theme_template", filename.to_s),
     ].find(&:exist?)
   end
 
@@ -81,14 +91,6 @@ class Jekyll::ThemeBuilder
     Jekyll.logger.info "initialize", path.join(".git").to_s
     Dir.chdir(path.to_s) { `git init` }
     write_file(".gitignore", template("gitignore"))
-  end
-
-  def user_name
-    @user_name ||= `git config user.name`.chomp
-  end
-
-  def user_email
-    @user_email ||= `git config user.email`.chomp
   end
 
   class ERBRenderer
