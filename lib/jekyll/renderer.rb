@@ -146,11 +146,6 @@ module Jekyll
       layout = layouts[document.data["layout"].to_s]
       validate_layout(layout)
 
-      if layout
-        layout_source = layout.path.start_with?(site.source) ? :site : :theme
-        Jekyll.logger.debug("Layout source:", layout_source)
-      end
-
       used = Set.new([layout])
 
       # Reset the payload layout data to ensure it starts fresh for each page.
@@ -174,12 +169,16 @@ module Jekyll
     # Returns nothing
     private
     def validate_layout(layout)
-      return unless invalid_layout?(layout)
-      Jekyll.logger.warn(
-        "Build Warning:",
-        "Layout '#{document.data["layout"]}' requested "\
-        "in #{document.relative_path} does not exist."
-      )
+      if invalid_layout?(layout)
+        Jekyll.logger.warn(
+          "Build Warning:",
+          "Layout '#{document.data["layout"]}' requested "\
+          "in #{document.relative_path} does not exist."
+        )
+      elsif !layout.nil?
+        layout_source = layout.path.start_with?(site.source) ? :site : :theme
+        Jekyll.logger.debug "Layout source:", layout_source
+      end
     end
 
     # Render layout content into document.output
