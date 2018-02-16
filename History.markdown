@@ -21,6 +21,7 @@
   * Install dh-autoreconf on Windows (#6765)
   * Fix common typos (#6764)
   * Fix documentation for `{{ page.excerpt }}` (#6779)
+  * Update docs on permalink configuration (#6775)
 
 ### Site Enhancements
 
