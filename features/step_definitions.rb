@@ -36,7 +36,7 @@ end
 Given(%r!^I have an? "(.*)" page(?: with (.*) "(.*)")? that contains "(.*)"$!) do |file, key, value, text|
   File.write(file, Jekyll::Utils.strip_heredoc(<<-DATA))
     ---
-    #{key || "layout"}: #{value || "nil"}
+    #{key || "layout"}: #{value || "none"}
     ---
 
     #{text}
