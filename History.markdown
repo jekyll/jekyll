@@ -23,6 +23,7 @@
   * Fix common typos (#6764)
   * Fix documentation for `{{ page.excerpt }}` (#6779)
   * Update docs on permalink configuration (#6775)
+  * Propose fix some typos (#6785)
 
 ### Site Enhancements
 
