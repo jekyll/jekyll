@@ -58,7 +58,7 @@
   * inform that symlinks are not allowed in safe mode (#6670)
   * Glob scope path only if configured with a pattern (#6692)
   * Add gem &#34;wdm&#34; to all newly generated Gemfiles (#6711)
-  * Fix timezone incosistencies between different ruby version (#6697)
+  * Fix timezone inconsistencies between different ruby version (#6697)
   * Refactor collections_dir feature for consistency (#6685)
 
 ### Minor Enhancements
@@ -1091,7 +1091,7 @@
   * utils/drops: update Drop to support `Utils.deep_merge_hashes` (#4289)
   * Make sure jekyll/drops/drop is loaded first. (#4292)
   * Convertible/Page/Renderer: use payload hash accessor & setter syntax for backwards-compatibility (#4311)
-  * Drop: fix hash setter precendence (#4312)
+  * Drop: fix hash setter precedence (#4312)
   * utils: `has_yaml_header?` should accept files with extraneous spaces (#4290)
   * Escape html from site.title and page.title in site template (#4307)
   * Allow custom file extensions if defined in `permalink` YAML front matter (#4314)
