@@ -17,7 +17,7 @@ Feature: Building Theme Gems
     Then the "assets/blank.scss" file should exist
     When I run git add .
     Then I should get an updated git index
-    When I run gem build my-cool-theme.gemspec
+    When I run gem build --force my-cool-theme.gemspec
     Then the "./my-cool-theme-0.1.0.gem" file should exist
     When I run gem unpack my-cool-theme-0.1.0.gem
     Then the my-cool-theme-0.1.0 directory should exist
