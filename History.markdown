@@ -6,6 +6,7 @@
   * Test against Ruby 2.5 on AppVeyor (#6668)
   * Replace simple regex with a native Ruby method (#6732)
   * Codeclimate: exclude livereload.js (#6776)
+  * Add a cucumber feature to test link tag (#6777)
 
 ### Minor Enhancements
 
