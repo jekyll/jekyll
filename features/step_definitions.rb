@@ -216,8 +216,6 @@ end
 
 When(%r!^I decide to build the theme gem$!) do
   Dir.chdir(Paths.theme_gem_dir)
-  gemspec = "my-cool-theme.gemspec"
-  File.write(gemspec, File.read(gemspec).sub("TODO: ", ""))
   File.new("_includes/blank.html", "w")
   File.new("_sass/blank.scss", "w")
   File.new("assets/blank.scss", "w")
