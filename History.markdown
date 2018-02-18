@@ -11,6 +11,7 @@
 ### Minor Enhancements
 
   * Two massive performance improvements for large sites (#6730)
+  * Cache the list of documents to be written (#6741)
 
 ### Documentation
 
