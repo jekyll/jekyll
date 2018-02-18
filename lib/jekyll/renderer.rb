@@ -52,7 +52,7 @@ module Jekyll
       Jekyll.logger.debug "Rendering:", document.relative_path
 
       assign_pages!
-      assign_related_posts!
+      assign_current_document!
       assign_highlighter_options!
       assign_layout_data!
 
@@ -217,12 +217,8 @@ module Jekyll
     #
     # Returns nothing
     private
-    def assign_related_posts!
-      if document.is_a?(Document) && document.collection.label == "posts"
-        payload["site"]["related_posts"] = document.related_posts
-      else
-        payload["site"]["related_posts"] = nil
-      end
+    def assign_current_document!
+      payload["site"].current_document = document
     end
 
     # Set highlighter prefix and suffix

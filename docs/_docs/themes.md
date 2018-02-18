@@ -236,7 +236,7 @@ Your theme should include a `/README.md` file, which explains how site authors c
 
 ### Adding a screenshot
 
-Themes are visual. Show users what your theme looks like by including a screenshot as `/screenshot.png` within your theme's repository where it can be retrieved programatically. You can also include this screenshot within your theme's documentation.
+Themes are visual. Show users what your theme looks like by including a screenshot as `/screenshot.png` within your theme's repository where it can be retrieved programmatically. You can also include this screenshot within your theme's documentation.
 
 ### Previewing your theme
 

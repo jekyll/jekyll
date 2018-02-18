@@ -358,7 +358,7 @@ module Jekyll
     #
     # Returns an Array of related Posts.
     def related_posts
-      Jekyll::RelatedPosts.new(self).build
+      @related_posts ||= Jekyll::RelatedPosts.new(self).build
     end
 
     # Override of normal respond_to? to match method_missing's logic for

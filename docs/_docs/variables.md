@@ -250,7 +250,7 @@ following is a reference of the available data.
       <td><p><code>page.excerpt</code></p></td>
       <td><p>
 
-        The un-rendered excerpt of the Page.
+        The un-rendered excerpt of a document.
 
       </p></td>
     </tr>

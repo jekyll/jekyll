@@ -3,6 +3,33 @@
 ### Development Fixes
 
   * move duplicate code to a single private method (#6593)
+  * Test against Ruby 2.5 on AppVeyor (#6668)
+  * Replace simple regex with a native Ruby method (#6732)
+  * Codeclimate: exclude livereload.js (#6776)
+  * Add a cucumber feature to test link tag (#6777)
+  * Fix theme gem feature (#6784)
+
+### Minor Enhancements
+
+  * Two massive performance improvements for large sites (#6730)
+  * Cache the list of documents to be written (#6741)
+
+### Documentation
+
+  * Adding the jekyll-algolia plugin to the list of plugins (#6737)
+  * Added Premonition plugin to list of plugins (#6750)
+  * Add document on releasing a new version (#6745)
+  * Mention Talkyard, a new commenting system for Jekyll and others. (#6752)
+  * Add &#39;jekyll-fontello&#39; to plugins (#6757)
+  * Install dh-autoreconf on Windows (#6765)
+  * Fix common typos (#6764)
+  * Fix documentation for `{{ page.excerpt }}` (#6779)
+  * Update docs on permalink configuration (#6775)
+  * Propose fix some typos (#6785)
+
+### Site Enhancements
+
+  * Remove links to Gists (#6751)
 
 ## 3.7.2 / 2018-01-25
 
@@ -34,7 +61,7 @@
   * inform that symlinks are not allowed in safe mode (#6670)
   * Glob scope path only if configured with a pattern (#6692)
   * Add gem &#34;wdm&#34; to all newly generated Gemfiles (#6711)
-  * Fix timezone incosistencies between different ruby version (#6697)
+  * Fix timezone inconsistencies between different ruby version (#6697)
   * Refactor collections_dir feature for consistency (#6685)
 
 ### Minor Enhancements
@@ -135,7 +162,7 @@
   * Add jekyll-pwa-plugin (#6533)
   * Remove Jekyll-Smartify from plugins directory (#6548)
   * Updated Jekyll-Pug listing to include official website (#6555)
-  * Remove link to severly outdated asset plugin (#6613)
+  * Remove link to severely outdated asset plugin (#6613)
   * Default time zone depends upon server (#6617)
   * Add `disqus-for-jekyll` to plugins. (#6618)
   * Update &#34;Requirements&#34; for Ruby version (#6623)
@@ -712,9 +739,9 @@
   * Update appveyor.yml and fix optional deps for Ruby x64 (#5180)
   * Improve tests for Jekyll::PluginManager (#5167)
   * Update Ruby versions in travis.yml (#5221)
-  * Avoid installing unecessary gems for site testing (#5272)
+  * Avoid installing unnecessary gems for site testing (#5272)
   * Proposal: Affinity teams and their captains (#5273)
-  * Replace duplicate with postive local test in issue template (#5286)
+  * Replace duplicate with positive local test in issue template (#5286)
   * Update AppVeyor config. (#5240)
   * Execute jekyll from clone instead of defined binary when running 'script/default-site' (#5295)
   * rubocop: lib/jekyll/document.rb complexity fixes (#5045)
@@ -758,7 +785,7 @@
   * Allow collections to have documents that have no file extension (#4545)
   * Add size property to `group_by` result (#4557)
   * Site Template: Removed unnecessary nesting from `_base.scss` (#4637)
-  * Adding a debug log statment for skipped future documents. (#4558)
+  * Adding a debug log statement for skipped future documents. (#4558)
   * Site Template: Changed main `<div>` to `<main>` and added accessibility info (#4636)
   * Add array support to `where` filter (#4555)
   * 'jekyll clean': also remove .sass-cache (#4652)
@@ -1067,7 +1094,7 @@
   * utils/drops: update Drop to support `Utils.deep_merge_hashes` (#4289)
   * Make sure jekyll/drops/drop is loaded first. (#4292)
   * Convertible/Page/Renderer: use payload hash accessor & setter syntax for backwards-compatibility (#4311)
-  * Drop: fix hash setter precendence (#4312)
+  * Drop: fix hash setter precedence (#4312)
   * utils: `has_yaml_header?` should accept files with extraneous spaces (#4290)
   * Escape html from site.title and page.title in site template (#4307)
   * Allow custom file extensions if defined in `permalink` YAML front matter (#4314)
