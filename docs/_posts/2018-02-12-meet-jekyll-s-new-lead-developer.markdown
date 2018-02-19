@@ -1,8 +1,9 @@
 ---
-layout: post
+layout: news_item
 title: "Meet Jekyll's New Lead Developer"
 date: "2018-02-12 20:48:09 -0500"
 author: parkr
+categories: [team]
 ---
 
 Jekyll has a new Lead Developer: [Olivia](https://liv.cat/)!
@@ -38,3 +39,5 @@ lead Jekyll to even greater heights.
 As always, Happy Jekylling!
 
 Parker
+
+*Curious about who else runs this show? [Check out our excellent team.](/team/)*
