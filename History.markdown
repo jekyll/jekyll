@@ -26,6 +26,7 @@
   * Fix documentation for `{{ page.excerpt }}` (#6779)
   * Update docs on permalink configuration (#6775)
   * Propose fix some typos (#6785)
+  * Say hello to Jekyll&#39;s New Lead Developer (#6790)
 
 ### Site Enhancements
 
