@@ -22,7 +22,7 @@ conversations about extensibility of Core Jekyll.*
 1. Ashwin (@ashmaroli)
 2. Florian (@Crunch09)
 3. Mert (@mertkahyaoglu, jekyll-admin)
-4. Chase (@Chase
+4. Alfred Xing (@alfredxing)
 
 ## Affinity Team Captains
 
