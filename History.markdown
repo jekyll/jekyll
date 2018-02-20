@@ -27,6 +27,7 @@
   * Update docs on permalink configuration (#6775)
   * Propose fix some typos (#6785)
   * Say hello to Jekyll&#39;s New Lead Developer (#6790)
+  * Add reference to Liquid to plugin docs (#6794)
 
 ### Site Enhancements
 
