@@ -8,7 +8,7 @@ module Jekyll
     attr_accessor :content, :ext
     attr_writer   :output
 
-    def_delegators :@doc, :site, :name, :ext, :relative_path, :extname,
+    def_delegators :@doc, :site, :name, :ext, :extname,
                           :render_with_liquid?, :collection, :related_posts,
                           :url, :next_doc, :previous_doc
 
@@ -39,6 +39,13 @@ module Jekyll
     # Returns the path for the doc this excerpt belongs to with #excerpt appended
     def path
       File.join(doc.path, "#excerpt")
+    end
+
+    # 'Relative Path' of the excerpt.
+    #
+    # Returns the relative_path for the doc this excerpt belongs to with #excerpt appended
+    def relative_path
+      File.join(doc.relative_path, "#excerpt")
     end
 
     # Check if excerpt includes a string
