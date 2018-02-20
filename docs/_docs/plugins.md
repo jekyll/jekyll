@@ -95,7 +95,10 @@ In general, plugins you make will fall broadly into one of five categories:
 5. [Hooks](#hooks)
 
 See the bottom of the page for a [list of available plugins](#available-plugins).
+
 For further information on how to develop your own plugins, check out the [Liquid documentation](https://github.com/Shopify/liquid/wiki/Liquid-for-Programmers) as well.
+
+If you never developed a Jekyll plugin [check this useful wrap-up](https://ayastreb.me/writing-a-jekyll-plugin/) by @ayastreb to get started.
 
 ## Generators
 
@@ -879,7 +882,7 @@ You can find a few useful plugins at the following locations:
   plugin to generate publication lists from [BibSonomy](https://www.bibsonomy.org/).
 - [github-cards](https://github.com/edward-shen/github-cards): Creates styleable Github cards for your Github projects.
 - [disqus-for-jekyll](https://github.com/kacperduras/disqus-for-jekyll): A Jekyll plugin to view the comments powered by Disqus.
-- [jekyll-html](https://github.com/kacperduras/jekyll-html): A Jekyll plugin to use HTML tags in Jekyll pages, posts and collections. 
+- [jekyll-html](https://github.com/kacperduras/jekyll-html): A Jekyll plugin to use HTML tags in Jekyll pages, posts and collections.
 
 
 #### Collections
