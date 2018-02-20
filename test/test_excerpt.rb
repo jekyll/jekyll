@@ -168,4 +168,39 @@ class TestExcerpt < JekyllUnitTest
       end
     end
   end
+
+  context "An excerpt with non-closed but valid Liquid block tag" do
+    setup do
+      clear_dest
+      @site = fixture_site
+      @post = setup_post("2018-01-28-open-liquid-block-excerpt.markdown")
+      @excerpt = @post.data["excerpt"]
+
+      assert_includes @post.content, "{% if"
+      refute_includes @post.content.split("\n\n")[0], "{% endif %}"
+    end
+
+    should "be appended to as necessary and generated" do
+      assert_includes @excerpt.content, "{% endif %}"
+      assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
+    end
+  end
+
+  context "An excerpt with valid closed Liquid block tag" do
+    setup do
+      clear_dest
+      @site = fixture_site
+      @post = setup_post("2018-01-28-closed-liquid-block-excerpt.markdown")
+      @excerpt = @post.data["excerpt"]
+
+      assert_includes @post.content, "{% if"
+      assert_includes @post.content.split("\n\n")[0], "{% endif %}"
+    end
+
+    should "not be appended to but generated as is" do
+      assert_includes @excerpt.content, "{% endif %}"
+      refute_includes @excerpt.content, "{% endif %}\n\n{% endif %}"
+      assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
+    end
+  end
 end
