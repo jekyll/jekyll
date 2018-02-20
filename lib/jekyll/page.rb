@@ -3,6 +3,7 @@
 module Jekyll
   class Page
     include Convertible
+    include Excerptible
 
     attr_writer :dir
     attr_accessor :site, :pager
@@ -17,6 +18,7 @@ module Jekyll
     ATTRIBUTES_FOR_LIQUID = %w(
       content
       dir
+      excerpt
       name
       path
       url
@@ -54,6 +56,8 @@ module Jekyll
       data.default_proc = proc do |_, key|
         site.frontmatter_defaults.find(File.join(dir, name), type, key)
       end
+
+      generate_excerpt
 
       Jekyll::Hooks.trigger :pages, :post_init, self
     end
@@ -182,6 +186,10 @@ module Jekyll
 
     def write?
       true
+    end
+
+    def excerpt
+      data.fetch("excerpt") { "" }
     end
   end
 end

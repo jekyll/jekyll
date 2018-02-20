@@ -11,6 +11,8 @@ module Jekyll
       @data ||= {}
     end
 
+    def generate_excerpt; end
+
     def inspect
       "#<Jekyll:PageWithoutAFile @name=#{name.inspect}>"
     end
