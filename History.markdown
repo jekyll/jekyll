@@ -8,6 +8,7 @@
   * Codeclimate: exclude livereload.js (#6776)
   * Add a cucumber feature to test link tag (#6777)
   * Fix theme gem feature (#6784)
+  * Replace simple regex with equivalent Ruby methods (#6736)
 
 ### Minor Enhancements
 
