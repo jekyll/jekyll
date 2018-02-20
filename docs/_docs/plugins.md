@@ -94,7 +94,8 @@ In general, plugins you make will fall broadly into one of five categories:
 4. [Tags](#tags)
 5. [Hooks](#hooks)
 
-See the bottom of the page for a [list of available plugins](#available-plugins)
+See the bottom of the page for a [list of available plugins](#available-plugins).
+For further information on how to develop your own plugins, check out the [Liquid documentation](https://github.com/Shopify/liquid/wiki/Liquid-for-Programmers) as well.
 
 ## Generators
 
