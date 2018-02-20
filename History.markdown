@@ -31,6 +31,7 @@
 ### Site Enhancements
 
   * Remove links to Gists (#6751)
+  * Always load Google Fonts over HTTPS (#6792)
 
 ## 3.7.2 / 2018-01-25
 
