@@ -36,6 +36,10 @@
   * Remove links to Gists (#6751)
   * Always load Google Fonts over HTTPS (#6792)
 
+### Bug Fixes
+
+  * Append appropriate closing tag to Liquid block in an excerpt (#6724)
+
 ## 3.7.2 / 2018-01-25
 
 ### Development Fixes
