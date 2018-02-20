@@ -213,7 +213,7 @@ module Jekyll
       doc = Jekyll::Document.new(full_path, :site => site, :collection => self)
       doc.read
       if site.publisher.publish?(doc) || !write?
-        docs << doc
+        docs << doc unless site.publisher.hidden_in_the_future?(doc)
       else
         Jekyll.logger.debug "Skipped Publishing:", doc.relative_path
       end
