@@ -15,6 +15,7 @@
   * Two massive performance improvements for large sites (#6730)
   * Cache the list of documents to be written (#6741)
   * Allow Jekyll Doctor to detect stray posts dir (#6681)
+  * Excerpt relative-path should match its path (#6597)
 
 ### Documentation
 
