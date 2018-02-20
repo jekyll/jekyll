@@ -1,20 +1,3 @@
-{% if site.gauges_id %}
-  <!-- Gauges (http://get.gaug.es/) -->
-  <script>
-    var _gauges = _gauges || [];
-    (function() {
-      var t   = document.createElement('script');
-      t.type  = 'text/javascript';
-      t.async = true;
-      t.id    = 'gauges-tracker';
-      t.setAttribute('data-site-id', '{{ site.gauges_id }}');
-      t.src = '//secure.gaug.es/track.js';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(t, s);
-    })();
-  </script>
-{% endif %}
-
 {% if site.google_analytics_id %}
   <!-- Google Analytics (https://www.google.com/analytics) -->
   <script>
