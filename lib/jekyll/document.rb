@@ -91,7 +91,7 @@ module Jekyll
     #
     # Returns the output extension
     def output_ext
-      Jekyll::Renderer.new(site, self).output_ext
+      renderer.output_ext
     end
 
     # The base filename of the document, without the file extname.
@@ -271,6 +271,12 @@ module Jekyll
           handle_read_error(e)
         end
       end
+    end
+
+    # The Renderer instance for this document
+    def renderer(payload = nil)
+      @renderer ||= Jekyll::Renderer.new(site, self, payload)
+      @renderer.tap { |r| r.payload = payload }
     end
 
     # Create a Liquid-understandable version of this Document.

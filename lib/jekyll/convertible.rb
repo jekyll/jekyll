@@ -80,7 +80,7 @@ module Jekyll
     #
     # Returns the transformed contents.
     def transform
-      _renderer.convert(content)
+      renderer.convert(content)
     end
 
     # Determine the extension depending on content_type.
@@ -88,7 +88,7 @@ module Jekyll
     # Returns the String extension for the output file.
     #   e.g. ".html" for an HTML output file.
     def output_ext
-      _renderer.output_ext
+      renderer.output_ext
     end
 
     # Determine which converter to use based on this convertible's
@@ -96,7 +96,7 @@ module Jekyll
     #
     # Returns the Converter instance.
     def converters
-      _renderer.converters
+      renderer.converters
     end
 
     # Render Liquid in the content
@@ -107,7 +107,7 @@ module Jekyll
     #
     # Returns the converted content
     def render_liquid(content, payload, info, path)
-      _renderer.render_liquid(content, payload, info, path)
+      renderer.render_liquid(content, payload, info, path)
     end
     # rubocop: enable RescueException
 
@@ -195,10 +195,10 @@ module Jekyll
     #
     # Returns nothing
     def render_all_layouts(layouts, payload, info)
-      _renderer.layouts = layouts
-      self.output = _renderer.place_in_layouts(output, payload, info)
+      renderer.layouts = layouts
+      self.output = renderer.place_in_layouts(output, payload, info)
     ensure
-      @_renderer = nil # this will allow the modifications above to disappear
+      @renderer = nil # this will allow the modifications above to disappear
     end
 
     # Add any necessary layouts to this convertible document.
@@ -208,15 +208,15 @@ module Jekyll
     #
     # Returns nothing.
     def do_layout(payload, layouts)
-      self.output = _renderer.tap do |renderer|
-        renderer.layouts = layouts
-        renderer.payload = payload
+      self.output = renderer.tap do |render|
+        render.layouts = layouts
+        render.payload = payload
       end.run
 
       Jekyll.logger.debug "Post-Render Hooks:", self.relative_path
       Jekyll::Hooks.trigger hook_owner, :post_render, self
     ensure
-      @_renderer = nil # this will allow the modifications above to disappear
+      @renderer = nil # this will allow the modifications above to disappear
     end
 
     # Write the generated page file to the destination directory.
@@ -244,11 +244,12 @@ module Jekyll
       end
     end
 
-    private
-
-    def _renderer
-      @_renderer ||= Jekyll::Renderer.new(site, self)
+    def renderer(payload = nil)
+      @renderer ||= Jekyll::Renderer.new(site, self, payload)
+      @renderer.tap { |r| r.payload = payload }
     end
+
+    private
 
     def no_layout?
       data["layout"] == "none"
