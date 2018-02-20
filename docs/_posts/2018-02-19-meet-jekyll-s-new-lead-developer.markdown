@@ -20,7 +20,7 @@ Node.js community, both online and as a volunteer organizer with JSConf EU.
 
 In my conversations with Olivia, it is clear that Jekyll's vision of
 simplicity for the user ([no magic!](/philosophy#1-no-magic)) and letting
-users' [content be king](/philosphy#3-content-is-king) will remain a top
+users' [content be king](/philosophy#3-content-is-king) will remain a top
 priority. In just the last few weeks as the transition has been occurring,
 we have seen some incredible work on performance that will make future
 versions of Jekyll work better at scale. She will be prioritizing work on
