@@ -246,6 +246,7 @@ module Jekyll
 
     def renderer(payload = nil)
       @renderer ||= Jekyll::Renderer.new(site, self, payload)
+      @renderer.tap { |r| r.payload = payload }
     end
 
     private

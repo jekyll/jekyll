@@ -276,6 +276,7 @@ module Jekyll
     # The Renderer instance for this document
     def renderer(payload = nil)
       @renderer ||= Jekyll::Renderer.new(site, self, payload)
+      @renderer.tap { |r| r.payload = payload }
     end
 
     # Create a Liquid-understandable version of this Document.
