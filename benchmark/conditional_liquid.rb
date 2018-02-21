@@ -75,17 +75,17 @@ end
 # Test https://github.com/jekyll/jekyll/pull/6735#discussion_r165499868
 # ------------------------------------------------------------------------
 def check_with_regex(content)
-  !%r!{[{%]!.match(content).nil?
+  !content.to_s.match?(%r!{[{%]!)
 end
 
 def check_with_builtin(content)
   content.include?("{%") || content.include?("{{")
 end
 
-SUITE.each_value do |text|
+SUITE.each do |key, text|
   Benchmark.ips do |x|
-    x.report("regex-check") { check_with_regex(text) }
-    x.report("builtin-check") { check_with_builtin(text) }
+    x.report("regex-check   - #{key}") { check_with_regex(text) }
+    x.report("builtin-check - #{key}") { check_with_builtin(text) }
     x.compare!
   end
 end
