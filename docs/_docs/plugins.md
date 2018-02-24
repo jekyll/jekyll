@@ -753,6 +753,13 @@ The complete list of available hooks is below:
 
 ## Available Plugins
 
+You can scaffold a basic Jekyll plugin using the yeoman [generator-jekyll-plugin](https://www.npmjs.com/package/generator-jekyll-plugin)
+
+```sh
+npm install -g yo generator-jekyll-plugin
+yo jekyll-plugin
+```
+
 You can find a few useful plugins at the following locations:
 
 #### Generators
