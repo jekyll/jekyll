@@ -31,6 +31,7 @@
   * Propose fix some typos (#6785)
   * Say hello to Jekyll&#39;s New Lead Developer (#6790)
   * Add reference to Liquid to plugin docs (#6794)
+  * Draft a release post for v3.7.3 (#6803)
 
 ### Site Enhancements
 
@@ -40,10 +41,11 @@
 ### Bug Fixes
 
   * Append appropriate closing tag to Liquid block in an excerpt (#6724)
-  
+
 ## 3.7.3 / 2018-02-25
 
 ### Bug Fixes
+
   * Do not hardcode locale unless certainly necessary (#6791)
 
 ## 3.7.2 / 2018-01-25
