@@ -7,6 +7,7 @@ categories: [release]
 ---
 
 Hello Jekyllers!! :wave:
+
 We're pleased to announce the release of `v3.7.3` which fixes a bug one might encounter while using `Jekyll - 3.7.x` along with a
 Jekyll plugin that in turn uses the `I18n` library.
 
