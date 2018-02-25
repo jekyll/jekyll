@@ -110,6 +110,8 @@ env:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
 
 sudo: false # route your build to the container-based infrastructure for a faster build
+
+exclude: [vendor] # prevent jekyll from reading gems on Travis servers
 ```
 
 Ok, now for an explanation of each line:
