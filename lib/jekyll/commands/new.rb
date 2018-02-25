@@ -27,8 +27,8 @@ module Jekyll
           new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
           FileUtils.mkdir_p new_blog_path
           if preserve_source_location?(new_blog_path, options)
-            Jekyll.logger.abort_with "Conflict:",
-                      "#{new_blog_path} exists and is not empty."
+            Jekyll.logger.error "Conflict:", "#{new_blog_path} exists and is not empty."
+            Jekyll.logger.abort_with "", "Use '--force' to overwrite and create anyway."
           end
 
           if options["blank"]
