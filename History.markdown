@@ -1,4 +1,4 @@
-## HEAD
+## 3.7.3 / 2018-02-25
 
 ### Bug Fixes
   * Do not hardcode locale unless certainly necessary (#6791)
