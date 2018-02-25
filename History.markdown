@@ -1,3 +1,8 @@
+## HEAD
+
+### Bug Fixes
+  * Do not hardcode locale unless certainly necessary (#6791)
+
 ## 3.7.2 / 2018-01-25
 
 ### Development Fixes
