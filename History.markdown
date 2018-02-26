@@ -37,6 +37,7 @@
 
   * Remove links to Gists (#6751)
   * Always load Google Fonts over HTTPS (#6792)
+  * always load analytics.js over HTTPS (#6807)
 
 ### Bug Fixes
 
