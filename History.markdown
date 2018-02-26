@@ -32,6 +32,7 @@
   * Say hello to Jekyll&#39;s New Lead Developer (#6790)
   * Add reference to Liquid to plugin docs (#6794)
   * Draft a release post for v3.7.3 (#6803)
+  * add missing step for gem-based theme conversion (#6802)
 
 ### Site Enhancements
 
