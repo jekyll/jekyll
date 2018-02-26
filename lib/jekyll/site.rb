@@ -253,7 +253,7 @@ module Jekyll
     #
     # Returns the Hash to be hooked to site.data.
     def site_data
-      config["data"] || data
+      @site_data ||= config["data"] || data
     end
 
     # The Hash payload containing site-wide data.
