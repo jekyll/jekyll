@@ -57,9 +57,9 @@ module Jekyll
     #
     # Returns a Set with the file paths
     def new_files
-      files = Set.new
-      site.each_site_file { |item| files << item.destination(site.dest) }
-      files
+      @new_files ||= Set.new.tap do |files|
+        site.each_site_file { |item| files << item.destination(site.dest) }
+      end
     end
 
     # Private: The list of directories to be created when site is built.
@@ -67,7 +67,7 @@ module Jekyll
     #
     # Returns a Set with the directory paths
     def new_dirs
-      new_files.map { |file| parent_dirs(file) }.flatten.to_set
+      @new_dirs ||= new_files.map { |file| parent_dirs(file) }.flatten.to_set
     end
 
     # Private: The list of parent directories of a given file

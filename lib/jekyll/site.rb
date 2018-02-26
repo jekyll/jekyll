@@ -97,6 +97,7 @@ module Jekyll
       @docs_to_write = nil
       @regenerator.clear_cache
       @liquid_renderer.reset
+      @site_cleaner = nil
 
       if limit_posts < 0
         raise ArgumentError, "limit_posts must be a non-negative number"
