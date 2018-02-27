@@ -18,7 +18,7 @@ Whether you're a developer, a designer, or just a Jekyll devotee, there are lots
 * Comment on some of the project's [open issues](https://github.com/jekyll/jekyll/issues). Have you experienced the same problem? Know a work around? Do you have a suggestion for how the feature could be better?
 * Read through [the documentation](https://jekyllrb.com/docs/home/), and click the "improve this page" button, any time you see something confusing, or have a suggestion for something that could be improved.
 * Browse through [the Jekyll discussion forum](https://talk.jekyllrb.com/), and lend a hand answering questions. There's a good chance you've already experienced what another user is experiencing.
-* Find [an open issue](https://github.com/jekyll/jekyll/issues) (especially [those labeled `help-wanted`](https://github.com/jekyll/jekyll/issues?utf8=%E2%9C%93&q=is%3Aopen+is%3Aissue+label%3A%22help-wanted+%3Apray%3A%22)), and submit a proposed fix. If it's your first pull request, we promise we won't bite, and are glad to answer any questions.
+* Find [an open issue](https://github.com/jekyll/jekyll/issues) (especially [those labeled `help-wanted`](https://github.com/jekyll/jekyll/issues?q=is%3Aopen+is%3Aissue+label%3A%22help-wanted+%3Apray%3A%22)), and submit a proposed fix. If it's your first pull request, we promise we won't bite, and are glad to answer any questions.
 * Help evaluate [open pull requests](https://github.com/jekyll/jekyll/pulls), by testing the changes locally and reviewing what's proposed.
 
 ## Submitting a pull request
