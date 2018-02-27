@@ -93,6 +93,7 @@ module Jekyll
       self.pages = []
       self.static_files = []
       self.data = {}
+      @site_data = nil
       @collections = nil
       @docs_to_write = nil
       @regenerator.clear_cache
@@ -253,7 +254,7 @@ module Jekyll
     #
     # Returns the Hash to be hooked to site.data.
     def site_data
-      @site_data ||= config["data"] || data
+      @site_data ||= (config["data"] || data)
     end
 
     # The Hash payload containing site-wide data.
