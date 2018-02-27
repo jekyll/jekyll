@@ -5,13 +5,27 @@ layout: default
   <section class="docs">
     <div class="grid">
 
-      {% include tutorials_contents_mobile.html %}
+      <div class="docs-nav-mobile unit whole show-on-mobiles">
+        <select onchange="if (this.value) window.location.href=this.value">
+          <option value="">Navigate the tutorials…</option>
+          {% for section in site.data.tutorials %}
+            <optgroup label="{{ section.title }}">
+              {% for item in section.tutorials %}
+                {% assign item_url = item | prepend:"/tutorials/" | append:"/" %}
+                {% assign tutorial = site.tutorials | where: "url", item_url | first %}
+                <option value="{{ tutorial.url }}">{{ tutorial.title }}</option>
+              {% endfor %}
+            </optgroup>
+          {% endfor %}
+        </select>
+      </div>
 
       <div class="unit four-fifths">
         <article>
           <div class="improve right hide-on-mobiles">
-            <a href="https://github.com/jekyll/jekyll/edit/master/docs/{{ page.path }}"><i
-                    class="fa fa-pencil"></i> &nbsp;Improve this page</a>
+            <a href="https://github.com/jekyll/jekyll/edit/master/docs/{{ page.path }}">
+              <i class="fa fa-pencil"></i> &nbsp;Improve this page
+            </a>
           </div>
           <h1>{{ page.title }}</h1>
           {{ content }}
@@ -19,7 +33,20 @@ layout: default
         </article>
       </div>
 
-      {% include tutorials_contents.html %}
+      <div class="unit one-fifth hide-on-mobiles">
+        <aside>
+          {% for section in site.data.tutorials %}
+            <h4>{{ section.title }}</h4>
+            <ul>
+              {% for item in section.tutorials %}
+                {% assign item_url = item | prepend:"/tutorials/" | append:"/" %}
+                {% assign p = site.tutorials | where:"url", item_url | first %}
+                <li class="{% if item_url == page.url %}current{% endif %}"><a href="{{ p.url }}">{{ p.title }}</a></li>
+              {% endfor %}
+            </ul>
+          {% endfor %}
+        </aside>
+      </div>
 
       <div class="clear"></div>
 
