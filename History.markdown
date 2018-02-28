@@ -46,6 +46,10 @@
 
   * Append appropriate closing tag to Liquid block in an excerpt (#6724)
 
+### -minor
+
+  * Bypass rendering via Liquid unless required (#6735)
+
 ## 3.7.3 / 2018-02-25
 
 ### Bug Fixes
