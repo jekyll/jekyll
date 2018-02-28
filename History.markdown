@@ -17,6 +17,7 @@
   * Allow Jekyll Doctor to detect stray posts dir (#6681)
   * Excerpt relative-path should match its path (#6597)
   * Remind user to resolve conflict in `jekyll new` with `--force` (#6801)
+  * Memoize helper methods in site-cleaner (#6808)
 
 ### Documentation
 
