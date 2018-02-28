@@ -14,7 +14,7 @@ install:
   - bundle install --retry 5 --jobs=%NUMBER_OF_PROCESSORS% --clean --path vendor\bundle
 
 environment:
-  BUNDLE_WITHOUT: "benchmark:site:development"
+  BUNDLE_WITHOUT: "benchmark:development"
   matrix:
     - RUBY_FOLDER_VER: "25"
       TEST_SUITE: "test"
@@ -36,6 +36,9 @@ test_script:
   - gem --version
   - bundler --version
   - bash ./script/cibuild
+
+on_success:
+  - bundle exec jekyll build --profile --source docs
 
 cache:
   # If one of the files after the right arrow changes, cache will be skipped

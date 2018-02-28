@@ -1,4 +1,4 @@
-bundler_args: --without benchmark:site:development
+bundler_args: --without benchmark:development
 script: script/cibuild
 cache: bundler
 language: ruby
@@ -52,6 +52,7 @@ addons:
 # regular test configuration
 after_success:
   - bundle exec codeclimate-test-reporter
+  - bundle exec jekyll build --profile --source docs
 
 before_install:
   - gem update --system
