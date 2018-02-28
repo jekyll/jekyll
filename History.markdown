@@ -18,6 +18,7 @@
   * Excerpt relative-path should match its path (#6597)
   * Remind user to resolve conflict in `jekyll new` with `--force` (#6801)
   * Memoize helper methods in site-cleaner (#6808)
+  * Compute document&#39;s relative_path faster (#6767)
 
 ### Documentation
 
@@ -44,10 +45,7 @@
 
 ### Bug Fixes
 
-  * Append appropriate closing tag to Liquid block in an excerpt (#6724)
-
-### -minor
-
+  * Append appropriate closing tag to Liquid block in an excerpt ### -minor (#6724)
   * Bypass rendering via Liquid unless required (#6735)
 
 ## 3.7.3 / 2018-02-25
