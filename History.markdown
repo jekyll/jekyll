@@ -8,11 +8,15 @@
   * Codeclimate: exclude livereload.js (#6776)
   * Add a cucumber feature to test link tag (#6777)
   * Fix theme gem feature (#6784)
+  * Replace simple regex with equivalent Ruby methods (#6736)
 
 ### Minor Enhancements
 
   * Two massive performance improvements for large sites (#6730)
   * Cache the list of documents to be written (#6741)
+  * Allow Jekyll Doctor to detect stray posts dir (#6681)
+  * Excerpt relative-path should match its path (#6597)
+  * Remind user to resolve conflict in `jekyll new` with `--force` (#6801)
 
 ### Documentation
 
@@ -26,10 +30,26 @@
   * Fix documentation for `{{ page.excerpt }}` (#6779)
   * Update docs on permalink configuration (#6775)
   * Propose fix some typos (#6785)
+  * Say hello to Jekyll&#39;s New Lead Developer (#6790)
+  * Add reference to Liquid to plugin docs (#6794)
+  * Draft a release post for v3.7.3 (#6803)
+  * add missing step for gem-based theme conversion (#6802)
 
 ### Site Enhancements
 
   * Remove links to Gists (#6751)
+  * Always load Google Fonts over HTTPS (#6792)
+  * always load analytics.js over HTTPS (#6807)
+
+### Bug Fixes
+
+  * Append appropriate closing tag to Liquid block in an excerpt (#6724)
+
+## 3.7.3 / 2018-02-25
+
+### Bug Fixes
+
+  * Do not hardcode locale unless certainly necessary (#6791)
 
 ## 3.7.2 / 2018-01-25
 
