@@ -19,6 +19,7 @@
   * Remind user to resolve conflict in `jekyll new` with `--force` (#6801)
   * Memoize helper methods in site-cleaner (#6808)
   * Compute document&#39;s relative_path faster (#6767)
+  * Create a single instance of PostReader per site (#6759)
 
 ### Documentation
 
