@@ -83,8 +83,7 @@ module Jekyll
     # Returns a String path which represents the relative path from the collections_dir
     # to this document.
     def relative_path
-      @relative_path ||=
-        Pathutil.new(path).relative_path_from(site.collections_path).to_s
+      @relative_path ||= path.sub("#{site.collections_path}/", "")
     end
 
     # The output extension of the document.
