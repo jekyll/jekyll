@@ -147,6 +147,14 @@ module Jekyll
     rescue EOFError
       false
     end
+
+    # Determine whether the given content string contains Liquid Tags or Vaiables
+    #
+    # Returns true is the string contains sequences of `{%` or `{{`
+    def has_liquid_construct?(content)
+      return false if content.nil? || content.empty?
+      content.include?("{%") || content.include?("{{")
+    end
     # rubocop: enable PredicateName
 
     # Slugify a filename or title.
