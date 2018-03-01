@@ -51,7 +51,9 @@ module Jekyll
       def config; end
 
       private
+
       def_delegator :@obj, :config, :fallback_data
+      private :fallback_data
     end
   end
 end

@@ -63,7 +63,9 @@ module Jekyll
       end
 
       private
+
       def_delegator :@obj, :data, :fallback_data
+      private :fallback_data
     end
   end
 end
