@@ -9,6 +9,7 @@
   * Add a cucumber feature to test link tag (#6777)
   * Fix theme gem feature (#6784)
   * Replace simple regex with equivalent Ruby methods (#6736)
+  * Rewrite `script/rubyprof` as a Ruby script (#6813)
 
 ### Minor Enhancements
 
