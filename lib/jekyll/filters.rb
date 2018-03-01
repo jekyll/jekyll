@@ -2,7 +2,6 @@
 
 require "addressable/uri"
 require "json"
-require "date"
 require "liquid"
 
 require_all "jekyll/filters"
