@@ -2,7 +2,7 @@
 
 module Jekyll
   module Tags
-    class HighlightBlock < Liquid::Block
+    class HighlightBlock < Liquid::Raw
       include Liquid::StandardFilters
 
       # The regular expression syntax checker. Start with the language specifier.
@@ -29,13 +29,11 @@ MSG
       end
 
       def render(context)
-        prefix = context["highlighter_prefix"] || ""
-        suffix = context["highlighter_suffix"] || ""
-        code = super.to_s.gsub(%r!\A(\n|\r)+|(\n|\r)+\z!, "")
-
+        prefix  = context["highlighter_prefix"] || ""
+        suffix  = context["highlighter_suffix"] || ""
+        code    = @body.to_s.gsub(%r!\A\s+!, "").chomp
         is_safe = !!context.registers[:site].safe
-
-        output =
+        output  =
           case context.registers[:site].highlighter
           when "pygments"
             render_pygments(code, is_safe)
@@ -72,16 +70,15 @@ MSG
           input.scan(%r!(?:\w="[^"]*"|\w=\w|\w)+!) do |opt|
             key, value = opt.split("=")
             # If a quoted list, convert to array
-            if value && value.include?("\"")
+            if value && value.include?('"')
               value.delete!('"')
               value = value.split
             end
             options[key.to_sym] = value || true
           end
         end
-        if options.key?(:linenos) && options[:linenos] == true
-          options[:linenos] = "inline"
-        end
+
+        options[:linenos] = "inline" if options[:linenos] == true
         options
       end
 
@@ -134,6 +131,8 @@ MSG
         "<figure class=\"highlight\"><pre><code #{code_attributes}>"\
         "#{code.chomp}</code></pre></figure>"
       end
+
+      def ensure_valid_markup(tag_name, markup, parse_context); end
     end
   end
 end
