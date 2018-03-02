@@ -73,5 +73,12 @@ class TestConvertible < JekyllUnitTest
       end
       refute_match(%r!Invalid permalink!, out)
     end
+
+    should "not parse Liquid if disabled in front matter" do
+      name = "no_liquid.erb"
+      @convertible.read_yaml(@base, name)
+      ret = @convertible.content.strip
+      assert_equal("{% raw %}{% endraw %}", ret)
+    end
   end
 end

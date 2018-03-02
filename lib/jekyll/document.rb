@@ -159,6 +159,7 @@ module Jekyll
     #   or if the document doesn't contain any Liquid Tags or Variables,
     #   true otherwise.
     def render_with_liquid?
+      return false if self.data["liquid"] == false
       !(coffeescript_file? || yaml_file? || !Utils.has_liquid_construct?(content))
     end
 
