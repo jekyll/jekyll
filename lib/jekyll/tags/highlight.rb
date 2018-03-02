@@ -31,7 +31,7 @@ MSG
       def render(context)
         prefix  = context["highlighter_prefix"] || ""
         suffix  = context["highlighter_suffix"] || ""
-        code    = @body.to_s.gsub(%r!\A\s+!, "").chomp
+        code    = @body.gsub(%r!\A(\n|\r)+|(\n|\r)+\z!, "")
         is_safe = !!context.registers[:site].safe
         output  =
           case context.registers[:site].highlighter
