@@ -19,7 +19,7 @@ module Jekyll
       "safe"                => false,
       "include"             => [".htaccess"],
       "exclude"             => %w(
-        Gemfile Gemfile.lock node_modules vendor/bundle/ vendor/cache/ vendor/gems/
+        CNAME Gemfile Gemfile.lock node_modules vendor/bundle/ vendor/cache/ vendor/gems/
         vendor/ruby/
       ),
       "keep_files"          => [".git", ".svn"],

@@ -52,6 +52,7 @@ class TestConfiguration < JekyllUnitTest
 
     should "exclude ruby vendor directories" do
       exclude = Configuration.from({})["exclude"]
+      assert_includes exclude, "CNAME"
       assert_includes exclude, "Gemfile"
       assert_includes exclude, "Gemfile.lock"
       assert_includes exclude, "vendor/bundle/"
