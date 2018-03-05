@@ -2,7 +2,6 @@
 
 require "addressable/uri"
 require "json"
-require "date"
 require "liquid"
 
 require_all "jekyll/filters"
@@ -11,6 +10,7 @@ module Jekyll
   module Filters
     include URLFilters
     include GroupingFilters
+    include DateFilters
 
     # Convert a Markdown string into HTML output.
     #
@@ -65,55 +65,6 @@ module Jekyll
     # See Utils.slugify for more detail.
     def slugify(input, mode = nil)
       Utils.slugify(input, :mode => mode)
-    end
-
-    # Format a date in short format e.g. "27 Jan 2011".
-    #
-    # date - the Time to format.
-    #
-    # Returns the formatting String.
-    def date_to_string(date)
-      time(date).strftime("%d %b %Y")
-    end
-
-    # Format a date in long format e.g. "27 January 2011".
-    #
-    # date - The Time to format.
-    #
-    # Returns the formatted String.
-    def date_to_long_string(date)
-      return date if date.to_s.empty?
-      time(date).strftime("%d %B %Y")
-    end
-
-    # Format a date for use in XML.
-    #
-    # date - The Time to format.
-    #
-    # Examples
-    #
-    #   date_to_xmlschema(Time.now)
-    #   # => "2011-04-24T20:34:46+08:00"
-    #
-    # Returns the formatted String.
-    def date_to_xmlschema(date)
-      return date if date.to_s.empty?
-      time(date).xmlschema
-    end
-
-    # Format a date according to RFC-822
-    #
-    # date - The Time to format.
-    #
-    # Examples
-    #
-    #   date_to_rfc822(Time.now)
-    #   # => "Sun, 24 Apr 2011 12:34:46 +0000"
-    #
-    # Returns the formatted String.
-    def date_to_rfc822(date)
-      return date if date.to_s.empty?
-      time(date).rfc822
     end
 
     # XML escape a string for use. Replaces any special characters with
@@ -355,16 +306,6 @@ module Jekyll
           end
         end
         .map!(&:last)
-    end
-
-    private
-    def time(input)
-      date = Liquid::Utils.to_date(input)
-      unless date.respond_to?(:to_time)
-        raise Errors::InvalidDateError,
-          "Invalid Date: '#{input.inspect}' is not a valid datetime."
-      end
-      date.to_time.dup.localtime
     end
 
     private
