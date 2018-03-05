@@ -10,7 +10,8 @@ encountered and how we might make the process easier.
 
 ### Requirements
 
-Installing Jekyll should be straight-forward if all requirements are met.
+Jekyll is a [RubyGem](https://rubygems.org), and there are several ways it can
+be installed. We'll cover some of them below.
 Before you start, make sure your system has the following:
 
 - GNU/Linux, Unix, or macOS
@@ -29,6 +30,14 @@ Before you start, make sure your system has the following:
 </div>
 
 <div class="note info">
+  <h5>Using Ubuntu?</h5>
+  <p>
+    This command will install any missing requirements:
+    <code>sudo apt-get install ruby ruby-dev build-essential</code>
+  </p>
+</div>
+
+<div class="note info">
   <h5>Running Jekyll on Windows</h5>
   <p>
     While Windows is not officially supported, it is possible to get Jekyll running
@@ -37,11 +46,34 @@ Before you start, make sure your system has the following:
   </p>
 </div>
 
+## Install & Use Jekyll with Bundler
+
+To use Jekyll with [Bundler](https://bundler.io/), add it as a
+dependency of your project. It can be installed in a sub-directory of the
+project. This avoids permissions issues, and also allows you to use different
+versions of Jekyll with different projects.
+
+First, install Bundler (as a system-wide gem):
+```sh
+sudo gem install bundler
+```
+
+Then, add Jekyll to your project's dependencies:
+
+```sh
+cd my-jekyll-project
+bundle init                          # Creates an empty Gemfile
+bundle install --path vendor/bundle  # Set install path to ./vendor/bundle
+bundle add jekyll                    # Add & install Jekyll gem
+```
+
+Now, run Jekyll commands inside `bundle exec`, like `bundle exec jekyll serve`.
+
 ## Install with RubyGems
 
-The best way to install Jekyll is via
-[RubyGems](https://rubygems.org/pages/download). At the terminal prompt,
-simply run the following command to install Jekyll:
+Jekyll can also be installed like any other gem with
+[RubyGems](https://rubygems.org/pages/download). Simply run the following
+command in a terminal to install Jekyll:
 
 ```sh
 gem install jekyll
@@ -49,6 +81,16 @@ gem install jekyll
 
 All of Jekyll’s gem dependencies are automatically installed by the above
 command, so you won’t have to worry about them at all.
+
+<div class="note info">
+  <h5>Permissions Issues?</h5>
+  <p>
+    The above command performs a system-wide install of jekyll (on most
+    systems). If you get a permissions error, you can either run the command as root
+    (<code>sudo gem install jekyll</code>) or use
+    <a href="https://rvm.io/gemsets/basics">RVM</a> to manage your Gems.
+  </p>
+</div>
 
 <div class="note info">
   <h5>Installing Xcode Command-Line Tools</h5>
@@ -108,26 +150,35 @@ Check out [the extras page](../extras/) for more information.
 
 ## Already Have Jekyll?
 
-Before you start developing with Jekyll, you may want to check that you're up to date with the latest version. To find your version of Jekyll, run one of these commands:
+Before you start developing with Jekyll, you may want to check that you're up to
+date with the latest version. To find your version of Jekyll, run one of these
+commands:
 
 ```sh
 jekyll --version
 gem list jekyll
 ```
 
-You can also use [RubyGems](https://rubygems.org/gems/jekyll) to find the current versioning of any gem. But you can also use the `gem` command line tool:
+You can also use [RubyGems](https://rubygems.org/gems/jekyll) to find the
+current version of any gem. Or you can use the `gem` command line tool:
 
 ```sh
 gem search jekyll --remote
 ```
 
-and you'll search for just the name `jekyll`, and in brackets will be latest version. Another way to check if you have the latest version is to run the command `gem outdated`. This will provide a list of all the gems on your system that need to be updated. If you aren't running the latest version, run this command:
+You just search for the name `jekyll`, and the latest version will be shown
+between the brackets. Another way to check if you have the latest version is to
+run the command `gem outdated`. This will provide a list of all the gems on your
+system that need to be updated. If you aren't running the latest version, you
+should update.
+
+If you're using Bundler to manage your Gemfile, run:
 
 ```sh
 bundle update jekyll
 ```
 
-Alternatively, if you don't have Bundler installed run:
+Otherwise, if you installed Jekyll with the `gem` command, you should run:
 
 ```sh
 gem update jekyll
