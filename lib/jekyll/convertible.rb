@@ -165,9 +165,9 @@ module Jekyll
 
     # Determine whether the file should be rendered with Liquid.
     #
-    # Always returns true.
+    # Returns true if the file has Liquid Tags or Variables, false otherwise.
     def render_with_liquid?
-      true
+      Jekyll::Utils.has_liquid_construct?(content)
     end
 
     # Determine whether the file should be placed into layouts.

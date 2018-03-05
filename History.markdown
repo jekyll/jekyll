@@ -9,6 +9,7 @@
   * Add a cucumber feature to test link tag (#6777)
   * Fix theme gem feature (#6784)
   * Replace simple regex with equivalent Ruby methods (#6736)
+  * Rewrite `script/rubyprof` as a Ruby script (#6813)
 
 ### Minor Enhancements
 
@@ -17,6 +18,9 @@
   * Allow Jekyll Doctor to detect stray posts dir (#6681)
   * Excerpt relative-path should match its path (#6597)
   * Remind user to resolve conflict in `jekyll new` with `--force` (#6801)
+  * Memoize helper methods in site-cleaner (#6808)
+  * Compute document&#39;s relative_path faster (#6767)
+  * Create a single instance of PostReader per site (#6759)
 
 ### Documentation
 
@@ -43,7 +47,8 @@
 
 ### Bug Fixes
 
-  * Append appropriate closing tag to Liquid block in an excerpt (#6724)
+  * Append appropriate closing tag to Liquid block in an excerpt ### -minor (#6724)
+  * Bypass rendering via Liquid unless required (#6735)
 
 ## 3.7.3 / 2018-02-25
 
