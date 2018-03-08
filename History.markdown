@@ -10,6 +10,7 @@
   * Fix theme gem feature (#6784)
   * Replace simple regex with equivalent Ruby methods (#6736)
   * Rewrite `script/rubyprof` as a Ruby script (#6813)
+  * Add debug output to theme rendering (#5195)
 
 ### Minor Enhancements
 
@@ -21,6 +22,7 @@
   * Memoize helper methods in site-cleaner (#6808)
   * Compute document&#39;s relative_path faster (#6767)
   * Create a single instance of PostReader per site (#6759)
+  * Allow date filters to output ordinal days (#6773)
 
 ### Documentation
 
@@ -49,6 +51,7 @@
 
   * Append appropriate closing tag to Liquid block in an excerpt ### -minor (#6724)
   * Bypass rendering via Liquid unless required (#6735)
+  * Delegated methods after `private` keyword are meant to be private (#6819)
 
 ## 3.7.3 / 2018-02-25
 
