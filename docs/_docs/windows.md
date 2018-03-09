@@ -61,6 +61,35 @@ jekyll new my_blog
 
 You can make sure time management is working properly by inspecting your `_posts` folder. You should see a markdown file with the current date in the filename.
 
+If you see the following error, when running the `jekyll new` command:
+
+```sh
+$ jekyll new test
+Running bundle install in /home/user/test...
+
+
+Your user account isn't allowed to install to the system RubyGems.
+  You can cancel this installation and run:
+
+      bundle install --path vendor/bundle
+
+  to install the gems into ./vendor/bundle/, or you can enter your password
+  and install the bundled gems to RubyGems using sudo.
+
+  Password:
+```
+
+Add the following to `.bashrc`:
+
+```sh
+# Ruby exports
+
+export GEM_HOME=$HOME/gems
+export PATH=$HOME/gems/bin:$PATH
+```
+
+Then close and restart Bash on Ubuntu on Windows (or run `. .bashrc`) and the `jekyll new` command should work properly. Adding these exports to `.bashrc` before running `gem install jekyll bundler` also allows a non-`sudo` install of Jekyll.
+
 **Note:** Bash on Ubuntu on Windows is still under development, so you may run into issues.
 
 
