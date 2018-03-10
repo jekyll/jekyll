@@ -23,6 +23,7 @@
   * Compute document&#39;s relative_path faster (#6767)
   * Create a single instance of PostReader per site (#6759)
   * Allow date filters to output ordinal days (#6773)
+  * Change regex to sanitize and normalize filenames passed to LiquidRenderer (#6610)
 
 ### Documentation
 
