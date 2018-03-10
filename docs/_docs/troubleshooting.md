@@ -123,9 +123,6 @@ To activate the new exports, either close and restart Bash, logout and
 log back into your shell account, or run `. .bashrc` in the 
 currently-running shell.
 
-Once this is done, the `jekyll new` command should work properly for
-your user account.
-
 If you see the following error when running the `jekyll new` command,
 you can solve it by using the above-described procedure:
 
@@ -144,6 +141,9 @@ Your user account isn't allowed to install to the system RubyGems.
 
   Password:
 ```
+
+Once this is done, the `jekyll new` command should work properly for
+your user account.
 
 ### Jekyll &amp; Mac OS X 10.11
 
