@@ -53,6 +53,7 @@
   * Append appropriate closing tag to Liquid block in an excerpt ### -minor (#6724)
   * Bypass rendering via Liquid unless required (#6735)
   * Delegated methods after `private` keyword are meant to be private (#6819)
+  * Improve handling non-default collection documents rendering and writing (#6795)
 
 ## 3.7.3 / 2018-02-25
 
