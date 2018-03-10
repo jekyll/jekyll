@@ -311,9 +311,10 @@ module Jekyll
     # Based on the Collection to which it belongs.
     #
     # True if the document has a collection and if that collection's #write?
-    #   method returns true, otherwise false.
+    # method returns true, and if the site's Publisher will publish the document.
+    # False otherwise.
     def write?
-      collection && collection.write?
+      collection && collection.write? && site.publisher.publish?(self)
     end
 
     # The Document excerpt_separator, from the YAML Front-Matter or site
