@@ -63,7 +63,7 @@ You can make sure time management is working properly by inspecting your `_posts
 
 <div class="note info">
   <h5>Non-superuser account issues</h5>
-  <p>If the `jekyll new` command prints the error "Your user account isn't allowed to install to the system RubyGems", see the "Running Jekyll as Non-Superuser" instructions in <a href="/docs/troubleshooting/">Troubleshooting</a>.</p>
+  <p>If the `jekyll new` command prints the error "Your user account isn't allowed to install to the system RubyGems", see the "Running Jekyll as Non-Superuser" instructions in <a href="/docs/troubleshooting/#no-sudo">Troubleshooting</a>.</p>
 </div>
 
 **Note:** Bash on Ubuntu on Windows is still under development, so you may run into issues.
