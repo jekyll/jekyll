@@ -648,7 +648,7 @@ exclude:              ["Gemfile", "Gemfile.lock", "node_modules", "vendor/bundle
 keep_files:           [".git", ".svn"]
 encoding:             "utf-8"
 markdown_ext:         "markdown,mkdown,mkdn,mkd,md"
-strict_front_matter: false
+strict_front_matter:  false
 
 # Filtering Content
 show_drafts: null
