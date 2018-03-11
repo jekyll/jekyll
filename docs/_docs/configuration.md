@@ -642,12 +642,12 @@ collections:
     output:   true
 
 # Handling Reading
-safe:                 false
-include:              [".htaccess"]
-exclude:              ["Gemfile", "Gemfile.lock", "node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/"]
-keep_files:           [".git", ".svn"]
-encoding:             "utf-8"
-markdown_ext:         "markdown,mkdown,mkdn,mkd,md"
+safe:                false
+include:             [".htaccess"]
+exclude:             ["Gemfile", "Gemfile.lock", "node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/"]
+keep_files:          [".git", ".svn"]
+encoding:            "utf-8"
+markdown_ext:        "markdown,mkdown,mkdn,mkd,md"
 strict_front_matter: false
 
 # Filtering Content
@@ -694,14 +694,14 @@ redcarpet:
   extensions: []
 
 kramdown:
-  auto_ids:       true
-  entity_output:  as_char
-  toc_levels:     1..6
-  smart_quotes:   lsquo,rsquo,ldquo,rdquo
-  input:          GFM
-  hard_wrap:      false
-  footnote_nr:    1
-  show_warnings:  false
+  auto_ids:      true
+  entity_output: as_char
+  toc_levels:    1..6
+  smart_quotes:  lsquo,rsquo,ldquo,rdquo
+  input:         GFM
+  hard_wrap:     false
+  footnote_nr:   1
+  show_warnings: false
 ```
 
 ## Liquid Options
