@@ -58,9 +58,9 @@ class TestSite < JekyllUnitTest
       assert_equal [source_dir("_plugins")], site.plugins
     end
 
-    should "expose default baseurl" do
+    should "default baseurl to `nil`" do
       site = Site.new(default_configuration)
-      assert_equal Jekyll::Configuration::DEFAULTS["baseurl"], site.baseurl
+      assert_nil site.baseurl
     end
 
     should "expose baseurl passed in from config" do
