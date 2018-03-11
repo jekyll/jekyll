@@ -97,7 +97,8 @@ Xcode.app can interfere with the command line tools downloaded above. If
 you run into this issue, upgrade Xcode and install the upgraded Command
 Line Tools.
 
-### Running Jekyll as Non-Superuser (no sudo!) <a id="no-sudo"></a>
+### Running Jekyll as Non-Superuser (no sudo!) 
+{: #no-sudo}
 
 On most flavors of Linux, macOS, and Bash on Ubuntu on Windows, it is
 possible to run Jekyll as a non-superuser and without having to install
