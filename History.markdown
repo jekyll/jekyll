@@ -41,6 +41,7 @@
   * Add reference to Liquid to plugin docs (#6794)
   * Draft a release post for v3.7.3 (#6803)
   * add missing step for gem-based theme conversion (#6802)
+  * Update windows.md to explain an issue with jekyll new. (#6838)
 
 ### Site Enhancements
 
