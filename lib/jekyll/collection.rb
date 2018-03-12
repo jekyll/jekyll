@@ -64,7 +64,7 @@ module Jekyll
           read_static_file(file_path, full_path)
         end
       end
-      docs.sort!
+      sort_docs
     end
 
     # All the entries in this collection.
@@ -218,7 +218,41 @@ module Jekyll
       end
     end
 
-    private
+    def sort_docs
+      return docs.sort! unless metadata["sort_by"].is_a?(String)
+      sort_docs_by_key!
+    end
+
+    # rubocop:disable Metrics/AbcSize
+    def sort_docs_by_key!
+      meta_key = metadata["sort_by"]
+      docs.map! { |d| [d.data[meta_key], d] }.sort! do |apples, oranges|
+        apple_property, apple_document = apples
+        orange_property, orange_document = oranges
+
+        if !apple_property.nil? && !orange_property.nil?
+          # If both documents have the property, sort by that property.
+          apple_property <=> orange_property
+        elsif !apple_property.nil? && orange_property.nil?
+          missing_sort_key_warning(meta_key, orange_document)
+          -1
+        elsif apple_property.nil? && !orange_property.nil?
+          missing_sort_key_warning(meta_key, apple_document)
+          1
+        else
+          # Fall back to Document#<=> if both documents don't have the property.
+          apple_document <=> orange_document
+        end
+
+        # and finally return the Document objects themselves
+      end.map!(&:last)
+    end
+    # rubocop:enable Metrics/AbcSize
+
+    def missing_sort_key_warning(sort_key, document)
+      Jekyll.logger.warn "Sort warning:",
+        "Missing sort key '#{sort_key}' in document #{document.relative_path.cyan}"
+    end
 
     def read_static_file(file_path, full_path)
       relative_dir = Jekyll.sanitized_path(
