@@ -20,6 +20,8 @@ require 'benchmark/ips'
 require 'minitest'
 require File.expand_path("../lib/jekyll", __dir__)
 
+include Jekyll::Filters
+
 def site
   @site ||= Jekyll::Site.new(
     Jekyll.configuration("source" => File.expand_path("../docs", __dir__))
@@ -32,8 +34,8 @@ end
 
 def sort_by_property_directly(docs, meta_key)
   docs.sort! do |apple, orange|
-    apple_property = apple[meta_key]
-    orange_property = orange[meta_key]
+    apple_property  = item_property(apple, meta_key)
+    orange_property = item_property(orange, meta_key)
 
     if !apple_property.nil? && !orange_property.nil?
       apple_property <=> orange_property
@@ -49,18 +51,21 @@ end
 
 def schwartzian_transform(docs, meta_key)
   docs.collect! { |d|
-    [d[meta_key], d]
+    [item_property(d, meta_key), d]
   }.sort! { |apple, orange|
-    if !apple[0].nil? && !orange[0].nil?
-      apple.first <=> orange.first
-    elsif !apple[0].nil? && orange[0].nil?
+    apple_property, apple_document = apple
+    orange_property, orange_document = orange
+
+    if !apple_property.nil? && !orange_property.nil?
+      apple_property <=> orange_property
+    elsif !apple_property.nil? && orange_property.nil?
       -1
-    elsif apple[0].nil? && !orange[0].nil?
+    elsif apple_property.nil? && !orange_property.nil?
       1
     else
-      apple[-1] <=> orange[-1]
+      apple_document <=> orange_document
     end
-  }.collect! { |d| d[-1] }
+  }.collect!(&:last)
 end
 
 # Before we test efficiency, do they produce the same output?
