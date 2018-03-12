@@ -5,7 +5,10 @@ layout: news
 <article>
   <h2>
     {{ page.title }}
-    <a href="{{ page.url }}" class="permalink" title="Permalink">∞</a>
+    <a href="{{ page.url }}" class="header-link" title="Permalink">
+      <span class="sr-only">Permalink</span>
+      <i class="fa fa-link"></i>
+    </a>
   </h2>
   <span class="post-category">
     <span class="label">

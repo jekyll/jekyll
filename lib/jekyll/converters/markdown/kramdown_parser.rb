@@ -1,5 +1,4 @@
 # Frozen-string-literal: true
-# Encoding: utf-8
 
 module Jekyll
   module Converters
@@ -15,7 +14,9 @@ module Jekyll
         }.freeze
 
         def initialize(config)
-          Jekyll::External.require_with_graceful_fail "kramdown"
+          unless defined?(Kramdown)
+            Jekyll::External.require_with_graceful_fail "kramdown"
+          end
           @main_fallback_highlighter = config["highlighter"] || "rouge"
           @config = config["kramdown"] || {}
           @highlighter = nil
@@ -38,16 +39,25 @@ module Jekyll
         end
 
         def convert(content)
-          Kramdown::Document.new(content, @config).to_html
+          document = Kramdown::Document.new(content, @config)
+          html_output = document.to_html
+          if @config["show_warnings"]
+            document.warnings.each do |warning|
+              Jekyll.logger.warn "Kramdown warning:", warning
+            end
+          end
+          html_output
         end
 
         private
+        # rubocop:disable Performance/HashEachMethods
         def make_accessible(hash = @config)
           hash.keys.each do |key|
             hash[key.to_sym] = hash[key]
             make_accessible(hash[key]) if hash[key].is_a?(Hash)
           end
         end
+        # rubocop:enable Performance/HashEachMethods
 
         # config[kramdown][syntax_higlighter] >
         #   config[kramdown][enable_coderay] >

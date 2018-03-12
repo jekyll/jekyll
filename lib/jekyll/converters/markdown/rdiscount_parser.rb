@@ -5,7 +5,9 @@ module Jekyll
     class Markdown
       class RDiscountParser
         def initialize(config)
-          Jekyll::External.require_with_graceful_fail "rdiscount"
+          unless defined?(RDiscount)
+            Jekyll::External.require_with_graceful_fail "rdiscount"
+          end
           @config = config
           @rdiscount_extensions = @config["rdiscount"]["extensions"].map(&:to_sym)
         end

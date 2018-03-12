@@ -20,7 +20,7 @@ Read this [Jekyll step-by-step guide](https://www.netlify.com/blog/2015/10/28/a-
 
 [Aerobatic](https://www.aerobatic.com) has custom domains, global CDN distribution, basic auth, CORS proxying, and a growing list of plugins all included.
 
-Automating the deployment of a Jekyll site is simple. See our [Jekyll docs](https://www.aerobatic.com/docs/static-site-generators/#jekyll) for more details. Your built `_site` folder is deployed to our highly-available, globally distributed hosting service.
+Automating the deployment of a Jekyll site is simple. See their [Jekyll docs](https://www.aerobatic.com/docs/static-site-generators/#jekyll) for more details. Your built `_site` folder is deployed to their highly-available, globally distributed hosting service.
 
 ## Kickster
 
@@ -66,13 +66,15 @@ server$ mkdir /var/www/myrepo
 Next, add the following lines to hooks/post-receive and be sure Jekyll is
 installed on the server:
 
-```sh
+```bash
 GIT_REPO=$HOME/myrepo.git
 TMP_GIT_CLONE=$HOME/tmp/myrepo
+GEMFILE=$TMP_GIT_CLONE/Gemfile
 PUBLIC_WWW=/var/www/myrepo
 
 git clone $GIT_REPO $TMP_GIT_CLONE
-bundle exec jekyll build -s $TMP_GIT_CLONE -d $PUBLIC_WWW
+BUNDLE_GEMFILE=$GEMFILE bundle install
+BUNDLE_GEMFILE=$GEMFILE bundle exec jekyll build -s $TMP_GIT_CLONE -d $PUBLIC_WWW
 rm -Rf $TMP_GIT_CLONE
 exit
 ```

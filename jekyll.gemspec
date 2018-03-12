@@ -1,4 +1,3 @@
-# coding: utf-8
 # frozen_string_literal: true
 
 lib = File.expand_path("lib", __dir__)
@@ -23,7 +22,7 @@ Gem::Specification.new do |s|
   s.homepage      = "https://github.com/jekyll/jekyll"
 
   all_files       = `git ls-files -z`.split("\x0")
-  s.files         = all_files.grep(%r!^(exe|lib)/|^.rubocop.yml$!)
+  s.files         = all_files.grep(%r!^(exe|lib|rubocop)/|^.rubocop.yml$!)
   s.executables   = all_files.grep(%r!^exe/!) { |f| File.basename(f) }
   s.bindir        = "exe"
   s.require_paths = ["lib"]
@@ -33,13 +32,15 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency("addressable",           "~> 2.4")
   s.add_runtime_dependency("colorator",             "~> 1.0")
+  s.add_runtime_dependency("em-websocket",          "~> 0.5")
+  s.add_runtime_dependency("i18n",                  "~> 0.7")
   s.add_runtime_dependency("jekyll-sass-converter", "~> 1.0")
-  s.add_runtime_dependency("jekyll-watch",          "~> 1.1")
+  s.add_runtime_dependency("jekyll-watch",          "~> 2.0")
   s.add_runtime_dependency("kramdown",              "~> 1.14")
   s.add_runtime_dependency("liquid",                "~> 4.0")
   s.add_runtime_dependency("mercenary",             "~> 0.3.3")
   s.add_runtime_dependency("pathutil",              "~> 0.9")
-  rouge_versions = ENV["ROUGE_VERSION"] ? ["~> #{ENV["ROUGE_VERSION"]}"] : [">= 1.7", "< 3"]
+  rouge_versions = ENV["ROUGE_VERSION"] ? ["~> #{ENV["ROUGE_VERSION"]}"] : [">= 1.7", "< 4"]
   s.add_runtime_dependency("rouge",                 *rouge_versions)
   s.add_runtime_dependency("safe_yaml",             "~> 1.0")
 end

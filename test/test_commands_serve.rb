@@ -3,13 +3,138 @@
 require "webrick"
 require "mercenary"
 require "helper"
+require "httpclient"
 require "openssl"
+require "thread"
+require "tmpdir"
 
 class TestCommandsServe < JekyllUnitTest
   def custom_opts(what)
     @cmd.send(
       :webrick_opts, what
     )
+  end
+
+  def start_server(opts)
+    @thread = Thread.new do
+      merc = nil
+      cmd = Jekyll::Commands::Serve
+      Mercenary.program(:jekyll) do |p|
+        merc = cmd.init_with_program(p)
+      end
+      merc.execute(:serve, opts)
+    end
+    @thread.abort_on_exception = true
+
+    Jekyll::Commands::Serve.mutex.synchronize do
+      unless Jekyll::Commands::Serve.running?
+        Jekyll::Commands::Serve.run_cond.wait(Jekyll::Commands::Serve.mutex)
+      end
+    end
+  end
+
+  def serve(opts)
+    allow(Jekyll).to receive(:configuration).and_return(opts)
+    allow(Jekyll::Commands::Build).to receive(:process)
+
+    start_server(opts)
+
+    opts
+  end
+
+  context "using LiveReload" do
+    setup do
+      @temp_dir = Dir.mktmpdir("jekyll_livereload_test")
+      @destination = File.join(@temp_dir, "_site")
+      Dir.mkdir(@destination) || flunk("Could not make directory #{@destination}")
+      @client = HTTPClient.new
+      @client.connect_timeout = 5
+      @standard_options = {
+        "port"        => 4000,
+        "host"        => "localhost",
+        "baseurl"     => "",
+        "detach"      => false,
+        "livereload"  => true,
+        "source"      => @temp_dir,
+        "destination" => @destination,
+      }
+
+      site = instance_double(Jekyll::Site)
+      simple_page = <<-HTML.gsub(%r!^\s*!, "")
+      <!DOCTYPE HTML>
+      <html lang="en-US">
+      <head>
+        <meta charset="UTF-8">
+        <title>Hello World</title>
+      </head>
+      <body>
+        <p>Hello!  I am a simple web page.</p>
+      </body>
+      </html>
+      HTML
+
+      File.open(File.join(@destination, "hello.html"), "w") do |f|
+        f.write(simple_page)
+      end
+      allow(Jekyll::Site).to receive(:new).and_return(site)
+    end
+
+    teardown do
+      capture_io do
+        Jekyll::Commands::Serve.shutdown
+      end
+
+      Jekyll::Commands::Serve.mutex.synchronize do
+        if Jekyll::Commands::Serve.running?
+          Jekyll::Commands::Serve.run_cond.wait(Jekyll::Commands::Serve.mutex)
+        end
+      end
+
+      FileUtils.remove_entry_secure(@temp_dir, true)
+    end
+
+    should "serve livereload.js over HTTP on the default LiveReload port" do
+      skip_if_windows "EventMachine support on Windows is limited"
+      opts = serve(@standard_options)
+      content = @client.get_content(
+        "http://#{opts["host"]}:#{opts["livereload_port"]}/livereload.js"
+      )
+      assert_match(%r!LiveReload.on!, content)
+    end
+
+    should "serve nothing else over HTTP on the default LiveReload port" do
+      skip_if_windows "EventMachine support on Windows is limited"
+      opts = serve(@standard_options)
+      res = @client.get("http://#{opts["host"]}:#{opts["livereload_port"]}/")
+      assert_equal(400, res.status_code)
+      assert_match(%r!only serves livereload.js!, res.content)
+    end
+
+    should "insert the LiveReload script tags" do
+      skip_if_windows "EventMachine support on Windows is limited"
+      opts = serve(@standard_options)
+      content = @client.get_content(
+        "http://#{opts["host"]}:#{opts["port"]}/#{opts["baseurl"]}/hello.html"
+      )
+      assert_match(
+        %r!livereload.js\?snipver=1&amp;port=#{opts["livereload_port"]}!,
+        content
+      )
+      assert_match(%r!I am a simple web page!, content)
+    end
+
+    should "apply the max and min delay options" do
+      skip_if_windows "EventMachine support on Windows is limited"
+      opts = serve(@standard_options.merge(
+        "livereload_max_delay" => "1066",
+        "livereload_min_delay" => "3"
+      ))
+      content = @client.get_content(
+        "http://#{opts["host"]}:#{opts["port"]}/#{opts["baseurl"]}/hello.html"
+      )
+      assert_match(%r!&amp;mindelay=3!, content)
+      assert_match(%r!&amp;maxdelay=1066!, content)
+    end
   end
 
   context "with a program" do

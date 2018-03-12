@@ -6,25 +6,18 @@ version: 1.1.1
 categories: [release]
 ---
 
+Coming just 10 days after the release of v1.1.0, v1.1.1 is out with a patch for
+the nasty excerpt inception bug ([#1339]({{ site.repository }}/issues/1339)) and
+non-zero exit codes for invalid commands ([#1338]({{ site.repository
+}}/issues/1338)).
 
-Coming just 10 days after the release of v1.1.0, v1.1.1 is out with a patch for the nasty
-excerpt inception bug ([#1339][]) and non-zero exit codes for invalid commands
-([#1338][]).
+To all those affected by the [strange excerpt bug in v1.1.0]({{ site.repository
+}}/issues/1321), I'm sorry. I think we have it all patched up and it should be
+deployed to [GitHub Pages](https://pages.github.com/) in the next couple weeks.
+Thank you for your patience!
 
-To all those affected by the [strange excerpt bug in v1.1.0][#1321], I'm sorry. I think we
-have it all patched up and it should be deployed to [GitHub Pages][gh_pages] in the next
-couple weeks. Thank you for your patience!
+If you're checking out v1.1.x for the first time, definitely check out [what
+shipped with v1.1.0!]({{ site.repository }}/releases/tag/v1.1.0)
 
-If you're checking out v1.1.x for the first time, definitely check out [what shipped with
-v1.1.0!][v1_1_0]
-
-See the [GitHub Release][] page for more a more detailed changelog for this release.
-
-{% assign issue_numbers = "1339|1338|1321" | split: "|" %}
-{% for issue in issue_numbers %}
-[#{{ issue }}]: {{ site.repository }}/issues/{{ issue }}
-{% endfor %}
-
-[GitHub Release]: {{ site.repository }}/releases/tag/v1.1.1
-[gh_pages]: https://pages.github.com/
-[v1_1_0]: {{ site.repository }}/releases/tag/v1.1.0
+See the [GitHub Release]({{ site.repository }}/releases/tag/v1.1.1) page for
+more a more detailed changelog for this release.

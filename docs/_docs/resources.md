@@ -11,12 +11,12 @@ Jekyll's growing use is producing a wide variety of tutorials, frameworks, exten
 - [markdown-writer](https://atom.io/packages/markdown-writer): An Atom package for Jekyll. It can create new posts/drafts, manage tags/categories, insert link/images and add many useful key mappings.
 - [sublime-jekyll](https://github.com/23maverick23/sublime-jekyll): A Sublime Text package for Jekyll static sites. This package should help creating Jekyll sites and posts easier by providing access to key template tags and filters, as well as common completions and a current date/datetime command (for dating posts). You can install this package manually via GitHub, or via [Package Control](https://packagecontrol.io/packages/Jekyll).
 - [vim-jekyll](https://github.com/parkr/vim-jekyll): A vim plugin to generate new posts and run `jekyll build` all without leaving vim.
-- [Wordpress2Jekyll](https://wordpress.org/plugins/wp2jekyll/): A Wordpress plugin that allows you to use Wordpress as your editor and (automatically) export content in to Jekyll. WordPress2Jekyll attempts to marry these two systems together in order to make a site that can be easily managed from all devices.
+- [WordPress2Jekyll](https://wordpress.org/plugins/wp2jekyll/): A WordPress plugin that allows you to use WordPress as your editor and (automatically) export content in to Jekyll. WordPress2Jekyll attempts to marry these two systems together in order to make a site that can be easily managed from all devices.
 
 ## Useful Guides
 
-- [Jekyll Tips](http://jekyll.tips) is a set of resources created by [CloudCannon](https://cloudcannon.com) to help folks get up and running with Jekyll. They cover all skill levels, and even include some great video tutorials.
-- [Jekyll Cheatsheet](http://jekyll.tips/jekyll-cheat-sheet/) is a single-page resource for Jekyll filters, variables, and the like.
+- [CloudCannon Academy](https://learn.cloudcannon.com/) is a set of resources created by [CloudCannon](https://cloudcannon.com/) to help folks get up and running with Jekyll. They cover all skill levels, and even include some great video tutorials.
+- [Jekyll Cheatsheet](https://learn.cloudcannon.com/jekyll-cheat-sheet/) is a single-page resource for Jekyll filters, variables, and the like.
 - ["Creating and Hosting a Personal Site on GitHub"](http://jmcglone.com/guides/github-pages/)
 - ['Build A Blog With Jekyll And GitHub Pages' on Smashing Magazine](https://www.smashingmagazine.com/2014/08/01/build-blog-jekyll-github-pages/)
 - Publishing to GitHub Pages? [Check out our documentation page for just that purpose](/docs/github-pages/).
@@ -31,6 +31,8 @@ Jekyll's growing use is producing a wide variety of tutorials, frameworks, exten
   - [FormKeep](https://formkeep.com/guides/contact-form-jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=contact-form-jekyll)
   - [Simple Form](https://getsimpleform.com/)
   - [Formingo](https://www.formingo.co/guides/jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=Jekyll%20Documentation)
+  - [Formester](http://www.formester.com)
+  - [Talkyard](https://www.talkyard.io/blog-comments): Embedded comments for Jekyll and others (free and open source, or hosted serverless)
   - [Staticman](https://staticman.net): Add user-generated content to a Jekyll site (free and open source)
   - [Snipcart](https://snipcart.com/blog/static-site-e-commerce-part-2-integrating-snipcart-with-jekyll): Add a shopping cart to a Jekyll site
   - [Contentful](https://www.contentful.com/ecosystem/jekyll/): use Jekyll together with the API-driven Contentful CMS.
@@ -39,6 +41,8 @@ Jekyll's growing use is producing a wide variety of tutorials, frameworks, exten
 ## Other commentary
 
 - [How I'm using Jekyll in 2016](https://mademistakes.com/articles/using-jekyll-2016/)
+
+- [Talkyard comments instructions for Jekyll](https://jekyll-demo.talkyard.io/2018/01/09/installation-instructions.html)
 
 - [Static Comments with Jekyll & Staticman](https://mademistakes.com/articles/improving-jekyll-static-comments/)
 

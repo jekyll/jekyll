@@ -31,14 +31,14 @@ class TestConvertible < JekyllUnitTest
         ret = @convertible.read_yaml(@base, name)
         assert_equal({}, ret)
       end
-      assert_match(%r!YAML Exception|syntax error|Error reading file!, out)
+      assert_match(%r!YAML Exception!, out)
       assert_match(%r!#{File.join(@base, name)}!, out)
     end
 
     should "raise for broken front matter with `strict_front_matter` set" do
       name = "broken_front_matter2.erb"
       @convertible.site.config["strict_front_matter"] = true
-      assert_raises do
+      assert_raises(Psych::SyntaxError) do
         @convertible.read_yaml(@base, name)
       end
     end

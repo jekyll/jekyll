@@ -7,22 +7,31 @@ The Jekyll gem makes a `jekyll` executable available to you in your Terminal
 window. You can use this command in a number of ways:
 
 ```sh
-$ jekyll build
+jekyll build
 # => The current folder will be generated into ./_site
 
-$ jekyll build --destination <destination>
+jekyll build --destination <destination>
 # => The current folder will be generated into <destination>
 
-$ jekyll build --source <source> --destination <destination>
+jekyll build --source <source> --destination <destination>
 # => The <source> folder will be generated into <destination>
 
-$ jekyll build --watch
+jekyll build --watch
 # => The current folder will be generated into ./_site,
 #    watched for changes, and regenerated automatically.
 ```
 
+## Override default development settings
+
+Default URL is set to `http://localhost:4000` in development environment. {% include docs_version_badge.html version="3.3.0" %}
+
+If you want to build for your production environment:
+
+  - Set your production URL in `_config.yml` e.g. `url: https://example.com`.
+  - Run `JEKYLL_ENV=production bundle exec jekyll build`.
+
 <div class="note info">
-  <h5>Changes to _config.yml are not included during automatic regeneration.</h5>
+  <h5>Changes to <code>_config.yml</code> are not included during automatic regeneration.</h5>
   <p>
     The <code>_config.yml</code> master configuration file contains global configurations
     and variable definitions that are read once at execution time. Changes made to <code>_config.yml</code>
@@ -52,25 +61,24 @@ Jekyll also comes with a built-in development server that will allow you to
 preview what the generated site will look like in your browser locally.
 
 ```sh
-$ jekyll serve
+jekyll serve
 # => A development server will run at http://localhost:4000/
 # Auto-regeneration: enabled. Use `--no-watch` to disable.
 
-$ jekyll serve --detach
+jekyll serve --livereload
+# LiveReload refreshes your browser after a change.
+
+jekyll serve --incremental
+# Incremental will perform a partial build in order to reduce regeneration time.
+
+jekyll serve --detach
 # => Same as `jekyll serve` but will detach from the current terminal.
 #    If you need to kill the server, you can `kill -9 1234` where "1234" is the PID.
 #    If you cannot find the PID, then do, `ps aux | grep jekyll` and kill the instance.
 ```
 
-<div class="note info">
-  <h5>Be aware of default behavior</h5>
-  <p>
-    As of version 2.4, the <code>serve</code> command will watch for changes automatically. To disable this, you can use <code>jekyll serve --no-watch</code>, which preserves the old behavior.
-  </p>
-</div>
-
 ```sh
-$ jekyll serve --no-watch
+jekyll serve --no-watch
 # => Same as `jekyll serve` but will not watch for changes.
 ```
 
@@ -89,8 +97,8 @@ destination: _deploy
 Then the following two commands will be equivalent:
 
 ```sh
-$ jekyll build
-$ jekyll build --source _source --destination _deploy
+jekyll build
+jekyll build --source _source --destination _deploy
 ```
 
 For more about the possible configuration options, see the

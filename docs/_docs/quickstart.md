@@ -8,16 +8,16 @@ If you already have a full [Ruby](https://www.ruby-lang.org/en/downloads/) devel
 
 ```sh
 # Install Jekyll and Bundler gems through RubyGems
-~ $ gem install jekyll bundler
+gem install jekyll bundler
 
 # Create a new Jekyll site at ./myblog
-~ $ jekyll new myblog
+jekyll new myblog
 
 # Change into your new directory
-~ $ cd myblog
+cd myblog
 
 # Build the site on the preview server
-~/myblog $ bundle exec jekyll serve
+bundle exec jekyll serve
 
 # Now browse to http://localhost:4000
 ```

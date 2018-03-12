@@ -64,6 +64,27 @@ class TestTheme < JekyllUnitTest
     end
   end
 
+  context "invalid theme" do
+    context "initializing" do
+      setup do
+        stub_gemspec = Object.new
+
+        # the directory for this theme should not exist
+        allow(stub_gemspec).to receive(:full_gem_path)
+          .and_return(File.expand_path("test/fixtures/test-non-existent-theme", __dir__))
+
+        allow(Gem::Specification).to receive(:find_by_name)
+          .with("test-non-existent-theme")
+          .and_return(stub_gemspec)
+      end
+
+      should "raise when getting theme root" do
+        error = assert_raises(RuntimeError) { Theme.new("test-non-existent-theme") }
+        assert_match(%r!fixtures\/test-non-existent-theme does not exist!, error.message)
+      end
+    end
+  end
+
   should "retrieve the gemspec" do
     assert_equal "test-theme-0.1.0", @theme.send(:gemspec).full_name
   end

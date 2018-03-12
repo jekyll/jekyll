@@ -1,4 +1,3 @@
-# coding: utf-8
 # frozen_string_literal: true
 
 require "helper"
@@ -186,7 +185,8 @@ CONTENT
 
       should "render markdown with pygments" do
         assert_match(
-          %(<pre><code class="language-text" data-lang="text">test</code></pre>),
+          %(<pre><code class="language-text" data-lang="text">) +
+          %(<span></span>test</code></pre>),
           @result
         )
       end
@@ -194,7 +194,7 @@ CONTENT
       should "render markdown with pygments with line numbers" do
         assert_match(
           %(<pre><code class="language-text" data-lang="text">) +
-          %(<span class="lineno">1</span> test</code></pre>),
+          %(<span></span><span class="lineno">1 </span>test</code></pre>),
           @result
         )
       end
@@ -207,7 +207,7 @@ CONTENT
 
       should "not embed the file" do
         assert_match(
-          %(<pre><code class="language-text" data-lang="text">) +
+          %(<pre><code class="language-text" data-lang="text"><span></span>) +
           %(./jekyll.gemspec</code></pre>),
           @result
         )
@@ -221,7 +221,8 @@ CONTENT
 
       should "render markdown with pygments line handling" do
         assert_match(
-          %(<pre><code class="language-text" data-lang="text">Æ</code></pre>),
+          %(<pre><code class="language-text" data-lang="text">) +
+          %(<span></span>Æ</code></pre>),
           @result
         )
       end
@@ -241,7 +242,8 @@ EOS
 
       should "only strip the preceding newlines" do
         assert_match(
-          %(<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]),
+          %(<pre><code class=\"language-text\" data-lang=\"text\">) +
+          %(<span></span>     [,1] [,2]),
           @result
         )
       end
@@ -266,8 +268,8 @@ EOS
 
       should "only strip the newlines which precede and succeed the entire block" do
         assert_match(
-          "<pre><code class=\"language-text\" data-lang=\"text\">" \
-          "     [,1] [,2]\n\n\n[1,] FALSE TRUE\n[2,] FALSE TRUE</code></pre>",
+          %(<pre><code class=\"language-text\" data-lang=\"text\"><span></span>) +
+          %(     [,1] [,2]\n\n\n[1,] FALSE TRUE\n[2,] FALSE TRUE</code></pre>),
           @result
         )
       end
@@ -281,7 +283,8 @@ EOS
 
       should "only strip the preceding newlines" do
         assert_match(
-          %(<pre><code class="language-text" data-lang="text">     [,1] [,2]),
+          %(<pre><code class="language-text" data-lang="text"><span></span>) +
+          %(     [,1] [,2]),
           @result
         )
       end
@@ -299,7 +302,8 @@ EOS
 
       should "only strip the preceding newlines" do
         assert_match(
-          %(<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]),
+          %(<pre><code class=\"language-text\" data-lang=\"text\"><span></span>) +
+          %(     [,1] [,2]),
           @result
         )
       end
@@ -908,7 +912,9 @@ CONTENT
         end
         assert_match(
           "Could not locate the included file 'tmp/pages-test-does-not-exist' " \
-          "in any of [\"#{source_dir}/_includes\"].",
+          "in any of [\"#{source_dir}/_includes\"]. Ensure it exists in one of " \
+          "those directories and is not a symlink as those are not allowed in " \
+          "safe mode.",
           ex.message
         )
       end
@@ -1267,8 +1273,8 @@ CONTENT
           })
         end
         assert_match(
-          "Ensure it exists in one of those directories and, if it is a symlink, does " \
-          "not point outside your site source.",
+          "Ensure it exists in one of those directories and is not a symlink "\
+          "as those are not allowed in safe mode.",
           ex.message
         )
       end

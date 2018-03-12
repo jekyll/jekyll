@@ -95,7 +95,8 @@ module Jekyll
         end
     end
 
-    # The directory for this Collection, relative to the site source.
+    # The directory for this Collection, relative to the site source or the directory
+    # containing the collection.
     #
     # Returns a String containing the directory name where the collection
     #   is stored on the filesystem.
@@ -108,7 +109,9 @@ module Jekyll
     # Returns a String containing th directory name where the collection
     #   is stored on the filesystem.
     def directory
-      @directory ||= site.in_source_dir(relative_directory)
+      @directory ||= site.in_source_dir(
+        File.join(container, relative_directory)
+      )
     end
 
     # The full path to the directory containing the collection, with
@@ -121,7 +124,7 @@ module Jekyll
     #   is stored on the filesystem.
     def collection_dir(*files)
       return directory if files.empty?
-      site.in_source_dir(relative_directory, *files)
+      site.in_source_dir(container, relative_directory, *files)
     end
 
     # Checks whether the directory "exists" for this collection.
@@ -200,13 +203,18 @@ module Jekyll
 
     private
 
+    def container
+      @container ||= site.config["collections_dir"]
+    end
+
+    private
+
     def read_document(full_path)
-      doc = Jekyll::Document.new(full_path, :site => site, :collection => self)
-      doc.read
-      if site.publisher.publish?(doc) || !write?
-        docs << doc
-      else
-        Jekyll.logger.debug "Skipped From Publishing:", doc.relative_path
+      docs << Document.new(full_path, :site => site, :collection => self).tap do |doc|
+        doc.read
+        if !site.publisher.publish?(doc) && site.publisher.hidden_in_the_future?(doc)
+          Jekyll.logger.debug "Skip Publishing:", "#{doc.relative_path} has a future date"
+        end
       end
     end
 

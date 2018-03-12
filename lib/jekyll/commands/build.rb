@@ -96,7 +96,7 @@ module Jekyll
             )
           end
         end
-      end # end of class << self
+      end
     end
   end
 end

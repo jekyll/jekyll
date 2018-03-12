@@ -46,6 +46,21 @@ defaults:
       layout: page
 ```
 
+<div class="note">
+  <h5>Gather your collections {%- include docs_version_badge.html version="3.7.0" -%}</h5>
+
+  <p>You can optionally specify a directory to store all your collections in the same place with <code>collections_dir: my_collections</code>.</p>
+
+  <p>Then Jekyll will look in <code>my_collections/_books</code> for the <code>books</code> collection, and
+  in <code>my_collections/_recipes</code> for the <code>recipes</code> collection.</p>
+</div>
+
+<div class="note warning">
+  <h5>Be sure to move posts into custom collections directory</h5>
+
+  <p>If you specify a directory to store all your collections in the same place with <code>collections_dir: my_collections</code>, then you will need to move your <code>_posts</code> directory to <code>my_collections/_posts</code>. Note that, the name of your collections directory cannot start with an underscore (`_`).</p>
+</div>
+
 ### Step 2: Add your content {#step2}
 
 Create a corresponding folder (e.g. `<source>/_my_collection`) and add
@@ -77,6 +92,20 @@ This will produce a file for each document in the collection.
 For example, if you have `_my_collection/some_subdir/some_doc.md`,
 it will be rendered using Liquid and the Markdown converter of your
 choice and written out to `<dest>/my_collection/some_subdir/some_doc.html`.
+
+If you wish a specific page to be shown when accessing `/my_collection/`,
+simply add `permalink: /my_collection/index.html` to a page.
+To list items from the collection, on that page or any other, you can use:
+
+{% raw %}
+```liquid
+{% for item in site.my_collection %}
+  <h2>{{ item.title }}</h2>
+  <p>{{ item.description }}</p>
+  <p><a href="{{ item.url }}">{{ item.title }}</a></p>
+{% endfor %}
+```
+{% endraw %}
 
 <div class="note info">
   <h5>Don't forget to add YAML for processing</h5>
@@ -111,7 +140,7 @@ _my_collection/
 
 each of the following `permalink` configurations will produce the document structure shown below it.
 
-* **Default**  
+* **Default**
   Same as `permalink: /:collection/:path`.
 
   ```
@@ -121,7 +150,7 @@ each of the following `permalink` configurations will produce the document struc
   │       └── some_doc.html
   ...
   ```
-* `permalink: pretty`  
+* `permalink: pretty`
   Same as `permalink: /:collection/:path/`.
 
   ```
@@ -225,7 +254,7 @@ each of the following `permalink` configurations will produce the document struc
 
 Each collection is accessible as a field on the `site` variable. For example, if
 you want to access the `albums` collection found in `_albums`, you'd use
-`site.albums`. 
+`site.albums`.
 
 Each collection is itself an array of documents (e.g., `site.albums` is an array of documents, much like `site.pages` and
 `site.posts`). See the table below for how to access attributes of those documents.
@@ -310,13 +339,27 @@ you specified in your `_config.yml` (if present) and the following information:
 
 <div class="note info">
   <h5>A Hard-Coded Collection</h5>
-  <p>In addition to any collections you create yourself, the 
-  <code>posts</code> collection is hard-coded into Jekyll. It exists whether 
-  you have a <code>_posts</code> directory or not. This is something to note 
-  when iterating through <code>site.collections</code> as you may need to 
+  <p>In addition to any collections you create yourself, the
+  <code>posts</code> collection is hard-coded into Jekyll. It exists whether
+  you have a <code>_posts</code> directory or not. This is something to note
+  when iterating through <code>site.collections</code> as you may need to
   filter it out.</p>
   <p>You may wish to use filters to find your collection:
   <code>{% raw %}{{ site.collections | where: "label", "myCollection" | first }}{% endraw %}</code></p>
+</div>
+
+<div class="note info">
+  <h5>Collections and Time</h5>
+  <p>Except for documents in hard-coded default collection <code>posts</code>, all documents in collections
+    you create, are accessible via Liquid irrespective of their assigned date, if any, and therefore renderable.
+  </p>
+  <p>However documents are attempted to be written to disk only if the concerned collection
+    metadata has <code>output: true</code>. Additionally, future-dated documents are only written if
+    <code>site.future</code> <em>is also true</em>.
+  </p>
+  <p>More fine-grained control over documents being written to disk can be exercised by setting
+    <code>published: false</code> (<em><code>true</code> by default</em>) in the document's front matter.
+  </p>
 </div>
 
 
@@ -443,7 +486,7 @@ works:
 
 Every album in the collection could be listed on a single page with a template:
 
-```html
+```liquid
 {% raw %}
 {% for album in site.albums %}
   <h2>{{ album.title }}</h2>

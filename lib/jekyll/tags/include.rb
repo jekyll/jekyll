@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # frozen_string_literal: true
 
 module Jekyll
@@ -61,7 +60,7 @@ module Jekyll
 
       def validate_file_name(file)
         if file !~ %r!^[a-zA-Z0-9_/\.-]+$! || file =~ %r!\./! || file =~ %r!/\.!
-          raise ArgumentError, <<-eos
+          raise ArgumentError, <<-MSG
 Invalid syntax for include tag. File contains invalid characters or sequences:
 
   #{file}
@@ -70,14 +69,14 @@ Valid syntax:
 
   #{syntax_example}
 
-eos
+MSG
         end
       end
 
       def validate_params
         full_valid_syntax = %r!\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z!
         unless @params =~ full_valid_syntax
-          raise ArgumentError, <<-eos
+          raise ArgumentError, <<-MSG
 Invalid syntax for include tag:
 
   #{@params}
@@ -86,7 +85,7 @@ Valid syntax:
 
   #{syntax_example}
 
-eos
+MSG
         end
       end
 
@@ -116,9 +115,7 @@ eos
           path = File.join(dir.to_s, file.to_s)
           return path if valid_include_file?(path, dir.to_s, safe)
         end
-        raise IOError, "Could not locate the included file '#{file}' in any of "\
-          "#{includes_dirs}. Ensure it exists in one of those directories and, "\
-          "if it is a symlink, does not point outside your site source."
+        raise IOError, could_not_locate_message(file, includes_dirs, safe)
       end
 
       def render(context)
@@ -185,13 +182,25 @@ eos
 
       def realpath_prefixed_with?(path, dir)
         File.exist?(path) && File.realpath(path).start_with?(dir)
-      rescue
+      rescue StandardError
         false
       end
 
       # This method allows to modify the file content by inheriting from the class.
       def read_file(file, context)
         File.read(file, file_read_opts(context))
+      end
+
+      private
+
+      def could_not_locate_message(file, includes_dirs, safe)
+        message = "Could not locate the included file '#{file}' in any of "\
+          "#{includes_dirs}. Ensure it exists in one of those directories and"
+        message + if safe
+                    " is not a symlink as those are not allowed in safe mode."
+                  else
+                    ", if it is a symlink, does not point outside your site source."
+                  end
       end
     end
 

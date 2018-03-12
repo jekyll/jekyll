@@ -20,13 +20,8 @@ class TestConfiguration < JekyllUnitTest
       assert_equal result["source"], "blah"
     end
 
-    should "fix common mistakes" do
-      result = Configuration.from({ "paginate" => 0 })
-      assert_nil(
-        result["paginate"],
-        "Expected 'paginate' to be corrected to 'nil', " \
-        "but was #{result["paginate"].inspect}"
-      )
+    should "return a valid Configuration instance" do
+      assert_instance_of Configuration, Configuration.from({}).fix_common_issues
     end
 
     should "add default collections" do
@@ -263,20 +258,6 @@ class TestConfiguration < JekyllUnitTest
       assert @config.backwards_compatibilize["plugins"]
     end
   end
-  context "#fix_common_issues" do
-    setup do
-      @config = proc do |val|
-        Configuration[{
-          "paginate" => val,
-        }]
-      end
-    end
-    should "sets an invalid 'paginate' value to nil" do
-      assert_nil @config.call(0).fix_common_issues["paginate"]
-      assert_nil @config.call(-1).fix_common_issues["paginate"]
-      assert_nil @config.call(true).fix_common_issues["paginate"]
-    end
-  end
   context "loading configuration" do
     setup do
       @path = source_dir("_config.yml")
@@ -399,11 +380,11 @@ class TestConfiguration < JekyllUnitTest
     end
 
     should "load multiple config files" do
-      External.require_with_graceful_fail("toml")
+      External.require_with_graceful_fail("tomlrb")
 
       allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return({})
       allow(SafeYAML).to receive(:load_file).with(@paths[:other]).and_return({})
-      allow(TOML).to receive(:load_file).with(@paths[:toml]).and_return({})
+      allow(Tomlrb).to receive(:load_file).with(@paths[:toml]).and_return({})
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:toml]}")

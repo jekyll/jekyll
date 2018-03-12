@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # frozen_string_literal: true
 
 require "helper"
@@ -14,6 +13,7 @@ class TestKramdown < JekyllUnitTest
           "toc_levels"              => "1..6",
           "auto_ids"                => false,
           "footnote_nr"             => 1,
+          "show_warnings"           => true,
 
           "syntax_highlighter"      => "rouge",
           "syntax_highlighter_opts" => {
@@ -55,6 +55,12 @@ class TestKramdown < JekyllUnitTest
 
     should "run Kramdown" do
       assert_equal "<h1>Some Header</h1>", @markdown.convert("# Some Header #").strip
+    end
+
+    should "should log kramdown warnings" do
+      allow_any_instance_of(Kramdown::Document).to receive(:warnings).and_return(["foo"])
+      expect(Jekyll.logger).to receive(:warn).with("Kramdown warning:", "foo")
+      @markdown.convert("Something")
     end
 
     context "when asked to convert smart quotes" do

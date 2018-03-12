@@ -29,6 +29,8 @@ exclude_paths:
   - test/**/*
   - vendor/**/*
 
+  - lib/jekyll/commands/serve/livereload_assets/livereload.js
+
 ratings:
   paths:
     - lib/**/*.rb

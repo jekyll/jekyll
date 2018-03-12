@@ -46,19 +46,13 @@ def normalize_bullets(markdown)
 end
 
 def linkify_prs(markdown)
-  markdown.gsub(%r!#(\d+)!) do |word|
+  markdown.gsub(%r!(?<\!&)#(\d+)!) do |word|
     "[#{word}]({{ site.repository }}/issues/#{word.delete("#")})"
   end
 end
 
-def linkify_users(markdown)
-  markdown.gsub(%r!(@\w+)!) do |username|
-    "[#{username}](https://github.com/#{username.delete("@")})"
-  end
-end
-
 def linkify(markdown)
-  linkify_users(linkify_prs(markdown))
+  linkify_prs(markdown)
 end
 
 def liquid_escape(markdown)
@@ -72,11 +66,11 @@ def custom_release_header_anchors(markdown)
     _, major, minor, patch = *release_notes.match(header_regexp)
     release_notes
       .gsub(header_regexp, "\\0\n{: #v\\1-\\2-\\3}")
-      .gsub(section_regexp) { |section| "#{section}\n{: ##{sluffigy(section)}-v#{major}-#{minor}-#{patch}}" }
+      .gsub(section_regexp) { |section| "#{section}\n{: ##{slugify(section)}-v#{major}-#{minor}-#{patch}}" }
   end.join("\n## ")
 end
 
-def sluffigy(header)
+def slugify(header)
   header.delete("#").strip.downcase.gsub(%r!\s+!, "-")
 end
 
@@ -101,7 +95,7 @@ def siteify_file(file, overrides_front_matter = {})
   abort "You seem to have misplaced your #{file} file. I can haz?" unless File.exist?(file)
   title = begin
             File.read(file).match(%r!\A# (.*)$!)[1]
-          rescue
+          rescue NoMethodError
             File.basename(file, ".*").downcase.capitalize
           end
   slug  = File.basename(file, ".markdown").downcase
