@@ -12,6 +12,7 @@
   * Rewrite `script/rubyprof` as a Ruby script (#6813)
   * Add debug output to theme rendering (#5195)
   * fix minitest deprecation warning in test (#6839)
+  * Memoize `Site#site_data` (#6809)
 
 ### Minor Enhancements
 
