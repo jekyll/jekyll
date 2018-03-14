@@ -160,7 +160,7 @@ Feature: Collections Directory
     And the _site/gathering directory should not exist
     And the _site/_posts directory should not exist
 
-  Scenario: Rendered collection with a document that includes a relative
+  Scenario: Rendered collection with a document that includes a relative document
     Given I have a _puppies directory
     And I have the following documents under the puppies collection:
       | title  | date       | content                         |
@@ -182,7 +182,7 @@ Feature: Collections Directory
     And the "_site/puppies/rover.html" file should exist
     And I should see "Random Content." in "_site/2009/03/27/gathered-post.html"
 
-  Scenario: Rendered collection in custom collections_dir with a document that includes a relative
+  Scenario: Rendered collection in custom collections_dir with a document that includes a relative document
     Given I have a collections/_puppies directory
     And I have the following documents under the "puppies" collection within the "collections" directory:
       | title  | date       | content                         |
