@@ -13,6 +13,7 @@
   * Add debug output to theme rendering (#5195)
   * fix minitest deprecation warning in test (#6839)
   * Memoize `Site#site_data` (#6809)
+  * Memoize document output extension (#6814)
 
 ### Minor Enhancements
 
