@@ -25,6 +25,7 @@
   * Create a single instance of PostReader per site (#6759)
   * Allow date filters to output ordinal days (#6773)
   * Change regex to sanitize and normalize filenames passed to LiquidRenderer (#6610)
+  * Allow passing :strict_variables and :strict_filters options to Liquid&#39;s renderer (#6726)
 
 ### Documentation
 
