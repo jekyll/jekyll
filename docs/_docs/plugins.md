@@ -883,7 +883,7 @@ You can find a few useful plugins at the following locations:
 - [github-cards](https://github.com/edward-shen/github-cards): Creates styleable Github cards for your Github projects.
 - [disqus-for-jekyll](https://github.com/kacperduras/disqus-for-jekyll): A Jekyll plugin to view the comments powered by Disqus.
 - [jekyll-html](https://github.com/kacperduras/jekyll-html): A Jekyll plugin to use HTML tags in Jekyll pages, posts and collections.
-- [jekyll-w2m](https://github.com/kacperduras/jekyll-html): A Jekyll plugin to liberate content from Microsoft Word documents (powered by [word-to-markdown](https://github.com/benbalter/word-to-markdown)).
+- [jekyll-w2m](https://github.com/kacperduras/jekyll-w2m): A Jekyll plugin to liberate content from Microsoft Word documents (powered by [word-to-markdown](https://github.com/benbalter/word-to-markdown)).
 
 #### Collections
 
