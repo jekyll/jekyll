@@ -44,6 +44,7 @@ module Jekyll
           index.htm
           index.html
           index.rhtml
+          index.xhtml
           index.cgi
           index.xml
           index.json
