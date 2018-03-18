@@ -276,6 +276,17 @@ module Jekyll
     end
     alias_method :to_liquid, :site_payload
 
+    # Store converter instances for faster multiple retrievals
+    #
+    # klass - The Class of the Converter instance to be retrieved
+    #
+    # Returns the requested Converter instance or raises an exception via
+    # `Jekyll::Site#find_converter_instance`
+    def converter_instance_of(klass)
+      @converter_instances ||= {}
+      @converter_instances[klass] = find_converter_instance(klass)
+    end
+
     # Get the implementation class for the given Converter.
     # Returns the Converter instance implementing the given Converter.
     # klass - The Class of the Converter to fetch.

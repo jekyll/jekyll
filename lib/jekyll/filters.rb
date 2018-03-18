@@ -18,9 +18,8 @@ module Jekyll
     #
     # Returns the HTML formatted String.
     def markdownify(input)
-      site = @context.registers[:site]
-      converter = site.find_converter_instance(Jekyll::Converters::Markdown)
-      converter.convert(input.to_s)
+      @context.registers[:site]
+        .converter_instance_of(Jekyll::Converters::Markdown).convert(input.to_s)
     end
 
     # Convert quotes into smart quotes.
@@ -29,9 +28,8 @@ module Jekyll
     #
     # Returns the smart-quotified String.
     def smartify(input)
-      site = @context.registers[:site]
-      converter = site.find_converter_instance(Jekyll::Converters::SmartyPants)
-      converter.convert(input.to_s)
+      @context.registers[:site]
+        .converter_instance_of(Jekyll::Converters::SmartyPants).convert(input.to_s)
     end
 
     # Convert a Sass string into CSS output.
@@ -40,9 +38,8 @@ module Jekyll
     #
     # Returns the CSS formatted String.
     def sassify(input)
-      site = @context.registers[:site]
-      converter = site.find_converter_instance(Jekyll::Converters::Sass)
-      converter.convert(input)
+      @context.registers[:site]
+        .converter_instance_of(Jekyll::Converters::Sass).convert(input)
     end
 
     # Convert a Scss string into CSS output.
@@ -51,9 +48,8 @@ module Jekyll
     #
     # Returns the CSS formatted String.
     def scssify(input)
-      site = @context.registers[:site]
-      converter = site.find_converter_instance(Jekyll::Converters::Scss)
-      converter.convert(input)
+      @context.registers[:site]
+        .converter_instance_of(Jekyll::Converters::Scss).convert(input)
     end
 
     # Slugify a filename or title.
