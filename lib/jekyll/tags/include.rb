@@ -18,7 +18,7 @@ module Jekyll
       !x
       VARIABLE_SYNTAX = %r!
         (?<variable>[^{]*(\{\{\s*[\w\-\.]+\s*(\|.*)?\}\}[^\s{}]*)+)
-        (?<params>.*)
+        (?<params>(.|\s)*)
       !x
 
       def initialize(tag_name, markup, tokens)
