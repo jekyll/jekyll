@@ -205,9 +205,7 @@ module Jekyll
     # Returns nothing.
     def write
       each_site_file do |item|
-        next unless regenerator.regenerate?(item)
-        Jekyll.logger.debug "Writing:", item.destination(dest).sub("#{source}/", "")
-        item.write(dest)
+        item.write(dest) if regenerator.regenerate?(item)
       end
       regenerator.write_metadata
       Jekyll::Hooks.trigger :site, :post_write, self
