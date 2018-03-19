@@ -1,0 +1,94 @@
+#!/usr/bin/env ruby
+
+require "benchmark/ips"
+require "../lib/jekyll"
+
+def regex_strip_leading(substr, string)
+  string.sub(%r!\A#{substr}!, "")
+end
+
+def regex_strip_leading_and_trailing(substr, string)
+  string.gsub(%r!\A#{substr}|#{substr}\z!, "")
+end
+
+def regex_strip_leading!(substr, string)
+  string.sub!(%r!\A#{substr}!, "")
+end
+
+def regex_strip_leading_and_trailing!(substr, string)
+  string.gsub!(%r!\A#{substr}|#{substr}\z!, "")
+end
+
+PATH      = File.join(__dir__, "about", "")
+DIR_PATH  = File.join(__dir__, "")
+SOME_PATH = "/foo/bar/"
+
+# --------------------- Homogeneous candidates ---------------------
+
+Benchmark.ips do |x|
+  x.report("strip-leading-match  ") { Jekyll::Utils.strip_leading(PATH, DIR_PATH) }
+  x.report("strip-leading-match! ") { Jekyll::Utils.strip_leading!(PATH, DIR_PATH) }
+  x.compare!
+end
+
+Benchmark.ips do |x|
+  x.report("regex-strip-leading-match  ") { regex_strip_leading(PATH, DIR_PATH) }
+  x.report("regex-strip-leading-match! ") { regex_strip_leading!(PATH, DIR_PATH) }
+  x.compare!
+end
+
+Benchmark.ips do |x|
+  x.report("strip-leading-unmatch  ") { Jekyll::Utils.strip_leading(PATH, SOME_PATH) }
+  x.report("strip-leading-unmatch! ") { Jekyll::Utils.strip_leading!(PATH, SOME_PATH) }
+  x.compare!
+end
+
+Benchmark.ips do |x|
+  x.report("regex-strip-leading-unmatch  ") { regex_strip_leading(PATH, SOME_PATH) }
+  x.report("regex-strip-leading-unmatch! ") { regex_strip_leading!(PATH, SOME_PATH) }
+  x.compare!
+end
+
+# --------------------- Heterogeneous candidates ---------------------
+
+Benchmark.ips do |x|
+  x.report("strip-leading-match!       ") { Jekyll::Utils.strip_leading!(PATH, DIR_PATH) }
+  x.report("regex-strip-leading-match! ") { regex_strip_leading!(PATH, DIR_PATH) }
+  x.compare!
+end
+
+Benchmark.ips do |x|
+  x.report("strip-leading-trailing-match       ") { Jekyll::Utils.strip_leading_and_trailing(PATH, DIR_PATH) }
+  x.report("regex-strip-leading-trailing-match ") { regex_strip_leading_and_trailing(PATH, DIR_PATH) }
+  x.compare!
+end
+
+Benchmark.ips do |x|
+  x.report("strip-leading-trailing-match!       ") { Jekyll::Utils.strip_leading_and_trailing!(PATH, DIR_PATH) }
+  x.report("regex-strip-leading-trailing-match! ") { regex_strip_leading_and_trailing!(PATH, DIR_PATH) }
+  x.compare!
+end
+
+Benchmark.ips do |x|
+  x.report("strip-leading-unmatch       ") { Jekyll::Utils.strip_leading(PATH, SOME_PATH) }
+  x.report("regex-strip-leading-unmatch ") { regex_strip_leading(PATH, SOME_PATH) }
+  x.compare!
+end
+
+Benchmark.ips do |x|
+  x.report("strip-leading-unmatch!       ") { Jekyll::Utils.strip_leading!(PATH, SOME_PATH) }
+  x.report("regex-strip-leading-unmatch! ") { regex_strip_leading!(PATH, SOME_PATH) }
+  x.compare!
+end
+
+Benchmark.ips do |x|
+  x.report("strip-leading-trailing-unmatch       ") { Jekyll::Utils.strip_leading_and_trailing(PATH, SOME_PATH) }
+  x.report("regex-strip-leading-trailing-unmatch ") { regex_strip_leading_and_trailing(PATH, SOME_PATH) }
+  x.compare!
+end
+
+Benchmark.ips do |x|
+  x.report("strip-leading-trailing-unmatch!       ") { Jekyll::Utils.strip_leading_and_trailing!(PATH, SOME_PATH) }
+  x.report("regex-strip-leading-trailing-unmatch! ") { regex_strip_leading_and_trailing!(PATH, SOME_PATH) }
+  x.compare!
+end
