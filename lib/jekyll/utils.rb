@@ -19,15 +19,44 @@ module Jekyll
     SLUGIFY_ASCII_REGEXP = Regexp.new("[^[A-Za-z0-9]]+").freeze
 
     # Takes an indented string and removes the preceding spaces on each line
-
     def strip_heredoc(str)
       str.gsub(%r!^[ \t]{#{(str.scan(%r!^[ \t]*(?=\S)!).min || "").size}}!, "")
     end
 
     # Takes a slug and turns it into a simple title.
-
     def titleize_slug(slug)
       slug.split("-").map!(&:capitalize).join(" ")
+    end
+
+    # Delete `substr` from the leading end of the given `input` string.
+    #
+    # Returns input if it is not a string or if the given substring doesn't start the
+    # input string.
+    def strip_leading!(substr, input)
+      return input unless input.is_a?(String)
+      return input unless input.start_with?(substr)
+      input[substr] = ""
+    end
+
+    # Non-destructive version of #strip_leading!
+    def strip_leading(substr, input)
+      strip_leading!(substr, input.dup)
+    end
+
+    # Delete `substr` from the leading and trailing end of the given `input` string.
+    #
+    # Returns `input` if it is not a string or if the given substring doesn't start and
+    # end the input string.
+    def strip_leading_and_trailing!(substr, input)
+      return input unless input.is_a?(String)
+      return input unless input.start_with?(substr)
+      return input unless input.end_with?(substr)
+      strip_leading!(substr, input).chomp!(substr)
+    end
+
+    # Non-destructive version of #strip_leading_and_trailing!
+    def strip_leading_and_trailing(substr, input)
+      strip_leading_and_trailing!(substr, input.dup)
     end
 
     # Non-destructive version of deep_merge_hashes! See that method.
