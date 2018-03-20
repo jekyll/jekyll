@@ -97,6 +97,55 @@ Xcode.app can interfere with the command line tools downloaded above. If
 you run into this issue, upgrade Xcode and install the upgraded Command
 Line Tools.
 
+### Running Jekyll as Non-Superuser (no sudo!) 
+{: #no-sudo}
+
+On most flavors of Linux, macOS, and Bash on Ubuntu on Windows, it is
+possible to run Jekyll as a non-superuser and without having to install
+gems to system-wide locations by adding the following lines to the end 
+of your `.bashrc` file:
+
+```sh
+# Ruby exports
+
+export GEM_HOME=$HOME/gems
+export PATH=$HOME/gems/bin:$PATH
+```
+
+This tells `gem` to place its gems within the user's home folder, 
+not in a system-wide location, and adds the local `jekyll` command to the 
+user's `PATH` ahead of any system-wide paths.
+
+This is also useful for many shared webhosting services, where user accounts
+have only limited privileges. Adding these exports to `.bashrc` before running 
+`gem install jekyll bundler` allows a complete non-`sudo` install of Jekyll.
+
+To activate the new exports, either close and restart Bash, logout and 
+log back into your shell account, or run `. .bashrc` in the 
+currently-running shell.
+
+If you see the following error when running the `jekyll new` command,
+you can solve it by using the above-described procedure:
+
+```
+$ jekyll new test
+Running bundle install in /home/user/test...
+
+
+Your user account isn't allowed to install to the system RubyGems.
+  You can cancel this installation and run:
+
+      bundle install --path vendor/bundle
+
+  to install the gems into ./vendor/bundle/, or you can enter your password
+  and install the bundled gems to RubyGems using sudo.
+
+  Password:
+```
+
+Once this is done, the `jekyll new` command should work properly for
+your user account.
+
 ### Jekyll &amp; Mac OS X 10.11
 
 With the introduction of System Integrity Protection, several directories

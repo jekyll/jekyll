@@ -11,6 +11,9 @@
   * Replace simple regex with equivalent Ruby methods (#6736)
   * Rewrite `script/rubyprof` as a Ruby script (#6813)
   * Add debug output to theme rendering (#5195)
+  * fix minitest deprecation warning in test (#6839)
+  * Memoize `Site#site_data` (#6809)
+  * Memoize document output extension (#6814)
 
 ### Minor Enhancements
 
@@ -23,6 +26,9 @@
   * Compute document&#39;s relative_path faster (#6767)
   * Create a single instance of PostReader per site (#6759)
   * Allow date filters to output ordinal days (#6773)
+  * Change regex to sanitize and normalize filenames passed to LiquidRenderer (#6610)
+  * Allow passing :strict_variables and :strict_filters options to Liquid&#39;s renderer (#6726)
+  * Debug writing files during the build process (#6696)
 
 ### Documentation
 
@@ -40,6 +46,8 @@
   * Add reference to Liquid to plugin docs (#6794)
   * Draft a release post for v3.7.3 (#6803)
   * add missing step for gem-based theme conversion (#6802)
+  * Update windows.md to explain an issue with jekyll new. (#6838)
+  * Add Bundler Installation Instructions (#6828)
 
 ### Site Enhancements
 
@@ -52,6 +60,7 @@
   * Append appropriate closing tag to Liquid block in an excerpt ### -minor (#6724)
   * Bypass rendering via Liquid unless required (#6735)
   * Delegated methods after `private` keyword are meant to be private (#6819)
+  * Improve handling non-default collection documents rendering and writing (#6795)
 
 ## 3.7.3 / 2018-02-25
 
