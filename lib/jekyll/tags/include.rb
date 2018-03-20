@@ -216,10 +216,10 @@ MSG
           site = context.registers[:site]
           page_payload  = context.registers[:page]
           resource_path = \
-            if page_payload.is_a?(Jekyll::Drops::DocumentDrop)
-              File.join(site.config["collections_dir"], page_payload["path"])
-            else
+            if page_payload["collection"].nil?
               page_payload["path"]
+            else
+              File.join(site.config["collections_dir"], page_payload["path"])
             end
           site.in_source_dir File.dirname(resource_path)
         end
