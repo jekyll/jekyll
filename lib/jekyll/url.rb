@@ -142,8 +142,7 @@ module Jekyll
       #   pct-encoded   = "%" HEXDIG HEXDIG
       #   sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
       #                 / "*" / "+" / "," / ";" / "="
-      encoded_path = Addressable::URI.encode(path).encode("utf-8")
-      cache[path] = encoded_path.sub("#", "%23")
+      cache[path] = Addressable::URI.encode(path).encode("utf-8").sub("#", "%23")
     end
 
     # Unescapes a URL path segment
