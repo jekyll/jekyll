@@ -180,6 +180,7 @@ Feature: Collections Directory
     Then I should get a zero exit status
     And the _site directory should exist
     And the "_site/puppies/rover.html" file should exist
+    And I should see "excerpt for all docs." in "_site/puppies/rover.html"
     And I should see "Random Content." in "_site/2009/03/27/gathered-post.html"
 
   Scenario: Rendered collection in custom collections_dir with a document that includes a relative document
@@ -204,4 +205,5 @@ Feature: Collections Directory
     Then I should get a zero exit status
     And the _site directory should exist
     And the "_site/puppies/rover.html" file should exist
+    And I should see "excerpt for all docs." in "_site/puppies/rover.html"
     And I should see "Random Content." in "_site/2009/03/27/gathered-post.html"
