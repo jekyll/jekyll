@@ -14,6 +14,7 @@
   * fix minitest deprecation warning in test (#6839)
   * Memoize `Site#site_data` (#6809)
   * Memoize document output extension (#6814)
+  * Access document permalink attribute efficiently (#6740)
 
 ### Minor Enhancements
 
