@@ -30,6 +30,7 @@
   * Change regex to sanitize and normalize filenames passed to LiquidRenderer (#6610)
   * Allow passing :strict_variables and :strict_filters options to Liquid&#39;s renderer (#6726)
   * Debug writing files during the build process (#6696)
+  * Improve regex usage in `Tags::IncludeTag` (#6848)
 
 ### Documentation
 
