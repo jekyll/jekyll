@@ -19,7 +19,7 @@ module Jekyll
       VARIABLE_SYNTAX = %r!
         (?<variable>[^{]*(\{\{\s*[\w\-\.]+\s*(\|.*)?\}\}[^\s{}]*)+)
         (?<params>.*)
-      !x
+      !mx
 
       FULL_VALID_SYNTAX = %r!\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z!
       VALID_FILENAME_CHARS = %r!^[\w/\.-]+$!
