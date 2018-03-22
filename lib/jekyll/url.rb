@@ -130,6 +130,8 @@ module Jekyll
     #
     # Returns the escaped path.
     def self.escape_path(path)
+      return cache[path] if cache.key?(path)
+
       # Because URI.escape doesn't escape "?", "[" and "]" by default,
       # specify unsafe string (except unreserved, sub-delims, ":", "@" and "/").
       #
@@ -140,8 +142,7 @@ module Jekyll
       #   pct-encoded   = "%" HEXDIG HEXDIG
       #   sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
       #                 / "*" / "+" / "," / ";" / "="
-      path = Addressable::URI.encode(path)
-      path.encode("utf-8").sub("#", "%23")
+      cache[path] = Addressable::URI.encode(path).encode("utf-8").sub("#", "%23")
     end
 
     # Unescapes a URL path segment
@@ -156,6 +157,10 @@ module Jekyll
     # Returns the unescaped path.
     def self.unescape_path(path)
       Addressable::URI.unencode(path.encode("utf-8"))
+    end
+
+    def self.cache
+      @cache ||= {}
     end
   end
 end
