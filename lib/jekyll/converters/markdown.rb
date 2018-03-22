@@ -73,6 +73,7 @@ module Jekyll
       end
 
       def convert(content)
+        return "" if content.to_s.empty?
         setup
         @parser.convert(content)
       end
