@@ -62,6 +62,17 @@ module Jekyll
       end
     end
 
+    def verbatim?(entry)
+      glob_include?(site.verbatim, relative_to_source(entry)).tap do |verbatim|
+        if verbatim
+          Jekyll.logger.debug(
+            "EntryFilter:",
+            "treating as verbatim #{relative_to_source(entry)}"
+          )
+        end
+      end
+    end
+
     # --
     # Check if a file is a symlink.
     # NOTE: This can be converted to allowing even in safe,

@@ -44,8 +44,9 @@ module Jekyll
       dot = Dir.chdir(base) { filter_entries(Dir.entries("."), base) }
       dot_dirs = dot.select { |file| File.directory?(@site.in_source_dir(base, file)) }
       dot_files = (dot - dot_dirs)
+      filter = EntryFilter.new(site, base)
       dot_pages = dot_files.select do |file|
-        Utils.has_yaml_header?(@site.in_source_dir(base, file))
+        !filter.verbatim?(file) && Utils.has_yaml_header?(@site.in_source_dir(base, file))
       end
       dot_static_files = dot_files - dot_pages
 
