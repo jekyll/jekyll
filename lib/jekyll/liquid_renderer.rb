@@ -29,16 +29,19 @@ module Jekyll
           Regexp.last_match(2)
         end
       LiquidRenderer::File.new(self, filename).tap do
-        @stats[filename] ||= new_profile_hash
+        @stats[filename] ||= {}
+        @stats[filename][:count] ||= 0
         @stats[filename][:count] += 1
       end
     end
 
     def increment_bytes(filename, bytes)
+      @stats[filename][:bytes] ||= 0
       @stats[filename][:bytes] += bytes
     end
 
     def increment_time(filename, time)
+      @stats[filename][:time] ||= 0
       @stats[filename][:time] += time
     end
 
@@ -54,10 +57,6 @@ module Jekyll
 
     def filename_regex
       %r!\A(#{source_dir}/|#{theme_dir}/|\W*)(.*)!oi
-    end
-
-    def new_profile_hash
-      Hash.new { |hash, key| hash[key] = 0 }
     end
   end
 end

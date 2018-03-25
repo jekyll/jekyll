@@ -110,6 +110,15 @@ class TestDocument < JekyllUnitTest
       assert_nil next_next_doc["previous"]["output"]
     end
 
+    should "be able to be marshalled" do
+      refute_nil @document.data.default_proc
+      dumped = Marshal.dump(@document)
+      refute_nil @document.data.default_proc
+
+      marshalled_doc = Marshal.load(dumped)
+      refute_nil marshalled_doc.data.default_proc
+    end
+
     context "with YAML ending in three dots" do
       setup do
         @site = fixture_site({ "collections" => ["methods"] })

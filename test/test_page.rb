@@ -106,6 +106,17 @@ class TestPage < JekyllUnitTest
         end
       end
 
+      should "be able to be marshalled" do
+        @page = setup_page("contacts.html")
+
+        refute_nil @page.data.default_proc
+        dumped = Marshal.dump(@page)
+        refute_nil @page.data.default_proc
+
+        marshalled_page = Marshal.load(dumped)
+        refute_nil marshalled_page.data.default_proc
+      end
+
       context "with pretty permalink style" do
         setup do
           @site.permalink_style = :pretty

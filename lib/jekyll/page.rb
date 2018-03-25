@@ -3,6 +3,7 @@
 module Jekyll
   class Page
     include Convertible
+    include Utils::MarshalWithoutDefaultProc
 
     attr_writer :dir
     attr_accessor :site, :pager
@@ -182,6 +183,13 @@ module Jekyll
 
     def write?
       true
+    end
+
+    private
+    def set_default_proc
+      data.default_proc = proc do |_, key|
+        site.frontmatter_defaults.find(File.join(dir, name), type, key)
+      end
     end
   end
 end

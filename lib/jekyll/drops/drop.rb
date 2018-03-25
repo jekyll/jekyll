@@ -209,6 +209,18 @@ module Jekyll
         return yield(key) unless block.nil?
         return default unless default.nil?
       end
+
+      private
+      def marshal_dump
+        (instance_variables - [:@context]).map do |attr|
+          { attr => instance_variable_get(attr) }
+        end.inject(:merge)
+      end
+
+      private
+      def marshal_load(marshalled_data)
+        marshalled_data.each { |key, value| instance_variable_set(key, value) }
+      end
     end
   end
 end

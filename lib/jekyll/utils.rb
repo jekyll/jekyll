@@ -6,6 +6,7 @@ module Jekyll
     autoload :Ansi, "jekyll/utils/ansi"
     autoload :Exec, "jekyll/utils/exec"
     autoload :Internet, "jekyll/utils/internet"
+    autoload :MarshalWithoutDefaultProc, "jekyll/utils/marshal_without_default_proc"
     autoload :Platforms, "jekyll/utils/platforms"
     autoload :Rouge, "jekyll/utils/rouge"
     autoload :ThreadEvent, "jekyll/utils/thread_event"
