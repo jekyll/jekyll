@@ -88,6 +88,7 @@ class TestSite < JekyllUnitTest
 
     teardown do
       if defined?(MyGenerator)
+        Generator.instance_variable_get(:@children).delete TestSite::MyGenerator
         self.class.send(:remove_const, :MyGenerator)
       end
     end
