@@ -14,6 +14,8 @@
   * fix minitest deprecation warning in test (#6839)
   * Memoize `Site#site_data` (#6809)
   * Memoize document output extension (#6814)
+  * Access document permalink attribute efficiently (#6740)
+  * Minimize array allocations in the `where` filter (#6860)
 
 ### Minor Enhancements
 
@@ -29,6 +31,7 @@
   * Change regex to sanitize and normalize filenames passed to LiquidRenderer (#6610)
   * Allow passing :strict_variables and :strict_filters options to Liquid&#39;s renderer (#6726)
   * Debug writing files during the build process (#6696)
+  * Improve regex usage in `Tags::IncludeTag` (#6848)
 
 ### Documentation
 
@@ -61,6 +64,7 @@
   * Bypass rendering via Liquid unless required (#6735)
   * Delegated methods after `private` keyword are meant to be private (#6819)
   * Improve handling non-default collection documents rendering and writing (#6795)
+  * Fix passing multiline params to include tag when using the variable syntax  (#6858)
 
 ## 3.7.3 / 2018-02-25
 

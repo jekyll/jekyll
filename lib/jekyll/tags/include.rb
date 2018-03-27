@@ -19,7 +19,11 @@ module Jekyll
       VARIABLE_SYNTAX = %r!
         (?<variable>[^{]*(\{\{\s*[\w\-\.]+\s*(\|.*)?\}\}[^\s{}]*)+)
         (?<params>.*)
-      !x
+      !mx
+
+      FULL_VALID_SYNTAX = %r!\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z!
+      VALID_FILENAME_CHARS = %r!^[\w/\.-]+$!
+      INVALID_SEQUENCES = %r![./]{2,}!
 
       def initialize(tag_name, markup, tokens)
         super
@@ -59,7 +63,7 @@ module Jekyll
       end
 
       def validate_file_name(file)
-        if file !~ %r!^[a-zA-Z0-9_/\.-]+$! || file =~ %r!\./! || file =~ %r!/\.!
+        if file =~ INVALID_SEQUENCES || file !~ VALID_FILENAME_CHARS
           raise ArgumentError, <<-MSG
 Invalid syntax for include tag. File contains invalid characters or sequences:
 
@@ -74,8 +78,7 @@ MSG
       end
 
       def validate_params
-        full_valid_syntax = %r!\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z!
-        unless @params =~ full_valid_syntax
+        unless @params =~ FULL_VALID_SYNTAX
           raise ArgumentError, <<-MSG
 Invalid syntax for include tag:
 
@@ -96,7 +99,7 @@ MSG
 
       # Render the variable if required
       def render_variable(context)
-        if @file.match(VARIABLE_SYNTAX)
+        if @file =~ VARIABLE_SYNTAX
           partial = context.registers[:site]
             .liquid_renderer
             .file("(variable)")

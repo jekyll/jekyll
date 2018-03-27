@@ -104,3 +104,28 @@ Feature: Include tags
     Then I should get a zero exit status
     And the _site directory should exist
     And I should see "include" in "_site/index.html"
+
+  Scenario: Include a file-path with non-alphanumeric character sequences
+    Given I have an _includes directory
+    And I have an "_includes/header-en.html" file that contains "include"
+    And I have an "index.html" page that contains "{% include ./header-en.html %}"
+    When I run jekyll build
+    Then I should get a non-zero exit status
+    And I should see "Invalid syntax for include tag." in the build output
+    When I have an "index.html" page that contains "{% include foo/.header-en.html %}"
+    When I run jekyll build
+    Then I should get a non-zero exit status
+    And I should see "Invalid syntax for include tag." in the build output
+    When I have an "index.html" page that contains "{% include //header-en.html %}"
+    When I run jekyll build
+    Then I should get a non-zero exit status
+    And I should see "Invalid syntax for include tag." in the build output
+    When I have an "index.html" page that contains "{% include ..header-en.html %}"
+    When I run jekyll build
+    Then I should get a non-zero exit status
+    And I should see "Invalid syntax for include tag." in the build output
+    When I have an "index.html" page that contains "{% include header-en.html %}"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "include" in "_site/index.html"
