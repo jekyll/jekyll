@@ -52,9 +52,7 @@ module Jekyll
       process(name)
       read_yaml(File.join(base, dir), name)
 
-      data.default_proc = proc do |_, key|
-        site.frontmatter_defaults.find(File.join(dir, name), type, key)
-      end
+      data.default_proc = data_default_proc
 
       Jekyll::Hooks.trigger :pages, :post_init, self
     end
@@ -186,9 +184,9 @@ module Jekyll
     end
 
     private
-    def set_default_proc
-      data.default_proc = proc do |_, key|
-        site.frontmatter_defaults.find(File.join(dir, name), type, key)
+    def data_default_proc
+      proc do |_, key|
+        site.frontmatter_defaults.find(File.join(@dir, name), type, key)
       end
     end
   end

@@ -36,7 +36,7 @@ module Jekyll
         categories_from_path(collection.relative_directory)
       end
 
-      set_default_proc
+      data.default_proc = data_default_proc
 
       trigger_hooks(:post_init)
     end
@@ -505,8 +505,8 @@ module Jekyll
     end
 
     private
-    def set_default_proc
-      data.default_proc = proc do |_, key|
+    def data_default_proc
+      proc do |_, key|
         site.frontmatter_defaults.find(relative_path, collection.label, key)
       end
     end
