@@ -51,6 +51,7 @@
   * add missing step for gem-based theme conversion (#6802)
   * Update windows.md to explain an issue with jekyll new. (#6838)
   * Add Bundler Installation Instructions (#6828)
+  * Docs: describe difference between tags and categories (#6882)
 
 ### Site Enhancements
 
