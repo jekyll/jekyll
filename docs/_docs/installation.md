@@ -55,7 +55,7 @@ command, so you won’t have to worry about them at all.
   <p>
     If you run into issues installing Jekyll's dependencies which make use of
     native extensions and are using macOS, you will need to install Xcode
-    and the Command-Line Tools it ships with. Download them in
+    and the Command-Line Tools it ships with. Download them in Xcode from
     <code>Preferences &#8594; Downloads &#8594; Components</code>.
   </p>
 </div>
