@@ -180,8 +180,12 @@ module Jekyll
     #
     # Returns an array of hashes
     def matching_sets(path, type)
-      valid_sets.select do |set|
-        !set.key?("scope") || applies?(set["scope"], path, type)
+      @matched_set_cache ||= {}
+      @matched_set_cache[path] ||= {}
+      @matched_set_cache[path][type] ||= begin
+        valid_sets.select do |set|
+          !set.key?("scope") || applies?(set["scope"], path, type)
+        end
       end
     end
 
