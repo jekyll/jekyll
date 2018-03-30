@@ -9,7 +9,7 @@ rvm:
   - &ruby2 2.4.3
   - &ruby3 2.3.6
   - &ruby4 2.2.9
-  - &jruby jruby-9.1.15.0
+  - &jruby jruby-9.1.16.0
 
 matrix:
   include:
