@@ -53,6 +53,7 @@
   * Update windows.md to explain an issue with jekyll new. (#6838)
   * Add Bundler Installation Instructions (#6828)
   * Docs: describe difference between tags and categories (#6882)
+  * Add `jekyll-random` plugin to docs (#6833)
 
 ### Site Enhancements
 
