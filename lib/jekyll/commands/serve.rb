@@ -178,7 +178,7 @@ module Jekyll
           end
         end
 
-        # Do a base pre-setup of WEBRick so that everything is in place
+        # Do a base pre-setup of WEBrick so that everything is in place
         # when we get ready to party, checking for an setting up an error page
         # and making sure our destination exists.
 
