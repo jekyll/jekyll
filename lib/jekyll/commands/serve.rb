@@ -101,7 +101,11 @@ module Jekyll
           register_reload_hooks(opts) if opts["livereload"]
           setup(destination)
 
+          start_up_livereload(opts)
           start_up_webrick(opts, destination)
+
+          launch_browser @server, opts if opts["open_url"]
+          boot_or_detach @server, opts
         end
 
         def shutdown
@@ -220,16 +224,17 @@ module Jekyll
 
         private
         def start_up_webrick(opts, destination)
-          if opts["livereload"]
-            @reload_reactor.start(opts)
-          end
-
           @server = WEBrick::HTTPServer.new(webrick_opts(opts)).tap { |o| o.unmount("") }
           @server.mount(opts["baseurl"].to_s, Servlet, destination, file_handler_opts)
 
           Jekyll.logger.info "Server address:", server_address(@server, opts)
-          launch_browser @server, opts if opts["open_url"]
-          boot_or_detach @server, opts
+        end
+
+        private
+        def start_up_livereload(opts)
+          if opts["livereload"]
+            @reload_reactor.start(opts)
+          end
         end
 
         # Recreate NondisclosureName under utf-8 circumstance
