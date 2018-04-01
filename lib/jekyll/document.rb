@@ -414,6 +414,12 @@ module Jekyll
       })
     end
 
+    def data_default_proc
+      proc do |_, key|
+        site.frontmatter_defaults.find(relative_path, collection.label, key)
+      end
+    end
+
     private
     def merge_categories!(other)
       if other.key?("categories") && !other["categories"].nil?
@@ -501,13 +507,6 @@ module Jekyll
     def generate_excerpt
       if generate_excerpt?
         data["excerpt"] ||= Jekyll::Excerpt.new(self)
-      end
-    end
-
-    private
-    def data_default_proc
-      proc do |_, key|
-        site.frontmatter_defaults.find(relative_path, collection.label, key)
       end
     end
   end

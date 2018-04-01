@@ -212,7 +212,7 @@ module Jekyll
 
       private
       def marshal_dump
-        (instance_variables - [:@context]).map do |attr|
+        (instance_variables - [:@context]).map! do |attr|
           { attr => instance_variable_get(attr) }
         end.inject(:merge!)
       end

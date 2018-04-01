@@ -176,6 +176,17 @@ class TestExcerpt < JekyllUnitTest
         assert_equal @post.content, @excerpt.content
       end
     end
+
+    should "be able to be marshalled" do
+      refute_nil @excerpt.data.default_proc
+      dumped = Marshal.dump(@excerpt)
+      refute_nil @excerpt.data.default_proc
+      refute_nil @excerpt.doc.data.default_proc
+
+      marshalled_excerpt = Marshal.load(dumped)
+      refute_nil marshalled_excerpt.data.default_proc
+      refute_nil marshalled_excerpt.doc.data.default_proc
+    end
   end
 
   context "An excerpt with non-closed but valid Liquid block tag" do

@@ -2,6 +2,7 @@
 
 module Jekyll
   class Excerpt
+    include Utils::MarshalWithoutDefaultProc
     extend Forwardable
 
     attr_accessor :doc
@@ -157,6 +158,10 @@ module Jekyll
       Jekyll.logger.warn "",
         "Feel free to define a custom excerpt or excerpt_separator in the document's " \
         "Front Matter if the generated excerpt is unsatisfactory."
+    end
+
+    def data_default_proc
+      doc.data_default_proc
     end
   end
 end
