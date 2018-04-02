@@ -16,6 +16,7 @@
   * Memoize document output extension (#6814)
   * Access document permalink attribute efficiently (#6740)
   * Minimize array allocations in the `where` filter (#6860)
+  * Bump JRuby (#6878)
 
 ### Minor Enhancements
 
@@ -51,6 +52,8 @@
   * add missing step for gem-based theme conversion (#6802)
   * Update windows.md to explain an issue with jekyll new. (#6838)
   * Add Bundler Installation Instructions (#6828)
+  * Docs: describe difference between tags and categories (#6882)
+  * Add `jekyll-random` plugin to docs (#6833)
 
 ### Site Enhancements
 
