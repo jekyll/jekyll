@@ -54,6 +54,7 @@
   * Add Bundler Installation Instructions (#6828)
   * Docs: describe difference between tags and categories (#6882)
   * Add `jekyll-random` plugin to docs (#6833)
+  * Fixed typo in description of categories and tags (#6896)
 
 ### Site Enhancements
 
