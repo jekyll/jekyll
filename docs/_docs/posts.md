@@ -222,7 +222,7 @@ tags: [ blog, travel ]
 ---
 ```
 will be saved as `{baseurl}/year/month/day/A-Trip.html`.  It is up to you to
-create `{baseurl}/tag/blog.html` and `{baseurl}/tag/blog.html` the same way as
+create `{baseurl}/tag/blog.html` and `{baseurl}/tag/travel.html` the same way as
 described above for categories.
 
 While this example is done with tags and categories, you can easily extend your
