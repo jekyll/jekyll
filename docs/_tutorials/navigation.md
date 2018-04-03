@@ -396,9 +396,11 @@ In addition to inserting items from the YAML data file into your list, you also 
 </style>
 
 <div class="highlight result">
-   <li class=""><a href="#">Introduction</a></li>
-   <li class=""><a href="#">Configuration</a></li>
-   <li class="active"><a href="#">Deployment</a></li>
+   <ul>
+      <li class=""><a href="#">Introduction</a></li>
+      <li class=""><a href="#">Configuration</a></li>
+      <li class="active"><a href="#">Deployment</a></li>
+   </ul>
 </div>
 
 In this case, assume `Deployment` is the current page.
