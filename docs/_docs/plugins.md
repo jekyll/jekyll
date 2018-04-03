@@ -825,6 +825,7 @@ You can find a few useful plugins at the following locations:
 - [match_regex](https://github.com/sparanoid/match_regex): A Liquid filter to perform regex match.
 - [replace_regex](https://github.com/sparanoid/replace_regex): A Liquid filter to perform regex replace.
 - [Jekyll Money](https://rubygems.org/gems/jekyll-money): A Jekyll plugin for dealing with money. Because we all have to at some point.
+- [jekyll-random](https://github.com/codecalm/jekyll-random) by [codecalm](https://nodecalm.net): A Jekyll plugin that generates pseudo-random data. Very useful when you want to generate a large amount of random data.
 
 #### Tags
 
