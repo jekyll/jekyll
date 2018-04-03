@@ -21,30 +21,30 @@ Before you start, make sure your system has the following:
 
 ## Install on macOS {#macOS}
 
-We only cover latest macOS High Sierra 10.13 here, which comes with Ruby 2.3.3, older systems will need to [install a more recent Ruby version via Homebrew](#homebrew).
+We only cover macOS High Sierra 10.13 here, which comes with Ruby 2.3.3, older systems will need to [install a more recent Ruby version via Homebrew](#homebrew).
 
-First, you need to [install Xcode from the App Store](https://itunes.apple.com/app/xcode/id497799835?mt=12) or [from Apple Developer website](https://developer.apple.com/xcode/). Then to install the command-line tools, open a terminal and run:
+First, you need to install the command-line tools to be able to compile native extensions, open a terminal and run:
 
 ```sh
 xcode-select --install
 ```
 
-Check your Ruby version, and upgrade [RubyGems](https://rubygems.org/pages/download):
+### Set up Ruby included with the OS
+
+Check your Ruby version meet our requirements:
 
 ```sh
 ruby -v
 2.3.3
-
-gem update --system
 ```
 
-Great, let's install Jekyll. We also need [bundler](https://bundler.io/) to help us handle [plugins](../plugins) and [themes](../themes):
+Great, let's install Jekyll. We also need [Bundler](https://bundler.io/) to help us handle [plugins](../plugins) and [themes](../themes):
 
 ```sh
 gem install bundler jekyll
 ```
 
-You're ready to go, either by installing our default jekyll blog theme with `jekyll new jekyll-website` or by starting from scratch:
+That's it, you're ready to go, either by installing our [default minimal blog theme](https://github.com/jekyll/minima) with `jekyll new jekyll-website` or by starting from scratch:
 
 ```sh
 mkdir jekyll-website
@@ -60,20 +60,24 @@ bundle add jekyll
 bundle install
 ```
 
-From there you can either use a [theme](../themes/) or create your own layouts.
+Great, from there you can now either use a [theme](../themes/) or [create your own layouts](../templates/).
 
-### Install via Homebrew {#homebrew}
+### Install a newer Ruby version via Homebrew {#homebrew}
 
-You can install the latest version of Ruby via [Homebrew](https://brew.sh) a handy package manager for macOS.
+If you wish to install the latest version of Ruby and get faster builds, we recommend to do it via [Homebrew](https://brew.sh) a handy package manager for macOS.
 
 ```sh
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew install ruby
+ruby -v
+ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin17]
 ```
 
-### Install Rbenv
+Yay! Now you have a shiny Ruby on your system!
 
-Developers often use [rbenv](https://github.com/rbenv/rbenv) to manage multiple Ruby versions.
+### Install multiple Ruby versions with rbenv {#rbenv}
+
+Developers often use [rbenv](https://github.com/rbenv/rbenv) to manage multiple Ruby versions. This can be useful if you want to run the same Ruby version used by [GitHub Pages](https://pages.github.com/versions/) or [Netlify](https://www.netlify.com/docs/#ruby) for instance.
 
 ```sh
 # Install rbenv and ruby-build
@@ -87,13 +91,16 @@ curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor 
 ```
 
 Restart your terminal for changes to take effect.
-Now we can install the Ruby version of our choice, let's go with Ruby 2.5.0 here:
+Now we can install the Ruby version of our choice, let's go with Ruby 2.5.1 here:
 
 ```sh
-rbenv install 2.5.0
-rbenv global 2.5.0
+rbenv install 2.5.1
+rbenv global 2.5.1
 ruby -v
+ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin17]
 ```
+
+That's it! Head over [rbenv command references](https://github.com/rbenv/rbenv#command-reference) to learn how to use different versions of Ruby in your projects.
 
 <div class="note info" markdown="1">
 
@@ -113,7 +120,7 @@ jekyll --version
 gem list jekyll
 ```
 
-You can use RubyGems to find [the current versioning of Jekyll](https://rubygems.org/gems/jekyll). Another way to check if you have the latest version is to run the command `gem outdated`. This will provide a list of all the gems on your system that need to be updated. If you aren't running the latest version, run this command:
+You can use RubyGems to find [the current version of Jekyll](https://rubygems.org/gems/jekyll). Another way to check if you have the latest version is to run the command `gem outdated`. This will provide a list of all the gems on your system that need to be updated. If you aren't running the latest version, run this command:
 
 ```sh
 bundle update jekyll
