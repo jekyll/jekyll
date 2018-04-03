@@ -55,6 +55,7 @@
   * Docs: describe difference between tags and categories (#6882)
   * Add `jekyll-random` plugin to docs (#6833)
   * Fixed typo in description of categories and tags (#6896)
+  * Add missing ul-tag (#6897)
 
 ### Site Enhancements
 
