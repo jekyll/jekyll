@@ -56,6 +56,7 @@
   * Add `jekyll-random` plugin to docs (#6833)
   * Fixed typo in description of categories and tags (#6896)
   * Add missing ul-tag (#6897)
+  * doc: add liquid tag plugin jekyll-onebox for html previews (#6898)
 
 ### Site Enhancements
 
