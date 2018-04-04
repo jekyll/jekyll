@@ -42,5 +42,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("pathutil",              "~> 0.9")
   rouge_versions = ENV["ROUGE_VERSION"] ? ["~> #{ENV["ROUGE_VERSION"]}"] : [">= 1.7", "< 4"]
   s.add_runtime_dependency("rouge",                 *rouge_versions)
+  s.add_runtime_dependency("rubypants",             "~> 0.7")
   s.add_runtime_dependency("safe_yaml",             "~> 1.0")
 end

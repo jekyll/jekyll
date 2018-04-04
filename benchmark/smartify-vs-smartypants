@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "benchmark/ips"
+require File.join(__dir__, "../lib/jekyll")
+
+class DummyFilter
+  include Jekyll::Filters
+  attr_accessor :site, :context
+
+  def initialize
+    config = Jekyll.configuration("skip_config_files" => true)
+    @site = Jekyll::Site.new(config)
+    @context = Liquid::Context.new(@site.site_payload, {}, { :site => @site })
+  end
+end
+
+SAMPLE_TEXT = %q{'Twas the night before `yesterday', when the 'quick' brown fox jumped over the "lazy" sleeping dog.}
+
+def smartify
+  DummyFilter.new.smartify(SAMPLE_TEXT)
+end
+
+def smartypants
+  DummyFilter.new.smartypants(SAMPLE_TEXT)
+end
+
+if smartify == smartypants
+  Benchmark.ips do |x|
+    x.report('smartify') { smartify }
+    x.report('smartypants') { smartypants }
+    x.compare!
+  end
+else
+  puts "SMARTIFY   : #{smartify}"
+  puts "SMARTYPANTS: #{smartypants}"
+end
