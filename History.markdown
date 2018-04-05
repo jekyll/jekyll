@@ -17,6 +17,7 @@
   * Access document permalink attribute efficiently (#6740)
   * Minimize array allocations in the `where` filter (#6860)
   * Bump JRuby (#6878)
+  * Assert existence of &lt;collection&gt;.files (#6907)
 
 ### Minor Enhancements
 
