@@ -46,3 +46,5 @@ exclude:
 - CNAME
 - icomoon-selection.json
 - readme.md
+
+theme: jekyll-theme-cayman
