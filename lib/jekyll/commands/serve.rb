@@ -336,7 +336,7 @@ module Jekyll
           require "webrick/https"
 
           opts[:SSLCertificate] = OpenSSL::X509::Certificate.new(read_file(src, cert))
-          opts[:SSLPrivateKey ] = OpenSSL::PKey::RSA.new(read_file(src, key))
+          opts[:SSLPrivateKey]  = OpenSSL::PKey::RSA.new(read_file(src, key))
           opts[:SSLEnable] = true
         end
 
