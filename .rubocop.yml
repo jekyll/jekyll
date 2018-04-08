@@ -48,6 +48,8 @@ Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
 Layout/SpaceInsideBrackets:
   Enabled: false
+Layout/EmptyComment:
+  Enabled: false
 Lint/EndAlignment:
   Severity: error
 Lint/UnreachableCode:
