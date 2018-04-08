@@ -58,6 +58,7 @@
   * Fixed typo in description of categories and tags (#6896)
   * Add missing ul-tag (#6897)
   * doc: add liquid tag plugin jekyll-onebox for html previews (#6898)
+  * Add `jekyll-w2m` to plugins (#6855)
 
 ### Site Enhancements
 
