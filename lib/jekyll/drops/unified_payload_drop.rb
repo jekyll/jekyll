@@ -13,7 +13,7 @@ module Jekyll
       end
 
       def site
-        @site_drop ||= SiteDrop.new(@obj)
+        @site ||= SiteDrop.new(@obj)
       end
 
       private

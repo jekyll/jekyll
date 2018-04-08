@@ -26,17 +26,17 @@ module Jekyll
       end
 
       def posts
-        @site_posts ||= @obj.posts.docs.sort { |a, b| b <=> a }
+        @posts ||= @obj.posts.docs.sort { |a, b| b <=> a }
       end
 
       def html_pages
-        @site_html_pages ||= @obj.pages.select do |page|
+        @html_pages ||= @obj.pages.select do |page|
           page.html? || page.url.end_with?("/")
         end
       end
 
       def collections
-        @site_collections ||= @obj.collections.values.sort_by(&:label).map(&:to_liquid)
+        @collections ||= @obj.collections.values.sort_by(&:label).map(&:to_liquid)
       end
 
       # `{{ site.related_posts }}` is how posts can get posts related to

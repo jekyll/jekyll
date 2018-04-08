@@ -8,7 +8,7 @@ module Jekyll
   # attributes "dir", "name", "path", "url" defined on it.
   class PageWithoutAFile < Page
     def read_yaml(*)
-      @data ||= {}
+      @read_yaml ||= {}
     end
 
     def inspect
