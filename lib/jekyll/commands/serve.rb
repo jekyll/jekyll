@@ -70,7 +70,7 @@ module Jekyll
             cmd.action do |_, opts|
               opts["livereload_port"] ||= LIVERELOAD_PORT
               opts["serving"] = true
-              opts["watch"  ] = true unless opts.key?("watch")
+              opts["watch"]   = true unless opts.key?("watch")
 
               start(opts)
             end
