@@ -109,7 +109,6 @@ module Jekyll
     def render_liquid(content, payload, info, path)
       _renderer.render_liquid(content, payload, info, path)
     end
-    # rubocop: enable RescueException
 
     # Convert this Convertible's data to a Hash suitable for use by Liquid.
     #
