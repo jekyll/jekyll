@@ -42,8 +42,8 @@ module Jekyll
       @stats[filename][:time] += time
     end
 
-    def stats_table(n = 50)
-      LiquidRenderer::Table.new(@stats).to_s(n)
+    def stats_table(num_of_rows = 50)
+      LiquidRenderer::Table.new(@stats).to_s(num_of_rows)
     end
 
     def self.format_error(e, path)
