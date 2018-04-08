@@ -63,7 +63,7 @@ module Jekyll
 
       data.each do |row|
         row.each_with_index do |cell, index|
-          widths[index] = [ cell.length, widths[index] ].compact.max
+          widths[index] = [cell.length, widths[index]].compact.max
         end
       end
 

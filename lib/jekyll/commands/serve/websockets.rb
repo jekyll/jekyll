@@ -74,6 +74,8 @@ module Jekyll
             close_connection_after_writing
           end
         end
+        # rubocop:enable Metrics/MethodLength
+
       end
     end
   end
