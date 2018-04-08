@@ -213,6 +213,7 @@ class TestSite < JekyllUnitTest
       @site.process
       # exclude files in symlinked directories here and insert them in the
       # following step when not on Windows.
+      # rubocop:disable Lint/NestedPercentLiteral
       sorted_pages = %w(
         %#\ +.md
         .htaccess
@@ -235,6 +236,7 @@ class TestSite < JekyllUnitTest
         sitemap.xml
         static_files.html
       )
+      # rubocop:enable Lint/NestedPercentLiteral
       unless Utils::Platforms.really_windows?
         # files in symlinked directories may appear twice
         sorted_pages.push("main.scss", "symlinked-file").sort!
