@@ -104,8 +104,8 @@ module Jekyll
 
           @reload_reactor.start(opts) if opts["livereload"]
 
-          launch_browser @server, opts if opts["open_url"]
-          boot_or_detach @server, opts
+          launch_browser(@server, opts) if opts["open_url"]
+          boot_or_detach(@server, opts)
         end
 
         def shutdown
