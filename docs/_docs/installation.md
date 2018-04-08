@@ -133,7 +133,6 @@ Alternatively, if you don't have Bundler installed run:
 gem update jekyll
 ```
 
-Please refer to our [upgrading section](../upgrading/) for major updates
-detailed instructions.
+Please refer to our [upgrading section](../upgrading/) for major updates and detailed instructions.
 
 Now that you’ve got everything up-to-date and installed, let’s get to work!
