@@ -42,8 +42,6 @@ end
 require "kramdown"
 require "shoulda"
 
-include Jekyll
-
 require "jekyll/commands/serve/servlet"
 
 # Report with color.
@@ -88,6 +86,7 @@ module DirectoryHelpers
 end
 
 class JekyllUnitTest < Minitest::Test
+  include Jekyll
   include ::RSpec::Mocks::ExampleMethods
   include DirectoryHelpers
   extend DirectoryHelpers
