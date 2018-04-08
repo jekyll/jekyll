@@ -96,6 +96,9 @@ Naming/FileName:
   Enabled: false
 Naming/HeredocDelimiterNaming:
   Enabled: false
+Naming/UncommunicativeMethodParamName:
+  AllowedNames:
+    - _
 Security/MarshalLoad:
   Exclude:
     - !ruby/regexp /test\/.*.rb$/
