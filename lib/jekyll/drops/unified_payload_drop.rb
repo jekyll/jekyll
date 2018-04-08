@@ -12,9 +12,11 @@ module Jekyll
         JekyllDrop.global
       end
 
+      # rubocop:disable Naming/MemoizedInstanceVariableName
       def site
-        @site ||= SiteDrop.new(@obj)
+        @site_drop ||= SiteDrop.new(@obj)
       end
+      # rubocop:enable Naming/MemoizedInstanceVariableName
 
       private
       def fallback_data

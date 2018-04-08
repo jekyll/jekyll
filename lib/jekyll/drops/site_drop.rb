@@ -25,19 +25,21 @@ module Jekyll
         (@obj.collections.key?(key) && key != "posts") || super
       end
 
+      # rubocop:disable Naming/MemoizedInstanceVariableName
       def posts
-        @posts ||= @obj.posts.docs.sort { |a, b| b <=> a }
+        @site_posts ||= @obj.posts.docs.sort { |a, b| b <=> a }
       end
 
       def html_pages
-        @html_pages ||= @obj.pages.select do |page|
+        @site_html_pages ||= @obj.pages.select do |page|
           page.html? || page.url.end_with?("/")
         end
       end
 
       def collections
-        @collections ||= @obj.collections.values.sort_by(&:label).map(&:to_liquid)
+        @site_collections ||= @obj.collections.values.sort_by(&:label).map(&:to_liquid)
       end
+      # rubocop:enable Naming/MemoizedInstanceVariableName
 
       # `{{ site.related_posts }}` is how posts can get posts related to
       # them, either through LSI if it's enabled, or through the most
