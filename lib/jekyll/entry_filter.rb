@@ -105,7 +105,7 @@ module Jekyll
           # see if the entry falls within that path and
           # exclude it if that's the case.
 
-          if e.end_with?("/")
+          if entry.end_with?("/")
             entry_path.in_path?(
               item
             )
