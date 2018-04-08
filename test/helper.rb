@@ -42,6 +42,10 @@ end
 require "kramdown"
 require "shoulda"
 
+# rubocop:disable Style/MixinUsage
+include Jekyll
+# rubocop:enable Style/MixinUsage
+
 require "jekyll/commands/serve/servlet"
 
 # Report with color.
@@ -86,7 +90,6 @@ module DirectoryHelpers
 end
 
 class JekyllUnitTest < Minitest::Test
-  include Jekyll
   include ::RSpec::Mocks::ExampleMethods
   include DirectoryHelpers
   extend DirectoryHelpers
