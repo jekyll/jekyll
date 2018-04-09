@@ -18,6 +18,7 @@
   * Minimize array allocations in the `where` filter (#6860)
   * Bump JRuby (#6878)
   * Assert existence of &lt;collection&gt;.files (#6907)
+  * Bump Rubocop to 0.54.x (#6915)
 
 ### Minor Enhancements
 
