@@ -7,11 +7,9 @@ module Jekyll
   # The class instance is basically just a bare-bones entity with just
   # attributes "dir", "name", "path", "url" defined on it.
   class PageWithoutAFile < Page
-    # rubocop:disable Naming/MemoizedInstanceVariableName
     def read_yaml(*)
       @data ||= {}
     end
-    # rubocop:enable Naming/MemoizedInstanceVariableName
 
     def inspect
       "#<Jekyll:PageWithoutAFile @name=#{name.inspect}>"

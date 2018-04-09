@@ -99,6 +99,11 @@ Naming/FileName:
   Enabled: false
 Naming/HeredocDelimiterNaming:
   Enabled: false
+Naming/MemoizedInstanceVariableName:
+  Exclude:
+    - lib/jekyll/page_without_a_file.rb
+    - lib/jekyll/drops/unified_payload_drop.rb
+    - lib/jekyll/drops/site_drop.rb
 Naming/UncommunicativeMethodParamName:
   AllowedNames:
     - _
@@ -126,6 +131,9 @@ Style/Documentation:
     - !ruby/regexp /features\/.*.rb$/
 Style/DoubleNegation:
   Enabled: false
+Style/FormatStringToken:
+  Exclude:
+    - lib/jekyll/utils/ansi.rb
 Style/GuardClause:
   Enabled: false
 Style/HashSyntax:
@@ -135,6 +143,9 @@ Style/IfUnlessModifier:
   Enabled: false
 Style/InverseMethods:
   Enabled: false
+Style/MixinUsage:
+  Exclude:
+    - test/helper.rb
 Style/ModuleFunction:
   Enabled: false
 Style/MultilineTernaryOperator:

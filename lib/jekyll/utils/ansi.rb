@@ -4,7 +4,7 @@ module Jekyll
   module Utils
     module Ansi
       extend self
-      # rubocop:disable Style/FormatStringToken
+
       ESCAPE = format("%c", 27)
       MATCH = %r!#{ESCAPE}\[(?:\d+)(?:;\d+)*(j|k|m|s|u|A|B|G)|\e\(B\e\[m!ix
       COLORS = {
@@ -52,7 +52,6 @@ module Jekyll
           "#{format("%c", 27)}[#{num}m#{str}#{reset}"
         end
       end
-      # rubocop:enable Style/FormatStringToken
     end
   end
 end
