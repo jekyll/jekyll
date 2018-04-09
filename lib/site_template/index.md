@@ -7,8 +7,8 @@
 # generated "index.html". You may also alter this front matter block itself
 # if you'd like to, Jekyll won't mind.
 #
-# Checkout the following URL for information on customizing layouts and other
-# files bundled inside a theme-gem:
+# Check out the following URL for information on customizing layouts and other
+# files bundled inside a theme gem:
 # https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: home
