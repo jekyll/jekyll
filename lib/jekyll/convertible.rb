@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "set"
-
 # Convertible provides methods for converting a pagelike item
 # from a certain type of markup into actual content
 #

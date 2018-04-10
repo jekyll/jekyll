@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require "addressable/uri"
-require "json"
-require "liquid"
-
 require_all "jekyll/filters"
 
 module Jekyll
