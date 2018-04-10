@@ -20,6 +20,7 @@
   * Assert existence of &lt;collection&gt;.files (#6907)
   * Bump Rubocop to 0.54.x (#6915)
   * Regenerate unconditionally unless its an incremental build (#6917)
+  * Centralize require statements (#6910)
 
 ### Minor Enhancements
 
