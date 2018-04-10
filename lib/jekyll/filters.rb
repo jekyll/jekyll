@@ -3,6 +3,7 @@
 require "addressable/uri"
 require "json"
 require "liquid"
+require "rubypants"
 
 require_all "jekyll/filters"
 
@@ -32,6 +33,21 @@ module Jekyll
       site = @context.registers[:site]
       converter = site.find_converter_instance(Jekyll::Converters::SmartyPants)
       converter.convert(input.to_s)
+    end
+
+    # A faster subset of the smartify filter, based on the original SmartyPants plugin
+    # and its Ruby port.
+    #
+    # Conversion summary:
+    #   * Straight quotes (" and ') into “curly” quote HTML entities.
+    #   * Backticks-style quotes (``like this'') into “curly” quote HTML entities.
+    #   * Dashes (-- and ---) into en-dash and em-dash entities.
+    #   * Three consecutive dots (... or . . .) into an ellipsis entity.
+    #
+    # Returns copy of input string with certain characters replaced with their
+    # Unicode versions.
+    def smartypants(input)
+      RubyPants.new(input.to_s, [2, :character_entities]).to_html
     end
 
     # Convert a Sass string into CSS output.
