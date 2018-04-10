@@ -36,6 +36,7 @@
   * Allow passing :strict_variables and :strict_filters options to Liquid&#39;s renderer (#6726)
   * Debug writing files during the build process (#6696)
   * Improve regex usage in `Tags::IncludeTag` (#6848)
+  * Improve comment included in the starter index.md (#6916)
 
 ### Documentation
 
