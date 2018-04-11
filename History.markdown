@@ -63,6 +63,7 @@
   * Add missing ul-tag (#6897)
   * doc: add liquid tag plugin jekyll-onebox for html previews (#6898)
   * Add `jekyll-w2m` to plugins (#6855)
+  * Fix tutorials navigation HTML (#6919)
 
 ### Site Enhancements
 
