@@ -261,7 +261,7 @@ toc2:
       {% if item.subfolderitems[0] %}
         <ul>
           {% for entry in item.subfolderitems %}
-              <li><a href="{{ entry.url }}">{{ entry.page }}</a></li>
+              <li><a href="{{ entry.url }}">{{ entry.page }}</a>
                 {% if entry.subsubfolderitems[0] %}
                   <ul>
                   {% for subentry in entry.subsubfolderitems %}
@@ -269,6 +269,7 @@ toc2:
                   {% endfor %}
                   </ul>
                 {% endif %}
+              </li>
           {% endfor %}
         </ul>
       {% endif %}
