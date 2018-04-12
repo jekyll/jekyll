@@ -41,7 +41,6 @@
   * Store and retrieve converter instances for Jekyll::Filters via a hash (#6856)
   * Implement a cache within the `where` filter (#6868)
   * Store regexp in a constant (#6887)
-  * Handle liquid tags in excerpts robustly (#6891)
 
 ### Documentation
 
@@ -83,6 +82,7 @@
   * Improve handling non-default collection documents rendering and writing (#6795)
   * Fix passing multiline params to include tag when using the variable syntax  (#6858)
   * `include_relative` tag should find related documents in collections gathered within custom `collections_dir` (#6818)
+  * Handle liquid tags in excerpts robustly (#6891)
 
 ## 3.7.3 / 2018-02-25
 
