@@ -41,6 +41,7 @@
   * Store and retrieve converter instances for Jekyll::Filters via a hash (#6856)
   * Implement a cache within the `where` filter (#6868)
   * Store regexp in a constant (#6887)
+  * Handle liquid tags in excerpts robustly (#6891)
 
 ### Documentation
 
