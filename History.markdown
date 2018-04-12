@@ -78,6 +78,7 @@
   * Delegated methods after `private` keyword are meant to be private (#6819)
   * Improve handling non-default collection documents rendering and writing (#6795)
   * Fix passing multiline params to include tag when using the variable syntax  (#6858)
+  * `include_relative` tag should find related documents in collections gathered within custom `collections_dir` (#6818)
 
 ## 3.7.3 / 2018-02-25
 
