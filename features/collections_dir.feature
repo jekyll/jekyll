@@ -159,3 +159,51 @@ Feature: Collections Directory
     And I should see exactly "Nested Static content." in "_site/puppies/nested/static_file.txt"
     And the _site/gathering directory should not exist
     And the _site/_posts directory should not exist
+
+  Scenario: Rendered collection with a document that includes a relative document
+    Given I have a _puppies directory
+    And I have the following documents under the puppies collection:
+      | title  | date       | content                         |
+      | INTRO  | 2007-12-31 | excerpt for all docs.           |
+      | Rover  | 2007-12-31 | {% include_relative intro.md %} |
+    And I have a _posts directory
+    And I have the following post:
+      | title         | date       | content         |
+      | Gathered Post | 2009-03-27 | Random Content. |
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      puppies:
+        output: true
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And the "_site/puppies/rover.html" file should exist
+    And I should see "excerpt for all docs." in "_site/puppies/rover.html"
+    And I should see "Random Content." in "_site/2009/03/27/gathered-post.html"
+
+  Scenario: Rendered collection in custom collections_dir with a document that includes a relative document
+    Given I have a collections/_puppies directory
+    And I have the following documents under the "puppies" collection within the "collections" directory:
+      | title  | date       | content                         |
+      | INTRO  | 2007-12-31 | excerpt for all docs.           |
+      | Rover  | 2007-12-31 | {% include_relative intro.md %} |
+    And I have a collections/_posts directory
+    And I have the following post within the "collections" directory:
+      | title         | date       | content         |
+      | Gathered Post | 2009-03-27 | Random Content. |
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      puppies:
+        output: true
+
+    collections_dir: collections
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And the "_site/puppies/rover.html" file should exist
+    And I should see "excerpt for all docs." in "_site/puppies/rover.html"
+    And I should see "Random Content." in "_site/2009/03/27/gathered-post.html"
