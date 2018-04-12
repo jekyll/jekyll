@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+set -e
+
+readonly BUNDLE_GEMFILE="$(pwd)/tmp/bench-site/Gemfile" bundle update
+
+function fold() {
+  if [[ $TRAVIS ]]; then echo "travis_fold:start:$1"; fi
+  $@
+  if [[ $TRAVIS ]]; then echo "travis_fold:end:$1"; fi
+}
+
+function benchmark() {(
+  cd tmp/bench-site
+  fold bundle update
+  echo "$1" > "../$1.txt"
+  start=$(date +%s)
+  bundle exec jekyll build
+  end=$(date +%s)
+  echo "$((end-start))" >> "../$1.txt"
+)}
+
+function gemfile() {
+  cat > tmp/bench-site/Gemfile << EOF
+  source "https://rubygems.org"
+  gem "jekyll", $@
+  gem "minima"
+EOF
+}
+
+function setup() {
+  rm -rf tmp/benchmark tmp/bench-site
+  mkdir -p tmp/bench-site
+  git clone --depth 1 https://github.com/jekyll/benchmarking.git tmp/benchmark
+}
+
+function generate_site() {
+  tmp/benchmark/generate_site.sh 10000 tmp/bench-site
+}
+
+function display() {
+  THIS=$(tail -n 1 tmp/this.txt)
+  MASTER=$(tail -n 1 tmp/master.txt)
+  DIFF=$(echo "scale=2;($THIS-$MASTER)/($MASTER/100)" | bc)
+  if (( THIS < MASTER )); then
+    ADJECTIVE="\033[32mfaster\033[0m"
+  else
+    ADJECTIVE="\033[31mslower\033[0m"
+  fi
+  pr -m -t tmp/this.txt tmp/master.txt
+  echo -e "This is ${DIFF/-/}% $ADJECTIVE than master"
+}
+
+fold setup
+fold generate_site
+
+gemfile ":path => '../..'"
+benchmark this
+
+gemfile ":git => 'https://github.com/jekyll/jekyll.git', branch: 'master'"
+benchmark master
+
+display
