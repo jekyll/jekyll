@@ -40,6 +40,7 @@
   * Improve comment included in the starter index.md (#6916)
   * Store and retrieve converter instances for Jekyll::Filters via a hash (#6856)
   * Implement a cache within the `where` filter (#6868)
+  * Store regexp in a constant (#6887)
 
 ### Documentation
 
