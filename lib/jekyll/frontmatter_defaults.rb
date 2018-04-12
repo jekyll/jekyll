@@ -52,6 +52,8 @@ module Jekyll
     #
     # Returns the default value or nil if none was found
     def find(path, type, setting)
+      return nil if valid_sets.empty?
+
       value = nil
       old_scope = nil
 
@@ -71,8 +73,11 @@ module Jekyll
     #
     # Returns a hash with all default values (an empty hash if there are none)
     def all(path, type)
+      return {} if valid_sets.empty?
+
       defaults = {}
       old_scope = nil
+
       matching_sets(path, type).each do |set|
         if has_precedence?(old_scope, set["scope"])
           defaults = Utils.deep_merge_hashes(defaults, set["values"])
@@ -193,7 +198,7 @@ module Jekyll
     # Returns an array of hashes
     def valid_sets
       sets = @site.config["defaults"]
-      return [] unless sets.is_a?(Array)
+      return [] if sets.empty? || !sets.is_a?(Array)
 
       sets.map do |set|
         if valid?(set)
