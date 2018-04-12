@@ -39,6 +39,7 @@
   * Improve regex usage in `Tags::IncludeTag` (#6848)
   * Improve comment included in the starter index.md (#6916)
   * Store and retrieve converter instances for Jekyll::Filters via a hash (#6856)
+  * Implement a cache within the `where` filter (#6868)
 
 ### Documentation
 
