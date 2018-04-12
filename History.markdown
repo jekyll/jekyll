@@ -41,6 +41,7 @@
   * Store and retrieve converter instances for Jekyll::Filters via a hash (#6856)
   * Implement a cache within the `where` filter (#6868)
   * Store regexp in a constant (#6887)
+  * Optimize computing filename in LiquidRenderer (#6841)
 
 ### Documentation
 
