@@ -36,6 +36,12 @@ If you installed the above - specifically on Fedora 23 - but the extensions woul
 sudo dnf install redhat-rpm-config
 ```
 
+On Arch Linux you need to run:
+
+```sh
+sudo pacman -S ruby-ffi
+```
+
 On Ubuntu if you get stuck after `bundle exec jekyll serve` and see error
 messages like `Could not locate Gemfile` or `.bundle/ directory`, it's likely
 because all requirements have not been fully met. Recent stock Ubuntu
