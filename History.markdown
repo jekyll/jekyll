@@ -68,6 +68,7 @@
   * doc: add liquid tag plugin jekyll-onebox for html previews (#6898)
   * Add `jekyll-w2m` to plugins (#6855)
   * Fix tutorials navigation HTML (#6919)
+  * add Arch Linux instalation troubleshoot (#6782)
 
 ### Site Enhancements
 
