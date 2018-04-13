@@ -1,9 +1,9 @@
 ---
 version: 3.7.3
-name: Jekyll • Simple, blog-aware, static sites
-description: Transform your plain text into static websites and blogs
-url: https://jekyllrb.com
-repository: https://github.com/jekyll/jekyll
+name: Dimas Yuwono
+description: I gotta start somewhere
+url: https://dimazyuwono.github.io
+repository: https://github.com/dimazyuwono
 timezone: America/Los_Angeles
 twitter:
   username: dimazyuwono
