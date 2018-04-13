@@ -93,11 +93,18 @@ following is a reference of the available data.
     </tr>
     <tr>
       <td><p><code>site.pages</code></p></td>
-      <td><p>
+      <td>
+      <p>
 
         A list of all Pages.
 
-      </p></td>
+      </p>
+      <p>
+      
+      Tip: When you commit your changed to GitHub, <code>jekyll</code> command will <strong>Recompiling</strong> on your site. So time will looks <strong>a bit of differend</strong>.
+      
+      </p>
+      </td>
     </tr>
     <tr>
       <td><p><code>site.posts</code></p></td>
