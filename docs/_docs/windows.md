@@ -76,8 +76,10 @@ You can make sure time management is working properly by inspecting your `_posts
 
 [RubyInstaller][] is a self-contained Windows-based installer that includes the Ruby language, an execution environment, important documentation, and more.
 
-1. Download and Install a package manager version from [RubyInstaller Downloads][RubyInstaller-downloads].
-2. Install Jekyll and Bundler via a command prompt window: `gem install jekyll bundler`
+1. Download and Install a **Ruby+Devkit** version from [RubyInstaller Downloads][RubyInstaller-downloads].
+   Use default options for installation.
+2. Open a new command prompt window from the start menu, so that changes to the `PATH` environment variable becomes effective.
+   Install Jekyll and Bundler via: `gem install jekyll bundler`
 3. Check if Jekyll installed properly: `jekyll -v`
 
 [RubyInstaller]: https://rubyinstaller.org/
