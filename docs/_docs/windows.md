@@ -7,13 +7,95 @@ While Windows is not an officially-supported platform, it can be used to run Jek
 
 
 ## Installing Jekyll
+The easiest way to run Jekyll is by using the [RubyInstaller][] for Windows version 2.4 and up.
 
-If you are using Windows 10 Anniversary Update, the easiest way to run Jekyll is by [installing][WSL-Guide] the new Bash on Ubuntu on Windows.
+### Installation via RubyInstaller
+
+[RubyInstaller][] is a self-contained Windows-based installer that includes the Ruby language, an execution environment, important documentation, and more.
+
+1. Download and Install a **Ruby+Devkit** version from [RubyInstaller Downloads][RubyInstaller-downloads].
+   Use default options for installation.
+2. Open a new command prompt window from the start menu, so that changes to the `PATH` environment variable becomes effective.
+   Install Jekyll and Bundler via: `gem install jekyll bundler`
+3. Check if Jekyll installed properly: `jekyll -v`
+
+[RubyInstaller]: https://rubyinstaller.org/
+[RubyInstaller-downloads]: https://rubyinstaller.org/downloads/
 
 
-### Installation via Bash on Windows 10
+### Install github-pages
 
-*Note:* You must have [Bash on Ubuntu on Windows][BASH-WSL] enabled.
+You need RubyInstaller-2.4 or newer with installed Devkit.
+RubyInstaller versions before 2.4 are not compatible to jekyll!
+
+  * Open command prompt and install [Bundler][]: `gem install bundler`
+  * Create a file called `Gemfile` without any extension in your root directory of your blog
+  * Copy & paste the two lines into the file:
+
+
+```ruby
+source 'https://rubygems.org'
+gem 'github-pages', group: :jekyll_plugins
+```
+
+ * Open a command prompt, target your local blog repository root, and install github-pages: `bundle install`
+
+After this process you should have github-pages installed on your system and you can host your blog with `jekyll s`.
+
+[Bundler]: http://bundler.io/ "Ruby Dependencie Manager"
+
+Optionally you can use [Autoinstall Jekyll for Windows][fastjekyll-autoinstall].
+
+[fastjekyll-autoinstall]: https://github.com/KeJunMao/fastjekyll#autoinstall-jekyll-for-windows
+
+
+### Encoding
+
+If you use UTF-8 encoding, make sure that no `BOM` header characters exist in your files or very, very bad things will happen to
+Jekyll. This is especially relevant when you're running Jekyll on Windows.
+
+Additionally, you might need to change the code page of the console window to UTF-8 in case you get a "Liquid Exception: Incompatible character encoding" error during the site generation process. It can be done with the following command:
+
+```sh
+chcp 65001
+```
+
+
+### Time-Zone Management
+
+Since Windows doesn't have a native source of zoneinfo data, the Ruby Interpreter would not understand IANA Timezones and hence using them had the `TZ` environment variable default to UTC/GMT 00:00.
+Though Windows users could alternatively define their blog's timezone by setting the key to use POSIX format of defining timezones, it wasn't as user-friendly when it came to having the clock altered to changing DST-rules.
+
+Jekyll now uses a rubygem to internally configure Timezone based on established [IANA Timezone Database][IANA-database].
+While 'new' blogs created with Jekyll v3.4 and greater, will have the following added to their 'Gemfile' by default, existing sites *will* have to update their 'Gemfile' (and installed) to enable development on Windows:
+
+```ruby
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+```
+
+[IANA-database]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+
+### Auto Regeneration
+
+Jekyll uses the `listen` gem to watch for changes when the `--watch` switch is specified during a build or serve. While `listen` has built-in support for UNIX systems, it may require an extra gem for compatibility with Windows.
+
+Add the following to the Gemfile for your site if you have issues with auto-regeneration on Windows alone:
+
+```ruby
+gem 'wdm', '~> 0.1.1' if Gem.win_platform?
+```
+
+You have to use a [Ruby+Devkit](https://rubyinstaller.org/downloads/) version of the RubyInstaller.
+
+
+## Installation via Bash on Windows 10
+
+If you are using Windows 10 version 1607 or later, another option to run Jekyll is by [installing][WSL-Guide] the Windows Subsystem for Linux.
+
+
+*Note:* You must have [Windows Subsystem for Linux][BASH-WSL] enabled.
 
 First let's make sure all our packages / repositories are up to date. Open a new Command Prompt instance, and type the following:
 
@@ -71,83 +153,3 @@ You can make sure time management is working properly by inspecting your `_posts
 [WSL-Guide]: https://msdn.microsoft.com/en-us/commandline/wsl/install_guide
 [BASH-WSL]: https://msdn.microsoft.com/en-us/commandline/wsl/about
 
-
-### Installation via RubyInstaller
-
-[RubyInstaller][] is a self-contained Windows-based installer that includes the Ruby language, an execution environment, important documentation, and more.
-
-1. Download and Install a **Ruby+Devkit** version from [RubyInstaller Downloads][RubyInstaller-downloads].
-   Use default options for installation.
-2. Open a new command prompt window from the start menu, so that changes to the `PATH` environment variable becomes effective.
-   Install Jekyll and Bundler via: `gem install jekyll bundler`
-3. Check if Jekyll installed properly: `jekyll -v`
-
-[RubyInstaller]: https://rubyinstaller.org/
-[RubyInstaller-downloads]: https://rubyinstaller.org/downloads/
-
-
-### Install github-pages
-
-You need RubyInstaller-2.4 or newer with installed Devkit.
-RubyInstaller versions before 2.4 are not compatible to jekyll!
-
-  * Open command prompt and install [Bundler][]: `gem install bundler`
-  * Create a file called `Gemfile` without any extension in your root directory of your blog
-  * Copy & paste the two lines into the file:
-
-
-```ruby
-source 'https://rubygems.org'
-gem 'github-pages', group: :jekyll_plugins
-```
-
- * Open a command prompt, target your local blog repository root, and install github-pages: `bundle install`
-
-After this process you should have github-pages installed on your system and you can host your blog with `jekyll s`.
-
-[Bundler]: http://bundler.io/ "Ruby Dependencie Manager"
-
-Optionally you can use [Autoinstall Jekyll for Windows][fastjekyll-autoinstall].
-
-[fastjekyll-autoinstall]: https://github.com/KeJunMao/fastjekyll#autoinstall-jekyll-for-windows
-
-
-## Encoding
-
-If you use UTF-8 encoding, make sure that no `BOM` header characters exist in your files or very, very bad things will happen to
-Jekyll. This is especially relevant when you're running Jekyll on Windows.
-
-Additionally, you might need to change the code page of the console window to UTF-8 in case you get a "Liquid Exception: Incompatible character encoding" error during the site generation process. It can be done with the following command:
-
-```sh
-chcp 65001
-```
-
-
-## Time-Zone Management
-
-Since Windows doesn't have a native source of zoneinfo data, the Ruby Interpreter would not understand IANA Timezones and hence using them had the `TZ` environment variable default to UTC/GMT 00:00.
-Though Windows users could alternatively define their blog's timezone by setting the key to use POSIX format of defining timezones, it wasn't as user-friendly when it came to having the clock altered to changing DST-rules.
-
-Jekyll now uses a rubygem to internally configure Timezone based on established [IANA Timezone Database][IANA-database].
-While 'new' blogs created with Jekyll v3.4 and greater, will have the following added to their 'Gemfile' by default, existing sites *will* have to update their 'Gemfile' (and installed) to enable development on Windows:
-
-```ruby
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-```
-
-[IANA-database]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-
-
-## Auto Regeneration
-
-Jekyll uses the `listen` gem to watch for changes when the `--watch` switch is specified during a build or serve. While `listen` has built-in support for UNIX systems, it may require an extra gem for compatibility with Windows.
-
-Add the following to the Gemfile for your site if you have issues with auto-regeneration on Windows alone:
-
-```ruby
-gem 'wdm', '~> 0.1.1' if Gem.win_platform?
-```
-
-You have to use a [Ruby+Devkit](https://rubyinstaller.org/downloads/) version of the RubyInstaller.
