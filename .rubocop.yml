@@ -49,11 +49,9 @@ Layout/MultilineOperationIndentation:
 Lint/NestedPercentLiteral:
   Exclude:
     - test/test_site.rb
-Layout/SpaceInsideBrackets:
-  Enabled: false
 Layout/EmptyComment:
   Enabled: false
-Lint/EndAlignment:
+Layout/EndAlignment:
   Severity: error
 Lint/UnreachableCode:
   Severity: error
