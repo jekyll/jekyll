@@ -134,7 +134,8 @@ If you see the following error when running the `jekyll new` command,
 you can solve it by using the above-described procedure:
 
 ```sh
-$ jekyll new test
+jekyll new test
+
 Running bundle install in /home/user/test...
 
 Your user account isn't allowed to install to the system RubyGems.
@@ -289,7 +290,7 @@ problems.
 
 ### Liquid
 
-Liquid version 2.0, seems to break the use of `{{ "{{" }}` in templates.
+Liquid version 2.0 seems to break the use of `{{ "{{" }}` in templates.
 Unlike previous versions, using `{{ "{{" }}` in 2.0 triggers the following error:
 
 ```sh
