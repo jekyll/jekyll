@@ -5,7 +5,7 @@ permalink: /docs/installation/
 ---
 
 Jekyll is a [Ruby Gem](http://guides.rubygems.org/rubygems-basics/), and can be
-installed easily on most systems.
+installed on most systems.
 
 - [Requirements](#requirements)
 - [Install Jekyll on macOS](#macOS)
