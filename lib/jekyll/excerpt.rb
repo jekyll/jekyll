@@ -120,6 +120,10 @@ module Jekyll
     # Excerpts are rendered same time as content is rendered.
     #
     # Returns excerpt String
+
+    LIQUID_TAG_REGEX = %r!{%\s*(\w+).+\s*%}!m
+    MKDWN_LINK_REF_REGEX = %r!^ {0,3}\[[^\]]+\]:.+$!
+
     def extract_excerpt(doc_content)
       head, _, tail = doc_content.to_s.partition(doc.excerpt_separator)
 
@@ -127,7 +131,7 @@ module Jekyll
       # partitioning resulted in leaving the closing tag somewhere in the "tail"
       # partition.
       if head.include?("{%")
-        head =~ %r!{%\s*(\w+).+\s*%}!
+        head =~ LIQUID_TAG_REGEX
         tag_name = Regexp.last_match(1)
 
         if liquid_block?(tag_name) && head.match(%r!{%\s*end#{tag_name}\s*%}!).nil?
@@ -139,7 +143,7 @@ module Jekyll
       if tail.empty?
         head
       else
-        head.to_s.dup << "\n\n" << tail.scan(%r!^ {0,3}\[[^\]]+\]:.+$!).join("\n")
+        head.to_s.dup << "\n\n" << tail.scan(MKDWN_LINK_REF_REGEX).join("\n")
       end
     end
 

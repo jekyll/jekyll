@@ -261,7 +261,7 @@ toc2:
       {% if item.subfolderitems[0] %}
         <ul>
           {% for entry in item.subfolderitems %}
-              <li><a href="{{ entry.url }}">{{ entry.page }}</a></li>
+              <li><a href="{{ entry.url }}">{{ entry.page }}</a>
                 {% if entry.subsubfolderitems[0] %}
                   <ul>
                   {% for subentry in entry.subsubfolderitems %}
@@ -269,6 +269,7 @@ toc2:
                   {% endfor %}
                   </ul>
                 {% endif %}
+              </li>
           {% endfor %}
         </ul>
       {% endif %}
@@ -396,9 +397,11 @@ In addition to inserting items from the YAML data file into your list, you also 
 </style>
 
 <div class="highlight result">
-   <li class=""><a href="#">Introduction</a></li>
-   <li class=""><a href="#">Configuration</a></li>
-   <li class="active"><a href="#">Deployment</a></li>
+   <ul>
+      <li class=""><a href="#">Introduction</a></li>
+      <li class=""><a href="#">Configuration</a></li>
+      <li class="active"><a href="#">Deployment</a></li>
+   </ul>
 </div>
 
 In this case, assume `Deployment` is the current page.

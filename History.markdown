@@ -16,6 +16,12 @@
   * Memoize document output extension (#6814)
   * Access document permalink attribute efficiently (#6740)
   * Minimize array allocations in the `where` filter (#6860)
+  * Bump JRuby (#6878)
+  * Assert existence of &lt;collection&gt;.files (#6907)
+  * Bump Rubocop to 0.54.x (#6915)
+  * Regenerate unconditionally unless its an incremental build (#6917)
+  * Centralize require statements (#6910)
+  * Bump to Rubocop 0.55 (#6929)
 
 ### Minor Enhancements
 
@@ -32,6 +38,11 @@
   * Allow passing :strict_variables and :strict_filters options to Liquid&#39;s renderer (#6726)
   * Debug writing files during the build process (#6696)
   * Improve regex usage in `Tags::IncludeTag` (#6848)
+  * Improve comment included in the starter index.md (#6916)
+  * Store and retrieve converter instances for Jekyll::Filters via a hash (#6856)
+  * Implement a cache within the `where` filter (#6868)
+  * Store regexp in a constant (#6887)
+  * Optimize computing filename in LiquidRenderer (#6841)
 
 ### Documentation
 
@@ -51,6 +62,16 @@
   * add missing step for gem-based theme conversion (#6802)
   * Update windows.md to explain an issue with jekyll new. (#6838)
   * Add Bundler Installation Instructions (#6828)
+  * Docs: describe difference between tags and categories (#6882)
+  * Add `jekyll-random` plugin to docs (#6833)
+  * Fixed typo in description of categories and tags (#6896)
+  * Add missing ul-tag (#6897)
+  * doc: add liquid tag plugin jekyll-onebox for html previews (#6898)
+  * Add `jekyll-w2m` to plugins (#6855)
+  * Fix tutorials navigation HTML (#6919)
+  * add Arch Linux instalation troubleshoot (#6782)
+  * Docs: Install Jekyll on macOS (#6881)
+  * Fix CodeClimate badges [ci skip] (#6930)
 
 ### Site Enhancements
 
@@ -65,6 +86,8 @@
   * Delegated methods after `private` keyword are meant to be private (#6819)
   * Improve handling non-default collection documents rendering and writing (#6795)
   * Fix passing multiline params to include tag when using the variable syntax  (#6858)
+  * `include_relative` tag should find related documents in collections gathered within custom `collections_dir` (#6818)
+  * Handle liquid tags in excerpts robustly (#6891)
 
 ## 3.7.3 / 2018-02-25
 

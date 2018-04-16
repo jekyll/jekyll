@@ -25,7 +25,6 @@ module Jekyll
       end
 
       def to_json(state = nil)
-        require "json"
         JSON.generate(to_h, state)
       end
     end

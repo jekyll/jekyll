@@ -20,6 +20,7 @@ module Jekyll
     #
     # Returns a boolean.
     def regenerate?(document)
+      return true if disabled
       case document
       when Page
         regenerate_page?(document)
