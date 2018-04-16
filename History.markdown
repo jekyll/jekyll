@@ -22,6 +22,7 @@
   * Regenerate unconditionally unless its an incremental build (#6917)
   * Centralize require statements (#6910)
   * Bump to Rubocop 0.55 (#6929)
+  * Refactor private method `HighlightBlock#parse_options` (#6822)
 
 ### Minor Enhancements
 
