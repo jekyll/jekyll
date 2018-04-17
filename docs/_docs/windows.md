@@ -30,7 +30,7 @@ Now we can install Ruby. To do this we will use a repository from [BrightBox](ht
 ```sh
 sudo apt-add-repository ppa:brightbox/ruby-ng
 sudo apt-get update
-sudo apt-get install ruby2.3 ruby2.3-dev build-essential
+sudo apt-get install ruby2.3 ruby2.3-dev build-essential dh-autoreconf
 ```
 
 Next let's update our Ruby gems:
@@ -61,8 +61,12 @@ jekyll new my_blog
 
 You can make sure time management is working properly by inspecting your `_posts` folder. You should see a markdown file with the current date in the filename.
 
-**Note:** Bash on Ubuntu on Windows is still under development, so you may run into issues.
+<div class="note info">
+  <h5>Non-superuser account issues</h5>
+  <p>If the `jekyll new` command prints the error "Your user account isn't allowed to install to the system RubyGems", see the "Running Jekyll as Non-Superuser" instructions in <a href="/docs/troubleshooting/#no-sudo">Troubleshooting</a>.</p>
+</div>
 
+**Note:** Bash on Ubuntu on Windows is still under development, so you may run into issues.
 
 [WSL-Guide]: https://msdn.microsoft.com/en-us/commandline/wsl/install_guide
 [BASH-WSL]: https://msdn.microsoft.com/en-us/commandline/wsl/about

@@ -11,12 +11,11 @@ module Jekyll
       def_delegators :@obj, :label, :docs, :files, :directory,
                             :relative_directory
 
+      private def_delegator :@obj, :metadata, :fallback_data
+
       def to_s
         docs.to_s
       end
-
-      private
-      def_delegator :@obj, :metadata, :fallback_data
     end
   end
 end

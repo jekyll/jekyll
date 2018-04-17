@@ -19,6 +19,13 @@ class TestRedcarpet < JekyllUnitTest
       }
 
       @markdown = Converters::Markdown.new @config
+
+      @sample = Jekyll::Utils.strip_heredoc(<<-EOS
+        ```ruby
+        puts "Hello world"
+        ```
+      EOS
+                                           )
     end
 
     should "pass redcarpet options" do
@@ -35,7 +42,7 @@ class TestRedcarpet < JekyllUnitTest
 
     should "pass redcarpet render options" do
       assert_equal "<p><strong>bad code not here</strong>: i am bad</p>",
-              @markdown.convert("**bad code not here**: <script>i am bad</script>").strip
+        @markdown.convert("**bad code not here**: <script>i am bad</script>").strip
     end
 
     context "with pygments enabled" do
@@ -46,16 +53,12 @@ class TestRedcarpet < JekyllUnitTest
       end
 
       should "render fenced code blocks with syntax highlighting" do
-        assert_equal "<div class=\"highlight\"><pre><code class=\"language-ruby\" "\
-                     "data-lang=\"ruby\"><span class=\"nb\">puts</span> <span "\
-                     "class=\"s2\">&quot;Hello world&quot;</span>\n</code></pre></div>",
-                     @markdown.convert(
-                       <<-EOS
-```ruby
-puts "Hello world"
-```
-EOS
-                     ).strip
+        assert_equal(
+          %(<div class="highlight"><pre><code class="language-ruby" ) +
+          %(data-lang="ruby"><span></span><span class="nb">puts</span> <span ) +
+          %(class="s2">&quot;Hello world&quot;</span>\n</code></pre></div>),
+          @markdown.convert(@sample).strip
+        )
       end
     end
 
@@ -65,16 +68,12 @@ EOS
       end
 
       should "render fenced code blocks with syntax highlighting" do
-        assert_equal "<div class=\"highlight\"><pre><code class=\"language-ruby\" "\
-                     "data-lang=\"ruby\"><span class=\"nb\">puts</span> <span "\
-                     "class=\"s2\">\"Hello world\"</span>\n</code></pre></div>",
-                     @markdown.convert(
-                       <<-EOS
-```ruby
-puts "Hello world"
-```
-          EOS
-                     ).strip
+        assert_equal(
+          %(<div class="highlight"><pre><code class="language-ruby" ) +
+          %(data-lang="ruby"><span class="nb">puts</span> <span ) +
+          %(class="s2">"Hello world"</span>\n</code></pre></div>),
+          @markdown.convert(@sample).strip
+        )
       end
     end
 
@@ -84,16 +83,11 @@ puts "Hello world"
       end
 
       should "render fenced code blocks without syntax highlighting" do
-        assert_equal "<figure class=\"highlight\"><pre><code class=\"language-ruby\" "\
-                     "data-lang=\"ruby\">puts &quot;Hello world&quot;\n</code></pre>"\
-                     "</figure>",
-                     @markdown.convert(
-                       <<-EOS
-```ruby
-puts "Hello world"
-```
-          EOS
-                     ).strip
+        assert_equal(
+          %(<figure class="highlight"><pre><code class="language-ruby" ) +
+          %(data-lang="ruby">puts &quot;Hello world&quot;\n</code></pre></figure>),
+          @markdown.convert(@sample).strip
+        )
       end
     end
   end

@@ -5,14 +5,13 @@ language: ruby
 sudo: false
 
 rvm:
-  - &ruby1 2.4.2
-  - &ruby2 2.3.5
-  - &jruby jruby-9.1.13.0
+  - &ruby1 2.5.1
+  - &ruby2 2.4.4
+  - &ruby3 2.3.7
+  - &jruby jruby-9.1.16.0
 
 matrix:
   include:
-    - rvm: *ruby1
-      env: TEST_SUITE=test ROUGE=1.11.1
     - rvm: *ruby1
       env: TEST_SUITE=fmt
     - rvm: *ruby1
@@ -55,3 +54,4 @@ after_success:
 
 before_install:
   - gem update --system
+  - gem install bundler

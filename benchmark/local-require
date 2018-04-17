@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'benchmark/ips'
+require 'jekyll'
+require 'json'
+
+DATA = {"foo"=>"bar", "alpha"=>{"beta"=>"gamma"}, "lipsum"=>["lorem", "ipsum", "dolor"]}
+
+def local_require
+  require 'json'
+  JSON.pretty_generate(DATA)
+end
+
+def global_require
+  JSON.pretty_generate(DATA)
+end
+
+def graceful_require
+  Jekyll::External.require_with_graceful_fail("json")
+  JSON.pretty_generate(DATA)
+end
+
+Benchmark.ips do |x|
+  x.report("local-require") { local_require }
+  x.report("global-require") { global_require }
+  x.report("graceful-require") { graceful_require }
+  x.compare!
+end

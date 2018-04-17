@@ -69,7 +69,7 @@ module Jekyll
 
       private
       def proc_version
-        @cached_proc_version ||= begin
+        @proc_version ||= begin
           Pathutil.new(
             "/proc/version"
           ).read

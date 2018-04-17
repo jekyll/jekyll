@@ -48,7 +48,7 @@
 ## My Reproduction Steps
 
 <!--
-  If this error occured on GitHub Pages, please try to provide us with logs,
+  If this error occurred on GitHub Pages, please try to provide us with logs,
   and look at them yourself, to determine if this is an actual Jekyll bug. In
   the event you are unsure, file a ticket, however, when you do please provide
   the logs (strip them of personal information.)

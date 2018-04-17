@@ -53,7 +53,7 @@ sass:
 The Sass converter will default the `sass_dir` configuration option to
 `_sass`.
 
-[example-sass]: https://github.com/jekyll/jekyll-sass-converter/tree/master/example
+[example-sass]: https://github.com/jekyll/jekyll-sass-converter/tree/master/docs
 
 <div class="note info">
   <h5>The <code>sass_dir</code> is only used by Sass</h5>

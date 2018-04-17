@@ -1,23 +1,33 @@
 .searchbox {
+  padding-top: 1px;
   .searchbox__input {
-    padding: 5px 5px 5px 29px;
+    padding: 6px 5px 5px 29px;
+    font-size: 0.75em;
     border: none;
     border-radius: 5px;
-    color: #444;
+    color: #555;
+    background-color: #333 !important;
+    box-shadow: 0 0 1px 0 #555;
 
     &::-webkit-input-placeholder {
       color: #aaa;
     }
-
     &:-ms-input-placeholder {
       color: #aaa;
     }
-
     &::placeholder {
       color: #aaa;
     }
+
+    &:focus, &:active {
+      color: #eaeaea;
+      background-color: #252525 !important;
+    }
   }
 }
+
+.searchbox__submit svg { fill: #fc0 }
+.searchbox__reset svg { fill: #999 }
 
 .algolia-autocomplete {
   .ds-dropdown-menu {

@@ -93,6 +93,20 @@ you come up with your own tags via plugins.
     </tr>
     <tr>
       <td>
+        <p class="name"><strong>Date to String in ordinal US style</strong></p>
+        <p>Format a date to ordinal, US, short format.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ site.time | date_to_string: "ordinal", "US" }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">Nov 7th, 2008</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p class="name"><strong>Date to Long String</strong></p>
         <p>Format a date to long format.</p>
       </td>
@@ -102,6 +116,20 @@ you come up with your own tags via plugins.
         </p>
         <p>
           <code class="output">07 November 2008</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="name"><strong>Date to Long String in ordinal UK style</strong></p>
+        <p>Format a date to ordinal, UK, long format.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ site.time | date_to_long_string: "ordinal" }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">7th November 2008</code>
         </p>
       </td>
     </tr>
@@ -429,7 +457,7 @@ The default is `default`. They are as follows (with what they filter):
 - `default`: spaces and non-alphanumeric characters
 - `pretty`: spaces and non-alphanumeric characters except for `._~!$&'()+,;=@`
 - `ascii`: spaces, non-alphanumeric, and non-ASCII characters
-- `latin`: like `default`, except Latin characters are first transliterated (e.g. `àèïòü` to `aeiou`)
+- `latin`: like `default`, except Latin characters are first transliterated (e.g. `àèïòü` to `aeiou`) {%- include docs_version_badge.html version="3.7.0" -%}
 
 ## Tags
 
