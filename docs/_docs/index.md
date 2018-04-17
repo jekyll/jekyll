@@ -4,13 +4,7 @@ permalink: /docs/home/
 redirect_from: /docs/index.html
 ---
 
-This site is a comprehensive guide to Jekyll. We’ll cover topics such as:
-
-  - Getting your site up and running
-  - Creating and managing your content
-  - Customizing how your site works and looks
-  - Deploying to various environments
-  - Participating in the development of Jekyll
+This site is a comprehensive guide to Jekyll. We’ll cover topics such as getting your site up and running, creating and managing content, customizing your build, and deploying.
 
 ## What is Jekyll, exactly?
 
