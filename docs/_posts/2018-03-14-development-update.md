@@ -19,4 +19,8 @@ That being said, the development period of version 4.0 begins _now_. This means 
 - Same with bug fixes, unless they concern something introduced in Jekyll 3.7 or 3.8, in which case we will backport the fixes and release a patch version.
 - Now is a great time to finally take on the feature you've wanted to see in Jekyll for ages! Just open an issue or experiment with the code to get going!
 
+As for a release date, we're currently aiming for late summer, around September or so. However, keep in mind that this project is purely volunteer-run, and as such, delays might occur and we might not hit that release date.
+
+Finally, this is a great time for newcomers to open-source to make their first contribution! We'll be doing our best to mark recommended contributions and create newcomer-friendly issues, as well as to provide mentoring through the contribution process (although we'd like to think that we're already pretty proficient at that). So if you've always been hestitant about contributing to a large open-source project, Jekyll is a good place to start!
+
 [issue]: http://google.com
