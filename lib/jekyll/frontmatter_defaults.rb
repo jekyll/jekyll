@@ -133,8 +133,7 @@ module Jekyll
     def strip_collections_dir(path)
       collections_dir  = @site.config["collections_dir"]
       slashed_coll_dir = "#{collections_dir}/"
-      return path if collections_dir.empty?
-      return path unless path.to_s.start_with?(slashed_coll_dir)
+      return path if collections_dir.empty? || !path.to_s.start_with?(slashed_coll_dir)
       path.sub(slashed_coll_dir, "")
     end
 
