@@ -1,13 +1,13 @@
 ---
 title: "Jekyll 4.0 is on the Horizon!"
-date: "2018-03-14 16:07:00 +0100"
+date: "2018-04-19 16:07:00 +0100"
 author: oe
 categories: [community]
 ---
 
 With the release of Jekyll 3.8.0, it's been 2 and a half years since the last major release. Jekyll 3.0.0 was released in late October of 2015! That's a long time ago, and we've been working towards the next major release of Jekyll for a couple of months now. Here's a small preview of what's to come:
 
-- Dropping support for Ruby 2.1 and 2.2. Both versions are reaching or have reached their EOL period.
+- Dropping support for Ruby 2.1 and 2.2. Both versions have reached their EOL period.
 - Dropping Pygments as a dependency. We're already defaulting to Rouge, and this removes the implicit Python dependency. (finally!)
 - Making the `link` tag use relative URLs. This is a big breaking change, but it's the cleaner solution.
 
@@ -21,7 +21,7 @@ That being said, the development period of version 4.0 begins _now_. This means 
 
 As for a release date, we're currently aiming for late summer, around September or so. However, keep in mind that this project is purely volunteer-run, and as such, delays might occur and we might not hit that release date.
 
-Finally, this is a great time for newcomers to open-source to make their first contribution! We'll be doing our best to mark recommended contributions and create newcomer-friendly issues, as well as to provide mentoring through the contribution process (although we'd like to think that we're already pretty proficient at that). So if you've always been hestitant about contributing to a large open-source project, Jekyll is a good place to start!
+Finally, this is a great time for newcomers to open-source to make their first contribution! We'll be doing our best to mark recommended contributions and create newcomer-friendly issues, as well as to provide mentoring throughout the contribution process (although we'd like to think that we're already pretty proficient at that). So if you've always been hestitant about contributing to a large open-source project, Jekyll is a good place to start!
 
 Happy Jekylling! :wave:
 
