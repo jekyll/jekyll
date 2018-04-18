@@ -73,6 +73,7 @@
   * add Arch Linux instalation troubleshoot (#6782)
   * Docs: Install Jekyll on macOS (#6881)
   * Fix CodeClimate badges [ci skip] (#6930)
+  * Update index.md (#6933)
 
 ### Site Enhancements
 
