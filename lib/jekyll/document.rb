@@ -12,7 +12,7 @@ module Jekyll
 
     YAML_FRONT_MATTER_REGEXP = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m
     DATELESS_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.[^.]+)$!
-    DATE_FILENAME_MATCHER = %r!^(?:.+?/)*?(\d{2,4}-\d{1,2}-\d{1,2})-(.*)(\.[^.]+)$!
+    DATE_FILENAME_MATCHER = %r!^(?>.+?/)*?(\d{2,4}-\d{1,2}-\d{1,2})-(.*)(\.[^.]+)$!
 
     # Create a new Document.
     #

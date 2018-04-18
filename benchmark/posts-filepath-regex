@@ -4,7 +4,7 @@
 require 'benchmark/ips'
 
 DATE_POST_MATCHER      = %r!^(?:.+/)*(\d{2,4}-\d{1,2}-\d{1,2})-(.*)(\.[^.]+)$!
-LAZY_DATE_POST_MATCHER = %r!^(?:.+?/)*?(\d{2,4}-\d{1,2}-\d{1,2})-(.*)(\.[^.]+)$!
+LAZY_DATE_POST_MATCHER = %r!^(?>.+?/)*?(\d{2,4}-\d{1,2}-\d{1,2})-(.*)(\.[^.]+)$!
 
 DATED_FILES = %w(
   2018-04-15-update-on-jekyll-s-google-summer-of-code-projects.markdown
