@@ -23,4 +23,6 @@ As for a release date, we're currently aiming for late summer, around September 
 
 Finally, this is a great time for newcomers to open-source to make their first contribution! We'll be doing our best to mark recommended contributions and create newcomer-friendly issues, as well as to provide mentoring through the contribution process (although we'd like to think that we're already pretty proficient at that). So if you've always been hestitant about contributing to a large open-source project, Jekyll is a good place to start!
 
+Happy Jekylling! :wave:
+
 [issue]: http://google.com
