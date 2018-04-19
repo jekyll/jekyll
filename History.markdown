@@ -90,6 +90,7 @@
   * Fix passing multiline params to include tag when using the variable syntax  (#6858)
   * `include_relative` tag should find related documents in collections gathered within custom `collections_dir` (#6818)
   * Handle liquid tags in excerpts robustly (#6891)
+  * Allow front matter defaults to be applied properly to documents gathered under custom `collections_dir` (#6885)
 
 ## 3.7.3 / 2018-02-25
 
