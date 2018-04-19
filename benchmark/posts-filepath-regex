@@ -15,9 +15,9 @@ DATED_FILES = %w(
 POST_FILENAMES = DATED_FILES.concat(
   DATED_FILES.map do |filename|
     [
-      "_posts/" + filename,
-      "_posts/category_a/" + filename,
-      "_posts/category_a/category_b/" + filename
+      '_posts/' + filename,
+      'category_a/_posts/' + filename,
+      'category_a/category_b/_posts/' + filename
     ]
   end
 ).flatten.freeze
