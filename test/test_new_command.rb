@@ -6,7 +6,7 @@ require "jekyll/commands/new"
 class TestNewCommand < JekyllUnitTest
   def dir_contents(path)
     Dir["#{path}/**/*"].each do |file|
-      file.gsub! path, ""
+      file.gsub! "#{path}/", ""
     end
   end
 
@@ -52,12 +52,12 @@ class TestNewCommand < JekyllUnitTest
       static_template_files = dir_contents(site_template).reject do |f|
         File.extname(f) == ".erb"
       end
-      static_template_files << "/Gemfile"
+      static_template_files << "Gemfile"
 
       capture_output { Jekyll::Commands::New.process(@args) }
 
       new_site_files = dir_contents(@full_path).reject do |f|
-        File.extname(f) == ".markdown"
+        f.end_with?("welcome-to-jekyll.md")
       end
 
       assert_same_elements static_template_files, new_site_files
@@ -86,7 +86,7 @@ class TestNewCommand < JekyllUnitTest
     end
 
     should "create blank project" do
-      blank_contents = %w(/_drafts /_layouts /_posts /index.html)
+      blank_contents = %w(_drafts _layouts _posts index.html)
       output = capture_output { Jekyll::Commands::New.process(@args, "--blank") }
       bundle_message = "Running bundle install in #{@full_path.cyan}..."
       assert_same_elements blank_contents, dir_contents(@full_path)
