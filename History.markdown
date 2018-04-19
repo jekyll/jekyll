@@ -1,3 +1,9 @@
+## HEAD
+
+### Documentation
+
+  * Release post for v3.8.0 (#6849)
+
 ## 3.8.0 / 2018-04-19
 
 ### Development Fixes
