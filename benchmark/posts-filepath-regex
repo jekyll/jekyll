@@ -70,3 +70,18 @@ POST_FILENAMES.each do |filename|
     x.compare!
   end
 end
+
+MARKDOWN_EXT = 'category_a/category_b/_posts/2018-04-15-update-on-jekyll-s-google-summer-of-code-projects.markdown'
+MD_EXT = 'category_a/category_b/_posts/2018-04-15-update-on-jekyll-s-google-summer-of-code-projects.md'
+
+Benchmark.ips do |x|
+  x.report('.markdown + current') { match_post(MARKDOWN_EXT, DATE_POST_MATCHER) }
+  x.report('.md + current') { match_post(MD_EXT, DATE_POST_MATCHER) }
+  x.compare!
+end
+
+Benchmark.ips do |x|
+  x.report('.markdown + proposed') { match_post(MARKDOWN_EXT, LAZY_DATE_POST_MATCHER) }
+  x.report('.md + proposed') { match_post(MD_EXT, LAZY_DATE_POST_MATCHER) }
+  x.compare!
+end
