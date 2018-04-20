@@ -122,9 +122,10 @@ dependencies.
 sudo apt-get install ruby ruby-dev build-essential
 ```
 
-It is best to avoid installing Ruby Gems as the root user. Therefore, we need
-to set up a gem installation directory for your user account. Run the following
-commands to add some configuration to your `.bashrc` file.
+It is best to avoid installing Ruby Gems as the root user. Therefore, we need to
+set up a gem installation directory for your user account. The following
+commands will add environment variables to your `~/.bashrc` file to configure
+the gem installation path. Run them now:
 
 ```sh
 echo '# Install Ruby Gems to ~/gems' >> ~/.bashrc
