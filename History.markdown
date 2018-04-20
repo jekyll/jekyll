@@ -5,6 +5,10 @@
   * Release post for v3.8.0 (#6849)
   * Add Installation Instructions for Ubuntu (#6925)
 
+### Minor Enhancements
+
+  * use jekyll-compose if installed (#6932)
+
 ## 3.8.0 / 2018-04-19
 
 ### Development Fixes
