@@ -7,11 +7,12 @@ While Windows is not an officially-supported platform, it can be used to run Jek
 
 
 ## Installing Jekyll
-The easiest way to run Jekyll is by using the [RubyInstaller][] for Windows version 2.4 and up.
+The easiest way to run Jekyll is by using the [RubyInstaller][] for Windows.
 
 ### Installation via RubyInstaller
 
 [RubyInstaller][] is a self-contained Windows-based installer that includes the Ruby language, an execution environment, important documentation, and more.
+We only cover RubyInstaller-2.4 and newer here, older versions need to [install the Devkit][Devkit-install] manually.
 
 1. Download and Install a **Ruby+Devkit** version from [RubyInstaller Downloads][RubyInstaller-downloads].
    Use default options for installation.
@@ -19,34 +20,11 @@ The easiest way to run Jekyll is by using the [RubyInstaller][] for Windows vers
    Install Jekyll and Bundler via: `gem install jekyll bundler`
 3. Check if Jekyll installed properly: `jekyll -v`
 
+That's it, you're ready to install our [default minimal blog theme](https://github.com/jekyll/minima) with `jekyll new jekyll-website`.
+
 [RubyInstaller]: https://rubyinstaller.org/
 [RubyInstaller-downloads]: https://rubyinstaller.org/downloads/
-
-
-### Install github-pages
-
-You need RubyInstaller-2.4 or newer with installed Devkit.
-RubyInstaller versions before 2.4 are not compatible to jekyll!
-
-  * Open command prompt and install [Bundler][]: `gem install bundler`
-  * Create a file called `Gemfile` without any extension in your root directory of your blog
-  * Copy & paste the two lines into the file:
-
-
-```ruby
-source 'https://rubygems.org'
-gem 'github-pages', group: :jekyll_plugins
-```
-
- * Open a command prompt, target your local blog repository root, and install github-pages: `bundle install`
-
-After this process you should have github-pages installed on your system and you can host your blog with `jekyll s`.
-
-[Bundler]: http://bundler.io/ "Ruby Dependencie Manager"
-
-Optionally you can use [Autoinstall Jekyll for Windows][fastjekyll-autoinstall].
-
-[fastjekyll-autoinstall]: https://github.com/KeJunMao/fastjekyll#autoinstall-jekyll-for-windows
+[Devkit-install]: https://github.com/oneclick/rubyinstaller/wiki/Development-Kit
 
 
 ### Encoding
