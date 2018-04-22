@@ -25,4 +25,4 @@ Finally, this is a great time for newcomers to open-source to make their first c
 
 Happy Jekylling! :wave:
 
-[issue]: http://google.com
+[issue]: https://github.com/jekyll/jekyll/issues/6948
