@@ -11,7 +11,7 @@ With the release of Jekyll 3.8.0, it's been 2 and a half years since the last ma
 - Dropping Pygments as a dependency. We're already defaulting to Rouge, and this removes the implicit Python dependency. (finally!)
 - Making the `link` tag use relative URLs. This is a big breaking change, but it's the cleaner solution.
 
-We're open to more ideas! If the development cost isn't too high, or if someone volunteers to take care of the implementation, it's likely that your suggestion might make it into Jekyll 4.0. Head over to this [issue] for more details. Some interesting topics might be improving Internationalization support in Jekyll, creating convenience Liquid tags, et cetera.
+We're open to more ideas, though. If the development cost isn't too high, or if someone volunteers to take care of the implementation, it's likely that your suggestion might make it into Jekyll 4.0. Head over to this [issue] for more details. Some interesting topics might be improving Internationalization support in Jekyll, creating convenience Liquid tags, et cetera.
 
 That being said, the development period of version 4.0 begins _now_. This means a couple of things:
 
@@ -21,7 +21,7 @@ That being said, the development period of version 4.0 begins _now_. This means 
 
 As for a release date, we're currently aiming for late summer, around September or so. However, keep in mind that this project is purely volunteer-run, and as such, delays might occur and we might not hit that release date.
 
-Finally, this is a great time for newcomers to open-source to make their first contribution! We'll be doing our best to mark recommended contributions and create newcomer-friendly issues, as well as to provide mentoring throughout the contribution process (although we'd like to think that we're already pretty proficient at that). So if you've always been hestitant about contributing to a large open-source project, Jekyll is a good place to start!
+Finally, this is a great time for newcomers to open-source to make their first contribution. We'll be doing our best to mark recommended contributions and create newcomer-friendly issues, as well as to provide mentoring throughout the contribution process (although we'd like to think that we're already pretty proficient at that). So if you've always been hestitant about contributing to a large open-source project, Jekyll is a good place to start!
 
 Happy Jekylling! :wave:
 
