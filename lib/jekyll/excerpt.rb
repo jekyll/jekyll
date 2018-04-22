@@ -9,8 +9,11 @@ module Jekyll
     attr_writer   :output
 
     def_delegators :@doc, :site, :name, :ext, :extname,
-                          :render_with_liquid?, :collection, :related_posts,
+                          :collection, :related_posts,
+                          :coffeescript_file?, :yaml_file?,
                           :url, :next_doc, :previous_doc
+
+    private :coffeescript_file?, :yaml_file?
 
     # Initialize this Excerpt instance.
     #
@@ -82,6 +85,10 @@ module Jekyll
 
     def place_in_layout?
       false
+    end
+
+    def render_with_liquid?
+      !(coffeescript_file? || yaml_file? || !Utils.has_liquid_construct?(content))
     end
 
     protected
