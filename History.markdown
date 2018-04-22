@@ -5,6 +5,7 @@
   * Release post for v3.8.0 (#6849)
   * Add Installation Instructions for Ubuntu (#6925)
   * add liquid tag jekyll-flickr (#6946)
+  * Add 4.0 development post (#6934)
 
 ### Minor Enhancements
 
