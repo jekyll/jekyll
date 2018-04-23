@@ -25,7 +25,7 @@ Jekyll's growing use is producing a wide variety of tutorials, frameworks, exten
 
 ## Integrations
 
-- Use a saas service as a backend for forms (contact forms, hiring forms, etc.)
+- Use a SaaS service as a backend for forms (contact forms, hiring forms, etc.)
 
   - [Formspree (open source)](https://formspree.io/)
   - [FormKeep](https://formkeep.com/guides/contact-form-jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=contact-form-jekyll)
