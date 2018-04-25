@@ -233,8 +233,11 @@ module Jekyll
       # Build a hash map based on the specified post attribute ( post attr =>
       # array of posts ) then sort each array in reverse order.
       hash = Hash.new { |h, key| h[key] = [] }
-      posts.docs.each do |p|
-        Array(p.data[post_attr]).each { |attribute| hash[attribute] << p } if p.data[post_attr]
+      posts.docs.each do |post|
+        next unless post.data[post_attr]
+        Array(post.data[post_attr]).each do |attribute|
+          hash[attribute] << post
+        end
       end
       hash.each_value { |posts| posts.sort!.reverse! }
       hash
