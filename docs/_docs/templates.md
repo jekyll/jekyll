@@ -178,7 +178,7 @@ you come up with your own tags via plugins.
     <tr>
       <td>
         <p class="name"><strong>Group By Expression</strong></p>
-        <p>Group an array's items using a Liquid expression.</p>
+        <p>Group an array's items using a Liquid expression. Jekyll v3.4.0 & later.</p>
       </td>
       <td class="align-center">
         <p>
