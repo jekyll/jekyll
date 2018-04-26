@@ -2,7 +2,7 @@
 
 ### Bug Fixes
 
-  * Backport #6945 (#6970)
+  * Fix rendering Liquid constructs in excerpts (#6945)
   * Liquify documents unless published == false (#6959)
 
 ## 3.8.0 / 2018-04-19
