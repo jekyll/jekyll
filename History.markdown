@@ -12,6 +12,10 @@
 
   * use jekyll-compose if installed (#6932)
 
+### Bug Fixes
+
+  * Fix rendering Liquid constructs in excerpts (#6945)
+
 ## 3.8.0 / 2018-04-19
 
 ### Development Fixes
