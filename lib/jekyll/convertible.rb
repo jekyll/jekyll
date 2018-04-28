@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "set"
-
 # Convertible provides methods for converting a pagelike item
 # from a certain type of markup into actual content
 #
@@ -109,7 +107,6 @@ module Jekyll
     def render_liquid(content, payload, info, path)
       _renderer.render_liquid(content, payload, info, path)
     end
-    # rubocop: enable RescueException
 
     # Convert this Convertible's data to a Hash suitable for use by Liquid.
     #

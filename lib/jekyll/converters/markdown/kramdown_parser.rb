@@ -14,9 +14,6 @@ module Jekyll
         }.freeze
 
         def initialize(config)
-          unless defined?(Kramdown)
-            Jekyll::External.require_with_graceful_fail "kramdown"
-          end
           @main_fallback_highlighter = config["highlighter"] || "rouge"
           @config = config["kramdown"] || {}
           @highlighter = nil
@@ -50,14 +47,12 @@ module Jekyll
         end
 
         private
-        # rubocop:disable Performance/HashEachMethods
         def make_accessible(hash = @config)
           hash.keys.each do |key|
             hash[key.to_sym] = hash[key]
             make_accessible(hash[key]) if hash[key].is_a?(Hash)
           end
         end
-        # rubocop:enable Performance/HashEachMethods
 
         # config[kramdown][syntax_higlighter] >
         #   config[kramdown][enable_coderay] >

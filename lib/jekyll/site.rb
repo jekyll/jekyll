@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "csv"
-
 module Jekyll
   class Site
     attr_reader   :source, :dest, :config
@@ -279,10 +277,12 @@ module Jekyll
     # Get the implementation class for the given Converter.
     # Returns the Converter instance implementing the given Converter.
     # klass - The Class of the Converter to fetch.
-
     def find_converter_instance(klass)
-      converters.find { |klass_| klass_.instance_of?(klass) } || \
-        raise("No Converters found for #{klass}")
+      @find_converter_instance ||= {}
+      @find_converter_instance[klass] ||= begin
+        converters.find { |converter| converter.instance_of?(klass) } || \
+          raise("No Converters found for #{klass}")
+      end
     end
 
     # klass - class or module containing the subclasses.

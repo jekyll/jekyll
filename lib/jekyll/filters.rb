@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require "addressable/uri"
-require "json"
-require "liquid"
-
 require_all "jekyll/filters"
 
 module Jekyll
@@ -18,9 +14,9 @@ module Jekyll
     #
     # Returns the HTML formatted String.
     def markdownify(input)
-      site = @context.registers[:site]
-      converter = site.find_converter_instance(Jekyll::Converters::Markdown)
-      converter.convert(input.to_s)
+      @context.registers[:site].find_converter_instance(
+        Jekyll::Converters::Markdown
+      ).convert(input.to_s)
     end
 
     # Convert quotes into smart quotes.
@@ -29,9 +25,9 @@ module Jekyll
     #
     # Returns the smart-quotified String.
     def smartify(input)
-      site = @context.registers[:site]
-      converter = site.find_converter_instance(Jekyll::Converters::SmartyPants)
-      converter.convert(input.to_s)
+      @context.registers[:site].find_converter_instance(
+        Jekyll::Converters::SmartyPants
+      ).convert(input.to_s)
     end
 
     # Convert a Sass string into CSS output.
@@ -40,9 +36,9 @@ module Jekyll
     #
     # Returns the CSS formatted String.
     def sassify(input)
-      site = @context.registers[:site]
-      converter = site.find_converter_instance(Jekyll::Converters::Sass)
-      converter.convert(input)
+      @context.registers[:site].find_converter_instance(
+        Jekyll::Converters::Sass
+      ).convert(input)
     end
 
     # Convert a Scss string into CSS output.
@@ -51,9 +47,9 @@ module Jekyll
     #
     # Returns the CSS formatted String.
     def scssify(input)
-      site = @context.registers[:site]
-      converter = site.find_converter_instance(Jekyll::Converters::Scss)
-      converter.convert(input)
+      @context.registers[:site].find_converter_instance(
+        Jekyll::Converters::Scss
+      ).convert(input)
     end
 
     # Slugify a filename or title.
@@ -171,11 +167,23 @@ module Jekyll
     #
     # Returns the filtered array of objects
     def where(input, property, value)
+      return input if property.nil? || value.nil?
       return input unless input.respond_to?(:select)
-      input = input.values if input.is_a?(Hash)
-      input.select do |object|
-        Array(item_property(object, property)).map!(&:to_s).include?(value.to_s)
-      end || []
+      input    = input.values if input.is_a?(Hash)
+      input_id = input.hash
+
+      # implement a hash based on method parameters to cache the end-result
+      # for given parameters.
+      @where_filter_cache ||= {}
+      @where_filter_cache[input_id] ||= {}
+      @where_filter_cache[input_id][property] ||= {}
+
+      # stash or retrive results to return
+      @where_filter_cache[input_id][property][value] ||= begin
+        input.select do |object|
+          Array(item_property(object, property)).map!(&:to_s).include?(value.to_s)
+        end || []
+      end
     end
 
     # Filters an array of objects against an expression
