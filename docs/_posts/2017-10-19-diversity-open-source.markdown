@@ -1,7 +1,7 @@
 ---
 title: "Diversity in Open Source, and Jekyll's role in it"
 date: 2017-10-19 21:33:00 +0200
-author: pup
+author: oe
 categories: [community]
 ---
 

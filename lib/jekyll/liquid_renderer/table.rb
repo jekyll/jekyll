@@ -6,8 +6,8 @@ module Jekyll
       @stats = stats
     end
 
-    def to_s(n = 50)
-      data = data_for_table(n)
+    def to_s(num_of_rows = 50)
+      data = data_for_table(num_of_rows)
       widths = table_widths(data)
       generate_table(data, widths)
     end
@@ -69,15 +69,17 @@ module Jekyll
 
       data.each do |row|
         row.each_with_index do |cell, index|
-          widths[index] = [ cell.length, widths[index] ].compact.max
+          widths[index] = [cell.length, widths[index]].compact.max
         end
       end
 
       widths
     end
 
-    def data_for_table(n)
-      sorted = @stats.sort_by { |_, file_stats| -file_stats[:liquid_time] }.slice(0, n)
+    def data_for_table(num_of_rows)
+      sorted = @stats.sort_by { |_, file_stats| -file_stats[:liquid_time] }
+      sorted = sorted.slice(0, num_of_rows)
+
       types  = %w(liquid markup)
       gauges = %w(count bytes time)
       total  = Hash.new { |hash, key| hash[key] = 0 }

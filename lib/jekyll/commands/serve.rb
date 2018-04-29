@@ -70,7 +70,7 @@ module Jekyll
             cmd.action do |_, opts|
               opts["livereload_port"] ||= LIVERELOAD_PORT
               opts["serving"] = true
-              opts["watch"  ] = true unless opts.key?("watch")
+              opts["watch"]   = true unless opts.key?("watch")
 
               start(opts)
             end
@@ -86,7 +86,6 @@ module Jekyll
           # a reactor created by a previous test when our test might not
           @reload_reactor = nil
 
-          register_reload_hooks(opts) if opts["livereload"]
           config = configuration_from_options(opts)
           if Jekyll.env == "development"
             config["url"] = default_url(config)
@@ -99,6 +98,7 @@ module Jekyll
         def process(opts)
           opts = configuration_from_options(opts)
           destination = opts["destination"]
+          register_reload_hooks(opts) if opts["livereload"]
           setup(destination)
 
           start_up_webrick(opts, destination)
@@ -173,6 +173,7 @@ module Jekyll
             @changed_pages = nil
           end
         end
+        # rubocop:enable Metrics/AbcSize
 
         # Do a base pre-setup of WEBRick so that everything is in place
         # when we get ready to party, checking for an setting up an error page
@@ -336,7 +337,7 @@ module Jekyll
           require "webrick/https"
 
           opts[:SSLCertificate] = OpenSSL::X509::Certificate.new(read_file(src, cert))
-          opts[:SSLPrivateKey ] = OpenSSL::PKey::RSA.new(read_file(src, key))
+          opts[:SSLPrivateKey]  = OpenSSL::PKey::RSA.new(read_file(src, key))
           opts[:SSLEnable] = true
         end
 

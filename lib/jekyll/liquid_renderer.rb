@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
-require "jekyll/liquid_renderer/file"
-require "jekyll/liquid_renderer/table"
+require_relative "liquid_renderer/file"
+require_relative "liquid_renderer/table"
 
 module Jekyll
   class LiquidRenderer
+    extend Forwardable
+
+    private def_delegator :@site, :in_source_dir, :source_dir
+    private def_delegator :@site, :in_theme_dir, :theme_dir
+
     def initialize(site)
       @site = site
       @type = ""
@@ -17,10 +22,14 @@ module Jekyll
     end
 
     def file(filename, type = "liquid")
-      filename = @site.in_source_dir(filename).sub(
-        %r!\A#{Regexp.escape(@site.source)}/!,
-        ""
-      )
+      filename.match(filename_regex)
+      filename =
+        if Regexp.last_match(1) == theme_dir("")
+          ::File.join(::File.basename(Regexp.last_match(1)), Regexp.last_match(2))
+        else
+          Regexp.last_match(2)
+        end
+
       @type = type
 
       LiquidRenderer::File.new(self, filename).tap do
@@ -37,16 +46,21 @@ module Jekyll
       stats[filename][stat_label("time")] += time
     end
 
-    def stats_table(n = 50)
-      LiquidRenderer::Table.new(stats).to_s(n)
+    def stats_table(num_of_rows = 50)
+      LiquidRenderer::Table.new(stats).to_s(num_of_rows)
     end
 
-    def self.format_error(e, path)
-      "#{e.message} in #{path}"
+    def self.format_error(error, path)
+      "#{error.message} in #{path}"
     end
 
     private
+
     attr_accessor :stats, :type
+
+    def filename_regex
+      @filename_regex ||= %r!\A(#{source_dir}/|#{theme_dir}/|\W*)(.*)!i
+    end
 
     def new_profile_hash
       Hash.new { |hash, key| hash[key] = 0 }

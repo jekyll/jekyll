@@ -71,14 +71,14 @@ Feature: Fancy permalinks
     And I should see "Totally custom." in "_site/03-27-2009/custom-permalink-schema.html"
 
   Scenario: Use custom permalink schema with date and time
-    Given I have a _posts directory
+    Given I have a configuration file with:
+    | key         | value              |
+    | permalink   | "/:year:month:day:hour:minute:second.html" |
+    | timezone    | UTC                |
+    And I have a _posts directory
     And I have the following post:
       | title                   | category | date                | content         |
       | Custom Permalink Schema | stuff    | 2009-03-27 22:31:07 | Totally custom. |
-    And I have a configuration file with:
-      | key         | value              |
-      | permalink   | "/:year:month:day:hour:minute:second.html" |
-      | timezone    | UTC                |
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist

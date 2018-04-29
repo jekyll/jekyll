@@ -78,6 +78,15 @@ class TestExcerpt < JekyllUnitTest
       end
     end
 
+    context "#relative_path" do
+      should "return its document's relative path with '/#excerpt' appended" do
+        assert_equal "#{@excerpt.doc.relative_path}/#excerpt",
+          @excerpt.relative_path
+        assert_equal "_posts/2013-07-22-post-excerpt-with-layout.markdown/#excerpt",
+          @excerpt.relative_path
+      end
+    end
+
     context "#to_liquid" do
       should "contain the proper page data to mimic the post liquid" do
         assert_equal "Post Excerpt with Layout", @excerpt.to_liquid["title"]
@@ -86,7 +95,7 @@ class TestExcerpt < JekyllUnitTest
         assert_equal Time.parse("2013-07-22"), @excerpt.to_liquid["date"]
         assert_equal %w(bar baz z_category MixedCase), @excerpt.to_liquid["categories"]
         assert_equal %w(first second third jekyllrb.com), @excerpt.to_liquid["tags"]
-        assert_equal "_posts/2013-07-22-post-excerpt-with-layout.markdown",
+        assert_equal "_posts/2013-07-22-post-excerpt-with-layout.markdown/#excerpt",
                      @excerpt.to_liquid["path"]
       end
     end
@@ -166,6 +175,41 @@ class TestExcerpt < JekyllUnitTest
       should "match the post content" do
         assert_equal @post.content, @excerpt.content
       end
+    end
+  end
+
+  context "An excerpt with non-closed but valid Liquid block tag" do
+    setup do
+      clear_dest
+      @site = fixture_site
+      @post = setup_post("2018-01-28-open-liquid-block-excerpt.markdown")
+      @excerpt = @post.data["excerpt"]
+
+      assert_includes @post.content, "{% if"
+      refute_includes @post.content.split("\n\n")[0], "{% endif %}"
+    end
+
+    should "be appended to as necessary and generated" do
+      assert_includes @excerpt.content, "{% endif %}"
+      assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
+    end
+  end
+
+  context "An excerpt with valid closed Liquid block tag" do
+    setup do
+      clear_dest
+      @site = fixture_site
+      @post = setup_post("2018-01-28-closed-liquid-block-excerpt.markdown")
+      @excerpt = @post.data["excerpt"]
+
+      assert_includes @post.content, "{% if"
+      assert_includes @post.content.split("\n\n")[0], "{% endif %}"
+    end
+
+    should "not be appended to but generated as is" do
+      assert_includes @excerpt.content, "{% endif %}"
+      refute_includes @excerpt.content, "{% endif %}\n\n{% endif %}"
+      assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
     end
   end
 end

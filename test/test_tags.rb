@@ -912,7 +912,9 @@ CONTENT
         end
         assert_match(
           "Could not locate the included file 'tmp/pages-test-does-not-exist' " \
-          "in any of [\"#{source_dir}/_includes\"].",
+          "in any of [\"#{source_dir}/_includes\"]. Ensure it exists in one of " \
+          "those directories and is not a symlink as those are not allowed in " \
+          "safe mode.",
           ex.message
         )
       end
@@ -928,6 +930,64 @@ title: Include tag parameters
 {% include sig.markdown myparam="test" %}
 
 {% include params.html param="value" %}
+CONTENT
+        create_post(content, {
+          "permalink"   => "pretty",
+          "source"      => source_dir,
+          "destination" => dest_dir,
+          "read_posts"  => true,
+        })
+      end
+
+      should "correctly output include variable" do
+        assert_match "<span id=\"include-param\">value</span>", @result.strip
+      end
+
+      should "ignore parameters if unused" do
+        assert_match "<hr />\n<p>Tom Preston-Werner\ngithub.com/mojombo</p>\n", @result
+      end
+    end
+
+    context "with simple syntax but multiline markup" do
+      setup do
+        content = <<CONTENT
+---
+title: Include tag parameters
+---
+
+{% include sig.markdown myparam="test" %}
+
+{% include params.html
+  param="value" %}
+CONTENT
+        create_post(content, {
+          "permalink"   => "pretty",
+          "source"      => source_dir,
+          "destination" => dest_dir,
+          "read_posts"  => true,
+        })
+      end
+
+      should "correctly output include variable" do
+        assert_match "<span id=\"include-param\">value</span>", @result.strip
+      end
+
+      should "ignore parameters if unused" do
+        assert_match "<hr />\n<p>Tom Preston-Werner\ngithub.com/mojombo</p>\n", @result
+      end
+    end
+
+    context "with variable syntax but multiline markup" do
+      setup do
+        content = <<CONTENT
+---
+title: Include tag parameters
+---
+
+{% include sig.markdown myparam="test" %}
+{% assign path = "params" | append: ".html" %}
+{% include {{ path }}
+  param="value" %}
 CONTENT
         create_post(content, {
           "permalink"   => "pretty",
@@ -1271,8 +1331,8 @@ CONTENT
           })
         end
         assert_match(
-          "Ensure it exists in one of those directories and, if it is a symlink, does " \
-          "not point outside your site source.",
+          "Ensure it exists in one of those directories and is not a symlink "\
+          "as those are not allowed in safe mode.",
           ex.message
         )
       end

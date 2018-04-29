@@ -147,6 +147,14 @@ module Jekyll
     rescue EOFError
       false
     end
+
+    # Determine whether the given content string contains Liquid Tags or Vaiables
+    #
+    # Returns true is the string contains sequences of `{%` or `{{`
+    def has_liquid_construct?(content)
+      return false if content.nil? || content.empty?
+      content.include?("{%") || content.include?("{{")
+    end
     # rubocop: enable PredicateName
 
     # Slugify a filename or title.
@@ -203,7 +211,10 @@ module Jekyll
       end
 
       # Drop accent marks from latin characters. Everything else turns to ?
-      string = ::I18n.transliterate(string) if mode == "latin"
+      if mode == "latin"
+        I18n.config.available_locales = :en if I18n.config.available_locales.empty?
+        string = I18n.transliterate(string)
+      end
 
       slug = replace_character_sequence_with_hyphen(string, :mode => mode)
 

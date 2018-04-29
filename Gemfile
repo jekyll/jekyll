@@ -31,7 +31,7 @@ group :test do
   gem "nokogiri", RUBY_VERSION >= "2.2" ? "~> 1.7" : "~> 1.7.0"
   gem "rspec"
   gem "rspec-mocks"
-  gem "rubocop", "~> 0.51.0"
+  gem "rubocop", "~> 0.55.0"
   gem "test-dependency-theme", :path => File.expand_path("test/fixtures/test-dependency-theme", __dir__)
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)
 
@@ -48,7 +48,6 @@ group :test_legacy do
   gem "minitest"
   gem "minitest-profile"
   gem "minitest-reporters"
-  gem "redgreen"
   gem "shoulda"
   gem "simplecov"
 end
@@ -76,11 +75,11 @@ group :jekyll_optional_dependencies do
   gem "jekyll-redirect-from"
   gem "kramdown", "~> 1.14"
   gem "mime-types", "~> 3.0"
-  gem "rdoc", "~> 5.0"
-  gem "toml", "~> 0.2.0"
+  gem "rdoc", RUBY_VERSION >= "2.2.2" ? "~> 6.0" : "~> 5.1"
+  gem "tomlrb", "~> 1.2"
 
   platform :ruby, :mswin, :mingw, :x64_mingw do
-    gem "classifier-reborn", "~> 2.1.0"
+    gem "classifier-reborn", "~> 2.2.0"
     gem "liquid-c", "~> 3.0"
     gem "pygments.rb", "~> 1.0"
     gem "rdiscount", "~> 2.0"
