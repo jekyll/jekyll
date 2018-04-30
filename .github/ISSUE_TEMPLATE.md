@@ -76,3 +76,11 @@
   The minimum should be personal information. Though we normally don't log
   anything like that so there should be no need to alter it.
 -->
+
+## Jekyll version
+
+<!--
+  Insert your gem version.
+  Run `bundle exec jekyll -v` or `jekyll -v` to output the Jekyll version your
+  site is using.
+-->
