@@ -17,6 +17,10 @@
 
   * Fix rendering Liquid constructs in excerpts (#6945)
 
+### Major Enhancements
+
+  * Remove unused error class (#6511)
+
 ## 3.8.0 / 2018-04-19
 
 ### Development Fixes
