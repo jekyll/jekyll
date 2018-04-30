@@ -20,6 +20,7 @@
 ### Major Enhancements
 
   * Remove unused error class (#6511)
+  * Drop support for Ruby 2.1 and 2.2 (#6560)
 
 ## 3.8.0 / 2018-04-19
 
