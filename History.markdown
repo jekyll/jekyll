@@ -22,6 +22,10 @@
   * Remove unused error class (#6511)
   * Drop support for Ruby 2.1 and 2.2 (#6560)
 
+### Development Fixes
+
+  * Remove unnecessary Jekyll::Page constant (#6770)
+
 ## 3.8.0 / 2018-04-19
 
 ### Development Fixes
