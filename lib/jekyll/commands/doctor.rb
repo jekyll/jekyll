@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "addressable/uri"
-
 module Jekyll
   module Commands
     class Doctor < Command

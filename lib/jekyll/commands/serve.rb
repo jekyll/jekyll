@@ -72,7 +72,7 @@ module Jekyll
             cmd.action do |_, opts|
               opts["livereload_port"] ||= LIVERELOAD_PORT
               opts["serving"] = true
-              opts["watch"  ] = true unless opts.key?("watch")
+              opts["watch"]   = true unless opts.key?("watch")
 
               start(opts)
             end
@@ -175,6 +175,7 @@ module Jekyll
             @changed_pages = nil
           end
         end
+        # rubocop:enable Metrics/AbcSize
 
         # Do a base pre-setup of WEBRick so that everything is in place
         # when we get ready to party, checking for an setting up an error page
@@ -338,7 +339,7 @@ module Jekyll
           require "webrick/https"
 
           opts[:SSLCertificate] = OpenSSL::X509::Certificate.new(read_file(src, cert))
-          opts[:SSLPrivateKey ] = OpenSSL::PKey::RSA.new(read_file(src, key))
+          opts[:SSLPrivateKey]  = OpenSSL::PKey::RSA.new(read_file(src, key))
           opts[:SSLEnable] = true
         end
 

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "csv"
-
 module Jekyll
   class Reader
     attr_reader :site
