@@ -23,6 +23,7 @@
 
   * Remove unused error class (#6511)
   * Drop support for Ruby 2.1 and 2.2 (#6560)
+  * Add vendor folder to a newly installed site&#39;s .gitignore (#6968)
 
 ### Development Fixes
 
