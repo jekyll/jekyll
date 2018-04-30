@@ -7,6 +7,7 @@
   * add liquid tag jekyll-flickr (#6946)
   * Add 4.0 development post (#6934)
   * Updated copy - fixed casing of SaaS on resources page. (#6949)
+  * WIP: Do not advise users to install Jekyll outside of Bundler (#6927)
 
 ### Minor Enhancements
 
