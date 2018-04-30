@@ -8,6 +8,7 @@
   * Add 4.0 development post (#6934)
   * Updated copy - fixed casing of SaaS on resources page. (#6949)
   * WIP: Do not advise users to install Jekyll outside of Bundler (#6927)
+  * Don&#39;t prompt for sudo when installing with Ubuntu WSL (#6781)
 
 ### Minor Enhancements
 
