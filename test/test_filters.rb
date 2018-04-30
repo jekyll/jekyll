@@ -1,4 +1,3 @@
-# coding: utf-8
 # frozen_string_literal: true
 
 require "helper"
@@ -44,7 +43,7 @@ class TestFilters < JekyllUnitTest
         "baseurl"                => "/base",
         "dont_show_posts_before" => @sample_time,
       })
-      @sample_date = Date.parse("2013-03-27")
+      @sample_date = Date.parse("2013-03-02")
       @time_as_string = "September 11, 2001 12:46:30 -0000"
       @time_as_numeric = 1_399_680_607
       @integer_as_string = "142857"
@@ -81,6 +80,13 @@ class TestFilters < JekyllUnitTest
         )
       end
 
+      should "convert not convert markdown to block HTML elements" do
+        assert_equal(
+          "#hashtag", # NOT "<h1>hashtag</h1>"
+          @filter.smartify("#hashtag")
+        )
+      end
+
       should "escapes special characters when configured to do so" do
         kramdown = make_filter_mock({ :kramdown => { :entity_output => :symbolic } })
         assert_equal(
@@ -92,6 +98,10 @@ class TestFilters < JekyllUnitTest
       should "convert HTML entities to unicode characters" do
         assert_equal "’", @filter.smartify("&rsquo;")
         assert_equal "“", @filter.smartify("&ldquo;")
+      end
+
+      should "convert multiple lines" do
+        assert_equal "…\n…", @filter.smartify("...\n...")
       end
 
       should "allow raw HTML passthrough" do
@@ -115,6 +125,12 @@ class TestFilters < JekyllUnitTest
         assert_equal(
           "404",
           @filter.smartify(404)
+        )
+      end
+
+      should "not output any warnings" do
+        assert_empty(
+          capture_output { @filter.smartify("Test") }
         )
       end
     end
@@ -194,6 +210,16 @@ class TestFilters < JekyllUnitTest
           assert_equal "27 March 2013", @filter.date_to_long_string(@sample_time)
         end
 
+        should "format a date with ordinal, US format" do
+          assert_equal "Mar 27th, 2013",
+                       @filter.date_to_string(@sample_time, "ordinal", "US")
+        end
+
+        should "format a date with long, ordinal format" do
+          assert_equal "27th March 2013",
+                       @filter.date_to_long_string(@sample_time, "ordinal")
+        end
+
         should "format a time with xmlschema" do
           assert_equal(
             "2013-03-27T11:22:33+00:00",
@@ -218,23 +244,32 @@ class TestFilters < JekyllUnitTest
 
       context "with Date object" do
         should "format a date with short format" do
-          assert_equal "27 Mar 2013", @filter.date_to_string(@sample_date)
+          assert_equal "02 Mar 2013", @filter.date_to_string(@sample_date)
         end
 
         should "format a date with long format" do
-          assert_equal "27 March 2013", @filter.date_to_long_string(@sample_date)
+          assert_equal "02 March 2013", @filter.date_to_long_string(@sample_date)
+        end
+
+        should "format a date with ordinal format" do
+          assert_equal "2nd Mar 2013", @filter.date_to_string(@sample_date, "ordinal")
+        end
+
+        should "format a date with ordinal, US, long format" do
+          assert_equal "March 2nd, 2013",
+                       @filter.date_to_long_string(@sample_date, "ordinal", "US")
         end
 
         should "format a time with xmlschema" do
           assert_equal(
-            "2013-03-27T00:00:00+00:00",
+            "2013-03-02T00:00:00+00:00",
             @filter.date_to_xmlschema(@sample_date)
           )
         end
 
         should "format a time according to RFC-822" do
           assert_equal(
-            "Wed, 27 Mar 2013 00:00:00 +0000",
+            "Sat, 02 Mar 2013 00:00:00 +0000",
             @filter.date_to_rfc822(@sample_date)
           )
         end
@@ -247,6 +282,16 @@ class TestFilters < JekyllUnitTest
 
         should "format a date with long format" do
           assert_equal "11 September 2001", @filter.date_to_long_string(@time_as_string)
+        end
+
+        should "format a date with ordinal, US format" do
+          assert_equal "Sep 11th, 2001",
+                       @filter.date_to_string(@time_as_string, "ordinal", "US")
+        end
+
+        should "format a date with ordinal long format" do
+          assert_equal "11th September 2001",
+                       @filter.date_to_long_string(@time_as_string, "ordinal", "UK")
         end
 
         should "format a time with xmlschema" do
@@ -278,6 +323,16 @@ class TestFilters < JekyllUnitTest
 
         should "format a date with long format" do
           assert_equal "10 May 2014", @filter.date_to_long_string(@time_as_numeric)
+        end
+
+        should "format a date with ordinal, US format" do
+          assert_equal "May 10th, 2014",
+                       @filter.date_to_string(@time_as_numeric, "ordinal", "US")
+        end
+
+        should "format a date with ordinal, long format" do
+          assert_equal "10th May 2014",
+                       @filter.date_to_long_string(@time_as_numeric, "ordinal")
         end
 
         should "format a time with xmlschema" do
@@ -444,6 +499,23 @@ class TestFilters < JekyllUnitTest
       should "not raise a TypeError when passed a hash" do
         assert @filter.absolute_url({ "foo" => "bar" })
       end
+
+      context "with a document" do
+        setup do
+          @site = fixture_site({
+            "collections" => ["methods"],
+          })
+          @site.process
+          @document = @site.collections["methods"].docs.detect do |d|
+            d.relative_path == "_methods/configuration.md"
+          end
+        end
+
+        should "make a url" do
+          expected = "http://example.com/base/methods/configuration.html"
+          assert_equal expected, @filter.absolute_url(@document)
+        end
+      end
     end
 
     context "relative_url filter" do
@@ -526,6 +598,21 @@ class TestFilters < JekyllUnitTest
         page_url = "/my-page.html"
         filter = make_filter_mock({ "baseurl" => Value.new(proc { "/baseurl/" }) })
         assert_equal "/baseurl#{page_url}", filter.relative_url(page_url)
+      end
+
+      should "transform protocol-relative url" do
+        url = "//example.com/"
+        assert_equal "/base//example.com/", @filter.relative_url(url)
+      end
+
+      should "not modify an absolute url with scheme" do
+        url = "file:///file.html"
+        assert_equal url, @filter.relative_url(url)
+      end
+
+      should "not normalize absolute international URLs" do
+        url = "https://example.com/错误"
+        assert_equal "https://example.com/错误", @filter.relative_url(url)
       end
     end
 
@@ -731,7 +818,6 @@ class TestFilters < JekyllUnitTest
       should "include the size of each grouping" do
         grouping = @filter.group_by(@filter.site.pages, "layout")
         grouping.each do |g|
-          p g
           assert_equal(
             g["items"].size,
             g["size"],
@@ -845,7 +931,7 @@ class TestFilters < JekyllUnitTest
       end
 
       should "filter with other operators" do
-        assert_equal [3, 4, 5], @filter.where_exp([ 1, 2, 3, 4, 5 ], "n", "n >= 3")
+        assert_equal [3, 4, 5], @filter.where_exp([1, 2, 3, 4, 5], "n", "n >= 3")
       end
 
       objects = [
@@ -1015,9 +1101,9 @@ class TestFilters < JekyllUnitTest
       end
       should "return sorted by subproperty array" do
         assert_equal [{ "a" => { "b" => 1 } }, { "a" => { "b" => 2 } },
-                      { "a" => { "b" => 3 } }, ],
+                      { "a" => { "b" => 3 } },],
           @filter.sort([{ "a" => { "b" => 2 } }, { "a" => { "b" => 1 } },
-                        { "a" => { "b" => 3 } }, ], "a.b")
+                        { "a" => { "b" => 3 } },], "a.b")
       end
     end
 

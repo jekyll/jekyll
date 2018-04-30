@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # frozen_string_literal: true
 
 module Jekyll
@@ -79,19 +78,19 @@ module Jekyll
         collection.label == "posts"
     end
 
-    # The path to the document, relative to the site source.
+    # The path to the document, relative to the collections_dir.
     #
-    # Returns a String path which represents the relative path
-    #   from the site source to this document
+    # Returns a String path which represents the relative path from the collections_dir
+    # to this document.
     def relative_path
-      @relative_path ||= Pathutil.new(path).relative_path_from(site.source).to_s
+      @relative_path ||= path.sub("#{site.collections_path}/", "")
     end
 
     # The output extension of the document.
     #
     # Returns the output extension
     def output_ext
-      Jekyll::Renderer.new(site, self).output_ext
+      @output_ext ||= Jekyll::Renderer.new(site, self).output_ext
     end
 
     # The base filename of the document, without the file extname.
@@ -157,9 +156,10 @@ module Jekyll
     # Determine whether the file should be rendered with Liquid.
     #
     # Returns false if the document is either an asset file or a yaml file,
+    #   or if the document doesn't contain any Liquid Tags or Variables,
     #   true otherwise.
     def render_with_liquid?
-      !(coffeescript_file? || yaml_file?)
+      !(coffeescript_file? || yaml_file? || !Utils.has_liquid_construct?(content))
     end
 
     # Determine whether the file should be rendered with a layout.
@@ -239,6 +239,7 @@ module Jekyll
     def write(dest)
       path = destination(dest)
       FileUtils.mkdir_p(File.dirname(path))
+      Jekyll.logger.debug "Writing:", path
       File.write(path, output, :mode => "wb")
 
       trigger_hooks(:post_write)
@@ -267,7 +268,7 @@ module Jekyll
           merge_defaults
           read_content(opts)
           read_post_data
-        rescue => e
+        rescue StandardError => e
           handle_read_error(e)
         end
       end
@@ -311,9 +312,10 @@ module Jekyll
     # Based on the Collection to which it belongs.
     #
     # True if the document has a collection and if that collection's #write?
-    #   method returns true, otherwise false.
+    # method returns true, and if the site's Publisher will publish the document.
+    # False otherwise.
     def write?
-      collection && collection.write?
+      collection && collection.write? && site.publisher.publish?(self)
     end
 
     # The Document excerpt_separator, from the YAML Front-Matter or site
@@ -358,7 +360,7 @@ module Jekyll
     #
     # Returns an Array of related Posts.
     def related_posts
-      Jekyll::RelatedPosts.new(self).build
+      @related_posts ||= Jekyll::RelatedPosts.new(self).build
     end
 
     # Override of normal respond_to? to match method_missing's logic for
@@ -400,11 +402,9 @@ module Jekyll
     def populate_categories
       merge_data!({
         "categories" => (
-        Array(data["categories"]) + Utils.pluralized_array_from_hash(
-          data,
-          "category",
-          "categories"
-        )
+          Array(data["categories"]) + Utils.pluralized_array_from_hash(
+            data, "category", "categories"
+          )
         ).map(&:to_s).flatten.uniq,
       })
     end
@@ -419,7 +419,7 @@ module Jekyll
     def merge_categories!(other)
       if other.key?("categories") && !other["categories"].nil?
         if other["categories"].is_a?(String)
-          other["categories"] = other["categories"].split(%r!\s+!).map(&:strip)
+          other["categories"] = other["categories"].split
         end
         other["categories"] = (data["categories"] || []) | other["categories"]
       end
@@ -427,7 +427,7 @@ module Jekyll
 
     private
     def merge_date!(source)
-      if data.key?("date") && !data["date"].is_a?(Time)
+      if data.key?("date")
         data["date"] = Utils.parse_date(
           data["date"].to_s,
           "Document '#{relative_path}' does not have a valid date in the #{source}."
@@ -464,7 +464,7 @@ module Jekyll
 
     private
     def handle_read_error(error)
-      if error.is_a? SyntaxError
+      if error.is_a? Psych::SyntaxError
         Jekyll.logger.error "Error:", "YAML Exception reading #{path}: #{error.message}"
       else
         Jekyll.logger.error "Error:", "could not read file #{path}: #{error.message}"

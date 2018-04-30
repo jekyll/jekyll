@@ -108,7 +108,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
             <a href="https://en.wikipedia.org/wiki/Tz_database">IANA Time Zone
             Database</a> is valid, e.g. <code>America/New_York</code>. A list of all
             available values can be found <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">
-            here</a>. The default is the local time zone, as set by your operating system.
+            here</a>. When serving on a local machine, the default time zone is set by your operating system. But when served on a remote host/server, the default time zone depends on the server's setting or location.
         </p>
       </td>
       <td class="align-center">
@@ -518,7 +518,7 @@ defaults:
   -
     scope:
       path: ""
-      type: "posts"
+      type: "pages"
     values:
       layout: "my-site"
   -
@@ -530,7 +530,7 @@ defaults:
       author: "Mr. Hyde"
 ```
 
-With these defaults, all posts would use the `my-site` layout. Any html files that exist in the `projects/` folder will use the `project` layout, if it exists. Those files will also have the `page.author` [liquid variable](../variables/) set to `Mr. Hyde`.
+With these defaults, all pages would use the `my-site` layout. Any html files that exist in the `projects/` folder will use the `project` layout, if it exists. Those files will also have the `page.author` [liquid variable](../variables/) set to `Mr. Hyde`.
 
 ```yaml
 collections:
@@ -549,11 +549,39 @@ defaults:
 In this example, the `layout` is set to `default` inside the
 [collection](../collections/) with the name `my_collection`.
 
+### Glob patterns in Front Matter defaults
+
+It is also possible to use glob patterns (currently limited to patterns that contain `*`) when matching defaults. For example, it is possible to set specific layout for each `special-page.html` in any subfolder of `section` folder. {%- include docs_version_badge.html version="3.7.0" -%}
+
+```yaml
+collections:
+  my_collection:
+    output: true
+
+defaults:
+  -
+    scope:
+      path: "section/*/special-page.html"
+    values:
+      layout: "specific-layout"
+```
+
+<div class="note warning">
+  <h5>Globbing and Performance</h5>
+  <p>
+    Please note that globbing a path is known to have a negative effect on
+    performance and is currently not optimized, especially on Windows.
+    Globbing a path will increase your build times in proportion to the size
+    of the associated collection directory.
+  </p>
+</div>
+
+
 ### Precedence
 
 Jekyll will apply all of the configuration settings you specify in the `defaults` section of your `_config.yml` file. However, you can choose to override settings from other scope/values pair by specifying a more specific path for the scope.
 
-You can see that in the second to last example above. First, we set the default layout to `my-site`. Then, using a more specific path, we set the default layout for files in the `projects/` path to `project`. This can be done with any value that you would set in the page or post front matter.
+You can see that in the second to last example above. First, we set the default page layout to `my-site`. Then, using a more specific path, we set the default layout for pages in the `projects/` path to `project`. This can be done with any value that you would set in the page or post front matter.
 
 Finally, if you set defaults in the site configuration by adding a `defaults` section to your `_config.yml` file, you can override those settings in a post or page file. All you need to do is specify the settings in the post or page front matter. For example:
 
@@ -602,23 +630,24 @@ file or on the command-line.
 
 ```yaml
 # Where things are
-source:       .
-destination:  ./_site
-plugins_dir:  _plugins
-layouts_dir:  _layouts
-data_dir:     _data
-includes_dir: _includes
+source:          .
+destination:     ./_site
+collections_dir: .
+plugins_dir:     _plugins
+layouts_dir:     _layouts
+data_dir:        _data
+includes_dir:    _includes
 collections:
   posts:
     output:   true
 
 # Handling Reading
-safe:                 false
-include:              [".htaccess"]
-exclude:              ["Gemfile", "Gemfile.lock", "node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/"]
-keep_files:           [".git", ".svn"]
-encoding:             "utf-8"
-markdown_ext:         "markdown,mkdown,mkdn,mkd,md"
+safe:                false
+include:             [".htaccess"]
+exclude:             ["Gemfile", "Gemfile.lock", "node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/"]
+keep_files:          [".git", ".svn"]
+encoding:            "utf-8"
+markdown_ext:        "markdown,mkdown,mkdn,mkd,md"
 strict_front_matter: false
 
 # Filtering Content
@@ -655,7 +684,9 @@ verbose:  false
 defaults: []
 
 liquid:
-  error_mode: warn
+  error_mode:       warn
+  strict_filters:   false
+  strict_variables: false
 
 # Markdown Processors
 rdiscount:
@@ -665,13 +696,14 @@ redcarpet:
   extensions: []
 
 kramdown:
-  auto_ids:       true
-  entity_output:  as_char
-  toc_levels:     1..6
-  smart_quotes:   lsquo,rsquo,ldquo,rdquo
-  input:          GFM
-  hard_wrap:      false
-  footnote_nr:    1
+  auto_ids:      true
+  entity_output: as_char
+  toc_levels:    1..6
+  smart_quotes:  lsquo,rsquo,ldquo,rdquo
+  input:         GFM
+  hard_wrap:     false
+  footnote_nr:   1
+  show_warnings: false
 ```
 
 ## Liquid Options
@@ -682,6 +714,14 @@ options are
 - `lax` --- Ignore all errors.
 - `warn` --- Output a warning on the console for each error.
 - `strict` --- Output an error message and stop the build.
+
+You can also configure Liquid's renderer to catch non-assigned variables and
+non-existing filters by setting `strict_variables` and / or `strict_filters`
+to `true` respectively. {% include docs_version_badge.html version="3.8.0" %}
+
+Do note that while `error_mode` configures Liquid's parser, the `strict_variables`
+and `strict_filters` options configure Liquid's renderer and are consequently,
+mutually exclusive.
 
 ## Markdown Options
 

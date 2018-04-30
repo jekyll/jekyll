@@ -3,7 +3,7 @@ title: Themes
 permalink: /docs/themes/
 ---
 
-Jekyll has an extensive theme system that allows you to leverage community-maintained templates and styles to customize your site's presentation. Jekyll themes package up layouts, includes, and stylesheets in a way that can be overridden by your site's content.
+Jekyll has an extensive theme system that allows you to leverage community-maintained templates and styles to customize your site's presentation. Jekyll themes specify plugins and package up assets, layouts, includes, and stylesheets in a way that can be overridden by your site's content.
 
 ## Understanding gem-based themes
 
@@ -47,7 +47,7 @@ To locate a theme's files on your computer:
 
 2. Open the theme's directory in Finder or Explorer:
 
-   ```shell
+   ```sh
    # On MacOS
    open $(bundle show minima)
    # On Windows
@@ -88,7 +88,7 @@ With a clear understanding of the theme's files, you can now override any theme 
 
 Let's say, for a second example, you want to override Minima's footer. In your Jekyll site, create an `_includes` folder and add a file in it called `footer.html`. Jekyll will now use your site's `footer.html` file instead of the `footer.html` file from the Minima theme gem.
 
-To modify any stylesheet you must take the extra step of also copying the main sass file (`_sass/minima.scss` in the Minima theme) into the `_sass` directory in your site's source. 
+To modify any stylesheet you must take the extra step of also copying the main sass file (`_sass/minima.scss` in the Minima theme) into the `_sass` directory in your site's source.
 
 Jekyll will look first to your site's content before looking to the theme's defaults for any requested file in the following folders:
 
@@ -108,7 +108,48 @@ Suppose you want to get rid of the gem-based theme and convert it to a regular t
 
 To do this, copy the files from the theme gem's directory into your Jekyll site directory. (For example, copy them to `/myblog` if you created your Jekyll site at `/myblog`. See the previous section for details.)
 
-Then remove references to the theme gem in `Gemfile` and configuration. For example, to remove `minima`:
+Then you must tell Jekyll about the plugins that were referenced by the theme. You can find these plugins in the theme's gemspec file as runtime dependencies. If you were converting the Minima theme, for example, you might see:
+
+```
+spec.add_runtime_dependency "jekyll-feed", "~> 0.9"
+spec.add_runtime_dependency "jekyll-seo-tag", "~> 2.1"
+```
+
+You should include these references in the `Gemfile` in one of two ways.
+
+You could list them individually in both `Gemfile` and `_config.yml`.
+
+```ruby
+# ./Gemfile
+
+gem "jekyll-feed", "~> 0.9"
+gem "jekyll-seo-tag", "~> 2.1"
+```
+
+```yaml
+# ./_config.yml
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+```
+
+Or you could list them explicitly as Jekyll plugins in your Gemfile, and not update `_config.yml`, like this:
+
+```ruby
+# ./Gemfile
+
+group :jekyll_plugins do
+  gem "jekyll-feed", "~> 0.9"
+  gem "jekyll-seo-tag", "~> 2.1"
+end
+```
+
+Either way, don't forget to `bundle update`.
+
+However, if you're publishing on GitHub Pages you should update only your `_config.yml` as GitHub Pages doesn't load plugins via Bundler.
+
+Finally, remove references to the theme gem in `Gemfile` and configuration. For example, to remove `minima`:
 
 - Open `Gemfile` and remove `gem "minima", "~> 2.0"`.
 - Open `_config.yml` and remove `theme: minima`.
@@ -125,8 +166,18 @@ To install a gem-based theme:
 
 1. Add the theme to your site's `Gemfile`:
 
-   ```sh
+   ```ruby
+   # ./Gemfile
+
    gem "jekyll-theme-awesome"
+   ```
+  Or if you've started with the `jekyll new` command, replace `gem "minima", "~> 2.0"` with your theme-gem:
+
+   ```diff
+   # ./Gemfile
+
+   - gem "minima", "~> 2.0"
+   + gem "jekyll-theme-awesome"
    ```
 
 2. Install the theme:
@@ -137,7 +188,7 @@ To install a gem-based theme:
 
 3. Add the following to your site's `_config.yml` to activate the theme:
 
-   ```sh
+   ```yaml
    theme: jekyll-theme-awesome
    ```
 
@@ -208,13 +259,15 @@ _sass
 
 Your theme's styles can be included in the user's stylesheet using the `@import` directive.
 
+{% raw %}
 ```css
-{% raw %}@import "{{ site.theme }}";{% endraw %}
+@import "{{ site.theme }}";
 ```
+{% endraw %}
 
-### Theme-gem dependencies
+### Theme-gem dependencies {%- include docs_version_badge.html version="3.5.0" -%}
 
-From `v3.5`, Jekyll will automatically require all whitelisted `runtime_dependencies` of your theme-gem even if they're not explicitly included under the `gems` array in the site's config file. (NOTE: whitelisting is only required when building or serving with the `--safe` option.)
+Jekyll will automatically require all whitelisted `runtime_dependencies` of your theme-gem even if they're not explicitly included under the `plugins` array in the site's config file. (Note: whitelisting is only required when building or serving with the `--safe` option.)
 
 With this, the end-user need not keep track of the plugins required to be included in their config file for their theme-gem to work as intended.
 
@@ -224,7 +277,7 @@ Your theme should include a `/README.md` file, which explains how site authors c
 
 ### Adding a screenshot
 
-Themes are visual. Show users what your theme looks like by including a screenshot as `/screenshot.png` within your theme's repository where it can be retrieved programatically. You can also include this screenshot within your theme's documentation.
+Themes are visual. Show users what your theme looks like by including a screenshot as `/screenshot.png` within your theme's repository where it can be retrieved programmatically. You can also include this screenshot within your theme's documentation.
 
 ### Previewing your theme
 

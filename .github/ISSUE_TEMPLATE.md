@@ -10,9 +10,6 @@
   a generic usage question, please consider asking your question at
   https://talk.jekyllrb.com where non-bug questions go.
 
-  Please make sure to mention an affinity team whose responsibilities
-  most closely align with your issue.
-
   Thanks!
 -->
 
@@ -51,7 +48,7 @@
 ## My Reproduction Steps
 
 <!--
-  If this error occured on GitHub Pages, please try to provide us with logs,
+  If this error occurred on GitHub Pages, please try to provide us with logs,
   and look at them yourself, to determine if this is an actual Jekyll bug. In
   the event you are unsure, file a ticket, however, when you do please provide
   the logs (strip them of personal information.)
@@ -79,5 +76,3 @@
   The minimum should be personal information. Though we normally don't log
   anything like that so there should be no need to alter it.
 -->
-
-/cc include any Jekyll affinity teams here (see https://teams.jekyllrb.com/ for more info)

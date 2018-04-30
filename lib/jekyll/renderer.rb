@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # frozen_string_literal: true
 
 module Jekyll
@@ -53,7 +52,7 @@ module Jekyll
       Jekyll.logger.debug "Rendering:", document.relative_path
 
       assign_pages!
-      assign_related_posts!
+      assign_current_document!
       assign_highlighter_options!
       assign_layout_data!
 
@@ -69,8 +68,11 @@ module Jekyll
     # rubocop: disable AbcSize
     def render_document
       info = {
-        :registers => { :site => site, :page => payload["page"] },
+        :registers        => { :site => site, :page => payload["page"] },
+        :strict_filters   => liquid_options["strict_filters"],
+        :strict_variables => liquid_options["strict_variables"],
       }
+
       output = document.content
       if document.render_with_liquid?
         Jekyll.logger.debug "Rendering Liquid:", document.relative_path
@@ -78,7 +80,7 @@ module Jekyll
       end
 
       Jekyll.logger.debug "Rendering Markup:", document.relative_path
-      output = convert(output)
+      output = convert(output.to_s)
       document.content = output
 
       if document.place_in_layout?
@@ -97,7 +99,7 @@ module Jekyll
       converters.reduce(content) do |output, converter|
         begin
           converter.convert output
-        rescue => e
+        rescue StandardError => e
           Jekyll.logger.error "Conversion error:",
             "#{converter.class} encountered an error while "\
             "converting '#{document.relative_path}':"
@@ -144,7 +146,7 @@ module Jekyll
     # Returns String rendered content
     def place_in_layouts(content, payload, info)
       output = content.dup
-      layout = layouts[document.data["layout"]]
+      layout = layouts[document.data["layout"].to_s]
       validate_layout(layout)
 
       used = Set.new([layout])
@@ -170,12 +172,16 @@ module Jekyll
     # Returns nothing
     private
     def validate_layout(layout)
-      return unless invalid_layout?(layout)
-      Jekyll.logger.warn(
-        "Build Warning:",
-        "Layout '#{document.data["layout"]}' requested "\
-        "in #{document.relative_path} does not exist."
-      )
+      if invalid_layout?(layout)
+        Jekyll.logger.warn(
+          "Build Warning:",
+          "Layout '#{document.data["layout"]}' requested "\
+          "in #{document.relative_path} does not exist."
+        )
+      elsif !layout.nil?
+        layout_source = layout.path.start_with?(site.source) ? :site : :theme
+        Jekyll.logger.debug "Layout source:", layout_source
+      end
     end
 
     # Render layout content into document.output
@@ -199,7 +205,7 @@ module Jekyll
       return unless document.write?
       site.regenerator.add_dependency(
         site.in_source_dir(document.path),
-        site.in_source_dir(layout.path)
+        layout.path
       )
     end
 
@@ -218,12 +224,8 @@ module Jekyll
     #
     # Returns nothing
     private
-    def assign_related_posts!
-      if document.is_a?(Document) && document.collection.label == "posts"
-        payload["site"]["related_posts"] = document.related_posts
-      else
-        payload["site"]["related_posts"] = nil
-      end
+    def assign_current_document!
+      payload["site"].current_document = document
     end
 
     # Set highlighter prefix and suffix
@@ -245,8 +247,9 @@ module Jekyll
 
     private
     def permalink_ext
-      if document.permalink && !document.permalink.end_with?("/")
-        permalink_ext = File.extname(document.permalink)
+      document_permalink = document.permalink
+      if document_permalink && !document_permalink.end_with?("/")
+        permalink_ext = File.extname(document_permalink)
         permalink_ext unless permalink_ext.empty?
       end
     end
@@ -265,6 +268,11 @@ module Jekyll
       @output_exts ||= converters.map do |c|
         c.output_ext(document.extname)
       end.compact
+    end
+
+    private
+    def liquid_options
+      @liquid_options ||= site.config["liquid"]
     end
   end
 end

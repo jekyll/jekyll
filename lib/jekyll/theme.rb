@@ -8,6 +8,8 @@ module Jekyll
 
     def initialize(name)
       @name = name.downcase.strip
+      Jekyll.logger.debug "Theme:", name
+      Jekyll.logger.debug "Theme source:", root
       configure_sass
     end
 
@@ -16,28 +18,29 @@ module Jekyll
       # Otherwise, Jekyll.sanitized path with prepend the unresolved root
       @root ||= File.realpath(gemspec.full_gem_path)
     rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP
-      nil
+      raise "Path #{gemspec.full_gem_path} does not exist, is not accessible "\
+        "or includes a symbolic link loop"
     end
 
     def includes_path
-      path_for "_includes".freeze
+      @includes_path ||= path_for "_includes".freeze
     end
 
     def layouts_path
-      path_for "_layouts".freeze
+      @layouts_path ||= path_for "_layouts".freeze
     end
 
     def sass_path
-      path_for "_sass".freeze
+      @sass_path ||= path_for "_sass".freeze
     end
 
     def assets_path
-      path_for "assets".freeze
+      @assets_path ||= path_for "assets".freeze
     end
 
     def configure_sass
       return unless sass_path
-      require "sass"
+      External.require_with_graceful_fail("sass") unless defined?(Sass)
       Sass.load_paths << sass_path
     end
 
@@ -55,6 +58,7 @@ module Jekyll
     def realpath_for(folder)
       File.realpath(Jekyll.sanitized_path(root, folder.to_s))
     rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP
+      Jekyll.logger.warn "Invalid theme folder:", folder
       nil
     end
 

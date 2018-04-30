@@ -7,6 +7,28 @@ class TestDocument < JekyllUnitTest
     assert_equal(one[key], other[key])
   end
 
+  def setup_encoded_document(filename)
+    site = fixture_site("collections" => ["encodings"])
+    site.process
+    Document.new(site.in_source_dir(File.join("_encodings", filename)), {
+      :site       => site,
+      :collection => site.collections["encodings"],
+    }).tap(&:read)
+  end
+
+  def setup_document_with_dates(filename)
+    site = fixture_site("collections" => ["dates"])
+    site.process
+    docs = nil
+    with_env("TZ", "UTC") do
+      docs = Document.new(site.in_source_dir(File.join("_dates", filename)), {
+        :site       => site,
+        :collection => site.collections["dates"],
+      }).tap(&:read)
+    end
+    docs
+  end
+
   context "a document in a collection" do
     setup do
       @site = fixture_site({
@@ -427,14 +449,16 @@ class TestDocument < JekyllUnitTest
         refute_nil @files.find do |doc|
           doc.relative_path == "_slides/example-slide-4.html"
         end
+        assert_exist dest_dir("slides/example-slide-4.html")
       end
     end
 
     context "with output overrides" do
       should "be output according its front matter" do
-        assert_nil(
-          @files.find { |doc| doc.relative_path == "_slides/non-outputted-slide.html" }
-        )
+        assert @files.find do |doc|
+          doc.relative_path == "_slides/non-outputted-slide.html"
+        end
+        refute_exist dest_dir("slides/non-outputted-slide.html")
       end
     end
   end
@@ -527,6 +551,56 @@ class TestDocument < JekyllUnitTest
 
     should "be output in the correct place" do
       assert_equal true, File.file?(@dest_file)
+    end
+  end
+
+  context "a document with UTF-8 CLRF" do
+    setup do
+      @document = setup_encoded_document "UTF8CRLFandBOM.md"
+    end
+
+    should "not throw an error" do
+      Jekyll::Renderer.new(@document.site, @document).render_document
+    end
+  end
+
+  context "a document with UTF-16LE CLRF" do
+    setup do
+      @document = setup_encoded_document "Unicode16LECRLFandBOM.md"
+    end
+
+    should "not throw an error" do
+      Jekyll::Renderer.new(@document.site, @document).render_document
+    end
+  end
+
+  context "a document with a date with timezone" do
+    setup do
+      @document = setup_document_with_dates "time_with_timezone.md"
+    end
+
+    should "have the expected date" do
+      assert_equal "2015/09/30", @document.data["date"].strftime("%Y/%m/%d")
+    end
+  end
+
+  context "a document with a date with time but without timezone" do
+    setup do
+      @document = setup_document_with_dates "time_without_timezone.md"
+    end
+
+    should "have the expected date" do
+      assert_equal "2015/10/01", @document.data["date"].strftime("%Y/%m/%d")
+    end
+  end
+
+  context "a document with a date without time" do
+    setup do
+      @document = setup_document_with_dates "date_without_time.md"
+    end
+
+    should "have the expected date" do
+      assert_equal "2015/10/01", @document.data["date"].strftime("%Y/%m/%d")
     end
   end
 end

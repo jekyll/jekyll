@@ -8,7 +8,7 @@ class TestAnsi < JekyllUnitTest
       @subject = Jekyll::Utils::Ansi
     end
 
-    Jekyll::Utils::Ansi::COLORS.each do |color, _val|
+    Jekyll::Utils::Ansi::COLORS.each_key do |color|
       should "respond_to? #{color}" do
         assert @subject.respond_to?(color)
       end

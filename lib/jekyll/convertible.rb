@@ -1,7 +1,4 @@
-# encoding: UTF-8
 # frozen_string_literal: true
-
-require "set"
 
 # Convertible provides methods for converting a pagelike item
 # from a certain type of markup into actual content
@@ -47,10 +44,10 @@ module Jekyll
           self.content = $POSTMATCH
           self.data = SafeYAML.load(Regexp.last_match(1))
         end
-      rescue SyntaxError => e
+      rescue Psych::SyntaxError => e
         Jekyll.logger.warn "YAML Exception reading #{filename}: #{e.message}"
         raise e if self.site.config["strict_front_matter"]
-      rescue => e
+      rescue StandardError => e
         Jekyll.logger.warn "Error reading file #{filename}: #{e.message}"
         raise e if self.site.config["strict_front_matter"]
       end
@@ -110,7 +107,6 @@ module Jekyll
     def render_liquid(content, payload, info, path)
       _renderer.render_liquid(content, payload, info, path)
     end
-    # rubocop: enable RescueException
 
     # Convert this Convertible's data to a Hash suitable for use by Liquid.
     #
@@ -166,16 +162,17 @@ module Jekyll
 
     # Determine whether the file should be rendered with Liquid.
     #
-    # Always returns true.
+    # Returns true if the file has Liquid Tags or Variables, false otherwise.
     def render_with_liquid?
-      true
+      Jekyll::Utils.has_liquid_construct?(content)
     end
 
     # Determine whether the file should be placed into layouts.
     #
-    # Returns false if the document is an asset file.
+    # Returns false if the document is an asset file or if the front matter
+    #   specifies `layout: none`
     def place_in_layout?
-      !asset_file?
+      !(asset_file? || no_layout?)
     end
 
     # Checks if the layout specified in the document actually exists
@@ -227,6 +224,7 @@ module Jekyll
     def write(dest)
       path = destination(dest)
       FileUtils.mkdir_p(File.dirname(path))
+      Jekyll.logger.debug "Writing:", path
       File.write(path, output, :mode => "wb")
       Jekyll::Hooks.trigger hook_owner, :post_write, self
     end
@@ -245,8 +243,13 @@ module Jekyll
     end
 
     private
+
     def _renderer
       @_renderer ||= Jekyll::Renderer.new(site, self)
+    end
+
+    def no_layout?
+      data["layout"] == "none"
     end
   end
 end

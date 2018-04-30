@@ -10,7 +10,7 @@ Happy Holidays, everyone.
 
 Jekyll v2.5.3 is a quick patch release, containing some minor fixes. See the
 [full history](/docs/history/) for more info. If you notice any problems,
-please [let us know]({{ site.help_url }}).
+please [let us know]({{ site.repository }}).
 
 This release also marks the start of Jekyll 3 development. I wrote about it
 over on my personal blog: [Jekyll 3 &mdash; The Road Ahead](https://byparker.com/blog/2014/jekyll-3-the-road-ahead/).

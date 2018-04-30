@@ -12,7 +12,7 @@ module Jekyll
       #
       # Returns a string that ultimately re-defines ENV["TZ"] in Windows
       def calculate(timezone)
-        External.require_with_graceful_fail("tzinfo")
+        External.require_with_graceful_fail("tzinfo") unless defined?(TZInfo)
         tz = TZInfo::Timezone.get(timezone)
         difference = Time.now.to_i - tz.now.to_i
         #

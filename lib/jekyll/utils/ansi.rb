@@ -1,6 +1,4 @@
 # Frozen-string-literal: true
-# Copyright: 2015 Jekyll - MIT License
-# Encoding: utf-8
 
 module Jekyll
   module Utils

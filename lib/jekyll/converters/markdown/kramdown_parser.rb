@@ -1,5 +1,4 @@
 # Frozen-string-literal: true
-# Encoding: utf-8
 
 module Jekyll
   module Converters
@@ -15,7 +14,6 @@ module Jekyll
         }.freeze
 
         def initialize(config)
-          Jekyll::External.require_with_graceful_fail "kramdown"
           @main_fallback_highlighter = config["highlighter"] || "rouge"
           @config = config["kramdown"] || {}
           @highlighter = nil
@@ -38,7 +36,14 @@ module Jekyll
         end
 
         def convert(content)
-          Kramdown::Document.new(content, @config).to_html
+          document = Kramdown::Document.new(content, @config)
+          html_output = document.to_html
+          if @config["show_warnings"]
+            document.warnings.each do |warning|
+              Jekyll.logger.warn "Kramdown warning:", warning
+            end
+          end
+          html_output
         end
 
         private

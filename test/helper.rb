@@ -32,7 +32,7 @@ require "minitest/profile"
 require "rspec/mocks"
 require_relative "../lib/jekyll.rb"
 
-Jekyll.logger = Logger.new(StringIO.new)
+Jekyll.logger = Logger.new(StringIO.new, :error)
 
 unless jruby?
   require "rdiscount"
@@ -43,6 +43,8 @@ require "kramdown"
 require "shoulda"
 
 include Jekyll
+
+require "jekyll/commands/serve/servlet"
 
 # Report with color.
 Minitest::Reporters.use! [
@@ -168,12 +170,15 @@ class JekyllUnitTest < Minitest::Test
     ENV[key] = old_value
   end
 
-  def capture_output
+  def capture_output(level = :debug)
     buffer = StringIO.new
     Jekyll.logger = Logger.new(buffer)
+    Jekyll.logger.log_level = level
     yield
     buffer.rewind
     buffer.string.to_s
+  ensure
+    Jekyll.logger = Logger.new(StringIO.new, :error)
   end
   alias_method :capture_stdout, :capture_output
   alias_method :capture_stderr, :capture_output
@@ -189,5 +194,57 @@ class JekyllUnitTest < Minitest::Test
       msg ||= "Jekyll does not currently support this feature on Windows."
       skip msg.to_s.magenta
     end
+  end
+end
+
+class FakeLogger
+  def <<(str); end
+end
+
+module TestWEBrick
+
+  module_function
+
+  def mount_server(&block)
+    server = WEBrick::HTTPServer.new(config)
+
+    begin
+      server.mount("/", Jekyll::Commands::Serve::Servlet, document_root,
+        document_root_options)
+
+      server.start
+      addr = server.listeners[0].addr
+      block.yield([server, addr[3], addr[1]])
+    rescue StandardError => e
+      raise e
+    ensure
+      server.shutdown
+      sleep 0.1 until server.status == :Stop
+    end
+  end
+
+  def config
+    logger = FakeLogger.new
+    {
+      :BindAddress => "127.0.0.1", :Port => 0,
+      :ShutdownSocketWithoutClose => true,
+      :ServerType => Thread,
+      :Logger => WEBrick::Log.new(logger),
+      :AccessLog => [[logger, ""]],
+      :JekyllOptions => {},
+    }
+  end
+
+  def document_root
+    "#{File.dirname(__FILE__)}/fixtures/webrick"
+  end
+
+  def document_root_options
+    WEBrick::Config::FileHandler.merge({
+      :FancyIndexing     => true,
+      :NondisclosureName => [
+        ".ht*", "~*",
+      ],
+    })
   end
 end

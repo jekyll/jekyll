@@ -1,6 +1,14 @@
 ---
+
+require:
+  - ./rubocop/jekyll
+
+Jekyll/NoPutsAllowed:
+  Exclude:
+    - rake/*.rake
+
 AllCops:
-  TargetRubyVersion: 2.0
+  TargetRubyVersion: 2.3
   Include:
     - lib/**/*.rb
   Exclude:
@@ -21,7 +29,7 @@ Layout/EmptyLinesAroundAccessModifier:
 Layout/EmptyLinesAroundModuleBody:
   Enabled: false
 Layout/EndOfLine:
-  EnforcedStyle: lf
+  EnforcedStyle: native
 Layout/ExtraSpacing:
   AllowForAlignment: true
 Layout/FirstParameterIndentation:
@@ -38,15 +46,20 @@ Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
-Layout/SpaceAroundOperators:
-  Enabled: true
-Layout/SpaceInsideBrackets:
+Lint/NestedPercentLiteral:
+  Exclude:
+    - test/test_site.rb
+Layout/EmptyComment:
   Enabled: false
-Lint/EndAlignment:
+Layout/EndAlignment:
   Severity: error
+Lint/UnneededRequireStatement:
+  Enabled: false
 Lint/UnreachableCode:
   Severity: error
 Lint/UselessAccessModifier:
+  Enabled: false
+Lint/Void:
   Enabled: false
 Metrics/AbcSize:
   Max: 21
@@ -82,6 +95,20 @@ Metrics/ParameterLists:
   Max: 4
 Metrics/PerceivedComplexity:
   Max: 8
+Naming/FileName:
+  Enabled: false
+Naming/HeredocDelimiterNaming:
+  Enabled: false
+Naming/MemoizedInstanceVariableName:
+  Exclude:
+    - lib/jekyll/page_without_a_file.rb
+    - lib/jekyll/drops/unified_payload_drop.rb
+    - lib/jekyll/drops/site_drop.rb
+Naming/UncommunicativeMethodParamName:
+  AllowedNames:
+    - _
+Performance/UnfreezeString:
+  Enabled: false
 Security/MarshalLoad:
   Exclude:
     - !ruby/regexp /test\/.*.rb$/
@@ -94,14 +121,11 @@ Style/Alias:
   Enabled: false
 Style/AndOr:
   Severity: error
-Style/Attr:
-  Enabled: false
 Style/BracesAroundHashParameters:
   Enabled: false
 Style/ClassAndModuleChildren:
   Enabled: false
 Style/FrozenStringLiteralComment:
-  Enabled: true
   EnforcedStyle: always
 Style/Documentation:
   Enabled: false
@@ -109,8 +133,9 @@ Style/Documentation:
     - !ruby/regexp /features\/.*.rb$/
 Style/DoubleNegation:
   Enabled: false
-Style/FileName:
-  Enabled: false
+Style/FormatStringToken:
+  Exclude:
+    - lib/jekyll/utils/ansi.rb
 Style/GuardClause:
   Enabled: false
 Style/HashSyntax:
@@ -120,10 +145,15 @@ Style/IfUnlessModifier:
   Enabled: false
 Style/InverseMethods:
   Enabled: false
+Style/MixinUsage:
+  Exclude:
+    - test/helper.rb
 Style/ModuleFunction:
   Enabled: false
 Style/MultilineTernaryOperator:
   Severity: error
+Style/NumericPredicate:
+  Enabled: false
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
     "%q": "{}"
@@ -133,6 +163,8 @@ Style/PercentLiteralDelimiters:
     "%w": "()"
     "%W": "()"
     "%x": "()"
+Style/RedundantFreeze:
+  Enabled: false
 Style/RedundantReturn:
   Enabled: false
 Style/RedundantSelf:
@@ -140,6 +172,8 @@ Style/RedundantSelf:
 Style/RegexpLiteral:
   EnforcedStyle: percent_r
 Style/RescueModifier:
+  Enabled: false
+Style/SafeNavigation:
   Enabled: false
 Style/SignalException:
   EnforcedStyle: only_raise
@@ -151,7 +185,7 @@ Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
 Style/SymbolArray:
   Enabled: false
-Style/TrailingCommaInLiteral:
+Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: consistent_comma
-Style/UnneededCapitalW:
-  Enabled: false
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma

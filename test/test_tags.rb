@@ -1,4 +1,3 @@
-# coding: utf-8
 # frozen_string_literal: true
 
 require "helper"
@@ -186,7 +185,8 @@ CONTENT
 
       should "render markdown with pygments" do
         assert_match(
-          %(<pre><code class="language-text" data-lang="text">test</code></pre>),
+          %(<pre><code class="language-text" data-lang="text">) +
+          %(<span></span>test</code></pre>),
           @result
         )
       end
@@ -194,7 +194,7 @@ CONTENT
       should "render markdown with pygments with line numbers" do
         assert_match(
           %(<pre><code class="language-text" data-lang="text">) +
-          %(<span class="lineno">1</span> test</code></pre>),
+          %(<span></span><span class="lineno">1 </span>test</code></pre>),
           @result
         )
       end
@@ -207,7 +207,7 @@ CONTENT
 
       should "not embed the file" do
         assert_match(
-          %(<pre><code class="language-text" data-lang="text">) +
+          %(<pre><code class="language-text" data-lang="text"><span></span>) +
           %(./jekyll.gemspec</code></pre>),
           @result
         )
@@ -221,7 +221,8 @@ CONTENT
 
       should "render markdown with pygments line handling" do
         assert_match(
-          %(<pre><code class="language-text" data-lang="text">Æ</code></pre>),
+          %(<pre><code class="language-text" data-lang="text">) +
+          %(<span></span>Æ</code></pre>),
           @result
         )
       end
@@ -241,7 +242,8 @@ EOS
 
       should "only strip the preceding newlines" do
         assert_match(
-          %(<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]),
+          %(<pre><code class=\"language-text\" data-lang=\"text\">) +
+          %(<span></span>     [,1] [,2]),
           @result
         )
       end
@@ -266,8 +268,8 @@ EOS
 
       should "only strip the newlines which precede and succeed the entire block" do
         assert_match(
-          "<pre><code class=\"language-text\" data-lang=\"text\">" \
-          "     [,1] [,2]\n\n\n[1,] FALSE TRUE\n[2,] FALSE TRUE</code></pre>",
+          %(<pre><code class=\"language-text\" data-lang=\"text\"><span></span>) +
+          %(     [,1] [,2]\n\n\n[1,] FALSE TRUE\n[2,] FALSE TRUE</code></pre>),
           @result
         )
       end
@@ -281,7 +283,8 @@ EOS
 
       should "only strip the preceding newlines" do
         assert_match(
-          %(<pre><code class="language-text" data-lang="text">     [,1] [,2]),
+          %(<pre><code class="language-text" data-lang="text"><span></span>) +
+          %(     [,1] [,2]),
           @result
         )
       end
@@ -299,7 +302,8 @@ EOS
 
       should "only strip the preceding newlines" do
         assert_match(
-          %(<pre><code class=\"language-text\" data-lang=\"text\">     [,1] [,2]),
+          %(<pre><code class=\"language-text\" data-lang=\"text\"><span></span>) +
+          %(     [,1] [,2]),
           @result
         )
       end
@@ -319,13 +323,62 @@ EOS
         )
       end
 
-      should "render markdown with rouge with line numbers" do
+      should "render markdown with rouge 2 with line numbers" do
+        skip "Skipped because using an older version of Rouge" if Utils::Rouge.old_api?
+        assert_match(
+          %(<table class="rouge-table"><tbody>) +
+            %(<tr><td class="gutter gl">) +
+            %(<pre class="lineno">1\n</pre></td>) +
+            %(<td class="code"><pre>test</pre></td></tr>) +
+            %(</tbody></table>),
+          @result
+        )
+      end
+
+      should "render markdown with rouge 1 with line numbers" do
+        skip "Skipped because using a newer version of Rouge" unless Utils::Rouge.old_api?
         assert_match(
           %(<table style="border-spacing: 0"><tbody>) +
             %(<tr><td class="gutter gl" style="text-align: right">) +
             %(<pre class="lineno">1</pre></td>) +
             %(<td class="code"><pre>test<span class="w">\n</span></pre></td></tr>) +
             %(</tbody></table>),
+          @result
+        )
+      end
+    end
+
+    context "post content has raw tag" do
+      setup do
+        content = <<-CONTENT
+---
+title: This is a test
+---
+
+```liquid
+{% raw %}
+{{ site.baseurl }}{% link _collection/name-of-document.md %}
+{% endraw %}
+```
+CONTENT
+        create_post(content)
+      end
+
+      should "render markdown with rouge 1" do
+        skip "Skipped because using a newer version of Rouge" unless Utils::Rouge.old_api?
+
+        assert_match(
+          %(<div class="language-liquid highlighter-rouge"><pre class="highlight"><code>),
+          @result
+        )
+      end
+
+      should "render markdown with rouge 2" do
+        skip "Skipped because using an older version of Rouge" if Utils::Rouge.old_api?
+
+        assert_match(
+          %(<div class="language-liquid highlighter-rouge">) +
+            %(<div class="highlight"><pre class="highlight"><code>),
           @result
         )
       end
@@ -418,13 +471,23 @@ This should not be highlighted, right?
 EOS
       end
 
-      should "should stop highlighting at boundary" do
+      should "should stop highlighting at boundary with rouge 2" do
+        skip "Skipped because using an older version of Rouge" if Utils::Rouge.old_api?
         expected = <<-EOS
-<p>This is not yet highlighted</p>
+<p>This is not yet highlighted</p>\n
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nx">test</span></pre></td></tr></tbody></table></code></pre></figure>\n
+<p>This should not be highlighted, right?</p>
+EOS
+        assert_match(expected, @result)
+      end
 
+      should "should stop highlighting at boundary with rouge 1" do
+        skip "Skipped because using a newer version of Rouge" unless Utils::Rouge.old_api?
+        expected = <<-EOS
+<p>This is not yet highlighted</p>\n
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>test<span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
+</span></pre></td></tr></tbody></table></code></pre></figure>\n
 <p>This should not be highlighted, right?</p>
 EOS
         assert_match(expected, @result)
@@ -849,7 +912,9 @@ CONTENT
         end
         assert_match(
           "Could not locate the included file 'tmp/pages-test-does-not-exist' " \
-          "in any of [\"#{source_dir}/_includes\"].",
+          "in any of [\"#{source_dir}/_includes\"]. Ensure it exists in one of " \
+          "those directories and is not a symlink as those are not allowed in " \
+          "safe mode.",
           ex.message
         )
       end
@@ -865,6 +930,64 @@ title: Include tag parameters
 {% include sig.markdown myparam="test" %}
 
 {% include params.html param="value" %}
+CONTENT
+        create_post(content, {
+          "permalink"   => "pretty",
+          "source"      => source_dir,
+          "destination" => dest_dir,
+          "read_posts"  => true,
+        })
+      end
+
+      should "correctly output include variable" do
+        assert_match "<span id=\"include-param\">value</span>", @result.strip
+      end
+
+      should "ignore parameters if unused" do
+        assert_match "<hr />\n<p>Tom Preston-Werner\ngithub.com/mojombo</p>\n", @result
+      end
+    end
+
+    context "with simple syntax but multiline markup" do
+      setup do
+        content = <<CONTENT
+---
+title: Include tag parameters
+---
+
+{% include sig.markdown myparam="test" %}
+
+{% include params.html
+  param="value" %}
+CONTENT
+        create_post(content, {
+          "permalink"   => "pretty",
+          "source"      => source_dir,
+          "destination" => dest_dir,
+          "read_posts"  => true,
+        })
+      end
+
+      should "correctly output include variable" do
+        assert_match "<span id=\"include-param\">value</span>", @result.strip
+      end
+
+      should "ignore parameters if unused" do
+        assert_match "<hr />\n<p>Tom Preston-Werner\ngithub.com/mojombo</p>\n", @result
+      end
+    end
+
+    context "with variable syntax but multiline markup" do
+      setup do
+        content = <<CONTENT
+---
+title: Include tag parameters
+---
+
+{% include sig.markdown myparam="test" %}
+{% assign path = "params" | append: ".html" %}
+{% include {{ path }}
+  param="value" %}
 CONTENT
         create_post(content, {
           "permalink"   => "pretty",
@@ -1208,8 +1331,8 @@ CONTENT
           })
         end
         assert_match(
-          "Ensure it exists in one of those directories and, if it is a symlink, does " \
-          "not point outside your site source.",
+          "Ensure it exists in one of those directories and is not a symlink "\
+          "as those are not allowed in safe mode.",
           ex.message
         )
       end

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "addressable/uri"
-
 module Jekyll
   module Commands
     class Doctor < Command
@@ -41,7 +39,20 @@ module Jekyll
             !conflicting_urls(site),
             !urls_only_differ_by_case(site),
             proper_site_url?(site),
+            properly_gathered_posts?(site),
           ].all?
+        end
+
+        def properly_gathered_posts?(site)
+          return true if site.config["collections_dir"].empty?
+          posts_at_root = site.in_source_dir("_posts")
+          return true unless File.directory?(posts_at_root)
+          Jekyll.logger.warn "Warning:",
+            "Detected '_posts' directory outside custom `collections_dir`!"
+          Jekyll.logger.warn "",
+            "Please move '#{posts_at_root}' into the custom directory at " \
+            "'#{site.in_source_dir(site.config["collections_dir"])}'"
+          false
         end
 
         def deprecated_relative_permalinks(site)
@@ -86,7 +97,7 @@ module Jekyll
         def urls_only_differ_by_case(site)
           urls_only_differ_by_case = false
           urls = case_insensitive_urls(site.pages + site.docs_to_write, site.dest)
-          urls.each do |_case_insensitive_url, real_urls|
+          urls.each_value do |real_urls|
             next unless real_urls.uniq.size > 1
             urls_only_differ_by_case = true
             Jekyll.logger.warn "Warning:", "The following URLs only differ" \
@@ -135,7 +146,9 @@ module Jekyll
         def url_valid?(url)
           Addressable::URI.parse(url)
           true
-        rescue
+        # Addressable::URI#parse only raises a TypeError
+        # https://git.io/vFfbx
+        rescue TypeError
           Jekyll.logger.warn "Warning:", "The site URL does not seem to be valid, "\
               "check the value of `url` in your config file."
           false

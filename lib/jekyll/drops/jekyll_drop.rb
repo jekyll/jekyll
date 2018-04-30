@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # frozen_string_literal: true
 
 module Jekyll
@@ -26,7 +25,6 @@ module Jekyll
       end
 
       def to_json(state = nil)
-        require "json"
         JSON.generate(to_h, state)
       end
     end
