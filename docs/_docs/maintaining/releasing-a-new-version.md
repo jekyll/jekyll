@@ -71,7 +71,7 @@ If you have access to the [@jekyllrb](https://twitter.com/jekyllrb) Twitter acco
 
 ### Build the docs
 
-We package our documentation as a :gem:Gem for offline use.
+We package our documentation as a :gem: Gem for offline use.
 
 This is done with the
 [**jekyll-docs**](https://github.com/jekyll/jekyll-docs#building) repository,
