@@ -147,7 +147,8 @@ you come up with your own tags via plugins.
     <tr>
       <td>
         <p class="name"><strong>Where Expression</strong></p>
-        <p>Select all the objects in an array where the expression is true. Jekyll v3.2.0 & later.</p>
+        <p>Select all the objects in an array where the expression is true.
+        {% include docs_version_badge.html version="3.2.0" %}</p>
       </td>
       <td class="align-center">
         <p>
@@ -178,7 +179,8 @@ you come up with your own tags via plugins.
     <tr>
       <td>
         <p class="name"><strong>Group By Expression</strong></p>
-        <p>Group an array's items using a Liquid expression.</p>
+        <p>Group an array's items using a Liquid expression.
+        {% include docs_version_badge.html version="3.4.0" %}</p>
       </td>
       <td class="align-center">
         <p>
