@@ -48,7 +48,7 @@ module Jekyll
     #
     # Returns the relative_path for the doc this excerpt belongs to with #excerpt appended
     def relative_path
-      File.join(doc.relative_path, "#excerpt")
+      @relative_path ||= File.join(doc.relative_path, "#excerpt")
     end
 
     # Check if excerpt includes a string
