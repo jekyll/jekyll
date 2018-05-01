@@ -29,6 +29,7 @@
 ### Development Fixes
 
   * Remove unnecessary Jekyll::Page constant (#6770)
+  * Loggers should accept both numbers and symbols (#6967)
 
 ## 3.8.0 / 2018-04-19
 
