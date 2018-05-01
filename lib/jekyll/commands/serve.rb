@@ -99,9 +99,13 @@ module Jekyll
           opts = configuration_from_options(opts)
           destination = opts["destination"]
           register_reload_hooks(opts) if opts["livereload"]
-          setup(destination)
+          pre_setup(destination)
+          setup_webrick(opts, destination)
 
-          start_up_webrick(opts, destination)
+          @reload_reactor.start(opts) if opts["livereload"]
+
+          launch_browser(@server, opts) if opts["open_url"]
+          boot_or_detach(@server, opts)
         end
 
         def shutdown
@@ -175,12 +179,12 @@ module Jekyll
         end
         # rubocop:enable Metrics/AbcSize
 
-        # Do a base pre-setup of WEBRick so that everything is in place
+        # Do a base pre-setup of WEBrick so that everything is in place
         # when we get ready to party, checking for an setting up an error page
         # and making sure our destination exists.
 
         private
-        def setup(destination)
+        def pre_setup(destination)
           require_relative "serve/servlet"
 
           FileUtils.mkdir_p(destination)
@@ -220,17 +224,11 @@ module Jekyll
         #
 
         private
-        def start_up_webrick(opts, destination)
-          if opts["livereload"]
-            @reload_reactor.start(opts)
-          end
-
+        def setup_webrick(opts, destination)
           @server = WEBrick::HTTPServer.new(webrick_opts(opts)).tap { |o| o.unmount("") }
           @server.mount(opts["baseurl"].to_s, Servlet, destination, file_handler_opts)
 
           Jekyll.logger.info "Server address:", server_address(@server, opts)
-          launch_browser @server, opts if opts["open_url"]
-          boot_or_detach @server, opts
         end
 
         # Recreate NondisclosureName under utf-8 circumstance
