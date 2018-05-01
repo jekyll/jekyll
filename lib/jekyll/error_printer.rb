@@ -4,8 +4,8 @@ module Jekyll
   class ErrorPrinter
     def initialize(options)
       @options = options
-      @exception = options.fetch(:exception)
-      @document = options.fetch(:document)
+      @exception = options.fetch("exception")
+      @document = options.fetch("document")
       @document_path = @document.path || @document.relative_path
     end
 
