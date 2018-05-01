@@ -17,11 +17,6 @@
   * use jekyll-compose if installed (#6932)
   * Memoize computing excerpt&#39;s relative_path (#6951)
 
-### Bug Fixes
-
-  * Fix rendering Liquid constructs in excerpts (#6945)
-  * Liquify documents unless published == false (#6959)
-
 ### Major Enhancements
 
   * Remove unused error class (#6511)
@@ -33,6 +28,13 @@
 
   * Remove unnecessary Jekyll::Page constant (#6770)
   * Loggers should accept both numbers and symbols (#6967)
+
+## 3.8.1 / 2018-05-01
+
+### Bug Fixes
+
+  * Fix rendering Liquid constructs in excerpts (#6945)
+  * Liquify documents unless published == false (#6959)
 
 ## 3.8.0 / 2018-04-19
 
