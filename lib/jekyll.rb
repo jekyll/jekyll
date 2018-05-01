@@ -79,6 +79,8 @@ module Jekyll
   autoload :URL,                 "jekyll/url"
   autoload :Utils,               "jekyll/utils"
   autoload :VERSION,             "jekyll/version"
+  autoload :ErrorPrinter,        "jekyll/error_printer"
+  autoload :LiveReloadTemplate,  "jekyll/live_reload_template"
 
   # extensions
   require "jekyll/plugin"

@@ -477,6 +477,12 @@ module Jekyll
     def render_regenerated(document, payload)
       return unless regenerator.regenerate?(document)
       document.output = Jekyll::Renderer.new(self, document, payload).run
+    rescue Liquid::SyntaxError => e
+      raise(e) unless config["livereload"] == true
+      document.output = Jekyll::ErrorPrinter.new(
+        config.merge("exception" => e, "document" => document)
+      ).call
+    ensure
       document.trigger_hooks(:post_render)
     end
   end
