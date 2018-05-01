@@ -10,6 +10,7 @@
   * WIP: Do not advise users to install Jekyll outside of Bundler (#6927)
   * Don&#39;t prompt for sudo when installing with Ubuntu WSL (#6781)
   * Fix typo (#6969)
+  * Add version number for group_by_exp doc (#6956)
 
 ### Minor Enhancements
 
