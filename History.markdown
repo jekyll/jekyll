@@ -19,6 +19,7 @@
 ### Bug Fixes
 
   * Fix rendering Liquid constructs in excerpts (#6945)
+  * Liquify documents unless published == false (#6959)
 
 ### Major Enhancements
 
