@@ -140,6 +140,44 @@ Feature: Collections
     And I should see "Newest puppy: Fido" in "_site/index.html"
     And the "_site/puppies/fido.html" file should exist
 
+  Scenario: Access rendered and published collection documents via Liquid
+    Given I have a _puppies directory
+    And I have the following documents under the puppies collection:
+      | title  | date       | content             | published |
+      | Rover  | 2007-12-31 | content for Rover.  | true      |
+      | Figor  | 2007-12-31 | content for Figor.  | false     |
+      | Snowy  | 2199-12-31 | content for Snowy.  | true      |
+      | Hardy  | 2199-12-31 | content for Hardy.  | false     |
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      puppies:
+        output: true
+    """
+    And I have a "index.md" page that contains "{% for puppy in site.puppies %}<div>{{ puppy.title }}</div>{% endfor %}"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "<div>Rover</div>" in "_site/index.html"
+    But I should see "<div>Snowy</div>" in "_site/index.html"
+    And I should not see "<div>Figor</div>" in "_site/index.html"
+    And I should not see "<div>Hardy</div>" in "_site/index.html"
+    And the "_site/puppies/rover.html" file should exist
+    And the "_site/puppies/figor.html" file should not exist
+    And the "_site/puppies/snowy.html" file should not exist
+    And the "_site/puppies/hardy.html" file should not exist
+    When I run jekyll build --future
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "<div>Rover</div>" in "_site/index.html"
+    And I should see "<div>Snowy</div>" in "_site/index.html"
+    And I should not see "<div>Figor</div>" in "_site/index.html"
+    But I should not see "<div>Hardy</div>" in "_site/index.html"
+    And the "_site/puppies/rover.html" file should exist
+    And the "_site/puppies/figor.html" file should not exist
+    And the "_site/puppies/hardy.html" file should not exist
+    But the "_site/puppies/snowy.html" file should exist
+
   Scenario: Unrendered collection with future dated document
     Given I have a _puppies directory
     And I have the following documents under the puppies collection:
@@ -186,6 +224,44 @@ Feature: Collections
     And the _site directory should exist
     And I should see "Newest puppy: Fido" in "_site/index.html"
     And the "_site/puppies/fido.html" file should not exist
+
+  Scenario: Access unrendered but publishable collection documents via Liquid
+    Given I have a _puppies directory
+    And I have the following documents under the puppies collection:
+      | title  | date       | content             | published |
+      | Rover  | 2007-12-31 | content for Rover.  | true      |
+      | Figor  | 2007-12-31 | content for Figor.  | false     |
+      | Snowy  | 2199-12-31 | content for Snowy.  | true      |
+      | Hardy  | 2199-12-31 | content for Hardy.  | false     |
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      puppies:
+        output: false
+    """
+    And I have a "index.md" page that contains "{% for puppy in site.puppies %}<div>{{ puppy.title }}</div>{% endfor %}"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "<div>Rover</div>" in "_site/index.html"
+    But I should see "<div>Snowy</div>" in "_site/index.html"
+    And I should not see "<div>Figor</div>" in "_site/index.html"
+    And I should not see "<div>Hardy</div>" in "_site/index.html"
+    And the "_site/puppies/rover.html" file should not exist
+    And the "_site/puppies/figor.html" file should not exist
+    And the "_site/puppies/snowy.html" file should not exist
+    And the "_site/puppies/hardy.html" file should not exist
+    When I run jekyll build --future
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "<div>Rover</div>" in "_site/index.html"
+    And I should see "<div>Snowy</div>" in "_site/index.html"
+    And I should not see "<div>Figor</div>" in "_site/index.html"
+    But I should not see "<div>Hardy</div>" in "_site/index.html"
+    And the "_site/puppies/rover.html" file should not exist
+    And the "_site/puppies/figor.html" file should not exist
+    And the "_site/puppies/snowy.html" file should not exist
+    And the "_site/puppies/hardy.html" file should not exist
 
   Scenario: All the documents
     Given I have an "index.html" page that contains "All documents: {% for doc in site.documents %}{{ doc.relative_path }} {% endfor %}"
