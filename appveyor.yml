@@ -28,15 +28,14 @@ environment:
       TEST_SUITE: "test"
     - RUBY_FOLDER_VER: "23"
       TEST_SUITE: "test"
+    - RUBY_FOLDER_VER: "25"
+      TEST_SUITE: "profile-docs"
 
 test_script:
   - ruby --version
   - gem --version
   - bundler --version
   - bash ./script/cibuild
-
-on_success:
-  - bundle exec jekyll build --profile --source docs
 
 cache:
   # If one of the files after the right arrow changes, cache will be skipped
