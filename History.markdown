@@ -19,6 +19,7 @@
 ### Bug Fixes
 
   * Fix rendering Liquid constructs in excerpts (#6945)
+  * Backport #6945 (#6970)
 
 ### Major Enhancements
 
