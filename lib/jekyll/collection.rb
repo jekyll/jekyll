@@ -210,12 +210,11 @@ module Jekyll
     private
 
     def read_document(full_path)
-      doc = Jekyll::Document.new(full_path, :site => site, :collection => self)
-      doc.read
-      if site.publisher.publish?(doc) || !write?
-        docs << doc
-      else
-        Jekyll.logger.debug "Skipped Publishing:", doc.relative_path
+      docs << Document.new(full_path, :site => site, :collection => self).tap do |doc|
+        doc.read
+        if !site.publisher.publish?(doc) && site.publisher.hidden_in_the_future?(doc)
+          Jekyll.logger.debug "Skip Publishing:", "#{doc.relative_path} has a future date"
+        end
       end
     end
 

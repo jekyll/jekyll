@@ -159,3 +159,127 @@ Feature: Collections Directory
     And I should see exactly "Nested Static content." in "_site/puppies/nested/static_file.txt"
     And the _site/gathering directory should not exist
     And the _site/_posts directory should not exist
+
+  Scenario: Rendered collection with a document that includes a relative document
+    Given I have a _puppies directory
+    And I have the following documents under the puppies collection:
+      | title  | date       | content                         |
+      | INTRO  | 2007-12-31 | excerpt for all docs.           |
+      | Rover  | 2007-12-31 | {% include_relative intro.md %} |
+    And I have a _posts directory
+    And I have the following post:
+      | title         | date       | content         |
+      | Gathered Post | 2009-03-27 | Random Content. |
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      puppies:
+        output: true
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And the "_site/puppies/rover.html" file should exist
+    And I should see "excerpt for all docs." in "_site/puppies/rover.html"
+    And I should see "Random Content." in "_site/2009/03/27/gathered-post.html"
+
+  Scenario: Rendered collection in custom collections_dir with a document that includes a relative document
+    Given I have a collections/_puppies directory
+    And I have the following documents under the "puppies" collection within the "collections" directory:
+      | title  | date       | content                         |
+      | INTRO  | 2007-12-31 | excerpt for all docs.           |
+      | Rover  | 2007-12-31 | {% include_relative intro.md %} |
+    And I have a collections/_posts directory
+    And I have the following post within the "collections" directory:
+      | title         | date       | content         |
+      | Gathered Post | 2009-03-27 | Random Content. |
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      puppies:
+        output: true
+
+    collections_dir: collections
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And the "_site/puppies/rover.html" file should exist
+    And I should see "excerpt for all docs." in "_site/puppies/rover.html"
+    And I should see "Random Content." in "_site/2009/03/27/gathered-post.html"
+
+  Scenario: Front matter defaults and custom collections directory
+    Given I have a gathering/_players/managers directory
+    And I have a gathering/_players/recruits directory
+    And I have a gathering/_players/standby directory
+    And I have the following documents nested inside "managers" directory under the "players" collection within the "gathering" directory:
+      | title          | content             |
+      | Tony Stark     | content for Tony.   |
+      | Steve Rogers   | content for Steve.  |
+    And I have the following documents nested inside "recruits" directory under the "players" collection within the "gathering" directory:
+      | title          | content             |
+      | Peter Parker   | content for Peter.  |
+      | Wanda Maximoff | content for Wanda.  |
+    And I have the following documents nested inside "standby" directory under the "players" collection within the "gathering" directory:
+      | title          | content             |
+      | Thanos         | content for Thanos. |
+      | Loki           | content for Loki.   |
+    And I have a "_config.yml" file with content:
+    """
+    collections_dir: gathering
+    collections: ["players"]
+    defaults:
+    - scope:
+        path: ""
+        type: players
+      values:
+        recruit: false
+        manager: false
+        villain: false
+    - scope:
+        path: gathering/_players/standby/thanos.md
+        type: players
+      values:
+        villain: true
+    - scope:
+        path: gathering/_players/managers/*
+        type: players
+      values:
+        manager: true
+    - scope:
+        path: gathering/_players/recruits/*
+        type: players
+      values:
+        recruit: true
+    """
+    And I have a "index.md" file with content:
+    """
+    ---
+    ---
+    {% for player in site.players %}
+      <p>{{ player.title }}: Manager: {{ player.manager }}</p>
+      <p>{{ player.title }}: Recruit: {{ player.recruit }}</p>
+      <p>{{ player.title }}: Villain: {{ player.villain }}</p>
+    {% endfor %}
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "<p>Tony Stark: Manager: true</p>" in "_site/index.html"
+    And I should see "<p>Tony Stark: Recruit: false</p>" in "_site/index.html"
+    And I should see "<p>Tony Stark: Villain: false</p>" in "_site/index.html"
+    And I should see "<p>Peter Parker: Manager: false</p>" in "_site/index.html"
+    And I should see "<p>Peter Parker: Recruit: true</p>" in "_site/index.html"
+    And I should see "<p>Peter Parker: Villain: false</p>" in "_site/index.html"
+    And I should see "<p>Steve Rogers: Manager: true</p>" in "_site/index.html"
+    And I should see "<p>Steve Rogers: Recruit: false</p>" in "_site/index.html"
+    And I should see "<p>Steve Rogers: Villain: false</p>" in "_site/index.html"
+    And I should see "<p>Wanda Maximoff: Manager: false</p>" in "_site/index.html"
+    And I should see "<p>Wanda Maximoff: Recruit: true</p>" in "_site/index.html"
+    And I should see "<p>Wanda Maximoff: Villain: false</p>" in "_site/index.html"
+    And I should see "<p>Thanos: Manager: false</p>" in "_site/index.html"
+    And I should see "<p>Thanos: Recruit: false</p>" in "_site/index.html"
+    And I should see "<p>Thanos: Villain: true</p>" in "_site/index.html"
+    And I should see "<p>Loki: Manager: false</p>" in "_site/index.html"
+    And I should see "<p>Loki: Recruit: false</p>" in "_site/index.html"
+    And I should see "<p>Loki: Villain: false</p>" in "_site/index.html"

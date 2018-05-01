@@ -8,7 +8,7 @@ While Windows is not an officially-supported platform, it can be used to run Jek
 
 ## Installing Jekyll
 
-If you are using Windows 10 Anniversary Update, the easiest way to run Jekyll is by [installing][WSL-Guide] the new Bash on Ubuntu on Windows.
+If you are using Windows 10 Anniversary Update or later, the easiest way to run Jekyll is by [installing][WSL-Guide] the new Bash on Ubuntu on Windows.
 
 
 ### Installation via Bash on Windows 10
@@ -51,6 +51,12 @@ Check if Jekyll installed properly by running:
 jekyll -v
 ```
 
+Configure the bundler/gem path so bundle doesn't prompt for sudo
+
+```sh
+bundle config path vendor/bundle
+```
+
 **And that's it!**
 
 To start a new project named `my_blog`, just run:
@@ -61,8 +67,12 @@ jekyll new my_blog
 
 You can make sure time management is working properly by inspecting your `_posts` folder. You should see a markdown file with the current date in the filename.
 
-**Note:** Bash on Ubuntu on Windows is still under development, so you may run into issues.
+<div class="note info">
+  <h5>Non-superuser account issues</h5>
+  <p>If the `jekyll new` command prints the error "Your user account isn't allowed to install to the system RubyGems", see the "Running Jekyll as Non-Superuser" instructions in <a href="/docs/troubleshooting/#no-sudo">Troubleshooting</a>.</p>
+</div>
 
+**Note:** Bash on Ubuntu on Windows is still under development, so you may run into issues.
 
 [WSL-Guide]: https://msdn.microsoft.com/en-us/commandline/wsl/install_guide
 [BASH-WSL]: https://msdn.microsoft.com/en-us/commandline/wsl/about
