@@ -80,7 +80,7 @@ group :jekyll_optional_dependencies do
     gem "pygments.rb", "~> 1.0"
     gem "rdiscount", "~> 2.0"
     gem "redcarpet", "~> 3.2", ">= 3.2.3"
-    gem "yajl-ruby", "~> 1.3.1"
+    gem "yajl-ruby", "~> 1.3"
   end
 
   # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
