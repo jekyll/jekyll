@@ -4,12 +4,14 @@ description: Official guide to install Jekyll on macOS, GNU/Linux or Windows.
 permalink: /docs/installation/
 ---
 
-- [Requirements](#requirements)
-- [Install on macOS](#macOS)
-- [Install on Windows](../windows/)
-- [Upgrade Jekyll](#upgrade-jekyll)
+Jekyll is a [Ruby Gem](http://guides.rubygems.org/rubygems-basics/), and can be
+installed on most systems.
 
-Installing Jekyll should be straight-forward if your system meets the requirements.
+- [Requirements](#requirements)
+- [Install Jekyll on macOS](#macOS)
+- [Install Jekyll on Ubuntu Linux](#ubuntu)
+- [Install Jekyll on Windows](../windows/)
+- [Upgrade Jekyll](#upgrade-jekyll)
 
 ## Requirements
 
@@ -110,6 +112,35 @@ Check out the [troubleshooting](../troubleshooting/) page or
 [ask for help on our forum](https://talk.jekyllrb.com).
 
 </div>
+
+## Install on Ubuntu Linux {#ubuntu}
+
+Before we install Jekyll, we need to make sure we have all the required
+dependencies.
+
+```sh
+sudo apt-get install ruby ruby-dev build-essential
+```
+
+It is best to avoid installing Ruby Gems as the root user. Therefore, we need to
+set up a gem installation directory for your user account. The following
+commands will add environment variables to your `~/.bashrc` file to configure
+the gem installation path. Run them now:
+
+```sh
+echo '# Install Ruby Gems to ~/gems' >> ~/.bashrc
+echo 'export GEM_HOME=$HOME/gems' >> ~/.bashrc
+echo 'export PATH=$HOME/gems/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+```
+
+Finally, install Jekyll:
+
+```sh
+gem install jekyll bundler
+```
+
+That's it! You're ready to start using Jekyll.
 
 ## Upgrade Jekyll
 

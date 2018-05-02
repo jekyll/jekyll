@@ -54,7 +54,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 [IANA-database]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
-
 ### Auto Regeneration
 
 Jekyll uses the `listen` gem to watch for changes when the `--watch` switch is specified during a build or serve. While `listen` has built-in support for UNIX systems, it may require an extra gem for compatibility with Windows.
@@ -109,6 +108,12 @@ Check if Jekyll installed properly by running:
 
 ```sh
 jekyll -v
+```
+
+Configure the bundler/gem path so bundle doesn't prompt for sudo
+
+```sh
+bundle config path vendor/bundle
 ```
 
 **And that's it!**

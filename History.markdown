@@ -1,5 +1,46 @@
 ## HEAD
 
+### Documentation
+
+  * Release post for v3.8.0 (#6849)
+  * Add Installation Instructions for Ubuntu (#6925)
+  * add liquid tag jekyll-flickr (#6946)
+  * Add 4.0 development post (#6934)
+  * Updated copy - fixed casing of SaaS on resources page. (#6949)
+  * WIP: Do not advise users to install Jekyll outside of Bundler (#6927)
+  * Don&#39;t prompt for sudo when installing with Ubuntu WSL (#6781)
+  * Fix typo (#6969)
+  * Add version number for group_by_exp doc (#6956)
+
+### Minor Enhancements
+
+  * use jekyll-compose if installed (#6932)
+  * Memoize computing excerpt&#39;s relative_path (#6951)
+
+### Major Enhancements
+
+  * Remove unused error class (#6511)
+  * Drop support for Ruby 2.1 and 2.2 (#6560)
+  * Add vendor folder to a newly installed site&#39;s .gitignore (#6968)
+  * bump i18n (#6931)
+  * We are not using Ruby 2.2 anymore (#6977)
+
+### Development Fixes
+
+  * Remove unnecessary Jekyll::Page constant (#6770)
+  * Loggers should accept both numbers and symbols (#6967)
+  * Update instructions for releasing docs Gem (#6975)
+  * yajl-ruby update to v1.4.0 (#6976)
+
+## 3.8.1 / 2018-05-01
+
+### Bug Fixes
+
+  * Fix rendering Liquid constructs in excerpts (#6945)
+  * Liquify documents unless published == false (#6959)
+
+## 3.8.0 / 2018-04-19
+
 ### Development Fixes
 
   * move duplicate code to a single private method (#6593)
@@ -21,6 +62,8 @@
   * Bump Rubocop to 0.54.x (#6915)
   * Regenerate unconditionally unless its an incremental build (#6917)
   * Centralize require statements (#6910)
+  * Bump to Rubocop 0.55 (#6929)
+  * Refactor private method `HighlightBlock#parse_options` (#6822)
 
 ### Minor Enhancements
 
@@ -70,6 +113,8 @@
   * Fix tutorials navigation HTML (#6919)
   * add Arch Linux instalation troubleshoot (#6782)
   * Docs: Install Jekyll on macOS (#6881)
+  * Fix CodeClimate badges [ci skip] (#6930)
+  * Update index.md (#6933)
 
 ### Site Enhancements
 
@@ -86,6 +131,7 @@
   * Fix passing multiline params to include tag when using the variable syntax  (#6858)
   * `include_relative` tag should find related documents in collections gathered within custom `collections_dir` (#6818)
   * Handle liquid tags in excerpts robustly (#6891)
+  * Allow front matter defaults to be applied properly to documents gathered under custom `collections_dir` (#6885)
 
 ## 3.7.3 / 2018-02-25
 
