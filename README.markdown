@@ -3,8 +3,8 @@
 [![Gem Version](https://img.shields.io/gem/v/jekyll.svg)][ruby-gems]
 [![Linux Build Status](https://img.shields.io/travis/jekyll/jekyll/master.svg?label=Linux%20build)][travis]
 [![Windows Build status](https://img.shields.io/appveyor/ci/jekyll/jekyll/master.svg?label=Windows%20build)][appveyor]
-[![Test Coverage](https://img.shields.io/codeclimate/coverage/github/jekyll/jekyll.svg)][coverage]
-[![Code Climate](https://img.shields.io/codeclimate/github/jekyll/jekyll.svg)][codeclimate]
+[![Maintainability](https://api.codeclimate.com/v1/badges/8ba0cb5b17bb9848e128/maintainability)](codeclimate)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/8ba0cb5b17bb9848e128/test_coverage)](coverage)
 [![Dependency Status](https://img.shields.io/gemnasium/jekyll/jekyll.svg)][gemnasium]
 [![Security](https://hakiri.io/github/jekyll/jekyll/master.svg)][hakiri]
 

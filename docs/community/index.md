@@ -1,14 +1,14 @@
 ---
 layout: page
-title: Community
-permalink: /community/
+title: JekyllConf
+redirect_from: /community/index.html
+permalink: /jekyllconf/
 ---
-
-## Jekyllconf
 
 [JekyllConf](http://jekyllconf.com) is a free, online conference for all things Jekyll hosted by [CloudCannon](http://cloudcannon.com). Each year members of the Jekyll community speak about interesting use cases, tricks they've learned, or meta Jekyll topics.
 
-### Featured
+## Featured
+
 {% assign random = site.time | date: "%s%N" | modulo: site.data.jekyllconf-talks.size %}
 {% assign featured = site.data.jekyllconf-talks[random] %}
 
@@ -19,7 +19,7 @@ permalink: /community/
 
 {% assign talks = site.data.jekyllconf-talks | group_by: 'year' %}
 {% for year in talks reversed %}
-### {{ year.name }}
+## {{ year.name }}
     {% for talk in year.items %}
  * [{{ talk.topic }}](https://youtu.be/{{ talk.youtube_id }}) - [{{ talk.speaker }}](https://twitter.com/{{ talk.twitter_handle }})
     {% endfor %}
