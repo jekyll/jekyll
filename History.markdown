@@ -17,6 +17,7 @@
 
   * use jekyll-compose if installed (#6932)
   * Memoize computing excerpt&#39;s relative_path (#6951)
+  * Liquefied link tag (#6269)
 
 ### Major Enhancements
 
