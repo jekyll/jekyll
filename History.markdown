@@ -29,6 +29,7 @@
   * Remove unnecessary Jekyll::Page constant (#6770)
   * Loggers should accept both numbers and symbols (#6967)
   * Update instructions for releasing docs Gem (#6975)
+  * yajl-ruby update to v1.4.0 (#6976)
 
 ## 3.8.1 / 2018-05-01
 
