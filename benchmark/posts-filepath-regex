@@ -1,0 +1,87 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'benchmark/ips'
+
+DATE_POST_MATCHER      = %r!^(?:.+/)*(\d{2,4}-\d{1,2}-\d{1,2})-(.*)(\.[^.]+)$!
+LAZY_DATE_POST_MATCHER = %r!^(?>.+?/)*?(\d{2,4}-\d{1,2}-\d{1,2})-(.*)(\.[^.]+)$!
+
+DATED_FILES = %w(
+  2018-04-15-update-on-jekyll-s-google-summer-of-code-projects.markdown
+  2018-04-1d-INVALID-day-pattern-on-this-filename.markdown
+  2018-04-15-.markdown
+)
+
+POST_FILENAMES = DATED_FILES.concat(
+  DATED_FILES.map do |filename|
+    [
+      '_posts/' + filename,
+      'category_a/_posts/' + filename,
+      'category_a/category_b/_posts/' + filename
+    ]
+  end
+).flatten.freeze
+
+def match_post(filename, pattern)
+  if filename =~ pattern
+    [$1, $2, $3]
+  else
+    []
+  end
+end
+
+def log(topic, message)
+  print topic.to_s.rjust(8)
+  print ': '
+  p message
+end
+
+POST_FILENAMES.each do |filename|
+  puts ''
+  puts '-' * 90
+  puts ''
+  log('rel_path', filename)
+  puts ''
+  puts 'comparing results...'
+
+  current_result  = match_post(filename, DATE_POST_MATCHER)
+  proposed_result = match_post(filename, LAZY_DATE_POST_MATCHER)
+
+  if ARGV[0] == '--show-matches'
+    log('current', current_result)
+    log('proposed', proposed_result)
+    puts ''
+  end
+
+  if current_result == proposed_result
+    puts 'Success! current_result == proposed_result'
+  else
+    puts 'Warning! Results do not tally with each other!'
+    puts 'Skipping..'
+    next
+  end
+
+  puts ''
+  puts '-' * 49
+
+  Benchmark.ips do |x|
+    x.report('current') { match_post(filename, DATE_POST_MATCHER) }
+    x.report('proposed') { match_post(filename, LAZY_DATE_POST_MATCHER) }
+    x.compare!
+  end
+end
+
+MARKDOWN_EXT = 'category_a/category_b/_posts/2018-04-15-update-on-jekyll-s-google-summer-of-code-projects.markdown'
+MD_EXT = 'category_a/category_b/_posts/2018-04-15-update-on-jekyll-s-google-summer-of-code-projects.md'
+
+Benchmark.ips do |x|
+  x.report('.markdown + current') { match_post(MARKDOWN_EXT, DATE_POST_MATCHER) }
+  x.report('.md + current') { match_post(MD_EXT, DATE_POST_MATCHER) }
+  x.compare!
+end
+
+Benchmark.ips do |x|
+  x.report('.markdown + proposed') { match_post(MARKDOWN_EXT, LAZY_DATE_POST_MATCHER) }
+  x.report('.md + proposed') { match_post(MD_EXT, LAZY_DATE_POST_MATCHER) }
+  x.compare!
+end
