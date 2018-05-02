@@ -23,6 +23,7 @@
   * Drop support for Ruby 2.1 and 2.2 (#6560)
   * Add vendor folder to a newly installed site&#39;s .gitignore (#6968)
   * bump i18n (#6931)
+  * We are not using Ruby 2.2 anymore (#6977)
 
 ### Development Fixes
 
