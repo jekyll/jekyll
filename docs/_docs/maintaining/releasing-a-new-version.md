@@ -69,6 +69,14 @@ And then, you're done! :tada: Feel free to celebrate!
 
 If you have access to the [@jekyllrb](https://twitter.com/jekyllrb) Twitter account, you should tweet the release post from there. If not, just ask another maintainer to do it or to give you access.
 
+### Build the docs
+
+We package our documentation as a :gem: Gem for offline use.
+
+This is done with the
+[**jekyll-docs**](https://github.com/jekyll/jekyll-docs#building) repository,
+and more detailed instructions are provided there.
+
 ## For non-core gems
 
 If you're not a maintainer for `jekyll/jekyll`, the procedure is much simpler in a lot of cases. Generally, the procedure still looks like this:

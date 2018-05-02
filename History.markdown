@@ -7,14 +7,35 @@
   * add liquid tag jekyll-flickr (#6946)
   * Add 4.0 development post (#6934)
   * Updated copy - fixed casing of SaaS on resources page. (#6949)
+  * WIP: Do not advise users to install Jekyll outside of Bundler (#6927)
+  * Don&#39;t prompt for sudo when installing with Ubuntu WSL (#6781)
+  * Fix typo (#6969)
+  * Add version number for group_by_exp doc (#6956)
 
 ### Minor Enhancements
 
   * use jekyll-compose if installed (#6932)
+  * Memoize computing excerpt&#39;s relative_path (#6951)
+
+### Major Enhancements
+
+  * Remove unused error class (#6511)
+  * Drop support for Ruby 2.1 and 2.2 (#6560)
+  * Add vendor folder to a newly installed site&#39;s .gitignore (#6968)
+  * bump i18n (#6931)
+
+### Development Fixes
+
+  * Remove unnecessary Jekyll::Page constant (#6770)
+  * Loggers should accept both numbers and symbols (#6967)
+  * Update instructions for releasing docs Gem (#6975)
+
+## 3.8.1 / 2018-05-01
 
 ### Bug Fixes
 
   * Fix rendering Liquid constructs in excerpts (#6945)
+  * Liquify documents unless published == false (#6959)
 
 ## 3.8.0 / 2018-04-19
 

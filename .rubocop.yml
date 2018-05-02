@@ -8,7 +8,7 @@ Jekyll/NoPutsAllowed:
     - rake/*.rake
 
 AllCops:
-  TargetRubyVersion: 2.1
+  TargetRubyVersion: 2.3
   Include:
     - lib/**/*.rb
   Exclude:
@@ -53,6 +53,8 @@ Layout/EmptyComment:
   Enabled: false
 Layout/EndAlignment:
   Severity: error
+Lint/UnneededRequireStatement:
+  Enabled: false
 Lint/UnreachableCode:
   Severity: error
 Lint/UselessAccessModifier:
@@ -105,6 +107,8 @@ Naming/MemoizedInstanceVariableName:
 Naming/UncommunicativeMethodParamName:
   AllowedNames:
     - _
+Performance/UnfreezeString:
+  Enabled: false
 Security/MarshalLoad:
   Exclude:
     - !ruby/regexp /test\/.*.rb$/
@@ -148,6 +152,8 @@ Style/ModuleFunction:
   Enabled: false
 Style/MultilineTernaryOperator:
   Severity: error
+Style/NumericPredicate:
+  Enabled: false
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
     "%q": "{}"
@@ -157,6 +163,8 @@ Style/PercentLiteralDelimiters:
     "%w": "()"
     "%W": "()"
     "%x": "()"
+Style/RedundantFreeze:
+  Enabled: false
 Style/RedundantReturn:
   Enabled: false
 Style/RedundantSelf:
@@ -164,6 +172,8 @@ Style/RedundantSelf:
 Style/RegexpLiteral:
   EnforcedStyle: percent_r
 Style/RescueModifier:
+  Enabled: false
+Style/SafeNavigation:
   Enabled: false
 Style/SignalException:
   EnforcedStyle: only_raise
