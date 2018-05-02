@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "csv"
-
 module Jekyll
   class Site
     attr_reader   :source, :dest, :config
@@ -77,7 +75,7 @@ module Jekyll
     end
 
     def print_stats
-      puts @liquid_renderer.stats_table
+      Jekyll.logger.info @liquid_renderer.stats_table
     end
 
     # Reset Site details.
@@ -93,9 +91,12 @@ module Jekyll
       self.pages = []
       self.static_files = []
       self.data = {}
+      @site_data = nil
       @collections = nil
+      @docs_to_write = nil
       @regenerator.clear_cache
       @liquid_renderer.reset
+      @site_cleaner = nil
 
       if limit_posts < 0
         raise ArgumentError, "limit_posts must be a non-negative number"
@@ -252,7 +253,7 @@ module Jekyll
     #
     # Returns the Hash to be hooked to site.data.
     def site_data
-      config["data"] || data
+      @site_data ||= (config["data"] || data)
     end
 
     # The Hash payload containing site-wide data.
@@ -276,10 +277,12 @@ module Jekyll
     # Get the implementation class for the given Converter.
     # Returns the Converter instance implementing the given Converter.
     # klass - The Class of the Converter to fetch.
-
     def find_converter_instance(klass)
-      converters.find { |klass_| klass_.instance_of?(klass) } || \
-        raise("No Converters found for #{klass}")
+      @find_converter_instance ||= {}
+      @find_converter_instance[klass] ||= begin
+        converters.find { |converter| converter.instance_of?(klass) } || \
+          raise("No Converters found for #{klass}")
+      end
     end
 
     # klass - class or module containing the subclasses.
@@ -311,7 +314,7 @@ module Jekyll
     #
     # Returns an Array of Documents which should be written
     def docs_to_write
-      documents.select(&:write?)
+      @docs_to_write ||= documents.select(&:write?)
     end
 
     # Get all the documents
@@ -391,6 +394,15 @@ module Jekyll
       end
     end
 
+    # Public: The full path to the directory that houses all the collections registered
+    # with the current site.
+    #
+    # Returns the source directory or the absolute path to the custom collections_dir
+    def collections_path
+      dir_str = config["collections_dir"]
+      @collections_path ||= dir_str.empty? ? source : in_source_dir(dir_str)
+    end
+
     # Limits the current posts; removes the posts which exceed the limit_posts
     #
     # Returns nothing
@@ -449,10 +461,7 @@ module Jekyll
     def render_docs(payload)
       collections.each_value do |collection|
         collection.docs.each do |document|
-          if regenerator.regenerate?(document)
-            document.output = Jekyll::Renderer.new(self, document, payload).run
-            document.trigger_hooks(:post_render)
-          end
+          render_regenerated(document, payload)
         end
       end
     end
@@ -460,11 +469,15 @@ module Jekyll
     private
     def render_pages(payload)
       pages.flatten.each do |page|
-        if regenerator.regenerate?(page)
-          page.output = Jekyll::Renderer.new(self, page, payload).run
-          page.trigger_hooks(:post_render)
-        end
+        render_regenerated(page, payload)
       end
+    end
+
+    private
+    def render_regenerated(document, payload)
+      return unless regenerator.regenerate?(document)
+      document.output = Jekyll::Renderer.new(self, document, payload).run
+      document.trigger_hooks(:post_render)
     end
   end
 end

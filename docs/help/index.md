@@ -5,10 +5,15 @@ title: Getting Help
 
 Need help with Jekyll? Try these resources.
 
+### [Documentation](/docs/home/)
+
+Start with our official guide to Jekyll covering installation, writing, customization, deployment, and more.
+
 ### [Jekyll Talk](https://talk.jekyllrb.com/)
 
-Jekyll Talk is our official Discourse forum. Here, users and contributors
+Our official Discourse forum. Here, users and contributors
 can ask questions and discuss all aspects of Jekyll.
+Also the place to [showcase your jekyll sites](https://talk.jekyllrb.com/t/jekyll-showcase-share-your-sites-built-with-jekyll/44/80) and [share your jekyll themes](https://talk.jekyllrb.com/t/jekyll-theme-showcase-share-your-jekyll-themes/1382/2).
 
 ### [Jekyll on StackOverflow](https://stackoverflow.com/questions/tagged/jekyll)
 
@@ -21,9 +26,9 @@ question!
 Get live support at **#jekyll** on **irc.freenode.net**, the official
 Jekyll IRC channel.
 
-### [Documentation](/docs/home/)
+### View source
 
-Our guide to Jekyll covering installation, writing, customization, deployment, and more.
+Learn from the source of others, you'll find plenty of [jekyll sites](https://github.com/topics/jekyll-site) and [jekyll themes](https://github.com/topics/jekyll-themes) carefully handcrafted on GitHub.
 
 ### [Tutorials](/tutorials/home)
 
@@ -37,10 +42,6 @@ Known breaking changes are listed in the upgrading docs.
 ### [Jekyllconf](/jekyllconf/)
 
 Watch videos from members of the Jekyll community speak about interesting use cases, tricks they've learned or meta Jekyll topics.
-
-### [View source](https://github.com/jekyll/jekyll/wiki/sites)
-
-Learn from the source of others' Jekyll-powered sites.
 
 ### [Google](https://www.google.com/?q=jekyll)
 

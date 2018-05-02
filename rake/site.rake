@@ -7,7 +7,7 @@
 #############################################################################
 
 namespace :site do
-  task :generated_pages => [:history, :version_file, :conduct, :contributing, :support]
+  task :generated_pages => [:history, :latest_version, :conduct, :contributing, :support]
 
   desc "Generate and view the site locally"
   task :preview => :generated_pages do
@@ -27,6 +27,8 @@ namespace :site do
     options = {
       "source"      => File.expand_path(docs_folder),
       "destination" => File.expand_path("#{docs_folder}/_site"),
+      "incremental" => true,
+      "profile"     => true,
       "watch"       => true,
       "serving"     => true,
     }
@@ -82,9 +84,15 @@ namespace :site do
     siteify_file(".github/SUPPORT.markdown", "title" => "Support")
   end
 
-  desc "Write the site latest_version.txt file"
-  task :version_file do
-    File.open("#{docs_folder}/latest_version.txt", "wb") { |f| f.puts(version) } unless version =~ %r!(beta|rc|alpha)!i
+  desc "Write the latest Jekyll version"
+  task :latest_version do
+    return if version =~ %r!(beta|rc|alpha)!i
+    require "safe_yaml/load"
+    config_file = File.join(docs_folder, "_config.yml")
+    config = SafeYAML.load_file(config_file)
+    config["version"] = version
+    File.write(config_file, YAML.dump(config))
+    File.open("#{docs_folder}/latest_version.txt", "wb") { |f| f.puts(version) }
   end
 
   namespace :releases do

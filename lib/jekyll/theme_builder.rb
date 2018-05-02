@@ -8,7 +8,7 @@ class Jekyll::ThemeBuilder
   attr_reader :name, :path, :code_of_conduct
 
   def initialize(theme_name, opts)
-    @name = theme_name.to_s.tr(" ", "_").gsub(%r!_+!, "_")
+    @name = theme_name.to_s.tr(" ", "_").squeeze("_")
     @path = Pathname.new(File.expand_path(name, Dir.pwd))
     @code_of_conduct = !!opts["code_of_conduct"]
   end
@@ -19,6 +19,14 @@ class Jekyll::ThemeBuilder
     create_gemspec
     create_accessories
     initialize_git_repo
+  end
+
+  def user_name
+    @user_name ||= `git config user.name`.chomp
+  end
+
+  def user_email
+    @user_email ||= `git config user.email`.chomp
   end
 
   private
@@ -83,14 +91,6 @@ class Jekyll::ThemeBuilder
     Jekyll.logger.info "initialize", path.join(".git").to_s
     Dir.chdir(path.to_s) { `git init` }
     write_file(".gitignore", template("gitignore"))
-  end
-
-  def user_name
-    @user_name ||= `git config user.name`.chomp
-  end
-
-  def user_email
-    @user_email ||= `git config user.email`.chomp
   end
 
   class ERBRenderer

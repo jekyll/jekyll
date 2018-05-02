@@ -14,6 +14,8 @@ module Jekyll
       def_delegator :@obj, :relative_path, :path
       def_delegators :@obj, :id, :output, :content, :to_s, :relative_path, :url
 
+      private def_delegator :@obj, :data, :fallback_data
+
       def collection
         @obj.collection.label
       end
@@ -61,9 +63,6 @@ module Jekyll
           result[key] = doc[key] unless NESTED_OBJECT_FIELD_BLACKLIST.include?(key)
         end
       end
-
-      private
-      def_delegator :@obj, :data, :fallback_data
     end
   end
 end

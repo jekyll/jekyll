@@ -6,7 +6,7 @@ permalink: /docs/permalinks/
 Permalinks refer to the URLs (excluding the domain name or directory folder) for your pages, posts, or collections.
 Jekyll supports a flexible way to build permalinks, allowing you to leverage various template variables or choose built-in permalink styles (such as `date`) that automatically use a template-variable pattern.
 
-You construct permalinks by creating a template URL where dynamic elements are represented by colon-prefixed keywords. The default template permalink is `/:categories/:year/:month/:day/:title.html`. Each of the colon-prefixed keywords is a template variable.
+You construct permalinks by creating a template URL where dynamic elements are represented by colon-prefixed keywords. The default template permalink is `/:categories/:year/:month/:day/:title:output_ext`. Each of the colon-prefixed keywords is a template variable.
 
 ## Where to configure permalinks
 
@@ -15,7 +15,7 @@ You can configure your site's permalinks through the [Configuration]({% link _do
 Setting permalink styles in your configuration file applies the setting globally in your project. You configure permalinks in your `_config.yml` file like this:
 
 ```yaml
-permalink: /:categories/:year/:month/:day/:title.html
+permalink: /:categories/:year/:month/:day/:title:output_ext
 ```
 
 If you don't specify any permalink setting, Jekyll uses the above pattern as the default.
@@ -26,7 +26,7 @@ The permalink can also be set using a built-in permalink style:
 permalink: date
 ```
 
-`date` is the same as `:categories/:year/:month/:day/:title.html`, the default. See [Built-in Permalink Styles](#builtinpermalinkstyles) below for more options.
+`date` is the same as `:categories/:year/:month/:day/:title:output_ext`, the default. See [Built-in Permalink Styles](#builtinpermalinkstyles) below for more options.
 
 Setting the permalink in your post, page, or collection's front matter overrides any global settings. Here's an example:
 
@@ -226,7 +226,7 @@ Although you can specify a custom permalink pattern using [template variables](#
         <p><code>date</code></p>
       </td>
       <td>
-        <p><code>/:categories/:year/:month/:day/:title.html</code></p>
+        <p><code>/:categories/:year/:month/:day/:title:output_ext</code></p>
       </td>
     </tr>
     <tr>
@@ -242,7 +242,7 @@ Although you can specify a custom permalink pattern using [template variables](#
         <p><code>ordinal</code></p>
       </td>
       <td>
-        <p><code>/:categories/:year/:y_day/:title.html</code></p>
+        <p><code>/:categories/:year/:y_day/:title:output_ext</code></p>
       </td>
     </tr>
     <tr>
@@ -250,7 +250,7 @@ Although you can specify a custom permalink pattern using [template variables](#
         <p><code>none</code></p>
       </td>
       <td>
-        <p><code>/:categories/:title.html</code></p>
+        <p><code>/:categories/:title:output_ext</code></p>
       </td>
     </tr>
   </tbody>
@@ -297,7 +297,7 @@ Given a post named: `/2009-04-29-slap-chop.md`
     </tr>
     <tr>
       <td>
-        <p><code>/:month-:day-:year/:title.html</code></p>
+        <p><code>/:month-:day-:year/:title:output_ext</code></p>
       </td>
       <td>
         <p><code>/04-29-2009/slap-chop.html</code></p>
@@ -330,7 +330,7 @@ The permalink setting in your configuration file specifies the permalink style u
 
 For example:
 
-* A permalink style of `/:categories/:year/:month/:day/:title.:output_ext` for posts becomes `/:title.html` for pages and collections.
+* A permalink style of `/:categories/:year/:month/:day/:title:output_ext` for posts becomes `/:title.html` for pages and collections.
 * A permalink style of `pretty` (or `/:categories/:year/:month/:day/:title/`), which omits the file extension and contains a trailing slash, will update page and collection permalinks to also omit the file extension and contain a trailing slash: `/:title/`.
 * A permalink style of `date`, which contains a trailing file extension, will update page permalinks to also contain a trailing file extension: `/:title.html`. But no time or category information will be included.
 

@@ -65,28 +65,29 @@ MSG
 
       private
 
+      OPTIONS_REGEX = %r!(?:\w="[^"]*"|\w=\w|\w)+!
+
       def parse_options(input)
         options = {}
-        unless input.empty?
-          # Split along 3 possible forms -- key="<quoted list>", key=value, or key
-          input.scan(%r!(?:\w="[^"]*"|\w=\w|\w)+!) do |opt|
-            key, value = opt.split("=")
-            # If a quoted list, convert to array
-            if value && value.include?("\"")
-              value.delete!('"')
-              value = value.split
-            end
-            options[key.to_sym] = value || true
+        return options if input.empty?
+
+        # Split along 3 possible forms -- key="<quoted list>", key=value, or key
+        input.scan(OPTIONS_REGEX) do |opt|
+          key, value = opt.split("=")
+          # If a quoted list, convert to array
+          if value && value.include?('"')
+            value.delete!('"')
+            value = value.split
           end
+          options[key.to_sym] = value || true
         end
-        if options.key?(:linenos) && options[:linenos] == true
-          options[:linenos] = "inline"
-        end
+
+        options[:linenos] = "inline" if options[:linenos] == true
         options
       end
 
       def render_pygments(code, is_safe)
-        Jekyll::External.require_with_graceful_fail("pygments")
+        Jekyll::External.require_with_graceful_fail("pygments") unless defined?(Pygments)
 
         highlighted_code = Pygments.highlight(
           code,
@@ -118,7 +119,7 @@ MSG
           :gutter_class => "gutter",
           :code_class   => "code"
         )
-        lexer = Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
+        lexer = ::Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
         formatter.format(lexer.lex(code))
       end
 

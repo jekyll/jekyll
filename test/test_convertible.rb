@@ -31,7 +31,7 @@ class TestConvertible < JekyllUnitTest
         ret = @convertible.read_yaml(@base, name)
         assert_equal({}, ret)
       end
-      assert_match(%r!YAML Exception|syntax error|Error reading file!, out)
+      assert_match(%r!YAML Exception!, out)
       assert_match(%r!#{File.join(@base, name)}!, out)
     end
 
