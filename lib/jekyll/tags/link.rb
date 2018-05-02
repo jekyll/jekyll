@@ -18,14 +18,17 @@ module Jekyll
       def render(context)
         site = context.registers[:site]
 
+        liquid = site.liquid_renderer.file("(jekyll:link)")
+        relative_path = liquid.parse(@relative_path).render(context)
+
         site.each_site_file do |item|
-          return item.url if item.relative_path == @relative_path
+          return item.url if item.relative_path == relative_path
           # This takes care of the case for static files that have a leading /
-          return item.url if item.relative_path == "/#{@relative_path}"
+          return item.url if item.relative_path == "/#{relative_path}"
         end
 
         raise ArgumentError, <<-MSG
-Could not find document '#{@relative_path}' in tag '#{self.class.tag_name}'.
+Could not find document '#{relative_path}' in tag '#{self.class.tag_name}'.
 
 Make sure the document exists and the path is correct.
 MSG
