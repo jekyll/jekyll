@@ -11,6 +11,7 @@
   * Don&#39;t prompt for sudo when installing with Ubuntu WSL (#6781)
   * Fix typo (#6969)
   * Add version number for group_by_exp doc (#6956)
+  * Update Windows install docs (#6926)
 
 ### Minor Enhancements
 
