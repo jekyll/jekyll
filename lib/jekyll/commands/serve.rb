@@ -72,14 +72,14 @@ module Jekyll
               opts["serving"] = true
               opts["watch"]   = true unless opts.key?("watch")
 
-              start(opts)
+              start(cmd, opts)
             end
           end
         end
 
         #
 
-        def start(opts)
+        def start(cmd, opts)
           # Set the reactor to nil so any old reactor will be GCed.
           # We can't unregister a hook so in testing when Serve.start is
           # called multiple times we don't want to inadvertently keep using
