@@ -59,19 +59,20 @@ module Jekyll
     #
     # Returns klass type of content files
     def read_content(dir, magic_dir, matcher)
+      posts = @site.posts
       @site.reader.get_entries(dir, magic_dir).map do |entry|
         next unless entry =~ matcher
         path = @site.in_source_dir(File.join(dir, magic_dir, entry))
 
-        unless Utils.has_yaml_header?(path)
-          Jekyll.logger.debug "Skipping", "#{entry} doesn't have a YAML Front Matter"
-          next
+        if Utils.has_yaml_header?(path)
+          Document.new(path, {
+            :site       => @site,
+            :collection => posts,
+          })
+        else
+          posts.files << StaticFile.new(@site, dir, magic_dir, entry, posts)
+          nil
         end
-
-        Document.new(path, {
-          :site       => @site,
-          :collection => @site.posts,
-        })
       end.reject(&:nil?)
     end
   end
