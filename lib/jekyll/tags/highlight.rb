@@ -112,7 +112,8 @@ MSG
       end
 
       def render_rouge(code)
-        formatter = Jekyll::Utils::Rouge.html_formatter(
+        require "rouge"
+        formatter = ::Rouge::Formatters::HTMLLegacy.new(
           :line_numbers => @highlight_options[:linenos],
           :wrap         => false,
           :css_class    => "highlight",

@@ -5,8 +5,6 @@ gemspec :name => "jekyll"
 
 gem "rake", "~> 12.0"
 
-gem "rouge", ENV["ROUGE"] if ENV["ROUGE"]
-
 group :development do
   gem "launchy", "~> 2.3"
   gem "pry"
