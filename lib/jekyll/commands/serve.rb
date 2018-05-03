@@ -72,25 +72,17 @@ module Jekyll
               opts["serving"] = true
               opts["watch"]   = true unless opts.key?("watch")
 
-              start(opts)
+              # Set the reactor to nil so any old reactor will be GCed.
+              # We can't unregister a hook so while running tests we don't want to
+              # inadvertently keep using a reactor created by a previous test.
+              @reload_reactor = nil
+
+              config = configuration_from_options(opts)
+              config["url"] = default_url(config) if Jekyll.env == "development"
+
+              process_with_graceful_fail(cmd, config, Build, Serve)
             end
           end
-        end
-
-        #
-
-        def start(opts)
-          # Set the reactor to nil so any old reactor will be GCed.
-          # We can't unregister a hook so in testing when Serve.start is
-          # called multiple times we don't want to inadvertently keep using
-          # a reactor created by a previous test when our test might not
-          @reload_reactor = nil
-
-          config = configuration_from_options(opts)
-          if Jekyll.env == "development"
-            config["url"] = default_url(config)
-          end
-          [Build, Serve].each { |klass| klass.process(config) }
         end
 
         #
