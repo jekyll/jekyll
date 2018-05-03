@@ -18,6 +18,7 @@
   * use jekyll-compose if installed (#6932)
   * Memoize computing excerpt&#39;s relative_path (#6951)
   * Liquefied link tag (#6269)
+  * Suggest re-running command with --trace on fail (#6551)
 
 ### Major Enhancements
 
