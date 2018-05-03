@@ -82,6 +82,7 @@ module Jekyll
       # options - configuration overrides
       # klass   - an array of Jekyll::Command subclasses associated with the command
       #
+      # Note that all exceptions are rescued..
       # rubocop: disable RescueException
       def process_with_graceful_fail(cmd, options, *klass)
         klass.each { |k| k.process(options) if k.respond_to?(:process) }
