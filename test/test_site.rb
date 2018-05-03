@@ -83,7 +83,9 @@ class TestSite < JekyllUnitTest
   context "creating sites" do
     setup do
       @site = Site.new(site_configuration)
-      @num_invalid_posts = 4
+      invalid_posts_count = 4
+      posts_without_front_matter = 4
+      @num_invalid_posts = invalid_posts_count + posts_without_front_matter
     end
 
     teardown do
