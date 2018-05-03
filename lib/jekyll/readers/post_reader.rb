@@ -62,6 +62,7 @@ module Jekyll
       @site.reader.get_entries(dir, magic_dir).map do |entry|
         next unless entry =~ matcher
         path = @site.in_source_dir(File.join(dir, magic_dir, entry))
+        next unless File.read(path) =~ Document::YAML_FRONT_MATTER_REGEXP
         Document.new(path, {
           :site       => @site,
           :collection => @site.posts,
