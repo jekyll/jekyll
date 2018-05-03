@@ -7,11 +7,8 @@ permalink: /docs/quickstart/
 If you already have a full [Ruby](https://www.ruby-lang.org/en/downloads/) development environment with all headers and [RubyGems](https://rubygems.org/pages/download) installed (see Jekyll's [requirements](/docs/installation/#requirements)), you can create a new Jekyll site by doing the following:
 
 ```sh
-# Install Bundler through RubyGems
-gem install bundler
-
-# Add Jekyll to your Gemfile and install its dependencies
-bundle add jekyll && bundle install
+# Install Jekyll and Bundler gems through RubyGems
+gem install jekyll bundler
 
 # Create a new Jekyll site at ./myblog
 jekyll new myblog
