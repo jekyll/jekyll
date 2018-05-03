@@ -86,29 +86,10 @@ MSG
         options
       end
 
-      def render_pygments(code, is_safe)
-        Jekyll::External.require_with_graceful_fail("pygments") unless defined?(Pygments)
-
-        highlighted_code = Pygments.highlight(
-          code,
-          :lexer   => @lang,
-          :options => sanitized_opts(@highlight_options, is_safe)
-        )
-
-        if highlighted_code.nil?
-          Jekyll.logger.error <<-MSG
-There was an error highlighting your code:
-
-#{code}
-
-While attempting to convert the above code, Pygments.rb returned an unacceptable value.
-This is usually a timeout problem solved by running `jekyll build` again.
-MSG
-          raise ArgumentError, "Pygments.rb returned an unacceptable value "\
-          "when attempting to highlight some code."
-        end
-
-        highlighted_code.sub('<div class="highlight"><pre>', "").sub("</pre></div>", "")
+      def render_pygments(code, _is_safe)
+        Jekyll.logger.warn "Warning:",
+          "Highlight Tag no longer supports rendering with Pygments"
+        code
       end
 
       def render_rouge(code)

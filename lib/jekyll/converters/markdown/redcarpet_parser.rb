@@ -15,21 +15,9 @@ class Jekyll::Converters::Markdown::RedcarpetParser
 
   module WithPygments
     include CommonMethods
-    def block_code(code, lang)
-      unless defined?(Pygments)
-        Jekyll::External.require_with_graceful_fail("pygments")
-      end
-      lang = lang && lang.split.first || "text"
-      add_code_tags(
-        Pygments.highlight(
-          code,
-          {
-            :lexer   => lang,
-            :options => { :encoding => "utf-8" },
-          }
-        ),
-        lang
-      )
+    def block_code(code, _lang)
+      Jekyll.logger.warn "Warning:", "Jekyll no longer supports Redcarpet with Pygments!"
+      code
     end
   end
 

@@ -45,23 +45,6 @@ class TestRedcarpet < JekyllUnitTest
         @markdown.convert("**bad code not here**: <script>i am bad</script>").strip
     end
 
-    context "with pygments enabled" do
-      setup do
-        @markdown = Converters::Markdown.new @config.merge(
-          { "highlighter" => "pygments" }
-        )
-      end
-
-      should "render fenced code blocks with syntax highlighting" do
-        assert_equal(
-          %(<div class="highlight"><pre><code class="language-ruby" ) +
-          %(data-lang="ruby"><span></span><span class="nb">puts</span> <span ) +
-          %(class="s2">&quot;Hello world&quot;</span>\n</code></pre></div>),
-          @markdown.convert(@sample).strip
-        )
-      end
-    end
-
     context "with rouge enabled" do
       setup do
         @markdown = Converters::Markdown.new @config.merge({ "highlighter" => "rouge" })
