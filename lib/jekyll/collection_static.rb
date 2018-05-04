@@ -13,6 +13,7 @@ module Jekyll
       @data = @site.frontmatter_defaults.all(relative_path, type)
     end
     alias_method :output_ext, :extname
+    alias_method :basename_without_ext, :basename
 
     def relative_path
       @relative_path ||= Pathname.new(path).relative_path_from(
