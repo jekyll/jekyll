@@ -39,18 +39,28 @@ module Jekyll
             !conflicting_urls(site),
             !urls_only_differ_by_case(site),
             proper_site_url?(site),
+            properly_gathered_drafts?(site),
             properly_gathered_posts?(site),
           ].all?
         end
 
+        def properly_gathered_drafts?(site)
+          inside_custom_collections_dir?(site, "drafts")
+        end
+
         def properly_gathered_posts?(site)
+          inside_custom_collections_dir?(site, "posts")
+        end
+
+        private
+        def inside_custom_collections_dir?(site, directory)
           return true if site.config["collections_dir"].empty?
-          posts_at_root = site.in_source_dir("_posts")
-          return true unless File.directory?(posts_at_root)
+          at_root = site.in_source_dir(directory)
+          return true unless File.directory?(at_root)
           Jekyll.logger.warn "Warning:",
-            "Detected '_posts' directory outside custom `collections_dir`!"
+            "Detected '#{directory}' directory outside custom `collections_dir`!"
           Jekyll.logger.warn "",
-            "Please move '#{posts_at_root}' into the custom directory at " \
+            "Please move '#{directory}' into the custom directory at " \
             "'#{site.in_source_dir(site.config["collections_dir"])}'"
           false
         end
