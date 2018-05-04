@@ -5,7 +5,7 @@ require "helper"
 class TestLiveReloadTemplate < JekyllUnitTest
   context "rendering livereload script with different options" do
     context "with port only" do
-      subject { LiveReloadTemplate.new("livereload_port" => "35729") }
+      subject { LiveReloadTemplate.new("livereload_port" => 35_729) }
 
       should "return correct script" do
         assert_equal subject.template, <<-TEMPLATE
