@@ -66,10 +66,6 @@ module Jekyll
         "strict_variables" => false,
       },
 
-      "rdiscount"           => {
-        "extensions" => [],
-      },
-
       "redcarpet"           => {
         "extensions" => [],
       },
