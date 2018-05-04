@@ -52,19 +52,6 @@ module Jekyll
           inside_custom_collections_dir?(site, "posts")
         end
 
-        private
-        def inside_custom_collections_dir?(site, directory)
-          return true if site.config["collections_dir"].empty?
-          at_root = site.in_source_dir(directory)
-          return true unless File.directory?(at_root)
-          Jekyll.logger.warn "Warning:",
-            "Detected '#{directory}' directory outside custom `collections_dir`!"
-          Jekyll.logger.warn "",
-            "Please move '#{directory}' into the custom directory at " \
-            "'#{site.in_source_dir(site.config["collections_dir"])}'"
-          false
-        end
-
         def deprecated_relative_permalinks(site)
           if site.config["relative_permalinks"]
             Jekyll::Deprecator.deprecation_message "Your site still uses relative" \
@@ -168,6 +155,19 @@ module Jekyll
           return true if Addressable::URI.parse(url).absolute?
           Jekyll.logger.warn "Warning:", "Your site URL does not seem to be absolute, "\
               "check the value of `url` in your config file."
+          false
+        end
+
+        private
+        def inside_custom_collections_dir?(site, directory)
+          return true if site.config["collections_dir"].empty?
+          at_root = site.in_source_dir(directory)
+          return true unless File.directory?(at_root)
+          Jekyll.logger.warn "Warning:",
+            "Detected '#{directory}' directory outside custom `collections_dir`!"
+          Jekyll.logger.warn "",
+            "Please move '#{directory}' into the custom directory at " \
+            "'#{site.in_source_dir(site.config["collections_dir"])}'"
           false
         end
       end
