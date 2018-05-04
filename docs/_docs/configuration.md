@@ -689,8 +689,6 @@ liquid:
   strict_variables: false
 
 # Markdown Processors
-rdiscount:
-  extensions: []
 
 redcarpet:
   extensions: []
