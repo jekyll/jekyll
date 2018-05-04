@@ -61,7 +61,7 @@ module Jekyll
         if Utils.has_yaml_header? full_path
           read_document(full_path)
         else
-          read_static_file(file_path, full_path)
+          read_static_file(full_path)
         end
       end
       docs.sort!
@@ -217,19 +217,8 @@ module Jekyll
 
     private
 
-    def read_static_file(file_path, full_path)
-      relative_dir = Jekyll.sanitized_path(
-        relative_directory,
-        File.dirname(file_path)
-      ).chomp("/.")
-
-      files << StaticFile.new(
-        site,
-        site.source,
-        relative_dir,
-        File.basename(full_path),
-        self
-      )
+    def read_static_file(full_path)
+      files << CollectionStatic.new(site, full_path, self)
     end
   end
 end

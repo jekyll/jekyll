@@ -21,12 +21,18 @@ class TestStaticFile < JekyllUnitTest
     Dir.chdir(@site.source) { StaticFile.new(@site, base, dir, name) }
   end
 
-  def setup_static_file_with_collection(base, dir, name, metadata)
-    site = fixture_site("collections" => { "foo" => metadata })
+  # rubocop: disable ParameterLists
+  def setup_static_file_with_collection(dir, name, metadata, coll_dir = "", *super_dirs)
+    site = fixture_site(
+      "collections_dir" => coll_dir,
+      "collections"     => { "foo" => metadata }
+    )
+    path = site.in_source_dir(site.collections_path, *super_dirs, "_foo", dir, name)
     Dir.chdir(site.source) do
-      StaticFile.new(site, base, dir, name, site.collections["foo"])
+      CollectionStatic.new(site, path, site.collections["foo"])
     end
   end
+  # rubocop: enable ParameterLists
 
   def setup_static_file_with_defaults(base, dir, name, defaults)
     site = fixture_site("defaults" => defaults)
@@ -67,26 +73,68 @@ class TestStaticFile < JekyllUnitTest
 
     should "have a destination relative directory with a collection" do
       static_file = setup_static_file_with_collection(
-        "root",
-        "_foo/dir/subdir",
+        "dir/subdir",
         "file.html",
         { "output" => true }
       )
       assert_equal :foo, static_file.type
       assert_equal "/foo/dir/subdir/file.html", static_file.url
       assert_equal "/foo/dir/subdir", static_file.destination_rel_dir
+
+      static_file = setup_static_file_with_collection(
+        "dir/subdir",
+        "file.html",
+        { "output" => true },
+        "custom_collection_dir"
+      )
+      assert_equal :foo, static_file.type
+      assert_equal "/foo/dir/subdir/file.html", static_file.url
+      assert_equal "/foo/dir/subdir", static_file.destination_rel_dir
+
+      static_file = setup_static_file_with_collection(
+        "dir/subdir",
+        "file.html",
+        { "output" => true },
+        "custom_collection_dir",
+        "categoryA",
+        "categoryB"
+      )
+      assert_equal :foo, static_file.type
+      assert_equal "/foo/categoryA/categoryB/dir/subdir/file.html", static_file.url
+      assert_equal "/foo/categoryA/categoryB/dir/subdir", static_file.destination_rel_dir
     end
 
     should "use its collection's permalink template for destination relative directory" do
       static_file = setup_static_file_with_collection(
-        "root",
-        "_foo/dir/subdir",
+        "dir/subdir",
         "file.html",
         { "output" => true, "permalink" => "/:path/" }
       )
       assert_equal :foo, static_file.type
       assert_equal "/dir/subdir/file.html", static_file.url
       assert_equal "/dir/subdir", static_file.destination_rel_dir
+
+      static_file = setup_static_file_with_collection(
+        "dir/subdir",
+        "file.html",
+        { "output" => true, "permalink" => "/:path/" },
+        "custom_collection_dir"
+      )
+      assert_equal :foo, static_file.type
+      assert_equal "/dir/subdir/file.html", static_file.url
+      assert_equal "/dir/subdir", static_file.destination_rel_dir
+
+      static_file = setup_static_file_with_collection(
+        "dir/subdir",
+        "file.html",
+        { "output" => true },
+        "custom_collection_dir",
+        "categoryA",
+        "categoryB"
+      )
+      assert_equal :foo, static_file.type
+      assert_equal "/foo/categoryA/categoryB/dir/subdir/file.html", static_file.url
+      assert_equal "/foo/categoryA/categoryB/dir/subdir", static_file.destination_rel_dir
     end
 
     should "be writable by default" do

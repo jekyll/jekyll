@@ -73,6 +73,7 @@ module Jekyll
   autoload :LiquidRenderer,      "jekyll/liquid_renderer"
   autoload :Site,                "jekyll/site"
   autoload :StaticFile,          "jekyll/static_file"
+  autoload :CollectionStatic,    "jekyll/collection_static"
   autoload :Stevenson,           "jekyll/stevenson"
   autoload :Theme,               "jekyll/theme"
   autoload :ThemeBuilder,        "jekyll/theme_builder"

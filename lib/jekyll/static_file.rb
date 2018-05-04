@@ -4,7 +4,7 @@ module Jekyll
   class StaticFile
     extend Forwardable
 
-    attr_reader :relative_path, :extname, :name, :data
+    attr_reader :relative_path, :extname, :name, :data, :type
 
     def_delegator :to_liquid, :to_json, :to_json
 
@@ -25,27 +25,19 @@ module Jekyll
     # base - The String path to the <source>.
     # dir  - The String path between <source> and the file.
     # name - The String filename of the file.
-    # rubocop: disable ParameterLists
-    def initialize(site, base, dir, name, collection = nil)
+    def initialize(site, base, dir, name)
       @site = site
       @base = base
       @dir  = dir
       @name = name
-      @collection = collection
       @relative_path = File.join(*[@dir, @name].compact)
       @extname = File.extname(@name)
       @data = @site.frontmatter_defaults.all(relative_path, type)
     end
-    # rubocop: enable ParameterLists
 
     # Returns source file path.
     def path
-      # Static file is from a collection inside custom collections directory
-      if !@collection.nil? && !@site.config["collections_dir"].empty?
-        File.join(*[@base, @site.config["collections_dir"], @dir, @name].compact)
-      else
-        File.join(*[@base, @dir, @name].compact)
-      end
+      File.join(*[@base, @dir, @name].compact)
     end
 
     # Obtain destination path.
@@ -54,15 +46,11 @@ module Jekyll
     #
     # Returns destination file path.
     def destination(dest)
-      @site.in_dest_dir(*[dest, destination_rel_dir, @name].compact)
+      @site.in_dest_dir(*[dest, destination_rel_dir, name].compact)
     end
 
     def destination_rel_dir
-      if @collection
-        File.dirname(url)
-      else
-        @dir
-      end
+      @dir
     end
 
     def modified_time
@@ -115,34 +103,8 @@ module Jekyll
       File.basename(name, extname)
     end
 
-    def placeholders
-      {
-        :collection => @collection.label,
-        :path       => relative_path[
-          @collection.relative_directory.size..relative_path.size],
-        :output_ext => "",
-        :name       => "",
-        :title      => "",
-      }
-    end
-
-    # Applies a similar URL-building technique as Jekyll::Document that takes
-    # the collection's URL template into account. The default URL template can
-    # be overriden in the collection's configuration in _config.yml.
     def url
-      @url ||= if @collection.nil?
-                 relative_path
-               else
-                 ::Jekyll::URL.new({
-                   :template     => @collection.url_template,
-                   :placeholders => placeholders,
-                 })
-               end.to_s.chomp("/")
-    end
-
-    # Returns the type of the collection if present, nil otherwise.
-    def type
-      @type ||= @collection.nil? ? nil : @collection.label.to_sym
+      @url ||= relative_path.to_s.chomp("/")
     end
 
     # Returns the front matter defaults defined for the file's URL and/or type
