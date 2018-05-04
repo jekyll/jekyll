@@ -200,6 +200,15 @@ end
 
 #
 
+When(%r!^I serve jekyll with (.*)$!) do |args|
+  serve(args)
+  if args.include?("--verbose") || ENV["DEBUG"]
+    warn "\n#{jekyll_run_output}\n"
+  end
+end
+
+#
+
 When(%r!^I run bundle(.*)$!) do |args|
   run_bundle(args)
   if args.include?("--verbose") || ENV["DEBUG"]

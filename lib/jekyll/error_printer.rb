@@ -9,6 +9,7 @@ module Jekyll
       @document_path = @document.path || @document.relative_path
     end
 
+    # Generates error page with Liquid error description
     def call
       ERB.new(error_page).result
     end
@@ -54,7 +55,7 @@ module Jekyll
 
     private
     def error_styles
-      <<-ERROR_STYLES
+      @error_styles ||= <<-ERROR_STYLES
       <style type="text/css">
         body { background-color: black; color: rgb(232, 232, 232); font-family: Menlo, Consolas, monospace;
           padding: 2rem; line-height: 1.2; }

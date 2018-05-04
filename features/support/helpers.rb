@@ -104,6 +104,17 @@ def run_jekyll(args)
 end
 
 #
+
+def serve(args, timeout = 2)
+  command = "exec ruby #{Paths.jekyll_bin} serve #{args} --trace > #{Paths.output_file} 2>&1"
+  pipe = IO.popen(command, "r")
+  sleep timeout
+
+  Process.kill("TERM", pipe.pid)
+end
+
+#
+
 def run_in_shell(*args)
   p, output = Jekyll::Utils::Exec.run(*args)
 
