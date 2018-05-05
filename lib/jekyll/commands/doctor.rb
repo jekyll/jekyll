@@ -45,11 +45,11 @@ module Jekyll
         end
 
         def properly_gathered_drafts?(site)
-          inside_custom_collections_dir?(site, "drafts")
+          inside_custom_collections_dir?(site, "_drafts")
         end
 
         def properly_gathered_posts?(site)
-          inside_custom_collections_dir?(site, "posts")
+          inside_custom_collections_dir?(site, "_posts")
         end
 
         def deprecated_relative_permalinks(site)
