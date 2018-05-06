@@ -28,6 +28,7 @@
   * bump i18n (#6931)
   * We are not using Ruby 2.2 anymore (#6977)
   * Drop support for older versions of Rouge (#6978)
+  * Remove support for Redcarpet (#6987)
 
 ### Development Fixes
 
