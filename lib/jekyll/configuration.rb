@@ -99,7 +99,9 @@ module Jekyll
       # problems and backwards-compatibility.
       def from(user_config)
         Utils.deep_merge_hashes(DEFAULTS, Configuration[user_config].stringify_keys)
-          .add_default_collections.sanitize_url!.sanitize_baseurl!
+          .add_default_collections
+          .sanitize_url!
+          .sanitize_baseurl!
       end
     end
 
@@ -286,20 +288,31 @@ module Jekyll
     end
 
     def sanitize_url!
-      value = ensure_string_without_trailing_slash(self["url"])
+      value = ensure_string_value_without_trailing_slash("url")
       tap { |config| config["url"] = value }
     end
 
     def sanitize_baseurl!
-      value = ensure_string_without_trailing_slash(self["baseurl"])
+      value = ensure_string_value_without_trailing_slash("baseurl")
       value = "/#{value}".squeeze("/") unless value.empty?
       tap { |config| config["baseurl"] = value }
     end
 
     private
-    def ensure_string_without_trailing_slash(value)
-      value = "" unless value.is_a?(String)
-      value = "" if value.include?("..")
+    def ensure_string_value_without_trailing_slash(key)
+      value = self[key]
+      value = "" if value.nil?
+
+      unless value.is_a?(String)
+        raise Jekyll::Errors::InvalidConfigurationError,
+          "Expected value for '#{key}' to be a string. but got: #{self[key].class}."
+      end
+
+      if value.include?("..")
+        raise Jekyll::Errors::InvalidConfigurationError,
+          "Value for '#{key}' should not contain '..'"
+      end
+
       value = value.dup
       value.chomp!("/") while value.end_with?("/")
       value

@@ -13,16 +13,6 @@ class TestFilters < JekyllUnitTest
     end
   end
 
-  class Value
-    def initialize(value)
-      @value = value
-    end
-
-    def to_s
-      @value.respond_to?(:call) ? @value.call : @value.to_s
-    end
-  end
-
   def make_filter_mock(opts = {})
     JekyllFilter.new(site_configuration(opts)).tap do |f|
       tz = f.site.config["timezone"]
@@ -492,7 +482,7 @@ class TestFilters < JekyllUnitTest
 
       should "transform the input URL to a string" do
         page_url = "/my-page.html"
-        filter = make_filter_mock({ "url" => Value.new(proc { "http://example.org" }) })
+        filter = make_filter_mock({ "url" => "http://example.org" })
         assert_equal "http://example.org#{page_url}", filter.absolute_url(page_url)
       end
 
@@ -567,15 +557,6 @@ class TestFilters < JekyllUnitTest
         assert_equal "/base/css/main.css", filter.relative_url(page_url)
       end
 
-      should "not return valid URI if baseurl ends with multiple '/'" do
-        page_url = "/css/main.css"
-        filter = make_filter_mock({
-          "url"     => "http://example.com",
-          "baseurl" => "/base//",
-        })
-        refute_equal "/base/css/main.css", filter.relative_url(page_url)
-      end
-
       should "not prepend a forward slash if both input and baseurl are simply '/'" do
         page_url = "/"
         filter = make_filter_mock({
@@ -596,7 +577,7 @@ class TestFilters < JekyllUnitTest
 
       should "transform the input baseurl to a string" do
         page_url = "/my-page.html"
-        filter = make_filter_mock({ "baseurl" => Value.new(proc { "/baseurl/" }) })
+        filter = make_filter_mock({ "baseurl" => "/baseurl/" })
         assert_equal "/baseurl#{page_url}", filter.relative_url(page_url)
       end
 

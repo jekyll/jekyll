@@ -560,15 +560,14 @@ class TestConfiguration < JekyllUnitTest
 
   context "sanitize_url!" do
     should "result in an empty string for non-String values" do
-      assert_sanitized_url "", %w(foo bar)
-      assert_sanitized_url "", { "foo" => "bar" }
-      assert_sanitized_url "", 345
-      assert_sanitized_url "", false
-      assert_sanitized_url "", true
-      assert_sanitized_url "", nil
+      [%w(foo bar), { "foo" => "bar" }, 345, false, true].each do |input|
+        assert_raises(Jekyll::Errors::InvalidConfigurationError) do
+          Configuration[{ "url" => input }].sanitize_url!
+        end
+      end
 
+      assert_sanitized_url "", nil
       refute_sanitized_url "", "foobar"
-      assert_sanitized_url "foobar", "foobar"
     end
 
     should "strip trailing slashes only" do
@@ -579,19 +578,26 @@ class TestConfiguration < JekyllUnitTest
       assert_sanitized_url "//foobar", "//foobar//"
       assert_sanitized_url "//foo//bar", "//foo//bar//"
     end
+
+    should "raise if value contains '..'" do
+      ["../foobar", "..foobar", "foobar..", "foobar/.."].each do |input|
+        assert_raises(Jekyll::Errors::InvalidConfigurationError) do
+          Configuration[{ "url" => input }].sanitize_url!
+        end
+      end
+    end
   end
 
   context "sanitize_baseurl!" do
-    should "result in an empty string for non-String values" do
-      assert_sanitized_baseurl "", %w(foo bar)
-      assert_sanitized_baseurl "", { "foo" => "bar" }
-      assert_sanitized_baseurl "", 345
-      assert_sanitized_baseurl "", false
-      assert_sanitized_baseurl "", true
-      assert_sanitized_baseurl "", nil
+    should "raise for non-nil but non-String values" do
+      [%w(foo bar), { "foo" => "bar" }, 345, false, true].each do |input|
+        assert_raises(Jekyll::Errors::InvalidConfigurationError) do
+          Configuration[{ "baseurl" => input }].sanitize_baseurl!
+        end
+      end
 
+      assert_sanitized_baseurl "", nil
       refute_sanitized_baseurl "", "foobar"
-      assert_sanitized_baseurl "/foobar", "foobar"
     end
 
     should "ensure a single leading slash and strip extra slashes" do
@@ -603,12 +609,12 @@ class TestConfiguration < JekyllUnitTest
       assert_sanitized_baseurl "/foo/bar", "//foo//bar//"
     end
 
-    should "result in an empty string if value contains '..'" do
-      assert_sanitized_baseurl "/foobar", "foobar"
-      assert_sanitized_baseurl "", "../foobar"
-      assert_sanitized_baseurl "", "..foobar"
-      assert_sanitized_baseurl "", "foobar.."
-      assert_sanitized_baseurl "", "foobar/.."
+    should "raise if value contains '..'" do
+      ["../foobar", "..foobar", "foobar..", "foobar/.."].each do |input|
+        assert_raises(Jekyll::Errors::InvalidConfigurationError) do
+          Configuration[{ "baseurl" => input }].sanitize_baseurl!
+        end
+      end
     end
   end
 end
