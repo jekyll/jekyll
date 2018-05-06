@@ -99,7 +99,7 @@ module Jekyll
       # problems and backwards-compatibility.
       def from(user_config)
         Utils.deep_merge_hashes(DEFAULTS, Configuration[user_config].stringify_keys)
-          .add_default_collections
+          .add_default_collections.sanitize_url!.sanitize_baseurl!
       end
     end
 
@@ -283,6 +283,26 @@ module Jekyll
           " file accordingly."
         config[new] = config.delete(old)
       end
+    end
+
+    def sanitize_url!
+      value = ensure_string_without_trailing_slash(self["url"])
+      tap { |config| config["url"] = value }
+    end
+
+    def sanitize_baseurl!
+      value = ensure_string_without_trailing_slash(self["baseurl"])
+      value = "/#{value}".squeeze("/") unless value.empty?
+      tap { |config| config["baseurl"] = value }
+    end
+
+    private
+    def ensure_string_without_trailing_slash(value)
+      value = "" unless value.is_a?(String)
+      value = "" if value.include?("..")
+      value = value.dup
+      value.chomp!("/") while value.end_with?("/")
+      value
     end
 
     private

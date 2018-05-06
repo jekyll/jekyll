@@ -4,6 +4,34 @@ require "helper"
 require "colorator"
 
 class TestConfiguration < JekyllUnitTest
+  def assert_sanitized_url(result, input)
+    assert_equal(
+      { "url" => result },
+      Configuration[{ "url" => input }].sanitize_url!
+    )
+  end
+
+  def refute_sanitized_url(result, input)
+    refute_equal(
+      { "url" => result },
+      Configuration[{ "url" => input }].sanitize_url!
+    )
+  end
+
+  def assert_sanitized_baseurl(result, input)
+    assert_equal(
+      { "baseurl" => result },
+      Configuration[{ "baseurl" => input }].sanitize_baseurl!
+    )
+  end
+
+  def refute_sanitized_baseurl(result, input)
+    refute_equal(
+      { "baseurl" => result },
+      Configuration[{ "baseurl" => input }].sanitize_baseurl!
+    )
+  end
+
   test_config = {
     "source"      => new(nil).source_dir,
     "destination" => dest_dir,
@@ -35,6 +63,12 @@ class TestConfiguration < JekyllUnitTest
           },
         }
       )
+    end
+
+    should "sanitize 'url' and 'baseurl' values" do
+      result = Configuration.from({ "url" => "http://blah//", "baseurl" => "blah//" })
+      assert_equal result["url"], "http://blah"
+      assert_equal result["baseurl"], "/blah"
     end
 
     should "NOT backwards-compatibilize" do
@@ -521,6 +555,60 @@ class TestConfiguration < JekyllUnitTest
       )
       assert_includes config["description"], "an awesome description"
       refute_includes config["description"], "\n"
+    end
+  end
+
+  context "sanitize_url!" do
+    should "result in an empty string for non-String values" do
+      assert_sanitized_url "", %w(foo bar)
+      assert_sanitized_url "", { "foo" => "bar" }
+      assert_sanitized_url "", 345
+      assert_sanitized_url "", false
+      assert_sanitized_url "", true
+      assert_sanitized_url "", nil
+
+      refute_sanitized_url "", "foobar"
+      assert_sanitized_url "foobar", "foobar"
+    end
+
+    should "strip trailing slashes only" do
+      assert_sanitized_url "foobar", "foobar"
+      assert_sanitized_url "foobar", "foobar/"
+      assert_sanitized_url "foobar", "foobar//"
+      assert_sanitized_url "//foobar", "//foobar"
+      assert_sanitized_url "//foobar", "//foobar//"
+      assert_sanitized_url "//foo//bar", "//foo//bar//"
+    end
+  end
+
+  context "sanitize_baseurl!" do
+    should "result in an empty string for non-String values" do
+      assert_sanitized_baseurl "", %w(foo bar)
+      assert_sanitized_baseurl "", { "foo" => "bar" }
+      assert_sanitized_baseurl "", 345
+      assert_sanitized_baseurl "", false
+      assert_sanitized_baseurl "", true
+      assert_sanitized_baseurl "", nil
+
+      refute_sanitized_baseurl "", "foobar"
+      assert_sanitized_baseurl "/foobar", "foobar"
+    end
+
+    should "ensure a single leading slash and strip extra slashes" do
+      assert_sanitized_baseurl "/foobar", "foobar"
+      assert_sanitized_baseurl "/foobar", "foobar/"
+      assert_sanitized_baseurl "/foobar", "foobar//"
+      assert_sanitized_baseurl "/foobar", "//foobar"
+      assert_sanitized_baseurl "/foobar", "//foobar//"
+      assert_sanitized_baseurl "/foo/bar", "//foo//bar//"
+    end
+
+    should "result in an empty string if value contains '..'" do
+      assert_sanitized_baseurl "/foobar", "foobar"
+      assert_sanitized_baseurl "", "../foobar"
+      assert_sanitized_baseurl "", "..foobar"
+      assert_sanitized_baseurl "", "foobar.."
+      assert_sanitized_baseurl "", "foobar/.."
     end
   end
 end
