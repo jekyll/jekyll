@@ -70,10 +70,6 @@ module Jekyll
         "extensions" => [],
       },
 
-      "redcarpet"           => {
-        "extensions" => [],
-      },
-
       "kramdown"            => {
         "auto_ids"      => true,
         "toc_levels"    => "1..6",
