@@ -30,7 +30,6 @@ module Jekyll
       # rubocop:disable Naming/AccessorMethodName
       def get_processor
         case @config["markdown"].downcase
-        when "redcarpet" then return RedcarpetParser.new(@config)
         when "kramdown"  then return KramdownParser.new(@config)
         else
           custom_processor
@@ -43,7 +42,7 @@ module Jekyll
       # are not in safe mode.)
 
       def valid_processors
-        %w(kramdown redcarpet) + third_party_processors
+        %w(kramdown) + third_party_processors
       end
 
       # Public: A list of processors that you provide via plugins.
@@ -52,7 +51,7 @@ module Jekyll
 
       def third_party_processors
         self.class.constants - \
-          %w(KramdownParser RedcarpetParser PRIORITIES).map(
+          %w(KramdownParser PRIORITIES).map(
             &:to_sym
           )
       end

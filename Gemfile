@@ -76,7 +76,6 @@ group :jekyll_optional_dependencies do
     gem "classifier-reborn", "~> 2.2.0"
     gem "liquid-c", "~> 3.0"
     gem "pygments.rb", "~> 1.0"
-    gem "redcarpet", "~> 3.2", ">= 3.2.3"
     gem "yajl-ruby", "~> 1.3"
   end
 
