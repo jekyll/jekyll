@@ -65,48 +65,6 @@ For more details about these options have a look at the [Kramdown configuration 
 
 It comes in two flavors: basic CommonMark with [jekyll-commonmark](https://github.com/jekyll/jekyll-commonmark) plugin and [GitHub Flavored Markdown supported by GitHub Pages](https://github.com/github/jekyll-commonmark-ghpages).
 
-### Redcarpet
-
-Redcarpet can be configured by providing an `extensions` sub-setting, whose
-value should be an array of strings. Each string should be the name of one of
-the `Redcarpet::Markdown` class's extensions; if present in the array, it will
-set the corresponding extension to `true`.
-
-Jekyll handles two special Redcarpet extensions:
-
-- `no_fenced_code_blocks` --- By default, Jekyll sets the `fenced_code_blocks`
-extension (for delimiting code blocks with triple tildes or triple backticks)
-to `true`, probably because GitHub's eager adoption of them is starting to make
-them inescapable. Redcarpet's normal `fenced_code_blocks` extension is inert
-when used with Jekyll; instead, you can use this inverted version of the
-extension for disabling fenced code.
-
-Note that you can also specify a language for highlighting after the first
-delimiter:
-
-    ```ruby
-    # ...ruby code
-    ```
-
-With both fenced code blocks and highlighter enabled, this will statically
-highlight the code; without any syntax highlighter, it will add a
-`class="LANGUAGE"` attribute to the `<code>` element, which can be used as a
-hint by various JavaScript code highlighting libraries.
-
-- `smart` --- This pseudo-extension turns on SmartyPants, which converts
-  straight quotes to curly quotes and runs of hyphens to em (`---`) and en (`--`) dashes.
-
-All other extensions retain their usual names from Redcarpet, and no renderer
-options aside from `smart` can be specified in Jekyll. [A list of available
-extensions can be found in the Redcarpet README file.](https://github.com/vmg/redcarpet/blob/v3.2.2/README.markdown#and-its-like-really-simple-to-use)
-Make sure you're looking at the README for the right version of
-Redcarpet: Jekyll currently uses v3.2.x. The most commonly used
-extensions are:
-
-- `tables`
-- `no_intra_emphasis`
-- `autolink`
-
 ### Custom Markdown Processors
 
 If you're interested in creating a custom markdown processor, you're in luck! Create a new class in the `Jekyll::Converters::Markdown` namespace:

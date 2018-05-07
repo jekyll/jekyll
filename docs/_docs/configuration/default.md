@@ -70,9 +70,6 @@ liquid:
   strict_variables  : false
 
 # Markdown Processors
-redcarpet:
-  extensions        : []
-
 kramdown:
   auto_ids          : true
   entity_output     : as_char
