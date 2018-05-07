@@ -12,6 +12,7 @@
   * Fix typo (#6969)
   * Add version number for group_by_exp doc (#6956)
   * Update Windows install docs (#6926)
+  * Remove documentation for using Redcarpet (#6990)
 
 ### Minor Enhancements
 
