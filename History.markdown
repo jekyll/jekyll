@@ -13,6 +13,7 @@
   * Add version number for group_by_exp doc (#6956)
   * Update Windows install docs (#6926)
   * Remove documentation for using Redcarpet (#6990)
+  * Updated nginx configuration for custom-404-page documentation (#6994)
 
 ### Minor Enhancements
 
