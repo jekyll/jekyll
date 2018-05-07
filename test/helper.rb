@@ -36,7 +36,6 @@ Jekyll.logger = Logger.new(StringIO.new, :error)
 
 unless jruby?
   require "rdiscount"
-  require "redcarpet"
 end
 
 require "kramdown"

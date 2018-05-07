@@ -12,6 +12,7 @@
   * Fix typo (#6969)
   * Add version number for group_by_exp doc (#6956)
   * Update Windows install docs (#6926)
+  * Remove documentation for using Redcarpet (#6990)
 
 ### Minor Enhancements
 
@@ -28,6 +29,7 @@
   * bump i18n (#6931)
   * We are not using Ruby 2.2 anymore (#6977)
   * Drop support for older versions of Rouge (#6978)
+  * Remove support for Redcarpet (#6987)
 
 ### Development Fixes
 

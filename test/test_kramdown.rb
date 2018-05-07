@@ -20,7 +20,7 @@ class TestKramdown < JekyllUnitTest
             "bold_every" => 8,
             "css"        => :class,
             "css_class"  => "highlight",
-            "formatter"  => Rouge::Formatters::HTMLLegacy,
+            "formatter"  => ::Rouge::Formatters::HTMLLegacy,
           },
         },
       }
