@@ -53,7 +53,7 @@ More info on configuring Apache Error Pages can found in [official documentation
 
 The procedure is just as simple as configuring Apache servers, but slightly different.
 
-Add the following to the nginx configuration file, `default`, which is usually located inside `/etc/nginx/sites-available/` or `/etc/nginx/sites-enabled/`:
+The nginx configuration file depends on the system in which it is installed. In most systems, it is the `nginx.conf` file, which is usually located inside `/etc/nginx/` or `/etc/nginx/conf/`. However, in other systems, you would have to look for a `default` nginx configuration file, containing server related information, which is usually located inside `/etc/nginx/sites-available/`. Depending upon the system in which nginx is installed, add the following to the nginx configuration file, _i.e._ either to `nginx.conf` file or to `defualt` file:
 
 ```nginx
 server {
