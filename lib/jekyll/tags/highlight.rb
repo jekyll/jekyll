@@ -65,23 +65,24 @@ MSG
 
       private
 
+      OPTIONS_REGEX = %r!(?:\w="[^"]*"|\w=\w|\w)+!
+
       def parse_options(input)
         options = {}
-        unless input.empty?
-          # Split along 3 possible forms -- key="<quoted list>", key=value, or key
-          input.scan(%r!(?:\w="[^"]*"|\w=\w|\w)+!) do |opt|
-            key, value = opt.split("=")
-            # If a quoted list, convert to array
-            if value && value.include?("\"")
-              value.delete!('"')
-              value = value.split
-            end
-            options[key.to_sym] = value || true
+        return options if input.empty?
+
+        # Split along 3 possible forms -- key="<quoted list>", key=value, or key
+        input.scan(OPTIONS_REGEX) do |opt|
+          key, value = opt.split("=")
+          # If a quoted list, convert to array
+          if value && value.include?('"')
+            value.delete!('"')
+            value = value.split
           end
+          options[key.to_sym] = value || true
         end
-        if options.key?(:linenos) && options[:linenos] == true
-          options[:linenos] = "inline"
-        end
+
+        options[:linenos] = "inline" if options[:linenos] == true
         options
       end
 
@@ -111,7 +112,8 @@ MSG
       end
 
       def render_rouge(code)
-        formatter = Jekyll::Utils::Rouge.html_formatter(
+        require "rouge"
+        formatter = ::Rouge::Formatters::HTMLLegacy.new(
           :line_numbers => @highlight_options[:linenos],
           :wrap         => false,
           :css_class    => "highlight",

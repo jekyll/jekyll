@@ -20,6 +20,7 @@ module Jekyll
     #
     # Returns a boolean.
     def regenerate?(document)
+      return true if disabled
       case document
       when Page
         regenerate_page?(document)
@@ -120,6 +121,7 @@ module Jekyll
     # Returns nothing.
     def write_metadata
       unless disabled?
+        Jekyll.logger.debug "Writing Metadata:", ".jekyll-metadata"
         File.binwrite(metadata_file, Marshal.dump(metadata))
       end
     end

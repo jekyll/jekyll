@@ -9,6 +9,7 @@ module Jekyll
       #
       def blessed_gems
         %w(
+          jekyll-compose
           jekyll-docs
           jekyll-import
         )

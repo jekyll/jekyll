@@ -29,7 +29,9 @@ module Jekyll
     #
     # Returns nothing
     def log_level=(level)
-      writer.level = LOG_LEVELS.fetch(level)
+      writer.level = level if level.is_a?(Integer) && level.between?(0, 3)
+      writer.level = LOG_LEVELS[level] ||
+        raise(ArgumentError, "unknown log level")
       @level = level
     end
 

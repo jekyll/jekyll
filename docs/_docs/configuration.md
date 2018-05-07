@@ -642,12 +642,12 @@ collections:
     output:   true
 
 # Handling Reading
-safe:                 false
-include:              [".htaccess"]
-exclude:              ["Gemfile", "Gemfile.lock", "node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/"]
-keep_files:           [".git", ".svn"]
-encoding:             "utf-8"
-markdown_ext:         "markdown,mkdown,mkdn,mkd,md"
+safe:                false
+include:             [".htaccess"]
+exclude:             ["Gemfile", "Gemfile.lock", "node_modules", "vendor/bundle/", "vendor/cache/", "vendor/gems/", "vendor/ruby/"]
+keep_files:          [".git", ".svn"]
+encoding:            "utf-8"
+markdown_ext:        "markdown,mkdown,mkdn,mkd,md"
 strict_front_matter: false
 
 # Filtering Content
@@ -684,7 +684,9 @@ verbose:  false
 defaults: []
 
 liquid:
-  error_mode: warn
+  error_mode:       warn
+  strict_filters:   false
+  strict_variables: false
 
 # Markdown Processors
 rdiscount:
@@ -694,14 +696,14 @@ redcarpet:
   extensions: []
 
 kramdown:
-  auto_ids:       true
-  entity_output:  as_char
-  toc_levels:     1..6
-  smart_quotes:   lsquo,rsquo,ldquo,rdquo
-  input:          GFM
-  hard_wrap:      false
-  footnote_nr:    1
-  show_warnings:  false
+  auto_ids:      true
+  entity_output: as_char
+  toc_levels:    1..6
+  smart_quotes:  lsquo,rsquo,ldquo,rdquo
+  input:         GFM
+  hard_wrap:     false
+  footnote_nr:   1
+  show_warnings: false
 ```
 
 ## Liquid Options
@@ -712,6 +714,14 @@ options are
 - `lax` --- Ignore all errors.
 - `warn` --- Output a warning on the console for each error.
 - `strict` --- Output an error message and stop the build.
+
+You can also configure Liquid's renderer to catch non-assigned variables and
+non-existing filters by setting `strict_variables` and / or `strict_filters`
+to `true` respectively. {% include docs_version_badge.html version="3.8.0" %}
+
+Do note that while `error_mode` configures Liquid's parser, the `strict_variables`
+and `strict_filters` options configure Liquid's renderer and are consequently,
+mutually exclusive.
 
 ## Markdown Options
 

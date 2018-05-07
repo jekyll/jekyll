@@ -94,7 +94,11 @@ In general, plugins you make will fall broadly into one of five categories:
 4. [Tags](#tags)
 5. [Hooks](#hooks)
 
-See the bottom of the page for a [list of available plugins](#available-plugins)
+See the bottom of the page for a [list of available plugins](#available-plugins).
+
+For further information on how to develop your own plugins, check out the [Liquid documentation](https://github.com/Shopify/liquid/wiki/Liquid-for-Programmers) as well.
+
+If you never developed a Jekyll plugin [check this useful wrap-up](https://ayastreb.me/writing-a-jekyll-plugin/) by @ayastreb to get started.
 
 ## Generators
 
@@ -821,6 +825,7 @@ You can find a few useful plugins at the following locations:
 - [match_regex](https://github.com/sparanoid/match_regex): A Liquid filter to perform regex match.
 - [replace_regex](https://github.com/sparanoid/replace_regex): A Liquid filter to perform regex replace.
 - [Jekyll Money](https://rubygems.org/gems/jekyll-money): A Jekyll plugin for dealing with money. Because we all have to at some point.
+- [jekyll-random](https://github.com/codecalm/jekyll-random) by [codecalm](https://nodecalm.net): A Jekyll plugin that generates pseudo-random data. Very useful when you want to generate a large amount of random data.
 
 #### Tags
 
@@ -878,8 +883,10 @@ You can find a few useful plugins at the following locations:
   plugin to generate publication lists from [BibSonomy](https://www.bibsonomy.org/).
 - [github-cards](https://github.com/edward-shen/github-cards): Creates styleable Github cards for your Github projects.
 - [disqus-for-jekyll](https://github.com/kacperduras/disqus-for-jekyll): A Jekyll plugin to view the comments powered by Disqus.
-- [jekyll-html](https://github.com/kacperduras/jekyll-html): A Jekyll plugin to use HTML tags in Jekyll pages, posts and collections. 
-
+- [jekyll-html](https://github.com/kacperduras/jekyll-html): A Jekyll plugin to use HTML tags in Jekyll pages, posts and collections.
+- [jekyll-onebox](https://github.com/rriemann/jekyll-onebox): Liquid tag for displaying HTML previews (embeds) for links to popular domains. Plugin is based on [Onebox](https://github.com/discourse/onebox) that powers link previews in [Discourse](http://github.com/discourse/discourse) forums.
+- [jekyll-w2m](https://github.com/kacperduras/jekyll-w2m): A Jekyll plugin to liberate content from Microsoft Word documents (powered by [word-to-markdown](https://github.com/benbalter/word-to-markdown)).
+- [jekyll-flickr](https://github.com/rriemann/jekyll-flickr): Liquid tag for responsive Flickr images using HTML5 srcset. Subtitles and automatic license notices are supported.
 
 #### Collections
 

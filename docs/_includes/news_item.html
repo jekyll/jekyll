@@ -13,10 +13,10 @@
     <span class="post-date">
       {{ post.date | date_to_string }}
     </span>
-    <a href="https://github.com/{{ post.author }}" class="post-author">
-      {% assign author = post.author %}
+    {% assign author = post.author %}
+    <a href="https://github.com/{{ author }}" class="post-author">
       {% avatar user=author size=24 %}
-      {{ post.author }}
+      {{ author }}
     </a>
   </div>
   <div class="post-content">

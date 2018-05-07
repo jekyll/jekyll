@@ -4,53 +4,38 @@ permalink: /docs/home/
 redirect_from: /docs/index.html
 ---
 
-This site aims to be a comprehensive guide to Jekyll. We’ll cover topics such
-as getting your site up and running, creating and managing your content,
-customizing the way your site works and looks, deploying to various
-environments, and give you some advice on participating in the future
-development of Jekyll itself.
+This site aims to be a comprehensive guide to Jekyll. We’ll cover topics such as getting your site up and running, creating and managing content, customizing your build, and deploying.
 
-## So what is Jekyll, exactly?
+## What is Jekyll, exactly?
 
-Jekyll is a simple, blog-aware, static site generator. It takes a template
-directory containing raw text files in various formats, runs it through
-a converter (like [Markdown](https://daringfireball.net/projects/markdown/))
-and our [Liquid](https://shopify.github.io/liquid/) renderer, and
-spits out a complete, ready-to-publish static website suitable
-for serving with your favorite web server. Jekyll also happens to be the engine
-behind [GitHub Pages](https://pages.github.com), which means you can use Jekyll
-to host your project’s page, blog, or website from GitHub’s servers **for
-free**.
+Jekyll is a simple, blog-aware, static site generator.
 
-## Helpful Hints
+You create your content as text files ([Markdown](https://daringfireball.net/projects/markdown/)), and organize them into folders. Then, you build the shell of your site using [Liquid](https://shopify.github.io/liquid/)-enhanced HTML templates. Jekyll automatically stitches the content and templates together, generating a website made entirely of static assets, suitable for uploading to any server.
 
-Throughout this guide there are a number of small-but-handy pieces of
-information that can make using Jekyll easier, more interesting, and less
-hazardous. Here’s what to look out for.
+Jekyll happens to be the engine behind [GitHub Pages](https://pages.github.com), so you can host your project’s Jekyll page/blog/website on GitHub’s servers **for free**.
+
+## Navigating the Guide
+
+Throughout this guide, you'll see these special sections that help you get the most out of Jekyll:
 
 <div class="note">
-  <h5>ProTips™ help you get more from Jekyll</h5>
-  <p>These are tips and tricks that will help you be a Jekyll wizard!</p>
+  <h5>ProTips™</h5>
+  <p>Tips and tricks that'll make you a Jekyll wizard!</p>
 </div>
 
 <div class="note info">
-  <h5>Notes are handy pieces of information</h5>
-  <p>These are for the extra tidbits sometimes necessary to understand
-     Jekyll.</p>
+  <h5>Notes</h5>
+  <p>Extra tidbits that are sometimes necessary to understand Jekyll.</p>
 </div>
 
 <div class="note warning">
-  <h5>Warnings help you not blow things up</h5>
-  <p>Be aware of these messages if you wish to avoid certain death.</p>
+  <h5>Warnings</h5>
+  <p>Common pitfalls to avoid.</p>
 </div>
 
 <div class="note unreleased">
-  <h5>You'll see this by a feature that hasn't been released</h5>
-  <p>Some pieces of this website are for future versions of Jekyll that
-    are not yet released.</p>
+  <h5>Unreleased</h5>
+  <p>Features planned for future versions of Jekyll, but not available yet.</p>
 </div>
 
-If you come across anything along the way that we haven’t covered, or if you
-know of a tip you think others would find handy, please [file an
-issue]({{ site.repository }}/issues/new) and we’ll see about
-including it in this guide.
+If you find anything we haven’t covered, or would like to share a tip that others might find handy, please [file an issue]({{ site.repository }}/issues/new) and we’ll see about adding it to the guide.

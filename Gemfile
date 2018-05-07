@@ -5,11 +5,6 @@ gemspec :name => "jekyll"
 
 gem "rake", "~> 12.0"
 
-gem "rouge", ENV["ROUGE"] if ENV["ROUGE"]
-
-# Dependency of jekyll-mentions. RubyGems in Ruby 2.1 doesn't shield us from this.
-gem "activesupport", "~> 4.2", :groups => [:test_legacy, :site] if RUBY_VERSION < "2.2.2"
-
 group :development do
   gem "launchy", "~> 2.3"
   gem "pry"
@@ -23,15 +18,14 @@ end
 
 group :test do
   gem "codeclimate-test-reporter", "~> 1.0.5"
-  gem "cucumber", RUBY_VERSION >= "2.2" ? "~> 3.0" : "3.0.1"
+  gem "cucumber", "~> 3.0"
   gem "httpclient"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
-  # nokogiri v1.8 does not work with ruby 2.1 and below
-  gem "nokogiri", RUBY_VERSION >= "2.2" ? "~> 1.7" : "~> 1.7.0"
+  gem "nokogiri", "~> 1.7"
   gem "rspec"
   gem "rspec-mocks"
-  gem "rubocop", "~> 0.51.0"
+  gem "rubocop", "~> 0.55.0"
   gem "test-dependency-theme", :path => File.expand_path("test/fixtures/test-dependency-theme", __dir__)
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)
 
@@ -41,7 +35,7 @@ end
 #
 
 group :test_legacy do
-  if RUBY_PLATFORM =~ %r!cygwin! || RUBY_VERSION.start_with?("2.2")
+  if RUBY_PLATFORM =~ %r!cygwin!
     gem "test-unit"
   end
 
@@ -75,7 +69,7 @@ group :jekyll_optional_dependencies do
   gem "jekyll-redirect-from"
   gem "kramdown", "~> 1.14"
   gem "mime-types", "~> 3.0"
-  gem "rdoc", RUBY_VERSION >= "2.2.2" ? "~> 6.0" : "~> 5.1"
+  gem "rdoc", "~> 6.0"
   gem "tomlrb", "~> 1.2"
 
   platform :ruby, :mswin, :mingw, :x64_mingw do
@@ -83,8 +77,7 @@ group :jekyll_optional_dependencies do
     gem "liquid-c", "~> 3.0"
     gem "pygments.rb", "~> 1.0"
     gem "rdiscount", "~> 2.0"
-    gem "redcarpet", "~> 3.2", ">= 3.2.3"
-    gem "yajl-ruby", "~> 1.3.1"
+    gem "yajl-ruby", "~> 1.3"
   end
 
   # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

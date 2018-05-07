@@ -8,7 +8,7 @@ class Jekyll::ThemeBuilder
   attr_reader :name, :path, :code_of_conduct
 
   def initialize(theme_name, opts)
-    @name = theme_name.to_s.tr(" ", "_").gsub(%r!_+!, "_")
+    @name = theme_name.to_s.tr(" ", "_").squeeze("_")
     @path = Pathname.new(File.expand_path(name, Dir.pwd))
     @code_of_conduct = !!opts["code_of_conduct"]
   end
