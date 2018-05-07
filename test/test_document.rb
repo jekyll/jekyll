@@ -449,14 +449,16 @@ class TestDocument < JekyllUnitTest
         refute_nil @files.find do |doc|
           doc.relative_path == "_slides/example-slide-4.html"
         end
+        assert_exist dest_dir("slides/example-slide-4.html")
       end
     end
 
     context "with output overrides" do
       should "be output according its front matter" do
-        assert_nil(
-          @files.find { |doc| doc.relative_path == "_slides/non-outputted-slide.html" }
-        )
+        assert @files.find do |doc|
+          doc.relative_path == "_slides/non-outputted-slide.html"
+        end
+        refute_exist dest_dir("slides/non-outputted-slide.html")
       end
     end
   end

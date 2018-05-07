@@ -90,7 +90,7 @@ module Jekyll
     #
     # Returns the output extension
     def output_ext
-      Jekyll::Renderer.new(site, self).output_ext
+      @output_ext ||= Jekyll::Renderer.new(site, self).output_ext
     end
 
     # The base filename of the document, without the file extname.
@@ -239,6 +239,7 @@ module Jekyll
     def write(dest)
       path = destination(dest)
       FileUtils.mkdir_p(File.dirname(path))
+      Jekyll.logger.debug "Writing:", path
       File.write(path, output, :mode => "wb")
 
       trigger_hooks(:post_write)
@@ -311,9 +312,10 @@ module Jekyll
     # Based on the Collection to which it belongs.
     #
     # True if the document has a collection and if that collection's #write?
-    #   method returns true, otherwise false.
+    # method returns true, and if the site's Publisher will publish the document.
+    # False otherwise.
     def write?
-      collection && collection.write?
+      collection && collection.write? && site.publisher.publish?(self)
     end
 
     # The Document excerpt_separator, from the YAML Front-Matter or site

@@ -68,8 +68,11 @@ module Jekyll
     # rubocop: disable AbcSize
     def render_document
       info = {
-        :registers => { :site => site, :page => payload["page"] },
+        :registers        => { :site => site, :page => payload["page"] },
+        :strict_filters   => liquid_options["strict_filters"],
+        :strict_variables => liquid_options["strict_variables"],
       }
+
       output = document.content
       if document.render_with_liquid?
         Jekyll.logger.debug "Rendering Liquid:", document.relative_path
@@ -169,12 +172,16 @@ module Jekyll
     # Returns nothing
     private
     def validate_layout(layout)
-      return unless invalid_layout?(layout)
-      Jekyll.logger.warn(
-        "Build Warning:",
-        "Layout '#{document.data["layout"]}' requested "\
-        "in #{document.relative_path} does not exist."
-      )
+      if invalid_layout?(layout)
+        Jekyll.logger.warn(
+          "Build Warning:",
+          "Layout '#{document.data["layout"]}' requested "\
+          "in #{document.relative_path} does not exist."
+        )
+      elsif !layout.nil?
+        layout_source = layout.path.start_with?(site.source) ? :site : :theme
+        Jekyll.logger.debug "Layout source:", layout_source
+      end
     end
 
     # Render layout content into document.output
@@ -240,8 +247,9 @@ module Jekyll
 
     private
     def permalink_ext
-      if document.permalink && !document.permalink.end_with?("/")
-        permalink_ext = File.extname(document.permalink)
+      document_permalink = document.permalink
+      if document_permalink && !document_permalink.end_with?("/")
+        permalink_ext = File.extname(document_permalink)
         permalink_ext unless permalink_ext.empty?
       end
     end
@@ -260,6 +268,11 @@ module Jekyll
       @output_exts ||= converters.map do |c|
         c.output_ext(document.extname)
       end.compact
+    end
+
+    private
+    def liquid_options
+      @liquid_options ||= site.config["liquid"]
     end
   end
 end

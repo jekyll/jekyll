@@ -55,6 +55,10 @@ class TestCollections < JekyllUnitTest
         assert_equal @collection.to_liquid["docs"], []
       end
 
+      should "have a files attribute" do
+        assert_equal @collection.to_liquid["files"], []
+      end
+
       should "have a directory attribute" do
         assert_equal @collection.to_liquid["directory"], source_dir("_methods")
       end

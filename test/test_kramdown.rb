@@ -20,7 +20,7 @@ class TestKramdown < JekyllUnitTest
             "bold_every" => 8,
             "css"        => :class,
             "css_class"  => "highlight",
-            "formatter"  => Jekyll::Utils::Rouge.html_formatter.class,
+            "formatter"  => ::Rouge::Formatters::HTMLLegacy,
           },
         },
       }
@@ -91,8 +91,7 @@ class TestKramdown < JekyllUnitTest
         puts "Hello World"
         ~~~
       MARKDOWN
-      div_highlight = ""
-      div_highlight = ">div.highlight" unless Utils::Rouge.old_api?
+      div_highlight = ">div.highlight"
       selector = "div.highlighter-rouge#{div_highlight}>pre.highlight>code"
       refute result.css(selector).empty?
     end

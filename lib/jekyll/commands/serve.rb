@@ -70,27 +70,19 @@ module Jekyll
             cmd.action do |_, opts|
               opts["livereload_port"] ||= LIVERELOAD_PORT
               opts["serving"] = true
-              opts["watch"  ] = true unless opts.key?("watch")
+              opts["watch"]   = true unless opts.key?("watch")
 
-              start(opts)
+              # Set the reactor to nil so any old reactor will be GCed.
+              # We can't unregister a hook so while running tests we don't want to
+              # inadvertently keep using a reactor created by a previous test.
+              @reload_reactor = nil
+
+              config = configuration_from_options(opts)
+              config["url"] = default_url(config) if Jekyll.env == "development"
+
+              process_with_graceful_fail(cmd, config, Build, Serve)
             end
           end
-        end
-
-        #
-
-        def start(opts)
-          # Set the reactor to nil so any old reactor will be GCed.
-          # We can't unregister a hook so in testing when Serve.start is
-          # called multiple times we don't want to inadvertently keep using
-          # a reactor created by a previous test when our test might not
-          @reload_reactor = nil
-
-          config = configuration_from_options(opts)
-          if Jekyll.env == "development"
-            config["url"] = default_url(config)
-          end
-          [Build, Serve].each { |klass| klass.process(config) }
         end
 
         #
@@ -173,6 +165,7 @@ module Jekyll
             @changed_pages = nil
           end
         end
+        # rubocop:enable Metrics/AbcSize
 
         # Do a base pre-setup of WEBRick so that everything is in place
         # when we get ready to party, checking for an setting up an error page
@@ -336,7 +329,7 @@ module Jekyll
           require "webrick/https"
 
           opts[:SSLCertificate] = OpenSSL::X509::Certificate.new(read_file(src, cert))
-          opts[:SSLPrivateKey ] = OpenSSL::PKey::RSA.new(read_file(src, key))
+          opts[:SSLPrivateKey]  = OpenSSL::PKey::RSA.new(read_file(src, key))
           opts[:SSLEnable] = true
         end
 

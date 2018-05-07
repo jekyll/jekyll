@@ -61,14 +61,12 @@ module Jekyll
       "defaults"            => [],
 
       "liquid"              => {
-        "error_mode" => "warn",
+        "error_mode"       => "warn",
+        "strict_filters"   => false,
+        "strict_variables" => false,
       },
 
       "rdiscount"           => {
-        "extensions" => [],
-      },
-
-      "redcarpet"           => {
         "extensions" => [],
       },
 

@@ -15,7 +15,7 @@ module Jekyll
 
             c.action do |_, options|
               options["serving"] = false
-              Jekyll::Commands::Build.process(options)
+              process_with_graceful_fail(c, options, self)
             end
           end
         end
