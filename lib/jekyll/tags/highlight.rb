@@ -33,12 +33,10 @@ MSG
         suffix = context["highlighter_suffix"] || ""
         code = super.to_s.gsub(%r!\A(\n|\r)+|(\n|\r)+\z!, "")
 
-        is_safe = !!context.registers[:site].safe
-
         output =
           case context.registers[:site].highlighter
           when "pygments"
-            render_pygments(code, is_safe)
+            render_pygments(code, context)
           when "rouge"
             render_rouge(code)
           else
@@ -47,20 +45,6 @@ MSG
 
         rendered_output = add_code_tag(output)
         prefix + rendered_output + suffix
-      end
-
-      def sanitized_opts(opts, is_safe)
-        if is_safe
-          Hash[[
-            [:startinline, opts.fetch(:startinline, nil)],
-            [:hl_lines,    opts.fetch(:hl_lines, nil)],
-            [:linenos,     opts.fetch(:linenos, nil)],
-            [:encoding,    opts.fetch(:encoding, "utf-8")],
-            [:cssclass,    opts.fetch(:cssclass, nil)],
-          ].reject { |f| f.last.nil? }]
-        else
-          opts
-        end
       end
 
       private
@@ -86,7 +70,7 @@ MSG
         options
       end
 
-      def render_pygments(code, _is_safe)
+      def render_pygments(code, _context)
         Jekyll.logger.warn "Warning:",
           "Highlight Tag no longer supports rendering with Pygments"
         code
