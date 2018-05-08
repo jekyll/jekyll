@@ -72,8 +72,9 @@ MSG
 
       def render_pygments(code, _context)
         Jekyll.logger.warn "Warning:",
-          "Highlight Tag no longer supports rendering with Pygments"
-        code
+          "Highlight Tag no longer supports rendering with Pygments."
+        Jekyll.logger.warn "", "Using the default highlighter, Rouge, instead."
+        render_rouge(code)
       end
 
       def render_rouge(code)
