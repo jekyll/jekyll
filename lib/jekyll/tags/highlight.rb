@@ -35,10 +35,10 @@ MSG
 
         output =
           case context.registers[:site].highlighter
-          when "pygments"
-            render_pygments(code, context)
           when "rouge"
             render_rouge(code)
+          when "pygments"
+            render_pygments(code, context)
           else
             render_codehighlighter(code)
           end
