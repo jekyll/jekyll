@@ -353,24 +353,38 @@ module Jekyll
     end
 
     # Parse a string to a Liquid Condition
+    # The following code was *adapted* from Liquid::If
+    # ref: https://git.io/vp6K6
     private
     def parse_condition(exp)
       parser = Liquid::Parser.new(exp)
-      left_expr = parser.expression
-      operator = parser.consume?(:comparison)
-      condition =
-        if operator
-          Liquid::Condition.new(Liquid::Expression.parse(left_expr),
-                                operator,
-                                Liquid::Expression.parse(parser.expression))
-        else
-          Liquid::Condition.new(Liquid::Expression.parse(left_expr))
-        end
+      condition = parse_binary_comparison(parser)
       parser.consume(:end_of_string)
-
       condition
     end
 
+    private
+    def parse_binary_comparison(parser)
+      condition = parse_comparison(parser)
+      binary_operator = parser.id?("and") || parser.id?("or")
+      condition.send(binary_operator, parse_binary_comparison(parser)) if binary_operator
+      condition
+    end
+
+    private
+    def parse_comparison(parser)
+      parsed_left_expr = Liquid::Expression.parse(parser.expression)
+      operator = parser.consume?(:comparison)
+      if operator
+        Liquid::Condition.new(
+          parsed_left_expr,
+          operator,
+          Liquid::Expression.parse(parser.expression)
+        )
+      else
+        Liquid::Condition.new(parsed_left_expr)
+      end
+    end
   end
 end
 
