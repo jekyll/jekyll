@@ -124,8 +124,7 @@ following is a reference of the available data.
 
         A list of all <a href="/docs/static-files/">static files</a> (i.e.
         files not processed by Jekyll's converters or the Liquid renderer).
-        Each file has three properties: <code>path</code>,
-        <code>modified_time</code> and <code>extname</code>.
+        Each file has five properties: <code>path</code>, <code>modified_time</code>, <code>name</code>, <code>basename</code> and <code>extname</code>.
 
       </p></td>
     </tr>
