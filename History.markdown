@@ -35,6 +35,7 @@
   * We are not using Ruby 2.2 anymore (#6977)
   * Drop support for older versions of Rouge (#6978)
   * Remove support for Redcarpet (#6987)
+  * Remove support for rdiscount (#6988)
 
 ### Development Fixes
 
