@@ -39,15 +39,13 @@ module Jekyll
         "WTZ#{sign}#{hh}:#{mm}"
       end
 
-      private
-
       # Private: Convert given seconds to an hour as a rational number.
       #
       # seconds - supplied as an integer, it is converted to a rational number.
       # 3600 - no. of seconds in an hour.
       #
       # Returns a rational number.
-      def rational_hour(seconds)
+      private def rational_hour(seconds)
         seconds.to_r / 3600
       end
 
@@ -57,7 +55,7 @@ module Jekyll
       # 3600 - no. of seconds in an hour.
       #
       # Returns an integer.
-      def absolute_hour(seconds)
+      private def absolute_hour(seconds)
         seconds.abs / 3600
       end
 
@@ -67,7 +65,7 @@ module Jekyll
       #            by its denominator and the remainder returned.
       #
       # Returns an integer.
-      def modulo_of(fraction)
+      private def modulo_of(fraction)
         fraction.numerator % fraction.denominator
       end
     end

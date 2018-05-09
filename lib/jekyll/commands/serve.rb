@@ -102,8 +102,7 @@ module Jekyll
 
         # Perform logical validation of CLI options
 
-        private
-        def validate_options(opts)
+        private def validate_options(opts)
           if opts["livereload"]
             if opts["detach"]
               Jekyll.logger.warn "Warning:",
@@ -131,11 +130,8 @@ module Jekyll
           end
         end
 
-        #
-
-        private
         # rubocop:disable Metrics/AbcSize
-        def register_reload_hooks(opts)
+        private def register_reload_hooks(opts)
           require_relative "serve/live_reload_reactor"
           @reload_reactor = LiveReloadReactor.new
 
@@ -171,8 +167,7 @@ module Jekyll
         # when we get ready to party, checking for an setting up an error page
         # and making sure our destination exists.
 
-        private
-        def setup(destination)
+        private def setup(destination)
           require_relative "serve/servlet"
 
           FileUtils.mkdir_p(destination)
@@ -188,8 +183,7 @@ module Jekyll
 
         #
 
-        private
-        def webrick_opts(opts)
+        private def webrick_opts(opts)
           opts = {
             :JekyllOptions      => opts,
             :DoNotReverseLookup => true,
@@ -211,8 +205,7 @@ module Jekyll
 
         #
 
-        private
-        def start_up_webrick(opts, destination)
+        private def start_up_webrick(opts, destination)
           if opts["livereload"]
             @reload_reactor.start(opts)
           end
@@ -227,8 +220,7 @@ module Jekyll
 
         # Recreate NondisclosureName under utf-8 circumstance
 
-        private
-        def file_handler_opts
+        private def file_handler_opts
           WEBrick::Config::FileHandler.merge({
             :FancyIndexing     => true,
             :NondisclosureName => [
@@ -239,8 +231,7 @@ module Jekyll
 
         #
 
-        private
-        def server_address(server, options = {})
+        private def server_address(server, options = {})
           format_url(
             server.config[:SSLEnable],
             server.config[:BindAddress],
@@ -249,8 +240,7 @@ module Jekyll
           )
         end
 
-        private
-        def format_url(ssl_enabled, address, port, baseurl = nil)
+        private def format_url(ssl_enabled, address, port, baseurl = nil)
           format("%<prefix>s://%<address>s:%<port>i%<baseurl>s", {
             :prefix  => ssl_enabled ? "https" : "http",
             :address => address,
@@ -261,8 +251,7 @@ module Jekyll
 
         #
 
-        private
-        def default_url(opts)
+        private def default_url(opts)
           config = configuration_from_options(opts)
           format_url(
             config["ssl_cert"] && config["ssl_key"],
@@ -273,8 +262,7 @@ module Jekyll
 
         #
 
-        private
-        def launch_browser(server, opts)
+        private def launch_browser(server, opts)
           address = server_address(server, opts)
           return system "start", address if Utils::Platforms.windows?
           return system "xdg-open", address if Utils::Platforms.linux?
@@ -287,8 +275,7 @@ module Jekyll
         # by the user.  This method determines what we do based on what you
         # ask us to do.
 
-        private
-        def boot_or_detach(server, opts)
+        private def boot_or_detach(server, opts)
           if opts["detach"]
             pid = Process.fork do
               server.start
@@ -306,8 +293,7 @@ module Jekyll
 
         # Make the stack verbose if the user requests it.
 
-        private
-        def enable_logging(opts)
+        private def enable_logging(opts)
           opts[:AccessLog] = []
           level = WEBrick::Log.const_get(opts[:JekyllOptions]["verbose"] ? :DEBUG : :WARN)
           opts[:Logger] = WEBrick::Log.new($stdout, level)
@@ -317,8 +303,7 @@ module Jekyll
         # provide both types of certificates commonly needed.  Raise if they
         # forget to add one of the certificates.
 
-        private
-        def enable_ssl(opts)
+        private def enable_ssl(opts)
           cert, key, src =
             opts[:JekyllOptions].values_at("ssl_cert", "ssl_key", "source")
 
@@ -333,8 +318,7 @@ module Jekyll
           opts[:SSLEnable] = true
         end
 
-        private
-        def start_callback(detached)
+        private def start_callback(detached)
           unless detached
             proc do
               mutex.synchronize do
@@ -348,8 +332,7 @@ module Jekyll
           end
         end
 
-        private
-        def stop_callback(detached)
+        private def stop_callback(detached)
           unless detached
             proc do
               mutex.synchronize do
@@ -364,14 +347,12 @@ module Jekyll
           end
         end
 
-        private
-        def mime_types
+        private def mime_types
           file = File.expand_path("../mime.types", __dir__)
           WEBrick::HTTPUtils.load_mime_types(file)
         end
 
-        private
-        def read_file(source_dir, file_path)
+        private def read_file(source_dir, file_path)
           File.read(Jekyll.sanitized_path(source_dir, file_path))
         end
       end

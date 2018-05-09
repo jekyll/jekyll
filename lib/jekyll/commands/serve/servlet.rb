@@ -180,8 +180,7 @@ module Jekyll
 
         #
 
-        private
-        def validate_and_ensure_charset(_req, res)
+        private def validate_and_ensure_charset(_req, res)
           key = res.header.keys.grep(%r!content-type!i).first
           typ = res.header[key]
 
@@ -192,8 +191,7 @@ module Jekyll
 
         #
 
-        private
-        def set_defaults
+        private def set_defaults
           hash_ = @jekyll_opts.fetch("webrick", {}).fetch("headers", {})
           DEFAULTS.each_with_object(@headers = hash_) do |(key, val), hash|
             hash[key] = val unless hash.key?(key)

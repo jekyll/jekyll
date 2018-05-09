@@ -48,9 +48,7 @@ module Jekyll
       # No LogDevice in use
     end
 
-    private
-
-    def logdevice(severity)
+    private def logdevice(severity)
       if severity > INFO
         $stderr
       else

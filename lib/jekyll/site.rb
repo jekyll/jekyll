@@ -406,8 +406,7 @@ module Jekyll
     # Limits the current posts; removes the posts which exceed the limit_posts
     #
     # Returns nothing
-    private
-    def limit_posts!
+    private def limit_posts!
       if limit_posts > 0
         limit = posts.docs.length < limit_posts ? posts.docs.length : limit_posts
         self.posts.docs = posts.docs[-limit, limit]
@@ -418,19 +417,16 @@ module Jekyll
     # already exist.
     #
     # Returns The Cleaner
-    private
-    def site_cleaner
+    private def site_cleaner
       @site_cleaner ||= Cleaner.new(self)
     end
 
-    private
-    def configure_plugins
+    private def configure_plugins
       self.plugin_manager = Jekyll::PluginManager.new(self)
       self.plugins        = plugin_manager.plugins_path
     end
 
-    private
-    def configure_theme
+    private def configure_theme
       self.theme = nil
       return if config["theme"].nil?
 
@@ -444,21 +440,18 @@ module Jekyll
         end
     end
 
-    private
-    def configure_include_paths
+    private def configure_include_paths
       @includes_load_paths = Array(in_source_dir(config["includes_dir"].to_s))
       @includes_load_paths << theme.includes_path if theme && theme.includes_path
     end
 
-    private
-    def configure_file_read_opts
+    private def configure_file_read_opts
       self.file_read_opts = {}
       self.file_read_opts[:encoding] = config["encoding"] if config["encoding"]
       self.file_read_opts = Jekyll::Utils.merged_file_read_opts(self, {})
     end
 
-    private
-    def render_docs(payload)
+    private def render_docs(payload)
       collections.each_value do |collection|
         collection.docs.each do |document|
           render_regenerated(document, payload)
@@ -466,15 +459,13 @@ module Jekyll
       end
     end
 
-    private
-    def render_pages(payload)
+    private def render_pages(payload)
       pages.flatten.each do |page|
         render_regenerated(page, payload)
       end
     end
 
-    private
-    def render_regenerated(document, payload)
+    private def render_regenerated(document, payload)
       return unless regenerator.regenerate?(document)
       document.output = Jekyll::Renderer.new(self, document, payload).run
       document.trigger_hooks(:post_render)

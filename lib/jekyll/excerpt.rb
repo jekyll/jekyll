@@ -91,8 +91,6 @@ module Jekyll
       !(coffeescript_file? || yaml_file? || !Utils.has_liquid_construct?(content))
     end
 
-    protected
-
     # Internal: Extract excerpt from the content
     #
     # By default excerpt is your first paragraph of a doc: everything before
@@ -131,7 +129,7 @@ module Jekyll
     LIQUID_TAG_REGEX = %r!{%\s*(\w+).+\s*%}!m
     MKDWN_LINK_REF_REGEX = %r!^ {0,3}\[[^\]]+\]:.+$!
 
-    def extract_excerpt(doc_content)
+    protected def extract_excerpt(doc_content)
       head, _, tail = doc_content.to_s.partition(doc.excerpt_separator)
 
       # append appropriate closing tag (to a Liquid block), to the "head" if the
@@ -154,13 +152,11 @@ module Jekyll
       end
     end
 
-    private
-
-    def liquid_block?(tag_name)
+    private def liquid_block?(tag_name)
       Liquid::Template.tags[tag_name].superclass == Liquid::Block
     end
 
-    def print_build_warning
+    private def print_build_warning
       Jekyll.logger.warn "Warning:", "Excerpt modified in #{doc.relative_path}!"
       Jekyll.logger.warn "",
         "Found a Liquid block containing separator '#{doc.excerpt_separator}' and has " \

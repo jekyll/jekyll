@@ -36,15 +36,13 @@ module Jekyll
         @template.warnings
       end
 
-      private
-
-      def measure_bytes
+      private def measure_bytes
         yield.tap do |str|
           @renderer.increment_bytes(@filename, str.bytesize)
         end
       end
 
-      def measure_time
+      private def measure_time
         before = Time.now
         yield
       ensure

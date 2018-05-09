@@ -116,8 +116,7 @@ module Jekyll
           ].all?
         end
 
-        private
-        def collect_urls(urls, things, destination)
+        private def collect_urls(urls, things, destination)
           things.each do |thing|
             dest = thing.destination(destination)
             if urls[dest]
@@ -129,21 +128,21 @@ module Jekyll
           urls
         end
 
-        def case_insensitive_urls(things, destination)
+        private def case_insensitive_urls(things, destination)
           things.each_with_object({}) do |thing, memo|
             dest = thing.destination(destination)
             (memo[dest.downcase] ||= []) << dest
           end
         end
 
-        def url_exists?(url)
+        private def url_exists?(url)
           return true unless url.nil? || url.empty?
           Jekyll.logger.warn "Warning:", "You didn't set an URL in the config file, "\
               "you may encounter problems with some plugins."
           false
         end
 
-        def url_valid?(url)
+        private def url_valid?(url)
           Addressable::URI.parse(url)
           true
         # Addressable::URI#parse only raises a TypeError
@@ -154,7 +153,7 @@ module Jekyll
           false
         end
 
-        def url_absolute(url)
+        private def url_absolute(url)
           return true if Addressable::URI.parse(url).absolute?
           Jekyll.logger.warn "Warning:", "Your site URL does not seem to be absolute, "\
               "check the value of `url` in your config file."

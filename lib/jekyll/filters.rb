@@ -293,13 +293,11 @@ module Jekyll
       xml_escape(input.inspect)
     end
 
-    private
-
     # Sort the input Enumerable by the given property.
     # If the property doesn't exist, return the sort order respective of
     # which item doesn't have the property.
     # We also utilize the Schwartzian transform to make this more efficient.
-    def sort_input(input, property, order)
+    private def sort_input(input, property, order)
       input.map { |item| [item_property(item, property), item] }
         .sort! do |apple_info, orange_info|
           apple_property = apple_info.first
@@ -316,8 +314,7 @@ module Jekyll
         .map!(&:last)
     end
 
-    private
-    def item_property(item, property)
+    private def item_property(item, property)
       if item.respond_to?(:to_liquid)
         property.to_s.split(".").reduce(item.to_liquid) do |subvalue, attribute|
           subvalue[attribute]
@@ -329,8 +326,7 @@ module Jekyll
       end
     end
 
-    private
-    def as_liquid(item)
+    private def as_liquid(item)
       case item
       when Hash
         pairs = item.map { |k, v| as_liquid([k, v]) }
@@ -353,8 +349,7 @@ module Jekyll
     end
 
     # Parse a string to a Liquid Condition
-    private
-    def parse_condition(exp)
+    private def parse_condition(exp)
       parser = Liquid::Parser.new(exp)
       left_expr = parser.expression
       operator = parser.consume?(:comparison)

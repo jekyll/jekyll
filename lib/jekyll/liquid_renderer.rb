@@ -50,13 +50,11 @@ module Jekyll
       "#{error.message} in #{path}"
     end
 
-    private
-
-    def filename_regex
+    private def filename_regex
       @filename_regex ||= %r!\A(#{source_dir}/|#{theme_dir}/|\W*)(.*)!i
     end
 
-    def new_profile_hash
+    private def new_profile_hash
       Hash.new { |hash, key| hash[key] = 0 }
     end
   end

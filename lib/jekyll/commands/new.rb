@@ -59,9 +59,7 @@ module Jekyll
           "_posts/#{Time.now.strftime("%Y-%m-%d")}-welcome-to-jekyll.markdown"
         end
 
-        private
-
-        def gemfile_contents
+        private def gemfile_contents
           <<-RUBY
 source "https://rubygems.org"
 
@@ -96,7 +94,7 @@ gem "wdm", "~> 0.1.0" if Gem.win_platform?
 RUBY
         end
 
-        def create_site(new_blog_path)
+        private def create_site(new_blog_path)
           create_sample_files new_blog_path
 
           File.open(File.expand_path(initialized_post_name, new_blog_path), "w") do |f|
@@ -108,21 +106,21 @@ RUBY
           end
         end
 
-        def preserve_source_location?(path, options)
+        private def preserve_source_location?(path, options)
           !options["force"] && !Dir["#{path}/**/*"].empty?
         end
 
-        def create_sample_files(path)
+        private def create_sample_files(path)
           FileUtils.cp_r site_template + "/.", path
           FileUtils.chmod_R "u+w", path
           FileUtils.rm File.expand_path(scaffold_path, path)
         end
 
-        def site_template
+        private def site_template
           File.expand_path("../../site_template", __dir__)
         end
 
-        def scaffold_path
+        private def scaffold_path
           "_posts/0000-00-00-welcome-to-jekyll.markdown.erb"
         end
 
@@ -130,7 +128,7 @@ RUBY
         # then automatically execute bundle install from within the new blog dir
         # unless the user opts to generate a blank blog or skip 'bundle install'.
 
-        def after_install(path, options = {})
+        private def after_install(path, options = {})
           unless options["blank"] || options["skip-bundle"]
             begin
               require "bundler"
@@ -144,7 +142,7 @@ RUBY
           Jekyll.logger.info "Bundle install skipped." if options["skip-bundle"]
         end
 
-        def bundle_install(path)
+        private def bundle_install(path)
           Jekyll.logger.info "Running bundle install in #{path.cyan}..."
           Dir.chdir(path) do
             exe = Gem.bin_path("bundler", "bundle")

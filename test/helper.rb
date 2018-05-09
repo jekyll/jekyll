@@ -202,9 +202,7 @@ end
 
 module TestWEBrick
 
-  module_function
-
-  def mount_server(&block)
+  module_function def mount_server(&block)
     server = WEBrick::HTTPServer.new(config)
 
     begin
@@ -222,7 +220,7 @@ module TestWEBrick
     end
   end
 
-  def config
+  module_function def config
     logger = FakeLogger.new
     {
       :BindAddress => "127.0.0.1", :Port => 0,
@@ -234,11 +232,11 @@ module TestWEBrick
     }
   end
 
-  def document_root
+  module_function def document_root
     "#{File.dirname(__FILE__)}/fixtures/webrick"
   end
 
-  def document_root_options
+  module_function def document_root_options
     WEBrick::Config::FileHandler.merge({
       :FancyIndexing     => true,
       :NondisclosureName => [

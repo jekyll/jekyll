@@ -242,13 +242,11 @@ module Jekyll
       end
     end
 
-    private
-
-    def _renderer
+    private def _renderer
       @_renderer ||= Jekyll::Renderer.new(site, self)
     end
 
-    def no_layout?
+    private def no_layout?
       data["layout"] == "none"
     end
   end

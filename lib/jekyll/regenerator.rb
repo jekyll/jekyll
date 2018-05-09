@@ -141,13 +141,11 @@ module Jekyll
       disabled
     end
 
-    private
-
     # Read metadata from the metadata file, if no file is found,
     # initialize with an empty hash
     #
     # Returns the read metadata.
-    def read_metadata
+    private def read_metadata
       @metadata =
         if !disabled? && File.file?(metadata_file)
           content = File.binread(metadata_file)
@@ -165,24 +163,21 @@ module Jekyll
         end
     end
 
-    private
-    def regenerate_page?(document)
+    private def regenerate_page?(document)
       document.asset_file? || document.data["regenerate"] ||
         source_modified_or_dest_missing?(
           site.in_source_dir(document.relative_path), document.destination(@site.dest)
         )
     end
 
-    private
-    def regenerate_document?(document)
+    private def regenerate_document?(document)
       !document.write? || document.data["regenerate"] ||
         source_modified_or_dest_missing?(
           document.path, document.destination(@site.dest)
         )
     end
 
-    private
-    def existing_file_modified?(path)
+    private def existing_file_modified?(path)
       # If one of this file dependencies have been modified,
       # set the regeneration bit for both the dependency and the file to true
       metadata[path]["deps"].each do |dependency|

@@ -84,8 +84,6 @@ module Jekyll
       defaults
     end
 
-    private
-
     # Checks if a given default setting scope matches the given path and type
     #
     # scope - the hash indicating the scope, as defined in _config.yml
@@ -93,12 +91,12 @@ module Jekyll
     # type - the type (:post, :page or :draft) to check for
     #
     # Returns true if the scope applies to the given path and type
-    def applies?(scope, path, type)
+    private def applies?(scope, path, type)
       applies_path?(scope, path) && applies_type?(scope, type)
     end
 
     # rubocop:disable Metrics/AbcSize
-    def applies_path?(scope, path)
+    private def applies_path?(scope, path)
       return true if !scope.key?("path") || scope["path"].empty?
 
       sanitized_path = Pathname.new(sanitize_path(path))
@@ -120,7 +118,7 @@ module Jekyll
     end
     # rubocop:enable Metrics/AbcSize
 
-    def path_is_subpath?(path, parent_path)
+    private def path_is_subpath?(path, parent_path)
       path.ascend do |ascended_path|
         if ascended_path.to_s == parent_path.to_s
           return true
@@ -130,7 +128,7 @@ module Jekyll
       false
     end
 
-    def strip_collections_dir(path)
+    private def strip_collections_dir(path)
       collections_dir  = @site.config["collections_dir"]
       slashed_coll_dir = "#{collections_dir}/"
       return path if collections_dir.empty? || !path.to_s.start_with?(slashed_coll_dir)
@@ -148,7 +146,7 @@ module Jekyll
     #
     # Returns true if either of the above conditions are satisfied,
     #   otherwise returns false
-    def applies_type?(scope, type)
+    private def applies_type?(scope, type)
       !scope.key?("type") || scope["type"].eql?(type.to_s)
     end
 
@@ -157,7 +155,7 @@ module Jekyll
     # set - the default value hash, as defined in _config.yml
     #
     # Returns true if the set is valid and can be used in this class
-    def valid?(set)
+    private def valid?(set)
       set.is_a?(Hash) && set["values"].is_a?(Hash)
     end
 
@@ -168,7 +166,7 @@ module Jekyll
     #
     # Returns true if the new scope has precedence over the older
     # rubocop: disable PredicateName
-    def has_precedence?(old_scope, new_scope)
+    private def has_precedence?(old_scope, new_scope)
       return true if old_scope.nil?
 
       new_path = sanitize_path(new_scope["path"])
@@ -187,7 +185,7 @@ module Jekyll
     # Collects a list of sets that match the given path and type
     #
     # Returns an array of hashes
-    def matching_sets(path, type)
+    private def matching_sets(path, type)
       valid_sets.select do |set|
         !set.key?("scope") || applies?(set["scope"], path, type)
       end
@@ -199,7 +197,7 @@ module Jekyll
     # and have their changes take effect
     #
     # Returns an array of hashes
-    def valid_sets
+    private def valid_sets
       sets = @site.config["defaults"]
       return [] unless sets.is_a?(Array)
 
@@ -218,7 +216,7 @@ module Jekyll
 
     SANITIZATION_REGEX = %r!\A/|(?<=[^/])\z!
 
-    def sanitize_path(path)
+    private def sanitize_path(path)
       if path.nil? || path.empty?
         ""
       else

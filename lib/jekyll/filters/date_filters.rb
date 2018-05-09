@@ -63,13 +63,12 @@ module Jekyll
         time(date).rfc822
       end
 
-      private
       # month_type: Notations that evaluate to 'Month' via `Time#strftime` ("%b", "%B")
       # type: nil (default) or "ordinal"
       # style: nil (default) or "US"
       #
       # Returns a stringified date or the empty input.
-      def stringify_date(date, month_type, type = nil, style = nil)
+      private def stringify_date(date, month_type, type = nil, style = nil)
         return date if date.to_s.empty?
         time = time(date)
         if type == "ordinal"
@@ -81,8 +80,7 @@ module Jekyll
         time.strftime("%d #{month_type} %Y")
       end
 
-      private
-      def ordinal(number)
+      private def ordinal(number)
         return "th" if (11..13).cover?(number)
 
         case number % 10
@@ -93,8 +91,7 @@ module Jekyll
         end
       end
 
-      private
-      def time(input)
+      private def time(input)
         date = Liquid::Utils.to_date(input)
         unless date.respond_to?(:to_time)
           raise Errors::InvalidDateError,

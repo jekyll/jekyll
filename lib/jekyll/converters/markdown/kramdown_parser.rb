@@ -46,8 +46,7 @@ module Jekyll
           html_output
         end
 
-        private
-        def make_accessible(hash = @config)
+        private def make_accessible(hash = @config)
           hash.keys.each do |key|
             hash[key.to_sym] = hash[key]
             make_accessible(hash[key]) if hash[key].is_a?(Hash)
@@ -60,8 +59,7 @@ module Jekyll
         # Where `enable_coderay` is now deprecated because Kramdown
         # supports Rouge now too.
 
-        private
-        def highlighter
+        private def highlighter
           return @highlighter if @highlighter
 
           if @config["syntax_highlighter"]
@@ -84,8 +82,7 @@ module Jekyll
           end
         end
 
-        private
-        def strip_coderay_prefix(hash)
+        private def strip_coderay_prefix(hash)
           hash.each_with_object({}) do |(key, val), hsh|
             cleaned_key = key.to_s.gsub(%r!\Acoderay_!, "")
 
@@ -103,8 +100,7 @@ module Jekyll
         # with your "coderay" key if it's there, deprecating it in the
         # process of you using it.
 
-        private
-        def modernize_coderay_config
+        private def modernize_coderay_config
           unless @config["coderay"].empty?
             Jekyll::Deprecator.deprecation_message(
               "You are using 'kramdown.coderay' in your configuration, " \

@@ -67,8 +67,7 @@ module Jekyll
 
       #
 
-      private
-      def proc_version
+      private def proc_version
         @proc_version ||= begin
           Pathutil.new(
             "/proc/version"

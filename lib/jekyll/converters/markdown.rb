@@ -76,8 +76,7 @@ module Jekyll
         @parser.convert(content)
       end
 
-      private
-      def custom_processor
+      private def custom_processor
         converter_name = @config["markdown"]
         if custom_class_allowed?(converter_name)
           self.class.const_get(converter_name).new(@config)
@@ -92,8 +91,7 @@ module Jekyll
       # Returns true if the parser name contains only alphanumeric
       # characters and is defined within Jekyll::Converters::Markdown
 
-      private
-      def custom_class_allowed?(parser_name)
+      private def custom_class_allowed?(parser_name)
         parser_name !~ %r![^A-Za-z0-9_]! && self.class.constants.include?(
           parser_name.to_sym
         )

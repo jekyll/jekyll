@@ -20,8 +20,7 @@ module Jekyll
       end
     end
 
-    private
-    def read_theme_asset(path)
+    private def read_theme_asset(path)
       base = site.theme.root
       dir = File.dirname(path.sub("#{site.theme.root}/", ""))
       name = File.basename(path)
@@ -35,7 +34,7 @@ module Jekyll
       end
     end
 
-    def append_unless_exists(haystack, new_item)
+    private def append_unless_exists(haystack, new_item)
       if haystack.any? { |file| file.relative_path == new_item.relative_path }
         Jekyll.logger.debug "Theme:",
           "Ignoring #{new_item.relative_path} in theme due to existing file " \

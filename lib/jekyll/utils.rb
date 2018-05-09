@@ -312,8 +312,7 @@ module Jekyll
       merged
     end
 
-    private
-    def merge_values(target, overwrite)
+    private def merge_values(target, overwrite)
       target.merge!(overwrite) do |_key, old_val, new_val|
         if new_val.nil?
           old_val
@@ -325,15 +324,13 @@ module Jekyll
       end
     end
 
-    private
-    def merge_default_proc(target, overwrite)
+    private def merge_default_proc(target, overwrite)
       if target.is_a?(Hash) && overwrite.is_a?(Hash) && target.default_proc.nil?
         target.default_proc = overwrite.default_proc
       end
     end
 
-    private
-    def duplicate_frozen_values(target)
+    private def duplicate_frozen_values(target)
       target.each do |key, val|
         target[key] = val.dup if val.frozen? && duplicable?(val)
       end
@@ -343,8 +340,7 @@ module Jekyll
     #
     # See Utils#slugify for a description of the character sequence specified
     # by each mode.
-    private
-    def replace_character_sequence_with_hyphen(string, mode: "default")
+    private def replace_character_sequence_with_hyphen(string, mode: "default")
       replaceable_char =
         case mode
         when "raw"

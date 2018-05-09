@@ -14,9 +14,7 @@ module Jekyll
       thing.respond_to?(:date) && !@site.future && thing.date.to_i > @site.time.to_i
     end
 
-    private
-
-    def can_be_published?(thing)
+    private def can_be_published?(thing)
       thing.data.fetch("published", true) || @site.unpublished
     end
   end

@@ -37,13 +37,12 @@ module Jekyll
           post_date.day   == other.date.day
       end
 
-      private
       # Construct the directory-aware post slug for a Jekyll::Post
       #
       # other - the Jekyll::Post
       #
       # Returns the post slug with the subdirectory (relative to _posts)
-      def post_slug(other)
+      private def post_slug(other)
         path = other.basename.split("/")[0...-1].join("/")
         if path.nil? || path == ""
           other.data["slug"]

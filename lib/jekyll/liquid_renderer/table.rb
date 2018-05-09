@@ -12,9 +12,7 @@ module Jekyll
       generate_table(data, widths)
     end
 
-    private
-
-    def generate_table(data, widths)
+    private def generate_table(data, widths)
       str = String.new("\n")
 
       table_head = data.shift
@@ -29,7 +27,7 @@ module Jekyll
       str
     end
 
-    def generate_table_head_border(row_data, widths)
+    private def generate_table_head_border(row_data, widths)
       str = String.new("")
 
       row_data.each_index do |cell_index|
@@ -41,7 +39,7 @@ module Jekyll
       str
     end
 
-    def generate_row(row_data, widths)
+    private def generate_row(row_data, widths)
       str = String.new("")
 
       row_data.each_with_index do |cell_data, cell_index|
@@ -58,7 +56,7 @@ module Jekyll
       str
     end
 
-    def table_widths(data)
+    private def table_widths(data)
       widths = []
 
       data.each do |row|
@@ -70,7 +68,7 @@ module Jekyll
       widths
     end
 
-    def data_for_table(num_of_rows)
+    private def data_for_table(num_of_rows)
       sorted = @stats.sort_by { |_, file_stats| -file_stats[:time] }
       sorted = sorted.slice(0, num_of_rows)
 
@@ -88,7 +86,7 @@ module Jekyll
       table
     end
 
-    def format_bytes(bytes)
+    private def format_bytes(bytes)
       bytes /= 1024.0
       format("%.2fK", bytes)
     end

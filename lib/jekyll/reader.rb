@@ -130,8 +130,6 @@ module Jekyll
       entries.delete_if { |e| File.directory?(site.in_source_dir(base, e)) }
     end
 
-    private
-
     # Internal
     #
     # Determine if the directory is supposed to contain posts and drafts.
@@ -140,14 +138,14 @@ module Jekyll
     #
     # Returns true if a custom collections_dir has been set but current directory lies
     # outside that directory.
-    def outside_configured_directory?(dir)
+    private def outside_configured_directory?(dir)
       collections_dir = site.config["collections_dir"]
       !collections_dir.empty? && !dir.start_with?("/#{collections_dir}")
     end
 
     # Create a single PostReader instance to retrieve drafts and posts from all valid
     # directories in current site.
-    def post_reader
+    private def post_reader
       @post_reader ||= PostReader.new(site)
     end
   end

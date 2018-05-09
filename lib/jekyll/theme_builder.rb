@@ -29,28 +29,26 @@ class Jekyll::ThemeBuilder
     @user_email ||= `git config user.email`.chomp
   end
 
-  private
-
-  def root
+  private def root
     @root ||= Pathname.new(File.expand_path("../", __dir__))
   end
 
-  def template_file(filename)
+  private def template_file(filename)
     [
       root.join("theme_template", "#{filename}.erb"),
       root.join("theme_template", filename.to_s),
     ].find(&:exist?)
   end
 
-  def template(filename)
+  private def template(filename)
     erb.render(template_file(filename).read)
   end
 
-  def erb
+  private def erb
     @erb ||= ERBRenderer.new(self)
   end
 
-  def mkdir_p(directories)
+  private def mkdir_p(directories)
     Array(directories).each do |directory|
       full_path = path.join(directory)
       Jekyll.logger.info "create", full_path.to_s
@@ -58,28 +56,28 @@ class Jekyll::ThemeBuilder
     end
   end
 
-  def write_file(filename, contents)
+  private def write_file(filename, contents)
     full_path = path.join(filename)
     Jekyll.logger.info "create", full_path.to_s
     File.write(full_path, contents)
   end
 
-  def create_directories
+  private def create_directories
     mkdir_p(SCAFFOLD_DIRECTORIES)
   end
 
-  def create_starter_files
+  private def create_starter_files
     %w(page post default).each do |layout|
       write_file("_layouts/#{layout}.html", template("_layouts/#{layout}.html"))
     end
   end
 
-  def create_gemspec
+  private def create_gemspec
     write_file("Gemfile", template("Gemfile"))
     write_file("#{name}.gemspec", template("theme.gemspec"))
   end
 
-  def create_accessories
+  private def create_accessories
     accessories = %w(README.md LICENSE.txt)
     accessories << "CODE_OF_CONDUCT.md" if code_of_conduct
     accessories.each do |filename|
@@ -87,7 +85,7 @@ class Jekyll::ThemeBuilder
     end
   end
 
-  def initialize_git_repo
+  private def initialize_git_repo
     Jekyll.logger.info "initialize", path.join(".git").to_s
     Dir.chdir(path.to_s) { `git init` }
     write_file(".gitignore", template("gitignore"))

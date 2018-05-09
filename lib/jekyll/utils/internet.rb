@@ -18,14 +18,11 @@ module Jekyll
       #   end
       #
       # Returns true if a DNS call can successfully be made, or false if not.
-      module_function
-      def connected?
+      module_function def connected?
         !dns("example.com").nil?
       end
 
-      private
-      module_function
-      def dns(domain)
+      private def dns(domain)
         require "resolv"
         Resolv::DNS.open do |resolver|
           resolver.getaddress(domain)
@@ -33,7 +30,7 @@ module Jekyll
       rescue Resolv::ResolvError, Resolv::ResolvTimeout
         nil
       end
-
+      module_function :dns
     end
   end
 end

@@ -21,8 +21,7 @@ module Jekyll
           html
         end
 
-        private
-        def replace_generated_toc(rd_instance, html, toc_token)
+        private def replace_generated_toc(rd_instance, html, toc_token)
           if rd_instance.generate_toc && html.include?(toc_token)
             utf8_toc = rd_instance.toc_content
             utf8_toc.force_encoding("utf-8") if utf8_toc.respond_to?(:force_encoding)

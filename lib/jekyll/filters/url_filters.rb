@@ -46,9 +46,7 @@ module Jekyll
         input.sub(%r!/index\.html?$!, "/")
       end
 
-      private
-
-      def sanitized_baseurl
+      private def sanitized_baseurl
         site = @context.registers[:site]
         site.config["baseurl"].to_s.chomp("/")
       end
