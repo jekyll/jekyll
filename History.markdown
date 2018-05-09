@@ -1,5 +1,7 @@
 ## HEAD
 
+  * Textile is only supported through a converter plugin (#7003)
+
 ### Documentation
 
   * Release post for v3.8.0 (#6849)
