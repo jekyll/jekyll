@@ -34,10 +34,6 @@ require_relative "../lib/jekyll.rb"
 
 Jekyll.logger = Logger.new(StringIO.new, :error)
 
-unless jruby?
-  require "rdiscount"
-end
-
 require "kramdown"
 require "shoulda"
 
