@@ -208,13 +208,9 @@ module Jekyll
     end
 
     def read_document(full_path)
-      doc = Jekyll::Document.new(full_path, :site => site, :collection => self)
+      doc = Document.new(full_path, :site => site, :collection => self)
       doc.read
-      if site.publisher.publish?(doc) || !write?
-        docs << doc
-      else
-        Jekyll.logger.debug "Skipped Publishing:", doc.relative_path
-      end
+      docs << doc unless doc.data["published"] == false
     end
 
     def read_static_file(file_path, full_path)

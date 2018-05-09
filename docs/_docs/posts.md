@@ -201,13 +201,38 @@ category: blog
 
 In this case, the listing pages will be accessible at `{baseurl}/category/blog.html`
 
-While this example is done with categories, you can easily extend your lists to
-filter by tags or any other variable created with extensions.
+Although categories and tags are very similar, they are used to group posts,
+there are a few differences between them.  Categories and sub-categories create
+hierarchies that, by default, are reflected in the directory structure of your
+site.  A post with the following header
+```yaml
+---
+layout: post
+title: A Trip
+category: [ blog, travel ]
+---
+```
+will be accessible at `{baseurl}/blog/travel/year/month/day/A-Trip.html`.  On
+the other hand, a tagged post
+```yaml
+---
+layout: post
+title: A Trip
+tags: [ blog, travel ]
+---
+```
+will be saved as `{baseurl}/year/month/day/A-Trip.html`.  It is up to you to
+create `{baseurl}/tag/blog.html` and `{baseurl}/tag/travel.html` the same way as
+described above for categories.
+
+While this example is done with tags and categories, you can easily extend your
+lists to filter by any other variable created with extensions.
 
 ## Post excerpts
 
 Each post automatically takes the first block of text, from the beginning of
-the content to the first occurrence of `excerpt_separator`, and sets it as the `post.excerpt`.
+the content to the first occurrence of `excerpt_separator`, and sets it in the
+post's data hash.
 Take the above example of an index of posts. Perhaps you want to include
 a little hint about the post's content by adding the first paragraph of each of
 your posts:

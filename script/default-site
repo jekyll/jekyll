@@ -16,5 +16,5 @@ ruby -e "contents = File.read('Gemfile'); File.write('Gemfile', contents.sub(/ge
 echo "$0: installing default site dependencies"
 BUNDLE_GEMFILE=Gemfile bundle install
 echo "$0: building the default site"
-BUNDLE_GEMFILE=Gemfile bundle exec jekyll build --verbose
+BUNDLE_GEMFILE=Gemfile bundle exec jekyll build --verbose --profile
 popd

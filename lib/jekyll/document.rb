@@ -83,15 +83,14 @@ module Jekyll
     # Returns a String path which represents the relative path from the collections_dir
     # to this document.
     def relative_path
-      @relative_path ||=
-        Pathutil.new(path).relative_path_from(site.collections_path).to_s
+      @relative_path ||= path.sub("#{site.collections_path}/", "")
     end
 
     # The output extension of the document.
     #
     # Returns the output extension
     def output_ext
-      Jekyll::Renderer.new(site, self).output_ext
+      @output_ext ||= Jekyll::Renderer.new(site, self).output_ext
     end
 
     # The base filename of the document, without the file extname.
@@ -157,9 +156,10 @@ module Jekyll
     # Determine whether the file should be rendered with Liquid.
     #
     # Returns false if the document is either an asset file or a yaml file,
+    #   or if the document doesn't contain any Liquid Tags or Variables,
     #   true otherwise.
     def render_with_liquid?
-      !(coffeescript_file? || yaml_file?)
+      !(coffeescript_file? || yaml_file? || !Utils.has_liquid_construct?(content))
     end
 
     # Determine whether the file should be rendered with a layout.
@@ -239,6 +239,7 @@ module Jekyll
     def write(dest)
       path = destination(dest)
       FileUtils.mkdir_p(File.dirname(path))
+      Jekyll.logger.debug "Writing:", path
       File.write(path, output, :mode => "wb")
 
       trigger_hooks(:post_write)
@@ -311,9 +312,10 @@ module Jekyll
     # Based on the Collection to which it belongs.
     #
     # True if the document has a collection and if that collection's #write?
-    #   method returns true, otherwise false.
+    # method returns true, and if the site's Publisher will publish the document.
+    # False otherwise.
     def write?
-      collection && collection.write?
+      collection && collection.write? && site.publisher.publish?(self)
     end
 
     # The Document excerpt_separator, from the YAML Front-Matter or site
@@ -418,7 +420,7 @@ module Jekyll
     def merge_categories!(other)
       if other.key?("categories") && !other["categories"].nil?
         if other["categories"].is_a?(String)
-          other["categories"] = other["categories"].split(%r!\s+!).map(&:strip)
+          other["categories"] = other["categories"].split
         end
         other["categories"] = (data["categories"] || []) | other["categories"]
       end

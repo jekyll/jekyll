@@ -137,7 +137,7 @@ module Jekyll
                    :template     => @collection.url_template,
                    :placeholders => placeholders,
                  })
-               end.to_s.gsub(%r!/$!, "")
+               end.to_s.chomp("/")
     end
 
     # Returns the type of the collection if present, nil otherwise.

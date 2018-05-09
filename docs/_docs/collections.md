@@ -348,6 +348,20 @@ you specified in your `_config.yml` (if present) and the following information:
   <code>{% raw %}{{ site.collections | where: "label", "myCollection" | first }}{% endraw %}</code></p>
 </div>
 
+<div class="note info">
+  <h5>Collections and Time</h5>
+  <p>Except for documents in hard-coded default collection <code>posts</code>, all documents in collections
+    you create, are accessible via Liquid irrespective of their assigned date, if any, and therefore renderable.
+  </p>
+  <p>However documents are attempted to be written to disk only if the concerned collection
+    metadata has <code>output: true</code>. Additionally, future-dated documents are only written if
+    <code>site.future</code> <em>is also true</em>.
+  </p>
+  <p>More fine-grained control over documents being written to disk can be exercised by setting
+    <code>published: false</code> (<em><code>true</code> by default</em>) in the document's front matter.
+  </p>
+</div>
+
 
 ### Documents
 
