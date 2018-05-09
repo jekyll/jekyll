@@ -41,7 +41,7 @@ module Jekyll
 
       private
 
-      # Private: Convert given seconds to an hour as a rational number.
+      # Convert given seconds to an hour as a rational number.
       #
       # seconds - supplied as an integer, it is converted to a rational number.
       # 3600 - no. of seconds in an hour.
@@ -51,7 +51,7 @@ module Jekyll
         seconds.to_r / 3600
       end
 
-      # Private: Convert given seconds to an hour as an absolute number.
+      # Convert given seconds to an hour as an absolute number.
       #
       # seconds - supplied as an integer, it is converted to its absolute.
       # 3600 - no. of seconds in an hour.
@@ -61,7 +61,7 @@ module Jekyll
         seconds.abs / 3600
       end
 
-      # Private: Perform a modulo operation on a given fraction.
+      # Perform a modulo operation on a given fraction.
       #
       # fraction - supplied as a rational number, its numerator is divided
       #            by its denominator and the remainder returned.

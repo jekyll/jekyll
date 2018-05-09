@@ -298,7 +298,7 @@ module Jekyll
       end
     end
 
-    # Private: Checks if a given config is a hash
+    # Checks if a given config is a hash
     #
     # extracted_config - the value to check
     # file - the file from which the config was extracted
@@ -372,7 +372,7 @@ module Jekyll
       end
     end
 
-    # Private: Checks if the `plugins` config is a String
+    # Checks if the `plugins` config is a String
     #
     # config - the config hash
     #

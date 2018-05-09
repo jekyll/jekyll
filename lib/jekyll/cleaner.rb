@@ -18,7 +18,7 @@ module Jekyll
 
     private
 
-    # Private: The list of files and directories to be deleted during cleanup process
+    # The list of files and directories to be deleted during cleanup process
     #
     # Returns an Array of the file and directory paths
     def obsolete_files
@@ -27,14 +27,14 @@ module Jekyll
       out
     end
 
-    # Private: The metadata file storing dependency tree and build history
+    # The metadata file storing dependency tree and build history
     #
     # Returns an Array with the metdata file as the only item
     def metadata_file
       [site.regenerator.metadata_file]
     end
 
-    # Private: The list of existing files, apart from those included in
+    # The list of existing files, apart from those included in
     # keep_files and hidden files.
     #
     # Returns a Set with the file paths
@@ -51,7 +51,7 @@ module Jekyll
       files
     end
 
-    # Private: The list of files to be created when site is built.
+    # The list of files to be created when site is built.
     #
     # Returns a Set with the file paths
     def new_files
@@ -60,7 +60,7 @@ module Jekyll
       end
     end
 
-    # Private: The list of directories to be created when site is built.
+    # The list of directories to be created when site is built.
     # These are the parent directories of the files in #new_files.
     #
     # Returns a Set with the directory paths
@@ -68,7 +68,7 @@ module Jekyll
       @new_dirs ||= new_files.map { |file| parent_dirs(file) }.flatten.to_set
     end
 
-    # Private: The list of parent directories of a given file
+    # The list of parent directories of a given file
     #
     # Returns an Array with the directory paths
     def parent_dirs(file)
@@ -80,7 +80,7 @@ module Jekyll
       end
     end
 
-    # Private: The list of existing files that will be replaced by a directory
+    # The list of existing files that will be replaced by a directory
     # during build
     #
     # Returns a Set with the file paths
@@ -88,7 +88,7 @@ module Jekyll
       new_dirs.select { |dir| File.file?(dir) }.to_set
     end
 
-    # Private: The list of directories that need to be kept because they are
+    # The list of directories that need to be kept because they are
     # parent directories of files specified in keep_files
     #
     # Returns a Set with the directory paths
@@ -96,7 +96,7 @@ module Jekyll
       site.keep_files.map { |file| parent_dirs(site.in_dest_dir(file)) }.flatten.to_set
     end
 
-    # Private: Creates a regular expression from the config's keep_files array
+    # Creates a regular expression from the config's keep_files array
     #
     # Examples
     #   ['.git','.svn'] with site.dest "/myblog/_site" creates
