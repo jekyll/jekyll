@@ -14,6 +14,7 @@
   * Update Windows install docs (#6926)
   * Remove documentation for using Redcarpet (#6990)
   * Updated nginx configuration for custom-404-page documentation (#6994)
+  * List all static files variables (#7002)
 
 ### Minor Enhancements
 
