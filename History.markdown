@@ -17,6 +17,7 @@
   * Remove documentation for using Redcarpet (#6990)
   * Updated nginx configuration for custom-404-page documentation (#6994)
   * List all static files variables (#7002)
+  * Document that _drafts need to be contained within the custom collection directory (#6985)
 
 ### Minor Enhancements
 
