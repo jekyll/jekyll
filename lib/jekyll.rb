@@ -34,6 +34,7 @@ require "addressable/uri"
 require "safe_yaml/load"
 require "liquid"
 require "kramdown"
+require "rouge"
 require "colorator"
 require "i18n"
 
