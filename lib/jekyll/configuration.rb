@@ -66,10 +66,6 @@ module Jekyll
         "strict_variables" => false,
       },
 
-      "rdiscount"           => {
-        "extensions" => [],
-      },
-
       "kramdown"            => {
         "auto_ids"      => true,
         "toc_levels"    => "1..6",
