@@ -128,7 +128,7 @@ module Jekyll
     #
     # Returns excerpt String
 
-    LIQUID_TAG_REGEX = %r!{%\s*(\w+).+\s*%}!m
+    LIQUID_TAG_REGEX = %r!{%-?\s*(\w+).+\s*-?%}!m
     MKDWN_LINK_REF_REGEX = %r!^ {0,3}\[[^\]]+\]:.+$!
 
     def extract_excerpt(doc_content)
@@ -141,7 +141,7 @@ module Jekyll
         head =~ LIQUID_TAG_REGEX
         tag_name = Regexp.last_match(1)
 
-        if liquid_block?(tag_name) && head.match(%r!{%\s*end#{tag_name}\s*%}!).nil?
+        if liquid_block?(tag_name) && head.match(%r!{%-?\s*end#{tag_name}\s*-?%}!).nil?
           print_build_warning
           head << "\n{% end#{tag_name} %}"
         end
