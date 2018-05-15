@@ -1,5 +1,9 @@
 ## HEAD
 
+### Development Fixes
+
+  * Update rubocop version (#7016)
+
 ### Bug Fixes
 
   * Add whitespace control to LIQUID_TAG_REGEX (#7015)
