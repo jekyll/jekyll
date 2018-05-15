@@ -46,6 +46,7 @@
   * Update instructions for releasing docs Gem (#6975)
   * yajl-ruby update to v1.4.0 (#6976)
   * Load Rouge for TestKramdown (#7007)
+  * Update rubocop version (#7016)
 
 ## 3.8.1 / 2018-05-01
 
