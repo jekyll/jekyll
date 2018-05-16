@@ -158,10 +158,10 @@ module Jekyll
 
     def liquid_block?(tag_name)
       Liquid::Template.tags[tag_name].superclass == Liquid::Block
-    rescue NoMethodError => e
+    rescue NoMethodError
       Jekyll.logger.error "Error:",
         "This page's excerpt appears to contain a Liquid tag which couldn't be " \
-        "parsed.\n" + e.message
+        "parsed."
       raise
     end
 
