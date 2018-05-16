@@ -160,8 +160,8 @@ module Jekyll
       Liquid::Template.tags[tag_name].superclass == Liquid::Block
     rescue NoMethodError
       Jekyll.logger.error "Error:",
-        "This page's excerpt appears to contain a Liquid tag which couldn't be " \
-        "parsed."
+        "Excerpt in #{doc.relative_path} appears to contain a Liquid tag which " \
+        "couldn't be parsed."
       raise
     end
 
