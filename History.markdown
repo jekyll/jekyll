@@ -1,3 +1,9 @@
+## HEAD
+
+### Bug Fixes
+
+  * Add whitespace control to LIQUID_TAG_REGEX (#7015)
+
 ## 3.8.1 / 2018-05-01
 
 ### Bug Fixes
