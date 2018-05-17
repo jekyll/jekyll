@@ -115,6 +115,11 @@ module Jekyll
       File.basename(name, extname)
     end
 
+    # Returns the file size
+    def file_size
+      @file_size ||= File.size(path)
+    end
+
     def placeholders
       {
         :collection => @collection.label,
