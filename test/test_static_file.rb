@@ -166,7 +166,7 @@ class TestStaticFile < JekyllUnitTest
     end
 
     should "know its file size" do
-      assert_equal File.size(@static_file.path), @static_file.file_size
+      assert_equal (Filesize.from("0 kB") + Filesize.from(File.size(@static_file.path).to_s + "B")).pretty, @static_file.file_size
     end
 
     should "be able to convert to liquid" do
