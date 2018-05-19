@@ -61,7 +61,7 @@ test:
 
 ## Complete Example circle.yml File
 
-When you put it all together, here's an example of what that `circle.yml` file could look like:
+When you put it all together, here's an example of what that `circle.yml` file could look like in v1:
 
 ```yaml
 machine:
@@ -81,6 +81,67 @@ deployment:
     branch: master
     commands:
       - rsync -va --delete ./_site username@my-website:/var/html
+```
+
+for CircleCI's v2 - docker based system which new projects will follow, change the `ROOTBUCKETNAME` in the environment variables in the below example.
+
+```
+defaults: &defaults
+  working_directory: ~/repo
+version: 2
+jobs:
+  build:
+    <<: *defaults
+    docker:
+      - image: circleci/ruby:2.5
+    environment:
+      BUNDLE_PATH: ~/repo/vendor/bundle
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - rubygems-v1-{{ checksum "Gemfile.lock" }}
+            - rubygems-v1-fallback
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+      - save_cache:
+          key: rubygems-v1-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - run:
+          name: Jekyll build
+          command: bundle exec jekyll build
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - _site
+  deploy:
+    <<: *defaults
+    docker:
+      - image: circleci/python:3.6.3
+    environment:
+      ROOTBUCKETNAME: <<YOUR BUCKET NAME HERE>>
+    steps:
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Install AWS CLI
+          command: pip install awscli --upgrade --user
+      - run:
+          name: Upload to s3
+          command: ~/.local/bin/aws s3 sync ./_site s3://$ROOTBUCKETNAME/ --delete --acl public-read
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
 ```
 
 ## Questions?
