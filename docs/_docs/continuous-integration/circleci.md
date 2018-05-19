@@ -83,7 +83,7 @@ deployment:
       - rsync -va --delete ./_site username@my-website:/var/html
 ```
 
-for CircleCI v2, a Docker-based system which new projects will follow, set the ROOTBUCKETNAME environment variable (an example of this is shown below).
+for CircleCI v2, a Docker-based system which new projects will follow, set the `S3_BUCKET_NAME` environment variable (an example of this is shown below).
 
 ```
 defaults: &defaults
@@ -121,7 +121,7 @@ jobs:
     docker:
       - image: circleci/python:3.6.3
     environment:
-      ROOTBUCKETNAME: <<YOUR BUCKET NAME HERE>>
+      S3_BUCKET_NAME: <<YOUR BUCKET NAME HERE>>
     steps:
       - attach_workspace:
           at: ./
@@ -130,7 +130,7 @@ jobs:
           command: pip install awscli --upgrade --user
       - run:
           name: Upload to s3
-          command: ~/.local/bin/aws s3 sync ./_site s3://$ROOTBUCKETNAME/ --delete --acl public-read
+          command: ~/.local/bin/aws s3 sync ./_site s3://$S3_BUCKET_NAME/ --delete --acl public-read
 workflows:
   version: 2
   test-deploy:
