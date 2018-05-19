@@ -83,7 +83,7 @@ deployment:
       - rsync -va --delete ./_site username@my-website:/var/html
 ```
 
-for CircleCI's v2 - docker based system which new projects will follow, change the `ROOTBUCKETNAME` in the environment variables in the below example.
+for CircleCI v2, a Docker-based system which new projects will follow, set the ROOTBUCKETNAME environment variable (an example of this is shown below).
 
 ```
 defaults: &defaults
