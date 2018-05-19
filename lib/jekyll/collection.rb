@@ -210,7 +210,7 @@ module Jekyll
     def read_document(full_path)
       doc = Document.new(full_path, :site => site, :collection => self)
       doc.read
-      docs << doc unless doc.data["published"] == false
+      docs << doc unless site.publisher.hidden_forever?(doc)
     end
 
     def read_static_file(file_path, full_path)
