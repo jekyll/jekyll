@@ -83,7 +83,7 @@ deployment:
       - rsync -va --delete ./_site username@my-website:/var/html
 ```
 
-for CircleCI v2, a Docker-based system which new projects will follow, set the `S3_BUCKET_NAME` environment variable (an example of this is shown below).
+for CircleCI v2, a Docker-based system which new projects will follow, set the `S3_BUCKET_NAME` environment variable (an example of the required config file is shown below).
 
 ```
 defaults: &defaults
