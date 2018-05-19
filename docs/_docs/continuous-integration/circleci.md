@@ -85,7 +85,7 @@ deployment:
 
 for CircleCI v2, a Docker-based system which new projects will follow, set the `S3_BUCKET_NAME` environment variable (an example of the required config file is shown below).
 
-```
+```yaml
 defaults: &defaults
   working_directory: ~/repo
 version: 2
