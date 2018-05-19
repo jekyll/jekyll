@@ -1,4 +1,4 @@
-## HEAD
+## 3.8.2 / 2018-05-18
 
 ### Development Fixes
 
