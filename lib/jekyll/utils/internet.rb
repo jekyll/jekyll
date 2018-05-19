@@ -23,8 +23,6 @@ module Jekyll
         !dns("example.com").nil?
       end
 
-      private
-      module_function
       def dns(domain)
         require "resolv"
         Resolv::DNS.open do |resolver|

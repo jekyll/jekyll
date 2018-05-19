@@ -207,15 +207,11 @@ module Jekyll
       @container ||= site.config["collections_dir"]
     end
 
-    private
-
     def read_document(full_path)
       doc = Document.new(full_path, :site => site, :collection => self)
       doc.read
       docs << doc unless doc.data["published"] == false
     end
-
-    private
 
     def read_static_file(file_path, full_path)
       relative_dir = Jekyll.sanitized_path(

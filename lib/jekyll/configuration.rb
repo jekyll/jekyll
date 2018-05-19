@@ -278,6 +278,7 @@ module Jekyll
     end
 
     private
+
     def style_to_permalink(permalink_style)
       case permalink_style.to_sym
       when :pretty
@@ -299,14 +300,12 @@ module Jekyll
     # file - the file from which the config was extracted
     #
     # Raises an ArgumentError if given config is not a hash
-    private
     def check_config_is_hash!(extracted_config, file)
       unless extracted_config.is_a?(Hash)
         raise ArgumentError, "Configuration file: (INVALID) #{file}".yellow
       end
     end
 
-    private
     def check_auto(config)
       if config.key?("auto") || config.key?("watch")
         Jekyll::Deprecator.deprecation_message "Auto-regeneration can no longer" \
@@ -317,7 +316,6 @@ module Jekyll
       end
     end
 
-    private
     def check_server(config)
       if config.key?("server")
         Jekyll::Deprecator.deprecation_message "The 'server' configuration option" \
@@ -327,7 +325,6 @@ module Jekyll
       end
     end
 
-    private
     def check_pygments(config)
       if config.key?("pygments")
         Jekyll::Deprecator.deprecation_message "The 'pygments' configuration option" \
@@ -340,7 +337,6 @@ module Jekyll
       end
     end
 
-    private
     def check_include_exclude(config)
       %w(include exclude).each do |option|
         if config[option].is_a?(String)
@@ -354,7 +350,6 @@ module Jekyll
       end
     end
 
-    private
     def check_coderay(config)
       if (config["kramdown"] || {}).key?("use_coderay")
         Jekyll::Deprecator.deprecation_message "Please change 'use_coderay'" \
@@ -363,7 +358,6 @@ module Jekyll
       end
     end
 
-    private
     def check_maruku(config)
       if config.fetch("markdown", "kramdown").to_s.casecmp("maruku").zero?
         Jekyll.logger.abort_with "Error:", "You're using the 'maruku' " \
@@ -380,7 +374,6 @@ module Jekyll
     #
     # Raises a Jekyll::Errors::InvalidConfigurationError if the config `plugins`
     # is a string
-    private
     def check_plugins(config)
       if config.key?("plugins") && config["plugins"].is_a?(String)
         Jekyll.logger.error "Configuration Error:", "You specified the" \

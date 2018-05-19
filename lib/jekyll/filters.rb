@@ -316,7 +316,6 @@ module Jekyll
         .map!(&:last)
     end
 
-    private
     def item_property(item, property)
       if item.respond_to?(:to_liquid)
         property.to_s.split(".").reduce(item.to_liquid) do |subvalue, attribute|
@@ -329,7 +328,6 @@ module Jekyll
       end
     end
 
-    private
     def as_liquid(item)
       case item
       when Hash
@@ -353,7 +351,6 @@ module Jekyll
     end
 
     # Parse a string to a Liquid Condition
-    private
     def parse_condition(exp)
       parser = Liquid::Parser.new(exp)
       left_expr = parser.expression

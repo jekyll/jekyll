@@ -57,8 +57,6 @@ Lint/UnneededRequireStatement:
   Enabled: false
 Lint/UnreachableCode:
   Severity: error
-Lint/UselessAccessModifier:
-  Enabled: false
 Lint/Void:
   Enabled: false
 Metrics/AbcSize:
