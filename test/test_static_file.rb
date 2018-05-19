@@ -165,6 +165,10 @@ class TestStaticFile < JekyllUnitTest
       assert @static_file.write(dest_dir)
     end
 
+    should "know its file size" do
+      assert_equal (Filesize.from("0 kB") + Filesize.from(File.size(@static_file.path).to_s + "B")).pretty, @static_file.file_size
+    end
+
     should "be able to convert to liquid" do
       expected = {
         "basename"      => "static_file",
@@ -173,6 +177,7 @@ class TestStaticFile < JekyllUnitTest
         "modified_time" => @static_file.modified_time,
         "path"          => "/static_file.txt",
         "collection"    => nil,
+        "file_size"     => @static_file.file_size,
       }
       assert_equal expected, @static_file.to_liquid.to_h
     end

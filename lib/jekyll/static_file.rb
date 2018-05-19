@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "filesize"
+
 module Jekyll
   class StaticFile
     extend Forwardable
@@ -113,6 +115,12 @@ module Jekyll
 
     def basename
       File.basename(name, extname)
+    end
+
+    # Returns the file size
+    def file_size
+      file_size_in_si = (Filesize.from("0kB") + Filesize.from(File.size(path).to_s + "B"))
+      @file_size ||= file_size_in_si.pretty
     end
 
     def placeholders
