@@ -105,6 +105,14 @@ jobs:
       - run:
           name: Bundle Install
           command: bundle check || bundle install
+      - run:
+          name: HTMLProofer tests
+          command: |
+            bundle exec htmlproofer ./_site \
+              --allow-hash-href \
+              --check-favicon  \
+              --check-html \
+              --disable-external
       - save_cache:
           key: rubygems-v1-{{ checksum "Gemfile.lock" }}
           paths:
