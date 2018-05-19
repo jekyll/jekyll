@@ -46,6 +46,7 @@
   * Update instructions for releasing docs Gem (#6975)
   * yajl-ruby update to v1.4.0 (#6976)
   * Load Rouge for TestKramdown (#7007)
+  * Useless privates removed (#6768)
 
 ## 3.8.2 / 2018-05-18
 
