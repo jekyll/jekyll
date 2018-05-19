@@ -81,7 +81,6 @@ module Jekyll
         time.strftime("%d #{month_type} %Y")
       end
 
-      private
       def ordinal(number)
         return "th" if (11..13).cover?(number)
 
@@ -93,7 +92,6 @@ module Jekyll
         end
       end
 
-      private
       def time(input)
         date = Liquid::Utils.to_date(input)
         unless date.respond_to?(:to_time)

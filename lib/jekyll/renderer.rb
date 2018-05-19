@@ -262,7 +262,6 @@ module Jekyll
       end.compact
     end
 
-    private
     def liquid_options
       @liquid_options ||= site.config["liquid"]
     end
