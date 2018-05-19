@@ -30,8 +30,7 @@ module Jekyll
       # rubocop:disable Naming/AccessorMethodName
       def get_processor
         case @config["markdown"].downcase
-        when "kramdown"  then return KramdownParser.new(@config)
-        when "rdiscount" then return RDiscountParser.new(@config)
+        when "kramdown" then return KramdownParser.new(@config)
         else
           custom_processor
         end
@@ -43,7 +42,7 @@ module Jekyll
       # are not in safe mode.)
 
       def valid_processors
-        %w(rdiscount kramdown) + third_party_processors
+        %w(kramdown) + third_party_processors
       end
 
       # Public: A list of processors that you provide via plugins.
@@ -52,7 +51,7 @@ module Jekyll
 
       def third_party_processors
         self.class.constants - \
-          %w(KramdownParser RDiscountParser PRIORITIES).map(
+          %w(KramdownParser PRIORITIES).map(
             &:to_sym
           )
       end

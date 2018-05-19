@@ -1,5 +1,7 @@
 ## HEAD
 
+  * Textile is only supported through a converter plugin (#7003)
+
 ### Documentation
 
   * Release post for v3.8.0 (#6849)
@@ -15,6 +17,9 @@
   * Remove documentation for using Redcarpet (#6990)
   * Updated nginx configuration for custom-404-page documentation (#6994)
   * List all static files variables (#7002)
+  * Document that _drafts need to be contained within the custom collection directory (#6985)
+  * proposed change for passive voice. (#7005)
+  * added the CAT plugin to the plugin list (#7011)
 
 ### Minor Enhancements
 
@@ -32,6 +37,7 @@
   * We are not using Ruby 2.2 anymore (#6977)
   * Drop support for older versions of Rouge (#6978)
   * Remove support for Redcarpet (#6987)
+  * Remove support for rdiscount (#6988)
 
 ### Development Fixes
 
@@ -39,6 +45,17 @@
   * Loggers should accept both numbers and symbols (#6967)
   * Update instructions for releasing docs Gem (#6975)
   * yajl-ruby update to v1.4.0 (#6976)
+  * Load Rouge for TestKramdown (#7007)
+
+## 3.8.2 / 2018-05-18
+
+### Development Fixes
+
+  * Update rubocop version (#7016)
+
+### Bug Fixes
+
+  * Add whitespace control to LIQUID_TAG_REGEX (#7015)
 
 ## 3.8.1 / 2018-05-01
 
