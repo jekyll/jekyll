@@ -212,7 +212,9 @@ module Jekyll
     def read_document(full_path)
       doc = Document.new(full_path, :site => site, :collection => self)
       doc.read
-      docs << doc unless doc.data["published"] == false
+      if site.unpublished || doc.published?
+        docs << doc
+      end
     end
 
     private
