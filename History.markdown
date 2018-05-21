@@ -20,6 +20,7 @@
   * Document that _drafts need to be contained within the custom collection directory (#6985)
   * proposed change for passive voice. (#7005)
   * added the CAT plugin to the plugin list (#7011)
+  * Updated to supported version (#7031)
 
 ### Minor Enhancements
 
