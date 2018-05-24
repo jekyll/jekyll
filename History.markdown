@@ -21,6 +21,7 @@
   * proposed change for passive voice. (#7005)
   * added the CAT plugin to the plugin list (#7011)
   * Updated to supported version (#7031)
+  * Clarify definition of &#39;draft&#39; (#7037)
 
 ### Minor Enhancements
 
