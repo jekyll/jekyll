@@ -19,7 +19,7 @@ We only cover RubyInstaller-2.4 and newer here, older versions need to [install 
 2. Open a new command prompt window from the start menu, so that changes to the `PATH` environment variable becomes effective.
    Install Jekyll and Bundler via: `gem install jekyll bundler`
 3. Check if Jekyll installed properly: `jekyll -v`
-
+After installing the **Ruby+Devkit**, go to desktop, right click on **My Computer** go to **Advance System Setting** and find **Environmental Variables** in **System Properties** window. Click on **Environmental Variables** and in **User Variables** find and select **PATH** and then click on Edit button. Add this address `C:\Ruby25-x64\bin; ` at the end of the current value. Please be noticed, this address may be different in your system depending on the route you have installed **Ruby+Devkit**, the version of Ruby and the 32 or 64 bit architecture of your OS.
 That's it, you're ready to install our [default minimal blog theme](https://github.com/jekyll/minima) with `jekyll new jekyll-website`.
 
 [RubyInstaller]: https://rubyinstaller.org/
