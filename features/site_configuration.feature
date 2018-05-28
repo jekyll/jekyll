@@ -248,7 +248,7 @@ Feature: Site configuration
     And I should see "FOO" in "_site/index.html"
     And I should not see " " in "_site/index.html"
 
-  Scenario: override url in development environment
+  Scenario: override url in development / default environment
     Given I have a _posts directory
     And I have a configuration file with:
       | key         | value               |
@@ -256,7 +256,7 @@ Feature: Site configuration
     And I have the following posts:
       | title   | date       | content      |
       | foobar  | 2018-01-01 | {{site.url}} |
-    When I run jekyll build ENV=development
+    When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
     And I should see "<p>http://localhost:4000</p>" in "_site/2018/01/01/foobar.html"
