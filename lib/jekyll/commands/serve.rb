@@ -79,7 +79,6 @@ module Jekyll
               @reload_reactor = nil
 
               config = configuration_from_options(opts)
-              config["url"] = default_url(config) if Jekyll.env == "development"
 
               process_with_graceful_fail(cmd, config, Build, Serve)
             end
@@ -234,23 +233,6 @@ module Jekyll
             server.config[:BindAddress],
             server.config[:Port],
             options["baseurl"]
-          )
-        end
-
-        def format_url(ssl_enabled, address, port, baseurl = nil)
-          format("%<prefix>s://%<address>s:%<port>i%<baseurl>s",
-                 :prefix  => ssl_enabled ? "https" : "http",
-                 :address => address,
-                 :port    => port,
-                 :baseurl => baseurl ? "#{baseurl}/" : "")
-        end
-
-        def default_url(opts)
-          config = configuration_from_options(opts)
-          format_url(
-            config["ssl_cert"] && config["ssl_key"],
-            config["host"] == "127.0.0.1" ? "localhost" : config["host"],
-            config["port"]
           )
         end
 
