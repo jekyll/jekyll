@@ -5,11 +5,10 @@ language: ruby
 sudo: false
 
 rvm:
-  - &ruby1 2.5.0
-  - &ruby2 2.4.3
-  - &ruby3 2.3.6
-  - &ruby4 2.2.9
-  - &jruby jruby-9.1.15.0
+  - &ruby1 2.5.1
+  - &ruby2 2.4.4
+  - &ruby3 2.3.7
+  - &jruby jruby-9.1.16.0
 
 matrix:
   include:
@@ -17,8 +16,6 @@ matrix:
       env: TEST_SUITE=fmt
     - rvm: *ruby1
       env: TEST_SUITE=default-site
-    - rvm: *ruby1
-      env: ROUGE_VERSION=1.11.1 # runs everything with this version
   exclude:
     - rvm: *jruby
       env: TEST_SUITE=cucumber
@@ -55,3 +52,4 @@ after_success:
 
 before_install:
   - gem update --system
+  - gem install bundler

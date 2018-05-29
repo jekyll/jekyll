@@ -20,6 +20,7 @@ module Jekyll
     #
     # Returns a boolean.
     def regenerate?(document)
+      return true if disabled
       case document
       when Page
         regenerate_page?(document)
@@ -164,7 +165,6 @@ module Jekyll
         end
     end
 
-    private
     def regenerate_page?(document)
       document.asset_file? || document.data["regenerate"] ||
         source_modified_or_dest_missing?(
@@ -172,7 +172,6 @@ module Jekyll
         )
     end
 
-    private
     def regenerate_document?(document)
       !document.write? || document.data["regenerate"] ||
         source_modified_or_dest_missing?(
@@ -180,7 +179,6 @@ module Jekyll
         )
     end
 
-    private
     def existing_file_modified?(path)
       # If one of this file dependencies have been modified,
       # set the regeneration bit for both the dependency and the file to true

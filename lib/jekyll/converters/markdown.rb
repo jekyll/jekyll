@@ -30,9 +30,7 @@ module Jekyll
       # rubocop:disable Naming/AccessorMethodName
       def get_processor
         case @config["markdown"].downcase
-        when "redcarpet" then return RedcarpetParser.new(@config)
-        when "kramdown"  then return KramdownParser.new(@config)
-        when "rdiscount" then return RDiscountParser.new(@config)
+        when "kramdown" then return KramdownParser.new(@config)
         else
           custom_processor
         end
@@ -44,7 +42,7 @@ module Jekyll
       # are not in safe mode.)
 
       def valid_processors
-        %w(rdiscount kramdown redcarpet) + third_party_processors
+        %w(kramdown) + third_party_processors
       end
 
       # Public: A list of processors that you provide via plugins.
@@ -53,7 +51,7 @@ module Jekyll
 
       def third_party_processors
         self.class.constants - \
-          %w(KramdownParser RDiscountParser RedcarpetParser PRIORITIES).map(
+          %w(KramdownParser PRIORITIES).map(
             &:to_sym
           )
       end
@@ -78,6 +76,7 @@ module Jekyll
       end
 
       private
+
       def custom_processor
         converter_name = @config["markdown"]
         if custom_class_allowed?(converter_name)
@@ -92,8 +91,6 @@ module Jekyll
       #
       # Returns true if the parser name contains only alphanumeric
       # characters and is defined within Jekyll::Converters::Markdown
-
-      private
       def custom_class_allowed?(parser_name)
         parser_name !~ %r![^A-Za-z0-9_]! && self.class.constants.include?(
           parser_name.to_sym

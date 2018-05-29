@@ -2,15 +2,6 @@
 
 module Jekyll
   module Tags
-    class IncludeTagError < StandardError
-      attr_accessor :path
-
-      def initialize(msg, path)
-        super(msg)
-        @path = path
-      end
-    end
-
     class IncludeTag < Liquid::Tag
       VALID_SYNTAX = %r!
         ([\w-]+)\s*=\s*
@@ -216,8 +207,15 @@ MSG
         if context.registers[:page].nil?
           context.registers[:site].source
         else
-          current_doc_dir = File.dirname(context.registers[:page]["path"])
-          context.registers[:site].in_source_dir current_doc_dir
+          site = context.registers[:site]
+          page_payload  = context.registers[:page]
+          resource_path = \
+            if page_payload["collection"].nil?
+              page_payload["path"]
+            else
+              File.join(site.config["collections_dir"], page_payload["path"])
+            end
+          site.in_source_dir File.dirname(resource_path)
         end
       end
     end

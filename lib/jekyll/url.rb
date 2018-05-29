@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "addressable/uri"
-
 # Public: Methods that generate a URL for a resource such as a Post or a Page.
 #
 # Examples

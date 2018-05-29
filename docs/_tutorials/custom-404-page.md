@@ -53,7 +53,7 @@ More info on configuring Apache Error Pages can found in [official documentation
 
 The procedure is just as simple as configuring Apache servers, but slightly different.
 
-Add the following to the nginx configuration file, `nginx.conf`, which is usually located inside `/etc/nginx/` or `/etc/nginx/conf/`:
+The nginx configuration file depends on the system in which it is installed. In most systems, it is the `nginx.conf` file, which is usually located inside `/etc/nginx/` or `/etc/nginx/conf/`. However, in other systems like Ubuntu, you would have to look for a `default` nginx configuration file, containing server related information, which is usually located inside `/etc/nginx/sites-available/` or `/etc/nginx/sites-enabled/`. Add the following to your nginx configuration file, _i.e._ either to `nginx.conf` file or to `default` file:
 
 ```nginx
 server {
@@ -63,5 +63,11 @@ server {
   }
 }
 ```
-
+If the `server` block already exists, only add the code inside the `server` block given above.
 The `location` directive prevents users from directly browsing the 404.html page.
+
+More info on nginx error page can be found on [nginx official documentation](http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page).
+
+<p class="note warning">
+  Proceed with caution while editing the configuration file.
+</p>
