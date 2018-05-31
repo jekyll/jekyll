@@ -49,6 +49,7 @@
   * yajl-ruby update to v1.4.0 (#6976)
   * Load Rouge for TestKramdown (#7007)
   * Useless privates removed (#6768)
+  * Allow i18n v0.9.5 and higher (#7044)
 
 ### Bug Fixes
 
