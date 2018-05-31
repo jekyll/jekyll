@@ -787,6 +787,7 @@ You can find a few useful plugins at the following locations:
 - [Jekyll::Paginate::Content](https://github.com/ibrado/jekyll-paginate-content): Content paginator in the style of jekyll-paginator-v2 that splits pages, posts, and collection entries into several pages. Specify a separator or use HTML &lt;h1&gt; etc. headers. Automatic splitting, single-page view, pager/trail, self-adjusting links, multipage TOC, SEO support.
 - [Premonition](https://github.com/amedia/premonition): Adds block-styled side content to your page. For example summary, notes, hints or warning boxes.
 - [jekyll-fontello](https://github.com/ericcornelissen/jekyll-fontello): A Jekyll plugin that automatically downloads your webfont from Fontello.
+- [Target Blank](https://github.com/keithmifsud/jekyll-target-blank): A Jekyll plugin to automatically open external links in a new browser tab or window.
 
 #### Converters
 
