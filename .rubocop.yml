@@ -37,8 +37,6 @@ Layout/EmptyComment:
   Enabled: false
 Layout/EndAlignment:
   Severity: error
-Lint/UnneededRequireStatement:
-  Enabled: false
 Lint/UnreachableCode:
   Severity: error
 Lint/Void:

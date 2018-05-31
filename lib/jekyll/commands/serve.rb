@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "thread"
-
 module Jekyll
   module Commands
     class Serve < Command
