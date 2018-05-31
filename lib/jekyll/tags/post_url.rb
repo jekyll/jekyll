@@ -63,13 +63,11 @@ module Jekyll
         begin
           @post = PostComparer.new(@orig_post)
         rescue StandardError => e
-          raise Jekyll::Errors::PostURLError, <<-MSG
-Could not parse name of post "#{@orig_post}" in tag 'post_url'.
-
-Make sure the post exists and the name is correct.
-
-#{e.class}: #{e.message}
-MSG
+          raise Jekyll::Errors::PostURLError, <<~MSG
+            Could not parse name of post "#{@orig_post}" in tag 'post_url'.
+             Make sure the post exists and the name is correct.
+             #{e.class}: #{e.message}
+          MSG
         end
       end
 
@@ -93,11 +91,10 @@ MSG
           return p.url
         end
 
-        raise Jekyll::Errors::PostURLError, <<-MSG
-Could not find post "#{@orig_post}" in tag 'post_url'.
-
-Make sure the post exists and the name is correct.
-MSG
+        raise Jekyll::Errors::PostURLError, <<~MSG
+          Could not find post "#{@orig_post}" in tag 'post_url'.
+          Make sure the post exists and the name is correct.
+        MSG
       end
     end
   end

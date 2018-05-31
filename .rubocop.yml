@@ -28,8 +28,6 @@ Layout/IndentArray:
   EnforcedStyle: consistent
 Layout/IndentHash:
   EnforcedStyle: consistent
-Layout/IndentHeredoc:
-  Enabled: false
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 Layout/MultilineOperationIndentation:

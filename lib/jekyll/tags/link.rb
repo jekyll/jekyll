@@ -27,11 +27,11 @@ module Jekyll
           return item.url if item.relative_path == "/#{relative_path}"
         end
 
-        raise ArgumentError, <<-MSG
-Could not find document '#{relative_path}' in tag '#{self.class.tag_name}'.
+        raise ArgumentError, <<~MSG
+          Could not find document '#{relative_path}' in tag '#{self.class.tag_name}'.
 
-Make sure the document exists and the path is correct.
-MSG
+          Make sure the document exists and the path is correct.
+        MSG
       end
     end
   end

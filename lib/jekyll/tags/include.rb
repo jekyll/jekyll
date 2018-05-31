@@ -55,31 +55,28 @@ module Jekyll
 
       def validate_file_name(file)
         if file =~ INVALID_SEQUENCES || file !~ VALID_FILENAME_CHARS
-          raise ArgumentError, <<-MSG
-Invalid syntax for include tag. File contains invalid characters or sequences:
+          raise ArgumentError, <<~MSG
+            Invalid syntax for include tag. File contains invalid characters or sequences:
+             #{file}
+             Valid syntax:
+             #{syntax_example}
 
-  #{file}
-
-Valid syntax:
-
-  #{syntax_example}
-
-MSG
+          MSG
         end
       end
 
       def validate_params
         unless @params =~ FULL_VALID_SYNTAX
-          raise ArgumentError, <<-MSG
-Invalid syntax for include tag:
+          raise ArgumentError, <<~MSG
+            Invalid syntax for include tag:
 
-  #{@params}
+            #{@params}
 
-Valid syntax:
+            Valid syntax:
 
-  #{syntax_example}
+            #{syntax_example}
 
-MSG
+          MSG
         end
       end
 
