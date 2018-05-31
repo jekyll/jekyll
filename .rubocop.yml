@@ -111,8 +111,6 @@ Style/Alias:
   EnforcedStyle: prefer_alias_method
 Style/AndOr:
   Severity: error
-Style/ClassAndModuleChildren:
-  Enabled: false
 Style/FrozenStringLiteralComment:
   EnforcedStyle: always
 Style/Documentation:
