@@ -22,8 +22,6 @@ Layout/AlignHash:
   EnforcedHashRocketStyle: table
 Layout/EndOfLine:
   EnforcedStyle: native
-Layout/ExtraSpacing:
-  AllowForAlignment: true
 Layout/FirstParameterIndentation:
   EnforcedStyle: consistent
 Layout/IndentationWidth:
