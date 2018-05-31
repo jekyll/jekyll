@@ -40,7 +40,8 @@ Layout/EndAlignment:
 Lint/UnreachableCode:
   Severity: error
 Lint/Void:
-  Enabled: false
+  Exclude:
+    - lib/jekyll/site.rb
 Metrics/AbcSize:
   Max: 21
 Metrics/BlockLength:
