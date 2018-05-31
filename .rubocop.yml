@@ -18,8 +18,6 @@ AllCops:
     - script/**/*
     - vendor/**/*
     - tmp/**/*
-Layout/AlignArray:
-  Enabled: false
 Layout/AlignHash:
   EnforcedHashRocketStyle: table
 Layout/EmptyLinesAroundModuleBody:

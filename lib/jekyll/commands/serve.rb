@@ -19,25 +19,28 @@ module Jekyll
           "host"                 => ["host", "-H", "--host [HOST]", "Host to bind to"],
           "open_url"             => ["-o", "--open-url", "Launch your site in a browser"],
           "detach"               => ["-B", "--detach",
-            "Run the server in the background",],
+                                     "Run the server in the background",],
           "ssl_key"              => ["--ssl-key [KEY]", "X.509 (SSL) Private Key."],
           "port"                 => ["-P", "--port [PORT]", "Port to listen on"],
           "show_dir_listing"     => ["--show-dir-listing",
-            "Show a directory listing instead of loading your index file.",],
+                                     "Show a directory listing instead of loading" \
+                                     " your index file.",],
           "skip_initial_build"   => ["skip_initial_build", "--skip-initial-build",
-            "Skips the initial site build which occurs before the server is started.",],
+                                     "Skips the initial site build which occurs before" \
+                                     " the server is started.",],
           "livereload"           => ["-l", "--livereload",
-            "Use LiveReload to automatically refresh browsers",],
+                                     "Use LiveReload to automatically refresh browsers",],
           "livereload_ignore"    => ["--livereload-ignore ignore GLOB1[,GLOB2[,...]]",
-            Array,
-            "Files for LiveReload to ignore. Remember to quote the values so your shell "\
-            "won't expand them",],
+                                     Array,
+                                     "Files for LiveReload to ignore. " \
+                                     "Remember to quote the values so your shell " \
+                                     "won't expand them",],
           "livereload_min_delay" => ["--livereload-min-delay [SECONDS]",
-            "Minimum reload delay",],
+                                     "Minimum reload delay",],
           "livereload_max_delay" => ["--livereload-max-delay [SECONDS]",
-            "Maximum reload delay",],
+                                     "Maximum reload delay",],
           "livereload_port"      => ["--livereload-port [PORT]", Integer,
-            "Port for LiveReload to listen on",],
+                                     "Port for LiveReload to listen on",],
         }.freeze
 
         DIRECTORY_INDEX = %w(
@@ -123,9 +126,9 @@ module Jekyll
               opts["watch"] = true
             end
           elsif %w(livereload_min_delay
-              livereload_max_delay
-              livereload_ignore
-              livereload_port).any? { |o| opts[o] }
+                   livereload_max_delay
+                   livereload_ignore
+                   livereload_port).any? { |o| opts[o] }
             Jekyll.logger.abort_with "--livereload-min-delay, "\
                "--livereload-max-delay, --livereload-ignore, and "\
                "--livereload-port require the --livereload option."
