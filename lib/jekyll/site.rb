@@ -98,7 +98,7 @@ module Jekyll
       @liquid_renderer.reset
       @site_cleaner = nil
 
-      raise ArgumentError, "limit_posts must be a non-negative number" if limit_posts < 0
+      raise ArgumentError, "limit_posts must be a non-negative number" if limit_posts.negative?
 
       Jekyll::Hooks.trigger :site, :after_reset, self
     end
@@ -407,7 +407,7 @@ module Jekyll
     #
     # Returns nothing
     def limit_posts!
-      if limit_posts > 0
+      if limit_posts.positive?
         limit = posts.docs.length < limit_posts ? posts.docs.length : limit_posts
         self.posts.docs = posts.docs[-limit, limit]
       end

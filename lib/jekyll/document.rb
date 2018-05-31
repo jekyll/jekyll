@@ -340,7 +340,7 @@ module Jekyll
 
     def previous_doc
       pos = collection.docs.index { |post| post.equal?(self) }
-      collection.docs[pos - 1] if pos && pos > 0
+      collection.docs[pos - 1] if pos && pos.positive?
     end
 
     def trigger_hooks(hook_name, *args)

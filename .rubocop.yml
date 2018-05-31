@@ -123,8 +123,6 @@ Style/ModuleFunction:
   Enabled: false
 Style/MultilineTernaryOperator:
   Severity: error
-Style/NumericPredicate:
-  Enabled: false
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
     "%q": "{}"
