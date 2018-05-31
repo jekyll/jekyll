@@ -106,7 +106,7 @@ Naming/UncommunicativeMethodParamName:
   AllowedNames:
     - _
 Performance/UnfreezeString:
-  Enabled: false
+  Enabled: true
 Security/MarshalLoad:
   Exclude:
     - !ruby/regexp /test\/.*.rb$/

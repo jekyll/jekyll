@@ -15,7 +15,7 @@ module Jekyll
     private
 
     def generate_table(data, widths)
-      str = String.new("\n")
+      str = +"\n"
 
       table_head = data.shift
       str << generate_row(table_head, widths)
@@ -30,7 +30,7 @@ module Jekyll
     end
 
     def generate_table_head_border(row_data, widths)
-      str = String.new("")
+      str = +""
 
       row_data.each_index do |cell_index|
         str << "-" * widths[cell_index]
@@ -42,7 +42,7 @@ module Jekyll
     end
 
     def generate_row(row_data, widths)
-      str = String.new("")
+      str = +""
 
       row_data.each_with_index do |cell_data, cell_index|
         str << if cell_index.zero?
