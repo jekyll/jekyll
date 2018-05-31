@@ -28,9 +28,7 @@ module Jekyll
 
           new_theme_name = args.join("_")
           theme = Jekyll::ThemeBuilder.new(new_theme_name, opts)
-          if theme.path.exist?
-            Jekyll.logger.abort_with "Conflict:", "#{theme.path} already exists."
-          end
+          Jekyll.logger.abort_with "Conflict:", "#{theme.path} already exists." if theme.path.exist?
 
           theme.create!
           Jekyll.logger.info "Your new Jekyll theme, #{theme.name.cyan}," \

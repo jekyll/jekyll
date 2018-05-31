@@ -213,9 +213,7 @@ module Jekyll
     # Returns nothing
     def assign_pages!
       payload["page"] = document.to_liquid
-      payload["paginator"] = if document.respond_to?(:pager)
-                               document.pager.to_liquid
-                             end
+      payload["paginator"] = (document.pager.to_liquid if document.respond_to?(:pager))
     end
 
     # Set related posts to payload if document is a post.
@@ -235,9 +233,7 @@ module Jekyll
 
     def assign_layout_data!
       layout = layouts[document.data["layout"]]
-      if layout
-        payload["layout"] = Utils.deep_merge_hashes(layout.data, payload["layout"] || {})
-      end
+      payload["layout"] = Utils.deep_merge_hashes(layout.data, payload["layout"] || {}) if layout
     end
 
     def permalink_ext

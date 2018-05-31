@@ -210,9 +210,7 @@ module Jekyll
     def read_document(full_path)
       doc = Document.new(full_path, :site => site, :collection => self)
       doc.read
-      if site.unpublished || doc.published?
-        docs << doc
-      end
+      docs << doc if site.unpublished || doc.published?
     end
 
     def read_static_file(file_path, full_path)

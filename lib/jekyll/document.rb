@@ -335,16 +335,12 @@ module Jekyll
 
     def next_doc
       pos = collection.docs.index { |post| post.equal?(self) }
-      if pos && pos < collection.docs.length - 1
-        collection.docs[pos + 1]
-      end
+      collection.docs[pos + 1] if pos && pos < collection.docs.length - 1
     end
 
     def previous_doc
       pos = collection.docs.index { |post| post.equal?(self) }
-      if pos && pos > 0
-        collection.docs[pos - 1]
-      end
+      collection.docs[pos - 1] if pos && pos > 0
     end
 
     def trigger_hooks(hook_name, *args)
@@ -419,9 +415,7 @@ module Jekyll
 
     def merge_categories!(other)
       if other.key?("categories") && !other["categories"].nil?
-        if other["categories"].is_a?(String)
-          other["categories"] = other["categories"].split
-        end
+        other["categories"] = other["categories"].split if other["categories"].is_a?(String)
         other["categories"] = (data["categories"] || []) | other["categories"]
       end
     end
@@ -493,9 +487,7 @@ module Jekyll
     end
 
     def generate_excerpt
-      if generate_excerpt?
-        data["excerpt"] ||= Jekyll::Excerpt.new(self)
-      end
+      data["excerpt"] ||= Jekyll::Excerpt.new(self) if generate_excerpt?
     end
   end
 end

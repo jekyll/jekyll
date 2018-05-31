@@ -24,9 +24,7 @@ module Jekyll
       priority :low
 
       def initialize(config)
-        unless defined?(Kramdown)
-          Jekyll::External.require_with_graceful_fail "kramdown"
-        end
+        Jekyll::External.require_with_graceful_fail "kramdown" unless defined?(Kramdown)
         @config = config["kramdown"].dup || {}
         @config[:input] = :SmartyPants
       end

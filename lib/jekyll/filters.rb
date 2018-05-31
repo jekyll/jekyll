@@ -225,9 +225,7 @@ module Jekyll
     #
     # Returns the filtered array of objects
     def sort(input, property = nil, nils = "first")
-      if input.nil?
-        raise ArgumentError, "Cannot sort a null object."
-      end
+      raise ArgumentError, "Cannot sort a null object." if input.nil?
       if property.nil?
         input.sort
       else

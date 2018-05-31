@@ -23,9 +23,7 @@ module Jekyll
 
       def wait
         @lock.synchronize do
-          unless @flag
-            @cond.wait(@lock)
-          end
+          @cond.wait(@lock) unless @flag
         end
       end
     end

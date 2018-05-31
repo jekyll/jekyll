@@ -108,9 +108,7 @@ module Jekyll
           msg = JSON.parse(json_message)
           # Not sure what the 'url' command even does in LiveReload.  The spec is silent
           # on its purpose.
-          if msg["command"] == "url"
-            Jekyll.logger.info "LiveReload:", "Browser URL: #{msg["url"]}"
-          end
+          Jekyll.logger.info "LiveReload:", "Browser URL: #{msg["url"]}" if msg["command"] == "url"
         end
 
         def log_error(error)

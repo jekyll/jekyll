@@ -205,9 +205,7 @@ module Jekyll
         end
 
         def start_up_webrick(opts, destination)
-          if opts["livereload"]
-            @reload_reactor.start(opts)
-          end
+          @reload_reactor.start(opts) if opts["livereload"]
 
           @server = WEBrick::HTTPServer.new(webrick_opts(opts)).tap { |o| o.unmount("") }
           @server.mount(opts["baseurl"].to_s, Servlet, destination, file_handler_opts)
