@@ -221,12 +221,12 @@ module Jekyll
 
         # Recreate NondisclosureName under utf-8 circumstance
         def file_handler_opts
-          WEBrick::Config::FileHandler.merge({
+          WEBrick::Config::FileHandler.merge(
             :FancyIndexing     => true,
             :NondisclosureName => [
               ".ht*", "~*",
-            ],
-          })
+            ]
+          )
         end
 
         def server_address(server, options = {})
@@ -239,12 +239,11 @@ module Jekyll
         end
 
         def format_url(ssl_enabled, address, port, baseurl = nil)
-          format("%<prefix>s://%<address>s:%<port>i%<baseurl>s", {
-            :prefix  => ssl_enabled ? "https" : "http",
-            :address => address,
-            :port    => port,
-            :baseurl => baseurl ? "#{baseurl}/" : "",
-          })
+          format("%<prefix>s://%<address>s:%<port>i%<baseurl>s",
+                 :prefix  => ssl_enabled ? "https" : "http",
+                 :address => address,
+                 :port    => port,
+                 :baseurl => baseurl ? "#{baseurl}/" : "")
         end
 
         def default_url(opts)

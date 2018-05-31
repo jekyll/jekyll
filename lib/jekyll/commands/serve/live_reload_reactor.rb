@@ -68,11 +68,11 @@ module Jekyll
         # http://feedback.livereload.com/knowledgebase/articles/86174-livereload-protocol
         def reload(pages)
           pages.each do |p|
-            json_message = JSON.dump({
+            json_message = JSON.dump(
               :command => "reload",
               :path    => p.url,
-              :liveCSS => true,
-            })
+              :liveCSS => true
+            )
 
             Jekyll.logger.debug "LiveReload:", "Reloading #{p.url}"
             Jekyll.logger.debug "", json_message

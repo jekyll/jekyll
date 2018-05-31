@@ -204,11 +204,11 @@ module Jekyll
     #
     # Returns the computed URL for the document.
     def url
-      @url ||= URL.new({
+      @url ||= URL.new(
         :template     => url_template,
         :placeholders => url_placeholders,
-        :permalink    => permalink,
-      }).to_s
+        :permalink    => permalink
+      ).to_s
     end
 
     def [](key)
@@ -400,19 +400,19 @@ module Jekyll
     end
 
     def populate_categories
-      merge_data!({
+      merge_data!(
         "categories" => (
           Array(data["categories"]) + Utils.pluralized_array_from_hash(
             data, "category", "categories"
           )
-        ).map(&:to_s).flatten.uniq,
-      })
+        ).map(&:to_s).flatten.uniq
+      )
     end
 
     def populate_tags
-      merge_data!({
-        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten,
-      })
+      merge_data!(
+        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
+      )
     end
 
     private
