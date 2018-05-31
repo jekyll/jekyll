@@ -28,7 +28,7 @@ module Jekyll
         regenerate_document?(document)
       else
         source_path = document.respond_to?(:path) ? document.path : nil
-        dest_path = (document.destination(@site.dest) if document.respond_to?(:destination))
+        dest_path = document.destination(@site.dest) if document.respond_to?(:destination)
         source_modified_or_dest_missing?(source_path, dest_path)
       end
     end
