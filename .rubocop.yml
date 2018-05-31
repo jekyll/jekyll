@@ -78,8 +78,6 @@ Metrics/PerceivedComplexity:
   Max: 8
 Naming/FileName:
   Enabled: false
-Naming/HeredocDelimiterNaming:
-  Enabled: false
 Naming/MemoizedInstanceVariableName:
   Exclude:
     - lib/jekyll/page_without_a_file.rb
