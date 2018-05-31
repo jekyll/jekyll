@@ -57,9 +57,12 @@ module Jekyll
         if file =~ INVALID_SEQUENCES || file !~ VALID_FILENAME_CHARS
           raise ArgumentError, <<~MSG
             Invalid syntax for include tag. File contains invalid characters or sequences:
-             #{file}
-             Valid syntax:
-             #{syntax_example}
+
+              #{file}
+
+            Valid syntax:
+
+              #{syntax_example}
 
           MSG
         end
