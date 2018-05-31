@@ -22,8 +22,6 @@ Layout/AlignArray:
   Enabled: false
 Layout/AlignHash:
   EnforcedHashRocketStyle: table
-Layout/EmptyLinesAroundAccessModifier:
-  Enabled: false
 Layout/EmptyLinesAroundModuleBody:
   Enabled: false
 Layout/EndOfLine:

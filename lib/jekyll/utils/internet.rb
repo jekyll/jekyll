@@ -18,7 +18,9 @@ module Jekyll
       #   end
       #
       # Returns true if a DNS call can successfully be made, or false if not.
+
       module_function
+
       def connected?
         !dns("example.com").nil?
       end

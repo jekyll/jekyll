@@ -152,6 +152,7 @@ module Jekyll
     end
 
     private
+
     def copy_file(dest_path)
       if @site.safe || Jekyll.env == "production"
         FileUtils.cp(path, dest_path)

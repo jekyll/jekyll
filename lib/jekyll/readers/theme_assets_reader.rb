@@ -21,6 +21,7 @@ module Jekyll
     end
 
     private
+
     def read_theme_asset(path)
       base = site.theme.root
       dir = File.dirname(path.sub("#{site.theme.root}/", ""))

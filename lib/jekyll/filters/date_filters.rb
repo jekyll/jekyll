@@ -64,6 +64,7 @@ module Jekyll
       end
 
       private
+
       # month_type: Notations that evaluate to 'Month' via `Time#strftime` ("%b", "%B")
       # type: nil (default) or "ordinal"
       # style: nil (default) or "US"

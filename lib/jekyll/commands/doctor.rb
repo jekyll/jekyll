@@ -117,6 +117,7 @@ module Jekyll
         end
 
         private
+
         def collect_urls(urls, things, destination)
           things.each do |thing|
             dest = thing.destination(destination)

@@ -40,6 +40,7 @@ module Jekyll
       end
 
       private
+
       # Construct the directory-aware post slug for a Jekyll::Post
       #
       # other - the Jekyll::Post
