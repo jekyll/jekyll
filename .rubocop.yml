@@ -49,7 +49,6 @@ Metrics/BlockLength:
     - test/**/*.rb
     - lib/jekyll/configuration.rb
     - rake/*.rake
-    - jekyll.gemspec
 Metrics/ClassLength:
   Exclude:
     - !ruby/regexp /features\/.*.rb$/
@@ -63,7 +62,6 @@ Metrics/LineLength:
     - Rakefile
     - rake/*.rake
     - Gemfile
-    - jekyll.gemspec
   Max: 100
   Severity: warning
 Metrics/MethodLength:
