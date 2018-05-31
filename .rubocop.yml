@@ -20,8 +20,6 @@ AllCops:
     - tmp/**/*
 Layout/AlignHash:
   EnforcedHashRocketStyle: table
-Layout/FirstParameterIndentation:
-  EnforcedStyle: consistent
 Layout/IndentationWidth:
   Severity: error
 Layout/IndentArray:
