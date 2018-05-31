@@ -3,7 +3,6 @@
 module Jekyll
   module Utils
     module Internet
-
       # Public: Determine whether the present device has a connection to
       # the Internet. This allows plugin writers which require the outside
       # world to have a neat fallback mechanism for offline building.
@@ -33,7 +32,6 @@ module Jekyll
       rescue Resolv::ResolvError, Resolv::ResolvTimeout
         nil
       end
-
     end
   end
 end

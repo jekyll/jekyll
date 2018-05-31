@@ -20,8 +20,6 @@ AllCops:
     - tmp/**/*
 Layout/AlignHash:
   EnforcedHashRocketStyle: table
-Layout/EmptyLinesAroundModuleBody:
-  Enabled: false
 Layout/EndOfLine:
   EnforcedStyle: native
 Layout/ExtraSpacing:

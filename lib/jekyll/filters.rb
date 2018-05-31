@@ -367,7 +367,6 @@ module Jekyll
 
       condition
     end
-
   end
 end
 
