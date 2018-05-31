@@ -148,8 +148,6 @@ Style/SafeNavigation:
   Enabled: false
 Style/SignalException:
   EnforcedStyle: only_raise
-Style/SingleLineMethods:
-  Enabled: false
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/StringLiteralsInInterpolation:
