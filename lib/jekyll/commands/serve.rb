@@ -107,8 +107,8 @@ module Jekyll
         def validate_options(opts)
           if opts["livereload"]
             if opts["detach"]
-              Jekyll.logger.warn "Warning:",
-                "--detach and --livereload are mutually exclusive. Choosing --livereload"
+              Jekyll.logger.warn "Warning:", "--detach and --livereload are mutually exclusive." \
+                                 " Choosing --livereload"
               opts["detach"] = false
             end
             if opts["ssl_cert"] || opts["ssl_key"]
@@ -273,7 +273,8 @@ module Jekyll
 
             Process.detach(pid)
             Jekyll.logger.info "Server detached with pid '#{pid}'.", \
-              "Run `pkill -f jekyll' or `kill -9 #{pid}' to stop the server."
+                               "Run `pkill -f jekyll' or `kill -9 #{pid}'" \
+                               " to stop the server."
           else
             t = Thread.new { server.start }
             trap("INT") { server.shutdown }

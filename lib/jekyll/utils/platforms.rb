@@ -31,7 +31,7 @@ module Jekyll
       # --
 
       alias_method :really_windows?, \
-        :vanilla_windows?
+                   :vanilla_windows?
 
       #
 

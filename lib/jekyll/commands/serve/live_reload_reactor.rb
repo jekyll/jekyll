@@ -58,7 +58,7 @@ module Jekyll
               EM.add_shutdown_hook { @stopped_event.set }
 
               Jekyll.logger.info "LiveReload address:",
-                "http://#{opts["host"]}:#{opts["livereload_port"]}"
+                                 "http://#{opts["host"]}:#{opts["livereload_port"]}"
             end
           end
           @thread.abort_on_exception = true

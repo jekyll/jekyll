@@ -3,7 +3,7 @@
 module Jekyll
   class Theme
     extend Forwardable
-    attr_reader :name
+    attr_reader   :name
     def_delegator :gemspec, :version, :version
 
     def initialize(name)
@@ -66,7 +66,7 @@ module Jekyll
       @gemspec ||= Gem::Specification.find_by_name(name)
     rescue Gem::LoadError
       raise Jekyll::Errors::MissingDependencyException,
-        "The #{name} theme could not be found."
+            "The #{name} theme could not be found."
     end
   end
 end

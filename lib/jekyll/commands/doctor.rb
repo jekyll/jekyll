@@ -11,7 +11,7 @@ module Jekyll
             c.alias(:hyde)
 
             c.option "config", "--config CONFIG_FILE[,CONFIG_FILE2,...]", Array,
-                            "Custom configuration file"
+                     "Custom configuration file"
 
             c.action do |_, options|
               Jekyll::Commands::Doctor.process(options)
@@ -48,9 +48,9 @@ module Jekyll
           posts_at_root = site.in_source_dir("_posts")
           return true unless File.directory?(posts_at_root)
           Jekyll.logger.warn "Warning:",
-            "Detected '_posts' directory outside custom `collections_dir`!"
+                             "Detected '_posts' directory outside custom `collections_dir`!"
           Jekyll.logger.warn "",
-            "Please move '#{posts_at_root}' into the custom directory at " \
+                             "Please move '#{posts_at_root}' into the custom directory at " \
             "'#{site.in_source_dir(site.config["collections_dir"])}'"
           false
         end

@@ -13,7 +13,7 @@ module Jekyll
         all, @path, @date, @slug = *name.sub(%r!^/!, "").match(MATCHER)
         unless all
           raise Jekyll::Errors::InvalidPostNameError,
-            "'#{name}' does not contain valid date and/or title."
+                "'#{name}' does not contain valid date and/or title."
         end
 
         escaped_slug = Regexp.escape(slug)
@@ -22,8 +22,10 @@ module Jekyll
       end
 
       def post_date
-        @post_date ||= Utils.parse_date(date,
-          "\"#{date}\" does not contain valid date and/or title.")
+        @post_date ||= Utils.parse_date(
+          date,
+          "\"#{date}\" does not contain valid date and/or title."
+        )
       end
 
       def ==(other)

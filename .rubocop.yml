@@ -22,8 +22,6 @@ Layout/AlignArray:
   Enabled: false
 Layout/AlignHash:
   EnforcedHashRocketStyle: table
-Layout/AlignParameters:
-  Enabled: false
 Layout/EmptyLinesAroundAccessModifier:
   Enabled: false
 Layout/EmptyLinesAroundModuleBody:
@@ -81,7 +79,7 @@ Metrics/LineLength:
     - rake/*.rake
     - Gemfile
     - jekyll.gemspec
-  Max: 90
+  Max: 100
   Severity: warning
 Metrics/MethodLength:
   CountComments: false

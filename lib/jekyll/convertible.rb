@@ -64,7 +64,7 @@ module Jekyll
     def validate_data!(filename)
       unless self.data.is_a?(Hash)
         raise Errors::InvalidYAMLFrontMatterError,
-          "Invalid YAML front matter in #{filename}"
+              "Invalid YAML front matter in #{filename}"
       end
     end
 

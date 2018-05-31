@@ -9,8 +9,8 @@ class Jekyll::Commands::NewTheme < Jekyll::Command
         c.syntax "new-theme NAME"
         c.description "Creates a new Jekyll theme scaffold"
         c.option "code_of_conduct", \
-          "-c", "--code-of-conduct", \
-          "Include a Code of Conduct. (defaults to false)"
+                 "-c", "--code-of-conduct", \
+                 "Include a Code of Conduct. (defaults to false)"
 
         c.action do |args, opts|
           Jekyll::Commands::NewTheme.process(args, opts)
@@ -32,7 +32,7 @@ class Jekyll::Commands::NewTheme < Jekyll::Command
 
       theme.create!
       Jekyll.logger.info "Your new Jekyll theme, #{theme.name.cyan}," \
-        " is ready for you in #{theme.path.to_s.cyan}!"
+                         " is ready for you in #{theme.path.to_s.cyan}!"
       Jekyll.logger.info "For help getting started, read #{theme.path}/README.md."
     end
     # rubocop:enable Metrics/AbcSize
