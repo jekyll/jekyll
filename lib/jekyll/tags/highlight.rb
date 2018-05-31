@@ -75,7 +75,7 @@ module Jekyll
         input.scan(OPTIONS_REGEX) do |opt|
           key, value = opt.split("=")
           # If a quoted list, convert to array
-          if value && value.include?('"')
+          if value&.include?('"')
             value.delete!('"')
             value = value.split
           end

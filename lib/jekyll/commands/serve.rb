@@ -310,7 +310,7 @@ module Jekyll
             proc do
               mutex.synchronize do
                 # Block until EventMachine reactor starts
-                @reload_reactor.started_event.wait unless @reload_reactor.nil?
+                @reload_reactor&.started_event&.wait
                 @running = true
                 Jekyll.logger.info("Server running...", "press ctrl-c to stop.")
                 @run_cond.broadcast

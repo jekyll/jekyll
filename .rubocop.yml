@@ -145,7 +145,8 @@ Style/RegexpLiteral:
 Style/RescueModifier:
   Enabled: false
 Style/SafeNavigation:
-  Enabled: false
+  Exclude:
+    - lib/jekyll/document.rb
 Style/SignalException:
   EnforcedStyle: only_raise
 Style/StringLiterals:

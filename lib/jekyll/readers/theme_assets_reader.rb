@@ -8,7 +8,7 @@ module Jekyll
     end
 
     def read
-      return unless site.theme && site.theme.assets_path
+      return unless site.theme&.assets_path
 
       Find.find(site.theme.assets_path) do |path|
         next if File.directory?(path)

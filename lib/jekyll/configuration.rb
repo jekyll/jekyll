@@ -346,7 +346,7 @@ module Jekyll
             " as a list of comma-separated values."
           config[option] = csv_to_array(config[option])
         end
-        config[option].map!(&:to_s) if config[option]
+        config[option]&.map!(&:to_s)
       end
     end
 

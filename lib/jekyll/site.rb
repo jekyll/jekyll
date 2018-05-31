@@ -232,7 +232,7 @@ module Jekyll
       # array of posts ) then sort each array in reverse order.
       hash = Hash.new { |h, key| h[key] = [] }
       posts.docs.each do |p|
-        p.data[post_attr].each { |t| hash[t] << p } if p.data[post_attr]
+        p.data[post_attr]&.each { |t| hash[t] << p }
       end
       hash.each_value { |posts| posts.sort!.reverse! }
       hash
@@ -442,7 +442,7 @@ module Jekyll
 
     def configure_include_paths
       @includes_load_paths = Array(in_source_dir(config["includes_dir"].to_s))
-      @includes_load_paths << theme.includes_path if theme && theme.includes_path
+      @includes_load_paths << theme.includes_path if theme&.includes_path
     end
 
     def configure_file_read_opts

@@ -135,7 +135,7 @@ module Jekyll
       end
 
       def add_include_to_dependency(site, path, context)
-        if context.registers[:page] && context.registers[:page].key?("path")
+        if context.registers[:page]&.key?("path")
           site.regenerator.add_dependency(
             site.in_source_dir(context.registers[:page]["path"]),
             path
