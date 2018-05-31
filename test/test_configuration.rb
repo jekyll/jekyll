@@ -4,6 +4,34 @@ require "helper"
 require "colorator"
 
 class TestConfiguration < JekyllUnitTest
+  def assert_sanitized_url(result, input)
+    assert_equal(
+      { "url" => result },
+      Configuration[{ "url" => input }].sanitize_url!
+    )
+  end
+
+  def refute_sanitized_url(result, input)
+    refute_equal(
+      { "url" => result },
+      Configuration[{ "url" => input }].sanitize_url!
+    )
+  end
+
+  def assert_sanitized_baseurl(result, input)
+    assert_equal(
+      { "baseurl" => result },
+      Configuration[{ "baseurl" => input }].sanitize_baseurl!
+    )
+  end
+
+  def refute_sanitized_baseurl(result, input)
+    refute_equal(
+      { "baseurl" => result },
+      Configuration[{ "baseurl" => input }].sanitize_baseurl!
+    )
+  end
+
   test_config = {
     "source"      => new(nil).source_dir,
     "destination" => dest_dir,
@@ -35,6 +63,12 @@ class TestConfiguration < JekyllUnitTest
           },
         }
       )
+    end
+
+    should "sanitize 'url' and 'baseurl' values" do
+      result = Configuration.from({ "url" => "http://blah//", "baseurl" => "blah//" })
+      assert_equal result["url"], "http://blah"
+      assert_equal result["baseurl"], "/blah"
     end
 
     should "NOT backwards-compatibilize" do
@@ -521,6 +555,66 @@ class TestConfiguration < JekyllUnitTest
       )
       assert_includes config["description"], "an awesome description"
       refute_includes config["description"], "\n"
+    end
+  end
+
+  context "sanitize_url!" do
+    should "result in an empty string for non-String values" do
+      [%w(foo bar), { "foo" => "bar" }, 345, false, true].each do |input|
+        assert_raises(Jekyll::Errors::InvalidConfigurationError) do
+          Configuration[{ "url" => input }].sanitize_url!
+        end
+      end
+
+      assert_sanitized_url "", nil
+      refute_sanitized_url "", "foobar"
+    end
+
+    should "strip trailing slashes only" do
+      assert_sanitized_url "foobar", "foobar"
+      assert_sanitized_url "foobar", "foobar/"
+      assert_sanitized_url "foobar", "foobar//"
+      assert_sanitized_url "//foobar", "//foobar"
+      assert_sanitized_url "//foobar", "//foobar//"
+      assert_sanitized_url "//foo//bar", "//foo//bar//"
+    end
+
+    should "raise if value contains '..'" do
+      ["../foobar", "..foobar", "foobar..", "foobar/.."].each do |input|
+        assert_raises(Jekyll::Errors::InvalidConfigurationError) do
+          Configuration[{ "url" => input }].sanitize_url!
+        end
+      end
+    end
+  end
+
+  context "sanitize_baseurl!" do
+    should "raise for non-nil but non-String values" do
+      [%w(foo bar), { "foo" => "bar" }, 345, false, true].each do |input|
+        assert_raises(Jekyll::Errors::InvalidConfigurationError) do
+          Configuration[{ "baseurl" => input }].sanitize_baseurl!
+        end
+      end
+
+      assert_sanitized_baseurl "", nil
+      refute_sanitized_baseurl "", "foobar"
+    end
+
+    should "ensure a single leading slash and strip extra slashes" do
+      assert_sanitized_baseurl "/foobar", "foobar"
+      assert_sanitized_baseurl "/foobar", "foobar/"
+      assert_sanitized_baseurl "/foobar", "foobar//"
+      assert_sanitized_baseurl "/foobar", "//foobar"
+      assert_sanitized_baseurl "/foobar", "//foobar//"
+      assert_sanitized_baseurl "/foo/bar", "//foo//bar//"
+    end
+
+    should "raise if value contains '..'" do
+      ["../foobar", "..foobar", "foobar..", "foobar/.."].each do |input|
+        assert_raises(Jekyll::Errors::InvalidConfigurationError) do
+          Configuration[{ "baseurl" => input }].sanitize_baseurl!
+        end
+      end
     end
   end
 end

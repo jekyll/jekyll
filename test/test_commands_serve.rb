@@ -262,10 +262,10 @@ class TestCommandsServe < JekyllUnitTest
         should "not update the site url" do
           expect(Jekyll).to receive(:env).and_return("production")
           expect(Jekyll::Commands::Serve).to receive(:start_up_webrick)
-          @merc.execute(:serve, { "watch" => false, "url" => "https://jekyllrb.com/" })
+          @merc.execute(:serve, { "watch" => false, "url" => "https://jekyllrb.com" })
 
           assert_equal 1, Jekyll.sites.count
-          assert_equal "https://jekyllrb.com/", Jekyll.sites.first.config["url"]
+          assert_equal "https://jekyllrb.com", Jekyll.sites.first.config["url"]
         end
       end
 

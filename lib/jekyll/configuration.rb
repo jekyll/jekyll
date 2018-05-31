@@ -92,6 +92,8 @@ module Jekyll
       def from(user_config)
         Utils.deep_merge_hashes(DEFAULTS, Configuration[user_config].stringify_keys)
           .add_default_collections
+          .sanitize_url!
+          .sanitize_baseurl!
       end
     end
 
@@ -275,6 +277,37 @@ module Jekyll
           " file accordingly."
         config[new] = config.delete(old)
       end
+    end
+
+    def sanitize_url!
+      value = ensure_string_value_without_trailing_slash("url")
+      tap { |config| config["url"] = value }
+    end
+
+    def sanitize_baseurl!
+      value = ensure_string_value_without_trailing_slash("baseurl")
+      value = "/#{value}".squeeze("/") unless value.empty?
+      tap { |config| config["baseurl"] = value }
+    end
+
+    private
+    def ensure_string_value_without_trailing_slash(key)
+      value = self[key]
+      value = "" if value.nil?
+
+      unless value.is_a?(String)
+        raise Jekyll::Errors::InvalidConfigurationError,
+          "Expected value for '#{key}' to be a string. but got: #{self[key].class}."
+      end
+
+      if value.include?("..")
+        raise Jekyll::Errors::InvalidConfigurationError,
+          "Value for '#{key}' should not contain '..'"
+      end
+
+      value = value.dup
+      value.chomp!("/") while value.end_with?("/")
+      value
     end
 
     private
