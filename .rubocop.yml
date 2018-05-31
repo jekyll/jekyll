@@ -132,8 +132,6 @@ Style/PercentLiteralDelimiters:
     "%w": "()"
     "%W": "()"
     "%x": "()"
-Style/RedundantFreeze:
-  Enabled: false
 Style/RedundantReturn:
   Enabled: false
 Style/RedundantSelf:
