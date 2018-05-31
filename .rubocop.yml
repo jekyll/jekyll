@@ -105,8 +105,6 @@ Naming/MemoizedInstanceVariableName:
 Naming/UncommunicativeMethodParamName:
   AllowedNames:
     - _
-Performance/UnfreezeString:
-  Enabled: true
 Security/MarshalLoad:
   Exclude:
     - !ruby/regexp /test\/.*.rb$/
