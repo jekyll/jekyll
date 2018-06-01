@@ -77,7 +77,7 @@ module Jekyll
 
     # Returns the shorthand String identifier of this doc.
     def inspect
-      "<Excerpt: #{self.id}>"
+      "<Excerpt: #{id}>"
     end
 
     def output

@@ -68,7 +68,7 @@ module Jekyll
     #
     # Returns -1, 0, 1.
     def self.<=>(other)
-      PRIORITIES[other.priority] <=> PRIORITIES[self.priority]
+      PRIORITIES[other.priority] <=> PRIORITIES[priority]
     end
 
     # Spaceship is priority [higher -> lower]

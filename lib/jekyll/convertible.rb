@@ -46,10 +46,10 @@ module Jekyll
         end
       rescue Psych::SyntaxError => e
         Jekyll.logger.warn "YAML Exception reading #{filename}: #{e.message}"
-        raise e if self.site.config["strict_front_matter"]
+        raise e if site.config["strict_front_matter"]
       rescue StandardError => e
         Jekyll.logger.warn "Error reading file #{filename}: #{e.message}"
-        raise e if self.site.config["strict_front_matter"]
+        raise e if site.config["strict_front_matter"]
       end
 
       self.data ||= {}
@@ -177,7 +177,7 @@ module Jekyll
     #
     # Returns true if the layout is invalid, false if otherwise
     def invalid_layout?(layout)
-      !data["layout"].nil? && layout.nil? && !(self.is_a? Jekyll::Excerpt)
+      !data["layout"].nil? && layout.nil? && !(is_a? Jekyll::Excerpt)
     end
 
     # Recursively render layouts
@@ -206,7 +206,7 @@ module Jekyll
         renderer.payload = payload
       end.run
 
-      Jekyll.logger.debug "Post-Render Hooks:", self.relative_path
+      Jekyll.logger.debug "Post-Render Hooks:", relative_path
       Jekyll::Hooks.trigger hook_owner, :post_render, self
     ensure
       @_renderer = nil # this will allow the modifications above to disappear

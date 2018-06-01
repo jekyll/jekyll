@@ -5,7 +5,7 @@ module Jekyll
     class Link < Liquid::Tag
       class << self
         def tag_name
-          self.name.split("::").last.downcase
+          name.split("::").last.downcase
         end
       end
 

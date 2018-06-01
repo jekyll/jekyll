@@ -136,8 +136,6 @@ Style/PercentLiteralDelimiters:
     "%w": "()"
     "%W": "()"
     "%x": "()"
-Style/RedundantSelf:
-  Enabled: false
 Style/RegexpLiteral:
   EnforcedStyle: percent_r
 Style/RescueModifier:

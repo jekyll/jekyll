@@ -45,7 +45,7 @@ module Jekyll
 
       %w(safe lsi highlighter baseurl exclude include future unpublished
          show_drafts limit_posts keep_files).each do |opt|
-        self.send("#{opt}=", config[opt])
+        send("#{opt}=", config[opt])
       end
 
       # keep using `gems` to avoid breaking change
@@ -409,7 +409,7 @@ module Jekyll
     def limit_posts!
       if limit_posts.positive?
         limit = posts.docs.length < limit_posts ? posts.docs.length : limit_posts
-        self.posts.docs = posts.docs[-limit, limit]
+        posts.docs = posts.docs[-limit, limit]
       end
     end
 
@@ -447,7 +447,7 @@ module Jekyll
 
     def configure_file_read_opts
       self.file_read_opts = {}
-      self.file_read_opts[:encoding] = config["encoding"] if config["encoding"]
+      file_read_opts[:encoding] = config["encoding"] if config["encoding"]
       self.file_read_opts = Jekyll::Utils.merged_file_read_opts(self, {})
     end
 
