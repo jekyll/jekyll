@@ -53,7 +53,11 @@ Metrics/ClassLength:
   Exclude:
     - !ruby/regexp /features\/.*.rb$/
     - !ruby/regexp /test\/.*.rb$/
-  Max: 300
+    - lib/jekyll/document.rb
+    - lib/jekyll/site.rb
+    - lib/jekyll/commands/serve.rb
+    - lib/jekyll/configuration.rb
+  Max: 240
 Metrics/CyclomaticComplexity:
   Exclude:
     - lib/jekyll/utils.rb
