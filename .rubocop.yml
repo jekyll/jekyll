@@ -106,8 +106,6 @@ Style/FrozenStringLiteralComment:
   EnforcedStyle: always
 Style/Documentation:
   Enabled: false
-  Exclude:
-    - !ruby/regexp /features\/.*.rb$/
 Style/DoubleNegation:
   Enabled: false
 Style/FormatStringToken:
