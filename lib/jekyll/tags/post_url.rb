@@ -24,7 +24,7 @@ module Jekyll
       def post_date
         @post_date ||= Utils.parse_date(
           date,
-          "\"#{date}\" does not contain valid date and/or title."
+          "'#{date}' does not contain valid date and/or title."
         )
       end
 
