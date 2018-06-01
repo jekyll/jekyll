@@ -13,7 +13,7 @@ module Jekyll
     #
 
     def self.inherited(const)
-      return catch_inheritance(const) do |const_|
+      catch_inheritance(const) do |const_|
         catch_inheritance(const_)
       end
     end

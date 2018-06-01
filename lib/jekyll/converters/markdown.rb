@@ -28,7 +28,7 @@ module Jekyll
       # rubocop:disable Naming/AccessorMethodName
       def get_processor
         case @config["markdown"].downcase
-        when "kramdown" then return KramdownParser.new(@config)
+        when "kramdown" then KramdownParser.new(@config)
         else
           custom_processor
         end
