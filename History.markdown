@@ -50,6 +50,7 @@
   * Load Rouge for TestKramdown (#7007)
   * Useless privates removed (#6768)
   * Allow i18n v0.9.5 and higher (#7044)
+  * Update Rubocop&#39;s config (#7050)
 
 ### Bug Fixes
 
