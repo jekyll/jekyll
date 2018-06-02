@@ -22,6 +22,7 @@
   * added the CAT plugin to the plugin list (#7011)
   * Updated to supported version (#7031)
   * Clarify definition of &#39;draft&#39; (#7037)
+  * Listed the jekyll-target-blank plugin in plugins list. (#7046)
 
 ### Minor Enhancements
 
