@@ -346,7 +346,7 @@ module Jekyll
             " as a list of comma-separated values."
           config[option] = csv_to_array(config[option])
         end
-        config[option].map!(&:to_s) if config[option]
+        config[option]&.map!(&:to_s)
       end
     end
 
@@ -381,8 +381,8 @@ module Jekyll
           " use an array instead. If you wanted to set the directory of your" \
           " plugins, use the config key `plugins_dir` instead."
         raise Jekyll::Errors::InvalidConfigurationError,
-          "'plugins' should not be a string, but was: " \
-          "#{config["plugins"].inspect}. Use 'plugins_dir' instead."
+              "'plugins' should not be a string, but was: " \
+              "#{config["plugins"].inspect}. Use 'plugins_dir' instead."
       end
     end
   end

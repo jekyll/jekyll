@@ -44,8 +44,8 @@ module Jekyll
       @config = config.clone
 
       %w(safe lsi highlighter baseurl exclude include future unpublished
-        show_drafts limit_posts keep_files).each do |opt|
-        self.send("#{opt}=", config[opt])
+         show_drafts limit_posts keep_files).each do |opt|
+        send("#{opt}=", config[opt])
       end
 
       # keep using `gems` to avoid breaking change
@@ -98,9 +98,7 @@ module Jekyll
       @liquid_renderer.reset
       @site_cleaner = nil
 
-      if limit_posts < 0
-        raise ArgumentError, "limit_posts must be a non-negative number"
-      end
+      raise ArgumentError, "limit_posts must be a non-negative number" if limit_posts.negative?
 
       Jekyll::Hooks.trigger :site, :after_reset, self
     end
@@ -124,7 +122,7 @@ module Jekyll
       Pathname.new(source).ascend do |path|
         if path == dest_pathname
           raise Errors::FatalException,
-            "Destination directory cannot be or contain the Source directory."
+                "Destination directory cannot be or contain the Source directory."
         end
       end
     end
@@ -174,7 +172,7 @@ module Jekyll
         start = Time.now
         generator.generate(self)
         Jekyll.logger.debug "Generating:",
-          "#{generator.class} finished in #{Time.now - start} seconds."
+                            "#{generator.class} finished in #{Time.now - start} seconds."
       end
     end
 
@@ -234,7 +232,7 @@ module Jekyll
       # array of posts ) then sort each array in reverse order.
       hash = Hash.new { |h, key| h[key] = [] }
       posts.docs.each do |p|
-        p.data[post_attr].each { |t| hash[t] << p } if p.data[post_attr]
+        p.data[post_attr]&.each { |t| hash[t] << p }
       end
       hash.each_value { |posts| posts.sort!.reverse! }
       hash
@@ -303,10 +301,10 @@ module Jekyll
     def relative_permalinks_are_deprecated
       if config["relative_permalinks"]
         Jekyll.logger.abort_with "Since v3.0, permalinks for pages" \
-                                " in subfolders must be relative to the" \
-                                " site source directory, not the parent" \
-                                " directory. Check https://jekyllrb.com/docs/upgrading/"\
-                                " for more info."
+                                 " in subfolders must be relative to the" \
+                                 " site source directory, not the parent" \
+                                 " directory. Check https://jekyllrb.com/docs/upgrading/"\
+                                 " for more info."
       end
     end
 
@@ -409,9 +407,9 @@ module Jekyll
     #
     # Returns nothing
     def limit_posts!
-      if limit_posts > 0
+      if limit_posts.positive?
         limit = posts.docs.length < limit_posts ? posts.docs.length : limit_posts
-        self.posts.docs = posts.docs[-limit, limit]
+        posts.docs = posts.docs[-limit, limit]
       end
     end
 
@@ -444,12 +442,12 @@ module Jekyll
 
     def configure_include_paths
       @includes_load_paths = Array(in_source_dir(config["includes_dir"].to_s))
-      @includes_load_paths << theme.includes_path if theme && theme.includes_path
+      @includes_load_paths << theme.includes_path if theme&.includes_path
     end
 
     def configure_file_read_opts
       self.file_read_opts = {}
-      self.file_read_opts[:encoding] = config["encoding"] if config["encoding"]
+      file_read_opts[:encoding] = config["encoding"] if config["encoding"]
       self.file_read_opts = Jekyll::Utils.merged_file_read_opts(self, {})
     end
 

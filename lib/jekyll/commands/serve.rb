@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "thread"
-
 module Jekyll
   module Commands
     class Serve < Command
@@ -19,25 +17,28 @@ module Jekyll
           "host"                 => ["host", "-H", "--host [HOST]", "Host to bind to"],
           "open_url"             => ["-o", "--open-url", "Launch your site in a browser"],
           "detach"               => ["-B", "--detach",
-            "Run the server in the background",],
+                                     "Run the server in the background",],
           "ssl_key"              => ["--ssl-key [KEY]", "X.509 (SSL) Private Key."],
           "port"                 => ["-P", "--port [PORT]", "Port to listen on"],
           "show_dir_listing"     => ["--show-dir-listing",
-            "Show a directory listing instead of loading your index file.",],
+                                     "Show a directory listing instead of loading" \
+                                     " your index file.",],
           "skip_initial_build"   => ["skip_initial_build", "--skip-initial-build",
-            "Skips the initial site build which occurs before the server is started.",],
+                                     "Skips the initial site build which occurs before" \
+                                     " the server is started.",],
           "livereload"           => ["-l", "--livereload",
-            "Use LiveReload to automatically refresh browsers",],
+                                     "Use LiveReload to automatically refresh browsers",],
           "livereload_ignore"    => ["--livereload-ignore ignore GLOB1[,GLOB2[,...]]",
-            Array,
-            "Files for LiveReload to ignore. Remember to quote the values so your shell "\
-            "won't expand them",],
+                                     Array,
+                                     "Files for LiveReload to ignore. " \
+                                     "Remember to quote the values so your shell " \
+                                     "won't expand them",],
           "livereload_min_delay" => ["--livereload-min-delay [SECONDS]",
-            "Minimum reload delay",],
+                                     "Minimum reload delay",],
           "livereload_max_delay" => ["--livereload-max-delay [SECONDS]",
-            "Maximum reload delay",],
+                                     "Maximum reload delay",],
           "livereload_port"      => ["--livereload-port [PORT]", Integer,
-            "Port for LiveReload to listen on",],
+                                     "Port for LiveReload to listen on",],
         }.freeze
 
         DIRECTORY_INDEX = %w(
@@ -107,8 +108,8 @@ module Jekyll
         def validate_options(opts)
           if opts["livereload"]
             if opts["detach"]
-              Jekyll.logger.warn "Warning:",
-                "--detach and --livereload are mutually exclusive. Choosing --livereload"
+              Jekyll.logger.warn "Warning:", "--detach and --livereload are mutually exclusive." \
+                                 " Choosing --livereload"
               opts["detach"] = false
             end
             if opts["ssl_cert"] || opts["ssl_key"]
@@ -123,9 +124,9 @@ module Jekyll
               opts["watch"] = true
             end
           elsif %w(livereload_min_delay
-              livereload_max_delay
-              livereload_ignore
-              livereload_port).any? { |o| opts[o] }
+                   livereload_max_delay
+                   livereload_ignore
+                   livereload_port).any? { |o| opts[o] }
             Jekyll.logger.abort_with "--livereload-min-delay, "\
                "--livereload-max-delay, --livereload-ignore, and "\
                "--livereload-port require the --livereload option."
@@ -204,9 +205,7 @@ module Jekyll
         end
 
         def start_up_webrick(opts, destination)
-          if opts["livereload"]
-            @reload_reactor.start(opts)
-          end
+          @reload_reactor.start(opts) if opts["livereload"]
 
           @server = WEBrick::HTTPServer.new(webrick_opts(opts)).tap { |o| o.unmount("") }
           @server.mount(opts["baseurl"].to_s, Servlet, destination, file_handler_opts)
@@ -218,12 +217,12 @@ module Jekyll
 
         # Recreate NondisclosureName under utf-8 circumstance
         def file_handler_opts
-          WEBrick::Config::FileHandler.merge({
+          WEBrick::Config::FileHandler.merge(
             :FancyIndexing     => true,
             :NondisclosureName => [
               ".ht*", "~*",
-            ],
-          })
+            ]
+          )
         end
 
         def server_address(server, options = {})
@@ -236,12 +235,11 @@ module Jekyll
         end
 
         def format_url(ssl_enabled, address, port, baseurl = nil)
-          format("%<prefix>s://%<address>s:%<port>i%<baseurl>s", {
-            :prefix  => ssl_enabled ? "https" : "http",
-            :address => address,
-            :port    => port,
-            :baseurl => baseurl ? "#{baseurl}/" : "",
-          })
+          format("%<prefix>s://%<address>s:%<port>i%<baseurl>s",
+                 :prefix  => ssl_enabled ? "https" : "http",
+                 :address => address,
+                 :port    => port,
+                 :baseurl => baseurl ? "#{baseurl}/" : "")
         end
 
         def default_url(opts)
@@ -273,7 +271,8 @@ module Jekyll
 
             Process.detach(pid)
             Jekyll.logger.info "Server detached with pid '#{pid}'.", \
-              "Run `pkill -f jekyll' or `kill -9 #{pid}' to stop the server."
+                               "Run `pkill -f jekyll' or `kill -9 #{pid}'" \
+                               " to stop the server."
           else
             t = Thread.new { server.start }
             trap("INT") { server.shutdown }
@@ -311,7 +310,7 @@ module Jekyll
             proc do
               mutex.synchronize do
                 # Block until EventMachine reactor starts
-                @reload_reactor.started_event.wait unless @reload_reactor.nil?
+                @reload_reactor&.started_event&.wait
                 @running = true
                 Jekyll.logger.info("Server running...", "press ctrl-c to stop.")
                 @run_cond.broadcast

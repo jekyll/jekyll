@@ -11,9 +11,7 @@ module Jekyll
         return if @setup ||= false
         unless (@parser = get_processor)
           Jekyll.logger.error "Invalid Markdown processor given:", @config["markdown"]
-          if @config["safe"]
-            Jekyll.logger.info "", "Custom processors are not loaded in safe mode"
-          end
+          Jekyll.logger.info "", "Custom processors are not loaded in safe mode" if @config["safe"]
           Jekyll.logger.error(
             "",
             "Available processors are: #{valid_processors.join(", ")}"
@@ -30,7 +28,7 @@ module Jekyll
       # rubocop:disable Naming/AccessorMethodName
       def get_processor
         case @config["markdown"].downcase
-        when "kramdown" then return KramdownParser.new(@config)
+        when "kramdown" then KramdownParser.new(@config)
         else
           custom_processor
         end
@@ -79,9 +77,7 @@ module Jekyll
 
       def custom_processor
         converter_name = @config["markdown"]
-        if custom_class_allowed?(converter_name)
-          self.class.const_get(converter_name).new(@config)
-        end
+        self.class.const_get(converter_name).new(@config) if custom_class_allowed?(converter_name)
       end
 
       # Private: Determine whether a class name is an allowed custom
