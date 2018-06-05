@@ -48,6 +48,8 @@
   * Load Rouge for TestKramdown (#7007)
   * Useless privates removed (#6768)
 
+## 3.8.3 / 2018-06-05
+
 ### Bug Fixes
 
   * Fix --unpublished not affecting collection documents (#7027)
