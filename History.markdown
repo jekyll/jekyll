@@ -24,6 +24,7 @@
   * Clarify definition of &#39;draft&#39; (#7037)
   * Listed the jekyll-target-blank plugin in plugins list. (#7046)
   * Typo (#7058)
+  * Add Hints for some Improved Travis Config in Doc (#7049)
 
 ### Minor Enhancements
 
