@@ -35,7 +35,7 @@ module Jekyll
     def method_missing(method, *args, &blck)
       if docs.respond_to?(method.to_sym)
         Jekyll.logger.warn "Deprecation:",
-          "#{label}.#{method} should be changed to #{label}.docs.#{method}."
+                           "#{label}.#{method} should be changed to #{label}.docs.#{method}."
         Jekyll.logger.warn "", "Called by #{caller(0..0)}."
         docs.public_send(method.to_sym, *args, &blck)
       else
@@ -210,9 +210,7 @@ module Jekyll
     def read_document(full_path)
       doc = Document.new(full_path, :site => site, :collection => self)
       doc.read
-      if site.unpublished || doc.published?
-        docs << doc
-      end
+      docs << doc if site.unpublished || doc.published?
     end
 
     def read_static_file(file_path, full_path)

@@ -28,9 +28,7 @@ module Jekyll
         regenerate_document?(document)
       else
         source_path = document.respond_to?(:path) ? document.path : nil
-        dest_path = if document.respond_to?(:destination)
-                      document.destination(@site.dest)
-                    end
+        dest_path = document.destination(@site.dest) if document.respond_to?(:destination)
         source_modified_or_dest_missing?(source_path, dest_path)
       end
     end
@@ -89,9 +87,7 @@ module Jekyll
       return true if path.nil?
 
       # Check for path in cache
-      if cache.key? path
-        return cache[path]
-      end
+      return cache[path] if cache.key? path
 
       if metadata[path]
         # If we have seen this file before,
@@ -183,9 +179,7 @@ module Jekyll
       # If one of this file dependencies have been modified,
       # set the regeneration bit for both the dependency and the file to true
       metadata[path]["deps"].each do |dependency|
-        if modified?(dependency)
-          return cache[dependency] = cache[path] = true
-        end
+        return cache[dependency] = cache[path] = true if modified?(dependency)
       end
 
       if File.exist?(path) && metadata[path]["mtime"].eql?(File.mtime(path))

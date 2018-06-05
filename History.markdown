@@ -20,6 +20,9 @@
   * Document that _drafts need to be contained within the custom collection directory (#6985)
   * proposed change for passive voice. (#7005)
   * added the CAT plugin to the plugin list (#7011)
+  * Updated to supported version (#7031)
+  * Clarify definition of &#39;draft&#39; (#7037)
+  * Listed the jekyll-target-blank plugin in plugins list. (#7046)
 
 ### Minor Enhancements
 
@@ -47,6 +50,8 @@
   * yajl-ruby update to v1.4.0 (#6976)
   * Load Rouge for TestKramdown (#7007)
   * Useless privates removed (#6768)
+  * Allow i18n v0.9.5 and higher (#7044)
+  * Update Rubocop&#39;s config (#7050)
 
 ## 3.8.3 / 2018-06-05
 

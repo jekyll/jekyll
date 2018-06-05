@@ -3,7 +3,6 @@
 module Jekyll
   module Utils
     module Internet
-
       # Public: Determine whether the present device has a connection to
       # the Internet. This allows plugin writers which require the outside
       # world to have a neat fallback mechanism for offline building.
@@ -18,7 +17,9 @@ module Jekyll
       #   end
       #
       # Returns true if a DNS call can successfully be made, or false if not.
+
       module_function
+
       def connected?
         !dns("example.com").nil?
       end
@@ -31,7 +32,6 @@ module Jekyll
       rescue Resolv::ResolvError, Resolv::ResolvTimeout
         nil
       end
-
     end
   end
 end

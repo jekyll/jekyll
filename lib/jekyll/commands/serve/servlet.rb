@@ -121,9 +121,7 @@ module Jekyll
           if @options["livereload_max_delay"]
             src += "&amp;maxdelay=#{@options["livereload_max_delay"]}"
           end
-          if @options["livereload_port"]
-            src += "&amp;port=#{@options["livereload_port"]}"
-          end
+          src += "&amp;port=#{@options["livereload_port"]}" if @options["livereload_port"]
           src
         end
       end

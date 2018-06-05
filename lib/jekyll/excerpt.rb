@@ -8,10 +8,11 @@ module Jekyll
     attr_accessor :content, :ext
     attr_writer   :output
 
-    def_delegators :@doc, :site, :name, :ext, :extname,
-                          :collection, :related_posts,
-                          :coffeescript_file?, :yaml_file?,
-                          :url, :next_doc, :previous_doc
+    def_delegators :@doc,
+                   :site, :name, :ext, :extname,
+                   :collection, :related_posts,
+                   :coffeescript_file?, :yaml_file?,
+                   :url, :next_doc, :previous_doc
 
     private :coffeescript_file?, :yaml_file?
 
@@ -55,7 +56,7 @@ module Jekyll
     #
     # Returns true if the string passed in
     def include?(something)
-      (output && output.include?(something)) || content.include?(something)
+      (output&.include?(something)) || content.include?(something)
     end
 
     # The UID for this doc (useful in feeds).
@@ -76,7 +77,7 @@ module Jekyll
 
     # Returns the shorthand String identifier of this doc.
     def inspect
-      "<Excerpt: #{self.id}>"
+      "<Excerpt: #{id}>"
     end
 
     def output
@@ -160,19 +161,18 @@ module Jekyll
       Liquid::Template.tags[tag_name].superclass == Liquid::Block
     rescue NoMethodError
       Jekyll.logger.error "Error:",
-        "A Liquid tag in the excerpt of #{doc.relative_path} couldn't be " \
-        "parsed."
+                          "A Liquid tag in the excerpt of #{doc.relative_path} couldn't be parsed."
       raise
     end
 
     def print_build_warning
       Jekyll.logger.warn "Warning:", "Excerpt modified in #{doc.relative_path}!"
       Jekyll.logger.warn "",
-        "Found a Liquid block containing separator '#{doc.excerpt_separator}' and has " \
-        "been modified with the appropriate closing tag."
+                         "Found a Liquid block containing separator '#{doc.excerpt_separator}'" \
+                         " and has been modified with the appropriate closing tag."
       Jekyll.logger.warn "",
-        "Feel free to define a custom excerpt or excerpt_separator in the document's " \
-        "Front Matter if the generated excerpt is unsatisfactory."
+                         "Feel free to define a custom excerpt or excerpt_separator in the" \
+                         " document's Front Matter if the generated excerpt is unsatisfactory."
     end
   end
 end

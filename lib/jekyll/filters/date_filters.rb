@@ -64,6 +64,7 @@ module Jekyll
       end
 
       private
+
       # month_type: Notations that evaluate to 'Month' via `Time#strftime` ("%b", "%B")
       # type: nil (default) or "ordinal"
       # style: nil (default) or "US"
@@ -96,7 +97,7 @@ module Jekyll
         date = Liquid::Utils.to_date(input)
         unless date.respond_to?(:to_time)
           raise Errors::InvalidDateError,
-            "Invalid Date: '#{input.inspect}' is not a valid datetime."
+                "Invalid Date: '#{input.inspect}' is not a valid datetime."
         end
         date.to_time.dup.localtime
       end
