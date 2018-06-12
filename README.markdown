@@ -5,11 +5,9 @@
 [![Windows Build status](https://img.shields.io/appveyor/ci/jekyll/jekyll/master.svg?label=Windows%20build)][appveyor]
 [![Maintainability](https://api.codeclimate.com/v1/badges/8ba0cb5b17bb9848e128/maintainability)](codeclimate)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/8ba0cb5b17bb9848e128/test_coverage)](coverage)
-[![Dependency Status](https://img.shields.io/gemnasium/jekyll/jekyll.svg)][gemnasium]
 [![Security](https://hakiri.io/github/jekyll/jekyll/master.svg)][hakiri]
 
 [ruby-gems]: https://rubygems.org/gems/jekyll
-[gemnasium]: https://gemnasium.com/jekyll/jekyll
 [codeclimate]: https://codeclimate.com/github/jekyll/jekyll
 [coverage]: https://codeclimate.com/github/jekyll/jekyll/coverage
 [hakiri]: https://hakiri.io/github/jekyll/jekyll/master
