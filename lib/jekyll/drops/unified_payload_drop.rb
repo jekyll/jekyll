@@ -17,6 +17,7 @@ module Jekyll
       end
 
       private
+
       def fallback_data
         @fallback_data ||= {}
       end

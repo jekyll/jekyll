@@ -3,11 +3,13 @@
 module Jekyll
   class Theme
     extend Forwardable
-    attr_reader :name
+    attr_reader   :name
     def_delegator :gemspec, :version, :version
 
     def initialize(name)
       @name = name.downcase.strip
+      Jekyll.logger.debug "Theme:", name
+      Jekyll.logger.debug "Theme source:", root
       configure_sass
     end
 
@@ -21,19 +23,19 @@ module Jekyll
     end
 
     def includes_path
-      path_for "_includes".freeze
+      @includes_path ||= path_for "_includes"
     end
 
     def layouts_path
-      path_for "_layouts".freeze
+      @layouts_path ||= path_for "_layouts"
     end
 
     def sass_path
-      path_for "_sass".freeze
+      @sass_path ||= path_for "_sass"
     end
 
     def assets_path
-      path_for "assets".freeze
+      @assets_path ||= path_for "assets"
     end
 
     def configure_sass
@@ -56,6 +58,7 @@ module Jekyll
     def realpath_for(folder)
       File.realpath(Jekyll.sanitized_path(root, folder.to_s))
     rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP
+      Jekyll.logger.warn "Invalid theme folder:", folder
       nil
     end
 
@@ -63,7 +66,7 @@ module Jekyll
       @gemspec ||= Gem::Specification.find_by_name(name)
     rescue Gem::LoadError
       raise Jekyll::Errors::MissingDependencyException,
-        "The #{name} theme could not be found."
+            "The #{name} theme could not be found."
     end
   end
 end

@@ -93,6 +93,20 @@ you come up with your own tags via plugins.
     </tr>
     <tr>
       <td>
+        <p class="name"><strong>Date to String in ordinal US style</strong></p>
+        <p>Format a date to ordinal, US, short format.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ site.time | date_to_string: "ordinal", "US" }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">Nov 7th, 2008</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p class="name"><strong>Date to Long String</strong></p>
         <p>Format a date to long format.</p>
       </td>
@@ -102,6 +116,20 @@ you come up with your own tags via plugins.
         </p>
         <p>
           <code class="output">07 November 2008</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="name"><strong>Date to Long String in ordinal UK style</strong></p>
+        <p>Format a date to ordinal, UK, long format.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ site.time | date_to_long_string: "ordinal" }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">7th November 2008</code>
         </p>
       </td>
     </tr>
@@ -119,7 +147,8 @@ you come up with your own tags via plugins.
     <tr>
       <td>
         <p class="name"><strong>Where Expression</strong></p>
-        <p>Select all the objects in an array where the expression is true. Jekyll v3.2.0 & later.</p>
+        <p>Select all the objects in an array where the expression is true.
+        {% include docs_version_badge.html version="3.2.0" %}</p>
       </td>
       <td class="align-center">
         <p>
@@ -150,7 +179,8 @@ you come up with your own tags via plugins.
     <tr>
       <td>
         <p class="name"><strong>Group By Expression</strong></p>
-        <p>Group an array's items using a Liquid expression.</p>
+        <p>Group an array's items using a Liquid expression.
+        {% include docs_version_badge.html version="3.4.0" %}</p>
       </td>
       <td class="align-center">
         <p>
