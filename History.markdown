@@ -54,6 +54,7 @@
   * Useless privates removed (#6768)
   * Allow i18n v0.9.5 and higher (#7044)
   * Update Rubocop&#39;s config (#7050)
+  * Remember to release docs gem (#7066)
 
 ## 3.8.3 / 2018-06-05
 
