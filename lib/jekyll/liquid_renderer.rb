@@ -7,8 +7,8 @@ module Jekyll
   class LiquidRenderer
     extend Forwardable
 
-    def_delegator :@site, :in_source_dir, :source_dir
-    def_delegator :@site, :in_theme_dir, :theme_dir
+    private def_delegator :@site, :in_source_dir, :source_dir
+    private def_delegator :@site, :in_theme_dir, :theme_dir
 
     def initialize(site)
       @site = site
@@ -24,7 +24,7 @@ module Jekyll
       filename.match(filename_regex)
       filename =
         if Regexp.last_match(1) == theme_dir("")
-          ::File.join(Regexp.last_match(1).split("/")[-1], Regexp.last_match(2))
+          ::File.join(::File.basename(Regexp.last_match(1)), Regexp.last_match(2))
         else
           Regexp.last_match(2)
         end
@@ -42,18 +42,18 @@ module Jekyll
       @stats[filename][:time] += time
     end
 
-    def stats_table(n = 50)
-      LiquidRenderer::Table.new(@stats).to_s(n)
+    def stats_table(num_of_rows = 50)
+      LiquidRenderer::Table.new(@stats).to_s(num_of_rows)
     end
 
-    def self.format_error(e, path)
-      "#{e.message} in #{path}"
+    def self.format_error(error, path)
+      "#{error.message} in #{path}"
     end
 
     private
 
     def filename_regex
-      %r!\A(#{source_dir}/|#{theme_dir}/|\W*)(.*)!oi
+      @filename_regex ||= %r!\A(#{source_dir}/|#{theme_dir}/|\W*)(.*)!i
     end
 
     def new_profile_hash

@@ -133,10 +133,10 @@ module Jekyll
       @url ||= if @collection.nil?
                  relative_path
                else
-                 ::Jekyll::URL.new({
+                 ::Jekyll::URL.new(
                    :template     => @collection.url_template,
-                   :placeholders => placeholders,
-                 })
+                   :placeholders => placeholders
+                 )
                end.to_s.chomp("/")
     end
 
@@ -152,6 +152,7 @@ module Jekyll
     end
 
     private
+
     def copy_file(dest_path)
       if @site.safe || Jekyll.env == "production"
         FileUtils.cp(path, dest_path)

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "set"
-
 module Jekyll
   # Handles the cleanup of a site's destination before it is built.
   class Cleaner

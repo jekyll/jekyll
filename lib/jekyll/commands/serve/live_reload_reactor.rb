@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "json"
 require "em-websocket"
 
 require_relative "websockets"
@@ -31,11 +30,11 @@ module Jekyll
           EM.reactor_running?
         end
 
-        def handle_websockets_event(ws)
-          ws.onopen { |handshake| connect(ws, handshake) }
-          ws.onclose { disconnect(ws) }
-          ws.onmessage { |msg| print_message(msg) }
-          ws.onerror { |error| log_error(error) }
+        def handle_websockets_event(websocket)
+          websocket.onopen { |handshake| connect(websocket, handshake) }
+          websocket.onclose { disconnect(websocket) }
+          websocket.onmessage { |msg| print_message(msg) }
+          websocket.onerror { |error| log_error(error) }
         end
 
         def start(opts)
@@ -59,7 +58,7 @@ module Jekyll
               EM.add_shutdown_hook { @stopped_event.set }
 
               Jekyll.logger.info "LiveReload address:",
-                "http://#{opts["host"]}:#{opts["livereload_port"]}"
+                                 "http://#{opts["host"]}:#{opts["livereload_port"]}"
             end
           end
           @thread.abort_on_exception = true
@@ -69,11 +68,11 @@ module Jekyll
         # http://feedback.livereload.com/knowledgebase/articles/86174-livereload-protocol
         def reload(pages)
           pages.each do |p|
-            json_message = JSON.dump({
+            json_message = JSON.dump(
               :command => "reload",
               :path    => p.url,
-              :liveCSS => true,
-            })
+              :liveCSS => true
+            )
 
             Jekyll.logger.debug "LiveReload:", "Reloading #{p.url}"
             Jekyll.logger.debug "", json_message
@@ -82,14 +81,15 @@ module Jekyll
         end
 
         private
-        def connect(ws, handshake)
+
+        def connect(websocket, handshake)
           @connections_count += 1
           if @connections_count == 1
             message = "Browser connected"
             message += " over SSL/TLS" if handshake.secure?
             Jekyll.logger.info "LiveReload:", message
           end
-          ws.send(
+          websocket.send(
             JSON.dump(
               :command    => "hello",
               :protocols  => ["http://livereload.com/protocols/official-7"],
@@ -97,29 +97,24 @@ module Jekyll
             )
           )
 
-          @websockets << ws
+          @websockets << websocket
         end
 
-        private
-        def disconnect(ws)
-          @websockets.delete(ws)
+        def disconnect(websocket)
+          @websockets.delete(websocket)
         end
 
-        private
         def print_message(json_message)
           msg = JSON.parse(json_message)
           # Not sure what the 'url' command even does in LiveReload.  The spec is silent
           # on its purpose.
-          if msg["command"] == "url"
-            Jekyll.logger.info "LiveReload:", "Browser URL: #{msg["url"]}"
-          end
+          Jekyll.logger.info "LiveReload:", "Browser URL: #{msg["url"]}" if msg["command"] == "url"
         end
 
-        private
-        def log_error(e)
+        def log_error(error)
           Jekyll.logger.error "LiveReload experienced an error. " \
             "Run with --trace for more information."
-          raise e
+          raise error
         end
       end
     end

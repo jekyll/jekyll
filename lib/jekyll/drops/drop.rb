@@ -137,7 +137,6 @@ module Jekyll
       #
       # Returns a pretty generation of the hash representation of the Drop.
       def inspect
-        require "json"
         JSON.pretty_generate to_h
       end
 
@@ -155,7 +154,6 @@ module Jekyll
       #
       # Returns a JSON representation of the Drop in a String.
       def to_json(state = nil)
-        require "json"
         JSON.generate(hash_for_json(state), state)
       end
 
@@ -175,7 +173,7 @@ module Jekyll
       end
 
       def merge(other, &block)
-        self.dup.tap do |me|
+        dup.tap do |me|
           if block.nil?
             me.merge!(other)
           else

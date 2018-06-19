@@ -36,6 +36,12 @@ If you installed the above - specifically on Fedora 23 - but the extensions woul
 sudo dnf install redhat-rpm-config
 ```
 
+On Arch Linux you need to run:
+
+```sh
+sudo pacman -S ruby-ffi
+```
+
 On Ubuntu if you get stuck after `bundle exec jekyll serve` and see error
 messages like `Could not locate Gemfile` or `.bundle/ directory`, it's likely
 because all requirements have not been fully met. Recent stock Ubuntu
@@ -105,7 +111,7 @@ possible to run Jekyll as a non-superuser and without having to install
 gems to system-wide locations by adding the following lines to the end 
 of your `.bashrc` file:
 
-```sh
+```
 # Ruby exports
 
 export GEM_HOME=$HOME/gems
@@ -127,20 +133,20 @@ currently-running shell.
 If you see the following error when running the `jekyll new` command,
 you can solve it by using the above-described procedure:
 
-```
-$ jekyll new test
+```sh
+jekyll new test
+
 Running bundle install in /home/user/test...
 
-
 Your user account isn't allowed to install to the system RubyGems.
-  You can cancel this installation and run:
+You can cancel this installation and run:
 
       bundle install --path vendor/bundle
 
-  to install the gems into ./vendor/bundle/, or you can enter your password
-  and install the bundled gems to RubyGems using sudo.
+to install the gems into ./vendor/bundle/, or you can enter your password
+and install the bundled gems to RubyGems using sudo.
 
-  Password:
+Password:
 ```
 
 Once this is done, the `jekyll new` command should work properly for
@@ -221,13 +227,13 @@ jekyll serve --baseurl '/blog'
 
 … then make sure that you access the site at:
 
-```sh
+```
 http://localhost:4000/blog/index.html
 ```
 
 It won’t work to just access:
 
-```sh
+```
 http://localhost:4000/blog
 ```
 
@@ -246,7 +252,7 @@ specified elsewhere.
 
 **Note: From v3.3.0 onward, Jekyll does not process `node_modules` and certain subdirectories within `vendor`, by default. But, by having an `exclude:` array defined explicitly in the config file overrides this default setting, which results in some users to encounter an error in building the site, with the following error message:**
 
-```
+```sh
     ERROR: YOUR SITE COULD NOT BE BUILT:
     ------------------------------------
     Invalid date '<%= Time.now.strftime('%Y-%m-%d %H:%M:%S %z') %>':
@@ -284,9 +290,8 @@ problems.
 
 ### Liquid
 
-The latest version, version 2.0, seems to break the use of `{{ "{{" }}` in
-templates. Unlike previous versions, using `{{ "{{" }}` in 2.0 triggers the
-following error:
+Liquid version 2.0 seems to break the use of `{{ "{{" }}` in templates.
+Unlike previous versions, using `{{ "{{" }}` in 2.0 triggers the following error:
 
 ```sh
 '{{ "{{" }}' was not properly terminated with regexp: /\}\}/  (Liquid::SyntaxError)

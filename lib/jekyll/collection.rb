@@ -35,7 +35,7 @@ module Jekyll
     def method_missing(method, *args, &blck)
       if docs.respond_to?(method.to_sym)
         Jekyll.logger.warn "Deprecation:",
-          "#{label}.#{method} should be changed to #{label}.docs.#{method}."
+                           "#{label}.#{method} should be changed to #{label}.docs.#{method}."
         Jekyll.logger.warn "", "Called by #{caller(0..0)}."
         docs.public_send(method.to_sym, *args, &blck)
       else
@@ -207,18 +207,11 @@ module Jekyll
       @container ||= site.config["collections_dir"]
     end
 
-    private
-
     def read_document(full_path)
-      docs << Document.new(full_path, :site => site, :collection => self).tap do |doc|
-        doc.read
-        if !site.publisher.publish?(doc) && site.publisher.hidden_in_the_future?(doc)
-          Jekyll.logger.debug "Skip Publishing:", "#{doc.relative_path} has a future date"
-        end
-      end
+      doc = Document.new(full_path, :site => site, :collection => self)
+      doc.read
+      docs << doc if site.unpublished || doc.published?
     end
-
-    private
 
     def read_static_file(file_path, full_path)
       relative_dir = Jekyll.sanitized_path(

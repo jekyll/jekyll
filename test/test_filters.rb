@@ -931,7 +931,7 @@ class TestFilters < JekyllUnitTest
       end
 
       should "filter with other operators" do
-        assert_equal [3, 4, 5], @filter.where_exp([ 1, 2, 3, 4, 5 ], "n", "n >= 3")
+        assert_equal [3, 4, 5], @filter.where_exp([1, 2, 3, 4, 5], "n", "n >= 3")
       end
 
       objects = [
@@ -1101,9 +1101,9 @@ class TestFilters < JekyllUnitTest
       end
       should "return sorted by subproperty array" do
         assert_equal [{ "a" => { "b" => 1 } }, { "a" => { "b" => 2 } },
-                      { "a" => { "b" => 3 } }, ],
+                      { "a" => { "b" => 3 } },],
           @filter.sort([{ "a" => { "b" => 2 } }, { "a" => { "b" => 1 } },
-                        { "a" => { "b" => 3 } }, ], "a.b")
+                        { "a" => { "b" => 3 } },], "a.b")
       end
     end
 

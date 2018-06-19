@@ -212,4 +212,56 @@ class TestExcerpt < JekyllUnitTest
       assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
     end
   end
+
+  context "An excerpt with non-closed but valid Liquid block tag with whitespace control" do
+    setup do
+      clear_dest
+      @site = fixture_site
+      @post = setup_post("2018-05-15-open-liquid-block-excerpt-whitespace-control.md")
+      @excerpt = @post.data["excerpt"]
+
+      assert_includes @post.content, "{%- for"
+      refute_includes @post.content.split("\n\n")[0], "{%- endfor -%}"
+    end
+
+    should "be appended to as necessary and generated" do
+      assert_includes @excerpt.content, "{% endfor %}"
+      refute_includes @excerpt.content, "{% endfor %}\n\n{% endfor %}"
+      assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
+    end
+  end
+
+  context "An excerpt with valid closed Liquid block tag with whitespace control" do
+    setup do
+      clear_dest
+      @site = fixture_site
+      @post = setup_post("2018-05-15-closed-liquid-block-excerpt-whitespace-control.md")
+      @excerpt = @post.data["excerpt"]
+
+      assert_includes @post.content, "{%- for"
+      assert_includes @post.content.split("\n\n")[0], "{%- endfor -%}"
+    end
+
+    should "not be appended to but generated as is" do
+      assert_includes @excerpt.content, "{%- endfor -%}"
+      refute_includes @excerpt.content, "{% endfor %}\n\n{% endfor %}"
+      assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
+    end
+  end
+
+  context "An excerpt with valid Liquid variable with whitespace control" do
+    setup do
+      clear_dest
+      @site = fixture_site
+      @post = setup_post("2018-05-15-excerpt-whitespace-control-variable.md")
+      @excerpt = @post.data["excerpt"]
+
+      assert_includes @post.content, "{%- assign"
+    end
+
+    should "not be appended to but generated as is" do
+      assert_includes @excerpt.content, "{{- xyzzy -}}"
+      assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
+    end
+  end
 end

@@ -1,16 +1,20 @@
 # frozen_string_literal: true
 
-class Kramdown::Parser::SmartyPants < Kramdown::Parser::Kramdown
-  def initialize(source, options)
-    super
-    @block_parsers = [:block_html, :content]
-    @span_parsers =  [:smart_quotes, :html_entity, :typographic_syms, :span_html]
-  end
+module Kramdown
+  module Parser
+    class SmartyPants < Kramdown::Parser::Kramdown
+      def initialize(source, options)
+        super
+        @block_parsers = [:block_html, :content]
+        @span_parsers =  [:smart_quotes, :html_entity, :typographic_syms, :span_html]
+      end
 
-  def parse_content
-    add_text @src.scan(%r!\A.*\n!)
+      def parse_content
+        add_text @src.scan(%r!\A.*\n!)
+      end
+      define_parser(:content, %r!\A!)
+    end
   end
-  define_parser(:content, %r!\A!)
 end
 
 module Jekyll
@@ -20,9 +24,7 @@ module Jekyll
       priority :low
 
       def initialize(config)
-        unless defined?(Kramdown)
-          Jekyll::External.require_with_graceful_fail "kramdown"
-        end
+        Jekyll::External.require_with_graceful_fail "kramdown" unless defined?(Kramdown)
         @config = config["kramdown"].dup || {}
         @config[:input] = :SmartyPants
       end
