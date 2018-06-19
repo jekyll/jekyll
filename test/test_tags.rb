@@ -39,6 +39,9 @@ This document has some highlighted code in it.
 {% highlight text linenos %}
 #{code}
 {% endhighlight %}
+{% highlight text linenos start_line=42 %}
+#{code}
+{% endhighlight %}
 CONTENT
     create_post(content, override)
   end
@@ -88,6 +91,14 @@ CONTENT
       tag = highlight_block_with_opts("ruby linenos=table ")
       assert_equal(
         { :linenos => "table" },
+        tag.instance_variable_get(:@highlight_options)
+      )
+    end
+
+    should "set the start_line option to set value" do
+      tag = highlight_block_with_opts("ruby linenos start_line=42 ")
+      assert_equal(
+        { :linenos => "inline", :start_line => 42 },
         tag.instance_variable_get(:@highlight_options)
       )
     end
@@ -144,6 +155,11 @@ CONTENT
       assert_equal true, sanitized[:linenos]
     end
 
+    should "allow start_line" do
+      sanitized = @tag.sanitized_opts({ :start_line => 42 }, true)
+      assert_equal 42, sanitized[:linenostart]
+    end
+
     should "allow hl_lines" do
       sanitized = @tag.sanitized_opts({ :hl_lines => %w(1 2 3 4) }, true)
       assert_equal %w(1 2 3 4), sanitized[:hl_lines]
@@ -195,6 +211,14 @@ CONTENT
         assert_match(
           %(<pre><code class="language-text" data-lang="text">) +
           %(<span></span><span class="lineno">1 </span>test</code></pre>),
+          @result
+        )
+      end
+
+      should "render markdown with pygments with line numbers and custom start line" do
+        assert_match(
+          %(<pre><code class="language-text" data-lang="text">) +
+          %(<span></span><span class="lineno">42 </span>test</code></pre>),
           @result
         )
       end
@@ -328,6 +352,17 @@ EOS
           %(<table class="rouge-table"><tbody>) +
             %(<tr><td class="gutter gl">) +
             %(<pre class="lineno">1\n</pre></td>) +
+            %(<td class="code"><pre>test</pre></td></tr>) +
+            %(</tbody></table>),
+          @result
+        )
+      end
+
+      should "render markdown with rouge with line numbers and custom start line" do
+        assert_match(
+          %(<table class="rouge-table"><tbody>) +
+            %(<tr><td class="gutter gl">) +
+            %(<pre class="lineno">42\n</pre></td>) +
             %(<td class="code"><pre>test</pre></td></tr>) +
             %(</tbody></table>),
           @result

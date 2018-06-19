@@ -325,6 +325,8 @@ end
     <code>linenos</code> to the end of the opening highlight tag like this:
     <code>{% raw %}{% highlight ruby linenos %}{% endraw %}</code>.
   </p>
+  <p>If you want the line numbering to start at a different number than <code>1</code>, use the <code>start_line</code> option as follows: <code>{% raw %}{% highlight haskell linenos start_line=42 %}{% endraw %}</code>.
+  </p>
 </div>
 
 These basics should be enough to get you started writing your first posts. When
