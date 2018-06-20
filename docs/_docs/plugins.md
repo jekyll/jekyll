@@ -938,6 +938,7 @@ You can find a few useful plugins at the following locations:
 - [jekyll-pre-commit](https://github.com/mpchadwick/jekyll-pre-commit): A framework for running checks against your posts using a git pre-commit hook before you publish them.
 - [jekyll-pwa-plugin](https://github.com/lavas-project/jekyll-pwa): A plugin provides PWA support for Jekyll. It generates a service worker in Jekyll build process and makes precache and runtime cache available in the runtime with Google Workbox.
 - [jekyll-algolia](https://community.algolia.com/jekyll-algolia/): Add fast and relevant search to your Jekyll site through the Algolia API.
+- [jekyll-get](https://github.com/18F/jekyll-get): Download data from external JSON API sources to use in generating a site.
 
 <div class="note info">
   <h5>Submit your gem plugins</h5>
