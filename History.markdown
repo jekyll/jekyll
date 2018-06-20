@@ -25,6 +25,7 @@
   * Listed the jekyll-target-blank plugin in plugins list. (#7046)
   * Typo (#7058)
   * Add Hints for some Improved Travis Config in Doc (#7049)
+  * Added plugin json-get. (#7086)
 
 ### Minor Enhancements
 
