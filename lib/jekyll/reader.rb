@@ -76,9 +76,7 @@ module Jekyll
       dot_dirs.each do |file|
         dir_path = site.in_source_dir(dir, file)
         rel_path = File.join(dir, file)
-        unless @site.dest.chomp("/") == dir_path
-          @site.reader.read_directories(rel_path)
-        end
+        @site.reader.read_directories(rel_path) unless @site.dest.chomp("/") == dir_path
       end
     end
 

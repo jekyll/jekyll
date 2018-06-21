@@ -101,8 +101,8 @@ module Jekyll
           converter.convert output
         rescue StandardError => e
           Jekyll.logger.error "Conversion error:",
-            "#{converter.class} encountered an error while "\
-            "converting '#{document.relative_path}':"
+                              "#{converter.class} encountered an error while "\
+                              "converting '#{document.relative_path}':"
           Jekyll.logger.error("", e.to_s)
           raise e
         end
@@ -121,13 +121,13 @@ module Jekyll
       template = site.liquid_renderer.file(path).parse(content)
       template.warnings.each do |e|
         Jekyll.logger.warn "Liquid Warning:",
-          LiquidRenderer.format_error(e, path || document.relative_path)
+                           LiquidRenderer.format_error(e, path || document.relative_path)
       end
       template.render!(payload, info)
     # rubocop: disable RescueException
     rescue Exception => e
       Jekyll.logger.error "Liquid Exception:",
-        LiquidRenderer.format_error(e, path || document.relative_path)
+                          LiquidRenderer.format_error(e, path || document.relative_path)
       raise e
     end
     # rubocop: enable RescueException
@@ -166,11 +166,12 @@ module Jekyll
       output
     end
 
+    private
+
     # Checks if the layout specified in the document actually exists
     #
     # layout - the layout to check
     # Returns nothing
-    private
     def validate_layout(layout)
       if invalid_layout?(layout)
         Jekyll.logger.warn(
@@ -187,7 +188,6 @@ module Jekyll
     # Render layout content into document.output
     #
     # Returns String rendered content
-    private
     def render_layout(output, layout, info)
       payload["content"] = output
       payload["layout"]  = Utils.deep_merge_hashes(layout.data, payload["layout"] || {})
@@ -200,7 +200,6 @@ module Jekyll
       )
     end
 
-    private
     def add_regenerator_dependencies(layout)
       return unless document.write?
       site.regenerator.add_dependency(
@@ -212,18 +211,14 @@ module Jekyll
     # Set page content to payload and assign pager if document has one.
     #
     # Returns nothing
-    private
     def assign_pages!
       payload["page"] = document.to_liquid
-      payload["paginator"] = if document.respond_to?(:pager)
-                               document.pager.to_liquid
-                             end
+      payload["paginator"] = (document.pager.to_liquid if document.respond_to?(:pager))
     end
 
     # Set related posts to payload if document is a post.
     #
     # Returns nothing
-    private
     def assign_current_document!
       payload["site"].current_document = document
     end
@@ -231,21 +226,16 @@ module Jekyll
     # Set highlighter prefix and suffix
     #
     # Returns nothing
-    private
     def assign_highlighter_options!
       payload["highlighter_prefix"] = converters.first.highlighter_prefix
       payload["highlighter_suffix"] = converters.first.highlighter_suffix
     end
 
-    private
     def assign_layout_data!
       layout = layouts[document.data["layout"]]
-      if layout
-        payload["layout"] = Utils.deep_merge_hashes(layout.data, payload["layout"] || {})
-      end
+      payload["layout"] = Utils.deep_merge_hashes(layout.data, payload["layout"] || {}) if layout
     end
 
-    private
     def permalink_ext
       document_permalink = document.permalink
       if document_permalink && !document_permalink.end_with?("/")
@@ -254,7 +244,6 @@ module Jekyll
       end
     end
 
-    private
     def converter_output_ext
       if output_exts.size == 1
         output_exts.last
@@ -263,14 +252,12 @@ module Jekyll
       end
     end
 
-    private
     def output_exts
       @output_exts ||= converters.map do |c|
         c.output_ext(document.extname)
       end.compact
     end
 
-    private
     def liquid_options
       @liquid_options ||= site.config["liquid"]
     end

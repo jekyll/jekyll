@@ -494,7 +494,7 @@ EOS
     setup do
       @content = <<CONTENT
 ---
-title: Kramdown vs. RDiscount
+title: Kramdown post with pre
 ---
 
 _FIGHT!_
@@ -505,25 +505,6 @@ puts "3..2..1.."
 
 *FINISH HIM*
 CONTENT
-    end
-
-    context "using RDiscount" do
-      setup do
-        if jruby?
-          then skip(
-            "JRuby does not perform well with CExt, test disabled."
-          )
-        end
-
-        create_post(@content, {
-          "markdown" => "rdiscount",
-        })
-      end
-
-      should "parse correctly" do
-        assert_match %r{<em>FIGHT!</em>}, @result
-        assert_match %r!<em>FINISH HIM</em>!, @result
-      end
     end
 
     context "using Kramdown" do

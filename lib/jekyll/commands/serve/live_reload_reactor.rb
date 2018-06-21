@@ -58,7 +58,7 @@ module Jekyll
               EM.add_shutdown_hook { @stopped_event.set }
 
               Jekyll.logger.info "LiveReload address:",
-                "http://#{opts["host"]}:#{opts["livereload_port"]}"
+                                 "http://#{opts["host"]}:#{opts["livereload_port"]}"
             end
           end
           @thread.abort_on_exception = true
@@ -68,11 +68,11 @@ module Jekyll
         # http://feedback.livereload.com/knowledgebase/articles/86174-livereload-protocol
         def reload(pages)
           pages.each do |p|
-            json_message = JSON.dump({
+            json_message = JSON.dump(
               :command => "reload",
               :path    => p.url,
-              :liveCSS => true,
-            })
+              :liveCSS => true
+            )
 
             Jekyll.logger.debug "LiveReload:", "Reloading #{p.url}"
             Jekyll.logger.debug "", json_message
@@ -81,6 +81,7 @@ module Jekyll
         end
 
         private
+
         def connect(websocket, handshake)
           @connections_count += 1
           if @connections_count == 1
@@ -99,22 +100,17 @@ module Jekyll
           @websockets << websocket
         end
 
-        private
         def disconnect(websocket)
           @websockets.delete(websocket)
         end
 
-        private
         def print_message(json_message)
           msg = JSON.parse(json_message)
           # Not sure what the 'url' command even does in LiveReload.  The spec is silent
           # on its purpose.
-          if msg["command"] == "url"
-            Jekyll.logger.info "LiveReload:", "Browser URL: #{msg["url"]}"
-          end
+          Jekyll.logger.info "LiveReload:", "Browser URL: #{msg["url"]}" if msg["command"] == "url"
         end
 
-        private
         def log_error(error)
           Jekyll.logger.error "LiveReload experienced an error. " \
             "Run with --trace for more information."

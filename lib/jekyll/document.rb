@@ -204,11 +204,11 @@ module Jekyll
     #
     # Returns the computed URL for the document.
     def url
-      @url ||= URL.new({
+      @url ||= URL.new(
         :template     => url_template,
         :placeholders => url_placeholders,
-        :permalink    => permalink,
-      }).to_s
+        :permalink    => permalink
+      ).to_s
     end
 
     def [](key)
@@ -315,7 +315,7 @@ module Jekyll
     # method returns true, and if the site's Publisher will publish the document.
     # False otherwise.
     def write?
-      collection && collection.write? && site.publisher.publish?(self)
+      collection&.write? && site.publisher.publish?(self)
     end
 
     # The Document excerpt_separator, from the YAML Front-Matter or site
@@ -335,16 +335,12 @@ module Jekyll
 
     def next_doc
       pos = collection.docs.index { |post| post.equal?(self) }
-      if pos && pos < collection.docs.length - 1
-        collection.docs[pos + 1]
-      end
+      collection.docs[pos + 1] if pos && pos < collection.docs.length - 1
     end
 
     def previous_doc
       pos = collection.docs.index { |post| post.equal?(self) }
-      if pos && pos > 0
-        collection.docs[pos - 1]
-      end
+      collection.docs[pos - 1] if pos && pos.positive?
     end
 
     def trigger_hooks(hook_name, *args)
@@ -400,32 +396,30 @@ module Jekyll
     end
 
     def populate_categories
-      merge_data!({
+      merge_data!(
         "categories" => (
           Array(data["categories"]) + Utils.pluralized_array_from_hash(
             data, "category", "categories"
           )
-        ).map(&:to_s).flatten.uniq,
-      })
+        ).map(&:to_s).flatten.uniq
+      )
     end
 
     def populate_tags
-      merge_data!({
-        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten,
-      })
+      merge_data!(
+        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
+      )
     end
 
     private
+
     def merge_categories!(other)
       if other.key?("categories") && !other["categories"].nil?
-        if other["categories"].is_a?(String)
-          other["categories"] = other["categories"].split
-        end
+        other["categories"] = other["categories"].split if other["categories"].is_a?(String)
         other["categories"] = (data["categories"] || []) | other["categories"]
       end
     end
 
-    private
     def merge_date!(source)
       if data.key?("date")
         data["date"] = Utils.parse_date(
@@ -435,7 +429,6 @@ module Jekyll
       end
     end
 
-    private
     def merge_defaults
       defaults = @site.frontmatter_defaults.all(
         relative_path,
@@ -444,7 +437,6 @@ module Jekyll
       merge_data!(defaults, :source => "front matter defaults") unless defaults.empty?
     end
 
-    private
     def read_content(opts)
       self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
       if content =~ YAML_FRONT_MATTER_REGEXP
@@ -454,7 +446,6 @@ module Jekyll
       end
     end
 
-    private
     def read_post_data
       populate_title
       populate_categories
@@ -462,7 +453,6 @@ module Jekyll
       generate_excerpt
     end
 
-    private
     def handle_read_error(error)
       if error.is_a? Psych::SyntaxError
         Jekyll.logger.error "Error:", "YAML Exception reading #{path}: #{error.message}"
@@ -475,7 +465,6 @@ module Jekyll
       end
     end
 
-    private
     def populate_title
       if relative_path =~ DATE_FILENAME_MATCHER
         date, slug, ext = Regexp.last_match.captures
@@ -491,18 +480,14 @@ module Jekyll
       data["ext"]   ||= ext
     end
 
-    private
     def modify_date(date)
       if !data["date"] || data["date"].to_i == site.time.to_i
         merge_data!({ "date" => date }, :source => "filename")
       end
     end
 
-    private
     def generate_excerpt
-      if generate_excerpt?
-        data["excerpt"] ||= Jekyll::Excerpt.new(self)
-      end
+      data["excerpt"] ||= Jekyll::Excerpt.new(self) if generate_excerpt?
     end
   end
 end

@@ -225,9 +225,7 @@ module Jekyll
     #
     # Returns the filtered array of objects
     def sort(input, property = nil, nils = "first")
-      if input.nil?
-        raise ArgumentError, "Cannot sort a null object."
-      end
+      raise ArgumentError, "Cannot sort a null object." if input.nil?
       if property.nil?
         input.sort
       else
@@ -316,7 +314,6 @@ module Jekyll
         .map!(&:last)
     end
 
-    private
     def item_property(item, property)
       if item.respond_to?(:to_liquid)
         property.to_s.split(".").reduce(item.to_liquid) do |subvalue, attribute|
@@ -329,7 +326,6 @@ module Jekyll
       end
     end
 
-    private
     def as_liquid(item)
       case item
       when Hash
@@ -355,7 +351,6 @@ module Jekyll
     # Parse a string to a Liquid Condition
     # The following code was *adapted* from Liquid::If
     # ref: https://git.io/vp6K6
-    private
     def parse_condition(exp)
       parser = Liquid::Parser.new(exp)
       condition = parse_binary_comparison(parser)
@@ -363,7 +358,6 @@ module Jekyll
       condition
     end
 
-    private
     def parse_binary_comparison(parser)
       condition = parse_comparison(parser)
       binary_operator = parser.id?("and") || parser.id?("or")
@@ -371,7 +365,6 @@ module Jekyll
       condition
     end
 
-    private
     def parse_comparison(parser)
       parsed_left_expr = Liquid::Expression.parse(parser.expression)
       operator = parser.consume?(:comparison)

@@ -11,7 +11,7 @@ module Jekyll
             c.alias(:hyde)
 
             c.option "config", "--config CONFIG_FILE[,CONFIG_FILE2,...]", Array,
-                            "Custom configuration file"
+                     "Custom configuration file"
 
             c.action do |_, options|
               Jekyll::Commands::Doctor.process(options)
@@ -48,19 +48,18 @@ module Jekyll
           posts_at_root = site.in_source_dir("_posts")
           return true unless File.directory?(posts_at_root)
           Jekyll.logger.warn "Warning:",
-            "Detected '_posts' directory outside custom `collections_dir`!"
+                             "Detected '_posts' directory outside custom `collections_dir`!"
           Jekyll.logger.warn "",
-            "Please move '#{posts_at_root}' into the custom directory at " \
+                             "Please move '#{posts_at_root}' into the custom directory at " \
             "'#{site.in_source_dir(site.config["collections_dir"])}'"
           false
         end
 
         def deprecated_relative_permalinks(site)
           if site.config["relative_permalinks"]
-            Jekyll::Deprecator.deprecation_message "Your site still uses relative" \
-                                " permalinks, which was removed in" \
-                                " Jekyll v3.0.0."
-            return true
+            Jekyll::Deprecator.deprecation_message "Your site still uses relative permalinks," \
+                                                   " which was removed in Jekyll v3.0.0."
+            true
           end
         end
 
@@ -117,6 +116,7 @@ module Jekyll
         end
 
         private
+
         def collect_urls(urls, things, destination)
           things.each do |thing|
             dest = thing.destination(destination)
