@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "helper"
+require "rouge"
 
 class TestKramdown < JekyllUnitTest
   context "kramdown" do

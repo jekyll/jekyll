@@ -173,7 +173,7 @@ module Jekyll
       end
 
       def merge(other, &block)
-        self.dup.tap do |me|
+        dup.tap do |me|
           if block.nil?
             me.merge!(other)
           else

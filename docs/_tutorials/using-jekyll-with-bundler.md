@@ -90,7 +90,7 @@ If you're storing your new site in version control, you'll want to ignore the
 `./vendor/` and `./.bundle/` folders since they contain user- or
 platform-specific information. New users will be able to install the correct
 dependencies based on `Gemfile` and `Gemfile.lock`, which should both be checked
-in. You can use this `.gitigonre` to get started, if you want.
+in. You can use this `.gitignore` to get started, if you want.
 
 **.gitignore**
 
