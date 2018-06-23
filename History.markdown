@@ -58,6 +58,7 @@
   * Allow i18n v0.9.5 and higher (#7044)
   * Update Rubocop&#39;s config (#7050)
   * Remember to release docs gem (#7066)
+  * Use assert_include (#7093)
 
 ## 3.8.3 / 2018-06-05
 
