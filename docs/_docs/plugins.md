@@ -788,6 +788,7 @@ You can find a few useful plugins at the following locations:
 - [Premonition](https://github.com/amedia/premonition): Adds block-styled side content to your page. For example summary, notes, hints or warning boxes.
 - [jekyll-fontello](https://github.com/ericcornelissen/jekyll-fontello): A Jekyll plugin that automatically downloads your webfont from Fontello.
 - [Target Blank](https://github.com/keithmifsud/jekyll-target-blank): A Jekyll plugin to automatically open external links in a new browser tab or window.
+- [jekyll-info](https://github.com/swestmoreland/jekyll-info): A plugin to provide information about your Jekyll site’s configuration.
 
 #### Converters
 
