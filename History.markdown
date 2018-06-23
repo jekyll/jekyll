@@ -27,6 +27,7 @@
   * Add Hints for some Improved Travis Config in Doc (#7049)
   * Added plugin json-get. (#7086)
   * Update travis-ci.md to point out &#34;this is an example Gemfile&#34; (#7089)
+  * Adding `jekyll-info` plugin (#7091)
 
 ### Minor Enhancements
 
