@@ -98,6 +98,8 @@ Security/YAMLLoad:
   Exclude:
     - !ruby/regexp /features\/.*.rb/
     - !ruby/regexp /test\/.*.rb$/
+Style/AccessModifierDeclarations:
+  Enabled: false
 Style/Alias:
   EnforcedStyle: prefer_alias_method
 Style/AndOr:
