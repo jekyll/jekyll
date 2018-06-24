@@ -86,10 +86,23 @@ sudo apt-get update -y && sudo apt-get upgrade -y
 ```
 Now we can install Ruby. To do this we will use a repository from [BrightBox](https://www.brightbox.com/docs/ruby/ubuntu/), which hosts optimized versions of Ruby for Ubuntu.
 
+If you’re using Ubuntu 14.04 (Trusty) or newer then you can add the package repository like this:
+
+```sh
+sudo apt-get install software-properties-common
+```
+
+Or if you’re on Ubuntu 12.04 (Precise) or older
+
+```sh
+sudo apt-get install python-software-properties
+```
+then type the below commands in the terminal
+
 ```sh
 sudo apt-add-repository ppa:brightbox/ruby-ng
 sudo apt-get update
-sudo apt-get install ruby2.4 ruby2.4-dev build-essential dh-autoreconf
+sudo apt-get install ruby2.5 ruby2.5-dev build-essential dh-autoreconf
 ```
 
 Next let's update our Ruby gems:
@@ -116,12 +129,36 @@ Configure the bundler/gem path so bundle doesn't prompt for sudo
 bundle config path vendor/bundle
 ```
 
-**And that's it!**
-
 To start a new project named `my_blog`, just run:
 
 ```sh
 jekyll new my_blog
+```
+
+**And that's it!**
+Now start the Jekyll server:
+
+```sh
+jekyll serve
+```
+
+Before running the above command make sure you have installed jekyll-sitemap plugin, if installed skip the below steps:
+
+```sh
+sudo gem install jekyll-sitemap
+```
+
+Now install the pygments syntax highlighter:
+
+```sh
+sudo gem install pygments.rb
+```
+
+We also need Bundler to help us handle plugins and themes. So let's install the bundler:
+
+```sh
+sudo gem install bundler
+bundle installer
 ```
 
 You can make sure time management is working properly by inspecting your `_posts` folder. You should see a markdown file with the current date in the filename.
