@@ -154,6 +154,8 @@ Now install the pygments syntax highlighter:
 sudo gem install pygments.rb
 ```
 
+Now everything should work fine and smooth. That's all, jekyll installation on Windows via Bash is performed sucessfully.
+
 You can make sure time management is working properly by inspecting your `_posts` folder. You should see a markdown file with the current date in the filename.
 
 <div class="note info">
