@@ -154,13 +154,6 @@ Now install the pygments syntax highlighter:
 sudo gem install pygments.rb
 ```
 
-We also need Bundler to help us handle plugins and themes. So let's install the bundler:
-
-```sh
-sudo gem install bundler
-bundle installer
-```
-
 You can make sure time management is working properly by inspecting your `_posts` folder. You should see a markdown file with the current date in the filename.
 
 <div class="note info">
