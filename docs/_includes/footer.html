@@ -11,5 +11,15 @@
         </a>
       </p>
     </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Sponsored by
+        {% for sponsor in site.data.sponsors %}
+          <a href="{{ sponsor.url }}">
+            <img src="{{ sponsor.image }}" width="100" height="30" alt="{{ sponsor.name }}">
+          </a>
+        {% endfor %}
+      </p>
+    </div>
   </div>
 </footer>
