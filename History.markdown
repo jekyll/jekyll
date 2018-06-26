@@ -59,6 +59,7 @@
   * Update Rubocop&#39;s config (#7050)
   * Remember to release docs gem (#7066)
   * Use assert_include (#7093)
+  * Update rubocop version to 0.57.x (#7078)
 
 ## 3.8.3 / 2018-06-05
 
