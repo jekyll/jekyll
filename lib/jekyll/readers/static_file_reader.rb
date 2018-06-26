@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class StaticFileReader
     attr_reader :site, :dir, :unfiltered_content

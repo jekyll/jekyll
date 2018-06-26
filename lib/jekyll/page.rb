@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class Page < Document
     attr_writer :dir
@@ -6,8 +8,6 @@ module Jekyll
     alias_method :ext, :extname
     alias_method :name, :basename
     alias_method :process, :read
-
-    FORWARD_SLASH = "/".freeze
 
     # Attributes for Liquid templates
     ATTRIBUTES_FOR_LIQUID = %w(
@@ -18,6 +18,7 @@ module Jekyll
       url
     ).freeze
 
+    # rubocop:disable Metrics/AbcSize
     # Initialize a new Page.
     #
     # site - The Site object.
@@ -29,9 +30,13 @@ module Jekyll
         super
       elsif args.size == 4 # Legacy Page support
         Jekyll::Deprecator.deprecation_message "Pages are now Documents."
-        Jekyll::Deprecator.deprecation_message "Called by #{caller.first}."
+        Jekyll::Deprecator.deprecation_message "Called by #{caller(1..1).first}."
         @site, @base, @dir, @name = args
-        @path = site.in_source_dir(@base, @dir, @name)
+        @path = if site.in_theme_dir(@base) == @base # we're in a theme
+                  site.in_theme_dir(@base, @dir, @name)
+                else
+                  site.in_source_dir(@base, @dir, @name)
+                end
         super(@path, :collection => site.pages, :site => @site)
         read
         backwards_compatibilize
@@ -40,17 +45,17 @@ module Jekyll
       end
     end
 
+    # rubocop:enable Metrics/AbcSize
+
     # Backwards compatible shim to return the generated directory into which
     # the page will be placed upon generation. This is derived from the
     # permalink or, if permalink is absent, will be '/'
-    #
-    # Returns the String destination directory.
     def dir
-      if url.end_with?(FORWARD_SLASH)
+      if url.end_with?("/")
         url
       else
         url_dir = File.dirname(url)
-        url_dir.end_with?(FORWARD_SLASH) ? url_dir : "#{url_dir}/"
+        url_dir.end_with?("/") ? url_dir : "#{url_dir}/"
       end
     end
 
@@ -73,22 +78,26 @@ module Jekyll
     # layouts      - The Hash of {"name" => "layout"}.
     # site_payload - The site payload Hash.
     #
-    # Returns nothing.
+    # Returns String rendered page.
     def render(_, site_payload = nil)
       Jekyll::Renderer.new(site, self, site_payload).run
+    end
+
+    def relative_path
+      @relative_path ||= Pathname.new(absolute_path)
+        .relative_path_from(Pathname.new(site.source)).to_s
     end
 
     # To maintain backwards compataiblity, path is relative for Pages
     # but absolute for documents. Use #absolute_path to get the absolute path
     def path
       Jekyll::Deprecator.deprecation_message "Page#path is now Page#relative_path."
-      Jekyll::Deprecator.deprecation_message "Called by #{caller.first}."
+      Jekyll::Deprecator.deprecation_message "Called by #{caller(1..1).first}."
       relative_path
     end
 
     private
 
-    # Pages expect addition fields to be exposed via :[]
     def backwards_compatibilize
       ATTRIBUTES_FOR_LIQUID.each do |key|
         data[key] = public_send(key.to_sym)

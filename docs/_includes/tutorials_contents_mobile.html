@@ -1,0 +1,10 @@
+<div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select onchange="if (this.value) window.location.href=this.value">
+    <option value="">Navigate the tutorials…</option>
+    {% for section in site.data.tutorials %}
+    <optgroup label="{{ section.title }}">
+      {% include tutorials_option.html items=section.tutorials %}
+    </optgroup>
+    {% endfor %}
+  </select>
+</div>

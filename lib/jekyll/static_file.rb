@@ -1,6 +1,12 @@
+# frozen_string_literal: true
+
 module Jekyll
   class StaticFile
-    attr_reader :relative_path, :extname
+    extend Forwardable
+
+    attr_reader :relative_path, :extname, :name, :data
+
+    def_delegator :to_liquid, :to_json, :to_json
 
     class << self
       # The cache of last modification times [path] -> mtime.
@@ -28,12 +34,18 @@ module Jekyll
       @collection = collection
       @relative_path = File.join(*[@dir, @name].compact)
       @extname = File.extname(@name)
+      @data = @site.frontmatter_defaults.all(relative_path, type)
     end
     # rubocop: enable ParameterLists
 
     # Returns source file path.
     def path
-      File.join(*[@base, @dir, @name].compact)
+      # Static file is from a collection inside custom collections directory
+      if !@collection.nil? && !@site.config["collections_dir"].empty?
+        File.join(*[@base, @site.config["collections_dir"], @dir, @name].compact)
+      else
+        File.join(*[@base, @dir, @name].compact)
+      end
     end
 
     # Obtain destination path.
@@ -96,11 +108,11 @@ module Jekyll
     end
 
     def to_liquid
-      {
-        "extname"       => extname,
-        "modified_time" => modified_time,
-        "path"          => File.join("", relative_path)
-      }
+      @to_liquid ||= Drops::StaticFileDrop.new(self)
+    end
+
+    def basename
+      File.basename(name, extname)
     end
 
     def placeholders
@@ -110,7 +122,7 @@ module Jekyll
           @collection.relative_directory.size..relative_path.size],
         :output_ext => "",
         :name       => "",
-        :title      => ""
+        :title      => "",
       }
     end
 
@@ -121,11 +133,11 @@ module Jekyll
       @url ||= if @collection.nil?
                  relative_path
                else
-                 ::Jekyll::URL.new({
+                 ::Jekyll::URL.new(
                    :template     => @collection.url_template,
                    :placeholders => placeholders
-                 })
-               end.to_s.gsub(%r!/$!, "")
+                 )
+               end.to_s.chomp("/")
     end
 
     # Returns the type of the collection if present, nil otherwise.
@@ -140,13 +152,17 @@ module Jekyll
     end
 
     private
+
     def copy_file(dest_path)
       if @site.safe || Jekyll.env == "production"
         FileUtils.cp(path, dest_path)
       else
         FileUtils.copy_entry(path, dest_path)
       end
-      File.utime(self.class.mtimes[path], self.class.mtimes[path], dest_path)
+
+      unless File.symlink?(dest_path)
+        File.utime(self.class.mtimes[path], self.class.mtimes[path], dest_path)
+      end
     end
   end
 end

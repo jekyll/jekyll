@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Jekyll
   class EntryFilter
     attr_reader :site
     SPECIAL_LEADING_CHARACTERS = [
-      ".", "_", "#", "~"
+      ".", "_", "#", "~",
     ].freeze
 
     def initialize(site, base_directory = nil)
@@ -29,15 +31,13 @@ module Jekyll
 
     def filter(entries)
       entries.reject do |e|
-        unless included?(e)
-          special?(e) || backup?(e) || excluded?(e) || symlink?(e)
-        end
+        special?(e) || backup?(e) || excluded?(e) || symlink?(e) unless included?(e)
       end
     end
 
     def included?(entry)
-      glob_include?(site.include,
-        entry)
+      glob_include?(site.include, entry) ||
+        glob_include?(site.include, File.basename(entry))
     end
 
     def special?(entry)
@@ -50,14 +50,14 @@ module Jekyll
     end
 
     def excluded?(entry)
-      excluded = glob_include?(site.exclude, relative_to_source(entry))
-      if excluded
-        Jekyll.logger.debug(
-          "EntryFilter:",
-          "excluded #{relative_to_source(entry)}"
-        )
+      glob_include?(site.exclude, relative_to_source(entry)).tap do |excluded|
+        if excluded
+          Jekyll.logger.debug(
+            "EntryFilter:",
+            "excluded #{relative_to_source(entry)}"
+          )
+        end
       end
-      excluded
     end
 
     # --
@@ -84,8 +84,8 @@ module Jekyll
     # Check if an entry matches a specific pattern and return true,false.
     # Returns true if path matches against any glob pattern.
     # --
-    def glob_include?(enum, e)
-      entry = Pathutil.new(site.in_source_dir).join(e)
+    def glob_include?(enum, entry)
+      entry_path = Pathutil.new(site.in_source_dir).join(entry)
       enum.any? do |exp|
         # Users who send a Regexp knows what they want to
         # exclude, so let them send a Regexp to exclude files,
@@ -93,7 +93,7 @@ module Jekyll
         # on them at this point.
 
         if exp.is_a?(Regexp)
-          entry =~ exp
+          entry_path =~ exp
 
         else
           item = Pathutil.new(site.in_source_dir).join(exp)
@@ -103,14 +103,14 @@ module Jekyll
           # see if the entry falls within that path and
           # exclude it if that's the case.
 
-          if e.end_with?("/")
-            entry.in_path?(
+          if entry.end_with?("/")
+            entry_path.in_path?(
               item
             )
 
           else
-            File.fnmatch?(item, entry) ||
-              entry.to_path.start_with?(
+            File.fnmatch?(item, entry_path) ||
+              entry_path.to_path.start_with?(
                 item
               )
           end

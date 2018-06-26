@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require "helper"
 require "colorator"
 
 class TestConfiguration < JekyllUnitTest
   test_config = {
     "source"      => new(nil).source_dir,
-    "destination" => dest_dir
+    "destination" => dest_dir,
   }
 
   context ".from" do
@@ -18,13 +20,8 @@ class TestConfiguration < JekyllUnitTest
       assert_equal result["source"], "blah"
     end
 
-    should "fix common mistakes" do
-      result = Configuration.from({ "paginate" => 0 })
-      assert_nil(
-        result["paginate"],
-        "Expected 'paginate' to be corrected to 'nil', " \
-        "but was #{result["paginate"].inspect}"
-      )
+    should "return a valid Configuration instance" do
+      assert_instance_of Configuration, Configuration.from({}).fix_common_issues
     end
 
     should "add default collections" do
@@ -34,10 +31,10 @@ class TestConfiguration < JekyllUnitTest
         {
           "posts" => {
             "output"    => true,
-            "permalink" => "/:categories/:year/:month/:day/:title:output_ext"
+            "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
           },
-          "pages" => {
-            "output" => true
+          "pages": {
+            "output": true,
           }
         }
       )
@@ -48,6 +45,22 @@ class TestConfiguration < JekyllUnitTest
         Configuration.from("watch" => true)["watch"],
         "Expected the 'watch' key to not be removed."
       )
+    end
+  end
+
+  context "the defaults" do
+    should "exclude node_modules" do
+      assert_includes Configuration.from({})["exclude"], "node_modules"
+    end
+
+    should "exclude ruby vendor directories" do
+      exclude = Configuration.from({})["exclude"]
+      assert_includes exclude, "Gemfile"
+      assert_includes exclude, "Gemfile.lock"
+      assert_includes exclude, "vendor/bundle/"
+      assert_includes exclude, "vendor/cache/"
+      assert_includes exclude, "vendor/gems/"
+      assert_includes exclude, "vendor/ruby/"
     end
   end
 
@@ -63,10 +76,10 @@ class TestConfiguration < JekyllUnitTest
       assert_equal(
         result["collections"],
         {
-          "posts"   => {
+          "posts" => {
             "output" => true
           },
-          "pages"   => {
+          "pages" => {
             "output" => true
           },
           "methods" => {}
@@ -82,20 +95,17 @@ class TestConfiguration < JekyllUnitTest
         {
           "posts" => {
             "output"    => true,
-            "permalink" => "/:categories/:year/:month/:day/:title/"
+            "permalink" => "/:categories/:year/:month/:day/:title/",
           },
-          "pages" => {
-            "output" => true
+          "pages": {
+            "output": true
           }
         }
       )
 
       result = Configuration[{ "permalink" => nil, "collections" => {} }]
         .add_default_collections
-      assert_equal result["collections"], {
-        "posts" => { "output" => true },
-        "pages" => { "output" => true }
-      }
+      assert_equal result["collections"], { "posts" => { "output" => true } }
     end
 
     should "forces posts to output" do
@@ -112,14 +122,14 @@ class TestConfiguration < JekyllUnitTest
         :permalink => "date",
         "baseurl"  => "/",
         :include   => [".htaccess"],
-        :source    => "./"
+        :source    => "./",
       }]
       @string_keys = Configuration[{
         "markdown"  => "kramdown",
         "permalink" => "date",
         "baseurl"   => "/",
         "include"   => [".htaccess"],
-        "source"    => "./"
+        "source"    => "./",
       }]
     end
     should "stringify symbol keys" do
@@ -135,7 +145,7 @@ class TestConfiguration < JekyllUnitTest
       @no_override     = {}
       @one_config_file = { "config" => "config.yml" }
       @multiple_files  = {
-        "config" => %w(config/site.yml config/deploy.toml configuration.yml)
+        "config" => %w(config/site.yml config/deploy.toml configuration.yml),
       }
     end
 
@@ -206,9 +216,9 @@ class TestConfiguration < JekyllUnitTest
         "exclude"     => "READ-ME.md, Gemfile,CONTRIBUTING.hello.markdown",
         "include"     => "STOP_THE_PRESSES.txt,.heloses, .git",
         "pygments"    => true,
-        "plugins"     => true,
         "layouts"     => true,
-        "data_source" => true
+        "data_source" => true,
+        "gems"        => [],
       }]
     end
     should "unset 'auto' and 'watch'" do
@@ -243,9 +253,6 @@ class TestConfiguration < JekyllUnitTest
       assert_equal @config.backwards_compatibilize["highlighter"], "pygments"
     end
     should "adjust directory names" do
-      assert @config.key?("plugins")
-      assert !@config.backwards_compatibilize.key?("plugins")
-      assert @config.backwards_compatibilize["plugins_dir"]
       assert @config.key?("layouts")
       assert !@config.backwards_compatibilize.key?("layouts")
       assert @config.backwards_compatibilize["layouts_dir"]
@@ -253,19 +260,16 @@ class TestConfiguration < JekyllUnitTest
       assert !@config.backwards_compatibilize.key?("data_source")
       assert @config.backwards_compatibilize["data_dir"]
     end
-  end
-  context "#fix_common_issues" do
-    setup do
-      @config = proc do |val|
-        Configuration[{
-          "paginate" => val
-        }]
+    should "raise an error if `plugins` key is a string" do
+      config = Configuration[{ "plugins" => "_plugin" }]
+      assert_raises Jekyll::Errors::InvalidConfigurationError do
+        config.backwards_compatibilize
       end
     end
-    should "sets an invalid 'paginate' value to nil" do
-      assert_nil @config.call(0).fix_common_issues["paginate"]
-      assert_nil @config.call(-1).fix_common_issues["paginate"]
-      assert_nil @config.call(true).fix_common_issues["paginate"]
+    should "set the `gems` config to `plugins`" do
+      assert @config.key?("gems")
+      assert !@config.backwards_compatibilize["gems"]
+      assert @config.backwards_compatibilize["plugins"]
     end
   end
   context "loading configuration" do
@@ -330,7 +334,7 @@ class TestConfiguration < JekyllUnitTest
         :default => source_dir("_config.yml"),
         :other   => source_dir("_config.live.yml"),
         :toml    => source_dir("_config.dev.toml"),
-        :empty   => ""
+        :empty   => "",
       }
     end
 
@@ -347,7 +351,10 @@ class TestConfiguration < JekyllUnitTest
         .and_return({ "baseurl" => "http://example.com" })
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
       assert_equal \
-        site_configuration({ "baseurl" => "http://example.com" }),
+        site_configuration({
+          "baseurl" => "http://example.com",
+          "config"  => @paths[:other],
+        }),
         Jekyll.configuration(test_config.merge({ "config" => @paths[:other] }))
     end
 
@@ -359,7 +366,10 @@ class TestConfiguration < JekyllUnitTest
         .and_return({ "baseurl" => "http://example.com" })
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
       assert_equal \
-        site_configuration({ "baseurl" => "http://example.com" }),
+        site_configuration({
+          "baseurl" => "http://example.com",
+          "config"  => @paths[:other],
+        }),
         Jekyll.configuration(test_config.merge({ :config => @paths[:other] }))
     end
 
@@ -367,30 +377,35 @@ class TestConfiguration < JekyllUnitTest
       allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return({})
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
       assert_equal \
-        site_configuration,
+        site_configuration({ "config" => [@paths[:empty]] }),
         Jekyll.configuration(test_config.merge({ "config" => [@paths[:empty]] }))
     end
 
     should "successfully load a TOML file" do
       Jekyll.logger.log_level = :warn
       assert_equal \
-        site_configuration({ "baseurl" => "/you-beautiful-blog-you",
-                             "title"   => "My magnificent site, wut" }),
+        site_configuration({
+          "baseurl" => "/you-beautiful-blog-you",
+          "title"   => "My magnificent site, wut",
+          "config"  => [@paths[:toml]],
+        }),
         Jekyll.configuration(test_config.merge({ "config" => [@paths[:toml]] }))
       Jekyll.logger.log_level = :info
     end
 
     should "load multiple config files" do
-      External.require_with_graceful_fail("toml")
+      External.require_with_graceful_fail("tomlrb")
 
       allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return({})
       allow(SafeYAML).to receive(:load_file).with(@paths[:other]).and_return({})
-      allow(TOML).to receive(:load_file).with(@paths[:toml]).and_return({})
+      allow(Tomlrb).to receive(:load_file).with(@paths[:toml]).and_return({})
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:toml]}")
       assert_equal(
-        site_configuration,
+        site_configuration({
+          "config" => [@paths[:default], @paths[:other], @paths[:toml]],
+        }),
         Jekyll.configuration(
           test_config.merge(
             { "config" => [@paths[:default], @paths[:other], @paths[:toml]] }
@@ -415,7 +430,10 @@ class TestConfiguration < JekyllUnitTest
         .to receive(:puts)
         .with("Configuration file: #{@paths[:other]}")
       assert_equal \
-        site_configuration({ "baseurl" => "http://example.com" }),
+        site_configuration({
+          "baseurl" => "http://example.com",
+          "config"  => [@paths[:default], @paths[:other]],
+        }),
         Jekyll.configuration(
           test_config.merge({ "config" => [@paths[:default], @paths[:other]] })
         )
@@ -435,15 +453,15 @@ class TestConfiguration < JekyllUnitTest
       end
       assert_equal conf.add_default_collections, conf.merge({
         "collections" => {
-          "docs"  => {},
           "posts" => {
             "output"    => true,
-            "permalink" => "/:categories/:year/:month/:day/:title:output_ext"
+            "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
           },
           "pages" => {
-            "output" => true
-          }
-        }
+            "output"    => true,
+          },
+          "docs"  => {},
+        },
       })
     end
 
@@ -455,12 +473,12 @@ class TestConfiguration < JekyllUnitTest
         "collections" => {
           "posts" => {
             "output"    => true,
-            "permalink" => "/:categories/:year/:month/:day/:title:output_ext"
+            "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
           },
           "pages" => {
-            "output" => true
-          }
-        }
+            "output"    => true
+          },
+        },
       })
     end
 
@@ -470,12 +488,12 @@ class TestConfiguration < JekyllUnitTest
         "collections" => {
           "posts" => {
             "output"    => true,
-            "permalink" => "/:categories/:year/:month/:day/:title:output_ext"
+            "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
           },
-          "pages" => {
-            "output" => true
-          }
-        }
+          "pages": {
+            "output": true
+          },
+        },
       })
     end
 
@@ -486,13 +504,46 @@ class TestConfiguration < JekyllUnitTest
       assert_equal conf.add_default_collections, conf.merge({
         "collections" => {
           "posts" => {
+            "permalink" => posts_permalink,
             "output"    => true,
-            "permalink" => posts_permalink
-          }, "pages" => {
-            "output" => true
+          },
+          "pages" => {
+            "output"    => true
           }
         }
       })
+    end
+  end
+
+  context "folded YAML string" do
+    setup do
+      @tester = Configuration.new
+    end
+
+    should "ignore newlines in that string entirely from a sample file" do
+      config = Jekyll.configuration(
+        @tester.read_config_file(
+          source_dir("_config_folded.yml")
+        )
+      )
+      assert_equal(
+        config["folded_string"],
+        "This string of text will ignore newlines till the next key.\n"
+      )
+      assert_equal(
+        config["clean_folded_string"],
+        "This string of text will ignore newlines till the next key."
+      )
+    end
+
+    should "ignore newlines in that string entirely from the template file" do
+      config = Jekyll.configuration(
+        @tester.read_config_file(
+          File.expand_path("../lib/site_template/_config.yml", File.dirname(__FILE__))
+        )
+      )
+      assert_includes config["description"], "an awesome description"
+      refute_includes config["description"], "\n"
     end
   end
 end

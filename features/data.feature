@@ -59,6 +59,20 @@ Feature: Data
     And I should see "Jack" in "_site/index.html"
     And I should see "Leon" in "_site/index.html"
 
+  Scenario: autoload *.tsv files in _data directory
+    Given I have a _data directory
+    And I have a "_data/members.tsv" file with content:
+      """
+      name	age
+      Jack	28
+      Leon	34
+      """
+    And I have an "index.html" page that contains "{% for member in site.data.members %}{{member.name}}{% endfor %}"
+    When I run jekyll build
+    Then the "_site/index.html" file should exist
+    And I should see "Jack" in "_site/index.html"
+    And I should see "Leon" in "_site/index.html"
+
   Scenario: autoload *.yml files in _data directory with space in file name
     Given I have a _data directory
     And I have a "_data/team members.yml" file with content:
