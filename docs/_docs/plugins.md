@@ -360,15 +360,21 @@ will output the time the page was rendered:
 
 ```ruby
 module Jekyll
-  class RenderTimeTag < Liquid::Tag
-
-    def initialize(tag_name, text, tokens)
-      super
-      @text = text
-    end
-
-    def render(context)
-      "#{@text} #{Time.now}"
+  module Tags
+    class RenderTimeTag < Liquid::Tag
+  
+      def initialize(tag_name, tag_text, tokens)
+        super
+        @tag_text = tag_text
+      end
+  
+      def render(context)
+        sentence = @tag_text
+        
+        sentence = sentence.capitalize
+        
+        "#{@sentence} #{Time.now}"
+      end
     end
   end
 end
@@ -418,7 +424,55 @@ pages:
 And we would get something like this on the page:
 
 ```html
-<p>page rendered at: Tue June 22 23:38:47 –0500 2010</p>
+<p>Page rendered at: Tue June 22 23:38:47 –0500 2010</p>
+```
+
+Liquid tags can be on their own (e.g. `{% tag %}`), take some text within the tag (e.g. `{% render_time Page rendered at %}`), or surround content (e.g. `{% tag %}content{% endtag %}`). Text within the opening tag is passed to the `initialize` method as the second parameter.
+
+### Block tags
+
+Block tags surround content, like this:
+
+{% raw %}
+```ruby
+{% pirate blackbeard %}
+Ahoy, me mateys.
+{% endpirate %}
+```
+{% endraw %}
+
+Tags like this are implemented in a similar way. Calling `super` within the `render` method will return the content that was surrounded.
+
+```ruby
+module Jekyll
+  module Tags
+    class PirateBlock < Liquid::Block
+  
+      def initialize(tag_name, tag_text, tokens)
+        super
+        @tag_text = tag_text
+      end
+  
+      def render(context)
+        content = super
+        pirate = @tag_text
+        
+        content = content.gsub('.', '!").upcase
+        pirate = pirate.upcase
+        
+        "#{pirate}: '#{content}'"
+      end
+    end
+  end
+end
+
+Liquid::Template.register_tag('pirate', Jekyll::Tags::PirateBlock)
+```
+
+This tag would output:
+
+```html
+BLACKBEARD: 'AHOY, ME MATEYS!'
 ```
 
 ### Liquid filters
@@ -430,9 +484,11 @@ of the filter. The return value will be the output of the filter.
 
 ```ruby
 module Jekyll
-  module AssetFilter
-    def asset_url(input)
-      "http://www.example.com/#{input}?#{Time.now.to_i}"
+  module Filters
+    module AssetFilter
+      def asset_url(input)
+        "http://www.example.com/#{input}?#{Time.now.to_i}"
+      end
     end
   end
 end
