@@ -61,6 +61,10 @@
   * Use assert_include (#7093)
   * Update rubocop version to 0.57.x (#7078)
 
+### -docs
+
+  * Example of CircleCI deployment through CircleCI v2 (#7024)
+
 ## 3.8.3 / 2018-06-05
 
 ### Bug Fixes
