@@ -102,6 +102,7 @@ module Jekyll
       ATTRIBUTES_FOR_LIQUID.each do |key|
         data[key] = public_send(key.to_sym)
       end
+      @url = nil
     end
   end
 end
