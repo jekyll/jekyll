@@ -27,16 +27,16 @@ class TestConfiguration < JekyllUnitTest
     should "add default collections" do
       result = Configuration.from({})
       assert_equal(
-        result["collections"],
         {
           "posts" => {
             "output"    => true,
             "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
           },
-          "pages": {
-            "output": true,
+          "pages" => {
+            "output"    => true,
           }
-        }
+        },
+        result["collections"],
       )
     end
 
@@ -97,15 +97,25 @@ class TestConfiguration < JekyllUnitTest
             "output"    => true,
             "permalink" => "/:categories/:year/:month/:day/:title/",
           },
-          "pages": {
-            "output": true
+          "pages" => {
+            "output" => true
           }
         }
       )
 
       result = Configuration[{ "permalink" => nil, "collections" => {} }]
         .add_default_collections
-      assert_equal result["collections"], { "posts" => { "output" => true } }
+      assert_equal(
+        result["collections"],
+        {
+          "posts" => {
+            "output" => true
+          },
+          "pages" => {
+            "output" => true
+          }
+        }
+      )
     end
 
     should "forces posts to output" do
@@ -490,8 +500,8 @@ class TestConfiguration < JekyllUnitTest
             "output"    => true,
             "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
           },
-          "pages": {
-            "output": true
+          "pages" => {
+            "output"    => true
           },
         },
       })
