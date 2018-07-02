@@ -37,6 +37,7 @@ module Jekyll
                 else
                   site.in_source_dir(@base, @dir, @name)
                 end
+        @relative_path = File.join(*[@dir, @name].map(&:to_s).reject(&:empty?)).sub(%r!\A\/!, "")
         super(@path, :collection => site.pages, :site => @site)
         read
         backwards_compatibilize
@@ -81,11 +82,6 @@ module Jekyll
     # Returns String rendered page.
     def render(_, site_payload = nil)
       Jekyll::Renderer.new(site, self, site_payload).run
-    end
-
-    def relative_path
-      @relative_path ||= Pathname.new(absolute_path)
-        .relative_path_from(Pathname.new(site.source)).to_s
     end
 
     # To maintain backwards compataiblity, path is relative for Pages
