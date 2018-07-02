@@ -41,6 +41,10 @@ class TestPageWithoutAFile < JekyllUnitTest
 
       should "have basic attributes defined in it" do
         regular_page = setup_page("properties.html", :klass => Page)
+        # assert a couple of attributes accessible in a regular Jekyll::Page instance
+        assert_equal "All the properties.\n", regular_page["content"]
+        assert_equal "properties.html", regular_page["name"]
+
         basic_attrs = %w(dir name path url)
         attrs = {
           "content"   => "All the properties.\n",
@@ -56,10 +60,6 @@ class TestPageWithoutAFile < JekyllUnitTest
           "url"       => "/properties.html",
         }
         attrs.each do |prop, value|
-          # assert a couple of attributes accessible in a regular Jekyll::Page instance
-          assert_equal "All the properties.\n", regular_page["content"]
-          assert_equal "properties.html", regular_page["name"]
-
           # assert that all attributes (of a Jekyll::PageWithoutAFile instance) other than
           # "dir", "name", "path", "url" are `nil`.
           # For example, @page[dir] should be "/" but @page[content] or @page[layout], should
