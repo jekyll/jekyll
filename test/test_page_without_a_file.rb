@@ -62,7 +62,7 @@ class TestPageWithoutAFile < JekyllUnitTest
 
           # assert differences with Jekyll::PageWithoutAFile instance
           if basic_attrs.include?(prop)
-            assert_equal @page[prop], value, "For <page[\"#{prop}\"]>:"
+            assert_equal value, @page[prop], "For <page[\"#{prop}\"]>:"
           else
             assert_nil @page[prop]
           end
