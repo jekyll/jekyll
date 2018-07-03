@@ -16,12 +16,12 @@ module Jekyll
 
       def content
         link_dependency
-        return @obj.content
+        @obj.content
       end
 
       def output
         link_dependency
-        return @obj.output
+        @obj.output
       end
 
       private def_delegator :@obj, :data, :fallback_data
