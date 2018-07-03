@@ -126,11 +126,11 @@ class TestDocument < JekyllUnitTest
     end
 
     should "output the collection name in the #to_liquid method" do
-      assert_equal @document.to_liquid["collection"], "methods"
+      assert_equal "methods", @document.to_liquid["collection"]
     end
 
     should "output its relative path as path in Liquid" do
-      assert_equal @document.to_liquid["path"], "_methods/configuration.md"
+      assert_equal "_methods/configuration.md", @document.to_liquid["path"]
     end
   end
 

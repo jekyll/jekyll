@@ -687,10 +687,10 @@ class TestFilters < JekyllUnitTest
       should "convert drop with drops to json" do
         @filter.site.read
         actual = @filter.jsonify(@filter.site.to_liquid)
-        assert_equal JSON.parse(actual)["jekyll"], {
+        assert_equal {
           "environment" => "development",
           "version"     => Jekyll::VERSION,
-        }
+        }, JSON.parse(actual)["jekyll"]
       end
 
       # rubocop:disable Style/StructInheritance
