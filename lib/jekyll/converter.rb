@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class Converter < Plugin
     # Public: Get or set the highlighter prefix. When an argument is specified,
@@ -8,7 +10,9 @@ module Jekyll
     #
     # Returns the String prefix.
     def self.highlighter_prefix(highlighter_prefix = nil)
-      @highlighter_prefix = highlighter_prefix if highlighter_prefix
+      unless defined?(@highlighter_prefix) && highlighter_prefix.nil?
+        @highlighter_prefix = highlighter_prefix
+      end
       @highlighter_prefix
     end
 
@@ -20,7 +24,9 @@ module Jekyll
     #
     # Returns the String suffix.
     def self.highlighter_suffix(highlighter_suffix = nil)
-      @highlighter_suffix = highlighter_suffix if highlighter_suffix
+      unless defined?(@highlighter_suffix) && highlighter_suffix.nil?
+        @highlighter_suffix = highlighter_suffix
+      end
       @highlighter_suffix
     end
 

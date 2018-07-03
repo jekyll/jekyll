@@ -1,9 +1,11 @@
-# encoding: UTF-8
+# frozen_string_literal: true
 
 module Jekyll
   module Drops
     class Drop < Liquid::Drop
-      NON_CONTENT_METHODS = [:[], :[]=, :inspect, :to_h, :fallback_data].freeze
+      include Enumerable
+
+      NON_CONTENT_METHODS = [:fallback_data, :collapse_document].freeze
 
       # Get or set whether the drop class is mutable.
       # Mutability determines whether or not pre-defined fields may be
@@ -13,11 +15,7 @@ module Jekyll
       #
       # Returns the mutability of the class
       def self.mutable(is_mutable = nil)
-        if is_mutable
-          @is_mutable = is_mutable
-        else
-          @is_mutable = false
-        end
+        @is_mutable = is_mutable || false
       end
 
       def self.mutable?
@@ -52,6 +50,7 @@ module Jekyll
           fallback_data[key]
         end
       end
+      alias_method :invoke_drop, :[]
 
       # Set a field in the Drop. If mutable, sets in the mutations and
       # returns. If not mutable, checks first if it's trying to override a
@@ -69,7 +68,7 @@ module Jekyll
       def []=(key, val)
         if respond_to?("#{key}=")
           public_send("#{key}=", val)
-        elsif respond_to? key
+        elsif respond_to?(key.to_s)
           if self.class.mutable?
             @mutations[key] = val
           else
@@ -86,7 +85,9 @@ module Jekyll
       # Returns an Array of strings which represent method-specific keys.
       def content_methods
         @content_methods ||= (
-          self.class.instance_methods(false) - NON_CONTENT_METHODS
+          self.class.instance_methods \
+            - Jekyll::Drops::Drop.instance_methods \
+            - NON_CONTENT_METHODS
         ).map(&:to_s).reject do |method|
           method.end_with?("=")
         end
@@ -98,11 +99,9 @@ module Jekyll
       #
       # Returns true if the given key is present
       def key?(key)
-        if self.class.mutable && @mutations.key?(key)
-          true
-        else
-          respond_to?(key) || fallback_data.key?(key)
-        end
+        return false if key.nil?
+        return true if self.class.mutable? && @mutations.key?(key)
+        respond_to?(key) || fallback_data.key?(key)
       end
 
       # Generates a list of keys with user content as their values.
@@ -134,8 +133,24 @@ module Jekyll
       #
       # Returns a pretty generation of the hash representation of the Drop.
       def inspect
-        require 'json'
         JSON.pretty_generate to_h
+      end
+
+      # Generate a Hash for use in generating JSON.
+      # This is useful if fields need to be cleared before the JSON can generate.
+      #
+      # Returns a Hash ready for JSON generation.
+      def hash_for_json(*)
+        to_h
+      end
+
+      # Generate a JSON representation of the Drop.
+      #
+      # state - the JSON::State object which determines the state of current processing.
+      #
+      # Returns a JSON representation of the Drop in a String.
+      def to_json(state = nil)
+        JSON.generate(hash_for_json(state), state)
       end
 
       # Collects all the keys and passes each to the block in turn.
@@ -147,8 +162,14 @@ module Jekyll
         keys.each(&block)
       end
 
+      def each
+        each_key.each do |key|
+          yield key, self[key]
+        end
+      end
+
       def merge(other, &block)
-        self.dup.tap do |me|
+        dup.tap do |me|
           if block.nil?
             me.merge!(other)
           else
@@ -196,6 +217,17 @@ module Jekyll
           req_path,
           res_path
         )
+      end
+
+      # Imitate Hash.fetch method in Drop
+      #
+      # Returns value if key is present in Drop, otherwise returns default value
+      # KeyError is raised if key is not present and no default value given
+      def fetch(key, default = nil, &block)
+        return self[key] if key?(key)
+        raise KeyError, %(key not found: "#{key}") if default.nil? && block.nil?
+        return yield(key) unless block.nil?
+        return default unless default.nil?
       end
     end
   end

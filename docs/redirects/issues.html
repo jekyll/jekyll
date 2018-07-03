@@ -1,0 +1,4 @@
+---
+permalink: /issues.html
+redirect_to: https://github.com/jekyll/jekyll/issues
+---

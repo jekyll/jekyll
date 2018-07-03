@@ -1,0 +1,48 @@
+---
+version: 3.8.3
+name: Jekyll • Simple, blog-aware, static sites
+description: Transform your plain text into static websites and blogs
+url: https://jekyllrb.com
+repository: https://github.com/jekyll/jekyll
+timezone: America/Los_Angeles
+twitter:
+  username: jekyllrb
+logo: "/img/logo-2x.png"
+google_analytics_id: UA-50755011-1
+google_site_verification: onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY
+collections:
+  docs:
+    permalink: "/:collection/:path/"
+    output: true
+  posts:
+    permalink: "/news/:year/:month/:day/:title/"
+    output: true
+  tutorials:
+    output: true
+defaults:
+- scope:
+    path: _docs
+    type: docs
+  values:
+    layout: docs
+- scope:
+    path: _posts
+    type: posts
+  values:
+    layout: news_item
+    image: "/img/twitter-card.png"
+plugins:
+- jekyll-avatar
+- jekyll-feed
+- jekyll-mentions
+- jekyll-redirect-from
+- jekyll-seo-tag
+- jekyll-sitemap
+- jemoji
+sass:
+  style: compressed
+exclude:
+- ".gitignore"
+- CNAME
+- icomoon-selection.json
+- readme.md

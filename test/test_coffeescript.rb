@@ -1,9 +1,11 @@
-require 'helper'
+# frozen_string_literal: true
+
+require "helper"
 
 class TestCoffeeScript < JekyllUnitTest
   context "converting CoffeeScript" do
     setup do
-      External.require_with_graceful_fail('jekyll-coffeescript')
+      External.require_with_graceful_fail("jekyll-coffeescript")
       @site = fixture_site
       @site.process
       @test_coffeescript_file = dest_dir("js/coffeescript.js")
@@ -37,7 +39,7 @@ JS
     end
 
     should "write a JS file in place" do
-      assert_exist @test_coffeescript_file, "Can't find the converted CoffeeScript file in the dest_dir."
+      assert_exist @test_coffeescript_file
     end
 
     should "produce JS" do

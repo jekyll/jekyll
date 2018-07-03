@@ -1,4 +1,6 @@
-require 'helper'
+# frozen_string_literal: true
+
+require "helper"
 
 class TestCommand < JekyllUnitTest
   context "when calling .add_build_options" do

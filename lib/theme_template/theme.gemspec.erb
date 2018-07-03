@@ -1,0 +1,19 @@
+# frozen_string_literal: true
+
+Gem::Specification.new do |spec|
+  spec.name          = <%= theme_name.inspect %>
+  spec.version       = "0.1.0"
+  spec.authors       = [<%= user_name.inspect %>]
+  spec.email         = [<%= user_email.inspect %>]
+
+  spec.summary       = "TODO: Write a short summary, because Rubygems requires one."
+  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.license       = "MIT"
+
+  spec.files         = `git ls-files -z`.split("\x0").select { |f| f.match(%r!^(<%= theme_directories.join("|") %>|LICENSE|README)!i) }
+
+  spec.add_runtime_dependency "jekyll", "~> <%= jekyll_version_with_minor %>"
+
+  spec.add_development_dependency "bundler", "~> 1.16"
+  spec.add_development_dependency "rake", "~> 12.0"
+end

@@ -1,11 +1,13 @@
-require 'helper'
+# frozen_string_literal: true
+
+require "helper"
 
 class TestSass < JekyllUnitTest
   context "importing partials" do
     setup do
       @site = Jekyll::Site.new(Jekyll.configuration({
-        "source" => source_dir,
-        "destination" => dest_dir
+        "source"      => source_dir,
+        "destination" => dest_dir,
       }))
       @site.process
       @test_css_file = dest_dir("css/main.css")
@@ -16,11 +18,13 @@ class TestSass < JekyllUnitTest
     end
 
     should "register the SCSS converter" do
-      assert !!@site.find_converter_instance(Jekyll::Converters::Scss), "SCSS converter implementation should exist."
+      message = "SCSS converter implementation should exist."
+      assert !!@site.find_converter_instance(Jekyll::Converters::Scss), message
     end
 
     should "register the Sass converter" do
-      assert !!@site.find_converter_instance(Jekyll::Converters::Sass), "Sass converter implementation should exist."
+      message = "Sass converter implementation should exist."
+      assert !!@site.find_converter_instance(Jekyll::Converters::Sass), message
     end
   end
 end

@@ -1,5 +1,4 @@
-# encoding: UTF-8
-require 'csv'
+# frozen_string_literal: true
 
 module Jekyll
   class Reader
@@ -16,13 +15,14 @@ module Jekyll
       @site.layouts = LayoutReader.new(site).read
       read_directories
       sort_files!
-      @site.data = DataReader.new(site).read(site.config['data_dir'])
+      @site.data = DataReader.new(site).read(site.config["data_dir"])
       CollectionReader.new(site).read
+      ThemeAssetsReader.new(site).read
     end
 
     # Sorts posts, pages, and static files.
     def sort_files!
-      site.collections.values.each { |c| c.docs.sort! }
+      site.collections.each_value { |c| c.docs.sort! }
       site.pages.sort_by!(&:name)
       site.static_files.sort_by!(&:relative_path)
     end
@@ -34,13 +34,17 @@ module Jekyll
     # dir - The String relative path of the directory to read. Default: ''.
     #
     # Returns nothing.
-    def read_directories(dir = '')
+    def read_directories(dir = "")
       base = site.in_source_dir(dir)
 
-      dot = Dir.chdir(base) { filter_entries(Dir.entries('.'), base) }
+      return unless File.directory?(base)
+
+      dot = Dir.chdir(base) { filter_entries(Dir.entries("."), base) }
       dot_dirs = dot.select { |file| File.directory?(@site.in_source_dir(base, file)) }
       dot_files = (dot - dot_dirs)
-      dot_pages = dot_files.select { |file| Utils.has_yaml_header?(@site.in_source_dir(base, file)) }
+      dot_pages = dot_files.select do |file|
+        Utils.has_yaml_header?(@site.in_source_dir(base, file))
+      end
       dot_static_files = dot_files - dot_pages
 
       retrieve_posts(dir)
@@ -56,8 +60,9 @@ module Jekyll
     #
     # Returns nothing.
     def retrieve_posts(dir)
-      site.posts.docs.concat(PostReader.new(site).read_posts(dir))
-      site.posts.docs.concat(PostReader.new(site).read_drafts(dir)) if site.show_drafts
+      return if outside_configured_directory?(dir)
+      site.posts.docs.concat(post_reader.read_posts(dir))
+      site.posts.docs.concat(post_reader.read_drafts(dir)) if site.show_drafts
     end
 
     # Recursively traverse directories with the read_directories function.
@@ -68,10 +73,10 @@ module Jekyll
     #
     # Returns nothing.
     def retrieve_dirs(_base, dir, dot_dirs)
-      dot_dirs.map do |file|
+      dot_dirs.each do |file|
         dir_path = site.in_source_dir(dir, file)
         rel_path = File.join(dir, file)
-        @site.reader.read_directories(rel_path) unless @site.dest.sub(/\/$/, '') == dir_path
+        @site.reader.read_directories(rel_path) unless @site.dest.chomp("/") == dir_path
       end
     end
 
@@ -119,8 +124,29 @@ module Jekyll
     def get_entries(dir, subfolder)
       base = site.in_source_dir(dir, subfolder)
       return [] unless File.exist?(base)
-      entries = Dir.chdir(base) { filter_entries(Dir['**/*'], base) }
+      entries = Dir.chdir(base) { filter_entries(Dir["**/*"], base) }
       entries.delete_if { |e| File.directory?(site.in_source_dir(base, e)) }
+    end
+
+    private
+
+    # Internal
+    #
+    # Determine if the directory is supposed to contain posts and drafts.
+    # If the user has defined a custom collections_dir, then attempt to read
+    # posts and drafts only from within that directory.
+    #
+    # Returns true if a custom collections_dir has been set but current directory lies
+    # outside that directory.
+    def outside_configured_directory?(dir)
+      collections_dir = site.config["collections_dir"]
+      !collections_dir.empty? && !dir.start_with?("/#{collections_dir}")
+    end
+
+    # Create a single PostReader instance to retrieve drafts and posts from all valid
+    # directories in current site.
+    def post_reader
+      @post_reader ||= PostReader.new(site)
     end
   end
 end

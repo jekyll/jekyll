@@ -1,31 +1,46 @@
+# frozen_string_literal: true
+
 module Jekyll
   module Tags
     class PostComparer
-      MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)$/
+      MATCHER = %r!^(.+/)*(\d+-\d+-\d+)-(.*)$!
 
       attr_reader :path, :date, :slug, :name
 
       def initialize(name)
         @name = name
-        all, @path, @date, @slug = *name.sub(/^\//, "").match(MATCHER)
-        raise ArgumentError.new("'#{name}' does not contain valid date and/or title.") unless all
 
-        @name_regex = /^#{path}#{date}-#{slug}\.[^.]+/
+        all, @path, @date, @slug = *name.sub(%r!^/!, "").match(MATCHER)
+        unless all
+          raise Jekyll::Errors::InvalidPostNameError,
+                "'#{name}' does not contain valid date and/or title."
+        end
+
+        escaped_slug = Regexp.escape(slug)
+        @name_regex = %r!^_posts/#{path}#{date}-#{escaped_slug}\.[^.]+|
+          ^#{path}_posts/?#{date}-#{escaped_slug}\.[^.]+!x
+      end
+
+      def post_date
+        @post_date ||= Utils.parse_date(
+          date,
+          "'#{date}' does not contain valid date and/or title."
+        )
       end
 
       def ==(other)
-        other.basename.match(@name_regex)
+        other.relative_path.match(@name_regex)
       end
 
       def deprecated_equality(other)
-        date = Utils.parse_date(name, "'#{name}' does not contain valid date and/or title.")
         slug == post_slug(other) &&
-          date.year  == other.date.year &&
-          date.month == other.date.month &&
-          date.day   == other.date.day
+          post_date.year  == other.date.year &&
+          post_date.month == other.date.month &&
+          post_date.day   == other.date.day
       end
 
       private
+
       # Construct the directory-aware post slug for a Jekyll::Post
       #
       # other - the Jekyll::Post
@@ -34,9 +49,9 @@ module Jekyll
       def post_slug(other)
         path = other.basename.split("/")[0...-1].join("/")
         if path.nil? || path == ""
-          other.data['slug']
+          other.data["slug"]
         else
-          path + '/' + other.data['slug']
+          path + "/" + other.data["slug"]
         end
       end
     end
@@ -47,12 +62,12 @@ module Jekyll
         @orig_post = post.strip
         begin
           @post = PostComparer.new(@orig_post)
-        rescue
-          raise ArgumentError.new <<-eos
-Could not parse name of post "#{@orig_post}" in tag 'post_url'.
-
-Make sure the post exists and the name is correct.
-eos
+        rescue StandardError => e
+          raise Jekyll::Errors::PostURLError, <<~MSG
+            Could not parse name of post "#{@orig_post}" in tag 'post_url'.
+             Make sure the post exists and the name is correct.
+             #{e.class}: #{e.message}
+          MSG
         end
       end
 
@@ -68,21 +83,21 @@ eos
 
         site.posts.docs.each do |p|
           next unless @post.deprecated_equality p
-          Jekyll::Deprecator.deprecation_message "A call to '{{ post_url #{@post.name} }}' did not match " \
+          Jekyll::Deprecator.deprecation_message "A call to "\
+            "'{% post_url #{@post.name} %}' did not match " \
             "a post using the new matching method of checking name " \
             "(path-date-slug) equality. Please make sure that you " \
             "change this tag to match the post's name exactly."
           return p.url
         end
 
-        raise ArgumentError.new <<-eos
-Could not find post "#{@orig_post}" in tag 'post_url'.
-
-Make sure the post exists and the name is correct.
-eos
+        raise Jekyll::Errors::PostURLError, <<~MSG
+          Could not find post "#{@orig_post}" in tag 'post_url'.
+          Make sure the post exists and the name is correct.
+        MSG
       end
     end
   end
 end
 
-Liquid::Template.register_tag('post_url', Jekyll::Tags::PostUrl)
+Liquid::Template.register_tag("post_url", Jekyll::Tags::PostUrl)

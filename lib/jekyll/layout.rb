@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class Layout
     include Convertible
@@ -10,6 +12,9 @@ module Jekyll
 
     # Gets the path to this layout.
     attr_reader :path
+
+    # Gets the path to this layout relative to its base
+    attr_reader :relative_path
 
     # Gets/Sets the extension of this layout.
     attr_accessor :ext
@@ -29,7 +34,15 @@ module Jekyll
       @site = site
       @base = base
       @name = name
-      @path = site.in_source_dir(base, name)
+
+      if site.theme && site.theme.layouts_path.eql?(base)
+        @base_dir = site.theme.root
+        @path = site.in_theme_dir(base, name)
+      else
+        @base_dir = site.source
+        @path = site.in_source_dir(base, name)
+      end
+      @relative_path = @path.sub(@base_dir, "")
 
       self.data = {}
 

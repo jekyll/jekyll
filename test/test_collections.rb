@@ -1,4 +1,6 @@
-require 'helper'
+# frozen_string_literal: true
+
+require "helper"
 
 class TestCollections < JekyllUnitTest
   context "an evil collection" do
@@ -28,7 +30,7 @@ class TestCollections < JekyllUnitTest
       assert_equal @collection.label, "methods"
     end
 
-    should "have default url template" do
+    should "have default URL template" do
       assert_equal @collection.url_template, "/:collection/:path:output_ext"
     end
 
@@ -50,7 +52,11 @@ class TestCollections < JekyllUnitTest
       end
 
       should "have a docs attribute" do
-        assert_equal @collection.to_liquid["docs"], Array.new
+        assert_equal @collection.to_liquid["docs"], []
+      end
+
+      should "have a files attribute" do
+        assert_equal @collection.to_liquid["files"], []
       end
 
       should "have a directory attribute" do
@@ -68,9 +74,9 @@ class TestCollections < JekyllUnitTest
 
     should "know whether it should be written or not" do
       assert_equal @collection.write?, false
-      @collection.metadata['output'] = true
+      @collection.metadata["output"] = true
       assert_equal @collection.write?, true
-      @collection.metadata.delete 'output'
+      @collection.metadata.delete "output"
     end
   end
 
@@ -80,8 +86,8 @@ class TestCollections < JekyllUnitTest
       @site.process
     end
 
-    should "contain only the defaul collections" do
-      refute_equal Hash.new, @site.collections
+    should "contain only the default collections" do
+      refute_equal @site.collections, {}
       refute_nil @site.collections
     end
   end
@@ -91,15 +97,15 @@ class TestCollections < JekyllUnitTest
       @site = fixture_site({
         "collections" => {
           "methods" => {
-            "permalink" => "/awesome/:path/"
-          }
-        }
+            "permalink" => "/awesome/:path/",
+          },
+        },
       })
       @site.process
       @collection = @site.collections["methods"]
     end
 
-    should "have custom url template" do
+    should "have custom URL template" do
       assert_equal @collection.url_template, "/awesome/:path/"
     end
   end
@@ -107,13 +113,13 @@ class TestCollections < JekyllUnitTest
   context "with a collection" do
     setup do
       @site = fixture_site({
-        "collections" => ["methods"]
+        "collections" => ["methods"],
       })
       @site.process
       @collection = @site.collections["methods"]
     end
 
-    should "create a Hash on Site with the label mapped to the instance of the Collection" do
+    should "create a Hash mapping label to Collection instance" do
       assert @site.collections.is_a?(Hash)
       refute_nil @site.collections["methods"]
       assert @site.collections["methods"].is_a? Jekyll::Collection
@@ -123,19 +129,21 @@ class TestCollections < JekyllUnitTest
       assert @site.collections["methods"].docs.is_a? Array
       @site.collections["methods"].docs.each do |doc|
         assert doc.is_a? Jekyll::Document
-        assert_includes %w[
+        assert_includes %w(
           _methods/configuration.md
           _methods/sanitized_path.md
+          _methods/collection/entries
           _methods/site/generate.md
           _methods/site/initialize.md
           _methods/um_hi.md
           _methods/escape-+\ #%20[].md
           _methods/yaml_with_dots.md
-        ], doc.relative_path
+          _methods/3940394-21-9393050-fifif1323-test.md
+        ), doc.relative_path
       end
     end
 
-    should "not include files which start with an underscore in the base collection directory" do
+    should "not include files from base dir which start with an underscore" do
       refute_includes @collection.filtered_entries, "_do_not_read_me.md"
     end
 
@@ -145,7 +153,8 @@ class TestCollections < JekyllUnitTest
 
     should "not include the underscored files in the list of docs" do
       refute_includes @collection.docs.map(&:relative_path), "_methods/_do_not_read_me.md"
-      refute_includes @collection.docs.map(&:relative_path), "_methods/site/_dont_include_me_either.md"
+      refute_includes @collection.docs.map(&:relative_path),
+                                           "_methods/site/_dont_include_me_either.md"
     end
   end
 
@@ -155,16 +164,16 @@ class TestCollections < JekyllUnitTest
         "collections" => {
           "methods" => {
             "foo" => "bar",
-            "baz" => "whoo"
-          }
-        }
+            "baz" => "whoo",
+          },
+        },
       })
       @site.process
       @collection = @site.collections["methods"]
     end
 
     should "extract the configuration collection information as metadata" do
-      assert_equal @collection.metadata, {"foo" => "bar", "baz" => "whoo"}
+      assert_equal @collection.metadata, { "foo" => "bar", "baz" => "whoo" }
     end
   end
 
@@ -172,19 +181,22 @@ class TestCollections < JekyllUnitTest
     setup do
       @site = fixture_site({
         "collections" => ["methods"],
-        "safe"        => true
+        "safe"        => true,
       })
       @site.process
       @collection = @site.collections["methods"]
     end
 
-    should "not allow symlinks" do
-      refute_includes @collection.filtered_entries, "um_hi.md"
+    should "include the symlinked file as it resolves to inside site.source" do
+      assert_includes @collection.filtered_entries, "um_hi.md"
       refute_includes @collection.filtered_entries, "/um_hi.md"
     end
 
-    should "not include the symlinked file in the list of docs" do
-      refute_includes @collection.docs.map(&:relative_path), "_methods/um_hi.md"
+    should "include the symlinked file from site.source in the list of docs" do
+      # no support for including symlinked file on Windows
+      skip_if_windows "Jekyll does not currently support symlinks on Windows."
+
+      assert_includes @collection.docs.map(&:relative_path), "_methods/um_hi.md"
     end
   end
 
@@ -192,7 +204,7 @@ class TestCollections < JekyllUnitTest
     setup do
       @site = fixture_site({
         "collections" => ["with.dots"],
-        "safe"        => true
+        "safe"        => true,
       })
       @site.process
       @collection = @site.collections["with.dots"]
@@ -203,7 +215,7 @@ class TestCollections < JekyllUnitTest
     end
 
     should "contain one document" do
-      assert_equal 3, @collection.docs.size
+      assert_equal 4, @collection.docs.size
     end
 
     should "allow dots in the filename" do
@@ -211,8 +223,38 @@ class TestCollections < JekyllUnitTest
     end
 
     should "read document in subfolders with dots" do
-      assert @collection.docs.any? { |d| d.path.include?("all.dots") }
+      assert(
+        @collection.docs.any? { |d| d.path.include?("all.dots") }
+      )
     end
   end
 
+  context "a collection with included dotfiles" do
+    setup do
+      @site = fixture_site({
+        "collections" => {
+          "methods" => {
+            "permalink" => "/awesome/:path/",
+          },
+        },
+        "include"     => %w(.htaccess .gitignore),
+      })
+      @site.process
+      @collection = @site.collections["methods"]
+    end
+
+    should "contain .htaccess file" do
+      assert(@collection.files.any? { |d| d.name == ".htaccess" })
+    end
+
+    should "contain .gitignore file" do
+      assert(@collection.files.any? { |d| d.name == ".gitignore" })
+    end
+
+    should "have custom URL in static file" do
+      assert(
+        @collection.files.any? { |d| d.url.include?("/awesome/with.dots/") }
+      )
+    end
+  end
 end

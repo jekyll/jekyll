@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class Command
     class << self
@@ -37,29 +39,64 @@ module Jekyll
       #
       # Returns a full Jekyll configuration
       def configuration_from_options(options)
+        return options if options.is_a?(Jekyll::Configuration)
         Jekyll.configuration(options)
       end
 
       # Add common options to a command for building configuration
       #
-      # c - the Jekyll::Command to add these options to
+      # cmd - the Jekyll::Command to add these options to
       #
       # Returns nothing
-      def add_build_options(c)
-        c.option 'config',  '--config CONFIG_FILE[,CONFIG_FILE2,...]', Array, 'Custom configuration file'
-        c.option 'destination', '-d', '--destination DESTINATION', 'The current folder will be generated into DESTINATION'
-        c.option 'source', '-s', '--source SOURCE', 'Custom source directory'
-        c.option 'future',  '--future', 'Publishes posts with a future date'
-        c.option 'limit_posts', '--limit_posts MAX_POSTS', Integer, 'Limits the number of posts to parse and publish'
-        c.option 'watch',   '-w', '--[no-]watch', 'Watch for changes and rebuild'
-        c.option 'force_polling', '--force_polling', 'Force watch to use polling'
-        c.option 'lsi',     '--lsi', 'Use LSI for improved related posts'
-        c.option 'show_drafts',  '-D', '--drafts', 'Render posts in the _drafts folder'
-        c.option 'unpublished', '--unpublished', 'Render posts that were marked as unpublished'
-        c.option 'quiet',   '-q', '--quiet', 'Silence output.'
-        c.option 'verbose', '-V', '--verbose', 'Print verbose output.'
-        c.option 'incremental', '-I', '--incremental', 'Enable incremental rebuild.'
+      # rubocop:disable Metrics/MethodLength
+      def add_build_options(cmd)
+        cmd.option "config", "--config CONFIG_FILE[,CONFIG_FILE2,...]",
+                   Array, "Custom configuration file"
+        cmd.option "destination", "-d", "--destination DESTINATION",
+                   "The current folder will be generated into DESTINATION"
+        cmd.option "source", "-s", "--source SOURCE", "Custom source directory"
+        cmd.option "future", "--future", "Publishes posts with a future date"
+        cmd.option "limit_posts", "--limit_posts MAX_POSTS", Integer,
+                   "Limits the number of posts to parse and publish"
+        cmd.option "watch", "-w", "--[no-]watch", "Watch for changes and rebuild"
+        cmd.option "baseurl", "-b", "--baseurl URL",
+                   "Serve the website from the given base URL"
+        cmd.option "force_polling", "--force_polling", "Force watch to use polling"
+        cmd.option "lsi", "--lsi", "Use LSI for improved related posts"
+        cmd.option "show_drafts", "-D", "--drafts", "Render posts in the _drafts folder"
+        cmd.option "unpublished", "--unpublished",
+                   "Render posts that were marked as unpublished"
+        cmd.option "quiet", "-q", "--quiet", "Silence output."
+        cmd.option "verbose", "-V", "--verbose", "Print verbose output."
+        cmd.option "incremental", "-I", "--incremental", "Enable incremental rebuild."
+        cmd.option "strict_front_matter", "--strict_front_matter",
+                   "Fail if errors are present in front matter"
       end
+      # rubocop:enable Metrics/MethodLength
+
+      # Run ::process method in a given set of Jekyll::Command subclasses and suggest
+      # re-running the associated command with --trace switch to obtain any additional
+      # information or backtrace regarding the encountered Exception.
+      #
+      # cmd     - the Jekyll::Command to be handled
+      # options - configuration overrides
+      # klass   - an array of Jekyll::Command subclasses associated with the command
+      #
+      # Note that all exceptions are rescued..
+      # rubocop: disable RescueException
+      def process_with_graceful_fail(cmd, options, *klass)
+        klass.each { |k| k.process(options) if k.respond_to?(:process) }
+      rescue Exception => e
+        raise e if cmd.trace
+
+        msg = " Please append `--trace` to the `#{cmd.name}` command "
+        dashes = "-" * msg.length
+        Jekyll.logger.error "", dashes
+        Jekyll.logger.error "Jekyll #{Jekyll::VERSION} ", msg
+        Jekyll.logger.error "", " for any additional information or backtrace. "
+        Jekyll.logger.abort_with "", dashes
+      end
+      # rubocop: enable RescueException
     end
   end
 end

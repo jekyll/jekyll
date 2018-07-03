@@ -1,0 +1,86 @@
+# The Jekyll project has 6 affinity teams, shown here: https://teams.jekyllrb.com/
+# They are as follows:
+#
+#   1. @jekyll/build
+#   2. @jekyll/documentation
+#   3. @jekyll/ecosystem
+#   4. @jekyll/performance
+#   5. @jekyll/stability
+#   6. @jekyll/windows
+#
+# Each of these teams has a mission. Wherever possible, GitHub should
+# automatically require review from these teams on the pieces of the
+# repository they maintain.
+
+# @jekyll/documentation
+/docs/                               @jekyll/documentation
+
+# @jekyll/build
+/exe/                                @jekyll/build
+/lib/jekyll.rb                       @jekyll/build
+/lib/jekyll/cleaner.rb               @jekyll/build
+/lib/jekyll/collection.rb            @jekyll/build
+/lib/jekyll/command.rb               @jekyll/build
+/lib/jekyll/commands/                @jekyll/build
+/lib/jekyll/converter.rb             @jekyll/build
+/lib/jekyll/converters/              @jekyll/build
+/lib/jekyll/convertible.rb           @jekyll/build
+/lib/jekyll/document.rb              @jekyll/build
+/lib/jekyll/drops/                   @jekyll/build
+/lib/jekyll/entry_filter.rb          @jekyll/build
+/lib/jekyll/errors.rb                @jekyll/build
+/lib/jekyll/excerpt.rb               @jekyll/build
+/lib/jekyll/filters/                 @jekyll/build
+/lib/jekyll/filters.rb               @jekyll/build
+/lib/jekyll/layout.rb                @jekyll/build
+/lib/jekyll/liquid_extensions.rb     @jekyll/build
+/lib/jekyll/liquid_renderer/         @jekyll/build
+/lib/jekyll/liquid_renderer.rb       @jekyll/build
+/lib/jekyll/log_adapter.rb           @jekyll/build
+/lib/jekyll/mime.types               @jekyll/build
+/lib/jekyll/page.rb                  @jekyll/build
+/lib/jekyll/publisher.rb             @jekyll/build
+/lib/jekyll/reader.rb                @jekyll/build
+/lib/jekyll/readers/                 @jekyll/build
+/lib/jekyll/regenerator.rb           @jekyll/build
+/lib/jekyll/related_posts.rb         @jekyll/build
+/lib/jekyll/renderer.rb              @jekyll/build
+/lib/jekyll/site.rb                  @jekyll/build
+/lib/jekyll/static_file.rb           @jekyll/build
+/lib/jekyll/stevenson.rb             @jekyll/build
+/lib/jekyll/tags/                    @jekyll/build
+/lib/jekyll/url.rb                   @jekyll/build
+/lib/jekyll/utils/                   @jekyll/build
+/lib/jekyll/utils.rb                 @jekyll/build
+
+# @jekyll/ecosystem
+/lib/jekyll/external.rb              @jekyll/ecosystem
+/lib/jekyll/generator.rb             @jekyll/ecosystem
+/lib/jekyll/hooks.rb                 @jekyll/ecosystem
+/lib/jekyll/plugin.rb                @jekyll/ecosystem
+/lib/jekyll/plugin_manager.rb        @jekyll/ecosystem
+/lib/jekyll/theme.rb                 @jekyll/ecosystem
+/lib/jekyll/theme_builder.rb         @jekyll/ecosystem
+
+# @jekyll/stability
+Gemfile                              @jekyll/stability
+*.gemspec                            @jekyll/stability
+.travis.yml                          @jekyll/stability
+appveyor.yml                         @jekyll/stability
+/lib/jekyll/configuration.rb         @jekyll/stability
+/lib/jekyll/deprecator.rb            @jekyll/stability
+/lib/jekyll/frontmatter_defaults.rb  @jekyll/stability
+/lib/site_template                   @jekyll/stability
+/lib/theme_template                  @jekyll/stability
+/features/                           @jekyll/stability
+/test/                               @jekyll/stability
+
+# Special cases
+.github/                             @jekyll/affinity-team-captains
+CODE_OF_CONDUCT.markdown             @jekyll/affinity-team-captains
+History.markdown                     @jekyll/affinity-team-captains
+LICENSE                              @jekyll/affinity-team-captains   # This file should never change.
+README.markdown                      @jekyll/affinity-team-captains
+/lib/jekyll/version.rb               @jekyll/affinity-team-captains
+/rake/                               @jekyll/affinity-team-captains
+/script/                             @jekyll/affinity-team-captains

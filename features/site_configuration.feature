@@ -44,9 +44,11 @@ Feature: Site configuration
     Given I have an "Rakefile" file that contains "I want to be excluded"
     And I have an "README" file that contains "I want to be excluded"
     And I have an "index.html" file that contains "I want to be included"
+    And I have a "Gemfile" file that contains "gem 'include-me'"
     And I have a configuration file with "exclude" set to "['Rakefile', 'README']"
     When I run jekyll build
     Then I should see "I want to be included" in "_site/index.html"
+    And the "_site/Gemfile" file should exist
     And the "_site/Rakefile" file should not exist
     And the "_site/README" file should not exist
 
@@ -63,29 +65,13 @@ Feature: Site configuration
     And the "_site/Rakefile" file should not exist
     And the "_site/README" file should not exist
 
-  Scenario: Use RDiscount for markup
-    Given I have an "index.markdown" page that contains "[Google](http://google.com)"
-    And I have a configuration file with "markdown" set to "rdiscount"
-    When I run jekyll build
-    Then I should get a zero exit status
-    And the _site directory should exist
-    And I should see "<a href=\"http://google.com\">Google</a>" in "_site/index.html"
-
   Scenario: Use Kramdown for markup
-    Given I have an "index.markdown" page that contains "[Google](http://google.com)"
+    Given I have an "index.markdown" page that contains "[Google](https://www.google.com)"
     And I have a configuration file with "markdown" set to "kramdown"
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "<a href=\"http://google.com\">Google</a>" in "_site/index.html"
-
-  Scenario: Use Redcarpet for markup
-    Given I have an "index.markdown" page that contains "[Google](http://google.com)"
-    And I have a configuration file with "markdown" set to "redcarpet"
-    When I run jekyll build
-    Then I should get a zero exit status
-    And the _site directory should exist
-    And I should see "<a href=\"http://google.com\">Google</a>" in "_site/index.html"
+    And I should see "<a href=\"https://www.google.com\">Google</a>" in "_site/index.html"
 
   Scenario: Highlight code with pygments
     Given I have an "index.html" page that contains "{% highlight ruby %} puts 'Hello world!' {% endhighlight %}"
@@ -170,10 +156,14 @@ Feature: Site configuration
         | entry2    | 2013-04-10 03:14 -0400 | post    | content for entry2. |
       When I run jekyll build
       Then I should get a zero exit status
-    And the _site directory should exist
+      And the _site directory should exist
       And I should see "Page Layout: 2" in "_site/index.html"
-      And I should see "Post Layout: <p>content for entry1.</p>\n built at 2013-04-09T23:22:00-04:00" in "_site/2013/04/09/entry1.html"
-      And I should see "Post Layout: <p>content for entry2.</p>\n built at 2013-04-10T03:14:00-04:00" in "_site/2013/04/10/entry2.html"
+      And I should see "Post Layout: <p>content for entry1.</p>\n built at" in "_site/2013/04/09/entry1.html"
+      And I should see "Post Layout: <p>content for entry2.</p>\n built at" in "_site/2013/04/10/entry2.html"
+      And I should see date "2013-04-09T23:22:00-04:00" in "_site/2013/04/09/entry1.html" unless Windows
+      And I should see date "2013-04-09T22:22:00-05:00" in "_site/2013/04/09/entry1.html" if on Windows
+      And I should see date "2013-04-10T03:14:00-04:00" in "_site/2013/04/10/entry2.html" unless Windows
+      And I should see date "2013-04-10T02:14:00-05:00" in "_site/2013/04/10/entry2.html" if on Windows
 
     Scenario: Generate proper dates with explicitly set timezone (different than posts' time)
       Given I have a _layouts directory
@@ -181,8 +171,8 @@ Feature: Site configuration
       And I have a post layout that contains "Post Layout: {{ content }} built at {{ page.date | date_to_xmlschema }}"
       And I have an "index.html" page with layout "page" that contains "site index page"
       And I have a configuration file with:
-        | key         | value               |
-        | timezone    | Pacific/Honolulu    |
+        | key         | value                |
+        | timezone    | Pacific/Honolulu     |
       And I have a _posts directory
       And I have the following posts:
         | title     | date                   | layout  | content             |

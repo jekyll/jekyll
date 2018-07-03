@@ -1,15 +1,18 @@
-# encoding: UTF-8
+# frozen_string_literal: true
 
 module Jekyll
   class Document
     include Comparable
+    extend Forwardable
 
     attr_reader :path, :site, :extname, :collection
     attr_accessor :content, :output
 
-    YAML_FRONT_MATTER_REGEXP = /\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)/m
-    DATELESS_FILENAME_MATCHER = /^(.+\/)*(.*)(\.[^.]+)$/
-    DATE_FILENAME_MATCHER = /^(.+\/)*(\d+-\d+-\d+)-(.*)(\.[^.]+)$/
+    def_delegator :self, :read_post_data, :post_read
+
+    YAML_FRONT_MATTER_REGEXP = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m
+    DATELESS_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.[^.]+)$!
+    DATE_FILENAME_MATCHER = %r!^(?:.+/)*(\d{2,4}-\d{1,2}-\d{1,2})-(.*)(\.[^.]+)$!
 
     # Create a new Document.
     #
@@ -51,24 +54,18 @@ module Jekyll
     #
     # Returns the merged data.
     def merge_data!(other, source: "YAML front matter")
-      if other.key?('categories') && !other['categories'].nil?
-        if other['categories'].is_a?(String)
-          other['categories'] = other['categories'].split(" ").map(&:strip)
-        end
-        other['categories'] = (data['categories'] || []) | other['categories']
-      end
+      merge_categories!(other)
       Utils.deep_merge_hashes!(data, other)
-      if data.key?('date') && !data['date'].is_a?(Time)
-        data['date'] = Utils.parse_date(
-          data['date'].to_s,
-          "Document '#{relative_path}' does not have a valid date in the #{source}."
-        )
-      end
+      merge_date!(source)
       data
     end
 
     def date
-      data['date'] ||= site.time
+      data["date"] ||= (draft? ? source_file_mtime : site.time)
+    end
+
+    def source_file_mtime
+      @source_file_mtime ||= File.mtime(path)
     end
 
     # Returns whether the document is a draft. This is only the case if
@@ -77,29 +74,30 @@ module Jekyll
     #
     # Returns whether the document is a draft.
     def draft?
-      data['draft'] ||= relative_path.index(collection.relative_directory).nil? && collection.label == "posts"
+      data["draft"] ||= relative_path.index(collection.relative_directory).nil? &&
+        collection.label == "posts"
     end
 
-    # The path to the document, relative to the site source.
+    # The path to the document, relative to the collections_dir.
     #
-    # Returns a String path which represents the relative path
-    #   from the site source to this document
+    # Returns a String path which represents the relative path from the collections_dir
+    # to this document.
     def relative_path
-      @relative_path ||= Pathname.new(path).relative_path_from(Pathname.new(site.source)).to_s
+      @relative_path ||= path.sub("#{site.collections_path}/", "")
     end
 
     # The output extension of the document.
     #
     # Returns the output extension
     def output_ext
-      Jekyll::Renderer.new(site, self).output_ext
+      @output_ext ||= Jekyll::Renderer.new(site, self).output_ext
     end
 
     # The base filename of the document, without the file extname.
     #
     # Returns the basename without the file extname.
     def basename_without_ext
-      @basename_without_ext ||= File.basename(path, '.*')
+      @basename_without_ext ||= File.basename(path, ".*")
     end
 
     # The base filename of the document.
@@ -152,23 +150,31 @@ module Jekyll
     #
     # Returns true if extname == .coffee, false otherwise.
     def coffeescript_file?
-      '.coffee'.eql?(extname)
+      extname == ".coffee"
     end
 
     # Determine whether the file should be rendered with Liquid.
     #
     # Returns false if the document is either an asset file or a yaml file,
+    #   or if the document doesn't contain any Liquid Tags or Variables,
     #   true otherwise.
     def render_with_liquid?
-      !(coffeescript_file? || yaml_file?)
+      !(coffeescript_file? || yaml_file? || !Utils.has_liquid_construct?(content))
+    end
+
+    # Determine whether the file should be rendered with a layout.
+    #
+    # Returns true if the Front Matter specifies that `layout` is set to `none`.
+    def no_layout?
+      data["layout"] == "none"
     end
 
     # Determine whether the file should be placed into layouts.
     #
-    # Returns false if the document is either an asset file or a yaml file,
-    #   true otherwise.
+    # Returns false if the document is set to `layouts: none`, or is either an
+    #   asset file or a yaml file. Returns true otherwise.
     def place_in_layout?
-      !(asset_file? || yaml_file?)
+      !(asset_file? || yaml_file? || no_layout?)
     end
 
     # The URL template where the document would be accessible.
@@ -191,18 +197,18 @@ module Jekyll
     #
     # Returns the permalink or nil if no permalink was set in the data.
     def permalink
-      data && data.is_a?(Hash) && data['permalink']
+      data && data.is_a?(Hash) && data["permalink"]
     end
 
     # The computed URL for the document. See `Jekyll::URL#to_s` for more details.
     #
     # Returns the computed URL for the document.
     def url
-      @url = URL.new({
-        :template => url_template,
+      @url ||= URL.new(
+        :template     => url_template,
         :placeholders => url_placeholders,
-        :permalink => permalink
-      }).to_s
+        :permalink    => permalink
+      ).to_s
     end
 
     def [](key)
@@ -217,8 +223,11 @@ module Jekyll
     def destination(base_directory)
       dest = site.in_dest_dir(base_directory)
       path = site.in_dest_dir(dest, URL.unescape_path(url))
-      path = File.join(path, "index.html") if url.end_with?("/")
-      path << output_ext unless path.end_with? output_ext
+      if url.end_with? "/"
+        path = File.join(path, "index.html")
+      else
+        path << output_ext unless path.end_with? output_ext
+      end
       path
     end
 
@@ -230,28 +239,18 @@ module Jekyll
     def write(dest)
       path = destination(dest)
       FileUtils.mkdir_p(File.dirname(path))
-      File.open(path, 'wb') do |f|
-        f.write(output)
-      end
+      Jekyll.logger.debug "Writing:", path
+      File.write(path, output, :mode => "wb")
 
       trigger_hooks(:post_write)
     end
 
-    # Returns merged option hash for File.read of self.site (if exists)
-    # and a given param
-    #
-    # opts - override options
-    #
-    # Return the file read options hash.
-    def merged_file_read_opts(opts)
-      site ? site.file_read_opts.merge(opts) : opts
-    end
-
     # Whether the file is published or not, as indicated in YAML front-matter
     #
-    # Returns true if the 'published' key is specified in the YAML front-matter and not `false`.
+    # Returns 'false' if the 'published' key is specified in the
+    # YAML front-matter and is 'false'. Otherwise returns 'true'.
     def published?
-      !(data.key?('published') && data['published'] == false)
+      !(data.key?("published") && data["published"] == false)
     end
 
     # Read in the file and assign the content and data based on the file contents.
@@ -266,73 +265,13 @@ module Jekyll
         @data = SafeYAML.load_file(path)
       else
         begin
-          defaults = @site.frontmatter_defaults.all(url, collection.label.to_sym)
-          merge_data!(defaults, source: "front matter defaults") unless defaults.empty?
-
-          self.content = File.read(path, merged_file_read_opts(opts))
-          if content =~ YAML_FRONT_MATTER_REGEXP
-            self.content = $POSTMATCH
-            data_file = SafeYAML.load(Regexp.last_match(1))
-            merge_data!(data_file, source: "YAML front matter") if data_file
-          end
-
-          post_read
-        rescue SyntaxError => e
-          Jekyll.logger.error "Error:", "YAML Exception reading #{path}: #{e.message}"
-        rescue Exception => e
-          if e.is_a? Jekyll::Errors::FatalException
-            raise e
-          end
-          Jekyll.logger.error "Error:", "could not read file #{path}: #{e.message}"
+          merge_defaults
+          read_content(opts)
+          read_post_data
+        rescue StandardError => e
+          handle_read_error(e)
         end
       end
-    end
-
-    def post_read
-      if relative_path =~ DATE_FILENAME_MATCHER
-        date, slug, ext = $2, $3, $4
-        if !data['date'] || data['date'].to_i == site.time.to_i
-          merge_data!({"date" => date}, source: "filename")
-        end
-      elsif relative_path =~ DATELESS_FILENAME_MATCHER
-        slug, ext = $2, $3
-      end
-
-      # Try to ensure the user gets a title.
-      data["title"] ||= Utils.titleize_slug(slug)
-      # Only overwrite slug & ext if they aren't specified.
-      data['slug'] ||= slug
-      data['ext']  ||= ext
-
-      populate_categories
-      populate_tags
-      generate_excerpt
-    end
-
-    # Add superdirectories of the special_dir to categories.
-    # In the case of es/_posts, 'es' is added as a category.
-    # In the case of _posts/es, 'es' is NOT added as a category.
-    #
-    # Returns nothing.
-    def categories_from_path(special_dir)
-      superdirs = relative_path.sub(/#{special_dir}(.*)/, '').split(File::SEPARATOR).reject do |c|
-        c.empty? || c.eql?(special_dir) || c.eql?(basename)
-      end
-      merge_data!({ 'categories' => superdirs }, source: "file path")
-    end
-
-    def populate_categories
-      merge_data!({
-        'categories' => (
-          Array(data['categories']) + Utils.pluralized_array_from_hash(data, 'category', 'categories')
-        ).map(&:to_s).flatten.uniq
-      })
-    end
-
-    def populate_tags
-      merge_data!({
-        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
-      })
     end
 
     # Create a Liquid-understandable version of this Document.
@@ -354,7 +293,7 @@ module Jekyll
     #
     # Returns the content of the document
     def to_s
-      output || content || 'NO CONTENT'
+      output || content || "NO CONTENT"
     end
 
     # Compare this document against another document.
@@ -364,8 +303,8 @@ module Jekyll
     #   equal or greater than the other doc's path. See String#<=> for more details.
     def <=>(other)
       return nil unless other.respond_to?(:data)
-      cmp = data['date'] <=> other.data['date']
-      cmp = path <=> other.path if cmp.nil? || cmp == 0
+      cmp = data["date"] <=> other.data["date"]
+      cmp = path <=> other.path if cmp.nil? || cmp.zero?
       cmp
     end
 
@@ -373,9 +312,10 @@ module Jekyll
     # Based on the Collection to which it belongs.
     #
     # True if the document has a collection and if that collection's #write?
-    #   method returns true, otherwise false.
+    # method returns true, and if the site's Publisher will publish the document.
+    # False otherwise.
     def write?
-      collection && collection.write?
+      collection&.write? && site.publisher.publish?(self)
     end
 
     # The Document excerpt_separator, from the YAML Front-Matter or site
@@ -383,7 +323,7 @@ module Jekyll
     #
     # Returns the document excerpt_separator
     def excerpt_separator
-      (data['excerpt_separator'] || site.config['excerpt_separator']).to_s
+      (data["excerpt_separator"] || site.config["excerpt_separator"]).to_s
     end
 
     # Whether to generate an excerpt
@@ -395,20 +335,12 @@ module Jekyll
 
     def next_doc
       pos = collection.docs.index { |post| post.equal?(self) }
-      if pos && pos < collection.docs.length - 1
-        collection.docs[pos + 1]
-      else
-        nil
-      end
+      collection.docs[pos + 1] if pos && pos < collection.docs.length - 1
     end
 
     def previous_doc
       pos = collection.docs.index { |post| post.equal?(self) }
-      if pos && pos > 0
-        collection.docs[pos - 1]
-      else
-        nil
-      end
+      collection.docs[pos - 1] if pos && pos.positive?
     end
 
     def trigger_hooks(hook_name, *args)
@@ -417,14 +349,14 @@ module Jekyll
     end
 
     def id
-      @id ||= File.join(File.dirname(url), (data['slug'] || basename_without_ext).to_s)
+      @id ||= File.join(File.dirname(url), (data["slug"] || basename_without_ext).to_s)
     end
 
     # Calculate related posts.
     #
     # Returns an Array of related Posts.
     def related_posts
-      Jekyll::RelatedPosts.new(self).build
+      @related_posts ||= Jekyll::RelatedPosts.new(self).build
     end
 
     # Override of normal respond_to? to match method_missing's logic for
@@ -436,19 +368,126 @@ module Jekyll
     # Override of method_missing to check in @data for the key.
     def method_missing(method, *args, &blck)
       if data.key?(method.to_s)
-        Jekyll.logger.warn "Deprecation:", "Document##{method} is now a key in the #data hash."
-        Jekyll.logger.warn "", "Called by #{caller.first}."
+        Jekyll::Deprecator.deprecation_message "Document##{method} is now a key "\
+                           "in the #data hash."
+        Jekyll::Deprecator.deprecation_message "Called by #{caller(0..0)}."
         data[method.to_s]
       else
         super
       end
     end
 
-    private # :nodoc:
-    def generate_excerpt
-      if generate_excerpt?
-        data["excerpt"] ||= Jekyll::Excerpt.new(self)
+    def respond_to_missing?(method, *)
+      data.key?(method.to_s) || super
+    end
+
+    # Add superdirectories of the special_dir to categories.
+    # In the case of es/_posts, 'es' is added as a category.
+    # In the case of _posts/es, 'es' is NOT added as a category.
+    #
+    # Returns nothing.
+    def categories_from_path(special_dir)
+      superdirs = relative_path.sub(%r!#{special_dir}(.*)!, "")
+        .split(File::SEPARATOR)
+        .reject do |c|
+        c.empty? || c == special_dir || c == basename
       end
+      merge_data!({ "categories" => superdirs }, :source => "file path")
+    end
+
+    def populate_categories
+      merge_data!(
+        "categories" => (
+          Array(data["categories"]) + Utils.pluralized_array_from_hash(
+            data, "category", "categories"
+          )
+        ).map(&:to_s).flatten.uniq
+      )
+    end
+
+    def populate_tags
+      merge_data!(
+        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
+      )
+    end
+
+    private
+
+    def merge_categories!(other)
+      if other.key?("categories") && !other["categories"].nil?
+        other["categories"] = other["categories"].split if other["categories"].is_a?(String)
+        other["categories"] = (data["categories"] || []) | other["categories"]
+      end
+    end
+
+    def merge_date!(source)
+      if data.key?("date")
+        data["date"] = Utils.parse_date(
+          data["date"].to_s,
+          "Document '#{relative_path}' does not have a valid date in the #{source}."
+        )
+      end
+    end
+
+    def merge_defaults
+      defaults = @site.frontmatter_defaults.all(
+        relative_path,
+        collection.label.to_sym
+      )
+      merge_data!(defaults, :source => "front matter defaults") unless defaults.empty?
+    end
+
+    def read_content(opts)
+      self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
+      if content =~ YAML_FRONT_MATTER_REGEXP
+        self.content = $POSTMATCH
+        data_file = SafeYAML.load(Regexp.last_match(1))
+        merge_data!(data_file, :source => "YAML front matter") if data_file
+      end
+    end
+
+    def read_post_data
+      populate_title
+      populate_categories
+      populate_tags
+      generate_excerpt
+    end
+
+    def handle_read_error(error)
+      if error.is_a? Psych::SyntaxError
+        Jekyll.logger.error "Error:", "YAML Exception reading #{path}: #{error.message}"
+      else
+        Jekyll.logger.error "Error:", "could not read file #{path}: #{error.message}"
+      end
+
+      if site.config["strict_front_matter"] || error.is_a?(Jekyll::Errors::FatalException)
+        raise error
+      end
+    end
+
+    def populate_title
+      if relative_path =~ DATE_FILENAME_MATCHER
+        date, slug, ext = Regexp.last_match.captures
+        modify_date(date)
+      elsif relative_path =~ DATELESS_FILENAME_MATCHER
+        slug, ext = Regexp.last_match.captures
+      end
+
+      # Try to ensure the user gets a title.
+      data["title"] ||= Utils.titleize_slug(slug)
+      # Only overwrite slug & ext if they aren't specified.
+      data["slug"]  ||= slug
+      data["ext"]   ||= ext
+    end
+
+    def modify_date(date)
+      if !data["date"] || data["date"].to_i == site.time.to_i
+        merge_data!({ "date" => date }, :source => "filename")
+      end
+    end
+
+    def generate_excerpt
+      data["excerpt"] ||= Jekyll::Excerpt.new(self) if generate_excerpt?
     end
   end
 end
