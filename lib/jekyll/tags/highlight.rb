@@ -18,13 +18,13 @@ module Jekyll
           @lang = Regexp.last_match(1).downcase
           @highlight_options = parse_options(Regexp.last_match(2))
         else
-          raise SyntaxError, <<-MSG
-Syntax Error in tag 'highlight' while parsing the following markup:
+          raise SyntaxError, <<~MSG
+            Syntax Error in tag 'highlight' while parsing the following markup:
 
-  #{markup}
+            #{markup}
 
-Valid syntax: highlight <lang> [linenos]
-MSG
+            Valid syntax: highlight <lang> [linenos]
+          MSG
         end
       end
 
@@ -59,7 +59,7 @@ MSG
         input.scan(OPTIONS_REGEX) do |opt|
           key, value = opt.split("=")
           # If a quoted list, convert to array
-          if value && value.include?('"')
+          if value&.include?('"')
             value.delete!('"')
             value = value.split
           end
@@ -71,9 +71,8 @@ MSG
       end
 
       def render_pygments(code, _context)
-        Jekyll.logger.warn "Warning:",
-          "Highlight Tag no longer supports rendering with Pygments."
-        Jekyll.logger.warn "", "Using the default highlighter, Rouge, instead."
+        Jekyll.logger.warn "Warning:", "Highlight Tag no longer supports rendering with Pygments."
+        Jekyll.logger.warn "", "Using the default highlighter 'Rouge' instead."
         render_rouge(code)
       end
 

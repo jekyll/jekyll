@@ -787,6 +787,8 @@ You can find a few useful plugins at the following locations:
 - [Jekyll::Paginate::Content](https://github.com/ibrado/jekyll-paginate-content): Content paginator in the style of jekyll-paginator-v2 that splits pages, posts, and collection entries into several pages. Specify a separator or use HTML &lt;h1&gt; etc. headers. Automatic splitting, single-page view, pager/trail, self-adjusting links, multipage TOC, SEO support.
 - [Premonition](https://github.com/amedia/premonition): Adds block-styled side content to your page. For example summary, notes, hints or warning boxes.
 - [jekyll-fontello](https://github.com/ericcornelissen/jekyll-fontello): A Jekyll plugin that automatically downloads your webfont from Fontello.
+- [Target Blank](https://github.com/keithmifsud/jekyll-target-blank): A Jekyll plugin to automatically open external links in a new browser tab or window.
+- [jekyll-info](https://github.com/swestmoreland/jekyll-info): A plugin to provide information about your Jekyll site’s configuration.
 
 #### Converters
 
@@ -887,6 +889,7 @@ You can find a few useful plugins at the following locations:
 - [jekyll-onebox](https://github.com/rriemann/jekyll-onebox): Liquid tag for displaying HTML previews (embeds) for links to popular domains. Plugin is based on [Onebox](https://github.com/discourse/onebox) that powers link previews in [Discourse](http://github.com/discourse/discourse) forums.
 - [jekyll-w2m](https://github.com/kacperduras/jekyll-w2m): A Jekyll plugin to liberate content from Microsoft Word documents (powered by [word-to-markdown](https://github.com/benbalter/word-to-markdown)).
 - [jekyll-flickr](https://github.com/rriemann/jekyll-flickr): Liquid tag for responsive Flickr images using HTML5 srcset. Subtitles and automatic license notices are supported.
+- [CAT](https://github.com/binfalse/jekyll-cat): Include the contents of any file (like the `include` command, but also for files outside of `_include`). Similar to Unix' `cat` tool; useful for including source code etc. in posts and pages.
 
 #### Collections
 
@@ -936,6 +939,7 @@ You can find a few useful plugins at the following locations:
 - [jekyll-pre-commit](https://github.com/mpchadwick/jekyll-pre-commit): A framework for running checks against your posts using a git pre-commit hook before you publish them.
 - [jekyll-pwa-plugin](https://github.com/lavas-project/jekyll-pwa): A plugin provides PWA support for Jekyll. It generates a service worker in Jekyll build process and makes precache and runtime cache available in the runtime with Google Workbox.
 - [jekyll-algolia](https://community.algolia.com/jekyll-algolia/): Add fast and relevant search to your Jekyll site through the Algolia API.
+- [jekyll-get](https://github.com/18F/jekyll-get): Download data from external JSON API sources to use in generating a site.
 
 <div class="note info">
   <h5>Submit your gem plugins</h5>

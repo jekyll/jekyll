@@ -15,11 +15,7 @@ module Jekyll
       #
       # Returns the mutability of the class
       def self.mutable(is_mutable = nil)
-        @is_mutable = if is_mutable
-                        is_mutable
-                      else
-                        false
-                      end
+        @is_mutable = is_mutable || false
       end
 
       def self.mutable?
@@ -173,7 +169,7 @@ module Jekyll
       end
 
       def merge(other, &block)
-        self.dup.tap do |me|
+        dup.tap do |me|
           if block.nil?
             me.merge!(other)
           else

@@ -89,7 +89,7 @@ Now we can install Ruby. To do this we will use a repository from [BrightBox](ht
 ```sh
 sudo apt-add-repository ppa:brightbox/ruby-ng
 sudo apt-get update
-sudo apt-get install ruby2.3 ruby2.3-dev build-essential dh-autoreconf
+sudo apt-get install ruby2.4 ruby2.4-dev build-essential dh-autoreconf
 ```
 
 Next let's update our Ruby gems:

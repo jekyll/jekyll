@@ -19,6 +19,15 @@
   * List all static files variables (#7002)
   * Document that _drafts need to be contained within the custom collection directory (#6985)
   * proposed change for passive voice. (#7005)
+  * added the CAT plugin to the plugin list (#7011)
+  * Updated to supported version (#7031)
+  * Clarify definition of &#39;draft&#39; (#7037)
+  * Listed the jekyll-target-blank plugin in plugins list. (#7046)
+  * Typo (#7058)
+  * Add Hints for some Improved Travis Config in Doc (#7049)
+  * Added plugin json-get. (#7086)
+  * Update travis-ci.md to point out &#34;this is an example Gemfile&#34; (#7089)
+  * Adding `jekyll-info` plugin (#7091)
 
 ### Minor Enhancements
 
@@ -45,6 +54,32 @@
   * Update instructions for releasing docs Gem (#6975)
   * yajl-ruby update to v1.4.0 (#6976)
   * Load Rouge for TestKramdown (#7007)
+  * Useless privates removed (#6768)
+  * Allow i18n v0.9.5 and higher (#7044)
+  * Update Rubocop&#39;s config (#7050)
+  * Remember to release docs gem (#7066)
+  * Use assert_include (#7093)
+  * Update rubocop version to 0.57.x (#7078)
+
+### -docs
+
+  * Example of CircleCI deployment through CircleCI v2 (#7024)
+
+## 3.8.3 / 2018-06-05
+
+### Bug Fixes
+
+  * Fix --unpublished not affecting collection documents (#7027)
+
+## 3.8.2 / 2018-05-18
+
+### Development Fixes
+
+  * Update rubocop version (#7016)
+
+### Bug Fixes
+
+  * Add whitespace control to LIQUID_TAG_REGEX (#7015)
 
 ## 3.8.1 / 2018-05-01
 
