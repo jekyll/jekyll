@@ -76,7 +76,7 @@ module Jekyll
       output = document.content
       if document.render_with_liquid?
         Jekyll.logger.debug "Rendering Liquid:", document.relative_path
-        output = render_liquid(output, payload, info, document.path)
+        output = render_liquid(output, payload, info, document.relative_path)
       end
 
       Jekyll.logger.debug "Rendering Markup:", document.relative_path
@@ -203,7 +203,7 @@ module Jekyll
     def add_regenerator_dependencies(layout)
       return unless document.write?
       site.regenerator.add_dependency(
-        site.in_source_dir(document.path),
+        site.in_source_dir(document.relative_path),
         layout.path
       )
     end

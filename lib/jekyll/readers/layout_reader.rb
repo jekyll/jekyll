@@ -11,19 +11,19 @@ module Jekyll
     def read
       layout_entries.each do |layout_file|
         @layouts[layout_name(layout_file)] = \
-          Layout.new(site, layout_directory, layout_file)
+          Layout.new(site, site.source, site.config["layouts_dir"], layout_file)
       end
 
       theme_layout_entries.each do |layout_file|
         @layouts[layout_name(layout_file)] ||= \
-          Layout.new(site, theme_layout_directory, layout_file)
+          Layout.new(site, site.theme.root, "_layouts", layout_file)
       end
 
       @layouts
     end
 
     def layout_directory
-      @layout_directory ||= (layout_directory_in_cwd || layout_directory_inside_source)
+      @layout_directory ||= site.in_source_dir(site.config["layouts_dir"])
     end
 
     def theme_layout_directory
@@ -55,15 +55,6 @@ module Jekyll
     def within(directory)
       return unless File.exist?(directory)
       Dir.chdir(directory) { yield }
-    end
-
-    def layout_directory_inside_source
-      site.in_source_dir(site.config["layouts_dir"])
-    end
-
-    def layout_directory_in_cwd
-      dir = Jekyll.sanitized_path(Dir.pwd, site.config["layouts_dir"])
-      dir if File.directory?(dir) && !site.safe
     end
   end
 end

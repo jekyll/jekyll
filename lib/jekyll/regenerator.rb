@@ -19,16 +19,15 @@ module Jekyll
     # Checks if a renderable object needs to be regenerated
     #
     # Returns a boolean.
-    def regenerate?(document)
+    def regenerate?(object)
       return true if disabled
-      case document
-      when Page
-        regenerate_page?(document)
-      when Document
-        regenerate_document?(document)
+      case object
+      when Document, Page
+        regenerate_renderable?(object)
       else
-        source_path = document.respond_to?(:path) ? document.path : nil
-        dest_path = document.destination(@site.dest) if document.respond_to?(:destination)
+        source_path = object.path if object.respond_to?(:path)
+        dest_path   = object.destination(@site.dest) if object.respond_to?(:destination)
+
         source_modified_or_dest_missing?(source_path, dest_path)
       end
     end
@@ -161,15 +160,8 @@ module Jekyll
         end
     end
 
-    def regenerate_page?(document)
-      document.asset_file? || document.data["regenerate"] ||
-        source_modified_or_dest_missing?(
-          site.in_source_dir(document.relative_path), document.destination(@site.dest)
-        )
-    end
-
-    def regenerate_document?(document)
-      !document.write? || document.data["regenerate"] ||
+    def regenerate_renderable?(document)
+      !document.write? || document.asset_file? || document.data["regenerate"] ||
         source_modified_or_dest_missing?(
           document.path, document.destination(@site.dest)
         )

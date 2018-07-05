@@ -1,24 +1,56 @@
 # frozen_string_literal: true
 
-# Convertible provides methods for converting a pagelike item
-# from a certain type of markup into actual content
-#
-# Requires
-#   self.site -> Jekyll::Site
-#   self.content
-#   self.content=
-#   self.data=
-#   self.ext=
-#   self.output=
-#   self.name
-#   self.path
-#   self.type -> :page, :post or :draft
-
 module Jekyll
-  module Convertible
-    # Returns the contents as a String.
+  # A precursor class that encompasses common methods for various convertible types (types that
+  # are not considered 'static' and are processed during the build process).
+  # Initializing this class directly is not recommended.
+  class PrimalPage
+    attr_reader   :site, :dir, :path, :relative_path
+
+    attr_accessor :name, :ext, :basename_without_ext,
+                  :data, :content, :output
+
+    alias_method  :basename, :name
+    alias_method  :extname, :ext
+
+    attr_writer   :basename, :extname
+
+    # For backwards compatibility with Jekyll::Page descendants older than v4.0, initialize a
+    # slimmer version of the former Jekyll::Page::ATTRIBUTES_FOR_LIQUID to avoid unnecessary
+    # computation.
+    ATTRIBUTES_FOR_LIQUID = %w(dir name).freeze
+
+    def initialize(site, base, dir, name)
+      @site = site
+      @dir  = dir
+      @name = name
+      base  = @site.source if base.nil? || base.empty? || base.include?("../")
+
+      @relative_path = Jekyll.sanitized_path(dir, name).sub(%r!\A/!, "")
+      @path = Jekyll.sanitized_path(base, @relative_path)
+
+      process(name)
+
+      @data = {} # ensures that data is always a Hash by default
+      read_yaml File.join(base, dir), name # arguments passed only for compatibility with plugins.
+
+      data.default_proc = proc do |_, key|
+        site.frontmatter_defaults.find(relative_path, type, key)
+      end
+
+      trigger_hooks :post_init
+    end
+
+    def process(name)
+      self.ext = File.extname(name)
+      self.basename_without_ext = File.basename(name, ".*")
+    end
+
+    # The string representation for this document.
+    #
+    # Returns the content of the document
     def to_s
-      content || ""
+      output || content || "NO CONTENT"
     end
 
     # Whether the file is published or not, as indicated in YAML front-matter
@@ -28,34 +60,29 @@ module Jekyll
 
     # Read the YAML frontmatter.
     #
-    # base - The String path to the dir containing the file.
-    # name - The String filename of the file.
     # opts - optional parameter to File.read, default at site configs
     #
     # Returns nothing.
     # rubocop:disable Metrics/AbcSize
-    def read_yaml(base, name, opts = {})
-      filename = File.join(base, name)
-
+    def read_yaml(*_args, **opts)
       begin
-        self.content = File.read(@path || site.in_source_dir(base, name),
-                                 Utils.merged_file_read_opts(site, opts))
+        self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
         if content =~ Document::YAML_FRONT_MATTER_REGEXP
           self.content = $POSTMATCH
           self.data = SafeYAML.load(Regexp.last_match(1))
         end
       rescue Psych::SyntaxError => e
-        Jekyll.logger.warn "YAML Exception reading #{filename}: #{e.message}"
+        Jekyll.logger.warn "YAML Exception reading #{path}: #{e.message}"
         raise e if site.config["strict_front_matter"]
       rescue StandardError => e
-        Jekyll.logger.warn "Error reading file #{filename}: #{e.message}"
+        Jekyll.logger.warn "Error reading file #{path}: #{e.message}"
         raise e if site.config["strict_front_matter"]
       end
 
       self.data ||= {}
 
-      validate_data! filename
-      validate_permalink! filename
+      validate_data! path
+      validate_permalink! path
 
       self.data
     end
@@ -74,11 +101,16 @@ module Jekyll
       end
     end
 
+    # Returns the object as a debug String.
+    def inspect
+      "#<#{self.class.name} @name=#{name.inspect}>"
+    end
+
     # Transform the contents based on the content type.
     #
     # Returns the transformed contents.
     def transform
-      _renderer.convert(content)
+      renderer.convert(content)
     end
 
     # Determine the extension depending on content_type.
@@ -86,7 +118,7 @@ module Jekyll
     # Returns the String extension for the output file.
     #   e.g. ".html" for an HTML output file.
     def output_ext
-      _renderer.output_ext
+      renderer.output_ext
     end
 
     # Determine which converter to use based on this convertible's
@@ -94,7 +126,7 @@ module Jekyll
     #
     # Returns the Converter instance.
     def converters
-      _renderer.converters
+      renderer.converters
     end
 
     # Render Liquid in the content
@@ -105,32 +137,14 @@ module Jekyll
     #
     # Returns the converted content
     def render_liquid(content, payload, info, path)
-      _renderer.render_liquid(content, payload, info, path)
+      renderer.render_liquid(content, payload, info, path)
     end
 
-    # Convert this Convertible's data to a Hash suitable for use by Liquid.
+    # Determine whether the document is a YAML file.
     #
-    # Returns the Hash representation of this Convertible.
-    def to_liquid(attrs = nil)
-      further_data = Hash[(attrs || self.class::ATTRIBUTES_FOR_LIQUID).map do |attribute|
-        [attribute, send(attribute)]
-      end]
-
-      defaults = site.frontmatter_defaults.all(relative_path, type)
-      Utils.deep_merge_hashes defaults, Utils.deep_merge_hashes(data, further_data)
-    end
-
-    # The type of a document,
-    #   i.e., its classname downcase'd and to_sym'd.
-    #
-    # Returns the type of self.
-    def type
-      :pages if is_a?(Page)
-    end
-
-    # returns the owner symbol for hook triggering
-    def hook_owner
-      :pages if is_a?(Page)
+    # Returns true if the extname is either .yml or .yaml, false otherwise.
+    def yaml_file?
+      %w(.yaml .yml).include?(extname)
     end
 
     # Determine whether the document is an asset file.
@@ -146,30 +160,31 @@ module Jekyll
     #
     # Returns true if extname == .sass or .scss, false otherwise.
     def sass_file?
-      %w(.sass .scss).include?(ext)
+      %w(.sass .scss).include?(extname)
     end
 
     # Determine whether the document is a CoffeeScript file.
     #
     # Returns true if extname == .coffee, false otherwise.
     def coffeescript_file?
-      ext == ".coffee"
+      extname == ".coffee"
     end
 
     # Determine whether the file should be rendered with Liquid.
     #
-    # Returns true if the file has Liquid Tags or Variables, false otherwise.
+    # Returns false if the document is a yaml file, or if the document doesn't
+    #   contain any Liquid Tags or Variables, true otherwise.
     def render_with_liquid?
       return false if data["render_with_liquid"] == false
-      Jekyll::Utils.has_liquid_construct?(content)
+      !(yaml_file? || !Utils.has_liquid_construct?(content))
     end
 
     # Determine whether the file should be placed into layouts.
     #
-    # Returns false if the document is an asset file or if the front matter
-    #   specifies `layout: none`
+    # Returns false if the document is set to `layouts: none`, or is either an
+    #   asset file or a yaml file. Returns true otherwise.
     def place_in_layout?
-      !(asset_file? || no_layout?)
+      !(asset_file? || yaml_file? || no_layout?)
     end
 
     # Checks if the layout specified in the document actually exists
@@ -189,10 +204,8 @@ module Jekyll
     #
     # Returns nothing
     def render_all_layouts(layouts, payload, info)
-      _renderer.layouts = layouts
-      self.output = _renderer.place_in_layouts(output, payload, info)
-    ensure
-      @_renderer = nil # this will allow the modifications above to disappear
+      renderer.layouts = layouts
+      self.output = renderer.place_in_layouts(output, payload, info)
     end
 
     # Add any necessary layouts to this convertible document.
@@ -202,15 +215,13 @@ module Jekyll
     #
     # Returns nothing.
     def do_layout(payload, layouts)
-      self.output = _renderer.tap do |renderer|
-        renderer.layouts = layouts
-        renderer.payload = payload
+      self.output = renderer.tap do |render|
+        render.layouts = layouts
+        render.payload = payload
       end.run
 
       Jekyll.logger.debug "Post-Render Hooks:", relative_path
-      Jekyll::Hooks.trigger hook_owner, :post_render, self
-    ensure
-      @_renderer = nil # this will allow the modifications above to disappear
+      trigger_hooks :post_render
     end
 
     # Write the generated page file to the destination directory.
@@ -223,7 +234,18 @@ module Jekyll
       FileUtils.mkdir_p(File.dirname(path))
       Jekyll.logger.debug "Writing:", path
       File.write(path, output, :mode => "wb")
-      Jekyll::Hooks.trigger hook_owner, :post_write, self
+
+      trigger_hooks(:post_write)
+    end
+
+    # Create a Liquid-understandable version of this Page.
+    #
+    # Returns a Hash representing this Page's data.
+    def to_liquid
+      @to_liquid ||= Utils.deep_merge_hashes(
+        site.frontmatter_defaults.all(relative_path, type),
+        Utils.deep_merge_hashes(legacy_data, Drops::PageDrop.new(self))
+      )
     end
 
     # Accessor for data properties by Liquid.
@@ -232,19 +254,34 @@ module Jekyll
     #
     # Returns the String value or nil if the property isn't included.
     def [](property)
-      if self.class::ATTRIBUTES_FOR_LIQUID.include?(property)
-        send(property)
-      else
-        data[property]
-      end
+      to_liquid[property] || data[property]
+    end
+
+    def trigger_hooks(hook_name, *args)
+      Jekyll::Hooks.trigger hook_owner, hook_name, self, *args
+    end
+
+    def type
+      nil
     end
 
     private
 
-    def _renderer
-      @_renderer ||= Jekyll::Renderer.new(site, self)
+    def legacy_data
+      Hash[
+        self.class::ATTRIBUTES_FOR_LIQUID.map { |attribute| [attribute, send(attribute)] }
+      ]
     end
 
+    def renderer
+      @renderer ||= Jekyll::Renderer.new(@site, self)
+    end
+
+    def hook_owner
+      nil
+    end
+
+    # Returns true if the Front Matter specifies that `layout` is set to `none`.
     def no_layout?
       data["layout"] == "none"
     end
