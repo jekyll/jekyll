@@ -160,7 +160,7 @@ module Jekyll
     #
     # Returns true if the file has Liquid Tags or Variables, false otherwise.
     def render_with_liquid?
-      return false if self.data["liquid"] == false
+      return false if data["liquid"] == false
       Jekyll::Utils.has_liquid_construct?(content)
     end
 
