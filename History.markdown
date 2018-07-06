@@ -28,6 +28,7 @@
   * Added plugin json-get. (#7086)
   * Update travis-ci.md to point out &#34;this is an example Gemfile&#34; (#7089)
   * Adding `jekyll-info` plugin (#7091)
+  * GitHub enables you to use themes from other repos (#7112)
 
 ### Minor Enhancements
 
@@ -59,10 +60,7 @@
   * Update Rubocop&#39;s config (#7050)
   * Remember to release docs gem (#7066)
   * Use assert_include (#7093)
-  * Update rubocop version to 0.57.x (#7078)
-
-### -docs
-
+  * Update rubocop version to 0.57.x ### -docs (#7078)
   * Example of CircleCI deployment through CircleCI v2 (#7024)
 
 ## 3.8.3 / 2018-06-05
