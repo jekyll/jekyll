@@ -100,7 +100,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - rubygems-v1-{{ checksum "Gemfile.lock" }}
+            - rubygems-v1-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
             - rubygems-v1-fallback
       - run:
           name: Bundle Install
@@ -114,7 +114,7 @@ jobs:
               --check-html \
               --disable-external
       - save_cache:
-          key: rubygems-v1-{{ checksum "Gemfile.lock" }}
+          key: rubygems-v1-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
           paths:
             - vendor/bundle
       - run:
