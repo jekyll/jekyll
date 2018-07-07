@@ -940,6 +940,7 @@ You can find a few useful plugins at the following locations:
 - [jekyll-pwa-plugin](https://github.com/lavas-project/jekyll-pwa): A plugin provides PWA support for Jekyll. It generates a service worker in Jekyll build process and makes precache and runtime cache available in the runtime with Google Workbox.
 - [jekyll-algolia](https://community.algolia.com/jekyll-algolia/): Add fast and relevant search to your Jekyll site through the Algolia API.
 - [jekyll-get](https://github.com/18F/jekyll-get): Download data from external JSON API sources to use in generating a site.
+- [jekyll-xml-source](https://github.com/mcred/jekyll-xml-source): Download XML and RSS from external sites for use in site data.
 
 <div class="note info">
   <h5>Submit your gem plugins</h5>
