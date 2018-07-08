@@ -326,16 +326,12 @@ module Jekyll
       end
     end
 
-    private
-
     # return numeric values as numbers for proper sorting
     def parse_sort_input(property)
       number_like = %r!\A\s*-?(?:\d+\.?\d*|\.\d+)\s*\Z!
       return property.to_f if property =~ number_like
-      return property
+      property
     end
-
-    private
 
     def as_liquid(item)
       case item
