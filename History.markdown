@@ -29,6 +29,7 @@
   * Update travis-ci.md to point out &#34;this is an example Gemfile&#34; (#7089)
   * Adding `jekyll-info` plugin (#7091)
   * GitHub enables you to use themes from other repos (#7112)
+  * Updates to CODE OF CONDUCT  (v1.4.0) (#7105)
 
 ### Minor Enhancements
 
