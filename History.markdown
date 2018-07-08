@@ -30,6 +30,7 @@
   * Adding `jekyll-info` plugin (#7091)
   * GitHub enables you to use themes from other repos (#7112)
   * Updates to CODE OF CONDUCT  (v1.4.0) (#7105)
+  * Instructions to view theme’s files under Linux (#7095)
 
 ### Minor Enhancements
 
