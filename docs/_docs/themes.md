@@ -3,7 +3,7 @@ title: Themes
 permalink: /docs/themes/
 ---
 
-Jekyll has an extensive theme system that allows you to leverage community-maintained templates and styles to customize your site's presentation. Jekyll themes package up layouts, includes, and stylesheets in a way that can be overridden by your site's content.
+Jekyll has an extensive theme system that allows you to leverage community-maintained templates and styles to customize your site's presentation. Jekyll themes specify plugins and package up assets, layouts, includes, and stylesheets in a way that can be overridden by your site's content.
 
 ## Understanding gem-based themes
 
@@ -108,7 +108,48 @@ Suppose you want to get rid of the gem-based theme and convert it to a regular t
 
 To do this, copy the files from the theme gem's directory into your Jekyll site directory. (For example, copy them to `/myblog` if you created your Jekyll site at `/myblog`. See the previous section for details.)
 
-Then remove references to the theme gem in `Gemfile` and configuration. For example, to remove `minima`:
+Then you must tell Jekyll about the plugins that were referenced by the theme. You can find these plugins in the theme's gemspec file as runtime dependencies. If you were converting the Minima theme, for example, you might see:
+
+```
+spec.add_runtime_dependency "jekyll-feed", "~> 0.9"
+spec.add_runtime_dependency "jekyll-seo-tag", "~> 2.1"
+```
+
+You should include these references in the `Gemfile` in one of two ways.
+
+You could list them individually in both `Gemfile` and `_config.yml`.
+
+```ruby
+# ./Gemfile
+
+gem "jekyll-feed", "~> 0.9"
+gem "jekyll-seo-tag", "~> 2.1"
+```
+
+```yaml
+# ./_config.yml
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+```
+
+Or you could list them explicitly as Jekyll plugins in your Gemfile, and not update `_config.yml`, like this:
+
+```ruby
+# ./Gemfile
+
+group :jekyll_plugins do
+  gem "jekyll-feed", "~> 0.9"
+  gem "jekyll-seo-tag", "~> 2.1"
+end
+```
+
+Either way, don't forget to `bundle update`.
+
+However, if you're publishing on GitHub Pages you should update only your `_config.yml` as GitHub Pages doesn't load plugins via Bundler.
+
+Finally, remove references to the theme gem in `Gemfile` and configuration. For example, to remove `minima`:
 
 - Open `Gemfile` and remove `gem "minima", "~> 2.0"`.
 - Open `_config.yml` and remove `theme: minima`.
@@ -160,7 +201,7 @@ To install a gem-based theme:
 You can have multiple themes listed in your site's `Gemfile`, but only one theme can be selected in your site's `_config.yml`.
 {: .note .info }
 
-If you're publishing your Jekyll site on [GitHub Pages](https://pages.github.com/), note that GitHub Pages supports only some gem-based themes. See [Supported Themes](https://pages.github.com/themes/) in GitHub's documentation to see which themes are supported.
+If you're publishing your Jekyll site on [GitHub Pages](https://pages.github.com/), note that GitHub Pages supports only [some gem-based themes](https://pages.github.com/themes/). GitHub Pages also supports [using any theme hosted on GitHub](https://help.github.com/articles/adding-a-jekyll-theme-to-your-github-pages-site/#adding-a-jekyll-theme-in-your-sites-_configyml-file) using the `remote_theme` configuration as if it were a gem-based theme.
 
 ## Creating a gem-based theme
 
@@ -236,7 +277,7 @@ Your theme should include a `/README.md` file, which explains how site authors c
 
 ### Adding a screenshot
 
-Themes are visual. Show users what your theme looks like by including a screenshot as `/screenshot.png` within your theme's repository where it can be retrieved programatically. You can also include this screenshot within your theme's documentation.
+Themes are visual. Show users what your theme looks like by including a screenshot as `/screenshot.png` within your theme's repository where it can be retrieved programmatically. You can also include this screenshot within your theme's documentation.
 
 ### Previewing your theme
 

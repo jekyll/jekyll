@@ -40,7 +40,12 @@ module Jekyll
 
     # Returns source file path.
     def path
-      File.join(*[@base, @dir, @name].compact)
+      # Static file is from a collection inside custom collections directory
+      if !@collection.nil? && !@site.config["collections_dir"].empty?
+        File.join(*[@base, @site.config["collections_dir"], @dir, @name].compact)
+      else
+        File.join(*[@base, @dir, @name].compact)
+      end
     end
 
     # Obtain destination path.
@@ -128,11 +133,11 @@ module Jekyll
       @url ||= if @collection.nil?
                  relative_path
                else
-                 ::Jekyll::URL.new({
+                 ::Jekyll::URL.new(
                    :template     => @collection.url_template,
-                   :placeholders => placeholders,
-                 })
-               end.to_s.gsub(%r!/$!, "")
+                   :placeholders => placeholders
+                 )
+               end.to_s.chomp("/")
     end
 
     # Returns the type of the collection if present, nil otherwise.
@@ -147,6 +152,7 @@ module Jekyll
     end
 
     private
+
     def copy_file(dest_path)
       if @site.safe || Jekyll.env == "production"
         FileUtils.cp(path, dest_path)

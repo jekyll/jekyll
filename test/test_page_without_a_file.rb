@@ -123,7 +123,7 @@ class TestPageWithoutAFile < JekyllUnitTest
         @page = setup_page("physical.html", :base => test_dir("fixtures"))
       end
 
-      should "recieve content provided to it" do
+      should "receive content provided to it" do
         assert_nil @page.content
 
         @page.content = "{{ site.title }}"

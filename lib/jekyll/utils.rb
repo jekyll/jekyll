@@ -7,7 +7,6 @@ module Jekyll
     autoload :Exec, "jekyll/utils/exec"
     autoload :Internet, "jekyll/utils/internet"
     autoload :Platforms, "jekyll/utils/platforms"
-    autoload :Rouge, "jekyll/utils/rouge"
     autoload :ThreadEvent, "jekyll/utils/thread_event"
     autoload :WinTZ, "jekyll/utils/win_tz"
 
@@ -147,6 +146,14 @@ module Jekyll
     rescue EOFError
       false
     end
+
+    # Determine whether the given content string contains Liquid Tags or Vaiables
+    #
+    # Returns true is the string contains sequences of `{%` or `{{`
+    def has_liquid_construct?(content)
+      return false if content.nil? || content.empty?
+      content.include?("{%") || content.include?("{{")
+    end
     # rubocop: enable PredicateName
 
     # Slugify a filename or title.
@@ -203,7 +210,10 @@ module Jekyll
       end
 
       # Drop accent marks from latin characters. Everything else turns to ?
-      string = ::I18n.transliterate(string) if mode == "latin"
+      if mode == "latin"
+        I18n.config.available_locales = :en if I18n.config.available_locales.empty?
+        string = I18n.transliterate(string)
+      end
 
       slug = replace_character_sequence_with_hyphen(string, :mode => mode)
 
@@ -303,6 +313,7 @@ module Jekyll
     end
 
     private
+
     def merge_values(target, overwrite)
       target.merge!(overwrite) do |_key, old_val, new_val|
         if new_val.nil?
@@ -315,14 +326,12 @@ module Jekyll
       end
     end
 
-    private
     def merge_default_proc(target, overwrite)
       if target.is_a?(Hash) && overwrite.is_a?(Hash) && target.default_proc.nil?
         target.default_proc = overwrite.default_proc
       end
     end
 
-    private
     def duplicate_frozen_values(target)
       target.each do |key, val|
         target[key] = val.dup if val.frozen? && duplicable?(val)
@@ -333,7 +342,6 @@ module Jekyll
     #
     # See Utils#slugify for a description of the character sequence specified
     # by each mode.
-    private
     def replace_character_sequence_with_hyphen(string, mode: "default")
       replaceable_char =
         case mode

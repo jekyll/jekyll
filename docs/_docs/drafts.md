@@ -3,7 +3,7 @@ title: Working with drafts
 permalink: /docs/drafts/
 ---
 
-Drafts are posts without a date. They're posts you're still working on and
+Drafts are posts without a date in the filename. They're posts you're still working on and
 don't want to publish yet. To get up and running with drafts, create a
 `_drafts` folder in your site's root (as described in the [site structure](/docs/structure/) section) and create your
 first draft:

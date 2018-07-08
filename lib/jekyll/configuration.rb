@@ -61,15 +61,9 @@ module Jekyll
       "defaults"            => [],
 
       "liquid"              => {
-        "error_mode" => "warn",
-      },
-
-      "rdiscount"           => {
-        "extensions" => [],
-      },
-
-      "redcarpet"           => {
-        "extensions" => [],
+        "error_mode"       => "warn",
+        "strict_filters"   => false,
+        "strict_variables" => false,
       },
 
       "kramdown"            => {
@@ -97,7 +91,7 @@ module Jekyll
       # problems and backwards-compatibility.
       def from(user_config)
         Utils.deep_merge_hashes(DEFAULTS, Configuration[user_config].stringify_keys)
-          .fix_common_issues.add_default_collections
+          .add_default_collections
       end
     end
 
@@ -134,8 +128,8 @@ module Jekyll
     def safe_load_file(filename)
       case File.extname(filename)
       when %r!\.toml!i
-        Jekyll::External.require_with_graceful_fail("toml") unless defined?(TOML)
-        TOML.load_file(filename)
+        Jekyll::External.require_with_graceful_fail("tomlrb") unless defined?(Tomlrb)
+        Tomlrb.load_file(filename)
       when %r!\.ya?ml!i
         SafeYAML.load_file(filename) || {}
       else
@@ -210,7 +204,7 @@ module Jekyll
         warn err
       end
 
-      configuration.fix_common_issues.backwards_compatibilize.add_default_collections
+      configuration.backwards_compatibilize.add_default_collections
     end
 
     # Public: Split a CSV string into an array containing its values
@@ -246,18 +240,9 @@ module Jekyll
       config
     end
 
+    # DEPRECATED.
     def fix_common_issues
-      config = clone
-
-      if config.key?("paginate") && (!config["paginate"].is_a?(Integer) ||
-             config["paginate"] < 1)
-
-        Jekyll.logger.warn "Config Warning:", "The `paginate` key must be a positive" \
-          " integer or nil. It's currently set to '#{config["paginate"].inspect}'."
-        config["paginate"] = nil
-      end
-
-      config
+      self
     end
 
     def add_default_collections
@@ -293,6 +278,7 @@ module Jekyll
     end
 
     private
+
     def style_to_permalink(permalink_style)
       case permalink_style.to_sym
       when :pretty
@@ -314,14 +300,12 @@ module Jekyll
     # file - the file from which the config was extracted
     #
     # Raises an ArgumentError if given config is not a hash
-    private
     def check_config_is_hash!(extracted_config, file)
       unless extracted_config.is_a?(Hash)
         raise ArgumentError, "Configuration file: (INVALID) #{file}".yellow
       end
     end
 
-    private
     def check_auto(config)
       if config.key?("auto") || config.key?("watch")
         Jekyll::Deprecator.deprecation_message "Auto-regeneration can no longer" \
@@ -332,7 +316,6 @@ module Jekyll
       end
     end
 
-    private
     def check_server(config)
       if config.key?("server")
         Jekyll::Deprecator.deprecation_message "The 'server' configuration option" \
@@ -342,7 +325,6 @@ module Jekyll
       end
     end
 
-    private
     def check_pygments(config)
       if config.key?("pygments")
         Jekyll::Deprecator.deprecation_message "The 'pygments' configuration option" \
@@ -355,7 +337,6 @@ module Jekyll
       end
     end
 
-    private
     def check_include_exclude(config)
       %w(include exclude).each do |option|
         if config[option].is_a?(String)
@@ -365,11 +346,10 @@ module Jekyll
             " as a list of comma-separated values."
           config[option] = csv_to_array(config[option])
         end
-        config[option].map!(&:to_s) if config[option]
+        config[option]&.map!(&:to_s)
       end
     end
 
-    private
     def check_coderay(config)
       if (config["kramdown"] || {}).key?("use_coderay")
         Jekyll::Deprecator.deprecation_message "Please change 'use_coderay'" \
@@ -378,7 +358,6 @@ module Jekyll
       end
     end
 
-    private
     def check_maruku(config)
       if config.fetch("markdown", "kramdown").to_s.casecmp("maruku").zero?
         Jekyll.logger.abort_with "Error:", "You're using the 'maruku' " \
@@ -395,7 +374,6 @@ module Jekyll
     #
     # Raises a Jekyll::Errors::InvalidConfigurationError if the config `plugins`
     # is a string
-    private
     def check_plugins(config)
       if config.key?("plugins") && config["plugins"].is_a?(String)
         Jekyll.logger.error "Configuration Error:", "You specified the" \
@@ -403,8 +381,8 @@ module Jekyll
           " use an array instead. If you wanted to set the directory of your" \
           " plugins, use the config key `plugins_dir` instead."
         raise Jekyll::Errors::InvalidConfigurationError,
-          "'plugins' should not be a string, but was: " \
-          "#{config["plugins"].inspect}. Use 'plugins_dir' instead."
+              "'plugins' should not be a string, but was: " \
+              "#{config["plugins"].inspect}. Use 'plugins_dir' instead."
       end
     end
   end
