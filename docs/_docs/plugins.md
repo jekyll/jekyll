@@ -94,7 +94,11 @@ In general, plugins you make will fall broadly into one of five categories:
 4. [Tags](#tags)
 5. [Hooks](#hooks)
 
-See the bottom of the page for a [list of available plugins](#available-plugins)
+See the bottom of the page for a [list of available plugins](#available-plugins).
+
+For further information on how to develop your own plugins, check out the [Liquid documentation](https://github.com/Shopify/liquid/wiki/Liquid-for-Programmers) as well.
+
+If you never developed a Jekyll plugin [check this useful wrap-up](https://ayastreb.me/writing-a-jekyll-plugin/) by @ayastreb to get started.
 
 ## Generators
 
@@ -783,6 +787,8 @@ You can find a few useful plugins at the following locations:
 - [Jekyll::Paginate::Content](https://github.com/ibrado/jekyll-paginate-content): Content paginator in the style of jekyll-paginator-v2 that splits pages, posts, and collection entries into several pages. Specify a separator or use HTML &lt;h1&gt; etc. headers. Automatic splitting, single-page view, pager/trail, self-adjusting links, multipage TOC, SEO support.
 - [Premonition](https://github.com/amedia/premonition): Adds block-styled side content to your page. For example summary, notes, hints or warning boxes.
 - [jekyll-fontello](https://github.com/ericcornelissen/jekyll-fontello): A Jekyll plugin that automatically downloads your webfont from Fontello.
+- [Target Blank](https://github.com/keithmifsud/jekyll-target-blank): A Jekyll plugin to automatically open external links in a new browser tab or window.
+- [jekyll-info](https://github.com/swestmoreland/jekyll-info): A plugin to provide information about your Jekyll site’s configuration.
 
 #### Converters
 
@@ -821,6 +827,7 @@ You can find a few useful plugins at the following locations:
 - [match_regex](https://github.com/sparanoid/match_regex): A Liquid filter to perform regex match.
 - [replace_regex](https://github.com/sparanoid/replace_regex): A Liquid filter to perform regex replace.
 - [Jekyll Money](https://rubygems.org/gems/jekyll-money): A Jekyll plugin for dealing with money. Because we all have to at some point.
+- [jekyll-random](https://github.com/codecalm/jekyll-random) by [codecalm](https://nodecalm.net): A Jekyll plugin that generates pseudo-random data. Very useful when you want to generate a large amount of random data.
 
 #### Tags
 
@@ -878,8 +885,11 @@ You can find a few useful plugins at the following locations:
   plugin to generate publication lists from [BibSonomy](https://www.bibsonomy.org/).
 - [github-cards](https://github.com/edward-shen/github-cards): Creates styleable Github cards for your Github projects.
 - [disqus-for-jekyll](https://github.com/kacperduras/disqus-for-jekyll): A Jekyll plugin to view the comments powered by Disqus.
-- [jekyll-html](https://github.com/kacperduras/jekyll-html): A Jekyll plugin to use HTML tags in Jekyll pages, posts and collections. 
-
+- [jekyll-html](https://github.com/kacperduras/jekyll-html): A Jekyll plugin to use HTML tags in Jekyll pages, posts and collections.
+- [jekyll-onebox](https://github.com/rriemann/jekyll-onebox): Liquid tag for displaying HTML previews (embeds) for links to popular domains. Plugin is based on [Onebox](https://github.com/discourse/onebox) that powers link previews in [Discourse](http://github.com/discourse/discourse) forums.
+- [jekyll-w2m](https://github.com/kacperduras/jekyll-w2m): A Jekyll plugin to liberate content from Microsoft Word documents (powered by [word-to-markdown](https://github.com/benbalter/word-to-markdown)).
+- [jekyll-flickr](https://github.com/rriemann/jekyll-flickr): Liquid tag for responsive Flickr images using HTML5 srcset. Subtitles and automatic license notices are supported.
+- [CAT](https://github.com/binfalse/jekyll-cat): Include the contents of any file (like the `include` command, but also for files outside of `_include`). Similar to Unix' `cat` tool; useful for including source code etc. in posts and pages.
 
 #### Collections
 
@@ -929,6 +939,8 @@ You can find a few useful plugins at the following locations:
 - [jekyll-pre-commit](https://github.com/mpchadwick/jekyll-pre-commit): A framework for running checks against your posts using a git pre-commit hook before you publish them.
 - [jekyll-pwa-plugin](https://github.com/lavas-project/jekyll-pwa): A plugin provides PWA support for Jekyll. It generates a service worker in Jekyll build process and makes precache and runtime cache available in the runtime with Google Workbox.
 - [jekyll-algolia](https://community.algolia.com/jekyll-algolia/): Add fast and relevant search to your Jekyll site through the Algolia API.
+- [jekyll-get](https://github.com/18F/jekyll-get): Download data from external JSON API sources to use in generating a site.
+- [jekyll-xml-source](https://github.com/mcred/jekyll-xml-source): Download XML and RSS from external sites for use in site data.
 
 <div class="note info">
   <h5>Submit your gem plugins</h5>

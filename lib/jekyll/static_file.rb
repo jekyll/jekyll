@@ -133,11 +133,11 @@ module Jekyll
       @url ||= if @collection.nil?
                  relative_path
                else
-                 ::Jekyll::URL.new({
+                 ::Jekyll::URL.new(
                    :template     => @collection.url_template,
-                   :placeholders => placeholders,
-                 })
-               end.to_s.gsub(%r!/$!, "")
+                   :placeholders => placeholders
+                 )
+               end.to_s.chomp("/")
     end
 
     # Returns the type of the collection if present, nil otherwise.
@@ -152,6 +152,7 @@ module Jekyll
     end
 
     private
+
     def copy_file(dest_path)
       if @site.safe || Jekyll.env == "production"
         FileUtils.cp(path, dest_path)

@@ -126,11 +126,11 @@ class TestDocument < JekyllUnitTest
     end
 
     should "output the collection name in the #to_liquid method" do
-      assert_equal @document.to_liquid["collection"], "methods"
+      assert_equal "methods", @document.to_liquid["collection"]
     end
 
     should "output its relative path as path in Liquid" do
-      assert_equal @document.to_liquid["path"], "_methods/configuration.md"
+      assert_equal "_methods/configuration.md", @document.to_liquid["path"]
     end
   end
 
@@ -449,14 +449,16 @@ class TestDocument < JekyllUnitTest
         refute_nil @files.find do |doc|
           doc.relative_path == "_slides/example-slide-4.html"
         end
+        assert_exist dest_dir("slides/example-slide-4.html")
       end
     end
 
     context "with output overrides" do
       should "be output according its front matter" do
-        assert_nil(
-          @files.find { |doc| doc.relative_path == "_slides/non-outputted-slide.html" }
-        )
+        assert @files.find do |doc|
+          doc.relative_path == "_slides/non-outputted-slide.html"
+        end
+        refute_exist dest_dir("slides/non-outputted-slide.html")
       end
     end
   end

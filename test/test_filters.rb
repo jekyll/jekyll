@@ -43,7 +43,7 @@ class TestFilters < JekyllUnitTest
         "baseurl"                => "/base",
         "dont_show_posts_before" => @sample_time,
       })
-      @sample_date = Date.parse("2013-03-27")
+      @sample_date = Date.parse("2013-03-02")
       @time_as_string = "September 11, 2001 12:46:30 -0000"
       @time_as_numeric = 1_399_680_607
       @integer_as_string = "142857"
@@ -210,6 +210,16 @@ class TestFilters < JekyllUnitTest
           assert_equal "27 March 2013", @filter.date_to_long_string(@sample_time)
         end
 
+        should "format a date with ordinal, US format" do
+          assert_equal "Mar 27th, 2013",
+                       @filter.date_to_string(@sample_time, "ordinal", "US")
+        end
+
+        should "format a date with long, ordinal format" do
+          assert_equal "27th March 2013",
+                       @filter.date_to_long_string(@sample_time, "ordinal")
+        end
+
         should "format a time with xmlschema" do
           assert_equal(
             "2013-03-27T11:22:33+00:00",
@@ -234,23 +244,32 @@ class TestFilters < JekyllUnitTest
 
       context "with Date object" do
         should "format a date with short format" do
-          assert_equal "27 Mar 2013", @filter.date_to_string(@sample_date)
+          assert_equal "02 Mar 2013", @filter.date_to_string(@sample_date)
         end
 
         should "format a date with long format" do
-          assert_equal "27 March 2013", @filter.date_to_long_string(@sample_date)
+          assert_equal "02 March 2013", @filter.date_to_long_string(@sample_date)
+        end
+
+        should "format a date with ordinal format" do
+          assert_equal "2nd Mar 2013", @filter.date_to_string(@sample_date, "ordinal")
+        end
+
+        should "format a date with ordinal, US, long format" do
+          assert_equal "March 2nd, 2013",
+                       @filter.date_to_long_string(@sample_date, "ordinal", "US")
         end
 
         should "format a time with xmlschema" do
           assert_equal(
-            "2013-03-27T00:00:00+00:00",
+            "2013-03-02T00:00:00+00:00",
             @filter.date_to_xmlschema(@sample_date)
           )
         end
 
         should "format a time according to RFC-822" do
           assert_equal(
-            "Wed, 27 Mar 2013 00:00:00 +0000",
+            "Sat, 02 Mar 2013 00:00:00 +0000",
             @filter.date_to_rfc822(@sample_date)
           )
         end
@@ -263,6 +282,16 @@ class TestFilters < JekyllUnitTest
 
         should "format a date with long format" do
           assert_equal "11 September 2001", @filter.date_to_long_string(@time_as_string)
+        end
+
+        should "format a date with ordinal, US format" do
+          assert_equal "Sep 11th, 2001",
+                       @filter.date_to_string(@time_as_string, "ordinal", "US")
+        end
+
+        should "format a date with ordinal long format" do
+          assert_equal "11th September 2001",
+                       @filter.date_to_long_string(@time_as_string, "ordinal", "UK")
         end
 
         should "format a time with xmlschema" do
@@ -294,6 +323,16 @@ class TestFilters < JekyllUnitTest
 
         should "format a date with long format" do
           assert_equal "10 May 2014", @filter.date_to_long_string(@time_as_numeric)
+        end
+
+        should "format a date with ordinal, US format" do
+          assert_equal "May 10th, 2014",
+                       @filter.date_to_string(@time_as_numeric, "ordinal", "US")
+        end
+
+        should "format a date with ordinal, long format" do
+          assert_equal "10th May 2014",
+                       @filter.date_to_long_string(@time_as_numeric, "ordinal")
         end
 
         should "format a time with xmlschema" do
@@ -648,10 +687,11 @@ class TestFilters < JekyllUnitTest
       should "convert drop with drops to json" do
         @filter.site.read
         actual = @filter.jsonify(@filter.site.to_liquid)
-        assert_equal JSON.parse(actual)["jekyll"], {
+        expected = {
           "environment" => "development",
           "version"     => Jekyll::VERSION,
         }
+        assert_equal expected, JSON.parse(actual)["jekyll"]
       end
 
       # rubocop:disable Style/StructInheritance
@@ -892,7 +932,7 @@ class TestFilters < JekyllUnitTest
       end
 
       should "filter with other operators" do
-        assert_equal [3, 4, 5], @filter.where_exp([ 1, 2, 3, 4, 5 ], "n", "n >= 3")
+        assert_equal [3, 4, 5], @filter.where_exp([1, 2, 3, 4, 5], "n", "n >= 3")
       end
 
       objects = [
@@ -1035,10 +1075,6 @@ class TestFilters < JekyllUnitTest
       end
       should "return sorted strings" do
         assert_equal %w(10 2), @filter.sort(%w(10 2))
-        assert_equal(
-          [{ "a" => "10" }, { "a" => "2" }],
-          @filter.sort([{ "a" => "10" }, { "a" => "2" }], "a")
-        )
         assert_equal %w(FOO Foo foo), @filter.sort(%w(foo Foo FOO))
         assert_equal %w(_foo foo foo_), @filter.sort(%w(foo_ _foo foo))
         # Cyrillic
@@ -1051,6 +1087,18 @@ class TestFilters < JekyllUnitTest
         assert_equal [{ "a" => 1 }, { "a" => 2 }, { "a" => 3 }, { "a" => 4 }],
           @filter.sort([{ "a" => 4 }, { "a" => 3 }, { "a" => 1 }, { "a" => 2 }], "a")
       end
+      should "return sorted by property array with numeric strings sorted as numbers" do
+        assert_equal([{ "a" => ".5" }, { "a" => "0.65" }, { "a" => "10" }],
+          @filter.sort([{ "a" => "10" }, { "a" => ".5" }, { "a" => "0.65" }], "a"))
+      end
+      should "return sorted by property array with numeric strings first" do
+        assert_equal([{ "a" => ".5" }, { "a" => "0.6" }, { "a" => "twelve" }],
+          @filter.sort([{ "a" => "twelve" }, { "a" => ".5" }, { "a" => "0.6" }], "a"))
+      end
+      should "return sorted by property array with numbers and strings " do
+        assert_equal([{ "a" => "1" }, { "a" => "1abc" }, { "a" => "20" }],
+          @filter.sort([{ "a" => "20" }, { "a" => "1" }, { "a" => "1abc" }], "a"))
+      end
       should "return sorted by property array with nils first" do
         ary = [{ "a" => 2 }, { "b" => 1 }, { "a" => 1 }]
         assert_equal [{ "b" => 1 }, { "a" => 1 }, { "a" => 2 }], @filter.sort(ary, "a")
@@ -1062,9 +1110,9 @@ class TestFilters < JekyllUnitTest
       end
       should "return sorted by subproperty array" do
         assert_equal [{ "a" => { "b" => 1 } }, { "a" => { "b" => 2 } },
-                      { "a" => { "b" => 3 } }, ],
+                      { "a" => { "b" => 3 } },],
           @filter.sort([{ "a" => { "b" => 2 } }, { "a" => { "b" => 1 } },
-                        { "a" => { "b" => 3 } }, ], "a.b")
+                        { "a" => { "b" => 3 } },], "a.b")
       end
     end
 

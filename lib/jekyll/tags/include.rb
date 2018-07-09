@@ -2,15 +2,6 @@
 
 module Jekyll
   module Tags
-    class IncludeTagError < StandardError
-      attr_accessor :path
-
-      def initialize(msg, path)
-        super(msg)
-        @path = path
-      end
-    end
-
     class IncludeTag < Liquid::Tag
       VALID_SYNTAX = %r!
         ([\w-]+)\s*=\s*
@@ -19,7 +10,11 @@ module Jekyll
       VARIABLE_SYNTAX = %r!
         (?<variable>[^{]*(\{\{\s*[\w\-\.]+\s*(\|.*)?\}\}[^\s{}]*)+)
         (?<params>.*)
-      !x
+      !mx
+
+      FULL_VALID_SYNTAX = %r!\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z!
+      VALID_FILENAME_CHARS = %r!^[\w/\.-]+$!
+      INVALID_SEQUENCES = %r![./]{2,}!
 
       def initialize(tag_name, markup, tokens)
         super
@@ -59,33 +54,32 @@ module Jekyll
       end
 
       def validate_file_name(file)
-        if file !~ %r!^[a-zA-Z0-9_/\.-]+$! || file =~ %r!\./! || file =~ %r!/\.!
-          raise ArgumentError, <<-MSG
-Invalid syntax for include tag. File contains invalid characters or sequences:
+        if file =~ INVALID_SEQUENCES || file !~ VALID_FILENAME_CHARS
+          raise ArgumentError, <<~MSG
+            Invalid syntax for include tag. File contains invalid characters or sequences:
 
-  #{file}
+              #{file}
 
-Valid syntax:
+            Valid syntax:
 
-  #{syntax_example}
+              #{syntax_example}
 
-MSG
+          MSG
         end
       end
 
       def validate_params
-        full_valid_syntax = %r!\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z!
-        unless @params =~ full_valid_syntax
-          raise ArgumentError, <<-MSG
-Invalid syntax for include tag:
+        unless @params =~ FULL_VALID_SYNTAX
+          raise ArgumentError, <<~MSG
+            Invalid syntax for include tag:
 
-  #{@params}
+            #{@params}
 
-Valid syntax:
+            Valid syntax:
 
-  #{syntax_example}
+            #{syntax_example}
 
-MSG
+          MSG
         end
       end
 
@@ -96,7 +90,7 @@ MSG
 
       # Render the variable if required
       def render_variable(context)
-        if @file.match(VARIABLE_SYNTAX)
+        if @file =~ VARIABLE_SYNTAX
           partial = context.registers[:site]
             .liquid_renderer
             .file("(variable)")
@@ -144,7 +138,7 @@ MSG
       end
 
       def add_include_to_dependency(site, path, context)
-        if context.registers[:page] && context.registers[:page].key?("path")
+        if context.registers[:page]&.key?("path")
           site.regenerator.add_dependency(
             site.in_source_dir(context.registers[:page]["path"]),
             path
@@ -213,8 +207,15 @@ MSG
         if context.registers[:page].nil?
           context.registers[:site].source
         else
-          current_doc_dir = File.dirname(context.registers[:page]["path"])
-          context.registers[:site].in_source_dir current_doc_dir
+          site = context.registers[:site]
+          page_payload  = context.registers[:page]
+          resource_path = \
+            if page_payload["collection"].nil?
+              page_payload["path"]
+            else
+              File.join(site.config["collections_dir"], page_payload["path"])
+            end
+          site.in_source_dir File.dirname(resource_path)
         end
       end
     end

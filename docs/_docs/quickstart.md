@@ -26,13 +26,15 @@ If you encounter any unexpected errors during the above, please refer to the [tr
 
 ## About Bundler
 
-`gem install jekyll bundler` installs the [jekyll](https://rubygems.org/gems/jekyll/) and [bundler](https://rubygems.org/gems/bundler) gems through [RubyGems](https://rubygems.org/). You need only to install the gems one time &mdash; not every time you create a new Jekyll project. Here are some additional details:
+`gem install bundler` installs the [bundler](https://rubygems.org/gems/bundler) gem through [RubyGems](https://rubygems.org/). You only need to install it once &mdash; not every time you create a new Jekyll project. Here are some additional details:
 
 * `bundler` is a gem that manages other Ruby gems. It makes sure your gems and gem versions are compatible, and that you have all necessary dependencies each gem requires.
 * The `Gemfile` and `Gemfile.lock` files inform Bundler about the gem requirements in your site. If your site doesn't have these Gemfiles, you can omit `bundle exec` and just run `jekyll serve`.
 
 * When you run `bundle exec jekyll serve`, Bundler uses the gems and versions as specified in `Gemfile.lock` to ensure your Jekyll site builds with no compatibility or dependency conflicts.
 
+For more information about how to use Bundler in your Jekyll project, this [tutorial](https://jekyllrb.com/tutorials/using-jekyll-with-bundler/) should provide answers to the most common questions and explain how to get up and running quickly.
+ 
 ## Options for creating a new site with Jekyll
 
 `jekyll new <PATH>` installs a new Jekyll site at the path specified (relative to current directory). In this case, Jekyll will be installed in a directory called `myblog`. Here are some additional details:

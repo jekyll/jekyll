@@ -83,15 +83,14 @@ module Jekyll
     # Returns a String path which represents the relative path from the collections_dir
     # to this document.
     def relative_path
-      @relative_path ||=
-        Pathutil.new(path).relative_path_from(site.collections_path).to_s
+      @relative_path ||= path.sub("#{site.collections_path}/", "")
     end
 
     # The output extension of the document.
     #
     # Returns the output extension
     def output_ext
-      Jekyll::Renderer.new(site, self).output_ext
+      @output_ext ||= Jekyll::Renderer.new(site, self).output_ext
     end
 
     # The base filename of the document, without the file extname.
@@ -157,9 +156,10 @@ module Jekyll
     # Determine whether the file should be rendered with Liquid.
     #
     # Returns false if the document is either an asset file or a yaml file,
+    #   or if the document doesn't contain any Liquid Tags or Variables,
     #   true otherwise.
     def render_with_liquid?
-      !(coffeescript_file? || yaml_file?)
+      !(coffeescript_file? || yaml_file? || !Utils.has_liquid_construct?(content))
     end
 
     # Determine whether the file should be rendered with a layout.
@@ -204,11 +204,11 @@ module Jekyll
     #
     # Returns the computed URL for the document.
     def url
-      @url ||= URL.new({
+      @url ||= URL.new(
         :template     => url_template,
         :placeholders => url_placeholders,
-        :permalink    => permalink,
-      }).to_s
+        :permalink    => permalink
+      ).to_s
     end
 
     def [](key)
@@ -239,6 +239,7 @@ module Jekyll
     def write(dest)
       path = destination(dest)
       FileUtils.mkdir_p(File.dirname(path))
+      Jekyll.logger.debug "Writing:", path
       File.write(path, output, :mode => "wb")
 
       trigger_hooks(:post_write)
@@ -311,9 +312,10 @@ module Jekyll
     # Based on the Collection to which it belongs.
     #
     # True if the document has a collection and if that collection's #write?
-    #   method returns true, otherwise false.
+    # method returns true, and if the site's Publisher will publish the document.
+    # False otherwise.
     def write?
-      collection && collection.write?
+      collection&.write? && site.publisher.publish?(self)
     end
 
     # The Document excerpt_separator, from the YAML Front-Matter or site
@@ -333,16 +335,12 @@ module Jekyll
 
     def next_doc
       pos = collection.docs.index { |post| post.equal?(self) }
-      if pos && pos < collection.docs.length - 1
-        collection.docs[pos + 1]
-      end
+      collection.docs[pos + 1] if pos && pos < collection.docs.length - 1
     end
 
     def previous_doc
       pos = collection.docs.index { |post| post.equal?(self) }
-      if pos && pos > 0
-        collection.docs[pos - 1]
-      end
+      collection.docs[pos - 1] if pos && pos.positive?
     end
 
     def trigger_hooks(hook_name, *args)
@@ -398,32 +396,30 @@ module Jekyll
     end
 
     def populate_categories
-      merge_data!({
+      merge_data!(
         "categories" => (
           Array(data["categories"]) + Utils.pluralized_array_from_hash(
             data, "category", "categories"
           )
-        ).map(&:to_s).flatten.uniq,
-      })
+        ).map(&:to_s).flatten.uniq
+      )
     end
 
     def populate_tags
-      merge_data!({
-        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten,
-      })
+      merge_data!(
+        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
+      )
     end
 
     private
+
     def merge_categories!(other)
       if other.key?("categories") && !other["categories"].nil?
-        if other["categories"].is_a?(String)
-          other["categories"] = other["categories"].split(%r!\s+!).map(&:strip)
-        end
+        other["categories"] = other["categories"].split if other["categories"].is_a?(String)
         other["categories"] = (data["categories"] || []) | other["categories"]
       end
     end
 
-    private
     def merge_date!(source)
       if data.key?("date")
         data["date"] = Utils.parse_date(
@@ -433,7 +429,6 @@ module Jekyll
       end
     end
 
-    private
     def merge_defaults
       defaults = @site.frontmatter_defaults.all(
         relative_path,
@@ -442,7 +437,6 @@ module Jekyll
       merge_data!(defaults, :source => "front matter defaults") unless defaults.empty?
     end
 
-    private
     def read_content(opts)
       self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
       if content =~ YAML_FRONT_MATTER_REGEXP
@@ -452,7 +446,6 @@ module Jekyll
       end
     end
 
-    private
     def read_post_data
       populate_title
       populate_categories
@@ -460,7 +453,6 @@ module Jekyll
       generate_excerpt
     end
 
-    private
     def handle_read_error(error)
       if error.is_a? Psych::SyntaxError
         Jekyll.logger.error "Error:", "YAML Exception reading #{path}: #{error.message}"
@@ -473,7 +465,6 @@ module Jekyll
       end
     end
 
-    private
     def populate_title
       if relative_path =~ DATE_FILENAME_MATCHER
         date, slug, ext = Regexp.last_match.captures
@@ -489,18 +480,14 @@ module Jekyll
       data["ext"]   ||= ext
     end
 
-    private
     def modify_date(date)
       if !data["date"] || data["date"].to_i == site.time.to_i
         merge_data!({ "date" => date }, :source => "filename")
       end
     end
 
-    private
     def generate_excerpt
-      if generate_excerpt?
-        data["excerpt"] ||= Jekyll::Excerpt.new(self)
-      end
+      data["excerpt"] ||= Jekyll::Excerpt.new(self) if generate_excerpt?
     end
   end
 end

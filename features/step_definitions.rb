@@ -135,6 +135,16 @@ end
 
 #
 
+Given(%r!^I have the following documents? nested inside "(.*)" directory under the "(.*)" collection within the "(.*)" directory:$!) do |subdir, label, dir, table|
+  table.hashes.each do |input_hash|
+    title = slug(input_hash["title"])
+    path = File.join(dir, "_#{label}", subdir, "#{title}.md")
+    File.write(path, file_content_from_hash(input_hash))
+  end
+end
+
+#
+
 Given(%r!^I have a configuration file with "(.*)" set to "(.*)"$!) do |key, value|
   config = \
     if source_dir.join("_config.yml").exist?
