@@ -38,6 +38,7 @@
   * Memoize computing excerpt&#39;s relative_path (#6951)
   * Liquefied link tag (#6269)
   * Suggest re-running command with --trace on fail (#6551)
+  * Update item_property to return numbers as numbers instead of strings (#6608)
 
 ### Major Enhancements
 
