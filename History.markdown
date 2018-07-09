@@ -31,6 +31,7 @@
   * GitHub enables you to use themes from other repos (#7112)
   * Updates to CODE OF CONDUCT  (v1.4.0) (#7105)
   * Instructions to view theme’s files under Linux (#7095)
+  * add jekyll-xml-source (#7114)
 
 ### Minor Enhancements
 
