@@ -14,7 +14,7 @@ your `_config.yml` under `plugins`. For Jekyll 2, this is standard.
 <div class="note info">
   <h5>Pagination only works within HTML files</h5>
   <p>
-    Pagination does not work from within Markdown or Textile files from
+    Pagination does not work from within Markdown files from
     your Jekyll site. Pagination works when called from within the HTML
     file, named <code>index.html</code>, which optionally may reside in and
     produce pagination from within a subdirectory, via the

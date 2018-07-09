@@ -323,25 +323,12 @@ EOS
         )
       end
 
-      should "render markdown with rouge 2 with line numbers" do
-        skip "Skipped because using an older version of Rouge" if Utils::Rouge.old_api?
+      should "render markdown with rouge with line numbers" do
         assert_match(
           %(<table class="rouge-table"><tbody>) +
             %(<tr><td class="gutter gl">) +
             %(<pre class="lineno">1\n</pre></td>) +
             %(<td class="code"><pre>test</pre></td></tr>) +
-            %(</tbody></table>),
-          @result
-        )
-      end
-
-      should "render markdown with rouge 1 with line numbers" do
-        skip "Skipped because using a newer version of Rouge" unless Utils::Rouge.old_api?
-        assert_match(
-          %(<table style="border-spacing: 0"><tbody>) +
-            %(<tr><td class="gutter gl" style="text-align: right">) +
-            %(<pre class="lineno">1</pre></td>) +
-            %(<td class="code"><pre>test<span class="w">\n</span></pre></td></tr>) +
             %(</tbody></table>),
           @result
         )
@@ -364,18 +351,7 @@ CONTENT
         create_post(content)
       end
 
-      should "render markdown with rouge 1" do
-        skip "Skipped because using a newer version of Rouge" unless Utils::Rouge.old_api?
-
-        assert_match(
-          %(<div class="language-liquid highlighter-rouge"><pre class="highlight"><code>),
-          @result
-        )
-      end
-
-      should "render markdown with rouge 2" do
-        skip "Skipped because using an older version of Rouge" if Utils::Rouge.old_api?
-
+      should "render markdown with rouge" do
         assert_match(
           %(<div class="language-liquid highlighter-rouge">) +
             %(<div class="highlight"><pre class="highlight"><code>),
@@ -471,23 +447,11 @@ This should not be highlighted, right?
 EOS
       end
 
-      should "should stop highlighting at boundary with rouge 2" do
-        skip "Skipped because using an older version of Rouge" if Utils::Rouge.old_api?
+      should "should stop highlighting at boundary with rouge" do
         expected = <<-EOS
 <p>This is not yet highlighted</p>\n
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 </pre></td><td class="code"><pre><span class="nx">test</span></pre></td></tr></tbody></table></code></pre></figure>\n
-<p>This should not be highlighted, right?</p>
-EOS
-        assert_match(expected, @result)
-      end
-
-      should "should stop highlighting at boundary with rouge 1" do
-        skip "Skipped because using a newer version of Rouge" unless Utils::Rouge.old_api?
-        expected = <<-EOS
-<p>This is not yet highlighted</p>\n
-<figure class="highlight"><pre><code class="language-php" data-lang="php"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>test<span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>\n
 <p>This should not be highlighted, right?</p>
 EOS
         assert_match(expected, @result)
@@ -530,7 +494,7 @@ EOS
     setup do
       @content = <<CONTENT
 ---
-title: Kramdown vs. RDiscount vs. Redcarpet
+title: Kramdown post with pre
 ---
 
 _FIGHT!_
@@ -543,47 +507,9 @@ puts "3..2..1.."
 CONTENT
     end
 
-    context "using RDiscount" do
-      setup do
-        if jruby?
-          then skip(
-            "JRuby does not perform well with CExt, test disabled."
-          )
-        end
-
-        create_post(@content, {
-          "markdown" => "rdiscount",
-        })
-      end
-
-      should "parse correctly" do
-        assert_match %r{<em>FIGHT!</em>}, @result
-        assert_match %r!<em>FINISH HIM</em>!, @result
-      end
-    end
-
     context "using Kramdown" do
       setup do
         create_post(@content, "markdown" => "kramdown")
-      end
-
-      should "parse correctly" do
-        assert_match %r{<em>FIGHT!</em>}, @result
-        assert_match %r!<em>FINISH HIM</em>!, @result
-      end
-    end
-
-    context "using Redcarpet" do
-      setup do
-        if jruby?
-          skip(
-            "JRuby does not perform well with CExt, test disabled."
-          )
-        end
-
-        create_post(@content, {
-          "markdown" => "redcarpet",
-        })
       end
 
       should "parse correctly" do
@@ -789,6 +715,45 @@ CONTENT
     end
   end
 
+  context "simple page with dynamic linking to a page" do
+    setup do
+      content = <<CONTENT
+---
+title: linking
+---
+
+{% assign contacts_filename = 'contacts' %}
+{% assign contacts_ext = 'html' %}
+{% link {{contacts_filename}}.{{contacts_ext}} %}
+{% assign info_path = 'info.md' %}
+{% link {{\ info_path\ }} %}
+{% assign screen_css_path = '/css' %}
+{% link {{ screen_css_path }}/screen.css %}
+CONTENT
+      create_post(content, {
+        "source"      => source_dir,
+        "destination" => dest_dir,
+        "read_all"    => true,
+      })
+    end
+
+    should "not cause an error" do
+      refute_match(%r!markdown\-html\-error!, @result)
+    end
+
+    should "have the URL to the 'contacts' item" do
+      assert_match(%r!/contacts\.html!, @result)
+    end
+
+    should "have the URL to the 'info' item" do
+      assert_match(%r!/info\.html!, @result)
+    end
+
+    should "have the URL to the 'screen.css' item" do
+      assert_match(%r!/css/screen\.css!, @result)
+    end
+  end
+
   context "simple page with linking" do
     setup do
       content = <<CONTENT
@@ -797,6 +762,33 @@ title: linking
 ---
 
 {% link _methods/yaml_with_dots.md %}
+CONTENT
+      create_post(content, {
+        "source"           => source_dir,
+        "destination"      => dest_dir,
+        "collections"      => { "methods" => { "output" => true } },
+        "read_collections" => true,
+      })
+    end
+
+    should "not cause an error" do
+      refute_match(%r!markdown\-html\-error!, @result)
+    end
+
+    should "have the URL to the 'yaml_with_dots' item" do
+      assert_match(%r!/methods/yaml_with_dots\.html!, @result)
+    end
+  end
+
+  context "simple page with dynamic linking" do
+    setup do
+      content = <<CONTENT
+---
+title: linking
+---
+
+{% assign yaml_with_dots_path = '_methods/yaml_with_dots.md' %}
+{% link {{yaml_with_dots_path}} %}
 CONTENT
       create_post(content, {
         "source"           => source_dir,
@@ -854,6 +846,28 @@ title: Invalid linking
 ---
 
 {% link non-existent-collection-item %}
+CONTENT
+
+      assert_raises ArgumentError do
+        create_post(content, {
+          "source"           => source_dir,
+          "destination"      => dest_dir,
+          "collections"      => { "methods" => { "output" => true } },
+          "read_collections" => true,
+        })
+      end
+    end
+  end
+
+  context "simple page with invalid dynamic linking" do
+    should "cause an error" do
+      content = <<CONTENT
+---
+title: Invalid linking
+---
+
+{% assign non_existent_path = 'non-existent-collection-item' %}
+{% link {{\ non_existent_path\ }} %}
 CONTENT
 
       assert_raises ArgumentError do

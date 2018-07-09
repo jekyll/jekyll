@@ -65,10 +65,9 @@ module Jekyll
         path = @site.in_source_dir(File.join(dir, magic_dir, entry))
 
         if Utils.has_yaml_header?(path)
-          Document.new(path, {
-            :site       => @site,
-            :collection => posts,
-          })
+          Document.new(path,
+                       :site       => @site,
+                       :collection => posts)
         else
           posts.files << StaticFile.new(
             @site,

@@ -18,13 +18,13 @@ module Jekyll
           @lang = Regexp.last_match(1).downcase
           @highlight_options = parse_options(Regexp.last_match(2))
         else
-          raise SyntaxError, <<-MSG
-Syntax Error in tag 'highlight' while parsing the following markup:
+          raise SyntaxError, <<~MSG
+            Syntax Error in tag 'highlight' while parsing the following markup:
 
-  #{markup}
+            #{markup}
 
-Valid syntax: highlight <lang> [linenos]
-MSG
+            Valid syntax: highlight <lang> [linenos]
+          MSG
         end
       end
 
@@ -75,7 +75,7 @@ MSG
         input.scan(OPTIONS_REGEX) do |opt|
           key, value = opt.split("=")
           # If a quoted list, convert to array
-          if value && value.include?('"')
+          if value&.include?('"')
             value.delete!('"')
             value = value.split
           end
@@ -96,14 +96,14 @@ MSG
         )
 
         if highlighted_code.nil?
-          Jekyll.logger.error <<-MSG
-There was an error highlighting your code:
+          Jekyll.logger.error <<~MSG
+            There was an error highlighting your code:
 
-#{code}
+            #{code}
 
-While attempting to convert the above code, Pygments.rb returned an unacceptable value.
-This is usually a timeout problem solved by running `jekyll build` again.
-MSG
+            While attempting to convert the above code, Pygments.rb returned an unacceptable value.
+            This is usually a timeout problem solved by running `jekyll build` again.
+          MSG
           raise ArgumentError, "Pygments.rb returned an unacceptable value "\
           "when attempting to highlight some code."
         end
@@ -112,7 +112,8 @@ MSG
       end
 
       def render_rouge(code)
-        formatter = Jekyll::Utils::Rouge.html_formatter(
+        require "rouge"
+        formatter = ::Rouge::Formatters::HTMLLegacy.new(
           :line_numbers => @highlight_options[:linenos],
           :wrap         => false,
           :css_class    => "highlight",

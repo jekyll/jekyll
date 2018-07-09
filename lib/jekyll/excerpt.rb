@@ -8,10 +8,11 @@ module Jekyll
     attr_accessor :content, :ext
     attr_writer   :output
 
-    def_delegators :@doc, :site, :name, :ext, :extname,
-                          :collection, :related_posts,
-                          :coffeescript_file?, :yaml_file?,
-                          :url, :next_doc, :previous_doc
+    def_delegators :@doc,
+                   :site, :name, :ext, :extname,
+                   :collection, :related_posts,
+                   :coffeescript_file?, :yaml_file?,
+                   :url, :next_doc, :previous_doc
 
     private :coffeescript_file?, :yaml_file?
 
@@ -55,7 +56,7 @@ module Jekyll
     #
     # Returns true if the string passed in
     def include?(something)
-      (output && output.include?(something)) || content.include?(something)
+      (output&.include?(something)) || content.include?(something)
     end
 
     # The UID for this doc (useful in feeds).
@@ -76,7 +77,7 @@ module Jekyll
 
     # Returns the shorthand String identifier of this doc.
     def inspect
-      "<Excerpt: #{self.id}>"
+      "<Excerpt: #{id}>"
     end
 
     def output
@@ -128,7 +129,7 @@ module Jekyll
     #
     # Returns excerpt String
 
-    LIQUID_TAG_REGEX = %r!{%\s*(\w+).+\s*%}!m
+    LIQUID_TAG_REGEX = %r!{%-?\s*(\w+).+\s*-?%}!m
     MKDWN_LINK_REF_REGEX = %r!^ {0,3}\[[^\]]+\]:.+$!
 
     def extract_excerpt(doc_content)
@@ -141,7 +142,7 @@ module Jekyll
         head =~ LIQUID_TAG_REGEX
         tag_name = Regexp.last_match(1)
 
-        if liquid_block?(tag_name) && head.match(%r!{%\s*end#{tag_name}\s*%}!).nil?
+        if liquid_block?(tag_name) && head.match(%r!{%-?\s*end#{tag_name}\s*-?%}!).nil?
           print_build_warning
           head << "\n{% end#{tag_name} %}"
         end
@@ -158,16 +159,20 @@ module Jekyll
 
     def liquid_block?(tag_name)
       Liquid::Template.tags[tag_name].superclass == Liquid::Block
+    rescue NoMethodError
+      Jekyll.logger.error "Error:",
+                          "A Liquid tag in the excerpt of #{doc.relative_path} couldn't be parsed."
+      raise
     end
 
     def print_build_warning
       Jekyll.logger.warn "Warning:", "Excerpt modified in #{doc.relative_path}!"
       Jekyll.logger.warn "",
-        "Found a Liquid block containing separator '#{doc.excerpt_separator}' and has " \
-        "been modified with the appropriate closing tag."
+                         "Found a Liquid block containing separator '#{doc.excerpt_separator}'" \
+                         " and has been modified with the appropriate closing tag."
       Jekyll.logger.warn "",
-        "Feel free to define a custom excerpt or excerpt_separator in the document's " \
-        "Front Matter if the generated excerpt is unsatisfactory."
+                         "Feel free to define a custom excerpt or excerpt_separator in the" \
+                         " document's Front Matter if the generated excerpt is unsatisfactory."
     end
   end
 end

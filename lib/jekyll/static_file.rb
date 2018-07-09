@@ -126,10 +126,10 @@ module Jekyll
       @url ||= if @collection.nil?
                  relative_path
                else
-                 ::Jekyll::URL.new({
+                 ::Jekyll::URL.new(
                    :template     => @collection.url_template,
-                   :placeholders => placeholders,
-                 })
+                   :placeholders => placeholders
+                 )
                end.to_s.chomp("/")
     end
 

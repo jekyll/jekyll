@@ -122,9 +122,7 @@ module Jekyll
 
     def path_is_subpath?(path, parent_path)
       path.ascend do |ascended_path|
-        if ascended_path.to_s == parent_path.to_s
-          return true
-        end
+        return true if ascended_path.to_s == parent_path.to_s
       end
 
       false
