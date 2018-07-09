@@ -251,12 +251,12 @@ Feature: Post data
     And I should see "Post categories: scifi and Movies" in "_site/scifi/movies/2009/03/27/star-wars.html"
     And I should see "Post categories: SciFi and movies" in "_site/scifi/movies/2013/03/17/star-trek.html"
 
-  Scenario: Use page.liquid variable
+  Scenario: Use page.render_with_liquid variable
     Given I have a _posts directory
     And I have the following posts:
-      | title     | liquid | date       | content                  |
-      | no-liquid | false  | 2017-07-06 | Liquid: {{ page.title }} |
-      |    liquid | true   | 2017-07-06 | Liquid: {{ page.title }} |
+      | title     | render_with_liquid | date       | content                  |
+      | no-liquid | false              | 2017-07-06 | Liquid: {{ page.title }} |
+      |    liquid | true               | 2017-07-06 | Liquid: {{ page.title }} |
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
