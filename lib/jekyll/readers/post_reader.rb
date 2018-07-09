@@ -70,7 +70,13 @@ module Jekyll
             :collection => posts,
           })
         else
-          posts.files << StaticFile.new(@site, dir, magic_dir, entry, posts)
+          posts.files << StaticFile.new(
+            @site,
+            @site.source,
+            File.join(dir, magic_dir),
+            entry,
+            posts
+          )
           nil
         end
       end.reject(&:nil?)

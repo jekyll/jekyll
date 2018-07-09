@@ -116,14 +116,7 @@ module Jekyll
     end
 
     def placeholders
-      {
-        :collection => @collection.label,
-        :path       => relative_path[
-          @collection.relative_directory.size..relative_path.size],
-        :output_ext => "",
-        :name       => "",
-        :title      => "",
-      }
+      @collection.label == "posts" ? post_placeholders : collection_placeholders
     end
 
     # Applies a similar URL-building technique as Jekyll::Document that takes
@@ -152,6 +145,7 @@ module Jekyll
     end
 
     private
+
     def copy_file(dest_path)
       if @site.safe || Jekyll.env == "production"
         FileUtils.cp(path, dest_path)
@@ -161,6 +155,29 @@ module Jekyll
 
       unless File.symlink?(dest_path)
         File.utime(self.class.mtimes[path], self.class.mtimes[path], dest_path)
+      end
+    end
+
+    def collection_placeholders
+      {
+        :collection => @collection.label,
+        :categories => "",
+        :path       => relative_path[
+          @collection.relative_directory.size..relative_path.size],
+        :output_ext => "",
+        :name       => "",
+        :title      => "",
+      }
+    end
+
+    def post_placeholders
+      if relative_path =~ Document::DATE_FILENAME_MATCHER
+        dates = Regexp.last_match(1).split("-")
+        collection_placeholders.merge(
+          Hash[[:year, :month, :day].zip(dates)]
+        )
+      else
+        collection_placeholders
       end
     end
   end
