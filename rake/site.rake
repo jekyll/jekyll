@@ -47,10 +47,10 @@ namespace :site do
   end
   task :build => :generate
 
-  desc "Update normalize.css library to the latest version"
-  task :update_normalize_css do
+  desc "Update reboot.css library to the latest version"
+  task :update_reboot_css do
     Dir.chdir("#{docs_folder}/_sass") do
-      sh 'curl "https://necolas.github.io/normalize.css/latest/normalize.css" -o "_normalize.scss"'
+      sh 'curl "https://raw.githubusercontent.com/twbs/bootstrap/v4-dev/dist/css/bootstrap-reboot.min.css" -o "_reboot.scss"'
     end
   end
 
