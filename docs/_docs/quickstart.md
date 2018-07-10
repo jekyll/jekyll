@@ -51,3 +51,14 @@ When in doubt, use the <code>help</code> command to remind you of all available 
 ## Next steps
 
 Building a Jekyll site with the default theme is just the first step. The real magic happens when you start creating blog posts, using the front matter to control templates and layouts, and taking advantage of all the awesome configuration options Jekyll makes available.
+
+
+////
+
+Hi team, had some questions about our audience:
+
+Who is our main reader?
+Are they non-technical, or do they program?
+Should we explain Bundler, or trust them to handle the abstraction?
+
+And based on answers to the above, should we structure this article any differently?
