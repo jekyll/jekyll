@@ -67,6 +67,10 @@
   * Update rubocop version to 0.57.x ### -docs (#7078)
   * Example of CircleCI deployment through CircleCI v2 (#7024)
 
+### Bug Fixes
+
+  * Add call to unused method `validate_options` in `commands/serve.rb` (#7122)
+
 ## 3.8.3 / 2018-06-05
 
 ### Bug Fixes
