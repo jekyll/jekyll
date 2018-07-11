@@ -828,6 +828,7 @@ You can find a few useful plugins at the following locations:
 - [replace_regex](https://github.com/sparanoid/replace_regex): A Liquid filter to perform regex replace.
 - [Jekyll Money](https://rubygems.org/gems/jekyll-money): A Jekyll plugin for dealing with money. Because we all have to at some point.
 - [jekyll-random](https://github.com/codecalm/jekyll-random) by [codecalm](https://nodecalm.net): A Jekyll plugin that generates pseudo-random data. Very useful when you want to generate a large amount of random data.
+- [jekyll-firstimage](https://github.com/nhoizey/jekyll-firstimage) adds a Liquid filter finding the first image in a HTML content string, including responsive images srcset.
 
 #### Tags
 
