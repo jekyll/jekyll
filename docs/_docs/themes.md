@@ -19,8 +19,8 @@ In the case of Minima, you see only the following files in your Jekyll site dire
 ├── _config.yml
 ├── _posts
 │   └── 2016-12-04-welcome-to-jekyll.markdown
-├── about.md
-└── index.md
+├── about.markdown
+└── index.markdown
 ```
 
 The `Gemfile` and `Gemfile.lock` files are used by Bundler to keep track of the required gems and gem versions you need to build your Jekyll site.
