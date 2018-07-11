@@ -33,6 +33,7 @@
   * Instructions to view theme’s files under Linux (#7095)
   * add jekyll-xml-source (#7114)
   * Add the jekyll-firstimage filter plugin (#7127)
+  * Use a real theme in the example (#7125)
 
 ### Minor Enhancements
 
