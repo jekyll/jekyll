@@ -41,6 +41,7 @@
   * Liquefied link tag (#6269)
   * Suggest re-running command with --trace on fail (#6551)
   * Update item_property to return numbers as numbers instead of strings (#6608)
+  * Use .markdown for page templates (#7126)
 
 ### Major Enhancements
 
