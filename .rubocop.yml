@@ -11,6 +11,7 @@ AllCops:
   TargetRubyVersion: 2.3
   Include:
     - lib/**/*.rb
+    - test/**/*.rb
   Exclude:
     - bin/**/*
     - exe/**/*
@@ -82,6 +83,9 @@ Metrics/PerceivedComplexity:
   Max: 8
 Naming/FileName:
   Enabled: false
+Naming/HeredocDelimiterNaming:
+  Exclude:
+    - test/**/*.rb
 Naming/MemoizedInstanceVariableName:
   Exclude:
     - lib/jekyll/page_without_a_file.rb
@@ -104,6 +108,9 @@ Style/Alias:
   EnforcedStyle: prefer_alias_method
 Style/AndOr:
   Severity: error
+Style/ClassAndModuleChildren:
+  Exclude:
+    - test/**/*.rb
 Style/FrozenStringLiteralComment:
   EnforcedStyle: always
 Style/Documentation:

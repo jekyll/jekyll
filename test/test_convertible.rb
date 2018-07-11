@@ -8,8 +8,8 @@ class TestConvertible < JekyllUnitTest
     setup do
       @convertible = OpenStruct.new(
         "site" => Site.new(Jekyll.configuration(
-          "source" => File.expand_path("fixtures", __dir__)
-        ))
+                             "source" => File.expand_path("fixtures", __dir__)
+                           ))
       )
       @convertible.extend Jekyll::Convertible
       @base = File.expand_path("fixtures", __dir__)
