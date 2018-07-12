@@ -69,6 +69,7 @@
   * Use assert_include (#7093)
   * Update rubocop version to 0.57.x ### -docs (#7078)
   * Example of CircleCI deployment through CircleCI v2 (#7024)
+  * Fix Rubocop offences in test files (#7128)
 
 ### Bug Fixes
 
