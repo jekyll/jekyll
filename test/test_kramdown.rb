@@ -155,7 +155,7 @@ class TestKramdown < JekyllUnitTest
       )
 
       expect(Kramdown::Document).to receive(:new) do |arg1, hash|
-        assert_equal hash["syntax_highlighter_opts"]["hello"], "world"
+        assert_equal "world", hash["syntax_highlighter_opts"]["hello"]
         original.call(arg1, hash)
       end
 

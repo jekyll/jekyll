@@ -17,7 +17,7 @@ class TestConfiguration < JekyllUnitTest
     should "merge input over defaults" do
       result = Configuration.from("source" => "blah")
       refute_equal result["source"], Configuration::DEFAULTS["source"]
-      assert_equal result["source"], "blah"
+      assert_equal "blah", result["source"]
     end
 
     should "return a valid Configuration instance" do
@@ -26,13 +26,11 @@ class TestConfiguration < JekyllUnitTest
 
     should "add default collections" do
       result = Configuration.from({})
-      assert_equal(
-        result["collections"],
-        "posts" => {
-          "output"    => true,
-          "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
-        }
-      )
+      expected = { "posts" => {
+        "output"    => true,
+        "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
+      }, }
+      assert_equal expected, result["collections"]
     end
 
     should "NOT backwards-compatibilize" do
@@ -68,32 +66,29 @@ class TestConfiguration < JekyllUnitTest
     should "turn an array into a hash" do
       result = Configuration[{ "collections" => %w(methods) }].add_default_collections
       assert_instance_of Hash, result["collections"]
-      assert_equal(
-        result["collections"],
-        "posts" => { "output" => true }, "methods" => {}
-      )
+      expected = { "posts" => { "output" => true }, "methods" => {} }
+      assert_equal expected, result["collections"]
     end
 
     should "only assign collections.posts.permalink if a permalink is specified" do
       result = Configuration[{ "permalink" => "pretty", "collections" => {} }]
         .add_default_collections
-      assert_equal(
-        result["collections"],
-        "posts" => {
-          "output"    => true,
-          "permalink" => "/:categories/:year/:month/:day/:title/",
-        }
-      )
+      expected = { "posts" => {
+        "output"    => true,
+        "permalink" => "/:categories/:year/:month/:day/:title/",
+      }, }
+      assert_equal expected, result["collections"]
 
       result = Configuration[{ "permalink" => nil, "collections" => {} }]
         .add_default_collections
-      assert_equal result["collections"], "posts" => { "output" => true }
+      expected = { "posts" => { "output" => true } }
+      assert_equal expected, result["collections"]
     end
 
     should "forces posts to output" do
       result = Configuration[{ "collections" => { "posts" => { "output" => false } } }]
         .add_default_collections
-      assert_equal result["collections"]["posts"]["output"], true
+      assert_equal true, result["collections"]["posts"]["output"]
     end
   end
 
@@ -216,23 +211,19 @@ class TestConfiguration < JekyllUnitTest
     should "transform string exclude into an array" do
       assert @config.key?("exclude")
       assert @config.backwards_compatibilize.key?("exclude")
-      assert_equal(
-        @config.backwards_compatibilize["exclude"],
-        %w(READ-ME.md Gemfile CONTRIBUTING.hello.markdown)
-      )
+      expected = %w(READ-ME.md Gemfile CONTRIBUTING.hello.markdown)
+      assert_equal expected, @config.backwards_compatibilize["exclude"]
     end
     should "transform string include into an array" do
       assert @config.key?("include")
       assert @config.backwards_compatibilize.key?("include")
-      assert_equal(
-        @config.backwards_compatibilize["include"],
-        %w(STOP_THE_PRESSES.txt .heloses .git)
-      )
+      expected = %w(STOP_THE_PRESSES.txt .heloses .git)
+      assert_equal expected, @config.backwards_compatibilize["include"]
     end
     should "set highlighter to pygments" do
       assert @config.key?("pygments")
       assert !@config.backwards_compatibilize.key?("pygments")
-      assert_equal @config.backwards_compatibilize["highlighter"], "pygments"
+      assert_equal "pygments", @config.backwards_compatibilize["highlighter"]
     end
     should "adjust directory names" do
       assert @config.key?("layouts")
@@ -500,12 +491,13 @@ class TestConfiguration < JekyllUnitTest
         )
       )
       assert_equal(
-        config["folded_string"],
-        "This string of text will ignore newlines till the next key.\n"
+        "This string of text will ignore newlines till the next key.\n",
+        config["folded_string"]
       )
+
       assert_equal(
-        config["clean_folded_string"],
-        "This string of text will ignore newlines till the next key."
+        "This string of text will ignore newlines till the next key.",
+        config["clean_folded_string"]
       )
     end
 
