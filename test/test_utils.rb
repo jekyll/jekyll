@@ -202,20 +202,20 @@ class TestUtils < JekyllUnitTest
 
     should "replace everything else but ASCII characters" do
       assert_equal "the-config-yml-file",
-        Utils.slugify("The _config.yml file?", :mode => "ascii")
+                   Utils.slugify("The _config.yml file?", :mode => "ascii")
       assert_equal "f-rtive-glance",
-        Utils.slugify("fürtive glance!!!!", :mode => "ascii")
+                   Utils.slugify("fürtive glance!!!!", :mode => "ascii")
     end
 
     should "map accented latin characters to ASCII characters" do
       assert_equal "the-config-yml-file",
-        Utils.slugify("The _config.yml file?", :mode => "latin")
+                   Utils.slugify("The _config.yml file?", :mode => "latin")
       assert_equal "furtive-glance",
-        Utils.slugify("fürtive glance!!!!", :mode => "latin")
+                   Utils.slugify("fürtive glance!!!!", :mode => "latin")
       assert_equal "aaceeiioouu",
-        Utils.slugify("àáçèéíïòóúü", :mode => "latin")
+                   Utils.slugify("àáçèéíïòóúü", :mode => "latin")
       assert_equal "a-z",
-        Utils.slugify("Aあわれ鬱господинZ", :mode => "latin")
+                   Utils.slugify("Aあわれ鬱господинZ", :mode => "latin")
     end
 
     should "only replace whitespace if mode is raw" do

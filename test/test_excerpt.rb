@@ -4,10 +4,9 @@ require "helper"
 
 class TestExcerpt < JekyllUnitTest
   def setup_post(file)
-    Document.new(@site.in_source_dir(File.join("_posts", file)), {
-      :site       => @site,
-      :collection => @site.posts,
-    }).tap(&:read)
+    Document.new(@site.in_source_dir(File.join("_posts", file)),
+                 :site       => @site,
+                 :collection => @site.posts).tap(&:read)
   end
 
   def do_render(document)
@@ -81,9 +80,9 @@ class TestExcerpt < JekyllUnitTest
     context "#relative_path" do
       should "return its document's relative path with '/#excerpt' appended" do
         assert_equal "#{@excerpt.doc.relative_path}/#excerpt",
-          @excerpt.relative_path
+                     @excerpt.relative_path
         assert_equal "_posts/2013-07-22-post-excerpt-with-layout.markdown/#excerpt",
-          @excerpt.relative_path
+                     @excerpt.relative_path
       end
     end
 
