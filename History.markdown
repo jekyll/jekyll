@@ -76,6 +76,10 @@
 
   * Add call to unused method `validate_options` in `commands/serve.rb` (#7122)
 
+### feature
+
+  * Disable Liquid via front matter (#6824)
+
 ## 3.8.3 / 2018-06-05
 
 ### Bug Fixes
