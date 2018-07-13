@@ -43,6 +43,7 @@
   * Suggest re-running command with --trace on fail (#6551)
   * Update item_property to return numbers as numbers instead of strings (#6608)
   * Use .markdown for page templates (#7126)
+  * Fix custom 404 page for GitHub pages (#7132)
 
 ### Major Enhancements
 
