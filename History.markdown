@@ -71,6 +71,7 @@
   * Update rubocop version to 0.57.x ### -docs (#7078)
   * Example of CircleCI deployment through CircleCI v2 (#7024)
   * Fix Rubocop offences in test files (#7128)
+  * fix up refute_equal call (#7133)
 
 ### Bug Fixes
 
