@@ -151,8 +151,10 @@ module Jekyll
         cached_partial = context.registers[:cached_partials]
 
         if cached_partial.key?(path)
+          Jekyll.logger.info "Include cache hit:  ", path.green
           cached_partial[path]
         else
+          Jekyll.logger.info "Include cache miss: ", path.yellow
           unparsed_file = context.registers[:site]
             .liquid_renderer
             .file(path)
