@@ -34,6 +34,7 @@
   * add jekyll-xml-source (#7114)
   * Add the jekyll-firstimage filter plugin (#7127)
   * Use a real theme in the example (#7125)
+  * Update docs about post creation (#7138)
 
 ### Minor Enhancements
 
