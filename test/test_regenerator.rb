@@ -153,7 +153,8 @@ class TestRegenerator < JekyllUnitTest
       assert @regenerator.cache[@path]
 
       @regenerator.clear_cache
-      assert_equal @regenerator.cache, {}
+      expected = {}
+      assert_equal expected, @regenerator.cache
     end
 
     should "write to the metadata file" do

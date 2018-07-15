@@ -154,9 +154,7 @@ class TestCommandsServe < JekyllUnitTest
     end
 
     should "label itself" do
-      assert_equal(
-        @merc.name, :serve
-      )
+      assert_equal :serve, @merc.name
     end
 
     should "have aliases" do
@@ -269,11 +267,11 @@ class TestCommandsServe < JekyllUnitTest
 
       context "verbose" do
         should "debug when verbose" do
-          assert_equal custom_opts("verbose" => true)[:Logger].level, 5
+          assert_equal 5, custom_opts("verbose" => true)[:Logger].level
         end
 
         should "warn when not verbose" do
-          assert_equal custom_opts({})[:Logger].level, 3
+          assert_equal 3, custom_opts({})[:Logger].level
         end
       end
 
@@ -305,8 +303,8 @@ class TestCommandsServe < JekyllUnitTest
           )
 
           assert result[:SSLEnable]
-          assert_equal result[:SSLPrivateKey],  "c2"
-          assert_equal result[:SSLCertificate], "c1"
+          assert_equal "c2", result[:SSLPrivateKey]
+          assert_equal "c1", result[:SSLCertificate]
         end
       end
     end
