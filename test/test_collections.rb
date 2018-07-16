@@ -87,7 +87,8 @@ class TestCollections < JekyllUnitTest
     end
 
     should "contain only the default collections" do
-      refute_equal @site.collections, {}
+      expected = {}
+      refute_equal expected, @site.collections
       refute_nil @site.collections
     end
   end
