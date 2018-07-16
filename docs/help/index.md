@@ -43,6 +43,10 @@ Known breaking changes are listed in the upgrading docs.
 
 Watch videos from members of the Jekyll community speak about interesting use cases, tricks they've learned or meta Jekyll topics.
 
+### The Dev community
+
+[DEV’s jekyll tag](https://dev.to/t/jekyll) is a place to share Jekyll projects, articles and tutorials as well as start discussions and ask for feedback on Jekyll-related topics. Developers of all skill-levels are welcome to take part.
+
 ### [Google](https://www.google.com/?q=jekyll)
 
 Add **jekyll** to almost any query, and you'll find just what you need.
