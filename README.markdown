@@ -6,6 +6,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/8ba0cb5b17bb9848e128/maintainability)](codeclimate)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/8ba0cb5b17bb9848e128/test_coverage)](coverage)
 [![Security](https://hakiri.io/github/jekyll/jekyll/master.svg)][hakiri]
+[![Backers on Open Collective](https://opencollective.com/jekyll/backers/badge.svg)](#backers)
+[![Sponsors on Open Collective](https://opencollective.com/jekyll/sponsors/badge.svg)](#sponsors) 
 
 [ruby-gems]: https://rubygems.org/gems/jekyll
 [codeclimate]: https://codeclimate.com/github/jekyll/jekyll
@@ -53,6 +55,26 @@ these terms, please let one of our [core team members](https://jekyllrb.com/team
 * Customize the [Permalinks](https://jekyllrb.com/docs/permalinks/) your posts are generated with
 * Use the built-in [Liquid Extensions](https://jekyllrb.com/docs/templates/) to make your life easier
 * Use custom [Plugins](https://jekyllrb.com/docs/plugins/) to generate content specific to your site
+
+## Credits
+
+### Contributors
+
+This project exists thanks to all the people who contribute.
+<a href="graphs/contributors"><img src="https://opencollective.com/jekyll/contributors.svg?width=890&button=false" /></a>
+
+### Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/jekyll#backer)]
+
+<a href="https://opencollective.com/jekyll#backers" target="_blank"><img src="https://opencollective.com/jekyll/backers.svg?width=890”></a>
+
+### Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/jekyll#sponsor)]
+
+<a href="https://opencollective.com/jekyll/sponsor/0/website" target="_blank"><img src="https://opencollective.com/jekyll/sponsor/0/avatar.svg"></a>
+
 
 ## License
 
