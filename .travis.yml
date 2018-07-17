@@ -52,4 +52,4 @@ after_success:
 
 before_install:
   - gem update --system
-  - gem install bundler
+  - gem install bundler --version 1.16.2
