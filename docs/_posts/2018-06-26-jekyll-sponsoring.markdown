@@ -5,7 +5,7 @@ author: oe
 categories: [community]
 ---
 
-_(TL;DR: We're open for sponsorships over our [OpenCollective page](https://opencollective.com/jekyll))_
+_(TL;DR: We're open for sponsorships on our [OpenCollective page](https://opencollective.com/jekyll))_
 
 Hi Jekyllers,
 
@@ -26,7 +26,9 @@ Jekyll has always been a product of volunteers. Rarely has someone been paid to 
 a certain plugin or feature. Today, we're excited to announce that we will finally
 be able to fund our contributors! __We are opening an OpenCollective to receive
 individual and corporate sponsorships__. This is not unheard of, [Hugo](http://gohugo.io)
-is also funded by sponsorships, as are many other similar projects.
+is also funded by sponsorships, as are many other similar projects, such as
+[webpack](https://opencollective.com/webpack), [Babel](https://opencollective.com/babel) or
+[RuboCop](https://opencollective.com/rubocop).
 
 OpenCollective is a service that makes it easy for open source projects to receive funding
 from individuals and companies alike. It's specifically designed for open source and
@@ -45,6 +47,10 @@ will improve the Jekyll ecosystem. Here's a couple of ideas:
 Again, these are just some ideas, but with the help of sponsoring, they are now one step closer
 to being realized :heart:
 
+<div align="center">
+  <img src="/img/forestry-logo.png" width="300" />
+</div>
+
 With that, we would like to announce our very first sponsor: [__Forestry.io__](https://forestry.io)! Forestry is
 a CMS that integrates with your Jekyll sites and lets you update content using a beautiful
 interface, and then automatically commits it back to your GitHub repository. We're excited to have
@@ -56,7 +62,7 @@ performance. Surprisingly, that's what happens when you properly fund people for
 
 If you have been a long time user for Jekyll and would like to give something back to the project,
 you can consider a small monthly donation to our [OpenCollective page](http://opencollective.com/jekyll).
-If your company heavily relies on Jekyll, consider sponsoring us! Contact me at
+If your company heavily relies on Jekyll, do consider sponsoring us! Contact me at
 `olivia at fastmail dot com` and we'll figure something out together.
 
 Thanks for sticking with us, and happy Jekylling! :tada:
