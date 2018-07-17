@@ -76,6 +76,7 @@
   * Fix Rubocop offences in test files (#7128)
   * fix up refute_equal call (#7133)
   * Fix incorrectly passed arguments to assert_equal (#7134)
+  * Lock Travis to Bundler-1.16.2 (#7144)
 
 ### Bug Fixes
 
