@@ -130,6 +130,14 @@ module Jekyll
       %w(.yaml .yml).include?(extname)
     end
 
+    # Determine whether the document is a YAML file. And if it is meant to be written.
+    #
+    # Returns true if the file should be output and 
+    #   extname is either .yml or .yaml, false otherwise.
+    def render_yaml_file?
+      yaml_file? && write?
+    end
+
     # Determine whether the document is an asset file.
     # Asset files include CoffeeScript files and Sass/SCSS files.
     #
@@ -160,7 +168,7 @@ module Jekyll
     #   true otherwise.
     def render_with_liquid?
       return false if data["render_with_liquid"] == false
-      !(coffeescript_file? || yaml_file? || !Utils.has_liquid_construct?(content))
+      !(coffeescript_file? || yaml_file? || !Utils.has_liquid_construct?(content)) || render_yaml_file?
     end
 
     # Determine whether the file should be rendered with a layout.
@@ -175,7 +183,7 @@ module Jekyll
     # Returns false if the document is set to `layouts: none`, or is either an
     #   asset file or a yaml file. Returns true otherwise.
     def place_in_layout?
-      !(asset_file? || yaml_file? || no_layout?)
+      !(asset_file? || yaml_file? || no_layout?) || render_yaml_file?
     end
 
     # The URL template where the document would be accessible.
@@ -262,12 +270,16 @@ module Jekyll
     def read(opts = {})
       Jekyll.logger.debug "Reading:", relative_path
 
-      if yaml_file?
+      if yaml_file? && !render_yaml_file?
         @data = SafeYAML.load_file(path)
       else
         begin
-          merge_defaults
-          read_content(opts)
+          merge_defaults 
+          if yaml_file?
+            read_yml_content()
+          else
+            read_content(opts)
+          end
           read_post_data
         rescue StandardError => e
           handle_read_error(e)
@@ -445,6 +457,12 @@ module Jekyll
         data_file = SafeYAML.load(Regexp.last_match(1))
         merge_data!(data_file, :source => "YAML front matter") if data_file
       end
+    end
+
+    def read_yml_content()
+      data_file = SafeYAML.load_file(path)
+      self.content = data_file["content"] || ""
+      merge_data!(data_file, :source => "YAML front matter")
     end
 
     def read_post_data
