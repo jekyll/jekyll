@@ -70,12 +70,12 @@ class TestGeneratedSite < JekyllUnitTest
       time_regexp = "\\d+:\\d+"
       #
       # adding a pipe character at the beginning preserves formatting with newlines
-      expected_output = Regexp.new <<-OUTPUT
-| - /css/screen.css last edited at #{time_regexp} with extname .css
-  - /pgp.key last edited at #{time_regexp} with extname .key
-  - /products.yml last edited at #{time_regexp} with extname .yml
-  - /symlink-test/symlinked-dir/screen.css last edited at #{time_regexp} with extname .css
-OUTPUT
+      expected_output = Regexp.new <<~OUTPUT
+        | - /css/screen.css last edited at #{time_regexp} with extname .css
+          - /pgp.key last edited at #{time_regexp} with extname .key
+          - /products.yml last edited at #{time_regexp} with extname .yml
+          - /symlink-test/symlinked-dir/screen.css last edited at #{time_regexp} with extname .css
+      OUTPUT
       assert_match expected_output, File.read(dest_dir("static_files.html"))
     end
   end

@@ -7,14 +7,14 @@ class TestRegenerator < JekyllUnitTest
     setup do
       FileUtils.rm_rf(source_dir(".jekyll-metadata"))
 
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "methods" => {
             "output" => true,
           },
         },
-        "incremental" => true,
-      })
+        "incremental" => true
+      )
 
       @site.read
       @page = @site.pages.first
@@ -93,9 +93,9 @@ class TestRegenerator < JekyllUnitTest
   context "The site regenerator" do
     setup do
       FileUtils.rm_rf(source_dir(".jekyll-metadata"))
-      @site = fixture_site({
-        "incremental" => true,
-      })
+      @site = fixture_site(
+        "incremental" => true
+      )
 
       @site.read
       @post = @site.posts.first
@@ -128,11 +128,11 @@ class TestRegenerator < JekyllUnitTest
     setup do
       FileUtils.rm_rf(source_dir(".jekyll-metadata"))
 
-      @site = Site.new(Jekyll.configuration({
-        "source"      => source_dir,
-        "destination" => dest_dir,
-        "incremental" => true,
-      }))
+      @site = Site.new(Jekyll.configuration(
+                         "source"      => source_dir,
+                         "destination" => dest_dir,
+                         "incremental" => true
+                       ))
 
       @site.process
       @path = @site.in_source_dir(@site.pages.first.path)
@@ -153,7 +153,8 @@ class TestRegenerator < JekyllUnitTest
       assert @regenerator.cache[@path]
 
       @regenerator.clear_cache
-      assert_equal @regenerator.cache, {}
+      expected = {}
+      assert_equal expected, @regenerator.cache
     end
 
     should "write to the metadata file" do
@@ -183,7 +184,7 @@ class TestRegenerator < JekyllUnitTest
     should "not crash when reading corrupted marshal file" do
       metadata_file = source_dir(".jekyll-metadata")
       File.open(metadata_file, "w") do |file|
-        file.puts Marshal.dump({ :foo => "bar" })[0, 5]
+        file.puts Marshal.dump(:foo => "bar")[0, 5]
       end
 
       @regenerator = Regenerator.new(@site)
@@ -310,11 +311,11 @@ class TestRegenerator < JekyllUnitTest
   context "when incremental regeneration is disabled" do
     setup do
       FileUtils.rm_rf(source_dir(".jekyll-metadata"))
-      @site = Site.new(Jekyll.configuration({
-        "source"      => source_dir,
-        "destination" => dest_dir,
-        "incremental" => false,
-      }))
+      @site = Site.new(Jekyll.configuration(
+                         "source"      => source_dir,
+                         "destination" => dest_dir,
+                         "incremental" => false
+                       ))
 
       @site.process
       @path = @site.in_source_dir(@site.pages.first.path)

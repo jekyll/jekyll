@@ -8,8 +8,8 @@ class TestConvertible < JekyllUnitTest
     setup do
       @convertible = OpenStruct.new(
         "site" => Site.new(Jekyll.configuration(
-          "source" => File.expand_path("fixtures", __dir__)
-        ))
+                             "source" => File.expand_path("fixtures", __dir__)
+                           ))
       )
       @convertible.extend Jekyll::Convertible
       @base = File.expand_path("fixtures", __dir__)
@@ -72,6 +72,13 @@ class TestConvertible < JekyllUnitTest
         @convertible.read_yaml(@base, "front_matter.erb")
       end
       refute_match(%r!Invalid permalink!, out)
+    end
+
+    should "not parse Liquid if disabled in front matter" do
+      name = "no_liquid.erb"
+      @convertible.read_yaml(@base, name)
+      ret = @convertible.content.strip
+      assert_equal("{% raw %}{% endraw %}", ret)
     end
   end
 end

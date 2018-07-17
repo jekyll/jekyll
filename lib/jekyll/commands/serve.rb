@@ -91,7 +91,10 @@ module Jekyll
         def process(opts)
           opts = configuration_from_options(opts)
           destination = opts["destination"]
-          register_reload_hooks(opts) if opts["livereload"]
+          if opts["livereload"]
+            validate_options(opts)
+            register_reload_hooks(opts)
+          end
           setup(destination)
 
           start_up_webrick(opts, destination)

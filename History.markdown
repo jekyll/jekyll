@@ -28,6 +28,15 @@
   * Added plugin json-get. (#7086)
   * Update travis-ci.md to point out &#34;this is an example Gemfile&#34; (#7089)
   * Adding `jekyll-info` plugin (#7091)
+  * GitHub enables you to use themes from other repos (#7112)
+  * Updates to CODE OF CONDUCT  (v1.4.0) (#7105)
+  * Instructions to view theme’s files under Linux (#7095)
+  * add jekyll-xml-source (#7114)
+  * Add the jekyll-firstimage filter plugin (#7127)
+  * Use a real theme in the example (#7125)
+  * Update docs about post creation (#7138)
+  * Add DEV Community&#39;s Jekyll tag to community page (#7139)
+  * Initialize upgrading doc for v4.0 (#7140)
 
 ### Minor Enhancements
 
@@ -35,6 +44,9 @@
   * Memoize computing excerpt&#39;s relative_path (#6951)
   * Liquefied link tag (#6269)
   * Suggest re-running command with --trace on fail (#6551)
+  * Update item_property to return numbers as numbers instead of strings (#6608)
+  * Use .markdown for page templates (#7126)
+  * Fix custom 404 page for GitHub pages (#7132)
 
 ### Major Enhancements
 
@@ -59,7 +71,19 @@
   * Update Rubocop&#39;s config (#7050)
   * Remember to release docs gem (#7066)
   * Use assert_include (#7093)
-  * Update rubocop version to 0.57.x (#7078)
+  * Update rubocop version to 0.57.x ### -docs (#7078)
+  * Example of CircleCI deployment through CircleCI v2 (#7024)
+  * Fix Rubocop offences in test files (#7128)
+  * fix up refute_equal call (#7133)
+  * Fix incorrectly passed arguments to assert_equal (#7134)
+
+### Bug Fixes
+
+  * Add call to unused method `validate_options` in `commands/serve.rb` (#7122)
+
+### feature
+
+  * Disable Liquid via front matter (#6824)
 
 ## 3.8.3 / 2018-06-05
 
