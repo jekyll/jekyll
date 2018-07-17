@@ -134,7 +134,7 @@ module Jekyll
     #
     # Returns true if the extname is either .yml or .yaml, false otherwise.
     def render_yaml_file?
-      yaml_file? && collection.metadata["output"]
+      yaml_file? && write?
     end
 
     # Determine whether the document is an asset file.
@@ -167,7 +167,7 @@ module Jekyll
     #   true otherwise.
     def render_with_liquid?
       return false if data["render_with_liquid"] == false
-      !(coffeescript_file? || render_yaml_file? || !Utils.has_liquid_construct?(content))
+      !(coffeescript_file? || !render_yaml_file? || !Utils.has_liquid_construct?(content))
     end
 
     # Determine whether the file should be rendered with a layout.
@@ -182,7 +182,7 @@ module Jekyll
     # Returns false if the document is set to `layouts: none`, or is either an
     #   asset file or a yaml file. Returns true otherwise.
     def place_in_layout?
-      !(asset_file? || render_yaml_file? || no_layout?)
+      !(asset_file? || yaml_file? || no_layout?)
     end
 
     # The URL template where the document would be accessible.
