@@ -38,11 +38,16 @@ module Jekyll
       filename = File.join(base, name)
 
       begin
-        self.content = File.read(@path || site.in_source_dir(base, name),
-                                 Utils.merged_file_read_opts(site, opts))
-        if content =~ Document::YAML_FRONT_MATTER_REGEXP
-          self.content = $POSTMATCH
-          self.data = SafeYAML.load(Regexp.last_match(1))
+        if %w(.yaml .yml).include?(File.extname(path))
+          self.data = SafeYAML.load_file(path)
+          self.content = self.data["content"] || ""
+        else
+          self.content = File.read(@path || site.in_source_dir(base, name),
+                                   Utils.merged_file_read_opts(site, opts))
+          if content =~ Document::YAML_FRONT_MATTER_REGEXP
+            self.content = $POSTMATCH
+            self.data = SafeYAML.load(Regexp.last_match(1))
+          end
         end
       rescue Psych::SyntaxError => e
         Jekyll.logger.warn "YAML Exception reading #{filename}: #{e.message}"
