@@ -130,9 +130,10 @@ module Jekyll
       %w(.yaml .yml).include?(extname)
     end
 
-    # Determine whether the document is a YAML file.
+    # Determine whether the document is a YAML file. And if it is meant to be written.
     #
-    # Returns true if the extname is either .yml or .yaml, false otherwise.
+    # Returns true if the file should be output and 
+    #   extname is either .yml or .yaml, false otherwise.
     def render_yaml_file?
       yaml_file? && write?
     end
@@ -167,7 +168,7 @@ module Jekyll
     #   true otherwise.
     def render_with_liquid?
       return false if data["render_with_liquid"] == false
-      !(coffeescript_file? || !render_yaml_file? || !Utils.has_liquid_construct?(content))
+      !(coffeescript_file? || yaml_file? || !Utils.has_liquid_construct?(content)) || render_yaml_file?
     end
 
     # Determine whether the file should be rendered with a layout.
