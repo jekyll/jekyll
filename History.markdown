@@ -35,6 +35,8 @@
   * Add the jekyll-firstimage filter plugin (#7127)
   * Use a real theme in the example (#7125)
   * Update docs about post creation (#7138)
+  * Add DEV Community&#39;s Jekyll tag to community page (#7139)
+  * Initialize upgrading doc for v4.0 (#7140)
 
 ### Minor Enhancements
 
