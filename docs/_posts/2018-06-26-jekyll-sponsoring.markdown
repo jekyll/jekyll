@@ -1,5 +1,5 @@
 ---
-title: 'Jekyll and Sponsoring'
+title: "Sponsoring Jekyll's development"
 date: 2018-06-26 16:00:00 +0200
 author: oe
 categories: [community]
@@ -31,6 +31,19 @@ is also funded by sponsorships, as are many other similar projects.
 OpenCollective is a service that makes it easy for open source projects to receive funding
 from individuals and companies alike. It's specifically designed for open source and
 many other projects already use it for funding.
+
+Sponsoring is, for us, a method to finally realize some of the more ambitious goals we've had
+with the project for years. The closest thing we want to realize is to __release Jekyll 4.0, and
+to make it as polished as we can__. In the future, we would also like to work on other things that
+will improve the Jekyll ecosystem. Here's a couple of ideas:
+
+- Create a comprehensive official plugin and theme directory site
+- Improve tooling built around measuring and improving Jekyll's performance
+- Improve maintenance for official plugins
+- Including the community into official decisions; making Jekyll more friendly to folks in the community
+
+Again, these are just some ideas, but with the help of sponsoring, they are now one step closer
+to being realized :heart:
 
 With that, we would like to announce our very first sponsor: [__Forestry.io__](https://forestry.io)! Forestry is
 a CMS that integrates with your Jekyll sites and lets you update content using a beautiful
