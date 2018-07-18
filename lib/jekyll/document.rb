@@ -132,7 +132,7 @@ module Jekyll
 
     # Determine whether the document is a YAML file. And if it is meant to be written.
     #
-    # Returns true if the file should be output and 
+    # Returns true if the file should be output and
     #   extname is either .yml or .yaml, false otherwise.
     def render_yaml_file?
       yaml_file? && write?
@@ -168,7 +168,8 @@ module Jekyll
     #   true otherwise.
     def render_with_liquid?
       return false if data["render_with_liquid"] == false
-      !(coffeescript_file? || yaml_file? || !Utils.has_liquid_construct?(content)) || render_yaml_file?
+      !(coffeescript_file? || yaml_file? || !Utils.has_liquid_construct?(content))\
+      || render_yaml_file?
     end
 
     # Determine whether the file should be rendered with a layout.
@@ -274,9 +275,9 @@ module Jekyll
         @data = SafeYAML.load_file(path)
       else
         begin
-          merge_defaults 
+          merge_defaults
           if yaml_file?
-            read_yml_content()
+            read_yml_content
           else
             read_content(opts)
           end
@@ -459,7 +460,7 @@ module Jekyll
       end
     end
 
-    def read_yml_content()
+    def read_yml_content
       data_file = SafeYAML.load_file(path)
       self.content = data_file["content"] || ""
       merge_data!(data_file, :source => "YAML front matter")
