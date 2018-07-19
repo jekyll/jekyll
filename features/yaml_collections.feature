@@ -1,4 +1,3 @@
-@yaml
 Feature: Yaml collections
   As a developer who likes to structured data
   I want to be able to create collections of data sets
