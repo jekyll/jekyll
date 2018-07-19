@@ -169,7 +169,7 @@ module Jekyll
     def render_with_liquid?
       return false if data["render_with_liquid"] == false
       !(coffeescript_file? || yaml_file? || !Utils.has_liquid_construct?(content))\
-      || render_yaml_file?
+      || (render_yaml_file? && Utils.has_liquid_construct?(content))
     end
 
     # Determine whether the file should be rendered with a layout.

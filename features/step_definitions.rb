@@ -125,6 +125,19 @@ end
 
 #
 
+Given(%r!^I have the following yaml documents? under the (.*) collection:$!) do |folder, table|
+  table.hashes.each do |input_hash|
+    title = slug(input_hash["title"])
+    filename = "#{title}.yaml"
+    dest_folder = "_#{folder}"
+
+    path = File.join(dest_folder, filename)
+    File.write(path, YAML.dump(input_hash))
+  end
+end
+
+#
+
 Given(%r!^I have the following documents? under the "(.*)" collection within the "(.*)" directory:$!) do |label, dir, table|
   table.hashes.each do |input_hash|
     title = slug(input_hash["title"])

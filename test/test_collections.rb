@@ -141,7 +141,6 @@ class TestCollections < JekyllUnitTest
           _methods/yaml_with_dots.md
           _methods/3940394-21-9393050-fifif1323-test.md
           _methods/just_yaml.yaml
-          _methods/just_yml.yml
         ), doc.relative_path
       end
     end
@@ -213,7 +212,6 @@ class TestCollections < JekyllUnitTest
           _methods/yaml_with_dots.md
           _methods/3940394-21-9393050-fifif1323-test.md
           _methods/just_yaml.yaml
-          _methods/just_yml.yml
         ), doc.relative_path
       end
     end

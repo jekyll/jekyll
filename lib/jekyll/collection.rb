@@ -58,7 +58,7 @@ module Jekyll
       filtered_entries.each do |file_path|
         full_path = collection_dir(file_path)
         next if File.directory?(full_path)
-        if Utils.has_yaml_header?(full_path) || read_yaml_file?(full_path)
+        if Utils.has_yaml_header? full_path
           read_document(full_path)
         else
           read_static_file(file_path, full_path)
@@ -202,10 +202,6 @@ module Jekyll
     end
 
     private
-
-    def read_yaml_file?(full_path)
-      write? && %w(.yaml .yml).include?(File.extname(full_path))
-    end
 
     def container
       @container ||= site.config["collections_dir"]

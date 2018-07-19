@@ -24,7 +24,7 @@ module Jekyll
       ),
       "keep_files"          => [".git", ".svn"],
       "encoding"            => "utf-8",
-      "markdown_ext"        => "markdown,mkdown,mkdn,mkd,md",
+      "markdown_ext"        => "markdown,mkdown,mkdn,mkd,md,yaml,yml",
       "strict_front_matter" => false,
 
       # Filtering Content
