@@ -83,6 +83,7 @@ Metrics/PerceivedComplexity:
 Naming/FileName:
   Enabled: false
 Naming/MemoizedInstanceVariableName:
+  EnforcedStyleForLeadingUnderscores: optional
   Exclude:
     - lib/jekyll/page_without_a_file.rb
     - lib/jekyll/drops/unified_payload_drop.rb
