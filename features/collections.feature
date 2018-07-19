@@ -372,7 +372,7 @@ Feature: Collections
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
-    And I should see "All documents: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/just_yaml.yaml _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/um_hi.md _methods/just_yaml.yaml" in "_site/index.html" unless Windows
+    And I should see "All documents: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/just_yaml.yaml _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/um_hi.md _methods/yaml_with_dots.md" in "_site/index.html" unless Windows
     And I should see "All documents: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/just_yaml.yaml _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/yaml_with_dots.md" in "_site/index.html" if on Windows
 
   Scenario: Documents have an output attribute, which is the converted HTML
