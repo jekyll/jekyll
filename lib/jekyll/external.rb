@@ -53,24 +53,36 @@ module Jekyll
       #
       # names - a string gem name or array of gem names
       #
+      # rubocop:disable Metrics/MethodLength
       def require_with_graceful_fail(names)
         Array(names).each do |name|
           begin
             Jekyll.logger.debug "Requiring:", name.to_s
             require name
-          rescue LoadError => e
-            Jekyll.logger.error "Dependency Error:", <<~MSG
-              Yikes! It looks like you don't have #{name} or one of its dependencies installed.
-              In order to use Jekyll as currently configured, you'll need to install this gem.
-
-              The full error message from Ruby is: '#{e.message}'
-
-              If you run into trouble, you can find helpful resources at https://jekyllrb.com/help/!
-            MSG
-            raise Jekyll::Errors::MissingDependencyException, name
+          rescue LoadError
+            if name.include?("-")
+              begin
+                namespaced_file = name.tr("-", "/")
+                require namespaced_file
+              end
+            else
+              raise
+            end
           end
         end
+      rescue LoadError => e
+        e.message =~ %r!^cannot load such file -- (.+)$!i
+        Jekyll.logger.error "Dependency Error:", <<-MSG
+          Yikes! It looks like you don't have #{Regexp.last_match[1]} or one of its dependencies installed.
+          In order to use Jekyll as currently configured, you'll need to install this gem.
+
+          The full error message from Ruby is: '#{e.message}'
+
+          If you run into trouble, you can find helpful resources at https://jekyllrb.com/help/!
+        MSG
+        raise Jekyll::Errors::MissingDependencyException, Regexp.last_match[1]
       end
+      # rubocop:enable Metrics/MethodLength
     end
   end
 end
