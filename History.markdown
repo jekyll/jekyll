@@ -85,6 +85,7 @@
 ### feature
 
   * Disable Liquid via front matter (#6824)
+  * Do not process Liquid in post excerpt when disabled in front matter (#7146)
 
 ## 3.8.3 / 2018-06-05
 
