@@ -102,7 +102,7 @@ Feature: Yaml collections
     And I should see "Collections: output => true" in "_site/index.html"
     And I should see "label => movies" in "_site/index.html"
     And I should see "<div class='title'>The Breakfast Club</div>" in "_site/movies/the-breakfast-club.html"
-    And I should not see "<p>John Hughes</p>" in "_site/movies/the-breakfast-club.html"
+    And I should not see "John Hughes" in "_site/movies/the-breakfast-club.html"
 
   Scenario: Rendered yaml document with \`content\` data
     Given I have an "index.html" page that contains "Collections: output => {{ site.collections[0].output }} label => {{ site.collections[0].label }}"
@@ -127,4 +127,4 @@ Feature: Yaml collections
     And I should see "Collections: output => true" in "_site/index.html"
     And I should see "label => movies" in "_site/index.html"
     And I should see "<div class='title'>The Breakfast Club</div>" in "_site/movies/the-breakfast-club.html"
-    And I should see "<p>John Hughes</p>" in "_site/movies/the-breakfast-club.html"
+    And I should see "John Hughes" in "_site/movies/the-breakfast-club.html"
