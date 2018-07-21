@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# frozen_string_literal: true
 
 module Jekyll
   module Drops
@@ -77,6 +77,12 @@ module Jekyll
 
       def y_day
         @obj.date.strftime("%j")
+      end
+
+      private
+
+      def fallback_data
+        {}
       end
     end
   end

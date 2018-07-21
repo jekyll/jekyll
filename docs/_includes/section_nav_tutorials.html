@@ -1,0 +1,39 @@
+{% comment %}
+Map grabs the tutorials sections, giving us an array of arrays. Join, flattens all
+the items to a comma delimited string. Split turns it into an array again.
+{% endcomment %}
+{% assign tutorials = site.data.tutorials | map: 'tutorials' | join: ',' | split: ',' %}
+
+{% comment %}
+Because this is built for every page, lets find where we are in the ordered
+document list by comparing url strings. Then if there's something previous or
+next, lets build a link to it.
+{% endcomment %}
+
+{% for tutorial in tutorials %}
+  {% assign tutorial_url = tutorial | prepend:"/tutorials/" | append:"/" %}
+  {% if tutorial_url == page.url %}
+    <div class="section-nav">
+      <div class="left align-right">
+          {% if forloop.first %}
+            <span class="prev disabled">Back</span>
+          {% else %}
+            {% assign previous = forloop.index0 | minus: 1 %}
+            {% assign previous_page = tutorials[previous] | prepend:"/tutorials/" | append:"/" %}
+            <a href="{{ previous_page }}" class="prev">Back</a>
+          {% endif %}
+      </div>
+      <div class="right align-left">
+          {% if forloop.last %}
+            <span class="next disabled">Next</span>
+          {% else %}
+            {% assign next = forloop.index0 | plus: 1 %}
+            {% assign next_page = tutorials[next] | prepend:"/tutorials/" | append:"/" %}
+            <a href="{{ next_page }}" class="next">Next</a>
+          {% endif %}
+      </div>
+    </div>
+    <div class="clear"></div>
+    {% break %}
+  {% endif %}
+{% endfor %}

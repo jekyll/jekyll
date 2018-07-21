@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestRelatedPosts < JekyllUnitTest
@@ -13,8 +15,8 @@ class TestRelatedPosts < JekyllUnitTest
       last_post     = @site.posts.last
       related_posts = Jekyll::RelatedPosts.new(last_post).build
 
-      last_10_recent_posts = (@site.posts.docs.reverse - [last_post]).first(10)
-      assert_equal last_10_recent_posts, related_posts
+      last_ten_recent_posts = (@site.posts.docs.reverse - [last_post]).first(10)
+      assert_equal last_ten_recent_posts, related_posts
     end
   end
 
@@ -27,9 +29,9 @@ class TestRelatedPosts < JekyllUnitTest
       end
 
       allow_any_instance_of(Jekyll::RelatedPosts).to receive(:display)
-      @site = fixture_site({
+      @site = fixture_site(
         "lsi" => true
-      })
+      )
 
       @site.reset
       @site.read

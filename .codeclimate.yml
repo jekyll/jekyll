@@ -3,6 +3,7 @@ engines:
     enabled: false
   rubocop:
     enabled: true
+    channel: rubocop-0-54
 
 exclude_paths:
   - .codeclimate.yml
@@ -23,10 +24,12 @@ exclude_paths:
 
   - features/**/*
   - script/**/*
-  - site/**/*
+  - docs/**/*
   - spec/**/*
   - test/**/*
   - vendor/**/*
+
+  - lib/jekyll/commands/serve/livereload_assets/livereload.js
 
 ratings:
   paths:

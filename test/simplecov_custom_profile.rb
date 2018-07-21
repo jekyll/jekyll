@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "simplecov"
 
 SimpleCov.profiles.define "gem" do

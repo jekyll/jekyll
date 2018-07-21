@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class CollectionReader
     SPECIAL_COLLECTIONS = %w(posts data).freeze
@@ -12,7 +14,7 @@ module Jekyll
     #
     # Returns nothing.
     def read
-      site.collections.each do |_, collection|
+      site.collections.each_value do |collection|
         collection.read unless SPECIAL_COLLECTIONS.include?(collection.label)
       end
     end

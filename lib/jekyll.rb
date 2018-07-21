@@ -1,4 +1,6 @@
-$LOAD_PATH.unshift File.dirname(__FILE__) # For use/testing when no gem is installed
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift __dir__ # For use/testing when no gem is installed
 
 # Require all of the Ruby files in the given directory.
 #
@@ -6,7 +8,7 @@ $LOAD_PATH.unshift File.dirname(__FILE__) # For use/testing when no gem is insta
 #
 # Returns nothing.
 def require_all(path)
-  glob = File.join(File.dirname(__FILE__), path, "*.rb")
+  glob = File.join(__dir__, path, "*.rb")
   Dir[glob].sort.each do |f|
     require f
   end
@@ -16,7 +18,6 @@ end
 require "rubygems"
 
 # stdlib
-require "pathutil"
 require "forwardable"
 require "fileutils"
 require "time"
@@ -24,12 +25,17 @@ require "English"
 require "pathname"
 require "logger"
 require "set"
+require "csv"
+require "json"
 
 # 3rd party
+require "pathutil"
+require "addressable/uri"
 require "safe_yaml/load"
 require "liquid"
 require "kramdown"
 require "colorator"
+require "i18n"
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
@@ -41,7 +47,6 @@ module Jekyll
   autoload :Convertible,         "jekyll/convertible"
   autoload :Deprecator,          "jekyll/deprecator"
   autoload :Document,            "jekyll/document"
-  autoload :Draft,               "jekyll/draft"
   autoload :EntryFilter,         "jekyll/entry_filter"
   autoload :Errors,              "jekyll/errors"
   autoload :Excerpt,             "jekyll/excerpt"
@@ -55,8 +60,10 @@ module Jekyll
   autoload :PostReader,          "jekyll/readers/post_reader"
   autoload :PageReader,          "jekyll/readers/page_reader"
   autoload :StaticFileReader,    "jekyll/readers/static_file_reader"
+  autoload :ThemeAssetsReader,   "jekyll/readers/theme_assets_reader"
   autoload :LogAdapter,          "jekyll/log_adapter"
   autoload :Page,                "jekyll/page"
+  autoload :PageWithoutAFile,    "jekyll/page_without_a_file"
   autoload :PluginManager,       "jekyll/plugin_manager"
   autoload :Publisher,           "jekyll/publisher"
   autoload :Reader,              "jekyll/reader"
@@ -117,11 +124,15 @@ module Jekyll
     # timezone - the IANA Time Zone
     #
     # Returns nothing
-    # rubocop:disable Style/AccessorMethodName
+    # rubocop:disable Naming/AccessorMethodName
     def set_timezone(timezone)
-      ENV["TZ"] = timezone
+      ENV["TZ"] = if Utils::Platforms.really_windows?
+                    Utils::WinTZ.calculate(timezone)
+                  else
+                    timezone
+                  end
     end
-    # rubocop:enable Style/AccessorMethodName
+    # rubocop:enable Naming/AccessorMethodName
 
     # Public: Fetch the logger instance for this Jekyll process.
     #
@@ -158,13 +169,16 @@ module Jekyll
     def sanitized_path(base_directory, questionable_path)
       return base_directory if base_directory.eql?(questionable_path)
 
-      questionable_path.insert(0, "/") if questionable_path.start_with?("~")
-      clean_path = File.expand_path(questionable_path, "/")
-      clean_path.sub!(%r!\A\w:/!, "/")
+      clean_path = questionable_path.dup
+      clean_path.insert(0, "/") if clean_path.start_with?("~")
+      clean_path = File.expand_path(clean_path, "/")
 
-      if clean_path.start_with?(base_directory.sub(%r!\A\w:/!, "/"))
+      return clean_path if clean_path.eql?(base_directory)
+
+      if clean_path.start_with?(base_directory.sub(%r!\z!, "/"))
         clean_path
       else
+        clean_path.sub!(%r!\A\w:/!, "/")
         File.join(base_directory, clean_path)
       end
     end

@@ -1,32 +1,36 @@
+# frozen_string_literal: true
+
 #############################################################################
 #
-# Site tasks - http://jekyllrb.com
+# Site tasks - https://jekyllrb.com
 #
 #############################################################################
 
 namespace :site do
-  task :generated_pages => [:history, :version_file, :conduct, :contributing]
+  task :generated_pages => [:history, :latest_version, :conduct, :contributing, :support]
 
   desc "Generate and view the site locally"
   task :preview => :generated_pages do
     require "launchy"
     require "jekyll"
 
-    # Yep, it's a hack! Wait a few seconds for the Jekyll site to generate and
-    # then open it in a browser. Someday we can do better than this, I hope.
-    Thread.new do
-      sleep 4
-      puts "Opening in browser..."
+    browser_launched = false
+    Jekyll::Hooks.register :site, :post_write do |_site|
+      next if browser_launched
+      browser_launched = true
+      Jekyll.logger.info "Opening in browser..."
       Launchy.open("http://localhost:4000")
     end
 
     # Generate the site in server mode.
     puts "Running Jekyll..."
     options = {
-      "source"      => File.expand_path("site"),
-      "destination" => File.expand_path("site/_site"),
+      "source"      => File.expand_path(docs_folder),
+      "destination" => File.expand_path("#{docs_folder}/_site"),
+      "incremental" => true,
+      "profile"     => true,
       "watch"       => true,
-      "serving"     => true
+      "serving"     => true,
     }
     Jekyll::Commands::Build.process(options)
     Jekyll::Commands::Serve.process(options)
@@ -36,109 +40,73 @@ namespace :site do
   task :generate => :generated_pages do
     require "jekyll"
     Jekyll::Commands::Build.process({
-      "profile" => true,
-      "source"      => File.expand_path("site"),
-      "destination" => File.expand_path("site/_site")
+      "profile"     => true,
+      "source"      => File.expand_path(docs_folder),
+      "destination" => File.expand_path("#{docs_folder}/_site"),
     })
   end
   task :build => :generate
 
-  desc "Update normalize.css library to the latest version and minify"
+  desc "Update normalize.css library to the latest version"
   task :update_normalize_css do
-    Dir.chdir("site/_sass") do
-      sh 'curl "http://necolas.github.io/normalize.css/latest/normalize.css" -o "normalize.scss"'
-      sh 'sass "normalize.scss":"_normalize.scss" --style compressed'
-      rm ['normalize.scss', Dir.glob('*.map')].flatten
+    Dir.chdir("#{docs_folder}/_sass") do
+      sh 'curl "https://necolas.github.io/normalize.css/latest/normalize.css" -o "_normalize.scss"'
     end
   end
 
-  desc "Commit the local site to the gh-pages branch and publish to GitHub Pages"
+  desc "Generate generated pages and publish to GitHub Pages"
   task :publish => :generated_pages do
-    # Ensure the gh-pages dir exists so we can generate into it.
-    puts "Checking for gh-pages dir..."
-    unless File.exist?("./gh-pages")
-      puts "Creating gh-pages dir..."
-      sh "git clone git@github.com:jekyll/jekyll gh-pages"
-    end
-
-    # Ensure latest gh-pages branch history.
-    Dir.chdir('gh-pages') do
-      sh "git checkout gh-pages"
-      sh "git pull origin gh-pages"
-    end
-
-    # Proceed to purge all files in case we removed a file in this release.
-    puts "Cleaning gh-pages directory..."
-    purge_exclude = %w[
-      gh-pages/.
-      gh-pages/..
-      gh-pages/.git
-      gh-pages/.gitignore
-    ]
-    FileList["gh-pages/{*,.*}"].exclude(*purge_exclude).each do |path|
-      sh "rm -rf #{path}"
-    end
-
-    # Copy site to gh-pages dir.
-    puts "Building site into gh-pages branch..."
-    ENV['JEKYLL_ENV'] = 'production'
-    require "jekyll"
-    Jekyll::Commands::Build.process({
-      "source"       => File.expand_path("site"),
-      "destination"  => File.expand_path("gh-pages"),
-      "sass"         => { "style" => "compressed" }
-    })
-
-    File.open('gh-pages/.nojekyll', 'wb') { |f| f.puts(":dog: food.") }
-
-    # Commit and push.
-    puts "Committing and pushing to GitHub Pages..."
-    sha = `git rev-parse HEAD`.strip
-    Dir.chdir('gh-pages') do
-      sh "git add ."
-      sh "git commit --allow-empty -m 'Updating to #{sha}.'"
-      sh "git push origin gh-pages"
-    end
-    puts 'Done.'
+    puts "GitHub Pages now compiles our docs site on every push to the `master` branch. Cool, huh?"
+    exit 1
   end
 
   desc "Create a nicely formatted history page for the jekyll site based on the repo history."
   task :history do
-    siteify_file('History.markdown', { "title" => "History" })
+    siteify_file("History.markdown", { "title" => "History" })
   end
 
   desc "Copy the Code of Conduct"
   task :conduct do
     front_matter = {
       "redirect_from" => "/conduct/index.html",
-      "editable"      => false
+      "editable"      => false,
     }
-    siteify_file('CONDUCT.markdown', front_matter)
+    siteify_file("CODE_OF_CONDUCT.markdown", front_matter)
   end
 
   desc "Copy the contributing file"
   task :contributing do
-    siteify_file('.github/CONTRIBUTING.markdown', "title" => "Contributing")
+    siteify_file(".github/CONTRIBUTING.markdown", "title" => "Contributing")
   end
 
-  desc "Write the site latest_version.txt file"
-  task :version_file do
-    File.open('site/latest_version.txt', 'wb') { |f| f.puts(version) } unless version =~ /(beta|rc|alpha)/i
+  desc "Copy the support file"
+  task :support do
+    siteify_file(".github/SUPPORT.markdown", "title" => "Support")
+  end
+
+  desc "Write the latest Jekyll version"
+  task :latest_version do
+    return if version =~ %r!(beta|rc|alpha)!i
+    require "safe_yaml/load"
+    config_file = File.join(docs_folder, "_config.yml")
+    config = SafeYAML.load_file(config_file)
+    config["version"] = version
+    File.write(config_file, YAML.dump(config))
+    File.open("#{docs_folder}/latest_version.txt", "wb") { |f| f.puts(version) }
   end
 
   namespace :releases do
     desc "Create new release post"
-    task :new, :version do |t, args|
+    task :new, :version do |_t, args|
       raise "Specify a version: rake site:releases:new['1.2.3']" unless args.version
-      today = Time.new.strftime('%Y-%m-%d')
+      today = Time.new.strftime("%Y-%m-%d")
       release = args.version.to_s
-      filename = "site/_posts/#{today}-jekyll-#{release.split('.').join('-')}-released.markdown"
+      filename = "#{docs_folder}/_posts/#{today}-jekyll-#{release.split(".").join("-")}-released.markdown"
 
       File.open(filename, "wb") do |post|
         post.puts("---")
-        post.puts("layout: news_item")
         post.puts("title: 'Jekyll #{release} Released'")
-        post.puts("date: #{Time.new.strftime('%Y-%m-%d %H:%M:%S %z')}")
+        post.puts("date: #{Time.new.strftime("%Y-%m-%d %H:%M:%S %z")}")
         post.puts("author: ")
         post.puts("version: #{release}")
         post.puts("categories: [release]")

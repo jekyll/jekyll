@@ -1,15 +1,20 @@
+# frozen_string_literal: true
+
 Before do
+  FileUtils.rm_rf(Paths.test_dir) if Paths.test_dir.exist?
   FileUtils.mkdir_p(Paths.test_dir) unless Paths.test_dir.directory?
   Dir.chdir(Paths.test_dir)
+  @timezone_before_scenario = ENV["TZ"]
 end
 
 #
 
 After do
-  Paths.test_dir.rmtree if Paths.test_dir.exist?
+  FileUtils.rm_rf(Paths.test_dir) if Paths.test_dir.exist?
   Paths.output_file.delete if Paths.output_file.exist?
   Paths.status_file.delete if Paths.status_file.exist?
   Dir.chdir(Paths.test_dir.parent)
+  ENV["TZ"] = @timezone_before_scenario
 end
 
 #
@@ -31,7 +36,7 @@ end
 Given(%r!^I have an? "(.*)" page(?: with (.*) "(.*)")? that contains "(.*)"$!) do |file, key, value, text|
   File.write(file, Jekyll::Utils.strip_heredoc(<<-DATA))
     ---
-    #{key || "layout"}: #{value || "nil"}
+    #{key || "layout"}: #{value || "none"}
     ---
 
     #{text}
@@ -82,10 +87,58 @@ Given(%r!^I have the following (draft|page|post)s?(?: (in|under) "([^"]+)")?:$!)
 
     if status == "post"
       parsed_date = Time.xmlschema(input_hash["date"]) rescue Time.parse(input_hash["date"])
+      input_hash["date"] = parsed_date
       filename = "#{parsed_date.strftime("%Y-%m-%d")}-#{title}.#{ext}"
     end
 
     path = File.join(before, dest_folder, after, filename)
+    File.write(path, file_content_from_hash(input_hash))
+  end
+end
+
+#
+
+Given(%r!^I have the following (draft|post)s? within the "(.*)" directory:$!) do |type, folder, table|
+  table.hashes.each do |input_hash|
+    title = slug(input_hash["title"])
+    parsed_date = Time.xmlschema(input_hash["date"]) rescue Time.parse(input_hash["date"])
+
+    filename = type == "draft" ? "#{title}.markdown" : "#{parsed_date.strftime("%Y-%m-%d")}-#{title}.markdown"
+
+    path = File.join(folder, "_#{type}s", filename)
+    File.write(path, file_content_from_hash(input_hash))
+  end
+end
+
+#
+
+Given(%r!^I have the following documents? under the (.*) collection:$!) do |folder, table|
+  table.hashes.each do |input_hash|
+    title = slug(input_hash["title"])
+    filename = "#{title}.md"
+    dest_folder = "_#{folder}"
+
+    path = File.join(dest_folder, filename)
+    File.write(path, file_content_from_hash(input_hash))
+  end
+end
+
+#
+
+Given(%r!^I have the following documents? under the "(.*)" collection within the "(.*)" directory:$!) do |label, dir, table|
+  table.hashes.each do |input_hash|
+    title = slug(input_hash["title"])
+    path = File.join(dir, "_#{label}", "#{title}.md")
+    File.write(path, file_content_from_hash(input_hash))
+  end
+end
+
+#
+
+Given(%r!^I have the following documents? nested inside "(.*)" directory under the "(.*)" collection within the "(.*)" directory:$!) do |subdir, label, dir, table|
+  table.hashes.each do |input_hash|
+    title = slug(input_hash["title"])
+    path = File.join(dir, "_#{label}", subdir, "#{title}.md")
     File.write(path, file_content_from_hash(input_hash))
   end
 end
@@ -100,6 +153,7 @@ Given(%r!^I have a configuration file with "(.*)" set to "(.*)"$!) do |key, valu
       {}
     end
   config[key] = YAML.load(value)
+  Jekyll.set_timezone(value) if key == "timezone"
   File.write("_config.yml", YAML.dump(config))
 end
 
@@ -140,7 +194,7 @@ end
 When(%r!^I run jekyll(.*)$!) do |args|
   run_jekyll(args)
   if args.include?("--verbose") || ENV["DEBUG"]
-    $stderr.puts "\n#{jekyll_run_output}\n"
+    warn "\n#{jekyll_run_output}\n"
   end
 end
 
@@ -149,8 +203,32 @@ end
 When(%r!^I run bundle(.*)$!) do |args|
   run_bundle(args)
   if args.include?("--verbose") || ENV["DEBUG"]
-    $stderr.puts "\n#{jekyll_run_output}\n"
+    warn "\n#{jekyll_run_output}\n"
   end
+end
+
+#
+
+When(%r!^I run gem(.*)$!) do |args|
+  run_rubygem(args)
+  if args.include?("--verbose") || ENV["DEBUG"]
+    warn "\n#{jekyll_run_output}\n"
+  end
+end
+
+#
+
+When(%r!^I run git add .$!) do
+  run_in_shell("git", "add", ".", "--verbose")
+end
+
+#
+
+When(%r!^I decide to build the theme gem$!) do
+  Dir.chdir(Paths.theme_gem_dir)
+  File.new("_includes/blank.html", "w")
+  File.new("_sass/blank.scss", "w")
+  File.new("assets/blank.scss", "w")
 end
 
 #
@@ -178,10 +256,63 @@ Then(%r!^the (.*) directory should +(not )?exist$!) do |dir, negative|
 end
 
 #
+
 Then(%r!^I should (not )?see "(.*)" in "(.*)"$!) do |negative, text, file|
   step %(the "#{file}" file should exist)
   regexp = Regexp.new(text, Regexp::MULTILINE)
   if negative.nil? || negative.empty?
+    expect(file_contents(file)).to match regexp
+  else
+    expect(file_contents(file)).not_to match regexp
+  end
+end
+
+#
+
+Then(%r!^I should (not )?see "(.*)" in "(.*)" if on Windows$!) do |negative, text, file|
+  step %(the "#{file}" file should exist)
+  regexp = Regexp.new(text, Regexp::MULTILINE)
+  if negative.nil? || negative.empty?
+    if Jekyll::Utils::Platforms.really_windows?
+      expect(file_contents(file)).to match regexp
+    else
+      expect(file_contents(file)).not_to match regexp
+    end
+  end
+end
+
+#
+
+Then(%r!^I should (not )?see "(.*)" in "(.*)" unless Windows$!) do |negative, text, file|
+  step %(the "#{file}" file should exist)
+  regexp = Regexp.new(text, Regexp::MULTILINE)
+  if negative.nil? || negative.empty?
+    if Jekyll::Utils::Platforms.really_windows?
+      expect(file_contents(file)).not_to match regexp
+    else
+      expect(file_contents(file)).to match regexp
+    end
+  end
+end
+
+#
+
+Then(%r!^I should see date "(.*)" in "(.*)" unless Windows$!) do |text, file|
+  step %(the "#{file}" file should exist)
+  regexp = Regexp.new(text)
+  if Jekyll::Utils::Platforms.really_windows? && !dst_active?
+    expect(file_contents(file)).not_to match regexp
+  else
+    expect(file_contents(file)).to match regexp
+  end
+end
+
+#
+
+Then(%r!^I should see date "(.*)" in "(.*)" if on Windows$!) do |text, file|
+  step %(the "#{file}" file should exist)
+  regexp = Regexp.new(text)
+  if Jekyll::Utils::Platforms.really_windows? && !dst_active?
     expect(file_contents(file)).to match regexp
   else
     expect(file_contents(file)).not_to match regexp
@@ -230,6 +361,27 @@ Then(%r!^I should (not )?see "(.*)" in the build output$!) do |negative, text|
     expect(jekyll_run_output).to match Regexp.new(text)
   else
     expect(jekyll_run_output).not_to match Regexp.new(text)
+  end
+end
+
+#
+
+Then(%r!^I should get an updated git index$!) do
+  index = %w(
+    .gitignore
+    Gemfile
+    LICENSE.txt
+    README.md
+    _includes/blank.html
+    _layouts/default.html
+    _layouts/page.html
+    _layouts/post.html
+    _sass/blank.scss
+    assets/blank.scss
+    my-cool-theme.gemspec
+  )
+  index.each do |file|
+    expect(jekyll_run_output).to match file
   end
 end
 
