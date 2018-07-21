@@ -1,16 +1,17 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestExcerpt < JekyllUnitTest
   def setup_post(file)
-    Document.new(@site.in_source_dir(File.join("_posts", file)), {
-      :site       => @site,
-      :collection => @site.posts
-    }).tap(&:read)
+    Document.new(@site.in_source_dir(File.join("_posts", file)),
+                 :site       => @site,
+                 :collection => @site.posts).tap(&:read)
   end
 
   def do_render(document)
     @site.layouts = {
-      "default" => Layout.new(@site, source_dir("_layouts"), "simple.html")
+      "default" => Layout.new(@site, source_dir("_layouts"), "simple.html"),
     }
     document.output = Jekyll::Renderer.new(@site, document, @site.site_payload).run
   end
@@ -76,6 +77,15 @@ class TestExcerpt < JekyllUnitTest
       end
     end
 
+    context "#relative_path" do
+      should "return its document's relative path with '/#excerpt' appended" do
+        assert_equal "#{@excerpt.doc.relative_path}/#excerpt",
+                     @excerpt.relative_path
+        assert_equal "_posts/2013-07-22-post-excerpt-with-layout.markdown/#excerpt",
+                     @excerpt.relative_path
+      end
+    end
+
     context "#to_liquid" do
       should "contain the proper page data to mimic the post liquid" do
         assert_equal "Post Excerpt with Layout", @excerpt.to_liquid["title"]
@@ -84,7 +94,7 @@ class TestExcerpt < JekyllUnitTest
         assert_equal Time.parse("2013-07-22"), @excerpt.to_liquid["date"]
         assert_equal %w(bar baz z_category MixedCase), @excerpt.to_liquid["categories"]
         assert_equal %w(first second third jekyllrb.com), @excerpt.to_liquid["tags"]
-        assert_equal "_posts/2013-07-22-post-excerpt-with-layout.markdown",
+        assert_equal "_posts/2013-07-22-post-excerpt-with-layout.markdown/#excerpt",
                      @excerpt.to_liquid["path"]
       end
     end
@@ -93,12 +103,12 @@ class TestExcerpt < JekyllUnitTest
       context "before render" do
         should "be the first paragraph of the page" do
           expected = "First paragraph with [link ref][link].\n\n[link]: "\
-                     "http://www.jekyllrb.com/"
+                     "https://jekyllrb.com/"
           assert_equal expected, @excerpt.content
         end
 
         should "contain any refs at the bottom of the page" do
-          assert @excerpt.content.include?("[link]: http://www.jekyllrb.com/")
+          assert @excerpt.content.include?("[link]: https://jekyllrb.com/")
         end
       end
 
@@ -110,13 +120,39 @@ class TestExcerpt < JekyllUnitTest
         end
 
         should "be the first paragraph of the page" do
-          expected = "<p>First paragraph with <a href=\"http://www.jekyllrb.com/\">link "\
+          expected = "<p>First paragraph with <a href=\"https://jekyllrb.com/\">link "\
                      "ref</a>.</p>\n\n"
           assert_equal expected, @extracted_excerpt.output
         end
 
         should "link properly" do
-          assert @extracted_excerpt.content.include?("http://www.jekyllrb.com/")
+          assert @extracted_excerpt.content.include?("https://jekyllrb.com/")
+        end
+      end
+
+      context "with indented link references" do
+        setup do
+          @post = setup_post("2016-08-16-indented-link-references.markdown")
+          @excerpt = @post.excerpt
+        end
+
+        should "contain all refs at the bottom of the page" do
+          (0..3).each do |i|
+            assert_match "[link_#{i}]: www.example.com/#{i}", @excerpt.content
+          end
+        end
+
+        should "ignore indented code" do
+          refute_match "[fakelink]:", @excerpt.content
+        end
+
+        should "render links properly" do
+          @rendered_post = @post.dup
+          do_render(@rendered_post)
+          output = @rendered_post.data["excerpt"].output
+          (0..3).each do |i|
+            assert_includes output, "<a href=\"www.example.com/#{i}\">"
+          end
         end
       end
     end
@@ -138,6 +174,93 @@ class TestExcerpt < JekyllUnitTest
       should "match the post content" do
         assert_equal @post.content, @excerpt.content
       end
+    end
+  end
+
+  context "An excerpt with non-closed but valid Liquid block tag" do
+    setup do
+      clear_dest
+      @site = fixture_site
+      @post = setup_post("2018-01-28-open-liquid-block-excerpt.markdown")
+      @excerpt = @post.data["excerpt"]
+
+      assert_includes @post.content, "{% if"
+      refute_includes @post.content.split("\n\n")[0], "{% endif %}"
+    end
+
+    should "be appended to as necessary and generated" do
+      assert_includes @excerpt.content, "{% endif %}"
+      assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
+    end
+  end
+
+  context "An excerpt with valid closed Liquid block tag" do
+    setup do
+      clear_dest
+      @site = fixture_site
+      @post = setup_post("2018-01-28-closed-liquid-block-excerpt.markdown")
+      @excerpt = @post.data["excerpt"]
+
+      assert_includes @post.content, "{% if"
+      assert_includes @post.content.split("\n\n")[0], "{% endif %}"
+    end
+
+    should "not be appended to but generated as is" do
+      assert_includes @excerpt.content, "{% endif %}"
+      refute_includes @excerpt.content, "{% endif %}\n\n{% endif %}"
+      assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
+    end
+  end
+
+  context "An excerpt with non-closed but valid Liquid block tag with whitespace control" do
+    setup do
+      clear_dest
+      @site = fixture_site
+      @post = setup_post("2018-05-15-open-liquid-block-excerpt-whitespace-control.md")
+      @excerpt = @post.data["excerpt"]
+
+      assert_includes @post.content, "{%- for"
+      refute_includes @post.content.split("\n\n")[0], "{%- endfor -%}"
+    end
+
+    should "be appended to as necessary and generated" do
+      assert_includes @excerpt.content, "{% endfor %}"
+      refute_includes @excerpt.content, "{% endfor %}\n\n{% endfor %}"
+      assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
+    end
+  end
+
+  context "An excerpt with valid closed Liquid block tag with whitespace control" do
+    setup do
+      clear_dest
+      @site = fixture_site
+      @post = setup_post("2018-05-15-closed-liquid-block-excerpt-whitespace-control.md")
+      @excerpt = @post.data["excerpt"]
+
+      assert_includes @post.content, "{%- for"
+      assert_includes @post.content.split("\n\n")[0], "{%- endfor -%}"
+    end
+
+    should "not be appended to but generated as is" do
+      assert_includes @excerpt.content, "{%- endfor -%}"
+      refute_includes @excerpt.content, "{% endfor %}\n\n{% endfor %}"
+      assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
+    end
+  end
+
+  context "An excerpt with valid Liquid variable with whitespace control" do
+    setup do
+      clear_dest
+      @site = fixture_site
+      @post = setup_post("2018-05-15-excerpt-whitespace-control-variable.md")
+      @excerpt = @post.data["excerpt"]
+
+      assert_includes @post.content, "{%- assign"
+    end
+
+    should "not be appended to but generated as is" do
+      assert_includes @excerpt.content, "{{- xyzzy -}}"
+      assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
     end
   end
 end

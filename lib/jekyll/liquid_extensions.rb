@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Jekyll
   module LiquidExtensions
-
     # Lookup a Liquid variable in the given context.
     #
     # context  - the Liquid context in question.
@@ -17,6 +18,5 @@ module Jekyll
 
       lookup || variable
     end
-
   end
 end

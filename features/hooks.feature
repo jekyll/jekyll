@@ -235,7 +235,7 @@ Feature: Hooks
       owner.output = "1 #{owner.output.chomp}"
     end
     Jekyll::Hooks.register :pages, :post_render, priority: :high do |owner|
-      # high runs last
+      # high runs first
       owner.output = "2 #{owner.output.chomp}"
     end
     Jekyll::Hooks.register :pages, :post_render do |owner|
@@ -243,13 +243,13 @@ Feature: Hooks
       owner.output = "3 #{owner.output.chomp}"
     end
     Jekyll::Hooks.register :pages, :post_render, priority: :low do |owner|
-      # low runs first
+      # low runs last 
       owner.output = "4 #{owner.output.chomp}"
     end
     """
     And I have a "index.html" page that contains "WRAP ME"
     When I run jekyll build
-    Then I should see "2 3 1 4 WRAP ME" in "_site/index.html"
+    Then I should see "4 3 1 2 WRAP ME" in "_site/index.html"
 
   Scenario: Alter a document right after it is initialized
     Given I have a _plugins directory

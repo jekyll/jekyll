@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestEntryFilter < JekyllUnitTest
@@ -8,7 +10,7 @@ class TestEntryFilter < JekyllUnitTest
 
     should "filter entries" do
       ent1 = %w(foo.markdown bar.markdown baz.markdown #baz.markdown#
-              .baz.markdow foo.markdown~ .htaccess _posts _pages ~$benbalter.docx)
+                .baz.markdow foo.markdown~ .htaccess _posts _pages ~$benbalter.docx)
 
       entries = EntryFilter.new(@site).filter(ent1)
       assert_equal %w(foo.markdown bar.markdown baz.markdown .htaccess), entries
@@ -17,7 +19,7 @@ class TestEntryFilter < JekyllUnitTest
     should "allow regexp filtering" do
       files = %w(README.md)
       @site.exclude = [
-        %r!README!
+        %r!README!,
       ]
 
       assert_empty @site.reader.filter_entries(
@@ -82,6 +84,9 @@ class TestEntryFilter < JekyllUnitTest
 
     # rubocop:disable Performance/FixedSize
     should "include only safe symlinks in safe mode" do
+      # no support for symlinks on Windows
+      skip_if_windows "Jekyll does not currently support symlinks on Windows."
+
       site = Site.new(site_configuration("safe" => true))
       site.reader.read_directories("symlink-test")
 
@@ -91,6 +96,9 @@ class TestEntryFilter < JekyllUnitTest
     # rubocop:enable Performance/FixedSize
 
     should "include symlinks in unsafe mode" do
+      # no support for symlinks on Windows
+      skip_if_windows "Jekyll does not currently support symlinks on Windows."
+
       site = Site.new(site_configuration)
 
       site.reader.read_directories("symlink-test")

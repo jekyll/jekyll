@@ -1,12 +1,15 @@
+# frozen_string_literal: true
+
 require "fileutils"
-require "jekyll/utils"
-require "open3"
+require "jekyll"
 require "time"
 require "safe_yaml/load"
 
 class Paths
   SOURCE_DIR = Pathname.new(File.expand_path("../..", __dir__))
   def self.test_dir; source_dir.join("tmp", "jekyll"); end
+
+  def self.theme_gem_dir; source_dir.join("tmp", "jekyll", "my-cool-theme"); end
 
   def self.output_file; test_dir.join("jekyll_output.txt"); end
 
@@ -54,7 +57,7 @@ end
 def all_steps_to_path(path)
   source = source_dir
   dest = Pathname.new(path).expand_path
-  paths  = []
+  paths = []
 
   dest.ascend do |f|
     break if f == source
@@ -88,33 +91,32 @@ end
 
 #
 
-def run_jekyll(args)
-  args = args.strip.split(" ") # Shellwords?
-  process = run_in_shell(Paths.jekyll_bin.to_s, *args, "--trace")
-  process.exitstatus.zero?
+def run_rubygem(args)
+  run_in_shell("gem", *args.strip.split(" "))
 end
 
 #
 
-# rubocop:disable Metrics/AbcSize
+def run_jekyll(args)
+  args = args.strip.split(" ") # Shellwords?
+  process = run_in_shell("ruby", Paths.jekyll_bin.to_s, *args, "--trace")
+  process.exitstatus.zero?
+end
+
+#
 def run_in_shell(*args)
-  i, o, e, p = Open3.popen3(*args)
-  out = o.read.strip
-  err = e.read.strip
+  p, output = Jekyll::Utils::Exec.run(*args)
 
-  [i, o, e].each(&:close)
-
-  File.write(Paths.status_file, p.value.exitstatus)
+  File.write(Paths.status_file, p.exitstatus)
   File.open(Paths.output_file, "wb") do |f|
-    f.puts "$ " << args.join(" ")
-    f.puts out
-    f.puts err
-    f.puts "EXIT STATUS: #{p.value.exitstatus}"
+    f.print "$ "
+    f.puts args.join(" ")
+    f.puts output
+    f.puts "EXIT STATUS: #{p.exitstatus}"
   end
 
-  p.value
+  p
 end
-# rubocop:enable Metrics/AbcSize
 
 #
 
@@ -134,7 +136,7 @@ def location(folder, direction)
   end
 
   [before || ".",
-    after || "."]
+    after || ".",]
 end
 
 #
@@ -152,7 +154,7 @@ def seconds_agnostic_datetime(datetime = Time.now)
   [
     Regexp.escape(date),
     "#{time}:\\d{2}",
-    Regexp.escape(zone)
+    Regexp.escape(zone),
   ] \
     .join("\\ ")
 end
@@ -163,4 +165,15 @@ def seconds_agnostic_time(time)
   time = time.strftime("%H:%M:%S") if time.is_a?(Time)
   hour, minutes, = time.split(":")
   "#{hour}:#{minutes}"
+end
+
+# Helper method for Windows
+def dst_active?
+  config = Jekyll.configuration("quiet" => true)
+  ENV["TZ"] = config["timezone"]
+  dst = Time.now.isdst
+
+  # reset variable to default state on Windows
+  ENV["TZ"] = nil
+  dst
 end

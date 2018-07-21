@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestExcerptDrop < JekyllUnitTest
@@ -26,7 +28,7 @@ class TestExcerptDrop < JekyllUnitTest
 
     should "inherit the layout for the drop but not the excerpt" do
       assert_nil @excerpt.data["layout"]
-      assert_equal @excerpt_drop["layout"], @doc_drop["layout"]
+      assert_equal @doc_drop["layout"], @excerpt_drop["layout"]
     end
 
     should "be inspectable" do
@@ -34,7 +36,7 @@ class TestExcerptDrop < JekyllUnitTest
     end
 
     should "inherit values from the document" do
-      assert_equal @excerpt_drop.keys.sort, @doc_drop.keys.sort
+      assert_equal @doc_drop.keys.sort, @excerpt_drop.keys.sort
     end
   end
 end

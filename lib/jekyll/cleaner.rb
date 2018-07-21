@@ -1,4 +1,4 @@
-require "set"
+# frozen_string_literal: true
 
 module Jekyll
   # Handles the cleanup of a site's destination before it is built.
@@ -22,7 +22,9 @@ module Jekyll
     #
     # Returns an Array of the file and directory paths
     def obsolete_files
-      (existing_files - new_files - new_dirs + replaced_files).to_a
+      out = (existing_files - new_files - new_dirs + replaced_files).to_a
+      Jekyll::Hooks.trigger :clean, :on_obsolete, out
+      out
     end
 
     # Private: The metadata file storing dependency tree and build history
@@ -53,9 +55,9 @@ module Jekyll
     #
     # Returns a Set with the file paths
     def new_files
-      files = Set.new
-      site.each_site_file { |item| files << item.destination(site.dest) }
-      files
+      @new_files ||= Set.new.tap do |files|
+        site.each_site_file { |item| files << item.destination(site.dest) }
+      end
     end
 
     # Private: The list of directories to be created when site is built.
@@ -63,7 +65,7 @@ module Jekyll
     #
     # Returns a Set with the directory paths
     def new_dirs
-      new_files.map { |file| parent_dirs(file) }.flatten.to_set
+      @new_dirs ||= new_files.map { |file| parent_dirs(file) }.flatten.to_set
     end
 
     # Private: The list of parent directories of a given file

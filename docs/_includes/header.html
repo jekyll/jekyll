@@ -1,0 +1,31 @@
+<header>
+  <div class="flexbox">
+    <div class="center-on-mobiles">
+      <h1>
+        <a href="/" class="logo">
+          <span class="sr-only">Jekyll</span>
+          <img src="/img/logo-2x.png" width="140" height="65" alt="Jekyll Logo">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav hide-on-mobiles">
+      {% include primary-nav-items.html %}
+    </nav>
+    <div class="search hide-on-mobiles">
+      {% include search/input.html %}
+    </div>
+    <div class="meta hide-on-mobiles">
+      <ul>
+        <li>
+          <a href="{{ site.repository }}/releases/tag/v{{ site.version }}">v{{ site.version }}</a>
+        </li>
+        <li>
+          <a href="{{ site.repository }}">GitHub</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <nav class="mobile-nav show-on-mobiles">
+    {% include mobile-nav-items.html %}
+  </nav>
+</header>

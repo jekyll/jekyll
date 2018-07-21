@@ -1,35 +1,75 @@
 ---
+
+require:
+  - ./rubocop/jekyll
+
+Jekyll/NoPutsAllowed:
+  Exclude:
+    - rake/*.rake
+
 AllCops:
-  TargetRubyVersion: 2.0
+  TargetRubyVersion: 2.3
   Include:
     - lib/**/*.rb
+    - test/**/*.rb
   Exclude:
-    - lib/jekyll/convertible.rb
-    - lib/jekyll/document.rb
-    - lib/jekyll/renderer.rb
     - bin/**/*
+    - exe/**/*
     - benchmark/**/*
     - script/**/*
     - vendor/**/*
-Lint/EndAlignment:
+    - tmp/**/*
+Layout/AlignHash:
+  EnforcedHashRocketStyle: table
+Layout/IndentationWidth:
+  Severity: error
+Layout/IndentArray:
+  EnforcedStyle: consistent
+Layout/IndentHash:
+  EnforcedStyle: consistent
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: indented
+Lint/NestedPercentLiteral:
+  Exclude:
+    - test/test_site.rb
+Layout/EmptyComment:
+  Enabled: false
+Layout/EndAlignment:
   Severity: error
 Lint/UnreachableCode:
   Severity: error
-Lint/UselessAccessModifier:
-  Enabled: false
+Lint/Void:
+  Exclude:
+    - lib/jekyll/site.rb
 Metrics/AbcSize:
-  Max: 20
+  Max: 21
+Metrics/BlockLength:
+  Exclude:
+    - test/**/*.rb
+    - lib/jekyll/configuration.rb
+    - rake/*.rake
 Metrics/ClassLength:
   Exclude:
     - !ruby/regexp /features\/.*.rb$/
     - !ruby/regexp /test\/.*.rb$/
-  Max: 300
+    - lib/jekyll/document.rb
+    - lib/jekyll/site.rb
+    - lib/jekyll/commands/serve.rb
+    - lib/jekyll/configuration.rb
+  Max: 240
 Metrics/CyclomaticComplexity:
-  Max: 8
+  Exclude:
+    - lib/jekyll/utils.rb
+    - lib/jekyll/commands/serve.rb
 Metrics/LineLength:
   Exclude:
     - !ruby/regexp /features\/.*.rb/
-  Max: 90
+    - Rakefile
+    - rake/*.rake
+    - Gemfile
+  Max: 100
   Severity: warning
 Metrics/MethodLength:
   CountComments: false
@@ -41,58 +81,55 @@ Metrics/ParameterLists:
   Max: 4
 Metrics/PerceivedComplexity:
   Max: 8
+Naming/FileName:
+  Enabled: false
+Naming/HeredocDelimiterNaming:
+  Exclude:
+    - test/**/*.rb
+Naming/MemoizedInstanceVariableName:
+  Exclude:
+    - lib/jekyll/page_without_a_file.rb
+    - lib/jekyll/drops/unified_payload_drop.rb
+    - lib/jekyll/drops/site_drop.rb
+Naming/UncommunicativeMethodParamName:
+  AllowedNames:
+    - _
+Security/MarshalLoad:
+  Exclude:
+    - !ruby/regexp /test\/.*.rb$/
+    - lib/jekyll/regenerator.rb
+Security/YAMLLoad:
+  Exclude:
+    - !ruby/regexp /features\/.*.rb/
+    - !ruby/regexp /test\/.*.rb$/
+Style/AccessModifierDeclarations:
+  Enabled: false
 Style/Alias:
-  Enabled: false
-Style/AlignArray:
-  Enabled: false
-Style/AlignHash:
-  EnforcedHashRocketStyle: table
-Style/AlignParameters:
-  Enabled: false
-  EnforcedStyle: with_fixed_indentation
+  EnforcedStyle: prefer_alias_method
 Style/AndOr:
   Severity: error
-Style/Attr:
-  Enabled: false
-Style/BracesAroundHashParameters:
-  Enabled: false
 Style/ClassAndModuleChildren:
-  Enabled: false
+  Exclude:
+    - test/**/*.rb
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: always
 Style/Documentation:
   Enabled: false
-  Exclude:
-    - !ruby/regexp /features\/.*.rb$/
 Style/DoubleNegation:
   Enabled: false
-Style/EmptyLinesAroundAccessModifier:
-  Enabled: false
-Style/EmptyLinesAroundModuleBody:
-  Enabled: false
-Style/ExtraSpacing:
-  AllowForAlignment: true
-Style/FileName:
-  Enabled: false
-Style/FirstParameterIndentation:
-  EnforcedStyle: consistent
+Style/FormatStringToken:
+  Exclude:
+    - lib/jekyll/utils/ansi.rb
 Style/GuardClause:
   Enabled: false
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
   Severity: error
-Style/IfUnlessModifier:
-  Enabled: false
-Style/IndentArray:
-  EnforcedStyle: consistent
-Style/IndentHash:
-  EnforcedStyle: consistent
-Style/IndentationWidth:
-  Severity: error
+Style/MixinUsage:
+  Exclude:
+    - test/helper.rb
 Style/ModuleFunction:
   Enabled: false
-Style/MultilineMethodCallIndentation:
-  EnforcedStyle: indented
-Style/MultilineOperationIndentation:
-  EnforcedStyle: indented
 Style/MultilineTernaryOperator:
   Severity: error
 Style/PercentLiteralDelimiters:
@@ -104,25 +141,22 @@ Style/PercentLiteralDelimiters:
     "%w": "()"
     "%W": "()"
     "%x": "()"
-Style/RedundantReturn:
-  Enabled: false
-Style/RedundantSelf:
-  Enabled: false
 Style/RegexpLiteral:
   EnforcedStyle: percent_r
 Style/RescueModifier:
   Enabled: false
+Style/SafeNavigation:
+  Exclude:
+    - lib/jekyll/document.rb
 Style/SignalException:
   EnforcedStyle: only_raise
-Style/SingleLineMethods:
-  Enabled: false
-Style/SpaceAroundOperators:
-  Enabled: false
-Style/SpaceInsideBrackets:
-  Enabled: false
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
-Style/UnneededCapitalW:
-  Enabled: false
+Style/SymbolArray:
+  EnforcedStyle: brackets
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma

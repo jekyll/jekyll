@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class LayoutReader
     attr_reader :site
@@ -61,9 +63,7 @@ module Jekyll
 
     def layout_directory_in_cwd
       dir = Jekyll.sanitized_path(Dir.pwd, site.config["layouts_dir"])
-      if File.directory?(dir) && !site.safe
-        dir
-      end
+      dir if File.directory?(dir) && !site.safe
     end
   end
 end

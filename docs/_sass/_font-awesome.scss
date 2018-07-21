@@ -1,0 +1,24 @@
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../fonts/FontAwesome.eot?9h6hxj');
+  src: url('../fonts/FontAwesome.eot?9h6hxj#iefix') format('embedded-opentype'),
+       url('../fonts/FontAwesome.woff?9h6hxj') format('woff'),
+       url('../fonts/FontAwesome.ttf?9h6hxj') format('truetype'),
+       url('../fonts/FontAwesome.svg?9h6hxj#FontAwesome') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.fa-link:before {
+  content: "\f0c1";
+}
+.fa-pencil:before {
+  content: "\f040";
+}

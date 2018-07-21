@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class DataReader
     attr_reader :site, :content
@@ -16,10 +18,9 @@ module Jekyll
         path = @site.in_source_dir(File.join(dir, site.config["data_dir"], entry))
         next if @entry_filter.symlink?(path)
 
-        doc = Document.new(path, {
-          :site       => @site,
-          :collection => @site.data_collection
-        })
+        doc = Document.new(path,
+                           :site       => @site,
+                           :collection => @site.data_collection)
         doc.read
 
         doc
