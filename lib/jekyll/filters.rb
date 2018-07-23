@@ -299,16 +299,16 @@ module Jekyll
     # We also utilize the Schwartzian transform to make this more efficient.
     def sort_input(input, property, order)
       input.map { |item| [item_property(item, property), item] }
-        .sort! do |apple_info, orange_info|
-          apple_property = apple_info.first
-          orange_property = orange_info.first
+        .sort! do |a_info, b_info|
+          a_property = a_info.first
+          b_property = b_info.first
 
-          if !apple_property.nil? && orange_property.nil?
+          if !a_property.nil? && b_property.nil?
             - order
-          elsif apple_property.nil? && !orange_property.nil?
+          elsif a_property.nil? && !b_property.nil?
             + order
           else
-            apple_property <=> orange_property
+            a_property <=> b_property || a_property.to_s <=> b_property.to_s
           end
         end
         .map!(&:last)
@@ -317,13 +317,20 @@ module Jekyll
     def item_property(item, property)
       if item.respond_to?(:to_liquid)
         property.to_s.split(".").reduce(item.to_liquid) do |subvalue, attribute|
-          subvalue[attribute]
+          parse_sort_input(subvalue[attribute])
         end
       elsif item.respond_to?(:data)
-        item.data[property.to_s]
+        parse_sort_input(item.data[property.to_s])
       else
-        item[property.to_s]
+        parse_sort_input(item[property.to_s])
       end
+    end
+
+    # return numeric values as numbers for proper sorting
+    def parse_sort_input(property)
+      number_like = %r!\A\s*-?(?:\d+\.?\d*|\.\d+)\s*\Z!
+      return property.to_f if property =~ number_like
+      property
     end
 
     def as_liquid(item)

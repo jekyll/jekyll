@@ -9,11 +9,11 @@ class TestCollections < JekyllUnitTest
     end
 
     should "sanitize the label name" do
-      assert_equal @collection.label, "....etcpassword"
+      assert_equal "....etcpassword", @collection.label
     end
 
     should "have a sanitized relative path name" do
-      assert_equal @collection.relative_directory, "_....etcpassword"
+      assert_equal "_....etcpassword", @collection.relative_directory
     end
 
     should "have a sanitized full path" do
@@ -27,11 +27,11 @@ class TestCollections < JekyllUnitTest
     end
 
     should "sanitize the label name" do
-      assert_equal @collection.label, "methods"
+      assert_equal "methods", @collection.label
     end
 
     should "have default URL template" do
-      assert_equal @collection.url_template, "/:collection/:path:output_ext"
+      assert_equal "/:collection/:path:output_ext", @collection.url_template
     end
 
     should "contain no docs when initialized" do
@@ -39,7 +39,7 @@ class TestCollections < JekyllUnitTest
     end
 
     should "know its relative directory" do
-      assert_equal @collection.relative_directory, "_methods"
+      assert_equal "_methods", @collection.relative_directory
     end
 
     should "know the full path to itself on the filesystem" do
@@ -48,15 +48,15 @@ class TestCollections < JekyllUnitTest
 
     context "when turned into Liquid" do
       should "have a label attribute" do
-        assert_equal @collection.to_liquid["label"], "methods"
+        assert_equal "methods", @collection.to_liquid["label"]
       end
 
       should "have a docs attribute" do
-        assert_equal @collection.to_liquid["docs"], []
+        assert_equal [], @collection.to_liquid["docs"]
       end
 
       should "have a files attribute" do
-        assert_equal @collection.to_liquid["files"], []
+        assert_equal [], @collection.to_liquid["files"]
       end
 
       should "have a directory attribute" do
@@ -64,18 +64,18 @@ class TestCollections < JekyllUnitTest
       end
 
       should "have a relative_directory attribute" do
-        assert_equal @collection.to_liquid["relative_directory"], "_methods"
+        assert_equal "_methods", @collection.to_liquid["relative_directory"]
       end
 
       should "have a output attribute" do
-        assert_equal @collection.to_liquid["output"], false
+        assert_equal false, @collection.to_liquid["output"]
       end
     end
 
     should "know whether it should be written or not" do
-      assert_equal @collection.write?, false
+      assert_equal false, @collection.write?
       @collection.metadata["output"] = true
-      assert_equal @collection.write?, true
+      assert_equal true, @collection.write?
       @collection.metadata.delete "output"
     end
   end
@@ -87,34 +87,35 @@ class TestCollections < JekyllUnitTest
     end
 
     should "contain only the default collections" do
-      refute_equal @site.collections, {}
+      expected = {}
+      refute_equal expected, @site.collections
       refute_nil @site.collections
     end
   end
 
   context "a collection with permalink" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "methods" => {
             "permalink" => "/awesome/:path/",
           },
-        },
-      })
+        }
+      )
       @site.process
       @collection = @site.collections["methods"]
     end
 
     should "have custom URL template" do
-      assert_equal @collection.url_template, "/awesome/:path/"
+      assert_equal "/awesome/:path/", @collection.url_template
     end
   end
 
   context "with a collection" do
     setup do
-      @site = fixture_site({
-        "collections" => ["methods"],
-      })
+      @site = fixture_site(
+        "collections" => ["methods"]
+      )
       @site.process
       @collection = @site.collections["methods"]
     end
@@ -154,35 +155,36 @@ class TestCollections < JekyllUnitTest
     should "not include the underscored files in the list of docs" do
       refute_includes @collection.docs.map(&:relative_path), "_methods/_do_not_read_me.md"
       refute_includes @collection.docs.map(&:relative_path),
-                                           "_methods/site/_dont_include_me_either.md"
+                      "_methods/site/_dont_include_me_either.md"
     end
   end
 
   context "with a collection with metadata" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "methods" => {
             "foo" => "bar",
             "baz" => "whoo",
           },
-        },
-      })
+        }
+      )
       @site.process
       @collection = @site.collections["methods"]
     end
 
     should "extract the configuration collection information as metadata" do
-      assert_equal @collection.metadata, { "foo" => "bar", "baz" => "whoo" }
+      expected = { "foo" => "bar", "baz" => "whoo" }
+      assert_equal expected, @collection.metadata
     end
   end
 
   context "in safe mode" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => ["methods"],
-        "safe"        => true,
-      })
+        "safe"        => true
+      )
       @site.process
       @collection = @site.collections["methods"]
     end
@@ -202,10 +204,10 @@ class TestCollections < JekyllUnitTest
 
   context "with dots in the filenames" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => ["with.dots"],
-        "safe"        => true,
-      })
+        "safe"        => true
+      )
       @site.process
       @collection = @site.collections["with.dots"]
     end
@@ -231,14 +233,14 @@ class TestCollections < JekyllUnitTest
 
   context "a collection with included dotfiles" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "methods" => {
             "permalink" => "/awesome/:path/",
           },
         },
-        "include"     => %w(.htaccess .gitignore),
-      })
+        "include"     => %w(.htaccess .gitignore)
+      )
       @site.process
       @collection = @site.collections["methods"]
     end

@@ -828,6 +828,7 @@ You can find a few useful plugins at the following locations:
 - [replace_regex](https://github.com/sparanoid/replace_regex): A Liquid filter to perform regex replace.
 - [Jekyll Money](https://rubygems.org/gems/jekyll-money): A Jekyll plugin for dealing with money. Because we all have to at some point.
 - [jekyll-random](https://github.com/codecalm/jekyll-random) by [codecalm](https://nodecalm.net): A Jekyll plugin that generates pseudo-random data. Very useful when you want to generate a large amount of random data.
+- [jekyll-firstimage](https://github.com/nhoizey/jekyll-firstimage) adds a Liquid filter finding the first image in a HTML content string, including responsive images srcset.
 
 #### Tags
 
@@ -940,6 +941,7 @@ You can find a few useful plugins at the following locations:
 - [jekyll-pwa-plugin](https://github.com/lavas-project/jekyll-pwa): A plugin provides PWA support for Jekyll. It generates a service worker in Jekyll build process and makes precache and runtime cache available in the runtime with Google Workbox.
 - [jekyll-algolia](https://community.algolia.com/jekyll-algolia/): Add fast and relevant search to your Jekyll site through the Algolia API.
 - [jekyll-get](https://github.com/18F/jekyll-get): Download data from external JSON API sources to use in generating a site.
+- [jekyll-xml-source](https://github.com/mcred/jekyll-xml-source): Download XML and RSS from external sites for use in site data.
 
 <div class="note info">
   <h5>Submit your gem plugins</h5>

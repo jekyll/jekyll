@@ -70,7 +70,7 @@ class TestStaticFile < JekyllUnitTest
         "root",
         "_foo/dir/subdir",
         "file.html",
-        { "output" => true }
+        "output" => true
       )
       assert_equal :foo, static_file.type
       assert_equal "/foo/dir/subdir/file.html", static_file.url
@@ -82,7 +82,7 @@ class TestStaticFile < JekyllUnitTest
         "root",
         "_foo/dir/subdir",
         "file.html",
-        { "output" => true, "permalink" => "/:path/" }
+        "output" => true, "permalink" => "/:path/"
       )
       assert_equal :foo, static_file.type
       assert_equal "/dir/subdir/file.html", static_file.url
@@ -92,7 +92,7 @@ class TestStaticFile < JekyllUnitTest
     should "be writable by default" do
       static_file = setup_static_file("root", "dir/subdir", "file.html")
       assert(static_file.write?,
-        "static_file.write? should return true by default")
+             "static_file.write? should return true by default")
     end
 
     should "use the _config.yml defaults to determine writability" do
@@ -107,8 +107,8 @@ class TestStaticFile < JekyllUnitTest
         defaults
       )
       assert(!static_file.write?,
-        "static_file.write? should return false when _config.yml sets " \
-        "`published: false`")
+             "static_file.write? should return false when _config.yml sets " \
+             "`published: false`")
     end
 
     should "respect front matter defaults" do
