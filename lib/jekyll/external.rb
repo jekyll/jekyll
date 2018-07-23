@@ -61,10 +61,7 @@ module Jekyll
             require name
           rescue LoadError
             if name.include?("-")
-              begin
-                namespaced_file = name.tr("-", "/")
-                require namespaced_file
-              end
+              require name.tr("-", "/")
             else
               raise
             end
