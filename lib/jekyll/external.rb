@@ -53,34 +53,45 @@ module Jekyll
       #
       # names - a string gem name or array of gem names
       #
-      # rubocop:disable Metrics/MethodLength
       def require_with_graceful_fail(names)
         Array(names).each do |name|
           begin
             Jekyll.logger.debug "Requiring:", name.to_s
             require name
-          rescue LoadError
+          rescue LoadError => e
             if name.include?("-")
-              require name.tr("-", "/")
+              begin
+                require name.tr("-", "/")
+              rescue LoadError => e
+                log_require_with_graceful_fail_error(name, e)
+                raise Jekyll::Errors::MissingDependencyException, name
+              end
             else
-              raise
+              log_require_with_graceful_fail_error(name, e)
+              raise Jekyll::Errors::MissingDependencyException, name
             end
           end
         end
-      rescue LoadError => e
-        e.message =~ %r! -- (.+)$!i
-        specimen = Regexp.last_match[1]
+      end
+
+      private
+
+      #
+      # Log error message for require_with_graceful_fail
+      #
+      # name    - a string gem name
+      # rescued - the error rescued
+      #
+      def log_require_with_graceful_fail_error(name, rescued)
         Jekyll.logger.error "Dependency Error:", <<-MSG
-          Yikes! It looks like you don't have #{specimen} or one of its dependencies installed.
+          Yikes! It looks like you don't have #{name} or one of its dependencies installed.
           In order to use Jekyll as currently configured, you'll need to install this gem.
 
-          The full error message from Ruby is: '#{e.message}'
+          The full error message from Ruby is: '#{rescued.message}'
 
           If you run into trouble, you can find helpful resources at https://jekyllrb.com/help/!
         MSG
-        raise Jekyll::Errors::MissingDependencyException, specimen
       end
-      # rubocop:enable Metrics/MethodLength
     end
   end
 end
