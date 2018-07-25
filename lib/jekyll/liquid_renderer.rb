@@ -46,26 +46,6 @@ module Jekyll
       LiquidRenderer::Table.new(@stats).to_s(num_of_rows)
     end
 
-    # rubocop:disable Metrics/AbcSize
-    def print(data)
-      cell_width  = data.keys.map(&:length).max
-      cell_border = "-" * (cell_width + 2)
-      total_time  = data.delete("TOTAL TIME")
-
-      table = +"\nBuild Process Summary:\n"
-      table << "-" * 22 << "\n\n"
-      table << format_data_cell("METHOD", "TIME", cell_width)
-      table << divider(cell_border)
-
-      data.each do |key, value|
-        table << format_data_cell(key, format("%.4f", value), cell_width)
-      end
-
-      table << divider(cell_border)
-      table << format_data_cell("TOTAL TIME", format("%.4f", total_time), cell_width)
-    end
-    # rubocop:enable Metrics/AbcSize
-
     def self.format_error(error, path)
       "#{error.message} in #{path}"
     end
@@ -78,16 +58,6 @@ module Jekyll
 
     def new_profile_hash
       Hash.new { |hash, key| hash[key] = 0 }
-    end
-
-    def format_data_cell(key, val, width)
-      row = +""
-      row << key.to_s.ljust(width - 2).center(width + 2) << " | "
-      row << val.to_s.rjust(width - 4).center(width + 2) << "\n"
-    end
-
-    def divider(cell_border)
-      +"" << cell_border << "-+-" << cell_border << "\n"
     end
   end
 end

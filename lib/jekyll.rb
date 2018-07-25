@@ -66,6 +66,7 @@ module Jekyll
   autoload :PageWithoutAFile,    "jekyll/page_without_a_file"
   autoload :PluginManager,       "jekyll/plugin_manager"
   autoload :Publisher,           "jekyll/publisher"
+  autoload :Profiler,            "jekyll/profiler"
   autoload :Reader,              "jekyll/reader"
   autoload :Regenerator,         "jekyll/regenerator"
   autoload :RelatedPosts,        "jekyll/related_posts"
