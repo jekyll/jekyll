@@ -80,6 +80,7 @@ module Jekyll
       end
 
       private
+
       def fallback_data
         {}
       end

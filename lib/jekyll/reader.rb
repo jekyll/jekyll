@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "csv"
-
 module Jekyll
   class Reader
     attr_reader :site
@@ -63,8 +61,8 @@ module Jekyll
     # Returns nothing.
     def retrieve_posts(dir)
       return if outside_configured_directory?(dir)
-      site.posts.docs.concat(PostReader.new(site).read_posts(dir))
-      site.posts.docs.concat(PostReader.new(site).read_drafts(dir)) if site.show_drafts
+      site.posts.docs.concat(post_reader.read_posts(dir))
+      site.posts.docs.concat(post_reader.read_drafts(dir)) if site.show_drafts
     end
 
     # Recursively traverse directories with the read_directories function.
@@ -78,9 +76,7 @@ module Jekyll
       dot_dirs.each do |file|
         dir_path = site.in_source_dir(dir, file)
         rel_path = File.join(dir, file)
-        unless @site.dest.chomp("/") == dir_path
-          @site.reader.read_directories(rel_path)
-        end
+        @site.reader.read_directories(rel_path) unless @site.dest.chomp("/") == dir_path
       end
     end
 
@@ -145,6 +141,12 @@ module Jekyll
     def outside_configured_directory?(dir)
       collections_dir = site.config["collections_dir"]
       !collections_dir.empty? && !dir.start_with?("/#{collections_dir}")
+    end
+
+    # Create a single PostReader instance to retrieve drafts and posts from all valid
+    # directories in current site.
+    def post_reader
+      @post_reader ||= PostReader.new(site)
     end
   end
 end

@@ -56,9 +56,9 @@ defaults:
 </div>
 
 <div class="note warning">
-  <h5>Be sure to move posts into custom collections directory</h5>
+  <h5>Be sure to move drafts and posts into custom collections directory</h5>
 
-  <p>If you specify a directory to store all your collections in the same place with <code>collections_dir: my_collections</code>, then you will need to move your <code>_posts</code> directory to <code>my_collections/_posts</code>. Note that, the name of your collections directory cannot start with an underscore (`_`).</p>
+  <p>If you specify a directory to store all your collections in the same place with <code>collections_dir: my_collections</code>, then you will need to move your <code>_drafts</code> and <code>_posts</code> directory to <code>my_collections/_drafts</code> and <code>my_collections/_posts</code>. Note that, the name of your collections directory cannot start with an underscore (`_`).</p>
 </div>
 
 ### Step 2: Add your content {#step2}
@@ -346,6 +346,20 @@ you specified in your `_config.yml` (if present) and the following information:
   filter it out.</p>
   <p>You may wish to use filters to find your collection:
   <code>{% raw %}{{ site.collections | where: "label", "myCollection" | first }}{% endraw %}</code></p>
+</div>
+
+<div class="note info">
+  <h5>Collections and Time</h5>
+  <p>Except for documents in hard-coded default collection <code>posts</code>, all documents in collections
+    you create, are accessible via Liquid irrespective of their assigned date, if any, and therefore renderable.
+  </p>
+  <p>However documents are attempted to be written to disk only if the concerned collection
+    metadata has <code>output: true</code>. Additionally, future-dated documents are only written if
+    <code>site.future</code> <em>is also true</em>.
+  </p>
+  <p>More fine-grained control over documents being written to disk can be exercised by setting
+    <code>published: false</code> (<em><code>true</code> by default</em>) in the document's front matter.
+  </p>
 </div>
 
 

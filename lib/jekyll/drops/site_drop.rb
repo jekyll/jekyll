@@ -8,8 +8,9 @@ module Jekyll
       mutable false
 
       def_delegator  :@obj, :site_data, :data
-      def_delegators :@obj, :time, :pages, :static_files, :documents,
-                            :tags, :categories
+      def_delegators :@obj, :time, :pages, :static_files, :documents, :tags, :categories
+
+      private def_delegator :@obj, :config, :fallback_data
 
       def [](key)
         if @obj.collections.key?(key) && key != "posts"
@@ -49,9 +50,6 @@ module Jekyll
 
       # return nil for `{{ site.config }}` even if --config was passed via CLI
       def config; end
-
-      private
-      def_delegator :@obj, :config, :fallback_data
     end
   end
 end

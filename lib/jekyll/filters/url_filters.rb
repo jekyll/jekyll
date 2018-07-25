@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "addressable/uri"
-
 module Jekyll
   module Filters
     module URLFilters
@@ -59,7 +57,6 @@ module Jekyll
         return input if input.nil? || input.empty? || input.start_with?("/")
         "/#{input}"
       end
-
     end
   end
 end

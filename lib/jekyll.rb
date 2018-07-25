@@ -18,7 +18,6 @@ end
 require "rubygems"
 
 # stdlib
-require "pathutil"
 require "forwardable"
 require "fileutils"
 require "time"
@@ -26,8 +25,12 @@ require "English"
 require "pathname"
 require "logger"
 require "set"
+require "csv"
+require "json"
 
 # 3rd party
+require "pathutil"
+require "addressable/uri"
 require "safe_yaml/load"
 require "liquid"
 require "kramdown"
@@ -35,7 +38,6 @@ require "colorator"
 require "i18n"
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
-I18n.config.available_locales = :en
 
 module Jekyll
   # internal requires

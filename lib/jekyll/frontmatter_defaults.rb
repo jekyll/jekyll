@@ -108,25 +108,31 @@ module Jekyll
 
       if scope["path"].to_s.include?("*")
         Dir.glob(abs_scope_path).each do |scope_path|
-          scope_path = Pathname.new(scope_path).relative_path_from site_path
+          scope_path = Pathname.new(scope_path).relative_path_from(site_path)
+          scope_path = strip_collections_dir(scope_path)
           Jekyll.logger.debug "Globbed Scope Path:", scope_path
           return true if path_is_subpath?(sanitized_path, scope_path)
         end
         false
       else
-        path_is_subpath?(sanitized_path, rel_scope_path)
+        path_is_subpath?(sanitized_path, strip_collections_dir(rel_scope_path))
       end
     end
     # rubocop:enable Metrics/AbcSize
 
     def path_is_subpath?(path, parent_path)
       path.ascend do |ascended_path|
-        if ascended_path.to_s == parent_path.to_s
-          return true
-        end
+        return true if ascended_path.to_s == parent_path.to_s
       end
 
       false
+    end
+
+    def strip_collections_dir(path)
+      collections_dir  = @site.config["collections_dir"]
+      slashed_coll_dir = "#{collections_dir}/"
+      return path if collections_dir.empty? || !path.to_s.start_with?(slashed_coll_dir)
+      path.sub(slashed_coll_dir, "")
     end
 
     # Determines whether the scope applies to type.
@@ -207,11 +213,14 @@ module Jekyll
     end
 
     # Sanitizes the given path by removing a leading and adding a trailing slash
+
+    SANITIZATION_REGEX = %r!\A/|(?<=[^/])\z!
+
     def sanitize_path(path)
       if path.nil? || path.empty?
         ""
       else
-        path.gsub(%r!\A/|(?<=[^/])\z!, "".freeze)
+        path.gsub(SANITIZATION_REGEX, "")
       end
     end
   end
