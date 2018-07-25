@@ -1,4 +1,4 @@
-bundler_args: --without benchmark:development
+bundler_args: --without benchmark:site:development
 script: script/cibuild
 cache: bundler
 language: ruby
@@ -20,6 +20,8 @@ matrix:
       name: "🏠️ Default Site"
     - rvm: *ruby1
       env: TEST_SUITE=profile-docs
+      name: "📝️ Docs Site"
+      bundler_args: --without benchmark:development
   exclude:
     - rvm: *jruby
       env: TEST_SUITE=cucumber
