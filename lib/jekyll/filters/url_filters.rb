@@ -57,7 +57,6 @@ module Jekyll
         return input if input.nil? || input.empty? || input.start_with?("/")
         "/#{input}"
       end
-
     end
   end
 end

@@ -31,9 +31,7 @@ module Jekyll
 
     def filter(entries)
       entries.reject do |e|
-        unless included?(e)
-          special?(e) || backup?(e) || excluded?(e) || symlink?(e)
-        end
+        special?(e) || backup?(e) || excluded?(e) || symlink?(e) unless included?(e)
       end
     end
 

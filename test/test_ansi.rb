@@ -15,7 +15,7 @@ class TestAnsi < JekyllUnitTest
     end
 
     should "be able to strip colors" do
-      assert_equal @subject.strip(@subject.yellow(@subject.red("hello"))), "hello"
+      assert_equal "hello", @subject.strip(@subject.yellow(@subject.red("hello")))
     end
 
     should "be able to detect colors" do

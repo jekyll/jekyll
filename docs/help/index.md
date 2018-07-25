@@ -26,6 +26,10 @@ question!
 Get live support at **#jekyll** on **irc.freenode.net**, the official
 Jekyll IRC channel.
 
+### [The Dev community](https://dev.to/)
+
+[DEV’s jekyll tag](https://dev.to/t/jekyll) is a place to share Jekyll projects, articles and tutorials as well as start discussions and ask for feedback on Jekyll-related topics. Developers of all skill-levels are welcome to take part.
+
 ### View source
 
 Learn from the source of others, you'll find plenty of [jekyll sites](https://github.com/topics/jekyll-site) and [jekyll themes](https://github.com/topics/jekyll-themes) carefully handcrafted on GitHub.

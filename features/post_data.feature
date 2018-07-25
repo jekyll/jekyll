@@ -251,6 +251,19 @@ Feature: Post data
     And I should see "Post categories: scifi and Movies" in "_site/scifi/movies/2009/03/27/star-wars.html"
     And I should see "Post categories: SciFi and movies" in "_site/scifi/movies/2013/03/17/star-trek.html"
 
+Scenario: Use page.render_with_liquid variable
+  Given I have a _posts directory
+  And I have the following posts:
+    | title           | render_with_liquid | date       | content                |
+    | Unrendered Post | false              | 2017-07-06 | Hello {{ page.title }} |
+    | Rendered Post   | true               | 2017-07-06 | Hello {{ page.title }} |
+  When I run jekyll build
+  Then I should get a zero exit status
+  And the _site directory should exist
+  And I should not see "Hello Unrendered Post" in "_site/2017/07/06/unrendered-post.html"
+  But I should see "Hello {{ page.title }}" in "_site/2017/07/06/unrendered-post.html"
+  And I should see "Hello Rendered Post" in "_site/2017/07/06/rendered-post.html"
+
   Scenario Outline: Use page.path variable
     Given I have a <dir>/_posts directory
     And I have the following post in "<dir>":

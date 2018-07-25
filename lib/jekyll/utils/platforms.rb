@@ -31,7 +31,7 @@ module Jekyll
       # --
 
       alias_method :really_windows?, \
-        :vanilla_windows?
+                   :vanilla_windows?
 
       #
 
@@ -68,6 +68,7 @@ module Jekyll
       #
 
       private
+
       def proc_version
         @proc_version ||= begin
           Pathutil.new(

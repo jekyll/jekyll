@@ -25,7 +25,7 @@ module Jekyll
 
         def invalid_command(prog, cmd)
           Jekyll.logger.error "Error:",
-                "Hmm... we don't know what the '#{cmd}' command is."
+                              "Hmm... we don't know what the '#{cmd}' command is."
           Jekyll.logger.info  "Valid commands:", prog.commands.keys.join(", ")
         end
       end

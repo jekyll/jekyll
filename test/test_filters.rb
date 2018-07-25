@@ -9,7 +9,7 @@ class TestFilters < JekyllUnitTest
 
     def initialize(opts = {})
       @site = Jekyll::Site.new(opts.merge("skip_config_files" => true))
-      @context = Liquid::Context.new(@site.site_payload, {}, { :site => @site })
+      @context = Liquid::Context.new(@site.site_payload, {}, :site => @site)
     end
   end
 
@@ -37,12 +37,12 @@ class TestFilters < JekyllUnitTest
   context "filters" do
     setup do
       @sample_time = Time.utc(2013, 3, 27, 11, 22, 33)
-      @filter = make_filter_mock({
+      @filter = make_filter_mock(
         "timezone"               => "UTC",
         "url"                    => "http://example.com",
         "baseurl"                => "/base",
-        "dont_show_posts_before" => @sample_time,
-      })
+        "dont_show_posts_before" => @sample_time
+      )
       @sample_date = Date.parse("2013-03-02")
       @time_as_string = "September 11, 2001 12:46:30 -0000"
       @time_as_numeric = 1_399_680_607
@@ -88,7 +88,7 @@ class TestFilters < JekyllUnitTest
       end
 
       should "escapes special characters when configured to do so" do
-        kramdown = make_filter_mock({ :kramdown => { :entity_output => :symbolic } })
+        kramdown = make_filter_mock(:kramdown => { :entity_output => :symbolic })
         assert_equal(
           "&ldquo;This filter&rsquo;s test&hellip;&rdquo;",
           kramdown.smartify(%q{"This filter's test..."})
@@ -406,82 +406,82 @@ class TestFilters < JekyllUnitTest
 
       should "ensure the leading slash for the baseurl" do
         page_url = "about/my_favorite_page/"
-        filter = make_filter_mock({
+        filter = make_filter_mock(
           "url"     => "http://example.com",
-          "baseurl" => "base",
-        })
+          "baseurl" => "base"
+        )
         assert_equal "http://example.com/base/#{page_url}", filter.absolute_url(page_url)
       end
 
       should "be ok with a blank but present 'url'" do
         page_url = "about/my_favorite_page/"
-        filter = make_filter_mock({
+        filter = make_filter_mock(
           "url"     => "",
-          "baseurl" => "base",
-        })
+          "baseurl" => "base"
+        )
         assert_equal "/base/#{page_url}", filter.absolute_url(page_url)
       end
 
       should "be ok with a nil 'url'" do
         page_url = "about/my_favorite_page/"
-        filter = make_filter_mock({
+        filter = make_filter_mock(
           "url"     => nil,
-          "baseurl" => "base",
-        })
+          "baseurl" => "base"
+        )
         assert_equal "/base/#{page_url}", filter.absolute_url(page_url)
       end
 
       should "be ok with a nil 'baseurl'" do
         page_url = "about/my_favorite_page/"
-        filter = make_filter_mock({
+        filter = make_filter_mock(
           "url"     => "http://example.com",
-          "baseurl" => nil,
-        })
+          "baseurl" => nil
+        )
         assert_equal "http://example.com/#{page_url}", filter.absolute_url(page_url)
       end
 
       should "not prepend a forward slash if input is empty" do
         page_url = ""
-        filter = make_filter_mock({
+        filter = make_filter_mock(
           "url"     => "http://example.com",
-          "baseurl" => "/base",
-        })
+          "baseurl" => "/base"
+        )
         assert_equal "http://example.com/base", filter.absolute_url(page_url)
       end
 
       should "not append a forward slash if input is '/'" do
         page_url = "/"
-        filter = make_filter_mock({
+        filter = make_filter_mock(
           "url"     => "http://example.com",
-          "baseurl" => "/base",
-        })
+          "baseurl" => "/base"
+        )
         assert_equal "http://example.com/base/", filter.absolute_url(page_url)
       end
 
       should "not append a forward slash if input is '/' and nil 'baseurl'" do
         page_url = "/"
-        filter = make_filter_mock({
+        filter = make_filter_mock(
           "url"     => "http://example.com",
-          "baseurl" => nil,
-        })
+          "baseurl" => nil
+        )
         assert_equal "http://example.com/", filter.absolute_url(page_url)
       end
 
       should "not append a forward slash if both input and baseurl are simply '/'" do
         page_url = "/"
-        filter = make_filter_mock({
+        filter = make_filter_mock(
           "url"     => "http://example.com",
-          "baseurl" => "/",
-        })
+          "baseurl" => "/"
+        )
         assert_equal "http://example.com/", filter.absolute_url(page_url)
       end
 
       should "normalize international URLs" do
         page_url = ""
-        filter = make_filter_mock({
+        filter = make_filter_mock(
           "url"     => "http://ümlaut.example.org/",
-          "baseurl" => nil,
-        })
+          "baseurl" => nil
+        )
         assert_equal "http://xn--mlaut-jva.example.org/", filter.absolute_url(page_url)
       end
 
@@ -492,19 +492,19 @@ class TestFilters < JekyllUnitTest
 
       should "transform the input URL to a string" do
         page_url = "/my-page.html"
-        filter = make_filter_mock({ "url" => Value.new(proc { "http://example.org" }) })
+        filter = make_filter_mock("url" => Value.new(proc { "http://example.org" }))
         assert_equal "http://example.org#{page_url}", filter.absolute_url(page_url)
       end
 
       should "not raise a TypeError when passed a hash" do
-        assert @filter.absolute_url({ "foo" => "bar" })
+        assert @filter.absolute_url("foo" => "bar")
       end
 
       context "with a document" do
         setup do
-          @site = fixture_site({
-            "collections" => ["methods"],
-          })
+          @site = fixture_site(
+            "collections" => ["methods"]
+          )
           @site.process
           @document = @site.collections["methods"].docs.detect do |d|
             d.relative_path == "_methods/configuration.md"
@@ -531,7 +531,7 @@ class TestFilters < JekyllUnitTest
 
       should "ensure the leading slash for the baseurl" do
         page_url = "about/my_favorite_page/"
-        filter = make_filter_mock({ "baseurl" => "base" })
+        filter = make_filter_mock("baseurl" => "base")
         assert_equal "/base/#{page_url}", filter.relative_url(page_url)
       end
 
@@ -542,51 +542,51 @@ class TestFilters < JekyllUnitTest
 
       should "be ok with a nil 'baseurl'" do
         page_url = "about/my_favorite_page/"
-        filter = make_filter_mock({
+        filter = make_filter_mock(
           "url"     => "http://example.com",
-          "baseurl" => nil,
-        })
+          "baseurl" => nil
+        )
         assert_equal "/#{page_url}", filter.relative_url(page_url)
       end
 
       should "not prepend a forward slash if input is empty" do
         page_url = ""
-        filter = make_filter_mock({
+        filter = make_filter_mock(
           "url"     => "http://example.com",
-          "baseurl" => "/base",
-        })
+          "baseurl" => "/base"
+        )
         assert_equal "/base", filter.relative_url(page_url)
       end
 
       should "not prepend a forward slash if baseurl ends with a single '/'" do
         page_url = "/css/main.css"
-        filter = make_filter_mock({
+        filter = make_filter_mock(
           "url"     => "http://example.com",
-          "baseurl" => "/base/",
-        })
+          "baseurl" => "/base/"
+        )
         assert_equal "/base/css/main.css", filter.relative_url(page_url)
       end
 
       should "not return valid URI if baseurl ends with multiple '/'" do
         page_url = "/css/main.css"
-        filter = make_filter_mock({
+        filter = make_filter_mock(
           "url"     => "http://example.com",
-          "baseurl" => "/base//",
-        })
+          "baseurl" => "/base//"
+        )
         refute_equal "/base/css/main.css", filter.relative_url(page_url)
       end
 
       should "not prepend a forward slash if both input and baseurl are simply '/'" do
         page_url = "/"
-        filter = make_filter_mock({
+        filter = make_filter_mock(
           "url"     => "http://example.com",
-          "baseurl" => "/",
-        })
+          "baseurl" => "/"
+        )
         assert_equal "/", filter.relative_url(page_url)
       end
 
       should "not return the url by reference" do
-        filter = make_filter_mock({ :baseurl => nil })
+        filter = make_filter_mock(:baseurl => nil)
         page = Page.new(filter.site, test_dir("fixtures"), "", "front_matter.erb")
         assert_equal "/front_matter.erb", page.url
         url = filter.relative_url(page.url)
@@ -596,7 +596,7 @@ class TestFilters < JekyllUnitTest
 
       should "transform the input baseurl to a string" do
         page_url = "/my-page.html"
-        filter = make_filter_mock({ "baseurl" => Value.new(proc { "/baseurl/" }) })
+        filter = make_filter_mock("baseurl" => Value.new(proc { "/baseurl/" }))
         assert_equal "/baseurl#{page_url}", filter.relative_url(page_url)
       end
 
@@ -640,7 +640,7 @@ class TestFilters < JekyllUnitTest
 
     context "jsonify filter" do
       should "convert hash to json" do
-        assert_equal "{\"age\":18}", @filter.jsonify({ :age => 18 })
+        assert_equal "{\"age\":18}", @filter.jsonify(:age => 18)
       end
 
       should "convert array to json" do
@@ -687,10 +687,11 @@ class TestFilters < JekyllUnitTest
       should "convert drop with drops to json" do
         @filter.site.read
         actual = @filter.jsonify(@filter.site.to_liquid)
-        assert_equal JSON.parse(actual)["jekyll"], {
+        expected = {
           "environment" => "development",
           "version"     => Jekyll::VERSION,
         }
+        assert_equal expected, JSON.parse(actual)["jekyll"]
       end
 
       # rubocop:disable Style/StructInheritance
@@ -704,7 +705,7 @@ class TestFilters < JekyllUnitTest
           {
             "name" => name,
             :v     => 1,
-            :thing => M.new({ :kay => "jewelers" }),
+            :thing => M.new(:kay => "jewelers"),
             :stuff => true,
           }
         end
@@ -972,7 +973,7 @@ class TestFilters < JekyllUnitTest
         @filter.site.tap(&:read)
         posts = @filter.site.site_payload["site"]["posts"]
         results = @filter.where_exp(posts, "post",
-          "post.date > site.dont_show_posts_before")
+                                    "post.date > site.dont_show_posts_before")
         assert_equal posts.select { |p| p.date > @sample_time }.count, results.length
       end
     end
@@ -1074,10 +1075,6 @@ class TestFilters < JekyllUnitTest
       end
       should "return sorted strings" do
         assert_equal %w(10 2), @filter.sort(%w(10 2))
-        assert_equal(
-          [{ "a" => "10" }, { "a" => "2" }],
-          @filter.sort([{ "a" => "10" }, { "a" => "2" }], "a")
-        )
         assert_equal %w(FOO Foo foo), @filter.sort(%w(foo Foo FOO))
         assert_equal %w(_foo foo foo_), @filter.sort(%w(foo_ _foo foo))
         # Cyrillic
@@ -1088,7 +1085,19 @@ class TestFilters < JekyllUnitTest
       end
       should "return sorted by property array" do
         assert_equal [{ "a" => 1 }, { "a" => 2 }, { "a" => 3 }, { "a" => 4 }],
-          @filter.sort([{ "a" => 4 }, { "a" => 3 }, { "a" => 1 }, { "a" => 2 }], "a")
+                     @filter.sort([{ "a" => 4 }, { "a" => 3 }, { "a" => 1 }, { "a" => 2 }], "a")
+      end
+      should "return sorted by property array with numeric strings sorted as numbers" do
+        assert_equal([{ "a" => ".5" }, { "a" => "0.65" }, { "a" => "10" }],
+                     @filter.sort([{ "a" => "10" }, { "a" => ".5" }, { "a" => "0.65" }], "a"))
+      end
+      should "return sorted by property array with numeric strings first" do
+        assert_equal([{ "a" => ".5" }, { "a" => "0.6" }, { "a" => "twelve" }],
+                     @filter.sort([{ "a" => "twelve" }, { "a" => ".5" }, { "a" => "0.6" }], "a"))
+      end
+      should "return sorted by property array with numbers and strings " do
+        assert_equal([{ "a" => "1" }, { "a" => "1abc" }, { "a" => "20" }],
+                     @filter.sort([{ "a" => "20" }, { "a" => "1" }, { "a" => "1abc" }], "a"))
       end
       should "return sorted by property array with nils first" do
         ary = [{ "a" => 2 }, { "b" => 1 }, { "a" => 1 }]
@@ -1097,13 +1106,13 @@ class TestFilters < JekyllUnitTest
       end
       should "return sorted by property array with nils last" do
         assert_equal [{ "a" => 1 }, { "a" => 2 }, { "b" => 1 }],
-          @filter.sort([{ "a" => 2 }, { "b" => 1 }, { "a" => 1 }], "a", "last")
+                     @filter.sort([{ "a" => 2 }, { "b" => 1 }, { "a" => 1 }], "a", "last")
       end
       should "return sorted by subproperty array" do
         assert_equal [{ "a" => { "b" => 1 } }, { "a" => { "b" => 2 } },
                       { "a" => { "b" => 3 } },],
-          @filter.sort([{ "a" => { "b" => 2 } }, { "a" => { "b" => 1 } },
-                        { "a" => { "b" => 3 } },], "a.b")
+                     @filter.sort([{ "a" => { "b" => 2 } }, { "a" => { "b" => 1 } },
+                                   { "a" => { "b" => 3 } },], "a.b")
       end
     end
 
@@ -1131,7 +1140,7 @@ class TestFilters < JekyllUnitTest
 
     context "inspect filter" do
       should "return a HTML-escaped string representation of an object" do
-        assert_equal "{&quot;&lt;a&gt;&quot;=&gt;1}", @filter.inspect({ "<a>" => 1 })
+        assert_equal "{&quot;&lt;a&gt;&quot;=&gt;1}", @filter.inspect("<a>" => 1)
       end
 
       should "quote strings" do

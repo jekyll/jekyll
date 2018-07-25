@@ -51,28 +51,52 @@ module Jekyll
       # rubocop:disable Metrics/MethodLength
       def add_build_options(cmd)
         cmd.option "config", "--config CONFIG_FILE[,CONFIG_FILE2,...]",
-          Array, "Custom configuration file"
+                   Array, "Custom configuration file"
         cmd.option "destination", "-d", "--destination DESTINATION",
-          "The current folder will be generated into DESTINATION"
+                   "The current folder will be generated into DESTINATION"
         cmd.option "source", "-s", "--source SOURCE", "Custom source directory"
         cmd.option "future", "--future", "Publishes posts with a future date"
         cmd.option "limit_posts", "--limit_posts MAX_POSTS", Integer,
-          "Limits the number of posts to parse and publish"
+                   "Limits the number of posts to parse and publish"
         cmd.option "watch", "-w", "--[no-]watch", "Watch for changes and rebuild"
         cmd.option "baseurl", "-b", "--baseurl URL",
-          "Serve the website from the given base URL"
+                   "Serve the website from the given base URL"
         cmd.option "force_polling", "--force_polling", "Force watch to use polling"
         cmd.option "lsi", "--lsi", "Use LSI for improved related posts"
         cmd.option "show_drafts", "-D", "--drafts", "Render posts in the _drafts folder"
         cmd.option "unpublished", "--unpublished",
-          "Render posts that were marked as unpublished"
+                   "Render posts that were marked as unpublished"
         cmd.option "quiet", "-q", "--quiet", "Silence output."
         cmd.option "verbose", "-V", "--verbose", "Print verbose output."
         cmd.option "incremental", "-I", "--incremental", "Enable incremental rebuild."
         cmd.option "strict_front_matter", "--strict_front_matter",
-          "Fail if errors are present in front matter"
+                   "Fail if errors are present in front matter"
       end
       # rubocop:enable Metrics/MethodLength
+
+      # Run ::process method in a given set of Jekyll::Command subclasses and suggest
+      # re-running the associated command with --trace switch to obtain any additional
+      # information or backtrace regarding the encountered Exception.
+      #
+      # cmd     - the Jekyll::Command to be handled
+      # options - configuration overrides
+      # klass   - an array of Jekyll::Command subclasses associated with the command
+      #
+      # Note that all exceptions are rescued..
+      # rubocop: disable RescueException
+      def process_with_graceful_fail(cmd, options, *klass)
+        klass.each { |k| k.process(options) if k.respond_to?(:process) }
+      rescue Exception => e
+        raise e if cmd.trace
+
+        msg = " Please append `--trace` to the `#{cmd.name}` command "
+        dashes = "-" * msg.length
+        Jekyll.logger.error "", dashes
+        Jekyll.logger.error "Jekyll #{Jekyll::VERSION} ", msg
+        Jekyll.logger.error "", " for any additional information or backtrace. "
+        Jekyll.logger.abort_with "", dashes
+      end
+      # rubocop: enable RescueException
     end
   end
 end

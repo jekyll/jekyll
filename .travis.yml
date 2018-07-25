@@ -14,10 +14,10 @@ matrix:
   include:
     - rvm: *ruby1
       env: TEST_SUITE=fmt
+      name: "🤖️ Code Format"
     - rvm: *ruby1
       env: TEST_SUITE=default-site
-    - rvm: *ruby1
-      env: ROUGE_VERSION=1.11.1 # runs everything with this version
+      name: "🏠️ Default Site"
     - rvm: *ruby1
       env: TEST_SUITE=profile-docs
   exclude:
@@ -56,4 +56,4 @@ after_success:
 
 before_install:
   - gem update --system
-  - gem install bundler
+  - gem install bundler --version 1.16.2
