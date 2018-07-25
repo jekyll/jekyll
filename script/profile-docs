@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Builds the 'docs' site and outputs the profile stats for that session
+
+set -e
+bundle exec jekyll build --profile --source docs
