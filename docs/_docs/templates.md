@@ -94,7 +94,8 @@ you come up with your own tags via plugins.
     <tr>
       <td>
         <p class="name"><strong>Date to String in ordinal US style</strong></p>
-        <p>Format a date to ordinal, US, short format.</p>
+        <p>Format a date to ordinal, US, short format.
+        {% include docs_version_badge.html version="3.8.0" %}</p>
       </td>
       <td class="align-center">
         <p>
@@ -122,7 +123,8 @@ you come up with your own tags via plugins.
     <tr>
       <td>
         <p class="name"><strong>Date to Long String in ordinal UK style</strong></p>
-        <p>Format a date to ordinal, UK, long format.</p>
+        <p>Format a date to ordinal, UK, long format.
+        {% include docs_version_badge.html version="3.8.0" %}</p>
       </td>
       <td class="align-center">
         <p>
