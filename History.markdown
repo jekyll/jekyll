@@ -37,6 +37,7 @@
   * Update docs about post creation (#7138)
   * Add DEV Community&#39;s Jekyll tag to community page (#7139)
   * Initialize upgrading doc for v4.0 (#7140)
+  * Add version badge for date filters with ordinal (#7162)
 
 ### Minor Enhancements
 
