@@ -86,6 +86,7 @@ For example, suppose you have a special image syntax with complex formatting, an
    <a href="http://jekyllrb.com">
    <img src="logo.png" style="max-width: 200px;"
       alt="Jekyll logo" />
+   </a>
    <figcaption>This is the Jekyll logo</figcaption>
 </figure>
 ```
@@ -98,6 +99,7 @@ You could templatize this content in your include and make each value available 
    <a href="{{ include.url }}">
    <img src="{{ include.file }}" style="max-width: {{ include.max-width }};"
       alt="{{ include.alt }}"/>
+   </a>
    <figcaption>{{ include.caption }}</figcaption>
 </figure>
 ```
