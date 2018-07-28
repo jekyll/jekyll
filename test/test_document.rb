@@ -92,10 +92,10 @@ class TestDocument < JekyllUnitTest
       assert_nil next_prev_doc["next"]["output"]
 
       next_next_doc = next_doc["next"]
-      assert_equal "Jekyll.sanitized_path", next_next_doc["title"]
-      assert_equal "_methods/sanitized_path.md", next_next_doc["path"]
+      assert_equal "just_yaml", next_next_doc["title"]
+      assert_equal "_methods/just_yaml.yaml", next_next_doc["path"]
       assert_equal "_methods/escape-+ #%20[].md", next_next_doc["previous"]["path"]
-      assert_equal "_methods/site/generate.md", next_next_doc["next"]["path"]
+      assert_equal "_methods/sanitized_path.md", next_next_doc["next"]["path"]
       assert_nil next_next_doc["next"]["next"]
       assert_nil next_next_doc["next"]["previous"]
       assert_nil next_next_doc["next"]["content"]

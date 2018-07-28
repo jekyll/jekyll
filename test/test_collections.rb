@@ -140,6 +140,7 @@ class TestCollections < JekyllUnitTest
           _methods/escape-+\ #%20[].md
           _methods/yaml_with_dots.md
           _methods/3940394-21-9393050-fifif1323-test.md
+          _methods/just_yaml.yaml
         ), doc.relative_path
       end
     end
@@ -176,6 +177,61 @@ class TestCollections < JekyllUnitTest
     should "extract the configuration collection information as metadata" do
       expected = { "foo" => "bar", "baz" => "whoo" }
       assert_equal expected, @collection.metadata
+    end
+  end
+
+  context "with a collection with metadata [output: true]" do
+    setup do
+      @site = fixture_site(
+        "collections" => {
+          "methods" => {
+            "output" => true,
+          },
+        }
+      )
+      @site.process
+      @collection = @site.collections["methods"]
+    end
+
+    should "know that it should be written" do
+      assert_equal true, @collection.write?
+    end
+
+    should "include yml/yaml docs in an array on the Collection object" do
+      assert @site.collections["methods"].docs.is_a? Array
+      @site.collections["methods"].docs.each do |doc|
+        assert doc.is_a? Jekyll::Document
+        assert_includes %w(
+          _methods/configuration.md
+          _methods/sanitized_path.md
+          _methods/collection/entries
+          _methods/site/generate.md
+          _methods/site/initialize.md
+          _methods/um_hi.md
+          _methods/escape-+\ #%20[].md
+          _methods/yaml_with_dots.md
+          _methods/3940394-21-9393050-fifif1323-test.md
+          _methods/just_yaml.yaml
+        ), doc.relative_path
+      end
+    end
+  end
+
+  context "with a collection with metadata [output: false]" do
+    setup do
+      @site = fixture_site(
+        "collections" => {
+          "methods" => {
+            "output" => false,
+          },
+        }
+      )
+      @site.process
+      @collection = @site.collections["methods"]
+    end
+
+    should "know that it should not be written" do
+      assert_equal false, @collection.write?
     end
   end
 
