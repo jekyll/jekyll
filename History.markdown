@@ -38,6 +38,7 @@
   * Add DEV Community&#39;s Jekyll tag to community page (#7139)
   * Initialize upgrading doc for v4.0 (#7140)
   * Add version badge for date filters with ordinal (#7162)
+  * Add closing tags for &lt;a&gt; (#7163)
 
 ### Minor Enhancements
 
