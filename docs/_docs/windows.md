@@ -3,11 +3,107 @@ title: Jekyll on Windows
 permalink: /docs/windows/
 ---
 
+[WSL-Guide]: https://docs.microsoft.com/en-us/windows/wsl/install-win10
+[MSFT-Store-Ubuntu]: https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6
+[MSFT-Store-Debian]: https://www.microsoft.com/en-us/p/debian-gnu-linux/9msvkqc78pk6
+[BASH-WSL]: https://msdn.microsoft.com/en-us/commandline/wsl/about
+[No-Sudo]: [https://jekyllrb.com/docs/troubleshooting/#no-sudo
+
 While Windows is not an officially-supported platform, it can be used to run Jekyll with the proper tweaks. This page aims to collect some of the general knowledge and lessons that have been unearthed by Windows users.
 
+You can either install Jekyll natively or use Windows Subsystem for Linux (aka. Bash on Windows).
 
-## Installing Jekyll
-The easiest way to run Jekyll is by using the [RubyInstaller][] for Windows.
+## Installation via Bash on Windows 10
+
+If you are using Windows 10 version 1607 or later, another option to run Jekyll is by [installing][WSL-Guide] the Windows Subsystem for Linux.  You can do this by installing [Ubuntu](MSFT-STORE-Ubuntu), [Debian](MSFT-STORE-Debian), or your preferred distro from the Microsoft Store.  The instructions below using `apt` and thus are for Debian-based distros.
+
+Once installed, run your distro of choice from the start menu.
+
+First, we need to update our systems' packages:
+
+```sh
+sudo apt-get update -y && sudo apt-get upgrade -y
+```
+
+Now we can install Ruby. To do this we will use a repository from [BrightBox](https://www.brightbox.com/docs/ruby/ubuntu/), which hosts optimized versions of Ruby for Ubuntu.
+
+```sh
+sudo apt-add-repository ppa:brightbox/ruby-ng
+sudo apt-get update
+sudo apt-get install ruby2.4 ruby2.4-dev build-essential dh-autoreconf
+```
+
+Next, [configure gem][No-Sudo] so that packages are installed in your $HOME directory so `sudo` is not required.  Add the following to the bottom of your .bashrc file:
+
+```sh
+# Ruby exports
+
+export GEM_HOME=$HOME/gems
+export PATH=$HOME/gems/bin:$PATH
+```
+
+Then reload it:
+
+```sh
+. .bashrc
+```
+
+Next let's update our Ruby gems:
+
+```sh
+gem update
+```
+
+Now install Jekyll.
+
+```sh
+gem install jekyll bundler
+```
+
+Check if Jekyll installed properly by running:
+
+```sh
+jekyll -v
+```
+
+**And that's it!**
+
+To start a new project named `my_blog`, just run:
+
+```sh
+jekyll new my_blog
+```
+
+### Troubleshooting
+
+#### bash: /usr/local/bin/jekyll: Permission denied
+```sh
+$ jekyll -v
+-bash: /usr/local/bin/jekyll: Permission denied
+$ ls -l /usr/local/bin/jekyll
+-rwxr-x--- 1 root root 598 Jul 30 13:18 /usr/local/bin/jekyll
+```
+
+You ran `gem install jekyll bundler` with `sudo`.  You can see the permissions in the above that that does not give everyone the ability to run the binary.  Run...
+
+```sh
+sudo gem uninstall jekyll bundler
+``` 
+
+...to remove the packages that were installed for root.  Follow [these instructions][No-Sudo] to configure `gem` to be usable as the current user.  Then run `gem uninstall jekyll bundler` (without sudo this time).
+
+#### You don't have write permissions for the /var/lib/gems/2.5.0 directory.
+
+```
+ERROR:  While executing gem ... (Gem::FilePermissionError)
+    You don't have write permissions for the /var/lib/gems/2.5.0 directory.
+```
+
+Follow [these instructions][No-Sudo] to configure `gem` to be usable as the current user.  Remember to run `. .bashrc` afterwards.
+
+
+## Installing Jekyll Natively
+One way to run Jekyll is by using the [RubyInstaller][] for Windows.
 
 ### Installation via RubyInstaller
 
@@ -66,73 +162,4 @@ gem 'wdm', '~> 0.1.1' if Gem.win_platform?
 
 You have to use a [Ruby+Devkit](https://rubyinstaller.org/downloads/) version of the RubyInstaller.
 
-
-## Installation via Bash on Windows 10
-
-If you are using Windows 10 version 1607 or later, another option to run Jekyll is by [installing][WSL-Guide] the Windows Subsystem for Linux.
-
-
-*Note:* You must have [Windows Subsystem for Linux][BASH-WSL] enabled.
-
-First let's make sure all our packages / repositories are up to date. Open a new Command Prompt instance, and type the following:
-
-```sh
-bash
-```
-Your Command Prompt instance should now be a Bash instance. Now we must update our repo lists and packages.
-
-```sh
-sudo apt-get update -y && sudo apt-get upgrade -y
-```
-Now we can install Ruby. To do this we will use a repository from [BrightBox](https://www.brightbox.com/docs/ruby/ubuntu/), which hosts optimized versions of Ruby for Ubuntu.
-
-```sh
-sudo apt-add-repository ppa:brightbox/ruby-ng
-sudo apt-get update
-sudo apt-get install ruby2.4 ruby2.4-dev build-essential dh-autoreconf
-```
-
-Next let's update our Ruby gems:
-
-```sh
-sudo gem update
-```
-
-Now all that is left to do is install Jekyll.
-
-```sh
-sudo gem install jekyll bundler
-```
-
-Check if Jekyll installed properly by running:
-
-```sh
-jekyll -v
-```
-
-Configure the bundler/gem path so bundle doesn't prompt for sudo
-
-```sh
-bundle config path vendor/bundle
-```
-
-**And that's it!**
-
-To start a new project named `my_blog`, just run:
-
-```sh
-jekyll new my_blog
-```
-
-You can make sure time management is working properly by inspecting your `_posts` folder. You should see a markdown file with the current date in the filename.
-
-<div class="note info">
-  <h5>Non-superuser account issues</h5>
-  <p>If the `jekyll new` command prints the error "Your user account isn't allowed to install to the system RubyGems", see the "Running Jekyll as Non-Superuser" instructions in <a href="/docs/troubleshooting/#no-sudo">Troubleshooting</a>.</p>
-</div>
-
-**Note:** Bash on Ubuntu on Windows is still under development, so you may run into issues.
-
-[WSL-Guide]: https://msdn.microsoft.com/en-us/commandline/wsl/install_guide
-[BASH-WSL]: https://msdn.microsoft.com/en-us/commandline/wsl/about
 
