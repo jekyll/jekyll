@@ -144,11 +144,19 @@ module Jekyll
       extname == ".json"
     end
 
-    # Determine whether the document is a CSV file.
+    # Determine whether the document is a CSV or TSV file.
     #
-    # Returns true if extname == .csv, false otherwise.
-    def csv_file?
-      extname == ".csv"
+    # Returns true if extname is either .csv or .tsv, false otherwise.
+    def delimiter_separated_file?
+      %w(.csv .tsv).include?(extname)
+    end
+
+    # Determine the column delimiter for ___SeparatedValue files.
+    #
+    # Returns "\t" if extname is `.tsv`, otherwise returns ",".
+    def column_delimiter
+      return "\t" if extname == ".tsv"
+      ","
     end
 
     # Determine whether the document is an asset file.
@@ -158,6 +166,15 @@ module Jekyll
     #   that asset files use.
     def asset_file?
       sass_file? || coffeescript_file?
+    end
+
+    # Determine whether the document is a data file.
+    # Data files include YAML, YML, CSV, TSV and JSON files.
+    #
+    # Returns true if the extname belongs to the set of extensions
+    #   that data files use.
+    def data_file?
+      yaml_file? || json_file? || delimiter_separated_file?
     end
 
     # Determine whether the document is a Sass file.
@@ -181,7 +198,7 @@ module Jekyll
     #   true otherwise.
     def render_with_liquid?
       return false if data["render_with_liquid"] == false
-      return false if coffeescript_file? || yaml_file? || json_file? || csv_file?
+      return false if coffeescript_file? || data_file?
       Utils.has_liquid_construct?(content)
     end
 
@@ -195,9 +212,9 @@ module Jekyll
     # Determine whether the file should be placed into layouts.
     #
     # Returns false if the document is set to `layouts: none`, or is either an
-    #   asset file or a yaml file. Returns true otherwise.
+    #   asset file or a data file. Returns true otherwise.
     def place_in_layout?
-      !(asset_file? || yaml_file? || json_file? || csv_file? || no_layout?)
+      !(asset_file? || data_file? || no_layout?)
     end
 
     # The URL template where the document would be accessible.
@@ -284,12 +301,8 @@ module Jekyll
     def read(opts = {})
       Jekyll.logger.debug "Reading:", relative_path
 
-      if yaml_file? || json_file?
-        @data = SafeYAML.load_file(path)
-      elsif csv_file?
-        @data = CSV.read(path,
-                         :headers  => true,
-                         :encoding => site.config["encoding"]).map(&:to_hash)
+      if data_file?
+        read_data_file
       else
         begin
           merge_defaults
@@ -390,12 +403,12 @@ module Jekyll
     # Override of normal respond_to? to match method_missing's logic for
     # looking in @data.
     def respond_to?(method, include_private = false)
-      data.is_a?(Hash) && data.key?(method.to_s) || super
+      data && data.is_a?(Hash) && data.key?(method.to_s) || super
     end
 
     # Override of method_missing to check in @data for the key.
     def method_missing(method, *args, &blck)
-      if data.is_a?(Hash) && data.key?(method.to_s)
+      if data && data.is_a?(Hash) && data.key?(method.to_s)
         Jekyll::Deprecator.deprecation_message "Document##{method} is now a key "\
                            "in the #data hash."
         Jekyll::Deprecator.deprecation_message "Called by #{caller(0..0)}."
@@ -406,7 +419,7 @@ module Jekyll
     end
 
     def respond_to_missing?(method, *)
-      data.key?(method.to_s) || super
+      data && data.is_a?(Hash) && data.key?(method.to_s) || super
     end
 
     # Add superdirectories of the special_dir to categories.
@@ -472,6 +485,17 @@ module Jekyll
         data_file = SafeYAML.load(Regexp.last_match(1))
         merge_data!(data_file, :source => "YAML front matter") if data_file
       end
+    end
+
+    def read_data_file
+      @data = if delimiter_separated_file?
+                CSV.read(path,
+                         :col_sep  => column_delimiter,
+                         :headers  => true,
+                         :encoding => site.config["encoding"]).map(&:to_hash)
+              else
+                SafeYAML.load_file(path)
+              end
     end
 
     def read_post_data

@@ -260,6 +260,7 @@ module Jekyll
         { "posts" => {}, "data" => {} }, config["collections"]
       ).tap do |collections|
         collections["posts"]["output"] = true
+        collections["data"]["output"] = false
         if config["permalink"]
           collections["posts"]["permalink"] ||= style_to_permalink(config["permalink"])
         end

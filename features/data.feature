@@ -14,7 +14,8 @@ Feature: Data
       """
     And I have an "index.html" page that contains "{% for product in site.data.products %}{{product.name}}{% endfor %}"
     When I run jekyll build
-    Then the "_site/index.html" file should exist
+    Then I should get a zero exit status
+    And the "_site/index.html" file should exist
     And I should see "sugar" in "_site/index.html"
     And I should see "salt" in "_site/index.html"
 
@@ -29,7 +30,8 @@ Feature: Data
       """
     And I have an "index.html" page that contains "{% for member in site.data.members %}{{member.name}}{% endfor %}"
     When I run jekyll build
-    Then the "_site/index.html" file should exist
+    Then I should get a zero exit status
+    And the "_site/index.html" file should exist
     And I should see "Jack" in "_site/index.html"
     And I should see "Leon" in "_site/index.html"
 
@@ -41,7 +43,8 @@ Feature: Data
       """
     And I have an "index.html" page that contains "{% for member in site.data.members %}{{member.name}}{% endfor %}"
     When I run jekyll build
-    Then the "_site/index.html" file should exist
+    Then I should get a zero exit status
+    And the "_site/index.html" file should exist
     And I should see "Jack" in "_site/index.html"
     And I should see "Leon" in "_site/index.html"
 
@@ -55,7 +58,8 @@ Feature: Data
       """
     And I have an "index.html" page that contains "{% for member in site.data.members %}{{member.name}}{% endfor %}"
     When I run jekyll build
-    Then the "_site/index.html" file should exist
+    Then I should get a zero exit status
+    And the "_site/index.html" file should exist
     And I should see "Jack" in "_site/index.html"
     And I should see "Leon" in "_site/index.html"
 
@@ -69,7 +73,8 @@ Feature: Data
       """
     And I have an "index.html" page that contains "{% for member in site.data.members %}{{member.name}}{% endfor %}"
     When I run jekyll build
-    Then the "_site/index.html" file should exist
+    Then I should get a zero exit status
+    And the "_site/index.html" file should exist
     And I should see "Jack" in "_site/index.html"
     And I should see "Leon" in "_site/index.html"
 
@@ -84,7 +89,8 @@ Feature: Data
       """
     And I have an "index.html" page that contains "{% for member in site.data.team_members %}{{member.name}}{% endfor %}"
     When I run jekyll build
-    Then the "_site/index.html" file should exist
+    Then I should get a zero exit status
+    And the "_site/index.html" file should exist
     And I should see "Jack" in "_site/index.html"
     And I should see "Leon" in "_site/index.html"
 
@@ -97,7 +103,8 @@ Feature: Data
       """
     And I have an "index.html" page that contains "{{ site.data.categories.dairy.name }}"
     When I run jekyll build
-    Then the "_site/index.html" file should exist
+    Then I should get a zero exit status
+    And the "_site/index.html" file should exist
     And I should see "Dairy Products" in "_site/index.html"
 
   Scenario: folders should have precedence over files with the same name
@@ -114,7 +121,8 @@ Feature: Data
       """
     And I have an "index.html" page that contains "{{ site.data.categories.dairy.name }}"
     When I run jekyll build
-    Then the "_site/index.html" file should exist
+    Then I should get a zero exit status
+    And the "_site/index.html" file should exist
     And I should see "Dairy Products" in "_site/index.html"
 
   Scenario: should be backward compatible with site.data in _config.yml
@@ -128,6 +136,7 @@ Feature: Data
       """
     And I have an "index.html" page that contains "{% for member in site.data %}{{member.name}}{% endfor %}"
     When I run jekyll build
-    Then the "_site/index.html" file should exist
+    Then I should get a zero exit status
+    And the "_site/index.html" file should exist
     And I should see "Jack" in "_site/index.html"
     And I should see "Leon" in "_site/index.html"

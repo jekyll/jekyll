@@ -8,10 +8,10 @@ module Jekyll
       # Created a nested hash of data files namespaced by sub directory
       def fallback_data
         @fallback_data ||= begin
-          # Create a new, emtpy hash for any key that doesn't exist
+          # Create a new, empty hash for any key that doesn't exist
           hash = Hash.new { |h, k| h[k] = Hash.new(&h.default_proc) }
 
-          # Propegate the hash with our data files
+          # Propagate the hash with our data files
           @obj.docs.each do |doc|
             subhash = doc.subdirs.inject(hash, :[])
             slug = doc.basename_without_ext.gsub(%r![^\w\s-]+!, "")

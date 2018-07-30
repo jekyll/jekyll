@@ -31,7 +31,9 @@ class TestConfiguration < JekyllUnitTest
           "output"    => true,
           "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
         },
-        "data"  => {},
+        "data"  => {
+          "output" => false,
+        },
       }
       assert_equal expected, result["collections"]
     end
@@ -69,7 +71,15 @@ class TestConfiguration < JekyllUnitTest
     should "turn an array into a hash" do
       result = Configuration[{ "collections" => %w(methods) }].add_default_collections
       assert_instance_of Hash, result["collections"]
-      expected = { "posts" => { "output" => true }, "data" => {}, "methods" => {} }
+      expected = {
+        "posts"   => {
+          "output" => true,
+        },
+        "data"    => {
+          "output" => false,
+        },
+        "methods" => {},
+      }
       assert_equal expected, result["collections"]
     end
 
@@ -81,7 +91,9 @@ class TestConfiguration < JekyllUnitTest
           "output"    => true,
           "permalink" => "/:categories/:year/:month/:day/:title/",
         },
-        "data"  => {},
+        "data"  => {
+          "output" => false,
+        },
       }
       assert_equal expected, result["collections"]
 
@@ -91,7 +103,9 @@ class TestConfiguration < JekyllUnitTest
         "posts" => {
           "output" => true,
         },
-        "data"  => {},
+        "data"  => {
+          "output" => false,
+        },
       }
       assert_equal expected, result["collections"]
     end
@@ -442,7 +456,9 @@ class TestConfiguration < JekyllUnitTest
             "output"    => true,
             "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
           },
-          "data"  => {},
+          "data"  => {
+            "output" => false,
+          },
         }
       )
     end
@@ -457,7 +473,9 @@ class TestConfiguration < JekyllUnitTest
             "output"    => true,
             "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
           },
-          "data"  => {},
+          "data"  => {
+            "output" => false,
+          },
         }
       )
     end
@@ -470,7 +488,9 @@ class TestConfiguration < JekyllUnitTest
             "output"    => true,
             "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
           },
-          "data"  => {},
+          "data"  => {
+            "output" => false,
+          },
         }
       )
     end
@@ -480,7 +500,9 @@ class TestConfiguration < JekyllUnitTest
       conf = Configuration[default_configuration].tap do |c|
         c["collections"] = {
           "posts" => { "permalink" => posts_permalink },
-          "data"  => {},
+          "data"  => {
+            "output" => false,
+          },
         }
       end
       assert_equal conf.add_default_collections, conf.merge(
@@ -489,7 +511,9 @@ class TestConfiguration < JekyllUnitTest
             "output"    => true,
             "permalink" => posts_permalink,
           },
-          "data"  => {},
+          "data"  => {
+            "output" => false,
+          },
         }
       )
     end

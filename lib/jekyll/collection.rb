@@ -58,7 +58,7 @@ module Jekyll
       filtered_entries.each do |file_path|
         full_path = collection_dir(file_path)
         next if File.directory?(full_path)
-        if Utils.has_yaml_header? full_path
+        if Utils.has_yaml_header?(full_path) || data_file?(full_path)
           read_document(full_path)
         else
           read_static_file(file_path, full_path)
@@ -161,6 +161,8 @@ module Jekyll
     # Returns a sanitized version of the label.
     def sanitize_label(label)
       label.gsub(%r![^a-z0-9_\-\.]!i, "")
+        .gsub(%r!(^|\b\s)\s+($|\s?\b)!, '\\1\\2')
+        .gsub(%r!\s+!, "_")
     end
 
     # Produce a representation of this Collection for use in Liquid.
@@ -199,6 +201,13 @@ module Jekyll
       else
         {}
       end
+    end
+
+    # Check if the file is an expected data file type
+    #
+    # Returns true if the extension is of an expected data extension
+    def data_file?(full_path)
+      %w(.yaml .yml .json .csv .tsv).include?(File.extname(full_path).downcase)
     end
 
     private
