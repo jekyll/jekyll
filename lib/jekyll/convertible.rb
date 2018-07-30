@@ -142,36 +142,6 @@ module Jekyll
       sass_file? || coffeescript_file?
     end
 
-    # Determine whether the document is a data file.
-    # Data files include YAML, YML, CSV, TSV and JSON files.
-    #
-    # Returns true if the extname belongs to the set of extensions
-    #   that data files use.
-    def data_file?
-      yaml_file? || json_file? || delimiter_separated_file?
-    end
-
-    # Determine whether the document is a YAML file.
-    #
-    # Returns true if the ext is either .yml or .yaml, false otherwise.
-    def yaml_file?
-      %w(.yaml .yml).include?(ext)
-    end
-
-    # Determine whether the document is a JSON file.
-    #
-    # Returns true if ext == .json, false otherwise.
-    def json_file?
-      ext == ".json"
-    end
-
-    # Determine whether the document is a CSV or TSV file.
-    #
-    # Returns true if ext is either .csv or .tsv, false otherwise.
-    def delimiter_separated_file?
-      %w(.csv .tsv).include?(ext)
-    end
-
     # Determine whether the document is a Sass file.
     #
     # Returns true if extname == .sass or .scss, false otherwise.
@@ -199,7 +169,7 @@ module Jekyll
     # Returns false if the document is an asset file or if the front matter
     #   specifies `layout: none`
     def place_in_layout?
-      !(asset_file? || data_file? || no_layout?)
+      !(asset_file? || no_layout?)
     end
 
     # Checks if the layout specified in the document actually exists
