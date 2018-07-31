@@ -9,6 +9,7 @@ module Jekyll
       "source"              => Dir.pwd,
       "destination"         => File.join(Dir.pwd, "_site"),
       "collections_dir"     => "",
+      "cache_dir"           => ".jekyll-cache",
       "plugins_dir"         => "_plugins",
       "layouts_dir"         => "_layouts",
       "data_dir"            => "_data",
