@@ -3,19 +3,13 @@ title: Jekyll on Windows
 permalink: /docs/windows/
 ---
 
-[WSL-Guide]: https://docs.microsoft.com/en-us/windows/wsl/install-win10
-[MSFT-Store-Ubuntu]: https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6
-[MSFT-Store-Debian]: https://www.microsoft.com/en-us/p/debian-gnu-linux/9msvkqc78pk6
-[BASH-WSL]: https://msdn.microsoft.com/en-us/commandline/wsl/about
-[No-Sudo]: [https://jekyllrb.com/docs/troubleshooting/#no-sudo
-
 While Windows is not an officially-supported platform, it can be used to run Jekyll with the proper tweaks. This page aims to collect some of the general knowledge and lessons that have been unearthed by Windows users.
 
 You can either install Jekyll natively or use Windows Subsystem for Linux (aka. Bash on Windows).
 
 ## Installation via Bash on Windows 10
 
-If you are using Windows 10 version 1607 or later, another option to run Jekyll is by [installing][WSL-Guide] the Windows Subsystem for Linux.  You can do this by installing [Ubuntu](MSFT-STORE-Ubuntu), [Debian](MSFT-STORE-Debian), or your preferred distro from the Microsoft Store.  The instructions below using `apt` and thus are for Debian-based distros.
+If you are using Windows 10 version 1607 or later, another option to run Jekyll is by [installing][WSL-Guide] the Windows Subsystem for Linux.  You can do this by installing [Ubuntu](MSFT-STORE-Ubuntu), [Debian](MSFT-STORE-Debian), or your preferred distro from the Microsoft Store.  The instructions below use apt and thus are suitable for Debian-based distros.
 
 Once installed, run your distro of choice from the start menu.
 
@@ -25,7 +19,7 @@ First, we need to update our systems' packages:
 sudo apt-get update -y && sudo apt-get upgrade -y
 ```
 
-Now we can install Ruby. To do this we will use a repository from [BrightBox](https://www.brightbox.com/docs/ruby/ubuntu/), which hosts optimized versions of Ruby for Ubuntu.
+Now we can install Ruby. To do this, we will use a repository from [BrightBox](https://www.brightbox.com/docs/ruby/ubuntu/) which hosts optimized versions of Ruby for Ubuntu.
 
 ```sh
 sudo apt-add-repository ppa:brightbox/ruby-ng
@@ -33,7 +27,7 @@ sudo apt-get update
 sudo apt-get install ruby2.4 ruby2.4-dev build-essential dh-autoreconf
 ```
 
-Next, [configure gem][No-Sudo] so that packages are installed in your $HOME directory so `sudo` is not required.  Add the following to the bottom of your .bashrc file:
+Next, [configure `gem`][No-Sudo] so that packages are installed in your $HOME directory so `sudo` is not required.  Add the following to the bottom of your .bashrc file:
 
 ```sh
 # Ruby exports
@@ -45,16 +39,16 @@ export PATH=$HOME/gems/bin:$PATH
 Then reload it:
 
 ```sh
-. .bashrc
+source .bashrc
 ```
 
-Next let's update our Ruby gems:
+Next, let's update our Ruby gems:
 
 ```sh
 gem update
 ```
 
-Now install Jekyll.
+Now install Jekyll:
 
 ```sh
 gem install jekyll bundler
@@ -84,7 +78,7 @@ $ ls -l /usr/local/bin/jekyll
 -rwxr-x--- 1 root root 598 Jul 30 13:18 /usr/local/bin/jekyll
 ```
 
-You ran `gem install jekyll bundler` with `sudo`.  You can see the permissions in the above that that does not give everyone the ability to run the binary.  Run...
+You probably ran `gem install jekyll bundler` with `sudo`.  You can see the permissions in the above that that does not give everyone the ability to run the binary.  Run:
 
 ```sh
 sudo gem uninstall jekyll bundler
@@ -99,7 +93,13 @@ ERROR:  While executing gem ... (Gem::FilePermissionError)
     You don't have write permissions for the /var/lib/gems/2.5.0 directory.
 ```
 
-Follow [these instructions][No-Sudo] to configure `gem` to be usable as the current user.  Remember to run `. .bashrc` afterwards.
+Follow [these instructions][No-Sudo] to configure `gem` to be usable as the current user.  Remember to run `source .bashrc` afterwards.
+
+[WSL-Guide]: https://docs.microsoft.com/en-us/windows/wsl/install-win10
+[MSFT-Store-Ubuntu]: https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6
+[MSFT-Store-Debian]: https://www.microsoft.com/en-us/p/debian-gnu-linux/9msvkqc78pk6
+[BASH-WSL]: https://msdn.microsoft.com/en-us/commandline/wsl/about
+[No-Sudo]: [https://jekyllrb.com/docs/troubleshooting/#no-sudo
 
 
 ## Installing Jekyll Natively
