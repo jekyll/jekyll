@@ -60,6 +60,7 @@
   * Drop support for older versions of Rouge (#6978)
   * Remove support for Redcarpet (#6987)
   * Remove support for rdiscount (#6988)
+  * Remove &#39;cache_dir&#39; during `jekyll clean` (#7158)
 
 ### Development Fixes
 
