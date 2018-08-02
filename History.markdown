@@ -39,6 +39,7 @@
   * Initialize upgrading doc for v4.0 (#7140)
   * Add version badge for date filters with ordinal (#7162)
   * Add closing tags for &lt;a&gt; (#7163)
+  * Add TSV to list of supported _data files. (#7168)
 
 ### Minor Enhancements
 
