@@ -137,9 +137,9 @@ An overview of what each of these does:
         <p>
           Well-formatted site data should be placed here. The Jekyll engine
           will autoload all data files (using either the <code>.yml</code>,
-          <code>.yaml</code>, <code>.json</code> or <code>.csv</code>
-          formats and extensions) in this directory, and they will be
-          accessible via `site.data`. If there's a file
+          <code>.yaml</code>, <code>.json</code>, <code>.csv</code> or
+          <code>.tsv</code> formats and extensions) in this directory,
+          and they will be accessible via `site.data`. If there's a file
           <code>members.yml</code> under the directory, then you can access
           contents of the file through <code>site.data.members</code>.
         </p>
