@@ -4,7 +4,7 @@ module Jekyll
   class Cache
     extend Forwardable
 
-    def_delegators :@cache, :[], :[]=, :clear, :delete, :has_key?
+    def_delegators :@cache, :[], :[]=, :clear, :delete, :key?
 
     # Get an existing named cache, or create a new one if none exists
     #
@@ -24,7 +24,7 @@ module Jekyll
     end
 
     def getset(key)
-      if has_key?(key)
+      if key?(key)
         @cache[key]
       else
         @cache[key] = yield
