@@ -22,5 +22,13 @@ module Jekyll
     def self.clear
       @@caches.clear
     end
+
+    def getset(key)
+      if has_key?(key)
+        @cache[key]
+      else
+        @cache[key] = yield
+      end
+    end
   end
 end
