@@ -15,8 +15,8 @@
       <p>
         Sponsored by
         {% for sponsor in site.data.sponsors %}
-          <a href="{{ sponsor.url }}">
-            <img src="{{ sponsor.image }}" width="120" height="30" alt="{{ sponsor.name }}">
+          <a href="{{ sponsor.url }}" style="margin-left: 10px;">
+            <img src="{{ sponsor.image }}" height="{{ sponsor.height }}" width="{{ sponsor.width }}" alt="{{ sponsor.name }}">
           </a>
         {% endfor %}
       </p>

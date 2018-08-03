@@ -1,3 +1,10 @@
 - name: Forestry.io
   image: /img/forestry-logo.png
   url: https://forestry.io
+  width: 140
+  height: 30
+- name: Siteleaf
+  image: /img/siteleaf-logo.png
+  url: https://siteleaf.com
+  width: 40
+  height: 50
