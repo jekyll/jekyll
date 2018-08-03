@@ -17,11 +17,20 @@ module Jekyll
       @@caches[name] ||= {}
       @cache = @@caches[name]
     end
-    # rubocop:enable Style/ClassVars
 
     def self.clear
+      @@caches ||= {}
       @@caches.clear
     end
+    # rubocop:enable Style/ClassVars
+
+    # rubocop:disable Lint/UselessSetterCall
+    def self.clear_if_config_changed(config)
+      cache = Jekyll::Cache.new "Jekyll::Cache"
+      clear unless cache["config"] == config
+      cache["config"] = config
+    end
+    # rubocop:enable Lint/UselessSetterCall
 
     def getset(key)
       if key?(key)
