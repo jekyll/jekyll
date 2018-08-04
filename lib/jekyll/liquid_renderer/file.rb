@@ -10,8 +10,8 @@ module Jekyll
 
       def parse(content)
         measure_time do
-          cache.getset(content) do
-            @template = Liquid::Template.parse(content, :line_numbers => true)
+          @template = cache.getset(content) do
+            Liquid::Template.parse(content, :line_numbers => true)
           end
         end
 
@@ -40,9 +40,9 @@ module Jekyll
 
       private
 
-       def cache
-         Jekyll::Cache.new("Jekyll::LiquidRenderer::File")
-       end
+      def cache
+        Jekyll::Cache.new("Jekyll::LiquidRenderer::File")
+      end
 
       def measure_bytes
         yield.tap do |str|
