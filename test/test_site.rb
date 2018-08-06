@@ -212,32 +212,32 @@ class TestSite < JekyllUnitTest
       # exclude files in symlinked directories here and insert them in the
       # following step when not on Windows.
       sorted_pages = %w(
-        %#\ +.md
+        +/%#\ +.md
+        +/foo.md
         .htaccess
         about.html
-        application.coffee
-        bar.html
-        coffeescript.coffee
+        assets/application.coffee
         contacts.html
+        contacts/bar.html
+        contacts/humans.txt
+        contacts/index.html
+        css/main.scss
         deal.with.dots.html
         dynamic_file.php
         environment.html
         exploit.md
-        foo.md
-        humans.txt
-        index.html
         index.html
         info.md
-        main.scss
+        js/coffeescript.coffee
         properties.html
         sitemap.xml
         static_files.html
       )
       unless Utils::Platforms.really_windows?
         # files in symlinked directories may appear twice
-        sorted_pages.push("main.scss", "symlinked-file").sort!
+        sorted_pages.push("symlink-test/symlinked-dir/main.scss", "symlink-test/symlinked-file")
       end
-      assert_equal sorted_pages, @site.pages.map(&:name)
+      assert_equal sorted_pages, @site.pages.map(&:relative_path)
     end
 
     should "read posts" do

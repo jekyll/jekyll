@@ -14,7 +14,7 @@ class TestPage < JekyllUnitTest
 
   def do_render(page)
     layouts = {
-      "default" => Layout.new(@site, source_dir("_layouts"), "simple.html"),
+      "default" => Layout.new(@site, source_dir, "_layouts", "simple.html"),
     }
     page.render(layouts, @site.site_payload)
   end
@@ -66,7 +66,7 @@ class TestPage < JekyllUnitTest
         @page = setup_page("dynamic_page.php")
         @dest_file = dest_dir("dynamic_page.php")
         assert_equal ".php", @page.ext
-        assert_equal "dynamic_page", @page.basename
+        assert_equal "dynamic_page", @page.basename_without_ext
         assert_equal "/dynamic_page.php", @page.url
         assert_equal @dest_file, @page.destination(dest_dir)
       end
@@ -75,7 +75,7 @@ class TestPage < JekyllUnitTest
         @page = setup_page("deal.with.dots.html")
         @dest_file = dest_dir("deal.with.dots.html")
 
-        assert_equal "deal.with.dots", @page.basename
+        assert_equal "deal.with.dots", @page.basename_without_ext
         assert_equal @dest_file, @page.destination(dest_dir)
       end
 
@@ -162,8 +162,8 @@ class TestPage < JekyllUnitTest
 
         should "return dir correctly" do
           assert_equal "/", setup_page("contacts.html").dir
-          assert_equal "/contacts/", setup_page("contacts/bar.html").dir
-          assert_equal "/contacts/", setup_page("contacts/index.html").dir
+          assert_equal "/contacts/", setup_page("contacts", "bar.html").dir
+          assert_equal "/contacts/", setup_page("contacts", "index.html").dir
         end
       end
 
@@ -210,8 +210,8 @@ class TestPage < JekyllUnitTest
         should "return dir correctly" do
           @site.permalink_style = nil
           assert_equal "/", setup_page("contacts.html").dir
-          assert_equal "/contacts/", setup_page("contacts/index.html").dir
-          assert_equal "/contacts/", setup_page("contacts/bar.html").dir
+          assert_equal "/contacts/", setup_page("contacts", "index.html").dir
+          assert_equal "/contacts/", setup_page("contacts", "bar.html").dir
         end
       end
 

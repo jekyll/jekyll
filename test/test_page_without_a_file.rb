@@ -115,7 +115,7 @@ class TestPageWithoutAFile < JekyllUnitTest
         base = "../../../"
         page = setup_page("pwd", :base => base)
 
-        assert_equal "pwd", page.path
+        assert_equal "pwd", page.relative_path
         assert_nil page.content
       end
     end
