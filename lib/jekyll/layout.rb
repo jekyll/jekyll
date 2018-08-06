@@ -42,7 +42,7 @@ module Jekyll
         @base_dir = site.source
         @path = site.in_source_dir(base, name)
       end
-      @relative_path = @path.sub(@base_dir, "")
+      @relative_path = @path.sub("#{@base_dir}/", "")
 
       self.data = {}
 
@@ -57,6 +57,24 @@ module Jekyll
     # Returns nothing.
     def process(name)
       self.ext = File.extname(name)
+    end
+
+    # Compute layout's location information from its path.
+    #
+    # Unlike `#relative_path`, which doesn't distinguish between a layout from the source
+    # directory and that from a theme-gem, this method returns the relative path of a
+    # layout from the theme-gem with the gem's dirname prepended.
+    #
+    #   <source_dir>/_layouts/home.html        =>  _layouts/home.html
+    #   <minima-2.3.0.gem>/_layouts/home.html  =>  minima-2.3.0/_layouts/home.html
+    def relative_file_path
+      @relative_file_path ||= begin
+        if site.theme && path.start_with?(site.theme.root)
+          path.sub("#{site.theme.gem_dir}/", "")
+        else
+          relative_path
+        end
+      end
     end
   end
 end

@@ -38,6 +38,10 @@ module Jekyll
       @assets_path ||= path_for "assets"
     end
 
+    def gem_dir
+      @gem_dir ||= File.dirname(root)
+    end
+
     def configure_sass
       return unless sass_path
       External.require_with_graceful_fail("sass") unless defined?(Sass)

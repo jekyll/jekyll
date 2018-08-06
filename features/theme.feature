@@ -40,9 +40,10 @@ Feature: Writing themes
     And I have an "_layouts/post.html" file that contains "post.html from the project: {{ content }}"
     And I have an "index.html" page with layout "default" that contains "I'm content."
     And I have a "post.html" page with layout "post" that contains "I'm more content."
-    When I run jekyll build
+    When I run jekyll build --verbose
     Then I should get a zero exit status
     And the _site directory should exist
+    And I should see "Layout File Path: test-theme/_layouts/default.html" in the build output
     And I should see "default.html from test-theme: I'm content." in "_site/index.html"
     And I should see "post.html from the project: I'm more content." in "_site/post.html"
 
