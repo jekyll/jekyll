@@ -62,6 +62,7 @@
   * Remove support for Redcarpet (#6987)
   * Remove support for rdiscount (#6988)
   * Remove &#39;cache_dir&#39; during `jekyll clean` (#7158)
+  * Output Jekyll Version while debugging (#7173)
 
 ### Development Fixes
 
