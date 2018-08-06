@@ -40,8 +40,24 @@ module Jekyll
       return true unless File.exist?(path)
 
       metadata[path] = {
-        "mtime" => File.mtime(path),
-        "deps"  => [],
+        "remote" => false,
+        "mtime"  => File.mtime(path),
+        "deps"   => [],
+      }
+      cache[path] = true
+    end
+
+    # Add a path outside the site's source directory, to the metadata.
+    # Since the file at that path doesn't physically exist, we'll only
+    # concern ourselves with its dependencies.
+    #
+    # Returns true, also on failure.
+    def add_external(path)
+      return true if disabled? || metadata.key?(path)
+      metadata[path] = {
+        "remote" => true,
+        "mtime"  => nil,
+        "deps"   => [],
       }
       cache[path] = true
     end
@@ -90,9 +106,13 @@ module Jekyll
       return cache[path] if cache.key? path
 
       if metadata[path]
-        # If we have seen this file before,
-        # check if it or one of its dependencies has been modified
-        existing_file_modified?(path)
+        if metadata[path]["remote"]
+          # check if one of the path's dependencies has been modified
+          remote_dependencies_modified?(path)
+        else
+          # check if it or one of its dependencies has been modified
+          existing_file_modified?(path)
+        end
       else
         # If we have not seen this file before, add it to the metadata and regenerate it
         add(path)
@@ -189,6 +209,15 @@ module Jekyll
         # If it has been modified, set it to true
         add(path)
       end
+    end
+
+    def remote_dependencies_modified?(path)
+      metadata[path]["deps"].each do |dependency|
+        if modified?(dependency)
+          return cache[dependency] = cache[path] = true
+        end
+      end
+      cache[path] = false
     end
   end
 end
