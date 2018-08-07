@@ -16,8 +16,7 @@ module Jekyll
     # rubocop:disable Style/ClassVars
     def initialize(name)
       @@caches ||= {}
-      @@caches[name] ||= self
-      @cache = {}
+      @cache = @@caches[name] ||= {}
       @name = name
       FileUtils.mkdir_p(path_to)
     end
@@ -29,13 +28,14 @@ module Jekyll
     # rubocop:enable Style/ClassVars
 
     def clear
+      delete_cache_files(@name)
       @cache.clear
     end
 
     # rubocop:disable Security/MarshalLoad
     def [](key)
       return @cache[key] if @cache.key?(key)
-      path = cached_hash_path(hash(key))
+      path = path_to(hash(key))
       if File.file?(path) && File.readable?(path)
         cached_file = File.open(path, "rb")
         value = Marshal.load(cached_file)
@@ -48,13 +48,12 @@ module Jekyll
 
     def getset(key)
       return @cache[key] if @cache.key?(key)
-      path = cached_hash_path(hash(key))
+      path = path_to(hash(key))
       if File.file?(path) && File.readable?(path)
         cached_file = File.open(path, "rb")
         value = Marshal.load(cached_file)
       else
         value = yield
-        path = cached_hash_path(hash(key))
         cached_file = File.open(path, "wb")
         Marshal.dump(value, cached_file)
       end
@@ -65,7 +64,7 @@ module Jekyll
 
     def []=(key, value)
       @cache[key] = value
-      path = cached_hash_path(hash(key))
+      path = path_to(hash(key))
       cached_file = File.open(path, "wb")
       Marshal.dump(value, cached_file)
       cached_file.close
@@ -73,13 +72,13 @@ module Jekyll
 
     def delete(key)
       @cache.delete(key)
-      path = cached_hash_path(hash(key))
+      path = path_to(hash(key))
       File.delete(path)
     end
 
     def key?(key)
       return true if @cache.key?(key)
-      path = cached_hash_path(hash(key))
+      path = path_to(hash(key))
       File.file?(path) && File.readable?(path)
     end
 
@@ -98,20 +97,20 @@ module Jekyll
 
     private
 
-    def path_to
-      File.expand_path(".jekyll-cache/Jekyll/Cache/#{@name}")
+    def path_to(hash = nil)
+      base_dir = File.expand_path(".jekyll-cache/Jekyll/Cache/#{@name}")
+      return base_dir if hash.nil?
+      subdir = File.join(base_dir, "#{hash[0..1]}/")
+      FileUtils.mkdir_p(subdir)
+      File.join(subdir, hash[2..-1])
     end
 
     def hash(key)
       Digest::SHA2.hexdigest(key)
     end
 
-    def cached_hash_path(hash)
-      ".jekyll-cache/Jekyll/Cache/#{@name}/#{hash}"
-    end
-
-    def self.delete_cache_files
-      FileUtils.rm_rf(".jekyll-cache/Jekyll/Cache")
+    def self.delete_cache_files(name = "")
+      FileUtils.rm_rf(".jekyll-cache/Jekyll/Cache/#{name}")
     end
     private_class_method :delete_cache_files
   end
