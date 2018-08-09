@@ -1,6 +1,7 @@
 ## HEAD
 
   * Textile is only supported through a converter plugin (#7003)
+  * Add info how to deploy using pre-push git hook (#7179)
 
 ### Documentation
 
