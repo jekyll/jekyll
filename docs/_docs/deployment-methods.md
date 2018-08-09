@@ -93,6 +93,10 @@ Deploying is now as easy as telling nginx or Apache to look at
 laptops$ git push deploy master
 ```
 
+### Git pre-push hook
+
+Instead of deploying using server-side hooks, you can deploy using `pre-push` client-side (executes on your desktop machine) git hook. [Check here](https://victorafanasev.info/tech/deploy-jekyll-build-to-github-pages-using-git-pre-push-hook) an example for Github Pages.
+
 ### Static Publisher
 
 [Static Publisher](https://github.com/static-publisher/static-publisher) is another automated deployment option with a server listening for webhook posts, though it's not tied to GitHub specifically. It has a one-click deploy to Heroku, it can watch multiple projects from one server, it has an easy to user admin interface and can publish to either S3 or to a git repository (e.g. gh-pages).
