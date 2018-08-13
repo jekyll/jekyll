@@ -31,22 +31,25 @@ module Jekyll
       def render(context)
         prefix = context["highlighter_prefix"] || ""
         suffix = context["highlighter_suffix"] || ""
-        code = super.to_s.gsub(%r!\A(\n|\r)+|(\n|\r)+\z!, "")
+        key = super.to_s
+        cache.getset(key) do
+          code = key.gsub(%r!\A(\n|\r)+|(\n|\r)+\z!, "")
 
-        is_safe = !!context.registers[:site].safe
+          is_safe = !!context.registers[:site].safe
 
-        output =
-          case context.registers[:site].highlighter
-          when "pygments"
-            render_pygments(code, is_safe)
-          when "rouge"
-            render_rouge(code)
-          else
-            render_codehighlighter(code)
-          end
+          output =
+            case context.registers[:site].highlighter
+            when "pygments"
+              render_pygments(code, is_safe)
+            when "rouge"
+              render_rouge(code)
+            else
+              render_codehighlighter(code)
+            end
 
-        rendered_output = add_code_tag(output)
-        prefix + rendered_output + suffix
+          rendered_output = add_code_tag(output)
+          prefix + rendered_output + suffix
+        end
       end
 
       def sanitized_opts(opts, is_safe)
@@ -66,6 +69,10 @@ module Jekyll
       private
 
       OPTIONS_REGEX = %r!(?:\w="[^"]*"|\w=\w|\w)+!
+
+      def cache
+        Jekyll::Cache.new("Jekyll::Tags::HighlightBlock")
+      end
 
       def parse_options(input)
         options = {}

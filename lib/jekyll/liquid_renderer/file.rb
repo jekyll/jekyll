@@ -10,7 +10,9 @@ module Jekyll
 
       def parse(content)
         measure_time do
-          @template = Liquid::Template.parse(content, :line_numbers => true)
+          @template = Jekyll::Cache.new("Jekyll::LiquidRenderer::File").getset(content) do
+            Liquid::Template.parse(content, :line_numbers => true)
+          end
         end
 
         self
@@ -24,6 +26,7 @@ module Jekyll
         end
       end
 
+      # This method simply 'rethrows any error' before attempting to render the template.
       def render!(*args)
         measure_time do
           measure_bytes do
