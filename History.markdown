@@ -41,6 +41,7 @@
   * Add version badge for date filters with ordinal (#7162)
   * Add closing tags for &lt;a&gt; (#7163)
   * Add TSV to list of supported _data files. (#7168)
+  * Corrected sample usage of postfiles (#7181)
 
 ### Minor Enhancements
 
