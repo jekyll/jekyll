@@ -51,6 +51,7 @@ module Jekyll
       # keep using `gems` to avoid breaking change
       self.gems = config["plugins"]
 
+      configure_cache
       configure_plugins
       configure_theme
       configure_include_paths
@@ -420,6 +421,13 @@ module Jekyll
     # Returns The Cleaner
     def site_cleaner
       @site_cleaner ||= Cleaner.new(self)
+    end
+
+    # If we are in safe mode, then it is *not* safe for Jekyll Cache to
+    # read/write to disk. If we are not in safe mode, then it *is* safe for
+    # Jekyll Cache to use the disk
+    def configure_cache
+      Jekyll::Cache.safe(!safe)
     end
 
     def configure_plugins
