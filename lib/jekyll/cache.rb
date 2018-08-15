@@ -48,24 +48,19 @@ module Jekyll
       end
     end
 
-    def getset(key)
-      return @cache[key] if @cache.key?(key)
-      path = path_to(hash(key))
-      if @@safe && File.file?(path) && File.readable?(path)
-        value = load(path)
-      else
-        value = yield
-        dump(path, value) if @@safe
-      end
-      @cache[key] = value
-    end
-
     def []=(key, value)
       @cache[key] = value
       if @@safe
         path = path_to(hash(key))
         dump(path, value)
       end
+      value
+    end
+
+    def getset(key)
+      self[key]
+    rescue
+      self[key] = yield
     end
 
     def delete(key)
