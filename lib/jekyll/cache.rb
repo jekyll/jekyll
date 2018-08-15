@@ -19,7 +19,7 @@ module Jekyll
       @@base_dir ||= File.expand_path(".jekyll-cache/Jekyll/Cache")
       @@caches ||= {}
       @cache = @@caches[name] ||= {}
-      @name = name
+      @name = name.gsub(%r![^\w\s-]!, "-")
       FileUtils.mkdir_p(path_to) if @@safe
     end
 
