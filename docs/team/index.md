@@ -8,7 +8,7 @@ title: The Jekyll Team
 *The Jekyll Core Team's responsibility is to ensure the development and
 community around the Jekyll ecosystem thrive.*
 
-1. Olivia (@oe, Lead Developer)
+1. Olivia (@oe, Project Lead)
 2. Frank (@DirtyF, Documentation)
 3. Pat (@pathawks)
 4. Matt (@mattr-)
