@@ -31,9 +31,11 @@ class TestPathSanitization < JekyllUnitTest
                  Jekyll.sanitized_path(source_dir, "f./../../../../../../files/hi.txt")
   end
 
-  should "strip extra leading slashes in questionable path" do
+  should "strip extra slashes in questionable path" do
+    subdir = "/files/"
+    file_path = "/hi.txt"
     assert_equal source_dir("files", "hi.txt"),
-                 Jekyll.sanitized_path(source_dir, "///////files/hi.txt")
+                 Jekyll.sanitized_path(source_dir, "/#{subdir}/#{file_path}")
   end
 
   if Jekyll::Utils::Platforms.really_windows?
