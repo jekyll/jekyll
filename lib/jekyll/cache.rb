@@ -54,13 +54,14 @@ module Jekyll
         path = path_to(hash(key))
         dump(path, value)
       end
-      value
     end
 
     def getset(key)
       self[key]
-    rescue
-      self[key] = yield
+    rescue StandardError
+      value = yield
+      self[key] = value
+      value
     end
 
     def delete(key)
