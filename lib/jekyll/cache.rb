@@ -15,9 +15,9 @@ module Jekyll
     # Returns nothing.
     # rubocop:disable Style/ClassVars
     def initialize(name)
+      throw unless defined? @@safe
       @@base_dir ||= File.expand_path(".jekyll-cache/Jekyll/Cache")
       @@caches ||= {}
-      @@safe ||= true
       @cache = @@caches[name] ||= {}
       @name = name
       FileUtils.mkdir_p(path_to) if @@safe
@@ -29,7 +29,7 @@ module Jekyll
     end
 
     def self.safe(safe = true)
-      @@safe = safe unless defined?(@safe) && safe.nil?
+      @@safe = safe
     end
     # rubocop:enable Style/ClassVars
 
@@ -124,11 +124,11 @@ module Jekyll
 
     def dump(path, value)
       return unless @@safe
-      dir, _file = File.split(path)
+      dir = File.dirname(path)
       FileUtils.mkdir_p(dir)
-      cached_file = File.open(path, "wb")
-      Marshal.dump(value, cached_file)
-      cached_file.close
+      File.open(path, "wb") do |cached_file|
+        Marshal.dump(value, cached_file)
+      end
     end
 
     def self.delete_cache_files
