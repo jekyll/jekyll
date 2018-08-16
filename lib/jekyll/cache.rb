@@ -8,16 +8,15 @@ module Jekyll
   class Cache
     extend Forwardable
 
+    # rubocop:disable Style/ClassVars
+    @@disk_cache_enabled = true
+
     # Get an existing named cache, or create a new one if none exists
     #
     # name - name of the cache
     #
     # Returns nothing.
-    # rubocop:disable Style/ClassVars
     def initialize(name)
-      unless defined? @@disk_cache_enabled
-        @@disk_cache_enabled = true
-      end
       @@base_dir ||= File.expand_path(".jekyll-cache/Jekyll/Cache")
       @@caches ||= {}
       @cache = @@caches[name] ||= {}
