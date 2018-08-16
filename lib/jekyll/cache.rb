@@ -9,6 +9,7 @@ module Jekyll
     extend Forwardable
 
     # rubocop:disable Style/ClassVars
+    @@caches = {}
     @@disk_cache_enabled = true
 
     # Get an existing named cache, or create a new one if none exists
@@ -18,7 +19,6 @@ module Jekyll
     # Returns nothing.
     def initialize(name)
       @@base_dir ||= File.expand_path(".jekyll-cache/Jekyll/Cache")
-      @@caches ||= {}
       @cache = @@caches[name] ||= {}
       @name = name.gsub(%r![^\w\s-]!, "-")
       FileUtils.mkdir_p(path_to) if @@disk_cache_enabled
@@ -85,8 +85,7 @@ module Jekyll
       config = config.inspect
       cache = Jekyll::Cache.new "Jekyll::Cache"
       unless cache.key?("config") && cache["config"] == config
-        delete_cache_files
-        @@caches = {}
+        clear
         cache = Jekyll::Cache.new "Jekyll::Cache"
         cache["config"] = config
       end
