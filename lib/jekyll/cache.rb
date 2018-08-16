@@ -24,17 +24,17 @@ module Jekyll
       FileUtils.mkdir_p(path_to) if @@disk_cache_enabled
     end
 
-    # Clear all caches
-    def self.clear
-      delete_cache_files
-      @@caches.each_value(&:clear)
-    end
-
     # Disable Marshaling cached items to disk
     def self.disable_disk_cache!
       @@disk_cache_enabled = false
     end
     # rubocop:enable Style/ClassVars
+
+    # Clear all caches
+    def self.clear
+      delete_cache_files
+      @@caches.each_value(&:clear)
+    end
 
     # Clear this particular cache
     def clear
