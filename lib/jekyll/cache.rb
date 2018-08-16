@@ -138,6 +138,14 @@ module Jekyll
       FileUtils.rm_rf(path_to) if @@disk_cache_enabled
     end
 
+    # Delete all cached items from all caches
+    #
+    # Returns nothing.
+    def self.delete_cache_files
+      FileUtils.rm_rf(@@base_dir) if @@disk_cache_enabled
+    end
+    private_class_method :delete_cache_files
+
     # Load `path` from disk and return the result
     # This MUST NEVER be called in Safe Mode
     # rubocop:disable Security/MarshalLoad
@@ -162,13 +170,5 @@ module Jekyll
         Marshal.dump(value, cached_file)
       end
     end
-
-    # Delete all cached items from all caches
-    #
-    # Returns nothing.
-    def self.delete_cache_files
-      FileUtils.rm_rf(@@base_dir) if @@disk_cache_enabled
-    end
-    private_class_method :delete_cache_files
   end
 end
