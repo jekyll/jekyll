@@ -21,7 +21,6 @@ module Jekyll
       @@base_dir ||= File.expand_path(".jekyll-cache/Jekyll/Cache")
       @cache = @@caches[name] ||= {}
       @name = name.gsub(%r![^\w\s-]!, "-")
-      FileUtils.mkdir_p(path_to) if @@disk_cache_enabled
     end
 
     # Disable Marshaling cached items to disk
