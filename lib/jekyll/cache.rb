@@ -1,13 +1,9 @@
 # frozen_string_literal: true
 
 require "digest"
-require "fileutils"
-require "pstore"
 
 module Jekyll
   class Cache
-    extend Forwardable
-
     # rubocop:disable Style/ClassVars
     @@caches = {}
     @@disk_cache_enabled = true
