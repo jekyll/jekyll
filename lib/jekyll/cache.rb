@@ -15,12 +15,14 @@ module Jekyll
     # Returns nothing.
     # rubocop:disable Style/ClassVars
     def initialize(name)
-      throw unless defined? @@safe
+      unless defined? @@disk_cache_enabled
+        @@disk_cache_enabled = true
+      end
       @@base_dir ||= File.expand_path(".jekyll-cache/Jekyll/Cache")
       @@caches ||= {}
       @cache = @@caches[name] ||= {}
       @name = name.gsub(%r![^\w\s-]!, "-")
-      FileUtils.mkdir_p(path_to) if @@safe
+      FileUtils.mkdir_p(path_to) if @@disk_cache_enabled
     end
 
     def self.clear
@@ -28,8 +30,8 @@ module Jekyll
       @@caches.each_value(&:clear)
     end
 
-    def self.safe(safe = true)
-      @@safe = safe
+    def self.disable_disk_cache!
+      @@disk_cache_enabled = false
     end
     # rubocop:enable Style/ClassVars
 
@@ -41,7 +43,7 @@ module Jekyll
     def [](key)
       return @cache[key] if @cache.key?(key)
       path = path_to(hash(key))
-      if @@safe && File.file?(path) && File.readable?(path)
+      if @@disk_cache_enabled && File.file?(path) && File.readable?(path)
         @cache[key] = load(path)
       else
         raise
@@ -50,7 +52,7 @@ module Jekyll
 
     def []=(key, value)
       @cache[key] = value
-      if @@safe
+      if @@disk_cache_enabled
         path = path_to(hash(key))
         dump(path, value)
       end
@@ -66,7 +68,7 @@ module Jekyll
 
     def delete(key)
       @cache.delete(key)
-      if @@safe
+      if @@disk_cache_enabled
         path = path_to(hash(key))
         File.delete(path)
       end
@@ -74,7 +76,7 @@ module Jekyll
 
     def key?(key)
       return true if @cache.key?(key)
-      return false unless @@safe
+      return false unless @@disk_cache_enabled
       path = path_to(hash(key))
       File.file?(path) && File.readable?(path)
     end
@@ -105,12 +107,12 @@ module Jekyll
     end
 
     def delete_cache_files
-      FileUtils.rm_rf(path_to) if @@safe
+      FileUtils.rm_rf(path_to) if @@disk_cache_enabled
     end
 
     # rubocop:disable Security/MarshalLoad
     def load(path)
-      raise unless @@safe
+      raise unless @@disk_cache_enabled
       cached_file = File.open(path, "rb")
       value = Marshal.load(cached_file)
       cached_file.close
@@ -119,7 +121,7 @@ module Jekyll
     # rubocop:enable Security/MarshalLoad
 
     def dump(path, value)
-      return unless @@safe
+      return unless @@disk_cache_enabled
       dir = File.dirname(path)
       FileUtils.mkdir_p(dir)
       File.open(path, "wb") do |cached_file|
@@ -128,7 +130,7 @@ module Jekyll
     end
 
     def self.delete_cache_files
-      FileUtils.rm_rf(@@base_dir) if @@safe
+      FileUtils.rm_rf(@@base_dir) if @@disk_cache_enabled
     end
     private_class_method :delete_cache_files
   end

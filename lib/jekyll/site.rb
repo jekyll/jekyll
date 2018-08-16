@@ -423,11 +423,9 @@ module Jekyll
       @site_cleaner ||= Cleaner.new(self)
     end
 
-    # If we are in safe mode, then it is *not* safe for Jekyll Cache to
-    # read/write to disk. If we are not in safe mode, then it *is* safe for
-    # Jekyll Cache to use the disk
+    # Disable Marshaling cache to disk in Safe Mode
     def configure_cache
-      Jekyll::Cache.safe(!safe)
+      Jekyll::Cache.disable_disk_cache! if safe
     end
 
     def configure_plugins
