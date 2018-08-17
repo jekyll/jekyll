@@ -56,10 +56,9 @@ module Jekyll
     # Returns nothing.
     def []=(key, value)
       @cache[key] = value
-      if @@disk_cache_enabled
-        path = path_to(hash(key))
-        dump(path, value)
-      end
+      return unless @@disk_cache_enabled
+      path = path_to(hash(key))
+      dump(path, value)
     end
 
     # If an item already exists in the cache, retrieve it
@@ -78,10 +77,9 @@ module Jekyll
     # Returns nothing.
     def delete(key)
       @cache.delete(key)
-      if @@disk_cache_enabled
-        path = path_to(hash(key))
-        File.delete(path)
-      end
+      return unless @@disk_cache_enabled
+      path = path_to(hash(key))
+      File.delete(path)
     end
 
     # Check if `key` already exists in this cache
@@ -104,11 +102,11 @@ module Jekyll
     def self.clear_if_config_changed(config)
       config = config.inspect
       cache = Jekyll::Cache.new "Jekyll::Cache"
-      unless cache.key?("config") && cache["config"] == config
-        clear
-        cache = Jekyll::Cache.new "Jekyll::Cache"
-        cache["config"] = config
-      end
+      return if cache.key?("config") && cache["config"] == config
+      clear
+      cache = Jekyll::Cache.new "Jekyll::Cache"
+      cache["config"] = config
+      nil
     end
 
     private
