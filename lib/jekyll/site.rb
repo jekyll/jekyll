@@ -82,10 +82,15 @@ module Jekyll
     #
     # Returns nothing
     def reset
+      if ENV['SOURCE_DATE_EPOCH'].nil?
+        now = Time.now
+      else
+        now = Time.at(ENV['SOURCE_DATE_EPOCH'].to_i).gmtime
+      end
       self.time = if config["time"]
                     Utils.parse_date(config["time"].to_s, "Invalid time in _config.yml.")
                   else
-                    Time.now
+                    now
                   end
       self.layouts = {}
       self.pages = []
