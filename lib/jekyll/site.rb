@@ -78,20 +78,26 @@ module Jekyll
       Jekyll.logger.info @liquid_renderer.stats_table
     end
 
-    # Reset Site details.
-    #
-    # Returns nothing
-    def reset
-      if ENV['SOURCE_DATE_EPOCH'].nil?
-        now = Time.now
-      else
-        now = Time.at(ENV['SOURCE_DATE_EPOCH'].to_i).gmtime
-      end
+    # Get Time
+
+    def now
+      now = if ENV["SOURCE_DATE_EPOCH"].nil?
+              Time.now
+            else
+              Time.at(ENV["SOURCE_DATE_EPOCH"].to_i).gmtime
+            end
       self.time = if config["time"]
                     Utils.parse_date(config["time"].to_s, "Invalid time in _config.yml.")
                   else
                     now
                   end
+    end
+
+    # Reset Site details.
+    #
+    # Returns nothing
+    def reset
+      now
       self.layouts = {}
       self.pages = []
       self.static_files = []
