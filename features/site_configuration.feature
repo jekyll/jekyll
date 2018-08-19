@@ -48,7 +48,7 @@ Feature: Site configuration
     And I have a configuration file with "exclude" set to "['Rakefile', 'README']"
     When I run jekyll build
     Then I should see "I want to be included" in "_site/index.html"
-    And the "_site/Gemfile" file should exist
+    And the "_site/Gemfile" file should not exist
     And the "_site/Rakefile" file should not exist
     And the "_site/README" file should not exist
 
