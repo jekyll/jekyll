@@ -67,39 +67,46 @@ Feature: Site configuration
     And the "_site/README" file should not exist
     And the "_site/Gemfile" file should not exist
 
-  Scenario: Copy over excluded files when they are explicitly included
+  Scenario: Copy over excluded files when their directory is explicitly included
     Given I have a ".gitignore" file that contains ".DS_Store"
     And I have an ".htaccess" file that contains "SomeDirective"
     And I have a "Gemfile" file that contains "gem 'include-me'"
+    And I have a node_modules directory
+    And I have a "node_modules/bazinga.js" file that contains "var c = 'Bazinga!';"
+    And I have a "node_modules/warning.js" file that contains "var w = 'Winter is coming!';"
     And I have a configuration file with "include" set to:
-      | value      |
-      | .gitignore |
-      | .foo       |
-      | Gemfile    |
+      | value        |
+      | .gitignore   |
+      | .foo         |
+      | Gemfile      |
+      | node_modules |
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
     And the "_site/.htaccess" file should not exist
     But I should see ".DS_Store" in "_site/.gitignore"
     And I should see "gem 'include-me'" in "_site/Gemfile"
+    And I should see "var c = 'Bazinga!';" in "_site/node_modules/bazinga.js"
+    And I should see "var w = 'Winter is coming!';" in "_site/node_modules/warning.js"
 
-  Scenario: Do not copy over excluded directories even when they are explicitly included
+  Scenario: Copy over excluded files only when they are explicitly included
     Given I have a ".gitignore" file that contains ".DS_Store"
     And I have an ".htaccess" file that contains "SomeDirective"
     And I have a node_modules directory
     And I have a "node_modules/bazinga.js" file that contains "var c = 'Bazinga!';"
+    And I have a "node_modules/warning.js" file that contains "var w = 'Winter is coming!';"
     And I have a configuration file with "include" set to:
       | value                   |
       | .gitignore              |
       | .foo                    |
-      | node_modules            |
       | node_modules/bazinga.js |
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
     And the "_site/.htaccess" file should not exist
     But I should see ".DS_Store" in "_site/.gitignore"
-    But the "_site/node_modules/bazinga.js" file should not exist
+    And I should see "var c = 'Bazinga!';" in "_site/node_modules/bazinga.js"
+    But the "_site/node_modules/warning.js" file should not exist
 
   Scenario: Use Kramdown for markup
     Given I have an "index.markdown" page that contains "[Google](https://www.google.com)"
