@@ -2,11 +2,7 @@
 title: Static Files
 permalink: /docs/static-files/
 ---
-
-In addition to renderable and convertible content, we also have **static
-files**.
-
-A static file is a file that does not contain any YAML front matter. These
+A static file is a file that does not contain any front matter. These
 include images, PDFs, and other un-rendered content.
 
 They're accessible in Liquid via `site.static_files` and contain the

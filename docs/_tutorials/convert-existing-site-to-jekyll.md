@@ -75,7 +75,7 @@ cd my_jekyll_site
 jekyll serve
 ```
 
-If you have a Gemfile, [use Bundler]({% link _docs/quickstart.md %}#about-bundler) by typing `bundle exec jekyll serve` instead.
+If you have a Gemfile, [use Bundler](/docs/ruby-101/#bundler) by typing `bundle exec jekyll serve` instead.
 {: .note .info}
 
 When you serve the site, you get a preview URL such as `http://127.0.0.1:4000/` (which is the same as `http://localhost:4000/`). The site's files are built into the `_site` folder by default.
@@ -102,13 +102,13 @@ Regardless of the site, do check the license and make sure you have permission t
 
 Copy and paste the source code into a file called `default.html`. Put the `default.html` file inside the `_layouts` folder. This will be the default layout template for your pages and posts &mdash; that is, each page or post will use this layout when Jekyll builds the site.
 
-Note that in looking for templates, you want the HTML output of the template. If the template has PHP tags or other dynamic scripts, these dynamic elements will need to be converted to HTML or to [Liquid](https://shopify.github.io/liquid/). Liquid is [Jekyll templating system]({% link _docs/templates.md %}) to retrieve dynamic content.
+Note that in looking for templates, you want the HTML output of the template. If the template has PHP tags or other dynamic scripts, these dynamic elements will need to be converted to HTML or to [Liquid](https://shopify.github.io/liquid/). Liquid is [Jekyll templating system](/docs/liquid/) to retrieve dynamic content.
 
 Open `default.html` into your browser locally to ensure the site looks and behaves like it does online. You will likely need to adjust CSS, JS, and image paths so they work.
 
 For example, if the paths were relative on the site you copied, you'll need to either download the same assets into your Jekyll site or use absolute paths to the same assets in the cloud. (Syntax such as `src="//` requires a prefix such as `src="http://` to work in your local browser.)
 
-Jekyll provides some [filters]({% link _docs/templates.md %}#filters) to prepend a site URL before path. For example, you could preface your stylesheet like this:
+Jekyll provides some [filters](/docs/liquid#filters) to prepend a site URL before path. For example, you could preface your stylesheet like this:
 
 ```liquid
 {% raw %}{{ "/assets/style.css" | relative_url }}{% endraw %}

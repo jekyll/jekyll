@@ -1,7 +1,6 @@
 ---
 layout: page
 title: JekyllConf
-redirect_from: /community/index.html
 permalink: /jekyllconf/
 ---
 

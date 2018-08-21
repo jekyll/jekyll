@@ -3,11 +3,10 @@ title: Front Matter
 permalink: /docs/frontmatter/
 ---
 
-The front matter is where Jekyll starts to get really cool. Any file that
-contains a [YAML](http://yaml.org/) front matter block will be processed by
-Jekyll as a special file. The front matter must be the first thing in the file
-and must take the form of valid YAML set between triple-dashed lines. Here is a
-basic example:
+Any file that contains a [YAML](http://yaml.org/) front matter block will be
+processed by Jekyll as a special file. The front matter must be the first thing
+in the file and must take the form of valid YAML set between triple-dashed
+lines. Here is a basic example:
 
 ```yaml
 ---
@@ -28,14 +27,14 @@ relies on.
     If you use UTF-8 encoding, make sure that no <code>BOM</code> header
     characters exist in your files or very, very bad things will happen to
     Jekyll. This is especially relevant if you’re running
-    <a href="../windows/">Jekyll on Windows</a>.
+    <a href="/docs/installation/windows/">Jekyll on Windows</a>.
   </p>
 </div>
 
 <div class="note">
   <h5>ProTip™: Front Matter Variables Are Optional</h5>
   <p>
-    If you want to use <a href="../variables/">Liquid tags and variables</a>
+    If you want to use <a href="/docs/variables/">Liquid tags and variables</a>
     but don’t need anything in your front matter, just leave it empty! The set
     of triple-dashed lines with nothing in between will still get Jekyll to
     process your file. (This is useful for things like CSS and RSS feeds!)
@@ -124,20 +123,18 @@ front matter of a page or post.
 
 ## Custom Variables
 
-Any variables in the front matter that are not predefined are mixed into the
-data that is sent to the Liquid templating engine during the conversion. For
-instance, if you set a title, you can use that in your layout to set the page
-title:
+You can also set your own front matter variables you can access in Liquid. For
+instance, if you set a variable called `food`, you can use that in your page:
 
+{% raw %}
 ```liquid
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <title>{% raw %}{{ page.title }}{% endraw %}</title>
-  </head>
-  <body>
-    …
+---
+food: Pizza
+---
+
+<h1>{{ page.food }}</h1>
 ```
+{% endraw %}
 
 ## Predefined Variables for Posts
 

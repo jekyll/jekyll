@@ -356,17 +356,6 @@ By default, collections follow a similar structure in the `_site` folder as page
 
 Collections have their own way of setting permalinks. Additionally, collections have unique template variables available (such as `path` and `output_ext`). See the [Configuring permalinks for collections](../collections/#permalinks) in Collections for more information.
 
-## Flattening pages in \_site on build
-
-If you want to flatten your pages (pull them out of subfolders) in the `_site` directory when your site builds (similar to posts), add the `permalink` property to the front matter of each page, with no path specified:
-
-```yaml
----
-title: My page
-permalink: mypageurl.html
----
-```
-
 ## Extensionless permalinks with no trailing slashes {#extensionless-permalinks}
 
 Jekyll supports permalinks that contain neither a trailing slash nor a file extension, but this requires additional support from the web server to properly serve. When using these types of permalinks, output files written to disk will still have the proper file extension (typically `.html`), so the web server must be able to map requests without file extensions to these files.
