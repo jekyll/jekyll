@@ -52,6 +52,7 @@
   * Update item_property to return numbers as numbers instead of strings (#6608)
   * Use .markdown for page templates (#7126)
   * Fix custom 404 page for GitHub pages (#7132)
+  * Add Cache class (#7169)
 
 ### Major Enhancements
 
