@@ -56,6 +56,7 @@ Feature: Site configuration
     Given I have an "Rakefile" file that contains "I want to be excluded"
     And I have an "README" file that contains "I want to be excluded"
     And I have an "index.html" file that contains "I want to be included"
+    And I have a "Gemfile" file that contains "gem 'include-me'"
     And I have a configuration file with "exclude" set to:
       | value    |
       | README   |
@@ -64,6 +65,41 @@ Feature: Site configuration
     Then I should see "I want to be included" in "_site/index.html"
     And the "_site/Rakefile" file should not exist
     And the "_site/README" file should not exist
+    And the "_site/Gemfile" file should not exist
+
+  Scenario: Copy over excluded files when they are explicitly included
+    Given I have a ".gitignore" file that contains ".DS_Store"
+    And I have an ".htaccess" file that contains "SomeDirective"
+    And I have a "Gemfile" file that contains "gem 'include-me'"
+    And I have a configuration file with "include" set to:
+      | value      |
+      | .gitignore |
+      | .foo       |
+      | Gemfile    |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And the "_site/.htaccess" file should not exist
+    But I should see ".DS_Store" in "_site/.gitignore"
+    And I should see "gem 'include-me'" in "_site/Gemfile"
+
+  Scenario: Do not copy over excluded directories even when they are explicitly included
+    Given I have a ".gitignore" file that contains ".DS_Store"
+    And I have an ".htaccess" file that contains "SomeDirective"
+    And I have a node_modules directory
+    And I have a "node_modules/bazinga.js" file that contains "var c = 'Bazinga!';"
+    And I have a configuration file with "include" set to:
+      | value                   |
+      | .gitignore              |
+      | .foo                    |
+      | node_modules            |
+      | node_modules/bazinga.js |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And the "_site/.htaccess" file should not exist
+    But I should see ".DS_Store" in "_site/.gitignore"
+    But the "_site/node_modules/bazinga.js" file should not exist
 
   Scenario: Use Kramdown for markup
     Given I have an "index.markdown" page that contains "[Google](https://www.google.com)"
@@ -203,19 +239,6 @@ Feature: Site configuration
     And the "_site/2009/04/05/bananas.html" file should exist
     And the "_site/2009/04/01/oranges.html" file should exist
     And the "_site/2009/03/27/apples.html" file should not exist
-
-  Scenario: Copy over normally excluded files when they are explicitly included
-    Given I have a ".gitignore" file that contains ".DS_Store"
-    And I have an ".htaccess" file that contains "SomeDirective"
-    And I have a configuration file with "include" set to:
-      | value      |
-      | .gitignore |
-      | .foo       |
-    When I run jekyll build
-    Then I should get a zero exit status
-    And the _site directory should exist
-    And I should see ".DS_Store" in "_site/.gitignore"
-    And the "_site/.htaccess" file should not exist
 
   Scenario: Using a different layouts directory
     Given I have a _theme directory
