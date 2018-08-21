@@ -112,6 +112,9 @@ module Jekyll
         raise IOError, could_not_locate_message(file, includes_dirs, safe)
       end
 
+      # rubocop:disable Metrics/AbcSize
+      # rubocop:disable Metrics/CyclomaticComplexity
+      # rubocop:disable Metrics/MethodLength
       def render(context)
         site = context.registers[:site]
 
@@ -124,11 +127,17 @@ module Jekyll
         add_include_to_dependency(site, path, context)
 
         partial = load_cached_partial(path, context)
+        return partial if partial.is_a? String
 
-        context.stack do
-          context["include"] = parse_params(context) if @params
+        reporting_context = ReportingContext.new(
+          context.environments, context.scopes.last, context.registers
+        )
+        reporting_context.stack do
+          reporting_context["include"] = parse_params(reporting_context) if @params
           begin
-            partial.render!(context)
+            r = partial.render!(reporting_context)
+            cache[path] = r if reporting_context.cachable?
+            r
           rescue Liquid::Error => e
             e.template_name = path
             e.markup_context = "included " if e.markup_context.nil?
@@ -136,6 +145,9 @@ module Jekyll
           end
         end
       end
+      # rubocop:enable Metrics/MethodLength
+      # rubocop:enable Metrics/CyclomaticComplexity
+      # rubocop:enable Metrics/AbcSize
 
       def add_include_to_dependency(site, path, context)
         if context.registers[:page]&.key?("path")
@@ -147,17 +159,16 @@ module Jekyll
       end
 
       def load_cached_partial(path, context)
-        context.registers[:cached_partials] ||= {}
-        cached_partial = context.registers[:cached_partials]
+        cache.getset(path) do
+          file_contents = read_file(path, context)
 
-        if cached_partial.key?(path)
-          cached_partial[path]
-        else
           unparsed_file = context.registers[:site]
             .liquid_renderer
             .file(path)
           begin
-            cached_partial[path] = unparsed_file.parse(read_file(path, context))
+            partial = unparsed_file.parse(file_contents)
+            cache[path] = partial
+            partial
           rescue Liquid::Error => e
             e.template_name = path
             e.markup_context = "included " if e.markup_context.nil?
@@ -186,6 +197,10 @@ module Jekyll
       end
 
       private
+
+      def cache
+        Jekyll::Cache.new("Jekyll::Tags::Include")
+      end
 
       def could_not_locate_message(file, includes_dirs, safe)
         message = "Could not locate the included file '#{file}' in any of "\

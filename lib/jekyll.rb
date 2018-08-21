@@ -71,6 +71,7 @@ module Jekyll
   autoload :Regenerator,         "jekyll/regenerator"
   autoload :RelatedPosts,        "jekyll/related_posts"
   autoload :Renderer,            "jekyll/renderer"
+  autoload :ReportingContext,    "jekyll/reporting_context"
   autoload :LiquidRenderer,      "jekyll/liquid_renderer"
   autoload :Site,                "jekyll/site"
   autoload :StaticFile,          "jekyll/static_file"
