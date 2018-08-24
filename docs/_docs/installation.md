@@ -10,6 +10,7 @@ installed on most systems.
 - [Requirements](#requirements)
 - [Install Jekyll on macOS](#macOS)
 - [Install Jekyll on Ubuntu Linux](#ubuntu)
+- [Install Jekyll on other Linux distros](#otherlinux)
 - [Install Jekyll on Windows](../windows/)
 - [Upgrade Jekyll](#upgrade-jekyll)
 
@@ -141,6 +142,17 @@ gem install jekyll bundler
 ```
 
 That's it! You're ready to start using Jekyll.
+
+## Install on other Linux distros {#otherlinux}
+
+Installation on other Linux distributions works similarly as on Ubuntu.
+
+On Fedora, the dependencies can be installed as follows, and the rest
+works the same as on Ubuntu.
+
+```sh
+sudo dnf install ruby ruby-devel @development-tools
+```
 
 ## Upgrade Jekyll
 
