@@ -53,6 +53,7 @@
   * Use .markdown for page templates (#7126)
   * Fix custom 404 page for GitHub pages (#7132)
   * Add Cache class (#7169)
+  * Add support for `*.xhtml` files (#6854)
 
 ### Major Enhancements
 
