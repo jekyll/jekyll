@@ -316,7 +316,8 @@ We've only scratched the surface of what you can do with `for` loops in retrievi
     <li><a href="{{ post.url }}">{{ post.title}}</a>
     <span class="postDate">{{ post.date | date: "%b %-d, %Y" }}</span>
     </li>
-{% endfor %}{% endraw %}
+{% endfor %}
+</ul>{% endraw %}
 ```
 
 This loop would get the latest three posts that have a category called `podcasts` in the front matter.
