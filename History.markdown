@@ -43,6 +43,7 @@
   * Add TSV to list of supported _data files. (#7168)
   * Corrected sample usage of postfiles (#7181)
   * Add missing html end tag for code example in section &#39;For loops&#39; (#7199)
+  * Resolve &#34;Unable to locate package ruby2.4&#34; error (#7196)
 
 ### Minor Enhancements
 
