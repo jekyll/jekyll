@@ -42,6 +42,7 @@
   * Add closing tags for &lt;a&gt; (#7163)
   * Add TSV to list of supported _data files. (#7168)
   * Corrected sample usage of postfiles (#7181)
+  * Add missing html end tag for code example in section &#39;For loops&#39; (#7199)
 
 ### Minor Enhancements
 
