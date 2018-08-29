@@ -51,7 +51,7 @@ and are separated by a `|`. For example:
 ```  
 {% endraw %}
 
-Outputs `HI`. You can learn more about the filters available to Jekyll
+Outputs `Hi`. You can learn more about the filters available to Jekyll
 [here](/docs/liquid/filters/).
 
 ## Use Liquid
