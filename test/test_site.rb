@@ -674,7 +674,7 @@ class TestSite < JekyllUnitTest
       setup do
         @site = Site.new(site_configuration(
                            "incremental"     => true,
-                           "incremental_key" => 'hash'
+                           "incremental_key" => "hash"
                          ))
         @site.read
       end
@@ -694,9 +694,7 @@ class TestSite < JekyllUnitTest
         assert_equal mhash1, mhash2 # no modifications, so remain the same
 
         # simulate file modification by user
-        open(source, 'a') { |f|
-          f.puts "some extra content"
-        }
+        IO.write(source, "some extra content", File.size(source), :mode => "a")
 
         sleep 1
         @site.process

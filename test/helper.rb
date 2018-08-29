@@ -168,7 +168,7 @@ class JekyllUnitTest < Minitest::Test
   def file_sha256(path)
     require "digest"
     sha256 = Digest::SHA256.file path
-    return sha256.hexdigest
+    sha256.hexdigest
   end
 
   def capture_output(level = :debug)

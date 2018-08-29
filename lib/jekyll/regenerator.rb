@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require 'digest'
+
+require "digest"
 
 module Jekyll
   class Regenerator
@@ -38,10 +39,10 @@ module Jekyll
     #
     # Returns any serializable
     def mkey(path)
-      return File.mtime(path) unless site.incremental_key == 'hash'
+      return File.mtime(path) unless site.incremental_key == "hash"
 
       sha256 = Digest::SHA256.file path
-      return sha256.hexdigest
+      sha256.hexdigest
     end
 
     # Add a path to the metadata
@@ -52,7 +53,7 @@ module Jekyll
 
       metadata[path] = {
         "mkey" => mkey(path),
-        "deps"  => [],
+        "deps" => [],
       }
       cache[path] = true
     end
@@ -193,7 +194,7 @@ module Jekyll
         return cache[dependency] = cache[path] = true if modified?(dependency)
       end
 
-      if File.exist?(path) && metadata[path]["mkey"].eql?(mkey(path))        
+      if File.exist?(path) && metadata[path]["mkey"].eql?(mkey(path))
         # If this file has not been modified, set the regeneration bit to false
         cache[path] = false
       else
