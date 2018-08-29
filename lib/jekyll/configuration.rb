@@ -44,6 +44,7 @@ module Jekyll
       "lsi"                 => false,
       "excerpt_separator"   => "\n\n",
       "incremental"         => false,
+      "incremental_key"     => "mtime",
 
       # Serving
       "detach"              => false, # default to not detaching the server
