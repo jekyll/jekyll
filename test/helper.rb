@@ -165,6 +165,12 @@ class JekyllUnitTest < Minitest::Test
     ENV[key] = old_value
   end
 
+  def file_sha256(path)
+    require "digest"
+    sha256 = Digest::SHA256.file path
+    return sha256.hexdigest
+  end
+
   def capture_output(level = :debug)
     buffer = StringIO.new
     Jekyll.logger = Logger.new(buffer)
