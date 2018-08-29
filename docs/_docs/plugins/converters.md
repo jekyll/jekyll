@@ -1,6 +1,6 @@
 ---
-title: Convertors
-permalink: /docs/plugins/convertors/
+title: Converters
+permalink: /docs/plugins/converters/
 ---
 
 If you have a new markup language you’d like to use with your site, you can

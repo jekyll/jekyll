@@ -50,7 +50,7 @@ I hope you like it!
 <div class="note">
   <h5>ProTip™: Link to other posts</h5>
   <p>
-    Use the <a href="/docs/templates/#linking-to-posts"><code>post_url</code></a>
+    Use the <a href="/docs/liquid/tags/#linking-to-posts"><code>post_url</code></a>
     tag to link to other posts without having to worry about the URLs
     breaking when the site permalink style changes.
   </p>

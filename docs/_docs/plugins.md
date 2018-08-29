@@ -10,7 +10,7 @@ having to modify the Jekyll source itself.
 * [Installation](/docs/plugins/installation/) - How to install plugins
 * [Your first plugin](/docs/plugins/your-first-plugin/) - How to write plugins
 * [Generators](/docs/plugins/generators/) - Create additional content on your site
-* [Convertors](/docs/plugins/convertors/) - Change a markup language into another format
+* [Converters](/docs/plugins/converters/) - Change a markup language into another format
 * [Commands](/docs/plugins/commands/) - Extend the `jekyll` executable with subcommands
 * [Tags](/docs/plugins/tags) - Create custom Liquid tags
 * [Filters](/docs/plugins/filters/) - Create custom Liquid filters

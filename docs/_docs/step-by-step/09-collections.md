@@ -243,7 +243,7 @@ layout: default
 ```
 {% endraw %}
 
-Open up [http://localhost:4000](http://localhost:4000){:target="_blank"} and
+Open up <a href="http://localhost:4000" target="_blank" data-proofer-ignore>http://localhost:4000</a> and
 have a look at the staff page and the author links on posts to check everything
 is linked together correctly.
 

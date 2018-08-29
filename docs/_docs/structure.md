@@ -32,7 +32,7 @@ A basic Jekyll site usually looks something like this:
 <div class="note info">
   <h5>Directory structure of Jekyll sites using gem-based themes</h5>
   <p>
-    Starting <strong>Jekyll 3.2</strong>, a new Jekyll project bootstrapped with <code>jekyll new</code> uses <a href="../themes/">gem-based themes</a> to define the look of the site. This results in a lighter default directory structure : <code>_layouts</code>, <code>_includes</code> and <code>_sass</code> are stored in the theme-gem, by default.
+    Starting <strong>Jekyll 3.2</strong>, a new Jekyll project bootstrapped with <code>jekyll new</code> uses <a href="/docs/themes/">gem-based themes</a> to define the look of the site. This results in a lighter default directory structure : <code>_layouts</code>, <code>_includes</code> and <code>_sass</code> are stored in the theme-gem, by default.
   </p>
   <br />
   <p>
@@ -57,7 +57,7 @@ An overview of what each of these does:
       </td>
       <td>
         <p>
-          Stores <a href="../configuration/">configuration</a> data. Many of
+          Stores <a href="/docs/configuration/">configuration</a> data. Many of
           these options can be specified from the command line executable but
           it’s easier to specify them here so you don’t have to remember them.
         </p>
@@ -70,7 +70,7 @@ An overview of what each of these does:
       <td>
         <p>
           Drafts are unpublished posts. The format of these files is without a
-          date: <code>title.MARKUP</code>. Learn how to <a href="../drafts/">
+          date: <code>title.MARKUP</code>. Learn how to <a href="/docs/posts/#drafts">
           work with drafts</a>.
         </p>
       </td>
@@ -97,7 +97,7 @@ An overview of what each of these does:
         <p>
           These are the templates that wrap posts. Layouts are chosen on a
           post-by-post basis in the
-          <a href="../frontmatter/">YAML Front Matter</a>,
+          <a href="/docs/frontmatter/">YAML Front Matter</a>,
           which is described in the next section. The liquid tag
           <code>{% raw %}{{ content }}{% endraw %}</code>
           is used to inject content into the web page.
@@ -113,7 +113,7 @@ An overview of what each of these does:
           Your dynamic content, so to speak. The naming convention of these
           files is important, and must follow the format:
           <code>YEAR-MONTH-DAY-title.MARKUP</code>.
-          The <a href="../permalinks/">permalinks</a> can be customized for
+          The <a href="/docs/permalinks/">permalinks</a> can be customized for
           each post, but the date and markup language are determined solely by
           the file name.
         </p>
@@ -180,7 +180,7 @@ An overview of what each of these does:
       </td>
       <td>
         <p>
-          Provided that the file has a <a href="../frontmatter/">YAML Front
+          Provided that the file has a <a href="/docs/frontmatter/">YAML Front
           Matter</a> section, it will be transformed by Jekyll. The same will
           happen for any <code>.html</code>, <code>.markdown</code>,
           <code>.md</code>, or <code>.textile</code> file in your site’s root
@@ -197,7 +197,7 @@ An overview of what each of these does:
           Every other directory and file except for those listed above—such as
           <code>css</code> and <code>images</code> folders,
           <code>favicon.ico</code> files, and so forth—will be copied verbatim
-          to the generated site. There are plenty of <a href="../sites/">sites
+          to the generated site. There are plenty of <a href="/showcase/">sites
           already using Jekyll</a> if you’re curious to see how they’re laid
           out.
         </p>

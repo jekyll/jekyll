@@ -28,8 +28,8 @@ about in [the changelog!](/docs/history/)
 
 As always, if you run into issues, please [check the issues]({{ site.repository }}/issues)
 and [create an issue if one doesn't exist for the bug you encountered]({{ site.repository }}/issues/new).
-If you just need some help, the extraordinary [jekyll help team is here for
-you!]({{ site.help_url }})
+If you just need some help, the extraordinary jekyll help team is here for
+you!
 
 *When was the [first commit to Jekyll](https://github.com/jekyll/jekyll/commit/d189e05d236769c1e5594af9db4d6eacb86fc16e)?
 All the way back on October 19, 2008. It features interesting historical

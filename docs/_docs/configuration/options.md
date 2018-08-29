@@ -43,7 +43,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr class="setting">
       <td>
         <p class="name"><strong>Safe</strong></p>
-        <p class="description">Disable <a href="../plugins/">custom plugins, and ignore symbolic links</a>.</p>
+        <p class="description">Disable <a href="/docs/plugins/">custom plugins, and ignore symbolic links</a>.</p>
       </td>
       <td class="align-center">
         <p><code class="option">safe: BOOL</code></p>
@@ -128,12 +128,12 @@ class="flag">flags</code> (specified on the command-line) that control them.
       <td>
         <p class='name'><strong>Defaults</strong></p>
         <p class='description'>
-            Set defaults for <a href="../frontmatter/" title="YAML Front Matter">YAML Front Matter</a>
+            Set defaults for <a href="/docs/frontmatter/" title="YAML Front Matter">YAML Front Matter</a>
             variables.
         </p>
       </td>
       <td class='align-center'>
-        <p>see <a href="#front-matter-defaults" title="details">below</a></p>
+        <p>see <a href="/docs/configuration/front-matter-defaults/" title="details">below</a></p>
       </td>
     </tr>
   </tbody>

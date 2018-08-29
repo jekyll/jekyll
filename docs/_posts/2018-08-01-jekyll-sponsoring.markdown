@@ -48,7 +48,7 @@ Again, these are just some ideas, but with the help of sponsoring, they are now 
 to being realized :heart:
 
 <div align="center">
-  <img src="/img/forestry-logo.png" width="300" />
+  <img src="/img/forestry-logo.png" alt="Forestry" width="300" />
 </div>
 
 With that, we would like to announce our very first sponsor: [__Forestry.io__](https://forestry.io)! Forestry is

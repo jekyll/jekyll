@@ -12,7 +12,7 @@ Building, testing, and deploying your Jekyll-generated website can quickly be do
 
 To start building your project on CircleCI, all you need to do is 'follow' your project from CircleCI's website:
 
-1. Visit the 'Add Projects' page: <https://circleci.com/add-projects>
+1. Visit the 'Add Projects' page
 1. From the GitHub or Bitbucket tab on the left, choose a user or organization.
 1. Find your project in the list and click 'Build project' on the right.
 1. The first build will start on its own. You can start telling CircleCI how to build your project by creating a [circle.yml][3] file in the root of your repository.

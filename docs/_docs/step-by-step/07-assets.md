@@ -84,7 +84,7 @@ Open `_layouts/default.html` and add the stylesheet to the `<head>`:
 ```
 {% endraw %}
 
-Load up [http://localhost:4000](http://localhost:4000){:target="_blank"}
+Load up <a href="http://localhost:4000" target="_blank" data-proofer-ignore>http://localhost:4000</a>
 and check the active link in the navigation is green.
 
 Next we're looking at one of Jekyll's most popular features, blogging.

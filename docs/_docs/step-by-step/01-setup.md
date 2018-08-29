@@ -65,8 +65,8 @@ When you're developing a site you'll use `jekyll serve` as it updates with any
 changes you make.
 
 Run `jekyll serve` and go to
-[http://localhost:4000](http://localhost:4000){:target="_blank"} in your
-browser. You should see "Hello World!".
+<a href="http://localhost:4000" target="_blank" data-proofer-ignore>http://localhost:4000</a> in
+your browser. You should see "Hello World!".
 
 You might be thinking what's the point in this? Jekyll just copied an HTML file
 from one place to another. Well patience young grasshopper, there's still much

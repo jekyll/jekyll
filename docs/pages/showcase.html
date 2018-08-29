@@ -8,7 +8,7 @@ permalink: /showcase/
 
 <ul class="showcase" id="showcase">
 	{% for s in site.data.showcase %}
-		<li><a href="{{ s.url }}"><img src="https://cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/loader.gif">{{ s.name }}</a></li>
+		<li><a href="{{ s.url }}"><img src="https://cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/loader.gif" alt="{{ s.name }}">{{ s.name }}</a></li>
 	{% endfor %}
 	<li class="spacer"></li>
 </ul>

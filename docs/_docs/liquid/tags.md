@@ -10,7 +10,7 @@ your own tags using [plugins](/docs/plugins/).
 ## Includes
 
 If you have page snippets that you use repeatedly across your site an
-[include](/docs/include/) is the perfect way make this more maintainable.
+[include](/docs/includes/) is the perfect way make this more maintainable.
 
 ## Code snippet highlighting
 

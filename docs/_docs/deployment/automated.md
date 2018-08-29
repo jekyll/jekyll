@@ -61,7 +61,3 @@ Deploying is now as easy as telling nginx or Apache to look at
 ```sh
 laptops$ git push deploy master
 ```
-
-## Git pre-push hook
-
-Instead of deploying using server-side hooks, you can deploy using `pre-push` client-side (executes on your desktop machine) git hook. [Check here](https://victorafanasev.info/tech/deploy-jekyll-build-to-github-pages-using-git-pre-push-hook) an example for Github Pages.

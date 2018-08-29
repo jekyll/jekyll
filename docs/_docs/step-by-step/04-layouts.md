@@ -80,7 +80,7 @@ This page tells you a little bit about me.
 ```
 {% endraw %}
 
-Open [http://localhost:4000/about.html](http://localhost:4000/about.html){:target="_blank"}
+Open <a href="http://localhost:4000/about.html" target="_blank" data-proofer-ignore>http://localhost:4000/about.html</a>
 in your browser and view your new page.
 
 Congratulations, you now have a two page website! But how do you

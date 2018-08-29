@@ -31,7 +31,7 @@ when ripe.
 
 This is like the `about.md` you created before except it has an author and
 a different layout. `author` is a custom variable, it's not required and could
-have just as easily be named something like `creator`.
+have been named something like `creator`.
 
 ## Layout
 
@@ -139,7 +139,7 @@ golden flesh with rows of tiny, black, edible seeds. The fruit has a soft
 texture, with a sweet and unique flavor.
 ```
 
-Open [http://localhost:4000](http://localhost:4000){:target="_blank"} and have
+Open <a href="http://localhost:4000" target="_blank" data-proofer-ignore>http://localhost:4000</a> and have
 a look through your blog posts.
 
 Next we'll focus on creating a page for each post author.

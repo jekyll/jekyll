@@ -108,7 +108,7 @@ Open `default.html` into your browser locally to ensure the site looks and behav
 
 For example, if the paths were relative on the site you copied, you'll need to either download the same assets into your Jekyll site or use absolute paths to the same assets in the cloud. (Syntax such as `src="//` requires a prefix such as `src="http://` to work in your local browser.)
 
-Jekyll provides some [filters](/docs/liquid#filters) to prepend a site URL before path. For example, you could preface your stylesheet like this:
+Jekyll provides some [filters](/docs/liquid/filters) to prepend a site URL before path. For example, you could preface your stylesheet like this:
 
 ```liquid
 {% raw %}{{ "/assets/style.css" | relative_url }}{% endraw %}
@@ -202,7 +202,7 @@ layout: homepage
 
 This page would then use the `homepage.html` template in the `_layouts` folder.
 
-You can even set [default front matter tags]({% link _docs/configuration.md %}#front-matter-defaults) for pages, posts, or [collections]({% link _docs/collections.md %}) in your `_config.yml` file so that you don't have to specify the layout in the front matter variables. Anywayd, setting defaults is beyond the scope of this tutorial, let's get back to work.
+You can even set [default front matter tags](/docs/configuration/front-matter-defaults/) for pages, posts, or [collections]({% link _docs/collections.md %}) in your `_config.yml` file so that you don't have to specify the layout in the front matter variables. Anywayd, setting defaults is beyond the scope of this tutorial, let's get back to work.
 
 ## 6. Configure site variables
 
@@ -440,7 +440,7 @@ In your `default.html` layout, look for a reference to the RSS or Atom feed in y
 <link rel="alternate" type="application/rss+xml"  href="{% raw %}{{ site.url }}{% endraw %}/feed.xml" title="{% raw %}{{ site.title }}{% endraw %}">
 ```
 
-You can also auto-generate your posts feed by adding a gem called [`jekyll-feed`][jekyll-feed]. This gem will also work on GitHub Pages.
+You can also auto-generate your posts feed by adding a gem called [`jekyll-feed`](https://help.github.com/articles/atom-rss-feeds-for-github-pages/). This gem will also work on GitHub Pages.
 
 ## 11. Add a sitemap
 
@@ -478,7 +478,7 @@ search: exclude
 
 Again, we're using a `for` loop here to iterate through all posts and pages to add them to the sitemap.
 
-You can also auto-generate your sitemap by adding a gem called [`jekyll-sitemap`][jekyll-sitemap]. This gem will also work on GitHub Pages.
+You can also auto-generate your sitemap by adding a gem called [`jekyll-sitemap`](https://help.github.com/articles/sitemaps-for-github-pages/). This gem will also work on GitHub Pages.
 
 ## 12. Add external services
 
@@ -509,7 +509,7 @@ Although websites can implement more sophisticated features and functionality, w
 
 To deploy your site, consider using [GitHub Pages](https://pages.github.com/), [Netlify](https://www.netlify.com/), [Amazon AWS S3](https://aws.amazon.com/s3/) using the [s3_website plugin](https://github.com/laurilehmijoki/s3_website), or just FTP your files to your web server.
 
-You can also package your layouts, includes and assets into a Ruby `gem` and [make it a Jekyll theme]({% link _docs/themes.md %}#creating-a-theme).
+You can also package your layouts, includes and assets into a Ruby `gem` and [make it a Jekyll theme](/docs/themes/).
 
 ## Additional resources
 
@@ -517,6 +517,3 @@ Here are some additional tutorials on creating Jekyll sites:
 
   * [Convert a static site to Jekyll](http://jekyll.tips/jekyll-casts/converting-a-static-site-to-jekyll/)
   * [Building a Jekyll Site – Part 1 of 3: Converting a Static Website To Jekyll](https://css-tricks.com/building-a-jekyll-site-part-1-of-3/)
-
-[jekyll-sitemap]: https://help.github.com/articles/sitemaps-for-github-pages/
-[jekyll-feed]: https://help.github.com/articles/atom-rss-feeds-for-github-pages/

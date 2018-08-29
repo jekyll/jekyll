@@ -49,7 +49,7 @@ Try using the include tag to add the navigation to `_layouts/default.html`:
 ```
 {% endraw %}
 
-Open [http://localhost:4000](http://localhost:4000){:target="_blank"}
+Open <a href="http://localhost:4000" target="_blank" data-proofer-ignore>http://localhost:4000</a>
 in your browser and try switching between the pages.
 
 ## Current page highlighting
@@ -76,7 +76,7 @@ if true:
 ```
 {% endraw %}
 
-Take a look at [http://localhost:4000](http://localhost:4000){:target="_blank"}
+Take a look at <a href="http://localhost:4000" target="_blank" data-proofer-ignore>http://localhost:4000</a>
 and see your red link for the current page.
 
 There's still a lot of repetition here if you wanted to add a new item to the

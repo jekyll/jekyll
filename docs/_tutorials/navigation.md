@@ -48,17 +48,19 @@ docs:
 
 **Liquid**
 
+{% raw %}
 ```liquid
-{% raw %}<h2>{{ site.data.samplelist.docs_list_title }}</h2>
+<h2>{{ site.data.samplelist.docs_list_title }}</h2>
 <ul>
    {% for item in site.data.samplelist.docs %}
       <li><a href="{{ item.url }}" alt="{{ item.title }}">{{ item.title }}</a></li>
    {% endfor %}
-</ul>{% endraw %}
+</ul>
 ```
+{% endraw %}
 
 **Result**
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <h2>ACME Documentation</h2>
    <ul>
       <li><a href="#" alt="Introduction">Introduction</a></li>
@@ -104,7 +106,7 @@ Suppose you wanted to sort the list by the `title`. To do this, convert the refe
 
 **Result**
 
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <ol>
       <li><a href="#" alt="Configuration">Configuration</a></li>
       <li><a href="#" alt="Deployment">Deployment</a></li>
@@ -174,7 +176,7 @@ toc:
 {% endraw %}
 
 **Result**
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
     <h3>Group 1</h3>
       <ul>
           <li><a href="#">Thing 1</a></li>
@@ -281,7 +283,7 @@ toc2:
 
 **Result**
 
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <div>
       <h3>Group 1</h3>
       <ul>
@@ -352,7 +354,7 @@ sidebar: toc
 
 **Result**
 
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <ul>
       <li><a href="#">Introduction</a></li>
       <li><a href="#">Configuration</a></li>
@@ -396,7 +398,7 @@ In addition to inserting items from the YAML data file into your list, you also 
   }
 </style>
 
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <ul>
       <li class=""><a href="#">Introduction</a></li>
       <li class=""><a href="#">Configuration</a></li>
@@ -446,7 +448,7 @@ docs2:
 
 **Result**
 
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <ul>
       <li><a href="#">Introduction</a></li>
       <li><a href="#">Configuration</a></li>
@@ -528,7 +530,7 @@ If you wanted to simply get all docs in the collection for a specific category, 
 
 The result would be as follows:
 
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <h3>Getting Started</h3>
    <ul>
       <li><a href="#">Sample1</a></li>
@@ -564,7 +566,7 @@ Here's the code for getting lists of pages grouped under their corresponding cat
 
 **Result**
 
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <h2>Getting-started</h2>
    <ul>
       <li><a href="#">Sample2</a></li>

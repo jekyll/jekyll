@@ -71,7 +71,7 @@ front matter of a page or post.
           <li>
             Using <code>null</code> will produce a file without using a layout
             file. However this is overridden if the file is a post/document and has a
-            layout defined in the <a href="../configuration/#front-matter-defaults">
+            layout defined in the <a href="/docs/configuration/front-matter-defaults/">
             frontmatter defaults</a>.
           </li>
           <li>
@@ -116,7 +116,7 @@ front matter of a page or post.
   <h5>ProTip™: Render Posts Marked As Unpublished</h5>
   <p>
     To preview unpublished pages, simply run `jekyll serve` or `jekyll build`
-    with the `--unpublished` switch. Jekyll also has a handy <a href="../drafts/">drafts</a>
+    with the `--unpublished` switch. Jekyll also has a handy <a href="/docs/posts/#drafts">drafts</a>
     feature tailored specifically for blog posts.
   </p>
 </div>
@@ -203,7 +203,7 @@ These are available out-of-the-box to be used in the front matter for a post.
   <h5>ProTip™: Don't repeat yourself</h5>
   <p>
     If you don't want to repeat your frequently used front matter variables
-    over and over, just define <a href="../configuration/#front-matter-defaults" title="Front Matter defaults">defaults</a>
+    over and over, just define <a href="/docs/configuration/front-matter-defaults/" title="Front Matter defaults">defaults</a>
     for them and only override them where necessary (or not at all). This works
     both for predefined and custom variables.
   </p>

@@ -3,7 +3,7 @@ title: Front Matter Defaults
 permalink: "/docs/configuration/front-matter-defaults/"
 ---
 
-Using [YAML Front Matter](../frontmatter/) is one way that you can specify configuration in the pages and posts for your site. Setting things like a default layout, or customizing the title, or specifying a more precise date/time for the post can all be added to your page or post front matter.
+Using [YAML Front Matter](/docs/frontmatter/) is one way that you can specify configuration in the pages and posts for your site. Setting things like a default layout, or customizing the title, or specifying a more precise date/time for the post can all be added to your page or post front matter.
 
 Often times, you will find that you are repeating a lot of configuration options. Setting the same layout in each file, adding the same category - or categories - to a post, etc. You can even add custom variables like author names, which might be the same for the majority of posts on your blog.
 
@@ -68,7 +68,7 @@ defaults:
       author: "Mr. Hyde"
 ```
 
-With these defaults, all pages would use the `my-site` layout. Any html files that exist in the `projects/` folder will use the `project` layout, if it exists. Those files will also have the `page.author` [liquid variable](../variables/) set to `Mr. Hyde`.
+With these defaults, all pages would use the `my-site` layout. Any html files that exist in the `projects/` folder will use the `project` layout, if it exists. Those files will also have the `page.author` [liquid variable](/docs/variables/) set to `Mr. Hyde`.
 
 ```yaml
 collections:
@@ -85,7 +85,7 @@ defaults:
 ```
 
 In this example, the `layout` is set to `default` inside the
-[collection](../collections/) with the name `my_collection`.
+[collection](/docs/collections/) with the name `my_collection`.
 
 ### Glob patterns in Front Matter defaults
 

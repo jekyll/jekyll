@@ -28,7 +28,7 @@ So if you had a PDF you didn't want to be in your sitemap, you couldn't use
 `jekyll-sitemap`.
 
 With this release, you can now set [front matter
-defaults](/docs/configuration/#front-matter-defaults) for static files:
+defaults](/docs/configuration/front-matter-defaults/) for static files:
 
 ```yaml
 defaults:

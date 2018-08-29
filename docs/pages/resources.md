@@ -24,6 +24,7 @@ some of the most popular Jekyll resources.
 
 ## Useful Guides
 
+- [Offical tutorials](/tutorials/home/)
 - [CloudCannon Academy](https://learn.cloudcannon.com/) is a set of resources created by [CloudCannon](https://cloudcannon.com/) to help folks get up and running with Jekyll. They cover all skill levels, and even include some great video tutorials.
 - [Jekyll Cheatsheet](https://learn.cloudcannon.com/jekyll-cheat-sheet/) is a single-page resource for Jekyll filters, variables, and the like.
 - ["Creating and Hosting a Personal Site on GitHub"](http://jmcglone.com/guides/github-pages/)
@@ -75,6 +76,5 @@ Use a SaaS service as a backend for functionality on your Jekyll site
 
   > "Jekyll is everything that I ever wanted in a blogging engine. Really. It isn't perfect, but what's excellent about it is that if there's something wrong, I know exactly how it works and how to fix it. It runs on the your machine only, and is essentially an added"build" step between you and the browser. I coded this entire site in TextMate using standard HTML5 and CSS3, and then at the end I added just a few little variables to the markup. Presto-chango, my site is built and I am at peace with the world."
 
-- [Generating a Tag Cloud in Jekyll](http://www.justkez.com/generating-a-tag-cloud-in-jekyll/) – A guide to implementing a tag cloud and per-tag content pages using Jekyll.
 - A way to [extend Jekyll](https://github.com/rfelix/jekyll_ext) without forking and modifying the Jekyll gem codebase and some [portable Jekyll extensions](https://wiki.github.com/rfelix/jekyll_ext/extensions) that can be reused and shared.
 - [Using your Rails layouts in Jekyll](http://numbers.brighterplanet.com/2010/08/09/sharing-rails-views-with-jekyll)
