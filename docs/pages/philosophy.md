@@ -1,5 +1,6 @@
 ---
 title: Philosophy
+permalink: /philosophy/
 ---
 
 Jekyll offers a unique philosophy when approaching the problem of static

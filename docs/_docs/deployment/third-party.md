@@ -9,6 +9,12 @@ permalink: /docs/deployment/third-party/
 
 Automating the deployment of a Jekyll site is simple. See their [Jekyll docs](https://www.aerobatic.com/docs/static-site-generators/#jekyll) for more details. Your built `_site` folder is deployed to their highly-available, globally distributed hosting service.
 
+## CloudCannon
+
+[CloudCannon](https://cloudcannon.com) has everything you need to build, host
+and update Jekyll websites. Take advantage of our global CDN, automated SSL,
+continuous deployment and [more](https://cloudcannon.com/features/).
+
 ## GitHub Pages
 
 Sites on GitHub Pages are powered by Jekyll behind the scenes, so if you’re looking for a zero-hassle, zero-cost solution, GitHub Pages are a great way to [host your Jekyll-powered website for free](/docs/github-pages/).

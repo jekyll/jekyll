@@ -1,5 +1,5 @@
 ---
-title: CLI
+title:  Command Line Usage
 permalink: /docs/usage/
 ---
 

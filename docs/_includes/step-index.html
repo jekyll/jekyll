@@ -1,0 +1,10 @@
+<ul>
+	{% assign docs = site.docs | where_exp: "doc", "doc.url contains '/step-by-step/'" %}
+	{% for step in docs %}
+		<li>
+			{% unless step.url == page.url %}<a href="{{ step.url }}">{% endunless %}
+				{{ step.title }}
+			{% unless step.url == page.url %}</a>{% endunless %}
+		</li>
+	{% endfor %}
+</ul>

@@ -4,6 +4,7 @@
     - link: /docs/ruby-101/
     - link: /docs/installation/
     - link: /docs/community/
+    - link: /docs/step-by-step/01-setup/
 - title: Build
   docs:
     - link: /docs/usage/

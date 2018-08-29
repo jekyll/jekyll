@@ -1,6 +1,7 @@
 ---
 layout: page
 title: The Jekyll Team
+permalink: /team/
 ---
 
 ## Core Team
