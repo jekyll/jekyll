@@ -1,6 +1,7 @@
 ---
 layout: step
-title: 2. Liquid
+title: Liquid
+position: 2
 ---
 Liquid is where Jekyll starts to get more interesting. Liquid is a templating
 language which has three main parts: [objects](#objects), [tags](#tags) and
@@ -50,20 +51,20 @@ and are separated by a `|`. For example:
 ```  
 {% endraw %}
 
-Outputs 'HI'. You can learn more about the filters available to Jekyll
+Outputs `HI`. You can learn more about the filters available to Jekyll
 [here](/docs/liquid/filters/).
 
 ## Use Liquid
 
-Now it's your turn, change the Hello World! on your page to output as uppercase:
+Now it's your turn, change the Hello World! on your page to output as lowercase:
 
 {% raw %}
 ```liquid
 ...
-<h1>{{ "Hello World!" | capitalize }}</h1>
+<h1>{{ "Hello World!" | downcase }}</h1>
 ...
 ```  
 {% endraw %}
 
-It may not seem like it now, but much of Jekyll's power comes from using Liquid
-with other features. Let's keep going.
+It may not seem like it now, but much of Jekyll's power comes from combining
+Liquid with other features. Let's keep going.

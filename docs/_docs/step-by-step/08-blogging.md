@@ -1,6 +1,7 @@
 ---
 layout: step
-title: 8. Blogging
+title: Blogging
+position: 8
 ---
 You might be wondering how you can have a blog without a database. In true
 Jekyll style, blogging is powered by text files and is easy to set up.
@@ -8,7 +9,7 @@ Jekyll style, blogging is powered by text files and is easy to set up.
 ## Posts
 
 Blog posts live in a folder called `_posts`. The filename for posts have a
-special format: the publish date followed by the title and finally an extension.
+special format: the publish date, then a title, followed by an extension.
 
 Create your first post at `_posts/2018-08-20-bananas.md` with the
 following content:
@@ -28,7 +29,7 @@ starch covered with a rind, which may be green, yellow, red, purple, or brown
 when ripe.
 ```
 
-This is similar to the `about.md` you created before except it has an author and
+This is like the `about.md` you created before except it has an author and
 a different layout. `author` is a custom variable, it's not required and could
 have just as easily be named something like `creator`.
 
@@ -37,6 +38,7 @@ have just as easily be named something like `creator`.
 The `post` layout doesn't exist so you'll need to create it at
 `_layouts/post.html` with the following content:
 
+{% raw %}
 ```html
 ---
 layout: default
@@ -46,23 +48,27 @@ layout: default
 
 {{ content }}
 ```
+{% endraw %}
 
-This is an example of layout inheritance. Posts have their title, date, author
-and content body output which is wrapped by the default layout. Also note the
-`date_to_string` filter, this formats a date into a nicer format.
+This is an example of layout inheritance. The post layout outputs the title,
+date, author and content body which is wrapped by the default layout.
+
+Also note the `date_to_string` filter, this formats a date into a nicer format.
 
 ## List posts
 
-There's a blog post on the site but there's currently no way to navigate to it.
-Typically a blog has a page which lists all the posts, let's do that next.
+There's currently no way to navigate to the blog post. Typically a blog has a
+page which lists all the posts, let's do that next.
 
-Jekyll makes posts available to you at `site.posts`. Create `blog.html` with
-the following content:
+Jekyll makes posts available at `site.posts`.
+
+Create `blog.html` with the following content:
 
 {% raw %}
 ```html
 ---
 layout: default
+title: Blog
 ---
 <h1>Latest Posts</h1>
 
@@ -79,7 +85,7 @@ layout: default
 
 There's a few things to note with this code:
 
-* `post.url` is automatically set by Jekyll to the path of the post
+* `post.url` is automatically set by Jekyll to the output path of the post
 * `post.title` is pulled from the post filename and can be overridden by
 setting `title` in front matter
 * `post.excerpt` is the first paragraph of content by default
@@ -98,7 +104,7 @@ You also need a way to navigate to this page through the main navigation. Open
 
 ## More posts
 
-A blog isn't very exciting with a single post. Let's add a couple more:
+A blog isn't very exciting with a single post. Add a few more:
 
 `_posts/2018-08-21-apples.md`:
 
@@ -133,5 +139,7 @@ golden flesh with rows of tiny, black, edible seeds. The fruit has a soft
 texture, with a sweet and unique flavor.
 ```
 
-Open `http://localhost:4000/` and have a look through your blog posts. Next
-we'll focus on creating a page for each post author.
+Open [http://localhost:4000](http://localhost:4000){:target="_blank"} and have
+a look through your blog posts.
+
+Next we'll focus on creating a page for each post author.

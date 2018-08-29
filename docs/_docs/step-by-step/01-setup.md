@@ -1,7 +1,8 @@
 ---
 layout: step
-title: 1. Setup
-menu_name: Step by Step tutorial
+title: Setup
+menu_name: Step by Step Tutorial
+position: 1
 ---
 Welcome to Jekyll's step-by-step tutorial. The goal of this tutorial is to take
 you from having some front end web development experience to building your
@@ -60,8 +61,8 @@ called `_site`.
 * `jekyll serve` - Does the same thing except it rebuilds any time you make
 a change and runs a local web server at `http://localhost:4000`.
 
-Typically, when you're developing a site you'll use `jekyll serve` as it
-automatically updates with any changes you make.
+When you're developing a site you'll use `jekyll serve` as it updates with any
+changes you make.
 
 Run `jekyll serve` and go to
 [http://localhost:4000](http://localhost:4000){:target="_blank"} in your

@@ -1176,3 +1176,20 @@ code.output {
     }
   }
 }
+
+.step-nav {
+  background: #2b2b2b;
+  border-radius: 5px;
+  color: #fc0;
+  padding: 8px 45px;
+
+  li {
+    margin: 0;
+    padding: 0;
+
+    &.current, &.current a {
+      color: #f90;
+      font-weight: bold;
+    }
+  }
+}

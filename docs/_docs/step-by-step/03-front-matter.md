@@ -1,6 +1,7 @@
 ---
 layout: step
-title: 3. Front Matter
+title: Front Matter
+position: 3
 ---
 Front matter is a snippet of [YAML](http://yaml.org/) which sits between two
 triple-dashed lines at the top of a file. Front matter is used to set variables
@@ -23,7 +24,7 @@ example to output the variable above you would use:
 
 ## Use front matter
 
-Let's change the `<title>` on your site to be populated using front matter:
+Let's change the `<title>` on your site to populate using front matter:
 
 {% raw %}
 ```html
@@ -37,12 +38,12 @@ title: Home
     <title>{{ page.title }}</title>
   </head>
   <body>
-    <h1>Hello World!</h1>
+    <h1>{{ "Hello World!" | downcase }}</h1>
   </body>
 </html>
 ```
 {% endraw %}
 
-It might still seems pointless as to why you'd output it this way as it takes
-more source code than raw HTML. In this next tutorial, you'll see why we've
-been doing this. All shall be revealed.
+You may still be wondering why you'd output it this way as it takes
+more source code than raw HTML. In this next step, you'll see why we've
+been doing this.

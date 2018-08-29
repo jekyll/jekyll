@@ -1,20 +1,20 @@
 ---
 layout: step
-title: 5. Includes
+title: Includes
+position: 5
 ---
-The site is coming along nicely however, there's no way to navigate between
+The site is coming together however, there's no way to navigate between
 pages. Let's fix that.
 
-The navigation should be on each page so adding it to your layout is the right
+Navigation should be on every page so adding it to your layout is the correct
 place to do this. Instead of adding it directly to the layout, let's use this
 as an opportunity to learn about includes.
 
 ## Include tag
 
 The `include` tag allows you to include content from another file stored
-an `_includes` folder. Includes are useful for having a single source for
-snippets of source code that repeat around the site or for improving the
-readability of the site.
+in an `_includes` folder. Includes are useful for having a single source for
+source code that repeats around the site or for improving the readability.
 
 Navigation source code can get complex so sometimes it's nice to move it into an
 include.  
@@ -31,7 +31,7 @@ following content:
 </nav>
 ```
 
-You can use the include tag to insert the navigation into the layout:
+Try using the include tag to add the navigation to `_layouts/default.html`:
 
 {% raw %}
 ```liquid
@@ -49,8 +49,8 @@ You can use the include tag to insert the navigation into the layout:
 ```
 {% endraw %}
 
-Open `http://localhost:4000/` in your browser and try switching between the
-pages.
+Open [http://localhost:4000](http://localhost:4000){:target="_blank"}
+in your browser and try switching between the pages.
 
 ## Current page highlighting
 
@@ -63,15 +63,21 @@ one of which is `page.url`.
 Using `page.url` you can check if each link is the current page and color it red
 if true:
 
+{% raw %}
 ```liquid
 <nav>
-  <a href="/" {% if page.url == "/" %}style="color: red;"{% endif %}>Home</a>
-  <a href="/about.html" {% if page.url == "/about.html" %}style="color: red;"{% endif %}>About</a>
+  <a href="/" {% if page.url == "/" %}style="color: red;"{% endif %}>
+    Home
+  </a>
+  <a href="/about.html" {% if page.url == "/about.html" %}style="color: red;"{% endif %}>
+    About
+  </a>
 </nav>
 ```
+{% endraw %}
 
-Take a look at `http://localhost:4000/` and see your red link for the current
-page.
+Take a look at [http://localhost:4000](http://localhost:4000){:target="_blank"}
+and see your red link for the current page.
 
 There's still a lot of repetition here if you wanted to add a new item to the
-navigation or change the highlight color. Let's look at fixed that.
+navigation or change the highlight color. In the next step we'll address this.
