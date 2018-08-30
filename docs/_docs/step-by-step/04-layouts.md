@@ -6,7 +6,9 @@ position: 4
 Websites typically have more than one page and this website is no different.
 
 Jekyll supports [Markdown](https://daringfireball.net/projects/markdown/syntax)
-as well as HTML for pages, let's use Markdown for the new page.
+as well as HTML for pages. Markdown is a great choice for pages with a simple
+content structure (just paragraphs, headings and images), as it's less verbose
+than raw HTML. Let's try it out on the next page.
 
 Create `about.md` in the root.
 
