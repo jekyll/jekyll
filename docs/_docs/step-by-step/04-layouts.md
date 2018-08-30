@@ -1,6 +1,6 @@
 ---
 layout: step
-title: Layout
+title: Layouts
 position: 4
 ---
 Websites typically have more than one page and this website is no different.
