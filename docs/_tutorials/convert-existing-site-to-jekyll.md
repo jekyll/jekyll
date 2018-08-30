@@ -83,7 +83,7 @@ When you serve the site, you get a preview URL such as `http://127.0.0.1:4000/` 
 This is a Jekyll site at the most basic functional level. Here's what is happening:
 
   * The `_config.yml` file contains settings that Jekyll uses as it processes your site. An empty config file will use default values for building a Jekyll site. For example, to convert [Markdown](https://learnxinyminutes.com/docs/markdown/) to HTML, Jekyll will automatically use the [kramdown Markdown filter](https://rubygems.org/gems/kramdown/), without any need to specify it.
-  * Jekyll looks for files with [front matter tags]({% link _docs/frontmatter.md %}) (the two sets of dashed lines `---` like those in `index.md`) and processes the files (populating site variables, rendering any [Liquid](https://shopify.github.io/liquid/), and converting Markdown to HTML).
+  * Jekyll looks for files with [front matter tags]({% link _docs/front-matter.md %}) (the two sets of dashed lines `---` like those in `index.md`) and processes the files (populating site variables, rendering any [Liquid](https://shopify.github.io/liquid/), and converting Markdown to HTML).
   * Jekyll pushes the content from all pages and posts into the `{% raw %}{{ content }}{% endraw %}` variable in the layout specified (`default`) in the front matter tags.
   * The processed files get written as `.html` files in the `_site` directory.
 

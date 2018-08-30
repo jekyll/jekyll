@@ -9,7 +9,7 @@ include it by implementing your own converter. Both the Markdown and
 languages are implemented using this method.
 
 <div class="note info">
-  <h5>Remember your YAML Front Matter</h5>
+  <h5>Remember your Front Matter</h5>
   <p>
     Jekyll will only convert files that have a YAML header at the top, even for
     converters you add using a plugin.
@@ -77,7 +77,7 @@ Converters should implement at a minimum 3 methods:
       </td>
       <td><p>
         Logic to do the content conversion. Takes one argument: the raw content
-        of the file (without YAML Front Matter). Must return a String.
+        of the file (without front matter). Must return a String.
       </p></td>
     </tr>
   </tbody>

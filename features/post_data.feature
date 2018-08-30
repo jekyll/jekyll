@@ -44,7 +44,7 @@ Feature: Post data
     And I have a "_posts/2016-01-01-test.md" page with date "tuesday" that contains "I have a bad date."
     When I run jekyll build
     Then the _site directory should not exist
-    And I should see "Document '_posts/2016-01-01-test.md' does not have a valid date in the YAML front matter." in the build output
+    And I should see "Document '_posts/2016-01-01-test.md' does not have a valid date in front matter." in the build output
 
   Scenario: Invalid date in filename
     Given I have a _posts directory

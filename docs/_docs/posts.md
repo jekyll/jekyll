@@ -30,7 +30,7 @@ file. For example, the following are examples of valid post filenames:
 2012-09-12-how-to-write-a-blog.md
 ```
 
-All blog post files must begin with [front matter](/docs/frontmatter/) which is
+All blog post files must begin with [front matter](/docs/front-matter/) which is
 typically used to set a [layout](/docs/layouts/) or other meta data. For a simple
 example this can just be empty:
 

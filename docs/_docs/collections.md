@@ -42,8 +42,8 @@ collections:
 ## Add content
 
 Create a corresponding folder (e.g. `<source>/_staff_members`) and add
-documents. YAML front matter is processed if the front matter exists, and everything
-after the front matter is pushed into the document's `content` attribute. If no YAML front
+documents. Front matter is processed if the front matter exists, and everything
+after the front matter is pushed into the document's `content` attribute. If no front
 matter is provided, Jekyll will not generate the file in your collection.
 
 For example here's how you would add an staff member to the collection set above.
@@ -239,9 +239,9 @@ file, each document has the following attributes:
       </td>
       <td>
         <p>
-          The (unrendered) content of the document. If no YAML Front Matter is
+          The (unrendered) content of the document. If no front matter is
           provided, Jekyll will not generate the file in your collection. If
-          YAML Front Matter is used, then this is all the contents of the file
+          front matter is used, then this is all the contents of the file
           after the terminating
           `---` of the front matter.
         </p>

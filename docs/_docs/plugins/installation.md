@@ -42,8 +42,8 @@ You have 3 options for installing plugins:
   <p>
     <a href="https://pages.github.com/">GitHub Pages</a> is powered by Jekyll.
     However, all Pages sites are generated using the <code>--safe</code> option
-    to disable plugins (with the exception of some 
-    <a href="https://pages.github.com/versions ">whitelisted plugins</a>) for
+    to disable plugins (with the exception of some
+    <a href="https://pages.github.com/versions">whitelisted plugins</a>) for
     security reasons. Unfortunately, this means
     your plugins won’t work if you’re deploying to GitHub Pages.<br><br>
     You can still use GitHub Pages to publish your site, but you’ll need to

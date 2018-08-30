@@ -12,7 +12,7 @@ method, which receives an instance of
 return value of `generate` is ignored.
 
 Generators run after Jekyll has made an inventory of the existing content, and
-before the site is generated. Pages with YAML Front Matters are stored as
+before the site is generated. Pages with front matter are stored as
 instances of
 [`Jekyll::Page`]({{ site.repository }}/blob/master/lib/jekyll/page.rb)
 and are available via `site.pages`. Static files become instances of

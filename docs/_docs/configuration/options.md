@@ -128,7 +128,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
       <td>
         <p class='name'><strong>Defaults</strong></p>
         <p class='description'>
-            Set defaults for <a href="/docs/frontmatter/" title="YAML Front Matter">YAML Front Matter</a>
+            Set defaults for <a href="/docs/front-matter/" title="front matter">front matter</a>
             variables.
         </p>
       </td>

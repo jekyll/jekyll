@@ -26,7 +26,7 @@ A basic Jekyll site usually looks something like this:
 |   └── _layout.scss
 ├── _site
 ├── .jekyll-metadata
-└── index.html # can also be an 'index.md' with valid YAML Frontmatter
+└── index.html # can also be an 'index.md' with valid front matter
 ```
 
 <div class="note info">
@@ -97,7 +97,7 @@ An overview of what each of these does:
         <p>
           These are the templates that wrap posts. Layouts are chosen on a
           post-by-post basis in the
-          <a href="/docs/frontmatter/">YAML Front Matter</a>,
+          <a href="/docs/front-matter/">front matter</a>,
           which is described in the next section. The liquid tag
           <code>{% raw %}{{ content }}{% endraw %}</code>
           is used to inject content into the web page.
@@ -180,8 +180,8 @@ An overview of what each of these does:
       </td>
       <td>
         <p>
-          Provided that the file has a <a href="/docs/frontmatter/">YAML Front
-          Matter</a> section, it will be transformed by Jekyll. The same will
+          Provided that the file has a <a href="/docs/front-matter/">front
+          matter</a> section, it will be transformed by Jekyll. The same will
           happen for any <code>.html</code>, <code>.markdown</code>,
           <code>.md</code>, or <code>.textile</code> file in your site’s root
           directory or directories not listed above.

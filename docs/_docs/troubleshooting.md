@@ -257,7 +257,7 @@ specified elsewhere.
     ------------------------------------
     Invalid date '<%= Time.now.strftime('%Y-%m-%d %H:%M:%S %z') %>':
     Document 'vendor/bundle/gems/jekyll-3.4.3/lib/site_template/_posts/0000-00-00-welcome-to-jekyll.markdown.erb'
-    does not have a valid date in the YAML front matter.
+    does not have a valid date in front matter.
 ```
 
 Simply adding `vendor/bundle` to the `exclude:` list will solve this problem but will lead to having other sub-directories under `/vendor/` (and also `/node_modules/`, if present) be processed to the destination folder `_site`.

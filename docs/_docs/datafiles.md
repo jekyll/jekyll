@@ -130,7 +130,7 @@ dave:
     twitter: DavidSilvaSmith
 ```
 
-The author can then be specified as a page variable in a post's frontmatter:
+The author can then be specified as a page variable in a post's front matter:
 
 {% raw %}
 ```liquid

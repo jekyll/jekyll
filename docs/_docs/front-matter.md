@@ -1,6 +1,7 @@
 ---
 title: Front Matter
-permalink: /docs/frontmatter/
+permalink: /docs/front-matter/
+redirect_from: /docs/frontmatter/index.html
 ---
 
 Any file that contains a [YAML](http://yaml.org/) front matter block will be
@@ -72,11 +73,11 @@ front matter of a page or post.
             Using <code>null</code> will produce a file without using a layout
             file. However this is overridden if the file is a post/document and has a
             layout defined in the <a href="/docs/configuration/front-matter-defaults/">
-            frontmatter defaults</a>.
+            front matter defaults</a>.
           </li>
           <li>
             Starting from version 3.5.0, using <code>none</code> in a post/document will
-            produce a file without using a layout file regardless of frontmatter defaults.
+            produce a file without using a layout file regardless of front matter defaults.
             Using <code>none</code> in a page, however, will cause Jekyll to attempt to
             use a layout named "none".
           </li>

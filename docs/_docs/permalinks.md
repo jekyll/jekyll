@@ -62,7 +62,7 @@ Here's the full list of placeholders available:
       <td>
         <p>
           Year from the post's filename. May be overridden via the document’s
-          <code>date</code> YAML front matter
+          <code>date</code> front matter
         </p>
       </td>
     </tr>
@@ -73,7 +73,7 @@ Here's the full list of placeholders available:
       <td>
         <p>
           Month from the post's filename. May be overridden via the document’s
-          <code>date</code> YAML front matter
+          <code>date</code> front matter
         </p>
       </td>
     </tr>
@@ -84,7 +84,7 @@ Here's the full list of placeholders available:
       <td>
         <p>
           Month without leading zeros from the post's filename. May be
-          overridden via the document’s <code>date</code> YAML front matter
+          overridden via the document’s <code>date</code> front matter
         </p>
       </td>
     </tr>
@@ -95,7 +95,7 @@ Here's the full list of placeholders available:
       <td>
         <p>
           Day from the post's filename. May be overridden via the document’s
-          <code>date</code> YAML front matter
+          <code>date</code> front matter
         </p>
       </td>
     </tr>
@@ -106,7 +106,7 @@ Here's the full list of placeholders available:
       <td>
         <p>
           Day without leading zeros from the post's filename. May be overridden
-          via the document’s <code>date</code> YAML front matter
+          via the document’s <code>date</code> front matter
         </p>
       </td>
     </tr>
@@ -125,7 +125,7 @@ Here's the full list of placeholders available:
       <td>
         <p>
           Year without the century from the post's filename. May be overridden
-          via the document’s <code>date</code> YAML front matter
+          via the document’s <code>date</code> front matter
         </p>
       </td>
     </tr>
@@ -167,7 +167,7 @@ Here's the full list of placeholders available:
       <td>
         <p>
             Title from the document’s filename. May be overridden via
-            the document’s <code>slug</code> YAML front matter.
+            the document’s <code>slug</code> front matter.
         </p>
       </td>
     </tr>
@@ -179,7 +179,7 @@ Here's the full list of placeholders available:
         <p>
             Slugified title from the document’s filename (any character
             except numbers and letters is replaced as hyphen). May be
-            overridden via the document’s <code>slug</code> YAML front matter.
+            overridden via the document’s <code>slug</code> front matter.
         </p>
       </td>
     </tr>
@@ -252,8 +252,8 @@ For posts, Jekyll also provides the following built-in styles for convenience:
 Rather than typing `permalink: /:categories/:year/:month/:day/:title/`, you can just type `permalink: pretty`.
 
 <div class="note info">
-<h5>Specifying permalinks through the YAML Front Matter</h5>
-<p>Built-in permalink styles are not recognized in YAML Front Matter. As a result, <code>permalink: pretty</code> will not work.</p>
+<h5>Specifying permalinks through the front matter</h5>
+<p>Built-in permalink styles are not recognized in front matter. As a result, <code>permalink: pretty</code> will not work.</p>
 </div>
 
 ### Collections
@@ -311,7 +311,7 @@ Collections have the following placeholders available:
       <td>
         <p>
           The <code>:title</code> template variable will take the
-          <code>slug</code> <a href="/docs/frontmatter/">front matter</a>
+          <code>slug</code> <a href="/docs/front-matter/">front matter</a>
           variable value if any is present in the document; if none is
           defined then <code>:title</code> will be equivalent to
           <code>:name</code>, aka the slug generated from the filename.

@@ -37,7 +37,7 @@ braces and percent signs: {% raw %}`{%`{% endraw %} and
 ```  
 {% endraw %}
 
-Output the sidebar if `page.show_sidebar` is true. You can learn more about the
+Outputs the sidebar if `page.show_sidebar` is true. You can learn more about the
 tags available to Jekyll [here](/docs/liquid/tags/).
 
 ## Filters

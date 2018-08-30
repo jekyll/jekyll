@@ -68,6 +68,6 @@ Run `jekyll serve` and go to
 <a href="http://localhost:4000" target="_blank" data-proofer-ignore>http://localhost:4000</a> in
 your browser. You should see "Hello World!".
 
-You might be thinking what's the point in this? Jekyll just copied an HTML file
-from one place to another. Well patience young grasshopper, there's still much
-to learn!
+Well, you might be thinking what's the point in this? Jekyll just copied an
+HTML file from one place to another. Well patience young grasshopper, there's
+still much to learn!

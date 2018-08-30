@@ -13,7 +13,7 @@ milestone with a pretty big release. What's changed in 2.5.0? Here are some
 highlights:
 
 * Require plugins in the `:jekyll_plugins` Gemfile group (turned off with an environment variable)
-* YAML Front Matter permalinks can now contain placeholders like `:name`. Check out all the placeholders on the [Permalinks docs page](/docs/permalinks/).
+* Front matter permalinks can now contain placeholders like `:name`. Check out all the placeholders on the [Permalinks docs page](/docs/permalinks/).
 * The `jsonify` filter now deep-converts arrays to liquid.
 * Shorted `build` and `serve` commands with `b` and `s` aliases, respectively
 * WEBrick will now list your directory if it can't find an index file.

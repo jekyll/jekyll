@@ -459,7 +459,7 @@ The `Deployment` page is excluded because its `version` is `2`.
 
 ## Scenario 8: Retrieving items based on front matter properties
 
-If you don't want to store your navigation items in a YAML file in your `_data` folder, you can use `for` loops to look through the YAML front matter of each page or collection and get the content based on properties in the front matter.
+If you don't want to store your navigation items in a YAML file in your `_data` folder, you can use `for` loops to look through the front matter of each page or collection and get the content based on properties in the front matter.
 
 In this scenario, suppose we have a collection called `_docs`. Collections are often better than pages because they allow you to narrow the list of what you're looping through. (Try to avoid scenarios where you loop through large numbers of items, since it will increase your build time. [Collections]({% link _docs/collections.md %}) help you narrow the scope.)
 
