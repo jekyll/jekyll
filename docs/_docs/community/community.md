@@ -33,6 +33,6 @@ There are a bunch of helpful community members on these services that should be 
 
 [Watch videos](/jekyllconf/) from members of the Jekyll community speak about interesting use cases, tricks they’ve learned or meta Jekyll topics.
 
-## Jekyllrb on Twitter
+## Jekyll on Twitter
 
 The [official Jekyll Twitter account](https://twitter.com/jekyllrb).
