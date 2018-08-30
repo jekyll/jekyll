@@ -4,7 +4,7 @@ permalink: "/docs/liquid/tags/"
 ---
 All of the standard Liquid
 [tags](https://shopify.github.io/liquid/tags/control-flow/) are supported.
-Jekyll has a few built in tags to help you built your site. You can also create
+Jekyll has a few built in tags to help you build your site. You can also create
 your own tags using [plugins](/docs/plugins/).
 
 ## Includes
