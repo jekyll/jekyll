@@ -20,7 +20,7 @@ If you're looking for support for Jekyll, there are a lot of options:
 
 There are a bunch of helpful community members on these services that should be willing to point you in the right direction.
 
-**Jekyll's issue tracker is not a support forum.**
+**Reminder: Jekyll's issue tracker is not a support forum.**
 
 ## Ways to contribute
 
