@@ -3,7 +3,7 @@ title: Layouts
 description: placeholder
 permalink: /docs/layouts/
 ---
-Layouts are templates that wrap around your content. It allows you to have the
+Layouts are templates that wrap around your content. They allow you to have the
 source code for your template in one place so you don't have to repeat things
 like your navigation and footer on every page.
 
@@ -15,7 +15,7 @@ from this as needed.
 
 The first step is to put the template source code in `default.html`. `content`
 is a special variable, the value is the rendered content of the post or page
-being wrapped. You have full access to liquid and the front matter of
+being wrapped. You have full access to Liquid and the front matter of
 the post or page which allows you to add a .
 
 {% raw %}
@@ -112,7 +112,7 @@ Now posts can use this layout while the rest of the pages use the default.
 ## Variables
 
 You can set front matter in layouts, the only difference is when you're
-using in liquid, you need to use the `layout` variable instead of `page`. For
+using in Liquid, you need to use the `layout` variable instead of `page`. For
 example:
 
 {% raw %}
