@@ -15,8 +15,9 @@ from this as needed.
 
 The first step is to put the template source code in `default.html`. `content`
 is a special variable, the value is the rendered content of the post or page
-being wrapped. You have full access to Liquid and the front matter of
-the post or page which allows you to add a .
+being wrapped.
+
+
 
 {% raw %}
 ```
@@ -43,6 +44,9 @@ the post or page which allows you to add a .
 </html>
 ```
 {% endraw %}
+
+You have full access to the front matter of the origin. In the
+example above, `page.title` comes from the page front matter.
 
 Next you need to specify what layout you're using in your page's front matter.
 You can also use
