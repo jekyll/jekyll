@@ -14,7 +14,7 @@ webrick:
 
 ### Defaults
 
-We provide by default `Content-Type` and `Cache-Control` response headers: one
-dynamic in order to specify the nature of the data being served, the other
-static in order to disable caching so that you don't have to fight with Chrome's
-aggressive caching when you are in development mode.
+Jekyll provides by default `Content-Type` and `Cache-Control` response
+headers: one dynamic in order to specify the nature of the data being served,
+the other static in order to disable caching so that you don't have to fight
+with Chrome's aggressive caching when you are in development mode.
