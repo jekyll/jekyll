@@ -19,13 +19,6 @@ thanks to [Rouge](http://rouge.jneen.net). Rouge is the default highlighter
 in Jekyll 3 and above. To use it in Jekyll 2, set `highlighter` to `rouge`
 and ensure the `rouge` gem is installed properly.
 
-<div class="note warning">
-  <h5>Jekyll 4 Pygments support</h5>
-  <p>
-    Pygments is not supported in Jekyll 4.
-  </p>
-</div>
-
 Alternatively, you can use [Pygments](http://pygments.org) to highlight
 your code snippets. To use Pygments, you must have Python installed on your
 system, have the `pygments.rb` gem installed and set `highlighter` to
