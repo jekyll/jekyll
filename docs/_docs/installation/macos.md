@@ -11,7 +11,7 @@ xcode-select --install
 
 ## Set up Ruby included with the OS
 
-Check your Ruby version meet our requirements. Jekyll requires Ruby 2.2.5 or above. If you're running an older version you'll need to [install a more recent Ruby version via Homebrew](#homebrew).
+Check your Ruby version meets our requirements. Jekyll requires Ruby 2.2.5 or above. If you're running an older version you'll need to [install a more recent Ruby version via Homebrew](#homebrew).
 
 ```sh
 ruby -v
