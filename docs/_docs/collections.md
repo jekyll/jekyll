@@ -9,19 +9,19 @@ talks at a conference.
 ## Setup
 
 To use a Collection you first need to define it in your `_config.yml`. For
-example here's a collection of albums:
+example here's a collection of staff members:
 
 ```yaml
 collections:
-  - albums
+  - staff_members
 ```
 
 You can optionally specify metadata for your collection in the configuration:
 
 ```yaml
 collections:
-  albums:
-    music: true
+  staff_members:
+    people: true
 ```
 
 <div class="note">
@@ -41,20 +41,20 @@ collections:
 
 ## Add content
 
-Create a corresponding folder (e.g. `<source>/_albums`) and add
+Create a corresponding folder (e.g. `<source>/_staff_members`) and add
 documents. YAML front matter is processed if the front matter exists, and everything
 after the front matter is pushed into the document's `content` attribute. If no YAML front
 matter is provided, Jekyll will not generate the file in your collection.
 
-For example here's how you would add an album to the collection set above.
-The filename is `./_albums/revolver.md` with the following content:
+For example here's how you would add an staff member to the collection set above.
+The filename is `./_staff_members/jane.md` with the following content:
 
 ```markdown
 ---
-artist: Beatles
-title: Revolver
+name: Jane Doe
+position: Developer
 ---
-Revolver is the seventh studio album by the English rock band the Beatles.
+Jane has worked on Jekyll for the past *five years*.
 ```
 
 <div class="note info">
@@ -67,15 +67,15 @@ your <code>_config.yml</code> file, with the addition of the preceding <code>_</
 
 ## Output
 
-Now you can iterate over `site.albums` on a page and output the content for
-each album. Similar to posts the body of the document is accessed using the
-`content` variable:
+Now you can iterate over `site.staff_members` on a page and output the content
+for each staff member. Similar to posts, the body of the document is accessed
+using the `content` variable:
 
 {% raw %}
 ```liquid
-{% for album in site.albums %}
-  <h2>{{ album.artist }} - {{ album.title }}</h2>
-  <p>{{ album.content | markdownify }}</p>
+{% for staff_member in site.staff_members %}
+  <h2>{{ staff_member.name }} - {{ staff_member.position }}</h2>
+  <p>{{ staff_member.content | markdownify }}</p>
 {% endfor %}
 ```
 {% endraw %}
@@ -87,7 +87,7 @@ metadata in `_config.yml`:
 
 ```yaml
 collections:
-  albums:
+  staff_members:
     output: true
 ```
 
