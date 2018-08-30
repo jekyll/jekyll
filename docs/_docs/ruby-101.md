@@ -3,7 +3,8 @@ title: Ruby 101
 permalink: /docs/ruby-101/
 ---
 
-Jekyll is written in Ruby so you need to understand some of the jargon to reach its full potential.
+Jekyll is written in Ruby. If you're new to Ruby, this page is to help you get
+up to speed with some of the terminology.
 
 ## Gems
 
