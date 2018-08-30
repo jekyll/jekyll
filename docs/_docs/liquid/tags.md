@@ -9,8 +9,8 @@ your own tags using [plugins](/docs/plugins/).
 
 ## Includes
 
-If you have page snippets that you use repeatedly across your site an
-[include](/docs/includes/) is the perfect way make this more maintainable.
+If you have page snippets that you use repeatedly across your site, an
+[include](/docs/includes/) is the perfect way to make this more maintainable.
 
 ## Code snippet highlighting
 
@@ -18,6 +18,13 @@ Jekyll has built in support for syntax highlighting of over 60 languages
 thanks to [Rouge](http://rouge.jneen.net). Rouge is the default highlighter
 in Jekyll 3 and above. To use it in Jekyll 2, set `highlighter` to `rouge`
 and ensure the `rouge` gem is installed properly.
+
+<div class="note warning">
+  <h5>Jekyll 4 Pygments support</h5>
+  <p>
+    Pygments is not supported in Jekyll 4.
+  </p>
+</div>
 
 Alternatively, you can use [Pygments](http://pygments.org) to highlight
 your code snippets. To use Pygments, you must have Python installed on your
