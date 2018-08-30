@@ -12,19 +12,19 @@ to look, what data gets displayed in the layout, and more.
 
 1. Install a full [Ruby development environment](/docs/installation/)
 2. Install Jekyll and [bundler](/docs/ruby-101/#bundler) [gems](/docs/ruby-101/#gems)
-```sh
+```
 gem install jekyll bundler
 ```
 3. Create a new Jekyll site at `./myblog`
-```sh
+```
 jekyll new myblog
 ```
 4. Change into your new directory
-```sh
+```
 cd myblog
 ```
 5. Build the site and make it available on a local server
-```sh
+```
 bundle exec jekyll serve
 ```
 6. Now browse to [http://localhost:4000](http://localhost:4000){:target="_blank"}
