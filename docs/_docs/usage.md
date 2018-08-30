@@ -8,8 +8,8 @@ The Jekyll gem makes a `jekyll` executable available to you in your terminal.
 You can use this command in a number of ways:
 
 * `jekyll new` - Creates a new Jekyll site scaffold
-* `jekyll build` - Performs a one off build your site to `./_site` (by default)
-* `jekyll serve` - Builds your site any time a source file changes and serves it locally
+* `jekyll build` or `jekyll b` - Performs a one off build your site to `./_site` (by default)
+* `jekyll serve` or `jekyll s` - Builds your site any time a source file changes and serves it locally
 * `jekyll doctor` - Outputs any deprecation or configuration issues
 * `jekyll new-theme` - Creates a new Jekyll theme scaffold
 * `jekyll clean` - Removes the generated site and metadata file
