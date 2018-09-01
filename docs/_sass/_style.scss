@@ -1155,3 +1155,45 @@ code.output {
     background: #1c1c1c;
   }
 }
+
+.showcase {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  li {
+    flex: 1 1 300px;
+    box-sizing: border-box;
+    margin: 10px;
+    text-align: center;
+
+    &.spacer {
+      height: 0;
+      margin: 0;
+    }
+  }
+}
+
+.step-nav {
+  background: #2b2b2b;
+  border-radius: 5px;
+  color: #fc0;
+  padding: 8px 45px;
+
+  li {
+    margin: 0;
+    padding: 0;
+
+    &.current, &.current a {
+      color: #f90;
+      font-weight: bold;
+    }
+  }
+}
+
+ol div.highlighter-rouge {
+  margin: 8px 0 10px 0;
+}

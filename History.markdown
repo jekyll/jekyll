@@ -457,7 +457,7 @@
   * add SUPPORT file for GitHub (#6324)
   * Rename CODE_OF_CONDUCT to show in banner (#6325)
   * Docs : illustrate page.id for a collection&#39;s document (#6329)
-  * Docs: post&#39;s date can be overriden in YAML front matter (#6334)
+  * Docs: post&#39;s date can be overriden in front matter (#6334)
   * Docs: `site.url` behavior on development and production environments (#6270)
   * Fix typo in site.url section of variables.md :-[ (#6337)
   * Docs: updates (#6343)
@@ -1123,7 +1123,7 @@
   * Fix typo on Chocolatey name in Windows documentation (#4686)
   * Use the correct URL, Fixes #4698 (#4699)
   * Add jekyll-paspagon plugin (#4700)
-  * Bold-italicize note in assets documentation about needing yaml front matter (#4706)
+  * Bold-italicize note in assets documentation about needing front matter (#4706)
   * Highlight the `script/` calls in the Contributing documentation (#4712)
   * Add Hawkins to the list of third-party plugins (#4755)
   * Fix a typo in pagination doc (#4763)
@@ -1291,7 +1291,7 @@
   * Drop: fix hash setter precedence (#4312)
   * utils: `has_yaml_header?` should accept files with extraneous spaces (#4290)
   * Escape html from site.title and page.title in site template (#4307)
-  * Allow custom file extensions if defined in `permalink` YAML front matter (#4314)
+  * Allow custom file extensions if defined in `permalink` front matter (#4314)
   * Fix deep_merge_hashes! handling of drops and hashes (#4359)
   * Page should respect output extension of its permalink (#4373)
   * Disable auto-regeneration when running server detached (#4376)
@@ -1511,7 +1511,7 @@
   * Fix nav items alignment when on multiple rows (#3264)
   * Highlight: Only Strip Newlines/Carriage Returns, not Spaces (#3278)
   * Find variables in front matter defaults by searching with relative file path. (#2774)
-  * Allow variables (e.g `:categories`) in YAML front matter permalinks (#3320)
+  * Allow variables (e.g `:categories`) in front matter permalinks (#3320)
   * Handle nil URL placeholders in permalinks (#3325)
   * Template: Fix nav items alignment when in "burger" mode (#3329)
   * Template: Remove `!important` from nav SCSS introduced in #3329 (#3375)
@@ -1528,7 +1528,7 @@
   * Add WOFF2 font MIME type to Jekyll server MIME types (#3647)
   * Be smarter about extracting the extname in `StaticFile` (#3632)
   * Process metadata for all dependencies (#3608)
-  * Show error message if the YAML front matter on a page/post is invalid. (#3643)
+  * Show error message if the front matter on a page/post is invalid. (#3643)
   * Upgrade redcarpet to 3.2 (Security fix: OSVDB-120415) (#3652)
   * Create #mock_expects that goes directly to RSpec Mocks. (#3658)
   * Open `.jekyll-metadata` in binary mode to read binary Marshal data (#3713)
@@ -1606,7 +1606,7 @@
   * Add a Resources link to tutorial on building dynamic navbars (#3185)
   * Semantic structure improvements to the post and page layouts (#3251)
   * Add new AsciiDoc plugin to list of third-party plugins. (#3277)
-  * Specify that all transformable collection documents must contain YAML front matter (#3271)
+  * Specify that all transformable collection documents must contain front matter (#3271)
   * Assorted accessibility fixes (#3256)
   * Update configuration docs to mention `keep_files` for `destination` (#3288, #3296)
   * Break when we successfully generate nav link to save CPU cycles. (#3291)
@@ -2143,7 +2143,7 @@
   * Clean up the `<head>` in the site template (#2186)
   * Permit YAML blocks to end with three dots to better conform with the YAML spec (#2110)
   * Use `File.exist?` instead of deprecated `File.exists?` (#2214)
-  * Require newline after start of YAML Front Matter header (#2211)
+  * Require newline after start of front matter header (#2211)
   * Add the ability for pages to be marked as `published: false` (#1492)
   * Add `Jekyll::LiquidExtensions` with `.lookup_variable` method for easy looking up of variable values in a Liquid context. (#2253)
   * Remove literal lang name from class (#2292)
@@ -2821,7 +2821,7 @@
   * Bullet-proof `limit_posts` option (#1004)
   * Read in YAML as UTF-8 to accept non-ASCII chars (#836)
   * Fix the CLI option `--plugins` to actually accept dirs and files (#993)
-  * Allow 'excerpt' in YAML front matter to override the extracted excerpt (#946)
+  * Allow 'excerpt' in front matter to override the extracted excerpt (#946)
   * Fix cascade problem with site.baseurl, site.port and site.host. (#935)
   * Filter out directories with valid post names (#875)
   * Fix symlinked static files not being correctly built in unsafe mode (#909)
@@ -2833,7 +2833,7 @@
   * Patch for multibyte URI problem with `jekyll serve` (#723)
   * Order plugin execution by priority (#864)
   * Fixed Page#dir and Page#url for edge cases (#536)
-  * Fix broken `post_url` with posts with a time in their YAML front matter (#831)
+  * Fix broken `post_url` with posts with a time in their front matter (#831)
   * Look for plugins under the source directory (#654)
   * Tumblr Migrator: finds `_posts` dir correctly, fixes truncation of long post names (#775)
   * Force Categories to be Strings (#767)
@@ -3024,7 +3024,7 @@
 
   * Bug Fixes
   * Require redcloth >= 4.2.1 in tests (#92)
-  * Don't break on triple dashes in yaml front matter (#93)
+  * Don't break on triple dashes in front matter (#93)
 
 ### Minor Enhancements
 
@@ -3056,7 +3056,7 @@
   * Added --paginate option to the executable along with a paginator object for the payload (@calavera)
   * Upgraded RedCloth to 4.2.1, which makes `<notextile>` tags work once again.
   * Configuration options set in config.yml are now available through the site payload (@vilcans)
-  * Posts can now have an empty YAML front matter or none at all (@ bahuvrihi)
+  * Posts can now have an empty front matter or none at all (@ bahuvrihi)
   * Bug Fixes
   * Fixing Ruby 1.9 issue that requires `#to_s` on the err object (@Chrononaut)
   * Fixes for pagination and ordering posts on the same day (@ujh)
@@ -3064,7 +3064,7 @@
   * Index.html file should always have index.html permalink (@eugenebolshakov)
   * Added trailing slash to pretty permalink style so Apache is happy (@eugenebolshakov)
   * Bad markdown processor in config fails sooner and with better message (@ gcnovus)
-  * Allow CRLFs in yaml front matter (@juretta)
+  * Allow CRLFs in front matter (@juretta)
   * Added Date#xmlschema for Ruby versions < 1.9
 
 ## 0.5.1 / 2009-05-06
@@ -3143,7 +3143,7 @@
   * Added post categories based on directories containing `_posts` (@mreid)
   * Added post topics based on directories underneath `_posts`
   * Added new date filter that shows the full month name (@mreid)
-  * Merge Post's YAML front matter into its to_liquid payload (@remi)
+  * Merge Post's front matter into its to_liquid payload (@remi)
   * Restrict includes to regular files underneath `_includes`
   * Bug Fixes
   * Change YAML delimiter matcher so as to not chew up 2nd level markdown headers (@mreid)

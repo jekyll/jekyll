@@ -3,54 +3,48 @@ title: Permalinks
 permalink: /docs/permalinks/
 ---
 
-Permalinks refer to the URLs (excluding the domain name or directory folder) for your pages, posts, or collections.
-Jekyll supports a flexible way to build permalinks, allowing you to leverage various template variables or choose built-in permalink styles (such as `date`) that automatically use a template-variable pattern.
+Permalinks are the output path for your pages, posts, or collections. They
+allow you to structure the directories of your source code different from the
+directories in your output.
 
-You construct permalinks by creating a template URL where dynamic elements are represented by colon-prefixed keywords. The default template permalink is `/:categories/:year/:month/:day/:title:output_ext`. Each of the colon-prefixed keywords is a template variable.
+## Front Matter
 
-## Where to configure permalinks
+The simplest way to set a permalink is using front matter. You set the
+`permalink` variable in front matter to the output path you'd like.
 
-You can configure your site's permalinks through the [Configuration]({% link _docs/configuration.md %}) file or in the [Front Matter]({% link _docs/frontmatter.md %}) for each post, page, or collection.
+For example, you might have a page on your site located at
+`/my_pages/about-me.html` and you want the output url to be `/about/`. In
+front matter the page you would set:
 
-Setting permalink styles in your configuration file applies the setting globally in your project. You configure permalinks in your `_config.yml` file like this:
+```
+---
+permalink: /about/
+---
+```
+
+## Global
+
+Setting a permalink in front matter for every page on your site is no fun.
+Luckily, Jekyll let's you set in globally in your `_config.yml`.
+
+To set a global permalink, you use the `permalink` variable in `_config.yml`.
+You can use placeholders to your desired output. For example:
 
 ```yaml
 permalink: /:categories/:year/:month/:day/:title:output_ext
 ```
 
-If you don't specify any permalink setting, Jekyll uses the above pattern as the default.
+Note that pages and collections don't have time or categories, these aspects of
+the permalink style are ignored for the output.
 
-The permalink can also be set using a built-in permalink style:
+For example, a permalink style of
+`/:categories/:year/:month/:day/:title:output_ext` for posts becomes
+`/:title.html` for pages and collections.
 
-```yaml
-permalink: date
-```
+### Placeholders
 
-`date` is the same as `:categories/:year/:month/:day/:title:output_ext`, the default. See [Built-in Permalink Styles](#builtinpermalinkstyles) below for more options.
+Here's the full list of placeholders available:
 
-Setting the permalink in your post, page, or collection's front matter overrides any global settings. Here's an example:
-
-```yaml
----
-title: My page title
-permalink: /mypageurl/
----
-```
-
-Even if your configuration file specifies the `date` style, the URL for this page would be `http://somedomain.com/mypageurl/`.
-
-When you use permalinks that omit the `.html` file extension (called "pretty URLs") Jekyll builds the file as index.html placed inside a folder with the page's name. For example:
-
-```
-├── mypageurl
-│   └── index.html
-```
-
-With a URL such as `/mypageurl/`, servers automatically load the index.html file inside the folder, so users can simply navigate to `http://somedomain.com/mypageurl/` to get to `mypageurl/index.html`.
-
-## Template variables for permalinks {#template-variables}
-
-The following table lists the template variables available for permalinks. You can use these variables in the `permalink` property in your config file.
 
 <div class="mobile-side-scroller">
 <table>
@@ -68,7 +62,7 @@ The following table lists the template variables available for permalinks. You c
       <td>
         <p>
           Year from the post's filename. May be overridden via the document’s
-          <code>date</code> YAML front matter
+          <code>date</code> front matter
         </p>
       </td>
     </tr>
@@ -79,7 +73,7 @@ The following table lists the template variables available for permalinks. You c
       <td>
         <p>
           Month from the post's filename. May be overridden via the document’s
-          <code>date</code> YAML front matter
+          <code>date</code> front matter
         </p>
       </td>
     </tr>
@@ -90,7 +84,7 @@ The following table lists the template variables available for permalinks. You c
       <td>
         <p>
           Month without leading zeros from the post's filename. May be
-          overridden via the document’s <code>date</code> YAML front matter
+          overridden via the document’s <code>date</code> front matter
         </p>
       </td>
     </tr>
@@ -101,7 +95,7 @@ The following table lists the template variables available for permalinks. You c
       <td>
         <p>
           Day from the post's filename. May be overridden via the document’s
-          <code>date</code> YAML front matter
+          <code>date</code> front matter
         </p>
       </td>
     </tr>
@@ -112,14 +106,14 @@ The following table lists the template variables available for permalinks. You c
       <td>
         <p>
           Day without leading zeros from the post's filename. May be overridden
-          via the document’s <code>date</code> YAML front matter
+          via the document’s <code>date</code> front matter
         </p>
       </td>
     </tr>
     <tr>
       <td>
         <p><code>y_day</code></p>
-      </td>_
+      </td>
       <td>
         <p>Day of the year from the post's filename, with leading zeros.</p>
       </td>
@@ -131,7 +125,7 @@ The following table lists the template variables available for permalinks. You c
       <td>
         <p>
           Year without the century from the post's filename. May be overridden
-          via the document’s <code>date</code> YAML front matter
+          via the document’s <code>date</code> front matter
         </p>
       </td>
     </tr>
@@ -173,7 +167,7 @@ The following table lists the template variables available for permalinks. You c
       <td>
         <p>
             Title from the document’s filename. May be overridden via
-            the document’s <code>slug</code> YAML front matter.
+            the document’s <code>slug</code> front matter.
         </p>
       </td>
     </tr>
@@ -185,7 +179,7 @@ The following table lists the template variables available for permalinks. You c
         <p>
             Slugified title from the document’s filename (any character
             except numbers and letters is replaced as hyphen). May be
-            overridden via the document’s <code>slug</code> YAML front matter.
+            overridden via the document’s <code>slug</code> front matter.
         </p>
       </td>
     </tr>
@@ -206,11 +200,9 @@ The following table lists the template variables available for permalinks. You c
 </table>
 </div>
 
-Note that all template variables relating to time or categories are available to posts only.
+### Built-in formats
 
-## Built-in permalink styles {#builtinpermalinkstyles}
-
-Although you can specify a custom permalink pattern using [template variables](#template-variables), Jekyll also provides the following built-in styles for convenience.
+For posts, Jekyll also provides the following built-in styles for convenience:
 
 <div class="mobile-side-scroller">
 <table>
@@ -260,135 +252,80 @@ Although you can specify a custom permalink pattern using [template variables](#
 Rather than typing `permalink: /:categories/:year/:month/:day/:title/`, you can just type `permalink: pretty`.
 
 <div class="note info">
-<h5>Specifying permalinks through the YAML Front Matter</h5>
-<p>Built-in permalink styles are not recognized in YAML Front Matter. As a result, <code>permalink: pretty</code> will not work.</p>
+<h5>Specifying permalinks through the front matter</h5>
+<p>Built-in permalink styles are not recognized in front matter. As a result, <code>permalink: pretty</code> will not work.</p>
 </div>
 
-## Permalink style examples with posts {#permalink-style-examples}
+### Collections
 
-Here are a few examples to clarify how permalink styles get applied with posts.
+For collections, you have the option to override the global permalink in the
+collection configuration in `_config.yml`:
 
-Given a post named: `/2009-04-29-slap-chop.md`
+```yaml
+collections:
+  my_collection:
+    output: true
+    permalink: /:collection/:name
+```
+
+Collections have the following placeholders available:
 
 <div class="mobile-side-scroller">
 <table>
   <thead>
     <tr>
-      <th>URL Template</th>
-      <th>Resulting Permalink URL</th>
+      <th>Variable</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <p>None specified, or <code>permalink: date</code></p>
+        <p><code>:collection</code></p>
       </td>
       <td>
-        <p><code>/2009/04/29/slap-chop.html</code></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p><code>pretty</code></p>
-      </td>
-      <td>
-        <p><code>/2009/04/29/slap-chop/</code></p>
+        <p>Label of the containing collection.</p>
       </td>
     </tr>
     <tr>
       <td>
-        <p><code>/:month-:day-:year/:title:output_ext</code></p>
+        <p><code>:path</code></p>
       </td>
       <td>
-        <p><code>/04-29-2009/slap-chop.html</code></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p><code>/blog/:year/:month/:day/:title/</code></p>
-      </td>
-      <td>
-        <p><code>/blog/2009/04/29/slap-chop/</code></p>
+        <p>Path to the document relative to the collection's directory.</p>
       </td>
     </tr>
     <tr>
       <td>
-        <p><code>/:year/:month/:title</code></p>
-        <p>See <a href="#extensionless-permalinks">Extensionless permalinks with no trailing slashes</a> for details.</p>
+        <p><code>:name</code></p>
       </td>
       <td>
-        <p><code>/2009/04/slap-chop</code></p>
+        <p>The document's base filename, with every sequence of spaces
+        and non-alphanumeric characters replaced by a hyphen.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:title</code></p>
+      </td>
+      <td>
+        <p>
+          The <code>:title</code> template variable will take the
+          <code>slug</code> <a href="/docs/front-matter/">front matter</a>
+          variable value if any is present in the document; if none is
+          defined then <code>:title</code> will be equivalent to
+          <code>:name</code>, aka the slug generated from the filename.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:output_ext</code></p>
+      </td>
+      <td>
+        <p>Extension of the output file. (Included by default and usually unnecessary.)</p>
       </td>
     </tr>
   </tbody>
 </table>
 </div>
-
-## Permalink settings for pages and collections {#pages-and-collections}
-
-The permalink setting in your configuration file specifies the permalink style used for posts, pages, and collections. However, because pages and collections don't have time or categories, these aspects of the permalink style are ignored with pages and collections.
-
-For example:
-
-* A permalink style of `/:categories/:year/:month/:day/:title:output_ext` for posts becomes `/:title.html` for pages and collections.
-* A permalink style of `pretty` (or `/:categories/:year/:month/:day/:title/`), which omits the file extension and contains a trailing slash, will update page and collection permalinks to also omit the file extension and contain a trailing slash: `/:title/`.
-* A permalink style of `date`, which contains a trailing file extension, will update page permalinks to also contain a trailing file extension: `/:title.html`. But no time or category information will be included.
-
-## Permalinks and default paths
-
-The path to the post or page in the built site differs for posts, pages, and collections:
-
-### Posts
-
-The subfolders into which you may have organized your posts inside the `_posts` directory will not be part of the permalink.
-
-If you use a permalink style that omits the `.html` file extension, each post is rendered as an `index.html` file inside a folder with the post's name (for example, `categoryname/2016/12/01/mypostname/index.html`).
-
-### Pages
-
-Unlike posts, pages by default mimic the source directory structure exactly. (The only exception is if your page has a `permalink` declared its front matter &mdash; in that case, the structure honors the permalink setting instead of the source folder structure.)
-
-As with posts, if you use a permalink style that omits the `.html` file extension, each page is rendered as an `index.html` file inserted inside a folder with the page's name (for example, `mypage/index.html`).
-
-### Collections
-
-By default, collections follow a similar structure in the `_site` folder as pages, except that the path is prefaced by the collection name. For example: `collectionname/mypage.html`. For permalink settings that omit the file extension, the path would be `collection_name/mypage/index.html`.
-
-Collections have their own way of setting permalinks. Additionally, collections have unique template variables available (such as `path` and `output_ext`). See the [Configuring permalinks for collections](../collections/#permalinks) in Collections for more information.
-
-## Flattening pages in \_site on build
-
-If you want to flatten your pages (pull them out of subfolders) in the `_site` directory when your site builds (similar to posts), add the `permalink` property to the front matter of each page, with no path specified:
-
-```yaml
----
-title: My page
-permalink: mypageurl.html
----
-```
-
-## Extensionless permalinks with no trailing slashes {#extensionless-permalinks}
-
-Jekyll supports permalinks that contain neither a trailing slash nor a file extension, but this requires additional support from the web server to properly serve. When using these types of permalinks, output files written to disk will still have the proper file extension (typically `.html`), so the web server must be able to map requests without file extensions to these files.
-
-Both [GitHub Pages](../github-pages/) and the Jekyll's built-in WEBrick server handle these requests properly without any additional work.
-
-### Apache
-
-The Apache web server has extensive support for content negotiation and can handle extensionless URLs by setting the [multiviews](https://httpd.apache.org/docs/current/content-negotiation.html#multiviews) option in your `httpd.conf` or `.htaccess` file:
-
-{% highlight apache %}
-Options +MultiViews
-{% endhighlight %}
-
-### Nginx
-
-The [try_files](http://nginx.org/en/docs/http/ngx_http_core_module.html#try_files) directive allows you to specify a list of files to search for to process a request. The following configuration will instruct nginx to search for a file with an `.html` extension if an exact match for the requested URI is not found.
-
-{% highlight nginx %}
-try_files $uri $uri.html $uri/ =404;
-{% endhighlight %}
-
-## Linking without regard to permalink styles
-
-You can create links in your topics to other posts, pages, or collection items in a way that is valid no matter what permalink configuration you choose. By using the `link` tag, if you change your permalinks, your links won't break. See [Linking to pages](../templates#link) in Templates for more details.
