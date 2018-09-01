@@ -45,6 +45,7 @@
   * Add missing html end tag for code example in section &#39;For loops&#39; (#7199)
   * Resolve &#34;Unable to locate package ruby2.4&#34; error (#7196)
   * installation instructions for Fedora (#7198)
+  * New docs (#7205)
 
 ### Minor Enhancements
 
