@@ -46,6 +46,7 @@
   * Resolve &#34;Unable to locate package ruby2.4&#34; error (#7196)
   * installation instructions for Fedora (#7198)
   * New docs (#7205)
+  * Correct stylesheet url in tutorial step 7 (#7210)
 
 ### Minor Enhancements
 
