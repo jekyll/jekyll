@@ -25,7 +25,7 @@ some of the most popular Jekyll resources.
 
 ## Useful Guides
 
-- [Offical tutorials](/tutorials/home/)
+- [Official tutorials](/tutorials/home/)
 - [CloudCannon Academy](https://learn.cloudcannon.com/) is a set of resources created by [CloudCannon](https://cloudcannon.com/) to help folks get up and running with Jekyll. They cover all skill levels, and even include some great video tutorials.
 - [Jekyll Cheatsheet](https://learn.cloudcannon.com/jekyll-cheat-sheet/) is a single-page resource for Jekyll filters, variables, and the like.
 - ["Creating and Hosting a Personal Site on GitHub"](http://jmcglone.com/guides/github-pages/)
