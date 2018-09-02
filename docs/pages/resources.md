@@ -12,6 +12,7 @@ some of the most popular Jekyll resources.
 - [jekyllthemes.io](https://jekyllthemes.io/)
 
 ## Plugins
+- [jekyll-plugin topic on GitHub](https://github.com/topics/jekyll-plugin)
 - [Planet Jekyll](https://github.com/planetjekyll/awesome-jekyll-plugins)
 
 ## Editors
