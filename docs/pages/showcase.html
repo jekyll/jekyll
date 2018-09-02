@@ -10,8 +10,12 @@ permalink: /showcase/
   {% for s in site.data.showcase reversed %}
     <li>
       <a href="{{ s.url }}" target="_blank">
-        <img class="b-lazy" src="https://cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/loader.gif" alt="{{ s.name }}">
-        {{ s.name }}
+        <figure>
+          <div class="imageWrapper">
+            <img class="b-lazy" src="/img/spacer.gif" alt="{{ s.name }}">
+          </div>
+          <figcaption>{{ s.name }}</figcaption>
+        </figure>
       </a>
     </li>
   {% endfor %}

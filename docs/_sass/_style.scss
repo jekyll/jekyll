@@ -1092,6 +1092,25 @@ code.output {
   height: 100%;
 }
 
+.imageWrapper {
+  width: 100%;
+  height: 0;
+  padding-bottom: 62.623762376237624%; /* You define this doing height / width * 100% */
+  position: relative;
+  background: #717171;
+  display: block;
+
+  img {
+    width: 100%;
+    position: absolute;
+    opacity: 0;
+  }
+  img.b-loaded {
+    opacity: 1;
+    transition: opacity .5s;
+  }
+}
+
 
 /* Helper class taken from Bootstrap.
    Hides an element to all devices except screen readers.
@@ -1168,8 +1187,12 @@ code.output {
     flex: 1 1 300px;
     box-sizing: border-box;
     margin: 10px;
-    text-align: center;
-
+    figure {
+      margin: 0;
+    }
+    figcaption {
+      text-align: center;
+    }
     &.spacer {
       height: 0;
       margin: 0;
