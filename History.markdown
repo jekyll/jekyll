@@ -94,6 +94,7 @@
   * Lock Travis to Bundler-1.16.2 (#7144)
   * Replace regex arg to :gsub with a string arg (#7189)
   * Interpolate Jekyll::Page subclass on inspection (#7203)
+  * Small benchmark refactoring (#7211)
 
 ### Bug Fixes
 
