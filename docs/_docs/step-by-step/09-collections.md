@@ -186,9 +186,9 @@ defaults:
       layout: "default"
 ```
 
-Now you can remove layout the front matter of all pages and posts. Note that
-any time you update `_config.yml` you'll need to restart Jekyll for the changes
-to take affect.
+Now you can remove layout from the front matter of all pages and posts. Note
+that any time you update `_config.yml` you'll need to restart Jekyll for the
+changes to take affect.
 
 ## List author's posts
 
