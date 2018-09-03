@@ -34,7 +34,7 @@
     - software
     - blog
 - name: AWS Amplify
-  url: https://aws-amplify.github.io/amplify-js/
+  url: https://aws-amplify.github.io/
   categories:
     - open-source
     - marketing-site
