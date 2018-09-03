@@ -47,6 +47,7 @@
   * installation instructions for Fedora (#7198)
   * New docs (#7205)
   * Correct stylesheet url in tutorial step 7 (#7210)
+  * Add some minor improvements to image loading in Showcase page (#7214)
 
 ### Minor Enhancements
 
