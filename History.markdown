@@ -49,6 +49,7 @@
   * Correct stylesheet url in tutorial step 7 (#7210)
   * Add some minor improvements to image loading in Showcase page (#7214)
   * Fix minor grammatical error (#7215)
+  * Add developer.spotify.com to the Jekyll Showcase (#7217)
 
 ### Minor Enhancements
 
