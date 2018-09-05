@@ -13,7 +13,7 @@ You can use this command in a number of ways:
 * `jekyll doctor` - Outputs any deprecation or configuration issues
 * `jekyll new-theme` - Creates a new Jekyll theme scaffold
 * `jekyll clean` - Removes the generated site and metadata file
-* `jekyll help` - Shows a help message or these commands
+* `jekyll help` - Shows help, optionally for a given subcommand, e.g. `jekyll help build`
 
 Typically you'll use `jekyll serve` while developing locally and `jekyll build` when you need to generate the site for production.
 
