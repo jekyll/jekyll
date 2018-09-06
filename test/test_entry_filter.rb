@@ -105,6 +105,17 @@ class TestEntryFilter < JekyllUnitTest
       refute_equal [], site.pages
       refute_equal [], site.static_files
     end
+
+    should "include only safe symlinks in safe mode even when included" do
+      # no support for symlinks on Windows
+      skip_if_windows "Jekyll does not currently support symlinks on Windows."
+
+      site = Site.new(site_configuration("safe" => true, "include" => ["symlinked-file-outside-source"]))
+      site.reader.read_directories("symlink-test")
+
+      assert_equal %w(main.scss symlinked-file).length, site.pages.length
+      refute_includes site.static_files.map(&:name), "symlinked-file-outside-source"
+    end
   end
 
   context "#glob_include?" do

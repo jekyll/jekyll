@@ -31,5 +31,46 @@ class TestLayoutReader < JekyllUnitTest
         assert_equal LayoutReader.new(@site).layout_directory, source_dir("blah/_layouts")
       end
     end
+
+    context "when a layout is a symlink" do
+      setup do
+        FileUtils.ln_sf("/etc/passwd", source_dir("_layouts", "symlink.html"))
+        @site.config = @site.config.merge({
+          "safe"    => true,
+          "include" => ["symlink.html"],
+        })
+      end
+
+      teardown do
+        FileUtils.rm(source_dir("_layouts", "symlink.html"))
+      end
+
+      should "only read the layouts which are in the site" do
+        layouts = LayoutReader.new(@site).read
+
+        refute layouts.keys.include?("symlink"), "Should not read the symlinked layout"
+      end
+    end
+
+    context "with a theme" do
+      setup do
+        FileUtils.ln_sf("/etc/passwd", theme_dir("_layouts", "theme-symlink.html"))
+        @site.config = @site.config.merge({
+          "include" => ["theme-symlink.html"],
+          "theme"   => "test-theme",
+          "safe"    => true,
+        })
+      end
+
+      teardown do
+        FileUtils.rm(theme_dir("_layouts", "theme-symlink.html"))
+      end
+
+      should "not read a symlink'd theme" do
+        layouts = LayoutReader.new(@site).read
+
+        refute layouts.keys.include?("theme-symlink"), "Should not read symlinked layout from theme"
+      end
+    end
   end
 end
