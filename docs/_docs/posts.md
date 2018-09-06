@@ -84,13 +84,13 @@ Including an image asset in a post:
 
 ```markdown
 ... which is shown in the screenshot below:
-![My helpful screenshot]("/assets/screenshot.jpg")
+![My helpful screenshot](/assets/screenshot.jpg)
 ```
 
 Linking to a PDF for readers to download:
 
 ```markdown
-... you can [get the PDF]("/assets/mydoc.pdf") directly.
+... you can [get the PDF](/assets/mydoc.pdf) directly.
 ```
 
 ## Displaying an index of posts
