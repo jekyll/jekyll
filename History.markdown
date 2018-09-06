@@ -50,6 +50,7 @@
   * Add some minor improvements to image loading in Showcase page (#7214)
   * Fix minor grammatical error (#7215)
   * Add developer.spotify.com to the Jekyll Showcase (#7217)
+  * removes quotes from markdown for assets (#7223)
 
 ### Minor Enhancements
 
