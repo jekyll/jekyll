@@ -104,6 +104,7 @@
 ### Bug Fixes
 
   * Add call to unused method `validate_options` in `commands/serve.rb` (#7122)
+  * Security: fix `include` bypass of `EntryFilter#filter` symlink check (#7226)
 
 ### feature
 
