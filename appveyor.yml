@@ -6,7 +6,6 @@ branches:
   only:
     - master
     - themes
-    - 3.7-entryfilter-symlink-fix
 
 build: off
 

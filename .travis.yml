@@ -32,7 +32,6 @@ branches:
     - master
     - themes
     - /*-stable/
-    - 3.7-entryfilter-symlink-fix
 
 notifications:
   slack:
