@@ -1,3 +1,9 @@
+- name: Crowdin Knowledge Base
+  url: https://support.crowdin.com/
+  categories:
+    - documentation
+    - software
+    - knowledgebase
 - name: Tom Preston Werner Blog
   url: http://tom.preston-werner.com/
   categories:
