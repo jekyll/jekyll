@@ -35,7 +35,7 @@ class TestLayoutReader < JekyllUnitTest
     context "when a layout is a symlink" do
       setup do
         FileUtils.ln_sf("/etc/passwd", source_dir("_layouts", "symlink.html"))
-        @site.config = @site.config.merge({
+        @site = fixture_site({
           "safe"    => true,
           "include" => ["symlink.html"],
         })
@@ -46,6 +46,8 @@ class TestLayoutReader < JekyllUnitTest
       end
 
       should "only read the layouts which are in the site" do
+        skip_if_windows "Jekyll does not currently support symlinks on Windows."
+
         layouts = LayoutReader.new(@site).read
 
         refute layouts.key?("symlink"), "Should not read the symlinked layout"
@@ -55,7 +57,7 @@ class TestLayoutReader < JekyllUnitTest
     context "with a theme" do
       setup do
         FileUtils.ln_sf("/etc/passwd", theme_dir("_layouts", "theme-symlink.html"))
-        @site.config = @site.config.merge({
+        @site = fixture_site({
           "include" => ["theme-symlink.html"],
           "theme"   => "test-theme",
           "safe"    => true,
@@ -67,6 +69,8 @@ class TestLayoutReader < JekyllUnitTest
       end
 
       should "not read a symlink'd theme" do
+        skip_if_windows "Jekyll does not currently support symlinks on Windows."
+
         layouts = LayoutReader.new(@site).read
 
         refute layouts.key?("theme-symlink"), \
