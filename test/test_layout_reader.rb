@@ -69,7 +69,8 @@ class TestLayoutReader < JekyllUnitTest
       should "not read a symlink'd theme" do
         layouts = LayoutReader.new(@site).read
 
-        refute layouts.key?("theme-symlink"), "Should not read symlinked layout from theme"
+        refute layouts.key?("theme-symlink"), \
+          "Should not read symlinked layout from theme"
       end
     end
   end

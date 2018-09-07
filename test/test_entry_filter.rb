@@ -111,6 +111,7 @@ class TestEntryFilter < JekyllUnitTest
       site = fixture_site("safe" => true, "include" => ["symlinked-file-outside-source"])
       site.reader.read_directories("symlink-test")
 
+      # rubocop:disable Performance/FixedSize
       assert_equal %w(main.scss symlinked-file).length, site.pages.length
       refute_includes site.static_files.map(&:name), "symlinked-file-outside-source"
     end
