@@ -31,5 +31,51 @@ class TestLayoutReader < JekyllUnitTest
         assert_equal LayoutReader.new(@site).layout_directory, source_dir("blah/_layouts")
       end
     end
+
+    context "when a layout is a symlink" do
+      setup do
+        FileUtils.ln_sf("/etc/passwd", source_dir("_layouts", "symlink.html"))
+        @site = fixture_site(
+          "safe"    => true,
+          "include" => ["symlink.html"]
+        )
+      end
+
+      teardown do
+        FileUtils.rm(source_dir("_layouts", "symlink.html"))
+      end
+
+      should "only read the layouts which are in the site" do
+        skip_if_windows "Jekyll does not currently support symlinks on Windows."
+
+        layouts = LayoutReader.new(@site).read
+
+        refute layouts.key?("symlink"), "Should not read the symlinked layout"
+      end
+    end
+
+    context "with a theme" do
+      setup do
+        FileUtils.ln_sf("/etc/passwd", theme_dir("_layouts", "theme-symlink.html"))
+        @site = fixture_site(
+          "include" => ["theme-symlink.html"],
+          "theme"   => "test-theme",
+          "safe"    => true
+        )
+      end
+
+      teardown do
+        FileUtils.rm(theme_dir("_layouts", "theme-symlink.html"))
+      end
+
+      should "not read a symlink'd theme" do
+        skip_if_windows "Jekyll does not currently support symlinks on Windows."
+
+        layouts = LayoutReader.new(@site).read
+
+        refute layouts.key?("theme-symlink"), \
+               "Should not read symlinked layout from theme"
+      end
+    end
   end
 end

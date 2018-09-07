@@ -31,9 +31,18 @@ module Jekyll
 
     def filter(entries)
       entries.reject do |e|
+<<<<<<< HEAD
         unless included?(e)
           special?(e) || backup?(e) || excluded?(e) || symlink?(e)
         end
+=======
+        # Reject this entry if it is a symlink.
+        next true if symlink?(e)
+        # Do not reject this entry if it is included.
+        next false if included?(e)
+        # Reject this entry if it is special, a backup file, or excluded.
+        special?(e) || backup?(e) || excluded?(e)
+>>>>>>> f1c87a91... Security: fix `include` bypass of `EntryFilter#filter` symlink check (#7226)
       end
     end
 
