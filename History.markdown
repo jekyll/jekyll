@@ -101,6 +101,7 @@
   * Interpolate Jekyll::Page subclass on inspection (#7203)
   * Small benchmark refactoring (#7211)
   * Add cucumber feature to test include_relative tag (#7213)
+  * Bump Rubocop to v0.59.0 (#7237)
 
 ### Bug Fixes
 
