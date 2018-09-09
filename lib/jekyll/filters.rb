@@ -169,6 +169,7 @@ module Jekyll
     def where(input, property, value)
       return input if property.nil? || value.nil?
       return input unless input.respond_to?(:select)
+
       input    = input.values if input.is_a?(Hash)
       input_id = input.hash
 
@@ -195,6 +196,7 @@ module Jekyll
     # Returns the filtered array of objects
     def where_exp(input, variable, expression)
       return input unless input.respond_to?(:select)
+
       input = input.values if input.is_a?(Hash) # FIXME
 
       condition = parse_condition(expression)
@@ -214,6 +216,7 @@ module Jekyll
     def to_integer(input)
       return 1 if input == true
       return 0 if input == false
+
       input.to_i
     end
 
@@ -226,6 +229,7 @@ module Jekyll
     # Returns the filtered array of objects
     def sort(input, property = nil, nils = "first")
       raise ArgumentError, "Cannot sort a null object." if input.nil?
+
       if property.nil?
         input.sort
       else
@@ -244,6 +248,7 @@ module Jekyll
 
     def pop(array, num = 1)
       return array unless array.is_a?(Array)
+
       num = Liquid::Utils.to_integer(num)
       new_ary = array.dup
       new_ary.pop(num)
@@ -252,6 +257,7 @@ module Jekyll
 
     def push(array, input)
       return array unless array.is_a?(Array)
+
       new_ary = array.dup
       new_ary.push(input)
       new_ary
@@ -259,6 +265,7 @@ module Jekyll
 
     def shift(array, num = 1)
       return array unless array.is_a?(Array)
+
       num = Liquid::Utils.to_integer(num)
       new_ary = array.dup
       new_ary.shift(num)
@@ -267,6 +274,7 @@ module Jekyll
 
     def unshift(array, input)
       return array unless array.is_a?(Array)
+
       new_ary = array.dup
       new_ary.unshift(input)
       new_ary
@@ -274,6 +282,7 @@ module Jekyll
 
     def sample(input, num = 1)
       return input unless input.respond_to?(:sample)
+
       num = Liquid::Utils.to_integer(num) rescue 1
       if num == 1
         input.sample
@@ -330,6 +339,7 @@ module Jekyll
     def parse_sort_input(property)
       number_like = %r!\A\s*-?(?:\d+\.?\d*|\.\d+)\s*\Z!
       return property.to_f if property =~ number_like
+
       property
     end
 

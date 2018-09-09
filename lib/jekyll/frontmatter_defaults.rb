@@ -36,6 +36,7 @@ module Jekyll
     def ensure_time!(set)
       return set unless set.key?("values") && set["values"].key?("date")
       return set if set["values"]["date"].is_a?(Time)
+
       set["values"]["date"] = Utils.parse_date(
         set["values"]["date"],
         "An invalid date format was found in a front-matter default set: #{set}"
@@ -132,6 +133,7 @@ module Jekyll
       collections_dir  = @site.config["collections_dir"]
       slashed_coll_dir = "#{collections_dir}/"
       return path if collections_dir.empty? || !path.to_s.start_with?(slashed_coll_dir)
+
       path.sub(slashed_coll_dir, "")
     end
 

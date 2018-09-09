@@ -158,10 +158,10 @@ module Jekyll
         output = render_layout(output, layout, info)
         add_regenerator_dependencies(layout)
 
-        if (layout = site.layouts[layout.data["layout"]])
-          break if used.include?(layout)
-          used << layout
-        end
+        next unless (layout = site.layouts[layout.data["layout"]])
+        break if used.include?(layout)
+
+        used << layout
       end
       output
     end
@@ -202,6 +202,7 @@ module Jekyll
 
     def add_regenerator_dependencies(layout)
       return unless document.write?
+
       site.regenerator.add_dependency(
         site.in_source_dir(document.path),
         layout.path

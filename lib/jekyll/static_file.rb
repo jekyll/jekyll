@@ -98,6 +98,7 @@ module Jekyll
       dest_path = destination(dest)
 
       return false if File.exist?(dest_path) && !modified?
+
       self.class.mtimes[path] = mtime
 
       FileUtils.mkdir_p(File.dirname(dest_path))

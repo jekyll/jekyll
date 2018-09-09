@@ -40,6 +40,7 @@ module Jekyll
 
     def configure_sass
       return unless sass_path
+
       External.require_with_graceful_fail("sass") unless defined?(Sass)
       Sass.load_paths << sass_path
     end

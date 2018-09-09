@@ -17,6 +17,7 @@ module Jekyll
       @logdev = logdevice(severity)
 
       return true if @logdev.nil? || severity < @level
+
       progname ||= @progname
       if message.nil?
         if block_given?
