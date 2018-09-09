@@ -377,6 +377,7 @@ module Jekyll
     # Returns a path which is prefixed with the theme root directory.
     def in_theme_dir(*paths)
       return nil unless theme
+
       paths.reduce(theme.root) do |base, path|
         Jekyll.sanitized_path(base, path)
       end
@@ -474,6 +475,7 @@ module Jekyll
 
     def render_regenerated(document, payload)
       return unless regenerator.regenerate?(document)
+
       document.output = Jekyll::Renderer.new(self, document, payload).run
       document.trigger_hooks(:post_render)
     end

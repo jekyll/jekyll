@@ -35,6 +35,7 @@ module Jekyll
         next true if symlink?(e)
         # Do not reject this entry if it is included.
         next false if included?(e)
+
         # Reject this entry if it is special, a backup file, or excluded.
         special?(e) || backup?(e) || excluded?(e)
       end

@@ -160,6 +160,7 @@ module Jekyll
     #   true otherwise.
     def render_with_liquid?
       return false if data["render_with_liquid"] == false
+
       !(coffeescript_file? || yaml_file? || !Utils.has_liquid_construct?(content))
     end
 
@@ -304,6 +305,7 @@ module Jekyll
     #   equal or greater than the other doc's path. See String#<=> for more details.
     def <=>(other)
       return nil unless other.respond_to?(:data)
+
       cmp = data["date"] <=> other.data["date"]
       cmp = path <=> other.path if cmp.nil? || cmp.zero?
       cmp

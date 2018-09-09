@@ -144,6 +144,7 @@ module Jekyll
     # the appropriate writer method, e.g. writer.info.
     def write(level_of_message, topic, message = nil, &block)
       return false unless write_message?(level_of_message)
+
       writer.public_send(level_of_message, message(topic, message, &block))
     end
   end

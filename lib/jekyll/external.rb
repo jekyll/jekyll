@@ -42,6 +42,7 @@ module Jekyll
       # RubyGems.
       def version_constraint(gem_name)
         return "= #{Jekyll::VERSION}" if gem_name.to_s.eql?("jekyll-docs")
+
         "> 0"
       end
 

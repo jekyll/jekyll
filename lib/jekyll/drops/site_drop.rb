@@ -44,6 +44,7 @@ module Jekyll
       # We should remove this in 4.0 and switch to `{{ post.related_posts }}`.
       def related_posts
         return nil unless @current_document.is_a?(Jekyll::Document)
+
         @current_document.related_posts
       end
       attr_writer :current_document

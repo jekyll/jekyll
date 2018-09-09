@@ -43,6 +43,7 @@ module Jekyll
     # Returns cached value
     def [](key)
       return @cache[key] if @cache.key?(key)
+
       path = path_to(hash(key))
       if @@disk_cache_enabled && File.file?(path) && File.readable?(path)
         @cache[key] = load(path)
@@ -57,6 +58,7 @@ module Jekyll
     def []=(key, value)
       @cache[key] = value
       return unless @@disk_cache_enabled
+
       path = path_to(hash(key))
       dump(path, value)
     end
@@ -78,6 +80,7 @@ module Jekyll
     def delete(key)
       @cache.delete(key)
       return unless @@disk_cache_enabled
+
       path = path_to(hash(key))
       File.delete(path)
     end
@@ -91,6 +94,7 @@ module Jekyll
       # Otherwise, it might be cached on disk
       # but we should not consider the disk cache if it is disabled
       return false unless @@disk_cache_enabled
+
       path = path_to(hash(key))
       File.file?(path) && File.readable?(path)
     end
@@ -103,6 +107,7 @@ module Jekyll
       config = config.inspect
       cache = Jekyll::Cache.new "Jekyll::Cache"
       return if cache.key?("config") && cache["config"] == config
+
       clear
       cache = Jekyll::Cache.new "Jekyll::Cache"
       cache["config"] = config
@@ -116,6 +121,7 @@ module Jekyll
     def path_to(hash = nil)
       @base_dir ||= File.join(@@base_dir, @name)
       return @base_dir if hash.nil?
+
       File.join(@base_dir, hash[0..1], hash[2..-1]).freeze
     end
 
@@ -145,6 +151,7 @@ module Jekyll
     # rubocop:disable Security/MarshalLoad
     def load(path)
       raise unless @@disk_cache_enabled
+
       cached_file = File.open(path, "rb")
       value = Marshal.load(cached_file)
       cached_file.close
@@ -158,6 +165,7 @@ module Jekyll
     # Returns nothing.
     def dump(path, value)
       return unless @@disk_cache_enabled
+
       dir = File.dirname(path)
       FileUtils.mkdir_p(dir)
       File.open(path, "wb") do |cached_file|

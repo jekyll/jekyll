@@ -26,6 +26,7 @@ module Jekyll
 
       def <=>(other)
         return nil unless other.is_a? DocumentDrop
+
         cmp = self["date"] <=> other["date"]
         cmp = self["path"] <=> other["path"] if cmp.nil? || cmp.zero?
         cmp
