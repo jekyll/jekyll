@@ -69,6 +69,6 @@ Now it's your turn, change the Hello World! on your page to output as lowercase:
 It may not seem like it now, but much of Jekyll's power comes from combining
 Liquid with other features. 
 
-In order to see the changes from downcase, we will need to add Front Matters. 
+In order to see the changes from `downcase` Liquid filter, we will need to add front matter. 
 
 That's next. Let's keep going.
