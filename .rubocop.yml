@@ -87,6 +87,7 @@ Naming/HeredocDelimiterNaming:
   Exclude:
     - test/**/*.rb
 Naming/MemoizedInstanceVariableName:
+  EnforcedStyleForLeadingUnderscores: optional
   Exclude:
     - lib/jekyll/page_without_a_file.rb
     - lib/jekyll/drops/unified_payload_drop.rb
