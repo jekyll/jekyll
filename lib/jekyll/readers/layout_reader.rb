@@ -54,6 +54,7 @@ module Jekyll
 
     def within(directory)
       return unless File.exist?(directory)
+
       Dir.chdir(directory) { yield }
     end
 

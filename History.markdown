@@ -51,6 +51,7 @@
   * Fix minor grammatical error (#7215)
   * Add developer.spotify.com to the Jekyll Showcase (#7217)
   * removes quotes from markdown for assets (#7223)
+  * clarified front matter requirement (#7234)
 
 ### Minor Enhancements
 
@@ -100,6 +101,7 @@
   * Interpolate Jekyll::Page subclass on inspection (#7203)
   * Small benchmark refactoring (#7211)
   * Add cucumber feature to test include_relative tag (#7213)
+  * Bump Rubocop to v0.59.0 (#7237)
 
 ### Bug Fixes
 

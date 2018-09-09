@@ -44,11 +44,12 @@ module Jekyll
       private
 
       def proc_version
-        @proc_version ||= begin
-          File.read("/proc/version").downcase
-        rescue Errno::ENOENT
-          ""
-        end
+        @proc_version ||= \
+          begin
+            File.read("/proc/version").downcase
+          rescue Errno::ENOENT
+            ""
+          end
       end
 
       def rbconfig_host
