@@ -51,6 +51,7 @@
   * Fix minor grammatical error (#7215)
   * Add developer.spotify.com to the Jekyll Showcase (#7217)
   * removes quotes from markdown for assets (#7223)
+  * clarified front matter requirement (#7234)
 
 ### Minor Enhancements
 
