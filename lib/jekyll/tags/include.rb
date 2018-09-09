@@ -35,10 +35,10 @@ module Jekyll
 
       def parse_params(context)
         params = {}
-        markup = @params
+        pos = 0
 
-        while (match = VALID_SYNTAX.match(markup))
-          markup = markup[match.end(0)..-1]
+        while (match = VALID_SYNTAX.match(@params, pos))
+          pos = match.end(0)
 
           value = if match[2]
                     match[2].gsub('\\"', '"')
