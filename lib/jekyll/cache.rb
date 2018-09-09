@@ -14,9 +14,13 @@ module Jekyll
     #
     # Returns nothing.
     def initialize(name)
-      @@base_dir ||= File.expand_path(".jekyll-cache/Jekyll/Cache")
       @cache = @@caches[name] ||= {}
       @name = name.gsub(%r![^\w\s-]!, "-")
+    end
+
+    # Set class-wide base_dir
+    def self.base_dir=(dir_path)
+      @@base_dir = dir_path
     end
 
     # Disable Marshaling cached items to disk
