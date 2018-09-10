@@ -38,7 +38,7 @@ CircleCI detects when `Gemfile` is present is will automatically run `bundle ins
 
 ## 3. Testing
 
-The most basic test that can be run is simply seeing if `jekyll build` actually works. This is a blocker, a dependency if you will,  for other tests you might run on the generate site. So we'll run Jekyll, via Bundler, in the `dependencies` phase.
+The most basic test that can be run is simply seeing if `jekyll build` actually works. This is a blocker, a dependency if you will, for other tests you might run on the generate site. So we'll run Jekyll, via Bundler, in the `dependencies` phase.
 
 ```yaml
 dependencies:
