@@ -11,7 +11,7 @@ CI.
 
 These services run a script when there's a commit on your Git repository.
 You might want this script to build the site, run tests over the output then deploy it to the
-service of your choice.  
+service of your choice. 
 
 We have guides for the following providers:
 

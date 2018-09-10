@@ -51,7 +51,7 @@ currently supported options:
   </p>
 </div>
 
-For more details about these options have a look at the [Kramdown configuration documentation](https://kramdown.gettalong.org/options.html).  
+For more details about these options have a look at the [Kramdown configuration documentation](https://kramdown.gettalong.org/options.html). 
 
 ### Redcarpet
 

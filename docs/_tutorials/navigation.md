@@ -591,7 +591,7 @@ The `group_by` filter groups the collection content by `category`. More specific
 ```yaml
 [
   {"name": "getting-started", "items": [Sample 1, Sample 2],"size": 2},
-  {"name": "configuration", "items": [Topic 1, Topic 2],  "size": 2},
+  {"name": "configuration", "items": [Topic 1, Topic 2], "size": 2},
   {"name": "deployment", "items": [Widget 1, Widget 2, "size": 2}
 ]
 ```
