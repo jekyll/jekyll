@@ -1,6 +1,8 @@
 ---
 title: Posts
 permalink: /docs/posts/
+redirect_from:
+  - /docs/drafts/
 ---
 
 Blogging is baked into Jekyll. You write blog posts as text files and Jekyll
