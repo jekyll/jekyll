@@ -62,7 +62,7 @@ page which lists all the posts, let's do that next.
 
 Jekyll makes posts available at `site.posts`.
 
-Create `blog.html` with the following content:
+Create `blog.html` in your root (`/blog.html`) with the following content:
 
 {% raw %}
 ```html
