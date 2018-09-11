@@ -108,6 +108,41 @@ Feature: Site configuration
     And I should see "var c = 'Bazinga!';" in "_site/node_modules/bazinga.js"
     But the "_site/node_modules/warning.js" file should not exist
 
+  Scenario: Copy over excluded wild-card files only when they are explicitly included
+    Given I have a ".gitignore" file that contains ".DS_Store"
+    And I have an ".htaccess" file that contains "SomeDirective"
+    And I have an "foo.txt" file that contains "Lorem Ipsum"
+    And I have an "index.md" page that contains "{{ site.title }}"
+    And I have an "about.md" page that contains "{{ site.author }}"
+    And I have a configuration file with:
+      | key      | value        |
+      | title    | Barren Site  |
+      | author   | John Doe     |
+      | exclude  | ["**"]       |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And the "_site/.gitignore" file should not exist
+    And the "_site/foo.txt" file should not exist
+    And the "_site/index.html" file should not exist
+    And the "_site/about.html" file should not exist
+    But the "_site/.htaccess" file should exist
+    Given I have a configuration file with:
+      | key      | value        |
+      | title    | Barren Site  |
+      | author   | John Doe     |
+      | exclude  | ["**"]       |
+      | include  | ["about.md"] |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And the "_site/.gitignore" file should not exist
+    And the "_site/foo.txt" file should not exist
+    And the "_site/index.html" file should not exist
+    And the "_site/.htaccess" file should not exist
+    But the "_site/about.html" file should exist
+    And I should see "John Doe" in "_site/about.html"
+
   Scenario: Use Kramdown for markup
     Given I have an "index.markdown" page that contains "[Google](https://www.google.com)"
     And I have a configuration file with "markdown" set to "kramdown"
