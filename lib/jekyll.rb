@@ -71,6 +71,7 @@ module Jekyll
   autoload :Regenerator,         "jekyll/regenerator"
   autoload :RelatedPosts,        "jekyll/related_posts"
   autoload :Renderer,            "jekyll/renderer"
+  autoload :LocaleHandler,       "jekyll/locale_handler"
   autoload :LiquidRenderer,      "jekyll/liquid_renderer"
   autoload :Site,                "jekyll/site"
   autoload :StaticFile,          "jekyll/static_file"

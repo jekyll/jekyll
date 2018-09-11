@@ -10,7 +10,7 @@ module Jekyll
                   :gems, :plugin_manager, :theme
 
     attr_accessor :converters, :generators, :reader
-    attr_reader   :regenerator, :liquid_renderer, :includes_load_paths
+    attr_reader   :regenerator, :liquid_renderer, :locale_handler, :includes_load_paths
 
     # Public: Initialize a new Site.
     #
@@ -24,6 +24,7 @@ module Jekyll
 
       @reader          = Reader.new(self)
       @regenerator     = Regenerator.new(self)
+      @locale_handler  = LocaleHandler.new(self)
       @liquid_renderer = LiquidRenderer.new(self)
 
       Jekyll.sites << self
@@ -96,6 +97,7 @@ module Jekyll
       @collections = nil
       @docs_to_write = nil
       @regenerator.clear_cache
+      @locale_handler.reset
       @liquid_renderer.reset
       @site_cleaner = nil
 

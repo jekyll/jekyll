@@ -16,6 +16,10 @@ module Jekyll
         @site_drop ||= SiteDrop.new(@obj)
       end
 
+      def locale
+        @locale_drop ||= LocaleDrop.new(@obj.locale_handler)
+      end
+
       private
 
       def fallback_data

@@ -14,6 +14,7 @@ module Jekyll
       "layouts_dir"         => "_layouts",
       "data_dir"            => "_data",
       "includes_dir"        => "_includes",
+      "locales_dir"         => "locales", # always relative to data_dir
       "collections"         => {},
 
       # Handling Reading
@@ -53,6 +54,7 @@ module Jekyll
       "show_dir_listing"    => false,
 
       # Output Configuration
+      "locale"              => "en",
       "permalink"           => "date",
       "paginate_path"       => "/page:num",
       "timezone"            => nil, # use the local timezone

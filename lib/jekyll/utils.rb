@@ -124,6 +124,24 @@ module Jekyll
       transform_keys(hash) { |key| key.to_s rescue key }
     end
 
+    # Convert all keys to snake_case by substituting non-alphanumeric characters
+    # with an underscore.
+    # The keys are first converted to lowercase strings and then any letters with accents
+    # are replaced with their plaintext counterpart
+    #
+    # hash - the hash to which to apply this transformation
+    #
+    # Returns a new hash with snake_cased keys or a hash with stringified keys.
+    def snake_case_keys(hash)
+      transform_keys(hash) do |key|
+        begin
+          Utils.slugify(key.to_s, :mode => "latin", :replacement => "_")
+        rescue StandardError
+          key.to_s
+        end
+      end
+    end
+
     # Parse a date/time and throw an error if invalid
     #
     # input - the date/time to parse
@@ -202,7 +220,7 @@ module Jekyll
     #   # => "the-config-yml-file"
     #
     # Returns the slugified string.
-    def slugify(string, mode: nil, cased: false)
+    def slugify(string, mode: nil, cased: false, replacement: "-")
       mode ||= "default"
       return nil if string.nil?
 
@@ -216,7 +234,7 @@ module Jekyll
         string = I18n.transliterate(string)
       end
 
-      slug = replace_character_sequence_with_hyphen(string, :mode => mode)
+      slug = replace_character_sequence(string, :mode => mode, :replacement => replacement)
 
       # Remove leading/trailing hyphen
       slug.gsub!(%r!^\-|\-$!i, "")
@@ -345,9 +363,9 @@ module Jekyll
     #
     # See Utils#slugify for a description of the character sequence specified
     # by each mode.
-    def replace_character_sequence_with_hyphen(string, mode: "default")
+    def replace_character_sequence(string, **opts)
       replaceable_char =
-        case mode
+        case opts[:mode]
         when "raw"
           SLUGIFY_RAW_REGEXP
         when "pretty"
@@ -364,7 +382,7 @@ module Jekyll
         end
 
       # Strip according to the mode
-      string.gsub(replaceable_char, "-")
+      string.gsub(replaceable_char, opts[:replacement])
     end
   end
 end
