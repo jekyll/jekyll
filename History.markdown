@@ -53,6 +53,7 @@
   * removes quotes from markdown for assets (#7223)
   * clarified front matter requirement (#7234)
   * Minor whitespace fixes (#7238)
+  * explicit location of where to create blog.html (#7241)
 
 ### Minor Enhancements
 
