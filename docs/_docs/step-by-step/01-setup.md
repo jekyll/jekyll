@@ -6,7 +6,8 @@ position: 1
 ---
 Welcome to Jekyll's step-by-step tutorial. The goal of this tutorial is to take
 you from having some front end web development experience to building your
-first Jekyll site. Let's get into it!
+first Jekyll site from scratch — not relying on the default gem-based theme. 
+Let's get into it!
 
 ## Installation
 
