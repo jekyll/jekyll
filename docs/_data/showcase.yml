@@ -210,6 +210,10 @@
   url: http://vesterheim.org/
   categories:
     - marketing-site
+- name: KOTN
+  url: https://kotn.com/
+  categories:
+   - marketing-site
 - name: TwitchCon
   url: https://www.twitchcon.com/
   categories:
