@@ -131,7 +131,7 @@ module Jekyll
     #
     # Returns excerpt String
 
-    LIQUID_TAG_REGEX = %r!{%-?\s*(\w+).+?\s*-?%}!m
+    LIQUID_TAG_REGEX = %r!{%-?\s*(\w+).*?\s*-?%}!m
     MKDWN_LINK_REF_REGEX = %r!^ {0,3}\[[^\]]+\]:.+$!
 
     def extract_excerpt(doc_content)
@@ -161,7 +161,7 @@ module Jekyll
 
     def endtag_regex_stash(tag_name)
       @endtag_regex_stash ||= {}
-      @endtag_regex_stash[tag_name] ||= %r!{%-?\s*end#{tag_name}.+?\s*-?%}!m
+      @endtag_regex_stash[tag_name] ||= %r!{%-?\s*end#{tag_name}.*?\s*-?%}!m
     end
 
     def liquid_block?(tag_name)
@@ -177,9 +177,9 @@ module Jekyll
 
     def print_build_warning
       Jekyll.logger.warn "Warning:", "Excerpt modified in #{doc.relative_path}!"
-      Jekyll.logger.warn "", "Found a Liquid block containing separator" \
-                         " #{doc.excerpt_separator.inspect} "
-      Jekyll.logger.warn "", "and has been modified with the appropriate closing tag."
+      Jekyll.logger.warn "", "Found a Liquid block containing the excerpt separator" \
+                         " #{doc.excerpt_separator.inspect}. "
+      Jekyll.logger.warn "", "The block has been modified with the appropriate closing tag."
       Jekyll.logger.warn "", "Feel free to define a custom excerpt or excerpt_separator in the"
       Jekyll.logger.warn "", "document's Front Matter if the generated excerpt is unsatisfactory."
     end
