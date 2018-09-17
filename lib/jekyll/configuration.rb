@@ -9,6 +9,7 @@ module Jekyll
       "source"              => Dir.pwd,
       "destination"         => File.join(Dir.pwd, "_site"),
       "collections_dir"     => "",
+      "cache_dir"           => ".jekyll-cache",
       "plugins_dir"         => "_plugins",
       "layouts_dir"         => "_layouts",
       "data_dir"            => "_data",
@@ -195,6 +196,7 @@ module Jekyll
       begin
         files.each do |config_file|
           next if config_file.nil? || config_file.empty?
+
           new_config = read_config_file(config_file)
           configuration = Utils.deep_merge_hashes(configuration, new_config)
         end

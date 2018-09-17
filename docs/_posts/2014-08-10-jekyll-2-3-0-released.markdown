@@ -14,7 +14,7 @@ fixes. Some of the highlights:
 * Pages, Posts, and Drafts can now be converted by multiple converters.
 * Static files can now be safely included in collections. They'll be placed
   in a `collection.files` array. `collection.docs` still holds exclusively
-  content with YAML front matter.
+  content with front matter.
 * Sass files can once again be rendered by Liquid. However, neither Sass
   nor CoffeeScript can ever have a layout. Bonus: `scssify` and `sassify`
   Liquid filters.

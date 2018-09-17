@@ -13,22 +13,22 @@ This release includes a beneficial change for a number of plugins:
 **static files now respect front matter defaults**.
 
 You might be asking yourself: "why would static files, files that are
-static files explicitly because they *don't* have YAML front matter, want
-to respect YAML front matter?" That's a great question. Let me illustrate
+static files explicitly because they *don't* have front matter, want
+to respect front matter?" That's a great question. Let me illustrate
 with an example.
 
 Let's look at `jekyll-sitemap`. This plugin generates a list of documents,
 pages, and static files, and some metadata for them in an XML file for a
 Google/Yahoo/Bing/DuckDuckGo crawler to consume. If you don't want a given
-file in this list, you set `sitemap: false` in the YAML front matter. But
-what about static files, which don't have YAML front matter? Before this
+file in this list, you set `sitemap: false` in front matter. But
+what about static files, which don't have front matter? Before this
 release, they could not be excluded because they had no properties in YAML
 other than [the ones we explicitly assigned](https://github.com/jekyll/jekyll/blob/v3.4.1/lib/jekyll/static_file.rb#L98-L106).
 So if you had a PDF you didn't want to be in your sitemap, you couldn't use
 `jekyll-sitemap`.
 
 With this release, you can now set [front matter
-defaults](/docs/configuration/#front-matter-defaults) for static files:
+defaults](/docs/configuration/front-matter-defaults/) for static files:
 
 ```yaml
 defaults:

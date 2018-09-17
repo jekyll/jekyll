@@ -45,6 +45,7 @@ module Jekyll
       # Returns the formatted String.
       def date_to_xmlschema(date)
         return date if date.to_s.empty?
+
         time(date).xmlschema
       end
 
@@ -60,6 +61,7 @@ module Jekyll
       # Returns the formatted String.
       def date_to_rfc822(date)
         return date if date.to_s.empty?
+
         time(date).rfc822
       end
 
@@ -72,11 +74,13 @@ module Jekyll
       # Returns a stringified date or the empty input.
       def stringify_date(date, month_type, type = nil, style = nil)
         return date if date.to_s.empty?
+
         time = time(date)
         if type == "ordinal"
           day = time.day
           ordinal_day = "#{day}#{ordinal(day)}"
           return time.strftime("#{month_type} #{ordinal_day}, %Y") if style == "US"
+
           return time.strftime("#{ordinal_day} #{month_type} %Y")
         end
         time.strftime("%d #{month_type} %Y")

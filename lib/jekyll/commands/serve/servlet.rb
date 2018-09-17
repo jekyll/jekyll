@@ -140,7 +140,9 @@ module Jekyll
         end
 
         def search_index_file(req, res)
-          super || search_file(req, res, ".html")
+          super ||
+            search_file(req, res, ".html") ||
+            search_file(req, res, ".xhtml")
         end
 
         # Add the ability to tap file.html the same way that Nginx does on our
@@ -149,7 +151,9 @@ module Jekyll
 
         def search_file(req, res, basename)
           # /file.* > /file/index.html > /file.html
-          super || super(req, res, "#{basename}.html")
+          super ||
+            super(req, res, "#{basename}.html") ||
+            super(req, res, "#{basename}.xhtml")
         end
 
         # rubocop:disable Naming/MethodName

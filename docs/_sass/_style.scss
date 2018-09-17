@@ -224,8 +224,7 @@ footer {
 
   img {
     display: inline-block;
-    position: relative;
-    top: 8px;
+    vertical-align: middle;
     margin-left: 5px;
     opacity: .8;
     padding: 1px;
@@ -1093,6 +1092,25 @@ code.output {
   height: 100%;
 }
 
+.imageWrapper {
+  width: 100%;
+  height: 0;
+  padding-bottom: 62.623762376237624%; /* You define this doing height / width * 100% */
+  position: relative;
+  background: #717171;
+  display: block;
+
+  img {
+    width: 100%;
+    position: absolute;
+    opacity: 0;
+  }
+  img.b-loaded {
+    opacity: 1;
+    transition: opacity .5s;
+  }
+}
+
 
 /* Helper class taken from Bootstrap.
    Hides an element to all devices except screen readers.
@@ -1155,4 +1173,50 @@ code.output {
   pre.highlight {
     background: #1c1c1c;
   }
+}
+
+.showcase {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  li {
+    flex: 1 1 300px;
+    box-sizing: border-box;
+    margin: 10px;
+    figure {
+      margin: 0;
+    }
+    figcaption {
+      text-align: center;
+    }
+    &.spacer {
+      height: 0;
+      margin: 0;
+    }
+  }
+}
+
+.step-nav {
+  background: #2b2b2b;
+  border-radius: 5px;
+  color: #fc0;
+  padding: 8px 45px;
+
+  li {
+    margin: 0;
+    padding: 0;
+
+    &.current, &.current a {
+      color: #f90;
+      font-weight: bold;
+    }
+  }
+}
+
+ol div.highlighter-rouge {
+  margin: 8px 0 10px 0;
 }

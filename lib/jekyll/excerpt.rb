@@ -90,6 +90,7 @@ module Jekyll
 
     def render_with_liquid?
       return false if data["render_with_liquid"] == false
+
       !(coffeescript_file? || yaml_file? || !Utils.has_liquid_construct?(content))
     end
 

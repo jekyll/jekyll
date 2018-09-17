@@ -15,10 +15,3 @@ If you're looking for support for Jekyll, there are a lot of options:
 * Chat with Jekyllers &mdash; Join [our Gitter channel](https://gitter.im/jekyll/jekyll) or [our IRC channel on Freenode](irc:irc.freenode.net/jekyll)
 
 There are a bunch of helpful community members on these services that should be willing to point you in the right direction.
-
-## Report a bug
-
-* If you think you've found a bug within a Jekyll plugin, open an issue in that plugin's repository &mdash; First [look for the plugin on rubygems](https://rubygems.org/) then click on the `Homepage` link to access the plugin repository.
-* If you think you've found a bug within Jekyll itself, [open an issue](https://github.com/jekyll/jekyll/issues/new).
-
-Happy Jekyllin'!

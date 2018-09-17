@@ -1,41 +1,38 @@
 ---
-title: Welcome
-permalink: /docs/home/
-redirect_from: /docs/index.html
+title: Quickstart
+permalink: /docs/
+redirect_from:
+  - /docs/home/
+  - /docs/quickstart/
+  - /docs/extras/
 ---
+Jekyll is a simple, extendable, static site generator. You give it text written
+in your favorite markup language and it churns through layouts to create a
+static website. Throughout that process you can tweak how you want the site URLs
+to look, what data gets displayed in the layout, and more.
 
-This site aims to be a comprehensive guide to Jekyll. We’ll cover topics such as getting your site up and running, creating and managing content, customizing your build, and deploying.
+## Instructions
 
-## What is Jekyll, exactly?
+1. Install a full [Ruby development environment](/docs/installation/)
+2. Install Jekyll and [bundler](/docs/ruby-101/#bundler) [gems](/docs/ruby-101/#gems)
+```
+gem install jekyll bundler
+```
+3. Create a new Jekyll site at `./myblog`
+```
+jekyll new myblog
+```
+4. Change into your new directory
+```
+cd myblog
+```
+5. Build the site and make it available on a local server
+```
+bundle exec jekyll serve
+```
+6. Now browse to [http://localhost:4000](http://localhost:4000){:target="_blank"}
 
-Jekyll is a simple, blog-aware, static site generator.
-
-You create your content as text files ([Markdown](https://daringfireball.net/projects/markdown/)), and organize them into folders. Then, you build the shell of your site using [Liquid](https://shopify.github.io/liquid/)-enhanced HTML templates. Jekyll automatically stitches the content and templates together, generating a website made entirely of static assets, suitable for uploading to any server.
-
-Jekyll happens to be the engine behind [GitHub Pages](https://pages.github.com), so you can host your project’s Jekyll page/blog/website on GitHub’s servers **for free**.
-
-## Navigating the Guide
-
-Throughout this guide, you'll see these special sections that help you get the most out of Jekyll:
-
-<div class="note">
-  <h5>ProTips™</h5>
-  <p>Tips and tricks that'll make you a Jekyll wizard!</p>
-</div>
-
-<div class="note info">
-  <h5>Notes</h5>
-  <p>Extra tidbits that are sometimes necessary to understand Jekyll.</p>
-</div>
-
-<div class="note warning">
-  <h5>Warnings</h5>
-  <p>Common pitfalls to avoid.</p>
-</div>
-
-<div class="note unreleased">
-  <h5>Unreleased</h5>
-  <p>Features planned for future versions of Jekyll, but not available yet.</p>
-</div>
-
-If you find anything we haven’t covered, or would like to share a tip that others might find handy, please [file an issue]({{ site.repository }}/issues/new) and we’ll see about adding it to the guide.
+If you encounter any unexpected errors during the above, please refer to the
+[troubleshooting](/docs/troubleshooting/#configuration-problems) page or the
+already-mentioned [requirements](/docs/installation/#requirements) page, as
+you might be missing development headers or other prerequisites.

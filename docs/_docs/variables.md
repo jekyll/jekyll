@@ -3,11 +3,10 @@ title: Variables
 permalink: /docs/variables/
 ---
 
-Jekyll traverses your site looking for files to process. Any files with [YAML
-front matter](../frontmatter/) are subject to processing. For each of these
-files, Jekyll makes a variety of data available via the [Liquid templating
-system](https://github.com/Shopify/liquid/wiki). The
-following is a reference of the available data.
+Jekyll traverses your site looking for files to process. Any files with
+[front matter](/docs/front-matter/) are subject to processing. For each of these
+files, Jekyll makes a variety of data available via the [Liquid](/docs/liquid/).
+The following is a reference of the available data.
 
 ## Global Variables
 
@@ -33,8 +32,8 @@ following is a reference of the available data.
       <td><p><code>page</code></p></td>
       <td><p>
 
-        Page specific information + the <a href="../frontmatter/">YAML front
-        matter</a>. Custom variables set via the YAML Front Matter will be
+        Page specific information + the <a href="/docs/front-matter/">front
+        matter</a>. Custom variables set via the front matter will be
         available here. See below for details.
 
       </p></td>
@@ -43,8 +42,8 @@ following is a reference of the available data.
       <td><p><code>layout</code></p></td>
       <td><p>
 
-        Layout specific information + the <a href="../frontmatter/">YAML front
-        matter</a>. Custom variables set via the YAML Front Matter in
+        Layout specific information + the <a href="/docs/front-matter/">front
+        matter</a>. Custom variables set via front matter in
         layouts will be available here.
 
       </p></td>
@@ -294,7 +293,7 @@ following is a reference of the available data.
         directory. For example, a post at
         <code>/work/code/_posts/2008-12-24-closures.md</code> would have this
         field set to <code>['work', 'code']</code>. These can also be specified
-        in the <a href="../frontmatter/">YAML Front Matter</a>.
+        in the <a href="/docs/front-matter/">front matter</a>.
 
       </p></td>
     </tr>
@@ -303,7 +302,7 @@ following is a reference of the available data.
       <td><p>
 
         The list of tags to which this post belongs. These can be specified in
-        the <a href="../frontmatter/">YAML Front Matter</a>.
+        the <a href="/docs/front-matter/">front matter</a>.
 
       </p></td>
     </tr>
@@ -313,7 +312,7 @@ following is a reference of the available data.
 
         The path to the raw post or page. Example usage: Linking back to the
         page or post’s source on GitHub. This can be overridden in the
-        <a href="../frontmatter/">YAML Front Matter</a>.
+        <a href="/docs/front-matter/">front matter</a>.
 
       </p></td>
     </tr>

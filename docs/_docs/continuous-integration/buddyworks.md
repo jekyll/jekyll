@@ -21,8 +21,6 @@ title: "Buddy"
 
 Whenever you make a push to the selected branch, the Jekyll action runs `jekyll build` in an isolated [Jekyll Docker image][jekyll-docker-image]. The output is generated to the `/filesystem` directory, and can be further deployed to FTP/SFTP and IaaS services. You can add your own commands, install additional packages, attach services, and run Selenium tests, as well as add other actions down the pipeline, eg. a Slack notification or an SSH script that will restart your server.
 
-![Jekyll Build](https://buddy.works/data/blog/_images/buddyworks-jekyll-small.png)
-
 [jekyll-docker-image]: https://hub.docker.com/r/jekyll/jekyll/
 
 ## 3. Using YAML for configuration
