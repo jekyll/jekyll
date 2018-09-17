@@ -55,6 +55,7 @@ module Jekyll
   autoload :Hooks,               "jekyll/hooks"
   autoload :Layout,              "jekyll/layout"
   autoload :Cache,               "jekyll/cache"
+  autoload :FilterCache,         "jekyll/filter_cache"
   autoload :CollectionReader,    "jekyll/readers/collection_reader"
   autoload :DataReader,          "jekyll/readers/data_reader"
   autoload :LayoutReader,        "jekyll/readers/layout_reader"

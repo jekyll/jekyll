@@ -9,17 +9,19 @@ module Jekyll
       #
       # Returns the absolute URL as a String.
       def absolute_url(input)
-        return if input.nil?
+        return unless input
 
         input = input.url if input.respond_to?(:url)
-        return input if Addressable::URI.parse(input.to_s).absolute?
+        site  = @context.registers[:site]
 
-        site = @context.registers[:site]
-        return relative_url(input) if site.config["url"].nil?
+        FilterCache.cache_url(site, __method__, input) do
+          return input if Addressable::URI.parse(input.to_s).absolute?
+          return relative_url(input) unless site.config["url"]
 
-        Addressable::URI.parse(
-          site.config["url"].to_s + relative_url(input)
-        ).normalize.to_s
+          Addressable::URI.parse(
+            File.join(site.config["url"].to_s, relative_url(input))
+          ).normalize.to_s
+        end
       end
 
       # Produces a URL relative to the domain root based on site.baseurl
@@ -29,15 +31,19 @@ module Jekyll
       #
       # Returns a URL relative to the domain root as a String.
       def relative_url(input)
-        return if input.nil?
+        return unless input
 
         input = input.url if input.respond_to?(:url)
-        return input if Addressable::URI.parse(input.to_s).absolute?
+        site  = @context.registers[:site]
 
-        parts = [sanitized_baseurl, input]
-        Addressable::URI.parse(
-          parts.compact.map { |part| ensure_leading_slash(part.to_s) }.join
-        ).normalize.to_s
+        FilterCache.cache_url(site, __method__, input) do
+          return input if Addressable::URI.parse(input.to_s).absolute?
+
+          parts = [sanitized_baseurl, input]
+          Addressable::URI.parse(
+            parts.compact.map! { |part| ensure_leading_slash(part.to_s) }.join
+          ).normalize.to_s
+        end
       end
 
       # Strips trailing `/index.html` from URLs to create pretty permalinks
