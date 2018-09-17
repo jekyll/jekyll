@@ -182,7 +182,9 @@ module Jekyll
 
       # This method allows to modify the file content by inheriting from the class.
       def read_file(file, context)
-        File.read(file, file_read_opts(context))
+        Tags.cache_include("raw_content", "#{file}-#{File.mtime(file)}") do
+          File.read(file, file_read_opts(context))
+        end
       end
 
       private
