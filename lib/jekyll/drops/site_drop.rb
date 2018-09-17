@@ -5,6 +5,8 @@ module Jekyll
     class SiteDrop < Drop
       extend Forwardable
 
+      SPECIAL_COLLECTIONS = %w(posts data).freeze
+
       mutable false
 
       def_delegator  :@obj, :site_data, :data
@@ -13,7 +15,7 @@ module Jekyll
       private def_delegator :@obj, :config, :fallback_data
 
       def [](key)
-        if @obj.collections.key?(key) && key != "posts" && key != "data"
+        if @obj.collections.key?(key) && !SPECIAL_COLLECTIONS.include?(key)
           @obj.collections[key].docs
         else
           super(key)
@@ -21,7 +23,7 @@ module Jekyll
       end
 
       def key?(key)
-        (@obj.collections.key?(key) && key != "posts") || super
+        (@obj.collections.key?(key) && !SPECIAL_COLLECTIONS.include?(key)) || super
       end
 
       def posts

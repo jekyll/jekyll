@@ -328,7 +328,11 @@ module Jekyll
     # Returns an Array of all Documents
     def documents
       collections.reduce(Set.new) do |docs, (_, collection)|
-        docs + collection.docs + collection.files
+        if collection.label != "data"
+          docs + collection.docs + collection.files
+        else
+          docs
+        end
       end.to_a
     end
 
@@ -461,6 +465,7 @@ module Jekyll
 
     def render_docs(payload)
       collections.each_value do |collection|
+        next if collection.label == "data"
         collection.docs.each do |document|
           render_regenerated(document, payload)
         end
