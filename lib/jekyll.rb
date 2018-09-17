@@ -88,6 +88,7 @@ module Jekyll
   require "jekyll/command"
   require "jekyll/liquid_extensions"
   require "jekyll/filters"
+  require "jekyll/tags"
 
   class << self
     # Public: Tells you which Jekyll environment you are building in so you can skip tasks
