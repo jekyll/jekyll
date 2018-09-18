@@ -140,16 +140,17 @@ module Jekyll
       # append appropriate closing tag(s) (for each Liquid block), to the `head` if the
       # partitioning resulted in leaving the closing tag somewhere in the `tail` partition.
       if head.include?("{%")
+        modified  = false
         tag_names = head.scan(LIQUID_TAG_REGEX)
         tag_names.flatten!
-        print_build_warning unless tag_names.empty?
-
         tag_names.reverse_each do |tag_name|
           next unless liquid_block?(tag_name)
           next if head =~ endtag_regex_stash(tag_name)
 
+          modified = true
           head << "\n{% end#{tag_name} %}"
         end
+        print_build_warning if modified
       end
 
       return head if tail.empty?
