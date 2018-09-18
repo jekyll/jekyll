@@ -26,7 +26,6 @@ module Jekyll
           @file, @params = markup.strip.split(%r!\s+!, 2)
         end
         validate_params if @params
-        @tag_name = tag_name
       end
 
       def syntax_example
@@ -35,20 +34,17 @@ module Jekyll
 
       def parse_params(context)
         params = {}
-        pos = 0
-
-        while (match = VALID_SYNTAX.match(@params, pos))
-          pos = match.end(0)
-
-          value = if match[2]
-                    match[2].gsub('\\"', '"')
-                  elsif match[3]
-                    match[3].gsub("\\'", "'")
-                  elsif match[4]
-                    context[match[4]]
-                  end
-
-          params[match[1]] = value
+        if @params
+          @params.scan(VALID_SYNTAX) do |name, dq_str, sq_str, var|
+            params[name] =
+              if dq_str
+                dq_str.gsub(%r!\\"!, '"')
+              elsif sq_str
+                sq_str.gsub(%r!\\'!, "'")
+              elsif var
+                context[var]
+              end
+          end
         end
         params
       end
