@@ -254,7 +254,7 @@ module Jekyll
 
           format_url(
             config["ssl_cert"] && config["ssl_key"],
-            config["host"],
+            config["host"] == "127.0.0.1" ? "localhost" : config["host"],
             config["port"]
           )
         end
