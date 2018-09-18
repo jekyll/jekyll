@@ -1,3 +1,9 @@
+## 3.8.4 / 2018-09-18
+
+### Bug Fixes
+
+  * security: fix `include` bypass of `EntryFilter#filter` symlink check (#7228)
+
 ## 3.8.3 / 2018-06-05
 
 ### Bug Fixes
