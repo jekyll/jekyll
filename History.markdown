@@ -54,6 +54,7 @@
   * clarified front matter requirement (#7234)
   * Minor whitespace fixes (#7238)
   * explicit location of where to create blog.html (#7241)
+  * Fix a small grammar error/typo in the docs (#7260)
 
 ### Minor Enhancements
 
