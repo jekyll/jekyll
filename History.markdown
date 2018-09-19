@@ -1,3 +1,9 @@
+3.6.3 / 2018-09-19
+
+### Bug Fixes
+
+  - security: fix include bypass of EntryFilter#filter symlink check (#7229)
+
 ## 3.6.2 / 2017-10-21
 
 ### Development Fixes
