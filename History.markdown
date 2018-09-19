@@ -111,6 +111,7 @@
   * Add call to unused method `validate_options` in `commands/serve.rb` (#7122)
   * Security: fix `include` bypass of `EntryFilter#filter` symlink check (#7226)
   * 3.8.x: security: fix `include` bypass of `EntryFilter#filter` symlink check (#7228)
+  * 3.6.x: security: fix `include` bypass of `EntryFilter#filter` symlink check (#7229)
 
 ### feature
 
