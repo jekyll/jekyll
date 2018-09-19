@@ -66,6 +66,7 @@
   * Fix custom 404 page for GitHub pages (#7132)
   * Add Cache class (#7169)
   * Add support for `*.xhtml` files (#6854)
+  * Cache matched defaults sets for given parameters (#6888)
 
 ### Major Enhancements
 
