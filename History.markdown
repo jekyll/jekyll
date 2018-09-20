@@ -2,6 +2,7 @@
 
   * Textile is only supported through a converter plugin (#7003)
   * Add info how to deploy using pre-push git hook (#7179)
+  * chore(release): reflect latest patched releases (#7262)
 
 ### Documentation
 
