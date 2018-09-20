@@ -54,6 +54,7 @@
   * clarified front matter requirement (#7234)
   * Minor whitespace fixes (#7238)
   * explicit location of where to create blog.html (#7241)
+  * Fix a small grammar error/typo in the docs (#7260)
 
 ### Minor Enhancements
 
@@ -110,6 +111,7 @@
 
   * Add call to unused method `validate_options` in `commands/serve.rb` (#7122)
   * Security: fix `include` bypass of `EntryFilter#filter` symlink check (#7226)
+  * Check if scope applies to type before given path (#7263)
 
 ### feature
 
