@@ -111,14 +111,18 @@
 
   * Add call to unused method `validate_options` in `commands/serve.rb` (#7122)
   * Security: fix `include` bypass of `EntryFilter#filter` symlink check (#7226)
-  * 3.8.x: security: fix `include` bypass of `EntryFilter#filter` symlink check (#7228)
-  * 3.6.x: security: fix `include` bypass of `EntryFilter#filter` symlink check (#7229)
   * Check if scope applies to type before given path (#7263)
 
 ### feature
 
   * Disable Liquid via front matter (#6824)
   * Do not process Liquid in post excerpt when disabled in front matter (#7146)
+
+## 3.8.4 / 2018-09-18
+
+### Bug Fixes
+
+  * 3.8.x: security: fix `include` bypass of `EntryFilter#filter` symlink check (#7228)
 
 ## 3.8.3 / 2018-06-05
 
@@ -236,6 +240,12 @@
   * `include_relative` tag should find related documents in collections gathered within custom `collections_dir` (#6818)
   * Handle liquid tags in excerpts robustly (#6891)
   * Allow front matter defaults to be applied properly to documents gathered under custom `collections_dir` (#6885)
+
+## 3.7.4 / 2018-09-07
+
+### Bug Fixes
+
+  * Security: fix `include` bypass of EntryFilter#filter symlink check (#7224)
 
 ## 3.7.3 / 2018-02-25
 
@@ -402,6 +412,12 @@
   * Add jekyll-category-pages plugin (#6632)
   * Improve docs styling for code to be run in shell (#6641)
   * Fix permalink icon markup in news-item layout (#6639)
+
+## 3.6.3 / 2018-09-18
+
+### Bug Fixes
+
+  * 3.6.x: security: fix `include` bypass of `EntryFilter#filter` symlink check (#7229)
 
 ## 3.6.2 / 2017-10-21
 
