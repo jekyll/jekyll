@@ -113,6 +113,7 @@
   * Security: fix `include` bypass of `EntryFilter#filter` symlink check (#7226)
   * 3.8.x: security: fix `include` bypass of `EntryFilter#filter` symlink check (#7228)
   * 3.6.x: security: fix `include` bypass of `EntryFilter#filter` symlink check (#7229)
+  * Check if scope applies to type before given path (#7263)
 
 ### feature
 
