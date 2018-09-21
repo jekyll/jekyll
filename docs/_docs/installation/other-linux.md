@@ -2,7 +2,7 @@
 title: Jekyll on Linux
 permalink: /docs/installation/other-linux/
 ---
-Installation on other Linux distributions works similarly as on [Ubuntu](ubuntu.html).
+Installation on other Linux distributions works similarly as on [Ubuntu](../ubuntu/).
 
 On Fedora, the dependencies can be installed as follows:
 
@@ -16,4 +16,4 @@ On Debian:
 sudo apt-get install ruby-full build-essential
 ```
 
-The rest works the same as on [Ubuntu](ubuntu.html).
+The rest works the same as on [Ubuntu](../ubuntu/).
