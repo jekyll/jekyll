@@ -1,5 +1,5 @@
 ---
-title: Jekyll on Ubuntu
+title: Jekyll on Linux
 permalink: /docs/installation/other-linux/
 ---
 Installation on other Linux distributions works similarly as on Ubuntu.
