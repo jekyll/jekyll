@@ -461,6 +461,8 @@ The default value for `JEKYLL_ENV` is `development`. Therefore if you omit `JEKY
 
 Your environment values can be anything you want (not just `development` or `production`). Some elements you might want to hide in development environments include Disqus comment forms or Google Analytics. Conversely, you might want to expose an "Edit me in GitHub" button in a development environment but not include it in production environments.
 
+By specifying the option in the build command, you avoid having to change values in your configuration files when moving from one environment to another.
+
 <div class="note info">
   <p>
     <code>JEKYLL_ENV</code> allows for environment specific content. In case you need environment specific configuration options, use the <a href="#build-command-options">build command option</a>, for example <code>--config _config.yml,_config.development.yml</code>. Settings in later files override settings in earlier files.
