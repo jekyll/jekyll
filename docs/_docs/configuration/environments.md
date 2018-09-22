@@ -41,3 +41,9 @@ environment but not include it in production environments.
 
 By specifying the option in the build command, you avoid having to change
 values in your configuration files when moving from one environment to another.
+
+<div class="note info">
+  <p>
+    In case you want to switch your whole config-file (or parts of it) based on your environment, you can use the <a href="/docs/configuration/options/#build-command-options">build command option</a>, for example <code>--config _config.yml,_config.development.yml</code>. Settings in later files override settings in earlier files.
+  </p>
+</div>
