@@ -57,6 +57,7 @@
   * explicit location of where to create blog.html (#7241)
   * Fix a small grammar error/typo in the docs (#7260)
   * environments.md: reference the build command options that allows multiple config files (#7266)
+  * Update 10-deployment.md (#7268)
 
 ### Minor Enhancements
 
