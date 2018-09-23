@@ -77,7 +77,7 @@ For `jekyll-feed` and `jekyll-seo-tag` you need to add tags to
   <head>
     <meta charset="utf-8">
     <title>{{ page.title }}</title>
-    <link rel="stylesheet" href="/assets/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
     {% feed_meta %}
     {% seo %}
   </head>
