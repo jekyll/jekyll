@@ -49,7 +49,6 @@ about: Is something not working as expected?
 
 ## Current Behavior
 
-
 <!--
   Describe the details of the bug. Be sure to include any steps you took for the
   problem to exist, such as the directories you created and the full command
