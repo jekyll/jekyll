@@ -74,6 +74,7 @@
   * Add support for `*.xhtml` files (#6854)
   * Cache matched defaults sets for given parameters (#6888)
   * Ignore permission error of /proc/version (#7267)
+  * Strip extra slashes via `Jekyll.sanitized_path` (#7182)
 
 ### Major Enhancements
 
