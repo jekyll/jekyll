@@ -21,6 +21,10 @@ about: Want us to add any features to Jekyll?
 <!--
   Why do you want to see this feature in Jekyll? What makes you sure that it should not be
   implemented at the plugin level, but in Jekyll core? What use cases does it support?
+
+  NOTE: Please be mindful of the Jekyll philosophy (https://jekyllrb.com/philosophy/),
+  particularily Section 5. Think about if 90% of the users would benefit from your
+  feature request, and whether your feature would be better off in a plugin.
 -->
 
 ## Guide-level explanation
