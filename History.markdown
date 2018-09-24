@@ -71,6 +71,7 @@
   * Add Cache class (#7169)
   * Add support for `*.xhtml` files (#6854)
   * Cache matched defaults sets for given parameters (#6888)
+  * Ignore permission error of /proc/version (#7267)
 
 ### Major Enhancements
 
