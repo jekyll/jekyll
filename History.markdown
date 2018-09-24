@@ -59,6 +59,7 @@
   * environments.md: reference the build command options that allows multiple config files (#7266)
   * Update 10-deployment.md (#7268)
   * Add more issue template(s) and pull request template (#7269)
+  * Suggest sites use OpenSSL instead of GnuTLS for their site&#39;s CI (#7010)
 
 ### Minor Enhancements
 
