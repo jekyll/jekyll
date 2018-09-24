@@ -116,6 +116,7 @@
   * Add call to unused method `validate_options` in `commands/serve.rb` (#7122)
   * Security: fix `include` bypass of `EntryFilter#filter` symlink check (#7226)
   * Check if scope applies to type before given path (#7263)
+  * Document two methods, simplify one of the methods (#7270)
 
 ### feature
 
