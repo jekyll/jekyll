@@ -20,7 +20,7 @@
 
   - I've added tests (if it's a bug, feature or enhancement)
   - I've adjusted the documentation (if it's a feature or enhancement)
-  - The test suite passes (run `script/test` to verify this)
+  - The test suite passes (run `script/cibuild` to verify this)
 -->
 
 ## Summary
