@@ -58,6 +58,7 @@
   * Fix a small grammar error/typo in the docs (#7260)
   * environments.md: reference the build command options that allows multiple config files (#7266)
   * Update 10-deployment.md (#7268)
+  * Add more issue template(s) and pull request template (#7269)
 
 ### Minor Enhancements
 
