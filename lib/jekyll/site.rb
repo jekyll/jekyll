@@ -468,7 +468,7 @@ module Jekyll
     end
 
     def render_pages(payload)
-      pages.flatten.each do |page|
+      pages.each do |page|
         render_regenerated(page, payload)
       end
     end
