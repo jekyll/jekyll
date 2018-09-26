@@ -121,6 +121,7 @@
   * Security: fix `include` bypass of `EntryFilter#filter` symlink check (#7226)
   * Check if scope applies to type before given path (#7263)
   * Document two methods, simplify one of the methods (#7270)
+  * Check key in collections only if it isn&#39;t &#34;posts&#34; (#7277)
 
 ### feature
 
