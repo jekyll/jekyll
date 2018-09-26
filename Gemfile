@@ -76,7 +76,7 @@ group :jekyll_optional_dependencies do
     gem "classifier-reborn", "~> 2.2.0"
     gem "liquid-c", "~> 3.0"
     gem "pygments.rb", "~> 1.0"
-    gem "yajl-ruby", "~> 1.3"
+    gem "yajl-ruby", "~> 1.4"
   end
 
   # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
