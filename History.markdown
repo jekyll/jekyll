@@ -130,6 +130,10 @@
   * Disable Liquid via front matter (#6824)
   * Do not process Liquid in post excerpt when disabled in front matter (#7146)
 
+### Site Enhancements
+
+  * Add Release Post for v3.6.3, v3.7.4 and v3.8.4 (#7259)
+
 ## 3.8.4 / 2018-09-18
 
 ### Bug Fixes
