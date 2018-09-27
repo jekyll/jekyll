@@ -46,7 +46,7 @@ documents. Front matter is processed if the front matter exists, and everything
 after the front matter is pushed into the document's `content` attribute. If no front
 matter is provided, Jekyll will not generate the file in your collection.
 
-For example here's how you would add an staff member to the collection set above.
+For example here's how you would add a staff member to the collection set above.
 The filename is `./_staff_members/jane.md` with the following content:
 
 ```markdown

@@ -176,6 +176,10 @@ module Jekyll
 
       return clean_path if clean_path.eql?(base_directory)
 
+      # remove any remaining extra leading slashes not stripped away by calling
+      # `File.expand_path` above.
+      clean_path.squeeze!("/")
+
       if clean_path.start_with?(base_directory.sub(%r!\z!, "/"))
         clean_path
       else

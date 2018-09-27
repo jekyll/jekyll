@@ -2,6 +2,7 @@
 
   * Textile is only supported through a converter plugin (#7003)
   * Add info how to deploy using pre-push git hook (#7179)
+  * chore(release): reflect latest patched releases (#7262)
 
 ### Documentation
 
@@ -53,6 +54,13 @@
   * removes quotes from markdown for assets (#7223)
   * clarified front matter requirement (#7234)
   * Minor whitespace fixes (#7238)
+  * explicit location of where to create blog.html (#7241)
+  * Fix a small grammar error/typo in the docs (#7260)
+  * environments.md: reference the build command options that allows multiple config files (#7266)
+  * Update 10-deployment.md (#7268)
+  * Add more issue template(s) and pull request template (#7269)
+  * Suggest sites use OpenSSL instead of GnuTLS for their site&#39;s CI (#7010)
+  * Fix broken Contributors link in README.markdown (#7200)
 
 ### Minor Enhancements
 
@@ -65,6 +73,9 @@
   * Fix custom 404 page for GitHub pages (#7132)
   * Add Cache class (#7169)
   * Add support for `*.xhtml` files (#6854)
+  * Cache matched defaults sets for given parameters (#6888)
+  * Ignore permission error of /proc/version (#7267)
+  * Strip extra slashes via `Jekyll.sanitized_path` (#7182)
 
 ### Major Enhancements
 
@@ -103,16 +114,26 @@
   * Small benchmark refactoring (#7211)
   * Add cucumber feature to test include_relative tag (#7213)
   * Bump Rubocop to v0.59.0 (#7237)
+  * update yajl-ruby (#7278)
 
 ### Bug Fixes
 
   * Add call to unused method `validate_options` in `commands/serve.rb` (#7122)
   * Security: fix `include` bypass of `EntryFilter#filter` symlink check (#7226)
+  * Check if scope applies to type before given path (#7263)
+  * Document two methods, simplify one of the methods (#7270)
+  * Check key in collections only if it isn&#39;t &#34;posts&#34; (#7277)
 
 ### feature
 
   * Disable Liquid via front matter (#6824)
   * Do not process Liquid in post excerpt when disabled in front matter (#7146)
+
+## 3.8.4 / 2018-09-18
+
+### Bug Fixes
+
+  * 3.8.x: security: fix `include` bypass of `EntryFilter#filter` symlink check (#7228)
 
 ## 3.8.3 / 2018-06-05
 
@@ -230,6 +251,12 @@
   * `include_relative` tag should find related documents in collections gathered within custom `collections_dir` (#6818)
   * Handle liquid tags in excerpts robustly (#6891)
   * Allow front matter defaults to be applied properly to documents gathered under custom `collections_dir` (#6885)
+
+## 3.7.4 / 2018-09-07
+
+### Bug Fixes
+
+  * Security: fix `include` bypass of EntryFilter#filter symlink check (#7224)
 
 ## 3.7.3 / 2018-02-25
 
@@ -396,6 +423,12 @@
   * Add jekyll-category-pages plugin (#6632)
   * Improve docs styling for code to be run in shell (#6641)
   * Fix permalink icon markup in news-item layout (#6639)
+
+## 3.6.3 / 2018-09-18
+
+### Bug Fixes
+
+  * 3.6.x: security: fix `include` bypass of `EntryFilter#filter` symlink check (#7229)
 
 ## 3.6.2 / 2017-10-21
 
