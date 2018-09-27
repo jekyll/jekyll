@@ -41,9 +41,9 @@ module Jekyll
           markup = markup[match.end(0)..-1]
 
           value = if match[2]
-                    match[2].gsub(%r!\\"!, '"')
+                    match[2].gsub('\\"', '"')
                   elsif match[3]
-                    match[3].gsub(%r!\\'!, "'")
+                    match[3].gsub("\\'", "'")
                   elsif match[4]
                     context[match[4]]
                   end

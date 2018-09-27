@@ -20,7 +20,7 @@ In an effort to make theme management a bit easier, any files you put into
 user's site. This means you can ship SCSS and CoffeeScript, images and
 webfonts, and so on -- anything you'd consider a part of the
 *presentation*. Same rules apply here as in a Jekyll site: if it has YAML
-front matter, it will be converted and rendered. No YAML front matter, and
+front matter, it will be converted and rendered. No front matter, and
 it will simply be copied over like a static asset.
 
 Note that if a user has a file of the same path, the theme content will not

@@ -21,7 +21,7 @@ Some other highlights:
 * Fix: `jekyll clean` now accepts build flags like `--source`.
 * Enhancement: `include` tags can now accept multiple liquid variables
 * Feature: adds new `sample` liquid tag which gets random element from an array
-* Fix: Jekyll will read in files with YAML front matter that has extraneous
+* Fix: Jekyll will read in files with front matter that has extraneous
 spaces after the first line
 * Enhancement: extract the `title` attribute from the filename for
 collection items without a date

@@ -86,6 +86,7 @@ For example, suppose you have a special image syntax with complex formatting, an
    <a href="http://jekyllrb.com">
    <img src="logo.png" style="max-width: 200px;"
       alt="Jekyll logo" />
+   </a>
    <figcaption>This is the Jekyll logo</figcaption>
 </figure>
 ```
@@ -98,6 +99,7 @@ You could templatize this content in your include and make each value available 
    <a href="{{ include.url }}">
    <img src="{{ include.file }}" style="max-width: {{ include.max-width }};"
       alt="{{ include.alt }}"/>
+   </a>
    <figcaption>{{ include.caption }}</figcaption>
 </figure>
 ```
@@ -150,41 +152,3 @@ Then pass this captured variable into the parameter for the include. Omit the qu
 {% include note.html content=download_note %}
 ```
 {% endraw %}
-
-### Passing references to YAML files as parameter values
-
-Instead of passing string variables to the include, you can pass a reference to a YAML data file stored in the `_data` folder.
-
-Here's an example. In the `_data` folder, suppose you have a YAML file called `profiles.yml`. Its content looks like this:
-
-```yaml
-- name: John Doe
-  login_age: old
-  image: johndoe.jpg
-
-- name: Jane Doe
-  login_age: new
-  image: janedoe.jpg
-```
-
-In the `_includes` folder, assume you have a file called `spotlight.html` with this code:
-
-{% raw %}
-```liquid
-{% for person in include.participants %}
-{% if person.login_age == "new" %}
-{{ person.name }}
-{% endif %}
-{% endfor %}
-```
-{% endraw %}
-
-Now when you insert the `spotlight.html` include file, you can submit the YAML file as a parameter:
-
-{% raw %}
-```liquid
-{% include spotlight.html participants=site.data.profiles %}
-```
-{% endraw %}
-
-In this instance, `site.data.profiles` gets inserted in place of {% raw %}`include.participants`{% endraw %} in the include file, and the Liquid logic processes. The result will be `Jane Doe`.

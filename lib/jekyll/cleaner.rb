@@ -45,6 +45,7 @@ module Jekyll
 
       Utils.safe_glob(site.in_dest_dir, ["**", "*"], File::FNM_DOTMATCH).each do |file|
         next if file =~ HIDDEN_FILE_REGEX || file =~ regex || dirs.include?(file)
+
         files << file
       end
 

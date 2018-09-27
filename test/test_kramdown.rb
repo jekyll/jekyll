@@ -40,18 +40,18 @@ class TestKramdown < JekyllUnitTest
 
       @kramdown_config_keys.each do |key|
         assert kramdown_config.key?(key.to_sym),
-          "Expected #{kramdown_config} to include key #{key.to_sym.inspect}"
+               "Expected #{kramdown_config} to include key #{key.to_sym.inspect}"
       end
 
       @syntax_highlighter_opts_config_keys.each do |key|
         assert kramdown_config["syntax_highlighter_opts"].key?(key.to_sym),
-          "Expected #{kramdown_config["syntax_highlighter_opts"]} to include " \
-          "key #{key.to_sym.inspect}"
+               "Expected #{kramdown_config["syntax_highlighter_opts"]} to include " \
+               "key #{key.to_sym.inspect}"
       end
 
       assert_equal kramdown_config["smart_quotes"], kramdown_config[:smart_quotes]
       assert_equal kramdown_config["syntax_highlighter_opts"]["css"],
-        kramdown_config[:syntax_highlighter_opts][:css]
+                   kramdown_config[:syntax_highlighter_opts][:css]
     end
 
     should "run Kramdown" do
@@ -82,7 +82,7 @@ class TestKramdown < JekyllUnitTest
 
         markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, override))
         assert_match %r!<p>(&#171;|«)Pit(&#8250;|›)hy(&#187;|»)<\/p>!, \
-          markdown.convert(%("Pit'hy")).strip
+                     markdown.convert(%("Pit'hy")).strip
       end
     end
 
@@ -142,19 +142,20 @@ class TestKramdown < JekyllUnitTest
 
     should "move coderay to syntax_highlighter_opts" do
       original = Kramdown::Document.method(:new)
-      markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, {
-        "higlighter" => nil,
-        "markdown"   => "kramdown",
-        "kramdown"   => {
-          "syntax_highlighter" => "coderay",
-          "coderay"            => {
-            "hello" => "world",
-          },
-        },
-      }))
+      markdown = Converters::Markdown.new(
+        Utils.deep_merge_hashes(@config,
+                                "higlighter" => nil,
+                                "markdown"   => "kramdown",
+                                "kramdown"   => {
+                                  "syntax_highlighter" => "coderay",
+                                  "coderay"            => {
+                                    "hello" => "world",
+                                  },
+                                })
+      )
 
       expect(Kramdown::Document).to receive(:new) do |arg1, hash|
-        assert_equal hash["syntax_highlighter_opts"]["hello"], "world"
+        assert_equal "world", hash["syntax_highlighter_opts"]["hello"]
         original.call(arg1, hash)
       end
 

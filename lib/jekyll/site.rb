@@ -51,6 +51,7 @@ module Jekyll
       # keep using `gems` to avoid breaking change
       self.gems = config["plugins"]
 
+      configure_cache
       configure_plugins
       configure_theme
       configure_include_paths
@@ -100,6 +101,7 @@ module Jekyll
 
       raise ArgumentError, "limit_posts must be a non-negative number" if limit_posts.negative?
 
+      Jekyll::Cache.clear_if_config_changed config
       Jekyll::Hooks.trigger :site, :after_reset, self
     end
 
@@ -375,6 +377,7 @@ module Jekyll
     # Returns a path which is prefixed with the theme root directory.
     def in_theme_dir(*paths)
       return nil unless theme
+
       paths.reduce(theme.root) do |base, path|
         Jekyll.sanitized_path(base, path)
       end
@@ -419,6 +422,11 @@ module Jekyll
     # Returns The Cleaner
     def site_cleaner
       @site_cleaner ||= Cleaner.new(self)
+    end
+
+    # Disable Marshaling cache to disk in Safe Mode
+    def configure_cache
+      Jekyll::Cache.disable_disk_cache! if safe
     end
 
     def configure_plugins
@@ -467,6 +475,7 @@ module Jekyll
 
     def render_regenerated(document, payload)
       return unless regenerator.regenerate?(document)
+
       document.output = Jekyll::Renderer.new(self, document, payload).run
       document.trigger_hooks(:post_render)
     end

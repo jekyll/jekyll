@@ -103,12 +103,12 @@ Xcode.app can interfere with the command line tools downloaded above. If
 you run into this issue, upgrade Xcode and install the upgraded Command
 Line Tools.
 
-### Running Jekyll as Non-Superuser (no sudo!) 
+### Running Jekyll as Non-Superuser (no sudo!)
 {: #no-sudo}
 
 On most flavors of Linux, macOS, and Bash on Ubuntu on Windows, it is
 possible to run Jekyll as a non-superuser and without having to install
-gems to system-wide locations by adding the following lines to the end 
+gems to system-wide locations by adding the following lines to the end
 of your `.bashrc` file:
 
 ```
@@ -118,16 +118,16 @@ export GEM_HOME=$HOME/gems
 export PATH=$HOME/gems/bin:$PATH
 ```
 
-This tells `gem` to place its gems within the user's home folder, 
-not in a system-wide location, and adds the local `jekyll` command to the 
+This tells `gem` to place its gems within the user's home folder,
+not in a system-wide location, and adds the local `jekyll` command to the
 user's `PATH` ahead of any system-wide paths.
 
 This is also useful for many shared webhosting services, where user accounts
-have only limited privileges. Adding these exports to `.bashrc` before running 
+have only limited privileges. Adding these exports to `.bashrc` before running
 `gem install jekyll bundler` allows a complete non-`sudo` install of Jekyll.
 
-To activate the new exports, either close and restart Bash, logout and 
-log back into your shell account, or run `. .bashrc` in the 
+To activate the new exports, either close and restart Bash, logout and
+log back into your shell account, or run `. .bashrc` in the
 currently-running shell.
 
 If you see the following error when running the `jekyll new` command,
@@ -239,7 +239,7 @@ http://localhost:4000/blog
 
 ## Configuration problems
 
-The order of precedence for conflicting [configuration settings](../configuration/)
+The order of precedence for conflicting [configuration settings](/docs/configuration/)
 is as follows:
 
 1. Command-line flags
@@ -257,7 +257,7 @@ specified elsewhere.
     ------------------------------------
     Invalid date '<%= Time.now.strftime('%Y-%m-%d %H:%M:%S %z') %>':
     Document 'vendor/bundle/gems/jekyll-3.4.3/lib/site_template/_posts/0000-00-00-welcome-to-jekyll.markdown.erb'
-    does not have a valid date in the YAML front matter.
+    does not have a valid date in front matter.
 ```
 
 Simply adding `vendor/bundle` to the `exclude:` list will solve this problem but will lead to having other sub-directories under `/vendor/` (and also `/node_modules/`, if present) be processed to the destination folder `_site`.
@@ -309,7 +309,7 @@ run into these errors, try setting `excerpt_separator: ""` in your
 
 If you run into an issue that a static file can't be found in your
 production environment during build since v3.2.0 you should set your
-[environment to `production`](../configuration/#specifying-a-jekyll-environment-at-build-time).
+[environment to `production`](/docs/configuration/environments/).
 The issue is caused by trying to copy a non-existing symlink.
 
 <div class="note">

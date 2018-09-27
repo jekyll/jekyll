@@ -68,6 +68,7 @@ module Jekyll
     def generate_url_from_hash(template)
       @placeholders.inject(template) do |result, token|
         break result if result.index(":").nil?
+
         if token.last.nil?
           # Remove leading "/" to avoid generating urls with `//`
           result.gsub("/:#{token.first}", "")

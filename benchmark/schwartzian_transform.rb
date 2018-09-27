@@ -90,26 +90,21 @@ end
 Correctness.new(site_docs, "redirect_from".freeze).assert!
 Correctness.new(site_docs, "title".freeze).assert!
 
-# First, test with a property only a handful of documents have.
-Benchmark.ips do |x|
-  x.config(time: 10, warmup: 5)
-  x.report('sort_by_property_directly with sparse property') do
-    sort_by_property_directly(site_docs, "redirect_from".freeze)
+def test_property(property, meta_key)
+  Benchmark.ips do |x|
+    x.config(time: 10, warmup: 5)
+    x.report("sort_by_property_directly with #{property} property") do
+      sort_by_property_directly(site_docs, meta_key)
+    end
+    x.report("schwartzian_transform with #{property} property") do
+      schwartzian_transform(site_docs, meta_key)
+    end
+    x.compare!
   end
-  x.report('schwartzian_transform with sparse property') do
-    schwartzian_transform(site_docs, "redirect_from".freeze)
-  end
-  x.compare!
 end
 
+# First, test with a property only a handful of documents have.
+test_property('sparse', 'redirect_from')
+
 # Next, test with a property they all have.
-Benchmark.ips do |x|
-  x.config(time: 10, warmup: 5)
-  x.report('sort_by_property_directly with non-sparse property') do
-    sort_by_property_directly(site_docs, "title".freeze)
-  end
-  x.report('schwartzian_transform with non-sparse property') do
-    schwartzian_transform(site_docs, "title".freeze)
-  end
-  x.compare!
-end
+test_property('non-sparse', 'title')
