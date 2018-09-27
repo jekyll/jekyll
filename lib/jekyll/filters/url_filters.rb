@@ -48,8 +48,9 @@ module Jekyll
       # input - a path relative to the project root
       #
       # Returns the supplied path relativized to the current page.
-      def relativize_url(input)
+      def relative_path(input)
         return if input.nil?
+
         input = ensure_leading_slash(input)
         page_url = @context.registers[:page]["url"]
         page_dir = Pathname(page_url).parent

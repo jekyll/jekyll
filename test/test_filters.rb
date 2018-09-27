@@ -10,10 +10,9 @@ class TestFilters < JekyllUnitTest
     def initialize(opts = {})
       @site = Jekyll::Site.new(opts.merge("skip_config_files" => true))
       @page = Jekyll::Page.new(@site, "", "/some/dir", "test.md")
-      @context = Liquid::Context.new(@site.site_payload, {}, {
-        :site => @site,
-        :page => @page,
-      })
+      @context = Liquid::Context.new(@site.site_payload, {},
+                                     :site => @site,
+                                     :page => @page)
     end
   end
 
@@ -620,32 +619,32 @@ class TestFilters < JekyllUnitTest
       end
     end
 
-    context "relativize_url filter" do
-      should "relativize a URL with no common path prefix" do
-        page_url = "/otherdir/otherpage.md"
-        assert_equal "../..#{page_url}", @filter.relativize_url(page_url)
+    context "relative_path filter" do
+      should "generate a relative path with no common path prefix" do
+        page_path = "/otherdir/otherpage.md"
+        assert_equal "../..#{page_path}", @filter.relative_path(page_path)
       end
 
-      should "relativize a URL with a common path prefix" do
+      should "generate a relative path with a common path prefix" do
         file = "otherpage.md"
-        page_url = "/some/#{file}"
-        assert_equal "../#{file}", @filter.relativize_url(page_url)
+        page_path = "/some/#{file}"
+        assert_equal "../#{file}", @filter.relative_path(page_path)
       end
 
-      should "relativize a URL in the same directory" do
+      should "generate a relative path in the same directory" do
         file = "otherpage.md"
-        page_url = "/some/dir/#{file}"
-        assert_equal file, @filter.relativize_url(page_url)
+        page_path = "/some/dir/#{file}"
+        assert_equal file, @filter.relative_path(page_path)
       end
 
       should "stay within site root" do
-        assert_equal "../..", @filter.relativize_url("/../../../../../")
-        assert_equal "../..", @filter.relativize_url("/a/b/../../..")
+        assert_equal "../..", @filter.relative_path("/../../../../../")
+        assert_equal "../..", @filter.relative_path("/a/b/../../..")
       end
 
       should "not malfunction for paths without leading slashes" do
         path = "a/b/c"
-        assert_equal "../../#{path}", @filter.relativize_url(path)
+        assert_equal "../../#{path}", @filter.relative_path(path)
       end
     end
 
