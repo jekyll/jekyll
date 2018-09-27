@@ -90,6 +90,7 @@
   * Remove &#39;cache_dir&#39; during `jekyll clean` (#7158)
   * Output Jekyll Version while debugging (#7173)
   * Ignore cache directory (#7184)
+  * Drop support for pygments as syntax-highlighter (#7118)
 
 ### Development Fixes
 
