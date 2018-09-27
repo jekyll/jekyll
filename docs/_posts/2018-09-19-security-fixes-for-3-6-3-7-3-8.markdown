@@ -19,6 +19,6 @@ The patch has been released as versions `3.6.3`, `3.7.4` and `3.8.4`.<br/>
 `v3.7.4` was released a couple of weeks prior and has been bundled with `github-pages-v192`.
 
 Please keep in mind that this issue affects _all previously released Jekyll versions_. If you have not had
-a good reason to upgrade to `3.6/7/8` yet, we advise that you do so at your earliest.
+a good reason to upgrade to `3.6`, `3.7` or `3.8` yet, we advise that you do so at your earliest.
 
 As always, Happy Jekylling! :sparkles:
