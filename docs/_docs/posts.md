@@ -11,7 +11,7 @@ provides everything you need to turn it into a blog.
 ## The Posts Folder
 
 The `_posts` folder is where your blog posts live. You typically write posts
-in [Markdown](https://daringfireball.net/projects/markdown/), however HTML is
+in [Markdown](https://daringfireball.net/projects/markdown/), HTML is
 also supported.
 
 ## Creating Posts
@@ -97,9 +97,9 @@ Linking to a PDF for readers to download:
 
 ## Displaying an index of posts
 
-Creating an index of posts on another page is easy thanks to
+Creating an index of posts on another page should be easy thanks to
 [Liquid](https://docs.shopify.com/themes/liquid/basics) and its tags. Here’s a
-basic example of how to create a list of links to your blog posts:
+simple example of how to create a list of links to your blog posts:
 
 {% raw %}
 ```html
@@ -162,7 +162,7 @@ For tags it's exactly the same except the variable is `site.tags`.
 ## Post excerpts
 
 You can access a snippet of a posts's content by using `excerpt` variable on a
-post. By default this is the first paragraph of content in the post however it
+post. By default this is the first paragraph of content in the post, however it
 can be customized by setting a `excerpt_separator` variable in front matter or
 `_config.yml`.
 
@@ -204,7 +204,7 @@ create a `_drafts` folder in your site's root and create your first draft:
 |   |-- a-draft-post.md
 ```
 
-To preview your site with drafts, simply run `jekyll serve` or `jekyll build`
+To preview your site with drafts, run `jekyll serve` or `jekyll build`
 with the `--drafts` switch. Each will be assigned the value modification time
 of the draft file for its date, and thus you will see currently edited drafts
 as the latest posts.

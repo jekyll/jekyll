@@ -209,7 +209,7 @@ you specified in your `_config.yml` (if present) and the following information:
   <p>Except for documents in hard-coded default collection <code>posts</code>, all documents in collections
     you create, are accessible via Liquid irrespective of their assigned date, if any, and therefore renderable.
   </p>
-  <p>However documents are attempted to be written to disk only if the concerned collection
+  <p>Documents are attempted to be written to disk only if the concerned collection
     metadata has <code>output: true</code>. Additionally, future-dated documents are only written if
     <code>site.future</code> <em>is also true</em>.
   </p>

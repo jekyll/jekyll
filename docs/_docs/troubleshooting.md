@@ -30,7 +30,7 @@ On Red Hat, CentOS, and Fedora systems you can do this by running:
 sudo yum install ruby-devel
 ```
 
-If you installed the above - specifically on Fedora 23 - but the extensions would still not compile, you are probably running a Fedora image that misses the `redhat-rpm-config` package. To solve this, simply run:
+If you installed the above - specifically on Fedora 23 - but the extensions would still not compile, you are probably running a Fedora image that misses the `redhat-rpm-config` package. To solve this, run:
 
 ```sh
 sudo dnf install redhat-rpm-config
@@ -152,9 +152,9 @@ Password:
 Once this is done, the `jekyll new` command should work properly for
 your user account.
 
-### Jekyll &amp; Mac OS X 10.11
+### Jekyll &amp; macOS
 
-With the introduction of System Integrity Protection, several directories
+With the introduction of System Integrity Protection in v10.11, several directories
 that were previously writable are now considered system locations and are no
 longer available. Given these changes, there are a couple of simple ways to get
 up and running. One option is to change the location where the gem will be
@@ -171,7 +171,7 @@ done as follows:
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
-Once Homebrew is installed, the second step is easy:
+Once Homebrew is installed, the second step is to run:
 
 ```sh
 brew install ruby
@@ -260,12 +260,12 @@ specified elsewhere.
     does not have a valid date in front matter.
 ```
 
-Simply adding `vendor/bundle` to the `exclude:` list will solve this problem but will lead to having other sub-directories under `/vendor/` (and also `/node_modules/`, if present) be processed to the destination folder `_site`.
+Adding `vendor/bundle` to the `exclude:` list will solve this problem but will lead to having other sub-directories under `/vendor/` (and also `/node_modules/`, if present) be processed to the destination folder `_site`.
 
 
 The proper solution is to incorporate the default setting for `exclude:` rather than override it completely:
 
-For versions upto `v3.4.3`, the `exclude:` setting must look like following:
+For versions up to `v3.4.3`, the `exclude:` setting must look like following:
 
 ```yaml
 exclude:
@@ -279,7 +279,7 @@ exclude:
   - any_additional_item # any user-specific listing goes at the end
 ```
 
-From `v3.5` onward, `Gemfile` and `Gemfile.lock` are also excluded by default. So, in most cases there is no need to define another `exclude:` array in the config file. So an existing definition can either be modified as above, or removed completely, or simply commented out to enable easy edits in future.
+From `v3.5` onward, `Gemfile` and `Gemfile.lock` are also excluded by default. So, in most cases there is no need to define another `exclude:` array in the config file. So an existing definition can either be modified as above, or removed completely, or commented out to enable easy edits in future.
 
 
 ## Markup Problems
