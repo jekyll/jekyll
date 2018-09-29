@@ -56,7 +56,7 @@ Be sure to run `bundle update` often.
 ### Project Page URL Structure
 
 Sometimes it's nice to preview your Jekyll site before you push your `gh-pages`
-branch to GitHub. However, the subdirectory-like URL structure GitHub uses for
+branch to GitHub. The subdirectory-like URL structure GitHub uses for
 Project Pages complicates the proper resolution of URLs. In order to assure your
 site builds properly, use the handy [URL filters](/docs/liquid/filters/):
 
