@@ -62,6 +62,7 @@
   * Suggest sites use OpenSSL instead of GnuTLS for their site&#39;s CI (#7010)
   * Fix broken Contributors link in README.markdown (#7200)
   * Docs: Add title tag to item in RSS template (#7282)
+  * Docs: more inclusive writing (#7283)
 
 ### Minor Enhancements
 
