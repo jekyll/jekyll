@@ -78,6 +78,7 @@
   * Cache matched defaults sets for given parameters (#6888)
   * Ignore permission error of /proc/version (#7267)
   * Strip extra slashes via `Jekyll.sanitized_path` (#7182)
+  * Site template: remove default config for markdown (#7285)
 
 ### Major Enhancements
 
