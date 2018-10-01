@@ -119,6 +119,7 @@
   * Add cucumber feature to test include_relative tag (#7213)
   * Bump Rubocop to v0.59.0 (#7237)
   * update yajl-ruby (#7278)
+  * Drop support for `jekyll-watch-1.4.0` and older (#7287)
 
 ### Bug Fixes
 
