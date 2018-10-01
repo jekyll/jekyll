@@ -63,6 +63,7 @@
   * Fix broken Contributors link in README.markdown (#7200)
   * Docs: Add title tag to item in RSS template (#7282)
   * Docs: more inclusive writing (#7283)
+  * Document converter methods (#7289)
 
 ### Minor Enhancements
 
