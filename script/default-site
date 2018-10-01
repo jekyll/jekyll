@@ -13,6 +13,7 @@ pushd tmp/default-site
 
 echo "$0: respecifying the jekyll install location"
 ruby -e "contents = File.read('Gemfile'); File.write('Gemfile', contents.sub(/gem \"jekyll\".*\\n/, 'gem \"jekyll\", path: \"../../\"'))"
+ruby -e "contents = File.read('Gemfile'); File.write('Gemfile', contents + %(gem 'jekyll-sass-converter', :git => 'https://github.com/jekyll/jekyll-sass-converter.git', :branch => 'sassc'))"
 echo "$0: installing default site dependencies"
 BUNDLE_GEMFILE=Gemfile bundle install
 echo "$0: building the default site"

@@ -10,22 +10,9 @@ rvm:
   - &ruby3 2.3.7
   - &jruby jruby-9.1.16.0
 
-matrix:
-  include:
-    - rvm: *ruby1
-      env: TEST_SUITE=fmt
-      name: "🤖️ Code Format"
-    - rvm: *ruby1
-      env: TEST_SUITE=default-site
-      name: "🏠️ Default Site"
-  exclude:
-    - rvm: *jruby
-      env: TEST_SUITE=cucumber
-
 env:
   matrix:
-    - TEST_SUITE=test
-    - TEST_SUITE=cucumber
+    - TEST_SUITE=default-site
 branches:
   only:
     - master
@@ -48,9 +35,6 @@ addons:
         DA4vsRURfABU0fIhwYkQuZqEcA3d8TL36BZcGEshG6MQ2AmnYsmFiTcxqV5bmlElHEqQuT\
         5SUFXLafgZPBnL0qDwujQcHukID41sE=\
       "
-# regular test configuration
-after_success:
-  - bundle exec codeclimate-test-reporter
 
 before_install:
   - gem update --system
