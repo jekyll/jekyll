@@ -96,15 +96,17 @@ module Jekyll
     #
     # Returns String the converted content.
     def convert(content)
-      converters.reduce(content) do |output, converter|
-        begin
-          converter.convert output
-        rescue StandardError => e
-          Jekyll.logger.error "Conversion error:",
-                              "#{converter.class} encountered an error while "\
-                              "converting '#{document.relative_path}':"
-          Jekyll.logger.error("", e.to_s)
-          raise e
+      Jekyll::Cache.new("Jekyll::Renderer").getset(content) do
+        converters.reduce(content) do |output, converter|
+          begin
+            converter.convert output
+          rescue StandardError => e
+            Jekyll.logger.error "Conversion error:",
+                                "#{converter.class} encountered an error while "\
+                                "converting '#{document.relative_path}':"
+            Jekyll.logger.error("", e.to_s)
+            raise e
+          end
         end
       end
     end
