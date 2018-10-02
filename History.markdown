@@ -98,7 +98,6 @@
   * Cache converted markdown (#7159)
   * Cache converter in renderer (#7183)
   * Ignore cache directory (#7184)
-  * Cache rendered includes (#7108)
 
 ### Development Fixes
 
