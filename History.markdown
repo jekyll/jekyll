@@ -80,6 +80,7 @@
   * Ignore permission error of /proc/version (#7267)
   * Strip extra slashes via `Jekyll.sanitized_path` (#7182)
   * Site template: remove default config for markdown (#7285)
+  * Cache: Do not dump undumpable objects (#7190)
 
 ### Major Enhancements
 
