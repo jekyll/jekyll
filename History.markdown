@@ -98,6 +98,7 @@
   * Drop support for pygments as syntax-highlighter (#7118)
   * Cache converted markdown (#7159)
   * Cache converter in renderer (#7183)
+  * WIP: Cache rendered includes (#7108)
 
 ### Development Fixes
 
