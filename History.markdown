@@ -96,6 +96,7 @@
   * Output Jekyll Version while debugging (#7173)
   * Ignore cache directory (#7184)
   * Drop support for pygments as syntax-highlighter (#7118)
+  * Cache converted markdown (#7159)
 
 ### Development Fixes
 
