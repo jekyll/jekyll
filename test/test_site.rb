@@ -86,7 +86,7 @@ class TestSite < JekyllUnitTest
   context "creating sites" do
     setup do
       @site = Site.new(site_configuration)
-      @num_invalid_posts = 4
+      @num_invalid_posts = 5
     end
 
     teardown do
