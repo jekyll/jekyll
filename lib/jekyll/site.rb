@@ -234,12 +234,12 @@ module Jekyll
       # Build a hash map based on the specified document attribute
       # ( doc_attr => array of docs ) then sort each array in reverse order.
       hash = Hash.new { |h, key| h[key] = [] }
+      documents.each do |doc|
+        next unless doc.data[doc_attr]
 
-      documents.each do |d|
-        d.data[doc_attr].each { |t| hash[t] << d } if d.data[doc_attr]
+        doc.data[doc_attr].each { |prop| hash[prop] << doc }
       end
-
-      hash.values.each { |docs| docs.sort!.reverse! }
+      hash.each_value { |docs| docs.sort!.reverse! }
       hash
     end
 
