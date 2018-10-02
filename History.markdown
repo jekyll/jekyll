@@ -97,6 +97,7 @@
   * Ignore cache directory (#7184)
   * Drop support for pygments as syntax-highlighter (#7118)
   * Cache converted markdown (#7159)
+  * Cache converter in renderer (#7183)
 
 ### Development Fixes
 
