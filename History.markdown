@@ -75,7 +75,6 @@
   * Update item_property to return numbers as numbers instead of strings (#6608)
   * Use .markdown for page templates (#7126)
   * Fix custom 404 page for GitHub pages (#7132)
-  * Add Cache class (#7169)
   * Add support for `*.xhtml` files (#6854)
   * Cache matched defaults sets for given parameters (#6888)
   * Ignore permission error of /proc/version (#7267)
@@ -94,11 +93,12 @@
   * Remove support for rdiscount (#6988)
   * Remove &#39;cache_dir&#39; during `jekyll clean` (#7158)
   * Output Jekyll Version while debugging (#7173)
-  * Ignore cache directory (#7184)
   * Drop support for pygments as syntax-highlighter (#7118)
+  * Add Cache class (#7169)
   * Cache converted markdown (#7159)
   * Cache converter in renderer (#7183)
-  * WIP: Cache rendered includes (#7108)
+  * Ignore cache directory (#7184)
+  * Cache rendered includes (#7108)
 
 ### Development Fixes
 
