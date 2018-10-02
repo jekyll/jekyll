@@ -64,6 +64,7 @@
   * Docs: Add title tag to item in RSS template (#7282)
   * Docs: more inclusive writing (#7283)
   * Document converter methods (#7289)
+  * Docs: Add link tag to item in RSS template (#7291)
 
 ### Minor Enhancements
 
