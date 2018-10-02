@@ -418,6 +418,9 @@ layout: null
         {% for post in site.posts %}
         <item>
             <title>{{ post.title }}</title>
+            <link>
+                {{ post.url | prepend: site.url }}
+            </link>
             <description>
                 {{ post.content | escape | truncate: '400' }}
             </description>
