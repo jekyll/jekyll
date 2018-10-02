@@ -22,6 +22,8 @@ module Jekyll
           raise Errors::FatalException, "Bailing out; invalid Markdown processor."
         end
 
+        @cache = Jekyll::Cache.new("Jekyll::Converters::Markdown")
+
         @setup = true
       end
 
@@ -89,7 +91,9 @@ module Jekyll
       # Returns a String of the converted content.
       def convert(content)
         setup
-        @parser.convert(content)
+        @cache.getset(content) do
+          @parser.convert(content)
+        end
       end
 
       private
