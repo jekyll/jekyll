@@ -18,6 +18,7 @@ module Jekyll
 
     def reset
       @stats = {}
+      @cache = {}
     end
 
     def file(filename)
@@ -50,10 +51,18 @@ module Jekyll
       "#{error.message} in #{path}"
     end
 
+    # A persistent cache to store and retrieve parsed templates based on the filename
+    # via `LiquidRenderer::File#parse`
+    #
+    # It is emptied when `self.reset` is called.
+    def cache
+      @cache ||= {}
+    end
+
     private
 
     def filename_regex
-      @filename_regex ||= %r!\A(#{source_dir}/|#{theme_dir}/|\W*)(.*)!i
+      @filename_regex ||= %r!\A(#{source_dir}/|#{theme_dir}/|/*)(.*)!i
     end
 
     def new_profile_hash

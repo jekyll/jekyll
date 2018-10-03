@@ -90,13 +90,7 @@ module Jekyll
 
       # Render the variable if required
       def render_variable(context)
-        if @file =~ VARIABLE_SYNTAX
-          partial = context.registers[:site]
-            .liquid_renderer
-            .file("(variable)")
-            .parse(@file)
-          partial.render!(context)
-        end
+        Liquid::Template.parse(@file).render(context) if @file =~ VARIABLE_SYNTAX
       end
 
       def tag_includes_dirs(context)
