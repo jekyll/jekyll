@@ -1,6 +1,7 @@
 ---
 layout: step
 title: Deployment
+menu_name: Step by Step Tutorial
 position: 10
 ---
 In this final step we'll get the site ready for production.

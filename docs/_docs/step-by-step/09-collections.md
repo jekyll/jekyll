@@ -1,6 +1,7 @@
 ---
 layout: step
 title: Collections
+menu_name: Step by Step Tutorial
 position: 9
 ---
 Let's look at fleshing out authors so each author has their own page with a

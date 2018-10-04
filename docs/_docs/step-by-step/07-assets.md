@@ -1,6 +1,7 @@
 ---
 layout: step
 title: Assets
+menu_name: Step by Step Tutorial
 position: 7
 ---
 Using CSS, JS, images and other assets is straight forward with Jekyll. Place

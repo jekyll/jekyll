@@ -1,6 +1,7 @@
 ---
 layout: step
 title: Layouts
+menu_name: Step by Step Tutorial
 position: 4
 ---
 Websites typically have more than one page and this website is no different.

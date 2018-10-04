@@ -1,6 +1,7 @@
 ---
 layout: step
 title: Includes
+menu_name: Step by Step Tutorial
 position: 5
 ---
 The site is coming together however, there's no way to navigate between
@@ -17,7 +18,7 @@ in an `_includes` folder. Includes are useful for having a single source for
 source code that repeats around the site or for improving the readability.
 
 Navigation source code can get complex so sometimes it's nice to move it into an
-include. 
+include.
 
 ## Include usage
 

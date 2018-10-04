@@ -1,6 +1,7 @@
 ---
 layout: step
 title: Data Files
+menu_name: Step by Step Tutorial
 position: 6
 ---
 Jekyll supports loading data from YAML, JSON, and CSV files located in a `_data`
