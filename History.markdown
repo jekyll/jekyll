@@ -82,6 +82,7 @@
   * Site template: remove default config for markdown (#7285)
   * Cache: Do not dump undumpable objects (#7190)
   * Optimize rendering Liquid templates (#7136)
+  * Automatically load _config.toml (#7299)
 
 ### Major Enhancements
 
