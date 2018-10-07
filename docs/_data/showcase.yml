@@ -230,3 +230,7 @@
     - marketing-site
     - documentation
     - software
+- name: Isomer - Singapore Government Static Websites
+  url: https://isomer.gov.sg/
+  categories:
+    - government
