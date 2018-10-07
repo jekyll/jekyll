@@ -34,19 +34,30 @@ module Jekyll
     #
     # Returns nothing.
     def read_publishable(dir, magic_dir, matcher)
-      read_content(dir, magic_dir, matcher).tap { |docs| docs.each(&:read) }
-        .select do |doc|
-          if doc.content.valid_encoding?
-            site.publisher.publish?(doc).tap do |will_publish|
-              if !will_publish && site.publisher.hidden_in_the_future?(doc)
-                Jekyll.logger.debug "Skipping:", "#{doc.relative_path} has a future date"
-              end
-            end
-          else
-            Jekyll.logger.debug "Skipping:", "#{doc.relative_path} is not valid UTF-8"
-            false
-          end
+      read_content(dir, magic_dir, matcher)
+        .tap { |docs| docs.each(&:read) }
+        .select(&method(:readable?))
+        .select(&method(:publishable?))
+    end
+
+    def readable?(doc)
+      if doc.content.nil?
+        Jekyll.logger.debug "Skipping:", "Content in #{doc.relative_path} is nil"
+        false
+      elsif !doc.content.valid_encoding?
+        Jekyll.logger.debug "Skipping:", "#{doc.relative_path} is not valid UTF-8"
+        false
+      else
+        true
+      end
+    end
+
+    def publishable?(doc)
+      site.publisher.publish?(doc).tap do |will_publish|
+        if !will_publish && site.publisher.hidden_in_the_future?(doc)
+          Jekyll.logger.debug "Skipping:", "#{doc.relative_path} has a future date"
         end
+      end
     end
 
     # Read all the content files from <source>/<dir>/magic_dir
