@@ -283,7 +283,7 @@ Jekyll will read-in a `_config.yml` at the root of the theme-gem and merge its d
 
 But unlike other entities loaded from within the theme, loading the config file comes with a few restrictions, as summarized below:
   * Jekyll's default settings cannot be overridden by a theme-config. That *ball is still in the user's court.*
-  * The theme-config should be a Hash. Otherwise, it will be simply ignored silently. Users will not get a warning or any log output regarding this discrepancy.
+  * The theme-config should be a set of key-value pairs. An empty config file, a config file that simply *lists items* under a key, or a config file with just a simple string of text will simply be ignored silently. Users will not get a warning or any log output regarding this discrepancy.
   * Any settings defined by the theme-config can be overridden by the user.
 
 While this feature is to enable easier adoption of a theme, the restrictions ensure that a theme-config cannot affect the build in a concerning manner. Any plugins required by the theme will have to be listed manually by the user or provided by the theme's `gemspec` file.
