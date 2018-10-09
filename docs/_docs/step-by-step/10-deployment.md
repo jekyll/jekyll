@@ -31,7 +31,7 @@ When using a `Gemfile`, you'll run commands like `jekyll serve` with
 bundle exec jekyll serve
 ```
 
-This restricts you Ruby environment to only use gems set in your `Gemfile`.
+This restricts your Ruby environment to only use gems set in your `Gemfile`.
 
 ## Plugins
 
