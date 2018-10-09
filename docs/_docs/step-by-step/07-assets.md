@@ -58,7 +58,7 @@ Create `_sass/main.scss` with the following content:
 
 ```sass
 .current {
-  color: green
+  color: green;
 }
 ```
 
