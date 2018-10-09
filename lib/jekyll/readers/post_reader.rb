@@ -43,11 +43,7 @@ module Jekyll
             return false
           end
 
-          site.publisher.publish?(doc).tap do |will_publish|
-            if !will_publish && site.publisher.hidden_in_the_future?(doc)
-              Jekyll.logger.debug "Skipping:", "#{doc.relative_path} has a future date"
-            end
-          end
+          read_validly_encoded_doc(doc)
         end
     end
 
@@ -69,6 +65,16 @@ module Jekyll
                      :site       => @site,
                      :collection => @site.posts)
       end.reject(&:nil?)
+    end
+
+    private
+
+    def read_validly_encoded_doc(doc)
+      site.publisher.publish?(doc).tap do |will_publish|
+        if !will_publish && site.publisher.hidden_in_the_future?(doc)
+          Jekyll.logger.debug "Skipping:", "#{doc.relative_path} has a future date"
+        end
+      end
     end
   end
 end
