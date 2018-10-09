@@ -38,15 +38,15 @@ module Jekyll
         .select do |doc|
           doc_has_valid_encoding = !doc.content.nil? && doc.content.valid_encoding?
 
-          if doc_has_valid_encoding
+          if !doc_has_valid_encoding
+            Jekyll.logger.debug "Skipping:", "#{doc.relative_path} is not valid UTF-8"
+            false
+          else
             site.publisher.publish?(doc).tap do |will_publish|
               if !will_publish && site.publisher.hidden_in_the_future?(doc)
                 Jekyll.logger.debug "Skipping:", "#{doc.relative_path} has a future date"
               end
             end
-          else
-            Jekyll.logger.debug "Skipping:", "#{doc.relative_path} is not valid UTF-8"
-            false
           end
         end
     end
@@ -70,5 +70,8 @@ module Jekyll
                      :collection => @site.posts)
       end.reject(&:nil?)
     end
+
+    private
+
   end
 end
