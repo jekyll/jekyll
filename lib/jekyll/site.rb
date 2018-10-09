@@ -412,6 +412,9 @@ module Jekyll
       theme_config_file = in_theme_dir("_config.yml")
       return config unless File.exist?(theme_config_file)
 
+      # Bail out if the theme_config_file is a symlink file irrespective of safe mode
+      return config unless File.realpath(theme_config_file) == theme_config_file
+
       theme_config = SafeYAML.load_file(theme_config_file)
       return config unless theme_config.is_a?(Hash)
 
