@@ -66,6 +66,7 @@
   * Document converter methods (#7289)
   * Docs: Add link tag to item in RSS template (#7291)
   * Add Isomer to showcase (#7300)
+  * Added missing semicolon (#7306)
 
 ### Minor Enhancements
 
