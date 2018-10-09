@@ -36,16 +36,14 @@ module Jekyll
     def read_publishable(dir, magic_dir, matcher)
       read_content(dir, magic_dir, matcher).tap { |docs| docs.each(&:read) }
         .select do |doc|
-          if doc.content.valid_encoding?
-            site.publisher.publish?(doc).tap do |will_publish|
-              if !will_publish && site.publisher.hidden_in_the_future?(doc)
-                Jekyll.logger.debug "Skipping:", "#{doc.relative_path} has a future date"
-              end
-            end
-          else
+          doc_has_valid_encoding = !doc.content.nil? && doc.content.valid_encoding?
+
+          unless doc_has_valid_encoding
             Jekyll.logger.debug "Skipping:", "#{doc.relative_path} is not valid UTF-8"
-            false
+            return false
           end
+
+          read_validly_encoded_doc(doc)
         end
     end
 
@@ -67,6 +65,16 @@ module Jekyll
                      :site       => @site,
                      :collection => @site.posts)
       end.reject(&:nil?)
+    end
+
+    private
+
+    def read_validly_encoded_doc(doc)
+      site.publisher.publish?(doc).tap do |will_publish|
+        if !will_publish && site.publisher.hidden_in_the_future?(doc)
+          Jekyll.logger.debug "Skipping:", "#{doc.relative_path} has a future date"
+        end
+      end
     end
   end
 end
