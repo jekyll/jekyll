@@ -70,8 +70,5 @@ module Jekyll
                      :collection => @site.posts)
       end.reject(&:nil?)
     end
-
-    private
-
   end
 end
