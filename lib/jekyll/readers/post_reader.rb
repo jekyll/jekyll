@@ -38,7 +38,7 @@ module Jekyll
         .select do |doc|
           doc_has_valid_encoding = !doc.content.nil? && doc.content.valid_encoding?
 
-          if !doc_has_valid_encoding
+          unless doc_has_valid_encoding
             Jekyll.logger.debug "Skipping:", "#{doc.relative_path} is not valid UTF-8"
             return false
           end
