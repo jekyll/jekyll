@@ -45,6 +45,7 @@ module Jekyll
           Dir.chdir(path) do
             FileUtils.mkdir(%w(_data _drafts _includes _layouts _posts _sass assets assets/css))
             FileUtils.touch("_config.yml")
+            FileUtils.touch("_layouts/default.html")
             FileUtils.touch("_sass/main.scss")
             FileUtils.touch("assets/css/main.scss")
             FileUtils.touch("index.html")
