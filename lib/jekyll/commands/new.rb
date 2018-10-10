@@ -41,15 +41,13 @@ module Jekyll
           after_install(new_blog_path, options)
         end
 
+        def blank_template
+          File.expand_path("../../blank_template", __dir__)
+        end
+
         def create_blank_site(path)
-          Dir.chdir(path) do
-            FileUtils.mkdir(%w(_data _drafts _includes _layouts _posts _sass assets assets/css))
-            FileUtils.touch("_config.yml")
-            FileUtils.touch("_layouts/default.html")
-            FileUtils.touch("_sass/main.scss")
-            FileUtils.touch("assets/css/main.scss")
-            FileUtils.touch("index.html")
-          end
+          FileUtils.cp_r blank_template + "/.", path
+          FileUtils.chmod_R "u+w", path
         end
 
         def scaffold_post_content
