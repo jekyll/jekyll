@@ -43,7 +43,10 @@ module Jekyll
 
         def create_blank_site(path)
           Dir.chdir(path) do
-            FileUtils.mkdir(%w(_layouts _posts _drafts))
+            FileUtils.mkdir(%w(_data _drafts _includes _layouts _posts _sass assets assets/css))
+            FileUtils.touch("_config.yml")
+            FileUtils.touch("_sass/main.scss")
+            FileUtils.touch("assets/css/main.scss")
             FileUtils.touch("index.html")
           end
         end
