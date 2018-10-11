@@ -57,6 +57,8 @@ module Jekyll
           source      = options["source"]
           destination = options["destination"]
           incremental = options["incremental"]
+
+          Jekyll.logger.debug "Source Encoding:", source.encoding
           Jekyll.logger.info "Source:", source
           Jekyll.logger.info "Destination:", destination
           Jekyll.logger.info "Incremental build:",
