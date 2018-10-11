@@ -48,6 +48,10 @@ module Jekyll
         def create_blank_site(path)
           FileUtils.cp_r blank_template + "/.", path
           FileUtils.chmod_R "u+w", path
+
+          Dir.chdir(path) do
+            FileUtils.mkdir(%w(_data _drafts _includes _posts))
+          end
         end
 
         def scaffold_post_content
