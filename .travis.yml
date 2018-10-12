@@ -9,6 +9,9 @@ rvm:
   - &ruby2 2.4.4
   - &ruby3 2.3.7
   - &jruby jruby-9.1.16.0
+os:
+  - linux
+  - windows
 
 matrix:
   include:
