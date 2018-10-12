@@ -35,7 +35,7 @@ redirect_from:
   for (var i = 0; i < sites.length; i++) {
     var href = sites[i].getAttribute('href'),
       inputUrl = encodeURIComponent(href),
-      q = 'url=' + inputUrl + '&resizeWidth=800&resizeHeight=600',
+      q = 'url=' + inputUrl + '&delay=5&resizeWidth=800&resizeHeight=600',
       hash = md5(b + q),
       resultImgUrl = apiUrl + a + '/' + hash + '/image?' + q;
 
