@@ -77,8 +77,8 @@ Feature: Collections
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
-    And I should see "Collections: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/um_hi.md" in "_site/index.html" unless Windows
-    And I should see "Collections: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/yaml_with_dots.md" in "_site/index.html" if on Windows
+    And I should see "Collections: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/trailing-dots...md _methods/um_hi.md" in "_site/index.html" unless Windows
+    And I should see "Collections: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/trailing-dots...md _methods/yaml_with_dots.md" in "_site/index.html" if on Windows
 
   Scenario: Collections specified as an hash
     Given I have an "index.html" page that contains "Collections: {% for method in site.methods %}{{ method.relative_path }} {% endfor %}"
@@ -91,8 +91,8 @@ Feature: Collections
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
-    And I should see "Collections: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/um_hi.md" in "_site/index.html" unless Windows
-    And I should see "Collections: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/yaml_with_dots.md" in "_site/index.html" if on Windows
+    And I should see "Collections: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/trailing-dots...md _methods/um_hi.md" in "_site/index.html" unless Windows
+    And I should see "Collections: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/trailing-dots...md _methods/yaml_with_dots.md" in "_site/index.html" if on Windows
 
   Scenario: Rendered collection with document with future date
     Given I have a _puppies directory
@@ -372,8 +372,8 @@ Feature: Collections
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
-    And I should see "All documents: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/um_hi.md" in "_site/index.html" unless Windows
-    And I should see "All documents: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/yaml_with_dots.md" in "_site/index.html" if on Windows
+    And I should see "All documents: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/trailing-dots...md _methods/um_hi.md" in "_site/index.html" unless Windows
+    And I should see "All documents: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/trailing-dots...md _methods/yaml_with_dots.md" in "_site/index.html" if on Windows
 
   Scenario: Documents have an output attribute, which is the converted HTML
     Given I have an "index.html" page that contains "Second document's output: {{ site.documents[2].output }}"
@@ -402,7 +402,7 @@ Feature: Collections
     And I should see "Item count: 2" in "_site/index.html"
 
   Scenario: Sort by title
-    Given I have an "index.html" page that contains "{% assign items = site.methods | sort: 'title' %}2. of {{ items.size }}: {{ items[1].output }}"
+    Given I have an "index.html" page that contains "{% assign items = site.methods | sort: 'title' %}2. of {{ items.size }}: {{ items[2].output }}"
     And I have fixture collections
     And I have a "_config.yml" file with content:
     """
@@ -412,8 +412,8 @@ Feature: Collections
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "2. of 9: <p>Page without title.</p>" in "_site/index.html" unless Windows
-    And I should see "2. of 8: <p>Page without title.</p>" in "_site/index.html" if on Windows
+    And I should see "2. of 10: <p>Page without title.</p>" in "_site/index.html" unless Windows
+    And I should see "2. of 9: <p>Page without title.</p>" in "_site/index.html" if on Windows
 
   Scenario: Sort by relative_path
     Given I have an "index.html" page that contains "Collections: {% assign methods = site.methods | sort: 'relative_path' %}{{ methods | map:"title" | join: ", " }}"
@@ -426,8 +426,8 @@ Feature: Collections
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
-    And I should see "Collections: this is a test!, Collection#entries, Jekyll.configuration, Jekyll.escape, Jekyll.sanitized_path, Site#generate, Initialize, Site#generate, YAML with Dots" in "_site/index.html" unless Windows
-    And I should see "Collections: this is a test!, Collection#entries, Jekyll.configuration, Jekyll.escape, Jekyll.sanitized_path, Site#generate, Initialize, YAML with Dots" in "_site/index.html" if on Windows
+    And I should see "Collections: this is a test!, Collection#entries, Jekyll.configuration, Jekyll.escape, Jekyll.sanitized_path, Site#generate, Initialize, Ellipsis Path, Site#generate, YAML with Dots" in "_site/index.html" unless Windows
+    And I should see "Collections: this is a test!, Collection#entries, Jekyll.configuration, Jekyll.escape, Jekyll.sanitized_path, Site#generate, Initialize, Ellipsis Path, YAML with Dots" in "_site/index.html" if on Windows
 
   Scenario: Rendered collection with date/dateless filename
     Given I have an "index.html" page that contains "Collections: {% for method in site.thanksgiving %}{{ method.title }} {% endfor %}"

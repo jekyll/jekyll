@@ -127,7 +127,9 @@ module Jekyll
     # Returns the cleaned relative path of the document.
     def cleaned_relative_path
       @cleaned_relative_path ||=
-        relative_path[0..-extname.length - 1].sub(collection.relative_directory, "")
+        relative_path[0..-extname.length - 1]
+          .sub(collection.relative_directory, "")
+          .gsub(%r!\.*\z!, "")
     end
 
     # Determine whether the document is a YAML file.
@@ -482,6 +484,9 @@ module Jekyll
       elsif relative_path =~ DATELESS_FILENAME_MATCHER
         slug, ext = Regexp.last_match.captures
       end
+
+      # slugs shouldn't end with a period
+      slug.gsub!(%r!\.*\z!, "")
 
       # Try to ensure the user gets a title.
       data["title"] ||= Utils.titleize_slug(slug)

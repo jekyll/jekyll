@@ -95,7 +95,7 @@ module Jekyll
     #
     # Returns false if the file was not modified since last time (no-op).
     def write(dest)
-      dest_path = destination(dest)
+      dest_path = destination(dest).squeeze(".")
 
       return false if File.exist?(dest_path) && !modified?
 
@@ -120,7 +120,7 @@ module Jekyll
       {
         :collection => @collection.label,
         :path       => relative_path[
-          @collection.relative_directory.size..relative_path.size],
+          @collection.relative_directory.size..relative_path.size].squeeze("."),
         :output_ext => "",
         :name       => "",
         :title      => "",
@@ -134,7 +134,7 @@ module Jekyll
       @url ||= if @collection.nil?
                  relative_path
                else
-                 ::Jekyll::URL.new(
+                 URL.new(
                    :template     => @collection.url_template,
                    :placeholders => placeholders
                  )
