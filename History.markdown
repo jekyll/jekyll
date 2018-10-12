@@ -86,6 +86,7 @@
   * Cache: Do not dump undumpable objects (#7190)
   * Optimize rendering Liquid templates (#7136)
   * Automatically load _config.toml (#7299)
+  * feat: enhance --blank scaffolding (#7310)
 
 ### Major Enhancements
 
