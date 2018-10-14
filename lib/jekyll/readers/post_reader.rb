@@ -36,7 +36,7 @@ module Jekyll
     def read_publishable(dir, magic_dir, matcher)
       read_content(dir, magic_dir, matcher)
         .tap { |docs| docs.each(&:read) }
-        .select(&method(:processable?))
+        .select { |doc| processable?(doc) }
     end
 
     # Read all the content files from <source>/<dir>/magic_dir
