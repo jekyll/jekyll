@@ -33,12 +33,10 @@ class TestPostReader < JekyllUnitTest
   end
 
   def all_documents
-    @post_reader
-      .read_content(@dir, @magic_dir, @matcher)
+    @post_reader.read_content(@dir, @magic_dir, @matcher)
   end
 
   def processed_documents
-    @post_reader
-      .read_publishable(@dir, @magic_dir, @matcher)
+    @post_reader.read_publishable(@dir, @magic_dir, @matcher)
   end
 end
