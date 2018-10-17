@@ -13,3 +13,8 @@
   url: https://siteleaf.com
   width: 40
   height: 50
+- name: Tidelift
+  image: /img/tidelift-logo.png
+  width: 140
+  height: 30
+  url: https://tidelift.com/subscription/pkg/rubygems-jekyll?utm_source=rubygems-jekyll&utm_medium=referral&utm_campaign=website
