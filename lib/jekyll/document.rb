@@ -119,8 +119,10 @@ module Jekyll
     #   and with the collection's directory removed as well.
     # This method is useful when building the URL of the document.
     #
+    # NOTE: `String#gsub` removes all trailing periods (in comparison to `String#chomp`)
+    #
     # Examples:
-    #   When relative_path is "_methods/site/generate.md":
+    #   When relative_path is "_methods/site/generate...md":
     #     cleaned_relative_path
     #     # => "/site/generate"
     #
@@ -486,6 +488,7 @@ module Jekyll
       end
 
       # slugs shouldn't end with a period
+      # `String#gsub!` removes all trailing periods (in comparison to `String#chomp!`)
       slug.gsub!(%r!\.*\z!, "")
 
       # Try to ensure the user gets a title.
