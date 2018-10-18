@@ -18,8 +18,6 @@
 
 Jekyll is a simple, blog-aware, static site generator perfect for personal, project, or organization sites. Think of it like a file-based CMS, without all the complexity. Jekyll takes your content, renders Markdown and Liquid templates, and spits out a complete, static website ready to be served by Apache, Nginx or another web server. Jekyll is the engine behind [GitHub Pages](https://pages.github.com), which you can use to host sites right from your GitHub repositories.
 
-Refer to Giraffe Academy's Jekyll tutorials on [YouTube](https://www.youtube.com/playlist?list=PLLAZ4kZ9dFpOPV5C5Ay0pHaa0RJFhcmcB)
-
 ## Philosophy
 
 Jekyll does what you tell it to do — no more, no less. It doesn't try to outsmart users by making bold assumptions, nor does it burden them with needless complexity and configuration. Put simply, Jekyll gets out of your way and allows you to concentrate on what truly matters: your content.
@@ -57,6 +55,7 @@ these terms, please let one of our [core team members](https://jekyllrb.com/team
 * Customize the [Permalinks](https://jekyllrb.com/docs/permalinks/) your posts are generated with
 * Use the built-in [Liquid Extensions](https://jekyllrb.com/docs/templates/) to make your life easier
 * Use custom [Plugins](https://jekyllrb.com/docs/plugins/) to generate content specific to your site
+* Watch [video tutorials from Giraffe Academy](https://jekyllrb.com/tutorials/video-walkthroughs/)
 
 ## Credits
 
