@@ -55,6 +55,7 @@ these terms, please let one of our [core team members](https://jekyllrb.com/team
 * Customize the [Permalinks](https://jekyllrb.com/docs/permalinks/) your posts are generated with
 * Use the built-in [Liquid Extensions](https://jekyllrb.com/docs/templates/) to make your life easier
 * Use custom [Plugins](https://jekyllrb.com/docs/plugins/) to generate content specific to your site
+* Watch [video tutorials from Giraffe Academy](https://jekyllrb.com/tutorials/video-walkthroughs/)
 
 ## Credits
 
