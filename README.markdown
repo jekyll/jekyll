@@ -24,10 +24,6 @@ Jekyll does what you tell it to do — no more, no less. It doesn't try to outs
 
 See: https://jekyllrb.com/philosophy
 
-## Having trouble?
-
-See: https://jekyllrb.com/docs/troubleshooting/
-
 ## Getting Started
 
 * [Install](https://jekyllrb.com/docs/installation/) the gem
@@ -35,6 +31,20 @@ See: https://jekyllrb.com/docs/troubleshooting/
 * Take a gander at some existing [Sites](https://wiki.github.com/jekyll/jekyll/sites)
 * [Fork](https://github.com/jekyll/jekyll/fork) and [Contribute](https://jekyllrb.com/docs/contributing/) your own modifications
 * Have questions? Check out our official forum community [Jekyll Talk](https://talk.jekyllrb.com/) or [`#jekyll` on irc.freenode.net](https://botbot.me/freenode/jekyll/)
+
+## Diving In
+
+* [Migrate](http://import.jekyllrb.com/docs/home/) from your previous system
+* Learn how [Front Matter](https://jekyllrb.com/docs/front-matter/) works
+* Put information on your site with [Variables](https://jekyllrb.com/docs/variables/)
+* Customize the [Permalinks](https://jekyllrb.com/docs/permalinks/) your posts are generated with
+* Use the built-in [Liquid Extensions](https://jekyllrb.com/docs/templates/) to make your life easier
+* Use custom [Plugins](https://jekyllrb.com/docs/plugins/) to generate content specific to your site
+* Watch [video tutorials from Giraffe Academy](https://jekyllrb.com/tutorials/video-walkthroughs/)
+
+## Need help?
+
+If you don't find the answer to your problem in our [docs](https://jekyllrb.com/docs/), or in the [troubleshooting section](https://jekyllrb.com/docs/troubleshooting/), ask the [community](https://jekyllrb.com/docs/community/) for help.
 
 ## Code of Conduct
 
@@ -46,16 +56,6 @@ Please adhere to this code of conduct in any interactions you have in the
 Jekyll community. It is strictly enforced on all official Jekyll
 repositories, websites, and resources. If you encounter someone violating
 these terms, please let one of our [core team members](https://jekyllrb.com/team/#core-team) know and we will address it as soon as possible.
-
-## Diving In
-
-* [Migrate](http://import.jekyllrb.com/docs/home/) from your previous system
-* Learn how [Front Matter](https://jekyllrb.com/docs/front-matter/) works
-* Put information on your site with [Variables](https://jekyllrb.com/docs/variables/)
-* Customize the [Permalinks](https://jekyllrb.com/docs/permalinks/) your posts are generated with
-* Use the built-in [Liquid Extensions](https://jekyllrb.com/docs/templates/) to make your life easier
-* Use custom [Plugins](https://jekyllrb.com/docs/plugins/) to generate content specific to your site
-* Watch [video tutorials from Giraffe Academy](https://jekyllrb.com/tutorials/video-walkthroughs/)
 
 ## Credits
 
@@ -77,7 +77,6 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 <a href="https://opencollective.com/jekyll/sponsor/0/website" target="_blank"><img src="https://opencollective.com/jekyll/sponsor/0/avatar.svg" /></a>
 <a href="https://opencollective.com/jekyll/sponsor/1/website" target="_blank"><img src="https://opencollective.com/jekyll/sponsor/1/avatar.svg" /></a>
 <a href="https://opencollective.com/jekyll/sponsor/2/website" target="_blank"><img src="https://opencollective.com/jekyll/sponsor/2/avatar.svg" /></a>
-
 
 ## License
 
