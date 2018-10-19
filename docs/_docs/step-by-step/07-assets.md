@@ -3,7 +3,7 @@ layout: step
 title: Assets
 position: 7
 ---
-Using CSS, JS, images and other assets is straight forward with Jekyll. Place
+Using CSS, JS, images and other assets is straightforward with Jekyll. Place
 them in your site folder and they’ll copy across to the built site.
 
 Jekyll sites often use this structure to keep assets organized:
