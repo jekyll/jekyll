@@ -88,6 +88,7 @@
   * Optimize rendering Liquid templates (#7136)
   * Automatically load _config.toml (#7299)
   * feat: enhance --blank scaffolding (#7310)
+  * Skip processing posts that can not be read (#7302)
 
 ### Major Enhancements
 
