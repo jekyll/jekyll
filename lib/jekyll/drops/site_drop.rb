@@ -15,7 +15,7 @@ module Jekyll
       private def_delegator :@obj, :config, :fallback_data
 
       def [](key)
-        if @obj.collections.key?(key) && !SPECIAL_COLLECTIONS.include?(key)
+        if !SPECIAL_COLLECTIONS.include?(key) && @obj.collections.key?(key)
           @obj.collections[key].docs
         else
           super(key)
@@ -23,7 +23,8 @@ module Jekyll
       end
 
       def key?(key)
-        (@obj.collections.key?(key) && !SPECIAL_COLLECTIONS.include?(key)) || super
+        !SPECIAL_COLLECTIONS.include?(key)) && (@obj.collections.key?(key) || super
+
       end
 
       def posts

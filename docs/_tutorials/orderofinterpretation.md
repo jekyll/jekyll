@@ -89,7 +89,7 @@ console.log('alert');
 ```
 {% endraw %}
 
-The `highlight` tag *is* Liquid. (Liquid passes the content to Rouge or Pygments for syntax highlighting.) As a result, this code will actually convert to HTML with syntax highlighting. Jekyll does not need the Markdown filter to process `highlight` tags.
+The `highlight` tag *is* Liquid. (Liquid passes the content to Rouge for syntax highlighting.) As a result, this code will actually convert to HTML with syntax highlighting. Jekyll does not need the Markdown filter to process `highlight` tags.
 
 ### Liquid mixed with JavaScript isn't rendered
 

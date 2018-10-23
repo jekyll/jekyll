@@ -31,7 +31,7 @@ When using a `Gemfile`, you'll run commands like `jekyll serve` with
 bundle exec jekyll serve
 ```
 
-This restricts you Ruby environment to only use gems set in your `Gemfile`.
+This restricts your Ruby environment to only use gems set in your `Gemfile`.
 
 ## Plugins
 
@@ -77,7 +77,7 @@ For `jekyll-feed` and `jekyll-seo-tag` you need to add tags to
   <head>
     <meta charset="utf-8">
     <title>{{ page.title }}</title>
-    <link rel="stylesheet" href="/assets/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
     {% feed_meta %}
     {% seo %}
   </head>

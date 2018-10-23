@@ -33,34 +33,18 @@ module Jekyll
         suffix = context["highlighter_suffix"] || ""
         code = super.to_s.gsub(%r!\A(\n|\r)+|(\n|\r)+\z!, "")
 
-        is_safe = !!context.registers[:site].safe
-
         output =
           case context.registers[:site].highlighter
-          when "pygments"
-            render_pygments(code, is_safe)
           when "rouge"
             render_rouge(code)
+          when "pygments"
+            render_pygments(code, context)
           else
             render_codehighlighter(code)
           end
 
         rendered_output = add_code_tag(output)
         prefix + rendered_output + suffix
-      end
-
-      def sanitized_opts(opts, is_safe)
-        if is_safe
-          Hash[[
-            [:startinline, opts.fetch(:startinline, nil)],
-            [:hl_lines,    opts.fetch(:hl_lines, nil)],
-            [:linenos,     opts.fetch(:linenos, nil)],
-            [:encoding,    opts.fetch(:encoding, "utf-8")],
-            [:cssclass,    opts.fetch(:cssclass, nil)],
-          ].reject { |f| f.last.nil? }]
-        else
-          opts
-        end
       end
 
       private
@@ -86,29 +70,10 @@ module Jekyll
         options
       end
 
-      def render_pygments(code, is_safe)
-        Jekyll::External.require_with_graceful_fail("pygments") unless defined?(Pygments)
-
-        highlighted_code = Pygments.highlight(
-          code,
-          :lexer   => @lang,
-          :options => sanitized_opts(@highlight_options, is_safe)
-        )
-
-        if highlighted_code.nil?
-          Jekyll.logger.error <<~MSG
-            There was an error highlighting your code:
-
-            #{code}
-
-            While attempting to convert the above code, Pygments.rb returned an unacceptable value.
-            This is usually a timeout problem solved by running `jekyll build` again.
-          MSG
-          raise ArgumentError, "Pygments.rb returned an unacceptable value "\
-          "when attempting to highlight some code."
-        end
-
-        highlighted_code.sub('<div class="highlight"><pre>', "").sub("</pre></div>", "")
+      def render_pygments(code, _context)
+        Jekyll.logger.warn "Warning:", "Highlight Tag no longer supports rendering with Pygments."
+        Jekyll.logger.warn "", "Using the default highlighter, Rouge, instead."
+        render_rouge(code)
       end
 
       def render_rouge(code)

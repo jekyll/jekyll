@@ -1,0 +1,8 @@
+---
+layout: default
+title: This file extension is skipped
+category: test_post_reader
+---
+
+`jekyll serve` used to crash if there's a post (document) with a wrong file extension.
+This file is used in `./test/test_post_reader.rb` to verify that this doesn't happen anymore.

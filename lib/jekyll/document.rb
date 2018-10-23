@@ -60,12 +60,19 @@ module Jekyll
       data
     end
 
+    # Returns the document date. If metadata is not present then calculates it
+    # based on Jekyll::Site#time or the document file modification time.
+    #
+    # Return document date string.
     def date
       data["date"] ||= (draft? ? source_file_mtime : site.time)
     end
 
+    # Return document file modification time in the form of a Time object.
+    #
+    # Return document file modification Time object.
     def source_file_mtime
-      @source_file_mtime ||= File.mtime(path)
+      File.mtime(path)
     end
 
     # Returns whether the document is a draft. This is only the case if
