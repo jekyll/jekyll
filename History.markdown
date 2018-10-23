@@ -70,6 +70,7 @@
   * &#34;This restricts you...&#34; to &#34;This restricts your&#34; (#7307)
   * Add a link to Giraffe Academy&#39;s tutorial (#7325)
   * grammar correction (#7327)
+  * docs: list all standard liquid filters (#7333)
 
 ### Minor Enhancements
 
