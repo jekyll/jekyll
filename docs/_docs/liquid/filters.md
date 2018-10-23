@@ -509,4 +509,4 @@ For your convenience, here is the list of all [Liquid filters](https://shopify.g
 - [uniq](https://shopify.github.io/liquid/filters/uniq/)
 - [upcase](https://shopify.github.io/liquid/filters/upcase/)
 - [url_decode](https://shopify.github.io/liquid/filters/url_decode/)
-- [url_encode ](https://shopify.github.io/liquid/filters/url_encode/)
+- [url_encode](https://shopify.github.io/liquid/filters/url_encode/)
