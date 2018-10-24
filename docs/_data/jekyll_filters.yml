@@ -9,7 +9,7 @@
 #   version_badge:  : [OPTIONAL] Jekyll version that introduced the filter
 #   examples:       : [REQUIRED] A 'nested list' comprised of inputs and outputs
 #     input:        : [REQUIRED] The filter syntax and usage
-#     output:       : [OPTIONAL] The output from the fiter
+#     output:       : [OPTIONAL] The output from the filter
 #
 # Tip: Use YAML Block notations to "fold" a long string, or to "break" a long string
 #      to the following line. Block notations can also be used to avoid having to use
