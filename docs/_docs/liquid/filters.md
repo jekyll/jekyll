@@ -1,7 +1,57 @@
 ---
 title: Liquid Filters
 permalink: "/docs/liquid/filters/"
+shopify_filter_url: https://shopify.github.io/liquid/filters/
+shopify_filters:
+- abs
+- append
+- at_least
+- at_most
+- capitalize
+- ceil
+- compact
+- concat
+- date
+- default
+- divided_by
+- downcase
+- escape
+- escape_once
+- first
+- floor
+- join
+- last
+- lstrip
+- map
+- minus
+- modulo
+- newline_to_br
+- plus
+- prepend
+- remove
+- remove_first
+- replace
+- replace_first
+- reverse
+- round
+- rstrip
+- size
+- slice
+- sort
+- sort_natural
+- split
+- strip
+- strip_html
+- strip_newlines
+- times
+- truncate
+- truncatewords
+- uniq
+- upcase
+- url_decode
+- url_encode
 ---
+
 All of the standard Liquid
 [filters](#standard-liquid-filters) are supported (see below).
 To make common tasks easier, Jekyll even adds a few handy filters of its own,
@@ -461,52 +511,8 @@ The default is `default`. They are as follows (with what they filter):
 
 ### Standard Liquid Filters
 
-For your convenience, here is the list of all [Liquid filters](https://shopify.github.io/liquid/filters/) with links to examples in the official Liquid documentation.
+For your convenience, here is the list of all [Liquid filters]({{ page.shopify_filter_url }}) with links to examples in the official Liquid documentation.
 
-- [abs](https://shopify.github.io/liquid/filters/abs/)
-- [append](https://shopify.github.io/liquid/filters/append/)
-- [at_least](https://shopify.github.io/liquid/filters/at_least/)
-- [at_most](https://shopify.github.io/liquid/filters/at_most/)
-- [capitalize](https://shopify.github.io/liquid/filters/capitalize/)
-- [ceil](https://shopify.github.io/liquid/filters/ceil/)
-- [compact](https://shopify.github.io/liquid/filters/compact/)
-- [concat](https://shopify.github.io/liquid/filters/concat/)
-- [date](https://shopify.github.io/liquid/filters/date/)
-- [default](https://shopify.github.io/liquid/filters/default/)
-- [divided_by](https://shopify.github.io/liquid/filters/divided_by/)
-- [downcase](https://shopify.github.io/liquid/filters/downcase/)
-- [escape](https://shopify.github.io/liquid/filters/escape/)
-- [escape_once](https://shopify.github.io/liquid/filters/escape_once/)
-- [first](https://shopify.github.io/liquid/filters/first/)
-- [floor](https://shopify.github.io/liquid/filters/floor/)
-- [join](https://shopify.github.io/liquid/filters/join/)
-- [last](https://shopify.github.io/liquid/filters/last/)
-- [lstrip](https://shopify.github.io/liquid/filters/lstrip/)
-- [map](https://shopify.github.io/liquid/filters/map/)
-- [minus](https://shopify.github.io/liquid/filters/minus/)
-- [modulo](https://shopify.github.io/liquid/filters/modulo/)
-- [newline_to_br](https://shopify.github.io/liquid/filters/newline_to_br/)
-- [plus](https://shopify.github.io/liquid/filters/plus/)
-- [prepend](https://shopify.github.io/liquid/filters/prepend/)
-- [remove](https://shopify.github.io/liquid/filters/remove/)
-- [remove_first](https://shopify.github.io/liquid/filters/remove_first/)
-- [replace](https://shopify.github.io/liquid/filters/replace/)
-- [replace_first](https://shopify.github.io/liquid/filters/replace_first/)
-- [reverse](https://shopify.github.io/liquid/filters/reverse/)
-- [round](https://shopify.github.io/liquid/filters/round/)
-- [rstrip](https://shopify.github.io/liquid/filters/rstrip/)
-- [size](https://shopify.github.io/liquid/filters/size/)
-- [slice](https://shopify.github.io/liquid/filters/slice/)
-- [sort](https://shopify.github.io/liquid/filters/sort/)
-- [sort_natural](https://shopify.github.io/liquid/filters/sort_natural/)
-- [split](https://shopify.github.io/liquid/filters/split/)
-- [strip](https://shopify.github.io/liquid/filters/strip/)
-- [strip_html](https://shopify.github.io/liquid/filters/strip_html/)
-- [strip_newlines](https://shopify.github.io/liquid/filters/strip_newlines/)
-- [times](https://shopify.github.io/liquid/filters/times/)
-- [truncate](https://shopify.github.io/liquid/filters/truncate/)
-- [truncatewords](https://shopify.github.io/liquid/filters/truncatewords/)
-- [uniq](https://shopify.github.io/liquid/filters/uniq/)
-- [upcase](https://shopify.github.io/liquid/filters/upcase/)
-- [url_decode](https://shopify.github.io/liquid/filters/url_decode/)
-- [url_encode](https://shopify.github.io/liquid/filters/url_encode/)
+{% for filter in page.shopify_filters %}
+- [{{ filter }}]({{ filter | prepend: page.shopify_filter_url | append: '/' }})
+{% endfor %}
