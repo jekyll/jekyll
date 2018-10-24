@@ -10,66 +10,15 @@ The following is a reference of the available data.
 
 ## Global Variables
 
-<div class="mobile-side-scroller">
-<table>
-  <thead>
-    <tr>
-      <th>Variable</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for var in site.data.jekyll_variables.global %}
-    <tr>
-      <td><p><code>{{ var.name }}</code></p></td>
-      <td><p>{{- var.description -}}</p></td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
-</div>
+{% include docs_variables_table.html scope=site.data.jekyll_variables.global %}
 
 ## Site Variables
 
-<div class="mobile-side-scroller">
-<table>
-  <thead>
-    <tr>
-      <th>Variable</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for var in site.data.jekyll_variables.site %}
-    <tr>
-      <td><p><code>{{ var.name }}</code></p></td>
-      <td><p>{{- var.description -}}</p></td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
-</div>
+{% include docs_variables_table.html scope=site.data.jekyll_variables.site %}
 
 ## Page Variables
 
-<div class="mobile-side-scroller">
-<table>
-  <thead>
-    <tr>
-      <th>Variable</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for var in site.data.jekyll_variables.page %}
-    <tr>
-      <td><p><code>{{ var.name }}</code></p></td>
-      <td><p>{{- var.description -}}</p></td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
-</div>
+{% include docs_variables_table.html scope=site.data.jekyll_variables.page %}
 
 <div class="note">
   <h5>ProTip™: Use Custom Front Matter</h5>
@@ -87,24 +36,7 @@ The following is a reference of the available data.
 
 ## Paginator
 
-<div class="mobile-side-scroller">
-<table>
-  <thead>
-    <tr>
-      <th>Variable</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for var in site.data.jekyll_variables.paginator %}
-    <tr>
-      <td><p><code>{{ var.name }}</code></p></td>
-      <td><p>{{- var.description -}}</p></td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
-</div>
+{% include docs_variables_table.html scope=site.data.jekyll_variables.paginator %}
 
 <div class="note info">
   <h5>Paginator variable availability</h5>
