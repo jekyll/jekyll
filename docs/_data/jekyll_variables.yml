@@ -150,13 +150,13 @@ paginator:
     description: Total number of pages
   - name: paginator.previous_page
     description: >-
-      The number of the previous page, , or <code>nil</code> if no previous page exists
+      The number of the previous page, or <code>nil</code> if no previous page exists
   - name: paginator.previous_page_path
     description: >-
       The path to the previous page, or <code>nil</code> if no previous page exists
   - name: paginator.next_page
     description: >-
-      The number of the next page, , or <code>nil</code> if no subsequent page exists
+      The number of the next page, or <code>nil</code> if no subsequent page exists
   - name: paginator.next_page_path
     description: >-
       The path to the next page, or <code>nil</code> if no subsequent page exists
