@@ -1,3 +1,8 @@
+# Variables provided by Jekyll core
+#
+#   name:           : name of the variable
+#   description:    : content returned by the varialble
+
 global:
   - name: site
     description: >-
@@ -133,21 +138,25 @@ page:
       Returns <code>nil</code> for the first entry.
 
 paginator:
-  - name: paginator.per_page
-    description: Number of Posts per page.
-  - name: paginator.posts
-    description: Posts available for that page.
-  - name: paginator.total_posts
-    description: Total number of Posts.
-  - name: paginator.total_pages
-    description: Total number of pages.
   - name: paginator.page
-    description: The number of the current page.
+    description: The number of the current page
+  - name: paginator.per_page
+    description: Number of posts per page
+  - name: paginator.posts
+    description: Posts available for the current page
+  - name: paginator.total_posts
+    description: Total number of posts
+  - name: paginator.total_pages
+    description: Total number of pages
   - name: paginator.previous_page
-    description: The number of the previous page.
+    description: >-
+      The number of the previous page, , or <code>nil</code> if no previous page exists
   - name: paginator.previous_page_path
-    description: The path to the previous page.
+    description: >-
+      The path to the previous page, or <code>nil</code> if no previous page exists
   - name: paginator.next_page
-    description: The number of the next page.
+    description: >-
+      The number of the next page, , or <code>nil</code> if no subsequent page exists
   - name: paginator.next_page_path
-    description: The path to the next page.
+    description: >-
+      The path to the next page, or <code>nil</code> if no subsequent page exists
