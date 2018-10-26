@@ -43,7 +43,7 @@ module Jekyll
 
       # This class inserts the LiveReload script tags into HTML as it is served
       class BodyProcessor
-        HEAD_TAG_REGEX = %r!<head>|<head[^(er)][^<]*>!
+        HEAD_TAG_REGEX = %r!<head>|<head[^(er)][^<]*>!.freeze
 
         attr_reader :content_length, :new_body, :livereload_added
 
