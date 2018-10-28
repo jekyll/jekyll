@@ -94,6 +94,7 @@
   * feat: enhance --blank scaffolding (#7310)
   * Skip processing posts that can not be read (#7302)
   * Memoize Site#post_attr_hash (#7276)
+  * Load config file from within current theme-gem (#7304)
 
 ### Major Enhancements
 
