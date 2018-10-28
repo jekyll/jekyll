@@ -73,6 +73,7 @@
   * docs: list all standard liquid filters (#7333)
   * Document Jekyll Filters with YAML data (#7335)
   * Remove redundant instruction comment (#7342)
+  * docs: minimize rendering count (#7343)
 
 ### Minor Enhancements
 
