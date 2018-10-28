@@ -59,6 +59,8 @@ module Jekyll
 
       self.permalink_style = config["permalink"].to_sym
 
+      # Read in a _config.yml from the current theme-gem at the very end.
+      @config = load_theme_configuration(config) if theme
       @config
     end
 
@@ -408,6 +410,25 @@ module Jekyll
     end
 
     private
+
+    def load_theme_configuration(config)
+      theme_config_file = in_theme_dir("_config.yml")
+      return config unless File.exist?(theme_config_file)
+
+      # Bail out if the theme_config_file is a symlink file irrespective of safe mode
+      return config if File.symlink?(theme_config_file)
+
+      theme_config = SafeYAML.load_file(theme_config_file)
+      return config unless theme_config.is_a?(Hash)
+
+      Jekyll.logger.info "Theme Config file:", theme_config_file
+
+      # theme_config should not be overriding Jekyll's defaults
+      theme_config.delete_if { |key, _| Configuration::DEFAULTS.key?(key) }
+
+      # Override theme_config with existing config and return the result.
+      Utils.deep_merge_hashes(theme_config, config)
+    end
 
     # Limits the current posts; removes the posts which exceed the limit_posts
     #
