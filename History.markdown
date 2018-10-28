@@ -93,6 +93,7 @@
   * Automatically load _config.toml (#7299)
   * feat: enhance --blank scaffolding (#7310)
   * Skip processing posts that can not be read (#7302)
+  * Memoize Site#post_attr_hash (#7276)
 
 ### Major Enhancements
 
