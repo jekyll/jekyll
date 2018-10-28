@@ -413,7 +413,7 @@ module Jekyll
       return config unless File.exist?(theme_config_file)
 
       # Bail out if the theme_config_file is a symlink file irrespective of safe mode
-      return config unless File.realpath(theme_config_file) == theme_config_file
+      return config if File.symlink?(theme_config_file)
 
       theme_config = SafeYAML.load_file(theme_config_file)
       return config unless theme_config.is_a?(Hash)
