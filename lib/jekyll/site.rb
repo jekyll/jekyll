@@ -83,11 +83,7 @@ module Jekyll
     #
     # Returns nothing
     def reset
-      self.time = if config["time"]
-                    Utils.parse_date(config["time"].to_s, "Invalid time in _config.yml.")
-                  else
-                    Time.now
-                  end
+      self.time = configured_time
       self.layouts = {}
       self.pages = []
       self.static_files = []
@@ -408,6 +404,20 @@ module Jekyll
     end
 
     private
+
+    # Private: If time is provided in a config file, validate the input and return the result.
+    # Otherwise either calculate Time from SOURCE_DATE_EPOCH environment variable when available
+    #   or simply return the current time.
+    #
+    # Returns a Time object.
+    def configured_time
+      if config["time"]
+        Utils.parse_date(config["time"].to_s, "Invalid time in _config.yml.")
+      else
+        epoch = ENV["SOURCE_DATE_EPOCH"]
+        epoch.nil? ? Time.now : Time.at(epoch.to_i).gmtime
+      end
+    end
 
     # Limits the current posts; removes the posts which exceed the limit_posts
     #
