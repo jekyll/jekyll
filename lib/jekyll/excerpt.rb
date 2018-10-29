@@ -131,8 +131,8 @@ module Jekyll
     #
     # Returns excerpt String
 
-    LIQUID_TAG_REGEX = %r!{%-?\s*(\w+).+\s*-?%}!m
-    MKDWN_LINK_REF_REGEX = %r!^ {0,3}\[[^\]]+\]:.+$!
+    LIQUID_TAG_REGEX = %r!{%-?\s*(\w+).+\s*-?%}!m.freeze
+    MKDWN_LINK_REF_REGEX = %r!^ {0,3}\[[^\]]+\]:.+$!.freeze
 
     def extract_excerpt(doc_content)
       head, _, tail = doc_content.to_s.partition(doc.excerpt_separator)

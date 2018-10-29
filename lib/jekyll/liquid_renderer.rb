@@ -31,7 +31,6 @@ module Jekyll
         end
       LiquidRenderer::File.new(self, filename).tap do
         @stats[filename] ||= new_profile_hash
-        @stats[filename][:count] += 1
       end
     end
 
@@ -41,6 +40,10 @@ module Jekyll
 
     def increment_time(filename, time)
       @stats[filename][:time] += time
+    end
+
+    def increment_count(filename)
+      @stats[filename][:count] += 1
     end
 
     def stats_table(num_of_rows = 50)

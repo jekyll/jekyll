@@ -6,15 +6,15 @@ module Jekyll
       VALID_SYNTAX = %r!
         ([\w-]+)\s*=\s*
         (?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))
-      !x
+      !x.freeze
       VARIABLE_SYNTAX = %r!
         (?<variable>[^{]*(\{\{\s*[\w\-\.]+\s*(\|.*)?\}\}[^\s{}]*)+)
         (?<params>.*)
-      !mx
+      !mx.freeze
 
-      FULL_VALID_SYNTAX = %r!\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z!
-      VALID_FILENAME_CHARS = %r!^[\w/\.-]+$!
-      INVALID_SEQUENCES = %r![./]{2,}!
+      FULL_VALID_SYNTAX = %r!\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z!.freeze
+      VALID_FILENAME_CHARS = %r!^[\w/\.-]+$!.freeze
+      INVALID_SEQUENCES = %r![./]{2,}!.freeze
 
       def initialize(tag_name, markup, tokens)
         super

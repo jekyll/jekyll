@@ -42,7 +42,8 @@ plugins:
 sass:
   style: compressed
 exclude:
-- ".gitignore"
+- .gitignore
+- .jekyll-cache
 - CNAME
 - icomoon-selection.json
 - readme.md

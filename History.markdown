@@ -70,6 +70,10 @@
   * &#34;This restricts you...&#34; to &#34;This restricts your&#34; (#7307)
   * Add a link to Giraffe Academy&#39;s tutorial (#7325)
   * grammar correction (#7327)
+  * docs: list all standard liquid filters (#7333)
+  * Document Jekyll Filters with YAML data (#7335)
+  * Remove redundant instruction comment (#7342)
+  * docs: minimize rendering count (#7343)
 
 ### Minor Enhancements
 
@@ -90,6 +94,8 @@
   * Automatically load _config.toml (#7299)
   * feat: enhance --blank scaffolding (#7310)
   * Skip processing posts that can not be read (#7302)
+  * Memoize Site#post_attr_hash (#7276)
+  * Load config file from within current theme-gem (#7304)
 
 ### Major Enhancements
 
@@ -134,6 +140,7 @@
   * update yajl-ruby (#7278)
   * Drop support for `jekyll-watch-1.4.0` and older (#7287)
   * CI(Appveyor): shallow clone with 5 last commits (#7312)
+  * Bump RuboCop to v0.60.x (#7338)
 
 ### Bug Fixes
 
@@ -143,6 +150,7 @@
   * Document two methods, simplify one of the methods (#7270)
   * Check key in collections only if it isn&#39;t &#34;posts&#34; (#7277)
   * Revert &#34;Cache converter in renderer&#34; (#7326)
+  * Measure the no. of times a template gets rendered (#7316)
 
 ### feature
 
