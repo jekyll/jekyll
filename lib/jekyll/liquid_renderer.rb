@@ -21,7 +21,12 @@ module Jekyll
     end
 
     def file(filename)
+      Jekyll.logger.info "FILENAME:", filename
       filename.match(filename_regex)
+
+      Jekyll.logger.info "CAPTURES:", Regexp.last_match.captures
+      puts
+
       filename =
         if Regexp.last_match(1) == theme_dir("")
           ::File.join(::File.basename(Regexp.last_match(1)), Regexp.last_match(2))
