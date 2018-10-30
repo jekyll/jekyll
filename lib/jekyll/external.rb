@@ -60,15 +60,11 @@ module Jekyll
             require name
           rescue LoadError => e
             if name.include?("-")
-              begin
-                require name.tr("-", "/")
-              rescue LoadError => e
-                log_require_with_graceful_fail_error(name, e)
-                raise Jekyll::Errors::MissingDependencyException, name
-              end
+              require_with_graceful_fail name.tr("-", "/")
             else
-              log_require_with_graceful_fail_error(name, e)
-              raise Jekyll::Errors::MissingDependencyException, name
+              requires = name.include?("/") ? "#{name.tr("/", "-")} or #{name}" : name
+              log_require_with_graceful_fail_error(requires, e)
+              raise Jekyll::Errors::MissingDependencyException, requires
             end
           end
         end
@@ -76,20 +72,14 @@ module Jekyll
 
       private
 
-      #
-      # Log error message for require_with_graceful_fail
-      #
-      # name    - a string gem name
-      # rescued - the error rescued
-      #
-      def log_require_with_graceful_fail_error(name, rescued)
+      def log_require_with_graceful_fail_error(requires, exception)
         Jekyll.logger.error "Dependency Error:", <<-MSG
-          Yikes! It looks like you don't have #{name} or one of its dependencies installed.
+          Yikes! It looks like you don't have #{requires} or one of its dependencies installed.
           In order to use Jekyll as currently configured, you'll need to install this gem.
 
-          The full error message from Ruby is: '#{rescued.message}'
+          The last error message from Ruby is: '#{exception.message}'
 
-          If you run into trouble, you can find helpful resources at https://jekyllrb.com/help/!
+          If you run into trouble, you can find helpful resources at https://jekyllrb.com/help/
         MSG
       end
     end
