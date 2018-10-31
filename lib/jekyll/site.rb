@@ -101,6 +101,7 @@ module Jekyll
       @regenerator.clear_cache
       @liquid_renderer.reset
       @site_cleaner = nil
+      frontmatter_defaults.reset
 
       raise ArgumentError, "limit_posts must be a non-negative number" if limit_posts.negative?
 
