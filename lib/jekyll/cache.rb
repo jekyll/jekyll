@@ -60,7 +60,10 @@ module Jekyll
       return unless @@disk_cache_enabled
 
       path = path_to(hash(key))
+      value = new Hash(value) if value.is_a?(Hash) && !value.default.nil?
       dump(path, value)
+    rescue TypeError
+      Jekyll.logger.debug "Cache:", "Cannot dump object #{key}"
     end
 
     # If an item already exists in the cache, retrieve it

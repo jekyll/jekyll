@@ -71,74 +71,7 @@ with the first 5 posts, `blog/page2/index.html` with the next 5 posts and
 The pagination plugin exposes the `paginator` liquid object with the following
 attributes:
 
-<div class="mobile-side-scroller">
-<table>
-  <thead>
-    <tr>
-      <th>Attribute</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><p><code>page</code></p></td>
-      <td><p>current page number</p></td>
-    </tr>
-    <tr>
-      <td><p><code>per_page</code></p></td>
-      <td><p>number of posts per page</p></td>
-    </tr>
-    <tr>
-      <td><p><code>posts</code></p></td>
-      <td><p>a list of posts for the current page</p></td>
-    </tr>
-    <tr>
-      <td><p><code>total_posts</code></p></td>
-      <td><p>total number of posts in the site</p></td>
-    </tr>
-    <tr>
-      <td><p><code>total_pages</code></p></td>
-      <td><p>number of pagination pages</p></td>
-    </tr>
-    <tr>
-      <td><p><code>previous_page</code></p></td>
-      <td>
-        <p>
-          page number of the previous pagination page,
-          or <code>nil</code> if no previous page exists
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td><p><code>previous_page_path</code></p></td>
-      <td>
-        <p>
-          path of previous pagination page,
-          or <code>nil</code> if no previous page exists
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td><p><code>next_page</code></p></td>
-      <td>
-          <p>
-              page number of the next pagination page,
-              or <code>nil</code> if no subsequent page exists
-          </p>
-      </td>
-    </tr>
-    <tr>
-      <td><p><code>next_page_path</code></p></td>
-      <td>
-        <p>
-          path of next pagination page,
-          or <code>nil</code> if no subsequent page exists
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-</div>
+{% include docs_variables_table.html scope=site.data.jekyll_variables.paginator %}
 
 <div class="note info">
   <h5>Pagination does not support tags or categories</h5>

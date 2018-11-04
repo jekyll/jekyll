@@ -17,9 +17,7 @@ module Jekyll
 
       def render(context)
         site = context.registers[:site]
-
-        liquid = site.liquid_renderer.file("(jekyll:link)")
-        relative_path = liquid.parse(@relative_path).render(context)
+        relative_path = Liquid::Template.parse(@relative_path).render(context)
 
         site.each_site_file do |item|
           return item.url if item.relative_path == relative_path
