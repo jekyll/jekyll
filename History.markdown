@@ -1,3 +1,9 @@
+## 3.8.5 / 2018-11-04
+
+### Bug Fixes
+
+  * Re-implement handling Liquid blocks in excerpts (#7250)
+
 ## 3.8.4 / 2018-09-18
 
 ### Bug Fixes
