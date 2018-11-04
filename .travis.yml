@@ -30,7 +30,8 @@ branches:
   only:
     - master
     - themes
-    - /*-stable/
+    - /^.*-stable/
+    - /.*backport.*/
 
 notifications:
   slack:
