@@ -30,6 +30,15 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.extra_rdoc_files = %w(README.markdown LICENSE)
 
+  s.post_install_message = <<~MSG
+    ----------------------------------------------------------------------------------
+    This version of Jekyll comes with some major changes. Most notably:
+      * Our `link` tag now comes with the `relative_url` filter incorporated into it.
+        You should no longer prepend `{{ site.baseurl }}` to `{% link foo.md %}`
+        For further details: https://github.com/jekyll/jekyll/pull/6727
+    ----------------------------------------------------------------------------------
+  MSG
+
   s.add_runtime_dependency("addressable",           "~> 2.4")
   s.add_runtime_dependency("colorator",             "~> 1.0")
   s.add_runtime_dependency("em-websocket",          "~> 0.5")
