@@ -183,9 +183,8 @@ module Jekyll
       Jekyll.logger.warn "", "The block has been modified with the appropriate" \
                          " closing tag."
       Jekyll.logger.warn "", "Feel free to define a custom excerpt or" \
-                         "excerpt_separator in the"
-      Jekyll.logger.warn "", "document's Front Matter if the generated excerpt" \
-                         " is unsatisfactory."
+                         " excerpt_separator in the document's front matter" \
+                         " if the generated excerpt is unsatisfactory."
     end
   end
 end
