@@ -114,6 +114,7 @@
   * Add Cache class (#7169)
   * Cache converted markdown (#7159)
   * Ignore cache directory (#7184)
+  * Incorporate `relative_url` filter in `link` tag (#6727)
 
 ### Development Fixes
 
