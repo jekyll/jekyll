@@ -152,6 +152,7 @@
   * Check key in collections only if it isn&#39;t &#34;posts&#34; (#7277)
   * Revert &#34;Cache converter in renderer&#34; (#7326)
   * Measure the no. of times a template gets rendered (#7316)
+  * Re-implement handling Liquid blocks in excerpts (#7250)
 
 ### feature
 
