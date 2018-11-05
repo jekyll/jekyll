@@ -31,7 +31,7 @@ documents. Front matter is processed if the front matter exists, and everything
 after the front matter is pushed into the document's `content` attribute. If no front
 matter is provided, Jekyll will not generate the file in your collection.
 
-For example here's how you would add an staff member to the collection set above.
+For example here's how you would add a staff member to the collection set above.
 The filename is `./_staff_members/jane.md` with the following content:
 
 ```markdown
@@ -205,7 +205,7 @@ you specified in your `_config.yml` (if present) and the following information:
   <p>Except for documents in hard-coded default collection <code>posts</code>, all documents in collections
     you create, are accessible via Liquid irrespective of their assigned date, if any, and therefore renderable.
   </p>
-  <p>However documents are attempted to be written to disk only if the concerned collection
+  <p>Documents are attempted to be written to disk only if the concerned collection
     metadata has <code>output: true</code>. Additionally, future-dated documents are only written if
     <code>site.future</code> <em>is also true</em>.
   </p>

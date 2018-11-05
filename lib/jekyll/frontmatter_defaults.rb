@@ -93,9 +93,9 @@ module Jekyll
     # path - the path to check for
     # type - the type (:post, :page or :draft) to check for
     #
-    # Returns true if the scope applies to the given path and type
+    # Returns true if the scope applies to the given type and path
     def applies?(scope, path, type)
-      applies_path?(scope, path) && applies_type?(scope, type)
+      applies_type?(scope, type) && applies_path?(scope, path)
     end
 
     # rubocop:disable Metrics/AbcSize
@@ -188,8 +188,12 @@ module Jekyll
     #
     # Returns an array of hashes
     def matching_sets(path, type)
-      valid_sets.select do |set|
-        !set.key?("scope") || applies?(set["scope"], path, type)
+      @matched_set_cache ||= {}
+      @matched_set_cache[path] ||= {}
+      @matched_set_cache[path][type] ||= begin
+        valid_sets.select do |set|
+          !set.key?("scope") || applies?(set["scope"], path, type)
+        end
       end
     end
 
@@ -216,7 +220,7 @@ module Jekyll
 
     # Sanitizes the given path by removing a leading and adding a trailing slash
 
-    SANITIZATION_REGEX = %r!\A/|(?<=[^/])\z!
+    SANITIZATION_REGEX = %r!\A/|(?<=[^/])\z!.freeze
 
     def sanitize_path(path)
       if path.nil? || path.empty?

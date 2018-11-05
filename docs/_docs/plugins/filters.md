@@ -3,7 +3,7 @@ title: Filters
 permalink: /docs/plugins/filters/
 ---
 
-Filters are simply modules that export their methods to liquid.
+Filters are modules that export their methods to liquid.
 All methods will have to take at least one parameter which represents the input
 of the filter. The return value will be the output of the filter.
 

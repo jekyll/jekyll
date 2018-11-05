@@ -40,7 +40,7 @@ There are three options for installing plugins:
 ## Plugins on GitHub Pages
 
 [GitHub Pages](https://pages.github.com/) is powered by Jekyll.
-However, all Pages sites are generated using the `--safe` option
+All Pages sites are generated using the `--safe` option
 to disable plugins (with the exception of some
 [whitelisted plugins](https://pages.github.com/versions)) for
 security reasons. Unfortunately, this means

@@ -417,6 +417,10 @@ layout: null
         <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
         {% for post in site.posts %}
         <item>
+            <title>{{ post.title }}</title>
+            <link>
+                {{ post.url | prepend: site.url }}
+            </link>
             <description>
                 {{ post.content | escape | truncate: '400' }}
             </description>

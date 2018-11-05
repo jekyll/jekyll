@@ -59,6 +59,8 @@ module Jekyll
 
       self.permalink_style = config["permalink"].to_sym
 
+      # Read in a _config.yml from the current theme-gem at the very end.
+      @config = load_theme_configuration(config) if theme
       @config
     end
 
@@ -92,8 +94,10 @@ module Jekyll
       self.pages = []
       self.static_files = []
       self.data = {}
+      @post_attr_hash = {}
       @site_data = nil
       @collections = nil
+      @documents = nil
       @docs_to_write = nil
       @regenerator.clear_cache
       @liquid_renderer.reset
@@ -232,12 +236,14 @@ module Jekyll
     def post_attr_hash(post_attr)
       # Build a hash map based on the specified post attribute ( post attr =>
       # array of posts ) then sort each array in reverse order.
-      hash = Hash.new { |h, key| h[key] = [] }
-      posts.docs.each do |p|
-        p.data[post_attr]&.each { |t| hash[t] << p }
+      @post_attr_hash[post_attr] ||= begin
+        hash = Hash.new { |h, key| h[key] = [] }
+        posts.docs.each do |p|
+          p.data[post_attr]&.each { |t| hash[t] << p }
+        end
+        hash.each_value { |posts| posts.sort!.reverse! }
+        hash
       end
-      hash.each_value { |posts| posts.sort!.reverse! }
-      hash
     end
 
     def tags
@@ -321,7 +327,7 @@ module Jekyll
     #
     # Returns an Array of all Documents
     def documents
-      collections.reduce(Set.new) do |docs, (_, collection)|
+      @documents ||= collections.reduce(Set.new) do |docs, (_, collection)|
         docs + collection.docs + collection.files
       end.to_a
     end
@@ -405,6 +411,25 @@ module Jekyll
     end
 
     private
+
+    def load_theme_configuration(config)
+      theme_config_file = in_theme_dir("_config.yml")
+      return config unless File.exist?(theme_config_file)
+
+      # Bail out if the theme_config_file is a symlink file irrespective of safe mode
+      return config if File.symlink?(theme_config_file)
+
+      theme_config = SafeYAML.load_file(theme_config_file)
+      return config unless theme_config.is_a?(Hash)
+
+      Jekyll.logger.info "Theme Config file:", theme_config_file
+
+      # theme_config should not be overriding Jekyll's defaults
+      theme_config.delete_if { |key, _| Configuration::DEFAULTS.key?(key) }
+
+      # Override theme_config with existing config and return the result.
+      Utils.deep_merge_hashes(theme_config, config)
+    end
 
     # Limits the current posts; removes the posts which exceed the limit_posts
     #

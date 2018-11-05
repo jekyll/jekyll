@@ -14,16 +14,23 @@ If you have page snippets that you use repeatedly across your site, an
 
 ## Code snippet highlighting
 
-Jekyll has built in support for syntax highlighting of over 60 languages
+Jekyll has built in support for syntax highlighting of over 100 languages
 thanks to [Rouge](http://rouge.jneen.net). Rouge is the default highlighter
 in Jekyll 3 and above. To use it in Jekyll 2, set `highlighter` to `rouge`
 and ensure the `rouge` gem is installed properly.
 
-Alternatively, you can use [Pygments](http://pygments.org) to highlight
-your code snippets. To use Pygments, you must have Python installed on your
-system, have the `pygments.rb` gem installed and set `highlighter` to
-`pygments` in your site's configuration file. Pygments supports [over 100
-languages](http://pygments.org/languages/)
+Alternatively, you can use [Pygments](http://pygments.org) to highlight your
+code snippets in Jekyll 3.x and below. To use Pygments, you must have Python
+installed on your system, have the `pygments.rb` gem installed and set
+`highlighter` to `pygments` in your site's configuration file. Pygments
+supports [over 100 languages](http://pygments.org/languages/)
+
+<div class="note info">
+  <p>Using Pygments has been deprecated and will not be officially supported in
+  Jekyll 4, meaning that the configuration setting <code>highlighter: pygments</code>
+  will automatically fall back to using <em>Rouge</em> which is written in Ruby
+  and 100% compatible with stylesheets for Pygments.</p>
+</div>
 
 To render a code block with syntax highlighting, surround your code as follows:
 

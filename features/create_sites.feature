@@ -6,9 +6,18 @@ Feature: Create sites
   Scenario: Blank site
     Given I do not have a "test_blank" directory
     When I run jekyll new test_blank --blank
-    Then the test_blank/_layouts directory should exist
+    Then the test_blank/_data directory should exist
+    And the test_blank/_drafts directory should exist
+    And the test_blank/_includes directory should exist
+    And the test_blank/_layouts directory should exist
     And the test_blank/_posts directory should exist
-    And the "test_blank/index.html" file should exist
+    And the test_blank/_sass directory should exist
+    And the test_blank/assets/css directory should exist
+    And the "test_blank/_layouts/default.html" file should exist
+    And the "test_blank/_sass/main.scss" file should exist
+    And the "test_blank/assets/css/main.scss" file should exist
+    And the "test_blank/_config.yml" file should exist
+    And the "test_blank/index.md" file should exist
 
   Scenario: Basic site
     Given I have an "index.html" file that contains "Basic Site"
