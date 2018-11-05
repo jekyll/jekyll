@@ -1,13 +1,31 @@
-{% include top.html %}
-
-<body class="wrap">
-  {% include header.html %}
-
-  {{ content }}
-
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="generator" content="Jekyll v{{ jekyll.version }}">
+  {% feed_meta %}
+  <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="{{ site.repository }}/commits/master.atom">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" /> -->
+  <link rel="stylesheet" href="/css/screen.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  {% seo %}
+</head>
+<body>
+  <div class="top-bg"><div class="shape top"></div><div class="shape bottom"></div></div>
+  <div class="container header">
+    <div class="logo">
+      <a href="/">
+        <img src="/img/jekyll-logo.svg" width="140" height="65" alt="Jekyll Logo">
+      </a>
+    </div>
+    {% include navigation/main.html %}
+  </div>
+  <div class="container">
+    {{ content }}
+  </div>
   {% include footer.html %}
-  {% include anchor_links.html %}
+  {% include anchor-links.html %}
   {% include analytics.html %}
-  {% include search/script.html %}
 </body>
 </html>

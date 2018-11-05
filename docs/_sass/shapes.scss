@@ -1,0 +1,46 @@
+.top-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 650px;
+  background: $alt-bg;
+  z-index: -1;
+  overflow: hidden;
+
+  &:after {
+    bottom: -50px;
+    content: '';
+    display: block;
+    height: 200px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    transform: skewY(4.5deg);
+    transform-origin: 0%;
+    background: $main-bg;
+  }
+
+  .shape {
+    background: #fff;
+    border-radius: 30px;
+    position: absolute;
+    opacity: .05;
+
+    &.top {
+      width: 300px;
+      height: 305px;
+      left: -32px;
+      top: -90px;
+      transform: rotate(25deg);
+    }
+
+    &.bottom {
+      width: 443px;
+      height: 406px;
+      right: -47px;
+      bottom: -181px;
+      transform: rotate(25deg);
+    }
+  }
+}

@@ -1,11 +1,11 @@
 ---
 layout: tutorials
 title: Tutorials
-permalink: /tutorials/home/
-redirect_from: /tutorials/index.html
+permalink: /tutorials/
+redirect_from: /tutorials/home/index.html
 ---
 
-In contrast to [Docs](/docs/home/), Tutorials provide more detailed, narrative instruction that cover a variety of Jekyll topics and scenarios. Tutorials might contain the following:
+In contrast to [Docs](/docs/), Tutorials provide more detailed, narrative instruction that cover a variety of Jekyll topics and scenarios. Tutorials might contain the following:
 
 * Step-by-step processes through particular scenarios or challenges
 * Full walk-throughs using sample data, showing inputs and results from the sample data
@@ -31,5 +31,3 @@ We welcome your tutorial contributions. To add your tutorial:
 6. Follow the regular git workflow to submit the pull request.
 
 When you submit your pull request, the Jekyll documentation team will review your contribution and either merge it or suggest edits.
-
-

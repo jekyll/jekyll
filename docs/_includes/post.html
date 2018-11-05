@@ -1,0 +1,24 @@
+<article class="post page">
+	<div class="page-pad">
+		<h2><a href="{{ include.post.url }}">{{ include.post.title }}</a></h2>
+
+		<div class="post-meta">
+			<span class="post-category">
+				{{ include.post.categories | array_to_sentence_string | capitalize }}
+			</span>
+			&middot;
+			<span class="post-date">
+				{{ include.post.date | date: '%e %b %Y' }}
+			</span>
+			&middot;
+			{% assign author = include.post.author %}
+			<a href="https://github.com/{{ author }}" class="post-author">
+				{% avatar user=author size=24 %}
+				{{ author }}
+			</a>
+		</div>
+		<div class="post-content">
+			{{ include.post.content }}
+		</div>
+	</div>
+</article>

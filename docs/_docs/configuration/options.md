@@ -7,6 +7,8 @@ The tables below list the available settings for Jekyll, and the various <code
 class="option">options</code> (specified in the configuration file) and <code
 class="flag">flags</code> (specified on the command-line) that control them.
 
+Remember, configuration files are YAML so use spaces for indention not tabs.
+
 ### Global Configuration
 
 <div class="mobile-side-scroller">
@@ -33,7 +35,8 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr class="setting">
       <td>
         <p class="name"><strong>Site Destination</strong></p>
-        <p class="description">Change the directory where Jekyll will write files</p>
+        <p class="description">Change the directory where Jekyll will write files. Files or folders in this directory that are not created by your site will be removed. Some files could be retained
+        by specifying them within the <code>&lt;keep_files&gt;</code> configuration directive.</p>
       </td>
       <td class="align-center">
         <p><code class="option">destination: DIR</code></p>
@@ -116,8 +119,6 @@ class="flag">flags</code> (specified on the command-line) that control them.
             The default value is <code>utf-8</code> starting in 2.0.0,
             and <code>nil</code> before 2.0.0, which will yield the Ruby
             default of <code>ASCII-8BIT</code>.
-            Available encodings can be shown by the
-            command <code>ruby -e 'puts Encoding::list.join("\n")'</code>.
         </p>
       </td>
       <td class="align-center">
@@ -138,20 +139,6 @@ class="flag">flags</code> (specified on the command-line) that control them.
     </tr>
   </tbody>
 </table>
-</div>
-
-<div class="note warning">
-  <h5>Destination folders are cleaned on site builds</h5>
-  <p>
-    The contents of <code>&lt;destination&gt;</code> are automatically
-    cleaned, by default, when the site is built. Files or folders that are not
-    created by your site will be removed. Some files could be retained
-    by specifying them within the <code>&lt;keep_files&gt;</code> configuration directive.
-  </p>
-  <p>
-    Do not use an important location for <code>&lt;destination&gt;</code>; instead, use it as
-    a staging area and copy files from there to your web server.
-  </p>
 </div>
 
 ### Build Command Options
@@ -398,12 +385,4 @@ before your site is served.
     </tr>
   </tbody>
 </table>
-</div>
-
-<div class="note warning">
-  <h5>Do not use tabs in configuration files</h5>
-  <p>
-    This will either lead to parsing errors, or Jekyll will revert to the
-    default settings. Use spaces instead.
-  </p>
 </div>

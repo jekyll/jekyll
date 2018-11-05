@@ -1,0 +1,12 @@
+<nav class="main-nav">
+  {% for p in site.data.primary_nav %}
+    <a href="{{ p.link }}" class="
+      {% if p.link == '/' %}
+        {% if page.url == '/' %}current{% endif %}
+      {% else %}
+        {% if page.url contains p.link %}current{% endif %}
+      {% endif %}">
+      {{ p.title }}
+    </a>
+  {% endfor %}
+</nav>

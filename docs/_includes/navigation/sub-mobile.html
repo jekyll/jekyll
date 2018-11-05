@@ -1,0 +1,19 @@
+<div class="sub-mobile-nav">
+  <select onchange="if (this.value) window.location.href=this.value">
+    <option value="">Navigate the {{ include.source.first.collection }}...</option>
+    {% for section in include.sections %}
+    <optgroup label="{{ section.title }}">
+      {% for item in section.items %}
+        {% assign p = include.source | where: "url", item.link | first %}
+        <option value="{{ p.url }}">
+          {% if p.menu_name %}
+            {{ p.menu_name }}
+          {% else %}
+            {{ p.title }}
+          {% endif %}
+        </option>
+      {% endfor %}
+    </optgroup>
+    {% endfor %}
+  </select>
+</div>

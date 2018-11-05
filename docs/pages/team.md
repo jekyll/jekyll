@@ -6,8 +6,8 @@ permalink: /team/
 
 ## Core Team
 
-*The Jekyll Core Team's responsibility is to ensure the development and
-community around the Jekyll ecosystem thrive.*
+The Jekyll Core Team's responsibility is to ensure the development and
+community around the Jekyll ecosystem thrive.
 
 1. Olivia (@oe, Project Lead)
 2. Frank (@DirtyF, Documentation)
@@ -16,9 +16,9 @@ community around the Jekyll ecosystem thrive.*
 
 ## Plugin Core
 
-*The Jekyll Plugin Core Team's responsibility is to ensure the development and
+The Jekyll Plugin Core Team's responsibility is to ensure the development and
 community around the core plugins thrive. They also provide guidance in
-conversations about extensibility of Core Jekyll.*
+conversations about extensibility of Core Jekyll.
 
 1. Ashwin (@ashmaroli)
 2. Florian (@Crunch09)
@@ -27,9 +27,9 @@ conversations about extensibility of Core Jekyll.*
 
 ## Affinity Team Captains
 
-*The Affinity Team Captains lead [Jekyll's Affinity
+The Affinity Team Captains lead [Jekyll's Affinity
 Teams](https://teams.jekyllrb.com/). Each team is tasked with maintaining
-and addressing issues for a specific aspect of Jekyll.*
+and addressing issues for a specific aspect of Jekyll.
 
 1. [Build](https://github.com/orgs/jekyll/teams/build): @mattr-
 2. [Documentation](https://github.com/orgs/jekyll/teams/documentation): @DirtyF, @mattr-
@@ -40,7 +40,7 @@ and addressing issues for a specific aspect of Jekyll.*
 
 ## Emeritus Core Team Members
 
-*Emeritus Core Team Members were once members of Jekyll's Core Team.*
+Emeritus Core Team Members were once members of Jekyll's Core Team.
 
 1. Parker (@parkr)
 2. Tom (@mojombo)

@@ -1,15 +1,9 @@
 - name: Forestry.io
-  image: /img/forestry-logo.png
+  image: /img/forestry.svg
   url: https://forestry.io/?utm_campaign=jekyllsponsor&utm_medium=banner&utm_source=jekyllrb.com
-  width: 140
-  height: 30
 - name: CloudCannon
-  image: /img/cloudcannon-logo.png
+  image: /img/cloudcannon.svg
   url: https://cloudcannon.com
-  width: 75
-  height: 30
 - name: Siteleaf
-  image: /img/siteleaf-logo.png
+  image: /img/siteleaf.svg
   url: https://siteleaf.com
-  width: 40
-  height: 50

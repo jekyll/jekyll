@@ -1,10 +1,20 @@
 ---
-layout: news
+layout: default
 title: News
 permalink: /news/
 author: all
+redirect_from: /news/releases/
 ---
+<h1>News</h1>
 
-{% for post in site.posts %}
-  {% include news_item.html %}
+{% for post in site.posts limit:5 %}
+  {% include post.html post=post %}
 {% endfor %}
+
+<h2>Archieved Posts</h2>
+
+<ul>
+  {% for post in site.posts offset:5 %}
+    <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+  {% endfor %}
+</ul>

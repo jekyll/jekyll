@@ -22,25 +22,16 @@ then be available to you to access using Liquid tags both further down in the
 file and also in any layouts or includes that the page or post in question
 relies on.
 
-<div class="note warning">
-  <h5>UTF-8 Character Encoding Warning</h5>
-  <p>
-    If you use UTF-8 encoding, make sure that no <code>BOM</code> header
-    characters exist in your files or very, very bad things will happen to
-    Jekyll. This is especially relevant if you’re running
-    <a href="/docs/installation/windows/">Jekyll on Windows</a>.
-  </p>
-</div>
+If you want to use [Liquid tags and variables](/docs/variables/)
+but don’t need anything in your front matter, just leave it empty. The set
+of triple-dashed lines with nothing in between will still get Jekyll to
+process your file. (This is useful for things like CSS and RSS feeds)
 
-<div class="note">
-  <h5>ProTip™: Front Matter Variables Are Optional</h5>
-  <p>
-    If you want to use <a href="/docs/variables/">Liquid tags and variables</a>
-    but don’t need anything in your front matter, just leave it empty! The set
-    of triple-dashed lines with nothing in between will still get Jekyll to
-    process your file. (This is useful for things like CSS and RSS feeds!)
-  </p>
-</div>
+If you use UTF-8 encoding, make sure that no `BOM` header
+characters exist in your files or very, very bad things will happen to
+Jekyll. This is especially relevant if you’re running
+<a href="">[Jekyll on Windows](/docs/installation/windows/).
+
 
 ## Predefined Global Variables
 
@@ -111,15 +102,6 @@ front matter of a page or post.
     </tr>
   </tbody>
 </table>
-</div>
-
-<div class="note">
-  <h5>ProTip™: Render Posts Marked As Unpublished</h5>
-  <p>
-    To preview unpublished pages, simply run `jekyll serve` or `jekyll build`
-    with the `--unpublished` switch. Jekyll also has a handy <a href="/docs/posts/#drafts">drafts</a>
-    feature tailored specifically for blog posts.
-  </p>
 </div>
 
 ## Custom Variables
@@ -200,12 +182,6 @@ These are available out-of-the-box to be used in the front matter for a post.
 </table>
 </div>
 
-<div class="note">
-  <h5>ProTip™: Don't repeat yourself</h5>
-  <p>
-    If you don't want to repeat your frequently used front matter variables
-    over and over, just define <a href="/docs/configuration/front-matter-defaults/" title="Front Matter defaults">defaults</a>
-    for them and only override them where necessary (or not at all). This works
-    both for predefined and custom variables.
-  </p>
-</div>
+## Defaults
+
+[Front matter defaults](/docs/configuration/front-matter-defaults/) help you to reduce repetition for things like `layouts` which is often the same across multiple pages.

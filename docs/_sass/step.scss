@@ -1,0 +1,17 @@
+.step-nav {
+  padding: 8px 45px;
+  background: rgba(0,0,0,.3);
+  border-radius: 5px;
+
+  li {
+    margin: 0;
+  }
+
+  .current {
+    font-weight: bold;
+  }
+}
+
+.section-nav {
+  text-align: center;
+}

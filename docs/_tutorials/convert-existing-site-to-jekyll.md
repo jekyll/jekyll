@@ -87,7 +87,7 @@ This is a Jekyll site at the most basic functional level. Here's what is happeni
   * Jekyll pushes the content from all pages and posts into the `{% raw %}{{ content }}{% endraw %}` variable in the layout specified (`default`) in the front matter tags.
   * The processed files get written as `.html` files in the `_site` directory.
 
-You can read more about how Jekyll processes the files in [order of Interpretation]({% link _tutorials/orderofinterpretation.md %}).
+You can read more about how Jekyll processes the files in [order of Interpretation]({% link _tutorials/order-of-interpretation.md %}).
 
 With this basic understanding of how a Jekyll site works, you can convert almost any HTML theme for Jekyll. The following sections will take you through a step-by-step tutorial to do so.
 

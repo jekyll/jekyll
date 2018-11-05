@@ -1,16 +1,16 @@
 - title: Getting Started
-  docs:
+  items:
     - link: /docs/
     - link: /docs/ruby-101/
     - link: /docs/installation/
     - link: /docs/community/
     - link: /docs/step-by-step/01-setup/
 - title: Build
-  docs:
+  items:
     - link: /docs/usage/
     - link: /docs/configuration/
 - title: Content
-  docs:
+  items:
     - link: /docs/pages/
     - link: /docs/posts/
     - link: /docs/front-matter/
@@ -19,7 +19,7 @@
     - link: /docs/assets/
     - link: /docs/static-files/
 - title: Site Structure
-  docs:
+  items:
     - link: /docs/structure/
     - link: /docs/liquid/
     - link: /docs/variables/
@@ -29,7 +29,7 @@
     - link: /docs/themes/
     - link: /docs/pagination/
 - title: Guides
-  docs:
+  items:
     - link: /docs/plugins/
     - link: /docs/migrations/
     - link: /docs/upgrading/

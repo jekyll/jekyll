@@ -1,0 +1,14 @@
+.btn {
+	border: 1px solid #fff;
+	border-radius: 3px;
+	color: #fff;
+	text-decoration: none;
+	padding: 15px 20px;
+	display: inline-block;
+	font-size: 0.85em;
+	transition: background ease .3s;
+	text-transform: uppercase;
+	&:hover {
+		background: rgba(255, 255, 255, .1);
+	}
+}

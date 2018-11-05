@@ -1,0 +1,9 @@
+- title: Tutorials
+  items:
+    - link: /tutorials/
+    - link: /tutorials/video-walkthroughs/
+    - link: /tutorials/navigation/
+    - link: /tutorials/order-of-interpretation/
+    - link: /tutorials/custom-404-page/
+    - link: /tutorials/convert-site-to-jekyll/
+    - link: /tutorials/using-jekyll-with-bundler/

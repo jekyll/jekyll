@@ -202,7 +202,7 @@ Here's the full list of placeholders available:
 
 ### Built-in formats
 
-For posts, Jekyll also provides the following built-in styles for convenience:
+For posts, Jekyll also provides the following built-in styles for convenience. Note, these aren't recognized when setting the permalink in front matter.
 
 <div class="mobile-side-scroller">
 <table>
@@ -247,13 +247,6 @@ For posts, Jekyll also provides the following built-in styles for convenience:
     </tr>
   </tbody>
 </table>
-</div>
-
-Rather than typing `permalink: /:categories/:year/:month/:day/:title/`, you can just type `permalink: pretty`.
-
-<div class="note info">
-<h5>Specifying permalinks through the front matter</h5>
-<p>Built-in permalink styles are not recognized in front matter. As a result, <code>permalink: pretty</code> will not work.</p>
 </div>
 
 ### Collections

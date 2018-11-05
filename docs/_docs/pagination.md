@@ -11,16 +11,12 @@ generate the appropriate files and folders you need for paginated listings.
 For Jekyll 3, include the `jekyll-paginate` plugin in your Gemfile and in
 your `_config.yml` under `plugins`. For Jekyll 2, this is standard.
 
-<div class="note info">
-  <h5>Pagination only works within HTML files</h5>
-  <p>
-    Pagination does not work from within Markdown files from
-    your Jekyll site. Pagination works when called from within the HTML
-    file, named <code>index.html</code>, which optionally may reside in and
-    produce pagination from within a subdirectory, via the
-    <code>paginate_path</code> configuration value.
-  </p>
-</div>
+Pagination does not work from within Markdown files from
+your Jekyll site. Pagination works when called from within the HTML
+file, named `index.html`, which optionally may reside in and
+produce pagination from within a subdirectory, via the
+`paginate_path` configuration value.
+{: .warning }
 
 ## Enable pagination
 
@@ -47,24 +43,8 @@ If a site has 12 posts and specifies `paginate: 5`, Jekyll will write `blog/inde
 with the first 5 posts, `blog/page2/index.html` with the next 5 posts and
 `blog/page3/index.html` with the last 2 posts into the destination directory.
 
-<div class="note warning">
-  <h5>Don't set a permalink</h5>
-  <p>
-    Setting a permalink in the front matter of your blog page will cause
-    pagination to break. Just omit the permalink.
-  </p>
-</div>
-
-<div class="note info">
-  <h5>Pagination for categories, tags and collections</h5>
-  <p>
-    The more recent <a href="https://github.com/sverrirs/jekyll-paginate-v2">
-    jekyll-paginate-v2</a> plugin supports more features. See the
-    <a href="https://github.com/sverrirs/jekyll-paginate-v2/tree/master/examples">
-    pagination examples</a> in the repository. <strong>This plugin is not
-    supported by GitHub Pages</strong>.
-  </p>
-</div>
+Setting a permalink in the front matter of your blog page will cause pagination to break. Just omit the permalink.
+{: .warning }
 
 ## Liquid Attributes Available
 
@@ -140,20 +120,22 @@ attributes:
 </table>
 </div>
 
-<div class="note info">
-  <h5>Pagination does not support tags or categories</h5>
-  <p>Pagination pages through every post in the <code>posts</code>
-  variable unless a post has <code>hidden: true</code> in its front matter.
-  It does not currently allow paging over groups of posts linked
-  by a common tag or category. It cannot include any collection of
-  documents because it is restricted to posts.</p>
-</div>
+## Tags and Categories
+
+Pagination pages through every post in the `posts`
+variable unless a post has `hidden: true` in its front matter.
+It does not currently allow paging over groups of posts linked
+by a common tag or category. It cannot include any collection of documents because it is restricted to posts.
+
+[jekyll-paginate-v2](https://github.com/sverrirs/jekyll-paginate-v2) is an unofficial successor of jekyll-paginate which supports more features.
 
 ## Render the paginated Posts
 
 The next thing you need to do is to actually display your posts in a list using
 the `paginator` variable that will now be available to you. You’ll probably
-want to do this in one of the main pages of your site. Here’s one example of a
+want to do this in one of the main pages of your site.
+
+Here’s one example of a
 simple way of rendering paginated Posts in a HTML file:
 
 {% raw %}
@@ -195,17 +177,10 @@ title: My Blog
 ```
 {% endraw %}
 
-<div class="note warning">
-  <h5>Beware the page one edge-case</h5>
-  <p>
-    Jekyll does not generate a ‘page1’ folder, so the above code will not work
-    when a <code>/page1</code> link is produced. See below for a way to handle
-    this if it’s a problem for you.
-  </p>
-</div>
 
-The following HTML snippet should handle page one, and render a list of each
-page with links to all but the current page.
+Jekyll does not generate a `page1` folder, so the above code will not work
+when a `/page1` link is produced. See below for a way to handle
+this if it’s a problem for you:
 
 {% raw %}
 ```liquid

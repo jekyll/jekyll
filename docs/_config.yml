@@ -29,7 +29,7 @@ defaults:
     path: _posts
     type: posts
   values:
-    layout: news_item
+    layout: post
     image: "/img/twitter-card.png"
 plugins:
 - jekyll-avatar
@@ -44,5 +44,4 @@ sass:
 exclude:
 - ".gitignore"
 - CNAME
-- icomoon-selection.json
 - readme.md

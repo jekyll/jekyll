@@ -43,12 +43,10 @@ you want to highlight, look for the “short name” on the [Rouge
 wiki](https://github.com/jayferd/rouge/wiki/List-of-supported-languages-and-lexers)
 or the [Pygments' Lexers page](http://pygments.org/docs/lexers/).
 
-<div class="note info">
-  <h5>Jekyll processes all Liquid filters in code blocks</h5>
-  <p>If you are using a language that contains curly braces, you
-    will likely need to place <code>{&#37; raw &#37;}</code> and
-    <code>{&#37; endraw &#37;}</code> tags around your code.</p>
-</div>
+### Raw
+Surround a block of code in <code>{&#37; raw &#37;}</code> will ignore Liquid until
+<code>{&#37; endraw &#37;}</code>. This is useful if you're using a language that
+contains curly braces or you're documenting Liquid.
 
 ### Line numbers
 
@@ -111,7 +109,7 @@ If you're unsure of the path, add `{% raw %}{{ page.path }}{% endraw %}` to the 
 
 One major benefit of using the `link` or `post_url` tag is link validation. If the link doesn't exist, Jekyll won't build your site. This is a good thing, as it will alert you to a broken link so you can fix it (rather than allowing you to build and deploy a site with broken links).
 
-Note you cannot add filters to `link` tags. For example, you cannot append a string using Liquid filters, such as `{% raw %}{% link mypage.html | append: "#section1" %} {% endraw %}`. To link to sections on a page, you will need to use regular HTML or Markdown linking techniques.
+Note you cannot add filters to `link` tags. For example, you cannot append a string using Liquid filters, such as `{% raw %}{% link mypage.html | append: "#section1" %}{% endraw %}`. To link to sections on a page, you will need to use regular HTML or Markdown linking techniques.
 
 ### Linking to posts
 

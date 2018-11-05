@@ -1,0 +1,19 @@
+---
+layout: blank
+---
+{% capture home %}/{{ layout.nav_source }}/{% endcapture %}
+{% capture nav_file_name %}{{ layout.nav_source }}_nav{% endcapture %}
+{% assign nav_file = site.data[nav_file_name] %}
+{% assign source = site[layout.nav_source] %}
+
+{% include navigation/sub-mobile.html sections=nav_file source=source home=home %}
+<div class="with-subnav">
+  {% include navigation/sub.html sections=nav_file source=source home=home  %}
+  <article class="content page-pad">
+     {% unless layout.no_title %}<h1>{{ page.title }}</h1>{% endunless %}
+    {{ content }}
+    <div class="improve">
+      <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/{{ page.path }}">&#9998; Improve this page</a>
+    </div>
+  </article>
+</div>

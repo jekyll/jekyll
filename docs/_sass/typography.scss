@@ -1,0 +1,45 @@
+body {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.2em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+
+h1 {
+  font-size: 3em;
+  margin-bottom: .7em;
+}
+
+h2 {
+  font-size: 2.3em;
+}
+
+h3 {
+  font-size: 1.8em
+}
+
+h4 {
+  font-size: 1.4em;
+  margin-bottom: .7em;
+}
+
+h2, h3 {
+  margin: .6em 0 .5em 0;
+}
+
+a {
+  color: $link-color;
+  text-decoration: none;
+}
+
+p, li, pre, code {
+  line-height: 1.5em;
+}
+
+pre {
+  border-radius: 5px;
+}

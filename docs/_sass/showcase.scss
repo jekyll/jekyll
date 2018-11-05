@@ -1,0 +1,30 @@
+.showcase {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  li {
+    flex: 1 1 300px;
+    box-sizing: border-box;
+    margin: 10px;
+    figure {
+      margin: 0;
+    }
+    figcaption {
+      text-align: center;
+      margin-top: 10px;
+    }
+    &.spacer {
+      height: 0;
+      margin: 0;
+    }
+
+    a:hover .imageWrapper img {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+}

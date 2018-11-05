@@ -42,16 +42,11 @@ currently supported options:
 * **transliterated_header_ids** - Transliterate the header text before generating the ID
 * **typographic_symbols** - Defines a mapping from typographical symbol to output characters
 
-<div class="note warning">
-  <h5>There are two unsupported kramdown options</h5>
-  <p>
-    Please note that both <code>remove_block_html_tags</code> and
-    <code>remove_span_html_tags</code> are currently unsupported in Jekyll due
-    to the fact that they are not included within the kramdown HTML converter.
-  </p>
-</div>
-
-For more details about these options have a look at the [Kramdown configuration documentation](https://kramdown.gettalong.org/options.html). 
+Please note that both `remove_block_html_tags` and
+`remove_span_html_tags` are currently unsupported in Jekyll due
+to the fact that they are not included within the kramdown HTML converter.
+{: .warning }
+For more details about these options have a look at the [Kramdown configuration documentation](https://kramdown.gettalong.org/options.html).
 
 ### Redcarpet
 

@@ -24,21 +24,6 @@ collections:
     people: true
 ```
 
-<div class="note">
-  <h5>Gather your collections {%- include docs_version_badge.html version="3.7.0" -%}</h5>
-
-  <p>You can optionally specify a directory to store all your collections in the same place with <code>collections_dir: my_collections</code>.</p>
-
-  <p>Then Jekyll will look in <code>my_collections/_books</code> for the <code>books</code> collection, and
-  in <code>my_collections/_recipes</code> for the <code>recipes</code> collection.</p>
-</div>
-
-<div class="note warning">
-  <h5>Be sure to move drafts and posts into custom collections directory</h5>
-
-  <p>If you specify a directory to store all your collections in the same place with <code>collections_dir: my_collections</code>, then you will need to move your <code>_drafts</code> and <code>_posts</code> directory to <code>my_collections/_drafts</code> and <code>my_collections/_posts</code>. Note that, the name of your collections directory cannot start with an underscore (`_`).</p>
-</div>
-
 ## Add content
 
 Create a corresponding folder (e.g. `<source>/_staff_members`) and add
@@ -110,6 +95,17 @@ You can link to the generated page using the `url` attribute:
 
 There are special [permalink variables for collections](/docs/permalinks/) to
 help you control the output url for the entire collection.
+
+## Custom Collection directory
+You can optionally specify a directory to store all your collections in the same place with `collections_dir: my_collections`.
+
+Then Jekyll will look in `my_collections/_books` for the `books` collection, and
+in `my_collections/_recipes` for the `recipes` collection.
+
+The name of your collections directory cannot start with an `_`.
+
+You will need to move your `_drafts` and `_posts` to your `collection_dir`
+{: .warning }
 
 ## Liquid Attributes
 

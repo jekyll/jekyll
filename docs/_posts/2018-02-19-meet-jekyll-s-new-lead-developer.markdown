@@ -1,5 +1,4 @@
 ---
-layout: news_item
 title: "Meet Jekyll's New Lead Developer"
 date: "2018-02-19 20:48:09 -0500"
 author: parkr

@@ -3,7 +3,7 @@ title: Plugins
 permalink: /docs/plugins/installation/
 ---
 
-You have 3 options for installing plugins:
+There are three options for installing plugins:
 
 1. In your site source root, make a `_plugins` directory. Place your plugins
    here. Any file ending in `*.rb` inside this directory will be loaded before
@@ -37,34 +37,20 @@ You have 3 options for installing plugins:
 
    Now you need to install all plugins from your Bundler group by running single command `bundle install`.
 
-<div class="note info">
-  <h5>Plugins on GitHub Pages</h5>
-  <p>
-    <a href="https://pages.github.com/">GitHub Pages</a> is powered by Jekyll.
-    However, all Pages sites are generated using the <code>--safe</code> option
-    to disable plugins (with the exception of some
-    <a href="https://pages.github.com/versions">whitelisted plugins</a>) for
-    security reasons. Unfortunately, this means
-    your plugins won’t work if you’re deploying to GitHub Pages.<br><br>
-    You can still use GitHub Pages to publish your site, but you’ll need to
-    convert the site locally and push the generated static files to your GitHub
-    repository instead of the Jekyll source files.
-  </p>
-</div>
+## Plugins on GitHub Pages
 
-<div class="note info">
-  <h5>
-    <code>_plugins</code>, <code>_config.yml</code> and <code>Gemfile</code>
-    can be used simultaneously
-  </h5>
-  <p>
-    You may use any of the aforementioned plugin options simultaneously in the
-    same site if you so choose. Use of one does not restrict the use of the
-    others.
-  </p>
-</div>
+[GitHub Pages](https://pages.github.com/) is powered by Jekyll.
+However, all Pages sites are generated using the `--safe` option
+to disable plugins (with the exception of some
+[whitelisted plugins](https://pages.github.com/versions)) for
+security reasons. Unfortunately, this means
+your plugins won’t work if you’re deploying to GitHub Pages.
 
-### The jekyll_plugins group
+You can still use GitHub Pages to publish your site, but you’ll need to
+convert the site locally and push the generated static files to your GitHub
+repository instead of the Jekyll source files.
+
+## jekyll_plugins group
 
 Jekyll gives this particular group of gems in your `Gemfile` a different
 treatment. Any gem included in this group is loaded before Jekyll starts
@@ -73,10 +59,8 @@ processing the rest of your source directory.
 A gem included here will be activated even if its not explicitly listed under
 the `plugins:` key in your site's config file.
 
-<div class="note warning">
-  <p>
-    Gems included in the <code>:jekyll-plugins</code> group are activated
-    regardless of the <code>--safe</code> mode setting. Be aware of what
-    gems are included under this group!
-  </p>
-</div>
+
+Gems included in the `:jekyll-plugins` group are activated
+regardless of the `--safe` mode setting. Be aware of what
+gems are included under this group!
+{: .warning }

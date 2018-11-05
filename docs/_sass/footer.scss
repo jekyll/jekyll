@@ -1,0 +1,50 @@
+footer {
+	background: $alt-bg;
+	margin-top: 90px;
+	padding: 50px 0;
+
+	.copy-text {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.sponsors p {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		height: 52px;
+		flex-wrap: wrap;
+
+		a {
+			display: inline-block;
+			height: 100%;
+			opacity: .75;
+			transition: opacity ease .3s;
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+
+		img {
+			padding-left: 10px;
+			max-width: 140px;
+			height: 100%;
+		}
+	}
+}
+
+@media screen and (max-width: $break-small) {
+  footer .columns {
+		display: block;
+
+		.sponsors p {
+			justify-content: normal;
+		}
+
+		p {
+			margin: 10px 0;
+		}
+	}
+}

@@ -1,23 +1,22 @@
 <footer>
-  <div class="grid">
-    <div class="unit one-third center-on-mobiles">
+  <div class="container columns">
+    <div class="column copy-text">
       <p>Jekyll is lovingly maintained by the <a href="/team/">core team</a> of volunteers. </p>
-      <p>The contents of this website are <br />&copy;&nbsp;{{ site.time | date: '%Y' }} under the terms of the <a href="{{ site.repository }}/blob/master/LICENSE">MIT&nbsp;License</a>.</p>
+      <p>The contents of this website are <br>
+        &copy; {{ site.time | date: '%Y' }} under the terms of the <a href="{{ site.repository }}/blob/master/LICENSE">MIT License</a>.</p>
     </div>
-    <div class="unit two-thirds align-right center-on-mobiles">
+    <div class="column sponsors">
       <p>
         Proudly hosted by
         <a href="https://github.com">
-          <img src="/img/footer-logo.png" width="100" height="30" alt="GitHub • Social coding">
+          <img src="/img/github.svg" width="100" alt="GitHub">
         </a>
       </p>
-    </div>
-    <div class="unit two-thirds align-right center-on-mobiles">
       <p>
         Sponsored by
         {% for sponsor in site.data.sponsors %}
-          <a href="{{ sponsor.url }}" style="margin-left: 10px;">
-            <img src="{{ sponsor.image }}" height="{{ sponsor.height }}" width="{{ sponsor.width }}" alt="{{ sponsor.name }}">
+          <a href="{{ sponsor.url }}">
+            <img src="{{ sponsor.image }}" alt="{{ sponsor.name }}">
           </a>
         {% endfor %}
       </p>

@@ -1,0 +1,61 @@
+.container {
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: 0 25px;
+
+  @media screen and (max-width: $break-small) {
+    padding: 0 12px;
+  }
+
+  &.slim {
+    max-width: 700px;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 100px;
+
+  @media screen and (max-width: $break-small) {
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.page {
+  background: $foreground;
+  border-radius: $page-border-radius;
+
+  .page-pad {
+    padding: 50px;
+
+    @media screen and (max-width: $break-small) {
+      padding: 18px;
+    }
+
+    > *:first-child {
+      margin-top: 0;
+    }
+  }
+}
+
+.with-subnav {
+  display: flex;
+
+  .content {
+    min-width: 0;
+    position: relative;
+
+    .improve {
+      text-align: right;
+      margin-top: 10px;
+    }
+  }
+}
