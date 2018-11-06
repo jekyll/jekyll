@@ -282,6 +282,12 @@ class TestUtils < JekyllUnitTest
         Utils.slugify("The _config.yml file?", :mode => "none", :cased => true)
       )
     end
+
+    should "raise an error if the returned slug is empty" do
+      assert_raises Jekyll::Errors::InvalidPermalinkError do
+        Utils.slugify("💎")
+      end
+    end
   end
 
   context "The \`Utils.titleize_slug\` method" do

@@ -222,6 +222,8 @@ module Jekyll
       slug.gsub!(%r!^\-|\-$!i, "")
 
       slug.downcase! unless cased
+      raise Errors::InvalidPermalinkError if slug.empty?
+
       slug
     end
 
