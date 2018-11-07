@@ -3,6 +3,7 @@
   * Textile is only supported through a converter plugin (#7003)
   * Add info how to deploy using pre-push git hook (#7179)
   * chore(release): reflect latest patched releases (#7262)
+  * Update posts.md (#7360)
 
 ### Documentation
 
@@ -167,6 +168,7 @@
 ## 3.8.5 / 2018-11-04
 
 ### Bug Fixes
+
   * Re-implement handling Liquid blocks in excerpts (#7250)
 
 ## 3.8.4 / 2018-09-18
