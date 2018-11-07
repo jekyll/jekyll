@@ -140,7 +140,7 @@ tags: [hot, summer]
 ```
 
 Jekyll makes the categories available to us at `site.categories`. Iterating over
-`site.categories` on a page gives as another array with two items, the first
+`site.categories` on a page gives us another array with two items, the first
 item is the name of the category and the second item is an array of posts in that
 category.
 
