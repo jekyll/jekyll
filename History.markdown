@@ -73,6 +73,7 @@
   * Update posts.md (#7360)
   * Add info how to deploy using pre-push git hook (#7179)
   * Textile is only supported through a converter plugin (#7003)
+  * Add documentation for custom tag blocks (#7359)
 
 ### Minor Enhancements
 
