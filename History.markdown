@@ -1,10 +1,5 @@
 ## HEAD
 
-  * Textile is only supported through a converter plugin (#7003)
-  * Add info how to deploy using pre-push git hook (#7179)
-  * chore(release): reflect latest patched releases (#7262)
-  * Update posts.md (#7360)
-
 ### Documentation
 
   * Release post for v3.8.0 (#6849)
@@ -75,6 +70,9 @@
   * Document Jekyll Filters with YAML data (#7335)
   * Remove redundant instruction comment (#7342)
   * docs: minimize rendering count (#7343)
+  * Update posts.md (#7360)
+  * Add info how to deploy using pre-push git hook (#7179)
+  * Textile is only supported through a converter plugin (#7003)
 
 ### Minor Enhancements
 
