@@ -22,12 +22,11 @@ module Jekyll
     #             Document belong.
     #
     # Returns nothing.
-    def initialize(path, relations = {})
-      @site = relations[:site]
+    def initialize(path, site:, collection:)
+      @site = site
       @path = path
       @extname = File.extname(path)
-      @collection = relations[:collection]
-      @has_yaml_header = nil
+      @collection = collection
 
       if draft?
         categories_from_path("_drafts")

@@ -22,10 +22,10 @@ module Jekyll
     #           :permalink    - If supplied, no URL will be generated from the
     #                           template. Instead, the given permalink will be
     #                           used as URL.
-    def initialize(options)
-      @template     = options[:template]
-      @placeholders = options[:placeholders] || {}
-      @permalink    = options[:permalink]
+    def initialize(template: nil, placeholders: {}, permalink: nil)
+      @template     = template
+      @placeholders = placeholders
+      @permalink    = permalink
 
       if (@template || @permalink).nil?
         raise ArgumentError, "One of :template or :permalink must be supplied."
