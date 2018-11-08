@@ -283,10 +283,9 @@ class TestUtils < JekyllUnitTest
       )
     end
 
-    should "raise an error if the returned slug is empty" do
-      assert_raises Jekyll::Errors::InvalidPermalinkError do
-        Utils.slugify("💎")
-      end
+    should "records a warning in the log if the returned slug is empty" do
+      expect(Jekyll.logger).to receive(:warn)
+      assert_equal "", Utils.slugify("💎")
     end
   end
 

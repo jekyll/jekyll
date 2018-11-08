@@ -222,8 +222,7 @@ module Jekyll
       slug.gsub!(%r!^\-|\-$!i, "")
 
       slug.downcase! unless cased
-      raise Errors::InvalidPermalinkError if slug.empty?
-
+      Jekyll.logger.warn "Warning:", "Empty `slug` generated for '[#{string}]'." if slug.empty?
       slug
     end
 
