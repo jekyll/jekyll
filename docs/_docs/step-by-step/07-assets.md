@@ -54,7 +54,7 @@ directory (`_sass/` by default).
 At this stage you'll just have a main css file. For larger projects, this is a
 great way to keep your CSS organized.
 
-Create `_sass/main.scss` with the following content:
+Create `/assets/css/_sass/main.scss` with the following content:
 
 ```sass
 .current {
