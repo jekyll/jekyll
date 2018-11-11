@@ -49,12 +49,12 @@ content:
 
 The empty front matter at the top tells Jekyll it needs to process the file. The
 `@import "main"` tells Sass to look for a file called `main.scss` in the sass
-directory (`_sass/` by default).
+directory (`/_sass/` by default).
 
 At this stage you'll just have a main css file. For larger projects, this is a
 great way to keep your CSS organized.
 
-Create `_sass/main.scss` with the following content:
+Create `/_sass/main.scss` with the following content:
 
 ```sass
 .current {
