@@ -74,6 +74,7 @@
   * Add info how to deploy using pre-push git hook (#7179)
   * Textile is only supported through a converter plugin (#7003)
   * Add documentation for custom tag blocks (#7359)
+  * Added 99inbound&#39;s Jekyll post to form resources (#7348)
 
 ### Minor Enhancements
 
