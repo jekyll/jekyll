@@ -81,6 +81,8 @@ module Jekyll
       Jekyll.logger.info @liquid_renderer.stats_table
     end
 
+    # rubocop:disable Metrics/MethodLength
+    #
     # Reset Site details.
     #
     # Returns nothing
@@ -109,6 +111,7 @@ module Jekyll
       Jekyll::Cache.clear_if_config_changed config
       Jekyll::Hooks.trigger :site, :after_reset, self
     end
+    # rubocop:enable Metrics/MethodLength
 
     # Load necessary libraries, plugins, converters, and generators.
     #
