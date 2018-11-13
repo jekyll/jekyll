@@ -166,6 +166,7 @@
 
   * Add Release Post for v3.6.3, v3.7.4 and v3.8.4 (#7259)
   * Fix link to Tidelift in site&#39;s footer (#7377)
+  * :sparkles: Add a link to OpenCollective backing (#7378)
 
 ## 3.8.5 / 2018-11-04
 
