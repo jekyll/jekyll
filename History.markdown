@@ -75,6 +75,7 @@
   * Textile is only supported through a converter plugin (#7003)
   * Add documentation for custom tag blocks (#7359)
   * Added 99inbound&#39;s Jekyll post to form resources (#7348)
+  * docs: document page.dir and page.name (#7373)
 
 ### Minor Enhancements
 
