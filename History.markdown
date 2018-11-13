@@ -99,6 +99,7 @@
   * Memoize Site#post_attr_hash (#7276)
   * Load config file from within current theme-gem (#7304)
   * Memoize the return value of Site#documents (#7273)
+  * Upgrade liquid-c to v4.0 (#7375)
 
 ### Major Enhancements
 
