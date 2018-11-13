@@ -74,7 +74,7 @@ group :jekyll_optional_dependencies do
 
   platform :ruby, :mswin, :mingw, :x64_mingw do
     gem "classifier-reborn", "~> 2.2.0"
-    gem "liquid-c", "~> 3.0"
+    gem "liquid-c", "~> 4.0"
     gem "yajl-ruby", "~> 1.4"
   end
 
