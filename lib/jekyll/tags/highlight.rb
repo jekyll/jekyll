@@ -28,7 +28,7 @@ module Jekyll
         end
       end
 
-      LEADING_OR_TRAILING_LINE_TERMINATORS = %r!\A(\n|\r)+|(\n|\r)+\z!
+      LEADING_OR_TRAILING_LINE_TERMINATORS = %r!\A(\n|\r)+|(\n|\r)+\z!.freeze
 
       def render(context)
         prefix = context["highlighter_prefix"] || ""
