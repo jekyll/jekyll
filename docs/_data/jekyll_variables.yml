@@ -124,6 +124,14 @@ page:
     description: >-
       The list of tags to which this post belongs. These can be specified in the
       <a href="/docs/front-matter/">front matter</a>.
+  - name: page.dir
+    description: >-
+      The path between the source directory and the file of the post or page,  e.g.
+      <code>/pages/</code>.
+      This can be overridden by <code>permalink</code> in the <a href="/docs/front-matter/">front matter</a>.
+  - name: page.name
+    description: >-
+      The filename of the post or page, e.g. <code>about.md</code>
   - name: page.path
     description: >-
       The path to the raw post or page. Example usage: Linking back to the page or post’s source

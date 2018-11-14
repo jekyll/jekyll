@@ -1,9 +1,5 @@
 ## HEAD
 
-  * Textile is only supported through a converter plugin (#7003)
-  * Add info how to deploy using pre-push git hook (#7179)
-  * chore(release): reflect latest patched releases (#7262)
-
 ### Documentation
 
   * Release post for v3.8.0 (#6849)
@@ -74,6 +70,12 @@
   * Document Jekyll Filters with YAML data (#7335)
   * Remove redundant instruction comment (#7342)
   * docs: minimize rendering count (#7343)
+  * Update posts.md (#7360)
+  * Add info how to deploy using pre-push git hook (#7179)
+  * Textile is only supported through a converter plugin (#7003)
+  * Add documentation for custom tag blocks (#7359)
+  * Added 99inbound&#39;s Jekyll post to form resources (#7348)
+  * docs: document page.dir and page.name (#7373)
 
 ### Minor Enhancements
 
@@ -97,6 +99,7 @@
   * Memoize Site#post_attr_hash (#7276)
   * Load config file from within current theme-gem (#7304)
   * Memoize the return value of Site#documents (#7273)
+  * Upgrade liquid-c to v4.0 (#7375)
 
 ### Major Enhancements
 
@@ -163,10 +166,13 @@
 ### Site Enhancements
 
   * Add Release Post for v3.6.3, v3.7.4 and v3.8.4 (#7259)
+  * Fix link to Tidelift in site&#39;s footer (#7377)
+  * :sparkles: Add a link to OpenCollective backing (#7378)
 
 ## 3.8.5 / 2018-11-04
 
 ### Bug Fixes
+
   * Re-implement handling Liquid blocks in excerpts (#7250)
 
 ## 3.8.4 / 2018-09-18

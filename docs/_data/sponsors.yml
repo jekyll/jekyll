@@ -7,3 +7,10 @@
 - name: Siteleaf
   image: /img/siteleaf.svg
   url: https://siteleaf.com
+  width: 40
+  height: 50
+- name: Icons8
+  image: /img/icons8-logo.png
+  width: 140
+  height: 30
+  url: https://icons8.com/
