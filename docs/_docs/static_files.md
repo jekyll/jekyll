@@ -62,7 +62,7 @@ following metadata:
 </table>
 </div>
 
-Note that in the above table, `file` can be anything. It's simply an arbitrarily set variable used in your own logic (such as in a for loop). It isn't a global site or page variable.
+Note that in the above table, `file` can be anything. It's an arbitrarily set variable used in your own logic (such as in a for loop). It isn't a global site or page variable.
 
 ## Add front matter to static files
 

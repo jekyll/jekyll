@@ -143,6 +143,17 @@ class TestConfiguration < JekyllUnitTest
       allow(File).to receive(:exist?).with(source_dir("_config.yml")).and_return(true)
       assert_equal [source_dir("_config.yml")], @config.config_files(@no_override)
     end
+    should "return .toml if that exists" do
+      allow(File).to receive(:exist?).with(source_dir("_config.yml")).and_return(false)
+      allow(File).to receive(:exist?).with(source_dir("_config.yaml")).and_return(false)
+      allow(File).to receive(:exist?).with(source_dir("_config.toml")).and_return(true)
+      assert_equal [source_dir("_config.toml")], @config.config_files(@no_override)
+    end
+    should "return .yml if both .yml and .toml exist" do
+      allow(File).to receive(:exist?).with(source_dir("_config.yml")).and_return(true)
+      allow(File).to receive(:exist?).with(source_dir("_config.toml")).and_return(true)
+      assert_equal [source_dir("_config.yml")], @config.config_files(@no_override)
+    end
     should "return the config if given one config file" do
       assert_equal %w(config.yml), @config.config_files(@one_config_file)
     end

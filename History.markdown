@@ -1,9 +1,5 @@
 ## HEAD
 
-  * Textile is only supported through a converter plugin (#7003)
-  * Add info how to deploy using pre-push git hook (#7179)
-  * chore(release): reflect latest patched releases (#7262)
-
 ### Documentation
 
   * Release post for v3.8.0 (#6849)
@@ -61,6 +57,25 @@
   * Add more issue template(s) and pull request template (#7269)
   * Suggest sites use OpenSSL instead of GnuTLS for their site&#39;s CI (#7010)
   * Fix broken Contributors link in README.markdown (#7200)
+  * Docs: Add title tag to item in RSS template (#7282)
+  * Docs: more inclusive writing (#7283)
+  * Document converter methods (#7289)
+  * Docs: Add link tag to item in RSS template (#7291)
+  * Add Isomer to showcase (#7300)
+  * Added missing semicolon (#7306)
+  * &#34;This restricts you...&#34; to &#34;This restricts your&#34; (#7307)
+  * Add a link to Giraffe Academy&#39;s tutorial (#7325)
+  * grammar correction (#7327)
+  * docs: list all standard liquid filters (#7333)
+  * Document Jekyll Filters with YAML data (#7335)
+  * Remove redundant instruction comment (#7342)
+  * docs: minimize rendering count (#7343)
+  * Update posts.md (#7360)
+  * Add info how to deploy using pre-push git hook (#7179)
+  * Textile is only supported through a converter plugin (#7003)
+  * Add documentation for custom tag blocks (#7359)
+  * Added 99inbound&#39;s Jekyll post to form resources (#7348)
+  * docs: document page.dir and page.name (#7373)
 
 ### Minor Enhancements
 
@@ -71,11 +86,20 @@
   * Update item_property to return numbers as numbers instead of strings (#6608)
   * Use .markdown for page templates (#7126)
   * Fix custom 404 page for GitHub pages (#7132)
-  * Add Cache class (#7169)
   * Add support for `*.xhtml` files (#6854)
   * Cache matched defaults sets for given parameters (#6888)
   * Ignore permission error of /proc/version (#7267)
   * Strip extra slashes via `Jekyll.sanitized_path` (#7182)
+  * Site template: remove default config for markdown (#7285)
+  * Cache: Do not dump undumpable objects (#7190)
+  * Optimize rendering Liquid templates (#7136)
+  * Automatically load _config.toml (#7299)
+  * feat: enhance --blank scaffolding (#7310)
+  * Skip processing posts that can not be read (#7302)
+  * Memoize Site#post_attr_hash (#7276)
+  * Load config file from within current theme-gem (#7304)
+  * Memoize the return value of Site#documents (#7273)
+  * Upgrade liquid-c to v4.0 (#7375)
 
 ### Major Enhancements
 
@@ -89,8 +113,11 @@
   * Remove support for rdiscount (#6988)
   * Remove &#39;cache_dir&#39; during `jekyll clean` (#7158)
   * Output Jekyll Version while debugging (#7173)
-  * Ignore cache directory (#7184)
   * Drop support for pygments as syntax-highlighter (#7118)
+  * Add Cache class (#7169)
+  * Cache converted markdown (#7159)
+  * Ignore cache directory (#7184)
+  * Incorporate `relative_url` filter in `link` tag (#6727)
 
 ### Development Fixes
 
@@ -116,6 +143,9 @@
   * Add cucumber feature to test include_relative tag (#7213)
   * Bump Rubocop to v0.59.0 (#7237)
   * update yajl-ruby (#7278)
+  * Drop support for `jekyll-watch-1.4.0` and older (#7287)
+  * CI(Appveyor): shallow clone with 5 last commits (#7312)
+  * Bump RuboCop to v0.60.x (#7338)
 
 ### Bug Fixes
 
@@ -124,6 +154,9 @@
   * Check if scope applies to type before given path (#7263)
   * Document two methods, simplify one of the methods (#7270)
   * Check key in collections only if it isn&#39;t &#34;posts&#34; (#7277)
+  * Revert &#34;Cache converter in renderer&#34; (#7326)
+  * Measure the no. of times a template gets rendered (#7316)
+  * Re-implement handling Liquid blocks in excerpts (#7250)
 
 ### feature
 
@@ -133,6 +166,14 @@
 ### Site Enhancements
 
   * Add Release Post for v3.6.3, v3.7.4 and v3.8.4 (#7259)
+  * Fix link to Tidelift in site&#39;s footer (#7377)
+  * :sparkles: Add a link to OpenCollective backing (#7378)
+
+## 3.8.5 / 2018-11-04
+
+### Bug Fixes
+
+  * Re-implement handling Liquid blocks in excerpts (#7250)
 
 ## 3.8.4 / 2018-09-18
 
@@ -1544,7 +1585,7 @@
   * Internal: trigger hooks by owner symbol (#3871)
   * Update MIME types from mime-db (#3933)
   * Add header to site template `_config.yml` for clarity & direction (#3997)
-  * Site template: add timezone offset to post date frontmatter (#4001)
+  * Site template: add timezone offset to post date front matter (#4001)
   * Make a constant for the regex to find hidden files (#4032)
   * Site template: refactor github & twitter icons into includes (#4049)
   * Site template: add background to Kramdown Rouge-ified backtick code blocks (#4053)
@@ -1684,7 +1725,7 @@
   * Add a link on all the docs pages to "Improve this page". (#3510)
   * Add jekyll-auto-image generator to the list of third-party plugins (#3489)
   * Replace link to the proposed `picture` element spec (#3530)
-  * Add frontmatter date formatting information (#3469)
+  * Add front matter date formatting information (#3469)
   * Improve consistency and clarity of plugins options note (#3546)
   * Add permalink warning to pagination docs (#3551)
   * Fix grammar in Collections docs API stability warning (#3560)

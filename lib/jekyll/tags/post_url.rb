@@ -3,7 +3,7 @@
 module Jekyll
   module Tags
     class PostComparer
-      MATCHER = %r!^(.+/)*(\d+-\d+-\d+)-(.*)$!
+      MATCHER = %r!^(.+/)*(\d+-\d+-\d+)-(.*)$!.freeze
 
       attr_reader :path, :date, :slug, :name
 
