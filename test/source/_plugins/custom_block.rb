@@ -10,5 +10,5 @@ module Jekyll
   end
 end
 
-Liquid::Template.register_tag("do_nothing", DoNothingBlock)
-Liquid::Template.register_tag("do_nothing_other", DoNothingOther)
+Liquid::Template.register_tag("do_nothing", Jekyll::DoNothingBlock)
+Liquid::Template.register_tag("do_nothing_other", Jekyll::DoNothingOther)
