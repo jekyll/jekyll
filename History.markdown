@@ -77,6 +77,7 @@
   * Added 99inbound&#39;s Jekyll post to form resources (#7348)
   * docs: document page.dir and page.name (#7373)
   * Remove installation instructions with Homebrew (#7381)
+  * Fix dead link and misleading prose (#7383)
 
 ### Minor Enhancements
 
