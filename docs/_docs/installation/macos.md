@@ -15,7 +15,7 @@ Check your Ruby version meets our requirements. Jekyll requires Ruby 2.2.5 or ab
 
 ```sh
 ruby -v
-2.3.3
+ruby 2.3.7p456 (2018-03-28 revision 63024) [universal.x86_64-darwin18]
 ```
 
 Now install Jekyll and [Bundler](/docs/ruby-101/#bundler).
@@ -48,10 +48,10 @@ Restart your terminal for changes to take effect.
 Now we can install the Ruby version of our choice, let's go with Ruby 2.5.1 here:
 
 ```sh
-rbenv install 2.5.1
-rbenv global 2.5.1
+rbenv install 2.5.3
+rbenv global 2.5.3
 ruby -v
-ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin17]
+ruby 2.5.3p105 (2018-10-18 revision 65156) [x86_64-darwin18]
 ```
 
 That's it! Head over [rbenv command references](https://github.com/rbenv/rbenv#command-reference) to learn how to use different versions of Ruby in your projects.
