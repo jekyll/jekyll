@@ -11,7 +11,7 @@ xcode-select --install
 
 ## Set up Ruby included with the OS
 
-Check your Ruby version meets our requirements. Jekyll requires Ruby 2.2.5 or above. If you're running an older version you'll need to [install a more recent Ruby version via Homebrew](#homebrew).
+Check your Ruby version meets our requirements. Jekyll requires Ruby 2.2.5 or above. If you're running an older version you'll need to [install a more recent Ruby version](#rbenv).
 
 ```sh
 ruby -v
@@ -24,11 +24,11 @@ Now install Jekyll and [Bundler](/docs/ruby-101/#bundler).
 gem install bundler jekyll
 ```
 
-### Install multiple Ruby versions with rbenv {#rbenv}
+### Install a more recent Ruby version with rbenv {#rbenv}
 
 Developers often use [rbenv](https://github.com/rbenv/rbenv) to manage multiple
-Ruby versions. This can be useful if you want to run the same Ruby version used
-by your colleagues/collaborators.
+Ruby versions. This can be useful when the version included with the OS is
+too old or when you want to run the same version as your colleagues/collaborators.
 
 ```sh
 # Install Homebrew
@@ -45,7 +45,7 @@ curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor 
 ```
 
 Restart your terminal for changes to take effect.
-Now we can install the Ruby version of our choice, let's go with Ruby 2.5.1 here:
+Now we can install the Ruby version of our choice, let's go with Ruby 2.5.3 here:
 
 ```sh
 rbenv install 2.5.3
