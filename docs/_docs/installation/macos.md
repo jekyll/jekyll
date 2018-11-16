@@ -24,17 +24,6 @@ Now install Jekyll and [Bundler](/docs/ruby-101/#bundler).
 gem install bundler jekyll
 ```
 
-### Install a newer Ruby version via Homebrew {#homebrew}
-
-If you wish to install the latest version of Ruby and get faster builds, we recommend doing it via [Homebrew](https://brew.sh) a handy package manager for macOS.
-
-```sh
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew install ruby
-ruby -v
-ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin17]
-```
-
 ### Install multiple Ruby versions with rbenv {#rbenv}
 
 Developers often use [rbenv](https://github.com/rbenv/rbenv) to manage multiple
@@ -42,6 +31,9 @@ Ruby versions. This can be useful if you want to run the same Ruby version used
 by your colleagues/collaborators.
 
 ```sh
+# Install Homebrew
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
 # Install rbenv and ruby-build
 brew install rbenv
 
