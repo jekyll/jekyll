@@ -78,6 +78,7 @@
   * docs: document page.dir and page.name (#7373)
   * Remove installation instructions with Homebrew (#7381)
   * Fix dead link and misleading prose (#7383)
+  * Fix content management section (#7385)
 
 ### Minor Enhancements
 
