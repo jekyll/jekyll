@@ -121,6 +121,7 @@
   * Cache converted markdown (#7159)
   * Ignore cache directory (#7184)
   * Incorporate `relative_url` filter in `link` tag (#6727)
+  * Only read layouts from source_dir or theme_dir (#6788)
 
 ### Development Fixes
 
