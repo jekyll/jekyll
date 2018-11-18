@@ -27,8 +27,9 @@ class TestLayoutReader < JekyllUnitTest
         allow(Dir).to receive(:pwd).and_return(source_dir("blah"))
       end
 
-      should "know to use the layout directory relative to CWD" do
-        assert_equal LayoutReader.new(@site).layout_directory, source_dir("blah/_layouts")
+      should "ignore the layout directory in CWD and use the directory relative to site source" do
+        refute_equal source_dir("blah/_layouts"), LayoutReader.new(@site).layout_directory
+        assert_equal source_dir("_layouts"), LayoutReader.new(@site).layout_directory
       end
     end
 
