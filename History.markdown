@@ -79,6 +79,7 @@
   * Remove installation instructions with Homebrew (#7381)
   * Fix dead link and misleading prose (#7383)
   * Fix content management section (#7385)
+  * Site: Better Performance (#7388)
 
 ### Minor Enhancements
 
