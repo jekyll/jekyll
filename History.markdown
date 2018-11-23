@@ -80,6 +80,7 @@
   * Fix dead link and misleading prose (#7383)
   * Fix content management section (#7385)
   * Site: Better Performance (#7388)
+  * Proposed re-wording of Sass note. :) (#7392)
 
 ### Minor Enhancements
 
