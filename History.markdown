@@ -153,6 +153,7 @@
   * CI(Appveyor): shallow clone with 5 last commits (#7312)
   * Bump RuboCop to v0.60.x (#7338)
   * Update excludes for CodeClimate Analyses (#7365)
+  * Switch to `:install_if` for wdm gem (#7372)
 
 ### Bug Fixes
 
