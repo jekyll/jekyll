@@ -81,6 +81,7 @@
   * Fix content management section (#7385)
   * Site: Better Performance (#7388)
   * Proposed re-wording of Sass note. :) (#7392)
+  * Apply ruby official guide documents (#7393)
 
 ### Minor Enhancements
 
