@@ -127,10 +127,10 @@
   examples:
     - input: |-
         {{ site.members | group_by_exp: "item",
-        "item.graduation_year | truncate 3, ''" }}
+        "item.graduation_year | truncate: 3, ''" }}
       output: |-
-        [{"name"=>"201...", "items"=>[...]},
-        {"name"=>"200...", "items"=>[...]}]
+        [{"name"=>"201", "items"=>[...]},
+        {"name"=>"200", "items"=>[...]}]
 
 #
 
