@@ -18,3 +18,9 @@
   width: 140
   height: 30
   url: https://icons8.com/
+- name: VPSServer
+  image: /img/vpsserver-logo.png
+  width: 140
+  height: 30
+  url: https://www.vpsserver.com
+  styles: "margin-top: 20px;"
