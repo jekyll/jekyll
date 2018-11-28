@@ -83,6 +83,7 @@
   * Proposed re-wording of Sass note. :) (#7392)
   * Apply ruby official guide documents (#7393)
   * docs: Fix group_by_exp filter example (#7394)
+  * adjust team page listings (#7395)
 
 ### Minor Enhancements
 
