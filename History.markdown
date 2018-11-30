@@ -85,6 +85,7 @@
   * docs: Fix group_by_exp filter example (#7394)
   * adjust team page listings (#7395)
   * Update resources.md (#7396)
+  * Update resources.md (#7397)
 
 ### Minor Enhancements
 
