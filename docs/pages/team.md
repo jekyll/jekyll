@@ -9,6 +9,7 @@ permalink: /team/
 *The Jekyll Core Team's responsibility is to ensure the development and
 community around the Jekyll ecosystem thrive.*
 
+- Ashwin (@ashmaroli)
 - Frank (@DirtyF, Documentation)
 - Matt (@mattr-)
 - Olivia (@oe)
