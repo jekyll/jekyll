@@ -143,7 +143,7 @@ class TestDocument < JekyllUnitTest
               "key" => "myval",
             },
           },
-        },]
+        }]
       )
       @site.process
       @document = @site.collections["slides"].docs.select { |d| d.is_a?(Document) }.first
@@ -174,7 +174,7 @@ class TestDocument < JekyllUnitTest
               "test2" => "default1",
             },
           },
-        },]
+        }]
       )
       @site.process
       @document = @site.collections["slides"].docs[1]
@@ -201,7 +201,7 @@ class TestDocument < JekyllUnitTest
               "key" => "value123",
             },
           },
-        },]
+        }]
       )
       @site.process
       @document = @site.collections["slides"].docs.first
@@ -225,7 +225,7 @@ class TestDocument < JekyllUnitTest
               "key" => "myval",
             },
           },
-        },]
+        }]
       )
       @site.process
       @document = @site.collections["slides"].docs.first
