@@ -159,6 +159,7 @@
   * Bump RuboCop to v0.60.x (#7338)
   * Update excludes for CodeClimate Analyses (#7365)
   * Switch to `:install_if` for wdm gem (#7372)
+  * Bump RuboCop to v0.61.x (#7401)
 
 ### Bug Fixes
 
