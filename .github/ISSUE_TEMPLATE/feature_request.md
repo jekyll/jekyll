@@ -1,6 +1,10 @@
 ---
 name: Feature Request
 about: Want us to add any features to Jekyll?
+title: 'feat: '
+labels: feature
+assignees: ''
+
 ---
 
 <!--
