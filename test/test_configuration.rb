@@ -29,7 +29,7 @@ class TestConfiguration < JekyllUnitTest
       expected = { "posts" => {
         "output"    => true,
         "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
-      }, }
+      } }
       assert_equal expected, result["collections"]
     end
 
@@ -76,7 +76,7 @@ class TestConfiguration < JekyllUnitTest
       expected = { "posts" => {
         "output"    => true,
         "permalink" => "/:categories/:year/:month/:day/:title/",
-      }, }
+      } }
       assert_equal expected, result["collections"]
 
       result = Configuration[{ "permalink" => nil, "collections" => {} }]
