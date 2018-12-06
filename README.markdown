@@ -61,7 +61,7 @@ these terms, please let one of our [core team members](https://jekyllrb.com/team
 
 ### Sponsors
 
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [Become a sponsor!](https://opencollective.com/jekyll#sponsor)
+Support this project by becoming a sponsor. Your logo will show up in this README with a link to your website. [Become a sponsor!](https://opencollective.com/jekyll#sponsor)
 
 <a href="https://opencollective.com/jekyll/sponsor/0/website" target="_blank"><img src="https://opencollective.com/jekyll/sponsor/0/avatar.svg" /></a>
 <a href="https://opencollective.com/jekyll/sponsor/1/website" target="_blank"><img src="https://opencollective.com/jekyll/sponsor/1/avatar.svg" /></a>
