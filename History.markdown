@@ -183,6 +183,7 @@
   * Fix link to Tidelift in site&#39;s footer (#7377)
   * :sparkles: Add a link to OpenCollective backing (#7378)
   * Add @ashmaroli to Core Team listing (#7398)
+  * link site to sponsor listing in readme (#7405)
 
 ## 3.8.5 / 2018-11-04
 
