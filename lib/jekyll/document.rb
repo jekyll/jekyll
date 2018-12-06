@@ -5,7 +5,7 @@ module Jekyll
     include Comparable
     extend Forwardable
 
-    attr_reader :path, :site, :extname, :collection
+    attr_reader :path, :site, :extname, :collection, :type
     attr_accessor :content, :output
 
     def_delegator :self, :read_post_data, :post_read
@@ -27,6 +27,8 @@ module Jekyll
       @path = path
       @extname = File.extname(path)
       @collection = relations[:collection]
+      @type = @collection.label.to_sym
+
       @has_yaml_header = nil
 
       if draft?
@@ -36,7 +38,7 @@ module Jekyll
       end
 
       data.default_proc = proc do |_, key|
-        site.frontmatter_defaults.find(relative_path, collection.label, key)
+        site.frontmatter_defaults.find(relative_path, type, key)
       end
 
       trigger_hooks(:post_init)
@@ -440,10 +442,7 @@ module Jekyll
     end
 
     def merge_defaults
-      defaults = @site.frontmatter_defaults.all(
-        relative_path,
-        collection.label.to_sym
-      )
+      defaults = @site.frontmatter_defaults.all(relative_path, type)
       merge_data!(defaults, :source => "front matter defaults") unless defaults.empty?
     end
 

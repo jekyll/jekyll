@@ -56,6 +56,15 @@ class TestExcerpt < JekyllUnitTest
       end
     end
 
+    context "#type" do
+      should "return the post's type" do
+        assert_equal @excerpt.type, @post.type
+      end
+      should "return a symbol" do
+        assert_same @excerpt.type.class, Symbol
+      end
+    end
+
     context "#to_s" do
       should "return rendered output" do
         assert_equal @excerpt.output, @excerpt.to_s

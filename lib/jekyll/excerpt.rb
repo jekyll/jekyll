@@ -10,7 +10,7 @@ module Jekyll
 
     def_delegators :@doc,
                    :site, :name, :ext, :extname,
-                   :collection, :related_posts,
+                   :collection, :related_posts, :type,
                    :coffeescript_file?, :yaml_file?,
                    :url, :next_doc, :previous_doc
 
