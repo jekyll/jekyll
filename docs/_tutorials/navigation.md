@@ -53,7 +53,7 @@ docs:
 <h2>{{ site.data.samplelist.docs_list_title }}</h2>
 <ul>
    {% for item in site.data.samplelist.docs %}
-      <li><a href="{{ item.url }}" alt="{{ item.title }}">{{ item.title }}</a></li>
+      <li><a href="{{ item.url }}">{{ item.title }}</a></li>
    {% endfor %}
 </ul>
 ```
@@ -63,9 +63,9 @@ docs:
 <div class="highlight result" data-proofer-ignore>
    <h2>ACME Documentation</h2>
    <ul>
-      <li><a href="#" alt="Introduction">Introduction</a></li>
-      <li><a href="#" alt="Configuration">Configuration</a></li>
-      <li><a href="#" alt="Deployment">Deployment</a></li>
+      <li><a href="#">Introduction</a></li>
+      <li><a href="#">Configuration</a></li>
+      <li><a href="#">Deployment</a></li>
    </ul>
 </div>
 
@@ -98,7 +98,7 @@ Suppose you wanted to sort the list by the `title`. To do this, convert the refe
 {% assign doclist = site.data.samplelist.docs | sort: 'title'  %}
 <ol>
 {% for item in doclist %}
-    <li><a href="{{ item.url }}" alt="{{ item.title }}">{{ item.title }}</a></li>
+    <li><a href="{{ item.url }}">{{ item.title }}</a></li>
 {% endfor %}
 </ol>
 ```
@@ -108,9 +108,9 @@ Suppose you wanted to sort the list by the `title`. To do this, convert the refe
 
 <div class="highlight result" data-proofer-ignore>
    <ol>
-      <li><a href="#" alt="Configuration">Configuration</a></li>
-      <li><a href="#" alt="Deployment">Deployment</a></li>
-      <li><a href="#" alt="Introduction">Introduction</a></li>
+      <li><a href="#">Configuration</a></li>
+      <li><a href="#">Deployment</a></li>
+      <li><a href="#">Introduction</a></li>
    </ol>
 </div>
 
