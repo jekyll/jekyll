@@ -86,6 +86,7 @@
   * adjust team page listings (#7395)
   * Update resources.md (#7396)
   * Update resources.md (#7397)
+  * Remove alt attribute from a tags (#7407)
 
 ### Minor Enhancements
 
