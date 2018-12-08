@@ -450,8 +450,8 @@ docs2:
 
 <div class="highlight result" data-proofer-ignore>
    <ul>
-      <li><a href="#"title="Introduction">Introduction</a></li>
-      <li><a href="#"title="Configuration">Configuration</a></li>
+      <li><a href="#">Introduction</a></li>
+      <li><a href="#">Configuration</a></li>
    </ul>
 </div>
 
