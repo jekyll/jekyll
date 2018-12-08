@@ -13,7 +13,7 @@ example here's a collection of staff members:
 
 ```yaml
 collections:
-  - staff_members
+  staff_members
 ```
 
 You can optionally specify metadata for your collection in the configuration:
