@@ -6,16 +6,20 @@ Feature: Collections
   Scenario: Unrendered collection
     Given I have an "index.html" page that contains "Collections: {{ site.methods }}"
     And I have fixture collections
+    And I have a "_methods/static-file.txt" file that contains "Static Content {{ site.title }}"
     And I have a configuration file with "collections" set to "['methods']"
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
+    But the _site/methods directory should not exist
     And the "_site/methods/configuration.html" file should not exist
+    And the "_site/methods/static-file.txt" file should not exist
 
   Scenario: Rendered collection
     Given I have an "index.html" page that contains "Collections: output => {{ site.collections[0].output }} label => {{ site.collections[0].label }}"
     And I have an "collection_metadata.html" page that contains "Methods metadata: {{ site.collections[0].foo }} {{ site.collections[0] }}"
     And I have fixture collections
+    And I have a "_methods/static-file.txt" file that contains "Static Content {{ site.title }}"
     And I have a "_config.yml" file with content:
     """
     collections:
@@ -30,6 +34,7 @@ Feature: Collections
     And I should see "label => methods" in "_site/index.html"
     And I should see "Methods metadata: bar" in "_site/collection_metadata.html"
     And I should see "<p>Whatever: foo.bar</p>" in "_site/methods/configuration.html"
+    And I should see "Static Content {{ site.title }}" in "_site/methods/static-file.txt"
 
   Scenario: Rendered collection at a custom URL
     Given I have an "index.html" page that contains "Collections: {{ site.collections }}"
