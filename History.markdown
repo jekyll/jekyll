@@ -87,6 +87,7 @@
   * Update resources.md (#7396)
   * Update resources.md (#7397)
   * Remove alt attribute from a tags (#7407)
+  * Fix grammatical error in permalinks.md (#7409)
 
 ### Minor Enhancements
 
