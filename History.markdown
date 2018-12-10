@@ -162,6 +162,7 @@
   * Update excludes for CodeClimate Analyses (#7365)
   * Switch to `:install_if` for wdm gem (#7372)
   * Bump RuboCop to v0.61.x (#7401)
+  * dev: test oldest and latest Ruby only (#7412)
 
 ### Bug Fixes
 
