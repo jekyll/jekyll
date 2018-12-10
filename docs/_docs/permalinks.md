@@ -14,7 +14,7 @@ The simplest way to set a permalink is using front matter. You set the
 
 For example, you might have a page on your site located at
 `/my_pages/about-me.html` and you want the output url to be `/about/`. In
-front matter the page you would set:
+front matter of the page you would set:
 
 ```
 ---

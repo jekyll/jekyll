@@ -1,0 +1,298 @@
+#
+# ---------------------------------------------------------------------------------------
+# List of Liquid Filters provided by Jekyll Core that will be utilized for their
+# documentation.
+#
+# To document a new filter, create a new "list-item" below with the following keys:
+#   name:           : [REQUIRED] A string label that identifies the filter
+#   description:    : [REQUIRED] A short description of what to expect from the filter
+#   version_badge:  : [OPTIONAL] Jekyll version that introduced the filter
+#   examples:       : [REQUIRED] A 'nested list' comprised of inputs and outputs
+#     input:        : [REQUIRED] The filter syntax and usage
+#     output:       : [OPTIONAL] The output from the filter
+#
+# Tip: Use YAML Block notations to "fold" a long string, or to "break" a long string
+#      to the following line. Block notations can also be used to avoid having to use
+#      backslashes to escape quotes.
+# ---------------------------------------------------------------------------------------
+#
+- name: Relative URL
+  description: >-
+    Prepend the <code>baseurl</code> value to the input. Useful if
+    your site is hosted at a subpath rather than the root of the domain.
+  examples:
+    - input: '{{ "/assets/style.css" | relative_url }}'
+      output: '/my-baseurl/assets/style.css'
+
+#
+
+- name: Absolute URL
+  description: Prepend the <code>url</code> and <code>baseurl</code> value to the input.
+  examples:
+    - input: '{{ "/assets/style.css" | absolute_url }}'
+      output: 'http://example.com/my-baseurl/assets/style.css'
+
+#
+
+- name: Date to XML Schema
+  description: Convert a Date into XML Schema (ISO 8601) format.
+  examples:
+    - input: '{{ site.time | date_to_xmlschema }}'
+      output: '2008-11-07T13:07:54-08:00'
+
+#
+
+- name: Date to RFC-822 Format
+  description: Convert a Date into the RFC-822 format used for RSS feeds.
+  examples:
+    - input: '{{ site.time | date_to_rfc822 }}'
+      output: 'Mon, 07 Nov 2008 13:07:54 -0800'
+
+#
+
+- name: Date to String
+  description: Convert a date to short format.
+  examples:
+    - input: '{{ site.time | date_to_string }}'
+      output: '07 Nov 2008'
+
+#
+
+- name: Date to String in ordinal US style
+  description: 'Format a date to ordinal, US, short format.'
+  version_badge: 3.8.0
+  examples:
+    - input: '{{ site.time | date_to_string: "ordinal", "US" }}'
+      output: 'Nov 7th, 2008'
+
+#
+
+- name: Date to Long String
+  description: Format a date to long format.
+  examples:
+    - input: '{{ site.time | date_to_long_string }}'
+      output: '07 November 2008'
+
+#
+
+- name: Date to Long String in ordinal UK style
+  description: 'Format a date to ordinal, UK, long format.'
+  version_badge: 3.8.0
+  examples:
+    - input: '{{ site.time | date_to_long_string: "ordinal" }}'
+      output: '7th November 2008'
+
+#
+
+- name: Where
+  description: Select all the objects in an array where the key has the given value.
+  examples:
+    - input: '{{ site.members | where:"graduation_year","2014" }}'
+      output:
+
+#
+
+- name: Where Expression
+  description: Select all the objects in an array where the expression is true.
+  version_badge: 3.2.0
+  examples:
+    - input: |-
+        {{ site.members | where_exp:"item",
+        "item.graduation_year == 2014" }}
+      output:
+    - input: |-
+        {{ site.members | where_exp:"item",
+        "item.graduation_year < 2014" }}
+      output:
+    - input: |-
+        {{ site.members | where_exp:"item",
+        "item.projects contains 'foo'" }}
+      output:
+
+#
+
+- name: Group By
+  description: Group an array's items by a given property.
+  examples:
+    - input: '{{ site.members | group_by:"graduation_year" }}'
+      output: |-
+        [{"name"=>"2013", "items"=>[...]},
+        {"name"=>"2014", "items"=>[...]}]
+
+#
+
+- name: Group By Expression
+  description: Group an array's items using a Liquid expression.
+  version_badge: 3.4.0
+  examples:
+    - input: |-
+        {{ site.members | group_by_exp: "item",
+        "item.graduation_year | truncate: 3, ''" }}
+      output: |-
+        [{"name"=>"201", "items"=>[...]},
+        {"name"=>"200", "items"=>[...]}]
+
+#
+
+- name: XML Escape
+  description: Escape some text for use in XML.
+  examples:
+    - input: '{{ page.content | xml_escape }}'
+      output:
+
+#
+
+- name: CGI Escape
+  description: >-
+    CGI escape a string for use in a URL. Replaces any special characters
+    with appropriate <code>%XX</code> replacements. CGI escape normally
+    replaces a space with a plus <code>+</code> sign.
+  examples:
+    - input: '{{ "foo, bar; baz?" | cgi_escape }}'
+      output: 'foo%2C+bar%3B+baz%3F'
+
+#
+
+- name: URI Escape
+  description: >-
+    Percent encodes any special characters in a URI.
+    URI escape normally replaces a space with <code>%20</code>.
+    <a href="https://en.wikipedia.org/wiki/Percent-encoding#Types_of_URI_characters">Reserved characters</a>
+    will not be escaped.
+  examples:
+    - input: '{{ "http://foo.com/?q=foo, \bar?" | uri_escape }}'
+      output: 'http://foo.com/?q=foo,%20%5Cbar?'
+
+#
+
+- name: Number of Words
+  description: Count the number of words in some text.
+  examples:
+    - input: '{{ page.content | number_of_words }}'
+      output: 1337
+
+#
+
+- name: Array to Sentence
+  description: >-
+    Convert an array into a sentence. Useful for listing tags.
+    Optional argument for connector.
+  examples:
+    - input: '{{ page.tags | array_to_sentence_string }}'
+      output: 'foo, bar, and baz'
+    - input: '{{ page.tags | array_to_sentence_string: "or" }}'
+      output: 'foo, bar, or baz'
+
+#
+
+- name: Markdownify
+  description: Convert a Markdown-formatted string into HTML.
+  examples:
+    - input: '{{ page.excerpt | markdownify }}'
+      output:
+
+#
+
+- name: Smartify
+  description: 'Convert "quotes" into &ldquo;smart quotes.&rdquo;'
+  examples:
+    - input: '{{ page.title | smartify }}'
+      output:
+
+#
+
+- name: Converting Sass/SCSS
+  description: Convert a Sass- or SCSS-formatted string into CSS.
+  examples:
+    - input: '{{ some_sass | sassify }}'
+      output:
+    - input: '{{ some_scss | scssify }}'
+      output:
+
+#
+
+- name: Slugify
+  description: Convert a string into a lowercase URL "slug". See below for options.
+  examples:
+    - input: '{{ "The _config.yml file" | slugify }}'
+      output: 'the-config-yml-file'
+    - input: '{{ "The _config.yml file" | slugify: "pretty" }}'
+      output: 'the-_config.yml-file'
+    - input: '{{ "The _cönfig.yml file" | slugify: "ascii" }}'
+      output: 'the-c-nfig-yml-file'
+    - input: '{{ "The cönfig.yml file" | slugify: "latin" }}'
+      output: 'the-config-yml-file'
+
+#
+
+- name: Data To JSON
+  description: Convert Hash or Array to JSON.
+  examples:
+    - input: '{{ site.data.projects | jsonify }}'
+      output:
+
+#
+
+- name: Normalize Whitespace
+  description: Replace any occurrence of whitespace with a single space.
+  examples:
+    - input: '{{ "a \n b" | normalize_whitespace }}'
+      output:
+
+#
+
+- name: Sort
+  description: >-
+    Sort an array. Optional arguments for hashes
+    1.&nbsp;property name
+    2.&nbsp;nils order (<em>first</em> or <em>last</em>).
+  examples:
+    - input: '{{ page.tags | sort }}'
+      output:
+    - input: '{{ site.posts | sort: "author" }}'
+      output:
+    - input: '{{ site.pages | sort: "title", "last" }}'
+      output:
+
+#
+
+- name: Sample
+  description: 'Pick a random value from an array. Optionally, pick multiple values.'
+  examples:
+    - input: '{{ site.pages | sample }}'
+      output:
+    - input: '{{ site.pages | sample: 2 }}'
+      output:
+
+#
+
+- name: To Integer
+  description: Convert a string or boolean to integer.
+  examples:
+    - input: '{{ some_var | to_integer }}'
+      output:
+
+#
+
+- name: Array Filters
+  description: >-
+    Push, pop, shift, and unshift elements from an Array.
+    These are <strong>NON-DESTRUCTIVE</strong>, i.e. they do not mutate the array,
+    but rather make a copy and mutate that.
+  examples:
+    - input: '{{ page.tags | push: "Spokane" }}'
+      output: '["Seattle", "Tacoma", "Spokane"]'
+    - input: '{{ page.tags | pop }}'
+      output: '["Seattle"]'
+    - input: '{{ page.tags | shift }}'
+      output: '["Tacoma"]'
+    - input: '{{ page.tags | unshift: "Olympia" }}'
+      output: '["Olympia", "Seattle", "Tacoma"]'
+
+#
+
+- name: Inspect
+  description: Convert an object into its String representation for debugging.
+  examples:
+    - input: '{{ some_var | inspect }}'
+      output:

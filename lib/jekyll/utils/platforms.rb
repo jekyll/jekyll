@@ -73,7 +73,7 @@ module Jekyll
         @proc_version ||=
           begin
             Pathutil.new("/proc/version").read
-          rescue Errno::ENOENT
+          rescue Errno::ENOENT, Errno::EACCES
             nil
           end
       end

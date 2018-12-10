@@ -4,7 +4,7 @@ title: Blogging
 position: 8
 ---
 You might be wondering how you can have a blog without a database. In true
-Jekyll style, blogging is powered by text files and is easy to set up.
+Jekyll style, blogging is powered by text files only.
 
 ## Posts
 

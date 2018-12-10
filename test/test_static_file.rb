@@ -99,7 +99,7 @@ class TestStaticFile < JekyllUnitTest
       defaults = [{
         "scope"  => { "path" => "private" },
         "values" => { "published" => false },
-      },]
+      }]
       static_file = setup_static_file_with_defaults(
         "root",
         "private/dir/subdir",
@@ -115,7 +115,7 @@ class TestStaticFile < JekyllUnitTest
       defaults = [{
         "scope"  => { "path" => "" },
         "values" => { "front-matter" => "default" },
-      },]
+      }]
 
       static_file = setup_static_file_with_defaults "", "", "file.pdf", defaults
       assert_equal "default", static_file.data["front-matter"]
@@ -125,7 +125,7 @@ class TestStaticFile < JekyllUnitTest
       defaults = [{
         "scope"  => { "path" => "" },
         "values" => { "front-matter" => "default" },
-      },]
+      }]
 
       static_file = setup_static_file_with_defaults "", "", "file.pdf", defaults
       hash = static_file.to_liquid
