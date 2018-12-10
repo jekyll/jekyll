@@ -51,7 +51,6 @@ module Jekyll
       # keep using `gems` to avoid breaking change
       self.gems = config["plugins"]
 
-      configure_cache
       configure_plugins
       configure_theme
       configure_include_paths
