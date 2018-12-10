@@ -9,25 +9,37 @@ First, you need to install the command-line tools to be able to compile native e
 xcode-select --install
 ```
 
-:warning: We strongly recommend that you install Ruby gems in your home directory in order to avoid file permissions and the use of `sudo`. To change the default gem path, add those line to your shell config file (e.g. `~/.bash_profile`):
+{: .note }
+We strongly recommend that you install Ruby gems in your home directory to avoid file permissions problems and using `sudo`.
+
+You can do this with the `--user-install` option, for instance by running:
+
+```sh
+gem install --user-install bundler jekyll
+```
+
+Or you can change the default gem path, by adding those lines to your shell config file, .e.g. `~/.bash_profile` or `~/.bashrc` if your shell is bash:
 
 ```
 export GEM_HOME=$HOME/gems
 export PATH=$HOME/gems/bin:$PATH
 ```
 
-Relaunch your terminal and run `gem env` to check that default gem paths point to you home directory.
+Relaunch your terminal and run `gem env` to check that default gem paths point to you home directory by default.
 
 ## Set up Ruby included with the OS
 
 Jekyll requires Ruby > 2.2.5 — we recommend that you run Ruby > 2.3 though, as more and more dependencies ask for that requirement. You're good to go on macOS Mojave 10.14:
 
 ```sh
+sw_vers -productVersion
+10.14
+
 ruby -v
 ruby 2.3.7p456 (2018-03-28 revision 63024) [universal.x86_64-darwin18]
 ```
 
-You can install Jekyll and [Bundler](/docs/ruby-101/#bundler):
+Install [Bundler](/docs/ruby-101/#bundler) and Jekyll by running:
 
 ```sh
 gem install bundler jekyll
