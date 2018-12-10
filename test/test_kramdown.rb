@@ -32,7 +32,6 @@ class TestKramdown < JekyllUnitTest
       @config = Jekyll.configuration(@config)
       @markdown = Converters::Markdown.new(@config)
       @markdown.setup
-      Jekyll::Cache.clear
     end
 
     should "fill symbolized keys into config for compatibility with kramdown" do

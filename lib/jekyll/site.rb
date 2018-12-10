@@ -105,7 +105,6 @@ module Jekyll
 
       raise ArgumentError, "limit_posts must be a non-negative number" if limit_posts.negative?
 
-      Jekyll::Cache.clear_if_config_changed config
       Jekyll::Hooks.trigger :site, :after_reset, self
     end
 
@@ -447,11 +446,6 @@ module Jekyll
     # Returns The Cleaner
     def site_cleaner
       @site_cleaner ||= Cleaner.new(self)
-    end
-
-    # Disable Marshaling cache to disk in Safe Mode
-    def configure_cache
-      Jekyll::Cache.disable_disk_cache! if safe
     end
 
     def configure_plugins
