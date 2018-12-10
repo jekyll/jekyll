@@ -1,11 +1,33 @@
-engines:
+version: "2"
+checks:
+  argument-count:
+    enabled: true
+    config:
+      threshold: 5
+  file-lines:
+    enabled: true
+    config:
+      threshold: 300
+  method-complexity:
+    enabled: true
+    config:
+      threshold: 15
+  method-count:
+    enabled: true
+    config:
+      threshold: 50
+  method-lines:
+    enabled: true
+    config:
+      threshold: 30
+plugins:
   fixme:
     enabled: false
   rubocop:
     enabled: true
-    channel: rubocop-0-54
+    channel: rubocop-0-60
 
-exclude_paths:
+exclude_patterns:
   - "*.*"
   - ".*"
 
@@ -13,22 +35,19 @@ exclude_paths:
   - LICENSE
   - Rakefile
 
-  - benchmark/**/*
-  - features/**/*
-  - script/**/*
-  - exe/**/*
-  - docs/**/*
-  - rake/**/*
-  - spec/**/*
-  - test/**/*
-  - vendor/**/*
+  - benchmark/
+  - docs/
+  - exe/
+  - features/
+  - rake/
+  - rubocop/
+  - script/
+  - spec/
+  - test/
+  - vendor/
 
-  - lib/blank_template/**/*
-  - lib/site_template/**/*
-  - lib/theme_template/**/*
+  - lib/blank_template/
+  - lib/site_template/
+  - lib/theme_template/
   - lib/jekyll/mime.types
   - lib/jekyll/commands/serve/livereload_assets/livereload.js
-
-ratings:
-  paths:
-    - lib/**/*.rb

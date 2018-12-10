@@ -17,7 +17,6 @@ end
 #
 
 group :test do
-  gem "codeclimate-test-reporter", "~> 1.0.5"
   gem "cucumber", "~> 3.0"
   gem "httpclient"
   gem "jekyll_test_plugin"
