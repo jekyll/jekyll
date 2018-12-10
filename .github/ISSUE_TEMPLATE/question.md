@@ -1,6 +1,10 @@
 ---
 name: Question
 about: Have any questions about how Jekyll works?
+title: ''
+labels: ''
+assignees: ''
+
 ---
 
 <!--

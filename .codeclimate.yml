@@ -6,29 +6,27 @@ engines:
     channel: rubocop-0-54
 
 exclude_paths:
-  - .codeclimate.yml
-  - .gitignore
-  - .rspec
-  - .rubocop.yml
-  - .travis.yml
+  - "*.*"
+  - ".*"
 
-  - Gemfile.lock
-  - CHANGELOG.{md,markdown,txt,textile}
-  - CONTRIBUTING.{md,markdown,txt,textile}
-  - readme.{md,markdown,txt,textile}
-  - README.{md,markdown,txt,textile}
-  - Readme.{md,markdown,txt,textile}
-  - ReadMe.{md,markdown,txt,textile}
-  - COPYING
+  - Gemfile
   - LICENSE
+  - Rakefile
 
+  - benchmark/**/*
   - features/**/*
   - script/**/*
+  - exe/**/*
   - docs/**/*
+  - rake/**/*
   - spec/**/*
   - test/**/*
   - vendor/**/*
 
+  - lib/blank_template/**/*
+  - lib/site_template/**/*
+  - lib/theme_template/**/*
+  - lib/jekyll/mime.types
   - lib/jekyll/commands/serve/livereload_assets/livereload.js
 
 ratings:

@@ -76,6 +76,18 @@
   * Add documentation for custom tag blocks (#7359)
   * Added 99inbound&#39;s Jekyll post to form resources (#7348)
   * docs: document page.dir and page.name (#7373)
+  * Remove installation instructions with Homebrew (#7381)
+  * Fix dead link and misleading prose (#7383)
+  * Fix content management section (#7385)
+  * Site: Better Performance (#7388)
+  * Proposed re-wording of Sass note. :) (#7392)
+  * Apply ruby official guide documents (#7393)
+  * docs: Fix group_by_exp filter example (#7394)
+  * adjust team page listings (#7395)
+  * Update resources.md (#7396)
+  * Update resources.md (#7397)
+  * Remove alt attribute from a tags (#7407)
+  * Fix grammatical error in permalinks.md (#7409)
 
 ### Minor Enhancements
 
@@ -118,6 +130,7 @@
   * Cache converted markdown (#7159)
   * Ignore cache directory (#7184)
   * Incorporate `relative_url` filter in `link` tag (#6727)
+  * Only read layouts from source_dir or theme_dir (#6788)
 
 ### Development Fixes
 
@@ -146,6 +159,9 @@
   * Drop support for `jekyll-watch-1.4.0` and older (#7287)
   * CI(Appveyor): shallow clone with 5 last commits (#7312)
   * Bump RuboCop to v0.60.x (#7338)
+  * Update excludes for CodeClimate Analyses (#7365)
+  * Switch to `:install_if` for wdm gem (#7372)
+  * Bump RuboCop to v0.61.x (#7401)
 
 ### Bug Fixes
 
@@ -168,6 +184,8 @@
   * Add Release Post for v3.6.3, v3.7.4 and v3.8.4 (#7259)
   * Fix link to Tidelift in site&#39;s footer (#7377)
   * :sparkles: Add a link to OpenCollective backing (#7378)
+  * Add @ashmaroli to Core Team listing (#7398)
+  * link site to sponsor listing in readme (#7405)
 
 ## 3.8.5 / 2018-11-04
 
