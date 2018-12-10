@@ -63,6 +63,6 @@ performance. Surprisingly, that's what happens when you properly fund people for
 If you have been a long time user for Jekyll and would like to give something back to the project,
 you can consider a small monthly donation to our [OpenCollective page](http://opencollective.com/jekyll).
 If your company heavily relies on Jekyll, do consider sponsoring us! Contact me at
-`olivia at fastmail dot com` and we'll figure something out together.
+`olivia at jekyllrb dot com` and we'll figure something out together.
 
 Thanks for sticking with us, and happy Jekylling! :tada:

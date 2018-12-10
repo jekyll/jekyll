@@ -55,7 +55,7 @@ Jekyll uses the `listen` gem to watch for changes when the `--watch` switch is s
 Add the following to the `Gemfile` for your site if you have issues with auto-regeneration on Windows alone:
 
 ```ruby
-gem 'wdm', '~> 0.1.1' if Gem.win_platform?
+gem 'wdm', '~> 0.1.1', :install_if => Gem.win_platform?
 ```
 
 You have to use a [Ruby+Devkit](https://rubyinstaller.org/downloads/) version of the RubyInstaller.

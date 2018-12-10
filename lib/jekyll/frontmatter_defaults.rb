@@ -220,7 +220,7 @@ module Jekyll
 
     # Sanitizes the given path by removing a leading and adding a trailing slash
 
-    SANITIZATION_REGEX = %r!\A/|(?<=[^/])\z!
+    SANITIZATION_REGEX = %r!\A/|(?<=[^/])\z!.freeze
 
     def sanitize_path(path)
       if path.nil? || path.empty?

@@ -3,7 +3,7 @@
 module Jekyll
   # Handles the cleanup of a site's destination before it is built.
   class Cleaner
-    HIDDEN_FILE_REGEX = %r!\/\.{1,2}$!
+    HIDDEN_FILE_REGEX = %r!\/\.{1,2}$!.freeze
     attr_reader :site
 
     def initialize(site)
