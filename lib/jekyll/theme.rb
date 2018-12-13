@@ -56,7 +56,7 @@ module Jekyll
     end
 
     def realpath_for(folder)
-      File.realpath(Jekyll.sanitized_path(root, folder.to_s))
+      Jekyll.sanitized_path(root, File.realpath(Jekyll.sanitized_path(root, folder.to_s)))
     rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP
       Jekyll.logger.warn "Invalid theme folder:", folder
       nil
