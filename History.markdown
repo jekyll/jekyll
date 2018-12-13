@@ -88,6 +88,7 @@
   * Update resources.md (#7397)
   * Remove alt attribute from a tags (#7407)
   * Fix grammatical error in permalinks.md (#7409)
+  * [Docs] Fix BASH code-block in ubuntu.md (#7420)
 
 ### Minor Enhancements
 
