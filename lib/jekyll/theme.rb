@@ -56,10 +56,10 @@ module Jekyll
     end
 
     def realpath_for(folder)
-      # This resolves all symlinks for the theme subfolder then ensures that
-      # the directory remains inside the theme root. This prevents the use
-      # of symlinks for theme subfolders to escape the theme root. Symlinks
-      # are allowed to point to other directories in the theme.
+      # This resolves all symlinks for the theme subfolder and then ensures that the directory
+      # remains inside the theme root. This prevents the use of symlinks for theme subfolders to
+      # escape the theme root.
+      # However, symlinks are allowed to point to other directories within the theme.
       Jekyll.sanitized_path(root, File.realpath(Jekyll.sanitized_path(root, folder.to_s)))
     rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP
       Jekyll.logger.warn "Invalid theme folder:", folder

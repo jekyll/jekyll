@@ -80,9 +80,9 @@ class TestThemeAssetsReader < JekyllUnitTest
     should "not read assets from symlinked theme" do
       begin
         tmp_dir = Dir.mktmpdir("jekyll-theme-test")
-        File.new(File.join(tmp_dir, "test.txt"), "w") { |f| f.write "content" }
+        File.open(File.join(tmp_dir, "test.txt"), "wb") { |f| f.write "content" }
 
-        theme_dir = File.join(File.dirname(__FILE__), "fixtures", "test-theme-symlink")
+        theme_dir = File.join(__dir__, "fixtures", "test-theme-symlink")
         File.symlink(tmp_dir, File.join(theme_dir, "assets"))
 
         site = fixture_site(
