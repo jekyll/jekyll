@@ -152,6 +152,12 @@ module Jekyll
       @defaults ||= @site.frontmatter_defaults.all url, type
     end
 
+    # Returns a debug string on inspecting the static file.
+    # Includes only the relative path of the object.
+    def inspect
+      "#<#{self.class} @relative_path=#{relative_path.inspect}>"
+    end
+
     private
 
     def copy_file(dest_path)
