@@ -7,6 +7,10 @@ module Jekyll
         @obj.doc.data["layout"]
       end
 
+      def date
+        @obj.doc.date
+      end
+
       def excerpt
         nil
       end
