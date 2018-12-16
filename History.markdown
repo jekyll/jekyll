@@ -113,6 +113,7 @@
   * Load config file from within current theme-gem (#7304)
   * Memoize the return value of Site#documents (#7273)
   * Upgrade liquid-c to v4.0 (#7375)
+  * Add a custom inspect string for StaticFile objects (#7422)
 
 ### Major Enhancements
 
