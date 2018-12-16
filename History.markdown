@@ -176,6 +176,7 @@
   * Measure the no. of times a template gets rendered (#7316)
   * Re-implement handling Liquid blocks in excerpts (#7250)
   * Theme gems: ensure directories aren&#39;t symlinks (#7419)
+  * Documents should be able to render their date (#7404)
 
 ### feature
 
