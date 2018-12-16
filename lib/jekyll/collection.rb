@@ -274,7 +274,9 @@ module Jekyll
       docs_table   = {}
       custom_order = {}
 
-      docs.each do |doc|
+      # pre-sort to normalize default array across platforms and then proceed to create a Hash
+      # from that sorted array.
+      docs.sort.each do |doc|
         docs_table[doc.relative_path] = doc
       end
 
