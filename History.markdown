@@ -165,6 +165,7 @@
   * Switch to `:install_if` for wdm gem (#7372)
   * Bump RuboCop to v0.61.x (#7401)
   * dev: test oldest and latest Ruby only (#7412)
+  * Reduce array traversal in Jekyll::Reader (#7157)
 
 ### Bug Fixes
 
