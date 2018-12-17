@@ -78,6 +78,8 @@ class TestThemeAssetsReader < JekyllUnitTest
 
   context "symlinked theme" do
     should "not read assets from symlinked theme" do
+      skip_if_windows "Jekyll does not currently support symlinks on Windows."
+
       begin
         tmp_dir = Dir.mktmpdir("jekyll-theme-test")
         File.open(File.join(tmp_dir, "test.txt"), "wb") { |f| f.write "content" }
