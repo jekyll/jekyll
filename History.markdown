@@ -167,6 +167,7 @@
   * Bump RuboCop to v0.61.x (#7401)
   * dev: test oldest and latest Ruby only (#7412)
   * Reduce array traversal in Jekyll::Reader (#7157)
+  * Create symlink only if target is accessible (#7429)
 
 ### Bug Fixes
 
