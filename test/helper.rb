@@ -190,6 +190,13 @@ class JekyllUnitTest < Minitest::Test
       skip msg.to_s.magenta
     end
   end
+
+  def symlink_if_allowed(target, sym_file)
+    FileUtils.ln_sf(target, sym_file)
+  rescue Errno::EACCES
+    skip "Permission denied for creating a symlink to #{target.inspect} " \
+         "on this machine".magenta
+  end
 end
 
 class FakeLogger
