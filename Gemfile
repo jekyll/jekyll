@@ -3,6 +3,10 @@
 source "https://rubygems.org"
 gemspec :name => "jekyll"
 
+# Temporarily lock JRuby builds on Travis CI to i18n-1.2.x until JRuby is able to handle
+# refinements introduced in i18n-1.3.0
+gem "i18n", "~> 1.2.0" if RUBY_ENGINE == "jruby"
+
 gem "rake", "~> 12.0"
 
 group :development do
