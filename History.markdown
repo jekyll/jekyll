@@ -90,6 +90,7 @@
   * Fix grammatical error in permalinks.md (#7409)
   * [Docs] Fix BASH code-block in ubuntu.md (#7420)
   * zlib is missing (#7428)
+  * Include docs for `{{ page.collection }}` (#7430)
 
 ### Minor Enhancements
 
