@@ -122,8 +122,9 @@ page:
       <a href="/docs/front-matter/">front matter</a>.
   - name: page.collection
     description: >-
-      The label of the collection to which this document belongs. If not part of a collection, an
-      empty string is returned.
+      The label of the collection to which this document belongs. e.g. <code>posts</code> for a post, or
+      <code>puppies</code> for a document at path <code>_puppies/rover.md</code>. If not part of a
+      collection, an empty string is returned.
   - name: page.tags
     description: >-
       The list of tags to which this post belongs. These can be specified in the
