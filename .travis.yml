@@ -7,7 +7,7 @@ sudo: false
 rvm:
   - &ruby1 2.5.3
   - &ruby2 2.3.8
-  - &jruby jruby-9.1.16.0
+  - &jruby jruby-9.2.5.0
 
 matrix:
   include:
