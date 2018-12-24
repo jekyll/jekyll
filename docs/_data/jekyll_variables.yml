@@ -121,12 +121,12 @@ page:
       <code>['work', 'code']</code>. These can also be specified in the
       <a href="/docs/front-matter/">front matter</a>.
    - name: page.collection
-    description: >-
-      The the collection to which this page belongs. This would equal the string `posts`
-      if the page was in the posts collection or `authors` of it was in the authors collection.
-      this tends to be useful in SEO includes, for example to mark the type of page.
-      `<meta property="og:type" content="{% if page.collection == 'posts' %}article{% elsif page.collection == 'authors' %}profile{% else %}website{% endif %}">`
-      would make a facebook open graph tag containing the page type.
+     description: >-
+       The the collection to which this page belongs. This would equal the string `posts`
+       if the page was in the posts collection or `authors` of it was in the authors collection.
+       this tends to be useful in SEO includes, for example to mark the type of page.
+       `<meta property="og:type" content="{% if page.collection == 'posts' %}article{% elsif page.collection == 'authors' %}profile{% else %}website{% endif %}">`
+       would make a facebook open graph tag containing the page type.
   - name: page.tags
     description: >-
       The list of tags to which this post belongs. These can be specified in the
