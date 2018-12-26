@@ -4,7 +4,7 @@ Feature: Configuring and using plugins
 
   Scenario: Add a gem-based plugin
     Given I have an "index.html" file that contains "Whatever"
-    And I have a configuration file with "gems" set to "[jekyll_test_plugin]"
+    And I have a configuration file with "plugins" set to "[jekyll_test_plugin]"
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
@@ -15,7 +15,7 @@ Feature: Configuring and using plugins
     Given I have an "index.html" file that contains "Whatever"
     And I have a configuration file with:
       | key       | value                |
-      | gems      | [jekyll_test_plugin] |
+      | plugins   | [jekyll_test_plugin] |
       | whitelist | []                   |
     When I run jekyll build --safe
     Then I should get a zero exit status
@@ -27,7 +27,7 @@ Feature: Configuring and using plugins
     Given I have an "index.html" file that contains "Whatever"
     And I have a configuration file with:
       | key       | value                                              |
-      | gems      | [jekyll_test_plugin, jekyll_test_plugin_malicious] |
+      | plugins   | [jekyll_test_plugin, jekyll_test_plugin_malicious] |
       | whitelist | [jekyll_test_plugin]                               |
     When I run jekyll build --safe
     Then I should get a zero exit status
