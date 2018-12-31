@@ -43,7 +43,7 @@ module Jekyll
 
       # This class inserts the LiveReload script tags into HTML as it is served
       class BodyProcessor
-        HEAD_TAG_REGEX = %r!<head>|<head[^(er)][^<]*>!
+        HEAD_TAG_REGEX = %r!<head>|<head[^(er)][^<]*>!.freeze
 
         attr_reader :content_length, :new_body, :livereload_added
 
@@ -88,6 +88,7 @@ module Jekyll
           end
           @new_body = @new_body.join
         end
+        # rubocop:enable Metrics/MethodLength
 
         def template
           # Unclear what "snipver" does. Doc at
@@ -120,9 +121,7 @@ module Jekyll
           if @options["livereload_max_delay"]
             src += "&amp;maxdelay=#{@options["livereload_max_delay"]}"
           end
-          if @options["livereload_port"]
-            src += "&amp;port=#{@options["livereload_port"]}"
-          end
+          src += "&amp;port=#{@options["livereload_port"]}" if @options["livereload_port"]
           src
         end
       end
@@ -141,7 +140,9 @@ module Jekyll
         end
 
         def search_index_file(req, res)
-          super || search_file(req, res, ".html")
+          super ||
+            search_file(req, res, ".html") ||
+            search_file(req, res, ".xhtml")
         end
 
         # Add the ability to tap file.html the same way that Nginx does on our
@@ -150,7 +151,9 @@ module Jekyll
 
         def search_file(req, res, basename)
           # /file.* > /file/index.html > /file.html
-          super || super(req, res, "#{basename}.html")
+          super ||
+            super(req, res, "#{basename}.html") ||
+            super(req, res, "#{basename}.xhtml")
         end
 
         # rubocop:disable Naming/MethodName
@@ -175,10 +178,10 @@ module Jekyll
           res.header.merge!(@headers)
           rtn
         end
-
-        #
+        # rubocop:enable Naming/MethodName
 
         private
+
         def validate_and_ensure_charset(_req, res)
           key = res.header.keys.grep(%r!content-type!i).first
           typ = res.header[key]
@@ -188,9 +191,6 @@ module Jekyll
           end
         end
 
-        #
-
-        private
         def set_defaults
           hash_ = @jekyll_opts.fetch("webrick", {}).fetch("headers", {})
           DEFAULTS.each_with_object(@headers = hash_) do |(key, val), hash|

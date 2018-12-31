@@ -17,11 +17,11 @@ Each affinity team has a few captains who manage the issues and pull requests fo
 
 Just ask! Feel free to open an issue on `jekyll/jekyll` and add `/cc @jekyll/core`. We can add you. :smile:
 
-Alternatively, you can email or otherwise reach out to [@parkr](https://github.com/parkr) directly if you prefer the more private route.
+Alternatively, you can email or otherwise reach out to [@oe](https://github.com/oe) directly if you prefer the more private route.
 
 ## Ugh, I'm tired and don't have time to be a captain anymore. What now?
 
-No sweat at all! Email [@parkr](https://github.com/parkr) and ask to be removed. Alternatively, you should be able to go to your team's page on GitHub.com (go to https://github.com/jekyll, click "Teams", click the link to your team) and change your status to either "member" or leave the team.
+No sweat at all! Email [@oe](https://github.com/oe) and ask to be removed. Alternatively, you should be able to go to your team's page on GitHub.com (go to https://github.com/jekyll, click "Teams", click the link to your team) and change your status to either "member" or leave the team.
 
 We realize that being a captain is no easy feat so we want to make it a great experience. As always, communicate as much as you can with us about what is working, and what isn't. Thanks for dedicating some time to Jekyll! :sparkles:
 

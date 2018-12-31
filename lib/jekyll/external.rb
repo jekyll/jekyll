@@ -9,6 +9,7 @@ module Jekyll
       #
       def blessed_gems
         %w(
+          jekyll-compose
           jekyll-docs
           jekyll-import
         )
@@ -41,6 +42,7 @@ module Jekyll
       # RubyGems.
       def version_constraint(gem_name)
         return "= #{Jekyll::VERSION}" if gem_name.to_s.eql?("jekyll-docs")
+
         "> 0"
       end
 
@@ -57,13 +59,13 @@ module Jekyll
             Jekyll.logger.debug "Requiring:", name.to_s
             require name
           rescue LoadError => e
-            Jekyll.logger.error "Dependency Error:", <<-MSG
-Yikes! It looks like you don't have #{name} or one of its dependencies installed.
-In order to use Jekyll as currently configured, you'll need to install this gem.
+            Jekyll.logger.error "Dependency Error:", <<~MSG
+              Yikes! It looks like you don't have #{name} or one of its dependencies installed.
+              In order to use Jekyll as currently configured, you'll need to install this gem.
 
-The full error message from Ruby is: '#{e.message}'
+              The full error message from Ruby is: '#{e.message}'
 
-If you run into trouble, you can find helpful resources at https://jekyllrb.com/help/!
+              If you run into trouble, you can find helpful resources at https://jekyllrb.com/help/!
             MSG
             raise Jekyll::Errors::MissingDependencyException, name
           end

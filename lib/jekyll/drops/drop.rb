@@ -15,11 +15,7 @@ module Jekyll
       #
       # Returns the mutability of the class
       def self.mutable(is_mutable = nil)
-        @is_mutable = if is_mutable
-                        is_mutable
-                      else
-                        false
-                      end
+        @is_mutable = is_mutable || false
       end
 
       def self.mutable?
@@ -105,6 +101,7 @@ module Jekyll
       def key?(key)
         return false if key.nil?
         return true if self.class.mutable? && @mutations.key?(key)
+
         respond_to?(key) || fallback_data.key?(key)
       end
 
@@ -137,7 +134,6 @@ module Jekyll
       #
       # Returns a pretty generation of the hash representation of the Drop.
       def inspect
-        require "json"
         JSON.pretty_generate to_h
       end
 
@@ -155,7 +151,6 @@ module Jekyll
       #
       # Returns a JSON representation of the Drop in a String.
       def to_json(state = nil)
-        require "json"
         JSON.generate(hash_for_json(state), state)
       end
 
@@ -175,7 +170,7 @@ module Jekyll
       end
 
       def merge(other, &block)
-        self.dup.tap do |me|
+        dup.tap do |me|
           if block.nil?
             me.merge!(other)
           else

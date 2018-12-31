@@ -22,10 +22,12 @@ module Jekyll
           options = configuration_from_options(options)
           destination = options["destination"]
           metadata_file = File.join(options["source"], ".jekyll-metadata")
+          cache_dir = File.join(options["source"], options["cache_dir"])
           sass_cache = ".sass-cache"
 
           remove(destination, :checker_func => :directory?)
           remove(metadata_file, :checker_func => :file?)
+          remove(cache_dir, :checker_func => :directory?)
           remove(sass_cache, :checker_func => :directory?)
         end
 

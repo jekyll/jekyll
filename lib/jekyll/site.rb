@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "csv"
-
 module Jekyll
   class Site
     attr_reader   :source, :dest, :config
@@ -46,13 +44,14 @@ module Jekyll
       @config = config.clone
 
       %w(safe lsi highlighter baseurl exclude include future unpublished
-        show_drafts limit_posts keep_files).each do |opt|
-        self.send("#{opt}=", config[opt])
+         show_drafts limit_posts keep_files).each do |opt|
+        send("#{opt}=", config[opt])
       end
 
       # keep using `gems` to avoid breaking change
       self.gems = config["plugins"]
 
+      configure_cache
       configure_plugins
       configure_theme
       configure_include_paths
@@ -60,6 +59,8 @@ module Jekyll
 
       self.permalink_style = config["permalink"].to_sym
 
+      # Read in a _config.yml from the current theme-gem at the very end.
+      @config = load_theme_configuration(config) if theme
       @config
     end
 
@@ -77,7 +78,7 @@ module Jekyll
     end
 
     def print_stats
-      puts @liquid_renderer.stats_table
+      Jekyll.logger.info @liquid_renderer.stats_table
     end
 
     # Reset Site details.
@@ -93,14 +94,18 @@ module Jekyll
       self.pages = []
       self.static_files = []
       self.data = {}
+      @post_attr_hash = {}
+      @site_data = nil
       @collections = nil
+      @documents = nil
+      @docs_to_write = nil
       @regenerator.clear_cache
       @liquid_renderer.reset
+      @site_cleaner = nil
 
-      if limit_posts < 0
-        raise ArgumentError, "limit_posts must be a non-negative number"
-      end
+      raise ArgumentError, "limit_posts must be a non-negative number" if limit_posts.negative?
 
+      Jekyll::Cache.clear_if_config_changed config
       Jekyll::Hooks.trigger :site, :after_reset, self
     end
 
@@ -123,7 +128,7 @@ module Jekyll
       Pathname.new(source).ascend do |path|
         if path == dest_pathname
           raise Errors::FatalException,
-            "Destination directory cannot be or contain the Source directory."
+                "Destination directory cannot be or contain the Source directory."
         end
       end
     end
@@ -173,7 +178,7 @@ module Jekyll
         start = Time.now
         generator.generate(self)
         Jekyll.logger.debug "Generating:",
-          "#{generator.class} finished in #{Time.now - start} seconds."
+                            "#{generator.class} finished in #{Time.now - start} seconds."
       end
     end
 
@@ -231,12 +236,14 @@ module Jekyll
     def post_attr_hash(post_attr)
       # Build a hash map based on the specified post attribute ( post attr =>
       # array of posts ) then sort each array in reverse order.
-      hash = Hash.new { |h, key| h[key] = [] }
-      posts.docs.each do |p|
-        p.data[post_attr].each { |t| hash[t] << p } if p.data[post_attr]
+      @post_attr_hash[post_attr] ||= begin
+        hash = Hash.new { |h, key| h[key] = [] }
+        posts.docs.each do |p|
+          p.data[post_attr]&.each { |t| hash[t] << p }
+        end
+        hash.each_value { |posts| posts.sort!.reverse! }
+        hash
       end
-      hash.each_value { |posts| posts.sort!.reverse! }
-      hash
     end
 
     def tags
@@ -252,7 +259,7 @@ module Jekyll
     #
     # Returns the Hash to be hooked to site.data.
     def site_data
-      config["data"] || data
+      @site_data ||= (config["data"] || data)
     end
 
     # The Hash payload containing site-wide data.
@@ -276,10 +283,12 @@ module Jekyll
     # Get the implementation class for the given Converter.
     # Returns the Converter instance implementing the given Converter.
     # klass - The Class of the Converter to fetch.
-
     def find_converter_instance(klass)
-      converters.find { |klass_| klass_.instance_of?(klass) } || \
-        raise("No Converters found for #{klass}")
+      @find_converter_instance ||= {}
+      @find_converter_instance[klass] ||= begin
+        converters.find { |converter| converter.instance_of?(klass) } || \
+          raise("No Converters found for #{klass}")
+      end
     end
 
     # klass - class or module containing the subclasses.
@@ -300,10 +309,10 @@ module Jekyll
     def relative_permalinks_are_deprecated
       if config["relative_permalinks"]
         Jekyll.logger.abort_with "Since v3.0, permalinks for pages" \
-                                " in subfolders must be relative to the" \
-                                " site source directory, not the parent" \
-                                " directory. Check https://jekyllrb.com/docs/upgrading/"\
-                                " for more info."
+                                 " in subfolders must be relative to the" \
+                                 " site source directory, not the parent" \
+                                 " directory. Check https://jekyllrb.com/docs/upgrading/"\
+                                 " for more info."
       end
     end
 
@@ -311,14 +320,14 @@ module Jekyll
     #
     # Returns an Array of Documents which should be written
     def docs_to_write
-      documents.select(&:write?)
+      @docs_to_write ||= documents.select(&:write?)
     end
 
     # Get all the documents
     #
     # Returns an Array of all Documents
     def documents
-      collections.reduce(Set.new) do |docs, (_, collection)|
+      @documents ||= collections.reduce(Set.new) do |docs, (_, collection)|
         docs + collection.docs + collection.files
       end.to_a
     end
@@ -374,6 +383,7 @@ module Jekyll
     # Returns a path which is prefixed with the theme root directory.
     def in_theme_dir(*paths)
       return nil unless theme
+
       paths.reduce(theme.root) do |base, path|
         Jekyll.sanitized_path(base, path)
       end
@@ -391,14 +401,43 @@ module Jekyll
       end
     end
 
+    # Public: The full path to the directory that houses all the collections registered
+    # with the current site.
+    #
+    # Returns the source directory or the absolute path to the custom collections_dir
+    def collections_path
+      dir_str = config["collections_dir"]
+      @collections_path ||= dir_str.empty? ? source : in_source_dir(dir_str)
+    end
+
+    private
+
+    def load_theme_configuration(config)
+      theme_config_file = in_theme_dir("_config.yml")
+      return config unless File.exist?(theme_config_file)
+
+      # Bail out if the theme_config_file is a symlink file irrespective of safe mode
+      return config if File.symlink?(theme_config_file)
+
+      theme_config = SafeYAML.load_file(theme_config_file)
+      return config unless theme_config.is_a?(Hash)
+
+      Jekyll.logger.info "Theme Config file:", theme_config_file
+
+      # theme_config should not be overriding Jekyll's defaults
+      theme_config.delete_if { |key, _| Configuration::DEFAULTS.key?(key) }
+
+      # Override theme_config with existing config and return the result.
+      Utils.deep_merge_hashes(theme_config, config)
+    end
+
     # Limits the current posts; removes the posts which exceed the limit_posts
     #
     # Returns nothing
-    private
     def limit_posts!
-      if limit_posts > 0
+      if limit_posts.positive?
         limit = posts.docs.length < limit_posts ? posts.docs.length : limit_posts
-        self.posts.docs = posts.docs[-limit, limit]
+        posts.docs = posts.docs[-limit, limit]
       end
     end
 
@@ -406,18 +445,20 @@ module Jekyll
     # already exist.
     #
     # Returns The Cleaner
-    private
     def site_cleaner
       @site_cleaner ||= Cleaner.new(self)
     end
 
-    private
+    # Disable Marshaling cache to disk in Safe Mode
+    def configure_cache
+      Jekyll::Cache.disable_disk_cache! if safe
+    end
+
     def configure_plugins
       self.plugin_manager = Jekyll::PluginManager.new(self)
       self.plugins        = plugin_manager.plugins_path
     end
 
-    private
     def configure_theme
       self.theme = nil
       return if config["theme"].nil?
@@ -432,39 +473,36 @@ module Jekyll
         end
     end
 
-    private
     def configure_include_paths
       @includes_load_paths = Array(in_source_dir(config["includes_dir"].to_s))
-      @includes_load_paths << theme.includes_path if theme && theme.includes_path
+      @includes_load_paths << theme.includes_path if theme&.includes_path
     end
 
-    private
     def configure_file_read_opts
       self.file_read_opts = {}
-      self.file_read_opts[:encoding] = config["encoding"] if config["encoding"]
+      file_read_opts[:encoding] = config["encoding"] if config["encoding"]
       self.file_read_opts = Jekyll::Utils.merged_file_read_opts(self, {})
     end
 
-    private
     def render_docs(payload)
       collections.each_value do |collection|
         collection.docs.each do |document|
-          if regenerator.regenerate?(document)
-            document.output = Jekyll::Renderer.new(self, document, payload).run
-            document.trigger_hooks(:post_render)
-          end
+          render_regenerated(document, payload)
         end
       end
     end
 
-    private
     def render_pages(payload)
       pages.flatten.each do |page|
-        if regenerator.regenerate?(page)
-          page.output = Jekyll::Renderer.new(self, page, payload).run
-          page.trigger_hooks(:post_render)
-        end
+        render_regenerated(page, payload)
       end
+    end
+
+    def render_regenerated(document, payload)
+      return unless regenerator.regenerate?(document)
+
+      document.output = Jekyll::Renderer.new(self, document, payload).run
+      document.trigger_hooks(:post_render)
     end
   end
 end

@@ -30,10 +30,16 @@ On Red Hat, CentOS, and Fedora systems you can do this by running:
 sudo yum install ruby-devel
 ```
 
-If you installed the above - specifically on Fedora 23 - but the extensions would still not compile, you are probably running a Fedora image that misses the `redhat-rpm-config` package. To solve this, simply run:
+If you installed the above - specifically on Fedora 23 - but the extensions would still not compile, you are probably running a Fedora image that misses the `redhat-rpm-config` package. To solve this, run:
 
 ```sh
 sudo dnf install redhat-rpm-config
+```
+
+On Arch Linux you need to run:
+
+```sh
+sudo pacman -S ruby-ffi
 ```
 
 On Ubuntu if you get stuck after `bundle exec jekyll serve` and see error
@@ -97,9 +103,58 @@ Xcode.app can interfere with the command line tools downloaded above. If
 you run into this issue, upgrade Xcode and install the upgraded Command
 Line Tools.
 
-### Jekyll &amp; Mac OS X 10.11
+### Running Jekyll as Non-Superuser (no sudo!)
+{: #no-sudo}
 
-With the introduction of System Integrity Protection, several directories
+On most flavors of Linux, macOS, and Bash on Ubuntu on Windows, it is
+possible to run Jekyll as a non-superuser and without having to install
+gems to system-wide locations by adding the following lines to the end
+of your `.bashrc` file:
+
+```
+# Ruby exports
+
+export GEM_HOME=$HOME/gems
+export PATH=$HOME/gems/bin:$PATH
+```
+
+This tells `gem` to place its gems within the user's home folder,
+not in a system-wide location, and adds the local `jekyll` command to the
+user's `PATH` ahead of any system-wide paths.
+
+This is also useful for many shared webhosting services, where user accounts
+have only limited privileges. Adding these exports to `.bashrc` before running
+`gem install jekyll bundler` allows a complete non-`sudo` install of Jekyll.
+
+To activate the new exports, either close and restart Bash, logout and
+log back into your shell account, or run `. .bashrc` in the
+currently-running shell.
+
+If you see the following error when running the `jekyll new` command,
+you can solve it by using the above-described procedure:
+
+```sh
+jekyll new test
+
+Running bundle install in /home/user/test...
+
+Your user account isn't allowed to install to the system RubyGems.
+You can cancel this installation and run:
+
+      bundle install --path vendor/bundle
+
+to install the gems into ./vendor/bundle/, or you can enter your password
+and install the bundled gems to RubyGems using sudo.
+
+Password:
+```
+
+Once this is done, the `jekyll new` command should work properly for
+your user account.
+
+### Jekyll &amp; macOS
+
+With the introduction of System Integrity Protection in v10.11, several directories
 that were previously writable are now considered system locations and are no
 longer available. Given these changes, there are a couple of simple ways to get
 up and running. One option is to change the location where the gem will be
@@ -116,7 +171,7 @@ done as follows:
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
-Once Homebrew is installed, the second step is easy:
+Once Homebrew is installed, the second step is to run:
 
 ```sh
 brew install ruby
@@ -172,19 +227,19 @@ jekyll serve --baseurl '/blog'
 
 … then make sure that you access the site at:
 
-```sh
+```
 http://localhost:4000/blog/index.html
 ```
 
 It won’t work to just access:
 
-```sh
+```
 http://localhost:4000/blog
 ```
 
 ## Configuration problems
 
-The order of precedence for conflicting [configuration settings](../configuration/)
+The order of precedence for conflicting [configuration settings](/docs/configuration/)
 is as follows:
 
 1. Command-line flags
@@ -197,20 +252,20 @@ specified elsewhere.
 
 **Note: From v3.3.0 onward, Jekyll does not process `node_modules` and certain subdirectories within `vendor`, by default. But, by having an `exclude:` array defined explicitly in the config file overrides this default setting, which results in some users to encounter an error in building the site, with the following error message:**
 
-```
+```sh
     ERROR: YOUR SITE COULD NOT BE BUILT:
     ------------------------------------
     Invalid date '<%= Time.now.strftime('%Y-%m-%d %H:%M:%S %z') %>':
     Document 'vendor/bundle/gems/jekyll-3.4.3/lib/site_template/_posts/0000-00-00-welcome-to-jekyll.markdown.erb'
-    does not have a valid date in the YAML front matter.
+    does not have a valid date in front matter.
 ```
 
-Simply adding `vendor/bundle` to the `exclude:` list will solve this problem but will lead to having other sub-directories under `/vendor/` (and also `/node_modules/`, if present) be processed to the destination folder `_site`.
+Adding `vendor/bundle` to the `exclude:` list will solve this problem but will lead to having other sub-directories under `/vendor/` (and also `/node_modules/`, if present) be processed to the destination folder `_site`.
 
 
 The proper solution is to incorporate the default setting for `exclude:` rather than override it completely:
 
-For versions upto `v3.4.3`, the `exclude:` setting must look like following:
+For versions up to `v3.4.3`, the `exclude:` setting must look like following:
 
 ```yaml
 exclude:
@@ -224,7 +279,7 @@ exclude:
   - any_additional_item # any user-specific listing goes at the end
 ```
 
-From `v3.5` onward, `Gemfile` and `Gemfile.lock` are also excluded by default. So, in most cases there is no need to define another `exclude:` array in the config file. So an existing definition can either be modified as above, or removed completely, or simply commented out to enable easy edits in future.
+From `v3.5` onward, `Gemfile` and `Gemfile.lock` are also excluded by default. So, in most cases there is no need to define another `exclude:` array in the config file. So an existing definition can either be modified as above, or removed completely, or commented out to enable easy edits in future.
 
 
 ## Markup Problems
@@ -235,9 +290,8 @@ problems.
 
 ### Liquid
 
-The latest version, version 2.0, seems to break the use of `{{ "{{" }}` in
-templates. Unlike previous versions, using `{{ "{{" }}` in 2.0 triggers the
-following error:
+Liquid version 2.0 seems to break the use of `{{ "{{" }}` in templates.
+Unlike previous versions, using `{{ "{{" }}` in 2.0 triggers the following error:
 
 ```sh
 '{{ "{{" }}' was not properly terminated with regexp: /\}\}/  (Liquid::SyntaxError)
@@ -255,7 +309,7 @@ run into these errors, try setting `excerpt_separator: ""` in your
 
 If you run into an issue that a static file can't be found in your
 production environment during build since v3.2.0 you should set your
-[environment to `production`](../configuration/#specifying-a-jekyll-environment-at-build-time).
+[environment to `production`](/docs/configuration/environments/).
 The issue is caused by trying to copy a non-existing symlink.
 
 <div class="note">

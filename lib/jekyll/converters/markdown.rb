@@ -2,6 +2,8 @@
 
 module Jekyll
   module Converters
+    # Markdown converter.
+    # For more info on converters see https://jekyllrb.com/docs/plugins/converters/
     class Markdown < Converter
       highlighter_prefix "\n"
       highlighter_suffix "\n"
@@ -9,17 +11,18 @@ module Jekyll
 
       def setup
         return if @setup ||= false
+
         unless (@parser = get_processor)
           Jekyll.logger.error "Invalid Markdown processor given:", @config["markdown"]
-          if @config["safe"]
-            Jekyll.logger.info "", "Custom processors are not loaded in safe mode"
-          end
+          Jekyll.logger.info "", "Custom processors are not loaded in safe mode" if @config["safe"]
           Jekyll.logger.error(
             "",
             "Available processors are: #{valid_processors.join(", ")}"
           )
           raise Errors::FatalException, "Bailing out; invalid Markdown processor."
         end
+
+        @cache = Jekyll::Cache.new("Jekyll::Converters::Markdown")
 
         @setup = true
       end
@@ -30,9 +33,7 @@ module Jekyll
       # rubocop:disable Naming/AccessorMethodName
       def get_processor
         case @config["markdown"].downcase
-        when "redcarpet" then return RedcarpetParser.new(@config)
-        when "kramdown"  then return KramdownParser.new(@config)
-        when "rdiscount" then return RDiscountParser.new(@config)
+        when "kramdown" then KramdownParser.new(@config)
         else
           custom_processor
         end
@@ -44,7 +45,7 @@ module Jekyll
       # are not in safe mode.)
 
       def valid_processors
-        %w(rdiscount kramdown redcarpet) + third_party_processors
+        %w(kramdown) + third_party_processors
       end
 
       # Public: A list of processors that you provide via plugins.
@@ -53,7 +54,7 @@ module Jekyll
 
       def third_party_processors
         self.class.constants - \
-          %w(KramdownParser RDiscountParser RedcarpetParser PRIORITIES).map(
+          %w(KramdownParser PRIORITIES).map(
             &:to_sym
           )
       end
@@ -64,25 +65,42 @@ module Jekyll
         end
       end
 
+      # Does the given extension match this converter's list of acceptable extensions?
+      # Takes one argument: the file's extension (including the dot).
+      #
+      # ext - The String extension to check.
+      #
+      # Returns true if it matches, false otherwise.
       def matches(ext)
         extname_list.include?(ext.downcase)
       end
 
+      # Public: The extension to be given to the output file (including the dot).
+      #
+      # ext - The String extension or original file.
+      #
+      # Returns The String output file extension.
       def output_ext(_ext)
         ".html"
       end
 
+      # Logic to do the content conversion.
+      #
+      # content - String content of file (without front matter).
+      #
+      # Returns a String of the converted content.
       def convert(content)
         setup
-        @parser.convert(content)
+        @cache.getset(content) do
+          @parser.convert(content)
+        end
       end
 
       private
+
       def custom_processor
         converter_name = @config["markdown"]
-        if custom_class_allowed?(converter_name)
-          self.class.const_get(converter_name).new(@config)
-        end
+        self.class.const_get(converter_name).new(@config) if custom_class_allowed?(converter_name)
       end
 
       # Private: Determine whether a class name is an allowed custom
@@ -92,8 +110,6 @@ module Jekyll
       #
       # Returns true if the parser name contains only alphanumeric
       # characters and is defined within Jekyll::Converters::Markdown
-
-      private
       def custom_class_allowed?(parser_name)
         parser_name !~ %r![^A-Za-z0-9_]! && self.class.constants.include?(
           parser_name.to_sym

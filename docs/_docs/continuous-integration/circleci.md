@@ -12,7 +12,7 @@ Building, testing, and deploying your Jekyll-generated website can quickly be do
 
 To start building your project on CircleCI, all you need to do is 'follow' your project from CircleCI's website:
 
-1. Visit the 'Add Projects' page: <https://circleci.com/add-projects>
+1. Visit the 'Add Projects' page
 1. From the GitHub or Bitbucket tab on the left, choose a user or organization.
 1. Find your project in the list and click 'Build project' on the right.
 1. The first build will start on its own. You can start telling CircleCI how to build your project by creating a [circle.yml][3] file in the root of your repository.
@@ -38,7 +38,7 @@ CircleCI detects when `Gemfile` is present is will automatically run `bundle ins
 
 ## 3. Testing
 
-The most basic test that can be run is simply seeing if `jekyll build` actually works. This is a blocker, a dependency if you will,  for other tests you might run on the generate site. So we'll run Jekyll, via Bundler, in the `dependencies` phase.
+The most basic test that can be run is seeing if `jekyll build` actually works. This is a blocker, a dependency if you will, for other tests you might run on the generate site. So we'll run Jekyll, via Bundler, in the `dependencies` phase.
 
 ```yaml
 dependencies:
@@ -61,7 +61,7 @@ test:
 
 ## Complete Example circle.yml File
 
-When you put it all together, here's an example of what that `circle.yml` file could look like:
+When you put it all together, here's an example of what that `circle.yml` file could look like in v1:
 
 ```yaml
 machine:
@@ -81,6 +81,75 @@ deployment:
     branch: master
     commands:
       - rsync -va --delete ./_site username@my-website:/var/html
+```
+
+for CircleCI v2, a Docker-based system which new projects will follow, set the `S3_BUCKET_NAME` environment variable (an example of the required config file is shown below).
+
+```yaml
+defaults: &defaults
+  working_directory: ~/repo
+version: 2
+jobs:
+  build:
+    <<: *defaults
+    docker:
+      - image: circleci/ruby:2.5
+    environment:
+      BUNDLE_PATH: ~/repo/vendor/bundle
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - rubygems-v1-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
+            - rubygems-v1-fallback
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+      - run:
+          name: HTMLProofer tests
+          command: |
+            bundle exec htmlproofer ./_site \
+              --allow-hash-href \
+              --check-favicon  \
+              --check-html \
+              --disable-external
+      - save_cache:
+          key: rubygems-v1-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
+          paths:
+            - vendor/bundle
+      - run:
+          name: Jekyll build
+          command: bundle exec jekyll build
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - _site
+  deploy:
+    <<: *defaults
+    docker:
+      - image: circleci/python:3.6.3
+    environment:
+      S3_BUCKET_NAME: <<YOUR BUCKET NAME HERE>>
+    steps:
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Install AWS CLI
+          command: pip install awscli --upgrade --user
+      - run:
+          name: Upload to s3
+          command: ~/.local/bin/aws s3 sync ./_site s3://$S3_BUCKET_NAME/ --delete --acl public-read
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
 ```
 
 ## Questions?

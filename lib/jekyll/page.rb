@@ -11,8 +11,6 @@ module Jekyll
 
     alias_method :extname, :ext
 
-    FORWARD_SLASH = "/".freeze
-
     # Attributes for Liquid templates
     ATTRIBUTES_FOR_LIQUID = %w(
       content
@@ -64,11 +62,11 @@ module Jekyll
     #
     # Returns the String destination directory.
     def dir
-      if url.end_with?(FORWARD_SLASH)
+      if url.end_with?("/")
         url
       else
         url_dir = File.dirname(url)
-        url_dir.end_with?(FORWARD_SLASH) ? url_dir : "#{url_dir}/"
+        url_dir.end_with?("/") ? url_dir : "#{url_dir}/"
       end
     end
 
@@ -97,11 +95,11 @@ module Jekyll
     #
     # Returns the String url.
     def url
-      @url ||= URL.new({
+      @url ||= URL.new(
         :template     => template,
         :placeholders => url_placeholders,
-        :permalink    => permalink,
-      }).to_s
+        :permalink    => permalink
+      ).to_s
     end
 
     # Returns a hash of URL placeholder names (as symbols) mapping to the
@@ -163,7 +161,7 @@ module Jekyll
 
     # Returns the object as a debug String.
     def inspect
-      "#<Jekyll:Page @name=#{name.inspect}>"
+      "#<#{self.class} @name=#{name.inspect}>"
     end
 
     # Returns the Boolean of whether this Page is HTML or not.

@@ -18,7 +18,6 @@ end
 require "rubygems"
 
 # stdlib
-require "pathutil"
 require "forwardable"
 require "fileutils"
 require "time"
@@ -26,8 +25,12 @@ require "English"
 require "pathname"
 require "logger"
 require "set"
+require "csv"
+require "json"
 
 # 3rd party
+require "pathutil"
+require "addressable/uri"
 require "safe_yaml/load"
 require "liquid"
 require "kramdown"
@@ -35,7 +38,6 @@ require "colorator"
 require "i18n"
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
-I18n.config.available_locales = :en
 
 module Jekyll
   # internal requires
@@ -52,6 +54,7 @@ module Jekyll
   autoload :FrontmatterDefaults, "jekyll/frontmatter_defaults"
   autoload :Hooks,               "jekyll/hooks"
   autoload :Layout,              "jekyll/layout"
+  autoload :Cache,               "jekyll/cache"
   autoload :CollectionReader,    "jekyll/readers/collection_reader"
   autoload :DataReader,          "jekyll/readers/data_reader"
   autoload :LayoutReader,        "jekyll/readers/layout_reader"
@@ -172,6 +175,10 @@ module Jekyll
       clean_path = File.expand_path(clean_path, "/")
 
       return clean_path if clean_path.eql?(base_directory)
+
+      # remove any remaining extra leading slashes not stripped away by calling
+      # `File.expand_path` above.
+      clean_path.squeeze!("/")
 
       if clean_path.start_with?(base_directory.sub(%r!\z!, "/"))
         clean_path

@@ -1,8 +1,17 @@
 ---
+
+require:
+  - ./rubocop/jekyll
+
+Jekyll/NoPutsAllowed:
+  Exclude:
+    - rake/*.rake
+
 AllCops:
-  TargetRubyVersion: 2.1
+  TargetRubyVersion: 2.3
   Include:
     - lib/**/*.rb
+    - test/**/*.rb
   Exclude:
     - bin/**/*
     - exe/**/*
@@ -10,44 +19,30 @@ AllCops:
     - script/**/*
     - vendor/**/*
     - tmp/**/*
-Layout/AlignArray:
-  Enabled: false
 Layout/AlignHash:
   EnforcedHashRocketStyle: table
-Layout/AlignParameters:
-  Enabled: false
-Layout/EmptyLinesAroundAccessModifier:
-  Enabled: false
-Layout/EmptyLinesAroundModuleBody:
-  Enabled: false
-Layout/EndOfLine:
-  EnforcedStyle: native
-Layout/ExtraSpacing:
-  AllowForAlignment: true
-Layout/FirstParameterIndentation:
-  EnforcedStyle: consistent
 Layout/IndentationWidth:
   Severity: error
 Layout/IndentArray:
   EnforcedStyle: consistent
 Layout/IndentHash:
   EnforcedStyle: consistent
-Layout/IndentHeredoc:
-  Enabled: false
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
-Layout/SpaceInsideBrackets:
+Lint/NestedPercentLiteral:
+  Exclude:
+    - test/test_site.rb
+Layout/EmptyComment:
   Enabled: false
-Lint/EndAlignment:
+Layout/EndAlignment:
   Severity: error
 Lint/UnreachableCode:
   Severity: error
-Lint/UselessAccessModifier:
-  Enabled: false
 Lint/Void:
-  Enabled: false
+  Exclude:
+    - lib/jekyll/site.rb
 Metrics/AbcSize:
   Max: 21
 Metrics/BlockLength:
@@ -55,22 +50,26 @@ Metrics/BlockLength:
     - test/**/*.rb
     - lib/jekyll/configuration.rb
     - rake/*.rake
-    - jekyll.gemspec
 Metrics/ClassLength:
   Exclude:
     - !ruby/regexp /features\/.*.rb$/
     - !ruby/regexp /test\/.*.rb$/
-  Max: 300
+    - lib/jekyll/document.rb
+    - lib/jekyll/site.rb
+    - lib/jekyll/commands/serve.rb
+    - lib/jekyll/configuration.rb
+  Max: 240
 Metrics/CyclomaticComplexity:
-  Max: 9
+  Exclude:
+    - lib/jekyll/utils.rb
+    - lib/jekyll/commands/serve.rb
 Metrics/LineLength:
   Exclude:
     - !ruby/regexp /features\/.*.rb/
     - Rakefile
     - rake/*.rake
     - Gemfile
-    - jekyll.gemspec
-  Max: 90
+  Max: 100
   Severity: warning
 Metrics/MethodLength:
   CountComments: false
@@ -85,7 +84,17 @@ Metrics/PerceivedComplexity:
 Naming/FileName:
   Enabled: false
 Naming/HeredocDelimiterNaming:
-  Enabled: false
+  Exclude:
+    - test/**/*.rb
+Naming/MemoizedInstanceVariableName:
+  Exclude:
+    - lib/jekyll/convertible.rb
+    - lib/jekyll/drops/site_drop.rb
+    - lib/jekyll/drops/unified_payload_drop.rb
+    - lib/jekyll/page_without_a_file.rb
+Naming/UncommunicativeMethodParamName:
+  AllowedNames:
+    - _
 Security/MarshalLoad:
   Exclude:
     - !ruby/regexp /test\/.*.rb$/
@@ -94,31 +103,32 @@ Security/YAMLLoad:
   Exclude:
     - !ruby/regexp /features\/.*.rb/
     - !ruby/regexp /test\/.*.rb$/
-Style/Alias:
+Style/AccessModifierDeclarations:
   Enabled: false
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
 Style/AndOr:
   Severity: error
-Style/BracesAroundHashParameters:
-  Enabled: false
 Style/ClassAndModuleChildren:
-  Enabled: false
+  Exclude:
+    - test/**/*.rb
 Style/FrozenStringLiteralComment:
   EnforcedStyle: always
 Style/Documentation:
   Enabled: false
-  Exclude:
-    - !ruby/regexp /features\/.*.rb$/
 Style/DoubleNegation:
   Enabled: false
+Style/FormatStringToken:
+  Exclude:
+    - lib/jekyll/utils/ansi.rb
 Style/GuardClause:
   Enabled: false
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
   Severity: error
-Style/IfUnlessModifier:
-  Enabled: false
-Style/InverseMethods:
-  Enabled: false
+Style/MixinUsage:
+  Exclude:
+    - test/helper.rb
 Style/ModuleFunction:
   Enabled: false
 Style/MultilineTernaryOperator:
@@ -132,23 +142,22 @@ Style/PercentLiteralDelimiters:
     "%w": "()"
     "%W": "()"
     "%x": "()"
-Style/RedundantReturn:
-  Enabled: false
-Style/RedundantSelf:
-  Enabled: false
 Style/RegexpLiteral:
   EnforcedStyle: percent_r
 Style/RescueModifier:
   Enabled: false
+Style/SafeNavigation:
+  Exclude:
+    - lib/jekyll/document.rb
 Style/SignalException:
   EnforcedStyle: only_raise
-Style/SingleLineMethods:
-  Enabled: false
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
 Style/SymbolArray:
-  Enabled: false
-Style/TrailingCommaInLiteral:
+  EnforcedStyle: brackets
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma

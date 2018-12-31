@@ -14,7 +14,7 @@ your `_config.yml` under `plugins`. For Jekyll 2, this is standard.
 <div class="note info">
   <h5>Pagination only works within HTML files</h5>
   <p>
-    Pagination does not work from within Markdown or Textile files from
+    Pagination does not work from within Markdown files from
     your Jekyll site. Pagination works when called from within the HTML
     file, named <code>index.html</code>, which optionally may reside in and
     produce pagination from within a subdirectory, via the
@@ -42,10 +42,10 @@ paginate_path: "/blog/page:num/"
 
 This will read in `blog/index.html`, send it each pagination page in Liquid as
 `paginator` and write the output to `blog/page:num/`, where `:num` is the
-pagination page number, starting with `2`. If a site has 12 posts and specifies
-`paginate: 5`, Jekyll will write `blog/index.html` with the first 5 posts, `blog/page2/index.html` with the next 5 posts
-and `blog/page3/index.html` with the last 2 posts into the destination
-directory.
+pagination page number, starting with `2`. <br/>
+If a site has 12 posts and specifies `paginate: 5`, Jekyll will write `blog/index.html`
+with the first 5 posts, `blog/page2/index.html` with the next 5 posts and
+`blog/page3/index.html` with the last 2 posts into the destination directory.
 
 <div class="note warning">
   <h5>Don't set a permalink</h5>
@@ -58,8 +58,11 @@ directory.
 <div class="note info">
   <h5>Pagination for categories, tags and collections</h5>
   <p>
-    The more recent <a href="https://github.com/sverrirs/jekyll-paginate-v2">jekyll-paginate-v2</a> plugin supports more features. See the <a href="https://github.com/sverrirs/jekyll-paginate-v2/tree/master/examples">pagination examples</a> in the repository.
-    <strong>This plugin is not supported by GitHub Pages</strong>.
+    The more recent <a href="https://github.com/sverrirs/jekyll-paginate-v2">
+    jekyll-paginate-v2</a> plugin supports more features. See the
+    <a href="https://github.com/sverrirs/jekyll-paginate-v2/tree/master/examples">
+    pagination examples</a> in the repository. <strong>This plugin is not
+    supported by GitHub Pages</strong>.
   </p>
 </div>
 
@@ -68,79 +71,12 @@ directory.
 The pagination plugin exposes the `paginator` liquid object with the following
 attributes:
 
-<div class="mobile-side-scroller">
-<table>
-  <thead>
-    <tr>
-      <th>Attribute</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><p><code>page</code></p></td>
-      <td><p>current page number</p></td>
-    </tr>
-    <tr>
-      <td><p><code>per_page</code></p></td>
-      <td><p>number of posts per page</p></td>
-    </tr>
-    <tr>
-      <td><p><code>posts</code></p></td>
-      <td><p>a list of posts for the current page</p></td>
-    </tr>
-    <tr>
-      <td><p><code>total_posts</code></p></td>
-      <td><p>total number of posts in the site</p></td>
-    </tr>
-    <tr>
-      <td><p><code>total_pages</code></p></td>
-      <td><p>number of pagination pages</p></td>
-    </tr>
-    <tr>
-      <td><p><code>previous_page</code></p></td>
-      <td>
-          <p>
-              page number of the previous pagination page,
-              or <code>nil</code> if no previous page exists
-          </p>
-      </td>
-    </tr>
-    <tr>
-      <td><p><code>previous_page_path</code></p></td>
-      <td>
-          <p>
-              path of previous pagination page,
-              or <code>nil</code> if no previous page exists
-          </p>
-      </td>
-    </tr>
-    <tr>
-      <td><p><code>next_page</code></p></td>
-      <td>
-          <p>
-              page number of the next pagination page,
-              or <code>nil</code> if no subsequent page exists
-          </p>
-      </td>
-    </tr>
-    <tr>
-      <td><p><code>next_page_path</code></p></td>
-      <td>
-          <p>
-              path of next pagination page,
-              or <code>nil</code> if no subsequent page exists
-          </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-</div>
+{% include docs_variables_table.html scope=site.data.jekyll_variables.paginator %}
 
 <div class="note info">
   <h5>Pagination does not support tags or categories</h5>
   <p>Pagination pages through every post in the <code>posts</code>
-  variable unless a post has <code>hidden: true</code> in its YAML Front Matter.
+  variable unless a post has <code>hidden: true</code> in its front matter.
   It does not currently allow paging over groups of posts linked
   by a common tag or category. It cannot include any collection of
   documents because it is restricted to posts.</p>
@@ -174,11 +110,15 @@ title: My Blog
 <!-- Pagination links -->
 <div class="pagination">
   {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path }}" class="previous">Previous</a>
+    <a href="{{ paginator.previous_page_path }}" class="previous">
+      Previous
+    </a>
   {% else %}
     <span class="previous">Previous</span>
   {% endif %}
-  <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
+  <span class="page_number ">
+    Page: {{ paginator.page }} of {{ paginator.total_pages }}
+  </span>
   {% if paginator.next_page %}
     <a href="{{ paginator.next_page_path }}" class="next">Next</a>
   {% else %}
@@ -205,7 +145,9 @@ page with links to all but the current page.
 {% if paginator.total_pages > 1 %}
 <div class="pagination">
   {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
+    <a href="{{ paginator.previous_page_path | relative_url }}">
+      &laquo; Prev
+    </a>
   {% else %}
     <span>&laquo; Prev</span>
   {% endif %}
@@ -214,14 +156,20 @@ page with links to all but the current page.
     {% if page == paginator.page %}
       <em>{{ page }}</em>
     {% elsif page == 1 %}
-      <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
+      <a href="{{ paginator.previous_page_path | relative_url }}">
+        {{ page }}
+      </a>
     {% else %}
-      <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+      <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}">
+        {{ page }}
+      </a>
     {% endif %}
   {% endfor %}
 
   {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
+    <a href="{{ paginator.next_page_path | relative_url }}">
+      Next &raquo;
+    </a>
   {% else %}
     <span>Next &raquo;</span>
   {% endif %}

@@ -1,0 +1,36 @@
+- title: Getting Started
+  docs:
+    - link: /docs/
+    - link: /docs/ruby-101/
+    - link: /docs/installation/
+    - link: /docs/community/
+    - link: /docs/step-by-step/01-setup/
+- title: Build
+  docs:
+    - link: /docs/usage/
+    - link: /docs/configuration/
+- title: Content
+  docs:
+    - link: /docs/pages/
+    - link: /docs/posts/
+    - link: /docs/front-matter/
+    - link: /docs/collections/
+    - link: /docs/datafiles/
+    - link: /docs/assets/
+    - link: /docs/static-files/
+- title: Site Structure
+  docs:
+    - link: /docs/structure/
+    - link: /docs/liquid/
+    - link: /docs/variables/
+    - link: /docs/includes/
+    - link: /docs/layouts/
+    - link: /docs/permalinks/
+    - link: /docs/themes/
+    - link: /docs/pagination/
+- title: Guides
+  docs:
+    - link: /docs/plugins/
+    - link: /docs/migrations/
+    - link: /docs/upgrading/
+    - link: /docs/deployment/

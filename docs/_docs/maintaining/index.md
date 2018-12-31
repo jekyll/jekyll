@@ -8,13 +8,14 @@ permalink: /docs/maintaining/
 
 Hello! This is where we document various processes for maintaining Jekyll. Being a maintainer for any Jekyll project is a big responsibility, so we put together some helpful documentation for various tasks you might do as a maintainer.
 
-1. [Affinity teams & their captains](affinity-team-captain/)
-2. [Triaging and issue](triaging-an-issue/)
-3. [Reviewing a pull request](reviewing-a-pull-request/)
-4. [Merging a pull request](merging-a-pull-request/)
-5. [Avoiding burnout](avoiding-burnout/)
-6. [Special Labels](special-labels/)
+- [Affinity teams & their captains](affinity-team-captain/)
+- [Triaging an issue](triaging-an-issue/)
+- [Reviewing a pull request](reviewing-a-pull-request/)
+- [Merging a pull request](merging-a-pull-request/)
+- [Avoiding burnout](avoiding-burnout/)
+- [Special Labels](special-labels/)
+- [Releasing a new version](releasing-a-new-version/)
 
 Interested in becoming a maintainer? Here is some documentation for **contributors**:
 
-1. [Becoming a maintainer](becoming-a-maintainer/)
+- [Becoming a maintainer](becoming-a-maintainer/)

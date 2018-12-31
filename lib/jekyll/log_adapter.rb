@@ -29,7 +29,9 @@ module Jekyll
     #
     # Returns nothing
     def log_level=(level)
-      writer.level = LOG_LEVELS.fetch(level)
+      writer.level = level if level.is_a?(Integer) && level.between?(0, 3)
+      writer.level = LOG_LEVELS[level] ||
+        raise(ArgumentError, "unknown log level")
       @level = level
     end
 
@@ -41,6 +43,7 @@ module Jekyll
         self.log_level = :debug
       end
       debug "Logging at level:", LOG_LEVELS.key(writer.level).to_s
+      debug "Jekyll Version:", Jekyll::VERSION
     end
 
     # Public: Print a debug message
@@ -141,6 +144,7 @@ module Jekyll
     # the appropriate writer method, e.g. writer.info.
     def write(level_of_message, topic, message = nil, &block)
       return false unless write_message?(level_of_message)
+
       writer.public_send(level_of_message, message(topic, message, &block))
     end
   end

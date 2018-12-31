@@ -8,9 +8,13 @@ module Jekyll
     attr_accessor :content, :ext
     attr_writer   :output
 
-    def_delegators :@doc, :site, :name, :ext, :relative_path, :extname,
-                          :render_with_liquid?, :collection, :related_posts,
-                          :url, :next_doc, :previous_doc
+    def_delegators :@doc,
+                   :site, :name, :ext, :extname,
+                   :collection, :related_posts,
+                   :coffeescript_file?, :yaml_file?,
+                   :url, :next_doc, :previous_doc
+
+    private :coffeescript_file?, :yaml_file?
 
     # Initialize this Excerpt instance.
     #
@@ -41,11 +45,18 @@ module Jekyll
       File.join(doc.path, "#excerpt")
     end
 
+    # 'Relative Path' of the excerpt.
+    #
+    # Returns the relative_path for the doc this excerpt belongs to with #excerpt appended
+    def relative_path
+      @relative_path ||= File.join(doc.relative_path, "#excerpt")
+    end
+
     # Check if excerpt includes a string
     #
     # Returns true if the string passed in
     def include?(something)
-      (output && output.include?(something)) || content.include?(something)
+      (output&.include?(something)) || content.include?(something)
     end
 
     # The UID for this doc (useful in feeds).
@@ -66,7 +77,7 @@ module Jekyll
 
     # Returns the shorthand String identifier of this doc.
     def inspect
-      "<Excerpt: #{self.id}>"
+      "<Excerpt: #{id}>"
     end
 
     def output
@@ -75,6 +86,12 @@ module Jekyll
 
     def place_in_layout?
       false
+    end
+
+    def render_with_liquid?
+      return false if data["render_with_liquid"] == false
+
+      !(coffeescript_file? || yaml_file? || !Utils.has_liquid_construct?(content))
     end
 
     protected
@@ -113,14 +130,59 @@ module Jekyll
     # Excerpts are rendered same time as content is rendered.
     #
     # Returns excerpt String
+
+    LIQUID_TAG_REGEX = %r!{%-?\s*(\w+)\s*.*?-?%}!m.freeze
+    MKDWN_LINK_REF_REGEX = %r!^ {0,3}\[[^\]]+\]:.+$!.freeze
+
     def extract_excerpt(doc_content)
       head, _, tail = doc_content.to_s.partition(doc.excerpt_separator)
 
-      if tail.empty?
-        head
-      else
-        head.to_s.dup << "\n\n" << tail.scan(%r!^ {0,3}\[[^\]]+\]:.+$!).join("\n")
+      # append appropriate closing tag(s) (for each Liquid block), to the `head` if the
+      # partitioning resulted in leaving the closing tag somewhere in the `tail` partition.
+      if head.include?("{%")
+        modified  = false
+        tag_names = head.scan(LIQUID_TAG_REGEX)
+        tag_names.flatten!
+        tag_names.reverse_each do |tag_name|
+          next unless liquid_block?(tag_name)
+          next if head =~ endtag_regex_stash(tag_name)
+
+          modified = true
+          head << "\n{% end#{tag_name} %}"
+        end
+        print_build_warning if modified
       end
+
+      return head if tail.empty?
+
+      head << "\n\n" << tail.scan(MKDWN_LINK_REF_REGEX).join("\n")
+    end
+
+    private
+
+    def endtag_regex_stash(tag_name)
+      @endtag_regex_stash ||= {}
+      @endtag_regex_stash[tag_name] ||= %r!{%-?\s*end#{tag_name}.*?\s*-?%}!m
+    end
+
+    def liquid_block?(tag_name)
+      return false unless tag_name.is_a?(String)
+      return false if tag_name.start_with?("end")
+
+      Liquid::Template.tags[tag_name].ancestors.include?(Liquid::Block)
+    rescue NoMethodError
+      Jekyll.logger.error "Error:",
+                          "A Liquid tag in the excerpt of #{doc.relative_path} couldn't be parsed."
+      raise
+    end
+
+    def print_build_warning
+      Jekyll.logger.warn "Warning:", "Excerpt modified in #{doc.relative_path}!"
+      Jekyll.logger.warn "", "Found a Liquid block containing the excerpt separator" \
+                         " #{doc.excerpt_separator.inspect}. "
+      Jekyll.logger.warn "", "The block has been modified with the appropriate closing tag."
+      Jekyll.logger.warn "", "Feel free to define a custom excerpt or excerpt_separator in the"
+      Jekyll.logger.warn "", "document's Front Matter if the generated excerpt is unsatisfactory."
     end
   end
 end

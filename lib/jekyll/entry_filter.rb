@@ -31,9 +31,13 @@ module Jekyll
 
     def filter(entries)
       entries.reject do |e|
-        unless included?(e)
-          special?(e) || backup?(e) || excluded?(e) || symlink?(e)
-        end
+        # Reject this entry if it is a symlink.
+        next true if symlink?(e)
+        # Do not reject this entry if it is included.
+        next false if included?(e)
+
+        # Reject this entry if it is special, a backup file, or excluded.
+        special?(e) || backup?(e) || excluded?(e)
       end
     end
 
@@ -86,8 +90,8 @@ module Jekyll
     # Check if an entry matches a specific pattern and return true,false.
     # Returns true if path matches against any glob pattern.
     # --
-    def glob_include?(enum, e)
-      entry = Pathutil.new(site.in_source_dir).join(e)
+    def glob_include?(enum, entry)
+      entry_path = Pathutil.new(site.in_source_dir).join(entry)
       enum.any? do |exp|
         # Users who send a Regexp knows what they want to
         # exclude, so let them send a Regexp to exclude files,
@@ -95,7 +99,7 @@ module Jekyll
         # on them at this point.
 
         if exp.is_a?(Regexp)
-          entry =~ exp
+          entry_path =~ exp
 
         else
           item = Pathutil.new(site.in_source_dir).join(exp)
@@ -105,14 +109,14 @@ module Jekyll
           # see if the entry falls within that path and
           # exclude it if that's the case.
 
-          if e.end_with?("/")
-            entry.in_path?(
+          if entry.end_with?("/")
+            entry_path.in_path?(
               item
             )
 
           else
-            File.fnmatch?(item, entry) ||
-              entry.to_path.start_with?(
+            File.fnmatch?(item, entry_path) ||
+              entry_path.to_path.start_with?(
                 item
               )
           end
