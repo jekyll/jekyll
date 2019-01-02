@@ -90,6 +90,7 @@
   * Fix grammatical error in permalinks.md (#7409)
   * [Docs] Fix BASH code-block in ubuntu.md (#7420)
   * zlib is missing (#7428)
+  * Include docs for `{{ page.collection }}` (#7430)
 
 ### Minor Enhancements
 
@@ -168,6 +169,7 @@
   * dev: test oldest and latest Ruby only (#7412)
   * Reduce array traversal in Jekyll::Reader (#7157)
   * Create symlink only if target is accessible (#7429)
+  * Test with the new Ruby v2.6 (#7438)
 
 ### Bug Fixes
 
