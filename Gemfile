@@ -13,9 +13,7 @@ group :development do
   gem "launchy", "~> 2.3"
   gem "pry"
 
-  unless RUBY_ENGINE == "jruby"
-    gem "pry-byebug"
-  end
+  gem "pry-byebug" unless RUBY_ENGINE == "jruby"
 end
 
 #
@@ -39,9 +37,7 @@ end
 #
 
 group :test_legacy do
-  if RUBY_PLATFORM =~ %r!cygwin!
-    gem "test-unit"
-  end
+  gem "test-unit" if RUBY_PLATFORM =~ %r!cygwin!
 
   gem "minitest"
   gem "minitest-profile"
@@ -89,9 +85,7 @@ end
 #
 
 group :site do
-  if ENV["PROOF"]
-    gem "html-proofer", "~> 3.4"
-  end
+  gem "html-proofer", "~> 3.4" if ENV["PROOF"]
 
   gem "jekyll-avatar"
   gem "jekyll-mentions"
