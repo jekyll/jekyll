@@ -5,8 +5,9 @@ language: ruby
 sudo: false
 
 rvm:
-  - &ruby1 2.5.3
-  - &ruby2 2.3.8
+  - &ruby1 2.6.0
+  - &ruby2 2.5.3
+  - &ruby3 2.3.8
   - &jruby jruby-9.1.16.0
 
 matrix:
