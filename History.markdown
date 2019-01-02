@@ -170,6 +170,7 @@
   * Reduce array traversal in Jekyll::Reader (#7157)
   * Create symlink only if target is accessible (#7429)
   * Test with the new Ruby v2.6 (#7438)
+  * Bump RuboCop to v0.62.x (#7449)
 
 ### Bug Fixes
 
