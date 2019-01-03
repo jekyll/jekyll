@@ -185,6 +185,7 @@
   * Theme gems: ensure directories aren&#39;t symlinks (#7419)
   * Documents should be able to render their date (#7404)
   * Fix Interpreter warning from Jekyll::Renderer (#7448)
+  * Dont write static files from unrendered collection (#7410)
 
 ### feature
 
