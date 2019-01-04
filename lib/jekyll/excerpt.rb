@@ -167,7 +167,7 @@ module Jekyll
 
     def liquid_block?(tag_name)
       return false unless tag_name.is_a?(String)
-      return false if tag_name.start_with?("end")
+      return false unless Liquid::Template.tags[tag_name]
 
       Liquid::Template.tags[tag_name].ancestors.include?(Liquid::Block)
     rescue NoMethodError
