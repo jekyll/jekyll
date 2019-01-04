@@ -91,6 +91,7 @@
   * [Docs] Fix BASH code-block in ubuntu.md (#7420)
   * zlib is missing (#7428)
   * Include docs for `{{ page.collection }}` (#7430)
+  * Permalink docs typo fixes (#7459)
 
 ### Minor Enhancements
 
