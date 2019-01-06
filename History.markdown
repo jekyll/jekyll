@@ -93,6 +93,7 @@
   * Include docs for `{{ page.collection }}` (#7430)
   * Permalink docs typo fixes (#7459)
   * Fixed unnecessary aticles and pronouns (#7466)
+  * Grammatical correction (#7464)
 
 ### Minor Enhancements
 
