@@ -92,6 +92,7 @@
   * zlib is missing (#7428)
   * Include docs for `{{ page.collection }}` (#7430)
   * Permalink docs typo fixes (#7459)
+  * Fixed unnecessary aticles and pronouns (#7466)
 
 ### Minor Enhancements
 
