@@ -23,8 +23,6 @@ environment:
       TEST_SUITE: "test"
     - RUBY_FOLDER_VER: "24"
       TEST_SUITE: "test"
-    - RUBY_FOLDER_VER: "23"
-      TEST_SUITE: "test"
 
 install:
   - SET PATH=C:\Ruby%RUBY_FOLDER_VER%\bin;%PATH%
