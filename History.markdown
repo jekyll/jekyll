@@ -94,6 +94,7 @@
   * Permalink docs typo fixes (#7459)
   * Fixed unnecessary aticles and pronouns (#7466)
   * Grammatical correction (#7464)
+  * Update resources.md (#7472)
 
 ### Minor Enhancements
 
