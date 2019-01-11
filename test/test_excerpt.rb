@@ -69,7 +69,7 @@ class TestExcerpt < JekyllUnitTest
 
     context "#inspect" do
       should "contain the excerpt id as a shorthand string identifier" do
-        assert_equal @excerpt.inspect, "<Excerpt: #{@excerpt.id}>"
+        assert_equal @excerpt.inspect, "<#{@excerpt.class} id=#{@excerpt.id}>"
       end
 
       should "return a string" do
