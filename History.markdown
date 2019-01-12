@@ -95,6 +95,7 @@
   * Fixed unnecessary aticles and pronouns (#7466)
   * Grammatical correction (#7464)
   * Update resources.md (#7472)
+  * Docs: store SSL key and cert in site source (#7473)
 
 ### Minor Enhancements
 
