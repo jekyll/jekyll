@@ -59,6 +59,19 @@ class TestPluginManager < JekyllUnitTest
     end
   end
 
+  context "require missing hyphenated gem" do
+    should "raise `Jekyll::Errors::MissingDependencyException`" do
+      gems = %w(foobar-foobar)
+
+      site = double(:gems => gems, :safe => false)
+      plugin_manager = PluginManager.new(site)
+
+      assert_raises(Jekyll::Errors::MissingDependencyException) do
+        plugin_manager.require_gems
+      end
+    end
+  end
+
   context "site is not marked as safe" do
     should "allow all plugins" do
       site = double(:safe => false)
