@@ -31,13 +31,20 @@ module Jekyll
 
     def filter(entries)
       entries.reject do |e|
-        # Reject this entry if it is a symlink.
-        next true if symlink?(e)
-        # Do not reject this entry if it is included.
-        next false if included?(e)
+        # Check if the current entry is explicitly included and cache the result
+        included = included?(e)
 
-        # Reject this entry if it is special, a backup file, or excluded.
-        special?(e) || backup?(e) || excluded?(e)
+        # Reject current entry if it is excluded but not explicitly included as well.
+        next true if excluded?(e) && !included
+
+        # Reject current entry if it is a symlink.
+        next true if symlink?(e)
+
+        # Do not reject current entry if it is explicitly included.
+        next false if included
+
+        # Reject current entry if it is special or a backup file.
+        special?(e) || backup?(e)
       end
     end
 
