@@ -67,7 +67,6 @@ group :jekyll_optional_dependencies do
   gem "jekyll-gist"
   gem "jekyll-paginate"
   gem "jekyll-redirect-from"
-  gem "kramdown", "~> 1.14"
   gem "mime-types", "~> 3.0"
   gem "rdoc", "~> 6.0"
   gem "tomlrb", "~> 1.2"
