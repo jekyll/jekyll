@@ -178,6 +178,7 @@
   * Test with the new Ruby v2.6 (#7438)
   * Bump RuboCop to v0.62.x (#7449)
   * Relax version constraint on classifier-reborn gem (#7471)
+  * Update rubocop to ~&gt; 0.63.1 (#7489)
 
 ### Bug Fixes
 
