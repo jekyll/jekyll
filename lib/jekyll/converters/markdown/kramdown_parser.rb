@@ -50,15 +50,13 @@ module Jekyll
         private
 
         def load_dependencies
-          if @config["input"] == "GFM"
-            require "kramdown-parser-gfm"
-          end
+          require "kramdown-parser-gfm" if @config["input"] == "GFM"
 
           if highlighter == "coderay"
             Jekyll::External.require_with_graceful_fail("kramdown-syntax-coderay")
           end
 
-          if math_engine = @config["math_engine"]
+          if (math_engine = @config["math_engine"])
             Jekyll::External.require_with_graceful_fail("kramdown-math-#{math_engine}")
           end
         end
