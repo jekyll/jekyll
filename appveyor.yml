@@ -19,15 +19,13 @@ environment:
       TEST_SUITE: "cucumber"
     - RUBY_FOLDER_VER: "25"
       TEST_SUITE: "default-site"
-    - RUBY_FOLDER_VER: "25-x64"
-      TEST_SUITE: "test"
     - RUBY_FOLDER_VER: "24"
       TEST_SUITE: "test"
     - RUBY_FOLDER_VER: "23"
       TEST_SUITE: "test"
 
 install:
-  - SET PATH=C:\Ruby%RUBY_FOLDER_VER%\bin;%PATH%
+  - SET PATH=C:\Ruby%RUBY_FOLDER_VER%-x64\bin;%PATH%
   - bundle install --retry 5 --jobs=%NUMBER_OF_PROCESSORS% --clean --path vendor\bundle
 
 test_script:
