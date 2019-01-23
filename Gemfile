@@ -68,13 +68,13 @@ end
 #
 
 group :jekyll_optional_dependencies do
-  gem "coderay", "~> 1.1.0"
   gem "jekyll-coffeescript"
   gem "jekyll-docs", :path => "../docs" if Dir.exist?("../docs") && ENV["JEKYLL_VERSION"]
   gem "jekyll-feed", "~> 0.9"
   gem "jekyll-gist"
   gem "jekyll-paginate"
   gem "jekyll-redirect-from"
+  gem "kramdown-syntax-coderay"
   gem "mime-types", "~> 3.0"
   gem "rdoc", RUBY_VERSION >= "2.2.2" ? "~> 6.0" : "~> 5.1"
   gem "tomlrb", "~> 1.2"
