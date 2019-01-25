@@ -63,7 +63,8 @@ module Jekyll
       # However, symlinks are allowed to point to other directories within the theme.
       Jekyll.sanitized_path(root, File.realpath(Jekyll.sanitized_path(root, folder.to_s)))
     rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP
-      Jekyll.logger.warn "Invalid theme folder:", folder
+      Jekyll.logger.debug "Theme Meta:", "Directory #{folder.inspect} does not exist, or is " \
+        "not accessible or includes a symbolic link loop"
       nil
     end
 
