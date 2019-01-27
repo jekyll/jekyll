@@ -161,7 +161,7 @@ module Jekyll
 
     # Returns the object as a debug String.
     def inspect
-      "#<Jekyll::Page @name=#{name.inspect}>"
+      "#<#{self.class} @name=#{name.inspect}>"
     end
 
     # Returns the Boolean of whether this Page is HTML or not.

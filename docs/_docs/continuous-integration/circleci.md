@@ -12,7 +12,7 @@ Building, testing, and deploying your Jekyll-generated website can quickly be do
 
 To start building your project on CircleCI, all you need to do is 'follow' your project from CircleCI's website:
 
-1. Visit the 'Add Projects' page: <https://circleci.com/add-projects>
+1. Visit the 'Add Projects' page
 1. From the GitHub or Bitbucket tab on the left, choose a user or organization.
 1. Find your project in the list and click 'Build project' on the right.
 1. The first build will start on its own. You can start telling CircleCI how to build your project by creating a [circle.yml][3] file in the root of your repository.
@@ -38,7 +38,7 @@ CircleCI detects when `Gemfile` is present is will automatically run `bundle ins
 
 ## 3. Testing
 
-The most basic test that can be run is simply seeing if `jekyll build` actually works. This is a blocker, a dependency if you will,  for other tests you might run on the generate site. So we'll run Jekyll, via Bundler, in the `dependencies` phase.
+The most basic test that can be run is seeing if `jekyll build` actually works. This is a blocker, a dependency if you will, for other tests you might run on the generate site. So we'll run Jekyll, via Bundler, in the `dependencies` phase.
 
 ```yaml
 dependencies:

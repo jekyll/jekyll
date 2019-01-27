@@ -40,6 +40,7 @@ module Jekyll
       # Returns a full Jekyll configuration
       def configuration_from_options(options)
         return options if options.is_a?(Jekyll::Configuration)
+
         Jekyll.configuration(options)
       end
 

@@ -45,6 +45,8 @@ module Jekyll
           index.htm
           index.html
           index.rhtml
+          index.xht
+          index.xhtml
           index.cgi
           index.xml
           index.json
@@ -259,6 +261,7 @@ module Jekyll
           return system "start", address if Utils::Platforms.windows?
           return system "xdg-open", address if Utils::Platforms.linux?
           return system "open", address if Utils::Platforms.osx?
+
           Jekyll.logger.error "Refusing to launch browser; " \
             "Platform launcher unknown."
         end

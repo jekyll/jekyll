@@ -14,6 +14,10 @@ class TestNewCommand < JekyllUnitTest
     File.expand_path("../lib/site_template", __dir__)
   end
 
+  def blank_template
+    File.expand_path("../lib/blank_template", __dir__)
+  end
+
   context "when args contains a path" do
     setup do
       @path = "new-site"
@@ -86,7 +90,8 @@ class TestNewCommand < JekyllUnitTest
     end
 
     should "create blank project" do
-      blank_contents = %w(/_drafts /_layouts /_posts /index.html)
+      blank_contents = dir_contents(blank_template)
+      blank_contents += %w(/_data /_drafts /_includes /_posts)
       output = capture_output { Jekyll::Commands::New.process(@args, "--blank") }
       bundle_message = "Running bundle install in #{@full_path.cyan}..."
       assert_same_elements blank_contents, dir_contents(@full_path)

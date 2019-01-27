@@ -88,9 +88,10 @@ Naming/HeredocDelimiterNaming:
     - test/**/*.rb
 Naming/MemoizedInstanceVariableName:
   Exclude:
-    - lib/jekyll/page_without_a_file.rb
-    - lib/jekyll/drops/unified_payload_drop.rb
+    - lib/jekyll/convertible.rb
     - lib/jekyll/drops/site_drop.rb
+    - lib/jekyll/drops/unified_payload_drop.rb
+    - lib/jekyll/page_without_a_file.rb
 Naming/UncommunicativeMethodParamName:
   AllowedNames:
     - _

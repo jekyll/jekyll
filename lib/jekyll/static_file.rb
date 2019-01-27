@@ -98,6 +98,7 @@ module Jekyll
       dest_path = destination(dest)
 
       return false if File.exist?(dest_path) && !modified?
+
       self.class.mtimes[path] = mtime
 
       FileUtils.mkdir_p(File.dirname(dest_path))
@@ -149,6 +150,12 @@ module Jekyll
     # as defined in _config.yml.
     def defaults
       @defaults ||= @site.frontmatter_defaults.all url, type
+    end
+
+    # Returns a debug string on inspecting the static file.
+    # Includes only the relative path of the object.
+    def inspect
+      "#<#{self.class} @relative_path=#{relative_path.inspect}>"
     end
 
     private

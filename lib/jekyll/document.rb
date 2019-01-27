@@ -10,9 +10,9 @@ module Jekyll
 
     def_delegator :self, :read_post_data, :post_read
 
-    YAML_FRONT_MATTER_REGEXP = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m
-    DATELESS_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.[^.]+)$!
-    DATE_FILENAME_MATCHER = %r!^(?:.+/)*(\d{2,4}-\d{1,2}-\d{1,2})-(.*)(\.[^.]+)$!
+    YAML_FRONT_MATTER_REGEXP = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m.freeze
+    DATELESS_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.[^.]+)$!.freeze
+    DATE_FILENAME_MATCHER = %r!^(?:.+/)*(\d{2,4}-\d{1,2}-\d{1,2})-(.*)(\.[^.]+)$!.freeze
 
     # Create a new Document.
     #
@@ -60,12 +60,19 @@ module Jekyll
       data
     end
 
+    # Returns the document date. If metadata is not present then calculates it
+    # based on Jekyll::Site#time or the document file modification time.
+    #
+    # Return document date string.
     def date
       data["date"] ||= (draft? ? source_file_mtime : site.time)
     end
 
+    # Return document file modification time in the form of a Time object.
+    #
+    # Return document file modification Time object.
     def source_file_mtime
-      @source_file_mtime ||= File.mtime(path)
+      File.mtime(path)
     end
 
     # Returns whether the document is a draft. This is only the case if
@@ -160,6 +167,7 @@ module Jekyll
     #   true otherwise.
     def render_with_liquid?
       return false if data["render_with_liquid"] == false
+
       !(coffeescript_file? || yaml_file? || !Utils.has_liquid_construct?(content))
     end
 
@@ -304,6 +312,7 @@ module Jekyll
     #   equal or greater than the other doc's path. See String#<=> for more details.
     def <=>(other)
       return nil unless other.respond_to?(:data)
+
       cmp = data["date"] <=> other.data["date"]
       cmp = path <=> other.path if cmp.nil? || cmp.zero?
       cmp

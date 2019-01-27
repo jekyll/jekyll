@@ -33,6 +33,10 @@ class TestPageWithoutAFile < JekyllUnitTest
         @page = setup_page("properties.html")
       end
 
+      should "identify itself properly" do
+        assert_equal "#<Jekyll::PageWithoutAFile @name=\"properties.html\">", @page.inspect
+      end
+
       should "not have page-content and page-data defined within it" do
         assert_equal "pages", @page.type.to_s
         assert_nil @page.content

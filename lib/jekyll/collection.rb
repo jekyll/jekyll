@@ -58,6 +58,7 @@ module Jekyll
       filtered_entries.each do |file_path|
         full_path = collection_dir(file_path)
         next if File.directory?(full_path)
+
         if Utils.has_yaml_header? full_path
           read_document(full_path)
         else
@@ -73,6 +74,7 @@ module Jekyll
     #   relative to the collection's directory
     def entries
       return [] unless exists?
+
       @entries ||=
         Utils.safe_glob(collection_dir, ["**", "*"], File::FNM_DOTMATCH).map do |entry|
           entry["#{collection_dir}/"] = ""
@@ -86,6 +88,7 @@ module Jekyll
     # Returns a list of filtered entry paths.
     def filtered_entries
       return [] unless exists?
+
       @filtered_entries ||=
         Dir.chdir(directory) do
           entry_filter.filter(entries).reject do |f|
@@ -124,6 +127,7 @@ module Jekyll
     #   is stored on the filesystem.
     def collection_dir(*files)
       return directory if files.empty?
+
       site.in_source_dir(container, relative_directory, *files)
     end
 

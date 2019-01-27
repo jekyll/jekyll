@@ -76,6 +76,9 @@ class TestSite < JekyllUnitTest
       allow(File).to receive(:directory?).with(theme_dir("_sass")).and_return(true)
       allow(File).to receive(:directory?).with(theme_dir("_layouts")).and_return(true)
       allow(File).to receive(:directory?).with(theme_dir("_includes")).and_return(false)
+      allow(File).to receive(:directory?).with(
+        File.expand_path(".jekyll-cache/Jekyll/Cache/Jekyll--Cache")
+      ).and_return(true)
       site = fixture_site("theme" => "test-theme")
       assert_equal [source_dir("_includes")], site.includes_load_paths
     end
@@ -83,7 +86,7 @@ class TestSite < JekyllUnitTest
   context "creating sites" do
     setup do
       @site = Site.new(site_configuration)
-      @num_invalid_posts = 4
+      @num_invalid_posts = 5
     end
 
     teardown do
@@ -585,7 +588,11 @@ class TestSite < JekyllUnitTest
 
       should "set a theme if the config is a string" do
         [:debug, :info, :warn, :error].each do |level|
-          expect(Jekyll.logger.writer).not_to receive(level)
+          if level == :info
+            expect(Jekyll.logger.writer).to receive(level)
+          else
+            expect(Jekyll.logger.writer).not_to receive(level)
+          end
         end
         site = fixture_site("theme" => "test-theme")
         assert_instance_of Jekyll::Theme, site.theme
