@@ -123,6 +123,7 @@
   * Upgrade liquid-c to v4.0 (#7375)
   * Add a custom inspect string for StaticFile objects (#7422)
   * Remind user to include gem in the Gemfile on error (#7476)
+  * Search Front matter defaults for Page objects with relative_path (#7261)
 
 ### Major Enhancements
 
