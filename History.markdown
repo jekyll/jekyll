@@ -97,6 +97,7 @@
   * Update resources.md (#7472)
   * Docs: store SSL key and cert in site source (#7473)
   * Minor doc fixes (#7495)
+  * Changed order of steps (#7503)
 
 ### Minor Enhancements
 
