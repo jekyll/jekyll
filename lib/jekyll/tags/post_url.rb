@@ -3,7 +3,7 @@
 module Jekyll
   module Tags
     class PostComparer
-      MATCHER = %r!^(.+/)*(\d+-\d+-\d+)-(.*)$!
+      MATCHER = %r!^(.+/)*(\d+-\d+-\d+)-(.*)$!.freeze
 
       attr_reader :path, :date, :slug, :name
 
@@ -83,6 +83,7 @@ module Jekyll
 
         site.posts.docs.each do |p|
           next unless @post.deprecated_equality p
+
           Jekyll::Deprecator.deprecation_message "A call to "\
             "'{% post_url #{@post.name} %}' did not match " \
             "a post using the new matching method of checking name " \

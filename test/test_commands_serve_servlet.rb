@@ -34,5 +34,15 @@ class TestCommandsServeServlet < JekyllUnitTest
         assert_equal("404", response.code)
       end
     end
+
+    should "find xhtml file" do
+      get("/bar/foo") do |response|
+        assert_equal("200", response.code)
+        assert_equal(
+          '<html xmlns="http://www.w3.org/1999/xhtml">Content of foo.xhtml</html>',
+          response.body.strip
+        )
+      end
+    end
   end
 end

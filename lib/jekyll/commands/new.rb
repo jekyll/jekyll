@@ -41,10 +41,16 @@ module Jekyll
           after_install(new_blog_path, options)
         end
 
+        def blank_template
+          File.expand_path("../../blank_template", __dir__)
+        end
+
         def create_blank_site(path)
+          FileUtils.cp_r blank_template + "/.", path
+          FileUtils.chmod_R "u+w", path
+
           Dir.chdir(path) do
-            FileUtils.mkdir(%w(_layouts _posts _drafts))
-            FileUtils.touch("index.html")
+            FileUtils.mkdir(%w(_data _drafts _includes _posts))
           end
         end
 
@@ -85,7 +91,7 @@ module Jekyll
             # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
             gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
             # Performance-booster for watching directories on Windows
-            gem "wdm", "~> 0.1.0" if Gem.win_platform?
+            gem "wdm", "~> 0.1.1", :install_if => Gem.win_platform?
 
           RUBY
         end

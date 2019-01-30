@@ -9,6 +9,7 @@ module Jekyll
       "source"              => Dir.pwd,
       "destination"         => File.join(Dir.pwd, "_site"),
       "collections_dir"     => "",
+      "cache_dir"           => ".jekyll-cache",
       "plugins_dir"         => "_plugins",
       "layouts_dir"         => "_layouts",
       "data_dir"            => "_data",
@@ -153,7 +154,7 @@ module Jekyll
       # Get configuration from <source>/_config.yml or <source>/<config_file>
       config_files = override["config"]
       if config_files.to_s.empty?
-        default = %w(yml yaml).find(-> { "yml" }) do |ext|
+        default = %w(yml yaml toml).find(-> { "yml" }) do |ext|
           File.exist?(Jekyll.sanitized_path(source(override), "_config.#{ext}"))
         end
         config_files = Jekyll.sanitized_path(source(override), "_config.#{default}")
@@ -195,6 +196,7 @@ module Jekyll
       begin
         files.each do |config_file|
           next if config_file.nil? || config_file.empty?
+
           new_config = read_config_file(config_file)
           configuration = Utils.deep_merge_hashes(configuration, new_config)
         end

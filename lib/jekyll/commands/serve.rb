@@ -45,6 +45,8 @@ module Jekyll
           index.htm
           index.html
           index.rhtml
+          index.xht
+          index.xhtml
           index.cgi
           index.xml
           index.json
@@ -91,7 +93,10 @@ module Jekyll
         def process(opts)
           opts = configuration_from_options(opts)
           destination = opts["destination"]
-          register_reload_hooks(opts) if opts["livereload"]
+          if opts["livereload"]
+            validate_options(opts)
+            register_reload_hooks(opts)
+          end
           setup(destination)
 
           start_up_webrick(opts, destination)
@@ -256,6 +261,7 @@ module Jekyll
           return system "start", address if Utils::Platforms.windows?
           return system "xdg-open", address if Utils::Platforms.linux?
           return system "open", address if Utils::Platforms.osx?
+
           Jekyll.logger.error "Refusing to launch browser; " \
             "Platform launcher unknown."
         end

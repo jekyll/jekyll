@@ -111,13 +111,13 @@ class JekyllUnitTest < Minitest::Test
   end
 
   def fixture_document(relative_path)
-    site = fixture_site({
+    site = fixture_site(
       "collections" => {
         "methods" => {
           "output" => true,
         },
-      },
-    })
+      }
+    )
     site.read
     matching_doc = site.collections["methods"].docs.find do |doc|
       doc.relative_path == relative_path
@@ -138,13 +138,13 @@ class JekyllUnitTest < Minitest::Test
   end
 
   def site_configuration(overrides = {})
-    full_overrides = build_configs(overrides, build_configs({
-      "destination" => dest_dir,
-      "incremental" => false,
-    }))
-    Configuration.from(full_overrides.merge({
-      "source" => source_dir,
-    }))
+    full_overrides = build_configs(overrides, build_configs(
+                                                "destination" => dest_dir,
+                                                "incremental" => false
+                                              ))
+    Configuration.from(full_overrides.merge(
+                         "source" => source_dir
+                       ))
   end
 
   def clear_dest
@@ -190,6 +190,15 @@ class JekyllUnitTest < Minitest::Test
       skip msg.to_s.magenta
     end
   end
+
+  def symlink_if_allowed(target, sym_file)
+    FileUtils.ln_sf(target, sym_file)
+  rescue Errno::EACCES
+    skip "Permission denied for creating a symlink to #{target.inspect} " \
+         "on this machine".magenta
+  rescue NotImplementedError => error
+    skip error.to_s.magenta
+  end
 end
 
 class FakeLogger
@@ -197,7 +206,6 @@ class FakeLogger
 end
 
 module TestWEBrick
-
   module_function
 
   def mount_server(&block)
@@ -205,7 +213,7 @@ module TestWEBrick
 
     begin
       server.mount("/", Jekyll::Commands::Serve::Servlet, document_root,
-        document_root_options)
+                   document_root_options)
 
       server.start
       addr = server.listeners[0].addr
@@ -235,11 +243,11 @@ module TestWEBrick
   end
 
   def document_root_options
-    WEBrick::Config::FileHandler.merge({
+    WEBrick::Config::FileHandler.merge(
       :FancyIndexing     => true,
       :NondisclosureName => [
         ".ht*", "~*",
-      ],
-    })
+      ]
+    )
   end
 end

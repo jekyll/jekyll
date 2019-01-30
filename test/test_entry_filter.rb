@@ -5,12 +5,12 @@ require "helper"
 class TestEntryFilter < JekyllUnitTest
   context "Filtering entries" do
     setup do
-      @site = Site.new(site_configuration)
+      @site = fixture_site
     end
 
     should "filter entries" do
       ent1 = %w(foo.markdown bar.markdown baz.markdown #baz.markdown#
-              .baz.markdow foo.markdown~ .htaccess _posts _pages ~$benbalter.docx)
+                .baz.markdow foo.markdown~ .htaccess _posts _pages ~$benbalter.docx)
 
       entries = EntryFilter.new(@site).filter(ent1)
       assert_equal %w(foo.markdown bar.markdown baz.markdown .htaccess), entries
@@ -87,7 +87,7 @@ class TestEntryFilter < JekyllUnitTest
       # no support for symlinks on Windows
       skip_if_windows "Jekyll does not currently support symlinks on Windows."
 
-      site = Site.new(site_configuration("safe" => true))
+      site = fixture_site("safe" => true)
       site.reader.read_directories("symlink-test")
 
       assert_equal %w(main.scss symlinked-file).length, site.pages.length
@@ -99,11 +99,22 @@ class TestEntryFilter < JekyllUnitTest
       # no support for symlinks on Windows
       skip_if_windows "Jekyll does not currently support symlinks on Windows."
 
-      site = Site.new(site_configuration)
+      @site.reader.read_directories("symlink-test")
+      refute_equal [], @site.pages
+      refute_equal [], @site.static_files
+    end
 
+    should "include only safe symlinks in safe mode even when included" do
+      # no support for symlinks on Windows
+      skip_if_windows "Jekyll does not currently support symlinks on Windows."
+
+      site = fixture_site("safe" => true, "include" => ["symlinked-file-outside-source"])
       site.reader.read_directories("symlink-test")
-      refute_equal [], site.pages
-      refute_equal [], site.static_files
+
+      # rubocop:disable Performance/FixedSize
+      assert_equal %w(main.scss symlinked-file).length, site.pages.length
+      refute_includes site.static_files.map(&:name), "symlinked-file-outside-source"
+      # rubocop:enable Performance/FixedSize
     end
   end
 
