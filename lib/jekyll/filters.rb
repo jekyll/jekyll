@@ -370,8 +370,9 @@ module Jekyll
 
     # Parse a string to a Liquid Condition
     def parse_condition(exp)
-      parser = Liquid::Parser.new(exp)
+      parser    = Liquid::Parser.new(exp)
       condition = parse_binary_comparison(parser)
+
       parser.consume(:end_of_string)
       condition
     end
@@ -398,16 +399,14 @@ module Jekyll
     # Returns an instance of Liquid::Condition
     def parse_comparison(parser)
       left_operand = Liquid::Expression.parse(parser.expression)
-      operator = parser.consume?(:comparison)
-      if operator
-        # 1. Parse what remains after "consuming" the left operand and the `:comparison` operator
-        # 2. Initialize a Liquid::Condition using the operands and the comparison-operator
-        right_operand = Liquid::Expression.parse(parser.expression)
-        Liquid::Condition.new(left_operand, operator, right_operand)
-      else
-        # No comparison-operator detected. Initialize a Liquid::Condition using only left operand
-        Liquid::Condition.new(left_operand)
-      end
+      operator     = parser.consume?(:comparison)
+
+      # No comparison-operator detected. Initialize a Liquid::Condition using only left operand
+      return Liquid::Condition.new(left_operand) unless operator
+
+      # Parse what remained after extracting the left operand and the `:comparison` operator
+      # and initialize a Liquid::Condition object using the operands and the comparison-operator
+      Liquid::Condition.new(left_operand, operator, Liquid::Expression.parse(parser.expression))
     end
   end
 end
