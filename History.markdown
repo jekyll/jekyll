@@ -125,6 +125,7 @@
   * Add a custom inspect string for StaticFile objects (#7422)
   * Remind user to include gem in the Gemfile on error (#7476)
   * Search Front matter defaults for Page objects with relative_path (#7261)
+  * Support for binary operators in where_exp filter (#6998)
 
 ### Major Enhancements
 
