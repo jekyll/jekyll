@@ -17,12 +17,18 @@ Gem::Specification.new do |s|
   if s.respond_to?(:metadata=)
     s.metadata = {
       "bug_tracker_uri" => "http://github.com/jekyll/jekyll/issues",
-      "changelog_uri" => "https://github.com/jekyll/jekyll/releases",
-      "homepage_uri" => "https://jekyllrb.com/",
+      "changelog_uri"   => "https://github.com/jekyll/jekyll/releases",
+      "homepage_uri"    => "https://jekyllrb.com/",
       "source_code_uri" => "https://github.com/jekyll/jekyll/",
     }
   end
 
+  all_files       = `git ls-files -z`.split("\x0")
+  s.files         = all_files.grep(%r!^(exe|lib|rubocop)/|^.rubocop.yml$!)
+  s.executables   = all_files.grep(%r!^exe/!) { |f| File.basename(f) }
+  s.bindir        = "exe"
+  s.require_paths = ["lib"]
+  
   s.rdoc_options = ["--charset=UTF-8"]
   s.extra_rdoc_files = %w(README.markdown LICENSE)
 
@@ -41,12 +47,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("pathutil",              "~> 0.9")
   s.add_runtime_dependency("rouge",                 "~> 3.0")
   s.add_runtime_dependency("safe_yaml",             "~> 1.0")
-
-  all_files       = `git ls-files -z`.split("\x0")
-  s.files         = all_files.grep(%r!^(exe|lib|rubocop)/|^.rubocop.yml$!)
-  s.executables   = all_files.grep(%r!^exe/!) { |f| File.basename(f) }
-  s.bindir        = "exe"
-  s.require_paths = ["lib"]
 
   s.post_install_message = <<~MSG
     ----------------------------------------------------------------------------------
