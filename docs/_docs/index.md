@@ -28,7 +28,7 @@ cd myblog
 ```
 5. Build the site and make it available on a local server
 ```
-bundle exec jekyll serve
+jekyll serve
 ```
 6. Now browse to [http://localhost:4000](http://localhost:4000){:target="_blank"}
 
