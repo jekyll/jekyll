@@ -14,26 +14,24 @@ Gem::Specification.new do |s|
   s.summary       = "A simple, blog aware, static site generator."
   s.description   = "Jekyll is a simple, blog aware, static site generator."
 
-  if s.respond_to?(:metadata=)
-    s.metadata = {
-      "bug_tracker_uri" => "http://github.com/jekyll/jekyll/issues",
-      "changelog_uri"   => "https://github.com/jekyll/jekyll/releases",
-      "homepage_uri"    => "https://jekyllrb.com/",
-      "source_code_uri" => "https://github.com/jekyll/jekyll/",
-    }
-  end
-
   all_files       = `git ls-files -z`.split("\x0")
   s.files         = all_files.grep(%r!^(exe|lib|rubocop)/|^.rubocop.yml$!)
   s.executables   = all_files.grep(%r!^exe/!) { |f| File.basename(f) }
   s.bindir        = "exe"
   s.require_paths = ["lib"]
 
+  s.metadata = {
+    "bug_tracker_uri" => "https://github.com/jekyll/jekyll/issues",
+    "changelog_uri"   => "https://github.com/jekyll/jekyll/releases",
+    "homepage_uri"    => "https://jekyllrb.com",
+    "source_code_uri" => "https://github.com/jekyll/jekyll",
+  }
+
   s.rdoc_options = ["--charset=UTF-8"]
   s.extra_rdoc_files = %w(README.markdown LICENSE)
 
   s.required_ruby_version     = ">= 2.3.0"
-  s.required_rubygems_version = ">= 2.5.0"
+  s.required_rubygems_version = ">= 2.7.0"
 
   s.add_runtime_dependency("addressable",           "~> 2.4")
   s.add_runtime_dependency("colorator",             "~> 1.0")
