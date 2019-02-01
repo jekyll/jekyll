@@ -20,14 +20,14 @@ Gem::Specification.new do |s|
   s.bindir        = "exe"
   s.require_paths = ["lib"]
 
-  s.metadata = {
+  s.metadata      = {
     "bug_tracker_uri" => "https://github.com/jekyll/jekyll/issues",
     "changelog_uri"   => "https://github.com/jekyll/jekyll/releases",
     "homepage_uri"    => "https://jekyllrb.com",
     "source_code_uri" => "https://github.com/jekyll/jekyll",
   }
 
-  s.rdoc_options = ["--charset=UTF-8"]
+  s.rdoc_options     = ["--charset=UTF-8"]
   s.extra_rdoc_files = %w(README.markdown LICENSE)
 
   s.required_ruby_version     = ">= 2.3.0"
