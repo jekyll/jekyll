@@ -69,7 +69,7 @@ which ruby
 /usr/local/opt/ruby/bin/ruby
 
 ruby -v
-ruby 2.5.3p105 (2018-10-18 revision 65156) [x86_64-darwin18]
+ruby 2.6.1p33 (2019-01-30 revision 66950) [x86_64-darwin18]
 ```
 
 Yay, we are now running current stable Ruby!
