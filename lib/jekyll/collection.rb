@@ -153,7 +153,7 @@ module Jekyll
     #
     # Returns the inspect string
     def inspect
-      "#<Jekyll::Collection @label=#{label} docs=#{docs}>"
+      "#<#{self.class} @label=#{label} docs=#{docs}>"
     end
 
     # Produce a sanitized label name

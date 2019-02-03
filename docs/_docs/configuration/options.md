@@ -381,7 +381,7 @@ before your site is served.
     <tr class="setting">
       <td>
         <p class="name"><strong>X.509 (SSL) Private Key</strong></p>
-        <p class="description">SSL Private Key.</p>
+        <p class="description">SSL Private Key, stored or symlinked in the site source.</p>
       </td>
       <td class="align-center">
         <p><code class="flag">--ssl-key</code></p>
@@ -390,7 +390,7 @@ before your site is served.
     <tr class="setting">
       <td>
         <p class="name"><strong>X.509 (SSL) Certificate</strong></p>
-        <p class="description">SSL Public certificate.</p>
+        <p class="description">SSL Public certificate, stored or symlinked in the site source.</p>
       </td>
       <td class="align-center">
         <p><code class="flag">--ssl-cert</code></p>

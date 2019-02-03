@@ -94,6 +94,10 @@
   * Permalink docs typo fixes (#7459)
   * Fixed unnecessary aticles and pronouns (#7466)
   * Grammatical correction (#7464)
+  * Update resources.md (#7472)
+  * Docs: store SSL key and cert in site source (#7473)
+  * Minor doc fixes (#7495)
+  * Changed order of steps (#7503)
 
 ### Minor Enhancements
 
@@ -119,6 +123,9 @@
   * Memoize the return value of Site#documents (#7273)
   * Upgrade liquid-c to v4.0 (#7375)
   * Add a custom inspect string for StaticFile objects (#7422)
+  * Remind user to include gem in the Gemfile on error (#7476)
+  * Search Front matter defaults for Page objects with relative_path (#7261)
+  * Support for binary operators in where_exp filter (#6998)
 
 ### Major Enhancements
 
@@ -174,6 +181,9 @@
   * Create symlink only if target is accessible (#7429)
   * Test with the new Ruby v2.6 (#7438)
   * Bump RuboCop to v0.62.x (#7449)
+  * Relax version constraint on classifier-reborn gem (#7471)
+  * Update rubocop to ~&gt; 0.63.1 (#7489)
+  * dev: update gemspec (#7425)
 
 ### Bug Fixes
 
