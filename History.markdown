@@ -98,6 +98,7 @@
   * Docs: store SSL key and cert in site source (#7473)
   * Minor doc fixes (#7495)
   * Changed order of steps (#7503)
+  * Hosting with AWS Amplify (#7510)
 
 ### Minor Enhancements
 
