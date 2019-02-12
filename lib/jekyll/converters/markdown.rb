@@ -21,7 +21,7 @@ module Jekyll
                               "#{@config["markdown"].inspect} is not a valid Markdown processor."
           Jekyll.logger.error "", "Available processors are: #{valid_processors.join(", ")}"
           Jekyll.logger.error ""
-          Jekyll.logger.abort_with "", "Invalid Markdown processor given: #{@config["markdown"]}"
+          raise Errors::FatalException, "Invalid Markdown processor given: #{@config["markdown"]}"
         end
 
         @cache = Jekyll::Cache.new("Jekyll::Converters::Markdown")
