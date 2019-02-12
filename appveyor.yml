@@ -13,12 +13,14 @@ build: off
 environment:
   BUNDLE_WITHOUT: "benchmark:site:development"
   matrix:
+    - RUBY_FOLDER_VER: "26"
+      TEST_SUITE: "test"
+    - RUBY_FOLDER_VER: "26"
+      TEST_SUITE: "cucumber"
+    - RUBY_FOLDER_VER: "26"
+      TEST_SUITE: "default-site"
     - RUBY_FOLDER_VER: "25"
       TEST_SUITE: "test"
-    - RUBY_FOLDER_VER: "25"
-      TEST_SUITE: "cucumber"
-    - RUBY_FOLDER_VER: "25"
-      TEST_SUITE: "default-site"
     - RUBY_FOLDER_VER: "24"
       TEST_SUITE: "test"
     - RUBY_FOLDER_VER: "23"
