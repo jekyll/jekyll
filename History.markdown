@@ -185,6 +185,7 @@
   * Relax version constraint on classifier-reborn gem (#7471)
   * Update rubocop to ~&gt; 0.63.1 (#7489)
   * dev: update gemspec (#7425)
+  * Test with Ruby 2.6 on AppVeyor [skip travis] (#7518)
 
 ### Bug Fixes
 
