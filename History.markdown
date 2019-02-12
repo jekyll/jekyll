@@ -98,6 +98,7 @@
   * Docs: store SSL key and cert in site source (#7473)
   * Minor doc fixes (#7495)
   * Changed order of steps (#7503)
+  * Hosting with AWS Amplify (#7510)
 
 ### Minor Enhancements
 
@@ -184,6 +185,7 @@
   * Relax version constraint on classifier-reborn gem (#7471)
   * Update rubocop to ~&gt; 0.63.1 (#7489)
   * dev: update gemspec (#7425)
+  * Test with Ruby 2.6 on AppVeyor [skip travis] (#7518)
 
 ### Bug Fixes
 
