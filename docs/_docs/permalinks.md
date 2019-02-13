@@ -25,7 +25,7 @@ permalink: /about/
 ## Global
 
 Setting a permalink in front matter for every page on your site is no fun.
-Luckily, Jekyll let's you set in globally in your `_config.yml`.
+Luckily, Jekyll lets you set the permalink structure globally in your `_config.yml`.
 
 To set a global permalink, you use the `permalink` variable in `_config.yml`.
 You can use placeholders to your desired output. For example:

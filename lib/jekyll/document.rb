@@ -295,7 +295,7 @@ module Jekyll
     #
     # Returns the inspect string for this document.
     def inspect
-      "#<Jekyll::Document #{relative_path} collection=#{collection.label}>"
+      "#<#{self.class} #{relative_path} collection=#{collection.label}>"
     end
 
     # The string representation for this document.

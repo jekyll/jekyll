@@ -54,7 +54,7 @@ content:
 ## Build
 
 Jekyll is a static site generator so we need Jekyll to build the site
-before we can view it. There's two commands you can run in the root of your site
+before we can view it. There are two commands you can run in the root of your site
 to build it:
 
 * `jekyll build` - Builds the site and outputs a static site to a directory

@@ -48,6 +48,7 @@ class TestFilters < JekyllUnitTest
       @time_as_numeric = 1_399_680_607
       @integer_as_string = "142857"
       @array_of_objects = [
+        { "color" => "teal", "size" => "large"  },
         { "color" => "red",  "size" => "large"  },
         { "color" => "red",  "size" => "medium" },
         { "color" => "blue", "size" => "medium" },
@@ -911,6 +912,28 @@ class TestFilters < JekyllUnitTest
         assert_equal(
           2,
           @filter.where_exp(@array_of_objects, "item", "item.color == 'red'").length
+        )
+      end
+
+      should "filter objects appropriately with 'or', 'and' operators" do
+        assert_equal(
+          [
+            { "color" => "teal", "size" => "large"  },
+            { "color" => "red",  "size" => "large"  },
+            { "color" => "red",  "size" => "medium" },
+          ],
+          @filter.where_exp(
+            @array_of_objects, "item", "item.color == 'red' or item.size == 'large'"
+          )
+        )
+
+        assert_equal(
+          [
+            { "color" => "red", "size" => "large" },
+          ],
+          @filter.where_exp(
+            @array_of_objects, "item", "item.color == 'red' and item.size == 'large'"
+          )
         )
       end
 

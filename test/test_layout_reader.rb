@@ -35,7 +35,8 @@ class TestLayoutReader < JekyllUnitTest
 
     context "when a layout is a symlink" do
       setup do
-        FileUtils.ln_sf("/etc/passwd", source_dir("_layouts", "symlink.html"))
+        symlink_if_allowed("/etc/passwd", source_dir("_layouts", "symlink.html"))
+
         @site = fixture_site(
           "safe"    => true,
           "include" => ["symlink.html"]
@@ -43,7 +44,7 @@ class TestLayoutReader < JekyllUnitTest
       end
 
       teardown do
-        FileUtils.rm(source_dir("_layouts", "symlink.html"))
+        FileUtils.rm_f(source_dir("_layouts", "symlink.html"))
       end
 
       should "only read the layouts which are in the site" do
@@ -57,7 +58,7 @@ class TestLayoutReader < JekyllUnitTest
 
     context "with a theme" do
       setup do
-        FileUtils.ln_sf("/etc/passwd", theme_dir("_layouts", "theme-symlink.html"))
+        symlink_if_allowed("/etc/passwd", theme_dir("_layouts", "theme-symlink.html"))
         @site = fixture_site(
           "include" => ["theme-symlink.html"],
           "theme"   => "test-theme",
@@ -66,7 +67,7 @@ class TestLayoutReader < JekyllUnitTest
       end
 
       teardown do
-        FileUtils.rm(theme_dir("_layouts", "theme-symlink.html"))
+        FileUtils.rm_f(theme_dir("_layouts", "theme-symlink.html"))
       end
 
       should "not read a symlink'd theme" do

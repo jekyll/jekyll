@@ -120,6 +120,11 @@ page:
       <code>/work/code/_posts/2008-12-24-closures.md</code> would have this field set to
       <code>['work', 'code']</code>. These can also be specified in the
       <a href="/docs/front-matter/">front matter</a>.
+  - name: page.collection
+    description: >-
+      The label of the collection to which this document belongs. e.g. <code>posts</code> for a post, or
+      <code>puppies</code> for a document at path <code>_puppies/rover.md</code>. If not part of a
+      collection, an empty string is returned.
   - name: page.tags
     description: >-
       The list of tags to which this post belongs. These can be specified in the

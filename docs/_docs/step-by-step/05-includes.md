@@ -3,7 +3,7 @@ layout: step
 title: Includes
 position: 5
 ---
-The site is coming together however, there's no way to navigate between
+The site is coming together; however, there's no way to navigate between
 pages. Let's fix that.
 
 Navigation should be on every page so adding it to your layout is the correct

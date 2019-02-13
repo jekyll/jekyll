@@ -86,7 +86,10 @@ module Jekyll
     # Returns true unless the defaults for the destination path from
     # _config.yml contain `published: false`.
     def write?
-      defaults.fetch("published", true)
+      publishable = defaults.fetch("published", true)
+      return publishable unless @collection
+
+      publishable && @collection.write?
     end
 
     # Write the static file to the destination directory (if modified).
@@ -150,6 +153,12 @@ module Jekyll
     # as defined in _config.yml.
     def defaults
       @defaults ||= @site.frontmatter_defaults.all url, type
+    end
+
+    # Returns a debug string on inspecting the static file.
+    # Includes only the relative path of the object.
+    def inspect
+      "#<#{self.class} @relative_path=#{relative_path.inspect}>"
     end
 
     private

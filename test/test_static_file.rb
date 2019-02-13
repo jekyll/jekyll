@@ -48,6 +48,11 @@ class TestStaticFile < JekyllUnitTest
       remove_dummy_file(@filename) if File.exist?(source_dir(@filename))
     end
 
+    should "return a simple string on inspection" do
+      static_file = setup_static_file("root", "dir", @filename)
+      assert_equal "#<Jekyll::StaticFile @relative_path=\"dir/#{@filename}\">", static_file.inspect
+    end
+
     should "have a source file path" do
       static_file = setup_static_file("root", "dir", @filename)
       assert_equal "root/dir/#{@filename}", static_file.path

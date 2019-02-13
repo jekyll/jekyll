@@ -9,26 +9,83 @@ First, you need to install the command-line tools to be able to compile native e
 xcode-select --install
 ```
 
-## Set up Ruby included with the OS
+{: .note }
+We strongly recommend that you install Ruby gems in your home directory to avoid file permissions problems and using `sudo`.
 
-Check your Ruby version meets our requirements. Jekyll requires Ruby 2.2.5 or above. If you're running an older version you'll need to [install a more recent Ruby version](#rbenv).
+You can do this with the `--user-install` option, for instance by running:
 
 ```sh
+gem install --user-install bundler jekyll
+```
+
+Or you can change the default gem path, by adding those lines to your shell config file, .e.g. `~/.bash_profile` or `~/.bashrc` if your shell is bash:
+
+```
+export GEM_HOME=$HOME/gems
+export PATH=$HOME/gems/bin:$PATH
+```
+
+Relaunch your terminal and run `gem env` to check that default gem paths point to you home directory by default.
+
+## Set up Ruby included with the OS
+
+Jekyll requires Ruby > 2.2.5 — we recommend that you run Ruby > 2.3 though, as more and more dependencies ask for that requirement. You're good to go on macOS Mojave 10.14:
+
+```sh
+sw_vers -productVersion
+10.14
+
 ruby -v
 ruby 2.3.7p456 (2018-03-28 revision 63024) [universal.x86_64-darwin18]
 ```
 
-Now install Jekyll and [Bundler](/docs/ruby-101/#bundler).
+Install [Bundler](/docs/ruby-101/#bundler) and Jekyll by running:
 
 ```sh
 gem install bundler jekyll
 ```
 
-### Install a more recent Ruby version with rbenv {#rbenv}
+### Install latest stable Ruby with Homebrew {#brew}
 
-Developers often use [rbenv](https://github.com/rbenv/rbenv) to manage multiple
-Ruby versions. This can be useful when the version included with the OS is
-too old or when you want to run the same version as your colleagues/collaborators.
+To run latest Ruby version you need to install it through [Homebrew](https://brew.sh).
+
+```sh
+# Install Homebrew
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+brew install ruby
+```
+
+Don't forget to add the brew ruby path to your shell config :
+
+```
+export PATH=/usr/local/opt/ruby/bin:$PATH
+```
+
+Then relaunch your terminal and check your updated Ruby setup:
+
+```
+which ruby
+/usr/local/opt/ruby/bin/ruby
+
+ruby -v
+ruby 2.6.1p33 (2019-01-30 revision 66950) [x86_64-darwin18]
+```
+
+Yay, we are now running current stable Ruby!
+
+We can install bundler and jekyll:
+
+```sh
+gem install bundler jekyll
+```
+
+That's it, you're ready to roll!
+
+### Manage multiple Ruby environments with rbenv {#rbenv}
+
+People often use [rbenv](https://github.com/rbenv/rbenv) to manage multiple
+Ruby versions. This is very useful when you need to be able to run a given Ruby version on a project.
 
 ```sh
 # Install Homebrew
@@ -45,7 +102,7 @@ curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor 
 ```
 
 Restart your terminal for changes to take effect.
-Now we can install the Ruby version of our choice, let's go with Ruby 2.5.3 here:
+Now you can install the Ruby version of our choice, let's go with current latest stable Ruby:
 
 ```sh
 rbenv install 2.5.3
