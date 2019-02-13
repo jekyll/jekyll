@@ -61,8 +61,8 @@ The Sass converter will default the `sass_dir` configuration option to
 
     Note that the <code>sass_dir</code> becomes the load path for Sass imports,
     nothing more. This means that Jekyll does not know about these files
-    directly, so any files here should not contain the front matter as
-    described above nor will they be transformed as described above. This
+    directly. Any files here should not contain the empty front matter as
+    described above. If they do, they'll not be transformed as described above. This
     folder should only contain imports.
 
   </p>

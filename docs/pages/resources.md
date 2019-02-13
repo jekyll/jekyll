@@ -43,18 +43,18 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [Talkyard](https://www.talkyard.io/blog-comments): Embedded comments for Jekyll and others (free and open source, or hosted serverless)
 
 ### Content Management
-  - [Contentful](https://www.contentful.com/ecosystem/jekyll/): use Jekyll together with the API-driven Contentful CMS.
   - [CloudCannon](https://cloudcannon.com/): The Cloud CMS for Jekyll
+  - [Contentful](https://github.com/contentful/jekyll-contentful-data-import) Content infrastructure for digital teams 
   - [Forestry.io](https://forestry.io/): A static CMS that commits
   - [Netlify CMS](https://www.netlifycms.org/): Open source content management for your Git workflow
-  - [Site Leaf](https://www.siteleaf.com/): Built for developers, Loved by everyone
+  - [Siteleaf](https://www.siteleaf.com/): Built for developers, Loved by everyone
 
 ### E-commerce
   - [Snipcart](https://snipcart.com/blog/static-site-e-commerce-part-2-integrating-snipcart-with-jekyll): Add a shopping cart to a Jekyll site
 
 ### Forms
-
-  - [Formester](http://www.formester.com)
+  - [Getform](https://getform.io)
+  - [99Inbound](https://www.99inbound.com)
   - [Formingo](https://www.formingo.co/guides/jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=Jekyll%20Documentation)
   - [FormKeep](https://formkeep.com/guides/contact-form-jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=contact-form-jekyll)
   - [Formspree (open source)](https://formspree.io/)

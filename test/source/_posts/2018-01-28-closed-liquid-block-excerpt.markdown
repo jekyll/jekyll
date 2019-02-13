@@ -2,10 +2,23 @@
 layout: post
 ---
 
-{% if
-  page.layout == "post" %}
-You’ll find this post in your `_posts` directory.
-To add new posts, simply add a file in the `_posts` directory.
-{% endif %}
+{%
+  highlight
+  ruby
+%}
+{% assign foo = 'foobar' %}
+{% raw
+%}
+def print_hi(name)
+  puts "Hi, #{name}"
+end
+print_hi('Tom')
+#=> prints 'Hi, Tom' to STDOUT.
+{%
+  endraw
+%}
+{%
+  endhighlight
+%}
 
 So let's talk business.

@@ -77,7 +77,7 @@ module Jekyll
 
     # Returns the shorthand String identifier of this doc.
     def inspect
-      "<Excerpt: #{id}>"
+      "<#{self.class} id=#{id}>"
     end
 
     def output
@@ -131,36 +131,45 @@ module Jekyll
     #
     # Returns excerpt String
 
-    LIQUID_TAG_REGEX = %r!{%-?\s*(\w+).+\s*-?%}!m
-    MKDWN_LINK_REF_REGEX = %r!^ {0,3}\[[^\]]+\]:.+$!
+    LIQUID_TAG_REGEX = %r!{%-?\s*(\w+)\s*.*?-?%}!m.freeze
+    MKDWN_LINK_REF_REGEX = %r!^ {0,3}\[[^\]]+\]:.+$!.freeze
 
     def extract_excerpt(doc_content)
       head, _, tail = doc_content.to_s.partition(doc.excerpt_separator)
 
-      # append appropriate closing tag (to a Liquid block), to the "head" if the
-      # partitioning resulted in leaving the closing tag somewhere in the "tail"
-      # partition.
+      # append appropriate closing tag(s) (for each Liquid block), to the `head` if the
+      # partitioning resulted in leaving the closing tag somewhere in the `tail` partition.
       if head.include?("{%")
-        head =~ LIQUID_TAG_REGEX
-        tag_name = Regexp.last_match(1)
+        modified  = false
+        tag_names = head.scan(LIQUID_TAG_REGEX)
+        tag_names.flatten!
+        tag_names.reverse_each do |tag_name|
+          next unless liquid_block?(tag_name)
+          next if head =~ endtag_regex_stash(tag_name)
 
-        if liquid_block?(tag_name) && head.match(%r!{%-?\s*end#{tag_name}\s*-?%}!).nil?
-          print_build_warning
+          modified = true
           head << "\n{% end#{tag_name} %}"
         end
+        print_build_warning if modified
       end
 
-      if tail.empty?
-        head
-      else
-        head.to_s.dup << "\n\n" << tail.scan(MKDWN_LINK_REF_REGEX).join("\n")
-      end
+      return head if tail.empty?
+
+      head << "\n\n" << tail.scan(MKDWN_LINK_REF_REGEX).join("\n")
     end
 
     private
 
+    def endtag_regex_stash(tag_name)
+      @endtag_regex_stash ||= {}
+      @endtag_regex_stash[tag_name] ||= %r!{%-?\s*end#{tag_name}.*?\s*-?%}!m
+    end
+
     def liquid_block?(tag_name)
-      Liquid::Template.tags[tag_name].superclass == Liquid::Block
+      return false unless tag_name.is_a?(String)
+      return false unless Liquid::Template.tags[tag_name]
+
+      Liquid::Template.tags[tag_name].ancestors.include?(Liquid::Block)
     rescue NoMethodError
       Jekyll.logger.error "Error:",
                           "A Liquid tag in the excerpt of #{doc.relative_path} couldn't be parsed."
@@ -169,12 +178,11 @@ module Jekyll
 
     def print_build_warning
       Jekyll.logger.warn "Warning:", "Excerpt modified in #{doc.relative_path}!"
-      Jekyll.logger.warn "",
-                         "Found a Liquid block containing separator '#{doc.excerpt_separator}'" \
-                         " and has been modified with the appropriate closing tag."
-      Jekyll.logger.warn "",
-                         "Feel free to define a custom excerpt or excerpt_separator in the" \
-                         " document's Front Matter if the generated excerpt is unsatisfactory."
+      Jekyll.logger.warn "", "Found a Liquid block containing the excerpt separator" \
+                         " #{doc.excerpt_separator.inspect}. "
+      Jekyll.logger.warn "", "The block has been modified with the appropriate closing tag."
+      Jekyll.logger.warn "", "Feel free to define a custom excerpt or excerpt_separator in the"
+      Jekyll.logger.warn "", "document's Front Matter if the generated excerpt is unsatisfactory."
     end
   end
 end

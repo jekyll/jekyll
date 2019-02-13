@@ -21,8 +21,8 @@ end
 
 Jekyll provides hooks for <code>:site</code>, <code>:pages</code>,
 <code>:posts</code>, and <code>:documents</code>. In all cases, Jekyll calls
-your hooks with the container object as the first callback parameter. However,
-all `:pre_render` hooks and the`:site, :post_render` hook will also provide a
+your hooks with the container object as the first callback parameter.
+All `:pre_render` hooks and the`:site, :post_render` hook will also provide a
 payload hash as a second parameter. In the case of `:pre_render`, the payload
 gives you full control over the variables that are available while rendering.
 In the case of `:site, :post_render`, the payload contains final values after

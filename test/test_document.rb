@@ -67,6 +67,12 @@ class TestDocument < JekyllUnitTest
       assert_equal "foo.bar", @document.data["whatever"]
     end
 
+    should "know its date" do
+      assert_nil @document.data["date"]
+      assert_equal Time.now.strftime("%Y/%m/%d"), @document.date.strftime("%Y/%m/%d")
+      assert_equal Time.now.strftime("%Y/%m/%d"), @document.to_liquid["date"].strftime("%Y/%m/%d")
+    end
+
     should "be jsonify-able" do
       page_json = @document.to_liquid.to_json
       parsed = JSON.parse(page_json)
@@ -143,7 +149,7 @@ class TestDocument < JekyllUnitTest
               "key" => "myval",
             },
           },
-        },]
+        }]
       )
       @site.process
       @document = @site.collections["slides"].docs.select { |d| d.is_a?(Document) }.first
@@ -174,7 +180,7 @@ class TestDocument < JekyllUnitTest
               "test2" => "default1",
             },
           },
-        },]
+        }]
       )
       @site.process
       @document = @site.collections["slides"].docs[1]
@@ -201,7 +207,7 @@ class TestDocument < JekyllUnitTest
               "key" => "value123",
             },
           },
-        },]
+        }]
       )
       @site.process
       @document = @site.collections["slides"].docs.first
@@ -225,7 +231,7 @@ class TestDocument < JekyllUnitTest
               "key" => "myval",
             },
           },
-        },]
+        }]
       )
       @site.process
       @document = @site.collections["slides"].docs.first
@@ -580,6 +586,10 @@ class TestDocument < JekyllUnitTest
     should "have the expected date" do
       assert_equal "2015/09/30", @document.data["date"].strftime("%Y/%m/%d")
     end
+
+    should "return the expected date via Liquid" do
+      assert_equal "2015/09/30", @document.to_liquid["date"].strftime("%Y/%m/%d")
+    end
   end
 
   context "a document with a date with time but without timezone" do
@@ -590,6 +600,10 @@ class TestDocument < JekyllUnitTest
     should "have the expected date" do
       assert_equal "2015/10/01", @document.data["date"].strftime("%Y/%m/%d")
     end
+
+    should "return the expected date via Liquid" do
+      assert_equal "2015/10/01", @document.to_liquid["date"].strftime("%Y/%m/%d")
+    end
   end
 
   context "a document with a date without time" do
@@ -599,6 +613,10 @@ class TestDocument < JekyllUnitTest
 
     should "have the expected date" do
       assert_equal "2015/10/01", @document.data["date"].strftime("%Y/%m/%d")
+    end
+
+    should "return the expected date via Liquid" do
+      assert_equal "2015/10/01", @document.to_liquid["date"].strftime("%Y/%m/%d")
     end
   end
 end

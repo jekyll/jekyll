@@ -3,21 +3,22 @@
 source "https://rubygems.org"
 gemspec :name => "jekyll"
 
+# Temporarily lock JRuby builds on Travis CI to i18n-1.2.x until JRuby is able to handle
+# refinements introduced in i18n-1.3.0
+gem "i18n", "~> 1.2.0" if RUBY_ENGINE == "jruby"
+
 gem "rake", "~> 12.0"
 
 group :development do
   gem "launchy", "~> 2.3"
   gem "pry"
 
-  unless RUBY_ENGINE == "jruby"
-    gem "pry-byebug"
-  end
+  gem "pry-byebug" unless RUBY_ENGINE == "jruby"
 end
 
 #
 
 group :test do
-  gem "codeclimate-test-reporter", "~> 1.0.5"
   gem "cucumber", "~> 3.0"
   gem "httpclient"
   gem "jekyll_test_plugin"
@@ -25,9 +26,10 @@ group :test do
   gem "nokogiri", "~> 1.7"
   gem "rspec"
   gem "rspec-mocks"
-  gem "rubocop", "~> 0.59.0"
+  gem "rubocop", "~> 0.64.0"
   gem "test-dependency-theme", :path => File.expand_path("test/fixtures/test-dependency-theme", __dir__)
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)
+  gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
 
   gem "jruby-openssl" if RUBY_ENGINE == "jruby"
 end
@@ -35,9 +37,7 @@ end
 #
 
 group :test_legacy do
-  if RUBY_PLATFORM =~ %r!cygwin!
-    gem "test-unit"
-  end
+  gem "test-unit" if RUBY_PLATFORM =~ %r!cygwin!
 
   gem "minitest"
   gem "minitest-profile"
@@ -73,10 +73,9 @@ group :jekyll_optional_dependencies do
   gem "tomlrb", "~> 1.2"
 
   platform :ruby, :mswin, :mingw, :x64_mingw do
-    gem "classifier-reborn", "~> 2.2.0"
-    gem "liquid-c", "~> 3.0"
-    gem "pygments.rb", "~> 1.0"
-    gem "yajl-ruby", "~> 1.3"
+    gem "classifier-reborn", "~> 2.2"
+    gem "liquid-c", "~> 4.0"
+    gem "yajl-ruby", "~> 1.4"
   end
 
   # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -86,9 +85,7 @@ end
 #
 
 group :site do
-  if ENV["PROOF"]
-    gem "html-proofer", "~> 3.4"
-  end
+  gem "html-proofer", "~> 3.4" if ENV["PROOF"]
 
   gem "jekyll-avatar"
   gem "jekyll-mentions"

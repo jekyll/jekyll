@@ -1,7 +1,10 @@
 ---
 title: Quickstart
 permalink: /docs/
-redirect_from: /docs/home/index.html
+redirect_from:
+  - /docs/home/
+  - /docs/quickstart/
+  - /docs/extras/
 ---
 Jekyll is a simple, extendable, static site generator. You give it text written
 in your favorite markup language and it churns through layouts to create a

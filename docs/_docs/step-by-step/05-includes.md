@@ -3,7 +3,7 @@ layout: step
 title: Includes
 position: 5
 ---
-The site is coming together however, there's no way to navigate between
+The site is coming together; however, there's no way to navigate between
 pages. Let's fix that.
 
 Navigation should be on every page so adding it to your layout is the correct
@@ -17,7 +17,7 @@ in an `_includes` folder. Includes are useful for having a single source for
 source code that repeats around the site or for improving the readability.
 
 Navigation source code can get complex so sometimes it's nice to move it into an
-include.  
+include. 
 
 ## Include usage
 

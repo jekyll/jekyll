@@ -86,7 +86,7 @@ class TestSite < JekyllUnitTest
   context "creating sites" do
     setup do
       @site = Site.new(site_configuration)
-      @num_invalid_posts = 4
+      @num_invalid_posts = 5
     end
 
     teardown do
@@ -588,7 +588,11 @@ class TestSite < JekyllUnitTest
 
       should "set a theme if the config is a string" do
         [:debug, :info, :warn, :error].each do |level|
-          expect(Jekyll.logger.writer).not_to receive(level)
+          if level == :info
+            expect(Jekyll.logger.writer).to receive(level)
+          else
+            expect(Jekyll.logger.writer).not_to receive(level)
+          end
         end
         site = fixture_site("theme" => "test-theme")
         assert_instance_of Jekyll::Theme, site.theme

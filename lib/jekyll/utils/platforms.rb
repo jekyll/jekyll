@@ -21,7 +21,6 @@ module Jekyll
       def vanilla_windows?
         @vanilla_windows ||= !!(rbconfig_host =~ %r!mswin|mingw|cygwin!) && proc_version.empty?
       end
-      # TODO: Remove in 4.0
       alias_method :really_windows?, :vanilla_windows?
 
       # Determine if Windows Subsystem for Linux (WSL)
@@ -47,7 +46,7 @@ module Jekyll
         @proc_version ||= \
           begin
             File.read("/proc/version").downcase
-          rescue Errno::ENOENT
+          rescue Errno::ENOENT, Errno::EACCES
             ""
           end
       end

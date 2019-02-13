@@ -38,7 +38,7 @@ CircleCI detects when `Gemfile` is present is will automatically run `bundle ins
 
 ## 3. Testing
 
-The most basic test that can be run is simply seeing if `jekyll build` actually works. This is a blocker, a dependency if you will,  for other tests you might run on the generate site. So we'll run Jekyll, via Bundler, in the `dependencies` phase.
+The most basic test that can be run is seeing if `jekyll build` actually works. This is a blocker, a dependency if you will, for other tests you might run on the generate site. So we'll run Jekyll, via Bundler, in the `dependencies` phase.
 
 ```yaml
 dependencies:
@@ -105,6 +105,13 @@ jobs:
       - run:
           name: Bundle Install
           command: bundle check || bundle install
+      - save_cache:
+          key: rubygems-v1-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
+          paths:
+            - vendor/bundle
+      - run:
+          name: Jekyll build
+          command: bundle exec jekyll build
       - run:
           name: HTMLProofer tests
           command: |
@@ -113,13 +120,6 @@ jobs:
               --check-favicon  \
               --check-html \
               --disable-external
-      - save_cache:
-          key: rubygems-v1-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
-          paths:
-            - vendor/bundle
-      - run:
-          name: Jekyll build
-          command: bundle exec jekyll build
       - persist_to_workspace:
           root: ./
           paths:

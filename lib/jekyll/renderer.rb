@@ -9,6 +9,7 @@ module Jekyll
       @site     = site
       @document = document
       @payload  = site_payload
+      @layouts  = nil
     end
 
     # Fetches the payload used in Liquid rendering.

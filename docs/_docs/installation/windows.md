@@ -1,7 +1,8 @@
 ---
 title: Jekyll on Windows
 permalink: /docs/installation/windows/
-redirect_from: "/docs/windows.html"
+redirect_from:
+  - /docs/windows/
 ---
 
 While Windows is not an officially-supported platform, it can be used to run Jekyll with the proper tweaks. This page aims to collect some of the general knowledge and lessons that have been unearthed by Windows users.
@@ -54,7 +55,7 @@ Jekyll uses the `listen` gem to watch for changes when the `--watch` switch is s
 Add the following to the `Gemfile` for your site if you have issues with auto-regeneration on Windows alone:
 
 ```ruby
-gem 'wdm', '~> 0.1.1' if Gem.win_platform?
+gem 'wdm', '~> 0.1.1', :install_if => Gem.win_platform?
 ```
 
 You have to use a [Ruby+Devkit](https://rubyinstaller.org/downloads/) version of the RubyInstaller.

@@ -4,7 +4,7 @@ title: Blogging
 position: 8
 ---
 You might be wondering how you can have a blog without a database. In true
-Jekyll style, blogging is powered by text files and is easy to set up.
+Jekyll style, blogging is powered by text files only.
 
 ## Posts
 
@@ -62,7 +62,7 @@ page which lists all the posts, let's do that next.
 
 Jekyll makes posts available at `site.posts`.
 
-Create `blog.html` with the following content:
+Create `blog.html` in your root (`/blog.html`) with the following content:
 
 {% raw %}
 ```html
