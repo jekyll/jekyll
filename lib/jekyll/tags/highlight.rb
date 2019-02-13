@@ -10,7 +10,7 @@ module Jekyll
       # forms: name, name=value, or name="<quoted list>"
       #
       # <quoted list> is a space-separated list of numbers
-      SYNTAX = %r!^([a-zA-Z0-9.+#_-]+)((\s+\w+(=(\w+|"([0-9]+\s)*[0-9]+"))?)*)$!
+      SYNTAX = %r!^([a-zA-Z0-9.+#_-]+)((\s+\w+(=(\w+|"([0-9]+\s)*[0-9]+"))?)*)$!.freeze
 
       def initialize(tag_name, markup, tokens)
         super
@@ -18,13 +18,13 @@ module Jekyll
           @lang = Regexp.last_match(1).downcase
           @highlight_options = parse_options(Regexp.last_match(2))
         else
-          raise SyntaxError, <<-MSG
-Syntax Error in tag 'highlight' while parsing the following markup:
+          raise SyntaxError, <<~MSG
+            Syntax Error in tag 'highlight' while parsing the following markup:
 
-  #{markup}
+            #{markup}
 
-Valid syntax: highlight <lang> [linenos]
-MSG
+            Valid syntax: highlight <lang> [linenos]
+          MSG
         end
       end
 
@@ -33,14 +33,12 @@ MSG
         suffix = context["highlighter_suffix"] || ""
         code = super.to_s.gsub(%r!\A(\n|\r)+|(\n|\r)+\z!, "")
 
-        is_safe = !!context.registers[:site].safe
-
         output =
           case context.registers[:site].highlighter
-          when "pygments"
-            render_pygments(code, is_safe)
           when "rouge"
             render_rouge(code)
+          when "pygments"
+            render_pygments(code, context)
           else
             render_codehighlighter(code)
           end
@@ -49,23 +47,9 @@ MSG
         prefix + rendered_output + suffix
       end
 
-      def sanitized_opts(opts, is_safe)
-        if is_safe
-          Hash[[
-            [:startinline, opts.fetch(:startinline, nil)],
-            [:hl_lines,    opts.fetch(:hl_lines, nil)],
-            [:linenos,     opts.fetch(:linenos, nil)],
-            [:encoding,    opts.fetch(:encoding, "utf-8")],
-            [:cssclass,    opts.fetch(:cssclass, nil)],
-          ].reject { |f| f.last.nil? }]
-        else
-          opts
-        end
-      end
-
       private
 
-      OPTIONS_REGEX = %r!(?:\w="[^"]*"|\w=\w|\w)+!
+      OPTIONS_REGEX = %r!(?:\w="[^"]*"|\w=\w|\w)+!.freeze
 
       def parse_options(input)
         options = {}
@@ -75,7 +59,7 @@ MSG
         input.scan(OPTIONS_REGEX) do |opt|
           key, value = opt.split("=")
           # If a quoted list, convert to array
-          if value && value.include?('"')
+          if value&.include?('"')
             value.delete!('"')
             value = value.split
           end
@@ -86,29 +70,10 @@ MSG
         options
       end
 
-      def render_pygments(code, is_safe)
-        Jekyll::External.require_with_graceful_fail("pygments") unless defined?(Pygments)
-
-        highlighted_code = Pygments.highlight(
-          code,
-          :lexer   => @lang,
-          :options => sanitized_opts(@highlight_options, is_safe)
-        )
-
-        if highlighted_code.nil?
-          Jekyll.logger.error <<-MSG
-There was an error highlighting your code:
-
-#{code}
-
-While attempting to convert the above code, Pygments.rb returned an unacceptable value.
-This is usually a timeout problem solved by running `jekyll build` again.
-MSG
-          raise ArgumentError, "Pygments.rb returned an unacceptable value "\
-          "when attempting to highlight some code."
-        end
-
-        highlighted_code.sub('<div class="highlight"><pre>', "").sub("</pre></div>", "")
+      def render_pygments(code, _context)
+        Jekyll.logger.warn "Warning:", "Highlight Tag no longer supports rendering with Pygments."
+        Jekyll.logger.warn "", "Using the default highlighter, Rouge, instead."
+        render_rouge(code)
       end
 
       def render_rouge(code)

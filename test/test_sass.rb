@@ -5,10 +5,10 @@ require "helper"
 class TestSass < JekyllUnitTest
   context "importing partials" do
     setup do
-      @site = Jekyll::Site.new(Jekyll.configuration({
-        "source"      => source_dir,
-        "destination" => dest_dir,
-      }))
+      @site = Jekyll::Site.new(Jekyll.configuration(
+                                 "source"      => source_dir,
+                                 "destination" => dest_dir
+                               ))
       @site.process
       @test_css_file = dest_dir("css/main.css")
     end

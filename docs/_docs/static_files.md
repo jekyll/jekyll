@@ -2,11 +2,7 @@
 title: Static Files
 permalink: /docs/static-files/
 ---
-
-In addition to renderable and convertible content, we also have **static
-files**.
-
-A static file is a file that does not contain any YAML front matter. These
+A static file is a file that does not contain any front matter. These
 include images, PDFs, and other un-rendered content.
 
 They're accessible in Liquid via `site.static_files` and contain the
@@ -66,11 +62,11 @@ following metadata:
 </table>
 </div>
 
-Note that in the above table, `file` can be anything. It's simply an arbitrarily set variable used in your own logic (such as in a for loop). It isn't a global site or page variable.
+Note that in the above table, `file` can be anything. It's an arbitrarily set variable used in your own logic (such as in a for loop). It isn't a global site or page variable.
 
 ## Add front matter to static files
 
-Although you can't directly add front matter values to static files, you can set front matter values through the [defaults property](../configuration/#front-matter-defaults) in your configuration file. When Jekyll builds the site, it will use the front matter values you set.
+Although you can't directly add front matter values to static files, you can set front matter values through the [defaults property](/docs/configuration/front-matter-defaults/) in your configuration file. When Jekyll builds the site, it will use the front matter values you set.
 
 Here's an example:
 

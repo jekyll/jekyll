@@ -65,14 +65,6 @@ Feature: Site configuration
     And the "_site/Rakefile" file should not exist
     And the "_site/README" file should not exist
 
-  Scenario: Use RDiscount for markup
-    Given I have an "index.markdown" page that contains "[Google](https://www.google.com)"
-    And I have a configuration file with "markdown" set to "rdiscount"
-    When I run jekyll build
-    Then I should get a zero exit status
-    And the _site directory should exist
-    And I should see "<a href=\"https://www.google.com\">Google</a>" in "_site/index.html"
-
   Scenario: Use Kramdown for markup
     Given I have an "index.markdown" page that contains "[Google](https://www.google.com)"
     And I have a configuration file with "markdown" set to "kramdown"
@@ -80,22 +72,6 @@ Feature: Site configuration
     Then I should get a zero exit status
     And the _site directory should exist
     And I should see "<a href=\"https://www.google.com\">Google</a>" in "_site/index.html"
-
-  Scenario: Use Redcarpet for markup
-    Given I have an "index.markdown" page that contains "[Google](https://www.google.com)"
-    And I have a configuration file with "markdown" set to "redcarpet"
-    When I run jekyll build
-    Then I should get a zero exit status
-    And the _site directory should exist
-    And I should see "<a href=\"https://www.google.com\">Google</a>" in "_site/index.html"
-
-  Scenario: Highlight code with pygments
-    Given I have an "index.html" page that contains "{% highlight ruby %} puts 'Hello world!' {% endhighlight %}"
-    When I run jekyll build
-    Then I should get a zero exit status
-    And the _site directory should exist
-    And I should see "Hello world!" in "_site/index.html"
-    And I should see "class=\"highlight\"" in "_site/index.html"
 
   Scenario: Highlight code with rouge
     Given I have an "index.html" page that contains "{% highlight ruby %} puts 'Hello world!' {% endhighlight %}"

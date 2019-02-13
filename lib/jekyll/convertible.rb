@@ -46,10 +46,10 @@ module Jekyll
         end
       rescue Psych::SyntaxError => e
         Jekyll.logger.warn "YAML Exception reading #{filename}: #{e.message}"
-        raise e if self.site.config["strict_front_matter"]
+        raise e if site.config["strict_front_matter"]
       rescue StandardError => e
         Jekyll.logger.warn "Error reading file #{filename}: #{e.message}"
-        raise e if self.site.config["strict_front_matter"]
+        raise e if site.config["strict_front_matter"]
       end
 
       self.data ||= {}
@@ -64,12 +64,12 @@ module Jekyll
     def validate_data!(filename)
       unless self.data.is_a?(Hash)
         raise Errors::InvalidYAMLFrontMatterError,
-          "Invalid YAML front matter in #{filename}"
+              "Invalid YAML front matter in #{filename}"
       end
     end
 
     def validate_permalink!(filename)
-      if self.data["permalink"] && self.data["permalink"].to_s.empty?
+      if self.data["permalink"]&.to_s&.empty?
         raise Errors::InvalidPermalinkError, "Invalid permalink in #{filename}"
       end
     end
@@ -125,16 +125,12 @@ module Jekyll
     #
     # Returns the type of self.
     def type
-      if is_a?(Page)
-        :pages
-      end
+      :pages if is_a?(Page)
     end
 
     # returns the owner symbol for hook triggering
     def hook_owner
-      if is_a?(Page)
-        :pages
-      end
+      :pages if is_a?(Page)
     end
 
     # Determine whether the document is an asset file.
@@ -164,6 +160,8 @@ module Jekyll
     #
     # Returns true if the file has Liquid Tags or Variables, false otherwise.
     def render_with_liquid?
+      return false if data["render_with_liquid"] == false
+
       Jekyll::Utils.has_liquid_construct?(content)
     end
 
@@ -181,7 +179,7 @@ module Jekyll
     #
     # Returns true if the layout is invalid, false if otherwise
     def invalid_layout?(layout)
-      !data["layout"].nil? && layout.nil? && !(self.is_a? Jekyll::Excerpt)
+      !data["layout"].nil? && layout.nil? && !(is_a? Jekyll::Excerpt)
     end
 
     # Recursively render layouts
@@ -210,7 +208,7 @@ module Jekyll
         renderer.payload = payload
       end.run
 
-      Jekyll.logger.debug "Post-Render Hooks:", self.relative_path
+      Jekyll.logger.debug "Post-Render Hooks:", relative_path
       Jekyll::Hooks.trigger hook_owner, :post_render, self
     ensure
       @_renderer = nil # this will allow the modifications above to disappear

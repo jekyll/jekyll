@@ -47,6 +47,7 @@ module Jekyll
         end
 
         private
+
         def make_accessible(hash = @config)
           hash.keys.each do |key|
             hash[key.to_sym] = hash[key]
@@ -59,8 +60,6 @@ module Jekyll
         #   config[highlighter]
         # Where `enable_coderay` is now deprecated because Kramdown
         # supports Rouge now too.
-
-        private
         def highlighter
           return @highlighter if @highlighter
 
@@ -84,7 +83,6 @@ module Jekyll
           end
         end
 
-        private
         def strip_coderay_prefix(hash)
           hash.each_with_object({}) do |(key, val), hsh|
             cleaned_key = key.to_s.gsub(%r!\Acoderay_!, "")
@@ -102,8 +100,6 @@ module Jekyll
         # If our highlighter is CodeRay we go in to merge the CodeRay defaults
         # with your "coderay" key if it's there, deprecating it in the
         # process of you using it.
-
-        private
         def modernize_coderay_config
           unless @config["coderay"].empty?
             Jekyll::Deprecator.deprecation_message(

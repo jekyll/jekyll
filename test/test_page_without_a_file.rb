@@ -21,16 +21,20 @@ class TestPageWithoutAFile < JekyllUnitTest
   context "A PageWithoutAFile" do
     setup do
       clear_dest
-      @site = Site.new(Jekyll.configuration({
-        "source"            => source_dir,
-        "destination"       => dest_dir,
-        "skip_config_files" => true,
-      }))
+      @site = Site.new(Jekyll.configuration(
+                         "source"            => source_dir,
+                         "destination"       => dest_dir,
+                         "skip_config_files" => true
+                       ))
     end
 
     context "with default site configuration" do
       setup do
         @page = setup_page("properties.html")
+      end
+
+      should "identify itself properly" do
+        assert_equal "#<Jekyll::PageWithoutAFile @name=\"properties.html\">", @page.inspect
       end
 
       should "not have page-content and page-data defined within it" do
@@ -41,6 +45,10 @@ class TestPageWithoutAFile < JekyllUnitTest
 
       should "have basic attributes defined in it" do
         regular_page = setup_page("properties.html", :klass => Page)
+        # assert a couple of attributes accessible in a regular Jekyll::Page instance
+        assert_equal "All the properties.\n", regular_page["content"]
+        assert_equal "properties.html", regular_page["name"]
+
         basic_attrs = %w(dir name path url)
         attrs = {
           "content"   => "All the properties.\n",
@@ -56,13 +64,13 @@ class TestPageWithoutAFile < JekyllUnitTest
           "url"       => "/properties.html",
         }
         attrs.each do |prop, value|
-          # assert the props being accessible in a Jekyll::Page instance
-          assert_equal "All the properties.\n", regular_page["content"]
-          assert_equal "properties.html", regular_page["name"]
-
-          # assert differences with Jekyll::PageWithoutAFile instance
+          # assert that all attributes (of a Jekyll::PageWithoutAFile instance) other than
+          # "dir", "name", "path", "url" are `nil`.
+          # For example, @page[dir] should be "/" but @page[content] or @page[layout], should
+          # simply be nil.
+          #
           if basic_attrs.include?(prop)
-            assert_equal @page[prop], value, "For <page[\"#{prop}\"]>:"
+            assert_equal value, @page[prop], "For Jekyll::PageWithoutAFile attribute '#{prop}':"
           else
             assert_nil @page[prop]
           end

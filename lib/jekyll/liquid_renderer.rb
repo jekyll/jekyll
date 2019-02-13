@@ -18,6 +18,7 @@ module Jekyll
 
     def reset
       @stats = {}
+      @cache = {}
     end
 
     def file(filename)
@@ -30,7 +31,6 @@ module Jekyll
         end
       LiquidRenderer::File.new(self, filename).tap do
         @stats[filename] ||= new_profile_hash
-        @stats[filename][:count] += 1
       end
     end
 
@@ -42,6 +42,10 @@ module Jekyll
       @stats[filename][:time] += time
     end
 
+    def increment_count(filename)
+      @stats[filename][:count] += 1
+    end
+
     def stats_table(num_of_rows = 50)
       LiquidRenderer::Table.new(@stats).to_s(num_of_rows)
     end
@@ -50,10 +54,18 @@ module Jekyll
       "#{error.message} in #{path}"
     end
 
+    # A persistent cache to store and retrieve parsed templates based on the filename
+    # via `LiquidRenderer::File#parse`
+    #
+    # It is emptied when `self.reset` is called.
+    def cache
+      @cache ||= {}
+    end
+
     private
 
     def filename_regex
-      @filename_regex ||= %r!\A(#{source_dir}/|#{theme_dir}/|\W*)(.*)!i
+      @filename_regex ||= %r!\A(#{source_dir}/|#{theme_dir}/|/*)(.*)!i
     end
 
     def new_profile_hash

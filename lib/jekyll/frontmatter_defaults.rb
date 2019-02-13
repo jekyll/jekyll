@@ -36,6 +36,7 @@ module Jekyll
     def ensure_time!(set)
       return set unless set.key?("values") && set["values"].key?("date")
       return set if set["values"]["date"].is_a?(Time)
+
       set["values"]["date"] = Utils.parse_date(
         set["values"]["date"],
         "An invalid date format was found in a front-matter default set: #{set}"
@@ -92,9 +93,9 @@ module Jekyll
     # path - the path to check for
     # type - the type (:post, :page or :draft) to check for
     #
-    # Returns true if the scope applies to the given path and type
+    # Returns true if the scope applies to the given type and path
     def applies?(scope, path, type)
-      applies_path?(scope, path) && applies_type?(scope, type)
+      applies_type?(scope, type) && applies_path?(scope, path)
     end
 
     # rubocop:disable Metrics/AbcSize
@@ -122,9 +123,7 @@ module Jekyll
 
     def path_is_subpath?(path, parent_path)
       path.ascend do |ascended_path|
-        if ascended_path.to_s == parent_path.to_s
-          return true
-        end
+        return true if ascended_path.to_s == parent_path.to_s
       end
 
       false
@@ -134,6 +133,7 @@ module Jekyll
       collections_dir  = @site.config["collections_dir"]
       slashed_coll_dir = "#{collections_dir}/"
       return path if collections_dir.empty? || !path.to_s.start_with?(slashed_coll_dir)
+
       path.sub(slashed_coll_dir, "")
     end
 
@@ -188,8 +188,12 @@ module Jekyll
     #
     # Returns an array of hashes
     def matching_sets(path, type)
-      valid_sets.select do |set|
-        !set.key?("scope") || applies?(set["scope"], path, type)
+      @matched_set_cache ||= {}
+      @matched_set_cache[path] ||= {}
+      @matched_set_cache[path][type] ||= begin
+        valid_sets.select do |set|
+          !set.key?("scope") || applies?(set["scope"], path, type)
+        end
       end
     end
 
@@ -216,7 +220,7 @@ module Jekyll
 
     # Sanitizes the given path by removing a leading and adding a trailing slash
 
-    SANITIZATION_REGEX = %r!\A/|(?<=[^/])\z!
+    SANITIZATION_REGEX = %r!\A/|(?<=[^/])\z!.freeze
 
     def sanitize_path(path)
       if path.nil? || path.empty?

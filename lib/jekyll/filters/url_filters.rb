@@ -10,10 +10,13 @@ module Jekyll
       # Returns the absolute URL as a String.
       def absolute_url(input)
         return if input.nil?
+
         input = input.url if input.respond_to?(:url)
         return input if Addressable::URI.parse(input.to_s).absolute?
+
         site = @context.registers[:site]
         return relative_url(input) if site.config["url"].nil?
+
         Addressable::URI.parse(
           site.config["url"].to_s + relative_url(input)
         ).normalize.to_s
@@ -27,6 +30,7 @@ module Jekyll
       # Returns a URL relative to the domain root as a String.
       def relative_url(input)
         return if input.nil?
+
         input = input.url if input.respond_to?(:url)
         return input if Addressable::URI.parse(input.to_s).absolute?
 
@@ -43,6 +47,7 @@ module Jekyll
       # Returns a URL with the trailing `/index.html` removed
       def strip_index(input)
         return if input.nil? || input.to_s.empty?
+
         input.sub(%r!/index\.html?$!, "/")
       end
 
@@ -55,9 +60,9 @@ module Jekyll
 
       def ensure_leading_slash(input)
         return input if input.nil? || input.empty? || input.start_with?("/")
+
         "/#{input}"
       end
-
     end
   end
 end

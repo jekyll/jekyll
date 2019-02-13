@@ -2,7 +2,7 @@
 title: "Travis CI"
 ---
 
-You can easily test your website build against one or more versions of Ruby.
+You can test your website build against one or more versions of Ruby.
 The following guide will show you how to set up a free build environment on
 [Travis][travis], with [GitHub][github] integration for pull requests.
 
@@ -11,7 +11,7 @@ The following guide will show you how to set up a free build environment on
 
 ## 1. Enabling Travis and GitHub
 
-Enabling Travis builds for your GitHub repository is pretty simple:
+To enable Travis builds for your GitHub repository:
 
 1. Go to your profile on travis-ci.org: https://travis-ci.org/profile/username
 2. Find the repository for which you're interested in enabling builds.
@@ -21,7 +21,7 @@ Enabling Travis builds for your GitHub repository is pretty simple:
 
 ## 2. The Test Script
 
-The simplest test script simply runs `jekyll build` and ensures that Jekyll
+The simplest test script runs `jekyll build` and ensures that Jekyll
 doesn't fail to build the site. It doesn't check the resulting site, but it
 does ensure things are built properly.
 
@@ -76,7 +76,7 @@ with Ruby and requires RubyGems to install, we use the Ruby language build
 environment. Below is a sample `.travis.yml` file, followed by
 an explanation of each line.
 
-**Note:** You will need a Gemfile as well, [Travis will automatically install](https://docs.travis-ci.com/user/languages/ruby/#Dependency-Management) the dependencies based on the referenced gems:
+**Note:** You will need a Gemfile as well, [Travis will automatically install](https://docs.travis-ci.com/user/languages/ruby/#Dependency-Management) the dependencies based on the referenced gems. Here is an example `Gemfile` with two referenced gems, "jekyll" and "html-proofer":
 
 ```ruby
 source "https://rubygems.org"
@@ -90,7 +90,7 @@ Your `.travis.yml` file should look like this:
 ```yaml
 language: ruby
 rvm:
-- 2.3.3
+  - 2.4.1
 
 before_script:
  - chmod +x ./script/cibuild # or do this locally and commit
@@ -109,7 +109,18 @@ env:
   global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
 
+addons:
+  apt:
+    packages:
+    - libcurl4-openssl-dev
+
 sudo: false # route your build to the container-based infrastructure for a faster build
+
+cache: bundler # caching bundler gem packages will speed up build
+
+# Optional: disable email notifications about the outcome of your builds
+notifications:
+  email: false
 ```
 
 Ok, now for an explanation of each line:
@@ -123,12 +134,13 @@ access to Bundler, RubyGems, and a Ruby runtime.
 
 ```yaml
 rvm:
-- 2.3.3
+  - 2.4.1
 ```
 
 RVM is a popular Ruby Version Manager (like rbenv, chruby, etc). This
 directive tells Travis the Ruby version to use when running your test
-script.
+script. Use a [version which is pre-installed on the Travis build docker][5]
+image to speed up the build.
 
 ```yaml
 before_script:
@@ -210,6 +222,23 @@ does need `sudo` access, modify the line to `sudo: required`.
 sudo: false
 ```
 
+To speed up the build, you should cache the gem packages created by `bundler`.
+Travis has a pre-defined [cache strategy for this tool][6] which should have
+all the default configs to do exactly that.
+
+```yaml
+cache: bundler
+```
+
+Optionally, if you are not interested in the build email notifications you
+can disable them with this configuration. Travis supports a wide array of
+notification services, you may find [another one more useful (e.g. slack)][7].
+
+```yaml
+notifications:
+  email: false
+```
+
 ### Troubleshooting
 
 **Travis error:** *"You are trying to install in deployment mode after changing
@@ -227,3 +256,6 @@ fix or [ask for help][4] if you run into trouble and need some help.
 
 [3]: https://github.com/jekyll/jekyll/edit/master/docs/_docs/continuous-integration/travis-ci.md
 [4]: https://jekyllrb.com/help/
+[5]: https://docs.travis-ci.com/user/languages/ruby/#Specifying-Ruby-versions-and-implementations
+[6]: https://docs.travis-ci.com/user/caching/#Caching-directories-(Bundler%2C-dependencies)
+[7]: https://docs.travis-ci.com/user/notifications/

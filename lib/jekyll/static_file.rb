@@ -86,7 +86,10 @@ module Jekyll
     # Returns true unless the defaults for the destination path from
     # _config.yml contain `published: false`.
     def write?
-      defaults.fetch("published", true)
+      publishable = defaults.fetch("published", true)
+      return publishable unless @collection
+
+      publishable && @collection.write?
     end
 
     # Write the static file to the destination directory (if modified).
@@ -98,6 +101,7 @@ module Jekyll
       dest_path = destination(dest)
 
       return false if File.exist?(dest_path) && !modified?
+
       self.class.mtimes[path] = mtime
 
       FileUtils.mkdir_p(File.dirname(dest_path))
@@ -133,10 +137,10 @@ module Jekyll
       @url ||= if @collection.nil?
                  relative_path
                else
-                 ::Jekyll::URL.new({
+                 ::Jekyll::URL.new(
                    :template     => @collection.url_template,
-                   :placeholders => placeholders,
-                 })
+                   :placeholders => placeholders
+                 )
                end.to_s.chomp("/")
     end
 
@@ -151,7 +155,14 @@ module Jekyll
       @defaults ||= @site.frontmatter_defaults.all url, type
     end
 
+    # Returns a debug string on inspecting the static file.
+    # Includes only the relative path of the object.
+    def inspect
+      "#<#{self.class} @relative_path=#{relative_path.inspect}>"
+    end
+
     private
+
     def copy_file(dest_path)
       if @site.safe || Jekyll.env == "production"
         FileUtils.cp(path, dest_path)

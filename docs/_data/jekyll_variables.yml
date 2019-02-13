@@ -1,0 +1,175 @@
+# Variables provided by Jekyll core
+#
+#   name:           : name of the variable
+#   description:    : content returned by the varialble
+
+global:
+  - name: site
+    description: >-
+      Site wide information + configuration settings from <code>_config.yml</code>.
+      See below for details.
+  - name: page
+    description: >-
+      Page specific information + the <a href="/docs/front-matter/">front matter</a>.
+      Custom variables set via the front matter will be available here. See below for details.
+  - name: layout
+    description: >-
+      Layout specific information + the <a href="/docs/front-matter/">front matter</a>.
+      Custom variables set via front matter in layouts will be available here.
+  - name: content
+    description: >-
+      In layout files, the rendered content of the Post or Page being wrapped.
+      Not defined in Post or Page files.
+  - name: paginator
+    description: >-
+      When the <code>paginate</code> configuration option is set, this variable becomes available
+      for use. See <a href="../pagination/">Pagination</a> for details.
+
+site:
+  - name: site.time
+    description: >-
+      The current time (when you run the <code>jekyll</code> command).
+  - name: site.pages
+    description: >-
+      A list of all Pages.
+  - name: site.posts
+    description: >-
+      A reverse chronological list of all Posts.
+  - name: site.related_posts
+    description: >-
+      If the page being processed is a Post, this contains a list of up to ten related Posts.
+      By default, these are the ten most recent posts. For high quality but slow to compute
+      results, run the <code>jekyll</code> command with the <code>--lsi</code>
+      (<a href="https://en.wikipedia.org/wiki/Latent_semantic_analysis#Latent_semantic_indexing">latent semantic indexing</a>)
+      option. Also note GitHub Pages does not support the
+      <code>lsi</code> option when generating sites.
+  - name: site.static_files
+    description: >-
+      A list of all <a href="/docs/static-files/">static files</a> (i.e.
+      files not processed by Jekyll's converters or the Liquid renderer).
+      Each file has five properties: <code>path</code>, <code>modified_time</code>,
+      <code>name</code>, <code>basename</code> and <code>extname</code>.
+  - name: site.html_pages
+    description: >-
+      A subset of `site.pages` listing those which end in `.html`.
+  - name: site.html_files
+    description: >-
+      A subset of `site.static_files` listing those which end in `.html`.
+  - name: site.collections
+    description: >-
+      A list of all the collections (including posts).
+  - name: site.data
+    description: >-
+      A list containing the data loaded from the YAML files located in the <code>_data</code>
+      directory.
+  - name: site.documents
+    description: >-
+      A list of all the documents in every collection.
+  - name: site.categories.CATEGORY
+    description: >-
+      The list of all Posts in category <code>CATEGORY</code>.
+  - name: site.tags.TAG
+    description: >-
+      The list of all Posts with tag <code>TAG</code>.
+  - name: site.url
+    description: >-
+      Contains the url of your site as it is configured in the <code>_config.yml</code>.
+      For example, if you have <code>url: http://mysite.com</code> in your configuration file,
+      then it will be accessible in Liquid as <code>site.url</code>. For the development
+      environment there is <a href="/news/#3-siteurl-is-set-by-the-development-server">an
+      exception</a>, if you are running <code>jekyll serve</code> in a development environment
+      <code>site.url</code> will be set to the value of <code>host</code>, <code>port</code>,
+      and SSL-related options. This defaults to <code>url: http://localhost:4000</code>.
+  - name: "site.[CONFIGURATION_DATA]"
+    description: >-
+      All the variables set via the command line and your <code>_config.yml</code> are available
+      through the <code>site</code> variable. For example, if you have <code>foo: bar</code> in
+      your configuration file, then it will be accessible in Liquid as <code>site.foo</code>.
+      Jekyll does not parse changes to <code>_config.yml</code> in
+      <code>watch</code> mode, you must restart Jekyll to see changes to variables.
+
+page:
+  - name: page.content
+    description: >-
+      The content of the Page, rendered or un-rendered depending upon
+      what Liquid is being processed and what <code>page</code> is.
+  - name: page.title
+    description: >-
+      The title of the Page.
+  - name: page.excerpt
+    description: >-
+      The un-rendered excerpt of a document.
+  - name: page.url
+    description: >-
+      The URL of the Post without the domain, but with a leading slash, e.g.
+      <code>/2008/12/14/my-post.html</code>
+  - name: page.date
+    description: >-
+      The Date assigned to the Post. This can be overridden in a Post’s front matter by specifying
+      a new date/time in the format <code>YYYY-MM-DD HH:MM:SS</code> (assuming UTC), or
+      <code>YYYY-MM-DD HH:MM:SS +/-TTTT</code> (to specify a time zone using an offset from UTC.
+      e.g. <code>2008-12-14 10:30:00 +0900</code>).
+  - name: page.id
+    description: >-
+      An identifier unique to a document in a Collection or a Post (useful in RSS feeds). e.g.
+      <code>/2008/12/14/my-post</code><code>/my-collection/my-document</code>
+  - name: page.categories
+    description: >-
+      The list of categories to which this post belongs. Categories are derived from the directory
+      structure above the <code>_posts</code> directory. For example, a post at
+      <code>/work/code/_posts/2008-12-24-closures.md</code> would have this field set to
+      <code>['work', 'code']</code>. These can also be specified in the
+      <a href="/docs/front-matter/">front matter</a>.
+  - name: page.collection
+    description: >-
+      The label of the collection to which this document belongs. e.g. <code>posts</code> for a post, or
+      <code>puppies</code> for a document at path <code>_puppies/rover.md</code>. If not part of a
+      collection, an empty string is returned.
+  - name: page.tags
+    description: >-
+      The list of tags to which this post belongs. These can be specified in the
+      <a href="/docs/front-matter/">front matter</a>.
+  - name: page.dir
+    description: >-
+      The path between the source directory and the file of the post or page,  e.g.
+      <code>/pages/</code>.
+      This can be overridden by <code>permalink</code> in the <a href="/docs/front-matter/">front matter</a>.
+  - name: page.name
+    description: >-
+      The filename of the post or page, e.g. <code>about.md</code>
+  - name: page.path
+    description: >-
+      The path to the raw post or page. Example usage: Linking back to the page or post’s source
+      on GitHub. This can be overridden in the <a href="/docs/front-matter/">front matter</a>.
+  - name: page.next
+    description: >-
+      The next post relative to the position of the current post in <code>site.posts</code>.
+      Returns <code>nil</code> for the last entry.
+  - name: page.previous
+    description: >-
+      The previous post relative to the position of the current post in <code>site.posts</code>.
+      Returns <code>nil</code> for the first entry.
+
+paginator:
+  - name: paginator.page
+    description: The number of the current page
+  - name: paginator.per_page
+    description: Number of posts per page
+  - name: paginator.posts
+    description: Posts available for the current page
+  - name: paginator.total_posts
+    description: Total number of posts
+  - name: paginator.total_pages
+    description: Total number of pages
+  - name: paginator.previous_page
+    description: >-
+      The number of the previous page, or <code>nil</code> if no previous page exists
+  - name: paginator.previous_page_path
+    description: >-
+      The path to the previous page, or <code>nil</code> if no previous page exists
+  - name: paginator.next_page
+    description: >-
+      The number of the next page, or <code>nil</code> if no subsequent page exists
+  - name: paginator.next_page_path
+    description: >-
+      The path to the next page, or <code>nil</code> if no subsequent page exists

@@ -39,13 +39,21 @@ module Jekyll
 
       return unless File.directory?(base)
 
+      dot_dirs = []
+      dot_pages = []
+      dot_static_files = []
+
       dot = Dir.chdir(base) { filter_entries(Dir.entries("."), base) }
-      dot_dirs = dot.select { |file| File.directory?(@site.in_source_dir(base, file)) }
-      dot_files = (dot - dot_dirs)
-      dot_pages = dot_files.select do |file|
-        Utils.has_yaml_header?(@site.in_source_dir(base, file))
+      dot.each do |entry|
+        file_path = @site.in_source_dir(base, entry)
+        if File.directory?(file_path)
+          dot_dirs << entry
+        elsif Utils.has_yaml_header?(file_path)
+          dot_pages << entry
+        else
+          dot_static_files << entry
+        end
       end
-      dot_static_files = dot_files - dot_pages
 
       retrieve_posts(dir)
       retrieve_dirs(base, dir, dot_dirs)
@@ -61,6 +69,7 @@ module Jekyll
     # Returns nothing.
     def retrieve_posts(dir)
       return if outside_configured_directory?(dir)
+
       site.posts.docs.concat(post_reader.read_posts(dir))
       site.posts.docs.concat(post_reader.read_drafts(dir)) if site.show_drafts
     end
@@ -76,9 +85,7 @@ module Jekyll
       dot_dirs.each do |file|
         dir_path = site.in_source_dir(dir, file)
         rel_path = File.join(dir, file)
-        unless @site.dest.chomp("/") == dir_path
-          @site.reader.read_directories(rel_path)
-        end
+        @site.reader.read_directories(rel_path) unless @site.dest.chomp("/") == dir_path
       end
     end
 
@@ -126,6 +133,7 @@ module Jekyll
     def get_entries(dir, subfolder)
       base = site.in_source_dir(dir, subfolder)
       return [] unless File.exist?(base)
+
       entries = Dir.chdir(base) { filter_entries(Dir["**/*"], base) }
       entries.delete_if { |e| File.directory?(site.in_source_dir(base, e)) }
     end
