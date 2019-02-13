@@ -13,16 +13,20 @@ module Jekyll
       # Returns a string that ultimately re-defines ENV["TZ"] in Windows
       def calculate(timezone)
         External.require_with_graceful_fail("tzinfo") unless defined?(TZInfo)
-        tz = TZInfo::Timezone.get(timezone)
-        difference = Time.now.to_i - tz.now.to_i
+        difference = TZInfo::Timezone.get(timezone).now.utc_offset
         #
         # POSIX style definition reverses the offset sign.
         #   e.g. Eastern Standard Time (EST) that is 5Hrs. to the 'west' of Prime Meridian
         #   is denoted as:
         #     EST+5 (or) EST+05:00
         # Reference: http://www.gnu.org/software/libc/manual/html_node/TZ-Variable.html
-        sign = difference.negative? ? "-" : "+"
-        offset = sign == "-" ? "+" : "-" unless difference.zero?
+        if difference.negative?
+          offset = "-"
+          sign   = "+"
+        else
+          offset = "+"
+          sign   = "-"
+        end
         #
         # convert the difference (in seconds) to hours, as a rational number, and perform
         # a modulo operation on it.

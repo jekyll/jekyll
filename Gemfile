@@ -78,8 +78,9 @@ group :jekyll_optional_dependencies do
     gem "yajl-ruby", "~> 1.4"
   end
 
-  # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+  # Windows does not include zoneinfo files, so bundle the tzinfo-data gem and associated library
   gem "tzinfo-data", :platforms => [:mingw, :mswin, :x64_mingw, :jruby]
+  gem "tzinfo", "~> 2.0"
 end
 
 #
