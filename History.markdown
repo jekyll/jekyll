@@ -99,6 +99,7 @@
   * Minor doc fixes (#7495)
   * Changed order of steps (#7503)
   * Hosting with AWS Amplify (#7510)
+  * Fix typo in tutorial for converting existing site (#7524)
 
 ### Minor Enhancements
 
