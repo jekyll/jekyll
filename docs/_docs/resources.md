@@ -37,6 +37,7 @@ Jekyll's growing use is producing a wide variety of tutorials, frameworks, exten
   - [Snipcart](https://snipcart.com/blog/static-site-e-commerce-part-2-integrating-snipcart-with-jekyll): Add a shopping cart to a Jekyll site
   - [Contentful](https://www.contentful.com/ecosystem/jekyll/): use Jekyll together with the API-driven Contentful CMS.
   - [Algolia](https://blog.algolia.com/instant-search-blog-documentation-jekyll-plugin/): Add a powerful instant search to your Jekyll site
+  - [CloudSh](https://cloudsh.com/generators/How-to-setup-search-on-Jekyll/): Website search with a few lines of JavaScript.
 
 ## Other commentary
 
