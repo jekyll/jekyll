@@ -101,6 +101,7 @@
   * Hosting with AWS Amplify (#7510)
   * Fix typo in tutorial for converting existing site (#7524)
   * Add CloudSh to resource page. (#7497)
+  * Docs: check if var exists before include tag (#7530)
 
 ### Minor Enhancements
 
