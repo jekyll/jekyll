@@ -129,6 +129,7 @@
   * Remind user to include gem in the Gemfile on error (#7476)
   * Search Front matter defaults for Page objects with relative_path (#7261)
   * Support for binary operators in where_exp filter (#6998)
+  * Configure cache_dir (#7232)
 
 ### Major Enhancements
 
