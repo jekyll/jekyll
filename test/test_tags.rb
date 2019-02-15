@@ -507,7 +507,7 @@ class TestTags < JekyllUnitTest
 
         {% link contacts.html %}
         {% link info.md %}
-        {% link /css/screen.css %}
+        {% link css/screen.css %}
       CONTENT
       create_post(content,
                   "source"      => source_dir,
@@ -544,7 +544,7 @@ class TestTags < JekyllUnitTest
         {% link {{contacts_filename}}.{{contacts_ext}} %}
         {% assign info_path = 'info.md' %}
         {% link {{\ info_path\ }} %}
-        {% assign screen_css_path = '/css' %}
+        {% assign screen_css_path = 'css' %}
         {% link {{ screen_css_path }}/screen.css %}
       CONTENT
       create_post(content,

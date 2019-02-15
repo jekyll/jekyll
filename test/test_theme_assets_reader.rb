@@ -29,7 +29,7 @@ class TestThemeAssetsReader < JekyllUnitTest
     should "read all assets" do
       @site.reset
       ThemeAssetsReader.new(@site).read
-      assert_file_with_relative_path @site.static_files, "/assets/img/logo.png"
+      assert_file_with_relative_path @site.static_files, "assets/img/logo.png"
       assert_file_with_relative_path @site.pages, "assets/style.scss"
     end
 
@@ -48,7 +48,7 @@ class TestThemeAssetsReader < JekyllUnitTest
 
       file = @site.pages.find { |f| f.relative_path == "assets/application.coffee" }
       static_script = File.read(
-        @site.static_files.find { |f| f.relative_path == "/assets/base.js" }.path
+        @site.static_files.find { |f| f.relative_path == "assets/base.js" }.path
       )
       refute_nil file
       refute_nil static_script
@@ -62,7 +62,7 @@ class TestThemeAssetsReader < JekyllUnitTest
       site = fixture_site("theme" => "test-theme")
       allow(site.theme).to receive(:assets_path).and_return(nil)
       ThemeAssetsReader.new(site).read
-      refute_file_with_relative_path site.static_files, "/assets/img/logo.png"
+      refute_file_with_relative_path site.static_files, "assets/img/logo.png"
       refute_file_with_relative_path site.pages, "assets/style.scss"
     end
   end
@@ -71,7 +71,7 @@ class TestThemeAssetsReader < JekyllUnitTest
     should "not read any assets" do
       site = fixture_site("theme" => nil)
       ThemeAssetsReader.new(site).read
-      refute_file_with_relative_path site.static_files, "/assets/img/logo.png"
+      refute_file_with_relative_path site.static_files, "assets/img/logo.png"
       refute_file_with_relative_path site.pages, "assets/style.scss"
     end
   end
