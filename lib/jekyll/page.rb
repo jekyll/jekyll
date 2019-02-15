@@ -4,6 +4,7 @@ module Jekyll
   class Page
     include Convertible
 
+    attr_reader :relative_path
     attr_writer :dir
     attr_accessor :site, :pager
     attr_accessor :name, :ext, :basename
@@ -45,6 +46,7 @@ module Jekyll
               else
                 site.in_source_dir(base, dir, name)
               end
+      @relative_path = File.join([@dir, @name].compact).sub(%r!\A\/!, "")
 
       process(name)
       read_yaml(File.join(base, dir), name)
@@ -140,11 +142,6 @@ module Jekyll
     # Returns the path to the source file
     def path
       data.fetch("path") { relative_path }
-    end
-
-    # The path to the page source file, relative to the site source
-    def relative_path
-      @relative_path ||= File.join(*[@dir, @name].map(&:to_s).reject(&:empty?)).sub(%r!\A\/!, "")
     end
 
     # Obtain destination path.
