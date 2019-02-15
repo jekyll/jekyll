@@ -52,6 +52,10 @@ Gem::Specification.new do |s|
       * Our `link` tag now comes with the `relative_url` filter incorporated into it.
         You should no longer prepend `{{ site.baseurl }}` to `{% link foo.md %}`
         For further details: https://github.com/jekyll/jekyll/pull/6727
+
+      * StaticFile objects no longer have a leading slash in their relative path
+        So please correct `{% link /css/screen.css %}` to `{% link css/screen.css %}`
+        For further details: https://github.com/jekyll/jekyll/pull/7529
     ----------------------------------------------------------------------------------
   MSG
 end
