@@ -20,7 +20,7 @@
 
   - I've added tests (if it's a bug, feature or enhancement)
   - I've adjusted the documentation (if it's a feature or enhancement)
-  - The test suite passes (run `script/cibuild` to verify this)
+  - The test suite passes locally (run `script/cibuild` to verify this)
 -->
 
 ## Summary
@@ -33,11 +33,13 @@
 
 <!--
   Is this related to any GitHub issue(s)?
--->
 
-## Semver Changes
+  You can use keywords to automatically close the related issue.
+  For example, (all of) the following will close issue #4567 when your PR is merged.
 
-<!--
-  Which semantic version change would you recommend?
-  If you don't know, feel free to omit it.
+  Closes #4567
+  Fixes #4567
+  Resolves #4567
+
+  Use any one of the above as applicable.
 -->
