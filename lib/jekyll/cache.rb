@@ -10,6 +10,17 @@ module Jekyll
     # class-wide directive to write cache to disk is enabled by default
     @disk_cache_enabled = true
 
+    class << self
+      # class-wide cache location
+      attr_accessor :cache_dir
+
+      # class-wide directive to write cache to disk
+      attr_reader :disk_cache_enabled
+
+      # class-wide base cache reader
+      attr_reader :base_cache
+    end
+
     # Get an existing named cache, or create a new one if none exists
     #
     # name - name of the cache
@@ -18,23 +29,6 @@ module Jekyll
     def initialize(name)
       @cache = Jekyll::Cache.base_cache[name] ||= {}
       @name = name.gsub(%r![^\w\s-]!, "-")
-    end
-
-    # Set class-wide cache_dir
-    def self.cache_dir=(dir_path)
-      @cache_dir = dir_path
-    end
-
-    def self.cache_dir
-      @cache_dir
-    end
-
-    def self.base_cache
-      @base_cache
-    end
-
-    def self.disk_cache_enabled
-      @disk_cache_enabled
     end
 
     # Disable Marshaling cached items to disk
