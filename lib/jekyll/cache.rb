@@ -113,8 +113,7 @@ module Jekyll
     end
 
     # If an item already exists in the cache, retrieve it
-    # Else execute code block, and add the result to the cache, and return that
-    #   result
+    # Else execute code block, and add the result to the cache, and return that result.
     def getset(key)
       self[key]
     rescue StandardError
@@ -154,8 +153,7 @@ module Jekyll
 
     private
 
-    # Given a hashed key, return the path to where this item would be saved on
-    # disk
+    # Given a hashed key, return the path to where this item would be saved on disk.
     def path_to(hash = nil)
       @base_dir ||= File.join(Jekyll::Cache.cache_dir, @name)
       return @base_dir if hash.nil?
@@ -163,8 +161,7 @@ module Jekyll
       File.join(@base_dir, hash[0..1], hash[2..-1]).freeze
     end
 
-    # Given a key, return a SHA2 hash that can be used for caching this item to
-    # disk
+    # Given a key, return a SHA2 hash that can be used for caching this item to disk.
     def hash(key)
       Digest::SHA2.hexdigest(key).freeze
     end
