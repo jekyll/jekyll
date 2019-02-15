@@ -42,6 +42,41 @@ module Jekyll
       base_cache.each_value(&:clear)
     end
 
+    # Compare the current config to the cached config
+    # If they are different, clear all caches
+    #
+    # Returns nothing.
+    def self.clear_if_config_changed(config)
+      config = config.inspect
+      cache = Jekyll::Cache.new "Jekyll::Cache"
+      return if cache.key?("config") && cache["config"] == config
+
+      clear
+      cache = Jekyll::Cache.new "Jekyll::Cache"
+      cache["config"] = config
+      nil
+    end
+
+    # Delete all cached items from all caches
+    #
+    # Returns nothing.
+    def self.delete_cache_files
+      FileUtils.rm_rf(@cache_dir) if disk_cache_enabled
+    end
+    private_class_method :delete_cache_files
+
+    #
+
+    # Get an existing named cache, or create a new one if none exists
+    #
+    # name - name of the cache
+    #
+    # Returns nothing.
+    def initialize(name)
+      @cache = Jekyll::Cache.base_cache[name] ||= {}
+      @name = name.gsub(%r![^\w\s-]!, "-")
+    end
+
     # Clear this particular cache
     def clear
       delete_cache_files
@@ -113,21 +148,6 @@ module Jekyll
       File.file?(path) && File.readable?(path)
     end
 
-    # Compare the current config to the cached config
-    # If they are different, clear all caches
-    #
-    # Returns nothing.
-    def self.clear_if_config_changed(config)
-      config = config.inspect
-      cache = Jekyll::Cache.new "Jekyll::Cache"
-      return if cache.key?("config") && cache["config"] == config
-
-      clear
-      cache = Jekyll::Cache.new "Jekyll::Cache"
-      cache["config"] = config
-      nil
-    end
-
     def disk_cache_enabled?
       !!self.class.disk_cache_enabled
     end
@@ -155,14 +175,6 @@ module Jekyll
     def delete_cache_files
       FileUtils.rm_rf(path_to) if disk_cache_enabled?
     end
-
-    # Delete all cached items from all caches
-    #
-    # Returns nothing.
-    def self.delete_cache_files
-      FileUtils.rm_rf(@cache_dir) if disk_cache_enabled
-    end
-    private_class_method :delete_cache_files
 
     # Load `path` from disk and return the result
     # This MUST NEVER be called in Safe Mode
