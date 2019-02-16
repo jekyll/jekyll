@@ -208,6 +208,7 @@
   * Dont write static files from unrendered collection (#7410)
   * Excerpt handling of custom and intermediate tags (#7382)
   * changed future post loglevel to warn to help user narrow down issues (#7527)
+  * Handle files with trailing dots in their basename (#7315)
 
 ### feature
 
