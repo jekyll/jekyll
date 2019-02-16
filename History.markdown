@@ -150,6 +150,7 @@
   * Ignore cache directory (#7184)
   * Incorporate `relative_url` filter in `link` tag (#6727)
   * Only read layouts from source_dir or theme_dir (#6788)
+  * Allow custom sorting of collection documents (#7427)
 
 ### Development Fixes
 
