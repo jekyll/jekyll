@@ -19,41 +19,42 @@ module Jekyll
 
       # class-wide base cache reader
       attr_reader :base_cache
-    end
 
-    # Disable Marshaling cached items to disk
-    def self.disable_disk_cache!
-      @disk_cache_enabled = false
-    end
+      # Disable Marshaling cached items to disk
+      def disable_disk_cache!
+        @disk_cache_enabled = false
+      end
 
-    # Clear all caches
-    def self.clear
-      delete_cache_files
-      base_cache.each_value(&:clear)
-    end
+      # Clear all caches
+      def clear
+        delete_cache_files
+        base_cache.each_value(&:clear)
+      end
 
-    # Compare the current config to the cached config
-    # If they are different, clear all caches
-    #
-    # Returns nothing.
-    def self.clear_if_config_changed(config)
-      config = config.inspect
-      cache = Jekyll::Cache.new "Jekyll::Cache"
-      return if cache.key?("config") && cache["config"] == config
+      # Compare the current config to the cached config
+      # If they are different, clear all caches
+      #
+      # Returns nothing.
+      def clear_if_config_changed(config)
+        config = config.inspect
+        cache = Jekyll::Cache.new "Jekyll::Cache"
+        return if cache.key?("config") && cache["config"] == config
 
-      clear
-      cache = Jekyll::Cache.new "Jekyll::Cache"
-      cache["config"] = config
-      nil
-    end
+        clear
+        cache = Jekyll::Cache.new "Jekyll::Cache"
+        cache["config"] = config
+        nil
+      end
 
-    # Delete all cached items from all caches
-    #
-    # Returns nothing.
-    def self.delete_cache_files
-      FileUtils.rm_rf(@cache_dir) if disk_cache_enabled
+      private
+
+      # Delete all cached items from all caches
+      #
+      # Returns nothing.
+      def delete_cache_files
+        FileUtils.rm_rf(@cache_dir) if disk_cache_enabled
+      end
     end
-    private_class_method :delete_cache_files
 
     #
 
@@ -138,7 +139,7 @@ module Jekyll
     end
 
     def disk_cache_enabled?
-      !!self.class.disk_cache_enabled
+      !!Jekyll::Cache.disk_cache_enabled
     end
 
     private
