@@ -21,16 +21,6 @@ module Jekyll
       attr_reader :base_cache
     end
 
-    # Get an existing named cache, or create a new one if none exists
-    #
-    # name - name of the cache
-    #
-    # Returns nothing.
-    def initialize(name)
-      @cache = Jekyll::Cache.base_cache[name] ||= {}
-      @name = name.gsub(%r![^\w\s-]!, "-")
-    end
-
     # Disable Marshaling cached items to disk
     def self.disable_disk_cache!
       @disk_cache_enabled = false
