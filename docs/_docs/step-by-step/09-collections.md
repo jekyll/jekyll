@@ -118,6 +118,7 @@ Add the link to the `staff.html` page:
 ```html
 ---
 layout: default
+title: Staff
 ---
 <h1>Staff</h1>
 
@@ -186,8 +187,10 @@ defaults:
       layout: "default"
 ```
 
-Now you can remove layout from the front matter of all pages and posts. Note
-that any time you update `_config.yml` you'll need to restart Jekyll for the
+Now you can remove layout from the front matter of all pages and posts. 
+Do not remove layout form `_layouts/post.html` and form `_layouts/author.html`. 
+Remember page can only have one layout.
+Note that any time you update `_config.yml` you'll need to restart Jekyll for the
 changes to take affect.
 
 ## List author's posts
