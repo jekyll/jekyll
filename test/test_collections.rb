@@ -140,6 +140,7 @@ class TestCollections < JekyllUnitTest
           _methods/escape-+\ #%20[].md
           _methods/yaml_with_dots.md
           _methods/3940394-21-9393050-fifif1323-test.md
+          _methods/trailing-dots...md
         ), doc.relative_path
       end
     end

@@ -811,7 +811,7 @@ class TestFilters < JekyllUnitTest
               "The list of grouped items for '' is not an Array."
             )
             # adjust array.size to ignore symlinked page in Windows
-            qty = Utils::Platforms.really_windows? ? 14 : 15
+            qty = Utils::Platforms.really_windows? ? 15 : 16
             assert_equal qty, g["items"].size
           end
         end
@@ -1031,7 +1031,7 @@ class TestFilters < JekyllUnitTest
               "The list of grouped items for '' is not an Array."
             )
             # adjust array.size to ignore symlinked page in Windows
-            qty = Utils::Platforms.really_windows? ? 14 : 15
+            qty = Utils::Platforms.really_windows? ? 15 : 16
             assert_equal qty, g["items"].size
           end
         end

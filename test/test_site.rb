@@ -239,6 +239,7 @@ class TestSite < JekyllUnitTest
         properties.html
         sitemap.xml
         static_files.html
+        trailing-dots...md
       )
       unless Utils::Platforms.really_windows?
         # files in symlinked directories may appear twice

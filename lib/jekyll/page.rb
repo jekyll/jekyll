@@ -116,10 +116,11 @@ module Jekyll
     #
     # name - The String filename of the page file.
     #
+    # NOTE: `String#gsub` removes all trailing periods (in comparison to `String#chomp`)
     # Returns nothing.
     def process(name)
       self.ext = File.extname(name)
-      self.basename = name[0..-ext.length - 1]
+      self.basename = name[0..-ext.length - 1].gsub(%r!\.*\z!, "")
     end
 
     # Add any necessary layouts to this post
