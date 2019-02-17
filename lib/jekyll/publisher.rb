@@ -7,7 +7,8 @@ module Jekyll
     end
 
     def publish?(thing)
-      can_be_published?(thing) && !hidden_in_the_future?(thing)
+      can_publish = can_be_published?(thing)
+      can_publish || (can_publish.nil? && !hidden_in_the_future?(thing))
     end
 
     def hidden_in_the_future?(thing)
@@ -17,7 +18,12 @@ module Jekyll
     private
 
     def can_be_published?(thing)
-      thing.data.fetch("published", true) || @site.unpublished
+      published = thing.data.fetch("published", nil)
+      if published.nil? || @site.unpublished
+        nil
+      else
+        published
     end
+    
   end
 end
