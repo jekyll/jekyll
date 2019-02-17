@@ -23,6 +23,7 @@ module Jekyll
         nil
       else
         published
+      end
     end
     
   end
