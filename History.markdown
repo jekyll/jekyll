@@ -153,6 +153,7 @@
   * Incorporate `relative_url` filter in `link` tag (#6727)
   * Only read layouts from source_dir or theme_dir (#6788)
   * Allow custom sorting of collection documents (#7427)
+  * Always exclude certain paths from being processed (#7188)
 
 ### Development Fixes
 
