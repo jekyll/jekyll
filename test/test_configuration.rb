@@ -29,7 +29,7 @@ class TestConfiguration < JekyllUnitTest
       expected = { "posts" => {
         "output"    => true,
         "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
-      }, }
+      } }
       assert_equal expected, result["collections"]
     end
 
@@ -95,7 +95,7 @@ class TestConfiguration < JekyllUnitTest
       expected = { "posts" => {
         "output"    => true,
         "permalink" => "/:categories/:year/:month/:day/:title/",
-      }, }
+      } }
       assert_equal expected, result["collections"]
 
       result = Configuration[{ "permalink" => nil, "collections" => {} }]
@@ -160,6 +160,17 @@ class TestConfiguration < JekyllUnitTest
     end
     should "return .yml if both .yml and .yaml exist" do
       allow(File).to receive(:exist?).with(source_dir("_config.yml")).and_return(true)
+      assert_equal [source_dir("_config.yml")], @config.config_files(@no_override)
+    end
+    should "return .toml if that exists" do
+      allow(File).to receive(:exist?).with(source_dir("_config.yml")).and_return(false)
+      allow(File).to receive(:exist?).with(source_dir("_config.yaml")).and_return(false)
+      allow(File).to receive(:exist?).with(source_dir("_config.toml")).and_return(true)
+      assert_equal [source_dir("_config.toml")], @config.config_files(@no_override)
+    end
+    should "return .yml if both .yml and .toml exist" do
+      allow(File).to receive(:exist?).with(source_dir("_config.yml")).and_return(true)
+      allow(File).to receive(:exist?).with(source_dir("_config.toml")).and_return(true)
       assert_equal [source_dir("_config.yml")], @config.config_files(@no_override)
     end
     should "return the config if given one config file" do

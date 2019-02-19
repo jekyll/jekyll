@@ -3,10 +3,11 @@ title: Assets
 permalink: /docs/assets/
 ---
 
-Jekyll provides built-in support for Sass and can work with CoffeeScript via
-a Ruby gem. In order to use them, you must first create a file with the
-proper extension name (one of `.sass`, `.scss`, or `.coffee`) and ***start the
-file with two lines of triple dashes***, like this:
+Jekyll provides built-in support for [Sass](https://sass-lang.com/)
+and can work with [CoffeeScript](https://coffeescript.org/) via a Ruby gem.
+In order to use them, you must first create a file with the proper extension
+name (one of `.sass`, `.scss`, or `.coffee`) and
+***start the file with two lines of triple dashes***, like this:
 
 ```sass
 ---
@@ -42,8 +43,7 @@ them to be in the output file, such as `<source>/css`. For an example, take
 a look at [this example site using Sass support in Jekyll][example-sass].
 
 If you are using Sass `@import` statements, you'll need to ensure that your
-`sass_dir` is set to the base directory that contains your Sass files. You
-can do that thusly:
+`sass_dir` is set to the base directory that contains your Sass files:
 
 ```yaml
 sass:
@@ -61,8 +61,8 @@ The Sass converter will default the `sass_dir` configuration option to
 
     Note that the <code>sass_dir</code> becomes the load path for Sass imports,
     nothing more. This means that Jekyll does not know about these files
-    directly, so any files here should not contain the YAML Front Matter as
-    described above nor will they be transformed as described above. This
+    directly. Any files here should not contain the empty front matter as
+    described above. If they do, they'll not be transformed as described above. This
     folder should only contain imports.
 
   </p>
@@ -89,5 +89,5 @@ To enable Coffeescript in Jekyll 3.0 and up you must
 
 ```yaml
 plugins:
- - jekyll-coffeescript
+  - jekyll-coffeescript
 ```

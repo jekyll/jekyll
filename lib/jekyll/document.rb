@@ -10,9 +10,9 @@ module Jekyll
 
     def_delegator :self, :read_post_data, :post_read
 
-    YAML_FRONT_MATTER_REGEXP = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m
-    DATELESS_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.[^.]+)$!
-    DATE_FILENAME_MATCHER = %r!^(?:.+/)*(\d{2,4}-\d{1,2}-\d{1,2})-(.*)(\.[^.]+)$!
+    YAML_FRONT_MATTER_REGEXP = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m.freeze
+    DATELESS_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.[^.]+)$!.freeze
+    DATE_FILENAME_MATCHER = %r!^(?:.+/)*(\d{2,4}-\d{1,2}-\d{1,2})-(.*)(\.[^.]+)$!.freeze
 
     # Create a new Document.
     #
@@ -60,12 +60,19 @@ module Jekyll
       data
     end
 
+    # Returns the document date. If metadata is not present then calculates it
+    # based on Jekyll::Site#time or the document file modification time.
+    #
+    # Return document date string.
     def date
       data["date"] ||= (draft? ? source_file_mtime : site.time)
     end
 
+    # Return document file modification time in the form of a Time object.
+    #
+    # Return document file modification Time object.
     def source_file_mtime
-      @source_file_mtime ||= File.mtime(path)
+      File.mtime(path)
     end
 
     # Returns whether the document is a draft. This is only the case if
@@ -112,15 +119,19 @@ module Jekyll
     #   and with the collection's directory removed as well.
     # This method is useful when building the URL of the document.
     #
+    # NOTE: `String#gsub` removes all trailing periods (in comparison to `String#chomp`)
+    #
     # Examples:
-    #   When relative_path is "_methods/site/generate.md":
+    #   When relative_path is "_methods/site/generate...md":
     #     cleaned_relative_path
     #     # => "/site/generate"
     #
     # Returns the cleaned relative path of the document.
     def cleaned_relative_path
       @cleaned_relative_path ||=
-        relative_path[0..-extname.length - 1].sub(collection.relative_directory, "")
+        relative_path[0..-extname.length - 1]
+          .sub(collection.relative_directory, "")
+          .gsub(%r!\.*\z!, "")
     end
 
     # Determine whether the document is a YAML file.
@@ -160,6 +171,7 @@ module Jekyll
     #   true otherwise.
     def render_with_liquid?
       return false if data["render_with_liquid"] == false
+
       !(coffeescript_file? || yaml_file? || !Utils.has_liquid_construct?(content))
     end
 
@@ -287,7 +299,7 @@ module Jekyll
     #
     # Returns the inspect string for this document.
     def inspect
-      "#<Jekyll::Document #{relative_path} collection=#{collection.label}>"
+      "#<#{self.class} #{relative_path} collection=#{collection.label}>"
     end
 
     # The string representation for this document.
@@ -304,6 +316,7 @@ module Jekyll
     #   equal or greater than the other doc's path. See String#<=> for more details.
     def <=>(other)
       return nil unless other.respond_to?(:data)
+
       cmp = data["date"] <=> other.data["date"]
       cmp = path <=> other.path if cmp.nil? || cmp.zero?
       cmp
@@ -473,6 +486,10 @@ module Jekyll
       elsif relative_path =~ DATELESS_FILENAME_MATCHER
         slug, ext = Regexp.last_match.captures
       end
+
+      # slugs shouldn't end with a period
+      # `String#gsub!` removes all trailing periods (in comparison to `String#chomp!`)
+      slug.gsub!(%r!\.*\z!, "")
 
       # Try to ensure the user gets a title.
       data["title"] ||= Utils.titleize_slug(slug)

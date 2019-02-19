@@ -152,6 +152,7 @@ module Jekyll
     # Returns true is the string contains sequences of `{%` or `{{`
     def has_liquid_construct?(content)
       return false if content.nil? || content.empty?
+
       content.include?("{%") || content.include?("{{")
     end
     # rubocop: enable PredicateName
@@ -292,8 +293,10 @@ module Jekyll
     # Returns matched pathes
     def safe_glob(dir, patterns, flags = 0)
       return [] unless Dir.exist?(dir)
+
       pattern = File.join(Array(patterns))
       return [dir] if pattern.empty?
+
       Dir.chdir(dir) do
         Dir.glob(pattern, flags).map { |f| File.join(dir, f) }
       end
