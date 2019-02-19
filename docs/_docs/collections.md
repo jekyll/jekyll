@@ -44,7 +44,10 @@ collections:
 Create a corresponding folder (e.g. `<source>/_staff_members`) and add
 documents. Front matter is processed if the front matter exists, and everything
 after the front matter is pushed into the document's `content` attribute. If no front
-matter is provided, Jekyll will not generate the file in your collection.
+matter is provided, Jekyll will consider it to be a [static file](/docs/static-files/)
+and copy it to the destination (e.g. `_site`) without processing. If front matter
+is provided, Jekyll will process the file in your collection but will not write to disk
+unless `output: true` is set in the collection's metadata.
 
 For example here's how you would add a staff member to the collection set above.
 The filename is `./_staff_members/jane.md` with the following content:
