@@ -18,6 +18,9 @@ matrix:
     - rvm: *ruby1
       env: TEST_SUITE=default-site
       name: "🏠️ Default Site"
+    - rvm: *ruby1
+      env: TEST_SUITE=profile-docs
+      name: "Profile Docs"
   exclude:
     - rvm: *jruby
       env: TEST_SUITE=cucumber
