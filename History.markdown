@@ -194,6 +194,7 @@
   * Update rubocop to ~&gt; 0.63.1 (#7489)
   * dev: update gemspec (#7425)
   * Test with Ruby 2.6 on AppVeyor [skip travis] (#7518)
+  * Add a script to profile docs with CI (#7540)
 
 ### Bug Fixes
 
