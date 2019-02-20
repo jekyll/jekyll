@@ -104,6 +104,7 @@
   * Docs: check if var exists before include tag (#7530)
   * Added formX to form-backend resources (#7536)
   * Clarify docs on collections regarding the need for front matter (#7538)
+  * Fix incorrect Windows path in themes.md (#7525)
 
 ### Minor Enhancements
 
