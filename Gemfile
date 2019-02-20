@@ -28,7 +28,7 @@ group :test do
   gem "rspec-mocks"
   # Temporary lock on RuboCop version for Windows since Pysch-3.1.0 is not available
   # for use on Ruby 2.6-mingw32 platforms
-  gem "rubocop", "~> 0.64.0" if Gem.win_platform?
+  gem "rubocop", Gem.win_platform? ? "~> 0.64.0" : "~> 0.65.0"
   gem "test-dependency-theme", :path => File.expand_path("test/fixtures/test-dependency-theme", __dir__)
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)
   gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
