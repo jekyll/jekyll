@@ -106,14 +106,18 @@ module Jekyll
         raise IOError, could_not_locate_message(file, includes_dirs, safe)
       end
 
+      # rubocop:disable Metrics/AbcSize
       def render(context)
+        context.registers[:include_file_path] ||= {}
+        file_path_cache = context.registers[:include_file_path]
+
         site = context.registers[:site]
 
         file = render_variable(context) || @file
         validate_file_name(file)
 
-        path = locate_include_file(context, file, site.safe)
-        return unless path
+        file_path_cache[file] ||= locate_include_file(context, file, site.safe)
+        return unless (path = file_path_cache[file])
 
         add_include_to_dependency(site, path, context)
 
@@ -130,6 +134,7 @@ module Jekyll
           end
         end
       end
+      # rubocop:enable Metrics/AbcSize
 
       def add_include_to_dependency(site, path, context)
         if context.registers[:page]&.key?("path")
