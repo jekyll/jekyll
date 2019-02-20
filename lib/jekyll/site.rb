@@ -2,7 +2,7 @@
 
 module Jekyll
   class Site
-    attr_reader   :source, :dest, :config
+    attr_reader   :source, :dest, :cache_dir, :config
     attr_accessor :layouts, :pages, :static_files, :drafts,
                   :exclude, :include, :lsi, :highlighter, :permalink_style,
                   :time, :future, :unpublished, :safe, :plugins, :limit_posts,
@@ -21,6 +21,8 @@ module Jekyll
       @dest            = File.expand_path(config["destination"]).freeze
 
       self.config = config
+
+      @cache_dir       = in_source_dir(config["cache_dir"])
 
       @reader          = Reader.new(self)
       @regenerator     = Regenerator.new(self)
@@ -397,6 +399,18 @@ module Jekyll
     # Returns a path which is prefixed with the destination directory.
     def in_dest_dir(*paths)
       paths.reduce(dest) do |base, path|
+        Jekyll.sanitized_path(base, path)
+      end
+    end
+
+    # Public: Prefix a given path with the cache directory.
+    #
+    # paths - (optional) path elements to a file or directory within the
+    #         cache directory
+    #
+    # Returns a path which is prefixed with the cache directory.
+    def in_cache_dir(*paths)
+      paths.reduce(cache_dir) do |base, path|
         Jekyll.sanitized_path(base, path)
       end
     end
