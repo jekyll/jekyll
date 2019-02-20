@@ -75,7 +75,7 @@ cd my_jekyll_site
 jekyll serve
 ```
 
-If you have a Gemfile, [use Bundler]({% link _docs/quickstart.md %}#about-bundler) by typing `bundle exec jekyll serve` instead.
+If you have a Gemfile, [use Bundler](/docs/ruby-101/#bundler) by typing `bundle exec jekyll serve` instead.
 {: .note .info}
 
 When you serve the site, you get a preview URL such as `http://127.0.0.1:4000/` (which is the same as `http://localhost:4000/`). The site's files are built into the `_site` folder by default.
@@ -83,7 +83,7 @@ When you serve the site, you get a preview URL such as `http://127.0.0.1:4000/` 
 This is a Jekyll site at the most basic functional level. Here's what is happening:
 
   * The `_config.yml` file contains settings that Jekyll uses as it processes your site. An empty config file will use default values for building a Jekyll site. For example, to convert [Markdown](https://learnxinyminutes.com/docs/markdown/) to HTML, Jekyll will automatically use the [kramdown Markdown filter](https://rubygems.org/gems/kramdown/), without any need to specify it.
-  * Jekyll looks for files with [front matter tags]({% link _docs/frontmatter.md %}) (the two sets of dashed lines `---` like those in `index.md`) and processes the files (populating site variables, rendering any [Liquid](https://shopify.github.io/liquid/), and converting Markdown to HTML).
+  * Jekyll looks for files with [front matter tags]({% link _docs/front-matter.md %}) (the two sets of dashed lines `---` like those in `index.md`) and processes the files (populating site variables, rendering any [Liquid](https://shopify.github.io/liquid/), and converting Markdown to HTML).
   * Jekyll pushes the content from all pages and posts into the `{% raw %}{{ content }}{% endraw %}` variable in the layout specified (`default`) in the front matter tags.
   * The processed files get written as `.html` files in the `_site` directory.
 
@@ -102,13 +102,13 @@ Regardless of the site, do check the license and make sure you have permission t
 
 Copy and paste the source code into a file called `default.html`. Put the `default.html` file inside the `_layouts` folder. This will be the default layout template for your pages and posts &mdash; that is, each page or post will use this layout when Jekyll builds the site.
 
-Note that in looking for templates, you want the HTML output of the template. If the template has PHP tags or other dynamic scripts, these dynamic elements will need to be converted to HTML or to [Liquid](https://shopify.github.io/liquid/). Liquid is [Jekyll templating system]({% link _docs/templates.md %}) to retrieve dynamic content.
+Note that in looking for templates, you want the HTML output of the template. If the template has PHP tags or other dynamic scripts, these dynamic elements will need to be converted to HTML or to [Liquid](https://shopify.github.io/liquid/). Liquid is [Jekyll templating system](/docs/liquid/) to retrieve dynamic content.
 
 Open `default.html` into your browser locally to ensure the site looks and behaves like it does online. You will likely need to adjust CSS, JS, and image paths so they work.
 
 For example, if the paths were relative on the site you copied, you'll need to either download the same assets into your Jekyll site or use absolute paths to the same assets in the cloud. (Syntax such as `src="//` requires a prefix such as `src="http://` to work in your local browser.)
 
-Jekyll provides some [filters]({% link _docs/templates.md %}#filters) to prepend a site URL before path. For example, you could preface your stylesheet like this:
+Jekyll provides some [filters](/docs/liquid/filters) to prepend a site URL before path. For example, you could preface your stylesheet like this:
 
 ```liquid
 {% raw %}{{ "/assets/style.css" | relative_url }}{% endraw %}
@@ -202,7 +202,7 @@ layout: homepage
 
 This page would then use the `homepage.html` template in the `_layouts` folder.
 
-You can even set [default front matter tags]({% link _docs/configuration.md %}#front-matter-defaults) for pages, posts, or [collections]({% link _docs/collections.md %}) in your `_config.yml` file so that you don't have to specify the layout in the front matter variables. Anywayd, setting defaults is beyond the scope of this tutorial, let's get back to work.
+You can even set [default front matter tags](/docs/configuration/front-matter-defaults/) for pages, posts, or [collections]({% link _docs/collections.md %}) in your `_config.yml` file so that you don't have to specify the layout in the front matter variables. Anyways, setting defaults is beyond the scope of this tutorial, let's get back to work.
 
 ## 6. Configure site variables
 
@@ -316,7 +316,8 @@ We've only scratched the surface of what you can do with `for` loops in retrievi
     <li><a href="{{ post.url }}">{{ post.title}}</a>
     <span class="postDate">{{ post.date | date: "%b %-d, %Y" }}</span>
     </li>
-{% endfor %}{% endraw %}
+{% endfor %}
+</ul>{% endraw %}
 ```
 
 This loop would get the latest three posts that have a category called `podcasts` in the front matter.
@@ -416,6 +417,10 @@ layout: null
         <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
         {% for post in site.posts %}
         <item>
+            <title>{{ post.title }}</title>
+            <link>
+                {{ post.url | prepend: site.url }}
+            </link>
             <description>
                 {{ post.content | escape | truncate: '400' }}
             </description>
@@ -439,7 +444,7 @@ In your `default.html` layout, look for a reference to the RSS or Atom feed in y
 <link rel="alternate" type="application/rss+xml"  href="{% raw %}{{ site.url }}{% endraw %}/feed.xml" title="{% raw %}{{ site.title }}{% endraw %}">
 ```
 
-You can also auto-generate your posts feed by adding a gem called [`jekyll-feed`][jekyll-feed]. This gem will also work on GitHub Pages.
+You can also auto-generate your posts feed by adding a gem called [`jekyll-feed`](https://help.github.com/articles/atom-rss-feeds-for-github-pages/). This gem will also work on GitHub Pages.
 
 ## 11. Add a sitemap
 
@@ -477,7 +482,7 @@ search: exclude
 
 Again, we're using a `for` loop here to iterate through all posts and pages to add them to the sitemap.
 
-You can also auto-generate your sitemap by adding a gem called [`jekyll-sitemap`][jekyll-sitemap]. This gem will also work on GitHub Pages.
+You can also auto-generate your sitemap by adding a gem called [`jekyll-sitemap`](https://help.github.com/articles/sitemaps-for-github-pages/). This gem will also work on GitHub Pages.
 
 ## 12. Add external services
 
@@ -508,7 +513,7 @@ Although websites can implement more sophisticated features and functionality, w
 
 To deploy your site, consider using [GitHub Pages](https://pages.github.com/), [Netlify](https://www.netlify.com/), [Amazon AWS S3](https://aws.amazon.com/s3/) using the [s3_website plugin](https://github.com/laurilehmijoki/s3_website), or just FTP your files to your web server.
 
-You can also package your layouts, includes and assets into a Ruby `gem` and [make it a Jekyll theme]({% link _docs/themes.md %}#creating-a-theme).
+You can also package your layouts, includes and assets into a Ruby `gem` and [make it a Jekyll theme](/docs/themes/).
 
 ## Additional resources
 
@@ -516,6 +521,3 @@ Here are some additional tutorials on creating Jekyll sites:
 
   * [Convert a static site to Jekyll](http://jekyll.tips/jekyll-casts/converting-a-static-site-to-jekyll/)
   * [Building a Jekyll Site – Part 1 of 3: Converting a Static Website To Jekyll](https://css-tricks.com/building-a-jekyll-site-part-1-of-3/)
-
-[jekyll-sitemap]: https://help.github.com/articles/sitemaps-for-github-pages/
-[jekyll-feed]: https://help.github.com/articles/atom-rss-feeds-for-github-pages/

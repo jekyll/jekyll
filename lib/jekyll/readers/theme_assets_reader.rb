@@ -12,6 +12,7 @@ module Jekyll
 
       Find.find(site.theme.assets_path) do |path|
         next if File.directory?(path)
+
         if File.symlink?(path)
           Jekyll.logger.warn "Theme reader:", "Ignored symlinked asset: #{path}"
         else

@@ -3,7 +3,7 @@ title: 'Jekyll 3.6.2 Released'
 date: 2017-10-21 21:31:40 +0200
 author: dirtyf
 version: 3.6.2
-categories: [release]
+category: release
 ---
 
 3.6.2 is out, it's a tiny patch release and we invite you to run `bundle update`
@@ -13,7 +13,7 @@ if you want to avoid possible build problems with:
 * fully numeric layout names (we convert those to string for you now).
 
 Other changes include updates to our documentation, like this [complete
-video series by Giraffe Academy](../tutorials/video-walkthroughs/) aimed at
+video series by Giraffe Academy](/tutorials/video-walkthroughs/) aimed at
 complete beginners. A big thanks to Mike for this.
 
 And if you're wondering what happened to version 3.6.1, it was just our new

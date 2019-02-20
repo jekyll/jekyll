@@ -14,7 +14,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
           "values" => {
             "key" => "val",
           },
-        },]
+        }]
       )
       @output = capture_output { @site.process }
       @affected = @site.pages.find { |page| page.relative_path == "contacts/bar.html" }
@@ -42,7 +42,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
           "values" => {
             "key" => "val",
           },
-        },]
+        }]
       )
       @output = capture_output { @site.process }
       @affected = @site.pages.find { |page| page.relative_path == "contacts/bar.html" }
@@ -69,7 +69,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
           "values" => {
             "key" => "val",
           },
-        },]
+        }]
       )
 
       @site.process
@@ -93,7 +93,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
           "values" => {
             "key" => "val",
           },
-        },]
+        }]
       )
 
       @site.process
@@ -117,7 +117,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
           "values" => {
             "key" => "val",
           },
-        },]
+        }]
       )
 
       @site.process
@@ -142,7 +142,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
           "values" => {
             "key" => "val",
           },
-        },]
+        }]
       )
       @site.process
       @affected = @site.pages
@@ -165,7 +165,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
           "values" => {
             "key" => "val",
           },
-        },]
+        }]
       )
       @site.process
       @affected = @site.pages
@@ -185,7 +185,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
           "values" => {
             "key" => "val",
           },
-        },]
+        }]
       )
       @site.process
       @affected = @site.pages
@@ -207,7 +207,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
                            "values" => {
                              "date" => "2015-01-01 00:00:01",
                            },
-                         },]
+                         }]
                        ))
     end
 

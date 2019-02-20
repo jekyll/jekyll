@@ -169,6 +169,7 @@ module Jekyll
     def where(input, property, value)
       return input if property.nil? || value.nil?
       return input unless input.respond_to?(:select)
+
       input    = input.values if input.is_a?(Hash)
       input_id = input.hash
 
@@ -195,6 +196,7 @@ module Jekyll
     # Returns the filtered array of objects
     def where_exp(input, variable, expression)
       return input unless input.respond_to?(:select)
+
       input = input.values if input.is_a?(Hash) # FIXME
 
       condition = parse_condition(expression)
@@ -214,6 +216,7 @@ module Jekyll
     def to_integer(input)
       return 1 if input == true
       return 0 if input == false
+
       input.to_i
     end
 
@@ -226,6 +229,7 @@ module Jekyll
     # Returns the filtered array of objects
     def sort(input, property = nil, nils = "first")
       raise ArgumentError, "Cannot sort a null object." if input.nil?
+
       if property.nil?
         input.sort
       else
@@ -244,6 +248,7 @@ module Jekyll
 
     def pop(array, num = 1)
       return array unless array.is_a?(Array)
+
       num = Liquid::Utils.to_integer(num)
       new_ary = array.dup
       new_ary.pop(num)
@@ -252,6 +257,7 @@ module Jekyll
 
     def push(array, input)
       return array unless array.is_a?(Array)
+
       new_ary = array.dup
       new_ary.push(input)
       new_ary
@@ -259,6 +265,7 @@ module Jekyll
 
     def shift(array, num = 1)
       return array unless array.is_a?(Array)
+
       num = Liquid::Utils.to_integer(num)
       new_ary = array.dup
       new_ary.shift(num)
@@ -267,6 +274,7 @@ module Jekyll
 
     def unshift(array, input)
       return array unless array.is_a?(Array)
+
       new_ary = array.dup
       new_ary.unshift(input)
       new_ary
@@ -274,6 +282,7 @@ module Jekyll
 
     def sample(input, num = 1)
       return input unless input.respond_to?(:sample)
+
       num = Liquid::Utils.to_integer(num) rescue 1
       if num == 1
         input.sample
@@ -330,6 +339,7 @@ module Jekyll
     def parse_sort_input(property)
       number_like = %r!\A\s*-?(?:\d+\.?\d*|\.\d+)\s*\Z!
       return property.to_f if property =~ number_like
+
       property
     end
 
@@ -355,22 +365,48 @@ module Jekyll
       end
     end
 
+    # -----------   The following set of code was *adapted* from Liquid::If
+    # -----------   ref: https://git.io/vp6K6
+
     # Parse a string to a Liquid Condition
     def parse_condition(exp)
-      parser = Liquid::Parser.new(exp)
-      left_expr = parser.expression
-      operator = parser.consume?(:comparison)
-      condition =
-        if operator
-          Liquid::Condition.new(Liquid::Expression.parse(left_expr),
-                                operator,
-                                Liquid::Expression.parse(parser.expression))
-        else
-          Liquid::Condition.new(Liquid::Expression.parse(left_expr))
-        end
-      parser.consume(:end_of_string)
+      parser    = Liquid::Parser.new(exp)
+      condition = parse_binary_comparison(parser)
 
+      parser.consume(:end_of_string)
       condition
+    end
+
+    # Generate a Liquid::Condition object from a Liquid::Parser object additionally processing
+    # the parsed expression based on whether the expression consists of binary operations with
+    # Liquid operators `and` or `or`
+    #
+    #  - parser: an instance of Liquid::Parser
+    #
+    # Returns an instance of Liquid::Condition
+    def parse_binary_comparison(parser)
+      parse_comparison(parser).tap do |condition|
+        binary_operator = parser.id?("and") || parser.id?("or")
+        condition.send(binary_operator, parse_comparison(parser)) if binary_operator
+      end
+    end
+
+    # Generates a Liquid::Condition object from a Liquid::Parser object based on whether the parsed
+    # expression involves a "comparison" operator (e.g. <, ==, >, !=, etc)
+    #
+    #  - parser: an instance of Liquid::Parser
+    #
+    # Returns an instance of Liquid::Condition
+    def parse_comparison(parser)
+      left_operand = Liquid::Expression.parse(parser.expression)
+      operator     = parser.consume?(:comparison)
+
+      # No comparison-operator detected. Initialize a Liquid::Condition using only left operand
+      return Liquid::Condition.new(left_operand) unless operator
+
+      # Parse what remained after extracting the left operand and the `:comparison` operator
+      # and initialize a Liquid::Condition object using the operands and the comparison-operator
+      Liquid::Condition.new(left_operand, operator, Liquid::Expression.parse(parser.expression))
     end
   end
 end

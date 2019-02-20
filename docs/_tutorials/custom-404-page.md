@@ -11,7 +11,7 @@ You can easily serve custom 404 error pages with Jekyll to replace the default *
 
 Any `404.html` at the **root of your `_site` directory** will be served automatically by GitHub Pages and the local WEBrick development server.
 
-Simply add a `404.md` or `404.html` at the root of your site's source directory and include the YAML Front Matter data to use the theme's base layout.
+Simply add a `404.md` or `404.html` at the root of your site's source directory and include front matter data to use the theme's base layout.
 
 If you plan to organize your files under subdirectories, the error page should have the following Front Matter Data, set: `permalink: /404.html`. This is to ensure that the compiled `404.html` resides at the root of your processed site, where it'll be picked by the server.
 

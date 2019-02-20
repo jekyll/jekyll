@@ -80,8 +80,14 @@ class TestSite < JekyllUnitTest
       assert_equal [source_dir("_includes")], site.includes_load_paths
     end
 
+    should "configure cache_dir" do
+      fixture_site.process
+      assert File.directory?(source_dir(".jekyll-cache", "Jekyll", "Cache"))
+      assert File.directory?(source_dir(".jekyll-cache", "Jekyll", "Cache", "Jekyll--Cache"))
+    end
+
     should "use .jekyll-cache directory at source as cache_dir by default" do
-      site = Site.new default_configuration
+      site = Site.new(default_configuration)
       assert_equal File.join(site.source, ".jekyll-cache"), site.cache_dir
     end
   end
@@ -89,7 +95,7 @@ class TestSite < JekyllUnitTest
   context "creating sites" do
     setup do
       @site = Site.new(site_configuration)
-      @num_invalid_posts = 4
+      @num_invalid_posts = 5
     end
 
     teardown do
@@ -238,6 +244,7 @@ class TestSite < JekyllUnitTest
         properties.html
         sitemap.xml
         static_files.html
+        trailing-dots...md
       )
       unless Utils::Platforms.really_windows?
         # files in symlinked directories may appear twice
@@ -591,7 +598,11 @@ class TestSite < JekyllUnitTest
 
       should "set a theme if the config is a string" do
         [:debug, :info, :warn, :error].each do |level|
-          expect(Jekyll.logger.writer).not_to receive(level)
+          if level == :info
+            expect(Jekyll.logger.writer).to receive(level)
+          else
+            expect(Jekyll.logger.writer).not_to receive(level)
+          end
         end
         site = fixture_site("theme" => "test-theme")
         assert_instance_of Jekyll::Theme, site.theme

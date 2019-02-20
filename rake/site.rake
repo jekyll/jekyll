@@ -109,7 +109,7 @@ namespace :site do
         post.puts("date: #{Time.new.strftime("%Y-%m-%d %H:%M:%S %z")}")
         post.puts("author: ")
         post.puts("version: #{release}")
-        post.puts("categories: [release]")
+        post.puts("category: release")
         post.puts("---")
         post.puts
         post.puts
