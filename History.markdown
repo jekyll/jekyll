@@ -155,6 +155,7 @@
   * Only read layouts from source_dir or theme_dir (#6788)
   * Allow custom sorting of collection documents (#7427)
   * Always exclude certain paths from being processed (#7188)
+  * Add `Site#in_cache_dir` helper method (#7160)
 
 ### Development Fixes
 
