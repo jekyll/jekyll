@@ -2,7 +2,7 @@
 title: "Security Fixes for series 3.6, 3.7 and 3.8"
 date: 2018-09-19 18:00:00 +0530
 author: ashmaroli
-categories: [release]
+category: release
 version: 3.8.4
 ---
 

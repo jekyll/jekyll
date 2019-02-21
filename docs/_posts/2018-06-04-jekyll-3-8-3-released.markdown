@@ -3,7 +3,7 @@ title: 'Jekyll 3.8.3 Released'
 date: 2018-06-05 09:00:00 -0500
 author: pathawks
 version: 3.8.3
-categories: [release]
+category: release
 ---
 
 This release fixes a regression in 3.8 where collections with `published: false`

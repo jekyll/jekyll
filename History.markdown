@@ -96,6 +96,15 @@
   * Grammatical correction (#7464)
   * Update resources.md (#7472)
   * Docs: store SSL key and cert in site source (#7473)
+  * Minor doc fixes (#7495)
+  * Changed order of steps (#7503)
+  * Hosting with AWS Amplify (#7510)
+  * Fix typo in tutorial for converting existing site (#7524)
+  * Add CloudSh to resource page. (#7497)
+  * Docs: check if var exists before include tag (#7530)
+  * Added formX to form-backend resources (#7536)
+  * Clarify docs on collections regarding the need for front matter (#7538)
+  * Fix incorrect Windows path in themes.md (#7525)
 
 ### Minor Enhancements
 
@@ -122,6 +131,10 @@
   * Upgrade liquid-c to v4.0 (#7375)
   * Add a custom inspect string for StaticFile objects (#7422)
   * Remind user to include gem in the Gemfile on error (#7476)
+  * Search Front matter defaults for Page objects with relative_path (#7261)
+  * Support for binary operators in where_exp filter (#6998)
+  * Configure cache_dir (#7232)
+  * Upgrade WinTZ utility to use TZInfo-2.0 (#7521)
 
 ### Major Enhancements
 
@@ -141,6 +154,9 @@
   * Ignore cache directory (#7184)
   * Incorporate `relative_url` filter in `link` tag (#6727)
   * Only read layouts from source_dir or theme_dir (#6788)
+  * Allow custom sorting of collection documents (#7427)
+  * Always exclude certain paths from being processed (#7188)
+  * Add `Site#in_cache_dir` helper method (#7160)
 
 ### Development Fixes
 
@@ -179,6 +195,9 @@
   * Bump RuboCop to v0.62.x (#7449)
   * Relax version constraint on classifier-reborn gem (#7471)
   * Update rubocop to ~&gt; 0.63.1 (#7489)
+  * dev: update gemspec (#7425)
+  * Test with Ruby 2.6 on AppVeyor [skip travis] (#7518)
+  * Add a script to profile docs with CI (#7540)
 
 ### Bug Fixes
 
@@ -195,6 +214,8 @@
   * Fix Interpreter warning from Jekyll::Renderer (#7448)
   * Dont write static files from unrendered collection (#7410)
   * Excerpt handling of custom and intermediate tags (#7382)
+  * changed future post loglevel to warn to help user narrow down issues (#7527)
+  * Handle files with trailing dots in their basename (#7315)
 
 ### feature
 

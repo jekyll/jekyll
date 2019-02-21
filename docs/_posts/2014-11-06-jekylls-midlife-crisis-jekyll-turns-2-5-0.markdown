@@ -3,7 +3,7 @@ title: "Jekyll's Mid-Life Crisis (Or, Jekyll turns 2.5.0)"
 date: 2014-11-05 10:48:22 -0800
 author: parkr
 version: 2.5.0
-categories: [release]
+category: release
 ---
 
 A new day, a new release! Jekyll just turned 2.5.0 and has gained a lot of

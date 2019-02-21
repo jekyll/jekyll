@@ -48,6 +48,18 @@ While 'new' blogs created with Jekyll v3.4 and greater, will have the following 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 ```
 
+<div class="note warning">
+  <h5>TZInfo 2.0 incompatibility</h5>
+  <p>
+    <code>v2.0</code> of the TZInfo library has introduced a change in how timezone offsets are calculated.
+    This will result in incorrect date and time for your posts when the site is built with Jekyll 3.x on Windows.
+  </p>
+  <p>
+    We therefore recommend that you lock the Timezone library to <code>v1.2</code> and above by listing
+    <code>gem 'tzinfo', '~> 1.2'</code> in your <code>Gemfile</code>.
+  </p>
+</div>
+
 ### Auto Regeneration
 
 Jekyll uses the `listen` gem to watch for changes when the `--watch` switch is specified during a build or serve. While `listen` has built-in support for UNIX systems, it may require an extra gem for compatibility with Windows.

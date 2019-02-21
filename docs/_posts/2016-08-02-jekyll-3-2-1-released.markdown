@@ -3,7 +3,7 @@ title: 'Jekyll 3.2.1 Released with Fix for Windows'
 date: 2016-08-02 13:20:11 -0700
 author: parkr
 version: 3.2.1
-categories: [release]
+category: release
 ---
 
 Well, 3.2.0 has been a success, but with one fatal flaw: it doesn't work on
