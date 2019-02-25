@@ -105,7 +105,8 @@ front matter of a page or post.
       <td>
         <p>
           Set to false if you don’t want a specific post to show up when the
-          site is generated.
+          site is generated, and set to true if you want to force a specific post
+          to show up.
         </p>
       </td>
     </tr>
