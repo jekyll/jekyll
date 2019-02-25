@@ -2,12 +2,20 @@
 
 module Jekyll
   class Publisher
+
+    @@default_value = nil
+
     def initialize(site)
       @site = site
     end
 
     def publish?(thing)
-      can_be_published?(thing) && !hidden_in_the_future?(thing)
+      can_publish = can_be_published?(thing)
+      if can_publish == @@default_value
+        !hidden_in_the_future?(thing)
+      else
+        can_publish
+      end
     end
 
     def hidden_in_the_future?(thing)
@@ -17,7 +25,12 @@ module Jekyll
     private
 
     def can_be_published?(thing)
-      thing.data.fetch("published", true) || @site.unpublished
+      published = thing.data.fetch("published", @@default_value)
+      if published == @@default_value || @site.unpublished
+        nil
+      else
+        published
+      end
     end
   end
 end
