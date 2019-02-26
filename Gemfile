@@ -79,6 +79,11 @@ group :jekyll_optional_dependencies do
     gem "liquid-c", "~> 4.0"
     gem "yajl-ruby", "~> 1.4"
   end
+
+  # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
+  install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do
+    gem "tzinfo-data"
+  end
 end
 
 #
