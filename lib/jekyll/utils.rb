@@ -8,7 +8,7 @@ module Jekyll
     autoload :Internet, "jekyll/utils/internet"
     autoload :Platforms, "jekyll/utils/platforms"
     autoload :ThreadEvent, "jekyll/utils/thread_event"
-    autoload :WinTZ, "jekyll/utils/win_tz"
+    autoload :TimeZone, "jekyll/utils/time_zone"
 
     # Constants for use in #slugify
     SLUGIFY_MODES = %w(raw default pretty ascii latin).freeze

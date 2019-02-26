@@ -127,11 +127,7 @@ module Jekyll
     # Returns nothing
     # rubocop:disable Naming/AccessorMethodName
     def set_timezone(timezone)
-      ENV["TZ"] = if Utils::Platforms.really_windows?
-                    Utils::WinTZ.calculate(timezone)
-                  else
-                    timezone
-                  end
+      ENV["TZ"] = Utils::TimeZone.calculate(timezone)
     end
     # rubocop:enable Naming/AccessorMethodName
 
