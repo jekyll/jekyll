@@ -39,6 +39,17 @@ Feature: Post data
     And the _site directory should exist
     And I should see "Post date: 27 Mar 2009" in "_site/2009/03/27/star-wars.html"
 
+  Scenario: Use post.date variable with valid date and timezone
+    Given I have a _posts directory
+    And I have a configuration file with "timezone" set to "America/New_York"
+    And I have the following post:
+      | title     | date                       | content                 |
+      | Star Wars | 2009-03-27 23:23:39 -05:00 | Luke, I am your father. |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "Luke, I am your father." in "_site/2009/03/27/star-wars.html"
+
   Scenario: Use post.date variable with invalid
     Given I have a _posts directory
     And I have a "_posts/2016-01-01-test.md" page with date "tuesday" that contains "I have a bad date."
