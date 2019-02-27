@@ -70,15 +70,29 @@ Feature: Fancy permalinks
     And the _site directory should exist
     And I should see "Totally custom." in "_site/03-27-2009/custom-permalink-schema.html"
 
-  Scenario: Use custom permalink schema with date and time
+  Scenario: Use custom permalink schema with date and UTC time
     Given I have a configuration file with:
-    | key         | value              |
+    | key         | value                                      |
     | permalink   | "/:year:month:day:hour:minute:second.html" |
-    | timezone    | UTC                |
+    | timezone    | UTC                                        |
     And I have a _posts directory
     And I have the following post:
-      | title                   | category | date                | content         |
-      | Custom Permalink Schema | stuff    | 2009-03-27 22:31:07 | Totally custom. |
+      | title                   | category | date                      | content         |
+      | Custom Permalink Schema | stuff    | 2009-03-27 19:31:07 -0500 | Totally custom. |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "Totally custom." in "_site/20090328003107.html"
+
+  Scenario: Use custom permalink schema with date and New York time zone
+    Given I have a configuration file with:
+    | key         | value                                      |
+    | permalink   | "/:year:month:day:hour:minute:second.html" |
+    | timezone    | America/New_York                           |
+    And I have a _posts directory
+    And I have the following post:
+      | title                   | category | date                      | content         |
+      | Custom Permalink Schema | stuff    | 2009-03-27 22:31:07 -0500 | Totally custom. |
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
