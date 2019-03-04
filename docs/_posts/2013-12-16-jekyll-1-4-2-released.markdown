@@ -3,7 +3,7 @@ title: 'Jekyll 1.4.2 Released'
 date: 2013-12-16 19:48:13 -0500
 author: parkr
 version: 1.4.2
-categories: [release]
+category: release
 ---
 
 This release fixes [a regression][] where Maruku fenced code blocks were turned

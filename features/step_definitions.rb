@@ -178,9 +178,11 @@ end
 
 #
 
-Given(%r!^I have fixture collections$!) do
-  FileUtils.cp_r Paths.source_dir.join("test", "source", "_methods"), source_dir
-  FileUtils.cp_r Paths.source_dir.join("test", "source", "_thanksgiving"), source_dir
+Given(%r!^I have fixture collections(?: in "(.*)" directory)?$!) do |directory|
+  collections_dir = File.join(source_dir, directory.to_s)
+  FileUtils.cp_r Paths.source_dir.join("test", "source", "_methods"), collections_dir
+  FileUtils.cp_r Paths.source_dir.join("test", "source", "_thanksgiving"), collections_dir
+  FileUtils.cp_r Paths.source_dir.join("test", "source", "_tutorials"), collections_dir
 end
 
 #

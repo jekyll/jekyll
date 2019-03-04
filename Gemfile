@@ -26,7 +26,9 @@ group :test do
   gem "nokogiri", "~> 1.7"
   gem "rspec"
   gem "rspec-mocks"
-  gem "rubocop", "~> 0.64.0"
+  # Temporary lock on RuboCop version for Windows since Pysch-3.1.0 is not available
+  # for use on Ruby 2.6-mingw32 platforms
+  gem "rubocop", Gem.win_platform? ? "~> 0.64.0" : "~> 0.65.0"
   gem "test-dependency-theme", :path => File.expand_path("test/fixtures/test-dependency-theme", __dir__)
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)
   gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
@@ -78,8 +80,12 @@ group :jekyll_optional_dependencies do
     gem "yajl-ruby", "~> 1.4"
   end
 
-  # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-  gem "tzinfo-data", :platforms => [:mingw, :mswin, :x64_mingw, :jruby]
+  # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
+  # and associated library
+  install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do
+    gem "tzinfo", "~> 2.0"
+    gem "tzinfo-data"
+  end
 end
 
 #

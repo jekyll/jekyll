@@ -19,10 +19,7 @@ module Jekyll
       # Handling Reading
       "safe"                => false,
       "include"             => [".htaccess"],
-      "exclude"             => %w(
-        Gemfile Gemfile.lock node_modules vendor/bundle/ vendor/cache/ vendor/gems/
-        vendor/ruby/
-      ),
+      "exclude"             => [],
       "keep_files"          => [".git", ".svn"],
       "encoding"            => "utf-8",
       "markdown_ext"        => "markdown,mkdown,mkdn,mkd,md",
@@ -92,7 +89,7 @@ module Jekyll
       # problems and backwards-compatibility.
       def from(user_config)
         Utils.deep_merge_hashes(DEFAULTS, Configuration[user_config].stringify_keys)
-          .add_default_collections
+          .add_default_collections.add_default_excludes
       end
     end
 
@@ -267,6 +264,21 @@ module Jekyll
         end
       end
 
+      config
+    end
+
+    DEFAULT_EXCLUDES = %w(
+      .sass-cache .jekyll-cache
+      gemfiles Gemfile Gemfile.lock
+      node_modules
+      vendor/bundle/ vendor/cache/ vendor/gems/ vendor/ruby/
+    ).freeze
+
+    def add_default_excludes
+      config = clone
+      return config if config["exclude"].nil?
+
+      config["exclude"].concat(DEFAULT_EXCLUDES).uniq!
       config
     end
 

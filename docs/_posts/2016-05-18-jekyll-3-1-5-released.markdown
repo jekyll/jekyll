@@ -3,7 +3,7 @@ title: 'Jekyll 3.1.5 Released'
 date: 2016-05-18 21:35:27 -0700
 author: parkr
 version: 3.1.5
-categories: [release]
+category: release
 ---
 
 There's always at least one bug, right? :)

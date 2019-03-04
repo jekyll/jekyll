@@ -3,7 +3,7 @@ title: 'Jekyll 1.5.1 Released'
 date: 2014-03-27 22:43:48 -0400
 author: parkr
 version: 1.5.1
-categories: [release]
+category: release
 ---
 
 The hawk-eyed [@gregose](https://github.com/gregose) spotted a bug in our

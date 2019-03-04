@@ -3,7 +3,7 @@ title: 'Jekyll 3.8.0 Released'
 date: 2018-04-19 19:45:15 +0530
 author: ashmaroli
 version: 3.8.0
-categories: [release]
+category: release
 ---
 
 Aloha Jekyllers!! :wave:

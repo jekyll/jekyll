@@ -114,6 +114,25 @@ class TestDocument < JekyllUnitTest
       assert_nil next_next_doc["previous"]["output"]
     end
 
+    context "with the basename (without extension) ending with dot(s)" do
+      setup do
+        @site = fixture_site("collections" => ["methods"])
+        @site.process
+        @document = @site.collections["methods"].docs.detect do |d|
+          d.relative_path == "_methods/trailing-dots...md"
+        end
+      end
+
+      should "render into the proper url" do
+        assert_equal "/methods/trailing-dots.html", @document.url
+
+        trailing_dots_doc = @site.posts.docs.detect do |d|
+          d.relative_path == "_posts/2018-10-12-trailing-dots...markdown"
+        end
+        assert_equal "/2018/10/12/trailing-dots.html", trailing_dots_doc.url
+      end
+    end
+
     context "with YAML ending in three dots" do
       setup do
         @site = fixture_site("collections" => ["methods"])
