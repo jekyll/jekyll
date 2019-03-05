@@ -386,6 +386,19 @@ module Jekyll
     def in_theme_dir(*paths)
       return nil unless theme
 
+      in_theme_dir_with_theme(theme, *paths)
+    end
+
+    # Public: Prefix a given path with the given theme's directory.
+    #
+    # theme - The theme whose directory should be prefixed
+    # paths - (optional) path elements to a file or directory within the
+    #         theme directory
+    #
+    # Returns a path which is prefixed with the theme root directory.
+    def in_theme_dir_with_theme(theme, *paths)
+      return nil unless theme
+
       paths.reduce(theme.root) do |base, path|
         Jekyll.sanitized_path(base, path)
       end
@@ -422,6 +435,28 @@ module Jekyll
     def collections_path
       dir_str = config["collections_dir"]
       @collections_path ||= dir_str.empty? ? source : in_source_dir(dir_str)
+    end
+
+    # Get a theme given a root directory
+    def theme_with_root(base)
+      matching_themes = theme_list.select do |theme|
+        theme.root == in_theme_dir_with_theme(theme, base)
+      end
+      matching_themes.length == 1 ? matching_themes[0] : nil
+    end
+
+    # Get a list of themes used by this site in reverse order of inheritance
+    # hierarchy.
+    def theme_list
+      return @theme_list if @theme_list
+
+      @theme_list = []
+      next_theme = theme
+      while next_theme
+        @theme_list << next_theme
+        next_theme = next_theme.parent_theme
+      end
+      @theme_list
     end
 
     private
