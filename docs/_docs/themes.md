@@ -300,6 +300,30 @@ While this feature is to enable easier adoption of a theme, the restrictions ens
 This feature will let the theme-gem to work with *theme-specific config variables* out-of-the-box.
 {% endif %}
 
+{% if site.version == '4.0.0' %}
+{% comment %} Remove this encapsulation when `v4.0` ships {% endcomment %}
+
+### Theme inheritance {%- include docs_version_badge.html version="4.0.0" -%}
+
+If you are only adding features (or making small changes) to an existing theme, you don't have to make a copy of all the theme's files. Theme inheritance allows you to reuse a "parent" theme's assets, layouts, includes and stylesheets. To use theme inheritance, add to your theme's `gemspec` metadata:
+
+{% raw %}
+```ruby
+Gem::Specification.new do |s|
+  s.name        = "test-theme-inheritance"
+  
+  # Add the theme dependency
+  s.add_runtime_dependency("test-theme", "~> 1.0")
+  # And mark it as a parent
+  s.metadata    = {
+    "parent_theme" => "test-theme"
+  }
+end
+```
+{% endraw %}
+
+{% endif %}
+
 ### Documenting your theme
 
 Your theme should include a `/README.md` file, which explains how site authors can install and use your theme. What layouts are included? What includes? Do they need to add anything special to their site's configuration file?
