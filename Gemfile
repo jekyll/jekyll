@@ -31,6 +31,7 @@ group :test do
   gem "rubocop", Gem.win_platform? ? "~> 0.64.0" : "~> 0.65.0"
   gem "test-dependency-theme", :path => File.expand_path("test/fixtures/test-dependency-theme", __dir__)
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)
+  gem "test-theme-inheritance", :path => File.expand_path("test/fixtures/test-theme-inheritance", __dir__)
   gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
 
   gem "jruby-openssl" if RUBY_ENGINE == "jruby"
