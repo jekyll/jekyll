@@ -37,8 +37,8 @@ module Jekyll
     # Returns false only if no dependencies have been specified, otherwise nothing.
     def require_theme_deps
       return false unless site.theme.runtime_dependencies
-      theme_names = site.theme_list.map { |theme| theme.name}
 
+      theme_names = site.theme_list.map(&:name)
       site.theme.runtime_dependencies.each do |dep|
         next if dep.name == "jekyll"
         next if theme_names.include? dep.name
