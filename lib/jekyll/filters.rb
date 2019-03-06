@@ -324,7 +324,7 @@ module Jekyll
     end
 
     def item_property(item, property)
-      if item.respond_to?(:to_liquid)
+      if item.is_a?(Jekyll::Document) || item.respond_to?(:to_liquid)
         property.to_s.split(".").reduce(item.to_liquid) do |subvalue, attribute|
           parse_sort_input(subvalue[attribute])
         end
