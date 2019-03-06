@@ -2,7 +2,6 @@ bundler_args: --without benchmark:development
 script: script/cibuild
 cache: bundler
 language: ruby
-sudo: false
 
 rvm:
   - &ruby1 2.6.0
