@@ -33,7 +33,8 @@ group :test do
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)
   gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
 
-  gem "jruby-openssl" if RUBY_ENGINE == "jruby"
+  # Temporarily lock to jruby-openssl-0.10.1 since JRuby 9.1 can't seem to load jruby-openssl-0.10.2
+  gem "jruby-openssl", "0.10.1" if RUBY_ENGINE == "jruby"
 end
 
 #
