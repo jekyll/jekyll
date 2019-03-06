@@ -12,4 +12,5 @@ Gem::Specification.new do |s|
   s.metadata    = {
     "parent_theme" => "test-theme"
   }
+  s.add_runtime_dependency("test-theme", "~> 0.1")
 end
