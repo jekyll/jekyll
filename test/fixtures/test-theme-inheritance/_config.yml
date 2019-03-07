@@ -1,4 +1,3 @@
-title: Hello World
 baseurl: "/test-theme-inheritance"
 include: ["_extras/banner.md"]
 exclude:

@@ -66,3 +66,16 @@ Feature: Theme Inheritance
     And the _site directory should exist
     And I should see "From your theme" in "_site/assets/base.js"
     And I should see "Another from theme inheritance" in "_site/assets/another.js"
+
+  Scenario: Inheriting a parent theme's default configuration
+    Given I have a configuration file with "theme" set to "test-theme"
+    And I have a "test.md" page that contains "{{ site.title }}"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "Hello World" in "_site/test.html"
+    Given I have a configuration file with "theme" set to "test-theme-inheritance"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "Hello World" in "_site/test.html"
