@@ -7,8 +7,6 @@ exclude:
   - Rakefile
   - test/**/*
 
-theme: test-theme-inheritance
-
 # theme-specific settings
 test_theme:
   skin: aero              # aero / chrome / dark / neon
