@@ -9,7 +9,8 @@ Feature: Theme Inheritance
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "from test-theme: <p>Hello!</p>" in "_site/test.html"
+    And I should see "from test-theme:" in "_site/test.html"
+    And I should see "<p>Hello!</p>" in "_site/test.html"
 
   Scenario: Using layouts from the child theme
     Given I have a configuration file with "theme" set to "test-theme-inheritance"
@@ -17,7 +18,8 @@ Feature: Theme Inheritance
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "unique.html from test-theme-inheritance: <p>Hello!</p>" in "_site/test.html"
+    And I should see "unique.html from test-theme-inheritance:" in "_site/test.html"
+    And I should see "<p>Hello!</p>" in "_site/test.html"
 
   Scenario: Overriding layouts in the child theme
     Given I have a configuration file with "theme" set to "test-theme-inheritance"
@@ -25,7 +27,8 @@ Feature: Theme Inheritance
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "from test-theme-inheritance: <p>Hello!</p>" in "_site/test.html"
+    And I should see "from test-theme-inheritance:" in "_site/test.html"
+    And I should see "<p>Hello!</p>" in "_site/test.html"
     Given I have a _layouts directory
     And I have an "_layouts/unique.html" file that contains "from source directory: {{ content }}"
     When I run jekyll build

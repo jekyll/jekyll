@@ -8,4 +8,6 @@ Gem::Specification.new do |s|
   s.authors     = ["Jekyll"]
   s.files       = ["lib/example.rb"]
   s.homepage    = "https://github.com/jekyll/jekyll"
+
+  s.add_runtime_dependency("jekyll-seo-tag", "~> 2.5")
 end
