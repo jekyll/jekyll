@@ -79,3 +79,42 @@ Feature: Theme Inheritance
     Then I should get a zero exit status
     And the _site directory should exist
     And I should see "Hello World" in "_site/test.html"
+
+  Scenario: Inheriting a parent theme's stylesheets
+    Given I have a configuration file with:
+      | key         | value       |
+      | theme       | test-theme  |
+      | theme-color | black       |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "color: black" in "_site/assets/style.css"
+    Given I have a configuration file with:
+      | key         | value                  |
+      | theme       | test-theme-inheritance |
+      | theme-color | black                  |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see ".sample {\s+color: black;\s+}" in "_site/assets/style.css"
+  
+  Scenario: Overriding stylesheets in the child theme that overrode a parent theme's stylesheet
+    Given I have a configuration file with "theme" set to "test-theme"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see ".another-sample {\s+color: blue;\s+}" in "_site/assets/style.css"
+    Given I have a configuration file with "theme" set to "test-theme-inheritance"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see ".another-sample {\s+color: brown;\s+}" in "_site/assets/style.css"
+    But I should not see ".another-sample {\s+color: blue;\s+}" in "_site/assets/style.css"
+    Given I have a _sass directory
+    And I have an "_sass/another-sample.scss" file that contains ".another-sample { color: purple; }"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see ".another-sample {\s+color: purple;\s+}" in "_site/assets/style.css"
+    But I should not see ".another-sample {\s+color: blue;\s+}" in "_site/assets/style.css"
+    But I should not see ".another-sample {\s+color: brown;\s+}" in "_site/assets/style.css"

@@ -462,8 +462,12 @@ module Jekyll
     private
 
     def load_theme_configuration(config)
-      theme_config_file = in_theme_dir("_config.yml")
-      return config unless File.exist?(theme_config_file)
+      theme_config_file = nil
+      theme_list.each do |theme|
+        theme_config_file ||= in_theme_dir_with_theme(theme, "_config.yml")
+        theme_config_file = nil unless File.exist?(theme_config_file)
+      end
+      return config unless theme_config_file
 
       # Bail out if the theme_config_file is a symlink file irrespective of safe mode
       return config if File.symlink?(theme_config_file)
