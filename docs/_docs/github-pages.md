@@ -32,16 +32,28 @@ gems.
 Note that GitHub Pages runs in `safe` mode and only allows [a set of whitelisted
 plugins](https://help.github.com/articles/configuring-jekyll-plugins/#default-plugins).
 
-To use the currently-deployed version of the gem in your project, add the
-following to your `Gemfile`:
+To use the currently-deployed version of the gem in your project, having just the
+following in your `Gemfile` will suffice for typical builds, though you may have to
+additionally include platform-specific gems as required for builds on Windows or JRuby.
 
 ```ruby
 source "https://rubygems.org"
 
-gem "github-pages", group: :jekyll_plugins
+gem "github-pages"
 ```
-
 Be sure to run `bundle update` often.
+
+<div class="note warning">
+  <h5><code>github-pages</code> gem and the <code>:jekyll_plugins</code> group</h5>
+  <p>
+    When <code>github-pages</code> gem is included in the <code>:jekyll_plugins</code>
+    group in your Gemfile, its whitelisted plugins are automatically enabled and loaded
+    into memory. This will result in longer build times and unneeded processing.
+    For example, a sitemap or a feed will <em>always be generated</em> even when both
+    <code>jekyll-sitemap</code> and <code>jekyll-feed</code> have not been explicitly
+    listed under the <code>plugins</code> key in the config file.
+  </p>
+</div>
 
 <div class="note">
   <h5>GitHub Pages Documentation, Help, and Support</h5>
