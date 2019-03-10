@@ -134,6 +134,7 @@
   * Search Front matter defaults for Page objects with relative_path (#7261)
   * Support for binary operators in where_exp filter (#6998)
   * Configure cache_dir (#7232)
+  * Lock use of `tzinfo` gem to v1.x (#7521, #7562)
 
 ### Major Enhancements
 
