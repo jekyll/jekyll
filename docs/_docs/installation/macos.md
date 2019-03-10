@@ -25,11 +25,11 @@ export GEM_HOME=$HOME/gems
 export PATH=$HOME/gems/bin:$PATH
 ```
 
-Relaunch your terminal and run `gem env` to check that default gem paths point to you home directory by default.
+Relaunch your terminal and run `gem env` to check that default gem paths point to your home directory by default.
 
 ## Set up Ruby included with the OS
 
-Jekyll requires Ruby > 2.2.5 — we recommend that you run Ruby > 2.3 though, as more and more dependencies ask for that requirement. You're good to go on macOS Mojave 10.14:
+Jekyll requires Ruby > 2.2.5. We recommend that you run Ruby > 2.3 though, as more and more dependencies ask for that requirement. You're good to go on macOS Mojave 10.14:
 
 ```sh
 sw_vers -productVersion
@@ -47,7 +47,7 @@ gem install bundler jekyll
 
 ### Install latest stable Ruby with Homebrew {#brew}
 
-To run latest Ruby version you need to install it through [Homebrew](https://brew.sh).
+To run the latest Ruby version you need to install it through [Homebrew](https://brew.sh).
 
 ```sh
 # Install Homebrew
