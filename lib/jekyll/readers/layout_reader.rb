@@ -19,12 +19,6 @@ module Jekyll
           Layout.new(site, theme_layout_directory, layout_file)
       end
 
-      if @layouts.empty?
-        Jekyll.logger.warn "", "No layouts detected. Ensure that your layouts directory is at"
-        Jekyll.logger.warn "", "the root of your source directory or at the root of your theme-gem"
-        Jekyll.logger.warn "", "and that it is not empty."
-      end
-
       @layouts
     end
 

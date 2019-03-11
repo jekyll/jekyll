@@ -84,7 +84,7 @@ module Jekyll
       output = convert(output.to_s)
       document.content = output
 
-      if !layouts.empty? && document.place_in_layout?
+      if document.place_in_layout?
         Jekyll.logger.debug "Rendering Layout:", document.relative_path
         output = place_in_layouts(output, payload, info)
       end
