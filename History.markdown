@@ -105,6 +105,7 @@
   * Added formX to form-backend resources (#7536)
   * Clarify docs on collections regarding the need for front matter (#7538)
   * Fix incorrect Windows path in themes.md (#7525)
+  * Improve handling sites without layouts (#7564)
 
 ### Minor Enhancements
 
