@@ -27,8 +27,8 @@ group :test do
   gem "httpclient"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
-  # nokogiri v1.8 does not work with ruby 2.1 and below
-  gem "nokogiri", RUBY_VERSION >= "2.2" ? "~> 1.7" : "~> 1.7.0"
+  # nokogiri v1.10 does not work with ruby 2.2 and below
+  gem "nokogiri", RUBY_VERSION >= "2.3" ? "~> 1.9" : "~> 1.9.0"
   gem "rspec"
   gem "rspec-mocks"
   gem "rubocop", "~> 0.51.0"
@@ -36,7 +36,7 @@ group :test do
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)
   gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
 
-  gem "jruby-openssl" if RUBY_ENGINE == "jruby"
+  gem "jruby-openssl", "0.10.1" if RUBY_ENGINE == "jruby"
 end
 
 #
