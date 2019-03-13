@@ -55,4 +55,3 @@ after_success:
 
 before_install:
   - gem update --system || true
-  - gem install bundler
