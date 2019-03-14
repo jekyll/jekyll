@@ -337,7 +337,7 @@ module Jekyll
     #
     # Returns the document excerpt_separator
     def excerpt_separator
-      (data["excerpt_separator"] || site.config["excerpt_separator"]).to_s
+      @excerpt_separator ||= (data["excerpt_separator"] || site.config["excerpt_separator"]).to_s
     end
 
     # Whether to generate an excerpt
