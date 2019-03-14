@@ -516,6 +516,7 @@ module Jekyll
     def render_regenerated(document, payload)
       return unless regenerator.regenerate?(document)
 
+      document.renderer.payload = payload
       document.output = document.renderer.run
       document.trigger_hooks(:post_render)
     end
