@@ -232,6 +232,7 @@
   * Avoid unnecessary duplication of pages array (#7272)
   * Escape valid special chars in a site&#39;s path name (#7568)
   * Replace `name` in Page#inspect with relative_path (#7434)
+  * Log a warning when the slug is empty (#7357)
 
 ### feature
 
