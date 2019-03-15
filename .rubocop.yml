@@ -92,9 +92,6 @@ Naming/MemoizedInstanceVariableName:
     - lib/jekyll/drops/site_drop.rb
     - lib/jekyll/drops/unified_payload_drop.rb
     - lib/jekyll/page_without_a_file.rb
-Naming/UncommunicativeMethodParamName:
-  AllowedNames:
-    - _
 Security/MarshalLoad:
   Exclude:
     - !ruby/regexp /test\/.*.rb$/
