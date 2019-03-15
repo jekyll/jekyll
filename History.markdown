@@ -165,6 +165,7 @@
   * Add `Site#in_cache_dir` helper method (#7160)
   * Refactor `highlight` tag to behave like the `raw` tag (#6821)
   * Upgrade kramdown dependency to v2.x (#7492)
+  * Feat: drop ruby 2.3 (#7454)
 
 ### Development Fixes
 
