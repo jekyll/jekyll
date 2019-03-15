@@ -217,6 +217,7 @@
   * Excerpt handling of custom and intermediate tags (#7382)
   * changed future post loglevel to warn to help user narrow down issues (#7527)
   * Handle files with trailing dots in their basename (#7315)
+  * Fix unnecessary allocations via StaticFileReader (#7572)
 
 ### feature
 
