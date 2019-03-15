@@ -163,6 +163,7 @@
   * Always exclude certain paths from being processed (#7188)
   * Add `Site#in_cache_dir` helper method (#7160)
   * Refactor `highlight` tag to behave like the `raw` tag (#6821)
+  * Upgrade kramdown dependency to v2.x (#7492)
 
 ### Development Fixes
 
