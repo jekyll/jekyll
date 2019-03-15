@@ -230,6 +230,7 @@
   * Use communicative method parameters (#7566)
   * Avoid unnecessary duplication of pages array (#7272)
   * Escape valid special chars in a site&#39;s path name (#7568)
+  * Replace `name` in Page#inspect with relative_path (#7434)
 
 ### feature
 
