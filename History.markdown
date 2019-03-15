@@ -225,6 +225,7 @@
   * Don&#39;t check if site URL is absolute if it is nil (#7498)
   * Use communicative method parameters (#7566)
   * Avoid unnecessary duplication of pages array (#7272)
+  * Escape valid special chars in a site&#39;s path name (#7568)
 
 ### feature
 
