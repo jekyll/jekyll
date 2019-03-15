@@ -190,7 +190,7 @@ class TestConfiguration < JekyllUnitTest
     end
 
     should "not raise an error on empty files" do
-      allow(SafeYAML).to receive(:load_file).with("empty.yml").and_return(false)
+      allow(SafeYAML).to receive(:load_file).with(File.expand_path("empty.yml")).and_return(false)
       Jekyll.logger.log_level = :warn
       @config.read_config_file("empty.yml")
       Jekyll.logger.log_level = :info
@@ -203,10 +203,10 @@ class TestConfiguration < JekyllUnitTest
     end
 
     should "continue to read config files if one is empty" do
-      allow(SafeYAML).to receive(:load_file).with("empty.yml").and_return(false)
+      allow(SafeYAML).to receive(:load_file).with(File.expand_path("empty.yml")).and_return(false)
       allow(SafeYAML)
         .to receive(:load_file)
-        .with("not_empty.yml")
+        .with(File.expand_path("not_empty.yml"))
         .and_return("foo" => "bar", "include" => "", "exclude" => "")
       Jekyll.logger.log_level = :warn
       read_config = @config.read_config_files(["empty.yml", "not_empty.yml"])

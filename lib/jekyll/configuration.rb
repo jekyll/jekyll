@@ -166,6 +166,7 @@ module Jekyll
     #
     # Returns this configuration, overridden by the values in the file
     def read_config_file(file)
+      file = File.expand_path(file)
       next_config = safe_load_file(file)
       check_config_is_hash!(next_config, file)
       Jekyll.logger.info "Configuration file:", file
