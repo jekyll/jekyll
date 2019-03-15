@@ -83,6 +83,8 @@ module Jekyll
       Jekyll.logger.info @liquid_renderer.stats_table
     end
 
+    # rubocop:disable Metrics/MethodLength
+    #
     # Reset Site details.
     #
     # Returns nothing
@@ -104,12 +106,14 @@ module Jekyll
       @regenerator.clear_cache
       @liquid_renderer.reset
       @site_cleaner = nil
+      frontmatter_defaults.reset
 
       raise ArgumentError, "limit_posts must be a non-negative number" if limit_posts.negative?
 
       Jekyll::Cache.clear_if_config_changed config
       Jekyll::Hooks.trigger :site, :after_reset, self
     end
+    # rubocop:enable Metrics/MethodLength
 
     # Load necessary libraries, plugins, converters, and generators.
     #
