@@ -222,6 +222,7 @@
   * changed future post loglevel to warn to help user narrow down issues (#7527)
   * Handle files with trailing dots in their basename (#7315)
   * Fix unnecessary allocations via StaticFileReader (#7572)
+  * Don&#39;t check if site URL is absolute if it is nil (#7498)
 
 ### feature
 
