@@ -324,14 +324,18 @@ module Jekyll
     end
 
     def item_property(item, property)
-      if item.respond_to?(:to_liquid)
-        property.to_s.split(".").reduce(item.to_liquid) do |subvalue, attribute|
-          parse_sort_input(subvalue[attribute])
+      @item_property_cache ||= {}
+      @item_property_cache[property] ||= {}
+      @item_property_cache[property][item] ||= begin
+        if item.respond_to?(:to_liquid)
+          property.to_s.split(".").reduce(item.to_liquid) do |subvalue, attribute|
+            parse_sort_input(subvalue[attribute])
+          end
+        elsif item.respond_to?(:data)
+          parse_sort_input(item.data[property.to_s])
+        else
+          parse_sort_input(item[property.to_s])
         end
-      elsif item.respond_to?(:data)
-        parse_sort_input(item.data[property.to_s])
-      else
-        parse_sort_input(item[property.to_s])
       end
     end
 
