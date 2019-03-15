@@ -143,6 +143,7 @@
   * Cache computed item property (#7301)
   * Memoize Document#excerpt_separator (#7569)
   * Cleanup Markdown converter (#7519)
+  * Optimize Document::DATE_FILENAME_MATCHER to match valid filenames (#7292)
 
 ### Major Enhancements
 
