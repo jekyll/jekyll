@@ -222,6 +222,7 @@ module Jekyll
       slug.gsub!(%r!^\-|\-$!i, "")
 
       slug.downcase! unless cased
+      Jekyll.logger.warn("Warning:", "Empty `slug` generated for '#{string}'.") if slug.empty?
       slug
     end
 
