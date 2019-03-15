@@ -139,6 +139,7 @@
   * Utilize absolute paths of user-provided file paths (#7450)
   * Cache globbed paths in front matter defaults (#7345)
   * Cache computed item property (#7301)
+  * Memoize Document#excerpt_separator (#7569)
 
 ### Major Enhancements
 
