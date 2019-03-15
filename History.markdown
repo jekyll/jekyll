@@ -106,6 +106,7 @@
   * Clarify docs on collections regarding the need for front matter (#7538)
   * Fix incorrect Windows path in themes.md (#7525)
   * Document where Jekyll looks for layouts in a site (#7564)
+  * docs: mention CommonMark plugins (#7418)
 
 ### Minor Enhancements
 
