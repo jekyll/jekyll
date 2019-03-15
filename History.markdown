@@ -210,6 +210,7 @@
   * dev: update gemspec (#7425)
   * Test with Ruby 2.6 on AppVeyor [skip travis] (#7518)
   * Add a script to profile docs with CI (#7540)
+  * Scan `assert_equal` methods and rectify any offenses with a custom Rubocop cop (#7130)
 
 ### Bug Fixes
 
