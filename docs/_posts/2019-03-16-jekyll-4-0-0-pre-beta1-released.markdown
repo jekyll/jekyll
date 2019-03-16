@@ -23,7 +23,7 @@ Also be aware that it's a new *major* version, and it comes with a few breaking 
 4. We dropped dependencies for Pygments, RedCarpet and rdiscount.
 5. We bumped kramdown to v2.
 
-Checkout the complete [changelog](/docs/history/#400prebeta1--2018-03-16) for more details.
+Checkout the complete [changelog](/docs/history/) for more details.
 
 To test this pre version run:
 

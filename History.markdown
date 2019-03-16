@@ -1,4 +1,4 @@
-## 4.0.0.pre.beta1 / 2018-03-16
+## HEAD
 
 ### Major Enhancements
 
