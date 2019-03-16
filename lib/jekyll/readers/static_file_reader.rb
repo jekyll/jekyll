@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class StaticFileReader
     attr_reader :site, :dir, :unfiltered_content
@@ -14,7 +16,7 @@ module Jekyll
     #
     # Returns an array of static files.
     def read(files)
-      files.map do |file|
+      files.each do |file|
         @unfiltered_content << StaticFile.new(@site, @site.source, @dir, file)
       end
       @unfiltered_content

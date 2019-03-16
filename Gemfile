@@ -1,47 +1,50 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 gemspec :name => "jekyll"
 
-gem "rake", "~> 12.0"
+# Temporarily lock JRuby builds on Travis CI to i18n-1.2.x until JRuby is able to handle
+# refinements introduced in i18n-1.3.0
+gem "i18n", "~> 1.2.0" if RUBY_ENGINE == "jruby"
 
-# Dependency of jekyll-mentions. RubyGems in Ruby 2.1 doesn't shield us from this.
-gem "activesupport", "~> 4.2", :groups => [:test_legacy, :site] if RUBY_VERSION < "2.2.2"
+gem "rake", "~> 12.0"
 
 group :development do
   gem "launchy", "~> 2.3"
   gem "pry"
 
-  unless RUBY_ENGINE == "jruby"
-    gem "pry-byebug"
-  end
+  gem "pry-byebug" unless RUBY_ENGINE == "jruby"
 end
 
 #
 
 group :test do
-  gem "codeclimate-test-reporter", "~> 1.0.5"
-  gem "cucumber", "~> 2.1"
+  gem "cucumber", "~> 3.0"
+  gem "httpclient"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
-  gem "nokogiri"
+  gem "nokogiri", "~> 1.7"
   gem "rspec"
   gem "rspec-mocks"
-  gem "rubocop", "~> 0.47"
-  gem "test-theme", :path => File.expand_path("./test/fixtures/test-theme", File.dirname(__FILE__))
+  # Temporary lock on RuboCop version for Windows since Pysch-3.1.0 is not available
+  # for use on Ruby 2.6-mingw32 platforms
+  gem "rubocop", Gem.win_platform? ? "~> 0.64.0" : "~> 0.65.0"
+  gem "test-dependency-theme", :path => File.expand_path("test/fixtures/test-dependency-theme", __dir__)
+  gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)
+  gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
 
-  gem "jruby-openssl" if RUBY_ENGINE == "jruby"
+  # Temporarily lock to jruby-openssl-0.10.1 since JRuby 9.1 can't seem to load jruby-openssl-0.10.2
+  gem "jruby-openssl", "0.10.1" if RUBY_ENGINE == "jruby"
 end
 
 #
 
 group :test_legacy do
-  if RUBY_PLATFORM =~ %r!cygwin! || RUBY_VERSION.start_with?("2.2")
-    gem "test-unit"
-  end
+  gem "test-unit" if RUBY_PLATFORM =~ %r!cygwin!
 
   gem "minitest"
   gem "minitest-profile"
   gem "minitest-reporters"
-  gem "redgreen"
   gem "shoulda"
   gem "simplecov"
 end
@@ -60,36 +63,35 @@ end
 #
 
 group :jekyll_optional_dependencies do
-  gem "coderay", "~> 1.1.0"
   gem "jekyll-coffeescript"
   gem "jekyll-docs", :path => "../docs" if Dir.exist?("../docs") && ENV["JEKYLL_VERSION"]
-  gem "jekyll-feed"
+  gem "jekyll-feed", "~> 0.9"
   gem "jekyll-gist"
   gem "jekyll-paginate"
   gem "jekyll-redirect-from"
-  gem "kramdown", "~> 1.9"
+  gem "kramdown-syntax-coderay"
   gem "mime-types", "~> 3.0"
-  gem "rdoc", "~> 5.0"
-  gem "toml", "~> 0.1.0"
+  gem "rdoc", "~> 6.0"
+  gem "tomlrb", "~> 1.2"
 
   platform :ruby, :mswin, :mingw, :x64_mingw do
-    gem "classifier-reborn", "~> 2.1.0"
-    gem "liquid-c", "~> 3.0"
-    gem "pygments.rb", "~> 0.6.0"
-    gem "rdiscount", "~> 2.0"
-    gem "redcarpet", "~> 3.2", ">= 3.2.3"
+    gem "classifier-reborn", "~> 2.2"
+    gem "liquid-c", "~> 4.0"
+    gem "yajl-ruby", "~> 1.4"
   end
 
-  # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-  gem "tzinfo-data", :platforms => [:mingw, :mswin, :x64_mingw, :jruby]
+  # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
+  # and associated library
+  install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do
+    gem "tzinfo", "~> 1.2"
+    gem "tzinfo-data"
+  end
 end
 
 #
 
 group :site do
-  if ENV["PROOF"]
-    gem "html-proofer", "~> 3.4"
-  end
+  gem "html-proofer", "~> 3.4" if ENV["PROOF"]
 
   gem "jekyll-avatar"
   gem "jekyll-mentions"

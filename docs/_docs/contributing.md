@@ -8,10 +8,7 @@ Hi there! Interested in contributing to Jekyll? We'd love your help. Jekyll is a
 
 ## Where to get help or report a problem
 
-* If you have a question about using Jekyll, start a discussion on [Jekyll Talk](https://talk.jekyllrb.com).
-* If you think you've found a bug within a Jekyll plugin, open an issue in that plugin's repository.
-* If you think you've found a bug within Jekyll itself, [open an issue](https://github.com/jekyll/jekyll/issues/new).
-* More resources are listed on our [Help page](https://jekyllrb.com/help/).
+See the [support guidelines](https://jekyllrb.com/docs/support/)
 
 ## Ways to contribute
 
@@ -19,9 +16,9 @@ Whether you're a developer, a designer, or just a Jekyll devotee, there are lots
 
 * [Install Jekyll on your computer](https://jekyllrb.com/docs/installation/) and kick the tires. Does it work? Does it do what you'd expect? If not, [open an issue](https://github.com/jekyll/jekyll/issues/new) and let us know.
 * Comment on some of the project's [open issues](https://github.com/jekyll/jekyll/issues). Have you experienced the same problem? Know a work around? Do you have a suggestion for how the feature could be better?
-* Read through [the documentation](https://jekyllrb.com/docs/home/), and click the "improve this page" button, any time you see something confusing, or have a suggestion for something that could be improved.
-* Browse through [the Jekyll discussion forum](https://talk.jekyllrb.com/), and lend a hand answering questions. There's a good chance you've already experienced what another user is experiencing.
-* Find [an open issue](https://github.com/jekyll/jekyll/issues) (especially [those labeled `help-wanted`](https://github.com/jekyll/jekyll/issues?q=is%3Aopen+is%3Aissue+label%3Ahelp-wanted)), and submit a proposed fix. If it's your first pull request, we promise we won't bite, and are glad to answer any questions.
+* Read through the [documentation](https://jekyllrb.com/docs/home/), and click the "improve this page" button, any time you see something confusing, or have a suggestion for something that could be improved.
+* Browse through the [Jekyll discussion forum](https://talk.jekyllrb.com/), and lend a hand answering questions. There's a good chance you've already experienced what another user is experiencing.
+* Find an [open issue](https://github.com/jekyll/jekyll/issues) (especially [those labeled `help-wanted`](https://github.com/jekyll/jekyll/issues?q=is%3Aopen+is%3Aissue+label%3Ahelp-wanted)), and submit a proposed fix. If it's your first pull request, we promise we won't bite, and are glad to answer any questions.
 * Help evaluate [open pull requests](https://github.com/jekyll/jekyll/pulls), by testing the changes locally and reviewing what's proposed.
 
 ## Submitting a pull request
@@ -32,7 +29,7 @@ Whether you're a developer, a designer, or just a Jekyll devotee, there are lots
 
 * The more information, the better. Make judicious use of the pull request body. Describe what changes were made, why you made them, and what impact they will have for users.
 
-* Pull requests are easy and fun. If this is your first pull request, it may help to [understand GitHub Flow](https://guides.github.com/introduction/flow/).
+* If this is your first pull request, it may help to [understand GitHub Flow](https://guides.github.com/introduction/flow/).
 
 * If you're submitting a code contribution, be sure to read the [code contributions](#code-contributions) section below.
 
@@ -56,7 +53,7 @@ That's it! You'll be automatically subscribed to receive updates as others revie
 2. Clone the repository locally `git clone https://github.com/<you-username>/jekyll`.
 3. Create a new, descriptively named branch to contain your change ( `git checkout -b my-awesome-feature` ).
 4. Hack away, add tests. Not necessarily in that order.
-5. Make sure everything still passes by running `script/cibuild` (see [the tests section](#running-tests-locally) below)
+5. Make sure everything still passes by running `script/cibuild` (see the [tests section](#running-tests-locally) below)
 6. Push the branch up ( `git push origin my-awesome-feature` ).
 7. Create a pull request by visiting `https://github.com/<your-username>/jekyll` and following the instructions at the top of the screen.
 
@@ -118,25 +115,37 @@ If your contribution changes any Jekyll behavior, make sure to update the docume
 
 * Don't bump the Gem version in your pull request (if you don't know what that means, you probably didn't).
 
+* You can use the command `script/console` to start a REPL to explore the result of
+Jekyll's methods. It also provides you with helpful methods to quickly create a
+site or configuration. [Feel free to check it out!](https://github.com/jekyll/jekyll/blob/master/script/console)
+
 ## Running tests locally
 
 ### Test Dependencies
 
 To run the test suite and build the gem you'll need to install Jekyll's dependencies by running the following command:
 
-<pre class="highlight"><code>$ script/bootstrap</code></pre>
+```sh
+script/bootstrap
+```
 
 Before you make any changes, run the tests and make sure that they pass (to confirm your environment is configured properly):
 
-<pre class="highlight"><code>$ script/cibuild</code></pre>
+```sh
+script/cibuild
+```
 
 If you are only updating a file in `test/`, you can use the command:
 
-<pre class="highlight"><code>$ script/test test/blah_test.rb</code></pre>
+```sh
+script/test test/blah_test.rb
+```
 
 If you are only updating a `.feature` file, you can use the command:
 
-<pre class="highlight"><code>$ script/cucumber features/blah.feature</code></pre>
+```sh
+script/cucumber features/blah.feature
+```
 
 Both `script/test` and `script/cucumber` can be run without arguments to
 run its entire respective suite.

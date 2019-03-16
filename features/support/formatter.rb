@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "fileutils"
 require "colorator"
 require "cucumber/formatter/console"
@@ -57,7 +59,7 @@ module Jekyll
       #
 
       def feature_element_timing_key(feature_element)
-        "\"#{feature_element.name.to_s.sub("Scenario: ", "")}\" (#{feature_element.location})"
+        "\"#{feature_element.name}\" (#{feature_element.location})"
       end
 
       #
@@ -171,16 +173,8 @@ module Jekyll
 
       #
 
-      private
-      def print_feature_element_name(keyword, name, source_line, _indent)
-        @io.puts
-
-        names = name.empty? ? [name] : name.each_line.to_a
-        line  = "  #{keyword}: #{names[0]}"
-
-        @io.print(source_line) if @options[:source]
-        @io.print(line)
-        @io.print " "
+      def print_feature_element_name(feature_element)
+        @io.print "\n#{feature_element.location}  Scenario: #{feature_element.name} "
         @io.flush
       end
 
@@ -210,5 +204,22 @@ module Jekyll
         print_passing_wip(@options)
       end
     end
+  end
+end
+
+AfterConfiguration do |config|
+  f = Jekyll::Cucumber::Formatter.new(nil, $stdout, {})
+
+  config.on_event :test_case_started do |event|
+    f.print_feature_element_name(event.test_case)
+    f.before_feature_element(event.test_case)
+  end
+
+  config.on_event :test_case_finished do |event|
+    f.after_feature_element(event.test_case)
+  end
+
+  config.on_event :test_run_finished do
+    f.print_worst_offenders
   end
 end

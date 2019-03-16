@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class LiquidRenderer
     class File
@@ -8,8 +10,9 @@ module Jekyll
 
       def parse(content)
         measure_time do
-          @template = Liquid::Template.parse(content, :line_numbers => true)
+          @renderer.cache[@filename] ||= Liquid::Template.parse(content, :line_numbers => true)
         end
+        @template = @renderer.cache[@filename]
 
         self
       end
@@ -17,15 +20,20 @@ module Jekyll
       def render(*args)
         measure_time do
           measure_bytes do
-            @template.render(*args)
+            measure_counts do
+              @template.render(*args)
+            end
           end
         end
       end
 
+      # This method simply 'rethrows any error' before attempting to render the template.
       def render!(*args)
         measure_time do
           measure_bytes do
-            @template.render!(*args)
+            measure_counts do
+              @template.render!(*args)
+            end
           end
         end
       end
@@ -35,6 +43,11 @@ module Jekyll
       end
 
       private
+
+      def measure_counts
+        @renderer.increment_count(@filename)
+        yield
+      end
 
       def measure_bytes
         yield.tap do |str|

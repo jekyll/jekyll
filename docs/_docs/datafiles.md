@@ -18,9 +18,8 @@ Plugins/themes can also leverage Data Files to set configuration variables.
 
 ## The Data Folder
 
-As explained on the [directory structure](../structure/) page, the `_data`
-folder is where you can store additional data for Jekyll to use when generating
-your site. These files must be YAML, JSON, or CSV files (using either
+The `_data` folder is where you can store additional data for Jekyll to use when
+generating your site. These files must be YAML, JSON, or CSV files (using either
 the `.yml`, `.yaml`, `.json` or `.csv` extension), and they will be
 accessible via `site.data`.
 
@@ -56,8 +55,8 @@ determines the variable name).
 
 You can now render the list of members in a template:
 
-```html
 {% raw %}
+```liquid
 <ul>
 {% for member in site.data.members %}
   <li>
@@ -67,13 +66,10 @@ You can now render the list of members in a template:
   </li>
 {% endfor %}
 </ul>
-{% endraw %}
 ```
+{% endraw %}
 
-{: .note .info }
-If your Jekyll site has a lot of pages, such as with documentation websites, see the detailed examples in [how to build robust navigation for your site]({% link _tutorials/navigation.md %}).
-
-## Example: Organizations
+## Subfolders
 
 Data files can also be placed in sub-folders of the `_data` folder. Each folder
 level will be added to a variable's namespace. The example below shows how
@@ -106,8 +102,8 @@ members:
 The organizations can then be accessed via `site.data.orgs`, followed by the
 file name:
 
-```html
 {% raw %}
+```liquid
 <ul>
 {% for org_hash in site.data.orgs %}
 {% assign org = org_hash[1] %}
@@ -119,8 +115,8 @@ file name:
   </li>
 {% endfor %}
 </ul>
-{% endraw %}
 ```
+{% endraw %}
 
 ## Example: Accessing a specific author
 
@@ -134,10 +130,10 @@ dave:
     twitter: DavidSilvaSmith
 ```
 
-The author can then be specified as a page variable in a post's frontmatter:
+The author can then be specified as a page variable in a post's front matter:
 
-```html
 {% raw %}
+```liquid
 ---
 title: sample post
 author: dave
@@ -149,8 +145,7 @@ author: dave
   title="{{ author.name }}">
     {{ author.name }}
 </a>
-
-{% endraw %}
 ```
+{% endraw %}
 
 For information on how to build robust navigation for your site (especially if you have a documentation website or another type of Jekyll site with a lot of pages to organize), see [Navigation](/tutorials/navigation).

@@ -33,7 +33,7 @@ You want to return a basic list of pages.
 **YAML**
 
 ```yaml
-docs_list_title: Docs
+docs_list_title: ACME Documentation
 docs:
 
 - title: Introduction
@@ -48,27 +48,29 @@ docs:
 
 **Liquid**
 
+{% raw %}
 ```liquid
-{% raw %}<h2>{{ site.data.samplelist.docs_list_title }}</h2>
+<h2>{{ site.data.samplelist.docs_list_title }}</h2>
 <ul>
    {% for item in site.data.samplelist.docs %}
-      <li><a href="{{ item.url }}" alt="{{ item.title }}">{{ item.title }}</a></li>
+      <li><a href="{{ item.url }}">{{ item.title }}</a></li>
    {% endfor %}
-</ul>{% endraw %}
+</ul>
 ```
+{% endraw %}
 
 **Result**
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <h2>ACME Documentation</h2>
    <ul>
-      <li><a href="#" alt="Introduction">Introduction</a></li>
-      <li><a href="#" alt="Configuration">Configuration</a></li>
-      <li><a href="#" alt="Deployment">Deployment</a></li>
+      <li><a href="#">Introduction</a></li>
+      <li><a href="#">Configuration</a></li>
+      <li><a href="#">Deployment</a></li>
    </ul>
 </div>
 
 {: .note .info }
-For the results in these fictitious samples, `#` is manually substituted for the actual link value to avoid 404 errors.) 
+For the results in these fictitious samples, `#` is manually substituted for the actual link value to avoid 404 errors.)
 
 When you use a `for` loop, you choose how you want to refer to the items you're looping through. The variable you choose (in this case, `item`) becomes how you access the properties of each item in the list. Dot notation is used to get a property of the item (for example, `item.url`).
 
@@ -91,28 +93,36 @@ Suppose you wanted to sort the list by the `title`. To do this, convert the refe
 
 **Liquid**
 
+{% raw %}
 ```liquid
-{% raw %}{% assign doclist = site.data.samplelist.docs | sort: 'title'  %}
+{% assign doclist = site.data.samplelist.docs | sort: 'title'  %}
+<ol>
 {% for item in doclist %}
-    <li><a href="{{ item.url }}" alt="{{ item.title }}">{{ item.title }}</a></li>
-{% endfor %}{% endraw %}
+    <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+{% endfor %}
+</ol>
 ```
+{% endraw %}
 
 **Result**
 
-<div class="highlight result">
-   <li><a href="#" alt="Configuration">Configuration</a></li>
-   <li><a href="#" alt="Deployment">Deployment</a></li>
-   <li><a href="#" alt="Introduction">Introduction</a></li>
+<div class="highlight result" data-proofer-ignore>
+   <ol>
+      <li><a href="#">Configuration</a></li>
+      <li><a href="#">Deployment</a></li>
+      <li><a href="#">Introduction</a></li>
+   </ol>
 </div>
 
 The items now appear in alphabetical order. The `sort` property in the Liquid filter applies to the `title`, which is an actual property in the list. If `title` weren't a property, we would need to sort by another property.
 
 See the [Liquid array filter](https://help.shopify.com/themes/liquid/filters/array-filters) for more filter options. Note that you can't simply use this syntax:
 
+{% raw %}
 ```liquid
-{% raw %}{% for item in site.data.samplelist.docs | sort: "title" %}{% endfor %}{% endraw %}
+{% for item in site.data.samplelist.docs | sort: "title" %}{% endfor %}
 ```
+{% endraw %}
 
 You have to convert `site.data.samplelist.docs` to a variable first using either `assign` or `capture` tags.
 
@@ -152,19 +162,21 @@ toc:
 
 **Liquid**
 
+{% raw %}
 ```liquid
-{% raw %}{% for item in site.data.samplelist.toc %}
+{% for item in site.data.samplelist.toc %}
     <h3>{{ item.title }}</h3>
       <ul>
         {% for entry in item.subfolderitems %}
           <li><a href="{{ entry.url }}">{{ entry.page }}</a></li>
         {% endfor %}
       </ul>
-  {% endfor %}{% endraw %}
+  {% endfor %}
 ```
+{% endraw %}
 
 **Result**
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
     <h3>Group 1</h3>
       <ul>
           <li><a href="#">Thing 1</a></li>
@@ -242,15 +254,16 @@ toc2:
 
 **Liquid**
 
+{% raw %}
 ```liquid
-{% raw %}<div>
+<div>
 {% if site.data.samplelist.toc2[0] %}
   {% for item in site.data.samplelist.toc2 %}
     <h3>{{ item.title }}</h3>
       {% if item.subfolderitems[0] %}
         <ul>
           {% for entry in item.subfolderitems %}
-              <li><a href="{{ entry.url }}">{{ entry.page }}</a></li>
+              <li><a href="{{ entry.url }}">{{ entry.page }}</a>
                 {% if entry.subsubfolderitems[0] %}
                   <ul>
                   {% for subentry in entry.subsubfolderitems %}
@@ -258,17 +271,19 @@ toc2:
                   {% endfor %}
                   </ul>
                 {% endif %}
+              </li>
           {% endfor %}
         </ul>
       {% endif %}
     {% endfor %}
 {% endif %}
-</div>{% endraw %}
+</div>
 ```
+{% endraw %}
 
 **Result**
 
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <div>
       <h3>Group 1</h3>
       <ul>
@@ -327,16 +342,19 @@ sidebar: toc
 
 **Liquid**
 
+{% raw %}
 ```liquid
-{% raw %}<ul>
+<ul>
     {% for item in site.data.samplelist[page.sidebar] %}
       <li><a href="{{ item.url }}">{{ item.title }}</a></li>
     {% endfor %}
-</ul>{% endraw %}
+</ul>
 ```
+{% endraw %}
+
 **Result**
 
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <ul>
       <li><a href="#">Introduction</a></li>
       <li><a href="#">Configuration</a></li>
@@ -361,13 +379,15 @@ In addition to inserting items from the YAML data file into your list, you also 
 ```
 **Liquid**
 
+{% raw %}
 ```liquid
-{% raw %}{% for item in site.data.samplelist.docs %}
+{% for item in site.data.samplelist.docs %}
     <li class="{% if item.url == page.url %}active{% endif %}">
       <a href="{{ item.url }}">{{ item.title }}</a>
     </li>
-{% endfor %}{% endraw %}
+{% endfor %}
 ```
+{% endraw %}
 
 **Result**
 
@@ -378,17 +398,19 @@ In addition to inserting items from the YAML data file into your list, you also 
   }
 </style>
 
-<div class="highlight result">
-   <li class=""><a href="#">Introduction</a></li>
-   <li class=""><a href="#">Configuration</a></li>
-   <li class="active"><a href="#">Deployment</a></li>
+<div class="highlight result" data-proofer-ignore>
+   <ul>
+      <li class=""><a href="#">Introduction</a></li>
+      <li class=""><a href="#">Configuration</a></li>
+      <li class="active"><a href="#">Deployment</a></li>
+   </ul>
 </div>
 
 In this case, assume `Deployment` is the current page.
 
 To make sure the `item.url` (stored in the YAML file) matches the `page.url`, it can be helpful to print the `{% raw %}{{ page.url }}{% endraw %}` to the page.
 
-## Scenario 6: Including items conditionally
+## Scenario 7: Including items conditionally
 
 You might want to include items conditionally in your list. For example, maybe you have multiple site outputs and only want to include the sidebar item for certain outputs. You can add properties in each list item and then use those properties to conditionally include the content.
 
@@ -412,19 +434,21 @@ docs2:
 
 **Liquid**
 
+{% raw %}
 ```liquid
-{% raw %}<ul>
+  <ul>
     {% for item in site.data.samplelist.docs2 %}
       {% if item.version == 1 %}
         <li><a href="{{ item.url }}">{{ item.title }}</a></li>
       {% endif %}
     {% endfor %}
-</ul>{% endraw %}
+</ul>
 ```
+{% endraw %}
 
 **Result**
 
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <ul>
       <li><a href="#">Introduction</a></li>
       <li><a href="#">Configuration</a></li>
@@ -433,9 +457,9 @@ docs2:
 
 The `Deployment` page is excluded because its `version` is `2`.
 
-## Scenario 7: Retrieving items based on front matter properties
+## Scenario 8: Retrieving items based on front matter properties
 
-If you don't want to store your navigation items in a YAML file in your `_data` folder, you can use `for` loops to look through the YAML front matter of each page or collection and get the content based on properties in the front matter.
+If you don't want to store your navigation items in a YAML file in your `_data` folder, you can use `for` loops to look through the front matter of each page or collection and get the content based on properties in the front matter.
 
 In this scenario, suppose we have a collection called `_docs`. Collections are often better than pages because they allow you to narrow the list of what you're looping through. (Try to avoid scenarios where you loop through large numbers of items, since it will increase your build time. [Collections]({% link _docs/collections.md %}) help you narrow the scope.)
 
@@ -491,20 +515,22 @@ Note that even though `category` is used in the doc front matter, `category` is 
 
 If you wanted to simply get all docs in the collection for a specific category, you could use a `for` loop with an `if` condition to check for a specific category:
 
+{% raw %}
 ```liquid
-{% raw %}<h3>Getting Started</h3>
+<h3>Getting Started</h3>
 <ul>
     {% for doc in site.docs %}
       {% if doc.category == "getting-started" %}
         <li><a href="{{ doc.url }}">{{ doc.title }}</a></li>
       {% endif %}
     {% endfor %}
-</ul>{% endraw %}
+</ul>
 ```
+{% endraw %}
 
 The result would be as follows:
 
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <h3>Getting Started</h3>
    <ul>
       <li><a href="#">Sample1</a></li>
@@ -523,8 +549,9 @@ Here's the code for getting lists of pages grouped under their corresponding cat
 
 **Liquid**
 
+{% raw %}
 ```liquid
-{% raw %}{% assign mydocs = site.docs | group_by: 'category' %}
+{% assign mydocs = site.docs | group_by: 'category' %}
 {% for cat in mydocs %}
 <h2>{{ cat.name | capitalize }}</h2>
     <ul>
@@ -533,12 +560,13 @@ Here's the code for getting lists of pages grouped under their corresponding cat
         <li><a href="{{ item.url }}">{{ item.title }}</a></li>
       {% endfor %}
     </ul>
-{% endfor %}{% endraw %}
+{% endfor %}
 ```
+{% endraw %}
 
 **Result**
 
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <h2>Getting-started</h2>
    <ul>
       <li><a href="#">Sample2</a></li>
@@ -563,7 +591,7 @@ The `group_by` filter groups the collection content by `category`. More specific
 ```yaml
 [
   {"name": "getting-started", "items": [Sample 1, Sample 2],"size": 2},
-  {"name": "configuration", "items": [Topic 1, Topic 2],  "size": 2},
+  {"name": "configuration", "items": [Topic 1, Topic 2], "size": 2},
   {"name": "deployment", "items": [Widget 1, Widget 2, "size": 2}
 ]
 ```
@@ -574,6 +602,6 @@ After getting the category name, we assign the variable `items` for the docs and
 
 The `for item in items` loop looks through each `item` and gets the `title` and `url` to form the list item link.
 
-For more details on the `group_by` filter, see [Jekyll's Templates documentation](https://jekyllrb.com/docs/templates/) as well as [this Siteleaf tutorial](https://www.siteleaf.com/blog/advanced-liquid-group-by/). For more details on the `sort` filter, see [sort](https://help.shopify.com/themes/liquid/filters/array-filters#sort) in Liquid's documentation.
+For more details on the `group_by` filter, see [Jekyll's Templates documentation](https://jekyllrb.com/docs/templates/) as well as [this Siteleaf tutorial](https://www.siteleaf.com/blog/advanced-liquid-group-by/). For more details on the `sort` filter, see [sort](https://shopify.github.io/liquid/filters/sort/) in Liquid's documentation.
 
 Whether you use properties in your doc's front matter to retrieve your pages or a YAML data file, in both cases you can programmatically build a more robust navigation for your site.

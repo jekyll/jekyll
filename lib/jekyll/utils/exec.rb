@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "open3"
 
 module Jekyll
@@ -19,7 +21,6 @@ module Jekyll
         [stdin, stdout, stderr].each(&:close)
         [process.value, out + err]
       end
-
     end
   end
 end

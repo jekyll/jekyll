@@ -3,7 +3,7 @@ title: "Jekyll 1.0.3 Released"
 date: "2013-06-07 21:02:13 +0200"
 author: parkr
 version: 1.0.3
-categories: [release]
+category: release
 ---
 
 v1.0.3 contains some key enhancements and bug fixes:

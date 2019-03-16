@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   module Utils
     module WinTZ
@@ -10,7 +12,7 @@ module Jekyll
       #
       # Returns a string that ultimately re-defines ENV["TZ"] in Windows
       def calculate(timezone)
-        External.require_with_graceful_fail("tzinfo")
+        External.require_with_graceful_fail("tzinfo") unless defined?(TZInfo)
         tz = TZInfo::Timezone.get(timezone)
         difference = Time.now.to_i - tz.now.to_i
         #
@@ -19,7 +21,7 @@ module Jekyll
         #   is denoted as:
         #     EST+5 (or) EST+05:00
         # Reference: http://www.gnu.org/software/libc/manual/html_node/TZ-Variable.html
-        sign = difference < 0 ? "-" : "+"
+        sign = difference.negative? ? "-" : "+"
         offset = sign == "-" ? "+" : "-" unless difference.zero?
         #
         # convert the difference (in seconds) to hours, as a rational number, and perform
@@ -46,7 +48,7 @@ module Jekyll
       #
       # Returns a rational number.
       def rational_hour(seconds)
-        seconds.to_r/3600
+        seconds.to_r / 3600
       end
 
       # Private: Convert given seconds to an hour as an absolute number.
@@ -56,7 +58,7 @@ module Jekyll
       #
       # Returns an integer.
       def absolute_hour(seconds)
-        seconds.abs/3600
+        seconds.abs / 3600
       end
 
       # Private: Perform a modulo operation on a given fraction.

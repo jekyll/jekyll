@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class RelatedPosts
     class << self
@@ -44,7 +46,7 @@ module Jekyll
     end
 
     def most_recent_posts
-      @most_recent_posts ||= (site.posts.docs.reverse - [post]).first(10)
+      @most_recent_posts ||= (site.posts.docs.last(11).reverse - [post]).first(10)
     end
   end
 end

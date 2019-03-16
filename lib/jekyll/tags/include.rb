@@ -1,25 +1,20 @@
-# encoding: UTF-8
+# frozen_string_literal: true
 
 module Jekyll
   module Tags
-    class IncludeTagError < StandardError
-      attr_accessor :path
-
-      def initialize(msg, path)
-        super(msg)
-        @path = path
-      end
-    end
-
     class IncludeTag < Liquid::Tag
       VALID_SYNTAX = %r!
         ([\w-]+)\s*=\s*
         (?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))
-      !x
+      !x.freeze
       VARIABLE_SYNTAX = %r!
         (?<variable>[^{]*(\{\{\s*[\w\-\.]+\s*(\|.*)?\}\}[^\s{}]*)+)
         (?<params>.*)
-      !x
+      !mx.freeze
+
+      FULL_VALID_SYNTAX = %r!\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z!.freeze
+      VALID_FILENAME_CHARS = %r!^[\w/\.-]+$!.freeze
+      INVALID_SEQUENCES = %r![./]{2,}!.freeze
 
       def initialize(tag_name, markup, tokens)
         super
@@ -46,9 +41,9 @@ module Jekyll
           markup = markup[match.end(0)..-1]
 
           value = if match[2]
-                    match[2].gsub(%r!\\"!, '"')
+                    match[2].gsub('\\"', '"')
                   elsif match[3]
-                    match[3].gsub(%r!\\'!, "'")
+                    match[3].gsub("\\'", "'")
                   elsif match[4]
                     context[match[4]]
                   end
@@ -59,33 +54,32 @@ module Jekyll
       end
 
       def validate_file_name(file)
-        if file !~ %r!^[a-zA-Z0-9_/\.-]+$! || file =~ %r!\./! || file =~ %r!/\.!
-          raise ArgumentError, <<-eos
-Invalid syntax for include tag. File contains invalid characters or sequences:
+        if file =~ INVALID_SEQUENCES || file !~ VALID_FILENAME_CHARS
+          raise ArgumentError, <<~MSG
+            Invalid syntax for include tag. File contains invalid characters or sequences:
 
-  #{file}
+              #{file}
 
-Valid syntax:
+            Valid syntax:
 
-  #{syntax_example}
+              #{syntax_example}
 
-eos
+          MSG
         end
       end
 
       def validate_params
-        full_valid_syntax = %r!\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z!
-        unless @params =~ full_valid_syntax
-          raise ArgumentError, <<-eos
-Invalid syntax for include tag:
+        unless @params =~ FULL_VALID_SYNTAX
+          raise ArgumentError, <<~MSG
+            Invalid syntax for include tag:
 
-  #{@params}
+            #{@params}
 
-Valid syntax:
+            Valid syntax:
 
-  #{syntax_example}
+            #{syntax_example}
 
-eos
+          MSG
         end
       end
 
@@ -96,13 +90,7 @@ eos
 
       # Render the variable if required
       def render_variable(context)
-        if @file.match(VARIABLE_SYNTAX)
-          partial = context.registers[:site]
-            .liquid_renderer
-            .file("(variable)")
-            .parse(@file)
-          partial.render!(context)
-        end
+        Liquid::Template.parse(@file).render(context) if @file =~ VARIABLE_SYNTAX
       end
 
       def tag_includes_dirs(context)
@@ -115,9 +103,7 @@ eos
           path = File.join(dir.to_s, file.to_s)
           return path if valid_include_file?(path, dir.to_s, safe)
         end
-        raise IOError, "Could not locate the included file '#{file}' in any of "\
-          "#{includes_dirs}. Ensure it exists in one of those directories and, "\
-          "if it is a symlink, does not point outside your site source."
+        raise IOError, could_not_locate_message(file, includes_dirs, safe)
       end
 
       def render(context)
@@ -135,12 +121,18 @@ eos
 
         context.stack do
           context["include"] = parse_params(context) if @params
-          partial.render!(context)
+          begin
+            partial.render!(context)
+          rescue Liquid::Error => e
+            e.template_name = path
+            e.markup_context = "included " if e.markup_context.nil?
+            raise e
+          end
         end
       end
 
       def add_include_to_dependency(site, path, context)
-        if context.registers[:page] && context.registers[:page].key?("path")
+        if context.registers[:page]&.key?("path")
           site.regenerator.add_dependency(
             site.in_source_dir(context.registers[:page]["path"]),
             path
@@ -160,8 +152,10 @@ eos
             .file(path)
           begin
             cached_partial[path] = unparsed_file.parse(read_file(path, context))
-          rescue Liquid::SyntaxError => ex
-            raise IncludeTagError.new(ex.message, path)
+          rescue Liquid::Error => e
+            e.template_name = path
+            e.markup_context = "included " if e.markup_context.nil?
+            raise e
           end
         end
       end
@@ -176,13 +170,25 @@ eos
 
       def realpath_prefixed_with?(path, dir)
         File.exist?(path) && File.realpath(path).start_with?(dir)
-      rescue
+      rescue StandardError
         false
       end
 
       # This method allows to modify the file content by inheriting from the class.
       def read_file(file, context)
         File.read(file, file_read_opts(context))
+      end
+
+      private
+
+      def could_not_locate_message(file, includes_dirs, safe)
+        message = "Could not locate the included file '#{file}' in any of "\
+          "#{includes_dirs}. Ensure it exists in one of those directories and"
+        message + if safe
+                    " is not a symlink as those are not allowed in safe mode."
+                  else
+                    ", if it is a symlink, does not point outside your site source."
+                  end
       end
     end
 
@@ -195,8 +201,15 @@ eos
         if context.registers[:page].nil?
           context.registers[:site].source
         else
-          current_doc_dir = File.dirname(context.registers[:page]["path"])
-          context.registers[:site].in_source_dir current_doc_dir
+          site = context.registers[:site]
+          page_payload  = context.registers[:page]
+          resource_path = \
+            if page_payload["collection"].nil?
+              page_payload["path"]
+            else
+              File.join(site.config["collections_dir"], page_payload["path"])
+            end
+          site.in_source_dir File.dirname(resource_path)
         end
       end
     end

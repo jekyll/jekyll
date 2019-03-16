@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   module Commands
     class Help < Command
@@ -10,9 +12,9 @@ module Jekyll
             c.action do |args, _|
               cmd = (args.first || "").to_sym
               if args.empty?
-                puts prog
+                Jekyll.logger.info prog.to_s
               elsif prog.has_command? cmd
-                puts prog.commands[cmd]
+                Jekyll.logger.info prog.commands[cmd].to_s
               else
                 invalid_command(prog, cmd)
                 abort
@@ -23,7 +25,7 @@ module Jekyll
 
         def invalid_command(prog, cmd)
           Jekyll.logger.error "Error:",
-                "Hmm... we don't know what the '#{cmd}' command is."
+                              "Hmm... we don't know what the '#{cmd}' command is."
           Jekyll.logger.info  "Valid commands:", prog.commands.keys.join(", ")
         end
       end

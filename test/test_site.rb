@@ -1,6 +1,24 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestSite < JekyllUnitTest
+  def with_image_as_post
+    tmp_image_path = File.join(source_dir, "_posts", "2017-09-01-jekyll-sticker.jpg")
+    FileUtils.cp File.join(Dir.pwd, "docs", "img", "jekyll-sticker.jpg"), tmp_image_path
+    yield
+  ensure
+    FileUtils.rm tmp_image_path
+  end
+
+  def read_posts
+    @site.posts.docs.concat(PostReader.new(@site).read_posts(""))
+    posts = Dir[source_dir("_posts", "**", "*")]
+    posts.delete_if do |post|
+      File.directory?(post) && post !~ Document::DATE_FILENAME_MATCHER
+    end
+  end
+
   context "configuring sites" do
     should "have an array for plugins by default" do
       site = Site.new default_configuration
@@ -13,15 +31,15 @@ class TestSite < JekyllUnitTest
     end
 
     should "have an array for plugins if passed as a string" do
-      site = Site.new(site_configuration({ "plugins_dir" => "/tmp/plugins" }))
+      site = Site.new(site_configuration("plugins_dir" => "/tmp/plugins"))
       array = Utils::Platforms.windows? ? ["C:/tmp/plugins"] : ["/tmp/plugins"]
       assert_equal array, site.plugins
     end
 
     should "have an array for plugins if passed as an array" do
-      site = Site.new(site_configuration({
-        "plugins_dir" => ["/tmp/plugins", "/tmp/otherplugins"],
-      }))
+      site = Site.new(site_configuration(
+                        "plugins_dir" => ["/tmp/plugins", "/tmp/otherplugins"]
+                      ))
       array = if Utils::Platforms.windows?
                 ["C:/tmp/plugins", "C:/tmp/otherplugins"]
               else
@@ -31,47 +49,57 @@ class TestSite < JekyllUnitTest
     end
 
     should "have an empty array for plugins if nothing is passed" do
-      site = Site.new(site_configuration({ "plugins_dir" => [] }))
+      site = Site.new(site_configuration("plugins_dir" => []))
       assert_equal [], site.plugins
     end
 
     should "have the default for plugins if nil is passed" do
-      site = Site.new(site_configuration({ "plugins_dir" => nil }))
+      site = Site.new(site_configuration("plugins_dir" => nil))
       assert_equal [source_dir("_plugins")], site.plugins
     end
 
-    should "expose default baseurl" do
+    should "default baseurl to `nil`" do
       site = Site.new(default_configuration)
-      assert_equal Jekyll::Configuration::DEFAULTS["baseurl"], site.baseurl
+      assert_nil site.baseurl
     end
 
     should "expose baseurl passed in from config" do
-      site = Site.new(site_configuration({ "baseurl" => "/blog" }))
+      site = Site.new(site_configuration("baseurl" => "/blog"))
       assert_equal "/blog", site.baseurl
     end
 
     should "only include theme includes_path if the path exists" do
-      site = fixture_site({ "theme" => "test-theme" })
+      site = fixture_site("theme" => "test-theme")
       assert_equal [source_dir("_includes"), theme_dir("_includes")],
-        site.includes_load_paths
+                   site.includes_load_paths
 
       allow(File).to receive(:directory?).with(theme_dir("_sass")).and_return(true)
       allow(File).to receive(:directory?).with(theme_dir("_layouts")).and_return(true)
       allow(File).to receive(:directory?).with(theme_dir("_includes")).and_return(false)
-      site = fixture_site({ "theme" => "test-theme" })
+      site = fixture_site("theme" => "test-theme")
       assert_equal [source_dir("_includes")], site.includes_load_paths
     end
+
+    should "configure cache_dir" do
+      fixture_site.process
+      assert File.directory?(source_dir(".jekyll-cache", "Jekyll", "Cache"))
+      assert File.directory?(source_dir(".jekyll-cache", "Jekyll", "Cache", "Jekyll--Cache"))
+    end
+
+    should "use .jekyll-cache directory at source as cache_dir by default" do
+      site = Site.new(default_configuration)
+      assert_equal File.join(site.source, ".jekyll-cache"), site.cache_dir
+    end
   end
+
   context "creating sites" do
     setup do
       @site = Site.new(site_configuration)
-      @num_invalid_posts = 4
+      @num_invalid_posts = 6
     end
 
     teardown do
-      if defined?(MyGenerator)
-        self.class.send(:remove_const, :MyGenerator)
-      end
+      self.class.send(:remove_const, :MyGenerator) if defined?(MyGenerator)
     end
 
     should "have an empty tag hash by default" do
@@ -216,6 +244,7 @@ class TestSite < JekyllUnitTest
         properties.html
         sitemap.xml
         static_files.html
+        trailing-dots...md
       )
       unless Utils::Platforms.really_windows?
         # files in symlinked directories may appear twice
@@ -225,12 +254,16 @@ class TestSite < JekyllUnitTest
     end
 
     should "read posts" do
-      @site.posts.docs.concat(PostReader.new(@site).read_posts(""))
-      posts = Dir[source_dir("_posts", "**", "*")]
-      posts.delete_if do |post|
-        File.directory?(post) && !(post =~ Document::DATE_FILENAME_MATCHER)
-      end
+      posts = read_posts
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
+    end
+
+    should "skip posts with invalid encoding" do
+      with_image_as_post do
+        posts = read_posts
+        num_invalid_posts = @num_invalid_posts + 1
+        assert_equal posts.size - num_invalid_posts, @site.posts.size
+      end
     end
 
     should "read pages with YAML front matter" do
@@ -257,7 +290,7 @@ class TestSite < JekyllUnitTest
 
       posts = Dir[source_dir("**", "_posts", "**", "*")]
       posts.delete_if do |post|
-        File.directory?(post) && !(post =~ Document::DATE_FILENAME_MATCHER)
+        File.directory?(post) && post !~ Document::DATE_FILENAME_MATCHER
       end
       categories = %w(
         2013 bar baz category foo z_category MixedCase Mixedcase publish_test win
@@ -279,6 +312,24 @@ class TestSite < JekyllUnitTest
         assert_raises Jekyll::Errors::FatalException do
           Site.new(site_configuration("destination" => File.join(source_dir, "..")))
         end
+      end
+
+      should "raise for bad frontmatter if strict_front_matter is set" do
+        site = Site.new(site_configuration(
+                          "collections"         => ["broken"],
+                          "strict_front_matter" => true
+                        ))
+        assert_raises(Psych::SyntaxError) do
+          site.process
+        end
+      end
+
+      should "not raise for bad frontmatter if strict_front_matter is not set" do
+        site = Site.new(site_configuration(
+                          "collections"         => ["broken"],
+                          "strict_front_matter" => false
+                        ))
+        site.process
       end
     end
 
@@ -372,9 +423,9 @@ class TestSite < JekyllUnitTest
 
         bad_processor = "Custom::Markdown"
         s = Site.new(site_configuration(
-          "markdown"    => bad_processor,
-          "incremental" => false
-        ))
+                       "markdown"    => bad_processor,
+                       "incremental" => false
+                     ))
         assert_raises Jekyll::Errors::FatalException do
           s.process
         end
@@ -393,9 +444,9 @@ class TestSite < JekyllUnitTest
       should "throw FatalException at process time" do
         bad_processor = "not a processor name"
         s = Site.new(site_configuration(
-          "markdown"    => bad_processor,
-          "incremental" => false
-        ))
+                       "markdown"    => bad_processor,
+                       "incremental" => false
+                     ))
         assert_raises Jekyll::Errors::FatalException do
           s.process
         end
@@ -449,8 +500,8 @@ class TestSite < JekyllUnitTest
         site.process
 
         file_content = SafeYAML.load_file(File.join(
-          source_dir, "_data", "categories", "dairy.yaml"
-        ))
+                                            source_dir, "_data", "categories", "dairy.yaml"
+                                          ))
 
         assert_equal site.data["categories"]["dairy"], file_content
         assert_equal(
@@ -464,8 +515,8 @@ class TestSite < JekyllUnitTest
         site.process
 
         file_content = SafeYAML.load_file(File.join(
-          source_dir, "_data", "categories.01", "dairy.yaml"
-        ))
+                                            source_dir, "_data", "categories.01", "dairy.yaml"
+                                          ))
 
         assert_equal site.data["categories01"]["dairy"], file_content
         assert_equal(
@@ -496,9 +547,9 @@ class TestSite < JekyllUnitTest
 
     context "manipulating the Jekyll environment" do
       setup do
-        @site = Site.new(site_configuration({
-          "incremental" => false,
-        }))
+        @site = Site.new(site_configuration(
+                           "incremental" => false
+                         ))
         @site.process
         @page = @site.pages.find { |p| p.name == "environment.html" }
       end
@@ -510,9 +561,9 @@ class TestSite < JekyllUnitTest
       context "in production" do
         setup do
           ENV["JEKYLL_ENV"] = "production"
-          @site = Site.new(site_configuration({
-            "incremental" => false,
-          }))
+          @site = Site.new(site_configuration(
+                             "incremental" => false
+                           ))
           @site.process
           @page = @site.pages.find { |p| p.name == "environment.html" }
         end
@@ -531,25 +582,29 @@ class TestSite < JekyllUnitTest
       should "set no theme if config is not set" do
         expect($stderr).not_to receive(:puts)
         expect($stdout).not_to receive(:puts)
-        site = fixture_site({ "theme" => nil })
+        site = fixture_site("theme" => nil)
         assert_nil site.theme
       end
 
       should "set no theme if config is a hash" do
         output = capture_output do
-          site = fixture_site({ "theme" => {} })
+          site = fixture_site("theme" => {})
           assert_nil site.theme
         end
         expected_msg = "Theme: value of 'theme' in config should be String " \
           "to use gem-based themes, but got Hash\n"
-        assert output.end_with?(expected_msg),
-          "Expected #{output.inspect} to end with #{expected_msg.inspect}"
+        assert_includes output, expected_msg
       end
 
       should "set a theme if the config is a string" do
-        expect($stderr).not_to receive(:puts)
-        expect($stdout).not_to receive(:puts)
-        site = fixture_site({ "theme" => "test-theme" })
+        [:debug, :info, :warn, :error].each do |level|
+          if level == :info
+            expect(Jekyll.logger.writer).to receive(level)
+          else
+            expect(Jekyll.logger.writer).not_to receive(level)
+          end
+        end
+        site = fixture_site("theme" => "test-theme")
         assert_instance_of Jekyll::Theme, site.theme
         assert_equal "test-theme", site.theme.name
       end
@@ -576,9 +631,9 @@ class TestSite < JekyllUnitTest
 
     context "incremental build" do
       setup do
-        @site = Site.new(site_configuration({
-          "incremental" => true,
-        }))
+        @site = Site.new(site_configuration(
+                           "incremental" => true
+                         ))
         @site.read
       end
 
@@ -626,6 +681,24 @@ class TestSite < JekyllUnitTest
         assert File.file?(dest)
         mtime2 = File.stat(dest).mtime.to_i
         refute_equal mtime1, mtime2 # must be regenerated
+      end
+    end
+
+    context "#in_cache_dir method" do
+      setup do
+        @site = Site.new(
+          site_configuration(
+            "cache_dir" => "../../custom-cache-dir"
+          )
+        )
+      end
+
+      should "create sanitized paths within the cache directory" do
+        assert_equal File.join(@site.source, "custom-cache-dir"), @site.cache_dir
+        assert_equal(
+          File.join(@site.source, "custom-cache-dir", "foo.md.metadata"),
+          @site.in_cache_dir("../../foo.md.metadata")
+        )
       end
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestLiquidExtensions < JekyllUnitTest
@@ -20,11 +22,11 @@ class TestLiquidExtensions < JekyllUnitTest
     end
 
     should "extract the var properly" do
-      assert_equal @template.render({ "page" => { "name" => "tobi" } }), "hi tobi"
+      assert_equal "hi tobi", @template.render("page" => { "name" => "tobi" })
     end
 
     should "return the variable name if the value isn't there" do
-      assert_equal @template.render({ "page" => { "title" => "tobi" } }), "hi page.name"
+      assert_equal "hi page.name", @template.render("page" => { "title" => "tobi" })
     end
   end
 end

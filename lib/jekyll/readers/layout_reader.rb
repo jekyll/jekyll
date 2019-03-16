@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class LayoutReader
     attr_reader :site
@@ -21,7 +23,7 @@ module Jekyll
     end
 
     def layout_directory
-      @layout_directory ||= (layout_directory_in_cwd || layout_directory_inside_source)
+      @layout_directory ||= site.in_source_dir(site.config["layouts_dir"])
     end
 
     def theme_layout_directory
@@ -52,18 +54,8 @@ module Jekyll
 
     def within(directory)
       return unless File.exist?(directory)
+
       Dir.chdir(directory) { yield }
-    end
-
-    def layout_directory_inside_source
-      site.in_source_dir(site.config["layouts_dir"])
-    end
-
-    def layout_directory_in_cwd
-      dir = Jekyll.sanitized_path(Dir.pwd, site.config["layouts_dir"])
-      if File.directory?(dir) && !site.safe
-        dir
-      end
     end
   end
 end

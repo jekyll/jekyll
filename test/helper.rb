@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 $stdout.puts "# -------------------------------------------------------------"
 $stdout.puts "# SPECS AND TESTS ARE RUNNING WITH WARNINGS OFF."
 $stdout.puts "# SEE: https://github.com/Shopify/liquid/issues/730"
@@ -13,7 +15,7 @@ if ENV["CI"]
   require "simplecov"
   SimpleCov.start
 else
-  require File.expand_path("../simplecov_custom_profile", __FILE__)
+  require File.expand_path("simplecov_custom_profile", __dir__)
   SimpleCov.start "gem" do
     add_filter "/vendor/gem"
     add_filter "/vendor/bundle"
@@ -30,17 +32,14 @@ require "minitest/profile"
 require "rspec/mocks"
 require_relative "../lib/jekyll.rb"
 
-Jekyll.logger = Logger.new(StringIO.new)
-
-unless jruby?
-  require "rdiscount"
-  require "redcarpet"
-end
+Jekyll.logger = Logger.new(StringIO.new, :error)
 
 require "kramdown"
 require "shoulda"
 
 include Jekyll
+
+require "jekyll/commands/serve/servlet"
 
 # Report with color.
 Minitest::Reporters.use! [
@@ -63,7 +62,7 @@ end
 
 module DirectoryHelpers
   def root_dir(*subdirs)
-    File.join(File.dirname(File.dirname(__FILE__)), *subdirs)
+    File.expand_path(File.join("..", *subdirs), __dir__)
   end
 
   def dest_dir(*subdirs)
@@ -112,13 +111,13 @@ class JekyllUnitTest < Minitest::Test
   end
 
   def fixture_document(relative_path)
-    site = fixture_site({
+    site = fixture_site(
       "collections" => {
         "methods" => {
           "output" => true,
         },
-      },
-    })
+      }
+    )
     site.read
     matching_doc = site.collections["methods"].docs.find do |doc|
       doc.relative_path == relative_path
@@ -139,13 +138,13 @@ class JekyllUnitTest < Minitest::Test
   end
 
   def site_configuration(overrides = {})
-    full_overrides = build_configs(overrides, build_configs({
-      "destination" => dest_dir,
-      "incremental" => false,
-    }))
-    Configuration.from(full_overrides.merge({
-      "source" => source_dir,
-    }))
+    full_overrides = build_configs(overrides, build_configs(
+                                                "destination" => dest_dir,
+                                                "incremental" => false
+                                              ))
+    Configuration.from(full_overrides.merge(
+                         "source" => source_dir
+                       ))
   end
 
   def clear_dest
@@ -166,12 +165,15 @@ class JekyllUnitTest < Minitest::Test
     ENV[key] = old_value
   end
 
-  def capture_output
+  def capture_output(level = :debug)
     buffer = StringIO.new
     Jekyll.logger = Logger.new(buffer)
+    Jekyll.logger.log_level = level
     yield
     buffer.rewind
     buffer.string.to_s
+  ensure
+    Jekyll.logger = Logger.new(StringIO.new, :error)
   end
   alias_method :capture_stdout, :capture_output
   alias_method :capture_stderr, :capture_output
@@ -187,5 +189,65 @@ class JekyllUnitTest < Minitest::Test
       msg ||= "Jekyll does not currently support this feature on Windows."
       skip msg.to_s.magenta
     end
+  end
+
+  def symlink_if_allowed(target, sym_file)
+    FileUtils.ln_sf(target, sym_file)
+  rescue Errno::EACCES
+    skip "Permission denied for creating a symlink to #{target.inspect} " \
+         "on this machine".magenta
+  rescue NotImplementedError => error
+    skip error.to_s.magenta
+  end
+end
+
+class FakeLogger
+  def <<(str); end
+end
+
+module TestWEBrick
+  module_function
+
+  def mount_server(&block)
+    server = WEBrick::HTTPServer.new(config)
+
+    begin
+      server.mount("/", Jekyll::Commands::Serve::Servlet, document_root,
+                   document_root_options)
+
+      server.start
+      addr = server.listeners[0].addr
+      block.yield([server, addr[3], addr[1]])
+    rescue StandardError => e
+      raise e
+    ensure
+      server.shutdown
+      sleep 0.1 until server.status == :Stop
+    end
+  end
+
+  def config
+    logger = FakeLogger.new
+    {
+      :BindAddress => "127.0.0.1", :Port => 0,
+      :ShutdownSocketWithoutClose => true,
+      :ServerType => Thread,
+      :Logger => WEBrick::Log.new(logger),
+      :AccessLog => [[logger, ""]],
+      :JekyllOptions => {},
+    }
+  end
+
+  def document_root
+    "#{File.dirname(__FILE__)}/fixtures/webrick"
+  end
+
+  def document_root_options
+    WEBrick::Config::FileHandler.merge(
+      :FancyIndexing     => true,
+      :NondisclosureName => [
+        ".ht*", "~*",
+      ]
+    )
   end
 end

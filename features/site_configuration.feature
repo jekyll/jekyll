@@ -48,7 +48,7 @@ Feature: Site configuration
     And I have a configuration file with "exclude" set to "['Rakefile', 'README']"
     When I run jekyll build
     Then I should see "I want to be included" in "_site/index.html"
-    And the "_site/Gemfile" file should exist
+    And the "_site/Gemfile" file should not exist
     And the "_site/Rakefile" file should not exist
     And the "_site/README" file should not exist
 
@@ -56,6 +56,7 @@ Feature: Site configuration
     Given I have an "Rakefile" file that contains "I want to be excluded"
     And I have an "README" file that contains "I want to be excluded"
     And I have an "index.html" file that contains "I want to be included"
+    And I have a "Gemfile" file that contains "gem 'include-me'"
     And I have a configuration file with "exclude" set to:
       | value    |
       | README   |
@@ -64,14 +65,83 @@ Feature: Site configuration
     Then I should see "I want to be included" in "_site/index.html"
     And the "_site/Rakefile" file should not exist
     And the "_site/README" file should not exist
+    And the "_site/Gemfile" file should not exist
 
-  Scenario: Use RDiscount for markup
-    Given I have an "index.markdown" page that contains "[Google](https://www.google.com)"
-    And I have a configuration file with "markdown" set to "rdiscount"
+  Scenario: Copy over excluded files when their directory is explicitly included
+    Given I have a ".gitignore" file that contains ".DS_Store"
+    And I have an ".htaccess" file that contains "SomeDirective"
+    And I have a "Gemfile" file that contains "gem 'include-me'"
+    And I have a node_modules directory
+    And I have a "node_modules/bazinga.js" file that contains "var c = 'Bazinga!';"
+    And I have a "node_modules/warning.js" file that contains "var w = 'Winter is coming!';"
+    And I have a configuration file with "include" set to:
+      | value        |
+      | .gitignore   |
+      | .foo         |
+      | Gemfile      |
+      | node_modules |
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "<a href=\"https://www.google.com\">Google</a>" in "_site/index.html"
+    And the "_site/.htaccess" file should not exist
+    But I should see ".DS_Store" in "_site/.gitignore"
+    And I should see "gem 'include-me'" in "_site/Gemfile"
+    And I should see "var c = 'Bazinga!';" in "_site/node_modules/bazinga.js"
+    And I should see "var w = 'Winter is coming!';" in "_site/node_modules/warning.js"
+
+  Scenario: Copy over excluded files only when they are explicitly included
+    Given I have a ".gitignore" file that contains ".DS_Store"
+    And I have an ".htaccess" file that contains "SomeDirective"
+    And I have a node_modules directory
+    And I have a "node_modules/bazinga.js" file that contains "var c = 'Bazinga!';"
+    And I have a "node_modules/warning.js" file that contains "var w = 'Winter is coming!';"
+    And I have a configuration file with "include" set to:
+      | value                   |
+      | .gitignore              |
+      | .foo                    |
+      | node_modules/bazinga.js |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And the "_site/.htaccess" file should not exist
+    But I should see ".DS_Store" in "_site/.gitignore"
+    And I should see "var c = 'Bazinga!';" in "_site/node_modules/bazinga.js"
+    But the "_site/node_modules/warning.js" file should not exist
+
+  Scenario: Copy over excluded wild-card files only when they are explicitly included
+    Given I have a ".gitignore" file that contains ".DS_Store"
+    And I have an ".htaccess" file that contains "SomeDirective"
+    And I have an "foo.txt" file that contains "Lorem Ipsum"
+    And I have an "index.md" page that contains "{{ site.title }}"
+    And I have an "about.md" page that contains "{{ site.author }}"
+    And I have a configuration file with:
+      | key      | value        |
+      | title    | Barren Site  |
+      | author   | John Doe     |
+      | exclude  | ["**"]       |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And the "_site/.gitignore" file should not exist
+    And the "_site/foo.txt" file should not exist
+    And the "_site/index.html" file should not exist
+    And the "_site/about.html" file should not exist
+    But the "_site/.htaccess" file should exist
+    Given I have a configuration file with:
+      | key      | value        |
+      | title    | Barren Site  |
+      | author   | John Doe     |
+      | exclude  | ["**"]       |
+      | include  | ["about.md"] |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And the "_site/.gitignore" file should not exist
+    And the "_site/foo.txt" file should not exist
+    And the "_site/index.html" file should not exist
+    And the "_site/.htaccess" file should not exist
+    But the "_site/about.html" file should exist
+    And I should see "John Doe" in "_site/about.html"
 
   Scenario: Use Kramdown for markup
     Given I have an "index.markdown" page that contains "[Google](https://www.google.com)"
@@ -80,22 +150,6 @@ Feature: Site configuration
     Then I should get a zero exit status
     And the _site directory should exist
     And I should see "<a href=\"https://www.google.com\">Google</a>" in "_site/index.html"
-
-  Scenario: Use Redcarpet for markup
-    Given I have an "index.markdown" page that contains "[Google](https://www.google.com)"
-    And I have a configuration file with "markdown" set to "redcarpet"
-    When I run jekyll build
-    Then I should get a zero exit status
-    And the _site directory should exist
-    And I should see "<a href=\"https://www.google.com\">Google</a>" in "_site/index.html"
-
-  Scenario: Highlight code with pygments
-    Given I have an "index.html" page that contains "{% highlight ruby %} puts 'Hello world!' {% endhighlight %}"
-    When I run jekyll build
-    Then I should get a zero exit status
-    And the _site directory should exist
-    And I should see "Hello world!" in "_site/index.html"
-    And I should see "class=\"highlight\"" in "_site/index.html"
 
   Scenario: Highlight code with rouge
     Given I have an "index.html" page that contains "{% highlight ruby %} puts 'Hello world!' {% endhighlight %}"
@@ -172,12 +226,14 @@ Feature: Site configuration
         | entry2    | 2013-04-10 03:14 -0400 | post    | content for entry2. |
       When I run jekyll build
       Then I should get a zero exit status
-    And the _site directory should exist
+      And the _site directory should exist
       And I should see "Page Layout: 2" in "_site/index.html"
-      And I should see "Post Layout: <p>content for entry1.</p>\n built at 2013-04-09T23:22:00-04:00" in "_site/2013/04/09/entry1.html" unless Windows
-      And I should see "Post Layout: <p>content for entry1.</p>\n built at 2013-04-09T22:22:00-05:00" in "_site/2013/04/09/entry1.html" if on Windows
-      And I should see "Post Layout: <p>content for entry2.</p>\n built at 2013-04-10T03:14:00-04:00" in "_site/2013/04/10/entry2.html" unless Windows
-      And I should see "Post Layout: <p>content for entry2.</p>\n built at 2013-04-10T02:14:00-05:00" in "_site/2013/04/10/entry2.html" if on Windows
+      And I should see "Post Layout: <p>content for entry1.</p>\n built at" in "_site/2013/04/09/entry1.html"
+      And I should see "Post Layout: <p>content for entry2.</p>\n built at" in "_site/2013/04/10/entry2.html"
+      And I should see date "2013-04-09T23:22:00-04:00" in "_site/2013/04/09/entry1.html" unless Windows
+      And I should see date "2013-04-09T22:22:00-05:00" in "_site/2013/04/09/entry1.html" if on Windows
+      And I should see date "2013-04-10T03:14:00-04:00" in "_site/2013/04/10/entry2.html" unless Windows
+      And I should see date "2013-04-10T02:14:00-05:00" in "_site/2013/04/10/entry2.html" if on Windows
 
     Scenario: Generate proper dates with explicitly set timezone (different than posts' time)
       Given I have a _layouts directory
@@ -217,19 +273,6 @@ Feature: Site configuration
     And the "_site/2009/04/05/bananas.html" file should exist
     And the "_site/2009/04/01/oranges.html" file should exist
     And the "_site/2009/03/27/apples.html" file should not exist
-
-  Scenario: Copy over normally excluded files when they are explicitly included
-    Given I have a ".gitignore" file that contains ".DS_Store"
-    And I have an ".htaccess" file that contains "SomeDirective"
-    And I have a configuration file with "include" set to:
-      | value      |
-      | .gitignore |
-      | .foo       |
-    When I run jekyll build
-    Then I should get a zero exit status
-    And the _site directory should exist
-    And I should see ".DS_Store" in "_site/.gitignore"
-    And the "_site/.htaccess" file should not exist
 
   Scenario: Using a different layouts directory
     Given I have a _theme directory

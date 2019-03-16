@@ -9,7 +9,7 @@ function msg {
   printf "\e[0;37m==> $1\e[0m\n"
 }
 
-INGORE_HREFS=$(ruby -e 'puts %w{
+IGNORE_HREFS=$(ruby -e 'puts %w{
   Chrononaut
   twitter.com
   nearlyfreespeech.net
@@ -32,4 +32,4 @@ bundle exec jekyll build -s $SOURCE -d $DESTINATION --trace
 
 # 3.
 msg "Proofing..."
-time bundle exec htmlproofer ./$DESTINATION --url-ignore $INGORE_HREFS $@
+time bundle exec htmlproofer ./$DESTINATION --allow-hash-href --url-ignore $IGNORE_HREFS $@

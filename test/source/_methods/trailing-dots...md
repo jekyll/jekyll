@@ -1,0 +1,3 @@
+---
+title: Ellipsis Path
+---

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class PageReader
     attr_reader :site, :dir, :unfiltered_content

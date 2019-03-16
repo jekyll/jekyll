@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   module Utils
     module Platforms
@@ -29,7 +31,7 @@ module Jekyll
       # --
 
       alias_method :really_windows?, \
-        :vanilla_windows?
+                   :vanilla_windows?
 
       #
 
@@ -66,14 +68,14 @@ module Jekyll
       #
 
       private
+
       def proc_version
-        @cached_proc_version ||= begin
-          Pathutil.new(
-            "/proc/version"
-          ).read
-        rescue Errno::ENOENT
-          nil
-        end
+        @proc_version ||=
+          begin
+            Pathutil.new("/proc/version").read
+          rescue Errno::ENOENT, Errno::EACCES
+            nil
+          end
       end
     end
   end

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Jekyll
   module Tags
     class PostComparer
-      MATCHER = %r!^(.+/)*(\d+-\d+-\d+)-(.*)$!
+      MATCHER = %r!^(.+/)*(\d+-\d+-\d+)-(.*)$!.freeze
 
       attr_reader :path, :date, :slug, :name
 
@@ -11,7 +13,7 @@ module Jekyll
         all, @path, @date, @slug = *name.sub(%r!^/!, "").match(MATCHER)
         unless all
           raise Jekyll::Errors::InvalidPostNameError,
-            "'#{name}' does not contain valid date and/or title."
+                "'#{name}' does not contain valid date and/or title."
         end
 
         escaped_slug = Regexp.escape(slug)
@@ -20,8 +22,10 @@ module Jekyll
       end
 
       def post_date
-        @post_date ||= Utils.parse_date(date,
-          "\"#{date}\" does not contain valid date and/or title.")
+        @post_date ||= Utils.parse_date(
+          date,
+          "'#{date}' does not contain valid date and/or title."
+        )
       end
 
       def ==(other)
@@ -36,6 +40,7 @@ module Jekyll
       end
 
       private
+
       # Construct the directory-aware post slug for a Jekyll::Post
       #
       # other - the Jekyll::Post
@@ -57,14 +62,12 @@ module Jekyll
         @orig_post = post.strip
         begin
           @post = PostComparer.new(@orig_post)
-        rescue => e
-          raise Jekyll::Errors::PostURLError, <<-eos
-Could not parse name of post "#{@orig_post}" in tag 'post_url'.
-
-Make sure the post exists and the name is correct.
-
-#{e.class}: #{e.message}
-eos
+        rescue StandardError => e
+          raise Jekyll::Errors::PostURLError, <<~MSG
+            Could not parse name of post "#{@orig_post}" in tag 'post_url'.
+             Make sure the post exists and the name is correct.
+             #{e.class}: #{e.message}
+          MSG
         end
       end
 
@@ -80,19 +83,19 @@ eos
 
         site.posts.docs.each do |p|
           next unless @post.deprecated_equality p
+
           Jekyll::Deprecator.deprecation_message "A call to "\
-            "'{{ post_url #{@post.name} }}' did not match " \
+            "'{% post_url #{@post.name} %}' did not match " \
             "a post using the new matching method of checking name " \
             "(path-date-slug) equality. Please make sure that you " \
             "change this tag to match the post's name exactly."
           return p.url
         end
 
-        raise Jekyll::Errors::PostURLError, <<-eos
-Could not find post "#{@orig_post}" in tag 'post_url'.
-
-Make sure the post exists and the name is correct.
-eos
+        raise Jekyll::Errors::PostURLError, <<~MSG
+          Could not find post "#{@orig_post}" in tag 'post_url'.
+          Make sure the post exists and the name is correct.
+        MSG
       end
     end
   end

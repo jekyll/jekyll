@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestUtils < JekyllUnitTest
@@ -200,9 +202,20 @@ class TestUtils < JekyllUnitTest
 
     should "replace everything else but ASCII characters" do
       assert_equal "the-config-yml-file",
-        Utils.slugify("The _config.yml file?", :mode => "ascii")
+                   Utils.slugify("The _config.yml file?", :mode => "ascii")
       assert_equal "f-rtive-glance",
-        Utils.slugify("fürtive glance!!!!", :mode => "ascii")
+                   Utils.slugify("fürtive glance!!!!", :mode => "ascii")
+    end
+
+    should "map accented latin characters to ASCII characters" do
+      assert_equal "the-config-yml-file",
+                   Utils.slugify("The _config.yml file?", :mode => "latin")
+      assert_equal "furtive-glance",
+                   Utils.slugify("fürtive glance!!!!", :mode => "latin")
+      assert_equal "aaceeiioouu",
+                   Utils.slugify("àáçèéíïòóúü", :mode => "latin")
+      assert_equal "a-z",
+                   Utils.slugify("Aあわれ鬱господинZ", :mode => "latin")
     end
 
     should "only replace whitespace if mode is raw" do
@@ -268,6 +281,11 @@ class TestUtils < JekyllUnitTest
         "The _config.yml file?",
         Utils.slugify("The _config.yml file?", :mode => "none", :cased => true)
       )
+    end
+
+    should "records a warning in the log if the returned slug is empty" do
+      expect(Jekyll.logger).to receive(:warn)
+      assert_equal "", Utils.slugify("💎")
     end
   end
 
@@ -384,16 +402,27 @@ class TestUtils < JekyllUnitTest
     should "ignore encoding if it's not there" do
       opts = Utils.merged_file_read_opts(nil, {})
       assert_nil opts["encoding"]
+      assert_nil opts[:encoding]
     end
 
     should "add bom to encoding" do
-      opts = Utils.merged_file_read_opts(nil, { "encoding" => "utf-8" })
-      assert_equal "bom|utf-8", opts["encoding"]
+      opts = { "encoding" => "utf-8", :encoding => "utf-8" }
+      merged = Utils.merged_file_read_opts(nil, opts)
+      assert_equal "bom|utf-8", merged["encoding"]
+      assert_equal "bom|utf-8", merged[:encoding]
     end
 
     should "preserve bom in encoding" do
-      opts = Utils.merged_file_read_opts(nil, { "encoding" => "bom|utf-8" })
-      assert_equal "bom|utf-8", opts["encoding"]
+      opts = { "encoding" => "bom|another", :encoding => "bom|another" }
+      merged = Utils.merged_file_read_opts(nil, opts)
+      assert_equal "bom|another", merged["encoding"]
+      assert_equal "bom|another", merged[:encoding]
+    end
+  end
+
+  context "Utils::Internet.connected?" do
+    should "return true if there's internet" do
+      assert Utils::Internet.connected?
     end
   end
 end

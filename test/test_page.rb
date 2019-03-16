@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestPage < JekyllUnitTest
@@ -20,17 +22,22 @@ class TestPage < JekyllUnitTest
   context "A Page" do
     setup do
       clear_dest
-      @site = Site.new(Jekyll.configuration({
-        "source"            => source_dir,
-        "destination"       => dest_dir,
-        "skip_config_files" => true,
-      }))
+      @site = Site.new(Jekyll.configuration(
+                         "source"            => source_dir,
+                         "destination"       => dest_dir,
+                         "skip_config_files" => true
+                       ))
     end
 
     context "processing pages" do
       should "create URL based on filename" do
         @page = setup_page("contacts.html")
         assert_equal "/contacts.html", @page.url
+      end
+
+      should "create proper URL from filename" do
+        @page = setup_page("trailing-dots...md")
+        assert_equal "/trailing-dots.html", @page.url
       end
 
       should "not published when published yaml is false" do
