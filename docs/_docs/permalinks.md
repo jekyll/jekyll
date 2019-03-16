@@ -66,7 +66,15 @@ The following table lists the template variables available for permalinks. You c
         <p><code>year</code></p>
       </td>
       <td>
-        <p>Year from the post's filename</p>
+        <p>Year from the post's filename, four digits</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>short_year</code></p>
+      </td>
+      <td>
+        <p>Year from the post's filename without the century. (00..99)</p>
       </td>
     </tr>
     <tr>
@@ -74,7 +82,7 @@ The following table lists the template variables available for permalinks. You c
         <p><code>month</code></p>
       </td>
       <td>
-        <p>Month from the post's filename</p>
+        <p>Month from the post's filename. (01..12)</p>
       </td>
     </tr>
     <tr>
@@ -87,10 +95,26 @@ The following table lists the template variables available for permalinks. You c
     </tr>
     <tr>
       <td>
+        <p><code>short_month</code></p>
+      </td>
+      <td>
+        <p>Three-letter month abbreviation, e.g. _JAN_</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>long_month</code></p>
+      </td>
+      <td>
+        <p>Full month name, e.g. _January_</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p><code>day</code></p>
       </td>
       <td>
-        <p>Day from the post's filename</p>
+        <p>Day of the month from the post's filename. (01..31)</p>
       </td>
     </tr>
     <tr>
@@ -98,15 +122,55 @@ The following table lists the template variables available for permalinks. You c
         <p><code>i_day</code></p>
       </td>
       <td>
-        <p>Day from the post's filename without leading zeros.</p>
+        <p>Day of the month from the post's filename without leading zeros.</p>
       </td>
     </tr>
     <tr>
       <td>
-        <p><code>short_year</code></p>
+        <p><code>y_day</code></p>
       </td>
       <td>
-        <p>Year from the post's filename without the century.</p>
+        <p>Ordinal day of the year. (001..366)</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>w_year</code></p>
+      </td>
+      <td>
+        <p>Week year which may differ from `:year` for up to three days at the start of Janaury and end of December</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>week</code></p>
+      </td>
+      <td>
+        <p>Week number of the current year, starting with the first week having a majority of its days in January. (01..53)</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>w_day</code></p>
+      </td>
+      <td>
+        <p>Day of the week, starting Monday. (1..7)</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>short_day</code></p>
+      </td>
+      <td>
+        <p>Three-letter weekday abbreviation, e.g. _SUN_.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>long_day</code></p>
+      </td>
+      <td>
+        <p>Weekday name, e.g. _Sunday_.</p>
       </td>
     </tr>
     <tr>
@@ -216,6 +280,14 @@ Although you can specify a custom permalink pattern using [template variables](#
       </td>
       <td>
         <p><code>/:categories/:year/:y_day/:title.html</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>weekdate</code></p>
+      </td>
+      <td>
+        <p><code>/:categories/:year/W:week/:short_day/:title.html</code></p>
       </td>
     </tr>
     <tr>
