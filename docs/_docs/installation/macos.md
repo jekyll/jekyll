@@ -11,7 +11,7 @@ xcode-select --install
 
 ## Set up Ruby
 
-Jekyll requires Ruby > 2.4.0.
+Jekyll requires Ruby > {{ site.min_ruby_version }}.
 As macOS Mojave 10.14 comes only with ruby 2.3.x, you'll have to install Ruby through Homebrew.
 
 ### Install latest stable Ruby with Homebrew {#brew}
