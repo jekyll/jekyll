@@ -20,7 +20,7 @@ Also be aware that it's a new *major* version, and it comes with a few breaking 
    GitHub Pages runs Ruby 2.5.x, services lile Netlify or Forestry already upgraded to latest Ruby 2.6.x.
 2. `link` tag now include `relative_url` filter, hurray [no more need to prepend `{% raw %}{{ site.baseurl }}{% endraw %}` ](https://github.com/jekyll/jekyll/pull/6727).
 3. [`{% raw %}{% highlight %}{% endraw %}` now behaves like `{% raw %}{% raw %}{% endraw %}`](https://github.com/jekyll/jekyll/pull/6821), so you can no longer use `include` tags within.
-4. We dropped dependencies for Pygments, RedCarpet and rdiscount.
+4. We dropped support for Pygments, RedCarpet and rdiscount.
 5. We bumped kramdown to v2.
 
 Checkout the complete [changelog](/docs/history/) for more details.
