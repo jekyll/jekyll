@@ -5,10 +5,31 @@ module Jekyll
     class UrlDrop < Drop
       extend Forwardable
 
+      def self.strftime_delegator(notation, method)
+        define_method(method) do
+          @obj.date.strftime(notation)
+        end
+      end
+      private_class_method :strftime_delegator
+
+      #
+
       mutable false
 
       def_delegator :@obj, :cleaned_relative_path, :path
       def_delegator :@obj, :output_ext, :output_ext
+
+      strftime_delegator "%Y",  :year
+      strftime_delegator "%m",  :month
+      strftime_delegator "%d",  :day
+      strftime_delegator "%H",  :hour
+      strftime_delegator "%M",  :minute
+      strftime_delegator "%S",  :second
+      strftime_delegator "%b",  :short_month
+      strftime_delegator "%y",  :short_year
+      strftime_delegator "%j",  :y_day
+      strftime_delegator "%-d", :i_day
+      strftime_delegator "%-m", :i_month
 
       def collection
         @obj.collection.label
@@ -33,50 +54,6 @@ module Jekyll
           category_set << category.to_s.downcase
         end
         category_set.to_a.join("/")
-      end
-
-      def year
-        @obj.date.strftime("%Y")
-      end
-
-      def month
-        @obj.date.strftime("%m")
-      end
-
-      def day
-        @obj.date.strftime("%d")
-      end
-
-      def hour
-        @obj.date.strftime("%H")
-      end
-
-      def minute
-        @obj.date.strftime("%M")
-      end
-
-      def second
-        @obj.date.strftime("%S")
-      end
-
-      def i_day
-        @obj.date.strftime("%-d")
-      end
-
-      def i_month
-        @obj.date.strftime("%-m")
-      end
-
-      def short_month
-        @obj.date.strftime("%b")
-      end
-
-      def short_year
-        @obj.date.strftime("%y")
-      end
-
-      def y_day
-        @obj.date.strftime("%j")
       end
 
       private
