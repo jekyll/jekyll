@@ -22,6 +22,8 @@ matrix:
   exclude:
     - rvm: *jruby
       env: TEST_SUITE=cucumber
+  allow_failures:
+    - rvm: *jruby
 
 env:
   matrix:
