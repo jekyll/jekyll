@@ -1,18 +1,20 @@
 ---
-title: Jekyll 4.0.0.pre.beta1 Released
-date: 2019-03-16 02:06:31 +0100
+title: Jekyll 4.0.0.pre.alpha1 Released
+date: 2019-03-18 18:17:31 +0100
 author: dirtyf
-version: 4.0.0.pre.beta1
+version: 4.0.0.pre.alpha1
 category: release
 ---
 
 Dear Jekyllers,
 
-Time has come to release a first beta for Jekyll 4!
+Time has come to release a first alpha for Jekyll 4!
 
-This pre version fixes many bugs, and should improve your build times. Some of you already shared [really](https://forestry.io/blog/how-i-reduced-my-jekyll-build-time-by-61/) [good](https://boris.schapira.dev/2018/11/jekyll-build-optimization/) results. We hope your Jekyll sites can also benefit from these optimizations.
+This pre version fixes many bugs, and should improve your build times. Some of you already shared [really](https://forestry.io/blog/how-i-reduced-my-jekyll-build-time-by-61/) [good](https://boris.schapira.dev/2018/11/jekyll-build-optimization/) results. We hope your Jekyll sites will also benefit from these optimizations.
 
-Jekyll now exposes a [caching API](/tutorials/cache-api/), that some plugins could benefit from. So if you're a plugin developer, this small tutorial is worth the read.
+If you're a plugin developer, we definitely need your feedback, especially if your plugin does not work with v4.
+
+Jekyll now exposes a [caching API](/tutorials/cache-api/), that some plugins could benefit from.
 
 Also be aware that it's a new *major* version, and it comes with a few breaking changes, notably :
 
