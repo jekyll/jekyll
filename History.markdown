@@ -238,7 +238,6 @@
   * Release post for v3.8.0 (#6849)
   * Release Post for v3.6.3, v3.7.4 and v3.8.4 (#7259)
 
-
 ### Site Enhancements
 
   * Add @ashmaroli to Core Team listing (#7398)
