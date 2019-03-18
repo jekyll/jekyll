@@ -139,7 +139,7 @@ module Jekyll
       return head if tail.empty?
 
       head = sanctify_liquid_tags(head) if head.include?("{%")
-      definitions = extract_mkdown_ref_link_defs(head, tail)
+      definitions = extract_markdown_link_reference_defintions(head, tail)
       return head if definitions.empty?
 
       head << "\n\n" << definitions.join("\n")
@@ -165,7 +165,7 @@ module Jekyll
       head
     end
 
-    def extract_mkdown_ref_link_defs(head, tail)
+    def extract_markdown_link_reference_defintions(head, tail)
       [].tap do |definitions|
         tail.scan(MKDWN_LINK_REF_REGEX).each do |segments|
           definitions << segments.join if head.include?(segments[0])
