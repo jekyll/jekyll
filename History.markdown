@@ -236,6 +236,7 @@
   * Escape valid special chars in a site&#39;s path name (#7568)
   * Replace `name` in Page#inspect with relative_path (#7434)
   * Log a warning when the slug is empty (#7357)
+  * Push Markdown link refs to excerpt only as required (#7577)
 
 ### feature
 
