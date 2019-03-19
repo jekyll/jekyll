@@ -77,7 +77,7 @@ module Jekyll
 
       # MMM: Jan..Dec
       def short_month
-        @obj.date.strftime("%b") 
+        @obj.date.strftime("%b")
       end
 
       # MMMM: January..December
