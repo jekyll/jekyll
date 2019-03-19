@@ -25,7 +25,7 @@ Also be aware that it's a new *major* version, and it comes with a few breaking 
 4. We dropped support for Pygments, RedCarpet and rdiscount.
 5. We bumped kramdown to v2.
 
-Checkout the complete [changelog](https://github.com/jekyll/jekyll/blob/master/History.markdown#minor-enhancements) for more details.
+Checkout the complete [changelog](https://github.com/jekyll/jekyll/releases/tag/v4.0.0.pre.alpha1) for more details.
 
 To test this pre version run:
 
