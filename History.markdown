@@ -25,7 +25,7 @@
   * Allow custom sorting of collection documents (#7427)
   * Always exclude certain paths from being processed (#7188)
 
-  ### Bug Fixes
+### Bug Fixes
 
   * Security: fix `include` bypass of `EntryFilter#filter` symlink check (#7226)
   * Theme gems: ensure directories aren&#39;t symlinks (#7419)
@@ -245,6 +245,10 @@
   * Link to OpenCollective backing (#7378
   * Link to sponsor listing in README (#7405)
   * Better Performance (#7388)
+
+### release
+
+  * Release v4.0.0.pre.alpha1 (#7574)
 
 ## 3.8.5 / 2018-11-04
 
