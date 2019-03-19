@@ -104,7 +104,7 @@ Here's the full list of placeholders available:
         <p><code>short_month</code></p>
       </td>
       <td>
-        <p>Three-letter month abbreviation, e.g. _JAN_</p>
+        <p>Three-letter month abbreviation, e.g. “JAN”.</p>
       </td>
     </tr>
     <tr>
@@ -112,7 +112,7 @@ Here's the full list of placeholders available:
         <p><code>long_month</code></p>
       </td>
       <td>
-        <p>Full month name, e.g. _January_</p>
+        <p>Full month name, e.g. “January”.</p>
       </td>
     </tr>
     <tr>
@@ -174,7 +174,7 @@ Here's the full list of placeholders available:
         <p><code>short_day</code></p>
       </td>
       <td>
-        <p>Three-letter weekday abbreviation, e.g. _SUN_.</p>
+        <p>Three-letter weekday abbreviation, e.g. “SUN”.</p>
       </td>
     </tr>
     <tr>
@@ -182,7 +182,7 @@ Here's the full list of placeholders available:
         <p><code>long_day</code></p>
       </td>
       <td>
-        <p>Weekday name, e.g. _Sunday_.</p>
+        <p>Weekday name, e.g. “Sunday”.</p>
       </td>
     </tr>
     <tr>
