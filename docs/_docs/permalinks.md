@@ -104,7 +104,7 @@ Here's the full list of placeholders available:
         <p><code>short_month</code></p>
       </td>
       <td>
-        <p>Three-letter month abbreviation, e.g. “JAN”.</p>
+        <p>Three-letter month abbreviation, e.g. “Jan”.</p>
       </td>
     </tr>
     <tr>
@@ -174,7 +174,7 @@ Here's the full list of placeholders available:
         <p><code>short_day</code></p>
       </td>
       <td>
-        <p>Three-letter weekday abbreviation, e.g. “SUN”.</p>
+        <p>Three-letter weekday abbreviation, e.g. “Sun”.</p>
       </td>
     </tr>
     <tr>
