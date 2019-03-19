@@ -83,7 +83,7 @@ Here's the full list of placeholders available:
       </td>
       <td>
         <p>
-          Month from the post’s filename. (01..12) 
+          Month from the post’s filename. (01..12)
           May be overridden via the document’s <code>date</code> front matter.
         </p>
       </td>
