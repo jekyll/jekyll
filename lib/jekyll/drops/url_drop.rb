@@ -75,17 +75,17 @@ module Jekyll
         @obj.date.strftime("%-m")
       end
 
-      # MMM, uppercase: JAN..DEC
+      # MMM: Jan..Dec
       def short_month
-        @obj.date.strftime("%^b") 
+        @obj.date.strftime("%b") 
       end
 
-      # MMMM, initial capital: January..December
+      # MMMM: January..December
       def long_month
         @obj.date.strftime("%B")
       end
 
-       # YY: 00..99
+      # YY: 00..99
       def short_year
         @obj.date.strftime("%y")
       end
@@ -105,9 +105,9 @@ module Jekyll
         @obj.date.strftime("%u")
       end
 
-      # dd, uppercase: MON..SUN
+      # dd: Mon..Sun
       def short_day
-        @obj.date.strftime("%^a")
+        @obj.date.strftime("%a")
       end
 
       # ddd, initial capital: Monday..Sunday
