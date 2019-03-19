@@ -150,7 +150,7 @@ Here's the full list of placeholders available:
         <p><code>w_year</code></p>
       </td>
       <td>
-        <p>Week year which may differ from the month year for up to three days at the start of Janaury and end of December</p>
+        <p>Week year which may differ from the month year for up to three days at the start of January and end of December</p>
       </td>
     </tr>
     <tr>
@@ -166,7 +166,7 @@ Here's the full list of placeholders available:
         <p><code>w_day</code></p>
       </td>
       <td>
-        <p>Day of the week, starting Monday. (1..7)</p>
+        <p>Day of the week, starting with Monday. (1..7)</p>
       </td>
     </tr>
     <tr>
