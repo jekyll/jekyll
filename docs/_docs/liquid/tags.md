@@ -90,10 +90,10 @@ You must include the file's original extension when using the `link` tag. Here a
 
 {% raw %}
 ```liquid
-{{ site.baseurl }}{% link _collection/name-of-document.md %}
-{{ site.baseurl }}{% link _posts/2016-07-26-name-of-post.md %}
-{{ site.baseurl }}{% link news/index.html %}
-{{ site.baseurl }}{% link /assets/files/doc.pdf %}
+{% link _collection/name-of-document.md %}
+{% link _posts/2016-07-26-name-of-post.md %}
+{% link news/index.html %}
+{% link /assets/files/doc.pdf %}
 ```
 {% endraw %}
 
@@ -101,14 +101,15 @@ You can also use the `link` tag to create a link in Markdown as follows:
 
 {% raw %}
 ```liquid
-[Link to a document]({{ site.baseurl }}{% link _collection/name-of-document.md %})
-[Link to a post]({{ site.baseurl }}{% link _posts/2016-07-26-name-of-post.md %})
-[Link to a page]({{ site.baseurl }}{% link news/index.html %})
-[Link to a file]({{ site.baseurl }}{% link /assets/files/doc.pdf %})
+[Link to a document]({% link _collection/name-of-document.md %})
+[Link to a post]({% link _posts/2016-07-26-name-of-post.md %})
+[Link to a page]({% link news/index.html %})
+[Link to a file]({% link /assets/files/doc.pdf %})
 ```
 {% endraw %}
 
-(Including `{% raw %}{{ site.baseurl }}{% endraw %}` is optional &mdash; it depends on whether you want to preface the page URL with the `baseurl` value.)
+{: .note }
+Since {% include docs_version_badge.html version="v4.0"%} you don't need to prepend `link` tags with `site.baseurl`
 
 The path to the post, page, or collection is defined as the path relative to the root directory (where your config file is) to the file, not the path from your existing page to the other page.
 

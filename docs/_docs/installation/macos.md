@@ -9,41 +9,10 @@ First, you need to install the command-line tools to be able to compile native e
 xcode-select --install
 ```
 
-{: .note }
-We strongly recommend that you install Ruby gems in your home directory to avoid file permissions problems and using `sudo`.
+## Set up Ruby
 
-You can do this with the `--user-install` option, for instance by running:
-
-```sh
-gem install --user-install bundler jekyll
-```
-
-Or you can change the default gem path, by adding those lines to your shell config file, .e.g. `~/.bash_profile` or `~/.bashrc` if your shell is bash:
-
-```
-export GEM_HOME=$HOME/gems
-export PATH=$HOME/gems/bin:$PATH
-```
-
-Relaunch your terminal and run `gem env` to check that default gem paths point to your home directory by default.
-
-## Set up Ruby included with the OS
-
-Jekyll requires Ruby > 2.2.5. We recommend that you run Ruby > 2.3 though, as more and more dependencies ask for that requirement. You're good to go on macOS Mojave 10.14:
-
-```sh
-sw_vers -productVersion
-10.14
-
-ruby -v
-ruby 2.3.7p456 (2018-03-28 revision 63024) [universal.x86_64-darwin18]
-```
-
-Install [Bundler](/docs/ruby-101/#bundler) and Jekyll by running:
-
-```sh
-gem install bundler jekyll
-```
+Jekyll requires Ruby > {{ site.min_ruby_version }}.
+As macOS Mojave 10.14 comes only with ruby 2.3.x, you'll have to install Ruby through Homebrew.
 
 ### Install latest stable Ruby with Homebrew {#brew}
 
@@ -69,7 +38,7 @@ which ruby
 /usr/local/opt/ruby/bin/ruby
 
 ruby -v
-ruby 2.6.1p33 (2019-01-30 revision 66950) [x86_64-darwin18]
+ruby 2.6.2p47 (2019-03-13 revision 67232) [x86_64-darwin18]
 ```
 
 Yay, we are now running current stable Ruby!
@@ -81,6 +50,24 @@ gem install bundler jekyll
 ```
 
 That's it, you're ready to roll!
+
+{: .note }
+We strongly recommend that you install Ruby gems in your home directory to avoid file permissions problems and using `sudo`.
+
+You can do this with the `--user-install` option, for instance by running:
+
+```sh
+gem install --user-install bundler jekyll
+```
+
+Or you can change the default gem path, by adding those lines to your shell config file, .e.g. `~/.bash_profile` or `~/.bashrc` if your shell is bash:
+
+```
+export GEM_HOME=$HOME/gems
+export PATH=$HOME/gems/bin:$PATH
+```
+
+Relaunch your terminal and run `gem env` to check that default gem paths point to your home directory by default.
 
 ### Manage multiple Ruby environments with rbenv {#rbenv}
 
@@ -105,10 +92,10 @@ Restart your terminal for changes to take effect.
 Now you can install the Ruby version of our choice, let's go with current latest stable Ruby:
 
 ```sh
-rbenv install 2.5.3
-rbenv global 2.5.3
+rbenv install 2.6.2
+rbenv global 2.6.2
 ruby -v
-ruby 2.5.3p105 (2018-10-18 revision 65156) [x86_64-darwin18]
+ruby 2.6.2p47 (2019-03-13 revision 67232) [x86_64-darwin18]
 ```
 
 That's it! Head over [rbenv command references](https://github.com/rbenv/rbenv#command-reference) to learn how to use different versions of Ruby in your projects.
