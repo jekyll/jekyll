@@ -90,12 +90,14 @@ module Jekyll
         @obj.date.strftime("%y")
       end
 
-      # CCYYw, ISO week year, may differ from CCYY for the first days of January and last days of December
+      # CCYYw, ISO week year
+      # may differ from CCYY for the first days of January and last days of December
       def w_year
         @obj.date.strftime("%G")
       end
 
-      # WW: 01..53, %W and %U do not comply with ISO 8601-1
+      # WW: 01..53
+      # %W and %U do not comply with ISO 8601-1
       def week
         @obj.date.strftime("%V")
       end
@@ -110,7 +112,7 @@ module Jekyll
         @obj.date.strftime("%a")
       end
 
-      # ddd, initial capital: Monday..Sunday
+      # ddd: Monday..Sunday
       def long_day
         @obj.date.strftime("%A")
       end
