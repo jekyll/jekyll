@@ -156,6 +156,6 @@ Feature: Embed filters
     And I should see exactly "<p>Elephant</p>" in "_site/string-value.html"
     And I should see exactly "<p>Bird, Cat</p>" in "_site/string-value-array.html"
     And I should see exactly "<p>Bird</p>" in "_site/string-value-hash.html"
-    And I should see exactly "<p>Dog, Horse, Iguana</p>" in "_site/nil-value.html"
+    And I should see exactly "<p>Dog</p>" in "_site/nil-value.html"
     And I should see exactly "<p>Dog, Goat, Horse, Iguana</p>" in "_site/empty-liquid-literal.html"
     And I should see exactly "<p>Dog, Goat, Horse, Iguana</p>" in "_site/blank-liquid-literal.html"

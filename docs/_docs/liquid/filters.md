@@ -109,17 +109,14 @@ The default is `default`. They are as follows (with what they filter):
 You can use the `where` filter to detect documents and pages with properties that are `nil` or `""`. For example,
 
 ```liquid
-// Using `nil` to select posts that do not have `my_prop` defined on set to `nil` explicitly
+// Using `nil` to select posts that either do not have `my_prop` defined or `my_prop` has been set to `nil` explicitly.
 {% raw %}{% assign filtered_posts = site.posts | where: 'my_prop', nil %}{% endraw %}
 ```
 
 ```liquid
-// Using Liquid's special literal `empty` or `blank` to select posts that have `my_prop` set to an empty value
+// Using Liquid's special literal `empty` or `blank` to select posts that have `my_prop` set to an empty value.
 {% raw %}{% assign filtered_posts = site.posts | where: 'my_prop', empty %}{% endraw %}
 ```
-
-The difference between using `nil` vs `empty` or `blank` is very subtle. For example, `nil` will not detect a property
-set to empty string i.e. YAML entries such as `foo: ""`.
 
 
 ### Standard Liquid Filters

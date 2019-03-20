@@ -329,8 +329,7 @@ module Jekyll
     def compare_property_vs_target(property, target)
       case target
       when NilClass
-        # won't catch `""`
-        return true if Array(property).empty?
+        return true if property.nil?
       when Liquid::Expression::MethodLiteral # `empty` or `blank`
         return true if Array(property).join == target.to_s
       else
