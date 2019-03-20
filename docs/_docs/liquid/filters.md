@@ -106,7 +106,7 @@ The default is `default`. They are as follows (with what they filter):
 
 ### Detecting `nil` values with `where` filter {%- include docs_version_badge.html version="4.0.0" -%}
 
-From `v4.0` onwards, you can use `where` filter to detect documents and pages with properties that are `nil` or `""`. For example,
+You can use the `where` filter to detect documents and pages with properties that are `nil` or `""`. For example,
 
 ```liquid
 // Using `nil` to select posts that do not have `my_prop` defined on set to `nil` explicitly
