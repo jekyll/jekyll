@@ -24,6 +24,7 @@
   * Only read layouts from source_dir or theme_dir (#6788)
   * Allow custom sorting of collection documents (#7427)
   * Always exclude certain paths from being processed (#7188)
+  * Remove Jekyll::Utils#strip_heredoc in favor of a Ruby &gt; 2.3 built in (#7584)
 
 ### Bug Fixes
 
