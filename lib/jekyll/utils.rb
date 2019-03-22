@@ -17,14 +17,7 @@ module Jekyll
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
     SLUGIFY_ASCII_REGEXP = Regexp.new("[^[A-Za-z0-9]]+").freeze
 
-    # Takes an indented string and removes the preceding spaces on each line
-
-    def strip_heredoc(str)
-      str.gsub(%r!^[ \t]{#{(str.scan(%r!^[ \t]*(?=\S)!).min || "").size}}!, "")
-    end
-
     # Takes a slug and turns it into a simple title.
-
     def titleize_slug(slug)
       slug.split("-").map!(&:capitalize).join(" ")
     end
