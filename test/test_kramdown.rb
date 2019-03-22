@@ -88,7 +88,7 @@ class TestKramdown < JekyllUnitTest
     end
 
     should "render fenced code blocks with syntax highlighting" do
-      result = nokogiri_fragment(@markdown.convert(Utils.strip_heredoc(<<-MARKDOWN)))
+      result = nokogiri_fragment(@markdown.convert(<<~MARKDOWN))
         ~~~ruby
         puts "Hello World"
         ~~~
@@ -109,7 +109,7 @@ class TestKramdown < JekyllUnitTest
         }
 
         markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, override))
-        result = nokogiri_fragment(markdown.convert(Utils.strip_heredoc(<<-MARKDOWN)))
+        result = nokogiri_fragment(markdown.convert(<<~MARKDOWN))
           ~~~ruby
           puts "Hello World"
           ~~~
@@ -130,7 +130,7 @@ class TestKramdown < JekyllUnitTest
         @config.delete("highlighter")
         @config["kramdown"].delete("syntax_highlighter")
         markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, override))
-        result = nokogiri_fragment(markdown.convert(Utils.strip_heredoc(<<-MARKDOWN)))
+        result = nokogiri_fragment(markdown.convert(<<~MARKDOWN))
           ~~~ruby
           puts "Hello World"
           ~~~

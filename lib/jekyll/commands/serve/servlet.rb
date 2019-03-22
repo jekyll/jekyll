@@ -98,17 +98,16 @@ module Jekyll
           # Complicated JavaScript to ensure that livereload.js is loaded from the
           # same origin as the page.  Mostly useful for dealing with the browser's
           # distinction between 'localhost' and 127.0.0.1
-          template = <<-TEMPLATE
-          <script>
-            document.write(
-              '<script src="http://' +
-              (location.host || 'localhost').split(':')[0] +
-              ':<%=@options["livereload_port"] %>/livereload.js?snipver=1<%= livereload_args %>"' +
-              '></' +
-              'script>');
-          </script>
+          @template ||= ERB.new(<<~TEMPLATE)
+            <script>
+              document.write(
+                '<script src="http://' +
+                (location.host || 'localhost').split(':')[0] +
+                ':<%=@options["livereload_port"] %>/livereload.js?snipver=1<%= livereload_args %>"' +
+                '></' +
+                'script>');
+            </script>
           TEMPLATE
-          ERB.new(Jekyll::Utils.strip_heredoc(template))
         end
 
         def livereload_args
