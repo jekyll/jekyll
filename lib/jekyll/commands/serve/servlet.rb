@@ -29,15 +29,15 @@ module Jekyll
         end
 
         def inline?
-          @response["Content-Disposition"] =~ %r!^inline!
+          @response["Content-Disposition"].start_with?("inline")
         end
 
         def bad_browser?
-          BAD_USER_AGENTS.any? { |pattern| @request["User-Agent"] =~ pattern }
+          BAD_USER_AGENTS.any? { |pattern| pattern.match?(@request["User-Agent"]) }
         end
 
         def html?
-          @response["Content-Type"] =~ %r!text/html!
+          @response["Content-Type"].include?("text/html")
         end
       end
 
