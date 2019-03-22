@@ -29,7 +29,7 @@ module Jekyll
         end
 
         def inline?
-          @response["Content-Disposition"].start_with?("inline")
+          @response["Content-Disposition"].to_s.start_with?("inline")
         end
 
         def bad_browser?
@@ -37,7 +37,7 @@ module Jekyll
         end
 
         def html?
-          @response["Content-Type"].include?("text/html")
+          @response["Content-Type"].to_s.include?("text/html")
         end
       end
 
