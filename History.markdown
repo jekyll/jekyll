@@ -89,6 +89,7 @@
   * Configure cache_dir (#7232)
   * Lock use of `tzinfo` gem to v1.x (#7521, #7562)
   * Utilize absolute paths of user-provided file paths (#7450)
+  * ISO week date drops (#5981)
 
 ### Development Fixes
 
