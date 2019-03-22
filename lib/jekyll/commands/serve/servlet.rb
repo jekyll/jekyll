@@ -186,7 +186,7 @@ module Jekyll
           key = res.header.keys.grep(%r!content-type!i).first
           typ = res.header[key]
 
-          unless typ =~ %r!;\s*charset=!
+          unless %r!;\s*charset=!.match?(typ)
             res.header[key] = "#{typ}; charset=#{@jekyll_opts["encoding"]}"
           end
         end

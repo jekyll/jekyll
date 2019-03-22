@@ -46,7 +46,7 @@ module Jekyll
           # WebSockets requests will have a Connection: Upgrade header
           if parser.http_method != "GET" || parser.upgrade?
             super
-          elsif parser.request_url =~ %r!^\/livereload.js!
+          elsif %r!^/livereload.js!.match?(parser.request_url)
             headers = [
               "HTTP/1.1 200 OK",
               "Content-Type: application/javascript",
