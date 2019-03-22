@@ -67,6 +67,17 @@ end
 
 #
 
+Given(%r!^I have an? "(.*)" page with content:$!) do |file, text|
+  File.write(file, <<~DATA)
+    ---
+    ---
+
+    #{text}
+  DATA
+end
+
+#
+
 Given(%r!^I have an? (.*) directory$!) do |dir|
   unless File.directory?(dir)
     then FileUtils.mkdir_p(dir)

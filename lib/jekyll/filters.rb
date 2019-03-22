@@ -161,13 +161,15 @@ module Jekyll
 
     # Filter an array of objects
     #
-    # input - the object array
-    # property - property within each object to filter by
-    # value - desired value
+    # input    - the object array.
+    # property - the property within each object to filter by.
+    # value    - the desired value.
+    #            Cannot be an instance of Array nor Hash since calling #to_s on them returns
+    #            their `#inspect` string object.
     #
     # Returns the filtered array of objects
     def where(input, property, value)
-      return input if property.nil? || value.nil?
+      return input if !property || value.is_a?(Array) || value.is_a?(Hash)
       return input unless input.respond_to?(:select)
 
       input    = input.values if input.is_a?(Hash)
@@ -182,8 +184,8 @@ module Jekyll
       # stash or retrive results to return
       @where_filter_cache[input_id][property][value] ||= begin
         input.select do |object|
-          Array(item_property(object, property)).map!(&:to_s).include?(value.to_s)
-        end || []
+          compare_property_vs_target(item_property(object, property), value)
+        end.to_a
       end
     end
 
@@ -321,6 +323,22 @@ module Jekyll
           end
         end
         .map!(&:last)
+    end
+
+    # `where` filter helper
+    def compare_property_vs_target(property, target)
+      case target
+      when NilClass
+        return true if property.nil?
+      when Liquid::Expression::MethodLiteral # `empty` or `blank`
+        return true if Array(property).join == target.to_s
+      else
+        Array(property).each do |prop|
+          return true if prop.to_s == target.to_s
+        end
+      end
+
+      false
     end
 
     def item_property(item, property)
