@@ -849,20 +849,6 @@ class TestFilters < JekyllUnitTest
         assert_equal 2, @filter.where(array, "color", nil).length
       end
 
-      should "filter array and string objects appropriately" do
-        hash = {
-          "a" => [%w(x y), nil],
-          "b" => ["tags", ["x"]],
-          "c" => ["x", %w(y z)],
-          "d" => nil,
-          "e" => "x",
-        }
-        assert_equal [["x", %w(y z)], "x"], @filter.where(hash, 0, "x")
-        assert_equal [["tags", ["x"]]], @filter.where(hash, 0, "tags")
-        assert_equal [["tags", ["x"]]], @filter.where(hash, "0", "tags")
-        assert_equal [], @filter.where(hash, "tags", "0")
-      end
-
       should "filter array properties appropriately" do
         hash = {
           "a" => { "tags"=>%w(x y) },
@@ -918,6 +904,16 @@ class TestFilters < JekyllUnitTest
           "c" => { "category"=>%w(bear lion) },
         }
         assert_equal 0, @filter.where(hash, "category", "ear").length
+      end
+
+      should "not throw exception when an item is null" do
+        array = [{}, { "color" => "text" }, { "foo" => "bar" }, nil]
+        assert_equal [{ "color" => "text" }], @filter.where(array, "color", "text")
+      end
+
+      should "not throw exception when an item itself is an array" do
+        array = [{}, { "color" => "text" }, [], { "foo" => "bar" }]
+        assert_equal [{ "color" => "text" }], @filter.where(array, "color", "text")
       end
 
       should "stringify during comparison for compatibility with liquid parsing" do
