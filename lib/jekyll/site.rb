@@ -2,7 +2,7 @@
 
 module Jekyll
   class Site
-    attr_reader   :source, :dest, :config
+    attr_reader   :source, :dest, :cache_dir, :config
     attr_accessor :layouts, :pages, :static_files, :drafts,
                   :exclude, :include, :lsi, :highlighter, :permalink_style,
                   :time, :future, :unpublished, :safe, :plugins, :limit_posts,
@@ -21,6 +21,8 @@ module Jekyll
       @dest            = File.expand_path(config["destination"]).freeze
 
       self.config = config
+
+      @cache_dir       = in_source_dir(config["cache_dir"])
 
       @reader          = Reader.new(self)
       @regenerator     = Regenerator.new(self)
@@ -81,6 +83,8 @@ module Jekyll
       Jekyll.logger.info @liquid_renderer.stats_table
     end
 
+    # rubocop:disable Metrics/MethodLength
+    #
     # Reset Site details.
     #
     # Returns nothing
@@ -102,12 +106,14 @@ module Jekyll
       @regenerator.clear_cache
       @liquid_renderer.reset
       @site_cleaner = nil
+      frontmatter_defaults.reset
 
       raise ArgumentError, "limit_posts must be a non-negative number" if limit_posts.negative?
 
       Jekyll::Cache.clear_if_config_changed config
       Jekyll::Hooks.trigger :site, :after_reset, self
     end
+    # rubocop:enable Metrics/MethodLength
 
     # Load necessary libraries, plugins, converters, and generators.
     #
@@ -401,6 +407,18 @@ module Jekyll
       end
     end
 
+    # Public: Prefix a given path with the cache directory.
+    #
+    # paths - (optional) path elements to a file or directory within the
+    #         cache directory
+    #
+    # Returns a path which is prefixed with the cache directory.
+    def in_cache_dir(*paths)
+      paths.reduce(cache_dir) do |base, path|
+        Jekyll.sanitized_path(base, path)
+      end
+    end
+
     # Public: The full path to the directory that houses all the collections registered
     # with the current site.
     #
@@ -451,6 +469,7 @@ module Jekyll
 
     # Disable Marshaling cache to disk in Safe Mode
     def configure_cache
+      Jekyll::Cache.base_dir = in_source_dir(config["cache_dir"], "Jekyll/Cache")
       Jekyll::Cache.disable_disk_cache! if safe
     end
 
@@ -493,7 +512,7 @@ module Jekyll
     end
 
     def render_pages(payload)
-      pages.flatten.each do |page|
+      pages.each do |page|
         render_regenerated(page, payload)
       end
     end

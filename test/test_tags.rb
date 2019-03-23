@@ -69,6 +69,30 @@ class TestTags < JekyllUnitTest
     end
   end
 
+  context "highlight tag" do
+    setup do
+      create_post <<~CONTENT
+        ---
+        title: This is a test
+        ---
+
+        This is not yet highlighted
+
+        {% highlight html %}
+        <h1>{% unregistered_tag %}</h1>
+        {{ page | inspect }}
+        {% endhighlight %}
+
+        This should not be highlighted, right?
+      CONTENT
+    end
+
+    should "not parse Liquid constructs in the tag markup" do
+      assert_match "{% unregistered_tag %}", @result
+      assert_match "{{ page | inspect }}", @result
+    end
+  end
+
   context "highlight tag in unsafe mode" do
     should "set the no options with just a language name" do
       tag = highlight_block_with_opts("ruby ")

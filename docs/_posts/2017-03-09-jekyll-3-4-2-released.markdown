@@ -3,7 +3,7 @@ title: 'Jekyll 3.4.2 Released'
 date: 2017-03-09 15:41:57 -0500
 author: parkr
 version: 3.4.2
-categories: [release]
+category: release
 ---
 
 Another one-PR patch update, though without the same [lessons as for the

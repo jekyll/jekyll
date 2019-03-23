@@ -18,6 +18,7 @@ module Jekyll
           @config = config["kramdown"] || {}
           @highlighter = nil
           setup
+          load_dependencies
         end
 
         # Setup and normalize the configuration:
@@ -30,6 +31,7 @@ module Jekyll
         def setup
           @config["syntax_highlighter"] ||= highlighter
           @config["syntax_highlighter_opts"] ||= {}
+          @config["syntax_highlighter_opts"]["guess_lang"] = @config["guess_lang"]
           @config["coderay"] ||= {} # XXX: Legacy.
           modernize_coderay_config
           make_accessible
@@ -47,6 +49,20 @@ module Jekyll
         end
 
         private
+
+        def load_dependencies
+          require "kramdown-parser-gfm" if @config["input"] == "GFM"
+
+          if highlighter == "coderay"
+            Jekyll::External.require_with_graceful_fail("kramdown-syntax-coderay")
+          end
+
+          # `mathjax` emgine is bundled within kramdown-2.x and will be handled by
+          # kramdown itself.
+          if (math_engine = @config["math_engine"]) && math_engine != "mathjax"
+            Jekyll::External.require_with_graceful_fail("kramdown-math-#{math_engine}")
+          end
+        end
 
         def make_accessible(hash = @config)
           hash.keys.each do |key|

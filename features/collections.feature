@@ -82,8 +82,8 @@ Feature: Collections
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
-    And I should see "Collections: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/um_hi.md" in "_site/index.html" unless Windows
-    And I should see "Collections: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/yaml_with_dots.md" in "_site/index.html" if on Windows
+    And I should see "Collections: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/trailing-dots...md _methods/um_hi.md" in "_site/index.html" unless Windows
+    And I should see "Collections: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/trailing-dots...md _methods/yaml_with_dots.md" in "_site/index.html" if on Windows
 
   Scenario: Collections specified as an hash
     Given I have an "index.html" page that contains "Collections: {% for method in site.methods %}{{ method.relative_path }} {% endfor %}"
@@ -96,8 +96,8 @@ Feature: Collections
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
-    And I should see "Collections: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/um_hi.md" in "_site/index.html" unless Windows
-    And I should see "Collections: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/yaml_with_dots.md" in "_site/index.html" if on Windows
+    And I should see "Collections: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/trailing-dots...md _methods/um_hi.md" in "_site/index.html" unless Windows
+    And I should see "Collections: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/trailing-dots...md _methods/yaml_with_dots.md" in "_site/index.html" if on Windows
 
   Scenario: Rendered collection with document with future date
     Given I have a _puppies directory
@@ -377,8 +377,8 @@ Feature: Collections
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
-    And I should see "All documents: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/um_hi.md" in "_site/index.html" unless Windows
-    And I should see "All documents: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/yaml_with_dots.md" in "_site/index.html" if on Windows
+    And I should see "All documents: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/trailing-dots...md _methods/um_hi.md" in "_site/index.html" unless Windows
+    And I should see "All documents: _methods/3940394-21-9393050-fifif1323-test.md _methods/collection/entries _methods/configuration.md _methods/escape-\+ #%20\[\].md _methods/sanitized_path.md _methods/site/generate.md _methods/site/initialize.md _methods/trailing-dots...md _methods/yaml_with_dots.md" in "_site/index.html" if on Windows
 
   Scenario: Documents have an output attribute, which is the converted HTML
     Given I have an "index.html" page that contains "Second document's output: {{ site.documents[2].output }}"
@@ -392,6 +392,21 @@ Feature: Collections
     Then I should get a zero exit status
     Then the _site directory should exist
     And I should see "Second document's output: <p>Use <code class=\"highlighter-rouge\">Jekyll.configuration</code> to build a full configuration for use w/Jekyll.</p>\n\n<p>Whatever: foo.bar</p>" in "_site/index.html"
+
+  Scenario: Documents have an output attribute, which is the converted HTML based on site.config
+    Given I have an "index.html" page that contains "Second document's output: {{ site.documents[2].output }}"
+    And I have fixture collections
+    And I have a "_config.yml" file with content:
+    """
+    kramdown:
+      guess_lang: false
+    collections:
+    - methods
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    Then the _site directory should exist
+    And I should see "Second document's output: <p>Use <code>Jekyll.configuration</code> to build a full configuration for use w/Jekyll.</p>\n\n<p>Whatever: foo.bar</p>" in "_site/index.html"
 
   Scenario: Filter documents by where
     Given I have an "index.html" page that contains "{% assign items = site.methods | where: 'whatever','foo.bar' %}Item count: {{ items.size }}"
@@ -407,7 +422,7 @@ Feature: Collections
     And I should see "Item count: 2" in "_site/index.html"
 
   Scenario: Sort by title
-    Given I have an "index.html" page that contains "{% assign items = site.methods | sort: 'title' %}2. of {{ items.size }}: {{ items[1].output }}"
+    Given I have an "index.html" page that contains "{% assign items = site.methods | sort: 'title' %}2. of {{ items.size }}: {{ items[2].output }}"
     And I have fixture collections
     And I have a "_config.yml" file with content:
     """
@@ -417,8 +432,8 @@ Feature: Collections
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "2. of 9: <p>Page without title.</p>" in "_site/index.html" unless Windows
-    And I should see "2. of 8: <p>Page without title.</p>" in "_site/index.html" if on Windows
+    And I should see "2. of 10: <p>Page without title.</p>" in "_site/index.html" unless Windows
+    And I should see "2. of 9: <p>Page without title.</p>" in "_site/index.html" if on Windows
 
   Scenario: Sort by relative_path
     Given I have an "index.html" page that contains "Collections: {% assign methods = site.methods | sort: 'relative_path' %}{{ methods | map:"title" | join: ", " }}"
@@ -431,8 +446,154 @@ Feature: Collections
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
-    And I should see "Collections: this is a test!, Collection#entries, Jekyll.configuration, Jekyll.escape, Jekyll.sanitized_path, Site#generate, Initialize, Site#generate, YAML with Dots" in "_site/index.html" unless Windows
-    And I should see "Collections: this is a test!, Collection#entries, Jekyll.configuration, Jekyll.escape, Jekyll.sanitized_path, Site#generate, Initialize, YAML with Dots" in "_site/index.html" if on Windows
+    And I should see "Collections: this is a test!, Collection#entries, Jekyll.configuration, Jekyll.escape, Jekyll.sanitized_path, Site#generate, Initialize, Ellipsis Path, Site#generate, YAML with Dots" in "_site/index.html" unless Windows
+    And I should see "Collections: this is a test!, Collection#entries, Jekyll.configuration, Jekyll.escape, Jekyll.sanitized_path, Site#generate, Initialize, Ellipsis Path, YAML with Dots" in "_site/index.html" if on Windows
+
+  Scenario: Sort all entries by a Front Matter key defined in all entries
+    Given I have an "index.html" page that contains "Collections: {{ site.tutorials | map: 'title' | join: ', ' }}"
+    And I have fixture collections
+    And I have a _layouts directory
+    And I have a "_layouts/tutorial.html" file with content:
+    """
+    {% if page.previous %}Previous: {{ page.previous.title }}{% endif %}
+
+    {% if page.next %}Next: {{ page.next.title }}{% endif %}
+    """
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      tutorials:
+        output: true
+        sort_by: lesson
+
+    defaults:
+      - scope:
+          path: ""
+          type: tutorials
+        values:
+          layout: tutorial
+
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    Then the _site directory should exist
+    And I should see "Collections: Getting Started, Let's Roll!, Dive-In and Publish Already!, Tip of the Iceberg, Extending with Plugins, Graduation Day" in "_site/index.html"
+    And I should not see "Previous: Graduation Day" in "_site/tutorials/lets-roll.html"
+    And I should not see "Next: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
+    But I should see "Previous: Getting Started" in "_site/tutorials/lets-roll.html"
+    And I should see "Next: Dive-In and Publish Already!" in "_site/tutorials/lets-roll.html"
+
+  Scenario: Sort all entries by a Front Matter key defined in only some entries
+    Given I have an "index.html" page that contains "Collections: {{ site.tutorials | map: 'title' | join: ', ' }}"
+    And I have fixture collections
+    And I have a _layouts directory
+    And I have a "_layouts/tutorial.html" file with content:
+    """
+    {% if page.previous %}Previous: {{ page.previous.title }}{% endif %}
+
+    {% if page.next %}Next: {{ page.next.title }}{% endif %}
+    """
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      tutorials:
+        output: true
+        sort_by: approx_time
+
+    defaults:
+    - scope:
+        path: ""
+        type: tutorials
+      values:
+        layout: tutorial
+
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    Then the _site directory should exist
+    And I should see "'approx_time' not defined" in the build output
+    And I should see "Collections: Extending with Plugins, Let's Roll!, Getting Started, Graduation Day, Dive-In and Publish Already!, Tip of the Iceberg" in "_site/index.html"
+    And I should see "Previous: Getting Started" in "_site/tutorials/graduation-day.html"
+    And I should see "Next: Dive-In and Publish Already!" in "_site/tutorials/graduation-day.html"
+
+  Scenario: Manually sort entries
+    Given I have an "index.html" page that contains "Collections: {{ site.tutorials | map: 'title' | join: ', ' }}"
+    And I have fixture collections
+    And I have a _layouts directory
+    And I have a "_layouts/tutorial.html" file with content:
+    """
+    {% if page.previous %}Previous: {{ page.previous.title }}{% endif %}
+
+    {% if page.next %}Next: {{ page.next.title }}{% endif %}
+    """
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      tutorials:
+        output: true
+        order:
+          - getting-started.md
+          - tip-of-the-iceberg.md
+          - lets-roll.md
+          - dive-in-and-publish-already.md
+          - graduation-day.md
+          - random-plugins.md
+
+    defaults:
+      - scope:
+          path: ""
+          type: tutorials
+        values:
+          layout: tutorial
+
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    Then the _site directory should exist
+    And I should see "Collections: Getting Started, Tip of the Iceberg, Let's Roll!, Dive-In and Publish Already!, Graduation Day, Extending with Plugins" in "_site/index.html"
+    And I should not see "Previous: Graduation Day" in "_site/tutorials/lets-roll.html"
+    And I should not see "Next: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
+    But I should see "Previous: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
+    And I should see "Next: Dive-In and Publish Already!" in "_site/tutorials/lets-roll.html"
+
+  Scenario: Manually sort some entries
+    Given I have an "index.html" page that contains "Collections: {{ site.tutorials | map: 'title' | join: ', ' }}"
+    And I have fixture collections
+    And I have a _layouts directory
+    And I have a "_layouts/tutorial.html" file with content:
+    """
+    {% if page.previous %}Previous: {{ page.previous.title }}{% endif %}
+
+    {% if page.next %}Next: {{ page.next.title }}{% endif %}
+    """
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      tutorials:
+        output: true
+        order:
+          - getting-started.md
+          - lets-roll.md
+          - dive-in-and-publish-already.md
+          - graduation-day.md
+
+    defaults:
+      - scope:
+          path: ""
+          type: tutorials
+        values:
+          layout: tutorial
+
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    Then the _site directory should exist
+    And I should see "Collections: Getting Started, Let's Roll!, Dive-In and Publish Already!, Graduation Day, Extending with Plugins, Tip of the Iceberg" in "_site/index.html"
+    And I should not see "Previous: Graduation Day" in "_site/tutorials/lets-roll.html"
+    And I should not see "Previous: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
+    And I should not see "Next: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
+    But I should see "Previous: Getting Started" in "_site/tutorials/lets-roll.html"
+    And I should see "Next: Dive-In and Publish Already!" in "_site/tutorials/lets-roll.html"
 
   Scenario: Rendered collection with date/dateless filename
     Given I have an "index.html" page that contains "Collections: {% for method in site.thanksgiving %}{{ method.title }} {% endfor %}"

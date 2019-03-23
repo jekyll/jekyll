@@ -61,8 +61,19 @@ Here's the full list of placeholders available:
       </td>
       <td>
         <p>
-          Year from the post's filename. May be overridden via the document’s
-          <code>date</code> front matter
+          Year from the post’s filename with four digits.
+          May be overridden via the document’s <code>date</code> front matter.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>short_year</code></p>
+      </td>
+      <td>
+        <p>
+          Year from the post’s filename without the century. (00..99)
+          May be overridden via the document’s <code>date</code> front matter.
         </p>
       </td>
     </tr>
@@ -72,8 +83,8 @@ Here's the full list of placeholders available:
       </td>
       <td>
         <p>
-          Month from the post's filename. May be overridden via the document’s
-          <code>date</code> front matter
+          Month from the post’s filename. (01..12)
+          May be overridden via the document’s <code>date</code> front matter.
         </p>
       </td>
     </tr>
@@ -83,9 +94,25 @@ Here's the full list of placeholders available:
       </td>
       <td>
         <p>
-          Month without leading zeros from the post's filename. May be
-          overridden via the document’s <code>date</code> front matter
+          Month without leading zeros from the post’s filename. May be
+          overridden via the document’s <code>date</code> front matter.
         </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>short_month</code></p>
+      </td>
+      <td>
+        <p>Three-letter month abbreviation, e.g. “Jan”.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>long_month</code></p>
+      </td>
+      <td>
+        <p>Full month name, e.g. “January”.</p>
       </td>
     </tr>
     <tr>
@@ -94,8 +121,8 @@ Here's the full list of placeholders available:
       </td>
       <td>
         <p>
-          Day from the post's filename. May be overridden via the document’s
-          <code>date</code> front matter
+          Day of the month from the post’s filename. (01..31)
+          May be overridden via the document’s <code>date</code> front matter.
         </p>
       </td>
     </tr>
@@ -105,8 +132,8 @@ Here's the full list of placeholders available:
       </td>
       <td>
         <p>
-          Day without leading zeros from the post's filename. May be overridden
-          via the document’s <code>date</code> front matter
+          Day of the month without leading zeros from the post’s filename.
+          May be overridden via the document’s <code>date</code> front matter.
         </p>
       </td>
     </tr>
@@ -115,18 +142,47 @@ Here's the full list of placeholders available:
         <p><code>y_day</code></p>
       </td>
       <td>
-        <p>Day of the year from the post's filename, with leading zeros.</p>
+        <p>Ordinal day of the year from the post’s filename, with leading zeros. (001..366)</p>
       </td>
     </tr>
     <tr>
       <td>
-        <p><code>short_year</code></p>
+        <p><code>w_year</code></p>
       </td>
       <td>
-        <p>
-          Year without the century from the post's filename. May be overridden
-          via the document’s <code>date</code> front matter
-        </p>
+        <p>Week year which may differ from the month year for up to three days at the start of January and end of December</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>week</code></p>
+      </td>
+      <td>
+        <p>Week number of the current year, starting with the first week having a majority of its days in January. (01..53)</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>w_day</code></p>
+      </td>
+      <td>
+        <p>Day of the week, starting with Monday. (1..7)</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>short_day</code></p>
+      </td>
+      <td>
+        <p>Three-letter weekday abbreviation, e.g. “Sun”.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>long_day</code></p>
+      </td>
+      <td>
+        <p>Weekday name, e.g. “Sunday”.</p>
       </td>
     </tr>
     <tr>
@@ -135,7 +191,7 @@ Here's the full list of placeholders available:
       </td>
       <td>
         <p>
-          Hour of the day, 24-hour clock, zero-padded from the post's
+          Hour of the day, 24-hour clock, zero-padded from the post’s
           <code>date</code> front matter. (00..23)
         </p>
       </td>
@@ -146,7 +202,7 @@ Here's the full list of placeholders available:
       </td>
       <td>
         <p>
-          Minute of the hour from the post's <code>date</code> front matter. (00..59)
+          Minute of the hour from the post’s <code>date</code> front matter. (00..59)
         </p>
       </td>
     </tr>
@@ -156,7 +212,7 @@ Here's the full list of placeholders available:
       </td>
       <td>
         <p>
-          Second of the minute from the post's <code>date</code> front matter. (00..59)
+          Second of the minute from the post’s <code>date</code> front matter. (00..59)
         </p>
       </td>
     </tr>
@@ -235,6 +291,14 @@ For posts, Jekyll also provides the following built-in styles for convenience:
       </td>
       <td>
         <p><code>/:categories/:year/:y_day/:title:output_ext</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>weekdate</code></p>
+      </td>
+      <td>
+        <p><code>/:categories/:year/W:week/:short_day/:title.html</code></p>
       </td>
     </tr>
     <tr>

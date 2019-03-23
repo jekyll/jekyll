@@ -10,6 +10,11 @@ module Jekyll
     # Initializes a new instance.
     def initialize(site)
       @site = site
+      reset
+    end
+
+    def reset
+      @glob_cache = {}
     end
 
     def update_deprecated_types(set)
@@ -98,28 +103,35 @@ module Jekyll
       applies_type?(scope, type) && applies_path?(scope, path)
     end
 
-    # rubocop:disable Metrics/AbcSize
     def applies_path?(scope, path)
       return true if !scope.key?("path") || scope["path"].empty?
 
       sanitized_path = Pathname.new(sanitize_path(path))
-      site_path      = Pathname.new(@site.source)
       rel_scope_path = Pathname.new(scope["path"])
-      abs_scope_path = File.join(@site.source, rel_scope_path)
 
       if scope["path"].to_s.include?("*")
-        Dir.glob(abs_scope_path).each do |scope_path|
-          scope_path = Pathname.new(scope_path).relative_path_from(site_path)
-          scope_path = strip_collections_dir(scope_path)
-          Jekyll.logger.debug "Globbed Scope Path:", scope_path
-          return true if path_is_subpath?(sanitized_path, scope_path)
-        end
-        false
+        glob_scope(sanitized_path, rel_scope_path)
       else
         path_is_subpath?(sanitized_path, strip_collections_dir(rel_scope_path))
       end
     end
-    # rubocop:enable Metrics/AbcSize
+
+    def glob_scope(sanitized_path, rel_scope_path)
+      site_source    = Pathname.new(@site.source)
+      abs_scope_path = site_source.join(rel_scope_path).to_s
+
+      glob_cache(abs_scope_path).each do |scope_path|
+        scope_path = Pathname.new(scope_path).relative_path_from(site_source)
+        scope_path = strip_collections_dir(scope_path)
+        Jekyll.logger.debug "Globbed Scope Path:", scope_path
+        return true if path_is_subpath?(sanitized_path, scope_path)
+      end
+      false
+    end
+
+    def glob_cache(path)
+      @glob_cache[path] ||= Dir.glob(path)
+    end
 
     def path_is_subpath?(path, parent_path)
       path.ascend do |ascended_path|

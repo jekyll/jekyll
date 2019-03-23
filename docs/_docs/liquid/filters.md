@@ -104,6 +104,21 @@ The default is `default`. They are as follows (with what they filter):
 - `ascii`: spaces, non-alphanumeric, and non-ASCII characters
 - `latin`: like `default`, except Latin characters are first transliterated (e.g. `àèïòü` to `aeiou`) {%- include docs_version_badge.html version="3.7.0" -%}.
 
+### Detecting `nil` values with `where` filter {%- include docs_version_badge.html version="4.0.0" -%}
+
+You can use the `where` filter to detect documents and pages with properties that are `nil` or `""`. For example,
+
+```liquid
+// Using `nil` to select posts that either do not have `my_prop` defined or `my_prop` has been set to `nil` explicitly.
+{% raw %}{% assign filtered_posts = site.posts | where: 'my_prop', nil %}{% endraw %}
+```
+
+```liquid
+// Using Liquid's special literal `empty` or `blank` to select posts that have `my_prop` set to an empty value.
+{% raw %}{% assign filtered_posts = site.posts | where: 'my_prop', empty %}{% endraw %}
+```
+
+
 ### Standard Liquid Filters
 
 For your convenience, here is the list of all [Liquid filters]({{ page.shopify_filter_url }}) with links to examples in the official Liquid documentation.

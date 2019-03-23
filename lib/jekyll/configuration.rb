@@ -19,10 +19,7 @@ module Jekyll
       # Handling Reading
       "safe"                => false,
       "include"             => [".htaccess"],
-      "exclude"             => %w(
-        Gemfile Gemfile.lock node_modules vendor/bundle/ vendor/cache/ vendor/gems/
-        vendor/ruby/
-      ),
+      "exclude"             => [],
       "keep_files"          => [".git", ".svn"],
       "encoding"            => "utf-8",
       "markdown_ext"        => "markdown,mkdown,mkdn,mkd,md",
@@ -74,6 +71,7 @@ module Jekyll
         "smart_quotes"  => "lsquo,rsquo,ldquo,rdquo",
         "input"         => "GFM",
         "hard_wrap"     => false,
+        "guess_lang"    => true,
         "footnote_nr"   => 1,
         "show_warnings" => false,
       },
@@ -92,7 +90,7 @@ module Jekyll
       # problems and backwards-compatibility.
       def from(user_config)
         Utils.deep_merge_hashes(DEFAULTS, Configuration[user_config].stringify_keys)
-          .add_default_collections
+          .add_default_collections.add_default_excludes
       end
     end
 
@@ -169,6 +167,7 @@ module Jekyll
     #
     # Returns this configuration, overridden by the values in the file
     def read_config_file(file)
+      file = File.expand_path(file)
       next_config = safe_load_file(file)
       check_config_is_hash!(next_config, file)
       Jekyll.logger.info "Configuration file:", file
@@ -270,7 +269,22 @@ module Jekyll
       config
     end
 
-    def renamed_key(old, new, config, _ = nil)
+    DEFAULT_EXCLUDES = %w(
+      .sass-cache .jekyll-cache
+      gemfiles Gemfile Gemfile.lock
+      node_modules
+      vendor/bundle/ vendor/cache/ vendor/gems/ vendor/ruby/
+    ).freeze
+
+    def add_default_excludes
+      config = clone
+      return config if config["exclude"].nil?
+
+      config["exclude"].concat(DEFAULT_EXCLUDES).uniq!
+      config
+    end
+
+    def renamed_key(old, new, config)
       if config.key?(old)
         Jekyll::Deprecator.deprecation_message "The '#{old}' configuration" \
           " option has been renamed to '#{new}'. Please update your config" \
@@ -291,6 +305,8 @@ module Jekyll
         "/:categories/:year/:month/:day/:title:output_ext"
       when :ordinal
         "/:categories/:year/:y_day/:title:output_ext"
+      when :weekdate
+        "/:categories/:year/W:week/:short_day/:title:output_ext"
       else
         permalink_style.to_s
       end

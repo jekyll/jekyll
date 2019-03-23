@@ -50,8 +50,16 @@ To locate a theme's files on your computer:
    ```sh
    # On MacOS
    open $(bundle show minima)
+
    # On Windows
-   explorer /usr/local/lib/ruby/gems/2.3.0/gems/minima-2.1.0
+   # First get the gem's installation path:
+   #
+   #   bundle show minima
+   #   => C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/minima-2.1.0
+   #
+   # then invoke explorer with above path, substituting `/` with `\`
+   explorer C:\Ruby24-x64\lib\ruby\gems\2.4.0\gems\minima-2.1.0
+
    # On Linux
    xdg-open $(bundle show minima)
    ```

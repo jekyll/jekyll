@@ -1,14 +1,12 @@
-bundler_args: --without benchmark:site:development
+bundler_args: --without benchmark:development
 script: script/cibuild
 cache: bundler
 language: ruby
-sudo: false
 
 rvm:
   - &ruby1 2.6.0
-  - &ruby2 2.5.3
-  - &ruby3 2.3.8
-  - &jruby jruby-9.1.16.0
+  - &ruby2 2.4.5
+  - &jruby jruby-9.2.6.0
 
 matrix:
   include:
@@ -18,9 +16,14 @@ matrix:
     - rvm: *ruby1
       env: TEST_SUITE=default-site
       name: "🏠️ Default Site"
+    - rvm: *ruby1
+      env: TEST_SUITE=profile-docs
+      name: "Profile Docs"
   exclude:
     - rvm: *jruby
       env: TEST_SUITE=cucumber
+  allow_failures:
+    - rvm: *jruby
 
 env:
   matrix:

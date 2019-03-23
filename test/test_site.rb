@@ -76,17 +76,26 @@ class TestSite < JekyllUnitTest
       allow(File).to receive(:directory?).with(theme_dir("_sass")).and_return(true)
       allow(File).to receive(:directory?).with(theme_dir("_layouts")).and_return(true)
       allow(File).to receive(:directory?).with(theme_dir("_includes")).and_return(false)
-      allow(File).to receive(:directory?).with(
-        File.expand_path(".jekyll-cache/Jekyll/Cache/Jekyll--Cache")
-      ).and_return(true)
       site = fixture_site("theme" => "test-theme")
       assert_equal [source_dir("_includes")], site.includes_load_paths
     end
+
+    should "configure cache_dir" do
+      fixture_site.process
+      assert File.directory?(source_dir(".jekyll-cache", "Jekyll", "Cache"))
+      assert File.directory?(source_dir(".jekyll-cache", "Jekyll", "Cache", "Jekyll--Cache"))
+    end
+
+    should "use .jekyll-cache directory at source as cache_dir by default" do
+      site = Site.new(default_configuration)
+      assert_equal File.join(site.source, ".jekyll-cache"), site.cache_dir
+    end
   end
+
   context "creating sites" do
     setup do
       @site = Site.new(site_configuration)
-      @num_invalid_posts = 5
+      @num_invalid_posts = 6
     end
 
     teardown do
@@ -235,6 +244,7 @@ class TestSite < JekyllUnitTest
         properties.html
         sitemap.xml
         static_files.html
+        trailing-dots...md
       )
       unless Utils::Platforms.really_windows?
         # files in symlinked directories may appear twice
@@ -671,6 +681,24 @@ class TestSite < JekyllUnitTest
         assert File.file?(dest)
         mtime2 = File.stat(dest).mtime.to_i
         refute_equal mtime1, mtime2 # must be regenerated
+      end
+    end
+
+    context "#in_cache_dir method" do
+      setup do
+        @site = Site.new(
+          site_configuration(
+            "cache_dir" => "../../custom-cache-dir"
+          )
+        )
+      end
+
+      should "create sanitized paths within the cache directory" do
+        assert_equal File.join(@site.source, "custom-cache-dir"), @site.cache_dir
+        assert_equal(
+          File.join(@site.source, "custom-cache-dir", "foo.md.metadata"),
+          @site.in_cache_dir("../../foo.md.metadata")
+        )
       end
     end
   end

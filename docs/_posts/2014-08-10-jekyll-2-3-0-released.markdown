@@ -3,7 +3,7 @@ title: 'Jekyll 2.3.0 Released'
 date: 2014-08-10 20:38:34 -0400
 author: parkr
 version: 2.3.0
-categories: [release]
+category: release
 ---
 
 This latest release of Jekyll includes a slew of enhancements and bug

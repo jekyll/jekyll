@@ -48,7 +48,9 @@ You could then reference that variable in your include:
 
 {% raw %}
 ```liquid
-{% include {{ page.my_variable }} %}
+{% if page.my_variable %}
+  {% include {{ page.my_variable }} %}
+{% endif %}
 ```
 {% endraw %}
 
