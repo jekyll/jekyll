@@ -347,7 +347,7 @@ module Jekyll
       @item_property_cache[property][item] ||= begin
         if item.respond_to?(:to_liquid)
           property.to_s.split(".").reduce(item.to_liquid) do |subvalue, attribute|
-            parse_sort_input(subvalue[attribute]) if subvalue.respond_to?(:[])
+            parse_sort_input(access_property(subvalue, attribute))
           end
         elsif item.respond_to?(:data)
           parse_sort_input(item.data[property.to_s])
@@ -355,6 +355,15 @@ module Jekyll
           parse_sort_input(item[property.to_s])
         end
       end
+    end
+
+    def access_property(object, key)
+      return object unless object.respond_to?(:[])
+
+      accessor = parse_sort_input(key)
+      return object if object.is_a?(Array) && !accessor.is_a?(Integer)
+
+      object[accessor]
     end
 
     # return numeric values as numbers for proper sorting

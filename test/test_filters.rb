@@ -849,6 +849,20 @@ class TestFilters < JekyllUnitTest
         assert_equal 2, @filter.where(array, "color", nil).length
       end
 
+      should "filter array and string objects appropriately" do
+        hash = {
+          "a" => [%w(x y), nil],
+          "b" => ["tags", ["x"]],
+          "c" => ["x", %w(y z)],
+          "d" => nil,
+          "e" => "x",
+        }
+        assert_equal [["x", %w(y z)], "x"], @filter.where(hash, 0, "x")
+        assert_equal [["tags", ["x"]]], @filter.where(hash, 0, "tags")
+        assert_equal [["tags", ["x"]]], @filter.where(hash, "0", "tags")
+        assert_equal [], @filter.where(hash, "tags", "0")
+      end
+
       should "filter array properties appropriately" do
         hash = {
           "a" => { "tags"=>%w(x y) },
