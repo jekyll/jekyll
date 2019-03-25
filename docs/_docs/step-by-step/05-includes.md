@@ -27,7 +27,7 @@ following content:
 ```liquid
 <nav>
   <a href="/">Home</a>
-  <a href="/about.html">About</a>
+  <a href="/about.md">About</a>
 </nav>
 ```
 
@@ -69,7 +69,7 @@ if true:
   <a href="/" {% if page.url == "/" %}style="color: red;"{% endif %}>
     Home
   </a>
-  <a href="/about.html" {% if page.url == "/about.html" %}style="color: red;"{% endif %}>
+  <a href="/about.md" {% if page.url == "/about.md" %}style="color: red;"{% endif %}>
     About
   </a>
 </nav>
