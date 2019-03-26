@@ -131,6 +131,7 @@
   * We are not using Ruby 2.2 anymore (#6977)
   * Remove unnecessary Jekyll::Page constant (#6770)
   * Remove unused error class (#6511)
+  * Add a Cucumber feature for post_url tag (#7586)
 
 ### Documentation
 
