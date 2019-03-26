@@ -27,7 +27,7 @@ Feature: PostUrl Tag
     And the _site directory should exist
     And I should see "<p><a href=\"/hello-world.html\">Welcome</a></p>" in "_site/index.html"
 
-  Scenario: Site with permalink setting scoped to the post
+  Scenario: Site with custom permalink settings on each post
     Given I have a _posts directory
     And I have the following posts:
       | title         | date       | permalink               | content           |
