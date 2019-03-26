@@ -14,7 +14,7 @@ Feature: PostUrl Tag
     And the _site directory should exist
     And I should see "<p><a href=\"/2019/02/04/hello-world.html\">Welcome</a></p>" in "_site/index.html"
 
-  Scenario: Site with site-wide custom permalink setting and posts
+  Scenario: Site with site-wide custom permalink setting
     Given I have a _posts directory
     And I have the following posts:
       | title         | date       | content           |
