@@ -3,7 +3,7 @@ Feature: PostUrl Tag
   I want to be able to link to posts easily
   And render them without much hassle
 
-  Scenario: Basic site with a single page and a single post
+  Scenario: A site that is using the defaults for permalink
     Given I have a _posts directory
     And I have the following post:
       | title       | date       | content           |
