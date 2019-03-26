@@ -55,9 +55,6 @@ Feature: PostUrl Tag
       | We Meet Again | 2119-02-04 | Alpha beta gamma  |
     And I have a configuration file with "permalink" set to "/:title:output_ext"
     And I have an "index.md" page that contains "[Welcome Again]({% post_url 2119-02-04-we-meet-again %})"
-    When I run jekyll build
-    Then I should get a non-zero exit status
-    And I should see "Could not find post \"2119-02-04-we-meet-again\" in tag 'post_url'." in the build output
     When I run jekyll build --future
     Then I should get a zero exit status
     And the _site directory should exist
@@ -107,38 +104,10 @@ Feature: PostUrl Tag
     And I have the following post in "movies":
       | title       | date       | content           |
       | Hello World | 2019-02-04 | Lorem ipsum dolor |
-    And I have the following post in "movies":
-      | title       | date       | category | content                |
-      | Star Wars   | 2019-02-05 | film     | Luke, I am your father |
     And I have an "index.md" page that contains "[Welcome]({% post_url 2019-02-04-hello-world %})"
     And I have an "hello.md" page that contains "[Movies]({% post_url movies/2019-02-04-hello-world %})"
-    And I have an "movie.md" page that contains "[Film]({% post_url movies/2019-02-05-star-wars %})"
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
     And I should see "<p><a href=\"/2019/02/04/hello-world.html\">Welcome</a></p>" in "_site/index.html"
     And I should see "<p><a href=\"/movies/2019/02/04/hello-world.html\">Movies</a></p>" in "_site/hello.html"
-    And I should see "<p><a href=\"/movies/film/2019/02/05/star-wars.html\">Film</a></p>" in "_site/movie.html"
-
-  Scenario: Site with configured baseurl and posts with categories
-    Given I have a configuration file with "baseurl" set to "blog"
-    And I have a _posts directory
-    And I have the following post:
-      | title        | date       | content           |
-      | Hello World  | 2019-02-04 | Lorem ipsum dolor |
-    And I have a movies/_posts directory
-    And I have the following post in "movies":
-      | title        | date       | content           |
-      | Hello Movies | 2019-02-05 | Lorem ipsum dolor |
-    And I have the following post in "movies":
-      | title        | date       | category | content                |
-      | Star Wars    | 2019-02-06 | film     | Luke, I am your father |
-    And I have an "index.md" page that contains "[Welcome]({% post_url 2019-02-04-hello-world %})"
-    And I have an "hello.md" page that contains "[Movies]({% post_url movies/2019-02-05-hello-movies %})"
-    And I have an "movie.md" page that contains "[Film]({% post_url movies/2019-02-06-star-wars %})"
-    When I run jekyll build
-    Then I should get a zero exit status
-    And the _site directory should exist
-    And I should see "<p><a href=\"/2019/02/04/hello-world.html\">Welcome</a></p>" in "_site/index.html"
-    And I should see "<p><a href=\"/movies/2019/02/05/hello-movies.html\">Movies</a></p>" in "_site/hello.html"
-    And I should see "<p><a href=\"/movies/film/2019/02/06/star-wars.html\">Film</a></p>" in "_site/movie.html"
