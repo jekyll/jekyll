@@ -120,3 +120,15 @@ Feature: PostUrl Tag
     And the _site directory should exist
     And I should see "<p><a href=\"/2019/02/04/hello-world.html\">Welcome</a></p>" in "_site/index.html"
     And I should see "<p><a href=\"/movies/2019/02/04/hello-world.html\">Movies</a></p>" in "_site/index.html"
+
+  Scenario: Deprecated usage to link nested post
+    Given I have a movies/_posts directory
+    And I have the following post in "movies":
+      | title       | date       | content           |
+      | Hello World | 2019-02-04 | Lorem ipsum dolor |
+    And I have an "index.md" page that contains "[Movies]({% post_url 2019-02-04-hello-world %})"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And I should see "Deprecation: A call to '{% post_url 2019-02-04-hello-world %}' did not match a post" in the build output
+    But the _site directory should exist
+    And I should see "<p><a href=\"/movies/2019/02/04/hello-world.html\">Movies</a></p>" in "_site/index.html"
