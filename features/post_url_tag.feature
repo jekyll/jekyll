@@ -71,7 +71,7 @@ Feature: PostUrl Tag
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "<p><a href=\"/2019/02/04/hello-world.html\">Welcome</a></p>" in "_site/index.html"
+    And I should see "<p><a href=\"/blog/2019/02/04/hello-world.html\">Welcome</a></p>" in "_site/index.html"
 
   Scenario: Posts with categories
     Given I have a _posts directory
