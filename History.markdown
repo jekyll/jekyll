@@ -243,6 +243,7 @@
   * v4.0 development post (#6934)
   * Release post for v3.8.0 (#6849)
   * Release Post for v3.6.3, v3.7.4 and v3.8.4 (#7259)
+  * Adds Statictastic to the list of resources (#7593)
 
 ### Site Enhancements
 
