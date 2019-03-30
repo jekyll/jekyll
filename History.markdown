@@ -25,6 +25,7 @@
   * Allow custom sorting of collection documents (#7427)
   * Always exclude certain paths from being processed (#7188)
   * Remove Jekyll::Utils#strip_heredoc in favor of a Ruby &gt; 2.3 built in (#7584)
+  * Incorporate `relative_url` within `post_url` tag (#7589)
 
 ### Bug Fixes
 
@@ -242,6 +243,7 @@
   * v4.0 development post (#6934)
   * Release post for v3.8.0 (#6849)
   * Release Post for v3.6.3, v3.7.4 and v3.8.4 (#7259)
+  * Adds Statictastic to the list of resources (#7593)
 
 ### Site Enhancements
 
