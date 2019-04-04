@@ -246,6 +246,7 @@
   * Adds Statictastic to the list of resources (#7593)
   * Update 07-assets.md (#7599)
   * Fix link space (#7600)
+  * Added Formspark to form resources (#7601)
 
 ### Site Enhancements
 
