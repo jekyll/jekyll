@@ -199,10 +199,10 @@ module Jekyll
           new_config = read_config_file(config_file)
           configuration = Utils.deep_merge_hashes(configuration, new_config)
         end
-      rescue ArgumentError => err
+      rescue ArgumentError => e
         Jekyll.logger.warn "WARNING:", "Error reading configuration. " \
                      "Using defaults (and options)."
-        warn err
+        warn e
       end
 
       configuration.backwards_compatibilize.add_default_collections
