@@ -133,6 +133,7 @@
   * Remove unnecessary Jekyll::Page constant (#6770)
   * Remove unused error class (#6511)
   * Add a Cucumber feature for post_url tag (#7586)
+  * Bump tested version of JRuby to 9.2.7.0 (#7612)
 
 ### Documentation
 
