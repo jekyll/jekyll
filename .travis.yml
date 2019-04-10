@@ -6,7 +6,7 @@ language: ruby
 rvm:
   - &ruby1 2.6.0
   - &ruby2 2.4.5
-  - &jruby jruby-9.2.6.0
+  - &jruby jruby-9.2.7.0
 
 matrix:
   include:
@@ -22,8 +22,6 @@ matrix:
   exclude:
     - rvm: *jruby
       env: TEST_SUITE=cucumber
-  allow_failures:
-    - rvm: *jruby
 
 env:
   matrix:
