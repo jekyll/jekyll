@@ -15,7 +15,7 @@ module Jekyll
 
       private
 
-      def generate(data, widths, initial = " ")
+      def inject_data(initial = " ")
         str = +initial
 
         yield str
@@ -25,7 +25,7 @@ module Jekyll
       end
 
       def generate_table(data, widths)
-        generate(data, widths, "\n") do |str|
+        inject_data("\n") do |str|
           headers = data.shift(2)
           footer  = data.pop
 
@@ -40,7 +40,7 @@ module Jekyll
       end
 
       def generate_table_head_border(row_data, widths)
-        generate(row_data, widths) do |str|
+        inject_data do |str|
           row_data.each_index do |index|
             str << "-" * widths[index]
             str << "-+-" unless index == row_data.length - 1
@@ -49,7 +49,7 @@ module Jekyll
       end
 
       def generate_row(row_data, widths)
-        generate(row_data, widths) do |str|
+        inject_data do |str|
           row_data.each_with_index do |cell, index|
             str << if index.zero?
                      cell.ljust(widths[index])
