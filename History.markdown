@@ -249,6 +249,7 @@
   * Fix link space (#7600)
   * Added Formspark to form resources (#7601)
   * Simplify couple of includes in the docs site (#7607)
+  * Avoid generating empty classnames (#7610)
 
 ### Site Enhancements
 
