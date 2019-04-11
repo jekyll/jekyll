@@ -15,54 +15,50 @@ module Jekyll
 
       private
 
-      def generate_table(data, widths)
-        str = +"\n"
+      def generate(data, widths, initial = " ")
+        str = +initial
 
-        header0 = data.shift
-        header1 = data.shift
-        footer  = data.pop
-        str << generate_row(header0, widths)
-        str << generate_row(header1, widths)
-        str << generate_table_head_border(header0, widths)
-
-        data.each do |row_data|
-          str << generate_row(row_data, widths)
-        end
-
-        str << generate_table_head_border(header0, widths)
-        str << generate_row(footer, widths)
+        yield str
 
         str << "\n"
         str
+      end
+
+      def generate_table(data, widths)
+        generate(data, widths, "\n") do |str|
+          headers = data.shift(2)
+          footer  = data.pop
+
+          headers.each { |header| str << generate_row(header, widths) }
+          str << generate_table_head_border(headers[0], widths)
+
+          data.each { |row_data| str << generate_row(row_data, widths) }
+
+          str << generate_table_head_border(headers[0], widths)
+          str << generate_row(footer, widths)
+        end
       end
 
       def generate_table_head_border(row_data, widths)
-        str = +""
-
-        row_data.each_index do |cell_index|
-          str << "-" * widths[cell_index]
-          str << "-+-" unless cell_index == row_data.length - 1
+        generate(row_data, widths) do |str|
+          row_data.each_index do |index|
+            str << "-" * widths[index]
+            str << "-+-" unless index == row_data.length - 1
+          end
         end
-
-        str << "\n"
-        str
       end
 
       def generate_row(row_data, widths)
-        str = +""
-
-        row_data.each_with_index do |cell_data, cell_index|
-          str << if cell_index.zero?
-                   cell_data.ljust(widths[cell_index], " ")
-                 else
-                   cell_data.rjust(widths[cell_index], " ")
-                 end
-
-          str << " | " unless cell_index == row_data.length - 1
+        generate(row_data, widths) do |str|
+          row_data.each_with_index do |cell, index|
+            str << if index.zero?
+                     cell.ljust(widths[index])
+                   else
+                     cell.rjust(widths[index])
+                   end
+            str << " | " unless index == row_data.length - 1
+          end
         end
-
-        str << "\n"
-        str
       end
 
       def table_widths(data)
@@ -104,7 +100,7 @@ module Jekyll
             end
           end
 
-          table << ["TOTAL"].tap do |row|
+          table << ["TOTAL (for #{sorted.size} files)"].tap do |row|
             types.each do |type|
               data_for_row(total, type, row)
             end
