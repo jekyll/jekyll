@@ -3,7 +3,7 @@ title: 'Jekyll 3.1.4 "Stability Sam" Released'
 date: 2016-05-18 16:50:37 -0700
 author: parkr
 version: 3.1.4
-categories: [release]
+category: release
 ---
 
 Hey Jekyllites!

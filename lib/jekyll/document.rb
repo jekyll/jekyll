@@ -10,9 +10,9 @@ module Jekyll
 
     def_delegator :self, :read_post_data, :post_read
 
-    YAML_FRONT_MATTER_REGEXP = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m
-    DATELESS_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.[^.]+)$!
-    DATE_FILENAME_MATCHER = %r!^(?:.+/)*(\d{2,4}-\d{1,2}-\d{1,2})-(.*)(\.[^.]+)$!
+    YAML_FRONT_MATTER_REGEXP = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m.freeze
+    DATELESS_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.[^.]+)$!.freeze
+    DATE_FILENAME_MATCHER = %r!^(?>.+/)*?(\d{2,4}-\d{1,2}-\d{1,2})-([^/]*)(\.[^.]+)$!.freeze
 
     # Create a new Document.
     #
@@ -60,12 +60,19 @@ module Jekyll
       data
     end
 
+    # Returns the document date. If metadata is not present then calculates it
+    # based on Jekyll::Site#time or the document file modification time.
+    #
+    # Return document date string.
     def date
       data["date"] ||= (draft? ? source_file_mtime : site.time)
     end
 
+    # Return document file modification time in the form of a Time object.
+    #
+    # Return document file modification Time object.
     def source_file_mtime
-      @source_file_mtime ||= File.mtime(path)
+      File.mtime(path)
     end
 
     # Returns whether the document is a draft. This is only the case if
@@ -112,15 +119,19 @@ module Jekyll
     #   and with the collection's directory removed as well.
     # This method is useful when building the URL of the document.
     #
+    # NOTE: `String#gsub` removes all trailing periods (in comparison to `String#chomp`)
+    #
     # Examples:
-    #   When relative_path is "_methods/site/generate.md":
+    #   When relative_path is "_methods/site/generate...md":
     #     cleaned_relative_path
     #     # => "/site/generate"
     #
     # Returns the cleaned relative path of the document.
     def cleaned_relative_path
       @cleaned_relative_path ||=
-        relative_path[0..-extname.length - 1].sub(collection.relative_directory, "")
+        relative_path[0..-extname.length - 1]
+          .sub(collection.relative_directory, "")
+          .gsub(%r!\.*\z!, "")
     end
 
     # Determine whether the document is a YAML file.
@@ -159,6 +170,8 @@ module Jekyll
     #   or if the document doesn't contain any Liquid Tags or Variables,
     #   true otherwise.
     def render_with_liquid?
+      return false if data["render_with_liquid"] == false
+
       !(coffeescript_file? || yaml_file? || !Utils.has_liquid_construct?(content))
     end
 
@@ -204,11 +217,11 @@ module Jekyll
     #
     # Returns the computed URL for the document.
     def url
-      @url ||= URL.new({
+      @url ||= URL.new(
         :template     => url_template,
         :placeholders => url_placeholders,
-        :permalink    => permalink,
-      }).to_s
+        :permalink    => permalink
+      ).to_s
     end
 
     def [](key)
@@ -286,7 +299,7 @@ module Jekyll
     #
     # Returns the inspect string for this document.
     def inspect
-      "#<Jekyll::Document #{relative_path} collection=#{collection.label}>"
+      "#<#{self.class} #{relative_path} collection=#{collection.label}>"
     end
 
     # The string representation for this document.
@@ -303,6 +316,7 @@ module Jekyll
     #   equal or greater than the other doc's path. See String#<=> for more details.
     def <=>(other)
       return nil unless other.respond_to?(:data)
+
       cmp = data["date"] <=> other.data["date"]
       cmp = path <=> other.path if cmp.nil? || cmp.zero?
       cmp
@@ -315,7 +329,7 @@ module Jekyll
     # method returns true, and if the site's Publisher will publish the document.
     # False otherwise.
     def write?
-      collection && collection.write? && site.publisher.publish?(self)
+      collection&.write? && site.publisher.publish?(self)
     end
 
     # The Document excerpt_separator, from the YAML Front-Matter or site
@@ -323,7 +337,7 @@ module Jekyll
     #
     # Returns the document excerpt_separator
     def excerpt_separator
-      (data["excerpt_separator"] || site.config["excerpt_separator"]).to_s
+      @excerpt_separator ||= (data["excerpt_separator"] || site.config["excerpt_separator"]).to_s
     end
 
     # Whether to generate an excerpt
@@ -335,16 +349,12 @@ module Jekyll
 
     def next_doc
       pos = collection.docs.index { |post| post.equal?(self) }
-      if pos && pos < collection.docs.length - 1
-        collection.docs[pos + 1]
-      end
+      collection.docs[pos + 1] if pos && pos < collection.docs.length - 1
     end
 
     def previous_doc
       pos = collection.docs.index { |post| post.equal?(self) }
-      if pos && pos > 0
-        collection.docs[pos - 1]
-      end
+      collection.docs[pos - 1] if pos && pos.positive?
     end
 
     def trigger_hooks(hook_name, *args)
@@ -400,32 +410,30 @@ module Jekyll
     end
 
     def populate_categories
-      merge_data!({
+      merge_data!(
         "categories" => (
           Array(data["categories"]) + Utils.pluralized_array_from_hash(
             data, "category", "categories"
           )
-        ).map(&:to_s).flatten.uniq,
-      })
+        ).map(&:to_s).flatten.uniq
+      )
     end
 
     def populate_tags
-      merge_data!({
-        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten,
-      })
+      merge_data!(
+        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
+      )
     end
 
     private
+
     def merge_categories!(other)
       if other.key?("categories") && !other["categories"].nil?
-        if other["categories"].is_a?(String)
-          other["categories"] = other["categories"].split
-        end
+        other["categories"] = other["categories"].split if other["categories"].is_a?(String)
         other["categories"] = (data["categories"] || []) | other["categories"]
       end
     end
 
-    private
     def merge_date!(source)
       if data.key?("date")
         data["date"] = Utils.parse_date(
@@ -435,7 +443,6 @@ module Jekyll
       end
     end
 
-    private
     def merge_defaults
       defaults = @site.frontmatter_defaults.all(
         relative_path,
@@ -444,7 +451,6 @@ module Jekyll
       merge_data!(defaults, :source => "front matter defaults") unless defaults.empty?
     end
 
-    private
     def read_content(opts)
       self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
       if content =~ YAML_FRONT_MATTER_REGEXP
@@ -454,7 +460,6 @@ module Jekyll
       end
     end
 
-    private
     def read_post_data
       populate_title
       populate_categories
@@ -462,7 +467,6 @@ module Jekyll
       generate_excerpt
     end
 
-    private
     def handle_read_error(error)
       if error.is_a? Psych::SyntaxError
         Jekyll.logger.error "Error:", "YAML Exception reading #{path}: #{error.message}"
@@ -475,7 +479,6 @@ module Jekyll
       end
     end
 
-    private
     def populate_title
       if relative_path =~ DATE_FILENAME_MATCHER
         date, slug, ext = Regexp.last_match.captures
@@ -484,6 +487,10 @@ module Jekyll
         slug, ext = Regexp.last_match.captures
       end
 
+      # slugs shouldn't end with a period
+      # `String#gsub!` removes all trailing periods (in comparison to `String#chomp!`)
+      slug.gsub!(%r!\.*\z!, "")
+
       # Try to ensure the user gets a title.
       data["title"] ||= Utils.titleize_slug(slug)
       # Only overwrite slug & ext if they aren't specified.
@@ -491,18 +498,14 @@ module Jekyll
       data["ext"]   ||= ext
     end
 
-    private
     def modify_date(date)
       if !data["date"] || data["date"].to_i == site.time.to_i
         merge_data!({ "date" => date }, :source => "filename")
       end
     end
 
-    private
     def generate_excerpt
-      if generate_excerpt?
-        data["excerpt"] ||= Jekyll::Excerpt.new(self)
-      end
+      data["excerpt"] ||= Jekyll::Excerpt.new(self) if generate_excerpt?
     end
   end
 end

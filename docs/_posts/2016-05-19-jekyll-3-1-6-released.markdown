@@ -3,7 +3,7 @@ title: 'Jekyll 3.1.6 Released'
 date: 2016-05-19 12:48:14 -0700
 author: parkr
 version: 3.1.6
-categories: [release]
+category: release
 ---
 
 Upon releasing 3.1.5 and kicking the tires, we noticed a glaring bug: our

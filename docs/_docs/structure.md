@@ -1,16 +1,7 @@
 ---
-title: Directory structure
+title: Directory Structure
 permalink: /docs/structure/
 ---
-
-Jekyll is, at its core, a text transformation engine. The concept behind the
-system is this: you give it text written in your favorite markup language, be
-that Markdown, Textile, or just plain HTML, and it churns that through a layout
-or a series of layout files. Throughout that process you can tweak how you want
-the site URLs to look, what data gets displayed in the layout, and more. This
-is all done through editing text files; the static web site is the final
-product.
-
 A basic Jekyll site usually looks something like this:
 
 ```sh
@@ -35,13 +26,13 @@ A basic Jekyll site usually looks something like this:
 |   └── _layout.scss
 ├── _site
 ├── .jekyll-metadata
-└── index.html # can also be an 'index.md' with valid YAML Frontmatter
+└── index.html # can also be an 'index.md' with valid front matter
 ```
 
 <div class="note info">
   <h5>Directory structure of Jekyll sites using gem-based themes</h5>
   <p>
-    Starting <strong>Jekyll 3.2</strong>, a new Jekyll project bootstrapped with <code>jekyll new</code> uses <a href="../themes/">gem-based themes</a> to define the look of the site. This results in a lighter default directory structure : <code>_layouts</code>, <code>_includes</code> and <code>_sass</code> are stored in the theme-gem, by default.
+    Starting <strong>Jekyll 3.2</strong>, a new Jekyll project bootstrapped with <code>jekyll new</code> uses <a href="/docs/themes/">gem-based themes</a> to define the look of the site. This results in a lighter default directory structure : <code>_layouts</code>, <code>_includes</code> and <code>_sass</code> are stored in the theme-gem, by default.
   </p>
   <br />
   <p>
@@ -66,7 +57,7 @@ An overview of what each of these does:
       </td>
       <td>
         <p>
-          Stores <a href="../configuration/">configuration</a> data. Many of
+          Stores <a href="/docs/configuration/">configuration</a> data. Many of
           these options can be specified from the command line executable but
           it’s easier to specify them here so you don’t have to remember them.
         </p>
@@ -79,7 +70,7 @@ An overview of what each of these does:
       <td>
         <p>
           Drafts are unpublished posts. The format of these files is without a
-          date: <code>title.MARKUP</code>. Learn how to <a href="../drafts/">
+          date: <code>title.MARKUP</code>. Learn how to <a href="/docs/posts/#drafts">
           work with drafts</a>.
         </p>
       </td>
@@ -106,7 +97,7 @@ An overview of what each of these does:
         <p>
           These are the templates that wrap posts. Layouts are chosen on a
           post-by-post basis in the
-          <a href="../frontmatter/">YAML Front Matter</a>,
+          <a href="/docs/front-matter/">front matter</a>,
           which is described in the next section. The liquid tag
           <code>{% raw %}{{ content }}{% endraw %}</code>
           is used to inject content into the web page.
@@ -122,7 +113,7 @@ An overview of what each of these does:
           Your dynamic content, so to speak. The naming convention of these
           files is important, and must follow the format:
           <code>YEAR-MONTH-DAY-title.MARKUP</code>.
-          The <a href="../permalinks/">permalinks</a> can be customized for
+          The <a href="/docs/permalinks/">permalinks</a> can be customized for
           each post, but the date and markup language are determined solely by
           the file name.
         </p>
@@ -136,9 +127,9 @@ An overview of what each of these does:
         <p>
           Well-formatted site data should be placed here. The Jekyll engine
           will autoload all data files (using either the <code>.yml</code>,
-          <code>.yaml</code>, <code>.json</code> or <code>.csv</code>
-          formats and extensions) in this directory, and they will be
-          accessible via `site.data`. If there's a file
+          <code>.yaml</code>, <code>.json</code>, <code>.csv</code> or
+          <code>.tsv</code> formats and extensions) in this directory,
+          and they will be accessible via `site.data`. If there's a file
           <code>members.yml</code> under the directory, then you can access
           contents of the file through <code>site.data.members</code>.
         </p>
@@ -185,12 +176,12 @@ An overview of what each of these does:
     <tr>
       <td>
         <p><code>index.html</code> or <code>index.md</code> and other HTML,
-        Markdown, Textile files</p>
+        Markdown files</p>
       </td>
       <td>
         <p>
-          Provided that the file has a <a href="../frontmatter/">YAML Front
-          Matter</a> section, it will be transformed by Jekyll. The same will
+          Provided that the file has a <a href="/docs/front-matter/">front
+          matter</a> section, it will be transformed by Jekyll. The same will
           happen for any <code>.html</code>, <code>.markdown</code>,
           <code>.md</code>, or <code>.textile</code> file in your site’s root
           directory or directories not listed above.
@@ -206,7 +197,7 @@ An overview of what each of these does:
           Every other directory and file except for those listed above—such as
           <code>css</code> and <code>images</code> folders,
           <code>favicon.ico</code> files, and so forth—will be copied verbatim
-          to the generated site. There are plenty of <a href="../sites/">sites
+          to the generated site. There are plenty of <a href="/showcase/">sites
           already using Jekyll</a> if you’re curious to see how they’re laid
           out.
         </p>

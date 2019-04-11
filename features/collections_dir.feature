@@ -283,3 +283,153 @@ Feature: Collections Directory
     And I should see "<p>Loki: Manager: false</p>" in "_site/index.html"
     And I should see "<p>Loki: Recruit: false</p>" in "_site/index.html"
     And I should see "<p>Loki: Villain: false</p>" in "_site/index.html"
+
+  Scenario: Sort all entries by a Front Matter key defined in all entries
+    Given I have an "index.html" page that contains "Collections: {{ site.tutorials | map: 'title' | join: ', ' }}"
+    And I have fixture collections in "gathering" directory
+    And I have a _layouts directory
+    And I have a "_layouts/tutorial.html" file with content:
+    """
+    {% if page.previous %}Previous: {{ page.previous.title }}{% endif %}
+
+    {% if page.next %}Next: {{ page.next.title }}{% endif %}
+    """
+    And I have a "_config.yml" file with content:
+    """
+    collections_dir: gathering
+    collections:
+      tutorials:
+        output: true
+        sort_by: lesson
+
+    defaults:
+      - scope:
+          path: ""
+          type: tutorials
+        values:
+          layout: tutorial
+
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    Then the _site directory should exist
+    And I should see "Collections: Getting Started, Let's Roll!, Dive-In and Publish Already!, Tip of the Iceberg, Extending with Plugins, Graduation Day" in "_site/index.html"
+    And I should not see "Previous: Graduation Day" in "_site/tutorials/lets-roll.html"
+    And I should not see "Next: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
+    But I should see "Previous: Getting Started" in "_site/tutorials/lets-roll.html"
+    And I should see "Next: Dive-In and Publish Already!" in "_site/tutorials/lets-roll.html"
+
+  Scenario: Sort all entries by a Front Matter key defined in only some entries
+    Given I have an "index.html" page that contains "Collections: {{ site.tutorials | map: 'title' | join: ', ' }}"
+    And I have fixture collections in "gathering" directory
+    And I have a _layouts directory
+    And I have a "_layouts/tutorial.html" file with content:
+    """
+    {% if page.previous %}Previous: {{ page.previous.title }}{% endif %}
+
+    {% if page.next %}Next: {{ page.next.title }}{% endif %}
+    """
+    And I have a "_config.yml" file with content:
+    """
+    collections_dir: gathering
+    collections:
+      tutorials:
+        output: true
+        sort_by: approx_time
+
+    defaults:
+    - scope:
+        path: ""
+        type: tutorials
+      values:
+        layout: tutorial
+
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    Then the _site directory should exist
+    And I should see "'approx_time' not defined" in the build output
+    And I should see "Collections: Extending with Plugins, Let's Roll!, Getting Started, Graduation Day, Dive-In and Publish Already!, Tip of the Iceberg" in "_site/index.html"
+    And I should see "Previous: Getting Started" in "_site/tutorials/graduation-day.html"
+    And I should see "Next: Dive-In and Publish Already!" in "_site/tutorials/graduation-day.html"
+
+  Scenario: Manually sort entries
+    Given I have an "index.html" page that contains "Collections: {{ site.tutorials | map: 'title' | join: ', ' }}"
+    And I have fixture collections in "gathering" directory
+    And I have a _layouts directory
+    And I have a "_layouts/tutorial.html" file with content:
+    """
+    {% if page.previous %}Previous: {{ page.previous.title }}{% endif %}
+
+    {% if page.next %}Next: {{ page.next.title }}{% endif %}
+    """
+    And I have a "_config.yml" file with content:
+    """
+    collections_dir: gathering
+    collections:
+      tutorials:
+        output: true
+        order:
+          - getting-started.md
+          - tip-of-the-iceberg.md
+          - lets-roll.md
+          - dive-in-and-publish-already.md
+          - graduation-day.md
+          - random-plugins.md
+
+    defaults:
+      - scope:
+          path: ""
+          type: tutorials
+        values:
+          layout: tutorial
+
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    Then the _site directory should exist
+    And I should see "Collections: Getting Started, Tip of the Iceberg, Let's Roll!, Dive-In and Publish Already!, Graduation Day, Extending with Plugins" in "_site/index.html"
+    And I should not see "Previous: Graduation Day" in "_site/tutorials/lets-roll.html"
+    And I should not see "Next: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
+    But I should see "Previous: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
+    And I should see "Next: Dive-In and Publish Already!" in "_site/tutorials/lets-roll.html"
+
+  Scenario: Manually sort some entries
+    Given I have an "index.html" page that contains "Collections: {{ site.tutorials | map: 'title' | join: ', ' }}"
+    And I have fixture collections in "gathering" directory
+    And I have a _layouts directory
+    And I have a "_layouts/tutorial.html" file with content:
+    """
+    {% if page.previous %}Previous: {{ page.previous.title }}{% endif %}
+
+    {% if page.next %}Next: {{ page.next.title }}{% endif %}
+    """
+    And I have a "_config.yml" file with content:
+    """
+    collections_dir: gathering
+    collections:
+      tutorials:
+        output: true
+        order:
+          - getting-started.md
+          - lets-roll.md
+          - dive-in-and-publish-already.md
+          - graduation-day.md
+
+    defaults:
+      - scope:
+          path: ""
+          type: tutorials
+        values:
+          layout: tutorial
+
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    Then the _site directory should exist
+    And I should see "Collections: Getting Started, Let's Roll!, Dive-In and Publish Already!, Graduation Day, Extending with Plugins, Tip of the Iceberg" in "_site/index.html"
+    And I should not see "Previous: Graduation Day" in "_site/tutorials/lets-roll.html"
+    And I should not see "Previous: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
+    And I should not see "Next: Tip of the Iceberg" in "_site/tutorials/lets-roll.html"
+    But I should see "Previous: Getting Started" in "_site/tutorials/lets-roll.html"
+    And I should see "Next: Dive-In and Publish Already!" in "_site/tutorials/lets-roll.html"

@@ -107,3 +107,55 @@ Feature: Embed filters
     Then I should get a zero exit status
     And the _site directory should exist
     And I should see exactly "The rule of 3: Fly, Run, Jump," in "_site/bird.html"
+
+  Scenario: Filter posts by given property and value
+    Given I have a _posts directory
+    And I have the following posts:
+      | title    | date       | content   | property                  |
+      | Bird     | 2019-03-13 | Chirp     | [nature, sounds]          |
+      | Cat      | 2019-03-14 | Meow      | [sounds]                  |
+      | Dog      | 2019-03-15 | Bark      |                           |
+      | Elephant | 2019-03-16 | Asiatic   | wildlife                  |
+      | Goat     | 2019-03-17 | Mountains | ""                        |
+      | Horse    | 2019-03-18 | Mustang   | []                        |
+      | Iguana   | 2019-03-19 | Reptile   | {}                        |
+      | Jaguar   | 2019-03-20 | Reptile   | {foo: lorem, bar: nature} |
+    And I have a "string-value.md" page with content:
+      """
+      {% assign pool = site.posts | reverse | where: 'property', 'wildlife' %}
+      {{ pool | map: 'title' | join: ', ' }}
+      """
+    And I have a "string-value-array.md" page with content:
+      """
+      {% assign pool = site.posts | reverse | where: 'property', 'sounds' %}
+      {{ pool | map: 'title' | join: ', ' }}
+      """
+    And I have a "string-value-hash.md" page with content:
+      """
+      {% assign pool = site.posts | reverse | where: 'property', 'nature' %}
+      {{ pool | map: 'title' | join: ', ' }}
+      """
+    And I have a "nil-value.md" page with content:
+      """
+      {% assign pool = site.posts | reverse | where: 'property', nil %}
+      {{ pool | map: 'title' | join: ', ' }}
+      """
+    And I have an "empty-liquid-literal.md" page with content:
+      """
+      {% assign pool = site.posts | reverse | where: 'property', empty %}
+      {{ pool | map: 'title' | join: ', ' }}
+      """
+    And I have a "blank-liquid-literal.md" page with content:
+      """
+      {% assign pool = site.posts | reverse | where: 'property', blank %}
+      {{ pool | map: 'title' | join: ', ' }}
+      """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see exactly "<p>Elephant</p>" in "_site/string-value.html"
+    And I should see exactly "<p>Bird, Cat</p>" in "_site/string-value-array.html"
+    And I should see exactly "<p>Bird</p>" in "_site/string-value-hash.html"
+    And I should see exactly "<p>Dog</p>" in "_site/nil-value.html"
+    And I should see exactly "<p>Dog, Goat, Horse, Iguana</p>" in "_site/empty-liquid-literal.html"
+    And I should see exactly "<p>Dog, Goat, Horse, Iguana</p>" in "_site/blank-liquid-literal.html"

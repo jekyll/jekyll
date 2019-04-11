@@ -60,6 +60,7 @@ module Jekyll
     # Ensure the priority is a Fixnum
     def self.priority_value(priority)
       return priority if priority.is_a?(Integer)
+
       PRIORITY_MAP[priority] || DEFAULT_PRIORITY
     end
 
@@ -77,9 +78,7 @@ module Jekyll
           "following hooks #{@registry[owner].keys.inspect}"
       end
 
-      unless block.respond_to? :call
-        raise Uncallable, "Hooks must respond to :call"
-      end
+      raise Uncallable, "Hooks must respond to :call" unless block.respond_to? :call
 
       insert_hook owner, event, priority, &block
     end

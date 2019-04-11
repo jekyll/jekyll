@@ -68,6 +68,7 @@ module Jekyll
     def generate_url_from_hash(template)
       @placeholders.inject(template) do |result, token|
         break result if result.index(":").nil?
+
         if token.last.nil?
           # Remove leading "/" to avoid generating urls with `//`
           result.gsub("/:#{token.first}", "")
@@ -98,8 +99,8 @@ module Jekyll
         winner = pool.find { |key| @placeholders.key?(key) }
         if winner.nil?
           raise NoMethodError,
-            "The URL template doesn't have #{pool.join(" or ")} keys. "\
-              "Check your permalink template!"
+                "The URL template doesn't have #{pool.join(" or ")} keys. "\
+                "Check your permalink template!"
         end
 
         value = @placeholders[winner]

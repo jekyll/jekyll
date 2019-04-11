@@ -6,15 +6,15 @@ module Jekyll
       VALID_SYNTAX = %r!
         ([\w-]+)\s*=\s*
         (?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))
-      !x
+      !x.freeze
       VARIABLE_SYNTAX = %r!
         (?<variable>[^{]*(\{\{\s*[\w\-\.]+\s*(\|.*)?\}\}[^\s{}]*)+)
         (?<params>.*)
-      !mx
+      !mx.freeze
 
-      FULL_VALID_SYNTAX = %r!\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z!
-      VALID_FILENAME_CHARS = %r!^[\w/\.-]+$!
-      INVALID_SEQUENCES = %r![./]{2,}!
+      FULL_VALID_SYNTAX = %r!\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z!.freeze
+      VALID_FILENAME_CHARS = %r!^[\w/\.-]+$!.freeze
+      INVALID_SEQUENCES = %r![./]{2,}!.freeze
 
       def initialize(tag_name, markup, tokens)
         super
@@ -41,9 +41,9 @@ module Jekyll
           markup = markup[match.end(0)..-1]
 
           value = if match[2]
-                    match[2].gsub(%r!\\"!, '"')
+                    match[2].gsub('\\"', '"')
                   elsif match[3]
-                    match[3].gsub(%r!\\'!, "'")
+                    match[3].gsub("\\'", "'")
                   elsif match[4]
                     context[match[4]]
                   end
@@ -55,31 +55,31 @@ module Jekyll
 
       def validate_file_name(file)
         if file =~ INVALID_SEQUENCES || file !~ VALID_FILENAME_CHARS
-          raise ArgumentError, <<-MSG
-Invalid syntax for include tag. File contains invalid characters or sequences:
+          raise ArgumentError, <<~MSG
+            Invalid syntax for include tag. File contains invalid characters or sequences:
 
-  #{file}
+              #{file}
 
-Valid syntax:
+            Valid syntax:
 
-  #{syntax_example}
+              #{syntax_example}
 
-MSG
+          MSG
         end
       end
 
       def validate_params
         unless @params =~ FULL_VALID_SYNTAX
-          raise ArgumentError, <<-MSG
-Invalid syntax for include tag:
+          raise ArgumentError, <<~MSG
+            Invalid syntax for include tag:
 
-  #{@params}
+            #{@params}
 
-Valid syntax:
+            Valid syntax:
 
-  #{syntax_example}
+            #{syntax_example}
 
-MSG
+          MSG
         end
       end
 
@@ -90,13 +90,7 @@ MSG
 
       # Render the variable if required
       def render_variable(context)
-        if @file =~ VARIABLE_SYNTAX
-          partial = context.registers[:site]
-            .liquid_renderer
-            .file("(variable)")
-            .parse(@file)
-          partial.render!(context)
-        end
+        Liquid::Template.parse(@file).render(context) if @file =~ VARIABLE_SYNTAX
       end
 
       def tag_includes_dirs(context)
@@ -138,7 +132,7 @@ MSG
       end
 
       def add_include_to_dependency(site, path, context)
-        if context.registers[:page] && context.registers[:page].key?("path")
+        if context.registers[:page]&.key?("path")
           site.regenerator.add_dependency(
             site.in_source_dir(context.registers[:page]["path"]),
             path

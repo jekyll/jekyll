@@ -3,7 +3,7 @@
 module Jekyll
   class Theme
     extend Forwardable
-    attr_reader :name
+    attr_reader   :name
     def_delegator :gemspec, :version, :version
 
     def initialize(name)
@@ -23,23 +23,24 @@ module Jekyll
     end
 
     def includes_path
-      @includes_path ||= path_for "_includes".freeze
+      @includes_path ||= path_for "_includes"
     end
 
     def layouts_path
-      @layouts_path ||= path_for "_layouts".freeze
+      @layouts_path ||= path_for "_layouts"
     end
 
     def sass_path
-      @sass_path ||= path_for "_sass".freeze
+      @sass_path ||= path_for "_sass"
     end
 
     def assets_path
-      @assets_path ||= path_for "assets".freeze
+      @assets_path ||= path_for "assets"
     end
 
     def configure_sass
       return unless sass_path
+
       External.require_with_graceful_fail("sass") unless defined?(Sass)
       Sass.load_paths << sass_path
     end
@@ -56,7 +57,11 @@ module Jekyll
     end
 
     def realpath_for(folder)
-      File.realpath(Jekyll.sanitized_path(root, folder.to_s))
+      # This resolves all symlinks for the theme subfolder and then ensures that the directory
+      # remains inside the theme root. This prevents the use of symlinks for theme subfolders to
+      # escape the theme root.
+      # However, symlinks are allowed to point to other directories within the theme.
+      Jekyll.sanitized_path(root, File.realpath(Jekyll.sanitized_path(root, folder.to_s)))
     rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP
       Jekyll.logger.warn "Invalid theme folder:", folder
       nil
@@ -66,7 +71,7 @@ module Jekyll
       @gemspec ||= Gem::Specification.find_by_name(name)
     rescue Gem::LoadError
       raise Jekyll::Errors::MissingDependencyException,
-        "The #{name} theme could not be found."
+            "The #{name} theme could not be found."
     end
   end
 end

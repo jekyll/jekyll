@@ -38,8 +38,8 @@ Feature: Link Tag
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "<p><a href=\"/about.html\">About my projects</a></p>" in "_site/index.html"
-    And I should see "<p><a href=\"/\">Home</a></p>" in "_site/about.html"
+    And I should see "<p><a href=\"/blog/about.html\">About my projects</a></p>" in "_site/index.html"
+    And I should see "<p><a href=\"/blog/\">Home</a></p>" in "_site/about.html"
 
   Scenario: Basic site with two pages and custom baseurl and permalinks
     Given I have an "index.md" page that contains "[About my projects]({% link about.md %})"
@@ -52,8 +52,8 @@ Feature: Link Tag
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "<p><a href=\"/about/\">About my projects</a></p>" in "_site/index.html"
-    And I should see "<p><a href=\"/\">Home</a></p>" in "_site/about/index.html"
+    And I should see "<p><a href=\"/blog/about/\">About my projects</a></p>" in "_site/index.html"
+    And I should see "<p><a href=\"/blog/\">Home</a></p>" in "_site/about/index.html"
 
   Scenario: Linking to a ghost file
     Given I have an "index.md" page that contains "[About my projects]({% link about.md %})"

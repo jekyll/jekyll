@@ -41,16 +41,15 @@ module Jekyll
       end
 
       private
+
       def parse_expression(str)
         Liquid::Variable.new(str, Liquid::ParseContext.new)
       end
 
-      private
       def groupable?(element)
         element.respond_to?(:group_by)
       end
 
-      private
       def grouped_array(groups)
         groups.each_with_object([]) do |item, array|
           array << {

@@ -1,0 +1,241 @@
+- name: Tom Preston Werner Blog
+  url: http://tom.preston-werner.com/
+  categories:
+    - personal
+    - blog
+- name: GitHub On Demand Training
+  url: https://services.github.com/on-demand/
+  categories:
+    - software
+    - knowledgebase
+- name: Vesterheim Norwegian-American Museum
+  url: http://vesterheim.org/
+  categories:
+    - marketing-site
+- name: KOTN
+  url: https://kotn.com/
+  categories:
+   - marketing-site
+- name: MvvmCross
+  url: https://www.mvvmcross.com/
+  categories:
+    - software
+    - marketing-site
+- name: Vidgrid
+  url: https://www.vidgrid.com/
+  categories:
+    - software
+    - marketing-site
+- name: Bitcoin
+  url: https://bitcoin.org/en/
+  categories:
+    - software
+    - marketing-site
+- name: Mapwize
+  url: https://www.mapwize.io/
+  categories:
+    - software
+    - marketing-site
+- name: Auth0 Blog
+  url: https://auth0.com/blog/
+  categories:
+    - software
+    - blog
+- name: AWS Amplify
+  url: https://aws-amplify.github.io/
+  categories:
+    - open-source
+    - marketing-site
+- name: Yeoman
+  url: http://yeoman.io/
+  categories:
+    - open-source
+    - marketing-site
+- name: Ionic Framwork
+  url: https://ionicframework.com/
+  categories:
+    - software
+    - marketing-site
+- name: Release Management Blog
+  url: https://release.mozilla.org/
+  categories:
+    - software
+    - blog
+- name: Freedom of Information Act
+  url: https://www.foia.gov/
+  categories:
+    - government
+- name: Art & About Sydney
+  url: https://www.artandabout.com.au/
+  categories:
+    - government
+- name: Passbolt Help
+  url: https://help.passbolt.com/
+  categories:
+    - knowledgebase
+- name: We are COLLINS
+  url: https://www.wearecollins.com/
+  categories:
+    - agency
+- name: Light Burn
+  url: https://lightburn.co/
+  categories:
+    - agency
+- name: italia.it
+  url: https://developers.italia.it/
+  categories:
+    - community
+- name: Sydney New Years Eve
+  url: https://www.sydneynewyearseve.com/
+  categories:
+    - government
+- name: Login.gov
+  url: https://login.gov/
+  categories:
+    - government
+- name: plainlanguage.gov
+  url: https://plainlanguage.gov/
+  categories:
+    - government
+- name: U.S. Web Design Standards
+  url: https://standards.usa.gov/
+  categories:
+    - government
+- name: Grantmaker Search
+  url: https://www.grantmakers.io/
+  categories:
+    - marketing-site
+- name: Rehan Butt
+  url: http://rehanbutt.com/
+  categories:
+    - personal
+    - portfolio
+- name: The Markdown Guide
+  url: https://www.markdownguide.org/
+  categories:
+    - knowledgebase
+- name: PROBOT
+  url: https://probot.github.io/
+  categories:
+    - documentation
+- name: Matt Grey
+  url: https://himatt.com/
+  categories:
+    - personal
+    - portfolio
+- name: frame.ai
+  url: https://frame.ai/
+  categories:
+    - software
+    - marketing-site
+- name: AdHawk
+  url: https://www.tryadhawk.com/
+  categories:
+    - agency
+- name: City of Boston Budget
+  url: https://budget.boston.gov/
+  categories:
+    - government
+- name: Lattice
+  url: https://latticehq.com/
+  categories:
+    - software
+    - marketing-site
+- name: MailTape
+  url: https://www.mailta.pe/
+  categories:
+    - other
+- name: Digital Democracy
+  url: http://www.digital-democracy.org/
+  categories:
+    - other
+- name: HTML Reference
+  url: http://htmlreference.io/
+  categories:
+    - documentation
+- name: CSS Reference
+  url: http://cssreference.io/
+  categories:
+    - documentation
+- name: Chain
+  url: https://chain.com/
+  categories:
+    - marketing-site
+- name: Boxy Suite
+  url: https://www.boxysuite.com/
+  categories:
+    - marketing-site
+    - software
+- name: Pattern Lab
+  url: http://patternlab.io/
+  categories:
+    - documentation
+- name: IBM MobileFirst Foundation
+  url: https://mobilefirstplatform.ibmcloud.com/
+  categories:
+    - documentation
+- name: 18F
+  url: https://18f.gsa.gov/
+  categories:
+    - agency
+    - government
+- name: Mapbox
+  url: https://mapbox.com/
+  categories:
+    - marketing-site
+- name: Development Seed
+  url: https://developmentseed.org/
+  categories:
+    - agency
+- name: Isomer - Singapore Government Static Websites
+  url: https://isomer.gov.sg/
+  categories:
+    - government
+- name: SiteLeaf
+  url: https://siteleaf.com
+  categories:
+    - software
+    - marketing-site
+- name: CloudCannon
+  url: https://cloudcannon.com/
+  categories:
+    - software
+    - marketing-site
+- name: Ruby on Rails
+  url: http://rubyonrails.org/
+  categories:
+    - marketing-site
+    - documentation
+- name: White House Social and Behavioral Sciences Team
+  url: https://sbst.gov/
+  categories:
+    - government
+- name: UN World Statistics
+  url: https://worldstatisticsday.org
+  categories:
+    - government
+- name: Sketch App
+  url: https://sketchapp.com/
+  categories:
+    - software
+    - marketing-site
+- name: Netflix Devices
+  url: https://devices.netflix.com/en/
+  categories:
+    - marketing-site
+- name: TwitchCon
+  url: https://www.twitchcon.com/
+  categories:
+    - marketing-site
+    - conference
+- name: Twitch Developer Documentation
+  url: https://dev.twitch.tv/
+  categories:
+    - marketing-site
+    - documentation
+- name: Spotify for Developers
+  url: https://developer.spotify.com
+  categories:
+    - marketing-site
+    - documentation
+    - software

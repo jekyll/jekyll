@@ -43,6 +43,7 @@ module Jekyll
         self.log_level = :debug
       end
       debug "Logging at level:", LOG_LEVELS.key(writer.level).to_s
+      debug "Jekyll Version:", Jekyll::VERSION
     end
 
     # Public: Print a debug message
@@ -143,6 +144,7 @@ module Jekyll
     # the appropriate writer method, e.g. writer.info.
     def write(level_of_message, topic, message = nil, &block)
       return false unless write_message?(level_of_message)
+
       writer.public_send(level_of_message, message(topic, message, &block))
     end
   end
