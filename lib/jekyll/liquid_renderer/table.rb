@@ -19,12 +19,17 @@ module Jekyll
         str = +"\n"
 
         table_head = data.shift
+        table_foot = data.pop
+
         str << generate_row(table_head, widths)
         str << generate_table_head_border(table_head, widths)
 
         data.each do |row_data|
           str << generate_row(row_data, widths)
         end
+
+        str << generate_table_head_border(table_foot, widths)
+        str << generate_row(table_foot, widths)
 
         str << "\n"
         str
@@ -75,18 +80,23 @@ module Jekyll
         sorted = @stats.sort_by { |_, file_stats| -file_stats[:time] }
         sorted = sorted.slice(0, num_of_rows)
 
-        table = [%w(Filename Count Bytes Time)]
+        gauges = [:count, :bytes, :time]
+        labels = %w(Filename).concat(gauges.map { |gauge| gauge.to_s.capitalize })
+        table  = [labels]
+        total  = Hash.new { |hash, key| hash[key] = 0 }
 
         sorted.each do |filename, file_stats|
-          row = []
-          row << filename
-          row << file_stats[:count].to_s
-          row << format_bytes(file_stats[:bytes])
-          row << format("%.3f", file_stats[:time])
-          table << row
+          gauges.each { |gauge| total[gauge] += file_stats[gauge] }
+          table << data_to_row(file_stats, [filename])
         end
 
-        table
+        table << data_to_row(total, ["TOTAL (for #{sorted.size} files)"])
+      end
+
+      def data_to_row(hash, row)
+        row << hash[:count].to_s
+        row << format_bytes(hash[:bytes])
+        row << format("%.3f", hash[:time])
       end
 
       def format_bytes(bytes)
