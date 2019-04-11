@@ -93,7 +93,7 @@ module Jekyll
           add_header(table, types, gauges.map(&:capitalize))
 
           sorted.each do |filename, file_stats|
-            table << [filename].tap do |row|
+            table << [truncate(filename)].tap do |row|
               types.each do |type|
                 gauges.each do |metric|
                   key = "#{type}_#{metric}".to_sym
@@ -135,6 +135,12 @@ module Jekyll
       def format_bytes(bytes)
         bytes /= 1024.0
         format("%.2fK", bytes)
+      end
+
+      def truncate(input, max_size = 36)
+        return input unless input.length > max_size
+
+        "#{input[0...max_size]}..."
       end
     end
   end
