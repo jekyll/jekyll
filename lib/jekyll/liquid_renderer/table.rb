@@ -3,6 +3,8 @@
 module Jekyll
   class LiquidRenderer
     class Table
+      GAUGES = [:count, :bytes, :time].freeze
+
       def initialize(stats)
         @stats = stats
       end
@@ -29,7 +31,7 @@ module Jekyll
         end
 
         str << generate_table_head_border(table_foot, widths)
-        str << generate_row(table_foot, widths)
+        str << generate_row(table_foot, widths).rstrip
 
         str << "\n"
         str
@@ -76,27 +78,35 @@ module Jekyll
         widths
       end
 
+      # rubocop:disable Metrics/AbcSize
       def data_for_table(num_of_rows)
         sorted = @stats.sort_by { |_, file_stats| -file_stats[:time] }
         sorted = sorted.slice(0, num_of_rows)
 
-        gauges = [:count, :bytes, :time]
-        labels = %w(Filename).concat(gauges.map { |gauge| gauge.to_s.capitalize })
-        table  = [labels]
-        total  = Hash.new { |hash, key| hash[key] = 0 }
+        table  = [header_labels]
+        totals = Hash.new { |hash, key| hash[key] = 0 }
 
         sorted.each do |filename, file_stats|
-          gauges.each { |gauge| total[gauge] += file_stats[gauge] }
-          table << data_to_row(file_stats, [filename])
+          GAUGES.each { |gauge| totals[gauge] += file_stats[gauge] }
+          row = []
+          row << filename
+          row << file_stats[:count].to_s
+          row << format_bytes(file_stats[:bytes])
+          row << format("%.3f", file_stats[:time])
+          table << row
         end
 
-        table << data_to_row(total, ["TOTAL (for #{sorted.size} files)"])
+        footer = []
+        footer << "TOTAL (for #{sorted.size} files)"
+        footer << totals[:count].to_s
+        footer << format_bytes(totals[:bytes])
+        footer << format("%.3f", totals[:time])
+        table  << footer
       end
+      # rubocop:enable Metrics/AbcSize
 
-      def data_to_row(hash, row)
-        row << hash[:count].to_s
-        row << format_bytes(hash[:bytes])
-        row << format("%.3f", hash[:time])
+      def header_labels
+        GAUGES.map { |gauge| gauge.to_s.capitalize }.unshift("Filename")
       end
 
       def format_bytes(bytes)
