@@ -134,6 +134,7 @@
   * Remove unused error class (#6511)
   * Add a Cucumber feature for post_url tag (#7586)
   * Bump tested version of JRuby to 9.2.7.0 (#7612)
+  * Generate a &#34;TOTAL&#34; row for build-profile table (#7614)
 
 ### Documentation
 
@@ -249,6 +250,8 @@
   * Fix link space (#7600)
   * Added Formspark to form resources (#7601)
   * Simplify couple of includes in the docs site (#7607)
+  * Avoid generating empty classnames (#7610)
+  * Install Docs that Work on MacOS 10.14 (#7561)
 
 ### Site Enhancements
 

@@ -3,6 +3,9 @@
 module Jekyll
   class LiquidRenderer
     class Table
+      TYPES  = [:liquid, :markup].freeze
+      GAUGES = [:count, :bytes, :time].freeze
+
       def initialize(stats)
         @stats = stats
       end
@@ -15,50 +18,55 @@ module Jekyll
 
       private
 
-      def inject_data(initial = " ")
-        str = +initial
+      def generate_table(data, widths)
+        str = +"\n"
 
-        yield str
+        headers = data.shift(2)
+        footer  = data.pop
+
+        headers.each do |header|
+          str << generate_row(header, widths)
+        end
+
+        str << generate_table_head_border(headers[0], widths)
+
+        data.each do |row_data|
+          str << generate_row(row_data, widths)
+        end
+
+        str << generate_table_head_border(headers[0], widths)
+        str << generate_row(footer, widths).rstrip
 
         str << "\n"
         str
       end
 
-      def generate_table(data, widths)
-        inject_data("\n") do |str|
-          headers = data.shift(2)
-          footer  = data.pop
-
-          headers.each { |header| str << generate_row(header, widths) }
-          str << generate_table_head_border(headers[0], widths)
-
-          data.each { |row_data| str << generate_row(row_data, widths) }
-
-          str << generate_table_head_border(headers[0], widths)
-          str << generate_row(footer, widths)
-        end
-      end
-
       def generate_table_head_border(row_data, widths)
-        inject_data do |str|
-          row_data.each_index do |index|
-            str << "-" * widths[index]
-            str << "-+-" unless index == row_data.length - 1
-          end
+        str = +" "
+
+        row_data.each_index do |index|
+          str << "-" * widths[index]
+          str << "-+-" unless index == row_data.length - 1
         end
+
+        str << "\n"
+        str
       end
 
       def generate_row(row_data, widths)
-        inject_data do |str|
-          row_data.each_with_index do |cell, index|
-            str << if index.zero?
-                     cell.ljust(widths[index])
-                   else
-                     cell.rjust(widths[index])
-                   end
-            str << " | " unless index == row_data.length - 1
-          end
+        str = +" "
+
+        row_data.each_with_index do |cell, index|
+          str << if index.zero?
+                   cell.ljust(widths[index])
+                 else
+                   cell.rjust(widths[index])
+                 end
+          str << " | " unless index == row_data.length - 1
         end
+
+        str << "\n"
+        str
       end
 
       def table_widths(data)
@@ -73,59 +81,63 @@ module Jekyll
         widths
       end
 
+      # rubocop:disable Metrics/AbcSize
+      # rubocop:disable Metrics/MethodLength
       def data_for_table(num_of_rows)
         sorted = @stats.sort_by { |_, file_stats| -file_stats[:liquid_time] }
         sorted = sorted.slice(0, num_of_rows)
 
-        types  = %w(liquid markup)
-        gauges = %w(count bytes time)
-        total  = Hash.new { |hash, key| hash[key] = 0 }
+        table  = initialize_table
+        totals = Hash.new { |hash, key| hash[key] = 0 }
 
-        tabulate(sorted, types, gauges, total)
-      end
+        sorted.each do |filename, file_stats|
+          row = []
+          row << truncate(filename)
 
-      def tabulate(sorted, types, gauges, total)
-        [].tap do |table|
-          add_header(table, types, gauges.map(&:capitalize))
-
-          sorted.each do |filename, file_stats|
-            table << [truncate(filename)].tap do |row|
-              types.each do |type|
-                gauges.each do |metric|
-                  key = "#{type}_#{metric}".to_sym
-                  total[key] += file_stats[key]
-                end
-                data_for_row(file_stats, type, row)
-              end
+          TYPES.each do |type|
+            GAUGES.each do |gauge|
+              key = "#{type}_#{gauge}".to_sym
+              totals[key] += file_stats[key]
             end
+
+            row << file_stats[:"#{type}_count"].to_s
+            row << format_bytes(file_stats[:"#{type}_bytes"])
+            row << format("%.3fs", file_stats[:"#{type}_time"])
           end
 
-          table << ["TOTAL (for #{sorted.size} files)"].tap do |row|
-            types.each do |type|
-              data_for_row(total, type, row)
-            end
-          end
-        end
-      end
-
-      def data_for_row(hash, type, row)
-        row << hash[:"#{type}_count"].to_s
-        row << format_bytes(hash[:"#{type}_bytes"])
-        row << format("%.3fs", hash[:"#{type}_time"])
-      end
-
-      def add_header(table, types, gauges)
-        header0 = [""]
-        types.each do |type|
-          3.times { header0 << type.capitalize }
+          table << row
         end
 
+        footer = []
+        footer << "TOTAL (for #{sorted.size} files)"
+
+        TYPES.each do |type|
+          footer << totals[:"#{type}_count"].to_s
+          footer << format_bytes(totals[:"#{type}_bytes"])
+          footer << format("%.3fs", totals[:"#{type}_time"])
+        end
+
+        table << footer
+      end
+      # rubocop:enable Metrics/MethodLength
+      # rubocop:enable Metrics/AbcSize
+
+      def initialize_table
+        # simulate rowspan with two header rows
+        header0 = ["        "]
         header1 = ["Filename"]
-        2.times { header1 += gauges }
 
-        table << header0
-        table << header1
-        table
+        # push each stringified type repeatedly into the first header row 3 times
+        TYPES.each { |type| 3.times { header0 << type.to_s.capitalize } }
+
+        # push each stringified gauge serially into the second header row twice
+        2.times { GAUGES.each { |gauge| header1 << gauge.to_s } }
+
+        # finally return the table skeleton
+        [].tap do |table|
+          table << header0
+          table << header1
+        end
       end
 
       def format_bytes(bytes)
