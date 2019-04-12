@@ -21,21 +21,20 @@ module Jekyll
       def generate_table(data, widths)
         str = +"\n"
 
-        headers = data.shift(2)
-        footer  = data.pop
+        table_heads = data.shift(2)
+        table_foot  = data.pop
 
-        headers.each do |header|
-          str << generate_row(header, widths)
+        table_heads.each do |table_head|
+          str << generate_row(table_head, widths)
         end
-
-        str << generate_table_head_border(headers[0], widths)
+        str << generate_table_head_border(table_heads[0], widths)
 
         data.each do |row_data|
           str << generate_row(row_data, widths)
         end
 
-        str << generate_table_head_border(headers[0], widths)
-        str << generate_row(footer, widths).rstrip
+        str << generate_table_head_border(table_foot, widths)
+        str << generate_row(table_foot, widths).rstrip
 
         str << "\n"
         str
@@ -44,9 +43,9 @@ module Jekyll
       def generate_table_head_border(row_data, widths)
         str = +" "
 
-        row_data.each_index do |index|
-          str << "-" * widths[index]
-          str << "-+-" unless index == row_data.length - 1
+        row_data.each_index do |cell_index|
+          str << "-" * widths[cell_index]
+          str << "-+-" unless cell_index == row_data.length - 1
         end
 
         str << "\n"
@@ -56,13 +55,14 @@ module Jekyll
       def generate_row(row_data, widths)
         str = +" "
 
-        row_data.each_with_index do |cell, index|
-          str << if index.zero?
-                   cell.ljust(widths[index])
+        row_data.each_with_index do |cell_data, cell_index|
+          str << if cell_index.zero?
+                   cell_data.ljust(widths[cell_index])
                  else
-                   cell.rjust(widths[index])
+                   cell_data.rjust(widths[cell_index])
                  end
-          str << " | " unless index == row_data.length - 1
+
+          str << " | " unless cell_index == row_data.length - 1
         end
 
         str << "\n"
