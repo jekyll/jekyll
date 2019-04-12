@@ -134,6 +134,7 @@
   * Remove unused error class (#6511)
   * Add a Cucumber feature for post_url tag (#7586)
   * Bump tested version of JRuby to 9.2.7.0 (#7612)
+  * Generate a &#34;TOTAL&#34; row for build-profile table (#7614)
 
 ### Documentation
 
