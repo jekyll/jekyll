@@ -251,6 +251,7 @@
   * Added Formspark to form resources (#7601)
   * Simplify couple of includes in the docs site (#7607)
   * Avoid generating empty classnames (#7610)
+  * Install Docs that Work on MacOS 10.14 (#7561)
 
 ### Site Enhancements
 
