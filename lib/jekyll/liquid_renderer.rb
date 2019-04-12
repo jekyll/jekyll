@@ -12,7 +12,6 @@ module Jekyll
 
     def initialize(site)
       @site = site
-      @type = ""
       Liquid::Template.error_mode = @site.config["liquid"]["error_mode"].to_sym
       reset
     end
@@ -23,6 +22,8 @@ module Jekyll
     end
 
     def file(filename, type = "liquid")
+      @type = type
+
       filename.match(filename_regex)
       filename =
         if Regexp.last_match(1) == theme_dir("")
@@ -31,27 +32,25 @@ module Jekyll
           Regexp.last_match(2)
         end
 
-      @type = type
-
       LiquidRenderer::File.new(self, filename).tap do
-        stats[filename] ||= new_profile_hash
+        @stats[filename] ||= new_profile_hash
       end
     end
 
     def increment_bytes(filename, bytes)
-      stats[filename][stat_label("bytes")] += bytes
+      @stats[filename][stat_label(:bytes)] += bytes
     end
 
     def increment_time(filename, time)
-      stats[filename][stat_label("time")] += time
+      @stats[filename][stat_label(:time)] += time
     end
 
     def increment_count(filename)
-      stats[filename][stat_label("count")] += 1
+      @stats[filename][stat_label(:count)] += 1
     end
 
     def stats_table(num_of_rows = 50)
-      LiquidRenderer::Table.new(stats).to_s(num_of_rows)
+      LiquidRenderer::Table.new(@stats).to_s(num_of_rows)
     end
 
     def self.format_error(error, path)
@@ -68,8 +67,6 @@ module Jekyll
 
     private
 
-    attr_accessor :stats, :type
-
     def filename_regex
       @filename_regex ||= begin
         %r!\A(#{Regexp.escape(source_dir)}/|#{Regexp.escape(theme_dir.to_s)}/|/*)(.*)!i
@@ -81,7 +78,7 @@ module Jekyll
     end
 
     def stat_label(key)
-      "#{type}_#{key}".to_sym
+      "#{@type}_#{key}".to_sym
     end
   end
 end
