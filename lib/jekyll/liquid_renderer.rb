@@ -35,7 +35,6 @@ module Jekyll
 
       LiquidRenderer::File.new(self, filename).tap do
         stats[filename] ||= new_profile_hash
-        stats[filename][stat_label("count")] += 1
       end
     end
 
@@ -48,7 +47,7 @@ module Jekyll
     end
 
     def increment_count(filename)
-      stats[filename][:count] += 1
+      stats[filename][stat_label("count")] += 1
     end
 
     def stats_table(num_of_rows = 50)
