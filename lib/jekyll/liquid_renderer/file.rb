@@ -9,7 +9,7 @@ module Jekyll
       end
 
       def parse(content)
-        measure_time do
+        measure_time("liquid") do
           @renderer.cache[@filename] ||= Liquid::Template.parse(content, :line_numbers => true)
         end
         @template = @renderer.cache[@filename]
@@ -17,32 +17,22 @@ module Jekyll
         self
       end
 
-      def render_with(converter, content)
-        measure_time do
-          measure_bytes do
-            converter.convert(content)
-          end
+      def render_markup(converter, content)
+        profile("markup") do
+          converter.convert(content)
         end
       end
 
       def render(*args)
-        measure_time do
-          measure_bytes do
-            measure_counts do
-              @template.render(*args)
-            end
-          end
+        profile do
+          @template.render(*args)
         end
       end
 
       # This method simply 'rethrows any error' before attempting to render the template.
       def render!(*args)
-        measure_time do
-          measure_bytes do
-            measure_counts do
-              @template.render!(*args)
-            end
-          end
+        profile do
+          @template.render!(*args)
         end
       end
 
@@ -52,23 +42,33 @@ module Jekyll
 
       private
 
-      def measure_counts
-        @renderer.increment_count(@filename)
-        yield
-      end
-
-      def measure_bytes
-        yield.tap do |str|
-          @renderer.increment_bytes(@filename, str.bytesize)
+      def profile(type = "liquid")
+        measure_time(type) do
+          measure_bytes(type) do
+            measure_counts(type) do
+              yield
+            end
+          end
         end
       end
 
-      def measure_time
+      def measure_counts(type)
+        @renderer.increment_count(@filename, type)
+        yield
+      end
+
+      def measure_bytes(type)
+        yield.tap do |str|
+          @renderer.increment_bytes(@filename, str.bytesize, type)
+        end
+      end
+
+      def measure_time(type)
         before = Time.now
         yield
       ensure
         after = Time.now
-        @renderer.increment_time(@filename, after - before)
+        @renderer.increment_time(@filename, (after - before), type)
       end
     end
   end

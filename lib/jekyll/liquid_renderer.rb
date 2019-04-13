@@ -21,9 +21,7 @@ module Jekyll
       @cache = {}
     end
 
-    def file(filename, type = "liquid")
-      @type = type
-
+    def file(filename)
       filename.match(filename_regex)
       filename =
         if Regexp.last_match(1) == theme_dir("")
@@ -37,16 +35,16 @@ module Jekyll
       end
     end
 
-    def increment_bytes(filename, bytes)
-      @stats[filename][stat_label(:bytes)] += bytes
+    def increment_bytes(filename, bytes, type)
+      @stats[filename][stat_label(:bytes, type)] += bytes
     end
 
-    def increment_time(filename, time)
-      @stats[filename][stat_label(:time)] += time
+    def increment_time(filename, time, type)
+      @stats[filename][stat_label(:time, type)] += time
     end
 
-    def increment_count(filename)
-      @stats[filename][stat_label(:count)] += 1
+    def increment_count(filename, type)
+      @stats[filename][stat_label(:count, type)] += 1
     end
 
     def stats_table(num_of_rows = 50)
@@ -77,8 +75,8 @@ module Jekyll
       Hash.new { |hash, key| hash[key] = 0 }
     end
 
-    def stat_label(key)
-      "#{@type}_#{key}".to_sym
+    def stat_label(key, type)
+      "#{type}_#{key}".to_sym
     end
   end
 end
