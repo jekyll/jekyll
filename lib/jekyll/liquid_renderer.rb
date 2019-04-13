@@ -29,7 +29,6 @@ module Jekyll
         else
           Regexp.last_match(2)
         end
-
       LiquidRenderer::File.new(self, filename).tap do
         @stats[filename] ||= new_profile_hash
       end

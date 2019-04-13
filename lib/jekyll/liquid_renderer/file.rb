@@ -42,16 +42,6 @@ module Jekyll
 
       private
 
-      def profile(type = "liquid")
-        measure_time(type) do
-          measure_bytes(type) do
-            measure_counts(type) do
-              yield
-            end
-          end
-        end
-      end
-
       def measure_counts(type)
         @renderer.increment_count(@filename, type)
         yield
@@ -69,6 +59,16 @@ module Jekyll
       ensure
         after = Time.now
         @renderer.increment_time(@filename, (after - before), type)
+      end
+
+      def profile(type = "liquid")
+        measure_time(type) do
+          measure_bytes(type) do
+            measure_counts(type) do
+              yield
+            end
+          end
+        end
       end
     end
   end
