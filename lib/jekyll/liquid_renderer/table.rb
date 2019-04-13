@@ -4,7 +4,7 @@ module Jekyll
   class LiquidRenderer
     class Table
       TYPES  = [:liquid, :markup].freeze
-      GAUGES = [:count, :bytes, :time].freeze
+      GAUGES = [:count, :time].freeze
 
       def initialize(stats)
         @stats = stats
@@ -101,7 +101,6 @@ module Jekyll
             end
 
             row << file_stats[:"#{type}_count"].to_s
-            row << format_bytes(file_stats[:"#{type}_bytes"])
             row << format("%.3fs", file_stats[:"#{type}_time"])
           end
 
@@ -113,7 +112,6 @@ module Jekyll
 
         TYPES.each do |type|
           footer << totals[:"#{type}_count"].to_s
-          footer << format_bytes(totals[:"#{type}_bytes"])
           footer << format("%.3fs", totals[:"#{type}_time"])
         end
 
@@ -127,11 +125,12 @@ module Jekyll
         header0 = ["        "]
         header1 = ["Filename"]
 
-        # push each stringified type repeatedly into the first header row 3 times
-        TYPES.each { |type| 3.times { header0 << type.to_s.capitalize } }
+        # push each stringified type repeatedly into the first header row for each gauge
+        gauge_count = GAUGES.count
+        TYPES.each { |type| gauge_count.times { header0 << type.to_s.capitalize } }
 
-        # push each stringified gauge serially into the second header row twice
-        2.times { GAUGES.each { |gauge| header1 << gauge.to_s } }
+        # push each stringified gauge serially into the second header row for each type
+        TYPES.count.times { GAUGES.each { |gauge| header1 << gauge.to_s } }
 
         # finally return the table skeleton
         [].tap do |table|
