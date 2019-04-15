@@ -153,8 +153,11 @@ module Jekyll
         def bundle_install(path)
           Jekyll.logger.info "Running bundle install in #{path.cyan}..."
           Dir.chdir(path) do
-            exe = Gem.bin_path("bundler", "bundle")
-            process, output = Jekyll::Utils::Exec.run("ruby", exe, "install")
+            gem "bundler"
+            bundler_gemspec = Gem.loaded_specs["bundler"]
+            exe = bundler_gemspec.bin_file "bundle"
+            require_paths = bundler_gemspec.full_require_paths
+            process, output = Jekyll::Utils::Exec.run("ruby", "-I", *require_paths, exe, "install")
 
             output.to_s.each_line do |line|
               Jekyll.logger.info("Bundler:".green, line.strip) unless line.to_s.empty?
