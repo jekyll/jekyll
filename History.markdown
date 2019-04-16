@@ -252,6 +252,7 @@
   * Simplify couple of includes in the docs site (#7607)
   * Avoid generating empty classnames (#7610)
   * Install Docs that Work on MacOS 10.14 (#7561)
+  * Update the contribution docs for draft pull requests (#7619)
 
 ### Site Enhancements
 
