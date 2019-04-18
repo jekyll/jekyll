@@ -42,6 +42,7 @@ module Jekyll
       # RubyGems.
       def version_constraint(gem_name)
         return "= #{Jekyll::VERSION}" if gem_name.to_s.eql?("jekyll-docs")
+
         "> 0"
       end
 
@@ -61,6 +62,9 @@ module Jekyll
             Jekyll.logger.error "Dependency Error:", <<~MSG
               Yikes! It looks like you don't have #{name} or one of its dependencies installed.
               In order to use Jekyll as currently configured, you'll need to install this gem.
+
+              If you've run Jekyll with `bundle exec`, ensure that you have included the #{name}
+              gem in your Gemfile as well.
 
               The full error message from Ruby is: '#{e.message}'
 

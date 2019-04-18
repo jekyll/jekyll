@@ -54,8 +54,8 @@ module Jekyll
         # Returns nothing.
         def build(site, options)
           t = Time.now
-          source      = options["source"]
-          destination = options["destination"]
+          source      = File.expand_path(options["source"])
+          destination = File.expand_path(options["destination"])
           incremental = options["incremental"]
           Jekyll.logger.info "Source:", source
           Jekyll.logger.info "Destination:", destination
@@ -85,16 +85,7 @@ module Jekyll
           end
 
           External.require_with_graceful_fail "jekyll-watch"
-          watch_method = Jekyll::Watcher.method(:watch)
-          if watch_method.parameters.size == 1
-            watch_method.call(
-              options
-            )
-          else
-            watch_method.call(
-              options, site
-            )
-          end
+          Jekyll::Watcher.watch(options, site)
         end
       end
     end

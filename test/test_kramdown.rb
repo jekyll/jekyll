@@ -32,6 +32,7 @@ class TestKramdown < JekyllUnitTest
       @config = Jekyll.configuration(@config)
       @markdown = Converters::Markdown.new(@config)
       @markdown.setup
+      Jekyll::Cache.clear
     end
 
     should "fill symbolized keys into config for compatibility with kramdown" do
@@ -87,14 +88,14 @@ class TestKramdown < JekyllUnitTest
     end
 
     should "render fenced code blocks with syntax highlighting" do
-      result = nokogiri_fragment(@markdown.convert(Utils.strip_heredoc(<<-MARKDOWN)))
+      result = nokogiri_fragment(@markdown.convert(<<~MARKDOWN))
         ~~~ruby
         puts "Hello World"
         ~~~
       MARKDOWN
       div_highlight = ">div.highlight"
       selector = "div.highlighter-rouge#{div_highlight}>pre.highlight>code"
-      refute result.css(selector).empty?
+      refute(result.css(selector).empty?, result.to_html)
     end
 
     context "when a custom highlighter is chosen" do
@@ -108,7 +109,7 @@ class TestKramdown < JekyllUnitTest
         }
 
         markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, override))
-        result = nokogiri_fragment(markdown.convert(Utils.strip_heredoc(<<-MARKDOWN)))
+        result = nokogiri_fragment(markdown.convert(<<~MARKDOWN))
           ~~~ruby
           puts "Hello World"
           ~~~
@@ -129,7 +130,7 @@ class TestKramdown < JekyllUnitTest
         @config.delete("highlighter")
         @config["kramdown"].delete("syntax_highlighter")
         markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, override))
-        result = nokogiri_fragment(markdown.convert(Utils.strip_heredoc(<<-MARKDOWN)))
+        result = nokogiri_fragment(markdown.convert(<<~MARKDOWN))
           ~~~ruby
           puts "Hello World"
           ~~~

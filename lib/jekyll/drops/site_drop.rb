@@ -13,7 +13,7 @@ module Jekyll
       private def_delegator :@obj, :config, :fallback_data
 
       def [](key)
-        if @obj.collections.key?(key) && key != "posts"
+        if key != "posts" && @obj.collections.key?(key)
           @obj.collections[key].docs
         else
           super(key)
@@ -21,7 +21,7 @@ module Jekyll
       end
 
       def key?(key)
-        (@obj.collections.key?(key) && key != "posts") || super
+        (key != "posts" && @obj.collections.key?(key)) || super
       end
 
       def posts
@@ -44,6 +44,7 @@ module Jekyll
       # We should remove this in 4.0 and switch to `{{ post.related_posts }}`.
       def related_posts
         return nil unless @current_document.is_a?(Jekyll::Document)
+
         @current_document.related_posts
       end
       attr_writer :current_document

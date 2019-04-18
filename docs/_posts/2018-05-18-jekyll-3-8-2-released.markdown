@@ -3,7 +3,7 @@ title: 'Jekyll 3.8.2 Released'
 date: 2018-05-19 10:30:00 -0500
 author: pathawks
 version: 3.8.2
-categories: [release]
+category: release
 ---
 
 Hello Jekyllers!!

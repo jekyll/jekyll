@@ -25,7 +25,7 @@ Whether you're a developer, a designer, or just a Jekyll devotee, there are lots
 
 * The more information, the better. Make judicious use of the pull request body. Describe what changes were made, why you made them, and what impact they will have for users.
 
-* Pull requests are easy and fun. If this is your first pull request, it may help to [understand GitHub Flow](https://guides.github.com/introduction/flow/).
+* If this is your first pull request, it may help to [understand GitHub Flow](https://guides.github.com/introduction/flow/).
 
 * If you're submitting a code contribution, be sure to read the [code contributions](#code-contributions) section below.
 
@@ -114,6 +114,8 @@ If your contribution changes any Jekyll behavior, make sure to update the docume
 * You can use the command `script/console` to start a REPL to explore the result of
 Jekyll's methods. It also provides you with helpful methods to quickly create a
 site or configuration. [Feel free to check it out!](https://github.com/jekyll/jekyll/blob/master/script/console)
+
+* Previously, we've used the WIP Probot app to help contributors determine whether their pull request is ready for review. Please use a [draft pull request](https://help.github.com/en/articles/about-pull-requests#draft-pull-requests) instead. When you're ready, [mark the pull request as ready for review](https://help.github.com/en/articles/changing-the-stage-of-a-pull-request)
 
 ## Running tests locally
 

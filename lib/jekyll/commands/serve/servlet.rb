@@ -43,7 +43,7 @@ module Jekyll
 
       # This class inserts the LiveReload script tags into HTML as it is served
       class BodyProcessor
-        HEAD_TAG_REGEX = %r!<head>|<head[^(er)][^<]*>!
+        HEAD_TAG_REGEX = %r!<head>|<head[^(er)][^<]*>!.freeze
 
         attr_reader :content_length, :new_body, :livereload_added
 
@@ -98,17 +98,16 @@ module Jekyll
           # Complicated JavaScript to ensure that livereload.js is loaded from the
           # same origin as the page.  Mostly useful for dealing with the browser's
           # distinction between 'localhost' and 127.0.0.1
-          template = <<-TEMPLATE
-          <script>
-            document.write(
-              '<script src="http://' +
-              (location.host || 'localhost').split(':')[0] +
-              ':<%=@options["livereload_port"] %>/livereload.js?snipver=1<%= livereload_args %>"' +
-              '></' +
-              'script>');
-          </script>
+          @template ||= ERB.new(<<~TEMPLATE)
+            <script>
+              document.write(
+                '<script src="http://' +
+                (location.host || 'localhost').split(':')[0] +
+                ':<%=@options["livereload_port"] %>/livereload.js?snipver=1<%= livereload_args %>"' +
+                '></' +
+                'script>');
+            </script>
           TEMPLATE
-          ERB.new(Jekyll::Utils.strip_heredoc(template))
         end
 
         def livereload_args
@@ -140,7 +139,9 @@ module Jekyll
         end
 
         def search_index_file(req, res)
-          super || search_file(req, res, ".html")
+          super ||
+            search_file(req, res, ".html") ||
+            search_file(req, res, ".xhtml")
         end
 
         # Add the ability to tap file.html the same way that Nginx does on our
@@ -149,7 +150,9 @@ module Jekyll
 
         def search_file(req, res, basename)
           # /file.* > /file/index.html > /file.html
-          super || super(req, res, "#{basename}.html")
+          super ||
+            super(req, res, "#{basename}.html") ||
+            super(req, res, "#{basename}.xhtml")
         end
 
         # rubocop:disable Naming/MethodName

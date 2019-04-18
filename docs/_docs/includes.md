@@ -48,7 +48,9 @@ You could then reference that variable in your include:
 
 {% raw %}
 ```liquid
-{% include {{ page.my_variable }} %}
+{% if page.my_variable %}
+  {% include {{ page.my_variable }} %}
+{% endif %}
 ```
 {% endraw %}
 
@@ -127,7 +129,7 @@ The result is the original HTML code shown earlier.
 
 To safeguard situations where users don't supply a value for the parameter, you can use [Liquid's default filter](https://shopify.github.io/liquid/filters/default/).
 
-Overall, you can create includes that act as templates for a variety of uses &mdash; inserting audio or video clips, alerts, special formatting, and more. However, note that you should avoid using too many includes, as this will slow down the build time of your site. For example, don't use includes every time you insert an image. (The above technique shows a use case for special images.)
+Overall, you can create includes that act as templates for a variety of uses &mdash; inserting audio or video clips, alerts, special formatting, and more. Note that you should avoid using too many includes, as this will slow down the build time of your site. For example, don't use includes every time you insert an image. (The above technique shows a use case for special images.)
 
 ### Passing parameter variables to includes
 
@@ -152,41 +154,3 @@ Then pass this captured variable into the parameter for the include. Omit the qu
 {% include note.html content=download_note %}
 ```
 {% endraw %}
-
-### Passing references to YAML files as parameter values
-
-Instead of passing string variables to the include, you can pass a reference to a YAML data file stored in the `_data` folder.
-
-Here's an example. In the `_data` folder, suppose you have a YAML file called `profiles.yml`. Its content looks like this:
-
-```yaml
-- name: John Doe
-  login_age: old
-  image: johndoe.jpg
-
-- name: Jane Doe
-  login_age: new
-  image: janedoe.jpg
-```
-
-In the `_includes` folder, assume you have a file called `spotlight.html` with this code:
-
-{% raw %}
-```liquid
-{% for person in include.participants %}
-{% if person.login_age == "new" %}
-{{ person.name }}
-{% endif %}
-{% endfor %}
-```
-{% endraw %}
-
-Now when you insert the `spotlight.html` include file, you can submit the YAML file as a parameter:
-
-{% raw %}
-```liquid
-{% include spotlight.html participants=site.data.profiles %}
-```
-{% endraw %}
-
-In this instance, `site.data.profiles` gets inserted in place of {% raw %}`include.participants`{% endraw %} in the include file, and the Liquid logic processes. The result will be `Jane Doe`.

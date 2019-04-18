@@ -70,13 +70,12 @@ module Jekyll
       private
 
       def proc_version
-        @proc_version ||= begin
-          Pathutil.new(
-            "/proc/version"
-          ).read
-        rescue Errno::ENOENT
-          nil
-        end
+        @proc_version ||=
+          begin
+            Pathutil.new("/proc/version").read
+          rescue Errno::ENOENT, Errno::EACCES
+            nil
+          end
       end
     end
   end

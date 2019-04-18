@@ -69,7 +69,7 @@ class TestExcerpt < JekyllUnitTest
 
     context "#inspect" do
       should "contain the excerpt id as a shorthand string identifier" do
-        assert_equal @excerpt.inspect, "<Excerpt: #{@excerpt.id}>"
+        assert_equal @excerpt.inspect, "<#{@excerpt.class} id=#{@excerpt.id}>"
       end
 
       should "return a string" do
@@ -184,12 +184,17 @@ class TestExcerpt < JekyllUnitTest
       @post = setup_post("2018-01-28-open-liquid-block-excerpt.markdown")
       @excerpt = @post.data["excerpt"]
 
-      assert_includes @post.content, "{% if"
-      refute_includes @post.content.split("\n\n")[0], "{% endif %}"
+      head = @post.content.split("\n\n")[0]
+
+      assert_includes @post.content, "{%\n  highlight\n"
+      assert_includes @post.content, "{% raw"
+      refute_includes head, "{% endraw %}"
+      refute_includes head, "{% endhighlight %}"
     end
 
     should "be appended to as necessary and generated" do
-      assert_includes @excerpt.content, "{% endif %}"
+      assert_includes @excerpt.content, "{% endraw %}"
+      assert_includes @excerpt.content, "{% endhighlight %}"
       assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
     end
   end
@@ -201,13 +206,19 @@ class TestExcerpt < JekyllUnitTest
       @post = setup_post("2018-01-28-closed-liquid-block-excerpt.markdown")
       @excerpt = @post.data["excerpt"]
 
-      assert_includes @post.content, "{% if"
-      assert_includes @post.content.split("\n\n")[0], "{% endif %}"
+      head = @post.content.split("\n\n")[0]
+
+      assert_includes @post.content, "{%\n  highlight\n"
+      assert_includes @post.content, "{% raw"
+      assert_includes head, "{%\n  endraw\n%}"
+      assert_includes head, "{%\n  endhighlight\n%}"
     end
 
     should "not be appended to but generated as is" do
-      assert_includes @excerpt.content, "{% endif %}"
-      refute_includes @excerpt.content, "{% endif %}\n\n{% endif %}"
+      assert_includes @excerpt.content, "{%\n  endraw\n%}"
+      assert_includes @excerpt.content, "{%\n  endhighlight\n%}"
+      refute_includes @excerpt.content, "{%\n  endraw\n%}\n\n{% endraw %}"
+      refute_includes @excerpt.content, "{%\n  endhighlight\n%}\n\n{% endhighlight %}"
       assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
     end
   end
@@ -260,6 +271,31 @@ class TestExcerpt < JekyllUnitTest
 
     should "not be appended to but generated as is" do
       assert_includes @excerpt.content, "{{- xyzzy -}}"
+      assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
+    end
+  end
+
+  context "An excerpt with Liquid tags" do
+    setup do
+      clear_dest
+      @site = fixture_site
+      @post = setup_post("2018-11-15-excerpt-liquid-block.md")
+      @excerpt = @post.data["excerpt"]
+
+      assert_includes @post.content.split("\n\n")[0].strip, "{% continue %}"
+      assert_equal true, Jekyll::DoNothingBlock.ancestors.include?(Liquid::Block)
+      assert_equal false, Jekyll::DoNothingOther.ancestors.include?(Liquid::Block)
+      assert_match "Jekyll::DoNothingBlock", Liquid::Template.tags["do_nothing"].name
+      assert_match "Jekyll::DoNothingOther", Liquid::Template.tags["do_nothing_other"].name
+    end
+
+    should "close open block tags, including custom tags, and ignore others" do
+      assert_includes @excerpt.content, "{% endcase %}"
+      assert_includes @excerpt.content, "{% endif %}"
+      assert_includes @excerpt.content, "{% endfor %}"
+      assert_includes @excerpt.content, "{% endunless %}"
+      assert_includes @excerpt.content, "{% enddo_nothing %}"
+      refute_includes @excerpt.content, "{% enddo_nothing_other %}"
       assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
     end
   end
