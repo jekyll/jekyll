@@ -69,7 +69,7 @@ module Jekyll
       end
 
       def validate_params
-        unless @params =~ FULL_VALID_SYNTAX
+        unless FULL_VALID_SYNTAX.match?(@params)
           raise ArgumentError, <<~MSG
             Invalid syntax for include tag:
 
