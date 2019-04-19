@@ -10,7 +10,6 @@
   * Drop support for rdiscount (#6988)
   * Drop support for `jekyll-watch-1.4.0` and older (#7287)
   * Incorporate `relative_url` filter in `link` tag (#6727)
-  * Refactor `highlight` tag to behave like the `raw` tag (#6821)
   * Upgrade kramdown dependency to v2.x (#7492)
   * Upgrade i18n to v1.x (#6931)
   * Add `Jekyll::Cache` class to handle caching on disk (#7169)

@@ -2,7 +2,7 @@
 
 module Jekyll
   module Tags
-    class HighlightBlock < Liquid::Raw
+    class HighlightBlock < Liquid::Block
       include Liquid::StandardFilters
 
       # The regular expression syntax checker. Start with the language specifier.
@@ -33,7 +33,7 @@ module Jekyll
       def render(context)
         prefix = context["highlighter_prefix"] || ""
         suffix = context["highlighter_suffix"] || ""
-        code   = @body.gsub(LEADING_OR_TRAILING_LINE_TERMINATORS, "")
+        code = super.to_s.gsub(LEADING_OR_TRAILING_LINE_TERMINATORS, "")
 
         output =
           case context.registers[:site].highlighter
@@ -103,8 +103,6 @@ module Jekyll
         "<figure class=\"highlight\"><pre><code #{code_attributes}>"\
         "#{code.chomp}</code></pre></figure>"
       end
-
-      def ensure_valid_markup(tag_name, markup, parse_context); end
     end
   end
 end

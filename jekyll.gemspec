@@ -59,13 +59,6 @@ Gem::Specification.new do |s|
       * Our `post_url` tag now comes with the `relative_url` filter incorporated into it.
         You shouldn't prepend `{{ site.baseurl }}` to `{% post_url 2019-03-27-hello %}`
         For further details: https://github.com/jekyll/jekyll/pull/7589
-
-      * Our `highlight` tag no longer parses Liquid and Liquid-like constructs in the
-        tag's content body. While this means you no longer need to enclose the content
-        within a `{% raw %}{% endraw %}` block, it also means that you can no longer
-        do the following as well:
-        `{% highlight html %}{% include snippet.html %}{% endhighlight %}`
-        For further details: https://github.com/jekyll/jekyll/pull/6821
     ----------------------------------------------------------------------------------
   MSG
 end
