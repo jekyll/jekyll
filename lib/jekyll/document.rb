@@ -401,28 +401,30 @@ module Jekyll
     #
     # Returns nothing.
     def categories_from_path(special_dir)
-      superdirs = relative_path.sub(%r!#{special_dir}(.*)!, "")
-        .split(File::SEPARATOR)
-        .reject do |c|
+      superdirs = relative_path.sub(%r!#{special_dir}(.*)!, "").split(File::SEPARATOR)
+      superdirs.reject! do |c|
         c.empty? || c == special_dir || c == basename
       end
+
       merge_data!({ "categories" => superdirs }, :source => "file path")
     end
 
     def populate_categories
-      merge_data!(
-        "categories" => (
-          Array(data["categories"]) + Utils.pluralized_array_from_hash(
-            data, "category", "categories"
-          )
-        ).map(&:to_s).flatten.uniq
+      categories = Array(data["categories"]) + Utils.pluralized_array_from_hash(
+        data, "category", "categories"
       )
+      categories.map!(&:to_s)
+      categories.flatten!
+      categories.uniq!
+
+      merge_data!("categories" => categories)
     end
 
     def populate_tags
-      merge_data!(
-        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
-      )
+      tags = Utils.pluralized_array_from_hash(data, "tag", "tags")
+      tags.flatten!
+
+      merge_data!("tags" => tags)
     end
 
     private
