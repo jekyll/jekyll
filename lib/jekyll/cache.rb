@@ -103,7 +103,7 @@ module Jekyll
       Jekyll.logger.debug "Cache:", "Cannot dump object #{key}"
     end
 
-    # If an item already exists in the cache, retrieve it
+    # If an item already exists in the cache, retrieve it.
     # Else execute code block, and add the result to the cache, and return that result.
     def getset(key)
       self[key]
@@ -161,7 +161,7 @@ module Jekyll
       FileUtils.rm_rf(path_to) if disk_cache_enabled?
     end
 
-    # Load `path` from disk and return the result
+    # Load `path` from disk and return the result.
     # This MUST NEVER be called in Safe Mode
     # rubocop:disable Security/MarshalLoad
     def load(path)
@@ -174,7 +174,7 @@ module Jekyll
     end
     # rubocop:enable Security/MarshalLoad
 
-    # Given a path and a value, save value to disk at path
+    # Given a path and a value, save value to disk at path.
     # This should NEVER be called in Safe Mode
     #
     # Returns nothing.
