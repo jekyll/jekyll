@@ -118,10 +118,7 @@ module Jekyll
     # Returns nothing.
     def delete(key)
       @cache.delete(key)
-      return unless disk_cache_enabled?
-
-      path = path_to(hash(key))
-      File.delete(path)
+      File.delete(path_to(hash(key))) if disk_cache_enabled?
     end
 
     # Check if `key` already exists in this cache
@@ -184,8 +181,7 @@ module Jekyll
     def dump(path, value)
       return unless disk_cache_enabled?
 
-      dir = File.dirname(path)
-      FileUtils.mkdir_p(dir)
+      FileUtils.mkdir_p(File.dirname(path))
       File.open(path, "wb") do |cached_file|
         Marshal.dump(value, cached_file)
       end
