@@ -56,6 +56,7 @@
   * Replace `name` in Page#inspect with relative_path (#7434)
   * Log a warning when the slug is empty (#7357)
   * Push Markdown link refs to excerpt only as required (#7577)
+  * Fix broken include_relative usage in excerpt (#7633)
 
 ### Minor Enhancements
 
