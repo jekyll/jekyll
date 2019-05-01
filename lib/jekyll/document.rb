@@ -14,6 +14,9 @@ module Jekyll
     DATELESS_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.[^.]+)$!.freeze
     DATE_FILENAME_MATCHER = %r!^(?>.+/)*?(\d{2,4}-\d{1,2}-\d{1,2})-([^/]*)(\.[^.]+)$!.freeze
 
+    SASS_FILE_EXTS = %w(.sass .scss).freeze
+    YAML_FILE_EXTS = %w(.yaml .yml).freeze
+
     # Create a new Document.
     #
     # path - the path to the file
@@ -138,7 +141,7 @@ module Jekyll
     #
     # Returns true if the extname is either .yml or .yaml, false otherwise.
     def yaml_file?
-      %w(.yaml .yml).include?(extname)
+      YAML_FILE_EXTS.include?(extname)
     end
 
     # Determine whether the document is an asset file.
@@ -154,7 +157,7 @@ module Jekyll
     #
     # Returns true if extname == .sass or .scss, false otherwise.
     def sass_file?
-      %w(.sass .scss).include?(extname)
+      SASS_FILE_EXTS.include?(extname)
     end
 
     # Determine whether the document is a CoffeeScript file.
