@@ -137,6 +137,7 @@
   * Generate a &#34;TOTAL&#34; row for build-profile table (#7614)
   * Target Ruby 2.4 syntax in RuboCop scans (#7583)
   * Bump RuboCop to v0.68.x (#7637)
+  * Refactor Jekyll::Cache (#7532)
 
 ### Documentation
 
