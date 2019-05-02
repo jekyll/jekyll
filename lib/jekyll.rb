@@ -50,6 +50,7 @@ module Jekyll
   autoload :EntryFilter,         "jekyll/entry_filter"
   autoload :Errors,              "jekyll/errors"
   autoload :Excerpt,             "jekyll/excerpt"
+  autoload :PageExcerpt,         "jekyll/page_excerpt"
   autoload :External,            "jekyll/external"
   autoload :FrontmatterDefaults, "jekyll/frontmatter_defaults"
   autoload :Hooks,               "jekyll/hooks"

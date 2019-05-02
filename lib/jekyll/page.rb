@@ -15,6 +15,7 @@ module Jekyll
     ATTRIBUTES_FOR_LIQUID = %w(
       content
       dir
+      excerpt
       name
       path
       url
@@ -181,6 +182,14 @@ module Jekyll
 
     def write?
       true
+    end
+
+    def excerpt_separator
+      @excerpt_separator ||= (data["excerpt_separator"] || site.config["excerpt_separator"]).to_s
+    end
+
+    def excerpt
+      data["excerpt"] ||= Jekyll::PageExcerpt.new(self) unless excerpt_separator.empty?
     end
   end
 end
