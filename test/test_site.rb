@@ -63,6 +63,11 @@ class TestSite < JekyllUnitTest
       assert_nil site.baseurl
     end
 
+    should "expose baseurl passed in from config" do
+      site = Site.new(site_configuration("baseurl" => "/blog"))
+      assert_equal "/blog", site.baseurl
+    end
+
     should "strip leading and trailing slashes from baseurl passed in from config" do
       site = Site.new(site_configuration("baseurl" => "//blog//"))
       assert_equal "blog", site.sanitized_baseurl
