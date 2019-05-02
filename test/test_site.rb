@@ -58,14 +58,19 @@ class TestSite < JekyllUnitTest
       assert_equal [source_dir("_plugins")], site.plugins
     end
 
-    should "default baseurl to `nil`" do
+    should "default baseurl to an empty string" do
       site = Site.new(default_configuration)
-      assert_nil site.baseurl
+      assert_equal "", site.baseurl
     end
 
-    should "expose baseurl passed in from config" do
-      site = Site.new(site_configuration("baseurl" => "/blog"))
-      assert_equal "/blog", site.baseurl
+    should "strip leading and trailing slashes from baseurl passed in from config" do
+      site = Site.new(site_configuration("baseurl" => "//blog//"))
+      assert_equal "blog", site.baseurl
+    end
+
+    should "strip leading and trailing slashes from site_url passed in from config" do
+      site = Site.new(site_configuration("url" => "//my-domain.com/blog//"))
+      assert_equal "my-domain.com/blog", site.url
     end
 
     should "only include theme includes_path if the path exists" do
