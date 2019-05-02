@@ -16,10 +16,10 @@ module Jekyll
         return input if Addressable::URI.parse(input).absolute?
 
         site = @context.registers[:site]
-        return relative_url(input) if site.url.empty?
+        return relative_url(input) if site.config["url"].nil?
 
         Addressable::URI.parse(
-          site.url + relative_url(input)
+          site.sanitized_url + relative_url(input)
         ).normalize.to_s
       end
 
@@ -39,7 +39,7 @@ module Jekyll
         site = @context.registers[:site]
 
         Addressable::URI.parse(
-          ensure_leading_slash(site.baseurl) + ensure_leading_slash(input)
+          ensure_leading_slash(site.sanitized_baseurl) + ensure_leading_slash(input)
         ).normalize.to_s
       end
 

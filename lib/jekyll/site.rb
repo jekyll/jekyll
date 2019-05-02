@@ -2,11 +2,11 @@
 
 module Jekyll
   class Site
-    attr_reader   :source, :dest, :cache_dir, :config, :baseurl, :url
+    attr_reader   :source, :dest, :cache_dir, :config, :sanitized_baseurl, :sanitized_url
     attr_accessor :layouts, :pages, :static_files, :drafts,
                   :exclude, :include, :lsi, :highlighter, :permalink_style,
                   :time, :future, :unpublished, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files, :data, :file_read_opts,
+                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
                   :gems, :plugin_manager, :theme
 
     attr_accessor :converters, :generators, :reader
@@ -45,14 +45,14 @@ module Jekyll
     def config=(config)
       @config = config.clone
 
-      %w(safe lsi highlighter exclude include future unpublished
+      %w(safe lsi highlighter baseurl exclude include future unpublished
          show_drafts limit_posts keep_files).each do |opt|
         send("#{opt}=", config[opt])
       end
 
       # Sanitize here to avoid multiple allocations within our URLFilters.
-      @baseurl = Utils.strip_leading_or_trailing_slashes config["baseurl"]
-      @url     = Utils.strip_leading_or_trailing_slashes config["url"]
+      @sanitized_baseurl = Utils.strip_leading_or_trailing_slashes config["baseurl"]
+      @sanitized_url     = Utils.strip_leading_or_trailing_slashes config["url"]
 
       # keep using `gems` to avoid breaking change
       self.gems = config["plugins"]
