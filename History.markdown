@@ -257,6 +257,7 @@
   * Avoid generating empty classnames (#7610)
   * Install Docs that Work on MacOS 10.14 (#7561)
   * Update the contribution docs for draft pull requests (#7619)
+  * Doc: Data file section adds TSV (#7640)
 
 ### Site Enhancements
 
