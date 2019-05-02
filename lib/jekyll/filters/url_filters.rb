@@ -12,13 +12,14 @@ module Jekyll
         return if input.nil?
 
         input = input.url if input.respond_to?(:url)
-        return input if Addressable::URI.parse(input.to_s).absolute?
+        input = input.to_s
+        return input if Addressable::URI.parse(input).absolute?
 
         site = @context.registers[:site]
-        return relative_url(input) if site.config["url"].nil?
+        return relative_url(input) if site.url.empty?
 
         Addressable::URI.parse(
-          site.config["url"].to_s + relative_url(input)
+          site.url + relative_url(input)
         ).normalize.to_s
       end
 
@@ -32,11 +33,13 @@ module Jekyll
         return if input.nil?
 
         input = input.url if input.respond_to?(:url)
-        return input if Addressable::URI.parse(input.to_s).absolute?
+        input = input.to_s
+        return input if Addressable::URI.parse(input).absolute?
 
-        parts = [sanitized_baseurl, input]
+        site = @context.registers[:site]
+
         Addressable::URI.parse(
-          parts.compact.map { |part| ensure_leading_slash(part.to_s) }.join
+          ensure_leading_slash(site.baseurl) + ensure_leading_slash(input)
         ).normalize.to_s
       end
 
@@ -52,11 +55,6 @@ module Jekyll
       end
 
       private
-
-      def sanitized_baseurl
-        site = @context.registers[:site]
-        site.config["baseurl"].to_s.chomp("/")
-      end
 
       def ensure_leading_slash(input)
         return input if input.nil? || input.empty? || input.start_with?("/")

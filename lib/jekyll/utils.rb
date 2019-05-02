@@ -150,6 +150,18 @@ module Jekyll
     end
     # rubocop: enable PredicateName
 
+    # Returns an empty string if given object is `nil` or `false`.
+    # Otherwise returns a copy of the given string or the string representation of given
+    #   object with any slashes at the leading end or the trailing end stripped away.
+    #
+    #   "//blog//" => "blog"
+    #   "blog//"   => "blog"
+    #   "//my-domain.com/blog/" => "my-domain.com/blog"
+    #
+    def strip_leading_or_trailing_slashes(input)
+      input ? input.to_s.gsub(%r!^/+|/+$!, "") : ""
+    end
+
     # Slugify a filename or title.
     #
     # string - the filename or title to slugify

@@ -414,6 +414,21 @@ class TestFilters < JekyllUnitTest
         assert_equal "http://example.com/base/#{page_url}", filter.absolute_url(page_url)
       end
 
+      should "be ok with a 'url' with trailing slash(es)" do
+        page_url = "about/my_favorite_page/"
+        filter = make_filter_mock(
+          "url"     => "http://example.com/",
+          "baseurl" => "/base"
+        )
+        assert_equal "http://example.com/base/#{page_url}", filter.absolute_url(page_url)
+
+        filter = make_filter_mock(
+          "url"     => "http://example.com//",
+          "baseurl" => "/base"
+        )
+        assert_equal "http://example.com/base/#{page_url}", filter.absolute_url(page_url)
+      end
+
       should "be ok with a blank but present 'url'" do
         page_url = "about/my_favorite_page/"
         filter = make_filter_mock(
@@ -568,13 +583,13 @@ class TestFilters < JekyllUnitTest
         assert_equal "/base/css/main.css", filter.relative_url(page_url)
       end
 
-      should "not return valid URI if baseurl ends with multiple '/'" do
+      should "return valid URI if baseurl ends with multiple '/'" do
         page_url = "/css/main.css"
         filter = make_filter_mock(
           "url"     => "http://example.com",
           "baseurl" => "/base//"
         )
-        refute_equal "/base/css/main.css", filter.relative_url(page_url)
+        assert_equal "/base/css/main.css", filter.relative_url(page_url)
       end
 
       should "not prepend a forward slash if both input and baseurl are simply '/'" do
