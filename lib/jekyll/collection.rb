@@ -76,8 +76,9 @@ module Jekyll
       return [] unless exists?
 
       @entries ||=
+        collection_dir_slash = "#{collection_dir}/"
         Utils.safe_glob(collection_dir, ["**", "*"], File::FNM_DOTMATCH).map do |entry|
-          entry["#{collection_dir}/"] = ""
+          entry[collection_dir_slash] = ""
           entry
         end
     end
