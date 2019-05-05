@@ -110,6 +110,7 @@ Here's the full list of placeholders available:
     <tr>
       <td>
         <p><code>long_month</code></p>
+        <small>{% include docs_version_badge.html version="4.0.0" %}</small>
       </td>
       <td>
         <p>Full month name, e.g. “January”.</p>
@@ -148,6 +149,7 @@ Here's the full list of placeholders available:
     <tr>
       <td>
         <p><code>w_year</code></p>
+        <small>{% include docs_version_badge.html version="4.0.0" %}</small>
       </td>
       <td>
         <p>Week year which may differ from the month year for up to three days at the start of January and end of December</p>
@@ -156,6 +158,7 @@ Here's the full list of placeholders available:
     <tr>
       <td>
         <p><code>week</code></p>
+        <small>{% include docs_version_badge.html version="4.0.0" %}</small>
       </td>
       <td>
         <p>Week number of the current year, starting with the first week having a majority of its days in January. (01..53)</p>
@@ -164,6 +167,7 @@ Here's the full list of placeholders available:
     <tr>
       <td>
         <p><code>w_day</code></p>
+        <small>{% include docs_version_badge.html version="4.0.0" %}</small>
       </td>
       <td>
         <p>Day of the week, starting with Monday. (1..7)</p>
@@ -172,6 +176,7 @@ Here's the full list of placeholders available:
     <tr>
       <td>
         <p><code>short_day</code></p>
+        <small>{% include docs_version_badge.html version="4.0.0" %}</small>
       </td>
       <td>
         <p>Three-letter weekday abbreviation, e.g. “Sun”.</p>
@@ -180,6 +185,7 @@ Here's the full list of placeholders available:
     <tr>
       <td>
         <p><code>long_day</code></p>
+        <small>{% include docs_version_badge.html version="4.0.0" %}</small>
       </td>
       <td>
         <p>Weekday name, e.g. “Sunday”.</p>
@@ -296,9 +302,10 @@ For posts, Jekyll also provides the following built-in styles for convenience:
     <tr>
       <td>
         <p><code>weekdate</code></p>
+        <small>{% include docs_version_badge.html version="4.0.0" %}</small>
       </td>
       <td>
-        <p><code>/:categories/:year/W:week/:short_day/:title.html</code></p>
+        <p><code>/:categories/:year/W:week/:short_day/:title:output_ext</code></p>
       </td>
     </tr>
     <tr>
