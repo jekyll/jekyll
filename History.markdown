@@ -259,6 +259,7 @@
   * Update the contribution docs for draft pull requests (#7619)
   * Doc: Data file section adds TSV (#7640)
   * Indicate where the _sass folder is by default (#7644)
+  * Docs: add version tags to new placeholders (#5981) for permalinks (#7647)
 
 ### Site Enhancements
 
