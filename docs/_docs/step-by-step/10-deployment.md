@@ -62,7 +62,8 @@ group :jekyll_plugins do
   gem 'jekyll-seo-tag'
 end
 ```
-And then add this line to `/_config.yml`:
+
+Then add those lines to your `_config.yml`:
 
 ```
 plugins:
@@ -70,8 +71,6 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
 ```
-
-If you are using Jekyll < 3.5.0 use the `gems` key instead of `plugins`.
 
 Now install them by running a `bundle update`.
 
