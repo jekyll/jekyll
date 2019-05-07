@@ -63,7 +63,7 @@ group :jekyll_plugins do
 end
 ```
 
-Then add those lines to your `_config.yml`:
+Then add these lines to your `_config.yml`:
 
 ```
 plugins:
