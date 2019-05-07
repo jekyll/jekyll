@@ -67,6 +67,8 @@ And then add this line to `/_config.yml`:
 ```
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
 ```
 
 If you are using Jekyll < 3.5.0 use the `gems` key instead of `plugins`.
