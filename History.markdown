@@ -260,6 +260,7 @@
   * Doc: Data file section adds TSV (#7640)
   * Indicate where the _sass folder is by default (#7644)
   * Docs: add version tags to new placeholders (#5981) for permalinks (#7647)
+  * Solve &#34;GitHub Page build failure&#34; in 10-deployment.md (#7648)
 
 ### Site Enhancements
 
