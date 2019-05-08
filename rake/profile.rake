@@ -5,12 +5,12 @@ require "jekyll"
 namespace :profile do
   desc "Profile allocations from a build session"
   task :memory, [:file, :mode] do |_t, args|
-    args.with_defaults(file: "memprof.txt", mode: "core")
+    args.with_defaults(file: "memprof.txt", mode: "lite")
 
     build_phases = [:reset, :read, :generate, :render, :cleanup, :write]
     safe_mode    = false
 
-    if args.mode == "core"
+    if args.mode == "lite"
       build_phases -= [:render, :generate]
       safe_mode     = true
     end
