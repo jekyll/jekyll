@@ -326,20 +326,31 @@ module Jekyll
     end
 
     # `where` filter helper
+    #
+    # rubocop:disable Metrics/CyclomaticComplexity
+    # rubocop:disable Metrics/PerceivedComplexity
     def compare_property_vs_target(property, target)
       case target
       when NilClass
         return true if property.nil?
       when Liquid::Expression::MethodLiteral # `empty` or `blank`
-        return true if Array(property).join == target.to_s
+        target = target.to_s
+        return true if property == target || Array(property).join == target
       else
-        Array(property).each do |prop|
-          return true if prop.to_s == target.to_s
+        target = target.to_s
+        if property.is_a? String
+          return true if property == target
+        else
+          Array(property).each do |prop|
+            return true if prop.to_s == target
+          end
         end
       end
 
       false
     end
+    # rubocop:enable Metrics/CyclomaticComplexity
+    # rubocop:enable Metrics/PerceivedComplexity
 
     def item_property(item, property)
       @item_property_cache ||= {}
