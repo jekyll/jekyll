@@ -129,7 +129,7 @@ module Jekyll
     #
     # Returns the escaped path.
     def self.escape_path(path)
-      return path if %r!^[a-zA-Z0-9./-]+$!.match?(path)
+      return path if path.empty? || %r!^[a-zA-Z0-9./-]+$!.match?(path)
 
       # Because URI.escape doesn't escape "?", "[" and "]" by default,
       # specify unsafe string (except unreserved, sub-delims, ":", "@" and "/").
