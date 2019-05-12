@@ -33,6 +33,9 @@ defaults:
     type: posts
   values:
     layout: news_item
+- scope:
+    path: ""
+  values:
     image: "/img/jekyll-og.png"
 
 plugins:
