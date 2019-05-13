@@ -10,11 +10,10 @@ module Jekyll
     # Initializes a new instance.
     def initialize(site)
       @site = site
-      reset
     end
 
     def reset
-      @glob_cache = {}
+      @glob_cache = {} if @glob_cache
     end
 
     def update_deprecated_types(set)
@@ -130,6 +129,7 @@ module Jekyll
     end
 
     def glob_cache(path)
+      @glob_cache ||= {}
       @glob_cache[path] ||= Dir.glob(path)
     end
 
