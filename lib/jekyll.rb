@@ -40,6 +40,9 @@ require "i18n"
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
+  # To allocate a single non-mutable Hash object as the default argument to methods applicable.
+  EMPTY_HASH = {}.freeze
+
   # internal requires
   autoload :Cleaner,             "jekyll/cleaner"
   autoload :Collection,          "jekyll/collection"
