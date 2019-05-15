@@ -96,6 +96,7 @@
   * Detect `nil` and empty values in objects with `where` filter (#7580)
   * Initialize mutations for Drops only if necessary (#7657)
   * Reduce Array allocations via Jekyll::Cleaner (#7659)
+  * Encode and unencode urls only as required (#7654)
 
 ### Development Fixes
 
