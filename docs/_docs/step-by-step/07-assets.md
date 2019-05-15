@@ -48,7 +48,7 @@ First create a Sass file at `/assets/css/styles.scss` with the following content
 
 The empty front matter at the top tells Jekyll it needs to process the file. The
 `@import "main"` tells Sass to look for a file called `main.scss` in the sass
-directory (`_sass/` by default).
+directory (`_sass/` by default which is directly under root folder of your website).
 
 At this stage you'll just have a main css file. For larger projects, this is a
 great way to keep your CSS organized.
