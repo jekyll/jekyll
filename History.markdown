@@ -140,6 +140,7 @@
   * Bump RuboCop to v0.68.x (#7637)
   * Refactor Jekyll::Cache (#7532)
   * Store list of expected extnames in a constant (#7638)
+  * Bump RuboCop to v0.69.x (#7656)
 
 ### Documentation
 
