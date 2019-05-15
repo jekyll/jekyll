@@ -93,6 +93,7 @@
   * Utilize absolute paths of user-provided file paths (#7450)
   * ISO week date drops (#5981)
   * Detect `nil` and empty values in objects with `where` filter (#7580)
+  * Initialize mutations for Drops only if necessary (#7657)
 
 ### Development Fixes
 
