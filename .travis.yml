@@ -19,6 +19,9 @@ matrix:
     - rvm: *ruby1
       env: TEST_SUITE=profile-docs
       name: "Profile Docs"
+    - rvm: *ruby1
+      env: TEST_SUITE=memprof
+      name: "Profile Memory Allocation"
   exclude:
     - rvm: *jruby
       env: TEST_SUITE=cucumber
@@ -42,6 +45,7 @@ after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 notifications:
+  email: false
   slack:
     secure: "\
       dNdKk6nahNURIUbO3ULhA09/vTEQjK0fNbgjVjeYPEvROHgQBP1cIP3AJy8aWs8rl5Yyow4Y\
