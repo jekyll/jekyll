@@ -144,6 +144,7 @@
   * Refactor Jekyll::Cache (#7532)
   * Store list of expected extnames in a constant (#7638)
   * Bump RuboCop to v0.69.x (#7656)
+  * Profile allocations from a build session (#7646)
 
 ### Documentation
 
