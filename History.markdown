@@ -94,6 +94,7 @@
   * ISO week date drops (#5981)
   * Detect `nil` and empty values in objects with `where` filter (#7580)
   * Initialize mutations for Drops only if necessary (#7657)
+  * Reduce Array allocations via Jekyll::Cleaner (#7659)
 
 ### Development Fixes
 
