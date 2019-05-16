@@ -41,11 +41,10 @@ defaults:
 plugins:
 - jekyll-avatar
 - jekyll-feed
-- jekyll-mentions
+- jekyll-mentioji
 - jekyll-redirect-from
 - jekyll-seo-tag
 - jekyll-sitemap
-- jemoji
 
 feed:
   categories:
