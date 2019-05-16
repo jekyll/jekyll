@@ -98,6 +98,7 @@
   * Reduce Array allocations via Jekyll::Cleaner (#7659)
   * Encode and unencode urls only as required (#7654)
   * Reduce string allocations with better alternatives (#7643)
+  * Reduce allocations from Jekyll::Document instances (#7625)
 
 ### Development Fixes
 
