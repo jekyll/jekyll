@@ -17,6 +17,20 @@ module Jekyll
     SASS_FILE_EXTS = %w(.sass .scss).freeze
     YAML_FILE_EXTS = %w(.yaml .yml).freeze
 
+    #
+
+    # Class-wide cache to stash and retrieve regexp to detect "super-directories"
+    # of a particular Jekyll::Document object.
+    #
+    # dirname - The *special directory* for the Document.
+    #           e.g. "_posts" or "_drafts" for Documents from the `site.posts` collection.
+    def self.superdirs_regex(dirname)
+      @superdirs_regex ||= {}
+      @superdirs_regex[dirname] ||= %r!#{dirname}.*!
+    end
+
+    #
+
     # Create a new Document.
     #
     # path - the path to the file
@@ -404,10 +418,9 @@ module Jekyll
     #
     # Returns nothing.
     def categories_from_path(special_dir)
-      superdirs = relative_path.sub(%r!#{special_dir}(.*)!, "").split(File::SEPARATOR)
-      superdirs.reject! do |c|
-        c.empty? || c == special_dir || c == basename
-      end
+      superdirs = relative_path.sub(Document.superdirs_regex(special_dir), "")
+      superdirs = superdirs.split(File::SEPARATOR)
+      superdirs.reject! { |c| c.empty? || c == special_dir || c == basename }
 
       merge_data!({ "categories" => superdirs }, :source => "file path")
     end
