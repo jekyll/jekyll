@@ -17,6 +17,20 @@ module Jekyll
     SASS_FILE_EXTS = %w(.sass .scss).freeze
     YAML_FILE_EXTS = %w(.yaml .yml).freeze
 
+    #
+
+    # Class-wide cache to stash and retrieve regexp to detect "super-directories"
+    # of a particular Jekyll::Document object.
+    #
+    # dirname - The *special directory* for the Document.
+    #           e.g. "_posts" or "_drafts" for Documents from the `site.posts` collection.
+    def self.superdirs_regex(dirname)
+      @superdirs_regex ||= {}
+      @superdirs_regex[dirname] ||= %r!#{dirname}.*!
+    end
+
+    #
+
     # Create a new Document.
     #
     # path - the path to the file
@@ -404,28 +418,29 @@ module Jekyll
     #
     # Returns nothing.
     def categories_from_path(special_dir)
-      superdirs = relative_path.sub(%r!#{special_dir}(.*)!, "")
-        .split(File::SEPARATOR)
-        .reject do |c|
-        c.empty? || c == special_dir || c == basename
-      end
+      superdirs = relative_path.sub(Document.superdirs_regex(special_dir), "")
+      superdirs = superdirs.split(File::SEPARATOR)
+      superdirs.reject! { |c| c.empty? || c == special_dir || c == basename }
+
       merge_data!({ "categories" => superdirs }, :source => "file path")
     end
 
     def populate_categories
-      merge_data!(
-        "categories" => (
-          Array(data["categories"]) + Utils.pluralized_array_from_hash(
-            data, "category", "categories"
-          )
-        ).map(&:to_s).flatten.uniq
+      categories = Array(data["categories"]) + Utils.pluralized_array_from_hash(
+        data, "category", "categories"
       )
+      categories.map!(&:to_s)
+      categories.flatten!
+      categories.uniq!
+
+      merge_data!("categories" => categories)
     end
 
     def populate_tags
-      merge_data!(
-        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
-      )
+      tags = Utils.pluralized_array_from_hash(data, "tag", "tags")
+      tags.flatten!
+
+      merge_data!("tags" => tags)
     end
 
     private
