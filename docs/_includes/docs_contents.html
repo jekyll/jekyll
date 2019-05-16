@@ -11,11 +11,7 @@
             {% if page.url contains p.url %}current{% endif %}
           {% endif %}">
             <a href="{{ p.url }}">
-              {% if p.menu_name %}
-                {{ p.menu_name }}
-              {% else %}
-                {{ p.title }}
-              {% endif %}
+              {{ p.menu_name | default: p.title }}
             </a>
           </li>
         {% endfor %}

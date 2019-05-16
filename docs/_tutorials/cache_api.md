@@ -2,7 +2,6 @@
 layout: tutorials
 permalink: /tutorials/cache-api/
 title: Cache API
-published: false
 ---
 
 Jekyll includes a caching API, which is used both internally as well as exposed

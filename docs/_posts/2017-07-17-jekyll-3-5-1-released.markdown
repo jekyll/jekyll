@@ -3,7 +3,7 @@ title: 'Jekyll 3.5.1 Released'
 date: 2017-07-17 12:40:37 -0400
 author: parkr
 version: 3.5.1
-categories: [release]
+category: release
 ---
 
 We've released a few bugfixes in the form of v3.5.1 today:

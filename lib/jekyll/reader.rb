@@ -14,6 +14,7 @@ module Jekyll
     def read
       @site.layouts = LayoutReader.new(site).read
       read_directories
+      read_included_excludes
       sort_files!
       @site.data = DataReader.new(site).read(site.config["data_dir"])
       CollectionReader.new(site).read
@@ -39,13 +40,21 @@ module Jekyll
 
       return unless File.directory?(base)
 
+      dot_dirs = []
+      dot_pages = []
+      dot_static_files = []
+
       dot = Dir.chdir(base) { filter_entries(Dir.entries("."), base) }
-      dot_dirs = dot.select { |file| File.directory?(@site.in_source_dir(base, file)) }
-      dot_files = (dot - dot_dirs)
-      dot_pages = dot_files.select do |file|
-        Utils.has_yaml_header?(@site.in_source_dir(base, file))
+      dot.each do |entry|
+        file_path = @site.in_source_dir(base, entry)
+        if File.directory?(file_path)
+          dot_dirs << entry
+        elsif Utils.has_yaml_header?(file_path)
+          dot_pages << entry
+        else
+          dot_static_files << entry
+        end
       end
-      dot_static_files = dot_files - dot_pages
 
       retrieve_posts(dir)
       retrieve_dirs(base, dir, dot_dirs)
@@ -149,6 +158,27 @@ module Jekyll
     # directories in current site.
     def post_reader
       @post_reader ||= PostReader.new(site)
+    end
+
+    def read_included_excludes
+      site.include.each do |entry|
+        next if entry == ".htaccess"
+
+        entry_path = site.in_source_dir(entry)
+        next if File.directory?(entry_path)
+
+        read_included_file(entry_path) if File.file?(entry_path)
+      end
+    end
+
+    def read_included_file(entry_path)
+      dir  = File.dirname(entry_path).sub(site.source, "")
+      file = Array(File.basename(entry_path))
+      if Utils.has_yaml_header?(entry_path)
+        site.pages.concat(PageReader.new(site, dir).read(file))
+      else
+        site.static_files.concat(StaticFileReader.new(site, dir).read(file))
+      end
     end
   end
 end

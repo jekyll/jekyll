@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#
+# Build Jekyll's Documentation site in 'debug' mode and outputs the site's profile stats.
+# Helps detecting *hard* breaking-changes (`jekyll build` aborts) and optimizations
+# in the `build` process.
+#
+# Usage: bash script/profile-docs
+
+SOURCE_DIR=$PWD/docs
+bundle exec jekyll build -s $SOURCE_DIR -d $SOURCE_DIR/_site --profile --trace --verbose

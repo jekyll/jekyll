@@ -29,6 +29,25 @@ Feature: include_relative Tag
     And the _site directory should exist
     And I should see "Welcome back Dear Reader!" in "_site/2018/09/02/star-wars.html"
 
+  Scenario: Include a nested file relative to a post as an excerpt
+    Given I have a _posts directory
+    And I have a _posts/snippets directory
+    And I have a _posts/snippets/welcome_para directory
+    And I have a "_posts/2018-09-02-star-wars.md" file with content:
+      """
+      {% include_relative snippets/welcome_para.md %}
+
+      Hello World
+      """
+    And I have an "_posts/snippets/welcome_para.md" file that contains "{% include_relative snippets/welcome_para/greeting.md %} Dear Reader!"
+    And I have an "_posts/snippets/welcome_para/greeting.md" file that contains "Welcome back"
+    And I have an "index.md" page that contains "{% for post in site.posts %}{{ post.excerpt }}{% endfor %}"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "Welcome back Dear Reader!" in "_site/2018/09/02/star-wars.html"
+    And I should see "Welcome back Dear Reader!" in "_site/index.html"
+
   Scenario: Include a nested file relative to a page at root
     Given I have a snippets directory
     And I have a snippets/welcome_para directory

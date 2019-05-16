@@ -2,6 +2,8 @@
 layout: page
 title: Resources
 permalink: /resources/
+redirect_from:
+ - /docs/resources/
 ---
 Jekyll's growing community produces wide variety of themes, plugins, tutorials
 and other resources that can be helpful. Below is a collection of links to
@@ -44,10 +46,11 @@ Use a SaaS service as a backend for functionality on your Jekyll site
 
 ### Content Management
   - [CloudCannon](https://cloudcannon.com/): The Cloud CMS for Jekyll
-  - [Contentful](https://github.com/contentful/jekyll-contentful-data-import) Content infrastructure for digital teams 
+  - [Contentful](https://github.com/contentful/jekyll-contentful-data-import) Content infrastructure for digital teams
   - [Forestry.io](https://forestry.io/): A static CMS that commits
   - [Netlify CMS](https://www.netlifycms.org/): Open source content management for your Git workflow
   - [Siteleaf](https://www.siteleaf.com/): Built for developers, Loved by everyone
+  - [Statictastic](https://www.statictastic.com/): Static site hosting, publishing and content management for teams
 
 ### E-commerce
   - [Snipcart](https://snipcart.com/blog/static-site-e-commerce-part-2-integrating-snipcart-with-jekyll): Add a shopping cart to a Jekyll site
@@ -55,14 +58,16 @@ Use a SaaS service as a backend for functionality on your Jekyll site
 ### Forms
   - [Getform](https://getform.io)
   - [99Inbound](https://www.99inbound.com)
-  - [Formester](http://www.formester.com)
   - [Formingo](https://www.formingo.co/guides/jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=Jekyll%20Documentation)
   - [FormKeep](https://formkeep.com/guides/contact-form-jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=contact-form-jekyll)
+  - [Formspark](https://formspark.io/)
   - [Formspree (open source)](https://formspree.io/)
+  - [formX](https://formx.stream)
   - [Simple Form](https://getsimpleform.com/)
 
 ### Search
   - [Algolia](https://blog.algolia.com/instant-search-blog-documentation-jekyll-plugin/): Add a powerful instant search to your Jekyll site
+  - [CloudSh](https://cloudsh.com/generators/How-to-setup-search-on-Jekyll/): Website search with a few lines of JavaScript
 
 ## Other commentary
 

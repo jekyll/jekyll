@@ -28,10 +28,12 @@ module Jekyll
         end
       end
 
+      LEADING_OR_TRAILING_LINE_TERMINATORS = %r!\A(\n|\r)+|(\n|\r)+\z!.freeze
+
       def render(context)
         prefix = context["highlighter_prefix"] || ""
         suffix = context["highlighter_suffix"] || ""
-        code = super.to_s.gsub(%r!\A(\n|\r)+|(\n|\r)+\z!, "")
+        code = super.to_s.gsub(LEADING_OR_TRAILING_LINE_TERMINATORS, "")
 
         output =
           case context.registers[:site].highlighter

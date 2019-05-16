@@ -12,7 +12,10 @@ module Jekyll
 
     YAML_FRONT_MATTER_REGEXP = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m.freeze
     DATELESS_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.[^.]+)$!.freeze
-    DATE_FILENAME_MATCHER = %r!^(?:.+/)*(\d{2,4}-\d{1,2}-\d{1,2})-(.*)(\.[^.]+)$!.freeze
+    DATE_FILENAME_MATCHER = %r!^(?>.+/)*?(\d{2,4}-\d{1,2}-\d{1,2})-([^/]*)(\.[^.]+)$!.freeze
+
+    SASS_FILE_EXTS = %w(.sass .scss).freeze
+    YAML_FILE_EXTS = %w(.yaml .yml).freeze
 
     # Create a new Document.
     #
@@ -121,22 +124,26 @@ module Jekyll
     #   and with the collection's directory removed as well.
     # This method is useful when building the URL of the document.
     #
+    # NOTE: `String#gsub` removes all trailing periods (in comparison to `String#chomp`)
+    #
     # Examples:
-    #   When relative_path is "_methods/site/generate.md":
+    #   When relative_path is "_methods/site/generate...md":
     #     cleaned_relative_path
     #     # => "/site/generate"
     #
     # Returns the cleaned relative path of the document.
     def cleaned_relative_path
       @cleaned_relative_path ||=
-        relative_path[0..-extname.length - 1].sub(collection.relative_directory, "")
+        relative_path[0..-extname.length - 1]
+          .sub(collection.relative_directory, "")
+          .gsub(%r!\.*\z!, "")
     end
 
     # Determine whether the document is a YAML file.
     #
     # Returns true if the extname is either .yml or .yaml, false otherwise.
     def yaml_file?
-      %w(.yaml .yml).include?(extname)
+      YAML_FILE_EXTS.include?(extname)
     end
 
     # Determine whether the document is an asset file.
@@ -152,7 +159,7 @@ module Jekyll
     #
     # Returns true if extname == .sass or .scss, false otherwise.
     def sass_file?
-      %w(.sass .scss).include?(extname)
+      SASS_FILE_EXTS.include?(extname)
     end
 
     # Determine whether the document is a CoffeeScript file.
@@ -297,7 +304,7 @@ module Jekyll
     #
     # Returns the inspect string for this document.
     def inspect
-      "#<Jekyll::Document #{relative_path} collection=#{collection.label}>"
+      "#<#{self.class} #{relative_path} collection=#{collection.label}>"
     end
 
     # The string representation for this document.
@@ -335,7 +342,7 @@ module Jekyll
     #
     # Returns the document excerpt_separator
     def excerpt_separator
-      (data["excerpt_separator"] || site.config["excerpt_separator"]).to_s
+      @excerpt_separator ||= (data["excerpt_separator"] || site.config["excerpt_separator"]).to_s
     end
 
     # Whether to generate an excerpt
@@ -481,6 +488,10 @@ module Jekyll
       elsif relative_path =~ DATELESS_FILENAME_MATCHER
         slug, ext = Regexp.last_match.captures
       end
+
+      # slugs shouldn't end with a period
+      # `String#gsub!` removes all trailing periods (in comparison to `String#chomp!`)
+      slug.gsub!(%r!\.*\z!, "")
 
       # Try to ensure the user gets a title.
       data["title"] ||= Utils.titleize_slug(slug)

@@ -21,7 +21,7 @@ the header files for compiling extension modules for Ruby 2.x This
 can be done on Ubuntu or Debian by running:
 
 ```sh
-sudo apt-get install ruby2.3-dev
+sudo apt-get install ruby2.6-dev
 ```
 
 On Red Hat, CentOS, and Fedora systems you can do this by running:
@@ -138,10 +138,10 @@ jekyll new test
 
 Running bundle install in /home/user/test...
 
-Your user account isn't allowed to install to the system RubyGems.
+Your user account is not allowed to install to the system RubyGems.
 You can cancel this installation and run:
 
-      bundle install --path vendor/bundle
+    bundle install --path vendor/bundle
 
 to install the gems into ./vendor/bundle/, or you can enter your password
 and install the bundled gems to RubyGems using sudo.

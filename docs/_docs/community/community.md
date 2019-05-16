@@ -8,15 +8,15 @@ redirect_from: "/help/index.html"
 
 As contributors and maintainers of this project, and in the interest of fostering an open and welcoming community, we pledge to respect all people who contribute through reporting issues, posting feature requests, updating documentation, submitting pull requests or patches, and other activities.
 
-[Read the full code of conduct](/docs/conduct/)
+Read the full [code of conduct](/docs/conduct/)
 
 ## Where to get support
 
 If you're looking for support for Jekyll, there are a lot of options:
 
-* Read [Jekyll Documentation](https://jekyllrb.com/docs/)
-* If you have a question about using Jekyll, start a discussion on [the Jekyll Forum](https://talk.jekyllrb.com/) or [StackOverflow](https://stackoverflow.com/questions/tagged/jekyll)
-* Chat with Jekyllers &mdash; Join [our Gitter channel](https://gitter.im/jekyll/jekyll) or [our IRC channel on Freenode](irc:irc.freenode.net/jekyll)
+* Read the [Jekyll Documentation](https://jekyllrb.com/docs/)
+* If you have a question about using Jekyll, start a discussion on the [Jekyll Forum](https://talk.jekyllrb.com/) or [StackOverflow](https://stackoverflow.com/questions/tagged/jekyll)
+* Chat with Jekyllers &mdash; Join our [Gitter channel](https://gitter.im/jekyll/jekyll) or our [IRC channel on Freenode](irc:irc.freenode.net/jekyll)
 
 There are a bunch of helpful community members on these services that should be willing to point you in the right direction.
 

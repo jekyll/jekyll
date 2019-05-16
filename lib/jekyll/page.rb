@@ -50,7 +50,7 @@ module Jekyll
       read_yaml(File.join(base, dir), name)
 
       data.default_proc = proc do |_, key|
-        site.frontmatter_defaults.find(File.join(dir, name), type, key)
+        site.frontmatter_defaults.find(relative_path, type, key)
       end
 
       Jekyll::Hooks.trigger :pages, :post_init, self
@@ -116,10 +116,11 @@ module Jekyll
     #
     # name - The String filename of the page file.
     #
+    # NOTE: `String#gsub` removes all trailing periods (in comparison to `String#chomp`)
     # Returns nothing.
     def process(name)
       self.ext = File.extname(name)
-      self.basename = name[0..-ext.length - 1]
+      self.basename = name[0..-ext.length - 1].gsub(%r!\.*\z!, "")
     end
 
     # Add any necessary layouts to this post
@@ -144,7 +145,7 @@ module Jekyll
 
     # The path to the page source file, relative to the site source
     def relative_path
-      File.join(*[@dir, @name].map(&:to_s).reject(&:empty?)).sub(%r!\A\/!, "")
+      @relative_path ||= File.join(*[@dir, @name].map(&:to_s).reject(&:empty?)).sub(%r!\A\/!, "")
     end
 
     # Obtain destination path.
@@ -161,7 +162,7 @@ module Jekyll
 
     # Returns the object as a debug String.
     def inspect
-      "#<#{self.class} @name=#{name.inspect}>"
+      "#<#{self.class} @relative_path=#{relative_path.inspect}>"
     end
 
     # Returns the Boolean of whether this Page is HTML or not.
