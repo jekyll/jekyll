@@ -56,6 +56,8 @@
   * Replace `name` in Page#inspect with relative_path (#7434)
   * Log a warning when the slug is empty (#7357)
   * Push Markdown link refs to excerpt only as required (#7577)
+  * Fix broken include_relative usage in excerpt (#7633)
+  * Initialize and reset glob_cache only as necessary (#7658)
 
 ### Minor Enhancements
 
@@ -92,6 +94,9 @@
   * Utilize absolute paths of user-provided file paths (#7450)
   * ISO week date drops (#5981)
   * Detect `nil` and empty values in objects with `where` filter (#7580)
+  * Initialize mutations for Drops only if necessary (#7657)
+  * Reduce Array allocations via Jekyll::Cleaner (#7659)
+  * Encode and unencode urls only as required (#7654)
 
 ### Development Fixes
 
@@ -134,6 +139,12 @@
   * Add a Cucumber feature for post_url tag (#7586)
   * Bump tested version of JRuby to 9.2.7.0 (#7612)
   * Generate a &#34;TOTAL&#34; row for build-profile table (#7614)
+  * Target Ruby 2.4 syntax in RuboCop scans (#7583)
+  * Bump RuboCop to v0.68.x (#7637)
+  * Refactor Jekyll::Cache (#7532)
+  * Store list of expected extnames in a constant (#7638)
+  * Bump RuboCop to v0.69.x (#7656)
+  * Profile allocations from a build session (#7646)
 
 ### Documentation
 
@@ -252,6 +263,10 @@
   * Avoid generating empty classnames (#7610)
   * Install Docs that Work on MacOS 10.14 (#7561)
   * Update the contribution docs for draft pull requests (#7619)
+  * Doc: Data file section adds TSV (#7640)
+  * Indicate where the _sass folder is by default (#7644)
+  * Docs: add version tags to new placeholders (#5981) for permalinks (#7647)
+  * Solve &#34;GitHub Page build failure&#34; in 10-deployment.md (#7648)
 
 ### Site Enhancements
 

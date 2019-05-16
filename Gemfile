@@ -23,12 +23,12 @@ group :test do
   gem "httpclient"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
+  gem "memory_profiler"
   gem "nokogiri", "~> 1.7"
   gem "rspec"
   gem "rspec-mocks"
-  # Temporary lock on RuboCop version for Windows since Pysch-3.1.0 is not available
-  # for use on Ruby 2.6-mingw32 platforms
-  gem "rubocop", Gem.win_platform? ? "~> 0.64.0" : "~> 0.66.0"
+  gem "rubocop", "~> 0.69.0"
+  gem "rubocop-performance"
   gem "test-dependency-theme", :path => File.expand_path("test/fixtures/test-dependency-theme", __dir__)
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)
   gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
