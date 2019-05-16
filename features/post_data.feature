@@ -129,19 +129,6 @@ Feature: Post data
     And the _site directory should exist
     And I should see "Post category: movies" in "_site/movies/2009/03/27/star-wars.html"
 
-  Scenario: Use post.categories with uppercase characters
-    Given I have a BroCode directory
-    And I have a BroCode/_posts directory
-    And I have a _layouts directory
-    And I have the following post in "BroCode":
-      | title     | date       | layout | category | content                 |
-      | Star Wars | 2009-03-27 | simple | epic     | Luke, I am your father. |
-    And I have a simple layout that contains "Post category: {{ page.categories }}"
-    When I run jekyll build
-    Then I should get a zero exit status
-    And the _site directory should exist
-    And I should see "Post category: BroCode" in "_site/BroCode/epic/2009/03/27/star-wars.html"
-
   Scenario: Use post.tags variable
     Given I have a _posts directory
     And I have a _layouts directory
@@ -180,7 +167,7 @@ Feature: Post data
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "Post categories: scifi and Movies" in "_site/scifi/movies/2009/03/27/star-wars.html"
+    And I should see "Post categories: scifi and Movies" in "_site/scifi/Movies/2009/03/27/star-wars.html"
 
   Scenario: Use post.categories variable when category is in YAML
     Given I have a _posts directory
@@ -261,7 +248,7 @@ Feature: Post data
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "Post categories: scifi and Movies" in "_site/scifi/movies/2009/03/27/star-wars.html"
+    And I should see "Post categories: scifi and Movies" in "_site/scifi/Movies/2009/03/27/star-wars.html"
     And I should see "Post categories: SciFi and movies" in "_site/scifi/movies/2013/03/17/star-trek.html"
 
 Scenario: Use page.render_with_liquid variable

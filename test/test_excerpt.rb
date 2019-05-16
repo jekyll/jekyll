@@ -89,7 +89,7 @@ class TestExcerpt < JekyllUnitTest
     context "#to_liquid" do
       should "contain the proper page data to mimic the post liquid" do
         assert_equal "Post Excerpt with Layout", @excerpt.to_liquid["title"]
-        url = "/bar/baz/z_category/mixedcase/2013/07/22/post-excerpt-with-layout.html"
+        url = "/bar/baz/z_category/MixedCase/2013/07/22/post-excerpt-with-layout.html"
         assert_equal url, @excerpt.to_liquid["url"]
         assert_equal Time.parse("2013-07-22"), @excerpt.to_liquid["date"]
         assert_equal %w(bar baz z_category MixedCase), @excerpt.to_liquid["categories"]
