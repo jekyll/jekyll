@@ -30,7 +30,7 @@ module Jekyll
       def categories
         category_set = Set.new
         Array(@obj.data["categories"]).each do |category|
-          category_set << category.to_s
+          category_set << category.to_s.downcase
         end
         category_set.to_a.join("/")
       end

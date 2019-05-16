@@ -167,7 +167,7 @@ Feature: Post data
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "Post categories: scifi and Movies" in "_site/scifi/Movies/2009/03/27/star-wars.html"
+    And I should see "Post categories: scifi and Movies" in "_site/scifi/movies/2009/03/27/star-wars.html"
 
   Scenario: Use post.categories variable when category is in YAML
     Given I have a _posts directory
@@ -248,7 +248,7 @@ Feature: Post data
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "Post categories: scifi and Movies" in "_site/scifi/Movies/2009/03/27/star-wars.html"
+    And I should see "Post categories: scifi and Movies" in "_site/scifi/movies/2009/03/27/star-wars.html"
     And I should see "Post categories: SciFi and movies" in "_site/scifi/movies/2013/03/17/star-trek.html"
 
 Scenario: Use page.render_with_liquid variable

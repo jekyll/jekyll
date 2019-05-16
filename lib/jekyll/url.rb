@@ -115,7 +115,7 @@ module Jekyll
     # as well as the beginning "/" so we can enforce and ensure it.
 
     def sanitize_url(str)
-      "/#{str}".gsub("..", "/").gsub("./", "").squeeze("/")
+      "/#{str}".gsub("..", "/").gsub("./", "").squeeze("/").downcase
     end
 
     # Escapes a path to be a valid URL path segment
