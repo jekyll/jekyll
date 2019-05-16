@@ -100,6 +100,7 @@
   * Reduce string allocations with better alternatives (#7643)
   * Reduce allocations from Jekyll::Document instances (#7625)
   * Add `type` attribute to Document instances (#7406)
+  * Reduce allocations from where-filter (#7653)
 
 ### Development Fixes
 
