@@ -99,6 +99,7 @@
   * Encode and unencode urls only as required (#7654)
   * Reduce string allocations with better alternatives (#7643)
   * Reduce allocations from Jekyll::Document instances (#7625)
+  * Add `type` attribute to Document instances (#7406)
 
 ### Development Fixes
 
