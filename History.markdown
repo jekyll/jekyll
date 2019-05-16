@@ -97,6 +97,7 @@
   * Initialize mutations for Drops only if necessary (#7657)
   * Reduce Array allocations via Jekyll::Cleaner (#7659)
   * Encode and unencode urls only as required (#7654)
+  * Reduce string allocations with better alternatives (#7643)
 
 ### Development Fixes
 
