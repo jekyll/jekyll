@@ -91,7 +91,7 @@ module Jekyll
     # Returns true if path matches against any glob pattern.
     # --
     def glob_include?(enum, entry)
-      entry_path = Pathutil.new(site.in_source_dir).join(entry)
+      entry_path = source_path.join(entry)
       enum.any? do |exp|
         # Users who send a Regexp knows what they want to
         # exclude, so let them send a Regexp to exclude files,
@@ -102,7 +102,7 @@ module Jekyll
           entry_path =~ exp
 
         else
-          item = Pathutil.new(site.in_source_dir).join(exp)
+          item = source_path.join(exp)
 
           # If it's a directory they want to exclude, AKA
           # ends with a "/" then we will go on to check and
@@ -122,6 +122,12 @@ module Jekyll
           end
         end
       end
+    end
+
+    private
+
+    def source_path
+      @source_path ||= Pathutil.new(site.in_source_dir)
     end
   end
 end
