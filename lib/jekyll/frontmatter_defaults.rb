@@ -10,11 +10,10 @@ module Jekyll
     # Initializes a new instance.
     def initialize(site)
       @site = site
-      reset
     end
 
     def reset
-      @glob_cache = {}
+      @glob_cache = {} if @glob_cache
     end
 
     def update_deprecated_types(set)
@@ -112,7 +111,7 @@ module Jekyll
       if scope["path"].to_s.include?("*")
         glob_scope(sanitized_path, rel_scope_path)
       else
-        path_is_subpath?(sanitized_path, strip_collections_dir(rel_scope_path))
+        path_is_subpath?(sanitized_path, strip_collections_dir(scope["path"]))
       end
     end
 
@@ -121,7 +120,7 @@ module Jekyll
       abs_scope_path = site_source.join(rel_scope_path).to_s
 
       glob_cache(abs_scope_path).each do |scope_path|
-        scope_path = Pathname.new(scope_path).relative_path_from(site_source)
+        scope_path = Pathname.new(scope_path).relative_path_from(site_source).to_s
         scope_path = strip_collections_dir(scope_path)
         Jekyll.logger.debug "Globbed Scope Path:", scope_path
         return true if path_is_subpath?(sanitized_path, scope_path)
@@ -130,6 +129,7 @@ module Jekyll
     end
 
     def glob_cache(path)
+      @glob_cache ||= {}
       @glob_cache[path] ||= Dir.glob(path)
     end
 
@@ -143,7 +143,7 @@ module Jekyll
 
     def strip_collections_dir(path)
       collections_dir  = @site.config["collections_dir"]
-      slashed_coll_dir = "#{collections_dir}/"
+      slashed_coll_dir = collections_dir.empty? ? "/" : "#{collections_dir}/"
       return path if collections_dir.empty? || !path.to_s.start_with?(slashed_coll_dir)
 
       path.sub(slashed_coll_dir, "")
