@@ -149,6 +149,7 @@
   * Store list of expected extnames in a constant (#7638)
   * Bump RuboCop to v0.69.x (#7656)
   * Profile allocations from a build session (#7646)
+  * Update small typo in contributing.md (#7671)
 
 ### Documentation
 
