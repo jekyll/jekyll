@@ -279,6 +279,7 @@
   * Link to OpenCollective backing (#7378
   * Link to sponsor listing in README (#7405)
   * Better Performance (#7388)
+  * Simplify assigning classname to docs&#39; aside-links (#7609)
 
 ### release
 
