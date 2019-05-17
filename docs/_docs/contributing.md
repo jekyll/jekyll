@@ -93,7 +93,7 @@ If you want to add your plugin to the [list of plugins](https://jekyllrb.com/doc
 
 ## Code Contributions
 
-Interesting in submitting a pull request? Awesome. Read on. There's a few common gotchas that we'd love to help you avoid.
+Interested in submitting a pull request? Awesome. Read on. There's a few common gotchas that we'd love to help you avoid.
 
 ### Tests and documentation
 
