@@ -72,7 +72,7 @@ module Jekyll
       def proc_version
         @proc_version ||=
           begin
-            File.read("/proc/version")
+            Pathutil.new("/proc/version").read
           rescue Errno::ENOENT, Errno::EACCES
             nil
           end

@@ -65,9 +65,8 @@ module Jekyll
       # and the key matches a method in which case it raises a
       # DropMutationException.
       def []=(key, val)
-        setter = "#{key}="
-        if respond_to?(setter)
-          public_send(setter, val)
+        if respond_to?("#{key}=")
+          public_send("#{key}=", val)
         elsif respond_to?(key.to_s)
           if self.class.mutable?
             mutations[key] = val
