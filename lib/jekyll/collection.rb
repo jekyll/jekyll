@@ -75,13 +75,11 @@ module Jekyll
     def entries
       return [] unless exists?
 
-      @entries ||= begin
-        collection_dir_slash = "#{collection_dir}/"
+      @entries ||=
         Utils.safe_glob(collection_dir, ["**", "*"], File::FNM_DOTMATCH).map do |entry|
-          entry[collection_dir_slash] = ""
+          entry["#{collection_dir}/"] = ""
           entry
         end
-      end
     end
 
     # Filtered version of the entries in this collection.
