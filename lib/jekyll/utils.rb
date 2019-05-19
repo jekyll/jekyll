@@ -17,6 +17,13 @@ module Jekyll
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
     SLUGIFY_ASCII_REGEXP = Regexp.new("[^[A-Za-z0-9]]+").freeze
 
+    # Regular expression used to parse an URI.
+    #
+    # Obtained from: https://www.ietf.org/rfc/rfc3986.txt
+    #   (ref: 'Appendix B. Parsing a URI Reference with a Regular Expression')
+    # Also used by the Addressable gem to parse URIs.
+    URI_PARSE_REGEX = %r!^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?$!.freeze
+
     # Takes a slug and turns it into a simple title.
     def titleize_slug(slug)
       slug.split("-").map!(&:capitalize).join(" ")
@@ -307,6 +314,19 @@ module Jekyll
         merged["encoding"] = "bom|#{merged["encoding"]}"
       end
       merged
+    end
+
+    # Returns true or false based on whether the given string contains a valid scheme component.
+    #
+    # This utility intends to be a drop-in replacement for Addressable::URI.parse(str).absolute?
+    # only. For advanced methods on URI, prefer using the Addressable library itself.
+    #
+    # str - URI string to test
+    #
+    # Returns boolean true or false.
+    def absolute_uri?(str)
+      str =~ URI_PARSE_REGEX
+      !!Regexp.last_match(1)
     end
 
     private

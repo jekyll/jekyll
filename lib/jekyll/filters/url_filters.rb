@@ -12,7 +12,8 @@ module Jekyll
         return if input.nil?
 
         input = input.url if input.respond_to?(:url)
-        return input if Addressable::URI.parse(input.to_s).absolute?
+        input = input.to_s
+        return input if Jekyll::Utils.absolute_uri?(input)
 
         site = @context.registers[:site]
         return relative_url(input) if site.config["url"].nil?
@@ -32,7 +33,8 @@ module Jekyll
         return if input.nil?
 
         input = input.url if input.respond_to?(:url)
-        return input if Addressable::URI.parse(input.to_s).absolute?
+        input = input.to_s
+        return input if Jekyll::Utils.absolute_uri?(input)
 
         parts = [sanitized_baseurl, input]
         Addressable::URI.parse(

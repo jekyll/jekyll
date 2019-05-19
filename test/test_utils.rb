@@ -425,4 +425,42 @@ class TestUtils < JekyllUnitTest
       assert Utils::Internet.connected?
     end
   end
+
+  #
+
+  def addressable_absolute?(str)
+    Addressable::URI.parse(str).absolute?
+  rescue StandardError
+    false
+  end
+
+  context "\`Utils.absolute_uri?\` method" do
+    should "detect absolute URI from relative URI" do
+      assert_equal true,  Utils.absolute_uri?("https://www.example.com/assets/main.css")
+      assert_equal false, Utils.absolute_uri?("www.example.com/assets/main.css")
+    end
+
+    should "return a result in sync with Addressable library" do
+      [
+        "c:/assets/css/main.css",
+        "://assets/css/main.css",
+        "//assets/css/main.css",
+        "/assets/css/main.css",
+        "assets/css/main.css",
+        "#://assets/css/main.css",
+        "/#assets/css/main.css",
+        "http://assets/css/main.css",
+        "random://assets/css/main.css",
+      ].each do |str|
+        assert_equal addressable_absolute?(str), Utils.absolute_uri?(str)
+      end
+    end
+
+    should "return \`false\` instead of raising an exception" do
+      sample = "://assets/css/main.css"
+      assert_raises(Addressable::URI::InvalidURIError) { Addressable::URI.parse(sample).absolute? }
+      assert_raises(StandardError) { Addressable::URI.parse(sample).absolute? }
+      assert_equal false, Utils.absolute_uri?(sample)
+    end
+  end
 end
