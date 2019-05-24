@@ -63,18 +63,18 @@ module Jekyll
       # However, symlinks are allowed to point to other directories within the theme.
       Jekyll.sanitized_path(root, File.realpath(Jekyll.sanitized_path(root, folder.to_s)))
     rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP => e
-      handle_exception(e)
+      handle_exception(e, folder)
       nil
     end
 
-    def handle_exception(err)
+    def handle_exception(err, folder)
       return if err.is_a?(Errno::ENOENT)
 
       case err
       when Errno::EACCES
-        Jekyll.logger.debug "Theme error:", "Directory '#{folder}' is not accessible."
+        Jekyll.logger.error "Theme error:", "Directory '#{folder}' is not accessible."
       when Errno::ELOOP
-        Jekyll.logger.debug "Theme error:", "Directory '#{folder}' includes a symbolic link loop."
+        Jekyll.logger.error "Theme error:", "Directory '#{folder}' includes a symbolic link loop."
       end
     end
 
