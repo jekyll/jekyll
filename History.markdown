@@ -150,6 +150,7 @@
   * Bump RuboCop to v0.69.x (#7656)
   * Profile allocations from a build session (#7646)
   * Update small typo in contributing.md (#7671)
+  * Bump RuboCop to v0.70.x (#7678)
 
 ### Documentation
 
