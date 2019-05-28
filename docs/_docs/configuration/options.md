@@ -362,7 +362,7 @@ before your site is served.
     <tr class="setting">
       <td>
         <p class="name"><strong>Live Reload</strong></p>
-        <p class="description">Reload the site automatically on the browser when content is edited.</p>
+        <p class="description">Reload a page automatically on the browser when its content is edited.</p>
       </td>
       <td class="align-center">
         <p><code class="option">livereload: true</code></p>
