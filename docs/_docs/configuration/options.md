@@ -365,6 +365,7 @@ before your site is served.
         <p class="description">Reload the site automatically on the browser when content is edited.</p>
       </td>
       <td class="align-center">
+        <p><code class="option">livereload: true</code></p>
         <p><code class="flag">--livereload</code></p>
       </td>
     </tr>
