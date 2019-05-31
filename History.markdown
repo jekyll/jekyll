@@ -58,6 +58,7 @@
   * Push Markdown link refs to excerpt only as required (#7577)
   * Fix broken include_relative usage in excerpt (#7633)
   * Initialize and reset glob_cache only as necessary (#7658)
+  * Revert memoizing Site#docs_to_write and #documents (#7684)
 
 ### Minor Enhancements
 
