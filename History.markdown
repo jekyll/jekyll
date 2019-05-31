@@ -59,6 +59,7 @@
   * Fix broken include_relative usage in excerpt (#7633)
   * Initialize and reset glob_cache only as necessary (#7658)
   * Revert memoizing Site#docs_to_write and #documents (#7684)
+  * Backport #7684 for v3.8.x: Revert memoizing Site#docs_to_write and refactor #documents (#7689)
 
 ### Minor Enhancements
 
