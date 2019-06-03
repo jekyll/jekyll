@@ -21,10 +21,6 @@ matrix:
     - rvm: *jruby
       env: TEST_SUITE=cucumber
 
-env:
-  matrix:
-    - TEST_SUITE=test
-    - TEST_SUITE=cucumber
 branches:
   only:
     - master
