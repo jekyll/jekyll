@@ -1,24 +1,33 @@
 bundler_args: --without benchmark:development
-
-script:
-  - script/bootstrap
-  - script/memprof
-  - script/test
-  - script/cucumber
-
+script: script/cibuild
 cache: bundler
 language: ruby
 
 rvm:
-  - 2.6.0
-  - 2.4.5
+  - &ruby1 2.6.0
+
+matrix:
+  include:
+    - rvm: *ruby1
+      env: TEST_SUITE=default-site
+      name: "Default Site"
+    - rvm: *ruby1
+      env: TEST_SUITE=profile-docs
+      name: "Profile Docs"
+    - rvm: *ruby1
+      env: TEST_SUITE=memprof
+      name: "Profile Memory Allocation"
+
 env:
   matrix:
-    - ROUGE_EDGE=true
-
+    - TEST_SUITE=test
+    - TEST_SUITE=cucumber
 branches:
   only:
-    -master
+    - master
+
+notifications:
+  email: false
 
 before_install:
   - gem update --system
