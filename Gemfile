@@ -9,6 +9,10 @@ gem "i18n", "~> 1.2.0" if RUBY_ENGINE == "jruby"
 
 gem "rake", "~> 12.0"
 
+if ENV["ROUGE_EDGE"]
+  gem "rouge", :git => "https://github.com/rouge-ruby/rouge.git", :branch => "master"
+end
+
 group :development do
   gem "launchy", "~> 2.3"
   gem "pry"

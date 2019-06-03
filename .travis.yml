@@ -22,6 +22,13 @@ matrix:
     - rvm: *ruby1
       env: TEST_SUITE=memprof
       name: "Profile Memory Allocation"
+    - rvm: *ruby1
+      env: ROUGE_EDGE=true
+      name: "Test Upstream Rouge"
+      script:
+        - script/memprof
+        - script/test
+        - script/cucumber
   exclude:
     - rvm: *jruby
       env: TEST_SUITE=cucumber
