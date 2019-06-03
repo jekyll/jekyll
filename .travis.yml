@@ -11,18 +11,6 @@ rvm:
 matrix:
   include:
     - rvm: *ruby1
-      env: TEST_SUITE=fmt
-      name: "🤖️ Code Format"
-    - rvm: *ruby1
-      env: TEST_SUITE=default-site
-      name: "🏠️ Default Site"
-    - rvm: *ruby1
-      env: TEST_SUITE=profile-docs
-      name: "Profile Docs"
-    - rvm: *ruby1
-      env: TEST_SUITE=memprof
-      name: "Profile Memory Allocation"
-    - rvm: *ruby1
       env: ROUGE_EDGE=true
       name: "Test Upstream Rouge"
       script:
