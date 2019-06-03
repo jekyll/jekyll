@@ -1,48 +1,20 @@
 bundler_args: --without benchmark:development
-script: script/cibuild
+
+script:
+  - script/bootstrap
+  - script/memprof
+  - script/test
+  - script/cucumber
+
 cache: bundler
 language: ruby
 
 rvm:
-  - &ruby1 2.6.0
-  - &ruby2 2.4.5
-  - &jruby jruby-9.2.7.0
-
-matrix:
-  include:
-    - rvm: *ruby1
-      env: ROUGE_EDGE=true
-      name: "Test Upstream Rouge"
-      script:
-        - script/memprof
-        - script/test
-        - script/cucumber
-  exclude:
-    - rvm: *jruby
-      env: TEST_SUITE=cucumber
-
-branches:
-  only:
-    - master
-    - themes
-    - /.*-stable/
-
-before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-
-notifications:
-  email: false
-  slack:
-    secure: "\
-      dNdKk6nahNURIUbO3ULhA09/vTEQjK0fNbgjVjeYPEvROHgQBP1cIP3AJy8aWs8rl5Yyow4Y\
-      GEilNRzKPz18AsFptVXofpwyqcBxaCfmHP809NX5PHBaadydveLm+TNVao2XeLXSWu+HUNAY\
-      O1AanCUbJSEyJTju347xCBGzESU=\
-    "
+  - 2.6.0
+  - 2.4.5
+env:
+  matrix:
+    - ROUGE_EDGE=true
 
 before_install:
   - gem update --system
