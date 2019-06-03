@@ -12,7 +12,7 @@ A gem is code you can include in Ruby projects. It allows you to package up func
 
 * Converting a Ruby object to JSON
 * Pagination
-* Interacting with APIs such as Github
+* Interacting with APIs such as GitHub
 * Jekyll itself is a gem as well as many Jekyll plugins including
 [jekyll-feed](https://github.com/jekyll/jekyll-feed),
 [jekyll-seo-tag](https://github.com/jekyll/jekyll-seo-tag) and
