@@ -16,6 +16,10 @@ env:
   matrix:
     - ROUGE_EDGE=true
 
+branches:
+  only:
+    -master
+
 before_install:
   - gem update --system
   - gem install bundler
