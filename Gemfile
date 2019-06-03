@@ -8,7 +8,7 @@ gemspec :name => "jekyll"
 gem "i18n", "~> 1.2.0" if RUBY_ENGINE == "jruby"
 
 gem "rake", "~> 12.0"
-gem "rouge", :git => "https://github.com/rouge-ruby/rouge.git", :ref => "579e634"
+gem "rouge", :git => "https://github.com/rouge-ruby/rouge.git", :ref => "a050f9e"
 
 group :development do
   gem "launchy", "~> 2.3"
