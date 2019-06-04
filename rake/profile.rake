@@ -17,7 +17,7 @@ namespace :profile do
 
     require "memory_profiler"
 
-    report = MemoryProfiler.report do
+    report = MemoryProfiler.report(allow_files: 'rouge') do
       site = Jekyll::Site.new(
         Jekyll.configuration(
           "source"      => File.expand_path("../docs", __dir__),
