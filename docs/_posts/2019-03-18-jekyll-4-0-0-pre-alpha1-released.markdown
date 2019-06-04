@@ -19,7 +19,7 @@ Jekyll now exposes a [caching API](/tutorials/cache-api/), that some plugins cou
 Also be aware that it's a new *major* version, and it comes with a few breaking changes, notably :
 
 1. We dropped support for [Ruby 2.3 who goes EOL at the end of the month](https://www.ruby-lang.org/en/downloads/).
-   GitHub Pages runs Ruby 2.5.x, services lile Netlify or Forestry already upgraded to latest Ruby 2.6.x.
+   GitHub Pages runs Ruby 2.5.x, services like Netlify or Forestry already upgraded to latest Ruby 2.6.x.
 2. `link` tag now include `relative_url` filter, hurray [no more need to prepend `{% raw %}{{ site.baseurl }}{% endraw %}` ](https://github.com/jekyll/jekyll/pull/6727).
 3. [`{% raw %}{% highlight %}{% endraw %}` now behaves like `{% raw %}{% raw %}{% endraw %}`](https://github.com/jekyll/jekyll/pull/6821), so you can no longer use `include` tags within.
 4. We dropped support for Pygments, RedCarpet and rdiscount.
