@@ -224,6 +224,7 @@ MSG
             else
               File.join(site.config["collections_dir"], page_payload["path"])
             end
+          resource_path.sub!(%r!/#excerpt\z!, "")
           site.in_source_dir File.dirname(resource_path)
         end
       end
