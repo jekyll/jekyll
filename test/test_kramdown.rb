@@ -22,6 +22,7 @@ class TestKramdown < JekyllUnitTest
             "css"        => :class,
             "css_class"  => "highlight",
             "formatter"  => ::Rouge::Formatters::HTMLLegacy,
+            "foobar"     => "lipsum",
           },
         },
       }
@@ -33,6 +34,12 @@ class TestKramdown < JekyllUnitTest
       @markdown = Converters::Markdown.new(@config)
       @markdown.setup
       Jekyll::Cache.clear
+    end
+
+    should "not break kramdown" do
+      kramdown_doc = Kramdown::Document.new("# Some Header #", @config["kramdown"])
+      assert_equal :class, kramdown_doc.options[:syntax_highlighter_opts][:css]
+      assert_equal "lipsum", kramdown_doc.options[:syntax_highlighter_opts][:foobar]
     end
 
     should "run Kramdown" do
