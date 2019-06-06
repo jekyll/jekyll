@@ -34,7 +34,6 @@ module Jekyll
           @config["syntax_highlighter_opts"]["guess_lang"] = @config["guess_lang"]
           @config["coderay"] ||= {} # XXX: Legacy.
           modernize_coderay_config
-          make_accessible
         end
 
         def convert(content)
@@ -61,13 +60,6 @@ module Jekyll
           # kramdown itself.
           if (math_engine = @config["math_engine"]) && math_engine != "mathjax"
             Jekyll::External.require_with_graceful_fail("kramdown-math-#{math_engine}")
-          end
-        end
-
-        def make_accessible(hash = @config)
-          hash.keys.each do |key|
-            hash[key.to_sym] = hash[key]
-            make_accessible(hash[key]) if hash[key].is_a?(Hash)
           end
         end
 

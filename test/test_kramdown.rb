@@ -35,26 +35,6 @@ class TestKramdown < JekyllUnitTest
       Jekyll::Cache.clear
     end
 
-    should "fill symbolized keys into config for compatibility with kramdown" do
-      kramdown_config = @markdown.instance_variable_get(:@parser)
-        .instance_variable_get(:@config)
-
-      @kramdown_config_keys.each do |key|
-        assert kramdown_config.key?(key.to_sym),
-               "Expected #{kramdown_config} to include key #{key.to_sym.inspect}"
-      end
-
-      @syntax_highlighter_opts_config_keys.each do |key|
-        assert kramdown_config["syntax_highlighter_opts"].key?(key.to_sym),
-               "Expected #{kramdown_config["syntax_highlighter_opts"]} to include " \
-               "key #{key.to_sym.inspect}"
-      end
-
-      assert_equal kramdown_config["smart_quotes"], kramdown_config[:smart_quotes]
-      assert_equal kramdown_config["syntax_highlighter_opts"]["css"],
-                   kramdown_config[:syntax_highlighter_opts][:css]
-    end
-
     should "run Kramdown" do
       assert_equal "<h1>Some Header</h1>", @markdown.convert("# Some Header #").strip
     end
