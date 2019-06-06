@@ -22,8 +22,7 @@ module Jekyll
 
       self.config = config
 
-      @cache_dir       = in_source_dir(config["cache_dir"])
-
+      @cache_dir       = Jekyll::Cache.cache_dir
       @reader          = Reader.new(self)
       @regenerator     = Regenerator.new(self)
       @liquid_renderer = LiquidRenderer.new(self)
@@ -414,6 +413,8 @@ module Jekyll
     #
     # Returns a path which is prefixed with the cache directory.
     def in_cache_dir(*paths)
+      return if safe || !cache_dir
+
       paths.reduce(cache_dir) do |base, path|
         Jekyll.sanitized_path(base, path)
       end
@@ -467,10 +468,8 @@ module Jekyll
       @site_cleaner ||= Cleaner.new(self)
     end
 
-    # Disable Marshaling cache to disk in Safe Mode
     def configure_cache
-      Jekyll::Cache.cache_dir = in_source_dir(config["cache_dir"], "Jekyll/Cache")
-      Jekyll::Cache.disable_disk_cache! if safe
+      Jekyll::Cache.bootstrap(self)
     end
 
     def configure_plugins

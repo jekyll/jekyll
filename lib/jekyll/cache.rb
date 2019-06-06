@@ -12,7 +12,7 @@ module Jekyll
 
     class << self
       # class-wide cache location
-      attr_accessor :cache_dir
+      attr_reader :cache_dir
 
       # class-wide directive to write cache to disk
       attr_reader :disk_cache_enabled
@@ -20,15 +20,26 @@ module Jekyll
       # class-wide base cache reader
       attr_reader :base_cache
 
+      # Setup cache attributes for given +site+
+      #
+      # site - A Jekyll::Site instance
+      #
+      # Returns nothing
+      def bootstrap(site)
+        @cache_dir = determine_cache_dir(site)
+        disable_disk_cache! if @cache_dir.nil? || site.safe
+        nil
+      end
+
       # Disable Marshaling cached items to disk
       def disable_disk_cache!
         @disk_cache_enabled = false
       end
 
-      # Clear all caches
+      # Delete all cached items from the disk cache and clear all in-memory caches
       def clear
-        delete_cache_files
-        base_cache.each_value(&:clear)
+        FileUtils.rm_rf(cache_dir) if disk_cache_enabled && cache_dir
+        base_cache.clear
       end
 
       # Compare the current config to the cached config
@@ -48,11 +59,14 @@ module Jekyll
 
       private
 
-      # Delete all cached items from all caches
-      #
-      # Returns nothing.
-      def delete_cache_files
-        FileUtils.rm_rf(@cache_dir) if disk_cache_enabled
+      def determine_cache_dir(site)
+        configured_path = site.config["cache_dir"]
+        return unless configured_path.is_a?(String)
+
+        cache_path = site.in_source_dir(configured_path)
+        return cache_path unless cache_path == site.in_source_dir("")
+
+        nil
       end
     end
 
@@ -136,14 +150,16 @@ module Jekyll
     end
 
     def disk_cache_enabled?
-      !!Jekyll::Cache.disk_cache_enabled
+      !!(Jekyll::Cache.cache_dir && Jekyll::Cache.disk_cache_enabled)
     end
 
     private
 
     # Given a hashed key, return the path to where this item would be saved on disk.
     def path_to(hash = nil)
-      @base_dir ||= File.join(Jekyll::Cache.cache_dir, @name)
+      return unless disk_cache_enabled?
+
+      @base_dir ||= File.join(Jekyll::Cache.cache_dir, "Jekyll/Cache", @name)
       return @base_dir if hash.nil?
 
       File.join(@base_dir, hash[0..1], hash[2..-1]).freeze
