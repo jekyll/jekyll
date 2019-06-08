@@ -69,7 +69,6 @@ Now it's your turn, change the Hello World! on your page to output as lowercase:
 To get our changes to show up on the page, we need to add something called a `frontmatter` to the top of our HTML. We will discuss frontmatters more in the next section. For now, just add this to the top of your html file:
 
 {% raw %}
-
 ```markdown
 ---
 # this is an empty front matter
