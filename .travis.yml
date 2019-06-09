@@ -54,5 +54,5 @@ notifications:
     "
 
 before_install:
-  - gem update --system
+  - gem update --system --no-document
   - gem install bundler
