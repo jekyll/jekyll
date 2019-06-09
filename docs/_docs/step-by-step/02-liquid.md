@@ -76,7 +76,7 @@ To get our changes processed by Jekyll we need to add [front matter](03-front-ma
 ```
 {% endraw %}
 
-If you are looking at the rendered file in the browser, you should now see that our "Hello World!" has been downcased.
+Our "Hello World!" will now be downcased on render.
 
 It may not seem like it now, but much of Jekyll's power comes from combining
 Liquid with other features. 
