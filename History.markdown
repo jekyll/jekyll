@@ -155,6 +155,7 @@
   * Update small typo in contributing.md (#7671)
   * Bump RuboCop to v0.70.x (#7678)
   * Remove override to Jekyll::Document#respond_to? (#7695)
+  * Do not install docs on updating gems on Travis (#7706)
 
 ### Documentation
 
