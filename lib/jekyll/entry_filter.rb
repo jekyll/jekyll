@@ -89,12 +89,12 @@ module Jekyll
     # Check if an entry matches a specific pattern.
     # Returns true if path matches against any glob pattern, else false.
     def glob_include?(enumerator, entry)
-      entry_with_source = site.in_source_dir(entry)
+      entry_with_source = File.join(site.source, entry)
 
       enumerator.any? do |pattern|
         case pattern
         when String
-          pattern_with_source = site.in_source_dir(pattern)
+          pattern_with_source = File.join(site.source, pattern)
 
           File.fnmatch?(pattern_with_source, entry_with_source) ||
             entry_with_source.start_with?(pattern_with_source)
