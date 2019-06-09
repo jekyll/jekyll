@@ -71,7 +71,7 @@ To get our changes processed by Jekyll we need to add [front matter](03-front-ma
 {% raw %}
 ```markdown
 ---
-# this is an empty front matter
+# front matter tells Jekyll to process Liquid
 ---
 ```
 {% endraw %}
