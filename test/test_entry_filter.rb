@@ -147,5 +147,11 @@ class TestEntryFilter < JekyllUnitTest
       assert @filter.glob_include?(data, "/vendor/bundle")
       assert @filter.glob_include?(data, "vendor/bundle")
     end
+
+    should "match even if there is no trailing slash" do
+      data = ["/vendor/bundle/", "vendor/ruby"]
+      assert @filter.glob_include?(data, "vendor/bundle/jekyll/lib/page.rb")
+      assert @filter.glob_include?(data, "/vendor/ruby/lib/set.rb")
+    end
   end
 end
