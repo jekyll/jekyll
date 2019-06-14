@@ -31,6 +31,9 @@ module Jekyll
 
     def filter(entries)
       entries.reject do |e|
+        # Reject this entry if it is just a "dot" representation.
+        #   e.g.: '.', '..', '_movies/.', 'music/..', etc
+        next true if e.end_with?(".")
         # Reject this entry if it is a symlink.
         next true if symlink?(e)
         # Do not reject this entry if it is included.
