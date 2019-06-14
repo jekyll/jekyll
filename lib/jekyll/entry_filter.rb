@@ -20,13 +20,12 @@ module Jekyll
 
     def derive_base_directory(site, base_dir)
       base_dir[site.source] = "" if base_dir.start_with?(site.source)
+      base_dir.gsub!(%r!\A#{File::SEPARATOR}!o, "")
       base_dir
     end
 
     def relative_to_source(entry)
-      File.join(
-        base_directory, entry
-      )
+      base_directory.empty? ? entry : File.join(base_directory, entry)
     end
 
     def filter(entries)
