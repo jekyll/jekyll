@@ -157,6 +157,7 @@
   * Remove override to Jekyll::Document#respond_to? (#7695)
   * Do not install docs on updating gems on Travis (#7706)
   * Update TestTags in sync with Rouge v3.4 (#7709)
+  * Bump RuboCop to v0.71.0 (#7687)
 
 ### Documentation
 
