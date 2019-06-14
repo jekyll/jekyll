@@ -86,48 +86,24 @@ module Jekyll
       )
     end
 
-    # --
-    # Check if an entry matches a specific pattern and return true,false.
-    # Returns true if path matches against any glob pattern.
-    # --
-    def glob_include?(enum, entry)
-      entry_path = source_path.join(entry)
-      enum.any? do |exp|
-        # Users who send a Regexp knows what they want to
-        # exclude, so let them send a Regexp to exclude files,
-        # we will not bother caring if it works or not, it's
-        # on them at this point.
+    # Check if an entry matches a specific pattern.
+    # Returns true if path matches against any glob pattern, else false.
+    def glob_include?(enumerator, entry)
+      entry_with_source = File.join(site.source, entry)
 
-        if exp.is_a?(Regexp)
-          entry_path =~ exp
+      enumerator.any? do |pattern|
+        case pattern
+        when String
+          pattern_with_source = File.join(site.source, pattern)
 
+          File.fnmatch?(pattern_with_source, entry_with_source) ||
+            entry_with_source.start_with?(pattern_with_source)
+        when Regexp
+          pattern.match?(entry_with_source)
         else
-          item = source_path.join(exp)
-
-          # If it's a directory they want to exclude, AKA
-          # ends with a "/" then we will go on to check and
-          # see if the entry falls within that path and
-          # exclude it if that's the case.
-
-          if entry.end_with?("/")
-            entry_path.in_path?(
-              item
-            )
-
-          else
-            File.fnmatch?(item, entry_path) ||
-              entry_path.to_path.start_with?(
-                item
-              )
-          end
+          false
         end
       end
-    end
-
-    private
-
-    def source_path
-      @source_path ||= Pathutil.new(site.in_source_dir)
     end
   end
 end
