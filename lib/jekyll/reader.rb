@@ -166,6 +166,7 @@ module Jekyll
 
         entry_path = site.in_source_dir(entry)
         next if File.directory?(entry_path)
+        next if reject_symlink?(entry_path)
 
         read_included_file(entry_path) if File.file?(entry_path)
       end
@@ -179,6 +180,10 @@ module Jekyll
       else
         site.static_files.concat(StaticFileReader.new(site, dir).read(file))
       end
+    end
+
+    def reject_symlink?(path)
+      site.safe && File.symlink?(path) && !Pathutil.new(path).in_path?(site.source)
     end
   end
 end
