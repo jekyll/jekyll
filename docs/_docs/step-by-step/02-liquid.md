@@ -68,19 +68,17 @@ Now it's your turn, change the Hello World! on your page to output as lowercase:
 
 To get our changes processed by Jekyll we need to add [front matter](03-front-matter/) to the top of the page:
 
-{% raw %}
 ```markdown
 ---
 # front matter tells Jekyll to process Liquid
 ---
 ```
-{% endraw %}
 
 Our "Hello World!" will now be downcased on render.
 
 It may not seem like it now, but much of Jekyll's power comes from combining
-Liquid with other features. 
+Liquid with other features.
 
-In order to see the changes from `downcase` Liquid filter, we will need to add front matter. 
+In order to see the changes from `downcase` Liquid filter, we will need to add front matter.
 
 That's next. Let's keep going.
