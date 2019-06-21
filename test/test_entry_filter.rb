@@ -82,7 +82,6 @@ class TestEntryFilter < JekyllUnitTest
       assert_equal %w(), entries
     end
 
-    # rubocop:disable Performance/FixedSize
     should "include only safe symlinks in safe mode" do
       # no support for symlinks on Windows
       skip_if_windows "Jekyll does not currently support symlinks on Windows."
@@ -93,7 +92,6 @@ class TestEntryFilter < JekyllUnitTest
       assert_equal %w(main.scss symlinked-file).length, site.pages.length
       refute_equal [], site.static_files
     end
-    # rubocop:enable Performance/FixedSize
 
     should "include symlinks in unsafe mode" do
       # no support for symlinks on Windows
@@ -111,10 +109,8 @@ class TestEntryFilter < JekyllUnitTest
       site = fixture_site("safe" => true, "include" => ["symlinked-file-outside-source"])
       site.reader.read_directories("symlink-test")
 
-      # rubocop:disable Performance/FixedSize
       assert_equal %w(main.scss symlinked-file).length, site.pages.length
       refute_includes site.static_files.map(&:name), "symlinked-file-outside-source"
-      # rubocop:enable Performance/FixedSize
     end
   end
 
