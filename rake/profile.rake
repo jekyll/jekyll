@@ -39,7 +39,7 @@ namespace :profile do
     end
 
     if ENV["CI"]
-      report.pretty_print(scale_bytes: true, color_output: true)
+      report.pretty_print(scale_bytes: true, color_output: false)
     else
       FileUtils.mkdir_p("tmp")
       report_file = File.join("tmp", args.file)
