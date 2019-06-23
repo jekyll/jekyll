@@ -161,11 +161,14 @@ module Jekyll
     end
 
     def read_included_excludes
+      entry_filter = EntryFilter.new(site)
+
       site.include.each do |entry|
         next if entry == ".htaccess"
 
         entry_path = site.in_source_dir(entry)
         next if File.directory?(entry_path)
+        next if entry_filter.symlink?(entry_path)
 
         read_included_file(entry_path) if File.file?(entry_path)
       end
