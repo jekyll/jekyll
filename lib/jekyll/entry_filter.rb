@@ -3,9 +3,7 @@
 module Jekyll
   class EntryFilter
     attr_reader :site
-    SPECIAL_LEADING_CHARACTERS = [
-      ".", "_", "#", "~",
-    ].freeze
+    SPECIAL_LEADING_CHAR_REGEX = %r!\A#{Regexp.union([".", "_", "#", "~"])}!o.freeze
 
     def initialize(site, base_directory = nil)
       @site = site
@@ -50,8 +48,8 @@ module Jekyll
     end
 
     def special?(entry)
-      SPECIAL_LEADING_CHARACTERS.include?(entry[0..0]) ||
-        SPECIAL_LEADING_CHARACTERS.include?(File.basename(entry)[0..0])
+      SPECIAL_LEADING_CHAR_REGEX.match?(entry) ||
+        SPECIAL_LEADING_CHAR_REGEX.match?(File.basename(entry))
     end
 
     def backup?(entry)
