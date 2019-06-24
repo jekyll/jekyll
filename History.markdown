@@ -160,6 +160,7 @@
   * Update TestTags in sync with Rouge v3.4 (#7709)
   * Bump RuboCop to v0.71.0 (#7687)
   * Use regexp to filter special entries (#7702)
+  * Replace `String#=~` with `String#match?` (#7718)
 
 ### Documentation
 
