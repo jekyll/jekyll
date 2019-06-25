@@ -608,7 +608,7 @@ Whether you use properties in your doc's front matter to retrieve your pages or 
 
 ## Scenario 9: Nested tree navigation with recursion
 
-Suppose you want a nested tree navigation of any depth. We can achieve this by recursively looping trough our tree of navigation links.
+Suppose you want a nested tree navigation of any depth. We can achieve this by recursively looping through our tree of navigation links.
 
 **YAML**
 
