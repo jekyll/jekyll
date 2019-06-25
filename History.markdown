@@ -61,6 +61,7 @@
   * Revert memoizing Site#docs_to_write and #documents (#7684)
   * Backport #7684 for v3.8.x: Revert memoizing Site#docs_to_write and refactor #documents (#7689)
   * Backport #7213 and #7633 for v3.8.x: Fix broken include_relative usage in excerpt (#7690)
+  * Don&#39;t read symlinks in site.include in safe mode (#7711)
 
 ### Minor Enhancements
 
@@ -156,6 +157,10 @@
   * Bump RuboCop to v0.70.x (#7678)
   * Remove override to Jekyll::Document#respond_to? (#7695)
   * Do not install docs on updating gems on Travis (#7706)
+  * Update TestTags in sync with Rouge v3.4 (#7709)
+  * Bump RuboCop to v0.71.0 (#7687)
+  * Use regexp to filter special entries (#7702)
+  * Replace `String#=~` with `String#match?` (#7718)
 
 ### Documentation
 
@@ -279,6 +284,7 @@
   * Docs: add version tags to new placeholders (#5981) for permalinks (#7647)
   * Solve &#34;GitHub Page build failure&#34; in 10-deployment.md (#7648)
   * Fix typo from &#39;Github&#39; to &#39;GitHub&#39; (#7691)
+  * fix link to Site Source config (#7708)
 
 ### Site Enhancements
 
