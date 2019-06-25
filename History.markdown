@@ -105,6 +105,7 @@
   * Reduce allocations from Jekyll::Document instances (#7625)
   * Add `type` attribute to Document instances (#7406)
   * Reduce allocations from where-filter (#7653)
+  * Memoize SiteDrop#documents to reduce allocations (#7697)
 
 ### Development Fixes
 
