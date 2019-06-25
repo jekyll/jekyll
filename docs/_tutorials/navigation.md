@@ -613,7 +613,7 @@ Suppose you want a nested tree navigation of any depth. We can achieve this by r
 **YAML**
 
 ```yaml
-navigation:
+nav:
   - title: Deployment
     url: deployment.html
     subnav:
