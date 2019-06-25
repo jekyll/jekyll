@@ -636,7 +636,7 @@ First, we'll create an include that we can use for rendering the navigation tree
   {% for item in include.nav %}
     <li><a href="{{ item.url }}">{{ item.title }}</a></li>
 
-    {% if item.tree %}
+    {% if item.subnav %}
       {% include nav.html nav=item.subnav %}
     {% endif %}
   {% endfor %}
