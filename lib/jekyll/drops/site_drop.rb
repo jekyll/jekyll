@@ -41,9 +41,9 @@ module Jekyll
       # `Site#documents` cannot be memoized so that `Site#docs_to_write` can access the
       # latest state of the attribute.
       #
-      # Since this method will be called after `Site#pre_render` hook, the `Site#documents`
-      # array shouldn't thereafter change and can therefore be safely memoized to prevent
-      # additional computation of `Site#documents`.
+      # Since this method will be called after `Site#pre_render` hook,
+      # the `Site#documents` array shouldn't thereafter change and can therefore be
+      # safely memoized to prevent additional computation of `Site#documents`.
       def documents
         @documents ||= @obj.documents
       end
