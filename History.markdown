@@ -1,3 +1,17 @@
+## HEAD
+
+### Bug Fixes
+
+  * Memoize `SiteDrop#documents` to reduce allocations (#7722)
+  * Excerpt handling of custom and intermediate tags (#7467)
+  * Escape valid special chars in a site's path name (#7573)
+  * Revert memoizing `Site#docs_to_write` and refactor `#documents` (#7689)
+  * Fix broken `include_relative` usage in excerpt (#7690)
+
+### Security Fixes
+
+  * Theme gems: ensure directories aren't symlinks (#7424)
+
 ## 3.8.5 / 2018-11-04
 
 ### Bug Fixes
