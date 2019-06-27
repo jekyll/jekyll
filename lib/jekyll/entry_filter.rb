@@ -5,10 +5,10 @@ module Jekyll
     attr_reader :site
     SPECIAL_LEADING_CHAR_REGEX = %r!\A#{Regexp.union([".", "_", "#", "~"])}!o.freeze
 
-    def self.prefix_source(src, item)
-      @prefix_source ||= {}
-      @prefix_source[src] ||= {}
-      @prefix_source[src][item] ||= File.join(src, item)
+    def self.join(base, item)
+      @join ||= {}
+      @join[base] ||= {}
+      @join[base][item] ||= File.join(base, item)
     end
 
     def initialize(site, base_directory = nil)
@@ -96,12 +96,12 @@ module Jekyll
     # Check if an entry matches a specific pattern.
     # Returns true if path matches against any glob pattern, else false.
     def glob_include?(enumerator, entry)
-      entry_with_source = EntryFilter.prefix_source(site.source, entry)
+      entry_with_source = EntryFilter.join(site.source, entry)
 
       enumerator.any? do |pattern|
         case pattern
         when String
-          pattern_with_source = EntryFilter.prefix_source(site.source, pattern)
+          pattern_with_source = EntryFilter.join(site.source, pattern)
 
           File.fnmatch?(pattern_with_source, entry_with_source) ||
             entry_with_source.start_with?(pattern_with_source)
