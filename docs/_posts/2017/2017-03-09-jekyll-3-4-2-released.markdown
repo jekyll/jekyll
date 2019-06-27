@@ -7,7 +7,7 @@ category: release
 ---
 
 Another one-PR patch update, though without the same [lessons as for the
-previous release]({% link _posts/2017-03-02-jekyll-3-4-1-released.markdown %}).
+previous release]({% link _posts/2017/2017-03-02-jekyll-3-4-1-released.markdown %}).
 
 This release includes a beneficial change for a number of plugins:
 **static files now respect front matter defaults**.

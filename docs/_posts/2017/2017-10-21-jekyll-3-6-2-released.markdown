@@ -32,7 +32,7 @@ Once again, many thanks to our contributors who helped make this release possibl
 ashmaroli, bellvat, Frank Taillandier, i-give-up, Jan Piotrowski, Maximiliano
 Kotvinsky, Oliver Steele and Pat Hawks. For some it was their [first
 contribution to open-source]({% link
-_posts/2017-10-19-diversity-open-source.markdown %}) 👏
+_posts/2017/2017-10-19-diversity-open-source.markdown %}) 👏
 
 As it's been nine years this week that Tom Preston-Werner started this project,
 I also wanna seize this opportunity to thank [all of the 732 contributors](https://github.com/jekyll/jekyll/graphs/contributors) who

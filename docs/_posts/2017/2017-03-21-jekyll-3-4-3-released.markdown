@@ -10,7 +10,7 @@ Another one-PR patch update as we continue our quest to destroy all bugs. A
 fairly technical debriefing follows, but the TLDR is that we have updated the
 `uri_escape` filter to more closely follow the pre-v3.4.0 behavior.
 
-In [v3.4.0]({% link _posts/2017-01-18-jekyll-3-4-0-released.markdown %}), we
+In [v3.4.0]({% link _posts/2017/2017-01-18-jekyll-3-4-0-released.markdown %}), we
 moved away from using the deprecated
 [`URI.escape`](https://ruby-doc.org/stdlib-2.3.0/libdoc/uri/rdoc/URI/Escape.html#method-i-encode)
 in favor of
