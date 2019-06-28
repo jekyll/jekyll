@@ -25,6 +25,7 @@
   * Always exclude certain paths from being processed (#7188)
   * Remove Jekyll::Utils#strip_heredoc in favor of a Ruby &gt; 2.3 built in (#7584)
   * Incorporate `relative_url` within `post_url` tag (#7589)
+  * Remove patch to modify config for kramdown (#7699)
 
 ### Bug Fixes
 
