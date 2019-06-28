@@ -289,6 +289,7 @@
   * Fix typo from &#39;Github&#39; to &#39;GitHub&#39; (#7691)
   * fix link to Site Source config (#7708)
   * Add Jekpack to resources page (#7598)
+  * Introduce frontmatter in step 2 (#7704)
 
 ### Site Enhancements
 
