@@ -125,7 +125,7 @@ module Jekyll
       private
 
       def fallback_data
-        {}
+        @fallback_data ||= {}
       end
     end
   end
