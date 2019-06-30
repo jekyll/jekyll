@@ -162,14 +162,14 @@ module Jekyll
     end
 
     # Public: Ensures the questionable path is prefixed with the base directory
-    #         and prepends the questionable path with the base directory if false.
+    #         and that the resulting path is a descendant of the base directory.
     #
     # base_directory - the directory with which to prefix the questionable path
     # questionable_path - the path we're unsure about, and want prefixed
     #
-    # Returns the sanitized path.
+    # Returns a frozen sanitized path or the frozen instance of `base_directory`.
     def sanitized_path(base_directory, questionable_path)
-      return base_directory if base_directory.eql?(questionable_path)
+      return base_directory.freeze if base_directory.eql?(questionable_path)
 
       PathManager.sanitized_join(base_directory, questionable_path)
     end
