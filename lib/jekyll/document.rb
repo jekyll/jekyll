@@ -258,7 +258,7 @@ module Jekyll
       if url.end_with? "/"
         path = File.join(path, "index.html")
       else
-        path << output_ext unless path.end_with? output_ext
+        path = "#{path}#{output_ext}" unless path.end_with? output_ext
       end
       path
     end
