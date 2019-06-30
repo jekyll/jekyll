@@ -162,16 +162,31 @@ module Jekyll
     end
 
     # Public: Ensures the questionable path is prefixed with the base directory
-    #         and that the resulting path is a descendant of the base directory.
+    #         and prepends the questionable path with the base directory if false.
     #
     # base_directory - the directory with which to prefix the questionable path
     # questionable_path - the path we're unsure about, and want prefixed
     #
-    # Returns a frozen sanitized path or the frozen instance of `base_directory`.
+    # Returns the sanitized path.
     def sanitized_path(base_directory, questionable_path)
-      return base_directory.freeze if base_directory.eql?(questionable_path)
+      return base_directory if base_directory.eql?(questionable_path)
 
-      PathManager.sanitized_join(base_directory, questionable_path)
+      clean_path = questionable_path.dup
+      clean_path.insert(0, "/") if clean_path.start_with?("~")
+      clean_path = File.expand_path(clean_path, "/")
+
+      return clean_path if clean_path.eql?(base_directory)
+
+      # remove any remaining extra leading slashes not stripped away by calling
+      # `File.expand_path` above.
+      clean_path.squeeze!("/")
+
+      if clean_path.start_with?(base_directory.sub(%r!\z!, "/"))
+        clean_path
+      else
+        clean_path.sub!(%r!\A\w:/!, "/")
+        File.join(base_directory, clean_path)
+      end
     end
 
     # Conditional optimizations
