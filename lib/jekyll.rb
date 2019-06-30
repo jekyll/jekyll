@@ -65,6 +65,7 @@ module Jekyll
   autoload :LogAdapter,          "jekyll/log_adapter"
   autoload :Page,                "jekyll/page"
   autoload :PageWithoutAFile,    "jekyll/page_without_a_file"
+  autoload :PathManager,         "jekyll/path_manager"
   autoload :PluginManager,       "jekyll/plugin_manager"
   autoload :Publisher,           "jekyll/publisher"
   autoload :Reader,              "jekyll/reader"
@@ -170,22 +171,7 @@ module Jekyll
     def sanitized_path(base_directory, questionable_path)
       return base_directory if base_directory.eql?(questionable_path)
 
-      clean_path = questionable_path.dup
-      clean_path.insert(0, "/") if clean_path.start_with?("~")
-      clean_path = File.expand_path(clean_path, "/")
-
-      return clean_path if clean_path.eql?(base_directory)
-
-      # remove any remaining extra leading slashes not stripped away by calling
-      # `File.expand_path` above.
-      clean_path.squeeze!("/")
-
-      if clean_path.start_with?(base_directory.sub(%r!\z!, "/"))
-        clean_path
-      else
-        clean_path.sub!(%r!\A\w:/!, "/")
-        File.join(base_directory, clean_path)
-      end
+      PathManager.sanitized_join(base_directory, questionable_path)
     end
 
     # Conditional optimizations
