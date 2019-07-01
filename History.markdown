@@ -64,6 +64,7 @@
   * Backport #7213 and #7633 for v3.8.x: Fix broken include_relative usage in excerpt (#7690)
   * Don&#39;t read symlinks in site.include in safe mode (#7711)
   * Replace `String#=~` with `String#match?` (#7723)
+  * Update log output for an invalid theme directory (#7679)
 
 ### Minor Enhancements
 
