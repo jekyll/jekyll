@@ -63,11 +63,11 @@ module Jekyll
       # However, symlinks are allowed to point to other directories within the theme.
       Jekyll.sanitized_path(root, File.realpath(Jekyll.sanitized_path(root, folder.to_s)))
     rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP => e
-      handle_exception(e, folder)
+      log_realpath_exception(e, folder)
       nil
     end
 
-    def handle_exception(err, folder)
+    def log_realpath_exception(err, folder)
       return if err.is_a?(Errno::ENOENT)
 
       case err
