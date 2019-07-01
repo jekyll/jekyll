@@ -73,7 +73,8 @@ module Jekyll
       when Errno::EACCES
         Jekyll.logger.error "Theme error:", "Directory '#{folder}' is not accessible."
       when Errno::ELOOP
-        Jekyll.logger.error "Theme error:", "Directory '#{folder}' includes a symbolic link loop."
+        Jekyll.logger.error "Theme error:",
+                            "Directory '#{folder}' includes a symbolic link loop."
       end
     end
 
