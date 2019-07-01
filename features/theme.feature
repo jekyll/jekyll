@@ -57,6 +57,17 @@ Feature: Writing themes
     And I should see "From your site." in "_site/assets/application.coffee"
     And I should see "From your site." in "_site/assets/base.js"
 
+  Scenario: A theme with *just* layouts
+    Given I have a configuration file with "theme" set to "test-theme-skinny"
+    And I have an "index.html" page with layout "home" that contains "The quick brown fox."
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "Message: The quick brown fox." in "_site/index.html"
+    But I should not see "_includes" in the build output
+    And I should not see "_sass" in the build output
+    And I should not see "assets" in the build output
+
   Scenario: Requiring dependencies of a theme
     Given I have a configuration file with "theme" set to "test-dependency-theme"
     When I run jekyll build
