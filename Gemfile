@@ -34,6 +34,7 @@ group :test do
   gem "rubocop", "~> 0.56.0"
   gem "test-dependency-theme", :path => File.expand_path("test/fixtures/test-dependency-theme", __dir__)
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)
+  gem "test-theme-skinny", :path => File.expand_path("test/fixtures/test-theme-skinny", __dir__)
   gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
 
   gem "jruby-openssl", "0.10.1" if RUBY_ENGINE == "jruby"
