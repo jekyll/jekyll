@@ -2,6 +2,7 @@
 
 ### Bug Fixes
 
+  * Update log output for an invalid theme directory (#7734)
   * Memoize `SiteDrop#documents` to reduce allocations (#7722)
   * Excerpt handling of custom and intermediate tags (#7467)
   * Escape valid special chars in a site's path name (#7573)
