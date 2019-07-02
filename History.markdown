@@ -305,6 +305,21 @@
 
   * Release v4.0.0.pre.alpha1 (#7574)
 
+## 3.8.6 / 2019-07-02
+
+### Bug Fixes
+
+  * Update log output for an invalid theme directory (#7734)
+  * Memoize `SiteDrop#documents` to reduce allocations (#7722)
+  * Excerpt handling of custom and intermediate tags (#7467)
+  * Escape valid special chars in a site's path name (#7573)
+  * Revert memoizing `Site#docs_to_write` and refactor `#documents` (#7689)
+  * Fix broken `include_relative` usage in excerpt (#7690)
+
+### Security Fixes
+
+  * Theme gems: ensure directories aren't symlinks (#7424)
+
 ## 3.8.5 / 2018-11-04
 
 ### Bug Fixes
