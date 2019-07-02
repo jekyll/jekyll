@@ -4,7 +4,7 @@ Hi there! Interested in contributing to Jekyll? We'd love your help. Jekyll is a
 
 ## Where to get help or report a problem
 
-See [the support guidelines](https://jekyllrb.com/docs/support/)
+See the [support guidelines](https://jekyllrb.com/docs/support/)
 
 ## Ways to contribute
 
@@ -12,9 +12,9 @@ Whether you're a developer, a designer, or just a Jekyll devotee, there are lots
 
 * [Install Jekyll on your computer](https://jekyllrb.com/docs/installation/) and kick the tires. Does it work? Does it do what you'd expect? If not, [open an issue](https://github.com/jekyll/jekyll/issues/new) and let us know.
 * Comment on some of the project's [open issues](https://github.com/jekyll/jekyll/issues). Have you experienced the same problem? Know a work around? Do you have a suggestion for how the feature could be better?
-* Read through [the documentation](https://jekyllrb.com/docs/home/), and click the "improve this page" button, any time you see something confusing, or have a suggestion for something that could be improved.
-* Browse through [the Jekyll discussion forum](https://talk.jekyllrb.com/), and lend a hand answering questions. There's a good chance you've already experienced what another user is experiencing.
-* Find [an open issue](https://github.com/jekyll/jekyll/issues) (especially [those labeled `help-wanted`](https://github.com/jekyll/jekyll/issues?q=is%3Aopen+is%3Aissue+label%3Ahelp-wanted)), and submit a proposed fix. If it's your first pull request, we promise we won't bite, and are glad to answer any questions.
+* Read through the [documentation](https://jekyllrb.com/docs/home/), and click the "improve this page" button, any time you see something confusing, or have a suggestion for something that could be improved.
+* Browse through the [Jekyll discussion forum](https://talk.jekyllrb.com/), and lend a hand answering questions. There's a good chance you've already experienced what another user is experiencing.
+* Find an [open issue](https://github.com/jekyll/jekyll/issues) (especially [those labeled `help-wanted`](https://github.com/jekyll/jekyll/issues?q=is%3Aopen+is%3Aissue+label%3Ahelp-wanted)), and submit a proposed fix. If it's your first pull request, we promise we won't bite, and are glad to answer any questions.
 * Help evaluate [open pull requests](https://github.com/jekyll/jekyll/pulls), by testing the changes locally and reviewing what's proposed.
 
 ## Submitting a pull request
@@ -49,7 +49,7 @@ That's it! You'll be automatically subscribed to receive updates as others revie
 2. Clone the repository locally `git clone https://github.com/<you-username>/jekyll`.
 3. Create a new, descriptively named branch to contain your change ( `git checkout -b my-awesome-feature` ).
 4. Hack away, add tests. Not necessarily in that order.
-5. Make sure everything still passes by running `script/cibuild` (see [the tests section](#running-tests-locally) below)
+5. Make sure everything still passes by running `script/cibuild` (see the [tests section](#running-tests-locally) below)
 6. Push the branch up ( `git push origin my-awesome-feature` ).
 7. Create a pull request by visiting `https://github.com/<your-username>/jekyll` and following the instructions at the top of the screen.
 
@@ -89,7 +89,7 @@ If you want to add your plugin to the [list of plugins](https://jekyllrb.com/doc
 
 ## Code Contributions
 
-Interesting in submitting a pull request? Awesome. Read on. There's a few common gotchas that we'd love to help you avoid.
+Interested in submitting a pull request? Awesome. Read on. There's a few common gotchas that we'd love to help you avoid.
 
 ### Tests and documentation
 
