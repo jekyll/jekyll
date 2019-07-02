@@ -1,4 +1,4 @@
-## HEAD
+## 3.8.6 / 2018-07-03
 
 ### Major Enhancements
 
