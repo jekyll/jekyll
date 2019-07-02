@@ -315,6 +315,7 @@
   * Escape valid special chars in a site's path name (#7573)
   * Revert memoizing `Site#docs_to_write` and refactor `#documents` (#7689)
   * Fix broken `include_relative` usage in excerpt (#7690)
+  * Install platform-specific gems as required (3c06609406)
 
 ### Security Fixes
 
