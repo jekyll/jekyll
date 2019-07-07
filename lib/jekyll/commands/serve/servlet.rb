@@ -29,21 +29,21 @@ module Jekyll
         end
 
         def inline?
-          @response["Content-Disposition"] =~ %r!^inline!
+          @response["Content-Disposition"].to_s.start_with?("inline")
         end
 
         def bad_browser?
-          BAD_USER_AGENTS.any? { |pattern| @request["User-Agent"] =~ pattern }
+          BAD_USER_AGENTS.any? { |pattern| pattern.match?(@request["User-Agent"]) }
         end
 
         def html?
-          @response["Content-Type"] =~ %r!text/html!
+          @response["Content-Type"].to_s.include?("text/html")
         end
       end
 
       # This class inserts the LiveReload script tags into HTML as it is served
       class BodyProcessor
-        HEAD_TAG_REGEX = %r!<head>|<head[^(er)][^<]*>!
+        HEAD_TAG_REGEX = %r!<head>|<head[^(er)][^<]*>!.freeze
 
         attr_reader :content_length, :new_body, :livereload_added
 
@@ -98,17 +98,16 @@ module Jekyll
           # Complicated JavaScript to ensure that livereload.js is loaded from the
           # same origin as the page.  Mostly useful for dealing with the browser's
           # distinction between 'localhost' and 127.0.0.1
-          template = <<-TEMPLATE
-          <script>
-            document.write(
-              '<script src="http://' +
-              (location.host || 'localhost').split(':')[0] +
-              ':<%=@options["livereload_port"] %>/livereload.js?snipver=1<%= livereload_args %>"' +
-              '></' +
-              'script>');
-          </script>
+          @template ||= ERB.new(<<~TEMPLATE)
+            <script>
+              document.write(
+                '<script src="http://' +
+                (location.host || 'localhost').split(':')[0] +
+                ':<%=@options["livereload_port"] %>/livereload.js?snipver=1<%= livereload_args %>"' +
+                '></' +
+                'script>');
+            </script>
           TEMPLATE
-          ERB.new(Jekyll::Utils.strip_heredoc(template))
         end
 
         def livereload_args
@@ -121,9 +120,7 @@ module Jekyll
           if @options["livereload_max_delay"]
             src += "&amp;maxdelay=#{@options["livereload_max_delay"]}"
           end
-          if @options["livereload_port"]
-            src += "&amp;port=#{@options["livereload_port"]}"
-          end
+          src += "&amp;port=#{@options["livereload_port"]}" if @options["livereload_port"]
           src
         end
       end
@@ -142,7 +139,9 @@ module Jekyll
         end
 
         def search_index_file(req, res)
-          super || search_file(req, res, ".html")
+          super ||
+            search_file(req, res, ".html") ||
+            search_file(req, res, ".xhtml")
         end
 
         # Add the ability to tap file.html the same way that Nginx does on our
@@ -151,7 +150,9 @@ module Jekyll
 
         def search_file(req, res, basename)
           # /file.* > /file/index.html > /file.html
-          super || super(req, res, "#{basename}.html")
+          super ||
+            super(req, res, "#{basename}.html") ||
+            super(req, res, "#{basename}.xhtml")
         end
 
         # rubocop:disable Naming/MethodName
@@ -178,21 +179,17 @@ module Jekyll
         end
         # rubocop:enable Naming/MethodName
 
-        #
-
         private
+
         def validate_and_ensure_charset(_req, res)
           key = res.header.keys.grep(%r!content-type!i).first
           typ = res.header[key]
 
-          unless typ =~ %r!;\s*charset=!
+          unless %r!;\s*charset=!.match?(typ)
             res.header[key] = "#{typ}; charset=#{@jekyll_opts["encoding"]}"
           end
         end
 
-        #
-
-        private
         def set_defaults
           hash_ = @jekyll_opts.fetch("webrick", {}).fetch("headers", {})
           DEFAULTS.each_with_object(@headers = hash_) do |(key, val), hash|

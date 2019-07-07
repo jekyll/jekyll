@@ -3,7 +3,7 @@ title: 'Jekyll 3.0.5 Released'
 date: 2016-04-26 17:40:44 -0700
 author: parkr
 version: 3.0.5
-categories: [release]
+category: release
 ---
 
 This version fixes a bug affecting only v3.0.4 where autoregeneration was

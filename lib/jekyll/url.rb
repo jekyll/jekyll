@@ -68,6 +68,7 @@ module Jekyll
     def generate_url_from_hash(template)
       @placeholders.inject(template) do |result, token|
         break result if result.index(":").nil?
+
         if token.last.nil?
           # Remove leading "/" to avoid generating urls with `//`
           result.gsub("/:#{token.first}", "")
@@ -98,8 +99,8 @@ module Jekyll
         winner = pool.find { |key| @placeholders.key?(key) }
         if winner.nil?
           raise NoMethodError,
-            "The URL template doesn't have #{pool.join(" or ")} keys. "\
-              "Check your permalink template!"
+                "The URL template doesn't have #{pool.join(" or ")} keys. "\
+                "Check your permalink template!"
         end
 
         value = @placeholders[winner]
@@ -128,6 +129,8 @@ module Jekyll
     #
     # Returns the escaped path.
     def self.escape_path(path)
+      return path if path.empty? || %r!^[a-zA-Z0-9./-]+$!.match?(path)
+
       # Because URI.escape doesn't escape "?", "[" and "]" by default,
       # specify unsafe string (except unreserved, sub-delims, ":", "@" and "/").
       #
@@ -138,8 +141,7 @@ module Jekyll
       #   pct-encoded   = "%" HEXDIG HEXDIG
       #   sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
       #                 / "*" / "+" / "," / ";" / "="
-      path = Addressable::URI.encode(path)
-      path.encode("utf-8").sub("#", "%23")
+      Addressable::URI.encode(path).encode("utf-8").sub("#", "%23")
     end
 
     # Unescapes a URL path segment
@@ -153,7 +155,10 @@ module Jekyll
     #
     # Returns the unescaped path.
     def self.unescape_path(path)
-      Addressable::URI.unencode(path.encode("utf-8"))
+      path = path.encode("utf-8")
+      return path unless path.include?("%")
+
+      Addressable::URI.unencode(path)
     end
   end
 end

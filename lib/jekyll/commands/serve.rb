@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "thread"
-
 module Jekyll
   module Commands
     class Serve < Command
@@ -19,31 +17,36 @@ module Jekyll
           "host"                 => ["host", "-H", "--host [HOST]", "Host to bind to"],
           "open_url"             => ["-o", "--open-url", "Launch your site in a browser"],
           "detach"               => ["-B", "--detach",
-            "Run the server in the background",],
+                                     "Run the server in the background",],
           "ssl_key"              => ["--ssl-key [KEY]", "X.509 (SSL) Private Key."],
           "port"                 => ["-P", "--port [PORT]", "Port to listen on"],
           "show_dir_listing"     => ["--show-dir-listing",
-            "Show a directory listing instead of loading your index file.",],
+                                     "Show a directory listing instead of loading" \
+                                     " your index file.",],
           "skip_initial_build"   => ["skip_initial_build", "--skip-initial-build",
-            "Skips the initial site build which occurs before the server is started.",],
+                                     "Skips the initial site build which occurs before" \
+                                     " the server is started.",],
           "livereload"           => ["-l", "--livereload",
-            "Use LiveReload to automatically refresh browsers",],
+                                     "Use LiveReload to automatically refresh browsers",],
           "livereload_ignore"    => ["--livereload-ignore ignore GLOB1[,GLOB2[,...]]",
-            Array,
-            "Files for LiveReload to ignore. Remember to quote the values so your shell "\
-            "won't expand them",],
+                                     Array,
+                                     "Files for LiveReload to ignore. " \
+                                     "Remember to quote the values so your shell " \
+                                     "won't expand them",],
           "livereload_min_delay" => ["--livereload-min-delay [SECONDS]",
-            "Minimum reload delay",],
+                                     "Minimum reload delay",],
           "livereload_max_delay" => ["--livereload-max-delay [SECONDS]",
-            "Maximum reload delay",],
+                                     "Maximum reload delay",],
           "livereload_port"      => ["--livereload-port [PORT]", Integer,
-            "Port for LiveReload to listen on",],
+                                     "Port for LiveReload to listen on",],
         }.freeze
 
         DIRECTORY_INDEX = %w(
           index.htm
           index.html
           index.rhtml
+          index.xht
+          index.xhtml
           index.cgi
           index.xml
           index.json
@@ -90,7 +93,10 @@ module Jekyll
         def process(opts)
           opts = configuration_from_options(opts)
           destination = opts["destination"]
-          register_reload_hooks(opts) if opts["livereload"]
+          if opts["livereload"]
+            validate_options(opts)
+            register_reload_hooks(opts)
+          end
           setup(destination)
 
           start_up_webrick(opts, destination)
@@ -103,11 +109,12 @@ module Jekyll
         # Perform logical validation of CLI options
 
         private
+
         def validate_options(opts)
           if opts["livereload"]
             if opts["detach"]
-              Jekyll.logger.warn "Warning:",
-                "--detach and --livereload are mutually exclusive. Choosing --livereload"
+              Jekyll.logger.warn "Warning:", "--detach and --livereload are mutually exclusive." \
+                                 " Choosing --livereload"
               opts["detach"] = false
             end
             if opts["ssl_cert"] || opts["ssl_key"]
@@ -122,18 +129,15 @@ module Jekyll
               opts["watch"] = true
             end
           elsif %w(livereload_min_delay
-              livereload_max_delay
-              livereload_ignore
-              livereload_port).any? { |o| opts[o] }
+                   livereload_max_delay
+                   livereload_ignore
+                   livereload_port).any? { |o| opts[o] }
             Jekyll.logger.abort_with "--livereload-min-delay, "\
                "--livereload-max-delay, --livereload-ignore, and "\
                "--livereload-port require the --livereload option."
           end
         end
 
-        #
-
-        private
         # rubocop:disable Metrics/AbcSize
         def register_reload_hooks(opts)
           require_relative "serve/live_reload_reactor"
@@ -171,7 +175,6 @@ module Jekyll
         # when we get ready to party, checking for an setting up an error page
         # and making sure our destination exists.
 
-        private
         def setup(destination)
           require_relative "serve/servlet"
 
@@ -186,9 +189,6 @@ module Jekyll
           end
         end
 
-        #
-
-        private
         def webrick_opts(opts)
           opts = {
             :JekyllOptions      => opts,
@@ -209,13 +209,8 @@ module Jekyll
           opts
         end
 
-        #
-
-        private
         def start_up_webrick(opts, destination)
-          if opts["livereload"]
-            @reload_reactor.start(opts)
-          end
+          @reload_reactor.start(opts) if opts["livereload"]
 
           @server = WEBrick::HTTPServer.new(webrick_opts(opts)).tap { |o| o.unmount("") }
           @server.mount(opts["baseurl"].to_s, Servlet, destination, file_handler_opts)
@@ -226,20 +221,15 @@ module Jekyll
         end
 
         # Recreate NondisclosureName under utf-8 circumstance
-
-        private
         def file_handler_opts
-          WEBrick::Config::FileHandler.merge({
+          WEBrick::Config::FileHandler.merge(
             :FancyIndexing     => true,
             :NondisclosureName => [
               ".ht*", "~*",
-            ],
-          })
+            ]
+          )
         end
 
-        #
-
-        private
         def server_address(server, options = {})
           format_url(
             server.config[:SSLEnable],
@@ -249,19 +239,14 @@ module Jekyll
           )
         end
 
-        private
         def format_url(ssl_enabled, address, port, baseurl = nil)
-          format("%<prefix>s://%<address>s:%<port>i%<baseurl>s", {
-            :prefix  => ssl_enabled ? "https" : "http",
-            :address => address,
-            :port    => port,
-            :baseurl => baseurl ? "#{baseurl}/" : "",
-          })
+          format("%<prefix>s://%<address>s:%<port>i%<baseurl>s",
+                 :prefix  => ssl_enabled ? "https" : "http",
+                 :address => address,
+                 :port    => port,
+                 :baseurl => baseurl ? "#{baseurl}/" : "")
         end
 
-        #
-
-        private
         def default_url(opts)
           config = configuration_from_options(opts)
           format_url(
@@ -271,14 +256,12 @@ module Jekyll
           )
         end
 
-        #
-
-        private
         def launch_browser(server, opts)
           address = server_address(server, opts)
           return system "start", address if Utils::Platforms.windows?
           return system "xdg-open", address if Utils::Platforms.linux?
           return system "open", address if Utils::Platforms.osx?
+
           Jekyll.logger.error "Refusing to launch browser; " \
             "Platform launcher unknown."
         end
@@ -286,8 +269,6 @@ module Jekyll
         # Keep in our area with a thread or detach the server as requested
         # by the user.  This method determines what we do based on what you
         # ask us to do.
-
-        private
         def boot_or_detach(server, opts)
           if opts["detach"]
             pid = Process.fork do
@@ -296,7 +277,8 @@ module Jekyll
 
             Process.detach(pid)
             Jekyll.logger.info "Server detached with pid '#{pid}'.", \
-              "Run `pkill -f jekyll' or `kill -9 #{pid}' to stop the server."
+                               "Run `pkill -f jekyll' or `kill -9 #{pid}'" \
+                               " to stop the server."
           else
             t = Thread.new { server.start }
             trap("INT") { server.shutdown }
@@ -305,8 +287,6 @@ module Jekyll
         end
 
         # Make the stack verbose if the user requests it.
-
-        private
         def enable_logging(opts)
           opts[:AccessLog] = []
           level = WEBrick::Log.const_get(opts[:JekyllOptions]["verbose"] ? :DEBUG : :WARN)
@@ -316,8 +296,6 @@ module Jekyll
         # Add SSL to the stack if the user triggers --enable-ssl and they
         # provide both types of certificates commonly needed.  Raise if they
         # forget to add one of the certificates.
-
-        private
         def enable_ssl(opts)
           cert, key, src =
             opts[:JekyllOptions].values_at("ssl_cert", "ssl_key", "source")
@@ -333,13 +311,12 @@ module Jekyll
           opts[:SSLEnable] = true
         end
 
-        private
         def start_callback(detached)
           unless detached
             proc do
               mutex.synchronize do
                 # Block until EventMachine reactor starts
-                @reload_reactor.started_event.wait unless @reload_reactor.nil?
+                @reload_reactor&.started_event&.wait
                 @running = true
                 Jekyll.logger.info("Server running...", "press ctrl-c to stop.")
                 @run_cond.broadcast
@@ -348,7 +325,6 @@ module Jekyll
           end
         end
 
-        private
         def stop_callback(detached)
           unless detached
             proc do
@@ -364,13 +340,11 @@ module Jekyll
           end
         end
 
-        private
         def mime_types
           file = File.expand_path("../mime.types", __dir__)
           WEBrick::HTTPUtils.load_mime_types(file)
         end
 
-        private
         def read_file(source_dir, file_path)
           File.read(Jekyll.sanitized_path(source_dir, file_path))
         end

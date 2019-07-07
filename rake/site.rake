@@ -86,7 +86,7 @@ namespace :site do
 
   desc "Write the latest Jekyll version"
   task :latest_version do
-    return if version =~ %r!(beta|rc|alpha)!i
+    next if version =~ %r!(beta|rc|alpha)!i
     require "safe_yaml/load"
     config_file = File.join(docs_folder, "_config.yml")
     config = SafeYAML.load_file(config_file)
@@ -109,7 +109,7 @@ namespace :site do
         post.puts("date: #{Time.new.strftime("%Y-%m-%d %H:%M:%S %z")}")
         post.puts("author: ")
         post.puts("version: #{release}")
-        post.puts("categories: [release]")
+        post.puts("category: release")
         post.puts("---")
         post.puts
         post.puts
