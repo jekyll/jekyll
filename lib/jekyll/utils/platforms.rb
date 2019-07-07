@@ -19,7 +19,7 @@ module Jekyll
 
       # Not a Windows Subsystem for Linux (WSL)
       def vanilla_windows?
-        !!(rbconfig_host =~ %r!mswin|mingw|cygwin!) && proc_version.empty?
+        rbconfig_host.match?(%r!mswin|mingw|cygwin!) && proc_version.empty?
       end
       alias_method :really_windows?, :vanilla_windows?
 
@@ -33,11 +33,11 @@ module Jekyll
       end
 
       def osx?
-        !!(rbconfig_host =~ %r!darwin|mac os!)
+        rbconfig_host.match?(%r!darwin|mac os!)
       end
 
       def unix?
-        !!(rbconfig_host =~ %r!solaris|bsd!)
+        rbconfig_host.match?(%r!solaris|bsd!)
       end
 
       private
