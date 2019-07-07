@@ -21,6 +21,8 @@ collections:
   authors:
 ```
 
+To (re)load the configuration, restart the jekyll server. Press `Ctrl`+`C` in your terminal to stop the server, and then `jekyll serve` to restart it.
+
 ## Add authors
 
 Documents (the items in a collection) live in a folder in the root of the site

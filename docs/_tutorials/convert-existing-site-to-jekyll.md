@@ -202,7 +202,7 @@ layout: homepage
 
 This page would then use the `homepage.html` template in the `_layouts` folder.
 
-You can even set [default front matter tags](/docs/configuration/front-matter-defaults/) for pages, posts, or [collections]({% link _docs/collections.md %}) in your `_config.yml` file so that you don't have to specify the layout in the front matter variables. Anywayd, setting defaults is beyond the scope of this tutorial, let's get back to work.
+You can even set [default front matter tags](/docs/configuration/front-matter-defaults/) for pages, posts, or [collections]({% link _docs/collections.md %}) in your `_config.yml` file so that you don't have to specify the layout in the front matter variables. Anyways, setting defaults is beyond the scope of this tutorial, let's get back to work.
 
 ## 6. Configure site variables
 

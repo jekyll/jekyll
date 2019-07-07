@@ -53,6 +53,12 @@ currently supported options:
 
 For more details about these options have a look at the [Kramdown configuration documentation](https://kramdown.gettalong.org/options.html). 
 
+### CommonMark
+
+[CommonMark](https://commonmark.org/) is a rationalized version of Markdown syntax, implemented in C and thus faster than default Kramdown implemented in Ruby. It [slightly differs](https://github.com/commonmark/CommonMark#differences-from-original-markdown) from original Markdown and does not support all the syntax elements implemented in Kramdown, like [Block Inline Attribute Lists](https://kramdown.gettalong.org/syntax.html#block-ials).
+
+It comes in two flavors: basic CommonMark with [jekyll-commonmark](https://github.com/jekyll/jekyll-commonmark) plugin and [GitHub Flavored Markdown supported by GitHub Pages](https://github.com/github/jekyll-commonmark-ghpages).
+
 ### Redcarpet
 
 Redcarpet can be configured by providing an `extensions` sub-setting, whose

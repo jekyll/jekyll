@@ -28,7 +28,7 @@ See: https://jekyllrb.com/philosophy
 
 * [Install](https://jekyllrb.com/docs/installation/) the gem
 * Read up about its [Usage](https://jekyllrb.com/docs/usage/) and [Configuration](https://jekyllrb.com/docs/configuration/)
-* Take a gander at some existing [Sites](https://wiki.github.com/jekyll/jekyll/sites)
+* Take a gander at some existing [Sites](https://github.com/jekyll/jekyll/wiki/sites)
 * [Fork](https://github.com/jekyll/jekyll/fork) and [Contribute](https://jekyllrb.com/docs/contributing/) your own modifications
 * Have questions? Check out our official forum community [Jekyll Talk](https://talk.jekyllrb.com/) or [`#jekyll` on irc.freenode.net](https://botbot.me/freenode/jekyll/)
 

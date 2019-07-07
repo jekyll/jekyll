@@ -41,19 +41,38 @@ class TestConfiguration < JekyllUnitTest
     end
   end
 
-  context "the defaults" do
-    should "exclude node_modules" do
-      assert_includes Configuration.from({})["exclude"], "node_modules"
+  context "the effective site configuration" do
+    setup do
+      @config = Configuration.from(
+        "exclude" => %w(
+          README.md Licence
+        )
+      )
     end
 
-    should "exclude ruby vendor directories" do
-      exclude = Configuration.from({})["exclude"]
+    should "always exclude node_modules" do
+      assert_includes @config["exclude"], "node_modules"
+    end
+
+    should "always exclude Gemfile and related paths" do
+      exclude = @config["exclude"]
       assert_includes exclude, "Gemfile"
       assert_includes exclude, "Gemfile.lock"
+      assert_includes exclude, "gemfiles"
+    end
+
+    should "always exclude ruby vendor directories" do
+      exclude = @config["exclude"]
       assert_includes exclude, "vendor/bundle/"
       assert_includes exclude, "vendor/cache/"
       assert_includes exclude, "vendor/gems/"
       assert_includes exclude, "vendor/ruby/"
+    end
+
+    should "always exclude default cache directories" do
+      exclude = @config["exclude"]
+      assert_includes exclude, ".sass-cache"
+      assert_includes exclude, ".jekyll-cache"
     end
   end
 
@@ -171,7 +190,7 @@ class TestConfiguration < JekyllUnitTest
     end
 
     should "not raise an error on empty files" do
-      allow(SafeYAML).to receive(:load_file).with("empty.yml").and_return(false)
+      allow(SafeYAML).to receive(:load_file).with(File.expand_path("empty.yml")).and_return(false)
       Jekyll.logger.log_level = :warn
       @config.read_config_file("empty.yml")
       Jekyll.logger.log_level = :info
@@ -184,10 +203,10 @@ class TestConfiguration < JekyllUnitTest
     end
 
     should "continue to read config files if one is empty" do
-      allow(SafeYAML).to receive(:load_file).with("empty.yml").and_return(false)
+      allow(SafeYAML).to receive(:load_file).with(File.expand_path("empty.yml")).and_return(false)
       allow(SafeYAML)
         .to receive(:load_file)
-        .with("not_empty.yml")
+        .with(File.expand_path("not_empty.yml"))
         .and_return("foo" => "bar", "include" => "", "exclude" => "")
       Jekyll.logger.log_level = :warn
       read_config = @config.read_config_files(["empty.yml", "not_empty.yml"])

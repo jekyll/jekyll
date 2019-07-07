@@ -8,7 +8,7 @@ module Jekyll
       mutable false
 
       def_delegator  :@obj, :site_data, :data
-      def_delegators :@obj, :time, :pages, :static_files, :documents, :tags, :categories
+      def_delegators :@obj, :time, :pages, :static_files, :tags, :categories
 
       private def_delegator :@obj, :config, :fallback_data
 
@@ -36,6 +36,16 @@ module Jekyll
 
       def collections
         @site_collections ||= @obj.collections.values.sort_by(&:label).map(&:to_liquid)
+      end
+
+      # `Site#documents` cannot be memoized so that `Site#docs_to_write` can access the
+      # latest state of the attribute.
+      #
+      # Since this method will be called after `Site#pre_render` hook, the `Site#documents`
+      # array shouldn't thereafter change and can therefore be safely memoized to prevent
+      # additional computation of `Site#documents`.
+      def documents
+        @documents ||= @obj.documents
       end
 
       # `{{ site.related_posts }}` is how posts can get posts related to

@@ -3,7 +3,7 @@ title: "Jekyll 3.7.2 Released"
 date: 2018-01-25 22:22:22 +0530
 author: ashmaroli
 version: 3.7.2
-categories: [release]
+category: release
 ---
 
 Close on the heels of shipping 3.7.0, we were informed of a couple of

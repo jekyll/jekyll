@@ -52,7 +52,7 @@ module Jekyll
       end
 
       def rbconfig_host
-        RbConfig::CONFIG["host_os"].downcase
+        @rbconfig_host ||= RbConfig::CONFIG["host_os"].downcase
       end
 
       def linux_os?

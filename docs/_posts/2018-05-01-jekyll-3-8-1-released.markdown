@@ -3,7 +3,7 @@ title: 'Jekyll 3.8.1 Released'
 date: 2018-05-01 11:56:01 -0500
 author: pathawks
 version: 3.8.1
-categories: [release]
+category: release
 ---
 
 Happy May Day :tada:

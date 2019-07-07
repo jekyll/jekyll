@@ -3,7 +3,7 @@ title: 'Jekyll 3.1.2 Released!'
 date: 2016-02-19 15:24:00 -0800
 author: parkr
 version: 3.1.2
-categories: [release]
+category: release
 ---
 
 Happy Friday from sunny California! Today, we're excited to announce the release of Jekyll v3.1.2, which comes with some crucial bug fixes:

@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.rdoc_options     = ["--charset=UTF-8"]
   s.extra_rdoc_files = %w(README.markdown LICENSE)
 
-  s.required_ruby_version     = ">= 2.3.0"
+  s.required_ruby_version     = ">= 2.4.0"
   s.required_rubygems_version = ">= 2.7.0"
 
   s.add_runtime_dependency("addressable",           "~> 2.4")
@@ -39,7 +39,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("i18n",                  ">= 0.9.5", "< 2")
   s.add_runtime_dependency("jekyll-sass-converter", "~> 1.0")
   s.add_runtime_dependency("jekyll-watch",          "~> 2.0")
-  s.add_runtime_dependency("kramdown",              "~> 1.14")
+  s.add_runtime_dependency("kramdown",              "~> 2.1")
+  s.add_runtime_dependency("kramdown-parser-gfm",   "~> 1.0")
   s.add_runtime_dependency("liquid",                "~> 4.0")
   s.add_runtime_dependency("mercenary",             "~> 0.3.3")
   s.add_runtime_dependency("pathutil",              "~> 0.9")
@@ -48,10 +49,16 @@ Gem::Specification.new do |s|
 
   s.post_install_message = <<~MSG
     ----------------------------------------------------------------------------------
-    This version of Jekyll comes with some major changes. Most notably:
+    This version of Jekyll comes with some major changes.
+
+    Most notably:
       * Our `link` tag now comes with the `relative_url` filter incorporated into it.
         You should no longer prepend `{{ site.baseurl }}` to `{% link foo.md %}`
         For further details: https://github.com/jekyll/jekyll/pull/6727
+
+      * Our `post_url` tag now comes with the `relative_url` filter incorporated into it.
+        You shouldn't prepend `{{ site.baseurl }}` to `{% post_url 2019-03-27-hello %}`
+        For further details: https://github.com/jekyll/jekyll/pull/7589
     ----------------------------------------------------------------------------------
   MSG
 end

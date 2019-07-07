@@ -3,7 +3,7 @@ title: 'Jekyll turns 3.6!'
 date: 2017-09-21 16:38:20 -0400
 author: parkr
 version: 3.6.0
-categories: [release]
+category: release
 ---
 
 Another much-anticipated release of Jekyll. This release comes with it Rouge 2 support, but note you can continue to use Rouge 1 if you'd prefer. We also now require Ruby 2.1.0 as 2.0.x is no longer supported by the Ruby team.
