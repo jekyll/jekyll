@@ -239,3 +239,8 @@
     - marketing-site
     - documentation
     - software
+- name: Food and Tastiness in Berlin
+  url: https://vilimpoc.org/food/
+  categories:
+    - personal
+    - blog
