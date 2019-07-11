@@ -12,6 +12,10 @@ module Jekyll
       @site = site
     end
 
+    def reset
+      @glob_cache = {} if @glob_cache
+    end
+
     def update_deprecated_types(set)
       return set unless set.key?("scope") && set["scope"].key?("type")
 
@@ -36,6 +40,7 @@ module Jekyll
     def ensure_time!(set)
       return set unless set.key?("values") && set["values"].key?("date")
       return set if set["values"]["date"].is_a?(Time)
+
       set["values"]["date"] = Utils.parse_date(
         set["values"]["date"],
         "An invalid date format was found in a front-matter default set: #{set}"
@@ -92,33 +97,41 @@ module Jekyll
     # path - the path to check for
     # type - the type (:post, :page or :draft) to check for
     #
-    # Returns true if the scope applies to the given path and type
+    # Returns true if the scope applies to the given type and path
     def applies?(scope, path, type)
-      applies_path?(scope, path) && applies_type?(scope, type)
+      applies_type?(scope, type) && applies_path?(scope, path)
     end
 
-    # rubocop:disable Metrics/AbcSize
     def applies_path?(scope, path)
       return true if !scope.key?("path") || scope["path"].empty?
 
       sanitized_path = Pathname.new(sanitize_path(path))
-      site_path      = Pathname.new(@site.source)
       rel_scope_path = Pathname.new(scope["path"])
-      abs_scope_path = File.join(@site.source, rel_scope_path)
 
       if scope["path"].to_s.include?("*")
-        Dir.glob(abs_scope_path).each do |scope_path|
-          scope_path = Pathname.new(scope_path).relative_path_from(site_path)
-          scope_path = strip_collections_dir(scope_path)
-          Jekyll.logger.debug "Globbed Scope Path:", scope_path
-          return true if path_is_subpath?(sanitized_path, scope_path)
-        end
-        false
+        glob_scope(sanitized_path, rel_scope_path)
       else
-        path_is_subpath?(sanitized_path, strip_collections_dir(rel_scope_path))
+        path_is_subpath?(sanitized_path, strip_collections_dir(scope["path"]))
       end
     end
-    # rubocop:enable Metrics/AbcSize
+
+    def glob_scope(sanitized_path, rel_scope_path)
+      site_source    = Pathname.new(@site.source)
+      abs_scope_path = site_source.join(rel_scope_path).to_s
+
+      glob_cache(abs_scope_path).each do |scope_path|
+        scope_path = Pathname.new(scope_path).relative_path_from(site_source).to_s
+        scope_path = strip_collections_dir(scope_path)
+        Jekyll.logger.debug "Globbed Scope Path:", scope_path
+        return true if path_is_subpath?(sanitized_path, scope_path)
+      end
+      false
+    end
+
+    def glob_cache(path)
+      @glob_cache ||= {}
+      @glob_cache[path] ||= Dir.glob(path)
+    end
 
     def path_is_subpath?(path, parent_path)
       path.ascend do |ascended_path|
@@ -130,8 +143,9 @@ module Jekyll
 
     def strip_collections_dir(path)
       collections_dir  = @site.config["collections_dir"]
-      slashed_coll_dir = "#{collections_dir}/"
+      slashed_coll_dir = collections_dir.empty? ? "/" : "#{collections_dir}/"
       return path if collections_dir.empty? || !path.to_s.start_with?(slashed_coll_dir)
+
       path.sub(slashed_coll_dir, "")
     end
 
@@ -186,8 +200,12 @@ module Jekyll
     #
     # Returns an array of hashes
     def matching_sets(path, type)
-      valid_sets.select do |set|
-        !set.key?("scope") || applies?(set["scope"], path, type)
+      @matched_set_cache ||= {}
+      @matched_set_cache[path] ||= {}
+      @matched_set_cache[path][type] ||= begin
+        valid_sets.select do |set|
+          !set.key?("scope") || applies?(set["scope"], path, type)
+        end
       end
     end
 
@@ -214,7 +232,7 @@ module Jekyll
 
     # Sanitizes the given path by removing a leading and adding a trailing slash
 
-    SANITIZATION_REGEX = %r!\A/|(?<=[^/])\z!
+    SANITIZATION_REGEX = %r!\A/|(?<=[^/])\z!.freeze
 
     def sanitize_path(path)
       if path.nil? || path.empty?

@@ -17,14 +17,7 @@ module Jekyll
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
     SLUGIFY_ASCII_REGEXP = Regexp.new("[^[A-Za-z0-9]]+").freeze
 
-    # Takes an indented string and removes the preceding spaces on each line
-
-    def strip_heredoc(str)
-      str.gsub(%r!^[ \t]{#{(str.scan(%r!^[ \t]*(?=\S)!).min || "").size}}!, "")
-    end
-
     # Takes a slug and turns it into a simple title.
-
     def titleize_slug(slug)
       slug.split("-").map!(&:capitalize).join(" ")
     end
@@ -142,7 +135,7 @@ module Jekyll
     # Returns true if the YAML front matter is present.
     # rubocop: disable PredicateName
     def has_yaml_header?(file)
-      !!(File.open(file, "rb", &:readline) =~ %r!\A---\s*\r?\n!)
+      File.open(file, "rb", &:readline).match? %r!\A---\s*\r?\n!
     rescue EOFError
       false
     end
@@ -152,6 +145,7 @@ module Jekyll
     # Returns true is the string contains sequences of `{%` or `{{`
     def has_liquid_construct?(content)
       return false if content.nil? || content.empty?
+
       content.include?("{%") || content.include?("{{")
     end
     # rubocop: enable PredicateName
@@ -221,6 +215,7 @@ module Jekyll
       slug.gsub!(%r!^\-|\-$!i, "")
 
       slug.downcase! unless cased
+      Jekyll.logger.warn("Warning:", "Empty `slug` generated for '#{string}'.") if slug.empty?
       slug
     end
 
@@ -292,8 +287,10 @@ module Jekyll
     # Returns matched pathes
     def safe_glob(dir, patterns, flags = 0)
       return [] unless Dir.exist?(dir)
+
       pattern = File.join(Array(patterns))
       return [dir] if pattern.empty?
+
       Dir.chdir(dir) do
         Dir.glob(pattern, flags).map { |f| File.join(dir, f) }
       end

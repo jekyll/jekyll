@@ -4,7 +4,7 @@ description: "Jekyll 3.7.0 brings LiveReload, a directory for your collections a
 date: 2018-01-02 11:21:40 +0100
 author: DirtyF
 version: 3.7.0
-categories: [release]
+category: release
 ---
 
 We're happy to release a new minor for the new year.
@@ -14,7 +14,7 @@ Here are a few of the latest additions from our contributors:
  * New `collections_dir` configuration option allows you to store all your [collections](/docs/collections) in a single folder. Your source root folder should now look cleaner :sparkles: .
  * If you're using a [gem-based theme](/docs/themes/) in coordination with the `--incremental` option, you should notice some significant speed during the regeneration process, we did see build time went down **from 12s to 2s** with @mmistakes [minimal-mistakes theme](https://github.com/mmistakes/minimal-mistakes) during our tests.
  * Jekyll will now check to determine whether host machine has internet connection.
- * A new `latin` option is available to better [handle URLs slugs](/docs/templates/#options-for-the-slugify-filter).
+ * A new `latin` option is available to better [handle URLs slugs](/docs/liquid/filters/#options-for-the-slugify-filter).
  * And of course many bug fixes and updates to our documentation — which you can now search thanks to our friends @Algolia.
  * [Full history is here](/docs/history/#v3-7-0).
 

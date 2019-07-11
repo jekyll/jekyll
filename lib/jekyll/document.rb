@@ -5,14 +5,31 @@ module Jekyll
     include Comparable
     extend Forwardable
 
-    attr_reader :path, :site, :extname, :collection
+    attr_reader :path, :site, :extname, :collection, :type
     attr_accessor :content, :output
 
     def_delegator :self, :read_post_data, :post_read
 
-    YAML_FRONT_MATTER_REGEXP = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m
-    DATELESS_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.[^.]+)$!
-    DATE_FILENAME_MATCHER = %r!^(?:.+/)*(\d{2,4}-\d{1,2}-\d{1,2})-(.*)(\.[^.]+)$!
+    YAML_FRONT_MATTER_REGEXP = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m.freeze
+    DATELESS_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.[^.]+)$!.freeze
+    DATE_FILENAME_MATCHER = %r!^(?>.+/)*?(\d{2,4}-\d{1,2}-\d{1,2})-([^/]*)(\.[^.]+)$!.freeze
+
+    SASS_FILE_EXTS = %w(.sass .scss).freeze
+    YAML_FILE_EXTS = %w(.yaml .yml).freeze
+
+    #
+
+    # Class-wide cache to stash and retrieve regexp to detect "super-directories"
+    # of a particular Jekyll::Document object.
+    #
+    # dirname - The *special directory* for the Document.
+    #           e.g. "_posts" or "_drafts" for Documents from the `site.posts` collection.
+    def self.superdirs_regex(dirname)
+      @superdirs_regex ||= {}
+      @superdirs_regex[dirname] ||= %r!#{dirname}.*!
+    end
+
+    #
 
     # Create a new Document.
     #
@@ -27,6 +44,8 @@ module Jekyll
       @path = path
       @extname = File.extname(path)
       @collection = relations[:collection]
+      @type = @collection.label.to_sym
+
       @has_yaml_header = nil
 
       if draft?
@@ -36,7 +55,7 @@ module Jekyll
       end
 
       data.default_proc = proc do |_, key|
-        site.frontmatter_defaults.find(relative_path, collection.label, key)
+        site.frontmatter_defaults.find(relative_path, type, key)
       end
 
       trigger_hooks(:post_init)
@@ -60,12 +79,19 @@ module Jekyll
       data
     end
 
+    # Returns the document date. If metadata is not present then calculates it
+    # based on Jekyll::Site#time or the document file modification time.
+    #
+    # Return document date string.
     def date
       data["date"] ||= (draft? ? source_file_mtime : site.time)
     end
 
+    # Return document file modification time in the form of a Time object.
+    #
+    # Return document file modification Time object.
     def source_file_mtime
-      @source_file_mtime ||= File.mtime(path)
+      File.mtime(path)
     end
 
     # Returns whether the document is a draft. This is only the case if
@@ -112,22 +138,26 @@ module Jekyll
     #   and with the collection's directory removed as well.
     # This method is useful when building the URL of the document.
     #
+    # NOTE: `String#gsub` removes all trailing periods (in comparison to `String#chomp`)
+    #
     # Examples:
-    #   When relative_path is "_methods/site/generate.md":
+    #   When relative_path is "_methods/site/generate...md":
     #     cleaned_relative_path
     #     # => "/site/generate"
     #
     # Returns the cleaned relative path of the document.
     def cleaned_relative_path
       @cleaned_relative_path ||=
-        relative_path[0..-extname.length - 1].sub(collection.relative_directory, "")
+        relative_path[0..-extname.length - 1]
+          .sub(collection.relative_directory, "")
+          .gsub(%r!\.*\z!, "")
     end
 
     # Determine whether the document is a YAML file.
     #
     # Returns true if the extname is either .yml or .yaml, false otherwise.
     def yaml_file?
-      %w(.yaml .yml).include?(extname)
+      YAML_FILE_EXTS.include?(extname)
     end
 
     # Determine whether the document is an asset file.
@@ -143,7 +173,7 @@ module Jekyll
     #
     # Returns true if extname == .sass or .scss, false otherwise.
     def sass_file?
-      %w(.sass .scss).include?(extname)
+      SASS_FILE_EXTS.include?(extname)
     end
 
     # Determine whether the document is a CoffeeScript file.
@@ -159,6 +189,8 @@ module Jekyll
     #   or if the document doesn't contain any Liquid Tags or Variables,
     #   true otherwise.
     def render_with_liquid?
+      return false if data["render_with_liquid"] == false
+
       !(coffeescript_file? || yaml_file? || !Utils.has_liquid_construct?(content))
     end
 
@@ -286,7 +318,7 @@ module Jekyll
     #
     # Returns the inspect string for this document.
     def inspect
-      "#<Jekyll::Document #{relative_path} collection=#{collection.label}>"
+      "#<#{self.class} #{relative_path} collection=#{collection.label}>"
     end
 
     # The string representation for this document.
@@ -303,6 +335,7 @@ module Jekyll
     #   equal or greater than the other doc's path. See String#<=> for more details.
     def <=>(other)
       return nil unless other.respond_to?(:data)
+
       cmp = data["date"] <=> other.data["date"]
       cmp = path <=> other.path if cmp.nil? || cmp.zero?
       cmp
@@ -323,7 +356,7 @@ module Jekyll
     #
     # Returns the document excerpt_separator
     def excerpt_separator
-      (data["excerpt_separator"] || site.config["excerpt_separator"]).to_s
+      @excerpt_separator ||= (data["excerpt_separator"] || site.config["excerpt_separator"]).to_s
     end
 
     # Whether to generate an excerpt
@@ -359,12 +392,6 @@ module Jekyll
       @related_posts ||= Jekyll::RelatedPosts.new(self).build
     end
 
-    # Override of normal respond_to? to match method_missing's logic for
-    # looking in @data.
-    def respond_to?(method, include_private = false)
-      data.key?(method.to_s) || super
-    end
-
     # Override of method_missing to check in @data for the key.
     def method_missing(method, *args, &blck)
       if data.key?(method.to_s)
@@ -387,28 +414,29 @@ module Jekyll
     #
     # Returns nothing.
     def categories_from_path(special_dir)
-      superdirs = relative_path.sub(%r!#{special_dir}(.*)!, "")
-        .split(File::SEPARATOR)
-        .reject do |c|
-        c.empty? || c == special_dir || c == basename
-      end
+      superdirs = relative_path.sub(Document.superdirs_regex(special_dir), "")
+      superdirs = superdirs.split(File::SEPARATOR)
+      superdirs.reject! { |c| c.empty? || c == special_dir || c == basename }
+
       merge_data!({ "categories" => superdirs }, :source => "file path")
     end
 
     def populate_categories
-      merge_data!(
-        "categories" => (
-          Array(data["categories"]) + Utils.pluralized_array_from_hash(
-            data, "category", "categories"
-          )
-        ).map(&:to_s).flatten.uniq
+      categories = Array(data["categories"]) + Utils.pluralized_array_from_hash(
+        data, "category", "categories"
       )
+      categories.map!(&:to_s)
+      categories.flatten!
+      categories.uniq!
+
+      merge_data!("categories" => categories)
     end
 
     def populate_tags
-      merge_data!(
-        "tags" => Utils.pluralized_array_from_hash(data, "tag", "tags").flatten
-      )
+      tags = Utils.pluralized_array_from_hash(data, "tag", "tags")
+      tags.flatten!
+
+      merge_data!("tags" => tags)
     end
 
     private
@@ -430,10 +458,7 @@ module Jekyll
     end
 
     def merge_defaults
-      defaults = @site.frontmatter_defaults.all(
-        relative_path,
-        collection.label.to_sym
-      )
+      defaults = @site.frontmatter_defaults.all(relative_path, type)
       merge_data!(defaults, :source => "front matter defaults") unless defaults.empty?
     end
 
@@ -472,6 +497,10 @@ module Jekyll
       elsif relative_path =~ DATELESS_FILENAME_MATCHER
         slug, ext = Regexp.last_match.captures
       end
+
+      # slugs shouldn't end with a period
+      # `String#gsub!` removes all trailing periods (in comparison to `String#chomp!`)
+      slug.gsub!(%r!\.*\z!, "")
 
       # Try to ensure the user gets a title.
       data["title"] ||= Utils.titleize_slug(slug)

@@ -2,7 +2,7 @@
 
 module Jekyll
   class Site
-    attr_reader   :source, :dest, :config
+    attr_reader   :source, :dest, :cache_dir, :config
     attr_accessor :layouts, :pages, :static_files, :drafts,
                   :exclude, :include, :lsi, :highlighter, :permalink_style,
                   :time, :future, :unpublished, :safe, :plugins, :limit_posts,
@@ -21,6 +21,8 @@ module Jekyll
       @dest            = File.expand_path(config["destination"]).freeze
 
       self.config = config
+
+      @cache_dir       = in_source_dir(config["cache_dir"])
 
       @reader          = Reader.new(self)
       @regenerator     = Regenerator.new(self)
@@ -51,6 +53,7 @@ module Jekyll
       # keep using `gems` to avoid breaking change
       self.gems = config["plugins"]
 
+      configure_cache
       configure_plugins
       configure_theme
       configure_include_paths
@@ -58,6 +61,8 @@ module Jekyll
 
       self.permalink_style = config["permalink"].to_sym
 
+      # Read in a _config.yml from the current theme-gem at the very end.
+      @config = load_theme_configuration(config) if theme
       @config
     end
 
@@ -78,6 +83,8 @@ module Jekyll
       Jekyll.logger.info @liquid_renderer.stats_table
     end
 
+    # rubocop:disable Metrics/MethodLength
+    #
     # Reset Site details.
     #
     # Returns nothing
@@ -91,17 +98,22 @@ module Jekyll
       self.pages = []
       self.static_files = []
       self.data = {}
+      @post_attr_hash = {}
       @site_data = nil
       @collections = nil
+      @documents = nil
       @docs_to_write = nil
       @regenerator.clear_cache
       @liquid_renderer.reset
       @site_cleaner = nil
+      frontmatter_defaults.reset
 
       raise ArgumentError, "limit_posts must be a non-negative number" if limit_posts.negative?
 
+      Jekyll::Cache.clear_if_config_changed config
       Jekyll::Hooks.trigger :site, :after_reset, self
     end
+    # rubocop:enable Metrics/MethodLength
 
     # Load necessary libraries, plugins, converters, and generators.
     #
@@ -230,12 +242,14 @@ module Jekyll
     def post_attr_hash(post_attr)
       # Build a hash map based on the specified post attribute ( post attr =>
       # array of posts ) then sort each array in reverse order.
-      hash = Hash.new { |h, key| h[key] = [] }
-      posts.docs.each do |p|
-        p.data[post_attr]&.each { |t| hash[t] << p }
+      @post_attr_hash[post_attr] ||= begin
+        hash = Hash.new { |h, key| h[key] = [] }
+        posts.docs.each do |p|
+          p.data[post_attr]&.each { |t| hash[t] << p }
+        end
+        hash.each_value { |posts| posts.sort!.reverse! }
+        hash
       end
-      hash.each_value { |posts| posts.sort!.reverse! }
-      hash
     end
 
     def tags
@@ -312,15 +326,15 @@ module Jekyll
     #
     # Returns an Array of Documents which should be written
     def docs_to_write
-      @docs_to_write ||= documents.select(&:write?)
+      documents.select(&:write?)
     end
 
     # Get all the documents
     #
     # Returns an Array of all Documents
     def documents
-      collections.reduce(Set.new) do |docs, (_, collection)|
-        docs + collection.docs + collection.files
+      collections.each_with_object(Set.new) do |(_, collection), set|
+        set.merge(collection.docs).merge(collection.files)
       end.to_a
     end
 
@@ -375,6 +389,7 @@ module Jekyll
     # Returns a path which is prefixed with the theme root directory.
     def in_theme_dir(*paths)
       return nil unless theme
+
       paths.reduce(theme.root) do |base, path|
         Jekyll.sanitized_path(base, path)
       end
@@ -392,6 +407,18 @@ module Jekyll
       end
     end
 
+    # Public: Prefix a given path with the cache directory.
+    #
+    # paths - (optional) path elements to a file or directory within the
+    #         cache directory
+    #
+    # Returns a path which is prefixed with the cache directory.
+    def in_cache_dir(*paths)
+      paths.reduce(cache_dir) do |base, path|
+        Jekyll.sanitized_path(base, path)
+      end
+    end
+
     # Public: The full path to the directory that houses all the collections registered
     # with the current site.
     #
@@ -402,6 +429,25 @@ module Jekyll
     end
 
     private
+
+    def load_theme_configuration(config)
+      theme_config_file = in_theme_dir("_config.yml")
+      return config unless File.exist?(theme_config_file)
+
+      # Bail out if the theme_config_file is a symlink file irrespective of safe mode
+      return config if File.symlink?(theme_config_file)
+
+      theme_config = SafeYAML.load_file(theme_config_file)
+      return config unless theme_config.is_a?(Hash)
+
+      Jekyll.logger.info "Theme Config file:", theme_config_file
+
+      # theme_config should not be overriding Jekyll's defaults
+      theme_config.delete_if { |key, _| Configuration::DEFAULTS.key?(key) }
+
+      # Override theme_config with existing config and return the result.
+      Utils.deep_merge_hashes(theme_config, config)
+    end
 
     # Limits the current posts; removes the posts which exceed the limit_posts
     #
@@ -419,6 +465,12 @@ module Jekyll
     # Returns The Cleaner
     def site_cleaner
       @site_cleaner ||= Cleaner.new(self)
+    end
+
+    # Disable Marshaling cache to disk in Safe Mode
+    def configure_cache
+      Jekyll::Cache.cache_dir = in_source_dir(config["cache_dir"], "Jekyll/Cache")
+      Jekyll::Cache.disable_disk_cache! if safe
     end
 
     def configure_plugins
@@ -460,13 +512,14 @@ module Jekyll
     end
 
     def render_pages(payload)
-      pages.flatten.each do |page|
+      pages.each do |page|
         render_regenerated(page, payload)
       end
     end
 
     def render_regenerated(document, payload)
       return unless regenerator.regenerate?(document)
+
       document.output = Jekyll::Renderer.new(self, document, payload).run
       document.trigger_hooks(:post_render)
     end

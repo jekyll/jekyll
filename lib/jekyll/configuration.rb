@@ -9,6 +9,7 @@ module Jekyll
       "source"              => Dir.pwd,
       "destination"         => File.join(Dir.pwd, "_site"),
       "collections_dir"     => "",
+      "cache_dir"           => ".jekyll-cache",
       "plugins_dir"         => "_plugins",
       "layouts_dir"         => "_layouts",
       "data_dir"            => "_data",
@@ -18,10 +19,7 @@ module Jekyll
       # Handling Reading
       "safe"                => false,
       "include"             => [".htaccess"],
-      "exclude"             => %w(
-        Gemfile Gemfile.lock node_modules vendor/bundle/ vendor/cache/ vendor/gems/
-        vendor/ruby/
-      ),
+      "exclude"             => [],
       "keep_files"          => [".git", ".svn"],
       "encoding"            => "utf-8",
       "markdown_ext"        => "markdown,mkdown,mkdn,mkd,md",
@@ -73,6 +71,7 @@ module Jekyll
         "smart_quotes"  => "lsquo,rsquo,ldquo,rdquo",
         "input"         => "GFM",
         "hard_wrap"     => false,
+        "guess_lang"    => true,
         "footnote_nr"   => 1,
         "show_warnings" => false,
       },
@@ -91,7 +90,7 @@ module Jekyll
       # problems and backwards-compatibility.
       def from(user_config)
         Utils.deep_merge_hashes(DEFAULTS, Configuration[user_config].stringify_keys)
-          .add_default_collections
+          .add_default_collections.add_default_excludes
       end
     end
 
@@ -153,7 +152,7 @@ module Jekyll
       # Get configuration from <source>/_config.yml or <source>/<config_file>
       config_files = override["config"]
       if config_files.to_s.empty?
-        default = %w(yml yaml).find(-> { "yml" }) do |ext|
+        default = %w(yml yaml toml).find(-> { "yml" }) do |ext|
           File.exist?(Jekyll.sanitized_path(source(override), "_config.#{ext}"))
         end
         config_files = Jekyll.sanitized_path(source(override), "_config.#{default}")
@@ -168,6 +167,7 @@ module Jekyll
     #
     # Returns this configuration, overridden by the values in the file
     def read_config_file(file)
+      file = File.expand_path(file)
       next_config = safe_load_file(file)
       check_config_is_hash!(next_config, file)
       Jekyll.logger.info "Configuration file:", file
@@ -195,13 +195,14 @@ module Jekyll
       begin
         files.each do |config_file|
           next if config_file.nil? || config_file.empty?
+
           new_config = read_config_file(config_file)
           configuration = Utils.deep_merge_hashes(configuration, new_config)
         end
-      rescue ArgumentError => err
+      rescue ArgumentError => e
         Jekyll.logger.warn "WARNING:", "Error reading configuration. " \
                      "Using defaults (and options)."
-        warn err
+        warn e
       end
 
       configuration.backwards_compatibilize.add_default_collections
@@ -268,7 +269,22 @@ module Jekyll
       config
     end
 
-    def renamed_key(old, new, config, _ = nil)
+    DEFAULT_EXCLUDES = %w(
+      .sass-cache .jekyll-cache
+      gemfiles Gemfile Gemfile.lock
+      node_modules
+      vendor/bundle/ vendor/cache/ vendor/gems/ vendor/ruby/
+    ).freeze
+
+    def add_default_excludes
+      config = clone
+      return config if config["exclude"].nil?
+
+      config["exclude"].concat(DEFAULT_EXCLUDES).uniq!
+      config
+    end
+
+    def renamed_key(old, new, config)
       if config.key?(old)
         Jekyll::Deprecator.deprecation_message "The '#{old}' configuration" \
           " option has been renamed to '#{new}'. Please update your config" \
@@ -289,6 +305,8 @@ module Jekyll
         "/:categories/:year/:month/:day/:title:output_ext"
       when :ordinal
         "/:categories/:year/:y_day/:title:output_ext"
+      when :weekdate
+        "/:categories/:year/W:week/:short_day/:title:output_ext"
       else
         permalink_style.to_s
       end
