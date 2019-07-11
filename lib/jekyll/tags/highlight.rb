@@ -69,7 +69,7 @@ module Jekyll
         end
 
         options[:linenos] = "inline" if options[:linenos] == true
-        options[:start_line] = Integer(options[:start_line]) unless options[:start_line].nil?
+        options[:start_line] = Integer(options[:start_line]) if options[:start_line]
         options
       end
 
