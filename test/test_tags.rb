@@ -174,7 +174,7 @@ class TestTags < JekyllUnitTest
           %(<table class="rouge-table"><tbody>) +
             %(<tr><td class="gutter gl">) +
             %(<pre class="lineno">42\n</pre></td>) +
-            %(<td class="code"><pre>test</pre></td></tr>) +
+            %(<td class="code"><pre>test\n</pre></td></tr>) +
             %(</tbody></table>),
           @result
         )
