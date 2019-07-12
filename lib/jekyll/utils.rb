@@ -68,11 +68,14 @@ module Jekyll
     #
     # Returns an array
     def pluralized_array_from_hash(hash, singular_key, plural_key)
-      [].tap do |array|
-        value = value_from_singular_key(hash, singular_key)
-        value ||= value_from_plural_key(hash, plural_key)
-        array << value
-      end.flatten.compact
+      array = []
+      value = value_from_singular_key(hash, singular_key)
+      value ||= value_from_plural_key(hash, plural_key)
+
+      array << value
+      array.flatten!
+      array.compact!
+      array
     end
 
     def value_from_singular_key(hash, key)
