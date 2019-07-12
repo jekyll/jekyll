@@ -422,12 +422,14 @@ module Jekyll
     end
 
     def populate_categories
-      categories = Set.new(Array(data["categories"]))
-      categories.merge(
-        Utils.pluralized_array_from_hash(data, "category", "categories")
+      categories = Array(data["categories"]) + Utils.pluralized_array_from_hash(
+        data, "category", "categories"
       )
       categories.map!(&:to_s)
-      merge_data!("categories" => categories.to_a)
+      categories.flatten!
+      categories.uniq!
+
+      merge_data!("categories" => categories)
     end
 
     def populate_tags
