@@ -78,7 +78,14 @@ end
 
 In order for the highlighting to show up, you’ll need to include a highlighting
 stylesheet. For Pygments or Rouge you can use a stylesheet for Pygments, you
-can find an example gallery [here](http://help.farbox.com/pygments.html).
+can find an example gallery [here](https://github.com/richleland/pygments-css) or [here](http://jwarby.github.io/jekyll-pygments-themes/languages/ruby.html).
+
+Copy the CSS file (native.css for example)into your css directory. Import the syntax highlighter styles into your `main.css`
+
+```css
+@import(native.css);
+```
+
 
 ## Links
 
