@@ -54,7 +54,7 @@ module Jekyll
       end
 
       def validate_file_name(file)
-        if file.match?(INVALID_SEQUENCES) || !file.match?(VALID_FILENAME_CHARS)
+        if INVALID_SEQUENCES.match?(file) || !VALID_FILENAME_CHARS.match?(file)
           raise ArgumentError, <<~MSG
             Invalid syntax for include tag. File contains invalid characters or sequences:
 
@@ -90,7 +90,7 @@ module Jekyll
 
       # Render the variable if required
       def render_variable(context)
-        Liquid::Template.parse(@file).render(context) if @file.match?(VARIABLE_SYNTAX)
+        Liquid::Template.parse(@file).render(context) if VARIABLE_SYNTAX.match?(@file)
       end
 
       def tag_includes_dirs(context)
