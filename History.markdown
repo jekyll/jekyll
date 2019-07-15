@@ -291,6 +291,7 @@
   * fix link to Site Source config (#7708)
   * Add Jekpack to resources page (#7598)
   * Introduce frontmatter in step 2 (#7704)
+  * Add recursive navigation tutorial (#7720)
 
 ### Site Enhancements
 
