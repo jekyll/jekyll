@@ -83,7 +83,7 @@ can find an example gallery [here](https://jwarby.github.io/jekyll-pygments-them
 Copy the CSS file (`native.css` for example) into your css directory and import the syntax highlighter styles into your `main.css`:
 
 ```css
-@import(native.css);
+@import "native.css";
 ```
 
 
