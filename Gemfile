@@ -7,6 +7,7 @@ gemspec :name => "jekyll"
 # refinements introduced in i18n-1.3.0
 gem "i18n", "~> 1.2.0" if RUBY_ENGINE == "jruby"
 
+gem "liquid", :github => "Shopify/liquid"
 gem "rake", "~> 12.0"
 
 group :development do
