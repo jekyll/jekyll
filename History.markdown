@@ -165,6 +165,7 @@
   * Bump RuboCop to v0.71.0 (#7687)
   * Use regexp to filter special entries (#7702)
   * Reduce Array objects generated from utility method (#7749)
+  * Update mime.types (#7756)
 
 ### Documentation
 
