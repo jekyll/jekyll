@@ -4,7 +4,7 @@ module Jekyll
   class Configuration < Hash
     # Default options. Overridden by values in _config.yml.
     # Strings rather than symbols are used for compatibility with YAML.
-    DEFAULTS = Configuration[{
+    DEFAULTS = {
       # Where things are
       "source"              => Dir.pwd,
       "destination"         => File.join(Dir.pwd, "_site"),
@@ -75,7 +75,7 @@ module Jekyll
         "footnote_nr"   => 1,
         "show_warnings" => false,
       },
-    }.map { |k, v| [k, v.freeze] }].freeze
+    }.each_with_object(Configuration.new) { |(k, v), hsh| hsh[k] = v.freeze }.freeze
 
     class << self
       # Static: Produce a Configuration ready for use in a Site.
