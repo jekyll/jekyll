@@ -98,7 +98,7 @@ module Jekyll
     #
     # Return a copy of the hash where all its keys are strings
     def stringify_keys
-      reduce({}) { |hsh, (k, v)| hsh.merge(k.to_s => v) }
+      each_with_object({}) { |(k, v), hsh| hsh[k.to_s] = v }
     end
 
     def get_config_value_with_override(config_key, override)
@@ -254,7 +254,9 @@ module Jekyll
 
       # Ensure we have a hash.
       if config["collections"].is_a?(Array)
-        config["collections"] = Hash[config["collections"].map { |c| [c, {}] }]
+        config["collections"] = config["collections"].each_with_object({}) do |collection, hash|
+          hash[collection] = {}
+        end
       end
 
       config["collections"] = Utils.deep_merge_hashes(
