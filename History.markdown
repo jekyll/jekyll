@@ -294,6 +294,7 @@
   * Add Jekpack to resources page (#7598)
   * Introduce frontmatter in step 2 (#7704)
   * Add recursive navigation tutorial (#7720)
+  * Fix misspelling of &#34;additional&#34; (#7764)
 
 ### Site Enhancements
 
