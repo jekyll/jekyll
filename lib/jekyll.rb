@@ -65,6 +65,7 @@ module Jekyll
   autoload :LogAdapter,          "jekyll/log_adapter"
   autoload :Page,                "jekyll/page"
   autoload :PageWithoutAFile,    "jekyll/page_without_a_file"
+  autoload :PathManager,         "jekyll/path_manager"
   autoload :PluginManager,       "jekyll/plugin_manager"
   autoload :Publisher,           "jekyll/publisher"
   autoload :Reader,              "jekyll/reader"
