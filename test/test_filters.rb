@@ -1256,6 +1256,26 @@ class TestFilters < JekyllUnitTest
       end
     end
 
+    context "pop_item filter" do
+      should "return the last item in the array by default" do
+        assert_equal "greeting", @filter.pop_item(%w(just a friendly greeting))
+      end
+      should "have the input array retain updates" do
+        greeting = %w(just a friendly greeting)
+        @filter.pop_item(greeting)
+        assert_equal %w(just a friendly), greeting
+      end
+      should "return multiple items popped" do
+        assert_equal %w(friendly greeting), @filter.pop_item(%w(just a friendly greeting), 2)
+      end
+      should "return an array when a number is specified" do
+        assert_equal %w(greeting), @filter.pop_item(%w(just a friendly greeting), 1)
+      end
+      should "cast string inputs for numbers into actual numbers" do
+        assert_equal %w(friendly greeting), @filter.pop_item(%w(just a friendly greeting), "2")
+      end
+    end
+
     context "sample filter" do
       should "return a random item from the array" do
         input = %w(hey there bernie)

@@ -257,6 +257,17 @@ module Jekyll
       new_ary
     end
 
+    def pop_item(array, num = nil)
+      return array unless array.is_a?(Array)
+
+      unless num.nil?
+        num = Liquid::Utils.to_integer(num)
+        array.pop(num)
+      else
+        array.pop
+      end
+    end
+
     def push(array, input)
       return array unless array.is_a?(Array)
 
