@@ -296,6 +296,7 @@
   * Introduce frontmatter in step 2 (#7704)
   * Add recursive navigation tutorial (#7720)
   * Fix misspelling of &#34;additional&#34; (#7764)
+  * docs: improve how to include rouge stylesheets (#7752)
 
 ### Site Enhancements
 
