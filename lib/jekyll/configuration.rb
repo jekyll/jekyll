@@ -4,7 +4,7 @@ module Jekyll
   class Configuration < Hash
     # Default options. Overridden by values in _config.yml.
     # Strings rather than symbols are used for compatibility with YAML.
-    DEFAULTS = Configuration[{
+    DEFAULTS = {
       # Where things are
       "source"              => Dir.pwd,
       "destination"         => File.join(Dir.pwd, "_site"),
@@ -75,7 +75,7 @@ module Jekyll
         "footnote_nr"   => 1,
         "show_warnings" => false,
       },
-    }.map { |k, v| [k, v.freeze] }].freeze
+    }.each_with_object(Configuration.new) { |(k, v), hsh| hsh[k] = v.freeze }.freeze
 
     class << self
       # Static: Produce a Configuration ready for use in a Site.
@@ -94,7 +94,7 @@ module Jekyll
     #
     # Return a copy of the hash where all its keys are strings
     def stringify_keys
-      reduce({}) { |hsh, (k, v)| hsh.merge(k.to_s => v) }
+      each_with_object({}) { |(k, v), hsh| hsh[k.to_s] = v }
     end
 
     def get_config_value_with_override(config_key, override)
@@ -235,7 +235,9 @@ module Jekyll
 
       # Ensure we have a hash.
       if config["collections"].is_a?(Array)
-        config["collections"] = Hash[config["collections"].map { |c| [c, {}] }]
+        config["collections"] = config["collections"].each_with_object({}) do |collection, hash|
+          hash[collection] = {}
+        end
       end
 
       config["collections"] = Utils.deep_merge_hashes(
