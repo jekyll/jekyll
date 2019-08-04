@@ -312,6 +312,7 @@
 ### release
 
   * Release v4.0.0.pre.alpha1 (#7574)
+  * Prepare Jekyll 4.0.0 beta1 (#7716)
 
 ## 3.8.6 / 2019-07-02
 
