@@ -4,6 +4,7 @@ date: 2019-08-04 10:43:31 -0500
 author: mattr-
 version: 4.0.0.pre.beta1
 categories: [release]
+redirect_from: /news/2019/07/20/jekyll-4-0-0-pre-beta1-released/
 ---
 
 Dear Jekyllers,
