@@ -300,6 +300,7 @@
   * Add recursive navigation tutorial (#7720)
   * Fix misspelling of &#34;additional&#34; (#7764)
   * docs: improve how to include rouge stylesheets (#7752)
+  * Added Bonsai Search (#7543)
 
 ### Site Enhancements
 
