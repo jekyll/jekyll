@@ -110,6 +110,7 @@
   * Reduce allocations from where-filter (#7653)
   * Memoize SiteDrop#documents to reduce allocations (#7697)
   * Add PathManager class to cache interim paths (#7732)
+  * Remove warnings and fixes for deprecated config (#7440)
 
 ### Development Fixes
 
