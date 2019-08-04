@@ -1,6 +1,6 @@
 ---
 title: Jekyll 4.0.0.pre.beta1 Released
-date: 2019-07-20 10:43:31 -0500
+date: 2019-08-04 10:43:31 -0500
 author: mattr-
 version: 4.0.0.pre.beta1
 categories: [release]
