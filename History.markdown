@@ -172,6 +172,7 @@
   * Replace redundant Array#map with Array#each (#7761)
   * Fix: rubocop offenses (#7769)
   * Reduce allocations by using #each_with_object (#7758)
+  * Memoize fallback_data for Drop (#7728)
 
 ### Documentation
 
