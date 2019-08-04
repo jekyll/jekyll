@@ -111,6 +111,7 @@
   * Memoize SiteDrop#documents to reduce allocations (#7697)
   * Add PathManager class to cache interim paths (#7732)
   * Remove warnings and fixes for deprecated config (#7440)
+  * Delegate --profile tabulation to `terminal-table` (#7627)
 
 ### Development Fixes
 
