@@ -34,7 +34,7 @@ class TestPageWithoutAFile < JekyllUnitTest
       end
 
       should "identify itself properly" do
-        assert_equal "#<Jekyll::PageWithoutAFile @name=\"properties.html\">", @page.inspect
+        assert_equal '#<Jekyll::PageWithoutAFile @relative_path="properties.html">', @page.inspect
       end
 
       should "not have page-content and page-data defined within it" do

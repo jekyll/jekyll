@@ -3,7 +3,7 @@ title: 'Jekyll 1.5.0 Released'
 date: 2014-03-24 20:37:59 -0400
 author: parkr
 version: 1.5.0
-categories: [release]
+category: release
 ---
 
 As work continues on Jekyll 2.0.0, we felt it was important to address two key

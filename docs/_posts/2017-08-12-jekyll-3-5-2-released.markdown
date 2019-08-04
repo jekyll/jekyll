@@ -3,7 +3,7 @@ title: 'Jekyll 3.5.2 Released'
 date: 2017-08-12 16:31:40 -0400
 author: parkr
 version: 3.5.2
-categories: [release]
+category: release
 ---
 
 3.5.2 is out with 6 great bug fixes, most notably one which should dramatically speed up generation of your site! In testing #6266, jekyllrb.com generation when from 18 seconds down to 8! Here is the full line-up of fixes:

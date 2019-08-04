@@ -2,6 +2,8 @@
 layout: page
 title: Resources
 permalink: /resources/
+redirect_from:
+ - /docs/resources/
 ---
 Jekyll's growing community produces wide variety of themes, plugins, tutorials
 and other resources that can be helpful. Below is a collection of links to
@@ -43,25 +45,30 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [Talkyard](https://www.talkyard.io/blog-comments): Embedded comments for Jekyll and others (free and open source, or hosted serverless)
 
 ### Content Management
-  - [Contentful](https://www.contentful.com/ecosystem/jekyll/): use Jekyll together with the API-driven Contentful CMS.
   - [CloudCannon](https://cloudcannon.com/): The Cloud CMS for Jekyll
+  - [Contentful](https://github.com/contentful/jekyll-contentful-data-import) Content infrastructure for digital teams
   - [Forestry.io](https://forestry.io/): A static CMS that commits
   - [Netlify CMS](https://www.netlifycms.org/): Open source content management for your Git workflow
-  - [Site Leaf](https://www.siteleaf.com/): Built for developers, Loved by everyone
+  - [Siteleaf](https://www.siteleaf.com/): Built for developers, Loved by everyone
+  - [Statictastic](https://www.statictastic.com/): Static site hosting, publishing and content management for teams
 
 ### E-commerce
   - [Snipcart](https://snipcart.com/blog/static-site-e-commerce-part-2-integrating-snipcart-with-jekyll): Add a shopping cart to a Jekyll site
 
 ### Forms
-
-  - [Formester](http://www.formester.com)
+  - [Getform](https://getform.io)
+  - [99Inbound](https://www.99inbound.com)
   - [Formingo](https://www.formingo.co/guides/jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=Jekyll%20Documentation)
   - [FormKeep](https://formkeep.com/guides/contact-form-jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=contact-form-jekyll)
+  - [Formspark](https://formspark.io/)
   - [Formspree (open source)](https://formspree.io/)
+  - [formX](https://formx.stream)
   - [Simple Form](https://getsimpleform.com/)
 
 ### Search
   - [Algolia](https://blog.algolia.com/instant-search-blog-documentation-jekyll-plugin/): Add a powerful instant search to your Jekyll site
+  - [Bonsai Search](https://docs.bonsai.io/article/217-jekyll): The easiest way to use Elasticsearch for your Jekyll site
+  - [CloudSh](https://cloudsh.com/generators/How-to-setup-search-on-Jekyll/): Website search with a few lines of JavaScript
 
 ## Other commentary
 
@@ -79,3 +86,4 @@ Use a SaaS service as a backend for functionality on your Jekyll site
 
 - A way to [extend Jekyll](https://github.com/rfelix/jekyll_ext) without forking and modifying the Jekyll gem codebase and some [portable Jekyll extensions](https://wiki.github.com/rfelix/jekyll_ext/extensions) that can be reused and shared.
 - [Using your Rails layouts in Jekyll](http://numbers.brighterplanet.com/2010/08/09/sharing-rails-views-with-jekyll)
+- [Jekpack](https://github.com/yfxie/jekpack/) an integration of Jekyll and Webpack to make them work together.

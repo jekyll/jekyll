@@ -708,6 +708,15 @@ h5 > code,
     0 -1px 0 rgba(0,0,0,.5));
 }
 
+.note .highlight {
+  width: 94%;
+  pre code {
+    font-size: 0.9em;
+    background-color: transparent;
+    box-shadow: none;
+  }
+}
+
 .note code {
   background-color: #333;
   background-color: rgba(0,0,0,0.2);

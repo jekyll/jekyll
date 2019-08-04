@@ -35,6 +35,11 @@ class TestPage < JekyllUnitTest
         assert_equal "/contacts.html", @page.url
       end
 
+      should "create proper URL from filename" do
+        @page = setup_page("trailing-dots...md")
+        assert_equal "/trailing-dots.html", @page.url
+      end
+
       should "not published when published yaml is false" do
         @page = setup_page("unpublished.html")
         assert_equal false, @page.published?

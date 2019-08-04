@@ -75,4 +75,29 @@ class TestThemeAssetsReader < JekyllUnitTest
       refute_file_with_relative_path site.pages, "assets/style.scss"
     end
   end
+
+  context "symlinked theme" do
+    should "not read assets from symlinked theme" do
+      skip_if_windows "Jekyll does not currently support symlinks on Windows."
+
+      begin
+        tmp_dir = Dir.mktmpdir("jekyll-theme-test")
+        File.open(File.join(tmp_dir, "test.txt"), "wb") { |f| f.write "content" }
+
+        theme_dir = File.join(__dir__, "fixtures", "test-theme-symlink")
+        File.symlink(tmp_dir, File.join(theme_dir, "assets"))
+
+        site = fixture_site(
+          "theme"       => "test-theme-symlink",
+          "theme-color" => "black"
+        )
+        ThemeAssetsReader.new(site).read
+
+        assert_empty site.static_files, "static file should not have been picked up"
+      ensure
+        FileUtils.rm_rf(tmp_dir)
+        FileUtils.rm_rf(File.join(theme_dir, "assets"))
+      end
+    end
+  end
 end

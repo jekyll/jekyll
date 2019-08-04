@@ -43,7 +43,7 @@ Create your first layout at `_layouts/default.html` with the following content:
 You'll notice this is almost identical to `index.html` except there's
 no front matter and the content of the page is replaced with a `content`
 variable. `content` is a special variable which has the value of the rendered
-content of the page its called on.
+content of the page it's called on.
 
 To have `index.html` use this layout, you can set a `layout` variable in front
 matter. The layout wraps around the content of the page so all you need in

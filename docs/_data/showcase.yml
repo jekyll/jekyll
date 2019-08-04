@@ -8,6 +8,14 @@
   categories:
     - software
     - knowledgebase
+- name: Vesterheim Norwegian-American Museum
+  url: http://vesterheim.org/
+  categories:
+    - marketing-site
+- name: KOTN
+  url: https://kotn.com/
+  categories:
+   - marketing-site
 - name: MvvmCross
   url: https://www.mvvmcross.com/
   categories:
@@ -120,16 +128,6 @@
   categories:
     - software
     - marketing-site
-- name: SiteLeaf
-  url: https://siteleaf.com
-  categories:
-    - software
-    - marketing-site
-- name: CloudCannon
-  url: https://cloudcannon.com/
-  categories:
-    - software
-    - marketing-site
 - name: AdHawk
   url: https://www.tryadhawk.com/
   categories:
@@ -159,27 +157,18 @@
   url: http://cssreference.io/
   categories:
     - documentation
-- name: Sketch App
-  url: https://sketchapp.com/
-  categories:
-    - software
-    - marketing-site
 - name: Chain
   url: https://chain.com/
   categories:
     - marketing-site
+- name: Boxy Suite
+  url: https://www.boxysuite.com/
+  categories:
+    - marketing-site
+    - software
 - name: Pattern Lab
   url: http://patternlab.io/
   categories:
-    - documentation
-- name: Netflix Devices
-  url: https://devices.netflix.com/en/
-  categories:
-    - marketing-site
-- name: Ruby on Rails
-  url: http://rubyonrails.org/
-  categories:
-    - marketing-site
     - documentation
 - name: IBM MobileFirst Foundation
   url: https://mobilefirstplatform.ibmcloud.com/
@@ -198,6 +187,25 @@
   url: https://developmentseed.org/
   categories:
     - agency
+- name: Isomer - Singapore Government Static Websites
+  url: https://isomer.gov.sg/
+  categories:
+    - government
+- name: SiteLeaf
+  url: https://siteleaf.com
+  categories:
+    - software
+    - marketing-site
+- name: CloudCannon
+  url: https://cloudcannon.com/
+  categories:
+    - software
+    - marketing-site
+- name: Ruby on Rails
+  url: http://rubyonrails.org/
+  categories:
+    - marketing-site
+    - documentation
 - name: White House Social and Behavioral Sciences Team
   url: https://sbst.gov/
   categories:
@@ -206,14 +214,15 @@
   url: https://worldstatisticsday.org
   categories:
     - government
-- name: Vesterheim Norwegian-American Museum
-  url: http://vesterheim.org/
+- name: Sketch App
+  url: https://sketchapp.com/
+  categories:
+    - software
+    - marketing-site
+- name: Netflix Devices
+  url: https://devices.netflix.com/en/
   categories:
     - marketing-site
-- name: KOTN
-  url: https://kotn.com/
-  categories:
-   - marketing-site
 - name: TwitchCon
   url: https://www.twitchcon.com/
   categories:
@@ -230,7 +239,3 @@
     - marketing-site
     - documentation
     - software
-- name: Isomer - Singapore Government Static Websites
-  url: https://isomer.gov.sg/
-  categories:
-    - government

@@ -3,45 +3,55 @@ title: Jekyll on macOS
 permalink: /docs/installation/macos/
 ---
 
+## Install Command Line Tools
 First, you need to install the command-line tools to be able to compile native extensions, open a terminal and run:
 
 ```sh
 xcode-select --install
 ```
 
-## Set up Ruby included with the OS
+## Install Ruby
 
-Check your Ruby version meets our requirements. Jekyll requires Ruby 2.2.5 or above. If you're running an older version you'll need to [install a more recent Ruby version via Homebrew](#homebrew).
+Jekyll requires Ruby > {{ site.min_ruby_version }}.
+As macOS Mojave 10.14 comes only with ruby 2.3.x, you'll have to install a newer version of Ruby.
 
-```sh
-ruby -v
-2.3.3
-```
-
-Now install Jekyll and [Bundler](/docs/ruby-101/#bundler).
+### With Homebrew {#brew}
+To run the latest Ruby version you need to install it through [Homebrew](https://brew.sh).
 
 ```sh
-gem install bundler jekyll
-```
-
-### Install a newer Ruby version via Homebrew {#homebrew}
-
-If you wish to install the latest version of Ruby and get faster builds, we recommend doing it via [Homebrew](https://brew.sh) a handy package manager for macOS.
-
-```sh
+# Install Homebrew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
 brew install ruby
-ruby -v
-ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin17]
 ```
 
-### Install multiple Ruby versions with rbenv {#rbenv}
+Don't forget to add the brew ruby path to your shell config :
 
-Developers often use [rbenv](https://github.com/rbenv/rbenv) to manage multiple
-Ruby versions. This can be useful if you want to run the same Ruby version used
-by your colleagues/collaborators.
+```
+export PATH=/usr/local/opt/ruby/bin:$PATH
+```
+
+Then relaunch your terminal and check your updated Ruby setup:
 
 ```sh
+which ruby
+# /usr/local/opt/ruby/bin/ruby
+
+ruby -v
+# ruby 2.6.2p47 (2019-03-13 revision 67232) [x86_64-darwin18]
+```
+
+Yay, we are now running current stable Ruby!
+
+### With rbenv {#rbenv}
+
+People often use [rbenv](https://github.com/rbenv/rbenv) to manage multiple
+Ruby versions. This is very useful when you need to be able to run a given Ruby version on a project.
+
+```sh
+# Install Homebrew
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
 # Install rbenv and ruby-build
 brew install rbenv
 
@@ -53,17 +63,73 @@ curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor 
 ```
 
 Restart your terminal for changes to take effect.
-Now we can install the Ruby version of our choice, let's go with Ruby 2.5.1 here:
+Now you can install the Ruby version of our choice, let's go with current latest stable Ruby:
 
 ```sh
-rbenv install 2.5.1
-rbenv global 2.5.1
+rbenv install 2.6.2
+rbenv global 2.6.2
 ruby -v
-ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin17]
+# ruby 2.6.2p47 (2019-03-13 revision 67232) [x86_64-darwin18]
 ```
 
 That's it! Head over [rbenv command references](https://github.com/rbenv/rbenv#command-reference) to learn how to use different versions of Ruby in your projects.
 
-### Problems?
+## Install Jekyll
+
+Now all that is left is installing [Bundler](/docs/ruby-101/#bundler) and Jekyll.
+
+### Local Install
+
+```sh
+gem install --user-install bundler jekyll
+```
+
+and then get your Ruby version using
+
+```sh
+ruby -v
+# ruby 2.6.1p33 (2019-01-30 revision 66950) [x86_64-darwin18]
+```
+
+Then append your path file with the following, replacing the `X.X` with the first two digits of your Ruby version.
+
+```
+export PATH=$HOME/.gem/ruby/X.X.0/bin:$PATH
+```
+
+To check your that you gem paths point to your home directory run:
+
+```sh
+gem env
+```
+
+And check that `GEM PATHS:` points to a path in your home directory
+
+{: .note }
+Every time you update Ruby to a version with a different first two digits, you will need to update your path to match.
+
+### Global Install
+
+{: .note .warning}
+We strongly recommend against installing Ruby gems globally to avoid file permissions problems and using `sudo`.
+
+#### On Mojave (10.14)
+
+Because of SIP Protections in Mojave, you must run:
+
+```sh
+sudo gem install bundler
+sudo gem install -n /usr/local/bin/ jekyll
+```
+
+#### Before Mojave (<10.14)
+
+You only have to run:
+
+```sh
+sudo gem install bundler jekyll
+```
+
+## Problems?
 
 Check out the [troubleshooting](/docs/troubleshooting/) page or [ask for help on our forum](https://talk.jekyllrb.com).

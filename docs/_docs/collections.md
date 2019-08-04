@@ -44,7 +44,10 @@ collections:
 Create a corresponding folder (e.g. `<source>/_staff_members`) and add
 documents. Front matter is processed if the front matter exists, and everything
 after the front matter is pushed into the document's `content` attribute. If no front
-matter is provided, Jekyll will not generate the file in your collection.
+matter is provided, Jekyll will consider it to be a [static file](/docs/static-files/)
+and copy it to the destination (e.g. `_site`) without processing. If front matter
+is provided, Jekyll will process the file in your collection but will not write to disk
+unless `output: true` is set in the collection's metadata.
 
 For example here's how you would add a staff member to the collection set above.
 The filename is `./_staff_members/jane.md` with the following content:
@@ -110,6 +113,58 @@ You can link to the generated page using the `url` attribute:
 
 There are special [permalink variables for collections](/docs/permalinks/) to
 help you control the output url for the entire collection.
+
+{% if site.version == '4.0.0' %}{% comment %} Remove this encapsulation when v4.0 ships {% endcomment %}
+
+## Custom Sorting of Documents
+
+By default, documents in a collection are sorted by their paths. But you can control this sorting via the collection's metadata.
+
+### Sort By Front Matter Key
+
+Documents can be sorted based on a front matter key by setting a `sort_by` metadata to the front matter key string. For example,
+to sort a collection of tutorials based on key `lesson`, the configuration would be:
+
+```yaml
+collections:
+  tutorials:
+    sort_by: lesson
+```
+
+The documents are arranged in the increasing order of the key's value. If a document does not have the front matter key defined
+then that document is placed immediately after sorted documents. When multiple documents do not have the front matter key defined,
+those documents are sorted by their dates or paths and then placed immediately after the sorted documents.
+
+### Manually Ordering Documents
+
+You can also manually order the documents by setting an `order` metadata with **the filenames listed** in the desired order.
+For example, a collection of tutorials would be configured as:
+
+```yaml
+collections:
+  tutorials:
+    order:
+      - hello-world.md
+      - introduction.md
+      - basic-concepts.md
+      - advanced-concepts.md
+```
+
+Any documents with filenames that do not match the list entry simply gets placed after the rearranged documents. If a document is
+nested under subdirectories, include them in entries as well:
+
+```yaml
+collections:
+  tutorials:
+    order:
+      - hello-world.md
+      - introduction.md
+      - concepts/basics.md
+      - concepts/advanced.md
+```
+
+If both metadata keys have been defined properly, `order` list takes precedence.
+{% endif %}
 
 ## Liquid Attributes
 

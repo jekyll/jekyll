@@ -50,8 +50,16 @@ To locate a theme's files on your computer:
    ```sh
    # On MacOS
    open $(bundle show minima)
+
    # On Windows
-   explorer /usr/local/lib/ruby/gems/2.3.0/gems/minima-2.1.0
+   # First get the gem's installation path:
+   #
+   #   bundle show minima
+   #   => C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/minima-2.1.0
+   #
+   # then invoke explorer with above path, substituting `/` with `\`
+   explorer C:\Ruby24-x64\lib\ruby\gems\2.4.0\gems\minima-2.1.0
+
    # On Linux
    xdg-open $(bundle show minima)
    ```
@@ -273,6 +281,24 @@ Your theme's styles can be included in the user's stylesheet using the `@import`
 Jekyll will automatically require all whitelisted `runtime_dependencies` of your theme-gem even if they're not explicitly included under the `plugins` array in the site's config file. (Note: whitelisting is only required when building or serving with the `--safe` option.)
 
 With this, the end-user need not keep track of the plugins required to be included in their config file for their theme-gem to work as intended.
+
+{% if site.version == '4.0.0' %}
+{% comment %} Remove this encapsulation when `v4.0` ships {% endcomment %}
+
+### Pre-configuring Theme-gems {%- include docs_version_badge.html version="4.0.0" -%}
+
+Jekyll will read-in a `_config.yml` at the root of the theme-gem and merge its data into the site's existing configuration data.
+
+But unlike other entities loaded from within the theme, loading the config file comes with a few restrictions, as summarized below:
+  * Jekyll's default settings cannot be overridden by a theme-config. That *ball is still in the user's court.*
+  * The theme-config-file cannot be a symlink, irrespective of `safe mode` and whether the file pointed to by the symlink is a legitimate file within the theme-gem.
+  * The theme-config should be a set of key-value pairs. An empty config file, a config file that simply *lists items* under a key, or a config file with just a simple string of text will simply be ignored silently. Users will not get a warning or any log output regarding this discrepancy.
+  * Any settings defined by the theme-config can be overridden by the user.
+
+While this feature is to enable easier adoption of a theme, the restrictions ensure that a theme-config cannot affect the build in a concerning manner. Any plugins required by the theme will have to be listed manually by the user or provided by the theme's `gemspec` file.
+
+This feature will let the theme-gem to work with *theme-specific config variables* out-of-the-box.
+{% endif %}
 
 ### Documenting your theme
 

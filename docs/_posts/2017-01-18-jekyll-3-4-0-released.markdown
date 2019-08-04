@@ -3,7 +3,7 @@ title: 'Jekyll turns 3.4.0'
 date: 2017-01-18 14:19:13 -0500
 author: parkr
 version: 3.4.0
-categories: [release]
+category: release
 ---
 
 Hey there! We have a quick update of Jekyll for you to enjoy this January.

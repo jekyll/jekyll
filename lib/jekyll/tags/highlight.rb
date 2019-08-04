@@ -10,7 +10,7 @@ module Jekyll
       # forms: name, name=value, or name="<quoted list>"
       #
       # <quoted list> is a space-separated list of numbers
-      SYNTAX = %r!^([a-zA-Z0-9.+#_-]+)((\s+\w+(=(\w+|"([0-9]+\s)*[0-9]+"))?)*)$!
+      SYNTAX = %r!^([a-zA-Z0-9.+#_-]+)((\s+\w+(=(\w+|"([0-9]+\s)*[0-9]+"))?)*)$!.freeze
 
       def initialize(tag_name, markup, tokens)
         super
@@ -28,10 +28,12 @@ module Jekyll
         end
       end
 
+      LEADING_OR_TRAILING_LINE_TERMINATORS = %r!\A(\n|\r)+|(\n|\r)+\z!.freeze
+
       def render(context)
         prefix = context["highlighter_prefix"] || ""
         suffix = context["highlighter_suffix"] || ""
-        code = super.to_s.gsub(%r!\A(\n|\r)+|(\n|\r)+\z!, "")
+        code = super.to_s.gsub(LEADING_OR_TRAILING_LINE_TERMINATORS, "")
 
         output =
           case context.registers[:site].highlighter
@@ -49,7 +51,7 @@ module Jekyll
 
       private
 
-      OPTIONS_REGEX = %r!(?:\w="[^"]*"|\w=\w|\w)+!
+      OPTIONS_REGEX = %r!(?:\w="[^"]*"|\w=\w|\w)+!.freeze
 
       def parse_options(input)
         options = {}
