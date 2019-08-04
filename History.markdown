@@ -171,6 +171,7 @@
   * Update mime.types (#7756)
   * Replace redundant Array#map with Array#each (#7761)
   * Fix: rubocop offenses (#7769)
+  * Reduce allocations by using #each_with_object (#7758)
 
 ### Documentation
 
