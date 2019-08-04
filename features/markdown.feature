@@ -21,7 +21,7 @@ Feature: Markdown
     Given I have a configuration file with:
       | key      | value             |
       | paginate | 5                 |
-      | gems     | [jekyll-paginate] |
+      | plugins  | [jekyll-paginate] |
     And I have an "index.html" page that contains "Index - {% for post in paginator.posts %} {{ post.content }} {% endfor %}"
     And I have a _posts directory
     And I have the following post:
