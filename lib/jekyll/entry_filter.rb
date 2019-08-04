@@ -53,7 +53,7 @@ module Jekyll
     end
 
     def backup?(entry)
-      entry[-1..-1] == "~"
+      entry.end_with?("~")
     end
 
     def excluded?(entry)
