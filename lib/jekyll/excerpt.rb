@@ -10,7 +10,7 @@ module Jekyll
 
     def_delegators :@doc,
                    :site, :name, :ext, :extname,
-                   :collection, :related_posts,
+                   :collection, :related_posts, :type,
                    :coffeescript_file?, :yaml_file?,
                    :url, :next_doc, :previous_doc
 
@@ -77,7 +77,7 @@ module Jekyll
 
     # Returns the shorthand String identifier of this doc.
     def inspect
-      "<Excerpt: #{id}>"
+      "<#{self.class} id=#{id}>"
     end
 
     def output
@@ -132,33 +132,46 @@ module Jekyll
     # Returns excerpt String
 
     LIQUID_TAG_REGEX = %r!{%-?\s*(\w+)\s*.*?-?%}!m.freeze
-    MKDWN_LINK_REF_REGEX = %r!^ {0,3}\[[^\]]+\]:.+$!.freeze
+    MKDWN_LINK_REF_REGEX = %r!^ {0,3}(?:(\[[^\]]+\])(:.+))$!.freeze
 
     def extract_excerpt(doc_content)
       head, _, tail = doc_content.to_s.partition(doc.excerpt_separator)
-
-      # append appropriate closing tag(s) (for each Liquid block), to the `head` if the
-      # partitioning resulted in leaving the closing tag somewhere in the `tail` partition.
-      if head.include?("{%")
-        modified  = false
-        tag_names = head.scan(LIQUID_TAG_REGEX)
-        tag_names.flatten!
-        tag_names.reverse_each do |tag_name|
-          next unless liquid_block?(tag_name)
-          next if head =~ endtag_regex_stash(tag_name)
-
-          modified = true
-          head << "\n{% end#{tag_name} %}"
-        end
-        print_build_warning if modified
-      end
-
       return head if tail.empty?
 
-      head << "\n\n" << tail.scan(MKDWN_LINK_REF_REGEX).join("\n")
+      head = sanctify_liquid_tags(head) if head.include?("{%")
+      definitions = extract_markdown_link_reference_defintions(head, tail)
+      return head if definitions.empty?
+
+      head << "\n\n" << definitions.join("\n")
     end
 
     private
+
+    # append appropriate closing tag(s) (for each Liquid block), to the `head` if the
+    # partitioning resulted in leaving the closing tag somewhere in the `tail` partition.
+    def sanctify_liquid_tags(head)
+      modified  = false
+      tag_names = head.scan(LIQUID_TAG_REGEX)
+      tag_names.flatten!
+      tag_names.reverse_each do |tag_name|
+        next unless liquid_block?(tag_name)
+        next if endtag_regex_stash(tag_name).match?(head)
+
+        modified = true
+        head << "\n{% end#{tag_name} %}"
+      end
+
+      print_build_warning if modified
+      head
+    end
+
+    def extract_markdown_link_reference_defintions(head, tail)
+      [].tap do |definitions|
+        tail.scan(MKDWN_LINK_REF_REGEX).each do |segments|
+          definitions << segments.join if head.include?(segments[0])
+        end
+      end
+    end
 
     def endtag_regex_stash(tag_name)
       @endtag_regex_stash ||= {}
@@ -167,7 +180,7 @@ module Jekyll
 
     def liquid_block?(tag_name)
       return false unless tag_name.is_a?(String)
-      return false if tag_name.start_with?("end")
+      return false unless Liquid::Template.tags[tag_name]
 
       Liquid::Template.tags[tag_name].ancestors.include?(Liquid::Block)
     rescue NoMethodError

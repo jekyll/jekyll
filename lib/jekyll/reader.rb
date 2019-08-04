@@ -14,6 +14,7 @@ module Jekyll
     def read
       @site.layouts = LayoutReader.new(site).read
       read_directories
+      read_included_excludes
       sort_files!
       @site.data = DataReader.new(site).read(site.config["data_dir"])
       CollectionReader.new(site).read
@@ -84,7 +85,7 @@ module Jekyll
     def retrieve_dirs(_base, dir, dot_dirs)
       dot_dirs.each do |file|
         dir_path = site.in_source_dir(dir, file)
-        rel_path = File.join(dir, file)
+        rel_path = PathManager.join(dir, file)
         @site.reader.read_directories(rel_path) unless @site.dest.chomp("/") == dir_path
       end
     end
@@ -157,6 +158,30 @@ module Jekyll
     # directories in current site.
     def post_reader
       @post_reader ||= PostReader.new(site)
+    end
+
+    def read_included_excludes
+      entry_filter = EntryFilter.new(site)
+
+      site.include.each do |entry|
+        next if entry == ".htaccess"
+
+        entry_path = site.in_source_dir(entry)
+        next if File.directory?(entry_path)
+        next if entry_filter.symlink?(entry_path)
+
+        read_included_file(entry_path) if File.file?(entry_path)
+      end
+    end
+
+    def read_included_file(entry_path)
+      dir  = File.dirname(entry_path).sub(site.source, "")
+      file = Array(File.basename(entry_path))
+      if Utils.has_yaml_header?(entry_path)
+        site.pages.concat(PageReader.new(site, dir).read(file))
+      else
+        site.static_files.concat(StaticFileReader.new(site, dir).read(file))
+      end
     end
   end
 end

@@ -282,6 +282,11 @@ class TestUtils < JekyllUnitTest
         Utils.slugify("The _config.yml file?", :mode => "none", :cased => true)
       )
     end
+
+    should "records a warning in the log if the returned slug is empty" do
+      expect(Jekyll.logger).to receive(:warn)
+      assert_equal "", Utils.slugify("💎")
+    end
   end
 
   context "The \`Utils.titleize_slug\` method" do

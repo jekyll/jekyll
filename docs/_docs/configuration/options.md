@@ -352,7 +352,7 @@ before your site is served.
     <tr class="setting">
       <td>
         <p class="name"><strong>Base URL</strong></p>
-        <p class="description">Serve the website from the given base URL</p>
+        <p class="description">Serve the website from the given base URL.</p>
       </td>
       <td class="align-center">
         <p><code class="option">baseurl: URL</code></p>
@@ -361,8 +361,18 @@ before your site is served.
     </tr>
     <tr class="setting">
       <td>
+        <p class="name"><strong>Live Reload</strong></p>
+        <p class="description">Reload a page automatically on the browser when its content is edited.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">livereload: true</code></p>
+        <p><code class="flag">--livereload</code></p>
+      </td>
+    </tr>
+    <tr class="setting">
+      <td>
         <p class="name"><strong>Detach</strong></p>
-        <p class="description">Detach the server from the terminal</p>
+        <p class="description">Detach the server from the terminal.</p>
       </td>
       <td class="align-center">
         <p><code class="option">detach: BOOL</code></p>
@@ -371,7 +381,7 @@ before your site is served.
     </tr>
     <tr class="setting">
       <td>
-        <p class="name"><strong>Skips the initial site build.</strong></p>
+        <p class="name"><strong>Skips the initial site build</strong></p>
         <p class="description">Skips the initial site build which occurs before the server is started.</p>
       </td>
       <td class="align-center">
@@ -381,7 +391,7 @@ before your site is served.
     <tr class="setting">
       <td>
         <p class="name"><strong>X.509 (SSL) Private Key</strong></p>
-        <p class="description">SSL Private Key.</p>
+        <p class="description">SSL Private Key, stored or symlinked in the site source.</p>
       </td>
       <td class="align-center">
         <p><code class="flag">--ssl-key</code></p>
@@ -390,7 +400,7 @@ before your site is served.
     <tr class="setting">
       <td>
         <p class="name"><strong>X.509 (SSL) Certificate</strong></p>
-        <p class="description">SSL Public certificate.</p>
+        <p class="description">SSL Public certificate, stored or symlinked in the site source.</p>
       </td>
       <td class="align-center">
         <p><code class="flag">--ssl-cert</code></p>

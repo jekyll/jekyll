@@ -36,6 +36,12 @@ Next, add the following lines to hooks/post-receive and be sure Jekyll is
 installed on the server:
 
 ```bash
+#!/bin/bash -l
+
+# Install Ruby Gems to ~/gems
+export GEM_HOME=$HOME/gems
+export PATH=$GEM_HOME/bin:$PATH
+
 GIT_REPO=$HOME/myrepo.git
 TMP_GIT_CLONE=$HOME/tmp/myrepo
 GEMFILE=$TMP_GIT_CLONE/Gemfile

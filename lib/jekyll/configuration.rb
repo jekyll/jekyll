@@ -19,10 +19,7 @@ module Jekyll
       # Handling Reading
       "safe"                => false,
       "include"             => [".htaccess"],
-      "exclude"             => %w(
-        Gemfile Gemfile.lock node_modules vendor/bundle/ vendor/cache/ vendor/gems/
-        vendor/ruby/
-      ),
+      "exclude"             => [],
       "keep_files"          => [".git", ".svn"],
       "encoding"            => "utf-8",
       "markdown_ext"        => "markdown,mkdown,mkdn,mkd,md",
@@ -74,6 +71,7 @@ module Jekyll
         "smart_quotes"  => "lsquo,rsquo,ldquo,rdquo",
         "input"         => "GFM",
         "hard_wrap"     => false,
+        "guess_lang"    => true,
         "footnote_nr"   => 1,
         "show_warnings" => false,
       },
@@ -88,7 +86,7 @@ module Jekyll
       # Returns a Configuration filled with defaults.
       def from(user_config)
         Utils.deep_merge_hashes(DEFAULTS, Configuration[user_config].stringify_keys)
-          .add_default_collections
+          .add_default_collections.add_default_excludes
       end
     end
 
@@ -165,8 +163,13 @@ module Jekyll
     #
     # Returns this configuration, overridden by the values in the file
     def read_config_file(file)
+      file = File.expand_path(file)
       next_config = safe_load_file(file)
-      check_config_is_hash!(next_config, file)
+
+      unless next_config.is_a?(Hash)
+        raise ArgumentError, "Configuration file: (INVALID) #{file}".yellow
+      end
+
       Jekyll.logger.info "Configuration file:", file
       next_config
     rescue SystemCallError
@@ -195,9 +198,9 @@ module Jekyll
           new_config = read_config_file(config_file)
           configuration = Utils.deep_merge_hashes(configuration, new_config)
         end
-      rescue ArgumentError => err
+      rescue ArgumentError => e
         Jekyll.logger.warn "WARNING:", "Error reading configuration. Using defaults (and options)."
-        warn err
+        warn e
       end
 
       configuration.validate.add_default_collections
@@ -214,7 +217,7 @@ module Jekyll
 
     # Public: Ensure the proper options are set in the configuration
     #
-    # Returns the backwards-compatible configuration
+    # Returns the configuration Hash
     def validate
       config = clone
 
@@ -247,6 +250,21 @@ module Jekyll
       config
     end
 
+    DEFAULT_EXCLUDES = %w(
+      .sass-cache .jekyll-cache
+      gemfiles Gemfile Gemfile.lock
+      node_modules
+      vendor/bundle/ vendor/cache/ vendor/gems/ vendor/ruby/
+    ).freeze
+
+    def add_default_excludes
+      config = clone
+      return config if config["exclude"].nil?
+
+      config["exclude"].concat(DEFAULT_EXCLUDES).uniq!
+      config
+    end
+
     private
 
     def style_to_permalink(permalink_style)
@@ -259,26 +277,17 @@ module Jekyll
         "/:categories/:year/:month/:day/:title:output_ext"
       when :ordinal
         "/:categories/:year/:y_day/:title:output_ext"
+      when :weekdate
+        "/:categories/:year/W:week/:short_day/:title:output_ext"
       else
         permalink_style.to_s
       end
     end
 
-    # Private: Checks if a given config is a hash
-    #
-    # extracted_config - the value to check
-    # file - the file from which the config was extracted
-    #
-    # Raises an ArgumentError if given config is not a hash
-    def check_config_is_hash!(extracted_config, file)
-      return if extracted_config.is_a?(Hash)
-
-      raise ArgumentError, "Configuration file: (INVALID) #{file}".yellow
-    end
-
     def check_include_exclude(config)
       %w(include exclude).each do |option|
-        next unless config[option].is_a?(String)
+        next unless config.key?(option)
+        next if config[option].is_a?(Array)
 
         raise Jekyll::Errors::InvalidConfigurationError,
               "'#{option}' should be set as an array, but was: #{config[option].inspect}."
@@ -290,10 +299,10 @@ module Jekyll
     # config - the config hash
     #
     # Raises a Jekyll::Errors::InvalidConfigurationError if the config `plugins`
-    # is a string
+    # is not an Array.
     def check_plugins(config)
       return unless config.key?("plugins")
-      return unless config["plugins"].is_a?(String)
+      return if config["plugins"].is_a?(Array)
 
       Jekyll.logger.error "'plugins' should be set as an array of gem-names, but was: " \
         "#{config["plugins"].inspect}. Use 'plugins_dir' instead to set the directory " \

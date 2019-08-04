@@ -161,7 +161,7 @@ module Jekyll
         end
 
         def url_absolute(url)
-          return true if Addressable::URI.parse(url).absolute?
+          return true if url.is_a?(String) && Addressable::URI.parse(url).absolute?
 
           Jekyll.logger.warn "Warning:", "Your site URL does not seem to be absolute, "\
               "check the value of `url` in your config file."

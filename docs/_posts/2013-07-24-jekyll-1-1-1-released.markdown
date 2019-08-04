@@ -3,7 +3,7 @@ title: "Jekyll 1.1.1 Released"
 date: "2013-07-24 22:24:14 +0200"
 author: parkr
 version: 1.1.1
-categories: [release]
+category: release
 ---
 
 Coming just 10 days after the release of v1.1.0, v1.1.1 is out with a patch for

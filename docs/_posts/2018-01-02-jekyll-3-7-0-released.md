@@ -4,7 +4,7 @@ description: "Jekyll 3.7.0 brings LiveReload, a directory for your collections a
 date: 2018-01-02 11:21:40 +0100
 author: DirtyF
 version: 3.7.0
-categories: [release]
+category: release
 ---
 
 We're happy to release a new minor for the new year.

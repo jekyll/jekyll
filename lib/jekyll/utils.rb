@@ -17,14 +17,7 @@ module Jekyll
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
     SLUGIFY_ASCII_REGEXP = Regexp.new("[^[A-Za-z0-9]]+").freeze
 
-    # Takes an indented string and removes the preceding spaces on each line
-
-    def strip_heredoc(str)
-      str.gsub(%r!^[ \t]{#{(str.scan(%r!^[ \t]*(?=\S)!).min || "").size}}!, "")
-    end
-
     # Takes a slug and turns it into a simple title.
-
     def titleize_slug(slug)
       slug.split("-").map!(&:capitalize).join(" ")
     end
@@ -75,11 +68,14 @@ module Jekyll
     #
     # Returns an array
     def pluralized_array_from_hash(hash, singular_key, plural_key)
-      [].tap do |array|
-        value = value_from_singular_key(hash, singular_key)
-        value ||= value_from_plural_key(hash, plural_key)
-        array << value
-      end.flatten.compact
+      array = []
+      value = value_from_singular_key(hash, singular_key)
+      value ||= value_from_plural_key(hash, plural_key)
+
+      array << value
+      array.flatten!
+      array.compact!
+      array
     end
 
     def value_from_singular_key(hash, key)
@@ -142,7 +138,7 @@ module Jekyll
     # Returns true if the YAML front matter is present.
     # rubocop: disable PredicateName
     def has_yaml_header?(file)
-      !!(File.open(file, "rb", &:readline) =~ %r!\A---\s*\r?\n!)
+      File.open(file, "rb", &:readline).match? %r!\A---\s*\r?\n!
     rescue EOFError
       false
     end
@@ -222,6 +218,7 @@ module Jekyll
       slug.gsub!(%r!^\-|\-$!i, "")
 
       slug.downcase! unless cased
+      Jekyll.logger.warn("Warning:", "Empty `slug` generated for '#{string}'.") if slug.empty?
       slug
     end
 

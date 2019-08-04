@@ -3,10 +3,10 @@ title: 'Jekyll 3.8.5 Released'
 date: 2018-11-04 20:58:20 +0100
 author: oe
 version: 3.8.5
-categories: [release]
+category: release
 ---
 
-This release fixes a bug where multiple Liquid tags were not supported in 
+This release fixes a bug where multiple Liquid tags were not supported in
 excerpts.
 
 Thanks to @ashmaroli for fixing this issue in [#7250].
