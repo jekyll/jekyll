@@ -168,6 +168,7 @@
   * Reduce Array objects generated from utility method (#7749)
   * Update mime.types (#7756)
   * Replace redundant Array#map with Array#each (#7761)
+  * Fix: rubocop offenses (#7769)
 
 ### Documentation
 
