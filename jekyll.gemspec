@@ -60,7 +60,7 @@ Gem::Specification.new do |s|
         You shouldn't prepend `{{ site.baseurl }}` to `{% post_url 2019-03-27-hello %}`
         For further details: https://github.com/jekyll/jekyll/pull/7589
 
-      * Support for deprecated configuration options have been removed. We will no longer
+      * Support for deprecated configuration options has been removed. We will no longer
         output a warning and gracefully assign their values to the newer counterparts
         internally.
     -------------------------------------------------------------------------------------
