@@ -251,7 +251,7 @@ class TestSite < JekyllUnitTest
         # files in symlinked directories may appear twice
         sorted_pages.push("main.scss", "main.css.map", "symlinked-file").sort!
       end
-      assert_equal sorted_pages, @site.pages.map(&:name)
+      assert_equal sorted_pages, @site.pages.map(&:name).sort!
     end
 
     should "read posts" do
