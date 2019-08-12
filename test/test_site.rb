@@ -241,6 +241,7 @@ class TestSite < JekyllUnitTest
         index.html
         info.md
         main.scss
+        main.css.map
         properties.html
         sitemap.xml
         static_files.html
@@ -248,7 +249,7 @@ class TestSite < JekyllUnitTest
       )
       unless Utils::Platforms.really_windows?
         # files in symlinked directories may appear twice
-        sorted_pages.push("main.scss", "symlinked-file").sort!
+        sorted_pages.push("main.scss", "main.css.map", "symlinked-file").sort!
       end
       assert_equal sorted_pages, @site.pages.map(&:name)
     end
