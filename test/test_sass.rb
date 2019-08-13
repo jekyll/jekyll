@@ -14,12 +14,7 @@ class TestSass < JekyllUnitTest
     end
 
     should "import SCSS partial" do
-      result = <<~CSS
-        .half { width: 50%; }
-
-        /*# sourceMappingURL=main.css.map */
-      CSS
-      assert_equal result.rstrip, File.read(@test_css_file)
+      assert_equal ".half {\n  width: 50%; }\n", File.read(@test_css_file)
     end
 
     should "register the SCSS converter" do

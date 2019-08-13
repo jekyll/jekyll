@@ -21,7 +21,7 @@ Feature: Writing themes
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see ".sample { color: black; }\n\n\/\*# sourceMappingURL=main.css.map \*\/" in "_site/css/main.css"
+    And I should see ".sample {\n  color: black; }" in "_site/css/main.css"
 
   Scenario: A theme with an include
     Given I have a configuration file with "theme" set to "test-theme"
