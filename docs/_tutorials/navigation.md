@@ -53,7 +53,7 @@ docs:
 <h2>{{ site.data.samplelist.docs_list_title }}</h2>
 <ul>
    {% for item in site.data.samplelist.docs %}
-      <li><a href="{{ item.url }}" alt="{{ item.title }}">{{ item.title }}</a></li>
+      <li><a href="{{ item.url }}">{{ item.title }}</a></li>
    {% endfor %}
 </ul>
 ```
@@ -63,9 +63,9 @@ docs:
 <div class="highlight result" data-proofer-ignore>
    <h2>ACME Documentation</h2>
    <ul>
-      <li><a href="#" alt="Introduction">Introduction</a></li>
-      <li><a href="#" alt="Configuration">Configuration</a></li>
-      <li><a href="#" alt="Deployment">Deployment</a></li>
+      <li><a href="#">Introduction</a></li>
+      <li><a href="#">Configuration</a></li>
+      <li><a href="#">Deployment</a></li>
    </ul>
 </div>
 
@@ -98,7 +98,7 @@ Suppose you wanted to sort the list by the `title`. To do this, convert the refe
 {% assign doclist = site.data.samplelist.docs | sort: 'title'  %}
 <ol>
 {% for item in doclist %}
-    <li><a href="{{ item.url }}" alt="{{ item.title }}">{{ item.title }}</a></li>
+    <li><a href="{{ item.url }}">{{ item.title }}</a></li>
 {% endfor %}
 </ol>
 ```
@@ -108,9 +108,9 @@ Suppose you wanted to sort the list by the `title`. To do this, convert the refe
 
 <div class="highlight result" data-proofer-ignore>
    <ol>
-      <li><a href="#" alt="Configuration">Configuration</a></li>
-      <li><a href="#" alt="Deployment">Deployment</a></li>
-      <li><a href="#" alt="Introduction">Introduction</a></li>
+      <li><a href="#">Configuration</a></li>
+      <li><a href="#">Deployment</a></li>
+      <li><a href="#">Introduction</a></li>
    </ol>
 </div>
 
@@ -605,3 +605,65 @@ The `for item in items` loop looks through each `item` and gets the `title` and 
 For more details on the `group_by` filter, see [Jekyll's Templates documentation](https://jekyllrb.com/docs/templates/) as well as [this Siteleaf tutorial](https://www.siteleaf.com/blog/advanced-liquid-group-by/). For more details on the `sort` filter, see [sort](https://shopify.github.io/liquid/filters/sort/) in Liquid's documentation.
 
 Whether you use properties in your doc's front matter to retrieve your pages or a YAML data file, in both cases you can programmatically build a more robust navigation for your site.
+
+## Scenario 9: Nested tree navigation with recursion
+
+Suppose you want a nested tree navigation of any depth. We can achieve this by recursively looping through our tree of navigation links.
+
+**YAML**
+
+```yaml
+nav:
+  - title: Deployment
+    url: deployment.html
+    subnav:
+      - title: Heroku
+        url: heroku.html
+        subnav:
+          - title: Jekyll on Heroku
+            url: jekyll-on-heroku.html
+  - title: Help
+    url: help.html
+```
+
+**Liquid**
+
+First, we'll create an include that we can use for rendering the navigation tree. This file would be `_includes/nav.html`
+
+{% raw %}
+```liquid
+<ul>
+  {% for item in include.nav %}
+    <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+
+    {% if item.subnav %}
+      {% include nav.html nav=item.subnav %}
+    {% endif %}
+  {% endfor %}
+</ul>
+```
+{% endraw %}
+
+To render this in your layout or pages, you would simply include the template and pass in the `nav` parameter. In this case, we'll use the `page.nav` to grab it from the yaml frontmatter.
+
+{% raw %}
+```liquid
+{% include nav.html nav=page.nav %}
+```
+{% endraw %}
+
+Our include will use this first, then look through each item for a `subnav` property to recursively render the nested lists.
+
+**Result**
+<div class="highlight result" data-proofer-ignore>
+   <ul>
+      <li><a href="#">Deployment</a></li>
+      <ul>
+        <li><a href="#">Heroku</a></li>
+        <ul>
+          <li><a href="#">Jekyll On Heroku</a></li>
+        </ul>
+      </ul>
+      <li><a href="#">Help</a></li>
+   </ul>
+</div>

@@ -2,7 +2,7 @@
 title: 'Jekyll turns 2.0.0'
 author: parkr
 version: 2.0.0
-categories: [release]
+category: release
 ---
 
 A year ago to the day, [we released Jekyll 1.0.0][jekyll-1]. One year later, we present to you the next major version: Jekyll 2.0.0.

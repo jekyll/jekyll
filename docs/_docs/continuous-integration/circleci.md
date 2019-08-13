@@ -34,7 +34,7 @@ gem 'jekyll'
 gem 'html-proofer'
 ```
 
-CircleCI detects when `Gemfile` is present is will automatically run `bundle install` for you in the `dependencies` phase.
+CircleCI detects when `Gemfile` is present and will automatically run `bundle install` for you in the `dependencies` phase.
 
 ## 3. Testing
 
@@ -105,6 +105,13 @@ jobs:
       - run:
           name: Bundle Install
           command: bundle check || bundle install
+      - save_cache:
+          key: rubygems-v1-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
+          paths:
+            - vendor/bundle
+      - run:
+          name: Jekyll build
+          command: bundle exec jekyll build
       - run:
           name: HTMLProofer tests
           command: |
@@ -113,13 +120,6 @@ jobs:
               --check-favicon  \
               --check-html \
               --disable-external
-      - save_cache:
-          key: rubygems-v1-{% raw %}{{ checksum "Gemfile.lock" }}{% endraw %}
-          paths:
-            - vendor/bundle
-      - run:
-          name: Jekyll build
-          command: bundle exec jekyll build
       - persist_to_workspace:
           root: ./
           paths:

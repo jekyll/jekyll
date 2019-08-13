@@ -140,6 +140,7 @@ class TestCollections < JekyllUnitTest
           _methods/escape-+\ #%20[].md
           _methods/yaml_with_dots.md
           _methods/3940394-21-9393050-fifif1323-test.md
+          _methods/trailing-dots...md
         ), doc.relative_path
       end
     end
@@ -176,6 +177,96 @@ class TestCollections < JekyllUnitTest
     should "extract the configuration collection information as metadata" do
       expected = { "foo" => "bar", "baz" => "whoo" }
       assert_equal expected, @collection.metadata
+    end
+  end
+
+  context "with a collection with metadata to sort items by attribute" do
+    setup do
+      @site = fixture_site(
+        "collections" => {
+          "methods"   => {
+            "output" => true,
+          },
+          "tutorials" => {
+            "output"  => true,
+            "sort_by" => "lesson",
+          },
+        }
+      )
+      @site.process
+      @tutorials_collection = @site.collections["tutorials"]
+
+      @actual_array = @tutorials_collection.docs.map(&:relative_path)
+    end
+
+    should "sort documents in a collection with 'sort_by' metadata set to a " \
+           "FrontMatter key 'lesson'" do
+      default_tutorials_array = %w(
+        _tutorials/dive-in-and-publish-already.md
+        _tutorials/extending-with-plugins.md
+        _tutorials/getting-started.md
+        _tutorials/graduation-day.md
+        _tutorials/lets-roll.md
+        _tutorials/tip-of-the-iceberg.md
+      )
+      tutorials_sorted_by_lesson_array = %w(
+        _tutorials/getting-started.md
+        _tutorials/lets-roll.md
+        _tutorials/dive-in-and-publish-already.md
+        _tutorials/tip-of-the-iceberg.md
+        _tutorials/extending-with-plugins.md
+        _tutorials/graduation-day.md
+      )
+      refute_equal default_tutorials_array, @actual_array
+      assert_equal tutorials_sorted_by_lesson_array, @actual_array
+    end
+  end
+
+  context "with a collection with metadata to rearrange items" do
+    setup do
+      @site = fixture_site(
+        "collections" => {
+          "methods"   => {
+            "output" => true,
+          },
+          "tutorials" => {
+            "output" => true,
+            "order"  => [
+              "getting-started.md",
+              "lets-roll.md",
+              "dive-in-and-publish-already.md",
+              "tip-of-the-iceberg.md",
+              "graduation-day.md",
+              "extending-with-plugins.md",
+            ],
+          },
+        }
+      )
+      @site.process
+      @tutorials_collection = @site.collections["tutorials"]
+
+      @actual_array = @tutorials_collection.docs.map(&:relative_path)
+    end
+
+    should "sort documents in a collection in the order outlined in the config file" do
+      default_tutorials_array = %w(
+        _tutorials/dive-in-and-publish-already.md
+        _tutorials/extending-with-plugins.md
+        _tutorials/getting-started.md
+        _tutorials/graduation-day.md
+        _tutorials/lets-roll.md
+        _tutorials/tip-of-the-iceberg.md
+      )
+      tutorials_rearranged_in_config_array = %w(
+        _tutorials/getting-started.md
+        _tutorials/lets-roll.md
+        _tutorials/dive-in-and-publish-already.md
+        _tutorials/tip-of-the-iceberg.md
+        _tutorials/graduation-day.md
+        _tutorials/extending-with-plugins.md
+      )
+      refute_equal default_tutorials_array, @actual_array
+      assert_equal tutorials_rearranged_in_config_array, @actual_array
     end
   end
 

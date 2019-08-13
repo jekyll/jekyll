@@ -3,7 +3,7 @@ title: 'Jekyll 3.6.2 Released'
 date: 2017-10-21 21:31:40 +0200
 author: dirtyf
 version: 3.6.2
-categories: [release]
+category: release
 ---
 
 3.6.2 is out, it's a tiny patch release and we invite you to run `bundle update`

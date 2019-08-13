@@ -49,10 +49,25 @@ module Jekyll
     end
 
     def realpath_for(folder)
-      File.realpath(Jekyll.sanitized_path(root, folder.to_s))
-    rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP
-      Jekyll.logger.warn "Invalid theme folder:", folder
+      # This resolves all symlinks for the theme subfolder and then ensures that the directory
+      # remains inside the theme root. This prevents the use of symlinks for theme subfolders to
+      # escape the theme root.
+      # However, symlinks are allowed to point to other directories within the theme.
+      Jekyll.sanitized_path(root, File.realpath(Jekyll.sanitized_path(root, folder.to_s)))
+    rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP => e
+      log_realpath_exception(e, folder)
       nil
+    end
+
+    def log_realpath_exception(err, folder)
+      return if err.is_a?(Errno::ENOENT)
+
+      case err
+      when Errno::EACCES
+        Jekyll.logger.error "Theme error:", "Directory '#{folder}' is not accessible."
+      when Errno::ELOOP
+        Jekyll.logger.error "Theme error:", "Directory '#{folder}' includes a symbolic link loop."
+      end
     end
 
     def gemspec

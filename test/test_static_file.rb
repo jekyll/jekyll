@@ -48,6 +48,11 @@ class TestStaticFile < JekyllUnitTest
       remove_dummy_file(@filename) if File.exist?(source_dir(@filename))
     end
 
+    should "return a simple string on inspection" do
+      static_file = setup_static_file("root", "dir", @filename)
+      assert_equal "#<Jekyll::StaticFile @relative_path=\"dir/#{@filename}\">", static_file.inspect
+    end
+
     should "have a source file path" do
       static_file = setup_static_file("root", "dir", @filename)
       assert_equal "root/dir/#{@filename}", static_file.path
@@ -99,7 +104,7 @@ class TestStaticFile < JekyllUnitTest
       defaults = [{
         "scope"  => { "path" => "private" },
         "values" => { "published" => false },
-      },]
+      }]
       static_file = setup_static_file_with_defaults(
         "root",
         "private/dir/subdir",
@@ -115,7 +120,7 @@ class TestStaticFile < JekyllUnitTest
       defaults = [{
         "scope"  => { "path" => "" },
         "values" => { "front-matter" => "default" },
-      },]
+      }]
 
       static_file = setup_static_file_with_defaults "", "", "file.pdf", defaults
       assert_equal "default", static_file.data["front-matter"]
@@ -125,7 +130,7 @@ class TestStaticFile < JekyllUnitTest
       defaults = [{
         "scope"  => { "path" => "" },
         "values" => { "front-matter" => "default" },
-      },]
+      }]
 
       static_file = setup_static_file_with_defaults "", "", "file.pdf", defaults
       hash = static_file.to_liquid

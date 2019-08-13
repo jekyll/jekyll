@@ -6,7 +6,7 @@ Before we install Jekyll, we need to make sure we have all the required
 dependencies.
 
 ```sh
-sudo apt-get install ruby ruby-dev build-essential
+sudo apt-get install ruby-full build-essential zlib1g-dev
 ```
 
 It is best to avoid installing Ruby Gems as the root user. Therefore, we need to
@@ -16,8 +16,8 @@ the gem installation path. Run them now:
 
 ```sh
 echo '# Install Ruby Gems to ~/gems' >> ~/.bashrc
-echo 'export GEM_HOME=$HOME/gems' >> ~/.bashrc
-echo 'export PATH=$HOME/gems/bin:$PATH' >> ~/.bashrc
+echo 'export GEM_HOME="$HOME/gems"' >> ~/.bashrc
+echo 'export PATH="$HOME/gems/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 ```
 

@@ -3,7 +3,7 @@ title: 'Jekyll 3.4.3 Released'
 date: 2017-03-21 08:52:53 -0500
 author: pathawks
 version: 3.4.3
-categories: [release]
+category: release
 ---
 
 Another one-PR patch update as we continue our quest to destroy all bugs. A

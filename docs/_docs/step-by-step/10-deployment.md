@@ -31,7 +31,7 @@ When using a `Gemfile`, you'll run commands like `jekyll serve` with
 bundle exec jekyll serve
 ```
 
-This restricts you Ruby environment to only use gems set in your `Gemfile`.
+This restricts your Ruby environment to only use gems set in your `Gemfile`.
 
 ## Plugins
 
@@ -61,6 +61,15 @@ group :jekyll_plugins do
   gem 'jekyll-feed'
   gem 'jekyll-seo-tag'
 end
+```
+
+Then add these lines to your `_config.yml`:
+
+```
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
 ```
 
 Now install them by running a `bundle update`.

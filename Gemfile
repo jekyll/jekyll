@@ -3,31 +3,36 @@
 source "https://rubygems.org"
 gemspec :name => "jekyll"
 
+# Temporarily lock JRuby builds on Travis CI to i18n-1.2.x until JRuby is able to handle
+# refinements introduced in i18n-1.3.0
+gem "i18n", "~> 1.2.0" if RUBY_ENGINE == "jruby"
+
 gem "rake", "~> 12.0"
 
 group :development do
   gem "launchy", "~> 2.3"
   gem "pry"
 
-  unless RUBY_ENGINE == "jruby"
-    gem "pry-byebug"
-  end
+  gem "pry-byebug" unless RUBY_ENGINE == "jruby"
 end
 
 #
 
 group :test do
-  gem "codeclimate-test-reporter", "~> 1.0.5"
   gem "cucumber", "~> 3.0"
   gem "httpclient"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
+  gem "memory_profiler"
   gem "nokogiri", "~> 1.7"
   gem "rspec"
   gem "rspec-mocks"
-  gem "rubocop", "~> 0.59.0"
+  gem "rubocop", "~> 0.72.0"
+  gem "rubocop-performance"
   gem "test-dependency-theme", :path => File.expand_path("test/fixtures/test-dependency-theme", __dir__)
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)
+  gem "test-theme-skinny", :path => File.expand_path("test/fixtures/test-theme-skinny", __dir__)
+  gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
 
   gem "jruby-openssl" if RUBY_ENGINE == "jruby"
 end
@@ -35,9 +40,7 @@ end
 #
 
 group :test_legacy do
-  if RUBY_PLATFORM =~ %r!cygwin!
-    gem "test-unit"
-  end
+  gem "test-unit" if RUBY_PLATFORM =~ %r!cygwin!
 
   gem "minitest"
   gem "minitest-profile"
@@ -60,34 +63,35 @@ end
 #
 
 group :jekyll_optional_dependencies do
-  gem "coderay", "~> 1.1.0"
   gem "jekyll-coffeescript"
   gem "jekyll-docs", :path => "../docs" if Dir.exist?("../docs") && ENV["JEKYLL_VERSION"]
   gem "jekyll-feed", "~> 0.9"
   gem "jekyll-gist"
   gem "jekyll-paginate"
   gem "jekyll-redirect-from"
-  gem "kramdown", "~> 1.14"
+  gem "kramdown-syntax-coderay"
   gem "mime-types", "~> 3.0"
   gem "rdoc", "~> 6.0"
   gem "tomlrb", "~> 1.2"
 
   platform :ruby, :mswin, :mingw, :x64_mingw do
-    gem "classifier-reborn", "~> 2.2.0"
-    gem "liquid-c", "~> 3.0"
+    gem "classifier-reborn", "~> 2.2"
+    gem "liquid-c", "~> 4.0"
     gem "yajl-ruby", "~> 1.4"
   end
 
-  # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-  gem "tzinfo-data", :platforms => [:mingw, :mswin, :x64_mingw, :jruby]
+  # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
+  # and associated library
+  install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do
+    gem "tzinfo", "~> 1.2"
+    gem "tzinfo-data"
+  end
 end
 
 #
 
 group :site do
-  if ENV["PROOF"]
-    gem "html-proofer", "~> 3.4"
-  end
+  gem "html-proofer", "~> 3.4" if ENV["PROOF"]
 
   gem "jekyll-avatar"
   gem "jekyll-mentions"
