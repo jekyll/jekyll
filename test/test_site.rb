@@ -240,8 +240,8 @@ class TestSite < JekyllUnitTest
         index.html
         index.html
         info.md
-        main.scss
         main.css.map
+        main.scss
         properties.html
         sitemap.xml
         static_files.html
