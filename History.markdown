@@ -65,6 +65,7 @@
   * Don&#39;t read symlinks in site.include in safe mode (#7711)
   * Replace `String#=~` with `String#match?` (#7723)
   * Update log output for an invalid theme directory (#7679)
+  * Remove configuration of theme sass files from Core (#7290)
 
 ### Minor Enhancements
 
