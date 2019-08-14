@@ -7,10 +7,6 @@ gemspec :name => "jekyll"
 # refinements introduced in i18n-1.3.0
 gem "i18n", "~> 1.2.0" if RUBY_ENGINE == "jruby"
 
-# Point to the sass-converter's repository to ensure Windows builds render as expected.
-# Remove once "jekyll-sass-converter-2.0.0" ships.
-gem "jekyll-sass-converter", :github => "jekyll/jekyll-sass-converter"
-
 gem "rake", "~> 12.0"
 
 group :development do
