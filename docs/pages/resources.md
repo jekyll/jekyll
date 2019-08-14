@@ -67,6 +67,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
 
 ### Search
   - [Algolia](https://blog.algolia.com/instant-search-blog-documentation-jekyll-plugin/): Add a powerful instant search to your Jekyll site
+  - [Bonsai Search](https://docs.bonsai.io/article/217-jekyll): The easiest way to use Elasticsearch for your Jekyll site
   - [CloudSh](https://cloudsh.com/generators/How-to-setup-search-on-Jekyll/): Website search with a few lines of JavaScript
 
 ## Other commentary
@@ -85,3 +86,4 @@ Use a SaaS service as a backend for functionality on your Jekyll site
 
 - A way to [extend Jekyll](https://github.com/rfelix/jekyll_ext) without forking and modifying the Jekyll gem codebase and some [portable Jekyll extensions](https://wiki.github.com/rfelix/jekyll_ext/extensions) that can be reused and shared.
 - [Using your Rails layouts in Jekyll](http://numbers.brighterplanet.com/2010/08/09/sharing-rails-views-with-jekyll)
+- [Jekpack](https://github.com/yfxie/jekpack/) an integration of Jekyll and Webpack to make them work together.

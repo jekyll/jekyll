@@ -47,7 +47,7 @@ module Jekyll
               end
 
       process(name)
-      read_yaml(File.join(base, dir), name)
+      read_yaml(PathManager.join(base, dir), name)
 
       data.default_proc = proc do |_, key|
         site.frontmatter_defaults.find(relative_path, type, key)

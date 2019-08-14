@@ -1,5 +1,5 @@
 ---
-version: 3.8.5
+version: 3.8.6
 min_ruby_version: 2.4.0
 name: Jekyll • Simple, blog-aware, static sites
 description: Transform your plain text into static websites and blogs

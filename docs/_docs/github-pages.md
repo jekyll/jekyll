@@ -122,7 +122,7 @@ to see more detailed examples.
   <h5>Source files must be in the root directory</h5>
   <p>
     GitHub Pages <a href="https://help.github.com/articles/troubleshooting-github-pages-build-failures#source-setting">overrides</a>
-    the <a href="/docs/configuration/>“Site Source”</a>
+    the <a href="/docs/configuration/options/">“Site Source”</a>
     configuration value, so if you locate your files anywhere other than the
     root directory, your site may not build correctly.
   </p>

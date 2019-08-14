@@ -21,7 +21,7 @@ class TestConfiguration < JekyllUnitTest
     end
 
     should "return a valid Configuration instance" do
-      assert_instance_of Configuration, Configuration.from({}).fix_common_issues
+      assert_instance_of Configuration, Configuration.from({})
     end
 
     should "add default collections" do
@@ -92,15 +92,19 @@ class TestConfiguration < JekyllUnitTest
     should "only assign collections.posts.permalink if a permalink is specified" do
       result = Configuration[{ "permalink" => "pretty", "collections" => {} }]
         .add_default_collections
-      expected = { "posts" => {
-        "output"    => true,
-        "permalink" => "/:categories/:year/:month/:day/:title/",
-      } }
+
+      expected = {
+        "posts" => {
+          "output"    => true,
+          "permalink" => "/:categories/:year/:month/:day/:title/",
+        },
+      }
+
       assert_equal expected, result["collections"]
 
-      result = Configuration[{ "permalink" => nil, "collections" => {} }]
-        .add_default_collections
+      result   = Configuration[{ "permalink" => nil, "collections" => {} }].add_default_collections
       expected = { "posts" => { "output" => true } }
+
       assert_equal expected, result["collections"]
     end
 
@@ -120,6 +124,7 @@ class TestConfiguration < JekyllUnitTest
         :include   => [".htaccess"],
         :source    => "./",
       }]
+
       @string_keys = Configuration[{
         "markdown"  => "kramdown",
         "permalink" => "date",
@@ -128,13 +133,16 @@ class TestConfiguration < JekyllUnitTest
         "source"    => "./",
       }]
     end
+
     should "stringify symbol keys" do
       assert_equal @string_keys, @mixed_keys.stringify_keys
     end
+
     should "not mess with keys already strings" do
       assert_equal @string_keys, @string_keys.stringify_keys
     end
   end
+
   context "#config_files" do
     setup do
       @config = Configuration[{ "source" => source_dir }]
@@ -150,32 +158,39 @@ class TestConfiguration < JekyllUnitTest
       assert @config.config_files(@one_config_file).is_a?(Array)
       assert @config.config_files(@multiple_files).is_a?(Array)
     end
+
     should "return the default config path if no config files are specified" do
       assert_equal [source_dir("_config.yml")], @config.config_files(@no_override)
     end
+
     should "return .yaml if it exists but .yml does not" do
       allow(File).to receive(:exist?).with(source_dir("_config.yml")).and_return(false)
       allow(File).to receive(:exist?).with(source_dir("_config.yaml")).and_return(true)
       assert_equal [source_dir("_config.yaml")], @config.config_files(@no_override)
     end
+
     should "return .yml if both .yml and .yaml exist" do
       allow(File).to receive(:exist?).with(source_dir("_config.yml")).and_return(true)
       assert_equal [source_dir("_config.yml")], @config.config_files(@no_override)
     end
+
     should "return .toml if that exists" do
       allow(File).to receive(:exist?).with(source_dir("_config.yml")).and_return(false)
       allow(File).to receive(:exist?).with(source_dir("_config.yaml")).and_return(false)
       allow(File).to receive(:exist?).with(source_dir("_config.toml")).and_return(true)
       assert_equal [source_dir("_config.toml")], @config.config_files(@no_override)
     end
+
     should "return .yml if both .yml and .toml exist" do
       allow(File).to receive(:exist?).with(source_dir("_config.yml")).and_return(true)
       allow(File).to receive(:exist?).with(source_dir("_config.toml")).and_return(true)
       assert_equal [source_dir("_config.yml")], @config.config_files(@no_override)
     end
+
     should "return the config if given one config file" do
       assert_equal %w(config.yml), @config.config_files(@one_config_file)
     end
+
     should "return an array of the config files if given many config files" do
       assert_equal(
         %w(config/site.yml config/deploy.toml configuration.yml),
@@ -204,77 +219,59 @@ class TestConfiguration < JekyllUnitTest
 
     should "continue to read config files if one is empty" do
       allow(SafeYAML).to receive(:load_file).with(File.expand_path("empty.yml")).and_return(false)
-      allow(SafeYAML)
-        .to receive(:load_file)
-        .with(File.expand_path("not_empty.yml"))
-        .and_return("foo" => "bar", "include" => "", "exclude" => "")
+      allow(SafeYAML).to receive(:load_file).with(File.expand_path("not_empty.yml")).and_return(
+        "foo" => "bar"
+      )
       Jekyll.logger.log_level = :warn
-      read_config = @config.read_config_files(["empty.yml", "not_empty.yml"])
+      read_config = @config.read_config_files(%w(empty.yml not_empty.yml))
       Jekyll.logger.log_level = :info
       assert_equal "bar", read_config["foo"]
     end
   end
-  context "#backwards_compatibilize" do
+
+  context "#validate" do
     setup do
       @config = Configuration[{
         "auto"        => true,
         "watch"       => true,
         "server"      => true,
-        "exclude"     => "READ-ME.md, Gemfile,CONTRIBUTING.hello.markdown",
-        "include"     => "STOP_THE_PRESSES.txt,.heloses, .git",
         "pygments"    => true,
         "layouts"     => true,
         "data_source" => true,
         "gems"        => [],
       }]
     end
-    should "unset 'auto' and 'watch'" do
-      assert @config.key?("auto")
-      assert @config.key?("watch")
-      assert !@config.backwards_compatibilize.key?("auto")
-      assert !@config.backwards_compatibilize.key?("watch")
+
+    should "raise an error if `exclude` key is a string" do
+      config = Configuration[{ "exclude" => "READ-ME.md, Gemfile,CONTRIBUTING.hello.markdown" }]
+      assert_raises(Jekyll::Errors::InvalidConfigurationError) { config.validate }
     end
-    should "unset 'server'" do
-      assert @config.key?("server")
-      assert !@config.backwards_compatibilize.key?("server")
+
+    should "raise an error if `include` key is a string" do
+      config = Configuration[{ "include" => "STOP_THE_PRESSES.txt,.heloses, .git" }]
+      assert_raises(Jekyll::Errors::InvalidConfigurationError) { config.validate }
     end
-    should "transform string exclude into an array" do
-      assert @config.key?("exclude")
-      assert @config.backwards_compatibilize.key?("exclude")
-      expected = %w(READ-ME.md Gemfile CONTRIBUTING.hello.markdown)
-      assert_equal expected, @config.backwards_compatibilize["exclude"]
-    end
-    should "transform string include into an array" do
-      assert @config.key?("include")
-      assert @config.backwards_compatibilize.key?("include")
-      expected = %w(STOP_THE_PRESSES.txt .heloses .git)
-      assert_equal expected, @config.backwards_compatibilize["include"]
-    end
-    should "set highlighter to pygments" do
-      assert @config.key?("pygments")
-      assert !@config.backwards_compatibilize.key?("pygments")
-      assert_equal "pygments", @config.backwards_compatibilize["highlighter"]
-    end
-    should "adjust directory names" do
-      assert @config.key?("layouts")
-      assert !@config.backwards_compatibilize.key?("layouts")
-      assert @config.backwards_compatibilize["layouts_dir"]
-      assert @config.key?("data_source")
-      assert !@config.backwards_compatibilize.key?("data_source")
-      assert @config.backwards_compatibilize["data_dir"]
-    end
+
     should "raise an error if `plugins` key is a string" do
       config = Configuration[{ "plugins" => "_plugin" }]
-      assert_raises Jekyll::Errors::InvalidConfigurationError do
-        config.backwards_compatibilize
-      end
+      assert_raises(Jekyll::Errors::InvalidConfigurationError) { config.validate }
     end
-    should "set the `gems` config to `plugins`" do
+
+    should "not rename configuration keys" do
+      assert @config.key?("layouts")
+      assert @config.validate.key?("layouts")
+      refute @config.validate.key?("layouts_dir")
+
+      assert @config.key?("data_source")
+      assert @config.validate.key?("data_source")
+      refute @config.validate.key?("data_dir")
+
       assert @config.key?("gems")
-      assert !@config.backwards_compatibilize["gems"]
-      assert @config.backwards_compatibilize["plugins"]
+      assert @config.validate.key?("gems")
+      refute @config.validate.key?("plugins")
     end
   end
+
   context "loading configuration" do
     setup do
       @path = source_dir("_config.yml")
@@ -331,6 +328,7 @@ class TestConfiguration < JekyllUnitTest
       # as opposed to: assert_equal ':foo', SafeYAML.load(':foo')
     end
   end
+
   context "loading config from external file" do
     setup do
       @paths = {

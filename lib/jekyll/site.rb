@@ -145,9 +145,9 @@ module Jekyll
     #
     # Returns a Hash containing collection name-to-instance pairs.
     def collections
-      @collections ||= Hash[collection_names.map do |coll|
-        [coll, Jekyll::Collection.new(self, coll)]
-      end]
+      @collections ||= collection_names.each_with_object({}) do |name, hsh|
+        hsh[name] = Jekyll::Collection.new(self, name)
+      end
     end
 
     # The list of collection names.

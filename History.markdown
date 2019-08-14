@@ -25,6 +25,7 @@
   * Always exclude certain paths from being processed (#7188)
   * Remove Jekyll::Utils#strip_heredoc in favor of a Ruby &gt; 2.3 built in (#7584)
   * Incorporate `relative_url` within `post_url` tag (#7589)
+  * Remove patch to modify config for kramdown (#7699)
 
 ### Bug Fixes
 
@@ -60,6 +61,10 @@
   * Initialize and reset glob_cache only as necessary (#7658)
   * Revert memoizing Site#docs_to_write and #documents (#7684)
   * Backport #7684 for v3.8.x: Revert memoizing Site#docs_to_write and refactor #documents (#7689)
+  * Backport #7213 and #7633 for v3.8.x: Fix broken include_relative usage in excerpt (#7690)
+  * Don&#39;t read symlinks in site.include in safe mode (#7711)
+  * Replace `String#=~` with `String#match?` (#7723)
+  * Update log output for an invalid theme directory (#7679)
 
 ### Minor Enhancements
 
@@ -103,6 +108,10 @@
   * Reduce allocations from Jekyll::Document instances (#7625)
   * Add `type` attribute to Document instances (#7406)
   * Reduce allocations from where-filter (#7653)
+  * Memoize SiteDrop#documents to reduce allocations (#7697)
+  * Add PathManager class to cache interim paths (#7732)
+  * Remove warnings and fixes for deprecated config (#7440)
+  * Delegate --profile tabulation to `terminal-table` (#7627)
 
 ### Development Fixes
 
@@ -153,6 +162,18 @@
   * Profile allocations from a build session (#7646)
   * Update small typo in contributing.md (#7671)
   * Bump RuboCop to v0.70.x (#7678)
+  * Remove override to Jekyll::Document#respond_to? (#7695)
+  * Do not install docs on updating gems on Travis (#7706)
+  * Update TestTags in sync with Rouge v3.4 (#7709)
+  * Bump RuboCop to v0.71.0 (#7687)
+  * Use regexp to filter special entries (#7702)
+  * Reduce Array objects generated from utility method (#7749)
+  * Update mime.types (#7756)
+  * Replace redundant Array#map with Array#each (#7761)
+  * Fix: rubocop offenses (#7769)
+  * Reduce allocations by using #each_with_object (#7758)
+  * Memoize fallback_data for Drop (#7728)
+  * Use String#end_with? to check if entry is a backup (#7701)
 
 ### Documentation
 
@@ -276,6 +297,13 @@
   * Docs: add version tags to new placeholders (#5981) for permalinks (#7647)
   * Solve &#34;GitHub Page build failure&#34; in 10-deployment.md (#7648)
   * Fix typo from &#39;Github&#39; to &#39;GitHub&#39; (#7691)
+  * fix link to Site Source config (#7708)
+  * Add Jekpack to resources page (#7598)
+  * Introduce frontmatter in step 2 (#7704)
+  * Add recursive navigation tutorial (#7720)
+  * Fix misspelling of &#34;additional&#34; (#7764)
+  * docs: improve how to include rouge stylesheets (#7752)
+  * Added Bonsai Search (#7543)
 
 ### Site Enhancements
 
@@ -289,6 +317,23 @@
 ### release
 
   * Release v4.0.0.pre.alpha1 (#7574)
+  * Prepare Jekyll 4.0.0 beta1 (#7716)
+
+## 3.8.6 / 2019-07-02
+
+### Bug Fixes
+
+  * Update log output for an invalid theme directory (#7734)
+  * Memoize `SiteDrop#documents` to reduce allocations (#7722)
+  * Excerpt handling of custom and intermediate tags (#7467)
+  * Escape valid special chars in a site's path name (#7573)
+  * Revert memoizing `Site#docs_to_write` and refactor `#documents` (#7689)
+  * Fix broken `include_relative` usage in excerpt (#7690)
+  * Install platform-specific gems as required (3c06609406)
+
+### Security Fixes
+
+  * Theme gems: ensure directories aren't symlinks (#7424)
 
 ## 3.8.5 / 2018-11-04
 
