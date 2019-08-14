@@ -175,6 +175,7 @@
   * Reduce allocations by using #each_with_object (#7758)
   * Memoize fallback_data for Drop (#7728)
   * Use String#end_with? to check if entry is a backup (#7701)
+  * Use jekyll-sass-converter-2.0 by default (#7778)
 
 ### Documentation
 
