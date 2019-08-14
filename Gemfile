@@ -9,7 +9,7 @@ gem "i18n", "~> 1.2.0" if RUBY_ENGINE == "jruby"
 
 # Point to the sass-converter's repository to ensure Windows builds render as expected.
 # Remove once "jekyll-sass-converter-2.0.0" ships.
-gem "jekyll-sass-converter", :github => "jekyll/jekyll-sass-converter", :ref => "refs/pull/91/head"
+gem "jekyll-sass-converter", :github => "jekyll/jekyll-sass-converter"
 
 gem "rake", "~> 12.0"
 
