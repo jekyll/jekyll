@@ -26,6 +26,7 @@
   * Remove Jekyll::Utils#strip_heredoc in favor of a Ruby &gt; 2.3 built in (#7584)
   * Incorporate `relative_url` within `post_url` tag (#7589)
   * Remove patch to modify config for kramdown (#7699)
+  * Use jekyll-sass-converter-2.0 by default (#7778)
 
 ### Bug Fixes
 
@@ -175,7 +176,6 @@
   * Reduce allocations by using #each_with_object (#7758)
   * Memoize fallback_data for Drop (#7728)
   * Use String#end_with? to check if entry is a backup (#7701)
-  * Use jekyll-sass-converter-2.0 by default (#7778)
 
 ### Documentation
 
