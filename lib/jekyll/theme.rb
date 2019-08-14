@@ -10,7 +10,6 @@ module Jekyll
       @name = name.downcase.strip
       Jekyll.logger.debug "Theme:", name
       Jekyll.logger.debug "Theme source:", root
-      configure_sass
     end
 
     def root
@@ -36,12 +35,6 @@ module Jekyll
 
     def assets_path
       @assets_path ||= path_for "assets".freeze
-    end
-
-    def configure_sass
-      return unless sass_path
-      External.require_with_graceful_fail("sass") unless defined?(Sass)
-      Sass.load_paths << sass_path
     end
 
     def runtime_dependencies

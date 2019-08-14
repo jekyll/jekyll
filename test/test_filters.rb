@@ -137,14 +137,18 @@ class TestFilters < JekyllUnitTest
 
     should "sassify with simple string" do
       assert_equal(
-        "p {\n  color: #123456; }\n",
-        @filter.sassify("$blue:#123456\np\n  color: $blue")
+        "p { color: #123456; }\n",
+        @filter.sassify(<<~SASS)
+          $blue: #123456
+          p
+            color: $blue
+        SASS
       )
     end
 
     should "scssify with simple string" do
       assert_equal(
-        "p {\n  color: #123456; }\n",
+        "p { color: #123456; }\n",
         @filter.scssify("$blue:#123456; p{color: $blue}")
       )
     end
@@ -809,7 +813,7 @@ class TestFilters < JekyllUnitTest
               "The list of grouped items for '' is not an Array."
             )
             # adjust array.size to ignore symlinked page in Windows
-            qty = Utils::Platforms.really_windows? ? 14 : 15
+            qty = Utils::Platforms.really_windows? ? 15 : 17
             assert_equal qty, g["items"].size
           end
         end
@@ -1007,7 +1011,7 @@ class TestFilters < JekyllUnitTest
               "The list of grouped items for '' is not an Array."
             )
             # adjust array.size to ignore symlinked page in Windows
-            qty = Utils::Platforms.really_windows? ? 14 : 15
+            qty = Utils::Platforms.really_windows? ? 15 : 17
             assert_equal qty, g["items"].size
           end
         end
