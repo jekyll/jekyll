@@ -36,7 +36,7 @@ module Jekyll
       "plugins"             => [],
 
       # Conversion
-      "markdown"            => "kramdown",
+      "markdown"            => "CommonMark",
       "highlighter"         => "rouge",
       "lsi"                 => false,
       "excerpt_separator"   => "\n\n",
@@ -57,6 +57,11 @@ module Jekyll
       "quiet"               => false,
       "verbose"             => false,
       "defaults"            => [],
+
+      "commonmark"          => {
+        "options"    => %w(SMART FOOTNOTES),
+        "extensions" => %w(strikethrough autolink table),
+      },
 
       "liquid"              => {
         "error_mode"       => "warn",

@@ -7,6 +7,9 @@ gemspec :name => "jekyll"
 # refinements introduced in i18n-1.3.0
 gem "i18n", "~> 1.2.0" if RUBY_ENGINE == "jruby"
 
+# Temporarily point to a WIP ref in the "jekyll/jekyll-commonmark" repository.
+gem "jekyll-commonmark", :github => "jekyll/jekyll-commonmark", :ref => "refs/pull/34/head"
+
 gem "rake", "~> 12.0"
 
 group :development do

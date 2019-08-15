@@ -37,6 +37,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("colorator",             "~> 1.0")
   s.add_runtime_dependency("em-websocket",          "~> 0.5")
   s.add_runtime_dependency("i18n",                  ">= 0.9.5", "< 2")
+  s.add_runtime_dependency("jekyll-commonmark",     "~> 1.3")
   s.add_runtime_dependency("jekyll-sass-converter", "~> 2.0")
   s.add_runtime_dependency("jekyll-watch",          "~> 2.0")
   s.add_runtime_dependency("kramdown",              "~> 2.1")
