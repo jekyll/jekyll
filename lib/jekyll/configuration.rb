@@ -59,7 +59,7 @@ module Jekyll
       "defaults"            => [],
 
       "commonmark"          => {
-        "options"    => %w(SMART FOOTNOTES),
+        "options"    => %w(SMART FOOTNOTES UNSAFE),
         "extensions" => %w(strikethrough autolink table),
       },
 
