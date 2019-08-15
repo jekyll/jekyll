@@ -6,7 +6,6 @@ language: ruby
 rvm:
   - &ruby1 2.6.0
   - &ruby2 2.4.5
-  - &jruby jruby-9.2.7.0
 
 matrix:
   include:
@@ -22,9 +21,6 @@ matrix:
     - rvm: *ruby1
       env: TEST_SUITE=memprof
       name: "Profile Memory Allocation"
-  exclude:
-    - rvm: *jruby
-      env: TEST_SUITE=cucumber
 
 env:
   matrix:
