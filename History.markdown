@@ -1,4 +1,4 @@
-## HEAD
+## 4.0.0 / 2019-08-17
 
 ### Major Enhancements
 
@@ -178,7 +178,7 @@
   * Add Installation Instructions for Ubuntu (#6925)
   * Don&#39;t prompt for sudo when installing with Ubuntu WSL (#6781)
   * Installation instructions for Fedora (#7198)
-  * Update Windows install docs (#6926)  
+  * Update Windows install docs (#6926)
   * List all standard liquid filters (#7333)
   * List all static files variables (#7002)
   * Improve how to include Rouge stylesheets (#7752)
