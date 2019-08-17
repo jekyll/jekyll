@@ -12,7 +12,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
     matrix:
-      os: [ubuntu-latest, windows-latest]
+      os: 
+      - ubuntu-latest
+      - windows-latest
     steps:
     - uses: actions/checkout@v1
     - name: Set up Ruby 2.6
