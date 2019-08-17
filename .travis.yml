@@ -3,9 +3,10 @@ script: script/cibuild
 cache: bundler
 language: ruby
 
+dist: bionic
 rvm:
   - &ruby1 2.6.3
-  - &ruby2 2.4.6
+  - &ruby2 2.4.5
   - &jruby jruby-9.2.7.0
 
 matrix:
