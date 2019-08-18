@@ -50,9 +50,8 @@ Gem::Specification.new do |s|
 
   s.post_install_message = <<~MSG
     -------------------------------------------------------------------------------------
-    This version of Jekyll comes with some major changes.
+    Jekyll 4.0 comes with some major changes, notably:
 
-    Most notably:
       * Our `link` tag now comes with the `relative_url` filter incorporated into it.
         You should no longer prepend `{{ site.baseurl }}` to `{% link foo.md %}`
         For further details: https://github.com/jekyll/jekyll/pull/6727

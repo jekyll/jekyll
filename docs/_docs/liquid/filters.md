@@ -104,7 +104,7 @@ The default is `default`. They are as follows (with what they filter):
 - `ascii`: spaces, non-alphanumeric, and non-ASCII characters
 - `latin`: like `default`, except Latin characters are first transliterated (e.g. `àèïòü` to `aeiou`) {%- include docs_version_badge.html version="3.7.0" -%}.
 
-### Detecting `nil` values with `where` filter {%- include docs_version_badge.html version="4.0.0" -%}
+### Detecting `nil` values with `where` filter {%- include docs_version_badge.html version="4.0" -%}
 
 You can use the `where` filter to detect documents and pages with properties that are `nil` or `""`. For example,
 
