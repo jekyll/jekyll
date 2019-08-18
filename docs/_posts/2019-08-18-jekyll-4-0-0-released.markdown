@@ -10,17 +10,18 @@ The long awaited Jekyll v4.0 is finally here :tada:
 
 ### Key changes
 
- - Lots of performance improvements :rocket:
- - Cache builds for faster rebuilds (30% on average)
- - Drop support for Ruby < 2.4, tested on Ruby 2.6
- - Drop support for Rouge < 3, Pygments, RedCarpet, rdiscount
- - Switch to Sassc library, generate sourcemaps by default
- - Incorporate `relative_url` in `link` and `post_url` tags
- - Custom sorting of collection documents (`sort_by`, `order`)
- - Support for binary operators in `where_exp` filter (`and`, `or`)
- - Load `_config.yml` from within current gem-based theme
- - Disable Liquid via front matter with `render_with_liquid: false`
- - and a lot of bug fixes :bug:
+- Lots of performance improvements :rocket:
+- Cache builds for faster rebuilds (30% on average)
+- Dropped support for Ruby < 2.4, tested on Ruby 2.6
+- Dropped support for Rouge < 3, Pygments, RedCarpet, rdiscount
+- Switched to SassC library, generate sourcemaps by default
+- Incorporated `relative_url` in `link` and `post_url` tags
+- Added support for using Liquid variables in the `link` tag.
+- Allow custom sorting of collection documents (`sort_by`, `order`)
+- Allow disabling Liquid via front matter with `render_with_liquid: false`
+- Added support for binary operators in `where_exp` filter (`and`, `or`)
+- Added support for loading `_config.yml` from within current gem-based theme
+- and a lot of bug fixes :bug:
 
 Check out the [full history](/docs/history/#v4-0-0) for more details.
 
@@ -28,11 +29,12 @@ We encourage you to [upgrade from Jekyll 3.x](/docs/upgrading/3-to-4/), this sho
 
 Edit your project's `Gemfile` to test Jekyll v4.x:
 
-```
+```ruby
 gem "jekyll", "~> 4.0"
 ```
 
-Then run `bundle update` and check everything is OK.
+Then run `bundle update` to update all dependencies. Unless you're using third-party plugins that
+haven't yet added support for Jekyll 4.0, you should be good to go.
 
 Feel free to reach out on our [community forum](https://talk.jekyllrb.com) if you need some help.
 
