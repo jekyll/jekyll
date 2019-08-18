@@ -268,6 +268,7 @@
   * Updates to CODE OF CONDUCT (v1.4.0) (#7105)
   * More inclusive writing (#7283)
   * Update Ruby version used in Travis-CI example (#7783)
+  * Documentation for binary operators in where_exp (#7786)
 
 ### Site Enhancements
 
