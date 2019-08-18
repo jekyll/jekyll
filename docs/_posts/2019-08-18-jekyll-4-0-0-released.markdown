@@ -25,8 +25,7 @@ The long awaited Jekyll v4.0 is finally here :tada:
 
 Check out the [full history](/docs/history/#v4-0-0) for more details.
 
-We encourage you to [upgrade from Jekyll 3.x](/docs/upgrading/3-to-4/), this should go pretty
-smoothly:
+We encourage you to [upgrade from Jekyll 3.x](/docs/upgrading/3-to-4/).
 
 Edit your project's `Gemfile` to test Jekyll v4.x:
 
@@ -34,10 +33,15 @@ Edit your project's `Gemfile` to test Jekyll v4.x:
 gem "jekyll", "~> 4.0"
 ```
 
-Then run `bundle update` to update all dependencies. Unless you're using third-party plugins that
-haven't yet added support for Jekyll 4.0, you should be good to go.
+Then run `bundle update` to update all dependencies. Unless you're using
+third-party plugins that haven't yet added support for Jekyll 4.0, you should be
+good to go.
 
-Feel free to reach out on our [community forum](https://talk.jekyllrb.com) if you need some help.
+Plugins and themes authors must loosen jekyll dependency in their `gemspec` file to allow for Jekyll v4.0:
+
+`spec.add_runtime_dependency "jekyll", ">= 3.6", "< 5.0"`
+
+Feel free to reach out on our [community forum](https://talk.jekyllrb.com) if you have any question.
 
 Many thanks to the 139 contributors who made this release possible (in alphabetical order):
 Aidan Fitzgerald, Akshat Kedia, Ale Muñoz, Alex Wood, Alexey Kopytko, Alexey Pelykh, Ali Thompson,
