@@ -16,7 +16,7 @@ braces: {% raw %}`{{`{% endraw %} and {% raw %}`}}`{% endraw %}. For example:
 {% raw %}
 ```liquid
 {{ page.title }}
-```  
+```
 {% endraw %}
 
 Outputs a variable called `page.title` on the page.
@@ -34,7 +34,7 @@ braces and percent signs: {% raw %}`{%`{% endraw %} and
     sidebar content
   </div>
 {% endif %}
-```  
+```
 {% endraw %}
 
 Outputs the sidebar if `page.show_sidebar` is true. You can learn more about the
@@ -48,7 +48,7 @@ and are separated by a `|`. For example:
 {% raw %}
 ```liquid
 {{ "hi" | capitalize }}
-```  
+```
 {% endraw %}
 
 Outputs `Hi`. You can learn more about the filters available to Jekyll
@@ -63,10 +63,10 @@ Now it's your turn, change the Hello World! on your page to output as lowercase:
 ...
 <h1>{{ "Hello World!" | downcase }}</h1>
 ...
-```  
+```
 {% endraw %}
 
-To get our changes processed by Jekyll we need to add [front matter](03-front-matter/) to the top of the page:
+To get our changes processed by Jekyll we need to add [front matter](../03-front-matter/) to the top of the page:
 
 ```markdown
 ---

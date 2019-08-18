@@ -90,7 +90,7 @@ Your `.travis.yml` file should look like this:
 ```yaml
 language: ruby
 rvm:
-  - 2.4.1
+  - 2.6.3
 
 before_script:
  - chmod +x ./script/cibuild # or do this locally and commit
@@ -134,7 +134,7 @@ access to Bundler, RubyGems, and a Ruby runtime.
 
 ```yaml
 rvm:
-  - 2.4.1
+  - 2.6.3
 ```
 
 RVM is a popular Ruby Version Manager (like rbenv, chruby, etc). This
