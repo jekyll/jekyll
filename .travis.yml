@@ -7,7 +7,7 @@ rvm:
   - &ruby1 2.6.3
   - &ruby2 2.4.6
   - &jruby jruby-9.2.7.0
-  - &βruby 2.7.0-preview1
+  - &omega 2.7.0-preview1
 
 matrix:
   include:
@@ -23,15 +23,15 @@ matrix:
     - rvm: *ruby1
       env: TEST_SUITE=memprof
       name: "Profile Memory Allocation"
-    - rvm: *βruby
+    - rvm: *omega
       env: TEST_SUITE=default-site
-    - rvm: *βruby
+    - rvm: *omega
       env: TEST_SUITE=profile-docs
   exclude:
     - rvm: *jruby
       env: TEST_SUITE=cucumber
   allow_failures:
-    - rvm: *βruby
+    - rvm: *omega
 
 env:
   matrix:
