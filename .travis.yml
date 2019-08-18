@@ -7,7 +7,7 @@ rvm:
   - &ruby1 2.6.3
   - &ruby2 2.4.6
   - &jruby jruby-9.2.7.0
-  - &pruby 2.7.0-preview1
+  - &βruby 2.7.0-preview1
 
 matrix:
   include:
@@ -20,20 +20,18 @@ matrix:
     - rvm: *ruby1
       env: TEST_SUITE=profile-docs
       name: "Profile Docs"
-    - rvm: *pruby
-      env: TEST_SUITE=default-site
-      name: "🏠️ Default Site"
-    - rvm: *pruby
-      env: TEST_SUITE=profile-docs
-      name: "Profile Docs"
     - rvm: *ruby1
       env: TEST_SUITE=memprof
       name: "Profile Memory Allocation"
+    - rvm: *βruby
+      env: TEST_SUITE=default-site
+    - rvm: *βruby
+      env: TEST_SUITE=profile-docs
   exclude:
     - rvm: *jruby
       env: TEST_SUITE=cucumber
   allow_failures:
-    - rvm: *pruby
+    - rvm: *βruby
 
 env:
   matrix:
