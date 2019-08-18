@@ -1,6 +1,6 @@
 ---
 title: 'Jekyll 4.0.0 Released'
-date: 2019-08-17 14:22:34 +0200
+date: 2019-08-18 09:00:00 -0500
 author: mattr-
 version: 4.0.0
 category: release
