@@ -6,8 +6,9 @@ language: ruby
 rvm:
   - &ruby1 2.6.3
   - &ruby2 2.4.6
-  - &rhead ruby-head
   - &jruby jruby-9.2.7.0
+  - &ruby_pre 2.7.0-preview1
+  - &ruby_head ruby-head
 
 matrix:
   include:
@@ -20,6 +21,12 @@ matrix:
     - rvm: *ruby1
       env: TEST_SUITE=profile-docs
       name: "Profile Docs"
+    - rvm: *ruby_pre
+      env: TEST_SUITE=default-site
+      name: "🏠️ Default Site"
+    - rvm: *ruby_pre
+      env: TEST_SUITE=profile-docs
+      name: "Profile Docs"
     - rvm: *ruby1
       env: TEST_SUITE=memprof
       name: "Profile Memory Allocation"
@@ -27,7 +34,8 @@ matrix:
     - rvm: *jruby
       env: TEST_SUITE=cucumber
   allow_failures:
-    - rvm: *rhead
+    - rvm: *ruby_pre
+    - rvm: *ruby_head
 
 env:
   matrix:
