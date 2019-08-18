@@ -27,7 +27,7 @@ matrix:
     - rvm: *jruby
       env: TEST_SUITE=cucumber
   allow_failures:
-    - rvm: &rhead
+    - rvm: *rhead
 
 env:
   matrix:
