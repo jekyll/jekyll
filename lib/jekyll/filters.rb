@@ -372,7 +372,7 @@ module Jekyll
     # return numeric values as numbers for proper sorting
     def parse_sort_input(property)
       number_like = %r!\A\s*-?(?:\d+\.?\d*|\.\d+)\s*\Z!
-      return property.to_f if property =~ number_like
+      return property.to_f if property.to_s =~ number_like
 
       property
     end
