@@ -114,6 +114,7 @@
   * Replace `String#=~` with `String#match?` (#7723)
   * Update log output for an invalid theme directory (#7679)
   * Remove configuration of theme sass files from Core (#7290)
+  * Actually conditionally include liquid-c (#7792)
 
 ### Development Fixes
 
