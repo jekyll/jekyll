@@ -114,6 +114,8 @@
   * Replace `String#=~` with `String#match?` (#7723)
   * Update log output for an invalid theme directory (#7679)
   * Remove configuration of theme sass files from Core (#7290)
+  * Actually conditionally include liquid-c (#7792)
+  * Test number_like regex on stringified property (#7788)
 
 ### Development Fixes
 
@@ -268,6 +270,8 @@
   * Updates to CODE OF CONDUCT (v1.4.0) (#7105)
   * More inclusive writing (#7283)
   * Update Ruby version used in Travis-CI example (#7783)
+  * Documentation for binary operators in where_exp (#7786)
+  * Adding SmartForms as Forms service (#7794)
 
 ### Site Enhancements
 

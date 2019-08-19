@@ -64,6 +64,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [Formspree (open source)](https://formspree.io/)
   - [formX](https://formx.stream)
   - [Simple Form](https://getsimpleform.com/)
+  - [SmartForms](https://smartforms.dev/)
 
 ### Search
   - [Algolia](https://blog.algolia.com/instant-search-blog-documentation-jekyll-plugin/): Add a powerful instant search to your Jekyll site
