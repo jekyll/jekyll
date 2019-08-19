@@ -115,6 +115,7 @@
   * Update log output for an invalid theme directory (#7679)
   * Remove configuration of theme sass files from Core (#7290)
   * Actually conditionally include liquid-c (#7792)
+  * Test number_like regex on stringified property (#7788)
 
 ### Development Fixes
 
