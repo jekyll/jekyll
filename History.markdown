@@ -1,4 +1,4 @@
-## HEAD
+## 4.0.0 / 2019-08-19
 
 ### Major Enhancements
 
