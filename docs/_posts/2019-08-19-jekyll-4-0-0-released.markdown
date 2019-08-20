@@ -37,7 +37,7 @@ processing of content that doesn't change between build sessions. Currently,
 this is limited to markdown. So while the very first build will take a certain
 amount of time, consequent builds for content that hasn't changed will take
 much less time due to the disk-cache. Disk caching is disabled for `safe` mode,
-however. 
+however.
 
 ### Super-powered content transformations 💪
 
@@ -56,13 +56,13 @@ guide](/docs/upgrading/3-to-4/) for more details.
 The `link` and `post_url` tags no longer need `site.baseurl` prepended every
 time they're used. Those tags now use our `relative_url` filter to take care of
 this for you. Existing uses of the prepending pattern will break though!
-Sorry! :sweat_smile: 
+Sorry! :sweat_smile:
 
 A few other smaller features when it comes to content:
  - The `link` tag understands Liquid variables in the same fashion our
  `include` tag does now.
  - Disable Liquid processing for a particular page / document by adding
- `render_with_liquid: false` to it's front matter.
+ `render_with_liquid: false` to its front matter.
  - Liquid's binary `and` and `or` operations can be used in the `where_exp`
  filter for more powerful filtering
 
