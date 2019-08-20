@@ -1,3 +1,9 @@
+## HEAD
+
+### release
+
+  * Jekyll v4.0 release (#7782)
+
 ## 4.0.0 / 2019-08-19
 
 ### Major Enhancements
