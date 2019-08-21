@@ -41,7 +41,7 @@ however.
 
 ### Super-powered content transformations 💪
 
-We've upgraded Sass support so it should be faster and support. There's also
+We've upgraded Sass support so it should be faster. There's also
 support for sourcemaps now! Under the hood, our Sass support uses the `SassC`
 library now, which is supported directly by the Sass team, which should mean
 better support for everybody in the long run.
