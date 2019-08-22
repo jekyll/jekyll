@@ -4,6 +4,10 @@
 
   * Jekyll v4.0 release (#7782)
 
+### Bug Fixes
+
+  * Memoize absolute_url and relative_url filters (#7793)
+
 ## 4.0.0 / 2019-08-19
 
 ### Major Enhancements
