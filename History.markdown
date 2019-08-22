@@ -8,6 +8,10 @@
 
   * Memoize absolute_url and relative_url filters (#7793)
 
+### Minor Enhancements
+
+  * serve: add support for ECC certificates (#7768)
+
 ## 4.0.0 / 2019-08-19
 
 ### Major Enhancements
