@@ -1,5 +1,4 @@
-# encoding: UTF-8
-require "csv"
+# frozen_string_literal: true
 
 module Jekyll
   class Reader
@@ -15,16 +14,16 @@ module Jekyll
     def read
       @site.layouts = LayoutReader.new(site).read
       read_directories
+      read_included_excludes
       sort_files!
-      @site.data = DataReader.new(site).read(site.config["data_dir"])
-      read_theme_data
+      read_site_data
       CollectionReader.new(site).read
       ThemeAssetsReader.new(site).read
     end
 
     # Sorts posts, pages, and static files.
     def sort_files!
-      site.collections.values.each { |c| c.docs.sort! }
+      site.collections.each_value { |c| c.docs.sort! }
       site.pages.sort_by!(&:name)
       site.static_files.sort_by!(&:relative_path)
     end
@@ -39,13 +38,23 @@ module Jekyll
     def read_directories(dir = "")
       base = site.in_source_dir(dir)
 
+      return unless File.directory?(base)
+
+      dot_dirs = []
+      dot_pages = []
+      dot_static_files = []
+
       dot = Dir.chdir(base) { filter_entries(Dir.entries("."), base) }
-      dot_dirs = dot.select { |file| File.directory?(@site.in_source_dir(base, file)) }
-      dot_files = (dot - dot_dirs)
-      dot_pages = dot_files.select do |file|
-        Utils.has_yaml_header?(@site.in_source_dir(base, file))
+      dot.each do |entry|
+        file_path = @site.in_source_dir(base, entry)
+        if File.directory?(file_path)
+          dot_dirs << entry
+        elsif Utils.has_yaml_header?(file_path)
+          dot_pages << entry
+        else
+          dot_static_files << entry
+        end
       end
-      dot_static_files = dot_files - dot_pages
 
       retrieve_posts(dir)
       retrieve_dirs(base, dir, dot_dirs)
@@ -60,8 +69,10 @@ module Jekyll
     #
     # Returns nothing.
     def retrieve_posts(dir)
-      site.posts.docs.concat(PostReader.new(site).read_posts(dir))
-      site.posts.docs.concat(PostReader.new(site).read_drafts(dir)) if site.show_drafts
+      return if outside_configured_directory?(dir)
+
+      site.posts.docs.concat(post_reader.read_posts(dir))
+      site.posts.docs.concat(post_reader.read_drafts(dir)) if site.show_drafts
     end
 
     # Recursively traverse directories with the read_directories function.
@@ -72,12 +83,10 @@ module Jekyll
     #
     # Returns nothing.
     def retrieve_dirs(_base, dir, dot_dirs)
-      dot_dirs.map do |file|
+      dot_dirs.each do |file|
         dir_path = site.in_source_dir(dir, file)
-        rel_path = File.join(dir, file)
-        unless @site.dest.sub(%r!/$!, "") == dir_path
-          @site.reader.read_directories(rel_path)
-        end
+        rel_path = PathManager.join(dir, file)
+        @site.reader.read_directories(rel_path) unless @site.dest.chomp("/") == dir_path
       end
     end
 
@@ -125,18 +134,70 @@ module Jekyll
     def get_entries(dir, subfolder)
       base = site.in_source_dir(dir, subfolder)
       return [] unless File.exist?(base)
+
       entries = Dir.chdir(base) { filter_entries(Dir["**/*"], base) }
       entries.delete_if { |e| File.directory?(site.in_source_dir(base, e)) }
     end
 
-    # Read data files within a theme gem and add them to internal data
+    private
+
+    # Internal
+    #
+    # Determine if the directory is supposed to contain posts and drafts.
+    # If the user has defined a custom collections_dir, then attempt to read
+    # posts and drafts only from within that directory.
+    #
+    # Returns true if a custom collections_dir has been set but current directory lies
+    # outside that directory.
+    def outside_configured_directory?(dir)
+      collections_dir = site.config["collections_dir"]
+      !collections_dir.empty? && !dir.start_with?("/#{collections_dir}")
+    end
+
+    # Create a single PostReader instance to retrieve drafts and posts from all valid
+    # directories in current site.
+    def post_reader
+      @post_reader ||= PostReader.new(site)
+    end
+
+    def read_included_excludes
+      entry_filter = EntryFilter.new(site)
+
+      site.include.each do |entry|
+        next if entry == ".htaccess"
+
+        entry_path = site.in_source_dir(entry)
+        next if File.directory?(entry_path)
+        next if entry_filter.symlink?(entry_path)
+
+        read_included_file(entry_path) if File.file?(entry_path)
+      end
+    end
+
+    def read_included_file(entry_path)
+      dir  = File.dirname(entry_path).sub(site.source, "")
+      file = Array(File.basename(entry_path))
+      if Utils.has_yaml_header?(entry_path)
+        site.pages.concat(PageReader.new(site, dir).read(file))
+      else
+        site.static_files.concat(StaticFileReader.new(site, dir).read(file))
+      end
+    end
+
+    # Read data files within current site.
+    #
+    # If the site uses a theme and has a `_data` directory at its root, read the files within
+    # and passively add them to the site's data hash.
+    # Only those keys that do not already exist in the site's data hash will be inserted from
+    # the theme-gem's data files.
     #
     # Returns a hash appended with new data
-    def read_theme_data
-      if site.theme && site.theme.data_path
-        theme_data = ThemeDataReader.new(site).read(site.config["data_dir"])
-        @site.data = Utils.deep_merge_hashes(theme_data, @site.data)
-      end
+    def read_site_data
+      @site.data = DataReader.new(site).read(site.config["data_dir"])
+      return unless site.theme && (data_path = site.theme.data_path)
+
+      theme_data = DataReader.new(site, :mode => :theme).read(data_path)
+      @site.data = Utils.deep_merge_hashes(theme_data, @site.data)
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestRelatedPosts < JekyllUnitTest
@@ -27,9 +29,9 @@ class TestRelatedPosts < JekyllUnitTest
       end
 
       allow_any_instance_of(Jekyll::RelatedPosts).to receive(:display)
-      @site = fixture_site({
+      @site = fixture_site(
         "lsi" => true
-      })
+      )
 
       @site.reset
       @site.read

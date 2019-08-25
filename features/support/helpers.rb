@@ -1,12 +1,13 @@
-require "fileutils"
-require "jekyll/utils"
-require "open3"
-require "time"
-require "safe_yaml/load"
+# frozen_string_literal: true
+
+require "jekyll"
 
 class Paths
   SOURCE_DIR = Pathname.new(File.expand_path("../..", __dir__))
+
   def self.test_dir; source_dir.join("tmp", "jekyll"); end
+
+  def self.theme_gem_dir; source_dir.join("tmp", "jekyll", "my-cool-theme"); end
 
   def self.output_file; test_dir.join("jekyll_output.txt"); end
 
@@ -21,24 +22,19 @@ end
 
 def file_content_from_hash(input_hash)
   matter_hash = input_hash.reject { |k, _v| k == "content" }
-  matter = matter_hash.map do |k, v|
-    "#{k}: #{v}\n"
-  end
+  matter = matter_hash.map { |k, v| "#{k}: #{v}\n" }.join
+  matter.chomp!
+  content = if input_hash["input"] && input_hash["filter"]
+              "{{ #{input_hash["input"]} | #{input_hash["filter"]} }}"
+            else
+              input_hash["content"]
+            end
 
-  matter = matter.join.chomp
-  content = \
-    if !input_hash["input"] || !input_hash["filter"]
-      then input_hash["content"]
-    else "{{ #{input_hash["input"]} | " \
-        "#{input_hash["filter"]} }}"
-    end
+  <<~EOF
+    ---
+    #{matter}
+    ---
 
-  Jekyll::Utils.strip_heredoc(<<-EOF)
-    ---
-    #{matter.gsub(
-      %r!\n!, "\n    "
-    )}
-    ---
     #{content}
   EOF
 end
@@ -46,7 +42,7 @@ end
 #
 
 def source_dir(*files)
-  return Paths.test_dir(*files)
+  Paths.test_dir(*files)
 end
 
 #
@@ -54,7 +50,7 @@ end
 def all_steps_to_path(path)
   source = source_dir
   dest = Pathname.new(path).expand_path
-  paths  = []
+  paths = []
 
   dest.ascend do |f|
     break if f == source
@@ -67,23 +63,25 @@ end
 #
 
 def jekyll_run_output
-  if Paths.output_file.file?
-    then return Paths.output_file.read
-  end
+  Paths.output_file.read if Paths.output_file.file?
 end
 
 #
 
 def jekyll_run_status
-  if Paths.status_file.file?
-    then return Paths.status_file.read
-  end
+  Paths.status_file.read if Paths.status_file.file?
 end
 
 #
 
 def run_bundle(args)
   run_in_shell("bundle", *args.strip.split(" "))
+end
+
+#
+
+def run_rubygem(args)
+  run_in_shell("gem", *args.strip.split(" "))
 end
 
 #
@@ -96,32 +94,27 @@ end
 
 #
 
-# rubocop:disable Metrics/AbcSize
 def run_in_shell(*args)
-  i, o, e, p = Open3.popen3(*args)
-  out = o.read.strip
-  err = e.read.strip
+  p, output = Jekyll::Utils::Exec.run(*args)
 
-  [i, o, e].each(&:close)
-
-  File.write(Paths.status_file, p.value.exitstatus)
+  File.write(Paths.status_file, p.exitstatus)
   File.open(Paths.output_file, "wb") do |f|
-    f.puts "$ " << args.join(" ")
-    f.puts out
-    f.puts err
-    f.puts "EXIT STATUS: #{p.value.exitstatus}"
+    f.print "$ "
+    f.puts args.join(" ")
+    f.puts output
+    f.puts "EXIT STATUS: #{p.exitstatus}"
   end
 
-  p.value
+  p
 end
-# rubocop:enable Metrics/AbcSize
 
 #
 
 def slug(title = nil)
-  if !title
-    then Time.now.strftime("%s%9N") # nanoseconds since the Epoch
-  else title.downcase.gsub(%r![^\w]!, " ").strip.gsub(%r!\s+!, "-")
+  if title
+    title.downcase.gsub(%r![^\w]!, " ").strip.gsub(%r!\s+!, "-")
+  else
+    Time.now.strftime("%s%9N") # nanoseconds since the Epoch
   end
 end
 
@@ -134,13 +127,13 @@ def location(folder, direction)
   end
 
   [before || ".",
-    after || "."]
+    after || ".",]
 end
 
 #
 
 def file_contents(path)
-  return Pathname.new(path).read
+  Pathname.new(path).read
 end
 
 #
@@ -152,9 +145,8 @@ def seconds_agnostic_datetime(datetime = Time.now)
   [
     Regexp.escape(date),
     "#{time}:\\d{2}",
-    Regexp.escape(zone)
-  ] \
-    .join("\\ ")
+    Regexp.escape(zone),
+  ].join("\\ ")
 end
 
 #
@@ -163,4 +155,15 @@ def seconds_agnostic_time(time)
   time = time.strftime("%H:%M:%S") if time.is_a?(Time)
   hour, minutes, = time.split(":")
   "#{hour}:#{minutes}"
+end
+
+# Helper method for Windows
+def dst_active?
+  config = Jekyll.configuration("quiet" => true)
+  ENV["TZ"] = config["timezone"]
+  dst = Time.now.isdst
+
+  # reset variable to default state on Windows
+  ENV["TZ"] = nil
+  dst
 end

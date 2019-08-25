@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class Regenerator
     attr_reader :site, :metadata, :cache
@@ -18,6 +20,8 @@ module Jekyll
     #
     # Returns a boolean.
     def regenerate?(document)
+      return true if disabled
+
       case document
       when Page
         regenerate_page?(document)
@@ -25,9 +29,7 @@ module Jekyll
         regenerate_document?(document)
       else
         source_path = document.respond_to?(:path) ? document.path : nil
-        dest_path = if document.respond_to?(:destination)
-                      document.destination(@site.dest)
-                    end
+        dest_path = document.destination(@site.dest) if document.respond_to?(:destination)
         source_modified_or_dest_missing?(source_path, dest_path)
       end
     end
@@ -40,7 +42,7 @@ module Jekyll
 
       metadata[path] = {
         "mtime" => File.mtime(path),
-        "deps"  => []
+        "deps"  => [],
       }
       cache[path] = true
     end
@@ -86,9 +88,7 @@ module Jekyll
       return true if path.nil?
 
       # Check for path in cache
-      if cache.key? path
-        return cache[path]
-      end
+      return cache[path] if cache.key? path
 
       if metadata[path]
         # If we have seen this file before,
@@ -118,6 +118,7 @@ module Jekyll
     # Returns nothing.
     def write_metadata
       unless disabled?
+        Jekyll.logger.debug "Writing Metadata:", ".jekyll-metadata"
         File.binwrite(metadata_file, Marshal.dump(metadata))
       end
     end
@@ -126,7 +127,7 @@ module Jekyll
     #
     # Returns the String path of the file.
     def metadata_file
-      site.in_source_dir(".jekyll-metadata")
+      @metadata_file ||= site.in_source_dir(".jekyll-metadata")
     end
 
     # Check if metadata has been disabled
@@ -161,7 +162,6 @@ module Jekyll
         end
     end
 
-    private
     def regenerate_page?(document)
       document.asset_file? || document.data["regenerate"] ||
         source_modified_or_dest_missing?(
@@ -169,7 +169,6 @@ module Jekyll
         )
     end
 
-    private
     def regenerate_document?(document)
       !document.write? || document.data["regenerate"] ||
         source_modified_or_dest_missing?(
@@ -177,14 +176,11 @@ module Jekyll
         )
     end
 
-    private
     def existing_file_modified?(path)
       # If one of this file dependencies have been modified,
       # set the regeneration bit for both the dependency and the file to true
       metadata[path]["deps"].each do |dependency|
-        if modified?(dependency)
-          return cache[dependency] = cache[path] = true
-        end
+        return cache[dependency] = cache[path] = true if modified?(dependency)
       end
 
       if File.exist?(path) && metadata[path]["mtime"].eql?(File.mtime(path))

@@ -1,8 +1,15 @@
-require "jekyll/liquid_renderer/file"
-require "jekyll/liquid_renderer/table"
+# frozen_string_literal: true
+
+require_relative "liquid_renderer/file"
+require_relative "liquid_renderer/table"
 
 module Jekyll
   class LiquidRenderer
+    extend Forwardable
+
+    private def_delegator :@site, :in_source_dir, :source_dir
+    private def_delegator :@site, :in_theme_dir, :theme_dir
+
     def initialize(site)
       @site = site
       Liquid::Template.error_mode = @site.config["liquid"]["error_mode"].to_sym
@@ -11,40 +18,60 @@ module Jekyll
 
     def reset
       @stats = {}
+      @cache = {}
     end
 
     def file(filename)
-      filename = @site.in_source_dir(filename).sub(
-        %r!\A#{Regexp.escape(@site.source)}/!,
-        ""
-      )
-
+      filename.match(filename_regex)
+      filename =
+        if Regexp.last_match(1) == theme_dir("")
+          ::File.join(::File.basename(Regexp.last_match(1)), Regexp.last_match(2))
+        else
+          Regexp.last_match(2)
+        end
       LiquidRenderer::File.new(self, filename).tap do
-        @stats[filename] ||= {}
-        @stats[filename][:count] ||= 0
-        @stats[filename][:count] += 1
+        @stats[filename] ||= new_profile_hash
       end
     end
 
     def increment_bytes(filename, bytes)
-      @stats[filename][:bytes] ||= 0
       @stats[filename][:bytes] += bytes
     end
 
     def increment_time(filename, time)
-      @stats[filename][:time] ||= 0.0
       @stats[filename][:time] += time
     end
 
-    def stats_table(n = 50)
-      LiquidRenderer::Table.new(@stats).to_s(n)
+    def increment_count(filename)
+      @stats[filename][:count] += 1
     end
 
-    def self.format_error(e, path)
-      if e.is_a? Tags::IncludeTagError
-        return "#{e.message} in #{e.path}, included in #{path}"
+    def stats_table(num_of_rows = 50)
+      LiquidRenderer::Table.new(@stats).to_s(num_of_rows)
+    end
+
+    def self.format_error(error, path)
+      "#{error.message} in #{path}"
+    end
+
+    # A persistent cache to store and retrieve parsed templates based on the filename
+    # via `LiquidRenderer::File#parse`
+    #
+    # It is emptied when `self.reset` is called.
+    def cache
+      @cache ||= {}
+    end
+
+    private
+
+    def filename_regex
+      @filename_regex ||= begin
+        %r!\A(#{Regexp.escape(source_dir)}/|#{Regexp.escape(theme_dir.to_s)}/|/*)(.*)!i
       end
-      "#{e.message} in #{path}"
+    end
+
+    def new_profile_hash
+      Hash.new { |hash, key| hash[key] = 0 }
     end
   end
 end

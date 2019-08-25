@@ -1,0 +1,13 @@
+{% if site.google_analytics_id %}
+  <!-- Google Analytics (https://www.google.com/analytics) -->
+  <script>
+    !function(j,e,k,y,l,L){j.GoogleAnalyticsObject=y,j[y]||(j[y]=function(){
+    (j[y].q=j[y].q||[]).push(arguments)}),j[y].l=+new Date,l=e.createElement(k),
+    L=e.getElementsByTagName(k)[0],l.src='https://www.google-analytics.com/analytics.js',
+    L.parentNode.insertBefore(l,L)}(window,document,'script','ga');
+
+    ga('create', '{{ site.google_analytics_id }}', 'jekyllrb.com');
+    ga('send', 'pageview');
+
+  </script>
+{% endif %}

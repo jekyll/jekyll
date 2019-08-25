@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class PostReader
     attr_reader :site, :unfiltered_content
@@ -32,14 +34,9 @@ module Jekyll
     #
     # Returns nothing.
     def read_publishable(dir, magic_dir, matcher)
-      read_content(dir, magic_dir, matcher).tap { |docs| docs.each(&:read) }
-        .select do |doc|
-          site.publisher.publish?(doc).tap do |will_publish|
-            if !will_publish && site.publisher.hidden_in_the_future?(doc)
-              Jekyll.logger.debug "Skipping:", "#{doc.relative_path} has a future date"
-            end
-          end
-        end
+      read_content(dir, magic_dir, matcher)
+        .tap { |docs| docs.each(&:read) }
+        .select { |doc| processable?(doc) }
     end
 
     # Read all the content files from <source>/<dir>/magic_dir
@@ -53,13 +50,35 @@ module Jekyll
     # Returns klass type of content files
     def read_content(dir, magic_dir, matcher)
       @site.reader.get_entries(dir, magic_dir).map do |entry|
-        next unless entry =~ matcher
+        next unless matcher.match?(entry)
+
         path = @site.in_source_dir(File.join(dir, magic_dir, entry))
-        Document.new(path, {
-          :site       => @site,
-          :collection => @site.posts
-        })
+        Document.new(path,
+                     :site       => @site,
+                     :collection => @site.posts)
       end.reject(&:nil?)
+    end
+
+    private
+
+    def processable?(doc)
+      if doc.content.nil?
+        Jekyll.logger.debug "Skipping:", "Content in #{doc.relative_path} is nil"
+        false
+      elsif !doc.content.valid_encoding?
+        Jekyll.logger.debug "Skipping:", "#{doc.relative_path} is not valid UTF-8"
+        false
+      else
+        publishable?(doc)
+      end
+    end
+
+    def publishable?(doc)
+      site.publisher.publish?(doc).tap do |will_publish|
+        if !will_publish && site.publisher.hidden_in_the_future?(doc)
+          Jekyll.logger.warn "Skipping:", "#{doc.relative_path} has a future date"
+        end
+      end
     end
   end
 end

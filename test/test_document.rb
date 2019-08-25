@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestDocument < JekyllUnitTest
@@ -5,11 +7,31 @@ class TestDocument < JekyllUnitTest
     assert_equal(one[key], other[key])
   end
 
+  def setup_encoded_document(filename)
+    site = fixture_site("collections" => ["encodings"])
+    site.process
+    Document.new(site.in_source_dir(File.join("_encodings", filename)),
+                 :site       => site,
+                 :collection => site.collections["encodings"]).tap(&:read)
+  end
+
+  def setup_document_with_dates(filename)
+    site = fixture_site("collections" => ["dates"])
+    site.process
+    docs = nil
+    with_env("TZ", "UTC") do
+      docs = Document.new(site.in_source_dir(File.join("_dates", filename)),
+                          :site       => site,
+                          :collection => site.collections["dates"]).tap(&:read)
+    end
+    docs
+  end
+
   context "a document in a collection" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => ["methods"]
-      })
+      )
       @site.process
       @document = @site.collections["methods"].docs.detect do |d|
         d.relative_path == "_methods/configuration.md"
@@ -36,6 +58,10 @@ class TestDocument < JekyllUnitTest
       assert_equal "configuration", @document.basename_without_ext
     end
 
+    should "know its type" do
+      assert_equal :methods, @document.type
+    end
+
     should "know whether it's a YAML file" do
       assert_equal false, @document.yaml_file?
     end
@@ -43,6 +69,12 @@ class TestDocument < JekyllUnitTest
     should "know its data" do
       assert_equal "Jekyll.configuration", @document.data["title"]
       assert_equal "foo.bar", @document.data["whatever"]
+    end
+
+    should "know its date" do
+      assert_nil @document.data["date"]
+      assert_equal Time.now.strftime("%Y/%m/%d"), @document.date.strftime("%Y/%m/%d")
+      assert_equal Time.now.strftime("%Y/%m/%d"), @document.to_liquid["date"].strftime("%Y/%m/%d")
     end
 
     should "be jsonify-able" do
@@ -86,9 +118,28 @@ class TestDocument < JekyllUnitTest
       assert_nil next_next_doc["previous"]["output"]
     end
 
+    context "with the basename (without extension) ending with dot(s)" do
+      setup do
+        @site = fixture_site("collections" => ["methods"])
+        @site.process
+        @document = @site.collections["methods"].docs.detect do |d|
+          d.relative_path == "_methods/trailing-dots...md"
+        end
+      end
+
+      should "render into the proper url" do
+        assert_equal "/methods/trailing-dots.html", @document.url
+
+        trailing_dots_doc = @site.posts.docs.detect do |d|
+          d.relative_path == "_posts/2018-10-12-trailing-dots...markdown"
+        end
+        assert_equal "/2018/10/12/trailing-dots.html", trailing_dots_doc.url
+      end
+    end
+
     context "with YAML ending in three dots" do
       setup do
-        @site = fixture_site({ "collections" => ["methods"] })
+        @site = fixture_site("collections" => ["methods"])
         @site.process
         @document = @site.collections["methods"].docs.detect do |d|
           d.relative_path == "_methods/yaml_with_dots.md"
@@ -102,27 +153,27 @@ class TestDocument < JekyllUnitTest
     end
 
     should "output the collection name in the #to_liquid method" do
-      assert_equal @document.to_liquid["collection"], "methods"
+      assert_equal "methods", @document.to_liquid["collection"]
     end
 
     should "output its relative path as path in Liquid" do
-      assert_equal @document.to_liquid["path"], "_methods/configuration.md"
+      assert_equal "_methods/configuration.md", @document.to_liquid["path"]
     end
   end
 
   context "a document as part of a collection with front matter defaults" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => ["slides"],
         "defaults"    => [{
-          "scope"  => { "path"=>"", "type"=>"slides" },
+          "scope"  => { "path" => "", "type" => "slides" },
           "values" => {
             "nested" => {
-              "key" => "myval"
-            }
-          }
+              "key" => "myval",
+            },
+          },
         }]
-      })
+      )
       @site.process
       @document = @site.collections["slides"].docs.select { |d| d.is_a?(Document) }.first
     end
@@ -132,22 +183,28 @@ class TestDocument < JekyllUnitTest
       assert_equal "slide", @document.data["layout"]
       assert_equal({ "key"=>"myval" }, @document.data["nested"])
     end
+
+    should "return front matter defaults via to_liquid" do
+      hash = @document.to_liquid
+      assert hash.key? "nested"
+      assert_equal({ "key"=>"myval" }, hash["nested"])
+    end
   end
 
   context "a document as part of a collection with overridden default values" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => ["slides"],
         "defaults"    => [{
-          "scope"  => { "path"=>"", "type"=>"slides" },
+          "scope"  => { "path" => "", "type" => "slides" },
           "values" => {
             "nested" => {
               "test1" => "default1",
-              "test2" => "default1"
-            }
-          }
+              "test2" => "default1",
+            },
+          },
         }]
-      })
+      )
       @site.process
       @document = @site.collections["slides"].docs[1]
     end
@@ -156,7 +213,7 @@ class TestDocument < JekyllUnitTest
       assert_equal "Override title", @document.data["title"]
       assert_equal "slide", @document.data["layout"]
       assert_equal(
-        { "test1"=>"override1", "test2"=>"override2" },
+        { "test1" => "override1", "test2" => "override2" },
         @document.data["nested"]
       )
     end
@@ -164,17 +221,17 @@ class TestDocument < JekyllUnitTest
 
   context "a document as part of a collection with valid path" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => ["slides"],
         "defaults"    => [{
-          "scope"  => { "path"=>"_slides", "type"=>"slides" },
+          "scope"  => { "path" => "_slides", "type" => "slides" },
           "values" => {
             "nested" => {
-              "key" => "value123"
-            }
-          }
+              "key" => "value123",
+            },
+          },
         }]
-      })
+      )
       @site.process
       @document = @site.collections["slides"].docs.first
     end
@@ -188,17 +245,17 @@ class TestDocument < JekyllUnitTest
 
   context "a document as part of a collection with invalid path" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => ["slides"],
         "defaults"    => [{
-          "scope"  => { "path"=>"somepath", "type"=>"slides" },
+          "scope"  => { "path" => "somepath", "type" => "slides" },
           "values" => {
             "nested" => {
-              "key" => "myval"
-            }
-          }
+              "key" => "myval",
+            },
+          },
         }]
-      })
+      )
       @site.process
       @document = @site.collections["slides"].docs.first
     end
@@ -206,15 +263,15 @@ class TestDocument < JekyllUnitTest
     should "not know the specified front matter defaults" do
       assert_equal "Example slide", @document.data["title"]
       assert_equal "slide", @document.data["layout"]
-      assert_equal nil, @document.data["nested"]
+      assert_nil @document.data["nested"]
     end
   end
 
   context "a document in a collection with a custom permalink" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => ["slides"]
-      })
+      )
       @site.process
       @document = @site.collections["slides"].docs[2]
       @dest_file = dest_dir("slide/3/index.html")
@@ -231,15 +288,15 @@ class TestDocument < JekyllUnitTest
 
   context "a document in a collection with custom filename permalinks" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "slides" => {
             "output"    => true,
-            "permalink" => "/slides/test/:name"
-          }
+            "permalink" => "/slides/test/:name",
+          },
         },
         "permalink"   => "pretty"
-      })
+      )
       @site.process
       @document = @site.collections["slides"].docs[0]
       @dest_file = dest_dir("slides/test/example-slide-1.html")
@@ -260,13 +317,13 @@ class TestDocument < JekyllUnitTest
 
   context "a document in a collection with pretty permalink style" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "slides" => {
-            "output" => true
-          }
+            "output" => true,
+          },
         }
-      })
+      )
       @site.permalink_style = :pretty
       @site.process
       @document = @site.collections["slides"].docs[0]
@@ -284,13 +341,13 @@ class TestDocument < JekyllUnitTest
 
   context "a document in a collection with cased file name" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "slides" => {
-            "output" => true
-          }
+            "output" => true,
+          },
         }
-      })
+      )
       @site.permalink_style = :pretty
       @site.process
       @document = @site.collections["slides"].docs[7]
@@ -304,13 +361,13 @@ class TestDocument < JekyllUnitTest
 
   context "a document in a collection with cased file name" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "slides" => {
-            "output" => true
-          }
+            "output" => true,
+          },
         }
-      })
+      )
       @site.process
       @document = @site.collections["slides"].docs[6]
       @dest_file = dest_dir("slides/example-slide-7.php")
@@ -335,14 +392,14 @@ class TestDocument < JekyllUnitTest
 
   context "documents in a collection with custom title permalinks" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "slides" => {
             "output"    => true,
-            "permalink" => "/slides/:title"
-          }
+            "permalink" => "/slides/:title",
+          },
         }
-      })
+      )
       @site.process
       @document = @site.collections["slides"].docs[3]
       @document_without_slug = @site.collections["slides"].docs[4]
@@ -380,9 +437,9 @@ class TestDocument < JekyllUnitTest
 
   context "document with a permalink with dots & a trailing slash" do
     setup do
-      @site = fixture_site({ "collections" => {
-        "with.dots" => { "output" => true }
-      } })
+      @site = fixture_site("collections" => {
+        "with.dots" => { "output" => true },
+      })
       @site.process
       @document = @site.collections["with.dots"].docs.last
       @dest_file = dest_dir("with.dots", "permalink.with.slash.tho", "index.html")
@@ -403,13 +460,13 @@ class TestDocument < JekyllUnitTest
 
   context "documents in a collection" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "slides" => {
-            "output" => true
-          }
+            "output" => true,
+          },
         }
-      })
+      )
       @site.process
       @files = @site.collections["slides"].docs
     end
@@ -419,27 +476,29 @@ class TestDocument < JekyllUnitTest
         refute_nil @files.find do |doc|
           doc.relative_path == "_slides/example-slide-4.html"
         end
+        assert_exist dest_dir("slides/example-slide-4.html")
       end
     end
 
     context "with output overrides" do
       should "be output according its front matter" do
-        assert_nil @files.find { |doc|
+        assert @files.find do |doc|
           doc.relative_path == "_slides/non-outputted-slide.html"
-        }
+        end
+        refute_exist dest_dir("slides/non-outputted-slide.html")
       end
     end
   end
 
   context "a static file in a collection" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "slides" => {
-            "output" => true
-          }
+            "output" => true,
+          },
         }
-      })
+      )
       @site.process
       @document = @site.collections["slides"].files.find do |doc|
         doc.relative_path == "_slides/octojekyll.png"
@@ -466,13 +525,13 @@ class TestDocument < JekyllUnitTest
 
   context "a document in a collection with non-alphabetic file name" do
     setup do
-      @site = fixture_site({
+      @site = fixture_site(
         "collections" => {
           "methods" => {
-            "output" => true
-          }
+            "output" => true,
+          },
         }
-      })
+      )
       @site.process
       @document = @site.collections["methods"].docs.find do |doc|
         doc.relative_path == "_methods/escape-+ #%20[].md"
@@ -490,6 +549,97 @@ class TestDocument < JekyllUnitTest
 
     should "be output in the correct place" do
       assert_equal true, File.file?(@dest_file)
+    end
+  end
+
+  context "a document in a collection with dash-separated numeric file name" do
+    setup do
+      @site = fixture_site(
+        "collections" => {
+          "methods" => {
+            "output" => true,
+          },
+        }
+      )
+      @site.process
+      @document = @site.collections["methods"].docs.find do |doc|
+        doc.relative_path == "_methods/3940394-21-9393050-fifif1323-test.md"
+      end
+      @dest_file = dest_dir("methods/3940394-21-9393050-fifif1323-test.html")
+    end
+
+    should "produce the right URL" do
+      assert_equal "/methods/3940394-21-9393050-fifif1323-test.html", @document.url
+    end
+
+    should "produce the right destination" do
+      assert_equal @dest_file, @document.destination(dest_dir)
+    end
+
+    should "be output in the correct place" do
+      assert_equal true, File.file?(@dest_file)
+    end
+  end
+
+  context "a document with UTF-8 CLRF" do
+    setup do
+      @document = setup_encoded_document "UTF8CRLFandBOM.md"
+    end
+
+    should "not throw an error" do
+      Jekyll::Renderer.new(@document.site, @document).render_document
+    end
+  end
+
+  context "a document with UTF-16LE CLRF" do
+    setup do
+      @document = setup_encoded_document "Unicode16LECRLFandBOM.md"
+    end
+
+    should "not throw an error" do
+      Jekyll::Renderer.new(@document.site, @document).render_document
+    end
+  end
+
+  context "a document with a date with timezone" do
+    setup do
+      @document = setup_document_with_dates "time_with_timezone.md"
+    end
+
+    should "have the expected date" do
+      assert_equal "2015/09/30", @document.data["date"].strftime("%Y/%m/%d")
+    end
+
+    should "return the expected date via Liquid" do
+      assert_equal "2015/09/30", @document.to_liquid["date"].strftime("%Y/%m/%d")
+    end
+  end
+
+  context "a document with a date with time but without timezone" do
+    setup do
+      @document = setup_document_with_dates "time_without_timezone.md"
+    end
+
+    should "have the expected date" do
+      assert_equal "2015/10/01", @document.data["date"].strftime("%Y/%m/%d")
+    end
+
+    should "return the expected date via Liquid" do
+      assert_equal "2015/10/01", @document.to_liquid["date"].strftime("%Y/%m/%d")
+    end
+  end
+
+  context "a document with a date without time" do
+    setup do
+      @document = setup_document_with_dates "date_without_time.md"
+    end
+
+    should "have the expected date" do
+      assert_equal "2015/10/01", @document.data["date"].strftime("%Y/%m/%d")
+    end
+
+    should "return the expected date via Liquid" do
+      assert_equal "2015/10/01", @document.to_liquid["date"].strftime("%Y/%m/%d")
     end
   end
 end

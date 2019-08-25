@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# frozen_string_literal: true
 
 module Jekyll
   module Drops
@@ -15,11 +15,7 @@ module Jekyll
       #
       # Returns the mutability of the class
       def self.mutable(is_mutable = nil)
-        @is_mutable = if is_mutable
-                        is_mutable
-                      else
-                        false
-                      end
+        @is_mutable = is_mutable || false
       end
 
       def self.mutable?
@@ -34,7 +30,6 @@ module Jekyll
       # Returns nothing
       def initialize(obj)
         @obj = obj
-        @mutations = {} # only if mutable: true
       end
 
       # Access a method in the Drop or a field in the underlying hash data.
@@ -46,14 +41,15 @@ module Jekyll
       #
       # Returns the value for the given key, or nil if none exists
       def [](key)
-        if self.class.mutable? && @mutations.key?(key)
-          @mutations[key]
+        if self.class.mutable? && mutations.key?(key)
+          mutations[key]
         elsif self.class.invokable? key
           public_send key
         else
           fallback_data[key]
         end
       end
+      alias_method :invoke_drop, :[]
 
       # Set a field in the Drop. If mutable, sets in the mutations and
       # returns. If not mutable, checks first if it's trying to override a
@@ -69,11 +65,12 @@ module Jekyll
       # and the key matches a method in which case it raises a
       # DropMutationException.
       def []=(key, val)
-        if respond_to?("#{key}=")
-          public_send("#{key}=", val)
-        elsif respond_to? key
+        setter = "#{key}="
+        if respond_to?(setter)
+          public_send(setter, val)
+        elsif respond_to?(key.to_s)
           if self.class.mutable?
-            @mutations[key] = val
+            mutations[key] = val
           else
             raise Errors::DropMutationException, "Key #{key} cannot be set in the drop."
           end
@@ -102,11 +99,10 @@ module Jekyll
       #
       # Returns true if the given key is present
       def key?(key)
-        if self.class.mutable
-          @mutations.key?(key)
-        else
-          respond_to?(key) || fallback_data.key?(key)
-        end
+        return false if key.nil?
+        return true if self.class.mutable? && mutations.key?(key)
+
+        respond_to?(key) || fallback_data.key?(key)
       end
 
       # Generates a list of keys with user content as their values.
@@ -117,7 +113,7 @@ module Jekyll
       # Returns an Array of unique keys for content for the Drop.
       def keys
         (content_methods |
-          @mutations.keys |
+          mutations.keys |
           fallback_data.keys).flatten
       end
 
@@ -138,7 +134,6 @@ module Jekyll
       #
       # Returns a pretty generation of the hash representation of the Drop.
       def inspect
-        require "json"
         JSON.pretty_generate to_h
       end
 
@@ -156,7 +151,6 @@ module Jekyll
       #
       # Returns a JSON representation of the Drop in a String.
       def to_json(state = nil)
-        require "json"
         JSON.generate(hash_for_json(state), state)
       end
 
@@ -176,7 +170,7 @@ module Jekyll
       end
 
       def merge(other, &block)
-        self.dup.tap do |me|
+        dup.tap do |me|
           if block.nil?
             me.merge!(other)
           else
@@ -209,6 +203,12 @@ module Jekyll
         raise KeyError, %(key not found: "#{key}") if default.nil? && block.nil?
         return yield(key) unless block.nil?
         return default unless default.nil?
+      end
+
+      private
+
+      def mutations
+        @mutations ||= {}
       end
     end
   end

@@ -1,0 +1,17 @@
+<div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    {% for section in site.data.docs_nav %}
+      <h4>{{ section.title }}</h4>
+      <ul>
+        {% for item in section.docs %}
+          {% assign p = site.documents | where: "url", item.link | first %}
+          <li {%- if page.url == p.url %} class="current" {%- endif %}>
+            <a href="{{ p.url }}">
+              {{ p.menu_name | default: p.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endfor %}
+  </aside>
+</div>

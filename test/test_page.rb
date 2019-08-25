@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestPage < JekyllUnitTest
@@ -12,7 +14,7 @@ class TestPage < JekyllUnitTest
 
   def do_render(page)
     layouts = {
-      "default" => Layout.new(@site, source_dir("_layouts"), "simple.html")
+      "default" => Layout.new(@site, source_dir("_layouts"), "simple.html"),
     }
     page.render(layouts, @site.site_payload)
   end
@@ -20,17 +22,22 @@ class TestPage < JekyllUnitTest
   context "A Page" do
     setup do
       clear_dest
-      @site = Site.new(Jekyll.configuration({
-        "source"            => source_dir,
-        "destination"       => dest_dir,
-        "skip_config_files" => true
-      }))
+      @site = Site.new(Jekyll.configuration(
+                         "source"            => source_dir,
+                         "destination"       => dest_dir,
+                         "skip_config_files" => true
+                       ))
     end
 
     context "processing pages" do
       should "create URL based on filename" do
         @page = setup_page("contacts.html")
         assert_equal "/contacts.html", @page.url
+      end
+
+      should "create proper URL from filename" do
+        @page = setup_page("trailing-dots...md")
+        assert_equal "/trailing-dots.html", @page.url
       end
 
       should "not published when published yaml is false" do
@@ -90,13 +97,17 @@ class TestPage < JekyllUnitTest
           :permalink => "/properties/",
           :published => nil,
           :title     => "Properties Page",
-          :url       => "/properties/"
+          :url       => "/properties/",
         }
 
         attrs.each do |attr, val|
           attr_str = attr.to_s
           result = page[attr_str]
-          assert_equal val, result, "For <page[\"#{attr_str}\"]>:"
+          if val.nil?
+            assert_nil result, "For <page[\"#{attr_str}\"]>:"
+          else
+            assert_equal val, result, "For <page[\"#{attr_str}\"]>:"
+          end
         end
       end
 
@@ -220,7 +231,7 @@ class TestPage < JekyllUnitTest
 
       should "return nil permalink if no permalink exists" do
         @page = setup_page("")
-        assert_equal nil, @page.permalink
+        assert_nil @page.permalink
       end
 
       should "not be writable outside of destination" do

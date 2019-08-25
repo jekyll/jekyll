@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   module Utils
     module Platforms
@@ -19,16 +21,29 @@ module Jekyll
       # /proc/version returns nothing to us.
       # --
 
-      def really_windows?
+      def vanilla_windows?
         RbConfig::CONFIG["host_os"] =~ %r!mswin|mingw|cygwin!i && \
           !proc_version
+      end
+
+      # --
+      # XXX: Remove in 4.0
+      # --
+
+      alias_method :really_windows?, \
+                   :vanilla_windows?
+
+      #
+
+      def bash_on_windows?
+        RbConfig::CONFIG["host_os"] =~ %r!linux! && \
+          proc_version =~ %r!microsoft!i
       end
 
       #
 
       def windows?
-        RbConfig::CONFIG["host_os"] =~ %r!mswin|mingw|cygwin!i || \
-          proc_version =~ %r!microsoft!i
+        vanilla_windows? || bash_on_windows?
       end
 
       #
@@ -53,14 +68,14 @@ module Jekyll
       #
 
       private
+
       def proc_version
-        @cached_proc_version ||= begin
-          Pathutil.new(
-            "/proc/version"
-          ).read
-        rescue Errno::ENOENT
-          nil
-        end
+        @proc_version ||=
+          begin
+            File.read("/proc/version")
+          rescue Errno::ENOENT, Errno::EACCES
+            nil
+          end
       end
     end
   end

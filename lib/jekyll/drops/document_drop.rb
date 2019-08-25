@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# frozen_string_literal: true
 
 module Jekyll
   module Drops
@@ -12,7 +12,9 @@ module Jekyll
       mutable false
 
       def_delegator :@obj, :relative_path, :path
-      def_delegators :@obj, :id, :output, :content, :to_s, :relative_path, :url
+      def_delegators :@obj, :id, :output, :content, :to_s, :relative_path, :url, :date
+
+      private def_delegator :@obj, :data, :fallback_data
 
       def collection
         @obj.collection.label
@@ -24,6 +26,7 @@ module Jekyll
 
       def <=>(other)
         return nil unless other.is_a? DocumentDrop
+
         cmp = self["date"] <=> other["date"]
         cmp = self["path"] <=> other["path"] if cmp.nil? || cmp.zero?
         cmp
@@ -61,9 +64,6 @@ module Jekyll
           result[key] = doc[key] unless NESTED_OBJECT_FIELD_BLACKLIST.include?(key)
         end
       end
-
-      private
-      def_delegator :@obj, :data, :fallback_data
     end
   end
 end

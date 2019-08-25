@@ -1,0 +1,15 @@
+<div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select onchange="if (this.value) window.location.href=this.value">
+    <option value="">Navigate the docs…</option>
+    {% for section in site.data.docs_nav %}
+    <optgroup label="{{ section.title }}">
+      {% for item in section.docs %}
+        {% assign p = site.documents | where: "url", item.link | first %}
+        <option value="{{ p.url }}">
+          {{ p.menu_name | default: p.title }}
+        </option>
+      {% endfor %}
+    </optgroup>
+    {% endfor %}
+  </select>
+</div>

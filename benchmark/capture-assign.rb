@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require "liquid"
 require "benchmark/ips"
 

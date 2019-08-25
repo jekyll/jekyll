@@ -1,0 +1,46 @@
+---
+layout: page
+title: Showcase
+permalink: /showcase/
+redirect_from:
+  - /docs/sites/
+---
+
+<p>Jekyll is used for all kinds of usecases. Here's some of our favorites:</p>
+
+<ul class="showcase" id="showcase">
+  {% for s in site.data.showcase reversed %}
+    <li>
+      <a href="{{ s.url }}" target="_blank">
+        <figure>
+          <div class="imageWrapper">
+            <img class="b-lazy" src="/img/spacer.gif" alt="{{ s.name }}">
+          </div>
+          <figcaption>{{ s.name }}</figcaption>
+        </figure>
+      </a>
+    </li>
+  {% endfor %}
+  <li class="spacer"></li>
+</ul>
+
+<script src="//cdn.jsdelivr.net/blazy/latest/blazy.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<script>
+  var apiUrl = 'https://d2ov3dk2yjyb0w.cloudfront.net/',
+    a = 'c7aa76e1-684d-4c45-b396-78b893839b5f',
+    b = 'c7bfb661-71a8-40bb-baac-7ddad709639c',
+    sites = document.getElementById('showcase').getElementsByTagName('a');
+
+  for (var i = 0; i < sites.length; i++) {
+    var href = sites[i].getAttribute('href'),
+      inputUrl = encodeURIComponent(href),
+      q = 'url=' + inputUrl + '&delay=2&resizeWidth=800&resizeHeight=600',
+      hash = md5(b + q),
+      resultImgUrl = apiUrl + a + '/' + hash + '/image?' + q;
+
+    sites[i].getElementsByTagName('img')[0].setAttribute('data-src', resultImgUrl);
+  }
+
+  var bLazy = new Blazy();
+</script>

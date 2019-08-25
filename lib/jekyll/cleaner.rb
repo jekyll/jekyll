@@ -1,9 +1,9 @@
-require "set"
+# frozen_string_literal: true
 
 module Jekyll
   # Handles the cleanup of a site's destination before it is built.
   class Cleaner
-    HIDDEN_FILE_REGEX = %r!\/\.{1,2}$!
+    HIDDEN_FILE_REGEX = %r!\/\.{1,2}$!.freeze
     attr_reader :site
 
     def initialize(site)
@@ -22,7 +22,9 @@ module Jekyll
     #
     # Returns an Array of the file and directory paths
     def obsolete_files
-      (existing_files - new_files - new_dirs + replaced_files).to_a
+      out = (existing_files - new_files - new_dirs + replaced_files).to_a
+      Jekyll::Hooks.trigger :clean, :on_obsolete, out
+      out
     end
 
     # Private: The metadata file storing dependency tree and build history
@@ -43,6 +45,7 @@ module Jekyll
 
       Utils.safe_glob(site.in_dest_dir, ["**", "*"], File::FNM_DOTMATCH).each do |file|
         next if file =~ HIDDEN_FILE_REGEX || file =~ regex || dirs.include?(file)
+
         files << file
       end
 
@@ -53,9 +56,9 @@ module Jekyll
     #
     # Returns a Set with the file paths
     def new_files
-      files = Set.new
-      site.each_site_file { |item| files << item.destination(site.dest) }
-      files
+      @new_files ||= Set.new.tap do |files|
+        site.each_site_file { |item| files << item.destination(site.dest) }
+      end
     end
 
     # Private: The list of directories to be created when site is built.
@@ -63,7 +66,7 @@ module Jekyll
     #
     # Returns a Set with the directory paths
     def new_dirs
-      new_files.map { |file| parent_dirs(file) }.flatten.to_set
+      @new_dirs ||= new_files.flat_map { |file| parent_dirs(file) }.to_set
     end
 
     # Private: The list of parent directories of a given file
@@ -74,7 +77,7 @@ module Jekyll
       if parent_dir == site.dest
         []
       else
-        [parent_dir] + parent_dirs(parent_dir)
+        parent_dirs(parent_dir).unshift(parent_dir)
       end
     end
 
@@ -91,7 +94,7 @@ module Jekyll
     #
     # Returns a Set with the directory paths
     def keep_dirs
-      site.keep_files.map { |file| parent_dirs(site.in_dest_dir(file)) }.flatten.to_set
+      site.keep_files.flat_map { |file| parent_dirs(site.in_dest_dir(file)) }.to_set
     end
 
     # Private: Creates a regular expression from the config's keep_files array

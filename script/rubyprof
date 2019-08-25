@@ -1,19 +1,23 @@
-#!/usr/bin/env bash
+#!/usr/bin/env ruby
 
-export BENCHMARK=1
+require "ruby-prof"
+require File.expand_path("../lib/jekyll", __dir__)
 
-TEST_SCRIPT="Jekyll::Commands::Build.process({'source' => 'site'})"
+result = RubyProf.profile do
+  Jekyll::Commands::Build.process({
+    "source"      => File.expand_path("../docs", __dir__),
+    "destination" => File.expand_path("../docs/_site", __dir__),
+  })
+end
 
-RUBY=$(cat <<RUBY
-  require 'ruby-prof'
-  result = RubyProf.profile{ ${TEST_SCRIPT} }
-  printer = RubyProf::CallTreePrinter.new(result)
-  filename = "tmp/ruby_prof_#{rand 10000}"
-  puts "Writing profile to #{filename}"
-  file = File.open(filename, "w")
-  printer.print(file, {})
-  file.close
-RUBY
-)
+puts "\nProcessing result.."
 
-bundle exec ruby -r ./lib/jekyll -e "${RUBY}"
+dir_path  = File.expand_path("../tmp", __dir__)
+file_path = File.join(dir_path, "rubyprof-#{Time.now.strftime('%Y%m%d%H%M%S')}")
+
+FileUtils.mkdir_p(dir_path) unless Dir.exist?(dir_path)
+File.open(file_path, "wb") do |file|
+  RubyProf::FlatPrinter.new(result).print(file)
+end
+
+puts "Profile result printed to #{file_path.cyan}"

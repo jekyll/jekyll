@@ -1,0 +1,13 @@
+<ul>
+  {% for p in site.data.primary_nav %}
+  <li
+    {%- if p.link == '/' -%}
+      {% if page.url == p.link %} class="current" {%- endif %}
+    {%- else -%}
+      {% if page.url contains p.link %} class="current" {%- endif %}
+    {%- endif -%}
+  >
+    <a href="{{ p.link }}">{{ p.title }}</a>
+  </li>
+  {% endfor %}
+</ul>

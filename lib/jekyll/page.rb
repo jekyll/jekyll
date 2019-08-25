@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class Page
     include Convertible
@@ -8,8 +10,6 @@ module Jekyll
     attr_accessor :data, :content, :output
 
     alias_method :extname, :ext
-
-    FORWARD_SLASH = "/".freeze
 
     # Attributes for Liquid templates
     ATTRIBUTES_FOR_LIQUID = %w(
@@ -47,10 +47,10 @@ module Jekyll
               end
 
       process(name)
-      read_yaml(File.join(base, dir), name)
+      read_yaml(PathManager.join(base, dir), name)
 
       data.default_proc = proc do |_, key|
-        site.frontmatter_defaults.find(File.join(dir, name), type, key)
+        site.frontmatter_defaults.find(relative_path, type, key)
       end
 
       Jekyll::Hooks.trigger :pages, :post_init, self
@@ -58,15 +58,15 @@ module Jekyll
 
     # The generated directory into which the page will be placed
     # upon generation. This is derived from the permalink or, if
-    # permalink is absent, we be '/'
+    # permalink is absent, will be '/'
     #
     # Returns the String destination directory.
     def dir
-      if url.end_with?(FORWARD_SLASH)
+      if url.end_with?("/")
         url
       else
         url_dir = File.dirname(url)
-        url_dir.end_with?(FORWARD_SLASH) ? url_dir : "#{url_dir}/"
+        url_dir.end_with?("/") ? url_dir : "#{url_dir}/"
       end
     end
 
@@ -95,11 +95,11 @@ module Jekyll
     #
     # Returns the String url.
     def url
-      @url ||= URL.new({
+      @url ||= URL.new(
         :template     => template,
         :placeholders => url_placeholders,
         :permalink    => permalink
-      }).to_s
+      ).to_s
     end
 
     # Returns a hash of URL placeholder names (as symbols) mapping to the
@@ -108,7 +108,7 @@ module Jekyll
       {
         :path       => @dir,
         :basename   => basename,
-        :output_ext => output_ext
+        :output_ext => output_ext,
       }
     end
 
@@ -116,10 +116,11 @@ module Jekyll
     #
     # name - The String filename of the page file.
     #
+    # NOTE: `String#gsub` removes all trailing periods (in comparison to `String#chomp`)
     # Returns nothing.
     def process(name)
       self.ext = File.extname(name)
-      self.basename = name[0..-ext.length - 1]
+      self.basename = name[0..-ext.length - 1].gsub(%r!\.*\z!, "")
     end
 
     # Add any necessary layouts to this post
@@ -127,7 +128,7 @@ module Jekyll
     # layouts      - The Hash of {"name" => "layout"}.
     # site_payload - The site payload Hash.
     #
-    # Returns nothing.
+    # Returns String rendered page.
     def render(layouts, site_payload)
       site_payload["page"] = to_liquid
       site_payload["paginator"] = pager.to_liquid
@@ -144,7 +145,7 @@ module Jekyll
 
     # The path to the page source file, relative to the site source
     def relative_path
-      File.join(*[@dir, @name].map(&:to_s).reject(&:empty?)).sub(%r!\A\/!, "")
+      @relative_path ||= File.join(*[@dir, @name].map(&:to_s).reject(&:empty?)).sub(%r!\A\/!, "")
     end
 
     # Obtain destination path.
@@ -161,7 +162,7 @@ module Jekyll
 
     # Returns the object as a debug String.
     def inspect
-      "#<Jekyll:Page @name=#{name.inspect}>"
+      "#<#{self.class} @relative_path=#{relative_path.inspect}>"
     end
 
     # Returns the Boolean of whether this Page is HTML or not.

@@ -1,26 +1,30 @@
+# frozen_string_literal: true
+
 module Jekyll
   class DataReader
     attr_reader :site, :content
-    def initialize(site)
+
+    def initialize(site, mode: :source)
       @site = site
       @content = {}
       @entry_filter = EntryFilter.new(site)
+      @mode = mode
     end
 
-    # Read all the files in <source>/<dir>/_drafts and create a new Draft
-    # object with each one.
+    # Read all the files in <dir> and adds them to @content
     #
     # dir - The String relative path of the directory to read.
     #
-    # Returns nothing.
+    # Returns @content, a Hash of the .yaml, .yml,
+    # .json, and .csv files in the base directory
     def read(dir)
-      base = site.in_source_dir(dir)
+      base = compute_absolute_path(dir)
       read_data_to(base, @content)
       @content
     end
 
-    # Read and parse all yaml files under <dir> and add them to the
-    # <data> variable.
+    # Read and parse all .yaml, .yml, .json, .csv and .tsv
+    # files under <dir> and add them to the <data> variable.
     #
     # dir - The string absolute path of the directory to read.
     # data - The variable to which data will be added.
@@ -30,11 +34,11 @@ module Jekyll
       return unless File.directory?(dir) && !@entry_filter.symlink?(dir)
 
       entries = Dir.chdir(dir) do
-        Dir["*.{yaml,yml,json,csv}"] + Dir["*"].select { |fn| File.directory?(fn) }
+        Dir["*.{yaml,yml,json,csv,tsv}"] + Dir["*"].select { |fn| File.directory?(fn) }
       end
 
       entries.each do |entry|
-        path = @site.in_source_dir(dir, entry)
+        path = compute_absolute_path(dir, entry)
         next if @entry_filter.symlink?(path)
 
         if File.directory?(path)
@@ -52,19 +56,28 @@ module Jekyll
     def read_data_file(path)
       case File.extname(path).downcase
       when ".csv"
-        CSV.read(path, {
-          :headers  => true,
-          :encoding => site.config["encoding"]
-        }).map(&:to_hash)
+        CSV.read(path,
+                 :headers  => true,
+                 :encoding => site.config["encoding"]).map(&:to_hash)
+      when ".tsv"
+        CSV.read(path,
+                 :col_sep  => "\t",
+                 :headers  => true,
+                 :encoding => site.config["encoding"]).map(&:to_hash)
       else
         SafeYAML.load_file(path)
       end
     end
 
     def sanitize_filename(name)
-      name.gsub!(%r![^\w\s-]+!, "")
-      name.gsub!(%r!(^|\b\s)\s+($|\s?\b)!, '\\1\\2')
-      name.gsub(%r!\s+!, "_")
+      name.gsub(%r![^\w\s-]+|(?<=^|\b\s)\s+(?=$|\s?\b)!, "")
+        .gsub(%r!\s+!, "_")
+    end
+
+    private
+
+    def compute_absolute_path(*entries)
+      @mode == :theme ? @site.in_theme_dir(*entries) : @site.in_source_dir(*entries)
     end
   end
 end

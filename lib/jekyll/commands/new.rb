@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "erb"
 
 module Jekyll
@@ -25,8 +27,9 @@ module Jekyll
           new_blog_path = File.expand_path(args.join(" "), Dir.pwd)
           FileUtils.mkdir_p new_blog_path
           if preserve_source_location?(new_blog_path, options)
-            Jekyll.logger.abort_with "Conflict:",
-                      "#{new_blog_path} exists and is not empty."
+            Jekyll.logger.error "Conflict:", "#{new_blog_path} exists and is not empty."
+            Jekyll.logger.abort_with "", "Ensure #{new_blog_path} is empty or else " \
+                      "try again with `--force` to proceed and overwrite any files."
           end
 
           if options["blank"]
@@ -38,10 +41,16 @@ module Jekyll
           after_install(new_blog_path, options)
         end
 
+        def blank_template
+          File.expand_path("../../blank_template", __dir__)
+        end
+
         def create_blank_site(path)
+          FileUtils.cp_r blank_template + "/.", path
+          FileUtils.chmod_R "u+w", path
+
           Dir.chdir(path) do
-            FileUtils.mkdir(%w(_layouts _posts _drafts))
-            FileUtils.touch("index.html")
+            FileUtils.mkdir(%w(_data _drafts _includes _posts))
           end
         end
 
@@ -59,32 +68,38 @@ module Jekyll
         private
 
         def gemfile_contents
-          <<-RUBY
-source "https://rubygems.org"
-ruby RUBY_VERSION
+          <<~RUBY
+            source "https://rubygems.org"
+            # Hello! This is where you manage which Jekyll version is used to run.
+            # When you want to use a different version, change it below, save the
+            # file and run `bundle install`. Run Jekyll with `bundle exec`, like so:
+            #
+            #     bundle exec jekyll serve
+            #
+            # This will help ensure the proper Jekyll version is running.
+            # Happy Jekylling!
+            gem "jekyll", "~> #{Jekyll::VERSION}"
+            # This is the default theme for new Jekyll sites. You may change this to anything you like.
+            gem "minima", "~> 2.5"
+            # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
+            # uncomment the line below. To upgrade, run `bundle update github-pages`.
+            # gem "github-pages", group: :jekyll_plugins
+            # If you have any plugins, put them here!
+            group :jekyll_plugins do
+              gem "jekyll-feed", "~> 0.12"
+            end
 
-# Hello! This is where you manage which Jekyll version is used to run.
-# When you want to use a different version, change it below, save the
-# file and run `bundle install`. Run Jekyll with `bundle exec`, like so:
-#
-#     bundle exec jekyll serve
-#
-# This will help ensure the proper Jekyll version is running.
-# Happy Jekylling!
-gem "jekyll", "#{Jekyll::VERSION}"
+            # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
+            # and associated library.
+            install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do
+              gem "tzinfo", "~> 1.2"
+              gem "tzinfo-data"
+            end
 
-# This is the default theme for new Jekyll sites. You may change this to anything you like.
-gem "minima", "~> 2.0"
+            # Performance-booster for watching directories on Windows
+            gem "wdm", "~> 0.1.1", :install_if => Gem.win_platform?
 
-# If you want to use GitHub Pages, remove the "gem "jekyll"" above and
-# uncomment the line below. To upgrade, run `bundle update github-pages`.
-# gem "github-pages", group: :jekyll_plugins
-
-# If you have any plugins, put them here!
-group :jekyll_plugins do
-   gem "jekyll-feed", "~> 0.6"
-end
-RUBY
+          RUBY
         end
 
         def create_site(new_blog_path)
@@ -105,11 +120,12 @@ RUBY
 
         def create_sample_files(path)
           FileUtils.cp_r site_template + "/.", path
+          FileUtils.chmod_R "u+w", path
           FileUtils.rm File.expand_path(scaffold_path, path)
         end
 
         def site_template
-          File.expand_path("../../site_template", File.dirname(__FILE__))
+          File.expand_path("../../site_template", __dir__)
         end
 
         def scaffold_path
@@ -121,23 +137,30 @@ RUBY
         # unless the user opts to generate a blank blog or skip 'bundle install'.
 
         def after_install(path, options = {})
+          unless options["blank"] || options["skip-bundle"]
+            begin
+              require "bundler"
+              bundle_install path
+            rescue LoadError
+              Jekyll.logger.info "Could not load Bundler. Bundle install skipped."
+            end
+          end
+
           Jekyll.logger.info "New jekyll site installed in #{path.cyan}."
           Jekyll.logger.info "Bundle install skipped." if options["skip-bundle"]
-
-          unless options["blank"] || options["skip-bundle"]
-            bundle_install path
-          end
         end
 
         def bundle_install(path)
-          Jekyll::External.require_with_graceful_fail "bundler"
           Jekyll.logger.info "Running bundle install in #{path.cyan}..."
           Dir.chdir(path) do
-            if ENV["CI"]
-              system("bundle", "install", "--quiet")
-            else
-              system("bundle", "install")
+            exe = Gem.bin_path("bundler", "bundle")
+            process, output = Jekyll::Utils::Exec.run("ruby", exe, "install")
+
+            output.to_s.each_line do |line|
+              Jekyll.logger.info("Bundler:".green, line.strip) unless line.to_s.empty?
             end
+
+            raise SystemExit unless process.success?
           end
         end
       end

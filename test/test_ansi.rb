@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 
 class TestAnsi < JekyllUnitTest
@@ -6,14 +8,14 @@ class TestAnsi < JekyllUnitTest
       @subject = Jekyll::Utils::Ansi
     end
 
-    Jekyll::Utils::Ansi::COLORS.each do |color, _val|
+    Jekyll::Utils::Ansi::COLORS.each_key do |color|
       should "respond_to? #{color}" do
         assert @subject.respond_to?(color)
       end
     end
 
     should "be able to strip colors" do
-      assert_equal @subject.strip(@subject.yellow(@subject.red("hello"))), "hello"
+      assert_equal "hello", @subject.strip(@subject.yellow(@subject.red("hello")))
     end
 
     should "be able to detect colors" do

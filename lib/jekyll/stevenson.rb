@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   class Stevenson < ::Logger
     def initialize
@@ -14,9 +16,8 @@ module Jekyll
       severity ||= UNKNOWN
       @logdev = logdevice(severity)
 
-      if @logdev.nil? || severity < @level
-        return true
-      end
+      return true if @logdev.nil? || severity < @level
+
       progname ||= @progname
       if message.nil?
         if block_given?

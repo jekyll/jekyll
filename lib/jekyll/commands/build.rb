@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Jekyll
   module Commands
     class Build < Command
@@ -13,7 +15,7 @@ module Jekyll
 
             c.action do |_, options|
               options["serving"] = false
-              Jekyll::Commands::Build.process(options)
+              process_with_graceful_fail(c, options, self)
             end
           end
         end
@@ -29,14 +31,14 @@ module Jekyll
 
           if options.fetch("skip_initial_build", false)
             Jekyll.logger.warn "Build Warning:", "Skipping the initial build." \
-                        " This may result in an out-of-date site."
+                               " This may result in an out-of-date site."
           else
             build(site, options)
           end
 
           if options.fetch("detach", false)
             Jekyll.logger.info "Auto-regeneration:",
-              "disabled when running server detached."
+                               "disabled when running server detached."
           elsif options.fetch("watch", false)
             watch(site, options)
           else
@@ -52,13 +54,13 @@ module Jekyll
         # Returns nothing.
         def build(site, options)
           t = Time.now
-          source      = options["source"]
-          destination = options["destination"]
+          source      = File.expand_path(options["source"])
+          destination = File.expand_path(options["destination"])
           incremental = options["incremental"]
           Jekyll.logger.info "Source:", source
           Jekyll.logger.info "Destination:", destination
           Jekyll.logger.info "Incremental build:",
-            (incremental ? "enabled" : "disabled. Enable with --incremental")
+                             (incremental ? "enabled" : "disabled. Enable with --incremental")
           Jekyll.logger.info "Generating..."
           process_site(site)
           Jekyll.logger.info "", "done in #{(Time.now - t).round(3)} seconds."
@@ -71,26 +73,21 @@ module Jekyll
         #
         # Returns nothing.
         def watch(site, options)
-          if Utils::Platforms.windows?
-            Jekyll.logger.warn "", "--watch arg is unsupported on Windows. "
-            Jekyll.logger.warn "", "If you are on Windows Bash, please see: " \
-              "https://github.com/Microsoft/BashOnWindows/issues/216"
-
-          else
-            External.require_with_graceful_fail "jekyll-watch"
-            watch_method = Jekyll::Watcher.method(:watch)
-            if watch_method.parameters.size == 1
-              watch_method.call(
-                options
-              )
-            else
-              watch_method.call(
-                options, site
-              )
-            end
+          # Warn Windows users that they might need to upgrade.
+          if Utils::Platforms.bash_on_windows?
+            Jekyll.logger.warn "",
+                               "Auto-regeneration may not work on some Windows versions."
+            Jekyll.logger.warn "",
+                               "Please see: https://github.com/Microsoft/BashOnWindows/issues/216"
+            Jekyll.logger.warn "",
+                               "If it does not work, please upgrade Bash on Windows or "\
+                               "run Jekyll with --no-watch."
           end
+
+          External.require_with_graceful_fail "jekyll-watch"
+          Jekyll::Watcher.watch(options, site)
         end
-      end # end of class << self
+      end
     end
   end
 end

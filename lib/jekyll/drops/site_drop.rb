@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# frozen_string_literal: true
 
 module Jekyll
   module Drops
@@ -8,15 +8,20 @@ module Jekyll
       mutable false
 
       def_delegator  :@obj, :site_data, :data
-      def_delegators :@obj, :time, :pages, :static_files, :documents,
-                            :tags, :categories
+      def_delegators :@obj, :time, :pages, :static_files, :tags, :categories
+
+      private def_delegator :@obj, :config, :fallback_data
 
       def [](key)
-        if @obj.collections.key?(key) && key != "posts"
+        if key != "posts" && @obj.collections.key?(key)
           @obj.collections[key].docs
         else
           super(key)
         end
+      end
+
+      def key?(key)
+        (key != "posts" && @obj.collections.key?(key)) || super
       end
 
       def posts
@@ -33,8 +38,29 @@ module Jekyll
         @site_collections ||= @obj.collections.values.sort_by(&:label).map(&:to_liquid)
       end
 
-      private
-      def_delegator :@obj, :config, :fallback_data
+      # `Site#documents` cannot be memoized so that `Site#docs_to_write` can access the
+      # latest state of the attribute.
+      #
+      # Since this method will be called after `Site#pre_render` hook, the `Site#documents`
+      # array shouldn't thereafter change and can therefore be safely memoized to prevent
+      # additional computation of `Site#documents`.
+      def documents
+        @documents ||= @obj.documents
+      end
+
+      # `{{ site.related_posts }}` is how posts can get posts related to
+      # them, either through LSI if it's enabled, or through the most
+      # recent posts.
+      # We should remove this in 4.0 and switch to `{{ post.related_posts }}`.
+      def related_posts
+        return nil unless @current_document.is_a?(Jekyll::Document)
+
+        @current_document.related_posts
+      end
+      attr_writer :current_document
+
+      # return nil for `{{ site.config }}` even if --config was passed via CLI
+      def config; end
     end
   end
 end

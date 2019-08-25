@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "helper"
 require "jekyll/commands/doctor"
 
@@ -8,10 +10,10 @@ class TestDoctorCommand < JekyllUnitTest
     end
 
     should "return success on a valid site/page" do
-      @site = Site.new(Jekyll.configuration({
-        "source"      => File.join(source_dir, "/_urls_differ_by_case_valid"),
-        "destination" => dest_dir
-      }))
+      @site = Site.new(Jekyll.configuration(
+                         "source"      => File.join(source_dir, "/_urls_differ_by_case_valid"),
+                         "destination" => dest_dir
+                       ))
       @site.process
       output = capture_stderr do
         ret = Jekyll::Commands::Doctor.urls_only_differ_by_case(@site)
@@ -21,10 +23,10 @@ class TestDoctorCommand < JekyllUnitTest
     end
 
     should "return warning for pages only differing by case" do
-      @site = Site.new(Jekyll.configuration({
-        "source"      => File.join(source_dir, "/_urls_differ_by_case_invalid"),
-        "destination" => dest_dir
-      }))
+      @site = Site.new(Jekyll.configuration(
+                         "source"      => File.join(source_dir, "/_urls_differ_by_case_invalid"),
+                         "destination" => dest_dir
+                       ))
       @site.process
       output = capture_stderr do
         ret = Jekyll::Commands::Doctor.urls_only_differ_by_case(@site)
