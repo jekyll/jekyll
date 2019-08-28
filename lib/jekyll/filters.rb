@@ -161,13 +161,15 @@ module Jekyll
 
     # Filter an array of objects
     #
-    # input - the object array
-    # property - property within each object to filter by
-    # value - desired value
+    # input    - the object array.
+    # property - the property within each object to filter by.
+    # value    - the desired value.
+    #            Cannot be an instance of Array nor Hash since calling #to_s on them returns
+    #            their `#inspect` string object.
     #
     # Returns the filtered array of objects
     def where(input, property, value)
-      return input if property.nil? || value.nil?
+      return input if !property || value.is_a?(Array) || value.is_a?(Hash)
       return input unless input.respond_to?(:select)
 
       input    = input.values if input.is_a?(Hash)
@@ -182,8 +184,8 @@ module Jekyll
       # stash or retrive results to return
       @where_filter_cache[input_id][property][value] ||= begin
         input.select do |object|
-          Array(item_property(object, property)).map!(&:to_s).include?(value.to_s)
-        end || []
+          compare_property_vs_target(item_property(object, property), value)
+        end.to_a
       end
     end
 
@@ -323,25 +325,58 @@ module Jekyll
         .map!(&:last)
     end
 
-    def item_property(item, property)
-      if item.respond_to?(:to_liquid)
-        property.to_s.split(".").reduce(item.to_liquid) do |subvalue, attribute|
-          parse_sort_input(subvalue[attribute])
-        end
-      elsif item.respond_to?(:data)
-        parse_sort_input(item.data[property.to_s])
+    # `where` filter helper
+    #
+    # rubocop:disable Metrics/CyclomaticComplexity
+    # rubocop:disable Metrics/PerceivedComplexity
+    def compare_property_vs_target(property, target)
+      case target
+      when NilClass
+        return true if property.nil?
+      when Liquid::Expression::MethodLiteral # `empty` or `blank`
+        target = target.to_s
+        return true if property == target || Array(property).join == target
       else
-        parse_sort_input(item[property.to_s])
+        target = target.to_s
+        if property.is_a? String
+          return true if property == target
+        else
+          Array(property).each do |prop|
+            return true if prop.to_s == target
+          end
+        end
+      end
+
+      false
+    end
+    # rubocop:enable Metrics/CyclomaticComplexity
+    # rubocop:enable Metrics/PerceivedComplexity
+
+    def item_property(item, property)
+      @item_property_cache ||= {}
+      @item_property_cache[property] ||= {}
+      @item_property_cache[property][item] ||= begin
+        if item.respond_to?(:to_liquid)
+          property.to_s.split(".").reduce(item.to_liquid) do |subvalue, attribute|
+            parse_sort_input(subvalue[attribute])
+          end
+        elsif item.respond_to?(:data)
+          parse_sort_input(item.data[property.to_s])
+        else
+          parse_sort_input(item[property.to_s])
+        end
       end
     end
 
+    # rubocop:disable Performance/RegexpMatch
     # return numeric values as numbers for proper sorting
     def parse_sort_input(property)
       number_like = %r!\A\s*-?(?:\d+\.?\d*|\.\d+)\s*\Z!
-      return property.to_f if property =~ number_like
+      return property.to_f if property.to_s =~ number_like
 
       property
     end
+    # rubocop:enable Performance/RegexpMatch
 
     def as_liquid(item)
       case item

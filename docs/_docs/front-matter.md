@@ -4,7 +4,7 @@ permalink: /docs/front-matter/
 redirect_from: /docs/frontmatter/index.html
 ---
 
-Any file that contains a [YAML](http://yaml.org/) front matter block will be
+Any file that contains a [YAML](https://yaml.org/) front matter block will be
 processed by Jekyll as a special file. The front matter must be the first thing
 in the file and must take the form of valid YAML set between triple-dashed
 lines. Here is a basic example:
@@ -33,7 +33,7 @@ relies on.
 </div>
 
 <div class="note">
-  <h5>ProTip™: Front Matter Variables Are Optional</h5>
+  <h5>Front Matter Variables Are Optional</h5>
   <p>
     If you want to use <a href="/docs/variables/">Liquid tags and variables</a>
     but don’t need anything in your front matter, just leave it empty! The set
@@ -114,7 +114,7 @@ front matter of a page or post.
 </div>
 
 <div class="note">
-  <h5>ProTip™: Render Posts Marked As Unpublished</h5>
+  <h5>Render Posts Marked As Unpublished</h5>
   <p>
     To preview unpublished pages, run `jekyll serve` or `jekyll build`
     with the `--unpublished` switch. Jekyll also has a handy <a href="/docs/posts/#drafts">drafts</a>
@@ -201,7 +201,7 @@ These are available out-of-the-box to be used in the front matter for a post.
 </div>
 
 <div class="note">
-  <h5>ProTip™: Don't repeat yourself</h5>
+  <h5>Don't repeat yourself</h5>
   <p>
     If you don't want to repeat your frequently used front matter variables
     over and over, define <a href="/docs/configuration/front-matter-defaults/" title="Front Matter defaults">defaults</a>

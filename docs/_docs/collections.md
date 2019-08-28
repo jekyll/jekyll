@@ -114,8 +114,6 @@ You can link to the generated page using the `url` attribute:
 There are special [permalink variables for collections](/docs/permalinks/) to
 help you control the output url for the entire collection.
 
-{% if site.version == '4.0.0' %}{% comment %} Remove this encapsulation when v4.0 ships {% endcomment %}
-
 ## Custom Sorting of Documents
 
 By default, documents in a collection are sorted by their paths. But you can control this sorting via the collection's metadata.
@@ -164,7 +162,6 @@ collections:
 ```
 
 If both metadata keys have been defined properly, `order` list takes precedence.
-{% endif %}
 
 ## Liquid Attributes
 

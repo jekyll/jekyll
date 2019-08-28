@@ -63,6 +63,15 @@ group :jekyll_plugins do
 end
 ```
 
+Then add these lines to your `_config.yml`:
+
+```
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+```
+
 Now install them by running a `bundle update`.
 
 `jekyll-sitemap` doesn't need any setup, it will create your sitemap on build.
