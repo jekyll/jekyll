@@ -12,6 +12,10 @@
 
   * serve: add support for ECC certificates (#7768)
 
+### Documentation
+
+  * Add dropped &#39;title: Staff&#39; to the code (#7805)
+
 ## 4.0.0 / 2019-08-19
 
 ### Major Enhancements
