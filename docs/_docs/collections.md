@@ -45,9 +45,12 @@ Create a corresponding folder (e.g. `<source>/_staff_members`) and add
 documents. Front matter is processed if the front matter exists, and everything
 after the front matter is pushed into the document's `content` attribute. If no front
 matter is provided, Jekyll will consider it to be a [static file](/docs/static-files/)
-and copy it to the destination (e.g. `_site`) without processing. If front matter
-is provided, Jekyll will process the file in your collection but will not write to disk
-unless `output: true` is set in the collection's metadata.
+and the contents will not undergo further processing. If front matter is provided,
+Jekyll will process the file contents into the expected output.
+
+Regardless of whether front matter exists or not, Jekyll will write to the destination
+directory (e.g. `_site`) only if `output: true` has been set in the collection's
+metadata.
 
 For example here's how you would add a staff member to the collection set above.
 The filename is `./_staff_members/jane.md` with the following content:
@@ -59,6 +62,12 @@ position: Developer
 ---
 Jane has worked on Jekyll for the past *five years*.
 ```
+
+<em>
+  Do note that in spite of being considered as a collection internally, the above
+  doesn't apply to [posts](/docs/posts/). Posts with a valid filename format will be
+  marked for processing even if they do not contain front matter.
+</em> 
 
 <div class="note info">
   <h5>Be sure to name your directories correctly</h5>
