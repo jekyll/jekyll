@@ -166,7 +166,9 @@
 #
 
 - name: Number of Words
-  description: Count the number of words in some text.
+  description: >-
+    Count the number of words in some text.
+    CJK characters are counted as one word per character instead of whitespace-separated.
   examples:
     - input: '{{ page.content | number_of_words }}'
       output: 1337
