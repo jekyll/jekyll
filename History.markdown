@@ -15,6 +15,7 @@
 ### Documentation
 
   * Add dropped &#39;title: Staff&#39; to the code (#7805)
+  * Clarify docs for static files in collection (#7812)
 
 ## 4.0.0 / 2019-08-19
 
