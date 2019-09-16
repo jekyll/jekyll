@@ -28,21 +28,19 @@ module Jekyll
         else
           Regexp.last_match(2)
         end
-      LiquidRenderer::File.new(self, filename).tap do
-        @stats[filename] ||= new_profile_hash
-      end
+      LiquidRenderer::File.new(self, filename)
     end
 
     def increment_bytes(filename, bytes)
-      @stats[filename][:bytes] += bytes
+      increment_attribute(filename, :bytes, bytes)
     end
 
     def increment_time(filename, time)
-      @stats[filename][:time] += time
+      increment_attribute(filename, :time, time)
     end
 
     def increment_count(filename)
-      @stats[filename][:count] += 1
+      increment_attribute(filename, :count, 1)
     end
 
     def stats_table(num_of_rows = 50)
@@ -55,8 +53,6 @@ module Jekyll
 
     # A persistent cache to store and retrieve parsed templates based on the filename
     # via `LiquidRenderer::File#parse`
-    #
-    # It is emptied when `self.reset` is called.
     def cache
       @cache ||= Jekyll::Cache.new(self.class.name)
     end
@@ -71,6 +67,11 @@ module Jekyll
 
     def new_profile_hash
       Hash.new { |hash, key| hash[key] = 0 }
+    end
+
+    def increment_attribute(filename, attribute, value)
+      @stats[filename] ||= new_profile_hash
+      @stats[filename][attribute] += value
     end
   end
 end
