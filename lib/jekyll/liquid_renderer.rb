@@ -18,7 +18,6 @@ module Jekyll
 
     def reset
       @stats = {}
-      @cache = {}
     end
 
     def file(filename)
@@ -59,7 +58,7 @@ module Jekyll
     #
     # It is emptied when `self.reset` is called.
     def cache
-      @cache ||= {}
+      @cache ||= Jekyll::Cache.new(self.class.name)
     end
 
     private

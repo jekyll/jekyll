@@ -10,9 +10,10 @@ module Jekyll
 
       def parse(content)
         measure_time do
-          @renderer.cache[@filename] ||= Liquid::Template.parse(content, :line_numbers => true)
+          @template = @renderer.cache.getset(content) do
+            Liquid::Template.parse(content, :line_numbers => true)
+          end
         end
-        @template = @renderer.cache[@filename]
 
         self
       end
