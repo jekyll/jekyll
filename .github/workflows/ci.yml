@@ -12,7 +12,7 @@ on:
 
 jobs:
   ci:
-    name: 'SUITE: ${{ matrix.test_suite }} OS: ${{ matrix.os }}'
+    name: 'SUITE: ${{ matrix.test_suite }} / OS: ${{ matrix.os }}'
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
