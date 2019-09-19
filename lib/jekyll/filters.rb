@@ -337,12 +337,23 @@ module Jekyll
         target = target.to_s
         return true if property == target || Array(property).join == target
       else
-        target = target.to_s
-        if property.is_a? String
-          return true if property == target
+        # Since `property` may be a Float via `#parse_sort_input`, it is imperative that we compare
+        # against the *floatified* value as well.
+        #
+        # For example, in a scenario where an item's property and `target` value are both `1234`,
+        # *floatifying* renders the `property` as `1234.0` which wouldn't equal the `target`.
+        # Therefore, we need to check against `"1234"`, `1234.0` and `"1234.0"`
+        target_string = target.to_s
+        parsed_target = parse_sort_input(target_string)
+        parsed_string = parsed_target.to_s
+
+        references = [target_string, parsed_string, parsed_target]
+
+        if property.is_a?(String)
+          return true if references.include?(property)
         else
           Array(property).each do |prop|
-            return true if prop.to_s == target
+            return true if references.include?(prop) || references.include?(prop.to_s)
           end
         end
       end
