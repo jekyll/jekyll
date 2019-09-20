@@ -155,7 +155,7 @@ module Jekyll
       tag_names.flatten!
       tag_names.reverse_each do |tag_name|
         next unless liquid_block?(tag_name)
-        next if head =~ endtag_regex_stash(tag_name)
+        next if endtag_regex_stash(tag_name).match?(head)
 
         modified = true
         head << "\n{% end#{tag_name} %}"

@@ -104,7 +104,7 @@ The default is `default`. They are as follows (with what they filter):
 - `ascii`: spaces, non-alphanumeric, and non-ASCII characters
 - `latin`: like `default`, except Latin characters are first transliterated (e.g. `àèïòü` to `aeiou`) {%- include docs_version_badge.html version="3.7.0" -%}.
 
-### Detecting `nil` values with `where` filter {%- include docs_version_badge.html version="4.0.0" -%}
+### Detecting `nil` values with `where` filter {%- include docs_version_badge.html version="4.0" -%}
 
 You can use the `where` filter to detect documents and pages with properties that are `nil` or `""`. For example,
 
@@ -118,6 +118,22 @@ You can use the `where` filter to detect documents and pages with properties tha
 {% raw %}{% assign filtered_posts = site.posts | where: 'my_prop', empty %}{% endraw %}
 ```
 
+### Binary operators in `where_exp` filter {%- include docs_version_badge.html version="4.0" -%}
+
+You can use Liquid binary operators `or` and `and` in the expression passed to the `where_exp` filter to employ multiple
+conditionals in the operation.
+
+For example, to get a list of documents on English horror flicks, one could use the following snippet:
+
+```liquid
+{% raw %}{{ site.movies | where_exp: "item", "item.genre == 'horror' and item.language == 'English'" }}{% endraw %}
+```
+
+Or to get a list of comic-book based movies, one may use the following:
+
+```liquid
+{% raw %}{{ site.movies | where_exp: "item", "item.sub_genre == 'MCU' or item.sub_genre == 'DCEU'" }}{% endraw %}
+```
 
 ### Standard Liquid Filters
 

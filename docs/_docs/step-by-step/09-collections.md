@@ -120,6 +120,7 @@ Add the link to the `staff.html` page:
 ```html
 ---
 layout: default
+title: Staff
 ---
 <h1>Staff</h1>
 

@@ -1,6 +1,5 @@
 ---
-version: 3.8.5
-min_ruby_version: 2.4.0
+version: 4.0.0
 name: Jekyll • Simple, blog-aware, static sites
 description: Transform your plain text into static websites and blogs
 url: https://jekyllrb.com
@@ -11,7 +10,6 @@ twitter:
 logo: "/img/logo-2x.png"
 google_analytics_id: UA-50755011-1
 google_site_verification: onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY
-
 collections:
   docs:
     permalink: "/:collection/:path/"
@@ -21,7 +19,6 @@ collections:
     output: true
   tutorials:
     output: true
-
 defaults:
 - scope:
     path: _docs
@@ -34,10 +31,10 @@ defaults:
   values:
     layout: news_item
 - scope:
-    path: ""
+    path: ''
   values:
     image: "/img/jekyll-og.png"
-
+future: true
 plugins:
 - jekyll-avatar
 - jekyll-feed
@@ -46,17 +43,15 @@ plugins:
 - jekyll-seo-tag
 - jekyll-sitemap
 - jemoji
-
 feed:
   categories:
-    - release
-
+  - release
 sass:
   style: compressed
-
+strict_front_matter: true
 exclude:
-- .gitignore
-- .jekyll-cache
+- ".gitignore"
+- ".jekyll-cache"
 - CNAME
 - icomoon-selection.json
 - readme.md

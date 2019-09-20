@@ -10,7 +10,6 @@ module Jekyll
       @name = name.downcase.strip
       Jekyll.logger.debug "Theme:", name
       Jekyll.logger.debug "Theme source:", root
-      configure_sass
     end
 
     def root
@@ -38,13 +37,6 @@ module Jekyll
       @assets_path ||= path_for "assets"
     end
 
-    def configure_sass
-      return unless sass_path
-
-      External.require_with_graceful_fail("sass") unless defined?(Sass)
-      Sass.load_paths << sass_path
-    end
-
     def runtime_dependencies
       gemspec.runtime_dependencies
     end
@@ -62,9 +54,20 @@ module Jekyll
       # escape the theme root.
       # However, symlinks are allowed to point to other directories within the theme.
       Jekyll.sanitized_path(root, File.realpath(Jekyll.sanitized_path(root, folder.to_s)))
-    rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP
-      Jekyll.logger.warn "Invalid theme folder:", folder
+    rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP => e
+      log_realpath_exception(e, folder)
       nil
+    end
+
+    def log_realpath_exception(err, folder)
+      return if err.is_a?(Errno::ENOENT)
+
+      case err
+      when Errno::EACCES
+        Jekyll.logger.error "Theme error:", "Directory '#{folder}' is not accessible."
+      when Errno::ELOOP
+        Jekyll.logger.error "Theme error:", "Directory '#{folder}' includes a symbolic link loop."
+      end
     end
 
     def gemspec

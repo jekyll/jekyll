@@ -19,18 +19,17 @@ application/davmount+xml                                                  davmou
 application/docbook+xml                                                   dbk
 application/dssc+der                                                      dssc
 application/dssc+xml                                                      xdssc
-application/ecmascript                                                    ecma
+application/ecmascript                                                    ecma es
 application/emma+xml                                                      emma
 application/epub+zip                                                      epub
 application/exi                                                           exi
 application/font-tdpfr                                                    pfr
-application/font-woff                                                     woff
-application/font-woff2                                                    woff2
 application/geo+json                                                      geojson
 application/gml+xml                                                       gml
 application/gpx+xml                                                       gpx
 application/gxf                                                           gxf
 application/gzip                                                          gz
+application/hjson                                                         hjson
 application/hyperstudio                                                   stk
 application/inkml+xml                                                     ink inkml
 application/ipfix                                                         ipfix
@@ -61,6 +60,8 @@ application/mp21                                                          m21 mp
 application/mp4                                                           mp4s m4p
 application/msword                                                        doc dot
 application/mxf                                                           mxf
+application/n-quads                                                       nq
+application/n-triples                                                     nt
 application/octet-stream                                                  bin dms lrf mar so dist distz pkg bpk dump elc deploy exe dll deb dmg iso img msi msp msm buffer
 application/oda                                                           oda
 application/oebps-package+xml                                             opf
@@ -86,7 +87,8 @@ application/pls+xml                                                       pls
 application/postscript                                                    ai eps ps
 application/prs.cww                                                       cww
 application/pskc+xml                                                      pskcxml
-application/rdf+xml                                                       rdf
+application/raml+yaml                                                     raml
+application/rdf+xml                                                       rdf owl
 application/reginfo+xml                                                   rif
 application/relax-ng-compact-syntax                                       rnc
 application/resource-lists+xml                                            rl
@@ -107,6 +109,7 @@ application/sdp                                                           sdp
 application/set-payment-initiation                                        setpay
 application/set-registration-initiation                                   setreg
 application/shf+xml                                                       shf
+application/sieve                                                         siv sieve
 application/smil+xml                                                      smi smil
 application/sparql-query                                                  rq
 application/sparql-results+xml                                            srx
@@ -143,7 +146,10 @@ application/vnd.anser-web-certificate-issue-initiation                    cii
 application/vnd.anser-web-funds-transfer-initiation                       fti
 application/vnd.antix.game-component                                      atx
 application/vnd.apple.installer+xml                                       mpkg
+application/vnd.apple.keynote                                             keynote
 application/vnd.apple.mpegurl                                             m3u8
+application/vnd.apple.numbers                                             numbers
+application/vnd.apple.pages                                               pages
 application/vnd.apple.pkpass                                              pkpass
 application/vnd.aristanetworks.swi                                        swi
 application/vnd.astraea-software.iota                                     iota
@@ -154,6 +160,7 @@ application/vnd.businessobjects                                           rep
 application/vnd.chemdraw+xml                                              cdxml
 application/vnd.chipnuts.karaoke-mmd                                      mmd
 application/vnd.cinderella                                                cdy
+application/vnd.citationstyles.style+xml                                  csl
 application/vnd.claymore                                                  cla
 application/vnd.cloanto.rp9                                               rp9
 application/vnd.clonk.c4group                                             c4g c4d c4f c4p c4u
@@ -482,6 +489,7 @@ application/vnd.yellowriver-custom-menu                                   cmp
 application/vnd.zul                                                       zir zirz
 application/vnd.zzazz.deck+xml                                            zaz
 application/voicexml+xml                                                  vxml
+application/wasm                                                          wasm
 application/widget                                                        wgt
 application/winhlp                                                        hlp
 application/wsdl+xml                                                      wsdl
@@ -521,10 +529,8 @@ application/x-eva                                                         eva
 application/x-font-bdf                                                    bdf
 application/x-font-ghostscript                                            gsf
 application/x-font-linux-psf                                              psf
-application/x-font-otf                                                    otf
 application/x-font-pcf                                                    pcf
 application/x-font-snf                                                    snf
-application/x-font-ttf                                                    ttf ttc
 application/x-font-type1                                                  pfa pfb pfm afm
 application/x-freearc                                                     arc
 application/x-futuresplash                                                spl
@@ -661,20 +667,41 @@ chemical/x-cmdf                                                           cmdf
 chemical/x-cml                                                            cml
 chemical/x-csml                                                           csml
 chemical/x-xyz                                                            xyz
+font/collection                                                           ttc
+font/otf                                                                  otf
+font/ttf                                                                  ttf
+font/woff                                                                 woff
+font/woff2                                                                woff2
+image/aces                                                                exr
 image/apng                                                                apng
 image/bmp                                                                 bmp
 image/cgm                                                                 cgm
+image/dicom-rle                                                           drle
+image/fits                                                                fits
 image/g3fax                                                               g3
 image/gif                                                                 gif
+image/heic                                                                heic
+image/heic-sequence                                                       heics
+image/heif                                                                heif
+image/heif-sequence                                                       heifs
 image/ief                                                                 ief
+image/jls                                                                 jls
+image/jp2                                                                 jp2 jpg2
 image/jpeg                                                                jpeg jpg jpe
+image/jpm                                                                 jpm
+image/jpx                                                                 jpx jpf
+image/jxr                                                                 jxr
 image/ktx                                                                 ktx
 image/png                                                                 png
 image/prs.btif                                                            btif
+image/prs.pti                                                             pti
 image/sgi                                                                 sgi
 image/svg+xml                                                             svg svgz
-image/tiff                                                                tiff tif
+image/t38                                                                 t38
+image/tiff                                                                tif tiff
+image/tiff-fx                                                             tfx
 image/vnd.adobe.photoshop                                                 psd
+image/vnd.airzip.accelerator.azv                                          azv
 image/vnd.dece.graphic                                                    uvi uvvi uvg uvvg
 image/vnd.djvu                                                            djvu djv
 image/vnd.dvb.subtitle                                                    sub
@@ -685,20 +712,22 @@ image/vnd.fpx                                                             fpx
 image/vnd.fst                                                             fst
 image/vnd.fujixerox.edmics-mmr                                            mmr
 image/vnd.fujixerox.edmics-rlc                                            rlc
+image/vnd.microsoft.icon                                                  ico
 image/vnd.ms-modi                                                         mdi
 image/vnd.ms-photo                                                        wdp
 image/vnd.net-fpx                                                         npx
+image/vnd.tencent.tap                                                     tap
+image/vnd.valve.source.texture                                            vtf
 image/vnd.wap.wbmp                                                        wbmp
 image/vnd.xiff                                                            xif
+image/vnd.zbrush.pcx                                                      pcx
 image/webp                                                                webp
 image/x-3ds                                                               3ds
 image/x-cmu-raster                                                        ras
 image/x-cmx                                                               cmx
 image/x-freehand                                                          fh fhc fh4 fh5 fh7
-image/x-icon                                                              ico
 image/x-jng                                                               jng
 image/x-mrsid-image                                                       sid
-image/x-pcx                                                               pcx
 image/x-pict                                                              pic pct
 image/x-portable-anymap                                                   pnm
 image/x-portable-bitmap                                                   pbm
@@ -709,7 +738,14 @@ image/x-tga                                                               tga
 image/x-xbitmap                                                           xbm
 image/x-xpixmap                                                           xpm
 image/x-xwindowdump                                                       xwd
+message/disposition-notification                                          disposition-notification
+message/global                                                            u8msg
+message/global-delivery-status                                            u8dsn
+message/global-disposition-notification                                   u8mdn
+message/global-headers                                                    u8hdr
 message/rfc822                                                            eml mime
+message/vnd.wfa.wsc                                                       wsc
+model/3mf                                                                 3mf
 model/gltf+json                                                           gltf
 model/gltf-binary                                                         glb
 model/iges                                                                igs iges
@@ -719,6 +755,11 @@ model/vnd.dwf                                                             dwf
 model/vnd.gdl                                                             gdl
 model/vnd.gtw                                                             gtw
 model/vnd.mts                                                             mts
+model/vnd.opengex                                                         ogex
+model/vnd.parasolid.transmit.binary                                       x_b
+model/vnd.parasolid.transmit.text                                         x_t
+model/vnd.usdz+zip                                                        usdz
+model/vnd.valve.source.compiled-map                                       bsp
 model/vnd.vtu                                                             vtu
 model/vrml                                                                wrl vrml
 model/x3d+binary                                                          x3db x3dbz
@@ -729,18 +770,19 @@ text/calendar                                                             ics if
 text/coffeescript                                                         coffee litcoffee
 text/css                                                                  css
 text/csv                                                                  csv
-text/hjson                                                                hjson
 text/html                                                                 html htm shtml
 text/jade                                                                 jade
 text/jsx                                                                  jsx
 text/less                                                                 less
 text/markdown                                                             markdown md
 text/mathml                                                               mml
+text/mdx                                                                  mdx
 text/n3                                                                   n3
 text/plain                                                                txt text conf def list log in ini
 text/prs.lines.tag                                                        dsc
 text/richtext                                                             rtx
 text/sgml                                                                 sgml sgm
+text/shex                                                                 shex
 text/slim                                                                 slim slm
 text/stylus                                                               stylus styl
 text/tab-separated-values                                                 tsv
@@ -788,7 +830,7 @@ video/h261                                                                h261
 video/h263                                                                h263
 video/h264                                                                h264
 video/jpeg                                                                jpgv
-video/jpm                                                                 jpm jpgm
+video/jpm                                                                 jpgm
 video/mj2                                                                 mj2 mjp2
 video/mp2t                                                                ts
 video/mp4                                                                 mp4 mp4v mpg4
