@@ -99,25 +99,25 @@ Feature: Theme Inheritance
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see ".sample {\n  color: black; }" in "_site/assets/style.css"
+    And I should see ".sample { color: black; }" in "_site/assets/style.css"
   
   Scenario: Overriding stylesheets in the child theme that overrode a parent theme's stylesheet
     Given I have a configuration file with "theme" set to "test-theme"
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see ".another-sample {\n  color: blue; }" in "_site/assets/style.css"
+    And I should see ".another-sample { color: blue; }" in "_site/assets/style.css"
     Given I have a configuration file with "theme" set to "test-theme-inheritance"
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see ".another-sample {\n  color: brown; }" in "_site/assets/style.css"
-    But I should not see ".another-sample {\n  color: blue; }" in "_site/assets/style.css"
+    And I should see ".another-sample { color: brown; }" in "_site/assets/style.css"
+    But I should not see ".another-sample { color: blue; }" in "_site/assets/style.css"
     Given I have a _sass directory
     And I have an "_sass/another-sample.scss" file that contains ".another-sample { color: purple; }"
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see ".another-sample {\n  color: purple; }" in "_site/assets/style.css"
-    But I should not see ".another-sample {\n  color: blue; }" in "_site/assets/style.css"
-    But I should not see ".another-sample {\n  color: brown; }" in "_site/assets/style.css"
+    And I should see ".another-sample { color: purple; }" in "_site/assets/style.css"
+    But I should not see ".another-sample { color: blue; }" in "_site/assets/style.css"
+    But I should not see ".another-sample { color: brown; }" in "_site/assets/style.css"
