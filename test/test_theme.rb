@@ -26,12 +26,6 @@ class TestTheme < JekyllUnitTest
         Theme.new("foo").version
       end
     end
-
-    should "add itself to sass's load path" do
-      @theme.configure_sass
-      message = "Sass load paths should include the theme sass dir"
-      assert Sass.load_paths.include?(@theme.sass_path), message
-    end
   end
 
   context "path generation" do

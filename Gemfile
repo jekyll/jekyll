@@ -23,15 +23,16 @@ group :test do
   gem "httpclient"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
+  gem "memory_profiler"
   gem "nokogiri", "~> 1.7"
   gem "rspec"
   gem "rspec-mocks"
-  # Temporary lock on RuboCop version for Windows since Pysch-3.1.0 is not available
-  # for use on Ruby 2.6-mingw32 platforms
-  gem "rubocop", Gem.win_platform? ? "~> 0.64.0" : "~> 0.65.0"
+  gem "rubocop", "~> 0.72.0"
+  gem "rubocop-performance"
   gem "test-dependency-theme", :path => File.expand_path("test/fixtures/test-dependency-theme", __dir__)
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)
   gem "test-theme-inheritance", :path => File.expand_path("test/fixtures/test-theme-inheritance", __dir__)
+  gem "test-theme-skinny", :path => File.expand_path("test/fixtures/test-theme-skinny", __dir__)
   gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
 
   gem "jruby-openssl" if RUBY_ENGINE == "jruby"
@@ -63,14 +64,13 @@ end
 #
 
 group :jekyll_optional_dependencies do
-  gem "coderay", "~> 1.1.0"
   gem "jekyll-coffeescript"
   gem "jekyll-docs", :path => "../docs" if Dir.exist?("../docs") && ENV["JEKYLL_VERSION"]
   gem "jekyll-feed", "~> 0.9"
   gem "jekyll-gist"
   gem "jekyll-paginate"
   gem "jekyll-redirect-from"
-  gem "kramdown", "~> 1.14"
+  gem "kramdown-syntax-coderay"
   gem "mime-types", "~> 3.0"
   gem "rdoc", "~> 6.0"
   gem "tomlrb", "~> 1.2"
@@ -84,7 +84,7 @@ group :jekyll_optional_dependencies do
   # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
   # and associated library
   install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do
-    gem "tzinfo", "~> 2.0"
+    gem "tzinfo", "~> 1.2"
     gem "tzinfo-data"
   end
 end

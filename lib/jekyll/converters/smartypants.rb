@@ -37,7 +37,7 @@ module Jekyll
       # ext - The String extension to check.
       #
       # Returns true if it matches, false otherwise.
-      def matches(_)
+      def matches(_ext)
         false
       end
 
@@ -46,7 +46,7 @@ module Jekyll
       # ext - The String extension or original file.
       #
       # Returns The String output file extension.
-      def output_ext(_)
+      def output_ext(_ext)
         nil
       end
 

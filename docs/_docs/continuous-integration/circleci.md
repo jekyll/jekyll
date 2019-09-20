@@ -34,7 +34,7 @@ gem 'jekyll'
 gem 'html-proofer'
 ```
 
-CircleCI detects when `Gemfile` is present is will automatically run `bundle install` for you in the `dependencies` phase.
+CircleCI detects when `Gemfile` is present and will automatically run `bundle install` for you in the `dependencies` phase.
 
 ## 3. Testing
 
@@ -61,6 +61,8 @@ test:
 
 ## Complete Example circle.yml File
 
+### CircleCI v1
+
 When you put it all together, here's an example of what that `circle.yml` file could look like in v1:
 
 ```yaml
@@ -83,7 +85,11 @@ deployment:
       - rsync -va --delete ./_site username@my-website:/var/html
 ```
 
-for CircleCI v2, a Docker-based system which new projects will follow, set the `S3_BUCKET_NAME` environment variable (an example of the required config file is shown below).
+### CircleCI v2
+
+CircleCI v2 is a Docker-based system. The example `circle.yml` below demonstrates how to
+deploy your Jekyll project to AWS. In order for this to work you would first have to set the
+`S3_BUCKET_NAME` [environment variable](https://circleci.com/docs/2.0/env-vars/).
 
 ```yaml
 defaults: &defaults

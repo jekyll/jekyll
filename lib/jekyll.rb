@@ -65,6 +65,7 @@ module Jekyll
   autoload :LogAdapter,          "jekyll/log_adapter"
   autoload :Page,                "jekyll/page"
   autoload :PageWithoutAFile,    "jekyll/page_without_a_file"
+  autoload :PathManager,         "jekyll/path_manager"
   autoload :PluginManager,       "jekyll/plugin_manager"
   autoload :Publisher,           "jekyll/publisher"
   autoload :Reader,              "jekyll/reader"
@@ -189,7 +190,7 @@ module Jekyll
     end
 
     # Conditional optimizations
-    Jekyll::External.require_if_present("liquid-c")
+    Jekyll::External.require_if_present("liquid/c")
   end
 end
 

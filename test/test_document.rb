@@ -58,6 +58,10 @@ class TestDocument < JekyllUnitTest
       assert_equal "configuration", @document.basename_without_ext
     end
 
+    should "know its type" do
+      assert_equal :methods, @document.type
+    end
+
     should "know whether it's a YAML file" do
       assert_equal false, @document.yaml_file?
     end

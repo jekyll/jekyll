@@ -138,14 +138,18 @@ class TestFilters < JekyllUnitTest
 
     should "sassify with simple string" do
       assert_equal(
-        "p {\n  color: #123456; }\n",
-        @filter.sassify("$blue:#123456\np\n  color: $blue")
+        "p { color: #123456; }\n",
+        @filter.sassify(<<~SASS)
+          $blue: #123456
+          p
+            color: $blue
+        SASS
       )
     end
 
     should "scssify with simple string" do
       assert_equal(
-        "p {\n  color: #123456; }\n",
+        "p { color: #123456; }\n",
         @filter.scssify("$blue:#123456; p{color: $blue}")
       )
     end
@@ -811,7 +815,7 @@ class TestFilters < JekyllUnitTest
               "The list of grouped items for '' is not an Array."
             )
             # adjust array.size to ignore symlinked page in Windows
-            qty = Utils::Platforms.really_windows? ? 15 : 16
+            qty = Utils::Platforms.really_windows? ? 16 : 18
             assert_equal qty, g["items"].size
           end
         end
@@ -844,6 +848,11 @@ class TestFilters < JekyllUnitTest
         assert_equal 2, @filter.where(@array_of_objects, "color", "red").length
       end
 
+      should "filter objects with null properties appropriately" do
+        array = [{}, { "color" => nil }, { "color" => "" }, { "color" => "text" }]
+        assert_equal 2, @filter.where(array, "color", nil).length
+      end
+
       should "filter array properties appropriately" do
         hash = {
           "a" => { "tags"=>%w(x y) },
@@ -860,6 +869,36 @@ class TestFilters < JekyllUnitTest
           "c" => { "tags"=>%w(y z) },
         }
         assert_equal 2, @filter.where(hash, "tags", "x").length
+      end
+
+      should "filter hash properties with null and empty values" do
+        hash = {
+          "a" => { "tags" => {} },
+          "b" => { "tags" => "" },
+          "c" => { "tags" => nil },
+          "d" => { "tags" => ["x", nil] },
+          "e" => { "tags" => [] },
+          "f" => { "tags" => "xtra" },
+        }
+
+        assert_equal [{ "tags" => nil }], @filter.where(hash, "tags", nil)
+
+        assert_equal(
+          [{ "tags" => "" }, { "tags" => ["x", nil] }],
+          @filter.where(hash, "tags", "")
+        )
+
+        # `{{ hash | where: 'tags', empty }}`
+        assert_equal(
+          [{ "tags" => {} }, { "tags" => "" }, { "tags" => nil }, { "tags" => [] }],
+          @filter.where(hash, "tags", Liquid::Expression::LITERALS["empty"])
+        )
+
+        # `{{ `hash | where: 'tags', blank }}`
+        assert_equal(
+          [{ "tags" => {} }, { "tags" => "" }, { "tags" => nil }, { "tags" => [] }],
+          @filter.where(hash, "tags", Liquid::Expression::LITERALS["blank"])
+        )
       end
 
       should "not match substrings" do
@@ -1031,7 +1070,7 @@ class TestFilters < JekyllUnitTest
               "The list of grouped items for '' is not an Array."
             )
             # adjust array.size to ignore symlinked page in Windows
-            qty = Utils::Platforms.really_windows? ? 15 : 16
+            qty = Utils::Platforms.really_windows? ? 16 : 18
             assert_equal qty, g["items"].size
           end
         end
