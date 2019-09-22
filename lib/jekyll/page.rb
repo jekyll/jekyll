@@ -31,10 +31,10 @@ module Jekyll
 
     # Initialize a new Page.
     #
-    # site  - The Site object.
-    # base  - The String path to the source.
-    # dir   - The String path between the source and the file.
-    # name  - The String filename of the file.
+    # site - The Site object.
+    # base - The String path to the source.
+    # dir  - The String path between the source and the file.
+    # name - The String filename of the file.
     def initialize(site, base, dir, name)
       @site = site
       @base = base
