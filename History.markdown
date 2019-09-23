@@ -17,6 +17,7 @@
   * Add dropped &#39;title: Staff&#39; to the code (#7805)
   * Clarify docs for static files in collection (#7812)
   * Rephrase the CircleCI v2 section (#7815)
+  * Update old GitHub wiki URL with new one (#7823)
 
 ## 4.0.0 / 2019-08-19
 
