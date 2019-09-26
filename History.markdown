@@ -20,6 +20,10 @@
   * Update old GitHub wiki URL with new one (#7823)
   * Update JekyllConf page with 2019 talks (#7826)
 
+### Development Fixes
+
+  * Ci/GitHub actions (#7822)
+
 ## 4.0.0 / 2019-08-19
 
 ### Major Enhancements
