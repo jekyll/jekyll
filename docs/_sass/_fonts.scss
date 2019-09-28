@@ -1,3 +1,7 @@
+// *.woff2 support: Chrome 26+, Opera 23+, FireFox 3.6
+// *.woff support: Chrome 6+, Firefox 3.6+, IE9+, Safari 5.1+
+
+// Lato Light (300)
 @font-face {
   font-family: 'Lato';
   font-style: normal;
@@ -8,6 +12,7 @@
   font-display: swap;
 }
 
+// Lato Light, Italic (300)
 @font-face {
   font-family: 'Lato';
   font-style: italic;
@@ -18,6 +23,7 @@
   font-display: swap;
 }
 
+// Lato Regular (400)
 @font-face {
   font-family: 'Lato';
   font-style: normal;
@@ -28,6 +34,7 @@
   font-display: swap;
 }
 
+// Lato Regular, Italic (400)
 @font-face {
   font-family: 'Lato';
   font-style: italic;
@@ -38,6 +45,7 @@
   font-display: swap;
 }
 
+// Lato Bold (700)
 @font-face {
   font-family: 'Lato';
   font-style: normal;
@@ -48,6 +56,7 @@
   font-display: swap;
 }
 
+// Lato Bold, Italic (700)
 @font-face {
   font-family: 'Lato';
   font-style: italic;
@@ -58,7 +67,7 @@
   font-display: swap;
 }
 
-/* lato-900 - latin */
+// Lato Black (900)
 @font-face {
   font-family: 'Lato';
   font-style: normal;
@@ -69,6 +78,7 @@
   font-display: swap;
 }
 
+// Lato Black, Italic (900)
 @font-face {
   font-family: 'Lato';
   font-style: italic;
