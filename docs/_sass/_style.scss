@@ -2,15 +2,15 @@
 
 @charset "utf-8";
 
- html {
-   box-sizing: border-box;
- }
+html {
+  box-sizing: border-box;
+}
 
- *,
- *:before,
- *:after {
-   box-sizing: inherit;
- }
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
 
 body {
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -28,8 +28,8 @@ body {
   
   -webkit-font-feature-settings: 'kern' on, 'liga' on, 'calt' on, 'onum', 'pnum';
   -moz-font-feature-settings: 'kern' on, 'liga' on, 'calt' on, 'onum', 'pnum';
-  -o-font-feature-settings: 'kern' on, 'liga' on, 'calt' on, 'onum', 'pnum';
   -ms-font-feature-settings: 'kern' on, 'liga' on, 'calt' on, 'onum', 'pnum';
+  -o-font-feature-settings: 'kern' on, 'liga' on, 'calt' on, 'onum', 'pnum';
   font-feature-settings: 'kern' on, 'liga' on, 'calt' on, 'onum', 'pnum';
   margin: 0;
 }
