@@ -10,6 +10,7 @@ and other resources that can be helpful. Below is a collection of links to
 some of the most popular Jekyll resources.
 
 ## Themes
+- [jamstackthemes.dev](https://jamstackthemes.dev/ssg/jekyll/)
 - [jekyllthemes.org](http://jekyllthemes.org/)
 - [jekyllthemes.io](https://jekyllthemes.io/)
 
