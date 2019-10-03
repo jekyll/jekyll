@@ -5,6 +5,14 @@ permalink: /docs/themes/
 
 Jekyll has an extensive theme system that allows you to leverage community-maintained templates and styles to customize your site's presentation. Jekyll themes specify plugins and package up assets, layouts, includes, and stylesheets in a way that can be overridden by your site's content.
 
+## Pick up a theme
+
+You can find and preview themes on different galleries:
+
+- [jamstackthemes.dev](https://jamstackthemes.dev/ssg/jekyll/)
+- [jekyllthemes.org](http://jekyllthemes.org/)
+- [jekyllthemes.io](https://jekyllthemes.io/)
+
 ## Understanding gem-based themes
 
 When you [create a new Jekyll site](/docs/) (by running the `jekyll new <PATH>` command), Jekyll installs a site that uses a gem-based theme called [Minima](https://github.com/jekyll/minima).
