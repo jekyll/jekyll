@@ -1036,7 +1036,9 @@ class TestFilters < JekyllUnitTest
         posts = @filter.site.site_payload["site"]["posts"]
         results = @filter.where_exp(posts, "post",
                                     "post.date > site.dont_show_posts_before")
+        # rubocop:disable Performance/Count
         assert_equal posts.select { |p| p.date > @sample_time }.count, results.length
+        # rubocop:enable Performance/Count
       end
     end
 
