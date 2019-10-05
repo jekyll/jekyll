@@ -54,9 +54,11 @@ module Jekyll
         # Returns nothing.
         def build(site, options)
           t = Time.now
+          # rubocop:disable Layout/SpaceAroundOperators
           source      = File.expand_path(options["source"])
           destination = File.expand_path(options["destination"])
           incremental = options["incremental"]
+          # rubocop:enable Layout/SpaceAroundOperators
           Jekyll.logger.info "Source:", source
           Jekyll.logger.info "Destination:", destination
           Jekyll.logger.info "Incremental build:",
