@@ -49,7 +49,7 @@ module Jekyll
           row << filename
           row << file_stats[:count].to_s
           row << format_bytes(file_stats[:bytes])
-          row << format("%.3f", file_stats[:time])
+          row << format("%.3f", file_stats[:time]) # rubocop:disable Style/FormatStringToken
           table << row
         end
 
@@ -57,7 +57,7 @@ module Jekyll
         footer << "TOTAL (for #{sorted.size} files)"
         footer << totals[:count].to_s
         footer << format_bytes(totals[:bytes])
-        footer << format("%.3f", totals[:time])
+        footer << format("%.3f", totals[:time]) # rubocop:disable Style/FormatStringToken
         table  << footer
       end
       # rubocop:enable Metrics/AbcSize
@@ -68,7 +68,7 @@ module Jekyll
 
       def format_bytes(bytes)
         bytes /= 1024.0
-        format("%.2fK", bytes)
+        format("%.2fK", bytes) # rubocop:disable Style/FormatStringToken
       end
     end
   end
