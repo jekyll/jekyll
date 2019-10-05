@@ -22,11 +22,13 @@ module Jekyll
 
       self.config = config
 
+      # rubocop:disable Layout/SpaceAroundOperators
       @cache_dir       = in_source_dir(config["cache_dir"])
 
       @reader          = Reader.new(self)
       @regenerator     = Regenerator.new(self)
       @liquid_renderer = LiquidRenderer.new(self)
+      # rubocop:enable Layout/SpaceAroundOperators
 
       Jekyll.sites << self
 
