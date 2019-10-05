@@ -175,7 +175,9 @@ class TestDocument < JekyllUnitTest
         }]
       )
       @site.process
+      # rubocop:disable Performance/Detect
       @document = @site.collections["slides"].docs.select { |d| d.is_a?(Document) }.first
+      # rubocop:enable Performance/Detect
     end
 
     should "know the front matter defaults" do
