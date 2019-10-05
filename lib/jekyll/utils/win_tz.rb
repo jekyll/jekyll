@@ -30,7 +30,9 @@ module Jekyll
         #
         # Format the hour as a two-digit number.
         # Establish the minutes based on modulo expression.
+        # rubocop:disable Style/FormatStringToken
         hh = format("%02d", absolute_hour(difference).ceil)
+        # rubocop:enable Style/FormatStringToken
         mm = modulo.zero? ? "00" : "30"
 
         Jekyll.logger.debug "Timezone:", "#{timezone} #{offset}#{hh}:#{mm}"
