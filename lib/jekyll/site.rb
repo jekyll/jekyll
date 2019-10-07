@@ -22,7 +22,7 @@ module Jekyll
 
       self.config = config
 
-      @cache_dir       = in_source_dir(config["cache_dir"])
+      @cache_dir = in_source_dir(config["cache_dir"])
 
       @reader          = Reader.new(self)
       @regenerator     = Regenerator.new(self)

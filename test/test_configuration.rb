@@ -146,7 +146,7 @@ class TestConfiguration < JekyllUnitTest
   context "#config_files" do
     setup do
       @config = Configuration[{ "source" => source_dir }]
-      @no_override     = {}
+      @no_override = {}
       @one_config_file = { "config" => "config.yml" }
       @multiple_files  = {
         "config" => %w(config/site.yml config/deploy.toml configuration.yml),
