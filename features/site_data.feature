@@ -102,13 +102,13 @@ Feature: Site data
     And the _site directory should exist
   And I should see "last:C, C:B,last B:A,C A:first,B first:,A" in "_site/index.html"
 
-  Scenario: Use configuration date in site payload
-    Given I have an "index.html" page that contains "{{ site.url }}"
-    And I have a configuration file with "url" set to "http://example.com"
+  Scenario: Use configuration data in site payload
+    Given I have an "index.html" page that contains "{{ site.name }}"
+    And I have a configuration file with "name" set to "My Jekyll blog"
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "http://example.com" in "_site/index.html"
+    And I should see "My Jekyll blog" in "_site/index.html"
 
   Scenario: Access Jekyll version via jekyll.version
     Given I have an "index.html" page that contains "{{ jekyll.version }}"
