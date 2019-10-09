@@ -54,6 +54,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [Statictastic](https://www.statictastic.com/): Static site hosting, publishing and content management for teams
 
 ### E-commerce
+  - [MemberSpace](https://www.memberspace.com/integrations/jekyll-membership/): Add memberships and paywall functionality to a Jekyll site
   - [Snipcart](https://snipcart.com/blog/static-site-e-commerce-part-2-integrating-snipcart-with-jekyll): Add a shopping cart to a Jekyll site
 
 ### Forms
