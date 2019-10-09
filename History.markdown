@@ -19,6 +19,7 @@
   * Rephrase the CircleCI v2 section (#7815)
   * Update old GitHub wiki URL with new one (#7823)
   * Update JekyllConf page with 2019 talks (#7826)
+  * link for memberships (#7825)
 
 ### Development Fixes
 
