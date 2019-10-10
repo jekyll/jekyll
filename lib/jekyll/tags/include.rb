@@ -202,7 +202,7 @@ module Jekyll
           context.registers[:site].source
         else
           site = context.registers[:site]
-          page_payload  = context.registers[:page]
+          page_payload = context.registers[:page]
           resource_path = \
             if page_payload["collection"].nil?
               page_payload["path"]
