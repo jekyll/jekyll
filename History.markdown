@@ -20,6 +20,7 @@
   * Update old GitHub wiki URL with new one (#7823)
   * Update JekyllConf page with 2019 talks (#7826)
   * link for memberships (#7825)
+  * Doc: minor fix, should be greater or equal to min version [ci skip] (#7856)
 
 ### Development Fixes
 
