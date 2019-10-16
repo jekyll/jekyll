@@ -179,7 +179,7 @@ module Jekyll
     # new_scope - the new scope hash
     #
     # Returns true if the new scope has precedence over the older
-    # rubocop: disable PredicateName
+    # rubocop: disable Naming/PredicateName
     def has_precedence?(old_scope, new_scope)
       return true if old_scope.nil?
 
@@ -194,7 +194,7 @@ module Jekyll
         !old_scope.key? "type"
       end
     end
-    # rubocop: enable PredicateName
+    # rubocop: enable Naming/PredicateName
 
     # Collects a list of sets that match the given path and type
     #
