@@ -1,5 +1,5 @@
-inherit_from: .rubocop_todo.yml
 ---
+inherit_from: .rubocop_todo.yml
 
 require:
   - rubocop-performance
@@ -120,6 +120,7 @@ Style/DoubleNegation:
 Style/FormatStringToken:
   Exclude:
     - lib/jekyll/utils/ansi.rb
+    - lib/jekyll/liquid_renderer/table.rb
 Style/GuardClause:
   Enabled: false
 Style/HashSyntax:
