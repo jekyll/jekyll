@@ -26,6 +26,7 @@
 ### Development Fixes
 
   * Ci/GitHub actions (#7822)
+  * Rubocop version upgrade (#7846)
 
 ## 4.0.0 / 2019-08-19
 
