@@ -51,6 +51,7 @@ position: Writer
 ---
 Ted has been eating fruit since he was baby.
 ```
+Also note that the files need to have Front Matter defined, otherwise they won't be picked by the collections.
 
 ## Staff page
 
