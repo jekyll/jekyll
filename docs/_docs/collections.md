@@ -125,7 +125,7 @@ help you control the output url for the entire collection.
 
 ## Custom Sorting of Documents
 
-By default, documents in a collection are sorted by their paths. But you can control this sorting via the collection's metadata.
+By default, documents in a collection are sorted by their `date`s (if both have that front-matter key) or by their paths (if one or both do not have the `date` key). But you can control this sorting via the collection's metadata.
 
 ### Sort By Front Matter Key
 
