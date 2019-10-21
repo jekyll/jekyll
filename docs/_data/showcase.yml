@@ -132,10 +132,11 @@
   url: https://www.tryadhawk.com/
   categories:
     - agency
-- name: City of Boston Budget
-  url: https://budget.boston.gov/
+- name: Whose Line Club
+  url: https://whoseline.club/
   categories:
-    - government
+    - community
+    - blog
 - name: Lattice
   url: https://latticehq.com/
   categories:
