@@ -15,14 +15,18 @@ example here's a collection of staff members:
 collections:
   - staff_members
 ```
-
-You can optionally specify metadata for your collection in the configuration:
+In this case `collections` is defined as a sequence (i.e array) with no additional metadata defined for each collection.  
+You can optionally specify metadata for your collection by defining `collections` as a mapping (i.e hashmap) instead of sequence, and then defining additional fields in it:
 
 ```yaml
 collections:
   staff_members:
     people: true
 ```
+
+<div class="note">
+  <p>When defining a collection as a sequence, it's pages will not be rendered by default. To enable this, <code>output: true</code> must be specified on the collection, which requires defining the collection as a mapping. For more information, see the section <a href="#output">Output</a></p>
+</div>
 
 <div class="note">
   <h5>Gather your collections {%- include docs_version_badge.html version="3.7.0" -%}</h5>
