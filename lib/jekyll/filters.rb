@@ -371,10 +371,15 @@ module Jekyll
     # rubocop:disable Performance/RegexpMatch
     # return numeric values as numbers for proper sorting
     def parse_sort_input(property)
-      number_like = %r!\A\s*-?(?:\d+\.?\d*|\.\d+)\s*\Z!
-      return property.to_f if property.to_s =~ number_like
-
-      property
+      float_like = %r!\A\s*-?(?:\d+\.?\d*|\.\d+)\s*\Z!
+      integer_like = %r!\A\s*-?\d+\s*\Z!
+      if property.to_s =~ integer_like
+        property.to_i
+      elsif property.to_s =~ float_like
+        property.to_f
+      else
+        property
+      end
     end
     # rubocop:enable Performance/RegexpMatch
 
