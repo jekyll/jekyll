@@ -148,3 +148,38 @@ author: dave
 {% endraw %}
 
 For information on how to build robust navigation for your site (especially if you have a documentation website or another type of Jekyll site with a lot of pages to organize), see [Navigation](/tutorials/navigation).
+
+## Key-Value pairs
+
+A data item can be used as a key-value pair. If you refer to it as an array, then the indexes 0 and 1 correspond to the key and value, respectively.
+
+Below is a an example of using key-value pairs to render a list of accounts in social networks.
+
+`_data/people.yml`:
+
+```yaml
+dave:
+    name: David Smith
+    social:
+       twitter: DavidSilvaSmith
+       facebook: david.silva.smith
+       instagram: david_silva_smith
+```
+
+The keys `twitter`,` facebook` and `instagram` can be used as fragments of the Font Awesome classes and web addresses:
+
+{% raw %}
+```liquid
+<ul>
+{% for item in site.data.people.dave.social %}
+  {%assign key = item[0] %}
+  {%assign value = item[1] %}
+  <li>
+    <a href="https://{{ key }}.com/{{ value }}">
+      <i class="fab fa-fw fa-{{ key }}"></i>
+    </a>
+  </li>
+{% endfor %}
+</ul>
+```
+{% endraw %}
