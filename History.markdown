@@ -23,6 +23,7 @@
   * Doc: minor fix, should be greater or equal to min version [ci skip] (#7856)
   * Update third-party.md - Fix broken link (#7857)
   * clarify _config.yml/collections type (#7873)
+  * Replace `` with html tag (#7879)
 
 ### Development Fixes
 
