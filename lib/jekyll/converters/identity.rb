@@ -2,7 +2,7 @@
 
 module Jekyll
   module Converters
-    # Identify converter. Returns same content as given.
+    # Identity converter. Returns same content as given.
     # For more info on converters see https://jekyllrb.com/docs/plugins/converters/
     class Identity < Converter
       safe true
@@ -12,7 +12,7 @@ module Jekyll
       # Public: Does the given extension match this converter's list of acceptable extensions?
       # Takes one argument: the file's extension (including the dot).
       #
-      # ext - The String extension to check (not relevant here)
+      # _ext - The String extension to check (not relevant here)
       #
       # Returns true since it always matches.
       def matches(_ext)
