@@ -24,6 +24,7 @@
   * Update third-party.md - Fix broken link (#7857)
   * clarify _config.yml/collections type (#7873)
   * Replace `` with html tag (#7879)
+  * add new theme source (#7875)
 
 ### Development Fixes
 
