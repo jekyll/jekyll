@@ -7,6 +7,7 @@
 ### Bug Fixes
 
   * Memoize absolute_url and relative_url filters (#7793)
+  * Fix documentation comment for Jekyll::Converters::Identity (#7883)
 
 ### Minor Enhancements
 
