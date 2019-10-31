@@ -8,6 +8,11 @@ module Jekyll
     include GroupingFilters
     include DateFilters
 
+    FLOAT_LIKE = %r!\A\s*-?(?:\d+\.?\d*|\.\d+)\s*\Z!
+    INTEGER_LIKE = %r!\A\s*-?\d+\s*\Z!
+    private_constant :FLOAT_LIKE
+    private_constant :INTEGER_LIKE
+
     # Convert a Markdown string into HTML output.
     #
     # input - The Markdown String to convert.
@@ -371,11 +376,10 @@ module Jekyll
     # rubocop:disable Performance/RegexpMatch
     # return numeric values as numbers for proper sorting
     def parse_sort_input(property)
-      float_like = %r!\A\s*-?(?:\d+\.?\d*|\.\d+)\s*\Z!
-      integer_like = %r!\A\s*-?\d+\s*\Z!
-      if property.to_s =~ integer_like
+      stringified = property.to_s
+      if INTEGER_LIKE.match?(stringified)
         property.to_i
-      elsif property.to_s =~ float_like
+      elsif FLOAT_LIKE.match?(stringified)
         property.to_f
       else
         property
