@@ -834,9 +834,9 @@ class TestFilters < JekyllUnitTest
 
       should "should pass integers as is" do
         grouping = @filter.group_by([
-          {"name" => "Allison", "year" => 2016},
-          {"name" => "Amy", "year" => 2016},
-          {"name" => "George", "year" => 2019},
+          { "name" => "Allison", "year" => 2016 },
+          { "name" => "Amy", "year" => 2016 },
+          { "name" => "George", "year" => 2019 },
         ], "year")
         assert_equal "2016", grouping[0]["name"]
         assert_equal "2019", grouping[1]["name"]
