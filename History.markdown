@@ -26,6 +26,7 @@
   * clarify _config.yml/collections type (#7873)
   * Replace `` with html tag (#7879)
   * add new theme source (#7875)
+  * fixed grammatical error (it&#39;s --&gt; its) (#7887)
 
 ### Development Fixes
 
