@@ -25,7 +25,7 @@ collections:
 ```
 
 <div class="note">
-  <p>When defining a collection as a sequence, it's pages will not be rendered by default. To enable this, <code>output: true</code> must be specified on the collection, which requires defining the collection as a mapping. For more information, see the section <a href="#output">Output</a></p>
+  <p>When defining a collection as a sequence, its pages will not be rendered by default. To enable this, <code>output: true</code> must be specified on the collection, which requires defining the collection as a mapping. For more information, see the section <a href="#output">Output</a></p>
 </div>
 
 <div class="note">

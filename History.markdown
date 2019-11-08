@@ -7,6 +7,7 @@
 ### Bug Fixes
 
   * Memoize absolute_url and relative_url filters (#7793)
+  * Fix documentation comment for Jekyll::Converters::Identity (#7883)
 
 ### Minor Enhancements
 
@@ -23,11 +24,15 @@
   * Doc: minor fix, should be greater or equal to min version [ci skip] (#7856)
   * Update third-party.md - Fix broken link (#7857)
   * clarify _config.yml/collections type (#7873)
+  * Replace `` with html tag (#7879)
+  * add new theme source (#7875)
+  * fixed grammatical error (it&#39;s --&gt; its) (#7887)
 
 ### Development Fixes
 
   * Ci/GitHub actions (#7822)
   * Rubocop version upgrade (#7846)
+  * Split action steps to avoid using `&amp;&amp;` on Windows (#7885)
 
 ## 4.0.0 / 2019-08-19
 
