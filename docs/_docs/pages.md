@@ -26,7 +26,7 @@ If you have a lot of pages, you can organize them into subfolders. The same subf
 .
 |-- about.md          # => http://example.com/about.html
 |-- Documentation     # folder containing pages
-    └── Doc1.md       # => http://example.com/Documentation/doc1.html
+    └── Doc1.md       # => http://example.com/Documentation/Doc1.html
 |-- Design            # folder containing pages
     └── draft.md      # => http://example.com/Design/draft.html
 ```
