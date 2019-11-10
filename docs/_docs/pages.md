@@ -20,15 +20,15 @@ and associated URLs might look like:
 └── contact.html  # => http://example.com/contact.html
 ```
 
-If you have a lot of pages, you can organize them into subfolders. The same subfolders that are used to group your pages in our project's source will exist in the `_site` folder when your site builds. Each individual page will then be generated in a sub folder mathcing its file name and be called index.html
+If you have a lot of pages, you can organize them into subfolders. The same subfolders that are used to group your pages in our project's source will exist in the `_site` folder when your site builds. Each individual page is generated said folders as file_name.html
 
 ```sh
 .
 |-- about.md          # => http://example.com/about.html
 |-- Documentation     # folder containing pages
-    └── Doc1.md       # => http://example.com/Documentation/Doc1/index.html
+    └── Doc1.md       # => http://example.com/Documentation/doc1.html
 |-- Design            # folder containing pages
-    └── draft.md      # => http://example.com/Design/draft/index.html
+    └── draft.md      # => http://example.com/Design/draft.html
 ```
 
 ## Changing the output URL
