@@ -20,7 +20,7 @@ and associated URLs might look like:
 └── contact.html  # => http://example.com/contact.html
 ```
 
-If you have a lot of pages, you can organize them into subfolders. The same subfolders that are used to group your pages in our project's source will exist in the `_site` folder when your site builds. Each individual page is generated said folders as file_name.html
+If you have a lot of pages, you can organize them into subfolders. Unless there is a permalink entry in the page's front matter the same subfolders that are used to group your pages in your project's source will exist in the `_site` folder when your site builds. Each individual page is generated in said folders as file_name.html
 
 ```sh
 .
