@@ -47,7 +47,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
 
 ### Content Management
   - [CloudCannon](https://cloudcannon.com/): The Cloud CMS for Jekyll
-  - [Contentful](https://github.com/contentful/jekyll-contentful-data-import) Content infrastructure for digital teams
+  - [Contentful](https://github.com/contentful/jekyll-contentful-data-import): Content infrastructure for digital teams
   - [Forestry.io](https://forestry.io/): A static CMS that commits
   - [Netlify CMS](https://www.netlifycms.org/): Open source content management for your Git workflow
   - [Siteleaf](https://www.siteleaf.com/): Built for developers, Loved by everyone
