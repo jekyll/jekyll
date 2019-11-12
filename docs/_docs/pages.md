@@ -25,10 +25,10 @@ If you have a lot of pages, you can organize them into subfolders. The same subf
 ```sh
 .
 |-- about.md          # => http://example.com/about.html
-|-- Documentation     # folder containing pages
-    └── Doc1.md       # => http://example.com/Documentation/Doc1.html
-|-- Design            # folder containing pages
-    └── draft.md      # => http://example.com/Design/draft.html
+|-- documentation     # folder containing pages
+    └── Doc1.md       # => http://example.com/documentation/doc1.html
+|-- design            # folder containing pages
+    └── draft.md      # => http://example.com/design/draft.html
 ```
 
 ## Changing the output URL
