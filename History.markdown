@@ -27,6 +27,7 @@
   * Replace `` with html tag (#7879)
   * add new theme source (#7875)
   * fixed grammatical error (it&#39;s --&gt; its) (#7887)
+  * Docs: Clarify organizing pages into subfolders (#7896)
 
 ### Development Fixes
 
