@@ -5,7 +5,7 @@ permalink: /docs/datafiles/
 
 In addition to the [built-in variables](../variables/) available from Jekyll,
 you can specify your own custom data that can be accessed via the [Liquid
-templating system](https://wiki.github.com/shopify/liquid/liquid-for-designers).
+templating system](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers).
 
 Jekyll supports loading data from [YAML](http://yaml.org/), [JSON](http://www.json.org/), [CSV](https://en.wikipedia.org/wiki/Comma-separated_values), and [TSV](https://en.wikipedia.org/wiki/Tab-separated_values) files located in the `_data` directory.
 Note that CSV and TSV files *must* contain a header row.
