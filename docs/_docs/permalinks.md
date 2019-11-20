@@ -34,12 +34,12 @@ You can use placeholders to your desired output. For example:
 permalink: /:categories/:year/:month/:day/:title:output_ext
 ```
 
-Note that pages and collections don't have time or categories, these aspects of
+Note that pages and collections(excluding `posts` and `drafts`) don't have time and categories(for pages, the above `:title` is equivalent to `:basename`), these aspects of
 the permalink style are ignored for the output.
 
 For example, a permalink style of
-`/:categories/:year/:month/:day/:title:output_ext` for posts becomes
-`/:title.html` for pages and collections.
+`/:categories/:year/:month/:day/:title:output_ext` for the `posts` collection becomes
+`/:title.html` for pages and collections(excluding `posts` and `drafts`).
 
 ### Placeholders
 
@@ -329,7 +329,7 @@ Rather than typing `permalink: /:categories/:year/:month/:day/:title/`, you can 
 
 ### Collections
 
-For collections, you have the option to override the global permalink in the
+For collections(including `posts` and `drafts`), you have the option to override the global permalink in the
 collection configuration in `_config.yml`:
 
 ```yaml
@@ -363,7 +363,7 @@ Collections have the following placeholders available:
         <p><code>:path</code></p>
       </td>
       <td>
-        <p>Path to the document relative to the collection's directory.</p>
+        <p>Path to the document relative to the collection's directory, including base filename of the document.</p>
       </td>
     </tr>
     <tr>
@@ -387,6 +387,49 @@ Collections have the following placeholders available:
           defined then <code>:title</code> will be equivalent to
           <code>:name</code>, aka the slug generated from the filename.
         </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:output_ext</code></p>
+      </td>
+      <td>
+        <p>Extension of the output file. (Included by default and usually unnecessary.)</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+### Pages
+
+For pages, you have to use front matter to override the global permalink, and if you set a permalink via front matter defaults in `_config.yml`, it will be ignored.
+
+Pages have the following placeholders available:
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>:path</code></p>
+      </td>
+      <td>
+        <p>Path to the page relative to the site's source directory, excluding base filename of the page.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:basename</code></p>
+      </td>
+      <td>
+        <p>The page's base filename</p>
       </td>
     </tr>
     <tr>
