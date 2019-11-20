@@ -34,12 +34,12 @@ You can use placeholders to your desired output. For example:
 permalink: /:categories/:year/:month/:day/:title:output_ext
 ```
 
-Note that pages and collections(excluding `posts` and `drafts`) don't have time and categories(for pages, the above `:title` is equivalent to `:basename`), these aspects of
+Note that pages and collections (excluding `posts` and `drafts`) don't have time and categories (for pages, the above `:title` is equivalent to `:basename`), these aspects of
 the permalink style are ignored for the output.
 
 For example, a permalink style of
 `/:categories/:year/:month/:day/:title:output_ext` for the `posts` collection becomes
-`/:title.html` for pages and collections(excluding `posts` and `drafts`).
+`/:title.html` for pages and collections (excluding `posts` and `drafts`).
 
 ### Placeholders
 
@@ -329,7 +329,7 @@ Rather than typing `permalink: /:categories/:year/:month/:day/:title/`, you can 
 
 ### Collections
 
-For collections(including `posts` and `drafts`), you have the option to override the global permalink in the
+For collections (including `posts` and `drafts`), you have the option to override the global permalink in the
 collection configuration in `_config.yml`:
 
 ```yaml
