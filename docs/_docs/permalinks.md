@@ -34,8 +34,9 @@ You can use placeholders to your desired output. For example:
 permalink: /:categories/:year/:month/:day/:title:output_ext
 ```
 
-Note that pages and collections (excluding `posts` and `drafts`) don't have time and categories (for pages, the above `:title` is equivalent to `:basename`), these aspects of
-the permalink style are ignored for the output.
+Note that pages and collections (excluding `posts` and `drafts`) don't have time and
+categories (for pages, the above `:title` is equivalent to `:basename`), these aspects
+of the permalink style are ignored for the output.
 
 For example, a permalink style of
 `/:categories/:year/:month/:day/:title:output_ext` for the `posts` collection becomes
@@ -403,7 +404,8 @@ Collections have the following placeholders available:
 
 ### Pages
 
-For pages, you have to use front matter to override the global permalink, and if you set a permalink via front matter defaults in `_config.yml`, it will be ignored.
+For pages, you have to use front matter to override the global permalink, and if you set a
+permalink via front matter defaults in `_config.yml`, it will be ignored.
 
 Pages have the following placeholders available:
 
@@ -421,7 +423,10 @@ Pages have the following placeholders available:
         <p><code>:path</code></p>
       </td>
       <td>
-        <p>Path to the page relative to the site's source directory, excluding base filename of the page.</p>
+        <p>
+          Path to the page relative to the site's source directory, excluding base filename
+          of the page.
+        </p>
       </td>
     </tr>
     <tr>
