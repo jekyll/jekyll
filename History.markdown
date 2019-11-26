@@ -35,6 +35,7 @@
   * Ci/GitHub actions (#7822)
   * Rubocop version upgrade (#7846)
   * Split action steps to avoid using `&amp;&amp;` on Windows (#7885)
+  * Upgrade rake to use version 13 (#7910)
 
 ## 4.0.0 / 2019-08-19
 
