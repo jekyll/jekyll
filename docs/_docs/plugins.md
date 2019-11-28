@@ -15,3 +15,9 @@ having to modify the Jekyll source itself.
 * [Tags](/docs/plugins/tags) - Create custom Liquid tags
 * [Filters](/docs/plugins/filters/) - Create custom Liquid filters
 * [Hooks](/docs/plugins/hooks/) - Fine-grained control to extend the build process
+
+
+Find more Jekyll plugins on [Rubygems][1] and on the [Awesome (Gem-Packaged) Jekyll Plugins][2] list.
+
+[1]:https://rubygems.org/search?utf8=%E2%9C%93&query=jekyll-
+[2]:https://github.com/planetjekyll/awesome-jekyll-plugins
