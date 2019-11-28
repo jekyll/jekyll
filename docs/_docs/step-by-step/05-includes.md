@@ -34,6 +34,9 @@ following content:
 Try using the include tag to add the navigation to `_layouts/default.html`:
 
 {% raw %}
+---
+# you need front matter dashes here for Jekyll to process your includes
+---
 ```liquid
 <!doctype html>
 <html>
