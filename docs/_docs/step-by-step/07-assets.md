@@ -36,7 +36,7 @@ You could use a standard CSS file for styling, we're going to take it a step
 further by using [Sass](https://sass-lang.com/). Sass is a fantastic extension
 to CSS baked right into Jekyll.
 
-First create a Sass file at `/assets/css/styles.scss` with the following content:
+First create a Sass file at `/assets/css/styles.css` with the following content:
 
 {% raw %}
 ```css
