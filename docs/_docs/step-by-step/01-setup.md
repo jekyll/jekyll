@@ -39,6 +39,8 @@ Finally run `bundle` to install jekyll for your project.
 You can now prefix all jekyll commands listed in this tutorial with `bundle exec` 
 to make sure you use the jekyll version defined in your `Gemfile`.
 
+Note: if `bundle` doesn't work try `bundle exec jekyll build`.
+
 ## Create a site
 
 It's time to create a site! Create a new directory for your site, you can name
