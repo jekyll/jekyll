@@ -13,7 +13,8 @@ xcode-select --install
 ## Install Ruby
 
 Jekyll requires **Ruby > {{ site.data.ruby.min_version }}**.
-As macOS Mojave 10.14 comes only with ruby 2.3.x, you'll have to install a newer version of Ruby.
+macOS Catalina 10.15 comes with ruby 2.6.3, so you're fine. 
+If you're running a previous macOS system, you'll have to install a newer version of Ruby.
 
 ### With Homebrew {#brew}
 To run the latest Ruby version you need to install it through [Homebrew](https://brew.sh).
