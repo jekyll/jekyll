@@ -29,6 +29,7 @@
   * fixed grammatical error (it&#39;s --&gt; its) (#7887)
   * Docs: Clarify organizing pages into subfolders (#7896)
   * Disambiguate the placeholder of permalink (#7906)
+  * docs: add short serve command for livereload (#7919)
 
 ### Development Fixes
 
