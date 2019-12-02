@@ -366,7 +366,7 @@ before your site is served.
       </td>
       <td class="align-center">
         <p><code class="option">livereload: true</code></p>
-        <p><code class="flag">--livereload</code></p>
+        <p><code class="flag">-l, --livereload</code></p>
       </td>
     </tr>
     <tr class="setting">
