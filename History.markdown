@@ -31,6 +31,7 @@
   * Disambiguate the placeholder of permalink (#7906)
   * docs: add short serve command for livereload (#7919)
   * docs: add options for watch and force polling (#7918)
+  * add install instructions for ArchLinux and openSUSE (#7920)
 
 ### Development Fixes
 
