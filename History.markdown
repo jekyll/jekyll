@@ -30,6 +30,7 @@
   * Docs: Clarify organizing pages into subfolders (#7896)
   * Disambiguate the placeholder of permalink (#7906)
   * docs: add short serve command for livereload (#7919)
+  * docs: add options for watch and force polling (#7918)
 
 ### Development Fixes
 
