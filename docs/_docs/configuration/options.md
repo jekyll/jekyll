@@ -171,6 +171,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p class="description">Enable auto-regeneration of the site when files are modified.</p>
       </td>
       <td class="align-center">
+        <p><code class="option">watch: BOOL</code></p>
         <p><code class="flag">-w, --[no-]watch</code></p>
       </td>
     </tr>
@@ -248,6 +249,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p class="description">Force watch to use polling.</p>
       </td>
       <td class="align-center">
+        <p><code class="option">force_polling: BOOL</code></p>
         <p><code class="flag">--force_polling</code></p>
       </td>
     </tr>
@@ -366,7 +368,7 @@ before your site is served.
       </td>
       <td class="align-center">
         <p><code class="option">livereload: true</code></p>
-        <p><code class="flag">--livereload</code></p>
+        <p><code class="flag">-l, --livereload</code></p>
       </td>
     </tr>
     <tr class="setting">

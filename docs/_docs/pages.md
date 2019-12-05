@@ -20,7 +20,16 @@ and associated URLs might look like:
 └── contact.html  # => http://example.com/contact.html
 ```
 
-If you have a lot of pages, you can organize them into subfolders. The same subfolders that are used to group your pages in our project's source will exist in the `_site` folder when your site builds.
+If you have a lot of pages, you can organize them into subfolders. The same subfolders that are used to group your pages in your project's source will then exist in the `_site` folder when your site builds. However, when a page has a *different* permalink set in the front matter, the subfolder at `_site` changes accordingly.
+
+```sh
+.
+|-- about.md          # => http://example.com/about.html
+|-- documentation     # folder containing pages
+    └── doc1.md       # => http://example.com/documentation/doc1.html
+|-- design            # folder containing pages
+    └── draft.md      # => http://example.com/design/draft.html
+```
 
 ## Changing the output URL
 

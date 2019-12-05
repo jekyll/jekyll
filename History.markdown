@@ -1,5 +1,50 @@
 ## HEAD
 
+### release
+
+  * Jekyll v4.0 release (#7782)
+
+### Bug Fixes
+
+  * Memoize absolute_url and relative_url filters (#7793)
+  * Fix documentation comment for Jekyll::Converters::Identity (#7883)
+
+### Minor Enhancements
+
+  * serve: add support for ECC certificates (#7768)
+
+### Documentation
+
+  * Add dropped &#39;title: Staff&#39; to the code (#7805)
+  * Clarify docs for static files in collection (#7812)
+  * Rephrase the CircleCI v2 section (#7815)
+  * Update old GitHub wiki URL with new one (#7823)
+  * Update JekyllConf page with 2019 talks (#7826)
+  * link for memberships (#7825)
+  * Doc: minor fix, should be greater or equal to min version [ci skip] (#7856)
+  * Update third-party.md - Fix broken link (#7857)
+  * clarify _config.yml/collections type (#7873)
+  * Replace `` with html tag (#7879)
+  * add new theme source (#7875)
+  * fixed grammatical error (it&#39;s --&gt; its) (#7887)
+  * Docs: Clarify organizing pages into subfolders (#7896)
+  * Disambiguate the placeholder of permalink (#7906)
+  * docs: add short serve command for livereload (#7919)
+  * docs: add options for watch and force polling (#7918)
+  * add install instructions for ArchLinux and openSUSE (#7920)
+  * Improve index page of Jekyll documentation  (#7926)
+
+### Development Fixes
+
+  * Ci/GitHub actions (#7822)
+  * Rubocop version upgrade (#7846)
+  * Split action steps to avoid using `&amp;&amp;` on Windows (#7885)
+  * Upgrade rake to use version 13 (#7910)
+  * Update dependency constraint to allow RuboCop v0.76 (#7893)
+  * Use bash executable consistently (#7909)
+
+## 4.0.0 / 2019-08-19
+
 ### Major Enhancements
 
   * Drop ruby 2.3 (#7454)
@@ -27,46 +72,6 @@
   * Remove Jekyll::Utils#strip_heredoc in favor of a Ruby &gt; 2.3 built in (#7584)
   * Incorporate `relative_url` within `post_url` tag (#7589)
   * Remove patch to modify config for kramdown (#7699)
-
-### Bug Fixes
-
-  * Security: fix `include` bypass of `EntryFilter#filter` symlink check (#7226)
-  * Theme gems: ensure directories aren&#39;t symlinks (#7419)
-  * Add call to unused method `validate_options` in `commands/serve.rb` (#7122)
-  * Check if scope applies to type before given path (#7263)
-  * Document two methods, simplify one of the methods (#7270)
-  * Check key in collections only if it isn&#39;t &#34;posts&#34; (#7277)
-  * Interpolate Jekyll::Page subclass on inspection (#7203)
-  * Measure the no. of times a template gets rendered (#7316)
-  * Reduce array traversal in Jekyll::Reader (#7157)
-  * Re-implement handling Liquid blocks in excerpts (#7250)
-  * Documents should be able to render their date (#7404)
-  * Fix Interpreter warning from Jekyll::Renderer (#7448)
-  * Loggers should accept both numbers and symbols (#6967)
-  * Replace regex arg to :gsub with a string arg (#7189)
-  * Dont write static files from unrendered collection (#7410)
-  * Excerpt handling of custom and intermediate tags (#7382)
-  * Change future post loglevel to warn to help user narrow down issues (#7527)
-  * Handle files with trailing dots in their basename (#7315)
-  * Fix unnecessary allocations via StaticFileReader (#7572)
-  * Don&#39;t check if site URL is absolute if it is nil (#7498)
-  * Avoid unnecessary duplication of pages array (#7272)
-  * Memoize Site#post_attr_hash (#7276)
-  * Memoize Document#excerpt_separator (#7569)
-  * Optimize Document::DATE_FILENAME_MATCHER to match valid filenames (#7292)
-  * Escape valid special chars in a site&#39;s path name (#7568)
-  * Replace `name` in Page#inspect with relative_path (#7434)
-  * Log a warning when the slug is empty (#7357)
-  * Push Markdown link refs to excerpt only as required (#7577)
-  * Fix broken include_relative usage in excerpt (#7633)
-  * Initialize and reset glob_cache only as necessary (#7658)
-  * Revert memoizing Site#docs_to_write and #documents (#7684)
-  * Backport #7684 for v3.8.x: Revert memoizing Site#docs_to_write and refactor #documents (#7689)
-  * Backport #7213 and #7633 for v3.8.x: Fix broken include_relative usage in excerpt (#7690)
-  * Don&#39;t read symlinks in site.include in safe mode (#7711)
-  * Replace `String#=~` with `String#match?` (#7723)
-  * Update log output for an invalid theme directory (#7679)
-  * Remove configuration of theme sass files from Core (#7290)
 
 ### Minor Enhancements
 
@@ -114,6 +119,48 @@
   * Add PathManager class to cache interim paths (#7732)
   * Remove warnings and fixes for deprecated config (#7440)
   * Delegate --profile tabulation to `terminal-table` (#7627)
+
+### Bug Fixes
+
+  * Security: fix `include` bypass of `EntryFilter#filter` symlink check (#7226)
+  * Theme gems: ensure directories aren&#39;t symlinks (#7419)
+  * Add call to unused method `validate_options` in `commands/serve.rb` (#7122)
+  * Check if scope applies to type before given path (#7263)
+  * Document two methods, simplify one of the methods (#7270)
+  * Check key in collections only if it isn&#39;t &#34;posts&#34; (#7277)
+  * Interpolate Jekyll::Page subclass on inspection (#7203)
+  * Measure the no. of times a template gets rendered (#7316)
+  * Reduce array traversal in Jekyll::Reader (#7157)
+  * Re-implement handling Liquid blocks in excerpts (#7250)
+  * Documents should be able to render their date (#7404)
+  * Fix Interpreter warning from Jekyll::Renderer (#7448)
+  * Loggers should accept both numbers and symbols (#6967)
+  * Replace regex arg to :gsub with a string arg (#7189)
+  * Dont write static files from unrendered collection (#7410)
+  * Excerpt handling of custom and intermediate tags (#7382)
+  * Change future post loglevel to warn to help user narrow down issues (#7527)
+  * Handle files with trailing dots in their basename (#7315)
+  * Fix unnecessary allocations via StaticFileReader (#7572)
+  * Don&#39;t check if site URL is absolute if it is nil (#7498)
+  * Avoid unnecessary duplication of pages array (#7272)
+  * Memoize Site#post_attr_hash (#7276)
+  * Memoize Document#excerpt_separator (#7569)
+  * Optimize Document::DATE_FILENAME_MATCHER to match valid filenames (#7292)
+  * Escape valid special chars in a site&#39;s path name (#7568)
+  * Replace `name` in Page#inspect with relative_path (#7434)
+  * Log a warning when the slug is empty (#7357)
+  * Push Markdown link refs to excerpt only as required (#7577)
+  * Fix broken include_relative usage in excerpt (#7633)
+  * Initialize and reset glob_cache only as necessary (#7658)
+  * Revert memoizing Site#docs_to_write and #documents (#7684)
+  * Backport #7684 for v3.8.x: Revert memoizing Site#docs_to_write and refactor #documents (#7689)
+  * Backport #7213 and #7633 for v3.8.x: Fix broken include_relative usage in excerpt (#7690)
+  * Don&#39;t read symlinks in site.include in safe mode (#7711)
+  * Replace `String#=~` with `String#match?` (#7723)
+  * Update log output for an invalid theme directory (#7679)
+  * Remove configuration of theme sass files from Core (#7290)
+  * Actually conditionally include liquid-c (#7792)
+  * Test number_like regex on stringified property (#7788)
 
 ### Development Fixes
 
@@ -268,6 +315,8 @@
   * Updates to CODE OF CONDUCT (v1.4.0) (#7105)
   * More inclusive writing (#7283)
   * Update Ruby version used in Travis-CI example (#7783)
+  * Documentation for binary operators in where_exp (#7786)
+  * Adding SmartForms as Forms service (#7794)
 
 ### Site Enhancements
 

@@ -16,4 +16,16 @@ On Debian:
 sudo apt-get install ruby-full build-essential
 ```
 
+On ArchLinux:
+
+```sh
+sudo pacman -S ruby base-devel
+```
+
+On openSUSE:
+
+```sh
+sudo zypper install -t pattern devel_ruby devel_C_C++
+```
+
 The rest works the same as on [Ubuntu](../ubuntu/).
