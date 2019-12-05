@@ -7,7 +7,7 @@ redirect_from:
   - /docs/extras/
 ---
 Jekyll is an extendable static site generator. You give it text written
-in your favorite markup language and it uses layout templates to create a
+in your favorite markup language and it uses layouts to create a
 static website. You can tweak how you want the site URLs
 to look like, what data gets displayed on the site, and more.
 
@@ -17,7 +17,7 @@ See [requirements](/docs/installation/#requirements).
 
 ## Instructions
 
-1. Install a full [Ruby development environment](/docs/installation).
+1. Install a full [Ruby development environment](/docs/installation/).
 2. Install Jekyll and [bundler](/docs/ruby-101/#bundler) [gems](/docs/ruby-101/#gems).
 ```
 gem install jekyll bundler
