@@ -24,12 +24,12 @@ YEAR-MONTH-DAY-title.MARKUP
 ```
 
 Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit
-numbers, and `MARKUP` is the file extension representing the format used in the
+numbers, and `MARKDOWN` is the file extension representing the format used in the
 file. For example, the following are examples of valid post filenames:
 
 ```
-2011-12-31-new-years-eve-is-awesome.md
-2012-09-12-how-to-write-a-blog.md
+2011-12-31-new-years-eve-is-awesome.markdown
+2012-09-12-how-to-write-a-blog.markdown
 ```
 
 All blog post files must begin with [front matter](/docs/front-matter/) which is
