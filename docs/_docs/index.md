@@ -6,10 +6,10 @@ redirect_from:
   - /docs/quickstart/
   - /docs/extras/
 ---
-Jekyll is an extendable static site generator. You give it text written
-in your favorite markup language and it uses layouts to create a static 
-website. You can tweak how you want the site URLs to look like, what data 
-gets displayed on the site, and more.
+Jekyll is an extendable static site generator. You give it text written in your
+favorite markup language and it uses layouts to create a static website. You can
+tweak how you want the site URLs to look like, what data gets displayed on the
+site, and more.
 
 ## Prerequities
 
@@ -37,6 +37,6 @@ bundle exec jekyll serve
 6. Browse to [http://localhost:4000](http://localhost:4000){:target="_blank"}
 
 If you encounter any errors during this process, see the
-[troubleshooting](/docs/troubleshooting/#configuration-problems) page. 
-Also, make sure you've installed the development headers and other 
-prerequisites as mentioned on the [requirements](/docs/installation/#requirements) page.
+[troubleshooting](/docs/troubleshooting/#configuration-problems) page. Also,
+make sure you've installed the development headers and other prerequisites as
+mentioned on the [requirements](/docs/installation/#requirements) page.
