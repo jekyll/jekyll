@@ -12,6 +12,7 @@
 ### Minor Enhancements
 
   * serve: add support for ECC certificates (#7768)
+  * Update item_property to recognize integers (#7878)
 
 ### Documentation
 
