@@ -7,8 +7,8 @@ The Jekyll gem makes a `jekyll` executable available to you in your terminal.
 
 You can use this command in a number of ways:
 
-* `jekyll new .` - Creates a new Jekyll site in present working directory with default gem-based theme. The `.` can be replaced with a path. The path will be created if it does not exist.
-* `jekyll new --blank .` - Creates a new blank Jekyll site scaffold in the present working directory.
+* `jekyll new some/path` - Creates a new Jekyll site with default gem-based theme at `./some/path`. The directories will be created as necessary.
+* `jekyll new some/path --blank` - Creates a new blank Jekyll site scaffold at path `./some/path`.
 * `jekyll build` or `jekyll b` - Performs a one off build your site to `./_site` (by default)
 * `jekyll serve` or `jekyll s` - Builds your site any time a source file changes and serves it locally
 * `jekyll doctor` - Outputs any deprecation or configuration issues
