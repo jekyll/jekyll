@@ -33,6 +33,7 @@
   * docs: add options for watch and force polling (#7918)
   * add install instructions for ArchLinux and openSUSE (#7920)
   * Improve index page of Jekyll documentation  (#7926)
+  * Include path in jekyll new commands (Usage docs) (#7931)
 
 ### Development Fixes
 
