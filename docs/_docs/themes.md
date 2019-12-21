@@ -58,7 +58,7 @@ To locate a theme's files on your computer:
 
    ```sh
    # On MacOS
-   open $(bundle info minima)
+   open $(bundle info --path minima)
 
    # On Windows
    # First get the gem's installation path:
