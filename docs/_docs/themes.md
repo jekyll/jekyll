@@ -50,7 +50,7 @@ For example, if your selected theme has a `page` layout, you can override the th
 
 To locate a theme's files on your computer:
 
-1. Run `bundle info` followed by the name of the theme's gem, e.g., `bundle info minima` for Jekyll's default theme.
+1. Run `bundle info --path` followed by the name of the theme's gem, e.g., `bundle info --path minima` for Jekyll's default theme.
 
    This returns the location of the gem-based theme files. For example, the Minima theme's files might be located in `/usr/local/lib/ruby/gems/2.6.0/gems/minima-2.5.1` on macOS.
 
