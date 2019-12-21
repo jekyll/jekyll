@@ -63,7 +63,7 @@ To locate a theme's files on your computer:
    # On Windows
    # First get the gem's installation path:
    #
-   #   bundle info minima
+   #   bundle info --path minima
    #   => C:/Ruby26-x64/lib/ruby/gems/{{ site.data.ruby.current_version }}/gems/minima-2.5.1
    #
    # then invoke explorer with above path, substituting `/` with `\`
