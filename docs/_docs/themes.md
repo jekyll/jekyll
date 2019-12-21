@@ -70,7 +70,7 @@ To locate a theme's files on your computer:
    explorer C:\Ruby26-x64\lib\ruby\gems\{{ site.data.ruby.current_version}}\gems\minima-2.5.1
 
    # On Linux
-   xdg-open $(bundle info minima)
+   xdg-open $(bundle info --path minima)
    ```
 
    A Finder or Explorer window opens showing the theme's files and directories. The Minima theme gem contains these files:
