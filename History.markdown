@@ -36,6 +36,7 @@
   * Improve index page of Jekyll documentation  (#7926)
   * Include path in jekyll new commands (Usage docs) (#7931)
   * Change `affect` to `effect` in the collections docs (#7937)
+  * Changed deprecated command in themes documentation (#7941)
 
 ### Development Fixes
 
