@@ -52,6 +52,8 @@ is completely optional but it's a great habit to get into. You can learn more
 about using Git by reading through the
 [Git Handbook](https://guides.github.com/introduction/git-handbook/).
 
+Before you start, rename `index.markdown` to `index.markdown.bak` to prevent jekyll from rendering the basic theme. 
+
 Let's add your first file. Create `index.html` in the root with the following
 content:
 
