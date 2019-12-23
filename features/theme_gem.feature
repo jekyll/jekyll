@@ -25,6 +25,7 @@ Feature: Building Theme Gems
     And the "my-cool-theme-0.1.0/_includes/blank.html" file should exist
     And the "my-cool-theme-0.1.0/_sass/blank.scss" file should exist
     And the "my-cool-theme-0.1.0/assets/blank.scss" file should exist
+    And the "my-cool-theme-0.1.0/_config.yml" file should exist
     And the my-cool-theme-0.1.0/.git directory should not exist
     And the "my-cool-theme-0.1.0/.gitignore" file should not exist
     And the "my-cool-theme-0.1.0/Gemfile" file should not exist
