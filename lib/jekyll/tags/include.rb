@@ -176,7 +176,7 @@ module Jekyll
 
       # This method allows to modify the file content by inheriting from the class.
       def read_file(file, context)
-        File.read(file, file_read_opts(context))
+        File.read(file, **file_read_opts(context))
       end
 
       private
