@@ -108,6 +108,8 @@ Style/Alias:
   EnforcedStyle: prefer_alias_method
 Style/AndOr:
   Severity: error
+Style/BracesAroundHashParameters:
+  Enabled: false
 Style/ClassAndModuleChildren:
   Exclude:
     - test/**/*.rb

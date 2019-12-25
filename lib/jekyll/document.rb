@@ -429,14 +429,14 @@ module Jekyll
       categories.flatten!
       categories.uniq!
 
-      merge_data!("categories" => categories)
+      merge_data!({ "categories" => categories })
     end
 
     def populate_tags
       tags = Utils.pluralized_array_from_hash(data, "tag", "tags")
       tags.flatten!
 
-      merge_data!("tags" => tags)
+      merge_data!({ "tags" => tags })
     end
 
     private
