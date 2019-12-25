@@ -6,7 +6,7 @@ language: ruby
 rvm:
   - &ruby1 2.7.0
   - &ruby2 2.5.7
-  - &jruby jruby-9.2.7.0
+  - &jruby jruby-9.2.9.0
 
 matrix:
   include:
