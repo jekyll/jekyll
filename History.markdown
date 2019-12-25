@@ -46,6 +46,7 @@
   * Upgrade rake to use version 13 (#7910)
   * Update dependency constraint to allow RuboCop v0.76 (#7893)
   * Use bash executable consistently (#7909)
+  * Test with JRuby 9.2.9.0 (#7779)
 
 ## 4.0.0 / 2019-08-19
 
