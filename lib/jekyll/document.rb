@@ -462,8 +462,8 @@ module Jekyll
       merge_data!(defaults, :source => "front matter defaults") unless defaults.empty?
     end
 
-    def read_content(opts)
-      self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
+    def read_content(**opts)
+      self.content = File.read(path, **Utils.merged_file_read_opts(site, opts))
       if content =~ YAML_FRONT_MATTER_REGEXP
         self.content = $POSTMATCH
         data_file = SafeYAML.load(Regexp.last_match(1))
