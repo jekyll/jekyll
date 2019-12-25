@@ -12,6 +12,7 @@
 ### Minor Enhancements
 
   * serve: add support for ECC certificates (#7768)
+  * Update item_property to recognize integers (#7878)
 
 ### Documentation
 
@@ -33,6 +34,9 @@
   * docs: add options for watch and force polling (#7918)
   * add install instructions for ArchLinux and openSUSE (#7920)
   * Improve index page of Jekyll documentation  (#7926)
+  * Include path in jekyll new commands (Usage docs) (#7931)
+  * Change `affect` to `effect` in the collections docs (#7937)
+  * Changed deprecated command in themes documentation (#7941)
 
 ### Development Fixes
 
