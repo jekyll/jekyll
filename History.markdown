@@ -37,6 +37,7 @@
   * Include path in jekyll new commands (Usage docs) (#7931)
   * Change `affect` to `effect` in the collections docs (#7937)
   * Changed deprecated command in themes documentation (#7941)
+  * Adds some documentation for the :clean, :on_obsolete hook (#7954)
 
 ### Development Fixes
 
