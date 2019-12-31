@@ -38,6 +38,7 @@
   * Change `affect` to `effect` in the collections docs (#7937)
   * Changed deprecated command in themes documentation (#7941)
   * Adds some documentation for the :clean, :on_obsolete hook (#7954)
+  * docs: fix broken link (#7955)
 
 ### Development Fixes
 
