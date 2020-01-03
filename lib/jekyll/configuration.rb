@@ -254,6 +254,7 @@ module Jekyll
 
     DEFAULT_EXCLUDES = %w(
       .sass-cache .jekyll-cache
+      .jekyll-footprint
       gemfiles Gemfile Gemfile.lock
       node_modules
       vendor/bundle/ vendor/cache/ vendor/gems/ vendor/ruby/

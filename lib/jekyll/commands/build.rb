@@ -29,6 +29,8 @@ module Jekyll
           options = configuration_from_options(options)
           site = Jekyll::Site.new(options)
 
+          Footprint.check(options)
+
           if options.fetch("skip_initial_build", false)
             Jekyll.logger.warn "Build Warning:", "Skipping the initial build." \
                                " This may result in an out-of-date site."
@@ -91,3 +93,5 @@ module Jekyll
     end
   end
 end
+
+require_relative "build/footprint"
