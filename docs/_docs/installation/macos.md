@@ -26,11 +26,21 @@ To run the latest Ruby version you need to install it through [Homebrew](https:/
 brew install ruby
 ```
 
-Add the brew ruby path to your shell config :
+You'll need to add the brew ruby path to your shell config.
+
+First, open your shell config file:
+
+```
+sudo nano ~/.bash_profile
+```
+
+Then, add the following line:
 
 ```
 export PATH=/usr/local/opt/ruby/bin:$PATH
 ```
+
+Type ctrl + X to exit, and type Y to save.
 
 Then relaunch your terminal and check your updated Ruby setup:
 
