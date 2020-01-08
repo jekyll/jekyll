@@ -18,6 +18,10 @@ module Jekyll
       end
 
       def render(*args)
+        # clear assigns to `Liquid::Template` instance prior to rendering since
+        # `Liquid::Template` instances are cached in Jekyll 4.
+        @template.instance_assigns.clear
+
         measure_time do
           measure_bytes do
             measure_counts do
