@@ -65,7 +65,7 @@ Metrics/CyclomaticComplexity:
   Exclude:
     - lib/jekyll/utils.rb
     - lib/jekyll/commands/serve.rb
-Metrics/LineLength:
+Layout/LineLength:
   Exclude:
     - !ruby/regexp /features\/.*.rb/
     - Rakefile
