@@ -49,6 +49,7 @@
   * Update dependency constraint to allow RuboCop v0.76 (#7893)
   * Use bash executable consistently (#7909)
   * Test with JRuby 9.2.9.0 (#7779)
+  * Bump RuboCop to v0.79.x (#7970)
 
 ## 4.0.0 / 2019-08-19
 
