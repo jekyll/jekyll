@@ -40,6 +40,7 @@
   * Adds some documentation for the :clean, :on_obsolete hook (#7954)
   * docs: fix broken link (#7955)
   * Corrected typo  (#7975)
+  * docs: remove watch option in config (#7940)
 
 ### Development Fixes
 
