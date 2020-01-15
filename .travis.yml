@@ -21,10 +21,7 @@ matrix:
       name: "Profile Docs"
     - rvm: *ruby2
       env: TEST_SUITE=memprof
-      name: "Profile Memory Allocation on mature Ruby"
-    - rvm: *ruby1
-      env: TEST_SUITE=memprof
-      name: "Profile Memory Allocation on latest Ruby"
+      name: "Profile Memory Allocation"
   exclude:
     - rvm: *jruby
       env: TEST_SUITE=cucumber
