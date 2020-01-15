@@ -21,13 +21,13 @@ AllCops:
     - script/**/*
     - vendor/**/*
     - tmp/**/*
-Layout/AlignHash:
+Layout/HashAlignment:
   EnforcedHashRocketStyle: table
 Layout/IndentationWidth:
   Severity: error
-Layout/IndentFirstArrayElement:
+Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
-Layout/IndentFirstHashElement:
+Layout/FirstHashElementIndentation:
   EnforcedStyle: consistent
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
@@ -65,7 +65,7 @@ Metrics/CyclomaticComplexity:
   Exclude:
     - lib/jekyll/utils.rb
     - lib/jekyll/commands/serve.rb
-Metrics/LineLength:
+Layout/LineLength:
   Exclude:
     - !ruby/regexp /features\/.*.rb/
     - Rakefile
