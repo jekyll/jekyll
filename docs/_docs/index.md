@@ -11,7 +11,7 @@ favorite markup language and it uses layouts to create a static website. You can
 tweak how you want the site URLs to look like, what data gets displayed on the
 site, and more.
 
-## Prerequities
+## Prerequisites
 
 See [requirements](/docs/installation/#requirements).
 
