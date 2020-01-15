@@ -39,6 +39,7 @@
   * Changed deprecated command in themes documentation (#7941)
   * Adds some documentation for the :clean, :on_obsolete hook (#7954)
   * docs: fix broken link (#7955)
+  * Corrected typo  (#7975)
 
 ### Development Fixes
 
