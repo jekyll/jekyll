@@ -34,7 +34,7 @@ module Jekyll
     #
     # Returns nothing.
     # rubocop:disable Metrics/AbcSize
-    def read_yaml(base, name, **opts)
+    def read_yaml(base, name, opts = {})
       filename = File.join(base, name)
 
       begin
