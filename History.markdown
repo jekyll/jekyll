@@ -41,6 +41,7 @@
   * docs: fix broken link (#7955)
   * Corrected typo  (#7975)
   * docs: remove watch option in config (#7940)
+  * Correct a sentence in the documentation (#7978)
 
 ### Development Fixes
 
