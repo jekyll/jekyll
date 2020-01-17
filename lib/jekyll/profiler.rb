@@ -42,16 +42,16 @@ module Jekyll
         start_time = Time.now
         @site.send(method)
         end_time = (Time.now - start_time).round(4)
-        profile_data[method.to_s.upcase.cyan] = format("%.4f", end_time)
+        profile_data[method.to_s.upcase] = format("%.4f", end_time)
         total_time += end_time
       end
 
       profile_data["TOTAL TIME"] = format("%.4f", total_time)
 
-      Jekyll.logger.info "\nBuild Process Summary:".cyan
+      Jekyll.logger.info "\nBuild Process Summary:"
       Jekyll.logger.info Profiler.tabulate(Array(profile_data))
 
-      Jekyll.logger.info "\nSite Render Stats:".cyan
+      Jekyll.logger.info "\nSite Render Stats:"
       @site.print_stats
     end
   end
