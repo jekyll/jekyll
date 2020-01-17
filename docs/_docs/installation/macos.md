@@ -98,7 +98,7 @@ Then append your path file with the following, replacing the `X.X` with the firs
 export PATH=$HOME/.gem/ruby/X.X.0/bin:$PATH
 ```
 
-To check your that you gem paths point to your home directory run:
+To check that your gem paths point to your home directory run:
 
 ```sh
 gem env
