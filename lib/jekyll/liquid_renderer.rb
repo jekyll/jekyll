@@ -53,7 +53,7 @@ module Jekyll
     private
 
     def filename_regex
-      @filename_regex ||= %r!\A(#{source_dir}/|#{theme_dir}/|/*)(.*)!i
+      @filename_regex ||= %r!\A(#{source_dir}/|#{theme_dir}/|\W*)(.*)!i
     end
 
     def new_profile_hash
