@@ -6,15 +6,15 @@ module Jekyll
       VALID_SYNTAX = %r!
         ([\w-]+)\s*=\s*
         (?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))
-      !x
+      !x.freeze
       VARIABLE_SYNTAX = %r!
         (?<variable>[^{]*(\{\{\s*[\w\-\.]+\s*(\|.*)?\}\}[^\s{}]*)+)
         (?<params>.*)
-      !mx
+      !mx.freeze
 
-      FULL_VALID_SYNTAX = %r!\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z!
-      VALID_FILENAME_CHARS = %r!^[\w/\.-]+$!
-      INVALID_SEQUENCES = %r![./]{2,}!
+      FULL_VALID_SYNTAX = %r!\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z!.freeze
+      VALID_FILENAME_CHARS = %r!^[\w/\.-]+$!.freeze
+      INVALID_SEQUENCES = %r![./]{2,}!.freeze
 
       def initialize(tag_name, markup, tokens)
         super
@@ -41,9 +41,9 @@ module Jekyll
           markup = markup[match.end(0)..-1]
 
           value = if match[2]
-                    match[2].gsub(%r!\\"!, '"')
+                    match[2].gsub('\\"', '"')
                   elsif match[3]
-                    match[3].gsub(%r!\\'!, "'")
+                    match[3].gsub("\\'", "'")
                   elsif match[4]
                     context[match[4]]
                   end
@@ -54,7 +54,7 @@ module Jekyll
       end
 
       def validate_file_name(file)
-        if file =~ INVALID_SEQUENCES || file !~ VALID_FILENAME_CHARS
+        if INVALID_SEQUENCES.match?(file) || !VALID_FILENAME_CHARS.match?(file)
           raise ArgumentError, <<~MSG
             Invalid syntax for include tag. File contains invalid characters or sequences:
 
@@ -69,7 +69,7 @@ module Jekyll
       end
 
       def validate_params
-        unless @params =~ FULL_VALID_SYNTAX
+        unless FULL_VALID_SYNTAX.match?(@params)
           raise ArgumentError, <<~MSG
             Invalid syntax for include tag:
 
@@ -90,13 +90,7 @@ module Jekyll
 
       # Render the variable if required
       def render_variable(context)
-        if @file =~ VARIABLE_SYNTAX
-          partial = context.registers[:site]
-            .liquid_renderer
-            .file("(variable)")
-            .parse(@file)
-          partial.render!(context)
-        end
+        Liquid::Template.parse(@file).render(context) if VARIABLE_SYNTAX.match?(@file)
       end
 
       def tag_includes_dirs(context)
@@ -106,7 +100,7 @@ module Jekyll
       def locate_include_file(context, file, safe)
         includes_dirs = tag_includes_dirs(context)
         includes_dirs.each do |dir|
-          path = File.join(dir.to_s, file.to_s)
+          path = PathManager.join(dir, file)
           return path if valid_include_file?(path, dir.to_s, safe)
         end
         raise IOError, could_not_locate_message(file, includes_dirs, safe)
@@ -215,6 +209,7 @@ module Jekyll
             else
               File.join(site.config["collections_dir"], page_payload["path"])
             end
+          resource_path.sub!(%r!/#excerpt\z!, "")
           site.in_source_dir File.dirname(resource_path)
         end
       end

@@ -9,14 +9,13 @@ module Jekyll
       @unfiltered_content = []
     end
 
-    # Read all the files in <source>/<dir>/ for Yaml header and create a new Page
-    # object for each file.
+    # Create a new `Jekyll::Page` object for each entry in a given array.
     #
-    # dir - The String relative path of the directory to read.
+    # files - An array of file names inside `@dir`
     #
-    # Returns an array of static pages.
+    # Returns an array of publishable `Jekyll::Page` objects.
     def read(files)
-      files.map do |page|
+      files.each do |page|
         @unfiltered_content << Page.new(@site, @site.source, @dir, page)
       end
       @unfiltered_content.select { |page| site.publisher.publish?(page) }

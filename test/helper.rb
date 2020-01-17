@@ -80,6 +80,17 @@ module DirectoryHelpers
   def test_dir(*subdirs)
     root_dir("test", *subdirs)
   end
+
+  def temp_dir(*subdirs)
+    if Utils::Platforms.windows?
+      drive = Dir.pwd.sub(%r!^([^\/]+).*!, '\1')
+      temp_root = File.join(drive, "tmp")
+    else
+      temp_root = "/tmp"
+    end
+
+    File.join(temp_root, *subdirs)
+  end
 end
 
 class JekyllUnitTest < Minitest::Test
@@ -189,6 +200,15 @@ class JekyllUnitTest < Minitest::Test
       msg ||= "Jekyll does not currently support this feature on Windows."
       skip msg.to_s.magenta
     end
+  end
+
+  def symlink_if_allowed(target, sym_file)
+    FileUtils.ln_sf(target, sym_file)
+  rescue Errno::EACCES
+    skip "Permission denied for creating a symlink to #{target.inspect} " \
+         "on this machine".magenta
+  rescue NotImplementedError => e
+    skip e.to_s.magenta
   end
 end
 

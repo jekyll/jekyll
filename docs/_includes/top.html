@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="generator" content="Jekyll v{{ jekyll.version }}">
   {% feed_meta %}
+  <link type="application/atom+xml" rel="alternate" href="{{ "/feed/release.xml" | relative_url }}" title="Jekyll releases posts" />
   <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="{{ site.repository }}/commits/master.atom">
-  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic,900">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+  <link rel="preload" href="/fonts/lato-v14-latin-300.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/lato-v14-latin-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="{{ "/css/screen.css" | relative_url }}" as="style">
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   {% seo %}

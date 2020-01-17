@@ -7,7 +7,7 @@ Feature: Site pagination
     Given I have a configuration file with:
       | key      | value             |
       | paginate | <num>             |
-      | gems     | [jekyll-paginate] |
+      | plugins  | [jekyll-paginate] |
     And I have a _layouts directory
     And I have an "index.html" page that contains "{{ paginator.posts.size }}"
     And I have a _posts directory
@@ -35,7 +35,7 @@ Feature: Site pagination
       | paginate      | 1                              |
       | paginate_path | /blog/page-:num                |
       | permalink     | /blog/:year/:month/:day/:title |
-      | gems          | [jekyll-paginate]              |
+      | plugins       | [jekyll-paginate]              |
     And I have a blog directory
     And I have an "blog/index.html" page that contains "{{ paginator.posts.size }}"
     And I have a _posts directory
@@ -63,7 +63,7 @@ Feature: Site pagination
       | paginate      | 1                              |
       | paginate_path | /blog/page/:num                |
       | permalink     | /blog/:year/:month/:day/:title |
-      | gems          | [jekyll-paginate]              |
+      | plugins       | [jekyll-paginate]              |
     And I have a blog directory
     And I have an "blog/index.html" page that contains "{{ paginator.posts.size }}"
     And I have an "index.html" page that contains "Don't pick me!"

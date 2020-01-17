@@ -16,12 +16,19 @@ Feature: Writing themes
 
   Scenario: A theme with SCSS
     Given I have a configuration file with "theme" set to "test-theme"
-    And I have a css directory
-    And I have a "css/main.scss" page that contains "@import 'test-theme-black';"
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see ".sample {\n  color: black; }" in "_site/css/main.css"
+    And I should see ".sample { color: red; }\n\n\/\*# sourceMappingURL=style.css.map \*\/" in "_site/assets/style.css"
+
+  Scenario: Overriding a theme with SCSS
+    Given I have a configuration file with "theme" set to "test-theme"
+    And I have an assets directory
+    And I have an "assets/style.scss" page that contains "@import 'test-theme-black';"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see ".sample { color: black; }\n\n\/\*# sourceMappingURL=style.css.map \*\/" in "_site/assets/style.css"
 
   Scenario: A theme with an include
     Given I have a configuration file with "theme" set to "test-theme"
@@ -56,6 +63,17 @@ Feature: Writing themes
     And the _site directory should exist
     And I should see "From your site." in "_site/assets/application.coffee"
     And I should see "From your site." in "_site/assets/base.js"
+
+  Scenario: A theme with *just* layouts
+    Given I have a configuration file with "theme" set to "test-theme-skinny"
+    And I have an "index.html" page with layout "home" that contains "The quick brown fox."
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "Message: The quick brown fox." in "_site/index.html"
+    But I should not see "_includes" in the build output
+    And I should not see "_sass" in the build output
+    And I should not see "assets" in the build output
 
   Scenario: Requiring dependencies of a theme
     Given I have a configuration file with "theme" set to "test-dependency-theme"

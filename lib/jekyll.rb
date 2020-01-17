@@ -54,6 +54,7 @@ module Jekyll
   autoload :FrontmatterDefaults, "jekyll/frontmatter_defaults"
   autoload :Hooks,               "jekyll/hooks"
   autoload :Layout,              "jekyll/layout"
+  autoload :Cache,               "jekyll/cache"
   autoload :CollectionReader,    "jekyll/readers/collection_reader"
   autoload :DataReader,          "jekyll/readers/data_reader"
   autoload :LayoutReader,        "jekyll/readers/layout_reader"
@@ -64,6 +65,7 @@ module Jekyll
   autoload :LogAdapter,          "jekyll/log_adapter"
   autoload :Page,                "jekyll/page"
   autoload :PageWithoutAFile,    "jekyll/page_without_a_file"
+  autoload :PathManager,         "jekyll/path_manager"
   autoload :PluginManager,       "jekyll/plugin_manager"
   autoload :Publisher,           "jekyll/publisher"
   autoload :Profiler,            "jekyll/profiler"
@@ -176,6 +178,10 @@ module Jekyll
 
       return clean_path if clean_path.eql?(base_directory)
 
+      # remove any remaining extra leading slashes not stripped away by calling
+      # `File.expand_path` above.
+      clean_path.squeeze!("/")
+
       if clean_path.start_with?(base_directory.sub(%r!\z!, "/"))
         clean_path
       else
@@ -185,7 +191,7 @@ module Jekyll
     end
 
     # Conditional optimizations
-    Jekyll::External.require_if_present("liquid-c")
+    Jekyll::External.require_if_present("liquid/c")
   end
 end
 

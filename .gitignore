@@ -1,23 +1,28 @@
-*.gem
-*.swp
-*~
-.DS_Store
-.analysis
+# Jekyll
+_site/
+*-cache/
+.jekyll-metadata
+
+# Ruby
 .bundle/
 .byebug_history
-.jekyll-metadata
 .ruby-gemset
 .ruby-version
-.sass-cache
-/test/source/file_name.txt
-/vendor
+*.gem
 Gemfile.lock
-_site/
-bin/
+
+# Files
+.analysis
+.DS_Store
+*.swp
+*~
+
+# Folders
+/vendor
 bbin/
+bin/
 coverage
 gh-pages/
 pkg/
-site/_site/
 test/dest
 tmp/*

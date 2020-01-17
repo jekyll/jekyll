@@ -5,9 +5,18 @@ permalink: /docs/themes/
 
 Jekyll has an extensive theme system that allows you to leverage community-maintained templates and styles to customize your site's presentation. Jekyll themes specify plugins and package up assets, layouts, includes, and stylesheets in a way that can be overridden by your site's content.
 
+## Pick up a theme
+
+You can find and preview themes on different galleries:
+
+- [jamstackthemes.dev](https://jamstackthemes.dev/ssg/jekyll/)
+- [jekyllthemes.org](http://jekyllthemes.org/)
+- [jekyllthemes.io](https://jekyllthemes.io/)
+- [jekyll-themes.com](https://jekyll-themes.com/)
+
 ## Understanding gem-based themes
 
-When you [create a new Jekyll site](/docs/quickstart) (by running the `jekyll new <PATH>` command), Jekyll installs a site that uses a gem-based theme called [Minima](https://github.com/jekyll/minima).
+When you [create a new Jekyll site](/docs/) (by running the `jekyll new <PATH>` command), Jekyll installs a site that uses a gem-based theme called [Minima](https://github.com/jekyll/minima).
 
 With gem-based themes, some of the site's directories (such as the `assets`, `_layouts`, `_includes`, and `_sass` directories) are stored in the theme's gem, hidden from your immediate view. Yet all of the necessary directories will be read and processed during Jekyll's build process.
 
@@ -25,7 +34,7 @@ In the case of Minima, you see only the following files in your Jekyll site dire
 
 The `Gemfile` and `Gemfile.lock` files are used by Bundler to keep track of the required gems and gem versions you need to build your Jekyll site.
 
-Gem-based themes make it easy for theme developers to make updates available to anyone who has the theme gem. When there's an update, theme developers push the update to RubyGems.
+Gem-based themes make it easier for theme developers to make updates available to anyone who has the theme gem. When there's an update, theme developers push the update to RubyGems.
 
 If you have the theme gem, you can (if you desire) run `bundle update` to update all gems in your project. Or you can run `bundle update <THEME>`, replacing `<THEME>` with the theme name, such as `minima`, to just update the theme gem. Any new files or updates the theme developer has made (such as to stylesheets or includes) will be pulled into your project automatically.
 
@@ -41,19 +50,27 @@ For example, if your selected theme has a `page` layout, you can override the th
 
 To locate a theme's files on your computer:
 
-1. Run `bundle show` followed by the name of the theme's gem, e.g., `bundle show minima` for Jekyll's default theme.
+1. Run `bundle info --path` followed by the name of the theme's gem, e.g., `bundle info --path minima` for Jekyll's default theme.
 
-   This returns the location of the gem-based theme files. For example, the Minima theme's files might be located in `/usr/local/lib/ruby/gems/2.3.0/gems/minima-2.1.0` on macOS.
+   This returns the location of the gem-based theme files. For example, the Minima theme's files might be located in `/usr/local/lib/ruby/gems/2.6.0/gems/minima-2.5.1` on macOS.
 
 2. Open the theme's directory in Finder or Explorer:
 
    ```sh
    # On MacOS
-   open $(bundle show minima)
+   open $(bundle info --path minima)
+
    # On Windows
-   explorer /usr/local/lib/ruby/gems/2.3.0/gems/minima-2.1.0
+   # First get the gem's installation path:
+   #
+   #   bundle info --path minima
+   #   => C:/Ruby26-x64/lib/ruby/gems/{{ site.data.ruby.current_version }}/gems/minima-2.5.1
+   #
+   # then invoke explorer with above path, substituting `/` with `\`
+   explorer C:\Ruby26-x64\lib\ruby\gems\{{ site.data.ruby.current_version}}\gems\minima-2.5.1
+
    # On Linux
-   xdg-open $(bundle show minima)
+   xdg-open $(bundle info --path minima)
    ```
 
    A Finder or Explorer window opens showing the theme's files and directories. The Minima theme gem contains these files:
@@ -113,8 +130,8 @@ To do this, copy the files from the theme gem's directory into your Jekyll site 
 Then you must tell Jekyll about the plugins that were referenced by the theme. You can find these plugins in the theme's gemspec file as runtime dependencies. If you were converting the Minima theme, for example, you might see:
 
 ```
-spec.add_runtime_dependency "jekyll-feed", "~> 0.9"
-spec.add_runtime_dependency "jekyll-seo-tag", "~> 2.1"
+spec.add_runtime_dependency "jekyll-feed", "~> 0.12"
+spec.add_runtime_dependency "jekyll-seo-tag", "~> 2.6"
 ```
 
 You should include these references in the `Gemfile` in one of two ways.
@@ -124,8 +141,8 @@ You could list them individually in both `Gemfile` and `_config.yml`.
 ```ruby
 # ./Gemfile
 
-gem "jekyll-feed", "~> 0.9"
-gem "jekyll-seo-tag", "~> 2.1"
+gem "jekyll-feed", "~> 0.12"
+gem "jekyll-seo-tag", "~> 2.6"
 ```
 
 ```yaml
@@ -142,18 +159,18 @@ Or you could list them explicitly as Jekyll plugins in your Gemfile, and not upd
 # ./Gemfile
 
 group :jekyll_plugins do
-  gem "jekyll-feed", "~> 0.9"
-  gem "jekyll-seo-tag", "~> 2.1"
+  gem "jekyll-feed", "~> 0.12"
+  gem "jekyll-seo-tag", "~> 2.6"
 end
 ```
 
 Either way, don't forget to `bundle update`.
 
-However, if you're publishing on GitHub Pages you should update only your `_config.yml` as GitHub Pages doesn't load plugins via Bundler.
+If you're publishing on GitHub Pages you should update only your `_config.yml` as GitHub Pages doesn't load plugins via Bundler.
 
 Finally, remove references to the theme gem in `Gemfile` and configuration. For example, to remove `minima`:
 
-- Open `Gemfile` and remove `gem "minima", "~> 2.0"`.
+- Open `Gemfile` and remove `gem "minima", "~> 2.5"`.
 - Open `_config.yml` and remove `theme: minima`.
 
 Now `bundle update` will no longer get updates for the theme gem.
@@ -179,7 +196,7 @@ To install a gem-based theme:
    ```diff
    # ./Gemfile
 
-   - gem "minima", "~> 2.0"
+   - gem "minima", "~> 2.5"
    + gem "jekyll-theme-minimal"
    ```
 
@@ -208,7 +225,7 @@ If you're publishing your Jekyll site on [GitHub Pages](https://pages.github.com
 
 ## Creating a gem-based theme
 
-If you're a Jekyll theme developer (rather than just a consumer of themes), you can package up your theme in RubyGems and allow users to install it through Bundler.
+If you're a Jekyll theme developer (rather than a consumer of themes), you can package up your theme in RubyGems and allow users to install it through Bundler.
 
 If you're unfamiliar with creating Ruby gems, don't worry. Jekyll will help you scaffold a new theme with the `new-theme` command. Run `jekyll new-theme` with the theme name as an argument.
 
@@ -238,14 +255,14 @@ Add your template files in the corresponding folders. Then complete the `.gemspe
 
 Theme layouts and includes work just like they work in any Jekyll site. Place layouts in your theme's `/_layouts` folder, and place includes in your themes `/_includes` folder.
 
-For example, if your theme has a `/_layouts/page.html` file, and a page has `layout: page` in its YAML front matter, Jekyll will first look to the site's `_layouts` folder for the `page` layout, and if none exists, will use your theme's `page` layout.
+For example, if your theme has a `/_layouts/page.html` file, and a page has `layout: page` in its front matter, Jekyll will first look to the site's `_layouts` folder for the `page` layout, and if none exists, will use your theme's `page` layout.
 
 ### Assets
 
 Any file in `/assets` will be copied over to the user's site upon build unless they have a file with the same relative path. You can ship any kind of asset here: SCSS, an image, a webfont, etc. These files behave like pages and static files in Jekyll:
 
-- If the file has [YAML front matter](/docs/frontmatter/) at the top, it will be rendered.
-- If the file does not have YAML front matter, it will simply be copied over into the resulting site.
+- If the file has [front matter](/docs/front-matter/) at the top, it will be rendered.
+- If the file does not have front matter, it will simply be copied over into the resulting site.
 
 This allows theme creators to ship a default `/assets/styles.scss` file which their layouts can depend on as `/assets/styles.css`.
 
@@ -273,6 +290,20 @@ Your theme's styles can be included in the user's stylesheet using the `@import`
 Jekyll will automatically require all whitelisted `runtime_dependencies` of your theme-gem even if they're not explicitly included under the `plugins` array in the site's config file. (Note: whitelisting is only required when building or serving with the `--safe` option.)
 
 With this, the end-user need not keep track of the plugins required to be included in their config file for their theme-gem to work as intended.
+
+### Pre-configuring Theme-gems {%- include docs_version_badge.html version="4.0" -%}
+
+Jekyll will read-in a `_config.yml` at the root of the theme-gem and merge its data into the site's existing configuration data.
+
+But unlike other entities loaded from within the theme, loading the config file comes with a few restrictions, as summarized below:
+  * Jekyll's default settings cannot be overridden by a theme-config. That *ball is still in the user's court.*
+  * The theme-config-file cannot be a symlink, irrespective of `safe mode` and whether the file pointed to by the symlink is a legitimate file within the theme-gem.
+  * The theme-config should be a set of key-value pairs. An empty config file, a config file that simply *lists items* under a key, or a config file with just a simple string of text will simply be ignored silently. Users will not get a warning or any log output regarding this discrepancy.
+  * Any settings defined by the theme-config can be overridden by the user.
+
+While this feature is to enable easier adoption of a theme, the restrictions ensure that a theme-config cannot affect the build in a concerning manner. Any plugins required by the theme will have to be listed manually by the user or provided by the theme's `gemspec` file.
+
+This feature will let the theme-gem to work with *theme-specific config variables* out-of-the-box.
 
 ### Documenting your theme
 

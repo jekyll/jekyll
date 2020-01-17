@@ -3,14 +3,14 @@ title: "Jekyll 3.7.2 Released"
 date: 2018-01-25 22:22:22 +0530
 author: ashmaroli
 version: 3.7.2
-categories: [release]
+category: release
 ---
 
 Close on the heels of shipping 3.7.0, we were informed of a couple of
 regressions due to the changes made in that release. In due time, Team Jekyll
 set out to address those issues as early as possible.
 
-Days later here we're, announcing 3.7.2 (sorry for skipping 3.7.1, 
+Days later here we're, announcing 3.7.2 (sorry for skipping 3.7.1,
 RubyGems didn't want to play nice) that fixes numerous issues! :tada:
 The highlights being:
 
@@ -24,7 +24,7 @@ The highlights being:
     We addressed this by having Jekyll scan the directory path only if the user
     explicitly configures the `scope["path"]` using wildcards.
 
-    Read our [documentation](/docs/configuration/#glob-patterns-in-front-matter-defaults)
+    Read our [documentation](/docs/configuration/front-matter-defaults/#glob-patterns-in-front-matter-defaults)
     for more details.
 
     A huge shout-out to @mmistakes for bringing this to our notice and

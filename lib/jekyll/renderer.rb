@@ -9,6 +9,7 @@ module Jekyll
       @site     = site
       @document = document
       @payload  = site_payload
+      @layouts  = nil
     end
 
     # Fetches the payload used in Liquid rendering.
@@ -65,7 +66,7 @@ module Jekyll
     # Render the document.
     #
     # Returns String rendered document output
-    # rubocop: disable AbcSize
+    # rubocop: disable Metrics/AbcSize
     def render_document
       info = {
         :registers        => { :site => site, :page => payload["page"] },
@@ -90,7 +91,7 @@ module Jekyll
 
       output
     end
-    # rubocop: enable AbcSize
+    # rubocop: enable Metrics/AbcSize
 
     # Convert the document using the converters which match this renderer's document.
     #
@@ -124,13 +125,13 @@ module Jekyll
                            LiquidRenderer.format_error(e, path || document.relative_path)
       end
       template.render!(payload, info)
-    # rubocop: disable RescueException
+    # rubocop: disable Lint/RescueException
     rescue Exception => e
       Jekyll.logger.error "Liquid Exception:",
                           LiquidRenderer.format_error(e, path || document.relative_path)
       raise e
     end
-    # rubocop: enable RescueException
+    # rubocop: enable Lint/RescueException
 
     # Checks if the layout specified in the document actually exists
     #
@@ -158,10 +159,10 @@ module Jekyll
         output = render_layout(output, layout, info)
         add_regenerator_dependencies(layout)
 
-        if (layout = site.layouts[layout.data["layout"]])
-          break if used.include?(layout)
-          used << layout
-        end
+        next unless (layout = site.layouts[layout.data["layout"]])
+        break if used.include?(layout)
+
+        used << layout
       end
       output
     end
@@ -202,6 +203,7 @@ module Jekyll
 
     def add_regenerator_dependencies(layout)
       return unless document.write?
+
       site.regenerator.add_dependency(
         site.in_source_dir(document.path),
         layout.path

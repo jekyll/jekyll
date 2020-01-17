@@ -1,5 +1,5 @@
 ---
-version: 3.8.3
+version: 4.0.0
 name: Jekyll • Simple, blog-aware, static sites
 description: Transform your plain text into static websites and blogs
 url: https://jekyllrb.com
@@ -30,7 +30,11 @@ defaults:
     type: posts
   values:
     layout: news_item
-    image: "/img/twitter-card.png"
+- scope:
+    path: ''
+  values:
+    image: "/img/jekyll-og.png"
+future: true
 plugins:
 - jekyll-avatar
 - jekyll-feed
@@ -39,10 +43,15 @@ plugins:
 - jekyll-seo-tag
 - jekyll-sitemap
 - jemoji
+feed:
+  categories:
+  - release
 sass:
   style: compressed
+strict_front_matter: true
 exclude:
 - ".gitignore"
+- ".jekyll-cache"
 - CNAME
 - icomoon-selection.json
 - readme.md

@@ -40,6 +40,7 @@ module Jekyll
       # Returns a full Jekyll configuration
       def configuration_from_options(options)
         return options if options.is_a?(Jekyll::Configuration)
+
         Jekyll.configuration(options)
       end
 
@@ -83,7 +84,7 @@ module Jekyll
       # klass   - an array of Jekyll::Command subclasses associated with the command
       #
       # Note that all exceptions are rescued..
-      # rubocop: disable RescueException
+      # rubocop: disable Lint/RescueException
       def process_with_graceful_fail(cmd, options, *klass)
         klass.each { |k| k.process(options) if k.respond_to?(:process) }
       rescue Exception => e
@@ -96,7 +97,7 @@ module Jekyll
         Jekyll.logger.error "", " for any additional information or backtrace. "
         Jekyll.logger.abort_with "", dashes
       end
-      # rubocop: enable RescueException
+      # rubocop: enable Lint/RescueException
     end
   end
 end

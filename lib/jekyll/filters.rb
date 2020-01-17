@@ -161,14 +161,17 @@ module Jekyll
 
     # Filter an array of objects
     #
-    # input - the object array
-    # property - property within each object to filter by
-    # value - desired value
+    # input    - the object array.
+    # property - the property within each object to filter by.
+    # value    - the desired value.
+    #            Cannot be an instance of Array nor Hash since calling #to_s on them returns
+    #            their `#inspect` string object.
     #
     # Returns the filtered array of objects
     def where(input, property, value)
-      return input if property.nil? || value.nil?
+      return input if !property || value.is_a?(Array) || value.is_a?(Hash)
       return input unless input.respond_to?(:select)
+
       input    = input.values if input.is_a?(Hash)
       input_id = input.hash
 
@@ -181,8 +184,8 @@ module Jekyll
       # stash or retrive results to return
       @where_filter_cache[input_id][property][value] ||= begin
         input.select do |object|
-          Array(item_property(object, property)).map!(&:to_s).include?(value.to_s)
-        end || []
+          compare_property_vs_target(item_property(object, property), value)
+        end.to_a
       end
     end
 
@@ -195,6 +198,7 @@ module Jekyll
     # Returns the filtered array of objects
     def where_exp(input, variable, expression)
       return input unless input.respond_to?(:select)
+
       input = input.values if input.is_a?(Hash) # FIXME
 
       condition = parse_condition(expression)
@@ -214,6 +218,7 @@ module Jekyll
     def to_integer(input)
       return 1 if input == true
       return 0 if input == false
+
       input.to_i
     end
 
@@ -226,6 +231,7 @@ module Jekyll
     # Returns the filtered array of objects
     def sort(input, property = nil, nils = "first")
       raise ArgumentError, "Cannot sort a null object." if input.nil?
+
       if property.nil?
         input.sort
       else
@@ -244,6 +250,7 @@ module Jekyll
 
     def pop(array, num = 1)
       return array unless array.is_a?(Array)
+
       num = Liquid::Utils.to_integer(num)
       new_ary = array.dup
       new_ary.pop(num)
@@ -252,6 +259,7 @@ module Jekyll
 
     def push(array, input)
       return array unless array.is_a?(Array)
+
       new_ary = array.dup
       new_ary.push(input)
       new_ary
@@ -259,6 +267,7 @@ module Jekyll
 
     def shift(array, num = 1)
       return array unless array.is_a?(Array)
+
       num = Liquid::Utils.to_integer(num)
       new_ary = array.dup
       new_ary.shift(num)
@@ -267,6 +276,7 @@ module Jekyll
 
     def unshift(array, input)
       return array unless array.is_a?(Array)
+
       new_ary = array.dup
       new_ary.unshift(input)
       new_ary
@@ -274,6 +284,7 @@ module Jekyll
 
     def sample(input, num = 1)
       return input unless input.respond_to?(:sample)
+
       num = Liquid::Utils.to_integer(num) rescue 1
       if num == 1
         input.sample
@@ -314,22 +325,59 @@ module Jekyll
         .map!(&:last)
     end
 
-    def item_property(item, property)
-      if item.respond_to?(:to_liquid)
-        property.to_s.split(".").reduce(item.to_liquid) do |subvalue, attribute|
-          parse_sort_input(subvalue[attribute])
-        end
-      elsif item.respond_to?(:data)
-        parse_sort_input(item.data[property.to_s])
+    # `where` filter helper
+    #
+    # rubocop:disable Metrics/CyclomaticComplexity
+    # rubocop:disable Metrics/PerceivedComplexity
+    def compare_property_vs_target(property, target)
+      case target
+      when NilClass
+        return true if property.nil?
+      when Liquid::Expression::MethodLiteral # `empty` or `blank`
+        target = target.to_s
+        return true if property == target || Array(property).join == target
       else
-        parse_sort_input(item[property.to_s])
+        target = target.to_s
+        if property.is_a? String
+          return true if property == target
+        else
+          Array(property).each do |prop|
+            return true if prop.to_s == target
+          end
+        end
+      end
+
+      false
+    end
+    # rubocop:enable Metrics/CyclomaticComplexity
+    # rubocop:enable Metrics/PerceivedComplexity
+
+    def item_property(item, property)
+      @item_property_cache ||= {}
+      @item_property_cache[property] ||= {}
+      @item_property_cache[property][item] ||= begin
+        if item.respond_to?(:to_liquid)
+          property.to_s.split(".").reduce(item.to_liquid) do |subvalue, attribute|
+            parse_sort_input(subvalue[attribute])
+          end
+        elsif item.respond_to?(:data)
+          parse_sort_input(item.data[property.to_s])
+        else
+          parse_sort_input(item[property.to_s])
+        end
       end
     end
 
+    FLOAT_LIKE   = %r!\A\s*-?(?:\d+\.?\d*|\.\d+)\s*\Z!.freeze
+    INTEGER_LIKE = %r!\A\s*-?\d+\s*\Z!.freeze
+    private_constant :FLOAT_LIKE, :INTEGER_LIKE
+
     # return numeric values as numbers for proper sorting
     def parse_sort_input(property)
-      number_like = %r!\A\s*-?(?:\d+\.?\d*|\.\d+)\s*\Z!
-      return property.to_f if property =~ number_like
+      stringified = property.to_s
+      return property.to_i if INTEGER_LIKE.match?(stringified)
+      return property.to_f if FLOAT_LIKE.match?(stringified)
+
       property
     end
 
@@ -355,22 +403,48 @@ module Jekyll
       end
     end
 
+    # -----------   The following set of code was *adapted* from Liquid::If
+    # -----------   ref: https://git.io/vp6K6
+
     # Parse a string to a Liquid Condition
     def parse_condition(exp)
-      parser = Liquid::Parser.new(exp)
-      left_expr = parser.expression
-      operator = parser.consume?(:comparison)
-      condition =
-        if operator
-          Liquid::Condition.new(Liquid::Expression.parse(left_expr),
-                                operator,
-                                Liquid::Expression.parse(parser.expression))
-        else
-          Liquid::Condition.new(Liquid::Expression.parse(left_expr))
-        end
-      parser.consume(:end_of_string)
+      parser    = Liquid::Parser.new(exp)
+      condition = parse_binary_comparison(parser)
 
+      parser.consume(:end_of_string)
       condition
+    end
+
+    # Generate a Liquid::Condition object from a Liquid::Parser object additionally processing
+    # the parsed expression based on whether the expression consists of binary operations with
+    # Liquid operators `and` or `or`
+    #
+    #  - parser: an instance of Liquid::Parser
+    #
+    # Returns an instance of Liquid::Condition
+    def parse_binary_comparison(parser)
+      parse_comparison(parser).tap do |condition|
+        binary_operator = parser.id?("and") || parser.id?("or")
+        condition.send(binary_operator, parse_comparison(parser)) if binary_operator
+      end
+    end
+
+    # Generates a Liquid::Condition object from a Liquid::Parser object based on whether the parsed
+    # expression involves a "comparison" operator (e.g. <, ==, >, !=, etc)
+    #
+    #  - parser: an instance of Liquid::Parser
+    #
+    # Returns an instance of Liquid::Condition
+    def parse_comparison(parser)
+      left_operand = Liquid::Expression.parse(parser.expression)
+      operator     = parser.consume?(:comparison)
+
+      # No comparison-operator detected. Initialize a Liquid::Condition using only left operand
+      return Liquid::Condition.new(left_operand) unless operator
+
+      # Parse what remained after extracting the left operand and the `:comparison` operator
+      # and initialize a Liquid::Condition object using the operands and the comparison-operator
+      Liquid::Condition.new(left_operand, operator, Liquid::Expression.parse(parser.expression))
     end
   end
 end

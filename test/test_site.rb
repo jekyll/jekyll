@@ -32,7 +32,7 @@ class TestSite < JekyllUnitTest
 
     should "have an array for plugins if passed as a string" do
       site = Site.new(site_configuration("plugins_dir" => "/tmp/plugins"))
-      array = Utils::Platforms.windows? ? ["C:/tmp/plugins"] : ["/tmp/plugins"]
+      array = [temp_dir("plugins")]
       assert_equal array, site.plugins
     end
 
@@ -40,11 +40,7 @@ class TestSite < JekyllUnitTest
       site = Site.new(site_configuration(
                         "plugins_dir" => ["/tmp/plugins", "/tmp/otherplugins"]
                       ))
-      array = if Utils::Platforms.windows?
-                ["C:/tmp/plugins", "C:/tmp/otherplugins"]
-              else
-                ["/tmp/plugins", "/tmp/otherplugins"]
-              end
+      array = [temp_dir("plugins"), temp_dir("otherplugins")]
       assert_equal array, site.plugins
     end
 
@@ -79,11 +75,23 @@ class TestSite < JekyllUnitTest
       site = fixture_site("theme" => "test-theme")
       assert_equal [source_dir("_includes")], site.includes_load_paths
     end
+
+    should "configure cache_dir" do
+      fixture_site.process
+      assert File.directory?(source_dir(".jekyll-cache", "Jekyll", "Cache"))
+      assert File.directory?(source_dir(".jekyll-cache", "Jekyll", "Cache", "Jekyll--Cache"))
+    end
+
+    should "use .jekyll-cache directory at source as cache_dir by default" do
+      site = Site.new(default_configuration)
+      assert_equal File.join(site.source, ".jekyll-cache"), site.cache_dir
+    end
   end
+
   context "creating sites" do
     setup do
       @site = Site.new(site_configuration)
-      @num_invalid_posts = 4
+      @num_invalid_posts = 6
     end
 
     teardown do
@@ -228,16 +236,18 @@ class TestSite < JekyllUnitTest
         index.html
         index.html
         info.md
+        main.css.map
         main.scss
         properties.html
         sitemap.xml
         static_files.html
+        trailing-dots...md
       )
       unless Utils::Platforms.really_windows?
         # files in symlinked directories may appear twice
-        sorted_pages.push("main.scss", "symlinked-file").sort!
+        sorted_pages.push("main.css.map", "main.scss", "symlinked-file").sort!
       end
-      assert_equal sorted_pages, @site.pages.map(&:name)
+      assert_equal sorted_pages, @site.pages.map(&:name).sort!
     end
 
     should "read posts" do
@@ -585,7 +595,11 @@ class TestSite < JekyllUnitTest
 
       should "set a theme if the config is a string" do
         [:debug, :info, :warn, :error].each do |level|
-          expect(Jekyll.logger.writer).not_to receive(level)
+          if level == :info
+            expect(Jekyll.logger.writer).to receive(level)
+          else
+            expect(Jekyll.logger.writer).not_to receive(level)
+          end
         end
         site = fixture_site("theme" => "test-theme")
         assert_instance_of Jekyll::Theme, site.theme
@@ -664,6 +678,24 @@ class TestSite < JekyllUnitTest
         assert File.file?(dest)
         mtime2 = File.stat(dest).mtime.to_i
         refute_equal mtime1, mtime2 # must be regenerated
+      end
+    end
+
+    context "#in_cache_dir method" do
+      setup do
+        @site = Site.new(
+          site_configuration(
+            "cache_dir" => "../../custom-cache-dir"
+          )
+        )
+      end
+
+      should "create sanitized paths within the cache directory" do
+        assert_equal File.join(@site.source, "custom-cache-dir"), @site.cache_dir
+        assert_equal(
+          File.join(@site.source, "custom-cache-dir", "foo.md.metadata"),
+          @site.in_cache_dir("../../foo.md.metadata")
+        )
       end
     end
   end

@@ -3,7 +3,7 @@ title: 'Jekyll 3.0.2 Released'
 date: 2016-01-20 14:08:18 -0800
 author: parkr
 version: 3.0.2
-categories: [release]
+category: release
 ---
 
 A crucial bug was found in v3.0.1 which caused invalid post dates to go
