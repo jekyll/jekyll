@@ -42,6 +42,7 @@
   * Corrected typo  (#7975)
   * docs: remove watch option in config (#7940)
   * Correct a sentence in the documentation (#7978)
+  * Fix YAML representation of `group_by` result (#7979)
 
 ### Development Fixes
 
