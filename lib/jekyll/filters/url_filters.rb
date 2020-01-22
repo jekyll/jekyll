@@ -62,7 +62,7 @@ module Jekyll
           parts.each_with_object(+"") do |part, result|
             next if part.nil?
 
-            result << ensure_leading_slash(part)
+            result << ensure_leading_slash(part.to_s)
           end
         ).normalize.to_s
       end
