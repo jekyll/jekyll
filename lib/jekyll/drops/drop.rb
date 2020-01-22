@@ -79,8 +79,7 @@ module Jekyll
         end
       end
 
-      # Generates a list of strings which correspond to content getter
-      # methods.
+      # Generates a list of strings which correspond to content getter methods.
       #
       # Returns an Array of strings which represent method-specific keys.
       def content_methods
@@ -88,8 +87,11 @@ module Jekyll
           self.class.instance_methods \
             - Jekyll::Drops::Drop.instance_methods \
             - NON_CONTENT_METHODS
-        ).map(&:to_s).reject do |method|
-          method.end_with?("=")
+        ).each_with_object([]) do |method, result|
+          key = method.to_s
+          next if key.end_with?("=")
+
+          result << key
         end
       end
 

@@ -59,7 +59,11 @@ module Jekyll
 
         parts = [sanitized_baseurl, input]
         Addressable::URI.parse(
-          parts.compact.map { |part| ensure_leading_slash(part.to_s) }.join
+          parts.each_with_object(+"") do |part, result|
+            next if part.nil?
+
+            result << ensure_leading_slash(part)
+          end
         ).normalize.to_s
       end
 

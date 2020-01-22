@@ -30,9 +30,11 @@ module Jekyll
     # Read all the files in <source>/<dir>/<magic_dir> and create a new
     # Document object with each one insofar as it matches the regexp matcher.
     #
-    # dir - The String relative path of the directory to read.
+    #       dir - The String relative path of the directory to read.
+    # magic_dir - The String relative directory to <dir>, looks for content here.
+    #   matcher - Regex pattern of valid filename for posts or drafts.
     #
-    # Returns nothing.
+    # Returns an array of Jekyll::Document instances.
     def read_publishable(dir, magic_dir, matcher)
       read_content(dir, magic_dir, matcher)
         .tap { |docs| docs.each(&:read) }
@@ -42,21 +44,18 @@ module Jekyll
     # Read all the content files from <source>/<dir>/magic_dir
     #   and return them with the type klass.
     #
-    # dir - The String relative path of the directory to read.
-    # magic_dir - The String relative directory to <dir>,
-    #   looks for content here.
-    # klass - The return type of the content.
+    #       dir - The String relative path of the directory to read.
+    # magic_dir - The String relative directory to <dir>, looks for content here.
+    #   matcher - Regex pattern of valid filename for posts or drafts.
     #
-    # Returns klass type of content files
+    # Returns an array of Jekyll::Document instances.
     def read_content(dir, magic_dir, matcher)
-      @site.reader.get_entries(dir, magic_dir).map do |entry|
+      @site.reader.get_entries(dir, magic_dir).each_with_object([]) do |entry, docs|
         next unless matcher.match?(entry)
 
         path = @site.in_source_dir(File.join(dir, magic_dir, entry))
-        Document.new(path,
-                     :site       => @site,
-                     :collection => @site.posts)
-      end.reject(&:nil?)
+        docs << Document.new(path, :site => @site, :collection => @site.posts)
+      end
     end
 
     private

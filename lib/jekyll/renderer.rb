@@ -255,9 +255,12 @@ module Jekyll
     end
 
     def output_exts
-      @output_exts ||= converters.map do |c|
-        c.output_ext(document.extname)
-      end.compact
+      @output_exts ||= converters.each_with_object([]) do |converter, result|
+        extname = converter.output_ext(document.extname)
+        next if extname.nil?
+
+        result << extname
+      end
     end
 
     def liquid_options

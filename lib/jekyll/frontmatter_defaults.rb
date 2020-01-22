@@ -219,15 +219,15 @@ module Jekyll
       sets = @site.config["defaults"]
       return [] unless sets.is_a?(Array)
 
-      sets.map do |set|
+      sets.each_with_object([]) do |set, result|
         if valid?(set)
-          ensure_time!(update_deprecated_types(set))
+          result << ensure_time!(update_deprecated_types(set))
         else
           Jekyll.logger.warn "Defaults:", "An invalid front-matter default set was found:"
           Jekyll.logger.warn set.to_s
           nil
         end
-      end.compact
+      end
     end
 
     # Sanitizes the given path by removing a leading and adding a trailing slash
