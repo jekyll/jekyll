@@ -310,6 +310,16 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p><code class="flag">--strict_front_matter</code></p>
       </td>
     </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>Base URL</strong></p>
+        <p class="description">Serve the website from the given base URL.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">baseurl: URL</code></p>
+        <p><code class="flag">--baseurl URL</code></p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -348,16 +358,6 @@ before your site is served.
       <td class="align-center">
         <p><code class="option">host: HOSTNAME</code></p>
         <p><code class="flag">--host HOSTNAME</code></p>
-      </td>
-    </tr>
-    <tr class="setting">
-      <td>
-        <p class="name"><strong>Base URL</strong></p>
-        <p class="description">Serve the website from the given base URL.</p>
-      </td>
-      <td class="align-center">
-        <p><code class="option">baseurl: URL</code></p>
-        <p><code class="flag">--baseurl URL</code></p>
       </td>
     </tr>
     <tr class="setting">
