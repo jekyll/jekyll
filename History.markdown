@@ -43,6 +43,7 @@
   * docs: remove watch option in config (#7940)
   * Correct a sentence in the documentation (#7978)
   * Fix YAML representation of `group_by` result (#7979)
+  * Move --baseurl to build command options (#7985)
 
 ### Development Fixes
 
