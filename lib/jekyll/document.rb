@@ -414,9 +414,13 @@ module Jekyll
     #
     # Returns nothing.
     def categories_from_path(special_dir)
-      superdirs = relative_path.sub(Document.superdirs_regex(special_dir), "")
-      superdirs = superdirs.split(File::SEPARATOR)
-      superdirs.reject! { |c| c.empty? || c == special_dir || c == basename }
+      if relative_path.start_with?(special_dir)
+        superdirs = []
+      else
+        superdirs = relative_path.sub(Document.superdirs_regex(special_dir), "")
+        superdirs = superdirs.split(File::SEPARATOR)
+        superdirs.reject! { |c| c.empty? || c == special_dir || c == basename }
+      end
 
       merge_data!({ "categories" => superdirs }, :source => "file path")
     end
