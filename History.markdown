@@ -56,6 +56,7 @@
   * Test with JRuby 9.2.9.0 (#7779)
   * Bump RuboCop to v0.79.x (#7970)
   * Remove post-install message from gemspec (#7974)
+  * Return relative_url if site.url is an empty string (#7988)
 
 ## 4.0.0 / 2019-08-19
 
