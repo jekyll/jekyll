@@ -44,10 +44,11 @@ module Jekyll
         return input if Addressable::URI.parse(input.to_s).absolute?
 
         site = @context.registers[:site]
-        return relative_url(input) if site.config["url"].nil?
+        site_url = site.config["url"]
+        return relative_url(input) if site_url.nil? || site_url == ""
 
         Addressable::URI.parse(
-          site.config["url"].to_s + relative_url(input)
+          site_url.to_s + relative_url(input)
         ).normalize.to_s
       end
 
