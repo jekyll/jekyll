@@ -84,13 +84,7 @@ module Jekyll
       #
       # Returns an Array of strings which represent method-specific keys.
       def content_methods
-        @content_methods ||= (
-          self.class.instance_methods \
-            - Jekyll::Drops::Drop.instance_methods \
-            - NON_CONTENT_METHODS
-        ).map(&:to_s).reject do |method|
-          method.end_with?("=")
-        end
+        @content_methods ||= self.class.content_methods
       end
 
       # Check if key exists in Drop
@@ -203,6 +197,18 @@ module Jekyll
         raise KeyError, %(key not found: "#{key}") if default.nil? && block.nil?
         return yield(key) unless block.nil?
         return default unless default.nil?
+      end
+
+      # Generates a list of strings which correspond to content getter methods.
+      #
+      # Defined at the bottom of the class after all *public instance methods* have been
+      # added to the class.
+      def self.content_methods
+        @content_methods ||= (
+          instance_methods \
+            - Jekyll::Drops::Drop.instance_methods \
+            - NON_CONTENT_METHODS
+        ).map!(&:to_s).reject { |method| method.end_with?("=") }
       end
 
       private
