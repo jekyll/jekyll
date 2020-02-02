@@ -44,6 +44,7 @@
   * Correct a sentence in the documentation (#7978)
   * Fix YAML representation of `group_by` result (#7979)
   * Move --baseurl to build command options (#7985)
+  * Correct documentation of filters (#7989)
 
 ### Development Fixes
 
