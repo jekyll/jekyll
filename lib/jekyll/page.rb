@@ -83,7 +83,13 @@ module Jekyll
     #
     # TODO: Remove in Jekyll 5.0
     def liquid_drop
-      @liquid_drop ||= Drops::PageDrop.new(self)
+      @liquid_drop ||= begin
+        defaults = site.frontmatter_defaults.all(relative_path, type)
+        unless defaults.empty?
+          Utils.deep_merge_hashes!(data, Utils.deep_merge_hashes!(defaults, data))
+        end
+        Drops::PageDrop.new(self)
+      end
     end
     private :liquid_drop
 
