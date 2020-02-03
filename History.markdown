@@ -7,16 +7,58 @@
 ### Bug Fixes
 
   * Memoize absolute_url and relative_url filters (#7793)
+  * Fix documentation comment for Jekyll::Converters::Identity (#7883)
 
 ### Minor Enhancements
 
   * serve: add support for ECC certificates (#7768)
+  * Update item_property to recognize integers (#7878)
 
 ### Documentation
 
   * Add dropped &#39;title: Staff&#39; to the code (#7805)
   * Clarify docs for static files in collection (#7812)
   * Rephrase the CircleCI v2 section (#7815)
+  * Update old GitHub wiki URL with new one (#7823)
+  * Update JekyllConf page with 2019 talks (#7826)
+  * link for memberships (#7825)
+  * Doc: minor fix, should be greater or equal to min version [ci skip] (#7856)
+  * Update third-party.md - Fix broken link (#7857)
+  * clarify _config.yml/collections type (#7873)
+  * Replace `` with html tag (#7879)
+  * add new theme source (#7875)
+  * fixed grammatical error (it&#39;s --&gt; its) (#7887)
+  * Docs: Clarify organizing pages into subfolders (#7896)
+  * Disambiguate the placeholder of permalink (#7906)
+  * docs: add short serve command for livereload (#7919)
+  * docs: add options for watch and force polling (#7918)
+  * add install instructions for ArchLinux and openSUSE (#7920)
+  * Improve index page of Jekyll documentation  (#7926)
+  * Include path in jekyll new commands (Usage docs) (#7931)
+  * Change `affect` to `effect` in the collections docs (#7937)
+  * Changed deprecated command in themes documentation (#7941)
+  * Adds some documentation for the :clean, :on_obsolete hook (#7954)
+  * docs: fix broken link (#7955)
+  * Corrected typo  (#7975)
+  * docs: remove watch option in config (#7940)
+  * Correct a sentence in the documentation (#7978)
+  * Fix YAML representation of `group_by` result (#7979)
+  * Move --baseurl to build command options (#7985)
+  * Correct documentation of filters (#7989)
+
+### Development Fixes
+
+  * Ci/GitHub actions (#7822)
+  * Rubocop version upgrade (#7846)
+  * Split action steps to avoid using `&amp;&amp;` on Windows (#7885)
+  * Upgrade rake to use version 13 (#7910)
+  * Update dependency constraint to allow RuboCop v0.76 (#7893)
+  * Use bash executable consistently (#7909)
+  * Test with JRuby 9.2.9.0 (#7779)
+  * Bump RuboCop to v0.79.x (#7970)
+  * Remove post-install message from gemspec (#7974)
+  * Return relative_url if site.url is an empty string (#7988)
+  * Attain Ruby 3.0 compatibility (#7948)
 
 ## 4.0.0 / 2019-08-19
 

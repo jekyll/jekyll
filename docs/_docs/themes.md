@@ -5,6 +5,15 @@ permalink: /docs/themes/
 
 Jekyll has an extensive theme system that allows you to leverage community-maintained templates and styles to customize your site's presentation. Jekyll themes specify plugins and package up assets, layouts, includes, and stylesheets in a way that can be overridden by your site's content.
 
+## Pick up a theme
+
+You can find and preview themes on different galleries:
+
+- [jamstackthemes.dev](https://jamstackthemes.dev/ssg/jekyll/)
+- [jekyllthemes.org](http://jekyllthemes.org/)
+- [jekyllthemes.io](https://jekyllthemes.io/)
+- [jekyll-themes.com](https://jekyll-themes.com/)
+
 ## Understanding gem-based themes
 
 When you [create a new Jekyll site](/docs/) (by running the `jekyll new <PATH>` command), Jekyll installs a site that uses a gem-based theme called [Minima](https://github.com/jekyll/minima).
@@ -41,7 +50,7 @@ For example, if your selected theme has a `page` layout, you can override the th
 
 To locate a theme's files on your computer:
 
-1. Run `bundle show` followed by the name of the theme's gem, e.g., `bundle show minima` for Jekyll's default theme.
+1. Run `bundle info --path` followed by the name of the theme's gem, e.g., `bundle info --path minima` for Jekyll's default theme.
 
    This returns the location of the gem-based theme files. For example, the Minima theme's files might be located in `/usr/local/lib/ruby/gems/2.6.0/gems/minima-2.5.1` on macOS.
 
@@ -49,19 +58,19 @@ To locate a theme's files on your computer:
 
    ```sh
    # On MacOS
-   open $(bundle show minima)
+   open $(bundle info --path minima)
 
    # On Windows
    # First get the gem's installation path:
    #
-   #   bundle show minima
+   #   bundle info --path minima
    #   => C:/Ruby26-x64/lib/ruby/gems/{{ site.data.ruby.current_version }}/gems/minima-2.5.1
    #
    # then invoke explorer with above path, substituting `/` with `\`
    explorer C:\Ruby26-x64\lib\ruby\gems\{{ site.data.ruby.current_version}}\gems\minima-2.5.1
 
    # On Linux
-   xdg-open $(bundle show minima)
+   xdg-open $(bundle info --path minima)
    ```
 
    A Finder or Explorer window opens showing the theme's files and directories. The Minima theme gem contains these files:
