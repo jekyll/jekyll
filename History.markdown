@@ -45,6 +45,7 @@
   * Fix YAML representation of `group_by` result (#7979)
   * Move --baseurl to build command options (#7985)
   * Correct documentation of filters (#7989)
+  * Document sorting two documents by their `date` (#7870)
 
 ### Development Fixes
 
