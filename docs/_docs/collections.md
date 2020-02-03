@@ -127,7 +127,7 @@ help you control the output url for the entire collection.
 
 By default, two documents in a collection are sorted by their `date` attribute when both of them have the `date` key in their front matter. However, if either or both documents do not have the `date` key in their front matter, they are sorted by their respective paths.
 
-You can control this sorting via the collection's metadata:
+You can control this sorting via the collection's metadata.
 
 ### Sort By Front Matter Key
 
