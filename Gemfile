@@ -24,7 +24,7 @@ group :test do
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
   gem "memory_profiler"
-  gem "nokogiri", "~> 1.7"
+  gem "nokogiri", "> 1.10.7"
   gem "rspec"
   gem "rspec-mocks"
   gem "rubocop", "~> 0.79.0"
