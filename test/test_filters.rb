@@ -863,6 +863,17 @@ class TestFilters < JekyllUnitTest
         assert_equal 2, @filter.where(array, "color", nil).length
       end
 
+      should "filter objects with numerical properties appropriately" do
+        array = [
+          { "value" => "555" },
+          { "value" => 555 },
+          { "value" => 24.625 },
+          { "value" => "24.625" },
+        ]
+        assert_equal 2, @filter.where(array, "value", 24.625).length
+        assert_equal 2, @filter.where(array, "value", 555).length
+      end
+
       should "filter array properties appropriately" do
         hash = {
           "a" => { "tags"=>%w(x y) },
