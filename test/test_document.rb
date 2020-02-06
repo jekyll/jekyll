@@ -175,7 +175,7 @@ class TestDocument < JekyllUnitTest
         }]
       )
       @site.process
-      @document = @site.collections["slides"].docs.select { |d| d.is_a?(Document) }.first
+      @document = @site.collections["slides"].docs.find { |d| d.is_a?(Document) }
     end
 
     should "know the front matter defaults" do

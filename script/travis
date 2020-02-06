@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Usage: script/travis [ruby-version [file]]
 # Example: script/travis 2.0 test/failing_test.rb
 # Example: script/travis 2.3.0

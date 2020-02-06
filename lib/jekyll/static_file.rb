@@ -25,7 +25,7 @@ module Jekyll
     # base - The String path to the <source>.
     # dir  - The String path between <source> and the file.
     # name - The String filename of the file.
-    # rubocop: disable ParameterLists
+    # rubocop: disable Metrics/ParameterLists
     def initialize(site, base, dir, name, collection = nil)
       @site = site
       @base = base
@@ -36,7 +36,7 @@ module Jekyll
       @extname = File.extname(@name)
       @data = @site.frontmatter_defaults.all(relative_path, type)
     end
-    # rubocop: enable ParameterLists
+    # rubocop: enable Metrics/ParameterLists
 
     # Returns source file path.
     def path
