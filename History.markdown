@@ -13,6 +13,7 @@
 
   * serve: add support for ECC certificates (#7768)
   * Update item_property to recognize integers (#7878)
+  * Include _config.yml in a new theme&#39;s gemspec (#7865)
 
 ### Documentation
 
