@@ -50,6 +50,14 @@ class TestPage < JekyllUnitTest
         assert_equal "/+/%25%23%20+.html", @page.url
       end
 
+      should "be exposed to Liquid as a Liquid::Drop subclass" do
+        page = setup_page("properties.html")
+        liquid_rep = page.to_liquid
+        refute_equal Hash, liquid_rep.class
+        assert_equal true, liquid_rep.is_a?(Liquid::Drop)
+        assert_equal Jekyll::Drops::PageDrop, liquid_rep.class
+      end
+
       should "make attributes accessible for use in Liquid templates" do
         page = setup_page("/contacts", "index.html")
         template = Liquid::Template.parse(<<~TEXT)
