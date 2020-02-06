@@ -47,6 +47,7 @@
   * Correct documentation of filters (#7989)
   * Document sorting two documents by their `date` (#7870)
   * Fix English grammar error. (#7994)
+  * Update 03-front-matter.md (#7996)
 
 ### Development Fixes
 
