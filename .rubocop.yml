@@ -79,6 +79,8 @@ Metrics/MethodLength:
   Severity: error
 Metrics/ModuleLength:
   Max: 240
+  Exclude:
+    - lib/jekyll/filters.rb
 Metrics/ParameterLists:
   Max: 4
 Metrics/PerceivedComplexity:
