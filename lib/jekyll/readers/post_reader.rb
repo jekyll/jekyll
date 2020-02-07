@@ -50,7 +50,7 @@ module Jekyll
     # Returns klass type of content files
     def read_content(dir, magic_dir, matcher)
       @site.reader.get_entries(dir, magic_dir).map do |entry|
-        next unless entry =~ matcher
+        next unless matcher.match?(entry)
 
         path = @site.in_source_dir(File.join(dir, magic_dir, entry))
         Document.new(path,
@@ -76,7 +76,7 @@ module Jekyll
     def publishable?(doc)
       site.publisher.publish?(doc).tap do |will_publish|
         if !will_publish && site.publisher.hidden_in_the_future?(doc)
-          Jekyll.logger.debug "Skipping:", "#{doc.relative_path} has a future date"
+          Jekyll.logger.warn "Skipping:", "#{doc.relative_path} has a future date"
         end
       end
     end

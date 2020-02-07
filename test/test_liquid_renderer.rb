@@ -14,13 +14,13 @@ class TestLiquidRenderer < JekyllUnitTest
 
       output = @renderer.stats_table
 
-      # rubocop:disable Metrics/LineLength
+      # rubocop:disable Layout/LineLength
       expected = [
-        %r!^Filename\s+|\s+Count\s+|\s+Bytes\s+|\s+Time$!,
-        %r!^-+\++-+\++-+\++-+$!,
-        %r!^_posts/2010-01-09-date-override\.markdown\s+|\s+\d+\s+|\s+\d+\.\d{2}K\s+|\s+\d+\.\d{3}$!,
+        %r!^\| Filename\s+|\s+Count\s+|\s+Bytes\s+|\s+Time$!,
+        %r!^\+(?:-+\+){4}$!,
+        %r!^\|_posts/2010-01-09-date-override\.markdown\s+|\s+\d+\s+|\s+\d+\.\d{2}K\s+|\s+\d+\.\d{3}$!,
       ]
-      # rubocop:enable Metrics/LineLength
+      # rubocop:enable Layout/LineLength
 
       expected.each do |regexp|
         assert_match regexp, output

@@ -4,7 +4,7 @@ module Jekyll
   class Configuration < Hash
     # Default options. Overridden by values in _config.yml.
     # Strings rather than symbols are used for compatibility with YAML.
-    DEFAULTS = Configuration[{
+    DEFAULTS = {
       # Where things are
       "source"              => Dir.pwd,
       "destination"         => File.join(Dir.pwd, "_site"),
@@ -19,10 +19,7 @@ module Jekyll
       # Handling Reading
       "safe"                => false,
       "include"             => [".htaccess"],
-      "exclude"             => %w(
-        Gemfile Gemfile.lock node_modules vendor/bundle/ vendor/cache/ vendor/gems/
-        vendor/ruby/
-      ),
+      "exclude"             => [],
       "keep_files"          => [".git", ".svn"],
       "encoding"            => "utf-8",
       "markdown_ext"        => "markdown,mkdown,mkdn,mkd,md",
@@ -74,25 +71,22 @@ module Jekyll
         "smart_quotes"  => "lsquo,rsquo,ldquo,rdquo",
         "input"         => "GFM",
         "hard_wrap"     => false,
+        "guess_lang"    => true,
         "footnote_nr"   => 1,
         "show_warnings" => false,
       },
-    }.map { |k, v| [k, v.freeze] }].freeze
+    }.each_with_object(Configuration.new) { |(k, v), hsh| hsh[k] = v.freeze }.freeze
 
     class << self
       # Static: Produce a Configuration ready for use in a Site.
-      # It takes the input, fills in the defaults where values do not
-      # exist, and patches common issues including migrating options for
-      # backwards compatiblity. Except where a key or value is being fixed,
-      # the user configuration will override the defaults.
+      # It takes the input, fills in the defaults where values do not exist.
       #
       # user_config - a Hash or Configuration of overrides.
       #
-      # Returns a Configuration filled with defaults and fixed for common
-      # problems and backwards-compatibility.
+      # Returns a Configuration filled with defaults.
       def from(user_config)
         Utils.deep_merge_hashes(DEFAULTS, Configuration[user_config].stringify_keys)
-          .add_default_collections
+          .add_default_collections.add_default_excludes
       end
     end
 
@@ -100,7 +94,7 @@ module Jekyll
     #
     # Return a copy of the hash where all its keys are strings
     def stringify_keys
-      reduce({}) { |hsh, (k, v)| hsh.merge(k.to_s => v) }
+      each_with_object({}) { |(k, v), hsh| hsh[k.to_s] = v }
     end
 
     def get_config_value_with_override(config_key, override)
@@ -134,8 +128,8 @@ module Jekyll
       when %r!\.ya?ml!i
         SafeYAML.load_file(filename) || {}
       else
-        raise ArgumentError, "No parser for '#{filename}' is available.
-          Use a .y(a)ml or .toml file instead."
+        raise ArgumentError,
+              "No parser for '#{filename}' is available. Use a .y(a)ml or .toml file instead."
       end
     end
 
@@ -169,8 +163,13 @@ module Jekyll
     #
     # Returns this configuration, overridden by the values in the file
     def read_config_file(file)
+      file = File.expand_path(file)
       next_config = safe_load_file(file)
-      check_config_is_hash!(next_config, file)
+
+      unless next_config.is_a?(Hash)
+        raise ArgumentError, "Configuration file: (INVALID) #{file}".yellow
+      end
+
       Jekyll.logger.info "Configuration file:", file
       next_config
     rescue SystemCallError
@@ -178,8 +177,7 @@ module Jekyll
         Jekyll.logger.warn "Configuration file:", "none"
         {}
       else
-        Jekyll.logger.error "Fatal:", "The configuration file '#{file}'
-          could not be found."
+        Jekyll.logger.error "Fatal:", "The configuration file '#{file}' could not be found."
         raise LoadError, "The Configuration file '#{file}' could not be found."
       end
     end
@@ -200,13 +198,12 @@ module Jekyll
           new_config = read_config_file(config_file)
           configuration = Utils.deep_merge_hashes(configuration, new_config)
         end
-      rescue ArgumentError => err
-        Jekyll.logger.warn "WARNING:", "Error reading configuration. " \
-                     "Using defaults (and options)."
-        warn err
+      rescue ArgumentError => e
+        Jekyll.logger.warn "WARNING:", "Error reading configuration. Using defaults (and options)."
+        warn e
       end
 
-      configuration.backwards_compatibilize.add_default_collections
+      configuration.validate.add_default_collections
     end
 
     # Public: Split a CSV string into an array containing its values
@@ -218,33 +215,16 @@ module Jekyll
       csv.split(",").map(&:strip)
     end
 
-    # Public: Ensure the proper options are set in the configuration to allow for
-    # backwards-compatibility with Jekyll pre-1.0
+    # Public: Ensure the proper options are set in the configuration
     #
-    # Returns the backwards-compatible configuration
-    def backwards_compatibilize
+    # Returns the configuration Hash
+    def validate
       config = clone
-      # Provide backwards-compatibility
-      check_auto(config)
-      check_server(config)
+
       check_plugins(config)
-
-      renamed_key "server_port", "port", config
-      renamed_key "gems", "plugins", config
-      renamed_key "layouts", "layouts_dir", config
-      renamed_key "data_source", "data_dir", config
-
-      check_pygments(config)
       check_include_exclude(config)
-      check_coderay(config)
-      check_maruku(config)
 
       config
-    end
-
-    # DEPRECATED.
-    def fix_common_issues
-      self
     end
 
     def add_default_collections
@@ -255,7 +235,9 @@ module Jekyll
 
       # Ensure we have a hash.
       if config["collections"].is_a?(Array)
-        config["collections"] = Hash[config["collections"].map { |c| [c, {}] }]
+        config["collections"] = config["collections"].each_with_object({}) do |collection, hash|
+          hash[collection] = {}
+        end
       end
 
       config["collections"] = Utils.deep_merge_hashes(
@@ -270,13 +252,19 @@ module Jekyll
       config
     end
 
-    def renamed_key(old, new, config, _ = nil)
-      if config.key?(old)
-        Jekyll::Deprecator.deprecation_message "The '#{old}' configuration" \
-          " option has been renamed to '#{new}'. Please update your config" \
-          " file accordingly."
-        config[new] = config.delete(old)
-      end
+    DEFAULT_EXCLUDES = %w(
+      .sass-cache .jekyll-cache
+      gemfiles Gemfile Gemfile.lock
+      node_modules
+      vendor/bundle/ vendor/cache/ vendor/gems/ vendor/ruby/
+    ).freeze
+
+    def add_default_excludes
+      config = clone
+      return config if config["exclude"].nil?
+
+      config["exclude"].concat(DEFAULT_EXCLUDES).uniq!
+      config
     end
 
     private
@@ -291,82 +279,20 @@ module Jekyll
         "/:categories/:year/:month/:day/:title:output_ext"
       when :ordinal
         "/:categories/:year/:y_day/:title:output_ext"
+      when :weekdate
+        "/:categories/:year/W:week/:short_day/:title:output_ext"
       else
         permalink_style.to_s
       end
     end
 
-    # Private: Checks if a given config is a hash
-    #
-    # extracted_config - the value to check
-    # file - the file from which the config was extracted
-    #
-    # Raises an ArgumentError if given config is not a hash
-    def check_config_is_hash!(extracted_config, file)
-      unless extracted_config.is_a?(Hash)
-        raise ArgumentError, "Configuration file: (INVALID) #{file}".yellow
-      end
-    end
-
-    def check_auto(config)
-      if config.key?("auto") || config.key?("watch")
-        Jekyll::Deprecator.deprecation_message "Auto-regeneration can no longer" \
-                            " be set from your configuration file(s). Use the" \
-                            " --[no-]watch/-w command-line option instead."
-        config.delete("auto")
-        config.delete("watch")
-      end
-    end
-
-    def check_server(config)
-      if config.key?("server")
-        Jekyll::Deprecator.deprecation_message "The 'server' configuration option" \
-                            " is no longer accepted. Use the 'jekyll serve'" \
-                            " subcommand to serve your site with WEBrick."
-        config.delete("server")
-      end
-    end
-
-    def check_pygments(config)
-      if config.key?("pygments")
-        Jekyll::Deprecator.deprecation_message "The 'pygments' configuration option" \
-                            " has been renamed to 'highlighter'. Please update your" \
-                            " config file accordingly. The allowed values are 'rouge', " \
-                            "'pygments' or null."
-
-        config["highlighter"] = "pygments" if config["pygments"]
-        config.delete("pygments")
-      end
-    end
-
     def check_include_exclude(config)
       %w(include exclude).each do |option|
-        if config[option].is_a?(String)
-          Jekyll::Deprecator.deprecation_message "The '#{option}' configuration option" \
-            " must now be specified as an array, but you specified" \
-            " a string. For now, we've treated the string you provided" \
-            " as a list of comma-separated values."
-          config[option] = csv_to_array(config[option])
-        end
-        config[option]&.map!(&:to_s)
-      end
-    end
+        next unless config.key?(option)
+        next if config[option].is_a?(Array)
 
-    def check_coderay(config)
-      if (config["kramdown"] || {}).key?("use_coderay")
-        Jekyll::Deprecator.deprecation_message "Please change 'use_coderay'" \
-          " to 'enable_coderay' in your configuration file."
-        config["kramdown"]["use_coderay"] = config["kramdown"].delete("enable_coderay")
-      end
-    end
-
-    def check_maruku(config)
-      if config.fetch("markdown", "kramdown").to_s.casecmp("maruku").zero?
-        Jekyll.logger.abort_with "Error:", "You're using the 'maruku' " \
-          "Markdown processor, which has been removed as of 3.0.0. " \
-          "We recommend you switch to Kramdown. To do this, replace " \
-          "`markdown: maruku` with `markdown: kramdown` in your " \
-          "`_config.yml` file."
+        raise Jekyll::Errors::InvalidConfigurationError,
+              "'#{option}' should be set as an array, but was: #{config[option].inspect}."
       end
     end
 
@@ -375,17 +301,16 @@ module Jekyll
     # config - the config hash
     #
     # Raises a Jekyll::Errors::InvalidConfigurationError if the config `plugins`
-    # is a string
+    # is not an Array.
     def check_plugins(config)
-      if config.key?("plugins") && config["plugins"].is_a?(String)
-        Jekyll.logger.error "Configuration Error:", "You specified the" \
-          " `plugins` config in your configuration file as a string, please" \
-          " use an array instead. If you wanted to set the directory of your" \
-          " plugins, use the config key `plugins_dir` instead."
-        raise Jekyll::Errors::InvalidConfigurationError,
-              "'plugins' should not be a string, but was: " \
-              "#{config["plugins"].inspect}. Use 'plugins_dir' instead."
-      end
+      return unless config.key?("plugins")
+      return if config["plugins"].is_a?(Array)
+
+      Jekyll.logger.error "'plugins' should be set as an array of gem-names, but was: " \
+        "#{config["plugins"].inspect}. Use 'plugins_dir' instead to set the directory " \
+        "for your non-gemified Ruby plugins."
+      raise Jekyll::Errors::InvalidConfigurationError,
+            "'plugins' should be set as an array, but was: #{config["plugins"].inspect}."
     end
   end
 end

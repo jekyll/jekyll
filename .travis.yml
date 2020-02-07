@@ -1,14 +1,12 @@
-bundler_args: --without benchmark:site:development
+bundler_args: --without benchmark:development
 script: script/cibuild
 cache: bundler
 language: ruby
-sudo: false
 
 rvm:
-  - &ruby1 2.6.0
-  - &ruby2 2.5.3
-  - &ruby3 2.3.8
-  - &jruby jruby-9.1.16.0
+  - &ruby1 2.7.0
+  - &ruby2 2.5.7
+  - &jruby jruby-9.2.9.0
 
 matrix:
   include:
@@ -18,6 +16,12 @@ matrix:
     - rvm: *ruby1
       env: TEST_SUITE=default-site
       name: "🏠️ Default Site"
+    - rvm: *ruby1
+      env: TEST_SUITE=profile-docs
+      name: "Profile Docs"
+    - rvm: *ruby2
+      env: TEST_SUITE=memprof
+      name: "Profile Memory Allocation"
   exclude:
     - rvm: *jruby
       env: TEST_SUITE=cucumber
@@ -41,6 +45,7 @@ after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 notifications:
+  email: false
   slack:
     secure: "\
       dNdKk6nahNURIUbO3ULhA09/vTEQjK0fNbgjVjeYPEvROHgQBP1cIP3AJy8aWs8rl5Yyow4Y\
@@ -49,5 +54,5 @@ notifications:
     "
 
 before_install:
-  - gem update --system
-  - gem install bundler
+  - gem update --system --no-document
+  - gem install bundler --no-document

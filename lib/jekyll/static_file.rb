@@ -25,7 +25,7 @@ module Jekyll
     # base - The String path to the <source>.
     # dir  - The String path between <source> and the file.
     # name - The String filename of the file.
-    # rubocop: disable ParameterLists
+    # rubocop: disable Metrics/ParameterLists
     def initialize(site, base, dir, name, collection = nil)
       @site = site
       @base = base
@@ -36,7 +36,7 @@ module Jekyll
       @extname = File.extname(@name)
       @data = @site.frontmatter_defaults.all(relative_path, type)
     end
-    # rubocop: enable ParameterLists
+    # rubocop: enable Metrics/ParameterLists
 
     # Returns source file path.
     def path
@@ -54,7 +54,8 @@ module Jekyll
     #
     # Returns destination file path.
     def destination(dest)
-      @site.in_dest_dir(*[dest, destination_rel_dir, @name].compact)
+      dest = @site.in_dest_dir(dest)
+      @site.in_dest_dir(dest, Jekyll::URL.unescape_path(url))
     end
 
     def destination_rel_dir
@@ -99,7 +100,6 @@ module Jekyll
     # Returns false if the file was not modified since last time (no-op).
     def write(dest)
       dest_path = destination(dest)
-
       return false if File.exist?(dest_path) && !modified?
 
       self.class.mtimes[path] = mtime
@@ -115,33 +115,58 @@ module Jekyll
       @to_liquid ||= Drops::StaticFileDrop.new(self)
     end
 
+    # Generate "basename without extension" and strip away any trailing periods.
+    # NOTE: `String#gsub` removes all trailing periods (in comparison to `String#chomp`)
     def basename
-      File.basename(name, extname)
+      @basename ||= File.basename(name, extname).gsub(%r!\.*\z!, "")
     end
 
     def placeholders
       {
         :collection => @collection.label,
-        :path       => relative_path[
-          @collection.relative_directory.size..relative_path.size],
+        :path       => cleaned_relative_path,
         :output_ext => "",
         :name       => "",
         :title      => "",
       }
     end
 
+    # Similar to Jekyll::Document#cleaned_relative_path.
+    # Generates a relative path with the collection's directory removed when applicable
+    #   and additionally removes any multiple periods in the string.
+    #
+    # NOTE: `String#gsub!` removes all trailing periods (in comparison to `String#chomp!`)
+    #
+    # Examples:
+    #   When `relative_path` is "_methods/site/my-cool-avatar...png":
+    #     cleaned_relative_path
+    #     # => "/site/my-cool-avatar"
+    #
+    # Returns the cleaned relative path of the static file.
+    def cleaned_relative_path
+      @cleaned_relative_path ||= begin
+        cleaned = relative_path[0..-extname.length - 1]
+        cleaned.gsub!(%r!\.*\z!, "")
+        cleaned.sub!(@collection.relative_directory, "") if @collection
+        cleaned
+      end
+    end
+
     # Applies a similar URL-building technique as Jekyll::Document that takes
     # the collection's URL template into account. The default URL template can
     # be overriden in the collection's configuration in _config.yml.
     def url
-      @url ||= if @collection.nil?
-                 relative_path
+      @url ||= begin
+        base = if @collection.nil?
+                 cleaned_relative_path
                else
-                 ::Jekyll::URL.new(
+                 Jekyll::URL.new(
                    :template     => @collection.url_template,
                    :placeholders => placeholders
                  )
                end.to_s.chomp("/")
+        base << extname
+      end
     end
 
     # Returns the type of the collection if present, nil otherwise.

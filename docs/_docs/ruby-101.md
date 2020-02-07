@@ -12,7 +12,7 @@ A gem is code you can include in Ruby projects. It allows you to package up func
 
 * Converting a Ruby object to JSON
 * Pagination
-* Interacting with APIs such as Github
+* Interacting with APIs such as GitHub
 * Jekyll itself is a gem as well as many Jekyll plugins including
 [jekyll-feed](https://github.com/jekyll/jekyll-feed),
 [jekyll-seo-tag](https://github.com/jekyll/jekyll-seo-tag) and
@@ -24,13 +24,13 @@ A gem is code you can include in Ruby projects. It allows you to package up func
 A `Gemfile` is a list of gems required for your site. For a simple Jekyll site it might look something like this:
 
 ```ruby
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'jekyll'
+gem "jekyll"
 
 group :jekyll_plugins do
-  gem 'jekyll-feed'
-  gem 'jekyll-seo-tag'
+  gem "jekyll-feed"
+  gem "jekyll-seo-tag"
 end
 ```
 

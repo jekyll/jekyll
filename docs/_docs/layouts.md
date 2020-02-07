@@ -11,6 +11,20 @@ Layouts live in the `_layouts` directory. The convention is to have a base
 template called `default.html` and have other layouts [inherit](#inheritance)
 from this as needed.
 
+<div class="note">
+  <h5>Layouts Directory</h5>
+  <p>
+    Jekyll looks for the <code>_layouts</code> directory either at the root of
+    your site's <code>source</code> or at the root of your theme.
+  </p>
+  <p>
+    While you can configure the directory name in which your layouts can reside by
+    setting the <code>layouts_dir</code> key in your config file, the directory
+    itself should be located at the root of your site's <code>source</code> directory.
+  </p>
+</div>
+
+
 ## Usage
 
 The first step is to put the template source code in `default.html`. `content`

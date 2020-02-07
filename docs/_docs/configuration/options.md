@@ -248,6 +248,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p class="description">Force watch to use polling.</p>
       </td>
       <td class="align-center">
+        <p><code class="option">force_polling: BOOL</code></p>
         <p><code class="flag">--force_polling</code></p>
       </td>
     </tr>
@@ -309,6 +310,16 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p><code class="flag">--strict_front_matter</code></p>
       </td>
     </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>Base URL</strong></p>
+        <p class="description">Serve the website from the given base URL.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">baseurl: URL</code></p>
+        <p><code class="flag">--baseurl URL</code></p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -351,18 +362,18 @@ before your site is served.
     </tr>
     <tr class="setting">
       <td>
-        <p class="name"><strong>Base URL</strong></p>
-        <p class="description">Serve the website from the given base URL</p>
+        <p class="name"><strong>Live Reload</strong></p>
+        <p class="description">Reload a page automatically on the browser when its content is edited.</p>
       </td>
       <td class="align-center">
-        <p><code class="option">baseurl: URL</code></p>
-        <p><code class="flag">--baseurl URL</code></p>
+        <p><code class="option">livereload: true</code></p>
+        <p><code class="flag">-l, --livereload</code></p>
       </td>
     </tr>
     <tr class="setting">
       <td>
         <p class="name"><strong>Detach</strong></p>
-        <p class="description">Detach the server from the terminal</p>
+        <p class="description">Detach the server from the terminal.</p>
       </td>
       <td class="align-center">
         <p><code class="option">detach: BOOL</code></p>
@@ -371,7 +382,7 @@ before your site is served.
     </tr>
     <tr class="setting">
       <td>
-        <p class="name"><strong>Skips the initial site build.</strong></p>
+        <p class="name"><strong>Skips the initial site build</strong></p>
         <p class="description">Skips the initial site build which occurs before the server is started.</p>
       </td>
       <td class="align-center">

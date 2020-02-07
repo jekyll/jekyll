@@ -65,7 +65,7 @@ module Jekyll
           read_static_file(file_path, full_path)
         end
       end
-      docs.sort!
+      sort_docs!
     end
 
     # All the entries in this collection.
@@ -75,11 +75,13 @@ module Jekyll
     def entries
       return [] unless exists?
 
-      @entries ||=
+      @entries ||= begin
+        collection_dir_slash = "#{collection_dir}/"
         Utils.safe_glob(collection_dir, ["**", "*"], File::FNM_DOTMATCH).map do |entry|
-          entry["#{collection_dir}/"] = ""
+          entry[collection_dir_slash] = ""
           entry
         end
+      end
     end
 
     # Filtered version of the entries in this collection.
@@ -215,6 +217,78 @@ module Jekyll
       doc = Document.new(full_path, :site => site, :collection => self)
       doc.read
       docs << doc if site.unpublished || doc.published?
+    end
+
+    def sort_docs!
+      if metadata["order"].is_a?(Array)
+        rearrange_docs!
+      elsif metadata["sort_by"].is_a?(String)
+        sort_docs_by_key!
+      else
+        docs.sort!
+      end
+    end
+
+    # A custom sort function based on Schwartzian transform
+    # Refer https://byparker.com/blog/2017/schwartzian-transform-faster-sorting/ for details
+    def sort_docs_by_key!
+      meta_key = metadata["sort_by"]
+      # Modify `docs` array to cache document's property along with the Document instance
+      docs.map! { |doc| [doc.data[meta_key], doc] }.sort! do |apples, olives|
+        order = determine_sort_order(meta_key, apples, olives)
+
+        # Fall back to `Document#<=>` if the properties were equal or were non-sortable
+        # Otherwise continue with current sort-order
+        if order.zero? || order.nil?
+          apples[-1] <=> olives[-1]
+        else
+          order
+        end
+
+        # Finally restore the `docs` array with just the Document objects themselves
+      end.map!(&:last)
+    end
+
+    def determine_sort_order(sort_key, apples, olives)
+      apple_property, apple_document = apples
+      olive_property, olive_document = olives
+
+      if apple_property.nil? && !olive_property.nil?
+        order_with_warning(sort_key, apple_document, 1)
+      elsif !apple_property.nil? && olive_property.nil?
+        order_with_warning(sort_key, olive_document, -1)
+      else
+        apple_property <=> olive_property
+      end
+    end
+
+    def order_with_warning(sort_key, document, order)
+      Jekyll.logger.warn "Sort warning:", "'#{sort_key}' not defined in #{document.relative_path}"
+      order
+    end
+
+    # Rearrange documents within the `docs` array as listed in the `metadata["order"]` array.
+    #
+    # Involves converting the two arrays into hashes based on relative_paths as keys first, then
+    # merging them to remove duplicates and finally retrieving the Document instances from the
+    # merged array.
+    def rearrange_docs!
+      docs_table   = {}
+      custom_order = {}
+
+      # pre-sort to normalize default array across platforms and then proceed to create a Hash
+      # from that sorted array.
+      docs.sort.each do |doc|
+        docs_table[doc.relative_path] = doc
+      end
+
+      metadata["order"].each do |entry|
+        custom_order[File.join(relative_directory, entry)] = nil
+      end
+
+      result = Jekyll::Utils.deep_merge_hashes(custom_order, docs_table).values
+      result.compact!
+      self.docs = result
     end
 
     def read_static_file(file_path, full_path)

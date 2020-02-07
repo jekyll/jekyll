@@ -3,7 +3,7 @@ title: "Jekyll 1.0.4 Released"
 date: "2013-07-25 09:08:38 +0200"
 author: mattr-
 version: 1.0.4
-categories: [release]
+category: release
 ---
 
 Version 1.0.4 fixes a minor, but nonetheless important security vulnerability affecting several third-party Jekyll plugins. If your Jekyll site does not use plugins, you may, but are not required to upgrade at this time.

@@ -34,7 +34,7 @@ end
 #
 
 Given(%r!^I have an? "(.*)" page(?: with (.*) "(.*)")? that contains "(.*)"$!) do |file, key, value, text|
-  File.write(file, Jekyll::Utils.strip_heredoc(<<-DATA))
+  File.write(file, <<~DATA)
     ---
     #{key || "layout"}: #{value || "none"}
     ---
@@ -63,6 +63,17 @@ end
 
 Given(%r!^I have an? "(.*)" file with content:$!) do |file, text|
   File.write(file, text)
+end
+
+#
+
+Given(%r!^I have an? "(.*)" page with content:$!) do |file, text|
+  File.write(file, <<~DATA)
+    ---
+    ---
+
+    #{text}
+  DATA
 end
 
 #
@@ -178,9 +189,11 @@ end
 
 #
 
-Given(%r!^I have fixture collections$!) do
-  FileUtils.cp_r Paths.source_dir.join("test", "source", "_methods"), source_dir
-  FileUtils.cp_r Paths.source_dir.join("test", "source", "_thanksgiving"), source_dir
+Given(%r!^I have fixture collections(?: in "(.*)" directory)?$!) do |directory|
+  collections_dir = File.join(source_dir, directory.to_s)
+  FileUtils.cp_r Paths.source_dir.join("test", "source", "_methods"), collections_dir
+  FileUtils.cp_r Paths.source_dir.join("test", "source", "_thanksgiving"), collections_dir
+  FileUtils.cp_r Paths.source_dir.join("test", "source", "_tutorials"), collections_dir
 end
 
 #
@@ -226,9 +239,14 @@ end
 
 When(%r!^I decide to build the theme gem$!) do
   Dir.chdir(Paths.theme_gem_dir)
-  File.new("_includes/blank.html", "w")
-  File.new("_sass/blank.scss", "w")
-  File.new("assets/blank.scss", "w")
+  [
+    "_includes/blank.html",
+    "_sass/blank.scss",
+    "assets/blank.scss",
+    "_config.yml"
+  ].each do |filename|
+    File.new(filename, "w")
+  end
 end
 
 #
@@ -372,6 +390,7 @@ Then(%r!^I should get an updated git index$!) do
     Gemfile
     LICENSE.txt
     README.md
+    _config.yml
     _includes/blank.html
     _layouts/default.html
     _layouts/page.html

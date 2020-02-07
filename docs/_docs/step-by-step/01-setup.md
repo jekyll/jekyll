@@ -22,6 +22,23 @@ terminal:
 gem install jekyll bundler
 ```
 
+To create a new `Gemfile` to list your project's dependencies run:
+
+```
+bundle init
+```
+
+Now edit the `Gemfile`and add jekyll as a dependency:
+
+```
+gem "jekyll"
+```
+
+Finally run `bundle` to install jekyll for your project.
+
+You can now prefix all jekyll commands listed in this tutorial with `bundle exec` 
+to make sure you use the jekyll version defined in your `Gemfile`.
+
 ## Create a site
 
 It's time to create a site! Create a new directory for your site, you can name

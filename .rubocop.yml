@@ -1,6 +1,8 @@
 ---
+inherit_from: .rubocop_todo.yml
 
 require:
+  - rubocop-performance
   - ./rubocop/jekyll
 
 Jekyll/NoPutsAllowed:
@@ -8,7 +10,7 @@ Jekyll/NoPutsAllowed:
     - rake/*.rake
 
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.4
   Include:
     - lib/**/*.rb
     - test/**/*.rb
@@ -19,13 +21,13 @@ AllCops:
     - script/**/*
     - vendor/**/*
     - tmp/**/*
-Layout/AlignHash:
+Layout/HashAlignment:
   EnforcedHashRocketStyle: table
 Layout/IndentationWidth:
   Severity: error
-Layout/IndentArray:
+Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
-Layout/IndentHash:
+Layout/FirstHashElementIndentation:
   EnforcedStyle: consistent
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
@@ -63,7 +65,7 @@ Metrics/CyclomaticComplexity:
   Exclude:
     - lib/jekyll/utils.rb
     - lib/jekyll/commands/serve.rb
-Metrics/LineLength:
+Layout/LineLength:
   Exclude:
     - !ruby/regexp /features\/.*.rb/
     - Rakefile
@@ -77,6 +79,8 @@ Metrics/MethodLength:
   Severity: error
 Metrics/ModuleLength:
   Max: 240
+  Exclude:
+    - lib/jekyll/filters.rb
 Metrics/ParameterLists:
   Max: 4
 Metrics/PerceivedComplexity:
@@ -92,9 +96,6 @@ Naming/MemoizedInstanceVariableName:
     - lib/jekyll/drops/site_drop.rb
     - lib/jekyll/drops/unified_payload_drop.rb
     - lib/jekyll/page_without_a_file.rb
-Naming/UncommunicativeMethodParamName:
-  AllowedNames:
-    - _
 Security/MarshalLoad:
   Exclude:
     - !ruby/regexp /test\/.*.rb$/
@@ -109,6 +110,8 @@ Style/Alias:
   EnforcedStyle: prefer_alias_method
 Style/AndOr:
   Severity: error
+Style/BracesAroundHashParameters:
+  Enabled: false
 Style/ClassAndModuleChildren:
   Exclude:
     - test/**/*.rb
@@ -121,6 +124,7 @@ Style/DoubleNegation:
 Style/FormatStringToken:
   Exclude:
     - lib/jekyll/utils/ansi.rb
+    - lib/jekyll/liquid_renderer/table.rb
 Style/GuardClause:
   Enabled: false
 Style/HashSyntax:

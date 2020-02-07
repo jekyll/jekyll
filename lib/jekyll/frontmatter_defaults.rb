@@ -12,6 +12,10 @@ module Jekyll
       @site = site
     end
 
+    def reset
+      @glob_cache = {} if @glob_cache
+    end
+
     def update_deprecated_types(set)
       return set unless set.key?("scope") && set["scope"].key?("type")
 
@@ -98,28 +102,36 @@ module Jekyll
       applies_type?(scope, type) && applies_path?(scope, path)
     end
 
-    # rubocop:disable Metrics/AbcSize
     def applies_path?(scope, path)
       return true if !scope.key?("path") || scope["path"].empty?
 
       sanitized_path = Pathname.new(sanitize_path(path))
-      site_path      = Pathname.new(@site.source)
       rel_scope_path = Pathname.new(scope["path"])
-      abs_scope_path = File.join(@site.source, rel_scope_path)
 
       if scope["path"].to_s.include?("*")
-        Dir.glob(abs_scope_path).each do |scope_path|
-          scope_path = Pathname.new(scope_path).relative_path_from(site_path)
-          scope_path = strip_collections_dir(scope_path)
-          Jekyll.logger.debug "Globbed Scope Path:", scope_path
-          return true if path_is_subpath?(sanitized_path, scope_path)
-        end
-        false
+        glob_scope(sanitized_path, rel_scope_path)
       else
-        path_is_subpath?(sanitized_path, strip_collections_dir(rel_scope_path))
+        path_is_subpath?(sanitized_path, strip_collections_dir(scope["path"]))
       end
     end
-    # rubocop:enable Metrics/AbcSize
+
+    def glob_scope(sanitized_path, rel_scope_path)
+      site_source    = Pathname.new(@site.source)
+      abs_scope_path = site_source.join(rel_scope_path).to_s
+
+      glob_cache(abs_scope_path).each do |scope_path|
+        scope_path = Pathname.new(scope_path).relative_path_from(site_source).to_s
+        scope_path = strip_collections_dir(scope_path)
+        Jekyll.logger.debug "Globbed Scope Path:", scope_path
+        return true if path_is_subpath?(sanitized_path, scope_path)
+      end
+      false
+    end
+
+    def glob_cache(path)
+      @glob_cache ||= {}
+      @glob_cache[path] ||= Dir.glob(path)
+    end
 
     def path_is_subpath?(path, parent_path)
       path.ascend do |ascended_path|
@@ -131,7 +143,7 @@ module Jekyll
 
     def strip_collections_dir(path)
       collections_dir  = @site.config["collections_dir"]
-      slashed_coll_dir = "#{collections_dir}/"
+      slashed_coll_dir = collections_dir.empty? ? "/" : "#{collections_dir}/"
       return path if collections_dir.empty? || !path.to_s.start_with?(slashed_coll_dir)
 
       path.sub(slashed_coll_dir, "")
@@ -167,7 +179,7 @@ module Jekyll
     # new_scope - the new scope hash
     #
     # Returns true if the new scope has precedence over the older
-    # rubocop: disable PredicateName
+    # rubocop: disable Naming/PredicateName
     def has_precedence?(old_scope, new_scope)
       return true if old_scope.nil?
 
@@ -182,7 +194,7 @@ module Jekyll
         !old_scope.key? "type"
       end
     end
-    # rubocop: enable PredicateName
+    # rubocop: enable Naming/PredicateName
 
     # Collects a list of sets that match the given path and type
     #
