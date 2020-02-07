@@ -64,6 +64,16 @@ class TestEntryFilter < JekyllUnitTest
       assert_equal files, @site.reader.filter_entries(files)
     end
 
+    should "not exclude explicitly included entry" do
+      entries  = %w(README TODO css .htaccess _movies/.)
+      excludes = %w(README TODO css)
+      includes = %w(README .htaccess)
+      @site.exclude = excludes
+      @site.include = includes
+      filtered_entries = EntryFilter.new(@site).filter(entries)
+      assert_equal %w(README .htaccess), filtered_entries
+    end
+
     should "keep safe symlink entries when safe mode enabled" do
       allow(File).to receive(:symlink?).with("symlink.js").and_return(true)
       files = %w(symlink.js)
