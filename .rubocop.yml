@@ -22,6 +22,10 @@ AllCops:
     - vendor/**/*
     - tmp/**/*
 Layout/HashAlignment:
+Layout/EmptyComment:
+  Enabled: false
+Layout/EndAlignment:
+  Severity: error
   EnforcedHashRocketStyle: table
 Layout/IndentationWidth:
   Severity: error
@@ -36,10 +40,6 @@ Layout/MultilineOperationIndentation:
 Lint/NestedPercentLiteral:
   Exclude:
     - test/test_site.rb
-Layout/EmptyComment:
-  Enabled: false
-Layout/EndAlignment:
-  Severity: error
 Lint/UnreachableCode:
   Severity: error
 Lint/Void:
