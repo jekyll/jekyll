@@ -52,6 +52,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [Netlify CMS](https://www.netlifycms.org/): Open source content management for your Git workflow
   - [Siteleaf](https://www.siteleaf.com/): Built for developers, Loved by everyone
   - [Statictastic](https://www.statictastic.com/): Static site hosting, publishing and content management for teams
+  - [Kentico Kontent](https://github.com/Kentico/kontent-jekyll): A headless CMS with full control over content presentation
 
 ### E-commerce
   - [MemberSpace](https://www.memberspace.com/integrations/jekyll-membership/): Add memberships and paywall functionality to a Jekyll site
