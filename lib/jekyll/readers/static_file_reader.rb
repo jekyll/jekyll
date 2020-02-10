@@ -9,10 +9,9 @@ module Jekyll
       @unfiltered_content = []
     end
 
-    # Read all the files in <source>/<dir>/ for Yaml header and create a new Page
-    # object for each file.
+    # Create a new StaticFile object for every entry in a given list of basenames.
     #
-    # dir - The String relative path of the directory to read.
+    # files - an array of file basenames.
     #
     # Returns an array of static files.
     def read(files)

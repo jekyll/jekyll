@@ -5,6 +5,15 @@ permalink: /docs/themes/
 
 Jekyll has an extensive theme system that allows you to leverage community-maintained templates and styles to customize your site's presentation. Jekyll themes specify plugins and package up assets, layouts, includes, and stylesheets in a way that can be overridden by your site's content.
 
+## Pick up a theme
+
+You can find and preview themes on different galleries:
+
+- [jamstackthemes.dev](https://jamstackthemes.dev/ssg/jekyll/)
+- [jekyllthemes.org](http://jekyllthemes.org/)
+- [jekyllthemes.io](https://jekyllthemes.io/)
+- [jekyll-themes.com](https://jekyll-themes.com/)
+
 ## Understanding gem-based themes
 
 When you [create a new Jekyll site](/docs/) (by running the `jekyll new <PATH>` command), Jekyll installs a site that uses a gem-based theme called [Minima](https://github.com/jekyll/minima).
@@ -41,27 +50,27 @@ For example, if your selected theme has a `page` layout, you can override the th
 
 To locate a theme's files on your computer:
 
-1. Run `bundle show` followed by the name of the theme's gem, e.g., `bundle show minima` for Jekyll's default theme.
+1. Run `bundle info --path` followed by the name of the theme's gem, e.g., `bundle info --path minima` for Jekyll's default theme.
 
-   This returns the location of the gem-based theme files. For example, the Minima theme's files might be located in `/usr/local/lib/ruby/gems/2.3.0/gems/minima-2.1.0` on macOS.
+   This returns the location of the gem-based theme files. For example, the Minima theme's files might be located in `/usr/local/lib/ruby/gems/2.6.0/gems/minima-2.5.1` on macOS.
 
 2. Open the theme's directory in Finder or Explorer:
 
    ```sh
    # On MacOS
-   open $(bundle show minima)
+   open $(bundle info --path minima)
 
    # On Windows
    # First get the gem's installation path:
    #
-   #   bundle show minima
-   #   => C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/minima-2.1.0
+   #   bundle info --path minima
+   #   => C:/Ruby26-x64/lib/ruby/gems/{{ site.data.ruby.current_version }}/gems/minima-2.5.1
    #
    # then invoke explorer with above path, substituting `/` with `\`
-   explorer C:\Ruby24-x64\lib\ruby\gems\2.4.0\gems\minima-2.1.0
+   explorer C:\Ruby26-x64\lib\ruby\gems\{{ site.data.ruby.current_version}}\gems\minima-2.5.1
 
    # On Linux
-   xdg-open $(bundle show minima)
+   xdg-open $(bundle info --path minima)
    ```
 
    A Finder or Explorer window opens showing the theme's files and directories. The Minima theme gem contains these files:
@@ -121,8 +130,8 @@ To do this, copy the files from the theme gem's directory into your Jekyll site 
 Then you must tell Jekyll about the plugins that were referenced by the theme. You can find these plugins in the theme's gemspec file as runtime dependencies. If you were converting the Minima theme, for example, you might see:
 
 ```
-spec.add_runtime_dependency "jekyll-feed", "~> 0.9"
-spec.add_runtime_dependency "jekyll-seo-tag", "~> 2.1"
+spec.add_runtime_dependency "jekyll-feed", "~> 0.12"
+spec.add_runtime_dependency "jekyll-seo-tag", "~> 2.6"
 ```
 
 You should include these references in the `Gemfile` in one of two ways.
@@ -132,8 +141,8 @@ You could list them individually in both `Gemfile` and `_config.yml`.
 ```ruby
 # ./Gemfile
 
-gem "jekyll-feed", "~> 0.9"
-gem "jekyll-seo-tag", "~> 2.1"
+gem "jekyll-feed", "~> 0.12"
+gem "jekyll-seo-tag", "~> 2.6"
 ```
 
 ```yaml
@@ -150,8 +159,8 @@ Or you could list them explicitly as Jekyll plugins in your Gemfile, and not upd
 # ./Gemfile
 
 group :jekyll_plugins do
-  gem "jekyll-feed", "~> 0.9"
-  gem "jekyll-seo-tag", "~> 2.1"
+  gem "jekyll-feed", "~> 0.12"
+  gem "jekyll-seo-tag", "~> 2.6"
 end
 ```
 
@@ -161,7 +170,7 @@ If you're publishing on GitHub Pages you should update only your `_config.yml` a
 
 Finally, remove references to the theme gem in `Gemfile` and configuration. For example, to remove `minima`:
 
-- Open `Gemfile` and remove `gem "minima", "~> 2.0"`.
+- Open `Gemfile` and remove `gem "minima", "~> 2.5"`.
 - Open `_config.yml` and remove `theme: minima`.
 
 Now `bundle update` will no longer get updates for the theme gem.
@@ -187,7 +196,7 @@ To install a gem-based theme:
    ```diff
    # ./Gemfile
 
-   - gem "minima", "~> 2.0"
+   - gem "minima", "~> 2.5"
    + gem "jekyll-theme-minimal"
    ```
 
@@ -282,10 +291,7 @@ Jekyll will automatically require all whitelisted `runtime_dependencies` of your
 
 With this, the end-user need not keep track of the plugins required to be included in their config file for their theme-gem to work as intended.
 
-{% if site.version == '4.0.0' %}
-{% comment %} Remove this encapsulation when `v4.0` ships {% endcomment %}
-
-### Pre-configuring Theme-gems {%- include docs_version_badge.html version="4.0.0" -%}
+### Pre-configuring Theme-gems {%- include docs_version_badge.html version="4.0" -%}
 
 Jekyll will read-in a `_config.yml` at the root of the theme-gem and merge its data into the site's existing configuration data.
 
@@ -298,7 +304,6 @@ But unlike other entities loaded from within the theme, loading the config file 
 While this feature is to enable easier adoption of a theme, the restrictions ensure that a theme-config cannot affect the build in a concerning manner. Any plugins required by the theme will have to be listed manually by the user or provided by the theme's `gemspec` file.
 
 This feature will let the theme-gem to work with *theme-specific config variables* out-of-the-box.
-{% endif %}
 
 ### Documenting your theme
 

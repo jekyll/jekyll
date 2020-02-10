@@ -21,6 +21,8 @@ collections:
   authors:
 ```
 
+To (re)load the configuration, restart the jekyll server. Press `Ctrl`+`C` in your terminal to stop the server, and then `jekyll serve` to restart it.
+
 ## Add authors
 
 Documents (the items in a collection) live in a folder in the root of the site
@@ -118,6 +120,7 @@ Add the link to the `staff.html` page:
 ```html
 ---
 layout: default
+title: Staff
 ---
 <h1>Staff</h1>
 
@@ -188,7 +191,7 @@ defaults:
 
 Now you can remove layout from the front matter of all pages and posts. Note
 that any time you update `_config.yml` you'll need to restart Jekyll for the
-changes to take affect.
+changes to take effect.
 
 ## List author's posts
 

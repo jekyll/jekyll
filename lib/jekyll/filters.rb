@@ -326,41 +326,66 @@ module Jekyll
     end
 
     # `where` filter helper
+    #
+    # rubocop:disable Metrics/CyclomaticComplexity
+    # rubocop:disable Metrics/PerceivedComplexity
     def compare_property_vs_target(property, target)
       case target
       when NilClass
         return true if property.nil?
       when Liquid::Expression::MethodLiteral # `empty` or `blank`
-        return true if Array(property).join == target.to_s
+        target = target.to_s
+        return true if property == target || Array(property).join == target
       else
-        Array(property).each do |prop|
-          return true if prop.to_s == target.to_s
+        target = target.to_s
+        if property.is_a? String
+          return true if property == target
+        else
+          Array(property).each do |prop|
+            return true if prop.to_s == target
+          end
         end
       end
 
       false
     end
+    # rubocop:enable Metrics/CyclomaticComplexity
+    # rubocop:enable Metrics/PerceivedComplexity
 
     def item_property(item, property)
       @item_property_cache ||= {}
       @item_property_cache[property] ||= {}
       @item_property_cache[property][item] ||= begin
-        if item.respond_to?(:to_liquid)
-          property.to_s.split(".").reduce(item.to_liquid) do |subvalue, attribute|
-            parse_sort_input(subvalue[attribute])
-          end
-        elsif item.respond_to?(:data)
-          parse_sort_input(item.data[property.to_s])
-        else
-          parse_sort_input(item[property.to_s])
-        end
+        property = property.to_s
+        property = if item.respond_to?(:to_liquid)
+                     read_liquid_attribute(item.to_liquid, property)
+                   elsif item.respond_to?(:data)
+                     item.data[property]
+                   else
+                     item[property]
+                   end
+
+        parse_sort_input(property)
       end
     end
 
+    def read_liquid_attribute(liquid_data, property)
+      return liquid_data[property] unless property.include?(".")
+
+      property.split(".").reduce(liquid_data) do |data, key|
+        data.respond_to?(:[]) && data[key]
+      end
+    end
+
+    FLOAT_LIKE   = %r!\A\s*-?(?:\d+\.?\d*|\.\d+)\s*\Z!.freeze
+    INTEGER_LIKE = %r!\A\s*-?\d+\s*\Z!.freeze
+    private_constant :FLOAT_LIKE, :INTEGER_LIKE
+
     # return numeric values as numbers for proper sorting
     def parse_sort_input(property)
-      number_like = %r!\A\s*-?(?:\d+\.?\d*|\.\d+)\s*\Z!
-      return property.to_f if property =~ number_like
+      stringified = property.to_s
+      return property.to_i if INTEGER_LIKE.match?(stringified)
+      return property.to_f if FLOAT_LIKE.match?(stringified)
 
       property
     end
