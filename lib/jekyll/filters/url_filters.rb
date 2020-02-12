@@ -17,6 +17,9 @@ module Jekyll
                   (@context.registers[:cached_absolute_url] ||= {})
                 end
         cache[input] ||= compute_absolute_url(input)
+
+        # Duplicate cached string so that the cached value is never mutated by
+        # a subsequent filter.
         cache[input].dup
       end
 
@@ -35,6 +38,9 @@ module Jekyll
                   (@context.registers[:cached_relative_url] ||= {})
                 end
         cache[input] ||= compute_relative_url(input)
+
+        # Duplicate cached string so that the cached value is never mutated by
+        # a subsequent filter.
         cache[input].dup
       end
 
