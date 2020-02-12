@@ -11,13 +11,13 @@ module Jekyll
       def absolute_url(input)
         return if input.nil?
 
-        if input.is_a?(String)
-          cache = (@context.registers[:site].filter_cache[:absolute_url] ||= {})
-          cache[input.freeze] ||= compute_absolute_url(input).freeze
-        else
-          cache = (@context.registers[:cached_absolute_url] ||= {})
-          cache[input] ||= compute_absolute_url(input)
-        end
+        cache = if input.is_a?(String)
+                  (@context.registers[:site].filter_cache[:absolute_url] ||= {})
+                else
+                  (@context.registers[:cached_absolute_url] ||= {})
+                end
+        cache[input] ||= compute_absolute_url(input)
+        cache[input].dup
       end
 
       # Produces a URL relative to the domain root based on site.baseurl
@@ -29,13 +29,13 @@ module Jekyll
       def relative_url(input)
         return if input.nil?
 
-        if input.is_a?(String)
-          cache = (@context.registers[:site].filter_cache[:relative_url] ||= {})
-          cache[input.freeze] ||= compute_relative_url(input).freeze
-        else
-          cache = (@context.registers[:cached_relative_url] ||= {})
-          cache[input] ||= compute_relative_url(input)
-        end
+        cache = if input.is_a?(String)
+                  (@context.registers[:site].filter_cache[:relative_url] ||= {})
+                else
+                  (@context.registers[:cached_relative_url] ||= {})
+                end
+        cache[input] ||= compute_relative_url(input)
+        cache[input].dup
       end
 
       # Strips trailing `/index.html` from URLs to create pretty permalinks
