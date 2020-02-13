@@ -51,6 +51,7 @@
   * Fix English grammar error. (#7994)
   * Update 03-front-matter.md (#7996)
   * Add Kentico Kontent CMS integration to resources (#8000)
+  * Update 07-assets.md (#7413)
 
 ### Development Fixes
 
