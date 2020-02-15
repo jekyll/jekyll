@@ -63,7 +63,7 @@ Create a Sass file at `/_sass/main.scss` with the following content:
 
 You'll need to reference the stylesheet in your layout.
 
-Open `_includes/head.html` and add the stylesheet to the `<head>`:
+Open `_layouts/default.html` and add the stylesheet to the `<head>`:
 
 {% raw %}
 ```liquid
