@@ -1221,6 +1221,39 @@ class TestFilters < JekyllUnitTest
       end
     end
 
+    context "precision filter" do
+      should "raise Exception when precision is not defined" do
+        assert_raises ArgumentError do
+          @filter.precision(1)
+        end
+      end
+      should "raise Exception when input is not a numeric string" do
+        assert_raises ArgumentError do
+          @filter.precision("my number", 1)
+        end
+      end
+      should "return with defined decimal" do
+        assert_equal "1.4000", @filter.precision(1.4, 4)
+        assert_equal "1", @filter.precision(1.42851, 0)
+        assert_equal "1.4", @filter.precision(1.42851, 1)
+        assert_equal "1.43", @filter.precision(1.42851, 2)
+        assert_equal "1.429", @filter.precision(1.42851, 3)
+        assert_equal "1.4285", @filter.precision(1.42851, 4)
+        assert_equal "1.42851", @filter.precision(1.42851, 5)
+        assert_equal "1.428510", @filter.precision(1.42851, 6)
+      end
+      should "return with defined decimal with string input" do
+        assert_equal "1.4000", @filter.precision("1.4", 4)
+        assert_equal "1", @filter.precision("1.42851", 0)
+        assert_equal "1.4", @filter.precision("1.42851", 1)
+        assert_equal "1.43", @filter.precision("1.42851", 2)
+        assert_equal "1.429", @filter.precision("1.42851", 3)
+        assert_equal "1.4285", @filter.precision("1.42851", 4)
+        assert_equal "1.42851", @filter.precision("1.42851", 5)
+        assert_equal "1.428510", @filter.precision("1.42851", 6)
+      end
+    end
+
     context "inspect filter" do
       should "return a HTML-escaped string representation of an object" do
         assert_equal "{&quot;&lt;a&gt;&quot;=&gt;1}", @filter.inspect("<a>" => 1)

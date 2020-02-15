@@ -222,6 +222,17 @@ module Jekyll
       input.to_i
     end
 
+    # Display a number with supplied precision
+    #
+    # input - the numeric value
+    #
+    # Returns the value with defined precision
+    def precision(input, value)
+      raise ArgumentError, "Cannot set a precision of '#{value}'" unless value.is_a?(Integer)
+
+      format("%.#{value}f", input)
+    end
+
     # Sort an array of objects
     #
     # input - the object array

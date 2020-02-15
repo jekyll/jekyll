@@ -274,6 +274,14 @@
 
 #
 
+- name: Precision
+  description: Define the precision of a number
+  examples:
+    - input: '{{ "1.2" | precision: 3 }}'
+      output: '1.200'
+
+#
+
 - name: Array Filters
   description: >-
     Push, pop, shift, and unshift elements from an Array.
