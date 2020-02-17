@@ -19,7 +19,7 @@ Jekyll sites often use this structure to keep assets organized:
 
 ## Sass
 
-Inlining the styles used in `_includes/header.html` is not a best practice,
+Inlining the styles used in `_includes/navigation.html` is not a best practice,
 let's style the current page with a class instead.
 
 {% raw %}
@@ -63,7 +63,7 @@ Create a Sass file at `/_sass/main.scss` with the following content:
 
 You'll need to reference the stylesheet in your layout.
 
-Open `_includes/head.html` and add the stylesheet to the `<head>`:
+Open `_layouts/default.html` and add the stylesheet to the `<head>`:
 
 {% raw %}
 ```liquid
