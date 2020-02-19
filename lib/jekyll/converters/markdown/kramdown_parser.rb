@@ -15,10 +15,13 @@ module Kramdown
       # rubocop:disable Naming/MemoizedInstanceVariableName
       def setup(options)
         @cache ||= {}
-        @cache[:id] ||= options.hash
 
         # reset variables on a subsequent set up with a different options Hash
-        reset! unless @cache[:id] == options.hash
+        unless @cache[:id] == options.hash
+          @options = @parser = nil
+          @cache[:id] = options.hash
+        end
+
         @options ||= Options.merge(options).freeze
         @parser  ||= begin
           parser_name = (@options[:input] || "kramdown").to_s
@@ -36,10 +39,6 @@ module Kramdown
       # rubocop:enable Naming/MemoizedInstanceVariableName
 
       private
-
-      def reset!
-        @options = @parser = @cache[:id] = nil
-      end
 
       def try_require(type, name)
         require "kramdown/#{type}/#{Utils.snake_case(name)}"
