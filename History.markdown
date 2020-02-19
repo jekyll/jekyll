@@ -68,6 +68,7 @@
   * Return relative_url if site.url is an empty string (#7988)
   * Attain Ruby 3.0 compatibility (#7948)
   * Test where filter handling numeric property values (#7821)
+  * chore(deps): rubocop 0.80.0 (#8012)
 
 ## 4.0.0 / 2019-08-19
 
