@@ -70,6 +70,7 @@
   * Test where filter handling numeric property values (#7821)
   * chore(deps): rubocop 0.80.0 (#8012)
   * Update unit tests for Kramdown-based converter (#8014)
+  * Add Visual Studio Code Development Container (#8016)
 
 ## 4.0.0 / 2019-08-19
 
