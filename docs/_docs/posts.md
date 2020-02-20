@@ -200,8 +200,10 @@ working on and don't want to publish yet. To get up and running with drafts,
 create a `_drafts` folder in your site's root and create your first draft:
 
 ```
-|-- _drafts/
-|   |-- a-draft-post.md
+.
+├── _drafts
+|   └── a-draft-post.md
+...
 ```
 
 To preview your site with drafts, run `jekyll serve` or `jekyll build`

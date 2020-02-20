@@ -19,6 +19,7 @@ First, let's start with a grounding in the basics. Stripping a Jekyll site down 
 We'll start with a *basic Jekyll site* consisting of three files:
 
 ```
+.
 ├── _config.yml
 ├── _layouts
 │   └── default.html
