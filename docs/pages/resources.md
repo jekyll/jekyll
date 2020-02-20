@@ -20,6 +20,7 @@ some of the most popular Jekyll resources.
 
 ## Editors
 
+- Visual Studio Code has [various jekyll related plugins](https://marketplace.visualstudio.com/search?term=tag%3Ajekyll&target=VSCode&category=All%20categories&sortBy=Installs) and supports [autocompletion for configuration file](http://json.schemastore.org/jekyll).
 - [jekyll-atom](https://atom.io/packages/jekyll): A collection of snippets and tools for Jekyll in Atom
 - [markdown-writer](https://atom.io/packages/markdown-writer): An Atom package for Jekyll. It can create new posts/drafts, manage tags/categories, insert link/images and add many useful key mappings.
 - [sublime-jekyll](https://github.com/23maverick23/sublime-jekyll): A Sublime Text package for Jekyll static sites. This package should help creating Jekyll sites and posts easier by providing access to key template tags and filters, as well as common completions and a current date/datetime command (for dating posts). You can install this package manually via GitHub, or via [Package Control](https://packagecontrol.io/packages/Jekyll).
@@ -52,6 +53,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [Netlify CMS](https://www.netlifycms.org/): Open source content management for your Git workflow
   - [Siteleaf](https://www.siteleaf.com/): Built for developers, Loved by everyone
   - [Statictastic](https://www.statictastic.com/): Static site hosting, publishing and content management for teams
+  - [Kentico Kontent](https://github.com/Kentico/kontent-jekyll): A headless CMS with full control over content presentation
 
 ### E-commerce
   - [MemberSpace](https://www.memberspace.com/integrations/jekyll-membership/): Add memberships and paywall functionality to a Jekyll site

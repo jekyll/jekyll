@@ -8,11 +8,13 @@
 
   * Memoize absolute_url and relative_url filters (#7793)
   * Fix documentation comment for Jekyll::Converters::Identity (#7883)
+  * Optimize Jekyll::Filters#item_property (#7696)
 
 ### Minor Enhancements
 
   * serve: add support for ECC certificates (#7768)
   * Update item_property to recognize integers (#7878)
+  * Include _config.yml in a new theme&#39;s gemspec (#7865)
 
 ### Documentation
 
@@ -45,6 +47,12 @@
   * Fix YAML representation of `group_by` result (#7979)
   * Move --baseurl to build command options (#7985)
   * Correct documentation of filters (#7989)
+  * Document sorting two documents by their `date` (#7870)
+  * Fix English grammar error. (#7994)
+  * Update 03-front-matter.md (#7996)
+  * Add Kentico Kontent CMS integration to resources (#8000)
+  * Update 07-assets.md (#7413)
+  * Fix file references in Step by Step Tutorial&#39;s Assets step (#8007)
 
 ### Development Fixes
 
@@ -59,6 +67,9 @@
   * Remove post-install message from gemspec (#7974)
   * Return relative_url if site.url is an empty string (#7988)
   * Attain Ruby 3.0 compatibility (#7948)
+  * Test where filter handling numeric property values (#7821)
+  * chore(deps): rubocop 0.80.0 (#8012)
+  * Update unit tests for Kramdown-based converter (#8014)
 
 ## 4.0.0 / 2019-08-19
 
