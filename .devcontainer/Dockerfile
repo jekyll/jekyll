@@ -26,6 +26,11 @@ RUN apt-get update \
     && gem install ruby-debug-ide \
     && gem install debase \
     #
+    # Install node.js
+    && apt-get -y install curl software-properties-common \
+    && curl -sL https://deb.nodesource.com/setup_13.x | bash - \
+    && apt-get -y install nodejs \
+    #
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
     && groupadd --gid $USER_GID $USERNAME \
     && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
