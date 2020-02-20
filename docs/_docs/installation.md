@@ -20,7 +20,3 @@ For detailed install instructions have a look at the guide for your operating sy
 * [Ubuntu Linux](/docs/installation/ubuntu/)
 * [Other Linux distros](/docs/installation/other-linux)
 * [Windows](/docs/installation/windows/)
-
-## Visual Studio Code Development Container
-
-If you've got [Visual Studio Code](https://code.visualstudio.com/) with the [Remote Development Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) installed then simply opening this repository in Visual Studio Code and following the prompts to "Re-open In A Development Container" will get you setup and ready to go with a fresh environment with all the requirements installed.
