@@ -20,7 +20,7 @@ We have [a helpful little bot](https://github.com/jekyllbot) which we use to mer
 
 To merge a pull request, leave a comment thanking the contributor, then add the special merge request:
 
-```text
+```
 Thank you very much for your contribution. Folks like you make this project and community strong. :heart:
 
 @jekyllbot: merge +dev
