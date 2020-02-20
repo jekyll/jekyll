@@ -111,7 +111,7 @@ possible to run Jekyll as a non-superuser and without having to install
 gems to system-wide locations by adding the following lines to the end
 of your `.bashrc` file:
 
-```
+```bash
 # Ruby exports
 
 export GEM_HOME=$HOME/gems

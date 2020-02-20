@@ -24,7 +24,7 @@ include.
 Create a file for the navigation at `_includes/navigation.html` with the
 following content:
 
-```liquid
+```
 <nav>
   <a href="/">Home</a>
   <a href="/about.html">About</a>

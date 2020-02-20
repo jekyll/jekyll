@@ -30,7 +30,7 @@ bundle init
 
 Now edit the `Gemfile`and add jekyll as a dependency:
 
-```
+```ruby
 gem "jekyll"
 ```
 

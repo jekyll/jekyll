@@ -13,7 +13,7 @@ different environments.
 
 Create `Gemfile` in the root with the following:
 
-```
+```ruby
 source 'https://rubygems.org'
 
 gem 'jekyll'
@@ -51,7 +51,7 @@ with SEO
 To use these first you need to add them to your `Gemfile`. If you put them
 in a `jekyll_plugins` group they'll automatically be required into Jekyll:
 
-```
+```ruby
 source 'https://rubygems.org'
 
 gem 'jekyll'
@@ -65,7 +65,7 @@ end
 
 Then add these lines to your `_config.yml`:
 
-```
+```yaml
 plugins:
   - jekyll-feed
   - jekyll-sitemap

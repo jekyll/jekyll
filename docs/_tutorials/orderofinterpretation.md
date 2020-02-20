@@ -115,7 +115,7 @@ This won't work because the `assign` tag is only available during the Liquid ren
 However, you can use Jekyll's site variables or Liquid to *populate* a script that is executed at a later time. For example, suppose you have the following property in your front matter: `someContent: "This is some content"`. You could do this:
 
 {% raw %}
-```js
+```javascript
 <button onclick="someFunction()">Click me</button>
 
 <p id="intro"></p>

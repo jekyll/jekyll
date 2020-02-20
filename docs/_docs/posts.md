@@ -102,7 +102,7 @@ Creating an index of posts on another page should be easy thanks to
 simple example of how to create a list of links to your blog posts:
 
 {% raw %}
-```html
+```liquid
 <ul>
   {% for post in site.posts %}
     <li>
@@ -166,7 +166,7 @@ post. By default this is the first paragraph of content in the post, however it
 can be customized by setting a `excerpt_separator` variable in front matter or
 `_config.yml`.
 
-```yaml
+```markdown
 ---
 excerpt_separator: <!--more-->
 ---

@@ -39,7 +39,7 @@ The `post` layout doesn't exist so you'll need to create it at
 `_layouts/post.html` with the following content:
 
 {% raw %}
-```html
+```liquid
 ---
 layout: default
 ---
@@ -65,7 +65,7 @@ Jekyll makes posts available at `site.posts`.
 Create `blog.html` in your root (`/blog.html`) with the following content:
 
 {% raw %}
-```html
+```liquid
 ---
 layout: default
 title: Blog

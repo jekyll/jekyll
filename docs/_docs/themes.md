@@ -131,7 +131,7 @@ To do this, copy the files from the theme gem's directory into your Jekyll site 
 
 Then you must tell Jekyll about the plugins that were referenced by the theme. You can find these plugins in the theme's gemspec file as runtime dependencies. If you were converting the Minima theme, for example, you might see:
 
-```
+```ruby
 spec.add_runtime_dependency "jekyll-feed", "~> 0.12"
 spec.add_runtime_dependency "jekyll-seo-tag", "~> 2.6"
 ```

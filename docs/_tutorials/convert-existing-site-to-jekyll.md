@@ -57,7 +57,7 @@ name: My Jekyll Website
 **index.md**
 
 {% raw %}
-```yaml
+```markdown
 ---
 title: My page
 layout: default
@@ -133,7 +133,7 @@ You can also use an `absolute_url` filter. This filter will prepend the `url` *a
 
 Again, both `url` and `baseurl` can be defined in your site's config file, like this:
 
-```
+```yaml
 url: http://mysite.com
 baseurl: /blog
 ```
@@ -162,7 +162,7 @@ Create a couple of files (`index.md` and `about.md`) in your root directory.
 
 In your `index.md` file, add some front matter tags containing a `title` and `layout` property, like this:
 
-```yaml
+```markdown
 ---
 title: Home
 layout: default
@@ -180,13 +180,13 @@ If you don't specify a layout in your pages, Jekyll will simply render that page
 
 Add a `_config.yml` file in your root directory. In `_config.yml`, you can optionally specify the markdown filter you want. By default, [kramdown](https://kramdown.gettalong.org/) is used (without the need to specify it). If no other filter is specified, your config file will automatically apply the following as a default setting:
 
-```
+```yaml
 markdown: kramdown
 ```
 
 You can also specify [some options](https://kramdown.gettalong.org/converter/html.html) for kramdown to make it behave more like [GitHub Flavored Markdown (GFM)](https://github.github.com/gfm/):
 
-```
+```yaml
 kramdown:
  input: GFM
  auto_ids: true
@@ -202,7 +202,7 @@ You've now extracted your content out into separate files and defined a common l
 
 You could define any number of layouts you want for pages. Then just identify the layout you want that particular page to use. For example:
 
-```
+```yaml
 ---
 title: Sample page
 layout: homepage
@@ -233,7 +233,7 @@ Insert the following site variables:
 
 Open `_config.yml` and add a `title` property for your site's name.
 
-```
+```yaml
 title: ACME Website
 ```
 
@@ -258,7 +258,7 @@ Add some posts in a `_posts` folder following the standard `YYYY-MM-DD-title.md`
 
 In each post, add some basic content:
 
-```
+```markdown
 ---
 title: My First Post
 layout: default
@@ -288,7 +288,7 @@ layout: default
 
 Create a file called `blog.md` in your root directory and specify the `home` layout:
 
-```
+```yaml
 ---
 title: Blog
 layout: home
@@ -346,7 +346,7 @@ In this tutorial, we'll assume you've got a simple list of pages you want to gen
 Identify the part of your code where the list of pages appears. Usually this is a `<ul>` element with various child `<li>` elements. Replace the code with the following:
 
 {% raw %}
-```html
+```liquid
 <ul>
   {% assign mypages = site.pages | sort: "order" %}
     {% for page in mypages %}
@@ -358,7 +358,7 @@ Identify the part of your code where the list of pages appears. Usually this is 
 
 This example assumes each page would have front matter containing both a `title` and `order` property like this:
 
-```
+```yaml
 ---
 title: My page
 order: 2
@@ -390,7 +390,7 @@ You can store additional properties for each item in this data file as desired. 
 To print the list of pages from the data file, use code like this:
 
 {% raw %}
-```html
+```liquid
 <ul>
     {% for link in site.data.navigation %}
     <li><a href="{{ link.url }}">{{ link.title }}</a></li>
@@ -424,7 +424,7 @@ You can break up other elements of your theme like this, such as your header or 
 Your Jekyll site needs an RSS feed. Here's the [basic RSS feed syntax](http://www.w3schools.com/xml/xml_rss.asp). To create an RSS file in Jekyll, create a file called `feed.xml` in your root directory and add the following:
 
 {% raw %}
-```xml
+```liquid
 ---
 layout: null
 ---
@@ -464,7 +464,7 @@ This code uses a `for` loop to look through your last 20 posts. The content from
 In your `default.html` layout, look for a reference to the RSS or Atom feed in your header, and replace it with a reference to the file you just created. For example:
 
 {% raw %}
-```html
+```liquid
 <link rel="alternate" type="application/rss+xml"  href="{{ site.url }}/feed.xml" title="{{ site.title }}">
 ```
 {% endraw %}
@@ -476,7 +476,7 @@ You can also auto-generate your posts feed by adding a gem called [`jekyll-feed`
 Finally, add a [site map](https://www.sitemaps.org/protocol.html). Create a `sitemap.xml` file in your root directory and add this code:
 
 {% raw %}
-```xml
+```liquid
 ---
 layout: null
 search: exclude
@@ -528,7 +528,7 @@ As you integrate code for these services, note that **if a page in your Jekyll s
 
 If you do want Jekyll to process some page content (for example, to populate a variable that you define in your site's config file), just add front matter tags to the page. If you don't want any layout applied to the page, specify `layout: null` like this:
 
-```
+```yaml
 ---
 layout: null
 ---

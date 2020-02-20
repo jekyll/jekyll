@@ -60,7 +60,7 @@ In the example above, we can place the following tag anywhere in one of our
 pages:
 
 {% raw %}
-```ruby
+```liquid
 <p>{% render_time page rendered at: %}</p>
 ```
 {% endraw %}
