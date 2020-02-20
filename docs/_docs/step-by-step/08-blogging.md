@@ -139,7 +139,7 @@ golden flesh with rows of tiny, black, edible seeds. The fruit has a soft
 texture, with a sweet and unique flavor.
 ```
 
-Open <a href="http://localhost:4000" target="_blank" data-proofer-ignore>http://localhost:4000</a> and have
-a look through your blog posts.
+Open <a href="http://localhost:4000" target="_blank" data-proofer-ignore>http://localhost:4000</a>
+and have a look through your blog posts.
 
 Next we'll focus on creating a page for each post author.

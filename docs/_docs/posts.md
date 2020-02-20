@@ -58,8 +58,6 @@ I hope you like it!
   </p>
 </div>
 
-
-
 <div class="note info">
   <h5>Be aware of character sets</h5>
   <p>

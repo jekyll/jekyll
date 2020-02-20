@@ -7,7 +7,6 @@ Liquid is where Jekyll starts to get more interesting. Liquid is a templating
 language which has three main parts: [objects](#objects), [tags](#tags) and
 [filters](#filters).
 
-
 ## Objects
 
 Objects tell Liquid where to output content. They're denoted by double curly

@@ -193,7 +193,8 @@ To install a gem-based theme:
    # This is an example, declare the theme gem you want to use here
    gem "jekyll-theme-minimal"
    ```
-  Or if you've started with the `jekyll new` command, replace `gem "minima", "~> 2.0"` with the gem you want, e.g:
+
+   Or if you've started with the `jekyll new` command, replace `gem "minima", "~> 2.0"` with the gem you want, e.g:
 
    ```diff
    # ./Gemfile

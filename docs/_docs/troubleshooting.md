@@ -262,7 +262,6 @@ specified elsewhere.
 
 Adding `vendor/bundle` to the `exclude:` list will solve this problem but will lead to having other sub-directories under `/vendor/` (and also `/node_modules/`, if present) be processed to the destination folder `_site`.
 
-
 The proper solution is to incorporate the default setting for `exclude:` rather than override it completely:
 
 For versions up to `v3.4.3`, the `exclude:` setting must look like following:
@@ -280,7 +279,6 @@ exclude:
 ```
 
 From `v3.5` onward, `Gemfile` and `Gemfile.lock` are also excluded by default. So, in most cases there is no need to define another `exclude:` array in the config file. So an existing definition can either be modified as above, or removed completely, or commented out to enable easy edits in future.
-
 
 ## Markup Problems
 

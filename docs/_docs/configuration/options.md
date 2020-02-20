@@ -346,7 +346,6 @@ class="flag">flags</code> (specified on the command-line) that control them.
 </table>
 </div>
 
-
 ### Serve Command Options
 
 In addition to the options below, the `serve` sub-command can accept any of the options

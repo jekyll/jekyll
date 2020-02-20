@@ -24,14 +24,11 @@ from this as needed.
   </p>
 </div>
 
-
 ## Usage
 
 The first step is to put the template source code in `default.html`. `content`
 is a special variable, the value is the rendered content of the post or page
 being wrapped.
-
-
 
 {% raw %}
 ```liquid
@@ -101,7 +98,6 @@ The rendered output of this page is:
   </body>
 </html>
 ```
-
 
 ## Inheritance
 

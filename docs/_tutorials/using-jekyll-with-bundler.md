@@ -105,4 +105,3 @@ _site/
 .bundle/
 vendor/
 ```
-

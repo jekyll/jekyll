@@ -371,12 +371,14 @@ For more information, see [Expressions and Variables](https://github.com/Shopify
 In addition to inserting items from the YAML data file into your list, you also usually want to highlight the current link if the user is viewing that page. You do this by inserting an `active` class for items that match the current page URL.
 
 **CSS**
+
 ```css
 .result li.active a {
     color: lightgray;
     cursor: default;
-  }
+}
 ```
+
 **Liquid**
 
 {% raw %}
@@ -415,6 +417,7 @@ To make sure the `item.url` (stored in the YAML file) matches the `page.url`, it
 You might want to include items conditionally in your list. For example, maybe you have multiple site outputs and only want to include the sidebar item for certain outputs. You can add properties in each list item and then use those properties to conditionally include the content.
 
 **YAML**
+
 ```yaml
 docs2_list_title: ACME Documentation
 docs2:

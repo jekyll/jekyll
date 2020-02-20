@@ -65,10 +65,13 @@ layout: default
 
 # {{ page.title }}
 
-Content is written in [Markdown](https://learnxinyminutes.com/docs/markdown/). Plain text format allows you to focus on your **content**.
+Content is written in [Markdown](https://learnxinyminutes.com/docs/markdown/).
+Plain text format allows you to focus on your **content**.
 
 <!--
-You can use HTML elements in Markdown, such as the comment element, and they won't be affected by a markdown parser. However, if you create an HTML element in your markdown file, you cannot use markdown syntax within that element's contents.
+You can use HTML elements in Markdown, such as the comment element, and they won't
+be affected by a markdown parser. However, if you create an HTML element in your
+markdown file, you cannot use markdown syntax within that element's contents.
 -->
 ```
 {% endraw %}
@@ -121,7 +124,7 @@ Jekyll provides some [filters](/docs/liquid/filters) to prepend a site URL befor
 ```
 {% endraw %}
 
-The `relative_url` filter will prepend the [`baseurl`](https://byparker.com/blog/2014/clearing-up-confusion-around-baseurl/) value from your config file (as`blog` for instance) to the input. This is useful if your site is hosted at a subpath rather than at the root of the domain (for example, `http://mysite.com/blog/`).
+The `relative_url` filter will prepend the [`baseurl`](https://byparker.com/blog/2014/clearing-up-confusion-around-baseurl/) value from your config file (as `blog` for instance) to the input. This is useful if your site is hosted at a subpath rather than at the root of the domain (for example, `http://mysite.com/blog/`).
 
 You can also use an `absolute_url` filter. This filter will prepend the `url` *and* `baseurl` value to the input:
 
@@ -296,7 +299,6 @@ layout: home
 ```
 
 In this case, contents of `blog.md` will be pushed into the {% raw %}`{{ content }}`{% endraw %} tag in the `home` layout. Then the `home` layout will be pushed into the {% raw %}`{{ content }}`{% endraw %} tag of the `default` layout.
-
 
 ### How layouts work
 

@@ -46,7 +46,6 @@ For example, a permalink style of
 
 Here's the full list of placeholders available:
 
-
 <div class="mobile-side-scroller">
 <table>
   <thead>
