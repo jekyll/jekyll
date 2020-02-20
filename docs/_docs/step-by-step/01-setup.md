@@ -18,13 +18,13 @@ instructions for your operating system.
 With Ruby setup you can install Jekyll by running the following in your
 terminal:
 
-```
+```sh
 gem install jekyll bundler
 ```
 
 To create a new `Gemfile` to list your project's dependencies run:
 
-```
+```sh
 bundle init
 ```
 

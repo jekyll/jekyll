@@ -13,7 +13,7 @@ a `.md` extension which converts to HTML on build. For a site with
 a homepage, an about page, and a contact page, here’s what the root directory
 and associated URLs might look like:
 
-```sh
+```
 .
 |-- about.md    # => http://example.com/about.html
 |-- index.html    # => http://example.com/
@@ -22,7 +22,7 @@ and associated URLs might look like:
 
 If you have a lot of pages, you can organize them into subfolders. The same subfolders that are used to group your pages in your project's source will then exist in the `_site` folder when your site builds. However, when a page has a *different* permalink set in the front matter, the subfolder at `_site` changes accordingly.
 
-```sh
+```
 .
 |-- about.md          # => http://example.com/about.html
 |-- documentation     # folder containing pages

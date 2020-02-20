@@ -29,8 +29,8 @@ We'll start with a *basic Jekyll site* consisting of three files:
 Manually create these three files in a folder called `my_jekyll_site` or whatever suits you the most, and place `default.html` inside a folder named `_layouts`.
 
 ```sh
-$ touch _config.yml index.md default.html
-$ mkdir _layouts && mv default.html _layouts
+touch _config.yml index.md default.html
+mkdir _layouts && mv default.html _layouts
 ```
 
 Fire up your favorite editor, and populate the contents of the `default.html` and `index.md` files as follows:
@@ -75,7 +75,7 @@ You can use HTML elements in Markdown, such as the comment element, and they won
 
 Now `cd` to `my_jekyll_site` and serve the site with the built-in server:
 
-```
+```sh
 cd my_jekyll_site
 jekyll serve
 ```

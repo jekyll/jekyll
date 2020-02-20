@@ -28,7 +28,7 @@ brew install ruby
 
 Add the brew ruby path to your shell config :
 
-```
+```bash
 export PATH=/usr/local/opt/ruby/bin:$PATH
 ```
 
@@ -94,7 +94,7 @@ ruby -v
 
 Then append your path file with the following, replacing the `X.X` with the first two digits of your Ruby version.
 
-```
+```bash
 export PATH=$HOME/.gem/ruby/X.X.0/bin:$PATH
 ```
 
