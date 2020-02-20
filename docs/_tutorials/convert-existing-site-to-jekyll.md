@@ -42,24 +42,27 @@ name: My Jekyll Website
 
 **_layouts/default.html**
 
+{% raw %}
 ```html
 <!DOCTYPE html>
 <html>
   <body>
-     {% raw %}{{ content }}{% endraw %}
+     {{ content }}
   </body>
 </html>
 ```
+{% endraw %}
 
 **index.md**
 
+{% raw %}
 ```yaml
 ---
 title: My page
 layout: default
 ---
 
-# {% raw %}{{ page.title }}{% endraw %}
+# {{ page.title }}
 
 Content is written in [Markdown](https://learnxinyminutes.com/docs/markdown/). Plain text format allows you to focus on your **content**.
 
@@ -67,6 +70,7 @@ Content is written in [Markdown](https://learnxinyminutes.com/docs/markdown/). P
 You can use HTML elements in Markdown, such as the comment element, and they won't be affected by a markdown parser. However, if you create an HTML element in your markdown file, you cannot use markdown syntax within that element's contents.
 -->
 ```
+{% endraw %}
 
 Now `cd` to `my_jekyll_site` and serve the site with the built-in server:
 
@@ -84,7 +88,7 @@ This is a Jekyll site at the most basic functional level. Here's what is happeni
 
   * The `_config.yml` file contains settings that Jekyll uses as it processes your site. An empty config file will use default values for building a Jekyll site. For example, to convert [Markdown](https://learnxinyminutes.com/docs/markdown/) to HTML, Jekyll will automatically use the [kramdown Markdown filter](https://rubygems.org/gems/kramdown/), without any need to specify it.
   * Jekyll looks for files with [front matter tags]({% link _docs/front-matter.md %}) (the two sets of dashed lines `---` like those in `index.md`) and processes the files (populating site variables, rendering any [Liquid](https://shopify.github.io/liquid/), and converting Markdown to HTML).
-  * Jekyll pushes the content from all pages and posts into the `{% raw %}{{ content }}{% endraw %}` variable in the layout specified (`default`) in the front matter tags.
+  * Jekyll pushes the content from all pages and posts into the {% raw %}`{{ content }}`{% endraw %} variable in the layout specified (`default`) in the front matter tags.
   * The processed files get written as `.html` files in the `_site` directory.
 
 You can read more about how Jekyll processes the files in [order of Interpretation]({% link _tutorials/orderofinterpretation.md %}).
@@ -110,17 +114,21 @@ For example, if the paths were relative on the site you copied, you'll need to e
 
 Jekyll provides some [filters](/docs/liquid/filters) to prepend a site URL before path. For example, you could preface your stylesheet like this:
 
+{% raw %}
 ```liquid
-{% raw %}{{ "/assets/style.css" | relative_url }}{% endraw %}
+{{ "/assets/style.css" | relative_url }}
 ```
+{% endraw %}
 
 The `relative_url` filter will prepend the [`baseurl`](https://byparker.com/blog/2014/clearing-up-confusion-around-baseurl/) value from your config file (as`blog` for instance) to the input. This is useful if your site is hosted at a subpath rather than at the root of the domain (for example, `http://mysite.com/blog/`).
 
 You can also use an `absolute_url` filter. This filter will prepend the `url` *and* `baseurl` value to the input:
 
+{% raw %}
 ```liquid
-{% raw %}{{ "/assets/style.css" | absolute_url }}{% endraw %}
+{{ "/assets/style.css" | absolute_url }}
 ```
+{% endraw %}
 
 Again, both `url` and `baseurl` can be defined in your site's config file, like this:
 
@@ -141,9 +149,9 @@ In the next section, you'll blank out the content of the layout and replace it w
 
 ## 2. Identify the content part of the layout
 
-In `default.html`, find where the page content begins (usually at `h1` or `h2` tags). Replace the title that appears inside these tags with `{% raw %}{{ page.title }}{% endraw %}`.
+In `default.html`, find where the page content begins (usually at `h1` or `h2` tags). Replace the title that appears inside these tags with {% raw %}`{{ page.title }}`{% endraw %}.
 
-Remove the content part (keep everything else: navigation menu, sidebar, footer, etc.) and replace it with `{% raw %}{{ content }}{% endraw %}`.
+Remove the content part (keep everything else: navigation menu, sidebar, footer, etc.) and replace it with {% raw %}`{{ content }}`{% endraw %}.
 
 Check the layout again in your browser and make sure you didn't corrupt or alter it up by inadvertently removing a crucial `div` tag or other element. The only change should be to the title and page content, which are now blanked out or showing the placeholder tag.
 
@@ -206,7 +214,7 @@ You can even set [default front matter tags](/docs/configuration/front-matter-de
 
 ## 6. Configure site variables
 
-You already configured the page title using `{% raw %}{{ page.title }}{% endraw %}` tags. But there are more `title` tags to populate. Pages also have a [`title`](https://moz.com/learn/seo/title-tag) tag that appears in the browser tab or window. Typically you put the page title followed by the site title here.
+You already configured the page title using {% raw %}`{{ page.title }}`{% endraw %} tags. But there are more `title` tags to populate. Pages also have a [`title`](https://moz.com/learn/seo/title-tag) tag that appears in the browser tab or window. Typically you put the page title followed by the site title here.
 
 In your `default.html` layout, look for the `title` tags below your `head` tags:
 
@@ -216,9 +224,11 @@ In your `default.html` layout, look for the `title` tags below your `head` tags:
 
 Insert the following site variables:
 
+{% raw %}
+```liquid
+<title>{{ page.title }} | {{ site.title }}</title>
 ```
-{% raw %}<title>{{ page.title }} | {{ site.title }}</title>{% endraw %}
-```
+{% endraw %}
 
 Open `_config.yml` and add a `title` property for your site's name.
 
@@ -258,20 +268,22 @@ Some sample content...
 
 Now let's create a layout that will display the posts. Create a new file in `_layouts` called `home.html` and add the following logic:
 
-```
+{% raw %}
+```liquid
 ---
 layout: default
 ---
 
-{% raw %}{{ content }}
+{{ content }}
 <ul class="myposts">
 {% for post in site.posts %}
     <li><a href="{{ post.url }}">{{ post.title}}</a>
     <span class="postDate">{{ post.date | date: "%b %-d, %Y" }}</span>
     </li>
 {% endfor %}
-</ul>{% endraw %}
+</ul>
 ```
+{% endraw %}
 
 Create a file called `blog.md` in your root directory and specify the `home` layout:
 
@@ -282,19 +294,19 @@ layout: home
 ---
 ```
 
-In this case, contents of `blog.md` will be pushed into the `{% raw %}{{ content }}{% endraw %}` tag in the `home` layout. Then the `home` layout will be pushed into the `{% raw %}{{ content }}{% endraw %}` tag of the `default` layout.
+In this case, contents of `blog.md` will be pushed into the {% raw %}`{{ content }}`{% endraw %} tag in the `home` layout. Then the `home` layout will be pushed into the {% raw %}`{{ content }}`{% endraw %} tag of the `default` layout.
 
 
 ### How layouts work
 
-When a layout specifies another layout, it means the content of the first layout will be stuffed into the `{% raw %}{{ content }}{% endraw %}` tag of the second layout. As an analogy, think of Russian dolls that fit into each other. Each layout fits into another layout that it specifies.
+When a layout specifies another layout, it means the content of the first layout will be stuffed into the {% raw %}`{{ content }}`{% endraw %} tag of the second layout. As an analogy, think of Russian dolls that fit into each other. Each layout fits into another layout that it specifies.
 
 The following diagram shows how layouts work in Jekyll:
 
 <img src="../../img/jekylllayoutconcept.png" alt="Concept of Jekyll layouts" />
 
 {: .image-description}
-In this example, the content from a Markdown document `document.md` that specifies `layout: docs` gets pushed into the `{% raw %}{{ content }}{% endraw %}` tag of the layout file `docs.html`. Because the `docs` layout itself specifies `layout: page`, the content from `docs.html` gets pushed into the `{% raw %}{{ content }}{% endraw %}` tag in the layout file `page.html`. Finally because the `page` layout specifies `layout: default`, the content from `page.html` gets pushed into the `{% raw %}{{ content }}{% endraw %}` tag of the layout file `default.html`.
+In this example, the content from a Markdown document `document.md` that specifies `layout: docs` gets pushed into the {% raw %}`{{ content }}`{% endraw %} tag of the layout file `docs.html`. Because the `docs` layout itself specifies `layout: page`, the content from `docs.html` gets pushed into the {% raw %}`{{ content }}`{% endraw %} tag in the layout file `page.html`. Finally because the `page` layout specifies `layout: default`, the content from `page.html` gets pushed into the {% raw %}`{{ content }}`{% endraw %} tag of the layout file `default.html`.
 
 You don't need multiple layouts. You could just use one: `default`. You have options for how you design your site. In general, it's common to define one layout for pages and another layout for posts, but for both of these layouts to inherit the `default` template (which usually defines the top and bottom parts of the site).
 
@@ -302,7 +314,7 @@ In your browser, go to `blog.html` and see the list of posts.
 Note that you don't have to use the method described here. You could have simply added the `for` loop to any page, such as `index.md`, to display these posts. But given that you may have more complex logic for other features, it can be helpful to store your logic in templates separate from the page area where you frequently type your content.
 
 {: .note .info}
-At minimum, a layout should contain `{% raw %}{{ content }}{% endraw %}`, which acts as a receiver for the *content* to be rendered.
+At minimum, a layout should contain {% raw %}`{{ content }}`{% endraw %}, which acts as a receiver for the *content* to be rendered.
 
 ### For loops
 
@@ -310,15 +322,17 @@ By the way, let's pause here to look at the `for` loop logic a little more close
 
 We've only scratched the surface of what you can do with `for` loops in retrieving posts. For example, if you wanted to display posts from a specific category, you could do so by adding a `categories` property to your post's front matter and then look in those categories. Further, you could limit the number of results by adding a `limit` property. Here's an example:
 
+{% raw %}
 ```liquid
-{% raw %}<ul class="myposts">
+<ul class="myposts">
 {% for post in site.categories.podcasts limit:3 %}
     <li><a href="{{ post.url }}">{{ post.title}}</a>
     <span class="postDate">{{ post.date | date: "%b %-d, %Y" }}</span>
     </li>
 {% endfor %}
-</ul>{% endraw %}
+</ul>
 ```
+{% endraw %}
 
 This loop would get the latest three posts that have a category called `podcasts` in the front matter.
 
@@ -330,14 +344,16 @@ In this tutorial, we'll assume you've got a simple list of pages you want to gen
 
 Identify the part of your code where the list of pages appears. Usually this is a `<ul>` element with various child `<li>` elements. Replace the code with the following:
 
+{% raw %}
 ```html
-{% raw %}<ul>
+<ul>
   {% assign mypages = site.pages | sort: "order" %}
     {% for page in mypages %}
     <li><a href="{{ page.url | absolute_url }}">{{ page.title }}</a></li>
     {% endfor %}
-  </ul>{% endraw %}
+</ul>
 ```
+{% endraw %}
 
 This example assumes each page would have front matter containing both a `title` and `order` property like this:
 
@@ -372,13 +388,15 @@ You can store additional properties for each item in this data file as desired. 
 
 To print the list of pages from the data file, use code like this:
 
+{% raw %}
 ```html
-{% raw %}<ul>
+<ul>
     {% for link in site.data.navigation %}
     <li><a href="{{ link.url }}">{{ link.title }}</a></li>
     {% endfor %}
-</ul>{% endraw %}
+</ul>
 ```
+{% endraw %}
 
 If you have more sophisticated requirements around navigation, such as when building a documentation site, see the [detailed tutorial on navigation](/tutorials/navigation/).
 
@@ -392,9 +410,11 @@ Remove your sidebar code from your `default.html` layout and insert it into the 
 
 Where the sidebar code previously existed in `default.html`, pull in your "include" like this:
 
+{% raw %}
 ```liquid
-{% raw %}{% include sidebar.html %}{% endraw %}
+{% include sidebar.html %}
 ```
+{% endraw %}
 
 You can break up other elements of your theme like this, such as your header or footer. Then you can apply these common elements to other layout files. This way you won't have duplicate code.
 
@@ -402,12 +422,13 @@ You can break up other elements of your theme like this, such as your header or 
 
 Your Jekyll site needs an RSS feed. Here's the [basic RSS feed syntax](http://www.w3schools.com/xml/xml_rss.asp). To create an RSS file in Jekyll, create a file called `feed.xml` in your root directory and add the following:
 
+{% raw %}
 ```xml
 ---
 layout: null
 ---
 
-{% raw %}<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
 
     <channel>
@@ -431,8 +452,9 @@ layout: null
         </item>
         {% endfor %}
     </channel>
-</rss>{% endraw %}
+</rss>
 ```
+{% endraw %}
 
 Make sure your `_config.yml` file has properties for `title`, `url`, and `description`.
 
@@ -440,9 +462,11 @@ This code uses a `for` loop to look through your last 20 posts. The content from
 
 In your `default.html` layout, look for a reference to the RSS or Atom feed in your header, and replace it with a reference to the file you just created. For example:
 
+{% raw %}
 ```html
-<link rel="alternate" type="application/rss+xml"  href="{% raw %}{{ site.url }}{% endraw %}/feed.xml" title="{% raw %}{{ site.title }}{% endraw %}">
+<link rel="alternate" type="application/rss+xml"  href="{{ site.url }}/feed.xml" title="{{ site.title }}">
 ```
+{% endraw %}
 
 You can also auto-generate your posts feed by adding a gem called [`jekyll-feed`](https://help.github.com/articles/atom-rss-feeds-for-github-pages/). This gem will also work on GitHub Pages.
 
@@ -450,13 +474,14 @@ You can also auto-generate your posts feed by adding a gem called [`jekyll-feed`
 
 Finally, add a [site map](https://www.sitemaps.org/protocol.html). Create a `sitemap.xml` file in your root directory and add this code:
 
+{% raw %}
 ```xml
 ---
 layout: null
 search: exclude
 ---
 
-{% raw %}<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     {% for page in site.pages %}
@@ -477,8 +502,9 @@ search: exclude
     </url>
     {% endfor %}
 
-</urlset>{% endraw %}
+</urlset>
 ```
+{% endraw %}
 
 Again, we're using a `for` loop here to iterate through all posts and pages to add them to the sitemap.
 

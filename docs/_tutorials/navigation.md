@@ -408,7 +408,7 @@ In addition to inserting items from the YAML data file into your list, you also 
 
 In this case, assume `Deployment` is the current page.
 
-To make sure the `item.url` (stored in the YAML file) matches the `page.url`, it can be helpful to print the `{% raw %}{{ page.url }}{% endraw %}` to the page.
+To make sure the `item.url` (stored in the YAML file) matches the `page.url`, it can be helpful to print the {% raw %}`{{ page.url }}`{% endraw %} to the page.
 
 ## Scenario 7: Including items conditionally
 
