@@ -72,6 +72,7 @@
   * chore(deps): rubocop 0.80.0 (#8012)
   * Update unit tests for Kramdown-based converter (#8014)
   * Add Visual Studio Code Development Container (#8016)
+  * Configure kramdown toc_levels as array by default (#8015)
 
 ## 4.0.0 / 2019-08-19
 
