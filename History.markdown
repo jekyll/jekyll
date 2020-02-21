@@ -54,6 +54,7 @@
   * Add Kentico Kontent CMS integration to resources (#8000)
   * Update 07-assets.md (#7413)
   * Fix file references in Step by Step Tutorial&#39;s Assets step (#8007)
+  * docs: improve highlighting of code blocks (#8017)
 
 ### Development Fixes
 
