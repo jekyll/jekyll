@@ -13,7 +13,7 @@ xcode-select --install
 ## Install Ruby
 
 Jekyll requires **Ruby > {{ site.data.ruby.min_version }}**.
-macOS Catalina 10.15 comes with ruby 2.6.3, so you're fine. 
+macOS Catalina 10.15 comes with ruby 2.6.3, so you're fine.
 If you're running a previous macOS system, you'll have to install a newer version of Ruby.
 
 ### With Homebrew {#brew}
@@ -26,9 +26,9 @@ To run the latest Ruby version you need to install it through [Homebrew](https:/
 brew install ruby
 ```
 
-Add the brew ruby path to your shell config :
+Add the brew ruby path to your shell config:
 
-```
+```bash
 export PATH=/usr/local/opt/ruby/bin:$PATH
 ```
 
@@ -56,10 +56,10 @@ Ruby versions. This is very useful when you need to be able to run a given Ruby 
 # Install rbenv and ruby-build
 brew install rbenv
 
-# Setup rbenv integration to your shell
+# Set up rbenv integration with your shell
 rbenv init
 
-# Check your install
+# Check your installation
 curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
 ```
 
@@ -94,7 +94,7 @@ ruby -v
 
 Then append your path file with the following, replacing the `X.X` with the first two digits of your Ruby version.
 
-```
+```bash
 export PATH=$HOME/.gem/ruby/X.X.0/bin:$PATH
 ```
 

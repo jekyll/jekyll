@@ -8,7 +8,6 @@ redirect_from:
 While Windows is not an officially-supported platform, it can be used to run Jekyll with the proper tweaks. This page aims to
 collect some of the general knowledge and lessons that have been unearthed by Windows users.
 
-
 ## Installing Jekyll
 
 ### Installation via RubyInstaller
@@ -43,11 +42,13 @@ First let's make sure all our packages / repositories are up to date. Open a new
 ```sh
 bash
 ```
+
 Your Command Prompt instance should now be a Bash instance. Now we must update our repo lists and packages.
 
 ```sh
 sudo apt-get update -y && sudo apt-get upgrade -y
 ```
+
 Now we can install Ruby. To do this we will use a repository from [BrightBox](https://www.brightbox.com/docs/ruby/ubuntu/),
 which hosts optimized versions of Ruby for Ubuntu.
 
@@ -89,7 +90,6 @@ with the current date in the filename.
 </div>
 
 **Note:** Bash on Ubuntu on Windows is still under development, so you may run into issues.
-
 
 ## Encoding
 

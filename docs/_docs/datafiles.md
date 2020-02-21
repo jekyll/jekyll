@@ -42,7 +42,7 @@ In `_data/members.yml`:
 
 Or `_data/members.csv`:
 
-```text
+```
 name,github
 Eric Mill,konklone
 Parker Moore,parkr

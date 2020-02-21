@@ -8,7 +8,7 @@ them in your site folder and they’ll copy across to the built site.
 
 Jekyll sites often use this structure to keep assets organized:
 
-```sh
+```
 .
 ├── assets
 |   ├── css
@@ -38,13 +38,11 @@ to CSS baked right into Jekyll.
 
 First create a Sass file at `/assets/css/styles.scss` with the following content:
 
-{% raw %}
-```css
+```sass
 ---
 ---
 @import "main";
 ```
-{% endraw %}
 
 The empty front matter at the top tells Jekyll it needs to process the file. The
 `@import "main"` tells Sass to look for a file called `main.scss` in the sass

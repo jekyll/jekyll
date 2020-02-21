@@ -16,7 +16,7 @@ For example, you might have a page on your site located at
 `/my_pages/about-me.html` and you want the output url to be `/about/`. In
 front matter of the page you would set:
 
-```
+```yaml
 ---
 permalink: /about/
 ---
@@ -45,7 +45,6 @@ For example, a permalink style of
 ### Placeholders
 
 Here's the full list of placeholders available:
-
 
 <div class="mobile-side-scroller">
 <table>

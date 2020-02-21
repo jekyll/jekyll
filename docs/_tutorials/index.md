@@ -31,5 +31,3 @@ We welcome your tutorial contributions. To add your tutorial:
 6. Follow the regular git workflow to submit the pull request.
 
 When you submit your pull request, the Jekyll documentation team will review your contribution and either merge it or suggest edits.
-
-

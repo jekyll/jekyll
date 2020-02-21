@@ -13,7 +13,7 @@ different environments.
 
 Create `Gemfile` in the root with the following:
 
-```
+```ruby
 source 'https://rubygems.org'
 
 gem 'jekyll'
@@ -27,7 +27,7 @@ creates `Gemfile.lock` which locks the current gem versions for a future
 When using a `Gemfile`, you'll run commands like `jekyll serve` with
 `bundle exec` prefixed. So the full command is:
 
-```bash
+```sh
 bundle exec jekyll serve
 ```
 
@@ -51,7 +51,7 @@ with SEO
 To use these first you need to add them to your `Gemfile`. If you put them
 in a `jekyll_plugins` group they'll automatically be required into Jekyll:
 
-```
+```ruby
 source 'https://rubygems.org'
 
 gem 'jekyll'
@@ -65,7 +65,7 @@ end
 
 Then add these lines to your `_config.yml`:
 
-```
+```yaml
 plugins:
   - jekyll-feed
   - jekyll-sitemap
@@ -109,7 +109,7 @@ To do this you can use [environments](/docs/configuration/environments/). You
 can set the environment by using the `JEKYLL_ENV` environment variable when
 running a command. For example:
 
-```bash
+```sh
 JEKYLL_ENV=production bundle exec jekyll build
 ```
 
@@ -130,7 +130,7 @@ on production you would do the following:
 The final step is to get the site onto a production server. The most basic way
 to do this is to run a production build:
 
-```bash
+```sh
 JEKYLL_ENV=production bundle exec jekyll build
 ```
 

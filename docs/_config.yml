@@ -46,6 +46,9 @@ plugins:
 feed:
   categories:
   - release
+kramdown:
+  syntax_highlighter_opts:
+    default_lang: plaintext
 sass:
   style: compressed
 strict_front_matter: true

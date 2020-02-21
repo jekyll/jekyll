@@ -71,8 +71,8 @@ end
 
 In order for the highlighting to show up, you’ll need to include a highlighting
 stylesheet. For Pygments or Rouge you can use a stylesheet for Pygments, you
-can find an example gallery 
-[here](https://jwarby.github.io/jekyll-pygments-themes/languages/ruby.html) 
+can find an example gallery
+[here](https://jwarby.github.io/jekyll-pygments-themes/languages/ruby.html)
 or from [its repository](https://github.com/jwarby/jekyll-pygments-themes).
 
 Copy the CSS file (`native.css` for example) into your css directory and import
@@ -117,11 +117,11 @@ The path to the post, page, or collection is defined as the path relative to the
 
 For example, suppose you're creating a link in `page_a.md` (stored in `pages/folder1/folder2`) to `page_b.md` (stored in  `pages/folder1`). Your path in the link would not be `../page_b.html`. Instead, it would be `/pages/folder1/page_b.md`.
 
-If you're unsure of the path, add `{% raw %}{{ page.path }}{% endraw %}` to the page and it will display the path.
+If you're unsure of the path, add {% raw %}`{{ page.path }}`{% endraw %} to the page and it will display the path.
 
 One major benefit of using the `link` or `post_url` tag is link validation. If the link doesn't exist, Jekyll won't build your site. This is a good thing, as it will alert you to a broken link so you can fix it (rather than allowing you to build and deploy a site with broken links).
 
-Note you cannot add filters to `link` tags. For example, you cannot append a string using Liquid filters, such as `{% raw %}{% link mypage.html | append: "#section1" %} {% endraw %}`. To link to sections on a page, you will need to use regular HTML or Markdown linking techniques.
+Note you cannot add filters to `link` tags. For example, you cannot append a string using Liquid filters, such as {% raw %}`{% link mypage.html | append: "#section1" %}`{% endraw %}. To link to sections on a page, you will need to use regular HTML or Markdown linking techniques.
 
 ### Linking to posts
 

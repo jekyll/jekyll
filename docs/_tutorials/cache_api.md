@@ -64,7 +64,6 @@ is built.
 This will clear all cached objects from a particular Cache. The Cache will be
 empty, both in memory and on disk.
 
-
 ### The following methods will probably only be used in special circumstances
 
 ## cache[key] → value

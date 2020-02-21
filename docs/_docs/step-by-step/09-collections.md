@@ -60,7 +60,7 @@ collection available at `site.authors`.
 Create `staff.html` and iterate over `site.authors` to output all the staff:
 
 {% raw %}
-```html
+```liquid
 ---
 layout: default
 title: Staff
@@ -117,7 +117,7 @@ You can link to the output page using `author.url`.
 Add the link to the `staff.html` page:
 
 {% raw %}
-```html
+```liquid
 ---
 layout: default
 title: Staff
@@ -141,7 +141,7 @@ Just like posts you'll need to create a layout for authors.
 Create `_layouts/author.html` with the following content:
 
 {% raw %}
-```html
+```liquid
 ---
 layout: default
 ---
@@ -203,7 +203,7 @@ Iterate over this filtered list in `_layouts/author.html` to output the
 author's posts:
 
 {% raw %}
-```html
+```liquid
 ---
 layout: default
 ---
@@ -228,7 +228,7 @@ The posts have a reference to the author so let's link it to the author's page.
 You can do this using a similar filtering technique in `_layouts/post.html`:
 
 {% raw %}
-```html
+```liquid
 ---
 layout: default
 ---
