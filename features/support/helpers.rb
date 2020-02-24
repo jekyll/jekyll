@@ -18,6 +18,17 @@ class Paths
   def self.source_dir; SOURCE_DIR; end
 end
 
+class ScenarioStats
+  class << self
+    attr_accessor :run_output, :run_status
+
+    def reset!
+      @run_output = nil
+      @run_status = nil
+    end
+  end
+end
+
 #
 
 def file_content_from_hash(input_hash)
@@ -63,13 +74,13 @@ end
 #
 
 def jekyll_run_output
-  Paths.output_file.read if Paths.output_file.file?
+  ScenarioStats.run_output
 end
 
 #
 
 def jekyll_run_status
-  Paths.status_file.read if Paths.status_file.file?
+  ScenarioStats.run_status
 end
 
 #
@@ -96,14 +107,12 @@ end
 
 def run_in_shell(*args)
   p, output = Jekyll::Utils::Exec.run(*args)
-
-  File.write(Paths.status_file, p.exitstatus)
-  File.open(Paths.output_file, "wb") do |f|
-    f.print "$ "
-    f.puts args.join(" ")
-    f.puts output
-    f.puts "EXIT STATUS: #{p.exitstatus}"
-  end
+  ScenarioStats.run_status = p.exitstatus
+  ScenarioStats.run_output = <<~TEXT
+    $ #{args.join(" ")}
+    #{output}
+    EXIT STATUS: #{p.exitstatus}
+  TEXT
 
   p
 end

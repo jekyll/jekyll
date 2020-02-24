@@ -11,8 +11,7 @@ end
 
 After do
   FileUtils.rm_rf(Paths.test_dir) if Paths.test_dir.exist?
-  Paths.output_file.delete if Paths.output_file.exist?
-  Paths.status_file.delete if Paths.status_file.exist?
+  ScenarioStats.reset!
   Dir.chdir(Paths.test_dir.parent)
   ENV["TZ"] = @timezone_before_scenario
 end
