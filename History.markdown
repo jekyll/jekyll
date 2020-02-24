@@ -76,6 +76,10 @@
   * Add Visual Studio Code Development Container (#8016)
   * Configure kramdown toc_levels as array by default (#8015)
 
+### Site Enhancements
+
+  * Optimize rendering of the documentation site (#8020)
+
 ## 4.0.0 / 2019-08-19
 
 ### Major Enhancements
