@@ -70,7 +70,7 @@ Open `_layouts/default.html` and add the stylesheet to the `<head>`:
   <head>
     <meta charset="utf-8">
     <title>{{ page.title }}</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
   </head>
   <body>
     {% include navigation.html %}
