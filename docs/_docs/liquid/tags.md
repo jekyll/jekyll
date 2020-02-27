@@ -18,12 +18,11 @@ Jekyll has built in support for syntax highlighting of over 100 languages
 thanks to [Rouge](http://rouge.jneen.net). Rouge is the default highlighter
 in Jekyll 3 and above.
 
-<div class="note warning">
-  <p>Using Pygments has been deprecated and is not supported in
-  Jekyll 4, the configuration setting <code>highlighter: pygments</code>
-  now automatically falls back to using <em>Rouge</em> which is written in Ruby
-  and 100% compatible with stylesheets for Pygments.</p>
-</div>
+{: .note .warning}
+Using Pygments has been deprecated and is not supported in
+Jekyll 4; the configuration setting <code>highlighter: pygments</code>
+now automatically falls back to using <em>Rouge</em> which is written in Ruby
+and 100% compatible with stylesheets for Pygments.
 
 To render a code block with syntax highlighting, surround your code as follows:
 

@@ -25,9 +25,11 @@ collections:
     people: true
 ```
 
-<div class="note">
-  <p>When defining a collection as a sequence, its pages will not be rendered by default. To enable this, <code>output: true</code> must be specified on the collection, which requires defining the collection as a mapping. For more information, see the section <a href="#output">Output</a></p>
-</div>
+{: .note .info}
+When defining a collection as a sequence, its pages will not be rendered by
+default. To enable this, <code>output: true</code> must be specified on the
+collection, which requires defining the collection as a mapping. For more
+information, see the section <a href="#output">Output</a>.
 
 <div class="note">
   <h5>Gather your collections {%- include docs_version_badge.html version="3.7.0" -%}</h5>
