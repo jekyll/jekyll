@@ -95,7 +95,7 @@ ruby -v
 Then append your path file with the following, replacing the `X.X` with the first two digits of your Ruby version.
 
 ```bash
-export PATH=$HOME/.gem/ruby/X.X.0/bin:$PATH
+echo 'export PATH="$HOME/.gem/ruby/X.X.0/bin:$PATH"' >> ~/.bash_profile
 ```
 
 To check that your gem paths point to your home directory run:
