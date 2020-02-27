@@ -391,7 +391,7 @@ Feature: Collections
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
-    And I should see "Second document's output: <p>Use <code class=\"highlighter-rouge\">Jekyll.configuration</code> to build a full configuration for use w/Jekyll.</p>\n\n<p>Whatever: foo.bar</p>" in "_site/index.html"
+    And I should see "Second document's output: <p>Use <code class=\"language-plaintext highlighter-rouge\">Jekyll.configuration</code> to build a full configuration for use w/Jekyll.</p>\n\n<p>Whatever: foo.bar</p>" in "_site/index.html"
 
   Scenario: Documents have an output attribute, which is the converted HTML based on site.config
     Given I have an "index.html" page that contains "Second document's output: {{ site.documents[2].output }}"
