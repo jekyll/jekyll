@@ -60,6 +60,7 @@
   * [Docs] Fix asset link ref in step-by-step tutorial (#8026)
   * Corrected command to modify PATH (#8029)
   * Corrected command to modify PATH (#8030)
+  * Docs: Render full contents of just the latest post (#8032)
 
 ### Development Fixes
 
