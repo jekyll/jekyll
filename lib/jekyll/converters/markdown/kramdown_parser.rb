@@ -1,5 +1,63 @@
 # Frozen-string-literal: true
 
+module Kramdown
+  # A Kramdown::Document subclass meant to optimize memory usage from initializing
+  # a kramdown document for parsing.
+  #
+  # The optimization is by using the same options Hash (and its derivatives) for
+  # converting all Markdown documents in a Jekyll site.
+  class JekyllDocument < Document
+    class << self
+      attr_reader :options, :parser
+
+      # The implementation is basically the core logic in +Kramdown::Document#initialize+
+      #
+      # rubocop:disable Naming/MemoizedInstanceVariableName
+      def setup(options)
+        @cache ||= {}
+
+        # reset variables on a subsequent set up with a different options Hash
+        unless @cache[:id] == options.hash
+          @options = @parser = nil
+          @cache[:id] = options.hash
+        end
+
+        @options ||= Options.merge(options).freeze
+        @parser  ||= begin
+          parser_name = (@options[:input] || "kramdown").to_s
+          parser_name = parser_name[0..0].upcase + parser_name[1..-1]
+          try_require("parser", parser_name)
+
+          if Parser.const_defined?(parser_name)
+            Parser.const_get(parser_name)
+          else
+            raise Kramdown::Error, "kramdown has no parser to handle the specified " \
+                                   "input format: #{@options[:input]}"
+          end
+        end
+      end
+      # rubocop:enable Naming/MemoizedInstanceVariableName
+
+      private
+
+      def try_require(type, name)
+        require "kramdown/#{type}/#{Utils.snake_case(name)}"
+      rescue LoadError
+        false
+      end
+    end
+
+    def initialize(source, options = {})
+      JekyllDocument.setup(options)
+
+      @options = JekyllDocument.options
+      @root, @warnings = JekyllDocument.parser.parse(source, @options)
+    end
+  end
+end
+
+#
+
 module Jekyll
   module Converters
     class Markdown
@@ -37,7 +95,7 @@ module Jekyll
         end
 
         def convert(content)
-          document = Kramdown::Document.new(content, @config)
+          document = Kramdown::JekyllDocument.new(content, @config)
           html_output = document.to_html
           if @config["show_warnings"]
             document.warnings.each do |warning|

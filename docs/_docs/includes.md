@@ -69,7 +69,7 @@ You can also pass parameters to an include. For example, suppose you have a file
 ```
 {% endraw %}
 
-The `{% raw %}{{ include.content }}{% endraw %}` is a parameter that gets populated when you call the include and specify a value for that parameter, like this:
+The {% raw %}`{{ include.content }}`{% endraw %} is a parameter that gets populated when you call the include and specify a value for that parameter, like this:
 
 {% raw %}
 ```liquid

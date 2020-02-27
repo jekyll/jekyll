@@ -114,7 +114,6 @@ defaults:
   </p>
 </div>
 
-
 ### Precedence
 
 Jekyll will apply all of the configuration settings you specify in the `defaults` section of your `_config.yml` file. You can choose to override settings from other scope/values pair by specifying a more specific path for the scope.

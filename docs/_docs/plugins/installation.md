@@ -27,12 +27,12 @@ You have 3 options for installing plugins:
    example:
 
    ```ruby
-    group :jekyll_plugins do
-      gem "jekyll-gist"
-      gem "jekyll-coffeescript"
-      gem "jekyll-assets"
-      gem "another-jekyll-plugin"
-    end
+   group :jekyll_plugins do
+     gem "jekyll-gist"
+     gem "jekyll-coffeescript"
+     gem "jekyll-assets"
+     gem "another-jekyll-plugin"
+   end
    ```
 
    Now you need to install all plugins from your Bundler group by running single command `bundle install`.

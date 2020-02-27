@@ -23,6 +23,7 @@ With gem-based themes, some of the site's directories (such as the `assets`, `_l
 In the case of Minima, you see only the following files in your Jekyll site directory:
 
 ```
+.
 ├── Gemfile
 ├── Gemfile.lock
 ├── _config.yml
@@ -75,33 +76,34 @@ To locate a theme's files on your computer:
 
    A Finder or Explorer window opens showing the theme's files and directories. The Minima theme gem contains these files:
 
-    ```
-    ├── LICENSE.txt
-    ├── README.md
-    ├── _includes
-    │   ├── disqus_comments.html
-    │   ├── footer.html
-    │   ├── google-analytics.html
-    │   ├── head.html
-    │   ├── header.html
-    │   ├── icon-github.html
-    │   ├── icon-github.svg
-    │   ├── icon-twitter.html
-    │   └── icon-twitter.svg
-    ├── _layouts
-    │   ├── default.html
-    │   ├── home.html
-    │   ├── page.html
-    │   └── post.html
-    ├── _sass
-    │   ├── minima
-    │   │   ├── _base.scss
-    │   │   ├── _layout.scss
-    │   │   └── _syntax-highlighting.scss
-    │   └── minima.scss
-    └── assets
-        └── main.scss
-     ```
+   ```
+   .
+   ├── LICENSE.txt
+   ├── README.md
+   ├── _includes
+   │   ├── disqus_comments.html
+   │   ├── footer.html
+   │   ├── google-analytics.html
+   │   ├── head.html
+   │   ├── header.html
+   │   ├── icon-github.html
+   │   ├── icon-github.svg
+   │   ├── icon-twitter.html
+   │   └── icon-twitter.svg
+   ├── _layouts
+   │   ├── default.html
+   │   ├── home.html
+   │   ├── page.html
+   │   └── post.html
+   ├── _sass
+   │   ├── minima
+   │   │   ├── _base.scss
+   │   │   ├── _layout.scss
+   │   │   └── _syntax-highlighting.scss
+   │   └── minima.scss
+   └── assets
+       └── main.scss
+   ```
 
 With a clear understanding of the theme's files, you can now override any theme file by creating a similarly named file in your Jekyll site directory.
 
@@ -129,7 +131,7 @@ To do this, copy the files from the theme gem's directory into your Jekyll site 
 
 Then you must tell Jekyll about the plugins that were referenced by the theme. You can find these plugins in the theme's gemspec file as runtime dependencies. If you were converting the Minima theme, for example, you might see:
 
-```
+```ruby
 spec.add_runtime_dependency "jekyll-feed", "~> 0.12"
 spec.add_runtime_dependency "jekyll-seo-tag", "~> 2.6"
 ```
@@ -191,7 +193,8 @@ To install a gem-based theme:
    # This is an example, declare the theme gem you want to use here
    gem "jekyll-theme-minimal"
    ```
-  Or if you've started with the `jekyll new` command, replace `gem "minima", "~> 2.0"` with the gem you want, e.g:
+
+   Or if you've started with the `jekyll new` command, replace `gem "minima", "~> 2.0"` with the gem you want, e.g:
 
    ```diff
    # ./Gemfile
@@ -274,7 +277,7 @@ Your theme's stylesheets should be placed in your theme's `_sass` folder, again,
 
 ```
 _sass
-├── jekyll-theme-awesome.scss
+└── jekyll-theme-awesome.scss
 ```
 
 Your theme's styles can be included in the user's stylesheet using the `@import` directive.
