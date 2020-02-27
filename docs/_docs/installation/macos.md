@@ -29,7 +29,7 @@ brew install ruby
 Add the brew ruby path to your shell config:
 
 ```bash
-export PATH=/usr/local/opt/ruby/bin:$PATH
+echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> ~/.bash_profile
 ```
 
 Then relaunch your terminal and check your updated Ruby setup:
