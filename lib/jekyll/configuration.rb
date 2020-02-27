@@ -71,6 +71,7 @@ module Jekyll
         "smart_quotes"  => "lsquo,rsquo,ldquo,rdquo",
         "input"         => "GFM",
         "hard_wrap"     => false,
+        "default_lang"  => "plaintext",
         "guess_lang"    => true,
         "footnote_nr"   => 1,
         "show_warnings" => false,

@@ -85,4 +85,6 @@ kramdown:
   hard_wrap         : false
   footnote_nr       : 1
   show_warnings     : false
+  guess_lang        : true
+  default_lang      : plaintext
 ```

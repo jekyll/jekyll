@@ -89,6 +89,7 @@ module Jekyll
         def setup
           @config["syntax_highlighter"] ||= highlighter
           @config["syntax_highlighter_opts"] ||= {}
+          @config["syntax_highlighter_opts"]["default_lang"] ||= @config["default_lang"]
           @config["syntax_highlighter_opts"]["guess_lang"] = @config["guess_lang"]
           @config["coderay"] ||= {} # XXX: Legacy.
           modernize_coderay_config
