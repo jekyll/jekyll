@@ -15,8 +15,8 @@ and associated URLs might look like:
 
 ```
 .
-|-- about.md    # => http://example.com/about.html
-|-- index.html    # => http://example.com/
+├── about.md    # => http://example.com/about.html
+├── index.html    # => http://example.com/
 └── contact.html  # => http://example.com/contact.html
 ```
 
@@ -24,11 +24,11 @@ If you have a lot of pages, you can organize them into subfolders. The same subf
 
 ```
 .
-|-- about.md          # => http://example.com/about.html
-|-- documentation     # folder containing pages
-    └── doc1.md       # => http://example.com/documentation/doc1.html
-|-- design            # folder containing pages
-    └── draft.md      # => http://example.com/design/draft.html
+├── about.md          # => http://example.com/about.html
+├── documentation     # folder containing pages
+│   └── doc1.md       # => http://example.com/documentation/doc1.html
+├── design            # folder containing pages
+│   └── draft.md      # => http://example.com/design/draft.html
 ```
 
 ## Changing the output URL
