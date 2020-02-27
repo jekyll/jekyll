@@ -120,8 +120,8 @@ Jekyll will look first to your site's content before looking to the theme's defa
 
 Note that making copies of theme files will prevent you from receiving any theme updates on those files. An alternative, to continue getting theme updates on all stylesheets, is to use higher specificity CSS selectors in your own additional, originally named CSS files.
 
-Refer to your selected theme's documentation and source repository for more information on what files you can override.
 {: .note .info}
+Refer to your selected theme's documentation and source repository for more information on which files you can override.
 
 ## Converting gem-based themes to regular themes
 
@@ -221,8 +221,8 @@ To install a gem-based theme:
    bundle exec jekyll serve
    ```
 
+{: .note .info}
 You can have multiple themes listed in your site's `Gemfile`, but only one theme can be selected in your site's `_config.yml`.
-{: .note .info }
 
 If you're publishing your Jekyll site on [GitHub Pages](https://pages.github.com/), note that GitHub Pages supports only [some gem-based themes](https://pages.github.com/themes/). GitHub Pages also supports [using any theme hosted on GitHub](https://help.github.com/articles/adding-a-jekyll-theme-to-your-github-pages-site/#adding-a-jekyll-theme-in-your-sites-_configyml-file) using the `remote_theme` configuration as if it were a gem-based theme.
 
@@ -320,8 +320,8 @@ Themes are visual. Show users what your theme looks like by including a screensh
 
 To preview your theme as you're authoring it, it may be helpful to add dummy content in, for example, `/index.html` and `/page.html` files. This will allow you to use the `jekyll build` and `jekyll serve` commands to preview your theme, just as you'd preview a Jekyll site.
 
+{: .note .info}
 If you do preview your theme locally, be sure to add `/_site` to your theme's `.gitignore` file to prevent the compiled site from also being included when you distribute your theme.
-{: .info .note}
 
 ### Publishing your theme
 

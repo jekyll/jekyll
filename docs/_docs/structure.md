@@ -29,10 +29,10 @@ A basic Jekyll site usually looks something like this:
 └── index.html # can also be an 'index.md' with valid front matter
 ```
 
-<div class="note info">
+<div class="note">
   <h5>Directory structure of Jekyll sites using gem-based themes</h5>
   <p>
-    Starting <strong>Jekyll 3.2</strong>, a new Jekyll project bootstrapped with <code>jekyll new</code> uses <a href="/docs/themes/">gem-based themes</a> to define the look of the site. This results in a lighter default directory structure : <code>_layouts</code>, <code>_includes</code> and <code>_sass</code> are stored in the theme-gem, by default.
+    Since version {% include docs_version_badge.html version="3.2"%}, a new Jekyll project bootstrapped with <code>jekyll new</code> uses <a href="/docs/themes/">gem-based themes</a> to define the look of the site. This results in a lighter default directory structure: <code>_layouts</code>, <code>_includes</code> and <code>_sass</code> are stored in the theme-gem, by default.
   </p>
   <br />
   <p>

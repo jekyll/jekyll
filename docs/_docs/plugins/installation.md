@@ -52,7 +52,7 @@ You have 3 options for installing plugins:
   </p>
 </div>
 
-<div class="note info">
+<div class="note">
   <h5>
     <code>_plugins</code>, <code>_config.yml</code> and <code>Gemfile</code>
     can be used simultaneously

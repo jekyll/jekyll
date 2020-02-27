@@ -104,9 +104,9 @@ To check that your gem paths point to your home directory run:
 gem env
 ```
 
-And check that `GEM PATHS:` points to a path in your home directory
+And check that `GEM PATHS:` points to a path in your home directory.
 
-{: .note }
+{: .note .info}
 Every time you update Ruby to a version with a different first two digits, you will need to update your path to match.
 
 ### Global Install
