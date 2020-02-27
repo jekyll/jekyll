@@ -58,6 +58,7 @@
   * docs: improve highlighting of code blocks (#8017)
   * remove leading slash from Sass file location (#8021)
   * [Docs] Fix asset link ref in step-by-step tutorial (#8026)
+  * Corrected command to modify PATH (#8029)
 
 ### Development Fixes
 
