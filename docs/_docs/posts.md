@@ -200,7 +200,7 @@ create a `_drafts` folder in your site's root and create your first draft:
 ```
 .
 ├── _drafts
-|   └── a-draft-post.md
+│   └── a-draft-post.md
 ...
 ```
 

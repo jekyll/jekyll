@@ -11,9 +11,9 @@ Jekyll sites often use this structure to keep assets organized:
 ```
 .
 ├── assets
-|   ├── css
-|   ├── images
-|   └── js
+│   ├── css
+│   ├── images
+│   └── js
 ...
 ```
 

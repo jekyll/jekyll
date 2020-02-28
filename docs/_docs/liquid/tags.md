@@ -18,12 +18,11 @@ Jekyll has built in support for syntax highlighting of over 100 languages
 thanks to [Rouge](http://rouge.jneen.net). Rouge is the default highlighter
 in Jekyll 3 and above.
 
-<div class="note warning">
-  <p>Using Pygments has been deprecated and is not supported in
-  Jekyll 4, the configuration setting <code>highlighter: pygments</code>
-  now automatically falls back to using <em>Rouge</em> which is written in Ruby
-  and 100% compatible with stylesheets for Pygments.</p>
-</div>
+{: .note .warning}
+Using Pygments has been deprecated and is not supported in
+Jekyll 4; the configuration setting <code>highlighter: pygments</code>
+now automatically falls back to using <em>Rouge</em> which is written in Ruby
+and 100% compatible with stylesheets for Pygments.
 
 To render a code block with syntax highlighting, surround your code as follows:
 
@@ -47,7 +46,7 @@ wiki](https://github.com/jayferd/rouge/wiki/List-of-supported-languages-and-lexe
   <p>If you are using a language that contains curly braces, you
     will likely need to place <code>{&#37; raw &#37;}</code> and
     <code>{&#37; endraw &#37;}</code> tags around your code.
-    Since {% include docs_version_badge.html version="4.0" %} you can add <code>render_with_liquid: false</code> in your front matter to disable Liquid entirely for a particular document.</p>
+    Since Jekyll {% include docs_version_badge.html version="4.0" %}, you can add <code>render_with_liquid: false</code> in your front matter to disable Liquid entirely for a particular document.</p>
 </div>
 
 ### Line numbers
@@ -84,8 +83,8 @@ the syntax highlighter styles into your `main.css`:
 
 ## Links
 
-{: .note }
-Since Jekyll {% include docs_version_badge.html version="v4.0"%} you don't need to prepend `link` and `post_url` tags with `site.baseurl`
+{: .note}
+Since Jekyll {% include docs_version_badge.html version="4.0"%}, you don't need to prepend `link` and `post_url` tags with `site.baseurl`.
 
 ### Linking to pages {#link}
 
