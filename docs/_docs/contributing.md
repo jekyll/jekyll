@@ -93,7 +93,7 @@ If you want to add your plugin to the [list of plugins](https://jekyllrb.com/doc
 
 ## Code Contributions
 
-Interesting in submitting a pull request? Awesome. Read on. There's a few common gotchas that we'd love to help you avoid.
+Interested in submitting a pull request? Awesome. Read on. There's a few common gotchas that we'd love to help you avoid.
 
 ### Tests and documentation
 
@@ -118,6 +118,8 @@ If your contribution changes any Jekyll behavior, make sure to update the docume
 * You can use the command `script/console` to start a REPL to explore the result of
 Jekyll's methods. It also provides you with helpful methods to quickly create a
 site or configuration. [Feel free to check it out!](https://github.com/jekyll/jekyll/blob/master/script/console)
+
+* Previously, we've used the WIP Probot app to help contributors determine whether their pull request is ready for review. Please use a [draft pull request](https://help.github.com/en/articles/about-pull-requests#draft-pull-requests) instead. When you're ready, [mark the pull request as ready for review](https://help.github.com/en/articles/changing-the-stage-of-a-pull-request)
 
 ## Running tests locally
 
@@ -149,6 +151,10 @@ script/cucumber features/blah.feature
 
 Both `script/test` and `script/cucumber` can be run without arguments to
 run its entire respective suite.
+
+## Visual Studio Code Development Container
+
+If you've got [Visual Studio Code](https://code.visualstudio.com/) with the [Remote Development Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) installed then simply opening this repository in Visual Studio Code and following the prompts to "Re-open In A Development Container" will get you setup and ready to go with a fresh environment with all the requirements installed.
 
 ## A thank you
 

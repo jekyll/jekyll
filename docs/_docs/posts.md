@@ -58,8 +58,6 @@ I hope you like it!
   </p>
 </div>
 
-
-
 <div class="note info">
   <h5>Be aware of character sets</h5>
   <p>
@@ -102,7 +100,7 @@ Creating an index of posts on another page should be easy thanks to
 simple example of how to create a list of links to your blog posts:
 
 {% raw %}
-```html
+```liquid
 <ul>
   {% for post in site.posts %}
     <li>
@@ -166,7 +164,7 @@ post. By default this is the first paragraph of content in the post, however it
 can be customized by setting a `excerpt_separator` variable in front matter or
 `_config.yml`.
 
-```yaml
+```markdown
 ---
 excerpt_separator: <!--more-->
 ---
@@ -199,9 +197,11 @@ Drafts are posts without a date in the filename. They're posts you're still
 working on and don't want to publish yet. To get up and running with drafts,
 create a `_drafts` folder in your site's root and create your first draft:
 
-```text
-|-- _drafts/
-|   |-- a-draft-post.md
+```
+.
+├── _drafts
+|   └── a-draft-post.md
+...
 ```
 
 To preview your site with drafts, run `jekyll serve` or `jekyll build`

@@ -30,7 +30,6 @@ module Jekyll
       # Returns nothing
       def initialize(obj)
         @obj = obj
-        @mutations = {} # only if mutable: true
       end
 
       # Access a method in the Drop or a field in the underlying hash data.
@@ -42,8 +41,8 @@ module Jekyll
       #
       # Returns the value for the given key, or nil if none exists
       def [](key)
-        if self.class.mutable? && @mutations.key?(key)
-          @mutations[key]
+        if self.class.mutable? && mutations.key?(key)
+          mutations[key]
         elsif self.class.invokable? key
           public_send key
         else
@@ -66,11 +65,12 @@ module Jekyll
       # and the key matches a method in which case it raises a
       # DropMutationException.
       def []=(key, val)
-        if respond_to?("#{key}=")
-          public_send("#{key}=", val)
+        setter = "#{key}="
+        if respond_to?(setter)
+          public_send(setter, val)
         elsif respond_to?(key.to_s)
           if self.class.mutable?
-            @mutations[key] = val
+            mutations[key] = val
           else
             raise Errors::DropMutationException, "Key #{key} cannot be set in the drop."
           end
@@ -100,7 +100,7 @@ module Jekyll
       # Returns true if the given key is present
       def key?(key)
         return false if key.nil?
-        return true if self.class.mutable? && @mutations.key?(key)
+        return true if self.class.mutable? && mutations.key?(key)
 
         respond_to?(key) || fallback_data.key?(key)
       end
@@ -113,7 +113,7 @@ module Jekyll
       # Returns an Array of unique keys for content for the Drop.
       def keys
         (content_methods |
-          @mutations.keys |
+          mutations.keys |
           fallback_data.keys).flatten
       end
 
@@ -203,6 +203,12 @@ module Jekyll
         raise KeyError, %(key not found: "#{key}") if default.nil? && block.nil?
         return yield(key) unless block.nil?
         return default unless default.nil?
+      end
+
+      private
+
+      def mutations
+        @mutations ||= {}
       end
     end
   end

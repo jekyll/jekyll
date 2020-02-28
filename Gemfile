@@ -7,7 +7,7 @@ gemspec :name => "jekyll"
 # refinements introduced in i18n-1.3.0
 gem "i18n", "~> 1.2.0" if RUBY_ENGINE == "jruby"
 
-gem "rake", "~> 12.0"
+gem "rake", "~> 13.0"
 
 group :development do
   gem "launchy", "~> 2.3"
@@ -23,14 +23,15 @@ group :test do
   gem "httpclient"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
+  gem "memory_profiler"
   gem "nokogiri", "~> 1.7"
   gem "rspec"
   gem "rspec-mocks"
-  # Temporary lock on RuboCop version for Windows since Pysch-3.1.0 is not available
-  # for use on Ruby 2.6-mingw32 platforms
-  gem "rubocop", Gem.win_platform? ? "~> 0.64.0" : "~> 0.66.0"
+  gem "rubocop", "~> 0.80.0"
+  gem "rubocop-performance"
   gem "test-dependency-theme", :path => File.expand_path("test/fixtures/test-dependency-theme", __dir__)
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)
+  gem "test-theme-skinny", :path => File.expand_path("test/fixtures/test-theme-skinny", __dir__)
   gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
 
   gem "jruby-openssl" if RUBY_ENGINE == "jruby"

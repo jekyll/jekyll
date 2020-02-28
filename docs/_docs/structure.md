@@ -4,7 +4,7 @@ permalink: /docs/structure/
 ---
 A basic Jekyll site usually looks something like this:
 
-```sh
+```
 .
 ├── _config.yml
 ├── _data

@@ -8,7 +8,6 @@ redirect_from:
 While Windows is not an officially-supported platform, it can be used to run Jekyll with the proper tweaks. This page aims to
 collect some of the general knowledge and lessons that have been unearthed by Windows users.
 
-
 ## Installing Jekyll
 
 ### Installation via RubyInstaller
@@ -23,7 +22,7 @@ We only cover RubyInstaller-2.4 and newer here, older versions need to
 1. Download and Install a **Ruby+Devkit** version from [RubyInstaller Downloads](https://rubyinstaller.org/downloads/).
    Use default options for installation.
 2. Run the `ridk install` step on the last stage of the installation wizard. This is needed for installing gems with native
-   extensions. You can find addtional information regarding this in the
+   extensions. You can find additional information regarding this in the
    [RubyInstaller Documentation](https://github.com/oneclick/rubyinstaller2#using-the-installer-on-a-target-system)
 3. Open a new command prompt window from the start menu, so that changes to the `PATH` environment variable becomes effective.
    Install Jekyll and Bundler via: `gem install jekyll bundler`
@@ -43,11 +42,13 @@ First let's make sure all our packages / repositories are up to date. Open a new
 ```sh
 bash
 ```
+
 Your Command Prompt instance should now be a Bash instance. Now we must update our repo lists and packages.
 
 ```sh
 sudo apt-get update -y && sudo apt-get upgrade -y
 ```
+
 Now we can install Ruby. To do this we will use a repository from [BrightBox](https://www.brightbox.com/docs/ruby/ubuntu/),
 which hosts optimized versions of Ruby for Ubuntu.
 
@@ -89,7 +90,6 @@ with the current date in the filename.
 </div>
 
 **Note:** Bash on Ubuntu on Windows is still under development, so you may run into issues.
-
 
 ## Encoding
 

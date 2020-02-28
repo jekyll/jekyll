@@ -138,14 +138,18 @@ class TestFilters < JekyllUnitTest
 
     should "sassify with simple string" do
       assert_equal(
-        "p {\n  color: #123456; }\n",
-        @filter.sassify("$blue:#123456\np\n  color: $blue")
+        "p { color: #123456; }\n",
+        @filter.sassify(<<~SASS)
+          $blue: #123456
+          p
+            color: $blue
+        SASS
       )
     end
 
     should "scssify with simple string" do
       assert_equal(
-        "p {\n  color: #123456; }\n",
+        "p { color: #123456; }\n",
         @filter.scssify("$blue:#123456; p{color: $blue}")
       )
     end
@@ -811,7 +815,7 @@ class TestFilters < JekyllUnitTest
               "The list of grouped items for '' is not an Array."
             )
             # adjust array.size to ignore symlinked page in Windows
-            qty = Utils::Platforms.really_windows? ? 15 : 16
+            qty = Utils::Platforms.really_windows? ? 16 : 18
             assert_equal qty, g["items"].size
           end
         end
@@ -826,6 +830,16 @@ class TestFilters < JekyllUnitTest
             "The size property for '#{g["name"]}' doesn't match the size of the Array."
           )
         end
+      end
+
+      should "should pass integers as is" do
+        grouping = @filter.group_by([
+          { "name" => "Allison", "year" => 2016 },
+          { "name" => "Amy", "year" => 2016 },
+          { "name" => "George", "year" => 2019 },
+        ], "year")
+        assert_equal "2016", grouping[0]["name"]
+        assert_equal "2019", grouping[1]["name"]
       end
     end
 
@@ -847,6 +861,17 @@ class TestFilters < JekyllUnitTest
       should "filter objects with null properties appropriately" do
         array = [{}, { "color" => nil }, { "color" => "" }, { "color" => "text" }]
         assert_equal 2, @filter.where(array, "color", nil).length
+      end
+
+      should "filter objects with numerical properties appropriately" do
+        array = [
+          { "value" => "555" },
+          { "value" => 555 },
+          { "value" => 24.625 },
+          { "value" => "24.625" },
+        ]
+        assert_equal 2, @filter.where(array, "value", 24.625).length
+        assert_equal 2, @filter.where(array, "value", 555).length
       end
 
       should "filter array properties appropriately" do
@@ -1032,7 +1057,7 @@ class TestFilters < JekyllUnitTest
         posts = @filter.site.site_payload["site"]["posts"]
         results = @filter.where_exp(posts, "post",
                                     "post.date > site.dont_show_posts_before")
-        assert_equal posts.select { |p| p.date > @sample_time }.count, results.length
+        assert_equal posts.count { |p| p.date > @sample_time }, results.length
       end
     end
 
@@ -1066,7 +1091,7 @@ class TestFilters < JekyllUnitTest
               "The list of grouped items for '' is not an Array."
             )
             # adjust array.size to ignore symlinked page in Windows
-            qty = Utils::Platforms.really_windows? ? 15 : 16
+            qty = Utils::Platforms.really_windows? ? 16 : 18
             assert_equal qty, g["items"].size
           end
         end

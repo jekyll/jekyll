@@ -16,7 +16,7 @@ For example, you might have a page on your site located at
 `/my_pages/about-me.html` and you want the output url to be `/about/`. In
 front matter of the page you would set:
 
-```
+```yaml
 ---
 permalink: /about/
 ---
@@ -34,17 +34,17 @@ You can use placeholders to your desired output. For example:
 permalink: /:categories/:year/:month/:day/:title:output_ext
 ```
 
-Note that pages and collections don't have time or categories, these aspects of
-the permalink style are ignored for the output.
+Note that pages and collections (excluding `posts` and `drafts`) don't have time
+and categories (for pages, the above `:title` is equivalent to `:basename`), these
+aspects of the permalink style are ignored for the output.
 
 For example, a permalink style of
-`/:categories/:year/:month/:day/:title:output_ext` for posts becomes
-`/:title.html` for pages and collections.
+`/:categories/:year/:month/:day/:title:output_ext` for the `posts` collection becomes
+`/:title.html` for pages and collections (excluding `posts` and `drafts`).
 
 ### Placeholders
 
 Here's the full list of placeholders available:
-
 
 <div class="mobile-side-scroller">
 <table>
@@ -110,6 +110,7 @@ Here's the full list of placeholders available:
     <tr>
       <td>
         <p><code>long_month</code></p>
+        <small>{% include docs_version_badge.html version="4.0" %}</small>
       </td>
       <td>
         <p>Full month name, e.g. “January”.</p>
@@ -148,6 +149,7 @@ Here's the full list of placeholders available:
     <tr>
       <td>
         <p><code>w_year</code></p>
+        <small>{% include docs_version_badge.html version="4.0" %}</small>
       </td>
       <td>
         <p>Week year which may differ from the month year for up to three days at the start of January and end of December</p>
@@ -156,6 +158,7 @@ Here's the full list of placeholders available:
     <tr>
       <td>
         <p><code>week</code></p>
+        <small>{% include docs_version_badge.html version="4.0" %}</small>
       </td>
       <td>
         <p>Week number of the current year, starting with the first week having a majority of its days in January. (01..53)</p>
@@ -164,6 +167,7 @@ Here's the full list of placeholders available:
     <tr>
       <td>
         <p><code>w_day</code></p>
+        <small>{% include docs_version_badge.html version="4.0" %}</small>
       </td>
       <td>
         <p>Day of the week, starting with Monday. (1..7)</p>
@@ -172,6 +176,7 @@ Here's the full list of placeholders available:
     <tr>
       <td>
         <p><code>short_day</code></p>
+        <small>{% include docs_version_badge.html version="4.0" %}</small>
       </td>
       <td>
         <p>Three-letter weekday abbreviation, e.g. “Sun”.</p>
@@ -180,6 +185,7 @@ Here's the full list of placeholders available:
     <tr>
       <td>
         <p><code>long_day</code></p>
+        <small>{% include docs_version_badge.html version="4.0" %}</small>
       </td>
       <td>
         <p>Weekday name, e.g. “Sunday”.</p>
@@ -296,9 +302,10 @@ For posts, Jekyll also provides the following built-in styles for convenience:
     <tr>
       <td>
         <p><code>weekdate</code></p>
+        <small>{% include docs_version_badge.html version="4.0" %}</small>
       </td>
       <td>
-        <p><code>/:categories/:year/W:week/:short_day/:title.html</code></p>
+        <p><code>/:categories/:year/W:week/:short_day/:title:output_ext</code></p>
       </td>
     </tr>
     <tr>
@@ -322,8 +329,8 @@ Rather than typing `permalink: /:categories/:year/:month/:day/:title/`, you can 
 
 ### Collections
 
-For collections, you have the option to override the global permalink in the
-collection configuration in `_config.yml`:
+For collections (including `posts` and `drafts`), you have the option to override
+the global permalink in the collection configuration in `_config.yml`:
 
 ```yaml
 collections:
@@ -356,7 +363,10 @@ Collections have the following placeholders available:
         <p><code>:path</code></p>
       </td>
       <td>
-        <p>Path to the document relative to the collection's directory.</p>
+        <p>
+          Path to the document relative to the collection's directory,
+          including base filename of the document.
+        </p>
       </td>
     </tr>
     <tr>
@@ -388,6 +398,57 @@ Collections have the following placeholders available:
       </td>
       <td>
         <p>Extension of the output file. (Included by default and usually unnecessary.)</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+### Pages
+
+For pages, you have to use front matter to override the global permalink,
+and if you set a permalink via front matter defaults in `_config.yml`,
+it will be ignored.
+
+Pages have the following placeholders available:
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>:path</code></p>
+      </td>
+      <td>
+        <p>
+          Path to the page relative to the site's source directory, excluding
+          base filename of the page.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:basename</code></p>
+      </td>
+      <td>
+        <p>The page's base filename</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:output_ext</code></p>
+      </td>
+      <td>
+        <p>
+          Extension of the output file. (Included by default and usually
+          unnecessary.)
+        </p>
       </td>
     </tr>
   </tbody>

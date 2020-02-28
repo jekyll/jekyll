@@ -16,6 +16,8 @@ plugins_dir         : _plugins
 layouts_dir         : _layouts
 data_dir            : _data
 includes_dir        : _includes
+sass:
+  sass_dir: _sass
 collections:
   posts:
     output          : true
@@ -77,7 +79,7 @@ redcarpet:
 kramdown:
   auto_ids          : true
   entity_output     : as_char
-  toc_levels        : 1..6
+  toc_levels        : [1, 2, 3, 4, 5, 6]
   smart_quotes      : lsquo,rsquo,ldquo,rdquo
   input             : GFM
   hard_wrap         : false

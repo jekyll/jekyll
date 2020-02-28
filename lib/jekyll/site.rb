@@ -145,9 +145,9 @@ module Jekyll
     #
     # Returns a Hash containing collection name-to-instance pairs.
     def collections
-      @collections ||= Hash[collection_names.map do |coll|
-        [coll, Jekyll::Collection.new(self, coll)]
-      end]
+      @collections ||= collection_names.each_with_object({}) do |name, hsh|
+        hsh[name] = Jekyll::Collection.new(self, name)
+      end
     end
 
     # The list of collection names.
@@ -326,15 +326,15 @@ module Jekyll
     #
     # Returns an Array of Documents which should be written
     def docs_to_write
-      @docs_to_write ||= documents.select(&:write?)
+      documents.select(&:write?)
     end
 
     # Get all the documents
     #
     # Returns an Array of all Documents
     def documents
-      @documents ||= collections.reduce(Set.new) do |docs, (_, collection)|
-        docs + collection.docs + collection.files
+      collections.each_with_object(Set.new) do |(_, collection), set|
+        set.merge(collection.docs).merge(collection.files)
       end.to_a
     end
 
@@ -469,8 +469,8 @@ module Jekyll
 
     # Disable Marshaling cache to disk in Safe Mode
     def configure_cache
-      Jekyll::Cache.base_dir = in_source_dir(config["cache_dir"], "Jekyll/Cache")
-      Jekyll::Cache.disable_disk_cache! if safe
+      Jekyll::Cache.cache_dir = in_source_dir(config["cache_dir"], "Jekyll/Cache")
+      Jekyll::Cache.disable_disk_cache! if safe || config["disable_disk_cache"]
     end
 
     def configure_plugins

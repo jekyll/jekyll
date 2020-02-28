@@ -69,30 +69,6 @@ class TestTags < JekyllUnitTest
     end
   end
 
-  context "highlight tag" do
-    setup do
-      create_post <<~CONTENT
-        ---
-        title: This is a test
-        ---
-
-        This is not yet highlighted
-
-        {% highlight html %}
-        <h1>{% unregistered_tag %}</h1>
-        {{ page | inspect }}
-        {% endhighlight %}
-
-        This should not be highlighted, right?
-      CONTENT
-    end
-
-    should "not parse Liquid constructs in the tag markup" do
-      assert_match "{% unregistered_tag %}", @result
-      assert_match "{{ page | inspect }}", @result
-    end
-  end
-
   context "highlight tag in unsafe mode" do
     should "set the no options with just a language name" do
       tag = highlight_block_with_opts("ruby ")
@@ -176,7 +152,7 @@ class TestTags < JekyllUnitTest
           %(<table class="rouge-table"><tbody>) +
             %(<tr><td class="gutter gl">) +
             %(<pre class="lineno">1\n</pre></td>) +
-            %(<td class="code"><pre>test</pre></td></tr>) +
+            %(<td class="code"><pre>test\n</pre></td></tr>) +
             %(</tbody></table>),
           @result
         )
@@ -299,7 +275,7 @@ class TestTags < JekyllUnitTest
         expected = <<~EOS
           <p>This is not yet highlighted</p>\n
           <figure class="highlight"><pre><code class="language-php" data-lang="php"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-          </pre></td><td class="code"><pre><span class="nx">test</span></pre></td></tr></tbody></table></code></pre></figure>\n
+          </pre></td><td class="code"><pre><span class="nx">test</span>\n</pre></td></tr></tbody></table></code></pre></figure>\n
           <p>This should not be highlighted, right?</p>
         EOS
         assert_match(expected, @result)
