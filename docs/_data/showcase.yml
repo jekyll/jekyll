@@ -132,10 +132,6 @@
   url: https://www.tryadhawk.com/
   categories:
     - agency
-- name: City of Boston Budget
-  url: https://budget.boston.gov/
-  categories:
-    - government
 - name: Lattice
   url: https://latticehq.com/
   categories:
@@ -179,10 +175,6 @@
   categories:
     - agency
     - government
-- name: Mapbox
-  url: https://mapbox.com/
-  categories:
-    - marketing-site
 - name: Development Seed
   url: https://developmentseed.org/
   categories:

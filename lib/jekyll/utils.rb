@@ -136,7 +136,7 @@ module Jekyll
     # Determines whether a given file has
     #
     # Returns true if the YAML front matter is present.
-    # rubocop: disable PredicateName
+    # rubocop: disable Naming/PredicateName
     def has_yaml_header?(file)
       File.open(file, "rb", &:readline).match? %r!\A---\s*\r?\n!
     rescue EOFError
@@ -151,7 +151,7 @@ module Jekyll
 
       content.include?("{%") || content.include?("{{")
     end
-    # rubocop: enable PredicateName
+    # rubocop: enable Naming/PredicateName
 
     # Slugify a filename or title.
     #

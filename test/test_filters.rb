@@ -831,6 +831,16 @@ class TestFilters < JekyllUnitTest
           )
         end
       end
+
+      should "should pass integers as is" do
+        grouping = @filter.group_by([
+          { "name" => "Allison", "year" => 2016 },
+          { "name" => "Amy", "year" => 2016 },
+          { "name" => "George", "year" => 2019 },
+        ], "year")
+        assert_equal "2016", grouping[0]["name"]
+        assert_equal "2019", grouping[1]["name"]
+      end
     end
 
     context "where filter" do
@@ -851,6 +861,17 @@ class TestFilters < JekyllUnitTest
       should "filter objects with null properties appropriately" do
         array = [{}, { "color" => nil }, { "color" => "" }, { "color" => "text" }]
         assert_equal 2, @filter.where(array, "color", nil).length
+      end
+
+      should "filter objects with numerical properties appropriately" do
+        array = [
+          { "value" => "555" },
+          { "value" => 555 },
+          { "value" => 24.625 },
+          { "value" => "24.625" },
+        ]
+        assert_equal 2, @filter.where(array, "value", 24.625).length
+        assert_equal 2, @filter.where(array, "value", 555).length
       end
 
       should "filter array properties appropriately" do
@@ -1036,7 +1057,7 @@ class TestFilters < JekyllUnitTest
         posts = @filter.site.site_payload["site"]["posts"]
         results = @filter.where_exp(posts, "post",
                                     "post.date > site.dont_show_posts_before")
-        assert_equal posts.select { |p| p.date > @sample_time }.count, results.length
+        assert_equal posts.count { |p| p.date > @sample_time }, results.length
       end
     end
 

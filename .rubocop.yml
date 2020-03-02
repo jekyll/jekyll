@@ -1,4 +1,5 @@
 ---
+inherit_from: .rubocop_todo.yml
 
 require:
   - rubocop-performance
@@ -20,13 +21,13 @@ AllCops:
     - script/**/*
     - vendor/**/*
     - tmp/**/*
-Layout/AlignHash:
+Layout/HashAlignment:
   EnforcedHashRocketStyle: table
 Layout/IndentationWidth:
   Severity: error
-Layout/IndentFirstArrayElement:
+Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
-Layout/IndentFirstHashElement:
+Layout/FirstHashElementIndentation:
   EnforcedStyle: consistent
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
@@ -64,7 +65,7 @@ Metrics/CyclomaticComplexity:
   Exclude:
     - lib/jekyll/utils.rb
     - lib/jekyll/commands/serve.rb
-Metrics/LineLength:
+Layout/LineLength:
   Exclude:
     - !ruby/regexp /features\/.*.rb/
     - Rakefile
@@ -78,6 +79,8 @@ Metrics/MethodLength:
   Severity: error
 Metrics/ModuleLength:
   Max: 240
+  Exclude:
+    - lib/jekyll/filters.rb
 Metrics/ParameterLists:
   Max: 4
 Metrics/PerceivedComplexity:
@@ -119,11 +122,18 @@ Style/DoubleNegation:
 Style/FormatStringToken:
   Exclude:
     - lib/jekyll/utils/ansi.rb
+    - lib/jekyll/liquid_renderer/table.rb
 Style/GuardClause:
   Enabled: false
+Style/HashEachMethods:
+  Enabled: true
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
   Severity: error
+Style/HashTransformKeys:
+  Enabled: false
+Style/HashTransformValues:
+  Enabled: true
 Style/MixinUsage:
   Exclude:
     - test/helper.rb
