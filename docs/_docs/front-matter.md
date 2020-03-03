@@ -32,15 +32,12 @@ relies on.
   </p>
 </div>
 
-<div class="note">
-  <h5>Front Matter Variables Are Optional</h5>
-  <p>
-    If you want to use <a href="{{ '/docs/variables/' | relative_url }}">Liquid tags and variables</a>
-    but don’t need anything in your front matter, just leave it empty! The set
-    of triple-dashed lines with nothing in between will still get Jekyll to
-    process your file. (This is useful for things like CSS and RSS feeds!)
-  </p>
-</div>
+{: .note}
+**Front Matter Variables Are Optional**{:.title}<br>
+If you want to use <a href="{{ '/docs/variables/' | relative_url }}">Liquid tags and variables</a>
+but don’t need anything in your front matter, just leave it empty! The set
+of triple-dashed lines with nothing in between will still get Jekyll to
+process your file. (This is useful for things like CSS and RSS feeds!)
 
 ## Predefined Global Variables
 
@@ -113,14 +110,11 @@ front matter of a page or post.
 </table>
 </div>
 
-<div class="note">
-  <h5>Render Posts Marked As Unpublished</h5>
-  <p>
-    To preview unpublished pages, run `jekyll serve` or `jekyll build`
-    with the `--unpublished` switch. Jekyll also has a handy <a href="{{ '/docs/posts/#drafts' | relative_url }}">drafts</a>
-    feature tailored specifically for blog posts.
-  </p>
-</div>
+{: .note}
+**Render Posts Marked As Unpublished**{:.title}<br>
+To preview unpublished pages, run `jekyll serve` or `jekyll build`
+with the `--unpublished` switch. Jekyll also has a handy <a href="{{ '/docs/posts/#drafts' | relative_url }}">drafts</a>
+feature tailored specifically for blog posts.
 
 ## Custom Variables
 
@@ -200,13 +194,9 @@ These are available out-of-the-box to be used in the front matter for a post.
 </table>
 </div>
 
-<div class="note">
-  <h5>Don't repeat yourself</h5>
-  <p>
-    If you don't want to repeat your frequently used front matter variables
-    over and over, define
-    <a href="{{ '/docs/configuration/front-matter-defaults/' | relative_url }}" title="Front Matter defaults">defaults</a>
-    for them and only override them where necessary (or not at all). This works
-    both for predefined and custom variables.
-  </p>
-</div>
+{: .note}
+**Don't repeat yourself**{:.title}<br>
+If you don't want to repeat your frequently used front matter variables over and
+over, define <a href="{{ '/docs/configuration/front-matter-defaults/' | relative_url }}" title="Front Matter defaults">defaults</a>
+for them and only override them where necessary (or not at all). This works
+both for predefined and custom variables.

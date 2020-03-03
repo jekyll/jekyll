@@ -52,17 +52,11 @@ You have 3 options for installing plugins:
   </p>
 </div>
 
-<div class="note">
-  <h5>
-    <code>_plugins</code>, <code>_config.yml</code> and <code>Gemfile</code>
-    can be used simultaneously
-  </h5>
-  <p>
-    You may use any of the aforementioned plugin options simultaneously in the
-    same site if you so choose. Use of one does not restrict the use of the
-    others.
-  </p>
-</div>
+
+{: .note}
+**<code>_plugins</code>, <code>_config.yml</code> and <code>Gemfile</code> can be used simultaneously**{:.title}<br>
+You may use any of the aforementioned plugin options simultaneously in the same
+site if you so choose. Use of one does not restrict the use of the others.
 
 ### The jekyll_plugins group
 

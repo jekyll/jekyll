@@ -43,15 +43,12 @@ gem "github-pages", group: :jekyll_plugins
 
 Be sure to run `bundle update` often.
 
-<div class="note">
-  <h5>GitHub Pages Documentation, Help, and Support</h5>
-  <p>
-    For more information about what you can do with GitHub Pages, as well as for
-    troubleshooting guides, you should check out
-    <a href="https://help.github.com/categories/github-pages-basics/">GitHub’s Pages Help section</a>.
-    If all else fails, you should contact <a href="https://github.com/contact">GitHub Support</a>.
-  </p>
-</div>
+{: .note}
+**GitHub Pages Documentation, Help, and Support**{:.title}<br>
+For more information about what you can do with GitHub Pages, as well as for
+troubleshooting guides, you should check out
+<a href="https://help.github.com/categories/github-pages-basics/">GitHub’s Pages Help section</a>.
+If all else fails, you should contact <a href="https://github.com/contact">GitHub Support</a>.
 
 ### Project Page URL Structure
 

@@ -14,12 +14,10 @@ guides to aid your upgrade:
 
 ## Minor updates
 
-<div class="note">
-  <h5>Stay Up to Date</h5>
-  <p>We recommend you update Jekyll as often as possible to benefit from
-  the latest bug fixes.
-  </p>
-</div>
+{: .note}
+**Stay Up to Date**{:.title}<br>
+We recommend you update Jekyll as often as possible to benefit from
+the latest bug fixes.
 
 If you followed our setup recommendations and installed [Bundler](http://bundler.io/), run `bundle update jekyll` or simply `bundle update` and all your gems will
 update to the latest versions.

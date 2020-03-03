@@ -31,14 +31,12 @@ default. To enable this, <code>output: true</code> must be specified on the
 collection, which requires defining the collection as a mapping. For more
 information, see the section <a href="#output">Output</a>.
 
-<div class="note">
-  <h5>Gather your collections {%- include docs_version_badge.html version="3.7.0" -%}</h5>
-
-  <p>You can optionally specify a directory to store all your collections in the same place with <code>collections_dir: my_collections</code>.</p>
-
-  <p>Then Jekyll will look in <code>my_collections/_books</code> for the <code>books</code> collection, and
-  in <code>my_collections/_recipes</code> for the <code>recipes</code> collection.</p>
-</div>
+{: .note}
+**Gather your collections**{:.title} {%- include docs_version_badge.html version="3.7.0" -%}<br>
+You can optionally specify a directory to store all your collections in the same place with <code>collections_dir: my_collections</code>.
+<br>
+Then Jekyll will look in <code>my_collections/_books</code> for the <code>books</code> collection, and
+in <code>my_collections/_recipes</code> for the <code>recipes</code> collection.
 
 <div class="note warning">
   <h5>Be sure to move drafts and posts into custom collections directory</h5>
