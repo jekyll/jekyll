@@ -1050,6 +1050,21 @@ p.note {
   font-weight: 400;
   font-size: .75em;
 
+  .title {
+    display: inline-block;
+    font-size: 1.33em;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 1.5;
+    margin-bottom: 3px;
+    padding-top: 0px;
+    top: 0px;
+  }
+
+  .version-badge {
+    vertical-align: baseline;
+  }
+
   &:after {
     line-height: 1.21;
   }
