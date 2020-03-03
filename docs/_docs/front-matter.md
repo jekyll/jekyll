@@ -22,15 +22,12 @@ then be available for you to access using Liquid tags both further down in the
 file and also in any layouts or includes that the page or post in question
 relies on.
 
-<div class="note warning">
-  <h5>UTF-8 Character Encoding Warning</h5>
-  <p>
-    If you use UTF-8 encoding, make sure that no <code>BOM</code> header
-    characters exist in your files or very, very bad things will happen to
-    Jekyll. This is especially relevant if you’re running
-    <a href="{{ '/docs/installation/windows/' | relative_url }}">Jekyll on Windows</a>.
-  </p>
-</div>
+{: .note .warning}
+**UTF-8 Character Encoding Warning**{:.title}<br>
+If you use UTF-8 encoding, make sure that no <code>BOM</code> header
+characters exist in your files or very, very bad things will happen to
+Jekyll. This is especially relevant if you’re running
+<a href="{{ '/docs/installation/windows/' | relative_url }}">Jekyll on Windows</a>.
 
 {: .note}
 **Front Matter Variables Are Optional**{:.title}<br>

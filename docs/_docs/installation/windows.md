@@ -123,17 +123,13 @@ sites *will* have to update their `Gemfile` (and installed gems) to enable devel
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 ```
 
-<div class="note warning">
-  <h5>TZInfo 2.0 incompatibility</h5>
-  <p>
-    Version 2.0 of the TZInfo library has introduced a change in how timezone offsets are calculated.
-    This will result in incorrect date and time for your posts when the site is built with Jekyll 3.x on Windows.
-  </p>
-  <p>
-    We therefore recommend that you lock the Timezone library to version 1.2 and above by listing
-    <code>gem 'tzinfo', '~> 1.2'</code> in your <code>Gemfile</code>.
-  </p>
-</div>
+{: .note .warning}
+**TZInfo 2.0 incompatibility**{:.title}<br>
+Version 2.0 of the TZInfo library has introduced a change in how timezone offsets are calculated.
+This will result in incorrect date and time for your posts when the site is built with Jekyll 3.x on Windows.
+<br>
+We therefore recommend that you lock the Timezone library to version 1.2 and above by listing
+<code>gem 'tzinfo', '~> 1.2'</code> in your <code>Gemfile</code>.
 
 ## Auto Regeneration
 

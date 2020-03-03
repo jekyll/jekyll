@@ -44,13 +44,10 @@ If a site has 12 posts and specifies `paginate: 5`, Jekyll will write `blog/inde
 with the first 5 posts, `blog/page2/index.html` with the next 5 posts and
 `blog/page3/index.html` with the last 2 posts into the destination directory.
 
-<div class="note warning">
-  <h5>Don't set a permalink</h5>
-  <p>
-    Setting a permalink in the front matter of your blog page will cause
-    pagination to break. Just omit the permalink.
-  </p>
-</div>
+{: .note .warning}
+**Don't set a permalink**{:.title}<br>
+Setting a permalink in the front matter of your blog page will cause
+pagination to break. Just omit the permalink.
 
 {: .note .info}
 **Pagination for categories, tags and collections**{:.title}<br>
@@ -121,14 +118,11 @@ title: My Blog
 ```
 {% endraw %}
 
-<div class="note warning">
-  <h5>Beware the page one edge-case</h5>
-  <p>
-    Jekyll does not generate a ‘page1’ folder, so the above code will not work
-    when a <code>/page1</code> link is produced. See below for a way to handle
-    this if it’s a problem for you.
-  </p>
-</div>
+{: .note .warning}
+**Beware the page one edge case**{:.title}<br>
+Jekyll does not generate a ‘page1’ folder, so the above code will not work
+when a <code>/page1</code> link is produced. See below for a way to handle
+this if it’s a problem for you.
 
 The following HTML snippet should handle page one, and render a list of each
 page with links to all but the current page.

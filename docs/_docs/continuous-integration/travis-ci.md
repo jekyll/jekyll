@@ -183,12 +183,10 @@ prefixed, exemplified above with the `/pages-(.*)/` regular expression.
 The `branches` directive is completely optional. Travis will build from every
 push to any branch of your repo if leave it out.
 
-<div class="note warning">
-  <h5>Be sure to exclude <code>vendor</code> from your
-   <code>_config.yml</code></h5>
-  <p>Travis bundles all gems in the <code>vendor</code> directory on its build
-   servers, which Jekyll will mistakenly read and explode on.</p>
-</div>
+{: .note .warning}
+**Be sure to exclude <code>vendor</code> from your <code>_config.yml</code>**{:.title}<br>
+Travis bundles all gems in the <code>vendor</code> directory on its build
+servers, which Jekyll will mistakenly read and explode on.
 
 ```yaml
 exclude: [vendor]

@@ -50,8 +50,8 @@ kramdown:
 
 {: .note .warning}
 **There are two unsupported kramdown options**{:.title}<br>
-Please note that both `remove_block_html_tags` and
-`remove_span_html_tags` are currently unsupported in Jekyll due
+Please note that both <code>remove_block_html_tags</code> and
+<code>remove_span_html_tags</code> are currently unsupported in Jekyll due
 to the fact that they are not included within the kramdown HTML converter.
 
 For more details about these options have a look at the [Kramdown configuration documentation](https://kramdown.gettalong.org/options.html).

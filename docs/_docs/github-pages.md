@@ -112,15 +112,12 @@ Please refer to GitHub official documentation on
 [user, organization and project pages](https://help.github.com/articles/user-organization-and-project-pages/)
 to see more detailed examples.
 
-<div class="note warning">
-  <h5>Source files must be in the root directory</h5>
-  <p>
-    GitHub Pages <a href="https://help.github.com/en/github/working-with-github-pages/troubleshooting-jekyll-build-errors-for-github-pages-sites">overrides</a>
-    the <a href="{{ '/docs/configuration/options/' | relative_url }}">“Site Source”</a>
-    configuration value, so if you locate your files anywhere other than the
-    root directory, your site may not build correctly.
-  </p>
-</div>
+{: .note .warning}
+**Source files must be in the root directory**{:.title}<br>
+GitHub Pages <a href="https://help.github.com/en/github/working-with-github-pages/troubleshooting-jekyll-build-errors-for-github-pages-sites">overrides</a>
+the <a href="{{ '/docs/configuration/options/' | relative_url }}">"Site Source"</a>
+configuration value, so if you locate your files anywhere other than the
+root directory, your site may not build correctly.
 
 {: .note .info}
 **Installing the <code>github-pages</code> gem on Windows**{:.title}<br>
