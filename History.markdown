@@ -81,6 +81,7 @@
   * Update unit tests for Kramdown-based converter (#8014)
   * Add Visual Studio Code Development Container (#8016)
   * Configure kramdown toc_levels as array by default (#8015)
+  * Simplify Jekyll::Hooks.trigger logic (#8044)
 
 ### Site Enhancements
 
