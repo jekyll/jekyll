@@ -345,7 +345,7 @@ Rather than typing `permalink: /:categories/:year/:month/:day/:title/`, you can 
 {: .note .info}
 **Specifying permalinks through the front matter**{:.title}<br>
 Built-in permalink styles are not recognized in front matter.
-As a result, <code>permalink: pretty</code> will not work.
+As a result, `permalink: pretty` will not work.
 
 ### Collections
 

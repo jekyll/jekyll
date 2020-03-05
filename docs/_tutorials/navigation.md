@@ -321,13 +321,13 @@ toc2:
 In this example, `if site.data.samplelist.toc2[0]` is used to ensure that the YAML level actually contains items. If there isn't anything at the `[0]` position, we can skip looking in this level.
 
 {: .note}
-**ProTip™: Line up <code>for</code> loops and <code>if</code> statements**{:.title}<br>
+**ProTip™: Line up `for` loops and `if` statements**{:.title}<br>
 To keep the code clear, line up the beginning and ending Liquid tags, such as
-the <code>for</code> loops and <code>if</code> statements. This way you know
+the `for` loops and `if` statements. This way you know
 when the open tags have been closed. If the code will appear in a Markdown page,
 keep the opening and closing HTML tags flush against the left edge so that the
 Markdown filter won't treat the content as a code sample. If necessary, you can
-wrap the entire code sample in a <code>div</code> tag to ensure the code has HTML
+wrap the entire code sample in a `<div>` tag to ensure the code has HTML
 tags that bookend the code.
 
 ## Scenario 5: Using a page variable to select the YAML list

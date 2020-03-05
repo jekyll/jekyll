@@ -129,7 +129,7 @@ Version 2.0 of the TZInfo library has introduced a change in how timezone offset
 This will result in incorrect date and time for your posts when the site is built with Jekyll 3.x on Windows.
 <br>
 We therefore recommend that you lock the Timezone library to version 1.2 and above by listing
-<code>gem 'tzinfo', '~> 1.2'</code> in your <code>Gemfile</code>.
+`gem 'tzinfo', '~> 1.2'` in your `Gemfile`.
 
 ## Auto Regeneration
 

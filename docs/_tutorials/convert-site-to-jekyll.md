@@ -84,7 +84,7 @@ jekyll serve
 ```
 
 {: .note .info}
-If you have a Gemfile, [use Bundler](/docs/ruby-101/#bundler) by typing `bundle exec jekyll serve` instead.
+If you have a `Gemfile`, [use Bundler](/docs/ruby-101/#bundler) by typing `bundle exec jekyll serve` instead.
 
 When you serve the site, you get a preview URL such as `http://127.0.0.1:4000/` (which is the same as `http://localhost:4000/`). The site's files are built into the `_site` folder by default.
 

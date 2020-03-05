@@ -23,12 +23,12 @@ The following is a reference of the available data.
 {: .note}
 **ProTip™: Use Custom Front Matter**{:.title}<br>
 Any custom front matter that you specify will be available under
-<code>page</code>. For example, if you specify <code>custom_css: true</code>
-in a page’s front matter, that value will be available as <code>page.custom_css</code>.
+`page`. For example, if you specify `custom_css: true`
+in a page’s front matter, that value will be available as `page.custom_css`.
 <br>
-If you specify front matter in a layout, access that via <code>layout</code>.
-For example, if you specify <code>class: full_page</code> in a layout’s front matter,
-that value will be available as <code>layout.class</code> in the layout and its parents.
+If you specify front matter in a layout, access that via `layout`.
+For example, if you specify `class: full_page` in a layout’s front matter,
+that value will be available as `layout.class` in the layout and its parents.
 
 ## Paginator
 
@@ -37,4 +37,4 @@ that value will be available as <code>layout.class</code> in the layout and its 
 {: .note .info}
 **Paginator variable availability**{:.title}<br>
 These are only available in index files, however they can be located in a subdirectory,
-such as <code>/blog/index.html</code>.
+such as `/blog/index.html`.

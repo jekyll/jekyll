@@ -7,7 +7,7 @@ In this final step we'll get the site ready for production.
 
 ## Gemfile
 
-It's good practice to have a [Gemfile](/docs/ruby-101/#gemfile) for your site.
+It's good practice to have a [`Gemfile`](/docs/ruby-101/#gemfile) for your site.
 This ensures the version of Jekyll and other gems remains consistent across
 different environments.
 

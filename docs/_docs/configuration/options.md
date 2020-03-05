@@ -57,12 +57,12 @@ class="flag">flags</code> (specified on the command-line) that control them.
 
 {: .note .warning}
 **Destination folders are cleaned on site builds**{:.title}<br>
-The contents of <code>&lt;destination&gt;</code> are automatically
+The contents of `<destination>` are automatically
 cleaned, by default, when the site is built. Files or folders that are not
 created by your site will be removed. Some files could be retained
-by specifying them within the <code>&lt;keep_files&gt;</code> configuration directive.
+by specifying them within the `<keep_files>` configuration directive.
 <br>
-Do not use an important location for <code>&lt;destination&gt;</code>; instead, use it as
+Do not use an important location for `<destination>`; instead, use it as
 a staging area and copy files from there to your web server.
 
 ### Build Command Options

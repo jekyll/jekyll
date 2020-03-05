@@ -21,7 +21,7 @@ Liquid::Template.register_filter(Jekyll::AssetFilter)
 
 {: .note}
 **ProTip™: Access the site object using Liquid**{:.title}<br>
-Jekyll lets you access the <code>site</code> object through the
-<code>@context.registers</code> feature of Liquid at <code>@context.registers[:site]</code>.
-For example, you can access the global configuration file <code>_config.yml</code> using
-<code>@context.registers[:site].config</code>.
+Jekyll lets you access the `site` object through the
+`@context.registers` feature of Liquid at `@context.registers[:site]`.
+For example, you can access the global configuration file `_config.yml` using
+`@context.registers[:site].config`.

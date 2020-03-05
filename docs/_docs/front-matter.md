@@ -24,7 +24,7 @@ relies on.
 
 {: .note .warning}
 **UTF-8 Character Encoding Warning**{:.title}<br>
-If you use UTF-8 encoding, make sure that no <code>BOM</code> header
+If you use UTF-8 encoding, make sure that no `BOM` header
 characters exist in your files or very, very bad things will happen to
 Jekyll. This is especially relevant if you’re running
 [Jekyll on Windows]({{ '/docs/installation/windows/' | relative_url }}).

@@ -55,8 +55,8 @@ The Sass converter will default the `sass_dir` configuration option to
 [example-sass]: https://github.com/jekyll/jekyll-sass-converter/tree/master/docs
 
 {: .note .info}
-**The <code>sass_dir</code> is only used by Sass**{:.title}<br>
-Note that the <code>sass_dir</code> becomes the load path for Sass imports,
+**The `sass_dir` is only used by Sass**{:.title}<br>
+Note that the `sass_dir` becomes the load path for Sass imports,
 nothing more. This means that Jekyll does not know about these files
 directly. Any files here should not contain the empty front matter as
 described above. If they do, they'll not be transformed as described above. This

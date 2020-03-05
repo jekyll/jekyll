@@ -13,12 +13,12 @@ from this as needed.
 
 {: .note}
 **Layouts Directory**{:.title}<br>
-Jekyll looks for the <code>_layouts</code> directory either at the root of
-your site's <code>source</code> or at the root of your theme.
+Jekyll looks for the `_layouts` directory either at the root of
+your site's `source` or at the root of your theme.
 <br>
 While you can configure the directory name in which your layouts can reside by
-setting the <code>layouts_dir</code> key in your config file, the directory
-itself should be located at the root of your site's <code>source</code> directory.
+setting the `layouts_dir` key in your config file, the directory
+itself should be located at the root of your site's `source` directory.
 
 ## Usage
 

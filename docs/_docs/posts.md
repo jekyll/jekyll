@@ -51,18 +51,17 @@ I hope you like it!
 
 {: .note}
 **ProTip™: Link to other posts**{:.title}<br>
-Use the [<code>post_url</code>](/docs/liquid/tags/#linking-to-posts)
+Use the [`post_url`](/docs/liquid/tags/#linking-to-posts)
 tag to link to other posts without having to worry about the URLs
 breaking when the site permalink style changes.
 
 {: .note .info}
 **Be aware of character sets**{:.title}<br>
 Content processors can modify certain characters to make them look nicer.
-For example, the <code>smart</code> extension in Redcarpet converts standard,
+For example, the `smart` extension in Redcarpet converts standard,
 ASCII quotation characters to curly, Unicode ones. In order for the browser
 to display those characters properly, define the charset meta value by
-including <code>&lt;meta charset=&quot;utf-8&quot;&gt;</code> in the
-<code>&lt;head&gt;</code> of your layout.
+including `<meta charset="utf-8">` in the `<head>` of your layout.
 
 ## Including images and resources
 

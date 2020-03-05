@@ -32,10 +32,10 @@ A basic Jekyll site usually looks something like this:
 {: .note}
 **Directory structure of Jekyll sites using gem-based themes**{:.title}<br>
 Since version {% include docs_version_badge.html version="3.2"%}, a new Jekyll
-project bootstrapped with <code>jekyll new</code> uses
+project bootstrapped with `jekyll new` uses
 [gem-based themes](/docs/themes/) to define the look of the site.
 This results in a lighter default directory structure:
-<code>_layouts</code>, <code>_includes</code> and <code>_sass</code> are stored
+`_layouts`, `_includes` and `_sass` are stored
 in the theme-gem, by default.
 <br>
 [minima](https://github.com/jekyll/minima) is the current default theme,

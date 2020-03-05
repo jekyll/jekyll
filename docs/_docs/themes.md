@@ -158,7 +158,7 @@ plugins:
   - jekyll-seo-tag
 ```
 
-Or you could list them explicitly as Jekyll plugins in your Gemfile, and not update `_config.yml`, like this:
+Or you could list them explicitly as Jekyll plugins in your `Gemfile`, and not update `_config.yml`, like this:
 
 ```ruby
 # ./Gemfile

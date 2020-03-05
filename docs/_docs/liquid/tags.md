@@ -20,7 +20,7 @@ in Jekyll 3 and above.
 
 {: .note .warning}
 Using Pygments has been deprecated and is not supported in
-Jekyll 4; the configuration setting <code>highlighter: pygments</code>
+Jekyll 4; the configuration setting `highlighter: pygments`
 now automatically falls back to using <em>Rouge</em> which is written in Ruby
 and 100% compatible with stylesheets for Pygments.
 
@@ -48,7 +48,7 @@ will likely need to place <code>{&#37; raw &#37;}</code> and
 <code>{&#37; endraw &#37;}</code> tags around your code.
 <br>
 Since Jekyll {% include docs_version_badge.html version="4.0" %},
-you can add <code>render_with_liquid: false</code> in your front matter
+you can add `render_with_liquid: false` in your front matter
 to disable Liquid entirely for a particular document.
 
 ### Line numbers

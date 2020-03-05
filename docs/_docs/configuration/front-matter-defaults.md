@@ -24,8 +24,8 @@ defaults:
 
 {: .note .info}
 **Stop and rerun the `jekyll serve` command.**{:.title}<br>
-The <code>_config.yml</code> master configuration file contains global configurations
-and variable definitions that are read once at execution time. Changes made to <code>_config.yml</code>
+The `_config.yml` master configuration file contains global configurations
+and variable definitions that are read once at execution time. Changes made to `_config.yml`
 during automatic regeneration are not loaded until the next execution.
 <br>
 Note [Data Files]({{ '/docs/datafiles' | relative_url }}) are included and reloaded during automatic regeneration.

@@ -27,23 +27,23 @@ collections:
 
 {: .note .info}
 When defining a collection as a sequence, its pages will not be rendered by
-default. To enable this, <code>output: true</code> must be specified on the
+default. To enable this, `output: true` must be specified on the
 collection, which requires defining the collection as a mapping. For more
 information, see the section [Output](#output).
 
 {: .note}
 **Gather your collections**{:.title} {%- include docs_version_badge.html version="3.7.0" -%}<br>
-You can optionally specify a directory to store all your collections in the same place with <code>collections_dir: my_collections</code>.
+You can optionally specify a directory to store all your collections in the same place with `collections_dir: my_collections`.
 <br>
-Then Jekyll will look in <code>my_collections/_books</code> for the <code>books</code> collection, and
-in <code>my_collections/_recipes</code> for the <code>recipes</code> collection.
+Then Jekyll will look in `my_collections/_books` for the `books` collection, and
+in `my_collections/_recipes` for the `recipes` collection.
 
 {: .note .warning}
 **Be sure to move drafts and posts into custom collections directory**{:.title}<br>
 If you specify a directory to store all your collections in the same place with
-<code>collections_dir: my_collections</code>, then you will need to move your
-<code>_drafts</code> and <code>_posts</code> directory to <code>my_collections/_drafts</code>
-and <code>my_collections/_posts</code>.
+`collections_dir: my_collections`, then you will need to move your
+`_drafts` and `_posts` directory to `my_collections/_drafts`
+and `my_collections/_posts`.
 <br>
 Note that the name of your collections directory cannot start with an underscore (`_`).
 
@@ -80,7 +80,7 @@ Jane has worked on Jekyll for the past *five years*.
 {: .note .info}
 **Be sure to name your directories correctly**{:.title}<br>
 The folder must be named identically to the collection you defined in
-your <code>_config.yml</code> file, with the addition of the preceding <code>_</code> character.
+your `_config.yml` file, with the addition of the preceding `_` character.
 
 ## Output
 
@@ -264,24 +264,24 @@ you specified in your `_config.yml` (if present) and the following information:
 {: .note .info}
 **A Hard-Coded Collection**{:.title}<br>
 In addition to any collections you create yourself, the
-<code>posts</code> collection is hard-coded into Jekyll. It exists whether
-you have a <code>_posts</code> directory or not. This is something to note
-when iterating through <code>site.collections</code> as you may need to
+`posts` collection is hard-coded into Jekyll. It exists whether
+you have a `_posts` directory or not. This is something to note
+when iterating through `site.collections` as you may need to
 filter it out.
 <br>
 You may wish to use filters to find your collection:
-<code>{% raw %}{{ site.collections | where: "label", "myCollection" | first }}{% endraw %}</code>
+`{% raw %}{{ site.collections | where: "label", "myCollection" | first }}{% endraw %}`
 
 {: .note .info}
 **Collections and Time**{:.title}<br>
-Except for documents in hard-coded default collection <code>posts</code>, all documents in collections
+Except for documents in hard-coded default collection `posts`, all documents in collections
 you create, are accessible via Liquid irrespective of their assigned date, if any, and therefore renderable.<br>
 Documents are attempted to be written to disk only if the concerned collection
-metadata has <code>output: true</code>. Additionally, future-dated documents are only written if
-<code>site.future</code> <em>is also true</em>.
+metadata has `output: true`. Additionally, future-dated documents are only written if
+`site.future` <em>is also true</em>.
 <br>
 More fine-grained control over documents being written to disk can be exercised by setting
-<code>published: false</code> (<em><code>true</code> by default</em>) in the document's front matter.
+`published: false` (<em>`true` by default</em>) in the document's front matter.
 
 ### Documents
 

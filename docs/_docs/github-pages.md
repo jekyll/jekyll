@@ -90,7 +90,7 @@ publish the GitHub Pages site, so make sure your Jekyll site is stored there.
 {: .note .info}
 **Custom domains do not affect repository names**{:.title}<br>
 GitHub Pages are initially configured to live under the
-<code>username.github.io</code> subdomain, which is why repositories must
+`username.github.io` subdomain, which is why repositories must
 be named this way <strong>even if a custom domain is being used</strong>.
 
 ### Project Pages
@@ -120,8 +120,8 @@ configuration value, so if you locate your files anywhere other than the
 root directory, your site may not build correctly.
 
 {: .note .info}
-**Installing the <code>github-pages</code> gem on Windows**{:.title}<br>
+**Installing the `github-pages` gem on Windows**{:.title}<br>
 While Windows is not officially supported, it is possible
-to install the <code>github-pages</code> gem on Windows.
+to install the `github-pages` gem on Windows.
 Special instructions can be found on our
 [Windows-specific docs page]({{ '/docs/installation/windows/' | relative_url }}).

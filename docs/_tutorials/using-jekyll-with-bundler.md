@@ -38,7 +38,7 @@ installed. You can find the installation instructions on their websites.
 
 The first thing to do is create a new directory for your project and run
 `bundle init`. This creates a new Bundler project (by creating an empty
-Gemfile).
+`Gemfile`).
 
 ```sh
 mkdir my-jekyll-website
@@ -64,12 +64,12 @@ bundle config set --local path 'vendor/bundle'
 {: .note .info}
 **Bundler Config is Persistent**{:.title}<br>
 This step is only required once per project. Bundler saves your config in
-<code>./.bundle/config</code>, so future gems will be installed to the same location.
+`./.bundle/config`, so future gems will be installed to the same location.
 
 ## Add Jekyll
 
 Now, we're going to use Bundler to add Jekyll as a dependency of our new
-project. This command will add the Jekyll gem to our Gemfile and install it to
+project. This command will add the Jekyll gem to our `Gemfile` and install it to
 the `./vendor/bundle/` folder (or your default gem installation directory if you
 didn't set a custom path).
 
@@ -82,7 +82,7 @@ bundle add jekyll
 Now that Jekyll is installed, we can use it to create the scaffolding for our
 site. We need the `--force` parameter because our folder isn't empty - it
 already has some Bundler files in it. We run the `bundle install` separately
-because Jekyll gets confused if the Gemfile already exists.
+because Jekyll gets confused if the `Gemfile` already exists.
 
 ```sh
 bundle exec jekyll new --force --skip-bundle .

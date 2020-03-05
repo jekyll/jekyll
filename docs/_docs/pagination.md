@@ -8,16 +8,16 @@ break the main listing of posts up into smaller lists and display them over
 multiple pages. Jekyll offers a pagination plugin, so you can automatically
 generate the appropriate files and folders you need for paginated listings.
 
-For Jekyll 3, include the `jekyll-paginate` plugin in your Gemfile and in
+For Jekyll 3, include the `jekyll-paginate` plugin in your `Gemfile` and in
 your `_config.yml` under `plugins`. For Jekyll 2, this is standard.
 
 {: .note .info}
 **Pagination only works within HTML files**{:.title}<br>
 Pagination does not work from within Markdown files from
 your Jekyll site. Pagination works when called from within the HTML
-file, named <code>index.html</code>, which optionally may reside in and
+file, named `index.html`, which optionally may reside in and
 produce pagination from within a subdirectory, via the
-<code>paginate_path</code> configuration value.
+`paginate_path` configuration value.
 
 ## Enable pagination
 
@@ -65,8 +65,8 @@ attributes:
 
 {: .note .info}
 **Pagination does not support tags or categories**{:.title}<br>
-Pagination pages through every post in the <code>posts</code>
-variable unless a post has <code>hidden: true</code> in its front matter.
+Pagination pages through every post in the `posts`
+variable unless a post has `hidden: true` in its front matter.
 It does not currently allow paging over groups of posts linked
 by a common tag or category. It cannot include any collection of
 documents because it is restricted to posts.
@@ -120,7 +120,7 @@ title: My Blog
 {: .note .warning}
 **Beware the page one edge case**{:.title}<br>
 Jekyll does not generate a ‘page1’ folder, so the above code will not work
-when a <code>/page1</code> link is produced. See below for a way to handle
+when a `/page1` link is produced. See below for a way to handle
 this if it’s a problem for you.
 
 The following HTML snippet should handle page one, and render a list of each
