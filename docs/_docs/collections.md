@@ -278,10 +278,10 @@ Except for documents in hard-coded default collection `posts`, all documents in 
 you create, are accessible via Liquid irrespective of their assigned date, if any, and therefore renderable.<br>
 Documents are attempted to be written to disk only if the concerned collection
 metadata has `output: true`. Additionally, future-dated documents are only written if
-`site.future` <em>is also true</em>.
+`site.future` *is also true*.
 <br>
 More fine-grained control over documents being written to disk can be exercised by setting
-`published: false` (<em>`true` by default</em>) in the document's front matter.
+`published: false` (*`true` by default*) in the document's front matter.
 
 ### Documents
 

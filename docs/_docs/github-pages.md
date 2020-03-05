@@ -91,7 +91,7 @@ publish the GitHub Pages site, so make sure your Jekyll site is stored there.
 **Custom domains do not affect repository names**{:.title}<br>
 GitHub Pages are initially configured to live under the
 `username.github.io` subdomain, which is why repositories must
-be named this way <strong>even if a custom domain is being used</strong>.
+be named this way **even if a custom domain is being used**.
 
 ### Project Pages
 

@@ -19,10 +19,10 @@ thanks to [Rouge](http://rouge.jneen.net). Rouge is the default highlighter
 in Jekyll 3 and above.
 
 {: .note .warning}
-Using Pygments has been deprecated and is not supported in
-Jekyll 4; the configuration setting `highlighter: pygments`
-now automatically falls back to using <em>Rouge</em> which is written in Ruby
-and 100% compatible with stylesheets for Pygments.
+Using Pygments has been deprecated and is not supported in Jekyll 4; the
+configuration setting `highlighter: pygments` now automatically falls back to
+using [Rouge](http://rouge.jneen.net/) which is written in Ruby and 100%
+compatible with stylesheets for Pygments.
 
 To render a code block with syntax highlighting, surround your code as follows:
 

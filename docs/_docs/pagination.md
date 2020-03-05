@@ -54,7 +54,7 @@ pagination to break. Just omit the permalink.
 The more recent [jekyll-paginate-v2](https://github.com/sverrirs/jekyll-paginate-v2)
 plugin supports more features. See the
 [pagination examples](https://github.com/sverrirs/jekyll-paginate-v2/tree/master/examples)
-in the repository. <strong>This plugin is not supported by GitHub Pages</strong>.
+in the repository. **This plugin is not supported by GitHub Pages**.
 
 ## Liquid Attributes Available
 
