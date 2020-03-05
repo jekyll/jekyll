@@ -130,7 +130,7 @@ The above workflow can be explained as the following:
 - We set a reference to a secret **environment variable** for the action to use. The `JEKYLL_PAT`
   is a *Personal Access Token* and is detailed in the next section.
 
-Instead of using the **on.push** condition, you could trigger your build on a **schedule** by 
+Instead of using the **on.push** condition, you could trigger your build on a **schedule** by
 using the [on.schedule] parameter. For example, here we build daily at midnight by specifying
 **cron** syntax, which can be tested at the [crontab guru] site.
 

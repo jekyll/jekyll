@@ -194,7 +194,7 @@ An overview of what each of these does:
       </td>
       <td>
         <p>
-          Except for the special cases listed above, every other directory and 
+          Except for the special cases listed above, every other directory and
           file—such as <code>css</code> and <code>images</code> folders,
           <code>favicon.ico</code> files, and so forth—will be copied verbatim
           to the generated site. There are plenty of <a href="/showcase/">sites

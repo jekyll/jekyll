@@ -7,7 +7,7 @@ Jekyll is written in Ruby. If you're new to Ruby, this page helps you learn some
 
 ## Gems
 
-Gems are code you can include in Ruby projects. Gems package specific functionality. You can share gems across multiple projects or with other people. 
+Gems are code you can include in Ruby projects. Gems package specific functionality. You can share gems across multiple projects or with other people.
 Gems can perform actions like:
 
 * Converting a Ruby object to JSON
@@ -21,7 +21,7 @@ Jekyll is a gem. Many Jekyll [plugins]({{ '/docs/plugins/' | relative_url }}) ar
 
 ## Gemfile
 
-A `Gemfile` is a list of gems used by your site. Every Jekyll site has a Gemfile in the main folder. 
+A `Gemfile` is a list of gems used by your site. Every Jekyll site has a Gemfile in the main folder.
 
 For a simple Jekyll site it might look something like this:
 
@@ -38,11 +38,11 @@ end
 
 ## Bundler
 
-[Bundler](https://rubygems.org/gems/bundler) is a gem that installs all gems in your `Gemfile`. 
+[Bundler](https://rubygems.org/gems/bundler) is a gem that installs all gems in your `Gemfile`.
 
 While you don't have to use `Gemfile` and `bundler`, it is highly recommended as it ensures you're running the same version of Jekyll and its plugins across different environments.
 
-Install Bundler using `gem install bundler`. You only need to install it once, not every time you create a new Jekyll project. 
+Install Bundler using `gem install bundler`. You only need to install it once, not every time you create a new Jekyll project.
 
 To install gems in your Gemfile using Bundler, run the following in the directory that has the Gemfile:
 

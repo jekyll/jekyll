@@ -28,9 +28,9 @@ class="flag">flags</code> (specified on the command-line) that control them.
             {% if setting.version-badge %}
               <span class="version-badge" title="Introduced in v{{ setting.version-badge }}">{{ setting.version-badge }}</span>
             {% endif %}
-          </p> 
+          </p>
           <p class="description">{{ setting.description }}</p>
-        </td> 
+        </td>
         <td class="align-center">
           <p><code class="option">{{ setting.option }}</code></p>
           {% if setting.flag %}
@@ -88,9 +88,9 @@ class="flag">flags</code> (specified on the command-line) that control them.
             {% if setting.version-badge %}
               <span class="version-badge" title="Introduced in v{{ setting.version-badge }}">{{ setting.version-badge }}</span>
             {% endif %}
-          </p> 
+          </p>
           <p class="description">{{ setting.description }}</p>
-        </td> 
+        </td>
         <td class="align-center">
           {% if setting.option %}<p><code class="option">{{ setting.option }}</code></p>{% endif %}
           {% if setting.flag %}<p><code class="flag">{{ setting.flag }}</code></p>{% endif %}
@@ -124,9 +124,9 @@ before your site is served.
             {% if setting.version-badge %}
               <span class="version-badge" title="Introduced in v{{ setting.version-badge }}">{{ setting.version-badge }}</span>
             {% endif %}
-          </p> 
+          </p>
           <p class="description">{{ setting.description }}</p>
-        </td> 
+        </td>
         <td class="align-center">
           {% if setting.option %}
             <p><code class="option">{{ setting.option }}</code></p>

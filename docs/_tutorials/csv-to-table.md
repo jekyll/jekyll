@@ -19,7 +19,6 @@ and unpack that so we can get the header names.
 
 Follow the steps below to convert a sample CSV of authors into an HTML table.
 
-
 ## 1. Create a CSV
 
 Create a CSV file in your [Data files]({{ '/docs/datafiles/' | relative_url }}) directory so
@@ -41,7 +40,6 @@ That data file will now be available in Jekyll like this:
 {{ site.data.authors }}
 ```
 {% endraw %}
-
 
 ## 2. Add a table
 
@@ -66,7 +64,6 @@ Grab the first row and see what it looks like using the `inspect` filter.
 ```
 {% endraw %}
 
-
 The result will be a _hash_ (an object consisting of key-value pairs) which looks like this:
 
 ```ruby
@@ -79,7 +76,6 @@ The result will be a _hash_ (an object consisting of key-value pairs) which look
 ```
 
 Note that Jekyll _does_ in fact preserve the order here, based on the original CSV.
-
 
 ### Unpack a row
 
@@ -139,7 +135,6 @@ element as we don't need the value yet.
 For now, we do not display any content from the second row onwards. We achieve this by using
 `forloop.first`, since this will return true for the _first_ row and false otherwise.
 
-
 ### Add table data rows
 
 In this section we add the data rows to the table. Now, we use the second element of `pair`
@@ -172,7 +167,6 @@ title: Table test
 </table>
 ```
 {% endraw %}
-
 
 With the code above, the complete table would look like this:
 
