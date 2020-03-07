@@ -515,14 +515,7 @@ You can also auto-generate your sitemap by adding a gem called [`jekyll-sitemap`
 
 ## 12. Add external services
 
-For other services you might need (such as contact forms, search, comments, and more), look for third-party services. For example, you might use the following:
-
-  * For comments: [Disqus](https://disqus.com/)
-  * For a newsletter: [Tinyletter](https://tinyletter.com/)
-  * For contact forms: [Wufoo](https://www.wufoo.com/)
-  * For search: [Algolia Docsearch](https://community.algolia.com/docsearch/)
-
-For more details on services for static sites, see the [Third Parties](https://learn.cloudcannon.com/jekyll-third-parties/) list and tutorials from CloudCannon.
+For other services you might need (such as contact forms, search, comments, and more), [look for third-party services](https://serverless.css-tricks.com/services/). We listed some [integrations on our resources page](/resources/#integrations) but in todays's world of SaaS and APis the list is endless.
 
 Your Jekyll pages consist of HTML, CSS, and JavaScript, so pretty much any code you need to embed will work without a problem.
 
@@ -540,7 +533,7 @@ layout: null
 
 Although websites can implement more sophisticated features and functionality, we've covered the basics in this tutorial. You now have a fully functional Jekyll site.
 
-To deploy your site, consider using [GitHub Pages](https://pages.github.com/), [Netlify](https://www.netlify.com/), [Amazon AWS S3](https://aws.amazon.com/s3/) using the [s3_website plugin](https://github.com/laurilehmijoki/s3_website), or just FTP your files to your web server.
+To deploy your site, consider using [GitHub Pages](https://pages.github.com/), [Netlify](https://www.netlify.com/), [ZEIT](https://zeit.co), [Render](https://render.com), [Amazon AWS S3](https://aws.amazon.com/s3/) using the [s3_website plugin](https://github.com/laurilehmijoki/s3_website), or just FTP your files to your web server.
 
 You can also package your layouts, includes and assets into a Ruby `gem` and [make it a Jekyll theme](/docs/themes/).
 
