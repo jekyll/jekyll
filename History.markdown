@@ -63,6 +63,7 @@
   * Corrected command to modify PATH (#8030)
   * Docs: Render full contents of just the latest post (#8032)
   * docs: improvements for note boxes (#8037)
+  * Non-deprecated `vendor/bundle` path configuration (#8048)
 
 ### Development Fixes
 
