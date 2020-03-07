@@ -41,7 +41,7 @@ other gems on your system. If you skip this step, Bundler will install your
 dependencies globally on your system.
 
 ```sh
-bundle config --local set path 'vendor/bundle'
+bundle config set path 'vendor/bundle'
 ```
 
 <div class="note info">
