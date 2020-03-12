@@ -10,6 +10,7 @@
   * Fix documentation comment for Jekyll::Converters::Identity (#7883)
   * Optimize Jekyll::Filters#item_property (#7696)
   * Allow multiple binary operators in where_exp filter (#8047)
+  * Fix documents custom-ordering logic (#8028)
 
 ### Minor Enhancements
 
