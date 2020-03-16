@@ -43,7 +43,7 @@ for a site with numerous *standlone pages not within a collection*.
 
 ### For plugin developers
 
-While end-users need not take any extra action due to this change, plugin authors depending on the existing behavior *may* need
+While end-users do not need to take any extra action due to this change, plugin authors depending on the existing behavior *may* need
 to make minor changes to their plugins.
 
 If a `Jekyll::Page` subclass' `to_liquid` method calls `super`, it will have to be slightly modified.
