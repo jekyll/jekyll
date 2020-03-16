@@ -87,6 +87,7 @@
   * Simplify Jekyll::Hooks.trigger logic (#8044)
   * chore: simplify require for Jekyll::VERSION (#8057)
   * Remove version-constraint relaxation for i18n gem (#8055)
+  * Mirror `spec.homepage` as `metadata[&#34;homepage_uri&#34;]` (#8056)
 
 ### Site Enhancements
 
