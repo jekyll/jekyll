@@ -19,10 +19,10 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.metadata      = {
+    "source_code_uri" => "https://github.com/jekyll/jekyll",
     "bug_tracker_uri" => "https://github.com/jekyll/jekyll/issues",
     "changelog_uri"   => "https://github.com/jekyll/jekyll/releases",
-    "homepage_uri"    => "https://jekyllrb.com",
-    "source_code_uri" => "https://github.com/jekyll/jekyll",
+    "homepage_uri"    => s.homepage,
   }
 
   s.rdoc_options     = ["--charset=UTF-8"]
