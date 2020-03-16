@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
     "source_code_uri" => "https://github.com/jekyll/jekyll",
     "bug_tracker_uri" => "https://github.com/jekyll/jekyll/issues",
     "changelog_uri"   => "https://github.com/jekyll/jekyll/releases",
+    "homepage_uri"    => s.homepage,
   }
 
   s.rdoc_options     = ["--charset=UTF-8"]
