@@ -86,6 +86,7 @@
   * Configure kramdown toc_levels as array by default (#8015)
   * Simplify Jekyll::Hooks.trigger logic (#8044)
   * chore: simplify require for Jekyll::VERSION (#8057)
+  * Remove version-constraint relaxation for i18n gem (#8055)
 
 ### Site Enhancements
 
