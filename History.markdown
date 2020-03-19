@@ -65,6 +65,7 @@
   * Docs: Render full contents of just the latest post (#8032)
   * docs: improvements for note boxes (#8037)
   * Non-deprecated `vendor/bundle` path configuration (#8048)
+  * Update 09-collections.md (#8060)
 
 ### Development Fixes
 
