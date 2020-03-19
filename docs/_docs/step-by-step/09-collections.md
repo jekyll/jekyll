@@ -112,6 +112,8 @@ collections:
     output: true
 ```
 
+Restart the jekyll server once more for the configuration changes to take effect. 
+
 You can link to the output page using `author.url`.
 
 Add the link to the `staff.html` page:
