@@ -11,6 +11,7 @@
   * Optimize Jekyll::Filters#item_property (#7696)
   * Allow multiple binary operators in where_exp filter (#8047)
   * Fix documents custom-ordering logic (#8028)
+  * Use `layout.path` when rendering the Liquid layout (#8069)
 
 ### Minor Enhancements
 
