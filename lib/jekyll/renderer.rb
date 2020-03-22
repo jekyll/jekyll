@@ -197,7 +197,7 @@ module Jekyll
         layout.content,
         payload,
         info,
-        layout.relative_path
+        layout.path
       )
     end
 
