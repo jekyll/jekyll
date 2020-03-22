@@ -28,7 +28,6 @@ There are a bunch of helpful community members on these services that should be 
 * [How to file a bug](/docs/community/bug/)
 * [Guide for maintaining Jekyll](/docs/maintaining/)
 
-
 ## Jekyllconf
 
 [Watch videos](/jekyllconf/) from members of the Jekyll community speak about interesting use cases, tricks they’ve learned or meta Jekyll topics.

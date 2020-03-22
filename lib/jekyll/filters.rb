@@ -356,15 +356,24 @@ module Jekyll
       @item_property_cache ||= {}
       @item_property_cache[property] ||= {}
       @item_property_cache[property][item] ||= begin
-        if item.respond_to?(:to_liquid)
-          property.to_s.split(".").reduce(item.to_liquid) do |subvalue, attribute|
-            parse_sort_input(subvalue[attribute])
-          end
-        elsif item.respond_to?(:data)
-          parse_sort_input(item.data[property.to_s])
-        else
-          parse_sort_input(item[property.to_s])
-        end
+        property = property.to_s
+        property = if item.respond_to?(:to_liquid)
+                     read_liquid_attribute(item.to_liquid, property)
+                   elsif item.respond_to?(:data)
+                     item.data[property]
+                   else
+                     item[property]
+                   end
+
+        parse_sort_input(property)
+      end
+    end
+
+    def read_liquid_attribute(liquid_data, property)
+      return liquid_data[property] unless property.include?(".")
+
+      property.split(".").reduce(liquid_data) do |data, key|
+        data.respond_to?(:[]) && data[key]
       end
     end
 
@@ -423,10 +432,14 @@ module Jekyll
     #
     # Returns an instance of Liquid::Condition
     def parse_binary_comparison(parser)
-      parse_comparison(parser).tap do |condition|
-        binary_operator = parser.id?("and") || parser.id?("or")
-        condition.send(binary_operator, parse_comparison(parser)) if binary_operator
+      condition = parse_comparison(parser)
+      first_condition = condition
+      while (binary_operator = parser.id?("and") || parser.id?("or"))
+        child_condition = parse_comparison(parser)
+        condition.send(binary_operator, child_condition)
+        condition = child_condition
       end
+      first_condition
     end
 
     # Generates a Liquid::Condition object from a Liquid::Parser object based on whether the parsed

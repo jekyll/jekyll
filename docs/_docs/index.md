@@ -8,7 +8,7 @@ redirect_from:
 ---
 Jekyll is a static site generator. You give it text written in your
 favorite markup language and it uses layouts to create a static website. You can
-tweak how you want the site URLs to look like, what data gets displayed on the
+tweak how you want the site URLs to look, what data gets displayed on the
 site, and more.
 
 ## Prerequisites

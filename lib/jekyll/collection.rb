@@ -239,7 +239,7 @@ module Jekyll
 
         # Fall back to `Document#<=>` if the properties were equal or were non-sortable
         # Otherwise continue with current sort-order
-        if order.zero? || order.nil?
+        if order.nil? || order.zero?
           apples[-1] <=> olives[-1]
         else
           order
