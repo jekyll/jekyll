@@ -5,9 +5,16 @@
     - link: /docs/installation/
     - link: /docs/community/
     - link: /docs/step-by-step/01-setup/
-- title: Build
+- title: Command Line Usage
   docs:
     - link: /docs/usage/
+    - link: /docs/cli/global/
+    - link: /docs/cli/new/
+    - link: /docs/cli/build/
+    - link: /docs/cli/serve/
+    - link: /docs/cli/more_usage/
+- title: Configuration
+  docs:
     - link: /docs/configuration/
 - title: Content
   docs:
