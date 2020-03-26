@@ -15,7 +15,8 @@ example here's a collection of staff members:
 collections:
   - staff_members
 ```
-In this case `collections` is defined as a sequence (i.e array) with no additional metadata defined for each collection.  
+
+In this case `collections` is defined as a sequence (i.e array) with no additional metadata defined for each collection.
 You can optionally specify metadata for your collection by defining `collections` as a mapping (i.e hashmap) instead of sequence, and then defining additional fields in it:
 
 ```yaml
@@ -24,9 +25,11 @@ collections:
     people: true
 ```
 
-<div class="note">
-  <p>When defining a collection as a sequence, its pages will not be rendered by default. To enable this, <code>output: true</code> must be specified on the collection, which requires defining the collection as a mapping. For more information, see the section <a href="#output">Output</a></p>
-</div>
+{: .note .info}
+When defining a collection as a sequence, its pages will not be rendered by
+default. To enable this, <code>output: true</code> must be specified on the
+collection, which requires defining the collection as a mapping. For more
+information, see the section <a href="#output">Output</a>.
 
 <div class="note">
   <h5>Gather your collections {%- include docs_version_badge.html version="3.7.0" -%}</h5>
@@ -71,7 +74,7 @@ Jane has worked on Jekyll for the past *five years*.
   Do note that in spite of being considered as a collection internally, the above
   doesn't apply to [posts](/docs/posts/). Posts with a valid filename format will be
   marked for processing even if they do not contain front matter.
-</em> 
+</em>
 
 <div class="note info">
   <h5>Be sure to name your directories correctly</h5>
@@ -95,7 +98,6 @@ using the `content` variable:
 {% endfor %}
 ```
 {% endraw %}
-
 
 If you'd like Jekyll to create a rendered page for each document in your
 collection, you can set the `output` key to `true` in your collection
@@ -284,7 +286,6 @@ you specified in your `_config.yml` (if present) and the following information:
     <code>published: false</code> (<em><code>true</code> by default</em>) in the document's front matter.
   </p>
 </div>
-
 
 ### Documents
 

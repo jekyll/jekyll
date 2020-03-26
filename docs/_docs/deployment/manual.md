@@ -31,7 +31,6 @@ Most traditional web hosting provider let you upload files to their servers over
 
 If you have direct access to the deployment web server, the process is essentially the same, except you might have other methods available to you (such as `scp`, or even direct filesystem access) for transferring the files. Remember to make sure the contents of the generated `_site` folder get placed in the appropriate web root directory for your web server.
 
-
 ## Rack-Jekyll
 
 [Rack-Jekyll](https://github.com/adaoraul/rack-jekyll/) allows you to deploy your site on any Rack server such as Amazon EC2, Slicehost, Heroku, and so forth. It also can run with [shotgun](https://github.com/rtomayko/shotgun/), [rackup](https://github.com/rack/rack), [mongrel](https://github.com/mongrel/mongrel), [unicorn](https://github.com/defunkt/unicorn/), and [others](https://github.com/adaoraul/rack-jekyll#readme).

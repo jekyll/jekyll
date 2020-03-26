@@ -18,7 +18,6 @@ A gem is code you can include in Ruby projects. It allows you to package up func
 [jekyll-seo-tag](https://github.com/jekyll/jekyll-seo-tag) and
 [jekyll-archives](https://github.com/jekyll/jekyll-archives).
 
-
 ## Gemfile
 
 A `Gemfile` is a list of gems required for your site. For a simple Jekyll site it might look something like this:

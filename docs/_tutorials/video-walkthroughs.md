@@ -31,5 +31,3 @@ title: Video Walkthroughs
 17. [Data Files](https://www.youtube.com/watch?v=M6b0KmLB-pM&list=PLLAZ4kZ9dFpOPV5C5Ay0pHaa0RJFhcmcB&index=17)
 18. [Static Files](https://www.youtube.com/watch?v=knWjmVlVpso&index=18&list=PLLAZ4kZ9dFpOPV5C5Ay0pHaa0RJFhcmcB)
 19. [Hosting on Github Pages](https://www.youtube.com/watch?v=fqFjuX4VZmU&list=PLLAZ4kZ9dFpOPV5C5Ay0pHaa0RJFhcmcB&index=19)
-
-

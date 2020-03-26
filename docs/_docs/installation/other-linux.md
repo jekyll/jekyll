@@ -6,7 +6,7 @@ Installation on other Linux distributions works similarly as on [Ubuntu](../ubun
 
 On Fedora, the dependencies can be installed as follows:
 
- ```sh
+```sh
 sudo dnf install ruby ruby-devel @development-tools
 ```
 

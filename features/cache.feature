@@ -35,3 +35,12 @@ Feature: Cache
     But the .jekyll-cache directory should not exist
     And the _site directory should exist
     And I should see "<p>Hello World</p>" in "_site/index.html"
+
+  Scenario: Disabling disk usage in non-safe mode
+    Given I have an "index.md" page that contains "{{ site.title }}"
+    And I have a configuration file with "title" set to "Hello World"
+    When I run jekyll build --disable-disk-cache
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "<p>Hello World</p>" in "_site/index.html"
+    But the .jekyll-cache directory should not exist

@@ -9,12 +9,19 @@
   * Memoize absolute_url and relative_url filters (#7793)
   * Fix documentation comment for Jekyll::Converters::Identity (#7883)
   * Optimize Jekyll::Filters#item_property (#7696)
+  * Allow multiple binary operators in where_exp filter (#8047)
+  * Fix documents custom-ordering logic (#8028)
+  * Use `layout.path` when rendering the Liquid layout (#8069)
 
 ### Minor Enhancements
 
   * serve: add support for ECC certificates (#7768)
   * Update item_property to recognize integers (#7878)
   * Include _config.yml in a new theme&#39;s gemspec (#7865)
+  * Add an option to easily disable disk-cache (#7928)
+  * Optimize markdown parsing with Kramdown by reusing the options and parser objects (#8013)
+  * Add PageDrop to provide Liquid templates with data (#7992)
+  * Optimize `Kramdown::JekyllDocument#to_html` calls (#8041)
 
 ### Documentation
 
@@ -50,6 +57,19 @@
   * Document sorting two documents by their `date` (#7870)
   * Fix English grammar error. (#7994)
   * Update 03-front-matter.md (#7996)
+  * Add Kentico Kontent CMS integration to resources (#8000)
+  * Update 07-assets.md (#7413)
+  * Fix file references in Step by Step Tutorial&#39;s Assets step (#8007)
+  * docs: improve highlighting of code blocks (#8017)
+  * remove leading slash from Sass file location (#8021)
+  * [Docs] Fix asset link ref in step-by-step tutorial (#8026)
+  * Corrected command to modify PATH (#8029)
+  * Corrected command to modify PATH (#8030)
+  * Docs: Render full contents of just the latest post (#8032)
+  * docs: improvements for note boxes (#8037)
+  * Non-deprecated `vendor/bundle` path configuration (#8048)
+  * Update 09-collections.md (#8060)
+  * Remove extra paragraph tags (#8063)
 
 ### Development Fixes
 
@@ -65,6 +85,18 @@
   * Return relative_url if site.url is an empty string (#7988)
   * Attain Ruby 3.0 compatibility (#7948)
   * Test where filter handling numeric property values (#7821)
+  * chore(deps): rubocop 0.80.0 (#8012)
+  * Update unit tests for Kramdown-based converter (#8014)
+  * Add Visual Studio Code Development Container (#8016)
+  * Configure kramdown toc_levels as array by default (#8015)
+  * Simplify Jekyll::Hooks.trigger logic (#8044)
+  * chore: simplify require for Jekyll::VERSION (#8057)
+  * Remove version-constraint relaxation for i18n gem (#8055)
+  * Mirror `spec.homepage` as `metadata[&#34;homepage_uri&#34;]` (#8056)
+
+### Site Enhancements
+
+  * Optimize rendering of the documentation site (#8020)
 
 ## 4.0.0 / 2019-08-19
 

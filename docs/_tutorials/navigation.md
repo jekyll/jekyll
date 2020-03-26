@@ -69,8 +69,8 @@ docs:
    </ul>
 </div>
 
-{: .note .info }
-For the results in these fictitious samples, `#` is manually substituted for the actual link value to avoid 404 errors.)
+{: .note .info}
+For the results in these fictitious samples, `#` is manually substituted for the actual link value (to avoid 404 errors.)
 
 When you use a `for` loop, you choose how you want to refer to the items you're looping through. The variable you choose (in this case, `item`) becomes how you access the properties of each item in the list. Dot notation is used to get a property of the item (for example, `item.url`).
 
@@ -371,12 +371,14 @@ For more information, see [Expressions and Variables](https://github.com/Shopify
 In addition to inserting items from the YAML data file into your list, you also usually want to highlight the current link if the user is viewing that page. You do this by inserting an `active` class for items that match the current page URL.
 
 **CSS**
+
 ```css
 .result li.active a {
     color: lightgray;
     cursor: default;
-  }
+}
 ```
+
 **Liquid**
 
 {% raw %}
@@ -408,13 +410,14 @@ In addition to inserting items from the YAML data file into your list, you also 
 
 In this case, assume `Deployment` is the current page.
 
-To make sure the `item.url` (stored in the YAML file) matches the `page.url`, it can be helpful to print the `{% raw %}{{ page.url }}{% endraw %}` to the page.
+To make sure the `item.url` (stored in the YAML file) matches the `page.url`, it can be helpful to print the {% raw %}`{{ page.url }}`{% endraw %} to the page.
 
 ## Scenario 7: Including items conditionally
 
 You might want to include items conditionally in your list. For example, maybe you have multiple site outputs and only want to include the sidebar item for certain outputs. You can add properties in each list item and then use those properties to conditionally include the content.
 
 **YAML**
+
 ```yaml
 docs2_list_title: ACME Documentation
 docs2:
@@ -588,7 +591,7 @@ Let's walk through the code. First, we assign a variable (`mydocs`) to the colle
 
 The `group_by` filter groups the collection content by `category`. More specifically, the `group_by` filter converts `mydocs` into an array with `name`, `items`, and `size` properties, somewhat like this:
 
-```yaml
+```json
 [
   {"name": "getting-started", "items": [Sample 1, Sample 2],"size": 2},
   {"name": "configuration", "items": [Topic 1, Topic 2], "size": 2},

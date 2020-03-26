@@ -1,7 +1,0 @@
-<ul>
-{% for item in include.items %}
-  {% assign item_url = item | prepend:"/tutorials/" | append:"/" %}
-  {% assign p = site.tutorials | where:"url", item_url | first %}
-  <li {%- if item_url == page.url %} class="current" {%- endif %}><a href="{{ p.url }}">{{ p.title }}</a></li>
-{% endfor %}
-</ul>
