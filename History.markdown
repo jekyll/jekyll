@@ -21,6 +21,7 @@
   * Add an option to easily disable disk-cache (#7928)
   * Optimize markdown parsing with Kramdown by reusing the options and parser objects (#8013)
   * Add PageDrop to provide Liquid templates with data (#7992)
+  * Optimize `Kramdown::JekyllDocument#to_html` calls (#8041)
 
 ### Documentation
 
