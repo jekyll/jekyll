@@ -34,7 +34,7 @@ Save the commands you want to run and succeed in a file: `./script/cibuild`
 
 ### The HTML Proofer Executable
 
-```sh
+```bash
 #!/usr/bin/env bash
 set -e # halt script on error
 

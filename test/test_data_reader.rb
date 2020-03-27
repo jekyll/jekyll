@@ -21,7 +21,7 @@ class TestDataReader < JekyllUnitTest
         "theme" => "test-theme"
       )
       assert @site.theme.data_path
-      @theme_data = DataReader.new(@site, :mode => :theme).read("_data")
+      @theme_data = DataReader.new(@site, "theme").read("_data")
       @site.process
     end
 

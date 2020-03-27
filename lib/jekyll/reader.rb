@@ -194,9 +194,9 @@ module Jekyll
     # Returns a hash appended with new data
     def read_site_data
       @site.data = DataReader.new(site).read(site.config["data_dir"])
-      return unless site.theme && (data_path = site.theme.data_path)
+      return unless (data_path = site.theme&.data_path)
 
-      theme_data = DataReader.new(site, :mode => :theme).read(data_path)
+      theme_data = DataReader.new(site, "theme").read(data_path)
       @site.data = Utils.deep_merge_hashes(theme_data, @site.data)
     end
   end

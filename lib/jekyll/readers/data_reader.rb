@@ -4,7 +4,7 @@ module Jekyll
   class DataReader
     attr_reader :site, :content
 
-    def initialize(site, mode: :source)
+    def initialize(site, mode = "source")
       @site = site
       @content = {}
       @entry_filter = EntryFilter.new(site)
@@ -77,7 +77,7 @@ module Jekyll
     private
 
     def compute_absolute_path(*entries)
-      @mode == :theme ? @site.in_theme_dir(*entries) : @site.in_source_dir(*entries)
+      @mode == "theme" ? @site.in_theme_dir(*entries) : @site.in_source_dir(*entries)
     end
   end
 end

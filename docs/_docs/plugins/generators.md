@@ -20,11 +20,11 @@ and are available via `site.pages`. Static files become instances of
 and are available via `site.static_files`. See
 [the Variables documentation page](/docs/variables/) and
 [`Jekyll::Site`]({{ site.repository }}/blob/master/lib/jekyll/site.rb)
-for more details.
+for details.
 
 For instance, a generator can inject values computed at build time for template
-variables. In the following example the template `reading.html` has two
-variables `ongoing` and `done` that we fill in the generator:
+variables. In the following example, the template `reading.html` has two
+variables `ongoing` and `done` that are filled in the generator:
 
 ```ruby
 module Reading
@@ -40,7 +40,7 @@ module Reading
 end
 ```
 
-This is a more complex generator that generates new pages:
+The following example is a more complex generator that generates new pages. In this example, the generator will create a series of files under the `categories` directory for each category, listing the posts in each category using the `category_index.html` layout.
 
 ```ruby
 module Jekyll
@@ -76,11 +76,7 @@ module Jekyll
 end
 ```
 
-In this example, our generator will create a series of files under the
-`categories` directory for each category, listing the posts in each category
-using the `category_index.html` layout.
-
-Generators are only required to implement one method:
+Generators need to implement only one method:
 
 <div class="mobile-side-scroller">
 <table>
@@ -102,3 +98,7 @@ Generators are only required to implement one method:
   </tbody>
 </table>
 </div>
+
+If your generator is contained within a single file, it can be named whatever you want but it should have an `.rb` extension. If your generator is split across multiple files, it should be packaged as a Rubygem to be published at https://rubygems.org/. In this case, the name of the gem depends on the availability of the name at that site because no two gems can have the same name.
+
+By default, Jekyll looks for generators in the `_plugins` directory. However, you can change the default directory by assigning the desired name to the key `plugins_dir` in the config file.

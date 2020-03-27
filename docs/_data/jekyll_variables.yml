@@ -51,10 +51,10 @@ site:
       <code>name</code>, <code>basename</code> and <code>extname</code>.
   - name: site.html_pages
     description: >-
-      A subset of `site.pages` listing those which end in `.html`.
+      A subset of <code>site.pages</code> listing those which end in <code>.html</code>.
   - name: site.html_files
     description: >-
-      A subset of `site.static_files` listing those which end in `.html`.
+      A subset of <code>site.static_files</code> listing those which end in <code>.html</code>.
   - name: site.collections
     description: >-
       A list of all the collections (including posts).

@@ -43,11 +43,33 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr class="setting">
       <td>
         <p class="name"><strong>Safe</strong></p>
-        <p class="description">Disable <a href="/docs/plugins/">custom plugins, and ignore symbolic links</a>.</p>
+        <p class="description">
+          Disable <a href="/docs/plugins/">custom plugins</a>, caching to disk
+          and ignore symbolic links.
+        </p>
       </td>
       <td class="align-center">
         <p><code class="option">safe: BOOL</code></p>
         <p><code class="flag">--safe</code></p>
+      </td>
+    </tr>
+    <tr class="setting">
+      <td>
+        <p class="name">
+          <strong>Disable Disk Cache</strong>
+          <span class="version-badge" title="Introduced in v4.1.0">4.1.0</span>
+        </p>
+        <p class="description">
+          Disable caching of content to disk in order to skip creating a
+          <code>.jekyll-cache</code> or similar directory at the source
+          to avoid interference with virtual environments and third-party
+          directory watchers.
+          Caching to disk is always disabled in <code>safe</code> mode.
+        </p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">disable_disk_cache: BOOL</code></p>
+        <p><code class="flag">--disable-disk-cache</code></p>
       </td>
     </tr>
     <tr class="setting">
@@ -248,6 +270,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p class="description">Force watch to use polling.</p>
       </td>
       <td class="align-center">
+        <p><code class="option">force_polling: BOOL</code></p>
         <p><code class="flag">--force_polling</code></p>
       </td>
     </tr>
@@ -309,10 +332,19 @@ class="flag">flags</code> (specified on the command-line) that control them.
         <p><code class="flag">--strict_front_matter</code></p>
       </td>
     </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>Base URL</strong></p>
+        <p class="description">Serve the website from the given base URL.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">baseurl: URL</code></p>
+        <p><code class="flag">--baseurl URL</code></p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
-
 
 ### Serve Command Options
 
@@ -351,22 +383,12 @@ before your site is served.
     </tr>
     <tr class="setting">
       <td>
-        <p class="name"><strong>Base URL</strong></p>
-        <p class="description">Serve the website from the given base URL.</p>
-      </td>
-      <td class="align-center">
-        <p><code class="option">baseurl: URL</code></p>
-        <p><code class="flag">--baseurl URL</code></p>
-      </td>
-    </tr>
-    <tr class="setting">
-      <td>
         <p class="name"><strong>Live Reload</strong></p>
         <p class="description">Reload a page automatically on the browser when its content is edited.</p>
       </td>
       <td class="align-center">
         <p><code class="option">livereload: true</code></p>
-        <p><code class="flag">--livereload</code></p>
+        <p><code class="flag">-l, --livereload</code></p>
       </td>
     </tr>
     <tr class="setting">
