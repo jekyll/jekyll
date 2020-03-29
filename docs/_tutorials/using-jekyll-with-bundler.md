@@ -1,6 +1,4 @@
 ---
-layout: tutorials
-permalink: /tutorials/using-jekyll-with-bundler/
 title: Using Jekyll with Bundler
 ---
 

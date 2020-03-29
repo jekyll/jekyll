@@ -1,6 +1,4 @@
 ---
-layout: tutorials
-permalink: /tutorials/navigation/
 title: Navigation
 ---
 

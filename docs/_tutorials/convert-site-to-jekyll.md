@@ -1,6 +1,4 @@
 ---
-layout: tutorials
-permalink: /tutorials/convert-site-to-jekyll/
 title: Convert an HTML site to Jekyll
 ---
 
