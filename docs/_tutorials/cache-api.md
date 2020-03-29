@@ -1,6 +1,4 @@
 ---
-layout: tutorials
-permalink: /tutorials/cache-api/
 title: Cache API
 ---
 

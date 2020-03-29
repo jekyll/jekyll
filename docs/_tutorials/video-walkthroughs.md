@@ -1,6 +1,4 @@
 ---
-layout: tutorials
-permalink: /tutorials/video-walkthroughs/
 title: Video Walkthroughs
 ---
 

@@ -1,6 +1,4 @@
 ---
-layout: tutorials
-permalink: /tutorials/orderofinterpretation/
 title: Order of interpretation
 ---
 
