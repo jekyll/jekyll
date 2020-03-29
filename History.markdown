@@ -70,6 +70,7 @@
   * Non-deprecated `vendor/bundle` path configuration (#8048)
   * Update 09-collections.md (#8060)
   * Remove extra paragraph tags (#8063)
+  * Add default front matter for tutorials collection (#8081)
 
 ### Development Fixes
 
