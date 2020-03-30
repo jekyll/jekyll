@@ -12,6 +12,7 @@
   * Allow multiple binary operators in where_exp filter (#8047)
   * Fix documents custom-ordering logic (#8028)
   * Use `layout.path` when rendering the Liquid layout (#8069)
+  * Reduce array allocations from `StaticFile#path` (#8083)
 
 ### Minor Enhancements
 
