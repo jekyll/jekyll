@@ -47,7 +47,7 @@ module Jekyll
         else
           File.join(*[@base, @dir, @name].compact)
         end
-      end.freeze
+      end
     end
 
     # Obtain destination path.
