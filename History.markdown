@@ -95,6 +95,7 @@
   * Remove version-constraint relaxation for i18n gem (#8055)
   * Mirror `spec.homepage` as `metadata[&#34;homepage_uri&#34;]` (#8056)
   * Reduce Pathname objects from front matter defaults (#8067)
+  * Quicker categories for documents without superdirs (#7987)
 
 ### Site Enhancements
 
