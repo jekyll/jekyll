@@ -13,6 +13,7 @@
   * Fix documents custom-ordering logic (#8028)
   * Use `layout.path` when rendering the Liquid layout (#8069)
   * Reduce array allocations from `StaticFile#path` (#8083)
+  * Simplify `Jekyll::Renderer#validate_layout` (#8064)
 
 ### Minor Enhancements
 
