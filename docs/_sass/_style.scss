@@ -664,13 +664,38 @@ article h2:first-child { margin-top: 0; }
 }
 
 .post-date,
-.post-author { margin-left: 10px; }
+.post-author { margin-left: 15px; }
+.post-author .author-name { margin-left: 8px }
 
 .news article + article {
-  margin-top: -10px;
-  @include border-radius(0 0 10px 10px);
+  margin-top: -6px;
+  padding: 15px 40px;
   border-top: 1px solid #555;
+  border-radius: 0;
   @include box-shadow(0 -1px 0 #2f2f2f);
+
+  h2.post-title {
+    margin-bottom: 0.45em;
+  }
+  .post-category {
+    margin-right: 20px;
+    padding-left: 0;
+    width: 150px;
+    box-sizing: border-box;
+    .label {
+      float: right;
+    }
+  }
+  .cell-left, .cell-right {
+    display: inline-block;
+  }
+  .cell-left {
+    max-width: 180px;
+  }
+  .cell-right {
+    width: calc(100% - 130px);
+  }
+  .post-date { margin-left: 0 }
 }
 
 /* Code Highlighting */
@@ -963,6 +988,16 @@ code.output {
     font-size: 28px;
     font-weight: 700;
     text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+  }
+}
+
+p.note {
+  color: #fff;
+  font-weight: 400;
+  font-size: .75em;
+
+  &:after {
+    line-height: 1.21;
   }
 }
 

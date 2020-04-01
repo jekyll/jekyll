@@ -1,11 +1,8 @@
 ---
-layout: tutorials
-permalink: /tutorials/custom-404-page/
 title: Custom 404 Page
 ---
 
 You can easily serve custom 404 error pages with Jekyll to replace the default **Error 404 -- File Not Found** page displayed when one tries to access a broken link on your site.
-
 
 ## On GitHub Pages
 
@@ -48,7 +45,6 @@ Where the path is relative to your site's domain.
 
 More info on configuring Apache Error Pages can found in [official documentation](https://httpd.apache.org/docs/current/mod/core.html#errordocument).
 
-
 ## Hosting on Nginx server
 
 The procedure is just as simple as configuring Apache servers, but slightly different.
@@ -63,6 +59,7 @@ server {
   }
 }
 ```
+
 If the `server` block already exists, only add the code inside the `server` block given above.
 The `location` directive prevents users from directly browsing the 404.html page.
 

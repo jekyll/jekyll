@@ -60,7 +60,7 @@ In the example above, we can place the following tag anywhere in one of our
 pages:
 
 {% raw %}
-```ruby
+```liquid
 <p>{% render_time page rendered at: %}</p>
 ```
 {% endraw %}
@@ -73,7 +73,7 @@ And we would get something like this on the page:
 
 ## Tag Blocks
 
-The `render_time` tag seen above can also be rewritten as a tag block by 
+The `render_time` tag seen above can also be rewritten as a tag block by
 inheriting the `Liquid::Block` class. Look at the example below:
 
 ```ruby
@@ -107,9 +107,8 @@ And we would still get the same output as above on the page:
 <p>page rendered at: Tue June 22 23:38:47 –0500 2010</p>
 ```
 
-<div class="note info">
-  <p>In the above example, the tag block and the tag are both registered with 
-  the name <code>render_time</code> but to register a tag and a tag block using 
-  the same name in the same project is not recommended as this may lead to 
-  conflicts.</p>
-</div>
+{: .note .info}
+In the above example, the tag block and the tag are both registered with
+the name <code>render_time</code>, but to register a tag and a tag block using
+the same name in the same project is not recommended as this may lead to
+conflicts.

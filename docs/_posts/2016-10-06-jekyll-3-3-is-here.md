@@ -38,31 +38,31 @@ new filters have you covered. When working locally, if you set your
 then `relative_url` will ensure that this baseurl is prepended to anything
 you pass it:
 
-{% highlight liquid %}
 {% raw %}
+```liquid
 {{ "/docs/assets/" | relative_url }} => /myproject/docs/assets
+```
 {% endraw %}
-{% endhighlight %}
 
 By default, `baseurl` is set to `""` and therefore yields (never set to
 `"/"`):
 
-{% highlight liquid %}
 {% raw %}
+```liquid
 {{ "/docs/assets/" | relative_url }} => /docs/assets
+```
 {% endraw %}
-{% endhighlight %}
 
 A result of `relative_url` will safely always produce a URL which is
 relative to the domain root. A similar principle applies to `absolute_url`.
 It prepends your `baseurl` and `url` values, making absolute URLs all the
 easier to make:
 
-{% highlight liquid %}
 {% raw %}
+```liquid
 {{ "/docs/assets/" | absolute_url }} => https://jekyllrb.com/myproject/docs/assets
+```
 {% endraw %}
-{% endhighlight %}
 
 ### 3. `site.url` is set by the development server
 

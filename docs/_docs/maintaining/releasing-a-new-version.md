@@ -3,7 +3,7 @@ title: "Releasing a new version"
 ---
 
 **This guide is for maintainers.** These special people have **write access** to one or more of Jekyll's repositories and help merge the contributions of others. You may find what is written here interesting, but it’s definitely not for everyone.
-{: .note .info }
+{: .note .info}
 
 The most important thing to understand before making a release is that there's no need to feel nervous. Most things are revertable, and even if you do publish an incomplete gem version, we can always skip that one. Don't hestitate to contact the other maintainers if you feel unsure or don't know what to do next.
 
