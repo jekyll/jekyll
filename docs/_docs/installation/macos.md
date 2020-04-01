@@ -77,7 +77,7 @@ That's it! Head over [rbenv command references](https://github.com/rbenv/rbenv#c
 
 ## Install Jekyll
 
-Now all that is left is installing [Bundler](/docs/ruby-101/#bundler) and Jekyll.
+Now all that is left is installing [Bundler]({{ '/docs/ruby-101/#bundler' | relative_url }}) and Jekyll.
 
 ### Local Install
 
@@ -133,4 +133,4 @@ sudo gem install bundler jekyll
 
 ## Problems?
 
-Check out the [troubleshooting](/docs/troubleshooting/) page or [ask for help on our forum](https://talk.jekyllrb.com).
+Check out the [troubleshooting]({{ '/docs/troubleshooting/' | relative_url }}) page or [ask for help on our forum](https://talk.jekyllrb.com).
