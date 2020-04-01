@@ -1,0 +1,18 @@
+themes:
+  - name: "jamstackthemes.dev"
+    link: "https://jamstackthemes.dev/ssg/jekyll/"
+  - name: "jekyllthemes.org"
+    link: "http://jekyllthemes.org/"
+  - name: "jekyllthemes.io"
+    link: "https://jekyllthemes.io/"
+  - name: "jekyll-themes.com"
+    link: "https://jekyll-themes.com/"
+  - name: "themes.jekyllrc.org"
+    link: "http://themes.jekyllrc.org/"
+ plugins:
+  - name: "Rubygems"
+    link: "https://rubygems.org/search?utf8=%E2%9C%93&query=jekyll-"
+  - name: "Awesome (Gem-Packaged) Jekyll Plugins"
+    lnik: "https://github.com/planetjekyll/awesome-jekyll-plugins"
+  - name: "jekyll-plugin topic on GitHub"
+    link: https://github.com/topics/jekyll-plugin
