@@ -20,7 +20,7 @@ next, lets build a link to it.
         {% else -%}
           {% assign previous = forloop.index0 | minus: 1 -%}
           {% assign previous_page = tutorials[previous] | prepend:"/tutorials/" | append:"/" -%}
-          <a href="{{ previous_page }}" class="prev">Back</a>
+          <a href="{{ previous_page | relative_url }}" class="prev">Back</a>
         {% endif -%}
     </div>
     <div class="right align-left">
@@ -29,7 +29,7 @@ next, lets build a link to it.
         {% else -%}
           {% assign next = forloop.index0 | plus: 1 -%}
           {% assign next_page = tutorials[next] | prepend:"/tutorials/" | append:"/" -%}
-          <a href="{{ next_page }}" class="next">Next</a>
+          <a href="{{ next_page | relative_url }}" class="next">Next</a>
         {% endif -%}
     </div>
   </div>

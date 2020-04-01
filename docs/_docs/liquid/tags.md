@@ -5,12 +5,12 @@ permalink: "/docs/liquid/tags/"
 All of the standard Liquid
 [tags](https://shopify.github.io/liquid/tags/control-flow/) are supported.
 Jekyll has a few built in tags to help you build your site. You can also create
-your own tags using [plugins](/docs/plugins/).
+your own tags using [plugins]({{ '/docs/plugins/' | relative_url }}).
 
 ## Includes
 
 If you have page snippets that you use repeatedly across your site, an
-[include](/docs/includes/) is the perfect way to make this more maintainable.
+[include]({{ '/docs/includes/' | relative_url }}) is the perfect way to make this more maintainable.
 
 ## Code snippet highlighting
 

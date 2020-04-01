@@ -51,7 +51,7 @@ information, see the section <a href="#output">Output</a>.
 Create a corresponding folder (e.g. `<source>/_staff_members`) and add
 documents. Front matter is processed if the front matter exists, and everything
 after the front matter is pushed into the document's `content` attribute. If no front
-matter is provided, Jekyll will consider it to be a [static file](/docs/static-files/)
+matter is provided, Jekyll will consider it to be a [static file]({{ '/docs/static-files/' | relative_url }})
 and the contents will not undergo further processing. If front matter is provided,
 Jekyll will process the file contents into the expected output.
 
@@ -126,7 +126,7 @@ You can link to the generated page using the `url` attribute:
 
 ## Permalinks
 
-There are special [permalink variables for collections](/docs/permalinks/) to
+There are special [permalink variables for collections]({{ '/docs/permalinks/' | relative_url }}) to
 help you control the output url for the entire collection.
 
 ## Custom Sorting of Documents
