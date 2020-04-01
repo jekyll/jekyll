@@ -101,6 +101,7 @@
 ### Site Enhancements
 
   * Optimize rendering of the documentation site (#8020)
+  * Utilize relative_url filter in documentation site (#8089)
 
 ## 4.0.0 / 2019-08-19
 
