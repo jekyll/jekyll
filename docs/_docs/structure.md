@@ -8,31 +8,31 @@ A basic Jekyll site usually looks something like this:
 .
 ├── _config.yml
 ├── _data
-|   └── members.yml
+│   └── members.yml
 ├── _drafts
-|   ├── begin-with-the-crazy-ideas.md
-|   └── on-simplicity-in-technology.md
+│   ├── begin-with-the-crazy-ideas.md
+│   └── on-simplicity-in-technology.md
 ├── _includes
-|   ├── footer.html
-|   └── header.html
+│   ├── footer.html
+│   └── header.html
 ├── _layouts
-|   ├── default.html
-|   └── post.html
+│   ├── default.html
+│   └── post.html
 ├── _posts
-|   ├── 2007-10-29-why-every-programmer-should-play-nethack.md
-|   └── 2009-04-26-barcamp-boston-4-roundup.md
+│   ├── 2007-10-29-why-every-programmer-should-play-nethack.md
+│   └── 2009-04-26-barcamp-boston-4-roundup.md
 ├── _sass
-|   ├── _base.scss
-|   └── _layout.scss
+│   ├── _base.scss
+│   └── _layout.scss
 ├── _site
 ├── .jekyll-metadata
 └── index.html # can also be an 'index.md' with valid front matter
 ```
 
-<div class="note info">
+<div class="note">
   <h5>Directory structure of Jekyll sites using gem-based themes</h5>
   <p>
-    Starting <strong>Jekyll 3.2</strong>, a new Jekyll project bootstrapped with <code>jekyll new</code> uses <a href="/docs/themes/">gem-based themes</a> to define the look of the site. This results in a lighter default directory structure : <code>_layouts</code>, <code>_includes</code> and <code>_sass</code> are stored in the theme-gem, by default.
+    Since version {% include docs_version_badge.html version="3.2"%}, a new Jekyll project bootstrapped with <code>jekyll new</code> uses <a href="/docs/themes/">gem-based themes</a> to define the look of the site. This results in a lighter default directory structure: <code>_layouts</code>, <code>_includes</code> and <code>_sass</code> are stored in the theme-gem, by default.
   </p>
   <br />
   <p>

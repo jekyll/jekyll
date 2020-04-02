@@ -35,10 +35,18 @@ Install the Kickster gem and you are good to go. More documentation can here fou
 
 ## Netlify
 
-Netlify provides Global CDN, Continuous Deployment, one click HTTPS and [much more](https://www.netlify.com/features/), providing developers the most robust toolset available for modern web projects, without added complexity. Netlify supports custom plugins for Jekyll and has a free plan for open source projects.
+Netlify provides Global CDN, Continuous Deployment, one click HTTPS and [much more](https://www.netlify.com/features/), providing developers a robust toolset for modern web projects, without added complexity. Netlify supports custom plugins for Jekyll and has a free plan for open source projects.
 
 Read this [Jekyll step-by-step guide](https://www.netlify.com/blog/2015/10/28/a-step-by-step-guide-jekyll-3.0-on-netlify/) to setup your Jekyll site on Netlify.
+
+## Render
+
+[Render](https://render.com) provides zero config continuous deployment for static sites. The service is free under 100GB monthly bandwith.
 
 ## Static Publisher
 
 [Static Publisher](https://github.com/static-publisher/static-publisher) is another automated deployment option with a server listening for webhook posts, though it's not tied to GitHub specifically. It has a one-click deploy to Heroku, it can watch multiple projects from one server, it has an easy to user admin interface and can publish to either S3 or to a git repository (e.g. gh-pages).
+
+## ZEIT
+
+[ZEIT](https://zeit.co/) provides zero config continuous deployment, HTTPS Custom domains, high performance smart CDN, you get instant static deploy for free.

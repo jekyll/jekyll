@@ -40,11 +40,13 @@ module Jekyll
 
     # Returns source file path.
     def path
-      # Static file is from a collection inside custom collections directory
-      if !@collection.nil? && !@site.config["collections_dir"].empty?
-        File.join(*[@base, @site.config["collections_dir"], @dir, @name].compact)
-      else
-        File.join(*[@base, @dir, @name].compact)
+      @path ||= begin
+        # Static file is from a collection inside custom collections directory
+        if !@collection.nil? && !@site.config["collections_dir"].empty?
+          File.join(*[@base, @site.config["collections_dir"], @dir, @name].compact)
+        else
+          File.join(*[@base, @dir, @name].compact)
+        end
       end
     end
 

@@ -58,12 +58,12 @@ Be sure to run `bundle update` often.
 Sometimes it's nice to preview your Jekyll site before you push your `gh-pages`
 branch to GitHub. The subdirectory-like URL structure GitHub uses for
 Project Pages complicates the proper resolution of URLs. In order to assure your
-site builds properly, use the handy [URL filters](/docs/liquid/filters/):
+site builds properly, use the handy [URL filters]({{ '/docs/liquid/filters/' | relative_url }}):
 
 {% raw %}
 ```liquid
 <!-- For styles with static names... -->
-<link href="{{ "/assets/css/style.css" | relative_url }}" rel="stylesheet">
+<link href="{{ 'assets/css/style.css' | relative_url }}" rel="stylesheet">
 <!-- For documents/pages whose URLs can change... -->
 [{{ page.title }}]("{{ page.url | relative_url }}")
 ```
@@ -122,7 +122,7 @@ to see more detailed examples.
   <h5>Source files must be in the root directory</h5>
   <p>
     GitHub Pages <a href="https://help.github.com/en/github/working-with-github-pages/troubleshooting-jekyll-build-errors-for-github-pages-sites">overrides</a>
-    the <a href="/docs/configuration/options/">“Site Source”</a>
+    the <a href="{{ '/docs/configuration/options/' | relative_url }}">“Site Source”</a>
     configuration value, so if you locate your files anywhere other than the
     root directory, your site may not build correctly.
   </p>
@@ -135,6 +135,6 @@ to see more detailed examples.
     While Windows is not officially supported, it is possible
     to install the <code>github-pages</code> gem on Windows.
     Special instructions can be found on our
-    <a href="/docs/installation/windows/">Windows-specific docs page</a>.
+    <a href="{{ '/docs/installation/windows/' | relative_url }}">Windows-specific docs page</a>.
   </p>
 </div>

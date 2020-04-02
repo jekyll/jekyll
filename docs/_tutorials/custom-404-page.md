@@ -1,6 +1,4 @@
 ---
-layout: tutorials
-permalink: /tutorials/custom-404-page/
 title: Custom 404 Page
 ---
 

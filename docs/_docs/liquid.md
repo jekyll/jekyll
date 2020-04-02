@@ -15,5 +15,5 @@ out the [official Liquid Documentation](https://shopify.github.io/liquid/).
 
 Jekyll provides a number of useful Liquid additions to help you build your site:
 
-* [Filters](/docs/liquid/filters/)
-* [Tags](/docs/liquid/tags/)
+* [Filters]({{ '/docs/liquid/filters/' | relative_url }})
+* [Tags]({{ '/docs/liquid/tags/' | relative_url }})

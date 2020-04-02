@@ -77,7 +77,7 @@ That's it! Head over [rbenv command references](https://github.com/rbenv/rbenv#c
 
 ## Install Jekyll
 
-Now all that is left is installing [Bundler](/docs/ruby-101/#bundler) and Jekyll.
+Now all that is left is installing [Bundler]({{ '/docs/ruby-101/#bundler' | relative_url }}) and Jekyll.
 
 ### Local Install
 
@@ -104,9 +104,9 @@ To check that your gem paths point to your home directory run:
 gem env
 ```
 
-And check that `GEM PATHS:` points to a path in your home directory
+And check that `GEM PATHS:` points to a path in your home directory.
 
-{: .note }
+{: .note .info}
 Every time you update Ruby to a version with a different first two digits, you will need to update your path to match.
 
 ### Global Install
@@ -133,4 +133,4 @@ sudo gem install bundler jekyll
 
 ## Problems?
 
-Check out the [troubleshooting](/docs/troubleshooting/) page or [ask for help on our forum](https://talk.jekyllrb.com).
+Check out the [troubleshooting]({{ '/docs/troubleshooting/' | relative_url }}) page or [ask for help on our forum](https://talk.jekyllrb.com).
