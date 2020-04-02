@@ -1,5 +1,7 @@
 ---
 title: Using Jekyll with Bundler
+author: mkasberg
+date: 2018-03-06 21:33:25 -0700
 ---
 
 > Bundler provides a consistent environment for Ruby projects by tracking and

@@ -698,8 +698,43 @@ article h2:first-child { margin-top: 0; }
   .post-date { margin-left: 0 }
 }
 
-/* Code Highlighting */
+/* Tutorials */
 
+.tutorial-header {
+  float: none;
+  margin-bottom: 30px;
+  padding: 0 0 15px;
+  background: transparent;
+  border-bottom: 1px solid #545454;
+  .improve { padding-top: 14px }
+  .tutorial-title {
+    display: block;
+    width: calc(100% - 160px);
+    font-size: 1.75em
+  }
+}
+
+.tutorial-meta {
+  @extend .post-meta;
+  font-weight: 400;
+  text-shadow: none;
+  .tutorial-date,
+  .tutorial-author {
+    display: inline-block;
+    height: 24px
+  }
+}
+
+.tutorial-date {
+  vertical-align: sub
+}
+.tutorial-author {
+  margin-left: 15px;
+  .author-name { vertical-align: middle }
+}
+
+
+/* Code Highlighting */
 
 pre,
 code {
