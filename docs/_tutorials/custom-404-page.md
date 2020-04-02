@@ -1,5 +1,7 @@
 ---
 title: Custom 404 Page
+author: ashmaroli
+date: 2017-03-11 17:23:24 +0530
 ---
 
 You can easily serve custom 404 error pages with Jekyll to replace the default **Error 404 -- File Not Found** page displayed when one tries to access a broken link on your site.
