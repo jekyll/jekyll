@@ -11,16 +11,19 @@ This approach:
 - will use the CSV's first row as the HTML table header.
 - will use remaining rows for the body of the table.
 - will preserve the order of the columns from the original CSV.
-- is flexible enough to work with _any_ valid CSV. No need specify anywhere what the names of the columns are or how many columns there are.
+- is flexible enough to work with _any_ valid CSV that is referenced.
 
-The trick to this tutorial is that, when we iterate over the row data, we pick up the _first row_ and unpack that so we can get the header names.
+There is no need to specify what the names of the columns are, or how many columns there are.
+The trick to this tutorial is that, when we iterate over the row data, we pick up the _first row_
+and unpack that so we can get the header names.
 
 Follow the steps below to convert a sample CSV of authors into an HTML table.
 
 
 ## 1. Create a CSV
 
-Create a CSV file in your [Data files]({{ '/docs/datafiles/' | relative_url }}) directory so that Jekyll will pick it up. A sample path and CSV data are shown below:
+Create a CSV file in your [Data files]({{ '/docs/datafiles/' | relative_url }}) directory so
+that Jekyll will pick it up. A sample path and CSV data are shown below:
 
 `_data/authors.csv`
 
@@ -105,7 +108,8 @@ So iterate over the `row` object using a `for` loop:
 {% endraw %}
 
 
-This produces the following. The first item in each pair is the _key_ and the second will be the _value_.
+This produces the following. The first item in each pair is the _key_ and the second will be
+the _value_.
 
 ```
 ["First name", "John"]
@@ -116,7 +120,8 @@ This produces the following. The first item in each pair is the _key_ and the se
 
 ### Create a table header row
 
-Here we make a table with a single table header (`th`) row, made up of table header (`th`) tags. We find the header name by getting the first item from `pair` at index `0` and ignore the second item.
+Here we make a table with a single table header (`th`) row, made up of table header (`th`) tags.
+We find the header name by getting the first item from `pair` at index `0` and ignore the second item.
 
 {% raw %}
 ```
@@ -134,14 +139,17 @@ Here we make a table with a single table header (`th`) row, made up of table hea
 ```
 {% endraw %}
 
-For now,s we do not display any content for the second row onwards - we achieve this by using `forloop.first`, since this will return true for the _first_ row and false otherwise.
+For now,s we do not display any content for the second row onwards - we achieve this by using
+`forloop.first`, since this will return true for the _first_ row and false otherwise.
 
 
 ### Add table data rows
 
 In this section we add the data rows to the table.
 
-For convenience, we use the `tablerow` tag - this works like a `for` loop but the inner data will be rendered with `tr` and `td` HTML tags for us. Unfortunately, there is no equivalent for the header row, so we must write that out in full, as in the previous section.
+For convenience, we use the `tablerow` tag - this works like a `for` loop but the inner data will
+be rendered with `tr` and `td` HTML tags for us. Unfortunately, there is no equivalent for the
+header row, so we must write that out in full, as in the previous section.
 
 {% raw %}
 ```
@@ -167,9 +175,7 @@ title: Table test
 ```
 {% endraw %}
 
-
-Our output table should look like this:
-
+With the code above, our output table should look like this:
 
 <table>
     <tr>
