@@ -85,7 +85,7 @@ The approach here iterates over the CSV rows once and inserts the header row if 
     <tr>
         {% for pair in row %}
         {% assign column_name = pair[0] %}
-        <td>{{ column_name }}</td>
+        <th>{{ column_name }}</th>
         {% endfor %}
     </tr>
     {% endif %}
