@@ -98,6 +98,7 @@
   * Mirror `spec.homepage` as `metadata[&#34;homepage_uri&#34;]` (#8056)
   * Reduce Pathname objects from front matter defaults (#8067)
   * Quicker categories for documents without superdirs (#7987)
+  * Bump Ruby versions on Travis builds (#8088)
 
 ### Site Enhancements
 
