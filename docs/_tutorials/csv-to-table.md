@@ -1,5 +1,7 @@
 ---
 title: Show CSV as a table
+author: MichaelCurrin
+date: 2020-04-01 20:30:00 +0200
 ---
 
 This tutorial will show you how to read a CSV file and render it as an HTML table. The result will be true to the original header row and data rows.
