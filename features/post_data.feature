@@ -144,8 +144,8 @@ Feature: Post data
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "Post categories: Sci-Fi Movi3s, vintage" in "_site/Sci-Fi Movi3s/vintage/2020/04/03/star-wars.html"
-    And I should see "Post URL: /sci-fi%20movi3s/vintage/2020/04/03/star-wars.html" in "_site/Sci-Fi Movi3s/vintage/2020/04/03/star-wars.html"
+    And I should see "Post categories: Sci-Fi Movi3s, vintage" in "_site/sci-fi movi3s/vintage/2020/04/03/star-wars.html"
+    And I should see "Post URL: /sci-fi%20movi3s/vintage/2020/04/03/star-wars.html" in "_site/sci-fi movi3s/vintage/2020/04/03/star-wars.html"
 
   Scenario: Use post.slugified_categories to generate URL when category is a composite of multiple words
     Given I have a Sci-Fi Movi3s directory
