@@ -120,8 +120,9 @@ the _value_.
 
 ### Create a table header row
 
-Here we make a table with a single table header (`th`) row, made up of table header (`th`) tags.
-We find the header name by getting the first item from `pair` at index `0` and ignore the second item.
+Here we make a table with a single table row (`tr`), made up of table header (`th`) tags. We find
+the header name by getting the first element (at index `0`) from `pair`. We ignore the second
+element as we don't need the value yet.
 
 {% raw %}
 ```
@@ -145,11 +146,12 @@ For now,s we do not display any content for the second row onwards - we achieve 
 
 ### Add table data rows
 
-In this section we add the data rows to the table.
+In this section we add the data rows to the table. Now, we use the second element of `pair`
+to find the value.
 
-For convenience, we use the `tablerow` tag - this works like a `for` loop but the inner data will
-be rendered with `tr` and `td` HTML tags for us. Unfortunately, there is no equivalent for the
-header row, so we must write that out in full, as in the previous section.
+For convenience, we render using the `tablerow` tag - this works like a `for` loop, but the inner
+data will be rendered with `tr` and `td` HTML tags for us. Unfortunately, there is no equivalent for
+the header row, so we must write that out in full, as in the previous section.
 
 {% raw %}
 ```
