@@ -51,57 +51,55 @@ We grab the first row using an index of zero.
 ```
 {% endraw %}
 
-The `row` object will be a hash (key-value pair).
+We unpack that using a _for loop_ and a variable named `pair`. Each time, `pair` will be an array of _two_ values. Always with _key_ first at index `0` and the _value_ second at index `1`. Here we use just the _key_.
 
-We unpack that using a _for loop_ and a variable named `pair`, which is an array of two values. We slice it with an index of `0` is for the row's key so we can show the column name.
-
-{% raw %}
-```
-<table>
-    {% assign row = site.data.authors[0] %}
-    <tr>
-        {% for pair in row %}
-        {% assign column_name = pair[0] %}
-        <th>{{ column_name }}</th>
-        {% endfor %}
-    </tr>
-</table>
-```
-{% endraw %}
-
-An index of `1` would give us the cell value for that same key. We ignore that for now, but we'll use it in the next section.
-
-### Full table
-
-Delete the code from above and replace it with the code in this section, showing both a header and rows of data.
-
-The approach here iterates over the CSV rows once and inserts the header row if we are at the first row.
+Also, we make use of `forloop.first` - this will be true only for the _first_ row and false otherwise, so display the header for the first row and nothing else.
 
 {% raw %}
 ```
 <table>
     {% for row in site.data.authors %}
-    {% if forloop.first %}
-    <tr>
-        {% for pair in row %}
-        {% assign column_name = pair[0] %}
-        <th>{{ column_name }}</th>
-        {% endfor %}
-    </tr>
-    {% endif %}
-    <tr>
-        {% for pair in row %}
-        {% assign value = pair[1] %}
-        <td>{{ value }}</td>
-        {% endfor %}
-    </tr>
+        {% if forloop.first %}
+        <tr>
+            {% for pair in row %}
+            <th>{{ pair[0] }}</th>
+            {% endfor %}
+        </tr>
+        {% endif %}
     {% endfor %}
 </table>
 ```
 {% endraw %}
 
 
-Our output should look like this:
+### Full table
+
+In this section we add the data rows to the table.
+
+For convenience We use the `tablerow` filter to render the `tr` and `td` HTML tags for us. But there is no equivalent for the header, so we must write that out in full.
+
+{% raw %}
+```
+<table>
+    {% for row in site.data.authors %}
+        {% if forloop.first %}
+        <tr>
+            {% for pair in row %}
+            <th>{{ pair[0] }}</th>
+            {% endfor %}
+        </tr>
+        {% endif %}
+
+        {% tablerow pair in row %}
+            {{ pair[1] }}
+        {% endtablerow %}
+    {% endfor %}
+</table>
+```
+{% endraw %}
+
+
+Our output table should look like this:
 
 
 <table>
