@@ -4,18 +4,23 @@ author: MichaelCurrin
 date: 2020-04-01 20:30:00 +0200
 ---
 
-This tutorial will show you how to read a CSV file and render it as an HTML table. The result will be true to the original header row and data rows.
+This tutorial shows how to use Jekyll to read a CSV and render the data as an HTML table.
 
-The approach followed here is very flexible - the number of columns and the names of the columns are picked up **dynamically**. We can drop in any valid CSV data and see it rendered.
+This approach:
 
-The trick in this tutorial is that when we iterate over the row data, we pick up the _first row_ and use that to create the labels for the HTML header row.
+- will use the CSV's first row as the HTML table header.
+- will use remaining rows for the body of the table.
+- will preserve the order of the columns from the original CSV.
+- is flexible enough to work with _any_ valid CSV. No need specify anywhere what the names of the columns are or how many columns there are.
 
-Follow the steps below to convert a sample CSV of authors into a table.
+The trick to this tutorial is that, when we iterate over the row data, we pick up the _first row_ and unpack that so we can get the header names.
+
+Follow the steps below to convert a sample CSV of authors into an HTML table.
 
 
 ## 1. Create a CSV
 
-Create a CSV file in the [Data files]({{ '/docs/datafiles/' | relative_url }}) directory so that Jekyll will pick it up. A sample path and CSV data are shown below:
+Create a CSV file in your [Data files]({{ '/docs/datafiles/' | relative_url }}) directory so that Jekyll will pick it up. A sample path and CSV data are shown below:
 
 `_data/authors.csv`
 
@@ -37,23 +42,81 @@ That data file will now be available in Jekyll like this:
 
 ## 2. Add a table
 
-Open an HTML or markdown file that you want to use. Then create an HTML table using the instructions below.
+Choose an HTML or markdown file where you want your table to be shown.
 
-### Header row
+For example: `table_test.md`
 
-Here is the code for a table which has a header and nothing else.
+{% raw %}
+```
+---
+title: Table test
+---
 
-We grab the first row using an index of zero.
+```
+{% endraw %}
+
+
+### Inspect a row
+
+Grab the first row and see what it looks like using the `inspect` filter.
 
 {% raw %}
 ```
 {% assign row = site.data.authors[0] %}
+{{ row | inspect }}
 ```
 {% endraw %}
 
-We unpack that using a _for loop_ and a variable named `pair`. Each time, `pair` will be an array of _two_ values. Always with _key_ first at index `0` and the _value_ second at index `1`. Here we use just the _key_.
+The result will be a _hash_ (an object consisting of key-value pairs) which looks like this:
 
-Also, we make use of `forloop.first` - this will be true only for the _first_ row and false otherwise, so display the header for the first row and nothing else.
+```ruby
+{
+    "First name"=>"John",
+    "Last name"=>"Doe",
+    "Age"=>"35",
+    "Location"=>"United States"
+}
+```
+
+Note that Jekyll _does_ in fact preserve the order here, based on the original CSV.
+
+### Unpack a row
+
+We could hardcode the keys when looking up the row names.
+
+{% raw %}
+```
+{{ row["First name"] }}
+{{ row['Last name"] }}
+```
+{% endraw %}
+
+But we want a solution that will work for _any_ CSV, without specifying the column names upfront.
+
+So iterate over the `row` object using a `for` loop:
+
+{% raw %}
+```
+{% assign row = site.data.authors[0] %}
+{% for pair in row %}
+{{ pair | inspect }}
+{% endfor %}
+```
+{% endraw %}
+
+
+This produces the following. The first item in each pair is the _key_ and the second will be the _value_.
+
+```
+["First name", "John"]
+["Last name", "Doe"]
+["Age", "35"]
+["Location", "United States"]
+```
+
+### Create a table header row
+
+Here we make a table with a single table header (`th`) row, made up of table header (`th`) tags. We find the header name by getting the first item from `pair` at index `0` and ignore the second item.
 
 {% raw %}
 ```
@@ -62,7 +125,7 @@ Also, we make use of `forloop.first` - this will be true only for the _first_ ro
         {% if forloop.first %}
         <tr>
             {% for pair in row %}
-            <th>{{ pair[0] }}</th>
+                <th>{{ pair[0] }}</th>
             {% endfor %}
         </tr>
         {% endif %}
@@ -71,15 +134,21 @@ Also, we make use of `forloop.first` - this will be true only for the _first_ ro
 ```
 {% endraw %}
 
+For now,s we do not display any content for the second row onwards - we achieve this by using `forloop.first`, since this will return true for the _first_ row and false otherwise.
 
-### Full table
+
+### Add table data rows
 
 In this section we add the data rows to the table.
 
-For convenience We use the `tablerow` filter to render the `tr` and `td` HTML tags for us. But there is no equivalent for the header, so we must write that out in full.
+For convenience, we use the `tablerow` tag - this works like a `for` loop but the inner data will be rendered with `tr` and `td` HTML tags for us. Unfortunately, there is no equivalent for the header row, so we must write that out in full, as in the previous section.
 
 {% raw %}
 ```
+---
+title: Table test
+---
+
 <table>
     {% for row in site.data.authors %}
         {% if forloop.first %}
@@ -129,8 +198,8 @@ Our output table should look like this:
     </tr>
 </table>
 
-Save everything and start your server. That's it - you can now turn a CSV into an HTML table using Jekyll.
+Add the last code block above to your page, save it and start your server. Open your browser at your page.
+
+That's it - you can now turn a CSV into an HTML table using Jekyll.
 
 Next, try using a YAML file as your input, or add CSS styling to your table.
-
-_Note: Each CSV row is turned into a hash and that object is typically **not** ordered in programming. However, the way Ruby and Jekyll handles the data means that the original order of the CSV columns is **preserved** when iterating over the CSV data. So the approach followed in this tutorial works well._
