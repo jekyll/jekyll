@@ -73,6 +73,7 @@
   * Update 09-collections.md (#8060)
   * Remove extra paragraph tags (#8063)
   * Add default front matter for tutorials collection (#8081)
+  * Create CSV to table tutorial (#8090)
 
 ### Development Fixes
 
