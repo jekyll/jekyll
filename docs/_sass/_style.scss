@@ -796,7 +796,10 @@ h5 > code,
   overflow: auto;
 }
 
-pre.highlight { padding: 10px 0.5em; }
+pre.highlight,
+.highlight > pre { 
+  padding: 10px 0.5em; 
+}
 
 .highlighter-rouge .highlight {
   @extend .highlight;
