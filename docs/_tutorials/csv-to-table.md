@@ -6,12 +6,12 @@ date: 2020-04-01 20:30:00 +0200
 
 This tutorial shows how to use Jekyll to read a CSV and render the data as an HTML table.
 
-This approach:
+This approach will:
 
-- will use the CSV's first row as the HTML table header.
-- will use remaining rows for the body of the table.
-- will preserve the order of the columns from the original CSV.
-- is flexible enough to work with _any_ valid CSV that is referenced.
+- use the CSV's first row as the HTML table header.
+- use remaining rows for the body of the table.
+- preserve the order of the columns from the original CSV.
+- be flexible enough to work with _any_ valid CSV that is referenced.
 
 There is no need to specify what the names of the columns are, or how many columns there are.
 The trick to this tutorial is that, when we iterate over the row data, we pick up the _first row_
