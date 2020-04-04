@@ -95,15 +95,14 @@ A simple solution would be to hardcode the field names when looking up the row v
 But we prefer a solution that will work for _any_ CSV, without specifying the column names upfront.
 So we iterate over the `row` object using a `for` loop:
 
+{% highlight liquid %}
 {% raw %}
-```
 {% assign row = site.data.authors[0] %}
 {% for pair in row %}
 {{ pair | inspect }}
 {% endfor %}
-```
 {% endraw %}
-
+{% endhighlight %}
 
 This produces the following. Note the first item in each pair is the _key_ and the second will be
 the _value_.
