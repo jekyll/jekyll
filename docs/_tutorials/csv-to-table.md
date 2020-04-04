@@ -36,12 +36,11 @@ Jack,Hill,25,Australia
 
 That data file will now be available in Jekyll like this:
 
+{% highlight liquid %}
 {% raw %}
-```
 {{ site.data.authors }}
-```
 {% endraw %}
-
+{% endhighlight %}
 
 ## 2. Add a table
 
@@ -49,26 +48,25 @@ Choose an HTML or markdown file where you want your table to be shown.
 
 For example: `table_test.md`
 
-{% raw %}
-```
+```yaml
 ---
 title: Table test
 ---
 
 ```
-{% endraw %}
 
 
 ### Inspect a row
 
 Grab the first row and see what it looks like using the `inspect` filter.
 
+{% highlight liquid %}
 {% raw %}
-```
 {% assign row = site.data.authors[0] %}
 {{ row | inspect }}
-```
 {% endraw %}
+{% endhighlight %}
+
 
 The result will be a _hash_ (an object consisting of key-value pairs) which looks like this:
 
@@ -87,16 +85,15 @@ Note that Jekyll _does_ in fact preserve the order here, based on the original C
 
 A simple solution would be to hardcode the field names when looking up the row values by key.
 
+{% highlight liquid %}
 {% raw %}
-```
 {{ row["First name"] }}
-{{ row['Last name"] }}
-```
+{{ row["Last name"] }}
 {% endraw %}
+{% endhighlight %}
 
-But we want a solution that will work for _any_ CSV, without specifying the column names upfront.
-
-So iterate over the `row` object using a `for` loop:
+But we prefer a solution that will work for _any_ CSV, without specifying the column names upfront.
+So we iterate over the `row` object using a `for` loop:
 
 {% raw %}
 ```
@@ -108,7 +105,7 @@ So iterate over the `row` object using a `for` loop:
 {% endraw %}
 
 
-This produces the following. The first item in each pair is the _key_ and the second will be
+This produces the following. Note the first item in each pair is the _key_ and the second will be
 the _value_.
 
 ```
@@ -124,8 +121,8 @@ Here we make a table with a single table row (`tr`), made up of table header (`t
 the header name by getting the first element (at index `0`) from `pair`. We ignore the second
 element as we don't need the value yet.
 
+{% highlight liquid %}
 {% raw %}
-```
 <table>
     {% for row in site.data.authors %}
         {% if forloop.first %}
@@ -137,8 +134,9 @@ element as we don't need the value yet.
         {% endif %}
     {% endfor %}
 </table>
-```
 {% endraw %}
+{% endhighlight %}
+
 
 For now,s we do not display any content for the second row onwards - we achieve this by using
 `forloop.first`, since this will return true for the _first_ row and false otherwise.
@@ -153,8 +151,8 @@ For convenience, we render using the `tablerow` tag - this works like a `for` lo
 data will be rendered with `tr` and `td` HTML tags for us. Unfortunately, there is no equivalent for
 the header row, so we must write that out in full, as in the previous section.
 
+{% highlight liquid %}
 {% raw %}
-```
 ---
 title: Table test
 ---
@@ -174,8 +172,9 @@ title: Table test
         {% endtablerow %}
     {% endfor %}
 </table>
-```
 {% endraw %}
+{% endhighlight %}
+
 
 With the code above, our output table should look like this:
 
