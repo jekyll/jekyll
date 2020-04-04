@@ -85,7 +85,7 @@ Note that Jekyll _does_ in fact preserve the order here, based on the original C
 
 ### Unpack a row
 
-We could hardcode the keys when looking up the row names.
+A simple solution would be to hardcode the field names when looking up the row values by key.
 
 {% raw %}
 ```
