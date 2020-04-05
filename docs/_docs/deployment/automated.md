@@ -15,9 +15,9 @@ service of your choice.
 
 We have guides for the following providers:
 
-* [Travis CI](/docs/continuous-integration/travis-ci/)
-* [CircleCI](/docs/continuous-integration/circleci/)
-* [Buddy](/docs/continuous-integration/buddyworks/)
+* [Travis CI]({{ '/docs/continuous-integration/travis-ci/' | relative_url }})
+* [CircleCI]({{ '/docs/continuous-integration/circleci/' | relative_url }})
+* [Buddy]({{ '/docs/continuous-integration/buddyworks/' | relative_url }})
 
 ## Git post-receive hook
 

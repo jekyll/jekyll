@@ -18,6 +18,7 @@ collections:
     permalink: "/news/:year/:month/:day/:title/"
     output: true
   tutorials:
+    permalink: "/:collection/:path/"
     output: true
 defaults:
 - scope:
@@ -30,6 +31,11 @@ defaults:
     type: posts
   values:
     layout: news_item
+- scope:
+    path: _tutorials
+    type: tutorials
+  values:
+    layout: tutorials
 - scope:
     path: ''
   values:
