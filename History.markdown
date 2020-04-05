@@ -74,6 +74,7 @@
   * Remove extra paragraph tags (#8063)
   * Add default front matter for tutorials collection (#8081)
   * Create CSV to table tutorial (#8090)
+  * Add version badge for Custom Sorting of Documents (#8098)
 
 ### Development Fixes
 
