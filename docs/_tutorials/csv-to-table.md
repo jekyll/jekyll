@@ -1,5 +1,5 @@
 ---
-title: Show CSV as a table
+title: Tabulate CSV Data
 author: MichaelCurrin
 date: 2020-04-01 20:30:00 +0200
 ---
@@ -36,11 +36,12 @@ Jack,Hill,25,Australia
 
 That data file will now be available in Jekyll like this:
 
-{% highlight liquid %}
 {% raw %}
+```liquid
 {{ site.data.authors }}
+```
 {% endraw %}
-{% endhighlight %}
+
 
 ## 2. Add a table
 
@@ -52,57 +53,56 @@ For example: `table_test.md`
 ---
 title: Table test
 ---
-
 ```
-
 
 ### Inspect a row
 
 Grab the first row and see what it looks like using the `inspect` filter.
 
-{% highlight liquid %}
 {% raw %}
+```liquid
 {% assign row = site.data.authors[0] %}
 {{ row | inspect }}
+```
 {% endraw %}
-{% endhighlight %}
 
 
 The result will be a _hash_ (an object consisting of key-value pairs) which looks like this:
 
 ```ruby
 {
-    "First name"=>"John",
-    "Last name"=>"Doe",
-    "Age"=>"35",
-    "Location"=>"United States"
+  "First name"=>"John",
+  "Last name"=>"Doe",
+  "Age"=>"35",
+  "Location"=>"United States"
 }
 ```
 
 Note that Jekyll _does_ in fact preserve the order here, based on the original CSV.
 
+
 ### Unpack a row
 
 A simple solution would be to hardcode the field names when looking up the row values by key.
 
-{% highlight liquid %}
 {% raw %}
+```liquid
 {{ row["First name"] }}
 {{ row["Last name"] }}
+```
 {% endraw %}
-{% endhighlight %}
 
 But we prefer a solution that will work for _any_ CSV, without specifying the column names upfront.
 So we iterate over the `row` object using a `for` loop:
 
-{% highlight liquid %}
 {% raw %}
+```liquid
 {% assign row = site.data.authors[0] %}
 {% for pair in row %}
-{{ pair | inspect }}
+  {{ pair | inspect }}
 {% endfor %}
+```
 {% endraw %}
-{% endhighlight %}
 
 This produces the following. Note the first item in each pair is the _key_ and the second will be
 the _value_.
@@ -120,24 +120,23 @@ Here we make a table with a single table row (`tr`), made up of table header (`t
 the header name by getting the first element (at index `0`) from `pair`. We ignore the second
 element as we don't need the value yet.
 
-{% highlight liquid %}
 {% raw %}
+```liquid
 <table>
-    {% for row in site.data.authors %}
-        {% if forloop.first %}
-        <tr>
-            {% for pair in row %}
-                <th>{{ pair[0] }}</th>
-            {% endfor %}
-        </tr>
-        {% endif %}
-    {% endfor %}
+  {% for row in site.data.authors %}
+    {% if forloop.first %}
+    <tr>
+      {% for pair in row %}
+        <th>{{ pair[0] }}</th>
+      {% endfor %}
+    </tr>
+    {% endif %}
+  {% endfor %}
 </table>
 {% endraw %}
-{% endhighlight %}
+```
 
-
-For now,s we do not display any content for the second row onwards - we achieve this by using
+For now, we do not display any content from the second row onwards. We achieve this by using
 `forloop.first`, since this will return true for the _first_ row and false otherwise.
 
 
@@ -150,58 +149,58 @@ For convenience, we render using the `tablerow` tag - this works like a `for` lo
 data will be rendered with `tr` and `td` HTML tags for us. Unfortunately, there is no equivalent for
 the header row, so we must write that out in full, as in the previous section.
 
-{% highlight liquid %}
 {% raw %}
+```liquid
 ---
 title: Table test
 ---
 
 <table>
-    {% for row in site.data.authors %}
-        {% if forloop.first %}
-        <tr>
-            {% for pair in row %}
-            <th>{{ pair[0] }}</th>
-            {% endfor %}
-        </tr>
-        {% endif %}
+  {% for row in site.data.authors %}
+    {% if forloop.first %}
+    <tr>
+      {% for pair in row %}
+        <th>{{ pair[0] }}</th>
+      {% endfor %}
+    </tr>
+    {% endif %}
 
-        {% tablerow pair in row %}
-            {{ pair[1] }}
-        {% endtablerow %}
-    {% endfor %}
+    {% tablerow pair in row %}
+      {{ pair[1] }}
+    {% endtablerow %}
+  {% endfor %}
 </table>
+```
 {% endraw %}
-{% endhighlight %}
 
 
-With the code above, our output table should look like this:
+With the code above, the complete table would look like this:
 
 <table>
-    <tr>
-        <th>First name</th>
-        <th>Last name</th>
-        <th>Age</th>
-        <th>Location</th>
-    </tr>
-    <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>35</td>
-        <td>United States</td>
-    </tr>
-    <tr>
-        <td>Jane</td>
-        <td>Doe</td>
-        <td>29</td>
-        <td>France</td>
-    </tr>
-    <tr>
-        <td>Jack</td>
-        <td>Hill</td>
-        <td>25</td>
-        <td>Australia</td>
-    </tr>
+  <tr>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Age</th>
+    <th>Location</th>
+  </tr>
+  <tr>
+    <td>John</td>
+    <td>Doe</td>
+    <td>35</td>
+    <td>United States</td>
+  </tr>
+  <tr>
+    <td>Jane</td>
+    <td>Doe</td>
+    <td>29</td>
+    <td>France</td>
+  </tr>
+  <tr>
+    <td>Jack</td>
+    <td>Hill</td>
+    <td>25</td>
+    <td>Australia</td>
+  </tr>
 </table>
 
 That's it - you can now turn a CSV into an HTML table using Jekyll.
