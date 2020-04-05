@@ -75,6 +75,7 @@
   * Add default front matter for tutorials collection (#8081)
   * Create CSV to table tutorial (#8090)
   * Add version badge for Custom Sorting of Documents (#8098)
+  * Docs: Fix grammar in `_docs/front-matter.md` (#8097)
 
 ### Development Fixes
 
