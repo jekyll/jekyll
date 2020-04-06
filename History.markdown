@@ -9,6 +9,11 @@
   * Memoize absolute_url and relative_url filters (#7793)
   * Fix documentation comment for Jekyll::Converters::Identity (#7883)
   * Optimize Jekyll::Filters#item_property (#7696)
+  * Allow multiple binary operators in where_exp filter (#8047)
+  * Fix documents custom-ordering logic (#8028)
+  * Use `layout.path` when rendering the Liquid layout (#8069)
+  * Reduce array allocations from `StaticFile#path` (#8083)
+  * Simplify `Jekyll::Renderer#validate_layout` (#8064)
 
 ### Minor Enhancements
 
@@ -17,6 +22,8 @@
   * Include _config.yml in a new theme&#39;s gemspec (#7865)
   * Add an option to easily disable disk-cache (#7928)
   * Optimize markdown parsing with Kramdown by reusing the options and parser objects (#8013)
+  * Add PageDrop to provide Liquid templates with data (#7992)
+  * Optimize `Kramdown::JekyllDocument#to_html` calls (#8041)
 
 ### Documentation
 
@@ -62,6 +69,13 @@
   * Corrected command to modify PATH (#8030)
   * Docs: Render full contents of just the latest post (#8032)
   * docs: improvements for note boxes (#8037)
+  * Non-deprecated `vendor/bundle` path configuration (#8048)
+  * Update 09-collections.md (#8060)
+  * Remove extra paragraph tags (#8063)
+  * Add default front matter for tutorials collection (#8081)
+  * Create CSV to table tutorial (#8090)
+  * Add version badge for Custom Sorting of Documents (#8098)
+  * Docs: Fix grammar in `_docs/front-matter.md` (#8097)
 
 ### Development Fixes
 
@@ -81,10 +95,19 @@
   * Update unit tests for Kramdown-based converter (#8014)
   * Add Visual Studio Code Development Container (#8016)
   * Configure kramdown toc_levels as array by default (#8015)
+  * Simplify Jekyll::Hooks.trigger logic (#8044)
+  * chore: simplify require for Jekyll::VERSION (#8057)
+  * Remove version-constraint relaxation for i18n gem (#8055)
+  * Mirror `spec.homepage` as `metadata[&#34;homepage_uri&#34;]` (#8056)
+  * Reduce Pathname objects from front matter defaults (#8067)
+  * Quicker categories for documents without superdirs (#7987)
+  * Bump Ruby versions on Travis builds (#8088)
 
 ### Site Enhancements
 
   * Optimize rendering of the documentation site (#8020)
+  * Utilize relative_url filter in documentation site (#8089)
+  * Render tutorial metadata in documentation site (#8092)
 
 ## 4.0.0 / 2019-08-19
 
