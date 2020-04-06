@@ -102,23 +102,6 @@ class TestKramdown < JekyllUnitTest
       should "accept the specified default syntax_highlighter language" do
         override = {
           "kramdown" => {
-            "default_lang" => "html",
-            "default_lang" => "html",
-          },
-        }
-        converter = fixture_converter(Utils.deep_merge_hashes(@config, override))
-        parser = converter.setup && converter.instance_variable_get(:@parser)
-        parser_config = parser.instance_variable_get(:@config)
-
-        assert_equal "html", parser_config.dig("syntax_highlighter_opts", "default_lang")
-        refute_match %r!<div class="language-plaintext!, converter.convert(@source)
-        assert_match %r!<div class="language-html!, converter.convert(@source)
-      end
-
-      should "respect directly specified default syntax_highlighter language" do
-        override = {
-          "kramdown" => {
-            "default_lang"            => "html",
             "syntax_highlighter_opts" => {
               "default_lang" => "yaml",
             },
