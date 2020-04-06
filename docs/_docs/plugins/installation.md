@@ -52,7 +52,7 @@ You have 3 options for installing plugins:
   </p>
 </div>
 
-<div class="note info">
+<div class="note">
   <h5>
     <code>_plugins</code>, <code>_config.yml</code> and <code>Gemfile</code>
     can be used simultaneously
@@ -73,10 +73,7 @@ processing the rest of your source directory.
 A gem included here will be activated even if its not explicitly listed under
 the `plugins:` key in your site's config file.
 
-<div class="note warning">
-  <p>
-    Gems included in the <code>:jekyll-plugins</code> group are activated
-    regardless of the <code>--safe</code> mode setting. Be aware of what
-    gems are included under this group!
-  </p>
-</div>
+{: .note .warning}
+Gems included in the <code>:jekyll-plugins</code> group are activated
+regardless of the <code>--safe</code> mode setting. Be aware of which
+gems are included under this group!

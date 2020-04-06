@@ -1,7 +1,7 @@
 ---
-layout: tutorials
-permalink: /tutorials/navigation/
 title: Navigation
+author: tomjoht
+date: 2017-01-24 15:38:17 -0800
 ---
 
 If your Jekyll site has a lot of pages, you might want to create navigation for the pages. Instead of hard-coding navigation links, you can programmatically retrieve a list of pages to build the navigation for your site.
@@ -69,8 +69,8 @@ docs:
    </ul>
 </div>
 
-{: .note .info }
-For the results in these fictitious samples, `#` is manually substituted for the actual link value to avoid 404 errors.)
+{: .note .info}
+For the results in these fictitious samples, `#` is manually substituted for the actual link value (to avoid 404 errors.)
 
 When you use a `for` loop, you choose how you want to refer to the items you're looping through. The variable you choose (in this case, `item`) becomes how you access the properties of each item in the list. Dot notation is used to get a property of the item (for example, `item.url`).
 

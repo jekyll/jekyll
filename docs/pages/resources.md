@@ -29,12 +29,12 @@ some of the most popular Jekyll resources.
 
 ## Useful Guides
 
-- [Official tutorials](/tutorials/home/)
+- [Official tutorials]({{ '/tutorials/home/' | relative_url }})
 - [CloudCannon Academy](https://learn.cloudcannon.com/) is a set of resources created by [CloudCannon](https://cloudcannon.com/) to help folks get up and running with Jekyll. They cover all skill levels, and even include some great video tutorials.
 - [Jekyll Cheatsheet](https://learn.cloudcannon.com/jekyll-cheat-sheet/) is a single-page resource for Jekyll filters, variables, and the like.
 - ["Creating and Hosting a Personal Site on GitHub"](http://jmcglone.com/guides/github-pages/)
 - ['Build A Blog With Jekyll And GitHub Pages' on Smashing Magazine](https://www.smashingmagazine.com/2014/08/01/build-blog-jekyll-github-pages/)
-- Publishing to GitHub Pages? [Check out our documentation page for just that purpose](/docs/github-pages/).
+- Publishing to GitHub Pages? [Check out our documentation page for just that purpose]({{ '/docs/github-pages/' | relative_url }}').
 - [Blogging with Git, Emacs and Jekyll](https://metajack.im/2009/01/23/blogging-with-git-emacs-and-jekyll/)
 - [Tips for working with GitHub Pages Integration](https://gist.github.com/jedschneider/2890453)
 
@@ -69,6 +69,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [formX](https://formx.stream)
   - [Simple Form](https://getsimpleform.com/)
   - [SmartForms](https://smartforms.dev/)
+  - [Typeform](https://www.typeform.com/templates/c/forms/)
 
 ### Search
   - [Algolia](https://blog.algolia.com/instant-search-blog-documentation-jekyll-plugin/): Add a powerful instant search to your Jekyll site

@@ -3,7 +3,7 @@ title: Data Files
 permalink: /docs/datafiles/
 ---
 
-In addition to the [built-in variables](../variables/) available from Jekyll,
+In addition to the [built-in variables]({{'/docs/variables/' | relative_url }}) available from Jekyll,
 you can specify your own custom data that can be accessed via the [Liquid
 templating system](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers).
 
@@ -147,4 +147,4 @@ author: dave
 ```
 {% endraw %}
 
-For information on how to build robust navigation for your site (especially if you have a documentation website or another type of Jekyll site with a lot of pages to organize), see [Navigation](/tutorials/navigation).
+For information on how to build robust navigation for your site (especially if you have a documentation website or another type of Jekyll site with a lot of pages to organize), see [Navigation]({{ '/tutorials/navigation/' | relative_url }}).

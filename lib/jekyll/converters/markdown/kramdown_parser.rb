@@ -53,6 +53,16 @@ module Kramdown
       @options = JekyllDocument.options
       @root, @warnings = JekyllDocument.parser.parse(source, @options)
     end
+
+    # Use Kramdown::Converter::Html class to convert this document into HTML.
+    #
+    # The implementation is basically an optimized version of core logic in
+    # +Kramdown::Document#method_missing+ from kramdown-2.1.0.
+    def to_html
+      output, warnings = Kramdown::Converter::Html.convert(@root, @options)
+      @warnings.concat(warnings)
+      output
+    end
   end
 end
 
