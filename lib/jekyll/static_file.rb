@@ -32,7 +32,7 @@ module Jekyll
       @dir  = dir
       @name = name
       @collection = collection
-      @relative_path = File.join(*[@dir, @name].compact).gsub(%r!\A/!, "")
+      @relative_path = File.join(*[@dir, @name].compact)
       @extname = File.extname(@name)
       @data = @site.frontmatter_defaults.all(relative_path, type)
     end
