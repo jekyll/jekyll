@@ -76,6 +76,7 @@
   * Create CSV to table tutorial (#8090)
   * Add version badge for Custom Sorting of Documents (#8098)
   * Docs: Fix grammar in `_docs/front-matter.md` (#8097)
+  * Update variables.md (#8106)
 
 ### Development Fixes
 
