@@ -83,7 +83,6 @@ module Jekyll
       Jekyll.logger.info @liquid_renderer.stats_table
     end
 
-    # rubocop:disable Metrics/MethodLength
     #
     # Reset Site details.
     #
@@ -103,18 +102,14 @@ module Jekyll
       @collections = nil
       @documents = nil
       @docs_to_write = nil
-      @regenerator.clear_cache
-      @liquid_renderer.reset
       @site_cleaner = nil
-      frontmatter_defaults.reset
 
+      reset_caches
       raise ArgumentError, "limit_posts must be a non-negative number" if limit_posts.negative?
 
       Jekyll::Cache.clear_if_config_changed config
-      Jekyll::Tags::IncludeTag.reset_contents_cache
       Jekyll::Hooks.trigger :site, :after_reset, self
     end
-    # rubocop:enable Metrics/MethodLength
 
     # Load necessary libraries, plugins, converters, and generators.
     #
@@ -466,6 +461,13 @@ module Jekyll
     # Returns The Cleaner
     def site_cleaner
       @site_cleaner ||= Cleaner.new(self)
+    end
+
+    def reset_caches
+      @regenerator.clear_cache
+      @liquid_renderer.reset
+      frontmatter_defaults.reset
+      Jekyll::Tags::IncludeTag.reset_contents_cache
     end
 
     # Disable Marshaling cache to disk in Safe Mode
