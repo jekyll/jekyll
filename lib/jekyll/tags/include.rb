@@ -176,8 +176,18 @@ module Jekyll
 
       # This method allows to modify the file content by inheriting from the class.
       def read_file(file, context)
-        Jekyll.logger.debug "Reading:", file.cyan
-        File.read(file, **file_read_opts(context))
+        self.class.contents_cache[file] ||= begin
+          Jekyll.logger.debug "Reading Include:", file.cyan
+          File.read(file, **file_read_opts(context))
+        end
+      end
+
+      def self.contents_cache
+        @contents_cache ||= {}
+      end
+
+      def self.reset_contents_cache
+        @contents_cache = nil
       end
 
       private
