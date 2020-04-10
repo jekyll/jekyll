@@ -26,10 +26,10 @@ will process it and put it in your site's destination folder under
 
 {: .note .info}
 **Jekyll processes all Liquid filters and tags in asset files**{:.title}<br>
-If you are using <a href="https://mustache.github.io">Mustache</a>
-or another JavaScript templating language that conflicts with
-the <a href="{{ '/docs/templates/' | relative_url }}">Liquid template syntax</a>, you
-will need to place <code>{&#37; raw &#37;}</code> and
+If you are using [Mustache](https://mustache.github.io)
+or another JavaScript templating language that conflicts with the
+[Liquid template syntax]({{ '/docs/templates/' | relative_url }}),
+you will need to place <code>{&#37; raw &#37;}</code> and
 <code>{&#37; endraw &#37;}</code> tags around your code.
 
 ## Sass/SCSS

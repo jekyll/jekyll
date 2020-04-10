@@ -88,7 +88,7 @@ with the current date in the filename.
 {: .note .info}
 **Non-superuser account issues**{:.title}<br>
 If the `jekyll new` command prints the error "Your user account isn't allowed to install to the system RubyGems", see
-the "Running Jekyll as Non-Superuser" instructions in <a href="{{ '/docs/troubleshooting/#no-sudo' | relative_url }}">Troubleshooting</a>.
+the "Running Jekyll as Non-Superuser" instructions in [Troubleshooting]({{ '/docs/troubleshooting/#no-sudo' | relative_url }}).
 
 {: .note .info}
 Bash on Ubuntu on Windows is still under development, so you may run into issues.

@@ -28,7 +28,7 @@ The <code>_config.yml</code> master configuration file contains global configura
 and variable definitions that are read once at execution time. Changes made to <code>_config.yml</code>
 during automatic regeneration are not loaded until the next execution.
 <br>
-Note <a href="{{ '/docs/datafiles' | relative_url }}">Data Files</a> are included and reloaded during automatic regeneration.
+Note [Data Files]({{ '/docs/datafiles' | relative_url }}) are included and reloaded during automatic regeneration.
 
 Here, we are scoping the `values` to any file that exists in the path `scope`. Since the path is set as an empty string, it will apply to **all files** in your project. You probably don't want to set a layout on every file in your project - like css files, for example - so you can also specify a `type` value under the `scope` key.
 

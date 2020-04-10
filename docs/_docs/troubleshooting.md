@@ -306,6 +306,6 @@ The issue is caused by trying to copy a non-existing symlink.
 
 {: .note}
 **Please report issues you encounter!**{:.title}<br>
-If you come across a bug, please <a href="{{ site.repository }}/issues/new">create an issue</a>
+If you come across a bug, please [create an issue]({{ site.repository }}/issues/new/choose)
 on GitHub describing the problem and any work-arounds you find so we can
 document it here for others.

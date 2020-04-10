@@ -51,7 +51,7 @@ I hope you like it!
 
 {: .note}
 **ProTip™: Link to other posts**{:.title}<br>
-Use the <a href="/docs/liquid/tags/#linking-to-posts"><code>post_url</code></a>
+Use the [<code>post_url</code>](/docs/liquid/tags/#linking-to-posts)
 tag to link to other posts without having to worry about the URLs
 breaking when the site permalink style changes.
 

@@ -51,11 +51,10 @@ pagination to break. Just omit the permalink.
 
 {: .note .info}
 **Pagination for categories, tags and collections**{:.title}<br>
-The more recent <a href="https://github.com/sverrirs/jekyll-paginate-v2">
-jekyll-paginate-v2</a> plugin supports more features. See the
-<a href="https://github.com/sverrirs/jekyll-paginate-v2/tree/master/examples">
-pagination examples</a> in the repository. <strong>This plugin is not
-supported by GitHub Pages</strong>.
+The more recent [jekyll-paginate-v2](https://github.com/sverrirs/jekyll-paginate-v2)
+plugin supports more features. See the
+[pagination examples](https://github.com/sverrirs/jekyll-paginate-v2/tree/master/examples)
+in the repository. <strong>This plugin is not supported by GitHub Pages</strong>.
 
 ## Liquid Attributes Available
 

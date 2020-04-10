@@ -47,8 +47,8 @@ Be sure to run `bundle update` often.
 **GitHub Pages Documentation, Help, and Support**{:.title}<br>
 For more information about what you can do with GitHub Pages, as well as for
 troubleshooting guides, you should check out
-<a href="https://help.github.com/categories/github-pages-basics/">GitHub’s Pages Help section</a>.
-If all else fails, you should contact <a href="https://github.com/contact">GitHub Support</a>.
+[GitHub’s Pages Help section](https://help.github.com/categories/github-pages-basics/).
+If all else fails, you should contact [GitHub Support](https://github.com/contact).
 
 ### Project Page URL Structure
 
@@ -114,8 +114,8 @@ to see more detailed examples.
 
 {: .note .warning}
 **Source files must be in the root directory**{:.title}<br>
-GitHub Pages <a href="https://help.github.com/en/github/working-with-github-pages/troubleshooting-jekyll-build-errors-for-github-pages-sites">overrides</a>
-the <a href="{{ '/docs/configuration/options/' | relative_url }}">"Site Source"</a>
+GitHub Pages [overrides](https://help.github.com/en/github/working-with-github-pages/troubleshooting-jekyll-build-errors-for-github-pages-sites)
+the ["Site Source"]({{ '/docs/configuration/options/' | relative_url }})
 configuration value, so if you locate your files anywhere other than the
 root directory, your site may not build correctly.
 
@@ -124,4 +124,4 @@ root directory, your site may not build correctly.
 While Windows is not officially supported, it is possible
 to install the <code>github-pages</code> gem on Windows.
 Special instructions can be found on our
-<a href="{{ '/docs/installation/windows/' | relative_url }}">Windows-specific docs page</a>.
+[Windows-specific docs page]({{ '/docs/installation/windows/' | relative_url }}).

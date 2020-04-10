@@ -39,10 +39,10 @@ You have 3 options for installing plugins:
 
 {: .note .info}
 **Plugins on GitHub Pages**{:.title}<br>
-<a href="https://pages.github.com/">GitHub Pages</a> is powered by Jekyll.
+[GitHub Pages](https://pages.github.com/) is powered by Jekyll.
 All Pages sites are generated using the <code>--safe</code> option
 to disable plugins (with the exception of some
-<a href="https://pages.github.com/versions">whitelisted plugins</a>) for
+[whitelisted plugins](https://pages.github.com/versions)) for
 security reasons. Unfortunately, this means
 your plugins won’t work if you’re deploying to GitHub Pages.
 <br>
