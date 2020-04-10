@@ -18,18 +18,11 @@ some of the most popular Jekyll resources.
 - [jekyll-plugin topic on GitHub](https://github.com/topics/jekyll-plugin)
 - [Planet Jekyll](https://github.com/planetjekyll/awesome-jekyll-plugins)
 
-## Editors
+## Guides
 
-- Visual Studio Code has [various jekyll related plugins](https://marketplace.visualstudio.com/search?term=tag%3Ajekyll&target=VSCode&category=All%20categories&sortBy=Installs) and supports [autocompletion for configuration file](http://json.schemastore.org/jekyll).
-- [jekyll-atom](https://atom.io/packages/jekyll): A collection of snippets and tools for Jekyll in Atom
-- [markdown-writer](https://atom.io/packages/markdown-writer): An Atom package for Jekyll. It can create new posts/drafts, manage tags/categories, insert link/images and add many useful key mappings.
-- [sublime-jekyll](https://github.com/23maverick23/sublime-jekyll): A Sublime Text package for Jekyll static sites. This package should help creating Jekyll sites and posts easier by providing access to key template tags and filters, as well as common completions and a current date/datetime command (for dating posts). You can install this package manually via GitHub, or via [Package Control](https://packagecontrol.io/packages/Jekyll).
-- [vim-jekyll](https://github.com/parkr/vim-jekyll): A vim plugin to generate new posts and run `jekyll build` all without leaving vim.
-- [WordPress2Jekyll](https://wordpress.org/plugins/wp2jekyll/): A WordPress plugin that allows you to use WordPress as your editor and (automatically) export content in to Jekyll. WordPress2Jekyll attempts to marry these two systems together in order to make a site that can be easily managed from all devices.
-
-## Useful Guides
-
-- [Official tutorials]({{ '/tutorials/home/' | relative_url }})
+- [Community tutorials]({{ '/tutorials/home/' | relative_url }})
+- [Deploy Jekyll with ZEIT Now](https://github.com/zeit/now/tree/master/examples/jekyll)
+- [Deploy Jekyll 4.0 on Netlify](https://www.netlify.com/blog/2020/04/02/a-step-by-step-guide-jekyll-4.0-on-netlify/)
 - [CloudCannon Academy](https://learn.cloudcannon.com/) is a set of resources created by [CloudCannon](https://cloudcannon.com/) to help folks get up and running with Jekyll. They cover all skill levels, and even include some great video tutorials.
 - [Jekyll Cheatsheet](https://learn.cloudcannon.com/jekyll-cheat-sheet/) is a single-page resource for Jekyll filters, variables, and the like.
 - ["Creating and Hosting a Personal Site on GitHub"](http://jmcglone.com/guides/github-pages/)
@@ -75,6 +68,16 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [Algolia](https://blog.algolia.com/instant-search-blog-documentation-jekyll-plugin/): Add a powerful instant search to your Jekyll site
   - [Bonsai Search](https://docs.bonsai.io/article/217-jekyll): The easiest way to use Elasticsearch for your Jekyll site
   - [CloudSh](https://cloudsh.com/generators/How-to-setup-search-on-Jekyll/): Website search with a few lines of JavaScript
+
+## Editors plugins
+
+- Visual Studio Code has [various jekyll related plugins](https://marketplace.visualstudio.com/search?term=tag%3Ajekyll&target=VSCode&category=All%20categories&sortBy=Installs) and supports [autocompletion for configuration file](http://json.schemastore.org/jekyll).
+- [jekyll-atom](https://atom.io/packages/jekyll): A collection of snippets and tools for Jekyll in Atom
+- [markdown-writer](https://atom.io/packages/markdown-writer): An Atom package for Jekyll. It can create new posts/drafts, manage tags/categories, insert link/images and add many useful key mappings.
+- [sublime-jekyll](https://github.com/23maverick23/sublime-jekyll): A Sublime Text package for Jekyll static sites. This package should help creating Jekyll sites and posts easier by providing access to key template tags and filters, as well as common completions and a current date/datetime command (for dating posts). You can install this package manually via GitHub, or via [Package Control](https://packagecontrol.io/packages/Jekyll).
+- [vim-jekyll](https://github.com/parkr/vim-jekyll): A vim plugin to generate new posts and run `jekyll build` all without leaving vim.
+- [WordPress2Jekyll](https://wordpress.org/plugins/wp2jekyll/): A WordPress plugin that allows you to use WordPress as your editor and (automatically) export content in to Jekyll. WordPress2Jekyll attempts to marry these two systems together in order to make a site that can be easily managed from all devices.
+
 
 ## Other commentary
 
