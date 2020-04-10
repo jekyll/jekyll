@@ -55,17 +55,14 @@ Use the <a href="/docs/liquid/tags/#linking-to-posts"><code>post_url</code></a>
 tag to link to other posts without having to worry about the URLs
 breaking when the site permalink style changes.
 
-<div class="note info">
-  <h5>Be aware of character sets</h5>
-  <p>
-    Content processors can modify certain characters to make them look nicer.
-    For example, the <code>smart</code> extension in Redcarpet converts standard,
-    ASCII quotation characters to curly, Unicode ones. In order for the browser
-    to display those characters properly, define the charset meta value by
-    including <code>&lt;meta charset=&quot;utf-8&quot;&gt;</code> in the
-    <code>&lt;head&gt;</code> of your layout.
-  </p>
-</div>
+{: .note .info}
+**Be aware of character sets**{:.title}<br>
+Content processors can modify certain characters to make them look nicer.
+For example, the <code>smart</code> extension in Redcarpet converts standard,
+ASCII quotation characters to curly, Unicode ones. In order for the browser
+to display those characters properly, define the charset meta value by
+including <code>&lt;meta charset=&quot;utf-8&quot;&gt;</code> in the
+<code>&lt;head&gt;</code> of your layout.
 
 ## Including images and resources
 

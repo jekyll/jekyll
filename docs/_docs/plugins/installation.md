@@ -37,21 +37,18 @@ You have 3 options for installing plugins:
 
    Now you need to install all plugins from your Bundler group by running single command `bundle install`.
 
-<div class="note info">
-  <h5>Plugins on GitHub Pages</h5>
-  <p>
-    <a href="https://pages.github.com/">GitHub Pages</a> is powered by Jekyll.
-    All Pages sites are generated using the <code>--safe</code> option
-    to disable plugins (with the exception of some
-    <a href="https://pages.github.com/versions">whitelisted plugins</a>) for
-    security reasons. Unfortunately, this means
-    your plugins won’t work if you’re deploying to GitHub Pages.<br><br>
-    You can still use GitHub Pages to publish your site, but you’ll need to
-    convert the site locally and push the generated static files to your GitHub
-    repository instead of the Jekyll source files.
-  </p>
-</div>
-
+{: .note .info}
+**Plugins on GitHub Pages**{:.title}<br>
+<a href="https://pages.github.com/">GitHub Pages</a> is powered by Jekyll.
+All Pages sites are generated using the <code>--safe</code> option
+to disable plugins (with the exception of some
+<a href="https://pages.github.com/versions">whitelisted plugins</a>) for
+security reasons. Unfortunately, this means
+your plugins won’t work if you’re deploying to GitHub Pages.
+<br>
+You can still use GitHub Pages to publish your site, but you’ll need to
+convert the site locally and push the generated static files to your GitHub
+repository instead of the Jekyll source files.
 
 {: .note}
 **<code>_plugins</code>, <code>_config.yml</code> and <code>Gemfile</code> can be used simultaneously**{:.title}<br>

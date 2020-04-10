@@ -74,13 +74,10 @@ Jane has worked on Jekyll for the past *five years*.
   marked for processing even if they do not contain front matter.
 </em>
 
-<div class="note info">
-  <h5>Be sure to name your directories correctly</h5>
-  <p>
+{: .note .info}
+**Be sure to name your directories correctly**{:.title}<br>
 The folder must be named identically to the collection you defined in
 your <code>_config.yml</code> file, with the addition of the preceding <code>_</code> character.
-  </p>
-</div>
 
 ## Output
 
@@ -261,30 +258,27 @@ you specified in your `_config.yml` (if present) and the following information:
 </table>
 </div>
 
-<div class="note info">
-  <h5>A Hard-Coded Collection</h5>
-  <p>In addition to any collections you create yourself, the
-  <code>posts</code> collection is hard-coded into Jekyll. It exists whether
-  you have a <code>_posts</code> directory or not. This is something to note
-  when iterating through <code>site.collections</code> as you may need to
-  filter it out.</p>
-  <p>You may wish to use filters to find your collection:
-  <code>{% raw %}{{ site.collections | where: "label", "myCollection" | first }}{% endraw %}</code></p>
-</div>
+{: .note .info}
+**A Hard-Coded Collection**{:.title}<br>
+In addition to any collections you create yourself, the
+<code>posts</code> collection is hard-coded into Jekyll. It exists whether
+you have a <code>_posts</code> directory or not. This is something to note
+when iterating through <code>site.collections</code> as you may need to
+filter it out.
+<br>
+You may wish to use filters to find your collection:
+<code>{% raw %}{{ site.collections | where: "label", "myCollection" | first }}{% endraw %}</code>
 
-<div class="note info">
-  <h5>Collections and Time</h5>
-  <p>Except for documents in hard-coded default collection <code>posts</code>, all documents in collections
-    you create, are accessible via Liquid irrespective of their assigned date, if any, and therefore renderable.
-  </p>
-  <p>Documents are attempted to be written to disk only if the concerned collection
-    metadata has <code>output: true</code>. Additionally, future-dated documents are only written if
-    <code>site.future</code> <em>is also true</em>.
-  </p>
-  <p>More fine-grained control over documents being written to disk can be exercised by setting
-    <code>published: false</code> (<em><code>true</code> by default</em>) in the document's front matter.
-  </p>
-</div>
+{: .note .info}
+**Collections and Time**{:.title}<br>
+Except for documents in hard-coded default collection <code>posts</code>, all documents in collections
+you create, are accessible via Liquid irrespective of their assigned date, if any, and therefore renderable.<br>
+Documents are attempted to be written to disk only if the concerned collection
+metadata has <code>output: true</code>. Additionally, future-dated documents are only written if
+<code>site.future</code> <em>is also true</em>.
+<br>
+More fine-grained control over documents being written to disk can be exercised by setting
+<code>published: false</code> (<em><code>true</code> by default</em>) in the document's front matter.
 
 ### Documents
 

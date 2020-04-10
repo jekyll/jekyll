@@ -61,14 +61,10 @@ used by `gem install`.
 bundle config set --local path 'vendor/bundle'
 ```
 
-<div class="note info">
-  <h5>Bundler Config is Persistent</h5>
-  <p>
-    This step is only required once per project. Bundler saves your config in
-    <code>./.bundle/config</code>, so future gems will be installed to the same
-    location.
-  </p>
-</div>
+{: .note .info}
+**Bundler Config is Persistent**{:.title}<br>
+This step is only required once per project. Bundler saves your config in
+<code>./.bundle/config</code>, so future gems will be installed to the same location.
 
 ## Add Jekyll
 

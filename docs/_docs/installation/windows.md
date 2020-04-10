@@ -85,12 +85,10 @@ That's it! You're ready to start using Jekyll.
 You can make sure time management is working properly by inspecting your `_posts` folder. You should see a markdown file
 with the current date in the filename.
 
-<div class="note info">
-  <h5>Non-superuser account issues</h5>
-  <p>If the `jekyll new` command prints the error "Your user account isn't allowed to install to the system RubyGems", see
-  the "Running Jekyll as Non-Superuser" instructions in
-  <a href="{{ '/docs/troubleshooting/#no-sudo' | relative_url }}">Troubleshooting</a>.</p>
-</div>
+{: .note .info}
+**Non-superuser account issues**{:.title}<br>
+If the `jekyll new` command prints the error "Your user account isn't allowed to install to the system RubyGems", see
+the "Running Jekyll as Non-Superuser" instructions in <a href="{{ '/docs/troubleshooting/#no-sudo' | relative_url }}">Troubleshooting</a>.
 
 {: .note .info}
 Bash on Ubuntu on Windows is still under development, so you may run into issues.

@@ -34,10 +34,7 @@ that value will be available as <code>layout.class</code> in the layout and its 
 
 {% include docs_variables_table.html scope=site.data.jekyll_variables.paginator %}
 
-<div class="note info">
-  <h5>Paginator variable availability</h5>
-  <p>
-    These are only available in index files, however they can be located in a subdirectory,
-    such as <code>/blog/index.html</code>.
-  </p>
-</div>
+{: .note .info}
+**Paginator variable availability**{:.title}<br>
+These are only available in index files, however they can be located in a subdirectory,
+such as <code>/blog/index.html</code>.

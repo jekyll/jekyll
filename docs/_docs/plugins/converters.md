@@ -8,13 +8,10 @@ include it by implementing your own converter. Both the Markdown and
 [Textile](https://github.com/jekyll/jekyll-textile-converter) markup
 languages are implemented using this method.
 
-<div class="note info">
-  <h5>Remember your Front Matter</h5>
-  <p>
-    Jekyll will only convert files that have a YAML header at the top, even for
-    converters you add using a plugin.
-  </p>
-</div>
+{: .note .info}
+**Remember your Front Matter**{:.title}<br>
+Jekyll will only convert files that have a YAML header at the top, even for
+converters you add using a plugin.
 
 Below is a converter that will take all posts ending in `.upcase` and process
 them using the `UpcaseConverter`:

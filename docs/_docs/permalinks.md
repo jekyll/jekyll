@@ -342,10 +342,10 @@ For posts, Jekyll also provides the following built-in styles for convenience:
 
 Rather than typing `permalink: /:categories/:year/:month/:day/:title/`, you can just type `permalink: pretty`.
 
-<div class="note info">
-<h5>Specifying permalinks through the front matter</h5>
-<p>Built-in permalink styles are not recognized in front matter. As a result, <code>permalink: pretty</code> will not work.</p>
-</div>
+{: .note .info}
+**Specifying permalinks through the front matter**{:.title}<br>
+Built-in permalink styles are not recognized in front matter.
+As a result, <code>permalink: pretty</code> will not work.
 
 ### Collections
 

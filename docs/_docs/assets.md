@@ -24,14 +24,13 @@ have a file named `css/styles.scss` in your site's source folder, Jekyll
 will process it and put it in your site's destination folder under
 `css/styles.css`.
 
-<div class="note info">
-  <h5>Jekyll processes all Liquid filters and tags in asset files</h5>
-  <p>If you are using <a href="https://mustache.github.io">Mustache</a>
-     or another JavaScript templating language that conflicts with
-     the <a href="{{ '/docs/templates/' | relative_url }}">Liquid template syntax</a>, you
-     will need to place <code>{&#37; raw &#37;}</code> and
-     <code>{&#37; endraw &#37;}</code> tags around your code.</p>
-</div>
+{: .note .info}
+**Jekyll processes all Liquid filters and tags in asset files**{:.title}<br>
+If you are using <a href="https://mustache.github.io">Mustache</a>
+or another JavaScript templating language that conflicts with
+the <a href="{{ '/docs/templates/' | relative_url }}">Liquid template syntax</a>, you
+will need to place <code>{&#37; raw &#37;}</code> and
+<code>{&#37; endraw &#37;}</code> tags around your code.
 
 ## Sass/SCSS
 
@@ -55,18 +54,13 @@ The Sass converter will default the `sass_dir` configuration option to
 
 [example-sass]: https://github.com/jekyll/jekyll-sass-converter/tree/master/docs
 
-<div class="note info">
-  <h5>The <code>sass_dir</code> is only used by Sass</h5>
-  <p>
-
-    Note that the <code>sass_dir</code> becomes the load path for Sass imports,
-    nothing more. This means that Jekyll does not know about these files
-    directly. Any files here should not contain the empty front matter as
-    described above. If they do, they'll not be transformed as described above. This
-    folder should only contain imports.
-
-  </p>
-</div>
+{: .note .info}
+**The <code>sass_dir</code> is only used by Sass**{:.title}<br>
+Note that the <code>sass_dir</code> becomes the load path for Sass imports,
+nothing more. This means that Jekyll does not know about these files
+directly. Any files here should not contain the empty front matter as
+described above. If they do, they'll not be transformed as described above. This
+folder should only contain imports.
 
 You may also specify the output style with the `style` option in your
 `_config.yml` file:
