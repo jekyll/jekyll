@@ -96,6 +96,10 @@ module Jekyll
               gem "tzinfo-data"
             end
 
+            # Event Machine does not load correctly on Windows when --livereload flag is used. Explicit bundling
+            # the gem would resolve the problem.
+            gem 'eventmachine', '~> 1.2', platform: :ruby
+
             # Performance-booster for watching directories on Windows
             gem "wdm", "~> 0.1.1", :install_if => Gem.win_platform?
 
