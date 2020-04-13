@@ -151,11 +151,10 @@ class TestEntryFilter < JekyllUnitTest
     end
 
     should "match directory only if there is trailing slash" do
-      data = ["../_glob_include_test/", "_not_dir/"]
-      assert @filter.glob_include?(data, "../_glob_include_test")
-      assert @filter.glob_include?(data, "../_glob_include_test/include_me.txt")
-      assert !@filter.glob_include?(data, "../_not_dir")
+      data = ["../_glob_include_test/_is_dir/", "../_glob_include_test/_not_dir/"]
+      assert @filter.glob_include?(data, "../_glob_include_test/_is_dir")
+      assert @filter.glob_include?(data, "../_glob_include_test/_is_dir/include_me.txt")
+      assert !@filter.glob_include?(data, "../_glob_include_test/_not_dir")
     end
-
   end
 end
