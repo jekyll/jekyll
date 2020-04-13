@@ -76,7 +76,7 @@ module Jekyll
     def publishable?(doc)
       site.publisher.publish?(doc).tap do |will_publish|
         if !will_publish && site.publisher.hidden_in_the_future?(doc)
-          Jekyll.logger.warn "Skipping:", "#{doc.relative_path} has a future date"
+          Jekyll.logger.warn "Skipping:", "#{doc.relative_path} has a future date, run jekyll with --future to publish anyway"
         end
       end
     end
