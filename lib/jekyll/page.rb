@@ -47,10 +47,10 @@ module Jekyll
               end
 
       process(name)
-      read_yaml(File.join(base, dir), name)
+      read_yaml(PathManager.join(base, dir), name)
 
       data.default_proc = proc do |_, key|
-        site.frontmatter_defaults.find(File.join(dir, name), type, key)
+        site.frontmatter_defaults.find(relative_path, type, key)
       end
 
       Jekyll::Hooks.trigger :pages, :post_init, self
@@ -68,6 +68,38 @@ module Jekyll
         url_dir = File.dirname(url)
         url_dir.end_with?("/") ? url_dir : "#{url_dir}/"
       end
+    end
+
+    # For backwards-compatibility in subclasses that do not redefine
+    # the `:to_liquid` method, stash existing definition under a new name
+    #
+    # TODO: Remove in Jekyll 5.0
+    alias_method :legacy_to_liquid, :to_liquid
+    private :legacy_to_liquid
+
+    # Private
+    # Subclasses can choose to optimize their `:to_liquid` method by wrapping
+    # it around this definition.
+    #
+    # TODO: Remove in Jekyll 5.0
+    def liquid_drop
+      @liquid_drop ||= begin
+        defaults = site.frontmatter_defaults.all(relative_path, type)
+        unless defaults.empty?
+          Utils.deep_merge_hashes!(data, Utils.deep_merge_hashes!(defaults, data))
+        end
+        Drops::PageDrop.new(self)
+      end
+    end
+    private :liquid_drop
+
+    # Public
+    #
+    # Liquid representation of current page
+    #
+    # TODO: Remove optional parameter in Jekyll 5.0
+    def to_liquid(attrs = nil)
+      self.class == Jekyll::Page ? liquid_drop : legacy_to_liquid(attrs)
     end
 
     # The full path and filename of the post. Defined in the YAML of the post
@@ -116,10 +148,11 @@ module Jekyll
     #
     # name - The String filename of the page file.
     #
+    # NOTE: `String#gsub` removes all trailing periods (in comparison to `String#chomp`)
     # Returns nothing.
     def process(name)
       self.ext = File.extname(name)
-      self.basename = name[0..-ext.length - 1]
+      self.basename = name[0..-ext.length - 1].gsub(%r!\.*\z!, "")
     end
 
     # Add any necessary layouts to this post
@@ -144,7 +177,7 @@ module Jekyll
 
     # The path to the page source file, relative to the site source
     def relative_path
-      File.join(*[@dir, @name].map(&:to_s).reject(&:empty?)).sub(%r!\A\/!, "")
+      @relative_path ||= File.join(*[@dir, @name].map(&:to_s).reject(&:empty?)).sub(%r!\A\/!, "")
     end
 
     # Obtain destination path.
@@ -161,7 +194,7 @@ module Jekyll
 
     # Returns the object as a debug String.
     def inspect
-      "#<Jekyll::Page @name=#{name.inspect}>"
+      "#<#{self.class} @relative_path=#{relative_path.inspect}>"
     end
 
     # Returns the Boolean of whether this Page is HTML or not.

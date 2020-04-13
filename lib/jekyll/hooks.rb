@@ -60,6 +60,7 @@ module Jekyll
     # Ensure the priority is a Fixnum
     def self.priority_value(priority)
       return priority if priority.is_a?(Integer)
+
       PRIORITY_MAP[priority] || DEFAULT_PRIORITY
     end
 
@@ -90,11 +91,8 @@ module Jekyll
     # interface for Jekyll core components to trigger hooks
     def self.trigger(owner, event, *args)
       # proceed only if there are hooks to call
-      return unless @registry[owner]
-      return unless @registry[owner][event]
-
-      # hooks to call for this owner and event
-      hooks = @registry[owner][event]
+      hooks = @registry.dig(owner, event)
+      return if hooks.nil? || hooks.empty?
 
       # sort and call hooks according to priority and load order
       hooks.sort_by { |h| @hook_priority[h] }.each do |hook|

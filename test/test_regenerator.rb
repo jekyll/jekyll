@@ -42,6 +42,7 @@ class TestRegenerator < JekyllUnitTest
       # because regenerate? checks if the destination exists
       [@page, @post, @document, @asset_file].each do |item|
         next unless item.respond_to?(:destination)
+
         dest = item.destination(@site.dest)
         FileUtils.mkdir_p(File.dirname(dest))
         FileUtils.touch(dest)

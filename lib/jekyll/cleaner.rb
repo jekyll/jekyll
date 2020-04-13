@@ -3,7 +3,7 @@
 module Jekyll
   # Handles the cleanup of a site's destination before it is built.
   class Cleaner
-    HIDDEN_FILE_REGEX = %r!\/\.{1,2}$!
+    HIDDEN_FILE_REGEX = %r!\/\.{1,2}$!.freeze
     attr_reader :site
 
     def initialize(site)
@@ -45,6 +45,7 @@ module Jekyll
 
       Utils.safe_glob(site.in_dest_dir, ["**", "*"], File::FNM_DOTMATCH).each do |file|
         next if file =~ HIDDEN_FILE_REGEX || file =~ regex || dirs.include?(file)
+
         files << file
       end
 
@@ -65,7 +66,7 @@ module Jekyll
     #
     # Returns a Set with the directory paths
     def new_dirs
-      @new_dirs ||= new_files.map { |file| parent_dirs(file) }.flatten.to_set
+      @new_dirs ||= new_files.flat_map { |file| parent_dirs(file) }.to_set
     end
 
     # Private: The list of parent directories of a given file
@@ -76,7 +77,7 @@ module Jekyll
       if parent_dir == site.dest
         []
       else
-        [parent_dir] + parent_dirs(parent_dir)
+        parent_dirs(parent_dir).unshift(parent_dir)
       end
     end
 
@@ -93,7 +94,7 @@ module Jekyll
     #
     # Returns a Set with the directory paths
     def keep_dirs
-      site.keep_files.map { |file| parent_dirs(site.in_dest_dir(file)) }.flatten.to_set
+      site.keep_files.flat_map { |file| parent_dirs(site.in_dest_dir(file)) }.to_set
     end
 
     # Private: Creates a regular expression from the config's keep_files array

@@ -12,7 +12,7 @@ module Jekyll
       mutable false
 
       def_delegator :@obj, :relative_path, :path
-      def_delegators :@obj, :id, :output, :content, :to_s, :relative_path, :url
+      def_delegators :@obj, :id, :output, :content, :to_s, :relative_path, :url, :date
 
       private def_delegator :@obj, :data, :fallback_data
 
@@ -26,6 +26,7 @@ module Jekyll
 
       def <=>(other)
         return nil unless other.is_a? DocumentDrop
+
         cmp = self["date"] <=> other["date"]
         cmp = self["path"] <=> other["path"] if cmp.nil? || cmp.zero?
         cmp

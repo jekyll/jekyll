@@ -1,8 +1,7 @@
 # Jekyll
 _site/
-.jekyll-cache
+*-cache/
 .jekyll-metadata
-.sass-cache
 
 # Ruby
 .bundle/

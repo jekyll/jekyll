@@ -41,10 +41,16 @@ module Jekyll
           after_install(new_blog_path, options)
         end
 
+        def blank_template
+          File.expand_path("../../blank_template", __dir__)
+        end
+
         def create_blank_site(path)
+          FileUtils.cp_r blank_template + "/.", path
+          FileUtils.chmod_R "u+w", path
+
           Dir.chdir(path) do
-            FileUtils.mkdir(%w(_layouts _posts _drafts))
-            FileUtils.touch("index.html")
+            FileUtils.mkdir(%w(_data _drafts _includes _posts))
           end
         end
 
@@ -74,18 +80,24 @@ module Jekyll
             # Happy Jekylling!
             gem "jekyll", "~> #{Jekyll::VERSION}"
             # This is the default theme for new Jekyll sites. You may change this to anything you like.
-            gem "minima", "~> 2.0"
+            gem "minima", "~> 2.5"
             # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
             # uncomment the line below. To upgrade, run `bundle update github-pages`.
             # gem "github-pages", group: :jekyll_plugins
             # If you have any plugins, put them here!
             group :jekyll_plugins do
-              gem "jekyll-feed", "~> 0.6"
+              gem "jekyll-feed", "~> 0.12"
             end
-            # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-            gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+            # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
+            # and associated library.
+            install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do
+              gem "tzinfo", "~> 1.2"
+              gem "tzinfo-data"
+            end
+
             # Performance-booster for watching directories on Windows
-            gem "wdm", "~> 0.1.0" if Gem.win_platform?
+            gem "wdm", "~> 0.1.1", :install_if => Gem.win_platform?
 
           RUBY
         end
@@ -127,9 +139,11 @@ module Jekyll
         def after_install(path, options = {})
           unless options["blank"] || options["skip-bundle"]
             begin
-              require "bundler"
+              # Activate 'bundler' gem and puts it into the `loaded_specs`.
+              # For details: https://rubydocs.org/d/ruby-2-4-0/classes/Kernel.html#method-i-gem
+              gem "bundler"
               bundle_install path
-            rescue LoadError
+            rescue Gem::MissingSpecError
               Jekyll.logger.info "Could not load Bundler. Bundle install skipped."
             end
           end
@@ -141,8 +155,10 @@ module Jekyll
         def bundle_install(path)
           Jekyll.logger.info "Running bundle install in #{path.cyan}..."
           Dir.chdir(path) do
-            exe = Gem.bin_path("bundler", "bundle")
-            process, output = Jekyll::Utils::Exec.run("ruby", exe, "install")
+            bundler_gemspec = Gem.loaded_specs["bundler"]
+            exe = bundler_gemspec.bin_file "bundle"
+            require_paths = bundler_gemspec.full_require_paths
+            process, output = Jekyll::Utils::Exec.run("ruby", "-I", *require_paths, exe, "install")
 
             output.to_s.each_line do |line|
               Jekyll.logger.info("Bundler:".green, line.strip) unless line.to_s.empty?

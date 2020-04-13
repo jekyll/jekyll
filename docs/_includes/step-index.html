@@ -1,0 +1,34 @@
+{% assign docs = site.docs | where_exp: "doc", "doc.url contains '/step-by-step/'" -%}
+
+{% for doc in docs -%}
+  {% if doc.url == page.url -%}
+    <div class="section-nav">
+      <div class="left align-right">
+        {% if forloop.first -%}
+          <span class="prev disabled">Back</span>
+        {% else -%}
+          {% assign previous = forloop.index0 | minus: 1 -%}
+          <a href="{{ docs[previous].url }}" class="prev">Back</a>
+        {% endif -%}
+      </div>
+      <div class="right align-left">
+      {% if forloop.last -%}
+        <span class="next disabled">Next</span>
+      {% else -%}
+        {% assign next = forloop.index0 | plus: 1 -%}
+        <a href="{{ docs[next].url }}" class="next">Next</a>
+      {% endif -%}
+      </div>
+    </div>
+    <div class="clear"></div>
+    {% break -%}
+  {% endif -%}
+{% endfor -%}
+
+<ol class="step-nav">
+  {% for step in docs -%}
+  <li {%- if step.url == page.url %} class="current"{% endif %}><a href="{{ step.url }}">
+    {{- step.title -}}
+  </a></li>
+  {% endfor -%}
+</ol>

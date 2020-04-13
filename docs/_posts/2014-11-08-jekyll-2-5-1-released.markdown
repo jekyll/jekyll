@@ -3,7 +3,7 @@ title: 'Jekyll 2.5.1 Released'
 date: 2014-11-09 09:47:52 -0800
 author: parkr
 version: 2.5.1
-categories: [release]
+category: release
 ---
 
 Hot on the heels of v2.5.0, this release brings relief to our Windows

@@ -1,6 +1,8 @@
 ---
+inherit_from: .rubocop_todo.yml
 
 require:
+  - rubocop-performance
   - ./rubocop/jekyll
 
 Jekyll/NoPutsAllowed:
@@ -8,7 +10,7 @@ Jekyll/NoPutsAllowed:
     - rake/*.rake
 
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.4
   Include:
     - lib/**/*.rb
     - test/**/*.rb
@@ -19,13 +21,13 @@ AllCops:
     - script/**/*
     - vendor/**/*
     - tmp/**/*
-Layout/AlignHash:
+Layout/HashAlignment:
   EnforcedHashRocketStyle: table
 Layout/IndentationWidth:
   Severity: error
-Layout/IndentArray:
+Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
-Layout/IndentHash:
+Layout/FirstHashElementIndentation:
   EnforcedStyle: consistent
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
@@ -38,6 +40,10 @@ Layout/EmptyComment:
   Enabled: false
 Layout/EndAlignment:
   Severity: error
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
 Lint/UnreachableCode:
   Severity: error
 Lint/Void:
@@ -63,7 +69,7 @@ Metrics/CyclomaticComplexity:
   Exclude:
     - lib/jekyll/utils.rb
     - lib/jekyll/commands/serve.rb
-Metrics/LineLength:
+Layout/LineLength:
   Exclude:
     - !ruby/regexp /features\/.*.rb/
     - Rakefile
@@ -77,6 +83,8 @@ Metrics/MethodLength:
   Severity: error
 Metrics/ModuleLength:
   Max: 240
+  Exclude:
+    - lib/jekyll/filters.rb
 Metrics/ParameterLists:
   Max: 4
 Metrics/PerceivedComplexity:
@@ -88,12 +96,10 @@ Naming/HeredocDelimiterNaming:
     - test/**/*.rb
 Naming/MemoizedInstanceVariableName:
   Exclude:
-    - lib/jekyll/page_without_a_file.rb
-    - lib/jekyll/drops/unified_payload_drop.rb
+    - lib/jekyll/convertible.rb
     - lib/jekyll/drops/site_drop.rb
-Naming/UncommunicativeMethodParamName:
-  AllowedNames:
-    - _
+    - lib/jekyll/drops/unified_payload_drop.rb
+    - lib/jekyll/page_without_a_file.rb
 Security/MarshalLoad:
   Exclude:
     - !ruby/regexp /test\/.*.rb$/
@@ -120,11 +126,18 @@ Style/DoubleNegation:
 Style/FormatStringToken:
   Exclude:
     - lib/jekyll/utils/ansi.rb
+    - lib/jekyll/liquid_renderer/table.rb
 Style/GuardClause:
   Enabled: false
+Style/HashEachMethods:
+  Enabled: true
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
   Severity: error
+Style/HashTransformKeys:
+  Enabled: false
+Style/HashTransformValues:
+  Enabled: true
 Style/MixinUsage:
   Exclude:
     - test/helper.rb

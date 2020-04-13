@@ -4,10 +4,24 @@ require "helper"
 require "rouge"
 
 class TestKramdown < JekyllUnitTest
+  def fixture_converter(config)
+    site = fixture_site(
+      Utils.deep_merge_hashes(
+        {
+          "markdown" => "kramdown",
+        },
+        config
+      )
+    )
+    Jekyll::Cache.clear
+    site.find_converter_instance(
+      Jekyll::Converters::Markdown
+    )
+  end
+
   context "kramdown" do
     setup do
       @config = {
-        "markdown" => "kramdown",
         "kramdown" => {
           "smart_quotes"            => "lsquo,rsquo,ldquo,rdquo",
           "entity_output"           => "as_char",
@@ -22,6 +36,7 @@ class TestKramdown < JekyllUnitTest
             "css"        => :class,
             "css_class"  => "highlight",
             "formatter"  => ::Rouge::Formatters::HTMLLegacy,
+            "foobar"     => "lipsum",
           },
         },
       }
@@ -30,45 +45,42 @@ class TestKramdown < JekyllUnitTest
         @config["kramdown"]["syntax_highlighter_opts"].keys
 
       @config = Jekyll.configuration(@config)
-      @markdown = Converters::Markdown.new(@config)
-      @markdown.setup
+      @converter = fixture_converter(@config)
     end
 
-    should "fill symbolized keys into config for compatibility with kramdown" do
-      kramdown_config = @markdown.instance_variable_get(:@parser)
-        .instance_variable_get(:@config)
-
-      @kramdown_config_keys.each do |key|
-        assert kramdown_config.key?(key.to_sym),
-               "Expected #{kramdown_config} to include key #{key.to_sym.inspect}"
-      end
-
-      @syntax_highlighter_opts_config_keys.each do |key|
-        assert kramdown_config["syntax_highlighter_opts"].key?(key.to_sym),
-               "Expected #{kramdown_config["syntax_highlighter_opts"]} to include " \
-               "key #{key.to_sym.inspect}"
-      end
-
-      assert_equal kramdown_config["smart_quotes"], kramdown_config[:smart_quotes]
-      assert_equal kramdown_config["syntax_highlighter_opts"]["css"],
-                   kramdown_config[:syntax_highlighter_opts][:css]
+    should "not break kramdown" do
+      kramdown_doc = Kramdown::Document.new("# Some Header #", @config["kramdown"])
+      assert_equal :class, kramdown_doc.options[:syntax_highlighter_opts][:css]
+      assert_equal "lipsum", kramdown_doc.options[:syntax_highlighter_opts][:foobar]
     end
 
     should "run Kramdown" do
-      assert_equal "<h1>Some Header</h1>", @markdown.convert("# Some Header #").strip
+      assert_equal "<h1>Some Header</h1>", @converter.convert("# Some Header #").strip
     end
 
     should "should log kramdown warnings" do
       allow_any_instance_of(Kramdown::Document).to receive(:warnings).and_return(["foo"])
       expect(Jekyll.logger).to receive(:warn).with("Kramdown warning:", "foo")
-      @markdown.convert("Something")
+      @converter.convert("Something")
+    end
+
+    should "render fenced code blocks with syntax highlighting" do
+      result = nokogiri_fragment(@converter.convert(<<~MARKDOWN))
+        ~~~ruby
+        puts "Hello World"
+        ~~~
+      MARKDOWN
+      div_highlight = ">div.highlight"
+      selector = "div.highlighter-rouge#{div_highlight}>pre.highlight>code"
+      refute(result.css(selector).empty?, result.to_html)
     end
 
     context "when asked to convert smart quotes" do
       should "convert" do
+        converter = fixture_converter(@config)
         assert_match(
           %r!<p>(&#8220;|“)Pit(&#8217;|’)hy(&#8221;|”)<\/p>!,
-          @markdown.convert(%("Pit'hy")).strip
+          converter.convert(%("Pit'hy")).strip
         )
       end
 
@@ -79,36 +91,22 @@ class TestKramdown < JekyllUnitTest
             "smart_quotes" => "lsaquo,rsaquo,laquo,raquo",
           },
         }
-
-        markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, override))
+        converter = fixture_converter(Utils.deep_merge_hashes(@config, override))
         assert_match %r!<p>(&#171;|«)Pit(&#8250;|›)hy(&#187;|»)<\/p>!, \
-                     markdown.convert(%("Pit'hy")).strip
+                     converter.convert(%("Pit'hy")).strip
       end
-    end
-
-    should "render fenced code blocks with syntax highlighting" do
-      result = nokogiri_fragment(@markdown.convert(Utils.strip_heredoc(<<-MARKDOWN)))
-        ~~~ruby
-        puts "Hello World"
-        ~~~
-      MARKDOWN
-      div_highlight = ">div.highlight"
-      selector = "div.highlighter-rouge#{div_highlight}>pre.highlight>code"
-      refute result.css(selector).empty?
     end
 
     context "when a custom highlighter is chosen" do
       should "use the chosen highlighter if it's available" do
         override = {
           "highlighter" => nil,
-          "markdown"    => "kramdown",
           "kramdown"    => {
-            "syntax_highlighter" => :coderay,
+            "syntax_highlighter" => "coderay",
           },
         }
-
-        markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, override))
-        result = nokogiri_fragment(markdown.convert(Utils.strip_heredoc(<<-MARKDOWN)))
+        converter = fixture_converter(Utils.deep_merge_hashes(@config, override))
+        result = nokogiri_fragment(converter.convert(<<~MARKDOWN))
           ~~~ruby
           puts "Hello World"
           ~~~
@@ -120,7 +118,6 @@ class TestKramdown < JekyllUnitTest
 
       should "support legacy enable_coderay... for now" do
         override = {
-          "markdown" => "kramdown",
           "kramdown" => {
             "enable_coderay" => true,
           },
@@ -128,8 +125,9 @@ class TestKramdown < JekyllUnitTest
 
         @config.delete("highlighter")
         @config["kramdown"].delete("syntax_highlighter")
-        markdown = Converters::Markdown.new(Utils.deep_merge_hashes(@config, override))
-        result = nokogiri_fragment(markdown.convert(Utils.strip_heredoc(<<-MARKDOWN)))
+
+        converter = fixture_converter(Utils.deep_merge_hashes(@config, override))
+        result = nokogiri_fragment(converter.convert(<<~MARKDOWN))
           ~~~ruby
           puts "Hello World"
           ~~~
@@ -141,17 +139,18 @@ class TestKramdown < JekyllUnitTest
     end
 
     should "move coderay to syntax_highlighter_opts" do
+      override = {
+        "higlighter" => nil,
+        "kramdown"   => {
+          "syntax_highlighter" => "coderay",
+          "coderay"            => {
+            "hello" => "world",
+          },
+        },
+      }
       original = Kramdown::Document.method(:new)
-      markdown = Converters::Markdown.new(
-        Utils.deep_merge_hashes(@config,
-                                "higlighter" => nil,
-                                "markdown"   => "kramdown",
-                                "kramdown"   => {
-                                  "syntax_highlighter" => "coderay",
-                                  "coderay"            => {
-                                    "hello" => "world",
-                                  },
-                                })
+      converter = fixture_converter(
+        Utils.deep_merge_hashes(@config, override)
       )
 
       expect(Kramdown::Document).to receive(:new) do |arg1, hash|
@@ -159,7 +158,7 @@ class TestKramdown < JekyllUnitTest
         original.call(arg1, hash)
       end
 
-      markdown.convert("hello world")
+      converter.convert("hello world")
     end
   end
 end

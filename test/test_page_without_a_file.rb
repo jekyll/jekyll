@@ -33,6 +33,10 @@ class TestPageWithoutAFile < JekyllUnitTest
         @page = setup_page("properties.html")
       end
 
+      should "identify itself properly" do
+        assert_equal '#<Jekyll::PageWithoutAFile @relative_path="properties.html">', @page.inspect
+      end
+
       should "not have page-content and page-data defined within it" do
         assert_equal "pages", @page.type.to_s
         assert_nil @page.content
@@ -71,6 +75,12 @@ class TestPageWithoutAFile < JekyllUnitTest
             assert_nil @page[prop]
           end
         end
+      end
+
+      should "be exposed to Liquid as a Hash" do
+        liquid_rep = @page.to_liquid
+        refute_equal Jekyll::Drops::PageDrop, liquid_rep.class
+        assert_equal Hash, liquid_rep.class
       end
     end
 

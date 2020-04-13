@@ -3,7 +3,7 @@ title: 'Jekyll 3.3 is here with better theme support, new URL filters, and tons 
 date: 2016-10-06 11:10:38 -0700
 author: parkr
 version: 3.3.0
-categories: [release]
+category: release
 ---
 
 There are tons of great new quality-of-life features you can use in 3.3.
@@ -20,7 +20,7 @@ In an effort to make theme management a bit easier, any files you put into
 user's site. This means you can ship SCSS and CoffeeScript, images and
 webfonts, and so on -- anything you'd consider a part of the
 *presentation*. Same rules apply here as in a Jekyll site: if it has YAML
-front matter, it will be converted and rendered. No YAML front matter, and
+front matter, it will be converted and rendered. No front matter, and
 it will simply be copied over like a static asset.
 
 Note that if a user has a file of the same path, the theme content will not
@@ -38,31 +38,31 @@ new filters have you covered. When working locally, if you set your
 then `relative_url` will ensure that this baseurl is prepended to anything
 you pass it:
 
-{% highlight liquid %}
 {% raw %}
+```liquid
 {{ "/docs/assets/" | relative_url }} => /myproject/docs/assets
+```
 {% endraw %}
-{% endhighlight %}
 
 By default, `baseurl` is set to `""` and therefore yields (never set to
 `"/"`):
 
-{% highlight liquid %}
 {% raw %}
+```liquid
 {{ "/docs/assets/" | relative_url }} => /docs/assets
+```
 {% endraw %}
-{% endhighlight %}
 
 A result of `relative_url` will safely always produce a URL which is
 relative to the domain root. A similar principle applies to `absolute_url`.
 It prepends your `baseurl` and `url` values, making absolute URLs all the
 easier to make:
 
-{% highlight liquid %}
 {% raw %}
+```liquid
 {{ "/docs/assets/" | absolute_url }} => https://jekyllrb.com/myproject/docs/assets
+```
 {% endraw %}
-{% endhighlight %}
 
 ### 3. `site.url` is set by the development server
 

@@ -1,0 +1,14 @@
+---
+layout: news
+title: News
+permalink: /news/
+author: all
+---
+
+{% for post in site.posts -%}
+  {% if forloop.index == 1 -%}
+    {% include news_item.html -%}
+  {% else -%}
+    {% include news_item_archive.html -%}
+  {% endif -%}
+{% endfor -%}

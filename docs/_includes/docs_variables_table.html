@@ -1,0 +1,18 @@
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for var in include.scope -%}
+    <tr>
+      <td><p><code>{{ var.name }}</code></p></td>
+      <td><p>{{- var.description -}}</p></td>
+    </tr>
+  {% endfor -%}
+  </tbody>
+</table>
+</div>

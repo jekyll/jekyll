@@ -664,17 +664,77 @@ article h2:first-child { margin-top: 0; }
 }
 
 .post-date,
-.post-author { margin-left: 10px; }
+.post-author { margin-left: 15px; }
+.post-author .author-name { margin-left: 8px }
 
 .news article + article {
-  margin-top: -10px;
-  @include border-radius(0 0 10px 10px);
+  margin-top: -6px;
+  padding: 15px 40px;
   border-top: 1px solid #555;
+  border-radius: 0;
   @include box-shadow(0 -1px 0 #2f2f2f);
+
+  h2.post-title {
+    margin-bottom: 0.45em;
+  }
+  .post-category {
+    margin-right: 20px;
+    padding-left: 0;
+    width: 150px;
+    box-sizing: border-box;
+    .label {
+      float: right;
+    }
+  }
+  .cell-left, .cell-right {
+    display: inline-block;
+  }
+  .cell-left {
+    max-width: 180px;
+  }
+  .cell-right {
+    width: calc(100% - 130px);
+  }
+  .post-date { margin-left: 0 }
 }
 
-/* Code Highlighting */
+/* Tutorials */
 
+.tutorial-header {
+  float: none;
+  margin-bottom: 30px;
+  padding: 0 0 15px;
+  background: transparent;
+  border-bottom: 1px solid #545454;
+  .improve { padding-top: 14px }
+  .tutorial-title {
+    display: block;
+    width: calc(100% - 160px);
+    font-size: 1.75em
+  }
+}
+
+.tutorial-meta {
+  @extend .post-meta;
+  font-weight: 400;
+  text-shadow: none;
+  .tutorial-date,
+  .tutorial-author {
+    display: inline-block;
+    height: 24px
+  }
+}
+
+.tutorial-date {
+  vertical-align: sub
+}
+.tutorial-author {
+  margin-left: 15px;
+  .author-name { vertical-align: middle }
+}
+
+
+/* Code Highlighting */
 
 pre,
 code {
@@ -708,6 +768,15 @@ h5 > code,
     0 -1px 0 rgba(0,0,0,.5));
 }
 
+.note .highlight {
+  width: 94%;
+  pre code {
+    font-size: 0.9em;
+    background-color: transparent;
+    box-shadow: none;
+  }
+}
+
 .note code {
   background-color: #333;
   background-color: rgba(0,0,0,0.2);
@@ -727,7 +796,10 @@ h5 > code,
   overflow: auto;
 }
 
-pre.highlight { padding: 10px 0.5em; }
+pre.highlight,
+.highlight > pre { 
+  padding: 10px 0.5em; 
+}
 
 .highlighter-rouge .highlight {
   @extend .highlight;
@@ -957,6 +1029,16 @@ code.output {
   }
 }
 
+p.note {
+  color: #fff;
+  font-weight: 400;
+  font-size: .75em;
+
+  &:after {
+    line-height: 1.21;
+  }
+}
+
 .info {
   background-color: #0389aa;
   background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAzODlhYSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDYxN2YiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
@@ -1092,6 +1174,25 @@ code.output {
   height: 100%;
 }
 
+.imageWrapper {
+  width: 100%;
+  height: 0;
+  padding-bottom: 62.623762376237624%; /* You define this doing height / width * 100% */
+  position: relative;
+  background: #717171;
+  display: block;
+
+  img {
+    width: 100%;
+    position: absolute;
+    opacity: 0;
+  }
+  img.b-loaded {
+    opacity: 1;
+    transition: opacity .5s;
+  }
+}
+
 
 /* Helper class taken from Bootstrap.
    Hides an element to all devices except screen readers.
@@ -1154,4 +1255,50 @@ code.output {
   pre.highlight {
     background: #1c1c1c;
   }
+}
+
+.showcase {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  li {
+    flex: 1 1 300px;
+    box-sizing: border-box;
+    margin: 10px;
+    figure {
+      margin: 0;
+    }
+    figcaption {
+      text-align: center;
+    }
+    &.spacer {
+      height: 0;
+      margin: 0;
+    }
+  }
+}
+
+.step-nav {
+  background: #2b2b2b;
+  border-radius: 5px;
+  color: #fc0;
+  padding: 8px 45px;
+
+  li {
+    margin: 0;
+    padding: 0;
+
+    &.current, &.current a {
+      color: #f90;
+      font-weight: bold;
+    }
+  }
+}
+
+ol div.highlighter-rouge {
+  margin: 8px 0 10px 0;
 }

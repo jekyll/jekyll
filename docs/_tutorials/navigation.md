@@ -1,7 +1,7 @@
 ---
-layout: tutorials
-permalink: /tutorials/navigation/
 title: Navigation
+author: tomjoht
+date: 2017-01-24 15:38:17 -0800
 ---
 
 If your Jekyll site has a lot of pages, you might want to create navigation for the pages. Instead of hard-coding navigation links, you can programmatically retrieve a list of pages to build the navigation for your site.
@@ -48,27 +48,29 @@ docs:
 
 **Liquid**
 
+{% raw %}
 ```liquid
-{% raw %}<h2>{{ site.data.samplelist.docs_list_title }}</h2>
+<h2>{{ site.data.samplelist.docs_list_title }}</h2>
 <ul>
    {% for item in site.data.samplelist.docs %}
-      <li><a href="{{ item.url }}" alt="{{ item.title }}">{{ item.title }}</a></li>
+      <li><a href="{{ item.url }}">{{ item.title }}</a></li>
    {% endfor %}
-</ul>{% endraw %}
+</ul>
 ```
+{% endraw %}
 
 **Result**
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <h2>ACME Documentation</h2>
    <ul>
-      <li><a href="#" alt="Introduction">Introduction</a></li>
-      <li><a href="#" alt="Configuration">Configuration</a></li>
-      <li><a href="#" alt="Deployment">Deployment</a></li>
+      <li><a href="#">Introduction</a></li>
+      <li><a href="#">Configuration</a></li>
+      <li><a href="#">Deployment</a></li>
    </ul>
 </div>
 
-{: .note .info }
-For the results in these fictitious samples, `#` is manually substituted for the actual link value to avoid 404 errors.)
+{: .note .info}
+For the results in these fictitious samples, `#` is manually substituted for the actual link value (to avoid 404 errors.)
 
 When you use a `for` loop, you choose how you want to refer to the items you're looping through. The variable you choose (in this case, `item`) becomes how you access the properties of each item in the list. Dot notation is used to get a property of the item (for example, `item.url`).
 
@@ -96,7 +98,7 @@ Suppose you wanted to sort the list by the `title`. To do this, convert the refe
 {% assign doclist = site.data.samplelist.docs | sort: 'title'  %}
 <ol>
 {% for item in doclist %}
-    <li><a href="{{ item.url }}" alt="{{ item.title }}">{{ item.title }}</a></li>
+    <li><a href="{{ item.url }}">{{ item.title }}</a></li>
 {% endfor %}
 </ol>
 ```
@@ -104,11 +106,11 @@ Suppose you wanted to sort the list by the `title`. To do this, convert the refe
 
 **Result**
 
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <ol>
-      <li><a href="#" alt="Configuration">Configuration</a></li>
-      <li><a href="#" alt="Deployment">Deployment</a></li>
-      <li><a href="#" alt="Introduction">Introduction</a></li>
+      <li><a href="#">Configuration</a></li>
+      <li><a href="#">Deployment</a></li>
+      <li><a href="#">Introduction</a></li>
    </ol>
 </div>
 
@@ -174,7 +176,7 @@ toc:
 {% endraw %}
 
 **Result**
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
     <h3>Group 1</h3>
       <ul>
           <li><a href="#">Thing 1</a></li>
@@ -281,7 +283,7 @@ toc2:
 
 **Result**
 
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <div>
       <h3>Group 1</h3>
       <ul>
@@ -352,7 +354,7 @@ sidebar: toc
 
 **Result**
 
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <ul>
       <li><a href="#">Introduction</a></li>
       <li><a href="#">Configuration</a></li>
@@ -369,12 +371,14 @@ For more information, see [Expressions and Variables](https://github.com/Shopify
 In addition to inserting items from the YAML data file into your list, you also usually want to highlight the current link if the user is viewing that page. You do this by inserting an `active` class for items that match the current page URL.
 
 **CSS**
+
 ```css
 .result li.active a {
     color: lightgray;
     cursor: default;
-  }
+}
 ```
+
 **Liquid**
 
 {% raw %}
@@ -396,7 +400,7 @@ In addition to inserting items from the YAML data file into your list, you also 
   }
 </style>
 
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <ul>
       <li class=""><a href="#">Introduction</a></li>
       <li class=""><a href="#">Configuration</a></li>
@@ -406,13 +410,14 @@ In addition to inserting items from the YAML data file into your list, you also 
 
 In this case, assume `Deployment` is the current page.
 
-To make sure the `item.url` (stored in the YAML file) matches the `page.url`, it can be helpful to print the `{% raw %}{{ page.url }}{% endraw %}` to the page.
+To make sure the `item.url` (stored in the YAML file) matches the `page.url`, it can be helpful to print the {% raw %}`{{ page.url }}`{% endraw %} to the page.
 
 ## Scenario 7: Including items conditionally
 
 You might want to include items conditionally in your list. For example, maybe you have multiple site outputs and only want to include the sidebar item for certain outputs. You can add properties in each list item and then use those properties to conditionally include the content.
 
 **YAML**
+
 ```yaml
 docs2_list_title: ACME Documentation
 docs2:
@@ -446,7 +451,7 @@ docs2:
 
 **Result**
 
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <ul>
       <li><a href="#">Introduction</a></li>
       <li><a href="#">Configuration</a></li>
@@ -457,7 +462,7 @@ The `Deployment` page is excluded because its `version` is `2`.
 
 ## Scenario 8: Retrieving items based on front matter properties
 
-If you don't want to store your navigation items in a YAML file in your `_data` folder, you can use `for` loops to look through the YAML front matter of each page or collection and get the content based on properties in the front matter.
+If you don't want to store your navigation items in a YAML file in your `_data` folder, you can use `for` loops to look through the front matter of each page or collection and get the content based on properties in the front matter.
 
 In this scenario, suppose we have a collection called `_docs`. Collections are often better than pages because they allow you to narrow the list of what you're looping through. (Try to avoid scenarios where you loop through large numbers of items, since it will increase your build time. [Collections]({% link _docs/collections.md %}) help you narrow the scope.)
 
@@ -528,7 +533,7 @@ If you wanted to simply get all docs in the collection for a specific category, 
 
 The result would be as follows:
 
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <h3>Getting Started</h3>
    <ul>
       <li><a href="#">Sample1</a></li>
@@ -564,7 +569,7 @@ Here's the code for getting lists of pages grouped under their corresponding cat
 
 **Result**
 
-<div class="highlight result">
+<div class="highlight result" data-proofer-ignore>
    <h2>Getting-started</h2>
    <ul>
       <li><a href="#">Sample2</a></li>
@@ -586,11 +591,11 @@ Let's walk through the code. First, we assign a variable (`mydocs`) to the colle
 
 The `group_by` filter groups the collection content by `category`. More specifically, the `group_by` filter converts `mydocs` into an array with `name`, `items`, and `size` properties, somewhat like this:
 
-```yaml
+```json
 [
   {"name": "getting-started", "items": [Sample 1, Sample 2],"size": 2},
-  {"name": "configuration", "items": [Topic 1, Topic 2],  "size": 2},
-  {"name": "deployment", "items": [Widget 1, Widget 2, "size": 2}
+  {"name": "configuration", "items": [Topic 1, Topic 2], "size": 2},
+  {"name": "deployment", "items": [Widget 1, Widget 2], "size": 2}
 ]
 ```
 
@@ -603,3 +608,65 @@ The `for item in items` loop looks through each `item` and gets the `title` and 
 For more details on the `group_by` filter, see [Jekyll's Templates documentation](https://jekyllrb.com/docs/templates/) as well as [this Siteleaf tutorial](https://www.siteleaf.com/blog/advanced-liquid-group-by/). For more details on the `sort` filter, see [sort](https://shopify.github.io/liquid/filters/sort/) in Liquid's documentation.
 
 Whether you use properties in your doc's front matter to retrieve your pages or a YAML data file, in both cases you can programmatically build a more robust navigation for your site.
+
+## Scenario 9: Nested tree navigation with recursion
+
+Suppose you want a nested tree navigation of any depth. We can achieve this by recursively looping through our tree of navigation links.
+
+**YAML**
+
+```yaml
+nav:
+  - title: Deployment
+    url: deployment.html
+    subnav:
+      - title: Heroku
+        url: heroku.html
+        subnav:
+          - title: Jekyll on Heroku
+            url: jekyll-on-heroku.html
+  - title: Help
+    url: help.html
+```
+
+**Liquid**
+
+First, we'll create an include that we can use for rendering the navigation tree. This file would be `_includes/nav.html`
+
+{% raw %}
+```liquid
+<ul>
+  {% for item in include.nav %}
+    <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+
+    {% if item.subnav %}
+      {% include nav.html nav=item.subnav %}
+    {% endif %}
+  {% endfor %}
+</ul>
+```
+{% endraw %}
+
+To render this in your layout or pages, you would simply include the template and pass in the `nav` parameter. In this case, we'll use the `page.nav` to grab it from the yaml frontmatter.
+
+{% raw %}
+```liquid
+{% include nav.html nav=page.nav %}
+```
+{% endraw %}
+
+Our include will use this first, then look through each item for a `subnav` property to recursively render the nested lists.
+
+**Result**
+<div class="highlight result" data-proofer-ignore>
+   <ul>
+      <li><a href="#">Deployment</a></li>
+      <ul>
+        <li><a href="#">Heroku</a></li>
+        <ul>
+          <li><a href="#">Jekyll On Heroku</a></li>
+        </ul>
+      </ul>
+      <li><a href="#">Help</a></li>
+   </ul>
+</div>

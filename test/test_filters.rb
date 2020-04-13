@@ -48,6 +48,7 @@ class TestFilters < JekyllUnitTest
       @time_as_numeric = 1_399_680_607
       @integer_as_string = "142857"
       @array_of_objects = [
+        { "color" => "teal", "size" => "large"  },
         { "color" => "red",  "size" => "large"  },
         { "color" => "red",  "size" => "medium" },
         { "color" => "blue", "size" => "medium" },
@@ -137,14 +138,18 @@ class TestFilters < JekyllUnitTest
 
     should "sassify with simple string" do
       assert_equal(
-        "p {\n  color: #123456; }\n",
-        @filter.sassify("$blue:#123456\np\n  color: $blue")
+        "p { color: #123456; }\n",
+        @filter.sassify(<<~SASS)
+          $blue: #123456
+          p
+            color: $blue
+        SASS
       )
     end
 
     should "scssify with simple string" do
       assert_equal(
-        "p {\n  color: #123456; }\n",
+        "p { color: #123456; }\n",
         @filter.scssify("$blue:#123456; p{color: $blue}")
       )
     end
@@ -810,7 +815,7 @@ class TestFilters < JekyllUnitTest
               "The list of grouped items for '' is not an Array."
             )
             # adjust array.size to ignore symlinked page in Windows
-            qty = Utils::Platforms.really_windows? ? 14 : 15
+            qty = Utils::Platforms.really_windows? ? 16 : 18
             assert_equal qty, g["items"].size
           end
         end
@@ -825,6 +830,16 @@ class TestFilters < JekyllUnitTest
             "The size property for '#{g["name"]}' doesn't match the size of the Array."
           )
         end
+      end
+
+      should "should pass integers as is" do
+        grouping = @filter.group_by([
+          { "name" => "Allison", "year" => 2016 },
+          { "name" => "Amy", "year" => 2016 },
+          { "name" => "George", "year" => 2019 },
+        ], "year")
+        assert_equal "2016", grouping[0]["name"]
+        assert_equal "2019", grouping[1]["name"]
       end
     end
 
@@ -843,6 +858,22 @@ class TestFilters < JekyllUnitTest
         assert_equal 2, @filter.where(@array_of_objects, "color", "red").length
       end
 
+      should "filter objects with null properties appropriately" do
+        array = [{}, { "color" => nil }, { "color" => "" }, { "color" => "text" }]
+        assert_equal 2, @filter.where(array, "color", nil).length
+      end
+
+      should "filter objects with numerical properties appropriately" do
+        array = [
+          { "value" => "555" },
+          { "value" => 555 },
+          { "value" => 24.625 },
+          { "value" => "24.625" },
+        ]
+        assert_equal 2, @filter.where(array, "value", 24.625).length
+        assert_equal 2, @filter.where(array, "value", 555).length
+      end
+
       should "filter array properties appropriately" do
         hash = {
           "a" => { "tags"=>%w(x y) },
@@ -859,6 +890,36 @@ class TestFilters < JekyllUnitTest
           "c" => { "tags"=>%w(y z) },
         }
         assert_equal 2, @filter.where(hash, "tags", "x").length
+      end
+
+      should "filter hash properties with null and empty values" do
+        hash = {
+          "a" => { "tags" => {} },
+          "b" => { "tags" => "" },
+          "c" => { "tags" => nil },
+          "d" => { "tags" => ["x", nil] },
+          "e" => { "tags" => [] },
+          "f" => { "tags" => "xtra" },
+        }
+
+        assert_equal [{ "tags" => nil }], @filter.where(hash, "tags", nil)
+
+        assert_equal(
+          [{ "tags" => "" }, { "tags" => ["x", nil] }],
+          @filter.where(hash, "tags", "")
+        )
+
+        # `{{ hash | where: 'tags', empty }}`
+        assert_equal(
+          [{ "tags" => {} }, { "tags" => "" }, { "tags" => nil }, { "tags" => [] }],
+          @filter.where(hash, "tags", Liquid::Expression::LITERALS["empty"])
+        )
+
+        # `{{ `hash | where: 'tags', blank }}`
+        assert_equal(
+          [{ "tags" => {} }, { "tags" => "" }, { "tags" => nil }, { "tags" => [] }],
+          @filter.where(hash, "tags", Liquid::Expression::LITERALS["blank"])
+        )
       end
 
       should "not match substrings" do
@@ -911,6 +972,45 @@ class TestFilters < JekyllUnitTest
         assert_equal(
           2,
           @filter.where_exp(@array_of_objects, "item", "item.color == 'red'").length
+        )
+      end
+
+      should "filter objects appropriately with 'or', 'and' operators" do
+        assert_equal(
+          [
+            { "color" => "teal", "size" => "large"  },
+            { "color" => "red",  "size" => "large"  },
+            { "color" => "red",  "size" => "medium" },
+          ],
+          @filter.where_exp(
+            @array_of_objects, "item", "item.color == 'red' or item.size == 'large'"
+          )
+        )
+
+        assert_equal(
+          [
+            { "color" => "red", "size" => "large" },
+          ],
+          @filter.where_exp(
+            @array_of_objects, "item", "item.color == 'red' and item.size == 'large'"
+          )
+        )
+      end
+
+      should "filter objects across multiple conditions" do
+        sample = [
+          { "color" => "teal", "size" => "large", "type" => "variable" },
+          { "color" => "red",  "size" => "large", "type" => "fixed" },
+          { "color" => "red",  "size" => "medium", "type" => "variable" },
+          { "color" => "blue", "size" => "medium", "type" => "fixed" },
+        ]
+        assert_equal(
+          [
+            { "color" => "red", "size" => "large", "type" => "fixed" },
+          ],
+          @filter.where_exp(
+            sample, "item", "item.type == 'fixed' and item.color == 'red' or item.color == 'teal'"
+          )
         )
       end
 
@@ -974,7 +1074,7 @@ class TestFilters < JekyllUnitTest
         posts = @filter.site.site_payload["site"]["posts"]
         results = @filter.where_exp(posts, "post",
                                     "post.date > site.dont_show_posts_before")
-        assert_equal posts.select { |p| p.date > @sample_time }.count, results.length
+        assert_equal posts.count { |p| p.date > @sample_time }, results.length
       end
     end
 
@@ -1008,7 +1108,7 @@ class TestFilters < JekyllUnitTest
               "The list of grouped items for '' is not an Array."
             )
             # adjust array.size to ignore symlinked page in Windows
-            qty = Utils::Platforms.really_windows? ? 14 : 15
+            qty = Utils::Platforms.really_windows? ? 16 : 18
             assert_equal qty, g["items"].size
           end
         end
