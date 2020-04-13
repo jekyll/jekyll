@@ -82,6 +82,7 @@
   * Add version badge for Custom Sorting of Documents (#8098)
   * Docs: Fix grammar in `_docs/front-matter.md` (#8097)
   * Update variables.md (#8106)
+  * Add help about Gentoo/Linux (#8002)
 
 ### Development Fixes
 
