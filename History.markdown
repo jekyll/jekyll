@@ -16,6 +16,7 @@
   * Simplify `Jekyll::Renderer#validate_layout` (#8064)
   * Add static file&#39;s basename to its url_placeholder (#7908)
   * Clear cached Liquid template scope before render (#7967)
+  * Add slugified_categories URL placeholder (#8094)
 
 ### Minor Enhancements
 
