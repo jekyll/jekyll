@@ -214,6 +214,13 @@ When you need to make further changes to the site, make changes to `master` and 
 action will build and deploy your site. Be sure to not edit the `gh-pages` branch directly.
 
 
+## Next steps
+
+- Start to use Jekyll 4 features - also have a look at the differences in case some things such as URLs start to break.
+- Choose another custom plugin you want to use and set it up.
+- Look at other actions available in the Marketplace.
+
+
 ## External links
 
 - [Actions][6] page on Github features.
@@ -221,7 +228,6 @@ action will build and deploy your site. Be sure to not edit the `gh-pages` branc
 - [jekyll-actions][3] is an action available on the Github Marketplace and also used in this guide.
 - [jekyll-actions-quickstart][8] is an unofficial repo that includes a live demo and can be used as
   a template for making a new site.
-
 
 [6]: https://github.com/features/actions
 [7]: https://help.github.com/en/actions
