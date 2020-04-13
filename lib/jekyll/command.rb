@@ -67,6 +67,8 @@ module Jekyll
         cmd.option "show_drafts", "-D", "--drafts", "Render posts in the _drafts folder"
         cmd.option "unpublished", "--unpublished",
                    "Render posts that were marked as unpublished"
+        cmd.option "disable_disk_cache", "--disable-disk-cache",
+                   "Disable caching to disk in non-safe mode"
         cmd.option "quiet", "-q", "--quiet", "Silence output."
         cmd.option "verbose", "-V", "--verbose", "Print verbose output."
         cmd.option "incremental", "-I", "--incremental", "Enable incremental rebuild."

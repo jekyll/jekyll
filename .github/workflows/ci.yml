@@ -24,7 +24,7 @@ jobs:
         - ubuntu-latest
         - windows-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
       with:
         fetch-depth: 5
     - name: Set up Ruby 2.6

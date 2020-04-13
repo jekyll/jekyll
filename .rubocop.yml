@@ -21,13 +21,13 @@ AllCops:
     - script/**/*
     - vendor/**/*
     - tmp/**/*
-Layout/AlignHash:
+Layout/HashAlignment:
   EnforcedHashRocketStyle: table
 Layout/IndentationWidth:
   Severity: error
-Layout/IndentFirstArrayElement:
+Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
-Layout/IndentFirstHashElement:
+Layout/FirstHashElementIndentation:
   EnforcedStyle: consistent
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
@@ -40,6 +40,10 @@ Layout/EmptyComment:
   Enabled: false
 Layout/EndAlignment:
   Severity: error
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
 Lint/UnreachableCode:
   Severity: error
 Lint/Void:
@@ -65,7 +69,7 @@ Metrics/CyclomaticComplexity:
   Exclude:
     - lib/jekyll/utils.rb
     - lib/jekyll/commands/serve.rb
-Metrics/LineLength:
+Layout/LineLength:
   Exclude:
     - !ruby/regexp /features\/.*.rb/
     - Rakefile
@@ -79,6 +83,8 @@ Metrics/MethodLength:
   Severity: error
 Metrics/ModuleLength:
   Max: 240
+  Exclude:
+    - lib/jekyll/filters.rb
 Metrics/ParameterLists:
   Max: 4
 Metrics/PerceivedComplexity:
@@ -123,9 +129,15 @@ Style/FormatStringToken:
     - lib/jekyll/liquid_renderer/table.rb
 Style/GuardClause:
   Enabled: false
+Style/HashEachMethods:
+  Enabled: true
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
   Severity: error
+Style/HashTransformKeys:
+  Enabled: false
+Style/HashTransformValues:
+  Enabled: true
 Style/MixinUsage:
   Exclude:
     - test/helper.rb

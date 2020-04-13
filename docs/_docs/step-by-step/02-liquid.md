@@ -7,7 +7,6 @@ Liquid is where Jekyll starts to get more interesting. Liquid is a templating
 language which has three main parts: [objects](#objects), [tags](#tags) and
 [filters](#filters).
 
-
 ## Objects
 
 Objects tell Liquid where to output content. They're denoted by double curly
@@ -68,7 +67,7 @@ Now it's your turn, change the Hello World! on your page to output as lowercase:
 
 To get our changes processed by Jekyll we need to add [front matter](../03-front-matter/) to the top of the page:
 
-```markdown
+```yaml
 ---
 # front matter tells Jekyll to process Liquid
 ---
