@@ -14,6 +14,7 @@
   * Use `layout.path` when rendering the Liquid layout (#8069)
   * Reduce array allocations from `StaticFile#path` (#8083)
   * Simplify `Jekyll::Renderer#validate_layout` (#8064)
+  * Add static file&#39;s basename to its url_placeholder (#7908)
 
 ### Minor Enhancements
 
