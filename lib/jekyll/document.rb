@@ -116,7 +116,7 @@ module Jekyll
     #
     # Returns the output extension
     def output_ext
-      @output_ext ||= Jekyll::Renderer.new(site, self).output_ext
+      renderer.output_ext
     end
 
     # The base filename of the document, without the file extname.
@@ -131,6 +131,10 @@ module Jekyll
     # Returns the base filename of the document.
     def basename
       @basename ||= File.basename(path)
+    end
+
+    def renderer
+      @renderer ||= Jekyll::Renderer.new(site, self)
     end
 
     # Produces a "cleaned" relative path.
