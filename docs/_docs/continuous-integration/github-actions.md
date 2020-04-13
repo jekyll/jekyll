@@ -1,7 +1,5 @@
 ---
 title: Github Actions
-author: MichaelCurrin
-date: 2020-04-13 19:00:00 +0200
 ---
 
 When building a Jekyll site with Github Pages, the standard flow is restricted for security reasons
