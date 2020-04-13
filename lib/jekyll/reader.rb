@@ -186,8 +186,8 @@ module Jekyll
 
     # Read data files within current site.
     #
-    # If the site uses a theme and the theme has a `_data` directory at its root, read the files within
-    # and passively add them to the site's data hash.
+    # If the site uses a theme and the theme has a `_data` directory at its root, read the files
+    # within and passively add them to the site's data hash.
     # Only those keys that do not already exist in the site's data hash will be inserted from
     # the theme-gem's data files.
     #
