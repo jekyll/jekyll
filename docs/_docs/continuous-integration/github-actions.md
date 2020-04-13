@@ -17,7 +17,7 @@ Using Jekyll with Github Actions lets you do the following:
 ### Gems
 
 - **Jekyll version** - Specify a Jekyll version in your Gemfile rather than using the standard
-  `3.8.5`. You can now use Jekyll `4` - see this guide to [upgrading][0] Jekyll.
+  `3.8.5`. You can now use Jekyll `4.x.x`. See this guide to [upgrading][0] Jekyll for understanding the differences and how they impact you.
 - **Plugins** - Install Jekyll plugins which are not on the [supported versions][1] list. Or use a
   different version to the standard environment.
 - **Themes** - While using a custom theme is possible without Actions, it is now simpler.
