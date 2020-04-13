@@ -596,6 +596,7 @@ class TestFilters < JekyllUnitTest
         assert_equal "/front_matter.erb", page.url
         url = filter.relative_url(page.url)
         url << "foo"
+        assert_equal "/front_matter.erb", filter.relative_url(page.url)
         assert_equal "/front_matter.erb", page.url
       end
 

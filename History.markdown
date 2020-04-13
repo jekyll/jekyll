@@ -12,6 +12,12 @@
   * Allow multiple binary operators in where_exp filter (#8047)
   * Fix documents custom-ordering logic (#8028)
   * Use `layout.path` when rendering the Liquid layout (#8069)
+  * Reduce array allocations from `StaticFile#path` (#8083)
+  * Simplify `Jekyll::Renderer#validate_layout` (#8064)
+  * Add static file&#39;s basename to its url_placeholder (#7908)
+  * Clear cached Liquid template scope before render (#7967)
+  * Add slugified_categories URL placeholder (#8094)
+  * Cache URLFilter results of string inputs per site (#7990)
 
 ### Minor Enhancements
 
@@ -22,6 +28,7 @@
   * Optimize markdown parsing with Kramdown by reusing the options and parser objects (#8013)
   * Add PageDrop to provide Liquid templates with data (#7992)
   * Optimize `Kramdown::JekyllDocument#to_html` calls (#8041)
+  * Reduce Jekyll::Renderer instances during a build (#7570)
 
 ### Documentation
 
@@ -70,6 +77,11 @@
   * Non-deprecated `vendor/bundle` path configuration (#8048)
   * Update 09-collections.md (#8060)
   * Remove extra paragraph tags (#8063)
+  * Add default front matter for tutorials collection (#8081)
+  * Create CSV to table tutorial (#8090)
+  * Add version badge for Custom Sorting of Documents (#8098)
+  * Docs: Fix grammar in `_docs/front-matter.md` (#8097)
+  * Update variables.md (#8106)
 
 ### Development Fixes
 
@@ -93,10 +105,15 @@
   * chore: simplify require for Jekyll::VERSION (#8057)
   * Remove version-constraint relaxation for i18n gem (#8055)
   * Mirror `spec.homepage` as `metadata[&#34;homepage_uri&#34;]` (#8056)
+  * Reduce Pathname objects from front matter defaults (#8067)
+  * Quicker categories for documents without superdirs (#7987)
+  * Bump Ruby versions on Travis builds (#8088)
 
 ### Site Enhancements
 
   * Optimize rendering of the documentation site (#8020)
+  * Utilize relative_url filter in documentation site (#8089)
+  * Render tutorial metadata in documentation site (#8092)
 
 ## 4.0.0 / 2019-08-19
 
