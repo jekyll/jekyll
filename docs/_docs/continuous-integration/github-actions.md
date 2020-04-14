@@ -12,7 +12,7 @@ GitHub repo, while still hosting with GitHub Pages.
 
 ## Advantages of using Actions
 
-### Gems
+### Set up gems
 
 - **Jekyll version** - Rather than using the standard version `3.8.5`, you can specify any version
   such as Jekyll `4.0.0`. See this guide to [upgrading][0] Jekyll for understanding the differences
@@ -24,7 +24,7 @@ GitHub repo, while still hosting with GitHub Pages.
 [0]: {{ '/docs/upgrading/3-to-4/' | relative_url }}
 [1]: https://pages.github.com/versions/
 
-### Workflow
+### Manage the workflow
 
 - **Customization** - By creating a workflow file to run Actions, you can now specify custom build
   steps, use environment variables and set an output destination (such as another branch or repo).
@@ -163,7 +163,7 @@ For example:
 [5]: https://rubygems.org/gems/jekyll-timeago
 
 
-### Install gems
+### 6. Install gems
 
 It is recommended to use [Bundler][6] to manage your project gems. Use that to install the gems we
 set above.
@@ -180,7 +180,7 @@ to this to do remove the `Gemfile.lock` from version control and add it file to 
 this now.
 
 
-### 6. Build and deploy
+### 7. Build and deploy
 
 Save and push any local changes on `master`.
 
@@ -199,7 +199,7 @@ If all goes well, all steps will be green successes and there will be no serious
 Also, the built assets will now exist on the `gh-pages` branch.
 
 
-### 7. View site
+### 8. View site
 
 On a successful build, GitHub Pages will publish the site stored on the repo's `gh-pages` branches.
 Note that you do not need to setup a `gh-pages` branch or enable GitHub Pages, as the action will
@@ -213,7 +213,7 @@ To see the live site:
 4. View your site. Make sure the `timeago` filter works as expected.
 
 
-### 8. Make further changes
+### 9. Make further changes
 
 When you need to make further changes to the site, make changes to `master` and push them. The
 workflow will build and deploy your site.
