@@ -76,8 +76,8 @@ Create a **workflow file** using one of the following approaches:
 
 **Copy** the following to your workflow file, then save it.
 
-{% highlight liquid %}
 {% raw %}
+```yaml
 name: Build and deploy Jekyll to GitHub Pages
 
 on:
@@ -93,8 +93,8 @@ jobs:
       - uses: helaili/jekyll-action@2.0.0
         env:
           JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
+```
 {% endraw %}
-{% endhighlight %}
 
 To explain that workflow file:
 
@@ -157,14 +157,14 @@ On one of your markdown pages, use the [Timeago][5] plugin.
 
 For example:
 
-{% highlight liquid %}
 {% raw %}
+```liquid
 {% assign date = '2020-04-13T10:20:00Z' %}
 
 - Original date - {{ date }}
 - With timeago filter - {{ date | timeago }}
+```
 {% endraw %}
-{% endhighlight %}
 
 [5]: https://rubygems.org/gems/jekyll-timeago
 
