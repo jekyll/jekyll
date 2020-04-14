@@ -102,7 +102,7 @@ To explain that workflow:
   is a "Personal Access Token" and is detailed in the next section.
 
 
-### 3. Set a secret
+### 3. Give the action permissions
 
 The action needs permissions to push to your `gh-pages` branch. So create a GitHub **authentication
 token** on your GitHub profile, then set it as an environment variable in your build using
@@ -111,7 +111,7 @@ _Secrets_.
 1. On your GitHub profile, go to the [Tokens][4] page and then the **Personal Access Tokens**
    section.
 2. **Create** a token. Give it a name like "GitHub Actions" and ensure it has permissions to
-   `public_repos` - necessary for pushing to `gh-pages` branch.
+   `public_repos` - necessary for the action to commit to the `gh-pages` branch.
 3. **Copy** the token value.
 4. Go to your repo's _Settings_ and then the **Secrets** tab.
 5. **Create** a token named `JEKYLL_PAT`. Set the value using the value copied above.
@@ -128,7 +128,7 @@ gem 'jekyll', '~> 4.0.0'
 ```
 
 
-### 5. Add custom plugin
+### 5. Add a custom plugin
 
 The [Timeago][5] plugin have been selected for this tutorial, as it is unsupported by the standard
 GitHub Pages build. The point of the plugin is to turn a date (e.g. `2016-03-23T10:20:00Z`) into a
@@ -189,10 +189,10 @@ The action will be triggered and your build will start.
 To watch the progress and see any build errors, check on the build status using one of the following
 approaches:
 
-- View by commit
+- **View by commit**
     - Go to the repo's level view in GitHub. Under the most recent commit (near the top) you’ll see
       a status symbol next to the commit message. Click the tick or _X_, then click _details_.
-- Actions tab
+- **Actions tab**
     - Go to the repo's Actions tab. Click on a workflow run.
 
 If all goes well, all steps will be green successes and there will be no serious errors in the log.
