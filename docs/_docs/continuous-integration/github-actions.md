@@ -1,18 +1,18 @@
 ---
-title: Github Actions
+title: GitHub Actions
 ---
 
-When building a Jekyll site with Github Pages, the standard flow is restricted for security reasons
+When building a Jekyll site with GitHub Pages, the standard flow is restricted for security reasons
 and to make it simpler to get a site setup. So, to get flexibility over the build and deploy steps,
-you can use Github Actions.
+you can use GitHub Actions.
 
 This guide shows some of the benefits of using this integration and how to setup it up on your own
-repo, while still hosting with Github Pages.
+repo, while still hosting with GitHub Pages.
 
 
 ## Advantages of using Actions
 
-Using Jekyll with Github Actions lets you do the following:
+Using Jekyll with GitHub Actions lets you do the following:
 
 ### Gems
 
@@ -28,9 +28,9 @@ Using Jekyll with Github Actions lets you do the following:
 ### Workflow
 
 - **Customization** - By creating a workflow file to run actions, you're no longer limited to the
-  steps, environment variables or output destination of the standard Github Pages build.
+  steps, environment variables or output destination of the standard GitHub Pages build.
 - **Logging** - The build log is verbose, so it is much easier to debug errors than with the
-  standard Github Pages flow.
+  standard GitHub Pages flow.
 
 
 ## How to setup Jekyll with Actions
@@ -43,7 +43,7 @@ Follow these steps to use Actions on your project.
 ### 1. Setup branches
 
 Choose an existing Jekyll project or follow the [Quickstart][2] guide. Make sure the repo is on
-Github.
+GitHub.
 
 [2]: {{ '/docs' | relative_url }}
 
@@ -59,7 +59,7 @@ Do **not** make any manual commits to `gh-pages` from now on as they will be los
 
 ### 2. Setup workflow
 
-Now we add a Github workflow file to your project - this will ensure Actions is trigger and runs so
+Now we add a GitHub workflow file to your project - this will ensure Actions is trigger and runs so
 we can build and deploy. Though there are many similar Jekyll-related actions to choose from, we
 chose [Jekyll Actions][3] from the marketplace for this tutorial. It simple to setup but gives
 enough flexibility.
@@ -69,7 +69,7 @@ enough flexibility.
 Create a **workflow file** using one of the following approaches:
 
 - Actions tab
-  - Go to the Actions tab on your Github repo and create a new file named `jekyll.yml` for example.
+  - Go to the Actions tab on your GitHub repo and create a new file named `jekyll.yml` for example.
 - Add file to repo
   - Create the the file directly in the repo at the path `.github/worksflows/jekyll.yml`. Note the
     dot at the start. This can be done locally too.
@@ -78,7 +78,7 @@ Create a **workflow file** using one of the following approaches:
 
 {% highlight liquid %}
 {% raw %}
-name: Build and deploy Jekyll to Github Pages
+name: Build and deploy Jekyll to GitHub Pages
 
 on:
   push:
@@ -109,17 +109,17 @@ To explain that workflow file:
 
 ### 3. Set a secret
 
-The action needs permissions to push to your `gh-pages` branch. So we must create a Github
-**authentication token** on your Github profile, then set it as an environment variable in your
+The action needs permissions to push to your `gh-pages` branch. So we must create a GitHub
+**authentication token** on your GitHub profile, then set it as an environment variable in your
 build using _Secrets_.
 
-1. On your Github profile, go to the [Tokens][4] page and then the _Personal Access Tokens_ (PAT)
+1. On your GitHub profile, go to the [Tokens][4] page and then the _Personal Access Tokens_ (PAT)
    section.
 2. Create a token.
-    - Give it a name like _Github Actions_.
+    - Give it a name like _GitHub Actions_.
     - Ensure it has permissions to `public_repos` (necessary for pushing to `gh-pages` branch).
 3. Copy the token value.
-4. Go back back to your repo on Github. Go to the repo's _Settings_ then the _Secrets_ tab.
+4. Go back back to your repo on GitHub. Go to the repo's _Settings_ then the _Secrets_ tab.
 5. Create a token named `JEKYLL_PAT`. Set the value using the one copied above.
 
 [4]: https://github.com/settings/tokens
@@ -137,7 +137,7 @@ gem 'jekyll', '~> 4.0.0'
 ### 5. Add custom plugin
 
 The [Timeago][5] plugin have been selected for this tutorial, as it is unsupported by the standard
-Github Pages build. The point of the plugin is to turn a date (e.g. `2016-03-23T10:20:00Z`) into a
+GitHub Pages build. The point of the plugin is to turn a date (e.g. `2016-03-23T10:20:00Z`) into a
 description of how long ago it was (e.g. _4 years and 3 weeks ago_).
 
 
@@ -189,7 +189,7 @@ Save and push any local changes on `master`. The action will be triggered.
 To watch the progress and see any build errors, check on the build status using one of the following
 approaches:
 
-- Go to your repo's level root in Github. Under the most recent commit (near the top) you’ll see a
+- Go to your repo's level root in GitHub. Under the most recent commit (near the top) you’ll see a
   status symbol next to the commit message. Click the tick or _X_, then click _details_.
 - Go to the repo's _Actions_ tab and click on a workflow run.
 
@@ -199,8 +199,8 @@ will exist on the `gh-pages` branch.
 
 ### 7. View site
 
-On a successful build, _Github Pages_ will publish the site stored on the repo's `gh-pages`
-branches. You do not need to setup a `gh-pages` branch or enable _Github Pages_ - the action will
+On a successful build, _GitHub Pages_ will publish the site stored on the repo's `gh-pages`
+branches. You do not need to setup a `gh-pages` branch or enable _GitHub Pages_ - the action will
 take care of this for you.
 
 To see the live site:
@@ -223,9 +223,9 @@ action will build and deploy your site. Be sure to not edit the `gh-pages` branc
 
 ## External links
 
-- [Actions][6] page on Github features.
-- [Actions][7] page under Github help.
-- [jekyll-actions][3] is an action available on the Github Marketplace and also used in this guide.
+- [Actions][6] page on GitHub features.
+- [Actions][7] page under GitHub help.
+- [jekyll-actions][3] is an action available on the GitHub Marketplace and also used in this guide.
 - [jekyll-actions-quickstart][8] is an unofficial repo that includes a live demo and can be used as
   a template for making a new site.
 
