@@ -3,77 +3,105 @@ title: GitHub Actions
 ---
 
 When building a Jekyll site with GitHub Pages, the standard flow is restricted for security reasons
-and to make it simpler to get a site setup. So to get flexibility over the build and deploy steps
-you can use GitHub Actions.
-
-This guide shows some of the benefits of using this integration and how to setup it up on your own
-GitHub repo, while still hosting with GitHub Pages.
+and to make it simpler to get a site setup. For more control over the build and still host the site
+with GitHub Pages you can use GitHub Actions.
 
 
 ## Advantages of using Actions
 
-### Set up gems
+### Control over gemset
 
-- **Jekyll version** - Rather than using the standard version `3.8.5`, you can specify any version
-  such as Jekyll `4.0.0`. See this guide to [upgrading][0] Jekyll for understanding the differences
-  and how they impact you.
-- **Plugins** - You can install Jekyll plugins which are not on the [supported versions][1] list. Or
-  use a different version to the standard environment.
-- **Themes** - While using a custom theme is possible without Actions, it is now simpler.
+- **Jekyll version** --- Instead of using the currently enabled version (`3.8.5`), you can use any
+  version of Jekyll you want. For example `4.0.0` or point directly to the repository.
+- **Plugins** --- You can use any Jekyll plugins irrespective of them being on the
+  [supported versions][ghp-whitelist] list, even `*.rb` files placed in the `_plugins` directory
+  of yor site.
+- **Themes** --- While using a custom theme is possible without Actions, it is now simpler.
 
-[0]: {{ '/docs/upgrading/3-to-4/' | relative_url }}
-[1]: https://pages.github.com/versions/
+### Workflow Management
 
-### Manage the workflow
-
-- **Customization** - By creating a workflow file to run Actions, you can now specify custom build
-  steps, use environment variables and set an output destination (such as another branch or repo).
-- **Logging** - The build log is verbose, so it is much easier to debug errors using Actions.
+- **Customization** --- By creating a workflow file to run Actions, you can specify custom build
+  steps, use environment variables.
+- **Logging** --- The build log is visible and can be tweaked to be verbose, so it is much easier to
+  debug errors using Actions.
 
 
-## How to setup Jekyll with Actions
+## Workspace setup
 
-This guide covers how to setup a workflow file with a suitable action and then set a custom Jekyll
-version and unsupported plugin so we can see that the action works.
+The first and foremost requirement is a Jekyll project hosted at GitHub. Choose an existing Jekyll
+project or follow the [Quickstart]{{ '/docs' | relative_url }} and push the repository to GitHub
+if it is not hosted there already.
 
-Follow these steps to use Actions on your project.
+We're only going to cover builds from the `master` branch in this page. Therefore, ensure that you
+are working on the `master` branch. If necessary, you may create it based on your default branch.
+When the Action builds your site, the contents of the *destination* directory will be automatically
+pushed to the `gh-pages` branch with a commit, ready to be used for serving.
 
-### 1. Setup branches
+{: .note .warning}
+The Action we're using here will create (or reset an existing) `gh-pages` branch on every successful
+deploy.<br/> So, if you have an existing `gh-pages` branch that is used to deploy your production build,
+ensure to make a backup of the contents into a different branch so that you can rollback easily
+if necessary.
 
-Choose an existing Jekyll project or follow the [Quickstart][2] guide. Make sure the repo is on
-GitHub.
+The Jekyll site we'll be using for the rest of this page initially consists of just a `_config.yml`,
+an `index.md` page and a Gemfile. The contents are respectively:
 
-[2]: {{ '/docs' | relative_url }}
+```yaml
+# _config.yml
 
-Ensure that you are working on the `master` branch. If necessary, create it based on your default
-branch. The Action we use here only builds from the `master` branch.
+title: "Jekyll Actions Demo"
+```
 
-Then optionally **delete** your `gh-pages` branch, as it is going to be recreated from scratch -
-when the action builds you site, the result will be automatically added with a commit to the
-`gh-pages` branch and then used for serving.
+{% raw %}
+```liquid
+---
+---
+
+Welcome to My Home Page
+
+{% assign date = '2020-04-13T10:20:00Z' %}
+
+- Original date - {{ date }}
+- With timeago filter - {{ date | timeago }}
+```
+{% endraw %}
 
 
-### 2. Setup workflow
+```ruby
+# Gemfile
 
-Now add a GitHub workflow file - this will ensure Actions is triggered. There are many similar
-Jekyll-related actions to choose from, we chose [Jekyll Actions][3] from the Marketplace here as it
-is simple to setup and gives flexibility.
+source 'https://rubygems.org'
 
-[3]: https://github.com/marketplace/actions/jekyll-actions
+gem 'jekyll', '~> 4.0'
 
-Create a **workflow file** using one of the following approaches:
+group :jekyll_plugins do
+  gem 'jekyll-timeago', '~> 0.13.1'
+end
+```
 
-- Actions tab
-  - Go to the Actions tab on your GitHub repo and create a new file, named `jekyll.yml` for example.
-- Add file to repo
-  - Create the the file directly in the repo at the path `.github/worksflows/jekyll.yml` - note the
-    dot at the start. This can be done locally too.
+{: .note .info}
+The demo site uses Jekyll 4 and a [third-party plugin][timeago-plugin] both of which are
+currently not whitelisted for use on GitHub pages. The plugin will allow us to turn a date say,
+`2016-03-23T10:20:00Z` into a description of how long ago it was from today (`2020-04-13T10:20:00Z`)
+which would be `4 years and 3 weeks ago`.
 
-**Copy** the following to your workflow file, then save it.
+{: .note .info}
+The action we're using takes care of installing the Ruby gems and dependencies. While that keeps
+the set-up simple for the user, one may encounter issues if they also check-in `Gemfile.lock` if it
+was generated with an old version of Bundler.
+
+### Setting up the Action
+
+GitHub Actions are registered for a repository by using a YAML file inside the directory path
+`.github/worksflows` (note the dot at the start). Here we shall employ [Jekyll Actions][jekyll-actions]
+from the Marketplace for its simplicity.
+
+Create a **workflow file**, say `jekyll.yml`, using either the GitHub interface or by pushing
+a YAML file to directory path manually. The base contents are:
 
 {% raw %}
 ```yaml
-name: Build and deploy Jekyll to GitHub Pages
+name: Build and deploy Jekyll site to GitHub Pages
 
 on:
   push:
@@ -91,152 +119,74 @@ jobs:
 ```
 {% endraw %}
 
-To explain that workflow:
+The above workflow can be explained as the following:
 
-- We set the build to happen on **push** to `master` only - this prevents the action from
+- We set the build to be triggered on **push** to `master` only --- this prevents the Action from
   overwriting the `gh-pages` branch on feature branch pushes.
-- The **checkout** action takes care of cloning your repo.
+- The name of the job matches our YAML filename: `jekyll`
+- The **checkout** action takes care of cloning your repository.
 - We specify the select **action** and version number using `helaili/jekyll-action@2.0.0`. This
   handles the build and deploy.
-- We set a reference to a secret **environment variable** for the action to use. This Jekyll "PAT"
-  is a "Personal Access Token" and is detailed in the next section.
+- We set a reference to a secret **environment variable** for the action to use. The `JEKYLL_PAT`
+  is a *Personal Access Token* and is detailed in the next section.
 
+### Providing permissions
 
-### 3. Give the action permissions
+The action needs permissions to push to your `gh-pages` branch. So you need to create a GitHub
+**authentication token** on your GitHub profile, then set it as an environment variable in your
+build using _Secrets_:
 
-The action needs permissions to push to your `gh-pages` branch. So create a GitHub **authentication
-token** on your GitHub profile, then set it as an environment variable in your build using
-_Secrets_.
-
-1. On your GitHub profile, go to the [Tokens][4] page and then the **Personal Access Tokens**
-   section.
+1. On your GitHub profile, go to the [tokens][] page and then
+   the **Personal Access Tokens** section.
 2. **Create** a token. Give it a name like "GitHub Actions" and ensure it has permissions to
-   `public_repos` - necessary for the action to commit to the `gh-pages` branch.
+   `public_repos` (or the entire `repo` scope for private repository) --- necessary for the action
+   to commit to the `gh-pages` branch.
 3. **Copy** the token value.
-4. Go to your repo's _Settings_ and then the **Secrets** tab.
-5. **Create** a token named `JEKYLL_PAT`. Set the value using the value copied above.
+4. Go to your repository's _Settings_ and then the **Secrets** tab.
+5. **Create** a token named `JEKYLL_PAT` (*important*). Set the value using the value copied above.
 
-[4]: https://github.com/settings/tokens
+### Build and deploy
 
-
-### 4. Set Jekyll version
-
-Jekyll version `4.0.0` has been selected for this tutorial. So add this to your `Gemfile`:
-
-```ruby
-gem 'jekyll', '~> 4.0.0'
-```
-
-
-### 5. Add a custom plugin
-
-The [Timeago][5] plugin have been selected for this tutorial, as it is unsupported by the standard
-GitHub Pages build. The point of the plugin is to turn a date (e.g. `2016-03-23T10:20:00Z`) into a
-description of how long ago it was (e.g. `4 years and 3 weeks ago`).
-
-
-1. Add the gem to your `Gemfile`:
-    ```ruby
-    group :jekyll_plugins do
-      gem 'jekyll-timeago', '~> 0.13.1'
-    end
-    ```
-2. Add the plugin to your `_config.yml` file:
-    ```yaml
-    plugins:
-        - jekyll-timeago
-    ```
-
-On one of your markdown pages, use the [Timeago][5] plugin.
-
-For example:
-
-{% raw %}
-```liquid
-{% assign date = '2020-04-13T10:20:00Z' %}
-
-- Original date - {{ date }}
-- With timeago filter - {{ date | timeago }}
-```
-{% endraw %}
-
-[5]: https://rubygems.org/gems/jekyll-timeago
-
-
-### 6. Install gems
-
-It is recommended to use [Bundler][6] to manage your project gems. Use that to install the gems we
-set above.
-
-[6]: https://bundler.io/
-
-```sh
-bundle install --path vendor/bundle
-```
-
-When we do a build, the action we set could given an **error** if your version of _Bundler_ which
-was used to create the lock file is **different** to the one in the action environment. One solution
-to this to do remove the `Gemfile.lock` from version control and add it file to `.gitignore`, so do
-this now.
-
-
-### 7. Build and deploy
-
-Save and push any local changes on `master`.
-
-The action will be triggered and your build will start.
+On pushing any local changes onto `master` the action will be triggered and the build will start.
 
 To watch the progress and see any build errors, check on the build status using one of the following
 approaches:
 
 - **View by commit**
-    - Go to the repo's level view in GitHub. Under the most recent commit (near the top) you’ll see
+    - Go to the repository level view in GitHub. Under the most recent commit (near the top) you’ll see
       a status symbol next to the commit message. Click the tick or _X_, then click _details_.
 - **Actions tab**
-    - Go to the repo's Actions tab. Click on a workflow run.
+    - Go to the repository's Actions tab. Click on the `jekyll` workflow tab.
 
-If all goes well, all steps will be green successes and there will be no serious errors in the log.
-Also, the built assets will now exist on the `gh-pages` branch.
+If all goes well, all steps will be green and the built assets will now exist on the `gh-pages` branch.
 
-
-### 8. View site
-
-On a successful build, GitHub Pages will publish the site stored on the repo's `gh-pages` branches.
+On a successful build, GitHub Pages will publish the site stored on the repository `gh-pages` branches.
 Note that you do not need to setup a `gh-pages` branch or enable GitHub Pages, as the action will
 take care of this for you.
+(For private repositories, you'll have to upgrade to a paid plan).
 
 To see the live site:
 
-1. Go to the _environment_ tab on your repo.
-2. Click _View Deployment_ to see the deployed site URL. Optionally add this URL to your repo's main
-   page and to your _README.md_ to make it easy for people to find and visit.
+1. Go to the _environment_ tab on your repository.
+2. Click _View Deployment_ to see the deployed site URL. Optionally add this URL to your repository's
+   main page and to your _README.md_ to make it easy for people to find and visit.
 4. View your site. Make sure the `timeago` filter works as expected.
 
+When you need to make further changes to the site, make changes to `master` and push them. The workflow
+will build and deploy your site.
 
-### 9. Make further changes
-
-When you need to make further changes to the site, make changes to `master` and push them. The
-workflow will build and deploy your site.
-
-Be sure to not edit the `gh-pages` branch directly as any changes will be last on the next `master`
-build.
-
-
-## Next steps
-
-- Start to use the [Jekyll 4][0] features. Address any unexpected changes such as broken URLs.
-- Choose another custom plugin and set it up.
-- Look at other actions available in the Marketplace.
-
+Be sure to not edit the `gh-pages` branch directly as any changes will be lost on the next successful
+deploy from the Action.
 
 ## External links
 
-- [Actions][7] page on GitHub features.
-- [Actions][8] page under GitHub help.
-- [jekyll-actions][3] is an action available on the GitHub Marketplace and was used in this guide.
-- [jekyll-actions-quickstart][9] is an unofficial repo that includes a live demo of the
+- [jekyll-actions][] is an action available on the GitHub Marketplace and was used in this guide.
+- [jekyll-actions-quickstart][] is an unofficial repository that includes a live demo of the
   `jekyll-actions` action. That project can be used as a template for making a new site.
 
-[7]: https://github.com/features/actions
-[8]: https://help.github.com/en/actions
-[9]: https://github.com/MichaelCurrin/jekyll-actions-quickstart
+
+[ghp-whitelist]: https://pages.github.com/versions/
+[timeago-plugin]: https://rubygems.org/gems/jekyll-timeago
+[tokens]: https://github.com/settings/tokens
+[jekyll-actions]: https://github.com/marketplace/actions/jekyll-actions
+[jekyll-actions-quickstart]: https://github.com/MichaelCurrin/jekyll-actions-quickstart
