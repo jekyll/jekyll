@@ -5,7 +5,7 @@ layout: news
 <article>
   <h2>
     {{ page.title }}
-    <a href="{{ page.url }}" class="header-link" title="Permalink">
+    <a href="{{ page.url | relative_url }}" class="header-link" title="Permalink">
       <span class="sr-only">Permalink</span>
       <i class="fa fa-link"></i>
     </a>

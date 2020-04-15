@@ -5,7 +5,7 @@ permalink: /docs/variables/
 
 Jekyll traverses your site looking for files to process. Any files with
 [front matter](/docs/front-matter/) are subject to processing. For each of these
-files, Jekyll makes a variety of data available via the [Liquid](/docs/liquid/).
+files, Jekyll makes a variety of data available via [Liquid](/docs/liquid/).
 The following is a reference of the available data.
 
 ## Global Variables

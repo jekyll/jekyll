@@ -27,7 +27,7 @@ group :test do
   gem "nokogiri", "~> 1.7"
   gem "rspec"
   gem "rspec-mocks"
-  gem "rubocop", "~> 0.80.0"
+  gem "rubocop", "~> 0.81.0"
   gem "rubocop-performance"
   gem "test-dependency-theme", :path => File.expand_path("test/fixtures/test-dependency-theme", __dir__)
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)

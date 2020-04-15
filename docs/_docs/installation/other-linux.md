@@ -16,6 +16,18 @@ On Debian:
 sudo apt-get install ruby-full build-essential
 ```
 
+On Gentoo Linux:
+
+```sh
+sudo emerge -av jekyll
+```
+
+or
+
+```sh
+sudo emerge --ask --verbose jekyll
+```
+
 On ArchLinux:
 
 ```sh

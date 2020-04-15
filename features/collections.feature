@@ -610,3 +610,17 @@ Feature: Collections
     And I should see "Thanksgiving Black Friday" in "_site/index.html"
     And I should see "Happy Thanksgiving" in "_site/thanksgiving/2015-11-26-thanksgiving.html"
     And I should see "Black Friday" in "_site/thanksgiving/black-friday.html"
+
+  Scenario: Rendered collection with custom permalinks and static file contents
+    Given I have fixture collections
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      methods:
+        output: true
+        permalink: /:collection/:name
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "I have no front matter." in "_site/methods/extensionless_static_file"

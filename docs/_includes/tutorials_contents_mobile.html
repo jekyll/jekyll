@@ -6,7 +6,7 @@
       {% for item in section.tutorials -%}
         {% assign item_url = item | prepend:"/tutorials/" | append:"/" -%}
         {% assign tutorial = site.tutorials | where: "url", item_url | first -%}
-        <option value="{{ tutorial.url }}">{{ tutorial.title }}</option>
+        <option value="{{ tutorial.url | relative_url }}">{{ tutorial.title }}</option>
       {% endfor -%}
     </optgroup>
     {% endfor -%}
