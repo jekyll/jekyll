@@ -82,6 +82,8 @@
   * Add version badge for Custom Sorting of Documents (#8098)
   * Docs: Fix grammar in `_docs/front-matter.md` (#8097)
   * Update variables.md (#8106)
+  * Add help about Gentoo/Linux (#8002)
+  * Update documentation on third party site (#8122)
 
 ### Development Fixes
 
@@ -114,6 +116,7 @@
   * Optimize rendering of the documentation site (#8020)
   * Utilize relative_url filter in documentation site (#8089)
   * Render tutorial metadata in documentation site (#8092)
+  * Improve syntax-highlighting in documentation site (#8079)
 
 ## 4.0.0 / 2019-08-19
 
