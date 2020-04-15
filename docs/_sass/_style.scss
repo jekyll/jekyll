@@ -809,6 +809,10 @@ pre.highlight,
   margin: 0;
 }
 
+div.highlighter-rouge + div.highlighter-rouge {
+  margin: 30px 0 0;
+}
+
 /* HTML Elements */
 
 h1, h2, h3, h4, h5, h6 { margin: 0; }
