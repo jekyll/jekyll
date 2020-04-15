@@ -116,6 +116,7 @@
   * Optimize rendering of the documentation site (#8020)
   * Utilize relative_url filter in documentation site (#8089)
   * Render tutorial metadata in documentation site (#8092)
+  * Improve syntax-highlighting in documentation site (#8079)
 
 ## 4.0.0 / 2019-08-19
 
