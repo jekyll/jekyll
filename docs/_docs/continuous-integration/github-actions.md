@@ -44,7 +44,7 @@ build, ensure to make a backup of the contents into a different branch so that y
 easily if necessary.
 
 The Jekyll site we'll be using for the rest of this page initially consists of just a `_config.yml`,
-an `index.md` page and a Gemfile. The contents are respectively:
+an `index.md` page and a `Gemfile`. The contents are respectively:
 
 ```yaml
 # _config.yml
@@ -80,14 +80,14 @@ end
 ```
 
 {: .note .info}
-The demo site uses Jekyll 4 and a [third-party plugin][timeago-plugin] both of which are
+The demo site uses Jekyll 4 and a [third-party plugin][timeago-plugin], both of which are
 currently not whitelisted for use on GitHub pages. The plugin will allow us to turn a date say,
-`2016-03-23T10:20:00Z` into a description of how long ago it was from today (`2020-04-13T10:20:00Z`)
-which would be `4 years and 3 weeks ago`.
+`2016-03-23T10:20:00Z` into a description of how long ago it was from today
+(`2020-04-13T10:20:00Z`), which would be `4 years and 3 weeks ago`.
 
 {: .note .info}
 The action we're using takes care of installing the Ruby gems and dependencies. While that keeps
-the set-up simple for the user, one may encounter issues if they also check-in `Gemfile.lock` if it
+the setup simple for the user, one may encounter issues if they also check-in `Gemfile.lock` if it
 was generated with an old version of Bundler.
 
 ### Setting up the Action
@@ -121,12 +121,12 @@ jobs:
 
 The above workflow can be explained as the following:
 
-- We set the build to be triggered on **push** to `master` only --- this prevents the Action from
+- We trigger the build on a **push** to `master` branch only --- this prevents the Action from
   overwriting the `gh-pages` branch on feature branch pushes.
-- The name of the job matches our YAML filename: `jekyll`
+- The name of the job matches our YAML filename: `jekyll`.
 - The **checkout** action takes care of cloning your repository.
-- We specify the select **action** and version number using `helaili/jekyll-action@2.0.0`. This
-  handles the build and deploy.
+- We specify our selected **action** and **version number** using `helaili/jekyll-action@2.0.0`.
+  This handles the build and deploy.
 - We set a reference to a secret **environment variable** for the action to use. The `JEKYLL_PAT`
   is a *Personal Access Token* and is detailed in the next section.
 
@@ -147,47 +147,51 @@ The action needs permissions to push to your `gh-pages` branch. So you need to c
 **authentication token** on your GitHub profile, then set it as an environment variable in your
 build using _Secrets_:
 
-1. On your GitHub profile, go to the [tokens] page and then
-   the **Personal Access Tokens** section.
+1. On your GitHub profile, under **Developer Settings**, go to the [Personal Access Tokens][tokens]
+   section.
 2. **Create** a token. Give it a name like "GitHub Actions" and ensure it has permissions to
    `public_repos` (or the entire `repo` scope for private repository) --- necessary for the action
    to commit to the `gh-pages` branch.
 3. **Copy** the token value.
-4. Go to your repository's _Settings_ and then the **Secrets** tab.
-5. **Create** a token named `JEKYLL_PAT` (*important*). Set the value using the value copied above.
+4. Go to your repository's **Settings** and then the **Secrets** tab.
+5. **Create** a token named `JEKYLL_PAT` (*important*). Give it a value using the value copied
+   above.
 
 ### Build and deploy
 
-On pushing any local changes onto `master` the action will be triggered and the build will start.
+On pushing any local changes onto `master`, the action will be triggered and the build will
+**start**.
 
-To watch the progress and see any build errors, check on the build status using one of the following
-approaches:
+To watch the progress and see any build errors, check on the build **status** using one of the
+following approaches:
 
 - **View by commit**
     - Go to the repository level view in GitHub. Under the most recent commit (near the top) you’ll
-      see a status symbol next to the commit message. Click the tick or _X_, then click _details_.
+      see a **status symbol** next to the commit message as a tick or _X_. Hover over it and click
+      the **details** link.
 - **Actions tab**
     - Go to the repository's Actions tab. Click on the `jekyll` workflow tab.
 
 If all goes well, all steps will be green and the built assets will now exist on the `gh-pages`
 branch.
 
-On a successful build, GitHub Pages will publish the site stored on the repository `gh-pages`
+On a successful build, GitHub Pages will **publish** the site stored on the repository `gh-pages`
 branches. Note that you do not need to setup a `gh-pages` branch or enable GitHub Pages, as the
 action will take care of this for you.
 (For private repositories, you'll have to upgrade to a paid plan).
 
-To see the live site:
+To see the **live site**:
 
-1. Go to the _environment_ tab on your repository.
-2. Click _View Deployment_ to see the deployed site URL. Optionally add this URL to your
-   repository's main page and to your _README.md_ to make it easy for people to find and visit.
-4. View your site. Make sure the `timeago` filter works as expected.
+1. Go to the **environment** tab on your repository.
+2. Click **View Deployment** to see the deployed site URL.
+3. View your site at the **URL**. Make sure the `timeago` filter works as expected.
+4. Optionally **add** this URL to your repository's main page and to your `README.md`, to make it
+   easy for people to find.
 
-When you need to make further changes to the site, make changes to `master` and push them. The
-workflow will build and deploy your site.
+When you need to make further **changes** to the site, commit to `master` and push. The workflow
+will build and deploy your site again.
 
-Be sure to not edit the `gh-pages` branch directly as any changes will be lost on the next
+Be sure **not to edit** the `gh-pages` branch directly, as any changes will be lost on the next
 successful deploy from the Action.
 
 ## External links
