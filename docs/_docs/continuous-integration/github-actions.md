@@ -80,10 +80,10 @@ end
 ```
 
 {: .note .info}
-The demo site uses Jekyll 4 and a [third-party plugin][timeago-plugin], both of which are
-currently not whitelisted for use on GitHub pages. The plugin will allow us to turn a date say,
-`2016-03-23T10:20:00Z` into a description of how long ago it was from today
-(`2020-04-13T10:20:00Z`), which would be `4 years and 3 weeks ago`.
+The demo site uses Jekyll 4 and a [third-party plugin][timeago-plugin], both of which are currently
+not whitelisted for use on GitHub pages. The plugin will allow us to describe how far back a date
+was from today. e.g. If we give a date as `2016-03-23T10:20:00Z` and the current date is
+`2020-04-13T10:20:00Z`, then the output would be `4 years and 3 weeks ago`.
 
 {: .note .info}
 The action we're using takes care of installing the Ruby gems and dependencies. While that keeps
