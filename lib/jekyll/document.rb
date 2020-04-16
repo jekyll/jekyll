@@ -266,7 +266,7 @@ module Jekyll
       else
         begin
           merge_defaults
-          read_content(opts)
+          read_content(**opts)
           read_post_data
         rescue StandardError => e
           handle_read_error(e)
@@ -445,8 +445,8 @@ module Jekyll
     end
 
     private
-    def read_content(opts)
-      self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
+    def read_content(**opts)
+      self.content = File.read(path, **Utils.merged_file_read_opts(site, opts))
       if content =~ YAML_FRONT_MATTER_REGEXP
         self.content = $POSTMATCH
         data_file = SafeYAML.load(Regexp.last_match(1))

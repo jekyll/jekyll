@@ -1,14 +1,16 @@
-bundler_args: --without benchmark:site:development
+bundler_args: --without benchmark:development
 script: script/cibuild
 cache: bundler
 language: ruby
 
 rvm:
-  - &ruby1 2.5.1
-  - &ruby2 2.4.4
-  - &ruby3 2.3.7
-  - &ruby4 2.2.10
-  - &jruby jruby-9.1.16.0
+  - &ruby1 2.7.1
+  - &ruby2 2.6.6
+  - &ruby3 2.5.8
+  - &ruby4 2.4.10
+  - &ruby5 2.3.8
+  - &ruby6 2.2.10
+  - &jruby jruby-9.2.11.1
 
 matrix:
   include:
@@ -16,6 +18,8 @@ matrix:
       env: TEST_SUITE=fmt
     - rvm: *ruby1
       env: TEST_SUITE=default-site
+    - rvm: *ruby1
+      env: TEST_SUITE=profile-docs
     - rvm: *ruby1
       env: ROUGE_VERSION=1.11.1 # runs everything with this version
   exclude:
