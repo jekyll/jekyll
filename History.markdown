@@ -1,3 +1,9 @@
+## HEAD
+
+### Bug Fixes
+
+  * Attain Ruby 3.0 compatibility (#8125)
+
 ## 3.8.6 / 2019-07-02
 
 ### Bug Fixes
