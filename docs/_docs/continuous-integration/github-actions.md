@@ -15,7 +15,7 @@ with GitHub Pages you can use GitHub Actions.
   version of Jekyll you want. For example `4.0.0` or point directly to the repository.
 - **Plugins** --- You can use any Jekyll plugins irrespective of them being on the
   [supported versions][ghp-whitelist] list, even `*.rb` files placed in the `_plugins` directory
-  of yor site.
+  of your site.
 - **Themes** --- While using a custom theme is possible without Actions, it is now simpler.
 
 ### Workflow Management
