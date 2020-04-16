@@ -130,6 +130,17 @@ The above workflow can be explained as the following:
 - We set a reference to a secret **environment variable** for the action to use. The `JEKYLL_PAT`
   is a *Personal Access Token* and is detailed in the next section.
 
+As an alternative to building on a push event, you can trigger a build using the [on.schedule]
+field. For example, to build nightly at midnight:
+
+```yaml
+on:
+  schedule:
+    - cron:  '0 0 * * *'
+```
+
+[on.schedule]: https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#onschedule
+
 ### Providing permissions
 
 The action needs permissions to push to your `gh-pages` branch. So you need to create a GitHub
