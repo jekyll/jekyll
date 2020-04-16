@@ -29,7 +29,7 @@ with GitHub Pages you can use GitHub Actions.
 ## Workspace setup
 
 The first and foremost requirement is a Jekyll project hosted at GitHub. Choose an existing Jekyll
-project or follow the [Quickstart]{{ '/docs' | relative_url }} and push the repository to GitHub
+project or follow the [Quickstart]({{ '/docs' | relative_url }}) and push the repository to GitHub
 if it is not hosted there already.
 
 We're only going to cover builds from the `master` branch in this page. Therefore, ensure that you
