@@ -25,8 +25,6 @@ environment:
       TEST_SUITE: "test"
     - RUBY_FOLDER_VER: "23"
       TEST_SUITE: "test"
-    - RUBY_FOLDER_VER: "22"
-      TEST_SUITE: "test"
     - RUBY_FOLDER_VER: "26"
       TEST_SUITE: "default-site"
     - RUBY_FOLDER_VER: "26"
