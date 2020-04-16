@@ -13,9 +13,7 @@ jobs:
         with:
           ruby-version: 2.7.x
       - name: Set up dependencies
-        run: gem update --system --no-document
-        run: gem update bundler --no-document
-        run: bundle install --jobs 4 --retry 3
+        run: bash .github/actions/bootstrap
       - name: Build and Deploy
         run: bash .github/actions/deploy_docs
         env:
