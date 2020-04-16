@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -e
+
+bundle exec jekyll build -s docs -d docs/_site -Vt
+cd docs/_site
+touch .nojekyll
+remote_branch="gh-pages-trial"
+
+echo "Publishing to ${GITHUB_REPOSITORY} on branch ${remote_branch}"
+remote_repo="https://${JEKYLL_PAT}@github.com/${GITHUB_REPOSITORY}.git"
+
+git init -q
+git config user.name "${GITHUB_ACTOR}"
+git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+git add .
+git commit -qm "[GH ACTIONS] Build triggered by ${GITHUB_SHA}"
+
+echo ""
+git push --force $remote_repo master:$remote_branch
+
+cd ../..
+exit 0
