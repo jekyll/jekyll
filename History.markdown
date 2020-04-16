@@ -1,3 +1,9 @@
+## HEAD
+
+### Bug Fixes
+
+  * Attain Ruby 3.0 compatibility (#8124)
+
 ## 4.0.0 / 2019-08-19
 
 ### Major Enhancements
