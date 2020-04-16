@@ -136,7 +136,7 @@ The action needs permissions to push to your `gh-pages` branch. So you need to c
 **authentication token** on your GitHub profile, then set it as an environment variable in your
 build using _Secrets_:
 
-1. On your GitHub profile, go to the [tokens][] page and then
+1. On your GitHub profile, go to the [tokens] page and then
    the **Personal Access Tokens** section.
 2. **Create** a token. Give it a name like "GitHub Actions" and ensure it has permissions to
    `public_repos` (or the entire `repo` scope for private repository) --- necessary for the action
@@ -181,8 +181,8 @@ successful deploy from the Action.
 
 ## External links
 
-- [jekyll-actions][] is an action available on the GitHub Marketplace and was used in this guide.
-- [jekyll-actions-quickstart][] is an unofficial repository that includes a live demo of the
+- [jekyll-actions] is an action available on the GitHub Marketplace and was used in this guide.
+- [jekyll-actions-quickstart] is an unofficial repository that includes a live demo of the
   `jekyll-actions` action. That project can be used as a template for making a new site.
 
 
