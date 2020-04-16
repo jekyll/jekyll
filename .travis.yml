@@ -19,7 +19,7 @@ matrix:
     - rvm: *ruby1
       env: TEST_SUITE=profile-docs
       name: "Profile Docs"
-    - rvm: *ruby1
+    - rvm: *ruby2
       env: TEST_SUITE=memprof
       name: "Profile Memory Allocation"
   exclude:
