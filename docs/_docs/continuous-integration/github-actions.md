@@ -11,8 +11,8 @@ with GitHub Pages you can use GitHub Actions.
 
 ### Control over gemset
 
-- **Jekyll version** --- Instead of using the currently enabled version (`3.8.5`), you can use any
-  version of Jekyll you want. For example `4.0.0` or point directly to the repository.
+- **Jekyll version** --- Instead of using the currently enabled version at `3.8.5`, you can use any
+  version of Jekyll you want. For example `4.0.0`, or point directly to the repository.
 - **Plugins** --- You can use any Jekyll plugins irrespective of them being on the
   [supported versions][ghp-whitelist] list, even `*.rb` files placed in the `_plugins` directory
   of your site.
@@ -39,9 +39,9 @@ pushed to the `gh-pages` branch with a commit, ready to be used for serving.
 
 {: .note .warning}
 The Action we're using here will create (or reset an existing) `gh-pages` branch on every successful
-deploy.<br/> So, if you have an existing `gh-pages` branch that is used to deploy your production build,
-ensure to make a backup of the contents into a different branch so that you can rollback easily
-if necessary.
+deploy.<br/> So, if you have an existing `gh-pages` branch that is used to deploy your production
+build, ensure to make a backup of the contents into a different branch so that you can rollback
+easily if necessary.
 
 The Jekyll site we'll be using for the rest of this page initially consists of just a `_config.yml`,
 an `index.md` page and a Gemfile. The contents are respectively:
@@ -93,8 +93,8 @@ was generated with an old version of Bundler.
 ### Setting up the Action
 
 GitHub Actions are registered for a repository by using a YAML file inside the directory path
-`.github/worksflows` (note the dot at the start). Here we shall employ [Jekyll Actions][jekyll-actions]
-from the Marketplace for its simplicity.
+`.github/worksflows` (note the dot at the start). Here we shall employ
+[Jekyll Actions][jekyll-actions] from the Marketplace for its simplicity.
 
 Create a **workflow file**, say `jekyll.yml`, using either the GitHub interface or by pushing
 a YAML file to directory path manually. The base contents are:
@@ -153,30 +153,31 @@ To watch the progress and see any build errors, check on the build status using 
 approaches:
 
 - **View by commit**
-    - Go to the repository level view in GitHub. Under the most recent commit (near the top) you’ll see
-      a status symbol next to the commit message. Click the tick or _X_, then click _details_.
+    - Go to the repository level view in GitHub. Under the most recent commit (near the top) you’ll
+      see a status symbol next to the commit message. Click the tick or _X_, then click _details_.
 - **Actions tab**
     - Go to the repository's Actions tab. Click on the `jekyll` workflow tab.
 
-If all goes well, all steps will be green and the built assets will now exist on the `gh-pages` branch.
+If all goes well, all steps will be green and the built assets will now exist on the `gh-pages`
+branch.
 
-On a successful build, GitHub Pages will publish the site stored on the repository `gh-pages` branches.
-Note that you do not need to setup a `gh-pages` branch or enable GitHub Pages, as the action will
-take care of this for you.
+On a successful build, GitHub Pages will publish the site stored on the repository `gh-pages`
+branches. Note that you do not need to setup a `gh-pages` branch or enable GitHub Pages, as the
+action will take care of this for you.
 (For private repositories, you'll have to upgrade to a paid plan).
 
 To see the live site:
 
 1. Go to the _environment_ tab on your repository.
-2. Click _View Deployment_ to see the deployed site URL. Optionally add this URL to your repository's
-   main page and to your _README.md_ to make it easy for people to find and visit.
+2. Click _View Deployment_ to see the deployed site URL. Optionally add this URL to your
+   repository's main page and to your _README.md_ to make it easy for people to find and visit.
 4. View your site. Make sure the `timeago` filter works as expected.
 
-When you need to make further changes to the site, make changes to `master` and push them. The workflow
-will build and deploy your site.
+When you need to make further changes to the site, make changes to `master` and push them. The
+workflow will build and deploy your site.
 
-Be sure to not edit the `gh-pages` branch directly as any changes will be lost on the next successful
-deploy from the Action.
+Be sure to not edit the `gh-pages` branch directly as any changes will be lost on the next
+successful deploy from the Action.
 
 ## External links
 
