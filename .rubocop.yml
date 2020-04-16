@@ -40,6 +40,8 @@ Layout/EmptyComment:
   Enabled: false
 Layout/EndAlignment:
   Severity: error
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
 Lint/RaiseException:
   Enabled: true
 Lint/StructNewOverride:
@@ -123,6 +125,8 @@ Style/Documentation:
   Enabled: false
 Style/DoubleNegation:
   Enabled: false
+Style/ExponentialNotation:
+  Enabled: true
 Style/FormatStringToken:
   Exclude:
     - lib/jekyll/utils/ansi.rb
