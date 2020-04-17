@@ -143,7 +143,7 @@ on:
 Note that this string must be quoted to prevent the asterisks from being evaluated incorrectly.
 
 [on.schedule]: https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#onschedule
-[cron tab]: https://crontab.guru/
+[crontab guru]: https://crontab.guru/
 
 
 ### Providing permissions
