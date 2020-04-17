@@ -97,7 +97,7 @@ GitHub Actions are registered for a repository by using a YAML file inside the d
 [Jekyll Actions][jekyll-actions] from the Marketplace for its simplicity.
 
 Create a **workflow file**, say `github-pages.yml`, using either the GitHub interface or by pushing
-a YAML file to directory path manually. The base contents are:
+a YAML file to the workflow directory path manually. The base contents are:
 
 {% raw %}
 ```yaml
@@ -109,7 +109,7 @@ on:
       - master
 
 jobs:
-  jekyll:
+  github-pages:
     runs-on: ubuntu-16.04
     steps:
       - uses: actions/checkout@v2
@@ -121,17 +121,18 @@ jobs:
 
 The above workflow can be explained as the following:
 
-- We trigger the build on a **push** to `master` branch only --- this prevents the Action from
-  overwriting the `gh-pages` branch on feature branch pushes.
-- The name of the job matches our YAML filename: `jekyll`.
+- We trigger the build using **on.push** condition for `master` branch only --- this prevents
+  the Action from overwriting the `gh-pages` branch on any feature branch pushes.
+- The **name** of the job matches our YAML filename: `github-pages`.
 - The **checkout** action takes care of cloning your repository.
 - We specify our selected **action** and **version number** using `helaili/jekyll-action@2.0.0`.
   This handles the build and deploy.
 - We set a reference to a secret **environment variable** for the action to use. The `JEKYLL_PAT`
   is a *Personal Access Token* and is detailed in the next section.
 
-As an alternative to building on a push event, you can trigger a build using the [on.schedule]
-field. For example, to build nightly at midnight:
+Instead of using the **on.push** condition, you could trigger your build on a **schedule** by 
+using the [on.schedule] parameter. For example, here we build daily at midnight by specifying
+**cron** syntax, which can be tested at the [crontab guru] site.
 
 ```yaml
 on:
@@ -139,7 +140,11 @@ on:
     - cron:  '0 0 * * *'
 ```
 
+Note that this string must be quoted to prevent the asterisks from being evaluated incorrectly.
+
 [on.schedule]: https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#onschedule
+[cron tab]: https://crontab.guru/
+
 
 ### Providing permissions
 
