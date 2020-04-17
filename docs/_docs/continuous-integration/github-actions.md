@@ -96,7 +96,7 @@ GitHub Actions are registered for a repository by using a YAML file inside the d
 `.github/worksflows` (note the dot at the start). Here we shall employ
 [Jekyll Actions][jekyll-actions] from the Marketplace for its simplicity.
 
-Create a **workflow file**, say `jekyll.yml`, using either the GitHub interface or by pushing
+Create a **workflow file**, say `github-pages.yml`, using either the GitHub interface or by pushing
 a YAML file to directory path manually. The base contents are:
 
 {% raw %}
