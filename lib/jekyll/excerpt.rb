@@ -56,7 +56,7 @@ module Jekyll
     #
     # Returns true if the string passed in
     def include?(something)
-      (output&.include?(something)) || content.include?(something)
+      output&.include?(something) || content.include?(something)
     end
 
     # The UID for this doc (useful in feeds).

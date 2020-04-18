@@ -116,7 +116,7 @@ module Jekyll
     #
     # Returns the output extension
     def output_ext
-      @output_ext ||= Jekyll::Renderer.new(site, self).output_ext
+      renderer.output_ext
     end
 
     # The base filename of the document, without the file extname.
@@ -131,6 +131,10 @@ module Jekyll
     # Returns the base filename of the document.
     def basename
       @basename ||= File.basename(path)
+    end
+
+    def renderer
+      @renderer ||= Jekyll::Renderer.new(site, self)
     end
 
     # Produces a "cleaned" relative path.
@@ -298,7 +302,7 @@ module Jekyll
       else
         begin
           merge_defaults
-          read_content(opts)
+          read_content(**opts)
           read_post_data
         rescue StandardError => e
           handle_read_error(e)
@@ -414,9 +418,13 @@ module Jekyll
     #
     # Returns nothing.
     def categories_from_path(special_dir)
-      superdirs = relative_path.sub(Document.superdirs_regex(special_dir), "")
-      superdirs = superdirs.split(File::SEPARATOR)
-      superdirs.reject! { |c| c.empty? || c == special_dir || c == basename }
+      if relative_path.start_with?(special_dir)
+        superdirs = []
+      else
+        superdirs = relative_path.sub(Document.superdirs_regex(special_dir), "")
+        superdirs = superdirs.split(File::SEPARATOR)
+        superdirs.reject! { |c| c.empty? || c == special_dir || c == basename }
+      end
 
       merge_data!({ "categories" => superdirs }, :source => "file path")
     end
@@ -429,14 +437,14 @@ module Jekyll
       categories.flatten!
       categories.uniq!
 
-      merge_data!("categories" => categories)
+      merge_data!({ "categories" => categories })
     end
 
     def populate_tags
       tags = Utils.pluralized_array_from_hash(data, "tag", "tags")
       tags.flatten!
 
-      merge_data!("tags" => tags)
+      merge_data!({ "tags" => tags })
     end
 
     private
@@ -462,8 +470,8 @@ module Jekyll
       merge_data!(defaults, :source => "front matter defaults") unless defaults.empty?
     end
 
-    def read_content(opts)
-      self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
+    def read_content(**opts)
+      self.content = File.read(path, **Utils.merged_file_read_opts(site, opts))
       if content =~ YAML_FRONT_MATTER_REGEXP
         self.content = $POSTMATCH
         data_file = SafeYAML.load(Regexp.last_match(1))

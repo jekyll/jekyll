@@ -2,32 +2,32 @@
   <aside>
     <ul>
       <li {%- if page.title == 'News' %} class="current" {%- endif %}>
-        <a href="/news/">All News</a>
+        <a href="{{ '/news/' | relative_url }}">All News</a>
       </li>
       <li {%- if page.title == 'Releases' %} class="current" {%- endif %}>
-        <a href="/news/releases/">Jekyll Releases</a>
+        <a href="{{ '/news/releases/' | relative_url }}">Jekyll Releases</a>
       </li>
     </ul>
     <h4>Recent Releases</h4>
     <ul>
-      {% for post in site.categories.release limit:5 %}
-      <li {%- if page.title == post.title %} class="current" {%- endif %}>
-        <a href="{{ post.url }}">Version {{ post.version }}</a>
+      {% for post in site.categories.release limit:5 -%}
+      <li {% if page.title == post.title %} class="current"{% endif %}>
+        <a href="{{ post.url | relative_url }}">Version {{ post.version }}</a>
       </li>
-      {% endfor %}
+      {% endfor -%}
       <li>
-        <a href="/docs/history/">History »</a>
+        <a href="{{ '/docs/history/' | relative_url }}">History »</a>
       </li>
     </ul>
     <h4>Other News</h4>
     <ul>
-      {% for post in site.posts %}
-        {% unless post.categories contains 'release' %}
-        <li {%- if page.title == post.title %} class="current" {%- endif %}>
-          <a href="{{ post.url }}">{{ post.title }}</a>
-        </li>
-        {% endunless %}
-      {% endfor %}
+    {% for post in site.posts -%}
+      {% unless post.categories contains 'release' -%}
+      <li {%- if page.title == post.title %} class="current" {%- endif %}>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      </li>
+      {% endunless -%}
+    {% endfor -%}
     </ul>
   </aside>
 </div>

@@ -50,6 +50,42 @@ class TestPage < JekyllUnitTest
         assert_equal "/+/%25%23%20+.html", @page.url
       end
 
+      should "be exposed to Liquid as a Liquid::Drop subclass" do
+        page = setup_page("properties.html")
+        liquid_rep = page.to_liquid
+        refute_equal Hash, liquid_rep.class
+        assert_equal true, liquid_rep.is_a?(Liquid::Drop)
+        assert_equal Jekyll::Drops::PageDrop, liquid_rep.class
+      end
+
+      should "make attributes accessible for use in Liquid templates" do
+        page = setup_page("/contacts", "index.html")
+        template = Liquid::Template.parse(<<~TEXT)
+          Name: {{ page.name }}
+          Path: {{ page.path }}
+          URL:  {{ page.url }}
+        TEXT
+        expected = <<~TEXT
+          Name: index.html
+          Path: contacts/index.html
+          URL:  /contacts/
+        TEXT
+        assert_equal(expected, template.render!("page" => page.to_liquid))
+      end
+
+      should "make front matter data accessible for use in Liquid templates" do
+        page = setup_page("properties.html")
+        template = Liquid::Template.parse(<<~TEXT)
+          TITLE: {{ page.title }}
+          FOO:   {{ page.foo }}
+        TEXT
+        expected = <<~TEXT
+          TITLE: Properties Page
+          FOO:   bar
+        TEXT
+        assert_equal expected, template.render!("page" => page.to_liquid)
+      end
+
       context "in a directory hierarchy" do
         should "create URL based on filename" do
           @page = setup_page("/contacts", "bar.html")

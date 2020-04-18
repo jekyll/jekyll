@@ -596,6 +596,7 @@ class TestFilters < JekyllUnitTest
         assert_equal "/front_matter.erb", page.url
         url = filter.relative_url(page.url)
         url << "foo"
+        assert_equal "/front_matter.erb", filter.relative_url(page.url)
         assert_equal "/front_matter.erb", page.url
       end
 
@@ -831,6 +832,16 @@ class TestFilters < JekyllUnitTest
           )
         end
       end
+
+      should "should pass integers as is" do
+        grouping = @filter.group_by([
+          { "name" => "Allison", "year" => 2016 },
+          { "name" => "Amy", "year" => 2016 },
+          { "name" => "George", "year" => 2019 },
+        ], "year")
+        assert_equal "2016", grouping[0]["name"]
+        assert_equal "2019", grouping[1]["name"]
+      end
     end
 
     context "where filter" do
@@ -851,6 +862,17 @@ class TestFilters < JekyllUnitTest
       should "filter objects with null properties appropriately" do
         array = [{}, { "color" => nil }, { "color" => "" }, { "color" => "text" }]
         assert_equal 2, @filter.where(array, "color", nil).length
+      end
+
+      should "filter objects with numerical properties appropriately" do
+        array = [
+          { "value" => "555" },
+          { "value" => 555 },
+          { "value" => 24.625 },
+          { "value" => "24.625" },
+        ]
+        assert_equal 2, @filter.where(array, "value", 24.625).length
+        assert_equal 2, @filter.where(array, "value", 555).length
       end
 
       should "filter array properties appropriately" do
@@ -976,6 +998,23 @@ class TestFilters < JekyllUnitTest
         )
       end
 
+      should "filter objects across multiple conditions" do
+        sample = [
+          { "color" => "teal", "size" => "large", "type" => "variable" },
+          { "color" => "red",  "size" => "large", "type" => "fixed" },
+          { "color" => "red",  "size" => "medium", "type" => "variable" },
+          { "color" => "blue", "size" => "medium", "type" => "fixed" },
+        ]
+        assert_equal(
+          [
+            { "color" => "red", "size" => "large", "type" => "fixed" },
+          ],
+          @filter.where_exp(
+            sample, "item", "item.type == 'fixed' and item.color == 'red' or item.color == 'teal'"
+          )
+        )
+      end
+
       should "stringify during comparison for compatibility with liquid parsing" do
         hash = {
           "The Words" => { "rating" => 1.2, "featured" => false },
@@ -1036,7 +1075,7 @@ class TestFilters < JekyllUnitTest
         posts = @filter.site.site_payload["site"]["posts"]
         results = @filter.where_exp(posts, "post",
                                     "post.date > site.dont_show_posts_before")
-        assert_equal posts.select { |p| p.date > @sample_time }.count, results.length
+        assert_equal posts.count { |p| p.date > @sample_time }, results.length
       end
     end
 

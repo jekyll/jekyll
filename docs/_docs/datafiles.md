@@ -3,9 +3,9 @@ title: Data Files
 permalink: /docs/datafiles/
 ---
 
-In addition to the [built-in variables](../variables/) available from Jekyll,
+In addition to the [built-in variables]({{'/docs/variables/' | relative_url }}) available from Jekyll,
 you can specify your own custom data that can be accessed via the [Liquid
-templating system](https://wiki.github.com/shopify/liquid/liquid-for-designers).
+templating system](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers).
 
 Jekyll supports loading data from [YAML](http://yaml.org/), [JSON](http://www.json.org/), [CSV](https://en.wikipedia.org/wiki/Comma-separated_values), and [TSV](https://en.wikipedia.org/wiki/Tab-separated_values) files located in the `_data` directory.
 Note that CSV and TSV files *must* contain a header row.
@@ -42,7 +42,7 @@ In `_data/members.yml`:
 
 Or `_data/members.csv`:
 
-```text
+```
 name,github
 Eric Mill,konklone
 Parker Moore,parkr
@@ -147,4 +147,4 @@ author: dave
 ```
 {% endraw %}
 
-For information on how to build robust navigation for your site (especially if you have a documentation website or another type of Jekyll site with a lot of pages to organize), see [Navigation](/tutorials/navigation).
+For information on how to build robust navigation for your site (especially if you have a documentation website or another type of Jekyll site with a lot of pages to organize), see [Navigation]({{ '/tutorials/navigation/' | relative_url }}).

@@ -10,7 +10,7 @@ module Jekyll
                   :gems, :plugin_manager, :theme
 
     attr_accessor :converters, :generators, :reader
-    attr_reader   :regenerator, :liquid_renderer, :includes_load_paths
+    attr_reader   :regenerator, :liquid_renderer, :includes_load_paths, :filter_cache
 
     # Public: Initialize a new Site.
     #
@@ -23,6 +23,7 @@ module Jekyll
       self.config = config
 
       @cache_dir       = in_source_dir(config["cache_dir"])
+      @filter_cache    = {}
 
       @reader          = Reader.new(self)
       @regenerator     = Regenerator.new(self)
@@ -509,7 +510,7 @@ module Jekyll
     # Disable Marshaling cache to disk in Safe Mode
     def configure_cache
       Jekyll::Cache.cache_dir = in_source_dir(config["cache_dir"], "Jekyll/Cache")
-      Jekyll::Cache.disable_disk_cache! if safe
+      Jekyll::Cache.disable_disk_cache! if safe || config["disable_disk_cache"]
     end
 
     def configure_plugins
@@ -559,7 +560,8 @@ module Jekyll
     def render_regenerated(document, payload)
       return unless regenerator.regenerate?(document)
 
-      document.output = Jekyll::Renderer.new(self, document, payload).run
+      document.renderer.payload = payload
+      document.output = document.renderer.run
       document.trigger_hooks(:post_render)
     end
   end

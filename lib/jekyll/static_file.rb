@@ -25,7 +25,7 @@ module Jekyll
     # base - The String path to the <source>.
     # dir  - The String path between <source> and the file.
     # name - The String filename of the file.
-    # rubocop: disable ParameterLists
+    # rubocop: disable Metrics/ParameterLists
     def initialize(site, base, dir, name, collection = nil)
       @site = site
       @base = base
@@ -36,15 +36,17 @@ module Jekyll
       @extname = File.extname(@name)
       @data = @site.frontmatter_defaults.all(relative_path, type)
     end
-    # rubocop: enable ParameterLists
+    # rubocop: enable Metrics/ParameterLists
 
     # Returns source file path.
     def path
-      # Static file is from a collection inside custom collections directory
-      if !@collection.nil? && !@site.config["collections_dir"].empty?
-        File.join(*[@base, @site.config["collections_dir"], @dir, @name].compact)
-      else
-        File.join(*[@base, @dir, @name].compact)
+      @path ||= begin
+        # Static file is from a collection inside custom collections directory
+        if !@collection.nil? && !@site.config["collections_dir"].empty?
+          File.join(*[@base, @site.config["collections_dir"], @dir, @name].compact)
+        else
+          File.join(*[@base, @dir, @name].compact)
+        end
       end
     end
 
@@ -126,7 +128,7 @@ module Jekyll
         :collection => @collection.label,
         :path       => cleaned_relative_path,
         :output_ext => "",
-        :name       => "",
+        :name       => basename,
         :title      => "",
       }
     end

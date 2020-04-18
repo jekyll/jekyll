@@ -5,6 +5,15 @@ permalink: /docs/themes/
 
 Jekyll has an extensive theme system that allows you to leverage community-maintained templates and styles to customize your site's presentation. Jekyll themes specify plugins and package up assets, layouts, includes, and stylesheets in a way that can be overridden by your site's content.
 
+## Pick up a theme
+
+You can find and preview themes on different galleries:
+
+- [jamstackthemes.dev](https://jamstackthemes.dev/ssg/jekyll/)
+- [jekyllthemes.org](http://jekyllthemes.org/)
+- [jekyllthemes.io](https://jekyllthemes.io/)
+- [jekyll-themes.com](https://jekyll-themes.com/)
+
 ## Understanding gem-based themes
 
 When you [create a new Jekyll site](/docs/) (by running the `jekyll new <PATH>` command), Jekyll installs a site that uses a gem-based theme called [Minima](https://github.com/jekyll/minima).
@@ -14,6 +23,7 @@ With gem-based themes, some of the site's directories (such as the `assets`, `_l
 In the case of Minima, you see only the following files in your Jekyll site directory:
 
 ```
+.
 ├── Gemfile
 ├── Gemfile.lock
 ├── _config.yml
@@ -41,7 +51,7 @@ For example, if your selected theme has a `page` layout, you can override the th
 
 To locate a theme's files on your computer:
 
-1. Run `bundle show` followed by the name of the theme's gem, e.g., `bundle show minima` for Jekyll's default theme.
+1. Run `bundle info --path` followed by the name of the theme's gem, e.g., `bundle info --path minima` for Jekyll's default theme.
 
    This returns the location of the gem-based theme files. For example, the Minima theme's files might be located in `/usr/local/lib/ruby/gems/2.6.0/gems/minima-2.5.1` on macOS.
 
@@ -49,50 +59,51 @@ To locate a theme's files on your computer:
 
    ```sh
    # On MacOS
-   open $(bundle show minima)
+   open $(bundle info --path minima)
 
    # On Windows
    # First get the gem's installation path:
    #
-   #   bundle show minima
+   #   bundle info --path minima
    #   => C:/Ruby26-x64/lib/ruby/gems/{{ site.data.ruby.current_version }}/gems/minima-2.5.1
    #
    # then invoke explorer with above path, substituting `/` with `\`
    explorer C:\Ruby26-x64\lib\ruby\gems\{{ site.data.ruby.current_version}}\gems\minima-2.5.1
 
    # On Linux
-   xdg-open $(bundle show minima)
+   xdg-open $(bundle info --path minima)
    ```
 
    A Finder or Explorer window opens showing the theme's files and directories. The Minima theme gem contains these files:
 
-    ```
-    ├── LICENSE.txt
-    ├── README.md
-    ├── _includes
-    │   ├── disqus_comments.html
-    │   ├── footer.html
-    │   ├── google-analytics.html
-    │   ├── head.html
-    │   ├── header.html
-    │   ├── icon-github.html
-    │   ├── icon-github.svg
-    │   ├── icon-twitter.html
-    │   └── icon-twitter.svg
-    ├── _layouts
-    │   ├── default.html
-    │   ├── home.html
-    │   ├── page.html
-    │   └── post.html
-    ├── _sass
-    │   ├── minima
-    │   │   ├── _base.scss
-    │   │   ├── _layout.scss
-    │   │   └── _syntax-highlighting.scss
-    │   └── minima.scss
-    └── assets
-        └── main.scss
-     ```
+   ```
+   .
+   ├── LICENSE.txt
+   ├── README.md
+   ├── _includes
+   │   ├── disqus_comments.html
+   │   ├── footer.html
+   │   ├── google-analytics.html
+   │   ├── head.html
+   │   ├── header.html
+   │   ├── icon-github.html
+   │   ├── icon-github.svg
+   │   ├── icon-twitter.html
+   │   └── icon-twitter.svg
+   ├── _layouts
+   │   ├── default.html
+   │   ├── home.html
+   │   ├── page.html
+   │   └── post.html
+   ├── _sass
+   │   ├── minima
+   │   │   ├── _base.scss
+   │   │   ├── _layout.scss
+   │   │   └── _syntax-highlighting.scss
+   │   └── minima.scss
+   └── assets
+       └── main.scss
+   ```
 
 With a clear understanding of the theme's files, you can now override any theme file by creating a similarly named file in your Jekyll site directory.
 
@@ -109,8 +120,8 @@ Jekyll will look first to your site's content before looking to the theme's defa
 
 Note that making copies of theme files will prevent you from receiving any theme updates on those files. An alternative, to continue getting theme updates on all stylesheets, is to use higher specificity CSS selectors in your own additional, originally named CSS files.
 
-Refer to your selected theme's documentation and source repository for more information on what files you can override.
 {: .note .info}
+Refer to your selected theme's documentation and source repository for more information on which files you can override.
 
 ## Converting gem-based themes to regular themes
 
@@ -120,7 +131,7 @@ To do this, copy the files from the theme gem's directory into your Jekyll site 
 
 Then you must tell Jekyll about the plugins that were referenced by the theme. You can find these plugins in the theme's gemspec file as runtime dependencies. If you were converting the Minima theme, for example, you might see:
 
-```
+```ruby
 spec.add_runtime_dependency "jekyll-feed", "~> 0.12"
 spec.add_runtime_dependency "jekyll-seo-tag", "~> 2.6"
 ```
@@ -182,7 +193,8 @@ To install a gem-based theme:
    # This is an example, declare the theme gem you want to use here
    gem "jekyll-theme-minimal"
    ```
-  Or if you've started with the `jekyll new` command, replace `gem "minima", "~> 2.0"` with the gem you want, e.g:
+
+   Or if you've started with the `jekyll new` command, replace `gem "minima", "~> 2.0"` with the gem you want, e.g:
 
    ```diff
    # ./Gemfile
@@ -209,8 +221,8 @@ To install a gem-based theme:
    bundle exec jekyll serve
    ```
 
+{: .note .info}
 You can have multiple themes listed in your site's `Gemfile`, but only one theme can be selected in your site's `_config.yml`.
-{: .note .info }
 
 If you're publishing your Jekyll site on [GitHub Pages](https://pages.github.com/), note that GitHub Pages supports only [some gem-based themes](https://pages.github.com/themes/). GitHub Pages also supports [using any theme hosted on GitHub](https://help.github.com/articles/adding-a-jekyll-theme-to-your-github-pages-site/#adding-a-jekyll-theme-in-your-sites-_configyml-file) using the `remote_theme` configuration as if it were a gem-based theme.
 
@@ -265,7 +277,7 @@ Your theme's stylesheets should be placed in your theme's `_sass` folder, again,
 
 ```
 _sass
-├── jekyll-theme-awesome.scss
+└── jekyll-theme-awesome.scss
 ```
 
 Your theme's styles can be included in the user's stylesheet using the `@import` directive.
@@ -332,8 +344,8 @@ Themes are visual. Show users what your theme looks like by including a screensh
 
 To preview your theme as you're authoring it, it may be helpful to add dummy content in, for example, `/index.html` and `/page.html` files. This will allow you to use the `jekyll build` and `jekyll serve` commands to preview your theme, just as you'd preview a Jekyll site.
 
+{: .note .info}
 If you do preview your theme locally, be sure to add `/_site` to your theme's `.gitignore` file to prevent the compiled site from also being included when you distribute your theme.
-{: .info .note}
 
 ### Publishing your theme
 
