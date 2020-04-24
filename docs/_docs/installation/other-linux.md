@@ -40,4 +40,10 @@ On openSUSE:
 sudo zypper install -t pattern devel_ruby devel_C_C++
 ```
 
+On Clear Linux:
+
+```sh
+sudo swupd bundle-add ruby-basic
+```
+
 The rest works the same as on [Ubuntu](../ubuntu/).
