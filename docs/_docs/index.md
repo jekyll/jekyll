@@ -40,3 +40,5 @@ If you encounter any errors during this process, see the
 [troubleshooting]({{ '/docs/troubleshooting/#configuration-problems' | relative_url }}) page. Also,
 make sure you've installed the development headers and other prerequisites as
 mentioned on the [requirements]({{ '/docs/installation/#requirements' | relative_url }}) page.
+
+Note: Installation might be different depending on your operating system. See our [guides](https://jekyllrb.com/docs/installation/#guides) for OS specific instructions.
