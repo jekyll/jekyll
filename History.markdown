@@ -85,6 +85,7 @@
   * Add help about Gentoo/Linux (#8002)
   * Update documentation on third party site (#8122)
   * Added Clear Linux (#8132)
+  * Added note about OS specific installation instructions. (#8135)
 
 ### Development Fixes
 
