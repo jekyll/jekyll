@@ -86,6 +86,7 @@
   * Update documentation on third party site (#8122)
   * Added Clear Linux (#8132)
   * Added note about OS specific installation instructions. (#8135)
+  * Fix broken URL in the Resources Page on the Documentation Site (#8136)
 
 ### Development Fixes
 
