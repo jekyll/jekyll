@@ -27,7 +27,7 @@ some of the most popular Jekyll resources.
 - [Jekyll Cheatsheet](https://learn.cloudcannon.com/jekyll-cheat-sheet/) is a single-page resource for Jekyll filters, variables, and the like.
 - ["Creating and Hosting a Personal Site on GitHub"](http://jmcglone.com/guides/github-pages/)
 - ['Build A Blog With Jekyll And GitHub Pages' on Smashing Magazine](https://www.smashingmagazine.com/2014/08/01/build-blog-jekyll-github-pages/)
-- Publishing to GitHub Pages? [Check out our documentation page for just that purpose]({{ '/docs/github-pages/' | relative_url }}').
+- Publishing to GitHub Pages? [Check out our documentation page for just that purpose]({{ '/docs/github-pages/' | relative_url }}).
 - [Blogging with Git, Emacs and Jekyll](https://metajack.im/2009/01/23/blogging-with-git-emacs-and-jekyll/)
 - [Tips for working with GitHub Pages Integration](https://gist.github.com/jedschneider/2890453)
 
