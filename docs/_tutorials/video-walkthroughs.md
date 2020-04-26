@@ -1,5 +1,7 @@
 ---
 title: Video Walkthroughs
+author: giraffeacademy
+date: 2017-10-02 15:20:08 -0400
 ---
 
 [Giraffe Academy](https://www.youtube.com/c/GiraffeAcademy) has a series of videos that will walk you through the basics of using Jekyll. In this series you'll learn everything from installing Jekyll on your computer and setting up your first site, to using more complex features like variables, layouts and conditionals.

@@ -128,7 +128,7 @@ module Jekyll
         :collection => @collection.label,
         :path       => cleaned_relative_path,
         :output_ext => "",
-        :name       => "",
+        :name       => basename,
         :title      => "",
       }
     end

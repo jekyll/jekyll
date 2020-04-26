@@ -1,5 +1,7 @@
 ---
 title: Order of interpretation
+author: tomjoht
+date: 2017-01-29 21:45:03 -0800
 ---
 
 Jekyll's main job is to convert your raw text files into a static website. It does this by rendering Liquid, Markdown, and other transforms as it generates the static HTML output.
