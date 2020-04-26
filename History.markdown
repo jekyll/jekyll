@@ -4,6 +4,10 @@
 
   * Attain Ruby 3.0 compatibility (#8124)
 
+### Development Fixes
+
+  * Fix Kramdown converter based tests for v4.0.x (#8143)
+
 ## 4.0.0 / 2019-08-19
 
 ### Major Enhancements
