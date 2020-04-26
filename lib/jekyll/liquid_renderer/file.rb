@@ -18,6 +18,8 @@ module Jekyll
       end
 
       def render(*args)
+        reset_template_assigns
+
         measure_time do
           measure_bytes do
             measure_counts do
@@ -29,6 +31,8 @@ module Jekyll
 
       # This method simply 'rethrows any error' before attempting to render the template.
       def render!(*args)
+        reset_template_assigns
+
         measure_time do
           measure_bytes do
             measure_counts do
@@ -43,6 +47,12 @@ module Jekyll
       end
 
       private
+
+      # clear assigns to `Liquid::Template` instance prior to rendering since
+      # `Liquid::Template` instances are cached in Jekyll 4.
+      def reset_template_assigns
+        @template.instance_assigns.clear
+      end
 
       def measure_counts
         @renderer.increment_count(@filename)
