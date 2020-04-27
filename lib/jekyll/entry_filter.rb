@@ -98,7 +98,8 @@ module Jekyll
           pattern_with_source = PathManager.join(site.source, pattern)
 
           File.fnmatch?(pattern_with_source, entry_with_source) ||
-            entry_with_source.start_with?(pattern_with_source)
+            entry_with_source.start_with?(pattern_with_source) ||
+            (pattern_with_source == "#{entry_with_source}/" if File.directory?(entry_with_source))
         when Regexp
           pattern.match?(entry_with_source)
         else
