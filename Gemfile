@@ -74,7 +74,7 @@ group :jekyll_optional_dependencies do
   gem "rdoc", "~> 6.0"
   gem "tomlrb", "~> 1.2"
 
-  platform :ruby, :mswin, :mingw, :x64_mingw do
+  platforms :ruby, :mswin, :mingw, :x64_mingw do
     gem "classifier-reborn", "~> 2.2"
     gem "liquid-c", "~> 4.0"
     gem "yajl-ruby", "~> 1.4"
@@ -82,7 +82,7 @@ group :jekyll_optional_dependencies do
 
   # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
   # and associated library
-  install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do
+  platforms :jruby, :mswin, :mingw, :x64_mingw do
     gem "tzinfo", "~> 1.2"
     gem "tzinfo-data"
   end
