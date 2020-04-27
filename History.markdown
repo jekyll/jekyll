@@ -18,6 +18,7 @@
   * Clear cached Liquid template scope before render (#7967)
   * Add slugified_categories URL placeholder (#8094)
   * Cache URLFilter results of string inputs per site (#7990)
+  * Use platforms instead of install_if (#8140)
 
 ### Minor Enhancements
 
