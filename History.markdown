@@ -19,6 +19,7 @@
   * Add slugified_categories URL placeholder (#8094)
   * Cache URLFilter results of string inputs per site (#7990)
   * Use platforms instead of install_if (#8140)
+  * Config include trailing slash (#8113)
 
 ### Minor Enhancements
 
