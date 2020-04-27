@@ -114,6 +114,7 @@
   * Reduce Pathname objects from front matter defaults (#8067)
   * Quicker categories for documents without superdirs (#7987)
   * Bump Ruby versions on Travis builds (#8088)
+  * Escape regex characters in paths to match (#8138)
 
 ### Site Enhancements
 
