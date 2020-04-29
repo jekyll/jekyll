@@ -62,7 +62,10 @@ Obfuscates emails to protect them from spam bots.
 ## Hooks
 
 [Hooks](/docs/plugins/hooks/) give fine-grained control to extend the build
-process.
+process. For example:
+
+* [jekyll-spaceship](https://github.com/jeffreytse/jekyll-spaceship) - Provides
+powerful supports for table, mathjax, plantuml, video, etc.
 
 ## Flags
 
