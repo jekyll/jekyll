@@ -19,7 +19,7 @@ you how to create a new Jekyll project using Bundler and without installing gems
 outside the project directory.
 
 <div class="note info">
-  <h5>This is not the simplest way start using Jekyll</h5>
+  <h5>This is not the simplest way to start using Jekyll</h5>
   <p>
     This tutorial helps you get Jekyll set up using Bundler, and optionally
     without any system-wide gem installations. If prefer installing the jekyll
