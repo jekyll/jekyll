@@ -3,16 +3,24 @@ Feature: Bundling Config file with Theme gems
   I want to be able to pre-configure my gemified theme
   In order to make it easier for other Jekyllites to use my theme
 
-  Scenario: Enabling import of theme configuration
-    Given I have a configuration file with:
-      | key                 | value      |
-      | theme               | test-theme |
-      | import_theme_config | true       |
+  Scenario: Easy onboarding with a pre-configured theme
+    Given I have a configuration file with "theme" set to "test-theme"
     And I have an "index.md" page that contains "{{ site.test_theme.skin }}"
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
     And I should see "aero" in "_site/index.html"
+
+  Scenario: Disabling import of theme configuration entirely
+    Given I have a configuration file with:
+      | key                 | value      |
+      | theme               | test-theme |
+      | ignore_theme_config | true       |
+    And I have an "index.md" page that contains "{{ site.test_theme.skin }}"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should not see "aero" in "_site/index.html"
 
   Scenario: A pre-configured theme with valid config file overriding Jekyll defaults
     Given I have a configuration file with "theme" set to "test-theme"
