@@ -624,3 +624,36 @@ Feature: Collections
     Then I should get a zero exit status
     And the _site directory should exist
     And I should see "I have no front matter." in "_site/methods/extensionless_static_file"
+
+  Scenario: Rendered collection with an extensionless document
+    Given I have fixture collections
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      methods:
+        output: true
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "I have no file extension but I should still be a part of the collection." in "_site/methods/collection/entries"
+
+  Scenario: Rendered collection with an extensionless document in a strict site
+    Given I have fixture collections
+    And I have a _posts directory
+    And I have an "_posts/2019-12-26-extensioned.md" file that contains "Hello!"
+    And I have an "_posts/2019-12-26-extensionless" file that contains "Aloha!"
+    And I have an "index.md" page that contains "{{ site.posts | map: 'title' }}"
+    And I have a "_config.yml" file with content:
+    """
+    strict_front_matter: true
+    collections:
+      methods:
+        output: true
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "I have no file extension but I should still be a part of the collection." in "_site/methods/collection/entries"
+    And I should see "Extensioned" in "_site/index.html"
+    But I should not see "Extensionless" in "_site/index.html"
