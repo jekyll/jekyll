@@ -53,7 +53,7 @@ gems in the `./vendor/bundle/` project subdirectory. The advantage of doing this
 is that bundler will install gems within your project folder instead of the
 location used by `gem install`. This can help you avoid permissions errors you
 might otherwise get during gem installation, depending how you installed Ruby.
-If you skip this stem, Bundler will install your dependencies to the location
+If you skip this step, Bundler will install your dependencies to the location
 used by `gem install`.
 
 
