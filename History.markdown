@@ -90,6 +90,7 @@
   * Added note about OS specific installation instructions. (#8135)
   * Fix broken URL in the Resources Page on the Documentation Site (#8136)
   * Docs: Deploy Jekyll site with GitHub Actions (#8119)
+  * Clarify `bundle config` in Bundler tutorial (#8150)
 
 ### Development Fixes
 
