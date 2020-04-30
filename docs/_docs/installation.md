@@ -16,7 +16,7 @@ Jekyll is a [Ruby Gem](/docs/ruby-101/#gems) that can be installed on most syste
 
 For detailed install instructions have a look at the guide for your operating system.
 
-* [macOS](/docs/installation/macos/)
-* [Ubuntu Linux](/docs/installation/ubuntu/)
-* [Other Linux distros](/docs/installation/other-linux)
-* [Windows](/docs/installation/windows/)
+* [macOS]({{ '/docs/installation/macos/' | relative_url }})
+* [Ubuntu Linux]({{ '/docs/installation/ubuntu/' | relative_url }})
+* [Other Linux distros]({{ '/docs/installation/other-linux/' | relative_url }})
+* [Windows]({{ '/docs/installation/windows/' | relative_url }})

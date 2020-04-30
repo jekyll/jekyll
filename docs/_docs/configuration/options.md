@@ -43,11 +43,33 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr class="setting">
       <td>
         <p class="name"><strong>Safe</strong></p>
-        <p class="description">Disable <a href="/docs/plugins/">custom plugins, and ignore symbolic links</a>.</p>
+        <p class="description">
+          Disable <a href="/docs/plugins/">custom plugins</a>, caching to disk
+          and ignore symbolic links.
+        </p>
       </td>
       <td class="align-center">
         <p><code class="option">safe: BOOL</code></p>
         <p><code class="flag">--safe</code></p>
+      </td>
+    </tr>
+    <tr class="setting">
+      <td>
+        <p class="name">
+          <strong>Disable Disk Cache</strong>
+          <span class="version-badge" title="Introduced in v4.1.0">4.1.0</span>
+        </p>
+        <p class="description">
+          Disable caching of content to disk in order to skip creating a
+          <code>.jekyll-cache</code> or similar directory at the source
+          to avoid interference with virtual environments and third-party
+          directory watchers.
+          Caching to disk is always disabled in <code>safe</code> mode.
+        </p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">disable_disk_cache: BOOL</code></p>
+        <p><code class="flag">--disable-disk-cache</code></p>
       </td>
     </tr>
     <tr class="setting">
@@ -128,12 +150,12 @@ class="flag">flags</code> (specified on the command-line) that control them.
       <td>
         <p class='name'><strong>Defaults</strong></p>
         <p class='description'>
-            Set defaults for <a href="/docs/front-matter/" title="front matter">front matter</a>
+            Set defaults for <a href="{{ '/docs/front-matter/' | relative_url }}" title="front matter">front matter</a>
             variables.
         </p>
       </td>
       <td class='align-center'>
-        <p>see <a href="/docs/configuration/front-matter-defaults/" title="details">below</a></p>
+        <p>see <a href="{{ '/docs/configuration/front-matter-defaults/' | relative_url }}" title="details">below</a></p>
       </td>
     </tr>
   </tbody>
@@ -225,7 +247,8 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr class="setting">
       <td>
         <p class="name"><strong>LSI</strong></p>
-        <p class="description">Produce an index for related posts. Requires the <a href="http://www.classifier-reborn.com/">classifier-reborn</a> plugin.</p>
+        <p class="description">Produce an index for related posts. Requires the
+          <a href="http://www.classifier-reborn.com/">classifier-reborn</a> plugin.</p>
       </td>
       <td class="align-center">
         <p><code class="option">lsi: BOOL</code></p>
@@ -323,7 +346,6 @@ class="flag">flags</code> (specified on the command-line) that control them.
   </tbody>
 </table>
 </div>
-
 
 ### Serve Command Options
 

@@ -13,7 +13,7 @@ xcode-select --install
 ## Install Ruby
 
 Jekyll requires **Ruby > {{ site.data.ruby.min_version }}**.
-macOS Catalina 10.15 comes with ruby 2.6.3, so you're fine. 
+macOS Catalina 10.15 comes with ruby 2.6.3, so you're fine.
 If you're running a previous macOS system, you'll have to install a newer version of Ruby.
 
 ### With Homebrew {#brew}
@@ -26,10 +26,10 @@ To run the latest Ruby version you need to install it through [Homebrew](https:/
 brew install ruby
 ```
 
-Add the brew ruby path to your shell config :
+Add the brew ruby path to your shell config:
 
-```
-export PATH=/usr/local/opt/ruby/bin:$PATH
+```bash
+echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> ~/.bash_profile
 ```
 
 Then relaunch your terminal and check your updated Ruby setup:
@@ -56,10 +56,10 @@ Ruby versions. This is very useful when you need to be able to run a given Ruby 
 # Install rbenv and ruby-build
 brew install rbenv
 
-# Setup rbenv integration to your shell
+# Set up rbenv integration with your shell
 rbenv init
 
-# Check your install
+# Check your installation
 curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
 ```
 
@@ -77,7 +77,7 @@ That's it! Head over [rbenv command references](https://github.com/rbenv/rbenv#c
 
 ## Install Jekyll
 
-Now all that is left is installing [Bundler](/docs/ruby-101/#bundler) and Jekyll.
+Now all that is left is installing [Bundler]({{ '/docs/ruby-101/#bundler' | relative_url }}) and Jekyll.
 
 ### Local Install
 
@@ -94,8 +94,8 @@ ruby -v
 
 Then append your path file with the following, replacing the `X.X` with the first two digits of your Ruby version.
 
-```
-export PATH=$HOME/.gem/ruby/X.X.0/bin:$PATH
+```bash
+echo 'export PATH="$HOME/.gem/ruby/X.X.0/bin:$PATH"' >> ~/.bash_profile
 ```
 
 To check that your gem paths point to your home directory run:
@@ -104,9 +104,9 @@ To check that your gem paths point to your home directory run:
 gem env
 ```
 
-And check that `GEM PATHS:` points to a path in your home directory
+And check that `GEM PATHS:` points to a path in your home directory.
 
-{: .note }
+{: .note .info}
 Every time you update Ruby to a version with a different first two digits, you will need to update your path to match.
 
 ### Global Install
@@ -133,4 +133,4 @@ sudo gem install bundler jekyll
 
 ## Problems?
 
-Check out the [troubleshooting](/docs/troubleshooting/) page or [ask for help on our forum](https://talk.jekyllrb.com).
+Check out the [troubleshooting]({{ '/docs/troubleshooting/' | relative_url }}) page or [ask for help on our forum](https://talk.jekyllrb.com).

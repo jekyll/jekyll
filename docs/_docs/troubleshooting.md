@@ -111,7 +111,7 @@ possible to run Jekyll as a non-superuser and without having to install
 gems to system-wide locations by adding the following lines to the end
 of your `.bashrc` file:
 
-```
+```bash
 # Ruby exports
 
 export GEM_HOME=$HOME/gems
@@ -252,7 +252,7 @@ specified elsewhere.
 
 **Note: From v3.3.0 onward, Jekyll does not process `node_modules` and certain subdirectories within `vendor`, by default. But, by having an `exclude:` array defined explicitly in the config file overrides this default setting, which results in some users to encounter an error in building the site, with the following error message:**
 
-```sh
+```
     ERROR: YOUR SITE COULD NOT BE BUILT:
     ------------------------------------
     Invalid date '<%= Time.now.strftime('%Y-%m-%d %H:%M:%S %z') %>':
@@ -261,7 +261,6 @@ specified elsewhere.
 ```
 
 Adding `vendor/bundle` to the `exclude:` list will solve this problem but will lead to having other sub-directories under `/vendor/` (and also `/node_modules/`, if present) be processed to the destination folder `_site`.
-
 
 The proper solution is to incorporate the default setting for `exclude:` rather than override it completely:
 
@@ -281,7 +280,6 @@ exclude:
 
 From `v3.5` onward, `Gemfile` and `Gemfile.lock` are also excluded by default. So, in most cases there is no need to define another `exclude:` array in the config file. So an existing definition can either be modified as above, or removed completely, or commented out to enable easy edits in future.
 
-
 ## Markup Problems
 
 The various markup engines that Jekyll uses may have some issues. This
@@ -293,7 +291,7 @@ problems.
 Liquid version 2.0 seems to break the use of `{{ "{{" }}` in templates.
 Unlike previous versions, using `{{ "{{" }}` in 2.0 triggers the following error:
 
-```sh
+```
 '{{ "{{" }}' was not properly terminated with regexp: /\}\}/  (Liquid::SyntaxError)
 ```
 

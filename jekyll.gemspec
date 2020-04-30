@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-lib = File.expand_path("lib", __dir__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "jekyll/version"
+require "English"
+require_relative "lib/jekyll/version"
 
 Gem::Specification.new do |s|
   s.name          = "jekyll"
@@ -14,17 +13,17 @@ Gem::Specification.new do |s|
   s.summary       = "A simple, blog aware, static site generator."
   s.description   = "Jekyll is a simple, blog aware, static site generator."
 
-  all_files       = `git ls-files -z`.split("\x0")
+  all_files       = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
   s.files         = all_files.grep(%r!^(exe|lib|rubocop)/|^.rubocop.yml$!)
   s.executables   = all_files.grep(%r!^exe/!) { |f| File.basename(f) }
   s.bindir        = "exe"
   s.require_paths = ["lib"]
 
   s.metadata      = {
+    "source_code_uri" => "https://github.com/jekyll/jekyll",
     "bug_tracker_uri" => "https://github.com/jekyll/jekyll/issues",
     "changelog_uri"   => "https://github.com/jekyll/jekyll/releases",
-    "homepage_uri"    => "https://jekyllrb.com",
-    "source_code_uri" => "https://github.com/jekyll/jekyll",
+    "homepage_uri"    => s.homepage,
   }
 
   s.rdoc_options     = ["--charset=UTF-8"]
@@ -36,7 +35,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("addressable",           "~> 2.4")
   s.add_runtime_dependency("colorator",             "~> 1.0")
   s.add_runtime_dependency("em-websocket",          "~> 0.5")
-  s.add_runtime_dependency("i18n",                  ">= 0.9.5", "< 2")
+  s.add_runtime_dependency("i18n",                  "~> 1.0")
   s.add_runtime_dependency("jekyll-sass-converter", "~> 2.0")
   s.add_runtime_dependency("jekyll-watch",          "~> 2.0")
   s.add_runtime_dependency("kramdown",              "~> 2.1")

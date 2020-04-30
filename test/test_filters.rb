@@ -596,6 +596,7 @@ class TestFilters < JekyllUnitTest
         assert_equal "/front_matter.erb", page.url
         url = filter.relative_url(page.url)
         url << "foo"
+        assert_equal "/front_matter.erb", filter.relative_url(page.url)
         assert_equal "/front_matter.erb", page.url
       end
 
@@ -993,6 +994,23 @@ class TestFilters < JekyllUnitTest
           ],
           @filter.where_exp(
             @array_of_objects, "item", "item.color == 'red' and item.size == 'large'"
+          )
+        )
+      end
+
+      should "filter objects across multiple conditions" do
+        sample = [
+          { "color" => "teal", "size" => "large", "type" => "variable" },
+          { "color" => "red",  "size" => "large", "type" => "fixed" },
+          { "color" => "red",  "size" => "medium", "type" => "variable" },
+          { "color" => "blue", "size" => "medium", "type" => "fixed" },
+        ]
+        assert_equal(
+          [
+            { "color" => "red", "size" => "large", "type" => "fixed" },
+          ],
+          @filter.where_exp(
+            sample, "item", "item.type == 'fixed' and item.color == 'red' or item.color == 'teal'"
           )
         )
       end

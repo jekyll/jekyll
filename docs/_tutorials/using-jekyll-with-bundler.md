@@ -1,7 +1,7 @@
 ---
-layout: tutorials
-permalink: /tutorials/using-jekyll-with-bundler/
 title: Using Jekyll with Bundler
+author: mkasberg
+date: 2018-03-06 21:33:25 -0700
 ---
 
 > Bundler provides a consistent environment for Ruby projects by tracking and
@@ -41,7 +41,7 @@ other gems on your system. If you skip this step, Bundler will install your
 dependencies globally on your system.
 
 ```sh
-bundle install --path vendor/bundle
+bundle config set path 'vendor/bundle'
 ```
 
 <div class="note info">
@@ -105,4 +105,3 @@ _site/
 .bundle/
 vendor/
 ```
-

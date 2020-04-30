@@ -6,7 +6,7 @@ position: 1
 ---
 Welcome to Jekyll's step-by-step tutorial. The goal of this tutorial is to take
 you from having some front end web development experience to building your
-first Jekyll site from scratch — not relying on the default gem-based theme. 
+first Jekyll site from scratch — not relying on the default gem-based theme.
 Let's get into it!
 
 ## Installation
@@ -18,25 +18,25 @@ instructions for your operating system.
 With Ruby setup you can install Jekyll by running the following in your
 terminal:
 
-```
+```sh
 gem install jekyll bundler
 ```
 
 To create a new `Gemfile` to list your project's dependencies run:
 
-```
+```sh
 bundle init
 ```
 
-Now edit the `Gemfile`and add jekyll as a dependency:
+Now edit the `Gemfile` and add jekyll as a dependency:
 
-```
+```ruby
 gem "jekyll"
 ```
 
 Finally run `bundle` to install jekyll for your project.
 
-You can now prefix all jekyll commands listed in this tutorial with `bundle exec` 
+You can now prefix all jekyll commands listed in this tutorial with `bundle exec`
 to make sure you use the jekyll version defined in your `Gemfile`.
 
 ## Create a site

@@ -40,6 +40,12 @@ Layout/EmptyComment:
   Enabled: false
 Layout/EndAlignment:
   Severity: error
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
 Lint/UnreachableCode:
   Severity: error
 Lint/Void:
@@ -110,8 +116,6 @@ Style/Alias:
   EnforcedStyle: prefer_alias_method
 Style/AndOr:
   Severity: error
-Style/BracesAroundHashParameters:
-  Enabled: false
 Style/ClassAndModuleChildren:
   Exclude:
     - test/**/*.rb
@@ -121,15 +125,23 @@ Style/Documentation:
   Enabled: false
 Style/DoubleNegation:
   Enabled: false
+Style/ExponentialNotation:
+  Enabled: true
 Style/FormatStringToken:
   Exclude:
     - lib/jekyll/utils/ansi.rb
     - lib/jekyll/liquid_renderer/table.rb
 Style/GuardClause:
   Enabled: false
+Style/HashEachMethods:
+  Enabled: true
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
   Severity: error
+Style/HashTransformKeys:
+  Enabled: false
+Style/HashTransformValues:
+  Enabled: true
 Style/MixinUsage:
   Exclude:
     - test/helper.rb
