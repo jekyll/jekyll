@@ -595,11 +595,7 @@ class TestSite < JekyllUnitTest
 
       should "set a theme if the config is a string" do
         [:debug, :info, :warn, :error].each do |level|
-          if level == :info
-            expect(Jekyll.logger.writer).to receive(level)
-          else
-            expect(Jekyll.logger.writer).not_to receive(level)
-          end
+          expect(Jekyll.logger.writer).not_to receive(level)
         end
         site = fixture_site("theme" => "test-theme")
         assert_instance_of Jekyll::Theme, site.theme
