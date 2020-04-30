@@ -32,6 +32,7 @@
   * Add PageDrop to provide Liquid templates with data (#7992)
   * Optimize `Kramdown::JekyllDocument#to_html` calls (#8041)
   * Reduce Jekyll::Renderer instances during a build (#7570)
+  * Configure default language for syntax-highlighting (#8035)
 
 ### Documentation
 
