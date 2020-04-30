@@ -20,6 +20,7 @@
   * Cache URLFilter results of string inputs per site (#7990)
   * Use platforms instead of install_if (#8140)
   * Config include trailing slash (#8113)
+  * Allow extensionless document in a strict site (#7950)
 
 ### Minor Enhancements
 
