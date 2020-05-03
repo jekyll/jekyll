@@ -67,6 +67,13 @@ module Jekyll
       end
     end
 
+    # For backwards-compatibility in subclasses that do not redefine
+    # the `:to_liquid` method, stash existing definition under a new name
+    #
+    # TODO: Remove in Jekyll 5.0
+    alias_method :legacy_to_liquid, :to_liquid
+    private :legacy_to_liquid
+
     # Liquid representation of current page
     #
     # TODO: Remove optional parameter in Jekyll 5.0
@@ -186,13 +193,6 @@ module Jekyll
     def write?
       true
     end
-
-    # For backwards-compatibility in subclasses that do not redefine
-    # the `:to_liquid` method, stash existing definition under a new name
-    #
-    # TODO: Remove in Jekyll 5.0
-    alias_method :legacy_to_liquid, :to_liquid
-    private :legacy_to_liquid
 
     private
 
