@@ -48,10 +48,7 @@ module Jekyll
 
       process(name)
       read_yaml(PathManager.join(base, dir), name)
-
-      data.default_proc = proc do |_, key|
-        site.frontmatter_defaults.find(relative_path, type, key)
-      end
+      merge_defaults
 
       Jekyll::Hooks.trigger :pages, :post_init, self
     end
@@ -70,31 +67,6 @@ module Jekyll
       end
     end
 
-    # For backwards-compatibility in subclasses that do not redefine
-    # the `:to_liquid` method, stash existing definition under a new name
-    #
-    # TODO: Remove in Jekyll 5.0
-    alias_method :legacy_to_liquid, :to_liquid
-    private :legacy_to_liquid
-
-    # Private
-    # Subclasses can choose to optimize their `:to_liquid` method by wrapping
-    # it around this definition.
-    #
-    # TODO: Remove in Jekyll 5.0
-    def liquid_drop
-      @liquid_drop ||= begin
-        defaults = site.frontmatter_defaults.all(relative_path, type)
-        unless defaults.empty?
-          Utils.deep_merge_hashes!(data, Utils.deep_merge_hashes!(defaults, data))
-        end
-        Drops::PageDrop.new(self)
-      end
-    end
-    private :liquid_drop
-
-    # Public
-    #
     # Liquid representation of current page
     #
     # TODO: Remove optional parameter in Jekyll 5.0
@@ -213,6 +185,31 @@ module Jekyll
 
     def write?
       true
+    end
+
+    # For backwards-compatibility in subclasses that do not redefine
+    # the `:to_liquid` method, stash existing definition under a new name
+    #
+    # TODO: Remove in Jekyll 5.0
+    alias_method :legacy_to_liquid, :to_liquid
+    private :legacy_to_liquid
+
+    private
+
+    # Subclasses can choose to optimize their `:to_liquid` method by wrapping
+    # it around this definition.
+    #
+    # TODO: Remove in Jekyll 5.0
+    def liquid_drop
+      @liquid_drop ||= Drops::PageDrop.new(self)
+    end
+
+    def merge_defaults
+      defaults = site.frontmatter_defaults.all(relative_path, type)
+      return if defaults.empty?
+
+      Utils.deep_merge_hashes!(defaults, data) unless data.empty?
+      Utils.deep_merge_hashes!(data, defaults)
     end
   end
 end

@@ -54,10 +54,6 @@ module Jekyll
         categories_from_path(collection.relative_directory)
       end
 
-      data.default_proc = proc do |_, key|
-        site.frontmatter_defaults.find(relative_path, type, key)
-      end
-
       trigger_hooks(:post_init)
     end
 
