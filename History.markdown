@@ -94,6 +94,7 @@
   * Fix broken URL in the Resources Page on the Documentation Site (#8136)
   * Docs: Deploy Jekyll site with GitHub Actions (#8119)
   * Clarify `bundle config` in Bundler tutorial (#8150)
+  * docs: update your-first-plugin.md (#8147)
 
 ### Development Fixes
 
