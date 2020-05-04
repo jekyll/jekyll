@@ -12,7 +12,14 @@ module Jekyll
     end
 
     def template
-      @template ||= site.liquid_renderer.file(relative_path).parse(content)
+      @template ||= \
+        begin
+          site.liquid_renderer.file(relative_path).parse(content)
+        rescue Liquid::Error => e
+          e.template_name  = path
+          e.markup_context = "included " if e.markup_context.nil?
+          raise e
+        end
     end
 
     def content

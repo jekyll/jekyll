@@ -211,7 +211,7 @@ module Jekyll
           begin
             partial.render!(context)
           rescue Liquid::Error => e
-            e.template_name = path
+            e.template_name  = inclusion.path
             e.markup_context = "included " if e.markup_context.nil?
             raise e
           end
