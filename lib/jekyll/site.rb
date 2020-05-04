@@ -84,6 +84,7 @@ module Jekyll
       Jekyll.logger.info @liquid_renderer.stats_table
     end
 
+    # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
     #
     # Reset Site details.
@@ -116,6 +117,7 @@ module Jekyll
       Jekyll::Hooks.trigger :site, :after_reset, self
     end
     # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/AbcSize
 
     # Load necessary libraries, plugins, converters, and generators.
     #

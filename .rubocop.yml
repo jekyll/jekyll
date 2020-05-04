@@ -52,7 +52,7 @@ Lint/Void:
   Exclude:
     - lib/jekyll/site.rb
 Metrics/AbcSize:
-  Max: 24
+  Max: 21
 Metrics/BlockLength:
   Exclude:
     - test/**/*.rb

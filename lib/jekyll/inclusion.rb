@@ -43,6 +43,7 @@ module Jekyll
       end
     end
 
+    # rubocop:disable Metrics/AbcSize
     def compute_relative_path
       case path
       when site.theme && %r!#{site.theme.includes_path}/(?<rel_path>.*)!o
@@ -53,5 +54,6 @@ module Jekyll
         path.sub(site.in_source_dir("/"), "")
       end
     end
+    # rubocop:enable Metrics/AbcSize
   end
 end
