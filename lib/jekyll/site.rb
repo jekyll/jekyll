@@ -3,7 +3,7 @@
 module Jekyll
   class Site
     attr_reader   :source, :dest, :cache_dir, :config
-    attr_accessor :layouts, :pages, :static_files, :drafts,
+    attr_accessor :layouts, :pages, :static_files, :drafts, :inclusions,
                   :exclude, :include, :lsi, :highlighter, :permalink_style,
                   :time, :future, :unpublished, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
@@ -96,6 +96,7 @@ module Jekyll
                     Time.now
                   end
       self.layouts = {}
+      self.inclusions = []
       self.pages = []
       self.static_files = []
       self.data = {}

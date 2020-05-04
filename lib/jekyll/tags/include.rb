@@ -192,6 +192,51 @@ module Jekyll
       end
     end
 
+    # Do not inherit from this class.
+    # TODO: Merge into the `Jekyll::Tags::IncludeTag` in v5.0
+    class OptimizedIncludeTag < IncludeTag
+      def render(context)
+        @site ||= context.registers[:site]
+
+        file = render_variable(context) || @file
+        validate_file_name(file)
+        inclusion = locate_include(file)
+        return unless inclusion
+
+        add_include_to_dependency(@site, inclusion, context)
+        partial = inclusion.template
+
+        context.stack do
+          context["include"] = parse_params(context) if @params
+          begin
+            partial.render!(context)
+          rescue Liquid::Error => e
+            e.template_name = path
+            e.markup_context = "included " if e.markup_context.nil?
+            raise e
+          end
+        end
+      end
+
+      private
+
+      def locate_include(file)
+        inclusion = @site.inclusions.find { |item| item.name == file }
+        return inclusion if inclusion
+
+        raise IOError, could_not_locate_message(file, @site.includes_load_paths, @site.safe)
+      end
+
+      def add_include_to_dependency(site, inclusion, context)
+        return unless context.registers[:page]&.key?("path")
+
+        site.regenerator.add_dependency(
+          site.in_source_dir(context.registers[:page]["path"]),
+          inclusion.path
+        )
+      end
+    end
+
     class IncludeRelativeTag < IncludeTag
       def tag_includes_dirs(context)
         Array(page_path(context)).freeze
@@ -217,5 +262,5 @@ module Jekyll
   end
 end
 
-Liquid::Template.register_tag("include", Jekyll::Tags::IncludeTag)
+Liquid::Template.register_tag("include", Jekyll::Tags::OptimizedIncludeTag)
 Liquid::Template.register_tag("include_relative", Jekyll::Tags::IncludeRelativeTag)
