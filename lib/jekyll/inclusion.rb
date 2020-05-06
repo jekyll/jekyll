@@ -11,15 +11,13 @@ module Jekyll
       @relative_path = compute_relative_path
     end
 
-    def template
-      @template ||= \
-        begin
-          site.liquid_renderer.file(relative_path).parse(content)
-        rescue Liquid::Error => e
-          e.template_name  = path
-          e.markup_context = "included " if e.markup_context.nil?
-          raise e
-        end
+    def render(context)
+      @template ||= site.liquid_renderer.file(relative_path).parse(content)
+      @template.render!(context)
+    rescue Liquid::Error => e
+      e.template_name  = path
+      e.markup_context = "included " if e.markup_context.nil?
+      raise e
     end
 
     def content

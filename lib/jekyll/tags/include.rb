@@ -208,13 +208,7 @@ module Jekyll
 
         context.stack do
           context["include"] = parse_params(context) if @params
-          begin
-            partial.render!(context)
-          rescue Liquid::Error => e
-            e.template_name  = inclusion.path
-            e.markup_context = "included " if e.markup_context.nil?
-            raise e
-          end
+          inclusion.render(context)
         end
       end
 
