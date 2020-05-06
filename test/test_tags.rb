@@ -709,7 +709,7 @@ class TestTags < JekyllUnitTest
                       "permalink"   => "pretty",
                       "source"      => source_dir,
                       "destination" => dest_dir,
-                      "read_all"    => true,
+                      "read_posts"  => true,
                       "safe"        => true)
         end
         @result ||= ""
@@ -730,7 +730,7 @@ class TestTags < JekyllUnitTest
                       "permalink"   => "pretty",
                       "source"      => source_dir,
                       "destination" => dest_dir,
-                      "read_all"    => true,
+                      "read_posts"  => true,
                       "safe"        => true)
         end
         assert_match(
@@ -758,7 +758,7 @@ class TestTags < JekyllUnitTest
                     "permalink"   => "pretty",
                     "source"      => source_dir,
                     "destination" => dest_dir,
-                    "read_all"    => true)
+                    "read_posts"  => true)
       end
 
       should "correctly output include variable" do
@@ -786,7 +786,7 @@ class TestTags < JekyllUnitTest
                     "permalink"   => "pretty",
                     "source"      => source_dir,
                     "destination" => dest_dir,
-                    "read_all"    => true)
+                    "read_posts"  => true)
       end
 
       should "correctly output include variable" do
@@ -814,7 +814,7 @@ class TestTags < JekyllUnitTest
                     "permalink"   => "pretty",
                     "source"      => source_dir,
                     "destination" => dest_dir,
-                    "read_all"    => true)
+                    "read_posts"  => true)
       end
 
       should "correctly output include variable" do
@@ -841,7 +841,7 @@ class TestTags < JekyllUnitTest
                       "permalink"   => "pretty",
                       "source"      => source_dir,
                       "destination" => dest_dir,
-                      "read_all"    => true)
+                      "read_posts"  => true)
         end
 
         content = <<~CONTENT
@@ -857,7 +857,7 @@ class TestTags < JekyllUnitTest
                       "permalink"   => "pretty",
                       "source"      => source_dir,
                       "destination" => dest_dir,
-                      "read_all"    => true)
+                      "read_posts"  => true)
         end
       end
     end
@@ -875,7 +875,7 @@ class TestTags < JekyllUnitTest
                     "permalink"   => "pretty",
                     "source"      => source_dir,
                     "destination" => dest_dir,
-                    "read_all"    => true)
+                    "read_posts"  => true)
       end
 
       should "list all parameters" do
@@ -901,7 +901,7 @@ class TestTags < JekyllUnitTest
                     "permalink"   => "pretty",
                     "source"      => source_dir,
                     "destination" => dest_dir,
-                    "read_all"    => true)
+                    "read_posts"  => true)
       end
 
       should "include file with empty parameters" do
@@ -923,7 +923,7 @@ class TestTags < JekyllUnitTest
                     "permalink"    => "pretty",
                     "source"       => source_dir,
                     "destination"  => dest_dir,
-                    "read_all"     => true)
+                    "read_posts"   => true)
       end
 
       should "include file from custom directory" do
@@ -944,7 +944,7 @@ class TestTags < JekyllUnitTest
                     "permalink"   => "pretty",
                     "source"      => source_dir,
                     "destination" => dest_dir,
-                    "read_all"    => true)
+                    "read_posts"  => true)
       end
 
       should "include file with empty parameters within if statement" do
@@ -969,7 +969,7 @@ class TestTags < JekyllUnitTest
                       "permalink"   => "pretty",
                       "source"      => source_dir,
                       "destination" => dest_dir,
-                      "read_all"    => true)
+                      "read_posts"  => true)
         end
         assert_match(
           "Could not locate the included file 'missing.html' in any of " \
@@ -1063,7 +1063,7 @@ class TestTags < JekyllUnitTest
                         "permalink"   => "pretty",
                         "source"      => source_dir,
                         "destination" => dest_dir,
-                        "read_all"    => true)
+                        "read_posts"  => true)
           end
           assert_match "Could not locate the included file 'missing.html' in any of " \
                        "[\"#{source_dir}\"].", exception.message
@@ -1087,7 +1087,7 @@ class TestTags < JekyllUnitTest
                         "permalink"   => "pretty",
                         "source"      => source_dir,
                         "destination" => dest_dir,
-                        "read_all"    => true)
+                        "read_posts"  => true)
           end
           assert_equal(
             "Invalid syntax for include tag. File contains invalid characters or " \
@@ -1115,7 +1115,7 @@ class TestTags < JekyllUnitTest
                       "permalink"   => "pretty",
                       "source"      => source_dir,
                       "destination" => dest_dir,
-                      "read_all"    => true,
+                      "read_posts"  => true,
                       "safe"        => true)
         end
         @result ||= ""
@@ -1136,7 +1136,7 @@ class TestTags < JekyllUnitTest
                       "permalink"   => "pretty",
                       "source"      => source_dir,
                       "destination" => dest_dir,
-                      "read_all"    => true,
+                      "read_posts"  => true,
                       "safe"        => true)
         end
         assert_match(

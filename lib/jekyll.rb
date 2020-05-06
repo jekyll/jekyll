@@ -58,7 +58,6 @@ module Jekyll
   autoload :Cache,               "jekyll/cache"
   autoload :CollectionReader,    "jekyll/readers/collection_reader"
   autoload :DataReader,          "jekyll/readers/data_reader"
-  autoload :IncludeFileReader,   "jekyll/readers/include_file_reader"
   autoload :LayoutReader,        "jekyll/readers/layout_reader"
   autoload :PostReader,          "jekyll/readers/post_reader"
   autoload :PageReader,          "jekyll/readers/page_reader"

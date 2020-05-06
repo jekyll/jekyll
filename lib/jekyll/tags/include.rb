@@ -201,7 +201,10 @@ module Jekyll
 
         file = render_variable(context) || @file
         validate_file_name(file)
-        inclusion = @site.inclusions[file] || raise(IOError, could_not_locate_message(file))
+
+        @site.inclusions[file] ||= locate_include_file(file)
+        inclusion = @site.inclusions[file]
+
         add_include_to_dependency(inclusion, context) if @site.incremental?
 
         context.stack do
@@ -212,8 +215,26 @@ module Jekyll
 
       private
 
-      def could_not_locate_message(file)
-        super(file, @site.includes_load_paths, @site.safe)
+      def locate_include_file(file)
+        @site.includes_load_paths.each do |dir|
+          path = PathManager.join(dir, file)
+          return Inclusion.new(@site, dir, file) if valid_include_file?(path, dir)
+        end
+        raise IOError, could_not_locate_message(file, @site.includes_load_paths, @site.safe)
+      end
+
+      def valid_include_file?(path, dir)
+        File.exist?(path) && !File.directory?(path) && !outside_scope?(path, dir)
+      end
+
+      def outside_scope?(path, dir)
+        @site.safe && !realpath_prefixed_with?(path, dir)
+      end
+
+      def realpath_prefixed_with?(path, dir)
+        File.realpath(path).start_with?(dir)
+      rescue StandardError
+        false
       end
 
       def add_include_to_dependency(inclusion, context)
