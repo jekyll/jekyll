@@ -5,6 +5,7 @@
   * Attain Ruby 3.0 compatibility (#8124)
   * Clear cached Liquid template scope before render (#8141)
   * Add static file's basename to its url_placeholder (#8142)
+  * Update item_property to recognize integers (#8160)
 
 ### Development Fixes
 
