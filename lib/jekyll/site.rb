@@ -432,6 +432,8 @@ module Jekyll
     private
 
     def load_theme_configuration(config)
+      return config if config["ignore_theme_config"] == true
+
       theme_config_file = in_theme_dir("_config.yml")
       return config unless File.exist?(theme_config_file)
 
