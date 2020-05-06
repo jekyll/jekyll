@@ -44,10 +44,7 @@ module Jekyll
       entries = nil
       return entries unless File.exist?(directory)
 
-      Dir.chdir(directory) do
-        entries = EntryFilter.new(site).filter(Dir["**/*"])
-      end
-
+      Dir.chdir(directory) { entries = Dir["**/*"] }
       entries
     end
   end
