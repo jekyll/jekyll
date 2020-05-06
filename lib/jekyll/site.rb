@@ -97,7 +97,7 @@ module Jekyll
                     Time.now
                   end
       self.layouts = {}
-      self.inclusions = []
+      self.inclusions = {}
       self.pages = []
       self.static_files = []
       self.data = {}

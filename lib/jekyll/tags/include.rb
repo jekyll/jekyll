@@ -200,11 +200,8 @@ module Jekyll
 
         file = render_variable(context) || @file
         validate_file_name(file)
-        inclusion = locate_include(file)
-        return unless inclusion
-
-        add_include_to_dependency(@site, inclusion, context)
-        partial = inclusion.template
+        inclusion = @site.inclusions[file] || raise(IOError, could_not_locate_message(file))
+        add_include_to_dependency(inclusion, context) if @site.incremental?
 
         context.stack do
           context["include"] = parse_params(context) if @params
@@ -214,18 +211,15 @@ module Jekyll
 
       private
 
-      def locate_include(file)
-        inclusion = @site.inclusions.find { |item| item.name == file }
-        return inclusion if inclusion
-
-        raise IOError, could_not_locate_message(file, @site.includes_load_paths, @site.safe)
+      def could_not_locate_message(file)
+        super(file, @site.includes_load_paths, @site.safe)
       end
 
-      def add_include_to_dependency(site, inclusion, context)
+      def add_include_to_dependency(inclusion, context)
         return unless context.registers[:page]&.key?("path")
 
-        site.regenerator.add_dependency(
-          site.in_source_dir(context.registers[:page]["path"]),
+        @site.regenerator.add_dependency(
+          @site.in_source_dir(context.registers[:page]["path"]),
           inclusion.path
         )
       end

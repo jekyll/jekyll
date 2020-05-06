@@ -2,13 +2,16 @@
 
 module Jekyll
   class Inclusion
-    attr_reader :name, :path, :relative_path
+    attr_reader :name, :path
 
     def initialize(site, base, name)
       @site = site
       @name = name
       @path = PathManager.join(base, name)
-      @relative_path = compute_relative_path
+    end
+
+    def relative_path
+      @relative_path ||= compute_relative_path
     end
 
     def render(context)
@@ -25,7 +28,7 @@ module Jekyll
     end
 
     def inspect
-      "#{self.class} #{@relative_path.inspect}"
+      "#{self.class} #{relative_path.inspect}"
     end
     alias_method :to_s, :inspect
 

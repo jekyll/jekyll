@@ -5,16 +5,15 @@ module Jekyll
     attr_reader :site
     def initialize(site)
       @site = site
-      @inclusions = {}
     end
 
     def read
       site.includes_load_paths.each do |load_path|
         entries_in(load_path)&.each do |name|
-          @inclusions[name] ||= initialize_validated(load_path, name)
+          inclusion = initialize_validated(load_path, name)
+          inclusion && site.inclusions[name] ||= inclusion
         end
       end
-      @inclusions.each_value { |item| item && site.inclusions << item }
     end
 
     private
