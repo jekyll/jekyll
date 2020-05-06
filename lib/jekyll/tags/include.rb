@@ -18,12 +18,13 @@ module Jekyll
 
       def initialize(tag_name, markup, tokens)
         super
-        matched = markup.strip.match(VARIABLE_SYNTAX)
+        markup  = markup.strip
+        matched = markup.match(VARIABLE_SYNTAX)
         if matched
           @file = matched["variable"].strip
           @params = matched["params"].strip
         else
-          @file, @params = markup.strip.split(%r!\s+!, 2)
+          @file, @params = markup.split(%r!\s+!, 2)
         end
         validate_params if @params
         @tag_name = tag_name
