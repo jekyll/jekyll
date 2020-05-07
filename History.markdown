@@ -96,6 +96,7 @@
   * Docs: Deploy Jekyll site with GitHub Actions (#8119)
   * Clarify `bundle config` in Bundler tutorial (#8150)
   * docs: update your-first-plugin.md (#8147)
+  * Fix typo in documentation on GitHub Actions (#8162)
 
 ### Development Fixes
 
