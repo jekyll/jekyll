@@ -11,6 +11,9 @@ You can use this command in a number of ways:
 * `jekyll new PATH --blank` - Creates a new blank Jekyll site scaffold at specified path.
 * `jekyll build` or `jekyll b` - Performs a one off build your site to `./_site` (by default)
 * `jekyll serve` or `jekyll s` - Builds your site any time a source file changes and serves it locally
+* `jekyll console` or `jekyll c` - Opens up an IRB console and lets you
+  inspect your site configuration and content "under the hood" using
+  Jekyll's native Ruby API.
 * `jekyll doctor` - Outputs any deprecation or configuration issues
 * `jekyll clean` - Removes all generated files: destination folder, metadata file, Sass and Jekyll caches.
 * `jekyll help` - Shows help, optionally for a given subcommand, e.g. `jekyll help build`
