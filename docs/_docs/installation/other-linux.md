@@ -16,6 +16,18 @@ On Debian:
 sudo apt-get install ruby-full build-essential
 ```
 
+On Gentoo Linux:
+
+```sh
+sudo emerge -av jekyll
+```
+
+or
+
+```sh
+sudo emerge --ask --verbose jekyll
+```
+
 On ArchLinux:
 
 ```sh
@@ -26,6 +38,12 @@ On openSUSE:
 
 ```sh
 sudo zypper install -t pattern devel_ruby devel_C_C++
+```
+
+On Clear Linux:
+
+```sh
+sudo swupd bundle-add ruby-basic
 ```
 
 The rest works the same as on [Ubuntu](../ubuntu/).

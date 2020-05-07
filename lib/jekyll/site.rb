@@ -10,7 +10,7 @@ module Jekyll
                   :gems, :plugin_manager, :theme
 
     attr_accessor :converters, :generators, :reader
-    attr_reader   :regenerator, :liquid_renderer, :includes_load_paths
+    attr_reader   :regenerator, :liquid_renderer, :includes_load_paths, :filter_cache
 
     # Public: Initialize a new Site.
     #
@@ -23,6 +23,7 @@ module Jekyll
       self.config = config
 
       @cache_dir       = in_source_dir(config["cache_dir"])
+      @filter_cache    = {}
 
       @reader          = Reader.new(self)
       @regenerator     = Regenerator.new(self)
@@ -431,6 +432,8 @@ module Jekyll
     private
 
     def load_theme_configuration(config)
+      return config if config["ignore_theme_config"] == true
+
       theme_config_file = in_theme_dir("_config.yml")
       return config unless File.exist?(theme_config_file)
 
@@ -520,7 +523,8 @@ module Jekyll
     def render_regenerated(document, payload)
       return unless regenerator.regenerate?(document)
 
-      document.output = Jekyll::Renderer.new(self, document, payload).run
+      document.renderer.payload = payload
+      document.output = document.renderer.run
       document.trigger_hooks(:post_render)
     end
   end

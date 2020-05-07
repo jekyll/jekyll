@@ -741,7 +741,7 @@ code {
   white-space: pre;
   display: inline-block;
   margin: 0;
-  font: 14px/1.8em Menlo, Consolas, "Courier New", Courier, "Liberation Mono", monospace;
+  font: 14px/1.625em Menlo, Consolas, "Courier New", Courier, "Liberation Mono", monospace;
   padding: 0 0.5em;
 }
 
@@ -750,6 +750,7 @@ code {
 }
 
 .highlight,
+a > code,
 p > pre,
 p > code,
 p > nobr > code,
@@ -757,7 +758,7 @@ li > code,
 li> pre,
 h5 > code,
 .note > code {
-  background-color: #2b2b2b;
+  background-color: #272727;
   color: #fff;
   max-width: 100%;
   overflow-x: auto;
@@ -767,6 +768,8 @@ h5 > code,
     0 1px 0 rgba(255,255,255,.1),
     0 -1px 0 rgba(0,0,0,.5));
 }
+
+a > code { color: inherit }
 
 .note .highlight {
   width: 94%;
@@ -804,6 +807,10 @@ pre.highlight,
 .highlighter-rouge .highlight {
   @extend .highlight;
   margin: 0;
+}
+
+div.highlighter-rouge + div.highlighter-rouge {
+  margin: 30px 0 0;
 }
 
 /* HTML Elements */

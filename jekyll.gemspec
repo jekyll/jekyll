@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "English"
 require_relative "lib/jekyll/version"
 
 Gem::Specification.new do |s|
@@ -12,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary       = "A simple, blog aware, static site generator."
   s.description   = "Jekyll is a simple, blog aware, static site generator."
 
-  all_files       = `git ls-files -z`.split("\x0")
+  all_files       = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
   s.files         = all_files.grep(%r!^(exe|lib|rubocop)/|^.rubocop.yml$!)
   s.executables   = all_files.grep(%r!^exe/!) { |f| File.basename(f) }
   s.bindir        = "exe"

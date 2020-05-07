@@ -149,5 +149,12 @@ class TestEntryFilter < JekyllUnitTest
       assert @filter.glob_include?(data, "vendor/bundle/jekyll/lib/page.rb")
       assert @filter.glob_include?(data, "/vendor/ruby/lib/set.rb")
     end
+
+    should "match directory only if there is trailing slash" do
+      data = ["_glob_include_test/_is_dir/", "_glob_include_test/_not_dir/"]
+      assert @filter.glob_include?(data, "_glob_include_test/_is_dir")
+      assert @filter.glob_include?(data, "_glob_include_test/_is_dir/include_me.txt")
+      refute @filter.glob_include?(data, "_glob_include_test/_not_dir")
+    end
   end
 end

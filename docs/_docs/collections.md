@@ -129,7 +129,8 @@ You can link to the generated page using the `url` attribute:
 There are special [permalink variables for collections]({{ '/docs/permalinks/' | relative_url }}) to
 help you control the output url for the entire collection.
 
-## Custom Sorting of Documents
+## Custom Sorting of Documents {%- include docs_version_badge.html version="4.0" -%}
+{: #custom-sorting-of-documents}
 
 By default, two documents in a collection are sorted by their `date` attribute when both of them have the `date` key in their front matter. However, if either or both documents do not have the `date` key in their front matter, they are sorted by their respective paths.
 
