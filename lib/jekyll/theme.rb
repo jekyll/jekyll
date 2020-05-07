@@ -21,6 +21,11 @@ module Jekyll
         "or includes a symbolic link loop"
     end
 
+    # The name of theme directory
+    def basename
+      @basename ||= File.basename(root)
+    end
+
     def includes_path
       @includes_path ||= path_for "_includes"
     end

@@ -63,8 +63,8 @@ module Jekyll
         when %r!(/gems/.*)*/gems/(?<dirname>[^/]+)(?<rest>.*)!,
              %r!(?<dirname>[^/]+/lib)(?<rest>.*)!
           "#{Regexp.last_match(:dirname)}#{Regexp.last_match(:rest)}"
-        when theme_dir && %r!\A(?<theme_repo>#{Regexp.escape(theme_dir)}/)(?<rest>.*)!io
-          ::File.join(::File.basename(Regexp.last_match(:theme_repo)), Regexp.last_match(:rest))
+        when theme_dir && %r!\A#{Regexp.escape(theme_dir)}/(?<rest>.*)!io
+          PathManager.join(@site.theme.basename, Regexp.last_match(:rest))
         when %r!\A/(.*)!
           Regexp.last_match(1)
         else
