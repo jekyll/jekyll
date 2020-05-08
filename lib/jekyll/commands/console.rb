@@ -14,6 +14,8 @@ module Jekyll
 
             c.option "config", "--config CONFIG_FILE[,CONFIG_FILE2,...]", Array,
                      "Custom configuration file"
+            c.option "blank", "--blank",
+                     "Skip reading content and running generators before opening console"
 
             c.action do |_, options|
               Jekyll::Commands::Console.process(options)
@@ -24,13 +26,19 @@ module Jekyll
         # TODO: is there a way to add a unit test for this command?
         # rubocop:disable Style/GlobalVars, Metrics/AbcSize, Metrics/MethodLength
         def process(options)
-          Jekyll.logger.info "Starting:", "Jekyll v#{Jekyll::VERSION.magenta}" \
-                                      " console…"
+          Jekyll.logger.info "Starting:", "Jekyll v#{Jekyll::VERSION} console..."
           Jekyll.logger.info "Environment:", Jekyll.env.cyan
           site = Jekyll::Site.new(configuration_from_options(options))
-          site.reset
-          site.read
-          site.generate
+
+          unless options["blank"]
+            site.reset
+            Jekyll.logger.info "Reading files..."
+            site.read
+            Jekyll.logger.info "", "done!"
+            Jekyll.logger.info "Running generators..."
+            site.generate
+            Jekyll.logger.info "", "done!"
+          end
 
           $JEKYLL_SITE = site
           IRB.setup(nil)
@@ -44,10 +52,8 @@ module Jekyll
             irb.signal_handle
           end
 
-          begin
-            catch(:IRB_EXIT) do
-              irb.eval_input
-            end
+          catch(:IRB_EXIT) do
+            irb.eval_input
           end
         end
         # rubocop:enable Style/GlobalVars, Metrics/AbcSize, Metrics/MethodLength
