@@ -1,8 +1,8 @@
-## HEAD
+## 3.8.7 / 2020-05-08
 
 ### Bug Fixes
 
-  * Attain Ruby 3.0 compatibility (#8125)
+  * Prevent console warnings with Ruby 2.7 (#8125)
 
 ## 3.8.6 / 2019-07-02
 
