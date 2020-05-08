@@ -1,8 +1,8 @@
-## HEAD
+## 4.0.1 / 2020-05-08
 
 ### Bug Fixes
 
-  * Attain Ruby 3.0 compatibility (#8124)
+  * Prevent console warning with Ruby 2.7 (#8124)
   * Clear cached Liquid template scope before render (#8141)
   * Add static file's basename to its url_placeholder (#8142)
   * Update item_property to recognize integers (#8160)
