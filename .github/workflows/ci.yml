@@ -27,16 +27,25 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 5
-    - name: Set up Ruby 2.6
+    - name: Ruby
       uses: actions/setup-ruby@v1
       with:
-        ruby-version: 2.6.x
+        ruby-version: ">= 2.5"
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
     - name: 'Update Rubygems'
       run: 'gem update --system --no-document'
     - name: 'Update Bundler'
       run: 'gem update bundler --no-document'
     - name: Set up bundle
-      run: bundle install --jobs 4 --retry 3
+      run: | 
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
     - name: Run Test Suite
       run: bash script/cibuild
       env:
