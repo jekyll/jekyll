@@ -125,6 +125,7 @@
   * Quicker categories for documents without superdirs (#7987)
   * Bump Ruby versions on Travis builds (#8088)
   * Escape regex characters in paths to match (#8138)
+  * chore(ci): cache dependencies (#8168)
 
 ### Site Enhancements
 
