@@ -5,7 +5,7 @@
       <ul>
       {% for item in section.tutorials -%}
         {% assign item_url = item | prepend:"/tutorials/" | append:"/" -%}
-        {% assign p = site.tutorials | where:"url", item_url | first -%}
+        {% assign p = site.tutorials | find: "url", item_url -%}
         <li {%- if item_url == page.url %} class="current" {%- endif %}><a href="{{ p.url | relative_url }}">
           {{- p.title -}}
         </a></li>
