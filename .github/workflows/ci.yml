@@ -30,7 +30,7 @@ jobs:
     - name: Ruby
       uses: actions/setup-ruby@v1
       with:
-        ruby-version: ">= 2.5"
+        ruby-version: 2.6.x
     - name: Cache dependencies
       uses: actions/cache@v1
       with:
