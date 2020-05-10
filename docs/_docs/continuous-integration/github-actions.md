@@ -93,7 +93,7 @@ was generated with an old version of Bundler.
 ### Setting up the Action
 
 GitHub Actions are registered for a repository by using a YAML file inside the directory path
-`.github/worksflows` (note the dot at the start). Here we shall employ
+`.github/workflows` (note the dot at the start). Here we shall employ
 [Jekyll Actions][jekyll-actions] from the Marketplace for its simplicity.
 
 Create a **workflow file**, say `github-pages.yml`, using either the GitHub interface or by pushing
