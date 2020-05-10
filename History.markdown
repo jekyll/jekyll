@@ -129,6 +129,7 @@
   * Utilize relative_url filter in documentation site (#8089)
   * Render tutorial metadata in documentation site (#8092)
   * Improve syntax-highlighting in documentation site (#8079)
+  * Site: Filter through just the docs collection (#8170)
 
 ## 4.0.1 / 2020-05-08
 
