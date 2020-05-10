@@ -123,6 +123,7 @@
   * Escape regex characters in paths to match (#8138)
   * chore(ci): cache dependencies (#8168)
   * Provide invokables for common drop query keys (#8165)
+  * Optimize path sanitization of default front matter (#8154)
 
 ### Site Enhancements
 
