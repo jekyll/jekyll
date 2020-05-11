@@ -3,6 +3,7 @@
 module Jekyll
   class DataReader
     attr_reader :site, :content
+
     def initialize(site)
       @site = site
       @content = {}
