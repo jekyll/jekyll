@@ -18,6 +18,7 @@
   * Config include trailing slash (#8113)
   * Allow extensionless document in a strict site (#7950)
   * Improve path normalization in liquid_renderer (#8075)
+  * Switch slugify regex to support more Unicode character groups (#8167)
 
 ### Minor Enhancements
 
