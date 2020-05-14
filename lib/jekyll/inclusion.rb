@@ -2,7 +2,8 @@
 
 module Jekyll
   class Inclusion
-    attr_reader :name, :path
+    attr_reader :site, :name, :path
+    private :site
 
     def initialize(site, base, name)
       @site = site
@@ -11,7 +12,7 @@ module Jekyll
     end
 
     def render(context)
-      @template ||= site.liquid_renderer.file(relative_path).parse(content)
+      @template ||= site.liquid_renderer.file(path).parse(content)
       @template.render!(context)
     rescue Liquid::Error => e
       e.template_name  = path
@@ -24,28 +25,8 @@ module Jekyll
     end
 
     def inspect
-      "#{self.class} #{relative_path.inspect}"
+      "#{self.class} #{path.inspect}"
     end
     alias_method :to_s, :inspect
-
-    private
-
-    attr_reader :site
-
-    # rubocop:disable Metrics/AbcSize
-    def relative_path
-      @relative_path ||= begin
-        case path
-        when site.theme && %r!#{site.theme.includes_path}/(?<rel_path>.*)!o
-          dir_path = PathManager.join(site.theme.basename, "_includes")
-          PathManager.join(dir_path, Regexp.last_match[:rel_path])
-        when %r!#{site.in_source_dir(site.config["includes_dir"], "/")}(?<rel_path>.*)!o
-          PathManager.join(site.config["includes_dir"], Regexp.last_match[:rel_path])
-        else
-          path.sub(site.in_source_dir("/"), "")
-        end
-      end
-    end
-    # rubocop:enable Metrics/AbcSize
   end
 end
