@@ -19,6 +19,7 @@
   * Allow extensionless document in a strict site (#7950)
   * Improve path normalization in liquid_renderer (#8075)
   * Switch slugify regex to support more Unicode character groups (#8167)
+  * Check if entry is a directory once per enumerator (#8177)
 
 ### Minor Enhancements
 
