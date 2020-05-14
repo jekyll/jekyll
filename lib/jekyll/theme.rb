@@ -4,6 +4,7 @@ module Jekyll
   class Theme
     extend Forwardable
     attr_reader   :name
+
     def_delegator :gemspec, :version, :version
 
     def initialize(name)
