@@ -8,8 +8,16 @@ The Jekyll gem makes a `jekyll` executable available to you in your terminal.
 The `jekyll` program has several commands but the structure is always:
 
 ```
-jekyll command [argument] [option]
+jekyll command [argument] [option] [argument_to_option]
+
+Examples:
+    jekyll new site/ --blank
+    jekyll serve --config _alternative_config.yml
 ```
+
+For a full list of options and their argument, see [Build Command Options](/docs/configuration/options/#build-command-options).
+
+Here is some of the most common commands:
 
 * `jekyll new PATH` - Creates a new Jekyll site with default gem-based theme at specified path. The directories will be created as necessary.
 * `jekyll new PATH --blank` - Creates a new blank Jekyll site scaffold at specified path.
@@ -23,4 +31,3 @@ jekyll command [argument] [option]
 Typically you'll use `jekyll serve` while developing locally and `jekyll build` when you need to generate the site for production.
 
 To change Jekyll's default build behavior have a look through the [configuration options](/docs/configuration/).
-For a full list of options, see [Build Command Options](https://jekyllrb.com/docs/configuration/options/#build-command-options).
