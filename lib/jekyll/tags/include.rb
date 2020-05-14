@@ -224,7 +224,7 @@ module Jekyll
       end
 
       def valid_include_file?(path, dir)
-        File.exist?(path) && !File.directory?(path) && !outside_scope?(path, dir)
+        File.file?(path) && !outside_scope?(path, dir)
       end
 
       def outside_scope?(path, dir)
