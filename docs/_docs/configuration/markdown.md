@@ -47,7 +47,7 @@ currently supported options:
 markdown: kramdown
 kramdown:
   html_to_native: true
-  ```
+```
   
 <div class="note warning">
   <h5>There are two unsupported kramdown options</h5>
