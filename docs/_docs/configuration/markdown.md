@@ -44,7 +44,6 @@ currently supported options:
 
 ### Example Usage
 ```yaml
-markdown: kramdown
 kramdown:
   html_to_native: true
 ```
