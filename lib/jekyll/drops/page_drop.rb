@@ -7,12 +7,10 @@ module Jekyll
 
       mutable false
 
-      def_delegators :@obj, :content, :dir, :name, :path, :url
-      private def_delegator :@obj, :data, :fallback_data
+      delegate_methods :content, :dir, :name, :path, :url
+      private delegate_method_as :data, :fallback_data
 
-      def title
-        @obj.data["title"]
-      end
+      data_delegator "title"
     end
   end
 end
