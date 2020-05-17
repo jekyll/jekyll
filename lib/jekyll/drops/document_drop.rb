@@ -64,6 +64,18 @@ module Jekyll
           result[key] = doc[key] unless NESTED_OBJECT_FIELD_BLACKLIST.include?(key)
         end
       end
+
+      def title
+        @obj.data["title"]
+      end
+
+      def categories
+        @obj.data["categories"]
+      end
+
+      def tags
+        @obj.data["tags"]
+      end
     end
   end
 end

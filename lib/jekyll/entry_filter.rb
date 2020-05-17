@@ -3,6 +3,7 @@
 module Jekyll
   class EntryFilter
     attr_reader :site
+
     SPECIAL_LEADING_CHAR_REGEX = %r!\A#{Regexp.union([".", "_", "#", "~"])}!o.freeze
 
     def initialize(site, base_directory = nil)
@@ -91,6 +92,7 @@ module Jekyll
     # Returns true if path matches against any glob pattern, else false.
     def glob_include?(enumerator, entry)
       entry_with_source = PathManager.join(site.source, entry)
+      entry_is_directory = File.directory?(entry_with_source)
 
       enumerator.any? do |pattern|
         case pattern
@@ -99,7 +101,7 @@ module Jekyll
 
           File.fnmatch?(pattern_with_source, entry_with_source) ||
             entry_with_source.start_with?(pattern_with_source) ||
-            (pattern_with_source == "#{entry_with_source}/" if File.directory?(entry_with_source))
+            (pattern_with_source == "#{entry_with_source}/" if entry_is_directory)
         when Regexp
           pattern.match?(entry_with_source)
         else

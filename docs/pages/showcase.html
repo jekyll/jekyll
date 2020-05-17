@@ -14,7 +14,7 @@ redirect_from:
     <a href="{{ s.url | relative_url }}" target="_blank">
       <figure>
         <div class="imageWrapper">
-          <img class="b-lazy" src="{{ 'img/spacer.gif' | relative_url }}" alt="{{ s.name }}">
+          <img loading="lazy" class="b-lazy" src="{{ 'img/spacer.gif' | relative_url }}" alt="{{ s.name }}" width="404">
         </div>
         <figcaption>{{ s.name }}</figcaption>
       </figure>
