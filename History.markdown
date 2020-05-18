@@ -18,6 +18,8 @@
   * Config include trailing slash (#8113)
   * Allow extensionless document in a strict site (#7950)
   * Improve path normalization in liquid_renderer (#8075)
+  * Switch slugify regex to support more Unicode character groups (#8167)
+  * Check if entry is a directory once per enumerator (#8177)
 
 ### Minor Enhancements
 
@@ -94,6 +96,8 @@
   * Clarify `bundle config` in Bundler tutorial (#8150)
   * docs: update your-first-plugin.md (#8147)
   * Fix typo in documentation on GitHub Actions (#8162)
+  * Ease discovery of CLI commands (in their entirety) (#8178)
+  * Remove sudo from Travis CI tutorial (#8187)
 
 ### Development Fixes
 
@@ -122,6 +126,8 @@
   * Bump Ruby versions on Travis builds (#8088)
   * Escape regex characters in paths to match (#8138)
   * chore(ci): cache dependencies (#8168)
+  * Provide invokables for common drop query keys (#8165)
+  * Optimize path sanitization of default front matter (#8154)
 
 ### Site Enhancements
 

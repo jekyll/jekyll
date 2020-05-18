@@ -5,6 +5,7 @@ module Jekyll
     SPECIAL_COLLECTIONS = %w(posts data).freeze
 
     attr_reader :site, :content
+
     def initialize(site)
       @site = site
       @content = {}
