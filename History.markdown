@@ -97,6 +97,7 @@
   * docs: update your-first-plugin.md (#8147)
   * Fix typo in documentation on GitHub Actions (#8162)
   * Ease discovery of CLI commands (in their entirety) (#8178)
+  * Remove sudo from Travis CI tutorial (#8187)
 
 ### Development Fixes
 
