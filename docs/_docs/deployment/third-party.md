@@ -25,7 +25,11 @@ continuous deployment and [more](https://cloudcannon.com/features/).
 
 Sites on GitHub Pages are powered by Jekyll behind the scenes, so if you’re looking for a zero-hassle, zero-cost solution, GitHub Pages are a great way to [host your Jekyll-powered website for free](/docs/github-pages/).
 
-### KeyCDN
+## GitLab Pages
+
+[GitLab Pages](https://about.gitlab.com/stages-devops-lifecycle/pages/) offers free hosting with custom domains. [Get started with Jekyll](https://docs.gitlab.com/ee/user/project/pages/getting_started_part_four.html#practical-example) and a fully customizable pipeline.
+
+## KeyCDN
 
 [KeyCDN](https://www.keycdn.com) accelerates Jekyll-powered websites with a wide range of other features such as real time image processing including WebP transformation.  
 The [Jekyll hosting tutorial](https://www.keycdn.com/support/jekyll-hosting) provides various options to supercharge Jekyll sites with just a few steps. It combines best flexibility and excellent performance.
