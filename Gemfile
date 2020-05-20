@@ -9,7 +9,7 @@ group :development do
   gem "launchy", "~> 2.3"
   gem "pry"
 
-  gem "pry-byebug" unless RUBY_ENGINE == "jruby"
+  
 end
 
 #
@@ -30,7 +30,7 @@ group :test do
   gem "test-theme-skinny", :path => File.expand_path("test/fixtures/test-theme-skinny", __dir__)
   gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
 
-  gem "jruby-openssl" if RUBY_ENGINE == "jruby"
+ 
 end
 
 #
