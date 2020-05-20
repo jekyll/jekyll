@@ -414,19 +414,19 @@ class TestPage < JekyllUnitTest
       context "generated via plugin" do
         setup do
           PageSubclass = Class.new(Jekyll::Page)
-          @page = PageSubclass.new(@site, source_dir, "/contacts", "bar.html")
-          @page.data.clear
+          @test_page = PageSubclass.new(@site, source_dir, "/contacts", "bar.html")
+          @test_page.data.clear
         end
 
         should "not expose an excerpt to Liquid templates by default" do
-          assert_equal "Contact Information\n", @page.content
-          assert_nil @page.to_liquid["excerpt"]
+          assert_equal "Contact Information\n", @test_page.content
+          assert_nil @test_page.to_liquid["excerpt"]
         end
 
         should "expose an excerpt to Liquid templates if hardcoded" do
-          @page.data["excerpt"] = "Test excerpt."
-          assert_equal "Contact Information\n", @page.content
-          assert_equal "Test excerpt.", @page.to_liquid["excerpt"]
+          @test_page.data["excerpt"] = "Test excerpt."
+          assert_equal "Contact Information\n", @test_page.content
+          assert_equal "Test excerpt.", @test_page.to_liquid["excerpt"]
         end
       end
     end
