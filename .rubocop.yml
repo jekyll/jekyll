@@ -21,6 +21,8 @@ AllCops:
     - script/**/*
     - vendor/**/*
     - tmp/**/*
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: false
 Layout/HashAlignment:
   EnforcedHashRocketStyle: table
 Layout/IndentationWidth:
@@ -165,6 +167,8 @@ Style/RescueModifier:
 Style/SafeNavigation:
   Exclude:
     - lib/jekyll/document.rb
+Style/SlicingWithRange:
+  Enabled: false
 Style/SignalException:
   EnforcedStyle: only_raise
 Style/StringLiterals:

@@ -74,6 +74,24 @@ class="flag">flags</code> (specified on the command-line) that control them.
     </tr>
     <tr class="setting">
       <td>
+        <p class="name">
+          <strong>Ignore theme configuration</strong>
+          <span class="version-badge" title="Introduced in v4.1.0">4.1.0</span>
+        </p>
+        <p class="description">
+          Jekyll 4.0 started allowing themes to bundle a <code>_config.yml</code>
+          to simplify theme-onboarding for new users.
+          In the unfortunate situation that importing a bundled theme configuration
+          messes up the merged site-configuration, the user can configure Jekyll
+          to not import the theme-config entirely.
+        </p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">ignore_theme_config: BOOL</code></p>
+      </td>
+    </tr>
+    <tr class="setting">
+      <td>
         <p class="name"><strong>Exclude</strong></p>
         <p class="description">
           Exclude directories and/or files from the
