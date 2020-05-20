@@ -9,18 +9,18 @@ redirect_from:
 <p>Jekyll is used for all kinds of usecases. Here's some of our favorites:</p>
 
 <ul class="showcase" id="showcase">
-  {% for s in site.data.showcase reversed %}
-    <li>
-      <a href="{{ s.url }}" target="_blank">
-        <figure>
-          <div class="imageWrapper">
-            <img class="b-lazy" src="/img/spacer.gif" alt="{{ s.name }}">
-          </div>
-          <figcaption>{{ s.name }}</figcaption>
-        </figure>
-      </a>
-    </li>
-  {% endfor %}
+  {% for s in site.data.showcase reversed -%}
+  <li>
+    <a href="{{ s.url | relative_url }}" target="_blank">
+      <figure>
+        <div class="imageWrapper">
+          <img loading="lazy" class="b-lazy" src="{{ 'img/spacer.gif' | relative_url }}" alt="{{ s.name }}" width="404">
+        </div>
+        <figcaption>{{ s.name }}</figcaption>
+      </figure>
+    </a>
+  </li>
+  {% endfor -%}
   <li class="spacer"></li>
 </ul>
 

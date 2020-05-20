@@ -8,17 +8,17 @@ redirect_from:
 ---
 Jekyll is a static site generator. You give it text written in your
 favorite markup language and it uses layouts to create a static website. You can
-tweak how you want the site URLs to look like, what data gets displayed on the
+tweak how you want the site URLs to look, what data gets displayed on the
 site, and more.
 
 ## Prerequisites
 
-See [requirements](/docs/installation/#requirements).
+See [requirements]({{ '/docs/installation/#requirements' | relative_url }}).
 
 ## Instructions
 
-1. Install a full [Ruby development environment](/docs/installation/).
-2. Install Jekyll and [bundler](/docs/ruby-101/#bundler) [gems](/docs/ruby-101/#gems).
+1. Install a full [Ruby development environment]({{ '/docs/installation/' | relative_url }}).
+2. Install Jekyll and [bundler]({{ '/docs/ruby-101/#bundler' | relative_url }}) [gems]({{ '/docs/ruby-101/#gems' | relative_url }}).
 ```
 gem install jekyll bundler
 ```
@@ -37,6 +37,8 @@ bundle exec jekyll serve
 6. Browse to [http://localhost:4000](http://localhost:4000){:target="_blank"}
 
 If you encounter any errors during this process, see the
-[troubleshooting](/docs/troubleshooting/#configuration-problems) page. Also,
+[troubleshooting]({{ '/docs/troubleshooting/#configuration-problems' | relative_url }}) page. Also,
 make sure you've installed the development headers and other prerequisites as
-mentioned on the [requirements](/docs/installation/#requirements) page.
+mentioned on the [requirements]({{ '/docs/installation/#requirements' | relative_url }}) page.
+
+Note: Installation might be different depending on your operating system. See our [guides](https://jekyllrb.com/docs/installation/#guides) for OS specific instructions.

@@ -16,7 +16,7 @@ For example, you might have a page on your site located at
 `/my_pages/about-me.html` and you want the output url to be `/about/`. In
 front matter of the page you would set:
 
-```
+```yaml
 ---
 permalink: /about/
 ---
@@ -45,7 +45,6 @@ For example, a permalink style of
 ### Placeholders
 
 Here's the full list of placeholders available:
-
 
 <div class="mobile-side-scroller">
 <table>
@@ -254,6 +253,26 @@ Here's the full list of placeholders available:
         <p>
           The specified categories for this post. If a post has multiple
           categories, Jekyll will create a hierarchy (e.g. <code>/category1/category2</code>).
+          Also Jekyll automatically parses out double slashes in the URLs,
+          so if no categories are present, it will ignore this.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>slugified_categories</code></p>
+        <small>{% include docs_version_badge.html version="4.1" %}</small>
+      </td>
+      <td>
+        <p>
+          The specified categories for this post but <em>slugified</em>. If a category is a
+          composite of multiple words, Jekyll will downcase all alphabets and replace any
+          non-alphanumeric character with a hyphen. (e.g. <code>"Work 2 Progress"</code>
+          will be converted into <code>"work-2-progress"</code>)
+        </p>
+        <p>
+          If a post has multiple categories, Jekyll will create a hierarchy
+          (e.g. <code>/work-2-progress/category2</code>).
           Also Jekyll automatically parses out double slashes in the URLs,
           so if no categories are present, it will ignore this.
         </p>

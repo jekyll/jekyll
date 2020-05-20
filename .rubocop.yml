@@ -21,6 +21,8 @@ AllCops:
     - script/**/*
     - vendor/**/*
     - tmp/**/*
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: false
 Layout/HashAlignment:
   EnforcedHashRocketStyle: table
 Layout/IndentationWidth:
@@ -40,6 +42,12 @@ Layout/EmptyComment:
   Enabled: false
 Layout/EndAlignment:
   Severity: error
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
 Lint/UnreachableCode:
   Severity: error
 Lint/Void:
@@ -79,6 +87,8 @@ Metrics/MethodLength:
   Severity: error
 Metrics/ModuleLength:
   Max: 240
+  Exclude:
+    - lib/jekyll/filters.rb
 Metrics/ParameterLists:
   Max: 4
 Metrics/PerceivedComplexity:
@@ -117,6 +127,8 @@ Style/Documentation:
   Enabled: false
 Style/DoubleNegation:
   Enabled: false
+Style/ExponentialNotation:
+  Enabled: true
 Style/FormatStringToken:
   Exclude:
     - lib/jekyll/utils/ansi.rb
@@ -124,9 +136,15 @@ Style/FormatStringToken:
     - lib/jekyll/profiler.rb
 Style/GuardClause:
   Enabled: false
+Style/HashEachMethods:
+  Enabled: true
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
   Severity: error
+Style/HashTransformKeys:
+  Enabled: false
+Style/HashTransformValues:
+  Enabled: true
 Style/MixinUsage:
   Exclude:
     - test/helper.rb
@@ -150,6 +168,8 @@ Style/RescueModifier:
 Style/SafeNavigation:
   Exclude:
     - lib/jekyll/document.rb
+Style/SlicingWithRange:
+  Enabled: false
 Style/SignalException:
   EnforcedStyle: only_raise
 Style/StringLiterals:

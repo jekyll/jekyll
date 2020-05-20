@@ -50,7 +50,7 @@ matter. The layout wraps around the content of the page so all you need in
 `index.html` is:
 
 {% raw %}
-```html
+```liquid
 ---
 layout: default
 title: Home
@@ -70,8 +70,7 @@ layout.
 
 Add the following to `about.md`:
 
-{% raw %}
-```html
+```markdown
 ---
 layout: default
 title: About
@@ -80,7 +79,6 @@ title: About
 
 This page tells you a little bit about me.
 ```
-{% endraw %}
 
 Open <a href="http://localhost:4000/about.html" target="_blank" data-proofer-ignore>http://localhost:4000/about.html</a>
 in your browser and view your new page.

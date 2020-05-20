@@ -1,7 +1,7 @@
 ---
-layout: tutorials
-permalink: /tutorials/cache-api/
 title: Cache API
+author: pathawks
+date: 2018-08-17 12:56:24 -0400
 ---
 
 Jekyll includes a caching API, which is used both internally as well as exposed
@@ -63,7 +63,6 @@ is built.
 
 This will clear all cached objects from a particular Cache. The Cache will be
 empty, both in memory and on disk.
-
 
 ### The following methods will probably only be used in special circumstances
 

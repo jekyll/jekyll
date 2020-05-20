@@ -596,6 +596,7 @@ class TestFilters < JekyllUnitTest
         assert_equal "/front_matter.erb", page.url
         url = filter.relative_url(page.url)
         url << "foo"
+        assert_equal "/front_matter.erb", filter.relative_url(page.url)
         assert_equal "/front_matter.erb", page.url
       end
 
@@ -863,6 +864,17 @@ class TestFilters < JekyllUnitTest
         assert_equal 2, @filter.where(array, "color", nil).length
       end
 
+      should "filter objects with numerical properties appropriately" do
+        array = [
+          { "value" => "555" },
+          { "value" => 555 },
+          { "value" => 24.625 },
+          { "value" => "24.625" },
+        ]
+        assert_equal 2, @filter.where(array, "value", 24.625).length
+        assert_equal 2, @filter.where(array, "value", 555).length
+      end
+
       should "filter array properties appropriately" do
         hash = {
           "a" => { "tags"=>%w(x y) },
@@ -982,6 +994,23 @@ class TestFilters < JekyllUnitTest
           ],
           @filter.where_exp(
             @array_of_objects, "item", "item.color == 'red' and item.size == 'large'"
+          )
+        )
+      end
+
+      should "filter objects across multiple conditions" do
+        sample = [
+          { "color" => "teal", "size" => "large", "type" => "variable" },
+          { "color" => "red",  "size" => "large", "type" => "fixed" },
+          { "color" => "red",  "size" => "medium", "type" => "variable" },
+          { "color" => "blue", "size" => "medium", "type" => "fixed" },
+        ]
+        assert_equal(
+          [
+            { "color" => "red", "size" => "large", "type" => "fixed" },
+          ],
+          @filter.where_exp(
+            sample, "item", "item.type == 'fixed' and item.color == 'red' or item.color == 'teal'"
           )
         )
       end

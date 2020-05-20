@@ -42,6 +42,12 @@ currently supported options:
 * **transliterated_header_ids** - Transliterate the header text before generating the ID
 * **typographic_symbols** - Defines a mapping from typographical symbol to output characters
 
+### Example Usage
+```yaml
+kramdown:
+  html_to_native: true
+```
+  
 <div class="note warning">
   <h5>There are two unsupported kramdown options</h5>
   <p>
@@ -51,7 +57,7 @@ currently supported options:
   </p>
 </div>
 
-For more details about these options have a look at the [Kramdown configuration documentation](https://kramdown.gettalong.org/options.html). 
+For more details about these options have a look at the [Kramdown configuration documentation](https://kramdown.gettalong.org/options.html).
 
 ### CommonMark
 
@@ -78,9 +84,9 @@ extension for disabling fenced code.
 Note that you can also specify a language for highlighting after the first
 delimiter:
 
-        ```ruby
-        # ...ruby code
-        ```
+    ```ruby
+    # ...ruby code
+    ```
 
 With both fenced code blocks and highlighter enabled, this will statically
 highlight the code; without any syntax highlighter, it will add a

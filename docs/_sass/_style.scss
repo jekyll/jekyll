@@ -664,24 +664,84 @@ article h2:first-child { margin-top: 0; }
 }
 
 .post-date,
-.post-author { margin-left: 10px; }
+.post-author { margin-left: 15px; }
+.post-author .author-name { margin-left: 8px }
 
 .news article + article {
-  margin-top: -10px;
-  @include border-radius(0 0 10px 10px);
+  margin-top: -6px;
+  padding: 15px 40px;
   border-top: 1px solid #555;
+  border-radius: 0;
   @include box-shadow(0 -1px 0 #2f2f2f);
+
+  h2.post-title {
+    margin-bottom: 0.45em;
+  }
+  .post-category {
+    margin-right: 20px;
+    padding-left: 0;
+    width: 150px;
+    box-sizing: border-box;
+    .label {
+      float: right;
+    }
+  }
+  .cell-left, .cell-right {
+    display: inline-block;
+  }
+  .cell-left {
+    max-width: 180px;
+  }
+  .cell-right {
+    width: calc(100% - 130px);
+  }
+  .post-date { margin-left: 0 }
 }
 
-/* Code Highlighting */
+/* Tutorials */
 
+.tutorial-header {
+  float: none;
+  margin-bottom: 30px;
+  padding: 0 0 15px;
+  background: transparent;
+  border-bottom: 1px solid #545454;
+  .improve { padding-top: 14px }
+  .tutorial-title {
+    display: block;
+    width: calc(100% - 160px);
+    font-size: 1.75em
+  }
+}
+
+.tutorial-meta {
+  @extend .post-meta;
+  font-weight: 400;
+  text-shadow: none;
+  .tutorial-date,
+  .tutorial-author {
+    display: inline-block;
+    height: 24px
+  }
+}
+
+.tutorial-date {
+  vertical-align: sub
+}
+.tutorial-author {
+  margin-left: 15px;
+  .author-name { vertical-align: middle }
+}
+
+
+/* Code Highlighting */
 
 pre,
 code {
   white-space: pre;
   display: inline-block;
   margin: 0;
-  font: 14px/1.8em Menlo, Consolas, "Courier New", Courier, "Liberation Mono", monospace;
+  font: 14px/1.625em Menlo, Consolas, "Courier New", Courier, "Liberation Mono", monospace;
   padding: 0 0.5em;
 }
 
@@ -690,6 +750,7 @@ code {
 }
 
 .highlight,
+a > code,
 p > pre,
 p > code,
 p > nobr > code,
@@ -697,7 +758,7 @@ li > code,
 li> pre,
 h5 > code,
 .note > code {
-  background-color: #2b2b2b;
+  background-color: #272727;
   color: #fff;
   max-width: 100%;
   overflow-x: auto;
@@ -707,6 +768,8 @@ h5 > code,
     0 1px 0 rgba(255,255,255,.1),
     0 -1px 0 rgba(0,0,0,.5));
 }
+
+a > code { color: inherit }
 
 .note .highlight {
   width: 94%;
@@ -736,11 +799,18 @@ h5 > code,
   overflow: auto;
 }
 
-pre.highlight { padding: 10px 0.5em; }
+pre.highlight,
+.highlight > pre { 
+  padding: 10px 0.5em; 
+}
 
 .highlighter-rouge .highlight {
   @extend .highlight;
   margin: 0;
+}
+
+div.highlighter-rouge + div.highlighter-rouge {
+  margin: 30px 0 0;
 }
 
 /* HTML Elements */
@@ -963,6 +1033,16 @@ code.output {
     font-size: 28px;
     font-weight: 700;
     text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+  }
+}
+
+p.note {
+  color: #fff;
+  font-weight: 400;
+  font-size: .75em;
+
+  &:after {
+    line-height: 1.21;
   }
 }
 
