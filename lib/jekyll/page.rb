@@ -221,6 +221,8 @@ module Jekyll
     end
 
     def excerpt
+      return data["excerpt"] unless self.class == Jekyll::Page
+
       data["excerpt"] ||= Jekyll::PageExcerpt.new(self).to_liquid unless excerpt_separator.empty?
     end
   end

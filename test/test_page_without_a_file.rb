@@ -53,7 +53,7 @@ class TestPageWithoutAFile < JekyllUnitTest
         attrs = {
           "content"   => nil,
           "dir"       => "/",
-          "excerpt"   => "",
+          "excerpt"   => nil,
           "foo"       => "bar",
           "layout"    => "default",
           "name"      => "properties.html",

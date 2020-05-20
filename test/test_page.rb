@@ -403,6 +403,32 @@ class TestPage < JekyllUnitTest
           assert_exist dest_dir("contacts", "bar", "index.html")
         end
       end
+
+      context "read-in by default" do
+        should "expose an excerpt to Liquid templates" do
+          page = setup_page("/contacts", "bar.html")
+          assert_equal "Contact Information\n", page.to_liquid["excerpt"]
+        end
+      end
+
+      context "generated via plugin" do
+        setup do
+          PageSubclass = Class.new(Jekyll::Page)
+          @page = PageSubclass.new(@site, source_dir, "/contacts", "bar.html")
+          @page.data.clear
+        end
+
+        should "not expose an excerpt to Liquid templates by default" do
+          assert_equal "Contact Information\n", @page.content
+          assert_nil @page.to_liquid["excerpt"]
+        end
+
+        should "expose an excerpt to Liquid templates if hardcoded" do
+          @page.data["excerpt"] = "Test excerpt."
+          assert_equal "Contact Information\n", @page.content
+          assert_equal "Test excerpt.", @page.to_liquid["excerpt"]
+        end
+      end
     end
   end
 end
