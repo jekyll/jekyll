@@ -59,3 +59,9 @@ Read this [Jekyll step-by-step guide](https://www.netlify.com/blog/2015/10/28/a-
 ## ZEIT
 
 [ZEIT](https://zeit.co/) provides zero config continuous deployment, HTTPS Custom domains, high performance smart CDN, you get instant static deploy for free.
+
+## 21YunBox
+
+[21YunBox](https://www.21yunbox.com) provides blazing fast Chinese CDN, Continuous Deployment, one click HTTPS and [much more](https://www.21yunbox.com/docs/v2/), providing developers a hassle-free solution to launch their web projects in China.
+
+Read this [Jekyll step-by-step guide](https://www.21yunbox.com/docs/v2/static.html#jekyll) to deploy your Jekyll site on 21YunBox.
