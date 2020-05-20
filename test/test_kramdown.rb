@@ -75,6 +75,44 @@ class TestKramdown < JekyllUnitTest
       refute(result.css(selector).empty?, result.to_html)
     end
 
+    context "when configured" do
+      setup do
+        @source = <<~TEXT
+          ## Code Sample
+
+              def ruby_fu
+                "Hello"
+              end
+        TEXT
+      end
+
+      should "have 'plaintext' as the default syntax_highlighter language" do
+        converter = fixture_converter(@config)
+        parser = converter.setup && converter.instance_variable_get(:@parser)
+        parser_config = parser.instance_variable_get(:@config)
+
+        assert_equal "plaintext", parser_config.dig("syntax_highlighter_opts", "default_lang")
+      end
+
+      should "accept the specified default syntax_highlighter language" do
+        override = {
+          "kramdown" => {
+            "syntax_highlighter_opts" => {
+              "default_lang" => "yaml",
+            },
+          },
+        }
+        converter = fixture_converter(Utils.deep_merge_hashes(@config, override))
+        parser = converter.setup && converter.instance_variable_get(:@parser)
+        parser_config = parser.instance_variable_get(:@config)
+
+        assert_equal "yaml", parser_config.dig("syntax_highlighter_opts", "default_lang")
+        refute_match %r!<div class="language-plaintext!, converter.convert(@source)
+        refute_match %r!<div class="language-html!, converter.convert(@source)
+        assert_match %r!<div class="language-yaml!, converter.convert(@source)
+      end
+    end
+
     context "when asked to convert smart quotes" do
       should "convert" do
         converter = fixture_converter(@config)

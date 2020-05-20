@@ -25,6 +25,15 @@ continuous deployment and [more](https://cloudcannon.com/features/).
 
 Sites on GitHub Pages are powered by Jekyll behind the scenes, so if you’re looking for a zero-hassle, zero-cost solution, GitHub Pages are a great way to [host your Jekyll-powered website for free](/docs/github-pages/).
 
+## GitLab Pages
+
+[GitLab Pages](https://about.gitlab.com/stages-devops-lifecycle/pages/) offers free hosting with custom domains. [Get started with Jekyll](https://docs.gitlab.com/ee/user/project/pages/getting_started_part_four.html#practical-example) and a fully customizable pipeline.
+
+## KeyCDN
+
+[KeyCDN](https://www.keycdn.com) accelerates Jekyll-powered websites with a wide range of other features such as real time image processing including WebP transformation.  
+The [Jekyll hosting tutorial](https://www.keycdn.com/support/jekyll-hosting) provides various options to supercharge Jekyll sites with just a few steps. It combines best flexibility and excellent performance.
+
 ## Kickster
 
 Use [Kickster](http://kickster.nielsenramon.com/) for automated deploys to GitHub Pages when using unsupported plugins on GitHub Pages.
@@ -50,3 +59,9 @@ Read this [Jekyll step-by-step guide](https://www.netlify.com/blog/2015/10/28/a-
 ## ZEIT
 
 [ZEIT](https://zeit.co/) provides zero config continuous deployment, HTTPS Custom domains, high performance smart CDN, you get instant static deploy for free.
+
+## 21YunBox
+
+[21YunBox](https://www.21yunbox.com) provides blazing fast Chinese CDN, Continuous Deployment, one click HTTPS and [much more](https://www.21yunbox.com/docs/v2/), providing developers a hassle-free solution to launch their web projects in China.
+
+Read this [Jekyll step-by-step guide](https://www.21yunbox.com/docs/v2/static.html#jekyll) to deploy your Jekyll site on 21YunBox.

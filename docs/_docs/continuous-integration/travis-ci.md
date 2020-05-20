@@ -114,8 +114,6 @@ addons:
     packages:
     - libcurl4-openssl-dev
 
-sudo: false # route your build to the container-based infrastructure for a faster build
-
 cache: bundler # caching bundler gem packages will speed up build
 
 # Optional: disable email notifications about the outcome of your builds
@@ -210,16 +208,6 @@ environment variable `NOKOGIRI_USE_SYSTEM_LIBRARIES` to `true`.
 
 ```yaml
 exclude: [vendor]
-```
-
-By default you should supply the `sudo: false` command to Travis. This command
-explicitly tells Travis to run your build on Travis's [container-based
- infrastructure](https://docs.travis-ci.com/user/workers/container-based-infrastructure/#Routing-your-build-to-container-based-infrastructure). Running on the container-based infrastructure can often times
-speed up your build. If you have any trouble with your build, or if your build
-does need `sudo` access, modify the line to `sudo: required`.
-
-```yaml
-sudo: false
 ```
 
 To speed up the build, you should cache the gem packages created by `bundler`.

@@ -9,8 +9,18 @@ module Jekyll
       #
       # Returns the absolute URL as a String.
       def absolute_url(input)
-        cache = (@context.registers[:cached_absolute_urls] ||= {})
+        return if input.nil?
+
+        cache = if input.is_a?(String)
+                  (@context.registers[:site].filter_cache[:absolute_url] ||= {})
+                else
+                  (@context.registers[:cached_absolute_url] ||= {})
+                end
         cache[input] ||= compute_absolute_url(input)
+
+        # Duplicate cached string so that the cached value is never mutated by
+        # a subsequent filter.
+        cache[input].dup
       end
 
       # Produces a URL relative to the domain root based on site.baseurl
@@ -20,8 +30,18 @@ module Jekyll
       #
       # Returns a URL relative to the domain root as a String.
       def relative_url(input)
-        cache = (@context.registers[:cached_relative_urls] ||= {})
+        return if input.nil?
+
+        cache = if input.is_a?(String)
+                  (@context.registers[:site].filter_cache[:relative_url] ||= {})
+                else
+                  (@context.registers[:cached_relative_url] ||= {})
+                end
         cache[input] ||= compute_relative_url(input)
+
+        # Duplicate cached string so that the cached value is never mutated by
+        # a subsequent filter.
+        cache[input].dup
       end
 
       # Strips trailing `/index.html` from URLs to create pretty permalinks
@@ -38,8 +58,6 @@ module Jekyll
       private
 
       def compute_absolute_url(input)
-        return if input.nil?
-
         input = input.url if input.respond_to?(:url)
         return input if Addressable::URI.parse(input.to_s).absolute?
 
@@ -53,8 +71,6 @@ module Jekyll
       end
 
       def compute_relative_url(input)
-        return if input.nil?
-
         input = input.url if input.respond_to?(:url)
         return input if Addressable::URI.parse(input.to_s).absolute?
 

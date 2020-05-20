@@ -74,6 +74,24 @@ class="flag">flags</code> (specified on the command-line) that control them.
     </tr>
     <tr class="setting">
       <td>
+        <p class="name">
+          <strong>Ignore theme configuration</strong>
+          <span class="version-badge" title="Introduced in v4.1.0">4.1.0</span>
+        </p>
+        <p class="description">
+          Jekyll 4.0 started allowing themes to bundle a <code>_config.yml</code>
+          to simplify theme-onboarding for new users.
+          In the unfortunate situation that importing a bundled theme configuration
+          messes up the merged site-configuration, the user can configure Jekyll
+          to not import the theme-config entirely.
+        </p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">ignore_theme_config: BOOL</code></p>
+      </td>
+    </tr>
+    <tr class="setting">
+      <td>
         <p class="name"><strong>Exclude</strong></p>
         <p class="description">
           Exclude directories and/or files from the
@@ -150,12 +168,12 @@ class="flag">flags</code> (specified on the command-line) that control them.
       <td>
         <p class='name'><strong>Defaults</strong></p>
         <p class='description'>
-            Set defaults for <a href="/docs/front-matter/" title="front matter">front matter</a>
+            Set defaults for <a href="{{ '/docs/front-matter/' | relative_url }}" title="front matter">front matter</a>
             variables.
         </p>
       </td>
       <td class='align-center'>
-        <p>see <a href="/docs/configuration/front-matter-defaults/" title="details">below</a></p>
+        <p>see <a href="{{ '/docs/configuration/front-matter-defaults/' | relative_url }}" title="details">below</a></p>
       </td>
     </tr>
   </tbody>
@@ -247,7 +265,8 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr class="setting">
       <td>
         <p class="name"><strong>LSI</strong></p>
-        <p class="description">Produce an index for related posts. Requires the <a href="http://www.classifier-reborn.com/">classifier-reborn</a> plugin.</p>
+        <p class="description">Produce an index for related posts. Requires the
+          <a href="http://www.classifier-reborn.com/">classifier-reborn</a> plugin.</p>
       </td>
       <td class="align-center">
         <p><code class="option">lsi: BOOL</code></p>

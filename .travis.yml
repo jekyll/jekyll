@@ -4,9 +4,9 @@ cache: bundler
 language: ruby
 
 rvm:
-  - &ruby1 2.7.0
-  - &ruby2 2.5.7
-  - &jruby jruby-9.2.10.0
+  - &ruby1 2.7.1
+  - &ruby2 2.5.8
+  - &jruby jruby-9.2.11.1
 
 matrix:
   include:

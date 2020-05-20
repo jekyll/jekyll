@@ -30,7 +30,7 @@ defaults:
     during automatic regeneration are not loaded until the next execution.
   </p>
   <p>
-    Note <a href="/docs/datafiles">Data Files</a> are included and reloaded during automatic regeneration.
+    Note <a href="{{ '/docs/datafiles' | relative_url }}">Data Files</a> are included and reloaded during automatic regeneration.
   </p>
 </div>
 
@@ -68,7 +68,9 @@ defaults:
       author: "Mr. Hyde"
 ```
 
-With these defaults, all pages would use the `my-site` layout. Any html files that exist in the `projects/` folder will use the `project` layout, if it exists. Those files will also have the `page.author` [liquid variable](/docs/variables/) set to `Mr. Hyde`.
+With these defaults, all pages would use the `my-site` layout. Any html files that exist in the `projects/`
+folder will use the `project` layout, if it exists. Those files will also have the `page.author`
+[liquid variable]({{ '/docs/variables/' | relative_url }}) set to `Mr. Hyde`.
 
 ```yaml
 collections:
@@ -85,7 +87,7 @@ defaults:
 ```
 
 In this example, the `layout` is set to `default` inside the
-[collection](/docs/collections/) with the name `my_collection`.
+[collection]({{ '/docs/collections/' | relative_url }}) with the name `my_collection`.
 
 ### Glob patterns in Front Matter defaults
 

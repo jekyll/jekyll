@@ -174,16 +174,10 @@ module Jekyll
     # layout - the layout to check
     # Returns nothing
     def validate_layout(layout)
-      if invalid_layout?(layout)
-        Jekyll.logger.warn(
-          "Build Warning:",
-          "Layout '#{document.data["layout"]}' requested "\
-          "in #{document.relative_path} does not exist."
-        )
-      elsif !layout.nil?
-        layout_source = layout.path.start_with?(site.source) ? :site : :theme
-        Jekyll.logger.debug "Layout source:", layout_source
-      end
+      return unless invalid_layout?(layout)
+
+      Jekyll.logger.warn "Build Warning:", "Layout '#{document.data["layout"]}' requested " \
+        "in #{document.relative_path} does not exist."
     end
 
     # Render layout content into document.output
