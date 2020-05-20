@@ -99,6 +99,7 @@
   * Ease discovery of CLI commands (in their entirety) (#8178)
   * Remove sudo from Travis CI tutorial (#8187)
   * Add Gitlab Pages to 3rd party list (#8191)
+  * docs: add 21yunbox for deployment (#8193)
 
 ### Development Fixes
 
