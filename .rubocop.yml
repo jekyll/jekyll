@@ -21,8 +21,13 @@ AllCops:
     - script/**/*
     - vendor/**/*
     - tmp/**/*
-Layout/EmptyLinesAroundAttributeAccessor:
+
+Layout/EmptyComment:
   Enabled: false
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+Layout/EndAlignment:
+  Severity: error
 Layout/HashAlignment:
   EnforcedHashRocketStyle: table
 Layout/IndentationWidth:
@@ -31,18 +36,25 @@ Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
 Layout/FirstHashElementIndentation:
   EnforcedStyle: consistent
+Layout/LineLength:
+  Exclude:
+    - !ruby/regexp /features\/.*.rb/
+    - Rakefile
+    - rake/*.rake
+    - Gemfile
+  Max: 100
+  Severity: warning
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
 Lint/NestedPercentLiteral:
   Exclude:
     - test/test_site.rb
-Layout/EmptyComment:
-  Enabled: false
-Layout/EndAlignment:
-  Severity: error
-Layout/SpaceAroundMethodCallOperator:
+Lint/DeprecatedOpenSSLConstant:
   Enabled: true
 Lint/RaiseException:
   Enabled: true
@@ -53,6 +65,7 @@ Lint/UnreachableCode:
 Lint/Void:
   Exclude:
     - lib/jekyll/site.rb
+
 Metrics/AbcSize:
   Max: 21
 Metrics/BlockLength:
@@ -73,14 +86,6 @@ Metrics/CyclomaticComplexity:
   Exclude:
     - lib/jekyll/utils.rb
     - lib/jekyll/commands/serve.rb
-Layout/LineLength:
-  Exclude:
-    - !ruby/regexp /features\/.*.rb/
-    - Rakefile
-    - rake/*.rake
-    - Gemfile
-  Max: 100
-  Severity: warning
 Metrics/MethodLength:
   CountComments: false
   Max: 20
@@ -93,6 +98,7 @@ Metrics/ParameterLists:
   Max: 4
 Metrics/PerceivedComplexity:
   Max: 8
+
 Naming/FileName:
   Enabled: false
 Naming/HeredocDelimiterNaming:
@@ -104,6 +110,7 @@ Naming/MemoizedInstanceVariableName:
     - lib/jekyll/drops/site_drop.rb
     - lib/jekyll/drops/unified_payload_drop.rb
     - lib/jekyll/page_without_a_file.rb
+
 Security/MarshalLoad:
   Exclude:
     - !ruby/regexp /test\/.*.rb$/
@@ -112,6 +119,7 @@ Security/YAMLLoad:
   Exclude:
     - !ruby/regexp /features\/.*.rb/
     - !ruby/regexp /test\/.*.rb$/
+
 Style/AccessModifierDeclarations:
   Enabled: false
 Style/Alias:
@@ -121,8 +129,6 @@ Style/AndOr:
 Style/ClassAndModuleChildren:
   Exclude:
     - test/**/*.rb
-Style/FrozenStringLiteralComment:
-  EnforcedStyle: always
 Style/Documentation:
   Enabled: false
 Style/DoubleNegation:
@@ -133,6 +139,8 @@ Style/FormatStringToken:
   Exclude:
     - lib/jekyll/utils/ansi.rb
     - lib/jekyll/liquid_renderer/table.rb
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: always
 Style/GuardClause:
   Enabled: false
 Style/HashEachMethods:
@@ -167,10 +175,10 @@ Style/RescueModifier:
 Style/SafeNavigation:
   Exclude:
     - lib/jekyll/document.rb
-Style/SlicingWithRange:
-  Enabled: false
 Style/SignalException:
   EnforcedStyle: only_raise
+Style/SlicingWithRange:
+  Enabled: false
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/StringLiteralsInInterpolation:
