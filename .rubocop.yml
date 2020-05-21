@@ -139,6 +139,7 @@ Style/FormatStringToken:
   Exclude:
     - lib/jekyll/utils/ansi.rb
     - lib/jekyll/liquid_renderer/table.rb
+    - lib/jekyll/profiler.rb
 Style/FrozenStringLiteralComment:
   EnforcedStyle: always
 Style/GuardClause:
