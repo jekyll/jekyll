@@ -35,6 +35,7 @@
   * Configure default language for syntax-highlighting (#8035)
   * Remove dev dependencies from new theme-gem gemspec (#8042)
   * Allow disabling import of theme configuration (#8131)
+  * Allow excerpts to be generated for Page objects (#7642)
 
 ### Documentation
 
@@ -101,6 +102,7 @@
   * Remove sudo from Travis CI tutorial (#8187)
   * Add Gitlab Pages to 3rd party list (#8191)
   * docs: add 21yunbox for deployment (#8193)
+  * Improve documentation on tags and categories (#8196)
 
 ### Development Fixes
 
