@@ -35,6 +35,7 @@
   * Configure default language for syntax-highlighting (#8035)
   * Remove dev dependencies from new theme-gem gemspec (#8042)
   * Allow disabling import of theme configuration (#8131)
+  * Allow excerpts to be generated for Page objects (#7642)
 
 ### Documentation
 
