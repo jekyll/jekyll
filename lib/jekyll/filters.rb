@@ -210,6 +210,66 @@ module Jekyll
       end || []
     end
 
+    # Search an array of objects and returns the first object that has the queried attribute
+    # with the given value or returns nil otherwise.
+    #
+    # input    - the object array.
+    # property - the property within each object to search by.
+    # value    - the desired value.
+    #            Cannot be an instance of Array nor Hash since calling #to_s on them returns
+    #            their `#inspect` string object.
+    #
+    # Returns the found object or nil
+    #
+    # rubocop:disable Metrics/CyclomaticComplexity
+    def find(input, property, value)
+      return input if !property || value.is_a?(Array) || value.is_a?(Hash)
+      return input unless input.respond_to?(:find)
+
+      input    = input.values if input.is_a?(Hash)
+      input_id = input.hash
+
+      # implement a hash based on method parameters to cache the end-result for given parameters.
+      @find_filter_cache ||= {}
+      @find_filter_cache[input_id] ||= {}
+      @find_filter_cache[input_id][property] ||= {}
+
+      # stash or retrive results to return
+      # Since `enum.find` can return nil or false, we use a placeholder string "<__NO MATCH__>"
+      #   to validate caching.
+      result = @find_filter_cache[input_id][property][value] ||= begin
+        input.find do |object|
+          compare_property_vs_target(item_property(object, property), value)
+        end || "<__NO MATCH__>"
+      end
+      return nil if result == "<__NO MATCH__>"
+
+      result
+    end
+    # rubocop:enable Metrics/CyclomaticComplexity
+
+    # Searches an array of objects against an expression and returns the first object for which
+    # the expression evaluates to true, or returns nil otherwise.
+    #
+    # input - the object array
+    # variable - the variable to assign each item to in the expression
+    # expression - a Liquid comparison expression passed in as a string
+    #
+    # Returns the found object or nil
+    def find_exp(input, variable, expression)
+      return input unless input.respond_to?(:find)
+
+      input = input.values if input.is_a?(Hash)
+
+      condition = parse_condition(expression)
+      @context.stack do
+        input.find do |object|
+          @context[variable] = object
+          condition.evaluate(@context)
+        end
+      end
+    end
+
     # Convert the input into integer
     #
     # input - the object string

@@ -111,6 +111,40 @@
 
 #
 
+- name: Find
+  description: >-
+    Return <strong>the first object</strong> in an array for which the queried
+    attribute has the given value or return <code>nil</code> if no item in
+    the array satisfies the given criteria.
+  version_badge: 4.1.0
+  examples:
+    - input: '{{ site.members | find: "graduation_year", "2014" }}'
+      output:
+
+#
+
+- name: Find Expression
+  description: >-
+    Return <strong>the first object</strong> in an array for which the given
+    expression evaluates to true or return <code>nil</code> if no item in
+    the array satisfies the evaluated expression.
+  version_badge: 4.1.0
+  examples:
+    - input: |-
+        {{ site.members | find_exp:"item",
+        "item.graduation_year == 2014" }}
+      output:
+    - input: |-
+        {{ site.members | find_exp:"item",
+        "item.graduation_year < 2014" }}
+      output:
+    - input: |-
+        {{ site.members | find_exp:"item",
+        "item.projects contains 'foo'" }}
+      output:
+
+#
+
 - name: Group By
   description: Group an array's items by a given property.
   examples:
