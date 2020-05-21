@@ -37,6 +37,7 @@
   * Allow disabling import of theme configuration (#8131)
   * Allow excerpts to be generated for Page objects (#7642)
   * Profile various stages of a site&#39;s build process (#6760)
+  * Add find filters to optimize where-first chains (#8171)
 
 ### Documentation
 
