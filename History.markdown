@@ -36,6 +36,7 @@
   * Remove dev dependencies from new theme-gem gemspec (#8042)
   * Allow disabling import of theme configuration (#8131)
   * Allow excerpts to be generated for Page objects (#7642)
+  * Profile various stages of a site&#39;s build process (#6760)
 
 ### Documentation
 
