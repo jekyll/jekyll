@@ -15,6 +15,7 @@ module Jekyll
     ATTRIBUTES_FOR_LIQUID = %w(
       content
       dir
+      excerpt
       name
       path
       url
@@ -68,6 +69,38 @@ module Jekyll
         url_dir = File.dirname(url)
         url_dir.end_with?("/") ? url_dir : "#{url_dir}/"
       end
+    end
+
+    # For backwards-compatibility in subclasses that do not redefine
+    # the `:to_liquid` method, stash existing definition under a new name
+    #
+    # TODO: Remove in Jekyll 5.0
+    alias_method :legacy_to_liquid, :to_liquid
+    private :legacy_to_liquid
+
+    # Private
+    # Subclasses can choose to optimize their `:to_liquid` method by wrapping
+    # it around this definition.
+    #
+    # TODO: Remove in Jekyll 5.0
+    def liquid_drop
+      @liquid_drop ||= begin
+        defaults = site.frontmatter_defaults.all(relative_path, type)
+        unless defaults.empty?
+          Utils.deep_merge_hashes!(data, Utils.deep_merge_hashes!(defaults, data))
+        end
+        Drops::PageDrop.new(self)
+      end
+    end
+    private :liquid_drop
+
+    # Public
+    #
+    # Liquid representation of current page
+    #
+    # TODO: Remove optional parameter in Jekyll 5.0
+    def to_liquid(attrs = nil)
+      self.class == Jekyll::Page ? liquid_drop : legacy_to_liquid(attrs)
     end
 
     # The full path and filename of the post. Defined in the YAML of the post
@@ -181,6 +214,16 @@ module Jekyll
 
     def write?
       true
+    end
+
+    def excerpt_separator
+      @excerpt_separator ||= (data["excerpt_separator"] || site.config["excerpt_separator"]).to_s
+    end
+
+    def excerpt
+      return data["excerpt"] unless self.class == Jekyll::Page
+
+      data["excerpt"] ||= Jekyll::PageExcerpt.new(self).to_liquid unless excerpt_separator.empty?
     end
   end
 end

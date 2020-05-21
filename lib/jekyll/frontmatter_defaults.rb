@@ -103,15 +103,15 @@ module Jekyll
     end
 
     def applies_path?(scope, path)
-      return true if !scope.key?("path") || scope["path"].empty?
+      rel_scope_path = scope["path"]
+      return true if !rel_scope_path.is_a?(String) || rel_scope_path.empty?
 
-      sanitized_path = Pathname.new(sanitize_path(path))
-      rel_scope_path = Pathname.new(scope["path"])
+      sanitized_path = sanitize_path(path)
 
-      if scope["path"].to_s.include?("*")
+      if rel_scope_path.include?("*")
         glob_scope(sanitized_path, rel_scope_path)
       else
-        path_is_subpath?(sanitized_path, strip_collections_dir(scope["path"]))
+        path_is_subpath?(sanitized_path, strip_collections_dir(rel_scope_path))
       end
     end
 
@@ -134,11 +134,7 @@ module Jekyll
     end
 
     def path_is_subpath?(path, parent_path)
-      path.ascend do |ascended_path|
-        return true if ascended_path.to_s == parent_path.to_s
-      end
-
-      false
+      path.start_with?(parent_path)
     end
 
     def strip_collections_dir(path)
@@ -179,7 +175,7 @@ module Jekyll
     # new_scope - the new scope hash
     #
     # Returns true if the new scope has precedence over the older
-    # rubocop: disable PredicateName
+    # rubocop: disable Naming/PredicateName
     def has_precedence?(old_scope, new_scope)
       return true if old_scope.nil?
 
@@ -194,7 +190,7 @@ module Jekyll
         !old_scope.key? "type"
       end
     end
-    # rubocop: enable PredicateName
+    # rubocop: enable Naming/PredicateName
 
     # Collects a list of sets that match the given path and type
     #
@@ -230,15 +226,14 @@ module Jekyll
       end.compact
     end
 
-    # Sanitizes the given path by removing a leading and adding a trailing slash
-
-    SANITIZATION_REGEX = %r!\A/|(?<=[^/])\z!.freeze
-
+    # Sanitizes the given path by removing a leading slash
     def sanitize_path(path)
       if path.nil? || path.empty?
         ""
+      elsif path.start_with?("/")
+        path.gsub(%r!\A/|(?<=[^/])\z!, "")
       else
-        path.gsub(SANITIZATION_REGEX, "")
+        path
       end
     end
   end

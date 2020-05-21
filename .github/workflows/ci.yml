@@ -1,0 +1,53 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+    - master
+    - /.*-stable/
+  pull_request:
+    branches:
+    - master
+    - /.*-stable/
+
+jobs:
+  ci:
+    name: 'SUITE: ${{ matrix.test_suite }} / OS: ${{ matrix.os }}'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        test_suite:
+        - test
+        - default-site
+        os:
+        - ubuntu-latest
+        - windows-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 5
+    - name: Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6.x
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+    - name: 'Update Rubygems'
+      run: 'gem update --system --no-document'
+    - name: 'Update Bundler'
+      run: 'gem update bundler --no-document'
+    - name: Set up bundle
+      run: | 
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
+    - name: Run Test Suite
+      run: bash script/cibuild
+      env:
+        CI: true
+        TEST_SUITE: ${{ matrix.test_suite }}

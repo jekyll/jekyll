@@ -16,7 +16,7 @@ For example, you might have a page on your site located at
 `/my_pages/about-me.html` and you want the output url to be `/about/`. In
 front matter of the page you would set:
 
-```
+```yaml
 ---
 permalink: /about/
 ---
@@ -34,17 +34,17 @@ You can use placeholders to your desired output. For example:
 permalink: /:categories/:year/:month/:day/:title:output_ext
 ```
 
-Note that pages and collections don't have time or categories, these aspects of
-the permalink style are ignored for the output.
+Note that pages and collections (excluding `posts` and `drafts`) don't have time
+and categories (for pages, the above `:title` is equivalent to `:basename`), these
+aspects of the permalink style are ignored for the output.
 
 For example, a permalink style of
-`/:categories/:year/:month/:day/:title:output_ext` for posts becomes
-`/:title.html` for pages and collections.
+`/:categories/:year/:month/:day/:title:output_ext` for the `posts` collection becomes
+`/:title.html` for pages and collections (excluding `posts` and `drafts`).
 
 ### Placeholders
 
 Here's the full list of placeholders available:
-
 
 <div class="mobile-side-scroller">
 <table>
@@ -258,6 +258,26 @@ Here's the full list of placeholders available:
         </p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <p><code>slugified_categories</code></p>
+        <small>{% include docs_version_badge.html version="4.1" %}</small>
+      </td>
+      <td>
+        <p>
+          The specified categories for this post but <em>slugified</em>. If a category is a
+          composite of multiple words, Jekyll will downcase all alphabets and replace any
+          non-alphanumeric character with a hyphen. (e.g. <code>"Work 2 Progress"</code>
+          will be converted into <code>"work-2-progress"</code>)
+        </p>
+        <p>
+          If a post has multiple categories, Jekyll will create a hierarchy
+          (e.g. <code>/work-2-progress/category2</code>).
+          Also Jekyll automatically parses out double slashes in the URLs,
+          so if no categories are present, it will ignore this.
+        </p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -329,8 +349,8 @@ Rather than typing `permalink: /:categories/:year/:month/:day/:title/`, you can 
 
 ### Collections
 
-For collections, you have the option to override the global permalink in the
-collection configuration in `_config.yml`:
+For collections (including `posts` and `drafts`), you have the option to override
+the global permalink in the collection configuration in `_config.yml`:
 
 ```yaml
 collections:
@@ -363,7 +383,10 @@ Collections have the following placeholders available:
         <p><code>:path</code></p>
       </td>
       <td>
-        <p>Path to the document relative to the collection's directory.</p>
+        <p>
+          Path to the document relative to the collection's directory,
+          including base filename of the document.
+        </p>
       </td>
     </tr>
     <tr>
@@ -395,6 +418,57 @@ Collections have the following placeholders available:
       </td>
       <td>
         <p>Extension of the output file. (Included by default and usually unnecessary.)</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+### Pages
+
+For pages, you have to use front matter to override the global permalink,
+and if you set a permalink via front matter defaults in `_config.yml`,
+it will be ignored.
+
+Pages have the following placeholders available:
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>:path</code></p>
+      </td>
+      <td>
+        <p>
+          Path to the page relative to the site's source directory, excluding
+          base filename of the page.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:basename</code></p>
+      </td>
+      <td>
+        <p>The page's base filename</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:output_ext</code></p>
+      </td>
+      <td>
+        <p>
+          Extension of the output file. (Included by default and usually
+          unnecessary.)
+        </p>
       </td>
     </tr>
   </tbody>

@@ -18,18 +18,10 @@ sitemap: false
       <p>The resource you requested was not found. Here are some links to help you find your way:</p>
       <nav class="main-nav">
         <ul>
-          <li>
-            <a href="/">Home</a>
-          </li>
-          <li>
-            <a href="/docs/home/">Documentation</a>
-          </li>
-          <li>
-            <a href="/news/">News</a>
-          </li>
-          <li>
-            <a href="/help/">Help</a>
-          </li>
+          <li><a href="{{ '/' | relative_url }}">Home</a></li>
+          <li><a href="{{ '/docs/home/' | relative_url }}">Documentation</a></li>
+          <li><a href="{{ '/news/' | relative_url }}">News</a></li>
+          <li><a href="{{ '/help/' | relative_url }}">Help</a></li>
         </ul>
       </nav>
     </div>

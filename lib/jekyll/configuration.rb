@@ -66,7 +66,7 @@ module Jekyll
 
       "kramdown"            => {
         "auto_ids"      => true,
-        "toc_levels"    => "1..6",
+        "toc_levels"    => (1..6).to_a,
         "entity_output" => "as_char",
         "smart_quotes"  => "lsquo,rsquo,ldquo,rdquo",
         "input"         => "GFM",

@@ -6,7 +6,7 @@ Installation on other Linux distributions works similarly as on [Ubuntu](../ubun
 
 On Fedora, the dependencies can be installed as follows:
 
- ```sh
+```sh
 sudo dnf install ruby ruby-devel @development-tools
 ```
 
@@ -14,6 +14,36 @@ On Debian:
 
 ```sh
 sudo apt-get install ruby-full build-essential
+```
+
+On Gentoo Linux:
+
+```sh
+sudo emerge -av jekyll
+```
+
+or
+
+```sh
+sudo emerge --ask --verbose jekyll
+```
+
+On ArchLinux:
+
+```sh
+sudo pacman -S ruby base-devel
+```
+
+On openSUSE:
+
+```sh
+sudo zypper install -t pattern devel_ruby devel_C_C++
+```
+
+On Clear Linux:
+
+```sh
+sudo swupd bundle-add ruby-basic
 ```
 
 The rest works the same as on [Ubuntu](../ubuntu/).

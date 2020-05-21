@@ -123,10 +123,11 @@ module Jekyll
     # Returns the Integer word count.
     def number_of_words(input)
       cjk_chars = '\p{Han}\p{Katakana}\p{Hiragana}\p{Hangul}'
-      cjk_count = input.scan(Regexp.new "[#{cjk_chars}]").length
-      return input.split.length if cjk_count == 0
+      cjk_count = input.scan(Regexp.new("[#{cjk_chars}]")).length
+      return input.split.length if cjk_count.zero?
+
       word_regex = "[^#{cjk_chars}\\s]+"
-      cjk_count + input.scan(Regexp.new word_regex).length
+      cjk_count + input.scan(Regexp.new(word_regex)).length
     end
 
     # Join an array of things into a string by separating with commas and the
@@ -212,6 +213,66 @@ module Jekyll
           condition.evaluate(@context)
         end
       end || []
+    end
+
+    # Search an array of objects and returns the first object that has the queried attribute
+    # with the given value or returns nil otherwise.
+    #
+    # input    - the object array.
+    # property - the property within each object to search by.
+    # value    - the desired value.
+    #            Cannot be an instance of Array nor Hash since calling #to_s on them returns
+    #            their `#inspect` string object.
+    #
+    # Returns the found object or nil
+    #
+    # rubocop:disable Metrics/CyclomaticComplexity
+    def find(input, property, value)
+      return input if !property || value.is_a?(Array) || value.is_a?(Hash)
+      return input unless input.respond_to?(:find)
+
+      input    = input.values if input.is_a?(Hash)
+      input_id = input.hash
+
+      # implement a hash based on method parameters to cache the end-result for given parameters.
+      @find_filter_cache ||= {}
+      @find_filter_cache[input_id] ||= {}
+      @find_filter_cache[input_id][property] ||= {}
+
+      # stash or retrive results to return
+      # Since `enum.find` can return nil or false, we use a placeholder string "<__NO MATCH__>"
+      #   to validate caching.
+      result = @find_filter_cache[input_id][property][value] ||= begin
+        input.find do |object|
+          compare_property_vs_target(item_property(object, property), value)
+        end || "<__NO MATCH__>"
+      end
+      return nil if result == "<__NO MATCH__>"
+
+      result
+    end
+    # rubocop:enable Metrics/CyclomaticComplexity
+
+    # Searches an array of objects against an expression and returns the first object for which
+    # the expression evaluates to true, or returns nil otherwise.
+    #
+    # input - the object array
+    # variable - the variable to assign each item to in the expression
+    # expression - a Liquid comparison expression passed in as a string
+    #
+    # Returns the found object or nil
+    def find_exp(input, variable, expression)
+      return input unless input.respond_to?(:find)
+
+      input = input.values if input.is_a?(Hash)
+
+      condition = parse_condition(expression)
+      @context.stack do
+        input.find do |object|
+          @context[variable] = object
+          condition.evaluate(@context)
+        end
+      end
     end
 
     # Convert the input into integer
@@ -360,27 +421,39 @@ module Jekyll
       @item_property_cache ||= {}
       @item_property_cache[property] ||= {}
       @item_property_cache[property][item] ||= begin
-        if item.respond_to?(:to_liquid)
-          property.to_s.split(".").reduce(item.to_liquid) do |subvalue, attribute|
-            parse_sort_input(subvalue[attribute])
-          end
-        elsif item.respond_to?(:data)
-          parse_sort_input(item.data[property.to_s])
-        else
-          parse_sort_input(item[property.to_s])
-        end
+        property = property.to_s
+        property = if item.respond_to?(:to_liquid)
+                     read_liquid_attribute(item.to_liquid, property)
+                   elsif item.respond_to?(:data)
+                     item.data[property]
+                   else
+                     item[property]
+                   end
+
+        parse_sort_input(property)
       end
     end
 
-    # rubocop:disable Performance/RegexpMatch
+    def read_liquid_attribute(liquid_data, property)
+      return liquid_data[property] unless property.include?(".")
+
+      property.split(".").reduce(liquid_data) do |data, key|
+        data.respond_to?(:[]) && data[key]
+      end
+    end
+
+    FLOAT_LIKE   = %r!\A\s*-?(?:\d+\.?\d*|\.\d+)\s*\Z!.freeze
+    INTEGER_LIKE = %r!\A\s*-?\d+\s*\Z!.freeze
+    private_constant :FLOAT_LIKE, :INTEGER_LIKE
+
     # return numeric values as numbers for proper sorting
     def parse_sort_input(property)
-      number_like = %r!\A\s*-?(?:\d+\.?\d*|\.\d+)\s*\Z!
-      return property.to_f if property.to_s =~ number_like
+      stringified = property.to_s
+      return property.to_i if INTEGER_LIKE.match?(stringified)
+      return property.to_f if FLOAT_LIKE.match?(stringified)
 
       property
     end
-    # rubocop:enable Performance/RegexpMatch
 
     def as_liquid(item)
       case item
@@ -424,10 +497,14 @@ module Jekyll
     #
     # Returns an instance of Liquid::Condition
     def parse_binary_comparison(parser)
-      parse_comparison(parser).tap do |condition|
-        binary_operator = parser.id?("and") || parser.id?("or")
-        condition.send(binary_operator, parse_comparison(parser)) if binary_operator
+      condition = parse_comparison(parser)
+      first_condition = condition
+      while (binary_operator = parser.id?("and") || parser.id?("or"))
+        child_condition = parse_comparison(parser)
+        condition.send(binary_operator, child_condition)
+        condition = child_condition
       end
+      first_condition
     end
 
     # Generates a Liquid::Condition object from a Liquid::Parser object based on whether the parsed

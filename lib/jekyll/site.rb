@@ -10,7 +10,7 @@ module Jekyll
                   :gems, :plugin_manager, :theme
 
     attr_accessor :converters, :generators, :reader
-    attr_reader   :regenerator, :liquid_renderer, :includes_load_paths
+    attr_reader   :regenerator, :liquid_renderer, :includes_load_paths, :filter_cache, :profiler
 
     # Public: Initialize a new Site.
     #
@@ -23,8 +23,10 @@ module Jekyll
       self.config = config
 
       @cache_dir       = in_source_dir(config["cache_dir"])
+      @filter_cache    = {}
 
       @reader          = Reader.new(self)
+      @profiler        = Profiler.new(self)
       @regenerator     = Regenerator.new(self)
       @liquid_renderer = LiquidRenderer.new(self)
 
@@ -70,13 +72,14 @@ module Jekyll
     #
     # Returns nothing.
     def process
+      return profiler.profile_process if config["profile"]
+
       reset
       read
       generate
       render
       cleanup
       write
-      print_stats if config["profile"]
     end
 
     def print_stats
@@ -431,6 +434,8 @@ module Jekyll
     private
 
     def load_theme_configuration(config)
+      return config if config["ignore_theme_config"] == true
+
       theme_config_file = in_theme_dir("_config.yml")
       return config unless File.exist?(theme_config_file)
 
@@ -470,7 +475,7 @@ module Jekyll
     # Disable Marshaling cache to disk in Safe Mode
     def configure_cache
       Jekyll::Cache.cache_dir = in_source_dir(config["cache_dir"], "Jekyll/Cache")
-      Jekyll::Cache.disable_disk_cache! if safe
+      Jekyll::Cache.disable_disk_cache! if safe || config["disable_disk_cache"]
     end
 
     def configure_plugins
@@ -520,7 +525,8 @@ module Jekyll
     def render_regenerated(document, payload)
       return unless regenerator.regenerate?(document)
 
-      document.output = Jekyll::Renderer.new(self, document, payload).run
+      document.renderer.payload = payload
+      document.output = document.renderer.run
       document.trigger_hooks(:post_render)
     end
   end
