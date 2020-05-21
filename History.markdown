@@ -18,6 +18,9 @@
   * Config include trailing slash (#8113)
   * Allow extensionless document in a strict site (#7950)
   * Improve path normalization in liquid_renderer (#8075)
+  * Switch slugify regex to support more Unicode character groups (#8167)
+  * Check if entry is a directory once per enumerator (#8177)
+  * Filter out exclusively excluded entries sooner (#7482)
 
 ### Minor Enhancements
 
@@ -32,6 +35,8 @@
   * Configure default language for syntax-highlighting (#8035)
   * Remove dev dependencies from new theme-gem gemspec (#8042)
   * Allow disabling import of theme configuration (#8131)
+  * Allow excerpts to be generated for Page objects (#7642)
+  * Profile various stages of a site&#39;s build process (#6760)
 
 ### Documentation
 
@@ -94,6 +99,11 @@
   * Clarify `bundle config` in Bundler tutorial (#8150)
   * docs: update your-first-plugin.md (#8147)
   * Fix typo in documentation on GitHub Actions (#8162)
+  * Ease discovery of CLI commands (in their entirety) (#8178)
+  * Remove sudo from Travis CI tutorial (#8187)
+  * Add Gitlab Pages to 3rd party list (#8191)
+  * docs: add 21yunbox for deployment (#8193)
+  * Improve documentation on tags and categories (#8196)
 
 ### Development Fixes
 
