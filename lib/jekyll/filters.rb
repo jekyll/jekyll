@@ -121,9 +121,11 @@ module Jekyll
     # input - The String on which to operate.
     #
     # Returns the Integer word count.
-    def number_of_words(input, mode = "default")
-      cjk_regex = %r![\p{Han}\p{Katakana}\p{Hiragana}\p{Hangul}]!
-      word_regex = %r![^\p{Han}\p{Katakana}\p{Hiragana}\p{Hangul}\s]+!
+    def number_of_words(input, mode = nil)
+      cjk_charset = '\p{Han}\p{Katakana}\p{Hiragana}\p{Hangul}'
+      cjk_regex = %r![#{cjk_charset}]!o
+      word_regex = %r![^#{cjk_charset}\s]+!o
+
       case mode
       when "cjk"
         input.scan(cjk_regex).length + input.scan(word_regex).length
