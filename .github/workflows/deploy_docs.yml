@@ -1,6 +1,6 @@
 name: Build and deploy Jekyll documentation site
 on:
-  pull_request:
+  push:
     branches:
       - master
 jobs:
