@@ -121,13 +121,15 @@ module Jekyll
     # input - The String on which to operate.
     #
     # Returns the Integer word count.
-    def number_of_words(input)
-      cjk_chars = '\p{Han}\p{Katakana}\p{Hiragana}\p{Hangul}'
-      cjk_count = input.scan(Regexp.new("[#{cjk_chars}]")).length
-      return input.split.length if cjk_count.zero?
-
-      word_regex = "[^#{cjk_chars}\\s]+"
-      cjk_count + input.scan(Regexp.new(word_regex)).length
+    def number_of_words(input, mode = "default")
+      if mode == "cjk"
+        cjk_chars = '\p{Han}\p{Katakana}\p{Hiragana}\p{Hangul}'
+        cjk_count = input.scan(Regexp.new("[#{cjk_chars}]")).length
+        word_regex = "[^#{cjk_chars}\\s]+"
+        cjk_count + input.scan(Regexp.new(word_regex)).length
+      else
+        input.split.length
+      end
     end
 
     # Join an array of things into a string by separating with commas and the

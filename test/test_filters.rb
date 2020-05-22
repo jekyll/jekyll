@@ -1516,16 +1516,20 @@ class TestFilters < JekyllUnitTest
 
     context "number_of_words filter" do
       should "return the number of words for Latin-only text" do
-        assert_equal 2, @filter.number_of_words("hello world!")
+        assert_equal 2, @filter.number_of_words("hello world!", "cjk")
       end
 
       should "return the number of characters for CJK-only text" do
-        assert_equal 6, @filter.number_of_words("你好，世界！")
+        assert_equal 6, @filter.number_of_words("你好，世界！", "cjk")
       end
 
       should "process Latin and CJK independently" do
         # Intentional: No space between Latin and CJK
-        assert_equal 6, @filter.number_of_words("你好hello世界world")
+        assert_equal 6, @filter.number_of_words("你好hello世界world", "cjk")
+      end
+
+      should "maintain original behavior unless specified" do
+        assert_equal 1, @filter.number_of_words("你好hello世界world")
       end
     end
   end
