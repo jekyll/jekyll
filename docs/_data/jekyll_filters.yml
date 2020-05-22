@@ -200,10 +200,25 @@
 #
 
 - name: Number of Words
-  description: Count the number of words in some text.
+  description: >-
+    Count the number of words in some text.<br/>
+    From <span class="version-badge">v4.1.0</span>, this filter takes an optional
+    argument to control the handling of Chinese-Japanese-Korean (CJK) characters
+    in the <code>input</code> string.<br/>
+    Passing <code>'cjk'</code> as the argument will count every CJK character
+    detected as one word irrespective of being separated by whitespace.<br/>
+    Passing <code>'auto'</code> (auto-detect) works similar to <code>'cjk'</code>
+    but is more performant if the filter is used on a variable string that may
+    or may not contain CJK chars.
   examples:
-    - input: '{{ page.content | number_of_words }}'
-      output: 1337
+    - input: '{{ "Hello world!" | number_of_words }}'
+      output: 2
+    - input: '{{ "你好hello世界world" | number_of_words }}'
+      output: 1
+    - input: '{{ "你好hello世界world" | number_of_words: "cjk" }}'
+      output: 6
+    - input: '{{ "你好hello世界world" | number_of_words: "auto" }}'
+      output: 6
 
 #
 
