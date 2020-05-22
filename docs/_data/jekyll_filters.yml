@@ -202,10 +202,14 @@
 - name: Number of Words
   description: >-
     Count the number of words in some text.
-    CJK characters are counted as one word per character instead of whitespace-separated.
+    An optional argument controlling the handling of CJK characters
+    may be specified as "auto" (auto-detect) or "cjk" (treat input as containing CJK),
+    where CJK characters are counted as one word per character instead of whitespace-separated.
   examples:
-    - input: '{{ page.content | number_of_words }}'
-      output: 1337
+    - input: '{{ "Hello world!" | number_of_words }}'
+      output: 2
+    - input: '{{ "你好，世界！" | number_of_words: "auto" }}'
+      output: 6
 
 #
 

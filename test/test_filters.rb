@@ -1516,8 +1516,8 @@ class TestFilters < JekyllUnitTest
 
     context "number_of_words filter" do
       should "return the number of words for Latin-only text" do
-        assert_equal 2, @filter.number_of_words("hello world!", "auto")
-        assert_equal 2, @filter.number_of_words("hello world!", "cjk")
+        assert_equal 5, @filter.number_of_words("hello world and taoky strong!", "auto")
+        assert_equal 5, @filter.number_of_words("hello world and taoky strong!", "cjk")
       end
 
       should "return the number of characters for CJK-only text" do
