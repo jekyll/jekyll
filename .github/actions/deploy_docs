@@ -8,7 +8,7 @@ touch .nojekyll
 remote_branch="gh-pages-trial"
 
 echo "Publishing to ${GITHUB_REPOSITORY} on branch ${remote_branch}"
-remote_repo="https://${JEKYLL_PAT}@github.com/${GITHUB_REPOSITORY}.git"
+remote_repo="https://x-access-token:${JEKYLL_PAT}@github.com/${GITHUB_REPOSITORY}.git"
 
 git init -q
 git config user.name "${GITHUB_ACTOR}"
