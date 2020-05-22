@@ -1,0 +1,45 @@
+name: Build and deploy Jekyll documentation site
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  deploy_docs:
+    if: "!contains(github.event.commits[0].message, '[ci skip]')"
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+      - name: Set up dependencies
+        run: |
+          gem update --system --no-document
+          gem update bundler --no-document
+          bundle install --jobs 4 --retry 3
+      - name: Build site
+        run: bundle exec jekyll build --source docs --destination docs/_site --verbose --trace
+        env:
+          JEKYLL_PAT: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy to GitHub Pages
+        run: |
+          SOURCE_COMMIT="$(git log -1 --pretty="%an: %B" "$GITHUB_SHA")"
+          pushd docs/_site &>/dev/null
+          : > .nojekyll
+
+          REMOTE_REPO="https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
+          REMOTE_BRANCH="${REMOTE_BRANCH:-gh-pages}"
+
+          echo "Publishing to ${GITHUB_REPOSITORY} on branch ${REMOTE_BRANCH}"
+          git init --quiet
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git add --all
+          git commit --quiet \
+            --message "Deploy docs from ${GITHUB_SHA}" \
+            --message "$SOURCE_COMMIT"
+          git push "$REMOTE_REPO" "+HEAD:${REMOTE_BRANCH}"
+
+          popd &>/dev/null
