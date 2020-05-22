@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+env:
+  RUBY_VERSION: 2.7
+
 jobs:
   deploy_docs:
     if: "!contains(github.event.commits[0].message, '[ci skip]')"
@@ -13,12 +16,22 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-ruby@v1
         with:
-          ruby-version: 2.7
+          ruby-version: ${{ env.RUBY_VERSION }}
+      - name: Setup cache for Bundler
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-bundler-${{ env.RUBY_VERSION }}-${{ hashFiles('Gemfile') }}-${{ hashFiles('jekyll.gemspec') }}
+          restore-keys:
+            - ${{ runner.os }}-bundler-${{ env.RUBY_VERSION }}-${{ hashFiles('Gemfile') }}-
+            - ${{ runner.os }}-bundler-${{ env.RUBY_VERSION }}-
       - name: Set up dependencies
         run: |
           gem update --system --no-document
           gem update bundler --no-document
-          bundle install --jobs 4 --retry 3
+          bundle install --path=vendor/bundle --jobs 4 --retry 3
+          bundle clean
       - name: Build site
         run: bundle exec jekyll build --source docs --destination docs/_site --verbose --trace
         env:
