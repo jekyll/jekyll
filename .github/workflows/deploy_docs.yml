@@ -17,4 +17,4 @@ jobs:
       - name: Build and Deploy
         run: bash .github/actions/deploy_docs
         env:
-          JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
+          JEKYLL_PAT: ${{ secrets.GITHUB_TOKEN }}
