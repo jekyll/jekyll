@@ -42,6 +42,12 @@ currently supported options:
 * **transliterated_header_ids** - Transliterate the header text before generating the ID
 * **typographic_symbols** - Defines a mapping from typographical symbol to output characters
 
+### Example Usage
+```yaml
+kramdown:
+  html_to_native: true
+```
+  
 <div class="note warning">
   <h5>There are two unsupported kramdown options</h5>
   <p>

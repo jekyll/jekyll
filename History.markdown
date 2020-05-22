@@ -1,9 +1,5 @@
 ## HEAD
 
-### release
-
-  * Jekyll v4.0 release (#7782)
-
 ### Bug Fixes
 
   * Memoize absolute_url and relative_url filters (#7793)
@@ -18,6 +14,13 @@
   * Clear cached Liquid template scope before render (#7967)
   * Add slugified_categories URL placeholder (#8094)
   * Cache URLFilter results of string inputs per site (#7990)
+  * Use platforms instead of install_if (#8140)
+  * Config include trailing slash (#8113)
+  * Allow extensionless document in a strict site (#7950)
+  * Improve path normalization in liquid_renderer (#8075)
+  * Switch slugify regex to support more Unicode character groups (#8167)
+  * Check if entry is a directory once per enumerator (#8177)
+  * Filter out exclusively excluded entries sooner (#7482)
 
 ### Minor Enhancements
 
@@ -29,6 +32,13 @@
   * Add PageDrop to provide Liquid templates with data (#7992)
   * Optimize `Kramdown::JekyllDocument#to_html` calls (#8041)
   * Reduce Jekyll::Renderer instances during a build (#7570)
+  * Configure default language for syntax-highlighting (#8035)
+  * Remove dev dependencies from new theme-gem gemspec (#8042)
+  * Allow disabling import of theme configuration (#8131)
+  * Allow excerpts to be generated for Page objects (#7642)
+  * Profile various stages of a site&#39;s build process (#6760)
+  * Add find filters to optimize where-first chains (#8171)
+  * Make number_of_words respect CJK characters (#7813)
 
 ### Documentation
 
@@ -38,7 +48,7 @@
   * Update old GitHub wiki URL with new one (#7823)
   * Update JekyllConf page with 2019 talks (#7826)
   * link for memberships (#7825)
-  * Doc: minor fix, should be greater or equal to min version [ci skip] (#7856)
+  * Doc: minor fix, should be greater or equal to min version (#7856)
   * Update third-party.md - Fix broken link (#7857)
   * clarify _config.yml/collections type (#7873)
   * Replace `` with html tag (#7879)
@@ -84,6 +94,18 @@
   * Update variables.md (#8106)
   * Add help about Gentoo/Linux (#8002)
   * Update documentation on third party site (#8122)
+  * Added Clear Linux (#8132)
+  * Added note about OS specific installation instructions. (#8135)
+  * Fix broken URL in the Resources Page on the Documentation Site (#8136)
+  * Docs: Deploy Jekyll site with GitHub Actions (#8119)
+  * Clarify `bundle config` in Bundler tutorial (#8150)
+  * docs: update your-first-plugin.md (#8147)
+  * Fix typo in documentation on GitHub Actions (#8162)
+  * Ease discovery of CLI commands (in their entirety) (#8178)
+  * Remove sudo from Travis CI tutorial (#8187)
+  * Add Gitlab Pages to 3rd party list (#8191)
+  * docs: add 21yunbox for deployment (#8193)
+  * Improve documentation on tags and categories (#8196)
 
 ### Development Fixes
 
@@ -110,6 +132,10 @@
   * Reduce Pathname objects from front matter defaults (#8067)
   * Quicker categories for documents without superdirs (#7987)
   * Bump Ruby versions on Travis builds (#8088)
+  * Escape regex characters in paths to match (#8138)
+  * chore(ci): cache dependencies (#8168)
+  * Provide invokables for common drop query keys (#8165)
+  * Optimize path sanitization of default front matter (#8154)
 
 ### Site Enhancements
 
@@ -117,6 +143,26 @@
   * Utilize relative_url filter in documentation site (#8089)
   * Render tutorial metadata in documentation site (#8092)
   * Improve syntax-highlighting in documentation site (#8079)
+  * Site: Filter through just the docs collection (#8170)
+
+## 4.0.1 / 2020-05-08
+
+### Bug Fixes
+
+  * Prevent console warning with Ruby 2.7 (#8124)
+  * Clear cached Liquid template scope before render (#8141)
+  * Add static file's basename to its url_placeholder (#8142)
+  * Update item_property to recognize integers (#8160)
+
+### Development Fixes
+
+  * Fix Kramdown converter based tests for v4.0.x (#8143)
+
+## 3.8.7 / 2020-05-08
+
+### Bug Fixes
+
+  * Prevent console warnings with Ruby 2.7 (#8125)
 
 ## 4.0.0 / 2019-08-19
 
@@ -404,6 +450,7 @@
 
 ### Release
 
+  * Jekyll v4.0 release (#7782)
   * Release post for v4.0.0 beta1 (#7716)
   * Release post for v4.0.0.pre.alpha1 (#7574)
   * Release post for v3.8.0 (#6849)
