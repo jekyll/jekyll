@@ -95,10 +95,11 @@ module Jekyll
     #
     # Returns an Array of plugin search paths
     def plugins_path
+      theme_plugins_path = site.in_theme_dir(Jekyll::Configuration::DEFAULTS["plugins_dir"])
       if site.config["plugins_dir"].eql? Jekyll::Configuration::DEFAULTS["plugins_dir"]
-        [site.in_source_dir(site.config["plugins_dir"])]
+        [site.in_source_dir(site.config["plugins_dir"]), theme_plugins_path].compact
       else
-        Array(site.config["plugins_dir"]).map { |d| File.expand_path(d) }
+        [site.config["plugins_dir"], theme_plugins_path].compact.map { |d| File.expand_path(d) }
       end
     end
 
