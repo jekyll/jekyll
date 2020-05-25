@@ -117,7 +117,7 @@ module Jekyll
         partial = load_cached_partial(path, context)
 
         context.stack do
-          context["include"] = parse_params(context) if @params
+          context["include"] = parse_params(context) if @params && !@params.empty?
           begin
             partial.render!(context)
           rescue Liquid::Error => e
@@ -204,7 +204,7 @@ module Jekyll
         add_include_to_dependency(inclusion, context) if @site.incremental?
 
         context.stack do
-          context["include"] = parse_params(context) if @params
+          context["include"] = parse_params(context) if @params && !@params.empty?
           inclusion.render(context)
         end
       end
