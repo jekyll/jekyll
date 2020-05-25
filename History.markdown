@@ -39,6 +39,7 @@
   * Profile various stages of a site&#39;s build process (#6760)
   * Add find filters to optimize where-first chains (#8171)
   * Make number_of_words respect CJK characters (#7813)
+  * Initialize static files&#39; data hash only if needed (#8188)
 
 ### Documentation
 
