@@ -125,7 +125,7 @@ class TestPage < JekyllUnitTest
         attrs = {
           :content   => "All the properties.\n",
           :dir       => "/properties/",
-          :excerpt   => nil,
+          :excerpt   => "All the properties.\n",
           :foo       => "bar",
           :layout    => "default",
           :name      => "properties.html",
@@ -401,6 +401,32 @@ class TestPage < JekyllUnitTest
 
           assert File.directory?(dest_dir)
           assert_exist dest_dir("contacts", "bar", "index.html")
+        end
+      end
+
+      context "read-in by default" do
+        should "expose an excerpt to Liquid templates" do
+          page = setup_page("/contacts", "bar.html")
+          assert_equal "Contact Information\n", page.to_liquid["excerpt"]
+        end
+      end
+
+      context "generated via plugin" do
+        setup do
+          PageSubclass = Class.new(Jekyll::Page)
+          @test_page = PageSubclass.new(@site, source_dir, "/contacts", "bar.html")
+          @test_page.data.clear
+        end
+
+        should "not expose an excerpt to Liquid templates by default" do
+          assert_equal "Contact Information\n", @test_page.content
+          assert_nil @test_page.to_liquid["excerpt"]
+        end
+
+        should "expose an excerpt to Liquid templates if hardcoded" do
+          @test_page.data["excerpt"] = "Test excerpt."
+          assert_equal "Contact Information\n", @test_page.content
+          assert_equal "Test excerpt.", @test_page.to_liquid["excerpt"]
         end
       end
     end

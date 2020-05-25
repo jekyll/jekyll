@@ -10,30 +10,10 @@ module Jekyll
       end
 
       def to_s(num_of_rows = 50)
-        tabulate(data_for_table(num_of_rows))
+        Jekyll::Profiler.tabulate(data_for_table(num_of_rows))
       end
 
       private
-
-      def tabulate(data)
-        require "terminal-table"
-
-        header = data.shift
-        footer = data.pop
-        output = +"\n"
-
-        table = Terminal::Table.new do |t|
-          t << header
-          t << :separator
-          data.each { |row| t << row }
-          t << :separator
-          t << footer
-          t.style = { :alignment => :right, :border_top => false, :border_bottom => false }
-          t.align_column(0, :left)
-        end
-
-        output << table.to_s << "\n"
-      end
 
       # rubocop:disable Metrics/AbcSize
       def data_for_table(num_of_rows)

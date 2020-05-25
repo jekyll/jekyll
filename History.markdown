@@ -20,6 +20,7 @@
   * Improve path normalization in liquid_renderer (#8075)
   * Switch slugify regex to support more Unicode character groups (#8167)
   * Check if entry is a directory once per enumerator (#8177)
+  * Filter out exclusively excluded entries sooner (#7482)
 
 ### Minor Enhancements
 
@@ -34,6 +35,11 @@
   * Configure default language for syntax-highlighting (#8035)
   * Remove dev dependencies from new theme-gem gemspec (#8042)
   * Allow disabling import of theme configuration (#8131)
+  * Allow excerpts to be generated for Page objects (#7642)
+  * Profile various stages of a site&#39;s build process (#6760)
+  * Add find filters to optimize where-first chains (#8171)
+  * Make number_of_words respect CJK characters (#7813)
+  * Initialize static files&#39; data hash only if needed (#8188)
 
 ### Documentation
 
@@ -99,6 +105,8 @@
   * Ease discovery of CLI commands (in their entirety) (#8178)
   * Remove sudo from Travis CI tutorial (#8187)
   * Add Gitlab Pages to 3rd party list (#8191)
+  * docs: add 21yunbox for deployment (#8193)
+  * Improve documentation on tags and categories (#8196)
 
 ### Development Fixes
 
@@ -129,6 +137,7 @@
   * chore(ci): cache dependencies (#8168)
   * Provide invokables for common drop query keys (#8165)
   * Optimize path sanitization of default front matter (#8154)
+  * Initialize include-files as Jekyll objects (#8158)
 
 ### Site Enhancements
 
