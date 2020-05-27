@@ -266,7 +266,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
       <td>
         <p class="name"><strong>LSI</strong></p>
         <p class="description">Produce an index for related posts. Requires the
-          <a href="http://www.classifier-reborn.com/">classifier-reborn</a> plugin.</p>
+          <a href="https://jekyll.github.io/classifier-reborn/">classifier-reborn</a> plugin.</p>
       </td>
       <td class="align-center">
         <p><code class="option">lsi: BOOL</code></p>
