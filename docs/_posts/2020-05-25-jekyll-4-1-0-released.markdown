@@ -12,11 +12,6 @@ It's time for yet another release that includes enhancements, optimizations and 
 are:
 
 * Jekyll now supports rendering excerpts for *pages* in addition to documents and posts.
-* One may now use `:slugified_categories` in their permalink configurations to generate a more apt URL (categories are
-downcased and non-alphanumeric characters replaced by dashes) for their for posts and documents.
-* When you build a site with the `--profle` switch, Jekyll will now additionally output a small table showing the amount
-of time taken during various stages of the *build process*.
-* Jekyll's development server now supports certificates based on Elliptic-curve cryptography.
 * The `where_exp` filter got enhanced.  Earlier, one could just use either `and` or `or` once per expression. Now, one
 may use those binary operators multiple times in the filter's expression.
 * Jekyll has a new set of filters based on *its flavor* of the `where` and `where_exp` filters. Named `find` and
@@ -24,12 +19,17 @@ may use those binary operators multiple times in the filter's expression.
 satisfies the given conditions.
 * Jekyll's `number_of_words` filter can now take [an optional argument][filters-docs] to better count words of text
 containing Chinese, Japanese or Korean characters.
+* One may now use `:slugified_categories` in their permalink configurations to generate a more apt URL (categories are
+downcased and non-alphanumeric characters replaced by dashes) for their for posts and documents.
 * The logic for *slugifying* a given string has been enhanced to support more Unicode characters.
 * If you face issues from Jekyll importing a config file bundled within a theme, you can now disable the import entirely
 by setting `ignore_theme_config: true` in your site's configuration file.
 * If you face issues from Jekyll's disk-caching feature, you can now disable the mechanism without opting to build in
 `safe` mode, by either setting `disable_disk_cache: true` in your configuration file or by passing the CLI switch
 `--disable-disk-cache` to `jekyll build` or `jekyll serve` commands.
+* When you build a site with the `--profile` switch, Jekyll will now additionally output a small table showing the amount
+of time taken during various stages of the *build process*.
+* Jekyll's development server now supports certificates based on Elliptic-curve cryptography.
 
 For the interest of plugin authors:
 * `Jekyll::Page` now uses a Liquid Drop to expose attributes for Liquid templates. However, its subclasses will continue
