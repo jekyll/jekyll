@@ -39,3 +39,8 @@ their `data` hash.
 
 [filters-docs]: {{ 'docs/liquid/filters/' | relative_url }}
 [page-drop-docs]: {{ 'docs/pages/#for-plugin-developers' | relative_url }}
+
+For the interest of plugin authors:
+* From `v4.1.0` onwards, a newly generated theme workspace (via `jekyll new-theme ...`) will have the gemspec configured
+to bundle a `_config.yml` at the root of the workspace. If you don't wish to include the configuration file in the
+released gem, please remove `|_config\.yml` from the regular expression in the gemspec.
