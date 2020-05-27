@@ -37,7 +37,7 @@ using the legacy `ATTRIBUTES_FOR_LIQUID` hash by default. More details in the [a
 * Excerpts won't be generated for `Jekyll::Page` subclasses automatically unless such instances have an `excerpt` key in
 their `data` hash.
 
-For the interest of plugin authors:
+For the interest of gem-based theme authors:
 * From `v4.1.0` onwards, a newly generated theme workspace (via `jekyll new-theme ...`) will have the gemspec configured
 to bundle a `_config.yml` at the root of the workspace. If you don't wish to include the configuration file in the
 released gem, please remove `|_config\.yml` from the regular expression in the gemspec.
