@@ -129,7 +129,7 @@
   * Bump RuboCop to v0.79.x (#7970)
   * Remove post-install message from gemspec (#7974)
   * Attain Ruby 3.0 compatibility (#7948)
-  * Test where filter handling numeric property values (#7821)
+  * Test `where` filter handling numeric property values (#7821)
   * chore(deps): rubocop 0.80.0 (#8012)
   * Update unit tests for Kramdown-based converter (#8014)
   * Add Visual Studio Code Development Container (#8016)
@@ -142,10 +142,10 @@
 ### Site Enhancements
 
   * Optimize rendering of the documentation site (#8020)
-  * Utilize relative_url filter in documentation site (#8089)
+  * Utilize `relative_url` filter in documentation site (#8089)
   * Render tutorial metadata in documentation site (#8092)
   * Improve syntax-highlighting in documentation site (#8079)
-  * Site: Filter through just the docs collection (#8170)
+  * Site: Filter through just the *docs* collection (#8170)
 
 ## 4.0.1 / 2020-05-08
 
