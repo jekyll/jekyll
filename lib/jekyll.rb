@@ -55,6 +55,7 @@ module Jekyll
   autoload :FrontmatterDefaults, "jekyll/frontmatter_defaults"
   autoload :Hooks,               "jekyll/hooks"
   autoload :Layout,              "jekyll/layout"
+  autoload :Inclusion,           "jekyll/inclusion"
   autoload :Cache,               "jekyll/cache"
   autoload :CollectionReader,    "jekyll/readers/collection_reader"
   autoload :DataReader,          "jekyll/readers/data_reader"

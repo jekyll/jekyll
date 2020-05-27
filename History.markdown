@@ -39,6 +39,7 @@
   * Profile various stages of a site&#39;s build process (#6760)
   * Add find filters to optimize where-first chains (#8171)
   * Make number_of_words respect CJK characters (#7813)
+  * Initialize static files&#39; data hash only if needed (#8188)
 
 ### Documentation
 
@@ -136,6 +137,7 @@
   * chore(ci): cache dependencies (#8168)
   * Provide invokables for common drop query keys (#8165)
   * Optimize path sanitization of default front matter (#8154)
+  * Initialize include-files as Jekyll objects (#8158)
 
 ### Site Enhancements
 
