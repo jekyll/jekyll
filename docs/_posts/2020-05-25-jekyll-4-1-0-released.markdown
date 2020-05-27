@@ -44,3 +44,10 @@ For the interest of plugin authors:
 * From `v4.1.0` onwards, a newly generated theme workspace (via `jekyll new-theme ...`) will have the gemspec configured
 to bundle a `_config.yml` at the root of the workspace. If you don't wish to include the configuration file in the
 released gem, please remove `|_config\.yml` from the regular expression in the gemspec.
+
+## Thanks you 🙇
+
+We are thankful to our community for all the contributions that helped shape this release.
+Special thanks to the 78 contributors who made this release possible and took the time to submit a pull request (in alphabetical order):
+
+Aaron Adams, Aaron K Redshaw, Alexandre Zanni, Anindita Basu, Arthur Zey, Artyom Tokachev, Ashwin Maroli, Atlas Cove, Ben Stolovitz, Billy Kong, Christian Oliff, codenitpicker, csquare, Damien St Pierre, Daniel Leidert, David Zhang, ddocs, dgolant, dkalev, Dmitry Egorov, dotnetCarpenter, Edward Thomson, Eric Knibbe, Frank Taillandier, Gabriel Rubens, Gareth Mcshane, Grzegorz Kaczorek, guanicoe, Harry Wood, HTeuMeuLeu, iBug, İsmail Arılık, Itay Shakury, Ivan Gromov, Ivan Raszl, J·Y, James Buckley, Jason Taylor, JC, jeffreytse, Johan Wigert, jonas-krummenacher, Justin Jia, Kayce Basques, Kieran Barker, Leo, Liam Bigelow, lizharris, Lizzy Kate, Luis Puente, Mark Bennett, Matt Penna, Matt Rogers, matt swanson, Max Chadwick, michaelcurrin, Mike Kasberg, Mike Neumegen, Muhammed Salih, Nikhil Benesch, Paramdeo Singh, Patrik Eriksson, Phil Nash, Philip Eriksson, R.P. Pedraza, Radoslav Karlík, Riccardo Porreca, sharath Kumar, Simone Arpe, Takashi Udagawa, Tobias Klüpfel, Toby Glei, vhermecz, Viktor Szakats, Ward Sandler, wzy, XhmikosR, Zlatan Vasović.
