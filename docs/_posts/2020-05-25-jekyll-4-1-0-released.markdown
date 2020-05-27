@@ -45,6 +45,14 @@ released gem, please remove `|_config\.yml` from the regular expression in the g
 [filters-docs]: {{ 'docs/liquid/filters/' | relative_url }}
 [page-drop-docs]: {{ 'docs/pages/#for-plugin-developers' | relative_url }}
 
+
+### Have questions?
+
+Please reach out on our [community forum](https://talk.jekyllrb.com)
+
+
+### Thank you!! :bow:
+
 We are thankful to our community for all the contributions that helped shape this release.
 Special thanks to the following 78 contributors (in alphabetical order) who made this release possible and took the time
 to submit a pull request:
