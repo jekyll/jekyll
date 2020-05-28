@@ -437,6 +437,7 @@ layout: null
     <channel>
         <title>{{ site.title }}</title>
         <link>{{ site.url }}</link>
+        <atom:link href="{{ page.url | prepend: site.url }}" rel="self" type="application/rss+xml" />
         <description>{{ site.description }}</description>
         <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
         {% for post in site.posts %}
