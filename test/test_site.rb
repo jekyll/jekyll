@@ -31,16 +31,16 @@ class TestSite < JekyllUnitTest
     end
 
     should "have an array for plugins if passed as a string" do
-      site = Site.new(site_configuration("plugins_dir" => "/tmp/plugins"))
+      site = Site.new(site_configuration("plugins_dir" => temp_dir("plugins")))
       array = [temp_dir("plugins")]
       assert_equal array, site.plugins
     end
 
     should "have an array for plugins if passed as an array" do
-      site = Site.new(site_configuration(
-                        "plugins_dir" => ["/tmp/plugins", "/tmp/otherplugins"]
-                      ))
       array = [temp_dir("plugins"), temp_dir("otherplugins")]
+      site = Site.new(site_configuration(
+                        "plugins_dir" => array
+                      ))
       assert_equal array, site.plugins
     end
 
