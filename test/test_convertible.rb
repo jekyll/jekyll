@@ -47,7 +47,7 @@ class TestConvertible < JekyllUnitTest
       out = capture_stderr do
         @convertible.read_yaml(@base, "exploit_front_matter.erb")
       end
-      refute_match(%r!undefined class\/module DoesNotExist!, out)
+      refute_match(%r!undefined class/module DoesNotExist!, out)
     end
 
     should "not parse if there is encoding error in file" do
