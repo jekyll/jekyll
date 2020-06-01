@@ -215,7 +215,7 @@ module Jekyll
       slug = replace_character_sequence_with_hyphen(string, :mode => mode)
 
       # Remove leading/trailing hyphen
-      slug.gsub!(%r!^\-|\-$!i, "")
+      slug.gsub!(%r!^-|-$!i, "")
 
       slug.downcase! unless cased
       Jekyll.logger.warn("Warning:", "Empty `slug` generated for '#{string}'.") if slug.empty?
