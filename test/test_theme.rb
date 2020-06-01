@@ -74,7 +74,7 @@ class TestTheme < JekyllUnitTest
 
       should "raise when getting theme root" do
         error = assert_raises(RuntimeError) { Theme.new("test-non-existent-theme") }
-        assert_match(%r!fixtures\/test-non-existent-theme does not exist!, error.message)
+        assert_match(%r!fixtures/test-non-existent-theme does not exist!, error.message)
       end
     end
   end

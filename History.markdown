@@ -1,3 +1,9 @@
+## HEAD
+
+### Development Fixes
+
+  * Bump RuboCop to v0.85.x (#8223)
+
 ## 4.1.0 / 2020-05-27
 
 ### Bug Fixes

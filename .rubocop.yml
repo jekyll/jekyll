@@ -56,6 +56,8 @@ Lint/NestedPercentLiteral:
     - test/test_site.rb
 Lint/DeprecatedOpenSSLConstant:
   Enabled: true
+Lint/MixedRegexpCaptureTypes:
+  Enabled: false
 Lint/RaiseException:
   Enabled: true
 Lint/StructNewOverride:
@@ -169,6 +171,10 @@ Style/PercentLiteralDelimiters:
     "%w": "()"
     "%W": "()"
     "%x": "()"
+Style/RedundantRegexpCharacterClass:
+  Enabled: true
+Style/RedundantRegexpEscape:
+  Enabled: true
 Style/RegexpLiteral:
   EnforcedStyle: percent_r
 Style/RescueModifier:

@@ -83,7 +83,7 @@ module DirectoryHelpers
 
   def temp_dir(*subdirs)
     if Utils::Platforms.windows?
-      drive = Dir.pwd.sub(%r!^([^\/]+).*!, '\1')
+      drive = Dir.pwd.sub(%r!^([^/]+).*!, '\1')
       temp_root = File.join(drive, "tmp")
     else
       temp_root = "/tmp"
