@@ -217,13 +217,14 @@ module Jekyll
     end
 
     def excerpt_separator
-      @excerpt_separator ||= (data["excerpt_separator"] || site.config["excerpt_separator"]).to_s
+      @excerpt_separator ||= data["excerpt_separator"] || site.config["excerpt_separator"] || ""
     end
 
     def excerpt
+      return if excerpt_separator.empty? || !site.config["page_excerpts"]
       return data["excerpt"] unless self.class == Jekyll::Page
 
-      data["excerpt"] ||= Jekyll::PageExcerpt.new(self).to_liquid unless excerpt_separator.empty?
+      data["excerpt"] ||= Jekyll::PageExcerpt.new(self).to_liquid
     end
   end
 end

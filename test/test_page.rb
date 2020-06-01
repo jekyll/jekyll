@@ -125,7 +125,7 @@ class TestPage < JekyllUnitTest
         attrs = {
           :content   => "All the properties.\n",
           :dir       => "/properties/",
-          :excerpt   => "All the properties.\n",
+          :excerpt   => nil,
           :foo       => "bar",
           :layout    => "default",
           :name      => "properties.html",
@@ -405,9 +405,15 @@ class TestPage < JekyllUnitTest
       end
 
       context "read-in by default" do
-        should "expose an excerpt to Liquid templates" do
+        should "not expose an excerpt to Liquid templates" do
           page = setup_page("/contacts", "bar.html")
-          assert_equal "Contact Information\n", page.to_liquid["excerpt"]
+          assert_nil page.to_liquid["excerpt"]
+        end
+
+        should "expose an excerpt to Liquid templates if site is configured to" do
+          configured_site = fixture_site("page_excerpts" => true)
+          test_page = Jekyll::Page.new(configured_site, source_dir, "/contacts", "bar.html")
+          assert_equal "Contact Information\n", test_page.to_liquid["excerpt"]
         end
       end
 

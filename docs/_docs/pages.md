@@ -35,6 +35,11 @@ If you have a lot of pages, you can organize them into subfolders. The same subf
 
 You might want to have a particular folder structure for your source files that changes for the built site. With [permalinks](/docs/permalinks) you have full control of the output URL.
 
+## Excerpts for pages
+
+From Jekyll 4.1.1 onwards, one can *choose* to generate excerpts for their pages by setting `page_excerpts` to `true` in their
+config file.
+
 ## Liquid Representation
 
 From Jekyll 4.1 onwards, there is a minor change in how instances of `Jekyll::Page` are exposed to layouts and other Liquid
