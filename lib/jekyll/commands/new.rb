@@ -99,6 +99,8 @@ module Jekyll
             # Performance-booster for watching directories on Windows
             gem "wdm", "~> 0.1.1", :platforms => [:mingw, :x64_mingw, :mswin]
 
+            # Temporarily lock ffi gem to v1.12.x on Windows
+            gem "ffi", "~> 1.12.2", :platforms => [:mingw, :x64_mingw, :mswin]
           RUBY
         end
 
