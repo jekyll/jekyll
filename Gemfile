@@ -3,11 +3,6 @@
 source "https://rubygems.org"
 gemspec :name => "jekyll"
 
-# Temporarily lock ffi gem to v1.12.x on Windows
-platforms :mswin, :mingw, :x64_mingw do
-  gem "ffi", "~> 1.12.2"
-end
-
 gem "rake", "~> 13.0"
 
 group :development do
