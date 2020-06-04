@@ -4,6 +4,10 @@
 
   * Bump RuboCop to v0.85.x (#8223)
 
+### Bug Fixes
+
+  * Disable page excerpts by default (#8222)
+
 ## 4.1.0 / 2020-05-27
 
 ### Bug Fixes
