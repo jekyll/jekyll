@@ -7,7 +7,6 @@
 ### Bug Fixes
 
   * Disable page excerpts by default (#8222)
-  * Revert introduction of PageDrop (#8221)
 
 ## 4.1.0 / 2020-05-27
 

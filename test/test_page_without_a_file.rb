@@ -76,6 +76,12 @@ class TestPageWithoutAFile < JekyllUnitTest
           end
         end
       end
+
+      should "be exposed to Liquid as a Hash" do
+        liquid_rep = @page.to_liquid
+        refute_equal Jekyll::Drops::PageDrop, liquid_rep.class
+        assert_equal Hash, liquid_rep.class
+      end
     end
 
     context "with site-wide permalink configuration" do
