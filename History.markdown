@@ -3,6 +3,7 @@
 ### Development Fixes
 
   * Bump RuboCop to v0.85.x (#8223)
+  * Expect drive letter only on vanilla windows (#8227)
 
 ### Bug Fixes
 
