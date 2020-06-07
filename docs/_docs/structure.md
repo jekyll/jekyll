@@ -36,7 +36,7 @@ A basic Jekyll site usually looks something like this:
   </p>
   <br />
   <p>
-     <a href="https://github.com/jekyll/minima">minima</a> is the current default theme, and <code>bundle show minima</code> will show you where minima theme's files are stored on your computer.
+     <a href="https://github.com/jekyll/minima">minima</a> is the current default theme, and <code>bundle info minima</code> will show you where minima theme's files are stored on your computer.
   </p>
 </div>
 
