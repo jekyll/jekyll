@@ -190,7 +190,7 @@ module Jekyll
 
     def excerpt
       return if excerpt_separator.empty? || !site.config["page_excerpts"]
-      return data["excerpt"] unless self.class == Jekyll::Page
+      return data["excerpt"] unless self.class == Jekyll::Page && html?
 
       data["excerpt"] ||= Jekyll::PageExcerpt.new(self).to_liquid
     end
