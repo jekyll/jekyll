@@ -10,6 +10,10 @@
   * Disable page excerpts by default (#8222)
   * Revert introduction of PageDrop (#8221)
 
+### Documentation
+
+  * Replace deprecated &#39;show&#39; command with &#39;info&#39; (#8235)
+
 ## 4.1.0 / 2020-05-27
 
 ### Bug Fixes
