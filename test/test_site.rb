@@ -241,6 +241,8 @@ class TestSite < JekyllUnitTest
         properties.html
         sitemap.xml
         static_files.html
+        test-styles.css.map
+        test-styles.scss
         trailing-dots...md
       )
       unless Utils::Platforms.really_windows?

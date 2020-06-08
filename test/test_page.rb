@@ -379,6 +379,13 @@ class TestPage < JekyllUnitTest
           test_page = Jekyll::Page.new(configured_site, source_dir, "/contacts", "bar.html")
           assert_equal "Contact Information\n", test_page.to_liquid["excerpt"]
         end
+
+        should "not expose an excerpt for non-html pages even in a configured site" do
+          configured_site = fixture_site("page_excerpts" => true)
+          test_page = Jekyll::Page.new(configured_site, source_dir, "assets", "test-styles.scss")
+          refute_equal ".half { width: 50%; }\n", test_page.to_liquid["excerpt"]
+          assert_nil test_page.to_liquid["excerpt"]
+        end
       end
 
       context "generated via plugin" do
