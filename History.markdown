@@ -15,6 +15,10 @@
 
   * Replace deprecated &#39;show&#39; command with &#39;info&#39; (#8235)
 
+### Site Enhancements
+
+  * Including correct Sketch website (#8241)
+
 ## 4.1.0 / 2020-05-27
 
 ### Bug Fixes
