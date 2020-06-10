@@ -190,7 +190,9 @@ module Jekyll
     end
 
     def excerpt
-      data["excerpt"]&.to_s
+      return @excerpt if defined?(@excerpt)
+
+      @excerpt = data["excerpt"]&.to_s
     end
 
     def generate_excerpt?
