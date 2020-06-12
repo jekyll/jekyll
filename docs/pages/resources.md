@@ -22,7 +22,7 @@ some of the most popular Jekyll resources.
 
 - [Community tutorials]({{ '/tutorials/home/' | relative_url }})
 - [Deploy Jekyll 4 on GitHub Pages]({{ '/docs/continuous-integration/github-actions/' | relative_url }})
-- [Deploy Jekyll on Vercel](https://github.com/zeit/now/tree/master/examples/jekyll)
+- [Deploy Jekyll on Vercel](https://github.com/vercel/now/tree/master/examples/jekyll)
 - [Deploy Jekyll 4 on Netlify](https://www.netlify.com/blog/2020/04/02/a-step-by-step-guide-jekyll-4.0-on-netlify/)
 - [CloudCannon Academy](https://learn.cloudcannon.com/) is a set of resources created by [CloudCannon](https://cloudcannon.com/) to help folks get up and running with Jekyll. They cover all skill levels, and even include some great video tutorials.
 - [Jekyll Cheatsheet](https://learn.cloudcannon.com/jekyll-cheat-sheet/) is a single-page resource for Jekyll filters, variables, and the like.
