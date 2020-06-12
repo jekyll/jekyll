@@ -14,6 +14,7 @@
 ### Documentation
 
   * Replace deprecated &#39;show&#39; command with &#39;info&#39; (#8235)
+  * Change name to ▲Vercel (#8247)
 
 ### Site Enhancements
 
