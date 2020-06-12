@@ -56,9 +56,9 @@ Read this [Jekyll step-by-step guide](https://www.netlify.com/blog/2015/10/28/a-
 
 [Static Publisher](https://github.com/static-publisher/static-publisher) is another automated deployment option with a server listening for webhook posts, though it's not tied to GitHub specifically. It has a one-click deploy to Heroku, it can watch multiple projects from one server, it has an easy to user admin interface and can publish to either S3 or to a git repository (e.g. gh-pages).
 
-## ZEIT
+## Vercel
 
-[ZEIT](https://zeit.co/) provides zero config continuous deployment, HTTPS Custom domains, high performance smart CDN, you get instant static deploy for free.
+[Vercel](https://vercel.com/) provides zero config continuous deployment, HTTPS Custom domains, high performance smart CDN, you get instant static deploy for free.
 
 ## 21YunBox
 
