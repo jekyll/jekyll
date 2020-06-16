@@ -9,7 +9,6 @@ Jekyll has an extensive theme system that allows you to leverage community-maint
 
 You can find and preview themes on different galleries:
 
-- [jamstackthemes.dev](https://jamstackthemes.dev/ssg/jekyll/)
 - [jekyllthemes.org](http://jekyllthemes.org/)
 - [jekyllthemes.io](https://jekyllthemes.io/)
 - [jekyll-themes.com](https://jekyll-themes.com/)
