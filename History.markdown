@@ -10,6 +10,7 @@
   * Disable page excerpts by default (#8222)
   * Revert introduction of PageDrop (#8221)
   * Don&#39;t generate excerpts for non-html pages (#8234)
+  * Make page excerpts consistent with doc excerpts (#8236)
 
 ### Documentation
 
