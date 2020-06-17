@@ -17,6 +17,22 @@ your configuration file. Due to its experimental nature, we have narrowed the sc
 negative effect on builds. Excerpts will not be generated for pages that *do not* output into an HTML file even if
 `page_excerpts: true` has been set in the configuration file.
 
-Another known issue with page-excerpts is that an infinite loop is created in certain use-cases.
+Another known issue with page-excerpts is that an infinite loop is created in certain use-cases such as any construct
+that involves iterating through `site.pages` directly within a `Jekyll::Page` instance. A couple of examples would be
+having a variant of either of the following code blocks inside a page source, say `index.markdown` or `about.markdown`:
+
+{% raw %}
+
+```liquid
+{% for entry in site.pages %}
+  {{ entry.name }}
+{% endfor %}
+```
+
+```liquid
+{{ site.pages | sort: 'title' }}
+```
+
+{% endraw %}
 
 Therefore, we advise caution when opting to use the page-excerpt feature.
