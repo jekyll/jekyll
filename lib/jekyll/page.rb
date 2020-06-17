@@ -49,6 +49,7 @@ module Jekyll
 
       process(name)
       read_yaml(PathManager.join(base, dir), name)
+      generate_excerpt if site.config["page_excerpts"]
 
       data.default_proc = proc do |_, key|
         site.frontmatter_defaults.find(relative_path, type, key)
@@ -185,14 +186,25 @@ module Jekyll
     end
 
     def excerpt_separator
-      @excerpt_separator ||= data["excerpt_separator"] || site.config["excerpt_separator"] || ""
+      @excerpt_separator ||= (data["excerpt_separator"] || site.config["excerpt_separator"]).to_s
     end
 
     def excerpt
-      return if excerpt_separator.empty? || !site.config["page_excerpts"]
-      return data["excerpt"] unless self.class == Jekyll::Page && html?
+      return @excerpt if defined?(@excerpt)
 
-      data["excerpt"] ||= Jekyll::PageExcerpt.new(self).to_liquid
+      @excerpt = data["excerpt"]&.to_s
+    end
+
+    def generate_excerpt?
+      !excerpt_separator.empty? && self.class == Jekyll::Page && html?
+    end
+
+    private
+
+    def generate_excerpt
+      return unless generate_excerpt?
+
+      data["excerpt"] ||= Jekyll::PageExcerpt.new(self)
     end
   end
 end

@@ -10,10 +10,18 @@
   * Disable page excerpts by default (#8222)
   * Revert introduction of PageDrop (#8221)
   * Don&#39;t generate excerpts for non-html pages (#8234)
+  * Make page excerpts consistent with doc excerpts (#8236)
 
 ### Documentation
 
   * Replace deprecated &#39;show&#39; command with &#39;info&#39; (#8235)
+  * Change name to ▲Vercel (#8247)
+  * Add language and examples to describe how to use the configuration op… (#8249)
+  * Fix missing yaml front matter colon and adjust/add clarifying language. (#8250)
+
+### Site Enhancements
+
+  * Including correct Sketch website (#8241)
 
 ## 4.1.0 / 2020-05-27
 

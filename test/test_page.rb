@@ -369,22 +369,39 @@ class TestPage < JekyllUnitTest
       end
 
       context "read-in by default" do
-        should "not expose an excerpt to Liquid templates" do
+        should "not initialize excerpts by default" do
+          page = setup_page("contacts", "foo.md")
+          assert_nil page.excerpt
+        end
+
+        should "not expose an excerpt to Liquid templates by default" do
           page = setup_page("/contacts", "bar.html")
           assert_nil page.to_liquid["excerpt"]
         end
 
-        should "expose an excerpt to Liquid templates if site is configured to" do
-          configured_site = fixture_site("page_excerpts" => true)
-          test_page = Jekyll::Page.new(configured_site, source_dir, "/contacts", "bar.html")
-          assert_equal "Contact Information\n", test_page.to_liquid["excerpt"]
-        end
+        context "in a site configured to generate page excerpts" do
+          setup { @configured_site = fixture_site("page_excerpts" => true) }
 
-        should "not expose an excerpt for non-html pages even in a configured site" do
-          configured_site = fixture_site("page_excerpts" => true)
-          test_page = Jekyll::Page.new(configured_site, source_dir, "assets", "test-styles.scss")
-          refute_equal ".half { width: 50%; }\n", test_page.to_liquid["excerpt"]
-          assert_nil test_page.to_liquid["excerpt"]
+          should "initialize excerpt eagerly but render only when needed" do
+            test_page = Jekyll::Page.new(@configured_site, source_dir, "contacts", "foo.md")
+            assert_equal Jekyll::PageExcerpt, test_page.data["excerpt"].class
+            assert_equal String, test_page.excerpt.class
+            assert_equal(
+              "<h2 id=\"contact-information\">Contact Information</h2>\n",
+              test_page.excerpt
+            )
+          end
+
+          should "expose an excerpt to Liquid templates" do
+            test_page = Jekyll::Page.new(@configured_site, source_dir, "/contacts", "bar.html")
+            assert_equal "Contact Information\n", test_page.to_liquid["excerpt"]
+          end
+
+          should "not expose an excerpt for non-html pages" do
+            test_page = Jekyll::Page.new(@configured_site, source_dir, "assets", "test-styles.scss")
+            refute_equal ".half { width: 50%; }\n", test_page.to_liquid["excerpt"]
+            assert_nil test_page.to_liquid["excerpt"]
+          end
         end
       end
 
