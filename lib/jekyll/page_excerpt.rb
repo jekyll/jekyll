@@ -2,15 +2,14 @@
 
 module Jekyll
   class PageExcerpt < Excerpt
-    attr_reader :output, :doc
+    attr_reader :doc
     alias_method :id, :relative_path
 
-    # The Liquid representation of this instance is simply the rendered output string.
-    alias_method :to_liquid, :output
+    EXCERPT_ATTRIBUTES = (Page::ATTRIBUTES_FOR_LIQUID - %w(excerpt)).freeze
+    private_constant :EXCERPT_ATTRIBUTES
 
-    def initialize(doc)
-      super
-      self.output = Renderer.new(site, self, site.site_payload).run
+    def to_liquid
+      @to_liquid ||= doc.to_liquid(EXCERPT_ATTRIBUTES)
     end
 
     def render_with_liquid?
