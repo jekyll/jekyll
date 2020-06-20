@@ -18,6 +18,7 @@
   * Change name to ▲Vercel (#8247)
   * Add language and examples to describe how to use the configuration op… (#8249)
   * Fix missing yaml front matter colon and adjust/add clarifying language. (#8250)
+  * correct typo (#8261)
 
 ### Site Enhancements
 
