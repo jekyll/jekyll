@@ -127,7 +127,8 @@ module Jekyll
 
           # `mathjax` emgine is bundled within kramdown-2.x and will be handled by
           # kramdown itself.
-          if (math_engine = @config["math_engine"]) && math_engine != "mathjax"
+          if (math_engine = @config["math_engine"]) &&
+              math_engine != "mathjax" && math_engine != "nil"
             Jekyll::External.require_with_graceful_fail("kramdown-math-#{math_engine}")
           end
         end
