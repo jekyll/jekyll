@@ -11,7 +11,7 @@ Jekyll style, blogging is powered by text files only.
 Blog posts live in a folder called `_posts`. The filename for posts have a
 special format: the publish date, then a title, followed by an extension.
 
-Create your first post at `_posts/2018-08-20-bananas.md` with the
+Create your first post at `_posts/2020-06-20-bananas.md` with the
 following content:
 
 ```markdown
@@ -106,7 +106,7 @@ You also need a way to navigate to this page through the main navigation. Open
 
 A blog isn't very exciting with a single post. Add a few more:
 
-`_posts/2018-08-21-apples.md`:
+`_posts/2020-06-21-apples.md`:
 
 ```markdown
 ---
@@ -122,7 +122,7 @@ years in Asia and Europe, and were brought to North America by European
 colonists.
 ```
 
-`_posts/2018-08-22-kiwifruit.md`:
+`_posts/2020-06-22-kiwifruit.md`:
 
 ```markdown
 ---
