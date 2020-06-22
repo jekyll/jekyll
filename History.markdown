@@ -19,6 +19,7 @@
   * Add language and examples to describe how to use the configuration op… (#8249)
   * Fix missing yaml front matter colon and adjust/add clarifying language. (#8250)
   * correct typo (#8261)
+  * Allow hyperlinks to specific filter documentation (#8231)
 
 ### Site Enhancements
 
