@@ -88,6 +88,7 @@ Metrics/CyclomaticComplexity:
   Exclude:
     - lib/jekyll/utils.rb
     - lib/jekyll/commands/serve.rb
+  Max: 11
 Metrics/MethodLength:
   CountComments: false
   Max: 20
@@ -171,6 +172,8 @@ Style/PercentLiteralDelimiters:
     "%w": "()"
     "%W": "()"
     "%x": "()"
+Style/RedundantFetchBlock:
+  Enabled: false
 Style/RedundantRegexpCharacterClass:
   Enabled: true
 Style/RedundantRegexpEscape:

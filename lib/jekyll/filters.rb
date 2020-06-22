@@ -399,7 +399,6 @@ module Jekyll
 
     # `where` filter helper
     #
-    # rubocop:disable Metrics/CyclomaticComplexity
     # rubocop:disable Metrics/PerceivedComplexity
     def compare_property_vs_target(property, target)
       case target
@@ -421,7 +420,7 @@ module Jekyll
 
       false
     end
-    # rubocop:enable Metrics/CyclomaticComplexity
+
     # rubocop:enable Metrics/PerceivedComplexity
 
     def item_property(item, property)
