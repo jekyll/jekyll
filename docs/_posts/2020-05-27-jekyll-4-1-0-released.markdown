@@ -4,6 +4,12 @@ date: 2020-05-27 15:20:30 +0530
 author: ashmaroli
 version: 4.1.0
 category: release
+
+filters_linked_to:
+- where expression
+- find expression
+- find
+- number of words
 ---
 
 Hello Jekyllers!
@@ -12,13 +18,13 @@ It's time for yet another release that includes enhancements, optimizations and 
 are:
 
 * Jekyll now supports rendering excerpts for *pages* in addition to documents and posts.
-* The `where_exp` filter got enhanced.  Earlier, one could just use either `and` or `or` once per expression. Now, one
-may use those binary operators multiple times in the filter's expression.
-* Jekyll has a new set of filters based on *its flavor* of the `where` and `where_exp` filters. Named `find` and
-`find_exp` filters respectively, they work similar to their ancestors except that they return **the first object** that
-satisfies the given conditions.
-* Jekyll's `number_of_words` filter can now take [an optional argument][filters-docs] to better count words of text
-containing Chinese, Japanese or Korean characters.
+* The [`where_exp`][where-expression-filter] filter got enhanced.  Earlier, one could just use either `and` or `or` once
+per expression. Now, one may use those binary operators multiple times in the filter's expression.
+* Jekyll has a new set of filters based on *its flavor* of the `where` and `where_exp` filters. Named
+[`find`][find-filter] and [`find_exp`][find-expression-filter] filters respectively, they work similar to their ancestors
+except that they return **the first object** that satisfies the given conditions.
+* Jekyll's [`number_of_words`][number-of-words-filter] filter can now take an optional argument to better count words
+of text containing Chinese, Japanese or Korean characters.
 * One may now use `:slugified_categories` in their permalink configurations to generate a more apt URL (categories are
 downcased and non-alphanumeric characters replaced by dashes) for their for posts and documents.
 * The logic for *slugifying* a given string has been enhanced to support more Unicode characters.
@@ -42,7 +48,11 @@ For the interest of gem-based theme authors:
 to bundle a `_config.yml` at the root of the workspace. If you don't wish to include the configuration file in the
 released gem, please remove `|_config\.yml` from the regular expression in the gemspec.
 
-[filters-docs]: {{ 'docs/liquid/filters/' | relative_url }}
+{% for filter in page.filters_linked_to %}
+{% assign filter_slug = filter | slugify %}
+[{{ filter_slug }}-filter]: {{ filter_slug | prepend: '/docs/liquid/filters/#' | relative_url }}
+{% endfor %}
+
 [page-drop-docs]: {{ 'docs/pages/#for-plugin-developers' | relative_url }}
 
 
