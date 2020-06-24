@@ -27,6 +27,7 @@
 ### Site Enhancements
 
   * Including correct Sketch website (#8241)
+  * Release post for v4.1.1 (#8243)
 
 ## 4.1.0 / 2020-05-27
 
