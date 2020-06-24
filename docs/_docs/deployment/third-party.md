@@ -46,7 +46,7 @@ Install the Kickster gem and you are good to go. More documentation can here fou
 
 Netlify provides Global CDN, Continuous Deployment, one click HTTPS and [much more](https://www.netlify.com/features/), providing developers a robust toolset for modern web projects, without added complexity. Netlify supports custom plugins for Jekyll and has a free plan for open source projects.
 
-Read this [Jekyll step-by-step guide](https://www.netlify.com/blog/2015/10/28/a-step-by-step-guide-jekyll-3.0-on-netlify/) to setup your Jekyll site on Netlify.
+Read this [Jekyll step-by-step guide](https://www.netlify.com/blog/2020/04/02/a-step-by-step-guide-jekyll-4.0-on-netlify/) to setup your Jekyll site on Netlify.
 
 ## Render
 
