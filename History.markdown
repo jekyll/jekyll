@@ -20,6 +20,7 @@
   * Fix missing yaml front matter colon and adjust/add clarifying language. (#8250)
   * correct typo (#8261)
   * Allow hyperlinks to specific filter documentation (#8231)
+  * Update link to Netlify step-by-step guide (#8264)
 
 ### Site Enhancements
 
