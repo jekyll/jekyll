@@ -1,5 +1,7 @@
 ## HEAD
 
+  * Fix grammar in documentation section (#8265)
+
 ### Development Fixes
 
   * Bump RuboCop to v0.85.x (#8223)
