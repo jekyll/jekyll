@@ -61,7 +61,7 @@ paginate_path       : /page:num
 timezone            : null
 
 quiet               : false
-verbose             : false
+verbose             : false # does nothing; use -V or --verbose at command line
 defaults            : []
 
 liquid:
