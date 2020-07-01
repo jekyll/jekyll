@@ -418,6 +418,17 @@ class TestFilters < JekyllUnitTest
         assert_equal "http://example.com/base/#{page_url}", filter.absolute_url(page_url)
       end
 
+      should "ensure cached url depends on the baseurl" do
+        page_url = "cached-page-testing/"
+        cached_url = { page_url => "http://example.com/#{page_url}" }
+        filter = make_filter_mock(
+          "url"     => "http://example.com",
+          "baseurl" => "en"
+        )
+        filter.context.registers[:site].filter_cache[:absolute_url] = cached_url
+        assert_equal "http://example.com/en/#{page_url}", filter.absolute_url(page_url)
+      end
+
       should "be ok with a blank but present 'url'" do
         page_url = "about/my_favorite_page/"
         filter = make_filter_mock(
@@ -538,6 +549,14 @@ class TestFilters < JekyllUnitTest
         page_url = "about/my_favorite_page/"
         filter = make_filter_mock("baseurl" => "base")
         assert_equal "/base/#{page_url}", filter.relative_url(page_url)
+      end
+
+      should "ensure cached url depends on the baseurl" do
+        page_url = "cached-page-testing/"
+        cached_url = { page_url => page_url }
+        filter = make_filter_mock("baseurl" => "en")
+        filter.context.registers[:site].filter_cache[:relative_url] = cached_url
+        assert_equal "/en/#{page_url}", filter.relative_url(page_url)
       end
 
       should "normalize international URLs" do
