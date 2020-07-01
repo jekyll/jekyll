@@ -3,6 +3,7 @@
 ### Documentation
 
   * Update pointer to special permalink variables for collections (#8274)
+  * Fix special treatment for &#39;page 1&#39; in docs of pagination (#8230)
 
 ## 4.1.1 / 2020-06-24
 
