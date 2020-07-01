@@ -3,14 +3,14 @@
 module Jekyll
   class Site
     attr_reader   :source, :dest, :cache_dir, :config
-    attr_accessor :layouts, :pages, :static_files, :drafts,
+    attr_accessor :layouts, :pages, :static_files, :drafts, :inclusions,
                   :exclude, :include, :lsi, :highlighter, :permalink_style,
                   :time, :future, :unpublished, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
                   :gems, :plugin_manager, :theme
 
     attr_accessor :converters, :generators, :reader
-    attr_reader   :regenerator, :liquid_renderer, :includes_load_paths, :filter_cache
+    attr_reader   :regenerator, :liquid_renderer, :includes_load_paths, :filter_cache, :profiler
 
     # Public: Initialize a new Site.
     #
@@ -26,6 +26,7 @@ module Jekyll
       @filter_cache    = {}
 
       @reader          = Reader.new(self)
+      @profiler        = Profiler.new(self)
       @regenerator     = Regenerator.new(self)
       @liquid_renderer = LiquidRenderer.new(self)
 
@@ -71,19 +72,21 @@ module Jekyll
     #
     # Returns nothing.
     def process
+      return profiler.profile_process if config["profile"]
+
       reset
       read
       generate
       render
       cleanup
       write
-      print_stats if config["profile"]
     end
 
     def print_stats
       Jekyll.logger.info @liquid_renderer.stats_table
     end
 
+    # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
     #
     # Reset Site details.
@@ -96,6 +99,7 @@ module Jekyll
                     Time.now
                   end
       self.layouts = {}
+      self.inclusions = {}
       self.pages = []
       self.static_files = []
       self.data = {}
@@ -115,6 +119,7 @@ module Jekyll
       Jekyll::Hooks.trigger :site, :after_reset, self
     end
     # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/AbcSize
 
     # Load necessary libraries, plugins, converters, and generators.
     #

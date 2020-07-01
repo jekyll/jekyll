@@ -49,9 +49,9 @@ class TestPageWithoutAFile < JekyllUnitTest
         assert_equal "All the properties.\n", regular_page["content"]
         assert_equal "properties.html", regular_page["name"]
 
-        basic_attrs = %w(dir name path url)
+        basic_attrs = %w(dir name path url excerpt)
         attrs = {
-          "content"   => "All the properties.\n",
+          "content"   => nil,
           "dir"       => "/",
           "excerpt"   => nil,
           "foo"       => "bar",
@@ -75,12 +75,6 @@ class TestPageWithoutAFile < JekyllUnitTest
             assert_nil @page[prop]
           end
         end
-      end
-
-      should "be exposed to Liquid as a Hash" do
-        liquid_rep = @page.to_liquid
-        refute_equal Jekyll::Drops::PageDrop, liquid_rep.class
-        assert_equal Hash, liquid_rep.class
       end
     end
 

@@ -437,6 +437,7 @@ layout: null
     <channel>
         <title>{{ site.title }}</title>
         <link>{{ site.url }}</link>
+        <atom:link href="{{ page.url | prepend: site.url }}" rel="self" type="application/rss+xml" />
         <description>{{ site.description }}</description>
         <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
         {% for post in site.posts %}
@@ -533,7 +534,7 @@ layout: null
 
 Although websites can implement more sophisticated features and functionality, we've covered the basics in this tutorial. You now have a fully functional Jekyll site.
 
-To deploy your site, consider using [GitHub Pages](https://pages.github.com/), [Netlify](https://www.netlify.com/), [ZEIT](https://zeit.co), [Render](https://render.com), [Amazon AWS S3](https://aws.amazon.com/s3/) using the [s3_website plugin](https://github.com/laurilehmijoki/s3_website), or just FTP your files to your web server.
+To deploy your site, consider using [GitHub Pages](https://pages.github.com/), [Netlify](https://www.netlify.com/), [Vercel](https://vercel.com), [Render](https://render.com), [Amazon AWS S3](https://aws.amazon.com/s3/) using the [s3_website plugin](https://github.com/laurilehmijoki/s3_website), or just FTP your files to your web server.
 
 You can also package your layouts, includes and assets into a Ruby `gem` and [make it a Jekyll theme](/docs/themes/).
 

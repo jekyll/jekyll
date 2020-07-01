@@ -97,7 +97,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
       )
 
       @site.process
-      @affected = @site.posts.docs.find { |page| page.relative_path =~ %r!win\/! }
+      @affected = @site.posts.docs.find { |page| page.relative_path =~ %r!win/! }
       @not_affected = @site.pages.find { |page| page.relative_path == "about.html" }
     end
 

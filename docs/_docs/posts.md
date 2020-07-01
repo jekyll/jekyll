@@ -120,34 +120,34 @@ you wish to access the currently-rendering page/posts's variables (the
 variables of the post/page that has the `for` loop in it), use the `page`
 variable instead.
 
-## Categories and Tags
+## Tags and Categories
 
-Jekyll has first class support for categories and tags in blog posts. The difference
-between categories and tags is a category can be part of the URL for a post
-whereas a tag cannot.
+Jekyll has first class support for *tags* and *categories* in blog posts.
 
-To use these, first set your categories and tags in front matter:
+### Tags
 
-```yaml
----
-layout: post
-title: A Trip
-categories: [blog, travel]
-tags: [hot, summer]
----
-```
+Tags for a post are defined in the post's front matter using either the key
+`tag` for a single entry or `tags` for multiple entries. <br/> Since Jekyll
+expects multiple items mapped to the key `tags`, it will automatically *split*
+a string entry if it contains whitespace. For example, while front matter
+`tag: classic hollywood` will be processed into a singular entity
+`"classic hollywood"`, front matter `tags: classic hollywood` will be processed
+into an array of entries `["classic", "hollywood"]`.
 
-Jekyll makes the categories available to us at `site.categories`. Iterating over
-`site.categories` on a page gives us another array with two items, the first
-item is the name of the category and the second item is an array of posts in that
-category.
+Irrespective of the front matter key chosen, Jekyll stores the metadata mapped
+to the plural key which is exposed to Liquid templates.
+
+All tags registered in the current site are exposed to Liquid templates via
+`site.tags`. Iterating over `site.tags` on a page will yield another array with
+two items, where the first item is the name of the tag and the second item being
+*an array of posts* with that tag.
 
 {% raw %}
 ```liquid
-{% for category in site.categories %}
-  <h3>{{ category[0] }}</h3>
+{% for tag in site.tags %}
+  <h3>{{ tag[0] }}</h3>
   <ul>
-    {% for post in category[1] %}
+    {% for post in tag[1] %}
       <li><a href="{{ post.url }}">{{ post.title }}</a></li>
     {% endfor %}
   </ul>
@@ -155,7 +155,37 @@ category.
 ```
 {% endraw %}
 
-For tags it's exactly the same except the variable is `site.tags`.
+
+### Categories
+
+Categories of a post work similar to the tags above:
+  * They can be defined via the front matter using keys `category` or
+    `categories` (that follow the same logic as for tags)
+  * All categories registered in the site are exposed to Liquid templates via
+    `site.categories` which can be iterated over (similar to the loop for tags
+    above.)
+
+*The similarity between categories and tags however, ends there.*
+
+Unlike tags, categories for posts can also be defined by a post's file path.
+Any directory above `_post` will be read-in as a category. For example,
+if a post is at path `movies/horror/_posts/2019-05-21-bride-of-chucky.markdown`,
+then `movies` and `horror` are automatically registered as categories for that
+post.
+
+When the post also has front matter defining categories, they just get added to
+the existing list if not present already.
+
+The hallmark difference between categories and tags is that categories of a post
+may be incorporated into [the generated URL]('/docs/permalinks/#global') for the
+post, while tags cannot be.
+
+Therefore, depending on whether front matter has `category: classic hollywood`,
+or `categories: classic hollywood`, the example post above would have the URL as
+either
+`movies/horror/classic%20hollywood/2019/05/21/bride-of-chucky.html` or
+`movies/horror/classic/hollywood/2019/05/21/bride-of-chucky.html` respectively.
+
 
 ## Post excerpts
 
