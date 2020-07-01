@@ -1,3 +1,9 @@
+## HEAD
+
+### Documentation
+
+  * Update pointer to special permalink variables for collections (#8274)
+
 ## 4.1.1 / 2020-06-24
 
   * Fix grammar in documentation section (#8265)
