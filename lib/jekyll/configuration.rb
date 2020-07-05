@@ -270,8 +270,8 @@ module Jekyll
     private
 
     STYLE_TO_PERMALINK = {
-      :date     => "/:categories/:year/:month/:day/:title:output_ext",
       :none     => "/:categories/:title:output_ext",
+      :date     => "/:categories/:year/:month/:day/:title:output_ext",
       :ordinal  => "/:categories/:year/:y_day/:title:output_ext",
       :pretty   => "/:categories/:year/:month/:day/:title/",
       :weekdate => "/:categories/:year/W:week/:short_day/:title:output_ext",
