@@ -8,6 +8,7 @@
 ### Development Fixes
 
   * Update cucumber gem to version 4.1 (#8278)
+  * Move permalink styles data to constant (#8282)
 
 ## 4.1.1 / 2020-06-24
 
