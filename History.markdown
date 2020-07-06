@@ -4,6 +4,7 @@
 
   * Update pointer to special permalink variables for collections (#8274)
   * Fix special treatment for &#39;page 1&#39; in docs of pagination (#8230)
+  * Add Formcake to forms section (#8283)
 
 ### Development Fixes
 
