@@ -9,6 +9,7 @@
   docs:
     - link: /docs/usage/
     - link: /docs/configuration/
+    - link: /docs/rendering-process/
 - title: Content
   docs:
     - link: /docs/pages/
