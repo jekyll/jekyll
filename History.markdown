@@ -10,6 +10,7 @@
 
   * Update cucumber gem to version 4.1 (#8278)
   * Move permalink styles data to constant (#8282)
+  * Update rubocop gem to 0.87.1 (#8287)
 
 ## 4.1.1 / 2020-06-24
 
