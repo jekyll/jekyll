@@ -13,6 +13,10 @@
   * Move permalink styles data to constant (#8282)
   * Update rubocop gem to 0.87.1 (#8287)
 
+### Bug Fixes
+
+  * Replace nested conditional with guard clauses (#8294)
+
 ## 4.1.1 / 2020-06-24
 
   * Fix grammar in documentation section (#8265)
