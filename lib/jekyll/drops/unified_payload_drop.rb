@@ -5,8 +5,12 @@ module Jekyll
     class UnifiedPayloadDrop < Drop
       mutable true
 
-      attr_accessor :page, :layout, :content, :paginator
-      attr_accessor :highlighter_prefix, :highlighter_suffix
+      attr_accessor :content,
+                    :highlighter_prefix,
+                    :highlighter_suffix,
+                    :layout,
+                    :page,
+                    :paginator
 
       def jekyll
         JekyllDrop.global

@@ -11,14 +11,10 @@ module Jekyll
     @disk_cache_enabled = true
 
     class << self
-      # class-wide cache location
-      attr_accessor :cache_dir
+      attr_accessor :cache_dir # class-wide cache location
 
-      # class-wide directive to write cache to disk
-      attr_reader :disk_cache_enabled
-
-      # class-wide base cache reader
-      attr_reader :base_cache
+      attr_reader :base_cache, # class-wide base cache reader
+                  :disk_cache_enabled # class-wide directive to write cache to disk
 
       # Disable Marshaling cached items to disk
       def disable_disk_cache!
