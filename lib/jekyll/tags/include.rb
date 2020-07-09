@@ -253,8 +253,7 @@ module Jekyll
       end
 
       def page_path(context)
-        page = context.registers[:page]
-        site = context.registers[:site]
+        page, site = context.registers.values_at(:page, :site)
         return site.source unless page
 
         site.in_source_dir File.dirname(resource_path(page, site))
