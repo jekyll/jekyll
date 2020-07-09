@@ -252,21 +252,21 @@ module Jekyll
         Array(page_path(context)).freeze
       end
 
+      private
+
       def page_path(context)
-        if context.registers[:page].nil?
-          context.registers[:site].source
-        else
-          site = context.registers[:site]
-          page_payload  = context.registers[:page]
-          resource_path = \
-            if page_payload["collection"].nil?
-              page_payload["path"]
-            else
-              File.join(site.config["collections_dir"], page_payload["path"])
-            end
-          resource_path.sub!(%r!/#excerpt\z!, "")
-          site.in_source_dir File.dirname(resource_path)
-        end
+        page = context.registers[:page]
+        site = context.registers[:site]
+        return site.source unless page
+
+        path = resource_path(page, site)
+        site.in_source_dir File.dirname(path)
+      end
+
+      def resource_path(page, site)
+        path = page["path"]
+        path = File.join(site.config["collections_dir"], path) if page["collection"]
+        path.sub(%r!/#excerpt\z!, "")
       end
     end
   end
