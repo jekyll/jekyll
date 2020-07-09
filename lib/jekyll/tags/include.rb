@@ -252,8 +252,6 @@ module Jekyll
         Array(page_path(context)).freeze
       end
 
-      private
-
       def page_path(context)
         page = context.registers[:page]
         site = context.registers[:site]
@@ -262,6 +260,8 @@ module Jekyll
         path = resource_path(page, site)
         site.in_source_dir File.dirname(path)
       end
+
+      private
 
       def resource_path(page, site)
         path = page["path"]
