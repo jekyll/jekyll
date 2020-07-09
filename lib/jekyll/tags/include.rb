@@ -257,8 +257,7 @@ module Jekyll
         site = context.registers[:site]
         return site.source unless page
 
-        path = resource_path(page, site)
-        site.in_source_dir File.dirname(path)
+        site.in_source_dir File.dirname(resource_path(page, site))
       end
 
       private
