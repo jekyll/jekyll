@@ -13,5 +13,4 @@
 Layout/SpaceAroundOperators:
   Exclude:
     - 'lib/jekyll/commands/build.rb'
-    - 'lib/jekyll/site.rb'
     - 'test/test_configuration.rb'
