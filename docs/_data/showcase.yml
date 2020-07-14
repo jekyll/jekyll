@@ -239,3 +239,9 @@
     - marketing-site
     - documentation
     - software
+- name: Hydejack
+  url: https://hydejack.com/
+  categories:
+    - personal
+    - blog
+    - documentation
