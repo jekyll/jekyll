@@ -35,7 +35,7 @@ end
 
 ## Bundler
 
-Bundler installs the gems in your `Gemfile`. It's not a requirement for you to use a `Gemfile` and `bundler` however it's highly recommended as it ensures you're running the same version of Jekyll and Jekyll plugins across different environments.
+Bundler installs the gems in your `Gemfile`. It's not a requirement for you to use a `Gemfile` and `bundler`; however, it's highly recommended as it ensures you're running the same version of Jekyll and Jekyll plugins across different environments.
 
 `gem install bundler` installs [Bundler](https://rubygems.org/gems/bundler). You only need to install it once &mdash; not every time you create a new Jekyll project. Here are some additional details:
 
