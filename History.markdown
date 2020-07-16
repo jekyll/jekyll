@@ -1,5 +1,7 @@
 ## HEAD
 
+  * Update default.html (#8305)
+
 ### Documentation
 
   * Update pointer to special permalink variables for collections (#8274)
