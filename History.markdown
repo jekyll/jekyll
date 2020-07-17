@@ -9,6 +9,7 @@
   * Add Formcake to forms section (#8283)
   * Add a note on the rendering process in the docs (#8291)
   * Add refactoring type to PULL_REQUEST_TEMPLATE (#8297)
+  * Update resources.md (#7864)
 
 ### Development Fixes
 
