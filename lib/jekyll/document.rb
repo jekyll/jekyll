@@ -498,7 +498,6 @@ module Jekyll
       end
     end
 
-    # rubocop:disable Metrics/AbcSize
     def populate_title
       if relative_path =~ DATE_FILENAME_MATCHER
         date, slug, ext = Regexp.last_match.captures
@@ -521,7 +520,6 @@ module Jekyll
       data["slug"]  ||= slug
       data["ext"]   ||= ext
     end
-    # rubocop:enable Metrics/AbcSize
 
     def modify_date(date)
       if !data["date"] || data["date"].to_i == site.time.to_i

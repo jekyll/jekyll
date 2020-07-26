@@ -56,6 +56,8 @@ Lint/NestedPercentLiteral:
     - test/test_site.rb
 Lint/DeprecatedOpenSSLConstant:
   Enabled: true
+Lint/DuplicateElsifCondition:
+  Enabled: true
 Lint/MixedRegexpCaptureTypes:
   Enabled: false
 Lint/RaiseException:
@@ -69,7 +71,7 @@ Lint/Void:
     - lib/jekyll/site.rb
 
 Metrics/AbcSize:
-  Max: 21
+  Max: 23
 Metrics/BlockLength:
   Exclude:
     - test/**/*.rb
@@ -100,7 +102,7 @@ Metrics/ModuleLength:
 Metrics/ParameterLists:
   Max: 4
 Metrics/PerceivedComplexity:
-  Max: 8
+  Max: 13
 
 Naming/FileName:
   Enabled: false
@@ -123,6 +125,8 @@ Security/YAMLLoad:
     - !ruby/regexp /features\/.*.rb/
     - !ruby/regexp /test\/.*.rb$/
 
+Style/ArrayCoercion:
+  Enabled: true
 Style/AccessModifierDeclarations:
   Enabled: false
 Style/AccessorGrouping:
@@ -132,6 +136,8 @@ Style/Alias:
 Style/AndOr:
   Severity: error
 Style/BisectedAttrAccessor:
+  Enabled: true
+Style/CaseLikeIf:
   Enabled: true
 Style/ClassAndModuleChildren:
   Exclude:
@@ -151,7 +157,11 @@ Style/FrozenStringLiteralComment:
   EnforcedStyle: always
 Style/GuardClause:
   Enabled: false
+Style/HashAsLastArrayItem:
+  Enabled: true
 Style/HashEachMethods:
+  Enabled: true
+Style/HashLikeCase:
   Enabled: true
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
@@ -180,6 +190,8 @@ Style/RedundantAssignment:
   Enabled: true
 Style/RedundantFetchBlock:
   Enabled: false
+Style/RedundantFileExtensionInRequire:
+  Enabled: true
 Style/RedundantRegexpCharacterClass:
   Enabled: true
 Style/RedundantRegexpEscape:
