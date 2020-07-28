@@ -239,3 +239,8 @@
     - marketing-site
     - documentation
     - software
+- name: jekyll-rtd-theme
+  url: https://rundocs.github.io/jekyll-rtd-theme/
+  categories:
+    - open-source
+    - documentation
