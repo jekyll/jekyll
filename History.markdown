@@ -11,6 +11,7 @@
   * Add refactoring type to PULL_REQUEST_TEMPLATE (#8297)
   * Update resources.md (#7864)
   * Extra apostrophes in an URL (#8319)
+  * Clarify target of subordinate clause (#8320)
 
 ### Development Fixes
 
