@@ -74,10 +74,15 @@ group :jekyll_optional_dependencies do
   gem "jekyll-gist"
   gem "jekyll-paginate"
   gem "jekyll-redirect-from"
-  gem "kramdown-syntax-coderay"
   gem "mime-types", "~> 3.0"
   gem "rdoc", RUBY_VERSION >= "2.2.2" ? "~> 6.0" : "~> 5.1"
   gem "tomlrb", "~> 1.2"
+
+  if ENV["KRAMDOWN_VERSION"].to_i >= 2
+    gem "kramdown-syntax-coderay"
+  else
+    gem "coderay", "~> 1.0"
+  end
 
   platform :ruby, :mswin, :mingw, :x64_mingw do
     gem "classifier-reborn", "~> 2.2.0"
