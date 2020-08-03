@@ -43,9 +43,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("rouge",                 *rouge_versions)
   s.add_runtime_dependency("safe_yaml",             "~> 1.0")
 
-  # Depend on kramdown. If a 1.x version is specified, do not attempt to
-  # load kramdown-parser-gfm.
+  # Depend on kramdown. For kramdown v2, extra gems are required.
+  # https://kramdown.gettalong.org/news.html#kramdown-200-released
   kramdown_versions = ENV["KRAMDOWN_VERSION"] ? ["~> #{ENV["KRAMDOWN_VERSION"]}"] : [">= 1.17", "< 3"]
   s.add_runtime_dependency("kramdown",              *kramdown_versions)
-  s.add_runtime_dependency("kramdown-parser-gfm",   "~> 1.0") if ENV["KRAMDOWN_VERSION"].nil? || ENV["KRAMDOWN_VERSION"].to_i >= 2
 end

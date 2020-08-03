@@ -80,6 +80,7 @@ group :jekyll_optional_dependencies do
 
   if ENV["KRAMDOWN_VERSION"].nil? || ENV["KRAMDOWN_VERSION"].to_i >= 2
     gem "kramdown-syntax-coderay"
+    gem "kramdown-parser-gfm"
   else
     gem "coderay", "~> 1.0"
   end
