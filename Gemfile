@@ -78,7 +78,7 @@ group :jekyll_optional_dependencies do
   gem "rdoc", RUBY_VERSION >= "2.2.2" ? "~> 6.0" : "~> 5.1"
   gem "tomlrb", "~> 1.2"
 
-  if ENV["KRAMDOWN_VERSION"].to_i >= 2
+  if ENV["KRAMDOWN_VERSION"].nil? || ENV["KRAMDOWN_VERSION"].to_i >= 2
     gem "kramdown-syntax-coderay"
   else
     gem "coderay", "~> 1.0"

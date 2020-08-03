@@ -47,5 +47,5 @@ Gem::Specification.new do |s|
   # load kramdown-parser-gfm.
   kramdown_versions = ENV["KRAMDOWN_VERSION"] ? ["~> #{ENV["KRAMDOWN_VERSION"]}"] : [">= 1.17", "< 3"]
   s.add_runtime_dependency("kramdown",              *kramdown_versions)
-  s.add_runtime_dependency("kramdown-parser-gfm",   "~> 1.0") if ENV["KRAMDOWN_VERSION"].to_i >= 2
+  s.add_runtime_dependency("kramdown-parser-gfm",   "~> 1.0") if ENV["KRAMDOWN_VERSION"].nil? || ENV["KRAMDOWN_VERSION"].to_i >= 2
 end
