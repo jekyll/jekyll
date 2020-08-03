@@ -65,7 +65,6 @@ module Jekyll
           end
         end
 
-
         def make_accessible(hash = @config)
           hash.keys.each do |key|
             hash[key.to_sym] = hash[key]
