@@ -185,6 +185,12 @@ end
 
 #
 
+Given("I'm using kramdown v{int}") do |int|
+  skip_this_scenario unless Kramdown::VERSION.to_i == int.to_i
+end
+
+#
+
 Given(%r!^I wait (\d+) second(s?)$!) do |time, _|
   sleep(time.to_f)
 end

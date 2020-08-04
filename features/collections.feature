@@ -398,6 +398,7 @@ Feature: Collections
     collections:
     - methods
     """
+    And I'm using kramdown v2
     When I run jekyll build
     Then I should get a zero exit status
     Then the _site directory should exist
