@@ -404,7 +404,6 @@ Feature: Collections
     Then the _site directory should exist
     And I should see "Second document's output: <p>Use <code>Jekyll.configuration</code> to build a full configuration for use w/Jekyll.</p>\n\n<p>Whatever: foo.bar</p>" in "_site/index.html"
 
-
   Scenario: Filter documents by where
     Given I have an "index.html" page that contains "{% assign items = site.methods | where: 'whatever','foo.bar' %}Item count: {{ items.size }}"
     And I have fixture collections
