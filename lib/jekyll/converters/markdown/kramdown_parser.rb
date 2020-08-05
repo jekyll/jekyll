@@ -52,7 +52,9 @@ module Jekyll
 
         def load_dependencies
           return if Kramdown::VERSION.to_i < 2
-          require "kramdown-parser-gfm" if @config["input"] == "GFM"
+          if @config["input"] == "GFM"
+            Jekyll::External.require_with_graceful_fail("kramdown-parser-gfm")
+          end
 
           if highlighter == "coderay"
             Jekyll::External.require_with_graceful_fail("kramdown-syntax-coderay")
