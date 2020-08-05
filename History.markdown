@@ -2,7 +2,8 @@
 
 ### Minor Enhancements
 
-* [3.x] kramdown v2 upgrade (#8322)
+* Allow use of kramdown v2 (#8322)
+* Add default language for kramdown syntax highlighting (#8325)
 
 ## 3.8.7 / 2020-05-08
 
