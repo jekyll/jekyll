@@ -1,3 +1,9 @@
+### HEAD
+
+### Minor Enhancements
+
+* [3.x] kramdown v2 upgrade (#8322)
+
 ## 3.8.7 / 2020-05-08
 
 ### Bug Fixes
