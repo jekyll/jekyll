@@ -12,6 +12,7 @@
   * Update resources.md (#7864)
   * Extra apostrophes in an URL (#8319)
   * Clarify target of subordinate clause (#8320)
+  * [3.x] Add 3.9.0 release post (#8323)
 
 ### Development Fixes
 
