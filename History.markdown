@@ -12,7 +12,6 @@
   * Update resources.md (#7864)
   * Extra apostrophes in an URL (#8319)
   * Clarify target of subordinate clause (#8320)
-  * [3.x] Add 3.9.0 release post (#8323)
 
 ### Development Fixes
 
@@ -25,7 +24,6 @@
 ### Bug Fixes
 
   * Replace nested conditional with guard clauses (#8294)
-  * [3.x] Add default language for kramdown syntax highlighting (#8325)
 
 ## 4.1.1 / 2020-06-24
 
@@ -219,6 +217,13 @@
 ### Development Fixes
 
   * Fix Kramdown converter based tests for v4.0.x (#8143)
+
+## 3.9.0 / 2020-08-05
+
+### Minor Enhancements
+
+* Allow use of kramdown v2 (#8322)
+* Add default language for kramdown syntax highlighting (#8325)
 
 ## 3.8.7 / 2020-05-08
 
