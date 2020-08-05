@@ -5,7 +5,8 @@ version: 3.9.0
 categories: [release]
 ---
 
-Jekyll 3.9.0 allows use of kramdown v2, the latest series of kramdown. If you choose to upgrade, please note that the GitHub-Flavored Markdown parser and other extensions have been moved to separate gems, so they will need to be added to your `Gemfile` separately:
+Jekyll 3.9.0 allows use of kramdown v2, the latest series of kramdown. If you choose to upgrade, please note that the GitHub-Flavored Markdown parser and
+the following features from kramdown v1 are now distributed via separate gems. So they will need to be added to your `Gemfile` separately to use the feature:
 
 - GFM parser – `kramdown-parser-gfm`
 - coderay syntax highlighter – `kramdown-syntax-coderay`
