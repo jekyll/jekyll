@@ -7,9 +7,6 @@ rvm:
   - &ruby1 2.7.1
   - &ruby2 2.6.6
   - &ruby3 2.5.8
-  - &ruby4 2.4.10
-  - &ruby5 2.3.8
-  - &ruby6 2.2.10
   - &jruby jruby-9.2.11.1
 
 matrix:
@@ -22,6 +19,8 @@ matrix:
       env: TEST_SUITE=profile-docs
     - rvm: *ruby1
       env: ROUGE_VERSION=1.11.1 # runs everything with this version
+    - rvm: *ruby1
+      env: KRAMDOWN_VERSION=1.17.0 # runs everything with this version
   exclude:
     - rvm: *jruby
       env: TEST_SUITE=cucumber

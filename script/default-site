@@ -13,6 +13,15 @@ pushd tmp/default-site
 
 echo "$0: respecifying the jekyll install location"
 ruby -e "contents = File.read('Gemfile'); File.write('Gemfile', contents.sub(/gem \"jekyll\".*\\n/, 'gem \"jekyll\", path: \"../../\"'))"
+if [ -n "$KRAMDOWN_VERSION" ]; then
+  echo "$0: respecifying the kramdown version"
+  ruby -e "contents = File.read('Gemfile'); File.write('Gemfile', contents.sub(/gem \"kramdown-parser-gfm\".*\\n/, ''))"
+  echo "gem 'kramdown', '~> $KRAMDOWN_VERSION'" >> Gemfile
+fi
+if [ -n "$ROUGE_VERSION" ]; then
+  echo "$0: respecifying the rouge version"
+  echo "gem 'rouge', '~> $ROUGE_VERSION'" >> Gemfile
+fi
 echo "$0: installing default site dependencies"
 BUNDLE_GEMFILE=Gemfile bundle install
 echo "$0: building the default site"
