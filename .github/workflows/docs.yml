@@ -35,7 +35,8 @@ jobs:
       - name: Build site
         run: bundle exec jekyll build --source docs --destination docs/_site --verbose --trace
         env:
-          JEKYLL_PAT: ${{ secrets.GITHUB_TOKEN }}
+          # For jekyll-github-metadata
+          JEKYLL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy to GitHub Pages
         run: |
           SOURCE_COMMIT="$(git log -1 --pretty="%an: %B" "$GITHUB_SHA")"
