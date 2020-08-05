@@ -32,6 +32,13 @@ jobs:
           gem update bundler --no-document
           bundle install --path=vendor/bundle --jobs 4 --retry 3
           bundle clean
+      - name: Clone target branch
+        run: |
+          REMOTE_BRANCH="${REMOTE_BRANCH:-gh-pages}"
+          REMOTE_REPO="https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
+
+          echo "Publishing to ${GITHUB_REPOSITORY} on branch ${REMOTE_BRANCH}"
+          git clone --depth=1 --branch="${REMOTE_BRANCH}" --single-branch --no-checkout "${REMOTE_REPO}"
       - name: Build site
         run: bundle exec jekyll build --source docs --destination docs/_site --verbose --trace
         env:
@@ -43,17 +50,11 @@ jobs:
           pushd docs/_site &>/dev/null
           : > .nojekyll
 
-          REMOTE_REPO="https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
-          REMOTE_BRANCH="${REMOTE_BRANCH:-gh-pages}"
-
-          echo "Publishing to ${GITHUB_REPOSITORY} on branch ${REMOTE_BRANCH}"
-          git init --quiet
-          git config user.name "${GITHUB_ACTOR}"
-          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git add --all
-          git commit --quiet \
+          git -c user.name="${GITHUB_ACTOR}" -c user.email="${GITHUB_ACTOR}@users.noreply.github.com" \
+            commit --quiet \
             --message "Deploy docs from ${GITHUB_SHA}" \
             --message "$SOURCE_COMMIT"
-          git push "$REMOTE_REPO" "+HEAD:${REMOTE_BRANCH}"
+          git push
 
           popd &>/dev/null
