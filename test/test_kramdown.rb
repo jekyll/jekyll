@@ -93,7 +93,7 @@ class TestKramdown < JekyllUnitTest
 
       should "have 'plaintext' as the default syntax_highlighter language" do
         converter = fixture_converter(@config)
-        parser = converter.setup && converter.instance_variable_get(:@parser)
+        parser = converter.instance_variable_get(:@parser)
         parser_config = parser.instance_variable_get(:@config)
 
         assert_equal "plaintext", parser_config.dig("syntax_highlighter_opts", "default_lang")
@@ -108,7 +108,7 @@ class TestKramdown < JekyllUnitTest
           },
         }
         converter = fixture_converter(Utils.deep_merge_hashes(@config, override))
-        parser = converter.setup && converter.instance_variable_get(:@parser)
+        parser = converter.instance_variable_get(:@parser)
         parser_config = parser.instance_variable_get(:@config)
 
         assert_equal "yaml", parser_config.dig("syntax_highlighter_opts", "default_lang")
