@@ -25,6 +25,7 @@
 ### Bug Fixes
 
   * Replace nested conditional with guard clauses (#8294)
+  * [3.x] Add default language for kramdown syntax highlighting (#8325)
 
 ## 4.1.1 / 2020-06-24
 
