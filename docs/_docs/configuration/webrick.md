@@ -21,7 +21,7 @@ with Chrome's aggressive caching when you are in development mode.
 
 
 You can override the default `Cache-Control` by setting it to a value of your
-own choosing including the empty string. If you don't want the WEBrick server
+own choosing (a caching instruction, or an empty string). If you don't want the WEBrick server
 to send any `Cache-Control` header at all, set the value to nil. That configuration
 is useful when Jekyll/WEBrick is behind a proxy server, such as `netlify dev`.
 
