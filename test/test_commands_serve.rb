@@ -43,8 +43,9 @@ class TestCommandsServe < JekyllUnitTest
 
   context "using LiveReload" do
     setup do
-#      skip_if_windows "EventMachine support on Windows is limited"
-#      -- unless installed with the --platform ruby option, Gem file should account for this
+      # skip_if_windows "EventMachine support on Windows is limited"
+      # -- Unless installed with the --platform ruby option.
+      # -- Gem file options (if Gem.win_platform?) should account for this.
       skip("Refinements are not fully supported in JRuby") if jruby?
 
       @temp_dir = Dir.mktmpdir("jekyll_livereload_test")
@@ -142,34 +143,34 @@ class TestCommandsServe < JekyllUnitTest
           "http://#{opts["host"]}:#{opts["port"]}/#{opts["baseurl"]}/hello.html"
         ).header
         refute_nil(
-          headers['Cache-Control'][0]
+          headers["Cache-Control"][0]
         )
         refute_empty(
-          headers['Cache-Control'][0]
+          headers["Cache-Control"][0]
         )
       end
     end
 
     context "with webrick header options" do
       should "set Cache-Control to empty when cache-control option is empty string" do
-        webrick_opts = {'webrick' => {'headers' => {'Cache-Control' => ''}}}
-        opts = serve(@standard_options.merge webrick_opts)
+        webrick_opts = { "webrick" => { "headers" => { "Cache-Control" => "" } } }
+        opts = serve(@standard_options.merge(webrick_opts))
         headers = @client.get(
           "http://#{opts["host"]}:#{opts["port"]}/#{opts["baseurl"]}/hello.html"
         ).header
         assert_empty(
-          headers['Cache-Control'][0]
+          headers["Cache-Control"][0]
         )
       end
 
       should "set not set Cache-Control when cache-control option is nil" do
-        webrick_opts = {'webrick' => {'headers' => {'Cache-Control' => nil}}}
-        opts = serve(@standard_options.merge webrick_opts)
+        webrick_opts = { "webrick" => { "headers" => { "Cache-Control" => nil } } }
+        opts = serve(@standard_options.merge(webrick_opts))
         headers = @client.get(
           "http://#{opts["host"]}:#{opts["port"]}/#{opts["baseurl"]}/hello.html"
         ).header
         assert_nil(
-          headers['Cache-Control'][0]
+          headers["Cache-Control"][0]
         )
       end
     end
