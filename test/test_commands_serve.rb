@@ -43,7 +43,8 @@ class TestCommandsServe < JekyllUnitTest
 
   context "using LiveReload" do
     setup do
-      skip_if_windows "EventMachine support on Windows is limited"
+#      skip_if_windows "EventMachine support on Windows is limited"
+#      -- unless installed with the --platform ruby option, Gem file should account for this
       skip("Refinements are not fully supported in JRuby") if jruby?
 
       @temp_dir = Dir.mktmpdir("jekyll_livereload_test")
@@ -132,6 +133,45 @@ class TestCommandsServe < JekyllUnitTest
       )
       assert_match(%r!&amp;mindelay=3!, content)
       assert_match(%r!&amp;maxdelay=1066!, content)
+    end
+
+    context "with no webrick header options" do
+      should "set Cache-Control to default" do
+        opts = serve(@standard_options)
+        headers = @client.get(
+          "http://#{opts["host"]}:#{opts["port"]}/#{opts["baseurl"]}/hello.html"
+        ).header
+        refute_nil(
+          headers['Cache-Control'][0]
+        )
+        refute_empty(
+          headers['Cache-Control'][0]
+        )
+      end
+    end
+
+    context "with webrick header options" do
+      should "set Cache-Control to empty when cache-control option is empty string" do
+        webrick_opts = {'webrick' => {'headers' => {'Cache-Control' => ''}}}
+        opts = serve(@standard_options.merge webrick_opts)
+        headers = @client.get(
+          "http://#{opts["host"]}:#{opts["port"]}/#{opts["baseurl"]}/hello.html"
+        ).header
+        assert_empty(
+          headers['Cache-Control'][0]
+        )
+      end
+
+      should "set not set Cache-Control when cache-control option is nil" do
+        webrick_opts = {'webrick' => {'headers' => {'Cache-Control' => nil}}}
+        opts = serve(@standard_options.merge webrick_opts)
+        headers = @client.get(
+          "http://#{opts["host"]}:#{opts["port"]}/#{opts["baseurl"]}/hello.html"
+        ).header
+        assert_nil(
+          headers['Cache-Control'][0]
+        )
+      end
     end
   end
 
