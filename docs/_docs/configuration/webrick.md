@@ -19,15 +19,15 @@ headers: one dynamic in order to specify the nature of the data being served,
 the other static in order to disable caching so that you don't have to fight
 with Chrome's aggressive caching when you are in development mode.
 
-
 You can override the default `Cache-Control` by setting it to a value of your
-own choosing (a caching instruction, or an empty string). If you don't want the WEBrick server
-to send any `Cache-Control` header at all, set the value to nil. That configuration
-is useful when Jekyll/WEBrick is behind a proxy server, such as `netlify dev`.
+own choosing (a caching instruction, or an empty string). If you don't want the
+WEBrick server to send any `Cache-Control` header at all, set the value to null.
+That configuration is useful when Jekyll/WEBrick is behind a proxy server, such
+as `netlify dev`.
 
 ```yaml
 # File: _config.yml
 webrick:
   headers:
-    Cache-Control: nil
+    Cache-Control: null
 ```
