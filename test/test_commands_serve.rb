@@ -166,12 +166,14 @@ class TestCommandsServe < JekyllUnitTest
       should "set not set Cache-Control when cache-control option is nil" do
         webrick_opts = { "webrick" => { "headers" => { "Cache-Control" => nil } } }
         opts = serve(@standard_options.merge(webrick_opts))
-        headers = @client.get(
-          "http://#{opts["host"]}:#{opts["port"]}/#{opts["baseurl"]}/hello.html"
-        ).header
-        assert_nil(
-          headers["Cache-Control"][0]
-        )
+        2.times do
+          headers = @client.get(
+            "http://#{opts["host"]}:#{opts["port"]}/#{opts["baseurl"]}/hello.html"
+          ).header
+          assert_nil(
+            headers["Cache-Control"][0]
+          )
+        end
       end
     end
   end
