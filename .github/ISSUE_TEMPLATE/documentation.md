@@ -3,7 +3,7 @@ name: Documentation
 about: Found a typo or something that isn't crystal clear in our docs?
 title: 'docs: '
 labels: documentation
-assignees: DirtyF
+assignees: ''
 
 ---
 
