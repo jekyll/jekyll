@@ -25,6 +25,10 @@
 
   * Replace nested conditional with guard clauses (#8294)
 
+### Minor Enhancements
+
+  * Warn on command-line with permalink conflict (#8342)
+
 ## 4.1.1 / 2020-06-24
 
   * Fix grammar in documentation section (#8265)
@@ -222,8 +226,8 @@
 
 ### Minor Enhancements
 
-* Allow use of kramdown v2 (#8322)
-* Add default language for kramdown syntax highlighting (#8325)
+  * Allow use of kramdown v2 (#8322)
+  * Add default language for kramdown syntax highlighting (#8325)
 
 ## 3.8.7 / 2020-05-08
 
