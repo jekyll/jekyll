@@ -73,9 +73,6 @@ liquid:
 rdiscount:
   extensions        : []
 
-redcarpet:
-  extensions        : []
-
 kramdown:
   auto_ids          : true
   entity_output     : as_char
