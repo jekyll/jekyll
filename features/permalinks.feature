@@ -151,3 +151,19 @@ Feature: Fancy permalinks
     And the _site directory should exist
     And I should see "Conflict: The URL '" in the build output
     And I should see "amazing.html' is the destination for the following pages: awesome.md, cool.md" in the build output
+
+  Scenario: Use the same redirect twice
+    Given I have a configuration file with "plugins" set to "[jekyll-redirect-from]"
+    And I have an "index.html" file with content:
+    """
+    ---
+    redirect_from:
+      - redirect.html
+      - redirect.html
+    ---
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should not see "Conflict: The URL '" in the build output
+    And I should not see "redirect.html' is the destination for the following pages: redirect.html, redirect.html" in the build output
