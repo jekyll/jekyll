@@ -1,6 +1,12 @@
-## HEAD
+## 4.1.2 / 2020-08-17
 
-  * Update default.html (#8305)
+### Bug Fixes
+
+  * fix: CVE-2020-14001(#8349)
+
+### Minor Enhancements
+
+  * Warn on command-line with permalink conflict (#8342)
 
 ### Documentation
 
@@ -21,15 +27,7 @@
   * Update rubocop gem to 0.87.1 (#8287)
   * Update RuboCop to-do file (#8296)
   * Fix `rake console` generating LoadError (#8312)
-
-### Bug Fixes
-
-  * Replace nested conditional with guard clauses (#8294)
-  * fix: security bump (#8349)
-
-### Minor Enhancements
-
-  * Warn on command-line with permalink conflict (#8342)
+  * Refactor: replace nested conditional with guard clauses (#8294)
 
 ## 4.1.1 / 2020-06-24
 
