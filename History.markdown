@@ -25,6 +25,7 @@
 ### Bug Fixes
 
   * Replace nested conditional with guard clauses (#8294)
+  * fix: security bump (#8349)
 
 ### Minor Enhancements
 
