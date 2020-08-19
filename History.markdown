@@ -30,6 +30,7 @@
 ### Minor Enhancements
 
   * Warn on command-line with permalink conflict (#8342)
+  * Supress warning issued for redirect pages (#8347)
 
 ## 4.1.1 / 2020-06-24
 
