@@ -12,6 +12,7 @@
   * Update resources.md (#7864)
   * Extra apostrophes in an URL (#8319)
   * Clarify target of subordinate clause (#8320)
+  * Cherry-pick commits from conflicting branch `docs-40`
 
 ### Development Fixes
 
@@ -24,6 +25,12 @@
 ### Bug Fixes
 
   * Replace nested conditional with guard clauses (#8294)
+  * fix: security bump (#8349)
+
+### Minor Enhancements
+
+  * Warn on command-line with permalink conflict (#8342)
+  * Supress warning issued for redirect pages (#8347)
 
 ## 4.1.1 / 2020-06-24
 
@@ -222,8 +229,8 @@
 
 ### Minor Enhancements
 
-* Allow use of kramdown v2 (#8322)
-* Add default language for kramdown syntax highlighting (#8325)
+  * Allow use of kramdown v2 (#8322)
+  * Add default language for kramdown syntax highlighting (#8325)
 
 ## 3.8.7 / 2020-05-08
 
