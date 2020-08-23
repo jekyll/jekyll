@@ -13,6 +13,7 @@
   * Extra apostrophes in an URL (#8319)
   * Clarify target of subordinate clause (#8320)
   * Cherry-pick commits from conflicting branch `docs-40`
+  * Update documentation on third party site (#8352)
 
 ### Development Fixes
 
