@@ -33,6 +33,9 @@ cd myblog
 5. Build the site and make it available on a local server.
 ```
 bundle exec jekyll serve
+
+// with autoreload
+bundle exec jekyll s --livereload
 ```
 6. Browse to [http://localhost:4000](http://localhost:4000){:target="_blank"}
 
