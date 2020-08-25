@@ -36,6 +36,10 @@ bundle exec jekyll serve
 ```
 6. Browse to [http://localhost:4000](http://localhost:4000){:target="_blank"}
 
+{: .note}
+Pass the `--livereload` option to the serve command if you want your browser to auto-refresh on each change you make: `bundle exec jekyll serve --livereload`
+
+
 If you encounter any errors during this process, see the
 [troubleshooting]({{ '/docs/troubleshooting/#configuration-problems' | relative_url }}) page. Also,
 make sure you've installed the development headers and other prerequisites as
