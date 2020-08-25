@@ -36,7 +36,7 @@ bundle exec jekyll serve
 ```
 6. Browse to [http://localhost:4000](http://localhost:4000){:target="_blank"}
 
-(: .note}
+{: .note}
 Pass the `--livereload` option to the serve command if you want your browser to auto-refresh on each change you make: `bundle exec jekyll serve --livereload`
 
 
