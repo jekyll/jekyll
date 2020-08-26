@@ -44,9 +44,8 @@ class="flag">flags</code> (specified on the command-line) that control them.
       <td>
         <p class="name"><strong>Safe</strong></p>
         <p class="description">
-          Disable <a href="/docs/plugins/">plugins</a>, caching to disk
-          and ignore symbolic links.  </br>
-          Whitelisted plugins are not disabled.
+          Disable <a href="/docs/plugins/">non-whitelisted plugins</a>, caching to disk,
+          and ignore symbolic links.
         </p>
       </td>
       <td class="align-center">
