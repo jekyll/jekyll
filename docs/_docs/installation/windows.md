@@ -28,6 +28,9 @@ We only cover RubyInstaller-2.4 and newer here, older versions need to
    Install Jekyll and Bundler via: `gem install jekyll bundler`
 4. Check if Jekyll installed properly: `jekyll -v`
 
+{: .note .info}
+You may receive an error when checking if Jekyll installed properly. Reboot your system and run `jekyll -v` again. If the error persists, open a [RubyInstaller issue](https://github.com/oneclick/rubyinstaller2/issues/new).
+
 That's it, you're ready to use Jekyll!
 
 ### Installation via Bash on Windows 10
