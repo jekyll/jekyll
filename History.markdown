@@ -15,6 +15,7 @@
   * Cherry-pick commits from conflicting branch `docs-40`
   * Update documentation on third party site (#8352)
   * Update default.md with info requested in #8314 (#8353)
+  * Clarify description of `safe` option (#8354)
 
 ### Development Fixes
 
