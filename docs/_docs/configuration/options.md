@@ -32,6 +32,16 @@ class="flag">flags</code> (specified on the command-line) that control them.
     </tr>
     <tr class="setting">
       <td>
+        <p class="name"><strong>Collections Directory</strong></p>
+        <p class="description">Change the direction where collections are stored. *Cannot be 'collections', and cannot contain '_' if _posts/ is inside it.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">source: collections_dir</code></p>
+        <p><code class="flag">-s, --source collections_dir</code></p>
+      </td>
+    </tr>
+    <tr class="setting">
+      <td>
         <p class="name"><strong>Site Destination</strong></p>
         <p class="description">Change the directory where Jekyll will write files</p>
       </td>
