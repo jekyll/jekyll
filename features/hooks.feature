@@ -103,7 +103,7 @@ Feature: Hooks
     Then I should see "special" in "_site/page1.html"
     And I should not see "special" in "_site/page2.html"
 
-  Scenario: Modify the converted HTML content before rendering the page
+  Scenario: Modify the converted HTML content of a page before rendering layout
     Given I have a _layouts directory
     And I have a "_layouts/page.html" file with content:
     """
@@ -191,7 +191,7 @@ Feature: Hooks
     Then I should see "old post" in "_site/2015/03/14/entry1.html"
     And I should see "new post" in "_site/2015/03/15/entry2.html"
 
-  Scenario: Modify the converted HTML content before rendering the post
+  Scenario: Modify the converted HTML content of a post before rendering layout
     Given I have a _layouts directory
     And I have a "_layouts/post.html" file with content:
     """
@@ -327,7 +327,7 @@ Feature: Hooks
     And the _site directory should exist
     And I should see "all your base are belong to us" in "_site/index.html"
 
-  Scenario: Modify the converted HTML content before rendering the document
+  Scenario: Modify the converted HTML content of a document before rendering layout
     Given I have a _layouts directory
     And I have a "_layouts/meme.html" file with content:
     """
