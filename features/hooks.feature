@@ -104,19 +104,14 @@ Feature: Hooks
     And I should not see "special" in "_site/page2.html"
 
   Scenario: Modify the converted HTML content before rendering the page
-    Given I have a _plugins directory
-    And I have a "_layouts/page.html" file with the content:
+    Given I have a _layouts directory
+    And I have a "_layouts/page.html" file with content:
     """
     <h3>Page heading</h3>
     {{ content }}
     """
-    And I have a "page.md" page with the content:
-    """
-    ---
-    layout: page
-    ---
-    ### Heading
-    """
+    And I have a "page.md" page with layout "page" that contains "### Heading"
+    And I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
     """
     Jekyll::Hooks.register :pages, :post_convert do |page|
@@ -127,7 +122,7 @@ Feature: Hooks
     Then I should get a zero exit status
     And the _site directory should exist
     And I should see "<h3>Page heading</h3>" in "_site/page.html"
-    And I should see "<h4>Heading</h4>" in "_site/page.html"
+    And I should see "<h4 id=\"heading\">Heading</h4>" in "_site/page.html"
 
   Scenario: Modify page contents before writing to disk
     Given I have a _plugins directory
@@ -197,22 +192,24 @@ Feature: Hooks
     And I should see "new post" in "_site/2015/03/15/entry2.html"
 
   Scenario: Modify the converted HTML content before rendering the post
-    Given I have a _plugins directory
-    And I have a "_layouts/post.html" file with the content:
+    Given I have a _layouts directory
+    And I have a "_layouts/post.html" file with content:
     """
     <h3>Page heading</h3>
     {{ content }}
     """
-    And I have a "_posts/2016-01-01-example.md" file with the content:
+    And I have a _posts directory
+    And I have a "_posts/2016-01-01-example.md" file with content:
     """
     ---
     layout: post
     ---
     ### Heading
     """
+    And I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:
     """
-    Jekyll::Hooks.register :opsts, :post_convert do |post|
+    Jekyll::Hooks.register :posts, :post_convert do |post|
       post.content = post.content.gsub('h3', 'h4')
     end
     """
@@ -220,7 +217,7 @@ Feature: Hooks
     Then I should get a zero exit status
     And the _site directory should exist
     And I should see "<h3>Page heading</h3>" in "_site/2016/01/01/example.html"
-    And I should see "<h4>Heading</h4>" in "_site/2016/01/01/example.html"
+    And I should see "<h4 id=\"heading\">Heading</h4>" in "_site/2016/01/01/example.html"
 
   Scenario: Modify post contents before writing to disk
     Given I have a _plugins directory
