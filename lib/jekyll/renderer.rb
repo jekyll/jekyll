@@ -84,7 +84,7 @@ module Jekyll
       output = convert(output.to_s)
       document.content = output
 
-      # Hook to modify converted content before layout is applied
+      Jekyll.logger.debug "Post-Convert Hooks:", document.relative_path
       document.trigger_hooks(:post_convert)
       output = document.content
 
