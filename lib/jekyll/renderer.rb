@@ -66,7 +66,7 @@ module Jekyll
     # Render the document.
     #
     # Returns String rendered document output
-    # rubocop: disable Metrics/AbcSize
+    # rubocop: disable Metrics/AbcSize, Metrics/MethodLength
     def render_document
       info = {
         :registers        => { :site => site, :page => payload["page"] },
@@ -95,7 +95,7 @@ module Jekyll
 
       output
     end
-    # rubocop: enable Metrics/AbcSize
+    # rubocop: enable Metrics/AbcSize, Metrics/MethodLength
 
     # Convert the document using the converters which match this renderer's document.
     #
