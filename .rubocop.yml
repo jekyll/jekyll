@@ -114,6 +114,27 @@ Naming/MemoizedInstanceVariableName:
     - lib/jekyll/drops/unified_payload_drop.rb
     - lib/jekyll/page_without_a_file.rb
 
+Performance/AncestorsInclude:
+  Enabled: false
+Performance/BigDecimalWithNumericArgument:
+  Enabled: true
+Performance/RedundantSortBlock:
+  Enabled: true
+Performance/RedundantStringChars:
+  Enabled: true
+Performance/ReverseFirst:
+  Enabled: true
+Performance/SortReverse:
+  Enabled: false
+Performance/Squeeze:
+  Enabled: true
+Performance/StringInclude:
+  Enabled: true
+  Exclude:
+    - lib/jekyll/utils/platforms.rb
+Performance/Sum:
+  Enabled: true
+
 Security/MarshalLoad:
   Exclude:
     - !ruby/regexp /test\/.*.rb$/
