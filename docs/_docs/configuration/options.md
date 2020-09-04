@@ -225,12 +225,32 @@ class="flag">flags</code> (specified on the command-line) that control them.
     </tr>
     <tr class="setting">
       <td>
+        <p class="name"><strong>Plugins</strong></p>
+        <p class="description">Specify plugin directories instead of using <code>_plugins/</code> automatically.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">plugins_dir: [ DIR1,... ]</code></p>
+        <p><code class="flag">-p, --plugins DIR1[,DIR2,...]</code></p>
+      </td>
+    </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>Layouts</strong></p>
+        <p class="description">Specify layout directory instead of using <code>_layouts/</code> automatically.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">layout_dir: DIR</code></p>
+        <p><code class="flag">--layouts DIR</code></p>
+      </td>
+    </tr>
+    <tr class="setting">
+      <td>
         <p class="name"><strong>Drafts</strong></p>
         <p class="description">Process and render draft posts.</p>
       </td>
       <td class="align-center">
         <p><code class="option">show_drafts: BOOL</code></p>
-        <p><code class="flag">--drafts</code></p>
+        <p><code class="flag">-D, --drafts</code></p>
       </td>
     </tr>
     <tr class="setting">
@@ -358,7 +378,16 @@ class="flag">flags</code> (specified on the command-line) that control them.
       </td>
       <td class="align-center">
         <p><code class="option">baseurl: URL</code></p>
-        <p><code class="flag">--baseurl URL</code></p>
+        <p><code class="flag">-b, --baseurl URL</code></p>
+      </td>
+    </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>Trace</strong></p>
+        <p class="description">Show the full backtrace when an error occurs.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="flag">-t, --trace</code></p>
       </td>
     </tr>
   </tbody>
@@ -387,7 +416,7 @@ before your site is served.
       </td>
       <td class="align-center">
         <p><code class="option">port: PORT</code></p>
-        <p><code class="flag">--port PORT</code></p>
+        <p><code class="flag">-P, --port PORT</code></p>
       </td>
     </tr>
     <tr class="setting">
@@ -397,7 +426,7 @@ before your site is served.
       </td>
       <td class="align-center">
         <p><code class="option">host: HOSTNAME</code></p>
-        <p><code class="flag">--host HOSTNAME</code></p>
+        <p><code class="flag">-H, --host HOSTNAME</code></p>
       </td>
     </tr>
     <tr class="setting">
@@ -406,8 +435,49 @@ before your site is served.
         <p class="description">Reload a page automatically on the browser when its content is edited.</p>
       </td>
       <td class="align-center">
-        <p><code class="option">livereload: true</code></p>
+        <p><code class="option">livereload: BOOL</code></p>
         <p><code class="flag">-l, --livereload</code></p>
+      </td>
+    </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>Live Reload Ignore</strong></p>
+        <p class="description">File glob patterns for LiveReload to ignore.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">livereload_ignore: [ GLOB1,... ]</code></p>
+        <p><code class="flag">--livereload-ignore GLOB1[,GLOB2,...]</code></p>
+      </td>
+    </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>Live Reload Min/Max Delay</strong></p>
+        <p class="description">Minimum/Maximum delay before automatically reloading page.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">livereload_min_delay: SECONDS</code><br>
+        <code class="option">livereload_max_delay: SECONDS</code></p>
+        <p><code class="flag">--livereload-min-delay SECONDS</code><br>
+        <code class="flag">--livereload-max-delay SECONDS</code></p>
+      </td>
+    </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>Live Reload Port</strong></p>
+        <p class="description">Port for LiveReload to listen on.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="flag">--livereload-port PORT</code></p>
+      </td>
+    </tr>
+    <tr class="setting">
+      <td>
+        <p class="name"><strong>Open URL</strong></p>
+        <p class="description">Open the site's URL in the browser.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">open_url: BOOL</code></p>
+        <p><code class="flag">-o, --open-url</code></p>
       </td>
     </tr>
     <tr class="setting">
@@ -426,7 +496,18 @@ before your site is served.
         <p class="description">Skips the initial site build which occurs before the server is started.</p>
       </td>
       <td class="align-center">
+        <p><code class="option">skip_initial_build: BOOL</code></p>
         <p><code class="flag">--skip-initial-build</code></p>
+      </td>
+    </tr>
+        <tr class="setting">
+      <td>
+        <p class="name"><strong>Show Directory Listing</strong></p>
+        <p class="description">Show a directory listing instead of loading your index file.</p>
+      </td>
+      <td class="align-center">
+        <p><code class="option">show_dir_listing: BOOL</code></p>
+        <p><code class="flag">--show-dir-listing</code></p>
       </td>
     </tr>
     <tr class="setting">
