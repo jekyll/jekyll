@@ -17,6 +17,7 @@
   * Update default.md with info requested in #8314 (#8353)
   * Clarify description of `safe` option (#8354)
   * Simplifying the Git post-receive hook-example (#8358)
+  * Add missing doc for build and serve commands (#8365)
 
 ### Development Fixes
 
