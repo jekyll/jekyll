@@ -51,7 +51,7 @@ module Jekyll
         if path.nil? || path == ""
           other.data["slug"]
         else
-          path + "/" + other.data["slug"]
+          "#{path}/#{other.data["slug"]}"
         end
       end
     end

@@ -64,7 +64,7 @@ class TestLogAdapter < JekyllUnitTest
       writer = LoggerDouble.new
       logger = Jekyll::LogAdapter.new(writer, :debug)
       allow(writer).to receive(:debug)
-        .with("topic ".rjust(20) + "log message").and_return(true)
+        .with("#{"topic ".rjust(20)}log message").and_return(true)
       assert logger.debug("topic", "log message")
     end
   end
@@ -74,7 +74,7 @@ class TestLogAdapter < JekyllUnitTest
       writer = LoggerDouble.new
       logger = Jekyll::LogAdapter.new(writer, :info)
       allow(writer).to receive(:info)
-        .with("topic ".rjust(20) + "log message").and_return(true)
+        .with("#{"topic ".rjust(20)}log message").and_return(true)
       assert logger.info("topic", "log message")
     end
   end
@@ -84,7 +84,7 @@ class TestLogAdapter < JekyllUnitTest
       writer = LoggerDouble.new
       logger = Jekyll::LogAdapter.new(writer, :warn)
       allow(writer).to receive(:warn)
-        .with("topic ".rjust(20) + "log message").and_return(true)
+        .with("#{"topic ".rjust(20)}log message").and_return(true)
       assert logger.warn("topic", "log message")
     end
   end
@@ -94,7 +94,7 @@ class TestLogAdapter < JekyllUnitTest
       writer = LoggerDouble.new
       logger = Jekyll::LogAdapter.new(writer, :error)
       allow(writer).to receive(:error)
-        .with("topic ".rjust(20) + "log message").and_return(true)
+        .with("#{"topic ".rjust(20)}log message").and_return(true)
       assert logger.error("topic", "log message")
     end
   end

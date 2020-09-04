@@ -54,7 +54,7 @@ module Jekyll
         # Returns nothing.
         def build(site, options)
           t = Time.now
-          source      = File.expand_path(options["source"])
+          source = File.expand_path(options["source"])
           destination = File.expand_path(options["destination"])
           incremental = options["incremental"]
           Jekyll.logger.info "Source:", source
