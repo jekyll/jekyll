@@ -34,6 +34,7 @@
 
   * Warn on command-line with permalink conflict (#8342)
   * Supress warning issued for redirect pages (#8347)
+  * Add post_convert hook to modify HTML content before layout (#8368)
 
 ## 4.1.1 / 2020-06-24
 
