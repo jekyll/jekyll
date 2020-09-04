@@ -307,9 +307,10 @@ module Jekyll
       if property.nil?
         input.sort
       else
-        if nils == "first"
+        case nils
+        when "first"
           order = - 1
-        elsif nils == "last"
+        when "last"
           order = + 1
         else
           raise ArgumentError, "Invalid nils order: " \
@@ -399,7 +400,6 @@ module Jekyll
 
     # `where` filter helper
     #
-    # rubocop:disable Metrics/PerceivedComplexity
     def compare_property_vs_target(property, target)
       case target
       when NilClass
@@ -420,8 +420,6 @@ module Jekyll
 
       false
     end
-
-    # rubocop:enable Metrics/PerceivedComplexity
 
     def item_property(item, property)
       @item_property_cache ||= {}

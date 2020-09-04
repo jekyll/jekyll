@@ -51,25 +51,53 @@ Layout/MultilineOperationIndentation:
 Layout/SpaceAroundMethodCallOperator:
   Enabled: true
 
+Lint/BinaryOperatorWithIdenticalOperands:
+  Enabled: true
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+Lint/DuplicateElsifCondition:
+  Enabled: true
+Lint/DuplicateRescueException:
+  Enabled: true
+Lint/DuplicateRequire:
+  Enabled: true
+Lint/EmptyConditionalBody:
+  Enabled: true
+Lint/EmptyFile:
+  Enabled: true
+Lint/FloatComparison:
+  Enabled: true
+Lint/MissingSuper:
+  Enabled: false
+Lint/MixedRegexpCaptureTypes:
+  Enabled: false
 Lint/NestedPercentLiteral:
   Exclude:
     - test/test_site.rb
-Lint/DeprecatedOpenSSLConstant:
+Lint/OutOfRangeRegexpRef:
   Enabled: true
-Lint/MixedRegexpCaptureTypes:
-  Enabled: false
 Lint/RaiseException:
+  Enabled: true
+Lint/SelfAssignment:
   Enabled: true
 Lint/StructNewOverride:
   Enabled: true
+Lint/TopLevelReturnWithArgument:
+  Enabled: true
+Lint/TrailingCommaInAttributeDeclaration:
+  Enabled: true
 Lint/UnreachableCode:
   Severity: error
+Lint/UnreachableLoop:
+  Enabled: true
+Lint/UselessMethodDefinition:
+  Enabled: true
 Lint/Void:
   Exclude:
     - lib/jekyll/site.rb
 
 Metrics/AbcSize:
-  Max: 21
+  Max: 23
 Metrics/BlockLength:
   Exclude:
     - test/**/*.rb
@@ -100,7 +128,7 @@ Metrics/ModuleLength:
 Metrics/ParameterLists:
   Max: 4
 Metrics/PerceivedComplexity:
-  Max: 8
+  Max: 13
 
 Naming/FileName:
   Enabled: false
@@ -144,6 +172,8 @@ Security/YAMLLoad:
     - !ruby/regexp /features\/.*.rb/
     - !ruby/regexp /test\/.*.rb$/
 
+Style/ArrayCoercion:
+  Enabled: true
 Style/AccessModifierDeclarations:
   Enabled: false
 Style/AccessorGrouping:
@@ -154,15 +184,21 @@ Style/AndOr:
   Severity: error
 Style/BisectedAttrAccessor:
   Enabled: true
+Style/CaseLikeIf:
+  Enabled: true
 Style/ClassAndModuleChildren:
   Exclude:
     - test/**/*.rb
+Style/CombinableLoops:
+  Enabled: true
 Style/Documentation:
   Enabled: false
 Style/DoubleNegation:
   Enabled: false
 Style/ExponentialNotation:
   Enabled: true
+Style/ExplicitBlockArgument:
+  Enabled: false
 Style/FormatStringToken:
   Exclude:
     - lib/jekyll/utils/ansi.rb
@@ -170,9 +206,15 @@ Style/FormatStringToken:
     - lib/jekyll/profiler.rb
 Style/FrozenStringLiteralComment:
   EnforcedStyle: always
+Style/GlobalStdStream:
+  Enabled: true
 Style/GuardClause:
   Enabled: false
+Style/HashAsLastArrayItem:
+  Enabled: true
 Style/HashEachMethods:
+  Enabled: true
+Style/HashLikeCase:
   Enabled: true
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
@@ -181,6 +223,8 @@ Style/HashTransformKeys:
   Enabled: false
 Style/HashTransformValues:
   Enabled: true
+Style/KeywordParametersOrder:
+  Enabled: true
 Style/MixinUsage:
   Exclude:
     - test/helper.rb
@@ -188,6 +232,8 @@ Style/ModuleFunction:
   Enabled: false
 Style/MultilineTernaryOperator:
   Severity: error
+Style/OptionalBooleanParameter:
+  Enabled: true
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
     "%q": "{}"
@@ -201,9 +247,13 @@ Style/RedundantAssignment:
   Enabled: true
 Style/RedundantFetchBlock:
   Enabled: false
+Style/RedundantFileExtensionInRequire:
+  Enabled: true
 Style/RedundantRegexpCharacterClass:
   Enabled: true
 Style/RedundantRegexpEscape:
+  Enabled: true
+Style/RedundantSelfAssignment:
   Enabled: true
 Style/RegexpLiteral:
   EnforcedStyle: percent_r
@@ -214,10 +264,19 @@ Style/SafeNavigation:
     - lib/jekyll/document.rb
 Style/SignalException:
   EnforcedStyle: only_raise
+Style/SingleArgumentDig:
+  Enabled: true
 Style/SlicingWithRange:
   Enabled: false
+Style/SoleNestedConditional:
+  Enabled: true
 Style/StringLiterals:
   EnforcedStyle: double_quotes
+Style/StringConcatenation:
+  Enabled: true
+  Exclude:
+    - lib/jekyll/commands/*.rb
+    - test/**/*.rb
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
 Style/SymbolArray:
