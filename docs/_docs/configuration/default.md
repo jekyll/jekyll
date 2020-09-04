@@ -7,15 +7,24 @@ Jekyll runs with the following configuration options by default. Alternative
 settings for these options can be explicitly specified in the configuration
 file or on the command-line.
 
+<div class="note info">
+  <h5>Be aware of directory paths</h5>
+  <p>
+    Make directory path values in configuration keys like `plugins_dir` relative to the current working directory, not the site source. 
+  </p>
+</div>
+
 ```yaml
 # Where things are
 source              : .
 destination         : ./_site
 collections_dir     : .
-plugins_dir         : _plugins
+plugins_dir         : _plugins # takes an array of strings and loads plugins in that order
 layouts_dir         : _layouts
 data_dir            : _data
 includes_dir        : _includes
+sass:
+  sass_dir: _sass
 collections:
   posts:
     output          : true
@@ -68,16 +77,10 @@ liquid:
   strict_variables  : false
 
 # Markdown Processors
-rdiscount:
-  extensions        : []
-
-redcarpet:
-  extensions        : []
-
 kramdown:
   auto_ids          : true
   entity_output     : as_char
-  toc_levels        : 1..6
+  toc_levels        : [1, 2, 3, 4, 5, 6]
   smart_quotes      : lsquo,rsquo,ldquo,rdquo
   input             : GFM
   hard_wrap         : false

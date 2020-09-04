@@ -18,7 +18,7 @@ title: Blogging Like a Hacker
 
 Between these triple-dashed lines, you can set predefined variables (see below
 for a reference) or even create custom ones of your own. These variables will
-then be available to you to access using Liquid tags both further down in the
+then be available for you to access using Liquid tags both further down in the
 file and also in any layouts or includes that the page or post in question
 relies on.
 
@@ -28,14 +28,14 @@ relies on.
     If you use UTF-8 encoding, make sure that no <code>BOM</code> header
     characters exist in your files or very, very bad things will happen to
     Jekyll. This is especially relevant if you’re running
-    <a href="/docs/installation/windows/">Jekyll on Windows</a>.
+    <a href="{{ '/docs/installation/windows/' | relative_url }}">Jekyll on Windows</a>.
   </p>
 </div>
 
 <div class="note">
-  <h5>ProTip™: Front Matter Variables Are Optional</h5>
+  <h5>Front Matter Variables Are Optional</h5>
   <p>
-    If you want to use <a href="/docs/variables/">Liquid tags and variables</a>
+    If you want to use <a href="{{ '/docs/variables/' | relative_url }}">Liquid tags and variables</a>
     but don’t need anything in your front matter, just leave it empty! The set
     of triple-dashed lines with nothing in between will still get Jekyll to
     process your file. (This is useful for things like CSS and RSS feeds!)
@@ -72,7 +72,7 @@ front matter of a page or post.
           <li>
             Using <code>null</code> will produce a file without using a layout
             file. This is overridden if the file is a post/document and has a
-            layout defined in the <a href="/docs/configuration/front-matter-defaults/">
+            layout defined in the <a href="{{ '/docs/configuration/front-matter-defaults/' | relative_url }}">
             front matter defaults</a>.
           </li>
           <li>
@@ -114,10 +114,10 @@ front matter of a page or post.
 </div>
 
 <div class="note">
-  <h5>ProTip™: Render Posts Marked As Unpublished</h5>
+  <h5>Render Posts Marked As Unpublished</h5>
   <p>
     To preview unpublished pages, run `jekyll serve` or `jekyll build`
-    with the `--unpublished` switch. Jekyll also has a handy <a href="/docs/posts/#drafts">drafts</a>
+    with the `--unpublished` switch. Jekyll also has a handy <a href="{{ '/docs/posts/#drafts' | relative_url }}">drafts</a>
     feature tailored specifically for blog posts.
   </p>
 </div>
@@ -201,10 +201,11 @@ These are available out-of-the-box to be used in the front matter for a post.
 </div>
 
 <div class="note">
-  <h5>ProTip™: Don't repeat yourself</h5>
+  <h5>Don't repeat yourself</h5>
   <p>
     If you don't want to repeat your frequently used front matter variables
-    over and over, define <a href="/docs/configuration/front-matter-defaults/" title="Front Matter defaults">defaults</a>
+    over and over, define
+    <a href="{{ '/docs/configuration/front-matter-defaults/' | relative_url }}" title="Front Matter defaults">defaults</a>
     for them and only override them where necessary (or not at all). This works
     both for predefined and custom variables.
   </p>

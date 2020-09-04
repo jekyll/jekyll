@@ -18,25 +18,24 @@ A gem is code you can include in Ruby projects. It allows you to package up func
 [jekyll-seo-tag](https://github.com/jekyll/jekyll-seo-tag) and
 [jekyll-archives](https://github.com/jekyll/jekyll-archives).
 
-
 ## Gemfile
 
 A `Gemfile` is a list of gems required for your site. For a simple Jekyll site it might look something like this:
 
 ```ruby
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'jekyll'
+gem "jekyll"
 
 group :jekyll_plugins do
-  gem 'jekyll-feed'
-  gem 'jekyll-seo-tag'
+  gem "jekyll-feed"
+  gem "jekyll-seo-tag"
 end
 ```
 
 ## Bundler
 
-Bundler installs the gems in your `Gemfile`. It's not a requirement for you to use a `Gemfile` and `bundler` however it's highly recommended as it ensures you're running the same version of Jekyll and Jekyll plugins across different environments.
+Bundler installs the gems in your `Gemfile`. It's not a requirement for you to use a `Gemfile` and `bundler`; however, it's highly recommended as it ensures you're running the same version of Jekyll and Jekyll plugins across different environments.
 
 `gem install bundler` installs [Bundler](https://rubygems.org/gems/bundler). You only need to install it once &mdash; not every time you create a new Jekyll project. Here are some additional details:
 

@@ -5,32 +5,24 @@ permalink: "/docs/liquid/tags/"
 All of the standard Liquid
 [tags](https://shopify.github.io/liquid/tags/control-flow/) are supported.
 Jekyll has a few built in tags to help you build your site. You can also create
-your own tags using [plugins](/docs/plugins/).
+your own tags using [plugins]({{ '/docs/plugins/' | relative_url }}).
 
 ## Includes
 
 If you have page snippets that you use repeatedly across your site, an
-[include](/docs/includes/) is the perfect way to make this more maintainable.
+[include]({{ '/docs/includes/' | relative_url }}) is the perfect way to make this more maintainable.
 
 ## Code snippet highlighting
 
 Jekyll has built in support for syntax highlighting of over 100 languages
 thanks to [Rouge](http://rouge.jneen.net). Rouge is the default highlighter
-in Jekyll 3 and above. To use it in Jekyll 2, set `highlighter` to `rouge`
-and ensure the `rouge` gem is installed properly.
+in Jekyll 3 and above.
 
-Alternatively, you can use [Pygments](http://pygments.org) to highlight your
-code snippets in Jekyll 3.x and below. To use Pygments, you must have Python
-installed on your system, have the `pygments.rb` gem installed and set
-`highlighter` to `pygments` in your site's configuration file. Pygments
-supports [over 100 languages](http://pygments.org/languages/)
-
-<div class="note info">
-  <p>Using Pygments has been deprecated and will not be officially supported in
-  Jekyll 4, meaning that the configuration setting <code>highlighter: pygments</code>
-  will automatically fall back to using <em>Rouge</em> which is written in Ruby
-  and 100% compatible with stylesheets for Pygments.</p>
-</div>
+{: .note .warning}
+Using Pygments has been deprecated and is not supported in
+Jekyll 4; the configuration setting <code>highlighter: pygments</code>
+now automatically falls back to using <em>Rouge</em> which is written in Ruby
+and 100% compatible with stylesheets for Pygments.
 
 To render a code block with syntax highlighting, surround your code as follows:
 
@@ -47,14 +39,14 @@ end
 The argument to the `highlight` tag (`ruby` in the example above) is the
 language identifier. To find the appropriate identifier to use for the language
 you want to highlight, look for the “short name” on the [Rouge
-wiki](https://github.com/jayferd/rouge/wiki/List-of-supported-languages-and-lexers)
-or the [Pygments' Lexers page](http://pygments.org/docs/lexers/).
+wiki](https://github.com/jayferd/rouge/wiki/List-of-supported-languages-and-lexers).
 
-<div class="note info">
+<div class="note">
   <h5>Jekyll processes all Liquid filters in code blocks</h5>
   <p>If you are using a language that contains curly braces, you
     will likely need to place <code>{&#37; raw &#37;}</code> and
-    <code>{&#37; endraw &#37;}</code> tags around your code.</p>
+    <code>{&#37; endraw &#37;}</code> tags around your code.
+    Since Jekyll {% include docs_version_badge.html version="4.0" %}, you can add <code>render_with_liquid: false</code> in your front matter to disable Liquid entirely for a particular document.</p>
 </div>
 
 ### Line numbers
@@ -78,9 +70,21 @@ end
 
 In order for the highlighting to show up, you’ll need to include a highlighting
 stylesheet. For Pygments or Rouge you can use a stylesheet for Pygments, you
-can find an example gallery [here](http://help.farbox.com/pygments.html).
+can find an example gallery
+[here](https://jwarby.github.io/jekyll-pygments-themes/languages/ruby.html)
+or from [its repository](https://github.com/jwarby/jekyll-pygments-themes).
+
+Copy the CSS file (`native.css` for example) into your css directory and import
+the syntax highlighter styles into your `main.css`:
+
+```css
+@import "native.css";
+```
 
 ## Links
+
+{: .note}
+Since Jekyll {% include docs_version_badge.html version="4.0"%}, you don't need to prepend `link` and `post_url` tags with `site.baseurl`.
 
 ### Linking to pages {#link}
 
@@ -108,18 +112,34 @@ You can also use the `link` tag to create a link in Markdown as follows:
 ```
 {% endraw %}
 
-{: .note }
-Since {% include docs_version_badge.html version="v4.0"%} you don't need to prepend `link` tags with `site.baseurl`
-
 The path to the post, page, or collection is defined as the path relative to the root directory (where your config file is) to the file, not the path from your existing page to the other page.
 
 For example, suppose you're creating a link in `page_a.md` (stored in `pages/folder1/folder2`) to `page_b.md` (stored in  `pages/folder1`). Your path in the link would not be `../page_b.html`. Instead, it would be `/pages/folder1/page_b.md`.
 
-If you're unsure of the path, add `{% raw %}{{ page.path }}{% endraw %}` to the page and it will display the path.
+If you're unsure of the path, add {% raw %}`{{ page.path }}`{% endraw %} to the page and it will display the path.
 
 One major benefit of using the `link` or `post_url` tag is link validation. If the link doesn't exist, Jekyll won't build your site. This is a good thing, as it will alert you to a broken link so you can fix it (rather than allowing you to build and deploy a site with broken links).
 
-Note you cannot add filters to `link` tags. For example, you cannot append a string using Liquid filters, such as `{% raw %}{% link mypage.html | append: "#section1" %} {% endraw %}`. To link to sections on a page, you will need to use regular HTML or Markdown linking techniques.
+Note you cannot add filters to `link` tags. For example, you cannot append a string using Liquid filters, such as {% raw %}`{% link mypage.html | append: "#section1" %}`{% endraw %}. To link to sections on a page, you will need to use regular HTML or Markdown linking techniques.
+
+The name of the file you want to link can be specified as a variable instead of an actual file name. For example, suppose you defined a variable in your page's front matter like this:
+
+```yaml
+---
+title: My page
+my_variable: footer_company_a.html
+---
+```
+
+You could then reference that variable in your link:
+
+{% raw %}
+```liquid
+{% link {{ page.my_variable }} %}
+```
+{% endraw %}
+
+In this example, the `link` tag would render a link to the file `footer_company_a.html`.
 
 ### Linking to posts
 
@@ -127,7 +147,7 @@ If you want to include a link to a post on your site, the `post_url` tag will ge
 
 {% raw %}
 ```liquid
-{{ site.baseurl }}{% post_url 2010-07-21-name-of-post %}
+{% post_url 2010-07-21-name-of-post %}
 ```
 {% endraw %}
 
@@ -135,7 +155,7 @@ If you organize your posts in subdirectories, you need to include subdirectory p
 
 {% raw %}
 ```liquid
-{{ site.baseurl }}{% post_url /subdir/2010-07-21-name-of-post %}
+{% post_url /subdir/2010-07-21-name-of-post %}
 ```
 {% endraw %}
 
@@ -145,6 +165,6 @@ You can also use this tag to create a link to a post in Markdown as follows:
 
 {% raw %}
 ```liquid
-[Name of Link]({{ site.baseurl }}{% post_url 2010-07-21-name-of-post %})
+[Name of Link]({% post_url 2010-07-21-name-of-post %})
 ```
 {% endraw %}

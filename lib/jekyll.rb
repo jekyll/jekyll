@@ -50,10 +50,12 @@ module Jekyll
   autoload :EntryFilter,         "jekyll/entry_filter"
   autoload :Errors,              "jekyll/errors"
   autoload :Excerpt,             "jekyll/excerpt"
+  autoload :PageExcerpt,         "jekyll/page_excerpt"
   autoload :External,            "jekyll/external"
   autoload :FrontmatterDefaults, "jekyll/frontmatter_defaults"
   autoload :Hooks,               "jekyll/hooks"
   autoload :Layout,              "jekyll/layout"
+  autoload :Inclusion,           "jekyll/inclusion"
   autoload :Cache,               "jekyll/cache"
   autoload :CollectionReader,    "jekyll/readers/collection_reader"
   autoload :DataReader,          "jekyll/readers/data_reader"
@@ -65,8 +67,10 @@ module Jekyll
   autoload :LogAdapter,          "jekyll/log_adapter"
   autoload :Page,                "jekyll/page"
   autoload :PageWithoutAFile,    "jekyll/page_without_a_file"
+  autoload :PathManager,         "jekyll/path_manager"
   autoload :PluginManager,       "jekyll/plugin_manager"
   autoload :Publisher,           "jekyll/publisher"
+  autoload :Profiler,            "jekyll/profiler"
   autoload :Reader,              "jekyll/reader"
   autoload :Regenerator,         "jekyll/regenerator"
   autoload :RelatedPosts,        "jekyll/related_posts"
@@ -189,7 +193,7 @@ module Jekyll
     end
 
     # Conditional optimizations
-    Jekyll::External.require_if_present("liquid-c")
+    Jekyll::External.require_if_present("liquid/c")
   end
 end
 

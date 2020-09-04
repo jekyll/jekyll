@@ -124,6 +124,8 @@ module Jekyll
 
         def collect_urls(urls, things, destination)
           things.each do |thing|
+            next if allow_used_permalink?(thing)
+
             dest = thing.destination(destination)
             if urls[dest]
               urls[dest] << thing.path
@@ -132,6 +134,10 @@ module Jekyll
             end
           end
           urls
+        end
+
+        def allow_used_permalink?(item)
+          defined?(JekyllRedirectFrom) && item.is_a?(JekyllRedirectFrom::RedirectPage)
         end
 
         def case_insensitive_urls(things, destination)

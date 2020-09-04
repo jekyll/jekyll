@@ -3,7 +3,7 @@ title: "Triaging an Issue"
 ---
 
 **This guide is for maintainers.** These special people have **write access** to one or more of Jekyll's repositories and help merge the contributions of others. You may find what is written here interesting, but it’s definitely not for everyone.
-{: .note .info }
+{: .note .info}
 
 Before evaluating an issue, it is important to identify if it is a feature
 request or a bug. For the Jekyll project the following definitions are used

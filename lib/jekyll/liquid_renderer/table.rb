@@ -10,73 +10,10 @@ module Jekyll
       end
 
       def to_s(num_of_rows = 50)
-        data = data_for_table(num_of_rows)
-        widths = table_widths(data)
-        generate_table(data, widths)
+        Jekyll::Profiler.tabulate(data_for_table(num_of_rows))
       end
 
       private
-
-      def generate_table(data, widths)
-        str = +"\n"
-
-        table_head = data.shift
-        table_foot = data.pop
-
-        str << generate_row(table_head, widths)
-        str << generate_table_head_border(table_head, widths)
-
-        data.each do |row_data|
-          str << generate_row(row_data, widths)
-        end
-
-        str << generate_table_head_border(table_foot, widths)
-        str << generate_row(table_foot, widths).rstrip
-
-        str << "\n"
-        str
-      end
-
-      def generate_table_head_border(row_data, widths)
-        str = +""
-
-        row_data.each_index do |cell_index|
-          str << "-" * widths[cell_index]
-          str << "-+-" unless cell_index == row_data.length - 1
-        end
-
-        str << "\n"
-        str
-      end
-
-      def generate_row(row_data, widths)
-        str = +""
-
-        row_data.each_with_index do |cell_data, cell_index|
-          str << if cell_index.zero?
-                   cell_data.ljust(widths[cell_index], " ")
-                 else
-                   cell_data.rjust(widths[cell_index], " ")
-                 end
-
-          str << " | " unless cell_index == row_data.length - 1
-        end
-
-        str << "\n"
-        str
-      end
-
-      def table_widths(data)
-        widths = []
-
-        data.each do |row|
-          row.each_with_index do |cell, index|
-            widths[index] = [cell.length, widths[index]].compact.max
-          end
-        end
-
-        widths
-      end
 
       # rubocop:disable Metrics/AbcSize
       def data_for_table(num_of_rows)

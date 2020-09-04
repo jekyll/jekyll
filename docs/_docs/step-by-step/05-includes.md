@@ -17,14 +17,14 @@ in an `_includes` folder. Includes are useful for having a single source for
 source code that repeats around the site or for improving the readability.
 
 Navigation source code can get complex so sometimes it's nice to move it into an
-include. 
+include.
 
 ## Include usage
 
 Create a file for the navigation at `_includes/navigation.html` with the
 following content:
 
-```liquid
+```
 <nav>
   <a href="/">Home</a>
   <a href="/about.html">About</a>

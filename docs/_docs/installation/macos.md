@@ -12,8 +12,9 @@ xcode-select --install
 
 ## Install Ruby
 
-Jekyll requires Ruby > {{ site.min_ruby_version }}.
-As macOS Mojave 10.14 comes only with ruby 2.3.x, you'll have to install a newer version of Ruby.
+Jekyll requires **Ruby > {{ site.data.ruby.min_version }}**.
+macOS Catalina 10.15 comes with ruby 2.6.3, so you're fine.
+If you're running a previous macOS system, you'll have to install a newer version of Ruby.
 
 ### With Homebrew {#brew}
 To run the latest Ruby version you need to install it through [Homebrew](https://brew.sh).
@@ -25,10 +26,10 @@ To run the latest Ruby version you need to install it through [Homebrew](https:/
 brew install ruby
 ```
 
-Don't forget to add the brew ruby path to your shell config :
+Add the brew ruby path to your shell config:
 
-```
-export PATH=/usr/local/opt/ruby/bin:$PATH
+```bash
+echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> ~/.bash_profile
 ```
 
 Then relaunch your terminal and check your updated Ruby setup:
@@ -38,7 +39,7 @@ which ruby
 # /usr/local/opt/ruby/bin/ruby
 
 ruby -v
-# ruby 2.6.2p47 (2019-03-13 revision 67232) [x86_64-darwin18]
+{{ site.data.ruby.current_version_output }}
 ```
 
 Yay, we are now running current stable Ruby!
@@ -55,10 +56,10 @@ Ruby versions. This is very useful when you need to be able to run a given Ruby 
 # Install rbenv and ruby-build
 brew install rbenv
 
-# Setup rbenv integration to your shell
+# Set up rbenv integration with your shell
 rbenv init
 
-# Check your install
+# Check your installation
 curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
 ```
 
@@ -66,17 +67,17 @@ Restart your terminal for changes to take effect.
 Now you can install the Ruby version of our choice, let's go with current latest stable Ruby:
 
 ```sh
-rbenv install 2.6.2
-rbenv global 2.6.2
+rbenv install {{ site.data.ruby.current_version }}
+rbenv global {{ site.data.ruby.current_version }}
 ruby -v
-# ruby 2.6.2p47 (2019-03-13 revision 67232) [x86_64-darwin18]
+{{ site.data.ruby.current_version_output }}
 ```
 
 That's it! Head over [rbenv command references](https://github.com/rbenv/rbenv#command-reference) to learn how to use different versions of Ruby in your projects.
 
 ## Install Jekyll
 
-Now all that is left is installing [Bundler](/docs/ruby-101/#bundler) and Jekyll.
+Now all that is left is installing [Bundler]({{ '/docs/ruby-101/#bundler' | relative_url }}) and Jekyll.
 
 ### Local Install
 
@@ -88,24 +89,24 @@ and then get your Ruby version using
 
 ```sh
 ruby -v
-# ruby 2.6.1p33 (2019-01-30 revision 66950) [x86_64-darwin18]
+{{ site.data.ruby.current_version_output }}
 ```
 
 Then append your path file with the following, replacing the `X.X` with the first two digits of your Ruby version.
 
-```
-export PATH=$HOME/.gem/ruby/X.X.0/bin:$PATH
+```bash
+echo 'export PATH="$HOME/.gem/ruby/X.X.0/bin:$PATH"' >> ~/.bash_profile
 ```
 
-To check your that you gem paths point to your home directory run:
+To check that your gem paths point to your home directory run:
 
 ```sh
 gem env
 ```
 
-And check that `GEM PATHS:` points to a path in your home directory
+And check that `GEM PATHS:` points to a path in your home directory.
 
-{: .note }
+{: .note .info}
 Every time you update Ruby to a version with a different first two digits, you will need to update your path to match.
 
 ### Global Install
@@ -132,4 +133,4 @@ sudo gem install bundler jekyll
 
 ## Problems?
 
-Check out the [troubleshooting](/docs/troubleshooting/) page or [ask for help on our forum](https://talk.jekyllrb.com).
+Check out the [troubleshooting]({{ '/docs/troubleshooting/' | relative_url }}) page or [ask for help on our forum](https://talk.jekyllrb.com).

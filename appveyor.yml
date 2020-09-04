@@ -13,8 +13,6 @@ build: off
 environment:
   BUNDLE_WITHOUT: "benchmark:development"
   matrix:
-    - RUBY_FOLDER_VER: "24"
-      TEST_SUITE: "test"
     - RUBY_FOLDER_VER: "26"
       TEST_SUITE: "test"
     - RUBY_FOLDER_VER: "26"

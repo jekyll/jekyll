@@ -26,12 +26,6 @@ class TestTheme < JekyllUnitTest
         Theme.new("foo").version
       end
     end
-
-    should "add itself to sass's load path" do
-      @theme.configure_sass
-      message = "Sass load paths should include the theme sass dir"
-      assert Sass.load_paths.include?(@theme.sass_path), message
-    end
   end
 
   context "path generation" do
@@ -80,7 +74,7 @@ class TestTheme < JekyllUnitTest
 
       should "raise when getting theme root" do
         error = assert_raises(RuntimeError) { Theme.new("test-non-existent-theme") }
-        assert_match(%r!fixtures\/test-non-existent-theme does not exist!, error.message)
+        assert_match(%r!fixtures/test-non-existent-theme does not exist!, error.message)
       end
     end
   end

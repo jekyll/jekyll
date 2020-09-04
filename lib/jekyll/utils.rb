@@ -13,8 +13,8 @@ module Jekyll
     # Constants for use in #slugify
     SLUGIFY_MODES = %w(raw default pretty ascii latin).freeze
     SLUGIFY_RAW_REGEXP = Regexp.new('\\s+').freeze
-    SLUGIFY_DEFAULT_REGEXP = Regexp.new("[^[:alnum:]]+").freeze
-    SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
+    SLUGIFY_DEFAULT_REGEXP = Regexp.new("[^\\p{M}\\p{L}\\p{Nd}]+").freeze
+    SLUGIFY_PRETTY_REGEXP = Regexp.new("[^\\p{M}\\p{L}\\p{Nd}._~!$&'()+,;=@]+").freeze
     SLUGIFY_ASCII_REGEXP = Regexp.new("[^[A-Za-z0-9]]+").freeze
 
     # Takes a slug and turns it into a simple title.
@@ -68,11 +68,14 @@ module Jekyll
     #
     # Returns an array
     def pluralized_array_from_hash(hash, singular_key, plural_key)
-      [].tap do |array|
-        value = value_from_singular_key(hash, singular_key)
-        value ||= value_from_plural_key(hash, plural_key)
-        array << value
-      end.flatten.compact
+      array = []
+      value = value_from_singular_key(hash, singular_key)
+      value ||= value_from_plural_key(hash, plural_key)
+
+      array << value
+      array.flatten!
+      array.compact!
+      array
     end
 
     def value_from_singular_key(hash, key)
@@ -133,7 +136,7 @@ module Jekyll
     # Determines whether a given file has
     #
     # Returns true if the YAML front matter is present.
-    # rubocop: disable PredicateName
+    # rubocop: disable Naming/PredicateName
     def has_yaml_header?(file)
       File.open(file, "rb", &:readline).match? %r!\A---\s*\r?\n!
     rescue EOFError
@@ -148,7 +151,7 @@ module Jekyll
 
       content.include?("{%") || content.include?("{{")
     end
-    # rubocop: enable PredicateName
+    # rubocop: enable Naming/PredicateName
 
     # Slugify a filename or title.
     #
@@ -212,7 +215,7 @@ module Jekyll
       slug = replace_character_sequence_with_hyphen(string, :mode => mode)
 
       # Remove leading/trailing hyphen
-      slug.gsub!(%r!^\-|\-$!i, "")
+      slug.gsub!(%r!^-|-$!i, "")
 
       slug.downcase! unless cased
       Jekyll.logger.warn("Warning:", "Empty `slug` generated for '#{string}'.") if slug.empty?

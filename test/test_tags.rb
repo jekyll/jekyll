@@ -275,7 +275,7 @@ class TestTags < JekyllUnitTest
         expected = <<~EOS
           <p>This is not yet highlighted</p>\n
           <figure class="highlight"><pre><code class="language-php" data-lang="php"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-          </pre></td><td class="code"><pre><span class="nx">test</span>\n</pre></td></tr></tbody></table></code></pre></figure>\n
+          </pre></td><td class="code"><pre><span class="n">test</span>\n</pre></td></tr></tbody></table></code></pre></figure>\n
           <p>This should not be highlighted, right?</p>
         EOS
         assert_match(expected, @result)
@@ -360,7 +360,7 @@ class TestTags < JekyllUnitTest
     end
 
     should "not cause an error" do
-      refute_match(%r!markdown\-html\-error!, @result)
+      refute_match(%r!markdown-html-error!, @result)
     end
 
     should "have the URL to the 'complex' post from 2008-11-21" do
@@ -385,7 +385,7 @@ class TestTags < JekyllUnitTest
     end
 
     should "not cause an error" do
-      refute_match(%r!markdown\-html\-error!, @result)
+      refute_match(%r!markdown-html-error!, @result)
     end
 
     should "have the URL to the 'special-chars' post from 2016-11-26" do
@@ -413,7 +413,7 @@ class TestTags < JekyllUnitTest
     end
 
     should "not cause an error" do
-      refute_match(%r!markdown\-html\-error!, @result)
+      refute_match(%r!markdown-html-error!, @result)
     end
 
     should "have the URL to the 'complex' post from 2008-11-21" do
@@ -444,7 +444,7 @@ class TestTags < JekyllUnitTest
     end
 
     should "not cause an error" do
-      refute_match(%r!markdown\-html\-error!, @result)
+      refute_match(%r!markdown-html-error!, @result)
     end
 
     should "have the url to the 'nested' post from 2008-11-21" do
@@ -516,7 +516,7 @@ class TestTags < JekyllUnitTest
     end
 
     should "not cause an error" do
-      refute_match(%r!markdown\-html\-error!, @result)
+      refute_match(%r!markdown-html-error!, @result)
     end
 
     should "have the URL to the 'contacts' item" do
@@ -554,7 +554,7 @@ class TestTags < JekyllUnitTest
     end
 
     should "not cause an error" do
-      refute_match(%r!markdown\-html\-error!, @result)
+      refute_match(%r!markdown-html-error!, @result)
     end
 
     should "have the URL to the 'contacts' item" do
@@ -587,7 +587,7 @@ class TestTags < JekyllUnitTest
     end
 
     should "not cause an error" do
-      refute_match(%r!markdown\-html\-error!, @result)
+      refute_match(%r!markdown-html-error!, @result)
     end
 
     should "have the URL to the 'yaml_with_dots' item" do
@@ -613,7 +613,7 @@ class TestTags < JekyllUnitTest
     end
 
     should "not cause an error" do
-      refute_match(%r!markdown\-html\-error!, @result)
+      refute_match(%r!markdown-html-error!, @result)
     end
 
     should "have the URL to the 'yaml_with_dots' item" do
@@ -639,7 +639,7 @@ class TestTags < JekyllUnitTest
     end
 
     should "not cause an error" do
-      refute_match(%r!markdown\-html\-error!, @result)
+      refute_match(%r!markdown-html-error!, @result)
     end
 
     should "have the URL to the 'sanitized_path' item" do
