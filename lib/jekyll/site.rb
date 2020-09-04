@@ -345,9 +345,11 @@ module Jekyll
       end.to_a
     end
 
-    def each_site_file(&block)
+    def each_site_file
       %w(pages static_files docs_to_write).each do |type|
-        send(type).each(&block)
+        send(type).each do |item|
+          yield item
+        end
       end
     end
 

@@ -50,6 +50,8 @@ Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
 Layout/SpaceAroundMethodCallOperator:
   Enabled: true
+Layout/SpaceAroundOperators:
+  Enabled: false
 
 Lint/NestedPercentLiteral:
   Exclude:
@@ -69,31 +71,31 @@ Lint/UnreachableCode:
 Lint/Void:
   Exclude:
     - lib/jekyll/site.rb
-Lint/BinaryOperatorWithIdenticalOperands: # (new in 0.89)
+Lint/BinaryOperatorWithIdenticalOperands:
   Enabled: true
-Lint/DuplicateRequire: # (new in 0.90)
+Lint/DuplicateRequire:
   Enabled: true
-Lint/DuplicateRescueException: # (new in 0.89)
+Lint/DuplicateRescueException:
   Enabled: true
-Lint/EmptyConditionalBody: # (new in 0.89)
+Lint/EmptyConditionalBody:
   Enabled: true
-Lint/EmptyFile: # (new in 0.90)
+Lint/EmptyFile:
   Enabled: true
-Lint/FloatComparison: # (new in 0.89)
+Lint/FloatComparison:
   Enabled: true
-Lint/MissingSuper: # (new in 0.89)
+Lint/MissingSuper:
+  Enabled: false
+Lint/OutOfRangeRegexpRef:
   Enabled: true
-Lint/OutOfRangeRegexpRef: # (new in 0.89)
+Lint/SelfAssignment:
   Enabled: true
-Lint/SelfAssignment: # (new in 0.89)
+Lint/TopLevelReturnWithArgument:
   Enabled: true
-Lint/TopLevelReturnWithArgument: # (new in 0.89)
+Lint/TrailingCommaInAttributeDeclaration:
   Enabled: true
-Lint/TrailingCommaInAttributeDeclaration: # (new in 0.90)
+Lint/UnreachableLoop:
   Enabled: true
-Lint/UnreachableLoop: # (new in 0.89)
-  Enabled: true
-Lint/UselessMethodDefinition: # (new in 0.90)
+Lint/UselessMethodDefinition:
   Enabled: true
 
 Metrics/AbcSize:
@@ -264,21 +266,24 @@ Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: consistent_comma
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
-Style/CombinableLoops: # (new in 0.90)
+Style/CombinableLoops:
   Enabled: true
-Style/ExplicitBlockArgument: # (new in 0.89)
+Style/ExplicitBlockArgument:
+  Enabled: false
+Style/GlobalStdStream:
   Enabled: true
-Style/GlobalStdStream: # (new in 0.89)
+Style/KeywordParametersOrder:
   Enabled: true
-Style/KeywordParametersOrder: # (new in 0.90)
+Style/OptionalBooleanParameter:
   Enabled: true
-Style/OptionalBooleanParameter: # (new in 0.89)
+Style/RedundantSelfAssignment:
   Enabled: true
-Style/RedundantSelfAssignment: # (new in 0.90)
+Style/SingleArgumentDig:
   Enabled: true
-Style/SingleArgumentDig: # (new in 0.89)
+Style/SoleNestedConditional:
   Enabled: true
-Style/SoleNestedConditional: # (new in 0.89)
+Style/StringConcatenation:
   Enabled: true
-Style/StringConcatenation: # (new in 0.89)
-  Enabled: true
+  Exclude:
+    - lib/jekyll/commands/*.rb
+    - test/**/*.rb

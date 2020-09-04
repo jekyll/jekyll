@@ -107,7 +107,7 @@ class TestRegenerator < JekyllUnitTest
     end
 
     teardown do
-      File.rename("#{@layout_path}.tmp", @layout_path)
+      File.rename(@layout_path + ".tmp", @layout_path)
     end
 
     should "handle deleted/nonexistent dependencies" do
@@ -117,7 +117,7 @@ class TestRegenerator < JekyllUnitTest
       assert_exist @layout_path
       @regenerator.add_dependency(path, @layout_path)
 
-      File.rename(@layout_path, "#{@layout_path}.tmp")
+      File.rename(@layout_path, @layout_path + ".tmp")
       refute File.exist?(@layout_path)
 
       @regenerator.clear_cache

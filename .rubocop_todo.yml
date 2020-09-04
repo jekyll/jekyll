@@ -6,17 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 7
-Lint/MissingSuper:
-  Exclude:
-    - 'lib/jekyll/converter.rb'
-    - 'lib/jekyll/converters/markdown/kramdown_parser.rb'
-    - 'lib/jekyll/converters/smartypants.rb'
-    - 'lib/jekyll/drops/drop.rb'
-    - 'lib/jekyll/plugin.rb'
-    - 'lib/jekyll/stevenson.rb'
-    - 'test/test_liquid_extensions.rb'
-
 # Offense count: 1
 Style/CombinableLoops:
   Exclude:

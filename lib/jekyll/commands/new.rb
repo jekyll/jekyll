@@ -46,7 +46,7 @@ module Jekyll
         end
 
         def create_blank_site(path)
-          FileUtils.cp_r "#{blank_template}/.", path
+          FileUtils.cp_r blank_template + "/.", path
           FileUtils.chmod_R "u+w", path
 
           Dir.chdir(path) do
@@ -119,7 +119,7 @@ module Jekyll
         end
 
         def create_sample_files(path)
-          FileUtils.cp_r "#{site_template}/.", path
+          FileUtils.cp_r site_template + "/.", path
           FileUtils.chmod_R "u+w", path
           FileUtils.rm File.expand_path(scaffold_path, path)
         end

@@ -53,10 +53,10 @@ module Jekyll
       file.split(".")[0..-2].join(".")
     end
 
-    def within(directory, &block)
+    def within(directory)
       return unless File.exist?(directory)
 
-      Dir.chdir(directory, &block)
+      Dir.chdir(directory) { yield }
     end
   end
 end

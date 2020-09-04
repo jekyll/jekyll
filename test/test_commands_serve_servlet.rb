@@ -5,12 +5,12 @@ require "helper"
 require "net/http"
 
 class TestCommandsServeServlet < JekyllUnitTest
-  def get(path, &block)
+  def get(path)
     TestWEBrick.mount_server do |_server, addr, port|
       http = Net::HTTP.new(addr, port)
       req = Net::HTTP::Get.new(path)
 
-      http.request(req, &block)
+      http.request(req) { |response| yield(response) }
     end
   end
 
