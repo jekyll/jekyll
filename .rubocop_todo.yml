@@ -6,6 +6,15 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
+# Offense count: 2
+# Cop supports --auto-correct.
+# Configuration parameters: AllowForAlignment, EnforcedStyleForExponentOperator.
+# SupportedStylesForExponentOperator: space, no_space
+Layout/SpaceAroundOperators:
+  Exclude:
+    - 'lib/jekyll/commands/build.rb'
+    - 'test/test_configuration.rb'
+
 # Offense count: 1
 Style/CombinableLoops:
   Exclude:
@@ -16,9 +25,3 @@ Style/OptionalBooleanParameter:
   Exclude:
     - 'lib/jekyll/collection.rb'
     - 'lib/jekyll/log_adapter.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/StringConcatenation:
-  Exclude:
-    - 'test/test_tags.rb'
