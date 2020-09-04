@@ -132,6 +132,8 @@ Performance/StringInclude:
   Enabled: true
   Exclude:
     - lib/jekyll/utils/platforms.rb
+Performance/Sum:
+  Enabled: true
 
 Security/MarshalLoad:
   Exclude:
