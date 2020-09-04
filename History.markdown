@@ -24,6 +24,7 @@
   * Update rubocop gem to 0.87.1 (#8287)
   * Update RuboCop to-do file (#8296)
   * Fix `rake console` generating LoadError (#8312)
+  * Configure Performance cops (#8369)
 
 ### Bug Fixes
 
