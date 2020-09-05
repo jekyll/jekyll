@@ -59,6 +59,23 @@ sudo apt-get update
 sudo apt-get install ruby2.5 ruby2.5-dev build-essential dh-autoreconf
 ```
 
+Next, configure `gem` environment so that packages are installed in your $HOME directory
+(which means `sudo` is no longer required).  Add the following to the bottom of your
+`.bashrc` file:
+
+```sh
+# Ruby exports
+
+export GEM_HOME=$HOME/gems
+export PATH=$HOME/gems/bin:$PATH
+```
+
+Then reload it:
+
+```sh
+source .bashrc
+```
+
 Next let's update our Ruby gems:
 
 ```sh
