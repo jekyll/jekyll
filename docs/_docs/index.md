@@ -6,19 +6,24 @@ redirect_from:
   - /docs/quickstart/
   - /docs/extras/
 ---
-Jekyll is a static site generator. You give it text written in your
-favorite markup language and it uses layouts to create a static website. You can
-tweak how you want the site URLs to look, what data gets displayed on the
-site, and more.
+Jekyll is a static site generator. It takes text written in your
+favorite markup language and uses layouts to create a static website. You can
+tweak the site's look and feel, URLs, the data displayed on the page, and more. 
 
 ## Prerequisites
 
-See [requirements]({{ '/docs/installation/#requirements' | relative_url }}).
+Jekyll requires the following:
+
+* Ruby version **{{ site.data.ruby.min_version }}** or higher
+* RubyGems
+* GCC and Make
+
+See [Requirements]({{ '/docs/installation/#requirements' | relative_url }}) for guides and details.
 
 ## Instructions
 
-1. Install a full [Ruby development environment]({{ '/docs/installation/' | relative_url }}).
-2. Install Jekyll and [bundler]({{ '/docs/ruby-101/#bundler' | relative_url }}) [gems]({{ '/docs/ruby-101/#gems' | relative_url }}).
+1. Install all [prerequisites]({{ '/docs/installation/' | relative_url }}).
+2. Install the jekyll and bundler [gems]({{ '/docs/ruby-101/#gems' | relative_url }}).
 ```
 gem install jekyll bundler
 ```
@@ -36,13 +41,12 @@ bundle exec jekyll serve
 ```
 6. Browse to [http://localhost:4000](http://localhost:4000){:target="_blank"}
 
-{: .note}
-Pass the `--livereload` option to the serve command if you want your browser to auto-refresh on each change you make: `bundle exec jekyll serve --livereload`
+{: .note .info}
+Pass the `--livereload` option to `serve` to automatically refresh the page with each change you make to the source files: `bundle exec jekyll serve --livereload`
 
 
-If you encounter any errors during this process, see the
-[troubleshooting]({{ '/docs/troubleshooting/#configuration-problems' | relative_url }}) page. Also,
-make sure you've installed the development headers and other prerequisites as
-mentioned on the [requirements]({{ '/docs/installation/#requirements' | relative_url }}) page.
+If you encounter any errors during this process, check that you have installed all the prerequisites in [Requirements]({{ '/docs/installation/#requirements' | relative_url }}). 
+If you still have issues, see [Troubleshooting]({{ '/docs/troubleshooting/#configuration-problems' | relative_url }}).
 
-Note: Installation might be different depending on your operating system. See our [guides](https://jekyllrb.com/docs/installation/#guides) for OS specific instructions.
+{: .note .info}
+Installation varies based on your operating system. See our [guides]({{ '/docs/installation/#guides' | relative_url }}) for OS-specific instructions.

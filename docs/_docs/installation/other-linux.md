@@ -2,21 +2,30 @@
 title: Jekyll on Linux
 permalink: /docs/installation/other-linux/
 ---
-Installation on other Linux distributions works similarly as on [Ubuntu](../ubuntu/).
 
-On Fedora, the dependencies can be installed as follows:
+Installation on other Linux distributions works similarly to installing on [Ubuntu](../ubuntu/).
+
+## Install prerequisites
+
+### Fedora
 
 ```sh
 sudo dnf install ruby ruby-devel @development-tools
 ```
+### RHEL8/CentOS8
 
-On Debian:
+```sh
+sudo dnf install ruby ruby-devel
+sudo dnf group install "Development Tools"
+```
+
+### Debian
 
 ```sh
 sudo apt-get install ruby-full build-essential
 ```
 
-On Gentoo Linux:
+### Gentoo
 
 ```sh
 sudo emerge -av jekyll
@@ -28,22 +37,23 @@ or
 sudo emerge --ask --verbose jekyll
 ```
 
-On ArchLinux:
+### ArchLinux
 
 ```sh
 sudo pacman -S ruby base-devel
 ```
 
-On openSUSE:
+### OpenSUSE
 
 ```sh
 sudo zypper install -t pattern devel_ruby devel_C_C++
 ```
 
-On Clear Linux:
+### Clear Linux
 
 ```sh
 sudo swupd bundle-add ruby-basic
 ```
+## Install Jekyll
 
-The rest works the same as on [Ubuntu](../ubuntu/).
+Follow the instructions for [Ubuntu](../ubuntu/).
