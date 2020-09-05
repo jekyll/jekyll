@@ -18,6 +18,7 @@
   * Clarify description of `safe` option (#8354)
   * Simplifying the Git post-receive hook-example (#8358)
   * Add missing doc for build and serve commands (#8365)
+  * Docs Review: Getting Started (#8372)
 
 ### Development Fixes
 
