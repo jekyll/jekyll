@@ -16,6 +16,9 @@
   * Update documentation on third party site (#8352)
   * Update default.md with info requested in #8314 (#8353)
   * Clarify description of `safe` option (#8354)
+  * Simplifying the Git post-receive hook-example (#8358)
+  * Add missing doc for build and serve commands (#8365)
+  * Docs Review: Getting Started (#8372)
 
 ### Development Fixes
 
@@ -24,6 +27,8 @@
   * Update rubocop gem to 0.87.1 (#8287)
   * Update RuboCop to-do file (#8296)
   * Fix `rake console` generating LoadError (#8312)
+  * Configure Performance cops (#8369)
+  * Update rubocop gem to 0.90.0 (#8313)
 
 ### Bug Fixes
 
@@ -34,6 +39,7 @@
 
   * Warn on command-line with permalink conflict (#8342)
   * Supress warning issued for redirect pages (#8347)
+  * Add post_convert hook to modify HTML content before layout (#8368)
 
 ## 4.1.1 / 2020-06-24
 

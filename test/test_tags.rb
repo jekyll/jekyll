@@ -7,7 +7,6 @@ class TestTags < JekyllUnitTest
     FileUtils.mkdir_p("tmp")
   end
 
-  # rubocop:disable Metrics/AbcSize
   def create_post(content, override = {}, converter_class = Jekyll::Converters::Markdown)
     site = fixture_site({ "highlighter" => "rouge" }.merge(override))
 
@@ -23,7 +22,6 @@ class TestTags < JekyllUnitTest
     @result = Liquid::Template.parse(content).render!(payload, info)
     @result = @converter.convert(@result)
   end
-  # rubocop:enable Metrics/AbcSize
 
   def fill_post(code, override = {})
     content = <<~CONTENT

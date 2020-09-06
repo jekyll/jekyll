@@ -66,7 +66,7 @@ module Jekyll
     # Render the document.
     #
     # Returns String rendered document output
-    # rubocop: disable Metrics/AbcSize
+    # rubocop: disable Metrics/AbcSize, Metrics/MethodLength
     def render_document
       info = {
         :registers        => { :site => site, :page => payload["page"] },
@@ -84,6 +84,10 @@ module Jekyll
       output = convert(output.to_s)
       document.content = output
 
+      Jekyll.logger.debug "Post-Convert Hooks:", document.relative_path
+      document.trigger_hooks(:post_convert)
+      output = document.content
+
       if document.place_in_layout?
         Jekyll.logger.debug "Rendering Layout:", document.relative_path
         output = place_in_layouts(output, payload, info)
@@ -91,7 +95,7 @@ module Jekyll
 
       output
     end
-    # rubocop: enable Metrics/AbcSize
+    # rubocop: enable Metrics/AbcSize, Metrics/MethodLength
 
     # Convert the document using the converters which match this renderer's document.
     #
