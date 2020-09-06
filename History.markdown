@@ -19,6 +19,7 @@
   * Simplifying the Git post-receive hook-example (#8358)
   * Add missing doc for build and serve commands (#8365)
   * Docs Review: Getting Started (#8372)
+  * Add note about rebooting system after installation (#8359)
 
 ### Development Fixes
 
