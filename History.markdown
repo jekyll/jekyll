@@ -20,6 +20,7 @@
   * Add missing doc for build and serve commands (#8365)
   * Docs Review: Getting Started (#8372)
   * Add note about rebooting system after installation (#8359)
+  * Use data file to render table at `/docs/configuration/options/#global-configuration` (#8377)
 
 ### Development Fixes
 
