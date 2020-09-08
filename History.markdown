@@ -21,6 +21,7 @@
   * Docs Review: Getting Started (#8372)
   * Add note about rebooting system after installation (#8359)
   * Use data file to render table at `/docs/configuration/options/#global-configuration` (#8377)
+  * Docs: Use data file(s) to render table(s) at https://jekyllrb.com/docs/configuration/options/ (#8380)
 
 ### Development Fixes
 
