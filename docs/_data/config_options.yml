@@ -35,3 +35,149 @@ global:
 - name: Encoding
   description: "Set the encoding of files by name (only available for Ruby 1.9 or later). The default value is <code>utf-8</code> starting in 2.0.0, and <code>nil</code> before 2.0.0, which will yield the Ruby default of <code>ASCII-8BIT</code>. Available encodings can be shown by the command <code>ruby -e 'puts Encoding::list.join(\"\\n\")'</code>."
   option: "encoding: ENCODING"
+build:
+- name: Regeneration
+  description: Enable auto-regeneration of the site when files are modified.
+  flag: -w, --[no-]watch
+- name: Configuration
+  description: >-
+    Specify config files instead of using <code>_config.yml</code> automatically. 
+    Settings in later files override settings in earlier files.
+  flag: --config FILE1[,FILE2,...]
+- name: Plugins
+  description: >-
+    Specify plugin directories instead of using <code>_plugins/</code> automatically.
+  option: "plugins_dir: [ DIR1,... ]"
+  flag: -p, --plugins DIR1[,DIR2,...]
+- name: Layouts
+  description: >-
+    Specify layout directory instead of using <code>_layouts/</code> automatically.
+  option: "layout_dir: DIR"
+  flag: --layouts DIR
+- name: Drafts
+  description: Process and render draft posts.
+  option: "show_drafts: BOOL"
+  flag: -D, --drafts
+- name: Environment
+  description: Use a specific environment value in the build.
+  flag: JEKYLL_ENV=production
+- name: Future
+  description: Publish posts or collection documents with a future date.
+  option: "future: BOOL"
+  flag: --future
+- name: Unpublished
+  description: Render posts that were marked as unpublished.
+  option: "unpublished: BOOL"
+  flag: --unpublished
+- name: LSI
+  description: >-
+    Produce an index for related posts. Requires the
+    <a href="https://jekyll.github.io/classifier-reborn/">classifier-reborn</a> plugin.
+  option: "lsi: BOOL"
+  flag: --lsi
+- name: Limit Posts
+  description: Limit the number of posts to parse and publish.
+  option: "limit_posts: NUM"
+  flag: --limit_posts NUM
+- name: Force polling
+  description: Force watch to use polling.
+  option: "force_polling: BOOL"
+  flag: --force_polling
+- name: Verbose output
+  description: Print verbose output.
+  flag: -V, --verbose
+- name: Silence Output
+  description: Silence the normal output from Jekyll during a build.
+  flag: -q, --quiet
+- name: Incremental build
+  description: >-
+    Enable the experimental incremental build feature. Incremental build only
+    re-builds posts and pages that have changed, resulting in significant performance
+    improvements for large sites, but may also break site generation in certain
+    cases.
+  option: "incremental: BOOL"
+  flag: -I, --incremental
+- name: Liquid profiler
+  description: Generate a Liquid rendering profile to help you identify performance bottlenecks.
+  option: "profile: BOOL"
+  flag: --profile
+- name: Strict Front Matter
+  description: Cause a build to fail if there is a YAML syntax error in a page's front matter.
+  option: "strict_front_matter: BOOL"
+  flag: --strict_front_matter
+- name: Base URL
+  description: Serve the website from the given base URL.
+  option: "baseurl: URL"
+  flag: -b, --baseurl URL
+- name: Trace
+  description: Show the full backtrace when an error occurs.
+  flag: -t, --trace
+serve:
+- name: Local Server Port
+  description: Listen on the given port.
+  option: 
+  - "port: PORT"
+  flag:
+  - -P, --port PORT
+- name: Local Server Hostname
+  description: Listen at the given hostname.
+  option: 
+  - "host: HOSTNAME"
+  flag:
+  - -H, --host HOSTNAME
+- name: Live Reload
+  description: Reload a page automatically on the browser when its content is edited.
+  option: 
+  - "livereload: BOOL"
+  flag:
+  - -l, --livereload
+- name: Live Reload Ignore
+  description: File glob patterns for LiveReload to ignore.
+  option: 
+  - "livereload_ignore: [ GLOB1,... ]"
+  flag:
+  - --livereload-ignore GLOB1[,GLOB2,...]
+- name: Live Reload Min/Max Delay
+  description: Minimum/Maximum delay before automatically reloading page.
+  option:
+  - "livereload_min_delay: SECONDS"
+  - "livereload_max_delay: SECONDS"
+  flag: 
+  - --livereload-min-delay SECONDS
+  - --livereload-max-delay SECONDS
+- name: Live Reload Port
+  description: Port for LiveReload to listen on.
+  flag:
+  - --livereload-port PORT
+- name: Open URL
+  description: Open the site's URL in the browser.
+  option: 
+  - "open_url: BOOL"
+  flag:
+  - -o, --open-url
+- name: Detach
+  description: Detach the server from the terminal.
+  option: 
+  - "detach: BOOL"
+  flag:
+  - -B, --detach
+- name: Skips the initial site build
+  description: Skips the initial site build which occurs before the server is started.
+  option: 
+  - "skip_initial_build: BOOL"
+  flag:
+  - --skip-initial-build
+- name: Show Directory Listing
+  description: Show a directory listing instead of loading your index file.
+  option: 
+  - "show_dir_listing: BOOL"
+  flag:
+  - --show-dir-listing
+- name: X.509 (SSL) Private Key
+  description: SSL Private Key, stored or symlinked in the site source.
+  flag:
+  - --ssl-key
+- name: X.509 (SSL) Certificate
+  description: SSL Public certificate, stored or symlinked in the site source.
+  flag:
+  - --ssl-cert
