@@ -92,12 +92,8 @@ class="flag">flags</code> (specified on the command-line) that control them.
           <p class="description">{{ setting.description }}</p>
         </td> 
         <td class="align-center">
-          {% if setting.option %}
-            <p><code class="option">{{ setting.option }}</code></p>
-          {% endif %}
-          {% if setting.flag %}
-            <p><code class="flag">{{ setting.flag }}</code></p>
-          {% endif %}
+          {% if setting.option %}<p><code class="option">{{ setting.option }}</code></p>{% endif %}
+          {% if setting.flag %}<p><code class="flag">{{ setting.flag }}</code></p>{% endif %}
         </td>
       </tr>
     {% endfor %}
@@ -133,15 +129,19 @@ before your site is served.
         </td> 
         <td class="align-center">
           {% if setting.option %}
+            <p><code class="option">{{ setting.option }}</code></p>
+          {% elsif setting.options %}
             <p>
-              {% for option in setting.option %}
+              {% for option in setting.options %}
                 <code class="option">{{ option }}</code><br>
               {% endfor %}
             </p>
           {% endif %}
           {% if setting.flag %}
+            <p><code class="flag">{{ setting.flag }}</code></p>
+          {% elsif setting.flags %}
             <p>
-            {% for flag in setting.flag %}
+            {% for flag in setting.flags %}
               <code class="flag">{{ flag }}</code><br>
             {% endfor %}
             </p>
