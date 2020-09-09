@@ -1,0 +1,110 @@
+- name: Regeneration
+  description: Enable auto-regeneration of the site when files are modified.
+  flag: "-w, --[no-]watch"
+
+
+- name: Configuration
+  description: >-
+    Specify config files instead of using <code>_config.yml</code> automatically.
+    Settings in later files override settings in earlier files.
+  flag: "--config FILE1[,FILE2,...]"
+
+
+- name: Plugins
+  description: >-
+    Specify plugin directories instead of using <code>_plugins/</code> automatically.
+  option: "plugins_dir: [ DIR1,... ]"
+  flag: "-p, --plugins DIR1[,DIR2,...]"
+
+
+- name: Layouts
+  description: >-
+    Specify layout directory instead of using <code>_layouts/</code> automatically.
+  option: "layout_dir: DIR"
+  flag: --layouts DIR
+
+
+- name: Drafts
+  description: Process and render draft posts.
+  option: "show_drafts: BOOL"
+  flag: -D, --drafts
+
+
+- name: Environment
+  description: Use a specific environment value in the build.
+  flag: JEKYLL_ENV=production
+
+
+- name: Future
+  description: Publish posts or collection documents with a future date.
+  option: "future: BOOL"
+  flag: --future
+
+
+- name: Unpublished
+  description: Render posts that were marked as unpublished.
+  option: "unpublished: BOOL"
+  flag: --unpublished
+
+
+- name: LSI
+  description: >-
+    Produce an index for related posts. Requires the
+    <a href="https://jekyll.github.io/classifier-reborn/">classifier-reborn</a> plugin.
+  option: "lsi: BOOL"
+  flag: --lsi
+
+
+- name: Limit Posts
+  description: Limit the number of posts to parse and publish.
+  option: "limit_posts: NUM"
+  flag: --limit_posts NUM
+
+
+- name: Force polling
+  description: Force watch to use polling.
+  option: "force_polling: BOOL"
+  flag: --force_polling
+
+
+- name: Verbose output
+  description: Print verbose output.
+  flag: -V, --verbose
+
+
+- name: Silence Output
+  description: Silence the normal output from Jekyll during a build.
+  flag: -q, --quiet
+
+
+- name: Incremental build
+  description: >-
+    Enable the experimental incremental build feature. Incremental build only
+    re-builds posts and pages that have changed, resulting in significant performance
+    improvements for large sites, but may also break site generation in certain
+    cases.
+  option: "incremental: BOOL"
+  flag: -I, --incremental
+
+
+- name: Liquid profiler
+  description: Generate a Liquid rendering profile to help you identify performance bottlenecks.
+  option: "profile: BOOL"
+  flag: --profile
+
+
+- name: Strict Front Matter
+  description: Cause a build to fail if there is a YAML syntax error in a page's front matter.
+  option: "strict_front_matter: BOOL"
+  flag: --strict_front_matter
+
+
+- name: Base URL
+  description: Serve the website from the given base URL.
+  option: "baseurl: URL"
+  flag: -b, --baseurl URL
+
+
+- name: Trace
+  description: Show the full backtrace when an error occurs.
+  flag: -t, --trace
