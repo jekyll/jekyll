@@ -46,8 +46,6 @@ module Jekyll
       @collection = relations[:collection]
       @type = @collection.label.to_sym
 
-      @has_yaml_header = nil
-
       if draft?
         categories_from_path("_drafts")
       else
