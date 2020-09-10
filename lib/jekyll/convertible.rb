@@ -163,7 +163,7 @@ module Jekyll
     def render_with_liquid?
       return false if data["render_with_liquid"] == false
 
-      Jekyll::Utils.has_liquid_construct?(content)
+      Jekyll::Utils.liquid_construct?(content)
     end
 
     # Determine whether the file should be placed into layouts.

@@ -145,13 +145,11 @@ module Jekyll
     # Determine whether the given content string contains Liquid Tags or Vaiables
     #
     # Returns true is the string contains sequences of `{%` or `{{`
-    # rubocop: disable Naming/PredicateName
-    def has_liquid_construct?(content)
+    def liquid_construct?(content)
       return false if content.nil? || content.empty?
 
       content.include?("{%") || content.include?("{{")
     end
-    # rubocop: enable Naming/PredicateName
 
     # Slugify a filename or title.
     #
