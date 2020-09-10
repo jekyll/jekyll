@@ -49,7 +49,7 @@ module Jekyll
         file_path = @site.in_source_dir(base, entry)
         if File.directory?(file_path)
           dot_dirs << entry
-        elsif Utils.has_yaml_header?(file_path)
+        elsif Utils.yaml_header?(file_path)
           dot_pages << entry
         else
           dot_static_files << entry
@@ -177,7 +177,7 @@ module Jekyll
     def read_included_file(entry_path)
       dir  = File.dirname(entry_path).sub(site.source, "")
       file = Array(File.basename(entry_path))
-      if Utils.has_yaml_header?(entry_path)
+      if Utils.yaml_header?(entry_path)
         site.pages.concat(PageReader.new(site, dir).read(file))
       else
         site.static_files.concat(StaticFileReader.new(site, dir).read(file))

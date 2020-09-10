@@ -29,7 +29,7 @@ module Jekyll
       dir = File.dirname(path.sub("#{site.theme.root}/", ""))
       name = File.basename(path)
 
-      if Utils.has_yaml_header?(path)
+      if Utils.yaml_header?(path)
         append_unless_exists site.pages,
                              Jekyll::Page.new(site, base, dir, name)
       else

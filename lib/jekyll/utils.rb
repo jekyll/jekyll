@@ -136,8 +136,7 @@ module Jekyll
     # Determines whether a given file has
     #
     # Returns true if the YAML front matter is present.
-    # rubocop: disable Naming/PredicateName
-    def has_yaml_header?(file)
+    def yaml_header?(file)
       File.open(file, "rb", &:readline).match? %r!\A---\s*\r?\n!
     rescue EOFError
       false
@@ -146,6 +145,7 @@ module Jekyll
     # Determine whether the given content string contains Liquid Tags or Vaiables
     #
     # Returns true is the string contains sequences of `{%` or `{{`
+    # rubocop: disable Naming/PredicateName
     def has_liquid_construct?(content)
       return false if content.nil? || content.empty?
 
