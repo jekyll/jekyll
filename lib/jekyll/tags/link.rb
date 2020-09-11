@@ -21,11 +21,12 @@ module Jekyll
         @context = context
         site = context.registers[:site]
         relative_path = Liquid::Template.parse(@relative_path).render(context)
+        relative_path_with_leading_slash = PathManager.join("", relative_path)
 
         site.each_site_file do |item|
           return relative_url(item) if item.relative_path == relative_path
           # This takes care of the case for static files that have a leading /
-          return relative_url(item) if item.relative_path == "/#{relative_path}"
+          return relative_url(item) if item.relative_path == relative_path_with_leading_slash
         end
 
         raise ArgumentError, <<~MSG
