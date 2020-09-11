@@ -40,6 +40,7 @@
   * Replace nested conditional with guard clauses (#8294)
   * fix: security bump (#8349)
   * Fix path matching regex in post_url Liquid tag (#8375)
+  * Reduce string allocations from the `link` tag (#8387)
 
 ### Minor Enhancements
 
