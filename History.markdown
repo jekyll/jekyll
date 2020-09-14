@@ -42,6 +42,7 @@
   * Fix path matching regex in post_url Liquid tag (#8375)
   * Reduce string allocations from the `link` tag (#8387)
   * Optimize parsing of parameters in include tag (#8192)
+  * Stash documents `write?` attribute in a variable (#8389)
 
 ### Minor Enhancements
 
