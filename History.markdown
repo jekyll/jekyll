@@ -41,6 +41,7 @@
   * fix: security bump (#8349)
   * Fix path matching regex in post_url Liquid tag (#8375)
   * Reduce string allocations from the `link` tag (#8387)
+  * Optimize parsing of parameters in include tag (#8192)
 
 ### Minor Enhancements
 
