@@ -43,12 +43,11 @@ installed on the server:
 export GEM_HOME=$HOME/gems
 export PATH=$GEM_HOME/bin:$PATH
 
-GIT_REPO=$HOME/myrepo.git
 TMP_GIT_CLONE=$HOME/tmp/myrepo
 GEMFILE=$TMP_GIT_CLONE/Gemfile
 PUBLIC_WWW=/var/www/myrepo
 
-git clone $GIT_REPO $TMP_GIT_CLONE
+git clone $GIT_DIR $TMP_GIT_CLONE
 BUNDLE_GEMFILE=$GEMFILE bundle install
 BUNDLE_GEMFILE=$GEMFILE bundle exec jekyll build -s $TMP_GIT_CLONE -d $PUBLIC_WWW
 rm -Rf $TMP_GIT_CLONE

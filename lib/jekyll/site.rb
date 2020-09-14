@@ -221,6 +221,7 @@ module Jekyll
     #
     # Returns nothing.
     def write
+      Jekyll::Commands::Doctor.conflicting_urls(self)
       each_site_file do |item|
         item.write(dest) if regenerator.regenerate?(item)
       end

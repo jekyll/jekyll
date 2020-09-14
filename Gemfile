@@ -15,7 +15,7 @@ end
 #
 
 group :test do
-  gem "cucumber", "~> 3.0"
+  gem "cucumber", "~> 4.1"
   gem "httpclient"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
@@ -23,7 +23,7 @@ group :test do
   gem "nokogiri", "~> 1.7"
   gem "rspec"
   gem "rspec-mocks"
-  gem "rubocop", "~> 0.84.0"
+  gem "rubocop", "~> 0.90.0"
   gem "rubocop-performance"
   gem "test-dependency-theme", :path => File.expand_path("test/fixtures/test-dependency-theme", __dir__)
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)

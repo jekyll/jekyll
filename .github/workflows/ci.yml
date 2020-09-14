@@ -22,7 +22,6 @@ jobs:
         - default-site
         os:
         - ubuntu-latest
-        - windows-latest
     steps:
     - uses: actions/checkout@v2
       with:

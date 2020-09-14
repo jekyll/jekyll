@@ -22,7 +22,7 @@ some of the most popular Jekyll resources.
 
 - [Community tutorials]({{ '/tutorials/home/' | relative_url }})
 - [Deploy Jekyll 4 on GitHub Pages]({{ '/docs/continuous-integration/github-actions/' | relative_url }})
-- [Deploy Jekyll on Vercel](https://github.com/zeit/now/tree/master/examples/jekyll)
+- [Deploy Jekyll on Vercel](https://github.com/vercel/vercel/tree/master/examples/jekyll)
 - [Deploy Jekyll 4 on Netlify](https://www.netlify.com/blog/2020/04/02/a-step-by-step-guide-jekyll-4.0-on-netlify/)
 - [CloudCannon Academy](https://learn.cloudcannon.com/) is a set of resources created by [CloudCannon](https://cloudcannon.com/) to help folks get up and running with Jekyll. They cover all skill levels, and even include some great video tutorials.
 - [Jekyll Cheatsheet](https://learn.cloudcannon.com/jekyll-cheat-sheet/) is a single-page resource for Jekyll filters, variables, and the like.
@@ -51,6 +51,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
 ### Forms
   - [Getform](https://getform.io)
   - [99Inbound](https://www.99inbound.com)
+  - [Formcake](https://formcake.com)
   - [Formingo](https://www.formingo.co/guides/jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=Jekyll%20Documentation)
   - [FormKeep](https://formkeep.com/guides/contact-form-jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=contact-form-jekyll)
   - [Formspark](https://formspark.io/)
@@ -62,6 +63,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
 
 ### Search
   - [Algolia](https://blog.algolia.com/instant-search-blog-documentation-jekyll-plugin/): Add a powerful instant search to your Jekyll site
+  - [Elastic Site Search](http://elastic.co/products/site-search/service?ultron=resources&blade=jekyll&hulk=referral): Another option for adding search to your Jekyll site, built on Elasticsearch
   - [Bonsai Search](https://docs.bonsai.io/article/217-jekyll): The easiest way to use Elasticsearch for your Jekyll site
   - [CloudSh](https://cloudsh.com/generators/How-to-setup-search-on-Jekyll/): Website search with a few lines of JavaScript
 

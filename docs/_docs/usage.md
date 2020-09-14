@@ -19,7 +19,7 @@ Typically you'll use `jekyll serve` while developing locally and `jekyll build` 
 
 For a full list of options and their argument, see [Build Command Options](/docs/configuration/options/#build-command-options).
 
-Here is some of the most common commands:
+Here are some of the most common commands:
 
 * `jekyll new PATH` - Creates a new Jekyll site with default gem-based theme at specified path. The directories will be created as necessary.
 * `jekyll new PATH --blank` - Creates a new blank Jekyll site scaffold at specified path.

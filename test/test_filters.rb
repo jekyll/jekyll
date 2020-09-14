@@ -790,11 +790,9 @@ class TestFilters < JekyllUnitTest
       should "successfully group array of Jekyll::Page's" do
         @filter.site.process
         grouping = @filter.group_by(@filter.site.pages, "layout")
+        names = ["default", "nil", ""]
         grouping.each do |g|
-          assert(
-            ["default", "nil", ""].include?(g["name"]),
-            "#{g["name"]} isn't a valid grouping."
-          )
+          assert names.include?(g["name"]), "#{g["name"]} isn't a valid grouping."
           case g["name"]
           when "default"
             assert(
@@ -816,7 +814,7 @@ class TestFilters < JekyllUnitTest
               "The list of grouped items for '' is not an Array."
             )
             # adjust array.size to ignore symlinked page in Windows
-            qty = Utils::Platforms.really_windows? ? 16 : 18
+            qty = Utils::Platforms.really_windows? ? 19 : 21
             assert_equal qty, g["items"].size
           end
         end
@@ -1284,11 +1282,9 @@ class TestFilters < JekyllUnitTest
       should "successfully group array of Jekyll::Page's" do
         @filter.site.process
         groups = @filter.group_by_exp(@filter.site.pages, "page", "page.layout | upcase")
+        names = ["DEFAULT", "NIL", ""]
         groups.each do |g|
-          assert(
-            ["DEFAULT", "NIL", ""].include?(g["name"]),
-            "#{g["name"]} isn't a valid grouping."
-          )
+          assert names.include?(g["name"]), "#{g["name"]} isn't a valid grouping."
           case g["name"]
           when "DEFAULT"
             assert(
@@ -1310,7 +1306,7 @@ class TestFilters < JekyllUnitTest
               "The list of grouped items for '' is not an Array."
             )
             # adjust array.size to ignore symlinked page in Windows
-            qty = Utils::Platforms.really_windows? ? 16 : 18
+            qty = Utils::Platforms.really_windows? ? 19 : 21
             assert_equal qty, g["items"].size
           end
         end
