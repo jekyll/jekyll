@@ -1,6 +1,7 @@
 ---
 layout: step
 title: Liquid
+menu_name: Step by Step Tutorial
 position: 2
 ---
 Liquid is where Jekyll starts to get more interesting. Liquid is a templating

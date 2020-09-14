@@ -1,6 +1,7 @@
 ---
 layout: step
 title: Front Matter
+menu_name: Step by Step Tutorial
 position: 3
 ---
 Front matter is a snippet of [YAML](http://yaml.org/) which sits between two

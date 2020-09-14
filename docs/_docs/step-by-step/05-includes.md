@@ -1,6 +1,7 @@
 ---
 layout: step
 title: Includes
+menu_name: Step by Step Tutorial
 position: 5
 ---
 The site is coming together; however, there's no way to navigate between

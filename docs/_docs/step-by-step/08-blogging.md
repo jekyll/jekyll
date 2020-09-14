@@ -1,6 +1,7 @@
 ---
 layout: step
 title: Blogging
+menu_name: Step by Step Tutorial
 position: 8
 ---
 You might be wondering how you can have a blog without a database. In true
