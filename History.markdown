@@ -34,6 +34,7 @@
   * Configure Performance cops (#8369)
   * Update rubocop gem to 0.90.0 (#8313)
   * Refactor Jekyll::Utils::Platforms (#7236)
+  * Bump RuboCop to v0.91.x (#8391)
 
 ### Bug Fixes
 
