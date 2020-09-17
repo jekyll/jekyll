@@ -77,7 +77,7 @@ called `_site`.
 * `jekyll serve` - Does `jekyll build` and runs it on a local web server at `http://localhost:4000`, rebuilding the site any time you make a change.
 
 {: .note .info}
-When you're developing a site, use `jekyll serve`.
+When you're developing a site, use `jekyll serve`. To force the browser to refresh with every change, use `jekyll serve --livereload`. 
 
 Run `jekyll serve` and go to
 <a href="http://localhost:4000" target="_blank" data-proofer-ignore>http://localhost:4000</a> in
@@ -89,4 +89,4 @@ HTML file from one place to another.
 Patience, young grasshopper, there's
 still much to learn!
 
-In the next step, we'll learn about Liquid and templating.
+Next. you'll learn about Liquid and templating.
