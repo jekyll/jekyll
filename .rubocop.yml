@@ -22,6 +22,8 @@ AllCops:
     - vendor/**/*
     - tmp/**/*
 
+Layout/BeginEndAlignment:
+  Enabled: true
 Layout/EmptyComment:
   Enabled: false
 Layout/EmptyLinesAroundAttributeAccessor:
@@ -53,6 +55,10 @@ Layout/SpaceAroundMethodCallOperator:
 
 Lint/BinaryOperatorWithIdenticalOperands:
   Enabled: true
+Lint/ConstantDefinitionInBlock:
+  Enabled: true
+  Exclude:
+    - test/**/*.rb
 Lint/DeprecatedOpenSSLConstant:
   Enabled: true
 Lint/DuplicateElsifCondition:
@@ -66,6 +72,8 @@ Lint/EmptyConditionalBody:
 Lint/EmptyFile:
   Enabled: true
 Lint/FloatComparison:
+  Enabled: true
+Lint/IdentityComparison:
   Enabled: true
 Lint/MissingSuper:
   Enabled: false
@@ -91,6 +99,8 @@ Lint/UnreachableCode:
 Lint/UnreachableLoop:
   Enabled: true
 Lint/UselessMethodDefinition:
+  Enabled: true
+Lint/UselessTimes:
   Enabled: true
 Lint/Void:
   Exclude:
