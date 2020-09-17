@@ -9,6 +9,7 @@ on:
       - master
 jobs:
   build_n_profile:
+    if: "!contains(github.event.commits[0].message, '[ci skip]')"
     runs-on: 'ubuntu-latest'
     steps:
     - name: Checkout Jekyll
