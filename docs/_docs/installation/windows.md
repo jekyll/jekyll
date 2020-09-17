@@ -26,7 +26,11 @@ We only cover RubyInstaller-2.4 and newer here. Older versions need to
    [RubyInstaller Documentation](https://github.com/oneclick/rubyinstaller2#using-the-installer-on-a-target-system)
 3. Open a new command prompt window from the start menu, so that changes to the `PATH` environment variable becomes effective.
    Install Jekyll and Bundler using `gem install jekyll bundler`
-4. Check if Jekyll installed properly: `jekyll -v`
+4. Check if Jekyll has been installed properly: `jekyll -v`
+
+{: .note .info}
+You may receive an error when checking if Jekyll has been installed properly. Reboot your system and run `jekyll -v` again.
+If the error persists, please open a [RubyInstaller issue](https://github.com/oneclick/rubyinstaller2/issues/new).
 
 That's it, you're ready to use Jekyll!
 

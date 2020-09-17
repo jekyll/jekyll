@@ -18,6 +18,11 @@
   * Clarify description of `safe` option (#8354)
   * Simplifying the Git post-receive hook-example (#8358)
   * Add missing doc for build and serve commands (#8365)
+  * Docs Review: Getting Started (#8372)
+  * Add note about rebooting system after installation (#8359)
+  * Use data file to render table at `/docs/configuration/options/#global-configuration` (#8377)
+  * Docs: Use data file(s) to render table(s) at https://jekyllrb.com/docs/configuration/options/ (#8380)
+  * Improve maintainability of config option data (#8383)
 
 ### Development Fixes
 
@@ -28,11 +33,17 @@
   * Fix `rake console` generating LoadError (#8312)
   * Configure Performance cops (#8369)
   * Update rubocop gem to 0.90.0 (#8313)
+  * Refactor Jekyll::Utils::Platforms (#7236)
+  * Bump RuboCop to v0.91.x (#8391)
 
 ### Bug Fixes
 
   * Replace nested conditional with guard clauses (#8294)
   * fix: security bump (#8349)
+  * Fix path matching regex in post_url Liquid tag (#8375)
+  * Reduce string allocations from the `link` tag (#8387)
+  * Optimize parsing of parameters in include tag (#8192)
+  * Stash documents `write?` attribute in a variable (#8389)
 
 ### Minor Enhancements
 

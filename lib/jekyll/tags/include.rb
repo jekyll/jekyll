@@ -36,20 +36,16 @@ module Jekyll
 
       def parse_params(context)
         params = {}
-        markup = @params
-
-        while (match = VALID_SYNTAX.match(markup))
-          markup = markup[match.end(0)..-1]
-
-          value = if match[2]
-                    match[2].gsub('\\"', '"')
-                  elsif match[3]
-                    match[3].gsub("\\'", "'")
-                  elsif match[4]
-                    context[match[4]]
+        @params.scan(VALID_SYNTAX) do |key, d_quoted, s_quoted, variable|
+          value = if d_quoted
+                    d_quoted.include?('\\"') ? d_quoted.gsub('\\"', '"') : d_quoted
+                  elsif s_quoted
+                    s_quoted.include?("\\'") ? s_quoted.gsub("\\'", "'") : s_quoted
+                  elsif variable
+                    context[variable]
                   end
 
-          params[match[1]] = value
+          params[key] = value
         end
         params
       end

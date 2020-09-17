@@ -352,7 +352,9 @@ module Jekyll
     # method returns true, and if the site's Publisher will publish the document.
     # False otherwise.
     def write?
-      collection&.write? && site.publisher.publish?(self)
+      return @write_p if defined?(@write_p)
+
+      @write_p = collection&.write? && site.publisher.publish?(self)
     end
 
     # The Document excerpt_separator, from the YAML Front-Matter or site
