@@ -36,20 +36,16 @@ module Jekyll
 
       def parse_params(context)
         params = {}
-        markup = @params
-
-        while (match = VALID_SYNTAX.match(markup))
-          markup = markup[match.end(0)..-1]
-
-          value = if match[2]
-                    match[2].gsub('\\"', '"')
-                  elsif match[3]
-                    match[3].gsub("\\'", "'")
-                  elsif match[4]
-                    context[match[4]]
+        @params.scan(VALID_SYNTAX) do |key, d_quoted, s_quoted, variable|
+          value = if d_quoted
+                    d_quoted.include?('\\"') ? d_quoted.gsub('\\"', '"') : d_quoted
+                  elsif s_quoted
+                    s_quoted.include?("\\'") ? s_quoted.gsub("\\'", "'") : s_quoted
+                  elsif variable
+                    context[variable]
                   end
 
-          params[match[1]] = value
+          params[key] = value
         end
         params
       end
@@ -253,20 +249,18 @@ module Jekyll
       end
 
       def page_path(context)
-        if context.registers[:page].nil?
-          context.registers[:site].source
-        else
-          site = context.registers[:site]
-          page_payload  = context.registers[:page]
-          resource_path = \
-            if page_payload["collection"].nil?
-              page_payload["path"]
-            else
-              File.join(site.config["collections_dir"], page_payload["path"])
-            end
-          resource_path.sub!(%r!/#excerpt\z!, "")
-          site.in_source_dir File.dirname(resource_path)
-        end
+        page, site = context.registers.values_at(:page, :site)
+        return site.source unless page
+
+        site.in_source_dir File.dirname(resource_path(page, site))
+      end
+
+      private
+
+      def resource_path(page, site)
+        path = page["path"]
+        path = File.join(site.config["collections_dir"], path) if page["collection"]
+        path.sub(%r!/#excerpt\z!, "")
       end
     end
   end

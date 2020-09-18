@@ -7,7 +7,6 @@ class TestTags < JekyllUnitTest
     FileUtils.mkdir_p("tmp")
   end
 
-  # rubocop:disable Metrics/AbcSize
   def create_post(content, override = {}, converter_class = Jekyll::Converters::Markdown)
     site = fixture_site({ "highlighter" => "rouge" }.merge(override))
 
@@ -23,7 +22,6 @@ class TestTags < JekyllUnitTest
     @result = Liquid::Template.parse(content).render!(payload, info)
     @result = @converter.convert(@result)
   end
-  # rubocop:enable Metrics/AbcSize
 
   def fill_post(code, override = {})
     content = <<~CONTENT
@@ -275,7 +273,7 @@ class TestTags < JekyllUnitTest
         expected = <<~EOS
           <p>This is not yet highlighted</p>\n
           <figure class="highlight"><pre><code class="language-php" data-lang="php"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-          </pre></td><td class="code"><pre><span class="nx">test</span>\n</pre></td></tr></tbody></table></code></pre></figure>\n
+          </pre></td><td class="code"><pre><span class="n">test</span>\n</pre></td></tr></tbody></table></code></pre></figure>\n
           <p>This should not be highlighted, right?</p>
         EOS
         assert_match(expected, @result)

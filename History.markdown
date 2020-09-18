@@ -1,9 +1,56 @@
 ## HEAD
 
+  * Update default.html (#8305)
+
 ### Documentation
 
   * Update pointer to special permalink variables for collections (#8274)
   * Fix special treatment for &#39;page 1&#39; in docs of pagination (#8230)
+  * Add Formcake to forms section (#8283)
+  * Add a note on the rendering process in the docs (#8291)
+  * Add refactoring type to PULL_REQUEST_TEMPLATE (#8297)
+  * Update resources.md (#7864)
+  * Extra apostrophes in an URL (#8319)
+  * Clarify target of subordinate clause (#8320)
+  * Cherry-pick commits from conflicting branch `docs-40`
+  * Update documentation on third party site (#8352)
+  * Update default.md with info requested in #8314 (#8353)
+  * Clarify description of `safe` option (#8354)
+  * Simplifying the Git post-receive hook-example (#8358)
+  * Add missing doc for build and serve commands (#8365)
+  * Docs Review: Getting Started (#8372)
+  * Add note about rebooting system after installation (#8359)
+  * Use data file to render table at `/docs/configuration/options/#global-configuration` (#8377)
+  * Docs: Use data file(s) to render table(s) at https://jekyllrb.com/docs/configuration/options/ (#8380)
+  * Improve maintainability of config option data (#8383)
+
+### Development Fixes
+
+  * Update cucumber gem to version 4.1 (#8278)
+  * Move permalink styles data to constant (#8282)
+  * Update rubocop gem to 0.87.1 (#8287)
+  * Update RuboCop to-do file (#8296)
+  * Fix `rake console` generating LoadError (#8312)
+  * Configure Performance cops (#8369)
+  * Update rubocop gem to 0.90.0 (#8313)
+  * Refactor Jekyll::Utils::Platforms (#7236)
+  * Bump RuboCop to v0.91.x (#8391)
+  * Add workflow to build and profile third-party repo (#8398)
+
+### Bug Fixes
+
+  * Replace nested conditional with guard clauses (#8294)
+  * fix: security bump (#8349)
+  * Fix path matching regex in post_url Liquid tag (#8375)
+  * Reduce string allocations from the `link` tag (#8387)
+  * Optimize parsing of parameters in include tag (#8192)
+  * Stash documents `write?` attribute in a variable (#8389)
+
+### Minor Enhancements
+
+  * Warn on command-line with permalink conflict (#8342)
+  * Supress warning issued for redirect pages (#8347)
+  * Add post_convert hook to modify HTML content before layout (#8368)
 
 ## 4.1.1 / 2020-06-24
 
@@ -197,6 +244,13 @@
 ### Development Fixes
 
   * Fix Kramdown converter based tests for v4.0.x (#8143)
+
+## 3.9.0 / 2020-08-05
+
+### Minor Enhancements
+
+  * Allow use of kramdown v2 (#8322)
+  * Add default language for kramdown syntax highlighting (#8325)
 
 ## 3.8.7 / 2020-05-08
 

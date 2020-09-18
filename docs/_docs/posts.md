@@ -177,7 +177,7 @@ When the post also has front matter defining categories, they just get added to
 the existing list if not present already.
 
 The hallmark difference between categories and tags is that categories of a post
-may be incorporated into [the generated URL]('/docs/permalinks/#global') for the
+may be incorporated into [the generated URL](/docs/permalinks/#global) for the
 post, while tags cannot be.
 
 Therefore, depending on whether front matter has `category: classic hollywood`,

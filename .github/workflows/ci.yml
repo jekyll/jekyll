@@ -12,6 +12,7 @@ on:
 
 jobs:
   ci:
+    if: "!contains(github.event.commits[0].message, '[ci skip]')"
     name: 'SUITE: ${{ matrix.test_suite }} / OS: ${{ matrix.os }}'
     runs-on: ${{ matrix.os }}
     strategy:
@@ -22,7 +23,6 @@ jobs:
         - default-site
         os:
         - ubuntu-latest
-        - windows-latest
     steps:
     - uses: actions/checkout@v2
       with:

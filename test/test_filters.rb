@@ -790,11 +790,9 @@ class TestFilters < JekyllUnitTest
       should "successfully group array of Jekyll::Page's" do
         @filter.site.process
         grouping = @filter.group_by(@filter.site.pages, "layout")
+        names = ["default", "nil", ""]
         grouping.each do |g|
-          assert(
-            ["default", "nil", ""].include?(g["name"]),
-            "#{g["name"]} isn't a valid grouping."
-          )
+          assert names.include?(g["name"]), "#{g["name"]} isn't a valid grouping."
           case g["name"]
           when "default"
             assert(
@@ -1284,11 +1282,9 @@ class TestFilters < JekyllUnitTest
       should "successfully group array of Jekyll::Page's" do
         @filter.site.process
         groups = @filter.group_by_exp(@filter.site.pages, "page", "page.layout | upcase")
+        names = ["DEFAULT", "NIL", ""]
         groups.each do |g|
-          assert(
-            ["DEFAULT", "NIL", ""].include?(g["name"]),
-            "#{g["name"]} isn't a valid grouping."
-          )
+          assert names.include?(g["name"]), "#{g["name"]} isn't a valid grouping."
           case g["name"]
           when "DEFAULT"
             assert(
