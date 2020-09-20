@@ -310,8 +310,7 @@ module Jekyll
     # passed in as argument.
 
     def instantiate_subclasses(klass)
-      klass.descendants.tap do |result|
-        result.select! { |c| !safe || c.safe }
+      klass.descendants.select { |c| !safe || c.safe }.tap do |result|
         result.sort!
         result.map! { |c| c.new(config) }
       end
