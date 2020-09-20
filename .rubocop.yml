@@ -156,6 +156,8 @@ Performance/AncestorsInclude:
   Enabled: false
 Performance/BigDecimalWithNumericArgument:
   Enabled: true
+Performance/ChainArrayAllocation:
+  Enabled: true
 Performance/RedundantSortBlock:
   Enabled: true
 Performance/RedundantStringChars:
