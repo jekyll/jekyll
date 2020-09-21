@@ -462,8 +462,7 @@ module Jekyll
     def as_liquid(item)
       case item
       when Hash
-        pairs = item.map { |k, v| as_liquid([k, v]) }
-        Hash[pairs]
+        item.each_with_object({}) { |(k, v), result| result[as_liquid(k)] = as_liquid(v) }
       when Array
         item.map { |i| as_liquid(i) }
       else
