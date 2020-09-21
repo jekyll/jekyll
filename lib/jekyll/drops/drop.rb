@@ -112,9 +112,15 @@ module Jekyll
       #
       # Returns an Array of unique keys for content for the Drop.
       def keys
-        (content_methods |
-          mutations.keys |
-          fallback_data.keys).flatten
+        if mutations.empty? && fallback_data.empty?
+          content_methods
+        elsif mutations.empty?
+          content_methods | fallback_data.keys
+        elsif fallback_data.empty?
+          content_methods | mutations.keys
+        else
+          content_methods | mutations.keys | fallback_data.keys
+        end
       end
 
       # Generate a Hash representation of the Drop by resolving each key's
