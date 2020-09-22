@@ -11,7 +11,7 @@ Install Ruby and other [prerequisites]({{ '/docs/installation/#requirements' | r
 sudo apt-get install ruby-full build-essential zlib1g-dev
 ```
 
-Avoid installing Ruby as the root user. Instead, 
+Avoid installing RubyGems packages (called gems) as the root user. Instead, 
 set up a gem installation directory for your user account. The following
 commands will add environment variables to your `~/.bashrc` file to configure
 the gem installation path:
