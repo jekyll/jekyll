@@ -7,19 +7,73 @@ module Jekyll
 
       NON_CONTENT_METHODS = [:fallback_data, :collapse_document].freeze
 
-      # Get or set whether the drop class is mutable.
-      # Mutability determines whether or not pre-defined fields may be
-      # overwritten.
-      #
-      # is_mutable - Boolean set mutability of the class (default: nil)
-      #
-      # Returns the mutability of the class
-      def self.mutable(is_mutable = nil)
-        @is_mutable = is_mutable || false
-      end
+      class << self
+        # Get or set whether the drop class is mutable.
+        # Mutability determines whether or not pre-defined fields may be
+        # overwritten.
+        #
+        # is_mutable - Boolean set mutability of the class (default: nil)
+        #
+        # Returns the mutability of the class
+        def mutable(is_mutable = nil)
+          @is_mutable = is_mutable || false
+        end
 
-      def self.mutable?
-        @is_mutable
+        def mutable?
+          @is_mutable
+        end
+
+        # public delegation helper methods that calls onto Drop's instance
+        # variable `@obj`.
+
+        # Generate private Drop instance_methods for each symbol in the given list.
+        #
+        # Returns nothing.
+        def private_delegate_methods(*symbols)
+          symbols.each { |symbol| private delegate_method(symbol) }
+          nil
+        end
+
+        # Generate public Drop instance_methods for each symbol in the given list.
+        #
+        # Returns nothing.
+        def delegate_methods(*symbols)
+          symbols.each { |symbol| delegate_method(symbol) }
+          nil
+        end
+
+        # Generate public Drop instance_method for given symbol that calls `@obj.<sym>`.
+        #
+        # Returns delegated method symbol.
+        def delegate_method(symbol)
+          define_method(symbol) { @obj.send(symbol) }
+        end
+
+        # Generate public Drop instance_method named `delegate` that calls `@obj.<original>`.
+        #
+        # Returns delegated method symbol.
+        def delegate_method_as(original, delegate)
+          define_method(delegate) { @obj.send(original) }
+        end
+
+        # Generate public Drop instance_methods for each string entry in the given list.
+        # The generated method(s) access(es) `@obj`'s data hash.
+        #
+        # Returns nothing.
+        def data_delegators(*strings)
+          strings.each do |key|
+            data_delegator(key) if key.is_a?(String)
+          end
+          nil
+        end
+
+        # Generate public Drop instance_methods for given string `key`.
+        # The generated method access(es) `@obj`'s data hash.
+        #
+        # Returns method symbol.
+        def data_delegator(key)
+          define_method(key.to_sym) { @obj.data[key] }
+        end
       end
 
       # Create a new Drop
