@@ -36,9 +36,7 @@ module Jekyll
     #
     # Returns Array of Converter instances.
     def converters
-      @converters ||= begin
-        site.converters.select { |c| c.matches(document.extname) }.tap(&:sort!)
-      end
+      @converters ||= site.converters.select { |c| c.matches(document.extname) }.tap(&:sort!)
     end
 
     # Determine the extname the outputted file should have
