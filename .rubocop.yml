@@ -52,6 +52,10 @@ Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
 Layout/SpaceAroundMethodCallOperator:
   Enabled: true
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: true
+  Exclude:
+    - test/**/*.rb
 
 Lint/BinaryOperatorWithIdenticalOperands:
   Enabled: true

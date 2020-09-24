@@ -201,7 +201,7 @@ module Jekyll
         @site.inclusions[file] ||= locate_include_file(file)
         inclusion = @site.inclusions[file]
 
-        add_include_to_dependency(inclusion, context) if @site.incremental?
+        add_include_to_dependency(inclusion, context) if @site.config["incremental"]
 
         context.stack do
           context["include"] = parse_params(context) if @params
