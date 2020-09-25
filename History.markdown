@@ -39,6 +39,7 @@
   * Bump RuboCop to v0.91.x (#8391)
   * Add workflow to build and profile third-party repo (#8398)
   * Implement custom delegators for drop methods (#8183)
+  * Bump RuboCop to v0.92.x
 
 ### Bug Fixes
 
