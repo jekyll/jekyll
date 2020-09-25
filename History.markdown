@@ -24,6 +24,7 @@
   * Docs: Use data file(s) to render table(s) at https://jekyllrb.com/docs/configuration/options/ (#8380)
   * Improve maintainability of config option data (#8383)
   * Remove CircleCI v1 docs (#8410)
+  * Remove NOKOGIRI_USE_SYSTEM_LIBRARIES from Travis CI docs (#8409)
 
 ### Development Fixes
 
