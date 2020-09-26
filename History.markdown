@@ -40,6 +40,7 @@
   * Add workflow to build and profile third-party repo (#8398)
   * Implement custom delegators for drop methods (#8183)
   * Bump RuboCop to v0.92.x
+  * Update cucumber gem version to 5.1.2 (#8413)
 
 ### Bug Fixes
 
