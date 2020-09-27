@@ -105,7 +105,7 @@ module Jekyll
 
         buffer = +""
         buffer << %(<div class="language-#{@lang} highlighter-rouge">)
-        buffer << %(<div class="code-block-lang">#{@lang}</div>) if options[:annotated]
+        buffer << %(<div class="code-block-lang"><div>#{@lang}</div></div>) if options[:annotated]
         buffer << %(<div class="highlight">)
         buffer << code
         buffer << "</div>"
