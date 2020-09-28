@@ -29,30 +29,18 @@ class TestPageWithoutAFile < JekyllUnitTest
     end
 
     should "have non-frozen path and relative_path attributes" do
-      page = PageWithoutAFile.new(@site, @site.source, "foo", "bar.md")
-      assert_equal "foo/bar.md", page.path
-      assert_equal "foo/bar.md", page.relative_path
-      refute page.relative_path.frozen?
-
-      page = PageWithoutAFile.new(@site, @site.source, nil, nil)
-      assert_equal "", page.relative_path
-      assert_equal "", page.path
-      refute page.relative_path.frozen?
-
-      page = PageWithoutAFile.new(@site, @site.source, "", "")
-      assert_equal "", page.relative_path
-      assert_equal "", page.path
-      refute page.relative_path.frozen?
-
-      page = PageWithoutAFile.new(@site, @site.source, "/lorem/", "/ipsum")
-      assert_equal "lorem/ipsum", page.relative_path
-      assert_equal "lorem/ipsum", page.path
-      refute page.relative_path.frozen?
-
-      page = PageWithoutAFile.new(@site, @site.source, "lorem", "ipsum")
-      assert_equal "lorem/ipsum", page.relative_path
-      assert_equal "lorem/ipsum", page.path
-      refute page.relative_path.frozen?
+      {
+        ["foo", "bar.md"]     => "foo/bar.md",
+        [nil, nil]            => "",
+        ["", ""]              => "",
+        ["/lorem/", "/ipsum"] => "lorem/ipsum",
+        %w(lorem ipsum)       => "lorem/ipsum",
+      }.each do |(dir, name), result|
+        page = PageWithoutAFile.new(@site, @site.source, dir, name)
+        assert_equal result, page.path
+        assert_equal result, page.relative_path
+        refute page.relative_path.frozen?
+      end
     end
 
     context "with default site configuration" do
