@@ -52,6 +52,7 @@
   * Stash documents `write?` attribute in a variable (#8389)
   * Reduce string allocations from generating doc URLs (#8392)
   * Check if site is in incremental mode optimally (#8401)
+  * Handle nil argument to Jekyll.sanitized_path (#8415)
 
 ### Minor Enhancements
 
