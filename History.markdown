@@ -41,6 +41,7 @@
   * Implement custom delegators for drop methods (#8183)
   * Bump RuboCop to v0.92.x
   * Update cucumber gem version to 5.1.2 (#8413)
+  * Fix test suite compatibility with JRuby (#8418)
 
 ### Bug Fixes
 
