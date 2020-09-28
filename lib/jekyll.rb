@@ -173,6 +173,7 @@ module Jekyll
     # Returns the sanitized path.
     def sanitized_path(base_directory, questionable_path)
       return base_directory if base_directory.eql?(questionable_path)
+      return base_directory if questionable_path.nil?
 
       clean_path = questionable_path.dup
       clean_path.insert(0, "/") if clean_path.start_with?("~")

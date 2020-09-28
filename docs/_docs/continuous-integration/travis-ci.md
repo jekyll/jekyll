@@ -105,10 +105,6 @@ branches:
   - gh-pages     # test the gh-pages branch
   - /pages-(.*)/ # test every branch which starts with "pages-"
 
-env:
-  global:
-  - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
-
 addons:
   apt:
     packages:
@@ -186,18 +182,6 @@ prefixed, exemplified above with the `/pages-(.*)/` regular expression.
 
 The `branches` directive is completely optional. Travis will build from every
 push to any branch of your repo if leave it out.
-
-```yaml
-env:
-  global:
-  - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
-```
-
-Using `html-proofer`? You'll want this environment variable. Nokogiri, used
-to parse HTML files in your compiled site, comes bundled with libraries
-which it must compile each time it is installed. Luckily, you can
-dramatically decrease the install time of Nokogiri by setting the
-environment variable `NOKOGIRI_USE_SYSTEM_LIBRARIES` to `true`.
 
 <div class="note warning">
   <h5>Be sure to exclude <code>vendor</code> from your

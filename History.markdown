@@ -23,6 +23,8 @@
   * Use data file to render table at `/docs/configuration/options/#global-configuration` (#8377)
   * Docs: Use data file(s) to render table(s) at https://jekyllrb.com/docs/configuration/options/ (#8380)
   * Improve maintainability of config option data (#8383)
+  * Remove CircleCI v1 docs (#8410)
+  * Remove NOKOGIRI_USE_SYSTEM_LIBRARIES from Travis CI docs (#8409)
 
 ### Development Fixes
 
@@ -37,6 +39,8 @@
   * Bump RuboCop to v0.91.x (#8391)
   * Add workflow to build and profile third-party repo (#8398)
   * Implement custom delegators for drop methods (#8183)
+  * Bump RuboCop to v0.92.x
+  * Update cucumber gem version to 5.1.2 (#8413)
 
 ### Bug Fixes
 
@@ -48,6 +52,7 @@
   * Stash documents `write?` attribute in a variable (#8389)
   * Reduce string allocations from generating doc URLs (#8392)
   * Check if site is in incremental mode optimally (#8401)
+  * Handle nil argument to Jekyll.sanitized_path (#8415)
 
 ### Minor Enhancements
 
