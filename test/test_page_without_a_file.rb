@@ -18,12 +18,6 @@ class TestPageWithoutAFile < JekyllUnitTest
     @site.write
   end
 
-  def rehash_page!(page, dir:, name:)
-    page.dir = dir
-    page.name = name
-    page.instance_variable_set(:@relative_path, nil)
-  end
-
   context "A PageWithoutAFile" do
     setup do
       clear_dest
@@ -36,37 +30,26 @@ class TestPageWithoutAFile < JekyllUnitTest
 
     should "have non-frozen path and relative_path attributes" do
       page = PageWithoutAFile.new(@site, @site.source, "foo", "bar.md")
-      assert_equal "foo", page.instance_variable_get(:@dir)
-      assert_equal "bar.md", page.instance_variable_get(:@name)
       assert_equal "foo/bar.md", page.path
       assert_equal "foo/bar.md", page.relative_path
       refute page.relative_path.frozen?
 
-      # reset attributes
-      rehash_page!(page, :dir => nil, :name => nil)
-
-      # assert attribute directly
-      assert_nil page.instance_variable_get(:@dir)
-      assert_nil page.instance_variable_get(:@name)
-
+      page = PageWithoutAFile.new(@site, @site.source, nil, nil)
       assert_equal "", page.relative_path
       assert_equal "", page.path
       refute page.relative_path.frozen?
 
-      #
-      rehash_page!(page, :dir => "", :name => "")
+      page = PageWithoutAFile.new(@site, @site.source, "", "")
       assert_equal "", page.relative_path
       assert_equal "", page.path
       refute page.relative_path.frozen?
 
-      #
-      rehash_page!(page, :dir => "/lorem/", :name => "/ipsum")
+      page = PageWithoutAFile.new(@site, @site.source, "/lorem/", "/ipsum")
       assert_equal "lorem/ipsum", page.relative_path
       assert_equal "lorem/ipsum", page.path
       refute page.relative_path.frozen?
 
-      #
-      rehash_page!(page, :dir => "lorem", :name => "ipsum")
+      page = PageWithoutAFile.new(@site, @site.source, "lorem", "ipsum")
       assert_equal "lorem/ipsum", page.relative_path
       assert_equal "lorem/ipsum", page.path
       refute page.relative_path.frozen?
