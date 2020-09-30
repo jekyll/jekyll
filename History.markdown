@@ -55,6 +55,7 @@
   * Check if site is in incremental mode optimally (#8401)
   * Handle nil argument to Jekyll.sanitized_path (#8415)
   * Compute relative_path of pages using PathManager (#8408)
+  * Enable `Performance/ChainArrayAllocation` cop (#8404)
 
 ### Minor Enhancements
 
