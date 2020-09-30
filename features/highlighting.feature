@@ -121,3 +121,26 @@ Feature: Syntax Highlighting
     And I should see "<tr data-line-id=\"line-1\" class=\"lineno\"><td class=\"rouge-gutter gl\"" in "_site/index.html"
     And I should see "<pre>1</pre></td><td class=\"rouge-code\"><pre>" in "_site/index.html"
     And I should see "<span class=\"k\">class</span> <span class=\"nc\">Foo</span>" in "_site/index.html"
+
+  Scenario: Highlighting with the 'rougify' tag and rendering line numbers with table-id
+    Given I have an "index.html" file with content:
+      """
+      ---
+      ---
+
+      {% rougify ruby linenos = true table_id = "test" %}
+      class Foo
+        def bar
+          puts "Hello World"
+        end
+      end
+      {% endrougify %}
+      """
+    And I have a configuration file with "title" set to "Sample Site"
+    When I run jekyll build
+    Then I should get a zero exit-status
+    And I should see "<div class=\"language-ruby highlighter-rouge\">" in "_site/index.html"
+    And I should see "<table id=\"test\" class=\"rouge-line-table\"><tbody>" in "_site/index.html"
+    And I should see "<tr id=\"test-line-1\" data-line-id=\"line-1\" class=\"lineno\"><td class=\"rouge-gutter gl\"" in "_site/index.html"
+    And I should see "<pre>1</pre></td><td class=\"rouge-code\"><pre>" in "_site/index.html"
+    And I should see "<span class=\"k\">class</span> <span class=\"nc\">Foo</span>" in "_site/index.html"

@@ -8,21 +8,26 @@ module Jekyll
       def initialize(formatter, opts)
         @formatter    = formatter
         @start_line   = opts.fetch :start_line,   1
+        @table_id     = opts.fetch :table_id,     nil
         @table_class  = opts.fetch :table_class,  "rouge-line-table"
         @gutter_class = opts.fetch :gutter_class, "rouge-gutter"
         @code_class   = opts.fetch :code_class,   "rouge-code"
         @line_class   = opts.fetch :line_class,   "lineno"
-        @line_id      = opts.fetch :line_id,      "line-%i"
+        @line_id_fmt  = opts.fetch :line_id_fmt,  "line-%i"
       end
 
       # rubocop:disable Style/FormatString
       def stream(tokens)
         lineno = @start_line - 1
         buffer = +""
-        buffer << %(<table class="#{@table_class}"><tbody>)
+        buffer << "<table"
+        buffer << %( id="#{@table_id}") if @table_id
+        buffer << %( class="#{@table_class}"><tbody>)
         token_lines(tokens) do |line_tokens|
           lineno += 1
-          buffer << %(<tr data-line-id="#{sprintf(@line_id, lineno)}" class="#{@line_class}">)
+          buffer << "<tr"
+          buffer << %( id="#{@table_id}-#{sprintf(@line_id_fmt, lineno)}") if @table_id
+          buffer << %( data-line-id="#{sprintf(@line_id_fmt, lineno)}" class="#{@line_class}">)
           buffer << %(<td class="#{@gutter_class} gl" )
           buffer << %(style="-moz-user-select: none;-ms-user-select: none;)
           buffer << %(-webkit-user-select: none;user-select: none;">)
