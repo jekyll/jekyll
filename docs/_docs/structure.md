@@ -36,7 +36,7 @@ A basic Jekyll site usually looks something like this:
   </p>
   <br />
   <p>
-     <a href="https://github.com/jekyll/minima">minima</a> is the current default theme, and <code>bundle show minima</code> will show you where minima theme's files are stored on your computer.
+     <a href="https://github.com/jekyll/minima">minima</a> is the current default theme, and <code>bundle info minima</code> will show you where minima theme's files are stored on your computer.
   </p>
 </div>
 
@@ -194,8 +194,8 @@ An overview of what each of these does:
       </td>
       <td>
         <p>
-          Every other directory and file except for those listed above—such as
-          <code>css</code> and <code>images</code> folders,
+          Except for the special cases listed above, every other directory and 
+          file—such as <code>css</code> and <code>images</code> folders,
           <code>favicon.ico</code> files, and so forth—will be copied verbatim
           to the generated site. There are plenty of <a href="/showcase/">sites
           already using Jekyll</a> if you’re curious to see how they’re laid
@@ -206,3 +206,11 @@ An overview of what each of these does:
   </tbody>
 </table>
 </div>
+
+Every file or directory beginning with the following characters: `.`, `_ `, `#` or `~` in the `source` directory will not be included in the `destination` folder. Such paths will have to be explicitly specified via the config file in the `include` directive to make sure they're copied over:
+
+```yaml
+include:
+ - _pages
+ - .htaccess
+ ```

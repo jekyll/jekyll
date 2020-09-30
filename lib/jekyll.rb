@@ -50,10 +50,12 @@ module Jekyll
   autoload :EntryFilter,         "jekyll/entry_filter"
   autoload :Errors,              "jekyll/errors"
   autoload :Excerpt,             "jekyll/excerpt"
+  autoload :PageExcerpt,         "jekyll/page_excerpt"
   autoload :External,            "jekyll/external"
   autoload :FrontmatterDefaults, "jekyll/frontmatter_defaults"
   autoload :Hooks,               "jekyll/hooks"
   autoload :Layout,              "jekyll/layout"
+  autoload :Inclusion,           "jekyll/inclusion"
   autoload :Cache,               "jekyll/cache"
   autoload :CollectionReader,    "jekyll/readers/collection_reader"
   autoload :DataReader,          "jekyll/readers/data_reader"
@@ -68,6 +70,7 @@ module Jekyll
   autoload :PathManager,         "jekyll/path_manager"
   autoload :PluginManager,       "jekyll/plugin_manager"
   autoload :Publisher,           "jekyll/publisher"
+  autoload :Profiler,            "jekyll/profiler"
   autoload :Reader,              "jekyll/reader"
   autoload :Regenerator,         "jekyll/regenerator"
   autoload :RelatedPosts,        "jekyll/related_posts"
@@ -170,6 +173,7 @@ module Jekyll
     # Returns the sanitized path.
     def sanitized_path(base_directory, questionable_path)
       return base_directory if base_directory.eql?(questionable_path)
+      return base_directory if questionable_path.nil?
 
       clean_path = questionable_path.dup
       clean_path.insert(0, "/") if clean_path.start_with?("~")

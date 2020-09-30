@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "English"
 require_relative "lib/jekyll/version"
 
 Gem::Specification.new do |s|
@@ -12,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary       = "A simple, blog aware, static site generator."
   s.description   = "Jekyll is a simple, blog aware, static site generator."
 
-  all_files       = `git ls-files -z`.split("\x0")
+  all_files       = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
   s.files         = all_files.grep(%r!^(exe|lib|rubocop)/|^.rubocop.yml$!)
   s.executables   = all_files.grep(%r!^exe/!) { |f| File.basename(f) }
   s.bindir        = "exe"
@@ -37,7 +38,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("i18n",                  "~> 1.0")
   s.add_runtime_dependency("jekyll-sass-converter", "~> 2.0")
   s.add_runtime_dependency("jekyll-watch",          "~> 2.0")
-  s.add_runtime_dependency("kramdown",              "~> 2.1")
+  s.add_runtime_dependency("kramdown",              "~> 2.3")
   s.add_runtime_dependency("kramdown-parser-gfm",   "~> 1.0")
   s.add_runtime_dependency("liquid",                "~> 4.0")
   s.add_runtime_dependency("mercenary",             "~> 0.4.0")

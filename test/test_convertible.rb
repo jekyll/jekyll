@@ -32,7 +32,7 @@ class TestConvertible < JekyllUnitTest
         assert_equal({}, ret)
       end
       assert_match(%r!YAML Exception!, out)
-      assert_match(%r!#{File.join(@base, name)}!, out)
+      assert_match(%r!#{Regexp.escape(File.join(@base, name))}!, out)
     end
 
     should "raise for broken front matter with `strict_front_matter` set" do
@@ -47,7 +47,7 @@ class TestConvertible < JekyllUnitTest
       out = capture_stderr do
         @convertible.read_yaml(@base, "exploit_front_matter.erb")
       end
-      refute_match(%r!undefined class\/module DoesNotExist!, out)
+      refute_match(%r!undefined class/module DoesNotExist!, out)
     end
 
     should "not parse if there is encoding error in file" do
@@ -57,7 +57,7 @@ class TestConvertible < JekyllUnitTest
         assert_equal({}, ret)
       end
       assert_match(%r!invalid byte sequence in UTF-8!, out)
-      assert_match(%r!#{File.join(@base, name)}!, out)
+      assert_match(%r!#{Regexp.escape(File.join(@base, name))}!, out)
     end
 
     should "parse the front matter but show an error if permalink is empty" do

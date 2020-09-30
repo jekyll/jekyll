@@ -193,6 +193,14 @@
   categories:
     - software
     - marketing-site
+- name: French Government Digital Services
+  url: https://beta.gouv.fr/
+  categories:
+    - government
+- name: Paris Call for Trust and Security in Cyberspace
+  url: https://pariscall.international/
+  categories:
+    - government
 - name: Ruby on Rails
   url: http://rubyonrails.org/
   categories:
@@ -206,8 +214,8 @@
   url: https://worldstatisticsday.org
   categories:
     - government
-- name: Sketch App
-  url: https://sketchapp.com/
+- name: Sketch
+  url: https://sketch.com/
   categories:
     - software
     - marketing-site

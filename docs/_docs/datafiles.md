@@ -49,8 +49,8 @@ Parker Moore,parkr
 Liu Fengyun,liufengyun
 ```
 
-This data can be accessed via `site.data.members` (notice that the filename
-determines the variable name).
+This data can be accessed via `site.data.members` (notice that the file's *basename* determines the variable name and
+therefore one should avoid having data files with the same basename but different extensions, in the same directory).
 
 You can now render the list of members in a template:
 

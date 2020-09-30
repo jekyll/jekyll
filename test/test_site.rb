@@ -232,6 +232,7 @@ class TestSite < JekyllUnitTest
         environment.html
         exploit.md
         foo.md
+        foo.md
         humans.txt
         index.html
         index.html
@@ -241,6 +242,8 @@ class TestSite < JekyllUnitTest
         properties.html
         sitemap.xml
         static_files.html
+        test-styles.css.map
+        test-styles.scss
         trailing-dots...md
       )
       unless Utils::Platforms.really_windows?

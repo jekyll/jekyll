@@ -1,14 +1,15 @@
 - title: Getting Started
   docs:
     - link: /docs/
-    - link: /docs/ruby-101/
     - link: /docs/installation/
+    - link: /docs/ruby-101/
     - link: /docs/community/
     - link: /docs/step-by-step/01-setup/
 - title: Build
   docs:
     - link: /docs/usage/
     - link: /docs/configuration/
+    - link: /docs/rendering-process/
 - title: Content
   docs:
     - link: /docs/pages/

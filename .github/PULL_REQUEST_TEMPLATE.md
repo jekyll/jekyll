@@ -12,6 +12,7 @@
 <!-- This is a 🐛 bug fix. -->
 <!-- This is a 🙋 feature or enhancement. -->
 <!-- This is a 🔦 documentation change. -->
+<!-- This is a 🔨 code refactoring. -->
 
 <!--
   Before you submit this pull request, make sure to have a look at the following

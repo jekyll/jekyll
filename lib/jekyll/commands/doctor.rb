@@ -84,7 +84,7 @@ module Jekyll
           return true unless Utils::Platforms.osx?
 
           if Dir.pwd != `pwd`.strip
-            Jekyll.logger.error "  " + <<-STR.strip.gsub(%r!\n\s+!, "\n  ")
+            Jekyll.logger.error <<~STR
               We have detected that there might be trouble using fsevent on your
               operating system, you can read https://github.com/thibaudgg/rb-fsevent/wiki/no-fsevents-fired-(OSX-bug)
               for possible work arounds or you can work around it immediately
@@ -124,6 +124,8 @@ module Jekyll
 
         def collect_urls(urls, things, destination)
           things.each do |thing|
+            next if allow_used_permalink?(thing)
+
             dest = thing.destination(destination)
             if urls[dest]
               urls[dest] << thing.path
@@ -132,6 +134,10 @@ module Jekyll
             end
           end
           urls
+        end
+
+        def allow_used_permalink?(item)
+          defined?(JekyllRedirectFrom) && item.is_a?(JekyllRedirectFrom::RedirectPage)
         end
 
         def case_insensitive_urls(things, destination)
