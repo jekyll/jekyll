@@ -139,12 +139,8 @@ module Jekyll
       # Returns an Array of strings which represent method-specific keys.
       def content_methods
         @content_methods ||= (
-          self.class.instance_methods \
-            - Jekyll::Drops::Drop.instance_methods \
-            - NON_CONTENT_METHODS
-        ).map(&:to_s).reject do |method|
-          method.end_with?("=")
-        end
+          self.class.instance_methods - Jekyll::Drops::Drop.instance_methods - NON_CONTENT_METHODS
+        ).map!(&:to_s).tap { |result| result.reject! { |method| method.end_with?("=") } }
       end
 
       # Check if key exists in Drop
