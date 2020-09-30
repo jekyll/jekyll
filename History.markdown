@@ -54,6 +54,7 @@
   * Reduce string allocations from generating doc URLs (#8392)
   * Check if site is in incremental mode optimally (#8401)
   * Handle nil argument to Jekyll.sanitized_path (#8415)
+  * Compute relative_path of pages using PathManager (#8408)
 
 ### Minor Enhancements
 
