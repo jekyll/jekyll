@@ -109,7 +109,7 @@ module Jekyll
         buffer << %(<div class="highlight">)
         buffer << code
         buffer << "</div>"
-        buffer << %(<div class="code-block-caption">#{caption}</div>) if caption
+        buffer << %(<div class="code-block-caption"><div>#{caption}</div></div>) if caption
         buffer << "</div>"
         buffer
       end

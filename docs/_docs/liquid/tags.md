@@ -66,6 +66,128 @@ end
 ```
 {% endraw %}
 
+renders into:
+
+{% highlight ruby linenos %}
+def foo
+  puts 'foo'
+end
+{% endhighlight %}
+
+### Enhanced Code blocks
+
+Using the `rougify` tag allows additional control over code-blocks without affecting other code-blocks
+
+#### with line numbers
+
+{% raw %}
+```liquid
+{% rougify ruby linenos = true %}
+def foo
+  puts 'foo'
+end
+{% endrougify %}
+```
+{% endraw %}
+
+renders into:
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><table class="rouge-line-table"><tbody>
+<tr data-line-id="line-1" class="lineno">
+<td class="rouge-gutter gl" style="-moz-user-select: none;-ms-user-select: none;-webkit-user-select: none;user-select: none;"><pre>1</pre></td>
+<td class="rouge-code"><pre><span class="k">def</span> <span class="nf">foo</span>
+</pre></td>
+</tr>
+<tr data-line-id="line-2" class="lineno">
+<td class="rouge-gutter gl" style="-moz-user-select: none;-ms-user-select: none;-webkit-user-select: none;user-select: none;"><pre>2</pre></td>
+<td class="rouge-code"><pre>  <span class="nb">puts</span> <span class="s1">'foo'</span>
+</pre></td>
+</tr>
+<tr data-line-id="line-3" class="lineno">
+<td class="rouge-gutter gl" style="-moz-user-select: none;-ms-user-select: none;-webkit-user-select: none;user-select: none;"><pre>3</pre></td>
+<td class="rouge-code"><pre><span class="k">end</span>
+</pre></td>
+</tr>
+</tbody></table></div></div>
+
+#### with annotation
+
+{% raw %}
+```liquid
+{% rougify ruby annotated = true %}
+def foo
+  puts 'foo'
+end
+{% endrougify %}
+```
+{% endraw %}
+
+renders into:
+
+<div class="language-ruby highlighter-rouge">
+<div class="code-block-lang"><div>ruby</div></div>
+<div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">foo</span>
+  <span class="nb">puts</span> <span class="s1">'foo'</span>
+<span class="k">end</span></code></pre></div>
+</div>
+
+#### with a caption
+
+{% raw %}
+```liquid
+{% rougify ruby caption = 'Sample Code' %}
+def foo
+  puts 'foo'
+end
+{% endrougify %}
+```
+{% endraw %}
+
+renders into:
+
+<div class="language-ruby highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">foo</span>
+  <span class="nb">puts</span> <span class="s1">'foo'</span>
+<span class="k">end</span></code></pre></div>
+<div class="code-block-caption"><div>Sample Code</div></div>
+</div>
+
+#### with multiple options
+
+{% raw %}
+```liquid
+{% rougify ruby linenos = true annotated = true caption = 'Sample Code' %}
+def foo
+  puts 'foo'
+end
+{% endrougify %}
+```
+{% endraw %}
+
+renders into:
+
+<div class="language-ruby highlighter-rouge">
+<div class="code-block-lang"><div>ruby</div></div>
+<div class="highlight"><table class="rouge-line-table"><tbody>
+<tr data-line-id="line-1" class="lineno">
+<td class="rouge-gutter gl" style="-moz-user-select: none;-ms-user-select: none;-webkit-user-select: none;user-select: none;"><pre>1</pre></td>
+<td class="rouge-code"><pre><span class="k">def</span> <span class="nf">foo</span>
+</pre></td>
+</tr>
+<tr data-line-id="line-2" class="lineno">
+<td class="rouge-gutter gl" style="-moz-user-select: none;-ms-user-select: none;-webkit-user-select: none;user-select: none;"><pre>2</pre></td>
+<td class="rouge-code"><pre>  <span class="nb">puts</span> <span class="s1">'foo'</span>
+</pre></td>
+</tr>
+<tr data-line-id="line-3" class="lineno">
+<td class="rouge-gutter gl" style="-moz-user-select: none;-ms-user-select: none;-webkit-user-select: none;user-select: none;"><pre>3</pre></td>
+<td class="rouge-code"><pre><span class="k">end</span>
+</pre></td>
+</tr>
+</tbody></table></div>
+<div class="code-block-caption"><div>Sample Code</div></div>
+</div>
+
 ### Stylesheets for syntax highlighting
 
 In order for the highlighting to show up, you’ll need to include a highlighting

@@ -1309,3 +1309,52 @@ p.note {
 ol div.highlighter-rouge {
   margin: 8px 0 10px 0;
 }
+
+.highlighter-rouge {
+  table.rouge-line-table {
+    margin: 0;
+    padding: 3px 0;
+    background-color: transparent;
+    tr.lineno {
+      padding: 0 5px;
+      &:hover {
+        background-color: #333;
+      }
+    }
+    td {
+      padding: 0;
+      line-height: 1;
+      background: none;
+      box-shadow: none;
+      &.rouge-gutter {
+        width: 30px;
+        color: #727272;
+        text-align: center;
+      }
+    }
+  }
+  div.code-block-lang, div.code-block-caption {
+    background-color: #1f1f1f;
+    @include box-shadow(inset 0 1px 10px rgba(0,0,0,.1),
+      0 1px 0 rgba(255,255,255,.1),
+      0 -1px 0 rgba(0,0,0,.1));
+    div {
+      padding: 8px;
+      color: #727272;
+      font-size: 0.75em;
+      font-weight: 600;
+      text-align: right;
+    }
+  }
+  div.code-block-lang {
+    @include border-radius(0);
+    &+div.highlight {
+      border-radius: 0;
+    }
+  }
+  div.code-block-caption {
+    div {
+      text-align: center;
+    }
+  }
+}
