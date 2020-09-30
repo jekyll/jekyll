@@ -28,6 +28,21 @@ class TestPageWithoutAFile < JekyllUnitTest
                        ))
     end
 
+    should "have non-frozen path and relative_path attributes" do
+      {
+        ["foo", "bar.md"]     => "foo/bar.md",
+        [nil, nil]            => "",
+        ["", ""]              => "",
+        ["/lorem/", "/ipsum"] => "lorem/ipsum",
+        %w(lorem ipsum)       => "lorem/ipsum",
+      }.each do |(dir, name), result|
+        page = PageWithoutAFile.new(@site, @site.source, dir, name)
+        assert_equal result, page.path
+        assert_equal result, page.relative_path
+        refute page.relative_path.frozen?
+      end
+    end
+
     context "with default site configuration" do
       setup do
         @page = setup_page("properties.html")

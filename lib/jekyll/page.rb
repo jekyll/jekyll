@@ -121,6 +121,8 @@ module Jekyll
     # NOTE: `String#gsub` removes all trailing periods (in comparison to `String#chomp`)
     # Returns nothing.
     def process(name)
+      return unless name
+
       self.ext = File.extname(name)
       self.basename = name[0..-ext.length - 1].gsub(%r!\.*\z!, "")
     end
@@ -147,7 +149,7 @@ module Jekyll
 
     # The path to the page source file, relative to the site source
     def relative_path
-      @relative_path ||= File.join(*[@dir, @name].map(&:to_s).reject(&:empty?)).sub(%r!\A/!, "")
+      @relative_path ||= PathManager.join(@dir, @name).sub(%r!\A/!, "")
     end
 
     # Obtain destination path.
