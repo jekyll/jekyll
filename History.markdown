@@ -56,6 +56,7 @@
   * Handle nil argument to Jekyll.sanitized_path (#8415)
   * Compute relative_path of pages using PathManager (#8408)
   * Enable `Performance/ChainArrayAllocation` cop (#8404)
+  * Utilize flexibility of Site#in_dest_dir (#8403)
 
 ### Minor Enhancements
 
