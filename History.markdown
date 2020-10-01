@@ -57,6 +57,7 @@
   * Compute relative_path of pages using PathManager (#8408)
   * Enable `Performance/ChainArrayAllocation` cop (#8404)
   * Utilize flexibility of Site#in_dest_dir (#8403)
+  * Reduce allocation from normalize_whitespace filter (#8400)
 
 ### Minor Enhancements
 
