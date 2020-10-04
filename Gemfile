@@ -15,7 +15,7 @@ end
 #
 
 group :test do
-  gem "cucumber", "~> 5.1.2"
+  gem "cucumber", RUBY_VERSION >= "2.5" ? "~> 5.1.2" : "~> 4.1"
   gem "httpclient"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
