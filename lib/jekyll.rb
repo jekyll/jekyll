@@ -196,7 +196,7 @@ module Jekyll
           clean_path
         else
           clean_path.sub!(%r!\A\w:/!, "/")
-          File.join(base_directory, clean_path)
+          Jekyll::PathManager.join(base_directory, clean_path)
         end
 
       @sanitized_path_cache[base_directory][questionable_path].dup
