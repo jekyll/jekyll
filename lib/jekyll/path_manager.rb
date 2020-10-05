@@ -36,11 +36,8 @@ module Jekyll
       return base_directory if base_directory.eql?(questionable_path)
       return base_directory if questionable_path.nil?
 
-      @sanitized_path_cache ||= {}
-      @sanitized_path_cache[base_directory] ||= {}
-      if @sanitized_path_cache[base_directory][questionable_path]
-        return @sanitized_path_cache[base_directory][questionable_path]
-      end
+      cached_path = sanitized_path_cache(base_directory, questionable_path)
+      return cached_path if cached_path
 
       clean_path = questionable_path.dup
       clean_path.insert(0, "/") if clean_path.start_with?("~")
@@ -52,7 +49,7 @@ module Jekyll
       # `File.expand_path` above.
       clean_path.squeeze!("/")
 
-      @sanitized_path_cache[base_directory][questionable_path] =
+      cached_path =
         if clean_path.start_with?(base_directory.sub(%r!\z!, "/"))
           clean_path.freeze
         else
@@ -60,7 +57,15 @@ module Jekyll
           Jekyll::PathManager.join(base_directory, clean_path)
         end
 
-      @sanitized_path_cache[base_directory][questionable_path]
+      sanitized_path_cache(base_directory, questionable_path, cached_path)
     end
+
+    def self.sanitized_path_cache(base_directory, questionable_path, cache_path = nil)
+      @sanitized_path ||= {}
+      @sanitized_path[base_directory] ||= {}
+      @sanitized_path[base_directory][questionable_path] ||= cache_path
+    end
+
+    private_class_method :sanitized_path_cache
   end
 end
