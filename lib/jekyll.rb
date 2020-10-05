@@ -172,34 +172,7 @@ module Jekyll
     #
     # Returns the sanitized path.
     def sanitized_path(base_directory, questionable_path)
-      return base_directory if base_directory.eql?(questionable_path)
-      return base_directory if questionable_path.nil?
-
-      @sanitized_path_cache ||= {}
-      @sanitized_path_cache[base_directory] ||= {}
-      if @sanitized_path_cache[base_directory][questionable_path]
-        return @sanitized_path_cache[base_directory][questionable_path].dup
-      end
-
-      clean_path = questionable_path.dup
-      clean_path.insert(0, "/") if clean_path.start_with?("~")
-      clean_path = File.expand_path(clean_path, "/")
-
-      return clean_path if clean_path.eql?(base_directory)
-
-      # remove any remaining extra leading slashes not stripped away by calling
-      # `File.expand_path` above.
-      clean_path.squeeze!("/")
-
-      @sanitized_path_cache[base_directory][questionable_path] =
-        if clean_path.start_with?(base_directory.sub(%r!\z!, "/"))
-          clean_path.freeze
-        else
-          clean_path.sub!(%r!\A\w:/!, "/")
-          Jekyll::PathManager.join(base_directory, clean_path)
-        end
-
-      @sanitized_path_cache[base_directory][questionable_path].dup
+      Jekyll::PathManager.sanitized_path(base_directory, questionable_path).dup
     end
 
     # Conditional optimizations
