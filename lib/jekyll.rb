@@ -178,7 +178,7 @@ module Jekyll
       @sanitized_path_cache ||= {}
       @sanitized_path_cache[base_directory] ||= {}
       if @sanitized_path_cache[base_directory][questionable_path]
-        return @sanitized_path_cache[base_directory][questionable_path]
+        return @sanitized_path_cache[base_directory][questionable_path].dup
       end
 
       clean_path = questionable_path.dup
@@ -193,7 +193,7 @@ module Jekyll
 
       @sanitized_path_cache[base_directory][questionable_path] =
         if clean_path.start_with?(base_directory.sub(%r!\z!, "/"))
-          clean_path
+          clean_path.freeze
         else
           clean_path.sub!(%r!\A\w:/!, "/")
           Jekyll::PathManager.join(base_directory, clean_path)
