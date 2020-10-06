@@ -33,9 +33,6 @@ module Jekyll
     #
     # Returns a frozen string.
     def self.sanitized_path(base_directory, questionable_path)
-      return base_directory if base_directory.eql?(questionable_path)
-      return base_directory if questionable_path.nil?
-
       cached_path = sanitized_path_cache(base_directory, questionable_path)
       return cached_path if cached_path
 
@@ -43,7 +40,7 @@ module Jekyll
       clean_path.insert(0, "/") if clean_path.start_with?("~")
       clean_path = File.expand_path(clean_path, "/")
 
-      return clean_path if clean_path.eql?(base_directory)
+      return clean_path.freeze if clean_path.eql?(base_directory)
 
       # remove any remaining extra leading slashes not stripped away by calling
       # `File.expand_path` above.
@@ -65,7 +62,7 @@ module Jekyll
       @sanitized_path[base_directory] ||= {}
       @sanitized_path[base_directory][questionable_path] ||= cache_path
     end
-
     private_class_method :sanitized_path_cache
+
   end
 end
