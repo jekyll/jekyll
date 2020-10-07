@@ -175,7 +175,7 @@ module Jekyll
       return base_directory if base_directory.eql?(questionable_path)
       return base_directory if questionable_path.nil?
 
-      Jekyll::PathManager.sanitized_path(base_directory, questionable_path).dup
+      +Jekyll::PathManager.sanitized_path(base_directory, questionable_path)
     end
 
     # Conditional optimizations
