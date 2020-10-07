@@ -91,7 +91,7 @@ group :site do
 
   gem "jekyll-avatar"
   gem "jekyll-mentions"
-  gem "jekyll-seo-tag"
+  gem "jekyll-seo-tag", :github => "jekyll/jekyll-seo-tag"
   gem "jekyll-sitemap"
   gem "jemoji"
 end
