@@ -47,18 +47,19 @@ class TestDrop < JekyllUnitTest
     end
 
     should "return array of only getter method name strings for .getter_methods" do
-      assert_includes @drop.class.instance_methods, :lipsum
-      assert_includes @drop.class.instance_methods, :lipsum=
-      assert_includes @drop.class.getter_method_names, "lipsum"
+      [:lipsum, :lipsum=].each { |id| assert_includes(@drop.class.instance_methods, id) }
 
+      assert_includes @drop.class.getter_method_names, "lipsum"
       refute_includes @drop.class.getter_method_names, "lipsum="
     end
 
     should "return only getter method names for #content_methods" do
-      refute_includes @drop.content_methods, "lipsum="
-      refute_includes @drop.content_methods, "fallback_data"
-      refute_includes @drop.content_methods, "collapse_document"
-      refute_includes @drop.content_methods, Jekyll::Drops::Drop.instance_methods.map(&:to_s)
+      drop_base_class_method_names = Jekyll::Drops::Drop.instance_methods.map(&:to_s)
+      sample_method_names = ["lipsum=", "fallback_data", "collapse_document"]
+
+      (sample_method_names + drop_base_class_method_names).each do |entry|
+        refute_includes @drop.content_methods, entry
+      end
 
       assert_equal %w(foo lipsum), @drop.content_methods.sort
     end
