@@ -19,10 +19,12 @@ class TestPathManager < JekyllUnitTest
     end
 
     should "return a frozen string result" do
-      assert_equal(
-        "#{@source}/_config.yml",
-        Jekyll::PathManager.sanitized_path(@source, "E:\\_config.yml")
-      )
+      if Jekyll::Utils::Platforms.really_windows?
+        assert_equal(
+          "#{@source}/_config.yml",
+          Jekyll::PathManager.sanitized_path(@source, "E:\\_config.yml")
+        )
+      end
       assert_equal(
         "#{@source}/_config.yml",
         Jekyll::PathManager.sanitized_path(@source, "//_config.yml")
