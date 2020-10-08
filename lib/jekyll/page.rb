@@ -194,11 +194,11 @@ module Jekyll
     def excerpt
       return @excerpt if defined?(@excerpt)
 
-      @excerpt = data["excerpt"]&.to_s
+      @excerpt = data["excerpt"] ? data["excerpt"].to_s : nil
     end
 
     def generate_excerpt?
-      !excerpt_separator.empty? && self.class == Jekyll::Page && html?
+      !excerpt_separator.empty? && instance_of?(Jekyll::Page) && html?
     end
 
     private
