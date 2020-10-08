@@ -21,7 +21,6 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: ashmaroli/tomjoht.github.io
-        ref: 'seo-tag-edge'
         path: sandbox
     - name: Set up Ruby
       uses: actions/setup-ruby@v1
