@@ -198,7 +198,7 @@ module Jekyll
     end
 
     def generate_excerpt?
-      !excerpt_separator.empty? && self.class == Jekyll::Page && html?
+      !excerpt_separator.empty? && instance_of?(Jekyll::Page) && html?
     end
 
     private
