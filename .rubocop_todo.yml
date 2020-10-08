@@ -15,15 +15,6 @@ Layout/SpaceAroundOperators:
     - 'lib/jekyll/commands/build.rb'
     - 'test/test_configuration.rb'
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: IgnoredMethods.
-# IgnoredMethods: to_c, to_f, to_i, to_r, rationalize, public_send, send, __send__
-Lint/RedundantSafeNavigation:
-  Exclude:
-    - 'lib/jekyll/convertible.rb'
-    - 'lib/jekyll/page.rb'
-
 # Offense count: 1
 Style/CombinableLoops:
   Exclude:
