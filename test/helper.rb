@@ -30,7 +30,7 @@ require "minitest/autorun"
 require "minitest/reporters"
 require "minitest/profile"
 require "rspec/mocks"
-require_relative "../lib/jekyll.rb"
+require_relative "../lib/jekyll"
 
 Jekyll.logger = Logger.new(StringIO.new, :error)
 
@@ -82,8 +82,8 @@ module DirectoryHelpers
   end
 
   def temp_dir(*subdirs)
-    if Utils::Platforms.windows?
-      drive = Dir.pwd.sub(%r!^([^\/]+).*!, '\1')
+    if Utils::Platforms.vanilla_windows?
+      drive = Dir.pwd.sub(%r!^([^/]+).*!, '\1')
       temp_root = File.join(drive, "tmp")
     else
       temp_root = "/tmp"

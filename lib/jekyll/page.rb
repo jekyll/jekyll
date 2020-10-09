@@ -15,6 +15,7 @@ module Jekyll
     ATTRIBUTES_FOR_LIQUID = %w(
       content
       dir
+      excerpt
       name
       path
       url
@@ -48,6 +49,7 @@ module Jekyll
 
       process(name)
       read_yaml(PathManager.join(base, dir), name)
+      generate_excerpt if site.config["page_excerpts"]
 
       data.default_proc = proc do |_, key|
         site.frontmatter_defaults.find(relative_path, type, key)
@@ -119,6 +121,8 @@ module Jekyll
     # NOTE: `String#gsub` removes all trailing periods (in comparison to `String#chomp`)
     # Returns nothing.
     def process(name)
+      return unless name
+
       self.ext = File.extname(name)
       self.basename = name[0..-ext.length - 1].gsub(%r!\.*\z!, "")
     end
@@ -145,7 +149,7 @@ module Jekyll
 
     # The path to the page source file, relative to the site source
     def relative_path
-      @relative_path ||= File.join(*[@dir, @name].map(&:to_s).reject(&:empty?)).sub(%r!\A\/!, "")
+      @relative_path ||= PathManager.join(@dir, @name).sub(%r!\A/!, "")
     end
 
     # Obtain destination path.
@@ -181,6 +185,28 @@ module Jekyll
 
     def write?
       true
+    end
+
+    def excerpt_separator
+      @excerpt_separator ||= (data["excerpt_separator"] || site.config["excerpt_separator"]).to_s
+    end
+
+    def excerpt
+      return @excerpt if defined?(@excerpt)
+
+      @excerpt = data["excerpt"] ? data["excerpt"].to_s : nil
+    end
+
+    def generate_excerpt?
+      !excerpt_separator.empty? && instance_of?(Jekyll::Page) && html?
+    end
+
+    private
+
+    def generate_excerpt
+      return unless generate_excerpt?
+
+      data["excerpt"] ||= Jekyll::PageExcerpt.new(self)
     end
   end
 end

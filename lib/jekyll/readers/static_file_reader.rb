@@ -3,6 +3,7 @@
 module Jekyll
   class StaticFileReader
     attr_reader :site, :dir, :unfiltered_content
+
     def initialize(site, dir)
       @site = site
       @dir = dir

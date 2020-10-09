@@ -16,15 +16,15 @@ The `include` tag allows you to include content from another file stored
 in an `_includes` folder. Includes are useful for having a single source for
 source code that repeats around the site or for improving the readability.
 
-Navigation source code can get complex so sometimes it's nice to move it into an
-include. 
+Navigation source code can get complex, so sometimes it's nice to move it into an
+include.
 
 ## Include usage
 
 Create a file for the navigation at `_includes/navigation.html` with the
 following content:
 
-```liquid
+```
 <nav>
   <a href="/">Home</a>
   <a href="/about.html">About</a>
@@ -57,7 +57,7 @@ in your browser and try switching between the pages.
 Let's take this a step further and highlight the current page in the navigation.
 
 `_includes/navigation.html` needs to know the URL of the page it's inserted into
-so it can add styling. Jekyll has useful [variables](/docs/variables/) available
+so it can add styling. Jekyll has useful [variables](/docs/variables/) available,
 one of which is `page.url`.
 
 Using `page.url` you can check if each link is the current page and color it red

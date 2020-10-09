@@ -5,25 +5,26 @@ module Jekyll
     class IncludeTag < Liquid::Tag
       VALID_SYNTAX = %r!
         ([\w-]+)\s*=\s*
-        (?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))
+        (?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w.-]+))
       !x.freeze
       VARIABLE_SYNTAX = %r!
-        (?<variable>[^{]*(\{\{\s*[\w\-\.]+\s*(\|.*)?\}\}[^\s{}]*)+)
+        (?<variable>[^{]*(\{\{\s*[\w\-.]+\s*(\|.*)?\}\}[^\s{}]*)+)
         (?<params>.*)
       !mx.freeze
 
       FULL_VALID_SYNTAX = %r!\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z!.freeze
-      VALID_FILENAME_CHARS = %r!^[\w/\.-]+$!.freeze
+      VALID_FILENAME_CHARS = %r!^[\w/.-]+$!.freeze
       INVALID_SEQUENCES = %r![./]{2,}!.freeze
 
       def initialize(tag_name, markup, tokens)
         super
-        matched = markup.strip.match(VARIABLE_SYNTAX)
+        markup  = markup.strip
+        matched = markup.match(VARIABLE_SYNTAX)
         if matched
           @file = matched["variable"].strip
           @params = matched["params"].strip
         else
-          @file, @params = markup.strip.split(%r!\s+!, 2)
+          @file, @params = markup.split(%r!\s+!, 2)
         end
         validate_params if @params
         @tag_name = tag_name
@@ -35,20 +36,16 @@ module Jekyll
 
       def parse_params(context)
         params = {}
-        markup = @params
-
-        while (match = VALID_SYNTAX.match(markup))
-          markup = markup[match.end(0)..-1]
-
-          value = if match[2]
-                    match[2].gsub('\\"', '"')
-                  elsif match[3]
-                    match[3].gsub("\\'", "'")
-                  elsif match[4]
-                    context[match[4]]
+        @params.scan(VALID_SYNTAX) do |key, d_quoted, s_quoted, variable|
+          value = if d_quoted
+                    d_quoted.include?('\\"') ? d_quoted.gsub('\\"', '"') : d_quoted
+                  elsif s_quoted
+                    s_quoted.include?("\\'") ? s_quoted.gsub("\\'", "'") : s_quoted
+                  elsif variable
+                    context[variable]
                   end
 
-          params[match[1]] = value
+          params[key] = value
         end
         params
       end
@@ -176,7 +173,7 @@ module Jekyll
 
       # This method allows to modify the file content by inheriting from the class.
       def read_file(file, context)
-        File.read(file, file_read_opts(context))
+        File.read(file, **file_read_opts(context))
       end
 
       private
@@ -192,30 +189,82 @@ module Jekyll
       end
     end
 
+    # Do not inherit from this class.
+    # TODO: Merge into the `Jekyll::Tags::IncludeTag` in v5.0
+    class OptimizedIncludeTag < IncludeTag
+      def render(context)
+        @site ||= context.registers[:site]
+
+        file = render_variable(context) || @file
+        validate_file_name(file)
+
+        @site.inclusions[file] ||= locate_include_file(file)
+        inclusion = @site.inclusions[file]
+
+        add_include_to_dependency(inclusion, context) if @site.config["incremental"]
+
+        context.stack do
+          context["include"] = parse_params(context) if @params
+          inclusion.render(context)
+        end
+      end
+
+      private
+
+      def locate_include_file(file)
+        @site.includes_load_paths.each do |dir|
+          path = PathManager.join(dir, file)
+          return Inclusion.new(@site, dir, file) if valid_include_file?(path, dir)
+        end
+        raise IOError, could_not_locate_message(file, @site.includes_load_paths, @site.safe)
+      end
+
+      def valid_include_file?(path, dir)
+        File.file?(path) && !outside_scope?(path, dir)
+      end
+
+      def outside_scope?(path, dir)
+        @site.safe && !realpath_prefixed_with?(path, dir)
+      end
+
+      def realpath_prefixed_with?(path, dir)
+        File.realpath(path).start_with?(dir)
+      rescue StandardError
+        false
+      end
+
+      def add_include_to_dependency(inclusion, context)
+        return unless context.registers[:page]&.key?("path")
+
+        @site.regenerator.add_dependency(
+          @site.in_source_dir(context.registers[:page]["path"]),
+          inclusion.path
+        )
+      end
+    end
+
     class IncludeRelativeTag < IncludeTag
       def tag_includes_dirs(context)
         Array(page_path(context)).freeze
       end
 
       def page_path(context)
-        if context.registers[:page].nil?
-          context.registers[:site].source
-        else
-          site = context.registers[:site]
-          page_payload  = context.registers[:page]
-          resource_path = \
-            if page_payload["collection"].nil?
-              page_payload["path"]
-            else
-              File.join(site.config["collections_dir"], page_payload["path"])
-            end
-          resource_path.sub!(%r!/#excerpt\z!, "")
-          site.in_source_dir File.dirname(resource_path)
-        end
+        page, site = context.registers.values_at(:page, :site)
+        return site.source unless page
+
+        site.in_source_dir File.dirname(resource_path(page, site))
+      end
+
+      private
+
+      def resource_path(page, site)
+        path = page["path"]
+        path = File.join(site.config["collections_dir"], path) if page["collection"]
+        path.sub(%r!/#excerpt\z!, "")
       end
     end
   end
 end
 
-Liquid::Template.register_tag("include", Jekyll::Tags::IncludeTag)
+Liquid::Template.register_tag("include", Jekyll::Tags::OptimizedIncludeTag)
 Liquid::Template.register_tag("include_relative", Jekyll::Tags::IncludeRelativeTag)

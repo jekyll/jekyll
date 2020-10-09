@@ -116,7 +116,7 @@ module Jekyll
     #
     # Returns the output extension
     def output_ext
-      @output_ext ||= Jekyll::Renderer.new(site, self).output_ext
+      renderer.output_ext
     end
 
     # The base filename of the document, without the file extname.
@@ -131,6 +131,10 @@ module Jekyll
     # Returns the base filename of the document.
     def basename
       @basename ||= File.basename(path)
+    end
+
+    def renderer
+      @renderer ||= Jekyll::Renderer.new(site, self)
     end
 
     # Produces a "cleaned" relative path.
@@ -253,8 +257,7 @@ module Jekyll
     #
     # Returns the full path to the output file of this document.
     def destination(base_directory)
-      dest = site.in_dest_dir(base_directory)
-      path = site.in_dest_dir(dest, URL.unescape_path(url))
+      path = site.in_dest_dir(base_directory, URL.unescape_path(url))
       if url.end_with? "/"
         path = File.join(path, "index.html")
       else
@@ -298,7 +301,7 @@ module Jekyll
       else
         begin
           merge_defaults
-          read_content(opts)
+          read_content(**opts)
           read_post_data
         rescue StandardError => e
           handle_read_error(e)
@@ -348,7 +351,9 @@ module Jekyll
     # method returns true, and if the site's Publisher will publish the document.
     # False otherwise.
     def write?
-      collection&.write? && site.publisher.publish?(self)
+      return @write_p if defined?(@write_p)
+
+      @write_p = collection&.write? && site.publisher.publish?(self)
     end
 
     # The Document excerpt_separator, from the YAML Front-Matter or site
@@ -414,9 +419,13 @@ module Jekyll
     #
     # Returns nothing.
     def categories_from_path(special_dir)
-      superdirs = relative_path.sub(Document.superdirs_regex(special_dir), "")
-      superdirs = superdirs.split(File::SEPARATOR)
-      superdirs.reject! { |c| c.empty? || c == special_dir || c == basename }
+      if relative_path.start_with?(special_dir)
+        superdirs = []
+      else
+        superdirs = relative_path.sub(Document.superdirs_regex(special_dir), "")
+        superdirs = superdirs.split(File::SEPARATOR)
+        superdirs.reject! { |c| c.empty? || c == special_dir || c == basename }
+      end
 
       merge_data!({ "categories" => superdirs }, :source => "file path")
     end
@@ -429,14 +438,14 @@ module Jekyll
       categories.flatten!
       categories.uniq!
 
-      merge_data!("categories" => categories)
+      merge_data!({ "categories" => categories })
     end
 
     def populate_tags
       tags = Utils.pluralized_array_from_hash(data, "tag", "tags")
       tags.flatten!
 
-      merge_data!("tags" => tags)
+      merge_data!({ "tags" => tags })
     end
 
     private
@@ -462,8 +471,8 @@ module Jekyll
       merge_data!(defaults, :source => "front matter defaults") unless defaults.empty?
     end
 
-    def read_content(opts)
-      self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
+    def read_content(**opts)
+      self.content = File.read(path, **Utils.merged_file_read_opts(site, opts))
       if content =~ YAML_FRONT_MATTER_REGEXP
         self.content = $POSTMATCH
         data_file = SafeYAML.load(Regexp.last_match(1))
@@ -497,6 +506,10 @@ module Jekyll
       elsif relative_path =~ DATELESS_FILENAME_MATCHER
         slug, ext = Regexp.last_match.captures
       end
+      # `slug` will be nil for documents without an extension since the regex patterns
+      # above tests for an extension as well.
+      # In such cases, assign `basename_without_ext` as the slug.
+      slug ||= basename_without_ext
 
       # slugs shouldn't end with a period
       # `String#gsub!` removes all trailing periods (in comparison to `String#chomp!`)
