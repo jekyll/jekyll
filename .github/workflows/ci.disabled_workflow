@@ -43,7 +43,7 @@ jobs:
     - name: 'Update Bundler'
       run: 'gem update bundler --no-document'
     - name: Set up bundle
-      run: | 
+      run: |
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
     - name: Run Test Suite

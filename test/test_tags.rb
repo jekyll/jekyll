@@ -15,7 +15,7 @@ class TestTags < JekyllUnitTest
     site.read if override["read_all"]
 
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
-    @converter = site.converters.find { |c| c.class == converter_class }
+    @converter = site.converters.find { |c| c.instance_of?(converter_class) }
     payload = { "highlighter_prefix" => @converter.highlighter_prefix,
                 "highlighter_suffix" => @converter.highlighter_suffix, }
 

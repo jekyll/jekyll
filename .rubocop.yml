@@ -77,6 +77,8 @@ Lint/EmptyFile:
   Enabled: true
 Lint/FloatComparison:
   Enabled: true
+Lint/HashCompareByIdentity:
+  Enabled: true
 Lint/IdentityComparison:
   Enabled: true
 Lint/MissingSuper:
@@ -89,6 +91,8 @@ Lint/NestedPercentLiteral:
 Lint/OutOfRangeRegexpRef:
   Enabled: true
 Lint/RaiseException:
+  Enabled: true
+Lint/RedundantSafeNavigation:
   Enabled: true
 Lint/SelfAssignment:
   Enabled: true
@@ -160,6 +164,8 @@ Performance/AncestorsInclude:
   Enabled: false
 Performance/BigDecimalWithNumericArgument:
   Enabled: true
+Performance/ChainArrayAllocation:
+  Enabled: true
 Performance/RedundantSortBlock:
   Enabled: true
 Performance/RedundantStringChars:
@@ -203,6 +209,8 @@ Style/CaseLikeIf:
 Style/ClassAndModuleChildren:
   Exclude:
     - test/**/*.rb
+Style/ClassEqualityComparison:
+  Enabled: true
 Style/CombinableLoops:
   Enabled: true
 Style/Documentation:

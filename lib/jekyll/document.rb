@@ -257,8 +257,7 @@ module Jekyll
     #
     # Returns the full path to the output file of this document.
     def destination(base_directory)
-      dest = site.in_dest_dir(base_directory)
-      path = site.in_dest_dir(dest, URL.unescape_path(url))
+      path = site.in_dest_dir(base_directory, URL.unescape_path(url))
       if url.end_with? "/"
         path = File.join(path, "index.html")
       else
