@@ -516,7 +516,7 @@ You can also auto-generate your sitemap by adding a gem called [`jekyll-sitemap`
 
 ## 12. Add external services
 
-For other services you might need (such as contact forms, search, comments, and more), [look for third-party services](https://serverless.css-tricks.com/services/). We listed some [integrations on our resources page](/resources/#integrations) but in todays's world of SaaS and APis the list is endless.
+For other services you might need (such as contact forms, search, comments, and more), [look for third-party services](https://serverless.css-tricks.com/services/major). We listed some [integrations on our resources page](/resources/#integrations) but in todays's world of SaaS and APis the list is endless.
 
 Your Jekyll pages consist of HTML, CSS, and JavaScript, so pretty much any code you need to embed will work without a problem.
 
