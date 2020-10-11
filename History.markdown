@@ -60,6 +60,7 @@
   * Utilize flexibility of Site#in_dest_dir (#8403)
   * Reduce allocation from normalize_whitespace filter (#8400)
   * Use Regexp#match? when MatchData is not required (#8427)
+  * Check default front matter scope against symbols (#8393)
 
 ### Minor Enhancements
 
