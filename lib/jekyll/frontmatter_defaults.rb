@@ -223,7 +223,7 @@ module Jekyll
           Jekyll.logger.warn set.to_s
           nil
         end
-      end.compact
+      end.tap(&:compact!)
     end
 
     # Sanitizes the given path by removing a leading slash

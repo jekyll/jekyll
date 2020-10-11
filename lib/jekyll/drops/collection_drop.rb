@@ -7,10 +7,10 @@ module Jekyll
 
       mutable false
 
-      def_delegator  :@obj, :write?, :output
-      def_delegators :@obj, :label, :docs, :files, :directory, :relative_directory
+      delegate_method_as :write?, :output
+      delegate_methods :label, :docs, :files, :directory, :relative_directory
 
-      private def_delegator :@obj, :metadata, :fallback_data
+      private delegate_method_as :metadata, :fallback_data
 
       def to_s
         docs.to_s

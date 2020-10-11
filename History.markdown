@@ -23,6 +23,8 @@
   * Use data file to render table at `/docs/configuration/options/#global-configuration` (#8377)
   * Docs: Use data file(s) to render table(s) at https://jekyllrb.com/docs/configuration/options/ (#8380)
   * Improve maintainability of config option data (#8383)
+  * Remove CircleCI v1 docs (#8410)
+  * Remove NOKOGIRI_USE_SYSTEM_LIBRARIES from Travis CI docs (#8409)
 
 ### Development Fixes
 
@@ -36,6 +38,11 @@
   * Refactor Jekyll::Utils::Platforms (#7236)
   * Bump RuboCop to v0.91.x (#8391)
   * Add workflow to build and profile third-party repo (#8398)
+  * Implement custom delegators for drop methods (#8183)
+  * Bump RuboCop to v0.92.x
+  * Update cucumber gem version to 5.1.2 (#8413)
+  * Fix test suite compatibility with JRuby (#8418)
+  * chore(deps): bump Rubocop to 0.93.0 (#8430)
 
 ### Bug Fixes
 
@@ -45,12 +52,21 @@
   * Reduce string allocations from the `link` tag (#8387)
   * Optimize parsing of parameters in include tag (#8192)
   * Stash documents `write?` attribute in a variable (#8389)
+  * Reduce string allocations from generating doc URLs (#8392)
+  * Check if site is in incremental mode optimally (#8401)
+  * Handle nil argument to Jekyll.sanitized_path (#8415)
+  * Compute relative_path of pages using PathManager (#8408)
+  * Enable `Performance/ChainArrayAllocation` cop (#8404)
+  * Utilize flexibility of Site#in_dest_dir (#8403)
+  * Reduce allocation from normalize_whitespace filter (#8400)
+  * Use Regexp#match? when MatchData is not required (#8427)
 
 ### Minor Enhancements
 
   * Warn on command-line with permalink conflict (#8342)
   * Supress warning issued for redirect pages (#8347)
   * Add post_convert hook to modify HTML content before layout (#8368)
+  * Cache Jekyll.sanitized_path (#8424)
 
 ## 4.1.1 / 2020-06-24
 

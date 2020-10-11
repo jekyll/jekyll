@@ -3,7 +3,7 @@
 require 'jekyll'
 require 'memory_profiler'
 
-MemoryProfiler.report(allow_files: 'lib/jekyll/') do
+MemoryProfiler.report(allow_files: ['lib/jekyll/', 'lib/jekyll.rb']) do
   Jekyll::PluginManager.require_from_bundler
   Jekyll::Commands::Build.process({
     "source"             => File.expand_path(ARGV[0]),
