@@ -9,6 +9,20 @@ module Jekyll
       NON_CONTENT_METHOD_NAMES = NON_CONTENT_METHODS.map(&:to_s).freeze
       private_constant :NON_CONTENT_METHOD_NAMES
 
+      # A private stash to avoid repeatedly generating the setter method name string for
+      # a call to `Drops::Drop#[]=`.
+      # The keys of the stash below have a very high probability of being called upon during
+      # the course of various `Jekyll::Renderer#run` calls.
+      SETTER_KEYS_STASH = {
+        "content"            => "content=",
+        "layout"             => "layout=",
+        "page"               => "page=",
+        "paginator"          => "paginator=",
+        "highlighter_prefix" => "highlighter_prefix=",
+        "highlighter_suffix" => "highlighter_suffix=",
+      }.freeze
+      private_constant :SETTER_KEYS_STASH
+
       class << self
         # Get or set whether the drop class is mutable.
         # Mutability determines whether or not pre-defined fields may be
@@ -132,7 +146,7 @@ module Jekyll
       # and the key matches a method in which case it raises a
       # DropMutationException.
       def []=(key, val)
-        setter = "#{key}="
+        setter = SETTER_KEYS_STASH[key] || "#{key}="
         if respond_to?(setter)
           public_send(setter, val)
         elsif respond_to?(key.to_s)
