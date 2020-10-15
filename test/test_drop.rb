@@ -59,7 +59,7 @@ class TestDrop < JekyllUnitTest
       fixture_ids.each { |id| assert_includes(@drop.class.instance_methods, id) }
 
       fixture_getter_names.each do |name|
-        assert_includes(@drop.class.getter_method_names, name)
+        assert_includes @drop.class.getter_method_names, name
       end
 
       fixture_getter_names.each do |name|
