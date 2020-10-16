@@ -6,6 +6,8 @@ module Jekyll
       include Enumerable
 
       NON_CONTENT_METHODS = [:fallback_data, :collapse_document].freeze
+      NON_CONTENT_METHOD_NAMES = NON_CONTENT_METHODS.map(&:to_s).freeze
+      private_constant :NON_CONTENT_METHOD_NAMES
 
       # A private stash to avoid repeatedly generating the setter method name string for
       # a call to `Drops::Drop#[]=`.
@@ -88,6 +90,17 @@ module Jekyll
         def data_delegator(key)
           define_method(key.to_sym) { @obj.data[key] }
         end
+
+        # Array of stringified instance methods that do not end with the assignment operator.
+        #
+        # (<klass>.instance_methods always generates a new Array object so it can be mutated)
+        #
+        # Returns array of strings.
+        def getter_method_names
+          @getter_method_names ||= instance_methods.map!(&:to_s).tap do |list|
+            list.reject! { |item| item.end_with?("=") }
+          end
+        end
       end
 
       # Create a new Drop
@@ -152,9 +165,10 @@ module Jekyll
       #
       # Returns an Array of strings which represent method-specific keys.
       def content_methods
-        @content_methods ||= (
-          self.class.instance_methods - Jekyll::Drops::Drop.instance_methods - NON_CONTENT_METHODS
-        ).map!(&:to_s).tap { |result| result.reject! { |method| method.end_with?("=") } }
+        @content_methods ||= \
+          self.class.getter_method_names \
+            - Jekyll::Drops::Drop.getter_method_names \
+            - NON_CONTENT_METHOD_NAMES
       end
 
       # Check if key exists in Drop
