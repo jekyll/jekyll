@@ -60,6 +60,8 @@
   * Utilize flexibility of Site#in_dest_dir (#8403)
   * Reduce allocation from normalize_whitespace filter (#8400)
   * Use Regexp#match? when MatchData is not required (#8427)
+  * Check default front matter scope against symbols (#8393)
+  * Stash frequently used Drop setter keys for reuse (#8394)
 
 ### Minor Enhancements
 
@@ -67,6 +69,7 @@
   * Supress warning issued for redirect pages (#8347)
   * Add post_convert hook to modify HTML content before layout (#8368)
   * Cache Jekyll.sanitized_path (#8424)
+  * Memoize array of drop getter method names (#8421)
 
 ## 4.1.1 / 2020-06-24
 

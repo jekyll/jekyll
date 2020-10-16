@@ -5,6 +5,8 @@ require "helper"
 class DropFixture < Jekyll::Drops::Drop
   mutable true
 
+  attr_accessor :lipsum
+
   def foo
     "bar"
   end
@@ -38,6 +40,39 @@ class TestDrop < JekyllUnitTest
 
     should "return values for #invoke_drop" do
       assert_equal "bar", @drop.invoke_drop("foo")
+    end
+
+    should "return array of strings for .getter_methods" do
+      assert(@drop.class.getter_method_names.all? { |entry| entry.is_a?(String) })
+    end
+
+    should "return array of only getter method name strings for .getter_methods" do
+      [:lipsum, :lipsum=].each { |id| assert_includes(@drop.class.instance_methods, id) }
+
+      assert_includes @drop.class.getter_method_names, "lipsum"
+      refute_includes @drop.class.getter_method_names, "lipsum="
+    end
+
+    should "not munge results for another Jekyll::Drops::Drop subclass" do
+      fixture_ids = [:lipsum, :lipsum=, :foo]
+      fixture_getter_names = %w(lipsum foo)
+      fixture_ids.each { |id| assert_includes(@drop.class.instance_methods, id) }
+
+      fixture_getter_names.each do |name|
+        assert_includes @drop.class.getter_method_names, name
+        refute_includes @document_drop.class.getter_method_names, name
+      end
+    end
+
+    should "return only getter method names for #content_methods" do
+      drop_base_class_method_names = Jekyll::Drops::Drop.instance_methods.map(&:to_s)
+      sample_method_names = ["lipsum=", "fallback_data", "collapse_document"]
+
+      (sample_method_names + drop_base_class_method_names).each do |entry|
+        refute_includes @drop.content_methods, entry
+      end
+
+      assert_equal %w(foo lipsum), @drop.content_methods.sort
     end
 
     context "mutations" do
