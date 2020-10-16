@@ -60,9 +60,6 @@ class TestDrop < JekyllUnitTest
 
       fixture_getter_names.each do |name|
         assert_includes @drop.class.getter_method_names, name
-      end
-
-      fixture_getter_names.each do |name|
         refute_includes @document_drop.class.getter_method_names, name
       end
     end
