@@ -790,11 +790,9 @@ class TestFilters < JekyllUnitTest
       should "successfully group array of Jekyll::Page's" do
         @filter.site.process
         grouping = @filter.group_by(@filter.site.pages, "layout")
+        names = ["default", "nil", ""]
         grouping.each do |g|
-          assert(
-            ["default", "nil", ""].include?(g["name"]),
-            "#{g["name"]} isn't a valid grouping."
-          )
+          assert names.include?(g["name"]), "#{g["name"]} isn't a valid grouping."
           case g["name"]
           when "default"
             assert(
@@ -816,7 +814,7 @@ class TestFilters < JekyllUnitTest
               "The list of grouped items for '' is not an Array."
             )
             # adjust array.size to ignore symlinked page in Windows
-            qty = Utils::Platforms.really_windows? ? 16 : 18
+            qty = Utils::Platforms.really_windows? ? 19 : 21
             assert_equal qty, g["items"].size
           end
         end
@@ -1079,15 +1077,214 @@ class TestFilters < JekyllUnitTest
       end
     end
 
+    context "find filter" do
+      should "return any input that is not an array" do
+        assert_equal "some string", @filter.find("some string", "la", "le")
+      end
+
+      should "filter objects in a hash appropriately" do
+        hash = { "a" => { "color" => "red" }, "b" => { "color" => "blue" } }
+        assert_equal({ "color" => "red" }, @filter.find(hash, "color", "red"))
+      end
+
+      should "filter objects appropriately" do
+        assert_equal(
+          { "color" => "red", "size" => "large" },
+          @filter.find(@array_of_objects, "color", "red")
+        )
+      end
+
+      should "filter objects with null properties appropriately" do
+        array = [{}, { "color" => nil }, { "color" => "" }, { "color" => "text" }]
+        assert_equal({}, @filter.find(array, "color", nil))
+      end
+
+      should "filter objects with numerical properties appropriately" do
+        array = [
+          { "value" => "555" },
+          { "value" => 555 },
+          { "value" => 24.625 },
+          { "value" => "24.625" },
+        ]
+        assert_equal({ "value" => 24.625 }, @filter.find(array, "value", 24.625))
+        assert_equal({ "value" => "555" }, @filter.find(array, "value", 555))
+      end
+
+      should "filter array properties appropriately" do
+        hash = {
+          "a" => { "tags" => %w(x y) },
+          "b" => { "tags" => ["x"] },
+          "c" => { "tags" => %w(y z) },
+        }
+        assert_equal({ "tags" => %w(x y) }, @filter.find(hash, "tags", "x"))
+      end
+
+      should "filter array properties alongside string properties" do
+        hash = {
+          "a" => { "tags" => %w(x y) },
+          "b" => { "tags" => "x" },
+          "c" => { "tags" => %w(y z) },
+        }
+        assert_equal({ "tags" => %w(x y) }, @filter.find(hash, "tags", "x"))
+      end
+
+      should "filter hash properties with null and empty values" do
+        hash = {
+          "a" => { "tags" => {} },
+          "b" => { "tags" => "" },
+          "c" => { "tags" => nil },
+          "d" => { "tags" => ["x", nil] },
+          "e" => { "tags" => [] },
+          "f" => { "tags" => "xtra" },
+        }
+
+        assert_equal({ "tags" => nil }, @filter.find(hash, "tags", nil))
+        assert_equal({ "tags" => "" }, @filter.find(hash, "tags", ""))
+
+        # `{{ hash | find: 'tags', empty }}`
+        assert_equal(
+          { "tags" => {} },
+          @filter.find(hash, "tags", Liquid::Expression::LITERALS["empty"])
+        )
+
+        # `{{ `hash | find: 'tags', blank }}`
+        assert_equal(
+          { "tags" => {} },
+          @filter.find(hash, "tags", Liquid::Expression::LITERALS["blank"])
+        )
+      end
+
+      should "not match substrings" do
+        hash = {
+          "a" => { "category" => "bear" },
+          "b" => { "category" => "wolf" },
+          "c" => { "category" => %w(bear lion) },
+        }
+        assert_nil @filter.find(hash, "category", "ear")
+      end
+
+      should "stringify during comparison for compatibility with liquid parsing" do
+        hash = {
+          "The Words" => { "rating" => 1.2, "featured" => false },
+          "Limitless" => { "rating" => 9.2, "featured" => true },
+          "Hustle"    => { "rating" => 4.7, "featured" => true },
+        }
+
+        result = @filter.find(hash, "featured", "true")
+        assert_equal 9.2, result["rating"]
+
+        result = @filter.find(hash, "rating", 4.7)
+        assert_equal 4.7, result["rating"]
+      end
+    end
+
+    context "find_exp filter" do
+      should "return any input that is not an array" do
+        assert_equal "some string", @filter.find_exp("some string", "la", "le")
+      end
+
+      should "filter objects in a hash appropriately" do
+        hash = { "a" => { "color"=>"red" }, "b" => { "color"=>"blue" } }
+        assert_equal(
+          { "color" => "red" },
+          @filter.find_exp(hash, "item", "item.color == 'red'")
+        )
+      end
+
+      should "filter objects appropriately" do
+        assert_equal(
+          { "color" => "red", "size" => "large" },
+          @filter.find_exp(@array_of_objects, "item", "item.color == 'red'")
+        )
+      end
+
+      should "filter objects appropriately with 'or', 'and' operators" do
+        assert_equal(
+          { "color" => "teal", "size" => "large" },
+          @filter.find_exp(
+            @array_of_objects, "item", "item.color == 'red' or item.size == 'large'"
+          )
+        )
+
+        assert_equal(
+          { "color" => "red", "size" => "large" },
+          @filter.find_exp(
+            @array_of_objects, "item", "item.color == 'red' and item.size == 'large'"
+          )
+        )
+      end
+
+      should "filter objects across multiple conditions" do
+        sample = [
+          { "color" => "teal", "size" => "large", "type" => "variable" },
+          { "color" => "red",  "size" => "large", "type" => "fixed" },
+          { "color" => "red",  "size" => "medium", "type" => "variable" },
+          { "color" => "blue", "size" => "medium", "type" => "fixed" },
+        ]
+        assert_equal(
+          { "color" => "red", "size" => "large", "type" => "fixed" },
+          @filter.find_exp(
+            sample, "item", "item.type == 'fixed' and item.color == 'red' or item.color == 'teal'"
+          )
+        )
+      end
+
+      should "stringify during comparison for compatibility with liquid parsing" do
+        hash = {
+          "The Words" => { "rating" => 1.2, "featured" => false },
+          "Limitless" => { "rating" => 9.2, "featured" => true },
+          "Hustle"    => { "rating" => 4.7, "featured" => true },
+        }
+
+        result = @filter.find_exp(hash, "item", "item.featured == true")
+        assert_equal 9.2, result["rating"]
+
+        result = @filter.find_exp(hash, "item", "item.rating == 4.7")
+        assert_equal 4.7, result["rating"]
+      end
+
+      should "filter with other operators" do
+        assert_equal 3, @filter.find_exp([1, 2, 3, 4, 5], "n", "n >= 3")
+      end
+
+      objects = [
+        { "id" => "a", "groups" => [1, 2] },
+        { "id" => "b", "groups" => [2, 3] },
+        { "id" => "c" },
+        { "id" => "d", "groups" => [1, 3] },
+      ]
+      should "filter with the contains operator over arrays" do
+        result = @filter.find_exp(objects, "obj", "obj.groups contains 1")
+        assert_equal "a", result["id"]
+      end
+
+      should "filter with the contains operator over hash keys" do
+        result = @filter.find_exp(objects, "obj", "obj contains 'groups'")
+        assert_equal "a", result["id"]
+      end
+
+      should "filter posts" do
+        site = fixture_site.tap(&:read)
+        posts = site.site_payload["site"]["posts"]
+        result = @filter.find_exp(posts, "obj", "obj.title == 'Foo Bar'")
+        assert_equal(result, site.posts.find { |p| p.title == "Foo Bar" })
+      end
+
+      should "filter by variable values" do
+        @filter.site.tap(&:read)
+        posts  = @filter.site.site_payload["site"]["posts"]
+        result = @filter.find_exp(posts, "post", "post.date > site.dont_show_posts_before")
+        assert result.date > @sample_time
+      end
+    end
+
     context "group_by_exp filter" do
       should "successfully group array of Jekyll::Page's" do
         @filter.site.process
         groups = @filter.group_by_exp(@filter.site.pages, "page", "page.layout | upcase")
+        names = ["DEFAULT", "NIL", ""]
         groups.each do |g|
-          assert(
-            ["DEFAULT", "NIL", ""].include?(g["name"]),
-            "#{g["name"]} isn't a valid grouping."
-          )
+          assert names.include?(g["name"]), "#{g["name"]} isn't a valid grouping."
           case g["name"]
           when "DEFAULT"
             assert(
@@ -1109,7 +1306,7 @@ class TestFilters < JekyllUnitTest
               "The list of grouped items for '' is not an Array."
             )
             # adjust array.size to ignore symlinked page in Windows
-            qty = Utils::Platforms.really_windows? ? 16 : 18
+            qty = Utils::Platforms.really_windows? ? 19 : 21
             assert_equal qty, g["items"].size
           end
         end
@@ -1310,6 +1507,28 @@ class TestFilters < JekyllUnitTest
         @filter.sample(input, 2).each do |val|
           assert_includes input, val
         end
+      end
+    end
+
+    context "number_of_words filter" do
+      should "return the number of words for Latin-only text" do
+        assert_equal 5, @filter.number_of_words("hello world and taoky strong!", "auto")
+        assert_equal 5, @filter.number_of_words("hello world and taoky strong!", "cjk")
+      end
+
+      should "return the number of characters for CJK-only text" do
+        assert_equal 17, @filter.number_of_words("こんにちは、世界！안녕하세요 세상!", "auto")
+        assert_equal 17, @filter.number_of_words("こんにちは、世界！안녕하세요 세상!", "cjk")
+      end
+
+      should "process Latin and CJK independently" do
+        # Intentional: No space between Latin and CJK
+        assert_equal 6, @filter.number_of_words("你好hello世界world", "auto")
+        assert_equal 6, @filter.number_of_words("你好hello世界world", "cjk")
+      end
+
+      should "maintain original behavior unless specified" do
+        assert_equal 1, @filter.number_of_words("你好hello世界world")
       end
     end
   end

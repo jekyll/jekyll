@@ -21,6 +21,15 @@ AllCops:
     - script/**/*
     - vendor/**/*
     - tmp/**/*
+
+Layout/BeginEndAlignment:
+  Enabled: true
+Layout/EmptyComment:
+  Enabled: false
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+Layout/EndAlignment:
+  Severity: error
 Layout/HashAlignment:
   EnforcedHashRocketStyle: table
 Layout/IndentationWidth:
@@ -29,30 +38,84 @@ Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
 Layout/FirstHashElementIndentation:
   EnforcedStyle: consistent
+Layout/LineLength:
+  Exclude:
+    - !ruby/regexp /features\/.*.rb/
+    - Rakefile
+    - rake/*.rake
+    - Gemfile
+  Max: 100
+  Severity: warning
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: true
+  Exclude:
+    - test/**/*.rb
+
+Lint/BinaryOperatorWithIdenticalOperands:
+  Enabled: true
+Lint/ConstantDefinitionInBlock:
+  Enabled: true
+  Exclude:
+    - test/**/*.rb
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+Lint/DuplicateElsifCondition:
+  Enabled: true
+Lint/DuplicateRescueException:
+  Enabled: true
+Lint/DuplicateRequire:
+  Enabled: true
+Lint/EmptyConditionalBody:
+  Enabled: true
+Lint/EmptyFile:
+  Enabled: true
+Lint/FloatComparison:
+  Enabled: true
+Lint/HashCompareByIdentity:
+  Enabled: true
+Lint/IdentityComparison:
+  Enabled: true
+Lint/MissingSuper:
+  Enabled: false
+Lint/MixedRegexpCaptureTypes:
+  Enabled: false
 Lint/NestedPercentLiteral:
   Exclude:
     - test/test_site.rb
-Layout/EmptyComment:
-  Enabled: false
-Layout/EndAlignment:
-  Severity: error
-Layout/SpaceAroundMethodCallOperator:
+Lint/OutOfRangeRegexpRef:
   Enabled: true
 Lint/RaiseException:
   Enabled: true
+Lint/RedundantSafeNavigation:
+  Enabled: true
+Lint/SelfAssignment:
+  Enabled: true
 Lint/StructNewOverride:
+  Enabled: true
+Lint/TopLevelReturnWithArgument:
+  Enabled: true
+Lint/TrailingCommaInAttributeDeclaration:
   Enabled: true
 Lint/UnreachableCode:
   Severity: error
+Lint/UnreachableLoop:
+  Enabled: true
+Lint/UselessMethodDefinition:
+  Enabled: true
+Lint/UselessTimes:
+  Enabled: true
 Lint/Void:
   Exclude:
     - lib/jekyll/site.rb
+
 Metrics/AbcSize:
-  Max: 21
+  Max: 23
 Metrics/BlockLength:
   Exclude:
     - test/**/*.rb
@@ -71,14 +134,7 @@ Metrics/CyclomaticComplexity:
   Exclude:
     - lib/jekyll/utils.rb
     - lib/jekyll/commands/serve.rb
-Layout/LineLength:
-  Exclude:
-    - !ruby/regexp /features\/.*.rb/
-    - Rakefile
-    - rake/*.rake
-    - Gemfile
-  Max: 100
-  Severity: warning
+  Max: 11
 Metrics/MethodLength:
   CountComments: false
   Max: 20
@@ -90,7 +146,8 @@ Metrics/ModuleLength:
 Metrics/ParameterLists:
   Max: 4
 Metrics/PerceivedComplexity:
-  Max: 8
+  Max: 13
+
 Naming/FileName:
   Enabled: false
 Naming/HeredocDelimiterNaming:
@@ -102,6 +159,30 @@ Naming/MemoizedInstanceVariableName:
     - lib/jekyll/drops/site_drop.rb
     - lib/jekyll/drops/unified_payload_drop.rb
     - lib/jekyll/page_without_a_file.rb
+
+Performance/AncestorsInclude:
+  Enabled: false
+Performance/BigDecimalWithNumericArgument:
+  Enabled: true
+Performance/ChainArrayAllocation:
+  Enabled: true
+Performance/RedundantSortBlock:
+  Enabled: true
+Performance/RedundantStringChars:
+  Enabled: true
+Performance/ReverseFirst:
+  Enabled: true
+Performance/SortReverse:
+  Enabled: false
+Performance/Squeeze:
+  Enabled: true
+Performance/StringInclude:
+  Enabled: true
+  Exclude:
+    - lib/jekyll/utils/platforms.rb
+Performance/Sum:
+  Enabled: true
+
 Security/MarshalLoad:
   Exclude:
     - !ruby/regexp /test\/.*.rb$/
@@ -110,30 +191,52 @@ Security/YAMLLoad:
   Exclude:
     - !ruby/regexp /features\/.*.rb/
     - !ruby/regexp /test\/.*.rb$/
+
+Style/ArrayCoercion:
+  Enabled: true
 Style/AccessModifierDeclarations:
+  Enabled: false
+Style/AccessorGrouping:
   Enabled: false
 Style/Alias:
   EnforcedStyle: prefer_alias_method
 Style/AndOr:
   Severity: error
+Style/BisectedAttrAccessor:
+  Enabled: true
+Style/CaseLikeIf:
+  Enabled: true
 Style/ClassAndModuleChildren:
   Exclude:
     - test/**/*.rb
-Style/FrozenStringLiteralComment:
-  EnforcedStyle: always
+Style/ClassEqualityComparison:
+  Enabled: true
+Style/CombinableLoops:
+  Enabled: true
 Style/Documentation:
   Enabled: false
 Style/DoubleNegation:
   Enabled: false
 Style/ExponentialNotation:
   Enabled: true
+Style/ExplicitBlockArgument:
+  Enabled: false
 Style/FormatStringToken:
   Exclude:
     - lib/jekyll/utils/ansi.rb
     - lib/jekyll/liquid_renderer/table.rb
+    - lib/jekyll/profiler.rb
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: always
+Style/GlobalStdStream:
+  Enabled: true
 Style/GuardClause:
   Enabled: false
+Style/HashAsLastArrayItem:
+  Enabled: true
 Style/HashEachMethods:
+  Enabled: true
+Style/HashLikeCase:
   Enabled: true
 Style/HashSyntax:
   EnforcedStyle: hash_rockets
@@ -142,6 +245,8 @@ Style/HashTransformKeys:
   Enabled: false
 Style/HashTransformValues:
   Enabled: true
+Style/KeywordParametersOrder:
+  Enabled: true
 Style/MixinUsage:
   Exclude:
     - test/helper.rb
@@ -149,6 +254,8 @@ Style/ModuleFunction:
   Enabled: false
 Style/MultilineTernaryOperator:
   Severity: error
+Style/OptionalBooleanParameter:
+  Enabled: true
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
     "%q": "{}"
@@ -158,6 +265,18 @@ Style/PercentLiteralDelimiters:
     "%w": "()"
     "%W": "()"
     "%x": "()"
+Style/RedundantAssignment:
+  Enabled: true
+Style/RedundantFetchBlock:
+  Enabled: false
+Style/RedundantFileExtensionInRequire:
+  Enabled: true
+Style/RedundantRegexpCharacterClass:
+  Enabled: true
+Style/RedundantRegexpEscape:
+  Enabled: true
+Style/RedundantSelfAssignment:
+  Enabled: true
 Style/RegexpLiteral:
   EnforcedStyle: percent_r
 Style/RescueModifier:
@@ -167,8 +286,19 @@ Style/SafeNavigation:
     - lib/jekyll/document.rb
 Style/SignalException:
   EnforcedStyle: only_raise
+Style/SingleArgumentDig:
+  Enabled: true
+Style/SlicingWithRange:
+  Enabled: false
+Style/SoleNestedConditional:
+  Enabled: true
 Style/StringLiterals:
   EnforcedStyle: double_quotes
+Style/StringConcatenation:
+  Enabled: true
+  Exclude:
+    - lib/jekyll/commands/*.rb
+    - test/**/*.rb
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
 Style/SymbolArray:

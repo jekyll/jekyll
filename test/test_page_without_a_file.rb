@@ -28,6 +28,21 @@ class TestPageWithoutAFile < JekyllUnitTest
                        ))
     end
 
+    should "have non-frozen path and relative_path attributes" do
+      {
+        ["foo", "bar.md"]     => "foo/bar.md",
+        [nil, nil]            => "",
+        ["", ""]              => "",
+        ["/lorem/", "/ipsum"] => "lorem/ipsum",
+        %w(lorem ipsum)       => "lorem/ipsum",
+      }.each do |(dir, name), result|
+        page = PageWithoutAFile.new(@site, @site.source, dir, name)
+        assert_equal result, page.path
+        assert_equal result, page.relative_path
+        refute page.relative_path.frozen?
+      end
+    end
+
     context "with default site configuration" do
       setup do
         @page = setup_page("properties.html")
@@ -49,9 +64,9 @@ class TestPageWithoutAFile < JekyllUnitTest
         assert_equal "All the properties.\n", regular_page["content"]
         assert_equal "properties.html", regular_page["name"]
 
-        basic_attrs = %w(dir name path url)
+        basic_attrs = %w(dir name path url excerpt)
         attrs = {
-          "content"   => "All the properties.\n",
+          "content"   => nil,
           "dir"       => "/",
           "excerpt"   => nil,
           "foo"       => "bar",
@@ -75,12 +90,6 @@ class TestPageWithoutAFile < JekyllUnitTest
             assert_nil @page[prop]
           end
         end
-      end
-
-      should "be exposed to Liquid as a Hash" do
-        liquid_rep = @page.to_liquid
-        refute_equal Jekyll::Drops::PageDrop, liquid_rep.class
-        assert_equal Hash, liquid_rep.class
       end
     end
 

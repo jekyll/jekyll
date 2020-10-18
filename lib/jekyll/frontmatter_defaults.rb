@@ -157,7 +157,7 @@ module Jekyll
     # Returns true if either of the above conditions are satisfied,
     #   otherwise returns false
     def applies_type?(scope, type)
-      !scope.key?("type") || scope["type"].eql?(type.to_s)
+      !scope.key?("type") || type&.to_sym.eql?(scope["type"].to_sym)
     end
 
     # Checks if a given set of default values is valid
@@ -223,18 +223,17 @@ module Jekyll
           Jekyll.logger.warn set.to_s
           nil
         end
-      end.compact
+      end.tap(&:compact!)
     end
 
-    # Sanitizes the given path by removing a leading and adding a trailing slash
-
-    SANITIZATION_REGEX = %r!\A/|(?<=[^/])\z!.freeze
-
+    # Sanitizes the given path by removing a leading slash
     def sanitize_path(path)
       if path.nil? || path.empty?
         ""
+      elsif path.start_with?("/")
+        path.gsub(%r!\A/|(?<=[^/])\z!, "")
       else
-        path.gsub(SANITIZATION_REGEX, "")
+        path
       end
     end
   end

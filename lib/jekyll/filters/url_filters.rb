@@ -76,13 +76,16 @@ module Jekyll
 
         parts = [sanitized_baseurl, input]
         Addressable::URI.parse(
-          parts.compact.map { |part| ensure_leading_slash(part.to_s) }.join
+          parts.map! { |part| ensure_leading_slash(part.to_s) }.join
         ).normalize.to_s
       end
 
       def sanitized_baseurl
         site = @context.registers[:site]
-        site.config["baseurl"].to_s.chomp("/")
+        baseurl = site.config["baseurl"]
+        return "" if baseurl.nil?
+
+        baseurl.to_s.chomp("/")
       end
 
       def ensure_leading_slash(input)

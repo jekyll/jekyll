@@ -62,7 +62,12 @@ Obfuscates emails to protect them from spam bots.
 ## Hooks
 
 [Hooks](/docs/plugins/hooks/) give fine-grained control to extend the build
-process.
+process. For example:
+
+* [jemoji](https://github.com/jekyll/jemoji) Display emojis :+1: 
+* [jekyll-mentions](https://github.com/jekyll/jekyll-mentions) turns mentions @jekyll into links
+* [jekyll-spaceship](https://github.com/jeffreytse/jekyll-spaceship) - advanced example. Provides
+powerful supports for table, mathjax, plantuml, video, etc.
 
 ## Flags
 
@@ -131,7 +136,7 @@ recommended best practices to help structure your plugin.
 We recommend using a [gem](/docs/ruby-101/#gems) for your plugin. This will
 help you manage dependencies, keep separation from your site source code and
 allow you to share functionality across multiple projects. For tips on creating
-a gem take a look a the
+a gem take a look at the
 [Ruby gems guide](https://guides.rubygems.org/make-your-own-gem/) or look
 through the source code of an existing plugin such as
 [jekyll-feed](https://github.com/jekyll/jekyll-feed).

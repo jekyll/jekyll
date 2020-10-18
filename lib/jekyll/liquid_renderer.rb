@@ -5,11 +5,6 @@ require_relative "liquid_renderer/table"
 
 module Jekyll
   class LiquidRenderer
-    extend Forwardable
-
-    private def_delegator :@site, :in_source_dir, :source_dir
-    private def_delegator :@site, :in_theme_dir, :theme_dir
-
     def initialize(site)
       @site = site
       Liquid::Template.error_mode = @site.config["liquid"]["error_mode"].to_sym
@@ -22,13 +17,7 @@ module Jekyll
     end
 
     def file(filename)
-      filename.match(filename_regex)
-      filename =
-        if Regexp.last_match(1) == theme_dir("")
-          ::File.join(::File.basename(Regexp.last_match(1)), Regexp.last_match(2))
-        else
-          Regexp.last_match(2)
-        end
+      filename = normalize_path(filename)
       LiquidRenderer::File.new(self, filename).tap do
         @stats[filename] ||= new_profile_hash
       end
@@ -64,9 +53,23 @@ module Jekyll
 
     private
 
-    def filename_regex
-      @filename_regex ||= begin
-        %r!\A(#{Regexp.escape(source_dir)}/|#{Regexp.escape(theme_dir.to_s)}/|/*)(.*)!i
+    def normalize_path(filename)
+      @normalize_path ||= {}
+      @normalize_path[filename] ||= begin
+        theme_dir = @site.theme&.root
+        case filename
+        when %r!\A(#{Regexp.escape(@site.source)}/)(?<rest>.*)!io
+          Regexp.last_match(:rest)
+        when %r!(/gems/.*)*/gems/(?<dirname>[^/]+)(?<rest>.*)!,
+             %r!(?<dirname>[^/]+/lib)(?<rest>.*)!
+          "#{Regexp.last_match(:dirname)}#{Regexp.last_match(:rest)}"
+        when theme_dir && %r!\A#{Regexp.escape(theme_dir)}/(?<rest>.*)!io
+          PathManager.join(@site.theme.basename, Regexp.last_match(:rest))
+        when %r!\A/(.*)!
+          Regexp.last_match(1)
+        else
+          filename
+        end
       end
     end
 

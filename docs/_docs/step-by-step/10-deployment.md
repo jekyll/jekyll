@@ -39,7 +39,7 @@ Jekyll plugins allow you to create custom generated content specific to your
 site. There's many [plugins](/docs/plugins/) available or you can even
 write your own.
 
-There's three official plugins which are useful on almost any Jekyll site:
+There are three official plugins which are useful on almost any Jekyll site:
 
 * [jekyll-sitemap](https://github.com/jekyll/jekyll-sitemap) - Creates a sitemap
 file to help search engines index content

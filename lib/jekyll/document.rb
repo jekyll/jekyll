@@ -257,8 +257,7 @@ module Jekyll
     #
     # Returns the full path to the output file of this document.
     def destination(base_directory)
-      dest = site.in_dest_dir(base_directory)
-      path = site.in_dest_dir(dest, URL.unescape_path(url))
+      path = site.in_dest_dir(base_directory, URL.unescape_path(url))
       if url.end_with? "/"
         path = File.join(path, "index.html")
       else
@@ -352,7 +351,9 @@ module Jekyll
     # method returns true, and if the site's Publisher will publish the document.
     # False otherwise.
     def write?
-      collection&.write? && site.publisher.publish?(self)
+      return @write_p if defined?(@write_p)
+
+      @write_p = collection&.write? && site.publisher.publish?(self)
     end
 
     # The Document excerpt_separator, from the YAML Front-Matter or site
@@ -505,6 +506,10 @@ module Jekyll
       elsif relative_path =~ DATELESS_FILENAME_MATCHER
         slug, ext = Regexp.last_match.captures
       end
+      # `slug` will be nil for documents without an extension since the regex patterns
+      # above tests for an extension as well.
+      # In such cases, assign `basename_without_ext` as the slug.
+      slug ||= basename_without_ext
 
       # slugs shouldn't end with a period
       # `String#gsub!` removes all trailing periods (in comparison to `String#chomp!`)

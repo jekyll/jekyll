@@ -61,33 +61,7 @@ test:
 
 ## Complete Example circle.yml File
 
-### CircleCI v1
-
-When you put it all together, here's an example of what that `circle.yml` file could look like in v1:
-
-```yaml
-machine:
-  environment:
-    NOKOGIRI_USE_SYSTEM_LIBRARIES: true # speeds up installation of html-proofer
-
-dependencies:
-  post:
-    - bundle exec jekyll build
-
-test:
-  post:
-    - bundle exec htmlproofer ./_site --allow-hash-href --check-favicon --check-html --disable-external
-
-deployment:
-  prod:
-    branch: master
-    commands:
-      - rsync -va --delete ./_site username@my-website:/var/html
-```
-
-### CircleCI v2
-
-CircleCI v2 is a Docker-based system. The example `circle.yml` below demonstrates how to
+Since v2, CircleCI is a Docker-based system. The example `circle.yml` below demonstrates how to
 deploy your Jekyll project to AWS. In order for this to work you would first have to set the
 `S3_BUCKET_NAME` [environment variable](https://circleci.com/docs/2.0/env-vars/).
 
