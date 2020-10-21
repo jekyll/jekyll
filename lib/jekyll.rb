@@ -39,6 +39,16 @@ require "i18n"
 
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
+module Liquid
+  class Expression
+    begin
+      const_get("MethodLiteral")
+    rescue NameError
+      MethodLiteral = Liquid::Condition::MethodLiteral
+    end
+  end
+end
+
 module Jekyll
   # internal requires
   autoload :Cleaner,             "jekyll/cleaner"
