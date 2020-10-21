@@ -79,6 +79,9 @@ module Jekyll
             # This will help ensure the proper Jekyll version is running.
             # Happy Jekylling!
             gem "jekyll", "~> #{Jekyll::VERSION}"
+
+            gem "liquid", :github => "Shopify/liquid"
+
             # This is the default theme for new Jekyll sites. You may change this to anything you like.
             gem "minima", "~> 2.5"
             # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
