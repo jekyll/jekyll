@@ -193,8 +193,7 @@ CONTENT
 
       should "render markdown with pygments with line numbers" do
         assert_match(
-          %(<pre><code class="language-text" data-lang="text">) +
-          %(<span></span><span class="lineno">1 </span>test</code></pre>),
+          %r{<pre><code class="language-text" data-lang="text"><span></span><span class="linenos?">1 ?</span>test</code></pre>}
           @result
         )
       end
