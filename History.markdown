@@ -25,6 +25,7 @@
   * Improve maintainability of config option data (#8383)
   * Remove CircleCI v1 docs (#8410)
   * Remove NOKOGIRI_USE_SYSTEM_LIBRARIES from Travis CI docs (#8409)
+  * Add links to all Jekyll themes on GitHub tagged with #jekyll-theme (#8447)
 
 ### Development Fixes
 
