@@ -32,7 +32,7 @@ module Jekyll
       @dir  = dir
       @name = name
       @collection = collection
-      @relative_path = File.join(*[@dir, @name].compact)
+      @relative_path = +PathManager.join(@dir, @name)
       @extname = File.extname(@name)
     end
     # rubocop: enable Metrics/ParameterLists
@@ -40,12 +40,14 @@ module Jekyll
     # Returns source file path.
     def path
       @path ||= begin
-        # Static file is from a collection inside custom collections directory
-        if !@collection.nil? && !@site.config["collections_dir"].empty?
-          File.join(*[@base, @site.config["collections_dir"], @dir, @name].compact)
-        else
-          File.join(*[@base, @dir, @name].compact)
-        end
+        # Static file could be from a collection inside custom collections directory
+        collections_dir = @site.config["collections_dir"]
+        base_path = if @collection && !collections_dir.empty?
+                      PathManager.join(@base, collections_dir)
+                    else
+                      @base
+                    end
+        +PathManager.join(base_path, @relative_path)
       end
     end
 
