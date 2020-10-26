@@ -10,9 +10,12 @@ and other resources that can be helpful. Below is a collection of links to
 some of the most popular Jekyll resources.
 
 ## Themes
+- [GitHub.com #jekyll-theme repos](https://github.com/topics/jekyll-theme)
 - [jamstackthemes.dev](https://jamstackthemes.dev/ssg/jekyll/)
 - [jekyllthemes.org](http://jekyllthemes.org/)
 - [jekyllthemes.io](https://jekyllthemes.io/)
+
+See also: [docs/themes](/docs/themes/).
 
 ## Plugins
 - [jekyll-plugin topic on GitHub](https://github.com/topics/jekyll-plugin)
