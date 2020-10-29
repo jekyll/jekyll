@@ -55,7 +55,7 @@ directory (`_sass/`) by default which you already created directly under the roo
 At this stage you'll just have a main css file. For larger projects, this is a
 great way to keep your CSS organized.
 
-We'll create the current class mentioned above, which will color the current link green. Create a Sass file at `_sass/main.scss` with the following content:
+Create the current class mentioned above in order to color the current link green. Create a Sass file at `_sass/main.scss` with the following content:
 
 ```sass
 .current {
