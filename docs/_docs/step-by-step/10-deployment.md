@@ -13,7 +13,7 @@ different environments.
 
 Create a `Gemfile` in the root. 
 The file should be called 'Gemfile' and should *not* have any extension. 
-You can create a Gemfile with bundler and then add the `jekyll` gem:
+You can create a Gemfile with Bundler and then add the `jekyll` gem:
 
 ```sh
 bundle init
@@ -29,7 +29,7 @@ source "https://rubygems.org"
 gem "jekyll"
 ```
 
-bundler installs the gems and creates a `Gemfile.lock` which locks the current 
+Bundler installs the gems and creates a `Gemfile.lock` which locks the current 
 gem versions for a future `bundle install`. If you ever want to update your gem 
 versions you can run `bundle update`.
 
