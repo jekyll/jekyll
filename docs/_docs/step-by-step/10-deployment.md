@@ -11,7 +11,9 @@ It's good practice to have a [Gemfile](/docs/ruby-101/#gemfile) for your site.
 This ensures the version of Jekyll and other gems remains consistent across
 different environments.
 
-Create `Gemfile` in the root with the following:
+Create a `Gemfile` in the root. The file should be called 'Gemfile' and should *not* have any extension. 
+
+Inside the file add the following:
 
 ```ruby
 source 'https://rubygems.org'
