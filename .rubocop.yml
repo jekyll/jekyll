@@ -67,9 +67,13 @@ Lint/DeprecatedOpenSSLConstant:
   Enabled: true
 Lint/DuplicateElsifCondition:
   Enabled: true
+Lint/DuplicateRegexpCharacterClassElement:
+  Enabled: true
 Lint/DuplicateRescueException:
   Enabled: true
 Lint/DuplicateRequire:
+  Enabled: true
+Lint/EmptyBlock:
   Enabled: true
 Lint/EmptyConditionalBody:
   Enabled: true
@@ -98,9 +102,13 @@ Lint/SelfAssignment:
   Enabled: true
 Lint/StructNewOverride:
   Enabled: true
+Lint/ToEnumArguments:
+  Enabled: false
 Lint/TopLevelReturnWithArgument:
   Enabled: true
 Lint/TrailingCommaInAttributeDeclaration:
+  Enabled: true
+Lint/UnmodifiedReduceAccumulator:
   Enabled: true
 Lint/UnreachableCode:
   Severity: error
@@ -192,6 +200,8 @@ Security/YAMLLoad:
     - !ruby/regexp /features\/.*.rb/
     - !ruby/regexp /test\/.*.rb$/
 
+Style/ArgumentsForwarding:
+  Enabled: false
 Style/ArrayCoercion:
   Enabled: true
 Style/AccessModifierDeclarations:
@@ -215,6 +225,8 @@ Style/CombinableLoops:
   Enabled: true
 Style/Documentation:
   Enabled: false
+Style/DocumentDynamicEvalDefinition:
+  Enabled: true
 Style/DoubleNegation:
   Enabled: false
 Style/ExponentialNotation:
@@ -301,6 +313,8 @@ Style/StringConcatenation:
     - test/**/*.rb
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
+Style/SwapValues:
+  Enabled: true
 Style/SymbolArray:
   EnforcedStyle: brackets
 Style/TrailingCommaInArrayLiteral:
