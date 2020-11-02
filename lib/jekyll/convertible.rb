@@ -117,7 +117,6 @@ module Jekyll
           hsh[attribute] = send(attribute)
         end
 
-      defaults = site.frontmatter_defaults.all(relative_path, type)
       Utils.deep_merge_hashes defaults, Utils.deep_merge_hashes(data, further_data)
     end
 
@@ -246,6 +245,10 @@ module Jekyll
     end
 
     private
+
+    def defaults
+      @defaults ||= site.frontmatter_defaults.all(relative_path, type)
+    end
 
     def no_layout?
       data["layout"] == "none"
