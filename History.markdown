@@ -45,6 +45,7 @@
   * Update cucumber gem version to 5.1.2 (#8413)
   * Fix test suite compatibility with JRuby (#8418)
   * chore(deps): bump Rubocop to 0.93.0 (#8430)
+  * Use Ruby 2.7.1 in GitHub Actions (#8444)
 
 ### Bug Fixes
 
