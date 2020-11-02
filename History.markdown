@@ -64,6 +64,7 @@
   * Use Regexp#match? when MatchData is not required (#8427)
   * Check default front matter scope against symbols (#8393)
   * Stash frequently used Drop setter keys for reuse (#8394)
+  * Memoize defaults computed for Convertibles (#8451)
 
 ### Minor Enhancements
 
