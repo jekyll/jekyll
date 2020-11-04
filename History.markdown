@@ -66,6 +66,7 @@
   * Check default front matter scope against symbols (#8393)
   * Stash frequently used Drop setter keys for reuse (#8394)
   * Memoize defaults computed for Convertibles (#8451)
+  * Reduce array allocations from merging categories (#8453)
 
 ### Minor Enhancements
 
