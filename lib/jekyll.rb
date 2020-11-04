@@ -76,6 +76,7 @@ module Jekyll
   autoload :RelatedPosts,        "jekyll/related_posts"
   autoload :Renderer,            "jekyll/renderer"
   autoload :LiquidRenderer,      "jekyll/liquid_renderer"
+  autoload :LiquidRendererProf,  "jekyll/liquid_renderer_prof"
   autoload :Site,                "jekyll/site"
   autoload :StaticFile,          "jekyll/static_file"
   autoload :Stevenson,           "jekyll/stevenson"

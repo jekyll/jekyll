@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
-require_relative "liquid_renderer/file"
-require_relative "liquid_renderer/table"
+require_relative "liquid_renderer/template"
 
 module Jekyll
   class LiquidRenderer
+    def self.format_error(error, path)
+      "#{error.message} in #{path}"
+    end
+
     def initialize(site)
       @site = site
       Liquid::Template.error_mode = @site.config["liquid"]["error_mode"].to_sym
@@ -12,35 +15,27 @@ module Jekyll
     end
 
     def reset
-      @stats = {}
       @cache = {}
     end
 
     def file(filename)
-      filename = normalize_path(filename)
-      LiquidRenderer::File.new(self, filename).tap do
-        @stats[filename] ||= new_profile_hash
-      end
+      LiquidRenderer::Template.new(self, filename)
     end
 
     def increment_bytes(filename, bytes)
-      @stats[filename][:bytes] += bytes
+      raise NotImplementedError
     end
 
     def increment_time(filename, time)
-      @stats[filename][:time] += time
+      raise NotImplementedError
     end
 
     def increment_count(filename)
-      @stats[filename][:count] += 1
+      raise NotImplementedError
     end
 
     def stats_table(num_of_rows = 50)
-      LiquidRenderer::Table.new(@stats).to_s(num_of_rows)
-    end
-
-    def self.format_error(error, path)
-      "#{error.message} in #{path}"
+      Jekyll.logger.warn "Build site with --profile enabled to display stats"
     end
 
     # A persistent cache to store and retrieve parsed templates based on the filename
@@ -49,32 +44,6 @@ module Jekyll
     # It is emptied when `self.reset` is called.
     def cache
       @cache ||= {}
-    end
-
-    private
-
-    def normalize_path(filename)
-      @normalize_path ||= {}
-      @normalize_path[filename] ||= begin
-        theme_dir = @site.theme&.root
-        case filename
-        when %r!\A(#{Regexp.escape(@site.source)}/)(?<rest>.*)!io
-          Regexp.last_match(:rest)
-        when %r!(/gems/.*)*/gems/(?<dirname>[^/]+)(?<rest>.*)!,
-             %r!(?<dirname>[^/]+/lib)(?<rest>.*)!
-          "#{Regexp.last_match(:dirname)}#{Regexp.last_match(:rest)}"
-        when theme_dir && %r!\A#{Regexp.escape(theme_dir)}/(?<rest>.*)!io
-          PathManager.join(@site.theme.basename, Regexp.last_match(:rest))
-        when %r!\A/(.*)!
-          Regexp.last_match(1)
-        else
-          filename
-        end
-      end
-    end
-
-    def new_profile_hash
-      Hash.new { |hash, key| hash[key] = 0 }
     end
   end
 end

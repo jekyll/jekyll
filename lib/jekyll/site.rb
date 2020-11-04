@@ -28,7 +28,7 @@ module Jekyll
       @reader          = Reader.new(self)
       @profiler        = Profiler.new(self)
       @regenerator     = Regenerator.new(self)
-      @liquid_renderer = LiquidRenderer.new(self)
+      @liquid_renderer = profiling? ? LiquidRendererProf.new(self) : LiquidRenderer.new(self)
 
       Jekyll.sites << self
 
@@ -72,7 +72,7 @@ module Jekyll
     #
     # Returns nothing.
     def process
-      return profiler.profile_process if config["profile"]
+      return profiler.profile_process if profiling?
 
       reset
       read
@@ -434,6 +434,10 @@ module Jekyll
     def collections_path
       dir_str = config["collections_dir"]
       @collections_path ||= dir_str.empty? ? source : in_source_dir(dir_str)
+    end
+
+    def profiling?
+      config["profile"]
     end
 
     private
