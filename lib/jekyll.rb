@@ -93,6 +93,8 @@ module Jekyll
   require "jekyll/liquid_extensions"
   require "jekyll/filters"
 
+  EMPTY_READ_ONLY_HASH = {}.freeze
+
   class << self
     # Public: Tells you which Jekyll environment you are building in so you can skip tasks
     # if you need to.  This is useful when doing expensive compression tasks on css and
@@ -111,7 +113,7 @@ module Jekyll
     #            list of option names and their defaults.
     #
     # Returns the final configuration Hash.
-    def configuration(override = {})
+    def configuration(override = Jekyll::EMPTY_READ_ONLY_HASH)
       config = Configuration.new
       override = Configuration[override].stringify_keys
       unless override.delete("skip_config_files")

@@ -110,12 +110,12 @@ module Jekyll
       get_config_value_with_override("source", override)
     end
 
-    def quiet(override = {})
+    def quiet(override = Jekyll::EMPTY_READ_ONLY_HASH)
       get_config_value_with_override("quiet", override)
     end
     alias_method :quiet?, :quiet
 
-    def verbose(override = {})
+    def verbose(override = Jekyll::EMPTY_READ_ONLY_HASH)
       get_config_value_with_override("verbose", override)
     end
     alias_method :verbose?, :verbose

@@ -365,7 +365,7 @@ module Jekyll
     # Whether to perform a full rebuild without incremental regeneration
     #
     # Returns a Boolean: true for a full rebuild, false for normal build
-    def incremental?(override = {})
+    def incremental?(override = Jekyll::EMPTY_READ_ONLY_HASH)
       override["incremental"] || config["incremental"]
     end
 

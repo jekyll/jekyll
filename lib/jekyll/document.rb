@@ -39,7 +39,7 @@ module Jekyll
     #             Document belong.
     #
     # Returns nothing.
-    def initialize(path, relations = {})
+    def initialize(path, relations = Jekyll::EMPTY_READ_ONLY_HASH)
       @site = relations[:site]
       @path = path
       @extname = File.extname(path)
@@ -293,7 +293,7 @@ module Jekyll
     # values
     #
     # Returns nothing.
-    def read(opts = {})
+    def read(opts = Jekyll::EMPTY_READ_ONLY_HASH)
       Jekyll.logger.debug "Reading:", relative_path
 
       if yaml_file?

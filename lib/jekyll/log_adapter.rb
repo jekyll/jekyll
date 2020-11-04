@@ -35,7 +35,7 @@ module Jekyll
       @level = level
     end
 
-    def adjust_verbosity(options = {})
+    def adjust_verbosity(options = Jekyll::EMPTY_READ_ONLY_HASH)
       # Quiet always wins.
       if options[:quiet]
         self.log_level = :error
