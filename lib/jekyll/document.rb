@@ -257,13 +257,16 @@ module Jekyll
     #
     # Returns the full path to the output file of this document.
     def destination(base_directory)
-      path = site.in_dest_dir(base_directory, URL.unescape_path(url))
-      if url.end_with? "/"
-        path = File.join(path, "index.html")
-      else
-        path << output_ext unless path.end_with? output_ext
+      @destination ||= {}
+      @destination[base_directory] ||= begin
+        path = site.in_dest_dir(base_directory, URL.unescape_path(url))
+        if url.end_with? "/"
+          path = File.join(path, "index.html")
+        else
+          path << output_ext unless path.end_with? output_ext
+        end
+        path
       end
-      path
     end
 
     # Write the generated Document file to the destination directory.
