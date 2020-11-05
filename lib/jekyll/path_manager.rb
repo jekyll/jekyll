@@ -16,45 +16,47 @@ module Jekyll
     # This class cannot be initialized from outside
     private_class_method :new
 
-    # Wraps `File.join` to cache the frozen result.
-    # Reassigns `nil`, empty strings and empty arrays to a frozen empty string beforehand.
-    #
-    # Returns a frozen string.
-    def self.join(base, item)
-      base = "" if base.nil? || base.empty?
-      item = "" if item.nil? || item.empty?
-      @join ||= {}
-      @join[base] ||= {}
-      @join[base][item] ||= File.join(base, item).freeze
-    end
+    class << self
+      # Wraps `File.join` to cache the frozen result.
+      # Reassigns `nil`, empty strings and empty arrays to a frozen empty string beforehand.
+      #
+      # Returns a frozen string.
+      def join(base, item)
+        base = "" if base.nil? || base.empty?
+        item = "" if item.nil? || item.empty?
+        @join ||= {}
+        @join[base] ||= {}
+        @join[base][item] ||= File.join(base, item).freeze
+      end
 
-    # Ensures the questionable path is prefixed with the base directory
-    # and prepends the questionable path with the base directory if false.
-    #
-    # Returns a frozen string.
-    def self.sanitized_path(base_directory, questionable_path)
-      @sanitized_path ||= {}
-      @sanitized_path[base_directory] ||= {}
-      @sanitized_path[base_directory][questionable_path] ||= begin
-        return base_directory.freeze if questionable_path.nil?
+      # Ensures the questionable path is prefixed with the base directory
+      # and prepends the questionable path with the base directory if false.
+      #
+      # Returns a frozen string.
+      def sanitized_path(base_directory, questionable_path)
+        @sanitized_path ||= {}
+        @sanitized_path[base_directory] ||= {}
+        @sanitized_path[base_directory][questionable_path] ||= begin
+          return base_directory.freeze if questionable_path.nil?
 
-        clean_path = if questionable_path.start_with?("~")
-                       questionable_path.dup.insert(0, "/")
-                     else
-                       questionable_path
-                     end
-        clean_path = File.expand_path(clean_path, "/")
-        return clean_path.freeze if clean_path.eql?(base_directory)
+          clean_path = if questionable_path.start_with?("~")
+                         questionable_path.dup.insert(0, "/")
+                       else
+                         questionable_path
+                       end
+          clean_path = File.expand_path(clean_path, "/")
+          return clean_path.freeze if clean_path.eql?(base_directory)
 
-        # remove any remaining extra leading slashes not stripped away by calling
-        # `File.expand_path` above.
-        clean_path.squeeze!("/")
+          # remove any remaining extra leading slashes not stripped away by calling
+          # `File.expand_path` above.
+          clean_path.squeeze!("/")
 
-        if clean_path.start_with?(base_directory.sub(%r!\z!, "/"))
-          clean_path.freeze
-        else
-          clean_path.sub!(%r!\A\w:/!, "/")
-          join(base_directory, clean_path)
+          if clean_path.start_with?(base_directory.sub(%r!\z!, "/"))
+            clean_path.freeze
+          else
+            clean_path.sub!(%r!\A\w:/!, "/")
+            join(base_directory, clean_path)
+          end
         end
       end
     end
