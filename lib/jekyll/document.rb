@@ -350,11 +350,14 @@ module Jekyll
     # True if the document has a collection and if that collection's #write?
     # method returns true, and if the site's Publisher will publish the document.
     # False otherwise.
+    #
+    # rubocop:disable Naming/MemoizedInstanceVariableName
     def write?
       return @write_p if defined?(@write_p)
 
       @write_p = collection&.write? && site.publisher.publish?(self)
     end
+    # rubocop:enable Naming/MemoizedInstanceVariableName
 
     # The Document excerpt_separator, from the YAML Front-Matter or site
     # default excerpt_separator value

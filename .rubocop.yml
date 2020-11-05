@@ -92,6 +92,8 @@ Lint/MixedRegexpCaptureTypes:
 Lint/NestedPercentLiteral:
   Exclude:
     - test/test_site.rb
+Lint/NoReturnInBeginEndBlocks:
+  Enabled: false
 Lint/OutOfRangeRegexpRef:
   Enabled: true
 Lint/RaiseException:
@@ -221,6 +223,8 @@ Style/ClassAndModuleChildren:
     - test/**/*.rb
 Style/ClassEqualityComparison:
   Enabled: true
+Style/CollectionCompact:
+  Enabled: true
 Style/CombinableLoops:
   Enabled: true
 Style/Documentation:
@@ -266,6 +270,8 @@ Style/ModuleFunction:
   Enabled: false
 Style/MultilineTernaryOperator:
   Severity: error
+Style/NegatedIfElseCondition:
+  Enabled: true
 Style/OptionalBooleanParameter:
   Enabled: true
 Style/PercentLiteralDelimiters:
