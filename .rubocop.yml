@@ -93,7 +93,7 @@ Lint/NestedPercentLiteral:
   Exclude:
     - test/test_site.rb
 Lint/NoReturnInBeginEndBlocks:
-  Enabled: false
+  Enabled: true
 Lint/OutOfRangeRegexpRef:
   Enabled: true
 Lint/RaiseException:

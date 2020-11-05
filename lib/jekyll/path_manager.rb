@@ -37,27 +37,37 @@ module Jekyll
         @sanitized_path ||= {}
         @sanitized_path[base_directory] ||= {}
         @sanitized_path[base_directory][questionable_path] ||= begin
-          return base_directory.freeze if questionable_path.nil?
-
-          clean_path = if questionable_path.start_with?("~")
-                         questionable_path.dup.insert(0, "/")
-                       else
-                         questionable_path
-                       end
-          clean_path = File.expand_path(clean_path, "/")
-          return clean_path.freeze if clean_path.eql?(base_directory)
-
-          # remove any remaining extra leading slashes not stripped away by calling
-          # `File.expand_path` above.
-          clean_path.squeeze!("/")
-
-          if clean_path.start_with?(base_directory.sub(%r!\z!, "/"))
-            clean_path.freeze
+          if questionable_path.nil?
+            base_directory.freeze
           else
-            clean_path.sub!(%r!\A\w:/!, "/")
-            join(base_directory, clean_path)
+            sanitize_and_join(base_directory, questionable_path).freeze
           end
         end
+      end
+
+      private
+
+      def sanitize_and_join(base_directory, questionable_path)
+        clean_path = if questionable_path.start_with?("~")
+                       questionable_path.dup.insert(0, "/")
+                     else
+                       questionable_path
+                     end
+        clean_path = File.expand_path(clean_path, "/")
+        return clean_path if clean_path.eql?(base_directory)
+
+        # remove any remaining extra leading slashes not stripped away by calling
+        # `File.expand_path` above.
+        clean_path.squeeze!("/")
+        return clean_path if clean_path.start_with?(slashed_dir_cache(base_directory))
+
+        clean_path.sub!(%r!\A\w:/!, "/")
+        join(base_directory, clean_path)
+      end
+
+      def slashed_dir_cache(base_directory)
+        @slashed_dir_cache ||= {}
+        @slashed_dir_cache[base_directory] ||= base_directory.sub(%r!\z!, "/")
       end
     end
   end
