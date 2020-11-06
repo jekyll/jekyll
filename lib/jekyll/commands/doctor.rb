@@ -72,7 +72,7 @@ module Jekyll
 
             conflicting_urls = true
             Jekyll.logger.warn "URL Conflict:",
-            "The destination #{url.inspect} is the same for the following:"
+                               "The destination #{url.inspect} is the same for the following:"
             paths.each { |path| Jekyll.logger.warn "", " - #{path}" }
           end
           conflicting_urls
