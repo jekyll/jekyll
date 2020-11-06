@@ -69,6 +69,7 @@
   * Memoize defaults computed for Convertibles (#8451)
   * Reduce array allocations from merging categories (#8453)
   * Enable Lint/NoReturnInBeginEndBlocks Cop (#8457)
+  * Memoize destination of pages, documents and staticfiles (#8458)
 
 ### Minor Enhancements
 
