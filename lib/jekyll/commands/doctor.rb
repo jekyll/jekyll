@@ -121,7 +121,7 @@ module Jekyll
         private
 
         def url_source_map(site)
-          @url_source_map ||= {}.tap do |result|
+          {}.tap do |result|
             site.each_site_file do |thing|
               next if allow_used_permalink?(thing)
 
