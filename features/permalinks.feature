@@ -143,14 +143,40 @@ Feature: Fancy permalinks
     And I should see "I am PHP" in "_site/2016/i-am-php.php"
     And I should see "I am also PHP" in "_site/i-am-also-php.php"
 
-  Scenario: Use the same permalink twice
+  Scenario: Using the same permalink twice
     Given I have a "cool.md" page with permalink "/amazing.html" that contains "I am cool"
     And I have an "awesome.md" page with permalink "/amazing.html" that contains "I am also awesome"
+    And I have an "amazing.html" file with content:
+      """
+      Hello World
+      I'm a static file
+      """
+    And I have a "_config.yml" file with content:
+      """
+      collections:
+        puppies:
+          output: true
+          permalink: /:collection/:year/:month/:day/:title:output_ext
+      """
+    And I have a _puppies directory
+    And I have the following documents under the puppies collection:
+      | title  | date       | content             |
+      | Rover  | 2009-03-27 | content for Rover.  |
+    And I have a _posts directory
+    And I have the following post:
+      | title     | date       | layout | category  | content                 |
+      | Rover     | 2009-03-27 | none   | puppies   | Luke, I am your father. |
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "Conflict: The URL '" in the build output
-    And I should see "amazing.html' is the destination for the following pages: awesome.md, cool.md" in the build output
+    And I should see "Conflict: The following destination is shared by multiple files." in the build output
+    And I should see "_site/amazing.html" in the build output
+    And I should see "awesome.md" in the build output
+    And I should see "cool.md" in the build output
+    And I should see "amazing.html" in the build output
+    And I should see "_site/puppies/2009/03/27/rover.html" in the build output
+    And I should see "_posts/2009-03-27-rover.markdown" in the build output
+    And I should see "_puppies/rover.md" in the build output
 
   Scenario: Redirecting from an existing permalink
     Given I have a configuration file with "plugins" set to "[jekyll-redirect-from]"
@@ -166,5 +192,7 @@ Feature: Fancy permalinks
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should not see "Conflict: The URL '" in the build output
-    And I should not see "offers/index.html' is the destination for the following pages: offers.html, redirect.html" in the build output
+    And I should not see "Conflict: The following destination is shared by multiple files." in the build output
+    And I should not see "_site/offers/index.html" in the build output
+    And I should not see "offers.html" in the build output
+    And I should not see "redirect.html" in the build output
