@@ -78,6 +78,7 @@
   * Add post_convert hook to modify HTML content before layout (#8368)
   * Cache Jekyll.sanitized_path (#8424)
   * Memoize array of drop getter method names (#8421)
+  * Enhance detection of conflicting destination URLs (#8459)
 
 ## 4.1.1 / 2020-06-24
 
