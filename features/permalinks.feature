@@ -169,14 +169,14 @@ Feature: Fancy permalinks
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "URL Conflict: The destination \"" in the build output
-    And I should see "_site/amazing.html\" is the same for the following:" in the build output
+    And I should see "Conflict: The following destination is shared by multiple files." in the build output
+    And I should see "_site/amazing.html" in the build output
     And I should see "awesome.md" in the build output
     And I should see "cool.md" in the build output
-    And I should see "tmp/jekyll/amazing.html" in the build output
-    And I should see "_site/puppies/2009/03/27/rover.html\" is the same for the following:" in the build output
-    And I should see "tmp/jekyll/_posts/2009-03-27-rover.markdown" in the build output
-    And I should see "tmp/jekyll/_puppies/rover.md" in the build output
+    And I should see "amazing.html" in the build output
+    And I should see "_site/puppies/2009/03/27/rover.html" in the build output
+    And I should see "_posts/2009-03-27-rover.markdown" in the build output
+    And I should see "_puppies/rover.md" in the build output
 
   Scenario: Redirecting from an existing permalink
     Given I have a configuration file with "plugins" set to "[jekyll-redirect-from]"
@@ -192,5 +192,7 @@ Feature: Fancy permalinks
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should not see "Conflict: The URL '" in the build output
-    And I should not see "offers/index.html' is the destination for the following pages: offers.html, redirect.html" in the build output
+    And I should not see "Conflict: The following destination is shared by multiple files." in the build output
+    And I should not see "_site/offers/index.html" in the build output
+    And I should not see "offers.html" in the build output
+    And I should not see "redirect.html" in the build output

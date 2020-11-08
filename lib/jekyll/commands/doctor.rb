@@ -67,13 +67,16 @@ module Jekyll
 
         def conflicting_urls(site)
           conflicting_urls = false
-          url_source_map(site).each do |url, paths|
+          destination_map(site).each do |dest, paths|
             next unless paths.size > 1
 
             conflicting_urls = true
-            Jekyll.logger.warn "URL Conflict:",
-                               "The destination #{url.inspect} is the same for the following:"
+            Jekyll.logger.warn "Conflict:",
+                               "The following destination is shared by multiple files."
+            Jekyll.logger.warn "", "The written file may end up with unexpected contents."
+            Jekyll.logger.warn "", dest.to_s.cyan
             paths.each { |path| Jekyll.logger.warn "", " - #{path}" }
+            Jekyll.logger.warn ""
           end
           conflicting_urls
         end
@@ -120,17 +123,13 @@ module Jekyll
 
         private
 
-        def url_source_map(site)
+        def destination_map(site)
           {}.tap do |result|
             site.each_site_file do |thing|
               next if allow_used_permalink?(thing)
 
               dest_path = thing.destination(site.dest)
-              if result[dest_path]
-                result[dest_path] << thing.path
-              else
-                result[dest_path] = [thing.path]
-              end
+              (result[dest_path] ||= []) << thing.path
             end
           end
         end
