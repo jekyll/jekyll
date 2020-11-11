@@ -91,13 +91,6 @@
 
 ## 4.1.1 / 2020-06-24
 
-  * Fix grammar in documentation section (#8265)
-
-### Development Fixes
-
-  * Bump RuboCop to v0.85.x (#8223)
-  * Expect drive letter only on vanilla windows (#8227)
-
 ### Bug Fixes
 
   * Disable page excerpts by default (#8222)
@@ -114,11 +107,17 @@
   * correct typo (#8261)
   * Allow hyperlinks to specific filter documentation (#8231)
   * Update link to Netlify step-by-step guide (#8264)
+  * Fix grammar in documentation section (#8265)
 
 ### Site Enhancements
 
   * Including correct Sketch website (#8241)
   * Release post for v4.1.1 (#8243)
+  
+### Development Fixes
+
+  * Bump RuboCop to v0.85.x (#8223)
+  * Expect drive letter only on vanilla windows (#8227)
 
 ## 4.1.0 / 2020-05-27
 
