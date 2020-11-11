@@ -35,11 +35,11 @@ module Jekyll
     # Returns nothing.
     # rubocop:disable Metrics/AbcSize
     def read_yaml(base, name, opts = {})
-      filename = File.join(base, name)
+      filename = @path || site.in_source_dir(base, name)
+      Jekyll.logger.debug "Reading:", relative_path
 
       begin
-        self.content = File.read(@path || site.in_source_dir(base, name),
-                                 **Utils.merged_file_read_opts(site, opts))
+        self.content = File.read(filename, **Utils.merged_file_read_opts(site, opts))
         if content =~ Document::YAML_FRONT_MATTER_REGEXP
           self.content = $POSTMATCH
           self.data = SafeYAML.load(Regexp.last_match(1))
