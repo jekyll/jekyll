@@ -71,6 +71,7 @@
   * Enable Lint/NoReturnInBeginEndBlocks Cop (#8457)
   * Memoize destination of pages, documents and staticfiles (#8458)
   * Generate items from `site.include` list only once (#8463)
+  * Allow triggering `:post_convert` events atomically (#8465)
 
 ### Minor Enhancements
 
