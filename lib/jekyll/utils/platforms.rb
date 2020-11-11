@@ -5,77 +5,62 @@ module Jekyll
     module Platforms
       extend self
 
-      # Provides jruby? and mri? which respectively detect these two types of
-      # tested Engines we support, in the future we might probably support the
-      # other one that everyone used to talk about.
-
-      { :jruby? => "jruby", :mri? => "ruby" }.each do |k, v|
-        define_method k do
-          ::RUBY_ENGINE == v
-        end
+      def jruby?
+        RUBY_ENGINE == "jruby"
       end
 
-      # --
-      # Allows you to detect "real" Windows, or what we would consider
-      # "real" Windows.  That is, that we can pass the basic test and the
-      # /proc/version returns nothing to us.
-      # --
-
-      def vanilla_windows?
-        RbConfig::CONFIG["host_os"] =~ %r!mswin|mingw|cygwin!i && \
-          !proc_version
+      def mri?
+        RUBY_ENGINE == "ruby"
       end
-
-      # --
-      # XXX: Remove in 4.0
-      # --
-
-      alias_method :really_windows?, \
-                   :vanilla_windows?
-
-      #
-
-      def bash_on_windows?
-        RbConfig::CONFIG["host_os"] =~ %r!linux! && \
-          proc_version =~ %r!microsoft!i
-      end
-
-      #
 
       def windows?
         vanilla_windows? || bash_on_windows?
       end
 
-      #
+      # Not a Windows Subsystem for Linux (WSL)
+      def vanilla_windows?
+        rbconfig_host.match?(%r!mswin|mingw|cygwin!) && proc_version.empty?
+      end
+      alias_method :really_windows?, :vanilla_windows?
+
+      # Determine if Windows Subsystem for Linux (WSL)
+      def bash_on_windows?
+        linux_os? && microsoft_proc_version?
+      end
 
       def linux?
-        RbConfig::CONFIG["host_os"] =~ %r!linux! && \
-          proc_version !~ %r!microsoft!i
+        linux_os? && !microsoft_proc_version?
       end
 
-      # Provides windows?, linux?, osx?, unix? so that we can detect
-      # platforms. This is mostly useful for `jekyll doctor` and for testing
-      # where we kick off certain tests based on the platform.
-
-      { :osx? => %r!darwin|mac os!, :unix? => %r!solaris|bsd! }.each do |k, v|
-        define_method k do
-          !!(
-            RbConfig::CONFIG["host_os"] =~ v
-          )
-        end
+      def osx?
+        rbconfig_host.match?(%r!darwin|mac os!)
       end
 
-      #
+      def unix?
+        rbconfig_host.match?(%r!solaris|bsd!)
+      end
 
       private
 
       def proc_version
-        @proc_version ||=
+        @proc_version ||= \
           begin
-            File.read("/proc/version")
+            File.read("/proc/version").downcase
           rescue Errno::ENOENT, Errno::EACCES
-            nil
+            ""
           end
+      end
+
+      def rbconfig_host
+        @rbconfig_host ||= RbConfig::CONFIG["host_os"].downcase
+      end
+
+      def linux_os?
+        rbconfig_host.include?("linux")
+      end
+
+      def microsoft_proc_version?
+        proc_version.include?("microsoft")
       end
     end
   end

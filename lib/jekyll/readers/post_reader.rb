@@ -3,6 +3,7 @@
 module Jekyll
   class PostReader
     attr_reader :site, :unfiltered_content
+
     def initialize(site)
       @site = site
     end
@@ -56,7 +57,7 @@ module Jekyll
         Document.new(path,
                      :site       => @site,
                      :collection => @site.posts)
-      end.reject(&:nil?)
+      end.tap(&:compact!)
     end
 
     private

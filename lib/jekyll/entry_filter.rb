@@ -3,6 +3,7 @@
 module Jekyll
   class EntryFilter
     attr_reader :site
+
     SPECIAL_LEADING_CHAR_REGEX = %r!\A#{Regexp.union([".", "_", "#", "~"])}!o.freeze
 
     def initialize(site, base_directory = nil)
@@ -32,13 +33,21 @@ module Jekyll
         # Reject this entry if it is just a "dot" representation.
         #   e.g.: '.', '..', '_movies/.', 'music/..', etc
         next true if e.end_with?(".")
-        # Reject this entry if it is a symlink.
-        next true if symlink?(e)
-        # Do not reject this entry if it is included.
-        next false if included?(e)
 
-        # Reject this entry if it is special, a backup file, or excluded.
-        special?(e) || backup?(e) || excluded?(e)
+        # Check if the current entry is explicitly included and cache the result
+        included = included?(e)
+
+        # Reject current entry if it is excluded but not explicitly included as well.
+        next true if excluded?(e) && !included
+
+        # Reject current entry if it is a symlink.
+        next true if symlink?(e)
+
+        # Do not reject current entry if it is explicitly included.
+        next false if included
+
+        # Reject current entry if it is special or a backup file.
+        special?(e) || backup?(e)
       end
     end
 
@@ -91,6 +100,7 @@ module Jekyll
     # Returns true if path matches against any glob pattern, else false.
     def glob_include?(enumerator, entry)
       entry_with_source = PathManager.join(site.source, entry)
+      entry_is_directory = File.directory?(entry_with_source)
 
       enumerator.any? do |pattern|
         case pattern
@@ -99,7 +109,7 @@ module Jekyll
 
           File.fnmatch?(pattern_with_source, entry_with_source) ||
             entry_with_source.start_with?(pattern_with_source) ||
-            (pattern_with_source == "#{entry_with_source}/" if File.directory?(entry_with_source))
+            (pattern_with_source == "#{entry_with_source}/" if entry_is_directory)
         when Regexp
           pattern.match?(entry_with_source)
         else

@@ -35,11 +35,11 @@ module Jekyll
     # Returns nothing.
     # rubocop:disable Metrics/AbcSize
     def read_yaml(base, name, opts = {})
-      filename = File.join(base, name)
+      filename = @path || site.in_source_dir(base, name)
+      Jekyll.logger.debug "Reading:", relative_path
 
       begin
-        self.content = File.read(@path || site.in_source_dir(base, name),
-                                 **Utils.merged_file_read_opts(site, opts))
+        self.content = File.read(filename, **Utils.merged_file_read_opts(site, opts))
         if content =~ Document::YAML_FRONT_MATTER_REGEXP
           self.content = $POSTMATCH
           self.data = SafeYAML.load(Regexp.last_match(1))
@@ -69,7 +69,7 @@ module Jekyll
     end
 
     def validate_permalink!(filename)
-      if self.data["permalink"]&.to_s&.empty?
+      if self.data["permalink"] == ""
         raise Errors::InvalidPermalinkError, "Invalid permalink in #{filename}"
       end
     end
@@ -117,7 +117,6 @@ module Jekyll
           hsh[attribute] = send(attribute)
         end
 
-      defaults = site.frontmatter_defaults.all(relative_path, type)
       Utils.deep_merge_hashes defaults, Utils.deep_merge_hashes(data, further_data)
     end
 
@@ -246,6 +245,10 @@ module Jekyll
     end
 
     private
+
+    def defaults
+      @defaults ||= site.frontmatter_defaults.all(relative_path, type)
+    end
 
     def no_layout?
       data["layout"] == "none"

@@ -11,7 +11,7 @@ with GitHub Pages you can use GitHub Actions.
 
 ### Control over gemset
 
-- **Jekyll version** --- Instead of using the currently enabled version at `3.8.5`, you can use any
+- **Jekyll version** --- Instead of using the currently enabled version at `3.9.0`, you can use any
   version of Jekyll you want. For example `4.0.0`, or point directly to the repository.
 - **Plugins** --- You can use any Jekyll plugins irrespective of them being on the
   [supported versions][ghp-whitelist] list, even `*.rb` files placed in the `_plugins` directory

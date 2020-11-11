@@ -4,6 +4,7 @@ module Jekyll
   class Theme
     extend Forwardable
     attr_reader   :name
+
     def_delegator :gemspec, :version, :version
 
     def initialize(name)
@@ -19,6 +20,11 @@ module Jekyll
     rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP
       raise "Path #{gemspec.full_gem_path} does not exist, is not accessible "\
         "or includes a symbolic link loop"
+    end
+
+    # The name of theme directory
+    def basename
+      @basename ||= File.basename(root)
     end
 
     def includes_path
