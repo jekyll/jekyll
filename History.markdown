@@ -29,6 +29,7 @@
   * docs: init project (#8450)
   * docs: installation: fedora: add additional dependencies (#8456)
   * Improve documentation on Hooks in Jekyll (#8467)
+  * Build docs site with GitHub Actions (#8201)
 
 ### Development Fixes
 
