@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://jekyllrb.com/feed/release.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2020-11-11T12:25:17-08:00</updated><id>https://jekyllrb.com/feed/release.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites | Release</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 4.1.1 Released</title><link href="https://jekyllrb.com/news/2020/06/24/jekyll-4-1-1-released/" rel="alternate" type="text/html" title="Jekyll 4.1.1 Released" /><published>2020-06-24T04:15:35-07:00</published><updated>2020-06-24T04:15:35-07:00</updated><id>https://jekyllrb.com/news/2020/06/24/jekyll-4-1-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2020/06/24/jekyll-4-1-1-released/">&lt;p&gt;Jekyll 4.1.0 brought two notable changes: &lt;em&gt;Page-excerpts&lt;/em&gt; and &lt;em&gt;Liquid Drop for Page objects&lt;/em&gt;.
+However these seemingly benign changes had unexpected adverse side-effects which did not figure in our tests.&lt;/p&gt;
+
+&lt;p&gt;The Core team decided that the best way forward is to revert introduction of the Liquid drop for Pages but push back
+generating excerpts for pages behind a flag until &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;v5.0&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Page-excerpts are henceforth an opt-in experimental feature which can be enabled by setting &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;page_excerpts: true&lt;/code&gt; in
+your configuration file. Due to its experimental nature, we have narrowed the scope for page-excerpts to limit their
+negative effect on builds. Excerpts will not be generated for pages that &lt;em&gt;do not&lt;/em&gt; output into an HTML file even if
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;page_excerpts: true&lt;/code&gt; has been set in the configuration file.&lt;/p&gt;
+
+&lt;p&gt;Another known issue with page-excerpts is that an infinite loop is created in certain use-cases such as any construct
+that involves iterating through &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;site.pages&lt;/code&gt; directly within a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Jekyll::Page&lt;/code&gt; instance. A couple of examples would be
+having a variant of either of the following code blocks inside a page source, say &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;index.markdown&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;about.markdown&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-liquid highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;site.pages&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;endfor&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-liquid highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;site&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pages&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'title'&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Therefore, we advise caution when opting to use the page-excerpt feature.&lt;/p&gt;</content><author><name>ashmaroli</name></author><category term="release" /><summary type="html">Jekyll 4.1.0 brought two notable changes: Page-excerpts and Liquid Drop for Page objects. However these seemingly benign changes had unexpected adverse side-effects which did not figure in our tests.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.1.0 Released</title><link href="https://jekyllrb.com/news/2020/05/27/jekyll-4-1-0-released/" rel="alternate" type="text/html" title="Jekyll 4.1.0 Released" /><published>2020-05-27T02:50:30-07:00</published><updated>2020-05-27T02:50:30-07:00</updated><id>https://jekyllrb.com/news/2020/05/27/jekyll-4-1-0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2020/05/27/jekyll-4-1-0-released/">&lt;p&gt;Hello Jekyllers!&lt;/p&gt;
+
+&lt;p&gt;It’s time for yet another release that includes enhancements, optimizations and bug-fixes. Highlights of this release
+are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Jekyll now supports rendering excerpts for &lt;em&gt;pages&lt;/em&gt; in addition to documents and posts.&lt;/li&gt;
+  &lt;li&gt;The &lt;a href=&quot;/docs/liquid/filters/#where-expression&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;where_exp&lt;/code&gt;&lt;/a&gt; filter got enhanced.  Earlier, one could just use either &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;and&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;or&lt;/code&gt; once
+per expression. Now, one may use those binary operators multiple times in the filter’s expression.&lt;/li&gt;
+  &lt;li&gt;Jekyll has a new set of filters based on &lt;em&gt;its flavor&lt;/em&gt; of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;where&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;where_exp&lt;/code&gt; filters. Named
+&lt;a href=&quot;/docs/liquid/filters/#find&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;/docs/liquid/filters/#find-expression&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find_exp&lt;/code&gt;&lt;/a&gt; filters respectively, they work similar to their ancestors
+except that they return &lt;strong&gt;the first object&lt;/strong&gt; that satisfies the given conditions.&lt;/li&gt;
+  &lt;li&gt;Jekyll’s &lt;a href=&quot;/docs/liquid/filters/#number-of-words&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;number_of_words&lt;/code&gt;&lt;/a&gt; filter can now take an optional argument to better count words
+of text containing Chinese, Japanese or Korean characters.&lt;/li&gt;
+  &lt;li&gt;One may now use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:slugified_categories&lt;/code&gt; in their permalink configurations to generate a more apt URL (categories are
+downcased and non-alphanumeric characters replaced by dashes) for their for posts and documents.&lt;/li&gt;
+  &lt;li&gt;The logic for &lt;em&gt;slugifying&lt;/em&gt; a given string has been enhanced to support more Unicode characters.&lt;/li&gt;
+  &lt;li&gt;If you face issues from Jekyll importing a config file bundled within a theme, you can now disable the import entirely
+by setting &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ignore_theme_config: true&lt;/code&gt; in your site’s configuration file.&lt;/li&gt;
+  &lt;li&gt;If you face issues from Jekyll’s disk-caching feature, you can now disable the mechanism without opting to build in
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;safe&lt;/code&gt; mode, by either setting &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;disable_disk_cache: true&lt;/code&gt; in your configuration file or by passing the CLI switch
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--disable-disk-cache&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll build&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt; commands.&lt;/li&gt;
+  &lt;li&gt;When you build a site with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--profile&lt;/code&gt; switch, Jekyll will now additionally output a small table showing the amount
+of time taken during various stages of the &lt;em&gt;build process&lt;/em&gt;.&lt;/li&gt;
+  &lt;li&gt;Jekyll’s development server now supports certificates based on Elliptic-curve cryptography.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For the interest of plugin authors:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Jekyll::Page&lt;/code&gt; now uses a Liquid Drop to expose attributes for Liquid templates. However, its subclasses will continue
+using the legacy &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ATTRIBUTES_FOR_LIQUID&lt;/code&gt; hash by default. More details in the &lt;a href=&quot;/docs/pages/#for-plugin-developers&quot;&gt;associated documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Excerpts won’t be generated for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Jekyll::Page&lt;/code&gt; subclasses automatically unless such instances have an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;excerpt&lt;/code&gt; key in
+their &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;data&lt;/code&gt; hash.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For the interest of gem-based theme authors:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;From &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;v4.1.0&lt;/code&gt; onwards, a newly generated theme workspace (via &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll new-theme ...&lt;/code&gt;) will have the gemspec configured
+to bundle a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; at the root of the workspace. If you don’t wish to include the configuration file in the
+released gem, please remove &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|_config\.yml&lt;/code&gt; from the regular expression in the gemspec.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;have-questions&quot;&gt;Have questions?&lt;/h3&gt;
+
+&lt;p&gt;Please reach out on our &lt;a href=&quot;https://talk.jekyllrb.com&quot;&gt;community forum&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;thank-you-bow&quot;&gt;Thank you!! :bow:&lt;/h3&gt;
+
+&lt;p&gt;We are thankful to our community for all the contributions that helped shape this release.
+Special thanks to the following 78 contributors (in alphabetical order) who made this release possible and took the time
+to submit a pull request:&lt;/p&gt;
+
+&lt;p&gt;Aaron Adams, Aaron K Redshaw, Alexandre Zanni, Anindita Basu, Arthur Zey, Artyom Tokachev, Ashwin Maroli, Atlas Cove,
+Ben Stolovitz, Billy Kong, Christian Oliff, codenitpicker, csquare, Damien St Pierre, Daniel Leidert, David Zhang,
+ddocs, dgolant, dkalev, Dmitry Egorov, dotnetCarpenter, Edward Thomson, Eric Knibbe, Frank Taillandier, Gabriel Rubens,
+Gareth Mcshane, Grzegorz Kaczorek, guanicoe, Harry Wood, HTeuMeuLeu, iBug, İsmail Arılık, Itay Shakury, Ivan Gromov,
+Ivan Raszl, J·Y, James Buckley, Jason Taylor, JC, jeffreytse, Johan Wigert, jonas-krummenacher, Justin Jia,
+Kayce Basques, Kieran Barker, Leo, Liam Bigelow, lizharris, Lizzy Kate, Luis Puente, Mark Bennett, Matt Penna,
+Matt Rogers, matt swanson, Max Chadwick, michaelcurrin, Mike Kasberg, Mike Neumegen, Muhammed Salih, Nikhil Benesch,
+Paramdeo Singh, Patrik Eriksson, Phil Nash, Philip Eriksson, R.P. Pedraza, Radoslav Karlík, Riccardo Porreca,
+sharath Kumar, Simone Arpe, Takashi Udagawa, Tobias Klüpfel, Toby Glei, vhermecz, Viktor Szakats, Ward Sandler, wzy,
+XhmikosR, Zlatan Vasović.&lt;/p&gt;</content><author><name>ashmaroli</name></author><category term="release" /><summary type="html">Hello Jekyllers!</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.0.1 Released</title><link href="https://jekyllrb.com/news/2020/05/08/jekyll-4-0-1-released/" rel="alternate" type="text/html" title="Jekyll 4.0.1 Released" /><published>2020-05-08T10:00:00-07:00</published><updated>2020-05-08T10:00:00-07:00</updated><id>https://jekyllrb.com/news/2020/05/08/jekyll-4-0-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2020/05/08/jekyll-4-0-1-released/">&lt;p&gt;Jekyll 4.0.1 is out and fixes a few issues reported by the community since 4.0.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;When using Ruby 2.7, you won’t get any more warnings in your console when running Jekyll. (This fix is also backported in &lt;a href=&quot;https://github.com/jekyll/jekyll/releases/tag/v3.8.7&quot;&gt;Jekyll 3.8.7&lt;/a&gt;).&lt;/li&gt;
+  &lt;li&gt;Liquid variables are now properly cached.&lt;/li&gt;
+  &lt;li&gt;Jekyll build will no longer fail for collections with a custom permalink containing static files.&lt;/li&gt;
+  &lt;li&gt;Jekyll filters now properly recognize integers.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;👀 A &lt;a href=&quot;https://github.com/jekyll/jekyll/releases/tag/v4.0.1&quot;&gt;release changelog&lt;/a&gt; is available for your perusal.&lt;/p&gt;
+
+&lt;p&gt;🙏 Many thanks to our contributors without whom this release could not be
+possible: @ashmaroli and &lt;a href=&quot;https://github.com/summerisgone&quot;&gt;Ivan Gromov&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Expect more fixes and improvements on the next minor release!&lt;/p&gt;
+
+&lt;p&gt;Happy Jekylling!&lt;/p&gt;</content><author><name>dirtyf</name></author><category term="release" /><summary type="html">Jekyll 4.0.1 is out and fixes a few issues reported by the community since 4.0.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.0.0 Released</title><link href="https://jekyllrb.com/news/2019/08/20/jekyll-4-0-0-released/" rel="alternate" type="text/html" title="Jekyll 4.0.0 Released" /><published>2019-08-20T08:00:00-07:00</published><updated>2019-08-20T08:00:00-07:00</updated><id>https://jekyllrb.com/news/2019/08/20/jekyll-4-0-0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2019/08/20/jekyll-4-0-0-released/">&lt;p&gt;Hi! 👋 I bring some good news! Jekyll 4.0.0 is finally here! 🎉&lt;/p&gt;
+
+&lt;p&gt;There’s quite a bit in this release to unpack, so let me hit the high points quickly:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Ruby 2.4.0 or greater is now required.&lt;/li&gt;
+  &lt;li&gt;Rouge 3.0 or greater is now required for syntax highlighting.&lt;/li&gt;
+  &lt;li&gt;Jekyll builds should be much faster.&lt;/li&gt;
+  &lt;li&gt;Kramdown 2.1 is now the default markdown engine.&lt;/li&gt;
+  &lt;li&gt;Sass processing should be faster.&lt;/li&gt;
+  &lt;li&gt;We dropped support for a lot of stuff, specifically:
+    &lt;ul&gt;
+      &lt;li&gt;Pygments&lt;/li&gt;
+      &lt;li&gt;RedCarpet&lt;/li&gt;
+      &lt;li&gt;RDiscount&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Alright, so with the high points out of the way, let’s get into the details a little bit.&lt;/p&gt;
+
+&lt;h3 id=&quot;cache-all-the-things-&quot;&gt;Cache all the things! 💰&lt;/h3&gt;
+
+&lt;p&gt;While some optimizations first made an appearance with Jekyll 3.8.0, Jekyll 4.0 takes
+it to another level altogether.&lt;/p&gt;
+
+&lt;p&gt;Jekyll 4.0 caches the processing done by Liquid in memory. So every Liquid
+template is processed only as required. If you have 10 pages depending on a
+single layout, the layout is cached and that data is then rendered as per the
+10 different contexts of the individual files.&lt;/p&gt;
+
+&lt;p&gt;There’s also a disk cache! Jekyll can now cache data to disk to avoid repeated
+processing of content that doesn’t change between build sessions. Currently,
+this is limited to markdown. So while the very first build will take a certain
+amount of time, consequent builds for content that hasn’t changed will take
+much less time due to the disk-cache. Disk caching is disabled for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;safe&lt;/code&gt; mode,
+however.&lt;/p&gt;
+
+&lt;h3 id=&quot;super-powered-content-transformations-&quot;&gt;Super-powered content transformations 💪&lt;/h3&gt;
+
+&lt;p&gt;We’ve upgraded Sass support so it should be faster. There’s also
+support for sourcemaps now! Under the hood, our Sass support uses the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SassC&lt;/code&gt;
+library now, which is supported directly by the Sass team, which should mean
+better support for everybody in the long run.&lt;/p&gt;
+
+&lt;p&gt;Kramdown is updated to version 2.1. This also brings with it a bunch of changes
+to the Kramdown configuration, as the Kramdown team have extracted a fair
+number of features into separate gems. Support for GitHub Flavored Markdown is
+enabled by default, but if you’re using another Kramdown extension in your
+site, you’ll likely need to update your plugin configuration. See the &lt;a href=&quot;/docs/upgrading/3-to-4/&quot;&gt;upgrade
+guide&lt;/a&gt; for more details.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;link&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;post_url&lt;/code&gt; tags no longer need &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;site.baseurl&lt;/code&gt; prepended every
+time they’re used. Those tags now use our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;relative_url&lt;/code&gt; filter to take care of
+this for you. Existing uses of the prepending pattern will break though!
+Sorry! :sweat_smile:&lt;/p&gt;
+
+&lt;p&gt;A few other smaller features when it comes to content:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;link&lt;/code&gt; tag understands Liquid variables in the same fashion our
+ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;include&lt;/code&gt; tag does now.&lt;/li&gt;
+  &lt;li&gt;Disable Liquid processing for a particular page / document by adding
+ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;render_with_liquid: false&lt;/code&gt; to its front matter.&lt;/li&gt;
+  &lt;li&gt;Liquid’s binary &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;and&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;or&lt;/code&gt; operations can be used in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;where_exp&lt;/code&gt;
+ filter for more powerful filtering&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There’s some goodies for theme community as well. Developers may now bundle a
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;config.yml&lt;/code&gt; into their theme-gem to provide some boilerplate configurations for
+the theme. Like other resources in the theme, these configuration values can also
+be customized at the user’s end.&lt;/p&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;/docs/history/#v4-0-0&quot;&gt;full history&lt;/a&gt; and the various pull requests
+for more details on all the enhancements and bug-fixes.&lt;/p&gt;
+
+&lt;h3 id=&quot;upgrading-&quot;&gt;Upgrading 📈&lt;/h3&gt;
+
+&lt;p&gt;First, read the &lt;a href=&quot;/docs/upgrading/3-to-4/&quot;&gt;upgrade guide&lt;/a&gt;!&lt;/p&gt;
+
+&lt;p&gt;Next, Edit your project’s &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt; to test Jekyll v4.x:&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;jekyll&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;~&amp;gt; 4.0&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle update&lt;/code&gt; to update all dependencies. Unless you’re using
+third-party plugins that haven’t yet added support for Jekyll 4.0, you should be
+good to go.&lt;/p&gt;
+
+&lt;p&gt;Plugins and themes authors must relax the jekyll dependency in their &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gemspec&lt;/code&gt; file
+to allow for Jekyll v4.0:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;spec.add_runtime_dependency &quot;jekyll&quot;, &quot;&amp;gt;= 3.6&quot;, &quot;&amp;lt; 5.0&quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;If your favorite plugin hasn’t relaxed that dependency yet, please gently
+encourage them to do so. :slightly_smiling_face:&lt;/p&gt;
+
+&lt;h3 id=&quot;have-questions&quot;&gt;Have questions❓&lt;/h3&gt;
+
+&lt;p&gt;Please reach out on our &lt;a href=&quot;https://talk.jekyllrb.com&quot;&gt;community forum&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;thank-you-&quot;&gt;Thank you!! 🙇&lt;/h3&gt;
+
+&lt;p&gt;Jekyll would not be possible without the many people who have taken the time to write issues, submit pull requests, create themes, answer questions for other users, or make their own sites using our project. Thanks to all of you who contribute, no matter how small you think your contribution might have been.&lt;/p&gt;
+
+&lt;p&gt;In addition, special thanks to the 139 contributors who made this
+release possible via a pull request submission (in alphabetical order): Aidan
+Fitzgerald, Akshat Kedia, Ale Muñoz, Alex Wood,
+Alexey Kopytko, Alexey Pelykh, Ali Thompson, Ana María Martínez Gómez,
+Ananthakumar, Andreas Möller, Andrew Lyndem, Andrew Marcuse, Andy Alt, Anne
+Gentle, Anny, Anuj Bhatnagar, argv-minus-one, Arjun Thakur, Arthur Attwell,
+Ashwin Maroli, Behrang, Belhassen Chelbi, Ben Keith, Ben Otte, Bilawal Hameed,
+Bjorn Krols, Boris Schapira, Boris van Hoytema, Brett C, Chris Finazzo, Chris
+Oliver, chrisfinazzo, Christian Oliff, Christoph Päper, Damien Solodow, Dan
+Allen, Dan Friedman, Daniel Höpfl, David J. Malan, David Kennell, David Zhang,
+Denis McDonald, Derek Smart, Derpy, Dusty Candland, Edgar Tinajero, Elvio
+Vicosa, ExE Boss, Fons van der Plas, Frank Taillandier, Gareth Cooper, Grzegorz
+Kaczorek, Haris Bjelic, Hodong Kim, ikeji, Isaac Goodman, Jacob Byers, Jakob
+Krigovsky, James Rhea, Jan Pobořil, jess, jingze_lu, Joe Shannon, Jordan Morgan,
+Jörg Steinsträter, Jorie Tappa, Josue Caraballo, jpasholk, Justin Vallelonga,
+Karel Bílek, Keith Mifsud, Kelly-Ann Green, Ken Salomon, Kevin Plattret, krissy,
+Kyle Barbour, Lars Kanis, Leandro Facchinetti, Liam Rosenfeld, Luis Enrique
+Perez Alvarez, Luis Guillermo Yáñez, Ma HongJun, makmm, Manu Mathew, Mario,
+Martin Scharm, Matt Kraai, Matt Massicotte, Matt Rogers, Matthew Rathbone,
+Maxwell Gerber, Mertcan Yücel, Michael Bishop, Michael Hiiva, Michelle Greer,
+Mike Kasberg, Mike Neumegen, mo khan, Monica Powell, Nicolas Hoizey, Nikhil
+Benesch, Nikhil Swaminathan, Nikita Skalkin, Niklas Eicker, ninevra, Olivia
+Hugger, Parker Moore, Pat Hawks, Patrick Favre-Bulle, Paul Kim, penguinpet,
+Philip Belesky, Preston Lim, Ralph, Robert Riemann, Rosário Pereira Fernandes,
+Sadik Kuzu, Samuel Gruetter, Scott Killen, Sri Pravan Paturi, Stephan Fischer,
+Stephen Weiss, Steven Westmoreland, strangehill, Sundaram Kalyan Vedala, Thanos
+Kolovos, Timo Schuhmacher, Tobias, Tom Harvey, Tushar Prajapati, Victor Afanasev,
+Vinicius Flores, Vitor Oliveira, Wouter Schoot, XhmikosR, Yi Feng Xie, Zhang
+Xiangze, 김정환, 104fps.&lt;/p&gt;
+
+&lt;p&gt;Happy Jekylling everyone!&lt;/p&gt;</content><author><name>mattr-</name></author><category term="release" /><summary type="html">Hi! 👋 I bring some good news! Jekyll 4.0.0 is finally here! 🎉</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.0.0.pre.alpha1 Released</title><link href="https://jekyllrb.com/news/2019/03/18/jekyll-4-0-0-pre-alpha1-released/" rel="alternate" type="text/html" title="Jekyll 4.0.0.pre.alpha1 Released" /><published>2019-03-18T10:17:31-07:00</published><updated>2019-03-18T10:17:31-07:00</updated><id>https://jekyllrb.com/news/2019/03/18/jekyll-4-0-0-pre-alpha1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2019/03/18/jekyll-4-0-0-pre-alpha1-released/">&lt;p&gt;Dear Jekyllers,&lt;/p&gt;
+
+&lt;p&gt;Time has come to release a first alpha for Jekyll 4!&lt;/p&gt;
+
+&lt;p&gt;This pre version fixes many bugs, and should improve your build times. Some of you already shared &lt;a href=&quot;https://forestry.io/blog/how-i-reduced-my-jekyll-build-time-by-61/&quot;&gt;really&lt;/a&gt; &lt;a href=&quot;https://boris.schapira.dev/2018/11/jekyll-build-optimization/&quot;&gt;good&lt;/a&gt; results. We hope your Jekyll sites will also benefit from these optimizations.&lt;/p&gt;
+
+&lt;p&gt;If you’re a plugin developer, we definitely need your feedback, especially if your plugin does not work with v4.&lt;/p&gt;
+
+&lt;p&gt;Jekyll now exposes a &lt;a href=&quot;/tutorials/cache-api/&quot;&gt;caching API&lt;/a&gt;, that some plugins could benefit from.&lt;/p&gt;
+
+&lt;p&gt;Also be aware that it’s a new &lt;em&gt;major&lt;/em&gt; version, and it comes with a few breaking changes, notably :&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;We dropped support for &lt;a href=&quot;https://www.ruby-lang.org/en/downloads/&quot;&gt;Ruby 2.3 who goes EOL at the end of the month&lt;/a&gt;.
+GitHub Pages runs Ruby 2.5.x, services like Netlify or Forestry already upgraded to latest Ruby 2.6.x.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;link&lt;/code&gt; tag now include &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;relative_url&lt;/code&gt; filter, hurray &lt;a href=&quot;https://github.com/jekyll/jekyll/pull/6727&quot;&gt;no more need to prepend &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{{ site.baseurl }}&lt;/code&gt; &lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/jekyll/jekyll/pull/6821&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{% highlight %}&lt;/code&gt; now behaves like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{% raw %}&lt;/code&gt;&lt;/a&gt;, so you can no longer use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;include&lt;/code&gt; tags within.&lt;/li&gt;
+  &lt;li&gt;We dropped support for Pygments, RedCarpet and rdiscount.&lt;/li&gt;
+  &lt;li&gt;We bumped kramdown to v2.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Checkout the complete &lt;a href=&quot;https://github.com/jekyll/jekyll/releases/tag/v4.0.0.pre.alpha1&quot;&gt;changelog&lt;/a&gt; for more details.&lt;/p&gt;
+
+&lt;p&gt;To test this pre version run:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gem &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;jekyll &lt;span class=&quot;nt&quot;&gt;--pre&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Please test this version thoroughly and file bugs as you encounter them.&lt;/p&gt;
+
+&lt;p&gt;Thanks to our dear contributors for helping making Jekyll better:&lt;/p&gt;
+
+&lt;p&gt;Aidan Fitzgerald, Akshat Kedia, Alex Wood, Alexey Kopytko, Alexey Pelykh, Ali Thompson, Ana María Martínez Gómez, Ananthakumar, Andreas Möller, Andrew Lyndem, Andy Alt, Anne Gentle, Anny, Arjun Thakur, Arthur Attwell, Ashwin Maroli, Behrang, Belhassen Chelbi, Ben Keith, Ben Otte, Bilawal Hameed, Boris Schapira, Boris van Hoytema, Brett C, Chris Finazzo, Christian Oliff, Damien Solodow, Dan Allen, Dan Friedman, Daniel Höpfl, David J. Malan, Denis McDonald, Derek Smart, Derpy, Dusty Candland, ExE Boss, Frank Taillandier, Gareth Cooper, Grzegorz Kaczorek, Isaac Goodman, Jacob Byers, Jakob Krigovsky, Jan Pobořil, Joe Shannon, Jordan Morgan, Jorie Tappa, Josue Caraballo, Justin Vallelonga, Jörg Steinsträter, Karel Bílek, Keith Mifsud, Kelly-Ann Green, Ken Salomon, Kevin Plattret, Kyle Barbour, Lars Kanis, Leandro Facchinetti, Luis Enrique Perez Alvarez, Luis Guillermo Yáñez, Ma HongJun, Manu Mathew, Mario, Martin Scharm, Matt Massicotte, Matthew Rathbone, Maxwell Gerber, Mertcan Yücel, Michael Hiiva, Mike Kasberg, Mike Neumegen, Monica Powell, Nicolas Hoizey, Nikhil Swaminathan, Nikita Skalkin, Olivia Hugger, Parker Moore, Pat Hawks, Patrick Favre-Bulle, Paul Kim, Philip Belesky, Preston Lim, Ralph, Robert Riemann, Rosário Pereira Fernandes, Samuel Gruetter, Scott Killen, Sri Pravan Paturi, Stephan Fischer, Stephen Weiss, Steven Westmoreland, Sundaram Kalyan Vedala, Thanos Kolovos, Timo Schuhmacher, Tobias, Tom Harvey, Tushar Prajapati, Victor Afanasev, Vitor Oliveira, Wouter Schoot, XhmikosR, Zhang Xiangze, _94gsc, argv-minus-one, chrisfinazzo, ikeji, jess, jpasholk, makmm, mo khan, ninevra, penguinpet, 김정환, 104fps&lt;/p&gt;
+
+&lt;p&gt;Happy Jekylling everyone!&lt;/p&gt;</content><author><name>dirtyf</name></author><category term="release" /><summary type="html">Dear Jekyllers,</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 3.8.5 Released</title><link href="https://jekyllrb.com/news/2018/11/04/jekyll-3-8-5-released/" rel="alternate" type="text/html" title="Jekyll 3.8.5 Released" /><published>2018-11-04T11:58:20-08:00</published><updated>2018-11-04T11:58:20-08:00</updated><id>https://jekyllrb.com/news/2018/11/04/jekyll-3-8-5-released</id><content type="html" xml:base="https://jekyllrb.com/news/2018/11/04/jekyll-3-8-5-released/">&lt;p&gt;This release fixes a bug where multiple Liquid tags were not supported in
+excerpts.&lt;/p&gt;
+
+&lt;p&gt;Thanks to @ashmaroli for fixing this issue in &lt;a href=&quot;https://github.com/jekyll/jekyll/pull/7250&quot;&gt;#7250&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Happy Jekylling!&lt;/p&gt;</content><author><name>oe</name></author><category term="release" /><summary type="html">This release fixes a bug where multiple Liquid tags were not supported in excerpts.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Security Fixes for series 3.6, 3.7 and 3.8</title><link href="https://jekyllrb.com/news/2018/09/19/security-fixes-for-3-6-3-7-3-8/" rel="alternate" type="text/html" title="Security Fixes for series 3.6, 3.7 and 3.8" /><published>2018-09-19T05:30:00-07:00</published><updated>2018-09-19T05:30:00-07:00</updated><id>https://jekyllrb.com/news/2018/09/19/security-fixes-for-3-6-3-7-3-8</id><content type="html" xml:base="https://jekyllrb.com/news/2018/09/19/security-fixes-for-3-6-3-7-3-8/">&lt;p&gt;Hi Jekyllers,&lt;/p&gt;
+
+&lt;p&gt;We have patched a &lt;strong&gt;critical vulnerability&lt;/strong&gt; reported to GitHub a couple of weeks ago and have released a set of new gems to
+bring that patch to you. The vulnerability allowed arbitrary file reads with the cunning use of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;include:&lt;/code&gt; setting in the
+config file.&lt;/p&gt;
+
+&lt;p&gt;By simply including a symlink in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;include&lt;/code&gt; array allowed the symlinked file to be read into the build when they shouldn’t
+actually be read in any circumstance.  
+Further details regarding the patch can be viewed at the &lt;a href=&quot;https://github.com/jekyll/jekyll/pull/7224&quot;&gt;pull request URL&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The patch has been released as versions &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;3.6.3&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;3.7.4&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;3.8.4&lt;/code&gt;.  
+Thanks to @parkr &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;v3.7.4&lt;/code&gt; was released a couple of weeks prior and has been bundled with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;github-pages-v192&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Please keep in mind that this issue affects &lt;em&gt;all previously released Jekyll versions&lt;/em&gt;. If you have not had
+a good reason to upgrade to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;3.6&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;3.7&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;3.8&lt;/code&gt; yet, we advise that you do so at the earliest.&lt;/p&gt;
+
+&lt;p&gt;As always, Happy Jekylling! :sparkles:&lt;/p&gt;</content><author><name>ashmaroli</name></author><category term="release" /><summary type="html">Hi Jekyllers,</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 3.8.3 Released</title><link href="https://jekyllrb.com/news/2018/06/05/jekyll-3-8-3-released/" rel="alternate" type="text/html" title="Jekyll 3.8.3 Released" /><published>2018-06-05T07:00:00-07:00</published><updated>2018-06-05T07:00:00-07:00</updated><id>https://jekyllrb.com/news/2018/06/05/jekyll-3-8-3-released</id><content type="html" xml:base="https://jekyllrb.com/news/2018/06/05/jekyll-3-8-3-released/">&lt;p&gt;This release fixes a regression in 3.8 where collections with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;published: false&lt;/code&gt;
+do not show when using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--unpublished&lt;/code&gt; flag.&lt;/p&gt;
+
+&lt;p&gt;Thanks to @philipbelesky for reporting and fixing this issue; collections with
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;published: false&lt;/code&gt; now behave the same way as Posts.&lt;/p&gt;</content><author><name>pathawks</name></author><category term="release" /><summary type="html">This release fixes a regression in 3.8 where collections with published: false do not show when using the --unpublished flag.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 3.8.2 Released</title><link href="https://jekyllrb.com/news/2018/05/19/jekyll-3-8-2-released/" rel="alternate" type="text/html" title="Jekyll 3.8.2 Released" /><published>2018-05-19T08:30:00-07:00</published><updated>2018-05-19T08:30:00-07:00</updated><id>https://jekyllrb.com/news/2018/05/19/jekyll-3-8-2-released</id><content type="html" xml:base="https://jekyllrb.com/news/2018/05/19/jekyll-3-8-2-released/">&lt;p&gt;Hello Jekyllers!!&lt;/p&gt;
+
+&lt;p&gt;Today we are releasing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;v3.8.2&lt;/code&gt;, which fixes the way Jekyll generates excerpts
+for posts when the first paragraph of the post contains Liquid tags that take
+advantage of &lt;a href=&quot;https://shopify.github.io/liquid/basics/whitespace/&quot;&gt;Liquid’s whitespace control feature&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Big thanks to @kylebarbour, who first reported this issue and also very quickly
+submitted a fix. Also thanks to @nickskalkin for making sure that we are using
+the latest version of Rubocop to lint our code.&lt;/p&gt;</content><author><name>pathawks</name></author><category term="release" /><summary type="html">Hello Jekyllers!!</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 3.8.1 Released</title><link href="https://jekyllrb.com/news/2018/05/01/jekyll-3-8-1-released/" rel="alternate" type="text/html" title="Jekyll 3.8.1 Released" /><published>2018-05-01T09:56:01-07:00</published><updated>2018-05-01T09:56:01-07:00</updated><id>https://jekyllrb.com/news/2018/05/01/jekyll-3-8-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2018/05/01/jekyll-3-8-1-released/">&lt;p&gt;Happy May Day :tada:&lt;/p&gt;
+
+&lt;p&gt;The Jekyll team is happy to announce the release of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;v3.8.1&lt;/code&gt;, which fixes
+a couple of bugs that were introduced two weeks ago in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;v3.8.0&lt;/code&gt;. If you have
+experienced trouble regarding post excerpts or non-published posts, this release
+should be the remedy. Thanks to @Chaosed0 and @domLocalHeroes for originally
+reporting these issues, and to @ashmaroli for fixing them so quickly.&lt;/p&gt;
+
+&lt;p&gt;As a reminder, we have started work on Jekyll 4.0. If there are any
+features that you would love to see added to Jekyll, or any pain points you
+would like to see removed, please do add your ideas to the &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/6948&quot;&gt;Jekyll 4.0 idea
+list&lt;/a&gt;.&lt;/p&gt;</content><author><name>pathawks</name></author><category term="release" /><summary type="html">Happy May Day :tada:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

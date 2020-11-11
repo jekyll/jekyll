@@ -1,5 +1,0 @@
----
-title: I have no layout
----
-
-This post will be rendered with the "post" layout.

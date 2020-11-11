@@ -12,25 +12,25 @@
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Pages | Jekyll • Simple, blog-aware, static sites</title>
+<title>Layouts | Jekyll • Simple, blog-aware, static sites</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Pages" />
+<meta property="og:title" content="Layouts" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Pages are the most basic building block for content. They’re useful for standalone content (content which is not date based or is not a group of content such as staff members or recipes)." />
-<meta property="og:description" content="Pages are the most basic building block for content. They’re useful for standalone content (content which is not date based or is not a group of content such as staff members or recipes)." />
-<link rel="canonical" href="https://jekyllrb.com/docs/pages/" />
-<meta property="og:url" content="https://jekyllrb.com/docs/pages/" />
+<meta name="description" content="Websites typically have more than one page and this website is no different." />
+<meta property="og:description" content="Websites typically have more than one page and this website is no different." />
+<link rel="canonical" href="https://jekyllrb.com/docs/step-by-step/04-layouts/" />
+<meta property="og:url" content="https://jekyllrb.com/docs/step-by-step/04-layouts/" />
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-11-11T12:25:17-08:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
-<meta property="twitter:title" content="Pages" />
+<meta property="twitter:title" content="Layouts" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"description":"Pages are the most basic building block for content. They’re useful for standalone content (content which is not date based or is not a group of content such as staff members or recipes).","image":"https://jekyllrb.com/img/jekyll-og.png","url":"https://jekyllrb.com/docs/pages/","headline":"Pages","@type":"BlogPosting","dateModified":"2020-11-11T12:25:17-08:00","datePublished":"2020-11-11T12:25:17-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/pages/"},"@context":"https://schema.org"}</script>
+{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"description":"Websites typically have more than one page and this website is no different.","image":"https://jekyllrb.com/img/jekyll-og.png","url":"https://jekyllrb.com/docs/step-by-step/04-layouts/","headline":"Layouts","@type":"BlogPosting","dateModified":"2020-11-11T12:25:17-08:00","datePublished":"2020-11-11T12:25:17-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/step-by-step/04-layouts/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -124,46 +124,108 @@
 <div class="unit four-fifths">
       <article>
         <div class="improve right hide-on-mobiles">
-          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/pages.md"><i
-             class="fa fa-pencil"></i> &nbsp;Improve this page</a>
+          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/step-by-step/04-layouts.md"><i class="fa fa-pencil"></i> &nbsp;Improve this page</a>
         </div>
-        <h1>Pages</h1>
-        <p>Pages are the most basic building block for content. They’re useful for standalone
-content (content which is not date based or is not a group of content such as staff
-members or recipes).</p>
+        <h1>Step by Step Tutorial</h1>
+        <h2>4. Layouts</h2>
+        <p>Websites typically have more than one page and this website is no different.</p>
 
-<p>The simplest way of adding a page is to add an HTML file in the root
-directory with a suitable filename. You can also write a page in Markdown using
-a <code class="language-plaintext highlighter-rouge">.md</code> extension which converts to HTML on build. For a site with
-a homepage, an about page, and a contact page, here’s what the root directory
-and associated URLs might look like:</p>
+<p>Jekyll supports <a href="https://daringfireball.net/projects/markdown/syntax">Markdown</a>
+as well as HTML for pages. Markdown is a great choice for pages with a simple
+content structure (just paragraphs, headings and images), as it’s less verbose
+than raw HTML. Let’s try it out on the next page.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
-├── about.md    # =&gt; http://example.com/about.html
-├── index.html    # =&gt; http://example.com/
-└── contact.html  # =&gt; http://example.com/contact.html
+<p>Create <code class="language-plaintext highlighter-rouge">about.md</code> in the root.</p>
+
+<p>For the structure you could copy <code class="language-plaintext highlighter-rouge">index.html</code> and modify it for the about page.
+The problem with doing this is duplicate code. Let’s say you wanted to add a
+stylesheet to your site, you would have to go to each page and add it to the
+<code class="language-plaintext highlighter-rouge">&lt;head&gt;</code>. It might not sound so bad for a two page site, imagine doing it
+for 100 pages. Even simple changes will take a long time to make.</p>
+
+<h2 id="creating-a-layout">Creating a layout</h2>
+
+<p>Using a layout is a much better choice. Layouts are templates that wrap around
+your content. They live in a directory called <code class="language-plaintext highlighter-rouge">_layouts</code>.</p>
+
+<p>Create your first layout at <code class="language-plaintext highlighter-rouge">_layouts/default.html</code> with the following content:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">page</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="p">}}</span>&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    <span class="p">{{</span><span class="w"> </span><span class="nv">content</span><span class="w"> </span><span class="p">}}</span>
+  &lt;/body&gt;
+&lt;/html&gt;
 </code></pre></div></div>
 
-<p>If you have a lot of pages, you can organize them into subfolders. The same subfolders that are used to group your pages in your project’s source will then exist in the <code class="language-plaintext highlighter-rouge">_site</code> folder when your site builds. However, when a page has a <em>different</em> permalink set in the front matter, the subfolder at <code class="language-plaintext highlighter-rouge">_site</code> changes accordingly.</p>
+<p>You’ll notice this is almost identical to <code class="language-plaintext highlighter-rouge">index.html</code> except there’s
+no front matter and the content of the page is replaced with a <code class="language-plaintext highlighter-rouge">content</code>
+variable. <code class="language-plaintext highlighter-rouge">content</code> is a special variable which has the value of the rendered
+content of the page it’s called on.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
-├── about.md          # =&gt; http://example.com/about.html
-├── documentation     # folder containing pages
-│   └── doc1.md       # =&gt; http://example.com/documentation/doc1.html
-├── design            # folder containing pages
-│   └── draft.md      # =&gt; http://example.com/design/draft.html
+<p>To have <code class="language-plaintext highlighter-rouge">index.html</code> use this layout, you can set a <code class="language-plaintext highlighter-rouge">layout</code> variable in front
+matter. The layout wraps around the content of the page so all you need in
+<code class="language-plaintext highlighter-rouge">index.html</code> is:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+layout: default
+title: Home
+---
+&lt;h1&gt;<span class="p">{{</span><span class="w"> </span><span class="s2">"Hello World!"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">downcase</span><span class="w"> </span><span class="p">}}</span>&lt;/h1&gt;
 </code></pre></div></div>
 
-<h2 id="changing-the-output-url">Changing the output URL</h2>
+<p>After doing this, the output will be exactly the same as before. Note that you
+can access the <code class="language-plaintext highlighter-rouge">page</code> front matter from the layout. In this case <code class="language-plaintext highlighter-rouge">title</code> is
+set in the index page’s front matter but is output in the layout.</p>
 
-<p>You might want to have a particular folder structure for your source files that changes for the built site. With <a href="/docs/permalinks">permalinks</a> you have full control of the output URL.</p>
+<h2 id="about-page">About page</h2>
 
-<h2 id="excerpts-for-pages">Excerpts for pages</h2>
+<p>Back to the about page, instead of copying from <code class="language-plaintext highlighter-rouge">index.html</code>, you can use the
+layout.</p>
 
-<p>From Jekyll 4.1.1 onwards, one can <em>choose</em> to generate excerpts for their pages by setting <code class="language-plaintext highlighter-rouge">page_excerpts</code> to <code class="language-plaintext highlighter-rouge">true</code> in their
-config file.</p>
+<p>Add the following to <code class="language-plaintext highlighter-rouge">about.md</code>:</p>
 
-      </article>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">default</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">About</span>
+<span class="nn">---</span>
+<span class="gh"># About page</span>
+
+This page tells you a little bit about me.
+</code></pre></div></div>
+
+<p>Open <a href="http://localhost:4000/about.html" target="_blank" data-proofer-ignore="">http://localhost:4000/about.html</a>
+in your browser and view your new page.</p>
+
+<p>Congratulations, you now have a two page website! But how do you
+navigate from one page to another? Keep reading to find out.</p>
+
+        <div class="section-nav">
+      <div class="left align-right">
+        <a href="/docs/step-by-step/03-front-matter/" class="prev">Back</a>
+        </div>
+      <div class="right align-left">
+      <a href="/docs/step-by-step/05-includes/" class="next">Next</a>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <ol class="step-nav">
+  <li><a href="/docs/step-by-step/01-setup/">Setup</a></li>
+  <li><a href="/docs/step-by-step/02-liquid/">Liquid</a></li>
+  <li><a href="/docs/step-by-step/03-front-matter/">Front Matter</a></li>
+  <li class="current"><a href="/docs/step-by-step/04-layouts/">Layouts</a></li>
+  <li><a href="/docs/step-by-step/05-includes/">Includes</a></li>
+  <li><a href="/docs/step-by-step/06-data-files/">Data Files</a></li>
+  <li><a href="/docs/step-by-step/07-assets/">Assets</a></li>
+  <li><a href="/docs/step-by-step/08-blogging/">Blogging</a></li>
+  <li><a href="/docs/step-by-step/09-collections/">Collections</a></li>
+  <li><a href="/docs/step-by-step/10-deployment/">Deployment</a></li>
+  </ol>
+</article>
     </div>
     <div class="unit one-fifth hide-on-mobiles">
   <aside>
@@ -183,7 +245,7 @@ config file.</p>
       </ul>
     <h4>Content</h4>
       <ul>
-        <li class="current"><a href="/docs/pages/">Pages</a></li>
+        <li><a href="/docs/pages/">Pages</a></li>
         <li><a href="/docs/posts/">Posts</a></li>
         <li><a href="/docs/front-matter/">Front Matter</a></li>
         <li><a href="/docs/collections/">Collections</a></li>

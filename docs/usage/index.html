@@ -12,25 +12,25 @@
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Pages | Jekyll • Simple, blog-aware, static sites</title>
+<title>Command Line Usage | Jekyll • Simple, blog-aware, static sites</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Pages" />
+<meta property="og:title" content="Command Line Usage" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Pages are the most basic building block for content. They’re useful for standalone content (content which is not date based or is not a group of content such as staff members or recipes)." />
-<meta property="og:description" content="Pages are the most basic building block for content. They’re useful for standalone content (content which is not date based or is not a group of content such as staff members or recipes)." />
-<link rel="canonical" href="https://jekyllrb.com/docs/pages/" />
-<meta property="og:url" content="https://jekyllrb.com/docs/pages/" />
+<meta name="description" content="The Jekyll gem makes a jekyll executable available to you in your terminal." />
+<meta property="og:description" content="The Jekyll gem makes a jekyll executable available to you in your terminal." />
+<link rel="canonical" href="https://jekyllrb.com/docs/usage/" />
+<meta property="og:url" content="https://jekyllrb.com/docs/usage/" />
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-11-11T12:25:17-08:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
-<meta property="twitter:title" content="Pages" />
+<meta property="twitter:title" content="Command Line Usage" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"description":"Pages are the most basic building block for content. They’re useful for standalone content (content which is not date based or is not a group of content such as staff members or recipes).","image":"https://jekyllrb.com/img/jekyll-og.png","url":"https://jekyllrb.com/docs/pages/","headline":"Pages","@type":"BlogPosting","dateModified":"2020-11-11T12:25:17-08:00","datePublished":"2020-11-11T12:25:17-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/pages/"},"@context":"https://schema.org"}</script>
+{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"description":"The Jekyll gem makes a jekyll executable available to you in your terminal.","image":"https://jekyllrb.com/img/jekyll-og.png","url":"https://jekyllrb.com/docs/usage/","headline":"Command Line Usage","@type":"BlogPosting","dateModified":"2020-11-11T12:25:17-08:00","datePublished":"2020-11-11T12:25:17-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/usage/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -124,44 +124,39 @@
 <div class="unit four-fifths">
       <article>
         <div class="improve right hide-on-mobiles">
-          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/pages.md"><i
+          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/usage.md"><i
              class="fa fa-pencil"></i> &nbsp;Improve this page</a>
         </div>
-        <h1>Pages</h1>
-        <p>Pages are the most basic building block for content. They’re useful for standalone
-content (content which is not date based or is not a group of content such as staff
-members or recipes).</p>
+        <h1>Command Line Usage</h1>
+        <p>The Jekyll gem makes a <code class="language-plaintext highlighter-rouge">jekyll</code> executable available to you in your terminal.</p>
 
-<p>The simplest way of adding a page is to add an HTML file in the root
-directory with a suitable filename. You can also write a page in Markdown using
-a <code class="language-plaintext highlighter-rouge">.md</code> extension which converts to HTML on build. For a site with
-a homepage, an about page, and a contact page, here’s what the root directory
-and associated URLs might look like:</p>
+<p>The <code class="language-plaintext highlighter-rouge">jekyll</code> program has several commands but the structure is always:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
-├── about.md    # =&gt; http://example.com/about.html
-├── index.html    # =&gt; http://example.com/
-└── contact.html  # =&gt; http://example.com/contact.html
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll command [argument] [option] [argument_to_option]
+
+Examples:
+    jekyll new site/ --blank
+    jekyll serve --config _alternative_config.yml
 </code></pre></div></div>
 
-<p>If you have a lot of pages, you can organize them into subfolders. The same subfolders that are used to group your pages in your project’s source will then exist in the <code class="language-plaintext highlighter-rouge">_site</code> folder when your site builds. However, when a page has a <em>different</em> permalink set in the front matter, the subfolder at <code class="language-plaintext highlighter-rouge">_site</code> changes accordingly.</p>
+<p>Typically you’ll use <code class="language-plaintext highlighter-rouge">jekyll serve</code> while developing locally and <code class="language-plaintext highlighter-rouge">jekyll build</code> when you need to generate the site for production.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
-├── about.md          # =&gt; http://example.com/about.html
-├── documentation     # folder containing pages
-│   └── doc1.md       # =&gt; http://example.com/documentation/doc1.html
-├── design            # folder containing pages
-│   └── draft.md      # =&gt; http://example.com/design/draft.html
-</code></pre></div></div>
+<p>For a full list of options and their argument, see <a href="/docs/configuration/options/#build-command-options">Build Command Options</a>.</p>
 
-<h2 id="changing-the-output-url">Changing the output URL</h2>
+<p>Here are some of the most common commands:</p>
 
-<p>You might want to have a particular folder structure for your source files that changes for the built site. With <a href="/docs/permalinks">permalinks</a> you have full control of the output URL.</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">jekyll new PATH</code> - Creates a new Jekyll site with default gem-based theme at specified path. The directories will be created as necessary.</li>
+  <li><code class="language-plaintext highlighter-rouge">jekyll new PATH --blank</code> - Creates a new blank Jekyll site scaffold at specified path.</li>
+  <li><code class="language-plaintext highlighter-rouge">jekyll build</code> or <code class="language-plaintext highlighter-rouge">jekyll b</code> - Performs a one off build your site to <code class="language-plaintext highlighter-rouge">./_site</code> (by default).</li>
+  <li><code class="language-plaintext highlighter-rouge">jekyll serve</code> or <code class="language-plaintext highlighter-rouge">jekyll s</code> - Builds your site any time a source file changes and serves it locally.</li>
+  <li><code class="language-plaintext highlighter-rouge">jekyll clean</code> - Removes all generated files: destination folder, metadata file, Sass and Jekyll caches.</li>
+  <li><code class="language-plaintext highlighter-rouge">jekyll help</code> - Shows help, optionally for a given subcommand, e.g. <code class="language-plaintext highlighter-rouge">jekyll help build</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">jekyll new-theme</code> - Creates a new Jekyll theme scaffold.</li>
+  <li><code class="language-plaintext highlighter-rouge">jekyll doctor</code> - Outputs any deprecation or configuration issues.</li>
+</ul>
 
-<h2 id="excerpts-for-pages">Excerpts for pages</h2>
-
-<p>From Jekyll 4.1.1 onwards, one can <em>choose</em> to generate excerpts for their pages by setting <code class="language-plaintext highlighter-rouge">page_excerpts</code> to <code class="language-plaintext highlighter-rouge">true</code> in their
-config file.</p>
+<p>To change Jekyll’s default build behavior have a look through the <a href="/docs/configuration/">configuration options</a>.</p>
 
       </article>
     </div>
@@ -177,13 +172,13 @@ config file.</p>
       </ul>
     <h4>Build</h4>
       <ul>
-        <li><a href="/docs/usage/">Command Line Usage</a></li>
+        <li class="current"><a href="/docs/usage/">Command Line Usage</a></li>
         <li><a href="/docs/configuration/">Configuration</a></li>
         <li><a href="/docs/rendering-process/">Rendering Process</a></li>
       </ul>
     <h4>Content</h4>
       <ul>
-        <li class="current"><a href="/docs/pages/">Pages</a></li>
+        <li><a href="/docs/pages/">Pages</a></li>
         <li><a href="/docs/posts/">Posts</a></li>
         <li><a href="/docs/front-matter/">Front Matter</a></li>
         <li><a href="/docs/collections/">Collections</a></li>

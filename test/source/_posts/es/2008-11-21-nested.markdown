@@ -1,8 +1,0 @@
----
-layout: default
-title: Nested
----
-
-url: {{ page.url }}
-date: {{ page.date }}
-id: {{ page.id }}

@@ -12,25 +12,25 @@
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Pages | Jekyll • Simple, blog-aware, static sites</title>
+<title>Rendering Process | Jekyll • Simple, blog-aware, static sites</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Pages" />
+<meta property="og:title" content="Rendering Process" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Pages are the most basic building block for content. They’re useful for standalone content (content which is not date based or is not a group of content such as staff members or recipes)." />
-<meta property="og:description" content="Pages are the most basic building block for content. They’re useful for standalone content (content which is not date based or is not a group of content such as staff members or recipes)." />
-<link rel="canonical" href="https://jekyllrb.com/docs/pages/" />
-<meta property="og:url" content="https://jekyllrb.com/docs/pages/" />
+<meta name="description" content="For any Jekyll site, a build session consists of discrete phases in the following order — setting up plugins, reading source files, running generators, rendering templates, and finally writing files to disk." />
+<meta property="og:description" content="For any Jekyll site, a build session consists of discrete phases in the following order — setting up plugins, reading source files, running generators, rendering templates, and finally writing files to disk." />
+<link rel="canonical" href="https://jekyllrb.com/docs/rendering-process/" />
+<meta property="og:url" content="https://jekyllrb.com/docs/rendering-process/" />
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-11-11T12:25:17-08:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
-<meta property="twitter:title" content="Pages" />
+<meta property="twitter:title" content="Rendering Process" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"description":"Pages are the most basic building block for content. They’re useful for standalone content (content which is not date based or is not a group of content such as staff members or recipes).","image":"https://jekyllrb.com/img/jekyll-og.png","url":"https://jekyllrb.com/docs/pages/","headline":"Pages","@type":"BlogPosting","dateModified":"2020-11-11T12:25:17-08:00","datePublished":"2020-11-11T12:25:17-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/pages/"},"@context":"https://schema.org"}</script>
+{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"description":"For any Jekyll site, a build session consists of discrete phases in the following order — setting up plugins, reading source files, running generators, rendering templates, and finally writing files to disk.","image":"https://jekyllrb.com/img/jekyll-og.png","url":"https://jekyllrb.com/docs/rendering-process/","headline":"Rendering Process","@type":"BlogPosting","dateModified":"2020-11-11T12:25:17-08:00","datePublished":"2020-11-11T12:25:17-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/rendering-process/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -124,44 +124,37 @@
 <div class="unit four-fifths">
       <article>
         <div class="improve right hide-on-mobiles">
-          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/pages.md"><i
+          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/rendering-process.md"><i
              class="fa fa-pencil"></i> &nbsp;Improve this page</a>
         </div>
-        <h1>Pages</h1>
-        <p>Pages are the most basic building block for content. They’re useful for standalone
-content (content which is not date based or is not a group of content such as staff
-members or recipes).</p>
+        <h1>Rendering Process</h1>
+        <p>For any Jekyll site, a <em>build session</em> consists of discrete phases in the following order — <em>setting up plugins,
+reading source files, running generators, rendering templates</em>, and finally <em>writing files to disk</em>.</p>
 
-<p>The simplest way of adding a page is to add an HTML file in the root
-directory with a suitable filename. You can also write a page in Markdown using
-a <code class="language-plaintext highlighter-rouge">.md</code> extension which converts to HTML on build. For a site with
-a homepage, an about page, and a contact page, here’s what the root directory
-and associated URLs might look like:</p>
+<p>While the phases above are self-explanatory, the one phase that warrants dissection is <em>the rendering phase</em>.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
-├── about.md    # =&gt; http://example.com/about.html
-├── index.html    # =&gt; http://example.com/
-└── contact.html  # =&gt; http://example.com/contact.html
-</code></pre></div></div>
-
-<p>If you have a lot of pages, you can organize them into subfolders. The same subfolders that are used to group your pages in your project’s source will then exist in the <code class="language-plaintext highlighter-rouge">_site</code> folder when your site builds. However, when a page has a <em>different</em> permalink set in the front matter, the subfolder at <code class="language-plaintext highlighter-rouge">_site</code> changes accordingly.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
-├── about.md          # =&gt; http://example.com/about.html
-├── documentation     # folder containing pages
-│   └── doc1.md       # =&gt; http://example.com/documentation/doc1.html
-├── design            # folder containing pages
-│   └── draft.md      # =&gt; http://example.com/design/draft.html
-</code></pre></div></div>
-
-<h2 id="changing-the-output-url">Changing the output URL</h2>
-
-<p>You might want to have a particular folder structure for your source files that changes for the built site. With <a href="/docs/permalinks">permalinks</a> you have full control of the output URL.</p>
-
-<h2 id="excerpts-for-pages">Excerpts for pages</h2>
-
-<p>From Jekyll 4.1.1 onwards, one can <em>choose</em> to generate excerpts for their pages by setting <code class="language-plaintext highlighter-rouge">page_excerpts</code> to <code class="language-plaintext highlighter-rouge">true</code> in their
-config file.</p>
+<p>The rendering phase is further divisible into three optional stages. Every file rendered, passes through one or more of
+these stages as determined by the file’s content string, front matter and extension. The stages are akin to an assembly
+line, with the <em>output</em> from a stage being the <em>input</em> for the succeeding stage:</p>
+<ul>
+  <li><strong>Interpreting Liquid expressions in the file</strong><br />
+This stage evaluates Liquid expressions in the current file. By default, the interpretation is <em>shallow</em> — in that
+any Liquid expression in resulting output is not further interpreted. Moreover, any Liquid expression in the file’s
+front matter is left untouched.</li>
+  <li><strong>Unleashing the converters</strong><br />
+This stage invokes the converter mapped to the current file’s extension and converts the input string. This is when
+Markdown gets converted into HTML and Sass / Scss into CSS or CoffeeScript into JavaScript, etc, etc. Since this stage
+is determined by the file’s extension, Markdown or Sass inside a <code class="language-plaintext highlighter-rouge">.html</code> file will remain untouched.</li>
+  <li><strong>Populating the layouts</strong><br />
+By this stage, <em>the source file</em> is considered rendered and it will not be revisited. However, based on the file’s
+extension and consequently based on the front matter, it is determined whether to take the <em>output</em> string from
+the preceding stage and place into layouts or not. Whereas output from Sass files or CoffeeScript files are <em>never</em>
+placed into a layout, regular text output can go either ways based on whether a layout has been assigned via the front
+matter.<br /><br />
+Placement into layouts work similar to how Russian dolls encase the smaller ones within itself or how an oyster
+generates a pearl — the converted output from the preceding stage forms the core and layout(s) are successively
+<em>rendered</em> separately onto the core.</li>
+</ul>
 
       </article>
     </div>
@@ -179,11 +172,11 @@ config file.</p>
       <ul>
         <li><a href="/docs/usage/">Command Line Usage</a></li>
         <li><a href="/docs/configuration/">Configuration</a></li>
-        <li><a href="/docs/rendering-process/">Rendering Process</a></li>
+        <li class="current"><a href="/docs/rendering-process/">Rendering Process</a></li>
       </ul>
     <h4>Content</h4>
       <ul>
-        <li class="current"><a href="/docs/pages/">Pages</a></li>
+        <li><a href="/docs/pages/">Pages</a></li>
         <li><a href="/docs/posts/">Posts</a></li>
         <li><a href="/docs/front-matter/">Front Matter</a></li>
         <li><a href="/docs/collections/">Collections</a></li>

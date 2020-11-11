@@ -1,9 +1,0 @@
----
-title: Some Tags
-tags:
-- food
-- cooking
-- pizza
----
-
-Awesome!

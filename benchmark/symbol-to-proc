@@ -1,7 +1,0 @@
-#!/usr/bin/env ruby
-require 'benchmark/ips'
-
-Benchmark.ips do |x|
-  x.report('block')  { (1..100).map { |i| i.to_s } }
-  x.report('&:to_s') { (1..100).map(&:to_s) }
-end

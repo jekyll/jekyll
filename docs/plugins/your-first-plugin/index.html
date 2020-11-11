@@ -12,25 +12,25 @@
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Pages | Jekyll • Simple, blog-aware, static sites</title>
+<title>Your first plugin | Jekyll • Simple, blog-aware, static sites</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Pages" />
+<meta property="og:title" content="Your first plugin" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Pages are the most basic building block for content. They’re useful for standalone content (content which is not date based or is not a group of content such as staff members or recipes)." />
-<meta property="og:description" content="Pages are the most basic building block for content. They’re useful for standalone content (content which is not date based or is not a group of content such as staff members or recipes)." />
-<link rel="canonical" href="https://jekyllrb.com/docs/pages/" />
-<meta property="og:url" content="https://jekyllrb.com/docs/pages/" />
+<meta name="description" content="Plugins allow you to extend Jekyll’s behavior to fit your needs. There are six types of plugins in Jekyll." />
+<meta property="og:description" content="Plugins allow you to extend Jekyll’s behavior to fit your needs. There are six types of plugins in Jekyll." />
+<link rel="canonical" href="https://jekyllrb.com/docs/plugins/your-first-plugin/" />
+<meta property="og:url" content="https://jekyllrb.com/docs/plugins/your-first-plugin/" />
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-11-11T12:25:17-08:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
-<meta property="twitter:title" content="Pages" />
+<meta property="twitter:title" content="Your first plugin" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"description":"Pages are the most basic building block for content. They’re useful for standalone content (content which is not date based or is not a group of content such as staff members or recipes).","image":"https://jekyllrb.com/img/jekyll-og.png","url":"https://jekyllrb.com/docs/pages/","headline":"Pages","@type":"BlogPosting","dateModified":"2020-11-11T12:25:17-08:00","datePublished":"2020-11-11T12:25:17-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/pages/"},"@context":"https://schema.org"}</script>
+{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"description":"Plugins allow you to extend Jekyll’s behavior to fit your needs. There are six types of plugins in Jekyll.","image":"https://jekyllrb.com/img/jekyll-og.png","url":"https://jekyllrb.com/docs/plugins/your-first-plugin/","headline":"Your first plugin","@type":"BlogPosting","dateModified":"2020-11-11T12:25:17-08:00","datePublished":"2020-11-11T12:25:17-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/plugins/your-first-plugin/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -70,7 +70,7 @@
   <nav class="mobile-nav show-on-mobiles">
     <ul>
   <li><a href="/">Home</a></li>
-    <li class="current" ><a href="/docs/">Docs</a></li>
+    <li class="current"><a href="/docs/">Docs</a></li>
     <li><a href="/resources/">Resources</a></li>
     <li><a href="/news/">News</a></li>
     <li><a href="https://github.com/jekyll/jekyll">GitHub</a></li>
@@ -124,44 +124,174 @@
 <div class="unit four-fifths">
       <article>
         <div class="improve right hide-on-mobiles">
-          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/pages.md"><i
-             class="fa fa-pencil"></i> &nbsp;Improve this page</a>
+          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/plugins/your-first-plugin.md"><i class="fa fa-pencil"></i>  Improve this page</a>
         </div>
-        <h1>Pages</h1>
-        <p>Pages are the most basic building block for content. They’re useful for standalone
-content (content which is not date based or is not a group of content such as staff
-members or recipes).</p>
+        <h1>Your first plugin</h1>
+        <p>Plugins allow you to extend Jekyll’s behavior to fit your needs. There are six
+types of plugins in Jekyll.</p>
 
-<p>The simplest way of adding a page is to add an HTML file in the root
-directory with a suitable filename. You can also write a page in Markdown using
-a <code class="language-plaintext highlighter-rouge">.md</code> extension which converts to HTML on build. For a site with
-a homepage, an about page, and a contact page, here’s what the root directory
-and associated URLs might look like:</p>
+<h2 id="generators">Generators</h2>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
-├── about.md    # =&gt; http://example.com/about.html
-├── index.html    # =&gt; http://example.com/
-└── contact.html  # =&gt; http://example.com/contact.html
+<p><a href="/docs/plugins/generators/">Generators</a> create content on your site.
+For example:</p>
+
+<ul>
+  <li>
+<a href="https://github.com/jekyll/jekyll-feed">jekyll-feed</a> creates an Atom feed of
+blog posts.</li>
+  <li>
+<a href="https://github.com/jekyll/jekyll-archives">jekyll-archives</a> creates archive
+pages for blog categories and tags.</li>
+  <li>
+<a href="https://github.com/jekyll/jekyll-sitemap">jekyll-sitemap</a> creates a sitemap.</li>
+</ul>
+
+<h2 id="converters">Converters</h2>
+
+<p><a href="/docs/plugins/converters/">Converters</a> change a markup language into another
+format. For example:</p>
+
+<ul>
+  <li>
+<a href="https://github.com/jekyll/jekyll-textile-converter">jekyll-textile-converter</a>
+converts textile to HTML.</li>
+  <li>
+<a href="https://github.com/jekyll/jekyll-coffeescript">jekyll-coffeescript</a> converts
+Coffeescript to JavaScript.</li>
+  <li>
+<a href="https://github.com/jekyll/jekyll-opal">jekyll-opal</a> converts Ruby to
+JavaScript.</li>
+</ul>
+
+<h2 id="commands">Commands</h2>
+
+<p><a href="/docs/plugins/commands/">Commands</a> extend the <code class="language-plaintext highlighter-rouge">jekyll</code> executable with
+subcommands. For example:</p>
+
+<ul>
+  <li>
+<a href="https://github.com/jekyll/jekyll-compose">jekyll-compose</a> adds subcommands
+for creating a post, page or draft.</li>
+</ul>
+
+<h2 id="tags">Tags</h2>
+
+<p><a href="/docs/plugins/tags/">Tags</a> create custom Liquid tags. For example:</p>
+
+<ul>
+  <li>
+<a href="https://github.com/dommmel/jekyll-youtube">jekyll-youtube</a> embeds a YouTube
+video.</li>
+  <li>
+<a href="https://github.com/samrayner/jekyll-asset-path-plugin">jekyll-asset-path-plugin</a>
+outputs a relative URL for assets.</li>
+  <li>
+<a href="https://github.com/sectore/jekyll-swfobject">jekyll-swfobject</a> embeds a SWF
+object.</li>
+</ul>
+
+<h2 id="filters">Filters</h2>
+
+<p><a href="/docs/plugins/filters/">Filters</a> create custom Liquid filters. For example:</p>
+
+<ul>
+  <li>
+<a href="https://github.com/markets/jekyll-timeago">jekyll-time-ago</a> - The distance
+between two dates in words.</li>
+  <li>
+<a href="https://github.com/toshimaru/jekyll-toc">jekyll-toc</a> - Generates a table of
+content.</li>
+  <li>
+<a href="https://github.com/vwochnik/jekyll-email-protect">jekyll-email-protect</a> -
+Obfuscates emails to protect them from spam bots.</li>
+</ul>
+
+<h2 id="hooks">Hooks</h2>
+
+<p><a href="/docs/plugins/hooks/">Hooks</a> give fine-grained control to extend the build
+process. For example:</p>
+
+<ul>
+  <li>
+<a href="https://github.com/jekyll/jemoji">jemoji</a> Display emojis <img class="emoji" title=":+1:" alt=":+1:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png" height="20" width="20">
+</li>
+  <li>
+<a href="https://github.com/jekyll/jekyll-mentions">jekyll-mentions</a> turns mentions <a href="https://github.com/jekyll" class="user-mention">@jekyll</a> into links</li>
+  <li>
+<a href="https://github.com/jeffreytse/jekyll-spaceship">jekyll-spaceship</a> - advanced example. Provides
+powerful supports for table, mathjax, plantuml, video, etc.</li>
+</ul>
+
+<h2 id="flags">Flags</h2>
+
+<p>There are two flags to be aware of when writing a plugin:</p>
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Flag</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>safe</code></p>
+      </td>
+      <td>
+        <p>
+          A boolean flag that informs Jekyll whether this plugin may be safely
+          executed in an environment where arbitrary code execution is not
+          allowed. This is used by GitHub Pages to determine which core plugins
+          may be used, and which are unsafe to run. If your plugin does not
+          allow for arbitrary code execution, set this to <code>true</code>.
+          GitHub Pages still won’t load your plugin, but if you submit it for
+          inclusion in core, it’s best for this to be correct!
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>priority</code></p>
+      </td>
+      <td>
+        <p>
+          This flag determines what order the plugin is loaded in. Valid values
+          are: <code>:lowest</code>, <code>:low</code>, <code>:normal</code>,
+          <code>:high</code>, and <code>:highest</code>. Highest priority
+          matches are applied first, lowest priority are applied last.
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>To use one of the example plugins above as an illustration, here is how you’d
+specify these two flags:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">module</span> <span class="nn">Jekyll</span>
+  <span class="k">class</span> <span class="nc">UpcaseConverter</span> <span class="o">&lt;</span> <span class="no">Converter</span>
+    <span class="n">safe</span> <span class="kp">true</span>
+    <span class="n">priority</span> <span class="ss">:low</span>
+    <span class="o">...</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 </code></pre></div></div>
 
-<p>If you have a lot of pages, you can organize them into subfolders. The same subfolders that are used to group your pages in your project’s source will then exist in the <code class="language-plaintext highlighter-rouge">_site</code> folder when your site builds. However, when a page has a <em>different</em> permalink set in the front matter, the subfolder at <code class="language-plaintext highlighter-rouge">_site</code> changes accordingly.</p>
+<h2 id="best-practices">Best Practices</h2>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
-├── about.md          # =&gt; http://example.com/about.html
-├── documentation     # folder containing pages
-│   └── doc1.md       # =&gt; http://example.com/documentation/doc1.html
-├── design            # folder containing pages
-│   └── draft.md      # =&gt; http://example.com/design/draft.html
-</code></pre></div></div>
+<p>The guides help you with the specifics of creating plugins. We also have some
+recommended best practices to help structure your plugin.</p>
 
-<h2 id="changing-the-output-url">Changing the output URL</h2>
-
-<p>You might want to have a particular folder structure for your source files that changes for the built site. With <a href="/docs/permalinks">permalinks</a> you have full control of the output URL.</p>
-
-<h2 id="excerpts-for-pages">Excerpts for pages</h2>
-
-<p>From Jekyll 4.1.1 onwards, one can <em>choose</em> to generate excerpts for their pages by setting <code class="language-plaintext highlighter-rouge">page_excerpts</code> to <code class="language-plaintext highlighter-rouge">true</code> in their
-config file.</p>
+<p>We recommend using a <a href="/docs/ruby-101/#gems">gem</a> for your plugin. This will
+help you manage dependencies, keep separation from your site source code and
+allow you to share functionality across multiple projects. For tips on creating
+a gem take a look at the
+<a href="https://guides.rubygems.org/make-your-own-gem/">Ruby gems guide</a> or look
+through the source code of an existing plugin such as
+<a href="https://github.com/jekyll/jekyll-feed">jekyll-feed</a>.</p>
 
       </article>
     </div>
@@ -183,7 +313,7 @@ config file.</p>
       </ul>
     <h4>Content</h4>
       <ul>
-        <li class="current"><a href="/docs/pages/">Pages</a></li>
+        <li><a href="/docs/pages/">Pages</a></li>
         <li><a href="/docs/posts/">Posts</a></li>
         <li><a href="/docs/front-matter/">Front Matter</a></li>
         <li><a href="/docs/collections/">Collections</a></li>
@@ -218,7 +348,7 @@ config file.</p>
   <div class="grid">
     <div class="unit one-third center-on-mobiles">
       <p>Jekyll is lovingly maintained by the <a href="/team/">core team</a> of volunteers. </p>
-      <p>The contents of this website are <br />&copy;&nbsp;2020 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT&nbsp;License</a>.</p>
+      <p>The contents of this website are <br>© 2020 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT License</a>.</p>
     </div>
     <div class="unit two-thirds align-right center-on-mobiles">
       <p>

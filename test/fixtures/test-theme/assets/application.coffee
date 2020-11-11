@@ -1,3 +1,0 @@
----
----
-alert "From your theme."

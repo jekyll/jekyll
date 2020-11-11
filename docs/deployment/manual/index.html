@@ -12,25 +12,25 @@
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Pages | Jekyll • Simple, blog-aware, static sites</title>
+<title>Manual Deployment | Jekyll • Simple, blog-aware, static sites</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Pages" />
+<meta property="og:title" content="Manual Deployment" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Pages are the most basic building block for content. They’re useful for standalone content (content which is not date based or is not a group of content such as staff members or recipes)." />
-<meta property="og:description" content="Pages are the most basic building block for content. They’re useful for standalone content (content which is not date based or is not a group of content such as staff members or recipes)." />
-<link rel="canonical" href="https://jekyllrb.com/docs/pages/" />
-<meta property="og:url" content="https://jekyllrb.com/docs/pages/" />
+<meta name="description" content="Jekyll generates your static site to the _site directory by default. You can transfer the contents of this directory to almost any hosting provider to get your site live. Here are some manual ways of achieving this:" />
+<meta property="og:description" content="Jekyll generates your static site to the _site directory by default. You can transfer the contents of this directory to almost any hosting provider to get your site live. Here are some manual ways of achieving this:" />
+<link rel="canonical" href="https://jekyllrb.com/docs/deployment/manual/" />
+<meta property="og:url" content="https://jekyllrb.com/docs/deployment/manual/" />
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-11-11T12:25:17-08:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
-<meta property="twitter:title" content="Pages" />
+<meta property="twitter:title" content="Manual Deployment" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"description":"Pages are the most basic building block for content. They’re useful for standalone content (content which is not date based or is not a group of content such as staff members or recipes).","image":"https://jekyllrb.com/img/jekyll-og.png","url":"https://jekyllrb.com/docs/pages/","headline":"Pages","@type":"BlogPosting","dateModified":"2020-11-11T12:25:17-08:00","datePublished":"2020-11-11T12:25:17-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/pages/"},"@context":"https://schema.org"}</script>
+{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"description":"Jekyll generates your static site to the _site directory by default. You can transfer the contents of this directory to almost any hosting provider to get your site live. Here are some manual ways of achieving this:","image":"https://jekyllrb.com/img/jekyll-og.png","url":"https://jekyllrb.com/docs/deployment/manual/","headline":"Manual Deployment","@type":"BlogPosting","dateModified":"2020-11-11T12:25:17-08:00","datePublished":"2020-11-11T12:25:17-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/deployment/manual/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -124,44 +124,41 @@
 <div class="unit four-fifths">
       <article>
         <div class="improve right hide-on-mobiles">
-          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/pages.md"><i
+          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/deployment/manual.md"><i
              class="fa fa-pencil"></i> &nbsp;Improve this page</a>
         </div>
-        <h1>Pages</h1>
-        <p>Pages are the most basic building block for content. They’re useful for standalone
-content (content which is not date based or is not a group of content such as staff
-members or recipes).</p>
+        <h1>Manual Deployment</h1>
+        <p>Jekyll generates your static site to the <code class="language-plaintext highlighter-rouge">_site</code> directory by default. You can
+transfer the contents of this directory to almost any hosting provider to get
+your site live. Here are some manual ways of achieving this:</p>
 
-<p>The simplest way of adding a page is to add an HTML file in the root
-directory with a suitable filename. You can also write a page in Markdown using
-a <code class="language-plaintext highlighter-rouge">.md</code> extension which converts to HTML on build. For a site with
-a homepage, an about page, and a contact page, here’s what the root directory
-and associated URLs might look like:</p>
+<h2 id="rsync">rsync</h2>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
-├── about.md    # =&gt; http://example.com/about.html
-├── index.html    # =&gt; http://example.com/
-└── contact.html  # =&gt; http://example.com/contact.html
-</code></pre></div></div>
+<p>Rsync is similar to scp except it can be faster as it will only send changed
+parts of files as opposed to the entire file. You can learn more about using
+rsync in the <a href="https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories-on-a-vps">Digital Ocean tutorial</a>.</p>
 
-<p>If you have a lot of pages, you can organize them into subfolders. The same subfolders that are used to group your pages in your project’s source will then exist in the <code class="language-plaintext highlighter-rouge">_site</code> folder when your site builds. However, when a page has a <em>different</em> permalink set in the front matter, the subfolder at <code class="language-plaintext highlighter-rouge">_site</code> changes accordingly.</p>
+<h2 id="amazon-s3">Amazon S3</h2>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
-├── about.md          # =&gt; http://example.com/about.html
-├── documentation     # folder containing pages
-│   └── doc1.md       # =&gt; http://example.com/documentation/doc1.html
-├── design            # folder containing pages
-│   └── draft.md      # =&gt; http://example.com/design/draft.html
-</code></pre></div></div>
+<p>If you want to host your site in Amazon S3, you can do so by
+using the <a href="https://github.com/laurilehmijoki/s3_website">s3_website</a>
+application. It will push your site to Amazon S3 where it can be served like
+any web server,
+dynamically scaling to almost unlimited traffic. This approach has the
+benefit of being about the cheapest hosting option available for
+low-volume blogs as you only pay for what you use.</p>
 
-<h2 id="changing-the-output-url">Changing the output URL</h2>
+<h2 id="ftp">FTP</h2>
 
-<p>You might want to have a particular folder structure for your source files that changes for the built site. With <a href="/docs/permalinks">permalinks</a> you have full control of the output URL.</p>
+<p>Most traditional web hosting provider let you upload files to their servers over FTP. To upload a Jekyll site to a web host using FTP, run the <code class="language-plaintext highlighter-rouge">jekyll build</code> command and copy the contents of the generated <code class="language-plaintext highlighter-rouge">_site</code> folder to the root folder of your hosting account. This is most likely to be the <code class="language-plaintext highlighter-rouge">httpdocs</code> or <code class="language-plaintext highlighter-rouge">public_html</code> folder on most hosting providers.</p>
 
-<h2 id="excerpts-for-pages">Excerpts for pages</h2>
+<h2 id="scp">scp</h2>
 
-<p>From Jekyll 4.1.1 onwards, one can <em>choose</em> to generate excerpts for their pages by setting <code class="language-plaintext highlighter-rouge">page_excerpts</code> to <code class="language-plaintext highlighter-rouge">true</code> in their
-config file.</p>
+<p>If you have direct access to the deployment web server, the process is essentially the same, except you might have other methods available to you (such as <code class="language-plaintext highlighter-rouge">scp</code>, or even direct filesystem access) for transferring the files. Remember to make sure the contents of the generated <code class="language-plaintext highlighter-rouge">_site</code> folder get placed in the appropriate web root directory for your web server.</p>
+
+<h2 id="rack-jekyll">Rack-Jekyll</h2>
+
+<p><a href="https://github.com/adaoraul/rack-jekyll/">Rack-Jekyll</a> allows you to deploy your site on any Rack server such as Amazon EC2, Slicehost, Heroku, and so forth. It also can run with <a href="https://github.com/rtomayko/shotgun/">shotgun</a>, <a href="https://github.com/rack/rack">rackup</a>, <a href="https://github.com/mongrel/mongrel">mongrel</a>, <a href="https://github.com/defunkt/unicorn/">unicorn</a>, and <a href="https://github.com/adaoraul/rack-jekyll#readme">others</a>.</p>
 
       </article>
     </div>
@@ -183,7 +180,7 @@ config file.</p>
       </ul>
     <h4>Content</h4>
       <ul>
-        <li class="current"><a href="/docs/pages/">Pages</a></li>
+        <li><a href="/docs/pages/">Pages</a></li>
         <li><a href="/docs/posts/">Posts</a></li>
         <li><a href="/docs/front-matter/">Front Matter</a></li>
         <li><a href="/docs/collections/">Collections</a></li>

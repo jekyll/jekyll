@@ -12,25 +12,25 @@
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Pages | Jekyll • Simple, blog-aware, static sites</title>
+<title>Tags | Jekyll • Simple, blog-aware, static sites</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Pages" />
+<meta property="og:title" content="Tags" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Pages are the most basic building block for content. They’re useful for standalone content (content which is not date based or is not a group of content such as staff members or recipes)." />
-<meta property="og:description" content="Pages are the most basic building block for content. They’re useful for standalone content (content which is not date based or is not a group of content such as staff members or recipes)." />
-<link rel="canonical" href="https://jekyllrb.com/docs/pages/" />
-<meta property="og:url" content="https://jekyllrb.com/docs/pages/" />
+<meta name="description" content="If you’d like to include custom liquid tags in your site, you can do so by hooking into the tagging system. Built-in examples added by Jekyll include the highlight and include tags. Below is an example of a custom liquid tag that will output the time the page was rendered:" />
+<meta property="og:description" content="If you’d like to include custom liquid tags in your site, you can do so by hooking into the tagging system. Built-in examples added by Jekyll include the highlight and include tags. Below is an example of a custom liquid tag that will output the time the page was rendered:" />
+<link rel="canonical" href="https://jekyllrb.com/docs/plugins/tags/" />
+<meta property="og:url" content="https://jekyllrb.com/docs/plugins/tags/" />
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-11-11T12:25:17-08:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
-<meta property="twitter:title" content="Pages" />
+<meta property="twitter:title" content="Tags" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"description":"Pages are the most basic building block for content. They’re useful for standalone content (content which is not date based or is not a group of content such as staff members or recipes).","image":"https://jekyllrb.com/img/jekyll-og.png","url":"https://jekyllrb.com/docs/pages/","headline":"Pages","@type":"BlogPosting","dateModified":"2020-11-11T12:25:17-08:00","datePublished":"2020-11-11T12:25:17-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/pages/"},"@context":"https://schema.org"}</script>
+{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"description":"If you’d like to include custom liquid tags in your site, you can do so by hooking into the tagging system. Built-in examples added by Jekyll include the highlight and include tags. Below is an example of a custom liquid tag that will output the time the page was rendered:","image":"https://jekyllrb.com/img/jekyll-og.png","url":"https://jekyllrb.com/docs/plugins/tags/","headline":"Tags","@type":"BlogPosting","dateModified":"2020-11-11T12:25:17-08:00","datePublished":"2020-11-11T12:25:17-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/plugins/tags/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -70,7 +70,7 @@
   <nav class="mobile-nav show-on-mobiles">
     <ul>
   <li><a href="/">Home</a></li>
-    <li class="current" ><a href="/docs/">Docs</a></li>
+    <li class="current"><a href="/docs/">Docs</a></li>
     <li><a href="/resources/">Resources</a></li>
     <li><a href="/news/">News</a></li>
     <li><a href="https://github.com/jekyll/jekyll">GitHub</a></li>
@@ -124,44 +124,106 @@
 <div class="unit four-fifths">
       <article>
         <div class="improve right hide-on-mobiles">
-          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/pages.md"><i
-             class="fa fa-pencil"></i> &nbsp;Improve this page</a>
+          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/plugins/tags.md"><i class="fa fa-pencil"></i>  Improve this page</a>
         </div>
-        <h1>Pages</h1>
-        <p>Pages are the most basic building block for content. They’re useful for standalone
-content (content which is not date based or is not a group of content such as staff
-members or recipes).</p>
+        <h1>Tags</h1>
+        <p>If you’d like to include custom liquid tags in your site, you can do so by
+hooking into the tagging system. Built-in examples added by Jekyll include the
+<code class="language-plaintext highlighter-rouge">highlight</code> and <code class="language-plaintext highlighter-rouge">include</code> tags. Below is an example of a custom liquid tag that
+will output the time the page was rendered:</p>
 
-<p>The simplest way of adding a page is to add an HTML file in the root
-directory with a suitable filename. You can also write a page in Markdown using
-a <code class="language-plaintext highlighter-rouge">.md</code> extension which converts to HTML on build. For a site with
-a homepage, an about page, and a contact page, here’s what the root directory
-and associated URLs might look like:</p>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">module</span> <span class="nn">Jekyll</span>
+  <span class="k">class</span> <span class="nc">RenderTimeTag</span> <span class="o">&lt;</span> <span class="no">Liquid</span><span class="o">::</span><span class="no">Tag</span>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
-├── about.md    # =&gt; http://example.com/about.html
-├── index.html    # =&gt; http://example.com/
-└── contact.html  # =&gt; http://example.com/contact.html
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">tag_name</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">tokens</span><span class="p">)</span>
+      <span class="k">super</span>
+      <span class="vi">@text</span> <span class="o">=</span> <span class="n">text</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+      <span class="s2">"</span><span class="si">#{</span><span class="vi">@text</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="si">}</span><span class="s2">"</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="p">.</span><span class="nf">register_tag</span><span class="p">(</span><span class="s1">'render_time'</span><span class="p">,</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">RenderTimeTag</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>If you have a lot of pages, you can organize them into subfolders. The same subfolders that are used to group your pages in your project’s source will then exist in the <code class="language-plaintext highlighter-rouge">_site</code> folder when your site builds. However, when a page has a <em>different</em> permalink set in the front matter, the subfolder at <code class="language-plaintext highlighter-rouge">_site</code> changes accordingly.</p>
+<p>At a minimum, liquid tags must implement:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
-├── about.md          # =&gt; http://example.com/about.html
-├── documentation     # folder containing pages
-│   └── doc1.md       # =&gt; http://example.com/documentation/doc1.html
-├── design            # folder containing pages
-│   └── draft.md      # =&gt; http://example.com/design/draft.html
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>render</code></p>
+      </td>
+      <td>
+        <p>Outputs the content of the tag.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>You must also register the custom tag with the Liquid template engine as
+follows:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="p">.</span><span class="nf">register_tag</span><span class="p">(</span><span class="s1">'render_time'</span><span class="p">,</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">RenderTimeTag</span><span class="p">)</span>
 </code></pre></div></div>
 
-<h2 id="changing-the-output-url">Changing the output URL</h2>
+<p>In the example above, we can place the following tag anywhere in one of our
+pages:</p>
 
-<p>You might want to have a particular folder structure for your source files that changes for the built site. With <a href="/docs/permalinks">permalinks</a> you have full control of the output URL.</p>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;p&gt;<span class="p">{%</span><span class="w"> </span><span class="nt">render_time</span><span class="w"> </span>page<span class="w"> </span>rendered<span class="w"> </span><span class="na">at</span><span class="o">:</span><span class="w"> </span><span class="p">%}</span>&lt;/p&gt;
+</code></pre></div></div>
 
-<h2 id="excerpts-for-pages">Excerpts for pages</h2>
+<p>And we would get something like this on the page:</p>
 
-<p>From Jekyll 4.1.1 onwards, one can <em>choose</em> to generate excerpts for their pages by setting <code class="language-plaintext highlighter-rouge">page_excerpts</code> to <code class="language-plaintext highlighter-rouge">true</code> in their
-config file.</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p&gt;</span>page rendered at: Tue June 22 23:38:47 –0500 2010<span class="nt">&lt;/p&gt;</span>
+</code></pre></div></div>
+
+<h2 id="tag-blocks">Tag Blocks</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">render_time</code> tag seen above can also be rewritten as a tag block by
+inheriting the <code class="language-plaintext highlighter-rouge">Liquid::Block</code> class. Look at the example below:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">module</span> <span class="nn">Jekyll</span>
+  <span class="k">class</span> <span class="nc">RenderTimeTagBlock</span> <span class="o">&lt;</span> <span class="no">Liquid</span><span class="o">::</span><span class="no">Block</span>
+
+    <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+      <span class="n">text</span> <span class="o">=</span> <span class="k">super</span>
+      <span class="s2">"&lt;p&gt;</span><span class="si">#{</span><span class="n">text</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="si">}</span><span class="s2">&lt;/p&gt;"</span>
+    <span class="k">end</span>
+
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="p">.</span><span class="nf">register_tag</span><span class="p">(</span><span class="s1">'render_time'</span><span class="p">,</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">RenderTimeTagBlock</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>We can now use the tag block anywhere:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">render_time</span><span class="w"> </span><span class="p">%}</span>
+page rendered at:
+<span class="p">{%</span><span class="w"> </span><span class="nt">endrender_time</span><span class="w"> </span><span class="p">%}</span>
+</code></pre></div></div>
+
+<p>And we would still get the same output as above on the page:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p&gt;</span>page rendered at: Tue June 22 23:38:47 –0500 2010<span class="nt">&lt;/p&gt;</span>
+</code></pre></div></div>
+
+<p class="note info">In the above example, the tag block and the tag are both registered with
+the name <code>render_time</code>, but to register a tag and a tag block using
+the same name in the same project is not recommended as this may lead to
+conflicts.</p>
 
       </article>
     </div>
@@ -183,7 +245,7 @@ config file.</p>
       </ul>
     <h4>Content</h4>
       <ul>
-        <li class="current"><a href="/docs/pages/">Pages</a></li>
+        <li><a href="/docs/pages/">Pages</a></li>
         <li><a href="/docs/posts/">Posts</a></li>
         <li><a href="/docs/front-matter/">Front Matter</a></li>
         <li><a href="/docs/collections/">Collections</a></li>
@@ -218,7 +280,7 @@ config file.</p>
   <div class="grid">
     <div class="unit one-third center-on-mobiles">
       <p>Jekyll is lovingly maintained by the <a href="/team/">core team</a> of volunteers. </p>
-      <p>The contents of this website are <br />&copy;&nbsp;2020 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT&nbsp;License</a>.</p>
+      <p>The contents of this website are <br>© 2020 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT License</a>.</p>
     </div>
     <div class="unit two-thirds align-right center-on-mobiles">
       <p>

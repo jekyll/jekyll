@@ -1,3 +1,0 @@
----
----
-alert "From your site."
