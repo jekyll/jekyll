@@ -85,6 +85,7 @@
   * Memoize array of drop getter method names (#8421)
   * Enhance detection of conflicting destination URLs (#8459)
   * Debug reading Page and Layout objects (#8100)
+  * Don&#39;t reset site.url to localhost:4000 by default (#7253)
 
 ## 4.1.1 / 2020-06-24
 
