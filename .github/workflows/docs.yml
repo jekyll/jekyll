@@ -22,10 +22,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: vendor/bundle
-          key: ${{ runner.os }}-bundler-${{ env.RUBY_VERSION }}-${{ hashFiles('Gemfile') }}-${{ hashFiles('jekyll.gemspec') }}
-          restore-keys:
-            - ${{ runner.os }}-bundler-${{ env.RUBY_VERSION }}-${{ hashFiles('Gemfile') }}-
-            - ${{ runner.os }}-bundler-${{ env.RUBY_VERSION }}-
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
       - name: Set up dependencies
         run: |
           bundle install --path=vendor/bundle --jobs 4 --retry 3
