@@ -82,6 +82,7 @@
   * Cache Jekyll.sanitized_path (#8424)
   * Memoize array of drop getter method names (#8421)
   * Enhance detection of conflicting destination URLs (#8459)
+  * Debug reading Page and Layout objects (#8100)
 
 ## 4.1.1 / 2020-06-24
 
