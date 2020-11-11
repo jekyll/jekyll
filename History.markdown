@@ -47,6 +47,7 @@
   * Fix test suite compatibility with JRuby (#8418)
   * chore(deps): bump Rubocop to 0.93.0 (#8430)
   * Use Ruby 2.7.1 in GitHub Actions (#8444)
+  * Reduce allocations from rendering item as liquid (#8406)
 
 ### Bug Fixes
 
