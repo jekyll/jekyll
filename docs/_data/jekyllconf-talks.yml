@@ -165,3 +165,45 @@
   youtube_id: nq1AUB72GCQ
   topic: Overcoming challenges in using Jekyll for documentation projects
   year: 2016
+
+- speaker: Pieter Roozen
+  twitter_handle: Pieter_Roozen
+  youtube_id: moQP0SqEPsw
+  topic: Jekyll As An API Endpoint
+  year: 2019
+
+- speaker: Chen Hui Jing
+  twitter_handle: hj_chen
+  youtube_id: CERXESTZ5w4
+  topic: Why I love Jekyll Data Files
+  year: 2019
+
+- speaker: Chris Ferdinandi
+  twitter_handle: ChrisFerdinandi
+  youtube_id: vR1aI_kQ4-A
+  topic: The Lean Web
+  year: 2019
+  
+- speaker: Catherine Roebuck
+  twitter_handle: 
+  youtube_id: zTAP1m1BaDM
+  topic: Jekyll For City Government
+  year: 2019
+  
+- speaker: Joost van der Schee
+  twitter_handle: jhvanderschee
+  youtube_id: ztJJ1GSlYgI
+  topic: "Jekyll Codex - Jekyll for front-end developers"
+  year: 2019
+  
+- speaker: Matthew Loberg
+  twitter_handle: mloberg
+  youtube_id: 6eiAjAtSGqw
+  topic: Leverage AWS S3 And CloudFront To Deploy Blazing Fast Jekyll Sites
+  year: 2019
+  
+- speaker: George Phillips
+  twitter_handle: gphillips_nz
+  youtube_id: nEvdOwFJBVc
+  topic: Structuring Jekyll Sites For Enterprise Design Systems
+  year: 2019

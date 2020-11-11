@@ -35,11 +35,11 @@ module Jekyll
     # Returns nothing.
     # rubocop:disable Metrics/AbcSize
     def read_yaml(base, name, opts = {})
-      filename = File.join(base, name)
+      filename = @path || site.in_source_dir(base, name)
+      Jekyll.logger.debug "Reading:", relative_path
 
       begin
-        self.content = File.read(@path || site.in_source_dir(base, name),
-                                 Utils.merged_file_read_opts(site, opts))
+        self.content = File.read(filename, **Utils.merged_file_read_opts(site, opts))
         if content =~ Document::YAML_FRONT_MATTER_REGEXP
           self.content = $POSTMATCH
           self.data = SafeYAML.load(Regexp.last_match(1))
@@ -69,7 +69,7 @@ module Jekyll
     end
 
     def validate_permalink!(filename)
-      if self.data["permalink"]&.to_s&.empty?
+      if self.data["permalink"] == ""
         raise Errors::InvalidPermalinkError, "Invalid permalink in #{filename}"
       end
     end
@@ -78,7 +78,7 @@ module Jekyll
     #
     # Returns the transformed contents.
     def transform
-      _renderer.convert(content)
+      renderer.convert(content)
     end
 
     # Determine the extension depending on content_type.
@@ -86,7 +86,7 @@ module Jekyll
     # Returns the String extension for the output file.
     #   e.g. ".html" for an HTML output file.
     def output_ext
-      _renderer.output_ext
+      renderer.output_ext
     end
 
     # Determine which converter to use based on this convertible's
@@ -94,7 +94,7 @@ module Jekyll
     #
     # Returns the Converter instance.
     def converters
-      _renderer.converters
+      renderer.converters
     end
 
     # Render Liquid in the content
@@ -105,7 +105,7 @@ module Jekyll
     #
     # Returns the converted content
     def render_liquid(content, payload, info, path)
-      _renderer.render_liquid(content, payload, info, path)
+      renderer.render_liquid(content, payload, info, path)
     end
 
     # Convert this Convertible's data to a Hash suitable for use by Liquid.
@@ -117,7 +117,6 @@ module Jekyll
           hsh[attribute] = send(attribute)
         end
 
-      defaults = site.frontmatter_defaults.all(relative_path, type)
       Utils.deep_merge_hashes defaults, Utils.deep_merge_hashes(data, further_data)
     end
 
@@ -191,10 +190,10 @@ module Jekyll
     #
     # Returns nothing
     def render_all_layouts(layouts, payload, info)
-      _renderer.layouts = layouts
-      self.output = _renderer.place_in_layouts(output, payload, info)
+      renderer.layouts = layouts
+      self.output = renderer.place_in_layouts(output, payload, info)
     ensure
-      @_renderer = nil # this will allow the modifications above to disappear
+      @renderer = nil # this will allow the modifications above to disappear
     end
 
     # Add any necessary layouts to this convertible document.
@@ -204,15 +203,15 @@ module Jekyll
     #
     # Returns nothing.
     def do_layout(payload, layouts)
-      self.output = _renderer.tap do |renderer|
-        renderer.layouts = layouts
-        renderer.payload = payload
+      self.output = renderer.tap do |doc_renderer|
+        doc_renderer.layouts = layouts
+        doc_renderer.payload = payload
       end.run
 
       Jekyll.logger.debug "Post-Render Hooks:", relative_path
       Jekyll::Hooks.trigger hook_owner, :post_render, self
     ensure
-      @_renderer = nil # this will allow the modifications above to disappear
+      @renderer = nil # this will allow the modifications above to disappear
     end
 
     # Write the generated page file to the destination directory.
@@ -241,10 +240,14 @@ module Jekyll
       end
     end
 
+    def renderer
+      @renderer ||= Jekyll::Renderer.new(site, self)
+    end
+
     private
 
-    def _renderer
-      @_renderer ||= Jekyll::Renderer.new(site, self)
+    def defaults
+      @defaults ||= site.frontmatter_defaults.all(relative_path, type)
     end
 
     def no_layout?

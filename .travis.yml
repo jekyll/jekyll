@@ -4,9 +4,10 @@ cache: bundler
 language: ruby
 
 rvm:
-  - &ruby1 2.6.3
-  - &ruby2 2.4.6
-  - &jruby jruby-9.2.7.0
+  - &ruby1 2.7.1
+  - &ruby2 2.5.8
+  - &jruby jruby-9.2.11.1
+
 os:
   - linux
   - windows
@@ -22,7 +23,7 @@ matrix:
     - rvm: *ruby1
       env: TEST_SUITE=profile-docs
       name: "Profile Docs"
-    - rvm: *ruby1
+    - rvm: *ruby2
       env: TEST_SUITE=memprof
       name: "Profile Memory Allocation"
   exclude:

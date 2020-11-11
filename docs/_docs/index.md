@@ -6,33 +6,47 @@ redirect_from:
   - /docs/quickstart/
   - /docs/extras/
 ---
-Jekyll is a simple, extendable, static site generator. You give it text written
-in your favorite markup language and it churns through layouts to create a
-static website. Throughout that process you can tweak how you want the site URLs
-to look, what data gets displayed in the layout, and more.
+Jekyll is a static site generator. It takes text written in your
+favorite markup language and uses layouts to create a static website. You can
+tweak the site's look and feel, URLs, the data displayed on the page, and more. 
+
+## Prerequisites
+
+Jekyll requires the following:
+
+* Ruby version **{{ site.data.ruby.min_version }}** or higher
+* RubyGems
+* GCC and Make
+
+See [Requirements]({{ '/docs/installation/#requirements' | relative_url }}) for guides and details.
 
 ## Instructions
 
-1. Install a full [Ruby development environment](/docs/installation/)
-2. Install Jekyll and [bundler](/docs/ruby-101/#bundler) [gems](/docs/ruby-101/#gems)
+1. Install all [prerequisites]({{ '/docs/installation/' | relative_url }}).
+2. Install the jekyll and bundler [gems]({{ '/docs/ruby-101/#gems' | relative_url }}).
 ```
 gem install jekyll bundler
 ```
-3. Create a new Jekyll site at `./myblog`
+3. Create a new Jekyll site at `./myblog`.
 ```
 jekyll new myblog
 ```
-4. Change into your new directory
+4. Change into your new directory.
 ```
 cd myblog
 ```
-5. Build the site and make it available on a local server
+5. Build the site and make it available on a local server.
 ```
 bundle exec jekyll serve
 ```
-6. Now browse to [http://localhost:4000](http://localhost:4000){:target="_blank"}
+6. Browse to [http://localhost:4000](http://localhost:4000){:target="_blank"}
 
-If you encounter any unexpected errors during the above, please refer to the
-[troubleshooting](/docs/troubleshooting/#configuration-problems) page or the
-already-mentioned [requirements](/docs/installation/#requirements) page, as
-you might be missing development headers or other prerequisites.
+{: .note .info}
+Pass the `--livereload` option to `serve` to automatically refresh the page with each change you make to the source files: `bundle exec jekyll serve --livereload`
+
+
+If you encounter any errors during this process, check that you have installed all the prerequisites in [Requirements]({{ '/docs/installation/#requirements' | relative_url }}). 
+If you still have issues, see [Troubleshooting]({{ '/docs/troubleshooting/#configuration-problems' | relative_url }}).
+
+{: .note .info}
+Installation varies based on your operating system. See our [guides]({{ '/docs/installation/#guides' | relative_url }}) for OS-specific instructions.

@@ -36,7 +36,7 @@ module Jekyll
     #
     # Returns Array of Converter instances.
     def converters
-      @converters ||= site.converters.select { |c| c.matches(document.extname) }.sort
+      @converters ||= site.converters.select { |c| c.matches(document.extname) }.tap(&:sort!)
     end
 
     # Determine the extname the outputted file should have
@@ -66,7 +66,7 @@ module Jekyll
     # Render the document.
     #
     # Returns String rendered document output
-    # rubocop: disable AbcSize
+    # rubocop: disable Metrics/AbcSize, Metrics/MethodLength
     def render_document
       info = {
         :registers        => { :site => site, :page => payload["page"] },
@@ -84,6 +84,10 @@ module Jekyll
       output = convert(output.to_s)
       document.content = output
 
+      Jekyll.logger.debug "Post-Convert Hooks:", document.relative_path
+      document.trigger_hooks(:post_convert)
+      output = document.content
+
       if document.place_in_layout?
         Jekyll.logger.debug "Rendering Layout:", document.relative_path
         output = place_in_layouts(output, payload, info)
@@ -91,7 +95,7 @@ module Jekyll
 
       output
     end
-    # rubocop: enable AbcSize
+    # rubocop: enable Metrics/AbcSize, Metrics/MethodLength
 
     # Convert the document using the converters which match this renderer's document.
     #
@@ -125,13 +129,13 @@ module Jekyll
                            LiquidRenderer.format_error(e, path || document.relative_path)
       end
       template.render!(payload, info)
-    # rubocop: disable RescueException
+    # rubocop: disable Lint/RescueException
     rescue Exception => e
       Jekyll.logger.error "Liquid Exception:",
                           LiquidRenderer.format_error(e, path || document.relative_path)
       raise e
     end
-    # rubocop: enable RescueException
+    # rubocop: enable Lint/RescueException
 
     # Checks if the layout specified in the document actually exists
     #
@@ -174,16 +178,10 @@ module Jekyll
     # layout - the layout to check
     # Returns nothing
     def validate_layout(layout)
-      if invalid_layout?(layout)
-        Jekyll.logger.warn(
-          "Build Warning:",
-          "Layout '#{document.data["layout"]}' requested "\
-          "in #{document.relative_path} does not exist."
-        )
-      elsif !layout.nil?
-        layout_source = layout.path.start_with?(site.source) ? :site : :theme
-        Jekyll.logger.debug "Layout source:", layout_source
-      end
+      return unless invalid_layout?(layout)
+
+      Jekyll.logger.warn "Build Warning:", "Layout '#{document.data["layout"]}' requested " \
+        "in #{document.relative_path} does not exist."
     end
 
     # Render layout content into document.output
@@ -197,7 +195,7 @@ module Jekyll
         layout.content,
         payload,
         info,
-        layout.relative_path
+        layout.path
       )
     end
 
@@ -257,7 +255,7 @@ module Jekyll
     def output_exts
       @output_exts ||= converters.map do |c|
         c.output_ext(document.extname)
-      end.compact
+      end.tap(&:compact!)
     end
 
     def liquid_options

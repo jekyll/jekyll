@@ -11,23 +11,32 @@ It's good practice to have a [Gemfile](/docs/ruby-101/#gemfile) for your site.
 This ensures the version of Jekyll and other gems remains consistent across
 different environments.
 
-Create `Gemfile` in the root with the following:
+Create a `Gemfile` in the root. 
+The file should be called 'Gemfile' and should *not* have any extension. 
+You can create a Gemfile with Bundler and then add the `jekyll` gem:
 
+```sh
+bundle init
+bundle add jekyll
 ```
-source 'https://rubygems.org'
 
-gem 'jekyll'
+Your file should look something like:
+
+```ruby
+# frozen_string_literal: true
+source "https://rubygems.org"
+
+gem "jekyll"
 ```
 
-Then run `bundle install` in your terminal. This installs the gems and
-creates `Gemfile.lock` which locks the current gem versions for a future
-`bundle install`. If you ever want to update your gem versions you can run
-`bundle update`.
+Bundler installs the gems and creates a `Gemfile.lock` which locks the current 
+gem versions for a future `bundle install`. If you ever want to update your gem 
+versions you can run `bundle update`.
 
 When using a `Gemfile`, you'll run commands like `jekyll serve` with
 `bundle exec` prefixed. So the full command is:
 
-```bash
+```sh
 bundle exec jekyll serve
 ```
 
@@ -39,7 +48,7 @@ Jekyll plugins allow you to create custom generated content specific to your
 site. There's many [plugins](/docs/plugins/) available or you can even
 write your own.
 
-There's three official plugins which are useful on almost any Jekyll site:
+There are three official plugins which are useful on almost any Jekyll site:
 
 * [jekyll-sitemap](https://github.com/jekyll/jekyll-sitemap) - Creates a sitemap
 file to help search engines index content
@@ -51,7 +60,7 @@ with SEO
 To use these first you need to add them to your `Gemfile`. If you put them
 in a `jekyll_plugins` group they'll automatically be required into Jekyll:
 
-```
+```ruby
 source 'https://rubygems.org'
 
 gem 'jekyll'
@@ -65,7 +74,7 @@ end
 
 Then add these lines to your `_config.yml`:
 
-```
+```yaml
 plugins:
   - jekyll-feed
   - jekyll-sitemap
@@ -109,7 +118,7 @@ To do this you can use [environments](/docs/configuration/environments/). You
 can set the environment by using the `JEKYLL_ENV` environment variable when
 running a command. For example:
 
-```bash
+```sh
 JEKYLL_ENV=production bundle exec jekyll build
 ```
 
@@ -130,7 +139,7 @@ on production you would do the following:
 The final step is to get the site onto a production server. The most basic way
 to do this is to run a production build:
 
-```bash
+```sh
 JEKYLL_ENV=production bundle exec jekyll build
 ```
 

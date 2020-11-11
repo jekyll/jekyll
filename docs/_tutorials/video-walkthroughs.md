@@ -1,7 +1,7 @@
 ---
-layout: tutorials
-permalink: /tutorials/video-walkthroughs/
 title: Video Walkthroughs
+author: giraffeacademy
+date: 2017-10-02 15:20:08 -0400
 ---
 
 [Giraffe Academy](https://www.youtube.com/c/GiraffeAcademy) has a series of videos that will walk you through the basics of using Jekyll. In this series you'll learn everything from installing Jekyll on your computer and setting up your first site, to using more complex features like variables, layouts and conditionals.
@@ -31,5 +31,3 @@ title: Video Walkthroughs
 17. [Data Files](https://www.youtube.com/watch?v=M6b0KmLB-pM&list=PLLAZ4kZ9dFpOPV5C5Ay0pHaa0RJFhcmcB&index=17)
 18. [Static Files](https://www.youtube.com/watch?v=knWjmVlVpso&index=18&list=PLLAZ4kZ9dFpOPV5C5Ay0pHaa0RJFhcmcB)
 19. [Hosting on Github Pages](https://www.youtube.com/watch?v=fqFjuX4VZmU&list=PLLAZ4kZ9dFpOPV5C5Ay0pHaa0RJFhcmcB&index=19)
-
-

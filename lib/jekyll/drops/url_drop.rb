@@ -7,8 +7,8 @@ module Jekyll
 
       mutable false
 
-      def_delegator :@obj, :cleaned_relative_path, :path
-      def_delegator :@obj, :output_ext, :output_ext
+      delegate_method :output_ext
+      delegate_method_as :cleaned_relative_path, :path
 
       def collection
         @obj.collection.label
@@ -33,6 +33,14 @@ module Jekyll
           category_set << category.to_s.downcase
         end
         category_set.to_a.join("/")
+      end
+
+      # Similar to output from #categories, but each category will be downcased and
+      # all non-alphanumeric characters of the category replaced with a hyphen.
+      def slugified_categories
+        Array(@obj.data["categories"]).each_with_object(Set.new) do |category, set|
+          set << Utils.slugify(category.to_s)
+        end.to_a.join("/")
       end
 
       # CCYY

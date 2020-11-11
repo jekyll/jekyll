@@ -249,6 +249,9 @@ module Jekyll
 
         def default_url(opts)
           config = configuration_from_options(opts)
+          auth = config.values_at("host", "port").join(":")
+          return config["url"] if auth == "127.0.0.1:4000"
+
           format_url(
             config["ssl_cert"] && config["ssl_key"],
             config["host"] == "127.0.0.1" ? "localhost" : config["host"],
@@ -307,7 +310,15 @@ module Jekyll
           require "webrick/https"
 
           opts[:SSLCertificate] = OpenSSL::X509::Certificate.new(read_file(src, cert))
-          opts[:SSLPrivateKey]  = OpenSSL::PKey::RSA.new(read_file(src, key))
+          begin
+            opts[:SSLPrivateKey] = OpenSSL::PKey::RSA.new(read_file(src, key))
+          rescue StandardError
+            if defined?(OpenSSL::PKey::EC)
+              opts[:SSLPrivateKey] = OpenSSL::PKey::EC.new(read_file(src, key))
+            else
+              raise
+            end
+          end
           opts[:SSLEnable] = true
         end
 

@@ -32,7 +32,7 @@ class TestSite < JekyllUnitTest
 
     should "have an array for plugins if passed as a string" do
       site = Site.new(site_configuration("plugins_dir" => "/tmp/plugins"))
-      array = Utils::Platforms.windows? ? ["C:/tmp/plugins"] : ["/tmp/plugins"]
+      array = [temp_dir("plugins")]
       assert_equal array, site.plugins
     end
 
@@ -40,11 +40,7 @@ class TestSite < JekyllUnitTest
       site = Site.new(site_configuration(
                         "plugins_dir" => ["/tmp/plugins", "/tmp/otherplugins"]
                       ))
-      array = if Utils::Platforms.windows?
-                ["C:/tmp/plugins", "C:/tmp/otherplugins"]
-              else
-                ["/tmp/plugins", "/tmp/otherplugins"]
-              end
+      array = [temp_dir("plugins"), temp_dir("otherplugins")]
       assert_equal array, site.plugins
     end
 
@@ -236,21 +232,25 @@ class TestSite < JekyllUnitTest
         environment.html
         exploit.md
         foo.md
+        foo.md
         humans.txt
         index.html
         index.html
         info.md
+        main.css.map
         main.scss
         properties.html
         sitemap.xml
         static_files.html
+        test-styles.css.map
+        test-styles.scss
         trailing-dots...md
       )
       unless Utils::Platforms.really_windows?
         # files in symlinked directories may appear twice
-        sorted_pages.push("main.scss", "symlinked-file").sort!
+        sorted_pages.push("main.css.map", "main.scss", "symlinked-file").sort!
       end
-      assert_equal sorted_pages, @site.pages.map(&:name)
+      assert_equal sorted_pages, @site.pages.map(&:name).sort!
     end
 
     should "read posts" do

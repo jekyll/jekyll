@@ -34,7 +34,7 @@ Save the commands you want to run and succeed in a file: `./script/cibuild`
 
 ### The HTML Proofer Executable
 
-```sh
+```bash
 #!/usr/bin/env bash
 set -e # halt script on error
 
@@ -90,7 +90,7 @@ Your `.travis.yml` file should look like this:
 ```yaml
 language: ruby
 rvm:
-  - 2.4.1
+  - 2.6.3
 
 before_script:
  - chmod +x ./script/cibuild # or do this locally and commit
@@ -105,16 +105,10 @@ branches:
   - gh-pages     # test the gh-pages branch
   - /pages-(.*)/ # test every branch which starts with "pages-"
 
-env:
-  global:
-  - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
-
 addons:
   apt:
     packages:
     - libcurl4-openssl-dev
-
-sudo: false # route your build to the container-based infrastructure for a faster build
 
 cache: bundler # caching bundler gem packages will speed up build
 
@@ -134,7 +128,7 @@ access to Bundler, RubyGems, and a Ruby runtime.
 
 ```yaml
 rvm:
-  - 2.4.1
+  - 2.6.3
 ```
 
 RVM is a popular Ruby Version Manager (like rbenv, chruby, etc). This
@@ -189,18 +183,6 @@ prefixed, exemplified above with the `/pages-(.*)/` regular expression.
 The `branches` directive is completely optional. Travis will build from every
 push to any branch of your repo if leave it out.
 
-```yaml
-env:
-  global:
-  - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
-```
-
-Using `html-proofer`? You'll want this environment variable. Nokogiri, used
-to parse HTML files in your compiled site, comes bundled with libraries
-which it must compile each time it is installed. Luckily, you can
-dramatically decrease the install time of Nokogiri by setting the
-environment variable `NOKOGIRI_USE_SYSTEM_LIBRARIES` to `true`.
-
 <div class="note warning">
   <h5>Be sure to exclude <code>vendor</code> from your
    <code>_config.yml</code></h5>
@@ -210,16 +192,6 @@ environment variable `NOKOGIRI_USE_SYSTEM_LIBRARIES` to `true`.
 
 ```yaml
 exclude: [vendor]
-```
-
-By default you should supply the `sudo: false` command to Travis. This command
-explicitly tells Travis to run your build on Travis's [container-based
- infrastructure](https://docs.travis-ci.com/user/workers/container-based-infrastructure/#Routing-your-build-to-container-based-infrastructure). Running on the container-based infrastructure can often times
-speed up your build. If you have any trouble with your build, or if your build
-does need `sudo` access, modify the line to `sudo: required`.
-
-```yaml
-sudo: false
 ```
 
 To speed up the build, you should cache the gem packages created by `bundler`.

@@ -3,7 +3,7 @@ title: "Becoming a Maintainer"
 ---
 
 **This guide is for contributors.** These special people have contributed to one or more of Jekyll's repositories, but do not yet have write access to any. You may find what is written here interesting, but it’s definitely not for everyone.
-{: .note .info }
+{: .note .info}
 
 So you want to become a maintainer of a Jekyll project? We'd love to have you! Here are some things we like to see from community members before we promote them to maintainers.
 

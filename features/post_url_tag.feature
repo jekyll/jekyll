@@ -132,3 +132,28 @@ Feature: PostUrl Tag
     And I should see "Deprecation: A call to '{% post_url 2019-02-04-hello-world %}' did not match a post" in the build output
     But the _site directory should exist
     And I should see "<p><a href=\"/movies/2019/02/04/hello-world.html\">Movies</a></p>" in "_site/index.html"
+
+  Scenario: Nested posts in a directory with name containing spaces
+    Given I have a Cats and Dogs/_posts directory
+    And I have the following post in "Cats and Dogs":
+      | title       | date       | content           |
+      | Hello World | 2019-02-04 | Lorem ipsum dolor |
+    And I have a _posts/Salt and Pepper directory
+    And I have the following post under "Salt and Pepper":
+      | title       | date       | content           |
+      | Hello Again | 2019-02-05 | Lorem ipsum dolor |
+    And I have an "index.md" file with content:
+      """
+      ---
+      ---
+
+      [Post 1]({% post_url Cats and Dogs/2019-02-04-hello-world %})
+
+      [Post 2]({% post_url Salt and Pepper/2019-02-05-hello-again %})
+      """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And I should not see "Deprecation: A call to '{% post_url" in the build output
+    But the _site directory should exist
+    And I should see "<p><a href=\"/cats%20and%20dogs/2019/02/04/hello-world.html\">Post 1</a></p>" in "_site/index.html"
+    And I should see "<p><a href=\"/2019/02/05/hello-again.html\">Post 2</a></p>" in "_site/index.html"

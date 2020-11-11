@@ -129,6 +129,48 @@ Feature: Post data
     And the _site directory should exist
     And I should see "Post category: movies" in "_site/movies/2009/03/27/star-wars.html"
 
+  Scenario: Use post.categories when category is a composite of multiple words
+    Given I have a Sci-Fi Movi3s directory
+    And I have a Sci-Fi Movi3s/_posts directory
+    And I have a _layouts directory
+    And I have the following post in "Sci-Fi Movi3s":
+      | title     | date       | layout | category | content                 |
+      | Star Wars | 2020-04-03 | simple | vintage  | Luke, I am your father. |
+    And I have a "_layouts/simple.html" file with content:
+      """
+      Post categories: {{ page.categories | join: ', ' }}
+      Post URL: {{ page.url }}
+      """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "Post categories: Sci-Fi Movi3s, vintage" in "_site/sci-fi movi3s/vintage/2020/04/03/star-wars.html"
+    And I should see "Post URL: /sci-fi%20movi3s/vintage/2020/04/03/star-wars.html" in "_site/sci-fi movi3s/vintage/2020/04/03/star-wars.html"
+
+  Scenario: Use post.slugified_categories to generate URL when category is a composite of multiple words
+    Given I have a Sci-Fi Movi3s directory
+    And I have a Sci-Fi Movi3s/_posts directory
+    And I have a _layouts directory
+    And I have the following post in "Sci-Fi Movi3s":
+      | title     | date       | layout | category | content                 |
+      | Star Wars | 2020-04-03 | simple | vintage  | Luke, I am your father. |
+    And I have a "_layouts/simple.html" file with content:
+      """
+      Post categories: {{ page.categories | join: ', ' }}
+      Post URL: {{ page.url }}
+      """
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      posts:
+        permalink: "/:slugified_categories/:year/:month/:day/:title:output_ext"
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "Post categories: Sci-Fi Movi3s, vintage" in "_site/sci-fi-movi3s/vintage/2020/04/03/star-wars.html"
+    And I should see "Post URL: /sci-fi-movi3s/vintage/2020/04/03/star-wars.html" in "_site/sci-fi-movi3s/vintage/2020/04/03/star-wars.html"
+
   Scenario: Use post.tags variable
     Given I have a _posts directory
     And I have a _layouts directory

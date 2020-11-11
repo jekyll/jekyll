@@ -3,7 +3,7 @@ title: "Merging a Pull Request"
 ---
 
 **This guide is for maintainers.** These special people have **write access** to one or more of Jekyll's repositories and help merge the contributions of others. You may find what is written here interesting, but it’s definitely not for everyone.
-{: .note .info }
+{: .note .info}
 
 ## Code Review
 
@@ -20,7 +20,7 @@ We have [a helpful little bot](https://github.com/jekyllbot) which we use to mer
 
 To merge a pull request, leave a comment thanking the contributor, then add the special merge request:
 
-```text
+```
 Thank you very much for your contribution. Folks like you make this project and community strong. :heart:
 
 @jekyllbot: merge +dev

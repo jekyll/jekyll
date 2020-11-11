@@ -11,15 +11,16 @@ module Jekyll
       def absolute_url(input)
         return if input.nil?
 
-        input = input.url if input.respond_to?(:url)
-        return input if Addressable::URI.parse(input.to_s).absolute?
+        cache = if input.is_a?(String)
+                  (@context.registers[:site].filter_cache[:absolute_url] ||= {})
+                else
+                  (@context.registers[:cached_absolute_url] ||= {})
+                end
+        cache[input] ||= compute_absolute_url(input)
 
-        site = @context.registers[:site]
-        return relative_url(input) if site.config["url"].nil?
-
-        Addressable::URI.parse(
-          site.config["url"].to_s + relative_url(input)
-        ).normalize.to_s
+        # Duplicate cached string so that the cached value is never mutated by
+        # a subsequent filter.
+        cache[input].dup
       end
 
       # Produces a URL relative to the domain root based on site.baseurl
@@ -31,13 +32,16 @@ module Jekyll
       def relative_url(input)
         return if input.nil?
 
-        input = input.url if input.respond_to?(:url)
-        return input if Addressable::URI.parse(input.to_s).absolute?
+        cache = if input.is_a?(String)
+                  (@context.registers[:site].filter_cache[:relative_url] ||= {})
+                else
+                  (@context.registers[:cached_relative_url] ||= {})
+                end
+        cache[input] ||= compute_relative_url(input)
 
-        parts = [sanitized_baseurl, input]
-        Addressable::URI.parse(
-          parts.compact.map { |part| ensure_leading_slash(part.to_s) }.join
-        ).normalize.to_s
+        # Duplicate cached string so that the cached value is never mutated by
+        # a subsequent filter.
+        cache[input].dup
       end
 
       # Strips trailing `/index.html` from URLs to create pretty permalinks
@@ -53,9 +57,35 @@ module Jekyll
 
       private
 
+      def compute_absolute_url(input)
+        input = input.url if input.respond_to?(:url)
+        return input if Addressable::URI.parse(input.to_s).absolute?
+
+        site = @context.registers[:site]
+        site_url = site.config["url"]
+        return relative_url(input) if site_url.nil? || site_url == ""
+
+        Addressable::URI.parse(
+          site_url.to_s + relative_url(input)
+        ).normalize.to_s
+      end
+
+      def compute_relative_url(input)
+        input = input.url if input.respond_to?(:url)
+        return input if Addressable::URI.parse(input.to_s).absolute?
+
+        parts = [sanitized_baseurl, input]
+        Addressable::URI.parse(
+          parts.map! { |part| ensure_leading_slash(part.to_s) }.join
+        ).normalize.to_s
+      end
+
       def sanitized_baseurl
         site = @context.registers[:site]
-        site.config["baseurl"].to_s.chomp("/")
+        baseurl = site.config["baseurl"]
+        return "" if baseurl.nil?
+
+        baseurl.to_s.chomp("/")
       end
 
       def ensure_leading_slash(input)

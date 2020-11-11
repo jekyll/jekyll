@@ -66,7 +66,7 @@ module Jekyll
 
       "kramdown"            => {
         "auto_ids"      => true,
-        "toc_levels"    => "1..6",
+        "toc_levels"    => (1..6).to_a,
         "entity_output" => "as_char",
         "smart_quotes"  => "lsquo,rsquo,ldquo,rdquo",
         "input"         => "GFM",
@@ -269,21 +269,18 @@ module Jekyll
 
     private
 
+    STYLE_TO_PERMALINK = {
+      :none     => "/:categories/:title:output_ext",
+      :date     => "/:categories/:year/:month/:day/:title:output_ext",
+      :ordinal  => "/:categories/:year/:y_day/:title:output_ext",
+      :pretty   => "/:categories/:year/:month/:day/:title/",
+      :weekdate => "/:categories/:year/W:week/:short_day/:title:output_ext",
+    }.freeze
+
+    private_constant :STYLE_TO_PERMALINK
+
     def style_to_permalink(permalink_style)
-      case permalink_style.to_sym
-      when :pretty
-        "/:categories/:year/:month/:day/:title/"
-      when :none
-        "/:categories/:title:output_ext"
-      when :date
-        "/:categories/:year/:month/:day/:title:output_ext"
-      when :ordinal
-        "/:categories/:year/:y_day/:title:output_ext"
-      when :weekdate
-        "/:categories/:year/W:week/:short_day/:title:output_ext"
-      else
-        permalink_style.to_s
-      end
+      STYLE_TO_PERMALINK[permalink_style.to_sym] || permalink_style.to_s
     end
 
     def check_include_exclude(config)

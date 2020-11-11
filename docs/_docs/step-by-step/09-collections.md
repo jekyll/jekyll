@@ -60,7 +60,7 @@ collection available at `site.authors`.
 Create `staff.html` and iterate over `site.authors` to output all the staff:
 
 {% raw %}
-```html
+```liquid
 ---
 layout: default
 title: Staff
@@ -112,14 +112,17 @@ collections:
     output: true
 ```
 
+Restart the jekyll server once more for the configuration changes to take effect. 
+
 You can link to the output page using `author.url`.
 
 Add the link to the `staff.html` page:
 
 {% raw %}
-```html
+```liquid
 ---
 layout: default
+title: Staff
 ---
 <h1>Staff</h1>
 
@@ -140,7 +143,7 @@ Just like posts you'll need to create a layout for authors.
 Create `_layouts/author.html` with the following content:
 
 {% raw %}
-```html
+```liquid
 ---
 layout: default
 ---
@@ -190,7 +193,7 @@ defaults:
 
 Now you can remove layout from the front matter of all pages and posts. Note
 that any time you update `_config.yml` you'll need to restart Jekyll for the
-changes to take affect.
+changes to take effect.
 
 ## List author's posts
 
@@ -202,7 +205,7 @@ Iterate over this filtered list in `_layouts/author.html` to output the
 author's posts:
 
 {% raw %}
-```html
+```liquid
 ---
 layout: default
 ---
@@ -227,7 +230,7 @@ The posts have a reference to the author so let's link it to the author's page.
 You can do this using a similar filtering technique in `_layouts/post.html`:
 
 {% raw %}
-```html
+```liquid
 ---
 layout: default
 ---

@@ -67,6 +67,8 @@ module Jekyll
         cmd.option "show_drafts", "-D", "--drafts", "Render posts in the _drafts folder"
         cmd.option "unpublished", "--unpublished",
                    "Render posts that were marked as unpublished"
+        cmd.option "disable_disk_cache", "--disable-disk-cache",
+                   "Disable caching to disk in non-safe mode"
         cmd.option "quiet", "-q", "--quiet", "Silence output."
         cmd.option "verbose", "-V", "--verbose", "Print verbose output."
         cmd.option "incremental", "-I", "--incremental", "Enable incremental rebuild."
@@ -84,7 +86,7 @@ module Jekyll
       # klass   - an array of Jekyll::Command subclasses associated with the command
       #
       # Note that all exceptions are rescued..
-      # rubocop: disable RescueException
+      # rubocop: disable Lint/RescueException
       def process_with_graceful_fail(cmd, options, *klass)
         klass.each { |k| k.process(options) if k.respond_to?(:process) }
       rescue Exception => e
@@ -97,7 +99,7 @@ module Jekyll
         Jekyll.logger.error "", " for any additional information or backtrace. "
         Jekyll.logger.abort_with "", dashes
       end
-      # rubocop: enable RescueException
+      # rubocop: enable Lint/RescueException
     end
   end
 end

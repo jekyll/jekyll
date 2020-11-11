@@ -16,13 +16,20 @@ collections:
   - staff_members
 ```
 
-You can optionally specify metadata for your collection in the configuration:
+In this case `collections` is defined as a sequence (i.e array) with no additional metadata defined for each collection.
+You can optionally specify metadata for your collection by defining `collections` as a mapping (i.e hashmap) instead of sequence, and then defining additional fields in it:
 
 ```yaml
 collections:
   staff_members:
     people: true
 ```
+
+{: .note .info}
+When defining a collection as a sequence, its pages will not be rendered by
+default. To enable this, <code>output: true</code> must be specified on the
+collection, which requires defining the collection as a mapping. For more
+information, see the section <a href="#output">Output</a>.
 
 <div class="note">
   <h5>Gather your collections {%- include docs_version_badge.html version="3.7.0" -%}</h5>
@@ -44,10 +51,13 @@ collections:
 Create a corresponding folder (e.g. `<source>/_staff_members`) and add
 documents. Front matter is processed if the front matter exists, and everything
 after the front matter is pushed into the document's `content` attribute. If no front
-matter is provided, Jekyll will consider it to be a [static file](/docs/static-files/)
-and copy it to the destination (e.g. `_site`) without processing. If front matter
-is provided, Jekyll will process the file in your collection but will not write to disk
-unless `output: true` is set in the collection's metadata.
+matter is provided, Jekyll will consider it to be a [static file]({{ '/docs/static-files/' | relative_url }})
+and the contents will not undergo further processing. If front matter is provided,
+Jekyll will process the file contents into the expected output.
+
+Regardless of whether front matter exists or not, Jekyll will write to the destination
+directory (e.g. `_site`) only if `output: true` has been set in the collection's
+metadata.
 
 For example here's how you would add a staff member to the collection set above.
 The filename is `./_staff_members/jane.md` with the following content:
@@ -59,6 +69,12 @@ position: Developer
 ---
 Jane has worked on Jekyll for the past *five years*.
 ```
+
+<em>
+  Do note that in spite of being considered as a collection internally, the above
+  doesn't apply to [posts](/docs/posts/). Posts with a valid filename format will be
+  marked for processing even if they do not contain front matter.
+</em>
 
 <div class="note info">
   <h5>Be sure to name your directories correctly</h5>
@@ -82,7 +98,6 @@ using the `content` variable:
 {% endfor %}
 ```
 {% endraw %}
-
 
 If you'd like Jekyll to create a rendered page for each document in your
 collection, you can set the `output` key to `true` in your collection
@@ -111,14 +126,15 @@ You can link to the generated page using the `url` attribute:
 
 ## Permalinks
 
-There are special [permalink variables for collections](/docs/permalinks/) to
+There are special [permalink variables for collections]({{ '/docs/permalinks/#collections' | relative_url }}) to
 help you control the output url for the entire collection.
 
-{% if site.version == '4.0.0' %}{% comment %} Remove this encapsulation when v4.0 ships {% endcomment %}
+## Custom Sorting of Documents {%- include docs_version_badge.html version="4.0" -%}
+{: #custom-sorting-of-documents}
 
-## Custom Sorting of Documents
+By default, two documents in a collection are sorted by their `date` attribute when both of them have the `date` key in their front matter. However, if either or both documents do not have the `date` key in their front matter, they are sorted by their respective paths.
 
-By default, documents in a collection are sorted by their paths. But you can control this sorting via the collection's metadata.
+You can control this sorting via the collection's metadata.
 
 ### Sort By Front Matter Key
 
@@ -164,7 +180,6 @@ collections:
 ```
 
 If both metadata keys have been defined properly, `order` list takes precedence.
-{% endif %}
 
 ## Liquid Attributes
 
@@ -272,7 +287,6 @@ you specified in your `_config.yml` (if present) and the following information:
     <code>published: false</code> (<em><code>true</code> by default</em>) in the document's front matter.
   </p>
 </div>
-
 
 ### Documents
 

@@ -38,6 +38,10 @@ class TestPathSanitization < JekyllUnitTest
                  Jekyll.sanitized_path(source_dir, "/#{subdir}/#{file_path}")
   end
 
+  should "handle nil questionable_path" do
+    assert_equal source_dir, Jekyll.sanitized_path(source_dir, nil)
+  end
+
   if Jekyll::Utils::Platforms.really_windows?
     context "on Windows with absolute path" do
       setup do
