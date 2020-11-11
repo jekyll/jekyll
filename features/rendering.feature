@@ -49,6 +49,20 @@ Feature: Rendering
     Then  I should get a zero exit-status
     And   I should not see "Liquid Exception:" in the build output
 
+  Scenario: Rendering a default site containing a file with a non-existent Liquid variable
+    Given I have a "index.html" file with content:
+    """
+    ---
+    title: Simple Test
+    ---
+    {{ site.lorem.ipsum }}
+    {{ site.title }}
+    """
+    And  I have a configuration file with "title" set to "Hello World"
+    When I run jekyll build
+    Then I should get a zero exit-status
+    And  the _site directory should exist
+
   Scenario: Rendering a custom site containing a file with a non-existent Liquid variable
     Given I have a "index.html" file with content:
     """
