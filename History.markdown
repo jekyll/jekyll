@@ -49,6 +49,7 @@
   * Use Ruby 2.7.1 in GitHub Actions (#8444)
   * Reduce allocations from rendering item as liquid (#8406)
   * Test that Liquid expressions are not deeply evaled (#8292)
+  * Test rendering arbitrary Liquid variables by default (#7414)
 
 ### Bug Fixes
 
