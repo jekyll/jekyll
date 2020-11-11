@@ -966,6 +966,15 @@ code.output {
   margin-bottom: 2px;
 }
 
+table#builtin-hooks {
+  td {
+    text-align: center;
+    &:first-of-type {
+      max-width: 330px
+    }
+  }
+}
+
 /* Note types */
 
 .note {
