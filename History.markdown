@@ -1,6 +1,42 @@
-## HEAD
+## 4.2.0 / 2020-11-11
 
-  * Update default.html (#8305)
+### Minor Enhancements
+
+  * feat: don&#39;t reset site.url to localhost:4000 by default (#7253)
+  * feat: debug reading Page and Layout objects (#8100)
+  * feat: add `post_convert` hook to modify HTML content before layout (#8368)
+  * feat: warn on command-line on permalink conflict (#8342)
+  * feat: enhance detection of conflicting destination URLs (#8459)
+  * chore(perf): cache Jekyll.sanitized_path (#8424)
+  * chore(perf): generate items from `site.include` list only once (#8463)
+  * chore(perf): memoize array of drop getter method names (#8421)
+  * chore(perf): memoize defaults computed for Convertibles (#8451)
+  * chore(perf): memoize destination of pages, documents and staticfiles (#8458)
+  * chore(perf): optimize parsing of parameters in include tag (#8192)
+  * chore(perf): reduce location from normalize_whitespace filter (#8400)
+  * chore(perf): reduce array allocations from merging categories (#8453)
+  * chore(perf): reduce string allocations from generating doc URLs (#8392)
+  * chore(perf): reduce string allocations from the `link` tag (#8387)
+  * chore(perf): stash documents `write?` attribute in a variable (#8389)
+  * chore(perf): stash frequently used Drop setter keys for reuse (#8394)
+  * chore(perf): use Regexp#match? when MatchData is not required (#8427)
+  * refactor: implement custom delegators for drop methods (#8183)
+  * refactor: Jekyll::Utils::Platforms (#7236)
+  * refactor: Move permalink styles data to constant (#8282)
+  * refactor: Reduce allocations from rendering item as liquid (#8406)
+  * refactor: Replace nested conditional with guard clauses (#8294)
+  * refactor: compute relative_path of pages using PathManager (#8408)
+  * refactor: utilize flexibility of Site#in_dest_dir (#8403)
+  * refactor: check default front matter scope against symbols (#8393)
+
+### Bug Fixes
+
+  * fix: supress warning issued for redirect pages (#8347)
+  * fix: security bump (#8349)
+  * fix: path matching regex in post_url Liquid tag (#8375)
+  * fix: check if site is in incremental mode optimally (#8401)
+  * fix: handle nil argument to Jekyll.sanitized_path (#8415)
+  * fix: allow triggering `:post_convert` events atomically (#8465)
 
 ### Documentation
 
@@ -21,7 +57,7 @@
   * Docs Review: Getting Started (#8372)
   * Add note about rebooting system after installation (#8359)
   * Use data file to render table at `/docs/configuration/options/#global-configuration` (#8377)
-  * Docs: Use data file(s) to render table(s) at https://jekyllrb.com/docs/configuration/options/ (#8380)
+  * docs: Use data file(s) to render table(s) at https://jekyllrb.com/docs/configuration/options/ (#8380)
   * Improve maintainability of config option data (#8383)
   * Remove CircleCI v1 docs (#8410)
   * Remove NOKOGIRI_USE_SYSTEM_LIBRARIES from Travis CI docs (#8409)
@@ -31,70 +67,21 @@
 
 ### Development Fixes
 
-  * Update cucumber gem to version 4.1 (#8278)
-  * Move permalink styles data to constant (#8282)
-  * Update rubocop gem to 0.87.1 (#8287)
-  * Update RuboCop to-do file (#8296)
-  * Fix `rake console` generating LoadError (#8312)
-  * Configure Performance cops (#8369)
-  * Update rubocop gem to 0.90.0 (#8313)
-  * Refactor Jekyll::Utils::Platforms (#7236)
-  * Bump RuboCop to v0.91.x (#8391)
-  * Add workflow to build and profile third-party repo (#8398)
-  * Implement custom delegators for drop methods (#8183)
-  * Bump RuboCop to v0.92.x
-  * Update cucumber gem version to 5.1.2 (#8413)
-  * Fix test suite compatibility with JRuby (#8418)
+  * chore(ci): add workflow to build and profile third-party repo (#8398)
+  * chore(ci): use Ruby 2.7.1 in GitHub Actions (#8444)
+  * chore(ci): fix test suite compatibility with JRuby (#8418)
   * chore(deps): bump Rubocop to 0.93.0 (#8430)
-  * Use Ruby 2.7.1 in GitHub Actions (#8444)
-  * Reduce allocations from rendering item as liquid (#8406)
-  * Test that Liquid expressions are not deeply evaled (#8292)
-  * Test rendering arbitrary Liquid variables by default (#7414)
+  * chore(deps): cucumber gem version to 5.1.2 (#8413)
+  * fix: `rake console` generating LoadError (#8312)
+  * style: configure Performance cops (#8369)
+  * style: RuboCop to-do file (#8296)
+  * style: enable `Performance/ChainArrayAllocation` cop (#8404)
+  * style: enable Lint/NoReturnInBeginEndBlocks Cop (#8457)
 
-### Bug Fixes
-
-  * Replace nested conditional with guard clauses (#8294)
-  * fix: security bump (#8349)
-  * Fix path matching regex in post_url Liquid tag (#8375)
-  * Reduce string allocations from the `link` tag (#8387)
-  * Optimize parsing of parameters in include tag (#8192)
-  * Stash documents `write?` attribute in a variable (#8389)
-  * Reduce string allocations from generating doc URLs (#8392)
-  * Check if site is in incremental mode optimally (#8401)
-  * Handle nil argument to Jekyll.sanitized_path (#8415)
-  * Compute relative_path of pages using PathManager (#8408)
-  * Enable `Performance/ChainArrayAllocation` cop (#8404)
-  * Utilize flexibility of Site#in_dest_dir (#8403)
-  * Reduce allocation from normalize_whitespace filter (#8400)
-  * Use Regexp#match? when MatchData is not required (#8427)
-  * Check default front matter scope against symbols (#8393)
-  * Stash frequently used Drop setter keys for reuse (#8394)
-  * Memoize defaults computed for Convertibles (#8451)
-  * Reduce array allocations from merging categories (#8453)
-  * Enable Lint/NoReturnInBeginEndBlocks Cop (#8457)
-  * Memoize destination of pages, documents and staticfiles (#8458)
-  * Generate items from `site.include` list only once (#8463)
-  * Allow triggering `:post_convert` events atomically (#8465)
-
-### Minor Enhancements
-
-  * Warn on command-line with permalink conflict (#8342)
-  * Supress warning issued for redirect pages (#8347)
-  * Add post_convert hook to modify HTML content before layout (#8368)
-  * Cache Jekyll.sanitized_path (#8424)
-  * Memoize array of drop getter method names (#8421)
-  * Enhance detection of conflicting destination URLs (#8459)
-  * Debug reading Page and Layout objects (#8100)
-  * Don&#39;t reset site.url to localhost:4000 by default (#7253)
+  * test: rendering arbitrary Liquid variables by default (#7414)
+  * test: that Liquid expressions are not deeply evaled (#8292)
 
 ## 4.1.1 / 2020-06-24
-
-  * Fix grammar in documentation section (#8265)
-
-### Development Fixes
-
-  * Bump RuboCop to v0.85.x (#8223)
-  * Expect drive letter only on vanilla windows (#8227)
 
 ### Bug Fixes
 
@@ -112,11 +99,17 @@
   * correct typo (#8261)
   * Allow hyperlinks to specific filter documentation (#8231)
   * Update link to Netlify step-by-step guide (#8264)
+  * Fix grammar in documentation section (#8265)
 
 ### Site Enhancements
 
   * Including correct Sketch website (#8241)
   * Release post for v4.1.1 (#8243)
+
+### Development Fixes
+
+  * Bump RuboCop to v0.85.x (#8223)
+  * Expect drive letter only on vanilla windows (#8227)
 
 ## 4.1.0 / 2020-05-27
 
