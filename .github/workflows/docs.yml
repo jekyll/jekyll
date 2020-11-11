@@ -28,8 +28,6 @@ jobs:
             - ${{ runner.os }}-bundler-${{ env.RUBY_VERSION }}-
       - name: Set up dependencies
         run: |
-          gem update --system --no-document
-          gem update bundler --no-document
           bundle install --path=vendor/bundle --jobs 4 --retry 3
           bundle clean
       - name: Clone target branch
