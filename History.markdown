@@ -113,7 +113,7 @@
 
   * Including correct Sketch website (#8241)
   * Release post for v4.1.1 (#8243)
-  
+
 ### Development Fixes
 
   * Bump RuboCop to v0.85.x (#8223)
