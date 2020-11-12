@@ -7,10 +7,10 @@ module Jekyll
 
       mutable false
 
-      def_delegator  :@obj, :site_data, :data
-      def_delegators :@obj, :time, :pages, :static_files, :tags, :categories
+      delegate_method_as :site_data, :data
+      delegate_methods :time, :pages, :static_files, :tags, :categories
 
-      private def_delegator :@obj, :config, :fallback_data
+      private delegate_method_as :config, :fallback_data
 
       def [](key)
         if key != "posts" && @obj.collections.key?(key)

@@ -113,7 +113,7 @@ module Jekyll
     #
     # Returns the formatted String
     def normalize_whitespace(input)
-      input.to_s.gsub(%r!\s+!, " ").strip
+      input.to_s.gsub(%r!\s+!, " ").tap(&:strip!)
     end
 
     # Count the number of words in the input string.
@@ -121,8 +121,20 @@ module Jekyll
     # input - The String on which to operate.
     #
     # Returns the Integer word count.
-    def number_of_words(input)
-      input.split.length
+    def number_of_words(input, mode = nil)
+      cjk_charset = '\p{Han}\p{Katakana}\p{Hiragana}\p{Hangul}'
+      cjk_regex = %r![#{cjk_charset}]!o
+      word_regex = %r![^#{cjk_charset}\s]+!o
+
+      case mode
+      when "cjk"
+        input.scan(cjk_regex).length + input.scan(word_regex).length
+      when "auto"
+        cjk_count = input.scan(cjk_regex).length
+        cjk_count.zero? ? input.split.length : cjk_count + input.scan(word_regex).length
+      else
+        input.split.length
+      end
     end
 
     # Join an array of things into a string by separating with commas and the
@@ -295,9 +307,10 @@ module Jekyll
       if property.nil?
         input.sort
       else
-        if nils == "first"
+        case nils
+        when "first"
           order = - 1
-        elsif nils == "last"
+        when "last"
           order = + 1
         else
           raise ArgumentError, "Invalid nils order: " \
@@ -387,8 +400,6 @@ module Jekyll
 
     # `where` filter helper
     #
-    # rubocop:disable Metrics/CyclomaticComplexity
-    # rubocop:disable Metrics/PerceivedComplexity
     def compare_property_vs_target(property, target)
       case target
       when NilClass
@@ -409,8 +420,6 @@ module Jekyll
 
       false
     end
-    # rubocop:enable Metrics/CyclomaticComplexity
-    # rubocop:enable Metrics/PerceivedComplexity
 
     def item_property(item, property)
       @item_property_cache ||= {}
@@ -453,8 +462,7 @@ module Jekyll
     def as_liquid(item)
       case item
       when Hash
-        pairs = item.map { |k, v| as_liquid([k, v]) }
-        Hash[pairs]
+        item.each_with_object({}) { |(k, v), result| result[as_liquid(k)] = as_liquid(v) }
       when Array
         item.map { |i| as_liquid(i) }
       else

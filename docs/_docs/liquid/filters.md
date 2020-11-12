@@ -70,7 +70,7 @@ using [plugins](/docs/plugins/).
     {% for filter in site.data.jekyll_filters %}
       <tr>
         <td>
-          <p class="name"><strong>{{ filter.name }}</strong></p>
+          <p id="{{ filter.name | slugify }}" class="name"><strong>{{ filter.name }}</strong></p>
           <p>
             {{- filter.description -}}
             {%- if filter.version_badge %}

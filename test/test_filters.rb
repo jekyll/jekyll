@@ -790,11 +790,9 @@ class TestFilters < JekyllUnitTest
       should "successfully group array of Jekyll::Page's" do
         @filter.site.process
         grouping = @filter.group_by(@filter.site.pages, "layout")
+        names = ["default", "nil", ""]
         grouping.each do |g|
-          assert(
-            ["default", "nil", ""].include?(g["name"]),
-            "#{g["name"]} isn't a valid grouping."
-          )
+          assert names.include?(g["name"]), "#{g["name"]} isn't a valid grouping."
           case g["name"]
           when "default"
             assert(
@@ -816,7 +814,7 @@ class TestFilters < JekyllUnitTest
               "The list of grouped items for '' is not an Array."
             )
             # adjust array.size to ignore symlinked page in Windows
-            qty = Utils::Platforms.really_windows? ? 16 : 18
+            qty = Utils::Platforms.really_windows? ? 19 : 21
             assert_equal qty, g["items"].size
           end
         end
@@ -1284,11 +1282,9 @@ class TestFilters < JekyllUnitTest
       should "successfully group array of Jekyll::Page's" do
         @filter.site.process
         groups = @filter.group_by_exp(@filter.site.pages, "page", "page.layout | upcase")
+        names = ["DEFAULT", "NIL", ""]
         groups.each do |g|
-          assert(
-            ["DEFAULT", "NIL", ""].include?(g["name"]),
-            "#{g["name"]} isn't a valid grouping."
-          )
+          assert names.include?(g["name"]), "#{g["name"]} isn't a valid grouping."
           case g["name"]
           when "DEFAULT"
             assert(
@@ -1310,7 +1306,7 @@ class TestFilters < JekyllUnitTest
               "The list of grouped items for '' is not an Array."
             )
             # adjust array.size to ignore symlinked page in Windows
-            qty = Utils::Platforms.really_windows? ? 16 : 18
+            qty = Utils::Platforms.really_windows? ? 19 : 21
             assert_equal qty, g["items"].size
           end
         end
@@ -1511,6 +1507,28 @@ class TestFilters < JekyllUnitTest
         @filter.sample(input, 2).each do |val|
           assert_includes input, val
         end
+      end
+    end
+
+    context "number_of_words filter" do
+      should "return the number of words for Latin-only text" do
+        assert_equal 5, @filter.number_of_words("hello world and taoky strong!", "auto")
+        assert_equal 5, @filter.number_of_words("hello world and taoky strong!", "cjk")
+      end
+
+      should "return the number of characters for CJK-only text" do
+        assert_equal 17, @filter.number_of_words("こんにちは、世界！안녕하세요 세상!", "auto")
+        assert_equal 17, @filter.number_of_words("こんにちは、世界！안녕하세요 세상!", "cjk")
+      end
+
+      should "process Latin and CJK independently" do
+        # Intentional: No space between Latin and CJK
+        assert_equal 6, @filter.number_of_words("你好hello世界world", "auto")
+        assert_equal 6, @filter.number_of_words("你好hello世界world", "cjk")
+      end
+
+      should "maintain original behavior unless specified" do
+        assert_equal 1, @filter.number_of_words("你好hello世界world")
       end
     end
   end

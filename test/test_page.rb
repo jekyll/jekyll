@@ -50,42 +50,6 @@ class TestPage < JekyllUnitTest
         assert_equal "/+/%25%23%20+.html", @page.url
       end
 
-      should "be exposed to Liquid as a Liquid::Drop subclass" do
-        page = setup_page("properties.html")
-        liquid_rep = page.to_liquid
-        refute_equal Hash, liquid_rep.class
-        assert_equal true, liquid_rep.is_a?(Liquid::Drop)
-        assert_equal Jekyll::Drops::PageDrop, liquid_rep.class
-      end
-
-      should "make attributes accessible for use in Liquid templates" do
-        page = setup_page("/contacts", "index.html")
-        template = Liquid::Template.parse(<<~TEXT)
-          Name: {{ page.name }}
-          Path: {{ page.path }}
-          URL:  {{ page.url }}
-        TEXT
-        expected = <<~TEXT
-          Name: index.html
-          Path: contacts/index.html
-          URL:  /contacts/
-        TEXT
-        assert_equal(expected, template.render!("page" => page.to_liquid))
-      end
-
-      should "make front matter data accessible for use in Liquid templates" do
-        page = setup_page("properties.html")
-        template = Liquid::Template.parse(<<~TEXT)
-          TITLE: {{ page.title }}
-          FOO:   {{ page.foo }}
-        TEXT
-        expected = <<~TEXT
-          TITLE: Properties Page
-          FOO:   bar
-        TEXT
-        assert_equal expected, template.render!("page" => page.to_liquid)
-      end
-
       context "in a directory hierarchy" do
         should "create URL based on filename" do
           @page = setup_page("/contacts", "bar.html")
@@ -125,7 +89,7 @@ class TestPage < JekyllUnitTest
         attrs = {
           :content   => "All the properties.\n",
           :dir       => "/properties/",
-          :excerpt   => "All the properties.\n",
+          :excerpt   => nil,
           :foo       => "bar",
           :layout    => "default",
           :name      => "properties.html",
@@ -405,9 +369,39 @@ class TestPage < JekyllUnitTest
       end
 
       context "read-in by default" do
-        should "expose an excerpt to Liquid templates" do
+        should "not initialize excerpts by default" do
+          page = setup_page("contacts", "foo.md")
+          assert_nil page.excerpt
+        end
+
+        should "not expose an excerpt to Liquid templates by default" do
           page = setup_page("/contacts", "bar.html")
-          assert_equal "Contact Information\n", page.to_liquid["excerpt"]
+          assert_nil page.to_liquid["excerpt"]
+        end
+
+        context "in a site configured to generate page excerpts" do
+          setup { @configured_site = fixture_site("page_excerpts" => true) }
+
+          should "initialize excerpt eagerly but render only when needed" do
+            test_page = Jekyll::Page.new(@configured_site, source_dir, "contacts", "foo.md")
+            assert_equal Jekyll::PageExcerpt, test_page.data["excerpt"].class
+            assert_equal String, test_page.excerpt.class
+            assert_equal(
+              "<h2 id=\"contact-information\">Contact Information</h2>\n",
+              test_page.excerpt
+            )
+          end
+
+          should "expose an excerpt to Liquid templates" do
+            test_page = Jekyll::Page.new(@configured_site, source_dir, "/contacts", "bar.html")
+            assert_equal "Contact Information\n", test_page.to_liquid["excerpt"]
+          end
+
+          should "not expose an excerpt for non-html pages" do
+            test_page = Jekyll::Page.new(@configured_site, source_dir, "assets", "test-styles.scss")
+            refute_equal ".half { width: 50%; }\n", test_page.to_liquid["excerpt"]
+            assert_nil test_page.to_liquid["excerpt"]
+          end
         end
       end
 

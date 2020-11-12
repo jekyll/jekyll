@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Rubocop $(bundle exec rubocop --version)"
+echo "RuboCop $(bundle exec rubocop --version)"
 bundle exec rubocop -D $@
 success=$?
 if ((success != 0)); then

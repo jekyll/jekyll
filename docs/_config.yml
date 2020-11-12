@@ -1,5 +1,5 @@
 ---
-version: 4.0.1
+version: 4.1.1
 name: Jekyll • Simple, blog-aware, static sites
 description: Transform your plain text into static websites and blogs
 url: https://jekyllrb.com
@@ -59,8 +59,5 @@ sass:
   style: compressed
 strict_front_matter: true
 exclude:
-- ".gitignore"
-- ".jekyll-cache"
-- CNAME
 - icomoon-selection.json
 - readme.md

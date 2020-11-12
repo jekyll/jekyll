@@ -127,7 +127,7 @@ def location(folder, direction)
   end
 
   [before || ".",
-    after || ".",]
+    after || "",]
 end
 
 #

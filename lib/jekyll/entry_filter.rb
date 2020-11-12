@@ -28,7 +28,6 @@ module Jekyll
       )
     end
 
-    # rubocop:disable Metrics/CyclomaticComplexity
     def filter(entries)
       entries.reject do |e|
         # Reject this entry if it is just a "dot" representation.
@@ -51,7 +50,6 @@ module Jekyll
         special?(e) || backup?(e)
       end
     end
-    # rubocop:enable Metrics/CyclomaticComplexity
 
     def included?(entry)
       glob_include?(site.include, entry) ||

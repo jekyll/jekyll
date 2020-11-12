@@ -3,7 +3,7 @@
 module Jekyll
   class Site
     attr_reader   :source, :dest, :cache_dir, :config
-    attr_accessor :layouts, :pages, :static_files, :drafts,
+    attr_accessor :layouts, :pages, :static_files, :drafts, :inclusions,
                   :exclude, :include, :lsi, :highlighter, :permalink_style,
                   :time, :future, :unpublished, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
@@ -86,6 +86,7 @@ module Jekyll
       Jekyll.logger.info @liquid_renderer.stats_table
     end
 
+    # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
     #
     # Reset Site details.
@@ -98,6 +99,7 @@ module Jekyll
                     Time.now
                   end
       self.layouts = {}
+      self.inclusions = {}
       self.pages = []
       self.static_files = []
       self.data = {}
@@ -117,6 +119,7 @@ module Jekyll
       Jekyll::Hooks.trigger :site, :after_reset, self
     end
     # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/AbcSize
 
     # Load necessary libraries, plugins, converters, and generators.
     #
@@ -218,6 +221,7 @@ module Jekyll
     #
     # Returns nothing.
     def write
+      Jekyll::Commands::Doctor.conflicting_urls(self)
       each_site_file do |item|
         item.write(dest) if regenerator.regenerate?(item)
       end
@@ -306,8 +310,9 @@ module Jekyll
     # passed in as argument.
 
     def instantiate_subclasses(klass)
-      klass.descendants.select { |c| !safe || c.safe }.sort.map do |c|
-        c.new(config)
+      klass.descendants.select { |c| !safe || c.safe }.tap do |result|
+        result.sort!
+        result.map! { |c| c.new(config) }
       end
     end
 
