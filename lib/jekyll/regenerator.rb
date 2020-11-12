@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "digest"
+
 module Jekyll
   class Regenerator
     attr_reader :site, :metadata, :cache
@@ -34,6 +36,16 @@ module Jekyll
       end
     end
 
+    # Get the value for 'path' indicating whether or not it has been modified
+    #
+    # Returns any serializable
+    def mkey(path)
+      return File.mtime(path) unless site.incremental_key == "hash"
+
+      sha256 = Digest::SHA256.file path
+      sha256.hexdigest
+    end
+
     # Add a path to the metadata
     #
     # Returns true, also on failure.
@@ -41,8 +53,8 @@ module Jekyll
       return true unless File.exist?(path)
 
       metadata[path] = {
-        "mtime" => File.mtime(path),
-        "deps"  => [],
+        "mkey" => mkey(path),
+        "deps" => [],
       }
       cache[path] = true
     end
@@ -78,7 +90,7 @@ module Jekyll
     end
 
     # Checks if a path's (or one of its dependencies)
-    # mtime has changed
+    # mkey has changed
     #
     # Returns a boolean.
     def modified?(path)
@@ -183,7 +195,7 @@ module Jekyll
         return cache[dependency] = cache[path] = true if modified?(dependency)
       end
 
-      if File.exist?(path) && metadata[path]["mtime"].eql?(File.mtime(path))
+      if File.exist?(path) && metadata[path]["mkey"].eql?(mkey(path))
         # If this file has not been modified, set the regeneration bit to false
         cache[path] = false
       else

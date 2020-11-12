@@ -684,6 +684,61 @@ class TestSite < JekyllUnitTest
       end
     end
 
+    context "incremental build with 'hash' incremental key" do
+      setup do
+        @site = Site.new(site_configuration(
+                           "incremental"     => true,
+                           "incremental_key" => "hash"
+                         ))
+        @site.read
+      end
+
+      should "build incrementally" do
+        contacts_html = @site.pages.find { |p| p.name == "contacts.html" }
+        @site.process
+
+        source = @site.in_source_dir(contacts_html.path)
+        dest = File.expand_path(contacts_html.destination(@site.dest))
+        mhash1 = file_sha256(dest) # first run must generate dest file
+
+        # need to sleep because filesystem timestamps have best resolution in seconds
+        sleep 1
+        @site.process
+        mhash2 = file_sha256(dest)
+        assert_equal mhash1, mhash2 # no modifications, so remain the same
+
+        # simulate file modification by user
+        IO.write(source, "some extra content", File.size(source), :mode => "a")
+
+        sleep 1
+        @site.process
+        mhash3 = file_sha256(dest)
+        refute_equal mhash2, mhash3 # must be regenerated
+
+        sleep 1
+        @site.process
+        mhash4 = file_sha256(dest)
+        assert_equal mhash3, mhash4 # no modifications, so remain the same
+      end
+
+      should "not build when file contents don't change" do
+        contacts_html = @site.pages.find { |p| p.name == "contacts.html" }
+        @site.process
+
+        source = @site.in_source_dir(contacts_html.path)
+        dest = File.expand_path(contacts_html.destination(@site.dest))
+        mhash1 = file_sha256(dest) # first run must generate dest file
+
+        FileUtils.touch source
+
+        # need to sleep because filesystem timestamps have best resolution in seconds
+        sleep 1
+        @site.process
+        mhash2 = file_sha256(dest)
+        assert_equal mhash1, mhash2 # no content modifications, so remain the same
+      end
+    end
+
     context "#in_cache_dir method" do
       setup do
         @site = Site.new(
