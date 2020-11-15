@@ -59,8 +59,5 @@ sass:
   style: compressed
 strict_front_matter: true
 exclude:
-- ".gitignore"
-- ".jekyll-cache"
-- CNAME
 - icomoon-selection.json
 - readme.md
