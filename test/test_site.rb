@@ -702,4 +702,13 @@ class TestSite < JekyllUnitTest
       end
     end
   end
+
+  context "site process phases" do
+    should "return nil as documented" do
+      site = fixture_site
+      [:reset, :read, :generate, :render, :cleanup, :write].each do |phase|
+        assert_nil site.send(phase)
+      end
+    end
+  end
 end
