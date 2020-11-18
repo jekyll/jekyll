@@ -442,6 +442,13 @@ module Jekyll
       @collections_path ||= dir_str.empty? ? source : in_source_dir(dir_str)
     end
 
+    # Public
+    #
+    # Returns the object as a debug String.
+    def inspect
+      "#<#{self.class} @source=#{@source}>"
+    end
+
     private
 
     def load_theme_configuration(config)
