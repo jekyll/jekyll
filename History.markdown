@@ -77,6 +77,7 @@
   * Memoize destination of pages, documents and staticfiles (#8458)
   * Generate items from `site.include` list only once (#8463)
   * Allow triggering `:post_convert` events atomically (#8465)
+  * Explicitly return nil after site process phase (#8472)
 
 ### Minor Enhancements
 
