@@ -25,7 +25,7 @@ module Jekyll
       @cache_dir       = in_source_dir(config["cache_dir"])
       @filter_cache    = {}
 
-      @reader          = Reader.new(self)
+      @reader          = Reader.new(self, limit_posts)
       @profiler        = Profiler.new(self)
       @regenerator     = Regenerator.new(self)
       @liquid_renderer = LiquidRenderer.new(self)

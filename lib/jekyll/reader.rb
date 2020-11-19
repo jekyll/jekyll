@@ -2,10 +2,11 @@
 
 module Jekyll
   class Reader
-    attr_reader :site
+    attr_reader :site, :limit
 
-    def initialize(site)
+    def initialize(site, limit)
       @site = site
+      @limit = limit
     end
 
     # Read Site data from disk and load it into internal data structures.
@@ -131,12 +132,15 @@ module Jekyll
     # subfolder - The String representing the directory to read.
     #
     # Returns the list of entries to process
-    def get_entries(dir, subfolder)
+    def get_entries(dir, subfolder, limit)
       base = site.in_source_dir(dir, subfolder)
       return [] unless File.exist?(base)
 
       entries = Dir.chdir(base) { filter_entries(Dir["**/*"], base) }
       entries.delete_if { |e| File.directory?(site.in_source_dir(base, e)) }
+
+      entries_limit = [entries.length, limit].min
+      limit.positive? ? entries[-entries_limit, entries_limit] : entries
     end
 
     private
@@ -157,7 +161,7 @@ module Jekyll
     # Create a single PostReader instance to retrieve drafts and posts from all valid
     # directories in current site.
     def post_reader
-      @post_reader ||= PostReader.new(site)
+      @post_reader ||= PostReader.new(site, limit)
     end
 
     def read_included_excludes
