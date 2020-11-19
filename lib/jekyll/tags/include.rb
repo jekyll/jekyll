@@ -194,8 +194,23 @@ module Jekyll
     class OptimizedIncludeTag < IncludeTag
       # @api private
       class TagParameterVariable
-        def self.parse(markup)
-          stash[markup] ||= new(markup)
+        def self.parse(input)
+          return if !input.is_a?(String) || input.empty?
+
+          result = {}
+          input.scan(Jekyll::Tags::IncludeTag::VALID_SYNTAX) do |key, d_quoted, s_quoted, variable|
+            value = if d_quoted
+                      d_quoted.include?('\\"') ? d_quoted.gsub('\\"', '"') : d_quoted
+                    elsif s_quoted
+                      s_quoted.include?("\\'") ? s_quoted.gsub("\\'", "'") : s_quoted
+                    elsif variable
+                      stash[markup] ||= new(markup)
+                    end
+
+            result[key] = value
+          end
+
+          result
         end
 
         def self.stash
@@ -215,7 +230,7 @@ module Jekyll
 
       def initialize(tag_name, markup, tokens)
         super
-        pre_render_params if @params
+        @params = TagParameterVariable.parse(@params)
       end
 
       def render(context)
@@ -242,18 +257,6 @@ module Jekyll
       private
 
       def pre_render_params
-        result = {}
-        @params.scan(VALID_SYNTAX) do |key, d_quoted, s_quoted, variable|
-          value = if d_quoted
-                    d_quoted.include?('\\"') ? d_quoted.gsub('\\"', '"') : d_quoted
-                  elsif s_quoted
-                    s_quoted.include?("\\'") ? s_quoted.gsub("\\'", "'") : s_quoted
-                  elsif variable
-                    TagParameterVariable.parse(variable)
-                  end
-
-          result[key] = value
-        end
         @params = result
       end
 
