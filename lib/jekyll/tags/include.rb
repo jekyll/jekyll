@@ -204,7 +204,7 @@ module Jekyll
                     elsif s_quoted
                       s_quoted.include?("\\'") ? s_quoted.gsub("\\'", "'") : s_quoted
                     elsif variable
-                      stash[input] ||= new(input)
+                      stash[variable] ||= new(variable)
                     end
 
             result[key] = value
