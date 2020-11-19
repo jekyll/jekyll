@@ -140,7 +140,7 @@ module Jekyll
       entries.delete_if { |e| File.directory?(site.in_source_dir(base, e)) }
 
       entries_limit = [entries.length, limit].min
-      limit.positive? ? entries[-entries_limit, entries_limit] : entries
+      limit.positive? ? entries.last(entries_limit) : entries
     end
 
     private
