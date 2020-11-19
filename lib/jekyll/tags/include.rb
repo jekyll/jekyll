@@ -192,6 +192,32 @@ module Jekyll
     # Do not inherit from this class.
     # TODO: Merge into the `Jekyll::Tags::IncludeTag` in v5.0
     class OptimizedIncludeTag < IncludeTag
+      # @api private
+      class TagParameterVariable
+        def self.parse(markup)
+          stash[markup] ||= new(markup)
+        end
+
+        def self.stash
+          @stash ||= {}
+        end
+
+        private_class_method :stash, :new
+
+        def initialize(markup)
+          @markup = markup
+        end
+
+        def render(context)
+          context[@markup]
+        end
+      end
+
+      def initialize(tag_name, markup, tokens)
+        super
+        pre_render_params if @params
+      end
+
       def render(context)
         @site ||= context.registers[:site]
 
@@ -204,12 +230,32 @@ module Jekyll
         add_include_to_dependency(inclusion, context) if @site.config["incremental"]
 
         context.stack do
-          context["include"] = parse_params(context) if @params
+          if @params
+            context["include"] = @params.transform_values do |value|
+              value.is_a?(TagParameterVariable) ? value.render(context) : value
+            end
+          end
           inclusion.render(context)
         end
       end
 
       private
+
+      def pre_render_params
+        result = {}
+        @params.scan(VALID_SYNTAX) do |key, d_quoted, s_quoted, variable|
+          value = if d_quoted
+                    d_quoted.include?('\\"') ? d_quoted.gsub('\\"', '"') : d_quoted
+                  elsif s_quoted
+                    s_quoted.include?("\\'") ? s_quoted.gsub("\\'", "'") : s_quoted
+                  elsif variable
+                    TagParameterVariable.parse(variable)
+                  end
+
+          result[key] = value
+        end
+        @params = result
+      end
 
       def locate_include_file(file)
         @site.includes_load_paths.each do |dir|
