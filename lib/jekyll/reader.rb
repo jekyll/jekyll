@@ -4,7 +4,7 @@ module Jekyll
   class Reader
     attr_reader :site, :limit
 
-    def initialize(site, limit)
+    def initialize(site, limit = 0)
       @site = site
       @limit = limit
     end
