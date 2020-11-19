@@ -256,10 +256,6 @@ module Jekyll
 
       private
 
-      def pre_render_params
-        @params = result
-      end
-
       def locate_include_file(file)
         @site.includes_load_paths.each do |dir|
           path = PathManager.join(dir, file)
