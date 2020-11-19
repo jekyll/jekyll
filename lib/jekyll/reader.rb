@@ -132,14 +132,14 @@ module Jekyll
     # subfolder - The String representing the directory to read.
     #
     # Returns the list of entries to process
-    def get_entries(dir, subfolder, limit)
+    def get_entries(dir, subfolder, limit = 0)
       base = site.in_source_dir(dir, subfolder)
       return [] unless File.exist?(base)
 
       entries = Dir.chdir(base) { filter_entries(Dir["**/*"], base) }
       entries.delete_if { |e| File.directory?(site.in_source_dir(base, e)) }
 
-      entries_limit = [entries.length, limit].min
+      entries_limit = entries.length < limit ? entries.length : limit
       limit.positive? ? entries.last(entries_limit) : entries
     end
 
