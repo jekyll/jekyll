@@ -2,7 +2,7 @@
 
 module Jekyll
   class PostReader
-    attr_reader :site, :unfiltered_content, :limit
+    attr_reader :site, :unfiltered_content
 
     def initialize(site, limit = 0)
       @site = site
@@ -62,6 +62,8 @@ module Jekyll
     end
 
     private
+
+    attr_reader :limit
 
     def processable?(doc)
       if doc.content.nil?

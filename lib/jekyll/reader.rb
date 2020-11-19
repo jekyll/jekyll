@@ -2,7 +2,7 @@
 
 module Jekyll
   class Reader
-    attr_reader :site, :limit
+    attr_reader :site
 
     def initialize(site, limit = 0)
       @site = site
@@ -144,6 +144,8 @@ module Jekyll
     end
 
     private
+
+    attr_reader :limit
 
     # Internal
     #
