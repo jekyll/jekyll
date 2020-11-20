@@ -6,18 +6,26 @@ version: 4.2.0
 category: release
 ---
 
-Jekyll 4.2.0 is here :tada:
+Greetings Jekyllers! Jekyll v4.2.0 is out!
 
-This minor release focuses on refactoring to enhance performance.
+This release gives you a new hook named `:post_convert` that allows modifying rendered HTML contents before they are
+placed into the designated layout(s).
 
-## Highlihts :sparkles:
+Detecting files that get written into the same destination path has been a part of the diagnostics from `jekyll doctor`
+for quite some time now. However, v4.2 has integrated that feature into the build process itself.
 
-- Slightly better performance
-- URL conflicts warning
-- New `post_convert` hook to modify HTML content before layout.
+On the topic of log output, the `--verbose` output got a bit more verbose. Instead of just showing *documents* that are
+being read, the output will now also show *pages* and *layouts* that are being read into the site.
 
-## Thank you :pray:
+Additionally, we have stopped overriding the `site.url` to `http://localhost:4000` in absolute URLs while developing
+via `jekyll serve`.
 
-Special thanks to the 35 contributors who made this release possible:
+As always, you can go through [the full list of changes](/docs/history/#v4-2-0) if you are interested in the various
+memory-allocation optimizations made to Jekyll.
 
-Alex Malaszkiewicz, Alexey Pelykh, Ashwin Maroli, Brittany Joiner, bytecode1024, Christopher Brown, Chuck Houpt, Corey Megown, Enrico Tolotto, fauno, Felix Breidenstein, Francesco Bianco, Frank Taillandier, Gabriel Staples, iBug, jaybe@jekyll, jesuslerma, jnozsc, Joe Marshall, joelkennedy, Liam Cooke, Lou Rectoret, m-naumann, Malathi, Nicholas Paxford, Nikita Skalkin, Parker Moore, Pratyaksh Gautam, Rachel Cheyfitz, SaintMalik, Seeker, Shannon Kularathna, Steven Xu, Takuya N, Thelonius Kort.
+Special thanks to our community members who helped improving Jekyll codebase and documentation from v4.1.1:
+Alex Malaszkiewicz, Alexey Pelykh, Brittany Joiner, bytecode1024, Christopher Brown, Chuck Houpt, Corey Megown,
+Enrico Tolotto, fauno, Felix Breidenstein, Francesco Bianco, Frank Taillandier, Gabriel Staples, iBug, jaybe@jekyll,
+jesuslerma, jnozsc, Joe Marshall, joelkennedy, Liam Cooke, Lou Rectoret, m-naumann, Malathi, Nicholas Paxford,
+Nikita Skalkin, Parker Moore, Pratyaksh Gautam, Rachel Cheyfitz, SaintMalik, Seeker, Shannon Kularathna, Steven Xu,
+Takuya N and Thelonius Kort.
