@@ -706,6 +706,7 @@ class TestFilters < JekyllUnitTest
           [message]
         end
       end
+
       class T < Struct.new(:name)
         def to_liquid
           {
