@@ -36,6 +36,7 @@ module Jekyll
         Dir["*.{yaml,yml,json,csv,tsv}"] + Dir["*"].select { |fn| File.directory?(fn) }
       end
 
+      base_dir = @site.in_source_dir("/")
       entries.each do |entry|
         path = @site.in_source_dir(dir, entry)
         next if @entry_filter.symlink?(path)
@@ -44,6 +45,7 @@ module Jekyll
           read_data_to(path, data[sanitize_filename(entry)] = {})
         else
           key = sanitize_filename(File.basename(entry, ".*"))
+          Jekyll.logger.debug "Reading:", path.sub(base_dir, "")
           data[key] = read_data_file(path)
         end
       end
