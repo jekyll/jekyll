@@ -245,7 +245,8 @@ Any properties you add in your `_config.yml` file are accessible through the `si
 Stop your Jekyll server with <kbd>Ctrl</kbd> + <kbd>C</kbd> and restart it. Verify that the `title` tags are populating correctly.
 
 {: .note .info}
-Every time you modify your config file, you have to restart Jekyll for the changes to take effect. When you modify other files, Jekyll automatically picks up the changes when it rebuilds.
+Every time you modify your config file, you have to restart Jekyll for the changes to take effect. When you modify other
+files, Jekyll automatically picks up the changes when it rebuilds.
 
 If you have other variables to populate in your site, rinse and repeat.
 
@@ -317,7 +318,8 @@ In your browser, go to `blog.html` and see the list of posts.
 Note that you don't have to use the method described here. You could have simply added the `for` loop to any page, such as `index.md`, to display these posts. But given that you may have more complex logic for other features, it can be helpful to store your logic in templates separate from the page area where you frequently type your content.
 
 {: .note .info}
-At minimum, a layout should contain {% raw %}`{{ content }}`{% endraw %}, which acts as a receiver for the *content* to be rendered.
+At minimum, a layout should contain {% raw %}`{{ content }}`{% endraw %}, which acts as a receiver for the *content* to
+be rendered.
 
 ### For loops
 

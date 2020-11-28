@@ -33,7 +33,8 @@ information, see the section [Output](#output).
 
 {: .note}
 **Gather your collections**{:.title} {%- include docs_version_badge.html version="3.7.0" -%}<br>
-You can optionally specify a directory to store all your collections in the same place with `collections_dir: my_collections`.
+You can optionally specify a directory to store all your collections in the same place with
+`collections_dir: my_collections`.
 <br>
 Then Jekyll will look in `my_collections/_books` for the `books` collection, and
 in `my_collections/_recipes` for the `recipes` collection.
@@ -275,7 +276,8 @@ You may wish to use filters to find your collection:
 {: .note .info}
 **Collections and Time**{:.title}<br>
 Except for documents in hard-coded default collection `posts`, all documents in collections
-you create, are accessible via Liquid irrespective of their assigned date, if any, and therefore renderable.<br>
+you create, are accessible via Liquid irrespective of their assigned date, if any, and therefore renderable.
+<br>
 Documents are attempted to be written to disk only if the concerned collection
 metadata has `output: true`. Additionally, future-dated documents are only written if
 `site.future` *is also true*.

@@ -42,11 +42,13 @@ bundle exec jekyll serve
 6. Browse to [http://localhost:4000](http://localhost:4000){:target="_blank"}
 
 {: .note .info}
-Pass the `--livereload` option to `serve` to automatically refresh the page with each change you make to the source files: `bundle exec jekyll serve --livereload`
+Pass the `--livereload` option to `serve` to automatically refresh the page with each change you make to the source
+files: `bundle exec jekyll serve --livereload`
 
 
 If you encounter any errors during this process, check that you have installed all the prerequisites in [Requirements]({{ '/docs/installation/#requirements' | relative_url }}).
 If you still have issues, see [Troubleshooting]({{ '/docs/troubleshooting/#configuration-problems' | relative_url }}).
 
 {: .note .info}
-Installation varies based on your operating system. See our [guides]({{ '/docs/installation/#guides' | relative_url }}) for OS-specific instructions.
+Installation varies based on your operating system. See our [guides]({{ '/docs/installation/#guides' | relative_url }})
+for OS-specific instructions.

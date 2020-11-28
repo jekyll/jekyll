@@ -86,7 +86,8 @@ the syntax highlighter styles into your `main.css`:
 ## Links
 
 {: .note}
-Since Jekyll {% include docs_version_badge.html version="4.0"%}, you don't need to prepend `link` and `post_url` tags with `site.baseurl`.
+Since Jekyll {% include docs_version_badge.html version="4.0"%}, you don't need to prepend `link` and `post_url` tags
+with `site.baseurl`.
 
 ### Linking to pages {#link}
 

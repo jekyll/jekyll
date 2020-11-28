@@ -29,8 +29,9 @@ We only cover RubyInstaller-2.4 and newer here. Older versions need to
 4. Check if Jekyll has been installed properly: `jekyll -v`
 
 {: .note .info}
-You may receive an error when checking if Jekyll has been installed properly. Reboot your system and run `jekyll -v` again.
-If the error persists, please open a [RubyInstaller issue](https://github.com/oneclick/rubyinstaller2/issues/new).
+You may receive an error when checking if Jekyll has been installed properly. Reboot your system and run `jekyll -v`
+again. If the error persists, please open a
+[RubyInstaller issue](https://github.com/oneclick/rubyinstaller2/issues/new).
 
 That's it, you're ready to use Jekyll!
 
@@ -72,7 +73,7 @@ gem install jekyll bundler
 ```
 
 {: .note .info}
-  No `sudo` here.
+No `sudo` here.
 
 Check your Jekyll version:
 
@@ -88,7 +89,8 @@ with the current date in the filename.
 {: .note .info}
 **Non-superuser account issues**{:.title}<br>
 If the `jekyll new` command prints the error "Your user account isn't allowed to install to the system RubyGems", see
-the "Running Jekyll as Non-Superuser" instructions in [Troubleshooting]({{ '/docs/troubleshooting/#no-sudo' | relative_url }}).
+the "Running Jekyll as Non-Superuser" instructions in
+[Troubleshooting]({{ '/docs/troubleshooting/#no-sudo' | relative_url }}).
 
 {: .note .info}
 Bash on Ubuntu on Windows is still under development, so you may run into issues.

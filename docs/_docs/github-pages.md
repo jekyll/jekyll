@@ -114,7 +114,8 @@ to see more detailed examples.
 
 {: .note .warning}
 **Source files must be in the root directory**{:.title}<br>
-GitHub Pages [overrides](https://help.github.com/en/github/working-with-github-pages/troubleshooting-jekyll-build-errors-for-github-pages-sites)
+GitHub Pages
+[overrides](https://help.github.com/en/github/working-with-github-pages/troubleshooting-jekyll-build-errors-for-github-pages-sites)
 the ["Site Source"]({{ '/docs/configuration/options/' | relative_url }})
 configuration value, so if you locate your files anywhere other than the
 root directory, your site may not build correctly.
