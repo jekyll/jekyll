@@ -30,6 +30,7 @@
   * docs: installation: fedora: add additional dependencies (#8456)
   * Improve documentation on Hooks in Jekyll (#8467)
   * Build docs site with GitHub Actions (#8201)
+  * structure.md: add link to Assets page from `_sass` section (#8486)
 
 ### Development Fixes
 
