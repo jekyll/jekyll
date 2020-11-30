@@ -64,12 +64,7 @@ module Jekyll
     #
     # Returns the String destination directory.
     def dir
-      if url.end_with?("/")
-        url
-      else
-        url_dir = File.dirname(url)
-        url_dir.end_with?("/") ? url_dir : "#{url_dir}/"
-      end
+      url.end_with?("/") ? url : url_dir
     end
 
     # The full path and filename of the post. Defined in the YAML of the post
@@ -210,6 +205,13 @@ module Jekyll
       return unless generate_excerpt?
 
       data["excerpt"] ||= Jekyll::PageExcerpt.new(self)
+    end
+
+    def url_dir
+      @url_dir ||= begin
+        value = File.dirname(url)
+        value.end_with?("/") ? value : "#{value}/"
+      end
     end
   end
 end
