@@ -65,6 +65,8 @@ Lint/ConstantDefinitionInBlock:
     - test/**/*.rb
 Lint/DeprecatedOpenSSLConstant:
   Enabled: true
+Lint/DuplicateBranch:
+  Enabled: true
 Lint/DuplicateElsifCondition:
   Enabled: true
 Lint/DuplicateRegexpCharacterClassElement:
@@ -74,6 +76,8 @@ Lint/DuplicateRescueException:
 Lint/DuplicateRequire:
   Enabled: true
 Lint/EmptyBlock:
+  Enabled: true
+Lint/EmptyClass:
   Enabled: true
 Lint/EmptyConditionalBody:
   Enabled: true
@@ -172,9 +176,19 @@ Naming/MemoizedInstanceVariableName:
 
 Performance/AncestorsInclude:
   Enabled: false
+Performance/ArraySemiInfiniteRangeSlice:
+  Enabled: true
 Performance/BigDecimalWithNumericArgument:
   Enabled: true
+Performance/BlockGivenWithExplicitBlock:
+  Enabled: true
 Performance/ChainArrayAllocation:
+  Enabled: true
+Performance/CollectionLiteralInLoop:
+  Enabled: true
+Performance/ConstantRegexp:
+  Enabled: true
+Performance/MethodObjectAsBlock:
   Enabled: true
 Performance/RedundantSortBlock:
   Enabled: true
@@ -272,6 +286,8 @@ Style/MultilineTernaryOperator:
   Severity: error
 Style/NegatedIfElseCondition:
   Enabled: true
+Style/NilLambda:
+  Enabled: true
 Style/OptionalBooleanParameter:
   Enabled: true
 Style/PercentLiteralDelimiters:
@@ -283,6 +299,8 @@ Style/PercentLiteralDelimiters:
     "%w": "()"
     "%W": "()"
     "%x": "()"
+Style/RedundantArgument:
+  Enabled: true
 Style/RedundantAssignment:
   Enabled: true
 Style/RedundantFetchBlock:
