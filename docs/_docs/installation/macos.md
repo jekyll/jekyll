@@ -31,7 +31,14 @@ brew install ruby
 Add the brew ruby path to your shell configuration:
 
 ```bash
+# MacOS Catalina (10.15) users and newer
+echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> ~/.zshenv
+
+# MacOS Mojave (10.14) users and older
 echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> ~/.bash_profile
+
+# Unsure which version of macOS you are using? Try
+sw_vers -productVersion 
 ```
 
 Relaunch your terminal and check your Ruby setup:
@@ -99,7 +106,14 @@ ruby -v
 Append your path file with the following, replacing the `X.X` with the first two digits of your Ruby version:
 
 ```bash
+# MacOS Catalina (10.15) users and newer
+echo 'export PATH="$HOME/.gem/ruby/X.X.0/bin:$PATH"' >> ~/.zshenv
+
+# MacOS Mojave (10.14) users and older
 echo 'export PATH="$HOME/.gem/ruby/X.X.0/bin:$PATH"' >> ~/.bash_profile
+
+# Unsure which version of macOS you are using? Try
+sw_vers -productVersion 
 ```
 
 Check that `GEM PATHS:` points to your home directory:
