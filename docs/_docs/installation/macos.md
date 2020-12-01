@@ -22,8 +22,9 @@ To run the latest Ruby version you need to install it through [Homebrew](https:/
 
 ```sh
 # Install Homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+# Install Ruby
 brew install ruby
 ```
 
