@@ -5,7 +5,6 @@ language: ruby
 
 rvm:
   - &ruby1 2.7.1
-  - &ruby2 2.5.8
   - &jruby jruby-9.2.11.1
 
 matrix:
@@ -13,15 +12,6 @@ matrix:
     - rvm: *ruby1
       env: TEST_SUITE=fmt
       name: "🤖️ Code Format"
-    - rvm: *ruby1
-      env: TEST_SUITE=default-site
-      name: "🏠️ Default Site"
-    - rvm: *ruby1
-      env: TEST_SUITE=profile-docs
-      name: "Profile Docs"
-    - rvm: *ruby2
-      env: TEST_SUITE=memprof
-      name: "Profile Memory Allocation"
   exclude:
     - rvm: *jruby
       env: TEST_SUITE=cucumber

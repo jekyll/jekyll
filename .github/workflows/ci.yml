@@ -13,16 +13,23 @@ on:
 jobs:
   ci:
     if: "!contains(github.event.commits[0].message, '[ci skip]')"
-    name: 'SUITE: ${{ matrix.test_suite }} / OS: ${{ matrix.os }}'
     runs-on: ${{ matrix.os }}
+
     strategy:
       fail-fast: false
       matrix:
+        ruby_version:
+        - 2.5.x
+        - 2.7.x
         test_suite:
         - test
+        - cucumber
         - default-site
+        - profile-docs
+        - memprof
         os:
         - ubuntu-latest
+
     steps:
     - uses: actions/checkout@v2
       with:
@@ -30,7 +37,7 @@ jobs:
     - name: Ruby
       uses: actions/setup-ruby@v1
       with:
-        ruby-version: 2.6.x
+        ruby-version: ${{ matrix.ruby_version }}
     - name: Cache dependencies
       uses: actions/cache@v1
       with:
