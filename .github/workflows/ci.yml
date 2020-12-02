@@ -64,3 +64,26 @@ jobs:
         bundler-cache: true
     - name: Run RuboCop
       run: bash script/fmt
+
+  profile_docs:
+    if: "!contains(github.event.commits[0].message, '[ci skip]')"
+    name: 'Profile Docs Site (Ruby ${{ matrix.ruby_version }})'
+    runs-on: 'ubuntu-latest'
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby_version:
+        - 2.4 # Minimum required Ruby version in gemspec
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 5
+    - name: "Set up Ruby ${{ matrix.ruby_version }}"
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby_version }}
+        bundler-cache: true
+    - name: Build Docs site with --profile
+      run: bash script/profile-docs
+    - name: Profile memory usage of building Docs site
+      run: bash script/memprof
