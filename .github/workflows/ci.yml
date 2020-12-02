@@ -13,24 +13,15 @@ on:
 jobs:
   ci:
     if: "!contains(github.event.commits[0].message, '[ci skip]')"
-    name: 'Ruby ${{ matrix.ruby_version }}: ${{ matrix.test_suite.name }}'
-    runs-on: ${{ matrix.os }}
+    name: 'Ruby ${{ matrix.ruby_version }}'
+    runs-on: 'ubuntu-latest'
 
     strategy:
       fail-fast: false
       matrix:
-        os:
-        - ubuntu-latest
         ruby_version:
         - 2.5.x
         - 2.7.x
-        test_suite:
-        - name: Unit Tests
-          id: test
-        - name: Cucumber Features
-          id: cucumber
-        - name: Default Site
-          id: default-site
 
     steps:
     - uses: actions/checkout@v2
@@ -55,8 +46,13 @@ jobs:
       run: |
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
-    - name: Run Test Suite
-      run: bash script/cibuild
+    - name: Run Unit Tests
+      run: bash script/test
       env:
         CI: true
-        TEST_SUITE: ${{ matrix.test_suite.id }}
+    - name: Run Cucumber Features
+      run: bash script/cucumber
+      env:
+        CI: true
+    - name: Sanity Check
+      run: bash script/default-site
