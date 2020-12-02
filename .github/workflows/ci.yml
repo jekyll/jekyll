@@ -13,7 +13,7 @@ on:
 jobs:
   ci:
     if: "!contains(github.event.commits[0].message, '[ci skip]')"
-    name: '${{ matrix.test_suite.name }} with Ruby ${{ matrix.ruby_version }}'
+    name: 'Ruby ${{ matrix.ruby_version }}: ${{ matrix.test_suite.name }}'
     runs-on: ${{ matrix.os }}
 
     strategy:
