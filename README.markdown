@@ -3,15 +3,11 @@
 [![Gem Version](https://img.shields.io/gem/v/jekyll.svg)][ruby-gems]
 [![Linux Build Status](https://github.com/jekyll/jekyll/workflows/Continuous%20Integration/badge.svg)][ci-workflow]
 [![Windows Build status](https://img.shields.io/appveyor/ci/jekyll/jekyll/master.svg?label=Windows%20build)][appveyor]
-[![Maintainability](https://api.codeclimate.com/v1/badges/8ba0cb5b17bb9848e128/maintainability)][codeclimate]
-[![Test Coverage](https://api.codeclimate.com/v1/badges/8ba0cb5b17bb9848e128/test_coverage)][coverage]
 [![Security](https://hakiri.io/github/jekyll/jekyll/master.svg)][hakiri]
 [![Backers on Open Collective](https://opencollective.com/jekyll/backers/badge.svg)](#backers)
 [![Sponsors on Open Collective](https://opencollective.com/jekyll/sponsors/badge.svg)](#sponsors)
 
 [ruby-gems]: https://rubygems.org/gems/jekyll
-[codeclimate]: https://codeclimate.com/github/jekyll/jekyll
-[coverage]: https://codeclimate.com/github/jekyll/jekyll/coverage
 [hakiri]: https://hakiri.io/github/jekyll/jekyll/master
 [ci-workflow]: https://github.com/jekyll/jekyll/actions?query=workflow%3A%22Continuous+Integration%22+branch%3Amaster
 [appveyor]: https://ci.appveyor.com/project/jekyll/jekyll/branch/master
