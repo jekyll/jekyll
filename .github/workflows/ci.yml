@@ -20,32 +20,19 @@ jobs:
       fail-fast: false
       matrix:
         ruby_version:
-        - 2.5.x
-        - 2.7.x
+        - 2.5
+        - 2.7
+        - jruby-9.2.11.1
 
     steps:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 5
     - name: "Set up Ruby ${{ matrix.ruby_version }}"
-      uses: actions/setup-ruby@v1
+      uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby_version }}
-    - name: Cache dependencies
-      uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
-    - name: 'Update Rubygems and Bundler'
-      run: |
-        gem update --system --no-document
-        gem update bundler --no-document
-    - name: Set up bundle
-      run: |
-        bundle config path vendor/bundle
-        bundle install --jobs 4 --retry 3
+        bundler-cache: true
     - name: Run Unit Tests
       run: bash script/test
       env:
@@ -65,29 +52,15 @@ jobs:
       fail-fast: false
       matrix:
         ruby_version:
-        - 2.5.x
+        - 2.5
     steps:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 5
     - name: "Set up Ruby ${{ matrix.ruby_version }}"
-      uses: actions/setup-ruby@v1
+      uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby_version }}
-    - name: Cache dependencies
-      uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
-    - name: 'Update Rubygems and Bundler'
-      run: |
-        gem update --system --no-document
-        gem update bundler --no-document
-    - name: Set up bundle
-      run: |
-        bundle config path vendor/bundle
-        bundle install --jobs 4 --retry 3
+        bundler-cache: true
     - name: Run RuboCop
       run: bash script/fmt
