@@ -30,7 +30,7 @@ jobs:
       uses: actions/cache@v1
       with:
         path: sandbox/vendor/bundle
-        key: ubuntu-latest-gems-
+        key: ubuntu-latest-gems-${{ hashFiles('**/Gemfile.lock') }}
         restore-keys: |
           ubuntu-latest-gems-
     - name: Set up Dependencies
