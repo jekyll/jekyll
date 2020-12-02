@@ -13,6 +13,7 @@ on:
 jobs:
   ci:
     if: "!contains(github.event.commits[0].message, '[ci skip]')"
+    name: 'SUITE: ${{ matrix.test_suite.name }}'
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -22,11 +23,16 @@ jobs:
         - 2.5.x
         - 2.7.x
         test_suite:
-        - test
-        - cucumber
-        - default-site
-        - profile-docs
-        - memprof
+        - name: Unit Tests
+          id: test
+        - name: Cucumber Features
+          id: cucumber
+        - name: Default Site
+          id: default-site
+        - name: Profile Docs site
+          id: profile-docs
+        - name: Memory Profile Docs site
+          id: memprof
         os:
         - ubuntu-latest
 
@@ -34,7 +40,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 5
-    - name: Ruby
+    - name: "Set up Ruby ${{ matrix.ruby_version }}"
       uses: actions/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby_version }}
@@ -45,10 +51,10 @@ jobs:
         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
         restore-keys: |
           ${{ runner.os }}-gems-
-    - name: 'Update Rubygems'
-      run: 'gem update --system --no-document'
-    - name: 'Update Bundler'
-      run: 'gem update bundler --no-document'
+    - name: 'Update Rubygems and Bundler'
+      run: |
+        gem update --system --no-document
+        gem update bundler --no-document
     - name: Set up bundle
       run: |
         bundle config path vendor/bundle
@@ -57,4 +63,4 @@ jobs:
       run: bash script/cibuild
       env:
         CI: true
-        TEST_SUITE: ${{ matrix.test_suite }}
+        TEST_SUITE: ${{ matrix.test_suite.id }}
