@@ -80,6 +80,7 @@
   * Allow triggering `:post_convert` events atomically (#8465)
   * Explicitly return nil after site process phase (#8472)
   * Reduce allocations from computing item property (#8485)
+  * Optimize Page#dir with a private method (#8489)
 
 ### Minor Enhancements
 
