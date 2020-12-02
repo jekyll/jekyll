@@ -13,12 +13,14 @@ on:
 jobs:
   ci:
     if: "!contains(github.event.commits[0].message, '[ci skip]')"
-    name: 'SUITE: ${{ matrix.test_suite.name }}'
+    name: '${{ matrix.test_suite.name }} with Ruby ${{ matrix.ruby_version }}'
     runs-on: ${{ matrix.os }}
 
     strategy:
       fail-fast: false
       matrix:
+        os:
+        - ubuntu-latest
         ruby_version:
         - 2.5.x
         - 2.7.x
@@ -29,12 +31,13 @@ jobs:
           id: cucumber
         - name: Default Site
           id: default-site
-        - name: Profile Docs site
-          id: profile-docs
-        - name: Memory Profile Docs site
-          id: memprof
-        os:
-        - ubuntu-latest
+        include:
+          ruby_version: 2.7.x
+          test_suite:
+          - name: Profile Docs site
+            id: profile-docs
+          - name: Memory Profile Docs site
+            id: memprof
 
     steps:
     - uses: actions/checkout@v2
