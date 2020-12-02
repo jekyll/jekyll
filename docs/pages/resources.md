@@ -52,6 +52,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [Snipcart](https://snipcart.com/blog/static-site-e-commerce-part-2-integrating-snipcart-with-jekyll): Add a shopping cart to a Jekyll site
 
 ### Forms
+  - [Arengu](https://www.arengu.com)
   - [Getform](https://getform.io)
   - [99Inbound](https://www.99inbound.com)
   - [Formcake](https://formcake.com)
