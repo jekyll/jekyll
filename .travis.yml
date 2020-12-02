@@ -13,9 +13,6 @@ matrix:
       env: TEST_SUITE=test
       name: "JRuby Compatibility"
     - rvm: *cruby
-      env: TEST_SUITE=fmt
-      name: "🤖️ Code Format"
-    - rvm: *cruby
       env: TEST_SUITE=profile-docs
       name: "Profile Docs"
     - rvm: *cruby

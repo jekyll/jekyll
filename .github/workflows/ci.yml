@@ -59,7 +59,7 @@ jobs:
 
   style_check:
     if: "!contains(github.event.commits[0].message, '[ci skip]')"
-    name: 'Code Style Check'
+    name: 'Code Style Check (Ruby ${{ matrix.ruby_version }})'
     runs-on: 'ubuntu-latest'
     strategy:
       fail-fast: false
