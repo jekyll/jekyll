@@ -31,14 +31,6 @@ jobs:
           id: cucumber
         - name: Default Site
           id: default-site
-        include:
-          - os: ubuntu-latest
-            ruby_version: 2.7.x
-            test_suite:
-            - name: Profile Docs site
-              id: profile-docs
-            - name: Memory Profile Docs site
-              id: memprof
 
     steps:
     - uses: actions/checkout@v2
