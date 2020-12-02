@@ -3,29 +3,25 @@ script: script/cibuild
 cache: bundler
 language: ruby
 
-rvm:
-  - &ruby1 2.7.1
+ruby_versions:
+  - &cruby 2.7.1
   - &jruby jruby-9.2.11.1
 
 matrix:
   include:
-    - rvm: *ruby1
+    - rvm: *jruby
+      env: TEST_SUITE=test
+      name: "JRuby Compatibility"
+    - rvm: *cruby
       env: TEST_SUITE=fmt
       name: "🤖️ Code Format"
-    - rvm: *ruby1
+    - rvm: *cruby
       env: TEST_SUITE=profile-docs
       name: "Profile Docs"
-    - rvm: *ruby2
+    - rvm: *cruby
       env: TEST_SUITE=memprof
       name: "Profile Memory Allocation"
-  exclude:
-    - rvm: *jruby
-      env: TEST_SUITE=cucumber
 
-env:
-  matrix:
-    - TEST_SUITE=test
-    - TEST_SUITE=cucumber
 branches:
   only:
     - master
