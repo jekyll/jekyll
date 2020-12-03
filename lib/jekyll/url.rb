@@ -11,6 +11,13 @@
 #
 module Jekyll
   class URL
+    # Drop's instance methods without traversing ancestors.
+    URL_DROP_METHODS = Drops::UrlDrop.instance_methods(false)
+    # A Hash of template key strings mapped to their string ids.
+    #   For example: {"year"=>":year", "month"=>":month", "day"=>":day", ...}
+    TEMPLATE_KEY_MAP = URL_DROP_METHODS.map(&:to_s).zip(URL_DROP_METHODS.map(&:inspect)).to_h
+    private_constant :URL_DROP_METHODS, :TEMPLATE_KEY_MAP
+
     # options - One of :permalink or :template must be supplied.
     #           :template     - The String used as template for URL generation,
     #                           for example "/:path/:basename:output_ext", where
@@ -108,7 +115,7 @@ module Jekyll
         value = "" if value.nil?
         replacement = self.class.escape_path(value)
 
-        match.sub!(":#{winner}", replacement)
+        match.sub!((TEMPLATE_KEY_MAP[winner] || ":#{winner}"), replacement)
       end
     end
 
