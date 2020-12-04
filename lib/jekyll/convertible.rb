@@ -248,7 +248,7 @@ module Jekyll
 
     def attribute_hash(attrs)
       @attribute_hash ||= {}
-      @attribute_hash[attrs] ||= attts.each_with_object({}) do |attribute, hsh|
+      @attribute_hash[attrs] ||= attrs.each_with_object({}) do |attribute, hsh|
         hsh[attribute] = send(attribute)
       end
     end
