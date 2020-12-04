@@ -31,14 +31,14 @@ brew install ruby
 Add the brew ruby path to your shell configuration:
 
 ```bash
-# MacOS Catalina (10.15) users and newer
-echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> ~/.zshenv
+# If you're using Zsh
+echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> ~/.zshrc
 
-# MacOS Mojave (10.14) users and older
+# If you're using Bash
 echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> ~/.bash_profile
 
-# Unsure which version of macOS you are using? Try
-sw_vers -productVersion 
+# Unsure which shell you are using? Try
+echo $SHELL
 ```
 
 Relaunch your terminal and check your Ruby setup:
