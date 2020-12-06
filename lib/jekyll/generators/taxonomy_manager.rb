@@ -5,7 +5,7 @@ module Jekyll
     safe :true
 
     def initialize(config)
-      @config = config["taxonomy_pages"]
+      @config = config["taxonomy_pages"] || {}
     end
 
     def generate(site)
