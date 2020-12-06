@@ -2,7 +2,7 @@
 
 module Jekyll
   class TaxonomyManager < Generator
-    safe :true
+    safe true
 
     def initialize(config)
       @config = config["taxonomy_pages"] || {}
