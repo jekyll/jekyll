@@ -96,6 +96,10 @@
   * Add custom debug strings for Jekyll objects (#8473)
   * Debug reading data files in a site (#8481)
 
+### Site Enhancements
+
+  * fix: showcase (#8504)
+
 ## 4.1.1 / 2020-06-24
 
 ### Bug Fixes
