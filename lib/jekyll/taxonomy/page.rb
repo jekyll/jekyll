@@ -3,18 +3,21 @@
 module Jekyll
   module Taxonomy
     class Page < PageWithoutAFile
-      attr_reader :site, :name, :docs, :relative_path
+      attr_reader :site, :type, :name, :linked_docs, :relative_path
       alias_method :basename_without_ext, :name
 
-      def initialize(site, type, name, docs)
+      def initialize(site, type, name, linked_docs)
         @site = site
         @name = name
-        @docs = docs
         @type = type.to_sym
         @ext  = ".html"
         @content = ""
+        @linked_docs = linked_docs
         @relative_path = "#{type}_page_#{name}.html"
-        @data = site.frontmatter_defaults.all(relative_path, type)
+      end
+
+      def data
+        @data ||= site.frontmatter_defaults.all(relative_path, type)
       end
 
       def url

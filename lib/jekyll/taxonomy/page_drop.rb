@@ -8,7 +8,7 @@ module Jekyll
       delegate_method_as :relative_path, :path
       private delegate_method_as :data, :fallback_data
 
-      delegate_methods :content, :relative_path, :url, :docs
+      delegate_methods :name, :content, :relative_path, :url, :linked_docs
     end
   end
 end
