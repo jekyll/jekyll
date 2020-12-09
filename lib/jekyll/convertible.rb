@@ -41,7 +41,7 @@ module Jekyll
       begin
         self.content = File.read(filename, **Utils.merged_file_read_opts(site, opts))
         if content =~ Document::YAML_FRONT_MATTER_REGEXP
-          self.content = $POSTMATCH
+          self.content = Regexp.last_match.post_match
           self.data = SafeYAML.load(Regexp.last_match(1))
         end
       rescue Psych::SyntaxError => e
