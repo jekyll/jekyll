@@ -1,279 +1,329 @@
 - name: Tom Preston Werner Blog
   url: http://tom.preston-werner.com/
-  image: showcase/tom-preston-werner.png
+  image: tom-preston-werner.png
   categories:
     - personal
     - blog
+
 # - name: White House Social and Behavioral Sciences Team
 #   url: https://sbst.gov/
-#   image: showcase/sbst.png
+#   image: sbst.png
 #   categories:
 #     - government
+
 - name: SiteLeaf
   url: https://siteleaf.com
-  image: showcase/siteleaf.png
+  image: siteleaf.png
   categories:
     - software
     - marketing-site
+
 - name: CloudCannon
   url: https://cloudcannon.com/
-  image: showcase/cloudcannon.png
+  image: cloudcannon.png
   categories:
     - software
     - marketing-site
+
 - name: Vesterheim Norwegian-American Museum
   url: http://vesterheim.org/
-  image: showcase/vesterheim.png
+  image: vesterheim.png
   categories:
     - marketing-site
+
 - name: KOTN
   url: https://kotn.com/
-  image: showcase/kotn.png
+  image: kotn.png
   categories:
    - marketing-site
+
 - name: MvvmCross
   url: https://www.mvvmcross.com/
-  image: showcase/mvvm.png
+  image: mvvm.png
   categories:
     - software
     - marketing-site
+
 - name: Vidgrid
   url: https://www.vidgrid.com/
-  image: showcase/vidgrid.png
+  image: vidgrid.png
   categories:
     - software
     - marketing-site
+
 - name: Bitcoin
   url: https://bitcoin.org/en/
-  image: showcase/bitcoin.png
+  image: bitcoin.png
   categories:
     - software
     - marketing-site
+
 - name: Mapwize
   url: https://www.mapwize.io/
-  image: showcase/mapwize.png
+  image: mapwize.png
   categories:
     - software
     - marketing-site
+
 - name: Auth0 Blog
   url: https://auth0.com/blog/
-  image: showcase/auth0-blog.png
+  image: auth0-blog.png
   categories:
     - software
     - blog
+
 - name: AWS Amplify
   url: https://aws-amplify.github.io/
-  image: showcase/amplify-framework.png
+  image: amplify-framework.png
   categories:
     - open-source
     - marketing-site
+
 - name: Freedom of Information Act
   url: https://www.foia.gov/
-  image: showcase/foia-gov.png
+  image: foia-gov.png
   categories:
     - government
-- name: Art & About Sydney
+
+- name: "Art & About Sydney"
   url: https://www.artandabout.com.au/
-  image: showcase/art-sydney.png
+  image: art-sydney.png
   categories:
     - government
+
 - name: Passbolt Help
   url: https://help.passbolt.com/
-  image: showcase/passbolt-help.png
+  image: passbolt-help.png
   categories:
     - knowledgebase
+
 - name: We are COLLINS
   url: https://www.wearecollins.com/
-  image: showcase/collins.png
+  image: collins.png
   categories:
     - agency
+
 - name: Lightburn
   url: https://lightburn.co/
-  image: showcase/lightburn.png
+  image: lightburn.png
   categories:
     - agency
+
 - name: italia.it
   url: https://developers.italia.it/
-  image: showcase/italia-it.png
+  image: italia-it.png
   categories:
     - community
+
 - name: Sydney New Years Eve
   url: https://www.sydneynewyearseve.com/
-  image: showcase/nsw.png
+  image: nsw.png
   categories:
     - government
+
 - name: Login.gov
   url: https://login.gov/
-  image: showcase/login-gov.png
+  image: login-gov.png
   categories:
     - government
+
 - name: plainlanguage.gov
   url: https://plainlanguage.gov/
-  image: showcase/plainlanguage-gov.png
+  image: plainlanguage-gov.png
   categories:
     - government
+
 - name: U.S. Web Design Standards
   url: https://standards.usa.gov/
-  image: showcase/uswds.png
+  image: uswds.png
   categories:
     - government
+
 - name: Grantmaker Search
   url: https://www.grantmakers.io/
-  image: showcase/grantmakers.png
+  image: grantmakers.png
   categories:
     - marketing-site
+
 - name: Rehan Butt
   url: http://rehanbutt.com/
-  image: showcase/rehn.png
+  image: rehn.png
   categories:
     - personal
     - portfolio
+
 - name: The Markdown Guide
   url: https://www.markdownguide.org/
-  image: showcase/markdown-guide.png
+  image: markdown-guide.png
   categories:
     - knowledgebase
+
 - name: Probot
   url: https://probot.github.io/
-  image: showcase/probot.png
+  image: probot.png
   categories:
     - documentation
+
 - name: Matt Grey
   url: https://himatt.com/
-  image: showcase/matt-grey.png
+  image: matt-grey.png
   categories:
     - personal
     - portfolio
+
 - name: Lattice
   url: https://latticehq.com/
-  image: showcase/lattice.png
+  image: lattice.png
   categories:
     - software
     - marketing-site
+
 - name: MailTape
   url: https://www.mailta.pe/
-  image: showcase/mailtape.png
+  image: mailtape.png
   categories:
     - other
+
 - name: Digital Democracy
   url: http://www.digital-democracy.org/
-  image: showcase/digital-democracy.png
+  image: digital-democracy.png
   categories:
     - other
+
 - name: HTML Reference
   url: http://htmlreference.io/
-  image: showcase/htmlreference.png
+  image: htmlreference.png
   categories:
     - documentation
+
 - name: CSS Reference
   url: http://cssreference.io/
-  image: showcase/cssreference.png
+  image: cssreference.png
   categories:
     - documentation
+
 - name: Chain
   url: https://chain.com/
-  image: showcase/chain.png
+  image: chain.png
   categories:
     - marketing-site
+
 - name: IBM MobileFirst Foundation
   url: https://mobilefirstplatform.ibmcloud.com/
-  image: showcase/ibm-mobile-foundation.png
+  image: ibm-mobile-foundation.png
   categories:
     - documentation
-- name: 18F
+
+- name: "18F"
   url: https://18f.gsa.gov/
-  image: showcase/18f.png
+  image: 18f.png
   categories:
     - agency
     - government
+
 - name: Development Seed
   url: https://developmentseed.org/
-  image: showcase/development-seed.png
+  image: development-seed.png
   categories:
     - agency
+
 - name: Isomer - Singapore Government Static Websites
   url: https://isomer.gov.sg/
-  image: showcase/isomer.png
+  image: isomer.png
   categories:
     - government
+
 - name: French Government Digital Services
   url: https://beta.gouv.fr/
-  image: showcase/beta-gouv-fr.png
+  image: beta-gouv-fr.png
   categories:
     - government
+
 - name: Paris Call for Trust and Security in Cyberspace
   url: https://pariscall.international/
-  image: showcase/appel-de-paris.png
+  image: appel-de-paris.png
   categories:
     - government
+
 - name: GitHub On Demand Training
   url: https://services.github.com/on-demand/
-  image: showcase/github-learning-lab.png
+  image: github-learning-lab.png
   categories:
     - software
     - knowledgebase
+
 - name: TwitchCon
   url: https://www.twitchcon.com/
-  image: showcase/twitchcon.png
+  image: twitchcon.png
   categories:
     - marketing-site
     - conference
+
 - name: UN World Statistics
   url: https://worldstatisticsday.org
-  image: showcase/world-statistics-day.png
+  image: world-statistics-day.png
   categories:
     - government
+
 - name: Netflix Devices
   url: https://devices.netflix.com/en/
-  image: showcase/netflix.png
+  image: netflix.png
   categories:
     - marketing-site
+
 - name: Twitch Developer Documentation
   url: https://dev.twitch.tv/
-  image: showcase/twitch-developers.png
+  image: twitch-developers.png
   categories:
     - marketing-site
     - documentation
+
 - name: Yeoman
   url: http://yeoman.io/
-  image: showcase/yeoman.png
+  image: yeoman.png
   categories:
     - open-source
     - marketing-site
+
 - name: Release Management Blog
   url: https://release.mozilla.org/
-  image: showcase/mozilla-release-blog.png
+  image: mozilla-release-blog.png
   categories:
     - software
     - blog
+
 - name: frame.ai
   url: https://frame.ai/
-  image: showcase/frame-ai.png
+  image: frame-ai.png
   categories:
     - software
     - marketing-site
+
 - name: Ionic Framwork
   url: https://ionicframework.com/
-  image: showcase/ionic-framework.png
+  image: ionic-framework.png
   categories:
     - software
     - marketing-site
+
 - name: Spotify for Developers
   url: https://developer.spotify.com
-  image: showcase/spotify-developers.png
+  image: spotify-developers.png
   categories:
     - marketing-site
     - documentation
     - software
+
 - name: Sketch
   url: https://sketch.com/
-  image: showcase/sketch.png
+  image: sketch.png
   categories:
     - software
     - marketing-site
+
 - name: Ruby on Rails
   url: http://rubyonrails.org/
-  image: showcase/ruby-on-rails.png
+  image: ruby-on-rails.png
   categories:
     - marketing-site
     - documentation

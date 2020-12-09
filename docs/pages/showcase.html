@@ -9,12 +9,12 @@ redirect_from:
 <p>Jekyll powers many company websites, here a few nice ones:</p>
 
 <ul class="showcase" id="showcase">
-  {% for s in site.data.showcase reversed -%}
+  {% for entry in site.data.showcase reversed -%}
   <li>
-    <a href="{{ s.url }}" target="_blank">
+    <a href="{{ entry.url }}" target="_blank">
       <figure>
-          <img loading="lazy" src="{{ site.cloudinary_url }}{{ s.image }}" alt="{{ s.name }}" width="404" height="253">
-        <figcaption>{{ s.name }}</figcaption>
+        <img loading="lazy" src="{{ site.cloudinary_url }}/showcase/{{ entry.image }}" alt="{{ entry.name }}" width="404" height="253">
+        <figcaption>{{ entry.name }}</figcaption>
       </figure>
     </a>
   </li>
