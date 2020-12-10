@@ -53,6 +53,7 @@
   * Reduce allocations from rendering item as liquid (#8406)
   * Test that Liquid expressions are not deeply evaled (#8292)
   * Test rendering arbitrary Liquid variables by default (#7414)
+  * Migrate TravisCI jobs to GitHub Actions (#8492)
 
 ### Bug Fixes
 
@@ -94,6 +95,10 @@
   * Don&#39;t reset site.url to localhost:4000 by default (#7253)
   * Add custom debug strings for Jekyll objects (#8473)
   * Debug reading data files in a site (#8481)
+
+### Site Enhancements
+
+  * fix: showcase (#8504)
 
 ## 4.1.1 / 2020-06-24
 
