@@ -3,6 +3,7 @@ title: 3rd Party
 permalink: /docs/deployment/third-party/
 ---
 
+
 ## Aerobatic
 
 [Aerobatic](https://www.aerobatic.com) has custom domains, global CDN distribution, basic auth, CORS proxying, and a growing list of plugins all included.
@@ -66,6 +67,6 @@ Read this [Jekyll step-by-step guide](https://www.netlify.com/blog/2020/04/02/a-
 
 ## 21YunBox
 
-[21YunBox](https://www.21yunbox.com) provides blazing fast Chinese CDN, Continuous Deployment, one click HTTPS and [much more](https://www.21yunbox.com/docs/v2/), providing developers a hassle-free solution to launch their web projects in China.
+[21YunBox](https://www.21yunbox.com) provides blazing fast Chinese CDN, Continuous Deployment, one click HTTPS and [much more](https://www.21yunbox.com/docs/), providing developers a hassle-free solution to launch their web projects in China.
 
-Read this [Jekyll step-by-step guide](https://www.21yunbox.com/docs/v2/static.html#jekyll) to deploy your Jekyll site on 21YunBox.
+Read this [Jekyll step-by-step guide](https://www.21yunbox.com/docs/#/deploy-jekyll) to deploy your Jekyll site on 21YunBox.

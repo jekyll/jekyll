@@ -422,7 +422,7 @@ module Jekyll
     end
 
     def item_property(item, property)
-      @item_property_cache ||= {}
+      @item_property_cache ||= @context.registers[:site].filter_cache[:item_property] ||= {}
       @item_property_cache[property] ||= {}
       @item_property_cache[property][item] ||= begin
         property = property.to_s
