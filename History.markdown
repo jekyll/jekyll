@@ -82,6 +82,7 @@
   * Explicitly return nil after site process phase (#8472)
   * Reduce allocations from computing item property (#8485)
   * Optimize Page#dir with a private method (#8489)
+  * Stash attribute hash for Liquid computed for pages (#8497)
 
 ### Minor Enhancements
 
