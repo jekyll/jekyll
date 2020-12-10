@@ -60,7 +60,7 @@ Ruby versions. This is very useful when you need to be able to run a given Ruby 
 
 ```sh
 # Install Homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install rbenv and ruby-build
 brew install rbenv
