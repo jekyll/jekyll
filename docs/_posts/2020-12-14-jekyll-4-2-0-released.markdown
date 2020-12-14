@@ -24,8 +24,8 @@ As always, you can go through [the full list of changes](/docs/history/#v4-2-0) 
 memory-allocation optimizations made to Jekyll.
 
 Special thanks to our community members who helped improving Jekyll codebase and documentation from v4.1.1:
-Alex Malaszkiewicz, Alexey Pelykh, Brittany Joiner, bytecode1024, Christopher Brown, Chuck Houpt, Corey Megown,
-Enrico Tolotto, fauno, Felix Breidenstein, Francesco Bianco, Frank Taillandier, Gabriel Staples, iBug, jaybe@jekyll,
-jesuslerma, jnozsc, Joe Marshall, joelkennedy, Liam Cooke, Lou Rectoret, m-naumann, Malathi, Nicholas Paxford,
-Nikita Skalkin, Parker Moore, Pratyaksh Gautam, Rachel Cheyfitz, SaintMalik, Seeker, Shannon Kularathna, Steven Xu,
-Takuya N and Thelonius Kort.
+Adam Alton, Alex Malaszkiewicz, Alexey Pelykh, Brittany Joiner, bytecode1024, Christopher Brown, Chuck Houpt,
+Corey Megown, Dan Nemenyi, Enrico Tolotto, fauno, Felix Breidenstein, Francesco Bianco, Frank Taillandier,
+Gabriel Staples, iBug, Jacobo Vidal, jaybe@jekyll, jesuslerma, jnozsc, joelkennedy, Joe Marshall, Liam Cooke,
+Lou Rectoret, Malathi, m-naumann, Nicholas Paxford, Nikita Skalkin, Parker Moore, Pratyaksh Gautam, Rachel Cheyfitz,
+SaintMalik, Seeker, Shannon Kularathna, Steven Xu, Takuya N, Thelonius Kort and Toby Glei.
