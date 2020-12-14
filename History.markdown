@@ -1,4 +1,4 @@
-## HEAD
+## 4.2.0 / 2020-12-14
 
 ### Minor Enhancements
 
