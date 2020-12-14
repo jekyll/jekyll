@@ -13,7 +13,7 @@
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>Releases | Jekyll • Simple, blog-aware, static sites</title>
-<meta name="generator" content="Jekyll v4.1.1" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Releases" />
 <meta name="author" content="all" />
 <meta property="og:locale" content="en_US" />
@@ -62,7 +62,7 @@
 </div>
     <div class="meta hide-on-mobiles">
       <ul>
-        <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.1.1">v4.1.1</a></li>
+        <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.2.0">v4.2.0</a></li>
         <li><a href="https://github.com/jekyll/jekyll">GitHub</a></li>
       </ul>
     </div>
@@ -84,6 +84,7 @@
     <option value="">Navigate the blog…</option>
     <option value="/news/">Home</option>
     <optgroup label="posts">
+      <option value="/news/2020/12/14/jekyll-4-2-0-released/">Jekyll 4.2.0 Released</option>
       <option value="/news/2020/08/05/jekyll-3-9-0-released/">Jekyll 3.9.0 Released</option>
       <option value="/news/2020/06/24/jekyll-4-1-1-released/">Jekyll 4.1.1 Released</option>
       <option value="/news/2020/05/27/jekyll-4-1-0-released/">Jekyll 4.1.0 Released</option>
@@ -174,41 +175,59 @@
 </div>
 <div class="unit four-fifths"><article>
   <h2>
-    <a href="/news/2020/08/05/jekyll-3-9-0-released/">Jekyll 3.9.0 Released</a>
+    <a href="/news/2020/12/14/jekyll-4-2-0-released/">Jekyll 4.2.0 Released</a>
   </h2>
   <span class="post-category">
     <span class="label">release</span>
   </span>
   <div class="post-meta">
-    <span class="post-date">05 Aug 2020</span>
-    <a href="https://github.com/parkr" class="post-author">
-      <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+    <span class="post-date">14 Dec 2020</span>
+    <a href="https://github.com/ashmaroli" class="post-author">
+      <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name">ashmaroli</span>
     </a>
   </div>
-  <div class="post-content"><p>Jekyll 3.9.0 allows use of kramdown v2, the latest series of kramdown.</p>
+  <div class="post-content"><p>Greetings Jekyllers! Jekyll v4.2.0 is out!</p>
 
-<p>If you choose to upgrade, please note that the GitHub-Flavored Markdown
-parser and other features of kramdown v1 are now distributed via
-separate gems. If you would like to continue using these features, you will
-need to add the gems to your <code class="language-plaintext highlighter-rouge">Gemfile</code>. They are as follows:</p>
+<p>This release gives you a new hook named <code class="language-plaintext highlighter-rouge">:post_convert</code> that allows modifying rendered HTML contents before they are
+placed into the designated layout(s).</p>
 
-<ul>
-  <li>GFM parser – <code class="language-plaintext highlighter-rouge">kramdown-parser-gfm</code></li>
-  <li>coderay syntax highlighter – <code class="language-plaintext highlighter-rouge">kramdown-syntax-coderay</code></li>
-  <li>mathjaxnode math engine – <code class="language-plaintext highlighter-rouge">kramdown-math-mathjaxnode</code></li>
-  <li>sskatex math engine – <code class="language-plaintext highlighter-rouge">kramdown-math-sskatex</code></li>
-  <li>katex math engine – <code class="language-plaintext highlighter-rouge">kramdown-math-katex</code></li>
-  <li>ritex math engine – <code class="language-plaintext highlighter-rouge">kramdown-math-ritex</code></li>
-  <li>itex2mml math engine – <code class="language-plaintext highlighter-rouge">kramdown-math-itex2mml</code></li>
-</ul>
+<p>Detecting files that get written into the same destination path has been a part of the diagnostics from <code class="language-plaintext highlighter-rouge">jekyll doctor</code>
+for quite some time now. However, v4.2 has integrated that feature into the build process itself.</p>
 
-<p>Jekyll will require the given gem when the configuration requires it, and
-will show a helpful message when a dependency is missing.</p>
+<p>On the topic of log output, the <code class="language-plaintext highlighter-rouge">--verbose</code> output got a bit more verbose. Instead of just showing <em>documents</em> that are
+being read, the output will now also show <em>pages</em> and <em>layouts</em> that are being read into the site.</p>
 
-<p>You can check out the patches and see all the details in <a href="/docs/history/#v3-9-0">the release notes</a></p>
+<p>Additionally, we have stopped overriding the <code class="language-plaintext highlighter-rouge">site.url</code> to <code class="language-plaintext highlighter-rouge">http://localhost:4000</code> in absolute URLs while developing
+via <code class="language-plaintext highlighter-rouge">jekyll serve</code>.</p>
 
-<p>Happy Jekylling!</p>
+<p>As always, you can go through <a href="/docs/history/#v4-2-0">the full list of changes</a> if you are interested in the various
+memory-allocation optimizations made to Jekyll.</p>
+
+<p>Special thanks to our community members who helped improving Jekyll codebase and documentation from v4.1.1:
+Adam Alton, Alex Malaszkiewicz, Alexey Pelykh, Brittany Joiner, bytecode1024, Christopher Brown, Chuck Houpt,
+Corey Megown, Dan Nemenyi, Enrico Tolotto, fauno, Felix Breidenstein, Francesco Bianco, Frank Taillandier,
+Gabriel Staples, iBug, Jacobo Vidal, jaybe@jekyll, jesuslerma, jnozsc, joelkennedy, Joe Marshall, Liam Cooke,
+Lou Rectoret, Malathi, m-naumann, Nicholas Paxford, Nikita Skalkin, Parker Moore, Pratyaksh Gautam, Rachel Cheyfitz,
+SaintMalik, Seeker, Shannon Kularathna, Steven Xu, Takuya N, Thelonius Kort and Toby Glei.</p>
 </div>
+</article>
+<article>
+  <div class="cell-left">
+    <span class="post-category">
+      <span class="label">release</span>
+    </span>
+  </div>
+  <div class="cell-right">
+    <div class="post-meta">
+      <h2 class="post-title">
+        <a href="/news/2020/08/05/jekyll-3-9-0-released/">Jekyll 3.9.0 Released</a>
+      </h2>
+      <span class="post-date">05 Aug 2020</span>
+      <a href="https://github.com/parkr" class="post-author">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      </a>
+    </div>
+  </div>
 </article>
 <article>
   <div class="cell-left">
@@ -1538,6 +1557,9 @@ will show a helpful message when a dependency is missing.</p>
     <h4>Recent Releases</h4>
     <ul>
       <li >
+        <a href="/news/2020/12/14/jekyll-4-2-0-released/">Version 4.2.0</a>
+      </li>
+      <li >
         <a href="/news/2020/08/05/jekyll-3-9-0-released/">Version 3.9.0</a>
       </li>
       <li >
@@ -1548,9 +1570,6 @@ will show a helpful message when a dependency is missing.</p>
       </li>
       <li >
         <a href="/news/2020/05/08/jekyll-4-0-1-released/">Version 4.0.1</a>
-      </li>
-      <li >
-        <a href="/news/2019/08/20/jekyll-4-0-0-released/">Version 4.0.0</a>
       </li>
       <li>
         <a href="/docs/history/">History »</a>

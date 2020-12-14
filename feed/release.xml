@@ -1,4 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://jekyllrb.com/feed/release.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2020-12-11T06:27:52-08:00</updated><id>https://jekyllrb.com/feed/release.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites | Release</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 4.1.1 Released</title><link href="https://jekyllrb.com/news/2020/06/24/jekyll-4-1-1-released/" rel="alternate" type="text/html" title="Jekyll 4.1.1 Released" /><published>2020-06-24T04:15:35-07:00</published><updated>2020-06-24T04:15:35-07:00</updated><id>https://jekyllrb.com/news/2020/06/24/jekyll-4-1-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2020/06/24/jekyll-4-1-1-released/">&lt;p&gt;Jekyll 4.1.0 brought two notable changes: &lt;em&gt;Page-excerpts&lt;/em&gt; and &lt;em&gt;Liquid Drop for Page objects&lt;/em&gt;.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://jekyllrb.com/feed/release.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2020-12-14T04:35:01-08:00</updated><id>https://jekyllrb.com/feed/release.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites | Release</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 4.2.0 Released</title><link href="https://jekyllrb.com/news/2020/12/14/jekyll-4-2-0-released/" rel="alternate" type="text/html" title="Jekyll 4.2.0 Released" /><published>2020-12-14T00:42:20-08:00</published><updated>2020-12-14T00:42:20-08:00</updated><id>https://jekyllrb.com/news/2020/12/14/jekyll-4-2-0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2020/12/14/jekyll-4-2-0-released/">&lt;p&gt;Greetings Jekyllers! Jekyll v4.2.0 is out!&lt;/p&gt;
+
+&lt;p&gt;This release gives you a new hook named &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:post_convert&lt;/code&gt; that allows modifying rendered HTML contents before they are
+placed into the designated layout(s).&lt;/p&gt;
+
+&lt;p&gt;Detecting files that get written into the same destination path has been a part of the diagnostics from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll doctor&lt;/code&gt;
+for quite some time now. However, v4.2 has integrated that feature into the build process itself.&lt;/p&gt;
+
+&lt;p&gt;On the topic of log output, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--verbose&lt;/code&gt; output got a bit more verbose. Instead of just showing &lt;em&gt;documents&lt;/em&gt; that are
+being read, the output will now also show &lt;em&gt;pages&lt;/em&gt; and &lt;em&gt;layouts&lt;/em&gt; that are being read into the site.&lt;/p&gt;
+
+&lt;p&gt;Additionally, we have stopped overriding the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;site.url&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://localhost:4000&lt;/code&gt; in absolute URLs while developing
+via &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;As always, you can go through &lt;a href=&quot;/docs/history/#v4-2-0&quot;&gt;the full list of changes&lt;/a&gt; if you are interested in the various
+memory-allocation optimizations made to Jekyll.&lt;/p&gt;
+
+&lt;p&gt;Special thanks to our community members who helped improving Jekyll codebase and documentation from v4.1.1:
+Adam Alton, Alex Malaszkiewicz, Alexey Pelykh, Brittany Joiner, bytecode1024, Christopher Brown, Chuck Houpt,
+Corey Megown, Dan Nemenyi, Enrico Tolotto, fauno, Felix Breidenstein, Francesco Bianco, Frank Taillandier,
+Gabriel Staples, iBug, Jacobo Vidal, jaybe@jekyll, jesuslerma, jnozsc, joelkennedy, Joe Marshall, Liam Cooke,
+Lou Rectoret, Malathi, m-naumann, Nicholas Paxford, Nikita Skalkin, Parker Moore, Pratyaksh Gautam, Rachel Cheyfitz,
+SaintMalik, Seeker, Shannon Kularathna, Steven Xu, Takuya N, Thelonius Kort and Toby Glei.&lt;/p&gt;</content><author><name>ashmaroli</name></author><category term="release" /><summary type="html">Greetings Jekyllers! Jekyll v4.2.0 is out!</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.1.1 Released</title><link href="https://jekyllrb.com/news/2020/06/24/jekyll-4-1-1-released/" rel="alternate" type="text/html" title="Jekyll 4.1.1 Released" /><published>2020-06-24T04:15:35-07:00</published><updated>2020-06-24T04:15:35-07:00</updated><id>https://jekyllrb.com/news/2020/06/24/jekyll-4-1-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2020/06/24/jekyll-4-1-1-released/">&lt;p&gt;Jekyll 4.1.0 brought two notable changes: &lt;em&gt;Page-excerpts&lt;/em&gt; and &lt;em&gt;Liquid Drop for Page objects&lt;/em&gt;.
 However these seemingly benign changes had unexpected adverse side-effects which did not figure in our tests.&lt;/p&gt;
 
 &lt;p&gt;The Core team decided that the best way forward is to revert introduction of the Liquid drop for Pages but push back
@@ -298,15 +320,4 @@ advantage of &lt;a href=&quot;https://shopify.github.io/liquid/basics/whitespace
 
 &lt;p&gt;Big thanks to @kylebarbour, who first reported this issue and also very quickly
 submitted a fix. Also thanks to @nickskalkin for making sure that we are using
-the latest version of Rubocop to lint our code.&lt;/p&gt;</content><author><name>pathawks</name></author><category term="release" /><summary type="html">Hello Jekyllers!!</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 3.8.1 Released</title><link href="https://jekyllrb.com/news/2018/05/01/jekyll-3-8-1-released/" rel="alternate" type="text/html" title="Jekyll 3.8.1 Released" /><published>2018-05-01T09:56:01-07:00</published><updated>2018-05-01T09:56:01-07:00</updated><id>https://jekyllrb.com/news/2018/05/01/jekyll-3-8-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2018/05/01/jekyll-3-8-1-released/">&lt;p&gt;Happy May Day :tada:&lt;/p&gt;
-
-&lt;p&gt;The Jekyll team is happy to announce the release of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;v3.8.1&lt;/code&gt;, which fixes
-a couple of bugs that were introduced two weeks ago in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;v3.8.0&lt;/code&gt;. If you have
-experienced trouble regarding post excerpts or non-published posts, this release
-should be the remedy. Thanks to @Chaosed0 and @domLocalHeroes for originally
-reporting these issues, and to @ashmaroli for fixing them so quickly.&lt;/p&gt;
-
-&lt;p&gt;As a reminder, we have started work on Jekyll 4.0. If there are any
-features that you would love to see added to Jekyll, or any pain points you
-would like to see removed, please do add your ideas to the &lt;a href=&quot;https://github.com/jekyll/jekyll/issues/6948&quot;&gt;Jekyll 4.0 idea
-list&lt;/a&gt;.&lt;/p&gt;</content><author><name>pathawks</name></author><category term="release" /><summary type="html">Happy May Day :tada:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+the latest version of Rubocop to lint our code.&lt;/p&gt;</content><author><name>pathawks</name></author><category term="release" /><summary type="html">Hello Jekyllers!!</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

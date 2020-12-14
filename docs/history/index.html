@@ -13,24 +13,24 @@
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <!-- Begin Jekyll SEO tag v2.7.1 -->
 <title>History | Jekyll • Simple, blog-aware, static sites</title>
-<meta name="generator" content="Jekyll v4.1.1" />
+<meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="History" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="4.1.1 / 2020-06-24" />
-<meta property="og:description" content="4.1.1 / 2020-06-24" />
+<meta name="description" content="4.2.0 / 2020-12-14" />
+<meta property="og:description" content="4.2.0 / 2020-12-14" />
 <link rel="canonical" href="https://jekyllrb.com/docs/history/" />
 <meta property="og:url" content="https://jekyllrb.com/docs/history/" />
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-12-11T06:27:52-08:00" />
+<meta property="article:published_time" content="2020-12-14T04:35:01-08:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="History" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"description":"4.1.1 / 2020-06-24","url":"https://jekyllrb.com/docs/history/","image":"https://jekyllrb.com/img/jekyll-og.png","@type":"BlogPosting","headline":"History","dateModified":"2020-12-11T06:27:52-08:00","datePublished":"2020-12-11T06:27:52-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/history/"},"@context":"https://schema.org"}</script>
+{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"description":"4.2.0 / 2020-12-14","url":"https://jekyllrb.com/docs/history/","image":"https://jekyllrb.com/img/jekyll-og.png","@type":"BlogPosting","headline":"History","dateModified":"2020-12-14T04:35:01-08:00","datePublished":"2020-12-14T04:35:01-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/history/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -62,7 +62,7 @@
 </div>
     <div class="meta hide-on-mobiles">
       <ul>
-        <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.1.1">v4.1.1</a></li>
+        <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.2.0">v4.2.0</a></li>
         <li><a href="https://github.com/jekyll/jekyll">GitHub</a></li>
       </ul>
     </div>
@@ -127,7 +127,124 @@
           <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/history.md"><i class="fa fa-pencil"></i>  Improve this page</a>
         </div>
         <h1>History</h1>
-        <h2 id="v4-1-1">4.1.1 / 2020-06-24</h2>
+        <h2 id="v4-2-0">4.2.0 / 2020-12-14</h2>
+
+<h3 id="minor-enhancements-v4-2-0">Minor Enhancements</h3>
+
+<ul>
+  <li>Warn on command-line with permalink conflict (<a href="https://github.com/jekyll/jekyll/issues/8342">#8342</a>)</li>
+  <li>Supress warning issued for redirect pages (<a href="https://github.com/jekyll/jekyll/issues/8347">#8347</a>)</li>
+  <li>Enhance detection of conflicting destination URLs (<a href="https://github.com/jekyll/jekyll/issues/8459">#8459</a>)</li>
+  <li>Add <code class="language-plaintext highlighter-rouge">:post_convert</code> hook to modify HTML content before layout (<a href="https://github.com/jekyll/jekyll/issues/8368">#8368</a>)</li>
+  <li>Allow triggering <code class="language-plaintext highlighter-rouge">:post_convert</code> events atomically (<a href="https://github.com/jekyll/jekyll/issues/8465">#8465</a>)</li>
+  <li>Debug reading Page and Layout objects (<a href="https://github.com/jekyll/jekyll/issues/8100">#8100</a>)</li>
+  <li>Do not reset <code class="language-plaintext highlighter-rouge">site.url</code> to <code class="language-plaintext highlighter-rouge">http://localhost:4000</code> by default (<a href="https://github.com/jekyll/jekyll/issues/7253">#7253</a>)</li>
+  <li>Add custom debug strings for Jekyll objects (<a href="https://github.com/jekyll/jekyll/issues/8473">#8473</a>)</li>
+  <li>Debug reading data files in a site (<a href="https://github.com/jekyll/jekyll/issues/8481">#8481</a>)</li>
+</ul>
+
+<h3 id="bug-fixes-v4-2-0">Bug Fixes</h3>
+
+<ul>
+  <li>Replace nested conditional with guard clauses (<a href="https://github.com/jekyll/jekyll/issues/8294">#8294</a>)</li>
+  <li>Fix: security bump (<a href="https://github.com/jekyll/jekyll/issues/8349">#8349</a>)</li>
+  <li>Fix path matching regex in post_url Liquid tag (<a href="https://github.com/jekyll/jekyll/issues/8375">#8375</a>)</li>
+  <li>Enable <code class="language-plaintext highlighter-rouge">Performance/ChainArrayAllocation</code> cop (<a href="https://github.com/jekyll/jekyll/issues/8404">#8404</a>)</li>
+  <li>Enable Lint/NoReturnInBeginEndBlocks Cop (<a href="https://github.com/jekyll/jekyll/issues/8457">#8457</a>)</li>
+  <li>Generate items from <code class="language-plaintext highlighter-rouge">site.include</code> list only once (<a href="https://github.com/jekyll/jekyll/issues/8463">#8463</a>)</li>
+  <li>Explicitly return nil after site process phase (<a href="https://github.com/jekyll/jekyll/issues/8472">#8472</a>)</li>
+</ul>
+
+<h3 id="optimization-fixes-v4-2-0">Optimization Fixes</h3>
+
+<ul>
+  <li>Implement custom delegators for drop methods (<a href="https://github.com/jekyll/jekyll/issues/8183">#8183</a>)</li>
+  <li>Handle <code class="language-plaintext highlighter-rouge">nil</code> argument to <code class="language-plaintext highlighter-rouge">Jekyll.sanitized_path</code> (<a href="https://github.com/jekyll/jekyll/issues/8415">#8415</a>)</li>
+  <li>Cache <code class="language-plaintext highlighter-rouge">Jekyll.sanitized_path</code> (<a href="https://github.com/jekyll/jekyll/issues/8424">#8424</a>)</li>
+  <li>Memoize array of drop getter method names (<a href="https://github.com/jekyll/jekyll/issues/8421">#8421</a>)</li>
+  <li>Reduce string allocations from the <code class="language-plaintext highlighter-rouge">link</code> tag (<a href="https://github.com/jekyll/jekyll/issues/8387">#8387</a>)</li>
+  <li>Optimize parsing of parameters in <code class="language-plaintext highlighter-rouge">include</code> tag (<a href="https://github.com/jekyll/jekyll/issues/8192">#8192</a>)</li>
+  <li>Stash documents <code class="language-plaintext highlighter-rouge">write?</code> attribute in a variable (<a href="https://github.com/jekyll/jekyll/issues/8389">#8389</a>)</li>
+  <li>Reduce string allocations from generating doc URLs (<a href="https://github.com/jekyll/jekyll/issues/8392">#8392</a>)</li>
+  <li>Check if site is in incremental mode optimally (<a href="https://github.com/jekyll/jekyll/issues/8401">#8401</a>)</li>
+  <li>Utilize flexibility of <code class="language-plaintext highlighter-rouge">Site#in_dest_dir</code> (<a href="https://github.com/jekyll/jekyll/issues/8403">#8403</a>)</li>
+  <li>Reduce allocations from rendering item as liquid (<a href="https://github.com/jekyll/jekyll/issues/8406">#8406</a>)</li>
+  <li>Compute relative_path of pages using PathManager (<a href="https://github.com/jekyll/jekyll/issues/8408">#8408</a>)</li>
+  <li>Reduce allocation from <code class="language-plaintext highlighter-rouge">normalize_whitespace</code> filter (<a href="https://github.com/jekyll/jekyll/issues/8400">#8400</a>)</li>
+  <li>Use <code class="language-plaintext highlighter-rouge">Regexp#match?</code> when <code class="language-plaintext highlighter-rouge">MatchData</code> is not required (<a href="https://github.com/jekyll/jekyll/issues/8427">#8427</a>)</li>
+  <li>Check default front matter scope against symbols (<a href="https://github.com/jekyll/jekyll/issues/8393">#8393</a>)</li>
+  <li>Stash frequently used <code class="language-plaintext highlighter-rouge">Drop</code> setter keys for reuse (<a href="https://github.com/jekyll/jekyll/issues/8394">#8394</a>)</li>
+  <li>Memoize defaults computed for Convertibles (<a href="https://github.com/jekyll/jekyll/issues/8451">#8451</a>)</li>
+  <li>Reduce array allocations from merging categories (<a href="https://github.com/jekyll/jekyll/issues/8453">#8453</a>)</li>
+  <li>Memoize destination of pages, documents and staticfiles (<a href="https://github.com/jekyll/jekyll/issues/8458">#8458</a>)</li>
+  <li>Reduce allocations from computing item property (<a href="https://github.com/jekyll/jekyll/issues/8485">#8485</a>)</li>
+  <li>Optimize <code class="language-plaintext highlighter-rouge">Page#dir</code> with a private method (<a href="https://github.com/jekyll/jekyll/issues/8489">#8489</a>)</li>
+  <li>Stash attribute hash for Liquid computed for pages (<a href="https://github.com/jekyll/jekyll/issues/8497">#8497</a>)</li>
+</ul>
+
+<h3 id="development-fixes-v4-2-0">Development Fixes</h3>
+
+<ul>
+  <li>Update cucumber gem to version 4.1 (<a href="https://github.com/jekyll/jekyll/issues/8278">#8278</a>)</li>
+  <li>Move permalink styles data to constant (<a href="https://github.com/jekyll/jekyll/issues/8282">#8282</a>)</li>
+  <li>Update rubocop gem to 0.87.1 (<a href="https://github.com/jekyll/jekyll/issues/8287">#8287</a>)</li>
+  <li>Update RuboCop to-do file (<a href="https://github.com/jekyll/jekyll/issues/8296">#8296</a>)</li>
+  <li>Fix <code class="language-plaintext highlighter-rouge">rake console</code> generating LoadError (<a href="https://github.com/jekyll/jekyll/issues/8312">#8312</a>)</li>
+  <li>Configure Performance cops (<a href="https://github.com/jekyll/jekyll/issues/8369">#8369</a>)</li>
+  <li>Update rubocop gem to 0.90.0 (<a href="https://github.com/jekyll/jekyll/issues/8313">#8313</a>)</li>
+  <li>Refactor <code class="language-plaintext highlighter-rouge">Jekyll::Utils::Platforms</code> (<a href="https://github.com/jekyll/jekyll/issues/7236">#7236</a>)</li>
+  <li>Bump RuboCop to v0.91.x (<a href="https://github.com/jekyll/jekyll/issues/8391">#8391</a>)</li>
+  <li>Add workflow to build and profile third-party repo (<a href="https://github.com/jekyll/jekyll/issues/8398">#8398</a>)</li>
+  <li>Bump RuboCop to v0.92.x</li>
+  <li>Update cucumber gem version to 5.1.2 (<a href="https://github.com/jekyll/jekyll/issues/8413">#8413</a>)</li>
+  <li>Fix test suite compatibility with JRuby (<a href="https://github.com/jekyll/jekyll/issues/8418">#8418</a>)</li>
+  <li>chore(deps): bump Rubocop to 0.93.0 (<a href="https://github.com/jekyll/jekyll/issues/8430">#8430</a>)</li>
+  <li>Use Ruby 2.7.1 in GitHub Actions (<a href="https://github.com/jekyll/jekyll/issues/8444">#8444</a>)</li>
+  <li>Test that Liquid expressions are not deeply evaled (<a href="https://github.com/jekyll/jekyll/issues/8292">#8292</a>)</li>
+  <li>Test rendering arbitrary Liquid variables by default (<a href="https://github.com/jekyll/jekyll/issues/7414">#7414</a>)</li>
+  <li>Migrate TravisCI jobs to GitHub Actions (<a href="https://github.com/jekyll/jekyll/issues/8492">#8492</a>)</li>
+</ul>
+
+<h3 id="documentation">Documentation</h3>
+
+<ul>
+  <li>Update pointer to special permalink variables for collections (<a href="https://github.com/jekyll/jekyll/issues/8274">#8274</a>)</li>
+  <li>Fix special treatment for 'page 1' in docs of pagination (<a href="https://github.com/jekyll/jekyll/issues/8230">#8230</a>)</li>
+  <li>Add Formcake to forms section (<a href="https://github.com/jekyll/jekyll/issues/8283">#8283</a>)</li>
+  <li>Add a note on the rendering process in the docs (<a href="https://github.com/jekyll/jekyll/issues/8291">#8291</a>)</li>
+  <li>Add refactoring type to PULL_REQUEST_TEMPLATE (<a href="https://github.com/jekyll/jekyll/issues/8297">#8297</a>)</li>
+  <li>Update resources.md (<a href="https://github.com/jekyll/jekyll/issues/7864">#7864</a>)</li>
+  <li>Extra apostrophes in an URL (<a href="https://github.com/jekyll/jekyll/issues/8319">#8319</a>)</li>
+  <li>Clarify target of subordinate clause (<a href="https://github.com/jekyll/jekyll/issues/8320">#8320</a>)</li>
+  <li>Cherry-pick commits from conflicting branch <code class="language-plaintext highlighter-rouge">docs-40</code>
+</li>
+  <li>Update documentation on third party site (<a href="https://github.com/jekyll/jekyll/issues/8352">#8352</a>)</li>
+  <li>Update default.md with info requested in <a href="https://github.com/jekyll/jekyll/issues/8314">#8314</a> (<a href="https://github.com/jekyll/jekyll/issues/8353">#8353</a>)</li>
+  <li>Clarify description of <code class="language-plaintext highlighter-rouge">safe</code> option (<a href="https://github.com/jekyll/jekyll/issues/8354">#8354</a>)</li>
+  <li>Simplifying the Git post-receive hook-example (<a href="https://github.com/jekyll/jekyll/issues/8358">#8358</a>)</li>
+  <li>Add missing doc for build and serve commands (<a href="https://github.com/jekyll/jekyll/issues/8365">#8365</a>)</li>
+  <li>Docs Review: Getting Started (<a href="https://github.com/jekyll/jekyll/issues/8372">#8372</a>)</li>
+  <li>Add note about rebooting system after installation (<a href="https://github.com/jekyll/jekyll/issues/8359">#8359</a>)</li>
+  <li>Use data file to render table at <code class="language-plaintext highlighter-rouge">/docs/configuration/options/#global-configuration</code> (<a href="https://github.com/jekyll/jekyll/issues/8377">#8377</a>)</li>
+  <li>Use data file(s) to render table(s) at <code class="language-plaintext highlighter-rouge">/docs/configuration/options/</code> (<a href="https://github.com/jekyll/jekyll/issues/8380">#8380</a>)</li>
+  <li>Improve maintainability of config option data (<a href="https://github.com/jekyll/jekyll/issues/8383">#8383</a>)</li>
+  <li>Remove CircleCI v1 docs (<a href="https://github.com/jekyll/jekyll/issues/8410">#8410</a>)</li>
+  <li>Remove <code class="language-plaintext highlighter-rouge">NOKOGIRI_USE_SYSTEM_LIBRARIES</code> from Travis CI docs (<a href="https://github.com/jekyll/jekyll/issues/8409">#8409</a>)</li>
+  <li>Add links to all Jekyll themes on GitHub tagged with #jekyll-theme (<a href="https://github.com/jekyll/jekyll/issues/8447">#8447</a>)</li>
+  <li>Document initializing project Gemfile from scratch (<a href="https://github.com/jekyll/jekyll/issues/8450">#8450</a>)</li>
+  <li>Document installation of additional dependencies for installing Jekyll on Fedora (<a href="https://github.com/jekyll/jekyll/issues/8456">#8456</a>)</li>
+  <li>Improve documentation on Hooks in Jekyll (<a href="https://github.com/jekyll/jekyll/issues/8467">#8467</a>)</li>
+  <li>Build docs site with GitHub Actions (<a href="https://github.com/jekyll/jekyll/issues/8201">#8201</a>)</li>
+  <li>Add link to Assets page from <code class="language-plaintext highlighter-rouge">_sass</code> section in <code class="language-plaintext highlighter-rouge">_docs/structure.md</code> (<a href="https://github.com/jekyll/jekyll/issues/8486">#8486</a>)</li>
+</ul>
+
+<h3 id="site-enhancements-v4-2-0">Site Enhancements</h3>
+
+<ul>
+  <li>Fix rendering of <em>showcase</em> images (<a href="https://github.com/jekyll/jekyll/issues/8504">#8504</a>)</li>
+</ul>
+
+<h2 id="v4-1-1">4.1.1 / 2020-06-24</h2>
 
 <h3 id="bug-fixes-v4-1-1">Bug Fixes</h3>
 
@@ -138,7 +255,7 @@
   <li>Make page excerpts consistent with doc excerpts (<a href="https://github.com/jekyll/jekyll/issues/8236">#8236</a>)</li>
 </ul>
 
-<h3 id="documentation">Documentation</h3>
+<h3 id="documentation-1">Documentation</h3>
 
 <ul>
   <li>Replace deprecated 'show' command with 'info' (<a href="https://github.com/jekyll/jekyll/issues/8235">#8235</a>)</li>
@@ -221,7 +338,7 @@
   <li>Add <code class="language-plaintext highlighter-rouge">:slugified_categories</code> URL placeholder (<a href="https://github.com/jekyll/jekyll/issues/8094">#8094</a>)</li>
 </ul>
 
-<h3 id="documentation-1">Documentation</h3>
+<h3 id="documentation-2">Documentation</h3>
 
 <ul>
   <li>Add dropped ‘title: Staff’ to the code (<a href="https://github.com/jekyll/jekyll/issues/7805">#7805</a>)</li>
@@ -538,7 +655,7 @@
   <li>Use String#end_with? to check if entry is a backup (<a href="https://github.com/jekyll/jekyll/issues/7701">#7701</a>)</li>
 </ul>
 
-<h3 id="documentation-2">Documentation</h3>
+<h3 id="documentation-3">Documentation</h3>
 
 <ul>
   <li>Refactor docs (<a href="https://github.com/jekyll/jekyll/issues/7205">#7205</a>)</li>
@@ -784,7 +901,7 @@
   <li>Optimize computing filename in LiquidRenderer (<a href="https://github.com/jekyll/jekyll/issues/6841">#6841</a>)</li>
 </ul>
 
-<h3 id="documentation-3">Documentation</h3>
+<h3 id="documentation-4">Documentation</h3>
 
 <ul>
   <li>Adding the jekyll-algolia plugin to the list of plugins (<a href="https://github.com/jekyll/jekyll/issues/6737">#6737</a>)</li>
@@ -873,7 +990,7 @@
   <li>Update version in <code class="language-plaintext highlighter-rouge">config.yml</code> via YAML load / dump (<a href="https://github.com/jekyll/jekyll/issues/6677">#6677</a>)</li>
 </ul>
 
-<h3 id="documentation-4">Documentation</h3>
+<h3 id="documentation-5">Documentation</h3>
 
 <ul>
   <li>Fix: Add note about posts in context of collections_dir (<a href="https://github.com/jekyll/jekyll/issues/6680">#6680</a>)</li>
@@ -974,7 +1091,7 @@
   <li>Cleanup LiveReloadReactor (<a href="https://github.com/jekyll/jekyll/issues/6607">#6607</a>)</li>
 </ul>
 
-<h3 id="documentation-5">Documentation</h3>
+<h3 id="documentation-6">Documentation</h3>
 
 <ul>
   <li>Add formester to the list of saas form backend (<a href="https://github.com/jekyll/jekyll/issues/6059">#6059</a>)</li>
@@ -1061,7 +1178,7 @@
 
 <h2 id="v3-6-1">3.6.1 / 2017-10-20</h2>
 
-<h3 id="documentation-6">Documentation</h3>
+<h3 id="documentation-7">Documentation</h3>
 
 <ul>
   <li>Doc y_day in docs/permalinks (<a href="https://github.com/jekyll/jekyll/issues/6244">#6244</a>)</li>
@@ -1115,7 +1232,7 @@
   <li>Don't break if bundler is not installed (<a href="https://github.com/jekyll/jekyll/issues/6377">#6377</a>)</li>
 </ul>
 
-<h3 id="documentation-7">Documentation</h3>
+<h3 id="documentation-8">Documentation</h3>
 
 <ul>
   <li>Fix a typo in <code class="language-plaintext highlighter-rouge">custom-404-page.md</code> (<a href="https://github.com/jekyll/jekyll/issues/6218">#6218</a>)</li>
@@ -1193,7 +1310,7 @@
   <li>Always normalize the result of the <code class="language-plaintext highlighter-rouge">relative_url</code> filter (<a href="https://github.com/jekyll/jekyll/issues/6185">#6185</a>)</li>
 </ul>
 
-<h3 id="documentation-8">Documentation</h3>
+<h3 id="documentation-9">Documentation</h3>
 
 <ul>
   <li>Update reference to trouble with OS X/macOS (<a href="https://github.com/jekyll/jekyll/issues/6139">#6139</a>)</li>
@@ -1240,7 +1357,7 @@
   <li>Add strip_index filter (<a href="https://github.com/jekyll/jekyll/issues/6075">#6075</a>)</li>
 </ul>
 
-<h3 id="documentation-9">Documentation</h3>
+<h3 id="documentation-10">Documentation</h3>
 
 <ul>
   <li>Install troubleshooting on Ubuntu (<a href="https://github.com/jekyll/jekyll/issues/5817">#5817</a>)</li>
@@ -1461,7 +1578,7 @@
   <li>Bump codeclimate-test-reporter to v1.0.5 (<a href="https://github.com/jekyll/jekyll/issues/5798">#5798</a>)</li>
 </ul>
 
-<h3 id="documentation-10">Documentation</h3>
+<h3 id="documentation-11">Documentation</h3>
 
 <ul>
   <li>Improve quickstart docs (<a href="https://github.com/jekyll/jekyll/issues/5689">#5689</a>)</li>
