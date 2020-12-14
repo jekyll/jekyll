@@ -1,6 +1,6 @@
 ---
 title: "Jekyll 4.2.0 Released"
-date: 2020-12-14 09:35:35 +0100
+date: 2020-12-14 14:12:20 +0530
 author: ashmaroli
 version: 4.2.0
 category: release
