@@ -45,4 +45,4 @@ module Jekyll
   end
 end
 
-Liquid::Template.register_tag(Jekyll::Tags::RelativeLink.tag_name, Jekyll::Tags::Link)
+Liquid::Template.register_tag(Jekyll::Tags::RelativeLink.tag_name, Jekyll::Tags::RelativeLink)
