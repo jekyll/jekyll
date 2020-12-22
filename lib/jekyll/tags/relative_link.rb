@@ -17,8 +17,15 @@ module Jekyll
         @relative_path = relative_path.strip
       end
 
+      def dir(url)
+        if url.end_with?("/")
+          return Pathname(url)
+        end
+        Pathname(url).parent
+      end
+
       def relativize_url(item)
-        page_dir = Pathname(@context.registers[:page]["dir"])
+        page_dir = dir(@context.registers[:page]["url"].to_s)
         site_relative_url = relative_url(item)
         Pathname(site_relative_url).relative_path_from(page_dir).to_s
       end
