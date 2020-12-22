@@ -20,7 +20,7 @@ module Jekyll
       def relativize_url(item)
         page_dir = Pathname(@context.registers[:page]["dir"])
         site_relative_url = relative_url(item)
-        return Pathname(site_relative_url).relative_path_from(page_dir).to_s
+        Pathname(site_relative_url).relative_path_from(page_dir).to_s
       end
 
       def render(context)
