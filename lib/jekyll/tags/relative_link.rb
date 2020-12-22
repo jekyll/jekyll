@@ -18,10 +18,7 @@ module Jekyll
       end
 
       def dir(url)
-        if url.end_with?("/")
-          return Pathname(url)
-        end
-        Pathname(url).parent
+        url.end_with?("/") ? Pathname(url) : Pathname(url).parent
       end
 
       def relativize_url(item)
