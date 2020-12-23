@@ -18,9 +18,11 @@ By the end of the tutorial, you'll expose the following API:
 
 Let's dive in!
 
+---
+
 # Setup
 
-First, you need to go through an installation process. Having that, you can initialize a new Jekyll project. In your directory of choice, invoke the following:
+First, you need to go through an [installation]({% link _docs/installation.md %}) process. Having that, you can initialize a new Jekyll project. In your directory of choice, invoke the following:
 
 ```sh
 bundle init
@@ -30,13 +32,15 @@ bundle exec jekyll new --force --skip-bundle .
 bundle install
 ```
 
-* Initialize a new Ruby bundle.
+* Initialize a new Ruby [bundle](https://bundler.io).
 * Instruct Bundler to install dependencies locally.
 * Add Jekyll as a dependency.
 * Create a new scaffold for the project. 
 * Install dependencies.
 
 Now, you need to do some clean up. 
+
+---
 
 # Configuration
 
@@ -81,7 +85,7 @@ categories: ["update", "tutorial"]
 
 This one belongs to two categories --- `update` and `tutorial`, and doesn't include the custom property. Because the categories overlap, it will be possible to test getting a list of posts from a category.
 
-You'll also need a couple of templates. Just add these empty files for now --- you'll fill (one of) them later:
+You'll also need a couple of layouts. Just add these empty files for now --- you'll fill (one of) them later:
 
 ```
 .
@@ -102,13 +106,15 @@ defaults:
       layout: "default"
 ```
 
-Since you won't have any pages in your project, leave the `path` to `""` in order to cover every file.
+Since you won't have any pages in your project, leave the `path` to `""` in order to [cover]({% link _docs/configuration/front-matter-defaults.md %}) every file.
+
+---
 
 # Convert Posts to JSON
 My approach is a little hacky --- it requires you to specify a JSON output format in a HTML template. The only thing you miss is that your text editor will most probably not recognize the markup file as a properly formatted JSON document. 
 
 ## Define the Template
-Before you do it, it's worth noting that you can list all available properties with this little template, which returns an array of available keys:
+Before you do it, it's worth noting that you can list all the available properties with this little template, which returns an array of available keys:
 
 ```liquid
 {% raw %}{{ page.keys | jsonify }}{% endraw %}
@@ -139,8 +145,8 @@ Given that, I'd like you to enter the following template instead of the aforemen
     "custom-property": {{ page.custom-property | jsonify }}
 }{% endraw %}
 ```
-* Pass every property through a jsonify filter. This will add quotation marks for us, convert arrays into strings and escape quotation marks.
-* For content, turn Markdown-formatted string into HTML using markdownify filter.
+* Pass every property through a jsonify [filter]({% link _docs/liquid/filters.md %}#data-to-json). This will add quotation marks for us, convert arrays into strings and escape quotation marks.
+* For content, turn Markdown-formatted string into HTML using [markdownify]({% link _docs/liquid/filters.md %}#markdownify) filter.
 * Fetch the falue of custom-property variable that you've defined earlier. If it doesn't exist on a post, a null value will be returned.
 
 If you enter `bundle exec jekyll build` command again, you'd get the following output:
@@ -157,26 +163,6 @@ If you enter `bundle exec jekyll build` command again, you'd get the following o
 }
 ```
 
-But, there's another trick. Using [hooks]({% link _docs/plugins/hooks.md %}), you can remove all whitespaces!
-
-## Remove Whitespaces
-
-Before a post is rendered, you can squeeze some custom logic in:
-
-```ruby
-Jekyll::Hooks.register :posts, :post_render do |post|
-  post.output = JSON.generate(JSON.parse(post.output))
-end
-```
-
-* Register for a `post_render` event owned by `posts`.
-* With every post, parse the JSON layout you've defined before and generate a new JSON string from it. It will remove all whitespace characters for you.
-
-After building the site, you'd get the following:
-
-```json
-{"title":"The First Post","categories":["update"],"tags":[],"content":"<p>1</p>\n","collection":"posts","date":"2020-12-20 00:00:00 +0100","custom-property":"My custom property"}
-```
 ## Create a Plugin
 
 The rest of the work can be done using a custom plugin. For now, it only needs to convert the output file extension from default `.html` to `.json`. Under `_plugins`, create a new `api_generator.rb` file:
@@ -210,6 +196,27 @@ end
 * `matches` --- a file extension to match. You target Markdown files, so it should match a filename `*.md`. Optionally, you could add `.markdown` etc.
 * `output_ext` --- a method that returns an output extension --- `.json` in our case.
 * `convert` --- a function that takes post content **transpiled into HTML** as an argument. Please note that it doesn't parse the file through a template.
+
+## Remove Whitespaces
+
+But, there's another trick. Using [hooks]({% link _docs/plugins/hooks.md %}), you can remove all whitespaces! Before a post is rendered, you can squeeze some custom logic in:
+
+```ruby
+Jekyll::Hooks.register :posts, :post_render do |post|
+  post.output = JSON.generate(JSON.parse(post.output))
+end
+```
+
+* Register for a `post_render` event owned by `posts`.
+* With every post, parse the JSON layout you've defined before and generate a new JSON string from it. It will remove all whitespace characters for you.
+
+After building the site, you'd get the following:
+
+```json
+{"title":"The First Post","categories":["update"],"tags":[],"content":"<p>1</p>\n","collection":"posts","date":"2020-12-20 00:00:00 +0100","custom-property":"My custom property"}
+``` 
+
+---
 
 # Generate Listings
 
@@ -250,7 +257,7 @@ end
 * `read_yaml` is only needed to define some instance variable for us. It's just simpler than doing it by hand. You can use any other layout as rendered content will be overwritten.
 * Overwrite content with JSON generated from a [hash](https://ruby-doc.org/core-2.7.2/Hash.html) provided in the `data` argument.
 
-# Generate Pages
+## Generate Pages
 
 The last class you'll write is a [generator]({% link _docs/plugins/generators.md %}) that creates listings for you. It's the last piece of code in this tutorial. It's rather lengthy, but really simple in principle:
 
