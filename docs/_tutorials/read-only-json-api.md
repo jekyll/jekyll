@@ -18,8 +18,6 @@ By the end of the tutorial, you'll expose the following API:
 
 Let's dive in!
 
----
-
 ## Setup
 
 First, you need to go through an [installation]({% link _docs/installation.md %}) process. Having that, you can initialize a new Jekyll project. In your directory of choice, invoke the following:
@@ -39,8 +37,6 @@ bundle install
 * Install dependencies.
 
 Now, you need to do some clean up. 
-
----
 
 ## Configuration
 
@@ -107,8 +103,6 @@ defaults:
 ```
 
 Since you won't have any pages in your project, leave the `path` to `""` in order to [cover]({% link _docs/configuration/front-matter-defaults.md %}) every file.
-
----
 
 ## Convert Posts to JSON
 My approach is a little hacky --- it requires you to specify a JSON output format in a HTML template. The only thing you miss is that your text editor will most probably not recognize the markup file as a properly formatted JSON document. 
@@ -215,8 +209,6 @@ After building the site, you'd get the following:
 ```json
 {"title":"The First Post","categories":["update"],"tags":[],"content":"<p>1</p>\n","collection":"posts","date":"2020-12-20 00:00:00 +0100","custom-property":"My custom property"}
 ``` 
-
----
 
 ## Generate Listings
 
