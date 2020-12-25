@@ -20,7 +20,7 @@ Let's dive in!
 
 ---
 
-# Setup
+## Setup
 
 First, you need to go through an [installation]({% link _docs/installation.md %}) process. Having that, you can initialize a new Jekyll project. In your directory of choice, invoke the following:
 
@@ -42,7 +42,7 @@ Now, you need to do some clean up. 
 
 ---
 
-# Configuration
+## Configuration
 
 There are some things in the bundle that you won't need:
 
@@ -110,10 +110,10 @@ Since you won't have any pages in your project, leave the `path` to `""` in orde
 
 ---
 
-# Convert Posts to JSON
+## Convert Posts to JSON
 My approach is a little hacky --- it requires you to specify a JSON output format in a HTML template. The only thing you miss is that your text editor will most probably not recognize the markup file as a properly formatted JSON document. 
 
-## Define the Template
+### Define the Template
 Before you do it, it's worth noting that you can list all the available properties with this little template, which returns an array of available keys:
 
 ```liquid
@@ -163,7 +163,7 @@ If you enter `bundle exec jekyll build` command again, you'd get the following o
 }
 ```
 
-## Create a Plugin
+### Create a Plugin
 
 The rest of the work can be done using a custom plugin. For now, it only needs to convert the output file extension from default `.html` to `.json`. Under `_plugins`, create a new `api_generator.rb` file:
 
@@ -197,7 +197,7 @@ end
 * `output_ext` --- a method that returns an output extension --- `.json` in our case.
 * `convert` --- a function that takes post content **transpiled into HTML** as an argument. Please note that it doesn't parse the file through a template.
 
-## Remove Whitespaces
+### Remove Whitespaces
 
 But, there's another trick. Using [hooks]({% link _docs/plugins/hooks.md %}), you can remove all whitespaces! Before a post is rendered, you can squeeze some custom logic in:
 
@@ -218,11 +218,11 @@ After building the site, you'd get the following:
 
 ---
 
-# Generate Listings
+## Generate Listings
 
 The last step is to generate categories and an index of all posts.
 
-## Define a Page
+### Define a Page
 
 In `api_generator.rb`, add the following class as a part of `Jekyll` module:
 
@@ -257,7 +257,7 @@ end
 * `read_yaml` is only needed to define some instance variable for us. It's just simpler than doing it by hand. You can use any other layout as rendered content will be overwritten.
 * Overwrite content with JSON generated from a [hash](https://ruby-doc.org/core-2.7.2/Hash.html) provided in the `data` argument.
 
-## Generate Pages
+### Generate Pages
 
 The last class you'll write is a [generator]({% link _docs/plugins/generators.md %}) that creates listings for you. It's the last piece of code in this tutorial. It's rather lengthy, but really simple in principle:
 
