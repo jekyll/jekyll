@@ -3,7 +3,7 @@ title: Read-Only JSON API
 author: izdwuut
 date: 2020-12-23 10:04:00 +0100
 ---
-
+{% raw %}
 There shouldn't be a necessity to explain what is the [API](https://en.wikipedia.org/wiki/API). I assume that you've landed here to learn it in a context of Jekyll. Let's jump straight to the actual thing, shall we?
 
 A huge inspiration to write this tutorial was a [post](https://forestry.io/blog/build-a-json-api-with-hugo/) written by [Régis Philibert](https://forestry.io/authors/r%C3%A9gis-philibert/). It's about doing the exact same thing in [Hugo](https://gohugo.io/).
@@ -117,7 +117,7 @@ My approach is a little hacky --- it requires you to specify a JSON output f
 Before you do it, it's worth noting that you can list all the available properties with this little template, which returns an array of available keys:
 
 ```liquid
-{% raw %}{{ page.keys | jsonify }}{% endraw %}
+{{ page.keys | jsonify }}
 ```
 
 If you enter it in a `default.html` template and execute the following command:
@@ -135,7 +135,7 @@ You'll get this in `/_site/update/2020/12/20/the-first-post.html`:
 Given that, I'd like you to enter the following template instead of the aforementioned one-liner:
 
 ```liquid
-{% raw %}{
+{
     "title": {{ page.title | jsonify }},
     "categories": {{ page.categories | jsonify }},
     "tags": {{ page.tags | jsonify }},
@@ -143,7 +143,7 @@ Given that, I'd like you to enter the following template instead of the aforemen
     "collection": {{ page.collection | jsonify }},
     "date": {{ page.date | jsonify }},
     "custom-property": {{ page.custom-property | jsonify }}
-}{% endraw %}
+}
 ```
 * Pass every property through a jsonify [filter]({% link _docs/liquid/filters.md %}#data-to-json). This will add quotation marks for us, convert arrays into strings and escape quotation marks.
 * For content, turn Markdown-formatted string into HTML using [markdownify]({% link _docs/liquid/filters.md %}#markdownify) filter.
@@ -319,3 +319,4 @@ And that's it! If you hit `bundle exec jekyll build` again, you'd get the follow
 │   │   │   ├── update
 │   │   │   │   └── index.json
 ```
+{% endraw %}
