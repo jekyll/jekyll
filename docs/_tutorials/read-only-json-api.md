@@ -3,9 +3,9 @@ title: Read-Only JSON API
 author: izdwuut
 date: 2020-12-23 10:04:00 +0100
 ---
-{% raw %}
 In this tutorial, you'll create a kind of a [REST](https://restfulapi.net/) [API](https://en.wikipedia.org/wiki/API) serving static [JSON](https://www.json.org/json-en.html) files generated from Markdown posts in your Jekyll site.
 
+{% raw %}
 JSON is a popular cross-language method of transferring data on the web, without all the presentation layer of HTML. The files you output will be similar to a REST API in a server-side language like Ruby, Python or Node. You'll be able to see them directly in the browser as `/foo.json`. They can be used to build a custom frontend using Angular, React, Vue and so on.
 
 A huge inspiration to write this tutorial was a [post](https://forestry.io/blog/build-a-json-api-with-hugo/) written by [Régis Philibert](https://forestry.io/authors/r%C3%A9gis-philibert/). It's about doing the exact same thing in [Hugo](https://gohugo.io/).
