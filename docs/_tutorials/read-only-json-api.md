@@ -4,11 +4,13 @@ author: izdwuut
 date: 2020-12-23 10:04:00 +0100
 ---
 {% raw %}
-There shouldn't be a necessity to explain what is the [API](https://en.wikipedia.org/wiki/API). I assume that you've landed here to learn it in a context of Jekyll. Let's jump straight to the actual thing, shall we?
+In this tutorial, you'll create a kind of a [REST](https://restfulapi.net/) [API](https://en.wikipedia.org/wiki/API) serving static [JSON](https://www.json.org/json-en.html) files generated from Markdown posts in your Jekyll site.
+
+JSON is a popular cross-language method of transferring data on the web, without all the presentation layer of HTML. The files you output will be similar to a REST API in a server-side language like Ruby, Python or Node. You'll be able to see them directly in the browser as `/foo.json`. They can be used to build a custom frontend using Angular, React, Vue and so on.
 
 A huge inspiration to write this tutorial was a [post](https://forestry.io/blog/build-a-json-api-with-hugo/) written by [Régis Philibert](https://forestry.io/authors/r%C3%A9gis-philibert/). It's about doing the exact same thing in [Hugo](https://gohugo.io/).
 
-I hope that my solution in Jekyll is elegant, too. You just need to define some [layouts]({% link _docs/layouts.md %}) and write a [plugin]({% link _docs/plugins.md %}) to convert your content to JSON. **Don't be afraid if you're not familiar with Ruby** --- the language that Jekyll is written in. It's similar to Python, and you'll get a hang of it quickly.
+I hope that this solution in Jekyll is elegant, too. You just need to define some [layouts]({% link _docs/layouts.md %}) and write a [plugin]({% link _docs/plugins.md %}) to convert your content to JSON. **Don't be afraid if you're not familiar with Ruby** --- the language that Jekyll is written in. It's similar to Python, and you'll get a hang of it quickly.
 
 By the end of the tutorial, you'll expose the following API:
 * `/` --- an index of all posts
@@ -20,41 +22,25 @@ Let's dive in!
 
 ## Setup
 
-First, you need to go through an [installation]({% link _docs/installation.md %}) process. Having that, you can initialize a new Jekyll project. In your directory of choice, invoke the following:
-
-```sh
-bundle init
-bundle config set --local path 'vendor/bundle'
-bundle add jekyll
-bundle exec jekyll new --force --skip-bundle .
-bundle install
-```
-
-* Initialize a new Ruby [bundle](https://bundler.io).
-* Instruct Bundler to install dependencies locally.
-* Add Jekyll as a dependency.
-* Create a new scaffold for the project. 
-* Install dependencies.
-
-Now, you need to do some clean up. 
-
-## Configuration
-
-There are some things in the bundle that you won't need:
+First, you need to go through an [installation]({% link _docs/installation.md %}) process. Having that, you can initialize a new Jekyll project by invoking `bundle exec jekyll new` command. Then you need to create the following directory structure:
 
 ```
 .
 ├── site
-│   ├── index.markdown
-│   ├── about.markdown
-│   ├── 404.html
+│   ├── config.yml
+│   ├── _layouts
+│   │   ├── category.html
+│   │   └── default.html
+│   ├── _plugins
+│   │   └── api_generator.rb
 │   ├── _posts
-│   │   └── 2020-12-19-welcome-to-jekyll.markdown
+│   │   ├── 2020–12–20-the-first-post.md
+│   │   └── 2020–12–20-the-second-post.md
 ```
 
 Unless you self-host your site, **you can rely on a generic 404 response from your server**. You no longer need `index` --- you will generate a custom one later. Generating pages like `about` is out of scope of this tutorial, but in case you need them, they behave the same way that posts do.
 
-Under `_posts`, create two new documents. Remember that Jekyll requires you to **prepend filenames with a date**:
+Under `_posts`, create two new documents. Remember that Jekyll requires you to **prepend post filename with a date**:
 
 `2020–12–20-the-first-post.md`
 
