@@ -20,6 +20,9 @@ By the end of the tutorial, you'll expose the following API:
 
 Let's dive in!
 
+{: .note .info}
+This solution needs a custom environment to support the Ruby code. This means that you can't host the site on GitHub Pages as-is - you'd need to use [Actions]({% link _docs/continuous-integration/github-actions.md %}) to deploy your site. First, see if a simpler [solution](https://gist.github.com/MichaelCurrin/f8d908596276bdbb2044f04c352cb7c7) created by [Michael Currin](https://github.com/MichaelCurrin) fits your needs.
+
 ## Setup
 
 First, you need to go through an [installation]({% link _docs/installation.md %}) process. Having that, you can initialize a new Jekyll project by invoking `bundle exec jekyll new` command. Then you need to create the following directory structure:
