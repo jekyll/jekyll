@@ -5,7 +5,6 @@ date: 2020-12-23 10:04:00 +0100
 ---
 In this tutorial, you'll create a kind of a [REST](https://restfulapi.net/) [API](https://en.wikipedia.org/wiki/API) serving static [JSON](https://www.json.org/json-en.html) files generated from Markdown posts in your Jekyll site.
 
-{% raw %}
 JSON is a popular cross-language method of transferring data on the web, without all the presentation layer of HTML. The files you output will be similar to a REST API in a server-side language like Ruby, Python or Node. You'll be able to see them directly in the browser as `/foo.json`. They can be used to build a custom frontend using Angular, React, Vue and so on.
 
 A huge inspiration to write this tutorial was a [post](https://forestry.io/blog/build-a-json-api-with-hugo/) written by [Régis Philibert](https://forestry.io/authors/r%C3%A9gis-philibert/). It's about doing the exact same thing in [Hugo](https://gohugo.io/).
@@ -99,9 +98,12 @@ My approach is a little hacky --- it requires you to specify a JSON output f
 ### Define the Template
 Before you do it, it's worth noting that you can list all the available properties with this little template, which returns an array of available keys:
 
+{% raw %}
 ```liquid
 {{ page.keys | jsonify }}
 ```
+{% endraw %}
+
 
 If you enter it in a `default.html` template and execute the following command:
 
@@ -117,6 +119,7 @@ You'll get this in `/_site/update/2020/12/20/the-first-post.html`:
 
 Given that, I'd like you to enter the following template instead of the aforementioned one-liner:
 
+{% raw %}
 ```liquid
 {
     "title": {{ page.title | jsonify }},
@@ -128,6 +131,8 @@ Given that, I'd like you to enter the following template instead of the aforemen
     "custom-property": {{ page.custom-property | jsonify }}
 }
 ```
+{% endraw %}
+
 * Pass every property through a jsonify [filter]({% link _docs/liquid/filters.md %}#data-to-json). This will add quotation marks for us, convert arrays into strings and escape quotation marks.
 * For content, turn Markdown-formatted string into HTML using [markdownify]({% link _docs/liquid/filters.md %}#markdownify) filter.
 * Fetch the falue of custom-property variable that you've defined earlier. If it doesn't exist on a post, a null value will be returned.
@@ -146,7 +151,7 @@ If you enter `bundle exec jekyll build` command again, you'd get the following o
 }
 ```
 
-### Create a Plugin
+### Create the Plugin
 
 The rest of the work can be done using a custom plugin. For now, it only needs to convert the output file extension from default `.html` to `.json`. Under `_plugins`, create a new `api_generator.rb` file:
 
@@ -300,4 +305,3 @@ And that's it! If you hit `bundle exec jekyll build` again, you'd get the follow
 │   │   │   ├── update
 │   │   │   │   └── index.json
 ```
-{% endraw %}
