@@ -129,8 +129,7 @@ module Jekyll
     # if not
     def parse_date(input, msg = "Input could not be parsed.")
       @parse_date_cache ||= {}
-      @parse_date_cache[input] ||= Time.parse(input)
-      @parse_date_cache[input].localtime
+      @parse_date_cache[input] ||= Time.parse(input).localtime
     rescue ArgumentError
       raise Errors::InvalidDateError, "Invalid date '#{input}': #{msg}"
     end
