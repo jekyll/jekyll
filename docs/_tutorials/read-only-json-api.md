@@ -203,7 +203,10 @@ end
 After building the site, you'd get the following:
 
 ```json
-{"title":"The First Post","categories":["update"],"tags":[],"content":"<p>1</p>\n","collection":"posts","date":"2020-12-20 00:00:00 +0100","custom-property":"My custom property"}
+{"title":"The First Post","categories":["update"],"tags":[],
+ "content":"<p>1</p>\n","collection":"posts",
+ "date":"2020-12-20 00:00:00 +0100",
+ "custom-property":"My custom property"}
 ``` 
 
 ## Generate Listings
