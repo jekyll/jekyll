@@ -277,7 +277,9 @@ class ApiGenerator < Generator
 
     category_dir = site.config['category_dir'] || 'categories'
     site.categories.each_key do |category|
-      site.pages << ListingPage.new(site, site.source, File.join(category_dir, category), categories[category])
+      site.pages << ListingPage.new(site, site.source,
+                                    File.join(category_dir, category), 
+                                    categories[category])
     end
     site.pages << ListingPage.new(site, site.source, "", posts)
     site.pages << ListingPage.new(site, site.source, category_dir, 
