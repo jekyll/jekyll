@@ -114,7 +114,9 @@ bundle exec jekyll build
 You'll get this in `/_site/update/2020/12/20/the-first-post.html`:
 
 ```json
-["url","relative_path","excerpt","title","categories","path","next","previous","id","output","date","tags","content","collection","draft","layout","category","custom-property","slug","ext"]
+["url","relative_path","excerpt","title","categories","path","next",
+ "previous","id","output","date","tags","content","collection",
+ "draft","layout","category","custom-property","slug","ext"]
 ```
 
 Given that, I'd like you to enter the following template instead of the aforementioned one-liner:
