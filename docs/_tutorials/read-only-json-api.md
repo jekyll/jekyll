@@ -280,7 +280,8 @@ class ApiGenerator < Generator
       site.pages << ListingPage.new(site, site.source, File.join(category_dir, category), categories[category])
     end
     site.pages << ListingPage.new(site, site.source, "", posts)
-    site.pages << ListingPage.new(site, site.source, category_dir, categories.keys)
+    site.pages << ListingPage.new(site, site.source, category_dir, 
+                                  categories.keys)
   end
 end
 ```
