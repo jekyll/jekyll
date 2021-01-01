@@ -1318,3 +1318,30 @@ p.note {
 ol div.highlighter-rouge {
   margin: 8px 0 10px 0;
 }
+
+.disclaimer-ribbon {
+  position: relative;
+  width: calc(100% + 100px);
+  margin: 45px -50px 0;
+  padding: 5px 20px;
+  font-size: 0.725em;
+  font-weight: 600;
+  color: #efc98f;
+  background: #695949;
+  &:before, &:after {
+    position: absolute;
+    top: -9px;
+    content: "";
+    display: table;
+    border: 5px solid;
+    z-index: -1;
+  }
+  &:before {
+    left: 0;
+    border-color: transparent #b28b70 #b28b70 transparent;
+  }
+  &:after {
+    right: 0;
+    border-color: transparent transparent #b28b70 #b28b70;
+  }
+}
