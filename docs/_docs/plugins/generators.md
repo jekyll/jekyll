@@ -95,8 +95,10 @@ module SamplePlugin
   end
 end
 ```
+
 The generated pages can now be set up to use a particular layout or output at a particular path in the destination
 directory all via the config file using front matter defaults. For example:
+
 ```yaml
 # _config.yml
 
