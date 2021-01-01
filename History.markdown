@@ -4,6 +4,7 @@
 
   * typo - do instead of don&#39;t (#8518)
   * Document support for TSV files consistently (#8488)
+  * Add a disclaimer to tutorials involving Ruby code (#8525)
 
 ## 4.2.0 / 2020-12-14
 
