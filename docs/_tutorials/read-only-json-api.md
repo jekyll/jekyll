@@ -2,6 +2,7 @@
 title: Read-Only JSON API
 author: izdwuut
 date: 2020-12-23 10:04:00 +0100
+plugin_disclaimer: true
 ---
 In this tutorial, you'll create a kind of a [REST](https://restfulapi.net/) [API](https://en.wikipedia.org/wiki/API)
 serving static [JSON](https://www.json.org/json-en.html) files generated from Markdown posts in your Jekyll site.
