@@ -20,7 +20,7 @@
 - name: Layouts
   description: >-
     Specify layout directory instead of using <code>_layouts/</code> automatically.
-  option: "layout_dir: DIR"
+  option: "layouts_dir: DIR"
   flag: --layouts DIR
 
 
