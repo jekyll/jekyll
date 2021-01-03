@@ -7,6 +7,7 @@
   * Add a disclaimer to tutorials involving Ruby code (#8525)
   * Improve documentation on developing generators (#8527)
   * Fixes typo in layouts_dir documentation (#8532)
+  * Fix i.e. typos in collections.md (#8529)
 
 ## 4.2.0 / 2020-12-14
 
