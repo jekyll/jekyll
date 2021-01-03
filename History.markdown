@@ -6,6 +6,7 @@
   * Document support for TSV files consistently (#8488)
   * Add a disclaimer to tutorials involving Ruby code (#8525)
   * Improve documentation on developing generators (#8527)
+  * Fixes typo in layouts_dir documentation (#8532)
 
 ## 4.2.0 / 2020-12-14
 
