@@ -73,7 +73,7 @@ jobs:
       fail-fast: false
       matrix:
         ruby_version:
-        - 2.4 # Minimum required Ruby version in gemspec
+        - 2.5 # Nokogiri 1.11 requires at least Ruby 2.5
     steps:
     - uses: actions/checkout@v2
       with:
