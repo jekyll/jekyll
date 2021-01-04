@@ -8,17 +8,17 @@ In this tutorial, you'll create a kind of a [REST](https://restfulapi.net/) [API
 serving static [JSON](https://www.json.org/json-en.html) files generated from Markdown posts in your Jekyll site.
 
 JSON is a popular cross-language method of transferring data on the web, without all the presentation layer of HTML.
-The files you output will be similar to a REST API in a server-side language like Ruby, Python or Node. You'll be able
-to see them directly in the browser as `/foo.json`. They can be used to build a custom frontend using Angular, React,
-Vue and so on.
+The files you output will be similar to a REST API in a server side language like Ruby, Python, or Node. You'll be able
+to see them directly in the browser as `/foo.json`. They can be used to build a custom frontend using Angular, React, 
+Vue, and so on.
 
 A huge inspiration to write this tutorial was a [post](https://forestry.io/blog/build-a-json-api-with-hugo/) written
 by [Régis Philibert](https://forestry.io/authors/r%C3%A9gis-philibert/). It's about doing the exact same thing in
 [Hugo](https://gohugo.io/).
 
-I hope that this solution in Jekyll is elegant, too. You just need to define some [layouts]({% link _docs/layouts.md %})
+I hope that this solution in Jekyll is elegant, too. You will need to define a number of [layouts]({% link _docs/layouts.md %})
 and write a [plugin]({% link _docs/plugins.md %}) to convert your content to JSON. **Don't be afraid if you're not
-familiar with Ruby** --- the language that Jekyll is written in. It's similar to Python, and you'll get a hang of it
+familiar with Ruby** --- the language that Jekyll is written in. It's similar to Python, and you should get a hang of it
 quickly.
 
 By the end of the tutorial, you'll expose the following API:
@@ -30,15 +30,15 @@ By the end of the tutorial, you'll expose the following API:
 Let's dive in!
 
 {: .note .info}
-This solution needs a custom environment to support the Ruby code. This means that you can't host the site on GitHub
+This solution needs a custom environment to support it's Ruby code. This means that you can't host the site on GitHub
 Pages as-is - you'd need to use [Actions]({% link _docs/continuous-integration/github-actions.md %}) to deploy your
 site. First, see if a simpler [solution](https://gist.github.com/MichaelCurrin/f8d908596276bdbb2044f04c352cb7c7)
 created by [Michael Currin](https://github.com/MichaelCurrin) fits your needs.
 
 ## Setup
 
-First, you need to go through an [installation]({% link _docs/installation.md %}) process. Having that, you can
-initialize a new Jekyll project by invoking `bundle exec jekyll new` command. Then you need to create the following
+First, you need to go through an [installation]({% link _docs/installation.md %}) process. Having done that, you can
+initialize a new Jekyll project by invoking the command `bundle exec jekyll new`. Then you need to create the following
 directory structure:
 
 ```
@@ -56,10 +56,10 @@ directory structure:
 ```
 
 Unless you self-host your site, **you can rely on a generic 404 response from your server**. You no longer need `index`
- --- you will generate a custom one later. Generating pages like `about` is out of scope of this tutorial, but in case
+ --- you will generate a custom one later. Generating pages like `about` is out of scope for this tutorial, but in case
 you need them, they behave the same way that posts do.
 
-Under `_posts`, create two new documents. Remember that Jekyll requires you to **prepend post filename with a date**:
+Under `_posts`, create two new documents. Remember that Jekyll requires you to **prepend post filenames with a date**:
 
 `2020–12–20-the-first-post.md`
 
@@ -72,7 +72,7 @@ custom-property: "My custom property"
 1
 ```
 
-Please note that you include a `custom-property` that you will fetch later on. 
+Make sure to include a `custom-property` so that you can fetch it later on. 
 
 `2020–12–20-the-second-post.md`
 
@@ -84,7 +84,7 @@ categories: ["update", "tutorial"]
 2
 ```
 
-This one belongs to two categories --- `update` and `tutorial`, and doesn't include the custom property. Because the
+This one belongs to two categories --- `update` and `tutorial` --- and doesn't include the custom property. Because the
 categories overlap, it will be possible to test getting a list of posts from a category.
 
 You'll also need a couple of layouts. Just add these empty files for now --- you'll fill (one of) them later:
@@ -112,9 +112,9 @@ Since you won't have any pages in your project, leave the `path` to `""` in orde
 [cover]({% link _docs/configuration/front-matter-defaults.md %}) every file.
 
 ## Convert Posts to JSON
-My approach is a little hacky --- it requires you to specify a JSON output format in a HTML template. The only thing
-you miss is that your text editor will most probably not recognize the markup file as a properly formatted JSON
-document. 
+My approach is a little hacky --- it requires you to specify a JSON output format in an HTML template. The only 
+thing you will miss is that your text editor will probably not recognize the markup file as a properly formatted 
+JSON document.
 
 ### Define the Template
 Before you do it, it's worth noting that you can list all the available properties with this little template, which
@@ -158,13 +158,13 @@ Given that, I'd like you to enter the following template instead of the aforemen
 {% endraw %}
 
 * Pass every property through a jsonify [filter]({% link _docs/liquid/filters.md %}#data-to-json). This will add
-quotation marks for us, convert arrays into strings and escape quotation marks.
-* For content, turn Markdown-formatted string into HTML using [markdownify]({% link _docs/liquid/filters.md %}#markdownify)
+quotation marks for us, convert arrays into strings, and escape quotation marks.
+* For content, turn Markdown-formatted strings into HTML using [markdownify]({% link _docs/liquid/filters.md %}#markdownify)
 filter.
-* Fetch the falue of custom-property variable that you've defined earlier. If it doesn't exist on a post, a null value
+* Fetch the falue of custom-property variable that you defined earlier. If it doesn't exist on a post, a null value
 will be returned.
 
-If you enter `bundle exec jekyll build` command again, you'd get the following output:
+If you enter `bundle exec jekyll build` again, you'd get the following output:
 
 ```json
 {
@@ -180,7 +180,7 @@ If you enter `bundle exec jekyll build` command again, you'd get the following o
 
 ### Create the Plugin
 
-The rest of the work can be done using a custom plugin. For now, it only needs to convert the output file extension
+The rest of the work can be done using a custom plugin. For now, it only needs to convert the output filename extension
 from default `.html` to `.json`. Under `_plugins`, create a new `api_generator.rb` file:
 
 ```ruby
@@ -219,10 +219,10 @@ Optionally, you could add `.markdown` etc.
 * `convert` --- a function that takes post content **transpiled into HTML** as an argument. Please note that it
 doesn't parse the file through a template.
 
-### Remove Whitespaces
+### Remove Whitespace
 
-But, there's another trick. Using [hooks]({% link _docs/plugins/hooks.md %}), you can remove all whitespaces! Before a
-post is rendered, you can squeeze some custom logic in:
+But, there's another trick. Using [hooks]({% link _docs/plugins/hooks.md %}), you can remove all whitespace! Before a
+post is rendered, you can add some custom logic in:
 
 ```ruby
 Jekyll::Hooks.register :posts, :post_render do |post|
@@ -249,7 +249,7 @@ The last step is to generate categories and an index of all posts.
 
 ### Define a Page
 
-In `api_generator.rb`, add the following class as a part of `Jekyll` module:
+In `api_generator.rb`, add the following class as a part of the `Jekyll` module:
 
 ```ruby
 class ListingPage < Page
@@ -280,7 +280,7 @@ end
 * Assign some [instance variables](https://www.ruby-lang.org/en/documentation/faq/8/) that Jekyll will utilize to
 generate the page.
 * Process the page filename. It will extract the extension and base name.
-* `read_yaml` is only needed to define some instance variable for us. It's just simpler than doing it by hand. You can
+* `read_yaml` is only needed to define some instance variables for us. It's simpler than doing it by hand. You can
 use any other layout as rendered content will be overwritten.
 * Overwrite content with JSON generated from a [hash](https://ruby-doc.org/core-2.7.2/Hash.html) provided in the `data`
 argument.
@@ -338,7 +338,7 @@ the inner loop and build the site.
 * Insert the post to `categories` and `posts` hashes.
 * Generate categories, categories index and the index of all posts (in that order)
 
-And that's it! If you hit `bundle exec jekyll build` again, you'd get the following output:
+And that's it! If you hit `bundle exec jekyll build` again, you'll get the following output:
 
 ```
 .
