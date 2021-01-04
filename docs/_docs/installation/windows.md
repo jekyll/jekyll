@@ -97,7 +97,7 @@ Bash on Ubuntu on Windows is still under development, so you may run into issues
 
 ## Encoding
 
-If you use UTF-8 encoding, make sure that no `BOM` header characters exist in your files. If they don't, Jekyll will break. This is especially relevant when you're running Jekyll on Windows.
+If you use UTF-8 encoding, Jekyll will break if a file starts with characters representing a [BOM](https://en.wikipedia.org/wiki/Byte_order_mark#UTF-8). Therefore, remove this sequence of bytes if it appears at the beginning of your file.
 
 Additionally, you might need to change the code page of the console window to UTF-8 in case you get a
 `Liquid Exception: Incompatible character encoding` error during the site generation process. Run the following:
