@@ -1,6 +1,83 @@
 ## HEAD
 
-  * Update default.html (#8305)
+### Documentation
+
+  * typo - do instead of don&#39;t (#8518)
+  * Document support for TSV files consistently (#8488)
+  * Add a disclaimer to tutorials involving Ruby code (#8525)
+  * Improve documentation on developing generators (#8527)
+  * Fixes typo in layouts_dir documentation (#8532)
+  * Fix i.e. typos in collections.md (#8529)
+
+## 4.2.0 / 2020-12-14
+
+### Minor Enhancements
+
+  * Warn on command-line with permalink conflict (#8342)
+  * Supress warning issued for redirect pages (#8347)
+  * Enhance detection of conflicting destination URLs (#8459)
+  * Add `:post_convert` hook to modify HTML content before layout (#8368)
+  * Allow triggering `:post_convert` events atomically (#8465)
+  * Debug reading Page and Layout objects (#8100)
+  * Do not reset `site.url` to `http://localhost:4000` by default (#7253)
+  * Add custom debug strings for Jekyll objects (#8473)
+  * Debug reading data files in a site (#8481)
+
+### Bug Fixes
+
+  * Replace nested conditional with guard clauses (#8294)
+  * Fix: security bump (#8349)
+  * Fix path matching regex in post_url Liquid tag (#8375)
+  * Enable `Performance/ChainArrayAllocation` cop (#8404)
+  * Enable Lint/NoReturnInBeginEndBlocks Cop (#8457)
+  * Generate items from `site.include` list only once (#8463)
+  * Explicitly return nil after site process phase (#8472)
+
+### Optimization Fixes
+
+  * Implement custom delegators for drop methods (#8183)
+  * Handle `nil` argument to `Jekyll.sanitized_path` (#8415)
+  * Cache `Jekyll.sanitized_path` (#8424)
+  * Memoize array of drop getter method names (#8421)
+  * Reduce string allocations from the `link` tag (#8387)
+  * Optimize parsing of parameters in `include` tag (#8192)
+  * Stash documents `write?` attribute in a variable (#8389)
+  * Reduce string allocations from generating doc URLs (#8392)
+  * Check if site is in incremental mode optimally (#8401)
+  * Utilize flexibility of `Site#in_dest_dir` (#8403)
+  * Reduce allocations from rendering item as liquid (#8406)
+  * Compute relative_path of pages using PathManager (#8408)
+  * Reduce allocation from `normalize_whitespace` filter (#8400)
+  * Use `Regexp#match?` when `MatchData` is not required (#8427)
+  * Check default front matter scope against symbols (#8393)
+  * Stash frequently used `Drop` setter keys for reuse (#8394)
+  * Memoize defaults computed for Convertibles (#8451)
+  * Reduce array allocations from merging categories (#8453)
+  * Memoize destination of pages, documents and staticfiles (#8458)
+  * Reduce allocations from computing item property (#8485)
+  * Optimize `Page#dir` with a private method (#8489)
+  * Stash attribute hash for Liquid computed for pages (#8497)
+
+### Development Fixes
+
+  * Update cucumber gem to version 4.1 (#8278)
+  * Move permalink styles data to constant (#8282)
+  * Update rubocop gem to 0.87.1 (#8287)
+  * Update RuboCop to-do file (#8296)
+  * Fix `rake console` generating LoadError (#8312)
+  * Configure Performance cops (#8369)
+  * Update rubocop gem to 0.90.0 (#8313)
+  * Refactor `Jekyll::Utils::Platforms` (#7236)
+  * Bump RuboCop to v0.91.x (#8391)
+  * Add workflow to build and profile third-party repo (#8398)
+  * Bump RuboCop to v0.92.x
+  * Update cucumber gem version to 5.1.2 (#8413)
+  * Fix test suite compatibility with JRuby (#8418)
+  * chore(deps): bump Rubocop to 0.93.0 (#8430)
+  * Use Ruby 2.7.1 in GitHub Actions (#8444)
+  * Test that Liquid expressions are not deeply evaled (#8292)
+  * Test rendering arbitrary Liquid variables by default (#7414)
+  * Migrate TravisCI jobs to GitHub Actions (#8492)
 
 ### Documentation
 
@@ -21,64 +98,22 @@
   * Docs Review: Getting Started (#8372)
   * Add note about rebooting system after installation (#8359)
   * Use data file to render table at `/docs/configuration/options/#global-configuration` (#8377)
-  * Docs: Use data file(s) to render table(s) at https://jekyllrb.com/docs/configuration/options/ (#8380)
+  * Use data file(s) to render table(s) at `/docs/configuration/options/` (#8380)
   * Improve maintainability of config option data (#8383)
   * Remove CircleCI v1 docs (#8410)
-  * Remove NOKOGIRI_USE_SYSTEM_LIBRARIES from Travis CI docs (#8409)
+  * Remove `NOKOGIRI_USE_SYSTEM_LIBRARIES` from Travis CI docs (#8409)
+  * Add links to all Jekyll themes on GitHub tagged with #jekyll-theme (#8447)
+  * Document initializing project Gemfile from scratch (#8450)
+  * Document installation of additional dependencies for installing Jekyll on Fedora (#8456)
+  * Improve documentation on Hooks in Jekyll (#8467)
+  * Build docs site with GitHub Actions (#8201)
+  * Add link to Assets page from `_sass` section in `_docs/structure.md` (#8486)
 
-### Development Fixes
+### Site Enhancements
 
-  * Update cucumber gem to version 4.1 (#8278)
-  * Move permalink styles data to constant (#8282)
-  * Update rubocop gem to 0.87.1 (#8287)
-  * Update RuboCop to-do file (#8296)
-  * Fix `rake console` generating LoadError (#8312)
-  * Configure Performance cops (#8369)
-  * Update rubocop gem to 0.90.0 (#8313)
-  * Refactor Jekyll::Utils::Platforms (#7236)
-  * Bump RuboCop to v0.91.x (#8391)
-  * Add workflow to build and profile third-party repo (#8398)
-  * Implement custom delegators for drop methods (#8183)
-  * Bump RuboCop to v0.92.x
-  * Update cucumber gem version to 5.1.2 (#8413)
-  * Fix test suite compatibility with JRuby (#8418)
-  * chore(deps): bump Rubocop to 0.93.0 (#8430)
-
-### Bug Fixes
-
-  * Replace nested conditional with guard clauses (#8294)
-  * fix: security bump (#8349)
-  * Fix path matching regex in post_url Liquid tag (#8375)
-  * Reduce string allocations from the `link` tag (#8387)
-  * Optimize parsing of parameters in include tag (#8192)
-  * Stash documents `write?` attribute in a variable (#8389)
-  * Reduce string allocations from generating doc URLs (#8392)
-  * Check if site is in incremental mode optimally (#8401)
-  * Handle nil argument to Jekyll.sanitized_path (#8415)
-  * Compute relative_path of pages using PathManager (#8408)
-  * Enable `Performance/ChainArrayAllocation` cop (#8404)
-  * Utilize flexibility of Site#in_dest_dir (#8403)
-  * Reduce allocation from normalize_whitespace filter (#8400)
-  * Use Regexp#match? when MatchData is not required (#8427)
-  * Check default front matter scope against symbols (#8393)
-  * Stash frequently used Drop setter keys for reuse (#8394)
-
-### Minor Enhancements
-
-  * Warn on command-line with permalink conflict (#8342)
-  * Supress warning issued for redirect pages (#8347)
-  * Add post_convert hook to modify HTML content before layout (#8368)
-  * Cache Jekyll.sanitized_path (#8424)
-  * Memoize array of drop getter method names (#8421)
+  * Fix rendering of *showcase* images (#8504)
 
 ## 4.1.1 / 2020-06-24
-
-  * Fix grammar in documentation section (#8265)
-
-### Development Fixes
-
-  * Bump RuboCop to v0.85.x (#8223)
-  * Expect drive letter only on vanilla windows (#8227)
 
 ### Bug Fixes
 
@@ -96,11 +131,17 @@
   * correct typo (#8261)
   * Allow hyperlinks to specific filter documentation (#8231)
   * Update link to Netlify step-by-step guide (#8264)
+  * Fix grammar in documentation section (#8265)
 
 ### Site Enhancements
 
   * Including correct Sketch website (#8241)
   * Release post for v4.1.1 (#8243)
+
+### Development Fixes
+
+  * Bump RuboCop to v0.85.x (#8223)
+  * Expect drive letter only on vanilla windows (#8227)
 
 ## 4.1.0 / 2020-05-27
 

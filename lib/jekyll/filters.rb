@@ -422,7 +422,7 @@ module Jekyll
     end
 
     def item_property(item, property)
-      @item_property_cache ||= {}
+      @item_property_cache ||= @context.registers[:site].filter_cache[:item_property] ||= {}
       @item_property_cache[property] ||= {}
       @item_property_cache[property][item] ||= begin
         property = property.to_s
@@ -462,8 +462,7 @@ module Jekyll
     def as_liquid(item)
       case item
       when Hash
-        pairs = item.map { |k, v| as_liquid([k, v]) }
-        Hash[pairs]
+        item.each_with_object({}) { |(k, v), result| result[as_liquid(k)] = as_liquid(v) }
       when Array
         item.map { |i| as_liquid(i) }
       else

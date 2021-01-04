@@ -144,6 +144,7 @@ An overview of what each of these does:
           These are sass partials that can be imported into your <code>main.scss</code>
           which will then be processed into a single stylesheet
           <code>main.css</code> that defines the styles to be used by your site.
+          Learn <a href="{{ '/docs/assets/' | relative_url }}">how to work with assets</a>. 
         </p>
       </td>
     </tr>

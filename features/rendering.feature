@@ -49,6 +49,20 @@ Feature: Rendering
     Then  I should get a zero exit-status
     And   I should not see "Liquid Exception:" in the build output
 
+  Scenario: Rendering a default site containing a file with a non-existent Liquid variable
+    Given I have a "index.html" file with content:
+    """
+    ---
+    title: Simple Test
+    ---
+    {{ site.lorem.ipsum }}
+    {{ site.title }}
+    """
+    And  I have a configuration file with "title" set to "Hello World"
+    When I run jekyll build
+    Then I should get a zero exit-status
+    And  the _site directory should exist
+
   Scenario: Rendering a custom site containing a file with a non-existent Liquid variable
     Given I have a "index.html" file with content:
     """
@@ -170,3 +184,26 @@ Feature: Rendering
     Then I should get a zero exit status
     And the _site directory should exist
     And I should see "hey = 'for cicada';" in "_site/index.js"
+
+  Scenario: Rendering Liquid expressions that return strings containg Liquid expressions
+    Given I have an "index.md" file with content:
+      """
+      ---
+      prequel: "{% link series/first-part.md %}"
+      sequel: "{% link series/last-part.md %}"
+      ---
+
+      This is the second-part of the series named {{ site.novel }}.
+      The first part is at {{ page.prequel }}.
+
+      Lorem ipsum
+
+      {% capture sequel_link %}{{ page.sequel }}{% endcapture %}
+      The last part of the series can be read at {{ sequel_link }}
+      """
+    And I have a configuration file with "novel" set to "'{{ site.title }}'"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And I should see "series named {{ site.title }}" in "_site/index.html"
+    And I should see "{% link series/first-part.md %}" in "_site/index.html"
+    And I should see "{% link series/last-part.md %}" in "_site/index.html"

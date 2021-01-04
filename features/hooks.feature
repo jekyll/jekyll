@@ -362,6 +362,51 @@ Feature: Hooks
     And I should see "<h3>Page heading</h3>" in "_site/memes/doc1.html"
     And I should see "<h4 id=\"all-your-base\">all your base</h4>" in "_site/memes/doc1.html"
 
+  Scenario: Modify the converted HTML content of document of a particular collection before rendering layout
+    Given I have a _layouts directory
+    And I have a "_layouts/meme.html" file with content:
+    """
+    <h3>Page heading</h3>
+    {{ content }}
+    """
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      memes:
+        output: true
+    """
+    And I have a _memes directory
+    And I have a "_memes/doc1.md" file with content:
+    """
+    ---
+    layout: meme
+    text: all your base
+    ---
+    ### {{ page.text }}
+    """
+    And I have a _posts directory
+    And I have a "_posts/2016-01-01-example.md" file with content:
+    """
+    ---
+    layout: meme
+    text: all your base
+    ---
+    ### {{ page.text }}
+    """
+    And I have a _plugins directory
+    And I have a "_plugins/ext.rb" file with content:
+    """
+    Jekyll::Hooks.register :memes, :post_convert do |document|
+      document.content = document.content.gsub('h3', 'h4')
+    end
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "<h3>Page heading</h3>" in "_site/memes/doc1.html"
+    And I should see "<h4 id=\"all-your-base\">all your base</h4>" in "_site/memes/doc1.html"
+    But I should see "<h3 id=\"all-your-base\">all your base</h3>" in "_site/2016/01/01/example.html"
+
   Scenario: Update a document after rendering it, but before writing it to disk
     Given I have a _plugins directory
     And I have a "_plugins/ext.rb" file with content:

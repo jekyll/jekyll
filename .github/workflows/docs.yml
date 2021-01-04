@@ -1,0 +1,59 @@
+name: Build and deploy Jekyll documentation site
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  RUBY_VERSION: 2.7
+
+jobs:
+  deploy_docs:
+    if: "!contains(github.event.commits[0].message, '[ci skip]')"
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+      - name: Setup cache for Bundler
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: Set up dependencies
+        run: |
+          bundle install --path=vendor/bundle --jobs 4 --retry 3
+          bundle clean
+      - name: Clone target branch
+        run: |
+          REMOTE_BRANCH="${REMOTE_BRANCH:-gh-pages}"
+          REMOTE_REPO="https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
+
+          echo "Publishing to ${GITHUB_REPOSITORY} on branch ${REMOTE_BRANCH}"
+          rm -rf docs/_site/
+          git clone --depth=1 --branch="${REMOTE_BRANCH}" --single-branch --no-checkout \
+            "${REMOTE_REPO}" docs/_site/
+      - name: Build site
+        run: bundle exec jekyll build --source docs --destination docs/_site --verbose --trace
+        env:
+          # For jekyll-github-metadata
+          JEKYLL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy to GitHub Pages
+        run: |
+          SOURCE_COMMIT="$(git log -1 --pretty="%an: %B" "$GITHUB_SHA")"
+          pushd docs/_site &>/dev/null
+          : > .nojekyll
+
+          git add --all
+          git -c user.name="${GITHUB_ACTOR}" -c user.email="${GITHUB_ACTOR}@users.noreply.github.com" \
+            commit --quiet \
+            --message "Deploy docs from ${GITHUB_SHA}" \
+            --message "$SOURCE_COMMIT"
+          git push
+
+          popd &>/dev/null

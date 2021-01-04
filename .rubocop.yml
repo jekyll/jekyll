@@ -65,11 +65,19 @@ Lint/ConstantDefinitionInBlock:
     - test/**/*.rb
 Lint/DeprecatedOpenSSLConstant:
   Enabled: true
+Lint/DuplicateBranch:
+  Enabled: true
 Lint/DuplicateElsifCondition:
+  Enabled: true
+Lint/DuplicateRegexpCharacterClassElement:
   Enabled: true
 Lint/DuplicateRescueException:
   Enabled: true
 Lint/DuplicateRequire:
+  Enabled: true
+Lint/EmptyBlock:
+  Enabled: true
+Lint/EmptyClass:
   Enabled: true
 Lint/EmptyConditionalBody:
   Enabled: true
@@ -88,6 +96,8 @@ Lint/MixedRegexpCaptureTypes:
 Lint/NestedPercentLiteral:
   Exclude:
     - test/test_site.rb
+Lint/NoReturnInBeginEndBlocks:
+  Enabled: true
 Lint/OutOfRangeRegexpRef:
   Enabled: true
 Lint/RaiseException:
@@ -98,9 +108,13 @@ Lint/SelfAssignment:
   Enabled: true
 Lint/StructNewOverride:
   Enabled: true
+Lint/ToEnumArguments:
+  Enabled: false
 Lint/TopLevelReturnWithArgument:
   Enabled: true
 Lint/TrailingCommaInAttributeDeclaration:
+  Enabled: true
+Lint/UnmodifiedReduceAccumulator:
   Enabled: true
 Lint/UnreachableCode:
   Severity: error
@@ -162,9 +176,19 @@ Naming/MemoizedInstanceVariableName:
 
 Performance/AncestorsInclude:
   Enabled: false
+Performance/ArraySemiInfiniteRangeSlice:
+  Enabled: true
 Performance/BigDecimalWithNumericArgument:
   Enabled: true
+Performance/BlockGivenWithExplicitBlock:
+  Enabled: true
 Performance/ChainArrayAllocation:
+  Enabled: true
+Performance/CollectionLiteralInLoop:
+  Enabled: true
+Performance/ConstantRegexp:
+  Enabled: true
+Performance/MethodObjectAsBlock:
   Enabled: true
 Performance/RedundantSortBlock:
   Enabled: true
@@ -192,6 +216,8 @@ Security/YAMLLoad:
     - !ruby/regexp /features\/.*.rb/
     - !ruby/regexp /test\/.*.rb$/
 
+Style/ArgumentsForwarding:
+  Enabled: false
 Style/ArrayCoercion:
   Enabled: true
 Style/AccessModifierDeclarations:
@@ -211,10 +237,14 @@ Style/ClassAndModuleChildren:
     - test/**/*.rb
 Style/ClassEqualityComparison:
   Enabled: true
+Style/CollectionCompact:
+  Enabled: true
 Style/CombinableLoops:
   Enabled: true
 Style/Documentation:
   Enabled: false
+Style/DocumentDynamicEvalDefinition:
+  Enabled: true
 Style/DoubleNegation:
   Enabled: false
 Style/ExponentialNotation:
@@ -254,6 +284,10 @@ Style/ModuleFunction:
   Enabled: false
 Style/MultilineTernaryOperator:
   Severity: error
+Style/NegatedIfElseCondition:
+  Enabled: true
+Style/NilLambda:
+  Enabled: true
 Style/OptionalBooleanParameter:
   Enabled: true
 Style/PercentLiteralDelimiters:
@@ -265,6 +299,8 @@ Style/PercentLiteralDelimiters:
     "%w": "()"
     "%W": "()"
     "%x": "()"
+Style/RedundantArgument:
+  Enabled: true
 Style/RedundantAssignment:
   Enabled: true
 Style/RedundantFetchBlock:
@@ -301,6 +337,8 @@ Style/StringConcatenation:
     - test/**/*.rb
 Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
+Style/SwapValues:
+  Enabled: true
 Style/SymbolArray:
   EnforcedStyle: brackets
 Style/TrailingCommaInArrayLiteral:

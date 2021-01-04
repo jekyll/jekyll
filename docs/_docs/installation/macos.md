@@ -22,15 +22,23 @@ To run the latest Ruby version you need to install it through [Homebrew](https:/
 
 ```sh
 # Install Homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+# Install Ruby
 brew install ruby
 ```
 
 Add the brew ruby path to your shell configuration:
 
 ```bash
+# If you're using Zsh
+echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> ~/.zshrc
+
+# If you're using Bash
 echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> ~/.bash_profile
+
+# Unsure which shell you are using? Type
+echo $SHELL
 ```
 
 Relaunch your terminal and check your Ruby setup:
@@ -52,7 +60,7 @@ Ruby versions. This is very useful when you need to be able to run a given Ruby 
 
 ```sh
 # Install Homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install rbenv and ruby-build
 brew install rbenv
@@ -98,7 +106,14 @@ ruby -v
 Append your path file with the following, replacing the `X.X` with the first two digits of your Ruby version:
 
 ```bash
+# If you're using Zsh
+echo 'export PATH="$HOME/.gem/ruby/X.X.0/bin:$PATH"' >> ~/.zshrc
+
+# If you're using Bash
 echo 'export PATH="$HOME/.gem/ruby/X.X.0/bin:$PATH"' >> ~/.bash_profile
+
+# Unsure which shell you are using? Type
+echo $SHELL
 ```
 
 Check that `GEM PATHS:` points to your home directory:

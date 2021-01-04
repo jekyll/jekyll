@@ -16,8 +16,8 @@ collections:
   - staff_members
 ```
 
-In this case `collections` is defined as a sequence (i.e array) with no additional metadata defined for each collection.
-You can optionally specify metadata for your collection by defining `collections` as a mapping (i.e hashmap) instead of sequence, and then defining additional fields in it:
+In this case `collections` is defined as a sequence (i.e., array) with no additional metadata defined for each collection.
+You can optionally specify metadata for your collection by defining `collections` as a mapping (i.e., hashmap) instead of sequence, and then defining additional fields in it:
 
 ```yaml
 collections:

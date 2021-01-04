@@ -117,6 +117,7 @@ module Jekyll
 
       Jekyll::Cache.clear_if_config_changed config
       Jekyll::Hooks.trigger :site, :after_reset, self
+      nil
     end
     # rubocop:enable Metrics/MethodLength
     # rubocop:enable Metrics/AbcSize
@@ -180,6 +181,7 @@ module Jekyll
       reader.read
       limit_posts!
       Jekyll::Hooks.trigger :site, :post_read, self
+      nil
     end
 
     # Run each of the Generators.
@@ -192,6 +194,7 @@ module Jekyll
         Jekyll.logger.debug "Generating:",
                             "#{generator.class} finished in #{Time.now - start} seconds."
       end
+      nil
     end
 
     # Render the site to the destination.
@@ -208,6 +211,7 @@ module Jekyll
       render_pages(payload)
 
       Jekyll::Hooks.trigger :site, :post_render, self, payload
+      nil
     end
 
     # Remove orphaned files and empty directories in destination.
@@ -215,6 +219,7 @@ module Jekyll
     # Returns nothing.
     def cleanup
       site_cleaner.cleanup!
+      nil
     end
 
     # Write static files, pages, and posts.
@@ -227,6 +232,7 @@ module Jekyll
       end
       regenerator.write_metadata
       Jekyll::Hooks.trigger :site, :post_write, self
+      nil
     end
 
     def posts
@@ -434,6 +440,13 @@ module Jekyll
     def collections_path
       dir_str = config["collections_dir"]
       @collections_path ||= dir_str.empty? ? source : in_source_dir(dir_str)
+    end
+
+    # Public
+    #
+    # Returns the object as a debug String.
+    def inspect
+      "#<#{self.class} @source=#{@source}>"
     end
 
     private

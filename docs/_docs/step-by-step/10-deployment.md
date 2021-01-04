@@ -11,18 +11,27 @@ It's good practice to have a [Gemfile](/docs/ruby-101/#gemfile) for your site.
 This ensures the version of Jekyll and other gems remains consistent across
 different environments.
 
-Create `Gemfile` in the root with the following:
+Create a `Gemfile` in the root. 
+The file should be called 'Gemfile' and should *not* have any extension. 
+You can create a Gemfile with Bundler and then add the `jekyll` gem:
 
-```ruby
-source 'https://rubygems.org'
-
-gem 'jekyll'
+```sh
+bundle init
+bundle add jekyll
 ```
 
-Then run `bundle install` in your terminal. This installs the gems and
-creates `Gemfile.lock` which locks the current gem versions for a future
-`bundle install`. If you ever want to update your gem versions you can run
-`bundle update`.
+Your file should look something like:
+
+```ruby
+# frozen_string_literal: true
+source "https://rubygems.org"
+
+gem "jekyll"
+```
+
+Bundler installs the gems and creates a `Gemfile.lock` which locks the current 
+gem versions for a future `bundle install`. If you ever want to update your gem 
+versions you can run `bundle update`.
 
 When using a `Gemfile`, you'll run commands like `jekyll serve` with
 `bundle exec` prefixed. So the full command is:

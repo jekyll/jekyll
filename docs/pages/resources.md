@@ -10,9 +10,12 @@ and other resources that can be helpful. Below is a collection of links to
 some of the most popular Jekyll resources.
 
 ## Themes
+- [GitHub.com #jekyll-theme repos](https://github.com/topics/jekyll-theme)
 - [jamstackthemes.dev](https://jamstackthemes.dev/ssg/jekyll/)
 - [jekyllthemes.org](http://jekyllthemes.org/)
 - [jekyllthemes.io](https://jekyllthemes.io/)
+
+See also: [docs/themes](/docs/themes/).
 
 ## Plugins
 - [jekyll-plugin topic on GitHub](https://github.com/topics/jekyll-plugin)
@@ -49,6 +52,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [Snipcart](https://snipcart.com/blog/static-site-e-commerce-part-2-integrating-snipcart-with-jekyll): Add a shopping cart to a Jekyll site
 
 ### Forms
+  - [Arengu](https://www.arengu.com)
   - [Getform](https://getform.io)
   - [99Inbound](https://www.99inbound.com)
   - [Formcake](https://formcake.com)

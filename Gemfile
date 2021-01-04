@@ -23,7 +23,7 @@ group :test do
   gem "nokogiri", "~> 1.11.0.rc3"
   gem "rspec"
   gem "rspec-mocks"
-  gem "rubocop", "~> 0.93.0"
+  gem "rubocop", "~> 1.0"
   gem "rubocop-performance"
   gem "test-dependency-theme", :path => File.expand_path("test/fixtures/test-dependency-theme", __dir__)
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)
@@ -68,7 +68,7 @@ group :jekyll_optional_dependencies do
   gem "kramdown-syntax-coderay"
   gem "mime-types", "~> 3.0"
   gem "rdoc", "~> 6.0"
-  gem "tomlrb", "~> 1.2"
+  gem "tomlrb"
 
   platforms :ruby, :mswin, :mingw, :x64_mingw do
     gem "classifier-reborn", "~> 2.2"

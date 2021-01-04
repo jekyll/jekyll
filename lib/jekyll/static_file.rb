@@ -55,7 +55,8 @@ module Jekyll
     #
     # Returns destination file path.
     def destination(dest)
-      @site.in_dest_dir(dest, Jekyll::URL.unescape_path(url))
+      @destination ||= {}
+      @destination[dest] ||= @site.in_dest_dir(dest, Jekyll::URL.unescape_path(url))
     end
 
     def destination_rel_dir

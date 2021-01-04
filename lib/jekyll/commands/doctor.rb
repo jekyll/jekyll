@@ -67,15 +67,16 @@ module Jekyll
 
         def conflicting_urls(site)
           conflicting_urls = false
-          urls = {}
-          urls = collect_urls(urls, site.pages, site.dest)
-          urls = collect_urls(urls, site.posts.docs, site.dest)
-          urls.each do |url, paths|
+          destination_map(site).each do |dest, paths|
             next unless paths.size > 1
 
             conflicting_urls = true
-            Jekyll.logger.warn "Conflict:", "The URL '#{url}' is the destination" \
-              " for the following pages: #{paths.join(", ")}"
+            Jekyll.logger.warn "Conflict:",
+                               "The following destination is shared by multiple files."
+            Jekyll.logger.warn "", "The written file may end up with unexpected contents."
+            Jekyll.logger.warn "", dest.to_s.cyan
+            paths.each { |path| Jekyll.logger.warn "", " - #{path}" }
+            Jekyll.logger.warn ""
           end
           conflicting_urls
         end
@@ -122,18 +123,15 @@ module Jekyll
 
         private
 
-        def collect_urls(urls, things, destination)
-          things.each do |thing|
-            next if allow_used_permalink?(thing)
+        def destination_map(site)
+          {}.tap do |result|
+            site.each_site_file do |thing|
+              next if allow_used_permalink?(thing)
 
-            dest = thing.destination(destination)
-            if urls[dest]
-              urls[dest] << thing.path
-            else
-              urls[dest] = [thing.path]
+              dest_path = thing.destination(site.dest)
+              (result[dest_path] ||= []) << thing.path
             end
           end
-          urls
         end
 
         def allow_used_permalink?(item)
