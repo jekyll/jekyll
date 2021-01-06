@@ -38,15 +38,21 @@ created by [Michael Currin](https://github.com/MichaelCurrin) fits your needs.
 ## Setup
 
 First, you need to go through an [installation]({% link _docs/installation.md %}) process. Having done that, you can
-initialize a new Jekyll project by invoking the command `bundle exec jekyll new`. Then you need to create the following
-directory structure:
+initialize a new Jekyll project by invoking the command `bundle exec jekyll new`. 
+
+### Directories Structure
+
+You need to create the following structure:
 
 ```
 .
 ├── site
 │   ├── config.yml
+│   ├── _includes
+│   │   └── post.rb
 │   ├── _layouts
-│   │   ├── category.html
+│   │   ├── categories_index.html
+│   │   ├── items_index.html
 │   │   └── default.html
 │   ├── _plugins
 │   │   └── api_generator.rb
@@ -58,6 +64,8 @@ directory structure:
 Unless you self-host your site, **you can rely on a generic 404 response from your server**. You no longer need `index`
  --- you will generate a custom one later. Generating pages like `about` is out of scope for this tutorial, but in case
 you need them, they behave the same way that posts do.
+
+### Dummy Posts
 
 Under `_posts`, create two new documents. Remember that Jekyll requires you to **prepend post filenames with a date**:
 
@@ -87,36 +95,46 @@ categories: ["update", "tutorial"]
 This one belongs to two categories --- `update` and `tutorial` --- and doesn't include the custom property. Because the
 categories overlap, it will be possible to test getting a list of posts from a category.
 
-You'll also need a couple of layouts. Just add these empty files for now --- you'll fill (one of) them later:
+### Layouts
 
-```
-.
-├── site
-│   ├── _layouts
-│   │   ├── category.html
-│   │   └── default.html
-```
-
-The last thing is to link the `default` layout in `config.yml`:
+The last thing is to link the layouts in `config.yml`:
 
 ```yml
 defaults:
-  -
-    scope:
-      path: ""
+  - scope:
+      type: categories
     values:
-      layout: "default"
+      layout: items_index
+      permalink: categories/:category/
+  - scope:
+      type: categories_index
+    values:
+      layout: categories_index
+      permalink: categories/
+  - scope:
+      type: posts
+    values:
+      layout: post
+  - scope:
+      type: posts_index
+    values:
+      layout: items_index
 ```
 
-Since you won't have any pages in your project, leave the `path` to `""` in order to
-[cover]({% link _docs/configuration/front-matter-defaults.md %}) every file.
+* You have four various content types: an index of all categories, a listing of all posts under a category, a 
+listing of all posts in the system and a single post. 
+* You specify a layout using a `layout` key.
+* You will reference `type` when you'll start writing the plugin. For purposes of this tutorial, it's only 
+required to be unique.
+* For some of the items you declare permalink. You can do it for all of them. It can come in handy if you want to 
+define your own API endpoints.
 
 ## Convert Posts to JSON
 My approach is a little hacky --- it requires you to specify a JSON output format in an HTML template. The only 
 thing you will miss is that your text editor will probably not recognize the markup file as a properly formatted 
 JSON document.
 
-### Define the Template
+### Define the Templates
 Before you do it, it's worth noting that you can list all the available properties with this little template, which
 returns an array of available keys:
 
@@ -127,7 +145,7 @@ returns an array of available keys:
 {% endraw %}
 
 
-If you enter it in a `default.html` template and execute the following command:
+If you enter it in a `post.html` template and execute the following command:
 
 ```sh
 bundle exec jekyll build
@@ -141,22 +159,34 @@ You'll get this in `/_site/update/2020/12/20/the-first-post.html`:
  "draft","layout","category","custom-property","slug","ext"]
 ```
 
-Given that, I'd like you to enter the following template instead of the aforementioned one-liner:
+Given that, I'd like you to enter the following template:
+
+{% raw %}
+```liquid
+{% include post.html post=page %}
+```
+{% endraw %}
+
+* Include a partial template `post.html` from `_includes` directory. 
+* Assign a value to internal `post` variable
+
+`post.html` should look like this:
 
 {% raw %}
 ```liquid
 {
-    "title": {{ page.title | jsonify }},
-    "categories": {{ page.categories | jsonify }},
-    "tags": {{ page.tags | jsonify }},
-    "content": {{ page.content | markdownify | jsonify  }},
-    "collection": {{ page.collection | jsonify }},
-    "date": {{ page.date | jsonify }},
-    "custom-property": {{ page.custom-property | jsonify }}
+    "title": {{ include.post.title | jsonify }},
+    "categories": {{ include.post.categories | jsonify }},
+    "tags": {{ include.post.tags | jsonify }},
+    "content": {{ include.post.content | markdownify | jsonify  }},
+    "collection": {{ include.post.collection | jsonify }},
+    "date": {{ include.post.date | jsonify }},
+    "custom-property": {{ include.post.custom-property | jsonify }}
 }
 ```
 {% endraw %}
 
+* Use `include.post` to reference the variable you passed before.
 * Pass every property through a jsonify [filter]({% link _docs/liquid/filters.md %}#data-to-json). This will add
 quotation marks for us, convert arrays into strings, and escape quotation marks.
 * For content, turn Markdown-formatted strings into HTML using [markdownify]({% link _docs/liquid/filters.md %}#markdownify)
@@ -225,14 +255,22 @@ But, there's another trick. Using [hooks]({% link _docs/plugins/hooks.md %}), yo
 post is rendered, you can add some custom logic in:
 
 ```ruby
-Jekyll::Hooks.register :posts, :post_render do |post|
-  post.output = JSON.generate(JSON.parse(post.output))
+def Jekyll.serialize(item)
+  JSON.generate(JSON.parse(item))
+end
+
+Hooks.register :posts, :post_render do |post|
+  post.output = serialize(post.output)
+end
+
+Hooks.register :pages, :post_render do |page|
+  page.output = serialize(page.output)
 end
 ```
-
-* Register for a `post_render` event owned by `posts`.
-* With every post, parse the JSON layout you've defined before and generate a new JSON string from it. It will remove
-all whitespace characters for you.
+* Create a `Jekyll.serialize` method to generate a new JSON string from an item (a post or page). 
+It will remove all whitespace characters for you. 
+* Register for a `post_render` event owned by `:posts` and `:pages`.
+* With every post, parse the JSON layout you've defined before and 
 
 After building the site, you'd get the following:
 
@@ -253,15 +291,29 @@ In `api_generator.rb`, add the following class as a part of the `Jekyll` module:
 
 ```ruby
 class ListingPage < Page
-  def initialize(site, base, dir, data)
+  def initialize(site, category, entries, type)
     @site = site
-    @base = base
-    @dir  = dir
+    @base = site.source
+    @dir = category
+    
+    @basename = 'index'
+    @ext = '.json'
     @name = 'index.json'
+    @data = {
+      'entries' => entries
+    }
+    data.default_proc = proc do |_, key|
+      site.frontmatter_defaults.find(relative_path, type, key)
+    end
+  end
 
-    self.process(@name)
-    self.read_yaml(File.join(base, '_layouts'), 'category.html')
-    self.content = JSON.generate(data)
+  def url_placeholders
+    {
+      :category   => @dir,
+      :path => @dir,
+      :basename   => basename,
+      :output_ext => output_ext,
+    }
   end
 end
 ```
@@ -276,14 +328,12 @@ end
 > `dir` - The String path between the source and the file.
 >
 > `name` - The String filename of the file.
-
-* Assign some [instance variables](https://www.ruby-lang.org/en/documentation/faq/8/) that Jekyll will utilize to
-generate the page.
-* Process the page filename. It will extract the extension and base name.
-* `read_yaml` is only needed to define some instance variables for us. It's simpler than doing it by hand. You can
-use any other layout as rendered content will be overwritten.
-* Overwrite content with JSON generated from a [hash](https://ruby-doc.org/core-2.7.2/Hash.html) provided in the `data`
-argument.
+  
+* `@basename` and `@ext` are only parts of the `@name`.
+* `@data` contains your entries --- posts and categories --- that will be rendered.
+* Look up front matter [defaults]({% link _docs/plugins/generators.md %}) scoped to a given type, and assign them to every 
+entry of `data.entries` array.
+* Define placeholders used in constructing page URL.
 
 ### Generate Pages
 
@@ -297,34 +347,25 @@ class ApiGenerator < Generator
 
   def generate(site)
     categories = {}
-    posts = {}
+    posts = []
 
     site.categories.each_key do |category|
-      categories[category] = {}
+      categories[category] = []
       site.categories[category].each_entry do |post|
         if post.data['draft']
           continue
         end
         inserted_post = post.data.clone
-        title = inserted_post['title']
-        inserted_post.delete('draft')
-        inserted_post.delete('ext')
-        inserted_post.delete('title')
-        inserted_post['url'] = post.url
-        categories[category][title] = inserted_post
-        posts[title] = inserted_post
+        categories[category].append(inserted_post)
+        posts.append(inserted_post)
       end
     end
 
-    category_dir = site.config['category_dir'] || 'categories'
     site.categories.each_key do |category|
-      site.pages << ListingPage.new(site, site.source,
-                                    File.join(category_dir, category),
-                                    categories[category])
+      site.pages << ListingPage.new(site, category, categories[category], :categories)
     end
-    site.pages << ListingPage.new(site, site.source, "", posts)
-    site.pages << ListingPage.new(site, site.source, category_dir,
-                                  categories.keys)
+    site.pages << ListingPage.new(site, "", posts, :posts_index)
+    site.pages << ListingPage.new(site, "", categories.keys, :categories_index)
   end
 end
 ```
@@ -332,11 +373,8 @@ end
 * There is only one method you have to implement --- `generate`.
 * Iterate through every category and post.
 * I opted for skipping on drafts, but you can choose to generate them as well.
-* Clone the `post` and delete unused keys. If you'd like to see what fields are available, just enter `puts post` in
-the inner loop and build the site.
-* Assign a post URL.
 * Insert the post to `categories` and `posts` hashes.
-* Generate categories, categories index and the index of all posts (in that order)
+* Generate categories, the index of all posts and categories index (in that order).
 
 And that's it! If you hit `bundle exec jekyll build` again, you'll get the following output:
 
