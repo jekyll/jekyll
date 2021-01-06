@@ -97,7 +97,7 @@ categories overlap, it will be possible to test getting a list of posts from a c
 
 ### Layouts
 
-The last thing is to link the layouts in `config.yml`:
+The last thing is to define the layouts. First, declare them in `config.yml`:
 
 ```yml
 defaults:
@@ -129,13 +129,7 @@ required to be unique.
 * For some of the items you declare permalink. You can do it for all of them. It can come in handy if you want to 
 define your own API endpoints.
 
-## Convert Posts to JSON
-My approach is a little hacky --- it requires you to specify a JSON output format in an HTML template. The only 
-thing you will miss is that your text editor will probably not recognize the markup file as a properly formatted 
-JSON document.
-
-### Define the Templates
-Before you do it, it's worth noting that you can list all the available properties with this little template, which
+Now you can define them. Before you do it, it's worth noting that you can list all the available properties with this little template, which
 returns an array of available keys:
 
 {% raw %}
@@ -143,7 +137,6 @@ returns an array of available keys:
 {{ page.keys | jsonify }}
 ```
 {% endraw %}
-
 
 If you enter it in a `post.html` template and execute the following command:
 
@@ -170,7 +163,7 @@ Given that, I'd like you to enter the following template:
 * Include a partial template `post.html` from `_includes` directory. 
 * Assign a value to internal `post` variable
 
-`post.html` should look like this:
+Partial template `post.html` should look like this:
 
 {% raw %}
 ```liquid
@@ -207,6 +200,42 @@ If you enter `bundle exec jekyll build` again, you'd get the following output:
     "custom-property": "My custom property"
 }
 ```
+
+The next template is `categories_index.html`. It's simple. The only thing it does is output
+an array of categories. You'll handle the `entries` variable in a bit:
+
+{% raw %}
+```liquid
+{{ page.entries | jsonify }}
+```
+{% endraw %}
+
+The last template --- `items_index.html` --- outputs a list of posts under a category and the 
+index of all posts:
+
+{% raw %}
+```liquid
+[
+    {%- for item in page.entries %}
+        {% include post.html post=item%}
+        {% if forloop.last != true %}
+            ,
+        {% endif %}
+    {% endfor -%}
+]
+```
+{% endraw %}
+
+* Iterate through every `item` in `entires` array.
+* Output the `item` using the partial template defined before passing the iterator variable.
+* Separate the entries using a colon, but skip it for the last one. This ensures that the loop 
+will generate a valid json.
+
+
+## Convert Posts to JSON
+My approach is a little hacky --- it requires you to specify a JSON output format in an HTML template. The only 
+thing you will miss is that your text editor will probably not recognize the markup file as a properly formatted 
+JSON document.
 
 ### Create the Plugin
 
