@@ -49,11 +49,11 @@ You need to create the following structure:
 ├── site
 │   ├── config.yml
 │   ├── _includes
-│   │   └── post.rb
+│   │   └── post.html
 │   ├── _layouts
 │   │   ├── categories_index.html
 │   │   ├── items_index.html
-│   │   └── default.html
+│   │   └── post.html
 │   ├── _plugins
 │   │   └── api_generator.rb
 │   ├── _posts
