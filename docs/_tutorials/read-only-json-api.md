@@ -13,7 +13,7 @@ can access them directly in your browser from e.g. `/foo.json`. They can be used
 Vue, and so on.
 
 A huge inspiration to write this tutorial was a [post](https://forestry.io/blog/build-a-json-api-with-hugo/) written
-by [Régis Philibert](https://forestry.io/authors/r%C3%A9gis-philibert/). It's about doing the exact same thing in
+by [Régis Philibert](https://twitter.com/regisphilibert). It's about doing the exact same thing in
 [Hugo](https://gohugo.io/).
 
 I hope that this solution in Jekyll is elegant, too. You will need to define a number of [layouts]({% link _docs/layouts.md %})
