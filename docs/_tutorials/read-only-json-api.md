@@ -16,7 +16,7 @@ A huge inspiration to write this tutorial was a [post](https://forestry.io/blog/
 by [Régis Philibert](https://twitter.com/regisphilibert). It's about doing the exact same thing in
 [Hugo](https://gohugo.io/).
 
-I hope that this solution in Jekyll is elegant, too. You will need to define a number of [layouts]({% link _docs/layouts.md %})
+You will need to define a number of [layouts]({% link _docs/layouts.md %})
 and write a [plugin]({% link _docs/plugins.md %}) to convert your content to JSON. **Don't be afraid if you're not
 familiar with Ruby** --- the language that Jekyll is written in. It can be learnt quite.
 quickly.
