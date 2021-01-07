@@ -39,7 +39,7 @@ class TestDocument < JekyllUnitTest
     end
 
     should "exist" do
-      assert !@document.nil?
+      refute @document.nil?
     end
 
     should "know its relative path" do
@@ -63,7 +63,7 @@ class TestDocument < JekyllUnitTest
     end
 
     should "know whether it's a YAML file" do
-      assert_equal false, @document.yaml_file?
+      refute @document.yaml_file?
     end
 
     should "know its data" do
@@ -507,7 +507,7 @@ class TestDocument < JekyllUnitTest
     end
 
     should "be a static file" do
-      assert_equal true, @document.is_a?(StaticFile)
+      assert @document.is_a?(StaticFile)
     end
 
     should "be set to write" do
@@ -515,7 +515,7 @@ class TestDocument < JekyllUnitTest
     end
 
     should "be in the list of docs_to_write" do
-      assert @site.docs_to_write.include?(@document)
+      assert_includes @site.docs_to_write, @document
     end
 
     should "be output in the correct place" do
@@ -548,7 +548,7 @@ class TestDocument < JekyllUnitTest
     end
 
     should "be output in the correct place" do
-      assert_equal true, File.file?(@dest_file)
+      assert File.file?(@dest_file)
     end
   end
 
@@ -577,7 +577,7 @@ class TestDocument < JekyllUnitTest
     end
 
     should "be output in the correct place" do
-      assert_equal true, File.file?(@dest_file)
+      assert File.file?(@dest_file)
     end
   end
 

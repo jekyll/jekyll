@@ -84,7 +84,7 @@ class TestPluginManager < JekyllUnitTest
       plugin_manager = PluginManager.new(site)
 
       assert plugin_manager.plugin_allowed?("jemoji")
-      assert !plugin_manager.plugin_allowed?("not_allowed_plugin")
+      refute plugin_manager.plugin_allowed?("not_allowed_plugin")
     end
 
     should "not require plugin files" do

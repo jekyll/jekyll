@@ -42,8 +42,8 @@ class TestExcerpt < JekyllUnitTest
       end
 
       should "return true only if an excerpt output contains a specified string" do
-        assert @excerpt.include?("fake output")
-        refute @excerpt.include?("real output")
+        assert_includes @excerpt, "fake output"
+        refute_includes @excerpt, "real output"
       end
     end
 
@@ -117,7 +117,7 @@ class TestExcerpt < JekyllUnitTest
         end
 
         should "contain any refs at the bottom of the page" do
-          assert @excerpt.content.include?("[link]: https://jekyllrb.com/")
+          assert_includes @excerpt.content, "[link]: https://jekyllrb.com/"
         end
       end
 
@@ -135,7 +135,7 @@ class TestExcerpt < JekyllUnitTest
         end
 
         should "link properly" do
-          assert @extracted_excerpt.content.include?("https://jekyllrb.com/")
+          assert_includes @extracted_excerpt.content, "https://jekyllrb.com/"
         end
       end
 
@@ -176,7 +176,7 @@ class TestExcerpt < JekyllUnitTest
     end
 
     should "be generated" do
-      assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
+      assert @excerpt.is_a?(Jekyll::Excerpt)
     end
 
     context "#content" do
@@ -204,7 +204,7 @@ class TestExcerpt < JekyllUnitTest
     should "be appended to as necessary and generated" do
       assert_includes @excerpt.content, "{% endraw %}"
       assert_includes @excerpt.content, "{% endhighlight %}"
-      assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
+      assert @excerpt.is_a?(Jekyll::Excerpt)
     end
   end
 
@@ -228,7 +228,7 @@ class TestExcerpt < JekyllUnitTest
       assert_includes @excerpt.content, "{%\n  endhighlight\n%}"
       refute_includes @excerpt.content, "{%\n  endraw\n%}\n\n{% endraw %}"
       refute_includes @excerpt.content, "{%\n  endhighlight\n%}\n\n{% endhighlight %}"
-      assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
+      assert @excerpt.is_a?(Jekyll::Excerpt)
     end
   end
 
@@ -246,7 +246,7 @@ class TestExcerpt < JekyllUnitTest
     should "be appended to as necessary and generated" do
       assert_includes @excerpt.content, "{% endfor %}"
       refute_includes @excerpt.content, "{% endfor %}\n\n{% endfor %}"
-      assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
+      assert @excerpt.is_a?(Jekyll::Excerpt)
     end
   end
 
@@ -264,7 +264,7 @@ class TestExcerpt < JekyllUnitTest
     should "not be appended to but generated as is" do
       assert_includes @excerpt.content, "{%- endfor -%}"
       refute_includes @excerpt.content, "{% endfor %}\n\n{% endfor %}"
-      assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
+      assert @excerpt.is_a?(Jekyll::Excerpt)
     end
   end
 
@@ -280,7 +280,7 @@ class TestExcerpt < JekyllUnitTest
 
     should "not be appended to but generated as is" do
       assert_includes @excerpt.content, "{{- xyzzy -}}"
-      assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
+      assert @excerpt.is_a?(Jekyll::Excerpt)
     end
   end
 
@@ -292,8 +292,8 @@ class TestExcerpt < JekyllUnitTest
       @excerpt = @post.data["excerpt"]
 
       assert_includes @post.content.split("\n\n")[0].strip, "{% continue %}"
-      assert_equal true, Jekyll::DoNothingBlock.ancestors.include?(Liquid::Block)
-      assert_equal false, Jekyll::DoNothingOther.ancestors.include?(Liquid::Block)
+      assert_includes Jekyll::DoNothingBlock.ancestors, Liquid::Block
+      refute_includes Jekyll::DoNothingOther.ancestors, Liquid::Block
       assert_match "Jekyll::DoNothingBlock", Liquid::Template.tags["do_nothing"].name
       assert_match "Jekyll::DoNothingOther", Liquid::Template.tags["do_nothing_other"].name
     end
@@ -305,7 +305,7 @@ class TestExcerpt < JekyllUnitTest
       assert_includes @excerpt.content, "{% endunless %}"
       assert_includes @excerpt.content, "{% enddo_nothing %}"
       refute_includes @excerpt.content, "{% enddo_nothing_other %}"
-      assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
+      assert @excerpt.is_a?(Jekyll::Excerpt)
     end
   end
 end

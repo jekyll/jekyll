@@ -68,14 +68,14 @@ class TestCollections < JekyllUnitTest
       end
 
       should "have a output attribute" do
-        assert_equal false, @collection.to_liquid["output"]
+        refute @collection.to_liquid["output"]
       end
     end
 
     should "know whether it should be written or not" do
-      assert_equal false, @collection.write?
+      refute @collection.write?
       @collection.metadata["output"] = true
-      assert_equal true, @collection.write?
+      assert @collection.write?
       @collection.metadata.delete "output"
     end
   end

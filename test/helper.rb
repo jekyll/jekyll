@@ -51,12 +51,12 @@ Minitest::Reporters.use! [
 module Minitest::Assertions
   def assert_exist(filename, msg = nil)
     msg = message(msg) { "Expected '#{filename}' to exist" }
-    assert File.exist?(filename), msg
+    assert_path_exists(filename, msg)
   end
 
   def refute_exist(filename, msg = nil)
     msg = message(msg) { "Expected '#{filename}' not to exist" }
-    refute File.exist?(filename), msg
+    refute_path_exists(filename, msg)
   end
 end
 
@@ -98,13 +98,13 @@ class JekyllUnitTest < Minitest::Test
   include DirectoryHelpers
   extend DirectoryHelpers
 
-  def mu_pp(obj)
+  def test_mu_pp(obj)
     s = obj.is_a?(Hash) ? JSON.pretty_generate(obj) : obj.inspect
     s = s.encode Encoding.default_external if defined? Encoding
     s
   end
 
-  def mocks_expect(*args)
+  def test_mocks_expect(*args)
     RSpec::Mocks::ExampleMethods::ExpectHost.instance_method(:expect)\
       .bind(self).call(*args)
   end
@@ -121,7 +121,7 @@ class JekyllUnitTest < Minitest::Test
     RSpec::Mocks.teardown
   end
 
-  def fixture_document(relative_path)
+  def test_fixture_document(relative_path)
     site = fixture_site(
       "collections" => {
         "methods" => {
@@ -136,19 +136,19 @@ class JekyllUnitTest < Minitest::Test
     [site, matching_doc]
   end
 
-  def fixture_site(overrides = {})
+  def test_fixture_site(overrides = {})
     Jekyll::Site.new(site_configuration(overrides))
   end
 
-  def default_configuration
+  def test_default_configuration
     Marshal.load(Marshal.dump(Jekyll::Configuration::DEFAULTS))
   end
 
-  def build_configs(overrides, base_hash = default_configuration)
+  def test_build_configs(overrides, base_hash = default_configuration)
     Utils.deep_merge_hashes(base_hash, overrides)
   end
 
-  def site_configuration(overrides = {})
+  def test_site_configuration(overrides = {})
     full_overrides = build_configs(overrides, build_configs(
                                                 "destination" => dest_dir,
                                                 "incremental" => false
@@ -158,25 +158,25 @@ class JekyllUnitTest < Minitest::Test
                        ))
   end
 
-  def clear_dest
+  def test_clear_dest
     FileUtils.rm_rf(dest_dir)
     FileUtils.rm_rf(source_dir(".jekyll-metadata"))
   end
 
-  def directory_with_contents(path)
+  def test_directory_with_contents(path)
     FileUtils.rm_rf(path)
     FileUtils.mkdir(path)
     File.open("#{path}/index.html", "w") { |f| f.write("I was previously generated.") }
   end
 
-  def with_env(key, value)
+  def test_with_env(key, value)
     old_value = ENV[key]
     ENV[key] = value
     yield
     ENV[key] = old_value
   end
 
-  def capture_output(level = :debug)
+  def test_capture_output(level = :debug)
     buffer = StringIO.new
     Jekyll.logger = Logger.new(buffer)
     Jekyll.logger.log_level = level
@@ -189,20 +189,20 @@ class JekyllUnitTest < Minitest::Test
   alias_method :capture_stdout, :capture_output
   alias_method :capture_stderr, :capture_output
 
-  def nokogiri_fragment(str)
+  def test_nokogiri_fragment(str)
     Nokogiri::HTML.fragment(
       str
     )
   end
 
-  def skip_if_windows(msg = nil)
+  def test_skip_if_windows(msg = nil)
     if Utils::Platforms.really_windows?
       msg ||= "Jekyll does not currently support this feature on Windows."
       skip msg.to_s.magenta
     end
   end
 
-  def symlink_if_allowed(target, sym_file)
+  def test_symlink_if_allowed(target, sym_file)
     FileUtils.ln_sf(target, sym_file)
   rescue Errno::EACCES
     skip "Permission denied for creating a symlink to #{target.inspect} " \

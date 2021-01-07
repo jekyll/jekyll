@@ -187,7 +187,7 @@ class TestSite < JekyllUnitTest
 
       # simulate destination file deletion
       File.unlink dest
-      refute File.exist?(dest)
+      refute_path_exists(dest)
 
       sleep 1
       @site.process
@@ -268,12 +268,12 @@ class TestSite < JekyllUnitTest
 
     should "read pages with YAML front matter" do
       abs_path = File.expand_path("about.html", @site.source)
-      assert_equal true, Utils.has_yaml_header?(abs_path)
+      assert Utils.has_yaml_header?(abs_path)
     end
 
     should "enforce a strict 3-dash limit on the start of the YAML front matter" do
       abs_path = File.expand_path("pgp.key", @site.source)
-      assert_equal false, Utils.has_yaml_header?(abs_path)
+      refute Utils.has_yaml_header?(abs_path)
     end
 
     should "expose jekyll version to site payload" do
