@@ -21,7 +21,7 @@ and write a [plugin]({% link _docs/plugins.md %}) to convert your content to JSO
 familiar with Ruby** --- the language that Jekyll is written in. It can be learnt quite.
 quickly.
 
-By the end of the tutorial, you'll expose the following API:
+By the end of the tutorial, you'll expose the following API enpoints:
 * `/` --- an index of all posts
 * `/{url}` --- details of a post
 * `/categories` --- an index of categories
