@@ -175,6 +175,8 @@ Metrics/ParameterLists:
   Max: 4
 Metrics/PerceivedComplexity:
   Max: 13
+Minitest/TestMethodName:
+  Enabled: false
 Naming/FileName:
   Enabled: false
 Naming/HeredocDelimiterNaming:

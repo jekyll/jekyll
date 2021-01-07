@@ -158,25 +158,25 @@ class JekyllUnitTest < Minitest::Test
                        ))
   end
 
-  def test_clear_dest
+  def clear_dest
     FileUtils.rm_rf(dest_dir)
     FileUtils.rm_rf(source_dir(".jekyll-metadata"))
   end
 
-  def test_directory_with_contents(path)
+  def directory_with_contents(path)
     FileUtils.rm_rf(path)
     FileUtils.mkdir(path)
     File.open("#{path}/index.html", "w") { |f| f.write("I was previously generated.") }
   end
 
-  def test_with_env(key, value)
+  def with_env(key, value)
     old_value = ENV[key]
     ENV[key] = value
     yield
     ENV[key] = old_value
   end
 
-  def test_capture_output(level = :debug)
+  def capture_output(level = :debug)
     buffer = StringIO.new
     Jekyll.logger = Logger.new(buffer)
     Jekyll.logger.log_level = level
@@ -189,20 +189,20 @@ class JekyllUnitTest < Minitest::Test
   alias_method :capture_stdout, :capture_output
   alias_method :capture_stderr, :capture_output
 
-  def test_nokogiri_fragment(str)
+  def nokogiri_fragment(str)
     Nokogiri::HTML.fragment(
       str
     )
   end
 
-  def test_skip_if_windows(msg = nil)
+  def skip_if_windows(msg = nil)
     if Utils::Platforms.really_windows?
       msg ||= "Jekyll does not currently support this feature on Windows."
       skip msg.to_s.magenta
     end
   end
 
-  def test_symlink_if_allowed(target, sym_file)
+  def symlink_if_allowed(target, sym_file)
     FileUtils.ln_sf(target, sym_file)
   rescue Errno::EACCES
     skip "Permission denied for creating a symlink to #{target.inspect} " \
