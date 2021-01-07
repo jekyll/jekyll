@@ -98,13 +98,13 @@ class JekyllUnitTest < Minitest::Test
   include DirectoryHelpers
   extend DirectoryHelpers
 
-  def test_mu_pp(obj)
+  def mu_pp(obj)
     s = obj.is_a?(Hash) ? JSON.pretty_generate(obj) : obj.inspect
     s = s.encode Encoding.default_external if defined? Encoding
     s
   end
 
-  def test_mocks_expect(*args)
+  def mocks_expect(*args)
     RSpec::Mocks::ExampleMethods::ExpectHost.instance_method(:expect)\
       .bind(self).call(*args)
   end
@@ -121,7 +121,7 @@ class JekyllUnitTest < Minitest::Test
     RSpec::Mocks.teardown
   end
 
-  def test_fixture_document(relative_path)
+  def fixture_document(relative_path)
     site = fixture_site(
       "collections" => {
         "methods" => {
@@ -136,19 +136,19 @@ class JekyllUnitTest < Minitest::Test
     [site, matching_doc]
   end
 
-  def test_fixture_site(overrides = {})
+  def fixture_site(overrides = {})
     Jekyll::Site.new(site_configuration(overrides))
   end
 
-  def test_default_configuration
+  def default_configuration
     Marshal.load(Marshal.dump(Jekyll::Configuration::DEFAULTS))
   end
 
-  def test_build_configs(overrides, base_hash = default_configuration)
+  def build_configs(overrides, base_hash = default_configuration)
     Utils.deep_merge_hashes(base_hash, overrides)
   end
 
-  def test_site_configuration(overrides = {})
+  def site_configuration(overrides = {})
     full_overrides = build_configs(overrides, build_configs(
                                                 "destination" => dest_dir,
                                                 "incremental" => false
