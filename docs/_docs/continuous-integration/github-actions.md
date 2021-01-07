@@ -12,7 +12,7 @@ with GitHub Pages you can use GitHub Actions.
 ### Control over gemset
 
 - **Jekyll version** --- Instead of using the currently enabled version at `3.9.0`, you can use any
-  version of Jekyll you want. For example `4.0.0`, or point directly to the repository.
+  version of Jekyll you want. For example `{{site.version}}`, or point directly to the repository.
 - **Plugins** --- You can use any Jekyll plugins irrespective of them being on the
   [supported versions][ghp-whitelist] list, even `*.rb` files placed in the `_plugins` directory
   of your site.
@@ -29,7 +29,7 @@ with GitHub Pages you can use GitHub Actions.
 ## Workspace setup
 
 The first and foremost requirement is a Jekyll project hosted at GitHub. Choose an existing Jekyll
-project or follow the [Quickstart]({{ '/docs' | relative_url }}) and push the repository to GitHub
+project or follow the [quickstart]({{ '/docs' | relative_url }}) and push the repository to GitHub
 if it is not hosted there already.
 
 We're only going to cover builds from the `master` branch in this page. Therefore, ensure that you
@@ -72,7 +72,7 @@ Welcome to My Home Page
 
 source 'https://rubygems.org'
 
-gem 'jekyll', '~> 4.0'
+gem 'jekyll', '~> 4.2'
 
 group :jekyll_plugins do
   gem 'jekyll-timeago', '~> 0.13.1'
@@ -110,10 +110,10 @@ on:
 
 jobs:
   github-pages:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: helaili/jekyll-action@2.0.1
+      - uses: helaili/jekyll-action@2.0.5
         env:
           JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
 ```
@@ -125,7 +125,7 @@ The above workflow can be explained as the following:
   the Action from overwriting the `gh-pages` branch on any feature branch pushes.
 - The **name** of the job matches our YAML filename: `github-pages`.
 - The **checkout** action takes care of cloning your repository.
-- We specify our selected **action** and **version number** using `helaili/jekyll-action@2.0.0`.
+- We specify our selected **action** and **version number** using `helaili/jekyll-action@2.0.5`.
   This handles the build and deploy.
 - We set a reference to a secret **environment variable** for the action to use. The `JEKYLL_PAT`
   is a *Personal Access Token* and is detailed in the next section.
@@ -204,10 +204,11 @@ successful deploy from the Action.
 - [jekyll-actions] is an action available on the GitHub Marketplace and was used in this guide.
 - [jekyll-actions-quickstart] is an unofficial repository that includes a live demo of the
   `jekyll-actions` action. That project can be used as a template for making a new site.
-
+- [jekyll-action-ts] is another action to build and publish Jekyll sites on GiHub Pages that includes HTML formatting options wih Prettier and caching.
 
 [ghp-whitelist]: https://pages.github.com/versions/
 [timeago-plugin]: https://rubygems.org/gems/jekyll-timeago
 [tokens]: https://github.com/settings/tokens
 [jekyll-actions]: https://github.com/marketplace/actions/jekyll-actions
 [jekyll-actions-quickstart]: https://github.com/MichaelCurrin/jekyll-actions-quickstart
+[jekyll-action-ts]: https://github.com/limjh16/jekyll-action-ts
