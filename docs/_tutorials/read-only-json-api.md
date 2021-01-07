@@ -18,7 +18,7 @@ by [Régis Philibert](https://twitter.com/regisphilibert). It's about doing the 
 
 I hope that this solution in Jekyll is elegant, too. You will need to define a number of [layouts]({% link _docs/layouts.md %})
 and write a [plugin]({% link _docs/plugins.md %}) to convert your content to JSON. **Don't be afraid if you're not
-familiar with Ruby** --- the language that Jekyll is written in. It's similar to Python, and you should get a hang of it
+familiar with Ruby** --- the language that Jekyll is written in. It can be learnt quite.
 quickly.
 
 By the end of the tutorial, you'll expose the following API:
