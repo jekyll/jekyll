@@ -7,7 +7,7 @@ plugin_disclaimer: true
 In this tutorial, you'll create a kind of a [REST](https://restfulapi.net/) [API](https://en.wikipedia.org/wiki/API)
 serving static [JSON](https://www.json.org/json-en.html) files generated from Markdown posts in your Jekyll site.
 
-JSON is a popular format to structure and exchange data on the web, without all the presentation layer of HTML.
+JSON is a popular format to structure and exchange data on the web, without the presentation layer of HTML.
 The files you output are similar to a REST API in a server side language like Ruby, Python, or Node. You
 can access them directly in your browser from e.g. `/foo.json`. They can be used to build a custom frontend using Angular, React, 
 Vue, and so on.
