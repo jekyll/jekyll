@@ -32,8 +32,8 @@ The first and foremost requirement is a Jekyll project hosted at GitHub. Choose 
 project or follow the [Quickstart]({{ '/docs' | relative_url }}) and push the repository to GitHub
 if it is not hosted there already.
 
-We're only going to cover builds from the `master` branch in this page. Therefore, ensure that you
-are working on the `master` branch. If necessary, you may create it based on your default branch.
+We're only going to cover builds from the `main` branch in this page. Therefore, ensure that you
+are working on the `main` branch. If necessary, you may create it based on your default branch.
 When the Action builds your site, the contents of the *destination* directory will be automatically
 pushed to the `gh-pages` branch with a commit, ready to be used for serving.
 
@@ -106,7 +106,7 @@ name: Build and deploy Jekyll site to GitHub Pages
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   github-pages:
@@ -121,7 +121,7 @@ jobs:
 
 The above workflow can be explained as the following:
 
-- We trigger the build using **on.push** condition for `master` branch only --- this prevents
+- We trigger the build using **on.push** condition for `main` branch only --- this prevents
   the Action from overwriting the `gh-pages` branch on any feature branch pushes.
 - The **name** of the job matches our YAML filename: `github-pages`.
 - The **checkout** action takes care of cloning your repository.
@@ -164,7 +164,7 @@ build using _Secrets_:
 
 ### Build and deploy
 
-On pushing any local changes onto `master`, the action will be triggered and the build will
+On pushing any local changes onto `main`, the action will be triggered and the build will
 **start**.
 
 To watch the progress and see any build errors, check on the build **status** using one of the
@@ -193,7 +193,7 @@ To see the **live site**:
 4. Optionally **add** this URL to your repository's main page and to your `README.md`, to make it
    easy for people to find.
 
-When you need to make further **changes** to the site, commit to `master` and push. The workflow
+When you need to make further **changes** to the site, commit to `main` and push. The workflow
 will build and deploy your site again.
 
 Be sure **not to edit** the `gh-pages` branch directly, as any changes will be lost on the next
