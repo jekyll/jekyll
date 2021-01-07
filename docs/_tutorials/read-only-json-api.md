@@ -35,29 +35,23 @@ Pages as-is - you'd need to use [Actions]({% link _docs/continuous-integration/g
 site. First, see if a simpler [solution](https://gist.github.com/MichaelCurrin/f8d908596276bdbb2044f04c352cb7c7)
 created by [Michael Currin](https://github.com/MichaelCurrin) fits your needs.
 
+{: .note .info}
+This tutorial comes with [a repository](https://github.com/izdwuut/jekyll-json-api-tutorial). 
+It contains the full project (`main` branch) and a deployed version of the site (`gh-pages` 
+branch). It has an action that builds the site on push to the default branch.
+
 ## Setup
 
-First, you need to go through an [installation]({% link _docs/installation.md %}) process. Having done that, you can
-initialize a new Jekyll project by invoking the command `bundle exec jekyll new`. 
+Here you will prepare the project for adding custom Ruby code later on.
 
-### Directories Structure
+### Installation
 
-You need to create the following structure:
+Start from going through an [installation]({% link _docs/installation.md %}) process and choose one of the following options:
 
-```
-.
-├── site
-│   ├── config.yml
-│   ├── _includes
-│   │   └── post.html
-│   ├── _layouts
-│   │   ├── categories_index.html
-│   │   ├── items_index.html
-│   │   └── post.html
-│   ├── _posts
-│   │   ├── 2020–12–20-the-first-post.md
-│   │   └── 2020–12–20-the-second-post.md
-```
+* Clone the aforementioned [repository](https://github.com/izdwuut/jekyll-json-api-tutorial), check out to a `tutorial` branch 
+and run a command `bundler install`. It contains the directories structure you will need.
+* Initialize a new Jekyll project by invoking the command `bundle exec jekyll new` and create 
+the directories structure yourself.
 
 Unless you self-host your site, **you can rely on a generic 404 response from your server**. You no longer need `index`
  --- you will generate a custom one later. Generating pages like `about` is out of scope for this tutorial, but in case
