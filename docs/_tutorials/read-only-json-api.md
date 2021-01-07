@@ -7,7 +7,7 @@ plugin_disclaimer: true
 In this tutorial, you'll create a kind of a [REST](https://restfulapi.net/) [API](https://en.wikipedia.org/wiki/API)
 serving static [JSON](https://www.json.org/json-en.html) files generated from Markdown posts in your Jekyll site.
 
-JSON is a popular format to structure and exchange data on the web, without all the presentation layer of HTML.
+JSON is aJSON is a popular format to structure and exchange data on the web, without all the presentation layer of HTML.
 The files you output are similar to a REST API in a server side language like Ruby, Python, or Node. You
 can access them directly in your browser from e.g. `/foo.json`. They can be used to build a custom frontend using Angular, React, 
 Vue, and so on.
@@ -54,9 +54,7 @@ You need to create the following structure:
 │   │   ├── categories_index.html
 │   │   ├── items_index.html
 │   │   └── post.html
-│   ├── _plugins
-│   │   └── api_generator.rb
-│   ├── _posts
+osts
 │   │   ├── 2020–12–20-the-first-post.md
 │   │   └── 2020–12–20-the-second-post.md
 ```
@@ -375,35 +373,32 @@ class ApiGenerator < Generator
   priority :normal
 
   def generate(site)
-    categories = {}
-    posts = []
+    posts = site.posts.docs.map{ |post| post.data.clone if !post.data['draft'] }
 
     site.categories.each_key do |category|
-      categories[category] = []
-      site.categories[category].each_entry do |post|
-        if post.data['draft']
-          continue
-        end
-        inserted_post = post.data.clone
-        categories[category].append(inserted_post)
-        posts.append(inserted_post)
-      end
-    end
+      categories = site.categories[category].map{ |post| post.data.clone }
 
-    site.categories.each_key do |category|
-      site.pages << ListingPage.new(site, category, categories[category], :categories)
+      site.pages << ListingPage.new(site, 
+                                    category, 
+                                    categories, 
+                                    :categories)
     end
-    site.pages << ListingPage.new(site, "", posts, :posts_index)
-    site.pages << ListingPage.new(site, "", categories.keys, :categories_index)
+    site.pages << ListingPage.new(site, 
+                                  "", 
+                                  posts, 
+                                  :posts_index)
+    site.pages << ListingPage.new(site, 
+                                  "", 
+                                  site.categories.keys, 
+                                  :categories_index)
   end
 end
 ```
 
 * There is only one method you have to implement --- `generate`.
-* Iterate through every category and post.
-* I opted for skipping on drafts, but you can choose to generate them as well.
-* Insert the post to `categories` and `posts` hashes.
-* Generate categories, the index of all posts and categories index (in that order).
+* Make an array of every post that isn't a draft. I opted to skip on them, but you can choose to generate them as well.
+* Iterate through every category to generate indices of posts under a category.
+* Generate index of all posts and categories index.
 
 And that's it! If you hit `bundle exec jekyll build` again, you'll get the following output:
 
