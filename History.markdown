@@ -9,6 +9,10 @@
   * Fixes typo in layouts_dir documentation (#8532)
   * Fix i.e. typos in collections.md (#8529)
 
+### Bug Fixes
+
+  * Add webrick as a dependency (#8524)
+
 ## 4.2.0 / 2020-12-14
 
 ### Minor Enhancements
