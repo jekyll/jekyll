@@ -22,7 +22,8 @@ jobs:
         ruby_version:
         - 2.5
         - 2.7
-        - jruby-9.2.11.1
+        - 3.0
+        - jruby-9.2.14.0
 
     steps:
     - uses: actions/checkout@v2
