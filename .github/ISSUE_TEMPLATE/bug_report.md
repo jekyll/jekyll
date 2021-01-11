@@ -19,7 +19,7 @@ assignees: ''
   Thanks!
 -->
 
-<!-- 
+<!--
   Make sure that you've done all of these. If you're sure that the bug you're
   reporting is only apparent in a previous version of Jekyll, please say so explicitly
   in your description.

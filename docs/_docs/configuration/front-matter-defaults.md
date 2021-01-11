@@ -22,17 +22,13 @@ defaults:
       layout: "default"
 ```
 
-<div class="note info">
-  <h5>Stop and rerun `jekyll serve` command.</h5>
-  <p>
-    The <code>_config.yml</code> master configuration file contains global configurations
-    and variable definitions that are read once at execution time. Changes made to <code>_config.yml</code>
-    during automatic regeneration are not loaded until the next execution.
-  </p>
-  <p>
-    Note <a href="{{ '/docs/datafiles' | relative_url }}">Data Files</a> are included and reloaded during automatic regeneration.
-  </p>
-</div>
+{: .note .info}
+**Stop and rerun the `jekyll serve` command.**{:.title}<br>
+The `_config.yml` master configuration file contains global configurations
+and variable definitions that are read once at execution time. Changes made to `_config.yml`
+during automatic regeneration are not loaded until the next execution.
+<br>
+Note [Data Files]({{ '/docs/datafiles' | relative_url }}) are included and reloaded during automatic regeneration.
 
 Here, we are scoping the `values` to any file that exists in the path `scope`. Since the path is set as an empty string, it will apply to **all files** in your project. You probably don't want to set a layout on every file in your project - like css files, for example - so you can also specify a `type` value under the `scope` key.
 
@@ -106,15 +102,12 @@ defaults:
       layout: "specific-layout"
 ```
 
-<div class="note warning">
-  <h5>Globbing and Performance</h5>
-  <p>
-    Please note that globbing a path is known to have a negative effect on
-    performance and is currently not optimized, especially on Windows.
-    Globbing a path will increase your build times in proportion to the size
-    of the associated collection directory.
-  </p>
-</div>
+{: .note .warning}
+**Globbing and Performance**{:.title}<br>
+Please note that globbing a path is known to have a negative effect on
+performance and is currently not optimized, especially on Windows.
+Globbing a path will increase your build times in proportion to the size
+of the associated collection directory.
 
 ### Precedence
 

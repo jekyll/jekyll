@@ -38,8 +38,9 @@ When the Action builds your site, the contents of the *destination* directory wi
 pushed to the `gh-pages` branch with a commit, ready to be used for serving.
 
 {: .note .warning}
-The Action we're using here will create (or reset an existing) `gh-pages` branch on every successful
-deploy.<br/> So, if you have an existing `gh-pages` branch that is used to deploy your production
+The Action we're using here will create (or reset an existing) `gh-pages` branch on every successful deploy.
+<br>
+So, if you have an existing `gh-pages` branch that is used to deploy your production
 build, ensure to make a backup of the contents into a different branch so that you can rollback
 easily if necessary.
 
@@ -130,7 +131,7 @@ The above workflow can be explained as the following:
 - We set a reference to a secret **environment variable** for the action to use. The `JEKYLL_PAT`
   is a *Personal Access Token* and is detailed in the next section.
 
-Instead of using the **on.push** condition, you could trigger your build on a **schedule** by 
+Instead of using the **on.push** condition, you could trigger your build on a **schedule** by
 using the [on.schedule] parameter. For example, here we build daily at midnight by specifying
 **cron** syntax, which can be tested at the [crontab guru] site.
 

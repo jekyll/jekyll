@@ -10,7 +10,7 @@ file or on the command-line.
 <div class="note info">
   <h5>Be aware of directory paths</h5>
   <p>
-    Make directory path values in configuration keys like `plugins_dir` relative to the current working directory, not the site source. 
+    Make directory path values in configuration keys like `plugins_dir` relative to the current working directory, not the site source.
   </p>
 </div>
 

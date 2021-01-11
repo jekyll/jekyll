@@ -36,7 +36,7 @@ Sites on GitHub Pages are powered by Jekyll behind the scenes, so if you’re lo
 
 ## KeyCDN
 
-[KeyCDN](https://www.keycdn.com) accelerates Jekyll-powered websites with a wide range of other features such as real time image processing including WebP transformation.  
+[KeyCDN](https://www.keycdn.com) accelerates Jekyll-powered websites with a wide range of other features such as real time image processing including WebP transformation.
 The [Jekyll hosting tutorial](https://www.keycdn.com/support/jekyll-hosting) provides various options to supercharge Jekyll sites with just a few steps. It combines best flexibility and excellent performance.
 
 ## Kickster

@@ -4,15 +4,12 @@ permalink: "/docs/configuration/incremental-regeneration/"
 ---
 
 ## Incremental Regeneration
-<div class="note warning">
-  <h5>Incremental regeneration is still an experimental feature</h5>
-  <p>
-    While incremental regeneration will work for the most common cases, it will
-    not work correctly in every scenario. Please be extremely cautious when
-    using the feature, and report any problems not listed below by
-    <a href="https://github.com/jekyll/jekyll/issues/new">opening an issue on GitHub</a>.
-  </p>
-</div>
+{: .note .warning}
+**Incremental regeneration is still an experimental feature**{:.title}<br>
+While incremental regeneration will work for the most common cases, it will
+not work correctly in every scenario. Please be extremely cautious when
+using the feature, and report any problems not listed below by
+[opening an issue on GitHub]({{ site.repository }}/issues/new/choose).
 
 Incremental regeneration helps shorten build times by only generating documents
 and pages that were updated since the previous build. It does this by keeping

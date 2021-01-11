@@ -19,10 +19,10 @@ thanks to [Rouge](http://rouge.jneen.net). Rouge is the default highlighter
 in Jekyll 3 and above.
 
 {: .note .warning}
-Using Pygments has been deprecated and is not supported in
-Jekyll 4; the configuration setting <code>highlighter: pygments</code>
-now automatically falls back to using <em>Rouge</em> which is written in Ruby
-and 100% compatible with stylesheets for Pygments.
+Using Pygments has been deprecated and is not supported in Jekyll 4; the
+configuration setting `highlighter: pygments` now automatically falls back to
+using [Rouge](http://rouge.jneen.net/) which is written in Ruby and 100%
+compatible with stylesheets for Pygments.
 
 To render a code block with syntax highlighting, surround your code as follows:
 
@@ -41,13 +41,15 @@ language identifier. To find the appropriate identifier to use for the language
 you want to highlight, look for the “short name” on the [Rouge
 wiki](https://github.com/jayferd/rouge/wiki/List-of-supported-languages-and-lexers).
 
-<div class="note">
-  <h5>Jekyll processes all Liquid filters in code blocks</h5>
-  <p>If you are using a language that contains curly braces, you
-    will likely need to place <code>{&#37; raw &#37;}</code> and
-    <code>{&#37; endraw &#37;}</code> tags around your code.
-    Since Jekyll {% include docs_version_badge.html version="4.0" %}, you can add <code>render_with_liquid: false</code> in your front matter to disable Liquid entirely for a particular document.</p>
-</div>
+{: .note}
+**Jekyll processes all Liquid filters in code blocks**{:.title}<br>
+If you are using a language that contains curly braces, you
+will likely need to place <code>{&#37; raw &#37;}</code> and
+<code>{&#37; endraw &#37;}</code> tags around your code.
+<br>
+Since Jekyll {% include docs_version_badge.html version="4.0" %},
+you can add `render_with_liquid: false` in your front matter
+to disable Liquid entirely for a particular document.
 
 ### Line numbers
 
@@ -84,7 +86,8 @@ the syntax highlighter styles into your `main.css`:
 ## Links
 
 {: .note}
-Since Jekyll {% include docs_version_badge.html version="4.0"%}, you don't need to prepend `link` and `post_url` tags with `site.baseurl`.
+Since Jekyll {% include docs_version_badge.html version="4.0"%}, you don't need to prepend `link` and `post_url` tags
+with `site.baseurl`.
 
 ### Linking to pages {#link}
 

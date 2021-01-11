@@ -28,9 +28,9 @@ class="flag">flags</code> (specified on the command-line) that control them.
             {% if setting.version-badge %}
               <span class="version-badge" title="Introduced in v{{ setting.version-badge }}">{{ setting.version-badge }}</span>
             {% endif %}
-          </p> 
+          </p>
           <p class="description">{{ setting.description }}</p>
-        </td> 
+        </td>
         <td class="align-center">
           <p><code class="option">{{ setting.option }}</code></p>
           {% if setting.flag %}
@@ -55,19 +55,15 @@ class="flag">flags</code> (specified on the command-line) that control them.
 </table>
 </div>
 
-<div class="note warning">
-  <h5>Destination folders are cleaned on site builds</h5>
-  <p>
-    The contents of <code>&lt;destination&gt;</code> are automatically
-    cleaned, by default, when the site is built. Files or folders that are not
-    created by your site will be removed. Some files could be retained
-    by specifying them within the <code>&lt;keep_files&gt;</code> configuration directive.
-  </p>
-  <p>
-    Do not use an important location for <code>&lt;destination&gt;</code>; instead, use it as
-    a staging area and copy files from there to your web server.
-  </p>
-</div>
+{: .note .warning}
+**Destination folders are cleaned on site builds**{:.title}<br>
+The contents of `<destination>` are automatically
+cleaned, by default, when the site is built. Files or folders that are not
+created by your site will be removed. Some files could be retained
+by specifying them within the `<keep_files>` configuration directive.
+<br>
+Do not use an important location for `<destination>`; instead, use it as
+a staging area and copy files from there to your web server.
 
 ### Build Command Options
 
@@ -88,9 +84,9 @@ class="flag">flags</code> (specified on the command-line) that control them.
             {% if setting.version-badge %}
               <span class="version-badge" title="Introduced in v{{ setting.version-badge }}">{{ setting.version-badge }}</span>
             {% endif %}
-          </p> 
+          </p>
           <p class="description">{{ setting.description }}</p>
-        </td> 
+        </td>
         <td class="align-center">
           {% if setting.option %}<p><code class="option">{{ setting.option }}</code></p>{% endif %}
           {% if setting.flag %}<p><code class="flag">{{ setting.flag }}</code></p>{% endif %}
@@ -124,9 +120,9 @@ before your site is served.
             {% if setting.version-badge %}
               <span class="version-badge" title="Introduced in v{{ setting.version-badge }}">{{ setting.version-badge }}</span>
             {% endif %}
-          </p> 
+          </p>
           <p class="description">{{ setting.description }}</p>
-        </td> 
+        </td>
         <td class="align-center">
           {% if setting.option %}
             <p><code class="option">{{ setting.option }}</code></p>
@@ -153,10 +149,7 @@ before your site is served.
 </table>
 </div>
 
-<div class="note warning">
-  <h5>Do not use tabs in configuration files</h5>
-  <p>
-    This will either lead to parsing errors, or Jekyll will revert to the
-    default settings. Use spaces instead.
-  </p>
-</div>
+{: .note .warning}
+**Do not use tabs in configuration files**{:.title}<br>
+This will either lead to parsing errors, or Jekyll will revert to the
+default settings. Use spaces instead.

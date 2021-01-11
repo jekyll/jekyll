@@ -21,7 +21,7 @@ To start building your project on CircleCI, all you need to do is 'follow' your 
 
 ## 2. Dependencies
 
-The easiest way to manage dependencies for a Jekyll project (with or without CircleCI) is via a [Gemfile][4]. You'd want to have Jekyll, any Jekyll plugins, [HTML Proofer](#html-proofer), and any other gems that you are using in the `Gemfile`. Don't forget to version `Gemfile.lock` as well. Here's an example `Gemfile`:
+The easiest way to manage dependencies for a Jekyll project (with or without CircleCI) is via a [`Gemfile`][4]. You'd want to have Jekyll, any Jekyll plugins, [HTML Proofer](#html-proofer), and any other gems that you are using in the `Gemfile`. Don't forget to version `Gemfile.lock` as well. Here's an example `Gemfile`:
 
 [4]: http://bundler.io/gemfile.html
 

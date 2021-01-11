@@ -29,8 +29,9 @@ We only cover RubyInstaller-2.4 and newer here. Older versions need to
 4. Check if Jekyll has been installed properly: `jekyll -v`
 
 {: .note .info}
-You may receive an error when checking if Jekyll has been installed properly. Reboot your system and run `jekyll -v` again.
-If the error persists, please open a [RubyInstaller issue](https://github.com/oneclick/rubyinstaller2/issues/new).
+You may receive an error when checking if Jekyll has been installed properly. Reboot your system and run `jekyll -v`
+again. If the error persists, please open a
+[RubyInstaller issue](https://github.com/oneclick/rubyinstaller2/issues/new).
 
 That's it, you're ready to use Jekyll!
 
@@ -72,7 +73,7 @@ gem install jekyll bundler
 ```
 
 {: .note .info}
-  No `sudo` here.
+No `sudo` here.
 
 Check your Jekyll version:
 
@@ -80,17 +81,16 @@ Check your Jekyll version:
 jekyll -v
 ```
 
-That's it! You're ready to start using Jekyll. 
+That's it! You're ready to start using Jekyll.
 
 You can make sure time management is working properly by inspecting your `_posts` folder. You should see a markdown file
 with the current date in the filename.
 
-<div class="note info">
-  <h5>Non-superuser account issues</h5>
-  <p>If the `jekyll new` command prints the error "Your user account isn't allowed to install to the system RubyGems", see
-  the "Running Jekyll as Non-Superuser" instructions in
-  <a href="{{ '/docs/troubleshooting/#no-sudo' | relative_url }}">Troubleshooting</a>.</p>
-</div>
+{: .note .info}
+**Non-superuser account issues**{:.title}<br>
+If the `jekyll new` command prints the error "Your user account isn't allowed to install to the system RubyGems", see
+the "Running Jekyll as Non-Superuser" instructions in
+[Troubleshooting]({{ '/docs/troubleshooting/#no-sudo' | relative_url }}).
 
 {: .note .info}
 Bash on Ubuntu on Windows is still under development, so you may run into issues.
@@ -125,17 +125,13 @@ sites *will* have to update their `Gemfile` (and installed gems) to enable devel
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 ```
 
-<div class="note warning">
-  <h5>TZInfo 2.0 incompatibility</h5>
-  <p>
-    Version 2.0 of the TZInfo library has introduced a change in how timezone offsets are calculated.
-    This will result in incorrect date and time for your posts when the site is built with Jekyll 3.x on Windows.
-  </p>
-  <p>
-    We therefore recommend that you lock the Timezone library to version 1.2 and above by listing
-    <code>gem 'tzinfo', '~> 1.2'</code> in your <code>Gemfile</code>.
-  </p>
-</div>
+{: .note .warning}
+**TZInfo 2.0 incompatibility**{:.title}<br>
+Version 2.0 of the TZInfo library has introduced a change in how timezone offsets are calculated.
+This will result in incorrect date and time for your posts when the site is built with Jekyll 3.x on Windows.
+<br>
+We therefore recommend that you lock the Timezone library to version 1.2 and above by listing
+`gem 'tzinfo', '~> 1.2'` in your `Gemfile`.
 
 ## Auto Regeneration
 

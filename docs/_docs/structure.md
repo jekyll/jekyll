@@ -29,16 +29,18 @@ A basic Jekyll site usually looks something like this:
 └── index.html # can also be an 'index.md' with valid front matter
 ```
 
-<div class="note">
-  <h5>Directory structure of Jekyll sites using gem-based themes</h5>
-  <p>
-    Since version {% include docs_version_badge.html version="3.2"%}, a new Jekyll project bootstrapped with <code>jekyll new</code> uses <a href="/docs/themes/">gem-based themes</a> to define the look of the site. This results in a lighter default directory structure: <code>_layouts</code>, <code>_includes</code> and <code>_sass</code> are stored in the theme-gem, by default.
-  </p>
-  <br />
-  <p>
-     <a href="https://github.com/jekyll/minima">minima</a> is the current default theme, and <code>bundle info minima</code> will show you where minima theme's files are stored on your computer.
-  </p>
-</div>
+{: .note}
+**Directory structure of Jekyll sites using gem-based themes**{:.title}<br>
+Since version {% include docs_version_badge.html version="3.2"%}, a new Jekyll
+project bootstrapped with `jekyll new` uses
+[gem-based themes](/docs/themes/) to define the look of the site.
+This results in a lighter default directory structure:
+`_layouts`, `_includes` and `_sass` are stored
+in the theme-gem, by default.
+<br>
+[minima](https://github.com/jekyll/minima) is the current default theme,
+and `bundle info minima` will show you where its files are
+stored on your computer.
 
 An overview of what each of these does:
 
@@ -195,7 +197,7 @@ An overview of what each of these does:
       </td>
       <td>
         <p>
-          Except for the special cases listed above, every other directory and 
+          Except for the special cases listed above, every other directory and
           file—such as <code>css</code> and <code>images</code> folders,
           <code>favicon.ico</code> files, and so forth—will be copied verbatim
           to the generated site. There are plenty of <a href="/showcase/">sites

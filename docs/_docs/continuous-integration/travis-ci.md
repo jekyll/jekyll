@@ -76,7 +76,7 @@ with Ruby and requires RubyGems to install, we use the Ruby language build
 environment. Below is a sample `.travis.yml` file, followed by
 an explanation of each line.
 
-**Note:** You will need a Gemfile as well, [Travis will automatically install](https://docs.travis-ci.com/user/languages/ruby/#Dependency-Management) the dependencies based on the referenced gems. Here is an example `Gemfile` with two referenced gems, "jekyll" and "html-proofer":
+**Note:** You will need a `Gemfile` as well; [Travis will automatically install](https://docs.travis-ci.com/user/languages/ruby/#Dependency-Management) the dependencies based on the referenced gems. Here is an example `Gemfile` with two referenced gems, "jekyll" and "html-proofer":
 
 ```ruby
 source "https://rubygems.org"
@@ -183,12 +183,10 @@ prefixed, exemplified above with the `/pages-(.*)/` regular expression.
 The `branches` directive is completely optional. Travis will build from every
 push to any branch of your repo if leave it out.
 
-<div class="note warning">
-  <h5>Be sure to exclude <code>vendor</code> from your
-   <code>_config.yml</code></h5>
-  <p>Travis bundles all gems in the <code>vendor</code> directory on its build
-   servers, which Jekyll will mistakenly read and explode on.</p>
-</div>
+{: .note .warning}
+**Be sure to exclude `vendor` from your `_config.yml`**{:.title}<br>
+Travis bundles all gems in the `vendor` directory on its build
+servers, which Jekyll will mistakenly read and explode on.
 
 ```yaml
 exclude: [vendor]

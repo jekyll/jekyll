@@ -44,6 +44,6 @@ values in your configuration files when moving from one environment to another.
 
 {: .note}
 To switch part of your config settings depending on the environment, use the
-<a href="{{ '/docs/configuration/options/#build-command-options' | relative_url }}">build command option</a>,
-for example <code>--config _config.yml,_config_development.yml</code>. Settings
+[build command option]({{ '/docs/configuration/options/#build-command-options' | relative_url }}),
+for example `--config _config.yml,_config_development.yml`. Settings
 in later files override settings in earlier files.

@@ -304,11 +304,8 @@ production environment during build since v3.2.0 you should set your
 [environment to `production`](/docs/configuration/environments/).
 The issue is caused by trying to copy a non-existing symlink.
 
-<div class="note">
-  <h5>Please report issues you encounter!</h5>
-  <p>
-  If you come across a bug, please <a href="{{ site.repository }}/issues/new">create an issue</a>
-  on GitHub describing the problem and any work-arounds you find so we can
-  document it here for others.
-  </p>
-</div>
+{: .note}
+**Please report issues you encounter!**{:.title}<br>
+If you come across a bug, please [create an issue]({{ site.repository }}/issues/new/choose)
+on GitHub describing the problem and any work-arounds you find so we can
+document it here for others.

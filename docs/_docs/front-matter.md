@@ -22,25 +22,19 @@ then be available for you to access using Liquid tags both further down in the
 file and also in any layouts or includes that the page or post in question
 relies on.
 
-<div class="note warning">
-  <h5>UTF-8 Character Encoding Warning</h5>
-  <p>
-    If you use UTF-8 encoding, make sure that no <code>BOM</code> header
-    characters exist in your files or very, very bad things will happen to
-    Jekyll. This is especially relevant if you’re running
-    <a href="{{ '/docs/installation/windows/' | relative_url }}">Jekyll on Windows</a>.
-  </p>
-</div>
+{: .note .warning}
+**UTF-8 Character Encoding Warning**{:.title}<br>
+If you use UTF-8 encoding, make sure that no `BOM` header
+characters exist in your files or very, very bad things will happen to
+Jekyll. This is especially relevant if you’re running
+[Jekyll on Windows]({{ '/docs/installation/windows/' | relative_url }}).
 
-<div class="note">
-  <h5>Front Matter Variables Are Optional</h5>
-  <p>
-    If you want to use <a href="{{ '/docs/variables/' | relative_url }}">Liquid tags and variables</a>
-    but don’t need anything in your front matter, just leave it empty! The set
-    of triple-dashed lines with nothing in between will still get Jekyll to
-    process your file. (This is useful for things like CSS and RSS feeds!)
-  </p>
-</div>
+{: .note}
+**Front Matter Variables Are Optional**{:.title}<br>
+If you want to use [Liquid tags and variables]({{ '/docs/variables/' | relative_url }})
+but don’t need anything in your front matter, just leave it empty! The set
+of triple-dashed lines with nothing in between will still get Jekyll to
+process your file. (This is useful for things like CSS and RSS feeds!)
 
 ## Predefined Global Variables
 
@@ -113,14 +107,11 @@ front matter of a page or post.
 </table>
 </div>
 
-<div class="note">
-  <h5>Render Posts Marked As Unpublished</h5>
-  <p>
-    To preview unpublished pages, run `jekyll serve` or `jekyll build`
-    with the `--unpublished` switch. Jekyll also has a handy <a href="{{ '/docs/posts/#drafts' | relative_url }}">drafts</a>
-    feature tailored specifically for blog posts.
-  </p>
-</div>
+{: .note}
+**Render Posts Marked As Unpublished**{:.title}<br>
+To preview unpublished pages, run `jekyll serve` or `jekyll build`
+with the `--unpublished` switch. Jekyll also has a handy [drafts]({{ '/docs/posts/#drafts' | relative_url }})
+feature tailored specifically for blog posts.
 
 ## Custom Variables
 
@@ -200,13 +191,9 @@ These are available out-of-the-box to be used in the front matter for a post.
 </table>
 </div>
 
-<div class="note">
-  <h5>Don't repeat yourself</h5>
-  <p>
-    If you don't want to repeat your frequently used front matter variables
-    over and over, define
-    <a href="{{ '/docs/configuration/front-matter-defaults/' | relative_url }}" title="Front Matter defaults">defaults</a>
-    for them and only override them where necessary (or not at all). This works
-    both for predefined and custom variables.
-  </p>
-</div>
+{: .note}
+**Don't repeat yourself**{:.title}<br>
+If you don't want to repeat your frequently used front matter variables over and
+over, define [defaults]({{ '/docs/configuration/front-matter-defaults/' | relative_url }} "Front Matter defaults")
+for them and only override them where necessary (or not at all). This works
+both for predefined and custom variables.

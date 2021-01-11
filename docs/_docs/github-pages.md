@@ -43,15 +43,12 @@ gem "github-pages", group: :jekyll_plugins
 
 Be sure to run `bundle update` often.
 
-<div class="note">
-  <h5>GitHub Pages Documentation, Help, and Support</h5>
-  <p>
-    For more information about what you can do with GitHub Pages, as well as for
-    troubleshooting guides, you should check out
-    <a href="https://help.github.com/categories/github-pages-basics/">GitHub’s Pages Help section</a>.
-    If all else fails, you should contact <a href="https://github.com/contact">GitHub Support</a>.
-  </p>
-</div>
+{: .note}
+**GitHub Pages Documentation, Help, and Support**{:.title}<br>
+For more information about what you can do with GitHub Pages, as well as for
+troubleshooting guides, you should check out
+[GitHub’s Pages Help section](https://help.github.com/categories/github-pages-basics/).
+If all else fails, you should contact [GitHub Support](https://github.com/contact).
 
 ### Project Page URL Structure
 
@@ -90,14 +87,11 @@ name. For example, [@mojombo’s user page repository](https://github.com/mojomb
 Content from the `master` branch of your repository will be used to build and
 publish the GitHub Pages site, so make sure your Jekyll site is stored there.
 
-<div class="note info">
-  <h5>Custom domains do not affect repository names</h5>
-  <p>
-    GitHub Pages are initially configured to live under the
-    <code>username.github.io</code> subdomain, which is why repositories must
-    be named this way <strong>even if a custom domain is being used</strong>.
-  </p>
-</div>
+{: .note .info}
+**Custom domains do not affect repository names**{:.title}<br>
+GitHub Pages are initially configured to live under the
+`username.github.io` subdomain, which is why repositories must
+be named this way **even if a custom domain is being used**.
 
 ### Project Pages
 
@@ -118,23 +112,17 @@ Please refer to GitHub official documentation on
 [user, organization and project pages](https://help.github.com/articles/user-organization-and-project-pages/)
 to see more detailed examples.
 
-<div class="note warning">
-  <h5>Source files must be in the root directory</h5>
-  <p>
-    GitHub Pages <a href="https://help.github.com/en/github/working-with-github-pages/troubleshooting-jekyll-build-errors-for-github-pages-sites">overrides</a>
-    the <a href="{{ '/docs/configuration/options/' | relative_url }}">“Site Source”</a>
-    configuration value, so if you locate your files anywhere other than the
-    root directory, your site may not build correctly.
-  </p>
-</div>
+{: .note .warning}
+**Source files must be in the root directory**{:.title}<br>
+GitHub Pages
+[overrides](https://help.github.com/en/github/working-with-github-pages/troubleshooting-jekyll-build-errors-for-github-pages-sites)
+the ["Site Source"]({{ '/docs/configuration/options/' | relative_url }})
+configuration value, so if you locate your files anywhere other than the
+root directory, your site may not build correctly.
 
-<div class="note info">
-  <h5>Installing the <code>github-pages</code> gem on Windows</h5>
-
-  <p>
-    While Windows is not officially supported, it is possible
-    to install the <code>github-pages</code> gem on Windows.
-    Special instructions can be found on our
-    <a href="{{ '/docs/installation/windows/' | relative_url }}">Windows-specific docs page</a>.
-  </p>
-</div>
+{: .note .info}
+**Installing the `github-pages` gem on Windows**{:.title}<br>
+While Windows is not officially supported, it is possible
+to install the `github-pages` gem on Windows.
+Special instructions can be found on our
+[Windows-specific docs page]({{ '/docs/installation/windows/' | relative_url }}).

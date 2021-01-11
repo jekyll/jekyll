@@ -109,6 +109,6 @@ And we would still get the same output as above on the page:
 
 {: .note .info}
 In the above example, the tag block and the tag are both registered with
-the name <code>render_time</code>, but to register a tag and a tag block using
+the name `render_time`, but to register a tag and a tag block using
 the same name in the same project is not recommended as this may lead to
 conflicts.
