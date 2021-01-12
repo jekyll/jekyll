@@ -24,7 +24,6 @@ AllCops:
     - script/**/*
     - vendor/**/*
     - tmp/**/*
-  NewCops: enable
 
 Layout/BeginEndAlignment:
   Enabled: true
@@ -62,6 +61,7 @@ Layout/SpaceInsideHashLiteralBraces:
   Enabled: true
   Exclude:
     - test/**/*.rb
+
 Lint/AmbiguousAssignment:
   Enabled: true
 Lint/BinaryOperatorWithIdenticalOperands:
@@ -142,6 +142,7 @@ Lint/UselessTimes:
 Lint/Void:
   Exclude:
     - lib/jekyll/site.rb
+
 Metrics/AbcSize:
   Max: 23
 Metrics/BlockLength:
@@ -175,8 +176,34 @@ Metrics/ParameterLists:
   Max: 4
 Metrics/PerceivedComplexity:
   Max: 13
+
+Minitest/AssertInDelta:
+  Enabled: true
+Minitest/AssertionInLifecycleHook:
+  Enabled: true
+Minitest/AssertKindOf:
+  Enabled: true
+Minitest/AssertOutput:
+  Enabled: true
+Minitest/AssertPathExists:
+  Enabled: true
+Minitest/AssertSilent:
+  Enabled: true
+Minitest/LiteralAsActualArgument:
+  Enabled: true
 Minitest/TestMethodName:
   Enabled: false
+Minitest/MultipleAssertions:
+  Enabled: true
+Minitest/RefuteInDelta:
+  Enabled: true
+Minitest/RefuteKindOf:
+  Enabled: true
+Minitest/RefutePathExists:
+  Enabled: true
+Minitest/UnspecifiedException:
+  Enabled: true
+
 Naming/FileName:
   Enabled: false
 Naming/HeredocDelimiterNaming:
@@ -188,6 +215,7 @@ Naming/MemoizedInstanceVariableName:
     - lib/jekyll/drops/site_drop.rb
     - lib/jekyll/drops/unified_payload_drop.rb
     - lib/jekyll/page_without_a_file.rb
+
 Performance/AncestorsInclude:
   Enabled: false
 Performance/ArraySemiInfiniteRangeSlice:
@@ -220,6 +248,7 @@ Performance/StringInclude:
     - lib/jekyll/utils/platforms.rb
 Performance/Sum:
   Enabled: true
+
 Security/MarshalLoad:
   Exclude:
     - !ruby/regexp /test\/.*.rb$/
@@ -228,6 +257,7 @@ Security/YAMLLoad:
   Exclude:
     - !ruby/regexp /features\/.*.rb/
     - !ruby/regexp /test\/.*.rb$/
+
 Style/AccessModifierDeclarations:
   Enabled: false
 Style/AccessorGrouping:
