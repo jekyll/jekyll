@@ -10,7 +10,7 @@ class TestAnsi < JekyllUnitTest
 
     Jekyll::Utils::Ansi::COLORS.each_key do |color|
       should "respond_to? #{color}" do
-        assert @subject.respond_to?(color)
+        assert_respond_to(@subject, color)
       end
     end
 

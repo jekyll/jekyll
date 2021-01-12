@@ -201,7 +201,7 @@ class TestCommandsServe < JekyllUnitTest
 
       should "use empty directory index list when show_dir_listing is true" do
         opts = { "show_dir_listing" => true }
-        assert custom_opts(opts)[:DirectoryIndex].empty?
+        assert_empty custom_opts(opts)[:DirectoryIndex]
       end
 
       should "keep config between build and serve" do

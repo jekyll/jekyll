@@ -42,7 +42,7 @@ class TestPage < JekyllUnitTest
 
       should "not published when published yaml is false" do
         @page = setup_page("unpublished.html")
-        assert_equal false, @page.published?
+        refute @page.published?
       end
 
       should "create URL with non-alphabetic characters" do

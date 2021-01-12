@@ -24,7 +24,10 @@ group :test do
   gem "rspec"
   gem "rspec-mocks"
   gem "rubocop", "~> 1.0"
+  gem "rubocop-minitest"
   gem "rubocop-performance"
+  gem "rubocop-rake"
+  gem "rubocop-rspec"
   gem "test-dependency-theme", :path => File.expand_path("test/fixtures/test-dependency-theme", __dir__)
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)
   gem "test-theme-skinny", :path => File.expand_path("test/fixtures/test-theme-skinny", __dir__)

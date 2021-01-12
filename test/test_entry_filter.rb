@@ -131,13 +131,13 @@ class TestEntryFilter < JekyllUnitTest
     end
 
     should "return false with no glob patterns" do
-      assert !@filter.glob_include?([], "a.txt")
+      refute @filter.glob_include?([], "a.txt")
     end
 
     should "return false with all not match path" do
       data = ["a*", "b?"]
-      assert !@filter.glob_include?(data, "ca.txt")
-      assert !@filter.glob_include?(data, "ba.txt")
+      refute @filter.glob_include?(data, "ca.txt")
+      refute @filter.glob_include?(data, "ba.txt")
     end
 
     should "return true with match path" do
