@@ -13,6 +13,10 @@
 
   * Add webrick as a dependency (#8524)
 
+### Development Fixes
+
+  * style: enable new cops (#8538)
+
 ## 4.2.0 / 2020-12-14
 
 ### Minor Enhancements
