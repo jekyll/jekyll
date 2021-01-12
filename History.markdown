@@ -8,6 +8,7 @@
   * Improve documentation on developing generators (#8527)
   * Fixes typo in layouts_dir documentation (#8532)
   * Fix i.e. typos in collections.md (#8529)
+  * Remove GitHub Pages content which is in GitHub docs (#8533)
 
 ### Bug Fixes
 
