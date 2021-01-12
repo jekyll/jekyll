@@ -17,6 +17,7 @@
 ### Development Fixes
 
   * style: enable new cops (#8538)
+  * Allow dependabot to keep github actions up-to-date (#8540)
 
 ## 4.2.0 / 2020-12-14
 
