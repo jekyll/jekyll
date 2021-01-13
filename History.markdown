@@ -19,6 +19,10 @@
   * style: enable new cops (#8538)
   * Allow dependabot to keep github actions up-to-date (#8540)
 
+### Minor Enhancements
+
+  * Regenerate supported mime types (#8542)
+
 ## 4.2.0 / 2020-12-14
 
 ### Minor Enhancements
