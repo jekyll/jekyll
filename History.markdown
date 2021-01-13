@@ -18,6 +18,7 @@
 
   * style: enable new cops (#8538)
   * Allow dependabot to keep github actions up-to-date (#8540)
+  * Update actions/cache requirement to v2.1.3 (#8543)
 
 ### Minor Enhancements
 
