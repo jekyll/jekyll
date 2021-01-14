@@ -31,7 +31,8 @@ Let's dive in!
 
 {: .note .info}
 This solution needs a custom environment to support its Ruby code. This means that you can't host the site on GitHub
-Pages as-is - you'd need to use [Actions]({% link _docs/continuous-integration/github-actions.md %}) to deploy your
+Pages using your source files alone - you'd need to host your static files, too. To 
+achieve that, you can use [Actions]({% link _docs/continuous-integration/github-actions.md %}) to deploy your
 site. First, see if a simpler [solution](https://gist.github.com/MichaelCurrin/f8d908596276bdbb2044f04c352cb7c7)
 created by [Michael Currin](https://github.com/MichaelCurrin) fits your needs.
 
@@ -86,12 +87,9 @@ categories: ["update", "tutorial"]
 2
 ```
 
-This post belongs to two categories --- `update` and `tutorial` --- and doesn't include the custom property. Because the
+This one belongs to two categories --- `update` and `tutorial` --- and doesn't include tThis post belongs to two categories --- `update` and `tutorial` --- and doesn't include the custom property. Because the
 categories overlap with that of the previous post, it will be possible to test getting a list of posts from a category.
-
-## Create the Plugin
-
-The majority of work can be done using a custom plugin. For now, it only needs to convert the output filename extension
+ only needs to convert the output filename extension
 from default `.html` to `.json`. Under `_plugins`, create a new `api_generator.rb` file:
 
 ```ruby
