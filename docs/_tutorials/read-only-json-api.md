@@ -87,7 +87,7 @@ categories: ["update", "tutorial"]
 ```
 
 This one belongs to two categories --- `update` and `tutorial` --- and doesn't include the custom property. Because the
-categories overlap, it will be possible to test getting a list of posts from a category.
+categories overlap with that of the previous post, it will be possible to test getting a list of posts from a category.
 
 ## Create the Plugin
 
