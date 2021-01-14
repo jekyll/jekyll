@@ -8,7 +8,7 @@ In this tutorial, you'll create a kind of a [REST](https://restfulapi.net/) [API
 serving static [JSON](https://www.json.org/json-en.html) files generated from Markdown posts in your Jekyll site.
 
 JSON is a popular format to structure and exchange data on the web, without the presentation layer of HTML.
-The files you output are similar to a REST API in a server side language like Ruby, Python, or Node. You
+The files you output are similar to a REST API in a server-side language like Ruby, Python, or Node. You
 can access them directly in your browser from e.g. `/foo.json`. They can be used to build a custom frontend using 
 Angular, React, Vue, and so on.
 
@@ -21,7 +21,7 @@ and write a [plugin]({% link _docs/plugins.md %}) to convert your content to JSO
 familiar with Ruby** --- the language that Jekyll is written in. It can be learnt quite
 quickly.
 
-By the end of the tutorial, you'll expose the following API enpoints:
+By the end of the tutorial, you'll expose the following API endpoints:
 * `/` --- an index of all posts
 * `/{url}` --- details of a post
 * `/categories` --- an index of categories
@@ -37,9 +37,9 @@ site. First, see if a simpler [solution](https://gist.github.com/MichaelCurrin/f
 created by [Michael Currin](https://github.com/MichaelCurrin) fits your needs.
 
 {: .note .info}
-This tutorial comes with [a repository](https://github.com/izdwuut/jekyll-json-api-tutorial). 
-It contains the full project (`main` branch) and a deployed version of the site (`gh-pages` 
-branch). It has an action that builds the site on push to the default branch.
+This tutorial comes with [a repository](https://github.com/izdwuut/jekyll-json-api-tutorial). It contains the full 
+project (`main` branch), a deployed version of the site (`gh-pages` branch), and the tutorial barebones (`tutorial` 
+branch). The repository has an action that builds the site on a push to the default branch.
 
 ## Setup
 
@@ -51,13 +51,13 @@ Start from going through an [installation]({% link _docs/installation.md %}) pro
 options:
 
 * Clone the aforementioned [repository](https://github.com/izdwuut/jekyll-json-api-tutorial), 
-check out to a `tutorial` branch and run a command `bundler install`. The branch contains the directories structure 
+check out to a `tutorial` branch, and run a command `bundler install`. The branch contains the directories structure 
 you will need.
 * Initialize a new Jekyll project by invoking the command `bundle exec jekyll new` and create 
 the directories structure yourself, using the structure in the repository.
 
-Unless you self-host your site, **you can rely on a generic 404 response from your server**. You no longer need `index`
- --- you will generate a custom one later. Generating pages like `about` is out of scope for this tutorial, but in case
+Unless you self-host your site, **you can rely on a generic 404 response from your server**. You no longer need `index.html`
+ --- you will generate a custom one later. Generating pages like `about.html` is out of scope for this tutorial, but in case
 you need them, they behave the same way that posts do.
 
 ### Dummy Posts
@@ -87,10 +87,13 @@ categories: ["update", "tutorial"]
 2
 ```
 
-This one belongs to two categories --- `update` and `tutorial` --- and doesn't include tThis post belongs to two categories --- `update` and `tutorial` --- and doesn't include the custom property. Because the
+This post belongs to two categories --- `update` and `tutorial` --- and doesn't include the custom property. Because the
 categories overlap with that of the previous post, it will be possible to test getting a list of posts from a category.
- only needs to convert the output filename extension
-from default `.html` to `.json`. Under `_plugins`, create a new `api_generator.rb` file:
+
+## Create the Plugin
+
+The majority of work can be done using a custom plugin. For now, it only needs to convert the output filename extension 
+from default `.html` to `.json`. Edit a file `_plugins/api_generator.rb`:
 
 ```ruby
 module Jekyll
@@ -149,7 +152,7 @@ end
 * Create a `Jekyll.serialize` method to generate a new JSON string from an item (a post or page). 
 It will remove all whitespace characters for you. 
 * Register for a `post_render` event owned by `:posts` and `:pages`.
-* With every post, parse it's layout and serialize it.
+* With every post, parse its layout and serialize it.
 
 ### Define a Page
 
@@ -195,11 +198,11 @@ end
 >
 > `name` - The String filename of the file.
   
-* `@basename` and `@ext` are only parts of the `@name`.
+* `@basename` and `@ext` are parts of the `@name`.
 * `@data` contains your `entries` --- posts and categories --- that will be rendered.
 * Look up front matter [defaults]({% link _docs/plugins/generators.md %}) scoped to a given type, and assign them to every 
 entry of `data.entries` array.
-* Define placeholders used in constructing page URL.
+* Define placeholders used in constructing the page URL.
 
 ### Generate Pages
 
@@ -234,7 +237,7 @@ end
 ```
 
 * There is only one method you have to implement --- `generate`.
-* Make an array of every post that isn't a draft. I opted to skip on them, but you can choose to generate them 
+* Make an array of every post. I opted to skip on drafts, but you can choose to generate them 
 as well.
 * Iterate through every category to generate indices of posts under a category.
 * Generate index of all posts and categories index.
@@ -266,15 +269,15 @@ defaults:
 ```
 
 * You have four various scopes: an index of all categories, a listing of all posts under a category, a 
-listing of all posts in the system and a single post. 
+listing of all posts in the system, and a single post. 
 * You specify a layout using a `layout` key.
-* Define a type used by the plugin. For purposes of this tutorial, it's only 
+* Define a `type` used by the plugin. For purposes of this tutorial, it's only 
 required to be unique.
-* For some of the items you declare a permalink. If you'd like to, you can do it for all of them. 
+* For some of the items, you declare a `permalink`. If you'd like to, you can do it for all of them. 
 It can come in handy if you want to define your own API endpoints.
 
-Now you can define the layouts. Before you do it, it's worth noting that you can look the 
-available variables up in [the documentation]({% link _docs/variables.md %}#page-variables).
+Now you can define the layouts. Before you do it, it's worth noting that you can look up the 
+available variables in [the documentation]({% link _docs/variables.md %}#page-variables).
 Knowing that, you can define a partial template in `_includes/post.html`:
 
 {% raw %}
@@ -292,11 +295,11 @@ Knowing that, you can define a partial template in `_includes/post.html`:
 {% endraw %}
 
 * Use `include.post` to reference the variable you passed before.
-* Pass every property through a jsonify [filter]({% link _docs/liquid/filters.md %}#data-to-json). This will add
+* Pass every property through a `jsonify` [filter]({% link _docs/liquid/filters.md %}#data-to-json). This will add
 quotation marks for us, convert arrays into strings, and escape quotation marks.
-* For `content`, turn Markdown-formatted strings into HTML using [markdownify]({% link _docs/liquid/filters.md %}#markdownify)
+* For `content`, turn Markdown-formatted strings into HTML using [`markdownify`]({% link _docs/liquid/filters.md %}#markdownify)
 filter.
-* Fetch the falue of `custom-property` variable that you defined earlier. If it doesn't exist on a post, a `null` value
+* Fetch the value of `custom-property` variable that you defined earlier. If it doesn't exist on a post, a `null` value
 will be returned.
 
 Now you can include it in `_layouts/post.html`:
@@ -308,7 +311,7 @@ Now you can include it in `_layouts/post.html`:
 {% endraw %}
 
 * Include a partial template `post.html` from `_includes` directory. 
-* Assign a value to internal `post` variable
+* Assign a value to the internal `post` variable
 
 
 The next template is `categories_index.html`. The only thing it does is output
@@ -320,7 +323,7 @@ an array of categories:
 ```
 {% endraw %}
 
-The last template --- `items_index.html` --- outputs a list of posts under a category and the 
+The last template --- `items_index.html` --- would output a list of posts under a category and the 
 index of all posts:
 
 {% raw %}
@@ -336,12 +339,18 @@ index of all posts:
 ```
 {% endraw %}
 
-* Iterate through every `item` in `entires` array.
-* Output the `item` using the partial template defined before, passing the iterator variable.
+* Iterate through every `item` in the `entires` array.
+* Passing the iterator variable, output the `item` using the partial template defined before.
 * Separate the `entries` using a colon, but skip it for the last one. This ensures that the loop 
-will generate a valid json.
+will generate a valid JSON.
 
-And that's it! If you enter command `bundle exec jekyll build`, you'll get the following output in your `_site` directory:
+And that's it! If you enter the command below:
+
+```sh
+bundle exec jekyll build
+```
+
+You'll get the following output in your `_site` directory:
 
 ```
 .
