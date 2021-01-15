@@ -4,22 +4,20 @@ author: izdwuut
 date: 2020-12-23 10:04:00 +0100
 plugin_disclaimer: true
 ---
-In this tutorial, you'll create a kind of a [REST](https://restfulapi.net/) [API](https://en.wikipedia.org/wiki/API)
-serving static [JSON](https://www.json.org/json-en.html) files generated from Markdown posts in your Jekyll site.
 
-JSON is a popular format to structure and exchange data on the web, without the presentation layer of HTML.
-The files you output are similar to a REST API in a server-side language like Ruby, Python, or Node. You
-can access them directly in your browser from e.g. `/foo.json`. They can be used to build a custom frontend using 
-Angular, React, Vue, and so on.
+In this tutorial, you'll create a kind of a [REST](https://restfulapi.net/) [API](https://en.wikipedia.org/wiki/API) serving
+static [JSON](https://www.json.org/json-en.html) files generated from Markdown posts in your Jekyll site.
 
-A huge inspiration to write this tutorial was a [post](https://forestry.io/blog/build-a-json-api-with-hugo/) written
-by [Régis Philibert](https://twitter.com/regisphilibert). It's about doing the exact same thing in
-[Hugo](https://gohugo.io/).
+JSON is a popular format to structure and exchange data on the web, without the presentation layer of HTML. The files you
+output are similar to a REST API in a server-side language like Ruby, Python, or Node. You can access them directly in your
+browser from e.g. `/foo.json`. They can be used to build a custom frontend using Angular, React, Vue, and so on.
 
-You will need to define a number of [layouts]({% link _docs/layouts.md %})
-and write a [plugin]({% link _docs/plugins.md %}) to convert your content to JSON. **Don't be afraid if you're not
-familiar with Ruby** --- the language that Jekyll is written in. It can be learnt quite
-quickly.
+A huge inspiration to write this tutorial was a [post](https://forestry.io/blog/build-a-json-api-with-hugo/) written by
+[Régis Philibert](https://twitter.com/regisphilibert). It's about doing the exact same thing in [Hugo](https://gohugo.io/).
+
+You will need to define a number of [layouts]({% link _docs/layouts.md %}) and write a [plugin]({% link _docs/plugins.md %})
+to convert your content to JSON. **Don't be afraid if you're not familiar with Ruby** --- the language that Jekyll is
+written in --- it can be learned quite quickly.
 
 By the end of the tutorial, you'll expose the following API endpoints:
 * `/` --- an index of all posts
@@ -30,16 +28,16 @@ By the end of the tutorial, you'll expose the following API endpoints:
 Let's dive in!
 
 {: .note .info}
-This solution needs a custom environment to support its Ruby code. This means that you can't host the site on GitHub
-Pages using your source files alone - you'd need to host your static files, too. To 
-achieve that, you can use [Actions]({% link _docs/continuous-integration/github-actions.md %}) to deploy your
-site. First, see if a simpler [solution](https://gist.github.com/MichaelCurrin/f8d908596276bdbb2044f04c352cb7c7)
-created by [Michael Currin](https://github.com/MichaelCurrin) fits your needs.
+This solution needs a custom environment to support its Ruby code. This means that you can't host the site on GitHub Pages
+using your source files alone --- you'd need to host your static files, too. To achieve that, you can use
+[GitHub Actions]({% link _docs/continuous-integration/github-actions.md %}) to deploy your site. First, see if a simpler
+[solution](https://gist.github.com/MichaelCurrin/f8d908596276bdbb2044f04c352cb7c7) created by
+[Michael Currin](https://github.com/MichaelCurrin) fits your needs.
 
 {: .note .info}
-This tutorial comes with [a repository](https://github.com/izdwuut/jekyll-json-api-tutorial). It contains the full 
-project (`main` branch), a deployed version of the site (`gh-pages` branch), and the tutorial barebones (`tutorial` 
-branch). The repository has an action that builds the site on a push to the default branch.
+This tutorial comes with [a repository](https://github.com/izdwuut/jekyll-json-api-tutorial). It contains the full project
+(`main` branch), a deployed version of the site (`gh-pages` branch), and the tutorial barebones (`tutorial` branch). The
+repository includes a GitHub Action workflow that builds the site on every push to the default branch.
 
 ## Setup
 
@@ -47,14 +45,12 @@ Here you will prepare the project for adding custom Ruby code later on.
 
 ### Installation
 
-Start from going through an [installation]({% link _docs/installation.md %}) process and choose one of the following 
-options:
-
-* Clone the aforementioned [repository](https://github.com/izdwuut/jekyll-json-api-tutorial), 
-check out to a `tutorial` branch, and run a command `bundler install`. The branch contains the directories structure 
-you will need.
-* Initialize a new Jekyll project by invoking the command `bundle exec jekyll new` and create 
-the directories structure yourself, using the structure in the repository.
+Once you have a working [installation]({% link _docs/installation.md %}) of Jekyll, choose one of the following options:
+* Clone the aforementioned [repository](https://github.com/izdwuut/jekyll-json-api-tutorial). Then create or check out to
+a branch named `tutorial` and pull in the contents of the remote `tutorial` branch. Finally install necessary dependencies
+by running `bundler install`.
+* Initialize a new Jekyll project by invoking the command `bundle exec jekyll new` and create the directory structure
+manually, mirroring the structure in the `tutorial` branch of the repository.
 
 Unless you self-host your site, **you can rely on a generic 404 response from your server**. You no longer need `index.html`
  --- you will generate a custom one later. Generating pages like `about.html` is out of scope for this tutorial, but in case
@@ -119,22 +115,19 @@ end
 * `Converter` --- a [class](https://www.rubydoc.info/github/jekyll/jekyll/Jekyll/Converter) that can handle
 [conversion]({% link _docs/plugins/converters.md %}) from one output format to another.
 * `safe` and `priority` --- as per [documentation]({% link _docs/plugins/your-first-plugin.md %}#flags):
-
-> Safe --- A boolean flag that informs Jekyll whether this plugin may be safely executed in an environment where
-arbitrary code execution is not allowed.
-
-> Priority --- This flag determines what order the plugin is loaded in.
-
-* `matches` --- a file extension to match. You target Markdown files, so it should match a filename `*.md`.
-Optionally, you could add `.markdown` etc.
+  > `safe` --- A boolean flag that informs Jekyll whether this plugin may be safely executed in an environment where
+  arbitrary code execution is not allowed.
+  > `priority` --- This flag determines what order the plugin is loaded in.
+* `matches` --- a file extension to match. You target Markdown files, so it should match the extension `.md`. Optionally,
+you could add `.markdown` and other Markdown file extensions.
 * `output_ext` --- a method that returns an output extension --- `.json` in our case.
-* `convert` --- a function that takes post content **transpiled into HTML** as an argument. Please note that it
-doesn't parse the file through a template.
+* `convert` --- a function that takes post content **transpiled into HTML** as an argument. Please note that it doesn't
+parse the file through a template.
 
 ### Remove Whitespace
 
-Using [hooks]({% link _docs/plugins/hooks.md %}), you can remove all whitespace. Before a
-post is rendered, you can add some custom logic in:
+Using [hooks]({% link _docs/plugins/hooks.md %}), you can remove all whitespace. Before a post is rendered, you can add some
+custom logic in:
 
 ```ruby
 def Jekyll.serialize(item)
@@ -149,8 +142,8 @@ Hooks.register :pages, :post_render do |page|
   page.output = serialize(page.output)
 end
 ```
-* Create a `Jekyll.serialize` method to generate a new JSON string from an item (a post or page). 
-It will remove all whitespace characters for you. 
+* Create a `Jekyll.serialize` method to generate a new JSON string from an item (a post or page). It will remove all
+whitespace characters for you.
 * Register for a `post_render` event owned by `:posts` and `:pages`.
 * With every post, parse its layout and serialize it.
 
@@ -179,7 +172,7 @@ class ListingPage < Page
   def url_placeholders
     {
       :category   => @dir,
-      :path => @dir,
+      :path       => @dir,
       :basename   => basename,
       :output_ext => output_ext,
     }
@@ -189,14 +182,10 @@ end
 
 * [`Page`](https://www.rubydoc.info/github/jekyll/jekyll/Jekyll/Page) means that `ListingPage` represents a generated page.
 * Override `initialize` method. According to the [documentation](https://www.rubydoc.info/github/jekyll/jekyll/Jekyll%2FPage:initialize):
-
-> `site` - The Site object.
->
-> `base` - The String path to the source.
->
-> `dir` - The String path between the source and the file.
->
-> `name` - The String filename of the file.
+  > `site` --- The Site object.
+  > `base` --- The String path to the source.
+  > `dir`  --- The String path between the source and the file.
+  > `name` --- The String filename of the file.
   
 * `@basename` and `@ext` are parts of the `@name`.
 * `@data` contains your `entries` --- posts and categories --- that will be rendered.
@@ -237,8 +226,7 @@ end
 ```
 
 * There is only one method you have to implement --- `generate`.
-* Make an array of every post. I opted to skip on drafts, but you can choose to generate them 
-as well.
+* Make an array of every post. I opted to skip on drafts, but you can choose to generate them as well.
 * Iterate through every category to generate indices of posts under a category.
 * Generate index of all posts and categories index.
 
@@ -268,17 +256,16 @@ defaults:
       layout: items_index
 ```
 
-* You have four various scopes: an index of all categories, a listing of all posts under a category, a 
-listing of all posts in the system, and a single post. 
+* You have four various scopes: an index of all categories, a listing of all posts under a category, a listing of all posts
+in the system, and a single post.
 * You specify a layout using a `layout` key.
-* Define a `type` used by the plugin. For purposes of this tutorial, it's only 
-required to be unique.
-* For some of the items, you declare a `permalink`. If you'd like to, you can do it for all of them. 
-It can come in handy if you want to define your own API endpoints.
+* Define a `type` used by the plugin. For purposes of this tutorial, it's only required to be unique.
+* For some of the items, you declare a `permalink`. If you'd like to, you can do it for all of them. It can come in handy if
+you want to define your own API endpoints.
 
-Now you can define the layouts. Before you do it, it's worth noting that you can look up the 
-available variables in [the documentation]({% link _docs/variables.md %}#page-variables).
-Knowing that, you can define a partial template in `_includes/post.html`:
+Now you can define the layouts. Before you do it, it's worth noting that you can look up the available variables in
+[the documentation]({% link _docs/variables.md %}#page-variables). Knowing that, you can define a partial template in
+`_includes/post.html`:
 
 {% raw %}
 ```liquid
@@ -295,12 +282,12 @@ Knowing that, you can define a partial template in `_includes/post.html`:
 {% endraw %}
 
 * Use `include.post` to reference the variable you passed before.
-* Pass every property through a `jsonify` [filter]({% link _docs/liquid/filters.md %}#data-to-json). This will add
-quotation marks for us, convert arrays into strings, and escape quotation marks.
+* Pass every property through a `jsonify` [filter]({% link _docs/liquid/filters.md %}#data-to-json). This will add quotation
+marks for us, convert arrays into strings, and escape quotation marks.
 * For `content`, turn Markdown-formatted strings into HTML using [`markdownify`]({% link _docs/liquid/filters.md %}#markdownify)
 filter.
-* Fetch the value of `custom-property` variable that you defined earlier. If it doesn't exist on a post, a `null` value
-will be returned.
+* Fetch the value of `custom-property` variable that you defined earlier. If it doesn't exist on a post, a `null` value will
+be returned.
 
 Now you can include it in `_layouts/post.html`:
 
@@ -310,12 +297,10 @@ Now you can include it in `_layouts/post.html`:
 ```
 {% endraw %}
 
-* Include a partial template `post.html` from `_includes` directory. 
+* Include a partial template `post.html` from `_includes` directory.
 * Assign a value to the internal `post` variable
 
-
-The next template is `categories_index.html`. The only thing it does is output
-an array of categories:
+The next template is `categories_index.html`. The only thing it does is output an array of categories:
 
 {% raw %}
 ```liquid
@@ -323,8 +308,7 @@ an array of categories:
 ```
 {% endraw %}
 
-The last template --- `items_index.html` --- would output a list of posts under a category and the 
-index of all posts:
+The last template --- `items_index.html` --- would output a list of posts under a category and the index of all posts:
 
 {% raw %}
 ```liquid
@@ -341,8 +325,7 @@ index of all posts:
 
 * Iterate through every `item` in the `entires` array.
 * Passing the iterator variable, output the `item` using the partial template defined before.
-* Separate the `entries` using a colon, but skip it for the last one. This ensures that the loop 
-will generate a valid JSON.
+* Separate the `entries` using a colon, but skip it for the last one. This ensures that the loop will generate a valid JSON.
 
 And that's it! If you enter the command below:
 
@@ -354,26 +337,21 @@ You'll get the following output in your `_site` directory:
 
 ```
 .
-│   index.json
-│
-├───categories
-│   │   index.json
-│   │
-│   ├───tutorial
-│   │       index.json
-│   │
-│   └───update
-│           index.json
-│
-└───update
-    ├───2020
-    │   └───12
-    │       └───20
-    │               the-first-post.json
-    │
-    └───tutorial
-        └───2020
-            └───12
-                └───20
-                        the-second-post.json
+├── index.json
+├── categories
+│   ├── index.json
+│   ├── tutorial
+│   │   └── index.json
+│   └── update
+│       └── index.json
+└── update
+    ├── 2020
+    │   └── 12
+    │       └── 20
+    │           └── the-first-post.json
+    └── tutorial
+        └── 2020
+            └── 12
+                └── 20
+                    └── the-second-post.json
 ```
