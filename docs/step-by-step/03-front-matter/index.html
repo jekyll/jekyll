@@ -16,21 +16,21 @@
 <meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Front Matter" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Front matter is a snippet of YAML which sits between two triple-dashed lines at the top of a file. Front matter is used to set variables for the page, for example:" />
-<meta property="og:description" content="Front matter is a snippet of YAML which sits between two triple-dashed lines at the top of a file. Front matter is used to set variables for the page, for example:" />
+<meta name="description" content="Front matter is a snippet of YAML placed between two triple-dashed lines at the start of a file." />
+<meta property="og:description" content="Front matter is a snippet of YAML placed between two triple-dashed lines at the start of a file." />
 <link rel="canonical" href="https://jekyllrb.com/docs/step-by-step/03-front-matter/" />
 <meta property="og:url" content="https://jekyllrb.com/docs/step-by-step/03-front-matter/" />
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-01-12T23:32:06-08:00" />
+<meta property="article:published_time" content="2021-01-19T00:56:59-08:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Front Matter" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/step-by-step/03-front-matter/"},"description":"Front matter is a snippet of YAML which sits between two triple-dashed lines at the top of a file. Front matter is used to set variables for the page, for example:","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/step-by-step/03-front-matter/","@type":"BlogPosting","image":"https://jekyllrb.com/img/jekyll-og.png","headline":"Front Matter","dateModified":"2021-01-12T23:32:06-08:00","datePublished":"2021-01-12T23:32:06-08:00","@context":"https://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/step-by-step/03-front-matter/"},"description":"Front matter is a snippet of YAML placed between two triple-dashed lines at the start of a file.","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/step-by-step/03-front-matter/","@type":"BlogPosting","image":"https://jekyllrb.com/img/jekyll-og.png","headline":"Front Matter","dateModified":"2021-01-19T00:56:59-08:00","datePublished":"2021-01-19T00:56:59-08:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -128,24 +128,25 @@
         </div>
         <h1>Step by Step Tutorial</h1>
         <h2>3. Front Matter</h2>
-        <p>Front matter is a snippet of <a href="http://yaml.org/">YAML</a> which sits between two
-triple-dashed lines at the top of a file. Front matter is used to set variables
-for the page, for example:</p>
+        <p>Front matter is a snippet of <a href="http://yaml.org/">YAML</a> placed between two
+triple-dashed lines at the start of a file.</p>
+
+<p>You can use front matter to set variables for the page:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="na">my_number</span><span class="pi">:</span> <span class="m">5</span>
 <span class="nn">---</span>
 </code></pre></div></div>
 
-<p>Front matter variables are available in Liquid under the <code class="language-plaintext highlighter-rouge">page</code> variable. For
-example to output the variable above you would use:</p>
+<p>You can call front matter variables in Liquid using the <code class="language-plaintext highlighter-rouge">page</code> variable. For
+example, to output the value of the <code class="language-plaintext highlighter-rouge">my_number</code> variable above:</p>
 
 <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{{</span><span class="w"> </span><span class="nv">page</span><span class="p">.</span><span class="nv">my_number</span><span class="w"> </span><span class="p">}}</span>
 </code></pre></div></div>
 
 <h2 id="use-front-matter">Use front matter</h2>
 
-<p>Let’s change the <code class="language-plaintext highlighter-rouge">&lt;title&gt;</code> on your site to populate using front matter:</p>
+<p>Change the <code class="language-plaintext highlighter-rouge">&lt;title&gt;</code> on your site to use front matter:</p>
 
 <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
 title: Home
@@ -162,17 +163,15 @@ title: Home
 &lt;/html&gt;
 </code></pre></div></div>
 
-<p>Note that in order for Jekyll to process any liquid tags on your page,
-you <em>must</em> include front matter on it. The most minimal snippet of front matter
-you can include is:</p>
+<p class="note info">You <em>must</em> include front matter on the page for Jekyll to process any Liquid tags on it.</p>
+
+<p>To make Jekyll process a page without defining variables in the front matter, use:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="nn">---</span>
 </code></pre></div></div>
 
-<p>You may still be wondering why you’d output it this way as it takes
-more source code than raw HTML. In this next step, you’ll see why we’ve
-been doing this.</p>
+<p>Next, you’ll learn more about layouts and why your pages use more source code than plain HTML.</p>
 
         <div class="section-nav">
       <div class="left align-right">
