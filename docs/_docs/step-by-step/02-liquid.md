@@ -11,7 +11,7 @@ language which has three main components:
 
 ## Objects
 
-Objects tell Liquid to output predefined [variables](../../variables) as content on a page. Use double curly braces for objects: {% raw %}`{{`{% endraw %} and {% raw %}`}}`{% endraw %}. 
+Objects tell Liquid to output predefined [variables](../../variables/) as content on a page. Use double curly braces for objects: {% raw %}`{{`{% endraw %} and {% raw %}`}}`{% endraw %}. 
 
 For example, {% raw %}`{{ page.title }}`{% endraw %} displays the `page.title` variable.
 
@@ -52,11 +52,11 @@ For example:
 
 This displays `Hi` instead of `hi`. 
 
-Learn more about the filters available in Jekyll [here](/docs/liquid/filters/).
+[Learn more about the filters](/docs/liquid/filters/) available.
 
 ## Use Liquid
 
-Now, use Liquid to make your `Hello World!` text from [Setup](../01-setup) lowercase:
+Now, use Liquid to make your `Hello World!` text from [Setup](../01-setup/) lowercase:
 
 {% raw %}
 ```liquid

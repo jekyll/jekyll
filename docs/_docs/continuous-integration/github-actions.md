@@ -6,7 +6,6 @@ When building a Jekyll site with GitHub Pages, the standard flow is restricted f
 and to make it simpler to get a site setup. For more control over the build and still host the site
 with GitHub Pages you can use GitHub Actions.
 
-
 ## Advantages of using Actions
 
 ### Control over gemset
@@ -25,16 +24,15 @@ with GitHub Pages you can use GitHub Actions.
 - **Logging** --- The build log is visible and can be tweaked to be verbose, so it is much easier to
   debug errors using Actions.
 
-
 ## Workspace setup
 
 The first and foremost requirement is a Jekyll project hosted at GitHub. Choose an existing Jekyll
-project or follow the [quickstart]({{ '/docs' | relative_url }}) and push the repository to GitHub
+project or follow the [quickstart]({{ '/docs/' | relative_url }}) and push the repository to GitHub
 if it is not hosted there already.
 
 We're only going to cover builds from the `master` branch in this page. Therefore, ensure that you
 are working on the `master` branch. If necessary, you may create it based on your default branch.
-When the Action builds your site, the contents of the *destination* directory will be automatically
+When the Action builds your site, the contents of the _destination_ directory will be automatically
 pushed to the `gh-pages` branch with a commit, ready to be used for serving.
 
 {: .note .warning}
@@ -53,6 +51,7 @@ title: "Jekyll Actions Demo"
 ```
 
 {% raw %}
+
 ```liquid
 ---
 ---
@@ -64,8 +63,8 @@ Welcome to My Home Page
 - Original date - {{ date }}
 - With timeago filter - {{ date | timeago }}
 ```
-{% endraw %}
 
+{% endraw %}
 
 ```ruby
 # Gemfile
@@ -100,6 +99,7 @@ Create a **workflow file**, say `github-pages.yml`, using either the GitHub inte
 a YAML file to the workflow directory path manually. The base contents are:
 
 {% raw %}
+
 ```yaml
 name: Build and deploy Jekyll site to GitHub Pages
 
@@ -117,6 +117,7 @@ jobs:
         env:
           JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
 ```
+
 {% endraw %}
 
 The above workflow can be explained as the following:
@@ -128,23 +129,22 @@ The above workflow can be explained as the following:
 - We specify our selected **action** and **version number** using `helaili/jekyll-action@2.0.5`.
   This handles the build and deploy.
 - We set a reference to a secret **environment variable** for the action to use. The `JEKYLL_PAT`
-  is a *Personal Access Token* and is detailed in the next section.
+  is a _Personal Access Token_ and is detailed in the next section.
 
-Instead of using the **on.push** condition, you could trigger your build on a **schedule** by 
+Instead of using the **on.push** condition, you could trigger your build on a **schedule** by
 using the [on.schedule] parameter. For example, here we build daily at midnight by specifying
 **cron** syntax, which can be tested at the [crontab guru] site.
 
 ```yaml
 on:
   schedule:
-    - cron:  '0 0 * * *'
+    - cron: "0 0 * * *"
 ```
 
 Note that this string must be quoted to prevent the asterisks from being evaluated incorrectly.
 
 [on.schedule]: https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#onschedule
 [crontab guru]: https://crontab.guru/
-
 
 ### Providing permissions
 
@@ -159,7 +159,7 @@ build using _Secrets_:
    to commit to the `gh-pages` branch.
 3. **Copy** the token value.
 4. Go to your repository's **Settings** and then the **Secrets** tab.
-5. **Create** a token named `JEKYLL_PAT` (*important*). Give it a value using the value copied
+5. **Create** a token named `JEKYLL_PAT` (_important_). Give it a value using the value copied
    above.
 
 ### Build and deploy
@@ -171,11 +171,11 @@ To watch the progress and see any build errors, check on the build **status** us
 following approaches:
 
 - **View by commit**
-    - Go to the repository level view in GitHub. Under the most recent commit (near the top) you’ll
-      see a **status symbol** next to the commit message as a tick or _X_. Hover over it and click
-      the **details** link.
+  - Go to the repository level view in GitHub. Under the most recent commit (near the top) you’ll
+    see a **status symbol** next to the commit message as a tick or _X_. Hover over it and click
+    the **details** link.
 - **Actions tab**
-    - Go to the repository's Actions tab. Click on the `jekyll` workflow tab.
+  - Go to the repository's Actions tab. Click on the `jekyll` workflow tab.
 
 If all goes well, all steps will be green and the built assets will now exist on the `gh-pages`
 branch.
