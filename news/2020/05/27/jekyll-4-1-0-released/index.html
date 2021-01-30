@@ -223,10 +223,6 @@ of time taken during various stages of the <em>build process</em>.</li>
 
 <p>For the interest of plugin authors:</p>
 <ul>
-  <li>
-<code class="language-plaintext highlighter-rouge">Jekyll::Page</code> now uses a Liquid Drop to expose attributes for Liquid templates. However, its subclasses will continue
-using the legacy <code class="language-plaintext highlighter-rouge">ATTRIBUTES_FOR_LIQUID</code> hash by default. More details in the <a href="/docs/pages/#for-plugin-developers">associated documentation</a>
-</li>
   <li>Excerpts won’t be generated for <code class="language-plaintext highlighter-rouge">Jekyll::Page</code> subclasses automatically unless such instances have an <code class="language-plaintext highlighter-rouge">excerpt</code> key in
 their <code class="language-plaintext highlighter-rouge">data</code> hash.</li>
 </ul>
