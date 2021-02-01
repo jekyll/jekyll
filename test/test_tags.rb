@@ -193,7 +193,7 @@ class TestTags < JekyllUnitTest
         end
         
         # {% highlight {{ lang }} %}
-        should "render markdown with rouge and lang from variable" do
+        should "render markdown with rouge, lang from variable" do
           assert_match(
             %(<pre><code class="language-ruby" data-lang="ruby"><span class="c1">) +
               %(# test) +
@@ -203,7 +203,7 @@ class TestTags < JekyllUnitTest
         end
         
         # {% highlight {{ lines }} %}
-        should "render markdown with rouge with line numbers from variable" do
+        should "render markdown with rouge, line numbers from variable" do
           assert_match(
             %(<table class="rouge-table"><tbody>) +
               %(<tr><td class="gutter gl">) +
@@ -217,26 +217,26 @@ class TestTags < JekyllUnitTest
         end
 
         HIGHLIGHT_VAR_AND_TABLE = %(<pre><code class="language-ruby" data-lang="ruby">) +
-        %(<table class="rouge-table"><tbody>) +
-        %(<tr><td class="gutter gl">) +
-        %(<pre class="lineno">1\n</pre></td>) +
-        %(<td class="code"><pre><span class="c1">) +
-        %(# test) +
-        %(</span>\n</pre></td></tr>) +
-        %(</tbody></table>)
+          %(<table class="rouge-table"><tbody>) +
+          %(<tr><td class="gutter gl">) +
+          %(<pre class="lineno">1\n</pre></td>) +
+          %(<td class="code"><pre><span class="c1">) +
+          %(# test) +
+          %(</span>\n</pre></td></tr>) +
+          %(</tbody></table>)
 
         # {% highlight {{ lang }} linenos %}
-        should "render markdown with rouge with lang from variable and line numbers" do
+        should "render markdown with rouge, lang from variable and line numbers" do
           assert_match(HIGHLIGHT_VAR_AND_TABLE, @result)
         end
 
         # {% highlight ruby {{ lines }}%}
-        should "render markdown with rouge with set lang and line numbers from variable" do
+        should "render markdown with rouge, set lang and line numbers from variable" do
           assert_match(HIGHLIGHT_VAR_AND_TABLE, @result)
         end
 
         # {% highlight {{ lang }} {{ lines }} %}
-        should "render markdown with rouge with lang from variable and line numbers from variable" do
+        should "render markdown with rouge, lang from variable, and line numbers from variable" do
           assert_match(HIGHLIGHT_VAR_AND_TABLE, @result)
         end
       end
