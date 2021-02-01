@@ -109,6 +109,10 @@ Lint/NestedPercentLiteral:
     - test/test_site.rb
 Lint/NoReturnInBeginEndBlocks:
   Enabled: true
+Lint/NumberedParameterAssignment:
+  Enabled: true
+Lint/OrAssignmentToConstant:
+  Enabled: true
 Lint/OutOfRangeRegexpRef:
   Enabled: true
 Lint/RaiseException:
@@ -121,11 +125,15 @@ Lint/SelfAssignment:
   Enabled: true
 Lint/StructNewOverride:
   Enabled: true
+Lint/SymbolConversion:
+  Enabled: true
 Lint/ToEnumArguments:
   Enabled: false
 Lint/TopLevelReturnWithArgument:
   Enabled: true
 Lint/TrailingCommaInAttributeDeclaration:
+  Enabled: true
+Lint/TripleQuotes:
   Enabled: true
 Lint/UnexpectedBlockArity:
   Enabled: true
@@ -320,6 +328,8 @@ Style/HashSyntax:
 Style/HashTransformKeys:
   Enabled: false
 Style/HashTransformValues:
+  Enabled: true
+Style/IfWithBooleanLiteralBranches:
   Enabled: true
 Style/KeywordParametersOrder:
   Enabled: true
