@@ -16,8 +16,7 @@ If you're looking for support for Jekyll, there are a lot of options:
 
 * Read the [Jekyll Documentation]({{ '/docs/' | relative_url }})
 * If you have a question about using Jekyll, start a discussion on the [Jekyll Forum](https://talk.jekyllrb.com/) or [StackOverflow](https://stackoverflow.com/questions/tagged/jekyll)
-* Chat with Jekyllers &mdash; Join our [Gitter channel](https://gitter.im/jekyll/jekyll) or our [IRC channel on Freenode](irc:irc.freenode.net/jekyll)
-
+* Chat with Jekyllers &mdash; Join our [Gitter channel](https://gitter.im/jekyll/jekyll) or our [IRC channel on Freenode](irc://irc.freenode.net/jekyll
 There are a bunch of helpful community members on these services who are willing to point you in the right direction.
 
 **Reminder: Jekyll's issue tracker is not a support forum.**

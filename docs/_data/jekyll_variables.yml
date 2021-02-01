@@ -76,7 +76,7 @@ site:
       Contains the url of your site as it is configured in the <code>_config.yml</code>.
       For example, if you have <code>url: http://mysite.com</code> in your configuration file,
       then it will be accessible in Liquid as <code>site.url</code>. For the development
-      environment there is <a href="/news/#3-siteurl-is-set-by-the-development-server">an
+      environment there is <a href="/news/2016/10/06/jekyll-3-3-is-here/#3-siteurl-is-set-by-the-development-server">an
       exception</a>, if you are running <code>jekyll serve</code> in a development environment
       <code>site.url</code> will be set to the value of <code>host</code>, <code>port</code>,
       and SSL-related options. This defaults to <code>url: http://localhost:4000</code>.

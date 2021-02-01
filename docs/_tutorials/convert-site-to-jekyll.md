@@ -116,7 +116,7 @@ Open `default.html` into your browser locally to ensure the site looks and behav
 
 For example, if the paths were relative on the site you copied, you'll need to either download the same assets into your Jekyll site or use absolute paths to the same assets in the cloud. (Syntax such as `src="//` requires a prefix such as `src="http://` to work in your local browser.)
 
-Jekyll provides some [filters](/docs/liquid/filters) to prepend a site URL before path. For example, you could preface your stylesheet like this:
+Jekyll provides some [filters](/docs/liquid/filters/) to prepend a site URL before path. For example, you could preface your stylesheet like this:
 
 {% raw %}
 ```liquid
