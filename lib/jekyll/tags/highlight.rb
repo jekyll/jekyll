@@ -14,35 +14,26 @@ module Jekyll
       # Both the language specifier and the options can be passed as liquid variables
       LANG_SYNTAX = %r![a-zA-Z0-9.+#_-]+!.freeze
       OPTIONS_SYNTAX = %r!(\s+\w+(=(\w+|"([0-9]+\s)*[0-9]+"))?)*!.freeze
-      SYNTAX = %r!^((?<lang_var>\{\{[ ]*(\w+([.]\w+)*([.]lang))[ ]*\}\})|(?<lang>#{LANG_SYNTAX}))?[ ]*((?<params_var>\{\{[ ]*(\w+([.]\w+)*)[ ]*\}\})|(?<params>#{OPTIONS_SYNTAX}))$!.freeze
+      SYNTAX = %r!^((?<lang_var>\{\{[ ]*((\w+[.])*(lang))[ ]*\}\})|(?<lang>#{LANG_SYNTAX}))?[ ]*((?<params_var>\{\{[ ]*(\w+([.]\w+)*)[ ]*\}\})|(?<params>#{OPTIONS_SYNTAX}))$!.freeze
 
       def initialize(tag_name, markup, tokens)
         super
         if markup.strip =~ SYNTAX
-          @matched = Regexp.last_match()
+          matched = Regexp.last_match
+          puts matched[0]
           
-          if @matched["lang_var"]
-            @lang = context[@matched["lang_var"]].downcase
-            @lang.match(LANG_SYNTAX)
-            unless $& == @lang
-              raise ArgumentError, <<~MSG
-                Language characters can only include Alphanumeric and the following characters, without spaces: . + # _ -
-                Your passed language variable: #{@lang}
-                MSG
-            end
-          elsif @matched["lang"]
-            @lang = @matched["lang"].downcase
+          if matched["lang_var"]
+            @lang = matched["lang_var"].strip
+          elsif matched["lang"]
+            @lang = matched["lang"].strip.downcase
           else
-            raise SyntaxError, <<~MSG
-              Unknown Syntax Error in tag 'highlight_param'.
-              Please review tag documentation.
-              MSG
+            @lang = ""
           end
 
-          if @matched["params_var"]
-            @highlight_options = parse_options(@matched["params_var"])
-          elsif @matched["params"]
-            @highlight_options = parse_options(@matched["params"])
+          if matched["params_var"]
+            @highlight_options = matched["params_var"].strip
+          elsif matched["params"]
+            @highlight_options = parse_options(matched["params"].strip)
           else
             @highlight_options = parse_options()
           end
@@ -62,16 +53,21 @@ module Jekyll
       end
 
       LEADING_OR_TRAILING_LINE_TERMINATORS = %r!\A(\n|\r)+|(\n|\r)+\z!.freeze
-
+      VARIABLE_SYNTAX = %r![^{]*(\{\{\s*[\w\-.]+\s*(\|.*)?\}\}[^\s{}]*)+!.freeze
+      
       def render(context)
         prefix = context["highlighter_prefix"] || ""
         suffix = context["highlighter_suffix"] || ""
         code = super.to_s.gsub(LEADING_OR_TRAILING_LINE_TERMINATORS, "")
 
+        if VARIABLE_SYNTAX.match?(@highlight_options.to_s)
+          @highlight_options = parse_options(context[@highlight_options])
+        end
+        
         output =
           case context.registers[:site].highlighter
           when "rouge"
-            render_rouge(code)
+            render_rouge(code, context)
           when "pygments"
             render_pygments(code, context)
           else
@@ -88,7 +84,7 @@ module Jekyll
 
       def parse_options(input)
         options = {}
-        return options if input.empty?
+        return options if input.nil?
 
         # Split along 3 possible forms -- key="<quoted list>", key=value, or key
         input.scan(OPTIONS_REGEX) do |opt|
@@ -108,10 +104,10 @@ module Jekyll
       def render_pygments(code, _context)
         Jekyll.logger.warn "Warning:", "Highlight Tag no longer supports rendering with Pygments."
         Jekyll.logger.warn "", "Using the default highlighter, Rouge, instead."
-        render_rouge(code)
+        render_rouge(code, _context)
       end
 
-      def render_rouge(code)
+      def render_rouge(code, _context)
         require "rouge"
         formatter = ::Rouge::Formatters::HTMLLegacy.new(
           :line_numbers => @highlight_options[:linenos],
@@ -120,13 +116,16 @@ module Jekyll
           :gutter_class => "gutter",
           :code_class   => "code"
         )
-        if LANG_SYNTAX.match?(@lang)
+        
+        if VARIABLE_SYNTAX.match?(@lang)
+          @lang = _context[@lang].downcase.strip
+          lexer = ::Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
+        elsif LANG_SYNTAX.match?(@lang)
           lexer = ::Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
         else
-          raise SyntaxError, <<~MSG
-          Can't find language variable #{@matched["lang_var"]}
-          MSG
+          lexer = Rouge::Lexers::PlainText
         end
+        puts lexer
         formatter.format(lexer.lex(code))
       end
 
