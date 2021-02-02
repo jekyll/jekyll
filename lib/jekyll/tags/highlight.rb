@@ -22,19 +22,15 @@ module Jekyll
       def initialize(tag_name, markup, tokens)
         super
         if markup.strip =~ SYNTAX
-        
+
           if Regexp.last_match["lang_var"]
-            @lang = Regexp.last_match["lang_var"].strip
+            @lang = Regexp.last_match["lang_var"]
           elsif Regexp.last_match["lang"]
-            @lang = Regexp.last_match["lang"].strip.downcase
+            @lang = Regexp.last_match["lang"].downcase
           end
 
-          @highlight_options = 
-            if Regexp.last_match["params_var"]
-              Regexp.last_match["params_var"].strip
-            else
-              parse_options(Regexp.last_match["params"].strip)
-            end
+          @highlight_options = Regexp.last_match["params_var"]
+          @highlight_options ||= parse_options(Regexp.last_match["params"])
 
         else
           raise SyntaxError, <<~MSG
@@ -48,7 +44,7 @@ module Jekyll
 
       LEADING_OR_TRAILING_LINE_TERMINATORS = %r!\A(\n|\r)+|(\n|\r)+\z!.freeze
       VARIABLE_SYNTAX = %r![^{]*(\{\{\s*[\w\-.]+\s*(\|.*)?\}\}[^\s{}]*)+!.freeze
-      
+
       def render(context)
         prefix = context["highlighter_prefix"] || ""
         suffix = context["highlighter_suffix"] || ""
@@ -57,7 +53,7 @@ module Jekyll
         if VARIABLE_SYNTAX.match?(@highlight_options.to_s)
           @highlight_options = parse_options(context[@highlight_options])
         end
-        
+
         output =
           case context.registers[:site].highlighter
           when "rouge"
@@ -110,7 +106,7 @@ module Jekyll
           :gutter_class => "gutter",
           :code_class   => "code"
         )
-        
+
         if VARIABLE_SYNTAX.match?(@lang)
           @lang = context[@lang].downcase.strip
           lexer = ::Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText

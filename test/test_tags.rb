@@ -191,7 +191,7 @@ class TestTags < JekyllUnitTest
         setup do
           fill_post_vars("# test")
         end
-        
+
         # {% highlight {{ lang }} %}
         should "render markdown with rouge, lang from variable" do
           assert_match(
@@ -201,7 +201,7 @@ class TestTags < JekyllUnitTest
             @result
           )
         end
-        
+
         # {% highlight {{ lines }} %}
         should "render markdown with rouge, line numbers from variable" do
           assert_match(
@@ -241,7 +241,7 @@ class TestTags < JekyllUnitTest
         end
       end
     end
-      
+
     context "post content has raw tag" do
       setup do
         content = <<~CONTENT
