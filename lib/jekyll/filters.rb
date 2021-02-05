@@ -355,6 +355,20 @@ module Jekyll
       new_ary
     end
 
+    def hash_add_item(hash, key, value)
+      return hash unless hash.is_a?(::Hash)
+
+      hash[key] = value
+      hash
+    end
+
+    def hash_remove_item(hash, key)
+      return hash unless hash.is_a?(::Hash)
+
+      hash.delete(key)
+      hash
+    end
+
     def sample(input, num = 1)
       return input unless input.respond_to?(:sample)
 

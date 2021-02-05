@@ -340,6 +340,18 @@
 
 #
 
+- name: Hash Filters
+  description: >-
+    hash_add_item and hash_remove_item add and remove items from a Hash.
+    These are <strong>NON-DESTRUCTIVE</strong>, i.e. they do not mutate the Hash.
+  examples:
+    - input: '{{ data.store | hash_add_item: "key", "value" }}'
+      output: '{"existing" => "data", "key" => "value"}'
+    - input: '{{ data.store | hash_remove_item: "existing" }}'
+      output: '{}'
+
+#
+
 - name: Inspect
   description: Convert an object into its String representation for debugging.
   examples:
