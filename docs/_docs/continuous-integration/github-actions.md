@@ -106,16 +106,16 @@ name: Build and deploy Jekyll site to GitHub Pages
 on:
   push:
     branches:
-      - master
+      - main # This may be master, if your repository was created before 01-Oct-2020
 
 jobs:
   github-pages:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: helaili/jekyll-action@2.0.5
+      - uses: helaili/jekyll-action@2.1
         env:
-          JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
+          token: ${{ secrets.JEKYLL_PAT }}
 ```
 
 {% endraw %}
