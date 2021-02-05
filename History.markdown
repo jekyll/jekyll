@@ -10,6 +10,7 @@
   * Fix i.e. typos in collections.md (#8529)
   * Remove GitHub Pages content which is in GitHub docs (#8533)
   * Step By Step Instructions Review (#8399)
+  * Fix typo in migrating from 3.0 to 4.0 page (#8572)
 
 ### Bug Fixes
 
