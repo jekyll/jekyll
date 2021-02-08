@@ -113,9 +113,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: helaili/jekyll-action@2.0.5
-        env:
-          JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
+      - uses: helaili/jekyll-action@2.1.0
+        with:
+          token: ${{ secrets.JEKYLL_PAT }}
 ```
 
 {% endraw %}
