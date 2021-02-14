@@ -444,6 +444,18 @@ module Jekyll
 
     # Public
     #
+    # Returns a list of themes used by this site in reverse order of
+    # inheritance hierarchy.
+    def theme_list
+      return @theme_list if @theme_list
+
+      @theme_list = []
+      @theme_list << theme
+      @theme_list
+    end
+
+    # Public
+    #
     # Returns the object as a debug String.
     def inspect
       "#<#{self.class} @source=#{@source}>"
