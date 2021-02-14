@@ -18,7 +18,7 @@ module Jekyll
       site.theme_list.each do |theme|
         theme_layout_entries(theme).each do |layout_file|
           @layouts[layout_name(layout_file)] ||= \
-            Layout.new(site, theme_layout_directory(theme), layout_file, theme)
+            Layout.new(site, theme_layout_directory_for_theme(theme), layout_file, theme)
         end
       end
 
@@ -29,7 +29,14 @@ module Jekyll
       @layout_directory ||= site.in_source_dir(site.config["layouts_dir"])
     end
 
-    def theme_layout_directory(theme)
+    # NOTE: Returns only the site's theme layout path. However, this does not
+    # account for theme inheritance. Use `theme_layout_directory_for_theme`
+    # instead.
+    def theme_layout_directory
+      @theme_layout_directory ||= site.theme.layouts_path if site.theme
+    end
+
+    def theme_layout_directory_for_theme(theme)
       return nil unless theme
 
       theme.layouts_path
@@ -42,8 +49,8 @@ module Jekyll
     end
 
     def theme_layout_entries(theme)
-      if theme_layout_directory(theme)
-        entries_in(theme_layout_directory(theme))
+      if theme_layout_directory_for_theme(theme)
+        entries_in(theme_layout_directory_for_theme(theme))
       else
         []
       end
