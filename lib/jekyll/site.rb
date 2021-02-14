@@ -3,14 +3,14 @@
 module Jekyll
   class Site
     attr_reader   :source, :dest, :cache_dir, :config
-    attr_accessor :layouts, :pages, :static_files, :drafts,
+    attr_accessor :layouts, :pages, :static_files, :drafts, :inclusions,
                   :exclude, :include, :lsi, :highlighter, :permalink_style,
                   :time, :future, :unpublished, :safe, :plugins, :limit_posts,
                   :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
                   :gems, :plugin_manager, :theme
 
     attr_accessor :converters, :generators, :reader
-    attr_reader   :regenerator, :liquid_renderer, :includes_load_paths, :filter_cache
+    attr_reader   :regenerator, :liquid_renderer, :includes_load_paths, :filter_cache, :profiler
 
     # Public: Initialize a new Site.
     #
@@ -26,6 +26,7 @@ module Jekyll
       @filter_cache    = {}
 
       @reader          = Reader.new(self)
+      @profiler        = Profiler.new(self)
       @regenerator     = Regenerator.new(self)
       @liquid_renderer = LiquidRenderer.new(self)
 
@@ -71,19 +72,21 @@ module Jekyll
     #
     # Returns nothing.
     def process
+      return profiler.profile_process if config["profile"]
+
       reset
       read
       generate
       render
       cleanup
       write
-      print_stats if config["profile"]
     end
 
     def print_stats
       Jekyll.logger.info @liquid_renderer.stats_table
     end
 
+    # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
     #
     # Reset Site details.
@@ -96,6 +99,7 @@ module Jekyll
                     Time.now
                   end
       self.layouts = {}
+      self.inclusions = {}
       self.pages = []
       self.static_files = []
       self.data = {}
@@ -113,8 +117,10 @@ module Jekyll
 
       Jekyll::Cache.clear_if_config_changed config
       Jekyll::Hooks.trigger :site, :after_reset, self
+      nil
     end
     # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/AbcSize
 
     # Load necessary libraries, plugins, converters, and generators.
     #
@@ -175,6 +181,7 @@ module Jekyll
       reader.read
       limit_posts!
       Jekyll::Hooks.trigger :site, :post_read, self
+      nil
     end
 
     # Run each of the Generators.
@@ -187,6 +194,7 @@ module Jekyll
         Jekyll.logger.debug "Generating:",
                             "#{generator.class} finished in #{Time.now - start} seconds."
       end
+      nil
     end
 
     # Render the site to the destination.
@@ -203,6 +211,7 @@ module Jekyll
       render_pages(payload)
 
       Jekyll::Hooks.trigger :site, :post_render, self, payload
+      nil
     end
 
     # Remove orphaned files and empty directories in destination.
@@ -210,17 +219,20 @@ module Jekyll
     # Returns nothing.
     def cleanup
       site_cleaner.cleanup!
+      nil
     end
 
     # Write static files, pages, and posts.
     #
     # Returns nothing.
     def write
+      Jekyll::Commands::Doctor.conflicting_urls(self)
       each_site_file do |item|
         item.write(dest) if regenerator.regenerate?(item)
       end
       regenerator.write_metadata
       Jekyll::Hooks.trigger :site, :post_write, self
+      nil
     end
 
     def posts
@@ -304,8 +316,9 @@ module Jekyll
     # passed in as argument.
 
     def instantiate_subclasses(klass)
-      klass.descendants.select { |c| !safe || c.safe }.sort.map do |c|
-        c.new(config)
+      klass.descendants.select { |c| !safe || c.safe }.tap do |result|
+        result.sort!
+        result.map! { |c| c.new(config) }
       end
     end
 
@@ -442,7 +455,12 @@ module Jekyll
       @collections_path ||= dir_str.empty? ? source : in_source_dir(dir_str)
     end
 
-    # Get a theme given a root directory
+    # Public: Get the theme at the given a root directory.
+    #
+    # base - A path to the root directory of the theme
+    #
+    # Returns the theme at the given root directory, or returns nil if no theme
+    # is present at that directory.
     def theme_with_root(base)
       matching_themes = theme_list.select do |theme|
         theme.root == in_theme_dir_with_theme(theme, base)
@@ -450,8 +468,10 @@ module Jekyll
       matching_themes.length == 1 ? matching_themes[0] : nil
     end
 
-    # Get a list of themes used by this site in reverse order of inheritance
-    # hierarchy.
+    # Public
+    #
+    # Returns a list of themes used by this site in reverse order of
+    # inheritance hierarchy.
     def theme_list
       return @theme_list if @theme_list
 
@@ -464,9 +484,18 @@ module Jekyll
       @theme_list
     end
 
+    # Public
+    #
+    # Returns the object as a debug String.
+    def inspect
+      "#<#{self.class} @source=#{@source}>"
+    end
+
     private
 
     def load_theme_configuration(config)
+      return config if config["ignore_theme_config"] == true
+
       theme_config_file = nil
       theme_list.each do |theme|
         theme_config_file ||= in_theme_dir_with_theme(theme, "_config.yml")

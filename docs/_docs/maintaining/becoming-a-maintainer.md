@@ -13,7 +13,7 @@ You want to maintain Jekyll? Use it often. Do weird things with it. Do normal th
 
 ## 2. Help Triage Issues
 
-Watch the repository you're interested in. Join [an Affinity Team](https://teams.jekyllrb.com) and receive mentions regarding a particular interest area of the project. When you receive a notification for an issue that has not been triaged by a maintainer, dive in. Can you reproduce the issue? Can you determine the fix? [More tips on Triaging an Issue in our maintainer guide](../triaging-an-issue). Every maintainer loves an issue that is resolved before they get to it. :smiley:
+Watch the repository you're interested in. Join [an Affinity Team](https://teams.jekyllrb.com) and receive mentions regarding a particular interest area of the project. When you receive a notification for an issue that has not been triaged by a maintainer, dive in. Can you reproduce the issue? Can you determine the fix? [More tips on Triaging an Issue in our maintainer guide](../triaging-an-issue/). Every maintainer loves an issue that is resolved before they get to it. :smiley:
 
 ## 3. Write Documentation
 
@@ -25,7 +25,7 @@ As a maintainer, you will be reviewing pull requests which update code. You shou
 
 ## 5. Review Pull Requests
 
-Start by reviewing one pull request a week. Leave detailed comments and [follow our guide for reviewing pull requests](../reviewing-a-pull-request).
+Start by reviewing one pull request a week. Leave detailed comments and [follow our guide for reviewing pull requests](../reviewing-a-pull-request/).
 
 ## 6. Ask!
 

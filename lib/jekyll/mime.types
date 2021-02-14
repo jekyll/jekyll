@@ -5,9 +5,15 @@ application/andrew-inset                                                  ez
 application/applixware                                                    aw
 application/atom+xml                                                      atom
 application/atomcat+xml                                                   atomcat
+application/atomdeleted+xml                                               atomdeleted
 application/atomsvc+xml                                                   atomsvc
+application/atsc-dwd+xml                                                  dwd
+application/atsc-held+xml                                                 held
+application/atsc-rsat+xml                                                 rsat
 application/bdoc                                                          bdoc
+application/calendar+xml                                                  xcs
 application/ccxml+xml                                                     ccxml
+application/cdfx+xml                                                      cdfx
 application/cdmi-capability                                               cdmia
 application/cdmi-container                                                cdmic
 application/cdmi-domain                                                   cdmid
@@ -21,8 +27,10 @@ application/dssc+der                                                      dssc
 application/dssc+xml                                                      xdssc
 application/ecmascript                                                    ecma es
 application/emma+xml                                                      emma
+application/emotionml+xml                                                 emotionml
 application/epub+zip                                                      epub
 application/exi                                                           exi
+application/fdt+xml                                                       fdt
 application/font-tdpfr                                                    pfr
 application/geo+json                                                      geojson
 application/gml+xml                                                       gml
@@ -33,6 +41,7 @@ application/hjson                                                         hjson
 application/hyperstudio                                                   stk
 application/inkml+xml                                                     ink inkml
 application/ipfix                                                         ipfix
+application/its+xml                                                       its
 application/java-archive                                                  jar war ear
 application/java-serialized-object                                        ser
 application/java-vm                                                       class
@@ -41,6 +50,7 @@ application/json                                                          json m
 application/json5                                                         json5
 application/jsonml+json                                                   jsonml
 application/ld+json                                                       jsonld
+application/lgr+xml                                                       lgr
 application/lost+xml                                                      lostxml
 application/mac-binhex40                                                  hqx
 application/mac-compactpro                                                cpt
@@ -55,13 +65,17 @@ application/mediaservercontrol+xml                                        mscml
 application/metalink+xml                                                  metalink
 application/metalink4+xml                                                 meta4
 application/mets+xml                                                      mets
+application/mmt-aei+xml                                                   maei
+application/mmt-usd+xml                                                   musd
 application/mods+xml                                                      mods
 application/mp21                                                          m21 mp21
 application/mp4                                                           mp4s m4p
+application/mrb-consumer+xml                                              xdf
 application/msword                                                        doc dot
 application/mxf                                                           mxf
 application/n-quads                                                       nq
 application/n-triples                                                     nt
+application/node                                                          cjs
 application/octet-stream                                                  bin dms lrf mar so dist distz pkg bpk dump elc deploy exe dll deb dmg iso img msi msp msm buffer
 application/oda                                                           oda
 application/oebps-package+xml                                             opf
@@ -69,6 +83,7 @@ application/ogg                                                           ogx
 application/omdoc+xml                                                     omdoc
 application/onenote                                                       onetoc onetoc2 onetmp onepkg
 application/oxps                                                          oxps
+application/p2p-overlay+xml                                               relo
 application/patch-ops-error+xml                                           xer
 application/pdf                                                           pdf
 application/pgp-encrypted                                                 pgp
@@ -85,6 +100,7 @@ application/pkix-pkipath                                                  pkipat
 application/pkixcmp                                                       pki
 application/pls+xml                                                       pls
 application/postscript                                                    ai eps ps
+application/provenance+xml                                                provx
 application/prs.cww                                                       cww
 application/pskc+xml                                                      pskcxml
 application/raml+yaml                                                     raml
@@ -94,6 +110,9 @@ application/relax-ng-compact-syntax                                       rnc
 application/resource-lists+xml                                            rl
 application/resource-lists-diff+xml                                       rld
 application/rls-services+xml                                              rs
+application/route-apd+xml                                                 rapd
+application/route-s-tsid+xml                                              sls
+application/route-usd+xml                                                 rusd
 application/rpki-ghostbusters                                             gbr
 application/rpki-manifest                                                 mft
 application/rpki-roa                                                      roa
@@ -106,6 +125,8 @@ application/scvp-cv-response                                              scs
 application/scvp-vp-request                                               spq
 application/scvp-vp-response                                              spp
 application/sdp                                                           sdp
+application/senml+xml                                                     senmlx
+application/sensml+xml                                                    sensmlx
 application/set-payment-initiation                                        setpay
 application/set-registration-initiation                                   setreg
 application/shf+xml                                                       shf
@@ -118,9 +139,16 @@ application/srgs+xml                                                      grxml
 application/sru+xml                                                       sru
 application/ssdl+xml                                                      ssdl
 application/ssml+xml                                                      ssml
+application/swid+xml                                                      swidtag
 application/tei+xml                                                       tei teicorpus
 application/thraud+xml                                                    tfi
 application/timestamped-data                                              tsd
+application/toml                                                          toml
+application/ttml+xml                                                      ttml
+application/ubjson                                                        ubj
+application/urc-ressheet+xml                                              rsheet
+application/urc-targetdesc+xml                                            td
+application/vnd.1000minds.decision-model+xml                              1km
 application/vnd.3gpp.pic-bw-large                                         plb
 application/vnd.3gpp.pic-bw-small                                         psb
 application/vnd.3gpp.pic-bw-var                                           pvb
@@ -146,7 +174,7 @@ application/vnd.anser-web-certificate-issue-initiation                    cii
 application/vnd.anser-web-funds-transfer-initiation                       fti
 application/vnd.antix.game-component                                      atx
 application/vnd.apple.installer+xml                                       mpkg
-application/vnd.apple.keynote                                             keynote
+application/vnd.apple.keynote                                             key
 application/vnd.apple.mpegurl                                             m3u8
 application/vnd.apple.numbers                                             numbers
 application/vnd.apple.pages                                               pages
@@ -154,6 +182,7 @@ application/vnd.apple.pkpass                                              pkpass
 application/vnd.aristanetworks.swi                                        swi
 application/vnd.astraea-software.iota                                     iota
 application/vnd.audiograph                                                aep
+application/vnd.balsamiq.bmml+xml                                         bmml
 application/vnd.blueice.multipass                                         mpm
 application/vnd.bmi                                                       bmi
 application/vnd.businessobjects                                           rep
@@ -181,6 +210,7 @@ application/vnd.curl.car                                                  car
 application/vnd.curl.pcurl                                                pcurl
 application/vnd.dart                                                      dart
 application/vnd.data-vision.rdz                                           rdz
+application/vnd.dbf                                                       dbf
 application/vnd.dece.data                                                 uvf uvvf uvd uvvd
 application/vnd.dece.ttml+xml                                             uvt uvvt
 application/vnd.dece.unspecified                                          uvx uvvx
@@ -380,7 +410,9 @@ application/vnd.oasis.opendocument.text-template                          ott
 application/vnd.oasis.opendocument.text-web                               oth
 application/vnd.olpc-sugar                                                xo
 application/vnd.oma.dd2+xml                                               dd2
+application/vnd.openblox.game+xml                                         obgx
 application/vnd.openofficeorg.extension                                   oxt
+application/vnd.openstreetmap.data+xml                                    osm
 application/vnd.openxmlformats-officedocument.presentationml.presentation pptx
 application/vnd.openxmlformats-officedocument.presentationml.slide        sldx
 application/vnd.openxmlformats-officedocument.presentationml.slideshow    ppsx
@@ -405,6 +437,7 @@ application/vnd.proteus.magazine                                          mgz
 application/vnd.publishare-delta-tree                                     qps
 application/vnd.pvi.ptid1                                                 ptid
 application/vnd.quark.quarkxpress                                         qxd qxt qwd qwt qxl qxb
+application/vnd.rar                                                       rar
 application/vnd.realvnc.bed                                               bed
 application/vnd.recordare.musicxml                                        mxl
 application/vnd.recordare.musicxml+xml                                    musicxml
@@ -425,6 +458,7 @@ application/vnd.shana.informed.package                                    ipk
 application/vnd.simtech-mindmapper                                        twd twds
 application/vnd.smaf                                                      mmf
 application/vnd.smart.teacher                                             teacher
+application/vnd.software602.filler.form+xml                               fo
 application/vnd.solent.sdkm+xml                                           sdkm sdkd
 application/vnd.spotfire.dxp                                              dxp
 application/vnd.spotfire.sfs                                              sfs
@@ -453,6 +487,7 @@ application/vnd.symbian.install                                           sis si
 application/vnd.syncml+xml                                                xsm
 application/vnd.syncml.dm+wbxml                                           bdm
 application/vnd.syncml.dm+xml                                             xdm
+application/vnd.syncml.dmddf+xml                                          ddf
 application/vnd.tao.intent-module-archive                                 tao
 application/vnd.tcpdump.pcap                                              pcap cap dmp
 application/vnd.tmobile-livetv                                            tmo
@@ -544,6 +579,7 @@ application/x-httpd-php                                                   php
 application/x-install-instructions                                        install
 application/x-java-archive-diff                                           jardiff
 application/x-java-jnlp-file                                              jnlp
+application/x-keepass2                                                    kdbx
 application/x-latex                                                       latex
 application/x-lua-bytecode                                                luac
 application/x-lzh-compressed                                              lzh lha
@@ -574,7 +610,6 @@ application/x-perl                                                        pl pm
 application/x-pkcs12                                                      p12 pfx
 application/x-pkcs7-certificates                                          p7b spc
 application/x-pkcs7-certreqresp                                           p7r
-application/x-rar-compressed                                              rar
 application/x-redhat-package-manager                                      rpm
 application/x-research-info-systems                                       ris
 application/x-sea                                                         sea
@@ -614,7 +649,10 @@ application/x-xpinstall                                                   xpi
 application/x-xz                                                          xz
 application/x-zmachine                                                    z1 z2 z3 z4 z5 z6 z7 z8
 application/xaml+xml                                                      xaml
-application/xcap-diff+xml                                                 xdf
+application/xcap-att+xml                                                  xav
+application/xcap-caps+xml                                                 xca
+application/xcap-el+xml                                                   xel
+application/xcap-ns+xml                                                   xns
 application/xenc+xml                                                      xenc
 application/xhtml+xml                                                     xhtml xht
 application/xml                                                           xml xsl xsd rng
@@ -631,10 +669,11 @@ audio/3gpp                                                                3gpp
 audio/adpcm                                                               adp
 audio/basic                                                               au snd
 audio/midi                                                                mid midi kar rmi
+audio/mobile-xmf                                                          mxmf
 audio/mp3                                                                 mp3
 audio/mp4                                                                 m4a mp4a
 audio/mpeg                                                                mpga mp2 mp2a m2a m3a
-audio/ogg                                                                 oga ogg spx
+audio/ogg                                                                 oga ogg spx opus
 audio/s3m                                                                 s3m
 audio/silk                                                                sil
 audio/vnd.dece.audio                                                      uva uvva
@@ -674,6 +713,7 @@ font/woff                                                                 woff
 font/woff2                                                                woff2
 image/aces                                                                exr
 image/apng                                                                apng
+image/avif                                                                avif
 image/bmp                                                                 bmp
 image/cgm                                                                 cgm
 image/dicom-rle                                                           drle
@@ -684,14 +724,25 @@ image/heic                                                                heic
 image/heic-sequence                                                       heics
 image/heif                                                                heif
 image/heif-sequence                                                       heifs
+image/hej2k                                                               hej2
+image/hsj2                                                                hsj2
 image/ief                                                                 ief
 image/jls                                                                 jls
 image/jp2                                                                 jp2 jpg2
 image/jpeg                                                                jpeg jpg jpe
+image/jph                                                                 jph
+image/jphc                                                                jhc
 image/jpm                                                                 jpm
 image/jpx                                                                 jpx jpf
 image/jxr                                                                 jxr
+image/jxra                                                                jxra
+image/jxrs                                                                jxrs
+image/jxs                                                                 jxs
+image/jxsc                                                                jxsc
+image/jxsi                                                                jxsi
+image/jxss                                                                jxss
 image/ktx                                                                 ktx
+image/ktx2                                                                ktx2
 image/png                                                                 png
 image/prs.btif                                                            btif
 image/prs.pti                                                             pti
@@ -713,9 +764,11 @@ image/vnd.fst                                                             fst
 image/vnd.fujixerox.edmics-mmr                                            mmr
 image/vnd.fujixerox.edmics-rlc                                            rlc
 image/vnd.microsoft.icon                                                  ico
+image/vnd.ms-dds                                                          dds
 image/vnd.ms-modi                                                         mdi
 image/vnd.ms-photo                                                        wdp
 image/vnd.net-fpx                                                         npx
+image/vnd.pco.b16                                                         b16
 image/vnd.tencent.tap                                                     tap
 image/vnd.valve.source.texture                                            vtf
 image/vnd.wap.wbmp                                                        wbmp
@@ -750,6 +803,7 @@ model/gltf+json                                                           gltf
 model/gltf-binary                                                         glb
 model/iges                                                                igs iges
 model/mesh                                                                msh mesh silo
+model/mtl                                                                 mtl
 model/vnd.collada+xml                                                     dae
 model/vnd.dwf                                                             dwf
 model/vnd.gdl                                                             gdl
@@ -784,6 +838,7 @@ text/richtext                                                             rtx
 text/sgml                                                                 sgml sgm
 text/shex                                                                 shex
 text/slim                                                                 slim slm
+text/spdx                                                                 spdx
 text/stylus                                                               stylus styl
 text/tab-separated-values                                                 tsv
 text/troff                                                                t tr roff man me ms

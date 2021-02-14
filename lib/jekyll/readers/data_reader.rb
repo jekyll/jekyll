@@ -3,10 +3,12 @@
 module Jekyll
   class DataReader
     attr_reader :site, :content
+
     def initialize(site)
       @site = site
       @content = {}
       @entry_filter = EntryFilter.new(site)
+      @source_dir = site.in_source_dir("/")
     end
 
     # Read all the files in <dir> and adds them to @content
@@ -52,6 +54,8 @@ module Jekyll
     #
     # Returns the contents of the data file.
     def read_data_file(path)
+      Jekyll.logger.debug "Reading:", path.sub(@source_dir, "")
+
       case File.extname(path).downcase
       when ".csv"
         CSV.read(path,

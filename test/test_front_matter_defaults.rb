@@ -97,7 +97,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
       )
 
       @site.process
-      @affected = @site.posts.docs.find { |page| page.relative_path =~ %r!win\/! }
+      @affected = @site.posts.docs.find { |page| page.relative_path.include?("win") }
       @not_affected = @site.pages.find { |page| page.relative_path == "about.html" }
     end
 
@@ -126,7 +126,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
     end
 
     should "affect only the specified type and all paths" do
-      assert_equal @affected.reject { |page| page.data["key"] == "val" }, []
+      assert_equal([], @affected.reject { |page| page.data["key"] == "val" })
       assert_equal @not_affected.reject { |page| page.data["key"] == "val" },
                    @not_affected
     end
@@ -150,7 +150,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
     end
 
     should "affect only the specified type and all paths" do
-      assert_equal @affected.reject { |page| page.data["key"] == "val" }, []
+      assert_equal([], @affected.reject { |page| page.data["key"] == "val" })
       assert_equal @not_affected.reject { |page| page.data["key"] == "val" },
                    @not_affected
     end
@@ -173,8 +173,8 @@ class TestFrontMatterDefaults < JekyllUnitTest
     end
 
     should "affect all types and paths" do
-      assert_equal @affected.reject { |page| page.data["key"] == "val" }, []
-      assert_equal @not_affected.reject { |page| page.data["key"] == "val" }, []
+      assert_equal([], @affected.reject { |page| page.data["key"] == "val" })
+      assert_equal([], @not_affected.reject { |page| page.data["key"] == "val" })
     end
   end
 
@@ -193,8 +193,8 @@ class TestFrontMatterDefaults < JekyllUnitTest
     end
 
     should "affect all types and paths" do
-      assert_equal @affected.reject { |page| page.data["key"] == "val" }, []
-      assert_equal @not_affected.reject { |page| page.data["key"] == "val" }, []
+      assert_equal([], @affected.reject { |page| page.data["key"] == "val" })
+      assert_equal([], @not_affected.reject { |page| page.data["key"] == "val" })
     end
   end
 

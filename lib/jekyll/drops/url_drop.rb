@@ -7,8 +7,8 @@ module Jekyll
 
       mutable false
 
-      def_delegator :@obj, :cleaned_relative_path, :path
-      def_delegator :@obj, :output_ext, :output_ext
+      delegate_method :output_ext
+      delegate_method_as :cleaned_relative_path, :path
 
       def collection
         @obj.collection.label

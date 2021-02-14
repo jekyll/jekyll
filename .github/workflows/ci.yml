@@ -12,33 +12,93 @@ on:
 
 jobs:
   ci:
-    name: 'SUITE: ${{ matrix.test_suite }} / OS: ${{ matrix.os }}'
-    runs-on: ${{ matrix.os }}
+    if: "!contains(github.event.commits[0].message, '[ci skip]')"
+    name: 'Ruby ${{ matrix.ruby_version }}'
+    runs-on: 'ubuntu-latest'
+
     strategy:
       fail-fast: false
       matrix:
-        test_suite:
-        - test
-        - default-site
-        os:
-        - ubuntu-latest
-        - windows-latest
+        ruby_version:
+        - 2.5
+        - 2.7
+        - 3.0
+        - jruby-9.2.14.0
+
     steps:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 5
-    - name: Set up Ruby 2.6
-      uses: actions/setup-ruby@v1
+    - name: "Set up Ruby ${{ matrix.ruby_version }}"
+      uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.6.x
-    - name: 'Update Rubygems'
-      run: 'gem update --system --no-document'
-    - name: 'Update Bundler'
-      run: 'gem update bundler --no-document'
-    - name: Set up bundle
-      run: bundle install --jobs 4 --retry 3
-    - name: Run Test Suite
-      run: bash script/cibuild
+        ruby-version: ${{ matrix.ruby_version }}
+        bundler-cache: true
+    - name: Run Unit Tests
+      run: bash script/test
       env:
         CI: true
-        TEST_SUITE: ${{ matrix.test_suite }}
+    - name: Run Cucumber Features
+      run: bash script/cucumber
+      env:
+        CI: true
+    - name: Sanity Check
+      run: bash script/default-site
+
+  style_check:
+    if: "!contains(github.event.commits[0].message, '[ci skip]')"
+    name: 'Code Style Check (Ruby ${{ matrix.ruby_version }})'
+    runs-on: 'ubuntu-latest'
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby_version:
+        - 2.5
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 5
+    - name: "Set up Ruby ${{ matrix.ruby_version }}"
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby_version }}
+        bundler-cache: true
+    - name: Run RuboCop
+      run: bash script/fmt
+
+  profile_docs:
+    if: "!contains(github.event.commits[0].message, '[ci skip]')"
+    name: 'Profile Docs Site (Ruby ${{ matrix.ruby_version }})'
+    runs-on: 'ubuntu-latest'
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby_version:
+        - 2.4 # Minimum required Ruby version in gemspec
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 5
+    - name: "Set up Ruby ${{ matrix.ruby_version }}"
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby_version }}
+    - name: Cache dependencies
+      uses: actions/cache@v2.1.3
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+    - name: 'Update Rubygems and Bundler'
+      run: |
+        gem update --system --no-document
+        gem update bundler --no-document
+    - name: Set up bundle
+      run: |
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
+    - name: Build Docs site with --profile
+      run: bash script/profile-docs
+    - name: Profile memory usage of building Docs site
+      run: bash script/memprof

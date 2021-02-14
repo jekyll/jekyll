@@ -3,6 +3,7 @@
 module Jekyll
   class ThemeAssetsReader
     attr_reader :site
+
     def initialize(site)
       @site = site
     end

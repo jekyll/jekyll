@@ -72,14 +72,52 @@ class TestKramdown < JekyllUnitTest
       MARKDOWN
       div_highlight = ">div.highlight"
       selector = "div.highlighter-rouge#{div_highlight}>pre.highlight>code"
-      refute(result.css(selector).empty?, result.to_html)
+      refute_empty(result.css(selector), result.to_html)
+    end
+
+    context "when configured" do
+      setup do
+        @source = <<~TEXT
+          ## Code Sample
+
+              def ruby_fu
+                "Hello"
+              end
+        TEXT
+      end
+
+      should "have 'plaintext' as the default syntax_highlighter language" do
+        converter = fixture_converter(@config)
+        parser = converter.setup && converter.instance_variable_get(:@parser)
+        parser_config = parser.instance_variable_get(:@config)
+
+        assert_equal "plaintext", parser_config.dig("syntax_highlighter_opts", "default_lang")
+      end
+
+      should "accept the specified default syntax_highlighter language" do
+        override = {
+          "kramdown" => {
+            "syntax_highlighter_opts" => {
+              "default_lang" => "yaml",
+            },
+          },
+        }
+        converter = fixture_converter(Utils.deep_merge_hashes(@config, override))
+        parser = converter.setup && converter.instance_variable_get(:@parser)
+        parser_config = parser.instance_variable_get(:@config)
+
+        assert_equal "yaml", parser_config.dig("syntax_highlighter_opts", "default_lang")
+        refute_match %r!<div class="language-plaintext!, converter.convert(@source)
+        refute_match %r!<div class="language-html!, converter.convert(@source)
+        assert_match %r!<div class="language-yaml!, converter.convert(@source)
+      end
     end
 
     context "when asked to convert smart quotes" do
       should "convert" do
         converter = fixture_converter(@config)
         assert_match(
-          %r!<p>(&#8220;|“)Pit(&#8217;|’)hy(&#8221;|”)<\/p>!,
+          %r!<p>(&#8220;|“)Pit(&#8217;|’)hy(&#8221;|”)</p>!,
           converter.convert(%("Pit'hy")).strip
         )
       end
@@ -92,7 +130,7 @@ class TestKramdown < JekyllUnitTest
           },
         }
         converter = fixture_converter(Utils.deep_merge_hashes(@config, override))
-        assert_match %r!<p>(&#171;|«)Pit(&#8250;|›)hy(&#187;|»)<\/p>!, \
+        assert_match %r!<p>(&#171;|«)Pit(&#8250;|›)hy(&#187;|»)</p>!, \
                      converter.convert(%("Pit'hy")).strip
       end
     end
@@ -113,7 +151,7 @@ class TestKramdown < JekyllUnitTest
         MARKDOWN
 
         selector = "div.highlighter-coderay>div.CodeRay>div.code>pre"
-        refute result.css(selector).empty?
+        refute_empty result.css(selector)
       end
 
       should "support legacy enable_coderay... for now" do
@@ -134,7 +172,7 @@ class TestKramdown < JekyllUnitTest
         MARKDOWN
 
         selector = "div.highlighter-coderay>div.CodeRay>div.code>pre"
-        refute result.css(selector).empty?, "pre tag should exist"
+        refute_empty result.css(selector), "pre tag should exist"
       end
     end
 

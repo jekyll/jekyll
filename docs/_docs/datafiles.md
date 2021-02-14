@@ -18,8 +18,8 @@ Plugins/themes can also leverage Data Files to set configuration variables.
 ## The Data Folder
 
 The `_data` folder is where you can store additional data for Jekyll to use when
-generating your site. These files must be YAML, JSON, or CSV files (using either
-the `.yml`, `.yaml`, `.json` or `.csv` extension), and they will be
+generating your site. These files must be YAML, JSON, TSV or CSV files (using either
+the `.yml`, `.yaml`, `.json`, `.tsv`, or `.csv` extension), and they will be
 accessible via `site.data`.
 
 ## Example: List of members
@@ -49,8 +49,8 @@ Parker Moore,parkr
 Liu Fengyun,liufengyun
 ```
 
-This data can be accessed via `site.data.members` (notice that the filename
-determines the variable name).
+This data can be accessed via `site.data.members` (notice that the file's *basename* determines the variable name and
+therefore one should avoid having data files with the same basename but different extensions, in the same directory).
 
 You can now render the list of members in a template:
 

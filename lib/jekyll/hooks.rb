@@ -22,22 +22,25 @@ module Jekyll
         :post_write  => [],
       },
       :pages     => {
-        :post_init   => [],
-        :pre_render  => [],
-        :post_render => [],
-        :post_write  => [],
+        :post_init    => [],
+        :pre_render   => [],
+        :post_convert => [],
+        :post_render  => [],
+        :post_write   => [],
       },
       :posts     => {
-        :post_init   => [],
-        :pre_render  => [],
-        :post_render => [],
-        :post_write  => [],
+        :post_init    => [],
+        :pre_render   => [],
+        :post_convert => [],
+        :post_render  => [],
+        :post_write   => [],
       },
       :documents => {
-        :post_init   => [],
-        :pre_render  => [],
-        :post_render => [],
-        :post_write  => [],
+        :post_init    => [],
+        :pre_render   => [],
+        :post_convert => [],
+        :post_render  => [],
+        :post_write   => [],
       },
       :clean     => {
         :on_obsolete => [],
@@ -67,10 +70,11 @@ module Jekyll
     # register a single hook to be called later, internal API
     def self.register_one(owner, event, priority, &block)
       @registry[owner] ||= {
-        :post_init   => [],
-        :pre_render  => [],
-        :post_render => [],
-        :post_write  => [],
+        :post_init    => [],
+        :pre_render   => [],
+        :post_convert => [],
+        :post_render  => [],
+        :post_write   => [],
       }
 
       unless @registry[owner][event]

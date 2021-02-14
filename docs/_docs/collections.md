@@ -16,8 +16,8 @@ collections:
   - staff_members
 ```
 
-In this case `collections` is defined as a sequence (i.e array) with no additional metadata defined for each collection.
-You can optionally specify metadata for your collection by defining `collections` as a mapping (i.e hashmap) instead of sequence, and then defining additional fields in it:
+In this case `collections` is defined as a sequence (i.e., array) with no additional metadata defined for each collection.
+You can optionally specify metadata for your collection by defining `collections` as a mapping (i.e., hashmap) instead of sequence, and then defining additional fields in it:
 
 ```yaml
 collections:
@@ -126,7 +126,7 @@ You can link to the generated page using the `url` attribute:
 
 ## Permalinks
 
-There are special [permalink variables for collections]({{ '/docs/permalinks/' | relative_url }}) to
+There are special [permalink variables for collections]({{ '/docs/permalinks/#collections' | relative_url }}) to
 help you control the output url for the entire collection.
 
 ## Custom Sorting of Documents {%- include docs_version_badge.html version="4.0" -%}

@@ -62,5 +62,10 @@ module Jekyll
     def process(name)
       self.ext = File.extname(name)
     end
+
+    # Returns the object as a debug String.
+    def inspect
+      "#<#{self.class} @path=#{@path.inspect}>"
+    end
   end
 end

@@ -1,0 +1,49 @@
+name: Third-Party Repository Profiling
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  build_n_profile:
+    if: "!contains(github.event.commits[0].message, '[ci skip]')"
+    runs-on: 'ubuntu-latest'
+    steps:
+    - name: Checkout Jekyll
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 5
+        path: jekyll
+    - name: Checkout Third-Party Repository
+      uses: actions/checkout@v2
+      with:
+        repository: ashmaroli/tomjoht.github.io
+        path: sandbox
+    - name: Set up Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+    - name: Set up Dependencies Cache
+      uses: actions/cache@v2.1.3
+      with:
+        path: sandbox/vendor/bundle
+        key: ubuntu-latest-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ubuntu-latest-gems-
+    - name: Set up Dependencies
+      run: |
+        gem update --system --no-document
+        gem update bundler --no-document
+        bundle config gemfile sandbox/Gemfile
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
+    - name: Run Jekyll Build 3 times
+      run: |
+        bundle exec jekyll build -s sandbox -d sandbox/_site --trace
+        bundle exec jekyll build -s sandbox -d sandbox/_site --trace
+        bundle exec jekyll build -s sandbox -d sandbox/_site --trace
+    - name: Memory Analysis of Jekyll Build
+      run: bundle exec ruby jekyll/.github/workflows/actions/memprof.rb sandbox

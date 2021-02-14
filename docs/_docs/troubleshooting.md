@@ -30,12 +30,6 @@ On Red Hat, CentOS, and Fedora systems you can do this by running:
 sudo yum install ruby-devel
 ```
 
-If you installed the above - specifically on Fedora 23 - but the extensions would still not compile, you are probably running a Fedora image that misses the `redhat-rpm-config` package. To solve this, run:
-
-```sh
-sudo dnf install redhat-rpm-config
-```
-
 On Arch Linux you need to run:
 
 ```sh

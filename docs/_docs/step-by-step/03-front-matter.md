@@ -3,9 +3,10 @@ layout: step
 title: Front Matter
 position: 3
 ---
-Front matter is a snippet of [YAML](http://yaml.org/) which sits between two
-triple-dashed lines at the top of a file. Front matter is used to set variables
-for the page, for example:
+Front matter is a snippet of [YAML](http://yaml.org/) placed between two
+triple-dashed lines at the start of a file.
+
+You can use front matter to set variables for the page:
 
 ```yaml
 ---
@@ -13,8 +14,8 @@ my_number: 5
 ---
 ```
 
-Front matter variables are available in Liquid under the `page` variable. For
-example to output the variable above you would use:
+You can call front matter variables in Liquid using the `page` variable. For
+example, to output the value of the `my_number` variable above:
 
 {% raw %}
 ```liquid
@@ -24,7 +25,7 @@ example to output the variable above you would use:
 
 ## Use front matter
 
-Let's change the `<title>` on your site to populate using front matter:
+Change the `<title>` on your site to use front matter:
 
 {% raw %}
 ```liquid
@@ -44,15 +45,14 @@ title: Home
 ```
 {% endraw %}
 
-Note that in order for Jekyll to process any liquid tags on your page,
-you _must_ include front matter on it. The most minimal snippet of front matter
-you can include is:
+{: .note .info }
+You _must_ include front matter on the page for Jekyll to process any Liquid tags on it. 
+
+To make Jekyll process a page without defining variables in the front matter, use:
 
 ```yaml
 ---
 ---
 ```
 
-You may still be wondering why you'd output it this way as it takes
-more source code than raw HTML. In this next step, you'll see why we've
-been doing this.
+Next, you'll learn more about layouts and why your pages use more source code than plain HTML.

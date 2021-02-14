@@ -64,6 +64,16 @@ class TestEntryFilter < JekyllUnitTest
       assert_equal files, @site.reader.filter_entries(files)
     end
 
+    should "not exclude explicitly included entry" do
+      entries  = %w(README TODO css .htaccess _movies/.)
+      excludes = %w(README TODO css)
+      includes = %w(README .htaccess)
+      @site.exclude = excludes
+      @site.include = includes
+      filtered_entries = EntryFilter.new(@site).filter(entries)
+      assert_equal %w(README .htaccess), filtered_entries
+    end
+
     should "keep safe symlink entries when safe mode enabled" do
       allow(File).to receive(:symlink?).with("symlink.js").and_return(true)
       files = %w(symlink.js)
@@ -121,13 +131,13 @@ class TestEntryFilter < JekyllUnitTest
     end
 
     should "return false with no glob patterns" do
-      assert !@filter.glob_include?([], "a.txt")
+      refute @filter.glob_include?([], "a.txt")
     end
 
     should "return false with all not match path" do
       data = ["a*", "b?"]
-      assert !@filter.glob_include?(data, "ca.txt")
-      assert !@filter.glob_include?(data, "ba.txt")
+      refute @filter.glob_include?(data, "ca.txt")
+      refute @filter.glob_include?(data, "ba.txt")
     end
 
     should "return true with match path" do
@@ -148,6 +158,13 @@ class TestEntryFilter < JekyllUnitTest
       data = ["/vendor/bundle/", "vendor/ruby"]
       assert @filter.glob_include?(data, "vendor/bundle/jekyll/lib/page.rb")
       assert @filter.glob_include?(data, "/vendor/ruby/lib/set.rb")
+    end
+
+    should "match directory only if there is trailing slash" do
+      data = ["_glob_include_test/_is_dir/", "_glob_include_test/_not_dir/"]
+      assert @filter.glob_include?(data, "_glob_include_test/_is_dir")
+      assert @filter.glob_include?(data, "_glob_include_test/_is_dir/include_me.txt")
+      refute @filter.glob_include?(data, "_glob_include_test/_not_dir")
     end
   end
 end

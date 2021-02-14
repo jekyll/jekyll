@@ -3,6 +3,7 @@
 module Jekyll
   class LayoutReader
     attr_reader :site
+
     def initialize(site)
       @site = site
       @layouts = {}
