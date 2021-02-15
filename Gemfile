@@ -12,6 +12,10 @@ group :development do
   gem "pry-byebug" unless RUBY_ENGINE == "jruby"
 end
 
+# TODO: This is a temporary change to ensure that CI tests for jekyll/jekyll#7554 pass.
+#       Delete this line before merging the PR.
+gem "jekyll-sass-converter", :github => "jekyll/jekyll-sass-converter", :ref => "refs/pull/114/head"
+
 #
 
 group :test do
