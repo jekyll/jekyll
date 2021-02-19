@@ -25,6 +25,8 @@ AllCops:
     - vendor/**/*
     - tmp/**/*
 
+Gemspec/DateAssignment:
+  Enabled: true
 Layout/BeginEndAlignment:
   Enabled: true
 Layout/EmptyComment:
@@ -316,6 +318,8 @@ Style/GuardClause:
   Enabled: false
 Style/HashAsLastArrayItem:
   Enabled: true
+Style/HashConversion:
+  Enabled: true  
 Style/HashEachMethods:
   Enabled: true
 Style/HashExcept:
