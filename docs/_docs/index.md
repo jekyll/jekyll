@@ -14,7 +14,7 @@ tweak the site's look and feel, URLs, the data displayed on the page, and more.
 
 Jekyll requires the following:
 
-* Ruby version **{{ site.data.ruby.min_version }}** or higher
+* Ruby version **{{ site.data.ruby.min_version }}** up to 2.7.2
 * RubyGems
 * GCC and Make
 
