@@ -20,6 +20,7 @@ Create `_config.yml` in the root with the following:
 collections:
   authors:
 ```
+(Be careful! A YAML file use spaces as indentation, you can use 2 or 4 spaces for indentation, but no tab)
 
 To (re)load the configuration, restart the jekyll server. Press `Ctrl`+`C` in your terminal to stop the server, and then `jekyll serve` to restart it.
 
