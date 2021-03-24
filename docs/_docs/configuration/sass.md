@@ -6,7 +6,7 @@ permalink: "/docs/configuration/sass/"
 By default, Jekyll will look for Sass partials in the `_sass` directory relative to your site's `source` directory. You can change the default load path or specify additional load paths with the following options:
 
 - **sass_dir** - Look for Sass partials in this directory path.
-* **load_paths** - An array of additional filesystem-paths which should be searched for Sass partials.
+* **load_paths** - Search for additional Sass partials in this array of directory paths.
 
 <div class="note info">
   <p>
