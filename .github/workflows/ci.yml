@@ -80,24 +80,13 @@ jobs:
       with:
         fetch-depth: 5
     - name: "Set up Ruby ${{ matrix.ruby_version }}"
-      uses: actions/setup-ruby@v1
+      uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby_version }}
-    - name: Cache dependencies
-      uses: actions/cache@v2.1.3
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
-    - name: 'Update Rubygems and Bundler'
-      run: |
-        gem update --system --no-document
-        gem update bundler --no-document
-    - name: Set up bundle
-      run: |
-        bundle config path vendor/bundle
-        bundle install --jobs 4 --retry 3
+        bundler-cache: true
+      env:
+          BUNDLE_JOBS: 4
+          BUNDLE_RETRY: 3
     - name: Build Docs site with --profile
       run: bash script/profile-docs
     - name: Profile memory usage of building Docs site
