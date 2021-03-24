@@ -10,7 +10,7 @@ By default, Jekyll will look for Sass partials in the `_sass` directory relative
 
 <div class="note info">
   <p>
-    Note that filesystem-paths specified in the <code>sass_dir</code> and
+    Note that directory paths specified in the <code>sass_dir</code> and
     <code>load_paths</code> options are resolved relative to your site's
     <code>source</code>, not relative to the location of the
     <code>_config.yml</code> file.
