@@ -153,6 +153,25 @@ script/cucumber features/blah.feature
 Both `script/test` and `script/cucumber` can be run without arguments to
 run its entire respective suite.
 
+### Test Ruby Versions Locally
+
+The CI process runs the build against with serveral [Ruby](https://github.com/jekyll/jekyll/blob/master/.github/workflows/ci.yml#L22) versions.  This process can be repeated locally without changing your default installation by using [earthly](https://earthly.dev/get-earthly).
+
+To run the full CI process across all supported Ruby Versions:
+```sh
+earthly +all
+```
+
+To run the tests for a specfic version of Ruby:
+```sh
+earthly --build-arg RUBY=2.5 +test
+```
+
+To run the tests for a specfic version of JRuby specify the full version:
+```sh
+earthly --build-arg RUBY=jruby:9.2.14.0 +test
+```
+
 ## Visual Studio Code Development Container
 
 If you've got [Visual Studio Code](https://code.visualstudio.com/) with the [Remote Development Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) installed then simply opening this repository in Visual Studio Code and following the prompts to "Re-open In A Development Container" will get you setup and ready to go with a fresh environment with all the requirements installed.

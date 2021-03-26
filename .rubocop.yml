@@ -213,6 +213,8 @@ Minitest/RefutePathExists:
   Enabled: true
 Minitest/UnspecifiedException:
   Enabled: true
+Minitest/AssertEmptyLiteral:
+  Enabled: false
 
 Naming/FileName:
   Enabled: false
