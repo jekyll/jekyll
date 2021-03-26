@@ -18,9 +18,8 @@
 #
 - name: Relative URL
   description: >-
-    Transforms a file path into the corresponding relative url by prepending the 
-    <code>baseurl</code> value to the input. Useful if your site is hosted at a subpath 
-    rather than the root of the domain.
+    Prepend <code>baseurl</code> config value to the input to convert a URL path into a relative URL. 
+    This is recommended for a site that is hosted on a subpath of a domain.
   examples:
     - input: '{{ "/assets/style.css" | relative_url }}'
       output: '/my-baseurl/assets/style.css'
