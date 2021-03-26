@@ -28,9 +28,7 @@
 
 - name: Absolute URL
   description: >-
-description: >-
-  Prepend <code>url</code> and <code>baseurl</code> values to the input to convert a URL path to an absolute URL.
-    the <code>url</code> and <code>baseurl</code> value to the input.
+    Prepend <code>url</code> and <code>baseurl</code> values to the input to convert a URL path to an absolute URL.
   examples:
     - input: '{{ "/assets/style.css" | absolute_url }}'
       output: 'http://example.com/my-baseurl/assets/style.css'
