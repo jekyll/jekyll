@@ -23,6 +23,7 @@
   * Update actions/cache requirement to v2.1.3 (#8543)
   * Pin rubocop version (#8564)
   * style: add rubocop 1.9 cops (#8567)
+  * Cross Version Testing Locally and Faster CI (#8610)
 
 ### Minor Enhancements
 
