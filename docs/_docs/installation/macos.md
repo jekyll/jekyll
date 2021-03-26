@@ -13,7 +13,7 @@ xcode-select --install
 ## Install Ruby
 
 Jekyll requires **Ruby v{{ site.data.ruby.min_version }}** or higher.
-macOS Catalina 10.15 ships with Ruby 2.6.3. Check your Ruby version using `ruby -v`.
+macOS Big Sur 11.x ships with Ruby 2.6.3. Check your Ruby version using `ruby -v`.
 
 If you're running a previous version of macOS, you'll have to install a newer version of Ruby.
 
