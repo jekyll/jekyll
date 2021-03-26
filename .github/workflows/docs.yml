@@ -19,7 +19,7 @@ jobs:
           ruby-version: ${{ env.RUBY_VERSION }}
       - name: Setup cache for Bundler
         id: cache
-        uses: actions/cache@v2.1.3
+        uses: actions/cache@v2.1.4
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
