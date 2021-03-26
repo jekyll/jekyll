@@ -28,7 +28,8 @@
 
 - name: Absolute URL
   description: >-
-    Transforms a file path into the corresponding relative url by prepend 
+description: >-
+  Prepend <code>url</code> and <code>baseurl</code> values to the input to convert a URL path to an absolute URL.
     the <code>url</code> and <code>baseurl</code> value to the input.
   examples:
     - input: '{{ "/assets/style.css" | absolute_url }}'
