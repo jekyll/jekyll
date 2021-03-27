@@ -11,6 +11,7 @@
   * Remove GitHub Pages content which is in GitHub docs (#8533)
   * Step By Step Instructions Review (#8399)
   * Fix typo in migrating from 3.0 to 4.0 page (#8572)
+  * Fix for important missing step in macOS Installation Docs: Add the Homebrew gems directory to the PATH (#8496)
 
 ### Bug Fixes
 
