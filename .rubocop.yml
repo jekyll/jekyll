@@ -286,6 +286,8 @@ Style/BisectedAttrAccessor:
   Enabled: true
 Style/CaseLikeIf:
   Enabled: true
+Style/StringChars:
+  Enabled: true
 Style/ClassAndModuleChildren:
   Exclude:
     - test/**/*.rb
