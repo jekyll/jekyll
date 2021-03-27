@@ -76,7 +76,8 @@ end
 {: .note}
 To pass a language variable to the `highlight` tag, the variable **must** be named `lang`, as in {% raw %}{{ page.lang }}{% endraw %}. The `linenos` variable can be called by any other name.
 
-Both language and the line numbering parameter `linenos` can be passed to the `highlight` tag as variables, instead of specific paramters. \
+Both the language and the line numbering parameter (`linenos`) can be passed to the `highlight` tag as variables, instead of the standard approach of fixed parameters.
+
 For example, suppose you defined a variable in your page's front matter like this:
 
 ```yaml
