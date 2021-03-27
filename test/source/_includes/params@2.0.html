@@ -1,0 +1,7 @@
+<span id='include-param'>{{include.param}}</span>
+
+<ul id='param-list'>
+  {% for param in include %}
+    <li>{{param[0]}} = {{param[1]}}</li>
+  {% endfor %}
+</ul>
