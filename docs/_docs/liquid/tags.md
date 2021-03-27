@@ -103,7 +103,9 @@ end
 
 {% endraw %}
 
-In this example, the `highlight` tag would render the code in the same manner as in the Line Numbers example, above. However, a different page may turn off the line numbering, eg.:
+In this example, the `highlight` tag would render the code in the same manner as in the Line Numbers example, above. However, a different page may turn off the line numbering
+
+e.g.
 
 ```yaml
 ---
