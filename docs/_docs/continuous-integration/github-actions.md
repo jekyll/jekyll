@@ -113,9 +113,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: helaili/jekyll-action@2.0.5
-        env:
-          JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
+      - uses: helaili/jekyll-action@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 {% endraw %}
@@ -128,7 +128,7 @@ The above workflow can be explained as the following:
 - The **checkout** action takes care of cloning your repository.
 - We specify our selected **action** and **version number** using `helaili/jekyll-action@2.0.5`.
   This handles the build and deploy.
-- We set a reference to a secret **environment variable** for the action to use. The `JEKYLL_PAT`
+- We set a reference to a secret **environment variable** for the action to use. The `GITHUB_TOKEN`
   is a _Personal Access Token_ and is detailed in the next section.
 
 Instead of using the **on.push** condition, you could trigger your build on a **schedule** by
@@ -159,7 +159,7 @@ build using _Secrets_:
    to commit to the `gh-pages` branch.
 3. **Copy** the token value.
 4. Go to your repository's **Settings** and then the **Secrets** tab.
-5. **Create** a token named `JEKYLL_PAT` (_important_). Give it a value using the value copied
+5. **Create** a token named `GITHUB_TOKEN` (_important_). Give it a value using the value copied
    above.
 
 ### Build and deploy
