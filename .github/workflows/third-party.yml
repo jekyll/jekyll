@@ -29,6 +29,7 @@ jobs:
         bundler-cache: true
       env:
         BUNDLE_GEMFILE: "sandbox/Gemfile"
+        BUNDLE_PATH: "vendor/bundle"
         BUNDLE_JOBS: 4
         BUNDLE_RETRY: 3
     - name: Run Jekyll Build 3 times

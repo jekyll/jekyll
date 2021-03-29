@@ -19,6 +19,7 @@ jobs:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
         env:
+          BUNDLE_PATH: "vendor/bundle"
           BUNDLE_JOBS: 4
           BUNDLE_RETRY: 3
       - name: Clone target branch
