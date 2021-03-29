@@ -23,8 +23,8 @@ non-existing filters by setting `strict_variables` and / or `strict_filters`
 to `true` respectively. {% include docs_version_badge.html version="3.8.0" %}
 
 Do note that while `error_mode` configures Liquid's parser, the `strict_variables`
-and `strict_filters` options configure Liquid's renderer and are consequently,
-mutually exclusive.
+and `strict_filters` options configure Liquid's renderer and are consequently
+orthogonal.
 
 An example of setting these variables within _config.yml is as follows:
 

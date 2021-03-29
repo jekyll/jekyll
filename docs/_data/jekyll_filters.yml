@@ -18,8 +18,8 @@
 #
 - name: Relative URL
   description: >-
-    Prepend the <code>baseurl</code> value to the input. Useful if
-    your site is hosted at a subpath rather than the root of the domain.
+    Prepend <code>baseurl</code> config value to the input to convert a URL path into a relative URL. 
+    This is recommended for a site that is hosted on a subpath of a domain.
   examples:
     - input: '{{ "/assets/style.css" | relative_url }}'
       output: '/my-baseurl/assets/style.css'
@@ -27,7 +27,8 @@
 #
 
 - name: Absolute URL
-  description: Prepend the <code>url</code> and <code>baseurl</code> value to the input.
+  description: >-
+    Prepend <code>url</code> and <code>baseurl</code> values to the input to convert a URL path to an absolute URL.
   examples:
     - input: '{{ "/assets/style.css" | absolute_url }}'
       output: 'http://example.com/my-baseurl/assets/style.css'

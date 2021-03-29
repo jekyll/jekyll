@@ -36,13 +36,13 @@ module Jekyll
       def sanitized_path(base_directory, questionable_path)
         @sanitized_path ||= {}
         @sanitized_path[base_directory] ||= {}
-        @sanitized_path[base_directory][questionable_path] ||= begin
-          if questionable_path.nil?
-            base_directory.freeze
-          else
-            sanitize_and_join(base_directory, questionable_path).freeze
-          end
-        end
+        @sanitized_path[base_directory][questionable_path] ||= if questionable_path.nil?
+                                                                 base_directory.freeze
+                                                               else
+                                                                 sanitize_and_join(
+                                                                   base_directory, questionable_path
+                                                                 ).freeze
+                                                               end
       end
 
       private
