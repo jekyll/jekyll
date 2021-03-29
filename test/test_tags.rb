@@ -907,6 +907,49 @@ class TestTags < JekyllUnitTest
       end
     end
 
+    context "with include file with special characters without params" do
+      setup do
+        content = <<~CONTENT
+          ---
+          title: special characters
+          ---
+
+          {% include params@2.0.html %}
+        CONTENT
+        create_post(content,
+                    "permalink"   => "pretty",
+                    "source"      => source_dir,
+                    "destination" => dest_dir,
+                    "read_posts"  => true)
+      end
+
+      should "include file with empty parameters" do
+        assert_match "<span id=\"include-param\"></span>", @result
+      end
+    end
+
+    context "with include file with special characters with params" do
+      setup do
+        content = <<~CONTENT
+          ---
+          title: special characters
+          ---
+
+          {% include params@2.0.html param1="foobar" param2="bazbar" %}
+        CONTENT
+        create_post(content,
+                    "permalink"   => "pretty",
+                    "source"      => source_dir,
+                    "destination" => dest_dir,
+                    "read_posts"  => true)
+      end
+
+      should "include file with empty parameters" do
+        assert_match "<li>param1 = foobar</li>", @result
+        assert_match "<li>param2 = bazbar</li>", @result
+      end
+    end
+
     context "with custom includes directory" do
       setup do
         content = <<~CONTENT
