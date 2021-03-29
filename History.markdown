@@ -13,6 +13,7 @@
   * Fix typo in migrating from 3.0 to 4.0 page (#8572)
   * Fix for important missing step in macOS Installation Docs: Add the Homebrew gems directory to the PATH (#8496)
   * Use latest Jekyll-action configuration (#8579)
+  * docs: troubleshoot macOS with ARM64 architecture (#8560)
 
 ### Bug Fixes
 
