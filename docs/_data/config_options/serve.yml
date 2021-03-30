@@ -1,11 +1,11 @@
 - name: Local Server Port
-  description: Listen on the given port.
+  description: Listen on the given port. The default is `4000`.
   option: "port: PORT"
   flag: "-P, --port PORT"
 
 
 - name: Local Server Hostname
-  description: Listen at the given hostname.
+  description: Listen at the given hostname. The default is `localhost`.
   option: "host: HOSTNAME"
   flag: "-H, --host HOSTNAME"
 
