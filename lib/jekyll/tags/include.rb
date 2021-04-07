@@ -21,9 +21,9 @@ module Jekyll
         (?<params>.*)
       !mx
 
-      FULL_VALID_SYNTAX = %r!\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z!.freeze
-      VALID_FILENAME_CHARS = %r!^[\w/.\-()+~\#@]+$!.freeze
-      INVALID_SEQUENCES = %r![./]{2,}!.freeze
+      FULL_VALID_SYNTAX = %r!\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z!
+      VALID_FILENAME_CHARS = %r!^[\w/.\-()+~\#@]+$!
+      INVALID_SEQUENCES = %r![./]{2,}!
 
       def initialize(tag_name, markup, tokens)
         super
