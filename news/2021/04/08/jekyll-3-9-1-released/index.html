@@ -12,27 +12,27 @@
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Jekyll 3.5.2 Released | Jekyll • Simple, blog-aware, static sites</title>
+<title>Jekyll 3.9.1 Released | Jekyll • Simple, blog-aware, static sites</title>
 <meta name="generator" content="Jekyll v4.2.0" />
-<meta property="og:title" content="Jekyll 3.5.2 Released" />
+<meta property="og:title" content="Jekyll 3.9.1 Released" />
 <meta name="author" content="parkr" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="3.5.2 is out with 6 great bug fixes, most notably one which should dramatically speed up generation of your site! In testing #6266, jekyllrb.com generation when from 18 seconds down to 8! Here is the full line-up of fixes:" />
-<meta property="og:description" content="3.5.2 is out with 6 great bug fixes, most notably one which should dramatically speed up generation of your site! In testing #6266, jekyllrb.com generation when from 18 seconds down to 8! Here is the full line-up of fixes:" />
-<link rel="canonical" href="https://jekyllrb.com/news/2017/08/12/jekyll-3-5-2-released/" />
-<meta property="og:url" content="https://jekyllrb.com/news/2017/08/12/jekyll-3-5-2-released/" />
+<meta name="description" content="This patch release of the 3.9 series is released to fix a bug where the include tag does not allow valid filename characters. For example, this would previously fail:" />
+<meta property="og:description" content="This patch release of the 3.9 series is released to fix a bug where the include tag does not allow valid filename characters. For example, this would previously fail:" />
+<link rel="canonical" href="https://jekyllrb.com/news/2021/04/08/jekyll-3-9-1-released/" />
+<meta property="og:url" content="https://jekyllrb.com/news/2021/04/08/jekyll-3-9-1-released/" />
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2017-08-12T13:31:40-07:00" />
+<meta property="article:published_time" content="2021-04-08T07:51:12-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
-<meta property="twitter:title" content="Jekyll 3.5.2 Released" />
+<meta property="twitter:title" content="Jekyll 3.9.1 Released" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="twitter:creator" content="@parkr" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"description":"3.5.2 is out with 6 great bug fixes, most notably one which should dramatically speed up generation of your site! In testing #6266, jekyllrb.com generation when from 18 seconds down to 8! Here is the full line-up of fixes:","url":"https://jekyllrb.com/news/2017/08/12/jekyll-3-5-2-released/","@type":"BlogPosting","headline":"Jekyll 3.5.2 Released","dateModified":"2017-08-12T13:31:40-07:00","datePublished":"2017-08-12T13:31:40-07:00","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/news/2017/08/12/jekyll-3-5-2-released/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"},"name":"parkr"},"author":{"@type":"Person","name":"parkr"},"@context":"https://schema.org"}</script>
+{"description":"This patch release of the 3.9 series is released to fix a bug where the include tag does not allow valid filename characters. For example, this would previously fail:","url":"https://jekyllrb.com/news/2021/04/08/jekyll-3-9-1-released/","@type":"BlogPosting","headline":"Jekyll 3.9.1 Released","dateModified":"2021-04-08T07:51:12-07:00","datePublished":"2021-04-08T07:51:12-07:00","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/news/2021/04/08/jekyll-3-9-1-released/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"},"name":"parkr"},"author":{"@type":"Person","name":"parkr"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -178,8 +178,8 @@
 </div>
 <div class="unit four-fifths"><article>
   <h2>
-    Jekyll 3.5.2 Released
-    <a href="/news/2017/08/12/jekyll-3-5-2-released/" class="header-link" title="Permalink">
+    Jekyll 3.9.1 Released
+    <a href="/news/2021/04/08/jekyll-3-9-1-released/" class="header-link" title="Permalink">
       <span class="sr-only">Permalink</span>
       <i class="fa fa-link"></i>
     </a>
@@ -188,27 +188,29 @@
     <span class="label">release</span>
   </span>
   <div class="post-meta">
-    <span class="post-date">12 Aug 2017</span>
+    <span class="post-date">08 Apr 2021</span>
     <a href="https://github.com/parkr" class="post-author">
       <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
     </a>
   </div>
   <div class="post-content">
-    <p>3.5.2 is out with 6 great bug fixes, most notably one which should dramatically speed up generation of your site! In testing #6266, jekyllrb.com generation when from 18 seconds down to 8! Here is the full line-up of fixes:</p>
+    <p>This patch release of the 3.9 series is released to fix a bug where the
+<code class="language-plaintext highlighter-rouge">include</code> tag does not allow valid filename characters. For example, this
+would previously fail:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% include my-logo@2x.svg %}
+</code></pre></div></div>
+
+<p>This release adds support for the following characters in filenames:</p>
 
 <ul>
-  <li>Backport #6266 for v3.5.x: Memoize the return value of <code class="language-plaintext highlighter-rouge">Document#url</code> (#6301)</li>
-  <li>Backport #6247 for v3.5.x: kramdown: symbolize keys in-place (#6303)</li>
-  <li>Backport #6281 for v3.5.x: Fix <code class="language-plaintext highlighter-rouge">Drop#key?</code> so it can handle a nil argument (#6288)</li>
-  <li>Backport #6280 for v3.5.x: Guard against type error in <code class="language-plaintext highlighter-rouge">absolute_url</code> (#6287)</li>
-  <li>Backport #6273 for v3.5.x: delegate <code class="language-plaintext highlighter-rouge">StaticFile#to_json</code> to <code class="language-plaintext highlighter-rouge">StaticFile#to_liquid</code> (#6302)</li>
-  <li>Backport #6226 for v3.5.x: <code class="language-plaintext highlighter-rouge">Reader#read_directories</code>: guard against an entry not being a directory (#6304</li>
+  <li><code class="language-plaintext highlighter-rouge">@</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-</code></li>
+  <li><code class="language-plaintext highlighter-rouge">(</code> and <code class="language-plaintext highlighter-rouge">)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">+</code></li>
+  <li><code class="language-plaintext highlighter-rouge">~</code></li>
+  <li><code class="language-plaintext highlighter-rouge">#</code></li>
 </ul>
-
-<p>A <a href="/docs/history/#v3-5-2">full history</a> is available for your perusal. As always, please file bugs if you encounter them! Opening a pull request with a failing test for your expected behaviour is the easiest way for us to address the issue since we have a reproducible example to test again. Short of that, please fill out our issue template to the best of your ability and we’ll try to get to it quickly!</p>
-
-<p>Many thanks to our contributors without whom this release could not be
-possible: Ben Balter &amp; Kyle Zhao.</p>
 
 <p>Happy Jekylling!</p>
 
@@ -227,7 +229,7 @@ possible: Ben Balter &amp; Kyle Zhao.</p>
     </ul>
     <h4>Recent Releases</h4>
     <ul>
-      <li >
+      <li  class="current">
         <a href="/news/2021/04/08/jekyll-3-9-1-released/">Version 3.9.1</a>
       </li>
       <li >
