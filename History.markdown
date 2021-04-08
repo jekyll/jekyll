@@ -329,6 +329,12 @@
 
   * Fix Kramdown converter based tests for v4.0.x (#8143)
 
+## 3.9.1 / 2021-04-08
+
+### Bug Fixes
+
+  * Backport #8618 for v3.9.x: Update include tag to be more permissive (#8629)
+
 ## 3.9.0 / 2020-08-05
 
 ### Minor Enhancements
