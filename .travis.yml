@@ -20,6 +20,8 @@ matrix:
     - rvm: *ruby1
       env: ROUGE_VERSION=1.11.1 # runs everything with this version
     - rvm: *ruby1
+      env: ROUGE_VERSION=3.21.0 # runs everything with this version
+    - rvm: *ruby1
       env: KRAMDOWN_VERSION=1.17.0 # runs everything with this version
   exclude:
     - rvm: *jruby

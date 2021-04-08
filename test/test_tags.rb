@@ -193,8 +193,7 @@ CONTENT
 
       should "render markdown with pygments with line numbers" do
         assert_match(
-          %(<pre><code class="language-text" data-lang="text">) +
-          %(<span></span><span class="lineno">1 </span>test</code></pre>),
+          %r!<pre><code class="language-text" data-lang="text"><span></span><span class="linenos?">1 ?</span>test</code></pre>!,
           @result
         )
       end
@@ -473,12 +472,12 @@ EOS
 
       should "should stop highlighting at boundary with rouge 2" do
         skip "Skipped because using an older version of Rouge" if Utils::Rouge.old_api?
-        expected = <<-EOS
+        expected = %r!
 <p>This is not yet highlighted</p>\n
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="nx">test</span>\n</pre></td></tr></tbody></table></code></pre></figure>\n
-<p>This should not be highlighted, right?</p>
-EOS
+</pre></td><td class="code"><pre><span class="nx?">test</span>\n</pre></td></tr></tbody></table></code></pre></figure>\n
+<p>This should not be highlighted, right\?</p>
+!
         assert_match(expected, @result)
       end
 
