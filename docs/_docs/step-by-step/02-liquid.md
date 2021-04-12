@@ -18,7 +18,7 @@ For example, {% raw %}`{{ page.title }}`{% endraw %} displays the `page.title` v
 ## Tags
 
 Tags define the logic and control flow for templates. Use curly
-braces and percent signs for objects: {% raw %}`{%`{% endraw %} and
+braces and percent signs for tags: {% raw %}`{%`{% endraw %} and
 {% raw %}`%}`{% endraw %}. 
 
 For example:
