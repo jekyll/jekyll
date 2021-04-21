@@ -13,6 +13,7 @@
   * Fix typo in migrating from 3.0 to 4.0 page (#8572)
   * Fix for important missing step in macOS Installation Docs: Add the Homebrew gems directory to the PATH (#8496)
   * Use latest Jekyll-action configuration (#8579)
+  * docs: troubleshoot macOS with ARM64 architecture (#8560)
 
 ### Bug Fixes
 
@@ -327,6 +328,12 @@
 ### Development Fixes
 
   * Fix Kramdown converter based tests for v4.0.x (#8143)
+
+## 3.9.1 / 2021-04-08
+
+### Bug Fixes
+
+  * Backport #8618 for v3.9.x: Update include tag to be more permissive (#8629)
 
 ## 3.9.0 / 2020-08-05
 
