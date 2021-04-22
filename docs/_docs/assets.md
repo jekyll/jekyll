@@ -79,7 +79,7 @@ sass:
 These are passed to Sass, so any output style options Sass supports are valid
 here, too.
 
-For more information on Sass configuration options, see the [Sass configuration]({{  '/docs/configuration/sass/' | relative_url }}) docs.
+For more information on Sass configuration options, see the [Sass configuration]({{ '/docs/configuration/sass/' | relative_url }}) docs.
 
 ## Coffeescript
 
