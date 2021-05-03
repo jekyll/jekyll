@@ -1890,7 +1890,7 @@
   * Reorganize and cleanup the Gemfile, shorten required depends. (#4318)
   * Remove script/rebund. (#4341)
   * Implement codeclimate platform (#4340)
-  * Remove ObectSpace dumping and start using inherited, it's faster. (#4342)
+  * Remove ObjectSpace dumping and start using inherited, it's faster. (#4342)
   * Add script/travis so all people can play with Travis-CI images. (#4338)
   * Move Cucumber to using RSpec-Expectations and furthering JRuby support. (#4343)
   * Rearrange Cucumber and add some flair. (#4347)
