@@ -3220,7 +3220,7 @@
   * Add ReadInXMinutes plugin to the plugin list (#1222)
   * Remove plugins from the plugin list that have equivalents in Jekyll proper (#1223)
   * Add jekyll-assets to the plugin list (#1225)
-  * Add jekyll-pandoc-mulitple-formats to the plugin list (#1229)
+  * Add jekyll-pandoc-multiple-formats to the plugin list (#1229)
   * Remove dead link to "Using Git to maintain your blog" (#1227)
   * Tidy up the third-party plugins listing (#1228)
   * Update contributor information (#1192)
