@@ -1727,7 +1727,7 @@
   * Corrected pagination docs for hidden: true feature (#4903)
   * Remove a Broken Link for Refheap Plugin (#4971)
   * Instructions on how to install github-gem on Windows (#4975)
-  * Minor tweak to fix missing apostrophne (#4962)
+  * Minor tweak to fix missing apostrophe (#4962)
   * Instructions on how to install github-gem on Windows (v2) (#4977)
   * Fix inaccurate HTTP response header field name (#4976)
   * Add post about GSoC project (#4980)
