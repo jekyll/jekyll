@@ -282,7 +282,7 @@
   * Fix typo in documentation on GitHub Actions (#8162)
   * Ease discovery of CLI commands (in their entirety) (#8178)
   * Remove `sudo` from Travis CI tutorial (#8187)
-  * Add Gitlab Pages to 3rd party list (#8191)
+  * Add GitLab Pages to 3rd party list (#8191)
   * docs: add 21yunbox for deployment (#8193)
   * Improve documentation on tags and categories (#8196)
 
