@@ -287,7 +287,7 @@ module Jekyll
     # patterns - the patterns (or the pattern) which will be applied under the dir
     # flags    - the flags which will be applied to the pattern
     #
-    # Returns matched pathes
+    # Returns matched paths
     def safe_glob(dir, patterns, flags = 0)
       return [] unless Dir.exist?(dir)
 
