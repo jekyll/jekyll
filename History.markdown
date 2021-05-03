@@ -764,7 +764,7 @@
   * doc: add liquid tag plugin jekyll-onebox for html previews (#6898)
   * Add `jekyll-w2m` to plugins (#6855)
   * Fix tutorials navigation HTML (#6919)
-  * add Arch Linux instalation troubleshoot (#6782)
+  * add Arch Linux installation troubleshoot (#6782)
   * Docs: Install Jekyll on macOS (#6881)
   * Fix CodeClimate badges [ci skip] (#6930)
   * Update index.md (#6933)
