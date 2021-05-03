@@ -1738,7 +1738,7 @@
   * Update text to be consistent with example (#5010)
   * Update template links to point to core Liquid site (#5012)
   * Add generator-jekyllized to third-party plugins (#5027)
-  * Add Jekyll Art Hallery generator plugin to list of third-party plugins (#5043)
+  * Add Jekyll Art Gallery generator plugin to list of third-party plugins (#5043)
   * Add Formingo to the list of Jekyll form SaaS (#5054)
   * Highlight help nav item when navigated to. (#5058)
   * Update normalize.css to v4.2.0. (#5096)
