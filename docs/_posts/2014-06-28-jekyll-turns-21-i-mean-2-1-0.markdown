@@ -19,7 +19,7 @@ things to look forward to:
 - Add support for `hl_lines` in `highlight` tag (#2532)
 - Post categories now merge with directory, front matter, and defaults (#2373)
 - New `--skip_initial_build` flag for `jekyll serve` (#2477)
-- A bajilion bug fixes and site updates!
+- A bajillion bug fixes and site updates!
 
 Let's go party!
 
