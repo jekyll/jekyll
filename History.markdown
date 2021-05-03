@@ -1629,7 +1629,7 @@
   * Fix state leakage in Kramdown test (#4618)
   * Unify method for copying special files from repo to site (#4601)
   * Refresh the contributing file (#4596)
-  * change smartify doc from copy/paste of mardownify doc (#4653)
+  * change smartify doc from copy/paste of markdownify doc (#4653)
   * Update Rake & disable warnings when running tests (#4720)
   * Fix many warnings (#4537)
   * Don't blindly assume the last system when determining "open" cmd (#4717)
