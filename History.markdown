@@ -38,7 +38,7 @@
 ### Minor Enhancements
 
   * Warn on command-line with permalink conflict (#8342)
-  * Supress warning issued for redirect pages (#8347)
+  * Suppress warning issued for redirect pages (#8347)
   * Enhance detection of conflicting destination URLs (#8459)
   * Add `:post_convert` hook to modify HTML content before layout (#8368)
   * Allow triggering `:post_convert` events atomically (#8465)
