@@ -920,7 +920,7 @@
   * Fix list appearance by adding missing `ol` tag (#6421)
   * Explain how to override output collection index page (#6424)
   * Added github-cards to the list of plugins (#6425)
-  * CoC violation correspondants (#6429)
+  * CoC violation correspondents (#6429)
   * Add a note about Liquid and syntax highlighting (#6466)
   * Remove `sudo` from macOS troubleshooting instructions (#6486)
   * Add a note on `:jekyll_plugins` group in the docs (#6488)
