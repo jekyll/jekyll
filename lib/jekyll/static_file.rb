@@ -156,7 +156,7 @@ module Jekyll
 
     # Applies a similar URL-building technique as Jekyll::Document that takes
     # the collection's URL template into account. The default URL template can
-    # be overriden in the collection's configuration in _config.yml.
+    # be overridden in the collection's configuration in _config.yml.
     def url
       @url ||= begin
         base = if @collection.nil?

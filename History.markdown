@@ -1036,7 +1036,7 @@
   * add SUPPORT file for GitHub (#6324)
   * Rename CODE_OF_CONDUCT to show in banner (#6325)
   * Docs : illustrate page.id for a collection&#39;s document (#6329)
-  * Docs: post&#39;s date can be overriden in front matter (#6334)
+  * Docs: post&#39;s date can be overridden in front matter (#6334)
   * Docs: `site.url` behavior on development and production environments (#6270)
   * Fix typo in site.url section of variables.md :-[ (#6337)
   * Docs: updates (#6343)
