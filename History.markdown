@@ -598,7 +598,7 @@
   * Remove alt attribute from a tags (#7407)
   * Fix BASH code-block in ubuntu.md (#7420)
   * zlib is missing (#7428)
-  * Fixed unnecessary aticles and pronouns (#7466)
+  * Fixed unnecessary articles and pronouns (#7466)
   * Store SSL key and cert in site source (#7473)
   * Fix typo in tutorial for converting existing site (#7524)
   * Check if var exists before include tag (#7530)
