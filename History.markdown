@@ -1084,7 +1084,7 @@
 
 ### Bug Fixes
 
-  * Backward compatiblize URLFilters module (#6163)
+  * Backward compatibilize URLFilters module (#6163)
   * Static files contain front matter default keys when `to_liquid`'d  (#6162)
   * Always normalize the result of the `relative_url` filter (#6185)
 
