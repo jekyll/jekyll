@@ -2225,7 +2225,7 @@
   * Define the `install` step in the CI example `.travis.yml` (#3622)
   * Expand collections documentation. (#3638)
   * Add the "warning" note label to excluding `vendor` in the CI docs page (#3623)
-  * Upgrade pieces of the Ugrading guide for Jekyll 3 (#3607)
+  * Upgrade pieces of the Upgrading guide for Jekyll 3 (#3607)
   * Showing how to access specific data items (#3468)
   * Clarify pagination works from within HTML files (#3467)
   * Add note to `excerpt_separator` documentation that it can be set globally (#3667)
