@@ -132,7 +132,7 @@ module Jekyll
           end
         end
 
-        # config[kramdown][syntax_higlighter] >
+        # config[kramdown][syntax_highlighter] >
         #   config[kramdown][enable_coderay] >
         #   config[highlighter]
         # Where `enable_coderay` is now deprecated because Kramdown

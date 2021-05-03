@@ -178,7 +178,7 @@ class TestKramdown < JekyllUnitTest
 
     should "move coderay to syntax_highlighter_opts" do
       override = {
-        "higlighter" => nil,
+        "highlighter" => nil,
         "kramdown"   => {
           "syntax_highlighter" => "coderay",
           "coderay"            => {
