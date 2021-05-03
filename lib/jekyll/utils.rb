@@ -143,7 +143,7 @@ module Jekyll
       false
     end
 
-    # Determine whether the given content string contains Liquid Tags or Vaiables
+    # Determine whether the given content string contains Liquid Tags or Variables
     #
     # Returns true is the string contains sequences of `{%` or `{{`
     def has_liquid_construct?(content)
