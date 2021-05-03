@@ -613,7 +613,7 @@
   * fix link to Site Source config (#7708)
   * Introduce frontmatter in step 2 (#7704)
   * Add @ashmaroli to Core Team listing (#7398)
-  * Lnk to Tidelift in site&#39;s footer (#7377)
+  * Link to Tidelift in site&#39;s footer (#7377)
   * Link to OpenCollective backing (#7378
   * Link to sponsor listing in README (#7405)
   * Adjust team page listings (#7395)
