@@ -162,12 +162,12 @@ To run the full CI process across all supported Ruby Versions:
 earthly +all
 ```
 
-To run the tests for a specfic version of Ruby:
+To run the tests for a specific version of Ruby:
 ```sh
 earthly --build-arg RUBY=2.5 +test
 ```
 
-To run the tests for a specfic version of JRuby specify the full version:
+To run the tests for a specific version of JRuby specify the full version:
 ```sh
 earthly --build-arg RUBY=jruby:9.2.14.0 +test
 ```
