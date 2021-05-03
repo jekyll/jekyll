@@ -3373,7 +3373,7 @@
   * Adds excerpt attribute to posts which contains first paragraph of content (#837)
   * Accept custom configuration file via CLI (#863)
   * Load in GitHub Pages MIME Types on `jekyll serve` (#847, #871)
-  * Improve debugability of error message for a malformed highlight tag (#785)
+  * Improve debuggability of error message for a malformed highlight tag (#785)
   * Allow symlinked files in unsafe mode (#824)
   * Add 'gist' Liquid tag to core (#822, #861)
   * New format of Jekyll output (#795)
