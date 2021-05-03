@@ -29,7 +29,7 @@ module Jekyll
 
     # Private: The metadata file storing dependency tree and build history
     #
-    # Returns an Array with the metdata file as the only item
+    # Returns an Array with the metadata file as the only item
     def metadata_file
       [site.regenerator.metadata_file]
     end
