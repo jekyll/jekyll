@@ -60,7 +60,7 @@ module Jekyll
     # Returns the given filename or title as a lowercase URL String.
     # See Utils.slugify for more detail.
     def slugify(input, mode = nil)
-      Utils.slugify(input, :mode => mode)
+      Utils.slugify(input.to_s, :mode => mode)
     end
 
     # XML escape a string for use. Replaces any special characters with
