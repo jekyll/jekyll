@@ -18,6 +18,7 @@
   * docs: clarify where .jekyll-metadata comes from (#8646)
   * Razorops cicd added (#8656)
   * Specify default port and host for serve commands in docs (#8624)
+  * Update third-party.md (#8652)
 
 ### Bug Fixes
 
