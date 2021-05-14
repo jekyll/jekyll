@@ -25,7 +25,7 @@ With [Razorops][razorops-homepage] you can set up your Jekyll websites project's
 1. Log in at [https://razorops.com/][razorops-homepage] with your GitHub/Bitbucket or Gitlab account
 2. Create a pipeline, choose your Git provider and select your Jekyll Project
 3. Add .razorops.yaml file in your root directory of your project
-4. Add envirommant var and your deployment is ready
+4. Add environment var and your deployment is ready
 5. Add build and deployment steps as shown in this post [How to Deploy a Static Website to AWS S3 with Razorops CI/CD][deploy-s3]
 
 ## 2. How it works
