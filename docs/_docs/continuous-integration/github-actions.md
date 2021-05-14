@@ -30,8 +30,8 @@ The first and foremost requirement is a Jekyll project hosted at GitHub. Choose 
 project or follow the [quickstart]({{ '/docs/' | relative_url }}) and push the repository to GitHub
 if it is not hosted there already.
 
-We're only going to cover builds from the `master` branch in this page. Therefore, ensure that you
-are working on the `master` branch. If necessary, you may create it based on your default branch.
+We're only going to cover builds from the `main` branch in this page. Therefore, ensure that you
+are working on the `main` branch. If necessary, you may create it based on your default branch.
 When the Action builds your site, the contents of the _destination_ directory will be automatically
 pushed to the `gh-pages` branch with a commit, ready to be used for serving.
 
@@ -106,7 +106,7 @@ name: Build and deploy Jekyll site to GitHub Pages
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   github-pages:
@@ -122,7 +122,7 @@ jobs:
 
 The above workflow can be explained as the following:
 
-- We trigger the build using **on.push** condition for `master` branch only --- this prevents
+- We trigger the build using **on.push** condition for `main` branch only --- this prevents
   the Action from overwriting the `gh-pages` branch on any feature branch pushes.
 - The **name** of the job matches our YAML filename: `github-pages`.
 - The **checkout** action takes care of cloning your repository.
