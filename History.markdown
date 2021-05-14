@@ -15,6 +15,7 @@
   * Use latest Jekyll-action configuration (#8579)
   * docs: troubleshoot macOS with ARM64 architecture (#8560)
   * docs: add overview of .jekyll-cache dir (#8648)
+  * docs: clarify where .jekyll-metadata comes from (#8646)
 
 ### Bug Fixes
 
