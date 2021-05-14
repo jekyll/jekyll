@@ -188,9 +188,11 @@ An overview of what each of these does:
         <p>
           This helps Jekyll keep track of which files have not been modified
           since the site was last built, and which files will need to be
-          regenerated on the next build. This file will not be included in the
-          generated site. It’s probably a good idea to add this to your
-          <code>.gitignore</code> file.
+          regenerated on the next build. Only created when using
+          <a href="/docs/configuration/incremental-regeneration/">
+          incremental regeneration</a> (e.g.: with <code>jekyll serve -I</code>).
+          This file will not be included in the generated site. It’s probably
+          a good idea to add this to your <code>.gitignore</code> file.
         </p>
       </td>
     </tr>

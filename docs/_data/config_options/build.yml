@@ -84,10 +84,11 @@
 
 - name: Incremental build
   description: >-
-    Enable the experimental incremental build feature. Incremental build only
-    re-builds posts and pages that have changed, resulting in significant performance
-    improvements for large sites, but may also break site generation in certain
-    cases.
+    Enable the experimental
+    <a href="/docs/configuration/incremental-regeneration/">incremental
+    build</a> feature. Incremental build only re-builds posts and pages that
+    have changed, resulting in significant performance improvements for large
+    sites, but may also break site generation in certain cases.
   option: "incremental: BOOL"
   flag: -I, --incremental
 
