@@ -12,25 +12,25 @@
   <link rel="stylesheet" href="/css/screen.css">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Configuration | Jekyll • Simple, blog-aware, static sites</title>
+<title>Sass/SCSS Options | Jekyll • Simple, blog-aware, static sites</title>
 <meta name="generator" content="Jekyll v4.2.0" />
-<meta property="og:title" content="Configuration" />
+<meta property="og:title" content="Sass/SCSS Options" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Jekyll gives you a lot of flexibility to customize how it builds your site. These options can either be specified in a _config.yml or _config.toml file placed in your site’s root directory, or can be specified as flags for the jekyll executable in the terminal." />
-<meta property="og:description" content="Jekyll gives you a lot of flexibility to customize how it builds your site. These options can either be specified in a _config.yml or _config.toml file placed in your site’s root directory, or can be specified as flags for the jekyll executable in the terminal." />
-<link rel="canonical" href="https://jekyllrb.com/docs/configuration/" />
-<meta property="og:url" content="https://jekyllrb.com/docs/configuration/" />
+<meta name="description" content="Jekyll comes bundled with jekyll-sass-converter plugin. By default, Jekyll will look for Sass partials in the _sass directory relative to your site’s source directory." />
+<meta property="og:description" content="Jekyll comes bundled with jekyll-sass-converter plugin. By default, Jekyll will look for Sass partials in the _sass directory relative to your site’s source directory." />
+<link rel="canonical" href="https://jekyllrb.com/docs/configuration/sass/" />
+<meta property="og:url" content="https://jekyllrb.com/docs/configuration/sass/" />
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-05-14T13:39:41-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
-<meta property="twitter:title" content="Configuration" />
+<meta property="twitter:title" content="Sass/SCSS Options" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"description":"Jekyll gives you a lot of flexibility to customize how it builds your site. These options can either be specified in a _config.yml or _config.toml file placed in your site’s root directory, or can be specified as flags for the jekyll executable in the terminal.","url":"https://jekyllrb.com/docs/configuration/","image":"https://jekyllrb.com/img/jekyll-og.png","@type":"BlogPosting","headline":"Configuration","dateModified":"2021-05-14T13:39:41-07:00","datePublished":"2021-05-14T13:39:41-07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/configuration/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"@context":"https://schema.org"}</script>
+{"description":"Jekyll comes bundled with jekyll-sass-converter plugin. By default, Jekyll will look for Sass partials in the _sass directory relative to your site’s source directory.","url":"https://jekyllrb.com/docs/configuration/sass/","image":"https://jekyllrb.com/img/jekyll-og.png","@type":"BlogPosting","headline":"Sass/SCSS Options","dateModified":"2021-05-14T13:39:41-07:00","datePublished":"2021-05-14T13:39:41-07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/configuration/sass/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -124,26 +124,20 @@
 <div class="unit four-fifths">
       <article>
         <div class="improve right hide-on-mobiles">
-          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/configuration.md"><i
+          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/configuration/sass.md"><i
              class="fa fa-pencil"></i> &nbsp;Improve this page</a>
         </div>
-        <h1>Configuration</h1>
-        <p>Jekyll gives you a lot of flexibility to customize how it builds your site. These
-options can either be specified in a <code class="language-plaintext highlighter-rouge">_config.yml</code> or <code class="language-plaintext highlighter-rouge">_config.toml</code> file placed
-in your site’s root directory, or can be specified as flags for the <code class="language-plaintext highlighter-rouge">jekyll</code>
-executable in the terminal.</p>
+        <h1>Sass/SCSS Options</h1>
+        <p>Jekyll comes bundled with <a href="https://github.com/jekyll/jekyll-sass-converter">jekyll-sass-converter</a> plugin. By default, Jekyll will look for Sass partials in the <code class="language-plaintext highlighter-rouge">_sass</code> directory relative to your site’s <code class="language-plaintext highlighter-rouge">source</code> directory.</p>
 
-<ul>
-  <li><a href="/docs/configuration/options/">Configuration Options</a></li>
-  <li><a href="/docs/configuration/default/">Default Configuration</a></li>
-  <li><a href="/docs/configuration/front-matter-defaults/">Front Matter Defaults</a></li>
-  <li><a href="/docs/configuration/environments/">Environments</a></li>
-  <li><a href="/docs/configuration/markdown/">Markdown Options</a></li>
-  <li><a href="/docs/configuration/liquid/">Liquid Options</a></li>
-  <li><a href="/docs/configuration/sass/">Sass/SCSS Options</a></li>
-  <li><a href="/docs/configuration/webrick/">Webrick Options</a></li>
-  <li><a href="/docs/configuration/incremental-regeneration/">Incremental Regeneration</a></li>
-</ul>
+<p>You can further configure the plugin by adding options to your Jekyll config under the <code class="language-plaintext highlighter-rouge">sass</code> attribute. See the <a href="https://github.com/jekyll/jekyll-sass-converter#usage">plugin’s documentation</a> for details and for its default values.</p>
+
+<div class="note info">
+  <p>
+    Note that directory paths specified in the <code>sass</code> configuration
+    are resolved relative to your site's <code>source</code>, not relative to the location of the <code>_config.yml</code> file.
+  </p>
+</div>
 
       </article>
     </div>
@@ -160,7 +154,7 @@ executable in the terminal.</p>
     <h4>Build</h4>
       <ul>
         <li><a href="/docs/usage/">Command Line Usage</a></li>
-        <li class="current"><a href="/docs/configuration/">Configuration</a></li>
+        <li><a href="/docs/configuration/">Configuration</a></li>
         <li><a href="/docs/rendering-process/">Rendering Process</a></li>
       </ul>
     <h4>Content</h4>
