@@ -57,6 +57,10 @@ Read this [Jekyll step-by-step guide](https://www.netlify.com/blog/2020/04/02/a-
 
 [Render](https://render.com) provides zero config continuous deployment for static sites. The service is free under 100GB monthly bandwidth.
 
+## Hostman 
+
+[Hostman](https://hostman.com) allows you to host websites for free with no configurations. Read [this guide](https://hostman.com/docs/jekyll) to deploy your Jekull site on Hostman. 
+
 ## Static Publisher
 
 [Static Publisher](https://github.com/static-publisher/static-publisher) is another automated deployment option with a server listening for webhook posts, though it's not tied to GitHub specifically. It has a one-click deploy to Heroku, it can watch multiple projects from one server, it has an easy to user admin interface and can publish to either S3 or to a git repository (e.g. gh-pages).
