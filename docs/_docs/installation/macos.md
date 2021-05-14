@@ -13,9 +13,9 @@ xcode-select --install
 ## Install Ruby
 
 Jekyll requires **Ruby v{{ site.data.ruby.min_version }}** or higher.
-macOS Catalina 10.15 ships with Ruby 2.6.3. Check your Ruby version using `ruby -v`.
+macOS Big Sur 11.x ships with Ruby 2.6.3. Check your Ruby version using `ruby -v`.
 
-If you're running a previous version of macOS, you'll have to install a newer version of Ruby.
+If you're running a previous version of macOS, you'll have to install a newer version of Ruby. Installation with [Homebrew](https://brew.sh) is simple if you're only planning to use Ruby for Jekyll. Install with a version manager such as [asdf](https://asdf-vm.com/), [chruby](https://github.com/postmodern/chruby), [rbenv](https://github.com/rbenv/rbenv), or [rvm](https://rvm.io/) if you need to switch among Ruby versions (instructions for rbenv are below). See the guide [Install Ruby on Mac](https://mac.install.guide/ruby/index.html) for details and recommendations.
 
 ### With Homebrew {#brew}
 To run the latest Ruby version you need to install it through [Homebrew](https://brew.sh).
@@ -28,14 +28,14 @@ To run the latest Ruby version you need to install it through [Homebrew](https:/
 brew install ruby
 ```
 
-Add the brew ruby path to your shell configuration:
+Add the brew ruby and gems path to your shell configuration:
 
 ```bash
 # If you're using Zsh
-echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> ~/.zshrc
+echo 'export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"' >> ~/.zshrc
 
 # If you're using Bash
-echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> ~/.bash_profile
+echo 'export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"' >> ~/.bash_profile
 
 # Unsure which shell you are using? Type
 echo $SHELL

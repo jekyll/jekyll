@@ -42,7 +42,7 @@ If you are using Windows 10 version 1607 or later, another option to run Jekyll 
 {: .note .info}
 You must have [Windows Subsystem for Linux](https://msdn.microsoft.com/en-us/commandline/wsl/about) enabled.
 
-Make sure all your packages and repositories are up to date. Open a new Command Prompt or Powershell window and type `bash`.
+Make sure all your packages and repositories are up to date. Open a new Command Prompt or PowerShell window and type `bash`.
 
 Your terminal should now be a Bash instance. Next, update your repository lists and packages:
 

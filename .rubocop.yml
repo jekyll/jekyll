@@ -25,6 +25,8 @@ AllCops:
     - vendor/**/*
     - tmp/**/*
 
+Gemspec/DateAssignment:
+  Enabled: true
 Layout/BeginEndAlignment:
   Enabled: true
 Layout/EmptyComment:
@@ -211,6 +213,8 @@ Minitest/RefutePathExists:
   Enabled: true
 Minitest/UnspecifiedException:
   Enabled: true
+Minitest/AssertEmptyLiteral:
+  Enabled: false
 
 Naming/FileName:
   Enabled: false
@@ -282,6 +286,8 @@ Style/BisectedAttrAccessor:
   Enabled: true
 Style/CaseLikeIf:
   Enabled: true
+Style/StringChars:
+  Enabled: true
 Style/ClassAndModuleChildren:
   Exclude:
     - test/**/*.rb
@@ -316,6 +322,8 @@ Style/GuardClause:
   Enabled: false
 Style/HashAsLastArrayItem:
   Enabled: true
+Style/HashConversion:
+  Enabled: true  
 Style/HashEachMethods:
   Enabled: true
 Style/HashExcept:

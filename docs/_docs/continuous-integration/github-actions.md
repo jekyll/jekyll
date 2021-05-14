@@ -30,8 +30,8 @@ The first and foremost requirement is a Jekyll project hosted at GitHub. Choose 
 project or follow the [quickstart]({{ '/docs/' | relative_url }}) and push the repository to GitHub
 if it is not hosted there already.
 
-We're only going to cover builds from the `master` branch in this page. Therefore, ensure that you
-are working on the `master` branch. If necessary, you may create it based on your default branch.
+We're only going to cover builds from the `main` branch in this page. Therefore, ensure that you
+are working on the `main` branch. If necessary, you may create it based on your default branch.
 When the Action builds your site, the contents of the _destination_ directory will be automatically
 pushed to the `gh-pages` branch with a commit, ready to be used for serving.
 
@@ -106,29 +106,29 @@ name: Build and deploy Jekyll site to GitHub Pages
 on:
   push:
     branches:
-      - main # This may be master, if your repository was created before 01-Oct-2020
+      - main # or master before October 2020
 
 jobs:
   github-pages:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: helaili/jekyll-action@2.0.5
-        env:
-          JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
+      - uses: helaili/jekyll-action@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 {% endraw %}
 
 The above workflow can be explained as the following:
 
-- We trigger the build using **on.push** condition for `master` branch only --- this prevents
+- We trigger the build using **on.push** condition for `main` branch only --- this prevents
   the Action from overwriting the `gh-pages` branch on any feature branch pushes.
 - The **name** of the job matches our YAML filename: `github-pages`.
 - The **checkout** action takes care of cloning your repository.
 - We specify our selected **action** and **version number** using `helaili/jekyll-action@2.0.5`.
   This handles the build and deploy.
-- We set a reference to a secret **environment variable** for the action to use. The `JEKYLL_PAT`
+- We set a reference to a secret **environment variable** for the action to use. The `GITHUB_TOKEN`
   is a _Personal Access Token_ and is detailed in the next section.
 
 Instead of using the **on.push** condition, you could trigger your build on a **schedule** by
@@ -159,7 +159,7 @@ build using _Secrets_:
    to commit to the `gh-pages` branch.
 3. **Copy** the token value.
 4. Go to your repository's **Settings** and then the **Secrets** tab.
-5. **Create** a token named `JEKYLL_PAT` (_important_). Give it a value using the value copied
+5. **Create** a token named `GITHUB_TOKEN` (_important_). Give it a value using the value copied
    above.
 
 ### Build and deploy
@@ -204,7 +204,7 @@ successful deploy from the Action.
 - [jekyll-actions] is an action available on the GitHub Marketplace and was used in this guide.
 - [jekyll-actions-quickstart] is an unofficial repository that includes a live demo of the
   `jekyll-actions` action. That project can be used as a template for making a new site.
-- [jekyll-action-ts] is another action to build and publish Jekyll sites on GiHub Pages that includes HTML formatting options wih Prettier and caching.
+- [jekyll-action-ts] is another action to build and publish Jekyll sites on GiHub Pages that includes HTML formatting options with Prettier and caching.
 
 [ghp-whitelist]: https://pages.github.com/versions/
 [timeago-plugin]: https://rubygems.org/gems/jekyll-timeago

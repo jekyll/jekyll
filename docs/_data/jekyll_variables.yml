@@ -1,7 +1,7 @@
 # Variables provided by Jekyll core
 #
 #   name:           : name of the variable
-#   description:    : content returned by the varialble
+#   description:    : content returned by the variable
 
 global:
   - name: site
