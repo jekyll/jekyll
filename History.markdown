@@ -16,6 +16,7 @@
   * docs: troubleshoot macOS with ARM64 architecture (#8560)
   * docs: add overview of .jekyll-cache dir (#8648)
   * docs: clarify where .jekyll-metadata comes from (#8646)
+  * Razorops cicd added (#8656)
 
 ### Bug Fixes
 
