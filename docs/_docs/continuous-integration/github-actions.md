@@ -204,7 +204,7 @@ successful deploy from the Action.
 - [jekyll-actions] is an action available on the GitHub Marketplace and was used in this guide.
 - [jekyll-actions-quickstart] is an unofficial repository that includes a live demo of the
   `jekyll-actions` action. That project can be used as a template for making a new site.
-- [jekyll-action-ts] is another action to build and publish Jekyll sites on GiHub Pages that includes HTML formatting options wih Prettier and caching.
+- [jekyll-action-ts] is another action to build and publish Jekyll sites on GiHub Pages that includes HTML formatting options with Prettier and caching.
 
 [ghp-whitelist]: https://pages.github.com/versions/
 [timeago-plugin]: https://rubygems.org/gems/jekyll-timeago
