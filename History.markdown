@@ -30,6 +30,7 @@
   * Pin rubocop version (#8564)
   * style: add rubocop 1.9 cops (#8567)
   * Cross Version Testing Locally and Faster CI (#8610)
+  * style: run rubocop -a (#8654)
 
 ### Minor Enhancements
 
