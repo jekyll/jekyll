@@ -18,6 +18,7 @@
 ### Bug Fixes
 
   * Add webrick as a dependency (#8524)
+  * fix: pin rubocop to 1.12 due to error with ruby 2.4 (#8651)
 
 ### Development Fixes
 
