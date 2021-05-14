@@ -19,6 +19,8 @@ end
 Liquid::Template.register_filter(Jekyll::AssetFilter)
 ```
 
+For more details on creating custom Liquid Filters, head to the [Liquid docs](https://github.com/Shopify/liquid/wiki/Liquid-for-Programmers#create-your-own-filters).
+
 <div class="note">
   <h5>ProTip™: Access the site object using Liquid</h5>
   <p>
