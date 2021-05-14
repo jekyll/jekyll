@@ -106,7 +106,7 @@ name: Build and deploy Jekyll site to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - main # or master before October 2020
 
 jobs:
   github-pages:
