@@ -14,6 +14,7 @@
   * Fix for important missing step in macOS Installation Docs: Add the Homebrew gems directory to the PATH (#8496)
   * Use latest Jekyll-action configuration (#8579)
   * docs: troubleshoot macOS with ARM64 architecture (#8560)
+  * docs: add overview of .jekyll-cache dir (#8648)
 
 ### Bug Fixes
 
