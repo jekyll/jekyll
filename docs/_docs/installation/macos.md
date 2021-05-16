@@ -10,6 +10,13 @@ To install the command line tools to compile native extensions, open a terminal 
 xcode-select --install
 ```
 
+### set SDKROOT (only macOS Catalina or later)
+Starting on macOS Catalina (10.15) the headers used for Ruby have been moved from their previous location which results in some gems, including Jekyll to fail installation. This can be solved by setting SDKROOT in your shell configuration to the value provided by xcrun.
+
+```ssh
+export SDKROOT=$(xcrun --show-sdk-path)
+```
+
 ## Install Ruby
 
 Jekyll requires **Ruby v{{ site.data.ruby.min_version }}** or higher.
