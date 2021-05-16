@@ -42,6 +42,10 @@
   * Regenerate supported mime types (#8542)
   * Update include tag to be more permissive (#8618)
 
+### Site Enhancements
+
+  * Improvements to CSS (#7834)
+
 ## 4.2.0 / 2020-12-14
 
 ### Minor Enhancements
