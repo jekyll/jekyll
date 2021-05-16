@@ -20,6 +20,7 @@
   * Specify default port and host for serve commands in docs (#8624)
   * Update third-party.md (#8652)
   * Add documentation for Sass configuration options (#8587)
+  * Add formcarry to forms section (#8471)
 
 ### Bug Fixes
 
