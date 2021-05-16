@@ -163,6 +163,7 @@ module Jekyll
 
     # Load `path` from disk and return the result.
     # This MUST NEVER be called in Safe Mode
+    # rubocop:disable Security/MarshalLoad
     def load(path)
       raise unless disk_cache_enabled?
 
@@ -171,6 +172,7 @@ module Jekyll
       cached_file.close
       value
     end
+    # rubocop:enable Security/MarshalLoad
 
     # Given a path and a value, save value to disk at path.
     # This should NEVER be called in Safe Mode
