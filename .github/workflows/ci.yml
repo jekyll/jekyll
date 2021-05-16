@@ -1,0 +1,62 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+    - master
+    - /.*-stable/
+  pull_request:
+    branches:
+    - master
+    - /.*-stable/
+
+jobs:
+  ci:
+    if: "!contains(github.event.commits[0].message, '[ci skip]')"
+    name: 'Ruby ${{ matrix.ruby_version }}'
+    runs-on: 'ubuntu-latest'
+
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby_version:
+        - 2.5
+        - 2.7
+        - 3.0
+        - jruby:9.2.14.0
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download released earth
+        run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.5.7/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
+      - name: Execute tests
+        run: earthly --build-arg RUBY=${{ matrix.ruby_version }} +test
+  profile_docs:
+    if: "!contains(github.event.commits[0].message, '[ci skip]')"
+    name: 'Profile Docs Site (Ruby ${{ matrix.ruby_version }})'
+    runs-on: 'ubuntu-latest'
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby_version:
+        - 2.4 # Minimum required Ruby version in gemspec
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download released earth
+        run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.5.7/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
+      - name: Execute tests
+        run: earthly --build-arg RUBY=${{ matrix.ruby_version }} +profile-docs
+  style_check:
+    if: "!contains(github.event.commits[0].message, '[ci skip]')"
+    name: 'Style Check (Ruby ${{ matrix.ruby_version }})'
+    runs-on: 'ubuntu-latest'
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby_version:
+        - 2.5 
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download released earth
+        run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.5.7/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
+      - name: Execute tests
+        run: earthly --build-arg RUBY=${{ matrix.ruby_version }} +style-check

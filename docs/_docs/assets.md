@@ -79,6 +79,8 @@ sass:
 These are passed to Sass, so any output style options Sass supports are valid
 here, too.
 
+For more information on Sass configuration options, see the [Sass configuration]({{ '/docs/configuration/sass/' | relative_url }}) docs.
+
 ## Coffeescript
 
 To enable Coffeescript in Jekyll 3.0 and up you must

@@ -11,7 +11,7 @@ class TestGeneratedSite < JekyllUnitTest
       @site.process
       @index = File.read(
         dest_dir("index.html"),
-        Utils.merged_file_read_opts(@site, {})
+        **Utils.merged_file_read_opts(@site, {})
       )
     end
 

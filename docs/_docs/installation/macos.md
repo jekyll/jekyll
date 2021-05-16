@@ -13,24 +13,32 @@ xcode-select --install
 ## Install Ruby
 
 Jekyll requires **Ruby v{{ site.data.ruby.min_version }}** or higher.
-macOS Catalina 10.15 ships with Ruby 2.6.3. Check your Ruby version using `ruby -v`.
+macOS Big Sur 11.x ships with Ruby 2.6.3. Check your Ruby version using `ruby -v`.
 
-If you're running a previous version of macOS, you'll have to install a newer version of Ruby.
+If you're running a previous version of macOS, you'll have to install a newer version of Ruby. Installation with [Homebrew](https://brew.sh) is simple if you're only planning to use Ruby for Jekyll. Install with a version manager such as [asdf](https://asdf-vm.com/), [chruby](https://github.com/postmodern/chruby), [rbenv](https://github.com/rbenv/rbenv), or [rvm](https://rvm.io/) if you need to switch among Ruby versions (instructions for rbenv are below). See the guide [Install Ruby on Mac](https://mac.install.guide/ruby/index.html) for details and recommendations.
 
 ### With Homebrew {#brew}
 To run the latest Ruby version you need to install it through [Homebrew](https://brew.sh).
 
 ```sh
 # Install Homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+# Install Ruby
 brew install ruby
 ```
 
-Add the brew ruby path to your shell configuration:
+Add the brew ruby and gems path to your shell configuration:
 
 ```bash
-echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> ~/.bash_profile
+# If you're using Zsh
+echo 'export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"' >> ~/.zshrc
+
+# If you're using Bash
+echo 'export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"' >> ~/.bash_profile
+
+# Unsure which shell you are using? Type
+echo $SHELL
 ```
 
 Relaunch your terminal and check your Ruby setup:
@@ -52,7 +60,7 @@ Ruby versions. This is very useful when you need to be able to run a given Ruby 
 
 ```sh
 # Install Homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install rbenv and ruby-build
 brew install rbenv
@@ -98,7 +106,14 @@ ruby -v
 Append your path file with the following, replacing the `X.X` with the first two digits of your Ruby version:
 
 ```bash
+# If you're using Zsh
+echo 'export PATH="$HOME/.gem/ruby/X.X.0/bin:$PATH"' >> ~/.zshrc
+
+# If you're using Bash
 echo 'export PATH="$HOME/.gem/ruby/X.X.0/bin:$PATH"' >> ~/.bash_profile
+
+# Unsure which shell you are using? Type
+echo $SHELL
 ```
 
 Check that `GEM PATHS:` points to your home directory:

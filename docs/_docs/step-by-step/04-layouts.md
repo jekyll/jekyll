@@ -3,27 +3,27 @@ layout: step
 title: Layouts
 position: 4
 ---
-Websites typically have more than one page and this website is no different.
-
 Jekyll supports [Markdown](https://daringfireball.net/projects/markdown/syntax)
-as well as HTML for pages. Markdown is a great choice for pages with a simple
+in addition to HTML when building pages. Markdown is a great choice for pages with a simple
 content structure (just paragraphs, headings and images), as it's less verbose
-than raw HTML. Let's try it out on the next page.
+than raw HTML. 
 
-Create `about.md` in the root.
+Create a new Markdown file named `about.md` in your site's root folder. 
 
-For the structure you could copy `index.html` and modify it for the about page.
-The problem with doing this is duplicate code. Let's say you wanted to add a
-stylesheet to your site, you would have to go to each page and add it to the
-`<head>`. It might not sound so bad for a two page site, imagine doing it
-for 100 pages. Even simple changes will take a long time to make.
+You could copy the contents of `index` and modify it for the About page. However,
+this creates duplicate code that has to be customized for each new page you add
+to your site. 
+
+For example, adding a new stylesheet to your site would involve adding the link
+to the stylesheet to the `<head>` of each page. For sites with many pages, this
+is a waste of time.
 
 ## Creating a layout
 
-Using a layout is a much better choice. Layouts are templates that wrap around
-your content. They live in a directory called `_layouts`.
+Layouts are templates that can be used by any page in your site and wrap around page content.
+They are stored in a directory called `_layouts`.
 
-Create your first layout at `_layouts/default.html` with the following content:
+Create the `_layouts` directory in your site's root folder and create a new `default.html` file with the following content:
 
 {% raw %}
 ```liquid
@@ -40,14 +40,17 @@ Create your first layout at `_layouts/default.html` with the following content:
 ```
 {% endraw %}
 
-You'll notice this is almost identical to `index.html` except there's
-no front matter and the content of the page is replaced with a `content`
-variable. `content` is a special variable which has the value of the rendered
-content of the page it's called on.
+This HTML is almost identical to `index.html` except there's
+no front matter and the content of the page is replaced by a `content`
+variable. 
 
-To have `index.html` use this layout, you can set a `layout` variable in front
-matter. The layout wraps around the content of the page so all you need in
-`index.html` is:
+`content` is a special variable that returns the rendered
+content of the page on which it's called.
+
+## Use layouts
+
+To make `index.html` use your new layout, set the `layout` variable in the front
+matter. The file should look like this:
 
 {% raw %}
 ```liquid
@@ -59,16 +62,14 @@ title: Home
 ```
 {% endraw %}
 
-After doing this, the output will be exactly the same as before. Note that you
-can access the `page` front matter from the layout. In this case `title` is
-set in the index page's front matter but is output in the layout.
+When you reload the site, the output remains the same.
 
-## About page
+Since the layout wraps around the content on the page, you can call front matter like `page` 
+in the layout file. When you apply the layout to a page, it uses the front matter on that page.
 
-Back to the about page, instead of copying from `index.html`, you can use the
-layout.
+## Build the About page
 
-Add the following to `about.md`:
+Add the following to `about.md` to use your new layout in the About page:
 
 ```markdown
 ---
@@ -83,5 +84,6 @@ This page tells you a little bit about me.
 Open <a href="http://localhost:4000/about.html" target="_blank" data-proofer-ignore>http://localhost:4000/about.html</a>
 in your browser and view your new page.
 
-Congratulations, you now have a two page website! But how do you
-navigate from one page to another? Keep reading to find out.
+Congratulations, you now have a two page website!
+
+Next, you'll learn about navigating from page to page in your site. 

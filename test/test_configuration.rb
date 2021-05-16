@@ -111,7 +111,7 @@ class TestConfiguration < JekyllUnitTest
     should "forces posts to output" do
       result = Configuration[{ "collections" => { "posts" => { "output" => false } } }]
         .add_default_collections
-      assert_equal true, result["collections"]["posts"]["output"]
+      assert result["collections"]["posts"]["output"]
     end
   end
 

@@ -111,7 +111,7 @@ class TestStaticFile < JekyllUnitTest
         "file.html",
         defaults
       )
-      assert(!static_file.write?,
+      refute(static_file.write?,
              "static_file.write? should return false when _config.yml sets " \
              "`published: false`")
     end
@@ -159,7 +159,7 @@ class TestStaticFile < JekyllUnitTest
     should "known if the source path is modified, when it's not" do
       @static_file.write(dest_dir)
       sleep 1 # wait, else the times are still the same
-      assert !@static_file.modified?
+      refute @static_file.modified?
     end
 
     should "known whether to write the file to the filesystem" do

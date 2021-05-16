@@ -13,7 +13,7 @@ class TestSiteDrop < JekyllUnitTest
     end
 
     should "respond to `key?`" do
-      assert @drop.respond_to?(:key?)
+      assert_respond_to @drop, :key?
     end
 
     should "find a key if it's in the collection of the drop" do
