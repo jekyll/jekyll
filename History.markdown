@@ -36,6 +36,7 @@
   * Cross Version Testing Locally and Faster CI (#8610)
   * style: run rubocop -a (#8654)
   * Use official Ruby setup GH action (#8614)
+  * Spell check action for markdown documentation (#8675)
 
 ### Minor Enhancements
 
