@@ -35,6 +35,7 @@
   * style: add rubocop 1.9 cops (#8567)
   * Cross Version Testing Locally and Faster CI (#8610)
   * style: run rubocop -a (#8654)
+  * Use official Ruby setup GH action (#8614)
 
 ### Minor Enhancements
 
