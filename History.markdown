@@ -26,6 +26,7 @@
   * Add webrick as a dependency (#8524)
   * fix: pin rubocop to 1.12 due to error with ruby 2.4 (#8651)
   * Revert &#34;style: run rubocop -a&#34; (#8676)
+  * Load Jekyll plugins from BUNDLE_GEMFILE location (#8585)
 
 ### Development Fixes
 
