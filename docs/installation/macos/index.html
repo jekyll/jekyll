@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-05-16T13:09:56-07:00" />
+<meta property="article:published_time" content="2021-05-16T13:11:13-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Jekyll on macOS" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"description":"Install Command Line Tools To install the command line tools to compile native extensions, open a terminal and run:","url":"https://jekyllrb.com/docs/installation/macos/","image":"https://jekyllrb.com/img/jekyll-og.png","@type":"BlogPosting","headline":"Jekyll on macOS","dateModified":"2021-05-16T13:09:56-07:00","datePublished":"2021-05-16T13:09:56-07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/installation/macos/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"@context":"https://schema.org"}</script>
+{"description":"Install Command Line Tools To install the command line tools to compile native extensions, open a terminal and run:","url":"https://jekyllrb.com/docs/installation/macos/","image":"https://jekyllrb.com/img/jekyll-og.png","@type":"BlogPosting","headline":"Jekyll on macOS","dateModified":"2021-05-16T13:11:13-07:00","datePublished":"2021-05-16T13:11:13-07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/installation/macos/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -132,6 +132,12 @@
 <p>To install the command line tools to compile native extensions, open a terminal and run:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xcode-select <span class="nt">--install</span>
+</code></pre></div></div>
+
+<h3 id="set-sdkroot-only-macos-catalina-or-later">set SDKROOT (only macOS Catalina or later)</h3>
+<p>Starting on macOS Catalina (10.15) the headers used for Ruby have been moved from their previous location which results in some gems, including Jekyll to fail installation. This can be solved by setting SDKROOT in your shell configuration to the value provided by xcrun.</p>
+
+<div class="language-ssh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> SDKROOT=<span class="err">$</span>(xcrun --show-sdk-path)
 </code></pre></div></div>
 
 <h2 id="install-ruby">Install Ruby</h2>
