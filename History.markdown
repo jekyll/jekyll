@@ -37,6 +37,7 @@
   * style: run rubocop -a (#8654)
   * Use official Ruby setup GH action (#8614)
   * Spell check action for markdown documentation (#8675)
+  * Update expect to cover docs/_posts (#8677)
 
 ### Minor Enhancements
 
