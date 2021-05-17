@@ -550,6 +550,8 @@ scrollbar
 scroller
 scss
 scssify
+sdk
+SDKROOT
 sectore
 semver
 seo
@@ -723,6 +725,7 @@ workflow
 wsl
 www
 xcode
+xcrun
 xdg
 Xhmikos
 xhtml
