@@ -5,8 +5,8 @@ module Jekyll
     include Convertible
 
     attr_accessor :content, # content of layout
-                  :data, # the Hash that holds the metadata for this layout
-                  :ext # extension of layout
+                  :data,    # the Hash that holds the metadata for this layout
+                  :ext      # extension of layout
 
     attr_reader :name, # name of layout
                 :path, # path to layout
