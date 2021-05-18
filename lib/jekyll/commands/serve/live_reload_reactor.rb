@@ -8,9 +8,7 @@ module Jekyll
   module Commands
     class Serve
       class LiveReloadReactor
-        attr_reader :started_event,
-                    :stopped_event,
-                    :thread
+        attr_reader :started_event, :stopped_event, :thread
 
         def initialize
           @websockets = []
