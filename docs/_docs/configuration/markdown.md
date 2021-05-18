@@ -28,7 +28,7 @@ kramdown:
 
 ### Syntax Highlighting (CodeRay)
 
-To use the [CodeRay](http://coderay.rubychan.de/) syntax highlighter with Kramdown, you'll need to add a dependency on the `kramdown-syntax-coderay` gem. For example, `bundle add kramdown-syntax-coderay`. Then, you'll be able to specify CodeRay in your `syntax_highlighter` config:
+To use the [CodeRay](http://coderay.rubychan.de/) syntax highlighter with Kramdown, you  need to add a dependency on the `kramdown-syntax-coderay` gem. For example, `bundle add kramdown-syntax-coderay`. Then, you'll be able to specify CodeRay in your `syntax_highlighter` config:
 
 ```yaml
 kramdown:
