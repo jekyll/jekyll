@@ -10,8 +10,8 @@ module Jekyll
 
     attr_reader :name, # name of layout
                 :path, # path to layout
-                :relative_path, # path to layout relative to its base
-                :site # the Site object
+                :site, # the Site object
+                :relative_path # path to layout relative to its base
 
     # Initialize a new Layout.
     #
