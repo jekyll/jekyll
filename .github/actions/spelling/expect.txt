@@ -34,7 +34,6 @@ awood
 aws
 awscli
 backend
-backlink
 backport
 backtick
 barcamp
@@ -165,7 +164,6 @@ endraw
 endrender
 endtablerow
 Enumerables
-EOL
 eol
 erb
 errordocument
@@ -528,6 +526,7 @@ rsync
 rtomayko
 Rubo
 rubocop
+rubychan
 rubygem
 rubyinstaller
 rubyprof
