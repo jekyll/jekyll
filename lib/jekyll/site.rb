@@ -9,15 +9,8 @@ module Jekyll
                   :reader, :safe, :show_drafts, :static_files, :theme, :time,
                   :unpublished
 
-    attr_reader :cache_dir,
-                :config,
-                :dest,
-                :filter_cache,
-                :includes_load_paths,
-                :liquid_renderer,
-                :profiler,
-                :regenerator,
-                :source
+    attr_reader :cache_dir, :config, :dest, :filter_cache, :includes_load_paths,
+                :liquid_renderer, :profiler, :regenerator, :source
 
     # Public: Initialize a new Site.
     #
