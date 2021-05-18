@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-05-17T23:32:04-07:00" />
+<meta property="article:published_time" content="2021-05-18T01:01:17-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Markdown Options" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"description":"The various Markdown renderers supported by Jekyll sometimes have extra options available.","url":"https://jekyllrb.com/docs/configuration/markdown/","image":"https://jekyllrb.com/img/jekyll-og.png","@type":"BlogPosting","headline":"Markdown Options","dateModified":"2021-05-17T23:32:04-07:00","datePublished":"2021-05-17T23:32:04-07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/configuration/markdown/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"@context":"https://schema.org"}</script>
+{"description":"The various Markdown renderers supported by Jekyll sometimes have extra options available.","url":"https://jekyllrb.com/docs/configuration/markdown/","image":"https://jekyllrb.com/img/jekyll-og.png","@type":"BlogPosting","headline":"Markdown Options","dateModified":"2021-05-18T01:01:17-07:00","datePublished":"2021-05-18T01:01:17-07:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/configuration/markdown/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -130,93 +130,58 @@
         <p>The various Markdown renderers supported by Jekyll sometimes have extra options
 available.</p>
 
-<h3 id="kramdown">Kramdown</h3>
+<h2 id="kramdown">Kramdown</h2>
 
-<p>Kramdown is the default Markdown renderer for Jekyll. Below is a list of the
-currently supported options:</p>
+<p>Kramdown is the default Markdown renderer for Jekyll, and often works well with no additional configuration. However, it does support many configuration options.</p>
 
-<ul>
-  <li>
-<strong>auto_id_prefix</strong> - Prefix used for automatically generated header IDs</li>
-  <li>
-<strong>auto_id_stripping</strong> - Strip all formatting from header text for automatic ID generation</li>
-  <li>
-<strong>auto_ids</strong> - Use automatic header ID generation</li>
-  <li>
-<strong>coderay_bold_every</strong> - Defines how often a line number should be made bold</li>
-  <li>
-<strong>coderay_css</strong> - Defines how the highlighted code gets styled</li>
-  <li>
-<strong>coderay_default_lang</strong> - Sets the default language for highlighting code blocks</li>
-  <li>
-<strong>coderay_line_number_start</strong> - The start value for the line numbers</li>
-  <li>
-<strong>coderay_line_numbers</strong> - Defines how and if line numbers should be shown</li>
-  <li>
-<strong>coderay_tab_width</strong> - The tab width used in highlighted code</li>
-  <li>
-<strong>coderay_wrap</strong> - Defines how the highlighted code should be wrapped</li>
-  <li>
-<strong>enable_coderay</strong> - Use coderay for syntax highlighting</li>
-  <li>
-<strong>entity_output</strong> - Defines how entities are output</li>
-  <li>
-<strong>footnote_backlink</strong> - Defines the text that should be used for the footnote backlinks</li>
-  <li>
-<strong>footnote_backlink_inline</strong> - Specifies whether the footnote backlink should always be inline</li>
-  <li>
-<strong>footnote_nr</strong> - The number of the first footnote</li>
-  <li>
-<strong>gfm_quirks</strong> - Enables a set of GFM specific quirks</li>
-  <li>
-<strong>hard_wrap</strong> - Interprets line breaks literally</li>
-  <li>
-<strong>header_offset</strong> - Sets the output offset for headers</li>
-  <li>
-<strong>html_to_native</strong> - Convert HTML elements to native elements</li>
-  <li>
-<strong>line_width</strong> - Defines the line width to be used when outputting a document</li>
-  <li>
-<strong>link_defs</strong> - Pre-defines link definitions</li>
-  <li>
-<strong>math_engine</strong> - Set the math engine</li>
-  <li>
-<strong>math_engine_opts</strong> - Set the math engine options</li>
-  <li>
-<strong>parse_block_html</strong> - Process kramdown syntax in block HTML tags</li>
-  <li>
-<strong>parse_span_html</strong> - Process kramdown syntax in span HTML tags</li>
-  <li>
-<strong>smart_quotes</strong> - Defines the HTML entity names or code points for smart quote output</li>
-  <li>
-<strong>syntax_highlighter</strong> - Set the syntax highlighter</li>
-  <li>
-<strong>syntax_highlighter_opts</strong> - Set the syntax highlighter options</li>
-  <li>
-<strong>toc_levels</strong> - Defines the levels that are used for the table of contents</li>
-  <li>
-<strong>transliterated_header_ids</strong> - Transliterate the header text before generating the ID</li>
-  <li>
-<strong>typographic_symbols</strong> - Defines a mapping from typographical symbol to output characters</li>
-</ul>
+<h3 id="github-flavored-markdown">GitHub Flavored Markdown</h3>
 
-<h3 id="example-usage">Example Usage</h3>
+<p>Kramdown supports GitHub Flavored Markdown (GFM). To use GFM with Kramdown in Jekyll, add the following to your configuration.</p>
+
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">kramdown</span><span class="pi">:</span>
-  <span class="na">html_to_native</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">input</span><span class="pi">:</span> <span class="s">GFM</span>
+</code></pre></div></div>
+
+<p>GFM supports additional Kramdown options, documented at <a href="https://github.com/kramdown/parser-gfm">kramdown-parser-gfm</a>. These options can be used directly in your Kramdown Jekyll config, like this:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">kramdown</span><span class="pi">:</span>
+  <span class="na">input</span><span class="pi">:</span> <span class="s">GFM</span>
+  <span class="na">gfm_quirks</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">paragraph_end</span><span class="pi">]</span>
+</code></pre></div></div>
+
+<h3 id="syntax-highlighting-coderay">Syntax Highlighting (CodeRay)</h3>
+
+<p>To use the <a href="http://coderay.rubychan.de/">CodeRay</a> syntax highlighter with Kramdown, you  need to add a dependency on the <code class="language-plaintext highlighter-rouge">kramdown-syntax-coderay</code> gem. For example, <code class="language-plaintext highlighter-rouge">bundle add kramdown-syntax-coderay</code>. Then, you’ll be able to specify CodeRay in your <code class="language-plaintext highlighter-rouge">syntax_highlighter</code> config:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">kramdown</span><span class="pi">:</span>
+  <span class="na">syntax_highlighter</span><span class="pi">:</span> <span class="s">coderay</span>
+</code></pre></div></div>
+
+<p>CodeRay supports several of its own configuration options, documented in the <a href="https://github.com/kramdown/syntax-coderay">kramdown-syntax-coderay docs</a> which can be passed as <code class="language-plaintext highlighter-rouge">syntax_highlighter_opts</code> like this:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">kramdown</span><span class="pi">:</span>
+  <span class="na">syntax_highlighter</span><span class="pi">:</span> <span class="s">coderay</span>
+  <span class="na">syntax_highlighter_opts</span><span class="pi">:</span>
+    <span class="na">line_numbers</span><span class="pi">:</span> <span class="s">table</span>
+    <span class="na">bold_every</span><span class="pi">:</span> <span class="m">5</span>
+</code></pre></div></div>
+
+<h3 id="advanced-kramdown-options">Advanced Kramdown Options</h3>
+
+<p>Kramdown supports a variety of other relatively advanced options such as <code class="language-plaintext highlighter-rouge">header_offset</code> and <code class="language-plaintext highlighter-rouge">smart_quotes</code>. These are documented in the <a href="https://kramdown.gettalong.org/options.html">Kramdown configuration documentation</a> and can be added to your Kramdown config like this:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">kramdown</span><span class="pi">:</span>
+  <span class="na">header_offset</span><span class="pi">:</span> <span class="m">2</span>
 </code></pre></div></div>
 
 <div class="note warning">
-  <h5>There are two unsupported kramdown options</h5>
+  <h5>There are several unsupported kramdown options</h5>
   <p>
-    Please note that both <code>remove_block_html_tags</code> and
-    <code>remove_span_html_tags</code> are currently unsupported in Jekyll due
-    to the fact that they are not included within the kramdown HTML converter.
+    Please note that Jekyll uses Kramdown's HTML converter. Kramdown options used only by other converters, such as <code>remove_block_html_tags</code> (used by the RemoveHtmlTags converter), will not work.
   </p>
 </div>
 
-<p>For more details about these options have a look at the <a href="https://kramdown.gettalong.org/options.html">Kramdown configuration documentation</a>.</p>
-
-<h3 id="commonmark">CommonMark</h3>
+<h2 id="commonmark">CommonMark</h2>
 
 <p><a href="https://commonmark.org/">CommonMark</a> is a rationalized version of Markdown syntax, implemented in C and thus faster than default Kramdown implemented in Ruby. It <a href="https://github.com/commonmark/CommonMark#differences-from-original-markdown">slightly differs</a> from original Markdown and does not support all the syntax elements implemented in Kramdown, like <a href="https://kramdown.gettalong.org/syntax.html#block-ials">Block Inline Attribute Lists</a>.</p>
 
