@@ -7,7 +7,7 @@ available.
 
 ## Kramdown
 
-Kramdown is the default Markdown renderer for Jekyll, and often works well with no additional configuration. However, it does support many configuration options that are available if you need them.
+Kramdown is the default Markdown renderer for Jekyll, and often works well with no additional configuration. However, it does support many configuration options.
 
 ### GitHub Flavored Markdown
 
