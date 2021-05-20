@@ -35,11 +35,15 @@ jekyll new myblog
 ```
 cd myblog
 ```
-5. Build the site and make it available on a local server.
+5. Add `webrick`, a dependency for serving the site locally
+```
+bundle add webrick
+```
+6. Build the site and make it available on a local server.
 ```
 bundle exec jekyll serve
 ```
-6. Browse to [http://localhost:4000](http://localhost:4000){:target="_blank"}
+7. Browse to [http://localhost:4000](http://localhost:4000){:target="_blank"}
 
 {: .note .info}
 Pass the `--livereload` option to `serve` to automatically refresh the page with each change you make to the source files: `bundle exec jekyll serve --livereload`
