@@ -793,7 +793,7 @@ class TestFilters < JekyllUnitTest
         grouping = @filter.group_by(@filter.site.pages, "layout")
         names = ["default", "nil", ""]
         grouping.each do |g|
-          assert names.include?(g["name"]), "#{g["name"]} isn't a valid grouping."
+          assert_includes names, g["name"], "#{g["name"]} isn't a valid grouping."
           case g["name"]
           when "default"
             assert(
@@ -940,12 +940,12 @@ class TestFilters < JekyllUnitTest
 
         results = @filter.where(hash, "featured", "true")
         assert_equal 2, results.length
-        assert_equal 9.2, results[0]["rating"]
-        assert_equal 4.7, results[1]["rating"]
+        assert_in_delta(9.2, results[0]["rating"])
+        assert_in_delta(4.7, results[1]["rating"])
 
         results = @filter.where(hash, "rating", 4.7)
         assert_equal 1, results.length
-        assert_equal 4.7, results[0]["rating"]
+        assert_in_delta(4.7, results[0]["rating"])
       end
 
       should "always return an array if the object responds to 'select'" do
@@ -1023,12 +1023,12 @@ class TestFilters < JekyllUnitTest
 
         results = @filter.where_exp(hash, "item", "item.featured == true")
         assert_equal 2, results.length
-        assert_equal 9.2, results[0]["rating"]
-        assert_equal 4.7, results[1]["rating"]
+        assert_in_delta(9.2, results[0]["rating"])
+        assert_in_delta(4.7, results[1]["rating"])
 
         results = @filter.where_exp(hash, "item", "item.rating == 4.7")
         assert_equal 1, results.length
-        assert_equal 4.7, results[0]["rating"]
+        assert_in_delta(4.7, results[0]["rating"])
       end
 
       should "filter with other operators" do
@@ -1172,10 +1172,10 @@ class TestFilters < JekyllUnitTest
         }
 
         result = @filter.find(hash, "featured", "true")
-        assert_equal 9.2, result["rating"]
+        assert_in_delta(9.2, result["rating"])
 
         result = @filter.find(hash, "rating", 4.7)
-        assert_equal 4.7, result["rating"]
+        assert_in_delta(4.7, result["rating"])
       end
     end
 
@@ -1238,10 +1238,10 @@ class TestFilters < JekyllUnitTest
         }
 
         result = @filter.find_exp(hash, "item", "item.featured == true")
-        assert_equal 9.2, result["rating"]
+        assert_in_delta(9.2, result["rating"])
 
         result = @filter.find_exp(hash, "item", "item.rating == 4.7")
-        assert_equal 4.7, result["rating"]
+        assert_in_delta(4.7, result["rating"])
       end
 
       should "filter with other operators" do
@@ -1285,7 +1285,7 @@ class TestFilters < JekyllUnitTest
         groups = @filter.group_by_exp(@filter.site.pages, "page", "page.layout | upcase")
         names = ["DEFAULT", "NIL", ""]
         groups.each do |g|
-          assert names.include?(g["name"]), "#{g["name"]} isn't a valid grouping."
+          assert_includes names, g["name"], "#{g["name"]} isn't a valid grouping."
           case g["name"]
           when "DEFAULT"
             assert(

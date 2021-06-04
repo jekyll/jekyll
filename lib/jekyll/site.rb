@@ -304,10 +304,10 @@ module Jekyll
     # klass - The Class of the Converter to fetch.
     def find_converter_instance(klass)
       @find_converter_instance ||= {}
-      @find_converter_instance[klass] ||= begin
-        converters.find { |converter| converter.instance_of?(klass) } || \
-          raise("No Converters found for #{klass}")
-      end
+      @find_converter_instance[klass] ||= converters.find do |converter|
+        converter.instance_of?(klass)
+      end || \
+        raise("No Converters found for #{klass}")
     end
 
     # klass - class or module containing the subclasses.

@@ -184,17 +184,17 @@ Feature: Create sites
     Given I have a _posts directory
     And I have the following post:
       | title  | date       | layout | content             |
-      | entry1 | 2020-12-31 | post   | content for entry1. |
+      | entry1 | 2040-12-31 | post   | content for entry1. |
       | entry2 | 2007-12-31 | post   | content for entry2. |
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
     And I should see "content for entry2" in "_site/2007/12/31/entry2.html"
-    And the "_site/2020/12/31/entry1.html" file should not exist
+    And the "_site/2040/12/31/entry1.html" file should not exist
     When I run jekyll build --future
     Then I should get a zero exit status
     And the _site directory should exist
-    And the "_site/2020/12/31/entry1.html" file should exist
+    And the "_site/2040/12/31/entry1.html" file should exist
 
   Scenario: Basic site with layouts, posts and related posts
     Given I have a _layouts directory

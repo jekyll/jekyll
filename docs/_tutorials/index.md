@@ -23,7 +23,7 @@ Some of these techniques might even guide you through a supporting tool, script,
 
 We welcome your tutorial contributions. To add your tutorial:
 
-1. Fork the Jekyll project by clicking the **Fork** button in the upper-right corner of the [jekyll/jekyll project Github repo](https://github.com/jekyll/jekyll/).
+1. Fork the Jekyll project by clicking the **Fork** button in the upper-right corner of the [jekyll/jekyll project GitHub repo](https://github.com/jekyll/jekyll/).
 2. Add your tutorial in the `_tutorials` collection.
 3. Make sure your tutorial has the same front matter items as other tutorial items.
 5. Add a reference to your tutorial filename in `_data/tutorials.yml`. This allows your tutorial to appear in the Tutorials sidebar.

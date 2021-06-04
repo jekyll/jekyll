@@ -41,7 +41,7 @@ module Jekyll
       begin
         self.content = File.read(filename, **Utils.merged_file_read_opts(site, opts))
         if content =~ Document::YAML_FRONT_MATTER_REGEXP
-          self.content = $POSTMATCH
+          self.content = Regexp.last_match.post_match
           self.data = SafeYAML.load(Regexp.last_match(1))
         end
       rescue Psych::SyntaxError => e
@@ -112,11 +112,7 @@ module Jekyll
     #
     # Returns the Hash representation of this Convertible.
     def to_liquid(attrs = nil)
-      further_data = \
-        (attrs || self.class::ATTRIBUTES_FOR_LIQUID).each_with_object({}) do |attribute, hsh|
-          hsh[attribute] = send(attribute)
-        end
-
+      further_data = attribute_hash(attrs || self.class::ATTRIBUTES_FOR_LIQUID)
       Utils.deep_merge_hashes defaults, Utils.deep_merge_hashes(data, further_data)
     end
 
@@ -248,6 +244,13 @@ module Jekyll
 
     def defaults
       @defaults ||= site.frontmatter_defaults.all(relative_path, type)
+    end
+
+    def attribute_hash(attrs)
+      @attribute_hash ||= {}
+      @attribute_hash[attrs] ||= attrs.each_with_object({}) do |attribute, hsh|
+        hsh[attribute] = send(attribute)
+      end
     end
 
     def no_layout?

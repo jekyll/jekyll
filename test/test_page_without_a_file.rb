@@ -161,7 +161,7 @@ class TestPageWithoutAFile < JekyllUnitTest
 
         refute_exist dest_dir("physical")
         refute_exist dest_dir("virtual-about")
-        refute File.exist?(dest_dir("virtual-about", "index.html"))
+        refute_path_exists(dest_dir("virtual-about", "index.html"))
       end
 
       should "be processed and written to destination when passed as "\
@@ -174,7 +174,7 @@ class TestPageWithoutAFile < JekyllUnitTest
 
         refute_exist dest_dir("physical")
         assert_exist dest_dir("virtual-about")
-        assert File.exist?(dest_dir("virtual-about", "index.html"))
+        assert_path_exists(dest_dir("virtual-about", "index.html"))
         assert_equal "Test Site", File.read(dest_dir("virtual-about", "index.html"))
       end
     end

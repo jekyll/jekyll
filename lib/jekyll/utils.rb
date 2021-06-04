@@ -143,7 +143,7 @@ module Jekyll
       false
     end
 
-    # Determine whether the given content string contains Liquid Tags or Vaiables
+    # Determine whether the given content string contains Liquid Tags or Variables
     #
     # Returns true is the string contains sequences of `{%` or `{{`
     def has_liquid_construct?(content)
@@ -265,7 +265,7 @@ module Jekyll
       template
     end
 
-    # Work the same way as Dir.glob but seperating the input into two parts
+    # Work the same way as Dir.glob but separating the input into two parts
     # ('dir' + '/' + 'pattern') to make sure the first part('dir') does not act
     # as a pattern.
     #
@@ -287,7 +287,7 @@ module Jekyll
     # patterns - the patterns (or the pattern) which will be applied under the dir
     # flags    - the flags which will be applied to the pattern
     #
-    # Returns matched pathes
+    # Returns matched paths
     def safe_glob(dir, patterns, flags = 0)
       return [] unless Dir.exist?(dir)
 

@@ -185,7 +185,7 @@ Feature: Rendering
     And the _site directory should exist
     And I should see "hey = 'for cicada';" in "_site/index.js"
 
-  Scenario: Rendering Liquid expressions that return strings containg Liquid expressions
+  Scenario: Rendering Liquid expressions that return strings containing Liquid expressions
     Given I have an "index.md" file with content:
       """
       ---

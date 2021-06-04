@@ -61,15 +61,15 @@ class TestCleaner < JekyllUnitTest
     end
 
     should "keep the file in the directory in keep_files" do
-      assert File.exist?(File.join(dest_dir(".git"), "index.html"))
+      assert_path_exists(File.join(dest_dir(".git"), "index.html"))
     end
 
     should "delete the file in the directory not in keep_files" do
-      assert !File.exist?(File.join(dest_dir("username.github.io"), "index.html"))
+      refute_path_exists(File.join(dest_dir("username.github.io"), "index.html"))
     end
 
     should "delete the directory not in keep_files" do
-      assert !File.exist?(dest_dir("username.github.io"))
+      refute_path_exists(dest_dir("username.github.io"))
     end
   end
 

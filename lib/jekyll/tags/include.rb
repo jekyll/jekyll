@@ -13,7 +13,7 @@ module Jekyll
       !mx.freeze
 
       FULL_VALID_SYNTAX = %r!\A\s*(?:#{VALID_SYNTAX}(?=\s|\z)\s*)*\z!.freeze
-      VALID_FILENAME_CHARS = %r!^[\w/.-]+$!.freeze
+      VALID_FILENAME_CHARS = %r!^[\w/.\-()+~\#@]+$!.freeze
       INVALID_SEQUENCES = %r![./]{2,}!.freeze
 
       def initialize(tag_name, markup, tokens)
