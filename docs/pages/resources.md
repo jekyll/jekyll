@@ -62,6 +62,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [Formspark](https://formspark.io/)
   - [Formspree (open source)](https://formspree.io/)
   - [formX](https://formx.stream)
+  - [HeroTofu (forms backend - free and paid plans)](https://herotofu.com)
   - [Simple Form](https://getsimpleform.com/)
   - [SmartForms](https://smartforms.dev/)
   - [Typeform](https://www.typeform.com/templates/c/forms/)
