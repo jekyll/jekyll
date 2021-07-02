@@ -220,12 +220,16 @@ module Jekyll
     end
 
     def sort_docs!
+      reverse = metadata["sort_order"] == "reverse"
       if metadata["order"].is_a?(Array)
+        # sort_order is ignored if manual sorting enabled
         rearrange_docs!
       elsif metadata["sort_by"].is_a?(String)
         sort_docs_by_key!
+        docs.reverse! if reverse
       else
         docs.sort!
+        docs.reverse! if reverse
       end
     end
 
@@ -247,8 +251,6 @@ module Jekyll
 
         # Finally restore the `docs` array with just the Document objects themselves
       end.map!(&:last)
-      docs.reverse! if metadata["sort_order"] == "reverse"
-      docs
     end
 
     def determine_sort_order(sort_key, apples, olives)
