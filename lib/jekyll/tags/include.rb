@@ -260,7 +260,7 @@ module Jekyll
       def resource_path(page, site)
         path = page["path"]
         path = File.join(site.config["collections_dir"], path) if page["collection"]
-        path.sub(%r!/#excerpt\z!, "")
+        path.delete_suffix("/#excerpt")
       end
     end
   end

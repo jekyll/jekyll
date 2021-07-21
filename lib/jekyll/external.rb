@@ -22,13 +22,11 @@ module Jekyll
       #
       def require_if_present(names)
         Array(names).each do |name|
-          begin
-            require name
-          rescue LoadError
-            Jekyll.logger.debug "Couldn't load #{name}. Skipping."
-            yield(name, version_constraint(name)) if block_given?
-            false
-          end
+          require name
+        rescue LoadError
+          Jekyll.logger.debug "Couldn't load #{name}. Skipping."
+          yield(name, version_constraint(name)) if block_given?
+          false
         end
       end
 
@@ -55,23 +53,21 @@ module Jekyll
       #
       def require_with_graceful_fail(names)
         Array(names).each do |name|
-          begin
-            Jekyll.logger.debug "Requiring:", name.to_s
-            require name
-          rescue LoadError => e
-            Jekyll.logger.error "Dependency Error:", <<~MSG
-              Yikes! It looks like you don't have #{name} or one of its dependencies installed.
-              In order to use Jekyll as currently configured, you'll need to install this gem.
+          Jekyll.logger.debug "Requiring:", name.to_s
+          require name
+        rescue LoadError => e
+          Jekyll.logger.error "Dependency Error:", <<~MSG
+            Yikes! It looks like you don't have #{name} or one of its dependencies installed.
+            In order to use Jekyll as currently configured, you'll need to install this gem.
 
-              If you've run Jekyll with `bundle exec`, ensure that you have included the #{name}
-              gem in your Gemfile as well.
+            If you've run Jekyll with `bundle exec`, ensure that you have included the #{name}
+            gem in your Gemfile as well.
 
-              The full error message from Ruby is: '#{e.message}'
+            The full error message from Ruby is: '#{e.message}'
 
-              If you run into trouble, you can find helpful resources at https://jekyllrb.com/help/!
-            MSG
-            raise Jekyll::Errors::MissingDependencyException, name
-          end
+            If you run into trouble, you can find helpful resources at https://jekyllrb.com/help/!
+          MSG
+          raise Jekyll::Errors::MissingDependencyException, name
         end
       end
     end
