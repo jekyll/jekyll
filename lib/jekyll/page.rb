@@ -144,7 +144,7 @@ module Jekyll
 
     # The path to the page source file, relative to the site source
     def relative_path
-      @relative_path ||= PathManager.join(@dir, @name).sub(%r!\A/!, "")
+      @relative_path ||= PathManager.join(@dir, @name).delete_prefix("/")
     end
 
     # Obtain destination path.
