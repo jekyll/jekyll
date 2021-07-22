@@ -9,22 +9,23 @@ available.
 
 Kramdown is the default Markdown renderer for Jekyll, and often works well with no additional configuration. However, it does support many configuration options.
 
-### GitHub Flavored Markdown
+### Kramdown Processor
 
-Kramdown supports GitHub Flavored Markdown (GFM). To use GFM with Kramdown in Jekyll, add the following to your configuration.
-
-```yaml
-kramdown:
-  input: GFM
-```
-
-GFM supports additional Kramdown options, documented at [kramdown-parser-gfm](https://github.com/kramdown/parser-gfm). These options can be used directly in your Kramdown Jekyll config, like this:
+By default, Jekyll uses the [GitHub Flavored Markdown (GFM) processor](https://github.com/kramdown/parser-gfm) for Kramdown. (Specifying `input: GFM` is fine, but redundant.) GFM supports a couple additional Kramdown options, documented by [kramdown-parser-gfm](https://github.com/kramdown/parser-gfm). These options can be used directly in your Kramdown Jekyll config, like this:
 
 ```yaml
 kramdown:
-  input: GFM
   gfm_quirks: [paragraph_end]
 ```
+
+You can also change the processor used by Kramdown (as specified for the `input` key in the [Kramdown RDoc](https://kramdown.gettalong.org/rdoc/Kramdown/Document.html#method-c-new)). For example, to use the non-GFM Kramdown processor in Jekyll, add the following to your configuration.
+
+```yaml
+kramdown:
+  input: Kramdown
+```
+
+Documentation for Kramdown parsers is available in the [Kramdown docs](https://kramdown.gettalong.org/parser/kramdown.html). If you use a Kramdown parser other than Kramdown or GFM, you'll need to add the gem for it.
 
 ### Syntax Highlighting (CodeRay)
 
