@@ -49,6 +49,7 @@
 
   * Regenerate supported mime types (#8542)
   * Update include tag to be more permissive (#8618)
+  * Optimize `Jekyll::Utils.parse_date` (#8425)
 
 ### Site Enhancements
 
