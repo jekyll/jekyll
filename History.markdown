@@ -1,5 +1,7 @@
 ## HEAD
 
+  * Bump check-spelling/check-spelling from 0.0.18 to 0.0.19 (#8740)
+
 ### Documentation
 
   * typo - do instead of don&#39;t (#8518)
