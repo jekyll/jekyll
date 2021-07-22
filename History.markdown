@@ -24,6 +24,7 @@
   * Add step to set SDKROOT (#8478)
   * Improve the &#34;Markdown Options&#34; Docs (#8681)
   * Add &#39;webrick&#39; warning note to &#34;Quickstart&#34; Docs (#8727)
+  * Update windows.md (#8701)
 
 ### Bug Fixes
 
