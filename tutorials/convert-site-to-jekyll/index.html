@@ -273,19 +273,14 @@ Some page content here...
 
 <h2 id="4-add-a-configuration-file">4. Add a configuration file</h2>
 
-<p>Add a <code class="language-plaintext highlighter-rouge">_config.yml</code> file in your root directory. In <code class="language-plaintext highlighter-rouge">_config.yml</code>, you can optionally specify the markdown filter you want. By default, <a href="https://kramdown.gettalong.org/">kramdown</a> is used (without the need to specify it). If no other filter is specified, your config file will automatically apply the following as a default setting:</p>
+<p>Add a <code class="language-plaintext highlighter-rouge">_config.yml</code> file in your root directory. In <code class="language-plaintext highlighter-rouge">_config.yml</code>, you can optionally specify the markdown filter you want. By default, the <a href="https://github.com/kramdown/parser-gfm">GitHub Flavored Markdown (GFM) processor</a> for <a href="https://kramdown.gettalong.org/">kramdown</a> is used. If no other filter is specified, your config file will automatically apply the following as a <a href="/docs/configuration/default/">default</a> setting:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">markdown</span><span class="pi">:</span> <span class="s">kramdown</span>
+<span class="na">kramdown</span><span class="pi">:</span>
+  <span class="na">input</span><span class="pi">:</span> <span class="s">GFM</span>
 </code></pre></div></div>
 
-<p>You can also specify <a href="https://kramdown.gettalong.org/converter/html.html">some options</a> for kramdown to make it behave more like <a href="https://github.github.com/gfm/">GitHub Flavored Markdown (GFM)</a>:</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">kramdown</span><span class="pi">:</span>
- <span class="na">input</span><span class="pi">:</span> <span class="s">GFM</span>
- <span class="na">auto_ids</span><span class="pi">:</span> <span class="no">true</span>
- <span class="na">hard_wrap</span><span class="pi">:</span> <span class="no">false</span>
- <span class="na">syntax_highlighter</span><span class="pi">:</span> <span class="s">rouge</span>
-</code></pre></div></div>
+<p>You can find additional <a href="/docs/configuration/markdown/">Markdown Options</a> in the Jekyll docs, though it’s unlikely that you’ll need them.</p>
 
 <h2 id="5-test-your-pages">5. Test your pages</h2>
 
