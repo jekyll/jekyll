@@ -29,7 +29,7 @@ We only cover RubyInstaller-2.4 and newer here. Older versions need to
 4. Check if Jekyll has been installed properly: `jekyll -v`
 
 {: .note .info}
-You may receive an error when checking if Jekyll has been installed properly. Reboot your system and run `jekyll -v` again.
+You may receive an error when checking if Jekyll has not been installed properly. Reboot your system and run `jekyll -v` again.
 If the error persists, please open a [RubyInstaller issue](https://github.com/oneclick/rubyinstaller2/issues/new).
 
 That's it, you're ready to use Jekyll!
