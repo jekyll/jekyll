@@ -4,8 +4,7 @@ module Jekyll
   class Excerpt
     extend Forwardable
 
-    attr_accessor :doc
-    attr_accessor :content, :ext
+    attr_accessor :content, :doc, :ext
     attr_writer   :output
 
     def_delegators :@doc,
