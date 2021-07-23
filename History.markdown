@@ -37,6 +37,7 @@
   * Revert &#34;style: run rubocop -a&#34; (#8676)
   * Load Jekyll plugins from BUNDLE_GEMFILE location (#8585)
   * fix(security):  CVE-2021-28834 (#8680)
+  * Inject livereload script using `location.protocol` instead of `http:` (#8718)
 
 ### Development Fixes
 
