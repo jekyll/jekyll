@@ -29,6 +29,7 @@
   * Update windows.md (#8701)
   * IRC networks - Libera, Freenode (#8706)
   * Improve GitHub Flavored Markdown Docs (#8684)
+  * Fixing URL in MacOS install for rbenv-doctor (#8693)
 
 ### Bug Fixes
 
