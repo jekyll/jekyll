@@ -69,6 +69,7 @@ module Jekyll
         end
 
         options[:linenos] = "inline" if options[:linenos] == true
+        options[:start_line] = Integer(options[:start_line]) if options[:start_line]
         options
       end
 
@@ -82,6 +83,7 @@ module Jekyll
         require "rouge"
         formatter = ::Rouge::Formatters::HTMLLegacy.new(
           :line_numbers => @highlight_options[:linenos],
+          :start_line   => @highlight_options[:start_line] || 1,
           :wrap         => false,
           :css_class    => "highlight",
           :gutter_class => "gutter",

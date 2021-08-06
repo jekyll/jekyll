@@ -37,6 +37,9 @@ class TestTags < JekyllUnitTest
       {% highlight text linenos %}
       #{code}
       {% endhighlight %}
+      {% highlight text linenos start_line=42 %}
+      #{code}
+      {% endhighlight %}
     CONTENT
     create_post(content, override)
   end
@@ -86,6 +89,14 @@ class TestTags < JekyllUnitTest
       tag = highlight_block_with_opts("ruby linenos=table ")
       assert_equal(
         { :linenos => "table" },
+        tag.instance_variable_get(:@highlight_options)
+      )
+    end
+
+    should "set the start_line option to set value" do
+      tag = highlight_block_with_opts("ruby linenos start_line=42 ")
+      assert_equal(
+        { :linenos => "inline", :start_line => 42 },
         tag.instance_variable_get(:@highlight_options)
       )
     end
@@ -150,6 +161,17 @@ class TestTags < JekyllUnitTest
           %(<table class="rouge-table"><tbody>) +
             %(<tr><td class="gutter gl">) +
             %(<pre class="lineno">1\n</pre></td>) +
+            %(<td class="code"><pre>test\n</pre></td></tr>) +
+            %(</tbody></table>),
+          @result
+        )
+      end
+
+      should "render markdown with rouge with line numbers and custom start line" do
+        assert_match(
+          %(<table class="rouge-table"><tbody>) +
+            %(<tr><td class="gutter gl">) +
+            %(<pre class="lineno">42\n</pre></td>) +
             %(<td class="code"><pre>test\n</pre></td></tr>) +
             %(</tbody></table>),
           @result

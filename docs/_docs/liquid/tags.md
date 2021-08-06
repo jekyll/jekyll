@@ -66,6 +66,20 @@ end
 ```
 {% endraw %}
 
+If you want the line numbering to start at a different number than `1`, say `42`,
+then use the `start_line` parameter as following example:
+
+{% raw %}
+```liquid
+{% highlight ruby linenos start_line=42 %}
+def foo
+  puts 'foo'
+end
+{% endhighlight %}
+```
+{% endraw %}
+
+
 ### Stylesheets for syntax highlighting
 
 In order for the highlighting to show up, you’ll need to include a highlighting
