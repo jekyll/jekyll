@@ -10,35 +10,54 @@ module Jekyll
       # forms: name, name=value, or name="<quoted list>"
       #
       # <quoted list> is a space-separated list of numbers
-      SYNTAX = %r!^([a-zA-Z0-9.+#_-]+)((\s+\w+(=(\w+|"([0-9]+\s)*[0-9]+"))?)*)$!.freeze
+      #
+      # Both the language specifier and the options can be passed as liquid variables
+      LANG_SYNTAX = %r![a-zA-Z0-9.+#_-]+!.freeze
+      OPTIONS_SYNTAX = %r!(\s+\w+(=(\w+|"([0-9]+\s)*[0-9]+"))?)*!.freeze
+      SYNTAX = %r!
+        ^((?<lang_var>\{\{[ ]*((\w+[.])*(lang))[ ]*\}\})|(?<lang>#{LANG_SYNTAX}))?[ ]*
+        ((?<params_var>\{\{[ ]*(\w+([.]\w+)*)[ ]*\}\})|(?<params>#{OPTIONS_SYNTAX}))$
+      !mx.freeze
 
       def initialize(tag_name, markup, tokens)
         super
         if markup.strip =~ SYNTAX
-          @lang = Regexp.last_match(1).downcase
-          @highlight_options = parse_options(Regexp.last_match(2))
+
+          if Regexp.last_match["lang_var"]
+            @lang = Regexp.last_match["lang_var"]
+          elsif Regexp.last_match["lang"]
+            @lang = Regexp.last_match["lang"].downcase
+          end
+
+          @highlight_options = Regexp.last_match["params_var"]
+          @highlight_options ||= parse_options(Regexp.last_match["params"])
+
         else
           raise SyntaxError, <<~MSG
-            Syntax Error in tag 'highlight' while parsing the following markup:
-
+            Syntax Error in tag '#{tag_name}' while parsing the following markup:
             #{markup}
-
-            Valid syntax: highlight <lang> [linenos]
+            Valid syntax: #{tag_name} [lang] [linenos]
+                      \tOR: #{tag_name} [{{ lang_variable }}] [{{ linenos_variable(s) }}]
           MSG
         end
       end
 
       LEADING_OR_TRAILING_LINE_TERMINATORS = %r!\A(\n|\r)+|(\n|\r)+\z!.freeze
+      VARIABLE_SYNTAX = %r![^{]*(\{\{\s*[\w\-.]+\s*(\|.*)?\}\}[^\s{}]*)+!.freeze
 
       def render(context)
         prefix = context["highlighter_prefix"] || ""
         suffix = context["highlighter_suffix"] || ""
         code = super.to_s.gsub(LEADING_OR_TRAILING_LINE_TERMINATORS, "")
 
+        if VARIABLE_SYNTAX.match?(@highlight_options.to_s)
+          @highlight_options = parse_options(context[@highlight_options])
+        end
+
         output =
           case context.registers[:site].highlighter
           when "rouge"
-            render_rouge(code)
+            render_rouge(code, context)
           when "pygments"
             render_pygments(code, context)
           else
@@ -55,7 +74,7 @@ module Jekyll
 
       def parse_options(input)
         options = {}
-        return options if input.empty?
+        return options if input.nil?
 
         # Split along 3 possible forms -- key="<quoted list>", key=value, or key
         input.scan(OPTIONS_REGEX) do |opt|
@@ -72,13 +91,13 @@ module Jekyll
         options
       end
 
-      def render_pygments(code, _context)
+      def render_pygments(code, context)
         Jekyll.logger.warn "Warning:", "Highlight Tag no longer supports rendering with Pygments."
         Jekyll.logger.warn "", "Using the default highlighter, Rouge, instead."
-        render_rouge(code)
+        render_rouge(code, context)
       end
 
-      def render_rouge(code)
+      def render_rouge(code, context)
         require "rouge"
         formatter = ::Rouge::Formatters::HTMLLegacy.new(
           :line_numbers => @highlight_options[:linenos],
@@ -87,7 +106,15 @@ module Jekyll
           :gutter_class => "gutter",
           :code_class   => "code"
         )
-        lexer = ::Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
+
+        if VARIABLE_SYNTAX.match?(@lang)
+          @lang = context[@lang].downcase.strip
+          lexer = ::Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
+        elsif LANG_SYNTAX.match?(@lang)
+          lexer = ::Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
+        else
+          lexer = Rouge::Lexers::PlainText
+        end
         formatter.format(lexer.lex(code))
       end
 

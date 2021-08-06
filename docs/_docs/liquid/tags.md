@@ -2,6 +2,7 @@
 title: Tags Filters
 permalink: "/docs/liquid/tags/"
 ---
+
 All of the standard Liquid
 [tags](https://shopify.github.io/liquid/tags/control-flow/) are supported.
 Jekyll has a few built in tags to help you build your site. You can also create
@@ -27,6 +28,7 @@ and 100% compatible with stylesheets for Pygments.
 To render a code block with syntax highlighting, surround your code as follows:
 
 {% raw %}
+
 ```liquid
 {% highlight ruby %}
 def foo
@@ -34,6 +36,7 @@ def foo
 end
 {% endhighlight %}
 ```
+
 {% endraw %}
 
 The argument to the `highlight` tag (`ruby` in the example above) is the
@@ -57,6 +60,7 @@ numbers. For instance, the following code block would include line numbers next
 to each line:
 
 {% raw %}
+
 ```liquid
 {% highlight ruby linenos %}
 def foo
@@ -64,7 +68,55 @@ def foo
 end
 {% endhighlight %}
 ```
+
 {% endraw %}
+
+### Variables for language and line numbers
+
+{: .note}
+To pass a language variable to the `highlight` tag, the variable **must** be named `lang`, as in {% raw %}{{ page.lang }}{% endraw %}. The `linenos` variable can be called by any other name.
+
+Both the language and the line numbering parameter (`linenos`) can be passed to the `highlight` tag as variables, instead of the standard approach of fixed parameters.
+
+For example, suppose you defined a variable in your page's front matter like this:
+
+```yaml
+---
+title: My page
+lang: ruby
+lines: true
+---
+
+```
+
+You could then reference those variables in your link:
+
+{% raw %}
+
+```liquid
+{% highlight {{ page.lang }} {{ page.lines }} %}
+def foo
+  puts 'foo'
+end
+{% endhighlight %}
+```
+
+{% endraw %}
+
+In this example, the `highlight` tag would render the code in the same manner as in the Line Numbers example, above. However, a different page may turn off the line numbering
+
+e.g.
+
+```yaml
+---
+title: My page
+lang: ruby
+lines: false
+---
+
+```
+
+Would render (using the same layout) the same highlighted code block without line numbering.
 
 ### Stylesheets for syntax highlighting
 
@@ -93,28 +145,32 @@ To link to a post, a page, collection item, or file, the `link` tag will generat
 You must include the file's original extension when using the `link` tag. Here are some examples:
 
 {% raw %}
+
 ```liquid
 {% link _collection/name-of-document.md %}
 {% link _posts/2016-07-26-name-of-post.md %}
 {% link news/index.html %}
 {% link /assets/files/doc.pdf %}
 ```
+
 {% endraw %}
 
 You can also use the `link` tag to create a link in Markdown as follows:
 
 {% raw %}
+
 ```liquid
 [Link to a document]({% link _collection/name-of-document.md %})
 [Link to a post]({% link _posts/2016-07-26-name-of-post.md %})
 [Link to a page]({% link news/index.html %})
 [Link to a file]({% link /assets/files/doc.pdf %})
 ```
+
 {% endraw %}
 
 The path to the post, page, or collection is defined as the path relative to the root directory (where your config file is) to the file, not the path from your existing page to the other page.
 
-For example, suppose you're creating a link in `page_a.md` (stored in `pages/folder1/folder2`) to `page_b.md` (stored in  `pages/folder1`). Your path in the link would not be `../page_b.html`. Instead, it would be `/pages/folder1/page_b.md`.
+For example, suppose you're creating a link in `page_a.md` (stored in `pages/folder1/folder2`) to `page_b.md` (stored in `pages/folder1`). Your path in the link would not be `../page_b.html`. Instead, it would be `/pages/folder1/page_b.md`.
 
 If you're unsure of the path, add {% raw %}`{{ page.path }}`{% endraw %} to the page and it will display the path.
 
@@ -129,14 +185,17 @@ The name of the file you want to link can be specified as a variable instead of 
 title: My page
 my_variable: footer_company_a.html
 ---
+
 ```
 
 You could then reference that variable in your link:
 
 {% raw %}
+
 ```liquid
 {% link {{ page.my_variable }} %}
 ```
+
 {% endraw %}
 
 In this example, the `link` tag would render a link to the file `footer_company_a.html`.
@@ -146,17 +205,21 @@ In this example, the `link` tag would render a link to the file `footer_company_
 If you want to include a link to a post on your site, the `post_url` tag will generate the correct permalink URL for the post you specify.
 
 {% raw %}
+
 ```liquid
 {% post_url 2010-07-21-name-of-post %}
 ```
+
 {% endraw %}
 
 If you organize your posts in subdirectories, you need to include subdirectory path to the post:
 
 {% raw %}
+
 ```liquid
 {% post_url /subdir/2010-07-21-name-of-post %}
 ```
+
 {% endraw %}
 
 There is no need to include the file extension when using the `post_url` tag.
@@ -164,7 +227,9 @@ There is no need to include the file extension when using the `post_url` tag.
 You can also use this tag to create a link to a post in Markdown as follows:
 
 {% raw %}
+
 ```liquid
 [Name of Link]({% post_url 2010-07-21-name-of-post %})
 ```
+
 {% endraw %}

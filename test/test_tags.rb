@@ -41,6 +41,35 @@ class TestTags < JekyllUnitTest
     create_post(content, override)
   end
 
+  def fill_post_vars(code, override = {})
+    content = <<~CONTENT
+      ---
+      title: This is a test
+      ---
+
+      This document has some highlighted code in it.
+
+      {% assign lang = 'ruby' %}
+      {% assign lines = 'linenos' %}
+      {% highlight {{ lang }} %}
+      #{code}
+      {% endhighlight %}
+      {% highlight {{ lines }} %}
+      #{code}
+      {% endhighlight %}
+      {% highlight {{ lang }} linenos %}
+      #{code}
+      {% endhighlight %}
+      {% highlight ruby {{ lines }}%}
+      #{code}
+      {% endhighlight %}
+      {% highlight {{ lang }} {{ lines }} %}
+      #{code}
+      {% endhighlight %}
+    CONTENT
+    create_post(content, override)
+  end
+
   def highlight_block_with_opts(options_string)
     Jekyll::Tags::HighlightBlock.parse(
       "highlight",
@@ -154,6 +183,62 @@ class TestTags < JekyllUnitTest
             %(</tbody></table>),
           @result
         )
+      end
+    end
+
+    context "with the rouge highlighter" do
+      context "post content has highlight tag" do
+        setup do
+          fill_post_vars("# test")
+        end
+
+        # {% highlight {{ lang }} %}
+        should "render markdown with rouge, lang from variable" do
+          assert_match(
+            %(<pre><code class="language-ruby" data-lang="ruby"><span class="c1">) +
+              %(# test) +
+            %(</span></code></pre>),
+            @result
+          )
+        end
+
+        # {% highlight {{ lines }} %}
+        should "render markdown with rouge, line numbers from variable" do
+          assert_match(
+            %(<table class="rouge-table"><tbody>) +
+              %(<tr><td class="gutter gl">) +
+              %(<pre class="lineno">1\n</pre></td>) +
+              %(<td class="code"><pre>) +
+              %(# test\n) +
+              %(</pre></td></tr>) +
+              %(</tbody></table>),
+            @result
+          )
+        end
+
+        HIGHLIGHT_VAR_AND_TABLE = %(<pre><code class="language-ruby" data-lang="ruby">) +
+          %(<table class="rouge-table"><tbody>) +
+          %(<tr><td class="gutter gl">) +
+          %(<pre class="lineno">1\n</pre></td>) +
+          %(<td class="code"><pre><span class="c1">) +
+          %(# test) +
+          %(</span>\n</pre></td></tr>) +
+          %(</tbody></table>)
+
+        # {% highlight {{ lang }} linenos %}
+        should "render markdown with rouge, lang from variable and line numbers" do
+          assert_match(HIGHLIGHT_VAR_AND_TABLE, @result)
+        end
+
+        # {% highlight ruby {{ lines }}%}
+        should "render markdown with rouge, set lang and line numbers from variable" do
+          assert_match(HIGHLIGHT_VAR_AND_TABLE, @result)
+        end
+
+        # {% highlight {{ lang }} {{ lines }} %}
+        should "render markdown with rouge, lang from variable, and line numbers from variable" do
+          assert_match(HIGHLIGHT_VAR_AND_TABLE, @result)
+        end
       end
     end
 
