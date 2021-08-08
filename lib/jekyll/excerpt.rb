@@ -50,6 +50,13 @@ module Jekyll
     def relative_path
       @relative_path ||= File.join(doc.relative_path, "#excerpt")
     end
+    
+    # The base filename of the excerpt.
+    #
+    # Returns the base filename for the doc this excerpt belongs.
+    def basename
+      @basename ||= doc.basename
+    end
 
     # Check if excerpt includes a string
     #
