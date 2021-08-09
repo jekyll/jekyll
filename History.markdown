@@ -54,6 +54,7 @@
   * Spell check action for markdown documentation (#8675)
   * Update expect to cover docs/_posts (#8677)
   * Enable Rubocop accessor grouping, fix existing offenses (#8293)
+  * Tags:Highlight: Decomposed HTMLLegacy formatter (#8623)
 
 ### Minor Enhancements
 
