@@ -18,7 +18,7 @@ module Jekyll
     #
     # Returns a boolean.
     def regenerate?(item)
-      return true if disabled?
+      return true if disabled? || !item.respond_to?(:path)
 
       case item
       when Page
