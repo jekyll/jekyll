@@ -162,7 +162,7 @@ module Jekyll
     #
     # Returns a boolean
     def item_source_modified_or_dest_missing?(item)
-      return true unless (ASSESSED_ATTRIBUTES.all? { |id| item.respond_to?(id) })
+      return true unless ASSESSED_ATTRIBUTES.all? { |id| item.respond_to?(id) }
 
       modified?(site.in_source_dir(item.path)) || !File.exist?(item.destination(@site.dest))
     end
