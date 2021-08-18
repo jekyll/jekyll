@@ -173,7 +173,6 @@ module Jekyll
     end
 
     # Documents that will not be written to destination will be regenerated always.
-    # Override by setting `regenerate: false` in the front matter.
     def regenerate_document?(document)
       !document.write? || document.data["regenerate"] ||
         item_source_modified_or_dest_missing?(document)
