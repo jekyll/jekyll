@@ -18,7 +18,7 @@ module Jekyll
     #
     # Returns a boolean.
     def regenerate?(item)
-      return true if disabled? || !item.respond_to?(:path)
+      return true if disabled?
 
       case item
       when Page
@@ -26,7 +26,7 @@ module Jekyll
       when Document
         regenerate_document?(item)
       else
-        writable_source_modified_or_dest_missing?(item)
+        item_source_modified_or_dest_missing?(item)
       end
     end
 
@@ -66,7 +66,7 @@ module Jekyll
     end
 
     # @deprecated. To be removed in the next major version.
-    # Reimplemented as private method `:writable_source_modified_or_dest_missing?`.
+    # Reimplemented as private method `:item_source_modified_or_dest_missing?`.
     #
     # Checks if the source has been modified or the destination is missing
     #
@@ -149,27 +149,34 @@ module Jekyll
       {}
     end
 
-    # Checks if given item may be written to `site.dest`
-    def writable?(item)
-      item.respond_to?(:write?) && item.respond_to?(:destination) && item.write?
-    end
+    # attributes assessed in order to determine whether source file has been
+    # modified or a destination expected to be wriiten is missing.
+    #   path:        to determine the absolute location of the source file
+    #   write?:      to determine if the rendered contents will be written to disk
+    #   destination: to determine the absolute location of the written contents.
+    ASSESSED_ATTRIBUTES = [:path, :write?, :destination].freeze
+    private_constant :ASSESSED_ATTRIBUTES
 
-    # Checks if the source of a writable has been modified or if the destination
-    # of the writable is missing
+    # Checks if the source of given item has been modified or if the destination
+    # of the item expected to be written is missing.
     #
     # Returns a boolean
-    def writable_source_modified_or_dest_missing?(item)
-      writable?(item) &&
-        (modified?(site.in_source_dir(item.path)) || !File.exist?(item.destination(@site.dest)))
+    def item_source_modified_or_dest_missing?(item)
+      return true unless (ASSESSED_ATTRIBUTES.all? { |id| item.respond_to?(id) })
+
+      modified?(site.in_source_dir(item.path)) || !File.exist?(item.destination(@site.dest))
     end
 
     def regenerate_page?(page)
       page.asset_file? || page.data["regenerate"] ||
-        writable_source_modified_or_dest_missing?(page)
+        item_source_modified_or_dest_missing?(page)
     end
 
+    # Documents that will not be written to destination will be regenerated always.
+    # Override by setting `regenerate: false` in the front matter.
     def regenerate_document?(document)
-      document.data["regenerate"] || writable_source_modified_or_dest_missing?(document)
+      !document.write? || document.data["regenerate"] ||
+        item_source_modified_or_dest_missing?(document)
     end
 
     def existing_file_modified?(path)
