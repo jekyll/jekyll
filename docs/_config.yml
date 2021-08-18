@@ -1,5 +1,5 @@
 ---
-version: 4.1.1
+version: 4.2.0
 name: Jekyll • Simple, blog-aware, static sites
 description: Transform your plain text into static websites and blogs
 url: https://jekyllrb.com
@@ -10,6 +10,7 @@ twitter:
 logo: "/img/logo-2x.png"
 google_analytics_id: UA-50755011-1
 google_site_verification: onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY
+cloudinary_url: https://res.cloudinary.com/jekyll/image/upload/f_auto,q_auto,w_404
 collections:
   docs:
     permalink: "/:collection/:path/"

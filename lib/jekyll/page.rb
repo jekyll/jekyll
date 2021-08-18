@@ -5,9 +5,7 @@ module Jekyll
     include Convertible
 
     attr_writer :dir
-    attr_accessor :site, :pager
-    attr_accessor :name, :ext, :basename
-    attr_accessor :data, :content, :output
+    attr_accessor :basename, :content, :data, :ext, :name, :output, :pager, :site
 
     alias_method :extname, :ext
 
@@ -64,12 +62,7 @@ module Jekyll
     #
     # Returns the String destination directory.
     def dir
-      if url.end_with?("/")
-        url
-      else
-        url_dir = File.dirname(url)
-        url_dir.end_with?("/") ? url_dir : "#{url_dir}/"
-      end
+      url.end_with?("/") ? url : url_dir
     end
 
     # The full path and filename of the post. Defined in the YAML of the post
@@ -149,7 +142,7 @@ module Jekyll
 
     # The path to the page source file, relative to the site source
     def relative_path
-      @relative_path ||= PathManager.join(@dir, @name).sub(%r!\A/!, "")
+      @relative_path ||= PathManager.join(@dir, @name).delete_prefix("/")
     end
 
     # Obtain destination path.
@@ -210,6 +203,13 @@ module Jekyll
       return unless generate_excerpt?
 
       data["excerpt"] ||= Jekyll::PageExcerpt.new(self)
+    end
+
+    def url_dir
+      @url_dir ||= begin
+        value = File.dirname(url)
+        value.end_with?("/") ? value : "#{value}/"
+      end
     end
   end
 end

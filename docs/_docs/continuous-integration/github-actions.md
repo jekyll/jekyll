@@ -6,13 +6,12 @@ When building a Jekyll site with GitHub Pages, the standard flow is restricted f
 and to make it simpler to get a site setup. For more control over the build and still host the site
 with GitHub Pages you can use GitHub Actions.
 
-
 ## Advantages of using Actions
 
 ### Control over gemset
 
 - **Jekyll version** --- Instead of using the currently enabled version at `3.9.0`, you can use any
-  version of Jekyll you want. For example `4.0.0`, or point directly to the repository.
+  version of Jekyll you want. For example `{{site.version}}`, or point directly to the repository.
 - **Plugins** --- You can use any Jekyll plugins irrespective of them being on the
   [supported versions][ghp-whitelist] list, even `*.rb` files placed in the `_plugins` directory
   of your site.
@@ -25,16 +24,15 @@ with GitHub Pages you can use GitHub Actions.
 - **Logging** --- The build log is visible and can be tweaked to be verbose, so it is much easier to
   debug errors using Actions.
 
-
 ## Workspace setup
 
 The first and foremost requirement is a Jekyll project hosted at GitHub. Choose an existing Jekyll
-project or follow the [Quickstart]({{ '/docs' | relative_url }}) and push the repository to GitHub
+project or follow the [quickstart]({{ '/docs/' | relative_url }}) and push the repository to GitHub
 if it is not hosted there already.
 
-We're only going to cover builds from the `master` branch in this page. Therefore, ensure that you
-are working on the `master` branch. If necessary, you may create it based on your default branch.
-When the Action builds your site, the contents of the *destination* directory will be automatically
+We're only going to cover builds from the `main` branch in this page. Therefore, ensure that you
+are working on the `main` branch. If necessary, you may create it based on your default branch.
+When the Action builds your site, the contents of the _destination_ directory will be automatically
 pushed to the `gh-pages` branch with a commit, ready to be used for serving.
 
 {: .note .warning}
@@ -53,6 +51,7 @@ title: "Jekyll Actions Demo"
 ```
 
 {% raw %}
+
 ```liquid
 ---
 ---
@@ -64,15 +63,15 @@ Welcome to My Home Page
 - Original date - {{ date }}
 - With timeago filter - {{ date | timeago }}
 ```
-{% endraw %}
 
+{% endraw %}
 
 ```ruby
 # Gemfile
 
 source 'https://rubygems.org'
 
-gem 'jekyll', '~> 4.0'
+gem 'jekyll', '~> 4.2'
 
 group :jekyll_plugins do
   gem 'jekyll-timeago', '~> 0.13.1'
@@ -100,51 +99,52 @@ Create a **workflow file**, say `github-pages.yml`, using either the GitHub inte
 a YAML file to the workflow directory path manually. The base contents are:
 
 {% raw %}
+
 ```yaml
 name: Build and deploy Jekyll site to GitHub Pages
 
 on:
   push:
     branches:
-      - master
+      - main # or master before October 2020
 
 jobs:
   github-pages:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: helaili/jekyll-action@2.0.1
-        env:
-          JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
+      - uses: helaili/jekyll-action@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 ```
+
 {% endraw %}
 
 The above workflow can be explained as the following:
 
-- We trigger the build using **on.push** condition for `master` branch only --- this prevents
+- We trigger the build using **on.push** condition for `main` branch only --- this prevents
   the Action from overwriting the `gh-pages` branch on any feature branch pushes.
 - The **name** of the job matches our YAML filename: `github-pages`.
 - The **checkout** action takes care of cloning your repository.
-- We specify our selected **action** and **version number** using `helaili/jekyll-action@2.0.0`.
+- We specify our selected **action** and **version number** using `helaili/jekyll-action@2.0.5`.
   This handles the build and deploy.
-- We set a reference to a secret **environment variable** for the action to use. The `JEKYLL_PAT`
-  is a *Personal Access Token* and is detailed in the next section.
+- We set a reference to a secret **environment variable** for the action to use. The `GITHUB_TOKEN`
+  is a _Personal Access Token_ and is detailed in the next section.
 
-Instead of using the **on.push** condition, you could trigger your build on a **schedule** by 
+Instead of using the **on.push** condition, you could trigger your build on a **schedule** by
 using the [on.schedule] parameter. For example, here we build daily at midnight by specifying
 **cron** syntax, which can be tested at the [crontab guru] site.
 
 ```yaml
 on:
   schedule:
-    - cron:  '0 0 * * *'
+    - cron: "0 0 * * *"
 ```
 
 Note that this string must be quoted to prevent the asterisks from being evaluated incorrectly.
 
 [on.schedule]: https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#onschedule
 [crontab guru]: https://crontab.guru/
-
 
 ### Providing permissions
 
@@ -159,7 +159,7 @@ build using _Secrets_:
    to commit to the `gh-pages` branch.
 3. **Copy** the token value.
 4. Go to your repository's **Settings** and then the **Secrets** tab.
-5. **Create** a token named `JEKYLL_PAT` (*important*). Give it a value using the value copied
+5. **Create** a token named `GITHUB_TOKEN` (_important_). Give it a value using the value copied
    above.
 
 ### Build and deploy
@@ -171,11 +171,11 @@ To watch the progress and see any build errors, check on the build **status** us
 following approaches:
 
 - **View by commit**
-    - Go to the repository level view in GitHub. Under the most recent commit (near the top) you’ll
-      see a **status symbol** next to the commit message as a tick or _X_. Hover over it and click
-      the **details** link.
+  - Go to the repository level view in GitHub. Under the most recent commit (near the top) you’ll
+    see a **status symbol** next to the commit message as a tick or _X_. Hover over it and click
+    the **details** link.
 - **Actions tab**
-    - Go to the repository's Actions tab. Click on the `jekyll` workflow tab.
+  - Go to the repository's Actions tab. Click on the `jekyll` workflow tab.
 
 If all goes well, all steps will be green and the built assets will now exist on the `gh-pages`
 branch.
@@ -204,10 +204,11 @@ successful deploy from the Action.
 - [jekyll-actions] is an action available on the GitHub Marketplace and was used in this guide.
 - [jekyll-actions-quickstart] is an unofficial repository that includes a live demo of the
   `jekyll-actions` action. That project can be used as a template for making a new site.
-
+- [jekyll-action-ts] is another action to build and publish Jekyll sites on GiHub Pages that includes HTML formatting options with Prettier and caching.
 
 [ghp-whitelist]: https://pages.github.com/versions/
 [timeago-plugin]: https://rubygems.org/gems/jekyll-timeago
 [tokens]: https://github.com/settings/tokens
 [jekyll-actions]: https://github.com/marketplace/actions/jekyll-actions
 [jekyll-actions-quickstart]: https://github.com/MichaelCurrin/jekyll-actions-quickstart
+[jekyll-action-ts]: https://github.com/limjh16/jekyll-action-ts

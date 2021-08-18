@@ -116,7 +116,7 @@ Open `default.html` into your browser locally to ensure the site looks and behav
 
 For example, if the paths were relative on the site you copied, you'll need to either download the same assets into your Jekyll site or use absolute paths to the same assets in the cloud. (Syntax such as `src="//` requires a prefix such as `src="http://` to work in your local browser.)
 
-Jekyll provides some [filters](/docs/liquid/filters) to prepend a site URL before path. For example, you could preface your stylesheet like this:
+Jekyll provides some [filters](/docs/liquid/filters/) to prepend a site URL before path. For example, you could preface your stylesheet like this:
 
 {% raw %}
 ```liquid
@@ -181,21 +181,15 @@ If you don't specify a layout in your pages, Jekyll will simply render that page
 
 ## 4. Add a configuration file
 
-Add a `_config.yml` file in your root directory. In `_config.yml`, you can optionally specify the markdown filter you want. By default, [kramdown](https://kramdown.gettalong.org/) is used (without the need to specify it). If no other filter is specified, your config file will automatically apply the following as a default setting:
+Add a `_config.yml` file in your root directory. In `_config.yml`, you can optionally specify the markdown filter you want. By default, the [GitHub Flavored Markdown (GFM) processor](https://github.com/kramdown/parser-gfm) for [kramdown](https://kramdown.gettalong.org/) is used. If no other filter is specified, your config file will automatically apply the following as a [default](/docs/configuration/default/) setting:
 
 ```yaml
 markdown: kramdown
-```
-
-You can also specify [some options](https://kramdown.gettalong.org/converter/html.html) for kramdown to make it behave more like [GitHub Flavored Markdown (GFM)](https://github.github.com/gfm/):
-
-```yaml
 kramdown:
- input: GFM
- auto_ids: true
- hard_wrap: false
- syntax_highlighter: rouge
+  input: GFM
 ```
+
+You can find additional [Markdown Options](/docs/configuration/markdown/) in the Jekyll docs, though it's unlikely that you'll need them.
 
 ## 5. Test your pages
 

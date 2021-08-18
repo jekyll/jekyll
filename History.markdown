@@ -1,6 +1,141 @@
 ## HEAD
 
-  * Update default.html (#8305)
+  * Bump check-spelling/check-spelling from 0.0.18 to 0.0.19 (#8740)
+
+### Documentation
+
+  * typo - do instead of don&#39;t (#8518)
+  * Document support for TSV files consistently (#8488)
+  * Add a disclaimer to tutorials involving Ruby code (#8525)
+  * Improve documentation on developing generators (#8527)
+  * Fixes typo in layouts_dir documentation (#8532)
+  * Fix i.e. typos in collections.md (#8529)
+  * Remove GitHub Pages content which is in GitHub docs (#8533)
+  * Step By Step Instructions Review (#8399)
+  * Fix typo in migrating from 3.0 to 4.0 page (#8572)
+  * Fix for important missing step in macOS Installation Docs: Add the Homebrew gems directory to the PATH (#8496)
+  * Use latest Jekyll-action configuration (#8579)
+  * docs: troubleshoot macOS with ARM64 architecture (#8560)
+  * docs: add overview of .jekyll-cache dir (#8648)
+  * docs: clarify where .jekyll-metadata comes from (#8646)
+  * Razorops cicd added (#8656)
+  * Specify default port and host for serve commands in docs (#8624)
+  * Update third-party.md (#8652)
+  * Add documentation for Sass configuration options (#8587)
+  * Add formcarry to forms section (#8471)
+  * Add step to set SDKROOT (#8478)
+  * Improve the &#34;Markdown Options&#34; Docs (#8681)
+  * Add &#39;webrick&#39; warning note to &#34;Quickstart&#34; Docs (#8727)
+  * Update windows.md (#8701)
+  * IRC networks - Libera, Freenode (#8706)
+  * Improve GitHub Flavored Markdown Docs (#8684)
+  * Fixing URL in MacOS install for rbenv-doctor (#8693)
+
+### Bug Fixes
+
+  * Add webrick as a dependency (#8524)
+  * fix: pin rubocop to 1.12 due to error with ruby 2.4 (#8651)
+  * Revert &#34;style: run rubocop -a&#34; (#8676)
+  * Load Jekyll plugins from BUNDLE_GEMFILE location (#8585)
+  * fix(security):  CVE-2021-28834 (#8680)
+  * Inject livereload script using `location.protocol` instead of `http:` (#8718)
+  * Respect collections_dir config within include tag (#8756)
+
+### Development Fixes
+
+  * style: enable new cops (#8538)
+  * Allow dependabot to keep github actions up-to-date (#8540)
+  * Update actions/cache requirement to v2.1.3 (#8543)
+  * Pin rubocop version (#8564)
+  * style: add rubocop 1.9 cops (#8567)
+  * Cross Version Testing Locally and Faster CI (#8610)
+  * style: run rubocop -a (#8654)
+  * Use official Ruby setup GH action (#8614)
+  * Spell check action for markdown documentation (#8675)
+  * Update expect to cover docs/_posts (#8677)
+  * Enable Rubocop accessor grouping, fix existing offenses (#8293)
+  * Tags:Highlight: Decomposed HTMLLegacy formatter (#8623)
+
+### Minor Enhancements
+
+  * Regenerate supported mime types (#8542)
+  * Update include tag to be more permissive (#8618)
+  * Optimize `Jekyll::Utils.parse_date` (#8425)
+  * Update rubocop from 1.12 to 1.18 and min ruby from 2.4 to 2.5 (#8741)
+
+### Site Enhancements
+
+  * Improvements to CSS (#7834)
+
+## 4.2.0 / 2020-12-14
+
+### Minor Enhancements
+
+  * Warn on command-line with permalink conflict (#8342)
+  * Suppress warning issued for redirect pages (#8347)
+  * Enhance detection of conflicting destination URLs (#8459)
+  * Add `:post_convert` hook to modify HTML content before layout (#8368)
+  * Allow triggering `:post_convert` events atomically (#8465)
+  * Debug reading Page and Layout objects (#8100)
+  * Do not reset `site.url` to `http://localhost:4000` by default (#7253)
+  * Add custom debug strings for Jekyll objects (#8473)
+  * Debug reading data files in a site (#8481)
+
+### Bug Fixes
+
+  * Replace nested conditional with guard clauses (#8294)
+  * Fix: security bump (#8349)
+  * Fix path matching regex in post_url Liquid tag (#8375)
+  * Enable `Performance/ChainArrayAllocation` cop (#8404)
+  * Enable Lint/NoReturnInBeginEndBlocks Cop (#8457)
+  * Generate items from `site.include` list only once (#8463)
+  * Explicitly return nil after site process phase (#8472)
+
+### Optimization Fixes
+
+  * Implement custom delegators for drop methods (#8183)
+  * Handle `nil` argument to `Jekyll.sanitized_path` (#8415)
+  * Cache `Jekyll.sanitized_path` (#8424)
+  * Memoize array of drop getter method names (#8421)
+  * Reduce string allocations from the `link` tag (#8387)
+  * Optimize parsing of parameters in `include` tag (#8192)
+  * Stash documents `write?` attribute in a variable (#8389)
+  * Reduce string allocations from generating doc URLs (#8392)
+  * Check if site is in incremental mode optimally (#8401)
+  * Utilize flexibility of `Site#in_dest_dir` (#8403)
+  * Reduce allocations from rendering item as liquid (#8406)
+  * Compute relative_path of pages using PathManager (#8408)
+  * Reduce allocation from `normalize_whitespace` filter (#8400)
+  * Use `Regexp#match?` when `MatchData` is not required (#8427)
+  * Check default front matter scope against symbols (#8393)
+  * Stash frequently used `Drop` setter keys for reuse (#8394)
+  * Memoize defaults computed for Convertibles (#8451)
+  * Reduce array allocations from merging categories (#8453)
+  * Memoize destination of pages, documents and staticfiles (#8458)
+  * Reduce allocations from computing item property (#8485)
+  * Optimize `Page#dir` with a private method (#8489)
+  * Stash attribute hash for Liquid computed for pages (#8497)
+
+### Development Fixes
+
+  * Update cucumber gem to version 4.1 (#8278)
+  * Move permalink styles data to constant (#8282)
+  * Update rubocop gem to 0.87.1 (#8287)
+  * Update RuboCop to-do file (#8296)
+  * Fix `rake console` generating LoadError (#8312)
+  * Configure Performance cops (#8369)
+  * Update rubocop gem to 0.90.0 (#8313)
+  * Refactor `Jekyll::Utils::Platforms` (#7236)
+  * Bump RuboCop to v0.91.x (#8391)
+  * Add workflow to build and profile third-party repo (#8398)
+  * Bump RuboCop to v0.92.x
+  * Update cucumber gem version to 5.1.2 (#8413)
+  * Fix test suite compatibility with JRuby (#8418)
+  * chore(deps): bump Rubocop to 0.93.0 (#8430)
+  * Use Ruby 2.7.1 in GitHub Actions (#8444)
+  * Test that Liquid expressions are not deeply evaled (#8292)
+  * Test rendering arbitrary Liquid variables by default (#7414)
+  * Migrate TravisCI jobs to GitHub Actions (#8492)
 
 ### Documentation
 
@@ -21,73 +156,20 @@
   * Docs Review: Getting Started (#8372)
   * Add note about rebooting system after installation (#8359)
   * Use data file to render table at `/docs/configuration/options/#global-configuration` (#8377)
-  * Docs: Use data file(s) to render table(s) at https://jekyllrb.com/docs/configuration/options/ (#8380)
+  * Use data file(s) to render table(s) at `/docs/configuration/options/` (#8380)
   * Improve maintainability of config option data (#8383)
   * Remove CircleCI v1 docs (#8410)
-  * Remove NOKOGIRI_USE_SYSTEM_LIBRARIES from Travis CI docs (#8409)
+  * Remove `NOKOGIRI_USE_SYSTEM_LIBRARIES` from Travis CI docs (#8409)
   * Add links to all Jekyll themes on GitHub tagged with #jekyll-theme (#8447)
-  * docs: init project (#8450)
-  * docs: installation: fedora: add additional dependencies (#8456)
+  * Document initializing project Gemfile from scratch (#8450)
+  * Document installation of additional dependencies for installing Jekyll on Fedora (#8456)
   * Improve documentation on Hooks in Jekyll (#8467)
   * Build docs site with GitHub Actions (#8201)
+  * Add link to Assets page from `_sass` section in `_docs/structure.md` (#8486)
 
-### Development Fixes
+### Site Enhancements
 
-  * Update cucumber gem to version 4.1 (#8278)
-  * Move permalink styles data to constant (#8282)
-  * Update rubocop gem to 0.87.1 (#8287)
-  * Update RuboCop to-do file (#8296)
-  * Fix `rake console` generating LoadError (#8312)
-  * Configure Performance cops (#8369)
-  * Update rubocop gem to 0.90.0 (#8313)
-  * Refactor Jekyll::Utils::Platforms (#7236)
-  * Bump RuboCop to v0.91.x (#8391)
-  * Add workflow to build and profile third-party repo (#8398)
-  * Implement custom delegators for drop methods (#8183)
-  * Bump RuboCop to v0.92.x
-  * Update cucumber gem version to 5.1.2 (#8413)
-  * Fix test suite compatibility with JRuby (#8418)
-  * chore(deps): bump Rubocop to 0.93.0 (#8430)
-  * Use Ruby 2.7.1 in GitHub Actions (#8444)
-  * Reduce allocations from rendering item as liquid (#8406)
-  * Test that Liquid expressions are not deeply evaled (#8292)
-  * Test rendering arbitrary Liquid variables by default (#7414)
-
-### Bug Fixes
-
-  * Replace nested conditional with guard clauses (#8294)
-  * fix: security bump (#8349)
-  * Fix path matching regex in post_url Liquid tag (#8375)
-  * Reduce string allocations from the `link` tag (#8387)
-  * Optimize parsing of parameters in include tag (#8192)
-  * Stash documents `write?` attribute in a variable (#8389)
-  * Reduce string allocations from generating doc URLs (#8392)
-  * Check if site is in incremental mode optimally (#8401)
-  * Handle nil argument to Jekyll.sanitized_path (#8415)
-  * Compute relative_path of pages using PathManager (#8408)
-  * Enable `Performance/ChainArrayAllocation` cop (#8404)
-  * Utilize flexibility of Site#in_dest_dir (#8403)
-  * Reduce allocation from normalize_whitespace filter (#8400)
-  * Use Regexp#match? when MatchData is not required (#8427)
-  * Check default front matter scope against symbols (#8393)
-  * Stash frequently used Drop setter keys for reuse (#8394)
-  * Memoize defaults computed for Convertibles (#8451)
-  * Reduce array allocations from merging categories (#8453)
-  * Enable Lint/NoReturnInBeginEndBlocks Cop (#8457)
-  * Memoize destination of pages, documents and staticfiles (#8458)
-  * Generate items from `site.include` list only once (#8463)
-  * Allow triggering `:post_convert` events atomically (#8465)
-
-### Minor Enhancements
-
-  * Warn on command-line with permalink conflict (#8342)
-  * Supress warning issued for redirect pages (#8347)
-  * Add post_convert hook to modify HTML content before layout (#8368)
-  * Cache Jekyll.sanitized_path (#8424)
-  * Memoize array of drop getter method names (#8421)
-  * Enhance detection of conflicting destination URLs (#8459)
-  * Debug reading Page and Layout objects (#8100)
-  * Don&#39;t reset site.url to localhost:4000 by default (#7253)
+  * Fix rendering of *showcase* images (#8504)
 
 ## 4.1.1 / 2020-06-24
 
@@ -234,7 +316,7 @@
   * Fix typo in documentation on GitHub Actions (#8162)
   * Ease discovery of CLI commands (in their entirety) (#8178)
   * Remove `sudo` from Travis CI tutorial (#8187)
-  * Add Gitlab Pages to 3rd party list (#8191)
+  * Add GitLab Pages to 3rd party list (#8191)
   * docs: add 21yunbox for deployment (#8193)
   * Improve documentation on tags and categories (#8196)
 
@@ -280,6 +362,12 @@
 ### Development Fixes
 
   * Fix Kramdown converter based tests for v4.0.x (#8143)
+
+## 3.9.1 / 2021-04-08
+
+### Bug Fixes
+
+  * Backport #8618 for v3.9.x: Update include tag to be more permissive (#8629)
 
 ## 3.9.0 / 2020-08-05
 
@@ -544,7 +632,7 @@
   * Remove alt attribute from a tags (#7407)
   * Fix BASH code-block in ubuntu.md (#7420)
   * zlib is missing (#7428)
-  * Fixed unnecessary aticles and pronouns (#7466)
+  * Fixed unnecessary articles and pronouns (#7466)
   * Store SSL key and cert in site source (#7473)
   * Fix typo in tutorial for converting existing site (#7524)
   * Check if var exists before include tag (#7530)
@@ -559,7 +647,7 @@
   * fix link to Site Source config (#7708)
   * Introduce frontmatter in step 2 (#7704)
   * Add @ashmaroli to Core Team listing (#7398)
-  * Lnk to Tidelift in site&#39;s footer (#7377)
+  * Link to Tidelift in site&#39;s footer (#7377)
   * Link to OpenCollective backing (#7378
   * Link to sponsor listing in README (#7405)
   * Adjust team page listings (#7395)
@@ -710,7 +798,7 @@
   * doc: add liquid tag plugin jekyll-onebox for html previews (#6898)
   * Add `jekyll-w2m` to plugins (#6855)
   * Fix tutorials navigation HTML (#6919)
-  * add Arch Linux instalation troubleshoot (#6782)
+  * add Arch Linux installation troubleshoot (#6782)
   * Docs: Install Jekyll on macOS (#6881)
   * Fix CodeClimate badges [ci skip] (#6930)
   * Update index.md (#6933)
@@ -866,7 +954,7 @@
   * Fix list appearance by adding missing `ol` tag (#6421)
   * Explain how to override output collection index page (#6424)
   * Added github-cards to the list of plugins (#6425)
-  * CoC violation correspondants (#6429)
+  * CoC violation correspondents (#6429)
   * Add a note about Liquid and syntax highlighting (#6466)
   * Remove `sudo` from macOS troubleshooting instructions (#6486)
   * Add a note on `:jekyll_plugins` group in the docs (#6488)
@@ -982,7 +1070,7 @@
   * add SUPPORT file for GitHub (#6324)
   * Rename CODE_OF_CONDUCT to show in banner (#6325)
   * Docs : illustrate page.id for a collection&#39;s document (#6329)
-  * Docs: post&#39;s date can be overriden in front matter (#6334)
+  * Docs: post&#39;s date can be overridden in front matter (#6334)
   * Docs: `site.url` behavior on development and production environments (#6270)
   * Fix typo in site.url section of variables.md :-[ (#6337)
   * Docs: updates (#6343)
@@ -1030,7 +1118,7 @@
 
 ### Bug Fixes
 
-  * Backward compatiblize URLFilters module (#6163)
+  * Backward compatibilize URLFilters module (#6163)
   * Static files contain front matter default keys when `to_liquid`'d  (#6162)
   * Always normalize the result of the `relative_url` filter (#6185)
 
@@ -1500,7 +1588,7 @@
 
 ### Minor Enhancements
 
-  * Stop testing with Ruby 2.0.x, which is EOL'd. (#4381)
+  * Stop testing with Ruby 2.0.x EOL (#4381)
   * Allow collections to have documents that have no file extension (#4545)
   * Add size property to `group_by` result (#4557)
   * Site Template: Removed unnecessary nesting from `_base.scss` (#4637)
@@ -1526,7 +1614,7 @@
   * Add 'jekyll new-theme' command to help users get up and running creating a theme (#4848)
   * `markdownify` and `smartify` should convert input to string before conversion (#4958)
   * Run `Site#generate` for 'jekyll doctor' to catch plugin issues (#5005)
-  * Add `normalize_whitepace` filter (#4917)
+  * Add `normalize_whitespace` filter (#4917)
   * Move bin/jekyll to exe/jekyll to prevent collision with binstubs (#5014)
   * Cleaning up site template & theme updates. (#4922)
   * Add fetch method to Drops (#5056)
@@ -1575,7 +1663,7 @@
   * Fix state leakage in Kramdown test (#4618)
   * Unify method for copying special files from repo to site (#4601)
   * Refresh the contributing file (#4596)
-  * change smartify doc from copy/paste of mardownify doc (#4653)
+  * change smartify doc from copy/paste of markdownify doc (#4653)
   * Update Rake & disable warnings when running tests (#4720)
   * Fix many warnings (#4537)
   * Don't blindly assume the last system when determining "open" cmd (#4717)
@@ -1673,7 +1761,7 @@
   * Corrected pagination docs for hidden: true feature (#4903)
   * Remove a Broken Link for Refheap Plugin (#4971)
   * Instructions on how to install github-gem on Windows (#4975)
-  * Minor tweak to fix missing apostrophne (#4962)
+  * Minor tweak to fix missing apostrophe (#4962)
   * Instructions on how to install github-gem on Windows (v2) (#4977)
   * Fix inaccurate HTTP response header field name (#4976)
   * Add post about GSoC project (#4980)
@@ -1681,10 +1769,10 @@
   * Update normalize.css to v4.0.0. (#4989)
   * Add jekyll-tags-list-plugin to list of third-party plugins (#5000)
   * Windows docs: Command needs to be called from blog path (#5006)
-  * Update text to be consitent with example (#5010)
+  * Update text to be consistent with example (#5010)
   * Update template links to point to core Liquid site (#5012)
   * Add generator-jekyllized to third-party plugins (#5027)
-  * Add Jekyll Art Hallery generator plugin to list of third-party plugins (#5043)
+  * Add Jekyll Art Gallery generator plugin to list of third-party plugins (#5043)
   * Add Formingo to the list of Jekyll form SaaS (#5054)
   * Highlight help nav item when navigated to. (#5058)
   * Update normalize.css to v4.2.0. (#5096)
@@ -1836,9 +1924,9 @@
   * Reorganize and cleanup the Gemfile, shorten required depends. (#4318)
   * Remove script/rebund. (#4341)
   * Implement codeclimate platform (#4340)
-  * Remove ObectSpace dumping and start using inherited, it's faster. (#4342)
+  * Remove ObjectSpace dumping and start using inherited, it's faster. (#4342)
   * Add script/travis so all people can play with Travis-CI images. (#4338)
-  * Move Cucumber to using RSpec-Expections and furthering JRuby support. (#4343)
+  * Move Cucumber to using RSpec-Expectations and furthering JRuby support. (#4343)
   * Rearrange Cucumber and add some flair. (#4347)
   * Remove old FIXME (#4349)
   * Clean up the Gemfile (and keep all the necessary dependencies) (#4350)
@@ -2171,7 +2259,7 @@
   * Define the `install` step in the CI example `.travis.yml` (#3622)
   * Expand collections documentation. (#3638)
   * Add the "warning" note label to excluding `vendor` in the CI docs page (#3623)
-  * Upgrade pieces of the Ugrading guide for Jekyll 3 (#3607)
+  * Upgrade pieces of the Upgrading guide for Jekyll 3 (#3607)
   * Showing how to access specific data items (#3468)
   * Clarify pagination works from within HTML files (#3467)
   * Add note to `excerpt_separator` documentation that it can be set globally (#3667)
@@ -3166,7 +3254,7 @@
   * Add ReadInXMinutes plugin to the plugin list (#1222)
   * Remove plugins from the plugin list that have equivalents in Jekyll proper (#1223)
   * Add jekyll-assets to the plugin list (#1225)
-  * Add jekyll-pandoc-mulitple-formats to the plugin list (#1229)
+  * Add jekyll-pandoc-multiple-formats to the plugin list (#1229)
   * Remove dead link to "Using Git to maintain your blog" (#1227)
   * Tidy up the third-party plugins listing (#1228)
   * Update contributor information (#1192)
@@ -3319,7 +3407,7 @@
   * Adds excerpt attribute to posts which contains first paragraph of content (#837)
   * Accept custom configuration file via CLI (#863)
   * Load in GitHub Pages MIME Types on `jekyll serve` (#847, #871)
-  * Improve debugability of error message for a malformed highlight tag (#785)
+  * Improve debuggability of error message for a malformed highlight tag (#785)
   * Allow symlinked files in unsafe mode (#824)
   * Add 'gist' Liquid tag to core (#822, #861)
   * New format of Jekyll output (#795)

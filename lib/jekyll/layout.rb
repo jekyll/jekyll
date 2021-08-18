@@ -4,26 +4,14 @@ module Jekyll
   class Layout
     include Convertible
 
-    # Gets the Site object.
-    attr_reader :site
+    attr_accessor :content, # content of layout
+                  :data,    # the Hash that holds the metadata for this layout
+                  :ext      # extension of layout
 
-    # Gets the name of this layout.
-    attr_reader :name
-
-    # Gets the path to this layout.
-    attr_reader :path
-
-    # Gets the path to this layout relative to its base
-    attr_reader :relative_path
-
-    # Gets/Sets the extension of this layout.
-    attr_accessor :ext
-
-    # Gets/Sets the Hash that holds the metadata for this layout.
-    attr_accessor :data
-
-    # Gets/Sets the content of this layout.
-    attr_accessor :content
+    attr_reader :name, # name of layout
+                :path, # path to layout
+                :site, # the Site object
+                :relative_path # path to layout relative to its base
 
     # Initialize a new Layout.
     #
@@ -57,6 +45,11 @@ module Jekyll
     # Returns nothing.
     def process(name)
       self.ext = File.extname(name)
+    end
+
+    # Returns the object as a debug String.
+    def inspect
+      "#<#{self.class} @path=#{@path.inspect}>"
     end
   end
 end

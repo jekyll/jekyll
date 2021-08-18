@@ -18,7 +18,7 @@ Today, we released v3.1.4 in an effort to bring more stability to the v3.1.x ser
 
 The fixes for `layout` may not be seamless for everyone, but we believe they will be the "right thing to do" going forward.
 
-We are alwawys striving to make Jekyll more straight-forward to use. Please do open an issue if you believe an aspect of Jekyll's user experience isn't up to par.
+We are always striving to make Jekyll more straight-forward to use. Please do open an issue if you believe an aspect of Jekyll's user experience isn't up to par.
 
 For a full history of our changes, [see the changelog](/docs/history/#v3-1-4).
 

@@ -30,7 +30,7 @@ defaults:
     during automatic regeneration are not loaded until the next execution.
   </p>
   <p>
-    Note <a href="{{ '/docs/datafiles' | relative_url }}">Data Files</a> are included and reloaded during automatic regeneration.
+    Note <a href="{{ '/docs/datafiles/' | relative_url }}">Data Files</a> are included and reloaded during automatic regeneration.
   </p>
 </div>
 

@@ -12,7 +12,7 @@ releases, and fix some other annoying bugs:
 * Backwards-compatibilize relative permalinks ([#1081][])
 * Add `jekyll doctor` command to check site for any known compatibility problems ([#1081][])
 * Deprecate old config `server_port`, match to `port` if `port` isn't set ([#1084][])
-* Update pygments.rb and kramdon versions to 0.5.0 and 1.0.2, respectively ([#1061][], [#1067][])
+* Update pygments.rb and kramdown versions to 0.5.0 and 1.0.2, respectively ([#1061][], [#1067][])
 * Fix issue when post categories are numbers ([#1078][])
 * Add a `data-lang="<lang>"` attribute to Redcarpet code blocks ([#1066][])
 * Catching that Redcarpet gem isn't installed ([#1059][])

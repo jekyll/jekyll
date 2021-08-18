@@ -40,7 +40,7 @@ class TestNewCommand < JekyllUnitTest
       refute_exist @full_path
       capture_output { Jekyll::Commands::New.process(@args) }
       assert_exist gemfile
-      assert_match(%r!gem "jekyll", "~> #{Jekyll::VERSION}"!, File.read(gemfile))
+      assert_match(%r!gem "jekyll", "~> #{Jekyll::VERSION}"!o, File.read(gemfile))
       assert_match(%r!gem "github-pages"!, File.read(gemfile))
     end
 

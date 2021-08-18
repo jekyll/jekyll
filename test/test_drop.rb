@@ -104,7 +104,7 @@ class TestDrop < JekyllUnitTest
         end
 
         should "fetch default boolean value correctly" do
-          assert_equal false, @document_drop.fetch("bar", false)
+          refute @document_drop.fetch("bar", false)
         end
 
         should "fetch default value from block if key is not found" do
