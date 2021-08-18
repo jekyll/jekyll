@@ -39,7 +39,7 @@ class TestDocument < JekyllUnitTest
     end
 
     should "exist" do
-      refute @document.nil?
+      refute_nil @document
     end
 
     should "know its relative path" do
