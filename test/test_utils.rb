@@ -130,7 +130,7 @@ class TestUtils < JekyllUnitTest
 
   context "The \`Utils.slugify\` method" do
     should "return nil if passed nil" do
-      assert Utils.slugify(nil).nil?
+      assert_nil Utils.slugify(nil)
     rescue NoMethodError
       assert false, "Threw NoMethodError"
     end
