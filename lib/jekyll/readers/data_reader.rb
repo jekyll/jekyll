@@ -67,7 +67,7 @@ module Jekyll
                  :headers  => true,
                  :encoding => site.config["encoding"]).map(&:to_hash)
       else
-        SafeYAML.load_file(path)
+        Jekyll::YAML.load_file(path, :read_opts => site.file_read_opts)
       end
     end
 

@@ -126,7 +126,7 @@ module Jekyll
         Jekyll::External.require_with_graceful_fail("tomlrb") unless defined?(Tomlrb)
         Tomlrb.load_file(filename)
       when %r!\.ya?ml!i
-        SafeYAML.load_file(filename) || {}
+        YAML.load_file(filename) || {}
       else
         raise ArgumentError,
               "No parser for '#{filename}' is available. Use a .y(a)ml or .toml file instead."

@@ -152,7 +152,7 @@ module Jekyll
           begin
             Marshal.load(content)
           rescue TypeError
-            SafeYAML.load(content)
+            Jekyll::YAML.safe_load(content)
           rescue ArgumentError => e
             Jekyll.logger.warn("Failed to load #{metadata_file}: #{e}")
             {}

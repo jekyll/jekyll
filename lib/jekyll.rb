@@ -31,13 +31,10 @@ require "json"
 # 3rd party
 require "pathutil"
 require "addressable/uri"
-require "safe_yaml/load"
 require "liquid"
 require "kramdown"
 require "colorator"
 require "i18n"
-
-SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
   # internal requires
@@ -83,6 +80,7 @@ module Jekyll
   autoload :ThemeBuilder,        "jekyll/theme_builder"
   autoload :URL,                 "jekyll/url"
   autoload :Utils,               "jekyll/utils"
+  autoload :YAML,                "jekyll/yaml"
   autoload :VERSION,             "jekyll/version"
 
   # extensions
