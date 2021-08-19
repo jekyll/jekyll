@@ -6,7 +6,7 @@ module Jekyll
 
     def initialize(site)
       @site = site
-      @content = {}
+      @content = SiteData::Directory.new
       @entry_filter = EntryFilter.new(site)
       @source_dir = site.in_source_dir("/")
     end
@@ -22,6 +22,8 @@ module Jekyll
       read_data_to(base, @content)
       @content
     end
+
+    # rubocop:disable Metrics/AbcSize
 
     # Read and parse all .yaml, .yml, .json, .csv and .tsv
     # files under <dir> and add them to the <data> variable.
@@ -42,13 +44,14 @@ module Jekyll
         next if @entry_filter.symlink?(path)
 
         if File.directory?(path)
-          read_data_to(path, data[sanitize_filename(entry)] = {})
+          read_data_to(path, data[sanitize_filename(entry)] = SiteData::Directory.new)
         else
           key = sanitize_filename(File.basename(entry, ".*"))
-          data[key] = read_data_file(path)
+          data[key] = SiteData::File.new(site, path, read_data_file(path))
         end
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
     # Determines how to read a data file.
     #
