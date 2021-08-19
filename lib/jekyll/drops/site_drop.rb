@@ -24,7 +24,9 @@ module Jekyll
       end
 
       def data
-        @obj.site_data.tap { |sdata| sdata.context = @context }
+        @obj.site_data.tap do |value|
+          value.context = @context if value.respond_to?(:context=)
+        end
       end
 
       def posts
