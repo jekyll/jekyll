@@ -187,7 +187,7 @@ module Jekyll
     # Returns String rendered content
     def render_layout(output, layout, info)
       payload["content"] = output
-      payload["layout"]  = Utils.deep_merge_hashes(layout.data, payload["layout"] || {})
+      payload["layout"]  = Utils.deep_merge_hashes(layout.data, payload["layout"])
 
       render_liquid(
         layout.content,
@@ -231,7 +231,7 @@ module Jekyll
 
     def assign_layout_data!
       layout = layouts[document.data["layout"]]
-      payload["layout"] = Utils.deep_merge_hashes(layout.data, payload["layout"] || {}) if layout
+      payload["layout"] = Utils.deep_merge_hashes(layout.data, payload["layout"]) if layout
     end
 
     def permalink_ext

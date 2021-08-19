@@ -26,6 +26,8 @@ module Jekyll
     #
     # Returns the merged hashes.
     def deep_merge_hashes(master_hash, other_hash)
+      return master_hash unless mergable?(other_hash)
+
       deep_merge_hashes!(master_hash.dup, other_hash)
     end
 
