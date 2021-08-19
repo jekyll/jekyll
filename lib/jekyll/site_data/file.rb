@@ -4,6 +4,7 @@ module Jekyll
   module SiteData
     class File
       attr_accessor :context
+      attr_reader :content
 
       def initialize(site, path, content)
         @site = site
@@ -26,6 +27,18 @@ module Jekyll
 
       def respond_to_missing?(method, *)
         @content.respond_to?(method) || super
+      end
+
+      def <=>(other)
+        content <=> (other.is_a?(self.class) ? other.content : other)
+      end
+
+      def ==(other)
+        content == (other.is_a?(self.class) ? other.content : other)
+      end
+
+      def inspect
+        @content.inspect
       end
 
       private
