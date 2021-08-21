@@ -89,7 +89,7 @@ namespace :site do
     next if version =~ %r!(beta|rc|alpha)!i
     require "jekyll/yaml"
     config_file = File.join(docs_folder, "_config.yml")
-    config = Jekyll::YAML.load_file(config_file)
+    config = Jekyll::Utils.safe_load_yaml_file(config_file)
     config["version"] = version
     File.write(config_file, YAML.dump(config))
     File.open("#{docs_folder}/latest_version.txt", "wb") { |f| f.puts(version) }

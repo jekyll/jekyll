@@ -27,6 +27,7 @@ require "logger"
 require "set"
 require "csv"
 require "json"
+require "psych"
 
 # 3rd party
 require "pathutil"
@@ -80,7 +81,6 @@ module Jekyll
   autoload :ThemeBuilder,        "jekyll/theme_builder"
   autoload :URL,                 "jekyll/url"
   autoload :Utils,               "jekyll/utils"
-  autoload :YAML,                "jekyll/yaml"
   autoload :VERSION,             "jekyll/version"
 
   # extensions
