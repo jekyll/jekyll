@@ -76,6 +76,9 @@ before we can view it. Run either of the following commands to build your site:
 called `_site`.
 * `jekyll serve` - Does `jekyll build` and runs it on a local web server at `http://localhost:4000`, rebuilding the site any time you make a change.
 
+{: .note .warning}
+If you are using Ruby version 3.0.0 or higher, running the above commands [may fail](https://github.com/github/pages-gem/issues/752). You may fix it by adding `webrick` to your dependencies: `bundle add webrick`
+
 {: .note .info}
 When you're developing a site, use `jekyll serve`. To force the browser to refresh with every change, use `jekyll serve --livereload`. 
 
