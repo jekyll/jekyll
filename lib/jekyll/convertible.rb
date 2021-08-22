@@ -240,6 +240,15 @@ module Jekyll
       @renderer ||= Jekyll::Renderer.new(site, self)
     end
 
+    # TEMPORARY PUBLIC METHOD FOR IMPROVING MEMORY FOOTPRINT OF `self.to_liquid`.
+    # WILL BE REMOVED IN A FUTURE VERSION.
+    # DO NOT CALL THIS METHOD PRIOR TO `site.render`.
+    #
+    # Memoized version of `self.to_liquid` to avoid repeated allocations.
+    def liquid_hash
+      @liquid_hash ||= to_liquid
+    end
+
     private
 
     def defaults

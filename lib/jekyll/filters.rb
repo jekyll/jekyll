@@ -423,7 +423,9 @@ module Jekyll
       @item_property_cache[property] ||= {}
       @item_property_cache[property][item] ||= begin
         property = property.to_s
-        property = if item.respond_to?(:to_liquid)
+        property = if item.respond_to?(:liquid_hash)
+                     read_liquid_attribute(item.liquid_hash, property)
+                   elsif item.respond_to?(:to_liquid)
                      read_liquid_attribute(item.to_liquid, property)
                    elsif item.respond_to?(:data)
                      item.data[property]
