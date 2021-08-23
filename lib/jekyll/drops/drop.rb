@@ -190,10 +190,8 @@ module Jekyll
       #
       # Returns an Array of unique keys for content for the Drop.
       def keys
-        if mutations.empty? && fallback_data.empty?
-          content_methods
-        elsif mutations.empty?
-          content_methods | fallback_data.keys
+        if mutations.empty?
+          fallback_data.empty? ? content_methods : (content_methods | fallback_data.keys)
         elsif fallback_data.empty?
           content_methods | mutations.keys
         else
