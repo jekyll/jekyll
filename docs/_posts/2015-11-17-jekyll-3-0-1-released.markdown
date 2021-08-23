@@ -15,7 +15,7 @@ Hey, folks! Bunch of bug fixes here. Notables:
 * All hooks should now be properly registered & documented
 
 And a bunch more changes which you can see over in the
-[changelog](/docs/history).
+[changelog](/docs/history/).
 
 Thanks to the 17 developers who contributed code and documentation to this
 patch release: Alfred Xing, Christian Trosell, Jordan Thornquest, Jordon

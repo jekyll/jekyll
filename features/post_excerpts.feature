@@ -103,12 +103,12 @@ Feature: Post excerpts
       | Just Text Excerpt            | post   | 2019-03-06 | Install Jekyll\n\nNext Para [^1]\n\n[^1]: Lorem ipsum     |
       | Text and Footnote            | post   | 2019-03-07 | Alpha [^1]\n\nNext Para\n\n[^1]: Omega sigma              |
       | Text and Reference Link      | post   | 2019-03-08 | Read [docs][link]\n\nNext Para\n\n[link]: docs.jekyll.com |
-      | Text and Self-refencing Link | post   | 2019-03-09 | Check out [jekyll]\n\nNext Para\n\n[jekyll]: jekyllrb.com |
+      | Text and Self-referencing Link | post   | 2019-03-09 | Check out [jekyll]\n\nNext Para\n\n[jekyll]: jekyllrb.com |
     When I run jekyll build
     Then I should get a zero exit status
     And I should not see "Kramdown warning" in the build output
     But I should see exactly "<p>Install Jekyll</p>" in "_site/just-text-excerpt.html"
-    And I should see "<p>Alpha <sup id=\"fnref:1\" role=\"doc-noteref\"><a href=\"#fn:1\" class=\"footnote\">1</a></sup></p>" in "_site/text-and-footnote.html"
+    And I should see "<p>Alpha <sup id=\"fnref:1\" role=\"doc-noteref\"><a href=\"#fn:1\" class=\"footnote\" rel=\"footnote\">1</a></sup></p>" in "_site/text-and-footnote.html"
     And I should see "<p>Omega sigma <a href=\"#fnref:1\" class=\"reversefootnote\" role=\"doc-backlink\">&#8617;</a></p>" in "_site/text-and-footnote.html"
     And I should see "<p>Read <a href=\"docs.jekyll.com\">docs</a></p>" in "_site/text-and-reference-link.html"
-    And I should see "<p>Check out <a href=\"jekyllrb.com\">jekyll</a></p>" in "_site/text-and-self-refencing-link.html"
+    And I should see "<p>Check out <a href=\"jekyllrb.com\">jekyll</a></p>" in "_site/text-and-self-referencing-link.html"

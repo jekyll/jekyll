@@ -201,7 +201,7 @@ class TestCommandsServe < JekyllUnitTest
 
       should "use empty directory index list when show_dir_listing is true" do
         opts = { "show_dir_listing" => true }
-        assert custom_opts(opts)[:DirectoryIndex].empty?
+        assert_empty custom_opts(opts)[:DirectoryIndex]
       end
 
       should "keep config between build and serve" do
@@ -231,12 +231,6 @@ class TestCommandsServe < JekyllUnitTest
         setup do
           expect(Jekyll).to receive(:env).and_return("development")
           expect(Jekyll::Commands::Serve).to receive(:start_up_webrick)
-        end
-        should "set the site url by default to `http://localhost:4000`" do
-          @merc.execute(:serve, "watch" => false, "url" => "https://jekyllrb.com/")
-
-          assert_equal 1, Jekyll.sites.count
-          assert_equal "http://localhost:4000", Jekyll.sites.first.config["url"]
         end
 
         should "take `host`, `port` and `ssl` into consideration if set" do

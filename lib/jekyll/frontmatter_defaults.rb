@@ -157,7 +157,7 @@ module Jekyll
     # Returns true if either of the above conditions are satisfied,
     #   otherwise returns false
     def applies_type?(scope, type)
-      !scope.key?("type") || scope["type"].eql?(type.to_s)
+      !scope.key?("type") || type&.to_sym.eql?(scope["type"].to_sym)
     end
 
     # Checks if a given set of default values is valid
@@ -198,10 +198,8 @@ module Jekyll
     def matching_sets(path, type)
       @matched_set_cache ||= {}
       @matched_set_cache[path] ||= {}
-      @matched_set_cache[path][type] ||= begin
-        valid_sets.select do |set|
-          !set.key?("scope") || applies?(set["scope"], path, type)
-        end
+      @matched_set_cache[path][type] ||= valid_sets.select do |set|
+        !set.key?("scope") || applies?(set["scope"], path, type)
       end
     end
 
@@ -223,7 +221,7 @@ module Jekyll
           Jekyll.logger.warn set.to_s
           nil
         end
-      end.compact
+      end.tap(&:compact!)
     end
 
     # Sanitizes the given path by removing a leading slash

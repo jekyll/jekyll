@@ -15,7 +15,7 @@ class TestTags < JekyllUnitTest
     site.read if override["read_all"]
 
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
-    @converter = site.converters.find { |c| c.class == converter_class }
+    @converter = site.converters.find { |c| c.instance_of?(converter_class) }
     payload = { "highlighter_prefix" => @converter.highlighter_prefix,
                 "highlighter_suffix" => @converter.highlighter_suffix, }
 
@@ -904,6 +904,49 @@ class TestTags < JekyllUnitTest
 
       should "include file with empty parameters" do
         assert_match "<span id=\"include-param\"></span>", @result
+      end
+    end
+
+    context "with include file with special characters without params" do
+      setup do
+        content = <<~CONTENT
+          ---
+          title: special characters
+          ---
+
+          {% include params@2.0.html %}
+        CONTENT
+        create_post(content,
+                    "permalink"   => "pretty",
+                    "source"      => source_dir,
+                    "destination" => dest_dir,
+                    "read_posts"  => true)
+      end
+
+      should "include file with empty parameters" do
+        assert_match "<span id=\"include-param\"></span>", @result
+      end
+    end
+
+    context "with include file with special characters with params" do
+      setup do
+        content = <<~CONTENT
+          ---
+          title: special characters
+          ---
+
+          {% include params@2.0.html param1="foobar" param2="bazbar" %}
+        CONTENT
+        create_post(content,
+                    "permalink"   => "pretty",
+                    "source"      => source_dir,
+                    "destination" => dest_dir,
+                    "read_posts"  => true)
+      end
+
+      should "include file with empty parameters" do
+        assert_match "<li>param1 = foobar</li>", @result
+        assert_match "<li>param2 = bazbar</li>", @result
       end
     end
 

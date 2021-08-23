@@ -90,7 +90,7 @@ end
 Correctness.new(site_docs, "redirect_from".freeze).assert!
 Correctness.new(site_docs, "title".freeze).assert!
 
-def test_property(property, meta_key)
+def property(property, meta_key)
   Benchmark.ips do |x|
     x.config(time: 10, warmup: 5)
     x.report("sort_by_property_directly with #{property} property") do

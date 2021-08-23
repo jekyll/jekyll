@@ -38,8 +38,6 @@ of time taken during various stages of the *build process*.
 * Jekyll's development server now supports certificates based on Elliptic-curve cryptography.
 
 For the interest of plugin authors:
-* `Jekyll::Page` now uses a Liquid Drop to expose attributes for Liquid templates. However, its subclasses will continue
-using the legacy `ATTRIBUTES_FOR_LIQUID` hash by default. More details in the [associated documentation][page-drop-docs]
 * Excerpts won't be generated for `Jekyll::Page` subclasses automatically unless such instances have an `excerpt` key in
 their `data` hash.
 
@@ -52,9 +50,6 @@ released gem, please remove `|_config\.yml` from the regular expression in the g
 {% assign filter_slug = filter | slugify %}
 [{{ filter_slug }}-filter]: {{ filter_slug | prepend: '/docs/liquid/filters/#' | relative_url }}
 {% endfor %}
-
-[page-drop-docs]: {{ 'docs/pages/#for-plugin-developers' | relative_url }}
-
 
 ### Have questions?
 

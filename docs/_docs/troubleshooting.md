@@ -30,12 +30,6 @@ On Red Hat, CentOS, and Fedora systems you can do this by running:
 sudo yum install ruby-devel
 ```
 
-If you installed the above - specifically on Fedora 23 - but the extensions would still not compile, you are probably running a Fedora image that misses the `redhat-rpm-config` package. To solve this, run:
-
-```sh
-sudo dnf install redhat-rpm-config
-```
-
 On Arch Linux you need to run:
 
 ```sh
@@ -213,6 +207,15 @@ you don't have a proper JavaScript runtime. To solve this, either install
 [issue #2327](https://github.com/jekyll/jekyll/issues/2327) for more info.
 
 ## Problems running Jekyll
+
+### macOS
+
+Jekyll is compatible with macOS with ARM64 architecture.
+However, `bundle exec jekyll serve` may [fail with elder version `ffi`](https://github.com/ffi/ffi/issues/870).
+
+You may need to run `bundle update` or update `ffi` to at least `1.14.2` manually.
+
+### Debian or Ubuntu
 
 On Debian or Ubuntu, you may need to add `/var/lib/gems/1.8/bin/` to your path
 in order to have the `jekyll` executable be available in your Terminal.

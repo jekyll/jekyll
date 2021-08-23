@@ -10,12 +10,31 @@ class TestPluginManager < JekyllUnitTest
     FileUtils.mv "Gemfile.old", "Gemfile"
   end
 
+  def with_bundle_gemfile
+    FileUtils.mv "Gemfile", "AlternateGemfile"
+    yield
+  ensure
+    FileUtils.mv "AlternateGemfile", "Gemfile"
+  end
+
   context "JEKYLL_NO_BUNDLER_REQUIRE set to `nil`" do
     should "require from bundler" do
       with_env("JEKYLL_NO_BUNDLER_REQUIRE", nil) do
         assert Jekyll::PluginManager.require_from_bundler,
                "require_from_bundler should return true."
         assert ENV["JEKYLL_NO_BUNDLER_REQUIRE"], "Gemfile plugins were not required."
+      end
+    end
+  end
+
+  context "BUNDLE_GEMFILE set to `AlternateGemfile`" do
+    should "require from bundler" do
+      with_env("BUNDLE_GEMFILE", "AlternateGemfile") do
+        with_bundle_gemfile do
+          assert Jekyll::PluginManager.require_from_bundler,
+                 "require_from_bundler should return true"
+          assert ENV["JEKYLL_NO_BUNDLER_REQUIRE"], "Gemfile plugins were not required."
+        end
       end
     end
   end
@@ -84,7 +103,7 @@ class TestPluginManager < JekyllUnitTest
       plugin_manager = PluginManager.new(site)
 
       assert plugin_manager.plugin_allowed?("jemoji")
-      assert !plugin_manager.plugin_allowed?("not_allowed_plugin")
+      refute plugin_manager.plugin_allowed?("not_allowed_plugin")
     end
 
     should "not require plugin files" do

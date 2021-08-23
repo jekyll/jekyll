@@ -143,6 +143,40 @@ Feature: Site configuration
     But the "_site/about.html" file should exist
     And I should see "John Doe" in "_site/about.html"
 
+  Scenario: Process included files only once
+    Given I have a ".foobar" page that contains "dotfile with front matter"
+    And I have an ".htaccess" file that contains "SomeDirective"
+    And I have a "_redirects" file that contains "/foo/* /bar/* 301!"
+    And I have an "index.md" file with content:
+      """
+      ---
+      ---
+
+        Dotpages: {{ site.pages | where: 'path', '.foobar' | size }}
+      Dotstatics: {{ site.static_files | where: 'path', '/_redirects' | size }}
+      """
+    And I have a configuration file with "title" set to "Hello World"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    But the "_site/.foobar" file should not exist
+    And the "_site/_redirects" file should not exist
+    And I should see "Dotpages: 0" in "_site/index.html"
+    And I should see "Dotstatics: 0" in "_site/index.html"
+
+    When I have a configuration file with:
+      | key     | value                 |
+      | title   | Hello World           |
+      | include | [.foobar, _redirects] |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And I should not see "Conflict:" in the build output
+    And the _site directory should exist
+    And the "_site/.foobar" file should exist
+    And the "_site/_redirects" file should exist
+    And I should see "Dotpages: 1" in "_site/index.html"
+    And I should see "Dotstatics: 1" in "_site/index.html"
+
   Scenario: Use Kramdown for markup
     Given I have an "index.markdown" page that contains "[Google](https://www.google.com)"
     And I have a configuration file with "markdown" set to "kramdown"

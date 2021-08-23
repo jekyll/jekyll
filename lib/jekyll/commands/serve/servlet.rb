@@ -101,7 +101,7 @@ module Jekyll
           @template ||= ERB.new(<<~TEMPLATE)
             <script>
               document.write(
-                '<script src="http://' +
+                '<script src="' + location.protocol + '//' +
                 (location.host || 'localhost').split(':')[0] +
                 ':<%=@options["livereload_port"] %>/livereload.js?snipver=1<%= livereload_args %>"' +
                 '></' +

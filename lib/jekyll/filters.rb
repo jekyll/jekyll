@@ -113,7 +113,7 @@ module Jekyll
     #
     # Returns the formatted String
     def normalize_whitespace(input)
-      input.to_s.gsub(%r!\s+!, " ").strip
+      input.to_s.gsub(%r!\s+!, " ").tap(&:strip!)
     end
 
     # Count the number of words in the input string.
@@ -193,12 +193,10 @@ module Jekyll
       @where_filter_cache[input_id] ||= {}
       @where_filter_cache[input_id][property] ||= {}
 
-      # stash or retrive results to return
-      @where_filter_cache[input_id][property][value] ||= begin
-        input.select do |object|
-          compare_property_vs_target(item_property(object, property), value)
-        end.to_a
-      end
+      # stash or retrieve results to return
+      @where_filter_cache[input_id][property][value] ||= input.select do |object|
+        compare_property_vs_target(item_property(object, property), value)
+      end.to_a
     end
 
     # Filters an array of objects against an expression
@@ -246,14 +244,13 @@ module Jekyll
       @find_filter_cache[input_id] ||= {}
       @find_filter_cache[input_id][property] ||= {}
 
-      # stash or retrive results to return
+      # stash or retrieve results to return
       # Since `enum.find` can return nil or false, we use a placeholder string "<__NO MATCH__>"
       #   to validate caching.
-      result = @find_filter_cache[input_id][property][value] ||= begin
-        input.find do |object|
-          compare_property_vs_target(item_property(object, property), value)
-        end || "<__NO MATCH__>"
-      end
+      result = @find_filter_cache[input_id][property][value] ||= input.find do |object|
+        compare_property_vs_target(item_property(object, property), value)
+      end || "<__NO MATCH__>"
+
       return nil if result == "<__NO MATCH__>"
 
       result
@@ -422,7 +419,7 @@ module Jekyll
     end
 
     def item_property(item, property)
-      @item_property_cache ||= {}
+      @item_property_cache ||= @context.registers[:site].filter_cache[:item_property] ||= {}
       @item_property_cache[property] ||= {}
       @item_property_cache[property][item] ||= begin
         property = property.to_s
@@ -462,8 +459,7 @@ module Jekyll
     def as_liquid(item)
       case item
       when Hash
-        pairs = item.map { |k, v| as_liquid([k, v]) }
-        Hash[pairs]
+        item.each_with_object({}) { |(k, v), result| result[as_liquid(k)] = as_liquid(v) }
       when Array
         item.map { |i| as_liquid(i) }
       else

@@ -257,14 +257,16 @@ module Jekyll
     #
     # Returns the full path to the output file of this document.
     def destination(base_directory)
-      dest = site.in_dest_dir(base_directory)
-      path = site.in_dest_dir(dest, URL.unescape_path(url))
-      if url.end_with? "/"
-        path = File.join(path, "index.html")
-      else
-        path << output_ext unless path.end_with? output_ext
+      @destination ||= {}
+      @destination[base_directory] ||= begin
+        path = site.in_dest_dir(base_directory, URL.unescape_path(url))
+        if url.end_with? "/"
+          path = File.join(path, "index.html")
+        else
+          path << output_ext unless path.end_with? output_ext
+        end
+        path
       end
-      path
     end
 
     # Write the generated Document file to the destination directory.
@@ -351,11 +353,14 @@ module Jekyll
     # True if the document has a collection and if that collection's #write?
     # method returns true, and if the site's Publisher will publish the document.
     # False otherwise.
+    #
+    # rubocop:disable Naming/MemoizedInstanceVariableName
     def write?
       return @write_p if defined?(@write_p)
 
       @write_p = collection&.write? && site.publisher.publish?(self)
     end
+    # rubocop:enable Naming/MemoizedInstanceVariableName
 
     # The Document excerpt_separator, from the YAML Front-Matter or site
     # default excerpt_separator value
@@ -454,7 +459,10 @@ module Jekyll
     def merge_categories!(other)
       if other.key?("categories") && !other["categories"].nil?
         other["categories"] = other["categories"].split if other["categories"].is_a?(String)
-        other["categories"] = (data["categories"] || []) | other["categories"]
+
+        if data["categories"].is_a?(Array)
+          other["categories"] = data["categories"] | other["categories"]
+        end
       end
     end
 
@@ -475,7 +483,7 @@ module Jekyll
     def read_content(**opts)
       self.content = File.read(path, **Utils.merged_file_read_opts(site, opts))
       if content =~ YAML_FRONT_MATTER_REGEXP
-        self.content = $POSTMATCH
+        self.content = Regexp.last_match.post_match
         data_file = SafeYAML.load(Regexp.last_match(1))
         merge_data!(data_file, :source => "YAML front matter") if data_file
       end

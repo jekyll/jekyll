@@ -36,7 +36,7 @@ module Jekyll
     #
     # Returns Array of Converter instances.
     def converters
-      @converters ||= site.converters.select { |c| c.matches(document.extname) }.sort
+      @converters ||= site.converters.select { |c| c.matches(document.extname) }.tap(&:sort!)
     end
 
     # Determine the extname the outputted file should have
@@ -102,15 +102,13 @@ module Jekyll
     # Returns String the converted content.
     def convert(content)
       converters.reduce(content) do |output, converter|
-        begin
-          converter.convert output
-        rescue StandardError => e
-          Jekyll.logger.error "Conversion error:",
-                              "#{converter.class} encountered an error while "\
-                              "converting '#{document.relative_path}':"
-          Jekyll.logger.error("", e.to_s)
-          raise e
-        end
+        converter.convert output
+      rescue StandardError => e
+        Jekyll.logger.error "Conversion error:",
+                            "#{converter.class} encountered an error while "\
+                            "converting '#{document.relative_path}':"
+        Jekyll.logger.error("", e.to_s)
+        raise e
       end
     end
 
@@ -255,7 +253,7 @@ module Jekyll
     def output_exts
       @output_exts ||= converters.map do |c|
         c.output_ext(document.extname)
-      end.compact
+      end.tap(&:compact!)
     end
 
     def liquid_options

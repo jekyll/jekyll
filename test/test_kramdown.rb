@@ -72,7 +72,7 @@ class TestKramdown < JekyllUnitTest
       MARKDOWN
       div_highlight = ">div.highlight"
       selector = "div.highlighter-rouge#{div_highlight}>pre.highlight>code"
-      refute(result.css(selector).empty?, result.to_html)
+      refute_empty(result.css(selector), result.to_html)
     end
 
     context "when configured" do
@@ -151,7 +151,7 @@ class TestKramdown < JekyllUnitTest
         MARKDOWN
 
         selector = "div.highlighter-coderay>div.CodeRay>div.code>pre"
-        refute result.css(selector).empty?
+        refute_empty result.css(selector)
       end
 
       should "support legacy enable_coderay... for now" do
@@ -172,14 +172,14 @@ class TestKramdown < JekyllUnitTest
         MARKDOWN
 
         selector = "div.highlighter-coderay>div.CodeRay>div.code>pre"
-        refute result.css(selector).empty?, "pre tag should exist"
+        refute_empty result.css(selector), "pre tag should exist"
       end
     end
 
     should "move coderay to syntax_highlighter_opts" do
       override = {
-        "higlighter" => nil,
-        "kramdown"   => {
+        "highlighter" => nil,
+        "kramdown"    => {
           "syntax_highlighter" => "coderay",
           "coderay"            => {
             "hello" => "world",

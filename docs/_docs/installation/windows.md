@@ -29,7 +29,7 @@ We only cover RubyInstaller-2.4 and newer here. Older versions need to
 4. Check if Jekyll has been installed properly: `jekyll -v`
 
 {: .note .info}
-You may receive an error when checking if Jekyll has been installed properly. Reboot your system and run `jekyll -v` again.
+You may receive an error when checking if Jekyll has not been installed properly. Reboot your system and run `jekyll -v` again.
 If the error persists, please open a [RubyInstaller issue](https://github.com/oneclick/rubyinstaller2/issues/new).
 
 That's it, you're ready to use Jekyll!
@@ -42,7 +42,7 @@ If you are using Windows 10 version 1607 or later, another option to run Jekyll 
 {: .note .info}
 You must have [Windows Subsystem for Linux](https://msdn.microsoft.com/en-us/commandline/wsl/about) enabled.
 
-Make sure all your packages and repositories are up to date. Open a new Command Prompt or Powershell window and type `bash`.
+Make sure all your packages and repositories are up to date. Open a new Command Prompt or PowerShell window and type `bash`.
 
 Your terminal should now be a Bash instance. Next, update your repository lists and packages:
 
@@ -97,7 +97,7 @@ Bash on Ubuntu on Windows is still under development, so you may run into issues
 
 ## Encoding
 
-If you use UTF-8 encoding, make sure that no `BOM` header characters exist in your files. If they don't, Jekyll will break. This is especially relevant when you're running Jekyll on Windows.
+If you use UTF-8 encoding, Jekyll will break if a file starts with characters representing a [BOM](https://en.wikipedia.org/wiki/Byte_order_mark#UTF-8). Therefore, remove this sequence of bytes if it appears at the beginning of your file.
 
 Additionally, you might need to change the code page of the console window to UTF-8 in case you get a
 `Liquid Exception: Incompatible character encoding` error during the site generation process. Run the following:

@@ -29,7 +29,7 @@ module Jekyll
 
     # Private: The metadata file storing dependency tree and build history
     #
-    # Returns an Array with the metdata file as the only item
+    # Returns an Array with the metadata file as the only item
     def metadata_file
       [site.regenerator.metadata_file]
     end
@@ -44,7 +44,7 @@ module Jekyll
       dirs = keep_dirs
 
       Utils.safe_glob(site.in_dest_dir, ["**", "*"], File::FNM_DOTMATCH).each do |file|
-        next if file =~ HIDDEN_FILE_REGEX || file =~ regex || dirs.include?(file)
+        next if HIDDEN_FILE_REGEX.match?(file) || regex.match?(file) || dirs.include?(file)
 
         files << file
       end

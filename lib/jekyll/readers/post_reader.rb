@@ -57,7 +57,7 @@ module Jekyll
         Document.new(path,
                      :site       => @site,
                      :collection => @site.posts)
-      end.reject(&:nil?)
+      end.tap(&:compact!)
     end
 
     private

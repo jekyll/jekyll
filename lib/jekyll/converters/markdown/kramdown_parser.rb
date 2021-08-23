@@ -125,14 +125,14 @@ module Jekyll
             Jekyll::External.require_with_graceful_fail("kramdown-syntax-coderay")
           end
 
-          # `mathjax` emgine is bundled within kramdown-2.x and will be handled by
+          # `mathjax` engine is bundled within kramdown-2.x and will be handled by
           # kramdown itself.
           if (math_engine = @config["math_engine"]) && math_engine != "mathjax"
             Jekyll::External.require_with_graceful_fail("kramdown-math-#{math_engine}")
           end
         end
 
-        # config[kramdown][syntax_higlighter] >
+        # config[kramdown][syntax_highlighter] >
         #   config[kramdown][enable_coderay] >
         #   config[highlighter]
         # Where `enable_coderay` is now deprecated because Kramdown
@@ -146,23 +146,21 @@ module Jekyll
             ]
           end
 
-          @highlighter = begin
-            if @config.key?("enable_coderay") && @config["enable_coderay"]
-              Jekyll::Deprecator.deprecation_message(
-                "You are using 'enable_coderay', " \
-                "use syntax_highlighter: coderay in your configuration file."
-              )
+          @highlighter = if @config.key?("enable_coderay") && @config["enable_coderay"]
+                           Jekyll::Deprecator.deprecation_message(
+                             "You are using 'enable_coderay', " \
+                             "use syntax_highlighter: coderay in your configuration file."
+                           )
 
-              "coderay"
-            else
-              @main_fallback_highlighter
-            end
-          end
+                           "coderay"
+                         else
+                           @main_fallback_highlighter
+                         end
         end
 
         def strip_coderay_prefix(hash)
           hash.each_with_object({}) do |(key, val), hsh|
-            cleaned_key = key.to_s.gsub(%r!\Acoderay_!, "")
+            cleaned_key = key.to_s.delete_prefix("coderay_")
 
             if key != cleaned_key
               Jekyll::Deprecator.deprecation_message(

@@ -2,15 +2,15 @@
 
 module Jekyll
   class Site
-    attr_reader   :source, :dest, :cache_dir, :config
-    attr_accessor :layouts, :pages, :static_files, :drafts, :inclusions,
-                  :exclude, :include, :lsi, :highlighter, :permalink_style,
-                  :time, :future, :unpublished, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
-                  :gems, :plugin_manager, :theme
+    attr_accessor :baseurl, :converters, :data, :drafts, :exclude,
+                  :file_read_opts, :future, :gems, :generators, :highlighter,
+                  :include, :inclusions, :keep_files, :layouts, :limit_posts,
+                  :lsi, :pages, :permalink_style, :plugin_manager, :plugins,
+                  :reader, :safe, :show_drafts, :static_files, :theme, :time,
+                  :unpublished
 
-    attr_accessor :converters, :generators, :reader
-    attr_reader   :regenerator, :liquid_renderer, :includes_load_paths, :filter_cache, :profiler
+    attr_reader :cache_dir, :config, :dest, :filter_cache, :includes_load_paths,
+                :liquid_renderer, :profiler, :regenerator, :source
 
     # Public: Initialize a new Site.
     #
@@ -117,6 +117,7 @@ module Jekyll
 
       Jekyll::Cache.clear_if_config_changed config
       Jekyll::Hooks.trigger :site, :after_reset, self
+      nil
     end
     # rubocop:enable Metrics/MethodLength
     # rubocop:enable Metrics/AbcSize
@@ -180,6 +181,7 @@ module Jekyll
       reader.read
       limit_posts!
       Jekyll::Hooks.trigger :site, :post_read, self
+      nil
     end
 
     # Run each of the Generators.
@@ -192,6 +194,7 @@ module Jekyll
         Jekyll.logger.debug "Generating:",
                             "#{generator.class} finished in #{Time.now - start} seconds."
       end
+      nil
     end
 
     # Render the site to the destination.
@@ -208,6 +211,7 @@ module Jekyll
       render_pages(payload)
 
       Jekyll::Hooks.trigger :site, :post_render, self, payload
+      nil
     end
 
     # Remove orphaned files and empty directories in destination.
@@ -215,6 +219,7 @@ module Jekyll
     # Returns nothing.
     def cleanup
       site_cleaner.cleanup!
+      nil
     end
 
     # Write static files, pages, and posts.
@@ -227,6 +232,7 @@ module Jekyll
       end
       regenerator.write_metadata
       Jekyll::Hooks.trigger :site, :post_write, self
+      nil
     end
 
     def posts
@@ -298,10 +304,10 @@ module Jekyll
     # klass - The Class of the Converter to fetch.
     def find_converter_instance(klass)
       @find_converter_instance ||= {}
-      @find_converter_instance[klass] ||= begin
-        converters.find { |converter| converter.instance_of?(klass) } || \
-          raise("No Converters found for #{klass}")
-      end
+      @find_converter_instance[klass] ||= converters.find do |converter|
+        converter.instance_of?(klass)
+      end || \
+        raise("No Converters found for #{klass}")
     end
 
     # klass - class or module containing the subclasses.
@@ -310,8 +316,9 @@ module Jekyll
     # passed in as argument.
 
     def instantiate_subclasses(klass)
-      klass.descendants.select { |c| !safe || c.safe }.sort.map do |c|
-        c.new(config)
+      klass.descendants.select { |c| !safe || c.safe }.tap do |result|
+        result.sort!
+        result.map! { |c| c.new(config) }
       end
     end
 
@@ -433,6 +440,13 @@ module Jekyll
     def collections_path
       dir_str = config["collections_dir"]
       @collections_path ||= dir_str.empty? ? source : in_source_dir(dir_str)
+    end
+
+    # Public
+    #
+    # Returns the object as a debug String.
+    def inspect
+      "#<#{self.class} @source=#{@source}>"
     end
 
     private

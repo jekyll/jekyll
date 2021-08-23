@@ -13,41 +13,50 @@ on:
 jobs:
   ci:
     if: "!contains(github.event.commits[0].message, '[ci skip]')"
-    name: 'SUITE: ${{ matrix.test_suite }} / OS: ${{ matrix.os }}'
-    runs-on: ${{ matrix.os }}
+    name: 'Ruby ${{ matrix.ruby_version }}'
+    runs-on: 'ubuntu-latest'
+
     strategy:
       fail-fast: false
       matrix:
-        test_suite:
-        - test
-        - default-site
-        os:
-        - ubuntu-latest
+        ruby_version:
+        - 2.5
+        - 2.7
+        - 3.0
+        - jruby:9.2.14.0
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 5
-    - name: Ruby
-      uses: actions/setup-ruby@v1
-      with:
-        ruby-version: 2.6.x
-    - name: Cache dependencies
-      uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
-    - name: 'Update Rubygems'
-      run: 'gem update --system --no-document'
-    - name: 'Update Bundler'
-      run: 'gem update bundler --no-document'
-    - name: Set up bundle
-      run: | 
-        bundle config path vendor/bundle
-        bundle install --jobs 4 --retry 3
-    - name: Run Test Suite
-      run: bash script/cibuild
-      env:
-        CI: true
-        TEST_SUITE: ${{ matrix.test_suite }}
+      - uses: actions/checkout@v2
+      - name: Download released earth
+        run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.5.7/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
+      - name: Execute tests
+        run: earthly --build-arg RUBY=${{ matrix.ruby_version }} +test
+  profile_docs:
+    if: "!contains(github.event.commits[0].message, '[ci skip]')"
+    name: 'Profile Docs Site (Ruby ${{ matrix.ruby_version }})'
+    runs-on: 'ubuntu-latest'
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby_version:
+        - 2.5 # Minimum required Ruby version in gemspec
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download released earth
+        run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.5.7/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
+      - name: Execute tests
+        run: earthly --build-arg RUBY=${{ matrix.ruby_version }} +profile-docs
+  style_check:
+    if: "!contains(github.event.commits[0].message, '[ci skip]')"
+    name: 'Style Check (Ruby ${{ matrix.ruby_version }})'
+    runs-on: 'ubuntu-latest'
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby_version:
+        - 2.5 
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download released earth
+        run: "sudo /bin/sh -c 'wget https://github.com/earthly/earthly/releases/download/v0.5.7/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly'"
+      - name: Execute tests
+        run: earthly --build-arg RUBY=${{ matrix.ruby_version }} +style-check

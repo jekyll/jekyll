@@ -28,6 +28,21 @@ class TestPageWithoutAFile < JekyllUnitTest
                        ))
     end
 
+    should "have non-frozen path and relative_path attributes" do
+      {
+        ["foo", "bar.md"]     => "foo/bar.md",
+        [nil, nil]            => "",
+        ["", ""]              => "",
+        ["/lorem/", "/ipsum"] => "lorem/ipsum",
+        %w(lorem ipsum)       => "lorem/ipsum",
+      }.each do |(dir, name), result|
+        page = PageWithoutAFile.new(@site, @site.source, dir, name)
+        assert_equal result, page.path
+        assert_equal result, page.relative_path
+        refute page.relative_path.frozen?
+      end
+    end
+
     context "with default site configuration" do
       setup do
         @page = setup_page("properties.html")
@@ -146,7 +161,7 @@ class TestPageWithoutAFile < JekyllUnitTest
 
         refute_exist dest_dir("physical")
         refute_exist dest_dir("virtual-about")
-        refute File.exist?(dest_dir("virtual-about", "index.html"))
+        refute_path_exists(dest_dir("virtual-about", "index.html"))
       end
 
       should "be processed and written to destination when passed as "\
@@ -159,7 +174,7 @@ class TestPageWithoutAFile < JekyllUnitTest
 
         refute_exist dest_dir("physical")
         assert_exist dest_dir("virtual-about")
-        assert File.exist?(dest_dir("virtual-about", "index.html"))
+        assert_path_exists(dest_dir("virtual-about", "index.html"))
         assert_equal "Test Site", File.read(dest_dir("virtual-about", "index.html"))
       end
     end
