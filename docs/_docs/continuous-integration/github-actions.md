@@ -128,8 +128,8 @@ The above workflow can be explained as the following:
 - The **checkout** action takes care of cloning your repository.
 - We specify our selected **action** and **version number** using `helaili/jekyll-action@2.0.5`.
   This handles the build and deploy.
-- We set a reference to a secret **environment variable** for the action to use. The `GITHUB_TOKEN`
-  is a _Personal Access Token_ and is detailed in the next section.
+- We set a reference to a token for the action to use. The `GITHUB_TOKEN`
+  is automatically provided by github actions.
 
 Instead of using the **on.push** condition, you could trigger your build on a **schedule** by
 using the [on.schedule] parameter. For example, here we build daily at midnight by specifying
@@ -145,22 +145,6 @@ Note that this string must be quoted to prevent the asterisks from being evaluat
 
 [on.schedule]: https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#onschedule
 [crontab guru]: https://crontab.guru/
-
-### Providing permissions
-
-The action needs permissions to push to your `gh-pages` branch. So you need to create a GitHub
-**authentication token** on your GitHub profile, then set it as an environment variable in your
-build using _Secrets_:
-
-1. On your GitHub profile, under **Developer Settings**, go to the [Personal Access Tokens][tokens]
-   section.
-2. **Create** a token. Give it a name like "GitHub Actions" and ensure it has permissions to
-   `public_repos` (or the entire `repo` scope for private repository) --- necessary for the action
-   to commit to the `gh-pages` branch.
-3. **Copy** the token value.
-4. Go to your repository's **Settings** and then the **Secrets** tab.
-5. **Create** a token named `GITHUB_TOKEN` (_important_). Give it a value using the value copied
-   above.
 
 ### Build and deploy
 
