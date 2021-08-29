@@ -167,10 +167,12 @@ CONTENT
 
   context "with the pygments highlighter" do
     setup do
-      if jruby?
-        then skip(
-          "JRuby does not support Pygments."
-        )
+      skip("JRuby does not support Pygments.") if jruby?
+
+      begin
+        exec("python", "--help")
+      rescue StandardError => e
+        skip "Skipping as attempting to load python errored with #{e.message}"
       end
     end
 
@@ -476,7 +478,7 @@ EOS
         expected = <<-EOS
 <p>This is not yet highlighted</p>\n
 <figure class="highlight"><pre><code class="language-php" data-lang="php"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="nx">test</span>\n</pre></td></tr></tbody></table></code></pre></figure>\n
+</pre></td><td class="code"><pre><span class="n">test</span>\n</pre></td></tr></tbody></table></code></pre></figure>\n
 <p>This should not be highlighted, right?</p>
 EOS
         assert_match(expected, @result)

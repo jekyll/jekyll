@@ -47,9 +47,14 @@ class TestRedcarpet < JekyllUnitTest
 
     context "with pygments enabled" do
       setup do
-        @markdown = Converters::Markdown.new @config.merge(
-          { "highlighter" => "pygments" }
-        )
+        begin
+          exec("python", "--help")
+          @markdown = Converters::Markdown.new @config.merge(
+            { "highlighter" => "pygments" }
+          )
+        rescue StandardError => e
+          skip "Skipping as attempting to load python errored with #{e.message}"
+        end
       end
 
       should "render fenced code blocks with syntax highlighting" do
