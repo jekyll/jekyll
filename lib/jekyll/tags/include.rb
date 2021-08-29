@@ -234,12 +234,18 @@ module Jekyll
       end
 
       def add_include_to_dependency(inclusion, context)
-        return unless context.registers[:page]&.key?("path")
+        page = context.registers[:page]
+        return unless page&.key?("path")
 
-        @site.regenerator.add_dependency(
-          @site.in_source_dir(context.registers[:page]["path"]),
-          inclusion.path
-        )
+        page_path = context.registers[:page]["path"]
+        absolute_path = \
+          if page["collection"]
+            @site.in_source_dir(@site.config["collections_dir"], page_path)
+          else
+            @site.in_source_dir(page_path)
+          end
+
+        @site.regenerator.add_dependency(absolute_path, inclusion.path)
       end
     end
 
