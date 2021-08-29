@@ -10,6 +10,7 @@ Jekyll/NoPutsAllowed:
     - rake/*.rake
 
 AllCops:
+  SuggestExtensions: false
   TargetRubyVersion: 2.4
   Include:
     - lib/**/*.rb
@@ -303,6 +304,8 @@ Style/RedundantArgument:
   Enabled: true
 Style/RedundantAssignment:
   Enabled: true
+Style/RedundantBegin:
+  Enabled: false
 Style/RedundantFetchBlock:
   Enabled: false
 Style/RedundantFileExtensionInRequire:

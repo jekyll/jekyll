@@ -3,19 +3,18 @@ name: Continuous Integration
 on:
   push:
     branches:
-    - master
-    - /.*-stable/
+    - 4.2-stable
   pull_request:
     branches:
-    - master
-    - /.*-stable/
+    - 4.2-stable
 
 jobs:
   ci:
     if: "!contains(github.event.commits[0].message, '[ci skip]')"
     name: 'Ruby ${{ matrix.ruby_version }}'
     runs-on: 'ubuntu-latest'
-
+    env:
+      CI: true
     strategy:
       fail-fast: false
       matrix:
@@ -23,7 +22,6 @@ jobs:
         - 2.5
         - 2.7
         - jruby-9.2.11.1
-
     steps:
     - uses: actions/checkout@v2
       with:
@@ -35,12 +33,8 @@ jobs:
         bundler-cache: true
     - name: Run Unit Tests
       run: bash script/test
-      env:
-        CI: true
     - name: Run Cucumber Features
       run: bash script/cucumber
-      env:
-        CI: true
     - name: Sanity Check
       run: bash script/default-site
 
@@ -69,34 +63,22 @@ jobs:
     if: "!contains(github.event.commits[0].message, '[ci skip]')"
     name: 'Profile Docs Site (Ruby ${{ matrix.ruby_version }})'
     runs-on: 'ubuntu-latest'
+    env:
+      CI: true
     strategy:
       fail-fast: false
       matrix:
         ruby_version:
-        - 2.4 # Minimum required Ruby version in gemspec
+        - 2.5
     steps:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 5
     - name: "Set up Ruby ${{ matrix.ruby_version }}"
-      uses: actions/setup-ruby@v1
+      uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby_version }}
-    - name: Cache dependencies
-      uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
-    - name: 'Update Rubygems and Bundler'
-      run: |
-        gem update --system --no-document
-        gem update bundler --no-document
-    - name: Set up bundle
-      run: |
-        bundle config path vendor/bundle
-        bundle install --jobs 4 --retry 3
+        bundler-cache: true
     - name: Build Docs site with --profile
       run: bash script/profile-docs
     - name: Profile memory usage of building Docs site
