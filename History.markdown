@@ -30,6 +30,7 @@
   * IRC networks - Libera, Freenode (#8706)
   * Improve GitHub Flavored Markdown Docs (#8684)
   * Fixing URL in MacOS install for rbenv-doctor (#8693)
+  * Fix adjective in `troubleshooting.md` document (#8777)
 
 ### Bug Fixes
 
