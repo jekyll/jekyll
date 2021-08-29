@@ -211,7 +211,6 @@ class FakeLogger
 end
 
 module TestWEBrick
-
   module_function
 
   def mount_server(&block)

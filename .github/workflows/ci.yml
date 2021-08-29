@@ -1,0 +1,100 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - 3.9-stable
+  pull_request:
+    branches:
+      - 3.9-stable
+
+jobs:
+  cruby:
+    if: "!contains(github.event.commits[0].message, '[ci skip]')"
+    name: 'Ruby ${{ matrix.ruby_version }}'
+    runs-on: 'ubuntu-latest'
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby_version:
+        - 2.5
+        - 2.7
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 5
+      - name: "Set up Ruby ${{ matrix.ruby_version }}"
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby_version }}
+          bundler-cache: true
+      - name: Execute Unit Tests
+        run:  bash script/test
+      - name: Execute Cucumber Scenarios
+        run:  bash script/cucumber
+      - name: Create and Build new site
+        run:  bash script/default-site
+
+  jruby:
+    if: "!contains(github.event.commits[0].message, '[ci skip]')"
+    name: JRuby
+    runs-on: 'ubuntu-latest'
+
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby_version:
+        - jruby
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 5
+      - name: "Set up Ruby ${{ matrix.ruby_version }}"
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby_version }}
+          bundler-cache: true
+      - name: Execute Unit Tests
+        run:  bash script/test
+
+  profile_docs:
+    if: "!contains(github.event.commits[0].message, '[ci skip]')"
+    name: 'Profile Docs Site (Ruby ${{ matrix.ruby_version }})'
+    runs-on: 'ubuntu-latest'
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby_version:
+        - 2.5
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 5
+      - name: "Set up Ruby ${{ matrix.ruby_version }}"
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby_version }}
+          bundler-cache: true
+      - name: Profile building docs site
+        run:  bash script/profile-docs
+
+  style_check:
+    if: "!contains(github.event.commits[0].message, '[ci skip]')"
+    name: 'Style Check (Ruby ${{ matrix.ruby_version }})'
+    runs-on: 'ubuntu-latest'
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby_version:
+        - 2.5 
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 5
+      - name: "Set up Ruby ${{ matrix.ruby_version }}"
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby_version }}
+          bundler-cache: true
+      - name: Run RuboCop
+        run:  bash script/fmt
