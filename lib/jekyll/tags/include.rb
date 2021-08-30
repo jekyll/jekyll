@@ -147,12 +147,17 @@ MSG
       end
 
       def add_include_to_dependency(site, path, context)
-        if context.registers[:page] && context.registers[:page].key?("path")
-          site.regenerator.add_dependency(
-            site.in_source_dir(context.registers[:page]["path"]),
-            path
-          )
-        end
+        page = context.registers[:page]
+        return unless page
+        return unless page.key?("path")
+
+        absolute_path = \
+          if page["collection"]
+            site.in_source_dir(site.config["collections_dir"], page["path"])
+          else
+            site.in_source_dir(page["path"])
+          end
+        site.regenerator.add_dependency(absolute_path, path)
       end
 
       def load_cached_partial(path, context)
