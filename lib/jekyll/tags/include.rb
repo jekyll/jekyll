@@ -237,12 +237,11 @@ module Jekyll
         page = context.registers[:page]
         return unless page&.key?("path")
 
-        page_path = context.registers[:page]["path"]
         absolute_path = \
           if page["collection"]
-            @site.in_source_dir(@site.config["collections_dir"], page_path)
+            @site.in_source_dir(@site.config["collections_dir"], page["path"])
           else
-            @site.in_source_dir(page_path)
+            @site.in_source_dir(page["path"])
           end
 
         @site.regenerator.add_dependency(absolute_path, inclusion.path)
