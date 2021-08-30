@@ -1,9 +1,21 @@
-### HEAD
+## HEAD
+
+### Development Fixes
+
+  * Fix CI for commits to `3.9-stable` branch (#8788)
+
+## 3.9.1 / 2021-04-08
+
+### Bug Fixes
+
+  * Backport #8618 for v3.9.x: Update include tag to be more permissive (#8629)
+
+## 3.9.0 / 2020-08-05
 
 ### Minor Enhancements
 
-* Allow use of kramdown v2 (#8322)
-* Add default language for kramdown syntax highlighting (#8325)
+  * Allow use of kramdown v2 (#8322)
+  * Add default language for kramdown syntax highlighting (#8325)
 
 ## 3.8.7 / 2020-05-08
 
