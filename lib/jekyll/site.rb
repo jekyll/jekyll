@@ -504,9 +504,12 @@ module Jekyll
 
     # Disable Marshaling cache to disk in Safe Mode
     def configure_cache
-      hide_cache_dir_from_git
       Jekyll::Cache.cache_dir = in_source_dir(config["cache_dir"], "Jekyll/Cache")
-      Jekyll::Cache.disable_disk_cache! if safe || config["disable_disk_cache"]
+      if safe || config["disable_disk_cache"]
+        Jekyll::Cache.disable_disk_cache!
+      else
+        hide_cache_dir_from_git
+      end
     end
 
     def configure_plugins
