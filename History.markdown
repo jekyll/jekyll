@@ -1,5 +1,9 @@
 ## HEAD
 
+### Bug Fixes
+
+  * Backport #8756 for v3.9.x: Respect collections_dir config within include tag (#8795)
+
 ### Development Fixes
 
   * Fix CI for commits to `3.9-stable` branch (#8788)
