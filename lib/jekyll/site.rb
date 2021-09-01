@@ -490,8 +490,21 @@ module Jekyll
       @site_cleaner ||= Cleaner.new(self)
     end
 
+    def hide_cache_dir_from_git
+      @cache_gitignore_path ||= in_source_dir(config["cache_dir"], ".gitignore")
+      return if File.exist?(@cache_gitignore_path)
+
+      cache_dir_path = in_source_dir(config["cache_dir"])
+      FileUtils.mkdir_p(cache_dir_path) unless File.directory?(cache_dir_path)
+
+      File.open(@cache_gitignore_path, "wb") do |file|
+        file.puts("# ignore everything in this directory\n*")
+      end
+    end
+
     # Disable Marshaling cache to disk in Safe Mode
     def configure_cache
+      hide_cache_dir_from_git
       Jekyll::Cache.cache_dir = in_source_dir(config["cache_dir"], "Jekyll/Cache")
       Jekyll::Cache.disable_disk_cache! if safe || config["disable_disk_cache"]
     end
