@@ -22,7 +22,7 @@ module Jekyll
       # Any missing method will be forwarded to the underlying data object stored in
       #   the instance variable `@content`.
       def method_missing(method, *args, &block)
-        @content.send(method, *args, &block) || super
+        @content.respond_to?(method) ? @content.send(method, *args, &block) : super
       end
 
       def respond_to_missing?(method, *)
@@ -44,7 +44,7 @@ module Jekyll
       private
 
       def incremental_build?
-        @incremental = @site.incremental? if @incremental.nil?
+        @incremental = @site.config["incremental"] if @incremental.nil?
         @incremental
       end
 
@@ -52,12 +52,11 @@ module Jekyll
         page = context.registers[:page]
         return unless page&.key?("path")
 
-        page_path = context.registers[:page]["path"]
         absolute_path = \
           if page["collection"]
-            @site.in_source_dir(@site.config["collections_dir"], page_path)
+            @site.in_source_dir(@site.config["collections_dir"], page["path"])
           else
-            @site.in_source_dir(page_path)
+            @site.in_source_dir(page["path"])
           end
 
         @site.regenerator.add_dependency(absolute_path, @path)
