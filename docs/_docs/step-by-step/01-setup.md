@@ -79,6 +79,10 @@ called `_site`.
 {: .note .info}
 When you're developing a site, use `jekyll serve`. To force the browser to refresh with every change, use `jekyll serve --livereload`. 
 
+{: .note .warning}
+The version of the site that `jekyll serve` builds in `_site` is not suited for deployment. To learn about how to build your site when it's ready for deployment, read the [Deployment]({{ '/docs/step-by-step/10-deployment/' | relative_url }}) section of this tutorial.
+
+
 Run `jekyll serve` and go to
 <a href="http://localhost:4000" target="_blank" data-proofer-ignore>http://localhost:4000</a> in
 your browser. You should see "Hello World!".
