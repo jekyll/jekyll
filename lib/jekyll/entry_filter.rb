@@ -2,7 +2,7 @@
 
 module Jekyll
   class EntryFilter
-    attr_reader :site
+    attr_reader :site, :base_directory
 
     SPECIAL_LEADING_CHAR_REGEX = %r!\A#{Regexp.union([".", "_", "#", "~"])}!o.freeze
 
@@ -11,10 +11,6 @@ module Jekyll
       @base_directory = derive_base_directory(
         @site, base_directory.to_s.dup
       )
-    end
-
-    def base_directory
-      @base_directory.to_s
     end
 
     def derive_base_directory(site, base_dir)
