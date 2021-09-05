@@ -67,7 +67,7 @@ module Jekyll
     end
 
     def excluded?(entry)
-      glob_include?(site.exclude - site.include, relative_to_source(entry)).tap do |excluded|
+      glob_include?(excluded, relative_to_source(entry)).tap do |excluded|
         if excluded
           Jekyll.logger.debug(
             "EntryFilter:",
@@ -75,6 +75,10 @@ module Jekyll
           )
         end
       end
+    end
+
+    def excluded
+      @excluded ||= site.exclude - site.include
     end
 
     # --
