@@ -53,13 +53,11 @@ module Jekyll
     end
 
     def included?(entry)
-      glob_include?(site.include, entry) ||
-        glob_include?(site.include, File.basename(entry))
+      glob_include?(site.include, entry) || (entry.include?(File::Separator) && glob_include?(site.include, File.basename(entry)))
     end
 
     def special?(entry)
-      SPECIAL_LEADING_CHAR_REGEX.match?(entry) ||
-        SPECIAL_LEADING_CHAR_REGEX.match?(File.basename(entry))
+      SPECIAL_LEADING_CHAR_REGEX.match?(entry) || (entry.include?(File::Separator) && SPECIAL_LEADING_CHAR_REGEX.match?(File.basename(entry)))
     end
 
     def backup?(entry)
