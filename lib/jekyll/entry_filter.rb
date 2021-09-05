@@ -22,6 +22,7 @@ module Jekyll
       base_dir
     end
 
+    # NOTE: Shouldn't this be a private method?
     def relative_to_source(entry)
       File.join(
         base_directory, entry
