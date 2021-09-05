@@ -53,7 +53,7 @@ module Jekyll
     end
 
     def special?(entry)
-      SPECIAL_LEADING_CHAR_REGEX.match?(entry) || (entry.include?(File::Separator) && SPECIAL_LEADING_CHAR_REGEX.match?(File.basename(entry)))
+      SPECIAL_LEADING_CHAR_REGEX.match?(File.basename(entry))
     end
 
     def backup?(entry)
