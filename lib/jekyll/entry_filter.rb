@@ -71,10 +71,6 @@ module Jekyll
       end
     end
 
-    def excluded
-      @excluded ||= site.exclude - site.include
-    end
-
     # --
     # Check if a file is a symlink.
     # NOTE: This can be converted to allowing even in safe,
@@ -116,6 +112,12 @@ module Jekyll
           false
         end
       end
+    end
+
+    private
+
+    def excluded
+      @excluded ||= site.exclude - site.include
     end
   end
 end
