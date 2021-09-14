@@ -21,7 +21,7 @@ in-house plugins.
 
 Abreast with latest developments in the Web-verse, Frank was always quick to introduce technologies that vastly improved
 maintenance in the Jekyll organization. He was instrumental in setting up deploy previews for patches to Jekyll's
-documentaion site and later wiring GitHub Actions to handle continuous integrations for Jekyll and in-house projects.
+documentation site and later wiring GitHub Actions to handle continuous integrations for Jekyll and in-house projects.
 
 In spite of spiritually moving away from Jekyll during the later part of his career, choosing to concentrate efforts on
 furthering JAMstack projects, he greatly remained active on Jekyll's development channel on Slack relaying key feedback
