@@ -43,6 +43,10 @@ module Jekyll
       @assets_path ||= path_for "assets"
     end
 
+    def data_path
+      @data_path ||= path_for "_data"
+    end
+
     def runtime_dependencies
       gemspec.runtime_dependencies
     end
