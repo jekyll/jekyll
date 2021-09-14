@@ -5,7 +5,7 @@ author: ashmaroli
 categories: [team, community]
 ---
 
-Over the weekend, the Jekyll core team learned of the passing of one of their own: *Frank Taillandier*, popularly known
+Over the weekend, the Jekyll core team learned of the passing of one of our own: *Frank Taillandier*, popularly known
 by his GitHub username @DirtyF.
 
 Ruby not being his forte, he chose to avoid code-level changes and instead focus on what he did best &mdash; *engage with
