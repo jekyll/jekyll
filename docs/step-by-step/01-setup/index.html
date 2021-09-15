@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-09-14T12:35:32-07:00" />
+<meta property="article:published_time" content="2021-09-15T06:54:10-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Setup" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"headline":"Setup","dateModified":"2021-09-14T12:35:32-07:00","datePublished":"2021-09-14T12:35:32-07:00","description":"Welcome to Jekyll’s step-by-step tutorial. This tutorial takes you from having some front-end web development experience to building your first Jekyll site from scratch without relying on the default gem-based theme.","url":"https://jekyllrb.com/docs/step-by-step/01-setup/","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/step-by-step/01-setup/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"image":"https://jekyllrb.com/img/jekyll-og.png","@context":"https://schema.org"}</script>
+{"headline":"Setup","dateModified":"2021-09-15T06:54:10-07:00","datePublished":"2021-09-15T06:54:10-07:00","description":"Welcome to Jekyll’s step-by-step tutorial. This tutorial takes you from having some front-end web development experience to building your first Jekyll site from scratch without relying on the default gem-based theme.","url":"https://jekyllrb.com/docs/step-by-step/01-setup/","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/step-by-step/01-setup/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"image":"https://jekyllrb.com/img/jekyll-og.png","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -198,7 +198,14 @@ called <code class="language-plaintext highlighter-rouge">_site</code>.</li>
   <li><code class="language-plaintext highlighter-rouge">jekyll serve</code> - Does <code class="language-plaintext highlighter-rouge">jekyll build</code> and runs it on a local web server at <code class="language-plaintext highlighter-rouge">http://localhost:4000</code>, rebuilding the site any time you make a change.</li>
 </ul>
 
-<p class="note info">When you’re developing a site, use <code class="language-plaintext highlighter-rouge">jekyll serve</code>. To force the browser to refresh with every change, use <code class="language-plaintext highlighter-rouge">jekyll serve --livereload</code>.</p>
+<p class="note info">When you’re developing a site, use <code class="language-plaintext highlighter-rouge">jekyll serve</code>. To force the browser to refresh with every change, use <code class="language-plaintext highlighter-rouge">jekyll serve --livereload</code>.
+If there’s a conflict or you’d like Jekyll to serve your development site at a different URL, use the <code class="language-plaintext highlighter-rouge">--host</code> and <code class="language-plaintext highlighter-rouge">--port</code> arguments,
+as described in the <a href="/docs/configuration/options/#serve-command-options">serve command options</a>.</p>
+
+<p class="note warning">The version of the site that <code class="language-plaintext highlighter-rouge">jekyll serve</code> builds in <code class="language-plaintext highlighter-rouge">_site</code> is not suited for deployment. Links and asset URLs in sites created
+with <code class="language-plaintext highlighter-rouge">jekyll serve</code> will use <code class="language-plaintext highlighter-rouge">https://localhost:4000</code> or the value set with command-line configuration, instead of the values set
+in <a href="/docs/configuration/">your site’s configuration file</a>. To learn about how to build your site when it’s
+ready for deployment, read the <a href="/docs/step-by-step/10-deployment/">Deployment</a> section of this tutorial.</p>
 
 <p>Run <code class="language-plaintext highlighter-rouge">jekyll serve</code> and go to
 <a href="http://localhost:4000" target="_blank" data-proofer-ignore="">http://localhost:4000</a> in
