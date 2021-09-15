@@ -148,14 +148,14 @@ And then copy the contents of `_site` to your server.
 <div class="note warning">
   <h5>Destination folders are cleaned on site builds</h5>
   <p>
-    The contents of <code>_site</code> are automatically
-    cleaned, by default, when the site is built. Files or folders that are not
-    created by your site's build process will be removed.
+    The contents of <code>_site</code> are automatically cleaned, by default, when
+    the site is built. Files or folders that are not created by your site's build
+    process will be removed.
   </p>
   <p>
-    Some files could be retained by specifying them within the
-    <code>keep_files</code> configuration directive. Other files could be retained
-    by keeping them in your assets directory.
+    Some files could be retained by specifying them within the <code>keep_files</code>
+    configuration directive. Other files could be retained by keeping them in your
+    assets directory.
   </p>
 </div>
 
