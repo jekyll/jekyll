@@ -35,6 +35,7 @@
   * Update index.html: Grammar fix. (#8803)
   * Prefer Libera. Remove Freenode. (#8811)
   * Update feature_request.md (#8797)
+  * Remove AWS Amplify from the showcase (#8812)
 
 ### Bug Fixes
 
