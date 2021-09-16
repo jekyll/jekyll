@@ -2,6 +2,7 @@
 
 ### Bug Fixes
 
+  * Backport #8756 for v4.2.x: Respect collections_dir config within include tag (#8794)
   * Backport #8786 for v4.2.x: Fix regression in Convertible module from v4.2.0 (#8793)
 
 ## 4.2.0 / 2020-12-14
