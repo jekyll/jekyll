@@ -1,3 +1,9 @@
+## HEAD
+
+### Bug Fixes
+
+  * Backport #8786 for v4.2.x: Fix regression in Convertible module from v4.2.0 (#8793)
+
 ## 4.2.0 / 2020-12-14
 
 ### Minor Enhancements
