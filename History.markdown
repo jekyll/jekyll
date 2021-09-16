@@ -34,6 +34,7 @@
   * Goodbye Frank. We&#39;ll miss you. 💔 (#8807)
   * Update index.html: Grammar fix. (#8803)
   * Prefer Libera. Remove Freenode. (#8811)
+  * Update feature_request.md (#8797)
 
 ### Bug Fixes
 
