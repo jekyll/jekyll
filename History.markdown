@@ -69,6 +69,7 @@
   * Update include tag to be more permissive (#8618)
   * Optimize `Jekyll::Utils.parse_date` (#8425)
   * Update rubocop from 1.12 to 1.18 and min ruby from 2.4 to 2.5 (#8741)
+  * Always hide cache-dir contents from Git (#8798)
 
 ### Site Enhancements
 
