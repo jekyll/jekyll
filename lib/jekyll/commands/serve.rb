@@ -249,9 +249,6 @@ module Jekyll
 
         def default_url(opts)
           config = configuration_from_options(opts)
-          auth = config.values_at("host", "port").join(":")
-          return config["url"] if auth == "127.0.0.1:4000"
-
           format_url(
             config["ssl_cert"] && config["ssl_key"],
             config["host"] == "127.0.0.1" ? "localhost" : config["host"],
