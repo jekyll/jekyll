@@ -15,13 +15,13 @@ In `v4.2.0`, we decided to stop overriding {% raw %}`{{ site.url }}`{% endraw %}
 the *localhost* address when running the command `jekyll serve` with the default
 *development* mode. While the intent behind the change was to avoid forcing users to
 generate a *production build* separately by invoking `jekyll build`, it however had an
-unforeseen undesired consequence &mdash; absolute URLs for assets now pointed to
+unforeseen consequence &mdash; absolute URLs for assets now pointed to
 resources that were at times not yet been deployed to the configured `site.url`. That
 broke the users' local development workflow.
 
 `v4.2.0` also added a series of optimizations surrounding the generation of Liquid
 representation for a site's standalone pages and layouts. However, that prevented
-{% raw %}`{{ page.content }}`{% endraw %} and other mutable attributes to reflect the
+{% raw %}`{{ page.content }}`{% endraw %} and other mutable attributes from reflecting the
 latest state of the requested attribute, thereby breaking the render of all resources
 that were dependent on such mutable attributes.
 
