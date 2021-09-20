@@ -16,19 +16,15 @@ module Jekyll
       return unless File.directory?(dir) && !@entry_filter.symlink?(dir)
 
       entries = Dir.chdir(dir) do
-        Dir["*.{yaml,yml,json,csv,tsv}"] + Dir["*"].select { |fn| File.directory?(fn) }
+        Dir["*.{yaml,yml,json,csv,tsv}"]
       end
 
       entries.each do |entry|
         path = @site.in_theme_dir(dir, entry)
         next if @entry_filter.symlink?(path)
 
-        if File.directory?(path)
-          read_data_to(path, data[sanitize_filename(entry)] = {})
-        else
-          key = sanitize_filename(File.basename(entry, ".*"))
-          data[key] = read_data_file(path)
-        end
+        key = sanitize_filename(File.basename(entry, ".*"))
+        data[key] = read_data_file(path)
       end
     end
   end
