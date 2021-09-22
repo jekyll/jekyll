@@ -1,6 +1,6 @@
 ---
 title: "Jekyll 4.2.1 Released"
-date: 2021-09-20 12:45:46 +0530
+date: 2021-09-22 18:45:46 +0530
 author: ashmaroli
 version: 4.2.1
 category: release
