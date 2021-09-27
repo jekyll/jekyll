@@ -1,6 +1,6 @@
 ---
 title: "Jekyll 4.2.1 Released"
-date: 2021-09-22 18:45:46 +0530
+date: 2021-09-27 14:45:46 +0530
 author: ashmaroli
 version: 4.2.1
 category: release
@@ -21,8 +21,8 @@ broke the users' local development workflow.
 
 `v4.2.0` also added a series of optimizations surrounding the generation of Liquid
 representation for a site's standalone pages and layouts. However, that prevented
-{% raw %}`{{ page.content }}`{% endraw %} and other mutable attributes from reflecting the
-latest state of the requested attribute, thereby breaking the render of all resources
+{% raw %}`{{ page.content }}`{% endraw %} and other mutable attributes from reflecting
+the latest state of the requested attribute, thereby breaking the render of all resources
 that were dependent on such mutable attributes.
 
 The last fix included in this release addresses the issue where incremental regeneration
