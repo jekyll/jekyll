@@ -7,6 +7,10 @@ title: "Releasing a new version"
 
 The most important thing to understand before making a release is that there's no need to feel nervous. Most things are revertable, and even if you do publish an incomplete gem version, we can always skip that one. Don't hesitate to contact the other maintainers if you feel unsure or don't know what to do next.
 
+## Branches: `master` vs `*-stable`
+
+We maintain several branches for major/minor releases that have since passed. For example, we maintain the `3.9-stable` branch for the `3.9.x` series since this is still used by GitHub Pages. This allows us to more easily make patches for bugs and security vulnerabilities. Maintaining a `*-stable` version is very similar to `master`, except that the jekyllrb.com blog post must (also) land on the `master` branch in order to be published.
+
 ### Bump the version
 
 The only important place you need to manually bump the version is in `lib/jekyll/version.rb`. Adjust that, and everything else should work fine.
@@ -32,7 +36,7 @@ This updates the website's changelog, and pushes the versions in various other p
 
 It's recommended that you go over the `History.markdown` file manually one more time, in case there are any spelling errors or such. Feel free to fix those manually, and after you're done generating the website changelog, commit your changes.
 
-## Write a release post
+## Write a release post (`master` branch)
 
 In case this isn't done already, you can generate a new release post using the included `rake` command:
 
@@ -48,12 +52,23 @@ git shortlog -sn master...v3.7.2
 
 where, again `v3.7.2` is the last release. Be sure to open a pull request for your release post.
 
+If you are releasing from a `*-stable` branch, you can generate the post like normal on this branch and create a pull request. The log of names will use the stable branch name instead of `master`:
+
+```sh
+git shortlog -sn 3.9-stable...v3.9.1
+```
+
+where `v3.9.1` is the previous release on this branch.
+
+**After your blog post has been approved and merged into the `*-stable` branch, you must re-create a pull request on the `master` branch in order to publish the post to jekyllrb.com.**
+
 ### Push the version
 
 Before you do this step, make sure the following things are done:
 
+- You are on the correct branch with your changes (`master` or a `*-stable` branch)
 - You have permission to push a new gem version to RubyGems
-- You're logged into RubyGems on your command line
+- You're [logged into RubyGems on your command line](https://guides.rubygems.org/command-reference/#gem-signin)
 - A release post has been prepared, and is ideally already live
 - All of the prior steps are done, committed, and pushed to `master`
 
