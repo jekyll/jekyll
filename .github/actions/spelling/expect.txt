@@ -562,6 +562,7 @@ shopify
 shortlog
 shoulda
 sieversii
+signin
 sigpipe
 simplecov
 Singhaniya
