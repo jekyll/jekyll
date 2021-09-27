@@ -19,6 +19,7 @@ We have guides for the following providers:
 * [Travis CI]({{ '/docs/continuous-integration/travis-ci/' | relative_url }})
 * [CircleCI]({{ '/docs/continuous-integration/circleci/' | relative_url }})
 * [Buddy]({{ '/docs/continuous-integration/buddyworks/' | relative_url }})
+* [Razorops CI/CD]({{ '/docs/continuous-integration/razorops/' | relative_url }})
 
 ## Git post-receive hook
 

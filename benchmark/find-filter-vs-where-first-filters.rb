@@ -34,7 +34,7 @@ puts "  #{'where + first'.cyan} results in #{TEMPLATE_1.render(SITE.site_payload
 puts "  #{'find'.cyan} results in #{TEMPLATE_2.render(SITE.site_payload).inspect.green}"
 
 if TEMPLATE_1.render(SITE.site_payload) == TEMPLATE_2.render(SITE.site_payload)
-  puts 'Success! Procceding to run benchmarks.'.green
+  puts 'Success! Proceeding to run benchmarks.'.green
   puts ''
 else
   puts 'Something went wrong. Aborting.'.magenta

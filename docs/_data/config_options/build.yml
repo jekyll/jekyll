@@ -77,14 +77,25 @@
   flag: -q, --quiet
 
 
+- name: Log Level
+  description: Specify a log level among debug, info, warn, or error.
+  flag: JEKYLL_LOG_LEVEL=info
+
+
 - name: Incremental build
   description: >-
-    Enable the experimental incremental build feature. Incremental build only
-    re-builds posts and pages that have changed, resulting in significant performance
-    improvements for large sites, but may also break site generation in certain
-    cases.
+    Enable the experimental
+    <a href="/docs/configuration/incremental-regeneration/">incremental
+    build</a> feature. Incremental build only re-builds posts and pages that
+    have changed, resulting in significant performance improvements for large
+    sites, but may also break site generation in certain cases.
   option: "incremental: BOOL"
   flag: -I, --incremental
+
+
+- name: Disable Bundle Require
+  description: Disables the need to require gems in `:jekyll_plugins` Gemfile
+  flag: JEKYLL_NO_BUNDLER_REQUIRE=true
 
 
 - name: Liquid profiler

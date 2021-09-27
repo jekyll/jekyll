@@ -25,6 +25,10 @@ A basic Jekyll site usually looks something like this:
 │   ├── _base.scss
 │   └── _layout.scss
 ├── _site
+├── .jekyll-cache
+│   └── Jekyll
+│       └── Cache
+│           └── [...]
 ├── .jekyll-metadata
 └── index.html # can also be an 'index.md' with valid front matter
 ```
@@ -162,15 +166,33 @@ An overview of what each of these does:
     </tr>
     <tr>
       <td>
+        <p><code>.jekyll-cache</code></p>
+      </td>
+      <td>
+        <p>
+          Keeps a copy of the generated pages and markup (e.g.: markdown) for
+          faster serving. Created when using e.g.: <code>jekyll serve</code>.
+          Can be disabled with
+          <a href="/docs/configuration/options/">an option and/or flag</a>.
+          This directory will not be included in the generated site. It’s
+          probably a good idea to add this to your <code>.gitignore</code>
+          file.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <p><code>.jekyll-metadata</code></p>
       </td>
       <td>
         <p>
           This helps Jekyll keep track of which files have not been modified
           since the site was last built, and which files will need to be
-          regenerated on the next build. This file will not be included in the
-          generated site. It’s probably a good idea to add this to your
-          <code>.gitignore</code> file.
+          regenerated on the next build. Only created when using
+          <a href="/docs/configuration/incremental-regeneration/">
+          incremental regeneration</a> (e.g.: with <code>jekyll serve -I</code>).
+          This file will not be included in the generated site. It’s probably
+          a good idea to add this to your <code>.gitignore</code> file.
         </p>
       </td>
     </tr>

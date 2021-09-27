@@ -55,7 +55,11 @@ Read this [Jekyll step-by-step guide](https://www.netlify.com/blog/2020/04/02/a-
 
 ## Render
 
-[Render](https://render.com) provides zero config continuous deployment for static sites. The service is free under 100GB monthly bandwith.
+[Render](https://render.com) provides zero config continuous deployment for static sites. The service is free under 100GB monthly bandwidth.
+
+## Hostman 
+
+[Hostman](https://hostman.com) allows you to host websites for free with no configurations. Read [this guide](https://hostman.com/docs/jekyll) to deploy your Jekyll site on Hostman. 
 
 ## Static Publisher
 

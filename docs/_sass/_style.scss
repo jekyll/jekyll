@@ -1,26 +1,36 @@
 /* Base */
 
- html {
-   box-sizing: border-box;
- }
+@charset "utf-8";
 
- *,
- *:before,
- *:after {
-   box-sizing: inherit;
- }
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
 
 body {
-  font: 300 21px Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 21px;
+  font-weight: 300;  
   color: #ddd;
   background-color: #333;
   @include box-shadow(inset 0 3px 30px rgba(0,0,0,.3));
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
-  -webkit-font-feature-settings: "kern" 1;
-  -moz-font-feature-settings: "kern" 1;
-  -o-font-feature-settings: "kern" 1;
-  font-feature-settings: "kern" 1;
-  font-kerning: normal;
+
+  // Not legible with 300 weight
+  // -moz-osx-font-smoothing: grayscale;
+  // -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  
+  -webkit-font-feature-settings: 'kern' on, 'liga' on, 'calt' on, 'onum', 'pnum';
+  -moz-font-feature-settings: 'kern' on, 'liga' on, 'calt' on, 'onum', 'pnum';
+  -ms-font-feature-settings: 'kern' on, 'liga' on, 'calt' on, 'onum', 'pnum';
+  -o-font-feature-settings: 'kern' on, 'liga' on, 'calt' on, 'onum', 'pnum';
+  font-feature-settings: 'kern' on, 'liga' on, 'calt' on, 'onum', 'pnum';
   margin: 0;
 }
 

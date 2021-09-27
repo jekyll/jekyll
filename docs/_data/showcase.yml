@@ -72,13 +72,6 @@
     - software
     - blog
 
-- name: AWS Amplify
-  url: https://aws-amplify.github.io/
-  image: amplify-framework.png
-  categories:
-    - open-source
-    - marketing-site
-
 - name: Freedom of Information Act
   url: https://www.foia.gov/
   image: foia-gov.png
@@ -299,7 +292,7 @@
     - software
     - marketing-site
 
-- name: Ionic Framwork
+- name: Ionic Framework
   url: https://ionicframework.com/
   image: ionic-framework.png
   categories:

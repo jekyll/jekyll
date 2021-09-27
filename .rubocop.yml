@@ -13,7 +13,7 @@ Jekyll/NoPutsAllowed:
     - rake/*.rake
 
 AllCops:
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.5
   Include:
     - lib/**/*.rb
     - test/**/*.rb
@@ -273,7 +273,7 @@ Security/YAMLLoad:
 Style/AccessModifierDeclarations:
   Enabled: false
 Style/AccessorGrouping:
-  Enabled: false
+  Enabled: true
 Style/Alias:
   EnforcedStyle: prefer_alias_method
 Style/AndOr:

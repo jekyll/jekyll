@@ -10,12 +10,19 @@ To install the command line tools to compile native extensions, open a terminal 
 xcode-select --install
 ```
 
+### set SDKROOT (only macOS Catalina or later)
+Starting on macOS Catalina (10.15) the headers used for Ruby have been moved from their previous location which results in some gems, including Jekyll to fail installation. This can be solved by setting SDKROOT in your shell configuration to the value provided by xcrun.
+
+```ssh
+export SDKROOT=$(xcrun --show-sdk-path)
+```
+
 ## Install Ruby
 
 Jekyll requires **Ruby v{{ site.data.ruby.min_version }}** or higher.
 macOS Big Sur 11.x ships with Ruby 2.6.3. Check your Ruby version using `ruby -v`.
 
-If you're running a previous version of macOS, you'll have to install a newer version of Ruby.
+If you're running a previous version of macOS, you'll have to install a newer version of Ruby. Installation with [Homebrew](https://brew.sh) is simple if you're only planning to use Ruby for Jekyll. Install with a version manager such as [asdf](https://asdf-vm.com/), [chruby](https://github.com/postmodern/chruby), [rbenv](https://github.com/rbenv/rbenv), or [rvm](https://rvm.io/) if you need to switch among Ruby versions (instructions for rbenv are below). See the guide [Install Ruby on Mac](https://mac.install.guide/ruby/index.html) for details and recommendations.
 
 ### With Homebrew {#brew}
 To run the latest Ruby version you need to install it through [Homebrew](https://brew.sh).
@@ -69,7 +76,7 @@ brew install rbenv
 rbenv init
 
 # Check your installation
-curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
+curl -fsSL https://github.com/rbenv/rbenv-installer/raw/main/bin/rbenv-doctor | bash
 ```
 
 Restart your terminal to apply your changes.

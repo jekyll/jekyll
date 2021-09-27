@@ -14,5 +14,6 @@ executable in the terminal.
 * [Environments]({{ '/docs/configuration/environments/' | relative_url }})
 * [Markdown Options]({{ '/docs/configuration/markdown/' | relative_url }})
 * [Liquid Options]({{ '/docs/configuration/liquid/' | relative_url }})
+* [Sass/SCSS Options]({{ '/docs/configuration/sass/' | relative_url }})
 * [Webrick Options]({{ '/docs/configuration/webrick/' | relative_url }})
 * [Incremental Regeneration]({{ '/docs/configuration/incremental-regeneration/' | relative_url }})

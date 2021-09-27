@@ -155,19 +155,19 @@ run its entire respective suite.
 
 ### Test Ruby Versions Locally
 
-The CI process runs the build against with serveral [Ruby](https://github.com/jekyll/jekyll/blob/master/.github/workflows/ci.yml#L22) versions.  This process can be repeated locally without changing your default installation by using [earthly](https://earthly.dev/get-earthly).
+The CI process runs the build against with several [Ruby](https://github.com/jekyll/jekyll/blob/master/.github/workflows/ci.yml#L22) versions.  This process can be repeated locally without changing your default installation by using [earthly](https://earthly.dev/get-earthly).
 
 To run the full CI process across all supported Ruby Versions:
 ```sh
 earthly +all
 ```
 
-To run the tests for a specfic version of Ruby:
+To run the tests for a specific version of Ruby:
 ```sh
 earthly --build-arg RUBY=2.5 +test
 ```
 
-To run the tests for a specfic version of JRuby specify the full version:
+To run the tests for a specific version of JRuby specify the full version:
 ```sh
 earthly --build-arg RUBY=jruby:9.2.14.0 +test
 ```

@@ -50,7 +50,7 @@ module Jekyll
     end
 
     def self.require_from_bundler
-      if !ENV["JEKYLL_NO_BUNDLER_REQUIRE"] && File.file?("Gemfile")
+      if !ENV["JEKYLL_NO_BUNDLER_REQUIRE"] && gemfile_exists?
         require "bundler"
 
         Bundler.setup
@@ -63,6 +63,13 @@ module Jekyll
       else
         false
       end
+    end
+
+    # Check for the existence of a Gemfile.
+    #
+    # Returns true if a Gemfile exists in the places bundler will look
+    def self.gemfile_exists?
+      File.file?("Gemfile") || (ENV["BUNDLE_GEMFILE"] && File.file?(ENV["BUNDLE_GEMFILE"]))
     end
 
     # Check whether a gem plugin is allowed to be used during this build.

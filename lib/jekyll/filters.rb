@@ -193,7 +193,7 @@ module Jekyll
       @where_filter_cache[input_id] ||= {}
       @where_filter_cache[input_id][property] ||= {}
 
-      # stash or retrive results to return
+      # stash or retrieve results to return
       @where_filter_cache[input_id][property][value] ||= input.select do |object|
         compare_property_vs_target(item_property(object, property), value)
       end.to_a
@@ -244,7 +244,7 @@ module Jekyll
       @find_filter_cache[input_id] ||= {}
       @find_filter_cache[input_id][property] ||= {}
 
-      # stash or retrive results to return
+      # stash or retrieve results to return
       # Since `enum.find` can return nil or false, we use a placeholder string "<__NO MATCH__>"
       #   to validate caching.
       result = @find_filter_cache[input_id][property][value] ||= input.find do |object|

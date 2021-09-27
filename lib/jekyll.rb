@@ -148,7 +148,7 @@ module Jekyll
 
     # Public: Set the log writer.
     #         New log writer must respond to the same methods
-    #         as Ruby's interal Logger.
+    #         as Ruby's internal Logger.
     #
     # writer - the new Logger-compatible log transport
     #

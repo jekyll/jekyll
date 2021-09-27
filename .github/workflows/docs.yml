@@ -12,23 +12,16 @@ jobs:
   deploy_docs:
     if: "!contains(github.event.commits[0].message, '[ci skip]')"
     runs-on: 'ubuntu-latest'
+    env:
+      BUNDLE_PATH: "vendor/bundle"
+      BUNDLE_JOBS: 4
+      BUNDLE_RETRY: 3
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
-      - name: Setup cache for Bundler
-        id: cache
-        uses: actions/cache@v2.1.3
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-      - name: Set up dependencies
-        run: |
-          bundle install --path=vendor/bundle --jobs 4 --retry 3
-          bundle clean
+          bundler-cache: true
       - name: Clone target branch
         run: |
           REMOTE_BRANCH="${REMOTE_BRANCH:-gh-pages}"

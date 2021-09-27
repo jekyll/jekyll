@@ -47,6 +47,7 @@ sudo pacman -S ruby base-devel
 
 ```sh
 sudo zypper install -t pattern devel_ruby devel_C_C++
+sudo zypper install ruby-devel
 ```
 
 ### Clear Linux

@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/jekyll'
+require 'benchmark/ips'
+
+date = "2014-08-02 14:43:06 PDT".freeze
+time = Time.parse(date)
+
+Benchmark.ips do |x|
+  x.report('Time.parse') do
+    Time.parse(date)
+  end
+
+  x.report('localtime') do
+    Time.parse(date).localtime
+  end
+
+  x.report('localtime parsed') do
+    time.localtime
+  end
+
+  x.report('Utils.parse_date') do
+    Jekyll::Utils.parse_date(date)
+  end
+end
