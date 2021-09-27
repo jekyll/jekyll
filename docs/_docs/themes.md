@@ -311,10 +311,10 @@ While this feature is to enable easier adoption of a theme, the restrictions ens
 
 This feature will let the theme-gem to work with *theme-specific config variables* out-of-the-box.
 
-{% if site.version == '4.1.0' %}
-{% comment %} Remove this encapsulation when `v4.1` ships {% endcomment %}
+{% if site.version == '4.3.0' %}
+{% comment %} Remove this encapsulation when `v4.3` ships {% endcomment %}
 
-### Theme inheritance {%- include docs_version_badge.html version="4.1.0" -%}
+### Theme inheritance {%- include docs_version_badge.html version="4.3.0" -%}
 
 If you are only adding features (or making small changes) to an existing theme, you don't have to make a copy of all the theme's files. Theme inheritance allows you to reuse a "parent" theme's assets, layouts, includes and stylesheets. To use theme inheritance, add to your theme's `gemspec` metadata:
 
