@@ -1,4 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2021-09-23T11:39:56-07:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Goodbye, Dear Frank.</title><link href="https://jekyllrb.com/news/2021/09/14/goodbye-dear-frank/" rel="alternate" type="text/html" title="Goodbye, Dear Frank." /><published>2021-09-14T09:28:02-07:00</published><updated>2021-09-14T09:28:02-07:00</updated><id>https://jekyllrb.com/news/2021/09/14/goodbye-dear-frank</id><content type="html" xml:base="https://jekyllrb.com/news/2021/09/14/goodbye-dear-frank/">&lt;p&gt;Over the weekend, the Jekyll core team learned of the passing of one of our own: &lt;em&gt;Frank Taillandier&lt;/em&gt;, popularly known
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2021-09-27T04:07:06-07:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 4.2.1 Released</title><link href="https://jekyllrb.com/news/2021/09/27/jekyll-4-2-1-released/" rel="alternate" type="text/html" title="Jekyll 4.2.1 Released" /><published>2021-09-27T02:15:46-07:00</published><updated>2021-09-27T02:15:46-07:00</updated><id>https://jekyllrb.com/news/2021/09/27/jekyll-4-2-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2021/09/27/jekyll-4-2-1-released/">&lt;p&gt;Hello Jekyllers!&lt;/p&gt;
+
+&lt;p&gt;The Jekyll team is happy to announce the release of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;v4.2.1&lt;/code&gt; which fixes a couple of
+regressions introduced in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;v4.2.0&lt;/code&gt; and another bug inherited from Jekyll 3.&lt;/p&gt;
+
+&lt;p&gt;In &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;v4.2.0&lt;/code&gt;, we decided to stop overriding &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{{ site.url }}&lt;/code&gt; with
+the &lt;em&gt;localhost&lt;/em&gt; address when running the command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt; with the default
+&lt;em&gt;development&lt;/em&gt; mode. While the intent behind the change was to avoid forcing users to
+generate a &lt;em&gt;production build&lt;/em&gt; separately by invoking &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll build&lt;/code&gt;, it however had an
+unforeseen consequence — absolute URLs for assets now pointed to
+resources that were at times not yet been deployed to the configured &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;site.url&lt;/code&gt;. That
+broke the users’ local development workflow.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;v4.2.0&lt;/code&gt; also added a series of optimizations surrounding the generation of Liquid
+representation for a site’s standalone pages and layouts. However, that prevented
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{{ page.content }}&lt;/code&gt; and other mutable attributes from reflecting
+the latest state of the requested attribute, thereby breaking the render of all resources
+that were dependent on such mutable attributes.&lt;/p&gt;
+
+&lt;p&gt;The last fix included in this release addresses the issue where incremental regeneration
+ignored changes to documents in collections when the site is configured to use a custom
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;collections_dir&lt;/code&gt; for all collections.&lt;/p&gt;
+
+&lt;p&gt;Special thanks to @benik for helping us understand the regression caused by the decision
+to stop overriding &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;site.url&lt;/code&gt; and proposing to revert the change. Another special thanks
+to @pdmosses for helping us discover the regression surrounding Liquid representation of
+pages by providing with a test repository.&lt;/p&gt;
+
+&lt;div style=&quot;padding:8px 0 2px;text-align:center;background:rgba(240,0,0,0.1)&quot;&gt;
+  :bouquet: &lt;span style=&quot;margin:0 6px;font-size:0.75em;vertical-align:top&quot;&gt;
+  Dedicated to our colleague Frank who passed away recently&lt;/span&gt; :bouquet:
+&lt;/div&gt;</content><author><name>ashmaroli</name></author><category term="release" /><summary type="html">Hello Jekyllers!</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Goodbye, Dear Frank.</title><link href="https://jekyllrb.com/news/2021/09/14/goodbye-dear-frank/" rel="alternate" type="text/html" title="Goodbye, Dear Frank." /><published>2021-09-14T09:28:02-07:00</published><updated>2021-09-14T09:28:02-07:00</updated><id>https://jekyllrb.com/news/2021/09/14/goodbye-dear-frank</id><content type="html" xml:base="https://jekyllrb.com/news/2021/09/14/goodbye-dear-frank/">&lt;p&gt;Over the weekend, the Jekyll core team learned of the passing of one of our own: &lt;em&gt;Frank Taillandier&lt;/em&gt;, popularly known
 by his GitHub username @DirtyF.&lt;/p&gt;
 
 &lt;p&gt;Ruby not being his forte, he chose to avoid code-level changes and instead focus on what he did best — &lt;em&gt;engage with
@@ -347,16 +378,4 @@ GitHub Pages runs Ruby 2.5.x, services like Netlify or Forestry already upgraded
 
 &lt;p&gt;Aidan Fitzgerald, Akshat Kedia, Alex Wood, Alexey Kopytko, Alexey Pelykh, Ali Thompson, Ana María Martínez Gómez, Ananthakumar, Andreas Möller, Andrew Lyndem, Andy Alt, Anne Gentle, Anny, Arjun Thakur, Arthur Attwell, Ashwin Maroli, Behrang, Belhassen Chelbi, Ben Keith, Ben Otte, Bilawal Hameed, Boris Schapira, Boris van Hoytema, Brett C, Chris Finazzo, Christian Oliff, Damien Solodow, Dan Allen, Dan Friedman, Daniel Höpfl, David J. Malan, Denis McDonald, Derek Smart, Derpy, Dusty Candland, ExE Boss, Frank Taillandier, Gareth Cooper, Grzegorz Kaczorek, Isaac Goodman, Jacob Byers, Jakob Krigovsky, Jan Pobořil, Joe Shannon, Jordan Morgan, Jorie Tappa, Josue Caraballo, Justin Vallelonga, Jörg Steinsträter, Karel Bílek, Keith Mifsud, Kelly-Ann Green, Ken Salomon, Kevin Plattret, Kyle Barbour, Lars Kanis, Leandro Facchinetti, Luis Enrique Perez Alvarez, Luis Guillermo Yáñez, Ma HongJun, Manu Mathew, Mario, Martin Scharm, Matt Massicotte, Matthew Rathbone, Maxwell Gerber, Mertcan Yücel, Michael Hiiva, Mike Kasberg, Mike Neumegen, Monica Powell, Nicolas Hoizey, Nikhil Swaminathan, Nikita Skalkin, Olivia Hugger, Parker Moore, Pat Hawks, Patrick Favre-Bulle, Paul Kim, Philip Belesky, Preston Lim, Ralph, Robert Riemann, Rosário Pereira Fernandes, Samuel Gruetter, Scott Killen, Sri Pravan Paturi, Stephan Fischer, Stephen Weiss, Steven Westmoreland, Sundaram Kalyan Vedala, Thanos Kolovos, Timo Schuhmacher, Tobias, Tom Harvey, Tushar Prajapati, Victor Afanasev, Vitor Oliveira, Wouter Schoot, XhmikosR, Zhang Xiangze, _94gsc, argv-minus-one, chrisfinazzo, ikeji, jess, jpasholk, makmm, mo khan, ninevra, penguinpet, 김정환, 104fps&lt;/p&gt;
 
-&lt;p&gt;Happy Jekylling everyone!&lt;/p&gt;</content><author><name>mattr-</name></author><category term="release" /><summary type="html">Dear Jekyllers,</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 3.8.6 Released</title><link href="https://jekyllrb.com/news/2019/07/02/jekyll-3-8-6-released/" rel="alternate" type="text/html" title="Jekyll 3.8.6 Released" /><published>2019-07-02T08:21:02-07:00</published><updated>2019-07-02T08:21:02-07:00</updated><id>https://jekyllrb.com/news/2019/07/02/jekyll-3-8-6-released</id><content type="html" xml:base="https://jekyllrb.com/news/2019/07/02/jekyll-3-8-6-released/">&lt;p&gt;We have another patch release in the 3.8 series! This time, we have one security patch
-and a handful of bug patches, including:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Filter symlinks from theme gems&lt;/li&gt;
-  &lt;li&gt;Fix excerpt handling of some Liquid tags&lt;/li&gt;
-  &lt;li&gt;Handle case where a theme directory doesn’t exist&lt;/li&gt;
-  &lt;li&gt;A few internal optimizations to reduce memory overhead&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;… and a few more! You can check out the patches and see all the details in &lt;a href=&quot;/docs/history/#v3-8-6&quot;&gt;the release notes&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Happy Jekylling!&lt;/p&gt;</content><author><name>parkr</name></author><category term="release" /><summary type="html">We have another patch release in the 3.8 series! This time, we have one security patch and a handful of bug patches, including:</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+&lt;p&gt;Happy Jekylling everyone!&lt;/p&gt;</content><author><name>mattr-</name></author><category term="release" /><summary type="html">Dear Jekyllers,</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
