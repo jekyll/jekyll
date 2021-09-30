@@ -1,0 +1,37 @@
+name: Gem Tasks
+
+on:
+  push:
+    branches:
+      - master
+      - "*-stable"
+
+jobs:
+  gem:
+    if: "github.repository_owner == 'jekyll' && startsWith(github.event.commits[0].message, 'Release :gem:')"
+    name: "Build Gem (Ruby ${{ matrix.ruby_version }})"
+    runs-on: "ubuntu-latest"
+    strategy:
+      fail-fast: true
+      matrix:
+        ruby_version:
+          - 2.7
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Set up Ruby ${{ matrix.ruby_version }}"
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby_version }}
+          bundler-cache: true
+      - name: Extract Jekyll Version
+        id: jekyll-meta
+        run: echo "::set-output name=version::$(bundle exec ruby -e 'require "jekyll"; puts Jekyll::VERSION')"
+        shell: bash
+      - name: "Build Gem (Jekyll ${{ steps.jekyll-meta.outputs.version }})"
+        run: gem build jekyll.gemspec
+      - name: Archive gem as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: "jekyll-${{ steps.jekyll-meta.outputs.version }}"
+          path: "jekyll-${{ steps.jekyll-meta.outputs.version }}.gem"
+          retention-days: 5
