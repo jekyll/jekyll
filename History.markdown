@@ -38,6 +38,7 @@
   * Remove AWS Amplify from the showcase (#8812)
   * Move Frank to Emeritus Core Team Members (#8813)
   * Release post for v4.2.1 (#8818)
+  * Update CircleCI example (#8829)
 
 ### Bug Fixes
 
