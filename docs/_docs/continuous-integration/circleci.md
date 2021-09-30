@@ -15,9 +15,9 @@ To start building your project on CircleCI, all you need to do is 'follow' your 
 1. Visit the 'Add Projects' page
 1. From the GitHub or Bitbucket tab on the left, choose a user or organization.
 1. Find your project in the list and click 'Build project' on the right.
-1. The first build will start on its own. You can start telling CircleCI how to build your project by creating a [circle.yml][3] file in the root of your repository.
+1. The first build will start on its own. You can start telling CircleCI how to build your project by creating a [.circleci/config.yml][3] file in the root of your repository.
 
-[3]: https://circleci.com/docs/configuration/
+[3]: https://circleci.com/docs/2.0/configuration-reference/
 
 ## 2. Dependencies
 
@@ -28,22 +28,24 @@ The easiest way to manage dependencies for a Jekyll project (with or without Cir
 ```ruby
 source 'https://rubygems.org'
 
-ruby '2.4.0'
+ruby '2.7.4'
 
 gem 'jekyll'
 gem 'html-proofer'
 ```
 
-CircleCI detects when `Gemfile` is present and will automatically run `bundle install` for you in the `dependencies` phase.
+```yaml
+    - step:
+       run: bundle install
+```
 
 ## 3. Testing
 
 The most basic test that can be run is seeing if `jekyll build` actually works. This is a blocker, a dependency if you will, for other tests you might run on the generate site. So we'll run Jekyll, via Bundler, in the `dependencies` phase.
 
 ```yaml
-dependencies:
-  post:
-    - bundle exec jekyll build
+    - step:
+        run: bundle exec jekyll build
 ```
 
 ### HTML Proofer
@@ -54,26 +56,32 @@ With your site built, it's useful to run tests to check for valid HTML, broken l
 [6]: https://github.com/gjtorikian/html-proofer/blob/master/README.md#configuration
 
 ```yaml
-test:
-  post:
-    - bundle exec htmlproofer ./_site --check-html --disable-external
+    - step:
+        run: bundle exec htmlproofer ./_site --check-html --disable-external
 ```
 
-## Complete Example circle.yml File
+## Complete Example .circleci/config.yml File
 
-Since v2, CircleCI is a Docker-based system. The example `circle.yml` below demonstrates how to
+The example `.circleci/config.yml` below demonstrates how to
 deploy your Jekyll project to AWS. In order for this to work you would first have to set the
 `S3_BUCKET_NAME` [environment variable](https://circleci.com/docs/2.0/env-vars/).
 
 ```yaml
-defaults: &defaults
-  working_directory: ~/repo
-version: 2
+workflows:
+  test-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+version: 2.1
 jobs:
   build:
-    <<: *defaults
     docker:
-      - image: circleci/ruby:2.5
+      - image: cimg/ruby:2.7.4
     environment:
       BUNDLE_PATH: ~/repo/vendor/bundle
     steps:
@@ -105,9 +113,8 @@ jobs:
           paths:
             - _site
   deploy:
-    <<: *defaults
     docker:
-      - image: circleci/python:3.6.3
+      - image: cimg/python:3.9.1
     environment:
       S3_BUCKET_NAME: <<YOUR BUCKET NAME HERE>>
     steps:
@@ -119,17 +126,6 @@ jobs:
       - run:
           name: Upload to s3
           command: ~/.local/bin/aws s3 sync ./_site s3://$S3_BUCKET_NAME/ --delete --acl public-read
-workflows:
-  version: 2
-  test-deploy:
-    jobs:
-      - build
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
 ```
 
 ## Questions?
