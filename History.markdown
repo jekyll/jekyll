@@ -66,6 +66,7 @@
   * Update expect to cover docs/_posts (#8677)
   * Enable Rubocop accessor grouping, fix existing offenses (#8293)
   * Tags:Highlight: Decomposed HTMLLegacy formatter (#8623)
+  * Relax Rubocop Dependency (#8831)
 
 ### Minor Enhancements
 
