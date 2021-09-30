@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-09-27T04:24:07-07:00" />
+<meta property="article:published_time" content="2021-09-30T07:37:58-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="CircleCI" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"image":"https://jekyllrb.com/img/jekyll-og.png","headline":"CircleCI","dateModified":"2021-09-27T04:24:07-07:00","datePublished":"2021-09-27T04:24:07-07:00","description":"Building, testing, and deploying your Jekyll-generated website can quickly be done with CircleCI, a continuous integration &amp; delivery tool. CircleCI supports GitHub and Bitbucket, and you can get started for free using an open-source or private repository.","url":"https://jekyllrb.com/docs/continuous-integration/circleci/","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/continuous-integration/circleci/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"@context":"https://schema.org"}</script>
+{"image":"https://jekyllrb.com/img/jekyll-og.png","headline":"CircleCI","dateModified":"2021-09-30T07:37:58-07:00","datePublished":"2021-09-30T07:37:58-07:00","description":"Building, testing, and deploying your Jekyll-generated website can quickly be done with CircleCI, a continuous integration &amp; delivery tool. CircleCI supports GitHub and Bitbucket, and you can get started for free using an open-source or private repository.","url":"https://jekyllrb.com/docs/continuous-integration/circleci/","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/continuous-integration/circleci/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -138,7 +138,7 @@
   <li>Visit the ‘Add Projects’ page</li>
   <li>From the GitHub or Bitbucket tab on the left, choose a user or organization.</li>
   <li>Find your project in the list and click ‘Build project’ on the right.</li>
-  <li>The first build will start on its own. You can start telling CircleCI how to build your project by creating a <a href="https://circleci.com/docs/configuration/">circle.yml</a> file in the root of your repository.</li>
+  <li>The first build will start on its own. You can start telling CircleCI how to build your project by creating a <a href="https://circleci.com/docs/2.0/configuration-reference/">.circleci/config.yml</a> file in the root of your repository.</li>
 </ol>
 
 <h2 id="2-dependencies">2. Dependencies</h2>
@@ -147,46 +147,53 @@
 
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">source</span> <span class="s1">'https://rubygems.org'</span>
 
-<span class="n">ruby</span> <span class="s1">'2.4.0'</span>
+<span class="n">ruby</span> <span class="s1">'2.7.4'</span>
 
 <span class="n">gem</span> <span class="s1">'jekyll'</span>
 <span class="n">gem</span> <span class="s1">'html-proofer'</span>
 </code></pre></div></div>
 
-<p>CircleCI detects when <code class="language-plaintext highlighter-rouge">Gemfile</code> is present and will automatically run <code class="language-plaintext highlighter-rouge">bundle install</code> for you in the <code class="language-plaintext highlighter-rouge">dependencies</code> phase.</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="pi">-</span> <span class="na">step</span><span class="pi">:</span>
+       <span class="na">run</span><span class="pi">:</span> <span class="s">bundle install</span>
+</code></pre></div></div>
 
 <h2 id="3-testing">3. Testing</h2>
 
 <p>The most basic test that can be run is seeing if <code class="language-plaintext highlighter-rouge">jekyll build</code> actually works. This is a blocker, a dependency if you will, for other tests you might run on the generate site. So we’ll run Jekyll, via Bundler, in the <code class="language-plaintext highlighter-rouge">dependencies</code> phase.</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">dependencies</span><span class="pi">:</span>
-  <span class="na">post</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">bundle exec jekyll build</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="pi">-</span> <span class="na">step</span><span class="pi">:</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">bundle exec jekyll build</span>
 </code></pre></div></div>
 
 <h3 id="html-proofer">HTML Proofer</h3>
 
 <p>With your site built, it’s useful to run tests to check for valid HTML, broken links, etc. There’s a few tools out there but <a href="https://github.com/gjtorikian/html-proofer">HTML Proofer</a> is popular amongst Jekyll users. We’ll run it in the <code class="language-plaintext highlighter-rouge">test</code> phase with a few preferred flags. Check out the <code class="language-plaintext highlighter-rouge">html-proofer</code> <a href="https://github.com/gjtorikian/html-proofer/blob/master/README.md#configuration">README</a> for all available flags, or run <code class="language-plaintext highlighter-rouge">htmlproofer --help</code> locally.</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">test</span><span class="pi">:</span>
-  <span class="na">post</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">bundle exec htmlproofer ./_site --check-html --disable-external</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="pi">-</span> <span class="na">step</span><span class="pi">:</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">bundle exec htmlproofer ./_site --check-html --disable-external</span>
 </code></pre></div></div>
 
-<h2 id="complete-example-circleyml-file">Complete Example circle.yml File</h2>
+<h2 id="complete-example-circleciconfigyml-file">Complete Example .circleci/config.yml File</h2>
 
-<p>Since v2, CircleCI is a Docker-based system. The example <code class="language-plaintext highlighter-rouge">circle.yml</code> below demonstrates how to
+<p>The example <code class="language-plaintext highlighter-rouge">.circleci/config.yml</code> below demonstrates how to
 deploy your Jekyll project to AWS. In order for this to work you would first have to set the
 <code class="language-plaintext highlighter-rouge">S3_BUCKET_NAME</code> <a href="https://circleci.com/docs/2.0/env-vars/">environment variable</a>.</p>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">defaults</span><span class="pi">:</span> <span class="nl">&amp;defaults</span>
-  <span class="na">working_directory</span><span class="pi">:</span> <span class="s">~/repo</span>
-<span class="na">version</span><span class="pi">:</span> <span class="m">2</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">workflows</span><span class="pi">:</span>
+  <span class="na">test-deploy</span><span class="pi">:</span>
+    <span class="na">jobs</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">build</span>
+      <span class="pi">-</span> <span class="na">deploy</span><span class="pi">:</span>
+          <span class="na">requires</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">build</span>
+          <span class="na">filters</span><span class="pi">:</span>
+            <span class="na">branches</span><span class="pi">:</span>
+              <span class="na">only</span><span class="pi">:</span> <span class="s">master</span>
+<span class="na">version</span><span class="pi">:</span> <span class="m">2.1</span>
 <span class="na">jobs</span><span class="pi">:</span>
   <span class="na">build</span><span class="pi">:</span>
-    <span class="na">&lt;&lt;</span><span class="pi">:</span> <span class="nv">*defaults</span>
     <span class="na">docker</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">image</span><span class="pi">:</span> <span class="s">circleci/ruby:2.5</span>
+      <span class="pi">-</span> <span class="na">image</span><span class="pi">:</span> <span class="s">cimg/ruby:2.7.4</span>
     <span class="na">environment</span><span class="pi">:</span>
       <span class="na">BUNDLE_PATH</span><span class="pi">:</span> <span class="s">~/repo/vendor/bundle</span>
     <span class="na">steps</span><span class="pi">:</span>
@@ -218,9 +225,8 @@ deploy your Jekyll project to AWS. In order for this to work you would first hav
           <span class="na">paths</span><span class="pi">:</span>
             <span class="pi">-</span> <span class="s">_site</span>
   <span class="na">deploy</span><span class="pi">:</span>
-    <span class="na">&lt;&lt;</span><span class="pi">:</span> <span class="nv">*defaults</span>
     <span class="na">docker</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">image</span><span class="pi">:</span> <span class="s">circleci/python:3.6.3</span>
+      <span class="pi">-</span> <span class="na">image</span><span class="pi">:</span> <span class="s">cimg/python:3.9.1</span>
     <span class="na">environment</span><span class="pi">:</span>
       <span class="na">S3_BUCKET_NAME</span><span class="pi">:</span> <span class="s">&lt;&lt;YOUR BUCKET NAME HERE&gt;&gt;</span>
     <span class="na">steps</span><span class="pi">:</span>
@@ -232,17 +238,6 @@ deploy your Jekyll project to AWS. In order for this to work you would first hav
       <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span>
           <span class="na">name</span><span class="pi">:</span> <span class="s">Upload to s3</span>
           <span class="na">command</span><span class="pi">:</span> <span class="s">~/.local/bin/aws s3 sync ./_site s3://$S3_BUCKET_NAME/ --delete --acl public-read</span>
-<span class="na">workflows</span><span class="pi">:</span>
-  <span class="na">version</span><span class="pi">:</span> <span class="m">2</span>
-  <span class="na">test-deploy</span><span class="pi">:</span>
-    <span class="na">jobs</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s">build</span>
-      <span class="pi">-</span> <span class="na">deploy</span><span class="pi">:</span>
-          <span class="na">requires</span><span class="pi">:</span>
-            <span class="pi">-</span> <span class="s">build</span>
-          <span class="na">filters</span><span class="pi">:</span>
-            <span class="na">branches</span><span class="pi">:</span>
-              <span class="na">only</span><span class="pi">:</span> <span class="s">master</span>
 </code></pre></div></div>
 
 <h2 id="questions">Questions?</h2>
