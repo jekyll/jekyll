@@ -24,10 +24,10 @@ module Jekyll
       @base = base
       @name = name
 
-      if theme && theme.layouts_path.eql?(base)
+      if theme&.layouts_path.eql?(base)
         @base_dir = theme.root
         @path = site.in_theme_dir_with_theme(theme, base, name)
-      elsif site.theme && site.theme.layouts_path.eql?(base)
+      elsif site.theme&.layouts_path.eql?(base)
         @base_dir = site.theme.root
         @path = site.in_theme_dir(base, name)
       else
