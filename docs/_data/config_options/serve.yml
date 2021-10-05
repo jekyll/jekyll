@@ -11,7 +11,7 @@
 
 
 - name: Live Reload
-  description: Reload a page automatically on the browser when its content is edited.
+  description: Reload a page automatically on the browser when its content is edited. Depeding on your Ruby version, you might need to run `bundle add webrick` for this.
   option: "livereload: BOOL"
   flag: "-l, --livereload"
 
