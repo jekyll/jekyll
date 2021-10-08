@@ -383,6 +383,14 @@ module Jekyll
       @publisher ||= Publisher.new(self)
     end
 
+    # Returns the beta_manager or creates a new beta_manager if it doesn't
+    # already exist.
+    #
+    # Returns The BetaHandler
+    def beta_manager
+      @beta_manager ||= BetaManager.new(self)
+    end
+
     # Public: Prefix a given path with the source directory.
     #
     # paths - (optional) path elements to a file or directory within the
