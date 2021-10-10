@@ -37,6 +37,9 @@
   * Update feature_request.md (#8797)
   * Remove AWS Amplify from the showcase (#8812)
   * Move Frank to Emeritus Core Team Members (#8813)
+  * Release post for v4.2.1 (#8818)
+  * Update CircleCI example (#8829)
+  * Fix typo (#8835)
 
 ### Bug Fixes
 
@@ -64,6 +67,7 @@
   * Update expect to cover docs/_posts (#8677)
   * Enable Rubocop accessor grouping, fix existing offenses (#8293)
   * Tags:Highlight: Decomposed HTMLLegacy formatter (#8623)
+  * Relax Rubocop Dependency (#8831)
 
 ### Minor Enhancements
 
@@ -77,6 +81,14 @@
 ### Site Enhancements
 
   * Improvements to CSS (#7834)
+
+## 4.2.1 / 2021-09-27
+
+### Bug Fixes
+
+  * Backport #8620 for v4.2.x: Revert #7253: "Don't reset site.url to localhost:4000 by default" (#8808)
+  * Backport #8756 for v4.2.x: Respect collections_dir config within include tag (#8794)
+  * Backport #8786 for v4.2.x: Fix regression in Convertible module from v4.2.0 (#8793)
 
 ## 4.2.0 / 2020-12-14
 

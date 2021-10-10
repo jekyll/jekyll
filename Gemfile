@@ -23,7 +23,7 @@ group :test do
   gem "nokogiri", "~> 1.7"
   gem "rspec"
   gem "rspec-mocks"
-  gem "rubocop", "~> 1.18.3"
+  gem "rubocop", "~> 1.22.0"
   gem "rubocop-minitest"
   gem "rubocop-performance"
   gem "rubocop-rake"

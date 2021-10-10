@@ -241,6 +241,7 @@ class TestSite < JekyllUnitTest
       @site.process
       # exclude files in symlinked directories here and insert them in the
       # following step when not on Windows.
+      # rubocop:disable Style/WordArray
       sorted_pages = %w(
         %#\ +.md
         .htaccess
@@ -268,6 +269,7 @@ class TestSite < JekyllUnitTest
         test-styles.scss
         trailing-dots...md
       )
+      # rubocop:enable Style/WordArray
       unless Utils::Platforms.really_windows?
         # files in symlinked directories may appear twice
         sorted_pages.push("main.css.map", "main.scss", "symlinked-file").sort!
