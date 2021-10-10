@@ -158,6 +158,7 @@ Emacs
 emails
 emoji
 endcapture
+endcomment
 endfor
 endhighlight
 endif
@@ -165,7 +166,7 @@ endraw
 endrender
 endtablerow
 Enumerables
-eol
+EOL
 erb
 errordocument
 Espinaco
