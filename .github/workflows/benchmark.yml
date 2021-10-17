@@ -1,0 +1,30 @@
+name: Micro Benchmark Runs
+
+on:
+  workflow_dispatch:
+    inputs:
+      path:
+        description: "Path to benchmark script relative to 'benchmark' directory."
+        required: true
+        default: "capture-assign.rb"
+      ruby_version:
+        description: "Ruby version to use (via `ruby/setup-ruby@v1`) action."
+        required: false
+        default: "2.7"
+
+jobs:
+  benchmark:
+    name: "Benchmark (${{ github.event.inputs.path }}) (Ruby ${{ github.event.inputs.ruby_version }})"
+    runs-on: "ubuntu-latest"
+    env:
+      BENCHMARK: true
+    steps:
+    - name: Checkout Jekyll
+      uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ github.event.inputs.ruby_version }}
+        bundler-cache: true
+    - name: Run Benchmark
+      run: "bundle exec ruby benchmark/${{ github.event.inputs.path }}"
