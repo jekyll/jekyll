@@ -14,7 +14,7 @@ module Jekyll
     def enabled?(feature)
       return false unless VALID_FEATURES.key?(feature)
 
-      !!@config.dig(feature, "enabled")
+      @config[feature] == "enabled"
     end
   end
 end
