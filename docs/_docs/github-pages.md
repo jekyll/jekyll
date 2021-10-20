@@ -118,3 +118,22 @@ to see more detailed examples.
     <a href="{{ '/docs/installation/windows/' | relative_url }}">Windows-specific docs page</a>.
   </p>
 </div>
+
+### Running and Testing Locally
+
+Once the project is configures with the github-pages environment, its quite hard to switch back and forth with the local settings and the production-level settings. FOr that we can use certain commands (to be precise some arguments) to make the workflow flawless and hasle-free.  
+
+For this, we are assuming that ruby and bundle are setup along with jekyll installed. 
+```
+bundle exec jekyll serve --baseurl=""
+```
+
+This will run the jekyll server on your local machine i.e. on `localhost:4000` you can definitely change the port as per your choice. You can add `--port 4002`, here `4002` can be any port number which is free on your system. Using this we can change the defualt port in jekyll.
+
+```
+bundle exec jekyll serve --baseurl="" --port 4002
+```
+
+Also, it will assume the baseurl as an empty string or in this case the `localhost:4000`, so that is **quite handy in seeing the changes before pushing into production**. This command can also be chained with multiple arguments like rendering `drafts`, using `safe`, `livereload`, etc.  
+
+
