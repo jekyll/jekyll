@@ -127,5 +127,5 @@ Once the project is configured with the github-pages environment, it's quite har
 bundle exec jekyll serve --baseurl=""
 ```
 
-This will run the jekyll server on your local machine i.e. on `http://localhost:4000`. Refer [server options]({{ '/docs/configuration/options/#serve-command-options' | relative_url }}) for available options.
+This will run the jekyll server on your local machine i.e. on `http://localhost:4000`. Refer <a href="{{ '/docs/configuration/options/#serve-command-options' | relative_url }}">server options</a> for available options.
 
