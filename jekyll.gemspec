@@ -33,9 +33,11 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 2.7.0"
 
   s.add_runtime_dependency("addressable",           "~> 2.4")
+  s.add_runtime_dependency("bigdecimal",            ">= 1.3.4")
   s.add_runtime_dependency("colorator",             "~> 1.0")
   s.add_runtime_dependency("em-websocket",          "~> 0.5")
   s.add_runtime_dependency("i18n",                  "~> 1.0")
+  s.add_runtime_dependency("json",                  ">= 2.1.0")
   s.add_runtime_dependency("jekyll-sass-converter", "~> 2.0")
   s.add_runtime_dependency("jekyll-watch",          "~> 2.0")
   s.add_runtime_dependency("kramdown",              "~> 2.3", ">= 2.3.1")
