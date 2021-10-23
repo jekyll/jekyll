@@ -40,6 +40,7 @@
   * Release post for v4.2.1 (#8818)
   * Update CircleCI example (#8829)
   * Fix typo (#8835)
+  * Added docs for running locally (#8852)
 
 ### Bug Fixes
 
