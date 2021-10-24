@@ -154,7 +154,7 @@ Note that this string must be quoted to prevent the asterisks from being evaluat
 At the start of each workflow run, GitHub automatically creates a unique `GITHUB_TOKEN` secret to use in
 your workflow. You can use the `GITHUB_TOKEN` to authenticate in a workflow run. You can use the
 `GITHUB_TOKEN` by using the standard syntax for referencing secrets: `${{ secrets.GITHUB_TOKEN }}`.
-For more information, you can see [here][github-token-ref]
+For more information, please read [GitHub's docs on token authentication][github-token-ref]
 
 [github-token-ref]: https://docs.github.com/en/actions/security-guides/automatic-token-authentication
 
