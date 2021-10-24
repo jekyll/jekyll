@@ -132,7 +132,7 @@ The above workflow can be explained as the following:
 - We set a reference to a secret **environment variable** for the action to use. The `GITHUB_TOKEN`
   is a _Personal Access Token_ and is detailed in the next section.
   
-[github-marketplace-for-jekyll-action]: https://github.com/marketplace?type=actions&query=jekyll+action+
+[github-marketplace-for-jekyll-action]: https://github.com/marketplace?type=actions&query=jekyll+action
 
 Instead of using the **on.push** condition, you could trigger your build on a **schedule** by
 using the [on.schedule] parameter. For example, here we build daily at midnight by specifying
