@@ -82,6 +82,7 @@
 ### Site Enhancements
 
   * Improvements to CSS (#7834)
+  * Slightly update lang `sh` code-block styling (#8857)
 
 ## 4.2.1 / 2021-09-27
 
