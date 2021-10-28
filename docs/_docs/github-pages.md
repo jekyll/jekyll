@@ -123,7 +123,7 @@ to see more detailed examples.
 
 Once the project is configured with the github-pages environment, it's quite hard to switch back and forth with the local settings and the production-level settings. For that we can use certain CLI options to make the workflow hassle-free.  
 
-```
+```sh
 bundle exec jekyll serve --baseurl=""
 ```
 
