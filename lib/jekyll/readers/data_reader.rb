@@ -59,14 +59,9 @@ module Jekyll
 
       case File.extname(path).downcase
       when ".csv"
-        CSV.read(path,
-                 :headers  => true,
-                 :encoding => site.config["encoding"]).map(&:to_hash)
+        CSV.read(path, **csv_config).map { |row| convert_row(row) }
       when ".tsv"
-        CSV.read(path,
-                 :col_sep  => "\t",
-                 :headers  => true,
-                 :encoding => site.config["encoding"]).map(&:to_hash)
+        CSV.read(path, **tsv_config).map { |row| convert_row(row) }
       else
         SafeYAML.load_file(path)
       end
@@ -75,6 +70,44 @@ module Jekyll
     def sanitize_filename(name)
       name.gsub(%r![^\w\s-]+|(?<=^|\b\s)\s+(?=$|\s?\b)!, "")
         .gsub(%r!\s+!, "_")
+    end
+
+    private
+
+    # @return [Hash]
+    def csv_config
+      @csv_config ||= read_config("csv_reader")
+    end
+
+    # @return [Hash]
+    def tsv_config
+      @tsv_config ||= read_config("tsv_reader", { :col_sep => "\t" })
+    end
+
+    # @param config_key [String]
+    # @param overrides [Hash]
+    # @return [Hash]
+    # @see https://ruby-doc.org/stdlib-2.5.0/libdoc/csv/rdoc/CSV.html#Converters
+    def read_config(config_key, overrides = {})
+      reader_config = config[config_key] || {}
+
+      defaults = {
+        :converters => reader_config.fetch("csv_converters", []).map(&:to_sym),
+        :headers    => reader_config.fetch("headers", true),
+        :encoding   => reader_config.fetch("encoding", config["encoding"]),
+      }
+
+      defaults.merge(overrides)
+    end
+
+    def config
+      @config ||= site.config
+    end
+
+    # @param row [Array, CSV::Row]
+    # @return [Array, Hash]
+    def convert_row(row)
+      row.instance_of?(CSV::Row) ? row.to_hash : row
     end
   end
 end

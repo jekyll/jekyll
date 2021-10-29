@@ -148,3 +148,30 @@ author: dave
 {% endraw %}
 
 For information on how to build robust navigation for your site (especially if you have a documentation website or another type of Jekyll site with a lot of pages to organize), see [Navigation]({{ '/tutorials/navigation/' | relative_url }}).
+
+## CSV/TSV Parse Options
+
+The way that Ruby parses CSV and TSV files can be customized with the `csv_reader` and `tsv_reader`
+configuration options. Each configuration key exposes the same options:
+
+`converters`: What [CSV converters](https://ruby-doc.org/stdlib-2.6.1/libdoc/csv/rdoc/CSV.html#Converters) should be
+              used when parsing the file. This will need to be set with `numeric` if you want number fields in the
+              CSV to be parsed into numeric types rather than into strings. By default, this list is empty.
+`encoding`:   What encoding the files are in. Defaults to the site `encoding` configuration option.
+`headers`:    Boolean field for whether to parse the first line of the file as headers. When `false`, it treats the
+              first row as data. Defaults to `true`.
+
+Examples:
+
+```yaml
+csv_reader:
+    converters:
+      - numeric
+      - datetime
+    headers: true
+    encoding: utf-8
+tsv_reader:
+    converters:
+      - all
+    headers: false
+```
