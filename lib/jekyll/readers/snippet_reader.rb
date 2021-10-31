@@ -9,6 +9,8 @@ module Jekyll
     end
 
     def read
+      return unless File.directory?(@dir_at_source)
+
       Dir.chdir(@dir_at_source) do
         filter_entries.each do |entry|
           @site.snippets[entry] = Snippet.new(@site, entry)
