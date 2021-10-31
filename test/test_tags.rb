@@ -1213,7 +1213,7 @@ class TestTags < JekyllUnitTest
 
           <h2 id="hello-world">Hello World</h2>
 
-          TEXT
+        TEXT
       end
     end
 
