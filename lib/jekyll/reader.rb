@@ -8,6 +8,8 @@ module Jekyll
       @site = site
     end
 
+    # rubocop:disable Metrics/AbcSize
+    #
     # Read Site data from disk and load it into internal data structures.
     #
     # Returns nothing.
@@ -19,7 +21,9 @@ module Jekyll
       @site.data = DataReader.new(site).read(site.config["data_dir"])
       CollectionReader.new(site).read
       ThemeAssetsReader.new(site).read
+      SnippetReader.new(site).read
     end
+    # rubocop:enable Metrics/AbcSize
 
     # Sorts posts, pages, and static files.
     def sort_files!

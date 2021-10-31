@@ -43,6 +43,10 @@ module Jekyll
       @assets_path ||= path_for "assets"
     end
 
+    def snippets_path
+      @snippets_path ||= path_for "_snippets"
+    end
+
     def runtime_dependencies
       gemspec.runtime_dependencies
     end

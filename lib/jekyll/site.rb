@@ -10,7 +10,7 @@ module Jekyll
                   :unpublished
 
     attr_reader :cache_dir, :config, :dest, :filter_cache, :includes_load_paths,
-                :liquid_renderer, :profiler, :regenerator, :source
+                :liquid_renderer, :profiler, :regenerator, :snippets, :source
 
     # Public: Initialize a new Site.
     #
@@ -103,6 +103,7 @@ module Jekyll
       self.pages = []
       self.static_files = []
       self.data = {}
+      @snippets = {}
       @post_attr_hash = {}
       @site_data = nil
       @collections = nil
@@ -207,6 +208,7 @@ module Jekyll
 
       Jekyll::Hooks.trigger :site, :pre_render, self, payload
 
+      render_snippets(payload)
       render_docs(payload)
       render_pages(payload)
 
@@ -553,6 +555,13 @@ module Jekyll
     def render_pages(payload)
       pages.each do |page|
         render_regenerated(page, payload)
+      end
+    end
+
+    def render_snippets(payload)
+      snippets.each_value do |snippet|
+        snippet.renderer.payload = payload
+        snippet.output = snippet.renderer.run
       end
     end
 

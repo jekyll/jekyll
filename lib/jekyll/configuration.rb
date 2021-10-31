@@ -14,6 +14,7 @@ module Jekyll
       "layouts_dir"         => "_layouts",
       "data_dir"            => "_data",
       "includes_dir"        => "_includes",
+      "snippets_dir"        => "_snippets",
       "collections"         => {},
 
       # Handling Reading

@@ -1188,4 +1188,51 @@ class TestTags < JekyllUnitTest
       end
     end
   end
+
+  context "simple page including a snippet" do
+    setup do
+      @site = fixture_site
+      @site.read
+      @page = Jekyll::PageWithoutAFile.new(@site, @site.source, "", "page-w-snippet.md")
+      @site.pages << @page
+    end
+
+    context "that exists" do
+      setup do
+        @page.content = <<~TEXT
+          Jack and Jill went up the hill
+
+          {% snippet 'lipsum/lorem.md' %}
+        TEXT
+      end
+
+      should "render as expected" do
+        @site.render
+        assert_equal(<<~TEXT, @page.output)
+          <p>Jack and Jill went up the hill</p>
+
+          <h2 id="hello-world">Hello World</h2>
+
+          TEXT
+      end
+    end
+
+    context "that is non-existent" do
+      setup do
+        @page.content = <<~TEXT
+          The quick brown fox jumped over the lazy sleeping dog
+
+          {% snippet 'wordsworth_quote.md' %}
+        TEXT
+      end
+
+      should "not abort build process" do
+        @site.render
+        assert_equal(
+          "<p>The quick brown fox jumped over the lazy sleeping dog</p>\n\n",
+          @page.output
+        )
+      end
+    end
+  end
 end
