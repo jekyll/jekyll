@@ -10,7 +10,8 @@ module Jekyll
                   :unpublished
 
     attr_reader :cache_dir, :config, :dest, :filter_cache, :includes_load_paths,
-                :liquid_renderer, :profiler, :regenerator, :snippets, :source
+                :liquid_renderer, :profiler, :regenerator, :source, :snippets,
+                :snippets_at_source
 
     # Public: Initialize a new Site.
     #
@@ -54,6 +55,8 @@ module Jekyll
 
       # keep using `gems` to avoid breaking change
       self.gems = config["plugins"]
+
+      @snippets_at_source = validate_snippets_dir
 
       configure_cache
       configure_plugins
@@ -502,6 +505,19 @@ module Jekyll
       File.open(@cache_gitignore_path, "wb") do |file|
         file.puts("# ignore everything in this directory\n*")
       end
+    end
+
+    def validate_snippets_dir
+      dirname = File.basename(in_source_dir(config["snippets_dir"])).delete_prefix("_")
+      return true unless collections.key?(dirname)
+
+      Jekyll.logger.warn "Conflict:", "There's already a collection labelled #{dirname.inspect}."
+      Jekyll.logger.warn "", "To avoid confusion, Jekyll will not load snippets from the source " \
+                             "directory."
+      Jekyll.logger.warn "", "Set a different directory to config key 'snippets_dir' to load " \
+                             "snippets at source."
+
+      false
     end
 
     # Disable Marshaling cache to disk in Safe Mode

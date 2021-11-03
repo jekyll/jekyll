@@ -31,6 +31,62 @@ class TestSnippet < JekyllUnitTest
       assert_raises(NoMethodError) { @site.snippets["lipsum/lorem.md"].url }
     end
 
+    context "within a site with collection labelled 'snippets' at root" do
+      should "not read snippets" do
+        test_site = rendered_site(
+          fixture_site(
+            "collections" => {
+              "snippets" => nil,
+            }
+          )
+        )
+        assert_empty test_site.snippets
+      end
+
+      should "render snippets if 'snippets_dir' has been customized" do
+        test_site = rendered_site(
+          fixture_site(
+            "snippets_dir" => "_includes",
+            "collections"  => {
+              "snippets" => nil,
+            }
+          )
+        )
+        assert_equal(
+          "<hr />\n<p>Tom Preston-Werner\ngithub.com/mojombo</p>\n",
+          test_site.snippets["sig.markdown"].content
+        )
+      end
+    end
+
+    context "within a site with collection labelled 'snippets' in a subdir" do
+      should "not read snippets" do
+        test_site = rendered_site(
+          fixture_site(
+            "collections" => {
+              "snippets" => nil,
+            }
+          )
+        )
+        assert_empty test_site.snippets
+      end
+
+      should "render snippets if 'snippets_dir' has been customized" do
+        test_site = rendered_site(
+          fixture_site(
+            "snippets_dir" => "_includes",
+            "collections"  => {
+              "snippets" => nil,
+            }
+          )
+        )
+        assert_equal(
+          "<hr />\n<p>Tom Preston-Werner\ngithub.com/mojombo</p>\n",
+          test_site.snippets["sig.markdown"].content
+        )
+      end
+    end
+
     context "within a themed-site" do
       setup do
         @themed_site = rendered_site(fixture_site("theme" => "test-theme"))

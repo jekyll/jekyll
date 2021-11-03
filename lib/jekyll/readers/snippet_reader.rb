@@ -4,31 +4,33 @@ module Jekyll
   class SnippetReader
     def initialize(site)
       @site = site
-      @dir_at_source = site.in_source_dir(site.config["snippets_dir"])
-      @entry_filter = EntryFilter.new(site, @dir_at_source)
     end
 
     def read
-      return unless File.directory?(@dir_at_source)
-
-      Dir.chdir(@dir_at_source) do
-        filter_entries.each do |entry|
-          @site.snippets[entry] = Snippet.new(@site, entry)
-        end
-      end
-      return unless @site.theme
-
-      Dir.chdir(@site.theme.snippets_path) do
-        filter_entries.each do |entry|
-          @site.snippets[entry] ||= Snippet.new(@site, entry, @site.theme)
-        end
-      end
+      read_dir_at_source if @site.snippets_at_source
+      read_dir_in_theme if @site.theme
     end
 
     private
 
-    def filter_entries
-      EntryFilter.new(@site).filter(Dir["**/*.*"])
+    def read_dir(path)
+      return unless File.directory?(path)
+
+      Dir.chdir(path) do
+        EntryFilter.new(@site, path).filter(Dir["**/*.*"]).each { |entry| yield entry }
+      end
+    end
+
+    def read_dir_at_source
+      read_dir(@site.in_source_dir(@site.config["snippets_dir"])) do |entry|
+        @site.snippets[entry] = Snippet.new(@site, entry)
+      end
+    end
+
+    def read_dir_in_theme
+      read_dir(@site.theme.snippets_path) do |entry|
+        @site.snippets[entry] ||= Snippet.new(@site, entry, @site.theme)
+      end
     end
   end
 end
