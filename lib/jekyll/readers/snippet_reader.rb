@@ -8,7 +8,7 @@ module Jekyll
 
     def read
       read_dir_at_source if @site.snippets_at_source
-      read_dir_in_theme if @site.theme
+      read_dir_in_theme if @site.theme&.snippets_path
     end
 
     private
