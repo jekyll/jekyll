@@ -69,6 +69,7 @@
   * Enable Rubocop accessor grouping, fix existing offenses (#8293)
   * Tags:Highlight: Decomposed HTMLLegacy formatter (#8623)
   * Relax Rubocop Dependency (#8831)
+  * Add a workflow to build gems consistently (#8830)
 
 ### Minor Enhancements
 
