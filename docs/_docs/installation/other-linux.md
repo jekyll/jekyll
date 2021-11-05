@@ -10,7 +10,7 @@ Installation on other Linux distributions works similarly to installing on [Ubun
 ### Fedora
 
 ```sh
-sudo dnf install ruby ruby-devel openssl-devel redhat-rpm-config @development-tools
+sudo dnf install ruby ruby-devel openssl-devel redhat-rpm-config gcc-c++ @development-tools
 ```
 ### RHEL8/CentOS8
 
