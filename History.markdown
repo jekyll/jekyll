@@ -1,3 +1,9 @@
+## HEAD
+
+### Development Fixes
+
+  * Backport #8830 for v4.2.x: Add a workflow to build gems consistently (#8869)
+
 ## 4.2.1 / 2021-09-27
 
 ### Bug Fixes
