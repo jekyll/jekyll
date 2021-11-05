@@ -16,10 +16,19 @@ module Jekyll
       read_directories
       read_included_excludes
       sort_files!
-      @site.data = DataReader.new(site).read(site.config["data_dir"])
       CollectionReader.new(site).read
       ThemeAssetsReader.new(site).read
-      ThemeDataReader.new(site).read(site.config["data_dir"])
+      read_data
+    end
+
+    # Read and merge the contents of _data folders. Data from Site takes
+    # precedence over data from theme.
+    #
+    # Returns nothing.
+    def read_data
+      @site.data = DataReader.new(site).read(site.config["data_dir"])
+      theme_data = DataReader.new(site).read(site.theme&.data_path)
+      Jekyll::Utils.deep_merge_hashes(theme_data, @site.data)
     end
 
     # Sorts posts, pages, and static files.
