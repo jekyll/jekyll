@@ -18,17 +18,17 @@ module Jekyll
       sort_files!
       CollectionReader.new(site).read
       ThemeAssetsReader.new(site).read
-      read_data
+      @site.data = read_data
     end
 
     # Read and merge the contents of _data folders. Data from Site takes
     # precedence over data from theme.
     #
-    # Returns nothing.
+    # Returns merged data hash.
     def read_data
-      @site.data = DataReader.new(site).read(site.config["data_dir"])
+      site_data = DataReader.new(site).read(site.config["data_dir"])
       theme_data = DataReader.new(site).read(site.theme&.data_path)
-      Jekyll::Utils.deep_merge_hashes(theme_data, @site.data)
+      Jekyll::Utils.deep_merge_hashes(theme_data, site_data)
     end
 
     # Sorts posts, pages, and static files.
