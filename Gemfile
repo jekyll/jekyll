@@ -34,6 +34,7 @@ group :test do
   gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
 
   gem "jruby-openssl" if RUBY_ENGINE == "jruby"
+  gem "eventmachine", "1.2.7", git: "https://github.com/eventmachine/eventmachine", tag: "v1.2.7" if Gem.win_platform?
 end
 
 #

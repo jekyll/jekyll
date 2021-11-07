@@ -191,9 +191,11 @@ module Jekyll
         end
 
         def set_defaults
-          hash_ = @jekyll_opts.fetch("webrick", {}).fetch("headers", {})
+          hash_ = @jekyll_opts.fetch("webrick", {}).fetch("headers", {}).dup
           DEFAULTS.each_with_object(@headers = hash_) do |(key, val), hash|
+            # use the default value unless the user specifies a value, and that value is not nil
             hash[key] = val unless hash.key?(key)
+            hash.delete(key) if hash[key].nil?
           end
         end
       end
