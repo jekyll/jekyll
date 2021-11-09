@@ -31,7 +31,7 @@ module Jekyll
       @site.data = DataReader.new(site).read(site.config["data_dir"])
       return unless site.theme&.data_path
 
-      theme_data = DataReader.new(site, site.method(:in_theme_dir)).read(site.theme.data_path)
+      theme_data = DataReader.new(site, :in_source_dir => site.method(:in_theme_dir)).read(site.theme.data_path)
       @site.data = Jekyll::Utils.deep_merge_hashes(theme_data, @site.data)
     end
 

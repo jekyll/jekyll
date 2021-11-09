@@ -41,6 +41,19 @@ Feature: Writing themes
     And I should see "I'm in the project." in "_site/index.html"
     And I should see "<span class=\"sample\">include.html from test-theme</span>" in "_site/index.html"
 
+  Scenario: A theme with data
+    Given I have a configuration file with "theme" set to "test-theme"
+    And I have an _data directory
+    And I have an "_data/greetings.yml" file with content:
+      """
+      foo: "Hello! I’m foo. And who are you?"
+      """
+    And I have an "index.html" page that contains "{{ site.data.greetings.foo }}"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "Hello! I’m foo. And who are you?" in "_site/index.html"
+
   Scenario: A theme with a layout
     Given I have a configuration file with "theme" set to "test-theme"
     And I have an _layouts directory
