@@ -9,7 +9,7 @@ module Jekyll
       @content = {}
       @entry_filter = EntryFilter.new(site)
       @in_source_dir = in_source_dir || @site.method(:in_source_dir)
-      @source_dir = in_source_dir.call("/")
+      @source_dir = @in_source_dir.call("/") if @in_source_dir
     end
 
     # Read all the files in <dir> and adds them to @content
