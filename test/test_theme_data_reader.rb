@@ -72,7 +72,7 @@ class TestThemeDataReader < JekyllUnitTest
     end
 
     should "should merge nested keys" do
-      assert_equal "Dairy", @site.data["categories"]["dairy"]["name"]
+      refute_equal "Cheese Dairy", @site.data["categories"]["dairy"]["name"]
       @site.data["categories"]["dairy"]["products"].each do |product|
         assert_includes "|spread cheese|,|cheddar cheese|,|cheese|,|milk|", "|#{product["name"]}|"
       end
