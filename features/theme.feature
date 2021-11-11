@@ -42,17 +42,17 @@ Feature: Writing themes
     And I should see "<span class=\"sample\">include.html from test-theme</span>" in "_site/index.html"
 
   Scenario: A theme without data
-    Given I have a configuration file with "theme" set to "test-theme"
+    Given I have a configuration file with "theme" set to "test-theme-skinny"
     And I have an "index.html" page that contains "{{ site.data.greetings.foo }}"
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
     And I should see "Hello! I’m bar. What’s up so far?" in "_site/index.html"
 
-  Scenario: A theme with data overridden by site data
+  Scenario: A theme with data overridden by data in source directory
     Given I have a configuration file with "theme" set to "test-theme"
-    And I have an _data directory
-    And I have an "_data/greetings.yml" file with content:
+    And I have a _data directory
+    And I have a "_data/greetings.yml" file with content:
       """
       foo: "Hello! I’m foo. And who are you?"
       """
