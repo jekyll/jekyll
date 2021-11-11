@@ -21,7 +21,7 @@ See also: [resources](/resources/).
 
 When you [create a new Jekyll site](/docs/) (by running the `jekyll new <PATH>` command), Jekyll installs a site that uses a gem-based theme called [Minima](https://github.com/jekyll/minima).
 
-With gem-based themes, some of the site's directories (such as the `assets`, `_layouts`, `_includes`, and `_sass` directories) are stored in the theme's gem, hidden from your immediate view. Yet all of the necessary directories will be read and processed during Jekyll's build process.
+With gem-based themes, some of the site's directories (such as the `assets`, `_data`, `_layouts`, `_includes`, and `_sass` directories) are stored in the theme's gem, hidden from your immediate view. Yet all of the necessary directories will be read and processed during Jekyll's build process.
 
 In the case of Minima, you see only the following files in your Jekyll site directory:
 
@@ -46,7 +46,7 @@ The goal of gem-based themes is to allow you to get all the benefits of a robust
 
 ## Overriding theme defaults
 
-Jekyll themes set default layouts, includes, and stylesheets. However, you can override any of the theme defaults with your own site content.
+Jekyll themes set default data, layouts, includes, and stylesheets. However, you can override any of the theme defaults with your own site content.
 
 To replace layouts or includes in your theme, make a copy in your `_layouts` or `_includes` directory of the specific file you wish to modify, or create the file from scratch giving it the same name as the file you wish to override.
 
@@ -117,6 +117,7 @@ To modify any stylesheet you must take the extra step of also copying the main s
 Jekyll will look first to your site's content before looking to the theme's defaults for any requested file in the following folders:
 
 - `/assets`
+- `/_data`
 - `/_layouts`
 - `/_includes`
 - `/_sass`
@@ -125,6 +126,43 @@ Note that making copies of theme files will prevent you from receiving any theme
 
 {: .note .info}
 Refer to your selected theme's documentation and source repository for more information on which files you can override.
+
+### Themes with a `_data` Folder
+
+Starting with version 4.2.2, Jekyll also takes into account the `_data` directory of themes. This allows data to be distributed across themes. 
+
+A typical example is text used within design elements.
+
+Imagine your theme provides a include `testimonials.html`. This design element creates a new section on the page, and puts a h3 heading over the list of testimonials.
+
+You as a theme developer will probably formulate the heading in English and put it directly into the HTML source code.
+
+Consumers of your theme can copy your include into their project and replace the heading there.
+
+With the consideration of the `_data` directory there is another solution for this standard task.
+
+Instead of entering the text directly into your design template, you add a reference to a text catalog (e.g. `site.data.i18n.testimonials.header`) and create a file `_data/i18n/testimonials.yml` in the data directory of your theme.
+
+In this file you put the header under the key `header` and Jekyll takes care of the rest.
+
+For you, this, at first sight, is of course a bigger effort than before.
+
+However, for the consumers of your theme, the customization is greatly simplified.
+
+Imagine your theme is used by a customer from Germany. In order for her to get the translated header for the testimonials design element in, she just has to create a data file in her project directory with the key `i18n.testimonials.header`, put the German translation or a header of her choice on top of it and the design element is already customized.
+
+She no longer has to copy your include into her project directory, customize it there and, what weighs heaviest, waiver all updates of your theme, simply because you offered her the possibility to make changes to text modules centrally via text files.
+
+{: .note .warning}
+Data files provide a high degree of flexibility. The place where you put your text modules may differ from that of your consumers
+
+Related to above example the overriding key `site.data.i18n.testimonials.header` from your themes `_data/i18n/testimonials.yml` on the consumer site can be located in three different locations:
+
+- `_data/i18n.yml` with key `testimonials.header`
+- `_data/i18n/testimonials.yml` with key `header` (which mirrors your layout)
+- `_data/i18n/testimonials/header.yml` without any key, the headline can go straight into the file
+
+Always have this ambiguity in mind, when consumers feel lost in setting their text modules for your design element.
 
 ## Converting gem-based themes to regular themes
 
