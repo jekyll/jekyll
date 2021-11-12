@@ -52,7 +52,7 @@ Feature: Writing themes
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "Hello! I’m bar. What’s up so far?" in "_site/index.html"
+    And I should see "Hello! I’m foo. And who are you?" in "_site/index.html"
 
   Scenario: A theme with data overridden by data in source directory
     Given I have a configuration file with "theme" set to "test-theme"
