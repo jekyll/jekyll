@@ -3,7 +3,6 @@
 require "helper"
 
 class TestThemeDataReader < JekyllUnitTest
-
   context "site without a theme" do
     setup do
       @site = fixture_site("theme" => nil)
@@ -74,7 +73,9 @@ class TestThemeDataReader < JekyllUnitTest
     should "should merge nested keys" do
       refute_equal "Cheese Dairy", @site.data["categories"]["dairy"]["name"]
       expected_names = %w(cheese milk)
-      product_names  = @site.data["categories"]["dairy"]["products"].map { |product| product["name"] }
+      product_names  = @site.data["categories"]["dairy"]["products"].map do |product|
+        product["name"]
+      end
       expected_names.each do |expected_name|
         assert_includes product_names, expected_name
       end

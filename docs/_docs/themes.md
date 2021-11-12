@@ -167,6 +167,8 @@ Always have this ambiguity in mind, when consumers feel lost in setting their te
 {: .note .info}
 When using the data feature ask yourself, is the key that I introduce something that changes the behaviour of your theme when present or not, or is it just data that’s displayed anyway. If it’s changing the behaviour of your theme it should go into `site.config` otherwise it’s fine to be provided via `site.data`.
 
+Bundling behavior-modifying theme-data is not only an **anti-pattern** whose use is discouraged, but it is solely upto the theme-author to ensure that every provided data can be easily overridden by the user if they desire to.
+
 ## Converting gem-based themes to regular themes
 
 Suppose you want to get rid of the gem-based theme and convert it to a regular theme, where all files are present in your Jekyll site directory, with nothing stored in the theme gem.

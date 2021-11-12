@@ -3,7 +3,7 @@
 module Jekyll
   class ThemeBuilder
     SCAFFOLD_DIRECTORIES = %w(
-      assets _layouts _includes _sass
+      assets _data _layouts _includes _sass
     ).freeze
 
     attr_reader :name, :path, :code_of_conduct
