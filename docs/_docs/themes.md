@@ -129,7 +129,7 @@ Refer to your selected theme's documentation and source repository for more info
 
 ### Themes with a `_data` Folder
 
-Starting with version 4.2.2, Jekyll also takes into account the `_data` directory of themes. This allows data to be distributed across themes. 
+Starting with version 4.3.0, Jekyll also takes into account the `_data` directory of themes. This allows data to be distributed across themes. 
 
 A typical example is text used within design elements.
 
@@ -165,7 +165,7 @@ Related to above example the overriding key `site.data.i18n.testimonials.header`
 Always have this ambiguity in mind, when consumers feel lost in setting their text modules for your design element you should be fine supporting them.
 
 {: .note .info}
-When using the data feature ask yourself, is the key that I want to introduce something that changes the behaviour of your theme when present or not, or is it just data that’s displayed anyway. If it’s changing the behaviour of your theme it should go into `site.config` otherwise it’s fine to be provided via `site.data`.
+When using the data feature ask yourself, is the key that I introduce something that changes the behaviour of your theme when present or not, or is it just data that’s displayed anyway. If it’s changing the behaviour of your theme it should go into `site.config` otherwise it’s fine to be provided via `site.data`.
 
 ## Converting gem-based themes to regular themes
 
