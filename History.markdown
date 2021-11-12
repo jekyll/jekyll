@@ -53,6 +53,7 @@
   * Respect collections_dir config within include tag (#8756)
   * Fix regression in Convertible module from v4.2.0  (#8786)
   * Revert #7253: &#34;Don&#39;t reset site.url to localhost:4000 by default&#34; (#8620)
+  * Improve readability of CI logs (#8877)
 
 ### Development Fixes
 
