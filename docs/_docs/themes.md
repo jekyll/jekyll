@@ -149,20 +149,23 @@ For you, this, at first sight, is of course a bigger effort than before.
 
 However, for the consumers of your theme, the customization is greatly simplified.
 
-Imagine your theme is used by a customer from Germany. In order for her to get the translated header for the testimonials design element in, she just has to create a data file in her project directory with the key `i18n.testimonials.header`, put the German translation or a header of her choice on top of it and the design element is already customized.
+Imagine your theme is used by a customer from Germany. In order for her to get the translated header for the testimonials design element in, she just has to create a data file in her project directory with the key `site.data.i18n.testimonials.header`, put the German translation or a header of her choice on top of it and the design element is already customized.
 
 She no longer has to copy your include into her project directory, customize it there and, what weighs heaviest, waiver all updates of your theme, simply because you offered her the possibility to make changes to text modules centrally via text files.
 
 {: .note .warning}
-Data files provide a high degree of flexibility. The place where you put your text modules may differ from that of your consumers
+Data files provide a high degree of flexibility. The place where you put your text modules may differ from that of your consumers which can cause unforeseen troubles!
 
-Related to above example the overriding key `site.data.i18n.testimonials.header` from your themes `_data/i18n/testimonials.yml` on the consumer site can be located in three different locations:
+Related to above example the overriding key `site.data.i18n.testimonials.header` from your themes `_data/i18n/testimonials.yml` file on the consumer site can be located in three different locations:
 
 - `_data/i18n.yml` with key `testimonials.header`
 - `_data/i18n/testimonials.yml` with key `header` (which mirrors your layout)
 - `_data/i18n/testimonials/header.yml` without any key, the headline can go straight into the file
 
-Always have this ambiguity in mind, when consumers feel lost in setting their text modules for your design element.
+Always have this ambiguity in mind, when consumers feel lost in setting their text modules for your design element you should be fine supporting them.
+
+{: .note .info}
+When using the data feature ask yourself, is the key that I want to introduce something that changes the behaviour of your theme when present or not, or is it just data that’s displayed anyway. If it’s changing the behaviour of your theme it should go into `site.config` otherwise it’s fine to be provided via `site.data`.
 
 ## Converting gem-based themes to regular themes
 

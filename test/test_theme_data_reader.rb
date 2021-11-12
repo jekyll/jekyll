@@ -80,5 +80,10 @@ class TestThemeDataReader < JekyllUnitTest
       end
       assert_equal "Dairy", @site.data["categories"]["dairy"]["name"]
     end
+
+    should "should illustrate the documented sample" do
+      assert_equal "Kundenstimmen", @site.data["i18n"]["testimonials"]["header"]
+      assert_equal "Design by FTC", @site.data["i18n"]["testimonials"]["footer"]
+    end
   end
 end
