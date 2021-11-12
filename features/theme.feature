@@ -43,6 +43,11 @@ Feature: Writing themes
 
   Scenario: A theme without data
     Given I have a configuration file with "theme" set to "test-theme-skinny"
+    And I have a _data directory
+    And I have a "_data/greetings.yml" file with content:
+      """
+      foo: "Hello! I’m foo. And who are you?"
+      """
     And I have an "index.html" page that contains "{{ site.data.greetings.foo }}"
     When I run jekyll build
     Then I should get a zero exit status
