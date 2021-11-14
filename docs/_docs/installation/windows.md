@@ -121,21 +121,13 @@ While 'new' blogs created with Jekyll v3.4 and greater, will have the following 
 sites *will* have to update their `Gemfile` (and installed gems) to enable development on Windows:
 
 ```ruby
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+# Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
+# and associated library.
+platforms :mingw, :x64_mingw, :mswin, :jruby do
+  gem "tzinfo", ">= 1", "< 3"
+  gem "tzinfo-data"
+end
 ```
-
-<div class="note warning">
-  <h5>TZInfo 2.0 incompatibility</h5>
-  <p>
-    Version 2.0 of the TZInfo library has introduced a change in how timezone offsets are calculated.
-    This will result in incorrect date and time for your posts when the site is built with Jekyll 3.x on Windows.
-  </p>
-  <p>
-    We therefore recommend that you lock the Timezone library to version 1.2 and above by listing
-    <code>gem 'tzinfo', '~> 1.2'</code> in your <code>Gemfile</code>.
-  </p>
-</div>
 
 ## Auto Regeneration
 

@@ -32,6 +32,8 @@ group :test do
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)
   gem "test-theme-skinny", :path => File.expand_path("test/fixtures/test-theme-skinny", __dir__)
   gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
+  gem "tzinfo", ">= 1", "< 3"
+  gem "tzinfo-data"
 
   if RUBY_ENGINE == "jruby"
     gem "http_parser.rb", "~> 0.6.0"
@@ -80,13 +82,6 @@ group :jekyll_optional_dependencies do
     gem "classifier-reborn", "~> 2.2"
     gem "liquid-c", "~> 4.0"
     gem "yajl-ruby", "~> 1.4"
-  end
-
-  # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
-  # and associated library
-  platforms :jruby, :mswin, :mingw, :x64_mingw do
-    gem "tzinfo", "~> 1.2"
-    gem "tzinfo-data"
   end
 end
 
