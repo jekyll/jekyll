@@ -23,7 +23,7 @@ group :test do
   gem "nokogiri", "~> 1.7"
   gem "rspec"
   gem "rspec-mocks"
-  gem "rubocop", "~> 1.18.3"
+  gem "rubocop", "~> 1.22.0"
   gem "rubocop-minitest"
   gem "rubocop-performance"
   gem "rubocop-rake"
@@ -33,7 +33,10 @@ group :test do
   gem "test-theme-skinny", :path => File.expand_path("test/fixtures/test-theme-skinny", __dir__)
   gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
 
-  gem "jruby-openssl" if RUBY_ENGINE == "jruby"
+  if RUBY_ENGINE == "jruby"
+    gem "http_parser.rb", "~> 0.6.0"
+    gem "jruby-openssl"
+  end
 end
 
 #

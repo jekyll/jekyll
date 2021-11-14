@@ -24,19 +24,19 @@ See [Requirements]({{ '/docs/installation/#requirements' | relative_url }}) for 
 
 1. Install all [prerequisites]({{ '/docs/installation/' | relative_url }}).
 2. Install the jekyll and bundler [gems]({{ '/docs/ruby-101/#gems' | relative_url }}).
-```
+```sh
 gem install jekyll bundler
 ```
 3. Create a new Jekyll site at `./myblog`.
-```
+```sh
 jekyll new myblog
 ```
 4. Change into your new directory.
-```
+```sh
 cd myblog
 ```
 5. Build the site and make it available on a local server.
-```
+```sh
 bundle exec jekyll serve
 ```
 6. Browse to [http://localhost:4000](http://localhost:4000){:target="_blank"}
