@@ -71,6 +71,7 @@
   * Tags:Highlight: Decomposed HTMLLegacy formatter (#8623)
   * Relax Rubocop Dependency (#8831)
   * Add a workflow to build gems consistently (#8830)
+  * Fix random test failures in TestExcerpt #to_liquid (#8884)
 
 ### Minor Enhancements
 
