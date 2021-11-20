@@ -133,41 +133,41 @@ Starting with version 4.3.0, Jekyll also takes into account the `_data` director
 
 A typical example is text used within design elements.
 
-Imagine your theme provides a include `testimonials.html`. This design element creates a new section on the page, and puts a h3 heading over the list of testimonials.
+Imagine a theme provides the include file `testimonials.html`. This design element creates a new section on the page, and puts a h3 heading over the list of testimonials.
 
-You as a theme developer will probably formulate the heading in English and put it directly into the HTML source code.
+A theme developer will probably formulate the heading in English and put it directly into the HTML source code.
 
-Consumers of your theme can copy your include into their project and replace the heading there.
+Consumers of the theme can copy the included file into their project and replace the heading there.
 
 With the consideration of the `_data` directory there is another solution for this standard task.
 
-Instead of entering the text directly into your design template, you add a reference to a text catalog (e.g. `site.data.i18n.testimonials.header`) and create a file `_data/i18n/testimonials.yml` in the data directory of your theme.
+Instead of entering the text directly into the design template, the designer adds a reference to a text catalog (e.g. `site.data.i18n.testimonials.header`) and create a file `_data/i18n/testimonials.yml` in the data directory of the theme.
 
-In this file you put the header under the key `header` and Jekyll takes care of the rest.
+In this file the header is put under the key `header` and Jekyll takes care of the rest.
 
-For you, this, at first sight, is of course a bigger effort than before.
+For theme developers, this, at first sight, is of course a bigger effort than before.
 
-However, for the consumers of your theme, the customization is greatly simplified.
+However, for the consumers of the theme, the customization is greatly simplified.
 
-Imagine your theme is used by a customer from Germany. In order for her to get the translated header for the testimonials design element in, she just has to create a data file in her project directory with the key `site.data.i18n.testimonials.header`, put the German translation or a header of her choice on top of it and the design element is already customized.
+Imagine the theme is used by a customer from Germany. In order for her to get the translated header for the testimonials design element in, she just has to create a data file in her project directory with the key `site.data.i18n.testimonials.header`, put the German translation or a header of her choice on top of it and the design element is already customized.
 
-She no longer has to copy your include into her project directory, customize it there and, what weighs heaviest, waiver all updates of your theme, simply because you offered her the possibility to make changes to text modules centrally via text files.
+She no longer has to copy the included file into her project directory, customize it there and, what weighs heaviest, waiver all updates of the theme, simply because the theme developer offered her the possibility to make changes to text modules centrally via text files.
 
 {: .note .warning}
-Data files provide a high degree of flexibility. The place where you put your text modules may differ from that of your consumers which can cause unforeseen troubles!
+Data files provide a high degree of flexibility. The place where theme developers put text modules may differ from that of the consumer of the theme which can cause unforeseen troubles!
 
-Related to above example the overriding key `site.data.i18n.testimonials.header` from your themes `_data/i18n/testimonials.yml` file on the consumer site can be located in three different locations:
+Related to above example the overriding key `site.data.i18n.testimonials.header` from the theme's `_data/i18n/testimonials.yml` file on the consumer site can be located in three different locations:
 
 - `_data/i18n.yml` with key `testimonials.header`
-- `_data/i18n/testimonials.yml` with key `header` (which mirrors your layout)
+- `_data/i18n/testimonials.yml` with key `header` (which mirrors the layout of the given example)
 - `_data/i18n/testimonials/header.yml` without any key, the headline can go straight into the file
 
-Always have this ambiguity in mind, when consumers feel lost in setting their text modules for your design element you should be fine supporting them.
+Theme developers should have this ambiguity in mind, when supporting consumers that feel lost in setting their text modules for the design elements the theme provides.
 
 {: .note .info}
-When using the data feature ask yourself, is the key that I introduce something that changes the behaviour of your theme when present or not, or is it just data that’s displayed anyway. If it’s changing the behaviour of your theme it should go into `site.config` otherwise it’s fine to be provided via `site.data`.
+When using the data feature ask yourself, is the key that you introduce something that changes the behaviour of the theme when present or not, or is it just data that's displayed anyway. If it's changing the behaviour of the theme it should go into `site.config` otherwise it's fine to be provided via `site.data`.
 
-Bundling behavior-modifying theme-data is not only an **anti-pattern** whose use is discouraged, but it is solely up to the theme-author to ensure that every provided data can be easily overridden by the user if they desire to.
+Bundling data that modifies the behavior of a theme is considered an **anti-pattern** whose use is strongly discouraged. It is solely up to the author of the theme to ensure that every provided data can be easily overridden by the consumer of the theme if they desire to.
 
 ## Converting gem-based themes to regular themes
 
