@@ -29,7 +29,7 @@ class TestTheme < JekyllUnitTest
   end
 
   context "path generation" do
-    [:assets, :_layouts, :_includes, :_sass].each do |folder|
+    [:assets, :_data, :_layouts, :_includes, :_sass].each do |folder|
       should "know the #{folder} path" do
         expected = theme_dir(folder.to_s)
         assert_equal expected, @theme.public_send("#{folder.to_s.tr("_", "")}_path")
