@@ -1252,9 +1252,11 @@ p.note {
 }
 
 .language-sh {
+  margin-top: 5px;
+  margin-bottom: 5px;
   position: relative;
   &:before {
-    display: table;
+    display: inline-table;
     padding: 8px;
     width: 100%;
     padding: 5px 0;
@@ -1267,19 +1269,27 @@ p.note {
     background-image: -webkit-linear-gradient(top, #f7f7f7 0%, #cfcfcf 7%, #aaaaaa 100%);
     background-image: -moz-linear-gradient(top, #f7f7f7 0%, #cfcfcf 7%, #aaaaaa 100%);
     background-image: -o-linear-gradient(top, #f7f7f7 0%, #cfcfcf 7%, #aaaaaa 100%);
-    background-image: linear-gradient(top, #f7f7f7 0%,#cfcfcf 7%,#aaaaaa 100%);
+    background-image: linear-gradient(to bottom, #ddd 0%,#999 84%,#bbb 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', endColorstr='#aaaaaa',GradientType=0 );
-    border-bottom: 1px solid #111;
     text-align: center;
     content: "terminal";
-    @include border-radius(5px 5px 0 0);
+    @include border-radius(3px 3px 0 0);
     @include box-shadow(0 3px 10px rgba(0,0,0,.5));
   }
   .highlight {
-    @include border-radius(0 0 5px 5px);
+    @include border-radius(0 0 3px 3px);
+  }
+  div.highlight {
+    border: 1px solid;
+    border-color: transparent #bbb #bbb #bbb;
+    @include box-shadow(0 3px 10px rgba(0,0,0,.5));
   }
   pre.highlight {
+    min-height: 48px;
     background: #1c1c1c;
+  }
+  code {
+    font-size: 15px
   }
 }
 

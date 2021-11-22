@@ -77,7 +77,16 @@ called `_site`.
 * `jekyll serve` - Does `jekyll build` and runs it on a local web server at `http://localhost:4000`, rebuilding the site any time you make a change.
 
 {: .note .info}
-When you're developing a site, use `jekyll serve`. To force the browser to refresh with every change, use `jekyll serve --livereload`. 
+When you're developing a site, use `jekyll serve`. To force the browser to refresh with every change, use `jekyll serve --livereload`.
+If there's a conflict or you'd like Jekyll to serve your development site at a different URL, use the `--host` and `--port` arguments,
+as described in the [serve command options]({{ '/docs/configuration/options/#serve-command-options' | relative_url }}).
+
+{: .note .warning}
+The version of the site that `jekyll serve` builds in `_site` is not suited for deployment. Links and asset URLs in sites created
+with `jekyll serve` will use `https://localhost:4000` or the value set with command-line configuration, instead of the values set
+in [your site's configuration file]({{ '/docs/configuration/' | relative_url }}). To learn about how to build your site when it's
+ready for deployment, read the [Deployment]({{ '/docs/step-by-step/10-deployment/' | relative_url }}) section of this tutorial.
+
 
 Run `jekyll serve` and go to
 <a href="http://localhost:4000" target="_blank" data-proofer-ignore>http://localhost:4000</a> in

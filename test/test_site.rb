@@ -86,6 +86,28 @@ class TestSite < JekyllUnitTest
       site = Site.new(default_configuration)
       assert_equal File.join(site.source, ".jekyll-cache"), site.cache_dir
     end
+
+    should "have the cache_dir hidden from Git" do
+      site = fixture_site
+      assert_equal site.source, source_dir
+      assert_exist source_dir(".jekyll-cache", ".gitignore")
+      assert_equal(
+        "# ignore everything in this directory\n*\n",
+        File.binread(source_dir(".jekyll-cache", ".gitignore"))
+      )
+    end
+
+    context "with a custom cache_dir configuration" do
+      should "have the custom cache_dir hidden from Git" do
+        site = fixture_site("cache_dir" => "../../custom-cache-dir")
+        refute_exist File.expand_path("../../custom-cache-dir/.gitignore", site.source)
+        assert_exist source_dir("custom-cache-dir", ".gitignore")
+        assert_equal(
+          "# ignore everything in this directory\n*\n",
+          File.binread(source_dir("custom-cache-dir", ".gitignore"))
+        )
+      end
+    end
   end
 
   context "creating sites" do
@@ -219,6 +241,7 @@ class TestSite < JekyllUnitTest
       @site.process
       # exclude files in symlinked directories here and insert them in the
       # following step when not on Windows.
+      # rubocop:disable Style/WordArray
       sorted_pages = %w(
         %#\ +.md
         .htaccess
@@ -246,6 +269,7 @@ class TestSite < JekyllUnitTest
         test-styles.scss
         trailing-dots...md
       )
+      # rubocop:enable Style/WordArray
       unless Utils::Platforms.really_windows?
         # files in symlinked directories may appear twice
         sorted_pages.push("main.css.map", "main.scss", "symlinked-file").sort!

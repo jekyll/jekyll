@@ -164,7 +164,7 @@ build using _Secrets_:
 
 ### Build and deploy
 
-On pushing any local changes onto `master`, the action will be triggered and the build will
+On pushing any local changes onto `main`, the action will be triggered and the build will
 **start**.
 
 To watch the progress and see any build errors, check on the build **status** using one of the

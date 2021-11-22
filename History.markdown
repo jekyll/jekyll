@@ -31,6 +31,16 @@
   * Improve GitHub Flavored Markdown Docs (#8684)
   * Fixing URL in MacOS install for rbenv-doctor (#8693)
   * Fix adjective in `troubleshooting.md` document (#8777)
+  * Goodbye Frank. We&#39;ll miss you. 💔 (#8807)
+  * Update index.html: Grammar fix. (#8803)
+  * Prefer Libera. Remove Freenode. (#8811)
+  * Update feature_request.md (#8797)
+  * Remove AWS Amplify from the showcase (#8812)
+  * Move Frank to Emeritus Core Team Members (#8813)
+  * Release post for v4.2.1 (#8818)
+  * Update CircleCI example (#8829)
+  * Fix typo (#8835)
+  * Added docs for running locally (#8852)
 
 ### Bug Fixes
 
@@ -42,6 +52,8 @@
   * Inject livereload script using `location.protocol` instead of `http:` (#8718)
   * Respect collections_dir config within include tag (#8756)
   * Fix regression in Convertible module from v4.2.0  (#8786)
+  * Revert #7253: &#34;Don&#39;t reset site.url to localhost:4000 by default&#34; (#8620)
+  * Improve readability of CI logs (#8877)
 
 ### Development Fixes
 
@@ -57,6 +69,9 @@
   * Update expect to cover docs/_posts (#8677)
   * Enable Rubocop accessor grouping, fix existing offenses (#8293)
   * Tags:Highlight: Decomposed HTMLLegacy formatter (#8623)
+  * Relax Rubocop Dependency (#8831)
+  * Add a workflow to build gems consistently (#8830)
+  * Fix random test failures in TestExcerpt #to_liquid (#8884)
 
 ### Minor Enhancements
 
@@ -64,10 +79,21 @@
   * Update include tag to be more permissive (#8618)
   * Optimize `Jekyll::Utils.parse_date` (#8425)
   * Update rubocop from 1.12 to 1.18 and min ruby from 2.4 to 2.5 (#8741)
+  * Always hide cache-dir contents from Git (#8798)
+  * Remove the warning about auto-regeneration on Windows (#8821)
 
 ### Site Enhancements
 
   * Improvements to CSS (#7834)
+  * Slightly update lang `sh` code-block styling (#8857)
+
+## 4.2.1 / 2021-09-27
+
+### Bug Fixes
+
+  * Backport #8620 for v4.2.x: Revert #7253: "Don't reset site.url to localhost:4000 by default" (#8808)
+  * Backport #8756 for v4.2.x: Respect collections_dir config within include tag (#8794)
+  * Backport #8786 for v4.2.x: Fix regression in Convertible module from v4.2.0 (#8793)
 
 ## 4.2.0 / 2020-12-14
 
