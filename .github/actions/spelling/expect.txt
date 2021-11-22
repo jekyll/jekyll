@@ -84,6 +84,7 @@ chown
 Chrononaut
 chruby
 cibuild
+cimg
 circleci
 CJK
 classname
