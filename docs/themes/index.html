@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-11-22T01:53:27-08:00" />
+<meta property="article:published_time" content="2021-11-22T05:02:03-08:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Themes" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"description":"Jekyll has an extensive theme system that allows you to leverage community-maintained templates and styles to customize your site’s presentation. Jekyll themes specify plugins and package up assets, layouts, includes, and stylesheets in a way that can be overridden by your site’s content.","url":"https://jekyllrb.com/docs/themes/","image":"https://jekyllrb.com/img/jekyll-og.png","@type":"BlogPosting","headline":"Themes","dateModified":"2021-11-22T01:53:27-08:00","datePublished":"2021-11-22T01:53:27-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/themes/"},"@context":"https://schema.org"}</script>
+{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"description":"Jekyll has an extensive theme system that allows you to leverage community-maintained templates and styles to customize your site’s presentation. Jekyll themes specify plugins and package up assets, layouts, includes, and stylesheets in a way that can be overridden by your site’s content.","url":"https://jekyllrb.com/docs/themes/","@type":"BlogPosting","image":"https://jekyllrb.com/img/jekyll-og.png","headline":"Themes","dateModified":"2021-11-22T05:02:03-08:00","datePublished":"2021-11-22T05:02:03-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/themes/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -147,7 +147,7 @@
 
 <p>When you <a href="/docs/">create a new Jekyll site</a> (by running the <code class="language-plaintext highlighter-rouge">jekyll new &lt;PATH&gt;</code> command), Jekyll installs a site that uses a gem-based theme called <a href="https://github.com/jekyll/minima">Minima</a>.</p>
 
-<p>With gem-based themes, some of the site’s directories (such as the <code class="language-plaintext highlighter-rouge">assets</code>, <code class="language-plaintext highlighter-rouge">_layouts</code>, <code class="language-plaintext highlighter-rouge">_includes</code>, and <code class="language-plaintext highlighter-rouge">_sass</code> directories) are stored in the theme’s gem, hidden from your immediate view. Yet all of the necessary directories will be read and processed during Jekyll’s build process.</p>
+<p>With gem-based themes, some of the site’s directories (such as the <code class="language-plaintext highlighter-rouge">assets</code>, <code class="language-plaintext highlighter-rouge">_data</code>, <code class="language-plaintext highlighter-rouge">_layouts</code>, <code class="language-plaintext highlighter-rouge">_includes</code>, and <code class="language-plaintext highlighter-rouge">_sass</code> directories) are stored in the theme’s gem, hidden from your immediate view. Yet all of the necessary directories will be read and processed during Jekyll’s build process.</p>
 
 <p>In the case of Minima, you see only the following files in your Jekyll site directory:</p>
 
@@ -171,7 +171,7 @@
 
 <h2 id="overriding-theme-defaults">Overriding theme defaults</h2>
 
-<p>Jekyll themes set default layouts, includes, and stylesheets. However, you can override any of the theme defaults with your own site content.</p>
+<p>Jekyll themes set default data, layouts, includes, and stylesheets. However, you can override any of the theme defaults with your own site content.</p>
 
 <p>To replace layouts or includes in your theme, make a copy in your <code class="language-plaintext highlighter-rouge">_layouts</code> or <code class="language-plaintext highlighter-rouge">_includes</code> directory of the specific file you wish to modify, or create the file from scratch giving it the same name as the file you wish to override.</p>
 
@@ -248,6 +248,7 @@ xdg-open <span class="si">$(</span>bundle info <span class="nt">--path</span> mi
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">/assets</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/_data</code></li>
   <li><code class="language-plaintext highlighter-rouge">/_layouts</code></li>
   <li><code class="language-plaintext highlighter-rouge">/_includes</code></li>
   <li><code class="language-plaintext highlighter-rouge">/_sass</code></li>
@@ -256,6 +257,53 @@ xdg-open <span class="si">$(</span>bundle info <span class="nt">--path</span> mi
 <p>Note that making copies of theme files will prevent you from receiving any theme updates on those files. An alternative, to continue getting theme updates on all stylesheets, is to use higher specificity CSS selectors in your own additional, originally named CSS files.</p>
 
 <p class="note info">Refer to your selected theme’s documentation and source repository for more information on which files you can override.</p>
+
+<h3 id="themes-with-data-directory">Themes with <code class="language-plaintext highlighter-rouge">_data</code> directory<span class="version-badge" title="This feature is available starting version 4.3.0">4.3.0</span>
+</h3>
+
+<p>Starting with version 4.3.0, Jekyll also takes into account the <code class="language-plaintext highlighter-rouge">_data</code> directory of themes. This allows data to be distributed across themes.</p>
+
+<p>A typical example is text used within design elements.</p>
+
+<p>Imagine a theme provides the include file <code class="language-plaintext highlighter-rouge">testimonials.html</code>. This design element creates a new section on the page, and puts a h3 heading over the list of testimonials.</p>
+
+<p>A theme developer will probably formulate the heading in English and put it directly into the HTML source code.</p>
+
+<p>Consumers of the theme can copy the included file into their project and replace the heading there.</p>
+
+<p>With the consideration of the <code class="language-plaintext highlighter-rouge">_data</code> directory there is another solution for this standard task.</p>
+
+<p>Instead of entering the text directly into the design template, the designer adds a reference to a text catalog (e.g. <code class="language-plaintext highlighter-rouge">site.data.i18n.testimonials.header</code>) and create a file <code class="language-plaintext highlighter-rouge">_data/i18n/testimonials.yml</code> in the data directory of the theme.</p>
+
+<p>In this file the header is put under the key <code class="language-plaintext highlighter-rouge">header</code> and Jekyll takes care of the rest.</p>
+
+<p>For theme developers, this, at first sight, is of course a bigger effort than before.</p>
+
+<p>However, for the consumers of the theme, the customization is greatly simplified.</p>
+
+<p>Imagine the theme is used by a customer from Germany. In order for her to get the translated header for the testimonials design element in, she just has to create a data file in her project directory with the key <code class="language-plaintext highlighter-rouge">site.data.i18n.testimonials.header</code>, put the German translation or a header of her choice on top of it and the design element is already customized.</p>
+
+<p>She no longer has to copy the included file into her project directory, customize it there and, what weighs heaviest, waiver all updates of the theme, simply because the theme developer offered her the possibility to make changes to text modules centrally via text files.</p>
+
+<p class="note warning">Data files provide a high degree of flexibility. The place where theme developers put text modules may differ from that of the consumer of the theme which can cause unforeseen troubles!</p>
+
+<p>Related to above example the overriding key <code class="language-plaintext highlighter-rouge">site.data.i18n.testimonials.header</code> from the theme’s <code class="language-plaintext highlighter-rouge">_data/i18n/testimonials.yml</code> file on the consumer site can be located in three different locations:</p>
+
+<ul>
+  <li>
+<code class="language-plaintext highlighter-rouge">_data/i18n.yml</code> with key <code class="language-plaintext highlighter-rouge">testimonials.header</code>
+</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">_data/i18n/testimonials.yml</code> with key <code class="language-plaintext highlighter-rouge">header</code> (which mirrors the layout of the given example)</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">_data/i18n/testimonials/header.yml</code> without any key, the headline can go straight into the file</li>
+</ul>
+
+<p>Theme developers should have this ambiguity in mind, when supporting consumers that feel lost in setting their text modules for the design elements the theme provides.</p>
+
+<p class="note info">When using the data feature ask yourself, is the key that you introduce something that changes the behaviour of the theme when present or not, or is it just data that’s displayed anyway. If it’s changing the behaviour of the theme it should go into <code class="language-plaintext highlighter-rouge">site.config</code> otherwise it’s fine to be provided via <code class="language-plaintext highlighter-rouge">site.data</code>.</p>
+
+<p>Bundling data that modifies the behavior of a theme is considered an <strong>anti-pattern</strong> whose use is strongly discouraged. It is solely up to the author of the theme to ensure that every provided data can be easily overridden by the consumer of the theme if they desire to.</p>
 
 <h2 id="converting-gem-based-themes-to-regular-themes">Converting gem-based themes to regular themes</h2>
 
