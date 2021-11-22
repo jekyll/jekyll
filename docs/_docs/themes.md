@@ -127,7 +127,8 @@ Note that making copies of theme files will prevent you from receiving any theme
 {: .note .info}
 Refer to your selected theme's documentation and source repository for more information on which files you can override.
 
-### Themes with a `_data` Folder
+### Themes with `_data` directory {%- include docs_version_badge.html version="4.3.0" -%}
+{: #themes-with-data-directory }
 
 Starting with version 4.3.0, Jekyll also takes into account the `_data` directory of themes. This allows data to be distributed across themes. 
 
