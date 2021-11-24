@@ -71,6 +71,7 @@
   * Tags:Highlight: Decomposed HTMLLegacy formatter (#8623)
   * Relax Rubocop Dependency (#8831)
   * Add a workflow to build gems consistently (#8830)
+  * Fix random test failures in TestExcerpt #to_liquid (#8884)
 
 ### Minor Enhancements
 
@@ -80,6 +81,7 @@
   * Update rubocop from 1.12 to 1.18 and min ruby from 2.4 to 2.5 (#8741)
   * Always hide cache-dir contents from Git (#8798)
   * Remove the warning about auto-regeneration on Windows (#8821)
+  * Propagate _data folder from theme (#8815)
 
 ### Site Enhancements
 
