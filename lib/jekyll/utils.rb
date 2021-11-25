@@ -47,7 +47,14 @@ module Jekyll
     end
 
     def mergable?(value)
-      value.is_a?(Hash) || value.is_a?(Drops::Drop)
+      case value
+      when Hash, Drops::Drop, SiteData::Directory
+        true
+      when SiteData::File
+        mergable?(value.content)
+      else
+        false
+      end
     end
 
     def duplicable?(obj)

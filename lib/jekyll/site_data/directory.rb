@@ -19,6 +19,16 @@ module Jekyll
         self
       end
 
+      def merge(other, &block)
+        merged_meta = @meta.merge(other, &block)
+        dup.tap { |d| d.instance_variable_set(:@meta, merged_meta) }
+      end
+
+      def merge!(other, &block)
+        @meta.merge!(other, &block)
+        self
+      end
+
       def method_missing(method, *args, &block)
         @meta.send(method, *args, &block)
       end
