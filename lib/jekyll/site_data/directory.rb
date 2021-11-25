@@ -10,8 +10,8 @@ module Jekyll
       end
       private_class_method :delegate_to_meta
 
-      attr_accessor :context
       delegate_to_meta :freeze, :inspect
+      attr_accessor :context
 
       def initialize
         @meta = {}

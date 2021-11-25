@@ -4,7 +4,6 @@ source "https://rubygems.org"
 gemspec :name => "jekyll"
 
 gem "rake", "~> 13.0"
-gem "tzinfo", "~> 1.2"
 
 group :development do
   gem "launchy", "~> 2.3"
@@ -87,6 +86,7 @@ group :jekyll_optional_dependencies do
   # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
   # and associated library
   platforms :jruby, :mswin, :mingw, :x64_mingw do
+    gem "tzinfo", "~> 1.2"
     gem "tzinfo-data"
   end
 end
