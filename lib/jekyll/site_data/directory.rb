@@ -3,7 +3,15 @@
 module Jekyll
   module SiteData
     class Directory
+      # Delegate given (zero-arity) method(s) to the Hash object stored in instance
+      # variable `@meta`.
+      def self.delegate_to_meta(*symbols)
+        symbols.each { |sym| define_method(sym) { @meta.send(sym) } }
+      end
+      private_class_method :delegate_to_meta
+
       attr_accessor :context
+      delegate_to_meta :freeze, :inspect
 
       def initialize
         @meta = {}
@@ -35,10 +43,6 @@ module Jekyll
 
       def respond_to_missing?(method, *)
         @meta.respond_to?(method)
-      end
-
-      def inspect
-        @meta.inspect
       end
     end
   end
