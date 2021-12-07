@@ -35,7 +35,7 @@ For example:
 
 This displays the sidebar if the value of the `show_sidebar` page variable is true. 
 
-Learn more about the tags available in Jekyll [here](/docs/liquid/tags/).
+[Learn more about the tags](/docs/liquid/tags/) available.
 
 ## Filters
 
