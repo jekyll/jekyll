@@ -86,7 +86,7 @@ group :jekyll_optional_dependencies do
   # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
   # and associated library
   platforms :jruby, :mswin, :mingw, :x64_mingw do
-    gem "tzinfo", "~> 1.2"
+    gem "tzinfo", ENV["TZINFO_VERSION"] if ENV["TZINFO_VERSION"]
     gem "tzinfo-data"
   end
 end
