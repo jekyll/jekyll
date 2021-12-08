@@ -41,6 +41,7 @@
   * Update CircleCI example (#8829)
   * Fix typo (#8835)
   * Added docs for running locally (#8852)
+  * Linting README.markdown (#8900)
 
 ### Bug Fixes
 
