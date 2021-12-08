@@ -33,7 +33,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby_version }}
-          bundler: "2.2.31"
           bundler-cache: true
       - name: Run Minitest based tests
         run: bash script/test
@@ -64,7 +63,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby_version }}
-          bundler: "2.2.31"
           bundler-cache: true
       - name: ${{ matrix.step_name }}
         run: bash script/${{ matrix.script_file }}
