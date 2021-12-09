@@ -4,11 +4,12 @@ module Jekyll
   class DataReader
     attr_reader :site, :content
 
-    def initialize(site)
+    def initialize(site, in_source_dir: nil)
       @site = site
       @content = {}
       @entry_filter = EntryFilter.new(site)
-      @source_dir = site.in_source_dir("/")
+      @in_source_dir = in_source_dir || @site.method(:in_source_dir)
+      @source_dir = @in_source_dir.call("/")
     end
 
     # Read all the files in <dir> and adds them to @content
@@ -18,7 +19,7 @@ module Jekyll
     # Returns @content, a Hash of the .yaml, .yml,
     # .json, and .csv files in the base directory
     def read(dir)
-      base = site.in_source_dir(dir)
+      base = @in_source_dir.call(dir)
       read_data_to(base, @content)
       @content
     end
@@ -38,7 +39,7 @@ module Jekyll
       end
 
       entries.each do |entry|
-        path = @site.in_source_dir(dir, entry)
+        path = @in_source_dir.call(dir, entry)
         next if @entry_filter.symlink?(path)
 
         if File.directory?(path)

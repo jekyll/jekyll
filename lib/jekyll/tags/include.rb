@@ -234,12 +234,17 @@ module Jekyll
       end
 
       def add_include_to_dependency(inclusion, context)
-        return unless context.registers[:page]&.key?("path")
+        page = context.registers[:page]
+        return unless page&.key?("path")
 
-        @site.regenerator.add_dependency(
-          @site.in_source_dir(context.registers[:page]["path"]),
-          inclusion.path
-        )
+        absolute_path = \
+          if page["collection"]
+            @site.in_source_dir(@site.config["collections_dir"], page["path"])
+          else
+            @site.in_source_dir(page["path"])
+          end
+
+        @site.regenerator.add_dependency(absolute_path, inclusion.path)
       end
     end
 
@@ -260,7 +265,7 @@ module Jekyll
       def resource_path(page, site)
         path = page["path"]
         path = File.join(site.config["collections_dir"], path) if page["collection"]
-        path.sub(%r!/#excerpt\z!, "")
+        path.delete_suffix("/#excerpt")
       end
     end
   end

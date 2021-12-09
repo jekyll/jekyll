@@ -118,3 +118,14 @@ to see more detailed examples.
     <a href="{{ '/docs/installation/windows/' | relative_url }}">Windows-specific docs page</a>.
   </p>
 </div>
+
+### Running and Testing Locally
+
+Once the project is configured with the github-pages environment, it's quite hard to switch back and forth with the local settings and the production-level settings. For that we can use certain CLI options to make the workflow hassle-free.  
+
+```sh
+bundle exec jekyll serve --baseurl=""
+```
+
+This will run the jekyll server on your local machine i.e. on `http://localhost:4000`. Refer <a href="{{ '/docs/configuration/options/#serve-command-options' | relative_url }}">server options</a> for available options.
+

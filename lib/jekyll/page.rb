@@ -5,9 +5,7 @@ module Jekyll
     include Convertible
 
     attr_writer :dir
-    attr_accessor :site, :pager
-    attr_accessor :name, :ext, :basename
-    attr_accessor :data, :content, :output
+    attr_accessor :basename, :content, :data, :ext, :name, :output, :pager, :site
 
     alias_method :extname, :ext
 
@@ -144,7 +142,7 @@ module Jekyll
 
     # The path to the page source file, relative to the site source
     def relative_path
-      @relative_path ||= PathManager.join(@dir, @name).sub(%r!\A/!, "")
+      @relative_path ||= PathManager.join(@dir, @name).delete_prefix("/")
     end
 
     # Obtain destination path.

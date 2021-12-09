@@ -130,11 +130,9 @@ class TestUtils < JekyllUnitTest
 
   context "The \`Utils.slugify\` method" do
     should "return nil if passed nil" do
-      begin
-        assert Utils.slugify(nil).nil?
-      rescue NoMethodError
-        assert false, "Threw NoMethodError"
-      end
+      assert_nil Utils.slugify(nil)
+    rescue NoMethodError
+      assert false, "Threw NoMethodError"
     end
 
     should "replace whitespace with hyphens" do

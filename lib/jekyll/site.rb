@@ -2,15 +2,15 @@
 
 module Jekyll
   class Site
-    attr_reader   :source, :dest, :cache_dir, :config
-    attr_accessor :layouts, :pages, :static_files, :drafts, :inclusions,
-                  :exclude, :include, :lsi, :highlighter, :permalink_style,
-                  :time, :future, :unpublished, :safe, :plugins, :limit_posts,
-                  :show_drafts, :keep_files, :baseurl, :data, :file_read_opts,
-                  :gems, :plugin_manager, :theme
+    attr_accessor :baseurl, :converters, :data, :drafts, :exclude,
+                  :file_read_opts, :future, :gems, :generators, :highlighter,
+                  :include, :inclusions, :keep_files, :layouts, :limit_posts,
+                  :lsi, :pages, :permalink_style, :plugin_manager, :plugins,
+                  :reader, :safe, :show_drafts, :static_files, :theme, :time,
+                  :unpublished
 
-    attr_accessor :converters, :generators, :reader
-    attr_reader   :regenerator, :liquid_renderer, :includes_load_paths, :filter_cache, :profiler
+    attr_reader :cache_dir, :config, :dest, :filter_cache, :includes_load_paths,
+                :liquid_renderer, :profiler, :regenerator, :source
 
     # Public: Initialize a new Site.
     #
@@ -490,10 +490,26 @@ module Jekyll
       @site_cleaner ||= Cleaner.new(self)
     end
 
+    def hide_cache_dir_from_git
+      @cache_gitignore_path ||= in_source_dir(config["cache_dir"], ".gitignore")
+      return if File.exist?(@cache_gitignore_path)
+
+      cache_dir_path = in_source_dir(config["cache_dir"])
+      FileUtils.mkdir_p(cache_dir_path) unless File.directory?(cache_dir_path)
+
+      File.open(@cache_gitignore_path, "wb") do |file|
+        file.puts("# ignore everything in this directory\n*")
+      end
+    end
+
     # Disable Marshaling cache to disk in Safe Mode
     def configure_cache
       Jekyll::Cache.cache_dir = in_source_dir(config["cache_dir"], "Jekyll/Cache")
-      Jekyll::Cache.disable_disk_cache! if safe || config["disable_disk_cache"]
+      if safe || config["disable_disk_cache"]
+        Jekyll::Cache.disable_disk_cache!
+      else
+        hide_cache_dir_from_git
+      end
     end
 
     def configure_plugins

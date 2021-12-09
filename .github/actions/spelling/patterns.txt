@@ -9,31 +9,42 @@ https?://(?:(?:www\.|)youtube\.com|youtu.be)/(?:channel/|embed/|playlist\?list=|
 <\s*youtube\s+id=['"][-a-zA-Z0-9?_]*['"]
 \bimg\.youtube\.com/vi/[-a-zA-Z0-9?&=_]*
 youtube_id:\s*[-a-zA-Z0-9?&=_]*
+
 # Google Analytics
 \bgoogle-analytics\.com/collect.[-0-9a-zA-Z?%=&_.~]*
+
 # Google APIs
 \bgoogleapis\.com/[a-z]+/v\d+/[a-z]+/[@./?=\w]+
 \b[-a-zA-Z0-9.]*\bstorage\d*\.googleapis\.com(?:/\S*|)
+
 # Google Calendar
 \bcalendar\.google\.com/calendar(?:/u/\d+|)/embed\?src=[@./?=\w&%]+
 \w+\@group\.calendar\.google\.com\b
+
 # Google DataStudio
 \bdatastudio\.google\.com/(?:(?:c/|)u/\d+/|)(?:embed/|)(?:open|reporting|datasources|s)/[-0-9a-zA-Z]+(?:/page/[-0-9a-zA-Z]+|)
+
 # The leading `/` here is as opposed to the `\b` above
 # ... a short way to match `https://` or `http://` since most urls have one of those prefixes
 # Google Docs
 /docs\.google\.com/[a-z]+/d/(?:e/|)[0-9a-zA-Z_-]+/?
+
 # Google Groups
 https://groups\.google\.com/d/topic/[^/]+/[a-zA-Z0-9]+/discussion
 https://groups\.google\.com/d/msg/[^/]+/[a-zA-Z0-9]+/[a-zA-Z0-9]+
+
 # Google themes
 themes\.googleusercontent\.com/static/fonts/[^/]+/v\d+/[^.]+.
+
 # Google CDN
 \bclients2\.google(?:usercontent|)\.com[-0-9a-zA-Z/.]*
+
 # Goo.gl
 /goo\.gl/[a-zA-Z0-9]+
+
 # Google Chrome Store
 \bchrome\.google\.com/webstore/detail/\w*(?:/\w*|)
+
 # google_site_verification:
 google_site_verification: [-a-zA-Z=;:/0-9+]*
 
