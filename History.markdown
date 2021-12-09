@@ -1,8 +1,13 @@
 ## HEAD
 
+### Bug Fixes
+
+  * Lock `http_parser.rb` gem to `v0.6.x` on JRuby.
+
 ### Development Fixes
 
   * Backport #8830 for v4.2.x: Add a workflow to build gems consistently (#8869)
+  * Lock `rubocop-performance` to `v1.11.x`.
 
 ## 4.2.1 / 2021-09-27
 
