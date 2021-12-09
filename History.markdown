@@ -1,3 +1,9 @@
+## HEAD
+
+### Bug Fixes
+
+  * Lock `http_parser.rb` gem to `v0.6.x` on JRuby.
+
 ## 4.2.1 / 2021-09-27
 
 ### Bug Fixes
