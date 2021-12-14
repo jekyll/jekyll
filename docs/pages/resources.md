@@ -14,6 +14,7 @@ some of the most popular Jekyll resources.
 - [jamstackthemes.dev](https://jamstackthemes.dev/ssg/jekyll/)
 - [jekyllthemes.org](http://jekyllthemes.org/)
 - [jekyllthemes.io](https://jekyllthemes.io/)
+- [shop.zeespire.com](https://shop.zeespire.com/)
 
 See also: [docs/themes](/docs/themes/).
 
