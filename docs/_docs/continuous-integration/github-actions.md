@@ -129,7 +129,8 @@ The above workflow can be explained as the following:
 - We specify our selected **action** and **version number** using `helaili/jekyll-action@2.0.5`.
   This handles the build and deploy.
 - We set a reference to a secret **environment variable** for the action to use. The `GITHUB_TOKEN`
-  is available out-of-the-box in GitHub Actions.
+  is a secret token automatically initialized at the start of every workflow run.
+  More information can be found in [GitHub documentation](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret). 
 
 Instead of using the **on.push** condition, you could trigger your build on a **schedule** by
 using the [on.schedule] parameter. For example, here we build daily at midnight by specifying
