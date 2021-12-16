@@ -42,6 +42,7 @@
   * Fix typo (#8835)
   * Added docs for running locally (#8852)
   * Linting README.markdown (#8900)
+  * Remove text on GITHUB_TOKEN which is now built-in (#8907)
 
 ### Bug Fixes
 
