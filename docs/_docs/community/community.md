@@ -10,6 +10,13 @@ As contributors and maintainers of this project, and in the interest of fosterin
 
 Read the full [code of conduct]({{ '/docs/conduct/' | relative_url }})
 
+## Reporting Security Vulnerabilities
+
+Find something in our codebase that could be exploited by malicious elements?
+
+Consult our [Security Policy]({{ '/docs/security/' | relative_url }}) to see if a product version is considered *outdated* and how to report
+the situation responsibly.
+
 ## Where to get support
 
 If you're looking for support for Jekyll, there are a lot of options:
