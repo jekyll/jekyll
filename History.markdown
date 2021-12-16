@@ -43,6 +43,7 @@
   * Added docs for running locally (#8852)
   * Linting README.markdown (#8900)
   * Remove text on GITHUB_TOKEN which is now built-in (#8907)
+  * Add Security Policy document (#8823)
 
 ### Bug Fixes
 
