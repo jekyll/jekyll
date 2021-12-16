@@ -47,7 +47,6 @@
 
   * Add webrick as a dependency (#8524)
   * fix: pin rubocop to 1.12 due to error with ruby 2.4 (#8651)
-  * Revert &#34;style: run rubocop -a&#34; (#8676)
   * Load Jekyll plugins from BUNDLE_GEMFILE location (#8585)
   * fix(security):  CVE-2021-28834 (#8680)
   * Inject livereload script using `location.protocol` instead of `http:` (#8718)
@@ -64,7 +63,6 @@
   * Pin rubocop version (#8564)
   * style: add rubocop 1.9 cops (#8567)
   * Cross Version Testing Locally and Faster CI (#8610)
-  * style: run rubocop -a (#8654)
   * Use official Ruby setup GH action (#8614)
   * Spell check action for markdown documentation (#8675)
   * Update expect to cover docs/_posts (#8677)
