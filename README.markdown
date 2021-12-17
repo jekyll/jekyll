@@ -45,7 +45,7 @@ If you don't find the answer to your problem in our [docs](https://jekyllrb.com/
 ## Code of Conduct
 
 In order to have a more open and welcoming community, Jekyll adheres to a
-[code of conduct](CODE_OF_CONDUCT.markdown) adapted from the Ruby on Rails code of
+[code of conduct](https://jekyllrb.com/docs/conduct/) adapted from the Ruby on Rails code of
 conduct.
 
 Please adhere to this code of conduct in any interactions you have in the

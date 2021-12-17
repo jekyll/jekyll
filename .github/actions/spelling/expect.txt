@@ -116,6 +116,7 @@ cruft
 css
 csv
 Currin
+CVE
 CWD
 cygwin
 daringfireball
