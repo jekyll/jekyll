@@ -754,3 +754,5 @@ Zsh
 zshrc
 zypper
 zzot
+frontend
+prefetching
