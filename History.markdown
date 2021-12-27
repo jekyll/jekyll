@@ -45,6 +45,7 @@
   * Remove text on GITHUB_TOKEN which is now built-in (#8907)
   * Add Security Policy document (#8823)
   * Manage repository meta documents consistently (#8908)
+  * docs: add Layer0 deployment guide (#8915)
 
 ### Bug Fixes
 
