@@ -74,7 +74,7 @@ group :jekyll_optional_dependencies do
   gem "jekyll-redirect-from"
   gem "kramdown-syntax-coderay"
   gem "mime-types", "~> 3.0"
-  gem "rdoc", "~> 6.0"
+  gem "rdoc", "~> 6.3.0"
   gem "tomlrb"
 
   platforms :ruby, :mswin, :mingw, :x64_mingw do
