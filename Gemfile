@@ -73,6 +73,7 @@ group :jekyll_optional_dependencies do
   gem "jekyll-paginate"
   gem "jekyll-redirect-from"
   gem "kramdown-syntax-coderay"
+  gem "matrix"
   gem "mime-types", "~> 3.0"
   gem "rdoc", "~> 6.3.0"
   gem "tomlrb"
