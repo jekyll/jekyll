@@ -37,6 +37,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
 ### Comments
   - [Staticman](https://staticman.net): Add user-generated content to a Jekyll site (free and open source)
   - [Talkyard](https://www.talkyard.io/blog-comments): Embedded comments for Jekyll and others (free and open source, or hosted serverless)
+  - [All commenting tools by CloudCannon](https://cloudcannon.com/community/jamstack-ecosystem/commenting/): Browse a list of commenting tools to choose the best one for your Jekyll project
 
 ### Content Management
   - [CloudCannon](https://cloudcannon.com/): The Cloud CMS for Jekyll
@@ -50,6 +51,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
 ### E-commerce
   - [MemberSpace](https://www.memberspace.com/integrations/jekyll-membership/): Add memberships and paywall functionality to a Jekyll site
   - [Snipcart](https://snipcart.com/blog/static-site-e-commerce-part-2-integrating-snipcart-with-jekyll): Add a shopping cart to a Jekyll site
+  - [All E-commerce tools by CloudCannon](https://cloudcannon.com/community/jamstack-ecosystem/ecommerce/): Browse a range of e-commerce plug-ins, payment options and features for Jekyll sites
 
 ### Forms
   - [Arengu](https://www.arengu.com)
@@ -65,12 +67,14 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [Simple Form](https://getsimpleform.com/)
   - [SmartForms](https://smartforms.dev/)
   - [Typeform](https://www.typeform.com/templates/c/forms/)
+  - [All form solutions by CloudCannon](https://cloudcannon.com/community/jamstack-ecosystem/contact-forms/): Compare contact form solutions to find the best for your Jekyll project
 
 ### Search
   - [Algolia](https://blog.algolia.com/instant-search-blog-documentation-jekyll-plugin/): Add a powerful instant search to your Jekyll site
   - [Elastic Site Search](http://elastic.co/products/site-search/service?ultron=resources&blade=jekyll&hulk=referral): Another option for adding search to your Jekyll site, built on Elasticsearch
   - [Bonsai Search](https://docs.bonsai.io/article/217-jekyll): The easiest way to use Elasticsearch for your Jekyll site
   - [CloudSh](https://cloudsh.com/generators/How-to-setup-search-on-Jekyll/): Website search with a few lines of JavaScript
+  - [All search tools by CloudCannon](https://cloudcannon.com/community/jamstack-ecosystem/search/): Browse a range of flexible and customizable search tools for your Jekyll site
 
 ## Editors plugins
 
