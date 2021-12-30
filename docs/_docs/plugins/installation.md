@@ -8,15 +8,14 @@ Jekyll has built-in support for using plugins to extend the core functionality.
 Primarily, any file with extension `.rb` placed within a `_plugins` directory at the root of the site's `source`, will be automatically loaded
 during a build session.
 
-This behavior can be configured as per following:
+This behavior can be configured as follows:
 
   * The `_plugins` directory may be changed either directly via the command-line or via the configuration file(s).
-  * Plugins in the `_plugins` directory (or its equivalent(s)) will not be loaded during the `safe` mode.
+  * Plugins in the `_plugins` directory (or its equivalent(s)) will not be loaded when Jekyll is running in `safe` mode.
   * This route cannot be used to extend the Jekyll CLI.
 
-To work with plugins packaged as gems, one has to list the desired gems in the configuration file under a top-level key named `plugins`
-(or `gems` if your Jekyll version is older than `3.5.0`). Additionally, if you're building under `safe` mode, the gem needs to be listed under
-a top-level key named `whitelist`. For example,
+To work with plugins packaged as gems, one has to list the desired gems in the configuration file under a top-level key named `plugins`.
+Additionally, if you're building in `safe` mode, the gem needs to be listed under a top-level key named `whitelist`. For example:
 
 ```yaml
 plugins:
@@ -30,7 +29,7 @@ safe: true
 
 # Whitelist plugins under safe mode.
 # Note that `some-other-jekyll-plugin` is not listed here. Therefore,
-#   it will not be loaded under safe mode.
+# it will not be loaded under safe mode.
 whitelist:
   - jekyll-gist
   - jekyll-coffeescript
@@ -45,10 +44,10 @@ gem install jekyll-gist jekyll-coffeescript jekyll-remote-theme some-other-jekyl
 ```
 ## Using a Gemfile
 
-The maintenance of various gem dependencies may be greatly simplified by using a Gemfile (usually at the root of site's source) in conjunction
-with a Rubygem named `bundler`. The Gemfile however **should** list all the primary dependencies of your site, including Jekyll itself, not
-just gem-based plugins of the site because bundler narrows the scope of installed gems to just *runtime dependencies* resolved by evaluating
-the Gemfile. For example:
+The maintenance of various gem dependencies may be greatly simplified by using a Gemfile (usually at the root of the site's source) in
+conjunction with a Rubygem named `bundler`. The Gemfile however **should** list all the primary dependencies of your site, including Jekyll
+itself, not just gem-based plugins of the site because Bundler narrows the scope of installed gems to just *runtime dependencies* resolved by
+evaluating the Gemfile. For example:
 
 ```ruby
 source "https://rubygems.org"
@@ -70,13 +69,13 @@ gem "some-other-jekyll-plugin"
 gem "nokogiri", "~> 1.11"
 ```
 
-To install all of the listed gems, simply run `bundle install`.
+The gems listed in the Gemfile can be collectively installed by simply running `bundle install`.
 
 ### The `:jekyll_plugins` Gemfile group
 {: #the-jekyll_plugins-group}
 
-Jekyll gives this particular group of gems in your Gemfile a different treatment. Any gem included in this group is loaded as the first step
-of any Jekyll process irrespective of the `--safe` CLI flag or entries in the configuration file(s).
+Jekyll gives a special treatment to gems listed as part of the `:jekyll_plugins` group in a Gemfile. Any gem under this group is loaded at
+the very beginning of any Jekyll process, irrespective of the `--safe` CLI flag or entries in the configuration file(s).
 
 While this route allows one to enhance Jekyll's CLI with additional subcommands and options, or avoid having to list gems in the configuration
 file, the downside is the necessity to be mindful of what gems are included in the group. For example:
@@ -94,7 +93,7 @@ gem "minima", "2.4.1"
 gem "jekyll-gist"
 gem "jekyll-coffeescript"
 
-# Plugins loaded irrespective of site configuration.
+# Gems loaded irrespective of site configuration.
 group :jekyll_plugins do
   gem "jekyll-cli-plus"
   gem "jekyll-seo-tag", "~> 1.5"
