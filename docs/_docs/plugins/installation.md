@@ -10,9 +10,9 @@ during a build session.
 
 This behavior can be configured as follows:
 
-  * The `_plugins` directory may be changed either directly via the command-line or via the configuration file(s).
-  * Plugins in the `_plugins` directory (or its equivalent(s)) will not be loaded when Jekyll is running in `safe` mode.
-  * This route cannot be used to extend the Jekyll CLI.
+* The `_plugins` directory may be changed either directly via the command-line or via the configuration file(s).
+* Plugins in the `_plugins` directory (or its equivalent(s)) will not be loaded when Jekyll is running in `safe` mode.
+* This route cannot be used to extend the Jekyll CLI.
 
 To work with plugins packaged as gems, one has to list the desired gems in the configuration file under a top-level key named `plugins`.
 Additionally, if you're building in `safe` mode, the gem needs to be listed under a top-level key named `whitelist`. For example:
@@ -42,6 +42,7 @@ latest versions of gems in the above list may be installed to a system-wide loca
 ```sh
 gem install jekyll-gist jekyll-coffeescript jekyll-remote-theme some-other-jekyll-plugin
 ```
+
 ## Using a Gemfile
 
 The maintenance of various gem dependencies may be greatly simplified by using a Gemfile (usually at the root of the site's source) in
