@@ -44,7 +44,6 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [Forestry.io](https://forestry.io/): A free Git-based responsive CMS, with content modeling and instant previews.
   - [Netlify CMS](https://www.netlifycms.org/): Open source content management for your Git workflow
   - [Siteleaf](https://www.siteleaf.com/): Built for developers, Loved by everyone
-  - [Statictastic](https://www.statictastic.com/): Static site hosting, publishing and content management for teams
   - [Kentico Kontent](https://github.com/Kentico/kontent-jekyll): A headless CMS with full control over content presentation
 
 ### E-commerce
