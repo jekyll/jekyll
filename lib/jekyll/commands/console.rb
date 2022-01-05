@@ -81,13 +81,7 @@ module Jekyll
         end
 
         def start_console
-          print "\nInitializing console "
-
-          60.times do
-            print "."
-            sleep 0.03
-          end
-          log "\n\n"
+          log "\nInitializing console..\n\n"
 
           CONSOLE_DEPS.each { |dep| require dep }
           IRB::ExtendCommandBundle.include ConsoleMethods
