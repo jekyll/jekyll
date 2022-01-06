@@ -16,21 +16,21 @@
 <meta name="generator" content="Jekyll v4.2.1" />
 <meta property="og:title" content="Plugins" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="You have 3 options for installing plugins:" />
-<meta property="og:description" content="You have 3 options for installing plugins:" />
+<meta name="description" content="Jekyll has built-in support for using plugins to extend the core functionality." />
+<meta property="og:description" content="Jekyll has built-in support for using plugins to extend the core functionality." />
 <link rel="canonical" href="https://jekyllrb.com/docs/plugins/installation/" />
 <meta property="og:url" content="https://jekyllrb.com/docs/plugins/installation/" />
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2022-01-03T12:50:06-08:00" />
+<meta property="article:published_time" content="2022-01-06T07:16:43-08:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Plugins" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"datePublished":"2022-01-03T12:50:06-08:00","dateModified":"2022-01-03T12:50:06-08:00","description":"You have 3 options for installing plugins:","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/plugins/installation/"},"url":"https://jekyllrb.com/docs/plugins/installation/","@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"image":"https://jekyllrb.com/img/jekyll-og.png","headline":"Plugins","@context":"https://schema.org"}</script>
+{"datePublished":"2022-01-06T07:16:43-08:00","dateModified":"2022-01-06T07:16:43-08:00","description":"Jekyll has built-in support for using plugins to extend the core functionality.","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/plugins/installation/"},"url":"https://jekyllrb.com/docs/plugins/installation/","@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"image":"https://jekyllrb.com/img/jekyll-og.png","headline":"Plugins","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -128,83 +128,123 @@
              class="fa fa-pencil"></i> &nbsp;Improve this page</a>
         </div>
         <h1>Plugins</h1>
-        <p>You have 3 options for installing plugins:</p>
+        <p>Jekyll has built-in support for using plugins to extend the core functionality.</p>
 
-<ol>
-  <li>
-    <p>In your site source root, make a <code class="language-plaintext highlighter-rouge">_plugins</code> directory. Place your plugins
-here. Any file ending in <code class="language-plaintext highlighter-rouge">*.rb</code> inside this directory will be loaded before
-Jekyll generates your site.</p>
-  </li>
-  <li>
-    <p>In your <code class="language-plaintext highlighter-rouge">_config.yml</code> file, add a new array with the key <code class="language-plaintext highlighter-rouge">plugins</code> (or <code class="language-plaintext highlighter-rouge">gems</code> for Jekyll &lt; <code class="language-plaintext highlighter-rouge">3.5.0</code>) and the
-values of the gem names of the plugins you’d like to use. An example:</p>
+<p>Primarily, any file with extension <code class="language-plaintext highlighter-rouge">.rb</code> placed within a <code class="language-plaintext highlighter-rouge">_plugins</code> directory at the root of the site’s <code class="language-plaintext highlighter-rouge">source</code>, will be automatically loaded
+during a build session.</p>
 
-    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># This will require each of these plugins automatically.</span>
-<span class="na">plugins</span><span class="pi">:</span>
+<p>This behavior can be configured as follows:</p>
+
+<ul>
+  <li>The <code class="language-plaintext highlighter-rouge">_plugins</code> directory may be changed either directly via the command-line or via the configuration file(s).</li>
+  <li>Plugins in the <code class="language-plaintext highlighter-rouge">_plugins</code> directory (or its equivalent(s)) will not be loaded when Jekyll is running in <code class="language-plaintext highlighter-rouge">safe</code> mode.</li>
+  <li>This route cannot be used to extend the Jekyll CLI.</li>
+</ul>
+
+<p>To work with plugins packaged as gems, one has to list the desired gems in the configuration file under a top-level key named <code class="language-plaintext highlighter-rouge">plugins</code>.
+Additionally, if you’re building in <code class="language-plaintext highlighter-rouge">safe</code> mode, the gem needs to be listed under a top-level key named <code class="language-plaintext highlighter-rouge">whitelist</code>. For example:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">plugins</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="s">jekyll-gist</span>
   <span class="pi">-</span> <span class="s">jekyll-coffeescript</span>
-  <span class="pi">-</span> <span class="s">jekyll-assets</span>
-  <span class="pi">-</span> <span class="s">another-jekyll-plugin</span>
-</code></pre></div>    </div>
+  <span class="pi">-</span> <span class="s">jekyll-seo-tag</span>
+  <span class="pi">-</span> <span class="s">some-other-jekyll-plugin</span>
 
-    <p>Then install your plugins using <code class="language-plaintext highlighter-rouge">gem install jekyll-gist jekyll-coffeescript jekyll-assets another-jekyll-plugin</code></p>
-  </li>
-  <li>
-    <p>Add the relevant plugins to a Bundler group in your <code class="language-plaintext highlighter-rouge">Gemfile</code>. An
-example:</p>
+<span class="c1"># Enable safe mode</span>
+<span class="na">safe</span><span class="pi">:</span> <span class="no">true</span>
 
-    <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">group</span> <span class="ss">:jekyll_plugins</span> <span class="k">do</span>
-  <span class="n">gem</span> <span class="s2">"jekyll-gist"</span>
-  <span class="n">gem</span> <span class="s2">"jekyll-coffeescript"</span>
-  <span class="n">gem</span> <span class="s2">"jekyll-assets"</span>
-  <span class="n">gem</span> <span class="s2">"another-jekyll-plugin"</span>
+<span class="c1"># Whitelist plugins under safe mode.</span>
+<span class="c1"># Note that `some-other-jekyll-plugin` is not listed here. Therefore,</span>
+<span class="c1"># it will not be loaded under safe mode.</span>
+<span class="na">whitelist</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">jekyll-gist</span>
+  <span class="pi">-</span> <span class="s">jekyll-coffeescript</span>
+  <span class="pi">-</span> <span class="s">jekyll-seo-tag</span>
+</code></pre></div></div>
+
+<p>In the absence of a Gemfile, one must manually ensure that listed plugins have been installed prior to invoking Jekyll. For example, the
+latest versions of gems in the above list may be installed to a system-wide location by running:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem <span class="nb">install </span>jekyll-gist jekyll-coffeescript jekyll-remote-theme some-other-jekyll-plugin
+</code></pre></div></div>
+
+<h2 id="using-a-gemfile">Using a Gemfile</h2>
+
+<p>The maintenance of various gem dependencies may be greatly simplified by using a Gemfile (usually at the root of the site’s source) in
+conjunction with a Rubygem named <code class="language-plaintext highlighter-rouge">bundler</code>. The Gemfile however <strong>should</strong> list all the primary dependencies of your site, including Jekyll
+itself, not just gem-based plugins of the site because Bundler narrows the scope of installed gems to just <em>runtime dependencies</em> resolved by
+evaluating the Gemfile. For example:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">source</span> <span class="s2">"https://rubygems.org"</span>
+
+<span class="c1"># Use the latest version.</span>
+<span class="n">gem</span> <span class="s2">"jekyll"</span>
+
+<span class="c1"># The theme of current site, locked to a certain version.</span>
+<span class="n">gem</span> <span class="s2">"minima"</span><span class="p">,</span> <span class="s2">"2.4.1"</span>
+
+<span class="c1"># Plugins of this site loaded during a build with proper</span>
+<span class="c1"># site configuration.</span>
+<span class="n">gem</span> <span class="s2">"jekyll-gist"</span>
+<span class="n">gem</span> <span class="s2">"jekyll-coffeescript"</span>
+<span class="n">gem</span> <span class="s2">"jekyll-seo-tag"</span><span class="p">,</span> <span class="s2">"~&gt; 1.5"</span>
+<span class="n">gem</span> <span class="s2">"some-other-jekyll-plugin"</span>
+
+<span class="c1"># A dependency of a custom-plugin inside `_plugins` directory.</span>
+<span class="n">gem</span> <span class="s2">"nokogiri"</span><span class="p">,</span> <span class="s2">"~&gt; 1.11"</span>
+</code></pre></div></div>
+
+<p>The gems listed in the Gemfile can be collectively installed by simply running <code class="language-plaintext highlighter-rouge">bundle install</code>.</p>
+
+<h3 id="the-jekyll_plugins-group">The <code class="language-plaintext highlighter-rouge">:jekyll_plugins</code> Gemfile group</h3>
+
+<p>Jekyll gives a special treatment to gems listed as part of the <code class="language-plaintext highlighter-rouge">:jekyll_plugins</code> group in a Gemfile. Any gem under this group is loaded at
+the very beginning of any Jekyll process, irrespective of the <code class="language-plaintext highlighter-rouge">--safe</code> CLI flag or entries in the configuration file(s).</p>
+
+<p>While this route allows one to enhance Jekyll’s CLI with additional subcommands and options, or avoid having to list gems in the configuration
+file, the downside is the necessity to be mindful of what gems are included in the group. For example:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">source</span> <span class="s2">"https://rubygems.org"</span>
+
+<span class="c1"># Use the latest version.</span>
+<span class="n">gem</span> <span class="s2">"jekyll"</span>
+
+<span class="c1"># The theme of current site, locked to a certain version.</span>
+<span class="n">gem</span> <span class="s2">"minima"</span><span class="p">,</span> <span class="s2">"2.4.1"</span>
+
+<span class="c1"># Plugins of this site loaded only if configured correctly.</span>
+<span class="n">gem</span> <span class="s2">"jekyll-gist"</span>
+<span class="n">gem</span> <span class="s2">"jekyll-coffeescript"</span>
+
+<span class="c1"># Gems loaded irrespective of site configuration.</span>
+<span class="n">group</span> <span class="ss">:jekyll_plugins</span> <span class="k">do</span>
+  <span class="n">gem</span> <span class="s2">"jekyll-cli-plus"</span>
+  <span class="n">gem</span> <span class="s2">"jekyll-seo-tag"</span><span class="p">,</span> <span class="s2">"~&gt; 1.5"</span>
+  <span class="n">gem</span> <span class="s2">"some-other-jekyll-plugin"</span>
 <span class="k">end</span>
-</code></pre></div>    </div>
-
-    <p>Now you need to install all plugins from your Bundler group by running single command <code class="language-plaintext highlighter-rouge">bundle install</code>.</p>
-  </li>
-</ol>
+</code></pre></div></div>
 
 <div class="note info">
   <h5>Plugins on GitHub Pages</h5>
   <p>
-    <a href="https://pages.github.com/">GitHub Pages</a> is powered by Jekyll.
-    All Pages sites are generated using the <code>--safe</code> option
-    to disable plugins (with the exception of some
-    <a href="https://pages.github.com/versions">whitelisted plugins</a>) for
-    security reasons. Unfortunately, this means
-    your plugins won’t work if you’re deploying to GitHub Pages.<br /><br />
-    You can still use GitHub Pages to publish your site, but you’ll need to
-    convert the site locally and push the generated static files to your GitHub
-    repository instead of the Jekyll source files.
+    <a href="https://pages.github.com/">GitHub Pages</a> is powered by Jekyll. All GitHub Pages sites are generated using the
+    <code>--safe</code> option to disable plugins (with the exception of some
+    <a href="https://pages.github.com/versions">whitelisted plugins</a>) for security reasons. Unfortunately, this means your plugins won't
+    work if you’re deploying via GitHub Pages.<br /><br />
+    You can still use GitHub Pages to publish your site, but you’ll need to build the site locally and push the generated files to your
+    GitHub repository instead of the Jekyll source files.
   </p>
 </div>
 
 <div class="note">
   <h5>
-    <code>_plugins</code>, <code>_config.yml</code> and <code>Gemfile</code>
-    can be used simultaneously
+    <code>_plugins</code>, <code>_config.yml</code> and <code>Gemfile</code> can be used simultaneously
   </h5>
   <p>
-    You may use any of the aforementioned plugin options simultaneously in the
-    same site if you so choose. Use of one does not restrict the use of the
-    others.
+    You may use any of the aforementioned plugin routes simultaneously in the same site if you so choose.
+    Use of one does not restrict the use of the others.
   </p>
 </div>
-
-<h3 id="the-jekyll_plugins-group">The jekyll_plugins group</h3>
-
-<p>Jekyll gives this particular group of gems in your <code class="language-plaintext highlighter-rouge">Gemfile</code> a different
-treatment. Any gem included in this group is loaded before Jekyll starts
-processing the rest of your source directory.</p>
-
-<p>A gem included here will be activated even if its not explicitly listed under
-the <code class="language-plaintext highlighter-rouge">plugins:</code> key in your site’s config file.</p>
-
-<p class="note warning">Gems included in the <code>:jekyll-plugins</code> group are activated
-regardless of the <code>--safe</code> mode setting. Be aware of which
-gems are included under this group!</p>
 
       </article>
     </div>
