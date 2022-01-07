@@ -27,7 +27,7 @@ To determine the correct version, consult the `## HEAD` section of our history d
 
 - If there's a subsection titled `Minor Enhancements`
   - Increment just the `minor` component and reset the patch component to `0`.
-  - Add `suufix` if applicable.
+  - Add `suffix` if applicable.
   - For example, `"4.0.2" => "4.1.0"` or `"4.1.0" => "4.2.0.pre"`.
   - Skip to next step in the release process.
 
