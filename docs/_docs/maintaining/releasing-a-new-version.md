@@ -5,7 +5,9 @@ title: "Releasing a new version"
 **This guide is for maintainers.** These special people have **write access** to one or more of Jekyll's repositories and help merge the contributions of others. You may find what is written here interesting, but it’s definitely not for everyone.
 {: .note .info}
 
-The most important thing to understand before making a release is that there's no need to feel nervous. Most things are revertable, and even if you do publish an incomplete gem version, we can always skip that one. Don't hesitate to contact the other maintainers if you feel unsure or don't know what to do next.
+The most important thing to understand before making a release is that there's no need to feel nervous. Most things are revertable, and even if
+you do publish an incomplete gem version, we can always skip that one. Don't hesitate to contact the other maintainers if you feel unsure or
+don't know what to do next.
 
 ### Bump the version
 
@@ -16,11 +18,11 @@ The only important place you need to manually bump the version is in `lib/jekyll
 Replace the first header of the history document with a version milestone. This looks like the following:
 
 ```diff
--## HEAD
-+## 3.7.1 / 2018-01-25
+- ## HEAD
++ ## 3.7.1 / 2018-01-25
 ```
 
-Adjust the version number and the date. The `## HEAD` heading will be regenerated next time a pull request is merged.
+Adjust the version number and the date. The `## HEAD` heading will be regenerated the next time a pull request is merged.
 
 Once you've done this, update the website by running the following command:
 
@@ -30,7 +32,8 @@ bundle exec rake site:generate
 
 This updates the website's changelog, and pushes the versions in various other places.
 
-It's recommended that you go over the `History.markdown` file manually one more time, in case there are any spelling errors or such. Feel free to fix those manually, and after you're done generating the website changelog, commit your changes.
+It's recommended that you go over the `History.markdown` file manually one more time, in case there are any spelling errors or such. Feel free
+to fix those manually, and after you're done generating the website changelog, commit your changes.
 
 ## Write a release post
 
@@ -40,7 +43,8 @@ In case this isn't done already, you can generate a new release post using the i
 bundle exec rake site:releases:new[3.8.0]
 ```
 
-where `3.8.0` should be replaced with the new version. Then, write the post. Be sure to thank all of the collaborators and maintainers who have contributed since the last release. You can generate a log of their names using the following command:
+where `3.8.0` should be replaced with the new version. Then, write the post. Be sure to thank all of the collaborators and maintainers who have
+contributed since the last release. You can generate a log of their names using the following command:
 
 ```sh
 git shortlog -sn master...v3.7.2
@@ -63,19 +67,20 @@ Really the only thing left to do is to run this command:
 bundle exec rake release
 ```
 
-This will automatically build the new gem, make a release commit and tag and then push the new gem to RubyGems. Don't worry about creating a GitHub release, @jekyllbot should take care of that.
+This will automatically build the new gem, make a release commit and tag and then push the new gem to RubyGems. Don't worry about creating a
+GitHub release, @jekyllbot should take care of that.
 
 And then, you're done! :tada: Feel free to celebrate!
 
-If you have access to the [@jekyllrb](https://twitter.com/jekyllrb) Twitter account, you should tweet the release post from there. If not, just ask another maintainer to do it or to give you access.
+If you have access to the [@jekyllrb](https://twitter.com/jekyllrb) Twitter account, you should tweet the release post from there. If not, just
+ask another maintainer to do it or to give you access.
 
 ### Build the docs
 
 We package our documentation as a :gem: Gem for offline use.
 
 This is done with the
-[**jekyll-docs**](https://github.com/jekyll/jekyll-docs#building) repository,
-and more detailed instructions are provided there.
+[**jekyll-docs**](https://github.com/jekyll/jekyll-docs#building) repository, and more detailed instructions are provided there.
 
 ## For non-core gems
 
