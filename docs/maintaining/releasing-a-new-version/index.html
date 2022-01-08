@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2022-01-06T07:16:43-08:00" />
+<meta property="article:published_time" content="2022-01-08T07:43:12-08:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Releasing a new version" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"datePublished":"2022-01-06T07:16:43-08:00","dateModified":"2022-01-06T07:16:43-08:00","description":"This guide is for maintainers. These special people have write access to one or more of Jekyll’s repositories and help merge the contributions of others. You may find what is written here interesting, but it’s definitely not for everyone.","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/maintaining/releasing-a-new-version/"},"url":"https://jekyllrb.com/docs/maintaining/releasing-a-new-version/","@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"image":"https://jekyllrb.com/img/jekyll-og.png","headline":"Releasing a new version","@context":"https://schema.org"}</script>
+{"datePublished":"2022-01-08T07:43:12-08:00","dateModified":"2022-01-08T07:43:12-08:00","description":"This guide is for maintainers. These special people have write access to one or more of Jekyll’s repositories and help merge the contributions of others. You may find what is written here interesting, but it’s definitely not for everyone.","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/maintaining/releasing-a-new-version/"},"url":"https://jekyllrb.com/docs/maintaining/releasing-a-new-version/","@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"image":"https://jekyllrb.com/img/jekyll-og.png","headline":"Releasing a new version","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -127,23 +127,107 @@
           <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/maintaining/releasing-a-new-version.md"><i class="fa fa-pencil"></i>  Improve this page</a>
         </div>
         <h1>Releasing a new version</h1>
-        <p class="note info"><strong>This guide is for maintainers.</strong> These special people have <strong>write access</strong> to one or more of Jekyll’s repositories and help merge the contributions of others. You may find what is written here interesting, but it’s definitely not for everyone.</p>
+        <p class="note info"><strong>This guide is for maintainers.</strong> These special people have <strong>write access</strong> to one or more of Jekyll’s repositories and help merge the
+contributions of others. You may find what is written here interesting, but it’s definitely not for everyone.</p>
 
-<p>The most important thing to understand before making a release is that there’s no need to feel nervous. Most things are revertable, and even if you do publish an incomplete gem version, we can always skip that one. Don’t hesitate to contact the other maintainers if you feel unsure or don’t know what to do next.</p>
+<p>The most important thing to understand before making a release is that there’s no need to feel nervous. Most things are revertable, and even if
+you do publish an incomplete gem version, we can always skip that one. Don’t hesitate to contact the other maintainers if you feel unsure or
+don’t know what to do next.</p>
 
 <h3 id="bump-the-version">Bump the version</h3>
 
 <p>The only important place you need to manually bump the version is in <code class="language-plaintext highlighter-rouge">lib/jekyll/version.rb</code>. Adjust that, and everything else should work fine.</p>
 
-<h3 id="update-the-history-document">Update the history document</h3>
+<p>The version will mostly be of the format <code class="language-plaintext highlighter-rouge">"major.minor.patch"</code>. At times, we may decide to ship pre-releases which will be in the format
+<code class="language-plaintext highlighter-rouge">"major.minor.patch.suffix"</code>. <code class="language-plaintext highlighter-rouge">suffix</code> is not standardized and may be anything like <code class="language-plaintext highlighter-rouge">pre.alpha1</code>, <code class="language-plaintext highlighter-rouge">pre.rc2</code>, or simply <code class="language-plaintext highlighter-rouge">beta3</code>, etc.</p>
 
-<p>Replace the first header of the history document with a version milestone. This looks like the following:</p>
+<p>To determine the correct version, consult the <code class="language-plaintext highlighter-rouge">## HEAD</code> section of our history document, <code class="language-plaintext highlighter-rouge">History.markdown</code>, first.</p>
 
-<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">-## HEAD
-</span><span class="gi">+## 3.7.1 / 2018-01-25
+<ul>
+  <li>If there’s a subsection titled <code class="language-plaintext highlighter-rouge">Major Enhancements</code>
+    <ul>
+      <li>Increment the <code class="language-plaintext highlighter-rouge">major</code> component of the version string and reset both <code class="language-plaintext highlighter-rouge">minor</code> and <code class="language-plaintext highlighter-rouge">patch</code> components to <code class="language-plaintext highlighter-rouge">0</code>.</li>
+      <li>Add <code class="language-plaintext highlighter-rouge">suffix</code> if applicable.</li>
+      <li>For example, <code class="language-plaintext highlighter-rouge">"3.9.1" =&gt; "4.0.0"</code> or, <code class="language-plaintext highlighter-rouge">"3.9.1 =&gt; "4.0.0.alpha1"</code>.</li>
+      <li>Skip to next step in the release process.</li>
+    </ul>
+  </li>
+  <li>If there’s a subsection titled <code class="language-plaintext highlighter-rouge">Minor Enhancements</code>
+    <ul>
+      <li>Increment just the <code class="language-plaintext highlighter-rouge">minor</code> component and reset the patch component to <code class="language-plaintext highlighter-rouge">0</code>.</li>
+      <li>Add <code class="language-plaintext highlighter-rouge">suffix</code> if applicable.</li>
+      <li>For example, <code class="language-plaintext highlighter-rouge">"4.0.2" =&gt; "4.1.0"</code> or <code class="language-plaintext highlighter-rouge">"4.1.0" =&gt; "4.2.0.pre"</code>.</li>
+      <li>Skip to next step in the release process.</li>
+    </ul>
+  </li>
+  <li>For anything else, increment just the <code class="language-plaintext highlighter-rouge">patch</code> component or <code class="language-plaintext highlighter-rouge">suffix</code> component as applicable. For example, <code class="language-plaintext highlighter-rouge">"4.0.2" =&gt; "4.0.3"</code> or
+<code class="language-plaintext highlighter-rouge">"4.1.0.beta3" =&gt; "4.1.0.rc"</code>.</li>
+</ul>
+
+<h3 id="write-a-release-post">Write a release post</h3>
+
+<p>In case this wasn’t done already, you can generate a new release post scaffold using the included <code class="language-plaintext highlighter-rouge">rake</code> command:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle <span class="nb">exec </span>rake site:releases:new[3.8.0]
+</code></pre></div></div>
+
+<p>where <code class="language-plaintext highlighter-rouge">3.8.0</code> should be replaced with the new version.</p>
+
+<p>Then, write the post. Be sure to thank all of the collaborators and maintainers who have contributed since the last release. You can generate
+a log of their names using the following command:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git shortlog <span class="nt">-sn</span> master...v3.7.2
+</code></pre></div></div>
+
+<p>where <code class="language-plaintext highlighter-rouge">v3.7.2</code> is the git tag for the previous release. In case the tag doesn’t exist in your repository, run:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull
+</code></pre></div></div>
+
+<p>Be sure to open a pull request for your release post once its finished.</p>
+
+<h3 id="update-the-history-document">Update the History document</h3>
+
+<p>Replace the first header of <code class="language-plaintext highlighter-rouge">History.markdown</code> with a version milestone. This looks like the following:</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">- ## HEAD
+</span><span class="gi">+ ## 3.7.1 / 2018-01-25
 </span></code></pre></div></div>
 
-<p>Adjust the version number and the date. The <code class="language-plaintext highlighter-rouge">## HEAD</code> heading will be regenerated next time a pull request is merged.</p>
+<p>Adjust the version number and the date. The <code class="language-plaintext highlighter-rouge">## HEAD</code> heading will be regenerated the next time a pull request is merged.</p>
+
+<p>Rearrange the subsections (as a whole) based on decreasing priorities as illustrated below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## 4.2.0 / 2020-12-14
+
+### Major Enhancements
+
+...
+
+### Minor Enhancements
+
+...
+
+### Bug Fixes
+
+...
+
+### Security Fixes
+
+...
+
+### Optimization Fixes
+
+...
+
+### Development Fixes
+
+...
+
+### Site Enhancements
+
+...
+</code></pre></div></div>
 
 <p>Once you’ve done this, update the website by running the following command:</p>
 
@@ -152,62 +236,55 @@
 
 <p>This updates the website’s changelog, and pushes the versions in various other places.</p>
 
-<p>It’s recommended that you go over the <code class="language-plaintext highlighter-rouge">History.markdown</code> file manually one more time, in case there are any spelling errors or such. Feel free to fix those manually, and after you’re done generating the website changelog, commit your changes.</p>
-
-<h2 id="write-a-release-post">Write a release post</h2>
-
-<p>In case this isn’t done already, you can generate a new release post using the included <code class="language-plaintext highlighter-rouge">rake</code> command:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle <span class="nb">exec </span>rake site:releases:new[3.8.0]
-</code></pre></div></div>
-
-<p>where <code class="language-plaintext highlighter-rouge">3.8.0</code> should be replaced with the new version. Then, write the post. Be sure to thank all of the collaborators and maintainers who have contributed since the last release. You can generate a log of their names using the following command:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git shortlog <span class="nt">-sn</span> master...v3.7.2
-</code></pre></div></div>
-
-<p>where, again <code class="language-plaintext highlighter-rouge">v3.7.2</code> is the last release. Be sure to open a pull request for your release post.</p>
+<p>It’s recommended that you go over the <code class="language-plaintext highlighter-rouge">History.markdown</code> file manually one more time, in case there are any spelling errors or such. Feel free
+to fix those manually, and after you’re done generating the website changelog, commit your changes.</p>
 
 <h3 id="push-the-version">Push the version</h3>
 
 <p>Before you do this step, make sure the following things are done:</p>
 
 <ul>
-  <li>You have permission to push a new gem version to RubyGems</li>
-  <li>You’re logged into RubyGems on your command line</li>
-  <li>A release post has been prepared, and is ideally already live</li>
-  <li>All of the prior steps are done, committed, and pushed to <code class="language-plaintext highlighter-rouge">master</code>
-</li>
+  <li>A release post has been prepared, and is ideally already live via a prior pull request.</li>
+  <li>All of the prior steps are done, especially the change to <code class="language-plaintext highlighter-rouge">lib/jekyll/version.rb</code> has been staged for commit.</li>
+  <li>Commit staged changes to the local <code class="language-plaintext highlighter-rouge">master</code> branch preferably with commit message <code class="language-plaintext highlighter-rouge">"Release :gem: v[CURRENT_VERSION]"</code>.</li>
 </ul>
 
-<p>Really the only thing left to do is to run this command:</p>
+<p>The only thing left to do now is to run this command:</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle <span class="nb">exec </span>rake release
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push upstream master
 </code></pre></div></div>
 
-<p>This will automatically build the new gem, make a release commit and tag and then push the new gem to RubyGems. Don’t worry about creating a GitHub release, <a href="https://github.com/jekyllbot" class="user-mention">@jekyllbot</a> should take care of that.</p>
+<p>where <code class="language-plaintext highlighter-rouge">upstream</code> references <code class="language-plaintext highlighter-rouge">git@github.com:jekyll/jekyll.git</code>.</p>
 
-<p>And then, you’re done! <img class="emoji" title=":tada:" alt=":tada:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png" height="20" width="20"> Feel free to celebrate!</p>
+<p>This will trigger a GitHub Actions workflow that will automatically build the new gem, tag the release commit, push the tag to GitHub and
+then finally, push the new gem to RubyGems. Don’t worry about creating a GitHub release either, <a href="https://github.com/jekyllbot" class="user-mention">@jekyllbot</a> will take care of that when the
+release workflow publishes the new tag.</p>
 
-<p>If you have access to the <a href="https://twitter.com/jekyllrb">@jekyllrb</a> Twitter account, you should tweet the release post from there. If not, just ask another maintainer to do it or to give you access.</p>
+<p>And then, if the workflow has completed successfully, you’re done! <img class="emoji" title=":tada:" alt=":tada:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png" height="20" width="20">
+Feel free to celebrate!</p>
+
+<p>If you have access to the <a href="https://twitter.com/jekyllrb">@jekyllrb</a> Twitter account, you should tweet the release post from there. If not, just
+ask another maintainer to do it or to give you access.</p>
 
 <h3 id="build-the-docs">Build the docs</h3>
 
 <p>We package our documentation as a <img class="emoji" title=":gem:" alt=":gem:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f48e.png" height="20" width="20"> Gem for offline use.</p>
 
-<p>This is done with the
-<a href="https://github.com/jekyll/jekyll-docs#building"><strong>jekyll-docs</strong></a> repository,
-and more detailed instructions are provided there.</p>
+<p>This is done with the <a href="https://github.com/jekyll/jekyll-docs#building"><strong>jekyll-docs</strong></a> repository, and more detailed instructions are
+provided there.</p>
 
 <h2 id="for-non-core-gems">For non-core gems</h2>
 
-<p>If you’re not a maintainer for <code class="language-plaintext highlighter-rouge">jekyll/jekyll</code>, the procedure is much simpler in a lot of cases. Generally, the procedure still looks like this:</p>
+<p>If you’re not a maintainer for <code class="language-plaintext highlighter-rouge">jekyll/jekyll</code>, the procedure is much simpler in a lot of cases. Generally, the procedure still looks like
+this:</p>
 
 <ul>
   <li>Bump the gem version manually, usually in <code class="language-plaintext highlighter-rouge">lib/&lt;plugin_name&gt;/version.rb</code>
 </li>
   <li>Adjust the history file</li>
-  <li>Run <code class="language-plaintext highlighter-rouge">bundle exec rake release</code> or <code class="language-plaintext highlighter-rouge">script/release</code>, depending on which of the two exists</li>
+  <li>Commit changes to default branch preferably with message <code class="language-plaintext highlighter-rouge">"Release :gem: v[CURRENT_VERSION]"</code>
+</li>
+  <li>Push to remote repository</li>
   <li>Rejoice</li>
 </ul>
 
