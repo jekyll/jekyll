@@ -38,6 +38,8 @@ group :test do
   gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
 
   gem "jruby-openssl", "0.10.1" if RUBY_ENGINE == "jruby"
+
+  gem "webrick" if RUBY_VERSION >= "3"
 end
 
 #
