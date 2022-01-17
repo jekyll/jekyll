@@ -169,9 +169,7 @@ CONTENT
     setup do
       skip("JRuby does not support Pygments.") if jruby?
 
-      begin
-        exec("python", "--help")
-      rescue StandardError => e
+      unless system("python", "--help")
         skip "Skipping as attempting to load python errored with #{e.message}"
       end
     end
