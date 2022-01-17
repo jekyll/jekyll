@@ -185,6 +185,10 @@ module Jekyll
           key = res.header.keys.grep(%r!content-type!i).first
           typ = res.header[key]
 
+          # WASM require the response header to be exactly "application/wasm". Even a trailing
+          # semicolon is illegal.
+          return if typ == "application/wasm"
+
           unless %r!;\s*charset=!.match?(typ)
             res.header[key] = "#{typ}; charset=#{@jekyll_opts["encoding"]}"
           end
