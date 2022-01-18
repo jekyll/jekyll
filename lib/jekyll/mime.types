@@ -21,6 +21,7 @@ application/cdmi-object                                                   cdmio
 application/cdmi-queue                                                    cdmiq
 application/cu-seeme                                                      cu
 application/dash+xml                                                      mpd
+application/dash-patch+xml                                                mpp
 application/davmount+xml                                                  davmount
 application/docbook+xml                                                   dbk
 application/dssc+der                                                      dssc
@@ -30,6 +31,7 @@ application/emma+xml                                                      emma
 application/emotionml+xml                                                 emotionml
 application/epub+zip                                                      epub
 application/exi                                                           exi
+application/express                                                       exp
 application/fdt+xml                                                       fdt
 application/font-tdpfr                                                    pfr
 application/geo+json                                                      geojson
@@ -70,7 +72,6 @@ application/mmt-usd+xml                                                   musd
 application/mods+xml                                                      mods
 application/mp21                                                          m21 mp21
 application/mp4                                                           mp4s m4p
-application/mrb-consumer+xml                                              xdf
 application/msword                                                        doc dot
 application/mxf                                                           mxf
 application/n-quads                                                       nq
@@ -144,6 +145,7 @@ application/tei+xml                                                       tei te
 application/thraud+xml                                                    tfi
 application/timestamped-data                                              tsd
 application/toml                                                          toml
+application/trig                                                          trig
 application/ttml+xml                                                      ttml
 application/ubjson                                                        ubj
 application/urc-ressheet+xml                                              rsheet
@@ -163,6 +165,7 @@ application/vnd.adobe.formscentral.fcdt                                   fcdt
 application/vnd.adobe.fxp                                                 fxp fxpl
 application/vnd.adobe.xdp+xml                                             xdp
 application/vnd.adobe.xfdf                                                xfdf
+application/vnd.age                                                       age
 application/vnd.ahead.space                                               ahead
 application/vnd.airzip.filesecure.azf                                     azf
 application/vnd.airzip.filesecure.azs                                     azs
@@ -330,6 +333,7 @@ application/vnd.lotus-organizer                                           org
 application/vnd.lotus-screencam                                           scm
 application/vnd.lotus-wordpro                                             lwp
 application/vnd.macports.portpkg                                          portpkg
+application/vnd.mapbox-vector-tile                                        mvt
 application/vnd.mcd                                                       mcd
 application/vnd.medcalcdata                                               mc1
 application/vnd.mediastation.cdkey                                        cdkey
@@ -369,7 +373,7 @@ application/vnd.ms-powerpoint.presentation.macroenabled.12                pptm
 application/vnd.ms-powerpoint.slide.macroenabled.12                       sldm
 application/vnd.ms-powerpoint.slideshow.macroenabled.12                   ppsm
 application/vnd.ms-powerpoint.template.macroenabled.12                    potm
-application/vnd.ms-project                                                mpp mpt
+application/vnd.ms-project                                                mpt
 application/vnd.ms-word.document.macroenabled.12                          docm
 application/vnd.ms-word.template.macroenabled.12                          dotm
 application/vnd.ms-works                                                  wps wks wcm wdb
@@ -651,6 +655,7 @@ application/x-zmachine                                                    z1 z2 
 application/xaml+xml                                                      xaml
 application/xcap-att+xml                                                  xav
 application/xcap-caps+xml                                                 xca
+application/xcap-diff+xml                                                 xdf
 application/xcap-el+xml                                                   xel
 application/xcap-ns+xml                                                   xns
 application/xenc+xml                                                      xenc
@@ -667,6 +672,7 @@ application/yin+xml                                                       yin
 application/zip                                                           zip
 audio/3gpp                                                                3gpp
 audio/adpcm                                                               adp
+audio/amr                                                                 amr
 audio/basic                                                               au snd
 audio/midi                                                                mid midi kar rmi
 audio/mobile-xmf                                                          mxmf
@@ -804,6 +810,9 @@ model/gltf-binary                                                         glb
 model/iges                                                                igs iges
 model/mesh                                                                msh mesh silo
 model/mtl                                                                 mtl
+model/step+xml                                                            stpx
+model/step+zip                                                            stpz
+model/step-xml+zip                                                        stpxz
 model/vnd.collada+xml                                                     dae
 model/vnd.dwf                                                             dwf
 model/vnd.gdl                                                             gdl
@@ -812,6 +821,7 @@ model/vnd.mts                                                             mts
 model/vnd.opengex                                                         ogex
 model/vnd.parasolid.transmit.binary                                       x_b
 model/vnd.parasolid.transmit.text                                         x_t
+model/vnd.sap.vds                                                         vds
 model/vnd.usdz+zip                                                        usdz
 model/vnd.valve.source.compiled-map                                       bsp
 model/vnd.vtu                                                             vtu
@@ -849,6 +859,7 @@ text/vnd.curl                                                             curl
 text/vnd.curl.dcurl                                                       dcurl
 text/vnd.curl.mcurl                                                       mcurl
 text/vnd.curl.scurl                                                       scurl
+text/vnd.familysearch.gedcom                                              ged
 text/vnd.fly                                                              fly
 text/vnd.fmi.flexstor                                                     flx
 text/vnd.graphviz                                                         gv
@@ -884,6 +895,7 @@ video/3gpp2                                                               3g2
 video/h261                                                                h261
 video/h263                                                                h263
 video/h264                                                                h264
+video/iso.segment                                                         m4s
 video/jpeg                                                                jpgv
 video/jpm                                                                 jpgm
 video/mj2                                                                 mj2 mjp2
