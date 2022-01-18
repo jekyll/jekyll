@@ -40,6 +40,15 @@ group :test do
   gem "jruby-openssl", "0.10.1" if RUBY_ENGINE == "jruby"
 
   gem "webrick" if RUBY_VERSION >= "3"
+
+  # Ruby 3.1.0 shipped with `psych-4.0.3` which caused some of our Cucumber-based tests to fail.
+  # TODO: Remove lock once we implement a way to use Psych 4 without breaking anything.
+  # See https://github.com/jekyll/jekyll/pull/8918
+  gem "psych", "~> 3.3"
+
+  # Add gem 'matrix'
+  # https://github.com/jekyll/jekyll/commit/d0eb07ba29dc7d5f52defab855bdb7a768cf824c
+  gem "matrix"
 end
 
 #
@@ -77,7 +86,7 @@ group :jekyll_optional_dependencies do
   gem "jekyll-paginate"
   gem "jekyll-redirect-from"
   gem "mime-types", "~> 3.0"
-  gem "rdoc", RUBY_VERSION >= "2.2.2" ? "~> 6.0" : "~> 5.1"
+  gem "rdoc", RUBY_VERSION >= "2.2.2" ? "~> 6.3.0" : "~> 5.1"
   gem "tomlrb", "~> 1.2"
 
   if ENV["KRAMDOWN_VERSION"].nil? || ENV["KRAMDOWN_VERSION"].to_i >= 2

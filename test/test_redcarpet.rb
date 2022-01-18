@@ -47,8 +47,8 @@ class TestRedcarpet < JekyllUnitTest
 
     context "with pygments enabled" do
       setup do
-        unless system("which", "python")
-          skip "Skipping as attempting to load python errored with #{e.message}"
+        unless system("command", "-v", "python")
+          skip "Skipping as 'python' is not available"
         end
         @markdown = Converters::Markdown.new @config.merge(
           { "highlighter" => "pygments" }
