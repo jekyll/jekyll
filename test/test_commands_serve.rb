@@ -5,7 +5,6 @@ require "mercenary"
 require "helper"
 require "httpclient"
 require "openssl"
-require "thread"
 require "tmpdir"
 
 class TestCommandsServe < JekyllUnitTest
@@ -153,9 +152,7 @@ class TestCommandsServe < JekyllUnitTest
     end
 
     should "label itself" do
-      assert_equal(
-        @merc.name, :serve
-      )
+      assert_equal :serve, @merc.name
     end
 
     should "have aliases" do
@@ -189,21 +186,21 @@ class TestCommandsServe < JekyllUnitTest
       end
 
       should "use user destinations" do
-        assert_equal "foo", custom_opts({ "destination" => "foo" })[
+        assert_equal "foo", custom_opts("destination" => "foo")[
           :DocumentRoot
         ]
       end
 
       should "use user port" do
         # WHAT?!?!1 Over 9000? That's impossible.
-        assert_equal 9001, custom_opts({ "port" => 9001 })[
+        assert_equal 9001, custom_opts("port" => 9001)[
           :Port
         ]
       end
 
       should "use empty directory index list when show_dir_listing is true" do
         opts = { "show_dir_listing" => true }
-        assert custom_opts(opts)[:DirectoryIndex].empty?
+        assert_empty custom_opts(opts)[:DirectoryIndex]
       end
 
       should "keep config between build and serve" do
@@ -235,21 +232,21 @@ class TestCommandsServe < JekyllUnitTest
           expect(Jekyll::Commands::Serve).to receive(:start_up_webrick)
         end
         should "set the site url by default to `http://localhost:4000`" do
-          @merc.execute(:serve, { "watch" => false, "url" => "https://jekyllrb.com/" })
+          @merc.execute(:serve, "watch" => false, "url" => "https://jekyllrb.com/")
 
           assert_equal 1, Jekyll.sites.count
           assert_equal "http://localhost:4000", Jekyll.sites.first.config["url"]
         end
 
         should "take `host`, `port` and `ssl` into consideration if set" do
-          @merc.execute(:serve, {
+          @merc.execute(:serve,
             "watch"    => false,
             "host"     => "example.com",
             "port"     => "9999",
             "url"      => "https://jekyllrb.com/",
             "ssl_cert" => "foo",
-            "ssl_key"  => "bar",
-          })
+            "ssl_key"  => "bar"
+          )
 
           assert_equal 1, Jekyll.sites.count
           assert_equal "https://example.com:9999", Jekyll.sites.first.config["url"]
@@ -260,7 +257,7 @@ class TestCommandsServe < JekyllUnitTest
         should "not update the site url" do
           expect(Jekyll).to receive(:env).and_return("production")
           expect(Jekyll::Commands::Serve).to receive(:start_up_webrick)
-          @merc.execute(:serve, { "watch" => false, "url" => "https://jekyllrb.com/" })
+          @merc.execute(:serve, "watch" => false, "url" => "https://jekyllrb.com/")
 
           assert_equal 1, Jekyll.sites.count
           assert_equal "https://jekyllrb.com/", Jekyll.sites.first.config["url"]
@@ -269,26 +266,26 @@ class TestCommandsServe < JekyllUnitTest
 
       context "verbose" do
         should "debug when verbose" do
-          assert_equal custom_opts({ "verbose" => true })[:Logger].level, 5
+          assert_equal 5, custom_opts("verbose" => true)[:Logger].level
         end
 
         should "warn when not verbose" do
-          assert_equal custom_opts({})[:Logger].level, 3
+          assert_equal 3, custom_opts({})[:Logger].level
         end
       end
 
       context "enabling SSL" do
         should "raise if enabling without key or cert" do
           assert_raises RuntimeError do
-            custom_opts({
-              "ssl_key" => "foo",
-            })
+            custom_opts(
+              "ssl_key" => "foo"
+            )
           end
 
           assert_raises RuntimeError do
-            custom_opts({
-              "ssl_key" => "foo",
-            })
+            custom_opts(
+              "ssl_key" => "foo"
+            )
           end
         end
 
@@ -297,16 +294,16 @@ class TestCommandsServe < JekyllUnitTest
           expect(OpenSSL::X509::Certificate).to receive(:new).and_return("c1")
           allow(File).to receive(:read).and_return("foo")
 
-          result = custom_opts({
+          result = custom_opts(
             "ssl_cert"   => "foo",
             "source"     => "bar",
             "enable_ssl" => true,
-            "ssl_key"    => "bar",
-          })
+            "ssl_key"    => "bar"
+          )
 
           assert result[:SSLEnable]
-          assert_equal result[:SSLPrivateKey],  "c2"
-          assert_equal result[:SSLCertificate], "c1"
+          assert_equal "c2", result[:SSLPrivateKey]
+          assert_equal "c1", result[:SSLCertificate]
         end
       end
     end
@@ -315,7 +312,7 @@ class TestCommandsServe < JekyllUnitTest
       allow(Jekyll::Commands::Serve).to receive(:start_up_webrick)
 
       expect(Jekyll).to receive(:configuration).once.and_call_original
-      @merc.execute(:serve, { "watch" => false })
+      @merc.execute(:serve, "watch" => false)
     end
   end
 end
