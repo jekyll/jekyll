@@ -8,6 +8,13 @@ require "openssl"
 require "thread"
 require "tmpdir"
 
+begin
+  require "eventmachine"
+rescue LoadError
+  Jekyll.logger.warn "Loading Pure Ruby Eventmachine.."
+  require "em/pure_ruby"
+end
+
 class TestCommandsServe < JekyllUnitTest
   def custom_opts(what)
     @cmd.send(
