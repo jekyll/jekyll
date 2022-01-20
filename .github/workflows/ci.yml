@@ -3,98 +3,69 @@ name: Continuous Integration
 on:
   push:
     branches:
-      - 3.9-stable
+      - master
+      - "*-stable"
   pull_request:
     branches:
-      - 3.9-stable
+      - master
+      - "*-stable"
 
 jobs:
-  cruby:
-    if: "!contains(github.event.commits[0].message, '[ci skip]')"
-    name: 'Ruby ${{ matrix.ruby_version }}'
-    runs-on: 'ubuntu-latest'
+  ci:
+    name: "Run Tests (${{ matrix.label }})"
+    runs-on: "ubuntu-latest"
     strategy:
       fail-fast: false
       matrix:
-        ruby_version:
-        - 2.5
-        - 2.7
+        include:
+          - label: Ruby 2.5
+            ruby_version: "2.5"
+          - label: Ruby 2.7
+            ruby_version: "2.7"
+          - label: Ruby 3.0
+            ruby_version: "3.0"
+          - label: Ruby 3.1
+            ruby_version: "3.1"
+          - label: JRuby 9.2.20.1
+            ruby_version: "jruby-9.2.20.1"
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: "Set up ${{ matrix.label }}"
+        uses: ruby/setup-ruby@v1
         with:
-          fetch-depth: 5
+          ruby-version: ${{ matrix.ruby_version }}
+          bundler-cache: true
+      - name: Run Minitest based tests
+        run: bash script/test
+      - name: Run Cucumber based tests
+        if: "!contains(matrix.ruby_version, 'jruby')"
+        run: bash script/cucumber
+      - name: Generate and Build a new site
+        run: bash script/default-site
+
+  xtras:
+    name: "${{ matrix.job_name }} (Ruby ${{ matrix.ruby_version }})"
+    runs-on: "ubuntu-latest"
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - job_name: "Profile Docs Site"
+            step_name: "Build and Profile docs site"
+            script_file: "profile-docs"
+            ruby_version: "2.5"
+          - job_name: "Style Check"
+            step_name: "Run RuboCop"
+            script_file: "fmt"
+            ruby_version: "2.5"
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
       - name: "Set up Ruby ${{ matrix.ruby_version }}"
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby_version }}
           bundler-cache: true
-      - name: Execute Unit Tests
-        run:  bash script/test
-      - name: Execute Cucumber Scenarios
-        run:  bash script/cucumber
-      - name: Create and Build new site
-        run:  bash script/default-site
-
-  jruby:
-    if: "!contains(github.event.commits[0].message, '[ci skip]')"
-    name: JRuby
-    runs-on: 'ubuntu-latest'
-
-    strategy:
-      fail-fast: false
-      matrix:
-        ruby_version:
-        - jruby
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 5
-      - name: "Set up Ruby ${{ matrix.ruby_version }}"
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby_version }}
-          bundler-cache: true
-      - name: Execute Unit Tests
-        run:  bash script/test
-
-  profile_docs:
-    if: "!contains(github.event.commits[0].message, '[ci skip]')"
-    name: 'Profile Docs Site (Ruby ${{ matrix.ruby_version }})'
-    runs-on: 'ubuntu-latest'
-    strategy:
-      fail-fast: false
-      matrix:
-        ruby_version:
-        - 2.5
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 5
-      - name: "Set up Ruby ${{ matrix.ruby_version }}"
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby_version }}
-          bundler-cache: true
-      - name: Profile building docs site
-        run:  bash script/profile-docs
-
-  style_check:
-    if: "!contains(github.event.commits[0].message, '[ci skip]')"
-    name: 'Style Check (Ruby ${{ matrix.ruby_version }})'
-    runs-on: 'ubuntu-latest'
-    strategy:
-      fail-fast: false
-      matrix:
-        ruby_version:
-        - 2.5 
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 5
-      - name: "Set up Ruby ${{ matrix.ruby_version }}"
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby_version }}
-          bundler-cache: true
-      - name: Run RuboCop
-        run:  bash script/fmt
+      - name: ${{ matrix.step_name }}
+        run: bash script/${{ matrix.script_file }}
