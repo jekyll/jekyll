@@ -37,7 +37,12 @@ group :test do
   gem "test-theme-skinny", :path => File.expand_path("test/fixtures/test-theme-skinny", __dir__)
   gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
 
-  gem "jruby-openssl", "0.10.1" if RUBY_ENGINE == "jruby"
+  # http_parser.rb has stopped shipping jruby-compatible versions
+  # latest compatible one was 0.6.0 https://rubygems.org/gems/http_parser.rb
+  if RUBY_ENGINE == "jruby"
+    gem "http_parser.rb", "~> 0.6.0"
+    gem "jruby-openssl"
+  end
 end
 
 #
