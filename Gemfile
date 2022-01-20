@@ -7,28 +7,22 @@ gem "rake", "~> 12.0"
 
 gem "rouge", ENV["ROUGE"] if ENV["ROUGE"]
 
-# Dependency of jekyll-mentions. RubyGems in Ruby 2.1 doesn't shield us from this.
-gem "activesupport", "~> 4.2", :groups => [:test_legacy, :site] if RUBY_VERSION < "2.2.2"
-
 group :development do
   gem "launchy", "~> 2.3"
   gem "pry"
 
-  unless RUBY_ENGINE == "jruby"
-    gem "pry-byebug"
-  end
+  gem "pry-byebug" unless RUBY_ENGINE == "jruby"
 end
 
 #
 
 group :test do
   gem "codeclimate-test-reporter", "~> 1.0.5"
-  gem "cucumber", RUBY_VERSION >= "2.2" ? "~> 3.0" : "3.0.1"
+  gem "cucumber", "~> 3.0"
   gem "httpclient"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
-  # nokogiri v1.10 does not work with ruby 2.2 and below
-  gem "nokogiri", RUBY_VERSION >= "2.3" ? "~> 1.9" : "~> 1.9.0"
+  gem "nokogiri", "~> 1.9"
   gem "rspec"
   gem "rspec-mocks"
   gem "rubocop", "~> 0.56.0"
@@ -59,9 +53,7 @@ end
 #
 
 group :test_legacy do
-  if RUBY_PLATFORM =~ %r!cygwin! || RUBY_VERSION.start_with?("2.2")
-    gem "test-unit"
-  end
+  gem "test-unit" if RUBY_PLATFORM =~ %r!cygwin!
 
   gem "minitest"
   gem "minitest-profile"
@@ -91,8 +83,8 @@ group :jekyll_optional_dependencies do
   gem "jekyll-paginate"
   gem "jekyll-redirect-from"
   gem "mime-types", "~> 3.0"
-  gem "rdoc", RUBY_VERSION >= "2.2.2" ? "~> 6.3.0" : "~> 5.1"
-  gem "tomlrb", "~> 1.2"
+  gem "rdoc", "~> 6.3.0"
+  gem "tomlrb", "~> 2.0"
 
   if ENV["KRAMDOWN_VERSION"].nil? || ENV["KRAMDOWN_VERSION"].to_i >= 2
     gem "kramdown-syntax-coderay"
@@ -103,7 +95,7 @@ group :jekyll_optional_dependencies do
 
   platform :ruby, :mswin, :mingw, :x64_mingw do
     gem "classifier-reborn", "~> 2.2.0"
-    gem "liquid-c", "~> 3.0"
+    gem "liquid-c", "~> 4.0"
     gem "pygments.rb", "~> 1.0"
     gem "rdiscount", "~> 2.0"
     gem "redcarpet", "~> 3.2", ">= 3.2.3"
@@ -117,9 +109,7 @@ end
 #
 
 group :site do
-  if ENV["PROOF"]
-    gem "html-proofer", "~> 3.4"
-  end
+  gem "html-proofer", "~> 3.4" if ENV["PROOF"]
 
   gem "jekyll-avatar"
   gem "jekyll-mentions"
