@@ -37,8 +37,6 @@ group :test do
   gem "test-theme-skinny", :path => File.expand_path("test/fixtures/test-theme-skinny", __dir__)
   gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
 
-  gem "jruby-openssl", "0.10.1" if RUBY_ENGINE == "jruby"
-
   gem "webrick" if RUBY_VERSION >= "3"
 
   # Ruby 3.1.0 shipped with `psych-4.0.3` which caused some of our Cucumber-based tests to fail.
