@@ -69,12 +69,13 @@ module Jekyll
 
       private
       def proc_version
-        @proc_version ||= \
-          begin
-            File.read("/proc/version").downcase
-          rescue Errno::ENOENT, Errno::EACCES
-            ""
-          end
+        @proc_version ||= begin
+          Pathutil.new(
+            "/proc/version"
+          ).read
+        rescue Errno::ENOENT
+          nil
+        end
       end
     end
   end
