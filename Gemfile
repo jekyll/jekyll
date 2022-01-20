@@ -49,6 +49,13 @@ group :test do
   # Add gem 'matrix'
   # https://github.com/jekyll/jekyll/commit/d0eb07ba29dc7d5f52defab855bdb7a768cf824c
   gem "matrix"
+
+  # http_parser.rb has stopped shipping jruby-compatible versions
+  # latest compatible one was 0.6.0 https://rubygems.org/gems/http_parser.rb
+  if RUBY_ENGINE == "jruby"
+    gem "http_parser.rb", "~> 0.6.0"
+    gem "jruby-openssl"
+  end
 end
 
 #
