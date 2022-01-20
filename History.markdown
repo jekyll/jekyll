@@ -7,6 +7,7 @@
 
 ### Development Fixes
 
+  * Update and fix CI for `3.9-stable` on Ruby 3.x (#8942)
   * Fix CI for commits to `3.9-stable` branch (#8788)
 
 ## 3.9.1 / 2021-04-08
