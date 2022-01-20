@@ -23,6 +23,12 @@ group :test do
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
   gem "nokogiri", "~> 1.9"
+
+  # Ruby 3.1.0 shipped with `psych-4.0.3` which caused some of our Cucumber-based tests to fail.
+  # TODO: Remove lock once we implement a way to use Psych 4 without breaking anything.
+  # See https://github.com/jekyll/jekyll/pull/8918
+  gem "psych", "~> 3.3"
+
   gem "rspec"
   gem "rspec-mocks"
   gem "rubocop", "~> 0.56.0"
@@ -32,15 +38,6 @@ group :test do
   gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
 
   gem "webrick" if RUBY_VERSION >= "3"
-
-  # Ruby 3.1.0 shipped with `psych-4.0.3` which caused some of our Cucumber-based tests to fail.
-  # TODO: Remove lock once we implement a way to use Psych 4 without breaking anything.
-  # See https://github.com/jekyll/jekyll/pull/8918
-  gem "psych", "~> 3.3"
-
-  # Add gem 'matrix'
-  # https://github.com/jekyll/jekyll/commit/d0eb07ba29dc7d5f52defab855bdb7a768cf824c
-  gem "matrix"
 
   # http_parser.rb has stopped shipping jruby-compatible versions
   # latest compatible one was 0.6.0 https://rubygems.org/gems/http_parser.rb
@@ -82,6 +79,11 @@ group :jekyll_optional_dependencies do
   gem "jekyll-gist"
   gem "jekyll-paginate"
   gem "jekyll-redirect-from"
+
+  # Add gem 'matrix'
+  # Ref: https://github.com/jekyll/jekyll/commit/d0eb07ba29dc7d5f52defab855bdb7a768cf824c
+  gem "matrix"
+
   gem "mime-types", "~> 3.0"
   gem "rdoc", "~> 6.3.0"
   gem "tomlrb", "~> 2.0"
