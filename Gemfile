@@ -24,10 +24,9 @@ group :test do
   gem "jekyll_test_plugin_malicious"
   gem "nokogiri", "~> 1.9"
 
-  # Psych 4 breaks RubyGems.
+  # Ruby 3.1.0 shipped with `psych-4.0.3` which caused some of our Cucumber-based tests to fail.
   # TODO: Remove lock once we implement a way to use Psych 4 without breaking anything.
   # See https://github.com/jekyll/jekyll/pull/8918
-  # See https://github.com/ruby/setup-ruby/issues/228#issuecomment-1009102442
   gem "psych", "~> 3.3"
 
   gem "rspec"
