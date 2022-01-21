@@ -92,6 +92,7 @@
   * Remove the warning about auto-regeneration on Windows (#8821)
   * Propagate _data folder from theme (#8815)
   * Support both tzinfo v1 and v2 alongwith non-half hour offsets. (#8880)
+  * Run vendor-mimes to update mime.types (#8940)
 
 ### Site Enhancements
 
