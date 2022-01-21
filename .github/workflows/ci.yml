@@ -36,6 +36,7 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby_version }}
           bundler-cache: true
+          cache-version: 2
       - name: Run Minitest based tests
         run: bash script/test
       - name: Run Cucumber based tests
@@ -67,5 +68,6 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby_version }}
           bundler-cache: true
+          cache-version: 2
       - name: ${{ matrix.step_name }}
         run: bash script/${{ matrix.script_file }}
