@@ -35,7 +35,8 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby_version }}
-          bundler-cache: true
+          # Bundler Cache has Psych 4.0, which breaks RubyGems presently.
+          # bundler-cache: true
       - name: Run Minitest based tests
         run: bash script/test
       - name: Run Cucumber based tests
@@ -66,6 +67,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby_version }}
-          bundler-cache: true
+          # Bundler Cache has Psych 4.0, which breaks RubyGems presently.
+          # bundler-cache: true
       - name: ${{ matrix.step_name }}
         run: bash script/${{ matrix.script_file }}
