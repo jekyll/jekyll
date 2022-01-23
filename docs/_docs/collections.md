@@ -46,6 +46,12 @@ information, see the section <a href="#output">Output</a>.
   <p>If you specify a directory to store all your collections in the same place with <code>collections_dir: my_collections</code>, then you will need to move your <code>_drafts</code> and <code>_posts</code> directory to <code>my_collections/_drafts</code> and <code>my_collections/_posts</code>. Note that, the name of your collections directory cannot start with an underscore (`_`).</p>
 </div>
 
+<div class="note warning">
+  <h5>Be sure to quote variables that can be considered truthy or falsy (true, false, yes, no)</h5>
+
+  <p>In collections, values that can be considered truthy (true, yes) or falsy (false, no) are converted to true and false respectively. If you want to use these as items in your collection, add double quotes around them to explicitly set their type to strings.</p>
+</div>
+
 ## Add content
 
 Create a corresponding folder (e.g. `<source>/_staff_members`) and add
