@@ -51,6 +51,7 @@
   * Rewrite documentation on installing plugins (#8921)
   * Improve maintainers guide on releasing a new version (#8928)
   * Fix link for &#34;CloudSh&#34; (#8934)
+  * Recommend using `actions/cache` in GitHub Actions documentation (#8948)
 
 ### Bug Fixes
 
