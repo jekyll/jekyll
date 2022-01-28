@@ -132,7 +132,7 @@ The above workflow can be explained as the following:
   the Action from overwriting the `gh-pages` branch on any feature branch pushes.
 - The **name** of the job matches our YAML filename: `github-pages`.
 - The **checkout** action takes care of cloning your repository.
-- The **cache** action is an optimisation for shorten the build times.
+- The **cache** action is an optimization to avoid fetching and installing gems on every build.
 - We specify our selected **action** and **version number** using `helaili/jekyll-action@2.0.5`.
   This handles the build and deploy.
 - We set a reference to a secret **environment variable** for the action to use. The `GITHUB_TOKEN`
