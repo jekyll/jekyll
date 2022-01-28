@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2022-01-20T18:51:25-08:00" />
+<meta property="article:published_time" content="2022-01-28T01:22:44-08:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="GitHub Actions" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"description":"When building a Jekyll site with GitHub Pages, the standard flow is restricted for security reasons and to make it simpler to get a site setup. For more control over the build and still host the site with GitHub Pages you can use GitHub Actions.","image":"https://jekyllrb.com/img/jekyll-og.png","url":"https://jekyllrb.com/docs/continuous-integration/github-actions/","headline":"GitHub Actions","dateModified":"2022-01-20T18:51:25-08:00","datePublished":"2022-01-20T18:51:25-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/continuous-integration/github-actions/"},"@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"@context":"https://schema.org"}</script>
+{"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"description":"When building a Jekyll site with GitHub Pages, the standard flow is restricted for security reasons and to make it simpler to get a site setup. For more control over the build and still host the site with GitHub Pages you can use GitHub Actions.","url":"https://jekyllrb.com/docs/continuous-integration/github-actions/","@type":"BlogPosting","image":"https://jekyllrb.com/img/jekyll-og.png","headline":"GitHub Actions","dateModified":"2022-01-28T01:22:44-08:00","datePublished":"2022-01-28T01:22:44-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/continuous-integration/github-actions/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -230,6 +230,12 @@ a YAML file to the workflow directory path manually. The base contents are:</p>
     <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
     <span class="na">steps</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/cache@v2</span>
+      <span class="na">with</span><span class="pi">:</span>
+        <span class="na">path</span><span class="pi">:</span> <span class="s">vendor/bundle</span>
+        <span class="na">key</span><span class="pi">:</span> <span class="s">${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}</span>
+        <span class="na">restore-keys</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">${{ runner.os }}-gems-</span>
       <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">helaili/jekyll-action@v2</span>
         <span class="na">with</span><span class="pi">:</span>
           <span class="na">token</span><span class="pi">:</span> <span class="s">${{ secrets.GITHUB_TOKEN }}</span>
@@ -242,6 +248,7 @@ a YAML file to the workflow directory path manually. The base contents are:</p>
 the Action from overwriting the <code class="language-plaintext highlighter-rouge">gh-pages</code> branch on any feature branch pushes.</li>
   <li>The <strong>name</strong> of the job matches our YAML filename: <code class="language-plaintext highlighter-rouge">github-pages</code>.</li>
   <li>The <strong>checkout</strong> action takes care of cloning your repository.</li>
+  <li>The <strong>cache</strong> action is an optimisation for shorten the build times.</li>
   <li>We specify our selected <strong>action</strong> and <strong>version number</strong> using <code class="language-plaintext highlighter-rouge">helaili/jekyll-action@2.0.5</code>.
 This handles the build and deploy.</li>
   <li>We set a reference to a secret <strong>environment variable</strong> for the action to use. The <code class="language-plaintext highlighter-rouge">GITHUB_TOKEN</code>
