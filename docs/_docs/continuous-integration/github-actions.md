@@ -113,6 +113,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
       - uses: helaili/jekyll-action@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -126,6 +132,7 @@ The above workflow can be explained as the following:
   the Action from overwriting the `gh-pages` branch on any feature branch pushes.
 - The **name** of the job matches our YAML filename: `github-pages`.
 - The **checkout** action takes care of cloning your repository.
+- The **cache** action is an optimisation for shorten the build times.
 - We specify our selected **action** and **version number** using `helaili/jekyll-action@2.0.5`.
   This handles the build and deploy.
 - We set a reference to a secret **environment variable** for the action to use. The `GITHUB_TOKEN`
