@@ -13,7 +13,7 @@ Jekyll/NoPutsAllowed:
     - rake/*.rake
 
 AllCops:
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.7
   Include:
     - lib/**/*.rb
     - test/**/*.rb
