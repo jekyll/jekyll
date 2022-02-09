@@ -735,4 +735,13 @@ class TestSite < JekyllUnitTest
       end
     end
   end
+
+  context "static files in a collection" do
+    should "be exposed via site instance" do
+      site = fixture_site("collections" => ["methods"])
+      site.read
+
+      assert_includes site.static_files.map(&:relative_path), "_methods/extensionless_static_file"
+    end
+  end
 end
