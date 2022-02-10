@@ -382,3 +382,35 @@ Scenario: Use page.render_with_liquid variable
     And the _site directory should exist
     And I should see "next post: Some like it hot" in "_site/2009/03/27/star-wars.html"
     And I should see "Previous post: Some like it hot" in "_site/2009/05/27/terminator.html"
+
+  Scenario: Deprecate calling data keys directly via Ruby
+    Given I have a _posts directory
+    And I have a _plugins directory
+    And I have the following post:
+      | title   | date       | content                 |
+      | My post | 2016-01-21 | Luke, I am your father. |
+    And I have a "_plugins/foo.rb" file with content:
+      """
+      Jekyll::Hooks.register :documents, :pre_render do |doc|
+        doc.title
+      end
+      """
+    And I have a "_plugins/bar.rb" file with content:
+      """
+      module FooBar
+        def self.dummy?(doc)
+          doc.title == "Dummy Document"
+        end
+      end
+
+      Jekyll::Hooks.register :documents, :post_render do |doc|
+        FooBar.dummy?(doc)
+      end
+      """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "Deprecation: Document#title" in the build output
+    And I should see "_plugins/foo.rb:2" in the build output
+    And I should see "_plugins/bar.rb:3" in the build output
+    But I should not see "lib/jekyll/document.rb" in the build output
