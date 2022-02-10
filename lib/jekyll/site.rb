@@ -343,6 +343,13 @@ module Jekyll
       documents.select(&:write?)
     end
 
+    # Get the to be written static files
+    #
+    # Returns an Array of StaticFiles which should be written
+    def static_files_to_write
+      static_files.select(&:write?)
+    end
+
     # Get all the documents
     #
     # Returns an Array of all Documents
@@ -353,7 +360,7 @@ module Jekyll
     end
 
     def each_site_file
-      %w(pages static_files docs_to_write).each do |type|
+      %w(pages static_files_to_write docs_to_write).each do |type|
         send(type).each do |item|
           yield item
         end
