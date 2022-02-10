@@ -134,6 +134,7 @@ module Jekyll
         def initialize(server, root, callbacks)
           # So we can access them easily.
           @jekyll_opts = server.config[:JekyllOptions]
+          @mime_types_data = JSON.parse(server.config[:MimeTypesJSON])
           set_defaults
           super
         end
@@ -173,7 +174,7 @@ module Jekyll
             end
           end
 
-          validate_and_ensure_charset(req, res)
+          validate_and_ensure_charset(res)
           res.header.merge!(@headers)
           rtn
         end
@@ -181,12 +182,11 @@ module Jekyll
 
         private
 
-        def validate_and_ensure_charset(_req, res)
-          key = res.header.keys.grep(%r!content-type!i).first
-          typ = res.header[key]
+        def validate_and_ensure_charset(res)
+          typ = res.header["content-type"]
 
-          unless %r!;\s*charset=!.match?(typ)
-            res.header[key] = "#{typ}; charset=#{@jekyll_opts["encoding"]}"
+          if @mime_types_data[type].key?("charset") && !%r!;\s*charset=!.match?(typ)
+            res.header["content-type"] = "#{typ}; charset=#{@jekyll_opts["encoding"]}"
           end
         end
 

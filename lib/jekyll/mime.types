@@ -19,6 +19,7 @@ application/cdmi-container                                                cdmic
 application/cdmi-domain                                                   cdmid
 application/cdmi-object                                                   cdmio
 application/cdmi-queue                                                    cdmiq
+application/cpl+xml                                                       cpl
 application/cu-seeme                                                      cu
 application/dash+xml                                                      mpd
 application/dash-patch+xml                                                mpp
@@ -63,6 +64,7 @@ application/marcxml+xml                                                   mrcx
 application/mathematica                                                   ma mb nb
 application/mathml+xml                                                    mathml
 application/mbox                                                          mbox
+application/media-policy-dataset+xml                                      mpf
 application/mediaservercontrol+xml                                        mscml
 application/metalink+xml                                                  metalink
 application/metalink4+xml                                                 meta4
@@ -88,7 +90,8 @@ application/p2p-overlay+xml                                               relo
 application/patch-ops-error+xml                                           xer
 application/pdf                                                           pdf
 application/pgp-encrypted                                                 pgp
-application/pgp-signature                                                 asc sig
+application/pgp-keys                                                      asc
+application/pgp-signature                                                 sig
 application/pics-rules                                                    prf
 application/pkcs10                                                        p10
 application/pkcs7-mime                                                    p7c p7m
@@ -529,6 +532,7 @@ application/vnd.zul                                                       zir zi
 application/vnd.zzazz.deck+xml                                            zaz
 application/voicexml+xml                                                  vxml
 application/wasm                                                          wasm
+application/watcherinfo+xml                                               wif
 application/widget                                                        wgt
 application/winhlp                                                        hlp
 application/wsdl+xml                                                      wsdl
@@ -719,6 +723,8 @@ font/woff                                                                 woff
 font/woff2                                                                woff2
 image/aces                                                                exr
 image/apng                                                                apng
+image/avci                                                                avci
+image/avcs                                                                avcs
 image/avif                                                                avif
 image/bmp                                                                 bmp
 image/cgm                                                                 cgm
