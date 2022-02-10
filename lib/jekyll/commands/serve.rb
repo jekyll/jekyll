@@ -354,10 +354,6 @@ module Jekyll
           WEBrick::HTTPUtils.load_mime_types(file)
         end
 
-        def mime_types_json
-          JSON.parse(File.read(File.expand_path("serve/mime_types.json", __dir__)))
-        end
-
         def read_file(source_dir, file_path)
           File.read(Jekyll.sanitized_path(source_dir, file_path))
         end

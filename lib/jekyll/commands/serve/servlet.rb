@@ -185,7 +185,7 @@ module Jekyll
         def validate_and_ensure_charset(res)
           typ = res.header["content-type"]
 
-          if @mime_types_data[type].key?("charset") && !%r!;\s*charset=!.match?(typ)
+          if @mime_types_data[typ].key?("charset") && !%r!;\s*charset=!.match?(typ)
             res.header["content-type"] = "#{typ}; charset=#{@jekyll_opts["encoding"]}"
           end
         end
