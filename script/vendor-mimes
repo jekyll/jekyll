@@ -27,7 +27,7 @@ rescue StandardError => e
   log_error "Error reading remote data!"
   log_error e.message
   log_error "Aborting."
-  exit
+  exit 1
 end
 
 log_info "Parsing remote data.."
