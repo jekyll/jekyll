@@ -134,7 +134,7 @@ module Jekyll
         def initialize(server, root, callbacks)
           # So we can access them easily.
           @jekyll_opts = server.config[:JekyllOptions]
-          @mime_types_data = JSON.parse(server.config[:MimeTypesJSON])
+          @mime_types_charset = server.config[:MimeTypesCharset]
           set_defaults
           super
         end
@@ -174,7 +174,7 @@ module Jekyll
             end
           end
 
-          validate_and_ensure_charset(res)
+          conditionally_inject_charset(res)
           res.header.merge!(@headers)
           rtn
         end
@@ -182,12 +182,16 @@ module Jekyll
 
         private
 
-        def validate_and_ensure_charset(res)
+        # Inject charset based on Jekyll config only if our mime-types database contains
+        # the charset metadata.
+        #
+        # Refer `script/vendor-mimes` in the repository for further details.
+        def conditionally_inject_charset(res)
           typ = res.header["content-type"]
+          return unless @mime_types_charset.key?(typ)
+          return if %r!;\s*charset=!.match?(typ)
 
-          if @mime_types_data[typ].key?("charset") && !%r!;\s*charset=!.match?(typ)
-            res.header["content-type"] = "#{typ}; charset=#{@jekyll_opts["encoding"]}"
-          end
+          res.header["content-type"] = "#{typ}; charset=#{@jekyll_opts["encoding"]}"
         end
 
         def set_defaults

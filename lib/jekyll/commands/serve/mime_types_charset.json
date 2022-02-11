@@ -1,0 +1,15 @@
+{
+  "application/javascript": "UTF-8",
+  "application/json": "UTF-8",
+  "application/manifest+json": "UTF-8",
+  "application/vnd.syncml+xml": "UTF-8",
+  "application/vnd.syncml.dm+wbxml": "UTF-8",
+  "application/vnd.syncml.dm+xml": "UTF-8",
+  "application/vnd.syncml.dmddf+xml": "UTF-8",
+  "application/vnd.wap.wbxml": "UTF-8",
+  "text/css": "UTF-8",
+  "text/n3": "UTF-8",
+  "text/turtle": "UTF-8",
+  "text/vnd.sun.j2me.app-descriptor": "UTF-8",
+  "text/vtt": "UTF-8"
+}

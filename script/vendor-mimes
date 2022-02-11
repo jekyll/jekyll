@@ -34,8 +34,9 @@ log_info "Parsing remote data.."
 data = JSON.parse(json)
 data.reject! { |mime, meta| meta["extensions"].nil? || meta["extensions"].empty? }
 
-log_info "Generating interim mime data-hash.."
+log_info "Generating interim mime data-hashes.."
 mimes = {}
+charset_data = {}
 data.each do |mime, meta|
   # Normalize extensions and mime-types
   mime = mime.downcase.strip
@@ -47,6 +48,9 @@ data.each do |mime, meta|
   next if extensions.empty?
   mimes[mime] = [] if mimes[mime].nil?
   mimes[mime].concat extensions
+
+  # Extract mime-types with "charset" metadata
+  charset_data[mime] = meta["charset"] if meta.key?("charset")
 end
 
 log_info "Formatting primary hash and writing to file.."
@@ -61,10 +65,10 @@ config = File.expand_path "../lib/jekyll/mime.types", __dir__
 File.write(config, output)
 log_info "Done! See: #{config.inspect.white}"
 
-# --- Generate JSON file from mime-type data ----
+# --- Generate JSON file from charset_data ----
 puts
 
-log_info "Dumping sanitized hash to file as JSON.."
-json_file = File.expand_path "../lib/jekyll/commands/serve/mime_types.json", __dir__
-File.write(json_file, JSON.pretty_generate(data) + "\n")
+log_info "Dumping miimetype-charset mapping as JSON.."
+json_file = File.expand_path "../lib/jekyll/commands/serve/mime_types_charset.json", __dir__
+File.write(json_file, JSON.pretty_generate(charset_data) + "\n")
 log_success "and done! See: #{json_file.inspect.white}"

@@ -194,7 +194,7 @@ module Jekyll
             :JekyllOptions      => opts,
             :DoNotReverseLookup => true,
             :MimeTypes          => mime_types,
-            :MimeTypesJSON      => File.read(File.expand_path("serve/mime_types.json", __dir__)),
+            :MimeTypesCharset   => mime_types_charset,
             :DocumentRoot       => opts["destination"],
             :StartCallback      => start_callback(opts["detach"]),
             :StopCallback       => stop_callback(opts["detach"]),
@@ -352,6 +352,12 @@ module Jekyll
         def mime_types
           file = File.expand_path("../mime.types", __dir__)
           WEBrick::HTTPUtils.load_mime_types(file)
+        end
+
+        def mime_types_charset
+          JSON.parse(
+            File.read(File.expand_path("serve/mime_types_charset.json", __dir__))
+          )
         end
 
         def read_file(source_dir, file_path)

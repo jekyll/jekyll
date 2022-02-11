@@ -239,14 +239,13 @@ module TestWEBrick
 
   def config
     logger = FakeLogger.new
-    mime_types_file = File.expand_path("../lib/jekyll/commands/serve/mime_types.json", __dir__)
     {
       :BindAddress => "127.0.0.1", :Port => 0,
       :ShutdownSocketWithoutClose => true,
       :ServerType => Thread,
       :Logger => WEBrick::Log.new(logger),
       :AccessLog => [[logger, ""]],
-      :MimeTypesJSON => File.read(mime_types_file),
+      :MimeTypesCharset => Jekyll::Commands::Serve.send(:mime_types_charset),
       :JekyllOptions => {},
     }
   end
