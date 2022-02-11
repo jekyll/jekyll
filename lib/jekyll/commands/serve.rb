@@ -355,9 +355,7 @@ module Jekyll
         end
 
         def mime_types_charset
-          JSON.parse(
-            File.read(File.expand_path("serve/mime_types_charset.json", __dir__))
-          )
+          SafeYAML.load_file(File.expand_path("serve/mime_types_charset.json", __dir__))
         end
 
         def read_file(source_dir, file_path)
