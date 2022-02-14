@@ -51,6 +51,9 @@ data.each do |mime, meta|
 
   # Extract mime-types with "charset" metadata
   charset_data[mime] = meta["charset"] if meta.key?("charset")
+
+  # Assign `UTF-8` charset for mime-types under the `text` domain if not already assigned upstream
+  charset_data[mime] ||= "UTF-8" if mime.start_with?("text/")
 end
 
 log_info "Formatting primary hash and writing to file.."
@@ -68,7 +71,7 @@ log_info "Done! See: #{config.inspect.white}"
 # --- Generate JSON file from charset_data ----
 puts
 
-log_info "Dumping miimetype-charset mapping as JSON.."
+log_info "Dumping mimetype-charset mapping as JSON.."
 json_file = File.expand_path "../lib/jekyll/commands/serve/mime_types_charset.json", __dir__
 File.write(json_file, JSON.pretty_generate(charset_data) + "\n")
 log_success "and done! See: #{json_file.inspect.white}"
