@@ -5,7 +5,7 @@ permalink: "/docs/configuration/options/"
 
 The tables below list the available settings for Jekyll, and the various <code
 class="option">options</code> (specified in the configuration file) and <code
-class="flag">flags</code> (specified on the command-line) that control them.
+class="flag">switches</code> (specified on the command-line) that control them.
 
 ### Global Configuration
 
@@ -15,7 +15,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
     <tr>
       <th>Setting</th>
       <th>
-        <span class="option">Options</span> and <span class="flag">Flags</span>
+        <span class="option">Options</span> and <span class="flag">Switches</span>
       </th>
     </tr>
   </thead>
@@ -76,7 +76,7 @@ class="flag">flags</code> (specified on the command-line) that control them.
   <thead>
     <tr>
       <th>Setting</th>
-      <th><span class="option">Options</span> and <span class="flag">Flags</span></th>
+      <th><span class="option">Options</span> and <span class="flag">Switches</span></th>
     </tr>
   </thead>
   <tbody>
@@ -112,7 +112,7 @@ before your site is served.
   <thead>
     <tr>
       <th>Setting</th>
-      <th><span class="option">Options</span> and <span class="flag">Flags</span></th>
+      <th><span class="option">Options</span> and <span class="flag">Switches</span></th>
     </tr>
   </thead>
   <tbody>
