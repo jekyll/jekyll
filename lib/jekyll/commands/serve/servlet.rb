@@ -137,6 +137,7 @@ module Jekyll
         def initialize(server, root, callbacks)
           # So we can access them easily.
           @jekyll_opts = server.config[:JekyllOptions]
+          @mime_types_charset = server.config[:MimeTypesCharset]
           set_defaults
           super
         end
@@ -172,27 +173,28 @@ module Jekyll
             end
           end
 
-          validate_and_ensure_charset(req, res)
+          conditionally_inject_charset(res)
           res.header.merge!(@headers)
           rtn
         end
         # rubocop:enable Naming/MethodName
 
-        #
-
         private
-        def validate_and_ensure_charset(_req, res)
-          key = res.header.keys.grep(%r!content-type!i).first
-          typ = res.header[key]
 
-          unless typ =~ %r!;\s*charset=!
-            res.header[key] = "#{typ}; charset=#{@jekyll_opts["encoding"]}"
-          end
+        #
+        # Inject charset based on Jekyll config only if our mime-types database contains
+        # the charset metadata.
+        #
+        # Refer `script/vendor-mimes` in the repository for further details.
+        def conditionally_inject_charset(res)
+          typ = res.header["content-type"]
+          return unless @mime_types_charset.key?(typ)
+          return if %r!;\s*charset=!.match?(typ)
+
+          res.header["content-type"] = "#{typ}; charset=#{@jekyll_opts["encoding"]}"
         end
 
         #
-
-        private
         def set_defaults
           hash_ = @jekyll_opts.fetch("webrick", {}).fetch("headers", {})
           DEFAULTS.each_with_object(@headers = hash_) do |(key, val), hash|

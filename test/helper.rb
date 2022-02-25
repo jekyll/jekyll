@@ -239,6 +239,7 @@ module TestWEBrick
       :ServerType => Thread,
       :Logger => WEBrick::Log.new(logger),
       :AccessLog => [[logger, ""]],
+      :MimeTypesCharset => Jekyll::Commands::Serve.send(:mime_types_charset),
       :JekyllOptions => {},
     }
   end
