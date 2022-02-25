@@ -66,6 +66,7 @@
   * Revert #7253: &#34;Don&#39;t reset site.url to localhost:4000 by default&#34; (#8620)
   * Improve readability of CI logs (#8877)
   * Fix deprecation message for missing doc method (#8960)
+  * Fix response header for content served via `jekyll serve` (#8965)
 
 ### Development Fixes
 
