@@ -3,14 +3,14 @@
 	"file": "screen.css",
 	"sources": [
 		"screen.scss",
-		"docs/_sass/_mixins.scss",
-		"docs/_sass/_normalize.scss",
-		"docs/_sass/_gridism.scss",
-		"docs/_sass/_pygments.scss",
-		"docs/_sass/_font-awesome.scss",
-		"docs/_sass/_fonts.scss",
-		"docs/_sass/_docsearch.scss",
-		"docs/_sass/_style.scss"
+		"_sass/_mixins.scss",
+		"_sass/_normalize.scss",
+		"_sass/_gridism.scss",
+		"_sass/_pygments.scss",
+		"_sass/_font-awesome.scss",
+		"_sass/_fonts.scss",
+		"_sass/_docsearch.scss",
+		"_sass/_style.scss"
 	],
 	"sourcesContent": [
 		"@import \"mixins\";\n@import \"normalize\";\n@import \"gridism\";\n@import \"pygments\";\n@import \"font-awesome\";\n@import \"fonts\";\n@import \"docsearch\";\n@import \"style\";\n",

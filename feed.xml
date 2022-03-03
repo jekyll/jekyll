@@ -1,4 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2022-02-25T13:16:15-08:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 4.2.1 Released</title><link href="https://jekyllrb.com/news/2021/09/27/jekyll-4-2-1-released/" rel="alternate" type="text/html" title="Jekyll 4.2.1 Released" /><published>2021-09-27T02:15:46-07:00</published><updated>2021-09-27T02:15:46-07:00</updated><id>https://jekyllrb.com/news/2021/09/27/jekyll-4-2-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2021/09/27/jekyll-4-2-1-released/"><![CDATA[<p>Hello Jekyllers!</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2022-03-03T02:52:06-08:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 4.2.2 Released</title><link href="https://jekyllrb.com/news/2022/03/03/jekyll-4-2-2-released/" rel="alternate" type="text/html" title="Jekyll 4.2.2 Released" /><published>2022-03-03T05:45:20-08:00</published><updated>2022-03-03T05:45:20-08:00</updated><id>https://jekyllrb.com/news/2022/03/03/jekyll-4-2-2-released</id><content type="html" xml:base="https://jekyllrb.com/news/2022/03/03/jekyll-4-2-2-released/"><![CDATA[<p>Hello Jekyllers!</p>
+
+<p>Jekyll 4.2.2 has been released. Unlike prior releases, this is a simple maintenance release and may be skipped.</p>
+
+<p>For those who are still curious about the current release, here is some technical context: The previous <code class="language-plaintext highlighter-rouge">jekyll-4.2.1</code> package was built and
+published using a Windows system. A side-effect of that action was that every file bundled into the gem ended up with Windows-style CRLF
+line-endings instead of Unix-style LF line-endings.</p>
+
+<p>For our end-users, this difference holds no significance. However, a third-party entity vendoring the release faced a roadblock. The executable
+program <code class="language-plaintext highlighter-rouge">jekyll</code> apparently misplaced the executable bit because of the change in line-endings.</p>
+
+<p>To that end, the Jekyll team decided to use the GitHub Actions service to build and publish releases. In-house plugins have already published
+releases via this route serving as trials. Henceforth, and unless explicitly reported, all Jekyll releases will be built on GitHub Actions’
+Ubuntu platform and published to Rubygems by @jekyllbot irrespective of the maintainer overseeing the release.</p>
+
+<p>That is all for now.
+Happy Jekyllin’!!</p>
+
+<p><em>P.S.: Jekyll 4.3.0 will be bringing you some new features very soon.. Also, our sass-converter plugin has been <a href="https://github.com/jekyll/jekyll-sass-converter/tree/v2.2.0#sass-embedded">enhanced</a> to support
+modern improvements to Sass.</em></p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.2.1 Released</title><link href="https://jekyllrb.com/news/2021/09/27/jekyll-4-2-1-released/" rel="alternate" type="text/html" title="Jekyll 4.2.1 Released" /><published>2021-09-27T02:15:46-07:00</published><updated>2021-09-27T02:15:46-07:00</updated><id>https://jekyllrb.com/news/2021/09/27/jekyll-4-2-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2021/09/27/jekyll-4-2-1-released/"><![CDATA[<p>Hello Jekyllers!</p>
 
 <p>The Jekyll team is happy to announce the release of <code class="language-plaintext highlighter-rouge">v4.2.1</code> which fixes a couple of
 regressions introduced in <code class="language-plaintext highlighter-rouge">v4.2.0</code> and another bug inherited from Jekyll 3.</p>
@@ -346,36 +365,4 @@ Kolovos, Timo Schuhmacher, Tobias, Tom Harvey, Tushar Prajapati, Victor Afanasev
 Vinicius Flores, Vitor Oliveira, Wouter Schoot, XhmikosR, Yi Feng Xie, Zhang
 Xiangze, 김정환, 104fps.</p>
 
-<p>Happy Jekylling everyone!</p>]]></content><author><name>mattr-</name></author><category term="release" /><summary type="html"><![CDATA[Hi! 👋 I bring some good news! Jekyll 4.0.0 is finally here! 🎉]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.0.0.pre.beta1 Released</title><link href="https://jekyllrb.com/news/2019/08/04/jekyll-4-0-0-pre-beta1-released/" rel="alternate" type="text/html" title="Jekyll 4.0.0.pre.beta1 Released" /><published>2019-08-04T08:43:31-07:00</published><updated>2019-08-04T08:43:31-07:00</updated><id>https://jekyllrb.com/news/2019/08/04/jekyll-4-0-0-pre-beta1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2019/08/04/jekyll-4-0-0-pre-beta1-released/"><![CDATA[<p>Dear Jekyllers,</p>
-
-<p>It’s time for another pre-release of Jekyll 4! 🎉</p>
-
-<p>This pre-release moves us further down the path of releasing Jekyll 4.0.0. All the same goodies <a href="/news/2019/03/18/jekyll-4-0-0-pre-alpha1-released/">from the last pre-release</a> are here, along with a few more things I want to highlight:</p>
-
-<p>Jekyll 4.0 is a new <em>major</em> version and it comes with a few breaking changes, notably :</p>
-
-<ol>
-  <li>We dropped support for <a href="https://www.ruby-lang.org/en/downloads/">Ruby 2.3 which EOL at the end of March 2019</a>.
-GitHub Pages runs Ruby 2.5.x, services like Netlify or Forestry already upgraded to latest Ruby 2.6.x.</li>
-  <li><code class="language-plaintext highlighter-rouge">link</code> tag now include <code class="language-plaintext highlighter-rouge">relative_url</code> filter, hurray <a href="https://github.com/jekyll/jekyll/pull/6727">no more need to prepend <code class="language-plaintext highlighter-rouge">{{ site.baseurl }}</code> </a>.</li>
-  <li><a href="https://github.com/jekyll/jekyll/pull/6821"><code class="language-plaintext highlighter-rouge">{% highlight %}</code> now behaves like <code class="language-plaintext highlighter-rouge">{% raw %}</code></a>, so you can no longer use <code class="language-plaintext highlighter-rouge">include</code> tags within.</li>
-  <li>We dropped support for Pygments, RedCarpet and rdiscount.</li>
-  <li>We bumped kramdown to v2.</li>
-</ol>
-
-<p>If you’re a plugin developer, we still need your feedback! Your plugin may not work with version 4 and we’d like to fix those issues before we release.</p>
-
-<p>Checkout the complete <a href="https://github.com/jekyll/jekyll/releases/tag/v4.0.0.pre.beta1">changelog</a> for more details.</p>
-
-<p>To test this pre version run:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem <span class="nb">install </span>jekyll <span class="nt">--pre</span>
-</code></pre></div></div>
-
-<p>Please test this version thoroughly and file bugs as you encounter them.</p>
-
-<p>Thanks to our dear contributors for helping making Jekyll better:</p>
-
-<p>Aidan Fitzgerald, Akshat Kedia, Alex Wood, Alexey Kopytko, Alexey Pelykh, Ali Thompson, Ana María Martínez Gómez, Ananthakumar, Andreas Möller, Andrew Lyndem, Andy Alt, Anne Gentle, Anny, Arjun Thakur, Arthur Attwell, Ashwin Maroli, Behrang, Belhassen Chelbi, Ben Keith, Ben Otte, Bilawal Hameed, Boris Schapira, Boris van Hoytema, Brett C, Chris Finazzo, Christian Oliff, Damien Solodow, Dan Allen, Dan Friedman, Daniel Höpfl, David J. Malan, Denis McDonald, Derek Smart, Derpy, Dusty Candland, ExE Boss, Frank Taillandier, Gareth Cooper, Grzegorz Kaczorek, Isaac Goodman, Jacob Byers, Jakob Krigovsky, Jan Pobořil, Joe Shannon, Jordan Morgan, Jorie Tappa, Josue Caraballo, Justin Vallelonga, Jörg Steinsträter, Karel Bílek, Keith Mifsud, Kelly-Ann Green, Ken Salomon, Kevin Plattret, Kyle Barbour, Lars Kanis, Leandro Facchinetti, Luis Enrique Perez Alvarez, Luis Guillermo Yáñez, Ma HongJun, Manu Mathew, Mario, Martin Scharm, Matt Massicotte, Matthew Rathbone, Maxwell Gerber, Mertcan Yücel, Michael Hiiva, Mike Kasberg, Mike Neumegen, Monica Powell, Nicolas Hoizey, Nikhil Swaminathan, Nikita Skalkin, Olivia Hugger, Parker Moore, Pat Hawks, Patrick Favre-Bulle, Paul Kim, Philip Belesky, Preston Lim, Ralph, Robert Riemann, Rosário Pereira Fernandes, Samuel Gruetter, Scott Killen, Sri Pravan Paturi, Stephan Fischer, Stephen Weiss, Steven Westmoreland, Sundaram Kalyan Vedala, Thanos Kolovos, Timo Schuhmacher, Tobias, Tom Harvey, Tushar Prajapati, Victor Afanasev, Vitor Oliveira, Wouter Schoot, XhmikosR, Zhang Xiangze, _94gsc, argv-minus-one, chrisfinazzo, ikeji, jess, jpasholk, makmm, mo khan, ninevra, penguinpet, 김정환, 104fps</p>
-
-<p>Happy Jekylling everyone!</p>]]></content><author><name>mattr-</name></author><category term="release" /><summary type="html"><![CDATA[Dear Jekyllers,]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<p>Happy Jekylling everyone!</p>]]></content><author><name>mattr-</name></author><category term="release" /><summary type="html"><![CDATA[Hi! 👋 I bring some good news! Jekyll 4.0.0 is finally here! 🎉]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
