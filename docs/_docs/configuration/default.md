@@ -19,7 +19,7 @@ file or on the command-line.
 source              : .
 destination         : ./_site
 collections_dir     : .
-plugins_dir         : _plugins # takes an array of strings and loads plugins in that order
+plugins_dir         : [_plugins] # takes an array of strings and loads plugins in that order
 layouts_dir         : _layouts
 data_dir            : _data
 includes_dir        : _includes
