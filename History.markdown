@@ -53,6 +53,7 @@
   * Fix link for &#34;CloudSh&#34; (#8934)
   * Recommend using `actions/cache` in GitHub Actions documentation (#8948)
   * Remove references to EOL hakiri.io service (#8946)
+  * Release post for v4.2.2 (#8982)
 
 ### Bug Fixes
 
