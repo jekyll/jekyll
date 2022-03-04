@@ -54,6 +54,7 @@
   * Recommend using `actions/cache` in GitHub Actions documentation (#8948)
   * Remove references to EOL hakiri.io service (#8946)
   * Release post for v4.2.2 (#8982)
+  * Document releasing off `*-stable` branches (#8984)
 
 ### Bug Fixes
 
