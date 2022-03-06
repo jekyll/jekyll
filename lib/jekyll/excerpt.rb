@@ -50,7 +50,7 @@ module Jekyll
     def relative_path
       @relative_path ||= File.join(doc.relative_path, "#excerpt")
     end
-    
+
     def name
       @name ||= @obj.doc.basename
     end
