@@ -84,6 +84,7 @@ chown
 Chrononaut
 chruby
 cibuild
+cimg
 circleci
 CJK
 classname
@@ -115,6 +116,7 @@ cruft
 css
 csv
 Currin
+CVE
 CWD
 cygwin
 daringfireball
@@ -157,6 +159,7 @@ Emacs
 emails
 emoji
 endcapture
+endcomment
 endfor
 endhighlight
 endif
@@ -164,7 +167,7 @@ endraw
 endrender
 endtablerow
 Enumerables
-eol
+EOL
 erb
 errordocument
 Espinaco
@@ -751,3 +754,5 @@ Zsh
 zshrc
 zypper
 zzot
+frontend
+prefetching

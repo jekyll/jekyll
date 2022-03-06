@@ -1,4 +1,5 @@
 <!-- See https://github.com/check-spelling/check-spelling/wiki/Configuration-Examples%3A-advice --> <!-- markdownlint-disable MD033 MD041 -->
+
 <details><summary>If you see a bunch of garbage</summary>
 
 If it relates to a ...

@@ -232,6 +232,12 @@ class TestCommandsServe < JekyllUnitTest
           expect(Jekyll).to receive(:env).and_return("development")
           expect(Jekyll::Commands::Serve).to receive(:start_up_webrick)
         end
+        should "set the site url by default to `http://localhost:4000`" do
+          @merc.execute(:serve, "watch" => false, "url" => "https://jekyllrb.com/")
+
+          assert_equal 1, Jekyll.sites.count
+          assert_equal "http://localhost:4000", Jekyll.sites.first.config["url"]
+        end
 
         should "take `host`, `port` and `ssl` into consideration if set" do
           @merc.execute(:serve,

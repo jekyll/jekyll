@@ -11,5 +11,5 @@ File | Purpose | Format | Info
 [expect.txt](expect.txt) | Expected words that aren't in the dictionary | one word per line (sorted, alphabetically) | [expect](https://github.com/check-spelling/check-spelling/wiki/Configuration#expect)
 [advice.txt](advice.txt) | Supplement for GitHub comment when unrecognized words are found | GitHub Markdown | [advice](https://github.com/check-spelling/check-spelling/wiki/Configuration-Examples%3A-advice)
 
-Note: you can replace any of these files with a directory by the same name (minus the suffix)
-and then include multiple files inside that directory (with that suffix) to merge multiple files together.
+Note: you can replace any of these files with a directory by the same name (minus the `.txt` extension) and
+then include multiple files (with a `.txt` extension) inside that directory to merge multiple files together.

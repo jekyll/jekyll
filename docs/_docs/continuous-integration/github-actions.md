@@ -113,6 +113,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
       - uses: helaili/jekyll-action@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -126,10 +132,12 @@ The above workflow can be explained as the following:
   the Action from overwriting the `gh-pages` branch on any feature branch pushes.
 - The **name** of the job matches our YAML filename: `github-pages`.
 - The **checkout** action takes care of cloning your repository.
+- The **cache** action is an optimization to avoid fetching and installing gems on every build.
 - We specify our selected **action** and **version number** using `helaili/jekyll-action@2.0.5`.
   This handles the build and deploy.
 - We set a reference to a secret **environment variable** for the action to use. The `GITHUB_TOKEN`
-  is a _Personal Access Token_ and is detailed in the next section.
+  is a secret token automatically initialized at the start of every workflow run.
+  More information can be found in [GitHub documentation](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret). 
 
 Instead of using the **on.push** condition, you could trigger your build on a **schedule** by
 using the [on.schedule] parameter. For example, here we build daily at midnight by specifying
@@ -146,25 +154,9 @@ Note that this string must be quoted to prevent the asterisks from being evaluat
 [on.schedule]: https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#onschedule
 [crontab guru]: https://crontab.guru/
 
-### Providing permissions
-
-The action needs permissions to push to your `gh-pages` branch. So you need to create a GitHub
-**authentication token** on your GitHub profile, then set it as an environment variable in your
-build using _Secrets_:
-
-1. On your GitHub profile, under **Developer Settings**, go to the [Personal Access Tokens][tokens]
-   section.
-2. **Create** a token. Give it a name like "GitHub Actions" and ensure it has permissions to
-   `public_repos` (or the entire `repo` scope for private repository) --- necessary for the action
-   to commit to the `gh-pages` branch.
-3. **Copy** the token value.
-4. Go to your repository's **Settings** and then the **Secrets** tab.
-5. **Create** a token named `GITHUB_TOKEN` (_important_). Give it a value using the value copied
-   above.
-
 ### Build and deploy
 
-On pushing any local changes onto `master`, the action will be triggered and the build will
+On pushing any local changes onto `main`, the action will be triggered and the build will
 **start**.
 
 To watch the progress and see any build errors, check on the build **status** using one of the

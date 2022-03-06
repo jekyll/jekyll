@@ -80,13 +80,17 @@ module Jekyll
 
       def render_rouge(code)
         require "rouge"
-        formatter = ::Rouge::Formatters::HTMLLegacy.new(
-          :line_numbers => @highlight_options[:linenos],
-          :wrap         => false,
-          :css_class    => "highlight",
-          :gutter_class => "gutter",
-          :code_class   => "code"
-        )
+        formatter = ::Rouge::Formatters::HTML.new
+        if @highlight_options[:linenos]
+          formatter = ::Rouge::Formatters::HTMLTable.new(
+            formatter,
+            {
+              :css_class    => "highlight",
+              :gutter_class => "gutter",
+              :code_class   => "code",
+            }
+          )
+        end
         lexer = ::Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
         formatter.format(lexer.lex(code))
       end

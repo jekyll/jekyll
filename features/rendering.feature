@@ -207,3 +207,35 @@ Feature: Rendering
     And I should see "series named {{ site.title }}" in "_site/index.html"
     And I should see "{% link series/first-part.md %}" in "_site/index.html"
     And I should see "{% link series/last-part.md %}" in "_site/index.html"
+
+  Scenario: Render content of another page
+    Given I have an "index.md" page that contains "__Hello World__"
+    And I have an "about.md" page that contains "{{ page.name }}"
+    And I have a "test.json" file with content:
+      """
+      ---
+      ---
+
+      {
+        "hpages": [
+          {%- for page in site.html_pages %}
+          {
+            "url"    : {{ page.url     | jsonify }},
+            "name"   : {{ page.name    | jsonify }},
+            "path"   : {{ page.path    | jsonify }},
+            "title"  : {{ page.title   | jsonify }},
+            "layout" : {{ page.layout  | jsonify }},
+            "content": {{ page.content | jsonify }},
+            "excerpt": {{ page.excerpt | jsonify }}
+          }{% unless forloop.last %},{% endunless -%}
+          {% endfor %}
+        ]
+      }
+      """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    But I should not see "content\": \"{{ page.name }}" in "_site/test.json"
+    And I should not see "content\": \"__Hello World__" in "_site/test.json"
+    But I should see "content\": \"<p>about.md</p>" in "_site/test.json"
+    And I should see "content\": \"<p><strong>Hello World</strong></p>" in "_site/test.json"

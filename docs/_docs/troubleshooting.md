@@ -211,7 +211,7 @@ you don't have a proper JavaScript runtime. To solve this, either install
 ### macOS
 
 Jekyll is compatible with macOS with ARM64 architecture.
-However, `bundle exec jekyll serve` may [fail with elder version `ffi`](https://github.com/ffi/ffi/issues/870).
+However, `bundle exec jekyll serve` may [fail with older version `ffi`](https://github.com/ffi/ffi/issues/870).
 
 You may need to run `bundle update` or update `ffi` to at least `1.14.2` manually.
 

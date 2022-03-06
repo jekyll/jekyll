@@ -10,13 +10,20 @@ As contributors and maintainers of this project, and in the interest of fosterin
 
 Read the full [code of conduct]({{ '/docs/conduct/' | relative_url }})
 
+## Reporting Security Vulnerabilities
+
+Find something in our codebase that could be exploited by malicious elements?
+
+Consult our [Security Policy]({{ '/docs/security/' | relative_url }}) to see if a product version is considered *outdated* and how to report
+the situation responsibly.
+
 ## Where to get support
 
 If you're looking for support for Jekyll, there are a lot of options:
 
 * Read the [Jekyll Documentation]({{ '/docs/' | relative_url }})
 * If you have a question about using Jekyll, start a discussion on the [Jekyll Forum](https://talk.jekyllrb.com/) or [StackOverflow](https://stackoverflow.com/questions/tagged/jekyll)
-* Chat with Jekyllers &mdash; Join our [Gitter channel](https://gitter.im/jekyll/jekyll) or our IRC channels #jekyll on [Libera](irc://irc.libera.chat/#jekyll) or [Freenode](irc://irc.freenode.net/#jekyll).
+* Chat with Jekyllers &mdash; Join our [Gitter channel](https://gitter.im/jekyll/jekyll) or our IRC channel #jekyll on [Libera](irc://irc.libera.chat/#jekyll).
 
 There are a bunch of helpful community members on these services who are willing to point you in the right direction.
 
