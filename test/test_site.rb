@@ -97,6 +97,12 @@ class TestSite < JekyllUnitTest
       )
     end
 
+    should "load config file from theme-gem as Jekyll::Configuration instance" do
+      site = fixture_site("theme" => "test-theme")
+      assert_instance_of Jekyll::Configuration, site.config
+      assert_equal "Hello World", site.config["title"]
+    end
+
     context "with a custom cache_dir configuration" do
       should "have the custom cache_dir hidden from Git" do
         site = fixture_site("cache_dir" => "../../custom-cache-dir")
