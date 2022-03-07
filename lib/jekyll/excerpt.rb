@@ -51,10 +51,6 @@ module Jekyll
       @relative_path ||= File.join(doc.relative_path, "#excerpt")
     end
 
-    def name
-      @name ||= @obj.doc.basename
-    end
-
     # Check if excerpt includes a string
     #
     # Returns true if the string passed in
