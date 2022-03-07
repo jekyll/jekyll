@@ -37,7 +37,7 @@ Feature: Post data
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see "Page name: 2009/03/27/star-wars.html" in "_site/2009/03/27/star-wars.html"
+    And I should see "Page name: 2009-03-27-star-wars.markdown" in "_site/2009/03/27/star-wars.html"
 
   Scenario: Use post.date variable
     Given I have a _posts directory
