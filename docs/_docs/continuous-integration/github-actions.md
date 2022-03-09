@@ -114,11 +114,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
       - uses: helaili/jekyll-action@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
