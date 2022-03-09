@@ -55,7 +55,7 @@
   flag: --lsi
 
 
-- name: Limit Posts
+- name: Limit posts
   description: Limit the number of posts to parse and publish.
   option: "limit_posts: NUM"
   flag: --limit_posts NUM
@@ -72,12 +72,12 @@
   flag: -V, --verbose
 
 
-- name: Silence Output
+- name: Silence output
   description: Silence the normal output from Jekyll during a build.
   flag: -q, --quiet
 
 
-- name: Log Level
+- name: Log level
   description: Specify a log level among debug, info, warn, or error.
   flag: JEKYLL_LOG_LEVEL=info
 
@@ -93,7 +93,7 @@
   flag: -I, --incremental
 
 
-- name: Disable Bundle Require
+- name: Disable bundle require
   description: Disables the need to require gems in `:jekyll_plugins` Gemfile
   flag: JEKYLL_NO_BUNDLER_REQUIRE=true
 
@@ -104,7 +104,7 @@
   flag: --profile
 
 
-- name: Strict Front Matter
+- name: Strict front matter
   description: Cause a build to fail if there is a YAML syntax error in a page's front matter.
   option: "strict_front_matter: BOOL"
   flag: --strict_front_matter
