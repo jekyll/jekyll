@@ -55,6 +55,7 @@
   * Remove references to EOL hakiri.io service (#8946)
   * Release post for v4.2.2 (#8982)
   * Document releasing off `*-stable` branches (#8984)
+  * Update document by fix yaml syntax error (#8991)
 
 ### Bug Fixes
 
