@@ -25,7 +25,7 @@ low-volume blogs as you only pay for what you use.
 
 ## FTP
 
-Most traditional web hosting provider let you upload files to their servers over FTP. To upload a Jekyll site to a web host using FTP, run the `jekyll build` command and copy the contents of the generated `_site` folder to the root folder of your hosting account. This is most likely to be the `httpdocs` or `public_html` folder on most hosting providers.
+Most traditional web hosting providers let you upload files to their servers over FTP. To upload a Jekyll site to a web host using FTP, run the `jekyll build` command and copy the contents of the generated `_site` folder to the root folder of your hosting account. This is most likely to be the `httpdocs` or `public_html` folder on most hosting providers.
 
 ## scp
 
