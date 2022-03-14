@@ -69,11 +69,13 @@
 
 - name: Verbose output
   description: Print verbose output.
+  option: "verbose: BOOL"
   flag: -V, --verbose
 
 
 - name: Silence Output
   description: Silence the normal output from Jekyll during a build.
+  option: "quiet: BOOL"
   flag: -q, --quiet
 
 
