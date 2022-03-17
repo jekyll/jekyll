@@ -58,6 +58,7 @@
   * Update document by fix yaml syntax error (#8991)
   * Enhance option&#39;s case for Jekyll configuration (#8992)
   * Fix typo in `_docs/deployment/manual.md` (#8997)
+  * Add quiet/verbose options (#8996)
 
 ### Bug Fixes
 
