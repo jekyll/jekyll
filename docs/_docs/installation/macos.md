@@ -19,16 +19,21 @@ to install Jekyll. This external article goes over the various reasons
 [why you shouldn't use the system Ruby](https://www.moncefbelyamani.com/why-you-shouldn-t-use-the-system-ruby-to-install-gems-on-a-mac/).
 
 Instead, you'll need to install a separate and newer version of Ruby using a 
-version manager such as [asdf](https://asdf-vm.com/), [chruby](https://github.com/postmodern/chruby), [rbenv](https://github.com/rbenv/rbenv), or [rvm](https://rvm.io/). 
-Version managers allow you to easily install multiple versions of Ruby, and 
-switch between them.
+version manager such as [asdf], [chruby], [rbenv], or [rvm]. Version managers 
+allow you to easily install multiple versions of Ruby, and switch between them.
 
 We recommend `chruby` because it's the simplest and least likely to cause issues. 
 
 The instructions below are an excerpt from this detailed external guide to 
-[install Ruby on Mac](https://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/). They work best if you're setting up development tools 
+[install Ruby on Mac]. They work best if you're setting up development tools 
 for the first time on your Mac. If you've already tried to install Ruby or 
 Jekyll on your Mac, or if you run into any issues, read that guide. 
+
+[asdf]: https://asdf-vm.com/
+[chruby]: https://github.com/postmodern/chruby
+[rbenv]: https://github.com/rbenv/rbenv
+[rvm]: https://rvm.io/
+[install Ruby on Mac]: https://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/
 
 ### Step 1: Install Homebrew
 
@@ -63,7 +68,8 @@ echo "chruby ruby-{{ site.data.ruby.current_version }}" >> ~/.zshrc
 
 If you're on an M1 Mac, replace `/usr/local` with `/opt/homebrew`.
 If you're using Bash, replace `.zshrc` with `.bash_profile`. If you're not sure, 
-read this external guide to [find out which shell you're using](https://www.moncefbelyamani.com/which-shell-am-i-using-how-can-i-switch/).
+read this external guide to 
+[find out which shell you're using](https://www.moncefbelyamani.com/which-shell-am-i-using-how-can-i-switch/).
 
 Quit and relaunch Terminal, then check that everything is working:
 
