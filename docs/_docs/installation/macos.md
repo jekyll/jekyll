@@ -66,7 +66,6 @@ echo "source $(brew --prefix)/opt/chruby/share/chruby/auto.sh" >> ~/.zshrc
 echo "chruby ruby-{{ site.data.ruby.current_version }}" >> ~/.zshrc
 ```
 
-If you're on an M1 Mac, replace `/usr/local` with `/opt/homebrew`.
 If you're using Bash, replace `.zshrc` with `.bash_profile`. If you're not sure, 
 read this external guide to 
 [find out which shell you're using](https://www.moncefbelyamani.com/which-shell-am-i-using-how-can-i-switch/).
