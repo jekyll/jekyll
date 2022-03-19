@@ -13,13 +13,22 @@ Older macOS versions might work, but we don't officially support them.
 
 ## Install Ruby
 
-To install Jekyll on macOS, you need a proper Ruby development environment. While macOS comes preinstalled with Ruby, we don't recommend using that version to install Jekyll. This external article goes over the various reasons [why you shouldn't use the system Ruby](https://www.moncefbelyamani.com/why-you-shouldn-t-use-the-system-ruby-to-install-gems-on-a-mac/).
+To install Jekyll on macOS, you need a proper Ruby development environment. 
+While macOS comes preinstalled with Ruby, we don't recommend using that version 
+to install Jekyll. This external article goes over the various reasons 
+[why you shouldn't use the system Ruby](https://www.moncefbelyamani.com/why-you-shouldn-t-use-the-system-ruby-to-install-gems-on-a-mac/).
 
-Instead, you'll need to install a separate and newer version of Ruby using a version manager such as [asdf](https://asdf-vm.com/), [chruby](https://github.com/postmodern/chruby), [rbenv](https://github.com/rbenv/rbenv), or [rvm](https://rvm.io/). Version managers allow you to easily install multiple versions of Ruby, and switch between them.
+Instead, you'll need to install a separate and newer version of Ruby using a 
+version manager such as [asdf](https://asdf-vm.com/), [chruby](https://github.com/postmodern/chruby), [rbenv](https://github.com/rbenv/rbenv), or [rvm](https://rvm.io/). 
+Version managers allow you to easily install multiple versions of Ruby, and 
+switch between them.
 
 We recommend `chruby` because it's the simplest and least likely to cause issues. 
 
-The instructions below are an excerpt from this detailed external guide to [install Ruby on Mac](https://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/). They work best if you're setting up development tools for the first time on your Mac. If you've already tried to install Ruby or Jekyll on your Mac, or if you run into any issues, read that guide. 
+The instructions below are an excerpt from this detailed external guide to 
+[install Ruby on Mac](https://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/). They work best if you're setting up development tools 
+for the first time on your Mac. If you've already tried to install Ruby or 
+Jekyll on your Mac, or if you run into any issues, read that guide. 
 
 ### Step 1: Install Homebrew
 
@@ -43,7 +52,8 @@ Install the latest stable version of Ruby:
 ruby-install ruby
 ```
 
-This will take a few minutes, and once it's done, configure your shell to automatically use `chruby`:
+This will take a few minutes, and once it's done, configure your shell to 
+automatically use `chruby`:
 
 ```sh
 echo "source /usr/local/opt/chruby/share/chruby/chruby.sh" >> ~/.zshrc
@@ -52,7 +62,8 @@ echo "chruby ruby-{{ site.data.ruby.current_version }}" >> ~/.zshrc
 ```
 
 If you're on an M1 Mac, replace `/usr/local` with `/opt/homebrew`.
-If you're using Bash, replace `.zshrc` with `.bash_profile`. If you're not sure, read this external guide to [find out which shell you're using](https://www.moncefbelyamani.com/which-shell-am-i-using-how-can-i-switch/).
+If you're using Bash, replace `.zshrc` with `.bash_profile`. If you're not sure, 
+read this external guide to [find out which shell you're using](https://www.moncefbelyamani.com/which-shell-am-i-using-how-can-i-switch/).
 
 Quit and relaunch Terminal, then check that everything is working:
 
@@ -62,25 +73,16 @@ ruby -v
 
 It should show {{ site.data.ruby.current_version_output }} or a newer version.
 
-Next, read that same external guide for important notes about [setting and switching between Ruby versions with chruby](https://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/#how-to-install-different-versions-of-ruby-and-switch-between-them).
+Next, read that same external guide for important notes about 
+[setting and switching between Ruby versions with chruby](https://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/#how-to-install-different-versions-of-ruby-and-switch-between-them).
 
 ## Install Jekyll
 
-After installing Ruby with chruby, install Jekyll and Bundler:
+After installing Ruby with chruby, install Jekyll:
 
 ```sh
-gem install bundler jekyll
+gem install jekyll
 ```
-
-### Note about Jekyll and Ruby 3.x
-
-If you installed the latest version of Ruby by following the instructions above, you'll need to make sure to add the `webrick` gem to your Jekyll site after you initially generate it with `jekyll new`. You can do that by running this command after you generate your Jekyll site:
-
-```sh
-bundle add webrick
-```
-
-Alternatively, you can install Ruby 2.7.5, which comes with `webrick`, and a new Jekyll site will work out of the box.
 
 ## Troubleshooting
 
