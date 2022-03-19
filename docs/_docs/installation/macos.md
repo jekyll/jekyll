@@ -61,8 +61,8 @@ This will take a few minutes, and once it's done, configure your shell to
 automatically use `chruby`:
 
 ```sh
-echo "source /usr/local/opt/chruby/share/chruby/chruby.sh" >> ~/.zshrc
-echo "source /usr/local/opt/chruby/share/chruby/auto.sh" >> ~/.zshrc
+echo "source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh" >> ~/.zshrc
+echo "source $(brew --prefix)/opt/chruby/share/chruby/auto.sh" >> ~/.zshrc
 echo "chruby ruby-{{ site.data.ruby.current_version }}" >> ~/.zshrc
 ```
 
