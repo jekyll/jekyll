@@ -1,0 +1,6 @@
+manufacturer: Mercedes
+models:
+- model: A-Klasse
+  price: 32,000.00
+- model: B-Klasse
+  price: 35,000.00

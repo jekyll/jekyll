@@ -1,0 +1,104 @@
+name: Bug Report
+description: "Is something not working as expected?"
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Hi! Thank you for taking the time to report a bug with Jekyll.
+
+        Please consider asking your question at https://talk.jekyllrb.com if one or more of the following is applicable to your situation:
+
+          - You are not sure if the issue is a bug in Jekyll.
+          - The issue is caused by a third-party plugin.
+          - This is just a generic usage question.
+
+        Additionally, please note that this platform is meant for bugs in Jekyll core only.
+        Issues regarding dependencies and plugins should be reported in their respective repositories.
+  - type: input
+    id: os
+    attributes:
+      label: Operating System
+      description: The operating system of your computer.
+      placeholder: "Ubuntu 21.10"
+    validations:
+      required: true
+  - type: input
+    id: ruby-version
+    attributes:
+      label: Ruby Version
+      description: |
+        The Ruby version you were using at the time.
+        Run `ruby -v` in your terminal and paste the output in the input field.
+      placeholder: "ruby 2.7.3p183 (2021-04-05 revision 6847ee089d) [x64-mingw32]"
+    validations:
+      required: true
+  - type: input
+    id: jekyll-version
+    attributes:
+      label: Jekyll Version
+      description: |
+        The version of Jekyll used in your project.
+        Run `bundle exec jekyll -v` and paste the output in the input field.
+        *If you are not using a Gemfile, run `jekyll -v` instead.*
+      placeholder: "jekyll 4.2.1"
+    validations:
+      required: true
+  - type: input
+    id: ghp-version
+    attributes:
+      label: GitHub Pages Version
+      description: |
+        Are you deploying your site using GitHub Pages?
+        If yes, then we need to know the `github-pages` version used by your project. Proceed ahead otherwise.
+        If you're using the `github-pages` gem in your Gemfile, paste the output from running the following:
+        ```
+        bundle exec github-pages -v
+        ```
+        Otherwise, enter `Latest` in the input field and proceed ahead.
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: Briefly describe what you expected to see or get with a certain functionality.
+      placeholder: |
+        I expected my site to be built successfully when I run the following:
+        ```
+        bundle exec jekyll build
+        ```
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Current Behavior
+      description: >
+        Describe the details of the bug.
+        Be sure to include any steps you took for the problem to exist, such as the directories
+        you created and the full command you ran.
+        Include any plugins you have configured for use in the site.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: |
+        Please copy and paste any relevant log output from your terminal.
+        *Note: This will be automatically formatted into code, so no need for backticks.*
+      render: shell
+  - type: textarea
+    id: sample
+    attributes:
+      label: Code Sample
+      description: >
+        The easiest way for someone to understand an issue is if they could reproduce your issue
+        in their environment. Therefore, please provide a link to your project repository alongwith
+        instructions to reproduce your issue. If your project is not publicly accessible, please
+        consider setting up a minimal test repository complete with necessary instructions.
+      placeholder: |
+        ### Steps to reproduce issue
+
+        - Clone [my repo](https://github.com/owner/repo)
+        - Install site dependencies
+        - Run `bundle exec jekyll build -s src -d src/dist`

@@ -116,6 +116,7 @@ cruft
 css
 csv
 Currin
+CVE
 CWD
 cygwin
 daringfireball
@@ -753,3 +754,5 @@ Zsh
 zshrc
 zypper
 zzot
+frontend
+prefetching

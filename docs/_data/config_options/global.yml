@@ -1,10 +1,10 @@
-- name: Site Source
+- name: Site source
   description: Change the directory where Jekyll will read files
   option: "source: DIR"
   flag: -s, --source DIR
 
 
-- name: Site Destination
+- name: Site destination
   description: Change the directory where Jekyll will write files
   option: "destination: DIR"
   flag: -d, --destination DIR
@@ -17,7 +17,7 @@
   flag: --safe
 
 
-- name: Disable Disk Cache
+- name: Disable disk cache
   version-badge: 4.1.0
   description: >-
     Disable caching of content to disk in order to skip creating a <code>.jekyll-cache</code> or similar directory at
@@ -57,7 +57,7 @@
   option: "keep_files: [DIR, FILE, ...]"
 
 
-- name: Time Zone
+- name: Time zone
   description: >-
     Set the time zone for site generation. This sets the <code>TZ</code> environment variable, which Ruby uses to handle
     time and date creation and manipulation. Any entry from the

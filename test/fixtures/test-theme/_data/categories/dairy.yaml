@@ -1,0 +1,6 @@
+name: Cheese Dairy
+products:
+- name: spread cheese
+  price: 1.2
+- name: cheddar cheese
+  price: 4.5

@@ -113,6 +113,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
       - uses: helaili/jekyll-action@2.0.5    # Choose any one of the Jekyll Actions
         with:                                # Some relative inputs of your action
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -126,13 +132,13 @@ The above workflow can be explained as the following:
   the Action from overwriting the `gh-pages` branch on any feature branch pushes.
 - The **name** of the job matches our YAML filename: `github-pages`.
 - The **checkout** action takes care of cloning your repository.
+- The **cache** action is an optimization to avoid fetching and installing gems on every build.
 - We specify our selected **action** and **version number** using `helaili/jekyll-action@2.0.5`,
   this handles the build and deploy. You can choose any one of the Jekyll Actions that matches
-  your project and flavor from [GitHub Marketplace][github-marketplace-for-jekyll-action].
+  your project and flavor from [GitHub Marketplace](https://github.com/marketplace?type=actions&query=jekyll+action).
 - We set a reference to a secret **environment variable** for the action to use. The `GITHUB_TOKEN`
-  is a _Personal Access Token_ and is detailed in the next section.
-  
-[github-marketplace-for-jekyll-action]: https://github.com/marketplace?type=actions&query=jekyll+action
+  is a secret token automatically initialized at the start of every workflow run.
+  More information can be found in [GitHub documentation](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret). 
 
 Instead of using the **on.push** condition, you could trigger your build on a **schedule** by
 using the [on.schedule] parameter. For example, here we build daily at midnight by specifying
