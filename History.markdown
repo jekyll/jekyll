@@ -73,6 +73,7 @@
   * Improve readability of CI logs (#8877)
   * Fix deprecation message for missing doc method (#8960)
   * Fix response header for content served via `jekyll serve` (#8965)
+  * Trigger livereload in sites without pages (#8337)
 
 ### Development Fixes
 
