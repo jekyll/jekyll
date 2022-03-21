@@ -83,7 +83,7 @@ Next, read that same external guide for important notes about
 
 ## Install Jekyll
 
-After installing Ruby with chruby, install Jekyll:
+After installing Ruby with chruby, install the latest Jekyll gem:
 
 ```sh
 gem install jekyll
