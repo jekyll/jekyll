@@ -151,7 +151,7 @@ For information on how to build robust navigation for your site (especially if y
 
 ## CSV/TSV Parse Options
 
-The way that Ruby parses CSV and TSV files can be customized with the `csv_reader` and `tsv_reader`
+The way Ruby parses CSV and TSV files can be customized with the `csv_reader` and `tsv_reader`
 configuration options. Each configuration key exposes the same options:
 
 `converters`: What [CSV converters](https://ruby-doc.org/stdlib-2.6.1/libdoc/csv/rdoc/CSV.html#Converters) should be
