@@ -59,6 +59,7 @@
   * Enhance option&#39;s case for Jekyll configuration (#8992)
   * Fix typo in `_docs/deployment/manual.md` (#8997)
   * Add quiet/verbose options (#8996)
+  * Update README.markdown re IRC Pointer (#9005)
 
 ### Bug Fixes
 
