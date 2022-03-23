@@ -155,8 +155,8 @@ The way Ruby parses CSV and TSV files can be customized with the `csv_reader` an
 configuration options. Each configuration key exposes the same options:
 
 `converters`: What [CSV converters](https://ruby-doc.org/stdlib-2.5.0/libdoc/csv/rdoc/CSV.html#Converters) should be
-              used when parsing the file. This will need to be set with `numeric` if you want number fields in the
-              CSV to be parsed into numeric types rather than into strings. By default, this list is empty.
+              used when parsing the file. Available options are `integer`, `float`, `numeric`, `date`, `date_time` and
+              `all`. By default, this list is empty.
 `encoding`:   What encoding the files are in. Defaults to the site `encoding` configuration option.
 `headers`:    Boolean field for whether to parse the first line of the file as headers. When `false`, it treats the
               first row as data. Defaults to `true`.
