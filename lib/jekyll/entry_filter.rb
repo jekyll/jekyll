@@ -82,7 +82,7 @@ module Jekyll
     #   since we use Pathutil#in_path? now.
     # --
     def symlink?(entry)
-      site.safe && File.symlink?(entry) && symlink_outside_site_source?(entry)
+      site.safe && symlink_outside_site_source?(entry)
     end
 
     # --
