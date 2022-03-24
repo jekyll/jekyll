@@ -60,6 +60,7 @@
   * Fix typo in `_docs/deployment/manual.md` (#8997)
   * Add quiet/verbose options (#8996)
   * Update README.markdown re IRC Pointer (#9005)
+  * Remove Aerobatic (#9007)
 
 ### Bug Fixes
 
