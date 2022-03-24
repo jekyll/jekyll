@@ -107,6 +107,7 @@
   * Propagate _data folder from theme (#8815)
   * Support both tzinfo v1 and v2 alongwith non-half hour offsets. (#8880)
   * Run vendor-mimes to update mime.types (#8940)
+  * Expose collection static files via `site.static_files` (#8961)
 
 ### Site Enhancements
 
