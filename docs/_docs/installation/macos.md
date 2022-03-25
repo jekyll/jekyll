@@ -37,6 +37,8 @@ brew install ruby
 
 Add the brew ruby and gems path to your shell configuration:
 
+On Intel based Macs:
+
 ```bash
 # If you're using Zsh
 echo 'export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"' >> ~/.zshrc
@@ -47,6 +49,20 @@ echo 'export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.0.0/bin:$P
 # Unsure which shell you are using? Type
 echo $SHELL
 ```
+
+On Apple Silicon based Macs:
+
+```bash
+# If you're using Zsh
+echo 'export PATH="/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.0.0/bin:$PATH"' >> ~/.zshrc
+
+# If you're using Bash
+echo 'export PATH="/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.0.0/bin:$PATH"' >> ~/.bash_profile
+
+# Unsure which shell you are using? Type
+echo $SHELL
+```
+
 
 Relaunch your terminal and check your Ruby setup:
 
