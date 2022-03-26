@@ -429,6 +429,19 @@
 
   * Fix Kramdown converter based tests for v4.0.x (#8143)
 
+## 3.9.2 / 2022-03-27
+
+### Bug Fixes
+
+  * Lock `http_parser.rb` gem to `v0.6.x` on JRuby (#8943)
+  * Backport #8756 for v3.9.x: Respect collections_dir config within include tag (#8795)
+  * Backport #8965 for v3.9.x: Fix response header for content served via `jekyll serve` (#8976)
+
+### Development Fixes
+
+  * Update and fix CI for `3.9-stable` on Ruby 3.x (#8942)
+  * Fix CI for commits to `3.9-stable` branch (#8788)
+
 ## 3.9.1 / 2021-04-08
 
 ### Bug Fixes
