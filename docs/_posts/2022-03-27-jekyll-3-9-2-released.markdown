@@ -10,7 +10,8 @@ Hey Jekyllers,
 
 Quick bug-fix release for you all today:
 
-1. Ruby 3.0 and 3.1 support :tada:
+1. Ruby 3.0 and 3.1 support :tada: (you will need to add `gem 'webrick'` to
+   your Gemfile)
 2. `jekyll serve` will no longer inject a charset into the MIME type for
 binary types
 3. Incremental regeneration now handles includes in collection files
