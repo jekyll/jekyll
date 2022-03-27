@@ -61,6 +61,7 @@
   * Add quiet/verbose options (#8996)
   * Update README.markdown re IRC Pointer (#9005)
   * Remove Aerobatic (#9007)
+  * Add Jekyll 3.9.2 release post to &#39;master&#39; branch (#9013)
 
 ### Bug Fixes
 
