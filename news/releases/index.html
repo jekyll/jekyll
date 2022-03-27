@@ -85,6 +85,7 @@
     <option value="">Navigate the blog…</option>
     <option value="/news/">Home</option>
     <optgroup label="posts">
+      <option value="/news/2022/03/27/jekyll-3-9-2-released/">Jekyll 3.9.2 Released</option>
       <option value="/news/2022/03/03/jekyll-4-2-2-released/">Jekyll 4.2.2 Released</option>
       <option value="/news/2021/09/27/jekyll-4-2-1-released/">Jekyll 4.2.1 Released</option>
       <option value="/news/2021/09/14/goodbye-dear-frank/">Goodbye, Dear Frank.</option>
@@ -181,40 +182,51 @@
 <div class="unit four-fifths">
 <article>
   <h2>
-    <a href="/news/2022/03/03/jekyll-4-2-2-released/">Jekyll 4.2.2 Released</a>
+    <a href="/news/2022/03/27/jekyll-3-9-2-released/">Jekyll 3.9.2 Released</a>
   </h2>
   <span class="post-category">
     <span class="label">release</span>
   </span>
   <div class="post-meta">
-    <span class="post-date">03 Mar 2022</span>
-    <a href="https://github.com/ashmaroli" class="post-author">
-      <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&amp;s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&amp;s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&amp;s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&amp;s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&amp;s=96 4x"><span class="author-name">ashmaroli</span>
+    <span class="post-date">27 Mar 2022</span>
+    <a href="https://github.com/parkr" class="post-author">
+      <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x"><span class="author-name">parkr</span>
     </a>
   </div>
   <div class="post-content">
-<p>Hello Jekyllers!</p>
+<p>Hey Jekyllers,</p>
 
-<p>Jekyll 4.2.2 has been released. Unlike prior releases, this is a simple maintenance release and may be skipped.</p>
+<p>Quick bug-fix release for you all today:</p>
 
-<p>For those who are still curious about the current release, here is some technical context: The previous <code class="language-plaintext highlighter-rouge">jekyll-4.2.1</code> package was built and
-published using a Windows system. A side-effect of that action was that every file bundled into the gem ended up with Windows-style CRLF
-line-endings instead of Unix-style LF line-endings.</p>
+<ol>
+  <li>Ruby 3.0 and 3.1 support <img class="emoji" title=":tada:" alt=":tada:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png" height="20" width="20"> (you will need to run <code class="language-plaintext highlighter-rouge">bundle add webrick</code> for <code class="language-plaintext highlighter-rouge">jekyll serve</code> to work)</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">jekyll serve</code> will no longer inject a charset into the MIME type for
+binary types</li>
+  <li>Incremental regeneration now handles includes in collection files
+correctly</li>
+</ol>
 
-<p>For our end-users, this difference holds no significance. However, a third-party entity vendoring the release faced a roadblock. The executable
-program <code class="language-plaintext highlighter-rouge">jekyll</code> apparently misplaced the executable bit because of the change in line-endings.</p>
-
-<p>To that end, the Jekyll team decided to use the GitHub Actions service to build and publish releases. In-house plugins have already published
-releases via this route serving as trials. Henceforth, and unless explicitly reported, all Jekyll releases will be built on GitHub Actions’
-Ubuntu platform and published to Rubygems by <a href="https://github.com/jekyllbot" class="user-mention">@jekyllbot</a> irrespective of the maintainer overseeing the release.</p>
-
-<p>That is all for now.
-Happy Jekyllin’!!</p>
-
-<p><em>P.S.: Jekyll 4.3.0 will be bringing you some new features very soon.. Also, our sass-converter plugin has been <a href="https://github.com/jekyll/jekyll-sass-converter/tree/v2.2.0#sass-embedded">enhanced</a> to support
-modern improvements to Sass.</em></p>
-
+<p>That’s all, Happy Jekylling!</p>
 </div>
+</article>
+<article>
+  <div class="cell-left">
+    <span class="post-category">
+      <span class="label">release</span>
+    </span>
+  </div>
+  <div class="cell-right">
+    <div class="post-meta">
+      <h2 class="post-title">
+        <a href="/news/2022/03/03/jekyll-4-2-2-released/">Jekyll 4.2.2 Released</a>
+      </h2>
+      <span class="post-date">03 Mar 2022</span>
+      <a href="https://github.com/ashmaroli" class="post-author">
+        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&amp;s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&amp;s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&amp;s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&amp;s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&amp;s=96 4x"><span class="author-name">ashmaroli</span>
+      </a>
+    </div>
+  </div>
 </article>
 <article>
   <div class="cell-left">
@@ -1616,6 +1628,9 @@ modern improvements to Sass.</em></p>
     <h4>Recent Releases</h4>
     <ul>
       <li>
+        <a href="/news/2022/03/27/jekyll-3-9-2-released/">Version 3.9.2</a>
+      </li>
+      <li>
         <a href="/news/2022/03/03/jekyll-4-2-2-released/">Version 4.2.2</a>
       </li>
       <li>
@@ -1626,9 +1641,6 @@ modern improvements to Sass.</em></p>
       </li>
       <li>
         <a href="/news/2020/12/14/jekyll-4-2-0-released/">Version 4.2.0</a>
-      </li>
-      <li>
-        <a href="/news/2020/08/05/jekyll-3-9-0-released/">Version 3.9.0</a>
       </li>
       <li>
         <a href="/docs/history/">History »</a>

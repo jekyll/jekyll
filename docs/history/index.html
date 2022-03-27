@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2022-03-24T09:33:47-07:00" />
+<meta property="article:published_time" content="2022-03-27T13:29:01-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="History" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-03-24T09:33:47-07:00","datePublished":"2022-03-24T09:33:47-07:00","description":"4.2.2 / 2022-03-03","headline":"History","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/history/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/history/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-03-27T13:29:01-07:00","datePublished":"2022-03-27T13:29:01-07:00","description":"4.2.2 / 2022-03-03","headline":"History","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/history/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/history/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -481,6 +481,23 @@
 
 <ul>
   <li>Fix Kramdown converter based tests for v4.0.x (<a href="https://github.com/jekyll/jekyll/issues/8143">#8143</a>)</li>
+</ul>
+
+<h2 id="v3-9-2">3.9.2 / 2022-03-27</h2>
+
+<h3 id="bug-fixes-v3-9-2">Bug Fixes</h3>
+
+<ul>
+  <li>Lock <code class="language-plaintext highlighter-rouge">http_parser.rb</code> gem to <code class="language-plaintext highlighter-rouge">v0.6.x</code> on JRuby (<a href="https://github.com/jekyll/jekyll/issues/8943">#8943</a>)</li>
+  <li>Backport <a href="https://github.com/jekyll/jekyll/issues/8756">#8756</a> for v3.9.x: Respect collections_dir config within include tag (<a href="https://github.com/jekyll/jekyll/issues/8795">#8795</a>)</li>
+  <li>Backport <a href="https://github.com/jekyll/jekyll/issues/8965">#8965</a> for v3.9.x: Fix response header for content served via <code class="language-plaintext highlighter-rouge">jekyll serve</code> (<a href="https://github.com/jekyll/jekyll/issues/8976">#8976</a>)</li>
+</ul>
+
+<h3 id="development-fixes-v3-9-2">Development Fixes</h3>
+
+<ul>
+  <li>Update and fix CI for <code class="language-plaintext highlighter-rouge">3.9-stable</code> on Ruby 3.x (<a href="https://github.com/jekyll/jekyll/issues/8942">#8942</a>)</li>
+  <li>Fix CI for commits to <code class="language-plaintext highlighter-rouge">3.9-stable</code> branch (<a href="https://github.com/jekyll/jekyll/issues/8788">#8788</a>)</li>
 </ul>
 
 <h2 id="v3-9-1">3.9.1 / 2021-04-08</h2>

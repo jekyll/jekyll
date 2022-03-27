@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2022-03-24T09:33:47-07:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 4.2.2 Released</title><link href="https://jekyllrb.com/news/2022/03/03/jekyll-4-2-2-released/" rel="alternate" type="text/html" title="Jekyll 4.2.2 Released" /><published>2022-03-03T05:45:20-08:00</published><updated>2022-03-03T05:45:20-08:00</updated><id>https://jekyllrb.com/news/2022/03/03/jekyll-4-2-2-released</id><content type="html" xml:base="https://jekyllrb.com/news/2022/03/03/jekyll-4-2-2-released/"><![CDATA[<p>Hello Jekyllers!</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2022-03-27T13:29:01-07:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 3.9.2 Released</title><link href="https://jekyllrb.com/news/2022/03/27/jekyll-3-9-2-released/" rel="alternate" type="text/html" title="Jekyll 3.9.2 Released" /><published>2022-03-27T13:20:00-07:00</published><updated>2022-03-27T13:20:00-07:00</updated><id>https://jekyllrb.com/news/2022/03/27/jekyll-3-9-2-released</id><content type="html" xml:base="https://jekyllrb.com/news/2022/03/27/jekyll-3-9-2-released/"><![CDATA[<p>Hey Jekyllers,</p>
+
+<p>Quick bug-fix release for you all today:</p>
+
+<ol>
+  <li>Ruby 3.0 and 3.1 support :tada: (you will need to run <code class="language-plaintext highlighter-rouge">bundle add webrick</code> for <code class="language-plaintext highlighter-rouge">jekyll serve</code> to work)</li>
+  <li><code class="language-plaintext highlighter-rouge">jekyll serve</code> will no longer inject a charset into the MIME type for
+binary types</li>
+  <li>Incremental regeneration now handles includes in collection files
+correctly</li>
+</ol>
+
+<p>That’s all, Happy Jekylling!</p>]]></content><author><name>parkr</name></author><category term="release" /><summary type="html"><![CDATA[Hey Jekyllers,]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.2.2 Released</title><link href="https://jekyllrb.com/news/2022/03/03/jekyll-4-2-2-released/" rel="alternate" type="text/html" title="Jekyll 4.2.2 Released" /><published>2022-03-03T05:45:20-08:00</published><updated>2022-03-03T05:45:20-08:00</updated><id>https://jekyllrb.com/news/2022/03/03/jekyll-4-2-2-released</id><content type="html" xml:base="https://jekyllrb.com/news/2022/03/03/jekyll-4-2-2-released/"><![CDATA[<p>Hello Jekyllers!</p>
 
 <p>Jekyll 4.2.2 has been released. Unlike prior releases, this is a simple maintenance release and may be skipped.</p>
 
@@ -232,137 +244,4 @@ possible: @ashmaroli and <a href="https://github.com/summerisgone">Ivan Gromov</
 
 <p>Expect more fixes and improvements on the next minor release!</p>
 
-<p>Happy Jekylling!</p>]]></content><author><name>dirtyf</name></author><category term="release" /><summary type="html"><![CDATA[Jekyll 4.0.1 is out and fixes a few issues reported by the community since 4.0.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.0.0 Released</title><link href="https://jekyllrb.com/news/2019/08/20/jekyll-4-0-0-released/" rel="alternate" type="text/html" title="Jekyll 4.0.0 Released" /><published>2019-08-20T08:00:00-07:00</published><updated>2019-08-20T08:00:00-07:00</updated><id>https://jekyllrb.com/news/2019/08/20/jekyll-4-0-0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2019/08/20/jekyll-4-0-0-released/"><![CDATA[<p>Hi! 👋 I bring some good news! Jekyll 4.0.0 is finally here! 🎉</p>
-
-<p>There’s quite a bit in this release to unpack, so let me hit the high points quickly:</p>
-<ul>
-  <li>Ruby 2.4.0 or greater is now required.</li>
-  <li>Rouge 3.0 or greater is now required for syntax highlighting.</li>
-  <li>Jekyll builds should be much faster.</li>
-  <li>Kramdown 2.1 is now the default markdown engine.</li>
-  <li>Sass processing should be faster.</li>
-  <li>We dropped support for a lot of stuff, specifically:
-    <ul>
-      <li>Pygments</li>
-      <li>RedCarpet</li>
-      <li>RDiscount</li>
-    </ul>
-  </li>
-</ul>
-
-<p>Alright, so with the high points out of the way, let’s get into the details a little bit.</p>
-
-<h3 id="cache-all-the-things-">Cache all the things! 💰</h3>
-
-<p>While some optimizations first made an appearance with Jekyll 3.8.0, Jekyll 4.0 takes
-it to another level altogether.</p>
-
-<p>Jekyll 4.0 caches the processing done by Liquid in memory. So every Liquid
-template is processed only as required. If you have 10 pages depending on a
-single layout, the layout is cached and that data is then rendered as per the
-10 different contexts of the individual files.</p>
-
-<p>There’s also a disk cache! Jekyll can now cache data to disk to avoid repeated
-processing of content that doesn’t change between build sessions. Currently,
-this is limited to markdown. So while the very first build will take a certain
-amount of time, consequent builds for content that hasn’t changed will take
-much less time due to the disk-cache. Disk caching is disabled for <code class="language-plaintext highlighter-rouge">safe</code> mode,
-however.</p>
-
-<h3 id="super-powered-content-transformations-">Super-powered content transformations 💪</h3>
-
-<p>We’ve upgraded Sass support so it should be faster. There’s also
-support for sourcemaps now! Under the hood, our Sass support uses the <code class="language-plaintext highlighter-rouge">SassC</code>
-library now, which is supported directly by the Sass team, which should mean
-better support for everybody in the long run.</p>
-
-<p>Kramdown is updated to version 2.1. This also brings with it a bunch of changes
-to the Kramdown configuration, as the Kramdown team have extracted a fair
-number of features into separate gems. Support for GitHub Flavored Markdown is
-enabled by default, but if you’re using another Kramdown extension in your
-site, you’ll likely need to update your plugin configuration. See the <a href="/docs/upgrading/3-to-4/">upgrade
-guide</a> for more details.</p>
-
-<p>The <code class="language-plaintext highlighter-rouge">link</code> and <code class="language-plaintext highlighter-rouge">post_url</code> tags no longer need <code class="language-plaintext highlighter-rouge">site.baseurl</code> prepended every
-time they’re used. Those tags now use our <code class="language-plaintext highlighter-rouge">relative_url</code> filter to take care of
-this for you. Existing uses of the prepending pattern will break though!
-Sorry! :sweat_smile:</p>
-
-<p>A few other smaller features when it comes to content:</p>
-<ul>
-  <li>The <code class="language-plaintext highlighter-rouge">link</code> tag understands Liquid variables in the same fashion our
- <code class="language-plaintext highlighter-rouge">include</code> tag does now.</li>
-  <li>Disable Liquid processing for a particular page / document by adding
- <code class="language-plaintext highlighter-rouge">render_with_liquid: false</code> to its front matter.</li>
-  <li>Liquid’s binary <code class="language-plaintext highlighter-rouge">and</code> and <code class="language-plaintext highlighter-rouge">or</code> operations can be used in the <code class="language-plaintext highlighter-rouge">where_exp</code>
- filter for more powerful filtering</li>
-</ul>
-
-<p>There’s some goodies for theme community as well. Developers may now bundle a
-<code class="language-plaintext highlighter-rouge">config.yml</code> into their theme-gem to provide some boilerplate configurations for
-the theme. Like other resources in the theme, these configuration values can also
-be customized at the user’s end.</p>
-
-<p>Check out the <a href="/docs/history/#v4-0-0">full history</a> and the various pull requests
-for more details on all the enhancements and bug-fixes.</p>
-
-<h3 id="upgrading-">Upgrading 📈</h3>
-
-<p>First, read the <a href="/docs/upgrading/3-to-4/">upgrade guide</a>!</p>
-
-<p>Next, Edit your project’s <code class="language-plaintext highlighter-rouge">Gemfile</code> to test Jekyll v4.x:</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gem</span> <span class="s2">"jekyll"</span><span class="p">,</span> <span class="s2">"~&gt; 4.0"</span>
-</code></pre></div></div>
-
-<p>Then run <code class="language-plaintext highlighter-rouge">bundle update</code> to update all dependencies. Unless you’re using
-third-party plugins that haven’t yet added support for Jekyll 4.0, you should be
-good to go.</p>
-
-<p>Plugins and themes authors must relax the jekyll dependency in their <code class="language-plaintext highlighter-rouge">gemspec</code> file
-to allow for Jekyll v4.0:</p>
-
-<p><code class="language-plaintext highlighter-rouge">spec.add_runtime_dependency "jekyll", "&gt;= 3.6", "&lt; 5.0"</code></p>
-
-<p>If your favorite plugin hasn’t relaxed that dependency yet, please gently
-encourage them to do so. :slightly_smiling_face:</p>
-
-<h3 id="have-questions">Have questions❓</h3>
-
-<p>Please reach out on our <a href="https://talk.jekyllrb.com">community forum</a></p>
-
-<h3 id="thank-you-">Thank you!! 🙇</h3>
-
-<p>Jekyll would not be possible without the many people who have taken the time to write issues, submit pull requests, create themes, answer questions for other users, or make their own sites using our project. Thanks to all of you who contribute, no matter how small you think your contribution might have been.</p>
-
-<p>In addition, special thanks to the 139 contributors who made this
-release possible via a pull request submission (in alphabetical order): Aidan
-Fitzgerald, Akshat Kedia, Ale Muñoz, Alex Wood,
-Alexey Kopytko, Alexey Pelykh, Ali Thompson, Ana María Martínez Gómez,
-Ananthakumar, Andreas Möller, Andrew Lyndem, Andrew Marcuse, Andy Alt, Anne
-Gentle, Anny, Anuj Bhatnagar, argv-minus-one, Arjun Thakur, Arthur Attwell,
-Ashwin Maroli, Behrang, Belhassen Chelbi, Ben Keith, Ben Otte, Bilawal Hameed,
-Bjorn Krols, Boris Schapira, Boris van Hoytema, Brett C, Chris Finazzo, Chris
-Oliver, chrisfinazzo, Christian Oliff, Christoph Päper, Damien Solodow, Dan
-Allen, Dan Friedman, Daniel Höpfl, David J. Malan, David Kennell, David Zhang,
-Denis McDonald, Derek Smart, Derpy, Dusty Candland, Edgar Tinajero, Elvio
-Vicosa, ExE Boss, Fons van der Plas, Frank Taillandier, Gareth Cooper, Grzegorz
-Kaczorek, Haris Bjelic, Hodong Kim, ikeji, Isaac Goodman, Jacob Byers, Jakob
-Krigovsky, James Rhea, Jan Pobořil, jess, jingze_lu, Joe Shannon, Jordan Morgan,
-Jörg Steinsträter, Jorie Tappa, Josue Caraballo, jpasholk, Justin Vallelonga,
-Karel Bílek, Keith Mifsud, Kelly-Ann Green, Ken Salomon, Kevin Plattret, krissy,
-Kyle Barbour, Lars Kanis, Leandro Facchinetti, Liam Rosenfeld, Luis Enrique
-Perez Alvarez, Luis Guillermo Yáñez, Ma HongJun, makmm, Manu Mathew, Mario,
-Martin Scharm, Matt Kraai, Matt Massicotte, Matt Rogers, Matthew Rathbone,
-Maxwell Gerber, Mertcan Yücel, Michael Bishop, Michael Hiiva, Michelle Greer,
-Mike Kasberg, Mike Neumegen, mo khan, Monica Powell, Nicolas Hoizey, Nikhil
-Benesch, Nikhil Swaminathan, Nikita Skalkin, Niklas Eicker, ninevra, Olivia
-Hugger, Parker Moore, Pat Hawks, Patrick Favre-Bulle, Paul Kim, penguinpet,
-Philip Belesky, Preston Lim, Ralph, Robert Riemann, Rosário Pereira Fernandes,
-Sadik Kuzu, Samuel Gruetter, Scott Killen, Sri Pravan Paturi, Stephan Fischer,
-Stephen Weiss, Steven Westmoreland, strangehill, Sundaram Kalyan Vedala, Thanos
-Kolovos, Timo Schuhmacher, Tobias, Tom Harvey, Tushar Prajapati, Victor Afanasev,
-Vinicius Flores, Vitor Oliveira, Wouter Schoot, XhmikosR, Yi Feng Xie, Zhang
-Xiangze, 김정환, 104fps.</p>
-
-<p>Happy Jekylling everyone!</p>]]></content><author><name>mattr-</name></author><category term="release" /><summary type="html"><![CDATA[Hi! 👋 I bring some good news! Jekyll 4.0.0 is finally here! 🎉]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<p>Happy Jekylling!</p>]]></content><author><name>dirtyf</name></author><category term="release" /><summary type="html"><![CDATA[Jekyll 4.0.1 is out and fixes a few issues reported by the community since 4.0.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
