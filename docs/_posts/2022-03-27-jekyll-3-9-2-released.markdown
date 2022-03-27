@@ -1,6 +1,6 @@
 ---
 title: 'Jekyll 3.9.2 Released'
-date: 2022-03-27 20:28:13 -0700
+date: 2022-03-27 13:20:00 -0700
 author: parkr
 version: 3.9.2
 categories: [release]
