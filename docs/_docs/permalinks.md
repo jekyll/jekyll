@@ -229,7 +229,7 @@ Here's the full list of placeholders available:
       <td>
         <p>
             Title from the document’s filename. May be overridden via
-            the document’s <code>slug</code> front matter.
+            the document’s <code>slug</code> front matter. Preserves case from the source.
         </p>
       </td>
     </tr>
@@ -409,6 +409,7 @@ Collections have the following placeholders available:
           variable value if any is present in the document; if none is
           defined then <code>:title</code> will be equivalent to
           <code>:name</code>, aka the slug generated from the filename.
+          Preserves case from the source.
         </p>
       </td>
     </tr>
