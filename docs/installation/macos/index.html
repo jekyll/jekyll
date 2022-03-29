@@ -16,21 +16,21 @@
 <meta name="generator" content="Jekyll v4.2.2" />
 <meta property="og:title" content="Jekyll on macOS" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Install Command Line Tools To install the command line tools to compile native extensions, open a terminal and run:" />
-<meta property="og:description" content="Install Command Line Tools To install the command line tools to compile native extensions, open a terminal and run:" />
+<meta name="description" content="Supported macOS versions" />
+<meta property="og:description" content="Supported macOS versions" />
 <link rel="canonical" href="https://jekyllrb.com/docs/installation/macos/" />
 <meta property="og:url" content="https://jekyllrb.com/docs/installation/macos/" />
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2022-03-27T13:29:01-07:00" />
+<meta property="article:published_time" content="2022-03-28T20:46:53-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Jekyll on macOS" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-03-27T13:29:01-07:00","datePublished":"2022-03-27T13:29:01-07:00","description":"Install Command Line Tools To install the command line tools to compile native extensions, open a terminal and run:","headline":"Jekyll on macOS","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/installation/macos/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/installation/macos/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-03-28T20:46:53-07:00","datePublished":"2022-03-28T20:46:53-07:00","description":"Supported macOS versions","headline":"Jekyll on macOS","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/installation/macos/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/installation/macos/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -128,140 +128,80 @@
              class="fa fa-pencil"></i> &nbsp;Improve this page</a>
         </div>
         <h1>Jekyll on macOS</h1>
-        <h2 id="install-command-line-tools">Install Command Line Tools</h2>
-<p>To install the command line tools to compile native extensions, open a terminal and run:</p>
+        <h2 id="supported-macos-versions">Supported macOS versions</h2>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xcode-select <span class="nt">--install</span>
-</code></pre></div></div>
+<ul>
+  <li>Monterey (macOS 12)</li>
+  <li>Big Sur (macOS 11)</li>
+  <li>Catalina (macOS 10.15)</li>
+</ul>
 
-<h3 id="set-sdkroot-only-macos-catalina-or-later">set SDKROOT (only macOS Catalina or later)</h3>
-<p>Starting on macOS Catalina (10.15) the headers used for Ruby have been moved from their previous location which results in some gems, including Jekyll to fail installation. This can be solved by setting SDKROOT in your shell configuration to the value provided by xcrun.</p>
-
-<div class="language-ssh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> SDKROOT=<span class="err">$</span>(xcrun --show-sdk-path)
-</code></pre></div></div>
+<p>Older macOS versions might work, but we don’t officially support them.</p>
 
 <h2 id="install-ruby">Install Ruby</h2>
 
-<p>Jekyll requires <strong>Ruby v2.5.0</strong> or higher.
-macOS Big Sur 11.x ships with Ruby 2.6.3. Check your Ruby version using <code class="language-plaintext highlighter-rouge">ruby -v</code>.</p>
+<p>To install Jekyll on macOS, you need a proper Ruby development environment. 
+While macOS comes preinstalled with Ruby, we don’t recommend using that version 
+to install Jekyll. This external article goes over the various reasons 
+<a href="https://www.moncefbelyamani.com/why-you-shouldn-t-use-the-system-ruby-to-install-gems-on-a-mac/">why you shouldn’t use the system Ruby</a>.</p>
 
-<p>If you’re running a previous version of macOS, you’ll have to install a newer version of Ruby. Installation with <a href="https://brew.sh">Homebrew</a> is simple if you’re only planning to use Ruby for Jekyll. Install with a version manager such as <a href="https://asdf-vm.com/">asdf</a>, <a href="https://github.com/postmodern/chruby">chruby</a>, <a href="https://github.com/rbenv/rbenv">rbenv</a>, or <a href="https://rvm.io/">rvm</a> if you need to switch among Ruby versions (instructions for rbenv are below). See the guide <a href="https://mac.install.guide/ruby/index.html">Install Ruby on Mac</a> for details and recommendations.</p>
+<p>Instead, you’ll need to install a separate and newer version of Ruby using a 
+version manager such as <a href="https://asdf-vm.com/">asdf</a>, <a href="https://github.com/postmodern/chruby">chruby</a>, <a href="https://github.com/rbenv/rbenv">rbenv</a>, or <a href="https://rvm.io/">rvm</a>. Version managers 
+allow you to easily install multiple versions of Ruby, and switch between them.</p>
 
-<h3 id="brew">With Homebrew</h3>
-<p>To run the latest Ruby version you need to install it through <a href="https://brew.sh">Homebrew</a>.</p>
+<p>We recommend <code class="language-plaintext highlighter-rouge">chruby</code> because it’s the simplest and least likely to cause issues.</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Homebrew</span>
-/bin/bash <span class="nt">-c</span> <span class="s2">"</span><span class="si">$(</span>curl <span class="nt">-fsSL</span> https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="si">)</span><span class="s2">"</span>
+<p>The instructions below are an excerpt from this detailed external guide to 
+<a href="https://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/">install Ruby on Mac</a>. They work best if you’re setting up development tools 
+for the first time on your Mac. If you’ve already tried to install Ruby or 
+Jekyll on your Mac, or if you run into any issues, read that guide.</p>
 
-<span class="c"># Install Ruby</span>
-brew <span class="nb">install </span>ruby
+<h3 id="step-1-install-homebrew">Step 1: Install Homebrew</h3>
+
+<p><a href="https://brew.sh/">Homebrew</a> makes it easy to install development tools on a Mac.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/bin/bash <span class="nt">-c</span> <span class="s2">"</span><span class="si">$(</span>curl <span class="nt">-fsSL</span> https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="si">)</span><span class="s2">"</span>
 </code></pre></div></div>
 
-<p>Add the brew ruby and gems path to your shell configuration:</p>
+<h3 id="step-2-install-chruby-and-the-latest-ruby-with-ruby-install">Step 2: Install chruby and the latest Ruby with ruby-install</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># If you're using Zsh</span>
-<span class="nb">echo</span> <span class="s1">'export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"'</span> <span class="o">&gt;&gt;</span> ~/.zshrc
+<p>Install <code class="language-plaintext highlighter-rouge">chruby</code> and <code class="language-plaintext highlighter-rouge">ruby-install</code> with Homebrew:</p>
 
-<span class="c"># If you're using Bash</span>
-<span class="nb">echo</span> <span class="s1">'export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"'</span> <span class="o">&gt;&gt;</span> ~/.bash_profile
-
-<span class="c"># Unsure which shell you are using? Type</span>
-<span class="nb">echo</span> <span class="nv">$SHELL</span>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>chruby ruby-install
 </code></pre></div></div>
 
-<p>Relaunch your terminal and check your Ruby setup:</p>
+<p>Install the latest stable version of Ruby:</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>which ruby
-<span class="c"># /usr/local/opt/ruby/bin/ruby</span>
-
-ruby <span class="nt">-v</span>
-ruby 3.0.0p0 <span class="o">(</span>2020-12-25 revision 95aff21468<span class="o">)</span>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruby-install ruby
 </code></pre></div></div>
 
-<p>You’re now running the current stable version of Ruby!</p>
+<p>This will take a few minutes, and once it’s done, configure your shell to 
+automatically use <code class="language-plaintext highlighter-rouge">chruby</code>:</p>
 
-<h3 id="rbenv">With rbenv</h3>
-
-<p>People often use <a href="https://github.com/rbenv/rbenv">rbenv</a> to manage multiple
-Ruby versions. This is very useful when you need to be able to run a given Ruby version on a project.</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Homebrew</span>
-/bin/bash <span class="nt">-c</span> <span class="s2">"</span><span class="si">$(</span>curl <span class="nt">-fsSL</span> https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh<span class="si">)</span><span class="s2">"</span>
-
-<span class="c"># Install rbenv and ruby-build</span>
-brew <span class="nb">install </span>rbenv
-
-<span class="c"># Set up rbenv integration with your shell</span>
-rbenv init
-
-<span class="c"># Check your installation</span>
-curl <span class="nt">-fsSL</span> https://github.com/rbenv/rbenv-installer/raw/main/bin/rbenv-doctor | bash
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"source </span><span class="si">$(</span>brew <span class="nt">--prefix</span><span class="si">)</span><span class="s2">/opt/chruby/share/chruby/chruby.sh"</span> <span class="o">&gt;&gt;</span> ~/.zshrc
+<span class="nb">echo</span> <span class="s2">"source </span><span class="si">$(</span>brew <span class="nt">--prefix</span><span class="si">)</span><span class="s2">/opt/chruby/share/chruby/auto.sh"</span> <span class="o">&gt;&gt;</span> ~/.zshrc
+<span class="nb">echo</span> <span class="s2">"chruby ruby-3.1.1"</span> <span class="o">&gt;&gt;</span> ~/.zshrc
 </code></pre></div></div>
 
-<p>Restart your terminal to apply your changes.
-Next, you can install the Ruby version you want. Let’s install the latest stable version:</p>
+<p>If you’re using Bash, replace <code class="language-plaintext highlighter-rouge">.zshrc</code> with <code class="language-plaintext highlighter-rouge">.bash_profile</code>. If you’re not sure, 
+read this external guide to 
+<a href="https://www.moncefbelyamani.com/which-shell-am-i-using-how-can-i-switch/">find out which shell you’re using</a>.</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rbenv <span class="nb">install </span>3.0.0
-rbenv global 3.0.0
-ruby <span class="nt">-v</span>
-ruby 3.0.0p0 <span class="o">(</span>2020-12-25 revision 95aff21468<span class="o">)</span>
+<p>Quit and relaunch Terminal, then check that everything is working:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruby <span class="nt">-v</span>
 </code></pre></div></div>
 
-<p>That’s it! Head over to <a href="https://github.com/rbenv/rbenv#command-reference">rbenv command references</a> to learn how to use different versions of Ruby in your projects.</p>
+<p>It should show ruby 3.1.1p18 (2022-02-18 revision 53f5fc4236) or a newer version.</p>
+
+<p>Next, read that same external guide for important notes about 
+<a href="https://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/#how-to-install-different-versions-of-ruby-and-switch-between-them">setting and switching between Ruby versions with chruby</a>.</p>
 
 <h2 id="install-jekyll">Install Jekyll</h2>
 
-<p>After installing Ruby, install Jekyll and Bundler.</p>
+<p>After installing Ruby with chruby, install the latest Jekyll gem:</p>
 
-<h3 id="local-install">Local Install</h3>
-
-<p>Install the bundler and jekyll gems:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem <span class="nb">install</span> <span class="nt">--user-install</span> bundler jekyll
-</code></pre></div></div>
-
-<p>Get your Ruby version:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruby <span class="nt">-v</span>
-ruby 3.0.0p0 <span class="o">(</span>2020-12-25 revision 95aff21468<span class="o">)</span>
-</code></pre></div></div>
-
-<p>Append your path file with the following, replacing the <code class="language-plaintext highlighter-rouge">X.X</code> with the first two digits of your Ruby version:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># If you're using Zsh</span>
-<span class="nb">echo</span> <span class="s1">'export PATH="$HOME/.gem/ruby/X.X.0/bin:$PATH"'</span> <span class="o">&gt;&gt;</span> ~/.zshrc
-
-<span class="c"># If you're using Bash</span>
-<span class="nb">echo</span> <span class="s1">'export PATH="$HOME/.gem/ruby/X.X.0/bin:$PATH"'</span> <span class="o">&gt;&gt;</span> ~/.bash_profile
-
-<span class="c"># Unsure which shell you are using? Type</span>
-<span class="nb">echo</span> <span class="nv">$SHELL</span>
-</code></pre></div></div>
-
-<p>Check that <code class="language-plaintext highlighter-rouge">GEM PATHS:</code> points to your home directory:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem <span class="nb">env</span>
-</code></pre></div></div>
-
-<p class="note info">Every time you update Ruby to a version in which the first two digits change, update your path to match.</p>
-
-<h3 id="global-install">Global Install</h3>
-
-<p class="note warning">We recommend not installing Ruby gems globally to avoid file permissions problems and using <code class="language-plaintext highlighter-rouge">sudo</code>.</p>
-
-<h4 id="on-mojave-1014">On Mojave (10.14)</h4>
-
-<p>Because of SIP Protections in Mojave, run:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>gem <span class="nb">install </span>bundler
-<span class="nb">sudo </span>gem <span class="nb">install</span> <span class="nt">-n</span> /usr/local/bin/ jekyll
-</code></pre></div></div>
-
-<h4 id="before-mojave-1014">Before Mojave (&lt;10.14)</h4>
-
-<p>Run:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>gem <span class="nb">install </span>bundler jekyll
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem <span class="nb">install </span>jekyll
 </code></pre></div></div>
 
 <h2 id="troubleshooting">Troubleshooting</h2>
