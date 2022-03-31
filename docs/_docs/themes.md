@@ -150,9 +150,9 @@ For theme developers, this, at first sight, is of course a bigger effort than be
 
 However, for the consumers of the theme, the customization is greatly simplified.
 
-Imagine the theme is used by a customer from Germany. In order for her to get the translated header for the testimonials design element in, she just has to create a data file in her project directory with the key `site.data.i18n.testimonials.header`, put the German translation or a header of her choice on top of it and the design element is already customized.
+Imagine the theme is used by a customer from Germany. In order for them to get the translated header for the testimonials design element in, they just has to create a data file in them project directory with the key `site.data.i18n.testimonials.header`, put the German translation or a header of them choice on top of it and the design element is already customized.
 
-She no longer has to copy the included file into her project directory, customize it there and, what weighs heaviest, waiver all updates of the theme, simply because the theme developer offered her the possibility to make changes to text modules centrally via text files.
+They no longer has to copy the included file into them project directory, customize it there and, what weighs heaviest, waiver all updates of the theme, simply because the theme developer offered them the possibility to make changes to text modules centrally via text files.
 
 {: .note .warning}
 Data files provide a high degree of flexibility. The place where theme developers put text modules may differ from that of the consumer of the theme which can cause unforeseen troubles!

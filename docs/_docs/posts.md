@@ -169,7 +169,7 @@ Categories of a post work similar to the tags above:
 
 Unlike tags, categories for posts can also be defined by a post's file path.
 Any directory above `_post` will be read-in as a category. For example,
-if a post is at path `movies/horror/_posts/2019-05-21-bride-of-chucky.markdown`,
+if a post is at path `movies/horror/_posts/2019-05-21-newlywed-of-chucky.markdown`,
 then `movies` and `horror` are automatically registered as categories for that
 post.
 
@@ -183,8 +183,8 @@ post, while tags cannot be.
 Therefore, depending on whether front matter has `category: classic hollywood`,
 or `categories: classic hollywood`, the example post above would have the URL as
 either
-`movies/horror/classic%20hollywood/2019/05/21/bride-of-chucky.html` or
-`movies/horror/classic/hollywood/2019/05/21/bride-of-chucky.html` respectively.
+`movies/horror/classic%20hollywood/2019/05/21/newlywed-of-chucky.html` or
+`movies/horror/classic/hollywood/2019/05/21/newlywed-of-chucky.html` respectively.
 
 
 ## Post excerpts
