@@ -1,0 +1,65 @@
+- key: year
+  description: Year from the post's filename with four digits.
+  override_key: date
+- key: short_year
+  description: Year from the post's filename without the century. (00..99).
+  override_key: date
+- key: month
+  description: Month from the post's filename. (01..12).
+  override_key: date
+- key: i_month
+  description: Month without leading zeros from the post's filename.
+  override_key: date
+- key: short_month
+  description: Three-letter month abbreviation, e.g. "Jan".
+- key: long_month
+  required_version: "4.0"
+  description: Full month name, e.g. "January".
+- key: day
+  description: Day of the month from the post's filename. (01..31).
+  override_key: date
+- key: i_day
+  description: Day of the month without leading zeros from the post's filename.
+  override_key: date
+- key: y_day
+  description: Ordinal day of the year from the post's filename, with leading zeros. (001..366).
+- key: w_year
+  required_version: "4.0"
+  description: Week year which may differ from the month year for up to three days at the start of January and end of December.
+- key: week
+  required_version: "4.0"
+  description: Week number of the current year, starting with the first week having a majority of its days in January. (01..53).
+- key: w_day
+  required_version: "4.0"
+  description: Day of the week, starting with Monday. (1..7).
+- key: short_day
+  required_version: "4.0"
+  description: Three-letter weekday abbreviation, e.g. "Sun".
+- key: long_day
+  required_version: "4.0"
+  description: Weekday name, e.g. "Sunday".
+- key: hour
+  description: Hour of the day, 24-hour clock, zero-padded from the post's <code>date</code> front matter. (00..23).
+- key: minute
+  description: Minute of the hour from the post's <code>date</code> front matter. (00..59).
+- key: second
+  description: Second of the minute from the post's <code>date</code> front matter. (00..59).
+- key: title
+  description: Title from the document's filename.
+  override_key: slug
+- key: slug
+  description: Slugified title from the document's filename (any character except numbers and letters is replaced as hyphen).
+  override_key: slug
+- key: categories
+  description: >-
+    The specified categories for this post. If a post has multiple categories, Jekyll will create a hierarchy
+    (e.g. <code>/category1/category2</code>). Also Jekyll automatically parses out double slashes in the URLs,
+    so if no categories are present, it will ignore this.
+- key: slugified_categories
+  required_version: "4.1"
+  description: >-
+    The specified categories for this post but <em>slugified</em>. If a category is a composite of multiple words, Jekyll will downcase
+    all alphabets and replace any non-alphanumeric character with a hyphen. (e.g. <code>"Work 2 Progress"</code> will be converted
+    into <code>"work-2-progress"</code>). If a post has multiple categories, Jekyll will create a hierarchy
+    (e.g. <code>/work-2-progress/category2</code>). Also Jekyll automatically parses out double slashes in the URLs, so if no categories
+    are present, it will ignore this.
