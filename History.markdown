@@ -53,6 +53,16 @@
   * Fix link for &#34;CloudSh&#34; (#8934)
   * Recommend using `actions/cache` in GitHub Actions documentation (#8948)
   * Remove references to EOL hakiri.io service (#8946)
+  * Release post for v4.2.2 (#8982)
+  * Document releasing off `*-stable` branches (#8984)
+  * Update document by fix yaml syntax error (#8991)
+  * Enhance option&#39;s case for Jekyll configuration (#8992)
+  * Fix typo in `_docs/deployment/manual.md` (#8997)
+  * Add quiet/verbose options (#8996)
+  * Update README.markdown re IRC Pointer (#9005)
+  * Remove Aerobatic (#9007)
+  * Add Jekyll 3.9.2 release post to &#39;master&#39; branch (#9013)
+  * Simplify macOS installation docs (#8993)
 
 ### Bug Fixes
 
@@ -65,6 +75,9 @@
   * Fix regression in Convertible module from v4.2.0  (#8786)
   * Revert #7253: &#34;Don&#39;t reset site.url to localhost:4000 by default&#34; (#8620)
   * Improve readability of CI logs (#8877)
+  * Fix deprecation message for missing doc method (#8960)
+  * Fix response header for content served via `jekyll serve` (#8965)
+  * Trigger livereload in sites without pages (#8337)
 
 ### Development Fixes
 
@@ -96,11 +109,23 @@
   * Propagate _data folder from theme (#8815)
   * Support both tzinfo v1 and v2 alongwith non-half hour offsets. (#8880)
   * Run vendor-mimes to update mime.types (#8940)
+  * Expose collection static files via `site.static_files` (#8961)
 
 ### Site Enhancements
 
   * Improvements to CSS (#7834)
   * Slightly update lang `sh` code-block styling (#8857)
+
+## 4.2.2 / 2022-03-03
+
+### Bug Fixes
+
+  * Lock `http_parser.rb` gem to `v0.6.x` on JRuby.
+
+### Development Fixes
+
+  * Backport #8830 for v4.2.x: Add a workflow to build gems consistently (#8869)
+  * Lock `rubocop-performance` to `v1.11.x`.
 
 ## 4.2.1 / 2021-09-27
 
@@ -405,6 +430,19 @@
 ### Development Fixes
 
   * Fix Kramdown converter based tests for v4.0.x (#8143)
+
+## 3.9.2 / 2022-03-27
+
+### Bug Fixes
+
+  * Lock `http_parser.rb` gem to `v0.6.x` on JRuby (#8943)
+  * Backport #8756 for v3.9.x: Respect collections_dir config within include tag (#8795)
+  * Backport #8965 for v3.9.x: Fix response header for content served via `jekyll serve` (#8976)
+
+### Development Fixes
+
+  * Update and fix CI for `3.9-stable` on Ruby 3.x (#8942)
+  * Fix CI for commits to `3.9-stable` branch (#8788)
 
 ## 3.9.1 / 2021-04-08
 
