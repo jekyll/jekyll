@@ -408,11 +408,18 @@ class TestUtils < JekyllUnitTest
       assert_nil opts[:encoding]
     end
 
-    should "add bom to encoding" do
+    should "add bom to utf-encoding" do
       opts = { "encoding" => "utf-8", :encoding => "utf-8" }
       merged = Utils.merged_file_read_opts(nil, opts)
       assert_equal "bom|utf-8", merged["encoding"]
       assert_equal "bom|utf-8", merged[:encoding]
+    end
+
+    should "not add bom to non-utf encoding" do
+      opts = { "encoding" => "ISO-8859-1", :encoding => "ISO-8859-1" }
+      merged = Utils.merged_file_read_opts(nil, opts)
+      assert_equal "ISO-8859-1", merged["encoding"]
+      assert_equal "ISO-8859-1", merged[:encoding]
     end
 
     should "preserve bom in encoding" do
