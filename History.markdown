@@ -78,6 +78,7 @@
   * Fix deprecation message for missing doc method (#8960)
   * Fix response header for content served via `jekyll serve` (#8965)
   * Trigger livereload in sites without pages (#8337)
+  * Only enable BOM encoding option on UTF encodings (#8363)
 
 ### Development Fixes
 
