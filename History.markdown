@@ -64,6 +64,7 @@
   * Add Jekyll 3.9.2 release post to &#39;master&#39; branch (#9013)
   * Simplify macOS installation docs (#8993)
   * Improve document about Github Actions section (#8853)
+  * Update permalinks.md  (#9017)
 
 ### Bug Fixes
 
