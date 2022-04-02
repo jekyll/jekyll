@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2022-04-01T06:42:30-07:00" />
+<meta property="article:published_time" content="2022-04-02T08:25:54-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="GitHub Actions" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-04-01T06:42:30-07:00","datePublished":"2022-04-01T06:42:30-07:00","description":"When building a Jekyll site with GitHub Pages, the standard flow is restricted for security reasons and to make it simpler to get a site setup. For more control over the build and still host the site with GitHub Pages you can use GitHub Actions.","headline":"GitHub Actions","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/continuous-integration/github-actions/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/continuous-integration/github-actions/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-04-02T08:25:54-07:00","datePublished":"2022-04-02T08:25:54-07:00","description":"When building a Jekyll site with GitHub Pages, the standard flow is restricted for security reasons and to make it simpler to get a site setup. For more control over the build and still host the site with GitHub Pages you can use GitHub Actions.","headline":"GitHub Actions","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/continuous-integration/github-actions/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/continuous-integration/github-actions/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -212,8 +212,8 @@ was generated with an old version of Bundler.</p>
 <h3 id="setting-up-the-action">Setting up the Action</h3>
 
 <p>GitHub Actions are registered for a repository by using a YAML file inside the directory path
-<code class="language-plaintext highlighter-rouge">.github/workflows</code> (note the dot at the start). Here we shall employ
-<a href="https://github.com/marketplace/actions/jekyll-actions">Jekyll Actions</a> from the Marketplace for its simplicity.</p>
+<code class="language-plaintext highlighter-rouge">.github/workflows</code> (note the dot at the start). For simplicity, here we use one of the
+<a href="#external-links">Jekyll Actions</a> to show you how to use the action.</p>
 
 <p>Create a <strong>workflow file</strong>, say <code class="language-plaintext highlighter-rouge">github-pages.yml</code>, using either the GitHub interface or by pushing
 a YAML file to the workflow directory path manually. The base contents are:</p>
@@ -236,8 +236,8 @@ a YAML file to the workflow directory path manually. The base contents are:</p>
           <span class="na">key</span><span class="pi">:</span> <span class="s">${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}</span>
           <span class="na">restore-keys</span><span class="pi">:</span> <span class="pi">|</span>
             <span class="s">${{ runner.os }}-gems-</span>
-      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">helaili/jekyll-action@v2</span>
-        <span class="na">with</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">helaili/jekyll-action@2.0.5</span>    <span class="c1"># Choose any one of the Jekyll Actions</span>
+        <span class="na">with</span><span class="pi">:</span>                                <span class="c1"># Some relative inputs of your action</span>
           <span class="na">token</span><span class="pi">:</span> <span class="s">${{ secrets.GITHUB_TOKEN }}</span>
 </code></pre></div></div>
 
@@ -249,8 +249,9 @@ the Action from overwriting the <code class="language-plaintext highlighter-roug
   <li>The <strong>name</strong> of the job matches our YAML filename: <code class="language-plaintext highlighter-rouge">github-pages</code>.</li>
   <li>The <strong>checkout</strong> action takes care of cloning your repository.</li>
   <li>The <strong>cache</strong> action is an optimization to avoid fetching and installing gems on every build.</li>
-  <li>We specify our selected <strong>action</strong> and <strong>version number</strong> using <code class="language-plaintext highlighter-rouge">helaili/jekyll-action@2.0.5</code>.
-This handles the build and deploy.</li>
+  <li>We specify our selected <strong>action</strong> and <strong>version number</strong> using <code class="language-plaintext highlighter-rouge">helaili/jekyll-action@2.0.5</code>,
+this handles the build and deploy. You can choose any one of the Jekyll Actions that matches
+your project and flavor from <a href="https://github.com/marketplace?type=actions&amp;query=jekyll+action">GitHub Marketplace</a>.</li>
   <li>We set a reference to a secret <strong>environment variable</strong> for the action to use. The <code class="language-plaintext highlighter-rouge">GITHUB_TOKEN</code>
 is a secret token automatically initialized at the start of every workflow run.
 More information can be found in <a href="https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret">GitHub documentation</a>.</li>
@@ -266,6 +267,29 @@ using the <a href="https://help.github.com/en/actions/reference/workflow-syntax-
 </code></pre></div></div>
 
 <p>Note that this string must be quoted to prevent the asterisks from being evaluated incorrectly.</p>
+
+<h3 id="providing-permissions">Providing permissions</h3>
+
+<p>At the start of each workflow run, GitHub automatically creates a unique <code class="language-plaintext highlighter-rouge">GITHUB_TOKEN</code> secret to use in
+your workflow. You can use the <code class="language-plaintext highlighter-rouge">GITHUB_TOKEN</code> to authenticate in a workflow run. You can use the
+<code class="language-plaintext highlighter-rouge">GITHUB_TOKEN</code> by using the standard syntax for referencing secrets: <code class="language-plaintext highlighter-rouge">$</code>.
+For more information, please read <a href="https://docs.github.com/en/actions/security-guides/automatic-token-authentication">GitHub’s docs on token authentication</a></p>
+
+<p>If you need a token that requires permissions that aren’t available in the <code class="language-plaintext highlighter-rouge">GITHUB_TOKEN</code>, you can create
+a Personal Access Token (PAT), and set it as a secret in your repository for this action to push to the
+<code class="language-plaintext highlighter-rouge">gh-pages</code> branch:</p>
+
+<ol>
+  <li>On your GitHub profile, under <strong>Developer Settings</strong>, go to the <a href="https://github.com/settings/tokens">Personal Access Tokens</a>
+section.</li>
+  <li><strong>Create</strong> a token. Give it a name like “GitHub Actions” and ensure it has permissions to
+<code class="language-plaintext highlighter-rouge">public_repos</code> (or the entire <code class="language-plaintext highlighter-rouge">repo</code> scope for private repository) — necessary for the action
+to commit to the <code class="language-plaintext highlighter-rouge">gh-pages</code> branch.</li>
+  <li><strong>Copy</strong> the token value.</li>
+  <li>Go to your repository’s <strong>Settings</strong> and then the <strong>Secrets</strong> tab.</li>
+  <li><strong>Create</strong> a token named <code class="language-plaintext highlighter-rouge">YOUR_CUSTOM_TOKEN</code> (<em>important</em>). Give it a value using the value copied
+above.</li>
+</ol>
 
 <h3 id="build-and-deploy">Build and deploy</h3>
 
@@ -321,6 +345,7 @@ successful deploy from the Action.</p>
   <li><a href="https://github.com/MichaelCurrin/jekyll-actions-quickstart">jekyll-actions-quickstart</a> is an unofficial repository that includes a live demo of the
 <code class="language-plaintext highlighter-rouge">jekyll-actions</code> action. That project can be used as a template for making a new site.</li>
   <li><a href="https://github.com/limjh16/jekyll-action-ts">jekyll-action-ts</a> is another action to build and publish Jekyll sites on GiHub Pages that includes HTML formatting options with Prettier and caching.</li>
+  <li><a href="https://github.com/jeffreytse/jekyll-deploy-action">jekyll-deploy-action</a> is a GitHub Action to deploy the Jekyll site conveniently for GitHub Pages (An alternative action with better speed and compatibility).</li>
 </ul>
 
 
