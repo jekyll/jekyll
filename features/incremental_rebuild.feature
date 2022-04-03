@@ -75,8 +75,6 @@ Feature: Incremental rebuild
       """
       - name: John Doe
         role: Admin
-      - name: Jane Doe
-        role: Admin
       """
     And I have an _includes directory
     And I have an "_includes/about.html" file with content:
@@ -105,13 +103,11 @@ Feature: Incremental rebuild
     And the _site directory should exist
     And I should see "red_green_blue" in "_site/index.html"
     And I should see "John Doe -- Admin" in "_site/about.html"
-    But I should see "Rendering: index.html" in the build output
+    And I should see "Rendering: index.html" in the build output
     And I should see "Rendering: _posts/2009-03-27-wargames.markdown" in the build output
     When I wait 1 second
     Then I have a "_data/members/core/emeritus.yml" file with content:
       """
-      - name: John Doe
-        role: Admin
       - name: Jane Doe
         role: Admin
       """
