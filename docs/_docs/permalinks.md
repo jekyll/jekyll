@@ -334,6 +334,7 @@ For posts, Jekyll also provides the following built-in styles for convenience:
       </td>
       <td>
         <p><code>/:categories/:year/W:week/:short_day/:title:output_ext</code></p>
+        <small>`W` is a prefix for `:week`</small>
       </td>
     </tr>
     <tr>
