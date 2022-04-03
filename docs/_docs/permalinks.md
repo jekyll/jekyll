@@ -278,6 +278,14 @@ Here's the full list of placeholders available:
         </p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <p><code>:output_ext</code></p>
+      </td>
+      <td>
+        <p>Extension of the output file. (Included by default and usually unnecessary.)</p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
