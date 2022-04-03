@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "docs/_data/tutorials.yml config file schema",
+  "type": "array",
+  "items": {
+    "title": "tutorial entry",
+    "description": "The tutorial entry",
+    "type": "object",
+    "properties": {
+      "title": {
+        "description": "The title",
+        "type": "string",
+        "minLength": 1
+      },
+      "tutorials": {
+        "description": "The tutorials",
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

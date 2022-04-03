@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "docs/_data/ruby.yml config file schema",
+  "type": "object",
+  "properties": {
+    "min_version": {
+      "description": "The minimum version",
+      "type": "string",
+      "minLength": 1
+    },
+    "current_version": {
+      "description": "The current version",
+      "type": "string",
+      "minLength": 1
+    },
+    "current_version_output": {
+      "description": "The current shown version",
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

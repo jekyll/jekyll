@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "docs/_data/primary_nav.yml config file schema",
+  "type": "array",
+  "items": {
+    "title": "link entry",
+    "description": "The link entry",
+    "type": "object",
+    "properties": {
+      "title": {
+        "description": "The title",
+        "type": "string",
+        "minLength": 1
+      },
+      "link": {
+        "description": "The url",
+        "type": "string",
+        "minLength": 1
+      },
+      "show_on_mobile": {
+        "description": "Show/hide on mobile",
+        "type": "boolean",
+        "minLength": 1
+      }
+    }
+  }
+}

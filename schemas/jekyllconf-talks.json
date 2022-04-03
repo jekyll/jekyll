@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "docs/_data/jekyllconf-talks.yml config file schema",
+  "type": "array",
+  "items": {
+    "title": "speaker entry",
+    "description": "The speaker entry",
+    "type": "object",
+    "properties": {
+      "speaker": {
+        "description": "The name",
+        "type": "string",
+        "minLength": 1
+      },
+      "twitter_handle": {
+        "description": "The description",
+        "$ref": "https://json.schemastore.org/base.json#definitions/string?",
+        "minLength": 1
+      },
+      "youtube_id": {
+        "description": "The YouTube id",
+        "type": "string",
+        "minLength": 1
+      },
+      "topic": {
+        "description": "The topic",
+        "type": "string",
+        "minLength": 1
+      },
+      "year": {
+        "description": "The year",
+        "type": "integer"
+      }
+    }
+  }
+}

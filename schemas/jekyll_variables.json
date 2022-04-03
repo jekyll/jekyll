@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "docs/_data/jekyll_variables.yml config file schema",
+  "patternProperties": {
+    ".": {
+      "description": "The variable scope",
+      "type": "array",
+      "items": {
+        "title": "variable list",
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The title",
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "description": "The description",
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "docs/_data/config_options/*.yml config file schema",
+  "type": "array",
+  "items": {
+    "title": "command line flag/config option",
+    "description": "The command line flag/config option",
+    "type": "object",
+    "properties": {
+      "name": {
+        "description": "The name",
+        "type": "string",
+        "minLength": 1
+      },
+      "description": {
+        "description": "The description",
+        "type": "string",
+        "minLength": 1
+      },
+      "version-badge": {
+        "description": "The version badge",
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "oneOf": [
+      {
+        "properties": {
+          "flag": {
+            "description": "The command line flag",
+            "type": "string",
+            "minLength": 1
+          },
+          "option": {
+            "description": "The config option",
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      {
+        "properties": {
+          "flags": {
+            "description": "The command line flag",
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "options": {
+            "description": "The config option",
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    ]
+  }
+}

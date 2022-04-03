@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "docs/_data/showcase.yml config file schema",
+  "type": "array",
+  "items": {
+    "title": "link entry",
+    "description": "The link entry",
+    "type": "object",
+    "properties": {
+      "name": {
+        "description": "The name",
+        "type": "string",
+        "minLength": 1
+      },
+      "url": {
+        "description": "The url",
+        "type": "string",
+        "minLength": 1
+      },
+      "image": {
+        "description": "The image",
+        "type": "string",
+        "minLength": 1
+      },
+      "categories": {
+        "description": "The categories",
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

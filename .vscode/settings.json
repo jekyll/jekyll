@@ -1,0 +1,13 @@
+{
+  "yaml.schemas": {
+    "schemas/config_options/options.json": "docs/_data/config_options/*.yml",
+    "schemas/docs_nav.json": "docs/_data/docs_nav.yml",
+    "schemas/jekyll_filters.json": "docs/_data/jekyll_filters.yml",
+    "schemas/jekyll_variables.json": "docs/_data/jekyll_variables.yml",
+    "schemas/jekyllconf-talks.json": "docs/_data/jekyllconf-talks.yml",
+    "schemas/primary_nav.json": "docs/_data/primary_nav.yml",
+    "schemas/ruby.json": "docs/_data/ruby.yml",
+    "schemas/showcase.json": "docs/_data/showcase.yml",
+    "schemas/tutorials.json": "docs/_data/tutorials.yml"
+  }
+}

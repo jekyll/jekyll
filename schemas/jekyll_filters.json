@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "docs/_data/docs_nav.yml config file schema",
+  "type": "array",
+  "items": {
+    "title": "filter entry",
+    "description": "The filter entry",
+    "type": "object",
+    "required": [
+      "name",
+      "description",
+      "examples"
+    ],
+    "properties": {
+      "name": {
+        "description": "The name",
+        "type": "string",
+        "minLength": 1
+      },
+      "description": {
+        "description": "The description",
+        "type": "string",
+        "minLength": 1
+      },
+      "version_badge": {
+        "description": "The version badge",
+        "type": "string",
+        "minLength": 1
+      },
+      "examples": {
+        "description": "The examples",
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "type": "object",
+          "required": [
+            "input"
+          ],
+          "properties": {
+            "input": {
+              "description": "The syntax"
+            },
+            "output": {
+              "description": "The output"
+            }
+          }
+        }
+      }
+    }
+  }
+}
