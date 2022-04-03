@@ -48,6 +48,9 @@ themes\.googleusercontent\.com/static/fonts/[^/]+/v\d+/[^.]+.
 # google_site_verification:
 google_site_verification: [-a-zA-Z=;:/0-9+]*
 
+# Ruby-doc.org
+https://ruby-doc\.org/.*
+
 # Contributors
 alphabetical order.*:.*
 twitter_handle: .*

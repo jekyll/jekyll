@@ -57,6 +57,14 @@
   * Document releasing off `*-stable` branches (#8984)
   * Update document by fix yaml syntax error (#8991)
   * Enhance option&#39;s case for Jekyll configuration (#8992)
+  * Fix typo in `_docs/deployment/manual.md` (#8997)
+  * Add quiet/verbose options (#8996)
+  * Update README.markdown re IRC Pointer (#9005)
+  * Remove Aerobatic (#9007)
+  * Add Jekyll 3.9.2 release post to &#39;master&#39; branch (#9013)
+  * Simplify macOS installation docs (#8993)
+  * Improve document about Github Actions section (#8853)
+  * Update permalinks.md  (#9017)
 
 ### Bug Fixes
 
@@ -71,6 +79,8 @@
   * Improve readability of CI logs (#8877)
   * Fix deprecation message for missing doc method (#8960)
   * Fix response header for content served via `jekyll serve` (#8965)
+  * Trigger livereload in sites without pages (#8337)
+  * Only enable BOM encoding option on UTF encodings (#8363)
 
 ### Development Fixes
 
@@ -102,6 +112,9 @@
   * Propagate _data folder from theme (#8815)
   * Support both tzinfo v1 and v2 alongwith non-half hour offsets. (#8880)
   * Run vendor-mimes to update mime.types (#8940)
+  * Expose collection static files via `site.static_files` (#8961)
+  * Expose `basename` from `document.rb` as `name` to Liquid templates (#8761)
+  * Allow Configurable Converters on CSV (#8858)
 
 ### Site Enhancements
 
@@ -422,6 +435,19 @@
 ### Development Fixes
 
   * Fix Kramdown converter based tests for v4.0.x (#8143)
+
+## 3.9.2 / 2022-03-27
+
+### Bug Fixes
+
+  * Lock `http_parser.rb` gem to `v0.6.x` on JRuby (#8943)
+  * Backport #8756 for v3.9.x: Respect collections_dir config within include tag (#8795)
+  * Backport #8965 for v3.9.x: Fix response header for content served via `jekyll serve` (#8976)
+
+### Development Fixes
+
+  * Update and fix CI for `3.9-stable` on Ruby 3.x (#8942)
+  * Fix CI for commits to `3.9-stable` branch (#8788)
 
 ## 3.9.1 / 2021-04-08
 

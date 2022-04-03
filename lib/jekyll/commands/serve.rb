@@ -144,9 +144,9 @@ module Jekyll
           @reload_reactor = LiveReloadReactor.new
 
           Jekyll::Hooks.register(:site, :post_render) do |site|
-            regenerator = Jekyll::Regenerator.new(site)
-            @changed_pages = site.pages.select do |p|
-              regenerator.regenerate?(p)
+            @changed_pages = []
+            site.each_site_file do |item|
+              @changed_pages << item if site.regenerator.regenerate?(item)
             end
           end
 
