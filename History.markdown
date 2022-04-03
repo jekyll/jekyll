@@ -100,6 +100,7 @@
   * Fix random test failures in TestExcerpt #to_liquid (#8884)
   * Lock gem `psych` to `v3.x` (#8918)
   * Fix typo in Bug Report template (#8951)
+  * Check symlink outside site_source without Pathutil (#9015)
 
 ### Minor Enhancements
 
