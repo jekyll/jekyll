@@ -333,8 +333,10 @@ For posts, Jekyll also provides the following built-in styles for convenience:
         <small>{% include docs_version_badge.html version="4.0" %}</small>
       </td>
       <td>
-        <p><code>/:categories/:year/W:week/:short_day/:title:output_ext</code></p>
-        <small>`W` is a prefix for `:week`</small>
+        <p>
+          <code>/:categories/:year/W:week/:short_day/:title:output_ext</code></br>
+          <small>`W` is a prefix for `:week`</small>
+        </p>
       </td>
     </tr>
     <tr>
