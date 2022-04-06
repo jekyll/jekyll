@@ -105,7 +105,8 @@ class JekyllUnitTest < Minitest::Test
   end
 
   def mocks_expect(*args)
-    RSpec::Mocks::ExampleMethods::ExpectHost.instance_method(:expect).bind_call(self, *args)
+    RSpec::Mocks::ExampleMethods::ExpectHost.instance_method(:expect)\
+      .bind(self).call(*args)
   end
 
   def before_setup
