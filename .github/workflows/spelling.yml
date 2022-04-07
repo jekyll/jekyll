@@ -17,6 +17,6 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Check Spellings
       uses: check-spelling/check-spelling@v0.0.19
