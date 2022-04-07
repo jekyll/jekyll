@@ -20,8 +20,6 @@ environment:
       TZINFO_VERSION: "~> 2.0"
       TEST_SUITE: "test"
     - RUBY_FOLDER_VER: "26"
-      TEST_SUITE: "test"
-    - RUBY_FOLDER_VER: "26"
       TEST_SUITE: "default-site"
     - RUBY_FOLDER_VER: "26"
       TEST_SUITE: "profile-docs"
@@ -32,8 +30,6 @@ environment:
       TEST_SUITE: "cucumber"
     - RUBY_FOLDER_VER: "26"
       TZINFO_VERSION: "~> 2.0"
-      TEST_SUITE: "cucumber"
-    - RUBY_FOLDER_VER: "26"
       TEST_SUITE: "cucumber"
 
 install:
