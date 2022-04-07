@@ -102,6 +102,7 @@
   * Fix typo in Bug Report template (#8951)
   * Check symlink outside site_source without Pathutil (#9015)
   * Stop testing with Rubies older than 2.7 on non-Windows  (#8955)
+  * Bump actions/checkout from 2 to 3 (#8986)
 
 ### Minor Enhancements
 
