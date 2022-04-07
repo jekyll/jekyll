@@ -28,7 +28,7 @@ jobs:
             ruby_version: "jruby-9.3.4.0"
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: "Set up ${{ matrix.label }}"
         uses: ruby/setup-ruby@v1
         with:
@@ -58,7 +58,7 @@ jobs:
             ruby_version: "2.7"
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: "Set up Ruby ${{ matrix.ruby_version }}"
         uses: ruby/setup-ruby@v1
         with:
