@@ -65,6 +65,7 @@
   * Simplify macOS installation docs (#8993)
   * Improve document about Github Actions section (#8853)
   * Update permalinks.md  (#9017)
+  * Add clarity to docs on permalinks placeholders and builtins (#8995)
 
 ### Bug Fixes
 
