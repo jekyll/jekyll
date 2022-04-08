@@ -476,7 +476,11 @@ module Jekyll
       theme_config.delete_if { |key, _| Configuration::DEFAULTS.key?(key) }
 
       # Override theme_config with existing config and return the result.
+      # Additionally ensure we return a `Jekyll::Configuration` instance instead of a Hash.
       Utils.deep_merge_hashes(theme_config, config)
+        .each_with_object(Jekyll::Configuration.new) do |(key, value), conf|
+          conf[key] = value
+        end
     end
 
     # Limits the current posts; removes the posts which exceed the limit_posts
