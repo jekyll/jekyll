@@ -278,6 +278,14 @@ Here's the full list of placeholders available:
         </p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <p><code>:output_ext</code></p>
+      </td>
+      <td>
+        <p>Extension of the output file. (Included by default and usually unnecessary.)</p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -325,7 +333,10 @@ For posts, Jekyll also provides the following built-in styles for convenience:
         <small>{% include docs_version_badge.html version="4.0" %}</small>
       </td>
       <td>
-        <p><code>/:categories/:year/W:week/:short_day/:title:output_ext</code></p>
+        <p>
+          <code>/:categories/:year/W:week/:short_day/:title:output_ext</code><br/>
+          <small>(<code>W</code> will be prefixed to the value of <code>:week</code>)</small>
+        </p>
       </td>
     </tr>
     <tr>
