@@ -81,6 +81,7 @@
   * Fix response header for content served via `jekyll serve` (#8965)
   * Trigger livereload in sites without pages (#8337)
   * Only enable BOM encoding option on UTF encodings (#8363)
+  * Ensure theme config is a `Jekyll::Configuration` object (#8988)
 
 ### Development Fixes
 
