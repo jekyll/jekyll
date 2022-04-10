@@ -49,23 +49,30 @@ Your terminal should now be a Bash instance. Next, update your repository lists 
 ```sh
 sudo apt-get update -y && sudo apt-get upgrade -y
 ```
+Update your environment so root is not required to update your gems.
 
+```sh
+echo 'export GEM_HOME=$HOME/gems' >> ~/.$(basename $SHELL)rc
+echo 'export PATH=$HOME/gems/bin:$PATH' >> ~/.$(basename $SHELL)rc
+source ~/.$(basename $SHELL)rc
+```
 Next, install Ruby. To do this, let's use a repository from [BrightBox](https://www.brightbox.com/docs/ruby/ubuntu/),
 which hosts optimized versions of Ruby for Ubuntu.
 
 ```sh
 sudo apt-add-repository ppa:brightbox/ruby-ng
 sudo apt-get update
-sudo apt-get install ruby2.5 ruby2.5-dev build-essential dh-autoreconf
+sudo apt-get install ruby ruby-dev build-essential dh-autoreconf
+sudo apt-get install libssl-dev zlib1g-dev libreadline-dev libffi-dev
 ```
 
-Next, update your Ruby gems:
+Now, update your Ruby gems:
 
 ```sh
 gem update
 ```
 
-Install Jekyll:
+Then install Jekyll:
 
 ```sh
 gem install jekyll bundler
