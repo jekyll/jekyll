@@ -7,12 +7,6 @@
 # versions of RuboCop, may require this file to be generated again.
 
 # Offense count: 1
-# This cop supports safe auto-correction (--auto-correct).
-Performance/BindCall:
-  Exclude:
-    - 'test/helper.rb'
-
-# Offense count: 1
 Style/CombinableLoops:
   Exclude:
     - 'lib/jekyll/tags/post_url.rb'
