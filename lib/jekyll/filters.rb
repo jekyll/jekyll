@@ -401,7 +401,7 @@ module Jekyll
       case target
       when NilClass
         return true if property.nil?
-      when "" # empty hashes and arrays will match this
+      when "", Liquid::Expression::MethodLiteral # empty/blank hashes and arrays will match this
         return true if property == target || Array(property).join == target
       else
         target = target.to_s
