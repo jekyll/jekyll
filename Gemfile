@@ -5,7 +5,7 @@ gemspec :name => "jekyll"
 
 gem "rake", "~> 13.0"
 
-if ENV["LIQUID_VERSION"]
+if ENV["LIQUID_VERSION"] && ENV["LIQUID_VERSION"] != ""
   gem "liquid", ENV["LIQUID_VERSION"]
 end
 
