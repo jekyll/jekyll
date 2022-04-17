@@ -91,7 +91,6 @@ module Jekyll
   require "jekyll/generator"
   require "jekyll/command"
   require "jekyll/liquid_extensions"
-  require "jekyll/liquid_expr_method_literal"
   require "jekyll/filters"
 
   class << self
@@ -181,6 +180,7 @@ module Jekyll
 
     # Conditional optimizations
     Jekyll::External.require_if_present("liquid/c")
+    require "jekyll/liquid_expr_method_literal" if Liquid::VERSION.start_with?("5.")
   end
 end
 
