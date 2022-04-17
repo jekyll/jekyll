@@ -14,16 +14,24 @@ jobs:
   ci:
     name: "Run Tests (${{ matrix.label }})"
     runs-on: "ubuntu-latest"
+    env:
+      LIQUID_VERSION: ${{ matrix.liquid_version }}
     strategy:
       fail-fast: false
       matrix:
         include:
           - label: Ruby 2.7
             ruby_version: "2.7"
+          - label: Ruby 2.7 with Liquid v4
+            ruby_version: "2.7"
+            liquid_version: "~> 4.0"
           - label: Ruby 3.0
             ruby_version: "3.0"
           - label: Ruby 3.1.2
             ruby_version: "3.1.2"
+          - label: Ruby 3.1.2 with Liquid v4
+            ruby_version: "3.1.2"
+            liquid_version: "~> 4.0"
           - label: JRuby 9.4.0.0
             ruby_version: "jruby-9.4.0.0"
     steps:
