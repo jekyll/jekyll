@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 gemspec :name => "jekyll"
 
-gem "liquid", ENV["LIQUID_VERSION"] if ENV["LIQUID_VERSION"]
+gem "liquid", ENV["LIQUID_VERSION"] unless ENV["LIQUID_VERSION"].to_s.empty?
 gem "rake", "~> 13.0"
 
 group :development do
