@@ -91,6 +91,7 @@ module Jekyll
   require "jekyll/generator"
   require "jekyll/command"
   require "jekyll/liquid_extensions"
+  require "jekyll/liquid_expr_method_literal"
   require "jekyll/filters"
 
   class << self
