@@ -35,7 +35,7 @@ Generators are required to implement the following public method at minimum:
       <td>
         <p>Generates content as a side-effect.</p>
         <p>
-          The method recieves a single argument: <code>site</code> which is an instance of the current site
+          The method receives a single argument: <code>site</code> which is an instance of the current site
           which under the hood is a Ruby object of class `Jekyll::Site`.
         </p>
       </td>
@@ -76,7 +76,7 @@ end
 ```
 
 The following example is a more complex, advanced-level generator that generates new pages. To fully wrap one's head around the implementation
-as a whole, it would be best (but not a requirement) to be aquainted with the implementation of `Jekyll::Page` before proceeding ahead.
+as a whole, it would be best (but not a requirement) to be acquainted with the implementation of `Jekyll::Page` before proceeding ahead.
 
 In this example, the aim of the generator is to create a page for each category registered in the `site`. The pages are created at runtime, so
 their contents, front matter and other attributes need to be designed by the plugin itself.
@@ -104,7 +104,7 @@ module SamplePlugin
   # the core class of all standalone pages in the site.
   #
   # Initializing `Jekyll::Page` objects directly involve reading physical files on disk.
-  # Subclassing allows bypassing the *disk-access* logic and additionaly giving greater
+  # Subclassing allows bypassing the *disk-access* logic and additionally giving greater
   # control over attributes of the generated objects.
   class CategoryPage < Jekyll::Page
     # The *initializer* of `Jekyll::Page` takes 4 mandatory arguments, most of which are
