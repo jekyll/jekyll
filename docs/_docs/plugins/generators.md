@@ -90,9 +90,10 @@ module SamplePlugin
   class CategoryPageGenerator < Jekyll::Generator
     safe true
 
-    # For every `category` registered under current site, *generate* an instance of
-    # `SamplePlugin::CategoryPage` and store them inside `site.pages` which is an array
-    # of all standalone pages in the current site.
+    # For every `category` registered under current site, *generate* an
+    # instance of `SamplePlugin::CategoryPage` and store them inside
+    # `site.pages` which is an array of all standalone pages in the
+    # current site.
     def generate(site)
       site.categories.each do |category, documents|
         site.pages << CategoryPage.new(site, category, documents)
@@ -100,69 +101,83 @@ module SamplePlugin
     end
   end
 
-  # Implement `SamplePlugin::CategoryPage` as a subclass of `Jekyll::Page` which is
-  # the core class of all standalone pages in the site.
+  # Implement `SamplePlugin::CategoryPage` as a subclass of
+  # `Jekyll::Page` which is the core class of all standalone pages in
+  # the site.
   #
-  # Initializing `Jekyll::Page` objects directly involve reading physical files on disk.
-  # Subclassing allows bypassing the *disk-access* logic and additionally giving greater
-  # control over attributes of the generated objects.
+  # Initializing `Jekyll::Page` objects directly involve reading
+  # physical files on disk. Subclassing allows bypassing the
+  # *disk-access* logic and additionally giving greater control over
+  # attributes of the generated objects.
   class CategoryPage < Jekyll::Page
-    # The *initializer* of `Jekyll::Page` takes 4 mandatory arguments, most of which are
-    # redundant as well as insufficient for our use-case.
+    # The *initializer* of `Jekyll::Page` takes 4 mandatory arguments,
+    # most of which are redundant as well as insufficient for our
+    # use-case.
     #
-    # The overridden *initializer* takes the following arguments in the given order:
+    # The overridden *initializer* takes the following arguments in the
+    # given order:
     #        site - The instance of current site (`Jekyll::Site`).
     #    category - Category name (`String`).
-    #   documents - Array of posts (instances of `Jekyll::Document`) under current
-    #               category name (`Array<Jekyll::Document>`).
+    #   documents - Array of posts (instances of `Jekyll::Document`)
+    #               under current category name
+    #               (`Array<Jekyll::Document>`).
     def initialize(site, category, posts)
       @site = site      # the current site instance.
       @dir  = category  # the directory the page will reside in.
 
-      # All pages have the same filename, so define attributes straight away.
-      # Once initialized, the value stored in the following can be accessed via namesake
-      # getters and setters. For example, `self.basename`, `self.name`, etc.
+      # All pages have the same filename, so define attributes straight
+      # away. Once initialized, the value stored in the following can
+      # be accessed via namesake getters and setters.
+      # For example, `self.basename`, `self.name`, etc.
       @basename = 'index'       # filename without the extension.
       @ext      = '.html'       # the extension.
       @name     = 'index.html'  # basically @basename + @ext.
 
-      # The `@dir` and `@name` defined by now will be used by Jekyll to construct the
-      # `relative_path` attribute automatically at runtime.
+      # The `@dir` and `@name` defined by now will be used by Jekyll
+      # to construct the `relative_path` attribute automatically at
+      # runtime.
 
-      # The following are optional enhancements for fine-grained control.
+      # The following are optional enhancements for fine-grained
+      # control.
 
-      # Initialize data hash with a key pointing to all posts under current category.
-      # This allows accessing the list in a Liquid template via `page.linked_docs`.
+      # Initialize data hash with a key pointing to all posts under
+      # current category. This allows accessing the list in a Liquid
+      # template via `page.linked_docs`.
       @data = {
         'linked_docs' => posts
       }
 
-      # Look up front matter defaults scoped to type `categories`, if given key doesn't
-      # exist in the `data` hash.
-      # Implementing this allows the user to alter front matter aspects (e.g. `layout`,
-      # `permalink`, etc) from the user's config file without editing the plugin code
-      # simply by setting the `scope.type` to `categories`.
+      # Look up front matter defaults scoped to type `categories`, if
+      # given key doesn't exist in the `data` hash. Implementing this
+      # allows the user to alter front matter aspects (e.g. `layout`,
+      # `permalink`, etc) from the user's config file without editing
+      # the plugin code simply by setting the `scope.type` to
+      # `categories`.
       #
-      # Note: The type assigned here is illustrative. It need not be `:categories`
-      # strictly.
+      # Note: The type assigned here is illustrative. It need not be
+      # `:categories` strictly.
       data.default_proc = proc do |_, key|
         site.frontmatter_defaults.find(relative_path, :categories, key)
       end
     end
 
-    # Override the URL template used in `Jekyll::Page` to suit our use-case.
-    # The result can be manipulated either using default front matter in the config file
-    #   or fall back to the site-wide permalink style used by other pages and docs in
-    #   the site.
+    # Override the URL template used in `Jekyll::Page` to suit our
+    # use-case.
+    # The result can be manipulated either using default front matter
+    #   in the config file or fall back to the site-wide permalink
+    #   style used by other pages and docs in the site.
     def template
-      Jekyll::Utils.add_permalink_suffix("/:category/:basename", site.permalink_style)
+      Jekyll::Utils.add_permalink_suffix(
+        "/:category/:basename", site.permalink_style
+      )
     end
 
-    # Override the placeholders from `Jekyll::Page` that are used in constructing page URL.
+    # Override the placeholders from `Jekyll::Page` that are used in
+    # constructing page URL.
     def url_placeholders
       {
         :category   => @dir,
-        :basename   => basename,   # same as `@basename` or `self.basename`
+        :basename   => basename, # same as `@basename`
         :output_ext => output_ext,
       }
     end
