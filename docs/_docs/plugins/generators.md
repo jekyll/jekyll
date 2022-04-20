@@ -78,15 +78,21 @@ end
 The following example is a more complex, advanced-level generator that generates new pages. To fully wrap one's head around the implementation
 as a whole, it would be best (but not a requirement) to be acquainted with the implementation of `Jekyll::Page` before proceeding ahead.
 
-In this example, the aim of the generator is to create a page for each category registered in the `site`. The pages are created at runtime, so
-their contents, front matter and other attributes need to be designed by the plugin itself.
-* The pages are intended to render a list of all documents under a given category. So the basename of the rendered file would be better as
-`index.html`.
+In this example, the aim of the generator is to create **a page** for each category registered in the `site`. The pages are virtual i.e.
+created at runtime. So their content, front matter and other attributes ideally need to be designed by the plugin itself. However, since a
+plugin cannot determine the presentational aspects of the render (the desired HTML) which is primarily dictated by the site's theme, the
+example plugin will only provide the backend data (`page.linked_docs`) that is expected to be consumed by the user's Liquid template.<br/>
+In other words, *the generated pages will be empty* unless linked to a layout (which is outside the scope of current document.)
+* The pages are *intended* to render a list of all documents under a given category. So the crux of the generator will be to loop through
+`site.categories` and initialize new *objects*, one per registered category.
 * Having the ability to configure the pages via [front matter defaults](/docs/configuration/front-matter-defaults/) would be awesome! So
-assigning a particular `type` to these pages would be beneficial.
+assigning a particular `type` to these pages would be beneficial. The generated virtual pages do not have a hard-coded layout. The layout
+attribute is to be assigned via front matter defaults.
 
 ```ruby
 module SamplePlugin
+  # ------------------------- START GENERATOR -------------------------
+  #
   class CategoryPageGenerator < Jekyll::Generator
     safe true
 
@@ -100,6 +106,12 @@ module SamplePlugin
       end
     end
   end
+
+  #
+  # -------------------------- END GENERATOR --------------------------
+
+  # ----------------------- START VIRTUAL PAGE ------------------------
+  #
 
   # Implement `SamplePlugin::CategoryPage` as a subclass of
   # `Jekyll::Page` which is the core class of all standalone pages in
@@ -136,9 +148,6 @@ module SamplePlugin
       # The `@dir` and `@name` defined by now will be used by Jekyll
       # to construct the `relative_path` attribute automatically at
       # runtime.
-
-      # The following are optional enhancements for fine-grained
-      # control.
 
       # Initialize data hash with a key pointing to all posts under
       # current category. This allows accessing the list in a Liquid
@@ -182,11 +191,16 @@ module SamplePlugin
       }
     end
   end
+  #
+  # ------------------------ END VIRTUAL PAGE -------------------------
 end
 ```
 
-The generated pages if set up to be managed via front matter defaults, the following example will assign a layout to all generated pages with
-type, `:categories`:
+The generated pages since designed to be managed via front matter defaults, the following example will collect all generated pages with type,
+`:categories` and do two things:
+* assign a layout named `category_page` to all of them.
+* configure the destination to be within a directory named `categories` i.e. of the pattern `_site/categories/<category_name>/index.html`. The
+destination may be changed to `_site/categories/<category_name>.html` by using `permalink: categories/:category:output_ext` instead.
 
 ```yaml
 # _config.yml
