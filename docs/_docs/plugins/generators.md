@@ -132,7 +132,7 @@ module SamplePlugin
     def initialize(site, category, posts)
       @site     = site          # the current site instance.
       @basename = category      # filename without the extension.
-      @ext      = '.md'         # Markdown extension so that this
+      @ext      = '.html'         # Markdown extension so that this
                                 #   page gets converted into HTML.
 
       # The `@dir` and `@name` defined below will be used by Jekyll
@@ -173,7 +173,7 @@ module SamplePlugin
       @content = if data['disable_onboarding_content']
                    ''
                  else
-                   DUMMY_CONTENT
+                   ONBOARDING_CONTENT
                  end
     end
 
@@ -197,65 +197,17 @@ module SamplePlugin
       }
     end
 
-    DUMMY_CONTENT = <<~TEXT {% raw %}
-      > This page was created by a Generator plugin. To **remove**
-      > this content, set `disable_onboarding_content: true` via front
-      > matter defaults in your configuration file
-      > ([refer below][fmd_reference]) and restart your local server.
-
-      [fmd_reference]: #managing-via-front-matter-defaults
-
-      ## About this page
-
-      This page is intended for showcasing your "category" named
-      **{{ page.basename }}**.
-
-      To list all posts / documents linked to the category
-      {{ page.basename }} as registered under this site, loop through
-      `page.linked_docs` in your layout. For example:
-
-      {% comment %}
-        ATTENTION!
-        Insert "Liquid raw opening tag" here, to disable Liquid
-        processing in examples below and then consecutively insert the
-        associated "Liquid endraw closing tag" right after the examples
-        to re-enable Liquid processing.
-      {% endcomment %}
-      ```html
+    ONBOARDING_CONTENT = <<~TEXT
+      {% raw %}
       <h2>Posts / documents under category {{ page.basename }}</h2>
       <ul>
       {% for doc in page.linked_docs %}
         <li><a href="{{ doc.url }}">{{ doc.title }}</a></li>
       {% endfor %}
       </ul>
-      ```
-
-      To view all accessible attributes available for current page, use
-      the `inspect` filter:
-      ```
-      {{ page | inspect }}
-      ```
-
-      ## Managing via Front Matter Defaults
-
-      This page has been designed to be managed via your configuration
-      file using front matter defaults.
-      Every such category-page has been assigned a type:
-      `category_pages`. Use the type to assign / alter various front
-      matter attributes like `layout`, `permalink`, etc. For example:
-      ```yaml
-      # _config.yml
-
-      defaults:
-        - scope:
-            type: category_pages # select all category pages
-          values:
-            layout: category_page
-            permalink: categories/:category/
-      ```
       {% endraw %}
     TEXT
-    private_constant :DUMMY_CONTENT
+    private_constant :ONBOARDING_CONTENT
   end
   # ------------------------ END VIRTUAL PAGE -------------------------
 end
