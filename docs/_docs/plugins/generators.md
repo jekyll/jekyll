@@ -49,7 +49,7 @@ extension. If your generator is split across multiple files, it should be packag
 In the latter case, the name of the gem depends on the availability of the name at that site because no two gems can have the same name.
 
 By default, Jekyll loads `.rb` files from the `_plugins` directory. However, you can change this behavior by assigning the desired directory
-name to the `plugins_dir` key in the config file.
+name to the `plugins_dir` key in the configuration file.
 
 ## Examples
 
@@ -92,7 +92,6 @@ attribute is to be assigned via front matter defaults.
 ```ruby
 module SamplePlugin
   # ------------------------- START GENERATOR -------------------------
-  #
   class CategoryPageGenerator < Jekyll::Generator
     safe true
 
@@ -106,13 +105,10 @@ module SamplePlugin
       end
     end
   end
-
-  #
   # -------------------------- END GENERATOR --------------------------
 
   # ----------------------- START VIRTUAL PAGE ------------------------
   #
-
   # Implement `SamplePlugin::CategoryPage` as a subclass of
   # `Jekyll::Page` which is the core class of all standalone pages in
   # the site.
@@ -124,7 +120,7 @@ module SamplePlugin
   class CategoryPage < Jekyll::Page
     # The *initializer* of `Jekyll::Page` takes 4 mandatory arguments,
     # most of which are redundant as well as insufficient for our
-    # use-case.
+    # use case.
     #
     # The overridden *initializer* takes the following arguments in the
     # given order:
@@ -134,50 +130,61 @@ module SamplePlugin
     #               under current category name
     #               (`Array<Jekyll::Document>`).
     def initialize(site, category, posts)
-      @site = site      # the current site instance.
-      @dir  = category  # the directory the page will reside in.
+      @site     = site          # the current site instance.
+      @basename = category      # filename without the extension.
+      @ext      = '.md'         # Markdown extension so that this
+                                #   page gets converted into HTML.
 
-      # All pages have the same filename, so define attributes straight
-      # away. Once initialized, the value stored in the following can
-      # be accessed via namesake getters and setters.
-      # For example, `self.basename`, `self.name`, etc.
-      @basename = 'index'       # filename without the extension.
-      @ext      = '.html'       # the extension.
-      @name     = 'index.html'  # basically @basename + @ext.
-
-      # The `@dir` and `@name` defined by now will be used by Jekyll
+      # The `@dir` and `@name` defined below will be used by Jekyll
       # to construct the `relative_path` attribute automatically at
       # runtime.
+      @dir  = ''
+      @name = @basename + @ext
 
-      # Initialize data hash with a key pointing to all posts under
-      # current category. This allows accessing the list in a Liquid
-      # template via `page.linked_docs`.
+      # Initialize data hash with some predefined attributes along with
+      # a key pointing to all posts under current category. This allows
+      # accessing the list in a Liquid template via `page.linked_docs`.
       @data = {
-        'linked_docs' => posts
+        'basename'    => basename,
+        'linked_docs' => posts,
       }
 
-      # Look up front matter defaults scoped to type `categories`, if
-      # given key doesn't exist in the `data` hash. Implementing this
-      # allows the user to alter front matter aspects (e.g. `layout`,
-      # `permalink`, etc) from the user's config file without editing
-      # the plugin code simply by setting the `scope.type` to
-      # `categories`.
+      # Look up front matter defaults scoped to type `category_pages`,
+      # if given key doesn't exist in the `data` hash. Implementing
+      # this allows the user to alter front matter aspects (e.g.
+      # `layout`, `permalink`, etc) from the user's configuration file
+      # without editing the plugin code simply by setting the
+      # `scope.type` to `category_pages`.
       #
       # Note: The type assigned here is illustrative. It need not be
-      # `:categories` strictly.
+      # `:category_pages` strictly.
       data.default_proc = proc do |_, key|
-        site.frontmatter_defaults.find(relative_path, :categories, key)
+        site.frontmatter_defaults.find(
+          relative_path, :category_pages, key
+        )
       end
+
+      # Fall back to use `default` layout unless configured by the user
+      data['layout'] ||= 'default'
+
+      # Since virtual pages have no content of their own, assign a
+      # dummy content along with a provision to hide / remove this
+      # dummy content at user's discretion.
+      @content = if data['disable_onboarding_content']
+                   ''
+                 else
+                   DUMMY_CONTENT
+                 end
     end
 
     # Override the URL template used in `Jekyll::Page` to suit our
-    # use-case.
+    # use case.
     # The result can be manipulated either using default front matter
-    #   in the config file or fall back to the site-wide permalink
-    #   style used by other pages and docs in the site.
+    # in the configuration file or fall back to the site-wide permalink
+    # style used by other pages and docs in the site.
     def template
       Jekyll::Utils.add_permalink_suffix(
-        "/:category/:basename", site.permalink_style
+        "/:category", site.permalink_style
       )
     end
 
@@ -185,19 +192,77 @@ module SamplePlugin
     # constructing page URL.
     def url_placeholders
       {
-        :category   => @dir,
-        :basename   => basename, # same as `@basename`
+        :category   => basename,
         :output_ext => output_ext,
       }
     end
+
+    DUMMY_CONTENT = <<~TEXT {% raw %}
+      > This page was created by a Generator plugin. To **remove**
+      > this content, set `disable_onboarding_content: true` via front
+      > matter defaults in your configuration file
+      > ([refer below][fmd_reference]) and restart your local server.
+
+      [fmd_reference]: #managing-via-front-matter-defaults
+
+      ## About this page
+
+      This page is intended for showcasing your "category" named
+      **{{ page.basename }}**.
+
+      To list all posts / documents linked to the category
+      {{ page.basename }} as registered under this site, loop through
+      `page.linked_docs` in your layout. For example:
+
+      {% comment %}
+        ATTENTION!
+        Insert "Liquid raw opening tag" here, to disable Liquid
+        processing in examples below and then consecutively insert the
+        associated "Liquid endraw closing tag" right after the examples
+        to re-enable Liquid processing.
+      {% endcomment %}
+      ```html
+      <h2>Posts / documents under category {{ page.basename }}</h2>
+      <ul>
+      {% for doc in page.linked_docs %}
+        <li><a href="{{ doc.url }}">{{ doc.title }}</a></li>
+      {% endfor %}
+      </ul>
+      ```
+
+      To view all accessible attributes available for current page, use
+      the `inspect` filter:
+      ```
+      {{ page | inspect }}
+      ```
+
+      ## Managing via Front Matter Defaults
+
+      This page has been designed to be managed via your configuration
+      file using front matter defaults.
+      Every such category-page has been assigned a type:
+      `category_pages`. Use the type to assign / alter various front
+      matter attributes like `layout`, `permalink`, etc. For example:
+      ```yaml
+      # _config.yml
+
+      defaults:
+        - scope:
+            type: category_pages # select all category pages
+          values:
+            layout: category_page
+            permalink: categories/:category/
+      ```
+      {% endraw %}
+    TEXT
+    private_constant :DUMMY_CONTENT
   end
-  #
   # ------------------------ END VIRTUAL PAGE -------------------------
 end
 ```
 
 The generated pages since designed to be managed via front matter defaults, the following example will collect all generated pages with type,
-`:categories` and do two things:
+`:category_pages` and do two things:
 * assign a layout named `category_page` to all of them.
 * configure the destination to be within a directory named `categories` i.e. of the pattern `_site/categories/<category_name>/index.html`. The
 destination may be changed to `_site/categories/<category_name>.html` by using `permalink: categories/:category:output_ext` instead.
@@ -207,7 +272,7 @@ destination may be changed to `_site/categories/<category_name>.html` by using `
 
 defaults:
   - scope:
-      type: categories  # select all category pages
+      type: category_pages  # select all category pages
     values:
       layout: category_page
       permalink: categories/:category/
