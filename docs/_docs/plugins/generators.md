@@ -53,6 +53,8 @@ name to the `plugins_dir` key in the configuration file.
 
 ## Examples
 
+### Modifying Existing Resources
+
 In the following example, the generator will inject values computed at build time for template variables. The template named `reading.html`
 has two undefined variables `ongoing` and `done` that will be defined or assigned a value when the generator runs:
 
@@ -74,6 +76,13 @@ module Reading
   end
 end
 ```
+
+With the advent of [hooks]({{ 'docs/plugins/hooks/' | relative_url }}) in Jekyll 3, the above use of generators may be replicated easily
+by one of the `:pre_render` hooks.
+
+### Generating New Resources
+
+#### Advanced Example
 
 The following example is a more complex, advanced-level generator that generates new pages. To fully wrap one's head around the implementation
 as a whole, it would be best (but not a requirement) to be acquainted with the implementation of `Jekyll::Page` before proceeding ahead.
