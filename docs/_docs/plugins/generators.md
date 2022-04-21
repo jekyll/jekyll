@@ -132,8 +132,7 @@ module SamplePlugin
     def initialize(site, category, posts)
       @site     = site          # the current site instance.
       @basename = category      # filename without the extension.
-      @ext      = '.html'         # Markdown extension so that this
-                                #   page gets converted into HTML.
+      @ext      = '.html'       # Extension of virtual page.
 
       # The `@dir` and `@name` defined below will be used by Jekyll
       # to construct the `relative_path` attribute automatically at
