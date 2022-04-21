@@ -79,10 +79,7 @@ The following example is a more complex, advanced-level generator that generates
 as a whole, it would be best (but not a requirement) to be acquainted with the implementation of `Jekyll::Page` before proceeding ahead.
 
 In this example, the aim of the generator is to create **a page** for each category registered in the `site`. The pages are virtual i.e.
-created at runtime. So their content, front matter and other attributes ideally need to be designed by the plugin itself. However, since a
-plugin cannot determine the presentational aspects of the render (the desired HTML) which is primarily dictated by the site's theme, the
-example plugin will only provide the backend data (`page.linked_docs`) that is expected to be consumed by the user's Liquid template.<br/>
-In other words, *the generated pages will be empty* unless linked to a layout (which is outside the scope of current document.)
+created at runtime. So their content, front matter and other attributes ideally need to be designed by the plugin itself.
 * The pages are *intended* to render a list of all documents under a given category. So the crux of the generator will be to loop through
 `site.categories` and initialize new *objects*, one per registered category.
 * Having the ability to configure the pages via [front matter defaults](/docs/configuration/front-matter-defaults/) would be awesome! So
