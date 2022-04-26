@@ -157,7 +157,7 @@ module Jekyll
           Addressable::URI.parse(url)
           true
         # Addressable::URI#parse only raises a TypeError
-        # https://git.io/vFfbx
+        # https://github.com/sporkmonger/addressable/blob/0a0e96acb17225f9b1c9cab0bad332b448934c9a/lib/addressable/uri.rb#L103
         rescue TypeError
           Jekyll.logger.warn "Warning:", "The site URL does not seem to be valid, "\
               "check the value of `url` in your config file."
