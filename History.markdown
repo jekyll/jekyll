@@ -66,6 +66,7 @@
   * Improve document about Github Actions section (#8853)
   * Update permalinks.md  (#9017)
   * Add clarity to docs on permalinks placeholders and builtins (#8995)
+  * Remove Ionic Framework site from showcase (#9057)
 
 ### Bug Fixes
 
