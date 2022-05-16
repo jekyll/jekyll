@@ -292,13 +292,6 @@
     - software
     - marketing-site
 
-- name: Ionic Framework
-  url: https://ionicframework.com/
-  image: ionic-framework.png
-  categories:
-    - software
-    - marketing-site
-
 - name: Spotify for Developers
   url: https://developer.spotify.com
   image: spotify-developers.png
