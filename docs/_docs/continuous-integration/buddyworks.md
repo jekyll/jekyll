@@ -57,4 +57,4 @@ This entire guide is open-source. Go ahead and [edit it][jekyll-docs-ci-buddy] i
 
 [jekyll-docs-ci-buddy]: https://github.com/jekyll/jekyll/edit/master/docs/_docs/continuous-integration/buddyworks.md
 [jekyll-help]: https://jekyllrb.com/help/
-[buddy-forum]: http://forum.buddy.works/
+[buddy-forum]: https://forum.buddy.works/

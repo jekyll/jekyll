@@ -2,7 +2,7 @@
 
 This issue is reserved for people who never contributed to Open Source before. We know that the process of creating a pull request is the biggest barrier for new contributors. This issue is for you 💝
 
-[About First Timers Only](http://www.firsttimersonly.com/).
+[About First Timers Only](https://www.firsttimersonly.com/).
 
 ### 🤔 What you will need to know.
 
