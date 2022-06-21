@@ -7,7 +7,7 @@ In addition to the [built-in variables]({{'/docs/variables/' | relative_url }}) 
 you can specify your own custom data that can be accessed via the [Liquid
 templating system](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers).
 
-Jekyll supports loading data from [YAML](http://yaml.org/), [JSON](http://www.json.org/), [CSV](https://en.wikipedia.org/wiki/Comma-separated_values), and [TSV](https://en.wikipedia.org/wiki/Tab-separated_values) files located in the `_data` directory.
+Jekyll supports loading data from [YAML](https://yaml.org), [JSON](https://www.json.org/json-en.html), [CSV](https://en.wikipedia.org/wiki/Comma-separated_values), and [TSV](https://en.wikipedia.org/wiki/Tab-separated_values) files located in the `_data` directory.
 Note that CSV and TSV files *must* contain a header row.
 
 This powerful feature allows you to avoid repetition in your templates and to

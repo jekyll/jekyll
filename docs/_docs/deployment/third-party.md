@@ -35,9 +35,9 @@ The [Jekyll hosting tutorial](https://www.keycdn.com/support/jekyll-hosting) pro
 
 ## Kickster
 
-Use [Kickster](http://kickster.nielsenramon.com/) for automated deploys to GitHub Pages when using unsupported plugins on GitHub Pages.
+Use [Kickster](https://kickster.nielsenramon.com/) for automated deploys to GitHub Pages when using unsupported plugins on GitHub Pages.
 
-Kickster provides a basic Jekyll project setup packed with web best practises and useful optimization tools increasing your overall project quality. Kickster ships with automated and worry-free deployment scripts for GitHub Pages.
+Kickster provides a basic Jekyll project setup packed with web best practices and useful optimization tools increasing your overall project quality. Kickster ships with automated and worry-free deployment scripts for GitHub Pages.
 
 Install the Kickster gem and you are good to go. More documentation can here found [here](https://github.com/nielsenramon/kickster#kickster). If you do not want to use the gem or start a new project you can just copy paste the deployment scripts for [Travis CI](https://github.com/nielsenramon/kickster/tree/master/snippets/travis) or [Circle CI](https://github.com/nielsenramon/kickster#automated-deployment-with-circle-ci).
 
