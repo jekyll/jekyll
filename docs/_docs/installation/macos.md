@@ -63,7 +63,7 @@ automatically use `chruby`:
 ```sh
 echo "source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh" >> ~/.zshrc
 echo "source $(brew --prefix)/opt/chruby/share/chruby/auto.sh" >> ~/.zshrc
-echo "chruby ruby-{{ site.data.ruby.current_version }}" >> ~/.zshrc
+echo "chruby ruby-{{ site.data.ruby.current_version }}" >> ~/.zshrc # run 'chruby' to see actual version
 ```
 
 If you're using Bash, replace `.zshrc` with `.bash_profile`. If you're not sure, 
