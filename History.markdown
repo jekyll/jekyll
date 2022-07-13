@@ -69,6 +69,7 @@
   * Remove Ionic Framework site from showcase (#9057)
   * Windows: describe which option to choose (#9049)
   * Improve links (http -&gt; https) (#9064)
+  * Update ruby version for macos guide (#9086)
 
 ### Bug Fixes
 
