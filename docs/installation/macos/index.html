@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2022-06-20T20:36:20-07:00" />
+<meta property="article:published_time" content="2022-07-13T16:49:57-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Jekyll on macOS" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-06-20T20:36:20-07:00","datePublished":"2022-06-20T20:36:20-07:00","description":"Supported macOS versions","headline":"Jekyll on macOS","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/installation/macos/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/installation/macos/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-07-13T16:49:57-07:00","datePublished":"2022-07-13T16:49:57-07:00","description":"Supported macOS versions","headline":"Jekyll on macOS","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/installation/macos/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/installation/macos/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -180,7 +180,7 @@ automatically use <code class="language-plaintext highlighter-rouge">chruby</cod
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"source </span><span class="si">$(</span>brew <span class="nt">--prefix</span><span class="si">)</span><span class="s2">/opt/chruby/share/chruby/chruby.sh"</span> <span class="o">&gt;&gt;</span> ~/.zshrc
 <span class="nb">echo</span> <span class="s2">"source </span><span class="si">$(</span>brew <span class="nt">--prefix</span><span class="si">)</span><span class="s2">/opt/chruby/share/chruby/auto.sh"</span> <span class="o">&gt;&gt;</span> ~/.zshrc
-<span class="nb">echo</span> <span class="s2">"chruby ruby-3.1.1"</span> <span class="o">&gt;&gt;</span> ~/.zshrc
+<span class="nb">echo</span> <span class="s2">"chruby ruby-3.1.2"</span> <span class="o">&gt;&gt;</span> ~/.zshrc <span class="c"># run 'chruby' to see actual version</span>
 </code></pre></div></div>
 
 <p>If you’re using Bash, replace <code class="language-plaintext highlighter-rouge">.zshrc</code> with <code class="language-plaintext highlighter-rouge">.bash_profile</code>. If you’re not sure, 
@@ -192,7 +192,7 @@ read this external guide to
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruby <span class="nt">-v</span>
 </code></pre></div></div>
 
-<p>It should show ruby 3.1.1p18 (2022-02-18 revision 53f5fc4236) or a newer version.</p>
+<p>It should show ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) or a newer version.</p>
 
 <p>Next, read that same external guide for important notes about 
 <a href="https://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/#how-to-install-different-versions-of-ruby-and-switch-between-them">setting and switching between Ruby versions with chruby</a>.</p>
