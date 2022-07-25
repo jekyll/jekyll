@@ -19,4 +19,4 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3
     - name: Check Spellings
-      uses: check-spelling/check-spelling@v0.0.19
+      uses: check-spelling/check-spelling@v0.0.20
