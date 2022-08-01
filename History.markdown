@@ -111,6 +111,7 @@
   * Stop testing with Rubies older than 2.7 on non-Windows  (#8955)
   * Bump actions/checkout from 2 to 3 (#8986)
   * Remove git.io shortlinks from repo (#9045)
+  * Bump rubocop to 1.32 (#9093)
 
 ### Minor Enhancements
 
