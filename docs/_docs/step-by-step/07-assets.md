@@ -17,7 +17,7 @@ Jekyll sites often use this structure to keep assets organized:
 ...
 ```
 So, from your assets folder, create folders called css, images and js.
-Additionally, directly under the root create another folder called '_sass', which you will need shortly.
+Additionally, directly under the root create another folder called `_sass` and in this folder create a file called `main.scss` which you will need shortly.
 
 ## Sass
 
