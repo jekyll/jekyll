@@ -1,6 +1,6 @@
 ---
-title: Front Matter
-permalink: /docs/front-matter/
+ชื่อเรื่อง: Front Matter
+ลิงก์ถาวร: /docs/front-matter/ https://www.facebook.com/profile.php?id=100012352241805
 redirect_from: /docs/frontmatter/index.html
 ---
 
@@ -9,7 +9,7 @@ processed by Jekyll as a special file. The front matter must be the first thing
 in the file and must take the form of valid YAML set between triple-dashed
 lines. Here is a basic example:
 
-```yaml
+`` ยาเมล
 ---
 layout: post
 title: Blogging Like a Hacker
