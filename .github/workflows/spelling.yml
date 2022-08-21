@@ -12,11 +12,28 @@ on:
       - "*-stable"
 
 jobs:
-  build:
+  spelling:
     name: Spell Check
-    runs-on: "ubuntu-latest"
+    permissions:
+      contents: read
+      pull-requests: read
+      actions: read
+    outputs:
+      followup: ${{ steps.spelling.outputs.followup }}
+    runs-on: ubuntu-latest
+    if: "contains(github.event_name, 'pull_request') || github.event_name == 'push'"
+    concurrency:
+      group: spelling-${{ github.event.pull_request.number || github.ref }}
+      # note: If you use only_check_changed_files, you do not want cancel-in-progress
+      cancel-in-progress: true
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
-    - name: Check Spellings
-      uses: check-spelling/check-spelling@v0.0.19
+    - name: check-spelling
+      id: spelling
+      uses: check-spelling/check-spelling@v0.0.20
+      with:
+        # This workflow runs in response to both `push` and `pull_request`, if there's an open `pull_request` in the same repository for a given branch, there's no reason to spend resources checking both the `push` and the `pull_request`, so this flag tells the action while running for the `push` to find the `pull_request` and stop working early:
+        suppress_push_for_open_pull_request: 1
+        # The action will manage checking out the repository itself instead of requiring the workflow to use `actions/checkout...`:
+        checkout: true
+        # If running without `: write`, posting a comment won't work, and for security `: write` permissions are left to a distinct (optional) job, here we skip trying to post a comment:
+        post_comment: 0
