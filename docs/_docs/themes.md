@@ -14,6 +14,7 @@ You can find and preview themes on different galleries:
 - [jekyllthemes.org](http://jekyllthemes.org/)
 - [jekyllthemes.io](https://jekyllthemes.io/)
 - [jekyll-themes.com](https://jekyll-themes.com/)
+- [ducor.net](https://www.ducor.net/)
 
 See also: [resources](/resources/).
 
