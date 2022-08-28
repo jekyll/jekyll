@@ -133,6 +133,14 @@ class TestCommandsServe < JekyllUnitTest
       assert_match(%r!&amp;mindelay=3!, content)
       assert_match(%r!&amp;maxdelay=1066!, content)
     end
+
+    should "apply the sleep delay option" do
+      skip_if_windows "EventMachine support on Windows is limited"
+      opts = serve(@standard_options.merge(
+        "livereload_sleep" => nil
+      ))
+      assert_equal(opts["livereload_sleep"], 1)
+    end
   end
 
   context "with a program" do

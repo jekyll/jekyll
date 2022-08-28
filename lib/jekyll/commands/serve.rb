@@ -39,6 +39,8 @@ module Jekyll
                                      "Maximum reload delay",],
           "livereload_port"      => ["--livereload-port [PORT]", Integer,
                                      "Port for LiveReload to listen on",],
+          "livereload_sleep"     => ["--livereload-sleep [SECONDS]", Integer,
+                                     "Auto-regeneration delay for LiveReload",],
         }.freeze
 
         DIRECTORY_INDEX = %w(
@@ -54,6 +56,7 @@ module Jekyll
 
         LIVERELOAD_PORT = 35_729
         LIVERELOAD_DIR = File.join(__dir__, "serve", "livereload_assets")
+        LIVERELOAD_SLP = 1
 
         attr_reader :mutex, :run_cond, :running
         alias_method :running?, :running
@@ -72,6 +75,7 @@ module Jekyll
 
             cmd.action do |_, opts|
               opts["livereload_port"] ||= LIVERELOAD_PORT
+              opts["livereload_sleep"] ||= LIVERELOAD_SLP if opts.key?("livereload_sleep")
               opts["serving"] = true
               opts["watch"]   = true unless opts.key?("watch")
 
@@ -130,11 +134,11 @@ module Jekyll
             end
           elsif %w(livereload_min_delay
                    livereload_max_delay
-                   livereload_ignore
-                   livereload_port).any? { |o| opts[o] }
-            Jekyll.logger.abort_with "--livereload-min-delay, "\
-               "--livereload-max-delay, --livereload-ignore, and "\
-               "--livereload-port require the --livereload option."
+                   livereload_ignore livereload_port
+                   livereload_sleep).any? { |o| opts[o] }
+            Jekyll.logger.abort_with "--livereload-min-delay, --livereload-max-delay, "\
+               "--livereload-ignore, --livereload-port, "\
+               "and --livereload-sleep require the --livereload option."
           end
         end
 
