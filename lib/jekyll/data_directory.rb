@@ -1,47 +1,55 @@
 # frozen_string_literal: true
 
 module Jekyll
+  # A class that behaves very similar to Ruby's `Hash` class yet different in how
+  # it is handled by Liquid. Almost all public methods delegate to the Hash object
+  # stored in the instance_variable `@metadata` to some degree.
   class DataDirectory
     # Delegate given (zero-arity) method(s) to the Hash object stored in instance
-    # variable `@meta`.
-    def self.delegate_to_meta(*symbols)
-      symbols.each { |sym| define_method(sym) { @meta.send(sym) } }
+    # variable `@metadata`.
+    # NOTE: Avoiding the use of `Forwardable` module's `def_delegators` for
+    # preventing unnecessary creation of interim objects on multiple calls.
+    def self.delegate_to_metadata(*symbols)
+      symbols.each { |sym| define_method(sym) { @metadata.send(sym) } }
     end
-    private_class_method :delegate_to_meta
+    private_class_method :delegate_to_metadata
 
-    delegate_to_meta :freeze, :inspect
+    delegate_to_metadata :freeze, :inspect
     attr_accessor :context
 
     def initialize
-      @meta = {}
+      @metadata = {}
     end
 
     def [](key)
-      @meta[key].tap do |value|
+      @metadata[key].tap do |value|
         value.context = context if value.respond_to?(:context=)
       end
     end
 
+    # `Hash#to_liquid` returns the Hash instance itself.
+    # Mimic that behavior by returning `self` instead of returning the `@metadata`
+    # variable value.
     def to_liquid
       self
     end
 
     def merge(other, &block)
-      merged_meta = @meta.merge(other, &block)
-      dup.tap { |d| d.instance_variable_set(:@meta, merged_meta) }
+      merged_metadata = @metadata.merge(other, &block)
+      dup.tap { |d| d.instance_variable_set(:@meta, merged_metadata) }
     end
 
     def merge!(other, &block)
-      @meta.merge!(other, &block)
+      @metadata.merge!(other, &block)
       self
     end
 
     def method_missing(method, *args, &block)
-      @meta.send(method, *args, &block)
+      @metadata.send(method, *args, &block)
     end
 
     def respond_to_missing?(method, *)
-      @meta.respond_to?(method)
+      @metadata.respond_to?(method)
     end
   end
 end
