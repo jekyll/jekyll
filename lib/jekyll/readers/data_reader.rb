@@ -6,7 +6,7 @@ module Jekyll
 
     def initialize(site, in_source_dir: nil)
       @site = site
-      @content = SiteData::Directory.new
+      @content = DataDirectory.new
       @entry_filter = EntryFilter.new(site)
       @in_source_dir = in_source_dir || @site.method(:in_source_dir)
       @source_dir = @in_source_dir.call("/")
@@ -45,10 +45,10 @@ module Jekyll
         next if @entry_filter.symlink?(path)
 
         if File.directory?(path)
-          read_data_to(path, data[sanitize_filename(entry)] = SiteData::Directory.new)
+          read_data_to(path, data[sanitize_filename(entry)] = DataDirectory.new)
         else
           key = sanitize_filename(File.basename(entry, ".*"))
-          data[key] = SiteData::File.new(site, path, read_data_file(path))
+          data[key] = DataFile.new(site, path, read_data_file(path))
         end
       end
     end

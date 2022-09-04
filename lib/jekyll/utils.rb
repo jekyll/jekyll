@@ -48,9 +48,9 @@ module Jekyll
 
     def mergable?(value)
       case value
-      when Hash, Drops::Drop, SiteData::Directory
+      when Hash, Drops::Drop, DataDirectory
         true
-      when SiteData::File
+      when DataFile
         mergable?(value.content)
       else
         false

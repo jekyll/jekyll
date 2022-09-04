@@ -2,7 +2,7 @@
 
 require "helper"
 
-class TestSiteDataDirectory < JekyllUnitTest
+class TestDataDirectory < JekyllUnitTest
   context "Data directory" do
     setup do
       @site = fixture_site
@@ -11,7 +11,7 @@ class TestSiteDataDirectory < JekyllUnitTest
 
     should "only mimic a Hash instance" do
       directory = @site.site_data
-      assert_equal Jekyll::SiteData::Directory, directory.class
+      assert_equal Jekyll::DataDirectory, directory.class
       refute directory.is_a?(Hash)
 
       copy = directory.dup
@@ -22,13 +22,13 @@ class TestSiteDataDirectory < JekyllUnitTest
       assert_equal "Hola!", copy["greetings"]
       refute copy["greetings"]["foo"]
 
-      frozen_dir = Jekyll::SiteData::Directory.new.freeze
+      frozen_dir = Jekyll::DataDirectory.new.freeze
       assert_raises(FrozenError) { frozen_dir["lorem"] = "ipsum" }
     end
 
     should "be mergable" do
-      alpha = Jekyll::SiteData::Directory.new
-      beta  = Jekyll::SiteData::Directory.new
+      alpha = Jekyll::DataDirectory.new
+      beta  = Jekyll::DataDirectory.new
 
       assert_equal "{}", alpha.inspect
       sample_data = { "foo" => "bar" }
