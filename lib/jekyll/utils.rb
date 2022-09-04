@@ -51,7 +51,7 @@ module Jekyll
       when Hash, Drops::Drop, DataDirectory
         true
       when DataFile
-        mergable?(value.content)
+        mergable?(value.data)
       else
         false
       end
