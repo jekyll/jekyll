@@ -36,7 +36,7 @@ module Jekyll
 
     def merge(other, &block)
       merged_metadata = @metadata.merge(other, &block)
-      dup.tap { |d| d.instance_variable_set(:@meta, merged_metadata) }
+      dup.tap { |d| d.instance_variable_set(:@metadata, merged_metadata) }
     end
 
     def merge!(other, &block)
