@@ -2,19 +2,19 @@
 
 require "helper"
 
-class TestDataDirectory < JekyllUnitTest
-  context "Data directory" do
+class TestDataHash < JekyllUnitTest
+  context "Data Hash" do
     setup do
       @site = fixture_site
       @site.read
     end
 
-    should "only mimic a Hash instance" do
-      directory = @site.site_data
-      assert_equal Jekyll::DataDirectory, directory.class
-      refute directory.is_a?(Hash)
+    should "only mimic a ::Hash instance" do
+      subject = @site.site_data
+      assert_equal Jekyll::DataHash, subject.class
+      refute subject.is_a?(Hash)
 
-      copy = directory.dup
+      copy = subject.dup
       assert copy["greetings"]["foo"]
       assert_includes copy.dig("greetings", "foo"), "Hello!"
 
@@ -22,13 +22,13 @@ class TestDataDirectory < JekyllUnitTest
       assert_equal "Hola!", copy["greetings"]
       refute copy["greetings"]["foo"]
 
-      frozen_dir = Jekyll::DataDirectory.new.freeze
-      assert_raises(FrozenError) { frozen_dir["lorem"] = "ipsum" }
+      frozen_data_hash = Jekyll::DataHash.new.freeze
+      assert_raises(FrozenError) { frozen_data_hash["lorem"] = "ipsum" }
     end
 
     should "be mergable" do
-      alpha = Jekyll::DataDirectory.new
-      beta  = Jekyll::DataDirectory.new
+      alpha = Jekyll::DataHash.new
+      beta  = Jekyll::DataHash.new
 
       assert_equal "{}", alpha.inspect
       sample_data = { "foo" => "bar" }
