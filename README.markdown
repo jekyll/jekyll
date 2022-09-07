@@ -3,12 +3,10 @@
 [![Gem Version](https://img.shields.io/gem/v/jekyll.svg)][ruby-gems]
 [![Linux Build Status](https://github.com/jekyll/jekyll/workflows/Continuous%20Integration/badge.svg)][ci-workflow]
 [![Windows Build status](https://img.shields.io/appveyor/ci/jekyll/jekyll/master.svg?label=Windows%20build)][appveyor]
-[![Security](https://hakiri.io/github/jekyll/jekyll/master.svg)][hakiri]
 [![Backers on Open Collective](https://opencollective.com/jekyll/backers/badge.svg)](#backers)
 [![Sponsors on Open Collective](https://opencollective.com/jekyll/sponsors/badge.svg)](#sponsors)
 
 [ruby-gems]: https://rubygems.org/gems/jekyll
-[hakiri]: https://hakiri.io/github/jekyll/jekyll/master
 [ci-workflow]: https://github.com/jekyll/jekyll/actions?query=workflow%3A%22Continuous+Integration%22+branch%3Amaster
 [appveyor]: https://ci.appveyor.com/project/jekyll/jekyll/branch/master
 
@@ -18,7 +16,7 @@ Jekyll is a simple, blog-aware, static site generator perfect for personal, proj
 
 Jekyll does what you tell it to do — no more, no less. It doesn't try to outsmart users by making bold assumptions, nor does it burden them with needless complexity and configuration. Put simply, Jekyll gets out of your way and allows you to concentrate on what truly matters: your content.
 
-See: https://jekyllrb.com/philosophy
+See: [https://jekyllrb.com/philosophy](https://jekyllrb.com/philosophy)
 
 ## Getting Started
 
@@ -26,11 +24,11 @@ See: https://jekyllrb.com/philosophy
 * Read up about its [Usage](https://jekyllrb.com/docs/usage/) and [Configuration](https://jekyllrb.com/docs/configuration/)
 * Take a gander at some existing [Sites](https://github.com/jekyll/jekyll/wiki/sites)
 * [Fork](https://github.com/jekyll/jekyll/fork) and [Contribute](https://jekyllrb.com/docs/contributing/) your own modifications
-* Have questions? Check out our official forum community [Jekyll Talk](https://talk.jekyllrb.com/) or [`#jekyll` on irc.freenode.net](https://botbot.me/freenode/jekyll/)
+* Have questions? Check out our official forum community [Jekyll Talk](https://talk.jekyllrb.com/) and [`#jekyll` Channel on Libera IRC](https://libera.chat)
 
 ## Diving In
 
-* [Migrate](http://import.jekyllrb.com/docs/home/) from your previous system
+* [Migrate](https://import.jekyllrb.com/docs/home/) from your previous system
 * Learn how [Front Matter](https://jekyllrb.com/docs/front-matter/) works
 * Put information on your site with [Variables](https://jekyllrb.com/docs/variables/)
 * Customize the [Permalinks](https://jekyllrb.com/docs/permalinks/) your posts are generated with
@@ -45,7 +43,7 @@ If you don't find the answer to your problem in our [docs](https://jekyllrb.com/
 ## Code of Conduct
 
 In order to have a more open and welcoming community, Jekyll adheres to a
-[code of conduct](CODE_OF_CONDUCT.markdown) adapted from the Ruby on Rails code of
+[code of conduct](https://jekyllrb.com/docs/conduct/) adapted from the Ruby on Rails code of
 conduct.
 
 Please adhere to this code of conduct in any interactions you have in the
@@ -58,28 +56,27 @@ these terms, please let one of our [core team members](https://jekyllrb.com/team
 ### Sponsors
 
 Support this project by becoming a sponsor. Your logo will show up in this README with a link to your website. [Become a sponsor!](https://opencollective.com/jekyll#sponsor)
-
-<a href="https://opencollective.com/jekyll/sponsor/0/website" target="_blank"><img src="https://opencollective.com/jekyll/sponsor/0/avatar.svg" /></a>
-<a href="https://opencollective.com/jekyll/sponsor/1/website" target="_blank"><img src="https://opencollective.com/jekyll/sponsor/1/avatar.svg" /></a>
-<a href="https://opencollective.com/jekyll/sponsor/2/website" target="_blank"><img src="https://opencollective.com/jekyll/sponsor/2/avatar.svg" /></a>
-<a href="https://opencollective.com/jekyll/sponsor/3/website" target="_blank"><img src="https://opencollective.com/jekyll/sponsor/3/avatar.svg" /></a>
-<a href="https://opencollective.com/jekyll/sponsor/4/website" target="_blank"><img src="https://opencollective.com/jekyll/sponsor/4/avatar.svg" /></a>
-<a href="https://opencollective.com/jekyll/sponsor/5/website" target="_blank"><img src="https://opencollective.com/jekyll/sponsor/5/avatar.svg" /></a>
-<a href="https://opencollective.com/jekyll/sponsor/6/website" target="_blank"><img src="https://opencollective.com/jekyll/sponsor/6/avatar.svg" /></a>
-<a href="https://opencollective.com/jekyll/sponsor/7/website" target="_blank"><img src="https://opencollective.com/jekyll/sponsor/7/avatar.svg" /></a>
-<a href="https://opencollective.com/jekyll/sponsor/8/website" target="_blank"><img src="https://opencollective.com/jekyll/sponsor/8/avatar.svg" /></a>
-<a href="https://opencollective.com/jekyll/sponsor/9/website" target="_blank"><img src="https://opencollective.com/jekyll/sponsor/9/avatar.svg" /></a>
+[![Jekyll Sponsor 0](https://opencollective.com/jekyll/sponsor/0/avatar.svg)](https://opencollective.com/jekyll/sponsor/0/website)
+[![Jekyll Sponsor 1](https://opencollective.com/jekyll/sponsor/1/avatar.svg)](https://opencollective.com/jekyll/sponsor/1/website)
+[![Jekyll Sponsor 2](https://opencollective.com/jekyll/sponsor/2/avatar.svg)](https://opencollective.com/jekyll/sponsor/2/website)
+[![Jekyll Sponsor 3](https://opencollective.com/jekyll/sponsor/3/avatar.svg)](https://opencollective.com/jekyll/sponsor/3/website)
+[![Jekyll Sponsor 4](https://opencollective.com/jekyll/sponsor/4/avatar.svg)](https://opencollective.com/jekyll/sponsor/4/website)
+[![Jekyll Sponsor 5](https://opencollective.com/jekyll/sponsor/5/avatar.svg)](https://opencollective.com/jekyll/sponsor/5/website)
+[![Jekyll Sponsor 6](https://opencollective.com/jekyll/sponsor/6/avatar.svg)](https://opencollective.com/jekyll/sponsor/6/website)
+[![Jekyll Sponsor 7](https://opencollective.com/jekyll/sponsor/7/avatar.svg)](https://opencollective.com/jekyll/sponsor/7/website)
+[![Jekyll Sponsor 8](https://opencollective.com/jekyll/sponsor/8/avatar.svg)](https://opencollective.com/jekyll/sponsor/8/website)
+[![Jekyll Sponsor 9](https://opencollective.com/jekyll/sponsor/9/avatar.svg)](https://opencollective.com/jekyll/sponsor/9/website)
 
 ### Contributors
 
 This project exists thanks to all the people who contribute.
-<a href="../../graphs/contributors"><img src="https://opencollective.com/jekyll/contributors.svg?width=890&button=false" /></a>
+[![Jekyll Contributors](https://opencollective.com/jekyll/contributors.svg?width=890&button=false)](../../graphs/contributors)
 
 ### Backers
 
 Thank you to all our backers! 🙏 [Become a backer](https://opencollective.com/jekyll#backer)
 
-<a href="https://opencollective.com/jekyll#backers" target="_blank"><img src="https://opencollective.com/jekyll/backers.svg?width=890" /></a>
+[![Jekyll Backers](https://opencollective.com/jekyll/backers.svg?width=890)](https://opencollective.com/jekyll#backers)
 
 ## License
 

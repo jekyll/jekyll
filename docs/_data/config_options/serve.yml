@@ -1,28 +1,28 @@
-- name: Local Server Port
+- name: Local server port
   description: Listen on the given port. The default is `4000`.
   option: "port: PORT"
   flag: "-P, --port PORT"
 
 
-- name: Local Server Hostname
+- name: Local server hostname
   description: Listen at the given hostname. The default is `localhost`.
   option: "host: HOSTNAME"
   flag: "-H, --host HOSTNAME"
 
 
-- name: Live Reload
+- name: Live reload
   description: Reload a page automatically on the browser when its content is edited.
   option: "livereload: BOOL"
   flag: "-l, --livereload"
 
 
-- name: Live Reload Ignore
+- name: Live reload ignore
   description: File glob patterns for LiveReload to ignore.
   option: "livereload_ignore: [ GLOB1,... ]"
   flag: "--livereload-ignore GLOB1[,GLOB2,...]"
 
 
-- name: Live Reload Min/Max Delay
+- name: Live reload min/max delay
   description: Minimum/Maximum delay before automatically reloading page.
   options:
     - "livereload_min_delay: SECONDS"
@@ -32,7 +32,7 @@
     - "--livereload-max-delay SECONDS"
 
 
-- name: Live Reload Port
+- name: Live reload port
   description: Port for LiveReload to listen on.
   flag: "--livereload-port PORT"
 
@@ -55,17 +55,17 @@
   flag: "--skip-initial-build"
 
 
-- name: Show Directory Listing
+- name: Show directory listing
   description: Show a directory listing instead of loading your index file.
   option: "show_dir_listing: BOOL"
   flag: "--show-dir-listing"
 
 
-- name: X.509 (SSL) Private Key
+- name: X.509 (SSL) private key
   description: "SSL Private Key, stored or symlinked in the site source."
   flag: "--ssl-key"
 
 
-- name: X.509 (SSL) Certificate
+- name: X.509 (SSL) certificate
   description: "SSL Public certificate, stored or symlinked in the site source."
   flag: "--ssl-cert"

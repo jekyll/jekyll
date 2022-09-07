@@ -23,7 +23,8 @@ We only cover RubyInstaller-2.4 and newer here. Older versions need to
    Use default options for installation.
 2. Run the `ridk install` step on the last stage of the installation wizard. This is needed for installing gems with native
    extensions. You can find additional information regarding this in the
-   [RubyInstaller Documentation](https://github.com/oneclick/rubyinstaller2#using-the-installer-on-a-target-system)
+   [RubyInstaller Documentation](https://github.com/oneclick/rubyinstaller2#using-the-installer-on-a-target-system).
+   From the options choose `MSYS2 and MINGW development tool chain`.
 3. Open a new command prompt window from the start menu, so that changes to the `PATH` environment variable becomes effective.
    Install Jekyll and Bundler using `gem install jekyll bundler`
 4. Check if Jekyll has been installed properly: `jekyll -v`
@@ -121,21 +122,13 @@ While 'new' blogs created with Jekyll v3.4 and greater, will have the following 
 sites *will* have to update their `Gemfile` (and installed gems) to enable development on Windows:
 
 ```ruby
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+# Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
+# and associated library.
+platforms :mingw, :x64_mingw, :mswin, :jruby do
+  gem "tzinfo", ">= 1", "< 3"
+  gem "tzinfo-data"
+end
 ```
-
-<div class="note warning">
-  <h5>TZInfo 2.0 incompatibility</h5>
-  <p>
-    Version 2.0 of the TZInfo library has introduced a change in how timezone offsets are calculated.
-    This will result in incorrect date and time for your posts when the site is built with Jekyll 3.x on Windows.
-  </p>
-  <p>
-    We therefore recommend that you lock the Timezone library to version 1.2 and above by listing
-    <code>gem 'tzinfo', '~> 1.2'</code> in your <code>Gemfile</code>.
-  </p>
-</div>
 
 ## Auto Regeneration
 

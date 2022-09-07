@@ -86,14 +86,10 @@ module Jekyll
     end
 
     # --
-    # NOTE: Pathutil#in_path? gets the realpath.
-    # @param [<Anything>] entry the entry you want to validate.
-    # Check if a path is outside of our given root.
+    # Check if given path is outside of current site's configured source directory.
     # --
     def symlink_outside_site_source?(entry)
-      !Pathutil.new(entry).in_path?(
-        site.in_source_dir
-      )
+      !File.realpath(entry).start_with?(site.in_source_dir)
     end
 
     # Check if an entry matches a specific pattern.

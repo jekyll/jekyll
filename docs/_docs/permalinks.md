@@ -229,7 +229,7 @@ Here's the full list of placeholders available:
       <td>
         <p>
             Title from the document’s filename. May be overridden via
-            the document’s <code>slug</code> front matter.
+            the document’s <code>slug</code> front matter. Preserves case from the source.
         </p>
       </td>
     </tr>
@@ -276,6 +276,14 @@ Here's the full list of placeholders available:
           Also Jekyll automatically parses out double slashes in the URLs,
           so if no categories are present, it will ignore this.
         </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:output_ext</code></p>
+      </td>
+      <td>
+        <p>Extension of the output file. (Included by default and usually unnecessary.)</p>
       </td>
     </tr>
   </tbody>
@@ -325,7 +333,10 @@ For posts, Jekyll also provides the following built-in styles for convenience:
         <small>{% include docs_version_badge.html version="4.0" %}</small>
       </td>
       <td>
-        <p><code>/:categories/:year/W:week/:short_day/:title:output_ext</code></p>
+        <p>
+          <code>/:categories/:year/W:week/:short_day/:title:output_ext</code><br/>
+          <small>(<code>W</code> will be prefixed to the value of <code>:week</code>)</small>
+        </p>
       </td>
     </tr>
     <tr>
@@ -409,6 +420,7 @@ Collections have the following placeholders available:
           variable value if any is present in the document; if none is
           defined then <code>:title</code> will be equivalent to
           <code>:name</code>, aka the slug generated from the filename.
+          Preserves case from the source.
         </p>
       </td>
     </tr>

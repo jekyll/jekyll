@@ -1,5 +1,5 @@
 - name: Tom Preston Werner Blog
-  url: http://tom.preston-werner.com/
+  url: https://tom.preston-werner.com/
   image: tom-preston-werner.png
   categories:
     - personal
@@ -26,7 +26,7 @@
     - marketing-site
 
 - name: Vesterheim Norwegian-American Museum
-  url: http://vesterheim.org/
+  url: https://vesterheim.org/
   image: vesterheim.png
   categories:
     - marketing-site
@@ -139,7 +139,7 @@
     - marketing-site
 
 - name: Rehan Butt
-  url: http://rehanbutt.com/
+  url: https://rehanbutt.com/
   image: rehn.png
   categories:
     - personal
@@ -178,19 +178,19 @@
     - other
 
 - name: Digital Democracy
-  url: http://www.digital-democracy.org/
+  url: https://www.digital-democracy.org/
   image: digital-democracy.png
   categories:
     - other
 
 - name: HTML Reference
-  url: http://htmlreference.io/
+  url: https://htmlreference.io/
   image: htmlreference.png
   categories:
     - documentation
 
 - name: CSS Reference
-  url: http://cssreference.io/
+  url: https://cssreference.io/
   image: cssreference.png
   categories:
     - documentation
@@ -272,7 +272,7 @@
     - documentation
 
 - name: Yeoman
-  url: http://yeoman.io/
+  url: https://yeoman.io/
   image: yeoman.png
   categories:
     - open-source
@@ -288,13 +288,6 @@
 - name: frame.ai
   url: https://frame.ai/
   image: frame-ai.png
-  categories:
-    - software
-    - marketing-site
-
-- name: Ionic Framework
-  url: https://ionicframework.com/
-  image: ionic-framework.png
   categories:
     - software
     - marketing-site
@@ -315,7 +308,7 @@
     - marketing-site
 
 - name: Ruby on Rails
-  url: http://rubyonrails.org/
+  url: https://rubyonrails.org/
   image: ruby-on-rails.png
   categories:
     - marketing-site
