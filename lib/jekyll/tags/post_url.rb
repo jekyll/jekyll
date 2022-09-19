@@ -86,11 +86,11 @@ module Jekyll
         site.posts.docs.each do |document|
           next unless @post.deprecated_equality document
 
-          Jekyll::Deprecator.deprecation_message "A call to "\
-            "'{% post_url #{@post.name} %}' did not match " \
-            "a post using the new matching method of checking name " \
-            "(path-date-slug) equality. Please make sure that you " \
-            "change this tag to match the post's name exactly."
+          Jekyll::Deprecator.deprecation_message(
+            "A call to '{% post_url #{@post.name} %}' did not match a post using the new " \
+            "matching method of checking name (path-date-slug) equality. Please make sure " \
+            "that you change this tag to match the post's name exactly."
+          )
           return relative_url(document)
         end
 

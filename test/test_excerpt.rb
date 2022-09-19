@@ -146,7 +146,7 @@ class TestExcerpt < JekyllUnitTest
         end
 
         should "contain all refs at the bottom of the page" do
-          (0..3).each do |i|
+          4.times do |i|
             assert_match "[link_#{i}]: www.example.com/#{i}", @excerpt.content
           end
         end
@@ -159,7 +159,7 @@ class TestExcerpt < JekyllUnitTest
           @rendered_post = @post.dup
           do_render(@rendered_post)
           output = @rendered_post.data["excerpt"].output
-          (0..3).each do |i|
+          4.times do |i|
             assert_includes output, "<a href=\"www.example.com/#{i}\">"
           end
         end

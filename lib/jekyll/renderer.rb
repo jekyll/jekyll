@@ -179,7 +179,7 @@ module Jekyll
       return unless invalid_layout?(layout)
 
       Jekyll.logger.warn "Build Warning:", "Layout '#{document.data["layout"]}' requested " \
-        "in #{document.relative_path} does not exist."
+                                           "in #{document.relative_path} does not exist."
     end
 
     # Render layout content into document.output

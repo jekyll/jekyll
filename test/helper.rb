@@ -166,7 +166,7 @@ class JekyllUnitTest < Minitest::Test
   def directory_with_contents(path)
     FileUtils.rm_rf(path)
     FileUtils.mkdir(path)
-    File.open("#{path}/index.html", "w") { |f| f.write("I was previously generated.") }
+    File.write("#{path}/index.html", "I was previously generated.")
   end
 
   def with_env(key, value)

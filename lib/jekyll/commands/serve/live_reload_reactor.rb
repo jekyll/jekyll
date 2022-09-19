@@ -110,7 +110,7 @@ module Jekyll
 
         def log_error(error)
           Jekyll.logger.error "LiveReload experienced an error. " \
-            "Run with --trace for more information."
+                              "Run with --trace for more information."
           raise error
         end
       end
