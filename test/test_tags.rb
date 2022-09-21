@@ -1181,7 +1181,7 @@ class TestTags < JekyllUnitTest
                       "safe"        => true)
         end
         assert_match(
-          "Ensure it exists in one of those directories and is not a symlink "\
+          "Ensure it exists in one of those directories and is not a symlink " \
           "as those are not allowed in safe mode.",
           ex.message
         )

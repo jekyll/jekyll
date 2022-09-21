@@ -59,8 +59,8 @@ module Jekyll
 
         def deprecated_relative_permalinks(site)
           if site.config["relative_permalinks"]
-            Jekyll::Deprecator.deprecation_message "Your site still uses relative permalinks," \
-                                                   " which was removed in Jekyll v3.0.0."
+            Jekyll::Deprecator.deprecation_message "Your site still uses relative permalinks, " \
+                                                   "which was removed in Jekyll v3.0.0."
             true
           end
         end

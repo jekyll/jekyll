@@ -22,6 +22,7 @@ class TestDoctorCommand < JekyllUnitTest
       assert_equal "", output
     end
 
+    # rubocop:disable Layout/LineLength
     should "return warning for pages only differing by case" do
       @site = Site.new(Jekyll.configuration(
                          "source"      => File.join(source_dir, "/_urls_differ_by_case_invalid"),
@@ -33,8 +34,9 @@ class TestDoctorCommand < JekyllUnitTest
         assert ret
       end
       assert_includes output, "Warning: The following URLs only differ by case. On a case-" \
-                              "insensitive file system one of the URLs will be overwritten by the "\
+                              "insensitive file system one of the URLs will be overwritten by the " \
                               "other: #{dest_dir}/about/index.html, #{dest_dir}/About/index.html"
     end
+    # rubocop:enable Layout/LineLength
   end
 end

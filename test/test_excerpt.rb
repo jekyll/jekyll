@@ -111,8 +111,7 @@ class TestExcerpt < JekyllUnitTest
     context "#content" do
       context "before render" do
         should "be the first paragraph of the page" do
-          expected = "First paragraph with [link ref][link].\n\n[link]: "\
-                     "https://jekyllrb.com/"
+          expected = "First paragraph with [link ref][link].\n\n[link]: https://jekyllrb.com/"
           assert_equal expected, @excerpt.content
         end
 
@@ -129,7 +128,7 @@ class TestExcerpt < JekyllUnitTest
         end
 
         should "be the first paragraph of the page" do
-          expected = "<p>First paragraph with <a href=\"https://jekyllrb.com/\">link "\
+          expected = "<p>First paragraph with <a href=\"https://jekyllrb.com/\">link " \
                      "ref</a>.</p>\n\n"
           assert_equal expected, @extracted_excerpt.output
         end

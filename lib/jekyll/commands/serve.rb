@@ -21,11 +21,11 @@ module Jekyll
           "ssl_key"              => ["--ssl-key [KEY]", "X.509 (SSL) Private Key."],
           "port"                 => ["-P", "--port [PORT]", "Port to listen on"],
           "show_dir_listing"     => ["--show-dir-listing",
-                                     "Show a directory listing instead of loading" \
-                                     " your index file.",],
+                                     "Show a directory listing instead of loading " \
+                                     "your index file.",],
           "skip_initial_build"   => ["skip_initial_build", "--skip-initial-build",
-                                     "Skips the initial site build which occurs before" \
-                                     " the server is started.",],
+                                     "Skips the initial site build which occurs before " \
+                                     "the server is started.",],
           "livereload"           => ["-l", "--livereload",
                                      "Use LiveReload to automatically refresh browsers",],
           "livereload_ignore"    => ["--livereload-ignore ignore GLOB1[,GLOB2[,...]]",
@@ -113,8 +113,8 @@ module Jekyll
         def validate_options(opts)
           if opts["livereload"]
             if opts["detach"]
-              Jekyll.logger.warn "Warning:", "--detach and --livereload are mutually exclusive." \
-                                             " Choosing --livereload"
+              Jekyll.logger.warn "Warning:", "--detach and --livereload are mutually exclusive. " \
+                                             "Choosing --livereload"
               opts["detach"] = false
             end
             if opts["ssl_cert"] || opts["ssl_key"]
@@ -278,9 +278,8 @@ module Jekyll
             end
 
             Process.detach(pid)
-            Jekyll.logger.info "Server detached with pid '#{pid}'.", \
-                               "Run `pkill -f jekyll' or `kill -9 #{pid}'" \
-                               " to stop the server."
+            Jekyll.logger.info "Server detached with pid '#{pid}'.",
+                               "Run `pkill -f jekyll' or `kill -9 #{pid}' to stop the server."
           else
             t = Thread.new { server.start }
             trap("INT") { server.shutdown }
