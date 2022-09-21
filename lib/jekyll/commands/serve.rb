@@ -21,11 +21,11 @@ module Jekyll
           "ssl_key"              => ["--ssl-key [KEY]", "X.509 (SSL) Private Key."],
           "port"                 => ["-P", "--port [PORT]", "Port to listen on"],
           "show_dir_listing"     => ["--show-dir-listing",
-                                     "Show a directory listing instead of loading" \
-                                     " your index file.",],
+                                     "Show a directory listing instead of loading " \
+                                     "your index file.",],
           "skip_initial_build"   => ["skip_initial_build", "--skip-initial-build",
-                                     "Skips the initial site build which occurs before" \
-                                     " the server is started.",],
+                                     "Skips the initial site build which occurs before " \
+                                     "the server is started.",],
           "livereload"           => ["-l", "--livereload",
                                      "Use LiveReload to automatically refresh browsers",],
           "livereload_ignore"    => ["--livereload-ignore ignore GLOB1[,GLOB2[,...]]",
@@ -113,8 +113,8 @@ module Jekyll
         def validate_options(opts)
           if opts["livereload"]
             if opts["detach"]
-              Jekyll.logger.warn "Warning:", "--detach and --livereload are mutually exclusive." \
-                                 " Choosing --livereload"
+              Jekyll.logger.warn "Warning:", "--detach and --livereload are mutually exclusive. " \
+                                             "Choosing --livereload"
               opts["detach"] = false
             end
             if opts["ssl_cert"] || opts["ssl_key"]
@@ -132,9 +132,9 @@ module Jekyll
                    livereload_max_delay
                    livereload_ignore
                    livereload_port).any? { |o| opts[o] }
-            Jekyll.logger.abort_with "--livereload-min-delay, "\
-               "--livereload-max-delay, --livereload-ignore, and "\
-               "--livereload-port require the --livereload option."
+            Jekyll.logger.abort_with "--livereload-min-delay, --livereload-max-delay, " \
+                                     "--livereload-ignore, and --livereload-port require " \
+                                     "the --livereload option."
           end
         end
 
@@ -174,7 +174,8 @@ module Jekyll
         # Do a base pre-setup of WEBRick so that everything is in place
         # when we get ready to party, checking for an setting up an error page
         # and making sure our destination exists.
-
+        #
+        # rubocop:disable Security/IoMethods
         def setup(destination)
           require_relative "serve/servlet"
 
@@ -188,6 +189,7 @@ module Jekyll
             end
           end
         end
+        # rubocop:enable Security/IoMethods
 
         def webrick_opts(opts)
           opts = {
@@ -263,8 +265,7 @@ module Jekyll
           return system "xdg-open", address if Utils::Platforms.linux?
           return system "open", address if Utils::Platforms.osx?
 
-          Jekyll.logger.error "Refusing to launch browser; " \
-            "Platform launcher unknown."
+          Jekyll.logger.error "Refusing to launch browser. Platform launcher unknown."
         end
 
         # Keep in our area with a thread or detach the server as requested
@@ -277,9 +278,8 @@ module Jekyll
             end
 
             Process.detach(pid)
-            Jekyll.logger.info "Server detached with pid '#{pid}'.", \
-                               "Run `pkill -f jekyll' or `kill -9 #{pid}'" \
-                               " to stop the server."
+            Jekyll.logger.info "Server detached with pid '#{pid}'.",
+                               "Run `pkill -f jekyll' or `kill -9 #{pid}' to stop the server."
           else
             t = Thread.new { server.start }
             trap("INT") { server.shutdown }

@@ -105,7 +105,7 @@ module Jekyll
         converter.convert output
       rescue StandardError => e
         Jekyll.logger.error "Conversion error:",
-                            "#{converter.class} encountered an error while "\
+                            "#{converter.class} encountered an error while " \
                             "converting '#{document.relative_path}':"
         Jekyll.logger.error("", e.to_s)
         raise e
@@ -179,7 +179,7 @@ module Jekyll
       return unless invalid_layout?(layout)
 
       Jekyll.logger.warn "Build Warning:", "Layout '#{document.data["layout"]}' requested " \
-        "in #{document.relative_path} does not exist."
+                                           "in #{document.relative_path} does not exist."
     end
 
     # Render layout content into document.output

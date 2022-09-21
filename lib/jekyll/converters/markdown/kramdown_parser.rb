@@ -1,4 +1,4 @@
-# Frozen-string-literal: true
+# frozen_string_literal: true
 
 module Kramdown
   # A Kramdown::Document subclass meant to optimize memory usage from initializing

@@ -450,10 +450,10 @@ class TestTags < JekyllUnitTest
     end
 
     should "throw a deprecation warning" do
-      deprecation_warning = "       Deprecation: A call to "\
-        "'{% post_url 2008-11-21-nested %}' did not match a post using the new matching "\
-        "method of checking name (path-date-slug) equality. Please make sure that you "\
-        "change this tag to match the post's name exactly."
+      deprecation_warning = "       Deprecation: A call to '{% post_url 2008-11-21-nested %}' " \
+                            "did not match a post using the new matching method of checking " \
+                            "name (path-date-slug) equality. Please make sure that you change " \
+                            "this tag to match the post's name exactly."
       assert_includes Jekyll.logger.messages, deprecation_warning
     end
   end
@@ -693,7 +693,7 @@ class TestTags < JekyllUnitTest
   context "include tag with parameters" do
     context "with symlink'd include" do
       should "not allow symlink includes" do
-        File.open("tmp/pages-test", "w") { |file| file.write("SYMLINK TEST") }
+        File.write("tmp/pages-test", "SYMLINK TEST")
         assert_raises IOError do
           content = <<~CONTENT
             ---
@@ -1142,7 +1142,7 @@ class TestTags < JekyllUnitTest
 
     context "with symlink'd include" do
       should "not allow symlink includes" do
-        File.open("tmp/pages-test", "w") { |file| file.write("SYMLINK TEST") }
+        File.write("tmp/pages-test", "SYMLINK TEST")
         assert_raises IOError do
           content = <<~CONTENT
             ---
@@ -1181,7 +1181,7 @@ class TestTags < JekyllUnitTest
                       "safe"        => true)
         end
         assert_match(
-          "Ensure it exists in one of those directories and is not a symlink "\
+          "Ensure it exists in one of those directories and is not a symlink " \
           "as those are not allowed in safe mode.",
           ex.message
         )

@@ -53,14 +53,14 @@ module Jekyll
                              "Detected '_posts' directory outside custom `collections_dir`!"
           Jekyll.logger.warn "",
                              "Please move '#{posts_at_root}' into the custom directory at " \
-            "'#{site.in_source_dir(site.config["collections_dir"])}'"
+                             "'#{site.in_source_dir(site.config["collections_dir"])}'"
           false
         end
 
         def deprecated_relative_permalinks(site)
           if site.config["relative_permalinks"]
-            Jekyll::Deprecator.deprecation_message "Your site still uses relative permalinks," \
-                                                   " which was removed in Jekyll v3.0.0."
+            Jekyll::Deprecator.deprecation_message "Your site still uses relative permalinks, " \
+                                                   "which was removed in Jekyll v3.0.0."
             true
           end
         end
@@ -105,9 +105,9 @@ module Jekyll
             next unless real_urls.uniq.size > 1
 
             urls_only_differ_by_case = true
-            Jekyll.logger.warn "Warning:", "The following URLs only differ" \
-              " by case. On a case-insensitive file system one of the URLs" \
-              " will be overwritten by the other: #{real_urls.join(", ")}"
+            Jekyll.logger.warn "Warning:", "The following URLs only differ by case. On a " \
+                                           "case-insensitive file system one of the URLs will be " \
+                                           "overwritten by the other: #{real_urls.join(", ")}"
           end
           urls_only_differ_by_case
         end
@@ -148,8 +148,8 @@ module Jekyll
         def url_exists?(url)
           return true unless url.nil? || url.empty?
 
-          Jekyll.logger.warn "Warning:", "You didn't set an URL in the config file, "\
-              "you may encounter problems with some plugins."
+          Jekyll.logger.warn "Warning:", "You didn't set an URL in the config file, you may " \
+                                         "encounter problems with some plugins."
           false
         end
 
@@ -159,16 +159,16 @@ module Jekyll
         # Addressable::URI#parse only raises a TypeError
         # https://github.com/sporkmonger/addressable/blob/0a0e96acb17225f9b1c9cab0bad332b448934c9a/lib/addressable/uri.rb#L103
         rescue TypeError
-          Jekyll.logger.warn "Warning:", "The site URL does not seem to be valid, "\
-              "check the value of `url` in your config file."
+          Jekyll.logger.warn "Warning:", "The site URL does not seem to be valid, " \
+                                         "check the value of `url` in your config file."
           false
         end
 
         def url_absolute(url)
           return true if url.is_a?(String) && Addressable::URI.parse(url).absolute?
 
-          Jekyll.logger.warn "Warning:", "Your site URL does not seem to be absolute, "\
-              "check the value of `url` in your config file."
+          Jekyll.logger.warn "Warning:", "Your site URL does not seem to be absolute, " \
+                                         "check the value of `url` in your config file."
           false
         end
       end

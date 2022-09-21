@@ -104,8 +104,8 @@ module Jekyll
           "class=\"language-#{@lang.to_s.tr("+", "-")}\"",
           "data-lang=\"#{@lang}\"",
         ].join(" ")
-        "<figure class=\"highlight\"><pre><code #{code_attributes}>"\
-        "#{code.chomp}</code></pre></figure>"
+        "<figure class=\"highlight\"><pre><code #{code_attributes}>" \
+          "#{code.chomp}</code></pre></figure>"
       end
     end
   end

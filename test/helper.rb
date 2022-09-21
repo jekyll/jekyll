@@ -105,8 +105,7 @@ class JekyllUnitTest < Minitest::Test
   end
 
   def mocks_expect(*args)
-    RSpec::Mocks::ExampleMethods::ExpectHost.instance_method(:expect)\
-      .bind(self).call(*args)
+    RSpec::Mocks::ExampleMethods::ExpectHost.instance_method(:expect).bind(self).call(*args)
   end
 
   def before_setup
@@ -166,7 +165,7 @@ class JekyllUnitTest < Minitest::Test
   def directory_with_contents(path)
     FileUtils.rm_rf(path)
     FileUtils.mkdir(path)
-    File.open("#{path}/index.html", "w") { |f| f.write("I was previously generated.") }
+    File.write("#{path}/index.html", "I was previously generated.")
   end
 
   def with_env(key, value)
