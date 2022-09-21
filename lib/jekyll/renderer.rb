@@ -105,7 +105,7 @@ module Jekyll
         converter.convert output
       rescue StandardError => e
         Jekyll.logger.error "Conversion error:",
-                            "#{converter.class} encountered an error while "\
+                            "#{converter.class} encountered an error while " \
                             "converting '#{document.relative_path}':"
         Jekyll.logger.error("", e.to_s)
         raise e
