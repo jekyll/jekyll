@@ -113,6 +113,7 @@
   * Remove git.io shortlinks from repo (#9045)
   * Bump rubocop to 1.32 (#9093)
   * Bump RuboCop to `1.36.x` (#9125)
+  * Use check-spelling/check-spelling@v0.0.20 (#9111)
 
 ### Minor Enhancements
 
