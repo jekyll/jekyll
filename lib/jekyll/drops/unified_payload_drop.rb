@@ -16,6 +16,10 @@ module Jekyll
         @site_drop ||= SiteDrop.new(@obj)
       end
 
+      def theme
+        @theme_drop ||= ThemeDrop.new(@obj.theme) if @obj.theme
+      end
+
       private
 
       def fallback_data
