@@ -129,6 +129,7 @@
   * Expose collection static files via `site.static_files` (#8961)
   * Expose `basename` from `document.rb` as `name` to Liquid templates (#8761)
   * Allow Configurable Converters on CSV (#8858)
+  * Introduce `theme` drop to expose theme-gem details (#9129)
 
 ### Site Enhancements
 
