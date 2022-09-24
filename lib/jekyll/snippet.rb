@@ -6,7 +6,7 @@ module Jekyll
     private_constant :FROZEN_READONLY_HASH
 
     attr_reader :site, :relative_path, :path
-    attr_accessor :content, :output
+    attr_accessor :content
 
     def initialize(site, relative_path, theme = nil)
       @site = site
@@ -33,8 +33,8 @@ module Jekyll
       @data ||= FROZEN_READONLY_HASH
     end
 
-    def renderer
-      @renderer ||= Renderer.new(site, self)
+    def output
+      @output ||= Renderer.new(site, self, site.site_payload).run
     end
 
     def render_with_liquid?
@@ -47,6 +47,10 @@ module Jekyll
 
     def to_liquid
       @to_liquid ||= FROZEN_READONLY_HASH
+    end
+
+    def rendered?
+      !!@output
     end
 
     # Redundant. Only for compatibility with the rendering process.

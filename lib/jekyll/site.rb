@@ -211,7 +211,6 @@ module Jekyll
 
       Jekyll::Hooks.trigger :site, :pre_render, self, payload
 
-      render_snippets(payload)
       render_docs(payload)
       render_pages(payload)
 
@@ -571,13 +570,6 @@ module Jekyll
     def render_pages(payload)
       pages.each do |page|
         render_regenerated(page, payload)
-      end
-    end
-
-    def render_snippets(payload)
-      snippets.each_value do |snippet|
-        snippet.renderer.payload = payload
-        snippet.output = snippet.renderer.run
       end
     end
 

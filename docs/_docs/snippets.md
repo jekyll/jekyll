@@ -4,28 +4,28 @@ permalink: /docs/snippets/
 render_with_liquid: false
 ---
 
-Snippets are chunks of text or code that are rendered before documents and pages. The rendered output can then be *included*
-into documents, pages, or Liquid templates via the `snippet` tag.
+Snippets are chunks of text or code that are rendered as required but just once per build. The rendered output can be *included*
+into documents, pages, or Liquid templates multiple times via a new [`snippet` tag](#snippet-tag).
 
 ## Snippets and Includes
 
 Snippets are functionally similar to *includes* yet slightly different as outlined below:
 
-Feature       | Includes            | Snippets
-------------- | :-----------------: | :-----------------------------:
-Front Matter  | Ignored             | Ignored
-Theme-gem     | Allowed             | Allowed
-Regeneration  | Supported           | Supported
-Content-type  | Any                 | Depends on available converters.
-Converter     | user-dependent (e.g. use of filters `markdownify`, `scssify`, etc) | automatically based on file-extension
-Rendering     | render-on-demand    | pre-rendered
-Location      | `_includes`         | `_snippets`
-Liquid Access | `{% include ... %}` | `{% snippet ... %}`
+Feature          | Includes            | Snippets
+---------------- | :-----------------: | :-----------------------------:
+Front Matter     | Ignored             | Ignored
+Theme-gem        | Allowed             | Allowed
+Regeneration     | Supported           | Supported
+Content-type     | Any                 | Depends on available converters.
+Converter        | user-dependent (e.g. use of filters `markdownify`, `scssify`, etc) | automatically based on file-extension
+Rendering        | render-on-demand    | render-on-demand but only on first request
+Default Location | `_includes`         | `_snippets`
+Liquid Access    | `{% include ... %}` | `{% snippet ... %}`
 
 ## Snippets and Documents
 
 Snippets is not a collection. Therefore, a *snippet* is not a document.
-The only similarity between a snippet and a document (or a standalone page), that they all are rendered once and regenerated
+The only similarity between a snippet and a document (or a standalone page), is that they all are rendered once and regenerated
 when changed.
 
 Feature                 | Document            | Snippet
@@ -40,8 +40,8 @@ Written to destination  | Conditionally       | No
 
 ## Snippet Tag
 
-The `snippet` tag allows one to insert pre-rendered output within documents, pages and Liquid templates, avoiding repeated rendering
-of the source-content.
+The `snippet` tag allows one to insert rendered snippets within documents, pages and Liquid templates, avoiding repeated
+rendering of the source-content. The raw source-content gets rendered the first time the requested snippet is encountered.
 
 ```liquid
 {% snippet 'footer.md' %}
@@ -69,9 +69,13 @@ The *snippets* entity was introduced to optimize the following use-case(s):
 ...
 <aside>
   <ul>
-    <li>
-      ...
-    </li>
+    {% for item in site.myList %}
+      {% if item == page_independent_condition %}
+        <li>
+          ...
+        </li>
+       {% endif %}
+     {% endfor %}
   </ul>
 
 {% capture description %}
@@ -100,6 +104,19 @@ Snippets are designed to be rendered just once, like standalone pages, but witho
 the latter. Moreover, they do not have URL attributes and consequently never written to destination. *Lesser flexibility
 translates to lesser overhead*.
 
+```liquid
+<!-- _snippets/aside/page_independent_list.html -->
+<ul>
+  {% for item in site.myList %}
+    {% if item == page_independent_condition %}
+      <li>
+        ...
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>
+```
+
 ```markdown
 <!-- _snippets/aside/description.md -->
 
@@ -112,9 +129,7 @@ This site was built with :heart: using Jekyll v{{ jekyll.version }}
 
 ...
 <aside>
-  <ul>
-    ...
-  </ul>
+{% snippet 'aside/page_independent_list.html' %}
 
 {% snippet 'aside/description.md' %}
 </aside>
