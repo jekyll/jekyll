@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2022-09-24T06:55:41-07:00" />
+<meta property="article:published_time" content="2022-09-25T07:55:31-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Variables" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-09-24T06:55:41-07:00","datePublished":"2022-09-24T06:55:41-07:00","description":"Jekyll traverses your site looking for files to process. Any files with front matter are subject to processing. For each of these files, Jekyll makes a variety of data available via Liquid. The following is a reference of the available data.","headline":"Variables","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/variables/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/variables/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-09-25T07:55:31-07:00","datePublished":"2022-09-25T07:55:31-07:00","description":"Jekyll traverses your site looking for files to process. Any files with front matter are subject to processing. For each of these files, Jekyll makes a variety of data available via Liquid. The following is a reference of the available data.","headline":"Variables","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/variables/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/variables/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -155,6 +155,10 @@ The following is a reference of the available data.</p>
   <tr>
       <td><p><code>layout</code></p></td>
       <td><p>Layout specific information + the <a href="/docs/front-matter/">front matter</a>. Custom variables set via front matter in layouts will be available here.</p></td>
+    </tr>
+  <tr>
+      <td><p><code>theme</code></p></td>
+      <td><p>Theme-gem specific information as defined in the theme's gemspec. Useful for rendering information in the theme demo's "About" page, for example. See below for details.</p></td>
     </tr>
   <tr>
       <td><p><code>content</code></p></td>
@@ -322,6 +326,45 @@ The following is a reference of the available data.</p>
     For example, if you specify <code>class: full_page</code> in a layout’s front matter,
     that value will be available as <code>layout.class</code> in the layout and its parents.
   </p>
+</div>
+
+<h2 id="theme">Theme</h2>
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+      <td><p><code>theme.root</code></p></td>
+      <td><p>Absolute path to the theme-gem.</p></td>
+    </tr>
+  <tr>
+      <td><p><code>theme.authors</code></p></td>
+      <td><p>Comma separated string composed of the authors of the theme-gem.</p></td>
+    </tr>
+  <tr>
+      <td><p><code>theme.description</code></p></td>
+      <td><p>Description or summary of the theme-gem as specified in the theme gemspec.</p></td>
+    </tr>
+  <tr>
+      <td><p><code>theme.version</code></p></td>
+      <td><p>The version string of current theme.</p></td>
+    </tr>
+  <tr>
+      <td><p><code>theme.dependencies</code></p></td>
+      <td><p>List of runtime dependencies of the theme.</p></td>
+    </tr>
+  <tr>
+      <td><p><code>theme.metadata</code></p></td>
+      <td><p>A mapping of key-value pairs as defined in the theme gemspec.</p></td>
+    </tr>
+  </tbody>
+</table>
 </div>
 
 <h2 id="paginator">Paginator</h2>
