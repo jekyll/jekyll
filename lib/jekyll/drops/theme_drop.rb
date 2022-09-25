@@ -3,7 +3,7 @@
 module Jekyll
   module Drops
     class ThemeDrop < Drop
-      delegate_methods   :root, :version
+      delegate_methods   :root
       delegate_method_as :runtime_dependencies, :dependencies
 
       def authors

@@ -34,6 +34,10 @@ The following is a reference of the available data.
   </p>
 </div>
 
+## Theme
+
+{% include docs_variables_table.html scope=site.data.jekyll_variables.theme %}
+
 ## Paginator
 
 {% include docs_variables_table.html scope=site.data.jekyll_variables.paginator %}
