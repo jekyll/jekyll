@@ -93,8 +93,8 @@ class TestGeneratedSite < JekyllUnitTest
     end
 
     should "ensure limit posts is 0 or more" do
+      clear_dest
       assert_raises ArgumentError do
-        clear_dest
         @site = fixture_site("limit_posts" => -1)
       end
     end
