@@ -218,6 +218,8 @@ Minitest/AssertOutput:
   Enabled: true
 Minitest/AssertPathExists:
   Enabled: true
+Minitest/AssertPredicate:
+  Enabled: false
 Minitest/AssertSilent:
   Enabled: true
 Minitest/AssertWithExpectedArgument:
@@ -230,6 +232,8 @@ Minitest/MultipleAssertions:
   Enabled: true
 Minitest/RefuteInDelta:
   Enabled: true
+Minitest/RefutePredicate:
+  Enabled: false
 Minitest/RefuteKindOf:
   Enabled: true
 Minitest/RefutePathExists:
