@@ -126,6 +126,8 @@ Lint/NestedPercentLiteral:
     - test/test_site.rb
 Lint/NoReturnInBeginEndBlocks:
   Enabled: true
+Lint/NonAtomicFileOperation:
+  Enabled: false
 Lint/NumberedParameterAssignment:
   Enabled: true
 Lint/OrAssignmentToConstant:
