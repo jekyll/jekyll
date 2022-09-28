@@ -164,7 +164,6 @@ Given(%r!^I have a configuration file with "(.*)" set to "(.*)"$!) do |key, valu
       {}
     end
   config[key] = SafeYAML.load(value)
-
   Jekyll.set_timezone(value) if key == "timezone"
   File.write("_config.yml", YAML.dump(config))
 end
