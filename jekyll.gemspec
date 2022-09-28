@@ -48,7 +48,7 @@ Gem::Specification.new do |s|
   # TODO: Remove lock once we implement a way to use Psych 4 without breaking anything.
   s.add_runtime_dependency("psych",                 "~> 3.3")
 
-  s.add_runtime_dependency("rouge",                 "~> 3.0")
+  s.add_runtime_dependency("rouge",                 ">= 3.0", "< 5.0")
   s.add_runtime_dependency("safe_yaml",             "~> 1.0")
   s.add_runtime_dependency("terminal-table",        ">= 1.8", "< 4.0")
   s.add_runtime_dependency("webrick",               "~> 1.7")
