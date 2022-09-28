@@ -130,6 +130,7 @@
   * Expose `basename` from `document.rb` as `name` to Liquid templates (#8761)
   * Allow Configurable Converters on CSV (#8858)
   * Introduce `theme` drop to expose theme-gem details (#9129)
+  * Relax version constraint to allow Rouge 4.x (#9134)
 
 ### Site Enhancements
 
