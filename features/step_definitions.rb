@@ -163,7 +163,13 @@ Given(%r!^I have a configuration file with "(.*)" set to "(.*)"$!) do |key, valu
     else
       {}
     end
-  config[key] = YAML.load(value)
+
+  if Gem::Version.new(Psych::VERSION) >= Gem::Version.new("4.0.0")
+    config[key] = YAML.load(value, permitted_classes: [Date])
+  else
+    config[key] = YAML.load(value)
+  end
+
   Jekyll.set_timezone(value) if key == "timezone"
   File.write("_config.yml", YAML.dump(config))
 end
