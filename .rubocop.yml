@@ -374,7 +374,7 @@ Style/GuardClause:
 Style/HashAsLastArrayItem:
   Enabled: true
 Style/HashConversion:
-  Enabled: true  
+  Enabled: true
 Style/HashEachMethods:
   Enabled: true
 Style/HashExcept:
