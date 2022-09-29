@@ -7,7 +7,6 @@ module Jekyll
 
       mutable false
 
-      delegate_method_as :site_data, :data
       delegate_methods :time, :pages, :static_files, :tags, :categories
 
       private delegate_method_as :config, :fallback_data
@@ -22,6 +21,12 @@ module Jekyll
 
       def key?(key)
         (key != "posts" && @obj.collections.key?(key)) || super
+      end
+
+      def data
+        @obj.site_data.tap do |value|
+          value.context = @context if value.respond_to?(:context=)
+        end
       end
 
       def posts

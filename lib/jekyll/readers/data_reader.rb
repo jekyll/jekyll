@@ -6,7 +6,7 @@ module Jekyll
 
     def initialize(site, in_source_dir: nil)
       @site = site
-      @content = {}
+      @content = DataHash.new
       @entry_filter = EntryFilter.new(site)
       @in_source_dir = in_source_dir || @site.method(:in_source_dir)
       @source_dir = @in_source_dir.call("/")
@@ -23,6 +23,8 @@ module Jekyll
       read_data_to(base, @content)
       @content
     end
+
+    # rubocop:disable Metrics/AbcSize
 
     # Read and parse all .yaml, .yml, .json, .csv and .tsv
     # files under <dir> and add them to the <data> variable.
@@ -43,13 +45,14 @@ module Jekyll
         next if @entry_filter.symlink?(path)
 
         if File.directory?(path)
-          read_data_to(path, data[sanitize_filename(entry)] = {})
+          read_data_to(path, data[sanitize_filename(entry)] = DataHash.new)
         else
           key = sanitize_filename(File.basename(entry, ".*"))
-          data[key] = read_data_file(path)
+          data[key] = DataEntry.new(site, path, read_data_file(path))
         end
       end
     end
+    # rubocop:enable Metrics/AbcSize
 
     # Determines how to read a data file.
     #

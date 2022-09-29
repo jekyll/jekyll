@@ -45,6 +45,8 @@ module Jekyll
   autoload :Collection,          "jekyll/collection"
   autoload :Configuration,       "jekyll/configuration"
   autoload :Convertible,         "jekyll/convertible"
+  autoload :DataEntry,           "jekyll/data_entry"
+  autoload :DataHash,            "jekyll/data_hash"
   autoload :Deprecator,          "jekyll/deprecator"
   autoload :Document,            "jekyll/document"
   autoload :EntryFilter,         "jekyll/entry_filter"
