@@ -6,17 +6,7 @@ require "ostruct"
 class TestConvertible < JekyllUnitTest
   context "YAML front matter" do
     setup do
-      ConvertibleClass = Struct.new(
-        :site,
-        :content,
-        :data,
-        :ext,
-        :output,
-        :name,
-        :relative_path,
-        :keyword_init => true
-      )
-      @convertible = ConvertibleClass.new(
+      @convertible = OpenStruct.new(
         "site" => Site.new(Jekyll.configuration(
                              "source" => File.expand_path("fixtures", __dir__)
                            ))
