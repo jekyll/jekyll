@@ -694,15 +694,15 @@ class TestTags < JekyllUnitTest
     context "with symlink'd include" do
       should "not allow symlink includes" do
         File.write("tmp/pages-test", "SYMLINK TEST")
-        content = <<~CONTENT
-          ---
-          title: Include symlink
-          ---
-
-          {% include tmp/pages-test %}
-
-        CONTENT
         assert_raises IOError do
+          content = <<~CONTENT
+            ---
+            title: Include symlink
+            ---
+
+            {% include tmp/pages-test %}
+
+          CONTENT
           create_post(content,
                       "permalink"   => "pretty",
                       "source"      => source_dir,
@@ -715,15 +715,15 @@ class TestTags < JekyllUnitTest
       end
 
       should "not expose the existence of symlinked files" do
-        content = <<~CONTENT
-          ---
-          title: Include symlink
-          ---
-
-          {% include tmp/pages-test-does-not-exist %}
-
-        CONTENT
         ex = assert_raises IOError do
+          content = <<~CONTENT
+            ---
+            title: Include symlink
+            ---
+
+            {% include tmp/pages-test-does-not-exist %}
+
+          CONTENT
           create_post(content,
                       "permalink"   => "pretty",
                       "source"      => source_dir,
@@ -1143,15 +1143,15 @@ class TestTags < JekyllUnitTest
     context "with symlink'd include" do
       should "not allow symlink includes" do
         File.write("tmp/pages-test", "SYMLINK TEST")
-        content = <<~CONTENT
-          ---
-          title: Include symlink
-          ---
-
-          {% include_relative tmp/pages-test %}
-
-        CONTENT
         assert_raises IOError do
+          content = <<~CONTENT
+            ---
+            title: Include symlink
+            ---
+
+            {% include_relative tmp/pages-test %}
+
+          CONTENT
           create_post(content,
                       "permalink"   => "pretty",
                       "source"      => source_dir,
@@ -1164,15 +1164,15 @@ class TestTags < JekyllUnitTest
       end
 
       should "not expose the existence of symlinked files" do
-        content = <<~CONTENT
-          ---
-          title: Include symlink
-          ---
-
-          {% include_relative tmp/pages-test-does-not-exist %}
-
-        CONTENT
         ex = assert_raises IOError do
+          content = <<~CONTENT
+            ---
+            title: Include symlink
+            ---
+
+            {% include_relative tmp/pages-test-does-not-exist %}
+
+          CONTENT
           create_post(content,
                       "permalink"   => "pretty",
                       "source"      => source_dir,
