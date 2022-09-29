@@ -109,15 +109,11 @@ Lint/EmptyConditionalBody:
   Enabled: true
 Lint/EmptyFile:
   Enabled: true
-Lint/EmptyInPattern:
-  Enabled: true
 Lint/FloatComparison:
   Enabled: true
 Lint/HashCompareByIdentity:
   Enabled: true
 Lint/IdentityComparison:
-  Enabled: true
-Lint/IncompatibleIoSelectWithFiberScheduler:
   Enabled: true
 Lint/LambdaWithoutLiteralBlock:
   Enabled: true
@@ -130,8 +126,6 @@ Lint/NestedPercentLiteral:
     - test/test_site.rb
 Lint/NoReturnInBeginEndBlocks:
   Enabled: true
-Lint/NonAtomicFileOperation:
-  Enabled: false
 Lint/NumberedParameterAssignment:
   Enabled: true
 Lint/OrAssignmentToConstant:
@@ -143,8 +137,6 @@ Lint/RaiseException:
 Lint/RedundantDirGlobSort:
   Enabled: true
 Lint/RedundantSafeNavigation:
-  Enabled: true
-Lint/RefinementImportMethods:
   Enabled: true
 Lint/RequireRangeParentheses:
   Enabled: true
@@ -173,8 +165,6 @@ Lint/UnreachableCode:
 Lint/UnreachableLoop:
   Enabled: true
 Lint/UselessMethodDefinition:
-  Enabled: true
-Lint/UselessRuby2Keywords:
   Enabled: true
 Lint/UselessTimes:
   Enabled: true
@@ -228,17 +218,9 @@ Minitest/AssertOutput:
   Enabled: true
 Minitest/AssertPathExists:
   Enabled: true
-Minitest/AssertPredicate:
-  Enabled: false
-Minitest/AssertRaisesCompoundBody:
-  Enabled: true
-Minitest/AssertRaisesWithRegexpArgument:
-  Enabled: true
 Minitest/AssertSilent:
   Enabled: true
 Minitest/AssertWithExpectedArgument:
-  Enabled: true
-Minitest/DuplicateTestRun:
   Enabled: true
 Minitest/LiteralAsActualArgument:
   Enabled: true
@@ -248,21 +230,15 @@ Minitest/MultipleAssertions:
   Enabled: true
 Minitest/RefuteInDelta:
   Enabled: true
-Minitest/RefutePredicate:
-  Enabled: false
 Minitest/RefuteKindOf:
   Enabled: true
 Minitest/RefutePathExists:
-  Enabled: true
-Minitest/SkipEnsure:
   Enabled: true
 Minitest/UnreachableAssertion:
   Enabled: true
 Minitest/UnspecifiedException:
   Enabled: true
 
-Naming/BlockForwarding:
-  Enabled: true
 Naming/FileName:
   Enabled: false
 Naming/HeredocDelimiterNaming:
@@ -286,8 +262,6 @@ Performance/BlockGivenWithExplicitBlock:
 Performance/ChainArrayAllocation:
   Enabled: true
 Performance/CollectionLiteralInLoop:
-  Enabled: true
-Performance/ConcurrentMonotonicTime:
   Enabled: true
 Performance/ConstantRegexp:
   Enabled: true
@@ -394,7 +368,7 @@ Style/GuardClause:
 Style/HashAsLastArrayItem:
   Enabled: true
 Style/HashConversion:
-  Enabled: true
+  Enabled: true  
 Style/HashEachMethods:
   Enabled: true
 Style/HashExcept:
@@ -410,8 +384,6 @@ Style/HashTransformValues:
   Enabled: true
 Style/IfWithBooleanLiteralBranches:
   Enabled: true
-Style/InPatternThen:
-  Enabled: true
 Style/KeywordParametersOrder:
   Enabled: true
 Style/MagicCommentFormat:
@@ -425,8 +397,6 @@ Style/MixinUsage:
     - test/helper.rb
 Style/ModuleFunction:
   Enabled: false
-Style/MultilineInPatternThen:
-  Enabled: true
 Style/MultilineTernaryOperator:
   Severity: error
 Style/NegatedIfElseCondition:
@@ -434,14 +404,6 @@ Style/NegatedIfElseCondition:
 Style/NestedFileDirname:
   Enabled: true
 Style/NilLambda:
-  Enabled: true
-Style/NumberedParameters:
-  Enabled: true
-Style/NumberedParametersLimit:
-  Enabled: true
-Style/ObjectThen:
-  Enabled: true
-Style/OpenStructUse:
   Enabled: true
 Style/OptionalBooleanParameter:
   Enabled: true
@@ -485,8 +447,6 @@ Style/RescueModifier:
 Style/SafeNavigation:
   Exclude:
     - lib/jekyll/document.rb
-Style/SelectByRegexp:
-  Enabled: true
 Style/SignalException:
   EnforcedStyle: only_raise
 Style/SingleArgumentDig:
@@ -512,32 +472,3 @@ Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: consistent_comma
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
-
-RSpec/BeEq:
-  Enabled: true
-RSpec/BeNil:
-  Enabled: true
-RSpec/ChangeByZero:
-  Enabled: true
-RSpec/ClassCheck:
-  Enabled: true
-RSpec/ExcessiveDocstringSpacing:
-  Enabled: true
-RSpec/IdenticalEqualityAssertion:
-  Enabled: true
-RSpec/NoExpectationExample:
-  Enabled: true
-RSpec/SubjectDeclaration:
-  Enabled: true
-RSpec/VerifiedDoubleReference:
-  Enabled: true
-RSpec/Capybara/SpecificFinders:
-  Enabled: true
-RSpec/Capybara/SpecificMatcher:
-  Enabled: true
-RSpec/FactoryBot/SyntaxMethods:
-  Enabled: true
-RSpec/Rails/AvoidSetupHook:
-  Enabled: true
-RSpec/Rails/HaveHttpStatus:
-  Enabled: true
