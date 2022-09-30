@@ -23,7 +23,7 @@ module Jekyll
 
             #{markup}
 
-            Valid syntax: highlight <lang> [linenos]
+            Valid syntax: highlight <lang> [linenos] [highlight_lines="3 4 5"] [highlight_line_class=class_name]
           MSG
         end
       end
@@ -81,18 +81,30 @@ module Jekyll
       def render_rouge(code)
         require "rouge"
         formatter = ::Rouge::Formatters::HTML.new
-        if @highlight_options[:linenos]
-          formatter = ::Rouge::Formatters::HTMLTable.new(
-            formatter,
-            {
-              :css_class    => "highlight",
-              :gutter_class => "gutter",
-              :code_class   => "code",
-            }
-          )
-        end
+        formatter = line_highlighter_formatter(formatter) if @highlight_options[:highlight_lines]
+        formatter = table_formatter(formatter) if @highlight_options[:linenos]
+
         lexer = ::Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
         formatter.format(lexer.lex(code))
+      end
+
+      def line_highlighter_formatter(formatter)
+        ::Rouge::Formatters::HTMLLineHighlighter.new(
+          formatter,
+          :highlight_lines      => @highlight_options[:highlight_lines].map(&:to_i),
+          :highlight_line_class => @highlight_options[:highlight_line_class] || "hll"
+        )
+      end
+
+      def table_formatter(formatter)
+        ::Rouge::Formatters::HTMLTable.new(
+          formatter,
+          {
+            :css_class    => "highlight",
+            :gutter_class => "gutter",
+            :code_class   => "code",
+          }
+        )
       end
 
       def render_codehighlighter(code)
