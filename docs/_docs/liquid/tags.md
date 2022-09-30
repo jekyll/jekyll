@@ -66,6 +66,40 @@ end
 ```
 {% endraw %}
 
+### Highlighting specific lines
+
+You can highlight specific lines in a code snippet by using the optional
+argument `highlight_lines`. This argument takes a space-
+separated list of line numbers which must be wrapped in quotes. For
+example, the following code block will highlight lines 1 and 2 but not
+line 3:
+
+{% raw %}
+```liquid
+{% highlight ruby highlight_lines="1 2" %}
+def foo
+  puts 'foo'
+end
+{% endhighlight %}
+```
+{% endraw %}
+
+A default class name of `hll` will be applied to the highlighted lines.
+You can change this class name using the attribute `highlight_line_class`.
+The class name must not be wrapped in quotes.
+For example, the following code block will highlight line 1 and wrap the
+line with `<span class="my_class">`:
+
+{% raw %}
+```liquid
+{% highlight ruby highlight_lines="1" highlight_line_class=my_class %}
+def foo
+  puts 'foo'
+end
+{% endhighlight %}
+```
+{% endraw %}
+
 ### Stylesheets for syntax highlighting
 
 In order for the highlighting to show up, you’ll need to include a highlighting
