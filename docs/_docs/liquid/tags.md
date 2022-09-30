@@ -70,7 +70,7 @@ end
 
 You can highlight specific lines in a code snippet by using the optional
 argument `highlight_lines`. This argument takes a space-separated list of
-line numbers which must be wrapped in quotes. For example, the following
+line numbers which must be wrapped in double quotes. For example, the following
 code block will highlight lines 1 and 2 but not line 3:
 
 {% raw %}
