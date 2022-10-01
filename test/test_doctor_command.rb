@@ -45,7 +45,7 @@ class TestDoctorCommand < JekyllUnitTest
                            "source"      => source_dir,
                            "destination" => dest_dir,
                            "collections" => { "methods" => { "output" => true } }
-                        ))
+                         ))
         @site.process
         output = capture_stderr do
           Jekyll::Commands::Doctor.conflicting_urls(@site)
