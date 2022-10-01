@@ -359,12 +359,14 @@ module Jekyll
       end.to_a
     end
 
-    def each_site_file
-      %w(pages static_files_to_write docs_to_write).each do |type|
-        send(type).each do |item|
-          yield item
+    def each_site_file(&block)
+      all_files_set =
+        %w(pages static_files_to_write docs_to_write).each_with_object(Set.new) do |type, set|
+          send(type).each do |item|
+            set.add(item)
+          end
         end
-      end
+      all_files_set.each(&block)
     end
 
     # Returns the FrontmatterDefaults or creates a new FrontmatterDefaults
