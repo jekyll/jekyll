@@ -3,7 +3,7 @@
 require "helper"
 
 class TestSnippet < JekyllUnitTest
-  def site_with_snippets(**overrides)
+  def site_with_snippets(overrides = {})
     fixture_site(overrides).tap(&:read)
   end
 
