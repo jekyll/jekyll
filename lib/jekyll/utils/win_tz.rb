@@ -11,64 +11,35 @@ module Jekyll
       # timezone - the IANA Time Zone specified in "_config.yml"
       #
       # Returns a string that ultimately re-defines ENV["TZ"] in Windows
-      def calculate(timezone)
+      def calculate(timezone, now = Time.now)
         External.require_with_graceful_fail("tzinfo") unless defined?(TZInfo)
         tz = TZInfo::Timezone.get(timezone)
-        difference = Time.now.to_i - tz.now.to_i
+
+        #
+        # Use period_for_utc and utc_total_offset instead of
+        # period_for and observed_utc_offset for compatibility with tzinfo v1.
+        offset = tz.period_for_utc(now.getutc).utc_total_offset
+
         #
         # POSIX style definition reverses the offset sign.
         #   e.g. Eastern Standard Time (EST) that is 5Hrs. to the 'west' of Prime Meridian
         #   is denoted as:
         #     EST+5 (or) EST+05:00
-        # Reference: http://www.gnu.org/software/libc/manual/html_node/TZ-Variable.html
-        sign = difference.negative? ? "-" : "+"
-        offset = sign == "-" ? "+" : "-" unless difference.zero?
-        #
-        # convert the difference (in seconds) to hours, as a rational number, and perform
-        # a modulo operation on it.
-        modulo = modulo_of(rational_hour(difference))
-        #
-        # Format the hour as a two-digit number.
-        # Establish the minutes based on modulo expression.
-        hh = format("%<hour>02d", :hour => absolute_hour(difference).ceil)
-        mm = modulo.zero? ? "00" : "30"
+        # Reference: https://www.gnu.org/software/libc/manual/html_node/TZ-Variable.html
+        sign = offset.positive? ? "-" : "+"
 
-        Jekyll.logger.debug "Timezone:", "#{timezone} #{offset}#{hh}:#{mm}"
+        rational_hours = offset.abs.to_r / 3600
+        hours = rational_hours.to_i
+        minutes = ((rational_hours - hours) * 60).to_i
+
+        #
+        # Format the hours and minutes as two-digit numbers.
+        time = format("%<hours>02d:%<minutes>02d", :hours => hours, :minutes => minutes)
+
+        Jekyll.logger.debug "Timezone:", "#{timezone} #{sign}#{time}"
         #
         # Note: The 3-letter-word below doesn't have a particular significance.
-        "WTZ#{sign}#{hh}:#{mm}"
-      end
-
-      private
-
-      # Private: Convert given seconds to an hour as a rational number.
-      #
-      # seconds - supplied as an integer, it is converted to a rational number.
-      # 3600 - no. of seconds in an hour.
-      #
-      # Returns a rational number.
-      def rational_hour(seconds)
-        seconds.to_r / 3600
-      end
-
-      # Private: Convert given seconds to an hour as an absolute number.
-      #
-      # seconds - supplied as an integer, it is converted to its absolute.
-      # 3600 - no. of seconds in an hour.
-      #
-      # Returns an integer.
-      def absolute_hour(seconds)
-        seconds.abs / 3600
-      end
-
-      # Private: Perform a modulo operation on a given fraction.
-      #
-      # fraction - supplied as a rational number, its numerator is divided
-      #            by its denominator and the remainder returned.
-      #
-      # Returns an integer.
-      def modulo_of(fraction)
-        fraction.numerator % fraction.denominator
+        "WTZ#{sign}#{time}"
       end
     end
   end

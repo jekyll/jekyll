@@ -16,6 +16,10 @@ global:
     description: >-
       Layout specific information + the <a href="/docs/front-matter/">front matter</a>.
       Custom variables set via front matter in layouts will be available here.
+  - name: theme
+    description: >-
+      Theme-gem specific information as defined in the theme's gemspec. Useful for rendering
+      information in the theme demo's "About" page, for example. See below for details.
   - name: content
     description: >-
       In layout files, the rendered content of the Post or Page being wrapped.
@@ -149,6 +153,20 @@ page:
     description: >-
       The previous post relative to the position of the current post in <code>site.posts</code>.
       Returns <code>nil</code> for the first entry.
+
+theme:
+  - name: theme.root
+    description: Absolute path to the theme-gem.
+  - name: theme.authors
+    description: Comma separated string composed of the authors of the theme-gem.
+  - name: theme.description
+    description: Description or summary of the theme-gem as specified in the theme gemspec. 
+  - name: theme.version
+    description: The version string of current theme.
+  - name: theme.dependencies
+    description: List of runtime dependencies of the theme.
+  - name: theme.metadata
+    description: A mapping of key-value pairs as defined in the theme gemspec. 
 
 paginator:
   - name: paginator.page

@@ -23,7 +23,7 @@ group :test do
   gem "nokogiri", "~> 1.7"
   gem "rspec"
   gem "rspec-mocks"
-  gem "rubocop", "~> 1.22.0"
+  gem "rubocop", "~> 1.36.0"
   gem "rubocop-minitest"
   gem "rubocop-performance"
   gem "rubocop-rake"
@@ -32,8 +32,12 @@ group :test do
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)
   gem "test-theme-skinny", :path => File.expand_path("test/fixtures/test-theme-skinny", __dir__)
   gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
+  gem "test-theme-w-empty-data", :path => File.expand_path("test/fixtures/test-theme-w-empty-data", __dir__)
 
-  gem "jruby-openssl" if RUBY_ENGINE == "jruby"
+  if RUBY_ENGINE == "jruby"
+    gem "http_parser.rb", "~> 0.6.0"
+    gem "jruby-openssl"
+  end
 end
 
 #
@@ -69,6 +73,7 @@ group :jekyll_optional_dependencies do
   gem "jekyll-paginate"
   gem "jekyll-redirect-from"
   gem "kramdown-syntax-coderay"
+  gem "matrix"
   gem "mime-types", "~> 3.0"
   gem "rdoc", "~> 6.0"
   gem "tomlrb"
@@ -82,7 +87,7 @@ group :jekyll_optional_dependencies do
   # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
   # and associated library
   platforms :jruby, :mswin, :mingw, :x64_mingw do
-    gem "tzinfo", "~> 1.2"
+    gem "tzinfo", ENV["TZINFO_VERSION"] if ENV["TZINFO_VERSION"]
     gem "tzinfo-data"
   end
 end

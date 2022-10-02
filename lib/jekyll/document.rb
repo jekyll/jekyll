@@ -406,9 +406,8 @@ module Jekyll
     # Override of method_missing to check in @data for the key.
     def method_missing(method, *args, &blck)
       if data.key?(method.to_s)
-        Jekyll::Deprecator.deprecation_message "Document##{method} is now a key "\
-                           "in the #data hash."
-        Jekyll::Deprecator.deprecation_message "Called by #{caller(0..0)}."
+        Jekyll::Deprecator.deprecation_message "Document##{method} is now a key in the #data hash."
+        Jekyll.logger.warn "", "Called by #{caller(1..1)[0]}."
         data[method.to_s]
       else
         super

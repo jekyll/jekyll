@@ -78,8 +78,8 @@ module Jekyll
       }
 
       unless @registry[owner][event]
-        raise NotAvailable, "Invalid hook. #{owner} supports only the " \
-          "following hooks #{@registry[owner].keys.inspect}"
+        raise NotAvailable, "Invalid hook. #{owner} supports only the following hooks " \
+                            "#{@registry[owner].keys.inspect}"
       end
 
       raise Uncallable, "Hooks must respond to :call" unless block.respond_to? :call

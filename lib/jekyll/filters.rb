@@ -311,7 +311,7 @@ module Jekyll
           order = + 1
         else
           raise ArgumentError, "Invalid nils order: " \
-            "'#{nils}' is not a valid nils order. It must be 'first' or 'last'."
+                               "'#{nils}' is not a valid nils order. It must be 'first' or 'last'."
         end
 
         sort_input(input, property, order)
@@ -478,7 +478,7 @@ module Jekyll
     end
 
     # -----------   The following set of code was *adapted* from Liquid::If
-    # -----------   ref: https://git.io/vp6K6
+    # -----------   ref: https://github.com/Shopify/liquid/blob/ffb0ace30315bbcf3548a0383fab531452060ae8/lib/liquid/tags/if.rb#L84-L107
 
     # Parse a string to a Liquid Condition
     def parse_condition(exp)

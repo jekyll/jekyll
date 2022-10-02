@@ -116,6 +116,7 @@ cruft
 css
 csv
 Currin
+CVE
 CWD
 cygwin
 daringfireball
@@ -391,6 +392,7 @@ mkdown
 mmistakes
 modernizr
 mojombo
+moncefbelyamani
 moz
 mreid
 msdn
@@ -477,6 +479,7 @@ Posterous
 postfiles
 postlayout
 postmodern
+preinstalled
 prepends
 Prioritise
 Probot
@@ -753,3 +756,5 @@ Zsh
 zshrc
 zypper
 zzot
+frontend
+prefetching

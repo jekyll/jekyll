@@ -8,8 +8,6 @@ module Jekyll
       @site = site
     end
 
-    # rubocop:disable Metrics/AbcSize
-    #
     # Read Site data from disk and load it into internal data structures.
     #
     # Returns nothing.
@@ -18,12 +16,28 @@ module Jekyll
       read_directories
       read_included_excludes
       sort_files!
-      @site.data = DataReader.new(site).read(site.config["data_dir"])
       CollectionReader.new(site).read
       ThemeAssetsReader.new(site).read
+      read_data
       SnippetReader.new(site).read
     end
-    # rubocop:enable Metrics/AbcSize
+
+    # Read and merge the data files.
+    # If a theme is specified and it contains data, it will be read.
+    # Site data will overwrite theme data with the same key using the
+    # semantics of Utils.deep_merge_hashes.
+    #
+    # Returns nothing.
+    def read_data
+      @site.data = DataReader.new(site).read(site.config["data_dir"])
+      return unless site.theme&.data_path
+
+      theme_data = DataReader.new(
+        site,
+        :in_source_dir => site.method(:in_theme_dir)
+      ).read(site.theme.data_path)
+      @site.data = Jekyll::Utils.deep_merge_hashes(theme_data, @site.data)
+    end
 
     # Sorts posts, pages, and static files.
     def sort_files!

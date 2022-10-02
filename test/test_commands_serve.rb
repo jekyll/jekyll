@@ -75,9 +75,7 @@ class TestCommandsServe < JekyllUnitTest
       </html>
       HTML
 
-      File.open(File.join(@destination, "hello.html"), "w") do |f|
-        f.write(simple_page)
-      end
+      File.write(File.join(@destination, "hello.html"), simple_page)
       allow(Jekyll::Site).to receive(:new).and_return(site)
     end
 

@@ -43,7 +43,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("liquid",                "~> 4.0")
   s.add_runtime_dependency("mercenary",             ">= 0.3.6", "< 0.5")
   s.add_runtime_dependency("pathutil",              "~> 0.9")
-  s.add_runtime_dependency("rouge",                 "~> 3.0")
+  s.add_runtime_dependency("rouge",                 ">= 3.0", "< 5.0")
   s.add_runtime_dependency("safe_yaml",             "~> 1.0")
   s.add_runtime_dependency("terminal-table",        ">= 1.8", "< 4.0")
   s.add_runtime_dependency("webrick",               "~> 1.7")

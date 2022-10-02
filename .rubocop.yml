@@ -13,7 +13,7 @@ Jekyll/NoPutsAllowed:
     - rake/*.rake
 
 AllCops:
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.7
   Include:
     - lib/**/*.rb
     - test/**/*.rb
@@ -25,8 +25,11 @@ AllCops:
     - vendor/**/*
     - tmp/**/*
 
-Gemspec/DateAssignment:
+Gemspec/DeprecatedAttributeAssignment:
   Enabled: true
+Gemspec/RequireMFA:
+  Enabled: false
+
 Layout/BeginEndAlignment:
   Enabled: true
 Layout/EmptyComment:
@@ -43,6 +46,12 @@ Layout/HashAlignment:
   EnforcedHashRocketStyle: table
 Layout/IndentationWidth:
   Severity: error
+Layout/LineContinuationLeadingSpace:
+  Enabled: true
+Layout/LineContinuationSpacing:
+  Enabled: true
+Layout/LineEndStringConcatenationIndentation:
+  Enabled: true
 Layout/LineLength:
   Exclude:
     - !ruby/regexp /features\/.*.rb/
@@ -66,12 +75,18 @@ Layout/SpaceInsideHashLiteralBraces:
 
 Lint/AmbiguousAssignment:
   Enabled: true
+Lint/AmbiguousOperatorPrecedence:
+  Enabled: true
+Lint/AmbiguousRange:
+  Enabled: true
 Lint/BinaryOperatorWithIdenticalOperands:
   Enabled: true
 Lint/ConstantDefinitionInBlock:
   Enabled: true
   Exclude:
     - test/**/*.rb
+Lint/ConstantOverwrittenInRescue:
+  Enabled: true
 Lint/DeprecatedConstants:
   Enabled: true
 Lint/DeprecatedOpenSSLConstant:
@@ -122,6 +137,10 @@ Lint/RaiseException:
 Lint/RedundantDirGlobSort:
   Enabled: true
 Lint/RedundantSafeNavigation:
+  Enabled: true
+Lint/RequireRangeParentheses:
+  Enabled: true
+Lint/RequireRelativeSelfPath:
   Enabled: true
 Lint/SelfAssignment:
   Enabled: true
@@ -187,6 +206,8 @@ Metrics/ParameterLists:
 Metrics/PerceivedComplexity:
   Max: 13
 
+Minitest/AssertEmptyLiteral:
+  Enabled: false
 Minitest/AssertInDelta:
   Enabled: true
 Minitest/AssertionInLifecycleHook:
@@ -198,6 +219,8 @@ Minitest/AssertOutput:
 Minitest/AssertPathExists:
   Enabled: true
 Minitest/AssertSilent:
+  Enabled: true
+Minitest/AssertWithExpectedArgument:
   Enabled: true
 Minitest/LiteralAsActualArgument:
   Enabled: true
@@ -211,10 +234,10 @@ Minitest/RefuteKindOf:
   Enabled: true
 Minitest/RefutePathExists:
   Enabled: true
+Minitest/UnreachableAssertion:
+  Enabled: true
 Minitest/UnspecifiedException:
   Enabled: true
-Minitest/AssertEmptyLiteral:
-  Enabled: false
 
 Naming/FileName:
   Enabled: false
@@ -242,9 +265,15 @@ Performance/CollectionLiteralInLoop:
   Enabled: true
 Performance/ConstantRegexp:
   Enabled: true
+Performance/MapCompact:
+  Enabled: true
 Performance/MethodObjectAsBlock:
   Enabled: true
+Performance/RedundantEqualityComparisonBlock:
+  Enabled: false
 Performance/RedundantSortBlock:
+  Enabled: true
+Performance/RedundantSplitRegexpArgument:
   Enabled: true
 Performance/RedundantStringChars:
   Enabled: true
@@ -254,6 +283,8 @@ Performance/SortReverse:
   Enabled: false
 Performance/Squeeze:
   Enabled: true
+Performance/StringIdentifierArgument:
+  Enabled: true
 Performance/StringInclude:
   Enabled: true
   Exclude:
@@ -261,6 +292,10 @@ Performance/StringInclude:
 Performance/Sum:
   Enabled: true
 
+Security/CompoundHash:
+  Enabled: true
+Security/IoMethods:
+  Enabled: true
 Security/MarshalLoad:
   Exclude:
     - !ruby/regexp /test\/.*.rb$/
@@ -303,12 +338,20 @@ Style/Documentation:
   Enabled: false
 Style/DoubleNegation:
   Enabled: false
+Style/EmptyHeredoc:
+  Enabled: true
 Style/EndlessMethod:
   Enabled: true
 Style/ExplicitBlockArgument:
   Enabled: false
 Style/ExponentialNotation:
   Enabled: true
+Style/EnvHome:
+  Enabled: true
+Style/FetchEnvVar:
+  Enabled: false
+Style/FileRead:
+  Enabled: false
 Style/FormatStringToken:
   Exclude:
     - lib/jekyll/utils/ansi.rb
@@ -316,6 +359,8 @@ Style/FormatStringToken:
     - lib/jekyll/profiler.rb
 Style/FrozenStringLiteralComment:
   EnforcedStyle: always
+Style/FileWrite:
+  Enabled: true
 Style/GlobalStdStream:
   Enabled: true
 Style/GuardClause:
@@ -341,6 +386,12 @@ Style/IfWithBooleanLiteralBranches:
   Enabled: true
 Style/KeywordParametersOrder:
   Enabled: true
+Style/MagicCommentFormat:
+  Enabled: true
+Style/MapCompactWithConditionalBlock:
+  Enabled: true
+Style/MapToHash:
+  Enabled: true
 Style/MixinUsage:
   Exclude:
     - test/helper.rb
@@ -350,10 +401,14 @@ Style/MultilineTernaryOperator:
   Severity: error
 Style/NegatedIfElseCondition:
   Enabled: true
+Style/NestedFileDirname:
+  Enabled: true
 Style/NilLambda:
   Enabled: true
 Style/OptionalBooleanParameter:
   Enabled: true
+  Exclude:
+    - lib/jekyll/log_adapter.rb
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
     "%Q": "{}"
@@ -363,6 +418,8 @@ Style/PercentLiteralDelimiters:
     "%s": ()
     "%w": ()
     "%x": ()
+Style/QuotedSymbols:
+  Enabled: true
 Style/RedundantArgument:
   Enabled: true
 Style/RedundantAssignment:
@@ -371,11 +428,17 @@ Style/RedundantFetchBlock:
   Enabled: false
 Style/RedundantFileExtensionInRequire:
   Enabled: true
+Style/RedundantInitialize:
+  Enabled: true
+  Exclude:
+    - lib/jekyll/plugin.rb
 Style/RedundantRegexpCharacterClass:
   Enabled: true
 Style/RedundantRegexpEscape:
   Enabled: true
 Style/RedundantSelfAssignment:
+  Enabled: true
+Style/RedundantSelfAssignmentBranch:
   Enabled: true
 Style/RegexpLiteral:
   EnforcedStyle: percent_r

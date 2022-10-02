@@ -28,8 +28,8 @@ module Jekyll
           FileUtils.mkdir_p new_blog_path
           if preserve_source_location?(new_blog_path, options)
             Jekyll.logger.error "Conflict:", "#{new_blog_path} exists and is not empty."
-            Jekyll.logger.abort_with "", "Ensure #{new_blog_path} is empty or else " \
-                      "try again with `--force` to proceed and overwrite any files."
+            Jekyll.logger.abort_with "", "Ensure #{new_blog_path} is empty or else try again " \
+                                         "with `--force` to proceed and overwrite any files."
           end
 
           if options["blank"]
@@ -92,26 +92,25 @@ module Jekyll
             # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
             # and associated library.
             platforms :mingw, :x64_mingw, :mswin, :jruby do
-              gem "tzinfo", "~> 1.2"
+              gem "tzinfo", ">= 1", "< 3"
               gem "tzinfo-data"
             end
 
             # Performance-booster for watching directories on Windows
             gem "wdm", "~> 0.1.1", :platforms => [:mingw, :x64_mingw, :mswin]
 
+            # Lock `http_parser.rb` gem to `v0.6.x` on JRuby builds since newer versions of the gem
+            # do not have a Java counterpart.
+            gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
           RUBY
         end
 
         def create_site(new_blog_path)
           create_sample_files new_blog_path
 
-          File.open(File.expand_path(initialized_post_name, new_blog_path), "w") do |f|
-            f.write(scaffold_post_content)
-          end
+          File.write(File.expand_path(initialized_post_name, new_blog_path), scaffold_post_content)
 
-          File.open(File.expand_path("Gemfile", new_blog_path), "w") do |f|
-            f.write(gemfile_contents)
-          end
+          File.write(File.expand_path("Gemfile", new_blog_path), gemfile_contents)
         end
 
         def preserve_source_location?(path, options)

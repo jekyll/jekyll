@@ -37,6 +37,7 @@ class TestFilters < JekyllUnitTest
   context "filters" do
     setup do
       @sample_time = Time.utc(2013, 3, 27, 11, 22, 33)
+      @timezone_before_test = ENV["TZ"]
       @filter = make_filter_mock(
         "timezone"               => "UTC",
         "url"                    => "http://example.com",
@@ -53,6 +54,10 @@ class TestFilters < JekyllUnitTest
         { "color" => "red",  "size" => "medium" },
         { "color" => "blue", "size" => "medium" },
       ]
+    end
+
+    teardown do
+      ENV["TZ"] = @timezone_before_test
     end
 
     should "markdownify with simple string" do
@@ -660,6 +665,7 @@ class TestFilters < JekyllUnitTest
       should "convert drop to json" do
         @filter.site.read
         expected = {
+          "name"          => "2008-02-02-published.markdown",
           "path"          => "_posts/2008-02-02-published.markdown",
           "previous"      => nil,
           "output"        => nil,

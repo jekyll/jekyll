@@ -179,8 +179,8 @@ module Jekyll
       private
 
       def could_not_locate_message(file, includes_dirs, safe)
-        message = "Could not locate the included file '#{file}' in any of "\
-          "#{includes_dirs}. Ensure it exists in one of those directories and"
+        message = "Could not locate the included file '#{file}' in any of #{includes_dirs}. " \
+                  "Ensure it exists in one of those directories and"
         message + if safe
                     " is not a symlink as those are not allowed in safe mode."
                   else

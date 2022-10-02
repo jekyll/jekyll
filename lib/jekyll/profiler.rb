@@ -14,15 +14,12 @@ module Jekyll
 
       rows   = table_rows.dup
       header = rows.shift
-      footer = rows.pop
       output = +"\n"
 
       table = Terminal::Table.new do |t|
         t << header
         t << :separator
         rows.each { |row| t << row }
-        t << :separator
-        t << footer
         t.style = TERMINAL_TABLE_STYLES
         t.align_column(0, :left)
       end

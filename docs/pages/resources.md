@@ -44,7 +44,6 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [Forestry.io](https://forestry.io/): A free Git-based responsive CMS, with content modeling and instant previews.
   - [Netlify CMS](https://www.netlifycms.org/): Open source content management for your Git workflow
   - [Siteleaf](https://www.siteleaf.com/): Built for developers, Loved by everyone
-  - [Statictastic](https://www.statictastic.com/): Static site hosting, publishing and content management for teams
   - [Kentico Kontent](https://github.com/Kentico/kontent-jekyll): A headless CMS with full control over content presentation
 
 ### E-commerce
@@ -70,7 +69,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [Algolia](https://blog.algolia.com/instant-search-blog-documentation-jekyll-plugin/): Add a powerful instant search to your Jekyll site
   - [Elastic Site Search](http://elastic.co/products/site-search/service?ultron=resources&blade=jekyll&hulk=referral): Another option for adding search to your Jekyll site, built on Elasticsearch
   - [Bonsai Search](https://docs.bonsai.io/article/217-jekyll): The easiest way to use Elasticsearch for your Jekyll site
-  - [CloudSh](https://cloudsh.com/generators/How-to-setup-search-on-Jekyll/): Website search with a few lines of JavaScript
+  - [CloudSh](https://cloudsh.com/generators/how-to-setup-search-on-jekyll/): Website search with a few lines of JavaScript
 
 ## Editors plugins
 
@@ -92,7 +91,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   > "Jekyll is everything that I ever wanted in a blogging engine. Really. It isn't perfect, but what's excellent about it is that if there's something wrong, I know exactly how it works and how to fix it. It runs on the your machine only, and is essentially an added"build" step between you and the browser. I coded this entire site in TextMate using standard HTML5 and CSS3, and then at the end I added just a few little variables to the markup. Presto-chango, my site is built and I am at peace with the world."
 
 - A way to [extend Jekyll](https://github.com/rfelix/jekyll_ext) without forking and modifying the Jekyll gem codebase and some [portable Jekyll extensions](https://github.com/rfelix/jekyll_ext/wiki/Extensions) that can be reused and shared.
-- [Using your Rails layouts in Jekyll](http://numbers.brighterplanet.com/2010/08/09/sharing-rails-views-with-jekyll)
+- [Using your Rails layouts in Jekyll](https://numbers.brighterplanet.com/2010/08/09/sharing-rails-views-with-jekyll)
 
 ## Forks
 

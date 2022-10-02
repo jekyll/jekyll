@@ -332,11 +332,11 @@ module Jekyll
     # Returns
     def relative_permalinks_are_deprecated
       if config["relative_permalinks"]
-        Jekyll.logger.abort_with "Since v3.0, permalinks for pages" \
-                                 " in subfolders must be relative to the" \
-                                 " site source directory, not the parent" \
-                                 " directory. Check https://jekyllrb.com/docs/upgrading/"\
-                                 " for more info."
+        Jekyll.logger.abort_with "Since v3.0, permalinks for pages " \
+                                 "in subfolders must be relative to the " \
+                                 "site source directory, not the parent " \
+                                 "directory. Check https://jekyllrb.com/docs/upgrading/ " \
+                                 "for more info."
       end
     end
 
@@ -345,6 +345,13 @@ module Jekyll
     # Returns an Array of Documents which should be written
     def docs_to_write
       documents.select(&:write?)
+    end
+
+    # Get the to be written static files
+    #
+    # Returns an Array of StaticFiles which should be written
+    def static_files_to_write
+      static_files.select(&:write?)
     end
 
     # Get all the documents
@@ -357,7 +364,7 @@ module Jekyll
     end
 
     def each_site_file
-      %w(pages static_files docs_to_write).each do |type|
+      %w(pages static_files_to_write docs_to_write).each do |type|
         send(type).each do |item|
           yield item
         end
@@ -473,7 +480,11 @@ module Jekyll
       theme_config.delete_if { |key, _| Configuration::DEFAULTS.key?(key) }
 
       # Override theme_config with existing config and return the result.
+      # Additionally ensure we return a `Jekyll::Configuration` instance instead of a Hash.
       Utils.deep_merge_hashes(theme_config, config)
+        .each_with_object(Jekyll::Configuration.new) do |(key, value), conf|
+          conf[key] = value
+        end
     end
 
     # Limits the current posts; removes the posts which exceed the limit_posts
@@ -542,8 +553,8 @@ module Jekyll
         if config["theme"].is_a?(String)
           Jekyll::Theme.new(config["theme"])
         else
-          Jekyll.logger.warn "Theme:", "value of 'theme' in config should be " \
-          "String to use gem-based themes, but got #{config["theme"].class}"
+          Jekyll.logger.warn "Theme:", "value of 'theme' in config should be String to use " \
+                                       "gem-based themes, but got #{config["theme"].class}"
           nil
         end
     end

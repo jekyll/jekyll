@@ -18,8 +18,8 @@ module Jekyll
       # Otherwise, Jekyll.sanitized path with prepend the unresolved root
       @root ||= File.realpath(gemspec.full_gem_path)
     rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP
-      raise "Path #{gemspec.full_gem_path} does not exist, is not accessible "\
-        "or includes a symbolic link loop"
+      raise "Path #{gemspec.full_gem_path} does not exist, is not accessible or includes " \
+            "a symbolic link loop"
     end
 
     # The name of theme directory
@@ -41,6 +41,10 @@ module Jekyll
 
     def assets_path
       @assets_path ||= path_for "assets"
+    end
+
+    def data_path
+      @data_path ||= path_for "_data"
     end
 
     def snippets_path
