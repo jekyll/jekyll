@@ -38,20 +38,5 @@ class TestDoctorCommand < JekyllUnitTest
                               "other: #{dest_dir}/about/index.html, #{dest_dir}/About/index.html"
     end
     # rubocop:enable Layout/LineLength
-
-    context "static files in a collection" do
-      should "not trigger false positives" do
-        @site = Site.new(Jekyll.configuration(
-                           "source"      => source_dir,
-                           "destination" => dest_dir,
-                           "collections" => { "methods" => { "output" => true } }
-                         ))
-        @site.process
-        output = capture_stderr do
-          Jekyll::Commands::Doctor.conflicting_urls(@site)
-        end
-        refute_includes output, "extensionless_static_file"
-      end
-    end
   end
 end
