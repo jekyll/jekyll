@@ -116,6 +116,7 @@
   * Bump RuboCop to `1.36.x` (#9125)
   * Use check-spelling/check-spelling@v0.0.20 (#9111)
   * Disable pending cops when running rubocop (#9136)
+  * Relax RDoc version dependency (#9142)
 
 ### Minor Enhancements
 
