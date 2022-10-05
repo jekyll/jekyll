@@ -8,7 +8,6 @@ module Jekyll
     def initialize(_config)
       super
 
-      require_relative "incremental_regenerator"
       @regenerator = IncrementalRegenerator.new(self)
     end
 

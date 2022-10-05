@@ -2,10 +2,11 @@
 
 module Jekyll
   class Regenerator
-    attr_reader :site
+    attr_reader :site, :metadata
 
     def initialize(site)
       @site = site
+      @metadata = {}
     end
 
     # Produce the absolute path of the metadata file

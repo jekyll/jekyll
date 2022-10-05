@@ -87,6 +87,9 @@ module Jekyll
   autoload :Utils,               "jekyll/utils"
   autoload :VERSION,             "jekyll/version"
 
+  autoload :IncrementalSite,        "jekyll/incremental_site"
+  autoload :IncrementalRegenerator, "jekyll/incremental_regenerator"
+
   # extensions
   require "jekyll/plugin"
   require "jekyll/converter"
