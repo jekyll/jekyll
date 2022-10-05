@@ -9,9 +9,7 @@ class TestIncrementalRegenerator < JekyllUnitTest
       FileUtils.rm_rf(source_dir(".jekyll-metadata"))
 
       @site = Jekyll::IncrementalSite.new(
-        Jekyll.configuration(
-          "source"      => source_dir,
-          "destination" => dest_dir,
+        site_configuration(
           "collections" => {
             "methods" => {
               "output" => true,
@@ -100,9 +98,7 @@ class TestIncrementalRegenerator < JekyllUnitTest
     setup do
       FileUtils.rm_rf(source_dir(".jekyll-metadata"))
       @site = Jekyll::IncrementalSite.new(
-        Jekyll.configuration(
-          "source"      => source_dir,
-          "destination" => dest_dir,
+        site_configuration(
           "incremental" => true
         )
       )
@@ -139,9 +135,7 @@ class TestIncrementalRegenerator < JekyllUnitTest
       FileUtils.rm_rf(source_dir(".jekyll-metadata"))
 
       @site = Jekyll::IncrementalSite.new(
-        Jekyll.configuration(
-          "source"      => source_dir,
-          "destination" => dest_dir,
+        site_configuration(
           "incremental" => true
         )
       )
