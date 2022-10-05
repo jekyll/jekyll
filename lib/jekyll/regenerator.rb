@@ -2,11 +2,11 @@
 
 module Jekyll
   class Regenerator
-    attr_reader :site, :metadata
+    attr_reader :site, :metadata, :cache
 
     def initialize(site)
       @site = site
-      @metadata = {}
+      clear
     end
 
     # Produce the absolute path of the metadata file
@@ -16,11 +16,17 @@ module Jekyll
       @metadata_file ||= site.in_source_dir(".jekyll-metadata")
     end
 
-    # ---------------------- For backwards-compatibility. ----------------------
+    # -------------------------- For backwards-compatibility. --------------------------
+    # See `lib/jekyll/incremental_regenertor.rb` for details and working implementation.
 
-    def clear; end
+    def clear
+      @metadata = {}
+      clear_cache
+    end
 
-    def clear_cache; end
+    def clear_cache
+      @cache = {}
+    end
 
     def add_dependency(path, dependency); end
 
