@@ -167,7 +167,7 @@ module Jekyll
     end
 
     # -------------
-    # item.data["regenerate"] is useful when Jekyll isn't able to detect dependencies For example,
+    # item.data["regenerate"] is useful when Jekyll isn't able to detect dependencies. For example,
     # when a page uses Liquid to iterate through `site.posts`, etc.
     # -------------
 
