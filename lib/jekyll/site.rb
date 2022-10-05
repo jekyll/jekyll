@@ -108,7 +108,6 @@ module Jekyll
       @collections = nil
       @documents = nil
       @docs_to_write = nil
-      @regenerator.clear_cache
       @liquid_renderer.reset
       @site_cleaner = nil
       frontmatter_defaults.reset
@@ -228,9 +227,8 @@ module Jekyll
     def write
       Jekyll::Commands::Doctor.conflicting_urls(self)
       each_site_file do |item|
-        item.write(dest) if regenerator.regenerate?(item)
+        item.write(dest)
       end
-      regenerator.write_metadata
       Jekyll::Hooks.trigger :site, :post_write, self
       nil
     end
@@ -568,8 +566,6 @@ module Jekyll
     end
 
     def render_regenerated(document, payload)
-      return unless regenerator.regenerate?(document)
-
       document.renderer.payload = payload
       document.output = document.renderer.run
       document.trigger_hooks(:post_render)

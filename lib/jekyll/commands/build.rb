@@ -27,7 +27,8 @@ module Jekyll
           Jekyll.logger.adjust_verbosity(options)
 
           options = configuration_from_options(options)
-          site = Jekyll::Site.new(options)
+          siteklass = options["incremental"] ? Jekyll::IncrementalSite : Jekyll::Site
+          site = siteklass.new(options)
 
           if options.fetch("skip_initial_build", false)
             Jekyll.logger.warn "Build Warning:",
