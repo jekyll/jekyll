@@ -102,7 +102,7 @@ class TestIncrementalRegenerator < JekyllUnitTest
       @site = Jekyll::IncrementalSite.new(
         Jekyll.configuration(
           "source"      => source_dir,
-          "destination" => dest_dir,          
+          "destination" => dest_dir,
           "incremental" => true
         )
       )
