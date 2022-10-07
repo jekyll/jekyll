@@ -70,6 +70,7 @@
   * Windows: describe which option to choose (#9049)
   * Improve links (http -&gt; https) (#9064)
   * Update ruby version for macos guide (#9086)
+  * Update posts.md (#9151)
 
 ### Bug Fixes
 
