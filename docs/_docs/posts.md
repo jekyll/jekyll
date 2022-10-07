@@ -168,7 +168,7 @@ Categories of a post work similar to the tags above:
 *The similarity between categories and tags however, ends there.*
 
 Unlike tags, categories for posts can also be defined by a post's file path.
-Any directory above `_post` will be read-in as a category. For example,
+Any directory above `_posts` will be read-in as a category. For example,
 if a post is at path `movies/horror/_posts/2019-05-21-bride-of-chucky.markdown`,
 then `movies` and `horror` are automatically registered as categories for that
 post.
