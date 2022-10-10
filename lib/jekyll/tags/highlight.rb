@@ -34,18 +34,19 @@ module Jekyll
         prefix = context["highlighter_prefix"] || ""
         suffix = context["highlighter_suffix"] || ""
         code = super.to_s.gsub(LEADING_OR_TRAILING_LINE_TERMINATORS, "")
+        lang = context.key?(@lang) ? context[@lang] : @lang
 
         output =
           case context.registers[:site].highlighter
           when "rouge"
-            render_rouge(code)
+            render_rouge(code, lang)
           when "pygments"
-            render_pygments(code, context)
+            render_pygments(code, lang, context)
           else
             render_codehighlighter(code)
           end
 
-        rendered_output = add_code_tag(output)
+        rendered_output = add_code_tag(output, lang)
         prefix + rendered_output + suffix
       end
 
@@ -72,13 +73,13 @@ module Jekyll
         options
       end
 
-      def render_pygments(code, _context)
+      def render_pygments(code, lang, _context)
         Jekyll.logger.warn "Warning:", "Highlight Tag no longer supports rendering with Pygments."
         Jekyll.logger.warn "", "Using the default highlighter, Rouge, instead."
-        render_rouge(code)
+        render_rouge(code, lang)
       end
 
-      def render_rouge(code)
+      def render_rouge(code, lang)
         require "rouge"
         formatter = ::Rouge::Formatters::HTML.new
         if @highlight_options[:linenos]
@@ -91,7 +92,7 @@ module Jekyll
             }
           )
         end
-        lexer = ::Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
+        lexer = ::Rouge::Lexer.find_fancy(lang, code) || Rouge::Lexers::PlainText
         formatter.format(lexer.lex(code))
       end
 
@@ -99,10 +100,10 @@ module Jekyll
         h(code).strip
       end
 
-      def add_code_tag(code)
+      def add_code_tag(code, lang)
         code_attributes = [
-          "class=\"language-#{@lang.to_s.tr("+", "-")}\"",
-          "data-lang=\"#{@lang}\"",
+          "class=\"language-#{lang.to_s.tr("+", "-")}\"",
+          "data-lang=\"#{lang}\"",
         ].join(" ")
         "<figure class=\"highlight\"><pre><code #{code_attributes}>" \
           "#{code.chomp}</code></pre></figure>"
