@@ -29,5 +29,6 @@ Here are some of the most common commands:
 * `jekyll help` - Shows help, optionally for a given subcommand, e.g. `jekyll help build`.
 * `jekyll new-theme` - Creates a new Jekyll theme scaffold.
 * `jekyll doctor` - Outputs any deprecation or configuration issues.
+* `jekyll console` - Start an interactive console preloaded with a site instance (exposed via `site`).
 
 To change Jekyll's default build behavior have a look through the [configuration options](/docs/configuration/).
