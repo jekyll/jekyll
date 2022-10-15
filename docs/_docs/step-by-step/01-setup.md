@@ -34,7 +34,7 @@ gem "jekyll"
 
 Run the `bundle` command to install jekyll for your project.
 
-```ruby
+```sh
 bundle
 ```
 
