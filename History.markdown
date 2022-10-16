@@ -90,6 +90,7 @@
   * Ensure theme config is a `Jekyll::Configuration` object (#8988)
   * Remove misleading totals row from `--profile` table (#9039)
   * Unlock Psych dependency (#9135)
+  * Fix false positive conflicts for static files in a collection (#9141)
 
 ### Development Fixes
 
