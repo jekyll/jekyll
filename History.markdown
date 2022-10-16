@@ -137,6 +137,7 @@
   * Introduce `theme` drop to expose theme-gem details (#9129)
   * Relax version constraint to allow Rouge 4.x (#9134)
   * Incrementally rebuild when a data file is changed (#8771)
+  * Support jekyll-sass-converter 3.x (#9132)
 
 ### Site Enhancements
 
