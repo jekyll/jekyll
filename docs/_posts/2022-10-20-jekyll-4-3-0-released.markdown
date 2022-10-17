@@ -66,7 +66,6 @@ alena-ko, fauno, lm, lucafrance, nusu, shorty, なつき</small>
 
 ---
 
-
 ### Announcement
 
 I would like to inform you that following this release, Jekyll will start developing towards a v5.0 milestone that will
@@ -74,10 +73,15 @@ I would like to inform you that following this release, Jekyll will start develo
 a glimpse of the PROBABLE OUTCOME. Towards that end, we will no longer accept documentation fixes on `master`. The `4.3-stable`
 branch will be used to build and deploy the site for https://jekyllrb.com.
 
-Jekyll 3.x series is now under security-maintennce phase. Only security patches will be released when necessary.
+Jekyll 3.x series is now under security-maintenance phase. Only security patches will be released when necessary.
 
-Jekyll 4.x series will continue recieving bug-fixes and security-patches only. Depending on the state of progress towards v5.0,
-there will be *at least* one minor version release serving as a transistionary version containing deprecations and bridge code
-to ease eventual major upgrade.
+Jekyll 4.x series will continue receiving bug-fixes and security-patches only. Depending on the state of progress towards v5.0,
+there will be *at least* one minor version release serving as a transitionary version containing deprecations and bridge code
+to ease the eventual upgrade to v5.0.
 
 [roadmap]: {{ site.repository }}/issues/9156
+
+---
+
+That is all for now.
+Happy Jekyllin'!!
