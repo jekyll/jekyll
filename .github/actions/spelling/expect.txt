@@ -128,6 +128,7 @@ Debian
 debuggability
 defunkt
 delegators
+dependabot
 deployer
 deps
 dest
@@ -565,6 +566,7 @@ SFTP
 shingo
 shopify
 shortlog
+shortlinks
 shoulda
 sieversii
 sigpipe
