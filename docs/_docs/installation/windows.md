@@ -59,7 +59,7 @@ sudo apt-add-repository ppa:brightbox/ruby-ng
 sudo apt-get update
 ```
 
-Next we need to clone the Ruby directory from online and install it and any of  it's depenendcies to our home directory. 
+Next we need to clone the Ruby directory from online and install it and any of  it's dependencies to our home directory.
 
 ```sh
 cd $HOME
