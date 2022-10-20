@@ -96,7 +96,7 @@ Linking to a PDF for readers to download:
 ## Displaying an index of posts
 
 Creating an index of posts on another page should be easy thanks to
-[Liquid](https://docs.shopify.com/themes/liquid/basics) and its tags. Here’s a
+[Liquid](https://shopify.github.io/liquid/) and its tags. Here’s a
 simple example of how to create a list of links to your blog posts:
 
 {% raw %}
