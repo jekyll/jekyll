@@ -137,6 +137,7 @@
   * Improve links (http -&gt; https) (#9064)
   * Update ruby version for macos guide (#9086)
   * Update posts.md (#9151)
+  * Release post for v4.3.0 (#9157)
 
 ### Site Enhancements
 
