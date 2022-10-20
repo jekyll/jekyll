@@ -53,16 +53,17 @@ Some noteworthy bug-fixes include:
 
 As always, we are grateful to the many contributors that helped improve the project codebase and documentation:
 
-<small>Ashwin Maroli, Frank Taillandier, Matt Rogers, Parker Moore, Kelvin M. Klann, Josh Soref, Youssef Boulkaid, Emily Grace Seville,
-Robert Martin, jaybe@jekyll, Ben Keith, Jonathan Darrer, Mike Kasberg, Moncef Belyamani, Phil Ross, Sesh Sadasivam, Adam Bell,
-Alaz Tetik, Alex Malaszkiewicz, Alex Saveau, Andreas Deininger, Andrew Davis, Andrew Gutekanst, Andrii Abramov, Aram Akhavan,
-Atlas Cove, Attaphong Rattanaveerachanon, Ben Whetton, Chris Keefe, Clayton Smith, Craig H Maynard, Curious Cat, Daniel Haim,
-Daniel Kehoe, Daryl Hepting, David Bruant, David Zhang, Edson Jiménez, Eric Cousineau, Gary, Ikko Ashimine, JJ, JT, Jeff Wilcox,
-Jeffrey Veen, Jesse van der Pluijm, John Losito, Kaben, Kantanat-Stamp, Kirstin Heidler, Korbs, Laurence Andrews, Liam Bigelow,
-Maik Riechert, Meet Gor, Meg Gutshall, Michael Gerzabek, MichaelCordingley, Miguel Brandão, Nahin Khan, Nemo, Nicholas Paxford,
-Nick Coish, Otto Urpelainen, Parikshit87, Phil Kirlin, Qasim Qureshi, Ricardo N Feliciano, Rishi Raj Jain, SNVMK, SaintMalik,
-Sampath Sukesh Ravolaparthi, Shannon Kularathna, Shyam Mohan K, Takuya N, Tejas Bubane, Toshimaru, Tyler887, Vinhas Kevin,
-alena-ko, fauno, lm, lucafrance, nusu, shorty, なつき</small>
+<small>Ashwin Maroli, Frank Taillandier, Matt Rogers, Parker Moore, Kelvin M. Klann, Josh Soref, Youssef Boulkaid,
+Emily Grace Seville, Robert Martin, jaybe@jekyll, Ben Keith, Jonathan Darrer, Kaben, Mike Kasberg, Moncef Belyamani,
+Phil Ross, Sesh Sadasivam, Adam Bell, Alaz Tetik, Alex Malaszkiewicz, Alex Saveau, Andreas Deininger, Andrew Davis,
+Andrew Gutekanst, Andrii Abramov, Aram Akhavan, Atlas Cove, Attaphong Rattanaveerachanon, Ben Whetton, Chris Keefe,
+Clayton Smith, Craig H Maynard, Curious Cat, Daniel Haim, Daniel Kehoe, Daryl Hepting, David Bruant, David Zhang,
+Edson Jiménez, Eric Cousineau, Gary, Giuseppe Bertone, Ikko Ashimine, JJ, JT, Jeff Wilcox, Jeffrey Veen,
+Jesse van der Pluijm, John Losito, Kantanat-Stamp, Kirstin Heidler, Korbs, Laurence Andrews, Liam Bigelow, Maik Riechert,
+Meet Gor, Meg Gutshall, Michael Gerzabek, MichaelCordingley, Miguel Brandão, Nahin Khan, Nemo, Nicholas Paxford,
+Nick Coish, Otto Urpelainen, Parikshit87, Phil Kirlin, Qasim Qureshi, Ricardo N Feliciano, Rishi Raj Jain, SNVMK,
+SaintMalik, Sampath Sukesh Ravolaparthi, Shannon Kularathna, Shyam Mohan K, Takuya N, Tejas Bubane, Toshimaru, Tyler887,
+Vinhas Kevin, alena-ko, fauno, lm, lucafrance, nusu, shorty, なつき</small>
 
 ---
 
