@@ -48,7 +48,7 @@ Jekyll on your Mac, or if you run into any issues, read that guide.
 Install `chruby` and `ruby-install` with Homebrew:
 
 ```sh
-brew install chruby ruby-install
+brew install chruby ruby-install xz
 ```
 
 Install the latest stable version of Ruby:
