@@ -51,13 +51,39 @@ Your terminal should now be a Bash instance. Next, update your repository lists 
 sudo apt-get update -y && sudo apt-get upgrade -y
 ```
 
-Next, install Ruby. To do this, let's use a repository from [BrightBox](https://www.brightbox.com/docs/ruby/ubuntu/),
+Before we install Ruby let's use a repository from [BrightBox](https://www.brightbox.com/docs/ruby/ubuntu/),
 which hosts optimized versions of Ruby for Ubuntu.
 
 ```sh
 sudo apt-add-repository ppa:brightbox/ruby-ng
 sudo apt-get update
-sudo apt-get install ruby2.5 ruby2.5-dev build-essential dh-autoreconf
+```
+
+Next we need to clone the Ruby directory from online and install it and any of  it's depenendcies to our home directory. 
+
+```sh
+cd $HOME
+sudo apt-get update
+sudo apt install curl
+curl -sL <https://deb.nodesource.com/setup_19.x> | sudo -E bash -
+curl -sS <https://dl.yarnpkg.com/debian/pubkey.gpg> | sudo apt-key add -
+echo "deb <https://dl.yarnpkg.com/debian/> stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt-get update
+sudo apt-get install git-core zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev software-properties-common libffi-dev nodejs yarn
+
+cd
+git clone <https://github.com/rbenv/rbenv.git> ~/.rbenv
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+exec $SHELL
+
+git clone <https://github.com/rbenv/ruby-build.git> ~/.rbenv/plugins/ruby-build
+echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+exec $SHELL
+
+rbenv install 3.0.1
+rbenv global 3.0.1
+ruby -v
 ```
 
 Next, update your Ruby gems:
@@ -81,14 +107,19 @@ Check your Jekyll version:
 jekyll -v
 ```
 
+If you have gone to a directory and done `bundle init`  then you will get an error that will look similar to the one [found here](https://github.com/jekyll/jekyll/issues/8523).
+
+To fix it use this command to add it as.
+```sh
+bundle add webrick
+```
+
 That's it! You're ready to start using Jekyll. 
 
-You can make sure time management is working properly by inspecting your `_posts` folder. You should see a markdown file
+You can make sure time management is working properly by inspecting your `_posts` folder. You should see a markdown file with the current date in the filename.
+rkdown file
 with the current date in the filename.
-
-<div class="note info">
-  <h5>Non-superuser account issues</h5>
-  <p>If the `jekyll new` command prints the error "Your user account isn't allowed to install to the system RubyGems", see
+r user account isn't allowed to install to the system RubyGems", see
   the "Running Jekyll as Non-Superuser" instructions in
   <a href="{{ '/docs/troubleshooting/#no-sudo' | relative_url }}">Troubleshooting</a>.</p>
 </div>
