@@ -714,6 +714,40 @@ class TestSite < JekyllUnitTest
       end
     end
 
+    context "incremental build with a MD5 hashing method" do
+      setup do
+        @site = Site.new(site_configuration(
+                           "incremental"     => true,
+                           "incremental_key" => "md5"
+                         ))
+        @site.read
+      end
+
+      should "build incrementally using MD5 hashes" do
+        contacts_html = @site.pages.find { |p| p.name == "contacts.html" }
+        @site.process
+
+        source = @site.in_source_dir(contacts_html.path)
+        dest = File.expand_path(contacts_html.destination(@site.dest))
+        md5_hash1 = md5_file(dest) # first run must generate dest file
+
+        @site.process
+        md5_hash2 = md5_file(dest)
+        assert_equal md5_hash1, md5_hash2 # no modifications, so remain the same
+
+        # simulate file modification by user
+        File.write(source, "some extra content", File.size(source), :mode => "a")
+
+        @site.process
+        md5_hash3 = md5_file(dest)
+        refute_equal md5_hash2, md5_hash3 # must be regenerated
+
+        @site.process
+        md5_hash4 = md5_file(dest)
+        assert_equal md5_hash3, md5_hash4 # no modifications, so remain the same
+      end
+    end
+
     context "#in_cache_dir method" do
       setup do
         @site = Site.new(

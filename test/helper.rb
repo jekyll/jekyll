@@ -175,6 +175,11 @@ class JekyllUnitTest < Minitest::Test
     ENV[key] = old_value
   end
 
+  def md5_file(path)
+    require "digest"
+    Digest::MD5.file(path).hexdigest
+  end
+
   def capture_output(level = :debug)
     buffer = StringIO.new
     Jekyll.logger = Logger.new(buffer)
