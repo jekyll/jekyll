@@ -748,7 +748,7 @@ class TestSite < JekyllUnitTest
         md5_hash4 = md5_digest(dest)
         assert_equal md5_hash3, md5_hash4 # no modifications, so remain the same
 
-        # Remove extra content
+        # Reset source file to its previous contents
         File.truncate(source, source_file_size)
       end
     end
