@@ -141,7 +141,7 @@ class TestRegenerator < JekyllUnitTest
     end
 
     should "store modification times" do
-      assert_equal File.mtime(@path), @regenerator.metadata[@path]["mtime"]
+      assert_equal File.mtime(@path), @regenerator.metadata[@path]["incremental_key"]
     end
 
     should "cache processed entries" do
@@ -167,7 +167,7 @@ class TestRegenerator < JekyllUnitTest
 
     should "read from the metadata file" do
       @regenerator = Regenerator.new(@site)
-      assert_equal File.mtime(@path), @regenerator.metadata[@path]["mtime"]
+      assert_equal File.mtime(@path), @regenerator.metadata[@path]["incremental_key"]
     end
 
     should "read legacy YAML metadata" do
@@ -177,7 +177,7 @@ class TestRegenerator < JekyllUnitTest
       File.write(metadata_file, @regenerator.metadata.to_yaml)
 
       @regenerator = Regenerator.new(@site)
-      assert_equal File.mtime(@path), @regenerator.metadata[@path]["mtime"]
+      assert_equal File.mtime(@path), @regenerator.metadata[@path]["incremental_key"]
     end
 
     should "not crash when reading corrupted marshal file" do
@@ -195,7 +195,7 @@ class TestRegenerator < JekyllUnitTest
     should "be able to add a path to the metadata" do
       @regenerator.clear
       @regenerator.add(@path)
-      assert_equal File.mtime(@path), @regenerator.metadata[@path]["mtime"]
+      assert_equal File.mtime(@path), @regenerator.metadata[@path]["incremental_key"]
       assert_equal [], @regenerator.metadata[@path]["deps"]
       assert @regenerator.cache[@path]
     end
@@ -262,11 +262,11 @@ class TestRegenerator < JekyllUnitTest
     should "regenerate if file is modified" do
       @regenerator.clear
       @regenerator.add(@path)
-      @regenerator.metadata[@path]["mtime"] = Time.at(0)
+      @regenerator.metadata[@path]["incremental_key"] = Time.at(0)
       @regenerator.write_metadata
       @regenerator = Regenerator.new(@site)
 
-      refute_same File.mtime(@path), @regenerator.metadata[@path]["mtime"]
+      refute_same File.mtime(@path), @regenerator.metadata[@path]["incremental_key"]
       assert @regenerator.modified?(@path)
     end
 
