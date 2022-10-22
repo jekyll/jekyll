@@ -728,7 +728,7 @@ class TestSite < JekyllUnitTest
         @site.process
 
         source = @site.in_source_dir(contacts_html.path)
-        source_size = File.size(source)
+        source_file_size = File.size(source)
 
         dest = File.expand_path(contacts_html.destination(@site.dest))
         md5_hash1 = md5_digest(dest) # first run must generate dest file
@@ -738,7 +738,7 @@ class TestSite < JekyllUnitTest
         assert_equal md5_hash1, md5_hash2 # no modifications, so remain the same
 
         # simulate file modification by user
-        File.write(source, "some extra content", File.size(source), :mode => "a")
+        File.write(source, "some extra content", source_file_size, :mode => "a")
 
         @site.process
         md5_hash3 = md5_digest(dest)
@@ -749,7 +749,7 @@ class TestSite < JekyllUnitTest
         assert_equal md5_hash3, md5_hash4 # no modifications, so remain the same
 
         # Remove extra content
-        File.truncate(source, source_size)
+        File.truncate(source, source_file_size)
       end
     end
 
