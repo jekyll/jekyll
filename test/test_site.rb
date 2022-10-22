@@ -728,6 +728,8 @@ class TestSite < JekyllUnitTest
         @site.process
 
         source = @site.in_source_dir(contacts_html.path)
+        source_size = File.size(source)
+
         dest = File.expand_path(contacts_html.destination(@site.dest))
         md5_hash1 = md5_file(dest) # first run must generate dest file
 
@@ -745,6 +747,9 @@ class TestSite < JekyllUnitTest
         @site.process
         md5_hash4 = md5_file(dest)
         assert_equal md5_hash3, md5_hash4 # no modifications, so remain the same
+
+        # Remove extra content
+        File.truncate(source, source_size)
       end
     end
 
