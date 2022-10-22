@@ -307,6 +307,43 @@ class TestRegenerator < JekyllUnitTest
     end
   end
 
+  context "using MD5 as the incremental_key" do
+    setup do
+      FileUtils.rm_rf(source_dir(".jekyll-metadata"))
+
+      @site = Site.new(Jekyll.configuration(
+                         "source"          => source_dir,
+                         "destination"     => dest_dir,
+                         "incremental"     => true,
+                         "incremental_key" => "md5"
+                       ))
+
+      @site.process
+      @path = @site.in_source_dir(@site.pages.first.path)
+      @regenerator = @site.regenerator
+    end
+
+    should "store MD5 file digests" do
+      assert_equal md5_file(@path), @regenerator.metadata[@path]["incremental_key"]
+    end
+
+    should "read from the metadata file" do
+      @regenerator = Regenerator.new(@site)
+      assert_equal md5_file(@path), @regenerator.metadata[@path]["incremental_key"]
+    end
+
+    should "regenerate if file is modified" do
+      @regenerator.clear
+      @regenerator.add(@path)
+      @regenerator.metadata[@path]["incremental_key"] = "old-md5"
+      @regenerator.write_metadata
+      @regenerator = Regenerator.new(@site)
+
+      refute_same md5_file(@path), @regenerator.metadata[@path]["incremental_key"]
+      assert @regenerator.modified?(@path)
+    end
+  end
+
   context "when incremental regeneration is disabled" do
     setup do
       FileUtils.rm_rf(source_dir(".jekyll-metadata"))
