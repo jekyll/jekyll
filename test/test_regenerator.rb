@@ -324,12 +324,12 @@ class TestRegenerator < JekyllUnitTest
     end
 
     should "store MD5 file digests" do
-      assert_equal md5_file(@path), @regenerator.metadata[@path]["incremental_key"]
+      assert_equal md5_digest(@path), @regenerator.metadata[@path]["incremental_key"]
     end
 
     should "read from the metadata file" do
       @regenerator = Regenerator.new(@site)
-      assert_equal md5_file(@path), @regenerator.metadata[@path]["incremental_key"]
+      assert_equal md5_digest(@path), @regenerator.metadata[@path]["incremental_key"]
     end
 
     should "regenerate if file is modified" do
@@ -339,7 +339,7 @@ class TestRegenerator < JekyllUnitTest
       @regenerator.write_metadata
       @regenerator = Regenerator.new(@site)
 
-      refute_same md5_file(@path), @regenerator.metadata[@path]["incremental_key"]
+      refute_same md5_digest(@path), @regenerator.metadata[@path]["incremental_key"]
       assert @regenerator.modified?(@path)
     end
   end

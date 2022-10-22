@@ -175,7 +175,7 @@ class JekyllUnitTest < Minitest::Test
     ENV[key] = old_value
   end
 
-  def md5_file(path)
+  def md5_digest(path)
     require "digest"
     Digest::MD5.file(path).hexdigest
   end
