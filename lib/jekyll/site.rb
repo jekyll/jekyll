@@ -389,8 +389,8 @@ module Jekyll
     # The key to use for deciding what files have been modified since the last build
     #
     # Returns a String: one of the supported keys like "mtime" or "md5"
-    def incremental_cache_key(override = {})
-      override["incremental_cache_key"] || config["incremental_cache_key"]
+    def incremental_key(override = {})
+      override["incremental_key"] || config["incremental_key"]
     end
 
     # Returns the publisher or creates a new publisher if it doesn't
