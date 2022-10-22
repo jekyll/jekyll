@@ -723,7 +723,7 @@ class TestSite < JekyllUnitTest
         @site.read
       end
 
-      should "build incrementally using MD5 hashes" do
+      should "build incrementally using MD5 digest" do
         contacts_html = @site.pages.find { |p| p.name == "contacts.html" }
         @site.process
 
@@ -731,22 +731,22 @@ class TestSite < JekyllUnitTest
         source_file_size = File.size(source)
 
         dest = File.expand_path(contacts_html.destination(@site.dest))
-        md5_hash1 = md5_digest(dest) # first run must generate dest file
+        md5_digest1 = md5_digest(dest) # first run must generate dest file
 
         @site.process
-        md5_hash2 = md5_digest(dest)
-        assert_equal md5_hash1, md5_hash2 # no modifications, so remain the same
+        md5_digest2 = md5_digest(dest)
+        assert_equal md5_digest1, md5_digest2 # no modifications, so remain the same
 
         # simulate file modification by user
         File.write(source, "some extra content", source_file_size, :mode => "a")
 
         @site.process
-        md5_hash3 = md5_digest(dest)
-        refute_equal md5_hash2, md5_hash3 # must be regenerated
+        md5_digest3 = md5_digest(dest)
+        refute_equal md5_digest2, md5_digest3 # must be regenerated
 
         @site.process
-        md5_hash4 = md5_digest(dest)
-        assert_equal md5_hash3, md5_hash4 # no modifications, so remain the same
+        md5_digest4 = md5_digest(dest)
+        assert_equal md5_digest3, md5_digest4 # no modifications, so remain the same
 
         # Reset source file to its previous contents
         File.truncate(source, source_file_size)
