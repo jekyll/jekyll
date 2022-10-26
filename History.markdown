@@ -1,3 +1,9 @@
+## HEAD
+
+### Bug Fixes
+
+  * Respect user-defined name attribute in documents (#9167)
+
 ## 4.3.0 / 2022-10-20
 
 ### Minor Enhancements
