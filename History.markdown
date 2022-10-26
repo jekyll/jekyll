@@ -3,6 +3,7 @@
 ### Bug Fixes
 
   * Respect user-defined name attribute in documents (#9167)
+  * Revert &#34;Incrementally rebuild when a data file is changed&#34; (#9170)
 
 ## 4.3.0 / 2022-10-20
 
