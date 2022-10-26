@@ -47,14 +47,7 @@ module Jekyll
     end
 
     def mergable?(value)
-      case value
-      when Hash, Drops::Drop, DataHash
-        true
-      when DataEntry
-        mergable?(value.data)
-      else
-        false
-      end
+      value.is_a?(Hash) || value.is_a?(Drops::Drop)
     end
 
     def duplicable?(obj)
