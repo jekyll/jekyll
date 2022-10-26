@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="https://jekyllrb.com/feed/release.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2022-10-26T09:38:42-07:00</updated><id>https://jekyllrb.com/feed/release.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites | Release</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 4.3.0 Released</title><link href="https://jekyllrb.com/news/2022/10/20/jekyll-4-3-0-released/" rel="alternate" type="text/html" title="Jekyll 4.3.0 Released" /><published>2022-10-20T08:20:22-07:00</published><updated>2022-10-20T08:20:22-07:00</updated><id>https://jekyllrb.com/news/2022/10/20/jekyll-4-3-0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2022/10/20/jekyll-4-3-0-released/"><![CDATA[<p>Hello Jekyllers!</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="https://jekyllrb.com/feed/release.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2022-10-26T10:49:43-07:00</updated><id>https://jekyllrb.com/feed/release.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites | Release</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 4.3.1 Released</title><link href="https://jekyllrb.com/news/2022/10/26/jekyll-4-3-1-released/" rel="alternate" type="text/html" title="Jekyll 4.3.1 Released" /><published>2022-10-26T06:39:42-07:00</published><updated>2022-10-26T06:39:42-07:00</updated><id>https://jekyllrb.com/news/2022/10/26/jekyll-4-3-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2022/10/26/jekyll-4-3-1-released/"><![CDATA[<p>Hello Jekyllers!</p>
+
+<p>We’re shipping <code class="language-plaintext highlighter-rouge">v4.3.1</code> containing fixes for two issues with v4.3.0:</p>
+<ul>
+  <li>Jekyll now respects user-defined <code class="language-plaintext highlighter-rouge">name</code> attribute for collection documents when accessed in Liquid templates.</li>
+  <li>Revert the changes made to trigger incremental rebuilds when data files are changed.</li>
+</ul>
+
+<p>Thanks to the users who took the time to report the issues to us.
+Happy Jekyllin’</p>
+
+<p>P.S. Development towards v5 has taken a back seat as of now. I plan on releasing a v4.4.0 instead.
+That said, please feel free to comment on the <a href="https://github.com/jekyll/jekyll/issues/9156">tentative roadmap to v5</a>.</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.3.0 Released</title><link href="https://jekyllrb.com/news/2022/10/20/jekyll-4-3-0-released/" rel="alternate" type="text/html" title="Jekyll 4.3.0 Released" /><published>2022-10-20T08:20:22-07:00</published><updated>2022-10-20T08:20:22-07:00</updated><id>https://jekyllrb.com/news/2022/10/20/jekyll-4-3-0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2022/10/20/jekyll-4-3-0-released/"><![CDATA[<p>Hello Jekyllers!</p>
 
 <p>The Jekyll team is happy to announce the release of <code class="language-plaintext highlighter-rouge">v4.3.0</code> shipping with some nice improvements and bug-fixes.</p>
 
@@ -287,20 +299,4 @@ Kayce Basques, Kieran Barker, Leo, Liam Bigelow, lizharris, Lizzy Kate, Luis Pue
 Matt Rogers, matt swanson, Max Chadwick, michaelcurrin, Mike Kasberg, Mike Neumegen, Muhammed Salih, Nikhil Benesch,
 Paramdeo Singh, Patrik Eriksson, Phil Nash, Philip Eriksson, R.P. Pedraza, Radoslav Karlík, Riccardo Porreca,
 sharath Kumar, Simone Arpe, Takashi Udagawa, Tobias Klüpfel, Toby Glei, vhermecz, Viktor Szakats, Ward Sandler, wzy,
-XhmikosR, Zlatan Vasović.</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.0.1 Released</title><link href="https://jekyllrb.com/news/2020/05/08/jekyll-4-0-1-released/" rel="alternate" type="text/html" title="Jekyll 4.0.1 Released" /><published>2020-05-08T10:00:00-07:00</published><updated>2020-05-08T10:00:00-07:00</updated><id>https://jekyllrb.com/news/2020/05/08/jekyll-4-0-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2020/05/08/jekyll-4-0-1-released/"><![CDATA[<p>Jekyll 4.0.1 is out and fixes a few issues reported by the community since 4.0.</p>
-
-<ul>
-  <li>When using Ruby 2.7, you won’t get any more warnings in your console when running Jekyll. (This fix is also backported in <a href="https://github.com/jekyll/jekyll/releases/tag/v3.8.7">Jekyll 3.8.7</a>).</li>
-  <li>Liquid variables are now properly cached.</li>
-  <li>Jekyll build will no longer fail for collections with a custom permalink containing static files.</li>
-  <li>Jekyll filters now properly recognize integers.</li>
-</ul>
-
-<p>👀 A <a href="https://github.com/jekyll/jekyll/releases/tag/v4.0.1">release changelog</a> is available for your perusal.</p>
-
-<p>🙏 Many thanks to our contributors without whom this release could not be
-possible: @ashmaroli and <a href="https://github.com/summerisgone">Ivan Gromov</a></p>
-
-<p>Expect more fixes and improvements on the next minor release!</p>
-
-<p>Happy Jekylling!</p>]]></content><author><name>dirtyf</name></author><category term="release" /><summary type="html"><![CDATA[Jekyll 4.0.1 is out and fixes a few issues reported by the community since 4.0.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+XhmikosR, Zlatan Vasović.</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

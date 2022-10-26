@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2022-10-26T09:38:42-07:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 4.3.0 Released</title><link href="https://jekyllrb.com/news/2022/10/20/jekyll-4-3-0-released/" rel="alternate" type="text/html" title="Jekyll 4.3.0 Released" /><published>2022-10-20T08:20:22-07:00</published><updated>2022-10-20T08:20:22-07:00</updated><id>https://jekyllrb.com/news/2022/10/20/jekyll-4-3-0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2022/10/20/jekyll-4-3-0-released/"><![CDATA[<p>Hello Jekyllers!</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.0">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2022-10-26T10:49:43-07:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 4.3.1 Released</title><link href="https://jekyllrb.com/news/2022/10/26/jekyll-4-3-1-released/" rel="alternate" type="text/html" title="Jekyll 4.3.1 Released" /><published>2022-10-26T06:39:42-07:00</published><updated>2022-10-26T06:39:42-07:00</updated><id>https://jekyllrb.com/news/2022/10/26/jekyll-4-3-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2022/10/26/jekyll-4-3-1-released/"><![CDATA[<p>Hello Jekyllers!</p>
+
+<p>We’re shipping <code class="language-plaintext highlighter-rouge">v4.3.1</code> containing fixes for two issues with v4.3.0:</p>
+<ul>
+  <li>Jekyll now respects user-defined <code class="language-plaintext highlighter-rouge">name</code> attribute for collection documents when accessed in Liquid templates.</li>
+  <li>Revert the changes made to trigger incremental rebuilds when data files are changed.</li>
+</ul>
+
+<p>Thanks to the users who took the time to report the issues to us.
+Happy Jekyllin’</p>
+
+<p>P.S. Development towards v5 has taken a back seat as of now. I plan on releasing a v4.4.0 instead.
+That said, please feel free to comment on the <a href="https://github.com/jekyll/jekyll/issues/9156">tentative roadmap to v5</a>.</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.3.0 Released</title><link href="https://jekyllrb.com/news/2022/10/20/jekyll-4-3-0-released/" rel="alternate" type="text/html" title="Jekyll 4.3.0 Released" /><published>2022-10-20T08:20:22-07:00</published><updated>2022-10-20T08:20:22-07:00</updated><id>https://jekyllrb.com/news/2022/10/20/jekyll-4-3-0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2022/10/20/jekyll-4-3-0-released/"><![CDATA[<p>Hello Jekyllers!</p>
 
 <p>The Jekyll team is happy to announce the release of <code class="language-plaintext highlighter-rouge">v4.3.0</code> shipping with some nice improvements and bug-fixes.</p>
 
@@ -252,63 +264,4 @@ having a variant of either of the following code blocks inside a page source, sa
 <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">pages</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">sort</span><span class="p">:</span><span class="w"> </span><span class="s1">'title'</span><span class="w"> </span><span class="p">}}</span>
 </code></pre></div></div>
 
-<p>Therefore, we advise caution when opting to use the page-excerpt feature.</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Jekyll 4.1.0 brought two notable changes: Page-excerpts and Liquid Drop for Page objects. However these seemingly benign changes had unexpected adverse side-effects which did not figure in our tests.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.1.0 Released</title><link href="https://jekyllrb.com/news/2020/05/27/jekyll-4-1-0-released/" rel="alternate" type="text/html" title="Jekyll 4.1.0 Released" /><published>2020-05-27T02:50:30-07:00</published><updated>2020-05-27T02:50:30-07:00</updated><id>https://jekyllrb.com/news/2020/05/27/jekyll-4-1-0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2020/05/27/jekyll-4-1-0-released/"><![CDATA[<p>Hello Jekyllers!</p>
-
-<p>It’s time for yet another release that includes enhancements, optimizations and bug-fixes. Highlights of this release
-are:</p>
-
-<ul>
-  <li>Jekyll now supports rendering excerpts for <em>pages</em> in addition to documents and posts.</li>
-  <li>The <a href="/docs/liquid/filters/#where-expression"><code class="language-plaintext highlighter-rouge">where_exp</code></a> filter got enhanced.  Earlier, one could just use either <code class="language-plaintext highlighter-rouge">and</code> or <code class="language-plaintext highlighter-rouge">or</code> once
-per expression. Now, one may use those binary operators multiple times in the filter’s expression.</li>
-  <li>Jekyll has a new set of filters based on <em>its flavor</em> of the <code class="language-plaintext highlighter-rouge">where</code> and <code class="language-plaintext highlighter-rouge">where_exp</code> filters. Named
-<a href="/docs/liquid/filters/#find"><code class="language-plaintext highlighter-rouge">find</code></a> and <a href="/docs/liquid/filters/#find-expression"><code class="language-plaintext highlighter-rouge">find_exp</code></a> filters respectively, they work similar to their ancestors
-except that they return <strong>the first object</strong> that satisfies the given conditions.</li>
-  <li>Jekyll’s <a href="/docs/liquid/filters/#number-of-words"><code class="language-plaintext highlighter-rouge">number_of_words</code></a> filter can now take an optional argument to better count words
-of text containing Chinese, Japanese or Korean characters.</li>
-  <li>One may now use <code class="language-plaintext highlighter-rouge">:slugified_categories</code> in their permalink configurations to generate a more apt URL (categories are
-downcased and non-alphanumeric characters replaced by dashes) for their for posts and documents.</li>
-  <li>The logic for <em>slugifying</em> a given string has been enhanced to support more Unicode characters.</li>
-  <li>If you face issues from Jekyll importing a config file bundled within a theme, you can now disable the import entirely
-by setting <code class="language-plaintext highlighter-rouge">ignore_theme_config: true</code> in your site’s configuration file.</li>
-  <li>If you face issues from Jekyll’s disk-caching feature, you can now disable the mechanism without opting to build in
-<code class="language-plaintext highlighter-rouge">safe</code> mode, by either setting <code class="language-plaintext highlighter-rouge">disable_disk_cache: true</code> in your configuration file or by passing the CLI switch
-<code class="language-plaintext highlighter-rouge">--disable-disk-cache</code> to <code class="language-plaintext highlighter-rouge">jekyll build</code> or <code class="language-plaintext highlighter-rouge">jekyll serve</code> commands.</li>
-  <li>When you build a site with the <code class="language-plaintext highlighter-rouge">--profile</code> switch, Jekyll will now additionally output a small table showing the amount
-of time taken during various stages of the <em>build process</em>.</li>
-  <li>Jekyll’s development server now supports certificates based on Elliptic-curve cryptography.</li>
-</ul>
-
-<p>For the interest of plugin authors:</p>
-<ul>
-  <li>Excerpts won’t be generated for <code class="language-plaintext highlighter-rouge">Jekyll::Page</code> subclasses automatically unless such instances have an <code class="language-plaintext highlighter-rouge">excerpt</code> key in
-their <code class="language-plaintext highlighter-rouge">data</code> hash.</li>
-</ul>
-
-<p>For the interest of gem-based theme authors:</p>
-<ul>
-  <li>From <code class="language-plaintext highlighter-rouge">v4.1.0</code> onwards, a newly generated theme workspace (via <code class="language-plaintext highlighter-rouge">jekyll new-theme ...</code>) will have the gemspec configured
-to bundle a <code class="language-plaintext highlighter-rouge">_config.yml</code> at the root of the workspace. If you don’t wish to include the configuration file in the
-released gem, please remove <code class="language-plaintext highlighter-rouge">|_config\.yml</code> from the regular expression in the gemspec.</li>
-</ul>
-
-<h3 id="have-questions">Have questions?</h3>
-
-<p>Please reach out on our <a href="https://talk.jekyllrb.com">community forum</a></p>
-
-<h3 id="thank-you-bow">Thank you!! :bow:</h3>
-
-<p>We are thankful to our community for all the contributions that helped shape this release.
-Special thanks to the following 78 contributors (in alphabetical order) who made this release possible and took the time
-to submit a pull request:</p>
-
-<p>Aaron Adams, Aaron K Redshaw, Alexandre Zanni, Anindita Basu, Arthur Zey, Artyom Tokachev, Ashwin Maroli, Atlas Cove,
-Ben Stolovitz, Billy Kong, Christian Oliff, codenitpicker, csquare, Damien St Pierre, Daniel Leidert, David Zhang,
-ddocs, dgolant, dkalev, Dmitry Egorov, dotnetCarpenter, Edward Thomson, Eric Knibbe, Frank Taillandier, Gabriel Rubens,
-Gareth Mcshane, Grzegorz Kaczorek, guanicoe, Harry Wood, HTeuMeuLeu, iBug, İsmail Arılık, Itay Shakury, Ivan Gromov,
-Ivan Raszl, J·Y, James Buckley, Jason Taylor, JC, jeffreytse, Johan Wigert, jonas-krummenacher, Justin Jia,
-Kayce Basques, Kieran Barker, Leo, Liam Bigelow, lizharris, Lizzy Kate, Luis Puente, Mark Bennett, Matt Penna,
-Matt Rogers, matt swanson, Max Chadwick, michaelcurrin, Mike Kasberg, Mike Neumegen, Muhammed Salih, Nikhil Benesch,
-Paramdeo Singh, Patrik Eriksson, Phil Nash, Philip Eriksson, R.P. Pedraza, Radoslav Karlík, Riccardo Porreca,
-sharath Kumar, Simone Arpe, Takashi Udagawa, Tobias Klüpfel, Toby Glei, vhermecz, Viktor Szakats, Ward Sandler, wzy,
-XhmikosR, Zlatan Vasović.</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<p>Therefore, we advise caution when opting to use the page-excerpt feature.</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Jekyll 4.1.0 brought two notable changes: Page-excerpts and Liquid Drop for Page objects. However these seemingly benign changes had unexpected adverse side-effects which did not figure in our tests.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
