@@ -16,7 +16,7 @@ module Jekyll
       end
 
       def name
-        @obj.doc.basename
+        @obj.doc.data["name"] || @obj.doc.basename
       end
     end
   end
