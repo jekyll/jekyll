@@ -89,11 +89,19 @@ module Jekyll
       end
 
       def line_highlighter_formatter(formatter)
+        unless @highlight_options[:highlight_lines].is_a?(Array)
+          raise SyntaxError, <<~MSG
+            Syntax Error for highlight_lines declaration. Expected an array of integers, got '#{@highlight_options[:highlight_lines]}'
+          MSG
+        end
+
         ::Rouge::Formatters::HTMLLineHighlighter.new(
           formatter,
           :highlight_lines      => @highlight_options[:highlight_lines].map(&:to_i),
           :highlight_line_class => @highlight_options[:highlight_line_class] || "hll"
         )
+      rescue ArgumentError => e
+        Jekyll.logger.error "Error:", e.message
       end
 
       def table_formatter(formatter)
