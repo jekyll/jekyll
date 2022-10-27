@@ -91,7 +91,7 @@ module Jekyll
       def line_highlighter_formatter(formatter)
         unless @highlight_options[:highlight_lines].is_a?(Array)
           raise SyntaxError, <<~MSG
-            Syntax Error for highlight_lines declaration. Expected an array of integers, got '#{@highlight_options[:highlight_lines]}'
+            Syntax Error for highlight_lines declaration. Expected an double-quoted list of integers'
           MSG
         end
 
