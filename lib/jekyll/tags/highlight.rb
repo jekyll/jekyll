@@ -89,19 +89,31 @@ module Jekyll
       end
 
       def line_highlighter_formatter(formatter)
+        ::Rouge::Formatters::HTMLLineHighlighter.new(
+          formatter,
+          :highlight_lines      => highlight_lines,
+          :highlight_line_class => highlight_line_class
+        )
+      end
+
+      def highlight_lines
         unless @highlight_options[:highlight_lines].is_a?(Array)
           raise SyntaxError, <<~MSG
             Syntax Error for highlight_lines declaration. Expected an double-quoted list of integers'
           MSG
         end
 
-        ::Rouge::Formatters::HTMLLineHighlighter.new(
-          formatter,
-          :highlight_lines      => @highlight_options[:highlight_lines].map(&:to_i),
-          :highlight_line_class => @highlight_options[:highlight_line_class] || "hll"
-        )
-      rescue ArgumentError => e
-        Jekyll.logger.error "Error:", e.message
+        @highlight_options[:highlight_lines].map(&:to_i)
+      end
+
+      def highlight_line_class
+        if @highlight_options[:highlight_line_class]
+          # if `highlight_line_class` has been declared in double-quotes (and hence
+          # converted to an array), be forgiving and convert it to a string respresentation
+          [@highlight_options[:highlight_line_class]].join(" ").to_s
+        else
+          "hll"
+        end
       end
 
       def table_formatter(formatter)
