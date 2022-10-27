@@ -33,11 +33,8 @@ Feature: Syntax Highlighting
     And I should see "<span class="nc">RewriteCond</span>" in "_site/index.html"
 
   Scenario: highlighting lines 1 and 2 in a Ruby code block with valid syntax
-    Given I have a "test.rb" file with content:
+    Given I have a "test.rb" page with content:
       """
-      ---
-      ---
-
       {% highlight ruby highlight_lines="1 2" %}
       module Jekyll
         module Tags
@@ -51,11 +48,8 @@ Feature: Syntax Highlighting
     And I should see "<span class=\"k\">class</span> <span class=\"nc\">HighlightBlock</span" in "_site/test.rb"
 
   Scenario: highlighting a single line in a Ruby code block using invalid syntax
-    Given I have a "test.rb" file with content:
+    Given I have a "test.rb" page with content:
       """
-      ---
-      ---
-
       {% highlight ruby highlight_lines=1 %}
       module Jekyll
         module Tags
@@ -66,11 +60,8 @@ Feature: Syntax Highlighting
     Then I should see "Liquid Exception: Syntax Error" in the build output
 
   Scenario: highlighting lines 1 and 2 in a Ruby code block using a custom class name with valid syntax
-    Given I have a "test.rb" file with content:
+    Given I have a "test.rb" page with content:
       """
-      ---
-      ---
-
       {% highlight ruby highlight_lines="1 2" highlight_line_class=myclass %}
       module Jekyll
         module Tags
@@ -84,11 +75,8 @@ Feature: Syntax Highlighting
     And I should see "<span class=\"k\">class</span> <span class=\"nc\">HighlightBlock</span" in "_site/test.rb"
 
   Scenario: highlighting lines 1 and 2 in a Ruby code block using a custom class name with invalid syntax
-    Given I have a "test.rb" file with content:
+    Given I have a "test.rb" page with content:
       """
-      ---
-      ---
-
       {% highlight ruby highlight_lines="1 2" highlight_line_class="myclass" %}
       module Jekyll
         module Tags
