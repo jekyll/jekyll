@@ -4,29 +4,14 @@ Feature: Syntax Highlighting
   And make them pretty for all the world to see
 
   Scenario: highlighting an apache configuration
-    Given I have an "index.html" file with content:
+    Given I have an "index.html" page with content:
       """
-      ---
-      ---
-
       {% highlight apache %}
       RewriteEngine On
       RewriteCond %{REQUEST_FILENAME} !-f
       RewriteCond %{REQUEST_FILENAME} !-d
       RewriteRule ^(.*)$ index.php [QSA,L]
       {% endhighlight %}
-
-      ```apache
-      RewriteEngine On
-      RewriteCond %{REQUEST_FILENAME} !-f
-      RewriteCond %{REQUEST_FILENAME} !-d
-      RewriteRule ^(.*)$ index.php [QSA,L]
-      ```
-      """
-    And I have a "_config.yml" file with content:
-      """
-      kramdown:
-        input: GFM
       """
     When I run jekyll build
     Then I should get a zero exit-status
