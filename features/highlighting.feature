@@ -33,7 +33,7 @@ Feature: Syntax Highlighting
     And I should see "<span class="nc">RewriteCond</span>" in "_site/index.html"
 
   Scenario: highlighting lines 1 and 2 in a Ruby code block with valid syntax
-    Given I have a "test.rb" page with content:
+    Given I have an "index.html" page with content:
       """
       {% highlight ruby highlight_lines="1 2" %}
       module Jekyll
@@ -43,12 +43,12 @@ Feature: Syntax Highlighting
       """
     When I run jekyll build
     Then I should get a zero exit-status
-    And I should see "<span class=\"hll\"><span class=\"k\">module</span> <span class=\"nn\">Jekyll</span>" in "_site/test.rb"
-    And I should see "<span class=\"hll\">  <span class=\"k\">module</span> <span class=\"nn\">Tags</span>" in "_site/test.rb"
-    And I should see "<span class=\"k\">class</span> <span class=\"nc\">HighlightBlock</span" in "_site/test.rb"
+    And I should see "<span class=\"hll\"><span class=\"k\">module</span> <span class=\"nn\">Jekyll</span>" in "_site/index.html"
+    And I should see "<span class=\"hll\">  <span class=\"k\">module</span> <span class=\"nn\">Tags</span>" in "_site/index.html"
+    And I should see "<span class=\"k\">class</span> <span class=\"nc\">HighlightBlock</span" in "_site/index.html"
 
   Scenario: highlighting a single line in a Ruby code block using invalid syntax
-    Given I have a "test.rb" page with content:
+    Given I have an "index.html" page with content:
       """
       {% highlight ruby highlight_lines=1 %}
       module Jekyll
@@ -60,7 +60,7 @@ Feature: Syntax Highlighting
     Then I should see "Liquid Exception: Syntax Error" in the build output
 
   Scenario: highlighting lines 1 and 2 in a Ruby code block using a custom class name with valid syntax
-    Given I have a "test.rb" page with content:
+    Given I have an "index.html" page with content:
       """
       {% highlight ruby highlight_lines="1 2" highlight_line_class=myclass %}
       module Jekyll
@@ -70,12 +70,12 @@ Feature: Syntax Highlighting
       """
     When I run jekyll build
     Then I should get a zero exit-status
-    And I should see "<span class=\"myclass\"><span class=\"k\">module</span> <span class=\"nn\">Jekyll</span>" in "_site/test.rb"
-    And I should see "<span class=\"myclass\">  <span class=\"k\">module</span> <span class=\"nn\">Tags</span>" in "_site/test.rb"
-    And I should see "<span class=\"k\">class</span> <span class=\"nc\">HighlightBlock</span" in "_site/test.rb"
+    And I should see "<span class=\"myclass\"><span class=\"k\">module</span> <span class=\"nn\">Jekyll</span>" in "_site/index.html"
+    And I should see "<span class=\"myclass\">  <span class=\"k\">module</span> <span class=\"nn\">Tags</span>" in "_site/index.html"
+    And I should see "<span class=\"k\">class</span> <span class=\"nc\">HighlightBlock</span" in "_site/index.html"
 
   Scenario: highlighting lines 1 and 2 in a Ruby code block using a custom class name with invalid syntax
-    Given I have a "test.rb" page with content:
+    Given I have an "index.html" page with content:
       """
       {% highlight ruby highlight_lines="1 2" highlight_line_class="myclass" %}
       module Jekyll
