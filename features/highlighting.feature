@@ -74,10 +74,16 @@ Feature: Syntax Highlighting
     And I should see "<span class=\"myclass\">  <span class=\"k\">module</span> <span class=\"nn\">Tags</span>" in "_site/index.html"
     And I should see "<span class=\"k\">class</span> <span class=\"nc\">HighlightBlock</span" in "_site/index.html"
 
-  Scenario: highlighting lines 1 and 2 in a Ruby code block using a custom class name in double-quotes
+  Scenario: highlighting lines 1 and 2 in a Ruby code block using a custom class name declared as double-quoted string of numbers
     Given I have an "index.html" page with content:
       """
       {% highlight ruby highlight_lines="1 2" highlight_line_class="1 2" %}
+      module Jekyll
+        module Tags
+          class HighlightBlock < Liquid::Block
+      {% endhighlight %}
+
+      {% highlight ruby highlight_lines="3" highlight_line_class="12" %}
       module Jekyll
         module Tags
           class HighlightBlock < Liquid::Block
@@ -88,3 +94,4 @@ Feature: Syntax Highlighting
     And I should see "<span class=\"1 2\"><span class=\"k\">module</span> <span class=\"nn\">Jekyll</span>" in "_site/index.html"
     And I should see "<span class=\"1 2\">  <span class=\"k\">module</span> <span class=\"nn\">Tags</span>" in "_site/index.html"
     And I should see "<span class=\"k\">class</span> <span class=\"nc\">HighlightBlock</span" in "_site/index.html"
+    And I should see "<span class=\"12\">    <span class=\"k\">class</span> <span class=\"nc\">HighlightBlock</span>" in "_site/index.html"

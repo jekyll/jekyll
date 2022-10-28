@@ -97,20 +97,23 @@ module Jekyll
       end
 
       def highlight_lines
-        unless @highlight_options[:highlight_lines].is_a?(Array)
-          raise SyntaxError, <<~MSG
-            Syntax Error for highlight_lines declaration. Expected an double-quoted list of integers'
-          MSG
-        end
+        value = @highlight_options[:highlight_lines]
+        return value.map(&:to_i) if value.is_a?(Array)
 
-        @highlight_options[:highlight_lines].map(&:to_i)
+        raise SyntaxError, "Syntax Error for highlight_lines declaration. Expected a " \
+                           "double-quoted list of integers."
       end
 
       def highlight_line_class
-        if @highlight_options[:highlight_line_class]
-          # if `highlight_line_class` has been declared in double-quotes (and hence
-          # converted to an array), be forgiving and convert it to a string respresentation
-          [@highlight_options[:highlight_line_class]].join(" ").to_s
+        value = @highlight_options[:highlight_line_class]
+        case value
+        when String
+          value
+        when Array
+          # if `highlight_line_class` was declared by the user as a double-quoted space-separated
+          # string of numbers, it would have been converted to an Array in the previous step.
+          # At this point, simply return the given space-separated string.
+          value.join(" ")
         else
           "hll"
         end
