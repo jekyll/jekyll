@@ -112,7 +112,7 @@ You can also use the `link` tag to create a link in Markdown as follows:
 ```
 {% endraw %}
 
-The path to the post, page, or collection is defined as the path relative to the root directory to the file, not the path from your existing page to the other page.
+The path to the post, page, or collection is not the path from your existing page to the other page, but the path relative to the root directory: where your config file is (if you have not changed the `source` configuration option).
 
 For example, suppose you're creating a link in `page_a.md` (stored in `pages/folder1/folder2`) to `page_b.md` (stored in  `pages/folder1`). Your path in the link would not be `../page_b.html`. Instead, it would be `/pages/folder1/page_b.md`.
 
