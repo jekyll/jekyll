@@ -23,7 +23,9 @@ module Jekyll
 
             #{markup}
 
-            Valid syntax: highlight <lang> [linenos] [highlight_lines="3 4 5"] [highlight_line_class=class_name]
+            Valid syntax: highlight <lang> [linenos] [mark_lines="3 4 5"]
+
+            See https://jekyllrb.com/docs/liquid/tags/#code-snippet-highlighting for more details.
           MSG
         end
       end
@@ -81,7 +83,7 @@ module Jekyll
       def render_rouge(code)
         require "rouge"
         formatter = ::Rouge::Formatters::HTML.new
-        formatter = line_highlighter_formatter(formatter) if @highlight_options[:highlight_lines]
+        formatter = line_highlighter_formatter(formatter) if @highlight_options[:mark_lines]
         formatter = table_formatter(formatter) if @highlight_options[:linenos]
 
         lexer = ::Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
@@ -91,32 +93,16 @@ module Jekyll
       def line_highlighter_formatter(formatter)
         ::Rouge::Formatters::HTMLLineHighlighter.new(
           formatter,
-          :highlight_lines      => highlight_lines,
-          :highlight_line_class => highlight_line_class
+          :highlight_lines => mark_lines
         )
       end
 
-      def highlight_lines
-        value = @highlight_options[:highlight_lines]
+      def mark_lines
+        value = @highlight_options[:mark_lines]
         return value.map(&:to_i) if value.is_a?(Array)
 
-        raise SyntaxError, "Syntax Error for highlight_lines declaration. Expected a " \
+        raise SyntaxError, "Syntax Error for mark_lines declaration. Expected a " \
                            "double-quoted list of integers."
-      end
-
-      def highlight_line_class
-        value = @highlight_options[:highlight_line_class]
-        case value
-        when String
-          value
-        when Array
-          # if `highlight_line_class` was declared by the user as a double-quoted space-separated
-          # string of numbers, it would have been converted to an Array in the previous step.
-          # At this point, simply return the given space-separated string.
-          value.join(" ")
-        else
-          "hll"
-        end
       end
 
       def table_formatter(formatter)
