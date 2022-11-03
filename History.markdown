@@ -1,3 +1,9 @@
+## HEAD
+
+### Minor Enhancements
+
+  * Allow marking specific highlighted lines via Liquid (#9138)
+
 ## 4.3.1 / 2022-10-26
 
 ### Bug Fixes
