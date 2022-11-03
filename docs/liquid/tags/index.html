@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2022-11-02T02:15:51-07:00" />
+<meta property="article:published_time" content="2022-11-03T07:41:41-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Tags Filters" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-11-02T02:15:51-07:00","datePublished":"2022-11-02T02:15:51-07:00","description":"All of the standard Liquid tags are supported. Jekyll has a few built in tags to help you build your site. You can also create your own tags using plugins.","headline":"Tags Filters","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/liquid/tags/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/liquid/tags/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-11-03T07:41:41-07:00","datePublished":"2022-11-03T07:41:41-07:00","description":"All of the standard Liquid tags are supported. Jekyll has a few built in tags to help you build your site. You can also create your own tags using plugins.","headline":"Tags Filters","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/liquid/tags/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/liquid/tags/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -184,6 +184,22 @@ def foo
 end
 <span class="p">{%</span><span class="w"> </span><span class="nt">endhighlight</span><span class="w"> </span><span class="p">%}</span>
 </code></pre></div></div>
+
+<h3 id="marking-specific-lines">Marking specific lines</h3>
+
+<p>You can mark specific lines in a code snippet by using the optional
+argument <code class="language-plaintext highlighter-rouge">mark_lines</code>. This argument takes a space-separated list of
+line numbers which must be wrapped in double quotes. For example, the
+following code block will mark lines 1 and 2 but not line 3:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">highlight</span><span class="w"> </span>ruby<span class="w"> </span><span class="na">mark_lines</span><span class="o">=</span><span class="s2">"1 2"</span><span class="w"> </span><span class="p">%}</span>
+def foo
+  puts 'foo'
+end
+<span class="p">{%</span><span class="w"> </span><span class="nt">endhighlight</span><span class="w"> </span><span class="p">%}</span>
+</code></pre></div></div>
+
+<p>A default class name of <code class="language-plaintext highlighter-rouge">hll</code> will be applied to the marked lines.</p>
 
 <h3 id="stylesheets-for-syntax-highlighting">Stylesheets for syntax highlighting</h3>
 
