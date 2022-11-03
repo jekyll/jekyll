@@ -66,6 +66,25 @@ end
 ```
 {% endraw %}
 
+### Marking specific lines
+
+You can mark specific lines in a code snippet by using the optional
+argument `mark_lines`. This argument takes a space-separated list of
+line numbers which must be wrapped in double quotes. For example, the
+following code block will mark lines 1 and 2 but not line 3:
+
+{% raw %}
+```liquid
+{% highlight ruby mark_lines="1 2" %}
+def foo
+  puts 'foo'
+end
+{% endhighlight %}
+```
+{% endraw %}
+
+A default class name of `hll` will be applied to the marked lines.
+
 ### Stylesheets for syntax highlighting
 
 In order for the highlighting to show up, you’ll need to include a highlighting
