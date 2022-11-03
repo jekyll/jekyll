@@ -4,6 +4,10 @@
 
   * Allow marking specific highlighted lines via Liquid (#9138)
 
+### Documentation
+
+  * Fix Nested tree navigation with recursion example (#9174)
+
 ## 4.3.1 / 2022-10-26
 
 ### Bug Fixes
