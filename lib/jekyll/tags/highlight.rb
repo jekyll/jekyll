@@ -108,11 +108,9 @@ module Jekyll
       def table_formatter(formatter)
         ::Rouge::Formatters::HTMLTable.new(
           formatter,
-          {
-            :css_class    => "highlight",
-            :gutter_class => "gutter",
-            :code_class   => "code",
-          }
+          :css_class    => "highlight",
+          :gutter_class => "gutter",
+          :code_class   => "code"
         )
       end
 
