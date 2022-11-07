@@ -119,7 +119,7 @@ module Jekyll
       end
 
       def add_code_tag(code)
-        code_attrs = %(class="language-#{@lang.to_s.tr("+", "-")}" data-lang="#{@lang}")
+        code_attrs = %(class="language-#{@lang.tr("+", "-")}" data-lang="#{@lang}")
         %(<figure class="highlight"><pre><code #{code_attrs}>#{code.chomp}</code></pre></figure>)
       end
     end
