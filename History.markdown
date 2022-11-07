@@ -8,6 +8,10 @@
 
   * Fix Nested tree navigation with recursion example (#9174)
 
+### Development Fixes
+
+  * Cleanup highlight tag (#9177)
+
 ## 4.3.1 / 2022-10-26
 
 ### Bug Fixes
