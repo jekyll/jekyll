@@ -82,16 +82,16 @@ module Jekyll
 
       def render_rouge(code)
         require "rouge"
-        formatter = ::Rouge::Formatters::HTML.new
+        formatter = Rouge::Formatters::HTML.new
         formatter = line_highlighter_formatter(formatter) if @highlight_options[:mark_lines]
         formatter = table_formatter(formatter) if @highlight_options[:linenos]
 
-        lexer = ::Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
+        lexer = Rouge::Lexer.find_fancy(@lang, code) || Rouge::Lexers::PlainText
         formatter.format(lexer.lex(code))
       end
 
       def line_highlighter_formatter(formatter)
-        ::Rouge::Formatters::HTMLLineHighlighter.new(
+        Rouge::Formatters::HTMLLineHighlighter.new(
           formatter,
           :highlight_lines => mark_lines
         )
@@ -106,13 +106,11 @@ module Jekyll
       end
 
       def table_formatter(formatter)
-        ::Rouge::Formatters::HTMLTable.new(
+        Rouge::Formatters::HTMLTable.new(
           formatter,
-          {
-            :css_class    => "highlight",
-            :gutter_class => "gutter",
-            :code_class   => "code",
-          }
+          :css_class    => "highlight",
+          :gutter_class => "gutter",
+          :code_class   => "code"
         )
       end
 
@@ -121,12 +119,8 @@ module Jekyll
       end
 
       def add_code_tag(code)
-        code_attributes = [
-          "class=\"language-#{@lang.to_s.tr("+", "-")}\"",
-          "data-lang=\"#{@lang}\"",
-        ].join(" ")
-        "<figure class=\"highlight\"><pre><code #{code_attributes}>" \
-          "#{code.chomp}</code></pre></figure>"
+        code_attrs = %(class="language-#{@lang.tr("+", "-")}" data-lang="#{@lang}")
+        %(<figure class="highlight"><pre><code #{code_attrs}>#{code.chomp}</code></pre></figure>)
       end
     end
   end
