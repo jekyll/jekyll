@@ -11,6 +11,7 @@
 ### Development Fixes
 
   * Cleanup highlight tag (#9177)
+  * Run tests in utc (#9168)
 
 ## 4.3.1 / 2022-10-26
 
