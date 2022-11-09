@@ -42,12 +42,8 @@ class TestTags < JekyllUnitTest
   end
 
   def highlight_block_with_opts(options_string)
-    Jekyll::Tags::HighlightBlock.parse(
-      "highlight",
-      options_string,
-      Liquid::Tokenizer.new("test{% endhighlight %}\n"),
-      Liquid::ParseContext.new
-    )
+    template = Liquid::Template.parse("{% highlight #{options_string} %}test{% endhighlight %}")
+    template.root.nodelist.first
   end
 
   context "language name" do

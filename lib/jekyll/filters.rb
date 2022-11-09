@@ -398,11 +398,17 @@ module Jekyll
     # `where` filter helper
     #
     def compare_property_vs_target(property, target)
+      # Liquid v4 handles 'empty' and 'blank' keywords separately from v5.
+      # Delete when we remove Liquid v5 support.
+      if Liquid::VERSION.start_with?("4.") && target.is_a?(Liquid::Expression::MethodLiteral)
+        target = target.to_s
+        return true if property == target || Array(property).join == target
+      end
+
       case target
       when NilClass
         return true if property.nil?
-      when Liquid::Expression::MethodLiteral # `empty` or `blank`
-        target = target.to_s
+      when "", Liquid::Expression::MethodLiteral # empty/blank hashes and arrays will match this
         return true if property == target || Array(property).join == target
       else
         target = target.to_s

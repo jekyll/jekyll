@@ -26,6 +26,9 @@ jobs:
             ruby_version: "3.1"
           - label: JRuby 9.3.4.0
             ruby_version: "jruby-9.3.4.0"
+          - label: Liquid 4
+            ruby_version: 3.1
+            liquid_version: "~> 4.0"
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -34,6 +37,8 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby_version }}
           bundler-cache: true
+        env:
+          LIQUID_VERSION: ${{ matrix.liquid_version }}
       - name: Run Minitest based tests
         run: bash script/test
       - name: Run Cucumber based tests

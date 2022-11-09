@@ -918,13 +918,13 @@ class TestFilters < JekyllUnitTest
         # `{{ hash | where: 'tags', empty }}`
         assert_equal(
           [{ "tags" => {} }, { "tags" => "" }, { "tags" => nil }, { "tags" => [] }],
-          @filter.where(hash, "tags", Liquid::Expression::LITERALS["empty"])
+          @filter.where(hash, "tags", Liquid::Condition.parse_expression(nil, "empty"))
         )
 
         # `{{ `hash | where: 'tags', blank }}`
         assert_equal(
           [{ "tags" => {} }, { "tags" => "" }, { "tags" => nil }, { "tags" => [] }],
-          @filter.where(hash, "tags", Liquid::Expression::LITERALS["blank"])
+          @filter.where(hash, "tags", Liquid::Condition.parse_expression(nil, "blank"))
         )
       end
 
@@ -1151,13 +1151,13 @@ class TestFilters < JekyllUnitTest
         # `{{ hash | find: 'tags', empty }}`
         assert_equal(
           { "tags" => {} },
-          @filter.find(hash, "tags", Liquid::Expression::LITERALS["empty"])
+          @filter.find(hash, "tags", Liquid::Condition.parse_expression(nil, "empty"))
         )
 
         # `{{ `hash | find: 'tags', blank }}`
         assert_equal(
           { "tags" => {} },
-          @filter.find(hash, "tags", Liquid::Expression::LITERALS["blank"])
+          @filter.find(hash, "tags", Liquid::Condition.parse_expression(nil, "blank"))
         )
       end
 
