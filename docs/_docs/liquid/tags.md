@@ -66,7 +66,7 @@ end
 ```
 {% endraw %}
 
-### Marking specific lines
+### Marking specific lines {%- include docs_version_badge.html version="4.4.0" -%}
 
 You can mark specific lines in a code snippet by using the optional
 argument `mark_lines`. This argument takes a space-separated list of
