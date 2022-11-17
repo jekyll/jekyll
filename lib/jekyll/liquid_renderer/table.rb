@@ -15,7 +15,6 @@ module Jekyll
 
       private
 
-      # rubocop:disable Metrics/AbcSize
       def data_for_table(num_of_rows)
         sorted = @stats.sort_by { |_, file_stats| -file_stats[:time] }
         sorted = sorted.slice(0, num_of_rows)
@@ -32,7 +31,6 @@ module Jekyll
 
         table
       end
-      # rubocop:enable Metrics/AbcSize
 
       def header_labels
         GAUGES.map { |gauge| gauge.to_s.capitalize }.unshift("Filename")
