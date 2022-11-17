@@ -33,17 +33,13 @@ module Jekyll
 
     def profile_process
       profile_data = { "PHASE" => "TIME" }
-      total_time = 0
 
       [:reset, :read, :generate, :render, :cleanup, :write].each do |method|
         start_time = Time.now
         @site.send(method)
         end_time = (Time.now - start_time).round(4)
         profile_data[method.to_s.upcase] = format("%.4f", end_time)
-        total_time += end_time
       end
-
-      profile_data["TOTAL TIME"] = format("%.4f", total_time)
 
       Jekyll.logger.info "\nBuild Process Summary:"
       Jekyll.logger.info Profiler.tabulate(Array(profile_data))

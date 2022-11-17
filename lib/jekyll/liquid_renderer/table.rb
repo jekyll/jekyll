@@ -21,10 +21,7 @@ module Jekyll
         sorted = sorted.slice(0, num_of_rows)
 
         table  = [header_labels]
-        totals = Hash.new { |hash, key| hash[key] = 0 }
-
         sorted.each do |filename, file_stats|
-          GAUGES.each { |gauge| totals[gauge] += file_stats[gauge] }
           row = []
           row << filename
           row << file_stats[:count].to_s
@@ -33,12 +30,7 @@ module Jekyll
           table << row
         end
 
-        footer = []
-        footer << "TOTAL (for #{sorted.size} files)"
-        footer << totals[:count].to_s
-        footer << format_bytes(totals[:bytes])
-        footer << format("%.3f", totals[:time])
-        table  << footer
+        table
       end
       # rubocop:enable Metrics/AbcSize
 
