@@ -18,22 +18,19 @@ module Jekyll
       end
 
       def render(context)
-        @context = context
-        site = context.registers[:site]
         relative_path = Liquid::Template.parse(@relative_path).render(context)
+
+        # This takes care of the case for static files that have a leading `/`.
         relative_path_with_leading_slash = PathManager.join("", relative_path)
 
-        site.each_site_file do |item|
-          return relative_url(item) if item.relative_path == relative_path
-          # This takes care of the case for static files that have a leading /
-          return relative_url(item) if item.relative_path == relative_path_with_leading_slash
-        end
+        registry = Jekyll::Tags::Link.instance_variable_get(:@registry) || {}
 
-        raise ArgumentError, <<~MSG
-          Could not find document '#{relative_path}' in tag '#{self.class.tag_name}'.
-
-          Make sure the document exists and the path is correct.
-        MSG
+        registry[relative_path] || \
+          registry[relative_path_with_leading_slash] || \
+          raise(ArgumentError, <<~MSG)
+            Could not find resource '#{relative_path}' in tag '#{self.class.tag_name}'.
+            Make sure the resource exists and the path is correct.
+          MSG
       end
     end
   end

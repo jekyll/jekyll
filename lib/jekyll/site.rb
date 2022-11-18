@@ -207,6 +207,8 @@ module Jekyll
 
       Jekyll::Hooks.trigger :site, :pre_render, self, payload
 
+      set_up_link_registry
+
       render_docs(payload)
       render_pages(payload)
 
@@ -555,6 +557,26 @@ module Jekyll
       self.file_read_opts = {}
       file_read_opts[:encoding] = config["encoding"] if config["encoding"]
       self.file_read_opts = Jekyll::Utils.merged_file_read_opts(self, {})
+    end
+
+    # Private
+    # Set up a mapping of `baseurl`-aware URLs against relative_path so that *LinkTag* doesn't
+    # have to search through *each site file* on **every** render call.
+    # (Inlines `Filters::URLFilters#relative_url` logic for baseurl awareness).
+    def set_up_link_registry
+      registry = {}
+
+      sanitized_baseurl = config["baseurl"] || ""
+      sanitized_baseurl = sanitized_baseurl.to_s.gsub(%r!\A/|/\z!, "")
+      sanitized_baseurl = "/#{sanitized_baseurl}"
+
+      each_site_file do |item|
+        registry[item.relative_path] ||= Addressable::URI.parse(
+          PathManager.join(sanitized_baseurl, item.url)
+        ).normalize.to_s
+      end
+
+      Jekyll::Tags::Link.instance_variable_set(:@registry, registry)
     end
 
     def render_docs(payload)

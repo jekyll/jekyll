@@ -7,21 +7,22 @@ class TestTags < JekyllUnitTest
     FileUtils.mkdir_p("tmp")
   end
 
+  # rubocop:disable Metrics/AbcSize
   def create_post(content, override = {}, converter_class = Jekyll::Converters::Markdown)
     site = fixture_site({ "highlighter" => "rouge" }.merge(override))
 
     site.posts.docs.concat(PostReader.new(site).read_posts("")) if override["read_posts"]
     CollectionReader.new(site).read if override["read_collections"]
     site.read if override["read_all"]
-
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
     @converter = site.converters.find { |c| c.instance_of?(converter_class) }
     payload = { "highlighter_prefix" => @converter.highlighter_prefix,
                 "highlighter_suffix" => @converter.highlighter_suffix, }
 
-    @result = Liquid::Template.parse(content).render!(payload, info)
-    @result = @converter.convert(@result)
+    site.send(:set_up_link_registry)
+    @result = @converter.convert(Liquid::Template.parse(content).render!(payload, info))
   end
+  # rubocop:enable Metrics/AbcSize
 
   def fill_post(code, override = {})
     content = <<~CONTENT
