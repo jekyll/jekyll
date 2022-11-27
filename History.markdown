@@ -14,6 +14,10 @@
   * Run tests in utc (#9168)
   * Lock Ruby in CI to v3.1.2 and bump JRuby to v9.4.0.0 (#9196)
 
+### Bug Fixes
+
+  * Optimize default front matter using `File.fnmatch?` (#9185)
+
 ## 4.3.1 / 2022-10-26
 
 ### Bug Fixes
