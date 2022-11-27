@@ -72,13 +72,15 @@ class TestFrontMatterDefaults < JekyllUnitTest
     end
 
     should "affect the appropriate items only" do
-      item = @staff.docs.sample
-      assert_equal "simple", item.data["layout"]
-      assert_nil item.data["css_class"]
+      @staff.docs.each do |item|
+        assert_equal "simple", item.data["layout"]
+        assert_nil item.data["css_class"]
+      end
 
-      item = @staff.files.sample
-      assert_equal "epilson", item.data["css_class"]
-      assert_nil item.data["layout"]
+      @staff.files.each do |item|
+        assert_equal "epilson", item.data["css_class"]
+        assert_nil item.data["layout"]
+      end
     end
   end
 
