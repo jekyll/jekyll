@@ -19,6 +19,7 @@ module Jekyll
       CollectionReader.new(site).read
       ThemeAssetsReader.new(site).read
       read_data
+      SnippetReader.new(site).read
     end
 
     # Read and merge the data files.

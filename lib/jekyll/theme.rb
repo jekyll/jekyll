@@ -47,6 +47,10 @@ module Jekyll
       @data_path ||= path_for "_data"
     end
 
+    def snippets_path
+      @snippets_path ||= path_for "_snippets"
+    end
+
     def runtime_dependencies
       gemspec.runtime_dependencies
     end
