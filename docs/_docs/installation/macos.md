@@ -57,6 +57,12 @@ Install the latest stable version of Ruby:
 ruby-install ruby
 ```
 
+Note: On an Macbook with an M1 chip, the ruby compliation failed.  The following installation worked: 
+
+```sh
+ruby-install 3.1.2 -- --enable-shared
+```
+
 This will take a few minutes, and once it's done, configure your shell to 
 automatically use `chruby`:
 
