@@ -7,6 +7,7 @@
 ### Documentation
 
   * Fix Nested tree navigation with recursion example (#9174)
+  * Fix typo on website (#9203)
 
 ### Development Fixes
 
