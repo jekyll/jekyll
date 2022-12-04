@@ -45,7 +45,7 @@ This restricts your Ruby environment to only use gems set in your `Gemfile`.
 ## Plugins
 
 Jekyll plugins allow you to create custom generated content specific to your
-site. There's many [plugins](/docs/plugins/) available or you can even
+site. There're many [plugins](/docs/plugins/) available or you can even
 write your own.
 
 There are three official plugins which are useful on almost any Jekyll site:
