@@ -19,6 +19,7 @@
 
   * Optimize default front matter using `File.fnmatch?` (#9185)
   * Remove totals in profile table properly (#9186)
+  * Optimize `Site#each_site_file` (#9187)
 
 ## 4.3.1 / 2022-10-26
 
