@@ -51,6 +51,12 @@ module Jekyll
       gemspec.runtime_dependencies
     end
 
+    def parent_theme
+      return nil unless gemspec.metadata.key?("parent_theme")
+
+      @parent_theme ||= Jekyll::Theme.new(gemspec.metadata["parent_theme"])
+    end
+
     private
 
     def path_for(folder)

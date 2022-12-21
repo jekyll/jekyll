@@ -12,3 +12,6 @@ test_theme:
   skin: aero              # aero / chrome / dark / neon
   date_format: "%b -d %Y" # any format supported by strftime
   header_links: true      # generate header links automatically
+
+plugins:
+  - jekyll-seo-tag

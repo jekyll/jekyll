@@ -409,6 +409,19 @@ module Jekyll
     def in_theme_dir(*paths)
       return nil unless theme
 
+      in_theme_dir_with_theme(theme, *paths)
+    end
+
+    # Public: Prefix a given path with the given theme's directory.
+    #
+    # theme - The theme whose directory should be prefixed
+    # paths - (optional) path elements to a file or directory within the
+    #         theme directory
+    #
+    # Returns a path which is prefixed with the theme root directory.
+    def in_theme_dir_with_theme(theme, *paths)
+      return nil unless theme
+
       paths.reduce(theme.root) do |base, path|
         Jekyll.sanitized_path(base, path)
       end
@@ -447,6 +460,35 @@ module Jekyll
       @collections_path ||= dir_str.empty? ? source : in_source_dir(dir_str)
     end
 
+    # Public: Get the theme at the given a root directory.
+    #
+    # base - A path to the root directory of the theme
+    #
+    # Returns the theme at the given root directory, or returns nil if no theme
+    # is present at that directory.
+    def theme_with_root(base)
+      matching_themes = theme_list.select do |theme|
+        theme.root == in_theme_dir_with_theme(theme, base)
+      end
+      matching_themes.length == 1 ? matching_themes[0] : nil
+    end
+
+    # Public
+    #
+    # Returns a list of themes used by this site in reverse order of
+    # inheritance hierarchy.
+    def theme_list
+      return @theme_list if @theme_list
+
+      @theme_list = []
+      next_theme = theme
+      while next_theme
+        @theme_list << next_theme
+        next_theme = next_theme.parent_theme
+      end
+      @theme_list
+    end
+
     # Public
     #
     # Returns the object as a debug String.
@@ -459,8 +501,12 @@ module Jekyll
     def load_theme_configuration(config)
       return config if config["ignore_theme_config"] == true
 
-      theme_config_file = in_theme_dir("_config.yml")
-      return config unless File.exist?(theme_config_file)
+      theme_config_file = nil
+      theme_list.each do |theme|
+        theme_config_file ||= in_theme_dir_with_theme(theme, "_config.yml")
+        theme_config_file = nil unless File.exist?(theme_config_file)
+      end
+      return config unless theme_config_file
 
       # Bail out if the theme_config_file is a symlink file irrespective of safe mode
       return config if File.symlink?(theme_config_file)

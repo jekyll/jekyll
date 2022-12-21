@@ -355,6 +355,26 @@ While this feature is to enable easier adoption of a theme, the restrictions ens
 
 This feature will let the theme-gem to work with *theme-specific config variables* out-of-the-box.
 
+### Theme inheritance {%- include docs_version_badge.html version="4.3.0" -%}
+{: #theme-inheritance }
+
+If you are only adding features (or making small changes) to an existing theme, you don't have to make a copy of all the theme's files. Theme inheritance allows you to reuse a "parent" theme's assets, layouts, includes and stylesheets. To use theme inheritance, add to your theme's `gemspec` metadata:
+
+```ruby
+Gem::Specification.new do |s|
+  s.name        = "test-theme-inheritance"
+  
+  # Add the theme dependency
+  s.add_runtime_dependency("test-theme", "~> 1.0")
+  # And mark it as a parent
+  s.metadata    = {
+    "parent_theme" => "test-theme"
+  }
+end
+```
+
+Theme inheritance may not be compatible with the [`remote_theme` feature on GitHub](https://help.github.com/articles/adding-a-jekyll-theme-to-your-github-pages-site/#adding-a-jekyll-theme-in-your-sites-_configyml-file).
+
 ### Documenting your theme
 
 Your theme should include a `/README.md` file, which explains how site authors can install and use your theme. What layouts are included? What includes? Do they need to add anything special to their site's configuration file?

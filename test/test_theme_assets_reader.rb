@@ -99,4 +99,50 @@ class TestThemeAssetsReader < JekyllUnitTest
       end
     end
   end
+
+  context "inherited theme" do
+    setup do
+      @site = fixture_site(
+        "theme"       => "test-theme-inheritance",
+        "theme-color" => "blue"
+      )
+      assert @site.theme
+    end
+
+    should "read all assets from child and parent themes" do
+      @site.reset
+      ThemeAssetsReader.new(@site).read
+
+      # This is from the child theme
+      assert_file_with_relative_path @site.static_files, "/assets/another.js"
+
+      # These are from the parent theme
+      assert_file_with_relative_path @site.static_files, "/assets/img/logo.png"
+      assert_file_with_relative_path @site.pages, "assets/style.scss"
+    end
+
+    should "convert pages" do
+      @site.process
+
+      file = @site.pages.find { |f| f.relative_path == "assets/style.scss" }
+      refute_nil file
+      assert_equal @site.in_dest_dir("assets/style.css"), file.destination(@site.dest)
+      assert_includes file.output, ".sample { color: blue; }"
+    end
+
+    context "with a valid theme using inheritance without an assets dir" do
+      should "not read any assets" do
+        site = fixture_site("theme" => "test-theme-inheritance")
+        allow(site.theme).to receive(:assets_path).and_return(nil)
+        ThemeAssetsReader.new(site).read
+
+        # This is from the child theme
+        refute_file_with_relative_path @site.pages, "assets/another.js"
+
+        # These are from the parent theme
+        refute_file_with_relative_path site.static_files, "/assets/img/logo.png"
+        refute_file_with_relative_path site.pages, "assets/style.scss"
+      end
+    end
+  end
 end

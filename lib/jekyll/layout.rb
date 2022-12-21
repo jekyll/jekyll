@@ -15,15 +15,19 @@ module Jekyll
 
     # Initialize a new Layout.
     #
-    # site - The Site.
-    # base - The String path to the source.
-    # name - The String filename of the post file.
-    def initialize(site, base, name)
+    # site  -  The Site.
+    # base  -  The String path to the source.
+    # name  -  The String filename of the post file.
+    # theme -  The Theme that contains this layout. Defaults to nil.
+    def initialize(site, base, name, theme = nil)
       @site = site
       @base = base
       @name = name
 
-      if site.theme && site.theme.layouts_path.eql?(base)
+      if theme&.layouts_path.eql?(base)
+        @base_dir = theme.root
+        @path = site.in_theme_dir_with_theme(theme, base, name)
+      elsif site.theme&.layouts_path.eql?(base)
         @base_dir = site.theme.root
         @path = site.in_theme_dir(base, name)
       else

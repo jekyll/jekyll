@@ -12,6 +12,10 @@ group :development do
   gem "pry-byebug" unless RUBY_ENGINE == "jruby"
 end
 
+# TODO: This is a temporary change to ensure that CI tests for jekyll/jekyll#7554 pass.
+#       Delete this line before merging the PR.
+gem "jekyll-sass-converter", :github => "jekyll/jekyll-sass-converter", :ref => "refs/pull/114/head"
+
 #
 
 group :test do
@@ -30,6 +34,8 @@ group :test do
   gem "rubocop-rspec"
   gem "test-dependency-theme", :path => File.expand_path("test/fixtures/test-dependency-theme", __dir__)
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)
+  gem "test-theme-inheritance", :path => File.expand_path("test/fixtures/test-theme-inheritance", __dir__)
+  gem "test-theme-inheritance-multi-level", :path => File.expand_path("test/fixtures/test-theme-inheritance-multi-level", __dir__)
   gem "test-theme-skinny", :path => File.expand_path("test/fixtures/test-theme-skinny", __dir__)
   gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)
   gem "test-theme-w-empty-data", :path => File.expand_path("test/fixtures/test-theme-w-empty-data", __dir__)

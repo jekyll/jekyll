@@ -19,7 +19,7 @@ Feature: Writing themes
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see ".sample { color: red; }\n\n\/\*# sourceMappingURL=style.css.map \*\/" in "_site/assets/style.css"
+    And I should see ".sample { color: red; }\n\n.another-sample { color: blue; }\n\n\/\*# sourceMappingURL=style.css.map \*\/" in "_site/assets/style.css"
 
   Scenario: Overriding a theme with SCSS
     Given I have a configuration file with "theme" set to "test-theme"
