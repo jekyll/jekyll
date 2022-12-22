@@ -5,10 +5,10 @@ author: ashmaroli
 category: community
 ---
 
-Jekyll Sass Converter 3.0 shipped recently, is available to those using Jekyll 4.3 and above and contains major changes.
+Jekyll Sass Converter 3.0 shipped recently and is available to those using Jekyll 4.3 and above. This release contains major changes.
 Specifically, the plugin has **stopped using `sassc` for converting your Sass partials and stylesheets** into CSS files.
-Instead, the converter now uses `sass-embedded` gem acting as an interface to Dart Sass, which is the current primary
-implementation of Sass under active development. The secondary implementation `libsass` which `sassc` gem interfaced
+Instead, the converter now uses the `sass-embedded` gem acting as an interface to Dart Sass, which is the current primary
+implementation of Sass under active development. The secondary implementation `libsass` which the `sassc` gem interfaced
 with has been deprecated by its developers.
 
 However, Dart Sass isn't *fully compatible* with older Ruby Sass workflow.
@@ -39,14 +39,14 @@ Jekyll filters and hence the redundant option `sass.add_charset` is no longer ac
 
 ### Dropped support of importing files with non-standard extension names
 
-`sass-embedded` only allows importing files that have extension names of `.sass`, `.scss` or `.css`. **SCSS syntax in
-files with `.css` extension name will result in a syntax error**.
+`sass-embedded` only allows importing files that have extension names of `.sass`, `.scss` or `.css`. SCSS syntax in
+files with `.css` extension name will result in a syntax error.
 
 
 ### Dropped support of importing files relative to site source
 
 In `v2.x`, the Converter allowed imports using paths relative to site source directory, even if the site source
-directory is not in Sass `load_paths`. This is a side effect of a bug in the converter, which will remain as is in
+directory is not present in Sass' `load_paths` option. This is a side effect of a bug in the converter, which will remain as is in
 `v2.x` due to its usage in the wild.
 
 In `v3.x`, imports using paths relative to site source directory will not work out of box. To allow these imports, `.`
