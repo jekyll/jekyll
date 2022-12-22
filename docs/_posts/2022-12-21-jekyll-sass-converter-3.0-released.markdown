@@ -8,9 +8,10 @@ category: community
 Jekyll Sass Converter 3.0 shipped recently, is available to those using Jekyll 4.3 and above and contains major changes.
 Specifically, the plugin has **stopped using `sassc` for converting your Sass partials and stylesheets** into CSS files.
 Instead, the converter now uses `sass-embedded` gem acting as an interface to Dart Sass, which is the current primary
-implementation of Sass under active development.
+implementation of Sass under active development. The secondary implementation `libsass` which `sassc` gem interfaced
+with has been deprecated by its developers.
 
-However, modern Sass isn't *fully compatible* with older Sass workflow.
+However, Dart Sass isn't *fully compatible* with older Ruby Sass workflow.
 
 ## Requirements
 
