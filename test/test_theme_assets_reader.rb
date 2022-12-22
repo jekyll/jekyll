@@ -38,7 +38,7 @@ class TestThemeAssetsReader < JekyllUnitTest
       file = @site.pages.find { |f| f.relative_path == "assets/style.scss" }
       refute_nil file
       assert_equal @site.in_dest_dir("assets/style.css"), file.destination(@site.dest)
-      assert_includes file.output, ".sample { color: black; }"
+      assert_includes file.output, ".sample {\n  color: black;\n}"
     end
 
     should "not overwrite site content with the same relative path" do

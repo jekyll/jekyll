@@ -15,7 +15,9 @@ class TestSass < JekyllUnitTest
 
     should "import SCSS partial" do
       result = <<~CSS
-        .half { width: 50%; }
+        .half {
+          width: 50%;
+        }
 
         /*# sourceMappingURL=main.css.map */
       CSS
