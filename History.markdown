@@ -8,6 +8,7 @@
 
   * Fix Nested tree navigation with recursion example (#9174)
   * Fix typo on website (#9203)
+  * Publish post on major release of sass-converter (#9225)
 
 ### Development Fixes
 
