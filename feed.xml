@@ -1,4 +1,61 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2022-12-22T06:51:31-08:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 4.3.1 Released</title><link href="https://jekyllrb.com/news/2022/10/26/jekyll-4-3-1-released/" rel="alternate" type="text/html" title="Jekyll 4.3.1 Released" /><published>2022-10-26T06:39:42-07:00</published><updated>2022-10-26T06:39:42-07:00</updated><id>https://jekyllrb.com/news/2022/10/26/jekyll-4-3-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2022/10/26/jekyll-4-3-1-released/"><![CDATA[<p>Hello Jekyllers!</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2022-12-22T22:20:47-08:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll Sass Converter 3.0 Released</title><link href="https://jekyllrb.com/news/2022/12/21/jekyll-sass-converter-3.0-released/" rel="alternate" type="text/html" title="Jekyll Sass Converter 3.0 Released" /><published>2022-12-21T04:22:15-08:00</published><updated>2022-12-21T04:22:15-08:00</updated><id>https://jekyllrb.com/news/2022/12/21/jekyll-sass-converter-3.0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2022/12/21/jekyll-sass-converter-3.0-released/"><![CDATA[<p>Jekyll Sass Converter 3.0 shipped recently and is available to those using Jekyll 4.3 and above. This release contains major changes.
+Specifically, the plugin has <strong>stopped using <code class="language-plaintext highlighter-rouge">sassc</code> for converting your Sass partials and stylesheets</strong> into CSS files.
+Instead, the converter now uses the <code class="language-plaintext highlighter-rouge">sass-embedded</code> gem acting as an interface to Dart Sass, which is the current primary
+implementation of Sass under active development. The secondary implementation <code class="language-plaintext highlighter-rouge">libsass</code> which the <code class="language-plaintext highlighter-rouge">sassc</code> gem interfaced
+with has been deprecated by its developers.</p>
+
+<p>However, Dart Sass isn’t <em>fully compatible</em> with older Ruby Sass workflow.</p>
+
+<h2 id="requirements">Requirements</h2>
+
+<ul>
+  <li>Minimum Ruby Version: <code class="language-plaintext highlighter-rouge">Ruby 2.6.0</code> (all platforms).</li>
+  <li>Minimum Rubygems Version: <code class="language-plaintext highlighter-rouge">3.3.22</code> (for Linux-based platforms).</li>
+</ul>
+
+<h2 id="migration-guide">Migration Guide</h2>
+
+<h3 id="dropped-implmentation-option">Dropped <code class="language-plaintext highlighter-rouge">implmentation</code> Option</h3>
+
+<p>In <code class="language-plaintext highlighter-rouge">v3.0.x</code>, <code class="language-plaintext highlighter-rouge">sass-embedded</code> is the only supported Sass implmentation, and therefore the config option
+<code class="language-plaintext highlighter-rouge">sass.implementation</code> introduced in <code class="language-plaintext highlighter-rouge">v2.2.0</code> has been removed.</p>
+
+<h3 id="dropped-add_charset-option">Dropped <code class="language-plaintext highlighter-rouge">add_charset</code> Option</h3>
+
+<p>The converter will no longer emit <code class="language-plaintext highlighter-rouge">@charset "UTF-8";</code> or a <code class="language-plaintext highlighter-rouge">U+FEFF</code> (byte-order marker) for <code class="language-plaintext highlighter-rouge">sassify</code> and <code class="language-plaintext highlighter-rouge">scssify</code>
+Jekyll filters and hence the redundant option <code class="language-plaintext highlighter-rouge">sass.add_charset</code> is no longer active.</p>
+
+<h3 id="dropped-line_comments-option">Dropped <code class="language-plaintext highlighter-rouge">line_comments</code> Option</h3>
+
+<p><code class="language-plaintext highlighter-rouge">sass-embedded</code> does not support <code class="language-plaintext highlighter-rouge">sass.line_comments</code> option.</p>
+
+<h3 id="dropped-support-of-importing-files-with-non-standard-extension-names">Dropped support of importing files with non-standard extension names</h3>
+
+<p><code class="language-plaintext highlighter-rouge">sass-embedded</code> only allows importing files that have extension names of <code class="language-plaintext highlighter-rouge">.sass</code>, <code class="language-plaintext highlighter-rouge">.scss</code> or <code class="language-plaintext highlighter-rouge">.css</code>. SCSS syntax in
+files with <code class="language-plaintext highlighter-rouge">.css</code> extension name will result in a syntax error.</p>
+
+<h3 id="dropped-support-of-importing-files-relative-to-site-source">Dropped support of importing files relative to site source</h3>
+
+<p>In <code class="language-plaintext highlighter-rouge">v2.x</code>, the Converter allowed imports using paths relative to site source directory, even if the site source
+directory is not present in Sass’ <code class="language-plaintext highlighter-rouge">load_paths</code> option. This is a side effect of a bug in the converter, which will remain as is in
+<code class="language-plaintext highlighter-rouge">v2.x</code> due to its usage in the wild.</p>
+
+<p>In <code class="language-plaintext highlighter-rouge">v3.x</code>, imports using paths relative to site source directory will not work out of box. To allow these imports, <code class="language-plaintext highlighter-rouge">.</code>
+(meaning current directory, or site source directory) need to be explicitly listed under <code class="language-plaintext highlighter-rouge">load_paths</code> option.</p>
+
+<h3 id="dropped-support-of-importing-files-with-the-same-filename-as-their-parent-file">Dropped support of importing files with the same filename as their parent file</h3>
+
+<p>In <code class="language-plaintext highlighter-rouge">v2.x</code>, the Converter allowed imports of files with the same filename as their parent file from <code class="language-plaintext highlighter-rouge">sass_dir</code> or
+<code class="language-plaintext highlighter-rouge">load_paths</code>. This is a side effect of a bug in the Converter, which will remain as is in <code class="language-plaintext highlighter-rouge">v2.x</code> due to its usage in the
+wild.</p>
+
+<p>In <code class="language-plaintext highlighter-rouge">v3.x</code>, imports using the same filename of parent file will create a circular import. To fix such imports, rename
+either of the files, or use complete relative path from the parent file.</p>
+
+<h3 id="behavioral-differences-in-sass-implementation">Behavioral Differences in Sass Implementation</h3>
+
+<p>There are a few intentional behavioral differences between Dart Sass and Ruby Sass. Please refer
+<a href="https://github.com/sass/dart-sass#behavioral-differences-from-ruby-sass">Behavioral Differences from Ruby Sass</a> for details.</p>]]></content><author><name>ashmaroli</name></author><category term="community" /><summary type="html"><![CDATA[Jekyll Sass Converter 3.0 shipped recently and is available to those using Jekyll 4.3 and above. This release contains major changes. Specifically, the plugin has stopped using sassc for converting your Sass partials and stylesheets into CSS files. Instead, the converter now uses the sass-embedded gem acting as an interface to Dart Sass, which is the current primary implementation of Sass under active development. The secondary implementation libsass which the sassc gem interfaced with has been deprecated by its developers.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.3.1 Released</title><link href="https://jekyllrb.com/news/2022/10/26/jekyll-4-3-1-released/" rel="alternate" type="text/html" title="Jekyll 4.3.1 Released" /><published>2022-10-26T06:39:42-07:00</published><updated>2022-10-26T06:39:42-07:00</updated><id>https://jekyllrb.com/news/2022/10/26/jekyll-4-3-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2022/10/26/jekyll-4-3-1-released/"><![CDATA[<p>Hello Jekyllers!</p>
 
 <p>We’re shipping <code class="language-plaintext highlighter-rouge">v4.3.1</code> containing fixes for two issues with v4.3.0:</p>
 <ul>
@@ -241,27 +298,4 @@ will show a helpful message when a dependency is missing.</p>
 
 <p>You can check out the patches and see all the details in <a href="/docs/history/#v3-9-0">the release notes</a></p>
 
-<p>Happy Jekylling!</p>]]></content><author><name>parkr</name></author><category term="release" /><summary type="html"><![CDATA[Jekyll 3.9.0 allows use of kramdown v2, the latest series of kramdown.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.1.1 Released</title><link href="https://jekyllrb.com/news/2020/06/24/jekyll-4-1-1-released/" rel="alternate" type="text/html" title="Jekyll 4.1.1 Released" /><published>2020-06-24T04:15:35-07:00</published><updated>2020-06-24T04:15:35-07:00</updated><id>https://jekyllrb.com/news/2020/06/24/jekyll-4-1-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2020/06/24/jekyll-4-1-1-released/"><![CDATA[<p>Jekyll 4.1.0 brought two notable changes: <em>Page-excerpts</em> and <em>Liquid Drop for Page objects</em>.
-However these seemingly benign changes had unexpected adverse side-effects which did not figure in our tests.</p>
-
-<p>The Core team decided that the best way forward is to revert introduction of the Liquid drop for Pages but push back
-generating excerpts for pages behind a flag until <code class="language-plaintext highlighter-rouge">v5.0</code>.</p>
-
-<p>Page-excerpts are henceforth an opt-in experimental feature which can be enabled by setting <code class="language-plaintext highlighter-rouge">page_excerpts: true</code> in
-your configuration file. Due to its experimental nature, we have narrowed the scope for page-excerpts to limit their
-negative effect on builds. Excerpts will not be generated for pages that <em>do not</em> output into an HTML file even if
-<code class="language-plaintext highlighter-rouge">page_excerpts: true</code> has been set in the configuration file.</p>
-
-<p>Another known issue with page-excerpts is that an infinite loop is created in certain use-cases such as any construct
-that involves iterating through <code class="language-plaintext highlighter-rouge">site.pages</code> directly within a <code class="language-plaintext highlighter-rouge">Jekyll::Page</code> instance. A couple of examples would be
-having a variant of either of the following code blocks inside a page source, say <code class="language-plaintext highlighter-rouge">index.markdown</code> or <code class="language-plaintext highlighter-rouge">about.markdown</code>:</p>
-
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">entry</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site.pages</span><span class="w"> </span><span class="p">%}</span>
-  <span class="p">{{</span><span class="w"> </span><span class="nv">entry</span><span class="p">.</span><span class="nv">name</span><span class="w"> </span><span class="p">}}</span>
-<span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
-</code></pre></div></div>
-
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">pages</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">sort</span><span class="p">:</span><span class="w"> </span><span class="s1">'title'</span><span class="w"> </span><span class="p">}}</span>
-</code></pre></div></div>
-
-<p>Therefore, we advise caution when opting to use the page-excerpt feature.</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Jekyll 4.1.0 brought two notable changes: Page-excerpts and Liquid Drop for Page objects. However these seemingly benign changes had unexpected adverse side-effects which did not figure in our tests.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<p>Happy Jekylling!</p>]]></content><author><name>parkr</name></author><category term="release" /><summary type="html"><![CDATA[Jekyll 3.9.0 allows use of kramdown v2, the latest series of kramdown.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
