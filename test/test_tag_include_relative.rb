@@ -86,6 +86,7 @@ class TestTagIncludeRelative < TagUnitTest
 
     context "with symlink'd include" do
       should "not allow symlink includes" do
+        FileUtils.mkdir_p("tmp")
         File.write("tmp/pages-test", "SYMLINK TEST")
         assert_raises IOError do
           content = <<~CONTENT
