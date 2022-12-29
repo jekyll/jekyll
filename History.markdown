@@ -17,6 +17,7 @@
   * Lock Ruby in CI to v3.1.2 and bump JRuby to v9.4.0.0 (#9196)
   * Update sass related tests for jekyll-sass-converter 3.x (#9223)
   * Split `test/test_tags.rb` into multiple files (#9230)
+  * test: use hash explicitly for Struct initializer for ruby 3.2 (#9237)
 
 ### Bug Fixes
 
