@@ -718,7 +718,7 @@ class TestFilters < JekyllUnitTest
           {
             "name" => name,
             :v     => 1,
-            :thing => M.new(:kay => "jewelers"),
+            :thing => M.new({:kay => "jewelers"}),
             :stuff => true,
           }
         end
