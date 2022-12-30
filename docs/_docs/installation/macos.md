@@ -51,10 +51,16 @@ Install `chruby` and `ruby-install` with Homebrew:
 brew install chruby ruby-install xz
 ```
 
-Install the latest stable version of Ruby:
+Install the latest stable version of Ruby (see note below on Apple Silicon):
 
 ```sh
 ruby-install ruby
+```
+
+Note: On Apple Silicon (e.g. M1) additional flags may be  required to successfully install the latest version of Ruby:
+
+```sh
+ruby-install ruby -- --enable-shared
 ```
 
 This will take a few minutes, and once it's done, configure your shell to 
