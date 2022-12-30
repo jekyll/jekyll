@@ -51,10 +51,10 @@ Install `chruby` and `ruby-install` with Homebrew:
 brew install chruby ruby-install xz
 ```
 
-Install the latest stable version of Ruby:
+Install the latest stable version of Ruby (supported by Jekyll):
 
 ```sh
-ruby-install ruby
+ruby-install ruby {{ site.data.ruby.current_version }}
 ```
 
 This will take a few minutes, and once it's done, configure your shell to 
