@@ -9,6 +9,7 @@
   * Fix Nested tree navigation with recursion example (#9174)
   * Fix typo on website (#9203)
   * Publish post on major release of sass-converter (#9225)
+  * Update Jekyll on macOS (macos.md) and current ruby version to 3.1.3 in ruby.yml (#9195)
 
 ### Development Fixes
 
