@@ -20,3 +20,22 @@ module Jekyll
     end
   end
 end
+
+if RUBY_VERSION >= "3.2"
+
+  module Liquid
+    module StandardFilters
+      def escape(input)
+        # Removes call to #untaint for Ruby 3.2 support.
+        CGI.escapeHTML(input.to_s) unless input.nil?
+      end
+    end
+  end
+
+  class Object
+    def tainted?
+      false
+    end
+  end
+
+end
