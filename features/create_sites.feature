@@ -14,7 +14,7 @@ Feature: Create sites
     And the test_blank/_sass directory should exist
     And the test_blank/assets/css directory should exist
     And the "test_blank/_layouts/default.html" file should exist
-    And the "test_blank/_sass/main.scss" file should exist
+    And the "test_blank/_sass/base.scss" file should exist
     And the "test_blank/assets/css/main.scss" file should exist
     And the "test_blank/_config.yml" file should exist
     And the "test_blank/index.md" file should exist
