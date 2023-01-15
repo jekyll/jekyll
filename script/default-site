@@ -18,3 +18,17 @@ BUNDLE_GEMFILE=Gemfile bundle install
 echo "$0: building the default site"
 BUNDLE_GEMFILE=Gemfile bundle exec jekyll build --verbose --profile
 popd
+
+echo "$0: creating new BLANK default site"
+bundle exec jekyll new tmp/default-site --blank
+pushd tmp/default-site
+
+echo "$0: generating a bare Gemfile via Bundler"
+bundle init
+echo "$0: respecifying the jekyll install location"
+ruby -e "contents = File.read('Gemfile'); File.write('Gemfile', contents.sub(/# gem \"rails\".*\\n/, 'gem \"jekyll\", path: \"../../\"'))"
+echo "$0: installing default site dependencies"
+BUNDLE_GEMFILE=Gemfile bundle install
+echo "$0: building the default site"
+BUNDLE_GEMFILE=Gemfile bundle exec jekyll build --verbose --profile
+popd
