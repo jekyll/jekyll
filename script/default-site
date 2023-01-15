@@ -20,8 +20,8 @@ BUNDLE_GEMFILE=Gemfile bundle exec jekyll build --verbose --profile
 popd
 
 echo "$0: creating new BLANK default site"
-bundle exec jekyll new tmp/default-site --blank
-pushd tmp/default-site
+bundle exec jekyll new tmp/blank-site --blank
+pushd tmp/blank-site
 
 echo "$0: generating a bare Gemfile via Bundler"
 bundle init
