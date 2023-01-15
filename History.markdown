@@ -1,3 +1,9 @@
+## HEAD
+
+### Development Fixes
+
+  * Backport #9223 for 4.3.x: Update sass related tests for jekyll-sass-converter 3.x (#9254)
+
 ## 4.3.1 / 2022-10-26
 
 ### Bug Fixes
