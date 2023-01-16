@@ -2,6 +2,7 @@
 
 ### Bug Fixes
 
+  * Backport #9187 for v4.3.x: Optimize `Site#each_site_file` (#9256)
   * Backport #9186 for v4.3.x: Remove totals in profile table properly (#9255)
 
 ### Development Fixes
