@@ -40,6 +40,8 @@ jobs:
         run: bash script/cucumber
       - name: Generate and Build a new site
         run: bash script/default-site
+      - name: Generate and Build a new blank site
+        run: bash script/blank-site
 
   xtras:
     name: "${{ matrix.job_name }} (Ruby ${{ matrix.ruby_version }})"

@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+#
+# Runs the `jekyll new` command with switch `--blank` and builds the blank site as a sanity check.
+
+set -e
+
+print_label() {
+  echo -e "\e[33m$0:\e[0m \e[36m$1..\e[0m"
+}
+
+# --
+
+print_label "Setting up 'tmp' directory"
+mkdir -p ./tmp
+rm -Rf ./tmp/default-site
+
+print_label "Creating new BLANK site"
+rm -Rf ./tmp/blank-site
+bundle exec jekyll new tmp/blank-site --blank
+pushd tmp/blank-site > /dev/null
+echo ""
+
+print_label "Generating a bare Gemfile via Bundler"
+bundle init
+echo ""
+
+print_label "Respecifying the jekyll install location"
+listings=$(cat <<-'EOS'
+  gem "jekyll", path: "../../"
+  gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
+EOS
+)
+ruby -e "contents = File.read('Gemfile'); File.write('Gemfile', contents.sub(/# gem \"rails\".*\\n/, '$listings'))"
+
+print_label "Installing site dependencies"
+BUNDLE_GEMFILE=Gemfile bundle install
+echo ""
+
+print_label "Building the site"
+BUNDLE_GEMFILE=Gemfile bundle exec jekyll build --verbose --profile
+popd > /dev/null
