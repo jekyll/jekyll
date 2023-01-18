@@ -11,7 +11,7 @@ mkdir -p ./tmp
 rm -Rf "./$TMP_SOURCE"
 
 echo "$0: creating new default site"
-bundle exec jekyll new "$TMP_SOURCE"
+bundle exec jekyll new "$TMP_SOURCE" "$@"
 pushd "$TMP_SOURCE"
 
 echo "$0: respecifying the jekyll install location"
@@ -19,5 +19,5 @@ ruby -e "contents = File.read('Gemfile'); File.write('Gemfile', contents.sub(/ge
 echo "$0: installing default site dependencies"
 BUNDLE_GEMFILE=Gemfile bundle install
 echo "$0: building the default site"
-BUNDLE_GEMFILE=Gemfile bundle exec jekyll build --verbose --profile "$@"
+BUNDLE_GEMFILE=Gemfile bundle exec jekyll build --verbose --profile
 popd
