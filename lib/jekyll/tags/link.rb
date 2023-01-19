@@ -5,11 +5,55 @@ module Jekyll
     class Link < Liquid::Tag
       include Jekyll::Filters::URLFilters
 
+      class LinkRegistry
+        def initialize
+          @stash = {}
+        end
+
+        def [](key)
+          @stash[ensure_single_leading_slash(key)]
+        end
+
+        def []=(key, value)
+          @stash[ensure_single_leading_slash(key)] ||= ensure_single_leading_slash(value)
+        end
+
+        private
+
+        def ensure_single_leading_slash(input)
+          result = input.nil? || input.empty? ? "" : input.gsub(%r!\A/|/\z!, "")
+          "/#{result}"
+        end
+      end
+      private_constant :LinkRegistry
+
+      # -- singleton methods -->
+
       class << self
         def tag_name
           name.split("::").last.downcase
         end
+
+        def register_links(site)
+          return unless site.is_a?(Jekyll::Site)
+
+          # Ensure registry is reset on every call to __method__.
+          registry = LinkRegistry.new
+
+          site.each_site_file do |item|
+            registry[item.relative_path] ||= Addressable::URI.parse(
+              PathManager.join(site.config["baseurl"], item.url)
+            ).normalize.to_s
+          end
+
+          @link_registry = registry
+        end
+
+        @link_registry ||= LinkRegistry.new
+        attr_reader :link_registry
       end
+
+      # -- instance methods -->
 
       def initialize(tag_name, relative_path, tokens)
         super
@@ -19,18 +63,12 @@ module Jekyll
 
       def render(context)
         relative_path = Liquid::Template.parse(@relative_path).render(context)
+        registry = Jekyll::Tags::Link.link_registry
 
-        # This takes care of the case for static files that have a leading `/`.
-        relative_path_with_leading_slash = PathManager.join("", relative_path)
-
-        registry = Jekyll::Tags::Link.instance_variable_get(:@registry) || {}
-
-        registry[relative_path] || \
-          registry[relative_path_with_leading_slash] || \
-          raise(ArgumentError, <<~MSG)
-            Could not find resource '#{relative_path}' in tag '#{self.class.tag_name}'.
-            Make sure the resource exists and the path is correct.
-          MSG
+        registry[relative_path] || raise(ArgumentError, <<~MSG)
+          Could not find resource '#{relative_path}' in tag '#{self.class.tag_name}'.
+          Make sure the resource exists and the path is correct.
+        MSG
       end
     end
   end

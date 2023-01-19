@@ -279,10 +279,13 @@ class TagUnitTest < JekyllUnitTest
       site.read
     end
 
+    trigger_pre_render_hook(site)
     @result = render_with(site, content)
   end
 
   private
+
+  def trigger_pre_render_hook(_site); end
 
   def render_with(site, content)
     converter = site.converters.find { |c| c.instance_of?(Jekyll::Converters::Markdown) }

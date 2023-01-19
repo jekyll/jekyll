@@ -3,6 +3,10 @@
 require "helper"
 
 class TestTagLink < TagUnitTest
+  def trigger_pre_render_hook(site)
+    Jekyll::Tags::Link.register_links(site)
+  end
+
   def render_content_with_collection(content, collection_label)
     render_content(
       content,
