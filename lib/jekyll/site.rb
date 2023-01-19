@@ -362,15 +362,9 @@ module Jekyll
     end
 
     def each_site_file
-      seen_files = []
-      %w(pages static_files_to_write docs_to_write).each do |type|
-        send(type).each do |item|
-          next if seen_files.include?(item)
-
-          yield item
-          seen_files << item
-        end
-      end
+      pages.each { |page| yield page }
+      static_files.each { |file| yield(file) if file.write? }
+      collections.each_value { |coll| coll.docs.each { |doc| yield(doc) if doc.write? } }
     end
 
     # Returns the FrontmatterDefaults or creates a new FrontmatterDefaults

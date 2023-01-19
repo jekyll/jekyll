@@ -7,11 +7,26 @@
 ### Documentation
 
   * Fix Nested tree navigation with recursion example (#9174)
+  * Fix typo on website (#9203)
+  * Publish post on major release of sass-converter (#9225)
+  * Update Jekyll on macOS (macos.md) and current ruby version to 3.1.3 in ruby.yml (#9195)
 
 ### Development Fixes
 
   * Cleanup highlight tag (#9177)
   * Run tests in utc (#9168)
+  * Lock Ruby in CI to v3.1.2 and bump JRuby to v9.4.0.0 (#9196)
+  * Update sass related tests for jekyll-sass-converter 3.x (#9223)
+  * Split `test/test_tags.rb` into multiple files (#9230)
+  * test: use hash explicitly for Struct initializer for ruby 3.2 (#9237)
+  * script/default-site: accept flags for `jekyll new` (#9259)
+
+### Bug Fixes
+
+  * Optimize default front matter using `File.fnmatch?` (#9185)
+  * Remove totals in profile table properly (#9186)
+  * Optimize `Site#each_site_file` (#9187)
+  * Rename sass partial created for new blank site (#9257)
 
 ## 4.3.1 / 2022-10-26
 

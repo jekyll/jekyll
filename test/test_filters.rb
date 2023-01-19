@@ -143,7 +143,7 @@ class TestFilters < JekyllUnitTest
 
     should "sassify with simple string" do
       assert_equal(
-        "p { color: #123456; }\n",
+        "p {\n  color: #123456;\n}",
         @filter.sassify(<<~SASS)
           $blue: #123456
           p
@@ -154,7 +154,7 @@ class TestFilters < JekyllUnitTest
 
     should "scssify with simple string" do
       assert_equal(
-        "p { color: #123456; }\n",
+        "p {\n  color: #123456;\n}",
         @filter.scssify("$blue:#123456; p{color: $blue}")
       )
     end
@@ -718,7 +718,7 @@ class TestFilters < JekyllUnitTest
           {
             "name" => name,
             :v     => 1,
-            :thing => M.new(:kay => "jewelers"),
+            :thing => M.new({:kay => "jewelers"}),
             :stuff => true,
           }
         end
