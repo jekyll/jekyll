@@ -19,6 +19,7 @@
   * Update sass related tests for jekyll-sass-converter 3.x (#9223)
   * Split `test/test_tags.rb` into multiple files (#9230)
   * test: use hash explicitly for Struct initializer for ruby 3.2 (#9237)
+  * script/default-site: accept flags for `jekyll new` (#9259)
 
 ### Bug Fixes
 
