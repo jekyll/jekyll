@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Runs the `jekyll new` command and builds the default site as a sanity check
-# Additional flags for `jekyll build` may be passed to this script.
+# Additional flags for `jekyll new` may be passed to this script.
 
 set -e
 
