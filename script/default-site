@@ -4,7 +4,7 @@
 
 set -e
 
-TMP_SOURCE="tmp/default-site-$$"
+TMP_SOURCE="tmp/default-site"
 
 echo "$0: setting up tmp directory"
 mkdir -p ./tmp
