@@ -1,4 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2023-01-18T23:06:06-08:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll Sass Converter 3.0 Released</title><link href="https://jekyllrb.com/news/2022/12/21/jekyll-sass-converter-3.0-released/" rel="alternate" type="text/html" title="Jekyll Sass Converter 3.0 Released" /><published>2022-12-21T04:22:15-08:00</published><updated>2022-12-21T04:22:15-08:00</updated><id>https://jekyllrb.com/news/2022/12/21/jekyll-sass-converter-3.0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2022/12/21/jekyll-sass-converter-3.0-released/"><![CDATA[<p>Jekyll Sass Converter 3.0 shipped recently and is available to those using Jekyll 4.3 and above. This release contains major changes.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2023-01-20T10:13:37-08:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 4.3.2 Released</title><link href="https://jekyllrb.com/news/2023/01/20/jekyll-4-3-2-released/" rel="alternate" type="text/html" title="Jekyll 4.3.2 Released" /><published>2023-01-20T09:30:00-08:00</published><updated>2023-01-20T09:30:00-08:00</updated><id>https://jekyllrb.com/news/2023/01/20/jekyll-4-3-2-released</id><content type="html" xml:base="https://jekyllrb.com/news/2023/01/20/jekyll-4-3-2-released/"><![CDATA[<p>Hello Jekyllers!</p>
+
+<p>This is a small release containing fixes for some issues that came to our attention after the
+release of v4.3.1:</p>
+<ul>
+  <li>Our <code class="language-plaintext highlighter-rouge">link</code> tag had a significant performance regression with the release of v4.3.0 solely due
+to a change related to <code class="language-plaintext highlighter-rouge">Jekyll::Site#each_site_file</code>. The new patch restores previous performance
+while maintaining the enhancements introduced in v4.3.0.</li>
+  <li>The tables printed out on running a build with the <code class="language-plaintext highlighter-rouge">--profile</code> did not stop including the
+misleading <code class="language-plaintext highlighter-rouge">TOTALS</code> row as advertised in the release-notes for v4.3.0. The row has been removed
+completely now.</li>
+  <li><code class="language-plaintext highlighter-rouge">jekyll-sass-converter-3.0.0</code> that shipped in the interim was not happy with our blank-site
+scaffolding (from running <code class="language-plaintext highlighter-rouge">jekyll new &lt;path&gt; --blank</code>) having a <code class="language-plaintext highlighter-rouge">main.scss</code> stylesheet template
+<em>import</em> a Sass partial <em>also named</em> <code class="language-plaintext highlighter-rouge">main.scss</code>. So the partial has been renamed to <code class="language-plaintext highlighter-rouge">base.scss</code>.</li>
+</ul>
+
+<p>That’s about it for this release. Depending on whether you use the features patched in this release,
+you may either wait for v4.4.0 (releasing in the near future) to update your Gemfile or, download
+the latest release right away! :)</p>
+
+<p>Happy Jekyllin’!!</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll Sass Converter 3.0 Released</title><link href="https://jekyllrb.com/news/2022/12/21/jekyll-sass-converter-3.0-released/" rel="alternate" type="text/html" title="Jekyll Sass Converter 3.0 Released" /><published>2022-12-21T04:22:15-08:00</published><updated>2022-12-21T04:22:15-08:00</updated><id>https://jekyllrb.com/news/2022/12/21/jekyll-sass-converter-3.0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2022/12/21/jekyll-sass-converter-3.0-released/"><![CDATA[<p>Jekyll Sass Converter 3.0 shipped recently and is available to those using Jekyll 4.3 and above. This release contains major changes.
 Specifically, the plugin has <strong>stopped using <code class="language-plaintext highlighter-rouge">sassc</code> for converting your Sass partials and stylesheets</strong> into CSS files.
 Instead, the converter now uses the <code class="language-plaintext highlighter-rouge">sass-embedded</code> gem acting as an interface to Dart Sass, which is the current primary
 implementation of Sass under active development. The secondary implementation <code class="language-plaintext highlighter-rouge">libsass</code> which the <code class="language-plaintext highlighter-rouge">sassc</code> gem interfaced
@@ -276,26 +296,4 @@ Adam Alton, Alex Malaszkiewicz, Alexey Pelykh, Brittany Joiner, bytecode1024, Ch
 Corey Megown, Dan Nemenyi, Enrico Tolotto, fauno, Felix Breidenstein, Francesco Bianco, Frank Taillandier,
 Gabriel Staples, iBug, Jacobo Vidal, jaybe@jekyll, jesuslerma, jnozsc, joelkennedy, Joe Marshall, Liam Cooke,
 Lou Rectoret, Malathi, m-naumann, Nicholas Paxford, Nikita Skalkin, Parker Moore, Pratyaksh Gautam, Rachel Cheyfitz,
-SaintMalik, Seeker, Shannon Kularathna, Steven Xu, Takuya N, Thelonius Kort and Toby Glei.</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Greetings Jekyllers! Jekyll v4.2.0 is out!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 3.9.0 Released</title><link href="https://jekyllrb.com/news/2020/08/05/jekyll-3-9-0-released/" rel="alternate" type="text/html" title="Jekyll 3.9.0 Released" /><published>2020-08-05T00:00:00-07:00</published><updated>2020-08-05T00:00:00-07:00</updated><id>https://jekyllrb.com/news/2020/08/05/jekyll-3-9-0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2020/08/05/jekyll-3-9-0-released/"><![CDATA[<p>Jekyll 3.9.0 allows use of kramdown v2, the latest series of kramdown.</p>
-
-<p>If you choose to upgrade, please note that the GitHub-Flavored Markdown
-parser and other features of kramdown v1 are now distributed via
-separate gems. If you would like to continue using these features, you will
-need to add the gems to your <code class="language-plaintext highlighter-rouge">Gemfile</code>. They are as follows:</p>
-
-<ul>
-  <li>GFM parser – <code class="language-plaintext highlighter-rouge">kramdown-parser-gfm</code></li>
-  <li>coderay syntax highlighter – <code class="language-plaintext highlighter-rouge">kramdown-syntax-coderay</code></li>
-  <li>mathjaxnode math engine – <code class="language-plaintext highlighter-rouge">kramdown-math-mathjaxnode</code></li>
-  <li>sskatex math engine – <code class="language-plaintext highlighter-rouge">kramdown-math-sskatex</code></li>
-  <li>katex math engine – <code class="language-plaintext highlighter-rouge">kramdown-math-katex</code></li>
-  <li>ritex math engine – <code class="language-plaintext highlighter-rouge">kramdown-math-ritex</code></li>
-  <li>itex2mml math engine – <code class="language-plaintext highlighter-rouge">kramdown-math-itex2mml</code></li>
-</ul>
-
-<p>Jekyll will require the given gem when the configuration requires it, and
-will show a helpful message when a dependency is missing.</p>
-
-<p>You can check out the patches and see all the details in <a href="/docs/history/#v3-9-0">the release notes</a></p>
-
-<p>Happy Jekylling!</p>]]></content><author><name>parkr</name></author><category term="release" /><summary type="html"><![CDATA[Jekyll 3.9.0 allows use of kramdown v2, the latest series of kramdown.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+SaintMalik, Seeker, Shannon Kularathna, Steven Xu, Takuya N, Thelonius Kort and Toby Glei.</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Greetings Jekyllers! Jekyll v4.2.0 is out!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
