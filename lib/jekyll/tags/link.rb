@@ -20,10 +20,12 @@ module Jekyll
 
         private
 
+        # rubocop:disable Performance/DeletePrefix
         def ensure_single_leading_slash(input)
-          result = input.nil? || input.empty? ? "" : input.gsub(%r!\A/|/\z!, "")
+          result = input.nil? || input.empty? ? "" : input.gsub(%r!\A/!, "")
           "/#{result}"
         end
+        # rubocop:enable Performance/DeletePrefix
       end
       private_constant :LinkRegistry
 
