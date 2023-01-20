@@ -85,5 +85,7 @@ kramdown:
   input             : GFM
   hard_wrap         : false
   footnote_nr       : 1
-  show_warnings     : false
+  show_warnings     : false # If true is set, more information will be displayed on the console (cli), such as _config.yml being set incorrectly. See the following image:
 ```
+**if `show_warnings: true`**
+![image](https://user-images.githubusercontent.com/58632405/213374665-a7376d1d-09f4-476d-b5d2-c96bfdc5e5ec.png)
