@@ -230,6 +230,7 @@ class TestSite < JekyllUnitTest
         index.html
         index.html
         info.md
+        main.css.map
         main.scss
         properties.html
         sitemap.xml
@@ -237,9 +238,9 @@ class TestSite < JekyllUnitTest
       )
       unless Utils::Platforms.really_windows?
         # files in symlinked directories may appear twice
-        sorted_pages.push("main.scss", "symlinked-file").sort!
+        sorted_pages.push("main.css.map", "main.scss", "symlinked-file").sort!
       end
-      assert_equal sorted_pages, @site.pages.map(&:name)
+      assert_equal sorted_pages, @site.pages.map(&:name).sort!
     end
 
     should "read posts" do

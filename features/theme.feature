@@ -16,12 +16,19 @@ Feature: Writing themes
 
   Scenario: A theme with SCSS
     Given I have a configuration file with "theme" set to "test-theme"
-    And I have a css directory
-    And I have a "css/main.scss" page that contains "@import 'test-theme-black';"
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see ".sample {\n  color: black; }" in "_site/css/main.css"
+    And I should see ".sample { color: red; }\n\n\/\*# sourceMappingURL=style.css.map \*\/" in "_site/assets/style.css"
+
+  Scenario: Overriding a theme with SCSS
+    Given I have a configuration file with "theme" set to "test-theme"
+    And I have an assets directory
+    And I have an "assets/style.scss" page that contains "@import 'test-theme-black';"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see ".sample { color: black; }\n\n\/\*# sourceMappingURL=style.css.map \*\/" in "_site/assets/style.css"
 
   Scenario: A theme with an include
     Given I have a configuration file with "theme" set to "test-theme"
