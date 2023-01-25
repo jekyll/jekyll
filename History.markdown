@@ -31,16 +31,15 @@
 
 ## 4.3.2 / 2023-01-20
 
-  * Optimize default front matter using `File.fnmatch?` (#9185)
-  * Remove totals in profile table properly (#9186)
-  * Optimize `Site#each_site_file` (#9187)
-  * Rename sass partial created for new blank site (#9257)
-
 ### Bug Fixes
 
   * Backport #9257 for v4.3.x: Rename sass partial created for new blank site (#9262)
   * Backport #9187 for v4.3.x: Optimize `Site#each_site_file` (#9256)
   * Backport #9186 for v4.3.x: Remove totals in profile table properly (#9255)
+
+### Development Fixes
+
+  * Backport #9223 for 4.3.x: Update sass related tests for jekyll-sass-converter 3.x (#9254)
 
 ## 4.3.1 / 2022-10-26
 
