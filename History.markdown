@@ -11,6 +11,7 @@
   * Publish post on major release of sass-converter (#9225)
   * Update Jekyll on macOS (macos.md) and current ruby version to 3.1.3 in ruby.yml (#9195)
   * Add release post for v4.3.2 (#9263)
+  * Grammatical reordering in  3-to-4 upgrading docs (#9245)
 
 ### Development Fixes
 
