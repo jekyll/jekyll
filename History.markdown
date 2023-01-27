@@ -13,6 +13,7 @@
   * Add release post for v4.3.2 (#9263)
   * Grammatical reordering in  3-to-4 upgrading docs (#9245)
   * fixed grammatical mistake on &#34;showcase&#34; page (#9264)
+  * Mark `highlight` `mark_lines` feature as 4.4 in docs (#9184)
 
 ### Development Fixes
 
