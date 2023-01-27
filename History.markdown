@@ -1,3 +1,16 @@
+## 3.9.3 / 2023-01-27
+
+### Bug Fixes
+
+  * 3.9.x: Support i18n 1.x (#9269)
+  * Backport #8880 for v3.9.x: Support both tzinfo v1 and v2 alongwith
+    non-half hour offsets (#9280)
+
+### Development Fixes
+
+  * v3.9.x: test under Ruby 3.2 #9272)
+  * v3.9.x: fix rdiscount test (#9277)
+
 ## 3.9.2 / 2022-03-27
 
 ### Bug Fixes
