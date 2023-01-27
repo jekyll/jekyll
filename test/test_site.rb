@@ -270,6 +270,7 @@ class TestSite < JekyllUnitTest
         main.scss
         properties.html
         sitemap.xml
+        slashes.html
         static_files.html
         test-styles.css.map
         test-styles.scss

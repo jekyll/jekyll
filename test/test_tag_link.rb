@@ -207,4 +207,23 @@ class TestTagLink < TagUnitTest
       end
     end
   end
+
+  context "custom content with linking to a page in site with baseurl" do
+    setup do
+      @content = "{% link slashes.html %}" # front matter has: `permalink: ///slashes///`
+    end
+
+    should "render valid url respecting the site baseurl" do
+      ["blog//", "//blog", "///blog///"].each do |baseurl|
+        assert_match(
+          "<p>/blog/slashes/</p>",
+          render_content(@content, "read_all" => true, "baseurl" => baseurl)
+        )
+      end
+      assert_match(
+        "<p>/slashes/</p>",
+        render_content(@content, "read_all" => true, "baseurl" => nil)
+      )
+    end
+  end
 end

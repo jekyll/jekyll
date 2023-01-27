@@ -20,12 +20,11 @@ module Jekyll
 
         private
 
-        # rubocop:disable Performance/DeletePrefix
         def ensure_single_leading_slash(input)
-          result = input.nil? || input.empty? ? "" : input.gsub(%r!\A/!, "")
+          result = input.nil? || input.empty? ? "" : input.squeeze("/")
+          result.delete_prefix!("/")
           "/#{result}"
         end
-        # rubocop:enable Performance/DeletePrefix
       end
       private_constant :LinkRegistry
 
@@ -43,9 +42,7 @@ module Jekyll
           registry = LinkRegistry.new
 
           site.each_site_file do |item|
-            registry[item.relative_path] ||= Addressable::URI.parse(
-              PathManager.join(site.config["baseurl"], item.url)
-            ).normalize.to_s
+            registry[item.relative_path] ||= PathManager.join(site.config["baseurl"], item.url)
           end
 
           @link_registry = registry
