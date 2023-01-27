@@ -32,8 +32,6 @@ environment:
     - RUBY_FOLDER_VER: "26"
       TEST_SUITE: "profile-docs"
     - RUBY_FOLDER_VER: "26"
-<<<<<<< HEAD
-=======
       TEST_SUITE: "memprof"
     - RUBY_FOLDER_VER: "26"
       TZINFO_VERSION: "~> 1.2"
@@ -42,7 +40,6 @@ environment:
       TZINFO_VERSION: "~> 2.0"
       TEST_SUITE: "cucumber"
     - RUBY_FOLDER_VER: "26"
->>>>>>> 9c9cf3e82 (Support both tzinfo v1 and v2 alongwith non-half hour offsets. (#8880))
       TEST_SUITE: "cucumber"
 
 test_script:
