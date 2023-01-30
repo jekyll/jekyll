@@ -14,6 +14,7 @@
   * Grammatical reordering in  3-to-4 upgrading docs (#9245)
   * fixed grammatical mistake on &#34;showcase&#34; page (#9264)
   * Mark `highlight` `mark_lines` feature as 4.4 in docs (#9184)
+  * Add v3.9.3 release history &amp; post to `master` branch (#9284)
 
 ### Development Fixes
 
@@ -38,6 +39,7 @@
 
   * 3.9.x: Support i18n 1.x (#9269)
   * Backport #8880 for v3.9.x: Support both tzinfo v1 and v2 along with
+
     non-half hour offsets (#9280)
 
 ### Development Fixes
