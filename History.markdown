@@ -25,6 +25,7 @@
   * Split `test/test_tags.rb` into multiple files (#9230)
   * test: use hash explicitly for Struct initializer for ruby 3.2 (#9237)
   * script/default-site: accept flags for `jekyll new` (#9259)
+  * Bump check-spelling/check-spelling from 0.0.20 to 0.0.21 (#9205)
 
 ### Bug Fixes
 
