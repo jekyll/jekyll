@@ -1,6 +1,6 @@
 ---
 title: 'Jekyll 3.9.3 Released'
-date: 2023-01-27 13:10:25 -0800
+date: 2023-01-29 18:30:22 2023 -0800
 author: parkr
 version: 3.9.3
 categories: [release]

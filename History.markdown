@@ -32,7 +32,7 @@
   * Optimize `Site#each_site_file` (#9187)
   * Rename sass partial created for new blank site (#9257)
 
-## 3.9.3 / 2023-01-27
+## 3.9.3 / 2023-01-29
 
 ### Bug Fixes
 
