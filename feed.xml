@@ -1,4 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2023-01-29T07:32:24-08:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 4.3.2 Released</title><link href="https://jekyllrb.com/news/2023/01/20/jekyll-4-3-2-released/" rel="alternate" type="text/html" title="Jekyll 4.3.2 Released" /><published>2023-01-20T09:30:00-08:00</published><updated>2023-01-20T09:30:00-08:00</updated><id>https://jekyllrb.com/news/2023/01/20/jekyll-4-3-2-released</id><content type="html" xml:base="https://jekyllrb.com/news/2023/01/20/jekyll-4-3-2-released/"><![CDATA[<p>Hello Jekyllers!</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2023-01-30T01:41:59-08:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 3.9.3 Released</title><link href="https://jekyllrb.com/news/2023/01/29/jekyll-3-9-3-released/" rel="alternate" type="text/html" title="Jekyll 3.9.3 Released" /><published>2023-01-29T18:30:22-08:00</published><updated>2023-01-29T18:30:22-08:00</updated><id>https://jekyllrb.com/news/2023/01/29/jekyll-3-9-3-released</id><content type="html" xml:base="https://jekyllrb.com/news/2023/01/29/jekyll-3-9-3-released/"><![CDATA[<p>Jekyll 3.9.3 is a bug fix release loosening version restrictions for
+dependencies <code class="language-plaintext highlighter-rouge">i18n</code> and <code class="language-plaintext highlighter-rouge">tzinfo</code> gems. You can now use Jekyll v3.9 with
+newer versions of these gems!</p>
+
+<p>More details in <a href="/docs/history/#v3-9-3">the full release notes</a>.</p>
+
+<p>Happy Jekylling!</p>]]></content><author><name>parkr</name></author><category term="release" /><summary type="html"><![CDATA[Jekyll 3.9.3 is a bug fix release loosening version restrictions for dependencies i18n and tzinfo gems. You can now use Jekyll v3.9 with newer versions of these gems!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.3.2 Released</title><link href="https://jekyllrb.com/news/2023/01/20/jekyll-4-3-2-released/" rel="alternate" type="text/html" title="Jekyll 4.3.2 Released" /><published>2023-01-20T09:30:00-08:00</published><updated>2023-01-20T09:30:00-08:00</updated><id>https://jekyllrb.com/news/2023/01/20/jekyll-4-3-2-released</id><content type="html" xml:base="https://jekyllrb.com/news/2023/01/20/jekyll-4-3-2-released/"><![CDATA[<p>Hello Jekyllers!</p>
 
 <p>This is a small release containing fixes for some issues that came to our attention after the
 release of v4.3.1:</p>
@@ -274,26 +280,4 @@ would previously fail:</p>
   <li><code class="language-plaintext highlighter-rouge">#</code></li>
 </ul>
 
-<p>Happy Jekylling!</p>]]></content><author><name>parkr</name></author><category term="release" /><summary type="html"><![CDATA[This patch release of the 3.9 series is released to fix a bug where the include tag does not allow valid filename characters. For example, this would previously fail:]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.2.0 Released</title><link href="https://jekyllrb.com/news/2020/12/14/jekyll-4-2-0-released/" rel="alternate" type="text/html" title="Jekyll 4.2.0 Released" /><published>2020-12-14T00:42:20-08:00</published><updated>2020-12-14T00:42:20-08:00</updated><id>https://jekyllrb.com/news/2020/12/14/jekyll-4-2-0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2020/12/14/jekyll-4-2-0-released/"><![CDATA[<p>Greetings Jekyllers! Jekyll v4.2.0 is out!</p>
-
-<p>This release gives you a new hook named <code class="language-plaintext highlighter-rouge">:post_convert</code> that allows modifying rendered HTML contents before they are
-placed into the designated layout(s).</p>
-
-<p>Detecting files that get written into the same destination path has been a part of the diagnostics from <code class="language-plaintext highlighter-rouge">jekyll doctor</code>
-for quite some time now. However, v4.2 has integrated that feature into the build process itself.</p>
-
-<p>On the topic of log output, the <code class="language-plaintext highlighter-rouge">--verbose</code> output got a bit more verbose. Instead of just showing <em>documents</em> that are
-being read, the output will now also show <em>pages</em> and <em>layouts</em> that are being read into the site.</p>
-
-<p>Additionally, we have stopped overriding the <code class="language-plaintext highlighter-rouge">site.url</code> to <code class="language-plaintext highlighter-rouge">http://localhost:4000</code> in absolute URLs while developing
-via <code class="language-plaintext highlighter-rouge">jekyll serve</code>.</p>
-
-<p>As always, you can go through <a href="/docs/history/#v4-2-0">the full list of changes</a> if you are interested in the various
-memory-allocation optimizations made to Jekyll.</p>
-
-<p>Special thanks to our community members who helped improving Jekyll codebase and documentation from v4.1.1:
-Adam Alton, Alex Malaszkiewicz, Alexey Pelykh, Brittany Joiner, bytecode1024, Christopher Brown, Chuck Houpt,
-Corey Megown, Dan Nemenyi, Enrico Tolotto, fauno, Felix Breidenstein, Francesco Bianco, Frank Taillandier,
-Gabriel Staples, iBug, Jacobo Vidal, jaybe@jekyll, jesuslerma, jnozsc, joelkennedy, Joe Marshall, Liam Cooke,
-Lou Rectoret, Malathi, m-naumann, Nicholas Paxford, Nikita Skalkin, Parker Moore, Pratyaksh Gautam, Rachel Cheyfitz,
-SaintMalik, Seeker, Shannon Kularathna, Steven Xu, Takuya N, Thelonius Kort and Toby Glei.</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Greetings Jekyllers! Jekyll v4.2.0 is out!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<p>Happy Jekylling!</p>]]></content><author><name>parkr</name></author><category term="release" /><summary type="html"><![CDATA[This patch release of the 3.9 series is released to fix a bug where the include tag does not allow valid filename characters. For example, this would previously fail:]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

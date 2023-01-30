@@ -85,6 +85,7 @@
     <option value="">Navigate the blog…</option>
     <option value="/news/">Home</option>
     <optgroup label="posts">
+      <option value="/news/2023/01/29/jekyll-3-9-3-released/">Jekyll 3.9.3 Released</option>
       <option value="/news/2023/01/20/jekyll-4-3-2-released/">Jekyll 4.3.2 Released</option>
       <option value="/news/2022/12/21/jekyll-sass-converter-3.0-released/">Jekyll Sass Converter 3.0 Released</option>
       <option value="/news/2022/10/26/jekyll-4-3-1-released/">Jekyll 4.3.1 Released</option>
@@ -185,39 +186,43 @@
 </div>
 <div class="unit four-fifths"><article>
   <h2>
-    <a href="/news/2023/01/20/jekyll-4-3-2-released/">Jekyll 4.3.2 Released</a>
+    <a href="/news/2023/01/29/jekyll-3-9-3-released/">Jekyll 3.9.3 Released</a>
   </h2>
   <span class="post-category">
     <span class="label">release</span>
   </span>
   <div class="post-meta">
-    <span class="post-date">20 Jan 2023</span>
-    <a href="https://github.com/ashmaroli" class="post-author">
-      <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name">ashmaroli</span>
+    <span class="post-date">29 Jan 2023</span>
+    <a href="https://github.com/parkr" class="post-author">
+      <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
     </a>
   </div>
-  <div class="post-content"><p>Hello Jekyllers!</p>
+  <div class="post-content"><p>Jekyll 3.9.3 is a bug fix release loosening version restrictions for
+dependencies <code class="language-plaintext highlighter-rouge">i18n</code> and <code class="language-plaintext highlighter-rouge">tzinfo</code> gems. You can now use Jekyll v3.9 with
+newer versions of these gems!</p>
 
-<p>This is a small release containing fixes for some issues that came to our attention after the
-release of v4.3.1:</p>
-<ul>
-  <li>Our <code class="language-plaintext highlighter-rouge">link</code> tag had a significant performance regression with the release of v4.3.0 solely due
-to a change related to <code class="language-plaintext highlighter-rouge">Jekyll::Site#each_site_file</code>. The new patch restores previous performance
-while maintaining the enhancements introduced in v4.3.0.</li>
-  <li>The tables printed out on running a build with the <code class="language-plaintext highlighter-rouge">--profile</code> did not stop including the
-misleading <code class="language-plaintext highlighter-rouge">TOTALS</code> row as advertised in the release-notes for v4.3.0. The row has been removed
-completely now.</li>
-  <li><code class="language-plaintext highlighter-rouge">jekyll-sass-converter-3.0.0</code> that shipped in the interim was not happy with our blank-site
-scaffolding (from running <code class="language-plaintext highlighter-rouge">jekyll new &lt;path&gt; --blank</code>) having a <code class="language-plaintext highlighter-rouge">main.scss</code> stylesheet template
-<em>import</em> a Sass partial <em>also named</em> <code class="language-plaintext highlighter-rouge">main.scss</code>. So the partial has been renamed to <code class="language-plaintext highlighter-rouge">base.scss</code>.</li>
-</ul>
+<p>More details in <a href="/docs/history/#v3-9-3">the full release notes</a>.</p>
 
-<p>That’s about it for this release. Depending on whether you use the features patched in this release,
-you may either wait for v4.4.0 (releasing in the near future) to update your Gemfile or, download
-the latest release right away! :)</p>
-
-<p>Happy Jekyllin’!!</p>
+<p>Happy Jekylling!</p>
 </div>
+</article>
+<article>
+  <div class="cell-left">
+    <span class="post-category">
+      <span class="label">release</span>
+    </span>
+  </div>
+  <div class="cell-right">
+    <div class="post-meta">
+      <h2 class="post-title">
+        <a href="/news/2023/01/20/jekyll-4-3-2-released/">Jekyll 4.3.2 Released</a>
+      </h2>
+      <span class="post-date">20 Jan 2023</span>
+      <a href="https://github.com/ashmaroli" class="post-author">
+        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name">ashmaroli</span>
+      </a>
+    </div>
+  </div>
 </article>
 <article>
   <div class="cell-left">
@@ -1691,6 +1696,9 @@ the latest release right away! :)</p>
     <h4>Recent Releases</h4>
     <ul>
       <li >
+        <a href="/news/2023/01/29/jekyll-3-9-3-released/">Version 3.9.3</a>
+      </li>
+      <li >
         <a href="/news/2023/01/20/jekyll-4-3-2-released/">Version 4.3.2</a>
       </li>
       <li >
@@ -1701,9 +1709,6 @@ the latest release right away! :)</p>
       </li>
       <li >
         <a href="/news/2022/03/27/jekyll-3-9-2-released/">Version 3.9.2</a>
-      </li>
-      <li >
-        <a href="/news/2022/03/03/jekyll-4-2-2-released/">Version 4.2.2</a>
       </li>
       <li>
         <a href="/docs/history/">History »</a>
