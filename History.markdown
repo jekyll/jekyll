@@ -32,6 +32,19 @@
   * Optimize `Site#each_site_file` (#9187)
   * Rename sass partial created for new blank site (#9257)
 
+## 3.9.3 / 2023-01-29
+
+### Bug Fixes
+
+  * 3.9.x: Support i18n 1.x (#9269)
+  * Backport #8880 for v3.9.x: Support both tzinfo v1 and v2 along with
+    non-half hour offsets (#9280)
+
+### Development Fixes
+
+  * v3.9.x: test under Ruby 3.2 #9272)
+  * v3.9.x: fix rdiscount test (#9277)
+
 ## 4.3.2 / 2023-01-20
 
 ### Bug Fixes
