@@ -41,9 +41,7 @@
 ### Bug Fixes
 
   * 3.9.x: Support i18n 1.x (#9269)
-  * Backport #8880 for v3.9.x: Support both tzinfo v1 and v2 along with
-
-    non-half hour offsets (#9280)
+  * Backport #8880 for v3.9.x: Support both tzinfo v1 and v2 along with non-half hour offsets (#9280)
 
 ### Development Fixes
 
