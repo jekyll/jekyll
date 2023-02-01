@@ -317,7 +317,7 @@ The issue is caused by trying to copy a non-existing symlink.
   <h5>Please report issues you encounter!</h5>
   <p>
   If you come across a bug, please <a href="{{ site.repository }}/issues/new">create an issue</a>
-  on GitHub describing the problem and any work-arounds you find so we can
+  on GitHub describing the problem and any workarounds you find so we can
   document it here for others.
   </p>
 </div>
