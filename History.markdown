@@ -15,6 +15,7 @@
   * fixed grammatical mistake on &#34;showcase&#34; page (#9264)
   * Mark `highlight` `mark_lines` feature as 4.4 in docs (#9184)
   * Add v3.9.3 release history &amp; post to `master` branch (#9284)
+  * Update S3 deployment to remove s3_website (#9221)
 
 ### Development Fixes
 
