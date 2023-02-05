@@ -441,6 +441,14 @@ module Jekyll
       property.split(".").reduce(liquid_data) do |data, key|
         data.respond_to?(:[]) && data[key]
       end
+    rescue StandardError => e
+      msg = if liquid_data.is_a?(Array)
+              "Error accessing object (#{liquid_data}) with given key. Expected an integer but " \
+                "got #{property.inspect} instead"
+            else
+              "Error accessing object with key #{property}. #{e.message}"
+            end
+      raise e, msg
     end
 
     FLOAT_LIKE   = %r!\A\s*-?(?:\d+\.?\d*|\.\d+)\s*\Z!.freeze

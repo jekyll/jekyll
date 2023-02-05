@@ -958,6 +958,14 @@ class TestFilters < JekyllUnitTest
         results = @filter.where(SelectDummy.new, "obj", "1 == 1")
         assert_equal [], results
       end
+
+      should "gracefully handle invalid property type" do
+        hash = {
+          "members" => { "name" => %w(John Jane Jimmy) },
+          "roles"   => %w(Admin Recruiter Manager),
+        }
+        assert_raises(TypeError) { @filter.where(hash, "name", "Jimmy") }
+      end
     end
 
     context "where_exp filter" do
