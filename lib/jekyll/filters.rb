@@ -445,8 +445,6 @@ module Jekyll
       msg = if liquid_data.is_a?(Array)
               "Error accessing object (#{liquid_data}) with given key. Expected an integer but " \
                 "got #{property.inspect} instead"
-            else
-              "Error accessing object with key #{property}. #{e.message}"
             end
       raise e, msg
     end
