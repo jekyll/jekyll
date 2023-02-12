@@ -441,10 +441,12 @@ module Jekyll
       property.split(".").reduce(liquid_data) do |data, key|
         data.respond_to?(:[]) && data[key]
       end
-    rescue StandardError => e
+    rescue TypeError => e
       msg = if liquid_data.is_a?(Array)
               "Error accessing object (#{liquid_data}) with given key. Expected an integer but " \
                 "got #{property.inspect} instead"
+            else
+              e.message
             end
       raise e, msg
     end
