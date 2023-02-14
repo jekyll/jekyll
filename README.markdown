@@ -74,9 +74,11 @@ This project exists thanks to all the people who contribute.
 
 ### Backers
 
-Thank you to all our backers! 🙏 [Become a backer](https://opencollective.com/jekyll#backer)
+Thank you to all our backers! 🙏 
 
 [![Jekyll Backers](https://opencollective.com/jekyll/backers.svg?width=890)](https://opencollective.com/jekyll#backers)
+
+Visit [Become a backer](https://opencollective.com/jekyll#backer) for more information.
 
 ## License
 
