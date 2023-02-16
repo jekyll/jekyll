@@ -447,6 +447,7 @@ Style/RescueModifier:
 Style/SafeNavigation:
   Exclude:
     - lib/jekyll/document.rb
+    - lib/jekyll/page.rb
 Style/SignalException:
   EnforcedStyle: only_raise
 Style/SingleArgumentDig:
