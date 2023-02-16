@@ -28,6 +28,7 @@
   * script/default-site: accept flags for `jekyll new` (#9259)
   * Bump check-spelling/check-spelling from 0.0.20 to 0.0.21 (#9205)
   * Use check-spelling/check-spelling@v0.0.21 (#9199)
+  * Bump RuboCop to v1.45.x (#9305)
 
 ### Bug Fixes
 
