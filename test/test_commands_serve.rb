@@ -340,6 +340,8 @@ class TestCommandsServe < JekyllUnitTest
       assert_equal 0, process.exitstatus
 
       pid = re.match(output)["pid"].to_i
+      assert pid > 1
+
       Process.kill 9, pid
     end
   end
