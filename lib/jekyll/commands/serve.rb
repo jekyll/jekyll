@@ -274,12 +274,19 @@ module Jekyll
         def boot_or_detach(server, opts)
           if opts["detach"]
             pid = Process.fork do
+              # Detach the process from controlling terminal
+              $stdin.reopen("/dev/null", "r")
+              $stdout.reopen("/dev/null", "w")
+              $stderr.reopen("/dev/null", "w")
               server.start
             end
 
             Process.detach(pid)
             Jekyll.logger.info "Server detached with pid '#{pid}'.",
                                "Run `pkill -f jekyll' or `kill -9 #{pid}' to stop the server."
+
+            # Exit without running `at_exit` inherited by the forked process.
+            Process.exit! 0
           else
             t = Thread.new { server.start }
             trap("INT") { server.shutdown }
