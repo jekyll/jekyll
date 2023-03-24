@@ -443,8 +443,8 @@ module Jekyll
       end
     rescue TypeError => e
       msg = if liquid_data.is_a?(Array)
-              "Error accessing object (#{liquid_data}) with given key. Expected an integer but " \
-                "got #{property.inspect} instead"
+              "Error accessing object (#{liquid_data.to_s[0...20]}) with given key. Expected an " \
+                "integer but got #{property.inspect} instead."
             else
               e.message
             end
