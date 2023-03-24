@@ -965,8 +965,9 @@ class TestFilters < JekyllUnitTest
           "roles"   => %w(Admin Recruiter Manager),
         }
         err = assert_raises(TypeError) { @filter.where(hash, "name", "Jimmy") }
-        msg = 'Error accessing object (["Admin", "Recruiter", "Manager"]) with given key. ' \
-              'Expected an integer but got "name" instead'
+        truncatd_arr_str = hash["roles"].to_liquid.to_s[0...20]
+        msg = "Error accessing object (#{truncatd_arr_str}) with given key. Expected an integer " \
+              'but got "name" instead.'
         assert_equal msg, err.message
       end
     end
