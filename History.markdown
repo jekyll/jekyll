@@ -37,6 +37,7 @@
   * Optimize `Site#each_site_file` (#9187)
   * Rename sass partial created for new blank site (#9257)
   * Fix `jekyll serve --detach` with jekyll-sass-converter 3.x (#9304)
+  * Handle TypeError from `where` filter gracefully (#9292)
 
 ## 3.9.3 / 2023-01-29
 
