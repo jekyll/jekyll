@@ -368,7 +368,7 @@ Style/GuardClause:
 Style/HashAsLastArrayItem:
   Enabled: true
 Style/HashConversion:
-  Enabled: true  
+  Enabled: true
 Style/HashEachMethods:
   Enabled: true
 Style/HashExcept:
@@ -391,6 +391,8 @@ Style/MagicCommentFormat:
 Style/MapCompactWithConditionalBlock:
   Enabled: true
 Style/MapToHash:
+  Enabled: true
+Style/MinMaxComparison:
   Enabled: true
 Style/MixinUsage:
   Exclude:

@@ -486,7 +486,7 @@ module Jekyll
     # Returns nothing
     def limit_posts!
       if limit_posts.positive?
-        limit = posts.docs.length < limit_posts ? posts.docs.length : limit_posts
+        limit = [posts.docs.length, limit_posts].min
         posts.docs = posts.docs[-limit, limit]
       end
     end
