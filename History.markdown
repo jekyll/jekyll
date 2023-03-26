@@ -29,6 +29,7 @@
   * Bump check-spelling/check-spelling from 0.0.20 to 0.0.21 (#9205)
   * Use check-spelling/check-spelling@v0.0.21 (#9199)
   * Bump RuboCop to v1.45.x (#9305)
+  * Bump Rubocop to version 1.48.x (#9326)
 
 ### Bug Fixes
 
