@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: "en-US" }}">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-    <title>{{ page.title }} - {{ site.title }}</title>
-    <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+    {% if page.title %}
+      {{ page.title }} -
+    {% else %}
+      {{ site.default_page_title }} -
+    {% endif %}
+    {{ site.title }}
+    </title>
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}" type="text/css">
   </head>
   <body>
-    {{ content }}
+    <main role="main">
+      {{ content }}
+    </main>
   </body>
 </html>

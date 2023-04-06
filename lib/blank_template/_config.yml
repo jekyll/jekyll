@@ -1,3 +1,36 @@
+# Site Information
+title: "My Jekyll Site" # the name of your site, e.g. ACME Corp.
+description: "This is a Jekyll site" # a brief description of your site
+
+# Build Configuration
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 baseurl: "" # the subpath of your site, e.g. /blog
-title: "" # the name of your site, e.g. ACME Corp.
+source: "." # the source directory for your site
+destination: "./_site" # the destination directory for your site
+lang: "en-US" # the language code for your site, e.g. en-US
+
+# Excluded Files
+# Add any files or directories that should be excluded from the Jekyll build process here
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE
+
+# Jekyll Plugins
+# Add your Jekyll plugins here to enable additional functionality for your site
+plugins:
+
+# Build settings
+# Configure the build process for your site
+encoding: "utf-8" # the character encoding for your site
+markdown: kramdown
+# collections:
+#   posts:
+#     output: true # whether to generate pages for posts
+#     permalink: /posts/:title/ # the permalink structure for posts
+#     layout: post # the default layout to use for posts
+#   pages:
+#     output: true # whether to generate pages for pages
+#     permalink: /:title/ # the permalink structure for pages
+#     layout: page # the default layout to use for pages
