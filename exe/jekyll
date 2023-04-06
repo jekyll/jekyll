@@ -3,21 +3,28 @@
 
 STDOUT.sync = true
 
+# Force all output to stdout to be immediately printed
 $LOAD_PATH.unshift File.expand_path("../lib", __dir__)
 
 require "jekyll"
 require "mercenary"
 
+# Load Jekyll plugins
 Jekyll::PluginManager.require_from_bundler
 
+# Process any deprecated options
 Jekyll::Deprecator.process(ARGV)
 
+# Define the command-line interface using the `Mercenary` library
 Mercenary.program(:jekyll) do |p|
+
+  # Define the version and description of the tool
   p.version Jekyll::VERSION
   p.description "Jekyll is a blog-aware, static site generator in Ruby"
   p.syntax "jekyll <subcommand> [options]"
 
-  p.option "source", "-s", "--source [DIR]", "Source directory (defaults to ./)"
+  # Define options that can be passed to the tool
+  p.option "source", "-s", "--source [DIR]", "Source directory for the Jekyll site (defaults to ./)"
   p.option "destination", "-d", "--destination [DIR]",
     "Destination directory (defaults to ./_site)"
   p.option "safe", "--safe", "Safe mode (defaults to false)"
@@ -27,6 +34,7 @@ Mercenary.program(:jekyll) do |p|
     "Layouts directory (defaults to ./_layouts)"
   p.option "profile", "--profile", "Generate a Liquid rendering profile"
 
+  # Check for required gems and display an error message if they're not installed
   Jekyll::External.require_if_present(Jekyll::External.blessed_gems) do |g, ver_constraint|
     cmd = g.split("-").last
     p.command(cmd.to_sym) do |c|
@@ -38,8 +46,10 @@ Mercenary.program(:jekyll) do |p|
     end
   end
 
+  # Initialize each of the available subcommands
   Jekyll::Command.subclasses.each { |c| c.init_with_program(p) }
 
+  # Define the default action if no subcommand is provided
   p.action do |args, _|
     if args.empty?
       Jekyll.logger.error "A subcommand is required."
