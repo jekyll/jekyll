@@ -12,10 +12,8 @@ lang: "en-US" # the language code for your site, e.g. en-US
 # Excluded Files
 # Add any files or directories that should be excluded from the Jekyll build process here
 exclude:
-  - Gemfile
-  - Gemfile.lock
-  - README.md
-  - LICENSE
+  # - README.md
+  # - LICENSE
 
 # Jekyll Plugins
 # Add your Jekyll plugins here to enable additional functionality for your site
@@ -25,12 +23,3 @@ plugins:
 # Configure the build process for your site
 encoding: "utf-8" # the character encoding for your site
 markdown: kramdown
-# collections:
-#   posts:
-#     output: true # whether to generate pages for posts
-#     permalink: /posts/:title/ # the permalink structure for posts
-#     layout: post # the default layout to use for posts
-#   pages:
-#     output: true # whether to generate pages for pages
-#     permalink: /:title/ # the permalink structure for pages
-#     layout: page # the default layout to use for pages

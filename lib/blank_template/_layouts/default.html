@@ -5,18 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
     {% if page.title %}
-      {{ page.title }} -
+      {{ page.title }}
     {% else %}
-      {{ site.default_page_title }} -
+      {{ site.title }}
     {% endif %}
-    {{ site.title }}
     </title>
     <meta name="description" content="{{ page.description | default: site.description }}">
-    <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}" type="text/css">
+    <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url | url_escape }}" type="text/css">
   </head>
   <body>
-    <main role="main">
-      {{ content }}
-    </main>
+    {{ content }}
   </body>
 </html>

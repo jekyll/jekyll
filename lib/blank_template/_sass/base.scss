@@ -1,9 +1,10 @@
 $body-bg: #ffffff !default;
 $body-color: #000000 !default;
-$body-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !default;
+$body-font: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+            "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
 
 body {
   background-color: $body-bg;
   color: $body-color;
-  font-family: $body-font, sans-serif;
+  font-family: $body-font;
 }
