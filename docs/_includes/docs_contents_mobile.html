@@ -1,15 +1,22 @@
 <div class="docs-nav-mobile unit whole show-on-mobiles">
-  <select onchange="if (this.value) window.location.href=this.value">
+  <select id="doc-nav" onchange="navigateToUrl(this)">
     <option value="">Navigate the docs…</option>
-    {% for section in site.data.docs_nav -%}
-    <optgroup label="{{ section.title }}">
-    {%- for item in section.docs -%}
-      {% assign p = site.docs | where: "url", item.link | first %}
-      <option value="{{ p.url | relative_url }}">
-        {{- p.menu_name | default: p.title -}}
-      </option>
-    {%- endfor %}
-    </optgroup>
-    {% endfor -%}
+    {% for section in site.data.docs_nav %}
+      <optgroup label="{{ section.title }}">
+        {%- for item in section.docs -%}
+          {% assign page = site.docs | where: "url", item.link | first %}
+          <option value="{{ page.url | relative_url }}">
+            {{- page.menu_name | default: page.title -}}
+          </option>
+        {%- endfor %}
+      </optgroup>
+    {% endfor %}
   </select>
 </div>
+
+<script>
+const navigateToUrl = (select) => {
+  const url = select.value;
+  url && (window.location.href = url);
+};
+</script>
