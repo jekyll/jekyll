@@ -1,5 +1,5 @@
 <div class="docs-nav-mobile unit whole show-on-mobiles">
-  <select id="doc-nav" onchange="navigateToUrl(this)">
+  <select id="doc-nav" onchange="navigateToUrl(this)" aria-label="Select a page from the documentation">
     <option value="">Navigate the docs…</option>
     {% for section in site.data.docs_nav %}
       <optgroup label="{{ section.title }}">
