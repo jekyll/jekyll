@@ -3,7 +3,7 @@
 
 STDOUT.sync = true
 
-# Force all output to stdout to be immediately printed
+# Add the 'lib' directory to the load path for Ruby modules
 $LOAD_PATH.unshift File.expand_path("../lib", __dir__)
 
 require "jekyll"
