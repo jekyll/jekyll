@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.101.1/containers/ruby-2
 {
-	"name": "Ruby 2",
+	"name": "Ruby 3",
 	"dockerFile": "Dockerfile",
 
 	// Set *default* container specific settings.json values on container create.
