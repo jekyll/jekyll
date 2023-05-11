@@ -15,7 +15,7 @@ If you have page snippets that you use repeatedly across your site, an
 ## Code snippet highlighting
 
 Jekyll has built in support for syntax highlighting of over 100 languages
-thanks to [Rouge](http://rouge.jneen.net). Rouge is the default highlighter
+thanks to [Rouge](https://github.com/rouge-ruby/rouge). Rouge is the default highlighter
 in Jekyll 3 and above.
 
 {: .note .warning}
