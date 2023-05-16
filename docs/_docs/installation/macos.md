@@ -5,6 +5,7 @@ permalink: /docs/installation/macos/
 
 ## Supported macOS versions
 
+- Ventura (macOS 13)
 - Monterey (macOS 12)
 - Big Sur (macOS 11)
 - Catalina (macOS 10.15)
@@ -48,13 +49,13 @@ Jekyll on your Mac, or if you run into any issues, read that guide.
 Install `chruby` and `ruby-install` with Homebrew:
 
 ```sh
-brew install chruby ruby-install xz
+brew install chruby ruby-install
 ```
 
 Install the latest stable version of Ruby (supported by Jekyll):
 
 ```sh
-ruby-install ruby {{ site.data.ruby.current_version }}
+ruby-install ruby
 ```
 
 This will take a few minutes, and once it's done, configure your shell to 
@@ -63,7 +64,8 @@ automatically use `chruby`:
 ```sh
 echo "source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh" >> ~/.zshrc
 echo "source $(brew --prefix)/opt/chruby/share/chruby/auto.sh" >> ~/.zshrc
-echo "chruby ruby-{{ site.data.ruby.current_version }}" >> ~/.zshrc # run 'chruby' to see actual version
+echo "chruby ruby" >> ~/.zshrc
+# run 'chruby' to see actual version
 ```
 
 If you're using Bash, replace `.zshrc` with `.bash_profile`. If you're not sure, 
@@ -83,10 +85,10 @@ Next, read that same external guide for important notes about
 
 ## Install Jekyll
 
-After installing Ruby with chruby, install the latest Jekyll gem:
+After installing Ruby with chruby, install the latest Jekyll and Bundler:
 
 ```sh
-gem install jekyll
+gem install jekyll bundler
 ```
 
 ## Troubleshooting
