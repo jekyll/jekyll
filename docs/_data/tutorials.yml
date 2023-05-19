@@ -8,6 +8,7 @@
   - convert-site-to-jekyll
   - using-jekyll-with-bundler
   - csv-to-table
+  - read-only-json-api
 
 #- title: Another section
 #  tutorials:
