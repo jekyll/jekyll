@@ -42,7 +42,8 @@
     and cannot be outside the source directory.
     <br />
     In Jekyll 3, Excludes replaces the default exclusion list.
-    <br /> In Jekyll 4, it adds to it instead and Include can be used to override the default exclusion list entries.
+    <br />
+    In Jekyll 4, it adds to it instead and Include can be used to override the default exclusion list entries.
     <br />
     The default exclusions are found in <code>_config.yml</code> as created by <code>jekyll new</code>:
     <ul>
