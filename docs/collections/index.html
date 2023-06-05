@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-05-08T06:27:11-07:00" />
+<meta property="article:published_time" content="2023-06-05T05:46:44-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Collections" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-05-08T06:27:11-07:00","datePublished":"2023-05-08T06:27:11-07:00","description":"Collections are a great way to group related content like members of a team or talks at a conference.","headline":"Collections","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/collections/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/collections/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-05T05:46:44-07:00","datePublished":"2023-06-05T05:46:44-07:00","description":"Collections are a great way to group related content like members of a team or talks at a conference.","headline":"Collections","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/collections/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/collections/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -212,10 +212,10 @@ your <code>_config.yml</code> file, with the addition of the preceding <code>_</
 for each staff member. Similar to posts, the body of the document is accessed
 using the <code class="language-plaintext highlighter-rouge">content</code> variable:</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">staff_member</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site.staff_members</span><span class="w"> </span><span class="p">%}</span>
-  &lt;h2&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">staff_member</span><span class="p">.</span><span class="nv">name</span><span class="w"> </span><span class="p">}}</span> - <span class="p">{{</span><span class="w"> </span><span class="nv">staff_member</span><span class="p">.</span><span class="nv">position</span><span class="w"> </span><span class="p">}}</span>&lt;/h2&gt;
-  &lt;p&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">staff_member</span><span class="p">.</span><span class="nv">content</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">markdownify</span><span class="w"> </span><span class="p">}}</span>&lt;/p&gt;
-<span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">staff_member</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">staff_members</span><span class="w"> </span><span class="cp">%}</span>
+  &lt;h2&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">staff_member</span><span class="p">.</span><span class="nv">name</span><span class="w"> </span><span class="cp">}}</span> - <span class="cp">{{</span><span class="w"> </span><span class="nv">staff_member</span><span class="p">.</span><span class="nv">position</span><span class="w"> </span><span class="cp">}}</span>&lt;/h2&gt;
+  &lt;p&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">staff_member</span><span class="p">.</span><span class="nv">content</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">markdownify</span><span class="w"> </span><span class="cp">}}</span>&lt;/p&gt;
+<span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
 </code></pre></div></div>
 
 <p>If you’d like Jekyll to create a rendered page for each document in your
@@ -229,14 +229,14 @@ metadata in <code class="language-plaintext highlighter-rouge">_config.yml</code
 
 <p>You can link to the generated page using the <code class="language-plaintext highlighter-rouge">url</code> attribute:</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">staff_member</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site.staff_members</span><span class="w"> </span><span class="p">%}</span>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">staff_member</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">staff_members</span><span class="w"> </span><span class="cp">%}</span>
   &lt;h2&gt;
-    &lt;a href="<span class="p">{{</span><span class="w"> </span><span class="nv">staff_member</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">}}</span>"&gt;
-      <span class="p">{{</span><span class="w"> </span><span class="nv">staff_member</span><span class="p">.</span><span class="nv">name</span><span class="w"> </span><span class="p">}}</span> - <span class="p">{{</span><span class="w"> </span><span class="nv">staff_member</span><span class="p">.</span><span class="nv">position</span><span class="w"> </span><span class="p">}}</span>
+    &lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">staff_member</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>"&gt;
+      <span class="cp">{{</span><span class="w"> </span><span class="nv">staff_member</span><span class="p">.</span><span class="nv">name</span><span class="w"> </span><span class="cp">}}</span> - <span class="cp">{{</span><span class="w"> </span><span class="nv">staff_member</span><span class="p">.</span><span class="nv">position</span><span class="w"> </span><span class="cp">}}</span>
     &lt;/a&gt;
   &lt;/h2&gt;
-  &lt;p&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">staff_member</span><span class="p">.</span><span class="nv">content</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">markdownify</span><span class="w"> </span><span class="p">}}</span>&lt;/p&gt;
-<span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+  &lt;p&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">staff_member</span><span class="p">.</span><span class="nv">content</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">markdownify</span><span class="w"> </span><span class="cp">}}</span>&lt;/p&gt;
+<span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
 </code></pre></div></div>
 
 <h2 id="permalinks">Permalinks</h2>

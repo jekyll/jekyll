@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-05-08T06:27:11-07:00" />
+<meta property="article:published_time" content="2023-06-05T05:46:44-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Liquid Filters" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-05-08T06:27:11-07:00","datePublished":"2023-05-08T06:27:11-07:00","description":"All of the standard Liquid filters are supported (see below).","headline":"Liquid Filters","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/liquid/filters/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/liquid/filters/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-05T05:46:44-07:00","datePublished":"2023-06-05T05:46:44-07:00","description":"All of the standard Liquid filters are supported (see below).","headline":"Liquid Filters","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/liquid/filters/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/liquid/filters/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -573,12 +573,12 @@ The default is <code class="language-plaintext highlighter-rouge">default</code>
 
 <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Using `nil` to select posts that either do not have `my_prop`
 // defined or `my_prop` has been set to `nil` explicitly.
-<span class="p">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">filtered_posts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">posts</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">where</span><span class="p">:</span><span class="w"> </span><span class="s1">'my_prop'</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">%}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">filtered_posts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">posts</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">where</span><span class="p">:</span><span class="w"> </span><span class="s1">'my_prop'</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="cp">%}</span>
 </code></pre></div></div>
 
 <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Using Liquid's special literal `empty` or `blank` to select
 // posts that have `my_prop` set to an empty value.
-<span class="p">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">filtered_posts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">posts</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">where</span><span class="p">:</span><span class="w"> </span><span class="s1">'my_prop'</span><span class="p">,</span><span class="w"> </span><span class="nb">empty</span><span class="w"> </span><span class="p">%}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">filtered_posts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">posts</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">where</span><span class="p">:</span><span class="w"> </span><span class="s1">'my_prop'</span><span class="p">,</span><span class="w"> </span><span class="nb">empty</span><span class="w"> </span><span class="cp">%}</span>
 </code></pre></div></div>
 
 <h3 id="binary-operators-in-where_exp-filter40">Binary operators in <code class="language-plaintext highlighter-rouge">where_exp</code> filter<span class="version-badge" title="This feature is available starting version 4.0">4.0</span></h3>
@@ -587,12 +587,12 @@ conditionals in the operation.</p>
 
 <p>For example, to get a list of documents on English horror flicks, one could use the following snippet:</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">movies</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">where_exp</span><span class="p">:</span><span class="w"> </span><span class="s2">"item"</span><span class="p">,</span><span class="w"> </span><span class="s2">"item.genre == 'horror' and item.language == 'English'"</span><span class="w"> </span><span class="p">}}</span>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">movies</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">where_exp</span><span class="p">:</span><span class="w"> </span><span class="s2">"item"</span><span class="p">,</span><span class="w"> </span><span class="s2">"item.genre == 'horror' and item.language == 'English'"</span><span class="w"> </span><span class="cp">}}</span>
 </code></pre></div></div>
 
 <p>Or to get a list of comic-book based movies, one may use the following:</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">movies</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">where_exp</span><span class="p">:</span><span class="w"> </span><span class="s2">"item"</span><span class="p">,</span><span class="w"> </span><span class="s2">"item.sub_genre == 'MCU' or item.sub_genre == 'DCEU'"</span><span class="w"> </span><span class="p">}}</span>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">movies</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">where_exp</span><span class="p">:</span><span class="w"> </span><span class="s2">"item"</span><span class="p">,</span><span class="w"> </span><span class="s2">"item.sub_genre == 'MCU' or item.sub_genre == 'DCEU'"</span><span class="w"> </span><span class="cp">}}</span>
 </code></pre></div></div>
 
 <h3 id="standard-liquid-filters">Standard Liquid Filters</h3>

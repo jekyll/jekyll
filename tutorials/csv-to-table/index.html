@@ -147,7 +147,7 @@ Jack,Hill,25,Australia
 
 <p>That data file will now be available in Jekyll like this:</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">authors</span><span class="w"> </span><span class="p">}}</span>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">authors</span><span class="w"> </span><span class="cp">}}</span>
 </code></pre></div></div>
 
 <h2 id="2-add-a-table">2. Add a table</h2>
@@ -165,8 +165,8 @@ Jack,Hill,25,Australia
 
 <p>Grab the first row and see what it looks like using the <code class="language-plaintext highlighter-rouge">inspect</code> filter.</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">authors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">%}</span>
-<span class="p">{{</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">inspect</span><span class="w"> </span><span class="p">}}</span>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">authors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="cp">%}</span>
+<span class="cp">{{</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">inspect</span><span class="w"> </span><span class="cp">}}</span>
 </code></pre></div></div>
 
 <p>The result will be a <em>hash</em> (an object consisting of key-value pairs) which looks like this:</p>
@@ -185,17 +185,17 @@ Jack,Hill,25,Australia
 
 <p>A simple solution would be to hardcode the field names when looking up the row values by key.</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{{</span><span class="w"> </span><span class="nv">row</span><span class="p">[</span><span class="s2">"First name"</span><span class="p">]</span><span class="w"> </span><span class="p">}}</span>
-<span class="p">{{</span><span class="w"> </span><span class="nv">row</span><span class="p">[</span><span class="s2">"Last name"</span><span class="p">]</span><span class="w"> </span><span class="p">}}</span>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{{</span><span class="w"> </span><span class="nv">row</span><span class="p">[</span><span class="s2">"First name"</span><span class="p">]</span><span class="w"> </span><span class="cp">}}</span>
+<span class="cp">{{</span><span class="w"> </span><span class="nv">row</span><span class="p">[</span><span class="s2">"Last name"</span><span class="p">]</span><span class="w"> </span><span class="cp">}}</span>
 </code></pre></div></div>
 
 <p>But we prefer a solution that will work for <em>any</em> CSV, without specifying the column names upfront.
 So we iterate over the <code class="language-plaintext highlighter-rouge">row</code> object using a <code class="language-plaintext highlighter-rouge">for</code> loop:</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">authors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">%}</span>
-<span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">pair</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="p">%}</span>
-  <span class="p">{{</span><span class="w"> </span><span class="nv">pair</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">inspect</span><span class="w"> </span><span class="p">}}</span>
-<span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">authors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="cp">%}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">pair</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="cp">%}</span>
+  <span class="cp">{{</span><span class="w"> </span><span class="nv">pair</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">inspect</span><span class="w"> </span><span class="cp">}}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
 </code></pre></div></div>
 
 <p>This produces the following. Note the first item in each pair is the <em>key</em> and the second will be
@@ -214,15 +214,15 @@ the header name by getting the first element (at index <code class="language-pla
 element as we don’t need the value yet.</p>
 
 <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;table&gt;
-  <span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site.data.authors</span><span class="w"> </span><span class="p">%}</span>
-    <span class="p">{%</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="nb">forloop.first</span><span class="w"> </span><span class="p">%}</span>
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">authors</span><span class="w"> </span><span class="cp">%}</span>
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">if</span><span class="w"> </span><span class="nb">forloop.first</span><span class="w"> </span><span class="cp">%}</span>
     &lt;tr&gt;
-      <span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">pair</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="p">%}</span>
-        &lt;th&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">}}</span>&lt;/th&gt;
-      <span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+      <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">pair</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="cp">%}</span>
+        &lt;th&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="cp">}}</span>&lt;/th&gt;
+      <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
     &lt;/tr&gt;
-    <span class="p">{%</span><span class="w"> </span><span class="kr">endif</span><span class="w"> </span><span class="p">%}</span>
-  <span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">endif</span><span class="w"> </span><span class="cp">%}</span>
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
 &lt;/table&gt;
 
 </code></pre></div></div>
@@ -244,19 +244,19 @@ title: Table test
 ---
 
 &lt;table&gt;
-  <span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site.data.authors</span><span class="w"> </span><span class="p">%}</span>
-    <span class="p">{%</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="nb">forloop.first</span><span class="w"> </span><span class="p">%}</span>
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">authors</span><span class="w"> </span><span class="cp">%}</span>
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">if</span><span class="w"> </span><span class="nb">forloop.first</span><span class="w"> </span><span class="cp">%}</span>
     &lt;tr&gt;
-      <span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">pair</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="p">%}</span>
-        &lt;th&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">}}</span>&lt;/th&gt;
-      <span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+      <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">pair</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="cp">%}</span>
+        &lt;th&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="cp">}}</span>&lt;/th&gt;
+      <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
     &lt;/tr&gt;
-    <span class="p">{%</span><span class="w"> </span><span class="kr">endif</span><span class="w"> </span><span class="p">%}</span>
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">endif</span><span class="w"> </span><span class="cp">%}</span>
 
-    <span class="p">{%</span><span class="w"> </span><span class="nt">tablerow</span><span class="w"> </span><span class="nv">pair</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="p">%}</span>
-      <span class="p">{{</span><span class="w"> </span><span class="nv">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">}}</span>
-    <span class="p">{%</span><span class="w"> </span><span class="nt">endtablerow</span><span class="w"> </span><span class="p">%}</span>
-  <span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">tablerow</span><span class="w"> </span><span class="nv">pair</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="cp">%}</span>
+      <span class="cp">{{</span><span class="w"> </span><span class="nv">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="cp">}}</span>
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">endtablerow</span><span class="w"> </span><span class="cp">%}</span>
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
 &lt;/table&gt;
 </code></pre></div></div>
 

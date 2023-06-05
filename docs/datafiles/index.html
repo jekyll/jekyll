@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-05-08T06:27:11-07:00" />
+<meta property="article:published_time" content="2023-06-05T05:46:44-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Data Files" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-05-08T06:27:11-07:00","datePublished":"2023-05-08T06:27:11-07:00","description":"In addition to the built-in variables available from Jekyll, you can specify your own custom data that can be accessed via the Liquid templating system.","headline":"Data Files","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/datafiles/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/datafiles/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-05T05:46:44-07:00","datePublished":"2023-06-05T05:46:44-07:00","description":"In addition to the built-in variables available from Jekyll, you can specify your own custom data that can be accessed via the Liquid templating system.","headline":"Data Files","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/datafiles/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/datafiles/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -178,13 +178,13 @@ therefore one should avoid having data files with the same basename but differen
 <p>You can now render the list of members in a template:</p>
 
 <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;ul&gt;
-<span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">member</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site.data.members</span><span class="w"> </span><span class="p">%}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">member</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">members</span><span class="w"> </span><span class="cp">%}</span>
   &lt;li&gt;
-    &lt;a href="https://github.com/<span class="p">{{</span><span class="w"> </span><span class="nv">member</span><span class="p">.</span><span class="nv">github</span><span class="w"> </span><span class="p">}}</span>"&gt;
-      <span class="p">{{</span><span class="w"> </span><span class="nv">member</span><span class="p">.</span><span class="nv">name</span><span class="w"> </span><span class="p">}}</span>
+    &lt;a href="https://github.com/<span class="cp">{{</span><span class="w"> </span><span class="nv">member</span><span class="p">.</span><span class="nv">github</span><span class="w"> </span><span class="cp">}}</span>"&gt;
+      <span class="cp">{{</span><span class="w"> </span><span class="nv">member</span><span class="p">.</span><span class="nv">name</span><span class="w"> </span><span class="cp">}}</span>
     &lt;/a&gt;
   &lt;/li&gt;
-<span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
 &lt;/ul&gt;
 </code></pre></div></div>
 
@@ -220,15 +220,15 @@ folder:</p>
 file name:</p>
 
 <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;ul&gt;
-<span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">org_hash</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site.data.orgs</span><span class="w"> </span><span class="p">%}</span>
-<span class="p">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">org</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">org_hash</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">%}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">org_hash</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">orgs</span><span class="w"> </span><span class="cp">%}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">org</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">org_hash</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="cp">%}</span>
   &lt;li&gt;
-    &lt;a href="https://github.com/<span class="p">{{</span><span class="w"> </span><span class="nv">org</span><span class="p">.</span><span class="nv">username</span><span class="w"> </span><span class="p">}}</span>"&gt;
-      <span class="p">{{</span><span class="w"> </span><span class="nv">org</span><span class="p">.</span><span class="nv">name</span><span class="w"> </span><span class="p">}}</span>
+    &lt;a href="https://github.com/<span class="cp">{{</span><span class="w"> </span><span class="nv">org</span><span class="p">.</span><span class="nv">username</span><span class="w"> </span><span class="cp">}}</span>"&gt;
+      <span class="cp">{{</span><span class="w"> </span><span class="nv">org</span><span class="p">.</span><span class="nv">name</span><span class="w"> </span><span class="cp">}}</span>
     &lt;/a&gt;
-    (<span class="p">{{</span><span class="w"> </span><span class="nv">org</span><span class="p">.</span><span class="nv">members</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">size</span><span class="w"> </span><span class="p">}}</span> members)
+    (<span class="cp">{{</span><span class="w"> </span><span class="nv">org</span><span class="p">.</span><span class="nv">members</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">size</span><span class="w"> </span><span class="cp">}}</span> members)
   &lt;/li&gt;
-<span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
 &lt;/ul&gt;
 </code></pre></div></div>
 
@@ -250,11 +250,11 @@ title: sample post
 author: dave
 ---
 
-<span class="p">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">people</span><span class="p">[</span><span class="nv">page</span><span class="p">.</span><span class="nv">author</span><span class="p">]</span><span class="w"> </span><span class="p">%}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">people</span><span class="p">[</span><span class="nv">page</span><span class="p">.</span><span class="nv">author</span><span class="p">]</span><span class="w"> </span><span class="cp">%}</span>
 &lt;a rel="author"
-  href="https://twitter.com/<span class="p">{{</span><span class="w"> </span><span class="nv">author</span><span class="p">.</span><span class="nv">twitter</span><span class="w"> </span><span class="p">}}</span>"
-  title="<span class="p">{{</span><span class="w"> </span><span class="nv">author</span><span class="p">.</span><span class="nv">name</span><span class="w"> </span><span class="p">}}</span>"&gt;
-    <span class="p">{{</span><span class="w"> </span><span class="nv">author</span><span class="p">.</span><span class="nv">name</span><span class="w"> </span><span class="p">}}</span>
+  href="https://twitter.com/<span class="cp">{{</span><span class="w"> </span><span class="nv">author</span><span class="p">.</span><span class="nv">twitter</span><span class="w"> </span><span class="cp">}}</span>"
+  title="<span class="cp">{{</span><span class="w"> </span><span class="nv">author</span><span class="p">.</span><span class="nv">name</span><span class="w"> </span><span class="cp">}}</span>"&gt;
+    <span class="cp">{{</span><span class="w"> </span><span class="nv">author</span><span class="p">.</span><span class="nv">name</span><span class="w"> </span><span class="cp">}}</span>
 &lt;/a&gt;
 </code></pre></div></div>
 

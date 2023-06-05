@@ -155,12 +155,12 @@
 
 <p>In your layout file (<code class="language-plaintext highlighter-rouge">_layouts/default.html</code>), suppose you have a variable assigned:</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">myvar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"joe"</span><span class="w"> </span><span class="p">%}</span>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">myvar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"joe"</span><span class="w"> </span><span class="cp">%}</span>
 </code></pre></div></div>
 
 <p>On a page that uses the layout, you reference that variable:</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{{</span><span class="w"> </span><span class="nv">myvar</span><span class="w"> </span><span class="p">}}</span>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{{</span><span class="w"> </span><span class="nv">myvar</span><span class="w"> </span><span class="cp">}}</span>
 </code></pre></div></div>
 
 <p>The variable won’t render because the page’s order of interpretation is to render Liquid first and later process the Layout. When the Liquid rendering happens, the variable assignment isn’t available.</p>
@@ -178,7 +178,7 @@
 
 <p>You include the file into an HTML file as follows:</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span>mycontent.md<span class="w"> </span><span class="p">%}</span>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span>mycontent.md<span class="w"> </span><span class="cp">%}</span>
 </code></pre></div></div>
 
 <p>The Markdown is not processed because first the Liquid (<code class="language-plaintext highlighter-rouge">include</code> tag) gets processed, inserting <code class="language-plaintext highlighter-rouge">mycontent.md</code> into the HTML file. <em>Then</em> the Markdown would get processed.</p>
@@ -189,9 +189,9 @@
 
 <p>Note that <code class="language-plaintext highlighter-rouge">highlight</code> tags don’t require Markdown to process. Suppose your include contains the following:</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">highlight</span><span class="w"> </span>javascript<span class="w"> </span><span class="p">%}</span>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">highlight</span><span class="w"> </span><span class="nv">javascript</span><span class="w"> </span><span class="cp">%}</span>
 console.log('alert');
-<span class="p">{%</span><span class="w"> </span><span class="nt">endhighlight</span><span class="w"> </span><span class="p">%}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">endhighlight</span><span class="w"> </span><span class="cp">%}</span>
 </code></pre></div></div>
 
 <p>The <code class="language-plaintext highlighter-rouge">highlight</code> tag <em>is</em> Liquid. (Liquid passes the content to Rouge for syntax highlighting.) As a result, this code will actually convert to HTML with syntax highlighting. Jekyll does not need the Markdown filter to process <code class="language-plaintext highlighter-rouge">highlight</code> tags.</p>
@@ -239,14 +239,14 @@ console.log('alert');
 <p>For example, suppose you have a <code class="language-plaintext highlighter-rouge">highlight</code> tag in your <code class="language-plaintext highlighter-rouge">_data/mydata.yml</code> file:</p>
 
 <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>myvalue: &gt;
-  <span class="p">{%</span><span class="w"> </span><span class="nt">highlight</span><span class="w"> </span>javascript<span class="w"> </span><span class="p">%}</span>
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">highlight</span><span class="w"> </span><span class="nv">javascript</span><span class="w"> </span><span class="cp">%}</span>
   console.log('alert');
-  <span class="p">{%</span><span class="w"> </span><span class="nt">endhighlight</span><span class="w"> </span><span class="p">%}</span>
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">endhighlight</span><span class="w"> </span><span class="cp">%}</span>
 </code></pre></div></div>
 
 <p>On a page, you try to insert the value:</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">mydata</span><span class="p">.</span><span class="nv">myvalue</span><span class="w"> </span><span class="p">}}</span>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">mydata</span><span class="p">.</span><span class="nv">myvalue</span><span class="w"> </span><span class="cp">}}</span>
 </code></pre></div></div>
 
 <p>This would render only as a string rather than a code sample with syntax highlighting. To make the code render, consider using an include instead.</p>

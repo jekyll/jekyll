@@ -235,13 +235,13 @@ new filters have you covered. When working locally, if you set your
 then <code class="language-plaintext highlighter-rouge">relative_url</code> will ensure that this baseurl is prepended to anything
 you pass it:</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{{</span><span class="w"> </span><span class="s2">"/docs/assets/"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">relative_url</span><span class="w"> </span><span class="p">}}</span> =&gt; /myproject/docs/assets
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{{</span><span class="w"> </span><span class="s2">"/docs/assets/"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">relative_url</span><span class="w"> </span><span class="cp">}}</span> =&gt; /myproject/docs/assets
 </code></pre></div></div>
 
 <p>By default, <code class="language-plaintext highlighter-rouge">baseurl</code> is set to <code class="language-plaintext highlighter-rouge">""</code> and therefore yields (never set to
 <code class="language-plaintext highlighter-rouge">"/"</code>):</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{{</span><span class="w"> </span><span class="s2">"/docs/assets/"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">relative_url</span><span class="w"> </span><span class="p">}}</span> =&gt; /docs/assets
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{{</span><span class="w"> </span><span class="s2">"/docs/assets/"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">relative_url</span><span class="w"> </span><span class="cp">}}</span> =&gt; /docs/assets
 </code></pre></div></div>
 
 <p>A result of <code class="language-plaintext highlighter-rouge">relative_url</code> will safely always produce a URL which is
@@ -249,7 +249,7 @@ relative to the domain root. A similar principle applies to <code class="languag
 It prepends your <code class="language-plaintext highlighter-rouge">baseurl</code> and <code class="language-plaintext highlighter-rouge">url</code> values, making absolute URLs all the
 easier to make:</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{{</span><span class="w"> </span><span class="s2">"/docs/assets/"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">absolute_url</span><span class="w"> </span><span class="p">}}</span> =&gt; https://jekyllrb.com/myproject/docs/assets
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{{</span><span class="w"> </span><span class="s2">"/docs/assets/"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">absolute_url</span><span class="w"> </span><span class="cp">}}</span> =&gt; https://jekyllrb.com/myproject/docs/assets
 </code></pre></div></div>
 
 <h3 id="3-siteurl-is-set-by-the-development-server">3. <code class="language-plaintext highlighter-rouge">site.url</code> is set by the development server</h3>

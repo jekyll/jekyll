@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-05-08T06:27:11-07:00" />
+<meta property="article:published_time" content="2023-06-05T05:46:44-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Configuration Options" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-05-08T06:27:11-07:00","datePublished":"2023-05-08T06:27:11-07:00","description":"The tables below list the available settings for Jekyll, and the various options (specified in the configuration file) and flags (specified on the command-line) that control them.","headline":"Configuration Options","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/configuration/options/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/configuration/options/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-06-05T05:46:44-07:00","datePublished":"2023-06-05T05:46:44-07:00","description":"The tables below list the available settings for Jekyll, and the various options (specified in the configuration file) and flags (specified on the command-line) that control them.","headline":"Configuration Options","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/configuration/options/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/configuration/options/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -232,7 +232,18 @@
             <strong>Exclude</strong>
             
           </p> 
-          <p class="description">Exclude directories and/or files from the conversion. These exclusions are relative to the site's source directory and cannot be outside the source directory.</p>
+          <p class="description">Exclude directories and/or files from the conversion. These exclusions are relative to the site's source directory and cannot be outside the source directory. <br /> In Jekyll 3, the `exclude` configuration option replaces the default exclusion list. <br /> In Jekyll 4, user-provided entries get added to the default exclusion list instead and the `include` option can be used to override the default exclusion list entries. <br /> The default exclusions are found in <code>_config.yml</code> as created by <code>jekyll new</code>: <ul>
+  <li><code>.sass-cache/</code></li>
+  <li><code>.jekyll-cache/</code></li>
+  <li><code>gemfiles/</code></li>
+  <li><code>Gemfile</code></li>
+  <li><code>Gemfile.lock</code></li>
+  <li><code>node_modules/</code></li>
+  <li><code>vendor/bundle/</code></li>
+  <li><code>vendor/cache/</code></li>
+  <li><code>vendor/gems/</code></li>
+  <li><code>vendor/ruby/</code></li>
+</ul></p>
         </td> 
         <td class="align-center">
           <p><code class="option">exclude: [DIR, FILE, ...]</code></p>
@@ -246,7 +257,7 @@
             <strong>Include</strong>
             
           </p> 
-          <p class="description">Force inclusion of directories and/or files in the conversion. <code>.htaccess</code> is a good example since dotfiles are excluded by default.</p>
+          <p class="description">Force inclusion of directories and/or files in the conversion. <code>.htaccess</code> is a good example since dotfiles are excluded by default. With Jekyll 4, the `include` configuration option entries override the `exclude` option entries.</p>
         </td> 
         <td class="align-center">
           <p><code class="option">include: [DIR, FILE, ...]</code></p>

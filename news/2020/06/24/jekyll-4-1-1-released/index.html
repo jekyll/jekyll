@@ -218,12 +218,12 @@ negative effect on builds. Excerpts will not be generated for pages that <em>do 
 that involves iterating through <code class="language-plaintext highlighter-rouge">site.pages</code> directly within a <code class="language-plaintext highlighter-rouge">Jekyll::Page</code> instance. A couple of examples would be
 having a variant of either of the following code blocks inside a page source, say <code class="language-plaintext highlighter-rouge">index.markdown</code> or <code class="language-plaintext highlighter-rouge">about.markdown</code>:</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">entry</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site.pages</span><span class="w"> </span><span class="p">%}</span>
-  <span class="p">{{</span><span class="w"> </span><span class="nv">entry</span><span class="p">.</span><span class="nv">name</span><span class="w"> </span><span class="p">}}</span>
-<span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">entry</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">pages</span><span class="w"> </span><span class="cp">%}</span>
+  <span class="cp">{{</span><span class="w"> </span><span class="nv">entry</span><span class="p">.</span><span class="nv">name</span><span class="w"> </span><span class="cp">}}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
 </code></pre></div></div>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">pages</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">sort</span><span class="p">:</span><span class="w"> </span><span class="s1">'title'</span><span class="w"> </span><span class="p">}}</span>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">pages</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">sort</span><span class="p">:</span><span class="w"> </span><span class="s1">'title'</span><span class="w"> </span><span class="cp">}}</span>
 </code></pre></div></div>
 
 <p>Therefore, we advise caution when opting to use the page-excerpt feature.</p>

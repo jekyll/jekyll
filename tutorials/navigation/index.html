@@ -171,11 +171,11 @@
 
 <p><strong>Liquid</strong></p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;h2&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">samplelist</span><span class="p">.</span><span class="nv">docs_list_title</span><span class="w"> </span><span class="p">}}</span>&lt;/h2&gt;
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;h2&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">samplelist</span><span class="p">.</span><span class="nv">docs_list_title</span><span class="w"> </span><span class="cp">}}</span>&lt;/h2&gt;
 &lt;ul&gt;
-   <span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site.data.samplelist.docs</span><span class="w"> </span><span class="p">%}</span>
-      &lt;li&gt;&lt;a href="<span class="p">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">}}</span>"&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="p">}}</span>&lt;/a&gt;&lt;/li&gt;
-   <span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+   <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">samplelist</span><span class="p">.</span><span class="nv">docs</span><span class="w"> </span><span class="cp">%}</span>
+      &lt;li&gt;&lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>"&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="cp">}}</span>&lt;/a&gt;&lt;/li&gt;
+   <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
 &lt;/ul&gt;
 </code></pre></div></div>
 
@@ -214,11 +214,11 @@
 
 <p><strong>Liquid</strong></p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">doclist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">samplelist</span><span class="p">.</span><span class="nv">docs</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">sort</span><span class="p">:</span><span class="w"> </span><span class="s1">'title'</span><span class="w">  </span><span class="p">%}</span>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">doclist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">samplelist</span><span class="p">.</span><span class="nv">docs</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">sort</span><span class="p">:</span><span class="w"> </span><span class="s1">'title'</span><span class="w">  </span><span class="cp">%}</span>
 &lt;ol&gt;
-<span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">doclist</span><span class="w"> </span><span class="p">%}</span>
-    &lt;li&gt;&lt;a href="<span class="p">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">}}</span>"&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="p">}}</span>&lt;/a&gt;&lt;/li&gt;
-<span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">doclist</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;li&gt;&lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>"&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="cp">}}</span>&lt;/a&gt;&lt;/li&gt;
+<span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
 &lt;/ol&gt;
 </code></pre></div></div>
 
@@ -236,7 +236,7 @@
 
 <p>See the <a href="https://help.shopify.com/themes/liquid/filters/array-filters">Liquid array filter</a> for more filter options. Note that you can’t simply use this syntax:</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site.data.samplelist.docs</span><span class="w"> </span>|<span class="w"> </span><span class="na">sort</span><span class="o">:</span><span class="w"> </span><span class="s2">"title"</span><span class="w"> </span><span class="p">%}{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">samplelist</span><span class="p">.</span><span class="nv">docs</span><span class="w"> </span>|<span class="w"> </span><span class="na">sort</span><span class="o">:</span><span class="w"> </span><span class="s2">"title"</span><span class="w"> </span><span class="cp">%}{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
 </code></pre></div></div>
 
 <p>You have to convert <code class="language-plaintext highlighter-rouge">site.data.samplelist.docs</code> to a variable first using either <code class="language-plaintext highlighter-rouge">assign</code> or <code class="language-plaintext highlighter-rouge">capture</code> tags.</p>
@@ -276,14 +276,14 @@
 
 <p><strong>Liquid</strong></p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site.data.samplelist.toc</span><span class="w"> </span><span class="p">%}</span>
-    &lt;h3&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="p">}}</span>&lt;/h3&gt;
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">samplelist</span><span class="p">.</span><span class="nv">toc</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;h3&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="cp">}}</span>&lt;/h3&gt;
       &lt;ul&gt;
-        <span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">entry</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">item.subfolderitems</span><span class="w"> </span><span class="p">%}</span>
-          &lt;li&gt;&lt;a href="<span class="p">{{</span><span class="w"> </span><span class="nv">entry</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">}}</span>"&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">entry</span><span class="p">.</span><span class="nv">page</span><span class="w"> </span><span class="p">}}</span>&lt;/a&gt;&lt;/li&gt;
-        <span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+        <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">entry</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">subfolderitems</span><span class="w"> </span><span class="cp">%}</span>
+          &lt;li&gt;&lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">entry</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>"&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">entry</span><span class="p">.</span><span class="nv">page</span><span class="w"> </span><span class="cp">}}</span>&lt;/a&gt;&lt;/li&gt;
+        <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
       &lt;/ul&gt;
-  <span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
 </code></pre></div></div>
 
 <p><strong>Result</strong></p>
@@ -365,26 +365,26 @@
 <p><strong>Liquid</strong></p>
 
 <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div&gt;
-<span class="p">{%</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">samplelist</span><span class="p">.</span><span class="nv">toc2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">%}</span>
-  <span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site.data.samplelist.toc2</span><span class="w"> </span><span class="p">%}</span>
-    &lt;h3&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="p">}}</span>&lt;/h3&gt;
-      <span class="p">{%</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">subfolderitems</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">%}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">if</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">samplelist</span><span class="p">.</span><span class="nv">toc2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="cp">%}</span>
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">samplelist</span><span class="p">.</span><span class="nv">toc2</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;h3&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="cp">}}</span>&lt;/h3&gt;
+      <span class="cp">{%</span><span class="w"> </span><span class="nt">if</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">subfolderitems</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="cp">%}</span>
         &lt;ul&gt;
-          <span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">entry</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">item.subfolderitems</span><span class="w"> </span><span class="p">%}</span>
-              &lt;li&gt;&lt;a href="<span class="p">{{</span><span class="w"> </span><span class="nv">entry</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">}}</span>"&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">entry</span><span class="p">.</span><span class="nv">page</span><span class="w"> </span><span class="p">}}</span>&lt;/a&gt;
-                <span class="p">{%</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="nv">entry</span><span class="p">.</span><span class="nv">subsubfolderitems</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">%}</span>
+          <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">entry</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">subfolderitems</span><span class="w"> </span><span class="cp">%}</span>
+              &lt;li&gt;&lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">entry</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>"&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">entry</span><span class="p">.</span><span class="nv">page</span><span class="w"> </span><span class="cp">}}</span>&lt;/a&gt;
+                <span class="cp">{%</span><span class="w"> </span><span class="nt">if</span><span class="w"> </span><span class="nv">entry</span><span class="p">.</span><span class="nv">subsubfolderitems</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="cp">%}</span>
                   &lt;ul&gt;
-                  <span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">subentry</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">entry.subsubfolderitems</span><span class="w"> </span><span class="p">%}</span>
-                      &lt;li&gt;&lt;a href="<span class="p">{{</span><span class="w"> </span><span class="nv">subentry</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">}}</span>"&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">subentry</span><span class="p">.</span><span class="nv">page</span><span class="w"> </span><span class="p">}}</span>&lt;/a&gt;&lt;/li&gt;
-                  <span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+                  <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">subentry</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">entry</span><span class="p">.</span><span class="nv">subsubfolderitems</span><span class="w"> </span><span class="cp">%}</span>
+                      &lt;li&gt;&lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">subentry</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>"&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">subentry</span><span class="p">.</span><span class="nv">page</span><span class="w"> </span><span class="cp">}}</span>&lt;/a&gt;&lt;/li&gt;
+                  <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
                   &lt;/ul&gt;
-                <span class="p">{%</span><span class="w"> </span><span class="kr">endif</span><span class="w"> </span><span class="p">%}</span>
+                <span class="cp">{%</span><span class="w"> </span><span class="nt">endif</span><span class="w"> </span><span class="cp">%}</span>
               &lt;/li&gt;
-          <span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+          <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
         &lt;/ul&gt;
-      <span class="p">{%</span><span class="w"> </span><span class="kr">endif</span><span class="w"> </span><span class="p">%}</span>
-    <span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
-<span class="p">{%</span><span class="w"> </span><span class="kr">endif</span><span class="w"> </span><span class="p">%}</span>
+      <span class="cp">{%</span><span class="w"> </span><span class="nt">endif</span><span class="w"> </span><span class="cp">%}</span>
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">endif</span><span class="w"> </span><span class="cp">%}</span>
 &lt;/div&gt;
 </code></pre></div></div>
 
@@ -449,9 +449,9 @@
 <p><strong>Liquid</strong></p>
 
 <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;ul&gt;
-    <span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site.data.samplelist[page.sidebar]</span><span class="w"> </span><span class="p">%}</span>
-      &lt;li&gt;&lt;a href="<span class="p">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">}}</span>"&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="p">}}</span>&lt;/a&gt;&lt;/li&gt;
-    <span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">samplelist</span><span class="p">[</span><span class="nv">page</span><span class="p">.</span><span class="nv">sidebar</span><span class="p">]</span><span class="w"> </span><span class="cp">%}</span>
+      &lt;li&gt;&lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>"&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="cp">}}</span>&lt;/a&gt;&lt;/li&gt;
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
 &lt;/ul&gt;
 </code></pre></div></div>
 
@@ -483,11 +483,11 @@
 
 <p><strong>Liquid</strong></p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site.data.samplelist.docs</span><span class="w"> </span><span class="p">%}</span>
-    &lt;li class="<span class="p">{%</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nv">page</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">%}</span>active<span class="p">{%</span><span class="w"> </span><span class="kr">endif</span><span class="w"> </span><span class="p">%}</span>"&gt;
-      &lt;a href="<span class="p">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">}}</span>"&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="p">}}</span>&lt;/a&gt;
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">samplelist</span><span class="p">.</span><span class="nv">docs</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;li class="<span class="cp">{%</span><span class="w"> </span><span class="nt">if</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nv">page</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">%}</span>active<span class="cp">{%</span><span class="w"> </span><span class="nt">endif</span><span class="w"> </span><span class="cp">%}</span>"&gt;
+      &lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>"&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="cp">}}</span>&lt;/a&gt;
     &lt;/li&gt;
-<span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
 </code></pre></div></div>
 
 <p><strong>Result</strong></p>
@@ -536,11 +536,11 @@
 <p><strong>Liquid</strong></p>
 
 <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &lt;ul&gt;
-    <span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site.data.samplelist.docs2</span><span class="w"> </span><span class="p">%}</span>
-      <span class="p">{%</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">version</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">%}</span>
-        &lt;li&gt;&lt;a href="<span class="p">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">}}</span>"&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="p">}}</span>&lt;/a&gt;&lt;/li&gt;
-      <span class="p">{%</span><span class="w"> </span><span class="kr">endif</span><span class="w"> </span><span class="p">%}</span>
-    <span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">samplelist</span><span class="p">.</span><span class="nv">docs2</span><span class="w"> </span><span class="cp">%}</span>
+      <span class="cp">{%</span><span class="w"> </span><span class="nt">if</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">version</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="cp">%}</span>
+        &lt;li&gt;&lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>"&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="cp">}}</span>&lt;/a&gt;&lt;/li&gt;
+      <span class="cp">{%</span><span class="w"> </span><span class="nt">endif</span><span class="w"> </span><span class="cp">%}</span>
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
 &lt;/ul&gt;
 </code></pre></div></div>
 
@@ -616,11 +616,11 @@
 
 <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;h3&gt;Getting Started&lt;/h3&gt;
 &lt;ul&gt;
-    <span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">doc</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site.docs</span><span class="w"> </span><span class="p">%}</span>
-      <span class="p">{%</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="nv">doc</span><span class="p">.</span><span class="nv">category</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"getting-started"</span><span class="w"> </span><span class="p">%}</span>
-        &lt;li&gt;&lt;a href="<span class="p">{{</span><span class="w"> </span><span class="nv">doc</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">}}</span>"&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">doc</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="p">}}</span>&lt;/a&gt;&lt;/li&gt;
-      <span class="p">{%</span><span class="w"> </span><span class="kr">endif</span><span class="w"> </span><span class="p">%}</span>
-    <span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">doc</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">docs</span><span class="w"> </span><span class="cp">%}</span>
+      <span class="cp">{%</span><span class="w"> </span><span class="nt">if</span><span class="w"> </span><span class="nv">doc</span><span class="p">.</span><span class="nv">category</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"getting-started"</span><span class="w"> </span><span class="cp">%}</span>
+        &lt;li&gt;&lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">doc</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>"&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">doc</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="cp">}}</span>&lt;/a&gt;&lt;/li&gt;
+      <span class="cp">{%</span><span class="w"> </span><span class="nt">endif</span><span class="w"> </span><span class="cp">%}</span>
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
 &lt;/ul&gt;
 </code></pre></div></div>
 
@@ -647,16 +647,16 @@
 
 <p><strong>Liquid</strong></p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">mydocs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">docs</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">group_by</span><span class="p">:</span><span class="w"> </span><span class="s1">'category'</span><span class="w"> </span><span class="p">%}</span>
-<span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">cat</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">mydocs</span><span class="w"> </span><span class="p">%}</span>
-&lt;h2&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">cat</span><span class="p">.</span><span class="nv">name</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">capitalize</span><span class="w"> </span><span class="p">}}</span>&lt;/h2&gt;
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">mydocs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">docs</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">group_by</span><span class="p">:</span><span class="w"> </span><span class="s1">'category'</span><span class="w"> </span><span class="cp">%}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">cat</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">mydocs</span><span class="w"> </span><span class="cp">%}</span>
+&lt;h2&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">cat</span><span class="p">.</span><span class="nv">name</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">capitalize</span><span class="w"> </span><span class="cp">}}</span>&lt;/h2&gt;
     &lt;ul&gt;
-      <span class="p">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">cat</span><span class="p">.</span><span class="nv">items</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">sort</span><span class="p">:</span><span class="w"> </span><span class="s1">'order'</span><span class="w"> </span><span class="p">%}</span>
-      <span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">items</span><span class="w"> </span><span class="p">%}</span>
-        &lt;li&gt;&lt;a href="<span class="p">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">}}</span>"&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="p">}}</span>&lt;/a&gt;&lt;/li&gt;
-      <span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+      <span class="cp">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">cat</span><span class="p">.</span><span class="nv">items</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">sort</span><span class="p">:</span><span class="w"> </span><span class="s1">'order'</span><span class="w"> </span><span class="cp">%}</span>
+      <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">items</span><span class="w"> </span><span class="cp">%}</span>
+        &lt;li&gt;&lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>"&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="cp">}}</span>&lt;/a&gt;&lt;/li&gt;
+      <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
     &lt;/ul&gt;
-<span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
 </code></pre></div></div>
 
 <p><strong>Result</strong></p>
@@ -724,19 +724,19 @@
 <p>First, we’ll create an include that we can use for rendering the navigation tree. This file would be <code class="language-plaintext highlighter-rouge">_includes/nav.html</code></p>
 
 <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;ul&gt;
-  <span class="p">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">include.nav</span><span class="w"> </span><span class="p">%}</span>
-    &lt;li&gt;&lt;a href="<span class="p">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">}}</span>"&gt;<span class="p">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="p">}}</span>&lt;/a&gt;
-      <span class="p">{%</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">subnav</span><span class="w"> </span><span class="p">%}</span>
-        <span class="p">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span>nav.html<span class="w"> </span><span class="na">nav</span><span class="o">=</span>item.subnav<span class="w"> </span><span class="p">%}</span>
-      <span class="p">{%</span><span class="w"> </span><span class="kr">endif</span><span class="w"> </span><span class="p">%}</span>
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">include</span><span class="p">.</span><span class="nv">nav</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;li&gt;&lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>"&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="cp">}}</span>&lt;/a&gt;
+      <span class="cp">{%</span><span class="w"> </span><span class="nt">if</span><span class="w"> </span><span class="nv">item</span><span class="p">.</span><span class="nv">subnav</span><span class="w"> </span><span class="cp">%}</span>
+        <span class="cp">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span>nav.html<span class="w"> </span><span class="na">nav</span><span class="o">=</span><span class="nv">item</span><span class="p">.</span><span class="nv">subnav</span><span class="w"> </span><span class="cp">%}</span>
+      <span class="cp">{%</span><span class="w"> </span><span class="nt">endif</span><span class="w"> </span><span class="cp">%}</span>
     &lt;/li&gt;
-  <span class="p">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="p">%}</span>
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
 &lt;/ul&gt;
 </code></pre></div></div>
 
 <p>To render this in your layout or pages, you would simply include the template and pass in the <code class="language-plaintext highlighter-rouge">nav</code> parameter. In this case, we’ll use the <code class="language-plaintext highlighter-rouge">page.nav</code> to grab it from the yaml frontmatter.</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span>nav.html<span class="w"> </span><span class="na">nav</span><span class="o">=</span>page.nav<span class="w"> </span><span class="p">%}</span>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span>nav.html<span class="w"> </span><span class="na">nav</span><span class="o">=</span><span class="nv">page</span><span class="p">.</span><span class="nv">nav</span><span class="w"> </span><span class="cp">%}</span>
 </code></pre></div></div>
 
 <p>Our include will use this first, then look through each item for a <code class="language-plaintext highlighter-rouge">subnav</code> property to recursively render the nested lists.</p>

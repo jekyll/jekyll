@@ -229,7 +229,7 @@ relative URI, without the slash it cannot figure out how to turn
 objection. This lead to the following Liquid code working fine in Jekyll 3.3.x
 but breaking in 3.4.0:</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{{</span><span class="w"> </span><span class="s2">"example :page"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">uri_escape</span><span class="w"> </span><span class="p">}}</span>
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{{</span><span class="w"> </span><span class="s2">"example :page"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">uri_escape</span><span class="w"> </span><span class="cp">}}</span>
 </code></pre></div></div>
 
 <p>This was not an intended consequence of switching to <strong>Addressable</strong>.</p>
