@@ -43,7 +43,8 @@
     <br />
     In Jekyll 3, the `exclude` configuration option replaces the default exclusion list.
     <br />
-    In Jekyll 4, it adds to it instead and the `include` option can be used to override the default exclusion list entries.
+    In Jekyll 4, user-provided entries get added to the default exclusion list instead and the `include` option can be
+    used to override the default exclusion list entries.
     <br />
     The default exclusions are found in <code>_config.yml</code> as created by <code>jekyll new</code>:
     <ul>
@@ -64,7 +65,8 @@
 - name: Include
   description: >-
     Force inclusion of directories and/or files in the conversion. <code>.htaccess</code> is a good example since
-    dotfiles are excluded by default. The `include` configuration option entries override the `exclude` option entries.
+    dotfiles are excluded by default. With Jekyll 4, the `include` configuration option entries override the
+    `exclude` option entries.
   option: "include: [DIR, FILE, ...]"
 
 
