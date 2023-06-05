@@ -32,6 +32,7 @@
   * Bump RuboCop to v1.45.x (#9305)
   * Bump Rubocop to version 1.48.x (#9326)
   * Bump versions of ruby &amp; nodejs in devcontainer (#9360)
+  * Bump rubocop version to 1.52.x (#9361)
 
 ### Bug Fixes
 
