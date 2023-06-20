@@ -41,6 +41,7 @@ module Jekyll
       begin
         self.content = File.read(filename, **Utils.merged_file_read_opts(site, opts))
         if content =~ Document::YAML_FRONT_MATTER_REGEXP
+          self.front_matter = Regexp.last_match[0] # includes both --- lines and trailing newline
           self.content = Regexp.last_match.post_match
           self.data = SafeYAML.load(Regexp.last_match(1))
         end

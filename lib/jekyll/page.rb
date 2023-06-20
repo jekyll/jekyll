@@ -5,7 +5,7 @@ module Jekyll
     include Convertible
 
     attr_writer :dir
-    attr_accessor :basename, :content, :data, :ext, :name, :output, :pager, :site
+    attr_accessor :basename, :content, :data, :ext, :front_matter, :name, :output, :pager, :site
 
     alias_method :extname, :ext
 
@@ -14,6 +14,7 @@ module Jekyll
       content
       dir
       excerpt
+      front_matter
       name
       path
       url
