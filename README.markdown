@@ -55,6 +55,8 @@ these terms, please let one of our [core team members](https://jekyllrb.com/team
 
 ### Sponsors
 
+### [Jekyll Forms](https://fabform.io/for/Jekyll)
+
 Support this project by becoming a sponsor. Your logo will show up in this README with a link to your website. [Become a sponsor!](https://opencollective.com/jekyll#sponsor)
 [![Jekyll Sponsor 0](https://opencollective.com/jekyll/sponsor/0/avatar.svg)](https://opencollective.com/jekyll/sponsor/0/website)
 [![Jekyll Sponsor 1](https://opencollective.com/jekyll/sponsor/1/avatar.svg)](https://opencollective.com/jekyll/sponsor/1/website)
