@@ -6,13 +6,11 @@ redirect_from:
   - /docs/quickstart/
   - /docs/extras/
 ---
-Jekyll is a static site generator. It takes text written in your
-favorite markup language and uses layouts to create a static website. You can
-tweak the site's look and feel, URLs, the data displayed on the page, and more. 
+Jekyll is a static site generator that takes your text file written in your desired markup language and format in the layouts to create the static website. You can further modify the look and feel, URLs, and displayed data on the webpage. 
 
 ## Prerequisites
 
-Jekyll requires the following:
+The following are the prerequisites to run Jekyll:
 
 * Ruby version **{{ site.data.ruby.min_version }}** or higher
 * RubyGems
@@ -22,7 +20,7 @@ See [Requirements]({{ '/docs/installation/#requirements' | relative_url }}) for 
 
 ## Instructions
 
-1. Install all [prerequisites]({{ '/docs/installation/' | relative_url }}).
+1. Install all the [prerequisites]({{ '/docs/installation/' | relative_url }}).
 2. Install the jekyll and bundler [gems]({{ '/docs/ruby-101/#gems' | relative_url }}).
 ```sh
 gem install jekyll bundler
@@ -48,8 +46,8 @@ If you are using Ruby version 3.0.0 or higher, step 5 [may fail](https://github.
 Pass the `--livereload` option to `serve` to automatically refresh the page with each change you make to the source files: `bundle exec jekyll serve --livereload`
 
 
-If you encounter any errors during this process, check that you have installed all the prerequisites in [Requirements]({{ '/docs/installation/#requirements' | relative_url }}). 
+If you encounter any errors during installation, please ensure all prerequisites are installed correctly. [Requirements]({{ '/docs/installation/#requirements' | relative_url }}). 
 If you still have issues, see [Troubleshooting]({{ '/docs/troubleshooting/#configuration-problems' | relative_url }}).
 
 {: .note .info}
-Installation varies based on your operating system. See our [guides]({{ '/docs/installation/#guides' | relative_url }}) for OS-specific instructions.
+Installation procedure depends on your system's *operating system* (OS). Refer to our [guides]({{ '/docs/installation/#guides' | relative_url }}) for OS-specific instructions.
