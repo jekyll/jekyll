@@ -18,6 +18,7 @@
   * Update S3 deployment to remove s3_website (#9221)
   * Document Exclude behavior, Include overrides and the default exclusion list (#9376)
   * Update macos.md, remove Catalina (macOS 10.15) (#9405)
+  * Update macos.md, add support for Ventura (#9406)
 
 ### Development Fixes
 
