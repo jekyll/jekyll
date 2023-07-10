@@ -7,7 +7,6 @@ permalink: /docs/installation/macos/
 
 - Monterey (macOS 12)
 - Big Sur (macOS 11)
-- Catalina (macOS 10.15)
 
 Older macOS versions might work, but we don't officially support them.
 
