@@ -5,6 +5,7 @@ permalink: /docs/installation/macos/
 
 ## Supported macOS versions
 
+- Ventura (macOS 13)
 - Monterey (macOS 12)
 - Big Sur (macOS 11)
 
