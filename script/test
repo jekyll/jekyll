@@ -34,6 +34,8 @@ else
   rubies=($(script/rubies))
 fi
 
+# Tests only pass when timezone offset is zero.
+TZ=UTC
 
 for ruby in $rubies; do
   if [[ "$ruby" == "jruby" ]]

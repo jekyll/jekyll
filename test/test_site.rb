@@ -97,6 +97,12 @@ class TestSite < JekyllUnitTest
       )
     end
 
+    should "load config file from theme-gem as Jekyll::Configuration instance" do
+      site = fixture_site("theme" => "test-theme")
+      assert_instance_of Jekyll::Configuration, site.config
+      assert_equal "Hello World", site.config["title"]
+    end
+
     context "with a custom cache_dir configuration" do
       should "have the custom cache_dir hidden from Git" do
         site = fixture_site("cache_dir" => "../../custom-cache-dir")
@@ -615,8 +621,8 @@ class TestSite < JekyllUnitTest
           site = fixture_site("theme" => {})
           assert_nil site.theme
         end
-        expected_msg = "Theme: value of 'theme' in config should be String " \
-          "to use gem-based themes, but got Hash\n"
+        expected_msg = "Theme: value of 'theme' in config should be String to use " \
+                       "gem-based themes, but got Hash\n"
         assert_includes output, expected_msg
       end
 
@@ -733,6 +739,24 @@ class TestSite < JekyllUnitTest
       [:reset, :read, :generate, :render, :cleanup, :write].each do |phase|
         assert_nil site.send(phase)
       end
+    end
+  end
+
+  context "static files in a collection" do
+    should "be exposed via site instance" do
+      site = fixture_site("collections" => ["methods"])
+      site.read
+
+      assert_includes site.static_files.map(&:relative_path), "_methods/extensionless_static_file"
+    end
+
+    should "not be revisited in `Site#each_site_file`" do
+      site = fixture_site("collections" => { "methods" => { "output" => true } })
+      site.read
+
+      visited_files = []
+      site.each_site_file { |file| visited_files << file }
+      assert_equal visited_files.count, visited_files.uniq.count
     end
   end
 end

@@ -7,7 +7,7 @@ In addition to the [built-in variables]({{'/docs/variables/' | relative_url }}) 
 you can specify your own custom data that can be accessed via the [Liquid
 templating system](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers).
 
-Jekyll supports loading data from [YAML](http://yaml.org/), [JSON](http://www.json.org/), [CSV](https://en.wikipedia.org/wiki/Comma-separated_values), and [TSV](https://en.wikipedia.org/wiki/Tab-separated_values) files located in the `_data` directory.
+Jekyll supports loading data from [YAML](https://yaml.org), [JSON](https://www.json.org/json-en.html), [CSV](https://en.wikipedia.org/wiki/Comma-separated_values), and [TSV](https://en.wikipedia.org/wiki/Tab-separated_values) files located in the `_data` directory.
 Note that CSV and TSV files *must* contain a header row.
 
 This powerful feature allows you to avoid repetition in your templates and to
@@ -148,3 +148,30 @@ author: dave
 {% endraw %}
 
 For information on how to build robust navigation for your site (especially if you have a documentation website or another type of Jekyll site with a lot of pages to organize), see [Navigation]({{ '/tutorials/navigation/' | relative_url }}).
+
+## CSV/TSV Parse Options
+
+The way Ruby parses CSV and TSV files can be customized with the `csv_reader` and `tsv_reader`
+configuration options. Each configuration key exposes the same options:
+
+`converters`: What [CSV converters](https://ruby-doc.org/stdlib-2.5.0/libdoc/csv/rdoc/CSV.html#Converters) should be
+              used when parsing the file. Available options are `integer`, `float`, `numeric`, `date`, `date_time` and
+              `all`. By default, this list is empty.
+`encoding`:   What encoding the files are in. Defaults to the site `encoding` configuration option.
+`headers`:    Boolean field for whether to parse the first line of the file as headers. When `false`, it treats the
+              first row as data. Defaults to `true`.
+
+Examples:
+
+```yaml
+csv_reader:
+    converters:
+      - numeric
+      - datetime
+    headers: true
+    encoding: utf-8
+tsv_reader:
+    converters:
+      - all
+    headers: false
+```

@@ -53,7 +53,7 @@ body:
         If yes, then we need to know the `github-pages` version used by your project. Proceed ahead otherwise.
         If you're using the `github-pages` gem in your Gemfile, paste the output from running the following:
         ```
-        bundle exec github-pges -v
+        bundle exec github-pages -v
         ```
         Otherwise, enter `Latest` in the input field and proceed ahead.
   - type: textarea

@@ -15,7 +15,7 @@ See the [support guidelines](https://jekyllrb.com/docs/support/)
 Whether you're a developer, a designer, or just a Jekyll devotee, there are lots of ways to contribute. Here's a few ideas:
 
 - [Install Jekyll on your computer](https://jekyllrb.com/docs/installation/) and kick the tires. Does it work? Does it do what you'd expect? If not, [open an issue](https://github.com/jekyll/jekyll/issues/new) and let us know.
-- Comment on some of the project's [open issues](https://github.com/jekyll/jekyll/issues). Have you experienced the same problem? Know a work around? Do you have a suggestion for how the feature could be better?
+- Comment on some of the project's [open issues](https://github.com/jekyll/jekyll/issues). Have you experienced the same problem? Know a workaround? Do you have a suggestion for how the feature could be better?
 - Read through the [documentation](https://jekyllrb.com/docs/home/), and click the "improve this page" button, any time you see something confusing, or have a suggestion for something that could be improved.
 - Browse through the [Jekyll discussion forum](https://talk.jekyllrb.com/), and lend a hand answering questions. There's a good chance you've already experienced what another user is experiencing.
 - Find an [open issue](https://github.com/jekyll/jekyll/issues) (especially [those labeled `help-wanted`](https://github.com/jekyll/jekyll/issues?q=is%3Aopen+is%3Aissue+label%3Ahelp-wanted)), and submit a proposed fix. If it's your first pull request, we promise we won't bite, and are glad to answer any questions.
@@ -152,25 +152,6 @@ script/cucumber features/blah.feature
 
 Both `script/test` and `script/cucumber` can be run without arguments to
 run its entire respective suite.
-
-### Test Ruby Versions Locally
-
-The CI process runs the build against with several [Ruby](https://github.com/jekyll/jekyll/blob/master/.github/workflows/ci.yml#L22) versions.  This process can be repeated locally without changing your default installation by using [earthly](https://earthly.dev/get-earthly).
-
-To run the full CI process across all supported Ruby Versions:
-```sh
-earthly +all
-```
-
-To run the tests for a specific version of Ruby:
-```sh
-earthly --build-arg RUBY=2.5 +test
-```
-
-To run the tests for a specific version of JRuby specify the full version:
-```sh
-earthly --build-arg RUBY=jruby:9.2.14.0 +test
-```
 
 ## Visual Studio Code Development Container
 

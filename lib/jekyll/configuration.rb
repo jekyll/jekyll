@@ -304,8 +304,8 @@ module Jekyll
       return if config["plugins"].is_a?(Array)
 
       Jekyll.logger.error "'plugins' should be set as an array of gem-names, but was: " \
-        "#{config["plugins"].inspect}. Use 'plugins_dir' instead to set the directory " \
-        "for your non-gemified Ruby plugins."
+                          "#{config["plugins"].inspect}. Use 'plugins_dir' instead to set " \
+                          "the directory for your non-gemified Ruby plugins."
       raise Jekyll::Errors::InvalidConfigurationError,
             "'plugins' should be set as an array, but was: #{config["plugins"].inspect}."
     end

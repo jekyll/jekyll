@@ -18,17 +18,19 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - label: Ruby 2.5
-            ruby_version: "2.5"
           - label: Ruby 2.7
             ruby_version: "2.7"
           - label: Ruby 3.0
             ruby_version: "3.0"
-          - label: JRuby 9.2.20.1
-            ruby_version: "jruby-9.2.20.1"
+          - label: Ruby 3.1
+            ruby_version: "3.1"
+          - label: Ruby 3.2
+            ruby_version: "3.2"
+          - label: JRuby 9.4.0.0
+            ruby_version: "jruby-9.4.0.0"
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: "Set up ${{ matrix.label }}"
         uses: ruby/setup-ruby@v1
         with:
@@ -51,14 +53,14 @@ jobs:
           - job_name: "Profile Docs Site"
             step_name: "Build and Profile docs site"
             script_file: "profile-docs"
-            ruby_version: "2.5"
+            ruby_version: "2.7"
           - job_name: "Style Check"
             step_name: "Run RuboCop"
             script_file: "fmt"
-            ruby_version: "2.5"
+            ruby_version: "2.7"
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: "Set up Ruby ${{ matrix.ruby_version }}"
         uses: ruby/setup-ruby@v1
         with:

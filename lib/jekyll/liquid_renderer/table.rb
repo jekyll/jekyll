@@ -15,16 +15,12 @@ module Jekyll
 
       private
 
-      # rubocop:disable Metrics/AbcSize
       def data_for_table(num_of_rows)
         sorted = @stats.sort_by { |_, file_stats| -file_stats[:time] }
         sorted = sorted.slice(0, num_of_rows)
 
         table  = [header_labels]
-        totals = Hash.new { |hash, key| hash[key] = 0 }
-
         sorted.each do |filename, file_stats|
-          GAUGES.each { |gauge| totals[gauge] += file_stats[gauge] }
           row = []
           row << filename
           row << file_stats[:count].to_s
@@ -33,14 +29,8 @@ module Jekyll
           table << row
         end
 
-        footer = []
-        footer << "TOTAL (for #{sorted.size} files)"
-        footer << totals[:count].to_s
-        footer << format_bytes(totals[:bytes])
-        footer << format("%.3f", totals[:time])
-        table  << footer
+        table
       end
-      # rubocop:enable Metrics/AbcSize
 
       def header_labels
         GAUGES.map { |gauge| gauge.to_s.capitalize }.unshift("Filename")

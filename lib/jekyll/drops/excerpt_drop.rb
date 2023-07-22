@@ -14,6 +14,10 @@ module Jekyll
       def excerpt
         nil
       end
+
+      def name
+        @obj.doc.data["name"] || @obj.doc.basename
+      end
     end
   end
 end

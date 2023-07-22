@@ -3,12 +3,10 @@
 [![Gem Version](https://img.shields.io/gem/v/jekyll.svg)][ruby-gems]
 [![Linux Build Status](https://github.com/jekyll/jekyll/workflows/Continuous%20Integration/badge.svg)][ci-workflow]
 [![Windows Build status](https://img.shields.io/appveyor/ci/jekyll/jekyll/master.svg?label=Windows%20build)][appveyor]
-[![Security](https://hakiri.io/github/jekyll/jekyll/master.svg)][hakiri]
 [![Backers on Open Collective](https://opencollective.com/jekyll/backers/badge.svg)](#backers)
 [![Sponsors on Open Collective](https://opencollective.com/jekyll/sponsors/badge.svg)](#sponsors)
 
 [ruby-gems]: https://rubygems.org/gems/jekyll
-[hakiri]: https://hakiri.io/github/jekyll/jekyll/master
 [ci-workflow]: https://github.com/jekyll/jekyll/actions?query=workflow%3A%22Continuous+Integration%22+branch%3Amaster
 [appveyor]: https://ci.appveyor.com/project/jekyll/jekyll/branch/master
 
@@ -26,11 +24,11 @@ See: [https://jekyllrb.com/philosophy](https://jekyllrb.com/philosophy)
 * Read up about its [Usage](https://jekyllrb.com/docs/usage/) and [Configuration](https://jekyllrb.com/docs/configuration/)
 * Take a gander at some existing [Sites](https://github.com/jekyll/jekyll/wiki/sites)
 * [Fork](https://github.com/jekyll/jekyll/fork) and [Contribute](https://jekyllrb.com/docs/contributing/) your own modifications
-* Have questions? Check out our official forum community [Jekyll Talk](https://talk.jekyllrb.com/) or [`#jekyll` on irc.freenode.net](https://botbot.me/freenode/jekyll/)
+* Have questions? Check out our official forum community [Jekyll Talk](https://talk.jekyllrb.com/) and [`#jekyll` Channel on Libera IRC](https://libera.chat)
 
 ## Diving In
 
-* [Migrate](http://import.jekyllrb.com/docs/home/) from your previous system
+* [Migrate](https://import.jekyllrb.com/docs/home/) from your previous system
 * Learn how [Front Matter](https://jekyllrb.com/docs/front-matter/) works
 * Put information on your site with [Variables](https://jekyllrb.com/docs/variables/)
 * Customize the [Permalinks](https://jekyllrb.com/docs/permalinks/) your posts are generated with
@@ -45,7 +43,7 @@ If you don't find the answer to your problem in our [docs](https://jekyllrb.com/
 ## Code of Conduct
 
 In order to have a more open and welcoming community, Jekyll adheres to a
-[code of conduct](CODE_OF_CONDUCT.markdown) adapted from the Ruby on Rails code of
+[code of conduct](https://jekyllrb.com/docs/conduct/) adapted from the Ruby on Rails code of
 conduct.
 
 Please adhere to this code of conduct in any interactions you have in the

@@ -92,8 +92,8 @@ was generated with an old version of Bundler.
 ### Setting up the Action
 
 GitHub Actions are registered for a repository by using a YAML file inside the directory path
-`.github/workflows` (note the dot at the start). Here we shall employ
-[Jekyll Actions][jekyll-actions] from the Marketplace for its simplicity.
+`.github/workflows` (note the dot at the start). For simplicity, here we use one of the
+[Jekyll Actions](#external-links) to show you how to use the action.
 
 Create a **workflow file**, say `github-pages.yml`, using either the GitHub interface or by pushing
 a YAML file to the workflow directory path manually. The base contents are:
@@ -113,8 +113,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: helaili/jekyll-action@v2
+      - uses: actions/cache@v2
         with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - uses: helaili/jekyll-action@2.0.5    # Choose any one of the Jekyll Actions
+        with:                                # Some relative inputs of your action
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
@@ -126,10 +132,13 @@ The above workflow can be explained as the following:
   the Action from overwriting the `gh-pages` branch on any feature branch pushes.
 - The **name** of the job matches our YAML filename: `github-pages`.
 - The **checkout** action takes care of cloning your repository.
-- We specify our selected **action** and **version number** using `helaili/jekyll-action@2.0.5`.
-  This handles the build and deploy.
+- The **cache** action is an optimization to avoid fetching and installing gems on every build.
+- We specify our selected **action** and **version number** using `helaili/jekyll-action@2.0.5`,
+  this handles the build and deploy. You can choose any one of the Jekyll Actions that matches
+  your project and flavor from [GitHub Marketplace](https://github.com/marketplace?type=actions&query=jekyll+action).
 - We set a reference to a secret **environment variable** for the action to use. The `GITHUB_TOKEN`
-  is a _Personal Access Token_ and is detailed in the next section.
+  is a secret token automatically initialized at the start of every workflow run.
+  More information can be found in [GitHub documentation](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret). 
 
 Instead of using the **on.push** condition, you could trigger your build on a **schedule** by
 using the [on.schedule] parameter. For example, here we build daily at midnight by specifying
@@ -148,9 +157,16 @@ Note that this string must be quoted to prevent the asterisks from being evaluat
 
 ### Providing permissions
 
-The action needs permissions to push to your `gh-pages` branch. So you need to create a GitHub
-**authentication token** on your GitHub profile, then set it as an environment variable in your
-build using _Secrets_:
+At the start of each workflow run, GitHub automatically creates a unique `GITHUB_TOKEN` secret to use in
+your workflow. You can use the `GITHUB_TOKEN` to authenticate in a workflow run. You can use the
+`GITHUB_TOKEN` by using the standard syntax for referencing secrets: `${{ secrets.GITHUB_TOKEN }}`.
+For more information, please read [GitHub's docs on token authentication][github-token-ref]
+
+[github-token-ref]: https://docs.github.com/en/actions/security-guides/automatic-token-authentication
+
+If you need a token that requires permissions that aren't available in the `GITHUB_TOKEN`, you can create
+a Personal Access Token (PAT), and set it as a secret in your repository for this action to push to the
+`gh-pages` branch:
 
 1. On your GitHub profile, under **Developer Settings**, go to the [Personal Access Tokens][tokens]
    section.
@@ -159,7 +175,7 @@ build using _Secrets_:
    to commit to the `gh-pages` branch.
 3. **Copy** the token value.
 4. Go to your repository's **Settings** and then the **Secrets** tab.
-5. **Create** a token named `GITHUB_TOKEN` (_important_). Give it a value using the value copied
+5. **Create** a token named `YOUR_CUSTOM_TOKEN` (_important_). Give it a value using the value copied
    above.
 
 ### Build and deploy
@@ -205,6 +221,7 @@ successful deploy from the Action.
 - [jekyll-actions-quickstart] is an unofficial repository that includes a live demo of the
   `jekyll-actions` action. That project can be used as a template for making a new site.
 - [jekyll-action-ts] is another action to build and publish Jekyll sites on GiHub Pages that includes HTML formatting options with Prettier and caching.
+- [jekyll-deploy-action] is a GitHub Action to deploy the Jekyll site conveniently for GitHub Pages (An alternative action with better speed and compatibility).
 
 [ghp-whitelist]: https://pages.github.com/versions/
 [timeago-plugin]: https://rubygems.org/gems/jekyll-timeago
@@ -212,3 +229,4 @@ successful deploy from the Action.
 [jekyll-actions]: https://github.com/marketplace/actions/jekyll-actions
 [jekyll-actions-quickstart]: https://github.com/MichaelCurrin/jekyll-actions-quickstart
 [jekyll-action-ts]: https://github.com/limjh16/jekyll-action-ts
+[jekyll-deploy-action]: https://github.com/jeffreytse/jekyll-deploy-action

@@ -14,15 +14,14 @@ class TestThemeAssetsReader < JekyllUnitTest
   def assert_file_with_relative_path(haystack, relative_path)
     assert haystack.any? { |f|
       f.relative_path == relative_path
-    }, "Site should read in the #{relative_path} file, " \
-      "but it was not found in #{haystack.inspect}"
+    }, "Site should read in the #{relative_path} file, but it was not found in #{haystack.inspect}"
   end
 
   def refute_file_with_relative_path(haystack, relative_path)
     refute haystack.any? { |f|
       f.relative_path == relative_path
-    }, "Site should not have read in the #{relative_path} file, " \
-      "but it was found in #{haystack.inspect}"
+    }, "Site should not have read in the #{relative_path} file, but it was found in " \
+       "#{haystack.inspect}"
   end
 
   context "with a valid theme" do
@@ -39,7 +38,7 @@ class TestThemeAssetsReader < JekyllUnitTest
       file = @site.pages.find { |f| f.relative_path == "assets/style.scss" }
       refute_nil file
       assert_equal @site.in_dest_dir("assets/style.css"), file.destination(@site.dest)
-      assert_includes file.output, ".sample { color: black; }"
+      assert_includes file.output, ".sample {\n  color: black;\n}"
     end
 
     should "not overwrite site content with the same relative path" do
@@ -82,7 +81,7 @@ class TestThemeAssetsReader < JekyllUnitTest
 
       begin
         tmp_dir = Dir.mktmpdir("jekyll-theme-test")
-        File.open(File.join(tmp_dir, "test.txt"), "wb") { |f| f.write "content" }
+        File.binwrite(File.join(tmp_dir, "test.txt"), "content")
 
         theme_dir = File.join(__dir__, "fixtures", "test-theme-symlink")
         File.symlink(tmp_dir, File.join(theme_dir, "assets"))

@@ -304,12 +304,15 @@ module Jekyll
     # and a given param
     def merged_file_read_opts(site, opts)
       merged = (site ? site.file_read_opts : {}).merge(opts)
-      if merged[:encoding] && !merged[:encoding].start_with?("bom|")
+
+      # always use BOM when reading UTF-encoded files
+      if merged[:encoding]&.downcase&.start_with?("utf-")
         merged[:encoding] = "bom|#{merged[:encoding]}"
       end
-      if merged["encoding"] && !merged["encoding"].start_with?("bom|")
+      if merged["encoding"]&.downcase&.start_with?("utf-")
         merged["encoding"] = "bom|#{merged["encoding"]}"
       end
+
       merged
     end
 

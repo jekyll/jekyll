@@ -1,6 +1,155 @@
 ## HEAD
 
+### Minor Enhancements
+
+  * Allow marking specific highlighted lines via Liquid (#9138)
+
+### Documentation
+
+  * Fix Nested tree navigation with recursion example (#9174)
+  * Fix typo on website (#9203)
+  * Publish post on major release of sass-converter (#9225)
+  * Update Jekyll on macOS (macos.md) and current ruby version to 3.1.3 in ruby.yml (#9195)
+  * Add release post for v4.3.2 (#9263)
+  * Grammatical reordering in  3-to-4 upgrading docs (#9245)
+  * fixed grammatical mistake on &#34;showcase&#34; page (#9264)
+  * Mark `highlight` `mark_lines` feature as 4.4 in docs (#9184)
+  * Add v3.9.3 release history &amp; post to `master` branch (#9284)
+  * Update S3 deployment to remove s3_website (#9221)
+  * Document Exclude behavior, Include overrides and the default exclusion list (#9376)
+  * Update macos.md, remove Catalina (macOS 10.15) (#9405)
+  * Update macos.md, add support for Ventura (#9406)
+
+### Development Fixes
+
+  * Cleanup highlight tag (#9177)
+  * Run tests in utc (#9168)
+  * Lock Ruby in CI to v3.1.2 and bump JRuby to v9.4.0.0 (#9196)
+  * Update sass related tests for jekyll-sass-converter 3.x (#9223)
+  * Split `test/test_tags.rb` into multiple files (#9230)
+  * test: use hash explicitly for Struct initializer for ruby 3.2 (#9237)
+  * script/default-site: accept flags for `jekyll new` (#9259)
+  * Bump check-spelling/check-spelling from 0.0.20 to 0.0.21 (#9205)
+  * Use check-spelling/check-spelling@v0.0.21 (#9199)
+  * Bump RuboCop to v1.45.x (#9305)
+  * Bump Rubocop to version 1.48.x (#9326)
+  * Bump versions of ruby &amp; nodejs in devcontainer (#9360)
+  * Bump rubocop version to 1.52.x (#9361)
+  * Upgrade RuboCop to 1.54 (#9401)
+
+### Bug Fixes
+
+  * Optimize default front matter using `File.fnmatch?` (#9185)
+  * Remove totals in profile table properly (#9186)
+  * Optimize `Site#each_site_file` (#9187)
+  * Rename sass partial created for new blank site (#9257)
+  * Fix `jekyll serve --detach` with jekyll-sass-converter 3.x (#9304)
+  * Handle TypeError from `where` filter gracefully (#9292)
+
+## 3.9.3 / 2023-01-29
+
+### Bug Fixes
+
+  * 3.9.x: Support i18n 1.x (#9269)
+  * Backport #8880 for v3.9.x: Support both tzinfo v1 and v2 along with non-half hour offsets (#9280)
+
+### Development Fixes
+
+  * v3.9.x: test under Ruby 3.2 #9272)
+  * v3.9.x: fix rdiscount test (#9277)
+
+## 4.3.2 / 2023-01-20
+
+### Bug Fixes
+
+  * Backport #9257 for v4.3.x: Rename sass partial created for new blank site (#9262)
+  * Backport #9187 for v4.3.x: Optimize `Site#each_site_file` (#9256)
+  * Backport #9186 for v4.3.x: Remove totals in profile table properly (#9255)
+
+### Development Fixes
+
+  * Backport #9223 for 4.3.x: Update sass related tests for jekyll-sass-converter 3.x (#9254)
+
+## 4.3.1 / 2022-10-26
+
+### Bug Fixes
+
+  * Respect user-defined name attribute in documents (#9167)
+  * Revert &#34;Incrementally rebuild when a data file is changed&#34; (#9170)
+
+### Documentation
+
+  * Release post for v4.3.1 (#9171)
+
+## 4.3.0 / 2022-10-20
+
+### Minor Enhancements
+
+  * Add webrick as a dependency (#8524)
+  * Regenerate supported mime types (#8542)
+  * Update include tag to be more permissive (#8618)
+  * Optimize `Jekyll::Utils.parse_date` (#8425)
+  * Update rubocop from 1.12 to 1.18 and min ruby from 2.4 to 2.5 (#8741)
+  * Always hide cache-dir contents from Git (#8798)
+  * Remove the warning about auto-regeneration on Windows (#8821)
+  * Propagate _data folder from theme (#8815)
+  * Support both tzinfo v1 and v2 along with non-half hour offsets. (#8880)
+  * Run vendor-mimes to update mime.types (#8940)
+  * Expose collection static files via `site.static_files` (#8961)
+  * Expose `basename` from `document.rb` as `name` to Liquid templates (#8761)
+  * Allow Configurable Converters on CSV (#8858)
+  * Introduce `theme` drop to expose theme-gem details (#9129)
+  * Relax version constraint to allow Rouge 4.x (#9134)
+  * Incrementally rebuild when a data file is changed (#8771)
+  * Support jekyll-sass-converter 3.x (#9132)
+
+### Bug Fixes
+
+  * fix: pin rubocop to 1.12 due to error with ruby 2.4 (#8651)
+  * Load Jekyll plugins from BUNDLE_GEMFILE location (#8585)
+  * fix(security):  CVE-2021-28834 (#8680)
+  * Inject livereload script using `location.protocol` instead of `http:` (#8718)
+  * Respect collections_dir config within include tag (#8756)
+  * Fix regression in Convertible module from v4.2.0  (#8786)
+  * Revert #7253: &#34;Don&#39;t reset site.url to localhost:4000 by default&#34; (#8620)
+  * Improve readability of CI logs (#8877)
+  * Fix deprecation message for missing doc method (#8960)
+  * Fix response header for content served via `jekyll serve` (#8965)
+  * Trigger livereload in sites without pages (#8337)
+  * Only enable BOM encoding option on UTF encodings (#8363)
+  * Ensure theme config is a `Jekyll::Configuration` object (#8988)
+  * Remove misleading totals row from `--profile` table (#9039)
+  * Unlock Psych dependency (#9135)
+  * Fix false positive conflicts for static files in a collection (#9141)
+
+### Development Fixes
+
+  * style: enable new cops (#8538)
+  * Allow dependabot to keep github actions up-to-date (#8540)
+  * Update actions/cache requirement to v2.1.3 (#8543)
+  * Pin rubocop version (#8564)
+  * style: add rubocop 1.9 cops (#8567)
+  * Cross Version Testing Locally and Faster CI (#8610)
+  * Use official Ruby setup GH action (#8614)
+  * Spell check action for markdown documentation (#8675)
+  * Update expect to cover docs/_posts (#8677)
   * Bump check-spelling/check-spelling from 0.0.18 to 0.0.19 (#8740)
+  * Enable Rubocop accessor grouping, fix existing offenses (#8293)
+  * Tags:Highlight: Decomposed HTMLLegacy formatter (#8623)
+  * Relax Rubocop Dependency (#8831)
+  * Add a workflow to build gems consistently (#8830)
+  * Fix random test failures in TestExcerpt #to_liquid (#8884)
+  * Lock gem `psych` to `v3.x` (#8918)
+  * Fix typo in Bug Report template (#8951)
+  * Check symlink outside site_source without Pathutil (#9015)
+  * Stop testing with Rubies older than 2.7 on non-Windows  (#8955)
+  * Bump actions/checkout from 2 to 3 (#8986)
+  * Remove git.io shortlinks from repo (#9045)
+  * Bump rubocop to 1.32 (#9093)
+  * Bump RuboCop to `1.36.x` (#9125)
+  * Use check-spelling/check-spelling@v0.0.20 (#9111)
+  * Disable pending cops when running rubocop (#9136)
+  * Relax RDoc version dependency (#9142)
 
 ### Documentation
 
@@ -18,7 +167,7 @@
   * docs: troubleshoot macOS with ARM64 architecture (#8560)
   * docs: add overview of .jekyll-cache dir (#8648)
   * docs: clarify where .jekyll-metadata comes from (#8646)
-  * Razorops cicd added (#8656)
+  * Razorops CI/CD added (#8656)
   * Specify default port and host for serve commands in docs (#8624)
   * Update third-party.md (#8652)
   * Add documentation for Sass configuration options (#8587)
@@ -42,53 +191,52 @@
   * Fix typo (#8835)
   * Added docs for running locally (#8852)
   * Linting README.markdown (#8900)
-
-### Bug Fixes
-
-  * Add webrick as a dependency (#8524)
-  * fix: pin rubocop to 1.12 due to error with ruby 2.4 (#8651)
-  * Revert &#34;style: run rubocop -a&#34; (#8676)
-  * Load Jekyll plugins from BUNDLE_GEMFILE location (#8585)
-  * fix(security):  CVE-2021-28834 (#8680)
-  * Inject livereload script using `location.protocol` instead of `http:` (#8718)
-  * Respect collections_dir config within include tag (#8756)
-  * Fix regression in Convertible module from v4.2.0  (#8786)
-  * Revert #7253: &#34;Don&#39;t reset site.url to localhost:4000 by default&#34; (#8620)
-  * Improve readability of CI logs (#8877)
-
-### Development Fixes
-
-  * style: enable new cops (#8538)
-  * Allow dependabot to keep github actions up-to-date (#8540)
-  * Update actions/cache requirement to v2.1.3 (#8543)
-  * Pin rubocop version (#8564)
-  * style: add rubocop 1.9 cops (#8567)
-  * Cross Version Testing Locally and Faster CI (#8610)
-  * style: run rubocop -a (#8654)
-  * Use official Ruby setup GH action (#8614)
-  * Spell check action for markdown documentation (#8675)
-  * Update expect to cover docs/_posts (#8677)
-  * Enable Rubocop accessor grouping, fix existing offenses (#8293)
-  * Tags:Highlight: Decomposed HTMLLegacy formatter (#8623)
-  * Relax Rubocop Dependency (#8831)
-  * Add a workflow to build gems consistently (#8830)
-  * Fix random test failures in TestExcerpt #to_liquid (#8884)
-
-### Minor Enhancements
-
-  * Regenerate supported mime types (#8542)
-  * Update include tag to be more permissive (#8618)
-  * Optimize `Jekyll::Utils.parse_date` (#8425)
-  * Update rubocop from 1.12 to 1.18 and min ruby from 2.4 to 2.5 (#8741)
-  * Always hide cache-dir contents from Git (#8798)
-  * Remove the warning about auto-regeneration on Windows (#8821)
-  * Propagate _data folder from theme (#8815)
-  * Support both tzinfo v1 and v2 alongwith non-half hour offsets. (#8880)
+  * Remove text on GITHUB_TOKEN which is now built-in (#8907)
+  * Add Security Policy document (#8823)
+  * Manage repository meta documents consistently (#8908)
+  * docs: add Layer0 deployment guide (#8915)
+  * docs: Update README generated by `jekyll new-theme` (#8919)
+  * Update resources.md (#8925)
+  * Rewrite documentation on installing plugins (#8921)
+  * Improve maintainers guide on releasing a new version (#8928)
+  * Fix link for &#34;CloudSh&#34; (#8934)
+  * Recommend using `actions/cache` in GitHub Actions documentation (#8948)
+  * Remove references to EOL hakiri.io service (#8946)
+  * Release post for v4.2.2 (#8982)
+  * Document releasing off `*-stable` branches (#8984)
+  * Update document by fix yaml syntax error (#8991)
+  * Enhance option&#39;s case for Jekyll configuration (#8992)
+  * Fix typo in `_docs/deployment/manual.md` (#8997)
+  * Add quiet/verbose options (#8996)
+  * Update README.markdown re IRC Pointer (#9005)
+  * Remove Aerobatic (#9007)
+  * Add Jekyll 3.9.2 release post to &#39;master&#39; branch (#9013)
+  * Simplify macOS installation docs (#8993)
+  * Improve document about GitHub Actions section (#8853)
+  * Update permalinks.md  (#9017)
+  * Add clarity to docs on permalinks placeholders and built-ins (#8995)
+  * Remove Ionic Framework site from showcase (#9057)
+  * Windows: describe which option to choose (#9049)
+  * Improve links (http -&gt; https) (#9064)
+  * Update ruby version for macos guide (#9086)
+  * Update posts.md (#9151)
+  * Release post for v4.3.0 (#9157)
 
 ### Site Enhancements
 
   * Improvements to CSS (#7834)
   * Slightly update lang `sh` code-block styling (#8857)
+
+## 4.2.2 / 2022-03-03
+
+### Bug Fixes
+
+  * Lock `http_parser.rb` gem to `v0.6.x` on JRuby.
+
+### Development Fixes
+
+  * Backport #8830 for v4.2.x: Add a workflow to build gems consistently (#8869)
+  * Lock `rubocop-performance` to `v1.11.x`.
 
 ## 4.2.1 / 2021-09-27
 
@@ -393,6 +541,19 @@
 ### Development Fixes
 
   * Fix Kramdown converter based tests for v4.0.x (#8143)
+
+## 3.9.2 / 2022-03-27
+
+### Bug Fixes
+
+  * Lock `http_parser.rb` gem to `v0.6.x` on JRuby (#8943)
+  * Backport #8756 for v3.9.x: Respect collections_dir config within include tag (#8795)
+  * Backport #8965 for v3.9.x: Fix response header for content served via `jekyll serve` (#8976)
+
+### Development Fixes
+
+  * Update and fix CI for `3.9-stable` on Ruby 3.x (#8942)
+  * Fix CI for commits to `3.9-stable` branch (#8788)
 
 ## 3.9.1 / 2021-04-08
 
@@ -1125,7 +1286,7 @@
   * make flakey test more robust (#6277)
   * Add a quick test for DataReader (#6284)
   * script/backport-pr: commit message no longer includes the `#` (#6289)
-  * Add Add CODEOWNERS file to help automate reviews. (#6320)
+  * Add CODEOWNERS file to help automate reviews. (#6320)
   * Fix builds on codeclimate (#6333)
   * Bump rubies on Travis (#6366)
 
@@ -2183,7 +2344,7 @@
   * Fixed an unclear code comment in site template SCSS (#3837)
   * Fix reading of binary metadata file (#3845)
   * Remove var collision with site template header menu iteration variable (#3838)
-  * Change non-existent `hl_linenos` to `hl_lines` to allow passthrough in safe mode (#3787)
+  * Change nonexistent `hl_linenos` to `hl_lines` to allow passthrough in safe mode (#3787)
   * Add missing flag to disable the watcher (#3820)
   * Update CI guide to include more direct explanations of the flow (#3891)
   * Set `future` to `false` in the default config (#3892)
@@ -2492,7 +2653,7 @@
   * Document the `name` variable for collection permalinks (#2829)
   * Adds info about installing jekyll in current dir (#2839)
   * Remove deprecated `jekyll-projectlist` plugin from list of third-party plugins (#2742)
-  * Remove tag plugins that are built in to Jekyll (#2751)
+  * Remove tag plugins that are built into Jekyll (#2751)
   * Add `markdown-writer` package for Atom Editor to list of third-party plugins (#2763)
   * Fix typo in site documentation for collections (#2764)
   * Fix minor typo on plugins docs page (#2765)

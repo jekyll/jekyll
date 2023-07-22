@@ -1,4 +1,6 @@
 version: "{build}"
+image: Visual Studio 2019
+build: off
 
 clone_depth: 5
 
@@ -6,39 +8,35 @@ branches:
   only:
     - master
     - themes
-    - /.*-stable/
-
-build: off
+    - /.*-stable$/
 
 environment:
   BUNDLE_WITHOUT: "benchmark:development"
   matrix:
-    - RUBY_FOLDER_VER: "26"
+    - RUBY_FOLDER_VER: "27"
       TZINFO_VERSION: "~> 1.2"
       TEST_SUITE: "test"
-    - RUBY_FOLDER_VER: "26"
+    - RUBY_FOLDER_VER: "27"
       TZINFO_VERSION: "~> 2.0"
       TEST_SUITE: "test"
-    - RUBY_FOLDER_VER: "26"
-      TEST_SUITE: "test"
-    - RUBY_FOLDER_VER: "26"
+    - RUBY_FOLDER_VER: "27"
       TEST_SUITE: "default-site"
-    - RUBY_FOLDER_VER: "26"
+    - RUBY_FOLDER_VER: "27"
       TEST_SUITE: "profile-docs"
-    - RUBY_FOLDER_VER: "26"
+    - RUBY_FOLDER_VER: "27"
       TEST_SUITE: "memprof"
-    - RUBY_FOLDER_VER: "26"
+    - RUBY_FOLDER_VER: "27"
       TZINFO_VERSION: "~> 1.2"
       TEST_SUITE: "cucumber"
-    - RUBY_FOLDER_VER: "26"
+    - RUBY_FOLDER_VER: "27"
       TZINFO_VERSION: "~> 2.0"
-      TEST_SUITE: "cucumber"
-    - RUBY_FOLDER_VER: "26"
       TEST_SUITE: "cucumber"
 
 install:
   - SET PATH=C:\Ruby%RUBY_FOLDER_VER%-x64\bin;%PATH%
-  - bundle install --retry 5 --jobs=%NUMBER_OF_PROCESSORS% --clean --path vendor\bundle
+  - bundle config set --local clean 'true'
+  - bundle config set --local path 'vendor\bundle'
+  - bundle install --retry 5 --jobs=%NUMBER_OF_PROCESSORS%
 
 test_script:
   - ruby --version

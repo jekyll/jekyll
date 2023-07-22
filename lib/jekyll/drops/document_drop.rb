@@ -25,6 +25,10 @@ module Jekyll
         fallback_data["excerpt"].to_s
       end
 
+      def name
+        fallback_data["name"] || @obj.basename
+      end
+
       def <=>(other)
         return nil unless other.is_a? DocumentDrop
 

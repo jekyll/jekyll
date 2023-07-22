@@ -75,9 +75,7 @@ class TestCommandsServe < JekyllUnitTest
       </html>
       HTML
 
-      File.open(File.join(@destination, "hello.html"), "w") do |f|
-        f.write(simple_page)
-      end
+      File.write(File.join(@destination, "hello.html"), simple_page)
       allow(Jekyll::Site).to receive(:new).and_return(site)
     end
 
@@ -313,6 +311,38 @@ class TestCommandsServe < JekyllUnitTest
 
       expect(Jekyll).to receive(:configuration).once.and_call_original
       @merc.execute(:serve, "watch" => false)
+    end
+  end
+
+  context "using --detach" do
+    setup do
+      skip_if_windows "fork is not supported on Windows"
+      skip("fork is not supported by JRuby") if jruby?
+
+      @temp_dir = Dir.mktmpdir("jekyll_serve_detach_test")
+      @destination = File.join(@temp_dir, "_site")
+      Dir.mkdir(@destination) || flunk("Could not make directory #{@destination}")
+    end
+
+    teardown do
+      FileUtils.remove_entry_secure(@temp_dir, true)
+    end
+
+    should "fork into daemon process" do
+      process, output = Jekyll::Utils::Exec.run("jekyll", "serve",
+                                                "--source", @temp_dir,
+                                                "--dest", @destination,
+                                                "--detach")
+
+      re = %r!Server detached with pid '(?<pid>\d+)'!
+
+      assert_match re, output
+      assert_equal 0, process.exitstatus
+
+      pid = re.match(output)["pid"].to_i
+      assert pid > 1
+
+      Process.kill 9, pid
     end
   end
 end

@@ -19,14 +19,15 @@ following content:
 layout: post
 author: jill
 ---
-A banana is an edible fruit – botanically a berry – produced by several kinds
-of large herbaceous flowering plants in the genus Musa.
+
+A banana is an edible fruit – botanically a berry – produced by several
+kinds of large herbaceous flowering plants in the genus Musa.
 
 In some countries, bananas used for cooking may be called "plantains",
-distinguishing them from dessert bananas. The fruit is variable in size, color,
-and firmness, but is usually elongated and curved, with soft flesh rich in
-starch covered with a rind, which may be green, yellow, red, purple, or brown
-when ripe.
+distinguishing them from dessert bananas. The fruit is variable in size,
+color, and firmness, but is usually elongated and curved, with soft
+flesh rich in starch covered with a rind, which may be green, yellow,
+red, purple, or brown when ripe.
 ```
 
 This is like the `about.md` you created before except it has an author and
@@ -115,11 +116,11 @@ author: jill
 ---
 An apple is a sweet, edible fruit produced by an apple tree.
 
-Apple trees are cultivated worldwide, and are the most widely grown species in
-the genus Malus. The tree originated in Central Asia, where its wild ancestor,
-Malus sieversii, is still found today. Apples have been grown for thousands of
-years in Asia and Europe, and were brought to North America by European
-colonists.
+Apple trees are cultivated worldwide, and are the most widely grown
+species in the genus Malus. The tree originated in Central Asia, where
+its wild ancestor, Malus sieversii, is still found today. Apples have
+been grown for thousands of years in Asia and Europe, and were brought
+to North America by European colonists.
 ```
 
 `_posts/2018-08-22-kiwifruit.md`:
@@ -129,14 +130,14 @@ colonists.
 layout: post
 author: ted
 ---
-Kiwifruit (often abbreviated as kiwi), or Chinese gooseberry is the edible
-berry of several species of woody vines in the genus Actinidia.
+Kiwifruit (often abbreviated as kiwi), or Chinese gooseberry is the
+edible berry of several species of woody vines in the genus Actinidia.
 
-The most common cultivar group of kiwifruit is oval, about the size of a large
-hen's egg (5–8 cm (2.0–3.1 in) in length and 4.5–5.5 cm (1.8–2.2 in) in
-diameter). It has a fibrous, dull greenish-brown skin and bright green or
-golden flesh with rows of tiny, black, edible seeds. The fruit has a soft
-texture, with a sweet and unique flavor.
+The most common cultivar group of kiwifruit is oval, about the size of
+a large hen's egg (5–8 cm (2.0–3.1 in) in length and 4.5–5.5 cm
+(1.8–2.2 in) in diameter). It has a fibrous, dull greenish-brown skin
+and bright green or golden flesh with rows of tiny, black, edible
+seeds. The fruit has a soft texture, with a sweet and unique flavor.
 ```
 
 Open <a href="http://localhost:4000" target="_blank" data-proofer-ignore>http://localhost:4000</a>

@@ -23,7 +23,7 @@ group :test do
   gem "nokogiri", "~> 1.7"
   gem "rspec"
   gem "rspec-mocks"
-  gem "rubocop", "~> 1.23.0"
+  gem "rubocop", "~> 1.54.0"
   gem "rubocop-minitest"
   gem "rubocop-performance"
   gem "rubocop-rake"
@@ -73,7 +73,14 @@ group :jekyll_optional_dependencies do
   gem "jekyll-paginate"
   gem "jekyll-redirect-from"
   gem "kramdown-syntax-coderay"
+  gem "matrix"
   gem "mime-types", "~> 3.0"
+  # Psych 5 has stopped bundling `libyaml` and expects it to be installed on the host system prior
+  # to being invoked.
+  # Since we don't have a direct dependency on the Psych gem (it gets included in the gem bundle as
+  # a dependency of the `rdoc` gem), lock psych gem to v4.x instead of installing `libyaml` in our
+  # development / CI environment.
+  gem "psych", "~> 4.0"
   gem "rdoc", "~> 6.0"
   gem "tomlrb"
 

@@ -2,6 +2,8 @@
 
 (?:^|/)(?i)COPYRIGHT
 (?:^|/)(?i)LICEN[CS]E
+(?:^|/)3rdparty/
+(?:^|/)go\.sum$
 (?:^|/)package(?:-lock|)\.json$
 (?:^|/)vendor/
 
@@ -9,20 +11,52 @@
 ignore$
 
 \.avi$
+\.bmp$
+\.bz2$
+\.class$
+\.crt$
+\.dll$
+\.docx?$
+\.drawio$
+\.DS_Store$
 \.eot$
+\.exe$
+\.gif$
+\.gitattributes$
+\.graffle$
+\.gz$
+\.icns$
 \.ico$
+\.jar$
+\.jks$
 \.jpe?g$
+\.key$
+\.lib$
 \.lock$
 \.map$
-\.min\.
+\.min\..
 \.mod$
 \.mp[34]$
+\.o$
+\.ocf$
+\.otf$
+\.pdf$
+\.pem$
 \.png$
-\.svg$
+\.psd$
+\.pyc$
+\.s$
+\.svgz?$
+\.tar$
+\.tiff?$
 \.ttf$
 \.wav$
+\.webm$
+\.webp$
 \.woff$
 \.woff2$
+\.xlsx?$
+\.zip$
 
 ^docs/pages/redirects/github\.html$
 ^lib/jekyll/mime\.types$
@@ -33,3 +67,4 @@ ignore$
 ^test/fixtures/webrick/bar/foo\.xhtml$
 ^test/source/_posts/2009-06-22-no-yaml\.markdown$
 ^\.github/
+^\Q.github/workflows/spelling.yml\E$

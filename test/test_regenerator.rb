@@ -174,9 +174,7 @@ class TestRegenerator < JekyllUnitTest
       metadata_file = source_dir(".jekyll-metadata")
       @regenerator = Regenerator.new(@site)
 
-      File.open(metadata_file, "w") do |f|
-        f.write(@regenerator.metadata.to_yaml)
-      end
+      File.write(metadata_file, @regenerator.metadata.to_yaml)
 
       @regenerator = Regenerator.new(@site)
       assert_equal File.mtime(@path), @regenerator.metadata[@path]["mtime"]
