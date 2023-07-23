@@ -37,6 +37,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
 ### Comments
   - [Staticman](https://staticman.net): Add user-generated content to a Jekyll site (free and open source)
   - [Talkyard](https://www.talkyard.io/blog-comments): Embedded comments for Jekyll and others (free and open source, or hosted serverless)
+  - [utterance](https://utteranc.es): A lightweight comments widget built on GitHub issues. Use GitHub issues for blog comments, wiki pages and more! (free and open source)
 
 ### Content Management
   - [CloudCannon](https://cloudcannon.com/): The Cloud CMS for Jekyll
