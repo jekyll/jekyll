@@ -88,7 +88,7 @@ module Jekyll
             Jekyll.logger.error <<~STR
               We have detected that there might be trouble using fsevent on your
               operating system, you can read https://github.com/thibaudgg/rb-fsevent/wiki/no-fsevents-fired-(OSX-bug)
-              for possible work arounds or you can work around it immediately
+              for possible workarounds or you can work around it immediately
               with `--force-polling`.
             STR
 

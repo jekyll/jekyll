@@ -22,7 +22,7 @@ With [Razorops][razorops-homepage] you can set up your Jekyll websites project's
 
 ## 1. Getting started
 
-1. Log in at [https://razorops.com/][razorops-homepage] with your GitHub/Bitbucket or Gitlab account
+1. Log in at [https://razorops.com/][razorops-homepage] with your GitHub/Bitbucket or GitLab account
 2. Create a pipeline, choose your Git provider and select your Jekyll Project
 3. Add .razorops.yaml file in your root directory of your project
 4. Add environment var and your deployment is ready

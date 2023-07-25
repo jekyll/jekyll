@@ -1,7 +1,10 @@
 ^attache$
 benefitting
-occurence
+occurences?
+^dependan.*
+^oer$
 Sorce
-^[Ss]pae
-^untill
-^wether
+^[Ss]pae.*
+^untill$
+^untilling$
+^wether.*

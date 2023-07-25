@@ -10,6 +10,15 @@
   * Fix typo on website (#9203)
   * Publish post on major release of sass-converter (#9225)
   * Update Jekyll on macOS (macos.md) and current ruby version to 3.1.3 in ruby.yml (#9195)
+  * Add release post for v4.3.2 (#9263)
+  * Grammatical reordering in  3-to-4 upgrading docs (#9245)
+  * fixed grammatical mistake on &#34;showcase&#34; page (#9264)
+  * Mark `highlight` `mark_lines` feature as 4.4 in docs (#9184)
+  * Add v3.9.3 release history &amp; post to `master` branch (#9284)
+  * Update S3 deployment to remove s3_website (#9221)
+  * Document Exclude behavior, Include overrides and the default exclusion list (#9376)
+  * Update macos.md, remove Catalina (macOS 10.15) (#9405)
+  * Update macos.md, add support for Ventura (#9406)
 
 ### Development Fixes
 
@@ -19,12 +28,47 @@
   * Update sass related tests for jekyll-sass-converter 3.x (#9223)
   * Split `test/test_tags.rb` into multiple files (#9230)
   * test: use hash explicitly for Struct initializer for ruby 3.2 (#9237)
+  * script/default-site: accept flags for `jekyll new` (#9259)
+  * Bump check-spelling/check-spelling from 0.0.20 to 0.0.21 (#9205)
+  * Use check-spelling/check-spelling@v0.0.21 (#9199)
+  * Bump RuboCop to v1.45.x (#9305)
+  * Bump Rubocop to version 1.48.x (#9326)
+  * Bump versions of ruby &amp; nodejs in devcontainer (#9360)
+  * Bump rubocop version to 1.52.x (#9361)
+  * Upgrade RuboCop to 1.54 (#9401)
 
 ### Bug Fixes
 
   * Optimize default front matter using `File.fnmatch?` (#9185)
   * Remove totals in profile table properly (#9186)
   * Optimize `Site#each_site_file` (#9187)
+  * Rename sass partial created for new blank site (#9257)
+  * Fix `jekyll serve --detach` with jekyll-sass-converter 3.x (#9304)
+  * Handle TypeError from `where` filter gracefully (#9292)
+
+## 3.9.3 / 2023-01-29
+
+### Bug Fixes
+
+  * 3.9.x: Support i18n 1.x (#9269)
+  * Backport #8880 for v3.9.x: Support both tzinfo v1 and v2 along with non-half hour offsets (#9280)
+
+### Development Fixes
+
+  * v3.9.x: test under Ruby 3.2 #9272)
+  * v3.9.x: fix rdiscount test (#9277)
+
+## 4.3.2 / 2023-01-20
+
+### Bug Fixes
+
+  * Backport #9257 for v4.3.x: Rename sass partial created for new blank site (#9262)
+  * Backport #9187 for v4.3.x: Optimize `Site#each_site_file` (#9256)
+  * Backport #9186 for v4.3.x: Remove totals in profile table properly (#9255)
+
+### Development Fixes
+
+  * Backport #9223 for 4.3.x: Update sass related tests for jekyll-sass-converter 3.x (#9254)
 
 ## 4.3.1 / 2022-10-26
 
@@ -168,7 +212,7 @@
   * Remove Aerobatic (#9007)
   * Add Jekyll 3.9.2 release post to &#39;master&#39; branch (#9013)
   * Simplify macOS installation docs (#8993)
-  * Improve document about Github Actions section (#8853)
+  * Improve document about GitHub Actions section (#8853)
   * Update permalinks.md  (#9017)
   * Add clarity to docs on permalinks placeholders and built-ins (#8995)
   * Remove Ionic Framework site from showcase (#9057)
@@ -1242,7 +1286,7 @@
   * make flakey test more robust (#6277)
   * Add a quick test for DataReader (#6284)
   * script/backport-pr: commit message no longer includes the `#` (#6289)
-  * Add Add CODEOWNERS file to help automate reviews. (#6320)
+  * Add CODEOWNERS file to help automate reviews. (#6320)
   * Fix builds on codeclimate (#6333)
   * Bump rubies on Travis (#6366)
 
@@ -2300,7 +2344,7 @@
   * Fixed an unclear code comment in site template SCSS (#3837)
   * Fix reading of binary metadata file (#3845)
   * Remove var collision with site template header menu iteration variable (#3838)
-  * Change non-existent `hl_linenos` to `hl_lines` to allow passthrough in safe mode (#3787)
+  * Change nonexistent `hl_linenos` to `hl_lines` to allow passthrough in safe mode (#3787)
   * Add missing flag to disable the watcher (#3820)
   * Update CI guide to include more direct explanations of the flow (#3891)
   * Set `future` to `false` in the default config (#3892)
@@ -2609,7 +2653,7 @@
   * Document the `name` variable for collection permalinks (#2829)
   * Adds info about installing jekyll in current dir (#2839)
   * Remove deprecated `jekyll-projectlist` plugin from list of third-party plugins (#2742)
-  * Remove tag plugins that are built in to Jekyll (#2751)
+  * Remove tag plugins that are built into Jekyll (#2751)
   * Add `markdown-writer` package for Atom Editor to list of third-party plugins (#2763)
   * Fix typo in site documentation for collections (#2764)
   * Fix minor typo on plugins docs page (#2765)

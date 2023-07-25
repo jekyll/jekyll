@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
 # Runs the `jekyll new` command and builds the default site as a sanity check
+# Additional flags for `jekyll new` may be passed to this script.
 
 set -e
 
+TMP_SOURCE="tmp/default-site"
+
 echo "$0: setting up tmp directory"
 mkdir -p ./tmp
-rm -Rf ./tmp/default-site
+rm -Rf "./$TMP_SOURCE"
 
 echo "$0: creating new default site"
-bundle exec jekyll new tmp/default-site
-pushd tmp/default-site
+bundle exec jekyll new "$TMP_SOURCE" "$@"
+pushd "$TMP_SOURCE"
 
 echo "$0: respecifying the jekyll install location"
 ruby -e "contents = File.read('Gemfile'); File.write('Gemfile', contents.sub(/gem \"jekyll\".*\\n/, 'gem \"jekyll\", path: \"../../\"'))"

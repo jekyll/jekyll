@@ -1,6 +1,6 @@
 version: "{build}"
-
 image: Visual Studio 2019
+build: off
 
 clone_depth: 5
 
@@ -8,9 +8,7 @@ branches:
   only:
     - master
     - themes
-    - /.*-stable/
-
-build: off
+    - /.*-stable$/
 
 environment:
   BUNDLE_WITHOUT: "benchmark:development"
@@ -36,7 +34,9 @@ environment:
 
 install:
   - SET PATH=C:\Ruby%RUBY_FOLDER_VER%-x64\bin;%PATH%
-  - bundle install --retry 5 --jobs=%NUMBER_OF_PROCESSORS% --clean --path vendor\bundle
+  - bundle config set --local clean 'true'
+  - bundle config set --local path 'vendor\bundle'
+  - bundle install --retry 5 --jobs=%NUMBER_OF_PROCESSORS%
 
 test_script:
   - ruby --version

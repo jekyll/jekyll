@@ -958,6 +958,18 @@ class TestFilters < JekyllUnitTest
         results = @filter.where(SelectDummy.new, "obj", "1 == 1")
         assert_equal [], results
       end
+
+      should "gracefully handle invalid property type" do
+        hash = {
+          "members" => { "name" => %w(John Jane Jimmy) },
+          "roles"   => %w(Admin Recruiter Manager),
+        }
+        err = assert_raises(TypeError) { @filter.where(hash, "name", "Jimmy") }
+        truncatd_arr_str = hash["roles"].to_liquid.to_s[0...20]
+        msg = "Error accessing object (#{truncatd_arr_str}) with given key. Expected an integer " \
+              'but got "name" instead.'
+        assert_equal msg, err.message
+      end
     end
 
     context "where_exp filter" do

@@ -36,6 +36,7 @@ awscli
 backend
 backport
 backtick
+backticks
 barcamp
 baseurl
 bashrc
@@ -51,6 +52,7 @@ bitbucket
 blog
 Blogger
 blogging
+blogs
 bonafide
 Bou
 breadcrumbs
@@ -178,6 +180,7 @@ exe
 execjs
 extensionpack
 extname
+extnames
 exts
 favicon
 Fengyun
@@ -203,6 +206,7 @@ formx
 Forwardable
 frameborder
 freenode
+frontend
 frontmatter
 fsnotify
 ftp
@@ -376,6 +380,7 @@ mergable
 Mertcan
 mertkahyaoglu
 metadata
+metadatas
 microdata
 microsoft
 mimetype
@@ -421,6 +426,7 @@ nakanishi
 namespace
 namespaced
 navbar
+navbars
 nbsp
 nearlyfreespeech
 nethack
@@ -460,6 +466,7 @@ pathawks
 Pathutil
 paywall
 pdf
+PDFs
 Pelykh
 permalink
 PHP
@@ -480,6 +487,7 @@ Posterous
 postfiles
 postlayout
 postmodern
+prefetching
 preinstalled
 prepends
 Prioritise
@@ -510,6 +518,8 @@ redgreen
 redhat
 refactor
 refactoring
+refactorings
+Refactors
 Refheap
 regen
 regex
@@ -552,6 +562,7 @@ Schwartzian
 scp
 screenshot
 scrollbar
+scrollbars
 scroller
 scss
 scssify
@@ -565,9 +576,9 @@ setenv
 SFTP
 shingo
 shopify
-shortlog
 shortlinks
-shoulda
+shortlog
+Shoulda
 sieversii
 sigpipe
 simplecov
@@ -610,6 +621,7 @@ subdir
 subdomain
 subfolder
 subfolderitems
+subfolders
 subnav
 subpages
 subpath
@@ -649,6 +661,7 @@ throughs
 Tidelift
 timeago
 timezone
+timezones
 titleize
 TLS
 tmm
@@ -687,6 +700,7 @@ uri
 url
 urlset
 username
+usernames
 usr
 utf
 utils
@@ -728,6 +742,7 @@ woff
 wordpress
 Workaround
 workflow
+workflows
 wsl
 www
 xcode
@@ -758,5 +773,3 @@ Zsh
 zshrc
 zypper
 zzot
-frontend
-prefetching
