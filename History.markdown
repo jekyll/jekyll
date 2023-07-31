@@ -17,6 +17,8 @@
   * Add v3.9.3 release history &amp; post to `master` branch (#9284)
   * Update S3 deployment to remove s3_website (#9221)
   * Document Exclude behavior, Include overrides and the default exclusion list (#9376)
+  * Update macos.md, remove Catalina (macOS 10.15) (#9405)
+  * Update macos.md, add support for Ventura (#9406)
 
 ### Development Fixes
 
@@ -33,6 +35,7 @@
   * Bump Rubocop to version 1.48.x (#9326)
   * Bump versions of ruby &amp; nodejs in devcontainer (#9360)
   * Bump rubocop version to 1.52.x (#9361)
+  * Upgrade RuboCop to 1.54 (#9401)
 
 ### Bug Fixes
 
