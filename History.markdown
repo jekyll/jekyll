@@ -19,6 +19,7 @@
   * Document Exclude behavior, Include overrides and the default exclusion list (#9376)
   * Update macos.md, remove Catalina (macOS 10.15) (#9405)
   * Update macos.md, add support for Ventura (#9406)
+  * Typo fix - update to hooks and 3rd party deployment and one other article (#9411)
 
 ### Development Fixes
 
