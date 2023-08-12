@@ -212,6 +212,7 @@ The complete list of available hooks:
       </td>
       <td>
         <p>After converting the post content, but before rendering the postlayout</p>
+        <p>After converting the post content, but before rendering the post layout</p>
       </td>
     </tr>
     <tr>
