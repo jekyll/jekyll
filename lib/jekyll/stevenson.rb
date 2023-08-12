@@ -3,13 +3,10 @@
 module Jekyll
   class Stevenson < ::Logger
     def initialize
-      @progname = nil
-      @level = DEBUG
-      @default_formatter = Formatter.new
-      @logdev = $stdout
-      @formatter = proc do |_, _, _, msg|
+      formatter = proc do |_, _, _, msg|
         msg.to_s
       end
+      super($stdout, :formatter => formatter)
     end
 
     def add(severity, message = nil, progname = nil)
