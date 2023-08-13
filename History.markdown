@@ -20,6 +20,7 @@
   * Update macos.md, remove Catalina (macOS 10.15) (#9405)
   * Update macos.md, add support for Ventura (#9406)
   * Typo fix - update to hooks and 3rd party deployment and one other article (#9411)
+  * Update 07-assets.md (#9393)
 
 ### Development Fixes
 
