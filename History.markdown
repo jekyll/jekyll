@@ -25,6 +25,7 @@
   * Point to the Rouge GitHub repo rather than broken website (#9362)
   * Add new theme directory to themes resources (#9356)
   * Adds Kinsta to 3rd party deployments (#9331)
+  * Update Fedora prerequisites to include g++ (#9290)
 
 ### Development Fixes
 
