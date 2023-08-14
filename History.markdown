@@ -26,6 +26,7 @@
   * Add new theme directory to themes resources (#9356)
   * Adds Kinsta to 3rd party deployments (#9331)
   * Update Fedora prerequisites to include g++ (#9290)
+  * Update convert-site-to-jekyll.md (#9348)
 
 ### Development Fixes
 
