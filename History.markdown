@@ -23,6 +23,7 @@
   * Update 07-assets.md (#9393)
   * Mention the front matter requirement in pages.md (#9423)
   * Point to the Rouge GitHub repo rather than broken website (#9362)
+  * Add new theme directory to themes resources (#9356)
 
 ### Development Fixes
 
