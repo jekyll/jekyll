@@ -24,6 +24,7 @@
   * Mention the front matter requirement in pages.md (#9423)
   * Point to the Rouge GitHub repo rather than broken website (#9362)
   * Add new theme directory to themes resources (#9356)
+  * Adds Kinsta to 3rd party deployments (#9331)
 
 ### Development Fixes
 
