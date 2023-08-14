@@ -22,6 +22,7 @@
   * Typo fix - update to hooks and 3rd party deployment and one other article (#9411)
   * Update 07-assets.md (#9393)
   * Mention the front matter requirement in pages.md (#9423)
+  * Point to the Rouge GitHub repo rather than broken website (#9362)
 
 ### Development Fixes
 
