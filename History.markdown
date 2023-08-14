@@ -21,6 +21,7 @@
   * Update macos.md, add support for Ventura (#9406)
   * Typo fix - update to hooks and 3rd party deployment and one other article (#9411)
   * Update 07-assets.md (#9393)
+  * Mention the front matter requirement in pages.md (#9423)
 
 ### Development Fixes
 
