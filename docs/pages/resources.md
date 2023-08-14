@@ -14,6 +14,7 @@ some of the most popular Jekyll resources.
 - [jamstackthemes.dev](https://jamstackthemes.dev/ssg/jekyll/)
 - [jekyllthemes.org](http://jekyllthemes.org/)
 - [jekyllthemes.io](https://jekyllthemes.io/)
+- [builtatlightspeed.com](https://builtatlightspeed.com/category/jekyll)
 
 See also: [docs/themes](/docs/themes/).
 
