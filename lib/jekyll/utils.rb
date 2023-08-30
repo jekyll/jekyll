@@ -315,7 +315,7 @@ module Jekyll
 
     # Safely load YAML strings
     def safe_load_yaml(yaml)
-      Psych.safe_load(yaml, :permitted_classes => [Date, Time])
+      Psych.safe_load(yaml, :permitted_classes => [Date, Time], aliases: true)
     rescue ArgumentError
       # Psych versions < 3.1 had a different safe_load API and used
       # problematic language.
