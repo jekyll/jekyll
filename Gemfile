@@ -48,7 +48,7 @@ group :test_legacy do
   gem "minitest"
   gem "minitest-profile"
   gem "minitest-reporters"
-  gem "shoulda"
+  gem "shoulda-context"
   gem "simplecov"
 end
 

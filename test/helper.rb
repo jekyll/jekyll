@@ -35,7 +35,7 @@ require_relative "../lib/jekyll"
 Jekyll.logger = Logger.new(StringIO.new, :error)
 
 require "kramdown"
-require "shoulda"
+require "shoulda-context"
 
 include Jekyll
 
