@@ -20,7 +20,7 @@ jobs:
       BENCHMARK: true
     steps:
     - name: Checkout Jekyll
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
