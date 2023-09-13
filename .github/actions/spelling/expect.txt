@@ -62,6 +62,7 @@ bridgetownrb
 brightbox
 brighterplanet
 buddyworks
+builtatlightspeed
 Bugfix
 Burela
 byparker
@@ -317,6 +318,7 @@ Kewin
 keycdn
 kickster
 Kinnula
+kinsta
 kiwifruit
 Kolesky
 konklone
