@@ -46,6 +46,7 @@
   * Bump rubocop version to 1.52.x (#9361)
   * Upgrade RuboCop to 1.54 (#9401)
   * Add CodeQL workflow (#9397)
+  * Bump actions/checkout from 3 to 4 (#9442)
 
 ### Bug Fixes
 
