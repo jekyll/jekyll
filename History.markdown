@@ -28,6 +28,7 @@
   * Update Fedora prerequisites to include g++ (#9290)
   * Update convert-site-to-jekyll.md (#9348)
   * Update github-actions documentation (#9426)
+  * Update resources.md (#9449)
 
 ### Development Fixes
 
