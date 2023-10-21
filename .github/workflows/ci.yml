@@ -36,6 +36,8 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby_version }}
           bundler-cache: true
+      - name: Print Gemfile.lock
+        run: bash cat Gemfile.lock
       - name: Run Minitest based tests
         run: bash script/test
       - name: Run Cucumber based tests
