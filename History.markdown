@@ -29,6 +29,7 @@
   * Update convert-site-to-jekyll.md (#9348)
   * Update github-actions documentation (#9426)
   * Update resources.md (#9449)
+  * Add GitHub Pages helpful notes (#9235)
 
 ### Development Fixes
 
