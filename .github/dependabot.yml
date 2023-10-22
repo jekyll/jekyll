@@ -5,6 +5,8 @@ updates:
     schedule:
       interval: "weekly"
   - package-ecosystem: bundler
+    reviewers:
+      - "jekyll/core"
     directory: /
     schedule:
       interval: weekly
