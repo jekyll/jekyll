@@ -10,7 +10,3 @@ updates:
     directory: /
     schedule:
       interval: weekly
-    groups:
-      rubygems:
-        patterns:
-        - '*'
