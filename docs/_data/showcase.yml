@@ -12,7 +12,7 @@
 #     - government
 
 - name: SiteLeaf
-  url: https://siteleaf.com
+  url: https://www.siteleaf.com/
   image: siteleaf.png
   categories:
     - software
@@ -52,7 +52,7 @@
     - marketing-site
 
 - name: Bitcoin
-  url: https://bitcoin.org/en/
+  url: https://bitcoin.org/
   image: bitcoin.png
   categories:
     - software
@@ -127,7 +127,7 @@
     - government
 
 - name: U.S. Web Design Standards
-  url: https://standards.usa.gov/
+  url: https://designsystem.digital.gov/
   image: uswds.png
   categories:
     - government
@@ -165,7 +165,7 @@
     - portfolio
 
 - name: Lattice
-  url: https://latticehq.com/
+  url: https://lattice.com/
   image: lattice.png
   categories:
     - software
@@ -196,7 +196,7 @@
     - documentation
 
 - name: Chain
-  url: https://chain.com/
+  url: https://www.chain.com/
   image: chain.png
   categories:
     - marketing-site
@@ -238,13 +238,6 @@
   categories:
     - government
 
-- name: GitHub On Demand Training
-  url: https://services.github.com/on-demand/
-  image: github-learning-lab.png
-  categories:
-    - software
-    - knowledgebase
-
 - name: TwitchCon
   url: https://www.twitchcon.com/
   image: twitchcon.png
@@ -253,13 +246,13 @@
     - conference
 
 - name: UN World Statistics
-  url: https://worldstatisticsday.org
+  url: https://worldstatisticsday.org/
   image: world-statistics-day.png
   categories:
     - government
 
 - name: Netflix Devices
-  url: https://devices.netflix.com/en/
+  url: https://devices.netflix.com/
   image: netflix.png
   categories:
     - marketing-site
@@ -301,7 +294,7 @@
     - software
 
 - name: Sketch
-  url: https://sketch.com/
+  url: https://www.sketch.com/
   image: sketch.png
   categories:
     - software
