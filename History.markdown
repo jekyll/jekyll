@@ -54,6 +54,7 @@
   * Keep activesupport at version 7.0.x (#9469)
   * Bump Rubocop to 1.56.4 (#9459)
   * Configure dependabot to handle rubygems dependencies (#9445)
+  * Update rubocop gem (#9476)
 
 ### Bug Fixes
 
