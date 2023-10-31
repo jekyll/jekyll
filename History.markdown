@@ -30,6 +30,7 @@
   * Update github-actions documentation (#9426)
   * Update resources.md (#9449)
   * Add GitHub Pages helpful notes (#9235)
+  * Clarify which version of Jekyll needs &#39;jekyll-paginate&#39; (#9477)
 
 ### Development Fixes
 
