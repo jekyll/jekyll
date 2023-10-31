@@ -53,6 +53,7 @@
   * Test suite uses shoulda-context only. (#9441)
   * Keep activesupport at version 7.0.x (#9469)
   * Bump Rubocop to 1.56.4 (#9459)
+  * Configure dependabot to handle rubygems dependencies (#9445)
 
 ### Bug Fixes
 
