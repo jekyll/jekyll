@@ -31,6 +31,7 @@
   * Update resources.md (#9449)
   * Add GitHub Pages helpful notes (#9235)
   * Clarify which version of Jekyll needs &#39;jekyll-paginate&#39; (#9477)
+  * chore: update showcases (#9473)
 
 ### Development Fixes
 
