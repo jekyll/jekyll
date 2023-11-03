@@ -18,5 +18,6 @@ For detailed install instructions, follow the guide for your operating system.
 
 * [macOS]({{ '/docs/installation/macos/' | relative_url }})
 * [Ubuntu]({{ '/docs/installation/ubuntu/' | relative_url }})
+* [FreeBSD]({{ '/docs/installation/freebsd/' | relative_url }})
 * [Other Linux]({{ '/docs/installation/other-linux/' | relative_url }})
 * [Windows]({{ '/docs/installation/windows/' | relative_url }})
