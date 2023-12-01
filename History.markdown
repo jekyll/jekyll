@@ -33,6 +33,7 @@
   * Clarify which version of Jekyll needs &#39;jekyll-paginate&#39; (#9477)
   * chore: update showcases (#9473)
   * Add FreeBSD installation instructions (#9481)
+  * Fix broken link for the security team page (#9497)
 
 ### Development Fixes
 
