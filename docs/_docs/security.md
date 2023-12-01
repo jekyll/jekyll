@@ -19,7 +19,7 @@ Security updates are applied to the latest MINOR version of Jekyll, and the vers
 Please report vulnerabilities by sending an email to security@jekyllrb.com with the following information:
 
 1. A description of the vulnerability
-2. Reproduction steps and/or a sample site (share a private repo to the [Jekyll Security Team](docs/pages/team.md))
+2. Reproduction steps and/or a sample site (share a private repo to the [Jekyll Security Team](/team/#security-team))
 3. Your contact information
 
 The Jekyll security team will respond to your submission and notify you whether it has been confirmed by the team.
