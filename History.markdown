@@ -34,6 +34,7 @@
   * chore: update showcases (#9473)
   * Add FreeBSD installation instructions (#9481)
   * Fix broken link for the security team page (#9497)
+  * Fix broken links for several Jekyll integrations (#9496)
 
 ### Development Fixes
 
