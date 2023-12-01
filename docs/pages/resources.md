@@ -37,7 +37,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
 
 ### Comments
   - [Staticman](https://staticman.net): Add user-generated content to a Jekyll site (free and open source)
-  - [Talkyard](https://www.talkyard.io/blog-comments): Embedded comments for Jekyll and others (free and open source, or hosted serverless)
+  - [Talkyard](https://blog-comments.talkyard.io/): Embedded comments for Jekyll and others (free and open source, or hosted serverless)
 
 ### Content Management
   - [CloudCannon](https://cloudcannon.com/): The Cloud CMS for Jekyll
@@ -45,7 +45,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [TinaCMS.io](https://tina.io/): Tina is an open-source, Git-backed headless content management system (CMS) that empowers both developers and content creators to collaborate seamlessly on a single platform
   - [Decap CMS](https://decapcms.org/): Decap CMS (formerly Netlify CMS) is an open source content management system for your Git workflow that enables you to provide editors with a friendly UI and intuitive workflows
   - [Siteleaf](https://www.siteleaf.com/): Built for developers, Loved by everyone
-  - [Kentico Kontent](https://github.com/Kentico/kontent-jekyll): A headless CMS with full control over content presentation
+  - [Kentico Kontent](https://rubygems.org/gems/kontent-jekyll/): A headless CMS with full control over content presentation
 
 ### E-commerce
   - [MemberSpace](https://www.memberspace.com/integrations/jekyll-membership/): Add memberships and paywall functionality to a Jekyll site
