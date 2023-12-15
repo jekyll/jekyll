@@ -81,3 +81,5 @@ Thank you to all our backers! 🙏 [Become a backer](https://opencollective.com/
 ## License
 
 See the [LICENSE](https://github.com/jekyll/jekyll/blob/master/LICENSE) file.
+
+# General
