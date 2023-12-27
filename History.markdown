@@ -71,6 +71,16 @@
   * Add support for upcoming logger 1.4.3 (#9392)
   * Fix typo in devcontainer.json (#9364)
 
+## 4.3.3 / 2023-12-27
+
+### Bug Fixes
+
+  * Backport #9392 for v4.3.x: Fix backward compatibility issues in the Logger (#9510)
+
+### Development Fixes
+
+  * Backport #9237 for v4.3.x: Use Hash explicitly for Struct initializer (#9285)
+
 ## 3.9.3 / 2023-01-29
 
 ### Bug Fixes
