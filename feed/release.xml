@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://jekyllrb.com/feed/release.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2023-12-01T08:52:10-08:00</updated><id>https://jekyllrb.com/feed/release.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites | Release</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 3.9.3 Released</title><link href="https://jekyllrb.com/news/2023/01/29/jekyll-3-9-3-released/" rel="alternate" type="text/html" title="Jekyll 3.9.3 Released" /><published>2023-01-29T18:30:22-08:00</published><updated>2023-01-29T18:30:22-08:00</updated><id>https://jekyllrb.com/news/2023/01/29/jekyll-3-9-3-released</id><content type="html" xml:base="https://jekyllrb.com/news/2023/01/29/jekyll-3-9-3-released/"><![CDATA[<p>Jekyll 3.9.3 is a bug fix release loosening version restrictions for
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://jekyllrb.com/feed/release.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2023-12-27T12:53:12-08:00</updated><id>https://jekyllrb.com/feed/release.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites | Release</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 4.3.3 Released</title><link href="https://jekyllrb.com/news/2023/12/27/jekyll-4-3-3-released/" rel="alternate" type="text/html" title="Jekyll 4.3.3 Released" /><published>2023-12-27T09:15:00-08:00</published><updated>2023-12-27T09:15:00-08:00</updated><id>https://jekyllrb.com/news/2023/12/27/jekyll-4-3-3-released</id><content type="html" xml:base="https://jekyllrb.com/news/2023/12/27/jekyll-4-3-3-released/"><![CDATA[<p>Hello Jekyllers!</p>
+
+<p>This is a very small release containing two things:</p>
+
+<ul>
+  <li>A fix for using Jekyll with Ruby 3.3 and the new <code class="language-plaintext highlighter-rouge">logger</code> gem included with that release.</li>
+  <li>A test fix for newer versions of Ruby for packagers that run the test suite
+ as part of their packaging process.</li>
+</ul>
+
+<p>Nothing new in the way of features for this release. You’ll need to wait for v4.4 for that. 😄</p>
+
+<p>Happy Jekylling!!</p>]]></content><author><name>mattr-</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 3.9.3 Released</title><link href="https://jekyllrb.com/news/2023/01/29/jekyll-3-9-3-released/" rel="alternate" type="text/html" title="Jekyll 3.9.3 Released" /><published>2023-01-29T18:30:22-08:00</published><updated>2023-01-29T18:30:22-08:00</updated><id>https://jekyllrb.com/news/2023/01/29/jekyll-3-9-3-released</id><content type="html" xml:base="https://jekyllrb.com/news/2023/01/29/jekyll-3-9-3-released/"><![CDATA[<p>Jekyll 3.9.3 is a bug fix release loosening version restrictions for
 dependencies <code class="language-plaintext highlighter-rouge">i18n</code> and <code class="language-plaintext highlighter-rouge">tzinfo</code> gems. You can now use Jekyll v3.9 with
 newer versions of these gems!</p>
 
@@ -221,26 +233,4 @@ Adam Alton, Alex Malaszkiewicz, Alexey Pelykh, Brittany Joiner, bytecode1024, Ch
 Corey Megown, Dan Nemenyi, Enrico Tolotto, fauno, Felix Breidenstein, Francesco Bianco, Frank Taillandier,
 Gabriel Staples, iBug, Jacobo Vidal, jaybe@jekyll, jesuslerma, jnozsc, joelkennedy, Joe Marshall, Liam Cooke,
 Lou Rectoret, Malathi, m-naumann, Nicholas Paxford, Nikita Skalkin, Parker Moore, Pratyaksh Gautam, Rachel Cheyfitz,
-SaintMalik, Seeker, Shannon Kularathna, Steven Xu, Takuya N, Thelonius Kort and Toby Glei.</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Greetings Jekyllers! Jekyll v4.2.0 is out!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 3.9.0 Released</title><link href="https://jekyllrb.com/news/2020/08/05/jekyll-3-9-0-released/" rel="alternate" type="text/html" title="Jekyll 3.9.0 Released" /><published>2020-08-05T00:00:00-07:00</published><updated>2020-08-05T00:00:00-07:00</updated><id>https://jekyllrb.com/news/2020/08/05/jekyll-3-9-0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2020/08/05/jekyll-3-9-0-released/"><![CDATA[<p>Jekyll 3.9.0 allows use of kramdown v2, the latest series of kramdown.</p>
-
-<p>If you choose to upgrade, please note that the GitHub-Flavored Markdown
-parser and other features of kramdown v1 are now distributed via
-separate gems. If you would like to continue using these features, you will
-need to add the gems to your <code class="language-plaintext highlighter-rouge">Gemfile</code>. They are as follows:</p>
-
-<ul>
-  <li>GFM parser – <code class="language-plaintext highlighter-rouge">kramdown-parser-gfm</code></li>
-  <li>coderay syntax highlighter – <code class="language-plaintext highlighter-rouge">kramdown-syntax-coderay</code></li>
-  <li>mathjaxnode math engine – <code class="language-plaintext highlighter-rouge">kramdown-math-mathjaxnode</code></li>
-  <li>sskatex math engine – <code class="language-plaintext highlighter-rouge">kramdown-math-sskatex</code></li>
-  <li>katex math engine – <code class="language-plaintext highlighter-rouge">kramdown-math-katex</code></li>
-  <li>ritex math engine – <code class="language-plaintext highlighter-rouge">kramdown-math-ritex</code></li>
-  <li>itex2mml math engine – <code class="language-plaintext highlighter-rouge">kramdown-math-itex2mml</code></li>
-</ul>
-
-<p>Jekyll will require the given gem when the configuration requires it, and
-will show a helpful message when a dependency is missing.</p>
-
-<p>You can check out the patches and see all the details in <a href="/docs/history/#v3-9-0">the release notes</a></p>
-
-<p>Happy Jekylling!</p>]]></content><author><name>parkr</name></author><category term="release" /><summary type="html"><![CDATA[Jekyll 3.9.0 allows use of kramdown v2, the latest series of kramdown.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+SaintMalik, Seeker, Shannon Kularathna, Steven Xu, Takuya N, Thelonius Kort and Toby Glei.</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Greetings Jekyllers! Jekyll v4.2.0 is out!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

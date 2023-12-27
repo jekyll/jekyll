@@ -13,7 +13,7 @@
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Releases | Jekyll • Simple, blog-aware, static sites</title>
-<meta name="generator" content="Jekyll v4.3.2" />
+<meta name="generator" content="Jekyll v4.3.3" />
 <meta property="og:title" content="Releases" />
 <meta name="author" content="all" />
 <meta property="og:locale" content="en_US" />
@@ -63,7 +63,7 @@
 </div>
     <div class="meta hide-on-mobiles">
       <ul>
-        <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.3.2">v4.3.2</a></li>
+        <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.3.3">v4.3.3</a></li>
         <li><a href="https://github.com/jekyll/jekyll">GitHub</a></li>
       </ul>
     </div>
@@ -85,6 +85,7 @@
     <option value="">Navigate the blog…</option>
     <option value="/news/">Home</option>
     <optgroup label="posts">
+      <option value="/news/2023/12/27/jekyll-4-3-3-released/">Jekyll 4.3.3 Released</option>
       <option value="/news/2023/01/29/jekyll-3-9-3-released/">Jekyll 3.9.3 Released</option>
       <option value="/news/2023/01/20/jekyll-4-3-2-released/">Jekyll 4.3.2 Released</option>
       <option value="/news/2022/12/21/jekyll-sass-converter-3.0-released/">Jekyll Sass Converter 3.0 Released</option>
@@ -186,25 +187,49 @@
 </div>
 <div class="unit four-fifths"><article>
   <h2>
-    <a href="/news/2023/01/29/jekyll-3-9-3-released/">Jekyll 3.9.3 Released</a>
+    <a href="/news/2023/12/27/jekyll-4-3-3-released/">Jekyll 4.3.3 Released</a>
   </h2>
   <span class="post-category">
     <span class="label">release</span>
   </span>
   <div class="post-meta">
-    <span class="post-date">29 Jan 2023</span>
-    <a href="https://github.com/parkr" class="post-author">
-      <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+    <span class="post-date">27 Dec 2023</span>
+    <a href="https://github.com/mattr-" class="post-author">
+      <img class="avatar avatar-small" alt="mattr-" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" /><span class="author-name">mattr-</span>
     </a>
   </div>
-  <div class="post-content"><p>Jekyll 3.9.3 is a bug fix release loosening version restrictions for
-dependencies <code class="language-plaintext highlighter-rouge">i18n</code> and <code class="language-plaintext highlighter-rouge">tzinfo</code> gems. You can now use Jekyll v3.9 with
-newer versions of these gems!</p>
+  <div class="post-content"><p>Hello Jekyllers!</p>
 
-<p>More details in <a href="/docs/history/#v3-9-3">the full release notes</a>.</p>
+<p>This is a very small release containing two things:</p>
 
-<p>Happy Jekylling!</p>
+<ul>
+  <li>A fix for using Jekyll with Ruby 3.3 and the new <code class="language-plaintext highlighter-rouge">logger</code> gem included with that release.</li>
+  <li>A test fix for newer versions of Ruby for packagers that run the test suite
+ as part of their packaging process.</li>
+</ul>
+
+<p>Nothing new in the way of features for this release. You’ll need to wait for v4.4 for that. 😄</p>
+
+<p>Happy Jekylling!!</p>
 </div>
+</article>
+<article>
+  <div class="cell-left">
+    <span class="post-category">
+      <span class="label">release</span>
+    </span>
+  </div>
+  <div class="cell-right">
+    <div class="post-meta">
+      <h2 class="post-title">
+        <a href="/news/2023/01/29/jekyll-3-9-3-released/">Jekyll 3.9.3 Released</a>
+      </h2>
+      <span class="post-date">29 Jan 2023</span>
+      <a href="https://github.com/parkr" class="post-author">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      </a>
+    </div>
+  </div>
 </article>
 <article>
   <div class="cell-left">
@@ -1696,6 +1721,9 @@ newer versions of these gems!</p>
     <h4>Recent Releases</h4>
     <ul>
       <li >
+        <a href="/news/2023/12/27/jekyll-4-3-3-released/">Version 4.3.3</a>
+      </li>
+      <li >
         <a href="/news/2023/01/29/jekyll-3-9-3-released/">Version 3.9.3</a>
       </li>
       <li >
@@ -1706,9 +1734,6 @@ newer versions of these gems!</p>
       </li>
       <li >
         <a href="/news/2022/10/20/jekyll-4-3-0-released/">Version 4.3.0</a>
-      </li>
-      <li >
-        <a href="/news/2022/03/27/jekyll-3-9-2-released/">Version 3.9.2</a>
       </li>
       <li>
         <a href="/docs/history/">History »</a>

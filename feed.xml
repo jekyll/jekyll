@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2023-12-01T08:52:10-08:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 3.9.3 Released</title><link href="https://jekyllrb.com/news/2023/01/29/jekyll-3-9-3-released/" rel="alternate" type="text/html" title="Jekyll 3.9.3 Released" /><published>2023-01-29T18:30:22-08:00</published><updated>2023-01-29T18:30:22-08:00</updated><id>https://jekyllrb.com/news/2023/01/29/jekyll-3-9-3-released</id><content type="html" xml:base="https://jekyllrb.com/news/2023/01/29/jekyll-3-9-3-released/"><![CDATA[<p>Jekyll 3.9.3 is a bug fix release loosening version restrictions for
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2023-12-27T12:53:12-08:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 4.3.3 Released</title><link href="https://jekyllrb.com/news/2023/12/27/jekyll-4-3-3-released/" rel="alternate" type="text/html" title="Jekyll 4.3.3 Released" /><published>2023-12-27T09:15:00-08:00</published><updated>2023-12-27T09:15:00-08:00</updated><id>https://jekyllrb.com/news/2023/12/27/jekyll-4-3-3-released</id><content type="html" xml:base="https://jekyllrb.com/news/2023/12/27/jekyll-4-3-3-released/"><![CDATA[<p>Hello Jekyllers!</p>
+
+<p>This is a very small release containing two things:</p>
+
+<ul>
+  <li>A fix for using Jekyll with Ruby 3.3 and the new <code class="language-plaintext highlighter-rouge">logger</code> gem included with that release.</li>
+  <li>A test fix for newer versions of Ruby for packagers that run the test suite
+ as part of their packaging process.</li>
+</ul>
+
+<p>Nothing new in the way of features for this release. You’ll need to wait for v4.4 for that. 😄</p>
+
+<p>Happy Jekylling!!</p>]]></content><author><name>mattr-</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 3.9.3 Released</title><link href="https://jekyllrb.com/news/2023/01/29/jekyll-3-9-3-released/" rel="alternate" type="text/html" title="Jekyll 3.9.3 Released" /><published>2023-01-29T18:30:22-08:00</published><updated>2023-01-29T18:30:22-08:00</updated><id>https://jekyllrb.com/news/2023/01/29/jekyll-3-9-3-released</id><content type="html" xml:base="https://jekyllrb.com/news/2023/01/29/jekyll-3-9-3-released/"><![CDATA[<p>Jekyll 3.9.3 is a bug fix release loosening version restrictions for
 dependencies <code class="language-plaintext highlighter-rouge">i18n</code> and <code class="language-plaintext highlighter-rouge">tzinfo</code> gems. You can now use Jekyll v3.9 with
 newer versions of these gems!</p>
 
@@ -262,22 +274,4 @@ from the community or discuss concerns regarding the future of Jekyll at length.
 
 <p>Having untimely left Jekyll and our community with an unfillable void, he will be missed immensely. :broken_heart:</p>
 
-<p>Rest in Peace, friend and colleague. :bouquet:</p>]]></content><author><name>ashmaroli</name></author><category term="team" /><category term="community" /><summary type="html"><![CDATA[Over the weekend, the Jekyll core team learned of the passing of one of our own: Frank Taillandier, popularly known by his GitHub username @DirtyF.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 3.9.1 Released</title><link href="https://jekyllrb.com/news/2021/04/08/jekyll-3-9-1-released/" rel="alternate" type="text/html" title="Jekyll 3.9.1 Released" /><published>2021-04-08T07:51:12-07:00</published><updated>2021-04-08T07:51:12-07:00</updated><id>https://jekyllrb.com/news/2021/04/08/jekyll-3-9-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2021/04/08/jekyll-3-9-1-released/"><![CDATA[<p>This patch release of the 3.9 series is released to fix a bug where the
-<code class="language-plaintext highlighter-rouge">include</code> tag does not allow valid filename characters. For example, this
-would previously fail:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% include my-logo@2x.svg %}
-</code></pre></div></div>
-
-<p>This release adds support for the following characters in filenames:</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">@</code></li>
-  <li><code class="language-plaintext highlighter-rouge">-</code></li>
-  <li><code class="language-plaintext highlighter-rouge">(</code> and <code class="language-plaintext highlighter-rouge">)</code></li>
-  <li><code class="language-plaintext highlighter-rouge">+</code></li>
-  <li><code class="language-plaintext highlighter-rouge">~</code></li>
-  <li><code class="language-plaintext highlighter-rouge">#</code></li>
-</ul>
-
-<p>Happy Jekylling!</p>]]></content><author><name>parkr</name></author><category term="release" /><summary type="html"><![CDATA[This patch release of the 3.9 series is released to fix a bug where the include tag does not allow valid filename characters. For example, this would previously fail:]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<p>Rest in Peace, friend and colleague. :bouquet:</p>]]></content><author><name>ashmaroli</name></author><category term="team" /><category term="community" /><summary type="html"><![CDATA[Over the weekend, the Jekyll core team learned of the passing of one of our own: Frank Taillandier, popularly known by his GitHub username @DirtyF.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
