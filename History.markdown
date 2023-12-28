@@ -82,6 +82,12 @@
 
   * Backport #9237 for v4.3.x: Use Hash explicitly for Struct initializer (#9285)
 
+## 3.9.4 / 2023-12-28
+
+### Bug Fixes
+
+  * Backport #9392 for v3.9.x: Add support for Ruby 3.3 Logger (#9513)
+
 ## 3.9.3 / 2023-01-29
 
 ### Bug Fixes
