@@ -28,6 +28,8 @@ jobs:
             ruby_version: "3.1"
           - label: Ruby 3.2
             ruby_version: "3.2"
+          - label: Ruby 3.3
+            ruby_version: "3.3"
           - label: JRuby 9.2.20.1
             ruby_version: "jruby-9.2.20.1"
     steps:
