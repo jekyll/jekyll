@@ -49,7 +49,7 @@ module Jekyll
 
       %w(safe lsi highlighter baseurl exclude include future unpublished
          show_drafts limit_posts keep_files).each do |opt|
-        send("#{opt}=", config[opt])
+        send(:"#{opt}=", config[opt])
       end
 
       # keep using `gems` to avoid breaking change
