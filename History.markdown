@@ -60,6 +60,7 @@
   * Bump Rubocop to 1.56.4 (#9459)
   * Configure dependabot to handle rubygems dependencies (#9445)
   * Update rubocop gem (#9476)
+  * Fix Performance/StringIdentifierArgument violation in site.rb and allow activesupport 6 for windows tests (#9512)
 
 ### Bug Fixes
 
