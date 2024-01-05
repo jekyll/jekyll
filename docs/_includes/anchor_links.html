@@ -1,5 +1,5 @@
 <script>
-// Creates an anchor element with the given ID and link for the permalink
+/* Creates an anchor element with the given ID and link for the permalink*/
 const anchorForId = (id) => {
   const anchor = document.createElement("a");
   anchor.className = "header-link";
@@ -9,11 +9,11 @@ const anchorForId = (id) => {
   return anchor;
 };
 
-// Finds all headers of the specified level within the given element, and adds a permalink to each header
+/* Finds all headers of the specified level within the given element, and adds a permalink to each header*/
 const linkifyAnchors = (level, containingElement) => {
-  // Retrieve all headers with the specified level as an Array
+  /* Retrieve all headers with the specified level as an Array*/
   const headers = Array.from(containingElement.getElementsByTagName(`h${level}`));
-  // For each header with an ID, add a permalink
+  /* For each header with an ID, add a permalink*/
   headers.forEach((header) => {
     if (header.id) {
       header.appendChild(anchorForId(header.id));
@@ -21,15 +21,15 @@ const linkifyAnchors = (level, containingElement) => {
   });
 };
 
-// Executes the function when the document is ready
+/* Executes the function when the document is ready */
 document.onreadystatechange = () => {
   if (document.readyState === "complete") {
-    // Find the first element with the class "docs" or "news"
+    /* Find the first element with the class "docs" or "news" */
     const contentBlock = document.getElementsByClassName("docs")[0]
       ?? document.getElementsByClassName("news")[0];
-    // If there is no content block, exit the function
+    /* If there is no content block, exit the function */
     if (!contentBlock) { return; }
-    // For each level of headers, add a permalink to each header
+    /* For each level of headers, add a permalink to each header */
     for (let level = 1; level <= 6; level++) {
       linkifyAnchors(level, contentBlock);
     }
