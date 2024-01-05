@@ -36,6 +36,7 @@
   * Fix broken link for the security team page (#9497)
   * Fix broken links for several Jekyll integrations (#9496)
   * Add release post for v4.3.3 (#9511)
+  * Add docs version badge to page_excerpts feature (#9520)
 
 ### Development Fixes
 
