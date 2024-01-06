@@ -11,9 +11,7 @@ const anchorForId = (id) => {
 
 /* Finds all headers of the specified level within the given element, and adds a permalink to each header*/
 const linkifyAnchors = (level, containingElement) => {
-  /* Retrieve all headers with the specified level as an Array*/
   const headers = Array.from(containingElement.getElementsByTagName(`h${level}`));
-  /* For each header with an ID, add a permalink*/
   headers.forEach((header) => {
     if (header.id) {
       header.appendChild(anchorForId(header.id));
