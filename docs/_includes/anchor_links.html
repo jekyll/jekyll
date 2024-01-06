@@ -22,12 +22,9 @@ const linkifyAnchors = (level, containingElement) => {
 /* Executes the function when the document is ready */
 document.onreadystatechange = () => {
   if (document.readyState === "complete") {
-    /* Find the first element with the class "docs" or "news" */
     const contentBlock = document.getElementsByClassName("docs")[0]
       ?? document.getElementsByClassName("news")[0];
-    /* If there is no content block, exit the function */
     if (!contentBlock) { return; }
-    /* For each level of headers, add a permalink to each header */
     for (let level = 1; level <= 6; level++) {
       linkifyAnchors(level, contentBlock);
     }
