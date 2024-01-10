@@ -32,6 +32,8 @@ Gem::Specification.new do |s|
   s.required_ruby_version     = ">= 2.5.0"
   s.required_rubygems_version = ">= 2.7.0"
 
+  s.add_dependency("csv",                           "~> 3.0")
+
   s.add_runtime_dependency("addressable",           "~> 2.4")
   s.add_runtime_dependency("colorator",             "~> 1.0")
   s.add_runtime_dependency("em-websocket",          "~> 0.5")
