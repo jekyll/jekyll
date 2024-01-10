@@ -30,6 +30,14 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.extra_rdoc_files = %w(README.markdown LICENSE)
 
+<<<<<<< HEAD
+=======
+  s.required_ruby_version     = ">= 2.5.0"
+  s.required_rubygems_version = ">= 2.7.0"
+
+  s.add_dependency("csv",                           "~> 3.0")
+
+>>>>>>> 25fd87c3e (add csv to runtime dependency list (#9522))
   s.add_runtime_dependency("addressable",           "~> 2.4")
   s.add_runtime_dependency("colorator",             "~> 1.0")
   s.add_runtime_dependency("em-websocket",          "~> 0.5")
