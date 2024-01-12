@@ -82,7 +82,7 @@ First, read the [upgrade guide](/docs/upgrading/3-to-4/)!
 Next, Edit your project's `Gemfile` to test Jekyll v4.x:
 
 ```ruby
-gem "jekyll", "~> 4.0"
+gem 'jekyll', '~> 4.0'
 ```
 
 Then run `bundle update` to update all dependencies. Unless you're using

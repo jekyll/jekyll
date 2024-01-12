@@ -68,12 +68,12 @@ in a `jekyll_plugins` group they'll automatically be required into Jekyll:
 ```ruby
 source 'https://rubygems.org'
 
-gem 'jekyll'
+gem "jekyll"
 
 group :jekyll_plugins do
-  gem 'jekyll-sitemap'
-  gem 'jekyll-feed'
-  gem 'jekyll-seo-tag'
+  gem "jekyll-sitemap"
+  gem "jekyll-feed"
+  gem "jekyll-seo-tag"
 end
 ```
 
