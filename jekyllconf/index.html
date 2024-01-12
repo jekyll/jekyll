@@ -1,5 +1,5 @@
-<!DOCTYPE HTML>
-<html lang="en-US">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -57,8 +57,7 @@
   </ul>
 </nav>
     <div class="search hide-on-mobiles">
-      <input type="text" id="docsearch-input" placeholder="Search the docs…">
-</div>
+      <input type="text" id="docsearch-input" placeholder="Search the docs…" aria-label="Search"></div>
     <div class="meta hide-on-mobiles">
       <ul>
         <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.3.3">v4.3.3</a></li>
@@ -72,9 +71,8 @@
     <li><a href="/docs/">Docs</a></li>
     <li><a href="/resources/">Resources</a></li>
     <li><a href="/news/">News</a></li>
-    <li><a href="https://github.com/jekyll/jekyll">GitHub</a></li>
-</ul>
-</nav>
+    <li><a href="https://github.com/jekyll/jekyll" target="_blank" rel="noopener">GitHub</a></li>
+</ul></nav>
 </header>
 <section class="standalone">
   <div class="grid">
@@ -84,9 +82,9 @@
 
 <h2 id="featured">Featured</h2>
 
-<p><strong>Continuous deployment of Jekyll sites powered by Docker</strong> - <a href="https://twitter.com/davidvlsea"><em>David Von Lehman</em></a></p>
+<p><strong>GitHub Pages behind the scenes</strong> - <a href="https://twitter.com/BenBalter"><em>Ben Balter</em></a></p>
 <div class="videoWrapper">
-    <iframe width="420" height="315" src="https://www.youtube.com/embed/wMlPlKCZfEk" frameborder="0" allowfullscreen=""></iframe>
+    <iframe width="420" height="315" src="https://www.youtube.com/embed/Z-37y1qaoxc" frameborder="0" allowfullscreen=""></iframe>
 </div>
 
 <h2 id="2019">2019</h2>
@@ -240,37 +238,37 @@
   </div>
 </footer>
 <script>
-  var anchorForId = function (id) {
-    var anchor = document.createElement("a");
-    anchor.className = "header-link";
-    anchor.href      = "#" + id;
-    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
-    anchor.title = "Permalink";
-    return anchor;
-  };
+/* Creates an anchor element with the given ID and link for the permalink*/
+const anchorForId = (id) => {
+  const anchor = document.createElement("a");
+  anchor.className = "header-link";
+  anchor.href = `#${id}`;
+  anchor.innerHTML = `<span class="sr-only">Permalink</span><i class="fa fa-link" aria-hidden="true"></i>`;
+  anchor.title = "Permalink";
+  return anchor;
+};
 
-  var linkifyAnchors = function (level, containingElement) {
-    var headers = containingElement.getElementsByTagName("h" + level);
-    for (var h = 0; h < headers.length; h++) {
-      var header = headers[h];
-
-      if (typeof header.id !== "undefined" && header.id !== "") {
-        header.appendChild(anchorForId(header.id));
-      }
+/* Finds all headers of the specified level within the given element, and adds a permalink to each header*/
+const linkifyAnchors = (level, containingElement) => {
+  const headers = Array.from(containingElement.getElementsByTagName(`h${level}`));
+  headers.forEach((header) => {
+    if (header.id) {
+      header.appendChild(anchorForId(header.id));
     }
-  };
+  });
+};
 
-  document.onreadystatechange = function () {
-    if (this.readyState === "complete") {
-      var contentBlock = document.getElementsByClassName("docs")[0] || document.getElementsByClassName("news")[0];
-      if (!contentBlock) {
-        return;
-      }
-      for (var level = 1; level <= 6; level++) {
-        linkifyAnchors(level, contentBlock);
-      }
+/* Executes the function when the document is ready */
+document.onreadystatechange = () => {
+  if (document.readyState === "complete") {
+    const contentBlock = document.getElementsByClassName("docs")[0]
+      ?? document.getElementsByClassName("news")[0];
+    if (!contentBlock) { return; }
+    for (let level = 1; level <= 6; level++) {
+      linkifyAnchors(level, contentBlock);
     }
-  };
+  }
+};
 </script>
 <!-- Google Analytics (https://www.google.com/analytics) -->
   <script>
@@ -282,14 +280,20 @@
     ga('create', 'UA-50755011-1', 'jekyllrb.com');
     ga('send', 'pageview');
   </script>
-<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js" defer></script>
 <script> docsearch({
 apiKey: '50fe39c839958dfad797000f33e2ec17',
 indexName: 'jekyllrb',
 inputSelector: '#docsearch-input',
 enhancedSearchInput: true,
-debug: false // Set debug to true if you want to inspect the dropdown
+debug: false
 });
 </script>
+<script>
+  const navigateToUrl = (select) => {
+    const url = select.value;
+    url && (window.location.href = url);
+  };
+  </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
-<!DOCTYPE HTML>
-<html lang="en-US">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-01-10T09:00:46-08:00" />
+<meta property="article:published_time" content="2024-01-12T08:57:51-08:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Tutorials" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-01-10T09:00:46-08:00","datePublished":"2024-01-10T09:00:46-08:00","description":"In contrast to Docs, Tutorials provide more detailed, narrative instruction that cover a variety of Jekyll topics and scenarios. Tutorials might contain the following:","headline":"Tutorials","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/tutorials/home/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/tutorials/home/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-01-12T08:57:51-08:00","datePublished":"2024-01-12T08:57:51-08:00","description":"In contrast to Docs, Tutorials provide more detailed, narrative instruction that cover a variety of Jekyll topics and scenarios. Tutorials might contain the following:","headline":"Tutorials","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/tutorials/home/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/tutorials/home/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -58,8 +58,7 @@
   </ul>
 </nav>
     <div class="search hide-on-mobiles">
-      <input type="text" id="docsearch-input" placeholder="Search the docs…">
-</div>
+      <input type="text" id="docsearch-input" placeholder="Search the docs…" aria-label="Search"></div>
     <div class="meta hide-on-mobiles">
       <ul>
         <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.3.3">v4.3.3</a></li>
@@ -73,27 +72,25 @@
     <li><a href="/docs/">Docs</a></li>
     <li><a href="/resources/">Resources</a></li>
     <li><a href="/news/">News</a></li>
-    <li><a href="https://github.com/jekyll/jekyll">GitHub</a></li>
-</ul>
-</nav>
+    <li><a href="https://github.com/jekyll/jekyll" target="_blank" rel="noopener">GitHub</a></li>
+</ul></nav>
 </header>
 <section class="docs">
   <div class="grid"><div class="docs-nav-mobile unit whole show-on-mobiles">
-  <select onchange="if (this.value) window.location.href=this.value">
+  <select id="tutorial-nav" onchange="navigateToUrl(this)" aria-label="Select a tutorial">
     <option value="">Navigate the tutorials…</option>
     <optgroup label="Tutorials">
-      <option value="/tutorials/home/">Tutorials</option>
-      <option value="/tutorials/video-walkthroughs/">Video Walkthroughs</option>
-      <option value="/tutorials/navigation/">Navigation</option>
-      <option value="/tutorials/orderofinterpretation/">Order of interpretation</option>
-      <option value="/tutorials/custom-404-page/">Custom 404 Page</option>
-      <option value="/tutorials/convert-site-to-jekyll/">Convert an HTML site to Jekyll</option>
-      <option value="/tutorials/using-jekyll-with-bundler/">Using Jekyll with Bundler</option>
-      <option value="/tutorials/csv-to-table/">Tabulate CSV Data</option>
-      </optgroup>
+        <option value="/tutorials/home/">Tutorials</option>
+        <option value="/tutorials/video-walkthroughs/">Video Walkthroughs</option>
+        <option value="/tutorials/navigation/">Navigation</option>
+        <option value="/tutorials/orderofinterpretation/">Order of interpretation</option>
+        <option value="/tutorials/custom-404-page/">Custom 404 Page</option>
+        <option value="/tutorials/convert-site-to-jekyll/">Convert an HTML site to Jekyll</option>
+        <option value="/tutorials/using-jekyll-with-bundler/">Using Jekyll with Bundler</option>
+        <option value="/tutorials/csv-to-table/">Tabulate CSV Data</option>
+        </optgroup>
     </select>
-</div>
-<div class="unit four-fifths">
+</div><div class="unit four-fifths">
       <article>
         <header class="tutorial-header">
           <div class="improve right hide-on-mobiles">
@@ -186,37 +183,37 @@
   </div>
 </footer>
 <script>
-  var anchorForId = function (id) {
-    var anchor = document.createElement("a");
-    anchor.className = "header-link";
-    anchor.href      = "#" + id;
-    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
-    anchor.title = "Permalink";
-    return anchor;
-  };
+/* Creates an anchor element with the given ID and link for the permalink*/
+const anchorForId = (id) => {
+  const anchor = document.createElement("a");
+  anchor.className = "header-link";
+  anchor.href = `#${id}`;
+  anchor.innerHTML = `<span class="sr-only">Permalink</span><i class="fa fa-link" aria-hidden="true"></i>`;
+  anchor.title = "Permalink";
+  return anchor;
+};
 
-  var linkifyAnchors = function (level, containingElement) {
-    var headers = containingElement.getElementsByTagName("h" + level);
-    for (var h = 0; h < headers.length; h++) {
-      var header = headers[h];
-
-      if (typeof header.id !== "undefined" && header.id !== "") {
-        header.appendChild(anchorForId(header.id));
-      }
+/* Finds all headers of the specified level within the given element, and adds a permalink to each header*/
+const linkifyAnchors = (level, containingElement) => {
+  const headers = Array.from(containingElement.getElementsByTagName(`h${level}`));
+  headers.forEach((header) => {
+    if (header.id) {
+      header.appendChild(anchorForId(header.id));
     }
-  };
+  });
+};
 
-  document.onreadystatechange = function () {
-    if (this.readyState === "complete") {
-      var contentBlock = document.getElementsByClassName("docs")[0] || document.getElementsByClassName("news")[0];
-      if (!contentBlock) {
-        return;
-      }
-      for (var level = 1; level <= 6; level++) {
-        linkifyAnchors(level, contentBlock);
-      }
+/* Executes the function when the document is ready */
+document.onreadystatechange = () => {
+  if (document.readyState === "complete") {
+    const contentBlock = document.getElementsByClassName("docs")[0]
+      ?? document.getElementsByClassName("news")[0];
+    if (!contentBlock) { return; }
+    for (let level = 1; level <= 6; level++) {
+      linkifyAnchors(level, contentBlock);
     }
-  };
+  }
+};
 </script>
 <!-- Google Analytics (https://www.google.com/analytics) -->
   <script>
@@ -228,14 +225,20 @@
     ga('create', 'UA-50755011-1', 'jekyllrb.com');
     ga('send', 'pageview');
   </script>
-<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js" defer></script>
 <script> docsearch({
 apiKey: '50fe39c839958dfad797000f33e2ec17',
 indexName: 'jekyllrb',
 inputSelector: '#docsearch-input',
 enhancedSearchInput: true,
-debug: false // Set debug to true if you want to inspect the dropdown
+debug: false
 });
 </script>
+<script>
+  const navigateToUrl = (select) => {
+    const url = select.value;
+    url && (window.location.href = url);
+  };
+  </script>
 </body>
 </html>

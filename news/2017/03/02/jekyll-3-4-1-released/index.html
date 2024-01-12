@@ -1,5 +1,5 @@
-<!DOCTYPE HTML>
-<html lang="en-US">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -60,7 +60,7 @@
   </ul>
 </nav>
     <div class="search hide-on-mobiles">
-      <input type="text" id="docsearch-input" placeholder="Search the docs…">
+      <input type="text" id="docsearch-input" placeholder="Search the docs…" aria-label="Search">
 </div>
     <div class="meta hide-on-mobiles">
       <ul>
@@ -74,15 +74,14 @@
   <li><a href="/">Home</a></li>
     <li><a href="/docs/">Docs</a></li>
     <li><a href="/resources/">Resources</a></li>
-    <li class="current"><a href="/news/">News</a></li>
-    <li><a href="https://github.com/jekyll/jekyll">GitHub</a></li>
-</ul>
-</nav>
+    <li class="current" aria-current="page"><a href="/news/">News</a></li>
+    <li><a href="https://github.com/jekyll/jekyll" target="_blank" rel="noopener">GitHub</a></li>
+</ul></nav>
 </header>
 <section class="news">
   <div class="grid">
     <div class="docs-nav-mobile unit whole show-on-mobiles">
-  <select onchange="if (this.value) window.location.href=this.value">
+  <select id="news-nav" onchange="navigateToUrl(this)" aria-label="Select a post from the blog">
     <option value="">Navigate the blog…</option>
     <option value="/news/">Home</option>
     <optgroup label="posts">
@@ -188,8 +187,8 @@
   </select>
 </div>
 <div class="unit four-fifths">
-<article>
-  <h2>
+<article itemscope itemtype="http://schema.org/Article">
+  <h2 itemprop="headline">
     Jekyll 3.4.1, or "Unintended Consequences"
     <a href="/news/2017/03/02/jekyll-3-4-1-released/" class="header-link" title="Permalink">
       <span class="sr-only">Permalink</span>
@@ -200,12 +199,12 @@
     <span class="label">release</span>
   </span>
   <div class="post-meta">
-    <span class="post-date">02 Mar 2017</span>
-    <a href="https://github.com/parkr" class="post-author">
-      <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x"><span class="author-name">parkr</span>
+    <span class="post-date" itemprop="datePublished" content="2017-03-02">02 Mar 2017</span>
+    <a class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person" target="_blank" href="https://github.com/parkr">
+      <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&amp;s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&amp;s=96 4x"><span class="author-name" itemprop="name">parkr</span>
     </a>
   </div>
-  <div class="post-content">
+  <div class="post-content" itemprop="articleBody">
     <p>Conformity is a confounding thing.</p>
 
 <p>We write tests to ensure that a piece of functionality that works today
@@ -406,37 +405,37 @@ unintended any longer.</p>
   </div>
 </footer>
 <script>
-  var anchorForId = function (id) {
-    var anchor = document.createElement("a");
-    anchor.className = "header-link";
-    anchor.href      = "#" + id;
-    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
-    anchor.title = "Permalink";
-    return anchor;
-  };
+/* Creates an anchor element with the given ID and link for the permalink*/
+const anchorForId = (id) => {
+  const anchor = document.createElement("a");
+  anchor.className = "header-link";
+  anchor.href = `#${id}`;
+  anchor.innerHTML = `<span class="sr-only">Permalink</span><i class="fa fa-link" aria-hidden="true"></i>`;
+  anchor.title = "Permalink";
+  return anchor;
+};
 
-  var linkifyAnchors = function (level, containingElement) {
-    var headers = containingElement.getElementsByTagName("h" + level);
-    for (var h = 0; h < headers.length; h++) {
-      var header = headers[h];
-
-      if (typeof header.id !== "undefined" && header.id !== "") {
-        header.appendChild(anchorForId(header.id));
-      }
+/* Finds all headers of the specified level within the given element, and adds a permalink to each header*/
+const linkifyAnchors = (level, containingElement) => {
+  const headers = Array.from(containingElement.getElementsByTagName(`h${level}`));
+  headers.forEach((header) => {
+    if (header.id) {
+      header.appendChild(anchorForId(header.id));
     }
-  };
+  });
+};
 
-  document.onreadystatechange = function () {
-    if (this.readyState === "complete") {
-      var contentBlock = document.getElementsByClassName("docs")[0] || document.getElementsByClassName("news")[0];
-      if (!contentBlock) {
-        return;
-      }
-      for (var level = 1; level <= 6; level++) {
-        linkifyAnchors(level, contentBlock);
-      }
+/* Executes the function when the document is ready */
+document.onreadystatechange = () => {
+  if (document.readyState === "complete") {
+    const contentBlock = document.getElementsByClassName("docs")[0]
+      ?? document.getElementsByClassName("news")[0];
+    if (!contentBlock) { return; }
+    for (let level = 1; level <= 6; level++) {
+      linkifyAnchors(level, contentBlock);
     }
-  };
+  }
+};
 </script>
 <!-- Google Analytics (https://www.google.com/analytics) -->
   <script>
@@ -448,14 +447,20 @@ unintended any longer.</p>
     ga('create', 'UA-50755011-1', 'jekyllrb.com');
     ga('send', 'pageview');
   </script>
-<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js" defer></script>
 <script> docsearch({
 apiKey: '50fe39c839958dfad797000f33e2ec17',
 indexName: 'jekyllrb',
 inputSelector: '#docsearch-input',
 enhancedSearchInput: true,
-debug: false // Set debug to true if you want to inspect the dropdown
+debug: false
 });
 </script>
+<script>
+  const navigateToUrl = (select) => {
+    const url = select.value;
+    url && (window.location.href = url);
+  };
+  </script>
 </body>
 </html>

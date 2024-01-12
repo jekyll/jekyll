@@ -1,5 +1,5 @@
-<!DOCTYPE HTML>
-<html lang="en-US">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -59,8 +59,7 @@
   </ul>
 </nav>
     <div class="search hide-on-mobiles">
-      <input type="text" id="docsearch-input" placeholder="Search the docs…">
-</div>
+      <input type="text" id="docsearch-input" placeholder="Search the docs…" aria-label="Search"></div>
     <div class="meta hide-on-mobiles">
       <ul>
         <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.3.3">v4.3.3</a></li>
@@ -73,15 +72,14 @@
   <li><a href="/">Home</a></li>
     <li><a href="/docs/">Docs</a></li>
     <li><a href="/resources/">Resources</a></li>
-    <li class="current" ><a href="/news/">News</a></li>
-    <li><a href="https://github.com/jekyll/jekyll">GitHub</a></li>
-</ul>
-</nav>
+    <li class="current" aria-current="page" ><a href="/news/">News</a></li>
+    <li><a href="https://github.com/jekyll/jekyll" target="_blank" rel="noopener">GitHub</a></li>
+</ul></nav>
 </header>
 <section class="news">
   <div class="grid">
     <div class="docs-nav-mobile unit whole show-on-mobiles">
-  <select onchange="if (this.value) window.location.href=this.value">
+  <select id="news-nav" onchange="navigateToUrl(this)" aria-label="Select a post from the blog">
     <option value="">Navigate the blog…</option>
     <option value="/news/">Home</option>
     <optgroup label="posts">
@@ -185,21 +183,20 @@
       <option value="/news/2013/05/05/jekyll-1-0-0-released/">Jekyll 1.0.0 Released</option>
       </optgroup>
   </select>
-</div>
-<div class="unit four-fifths"><article>
-  <h2>
+</div><div class="unit four-fifths"><article itemscope itemtype="http://schema.org/NewsArticle">
+  <h2 itemprop="headline">
     <a href="/news/2023/12/28/jekyll-3-9-4-released/">Jekyll 3.9.4 Released</a>
   </h2>
   <span class="post-category">
     <span class="label">release</span>
   </span>
   <div class="post-meta">
-    <span class="post-date">28 Dec 2023</span>
-    <a href="https://github.com/parkr" class="post-author">
-      <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+    <span class="post-date" itemprop="datePublished" content="2023-12-28">28 Dec 2023</span>
+    <a class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person" target="_blank" href="https://github.com/parkr">
+      <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
     </a>
   </div>
-  <div class="post-content"><p>Hey Jekyllers!</p>
+  <div class="post-content" itemprop="articleBody"><p>Hey Jekyllers!</p>
 
 <p>This release, 3.9.4, is to bring Ruby 3.3 support to Jekyll. You can find
 the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
@@ -207,7 +204,7 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
 <p>Happy Jekylling!</p>
 </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -215,17 +212,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2023/12/27/jekyll-4-3-3-released/">Jekyll 4.3.3 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2023/12/27/jekyll-4-3-3-released/" itemprop="url">Jekyll 4.3.3 Released</a>
       </h2>
-      <span class="post-date">27 Dec 2023</span>
-      <a href="https://github.com/mattr-" class="post-author">
-        <img class="avatar avatar-small" alt="mattr-" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" /><span class="author-name">mattr-</span>
+      <span class="post-date" itemprop="datePublished" content="2023-12-27">27 Dec 2023</span>
+      <a href="https://github.com/mattr-" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="mattr-" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" /><span class="author-name" itemprop="name">mattr-</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -233,17 +230,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2023/01/29/jekyll-3-9-3-released/">Jekyll 3.9.3 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2023/01/29/jekyll-3-9-3-released/" itemprop="url">Jekyll 3.9.3 Released</a>
       </h2>
-      <span class="post-date">29 Jan 2023</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2023-01-29">29 Jan 2023</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -251,17 +248,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2023/01/20/jekyll-4-3-2-released/">Jekyll 4.3.2 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2023/01/20/jekyll-4-3-2-released/" itemprop="url">Jekyll 4.3.2 Released</a>
       </h2>
-      <span class="post-date">20 Jan 2023</span>
-      <a href="https://github.com/ashmaroli" class="post-author">
-        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name">ashmaroli</span>
+      <span class="post-date" itemprop="datePublished" content="2023-01-20">20 Jan 2023</span>
+      <a href="https://github.com/ashmaroli" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name" itemprop="name">ashmaroli</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -269,17 +266,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2022/10/26/jekyll-4-3-1-released/">Jekyll 4.3.1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2022/10/26/jekyll-4-3-1-released/" itemprop="url">Jekyll 4.3.1 Released</a>
       </h2>
-      <span class="post-date">26 Oct 2022</span>
-      <a href="https://github.com/ashmaroli" class="post-author">
-        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name">ashmaroli</span>
+      <span class="post-date" itemprop="datePublished" content="2022-10-26">26 Oct 2022</span>
+      <a href="https://github.com/ashmaroli" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name" itemprop="name">ashmaroli</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -287,17 +284,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2022/10/20/jekyll-4-3-0-released/">Jekyll 4.3.0 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2022/10/20/jekyll-4-3-0-released/" itemprop="url">Jekyll 4.3.0 Released</a>
       </h2>
-      <span class="post-date">20 Oct 2022</span>
-      <a href="https://github.com/ashmaroli" class="post-author">
-        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name">ashmaroli</span>
+      <span class="post-date" itemprop="datePublished" content="2022-10-20">20 Oct 2022</span>
+      <a href="https://github.com/ashmaroli" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name" itemprop="name">ashmaroli</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -305,17 +302,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2022/03/27/jekyll-3-9-2-released/">Jekyll 3.9.2 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2022/03/27/jekyll-3-9-2-released/" itemprop="url">Jekyll 3.9.2 Released</a>
       </h2>
-      <span class="post-date">27 Mar 2022</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2022-03-27">27 Mar 2022</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -323,17 +320,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2022/03/03/jekyll-4-2-2-released/">Jekyll 4.2.2 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2022/03/03/jekyll-4-2-2-released/" itemprop="url">Jekyll 4.2.2 Released</a>
       </h2>
-      <span class="post-date">03 Mar 2022</span>
-      <a href="https://github.com/ashmaroli" class="post-author">
-        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name">ashmaroli</span>
+      <span class="post-date" itemprop="datePublished" content="2022-03-03">03 Mar 2022</span>
+      <a href="https://github.com/ashmaroli" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name" itemprop="name">ashmaroli</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -341,17 +338,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2021/09/27/jekyll-4-2-1-released/">Jekyll 4.2.1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2021/09/27/jekyll-4-2-1-released/" itemprop="url">Jekyll 4.2.1 Released</a>
       </h2>
-      <span class="post-date">27 Sep 2021</span>
-      <a href="https://github.com/ashmaroli" class="post-author">
-        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name">ashmaroli</span>
+      <span class="post-date" itemprop="datePublished" content="2021-09-27">27 Sep 2021</span>
+      <a href="https://github.com/ashmaroli" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name" itemprop="name">ashmaroli</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -359,17 +356,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2021/04/08/jekyll-3-9-1-released/">Jekyll 3.9.1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2021/04/08/jekyll-3-9-1-released/" itemprop="url">Jekyll 3.9.1 Released</a>
       </h2>
-      <span class="post-date">08 Apr 2021</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2021-04-08">08 Apr 2021</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -377,17 +374,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2020/12/14/jekyll-4-2-0-released/">Jekyll 4.2.0 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2020/12/14/jekyll-4-2-0-released/" itemprop="url">Jekyll 4.2.0 Released</a>
       </h2>
-      <span class="post-date">14 Dec 2020</span>
-      <a href="https://github.com/ashmaroli" class="post-author">
-        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name">ashmaroli</span>
+      <span class="post-date" itemprop="datePublished" content="2020-12-14">14 Dec 2020</span>
+      <a href="https://github.com/ashmaroli" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name" itemprop="name">ashmaroli</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -395,17 +392,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2020/08/05/jekyll-3-9-0-released/">Jekyll 3.9.0 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2020/08/05/jekyll-3-9-0-released/" itemprop="url">Jekyll 3.9.0 Released</a>
       </h2>
-      <span class="post-date">05 Aug 2020</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2020-08-05">05 Aug 2020</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -413,17 +410,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2020/06/24/jekyll-4-1-1-released/">Jekyll 4.1.1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2020/06/24/jekyll-4-1-1-released/" itemprop="url">Jekyll 4.1.1 Released</a>
       </h2>
-      <span class="post-date">24 Jun 2020</span>
-      <a href="https://github.com/ashmaroli" class="post-author">
-        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name">ashmaroli</span>
+      <span class="post-date" itemprop="datePublished" content="2020-06-24">24 Jun 2020</span>
+      <a href="https://github.com/ashmaroli" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name" itemprop="name">ashmaroli</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -431,17 +428,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2020/05/27/jekyll-4-1-0-released/">Jekyll 4.1.0 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2020/05/27/jekyll-4-1-0-released/" itemprop="url">Jekyll 4.1.0 Released</a>
       </h2>
-      <span class="post-date">27 May 2020</span>
-      <a href="https://github.com/ashmaroli" class="post-author">
-        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name">ashmaroli</span>
+      <span class="post-date" itemprop="datePublished" content="2020-05-27">27 May 2020</span>
+      <a href="https://github.com/ashmaroli" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name" itemprop="name">ashmaroli</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -449,17 +446,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2020/05/08/jekyll-4-0-1-released/">Jekyll 4.0.1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2020/05/08/jekyll-4-0-1-released/" itemprop="url">Jekyll 4.0.1 Released</a>
       </h2>
-      <span class="post-date">08 May 2020</span>
-      <a href="https://github.com/dirtyf" class="post-author">
-        <img class="avatar avatar-small" alt="dirtyf" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/dirtyf?v=3&s=24" srcset="https://avatars3.githubusercontent.com/dirtyf?v=3&s=24 1x, https://avatars3.githubusercontent.com/dirtyf?v=3&s=48 2x, https://avatars3.githubusercontent.com/dirtyf?v=3&s=72 3x, https://avatars3.githubusercontent.com/dirtyf?v=3&s=96 4x" /><span class="author-name">dirtyf</span>
+      <span class="post-date" itemprop="datePublished" content="2020-05-08">08 May 2020</span>
+      <a href="https://github.com/dirtyf" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="dirtyf" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/dirtyf?v=3&s=24" srcset="https://avatars3.githubusercontent.com/dirtyf?v=3&s=24 1x, https://avatars3.githubusercontent.com/dirtyf?v=3&s=48 2x, https://avatars3.githubusercontent.com/dirtyf?v=3&s=72 3x, https://avatars3.githubusercontent.com/dirtyf?v=3&s=96 4x" /><span class="author-name" itemprop="name">dirtyf</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -467,17 +464,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2019/08/20/jekyll-4-0-0-released/">Jekyll 4.0.0 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2019/08/20/jekyll-4-0-0-released/" itemprop="url">Jekyll 4.0.0 Released</a>
       </h2>
-      <span class="post-date">20 Aug 2019</span>
-      <a href="https://github.com/mattr-" class="post-author">
-        <img class="avatar avatar-small" alt="mattr-" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" /><span class="author-name">mattr-</span>
+      <span class="post-date" itemprop="datePublished" content="2019-08-20">20 Aug 2019</span>
+      <a href="https://github.com/mattr-" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="mattr-" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" /><span class="author-name" itemprop="name">mattr-</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -485,17 +482,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2019/08/04/jekyll-4-0-0-pre-beta1-released/">Jekyll 4.0.0.pre.beta1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2019/08/04/jekyll-4-0-0-pre-beta1-released/" itemprop="url">Jekyll 4.0.0.pre.beta1 Released</a>
       </h2>
-      <span class="post-date">04 Aug 2019</span>
-      <a href="https://github.com/mattr-" class="post-author">
-        <img class="avatar avatar-small" alt="mattr-" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" /><span class="author-name">mattr-</span>
+      <span class="post-date" itemprop="datePublished" content="2019-08-04">04 Aug 2019</span>
+      <a href="https://github.com/mattr-" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="mattr-" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" /><span class="author-name" itemprop="name">mattr-</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -503,17 +500,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2019/07/02/jekyll-3-8-6-released/">Jekyll 3.8.6 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2019/07/02/jekyll-3-8-6-released/" itemprop="url">Jekyll 3.8.6 Released</a>
       </h2>
-      <span class="post-date">02 Jul 2019</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2019-07-02">02 Jul 2019</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -521,17 +518,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2019/03/18/jekyll-4-0-0-pre-alpha1-released/">Jekyll 4.0.0.pre.alpha1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2019/03/18/jekyll-4-0-0-pre-alpha1-released/" itemprop="url">Jekyll 4.0.0.pre.alpha1 Released</a>
       </h2>
-      <span class="post-date">18 Mar 2019</span>
-      <a href="https://github.com/dirtyf" class="post-author">
-        <img class="avatar avatar-small" alt="dirtyf" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/dirtyf?v=3&s=24" srcset="https://avatars3.githubusercontent.com/dirtyf?v=3&s=24 1x, https://avatars3.githubusercontent.com/dirtyf?v=3&s=48 2x, https://avatars3.githubusercontent.com/dirtyf?v=3&s=72 3x, https://avatars3.githubusercontent.com/dirtyf?v=3&s=96 4x" /><span class="author-name">dirtyf</span>
+      <span class="post-date" itemprop="datePublished" content="2019-03-18">18 Mar 2019</span>
+      <a href="https://github.com/dirtyf" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="dirtyf" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/dirtyf?v=3&s=24" srcset="https://avatars3.githubusercontent.com/dirtyf?v=3&s=24 1x, https://avatars3.githubusercontent.com/dirtyf?v=3&s=48 2x, https://avatars3.githubusercontent.com/dirtyf?v=3&s=72 3x, https://avatars3.githubusercontent.com/dirtyf?v=3&s=96 4x" /><span class="author-name" itemprop="name">dirtyf</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -539,17 +536,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2018/11/04/jekyll-3-8-5-released/">Jekyll 3.8.5 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2018/11/04/jekyll-3-8-5-released/" itemprop="url">Jekyll 3.8.5 Released</a>
       </h2>
-      <span class="post-date">04 Nov 2018</span>
-      <a href="https://github.com/oe" class="post-author">
-        <img class="avatar avatar-small" alt="oe" width="24" height="24" data-proofer-ignore="true" src="https://avatars2.githubusercontent.com/oe?v=3&s=24" srcset="https://avatars2.githubusercontent.com/oe?v=3&s=24 1x, https://avatars2.githubusercontent.com/oe?v=3&s=48 2x, https://avatars2.githubusercontent.com/oe?v=3&s=72 3x, https://avatars2.githubusercontent.com/oe?v=3&s=96 4x" /><span class="author-name">oe</span>
+      <span class="post-date" itemprop="datePublished" content="2018-11-04">04 Nov 2018</span>
+      <a href="https://github.com/oe" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="oe" width="24" height="24" data-proofer-ignore="true" src="https://avatars2.githubusercontent.com/oe?v=3&s=24" srcset="https://avatars2.githubusercontent.com/oe?v=3&s=24 1x, https://avatars2.githubusercontent.com/oe?v=3&s=48 2x, https://avatars2.githubusercontent.com/oe?v=3&s=72 3x, https://avatars2.githubusercontent.com/oe?v=3&s=96 4x" /><span class="author-name" itemprop="name">oe</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -557,17 +554,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2018/09/19/security-fixes-for-3-6-3-7-3-8/">Security Fixes for series 3.6, 3.7 and 3.8</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2018/09/19/security-fixes-for-3-6-3-7-3-8/" itemprop="url">Security Fixes for series 3.6, 3.7 and 3.8</a>
       </h2>
-      <span class="post-date">19 Sep 2018</span>
-      <a href="https://github.com/ashmaroli" class="post-author">
-        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name">ashmaroli</span>
+      <span class="post-date" itemprop="datePublished" content="2018-09-19">19 Sep 2018</span>
+      <a href="https://github.com/ashmaroli" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name" itemprop="name">ashmaroli</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -575,17 +572,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2018/06/05/jekyll-3-8-3-released/">Jekyll 3.8.3 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2018/06/05/jekyll-3-8-3-released/" itemprop="url">Jekyll 3.8.3 Released</a>
       </h2>
-      <span class="post-date">05 Jun 2018</span>
-      <a href="https://github.com/pathawks" class="post-author">
-        <img class="avatar avatar-small" alt="pathawks" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/pathawks?v=3&s=24" srcset="https://avatars3.githubusercontent.com/pathawks?v=3&s=24 1x, https://avatars3.githubusercontent.com/pathawks?v=3&s=48 2x, https://avatars3.githubusercontent.com/pathawks?v=3&s=72 3x, https://avatars3.githubusercontent.com/pathawks?v=3&s=96 4x" /><span class="author-name">pathawks</span>
+      <span class="post-date" itemprop="datePublished" content="2018-06-05">05 Jun 2018</span>
+      <a href="https://github.com/pathawks" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="pathawks" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/pathawks?v=3&s=24" srcset="https://avatars3.githubusercontent.com/pathawks?v=3&s=24 1x, https://avatars3.githubusercontent.com/pathawks?v=3&s=48 2x, https://avatars3.githubusercontent.com/pathawks?v=3&s=72 3x, https://avatars3.githubusercontent.com/pathawks?v=3&s=96 4x" /><span class="author-name" itemprop="name">pathawks</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -593,17 +590,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2018/05/19/jekyll-3-8-2-released/">Jekyll 3.8.2 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2018/05/19/jekyll-3-8-2-released/" itemprop="url">Jekyll 3.8.2 Released</a>
       </h2>
-      <span class="post-date">19 May 2018</span>
-      <a href="https://github.com/pathawks" class="post-author">
-        <img class="avatar avatar-small" alt="pathawks" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/pathawks?v=3&s=24" srcset="https://avatars3.githubusercontent.com/pathawks?v=3&s=24 1x, https://avatars3.githubusercontent.com/pathawks?v=3&s=48 2x, https://avatars3.githubusercontent.com/pathawks?v=3&s=72 3x, https://avatars3.githubusercontent.com/pathawks?v=3&s=96 4x" /><span class="author-name">pathawks</span>
+      <span class="post-date" itemprop="datePublished" content="2018-05-19">19 May 2018</span>
+      <a href="https://github.com/pathawks" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="pathawks" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/pathawks?v=3&s=24" srcset="https://avatars3.githubusercontent.com/pathawks?v=3&s=24 1x, https://avatars3.githubusercontent.com/pathawks?v=3&s=48 2x, https://avatars3.githubusercontent.com/pathawks?v=3&s=72 3x, https://avatars3.githubusercontent.com/pathawks?v=3&s=96 4x" /><span class="author-name" itemprop="name">pathawks</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -611,17 +608,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2018/05/01/jekyll-3-8-1-released/">Jekyll 3.8.1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2018/05/01/jekyll-3-8-1-released/" itemprop="url">Jekyll 3.8.1 Released</a>
       </h2>
-      <span class="post-date">01 May 2018</span>
-      <a href="https://github.com/pathawks" class="post-author">
-        <img class="avatar avatar-small" alt="pathawks" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/pathawks?v=3&s=24" srcset="https://avatars3.githubusercontent.com/pathawks?v=3&s=24 1x, https://avatars3.githubusercontent.com/pathawks?v=3&s=48 2x, https://avatars3.githubusercontent.com/pathawks?v=3&s=72 3x, https://avatars3.githubusercontent.com/pathawks?v=3&s=96 4x" /><span class="author-name">pathawks</span>
+      <span class="post-date" itemprop="datePublished" content="2018-05-01">01 May 2018</span>
+      <a href="https://github.com/pathawks" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="pathawks" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/pathawks?v=3&s=24" srcset="https://avatars3.githubusercontent.com/pathawks?v=3&s=24 1x, https://avatars3.githubusercontent.com/pathawks?v=3&s=48 2x, https://avatars3.githubusercontent.com/pathawks?v=3&s=72 3x, https://avatars3.githubusercontent.com/pathawks?v=3&s=96 4x" /><span class="author-name" itemprop="name">pathawks</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -629,17 +626,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2018/04/19/jekyll-3-8-0-released/">Jekyll 3.8.0 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2018/04/19/jekyll-3-8-0-released/" itemprop="url">Jekyll 3.8.0 Released</a>
       </h2>
-      <span class="post-date">19 Apr 2018</span>
-      <a href="https://github.com/ashmaroli" class="post-author">
-        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name">ashmaroli</span>
+      <span class="post-date" itemprop="datePublished" content="2018-04-19">19 Apr 2018</span>
+      <a href="https://github.com/ashmaroli" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name" itemprop="name">ashmaroli</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -647,17 +644,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2018/02/24/jekyll-3-7-3-released/">Jekyll 3.7.3 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2018/02/24/jekyll-3-7-3-released/" itemprop="url">Jekyll 3.7.3 Released</a>
       </h2>
-      <span class="post-date">24 Feb 2018</span>
-      <a href="https://github.com/ashmaroli" class="post-author">
-        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name">ashmaroli</span>
+      <span class="post-date" itemprop="datePublished" content="2018-02-24">24 Feb 2018</span>
+      <a href="https://github.com/ashmaroli" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name" itemprop="name">ashmaroli</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -665,17 +662,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2018/01/25/jekyll-3-7-2-released/">Jekyll 3.7.2 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2018/01/25/jekyll-3-7-2-released/" itemprop="url">Jekyll 3.7.2 Released</a>
       </h2>
-      <span class="post-date">25 Jan 2018</span>
-      <a href="https://github.com/ashmaroli" class="post-author">
-        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name">ashmaroli</span>
+      <span class="post-date" itemprop="datePublished" content="2018-01-25">25 Jan 2018</span>
+      <a href="https://github.com/ashmaroli" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name" itemprop="name">ashmaroli</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -683,17 +680,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2018/01/02/jekyll-3-7-0-released/">Jekyll 3.7.0 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2018/01/02/jekyll-3-7-0-released/" itemprop="url">Jekyll 3.7.0 Released</a>
       </h2>
-      <span class="post-date">02 Jan 2018</span>
-      <a href="https://github.com/DirtyF" class="post-author">
-        <img class="avatar avatar-small" alt="DirtyF" width="24" height="24" data-proofer-ignore="true" src="https://avatars1.githubusercontent.com/DirtyF?v=3&s=24" srcset="https://avatars1.githubusercontent.com/DirtyF?v=3&s=24 1x, https://avatars1.githubusercontent.com/DirtyF?v=3&s=48 2x, https://avatars1.githubusercontent.com/DirtyF?v=3&s=72 3x, https://avatars1.githubusercontent.com/DirtyF?v=3&s=96 4x" /><span class="author-name">DirtyF</span>
+      <span class="post-date" itemprop="datePublished" content="2018-01-02">02 Jan 2018</span>
+      <a href="https://github.com/DirtyF" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="DirtyF" width="24" height="24" data-proofer-ignore="true" src="https://avatars1.githubusercontent.com/DirtyF?v=3&s=24" srcset="https://avatars1.githubusercontent.com/DirtyF?v=3&s=24 1x, https://avatars1.githubusercontent.com/DirtyF?v=3&s=48 2x, https://avatars1.githubusercontent.com/DirtyF?v=3&s=72 3x, https://avatars1.githubusercontent.com/DirtyF?v=3&s=96 4x" /><span class="author-name" itemprop="name">DirtyF</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -701,17 +698,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2017/10/21/jekyll-3-6-2-released/">Jekyll 3.6.2 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2017/10/21/jekyll-3-6-2-released/" itemprop="url">Jekyll 3.6.2 Released</a>
       </h2>
-      <span class="post-date">21 Oct 2017</span>
-      <a href="https://github.com/dirtyf" class="post-author">
-        <img class="avatar avatar-small" alt="dirtyf" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/dirtyf?v=3&s=24" srcset="https://avatars3.githubusercontent.com/dirtyf?v=3&s=24 1x, https://avatars3.githubusercontent.com/dirtyf?v=3&s=48 2x, https://avatars3.githubusercontent.com/dirtyf?v=3&s=72 3x, https://avatars3.githubusercontent.com/dirtyf?v=3&s=96 4x" /><span class="author-name">dirtyf</span>
+      <span class="post-date" itemprop="datePublished" content="2017-10-21">21 Oct 2017</span>
+      <a href="https://github.com/dirtyf" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="dirtyf" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/dirtyf?v=3&s=24" srcset="https://avatars3.githubusercontent.com/dirtyf?v=3&s=24 1x, https://avatars3.githubusercontent.com/dirtyf?v=3&s=48 2x, https://avatars3.githubusercontent.com/dirtyf?v=3&s=72 3x, https://avatars3.githubusercontent.com/dirtyf?v=3&s=96 4x" /><span class="author-name" itemprop="name">dirtyf</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -719,17 +716,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2017/09/21/jekyll-3-6-0-released/">Jekyll turns 3.6!</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2017/09/21/jekyll-3-6-0-released/" itemprop="url">Jekyll turns 3.6!</a>
       </h2>
-      <span class="post-date">21 Sep 2017</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2017-09-21">21 Sep 2017</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -737,17 +734,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2017/08/12/jekyll-3-5-2-released/">Jekyll 3.5.2 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2017/08/12/jekyll-3-5-2-released/" itemprop="url">Jekyll 3.5.2 Released</a>
       </h2>
-      <span class="post-date">12 Aug 2017</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2017-08-12">12 Aug 2017</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -755,17 +752,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2017/07/17/jekyll-3-5-1-released/">Jekyll 3.5.1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2017/07/17/jekyll-3-5-1-released/" itemprop="url">Jekyll 3.5.1 Released</a>
       </h2>
-      <span class="post-date">17 Jul 2017</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2017-07-17">17 Jul 2017</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -773,17 +770,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2017/06/15/jekyll-3-5-0-released/">Jekyll turns 3.5, oh my!</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2017/06/15/jekyll-3-5-0-released/" itemprop="url">Jekyll turns 3.5, oh my!</a>
       </h2>
-      <span class="post-date">15 Jun 2017</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2017-06-15">15 Jun 2017</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -791,17 +788,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2017/03/21/jekyll-3-4-3-released/">Jekyll 3.4.3 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2017/03/21/jekyll-3-4-3-released/" itemprop="url">Jekyll 3.4.3 Released</a>
       </h2>
-      <span class="post-date">21 Mar 2017</span>
-      <a href="https://github.com/pathawks" class="post-author">
-        <img class="avatar avatar-small" alt="pathawks" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/pathawks?v=3&s=24" srcset="https://avatars3.githubusercontent.com/pathawks?v=3&s=24 1x, https://avatars3.githubusercontent.com/pathawks?v=3&s=48 2x, https://avatars3.githubusercontent.com/pathawks?v=3&s=72 3x, https://avatars3.githubusercontent.com/pathawks?v=3&s=96 4x" /><span class="author-name">pathawks</span>
+      <span class="post-date" itemprop="datePublished" content="2017-03-21">21 Mar 2017</span>
+      <a href="https://github.com/pathawks" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="pathawks" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/pathawks?v=3&s=24" srcset="https://avatars3.githubusercontent.com/pathawks?v=3&s=24 1x, https://avatars3.githubusercontent.com/pathawks?v=3&s=48 2x, https://avatars3.githubusercontent.com/pathawks?v=3&s=72 3x, https://avatars3.githubusercontent.com/pathawks?v=3&s=96 4x" /><span class="author-name" itemprop="name">pathawks</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -809,17 +806,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2017/03/09/jekyll-3-4-2-released/">Jekyll 3.4.2 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2017/03/09/jekyll-3-4-2-released/" itemprop="url">Jekyll 3.4.2 Released</a>
       </h2>
-      <span class="post-date">09 Mar 2017</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2017-03-09">09 Mar 2017</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -827,17 +824,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2017/03/02/jekyll-3-4-1-released/">Jekyll 3.4.1, or "Unintended Consequences"</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2017/03/02/jekyll-3-4-1-released/" itemprop="url">Jekyll 3.4.1, or "Unintended Consequences"</a>
       </h2>
-      <span class="post-date">02 Mar 2017</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2017-03-02">02 Mar 2017</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -845,17 +842,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2017/01/18/jekyll-3-4-0-released/">Jekyll turns 3.4.0</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2017/01/18/jekyll-3-4-0-released/" itemprop="url">Jekyll turns 3.4.0</a>
       </h2>
-      <span class="post-date">18 Jan 2017</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2017-01-18">18 Jan 2017</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -863,17 +860,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2016/11/14/jekyll-3-3-1-released/">Jekyll 3.3.1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2016/11/14/jekyll-3-3-1-released/" itemprop="url">Jekyll 3.3.1 Released</a>
       </h2>
-      <span class="post-date">14 Nov 2016</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2016-11-14">14 Nov 2016</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -881,17 +878,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2016/10/06/jekyll-3-3-is-here/">Jekyll 3.3 is here with better theme support, new URL filters, and tons more</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2016/10/06/jekyll-3-3-is-here/" itemprop="url">Jekyll 3.3 is here with better theme support, new URL filters, and tons more</a>
       </h2>
-      <span class="post-date">06 Oct 2016</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2016-10-06">06 Oct 2016</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -899,17 +896,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2016/08/02/jekyll-3-2-1-released/">Jekyll 3.2.1 Released with Fix for Windows</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2016/08/02/jekyll-3-2-1-released/" itemprop="url">Jekyll 3.2.1 Released with Fix for Windows</a>
       </h2>
-      <span class="post-date">02 Aug 2016</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2016-08-02">02 Aug 2016</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -917,17 +914,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2016/07/26/jekyll-3-2-0-released/">Jekyll turns 3.2</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2016/07/26/jekyll-3-2-0-released/" itemprop="url">Jekyll turns 3.2</a>
       </h2>
-      <span class="post-date">26 Jul 2016</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2016-07-26">26 Jul 2016</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -935,17 +932,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2016/05/19/jekyll-3-1-6-released/">Jekyll 3.1.6 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2016/05/19/jekyll-3-1-6-released/" itemprop="url">Jekyll 3.1.6 Released</a>
       </h2>
-      <span class="post-date">19 May 2016</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2016-05-19">19 May 2016</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -953,17 +950,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2016/05/18/jekyll-3-1-5-released/">Jekyll 3.1.5 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2016/05/18/jekyll-3-1-5-released/" itemprop="url">Jekyll 3.1.5 Released</a>
       </h2>
-      <span class="post-date">18 May 2016</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2016-05-18">18 May 2016</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -971,17 +968,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2016/05/18/jekyll-3-1-4-released/">Jekyll 3.1.4 "Stability Sam" Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2016/05/18/jekyll-3-1-4-released/" itemprop="url">Jekyll 3.1.4 "Stability Sam" Released</a>
       </h2>
-      <span class="post-date">18 May 2016</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2016-05-18">18 May 2016</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -989,17 +986,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2016/04/26/jekyll-3-0-5-released/">Jekyll 3.0.5 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2016/04/26/jekyll-3-0-5-released/" itemprop="url">Jekyll 3.0.5 Released</a>
       </h2>
-      <span class="post-date">26 Apr 2016</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2016-04-26">26 Apr 2016</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1007,17 +1004,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2016/04/19/jekyll-3-1-3-released/">Jekyll 3.1.3 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2016/04/19/jekyll-3-1-3-released/" itemprop="url">Jekyll 3.1.3 Released</a>
       </h2>
-      <span class="post-date">19 Apr 2016</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2016-04-19">19 Apr 2016</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1025,17 +1022,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2016/04/19/jekyll-3-0-4-released/">Jekyll 3.0.4 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2016/04/19/jekyll-3-0-4-released/" itemprop="url">Jekyll 3.0.4 Released</a>
       </h2>
-      <span class="post-date">19 Apr 2016</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2016-04-19">19 Apr 2016</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1043,17 +1040,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2016/02/19/jekyll-3-1-2-released/">Jekyll 3.1.2 Released!</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2016/02/19/jekyll-3-1-2-released/" itemprop="url">Jekyll 3.1.2 Released!</a>
       </h2>
-      <span class="post-date">19 Feb 2016</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2016-02-19">19 Feb 2016</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1061,17 +1058,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2016/02/08/jekyll-3-0-3-released/">Jekyll 3.0.3 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2016/02/08/jekyll-3-0-3-released/" itemprop="url">Jekyll 3.0.3 Released</a>
       </h2>
-      <span class="post-date">08 Feb 2016</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2016-02-08">08 Feb 2016</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1079,17 +1076,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2016/01/28/jekyll-3-1-1-released/">Jekyll 3.1.1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2016/01/28/jekyll-3-1-1-released/" itemprop="url">Jekyll 3.1.1 Released</a>
       </h2>
-      <span class="post-date">28 Jan 2016</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2016-01-28">28 Jan 2016</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1097,17 +1094,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2016/01/24/jekyll-3-1-0-released/">Jekyll 3.1.0 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2016/01/24/jekyll-3-1-0-released/" itemprop="url">Jekyll 3.1.0 Released</a>
       </h2>
-      <span class="post-date">24 Jan 2016</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2016-01-24">24 Jan 2016</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1115,17 +1112,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2016/01/20/jekyll-3-0-2-released/">Jekyll 3.0.2 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2016/01/20/jekyll-3-0-2-released/" itemprop="url">Jekyll 3.0.2 Released</a>
       </h2>
-      <span class="post-date">20 Jan 2016</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2016-01-20">20 Jan 2016</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1133,17 +1130,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2015/11/17/jekyll-3-0-1-released/">Jekyll 3.0.1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2015/11/17/jekyll-3-0-1-released/" itemprop="url">Jekyll 3.0.1 Released</a>
       </h2>
-      <span class="post-date">17 Nov 2015</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2015-11-17">17 Nov 2015</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1151,17 +1148,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2015/10/26/jekyll-3-0-released/">Jekyll 3.0 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2015/10/26/jekyll-3-0-released/" itemprop="url">Jekyll 3.0 Released</a>
       </h2>
-      <span class="post-date">26 Oct 2015</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2015-10-26">26 Oct 2015</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1169,17 +1166,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2015/01/24/jekyll-3-0-0-beta1-released/">Jekyll 3.0.0.beta1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2015/01/24/jekyll-3-0-0-beta1-released/" itemprop="url">Jekyll 3.0.0.beta1 Released</a>
       </h2>
-      <span class="post-date">24 Jan 2015</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2015-01-24">24 Jan 2015</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1187,17 +1184,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2014/12/22/jekyll-2-5-3-released/">Jekyll Release for the Holidays! v2.5.3 Out</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2014/12/22/jekyll-2-5-3-released/" itemprop="url">Jekyll Release for the Holidays! v2.5.3 Out</a>
       </h2>
-      <span class="post-date">22 Dec 2014</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2014-12-22">22 Dec 2014</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1205,17 +1202,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2014/11/12/jekyll-2-5-2-released/">Jekyll 2.5.2 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2014/11/12/jekyll-2-5-2-released/" itemprop="url">Jekyll 2.5.2 Released</a>
       </h2>
-      <span class="post-date">12 Nov 2014</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2014-11-12">12 Nov 2014</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1223,17 +1220,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2014/11/09/jekyll-2-5-1-released/">Jekyll 2.5.1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2014/11/09/jekyll-2-5-1-released/" itemprop="url">Jekyll 2.5.1 Released</a>
       </h2>
-      <span class="post-date">09 Nov 2014</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2014-11-09">09 Nov 2014</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1241,17 +1238,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2014/11/05/jekylls-midlife-crisis-jekyll-turns-2-5-0/">Jekyll's Mid-Life Crisis (Or, Jekyll turns 2.5.0)</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2014/11/05/jekylls-midlife-crisis-jekyll-turns-2-5-0/" itemprop="url">Jekyll's Mid-Life Crisis (Or, Jekyll turns 2.5.0)</a>
       </h2>
-      <span class="post-date">05 Nov 2014</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2014-11-05">05 Nov 2014</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1259,17 +1256,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2014/09/09/jekyll-2-4-0-released/">A Wild Jekyll 2.4.0 Appeared!</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2014/09/09/jekyll-2-4-0-released/" itemprop="url">A Wild Jekyll 2.4.0 Appeared!</a>
       </h2>
-      <span class="post-date">09 Sep 2014</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2014-09-09">09 Sep 2014</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1277,17 +1274,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2014/08/10/jekyll-2-3-0-released/">Jekyll 2.3.0 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2014/08/10/jekyll-2-3-0-released/" itemprop="url">Jekyll 2.3.0 Released</a>
       </h2>
-      <span class="post-date">10 Aug 2014</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2014-08-10">10 Aug 2014</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1295,17 +1292,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2014/07/29/jekyll-2-2-0-released/">Jekyll 2.2.0 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2014/07/29/jekyll-2-2-0-released/" itemprop="url">Jekyll 2.2.0 Released</a>
       </h2>
-      <span class="post-date">29 Jul 2014</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2014-07-29">29 Jul 2014</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1313,17 +1310,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2014/07/01/jekyll-2-1-1-released/">Jekyll 2.1.1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2014/07/01/jekyll-2-1-1-released/" itemprop="url">Jekyll 2.1.1 Released</a>
       </h2>
-      <span class="post-date">01 Jul 2014</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2014-07-01">01 Jul 2014</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1331,17 +1328,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2014/06/28/jekyll-turns-21-i-mean-2-1-0/">Jekyll Turns 21! Err... I mean 2.1.0.</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2014/06/28/jekyll-turns-21-i-mean-2-1-0/" itemprop="url">Jekyll Turns 21! Err... I mean 2.1.0.</a>
       </h2>
-      <span class="post-date">28 Jun 2014</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2014-06-28">28 Jun 2014</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1349,17 +1346,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2014/05/08/jekyll-2-0-3-released/">Jekyll 2.0.3 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2014/05/08/jekyll-2-0-3-released/" itemprop="url">Jekyll 2.0.3 Released</a>
       </h2>
-      <span class="post-date">08 May 2014</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2014-05-08">08 May 2014</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1367,17 +1364,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2014/05/06/jekyll-turns-2-0-0/">Jekyll turns 2.0.0</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2014/05/06/jekyll-turns-2-0-0/" itemprop="url">Jekyll turns 2.0.0</a>
       </h2>
-      <span class="post-date">06 May 2014</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2014-05-06">06 May 2014</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1385,17 +1382,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2014/03/27/jekyll-1-5-1-released/">Jekyll 1.5.1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2014/03/27/jekyll-1-5-1-released/" itemprop="url">Jekyll 1.5.1 Released</a>
       </h2>
-      <span class="post-date">27 Mar 2014</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2014-03-27">27 Mar 2014</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1403,17 +1400,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2014/03/24/jekyll-1-5-0-released/">Jekyll 1.5.0 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2014/03/24/jekyll-1-5-0-released/" itemprop="url">Jekyll 1.5.0 Released</a>
       </h2>
-      <span class="post-date">24 Mar 2014</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2014-03-24">24 Mar 2014</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1421,17 +1418,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2014/01/13/jekyll-1-4-3-released/">Jekyll 1.4.3 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2014/01/13/jekyll-1-4-3-released/" itemprop="url">Jekyll 1.4.3 Released</a>
       </h2>
-      <span class="post-date">13 Jan 2014</span>
-      <a href="https://github.com/benbalter" class="post-author">
-        <img class="avatar avatar-small" alt="benbalter" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/benbalter?v=3&s=24" srcset="https://avatars0.githubusercontent.com/benbalter?v=3&s=24 1x, https://avatars0.githubusercontent.com/benbalter?v=3&s=48 2x, https://avatars0.githubusercontent.com/benbalter?v=3&s=72 3x, https://avatars0.githubusercontent.com/benbalter?v=3&s=96 4x" /><span class="author-name">benbalter</span>
+      <span class="post-date" itemprop="datePublished" content="2014-01-13">13 Jan 2014</span>
+      <a href="https://github.com/benbalter" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="benbalter" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/benbalter?v=3&s=24" srcset="https://avatars0.githubusercontent.com/benbalter?v=3&s=24 1x, https://avatars0.githubusercontent.com/benbalter?v=3&s=48 2x, https://avatars0.githubusercontent.com/benbalter?v=3&s=72 3x, https://avatars0.githubusercontent.com/benbalter?v=3&s=96 4x" /><span class="author-name" itemprop="name">benbalter</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1439,17 +1436,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2013/12/16/jekyll-1-4-2-released/">Jekyll 1.4.2 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2013/12/16/jekyll-1-4-2-released/" itemprop="url">Jekyll 1.4.2 Released</a>
       </h2>
-      <span class="post-date">16 Dec 2013</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2013-12-16">16 Dec 2013</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1457,17 +1454,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2013/12/09/jekyll-1-4-1-released/">Jekyll 1.4.1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2013/12/09/jekyll-1-4-1-released/" itemprop="url">Jekyll 1.4.1 Released</a>
       </h2>
-      <span class="post-date">09 Dec 2013</span>
-      <a href="https://github.com/mattr-" class="post-author">
-        <img class="avatar avatar-small" alt="mattr-" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" /><span class="author-name">mattr-</span>
+      <span class="post-date" itemprop="datePublished" content="2013-12-09">09 Dec 2013</span>
+      <a href="https://github.com/mattr-" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="mattr-" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" /><span class="author-name" itemprop="name">mattr-</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1475,17 +1472,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2013/12/07/jekyll-1-4-0-released/">Jekyll 1.4.0 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2013/12/07/jekyll-1-4-0-released/" itemprop="url">Jekyll 1.4.0 Released</a>
       </h2>
-      <span class="post-date">07 Dec 2013</span>
-      <a href="https://github.com/mattr-" class="post-author">
-        <img class="avatar avatar-small" alt="mattr-" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" /><span class="author-name">mattr-</span>
+      <span class="post-date" itemprop="datePublished" content="2013-12-07">07 Dec 2013</span>
+      <a href="https://github.com/mattr-" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="mattr-" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" /><span class="author-name" itemprop="name">mattr-</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1493,17 +1490,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2013/11/26/jekyll-1-3-1-released/">Jekyll 1.3.1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2013/11/26/jekyll-1-3-1-released/" itemprop="url">Jekyll 1.3.1 Released</a>
       </h2>
-      <span class="post-date">26 Nov 2013</span>
-      <a href="https://github.com/mattr-" class="post-author">
-        <img class="avatar avatar-small" alt="mattr-" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" /><span class="author-name">mattr-</span>
+      <span class="post-date" itemprop="datePublished" content="2013-11-26">26 Nov 2013</span>
+      <a href="https://github.com/mattr-" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="mattr-" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" /><span class="author-name" itemprop="name">mattr-</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1511,17 +1508,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2013/11/04/jekyll-1-3-0-released/">Jekyll 1.3.0 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2013/11/04/jekyll-1-3-0-released/" itemprop="url">Jekyll 1.3.0 Released</a>
       </h2>
-      <span class="post-date">04 Nov 2013</span>
-      <a href="https://github.com/mattr-" class="post-author">
-        <img class="avatar avatar-small" alt="mattr-" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" /><span class="author-name">mattr-</span>
+      <span class="post-date" itemprop="datePublished" content="2013-11-04">04 Nov 2013</span>
+      <a href="https://github.com/mattr-" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="mattr-" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" /><span class="author-name" itemprop="name">mattr-</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1529,17 +1526,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2013/10/28/jekyll-1-3-0-rc1-released/">Jekyll 1.3.0.rc1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2013/10/28/jekyll-1-3-0-rc1-released/" itemprop="url">Jekyll 1.3.0.rc1 Released</a>
       </h2>
-      <span class="post-date">28 Oct 2013</span>
-      <a href="https://github.com/mattr-" class="post-author">
-        <img class="avatar avatar-small" alt="mattr-" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" /><span class="author-name">mattr-</span>
+      <span class="post-date" itemprop="datePublished" content="2013-10-28">28 Oct 2013</span>
+      <a href="https://github.com/mattr-" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="mattr-" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" /><span class="author-name" itemprop="name">mattr-</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1547,17 +1544,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2013/09/14/jekyll-1-2-1-released/">Jekyll 1.2.1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2013/09/14/jekyll-1-2-1-released/" itemprop="url">Jekyll 1.2.1 Released</a>
       </h2>
-      <span class="post-date">14 Sep 2013</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2013-09-14">14 Sep 2013</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1565,17 +1562,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2013/09/06/jekyll-1-2-0-released/">Jekyll 1.2.0 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2013/09/06/jekyll-1-2-0-released/" itemprop="url">Jekyll 1.2.0 Released</a>
       </h2>
-      <span class="post-date">06 Sep 2013</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2013-09-06">06 Sep 2013</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1583,17 +1580,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2013/07/25/jekyll-1-1-2-released/">Jekyll 1.1.2 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2013/07/25/jekyll-1-1-2-released/" itemprop="url">Jekyll 1.1.2 Released</a>
       </h2>
-      <span class="post-date">25 Jul 2013</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2013-07-25">25 Jul 2013</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1601,17 +1598,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2013/07/25/jekyll-1-0-4-released/">Jekyll 1.0.4 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2013/07/25/jekyll-1-0-4-released/" itemprop="url">Jekyll 1.0.4 Released</a>
       </h2>
-      <span class="post-date">25 Jul 2013</span>
-      <a href="https://github.com/mattr-" class="post-author">
-        <img class="avatar avatar-small" alt="mattr-" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" /><span class="author-name">mattr-</span>
+      <span class="post-date" itemprop="datePublished" content="2013-07-25">25 Jul 2013</span>
+      <a href="https://github.com/mattr-" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="mattr-" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/mattr-?v=3&s=24" srcset="https://avatars0.githubusercontent.com/mattr-?v=3&s=24 1x, https://avatars0.githubusercontent.com/mattr-?v=3&s=48 2x, https://avatars0.githubusercontent.com/mattr-?v=3&s=72 3x, https://avatars0.githubusercontent.com/mattr-?v=3&s=96 4x" /><span class="author-name" itemprop="name">mattr-</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1619,17 +1616,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2013/07/24/jekyll-1-1-1-released/">Jekyll 1.1.1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2013/07/24/jekyll-1-1-1-released/" itemprop="url">Jekyll 1.1.1 Released</a>
       </h2>
-      <span class="post-date">24 Jul 2013</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2013-07-24">24 Jul 2013</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1637,17 +1634,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2013/07/14/jekyll-1-1-0-released/">Jekyll 1.1.0 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2013/07/14/jekyll-1-1-0-released/" itemprop="url">Jekyll 1.1.0 Released</a>
       </h2>
-      <span class="post-date">14 Jul 2013</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2013-07-14">14 Jul 2013</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1655,17 +1652,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2013/06/07/jekyll-1-0-3-released/">Jekyll 1.0.3 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2013/06/07/jekyll-1-0-3-released/" itemprop="url">Jekyll 1.0.3 Released</a>
       </h2>
-      <span class="post-date">07 Jun 2013</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2013-06-07">07 Jun 2013</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1673,17 +1670,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2013/05/12/jekyll-1-0-2-released/">Jekyll 1.0.2 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2013/05/12/jekyll-1-0-2-released/" itemprop="url">Jekyll 1.0.2 Released</a>
       </h2>
-      <span class="post-date">12 May 2013</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2013-05-12">12 May 2013</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1691,17 +1688,17 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2013/05/08/jekyll-1-0-1-released/">Jekyll 1.0.1 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2013/05/08/jekyll-1-0-1-released/" itemprop="url">Jekyll 1.0.1 Released</a>
       </h2>
-      <span class="post-date">08 May 2013</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2013-05-08">08 May 2013</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
 </article>
-<article>
+<article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
     <span class="post-category">
       <span class="label">release</span>
@@ -1709,12 +1706,12 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
   <div class="cell-right">
     <div class="post-meta">
-      <h2 class="post-title">
-        <a href="/news/2013/05/05/jekyll-1-0-0-released/">Jekyll 1.0.0 Released</a>
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2013/05/05/jekyll-1-0-0-released/" itemprop="url">Jekyll 1.0.0 Released</a>
       </h2>
-      <span class="post-date">05 May 2013</span>
-      <a href="https://github.com/parkr" class="post-author">
-        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name">parkr</span>
+      <span class="post-date" itemprop="datePublished" content="2013-05-05">05 May 2013</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
       </a>
     </div>
   </div>
@@ -1823,37 +1820,37 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
   </div>
 </footer>
 <script>
-  var anchorForId = function (id) {
-    var anchor = document.createElement("a");
-    anchor.className = "header-link";
-    anchor.href      = "#" + id;
-    anchor.innerHTML = "<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>";
-    anchor.title = "Permalink";
-    return anchor;
-  };
+/* Creates an anchor element with the given ID and link for the permalink*/
+const anchorForId = (id) => {
+  const anchor = document.createElement("a");
+  anchor.className = "header-link";
+  anchor.href = `#${id}`;
+  anchor.innerHTML = `<span class="sr-only">Permalink</span><i class="fa fa-link" aria-hidden="true"></i>`;
+  anchor.title = "Permalink";
+  return anchor;
+};
 
-  var linkifyAnchors = function (level, containingElement) {
-    var headers = containingElement.getElementsByTagName("h" + level);
-    for (var h = 0; h < headers.length; h++) {
-      var header = headers[h];
-
-      if (typeof header.id !== "undefined" && header.id !== "") {
-        header.appendChild(anchorForId(header.id));
-      }
+/* Finds all headers of the specified level within the given element, and adds a permalink to each header*/
+const linkifyAnchors = (level, containingElement) => {
+  const headers = Array.from(containingElement.getElementsByTagName(`h${level}`));
+  headers.forEach((header) => {
+    if (header.id) {
+      header.appendChild(anchorForId(header.id));
     }
-  };
+  });
+};
 
-  document.onreadystatechange = function () {
-    if (this.readyState === "complete") {
-      var contentBlock = document.getElementsByClassName("docs")[0] || document.getElementsByClassName("news")[0];
-      if (!contentBlock) {
-        return;
-      }
-      for (var level = 1; level <= 6; level++) {
-        linkifyAnchors(level, contentBlock);
-      }
+/* Executes the function when the document is ready */
+document.onreadystatechange = () => {
+  if (document.readyState === "complete") {
+    const contentBlock = document.getElementsByClassName("docs")[0]
+      ?? document.getElementsByClassName("news")[0];
+    if (!contentBlock) { return; }
+    for (let level = 1; level <= 6; level++) {
+      linkifyAnchors(level, contentBlock);
     }
-  };
+  }
+};
 </script>
 <!-- Google Analytics (https://www.google.com/analytics) -->
   <script>
@@ -1865,14 +1862,20 @@ the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
     ga('create', 'UA-50755011-1', 'jekyllrb.com');
     ga('send', 'pageview');
   </script>
-<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js" defer></script>
 <script> docsearch({
 apiKey: '50fe39c839958dfad797000f33e2ec17',
 indexName: 'jekyllrb',
 inputSelector: '#docsearch-input',
 enhancedSearchInput: true,
-debug: false // Set debug to true if you want to inspect the dropdown
+debug: false
 });
 </script>
+<script>
+  const navigateToUrl = (select) => {
+    const url = select.value;
+    url && (window.location.href = url);
+  };
+  </script>
 </body>
 </html>
