@@ -38,6 +38,7 @@
   * Add release post for v4.3.3 (#9511)
   * Add docs version badge to page_excerpts feature (#9520)
   * Improve accessibility of the docs (#9338)
+  * Fix gem quote consistency on docs (#9517)
 
 ### Development Fixes
 
