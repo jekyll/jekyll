@@ -1,5 +1,5 @@
 <div class="docs-nav-mobile unit whole show-on-mobiles">
-  <select onchange="if (this.value) window.location.href=this.value">
+  <select id="news-nav" onchange="navigateToUrl(this)" aria-label="Select a post from the blog">
     <option value="">Navigate the blog…</option>
     <option value="{{ '/news/' | relative_url }}">Home</option>
     <optgroup label="posts">
