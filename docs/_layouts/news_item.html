@@ -2,8 +2,8 @@
 layout: news
 ---
 
-<article>
-  <h2>
+<article itemscope itemtype="http://schema.org/Article">
+  <h2 itemprop="headline">
     {{ page.title }}
     <a href="{{ page.url | relative_url }}" class="header-link" title="Permalink">
       <span class="sr-only">Permalink</span>
@@ -16,16 +16,16 @@ layout: news
     </span>
   </span>
   <div class="post-meta">
-    <span class="post-date">
+    <span class="post-date" itemprop="datePublished" content="{{ page.date | date: "%Y-%m-%d" }}">
       {{- page.date | date_to_string -}}
     </span>
     {% assign author = page.author -%}
-    <a href="https://github.com/{{ author }}" class="post-author">
+    <a class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person" target="_blank" href="https://github.com/{{ author }}">
       {% avatar user=author size=24 -%}
-      <span class="author-name">{{ author }}</span>
+      <span class="author-name" itemprop="name">{{ author }}</span>
     </a>
   </div>
-  <div class="post-content">
+  <div class="post-content" itemprop="articleBody">
     {{ content }}
   </div>
 </article>
