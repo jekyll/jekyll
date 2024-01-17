@@ -40,6 +40,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [Talkyard](https://blog-comments.talkyard.io/): Embedded comments for Jekyll and others (free and open source, or hosted serverless)
 
 ### Content Management
+  - [JekyllPad](https://www.JekyllPad.com): Online WYSIWYG editor for Jekyll sites on GitHub Pages; Seamlessly integrates with Github, manages posts, pages, tags, frontmatter and images; start for free
   - [CloudCannon](https://cloudcannon.com/): The Cloud CMS for Jekyll
   - [Contentful](https://github.com/contentful/jekyll-contentful-data-import): Content infrastructure for digital teams
   - [TinaCMS.io](https://tina.io/): Tina is an open-source, Git-backed headless content management system (CMS) that empowers both developers and content creators to collaborate seamlessly on a single platform
