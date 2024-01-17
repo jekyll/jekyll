@@ -39,6 +39,7 @@
   * Add docs version badge to page_excerpts feature (#9520)
   * Improve accessibility of the docs (#9338)
   * Fix gem quote consistency on docs (#9517)
+  * Make site search work again (#9530)
 
 ### Development Fixes
 
