@@ -1,5 +1,5 @@
 ---
-title: Default Configuration
+title: Incremental Regeneration
 permalink: "/docs/configuration/incremental-regeneration/"
 ---
 
