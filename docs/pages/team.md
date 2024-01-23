@@ -28,5 +28,7 @@ _Emeritus Core Team Members were once members of Jekyll's Core Team._
 * Alfred (@alfredxing)
 * Frank (@DirtyF)
 * Nick (@qrush)
+* Olivia
 * Parker (@parkr)
+* Pat (@pathawks)
 * Tom (@mojombo)
