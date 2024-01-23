@@ -26,6 +26,7 @@ patch security vulnerabilities reported to them._
 _Emeritus Core Team Members were once members of Jekyll's Core Team._
 
 * Alfred (@alfredxing)
+* Ben (@benbalter)
 * Frank (@DirtyF)
 * Nick (@qrush)
 * Olivia
