@@ -4,9 +4,9 @@
     {% for section in site.data.docs_nav %}
       <optgroup label="{{ section.title }}">
         {%- for item in section.docs -%}
-          {% assign page = site.docs | where: "url", item.link | first %}
-          <option value="{{ page.url | relative_url }}">
-            {{- page.menu_name | default: page.title -}}
+          {% assign current_page = site.docs | where: "url", item.link | first %}
+          <option value="{{ current_page.url | relative_url }}">
+            {{- current_page.menu_name | default: current_page.title -}}
           </option>
         {%- endfor %}
       </optgroup>
