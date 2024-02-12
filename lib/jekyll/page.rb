@@ -183,5 +183,20 @@ module Jekyll
     def write?
       true
     end
+
+    # The Page excerpt_separator, from the YAML Front-Matter or site
+    # default excerpt_separator value
+    #
+    # Returns the document excerpt_separator
+    def excerpt_separator
+      (data["excerpt_separator"] || site.config["excerpt_separator"]).to_s
+    end
+
+    # Whether to generate an excerpt
+    #
+    # Returns true if the excerpt separator is configured.
+    def generate_excerpt?
+      !excerpt_separator.empty?
+    end
   end
 end

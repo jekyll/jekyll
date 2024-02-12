@@ -315,7 +315,7 @@ class TestExcerpt < JekyllUnitTest
 
 
     should "produce a proper excerpt" do
-      assert_includes @excerpt.content, "I am the excerpt"
+      assert_equal @excerpt.content, "I am the excerpt\n\n"
     end
   end
 end
