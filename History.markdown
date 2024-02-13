@@ -40,6 +40,7 @@
   * Improve accessibility of the docs (#9338)
   * Fix gem quote consistency on docs (#9517)
   * Make site search work again (#9530)
+  * Jekyll docs template typo - All pages show &#34;Deployment&#34; (#9548)
 
 ### Development Fixes
 
