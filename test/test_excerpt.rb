@@ -10,6 +10,10 @@ class TestExcerpt < JekyllUnitTest
     }).tap(&:read)
   end
 
+  def setup_page
+    Page.new(@site, @site.in_source_dir, "", "page_with_excerpt.md")
+  end
+
   def do_render(document)
     @site.layouts = {
       "default" => Layout.new(@site, source_dir("_layouts"), "simple.html"),
@@ -298,6 +302,20 @@ class TestExcerpt < JekyllUnitTest
       assert_includes @excerpt.content, "{% enddo_nothing %}"
       refute_includes @excerpt.content, "{% enddo_nothing_other %}"
       assert_equal true, @excerpt.is_a?(Jekyll::Excerpt)
+    end
+  end
+
+  context "On a page" do
+    setup do
+      clear_dest
+      @site = fixture_site
+      @page = setup_page
+      @excerpt = Jekyll::Excerpt.new(@page)
+    end
+
+
+    should "produce a proper excerpt" do
+      assert_equal @excerpt.content, "I am the excerpt\n\n"
     end
   end
 end

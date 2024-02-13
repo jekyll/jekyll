@@ -231,6 +231,7 @@ class TestSite < JekyllUnitTest
         index.html
         info.md
         main.scss
+        page_with_excerpt.md
         properties.html
         sitemap.xml
         static_files.html
