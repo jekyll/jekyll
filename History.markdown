@@ -3,6 +3,7 @@
 ### Minor Enhancements
 
   * Allow marking specific highlighted lines via Liquid (#9138)
+  * 3.9-stable: allow Pages to be Excerpted (#9550)
 
 ### Documentation
 
