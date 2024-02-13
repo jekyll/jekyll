@@ -1,3 +1,9 @@
+## 3.9.5 / 2024-02-12
+
+### Minor Enhancements
+
+  * 3.9-stable: allow Pages to be Excerpted (#9550)
+
 ## 3.9.4 / 2023-12-28
 
 ### Bug Fixes
