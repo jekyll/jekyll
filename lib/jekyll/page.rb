@@ -198,5 +198,28 @@ module Jekyll
     def generate_excerpt?
       !excerpt_separator.empty?
     end
+
+    # Determine whether the page is a YAML file.
+    #
+    # Returns true if the extname is either .yml or .yaml, false otherwise.
+    def yaml_file?
+      %w(.yaml .yml).include?(extname)
+    end
+
+    def previous_doc
+    end
+
+    def next_doc
+    end
+
+    def collection
+      Struct.new(:label).new("")
+    end
+
+    def id
+      @id ||= File.join(
+        *[@dir, (data["slug"] || File.basename(basename, ".*"))].map(&:to_s).reject(&:empty?)
+      )
+    end
   end
 end
