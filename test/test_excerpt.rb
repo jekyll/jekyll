@@ -317,5 +317,26 @@ class TestExcerpt < JekyllUnitTest
     should "produce a proper excerpt" do
       assert_equal @excerpt.content, "I am the excerpt\n\n"
     end
+
+    should "render" do
+      assert_equal @excerpt.output, "<p>I am the excerpt</p>\n\n"
+    end
+
+    should "support the drop" do
+      assert_equal @excerpt.to_liquid.to_h, {
+        "layout": nil,
+        "excerpt": nil,
+        "path": "page_with_excerpt.md/#excerpt",
+        "previous": nil,
+        "next": nil,
+        "output": "<p>I am the excerpt</p>\n\n",
+        "content": "<p>I am the excerpt</p>\n\n",
+        "collection": "",
+        "id": "/page_with_excerpt#excerpt",
+        "url": "/page_with_excerpt.html",
+        "relative_path": "page_with_excerpt.md/#excerpt",
+        "title": "I am a page with an excerpt"
+      }
+    end
   end
 end
