@@ -188,3 +188,27 @@ You can also use this tag to create a link to a post in Markdown as follows:
 [Name of Link]({% post_url 2010-07-21-name-of-post %})
 ```
 {% endraw %}
+
+
+## Line Numbers in Pages
+
+The Liquid variable `@line_number` is provided to `Liquid::Block` and `Liquid::Tag` plugins to indicate where the tag was located, relative to the end of the front matter after Liquid parses the page.
+Jekyll provides the raw, unprocessed front matter as `page['front_matter']`.
+To discover the line number relative to the top of the file, add the number of lines in the raw front matter to `line_number`:
+
+```ruby
+page = liquid_context.registers[:page] # hash
+puts "This tag was placed on line #{page['front_matter'].count("\n") + @line_number}"
+```
+
+Or you could define a method for better readability:
+
+```ruby
+# @return line number where tag or block was found, relative to the start of the page
+def jekyll_line_number
+  page = liquid_context.registers[:page] # hash
+  page['front_matter'].count("\n") + @line_number
+end
+
+puts "This tag was placed on line #{jekyll_line_number}"
+```

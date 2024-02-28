@@ -4,9 +4,10 @@ module Jekyll
   class Layout
     include Convertible
 
-    attr_accessor :content, # content of layout
-                  :data,    # the Hash that holds the metadata for this layout
-                  :ext      # extension of layout
+    attr_accessor :content,     # content of layout (without front matter)
+                  :data,        # the Hash that holds the metadata for this layout
+                  :ext,         # extension of layout
+                  :front_matter # raw front matter for the layout
 
     attr_reader :name, # name of layout
                 :path, # path to layout
