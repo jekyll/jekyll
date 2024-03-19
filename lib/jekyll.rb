@@ -56,6 +56,7 @@ module Jekyll
   autoload :Hooks,               "jekyll/hooks"
   autoload :Layout,              "jekyll/layout"
   autoload :Inclusion,           "jekyll/inclusion"
+  autoload :BetaManager,         "jekyll/beta_manager"
   autoload :Cache,               "jekyll/cache"
   autoload :CollectionReader,    "jekyll/readers/collection_reader"
   autoload :DataReader,          "jekyll/readers/data_reader"
