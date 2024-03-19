@@ -98,8 +98,8 @@ module Jekyll
     # if you need to.  This is useful when doing expensive compression tasks on css and
     # images and allows you to skip that when working in development.
 
-    def env
-      ENV["JEKYLL_ENV"] || "development"
+    def env(default = "development")
+      ENV["JEKYLL_ENV"] || default
     end
 
     # Public: Generate a Jekyll configuration Hash by merging the default
