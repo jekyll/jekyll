@@ -299,7 +299,7 @@ Security/IoMethods:
 Security/MarshalLoad:
   Exclude:
     - !ruby/regexp /test\/.*.rb$/
-    - lib/jekyll/regenerator.rb
+    - lib/jekyll/incremental_regenerator.rb
 Security/YAMLLoad:
   Exclude:
     - !ruby/regexp /features\/.*.rb/
