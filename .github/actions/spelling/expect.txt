@@ -249,6 +249,7 @@ helaili
 henrik
 heredoc
 heroku
+herotofu
 highlighter
 hilighting
 Hoizey
