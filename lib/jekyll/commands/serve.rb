@@ -160,7 +160,7 @@ module Jekyll
             if @changed_pages && @reload_reactor && @reload_reactor.running?
               ignore, @changed_pages = @changed_pages.partition do |p|
                 Array(opts["livereload_ignore"]).any? do |filter|
-                  File.fnmatch(filter, Jekyll.sanitized_path(p.relative_path))
+                  File.fnmatch(filter, p.relative_path)
                 end
               end
               Jekyll.logger.debug "LiveReload:", "Ignoring #{ignore.map(&:relative_path)}"
