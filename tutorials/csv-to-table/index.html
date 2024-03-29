@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
+  <link type="application/atom+xml" rel="alternate" href="/feed/release.xml" title="Jekyll releases posts" />
+  <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
+  <link rel="preload" href="/fonts/lato-v14-latin-300.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/lato-v14-latin-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/css/screen.css" as="style">
+  <link rel="stylesheet" href="/css/screen.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Tabulate CSV Data | Jekyll • Simple, blog-aware, static sites</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Tabulate CSV Data" />
+<meta name="author" content="MichaelCurrin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This tutorial shows how to use Jekyll to read a CSV and render the data as an HTML table." />
+<meta property="og:description" content="This tutorial shows how to use Jekyll to read a CSV and render the data as an HTML table." />
+<link rel="canonical" href="https://jekyllrb.com/tutorials/csv-to-table/" />
+<meta property="og:url" content="https://jekyllrb.com/tutorials/csv-to-table/" />
+<meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
+<meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-04-01T11:30:00-07:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
+<meta property="twitter:title" content="Tabulate CSV Data" />
+<meta name="twitter:site" content="@jekyllrb" />
+<meta name="twitter:creator" content="@MichaelCurrin" />
+<meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"MichaelCurrin"},"dateModified":"2020-04-01T11:30:00-07:00","datePublished":"2020-04-01T11:30:00-07:00","description":"This tutorial shows how to use Jekyll to read a CSV and render the data as an HTML table.","headline":"Tabulate CSV Data","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/tutorials/csv-to-table/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"},"name":"MichaelCurrin"},"url":"https://jekyllrb.com/tutorials/csv-to-table/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.min.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="wrap"><header>
+  <div class="flexbox">
+    <div class="center-on-mobiles">
+      <h1>
+        <a href="/" class="logo">
+          <span class="sr-only">Jekyll</span>
+          <img src="/img/logo-2x.png" width="140" height="65" alt="Jekyll Logo">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav hide-on-mobiles">
+      <ul>
+  <li><a href="/">Home</a></li>
+  <li><a href="/docs/">Docs</a></li>
+  <li><a href="/resources/">Resources</a></li>
+  <li><a href="/showcase/">Showcase</a></li>
+  <li><a href="/news/">News</a></li>
+  </ul>
+</nav>
+    <div class="search hide-on-mobiles">
+      <input type="text" id="docsearch-input" placeholder="Search the docs…" aria-label="Search"></div>
+    <div class="meta hide-on-mobiles">
+      <ul>
+        <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.3.3">v4.3.3</a></li>
+        <li><a href="https://github.com/jekyll/jekyll">GitHub</a></li>
+      </ul>
+    </div>
+  </div>
+  <nav class="mobile-nav show-on-mobiles">
+    <ul>
+  <li><a href="/">Home</a></li>
+    <li><a href="/docs/">Docs</a></li>
+    <li><a href="/resources/">Resources</a></li>
+    <li><a href="/news/">News</a></li>
+    <li><a href="https://github.com/jekyll/jekyll" target="_blank" rel="noopener">GitHub</a></li>
+</ul></nav>
+</header>
+<section class="docs">
+  <div class="grid"><div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select id="tutorial-nav" onchange="navigateToUrl(this)" aria-label="Select a tutorial">
+    <option value="">Navigate the tutorials…</option>
+    <optgroup label="Tutorials">
+        <option value="/tutorials/home/">Tutorials</option>
+        <option value="/tutorials/video-walkthroughs/">Video Walkthroughs</option>
+        <option value="/tutorials/navigation/">Navigation</option>
+        <option value="/tutorials/orderofinterpretation/">Order of interpretation</option>
+        <option value="/tutorials/custom-404-page/">Custom 404 Page</option>
+        <option value="/tutorials/convert-site-to-jekyll/">Convert an HTML site to Jekyll</option>
+        <option value="/tutorials/using-jekyll-with-bundler/">Using Jekyll with Bundler</option>
+        <option value="/tutorials/csv-to-table/">Tabulate CSV Data</option>
+        </optgroup>
+    </select>
+</div><div class="unit four-fifths">
+      <article>
+        <header class="tutorial-header">
+          <div class="improve right hide-on-mobiles">
+            <a href="https://github.com/jekyll/jekyll/edit/master/docs/_tutorials/csv-to-table.md"><i
+               class="fa fa-pencil"></i> &nbsp;Improve this page</a>
+          </div>
+          <h1 class="tutorial-title">Tabulate CSV Data</h1>
+          
+          
+            <div class="tutorial-meta">
+              <span class="tutorial-date">
+               01 April 2020
+              </span>
+              <a href="https://github.com/MichaelCurrin" class="tutorial-author">
+                <img class="avatar avatar-small" alt="MichaelCurrin" width="24" height="24" data-proofer-ignore="true" src="https://avatars2.githubusercontent.com/MichaelCurrin?v=3&s=24" srcset="https://avatars2.githubusercontent.com/MichaelCurrin?v=3&s=24 1x, https://avatars2.githubusercontent.com/MichaelCurrin?v=3&s=48 2x, https://avatars2.githubusercontent.com/MichaelCurrin?v=3&s=72 3x, https://avatars2.githubusercontent.com/MichaelCurrin?v=3&s=96 4x" />
+                <span class="author-name">MichaelCurrin</span>
+              </a>
+            </div>
+          
+        </header><p>This tutorial shows how to use Jekyll to read a CSV and render the data as an HTML table.</p>
+
+<p>This approach will:</p>
+
+<ul>
+  <li>use the CSV’s first row as the HTML table header.</li>
+  <li>use remaining rows for the body of the table.</li>
+  <li>preserve the order of the columns from the original CSV.</li>
+  <li>be flexible enough to work with <em>any</em> valid CSV that is referenced.</li>
+</ul>
+
+<p>There is no need to specify what the names of the columns are, or how many columns there are.
+The trick to this tutorial is that, when we iterate over the row data, we pick up the <em>first row</em>
+and unpack that so we can get the header names.</p>
+
+<p>Follow the steps below to convert a sample CSV of authors into an HTML table.</p>
+
+<h2 id="1-create-a-csv">1. Create a CSV</h2>
+
+<p>Create a CSV file in your <a href="/docs/datafiles/">Data files</a> directory so
+that Jekyll will pick it up. A sample path and CSV data are shown below:</p>
+
+<p><code class="language-plaintext highlighter-rouge">_data/authors.csv</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>First name,Last name,Age,Location
+John,Doe,35,United States
+Jane,Doe,29,France
+Jack,Hill,25,Australia
+</code></pre></div></div>
+
+<p>That data file will now be available in Jekyll like this:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">authors</span><span class="w"> </span><span class="cp">}}</span>
+</code></pre></div></div>
+
+<h2 id="2-add-a-table">2. Add a table</h2>
+
+<p>Choose an HTML or markdown file where you want your table to be shown.</p>
+
+<p>For example: <code class="language-plaintext highlighter-rouge">table_test.md</code></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">Table test</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<h3 id="inspect-a-row">Inspect a row</h3>
+
+<p>Grab the first row and see what it looks like using the <code class="language-plaintext highlighter-rouge">inspect</code> filter.</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">authors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="cp">%}</span>
+<span class="cp">{{</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">inspect</span><span class="w"> </span><span class="cp">}}</span>
+</code></pre></div></div>
+
+<p>The result will be a <em>hash</em> (an object consisting of key-value pairs) which looks like this:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+  <span class="s2">"First name"</span><span class="o">=&gt;</span><span class="s2">"John"</span><span class="p">,</span>
+  <span class="s2">"Last name"</span><span class="o">=&gt;</span><span class="s2">"Doe"</span><span class="p">,</span>
+  <span class="s2">"Age"</span><span class="o">=&gt;</span><span class="s2">"35"</span><span class="p">,</span>
+  <span class="s2">"Location"</span><span class="o">=&gt;</span><span class="s2">"United States"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Note that Jekyll <em>does</em> in fact preserve the order here, based on the original CSV.</p>
+
+<h3 id="unpack-a-row">Unpack a row</h3>
+
+<p>A simple solution would be to hardcode the field names when looking up the row values by key.</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{{</span><span class="w"> </span><span class="nv">row</span><span class="p">[</span><span class="s2">"First name"</span><span class="p">]</span><span class="w"> </span><span class="cp">}}</span>
+<span class="cp">{{</span><span class="w"> </span><span class="nv">row</span><span class="p">[</span><span class="s2">"Last name"</span><span class="p">]</span><span class="w"> </span><span class="cp">}}</span>
+</code></pre></div></div>
+
+<p>But we prefer a solution that will work for <em>any</em> CSV, without specifying the column names upfront.
+So we iterate over the <code class="language-plaintext highlighter-rouge">row</code> object using a <code class="language-plaintext highlighter-rouge">for</code> loop:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">authors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="cp">%}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">pair</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="cp">%}</span>
+  <span class="cp">{{</span><span class="w"> </span><span class="nv">pair</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">inspect</span><span class="w"> </span><span class="cp">}}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
+</code></pre></div></div>
+
+<p>This produces the following. Note the first item in each pair is the <em>key</em> and the second will be
+the <em>value</em>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>["First name", "John"]
+["Last name", "Doe"]
+["Age", "35"]
+["Location", "United States"]
+</code></pre></div></div>
+
+<h3 id="create-a-table-header-row">Create a table header row</h3>
+
+<p>Here we make a table with a single table row (<code class="language-plaintext highlighter-rouge">tr</code>), made up of table header (<code class="language-plaintext highlighter-rouge">th</code>) tags. We find
+the header name by getting the first element (at index <code class="language-plaintext highlighter-rouge">0</code>) from <code class="language-plaintext highlighter-rouge">pair</code>. We ignore the second
+element as we don’t need the value yet.</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;table&gt;
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">authors</span><span class="w"> </span><span class="cp">%}</span>
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">if</span><span class="w"> </span><span class="nb">forloop.first</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;tr&gt;
+      <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">pair</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="cp">%}</span>
+        &lt;th&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="cp">}}</span>&lt;/th&gt;
+      <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;/tr&gt;
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">endif</span><span class="w"> </span><span class="cp">%}</span>
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
+&lt;/table&gt;
+
+</code></pre></div></div>
+
+<p>For now, we do not display any content from the second row onwards. We achieve this by using
+<code class="language-plaintext highlighter-rouge">forloop.first</code>, since this will return true for the <em>first</em> row and false otherwise.</p>
+
+<h3 id="add-table-data-rows">Add table data rows</h3>
+
+<p>In this section we add the data rows to the table. Now, we use the second element of <code class="language-plaintext highlighter-rouge">pair</code>
+to find the value.</p>
+
+<p>For convenience, we render using the <code class="language-plaintext highlighter-rouge">tablerow</code> tag - this works like a <code class="language-plaintext highlighter-rouge">for</code> loop, but the inner
+data will be rendered with <code class="language-plaintext highlighter-rouge">tr</code> and <code class="language-plaintext highlighter-rouge">td</code> HTML tags for us. Unfortunately, there is no equivalent for
+the header row, so we must write that out in full, as in the previous section.</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+title: Table test
+---
+
+&lt;table&gt;
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">authors</span><span class="w"> </span><span class="cp">%}</span>
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">if</span><span class="w"> </span><span class="nb">forloop.first</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;tr&gt;
+      <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">pair</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="cp">%}</span>
+        &lt;th&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="cp">}}</span>&lt;/th&gt;
+      <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;/tr&gt;
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">endif</span><span class="w"> </span><span class="cp">%}</span>
+
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">tablerow</span><span class="w"> </span><span class="nv">pair</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">row</span><span class="w"> </span><span class="cp">%}</span>
+      <span class="cp">{{</span><span class="w"> </span><span class="nv">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="cp">}}</span>
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">endtablerow</span><span class="w"> </span><span class="cp">%}</span>
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
+&lt;/table&gt;
+</code></pre></div></div>
+
+<p>With the code above, the complete table would look like this:</p>
+
+<table>
+  <tr>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Age</th>
+    <th>Location</th>
+  </tr>
+  <tr>
+    <td>John</td>
+    <td>Doe</td>
+    <td>35</td>
+    <td>United States</td>
+  </tr>
+  <tr>
+    <td>Jane</td>
+    <td>Doe</td>
+    <td>29</td>
+    <td>France</td>
+  </tr>
+  <tr>
+    <td>Jack</td>
+    <td>Hill</td>
+    <td>25</td>
+    <td>Australia</td>
+  </tr>
+</table>
+
+<p>That’s it - you can now turn a CSV into an HTML table using Jekyll.</p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<ul>
+  <li>Change the field names in the CSV.</li>
+  <li>Choose a different CSV.</li>
+  <li>Add CSS styling to your table.</li>
+  <li>Render the table using a JSON or YAML input file.</li>
+</ul>
+
+<div class="section-nav">
+    <div class="left align-right">
+        <a href="/tutorials/using-jekyll-with-bundler/" class="prev">Back</a>
+        </div>
+    <div class="right align-left">
+        <span class="next disabled">Next</span>
+        </div>
+  </div>
+  <div class="clear"></div>
+  </article>
+    </div><div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    <h4>Tutorials</h4>
+      <ul>
+      <li><a href="/tutorials/home/">Tutorials</a></li>
+      <li><a href="/tutorials/video-walkthroughs/">Video Walkthroughs</a></li>
+      <li><a href="/tutorials/navigation/">Navigation</a></li>
+      <li><a href="/tutorials/orderofinterpretation/">Order of interpretation</a></li>
+      <li><a href="/tutorials/custom-404-page/">Custom 404 Page</a></li>
+      <li><a href="/tutorials/convert-site-to-jekyll/">Convert an HTML site to Jekyll</a></li>
+      <li><a href="/tutorials/using-jekyll-with-bundler/">Using Jekyll with Bundler</a></li>
+      <li class="current"><a href="/tutorials/csv-to-table/">Tabulate CSV Data</a></li>
+      </ul>
+    </aside>
+</div>
+<div class="clear"></div>
+  </div>
+</section>
+<footer>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <p>Jekyll is lovingly maintained by the <a href="/team/">core team</a> of volunteers. </p>
+      <p>The contents of this website are <br />&copy;&nbsp;2024 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT&nbsp;License</a>.</p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Proudly hosted by
+        <a href="https://github.com">
+          <img src="/img/footer-logo.png" width="100" height="30" alt="GitHub • Social coding">
+        </a>
+      </p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Jekyll is funded thanks to its
+        <a href="https://github.com/jekyll/jekyll#sponsors">
+          sponsors!
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+<script>
+/* Creates an anchor element with the given ID and link for the permalink*/
+const anchorForId = (id) => {
+  const anchor = document.createElement("a");
+  anchor.className = "header-link";
+  anchor.href = `#${id}`;
+  anchor.innerHTML = `<span class="sr-only">Permalink</span><i class="fa fa-link" aria-hidden="true"></i>`;
+  anchor.title = "Permalink";
+  return anchor;
+};
+
+/* Finds all headers of the specified level within the given element, and adds a permalink to each header*/
+const linkifyAnchors = (level, containingElement) => {
+  const headers = Array.from(containingElement.getElementsByTagName(`h${level}`));
+  headers.forEach((header) => {
+    if (header.id) {
+      header.appendChild(anchorForId(header.id));
+    }
+  });
+};
+
+/* Executes the function when the document is ready */
+document.onreadystatechange = () => {
+  if (document.readyState === "complete") {
+    const contentBlock = document.getElementsByClassName("docs")[0]
+      ?? document.getElementsByClassName("news")[0];
+    if (!contentBlock) { return; }
+    for (let level = 1; level <= 6; level++) {
+      linkifyAnchors(level, contentBlock);
+    }
+  }
+};
+</script>
+<!-- Google Analytics (https://www.google.com/analytics) -->
+  <script>
+    !function(j,e,k,y,l,L){j.GoogleAnalyticsObject=y,j[y]||(j[y]=function(){
+    (j[y].q=j[y].q||[]).push(arguments)}),j[y].l=+new Date,l=e.createElement(k),
+    L=e.getElementsByTagName(k)[0],l.src='https://www.google-analytics.com/analytics.js',
+    L.parentNode.insertBefore(l,L)}(window,document,'script','ga');
+
+    ga('create', 'UA-50755011-1', 'jekyllrb.com');
+    ga('send', 'pageview');
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script> docsearch({
+apiKey: '50fe39c839958dfad797000f33e2ec17',
+indexName: 'jekyllrb',
+inputSelector: '#docsearch-input',
+enhancedSearchInput: true,
+debug: false // Set debug to true if you want to inspect the dropdown
+});
+</script>
+<script>
+  const navigateToUrl = (select) => {
+    const url = select.value;
+    url && (window.location.href = url);
+  };
+  </script>
+</body>
+</html>

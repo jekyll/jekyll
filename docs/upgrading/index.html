@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
+  <link type="application/atom+xml" rel="alternate" href="/feed/release.xml" title="Jekyll releases posts" />
+  <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
+  <link rel="preload" href="/fonts/lato-v14-latin-300.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/lato-v14-latin-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/css/screen.css" as="style">
+  <link rel="stylesheet" href="/css/screen.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Upgrading | Jekyll • Simple, blog-aware, static sites</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Upgrading" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Upgrading from an older version of Jekyll? Upgrading to a new major version of Jekyll (e.g. from v2.x to v3.x) may cause some headaches. Take the following guides to aid your upgrade:" />
+<meta property="og:description" content="Upgrading from an older version of Jekyll? Upgrading to a new major version of Jekyll (e.g. from v2.x to v3.x) may cause some headaches. Take the following guides to aid your upgrade:" />
+<link rel="canonical" href="https://jekyllrb.com/docs/upgrading/" />
+<meta property="og:url" content="https://jekyllrb.com/docs/upgrading/" />
+<meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
+<meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-03-29T04:39:06-07:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
+<meta property="twitter:title" content="Upgrading" />
+<meta name="twitter:site" content="@jekyllrb" />
+<meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-03-29T04:39:06-07:00","datePublished":"2024-03-29T04:39:06-07:00","description":"Upgrading from an older version of Jekyll? Upgrading to a new major version of Jekyll (e.g. from v2.x to v3.x) may cause some headaches. Take the following guides to aid your upgrade:","headline":"Upgrading","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/upgrading/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/upgrading/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.min.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="wrap"><header>
+  <div class="flexbox">
+    <div class="center-on-mobiles">
+      <h1>
+        <a href="/" class="logo">
+          <span class="sr-only">Jekyll</span>
+          <img src="/img/logo-2x.png" width="140" height="65" alt="Jekyll Logo">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav hide-on-mobiles">
+      <ul>
+  <li><a href="/">Home</a></li>
+  <li class="current"><a href="/docs/">Docs</a></li>
+  <li><a href="/resources/">Resources</a></li>
+  <li><a href="/showcase/">Showcase</a></li>
+  <li><a href="/news/">News</a></li>
+  </ul>
+</nav>
+    <div class="search hide-on-mobiles">
+      <input type="text" id="docsearch-input" placeholder="Search the docs…" aria-label="Search"></div>
+    <div class="meta hide-on-mobiles">
+      <ul>
+        <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.3.3">v4.3.3</a></li>
+        <li><a href="https://github.com/jekyll/jekyll">GitHub</a></li>
+      </ul>
+    </div>
+  </div>
+  <nav class="mobile-nav show-on-mobiles">
+    <ul>
+  <li><a href="/">Home</a></li>
+    <li class="current" aria-current="page" ><a href="/docs/">Docs</a></li>
+    <li><a href="/resources/">Resources</a></li>
+    <li><a href="/news/">News</a></li>
+    <li><a href="https://github.com/jekyll/jekyll" target="_blank" rel="noopener">GitHub</a></li>
+</ul></nav>
+</header>
+<section class="docs">
+  <div class="grid">
+    <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select id="doc-nav" onchange="navigateToUrl(this)" aria-label="Select a page from the documentation">
+    <option value="">Navigate the docs…</option>
+    
+      <optgroup label="Getting Started">
+          <option value="/docs/">Quickstart</option>
+          <option value="/docs/installation/">Installation</option>
+          <option value="/docs/ruby-101/">Ruby 101</option>
+          <option value="/docs/community/">Community</option>
+          <option value="/docs/step-by-step/01-setup/">Step by Step Tutorial</option>
+      </optgroup>
+    
+      <optgroup label="Build">
+          <option value="/docs/usage/">Command Line Usage</option>
+          <option value="/docs/configuration/">Configuration</option>
+          <option value="/docs/rendering-process/">Rendering Process</option>
+      </optgroup>
+    
+      <optgroup label="Content">
+          <option value="/docs/pages/">Pages</option>
+          <option value="/docs/posts/">Posts</option>
+          <option value="/docs/front-matter/">Front Matter</option>
+          <option value="/docs/collections/">Collections</option>
+          <option value="/docs/datafiles/">Data Files</option>
+          <option value="/docs/assets/">Assets</option>
+          <option value="/docs/static-files/">Static Files</option>
+      </optgroup>
+    
+      <optgroup label="Site Structure">
+          <option value="/docs/structure/">Directory Structure</option>
+          <option value="/docs/liquid/">Liquid</option>
+          <option value="/docs/variables/">Variables</option>
+          <option value="/docs/includes/">Includes</option>
+          <option value="/docs/layouts/">Layouts</option>
+          <option value="/docs/permalinks/">Permalinks</option>
+          <option value="/docs/themes/">Themes</option>
+          <option value="/docs/pagination/">Pagination</option>
+      </optgroup>
+    
+      <optgroup label="Guides">
+          <option value="/docs/plugins/">Plugins</option>
+          <option value="/docs/migrations/">Blog Migrations</option>
+          <option value="/docs/upgrading/">Upgrading</option>
+          <option value="/docs/deployment/">Deployment</option>
+      </optgroup>
+    
+  </select>
+</div>
+<div class="unit four-fifths">
+      <article>
+        <div class="improve right hide-on-mobiles">
+          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/upgrading.md"><i
+             class="fa fa-pencil"></i> &nbsp;Improve this page</a>
+        </div>
+        <h1>Upgrading</h1>
+        <p>Upgrading from an older version of Jekyll? Upgrading to a new major version of
+Jekyll (e.g. from v2.x to v3.x) may cause some headaches. Take the following
+guides to aid your upgrade:</p>
+
+<ul>
+  <li><a href="/docs/upgrading/0-to-2/">From 0.x to 1.x and 2.x</a></li>
+  <li><a href="/docs/upgrading/2-to-3/">From 2.x to 3.x</a></li>
+  <li><a href="/docs/upgrading/3-to-4/">From 3.x to 4.x</a></li>
+</ul>
+
+<h2 id="minor-updates">Minor updates</h2>
+
+<div class="note">
+  <h5>Stay Up to Date</h5>
+  <p>We recommend you update Jekyll as often as possible to benefit from
+  the latest bug fixes.
+  </p>
+</div>
+
+<p>If you followed our setup recommendations and installed <a href="http://bundler.io/">Bundler</a>, run <code class="language-plaintext highlighter-rouge">bundle update jekyll</code> or simply <code class="language-plaintext highlighter-rouge">bundle update</code> and all your gems will
+update to the latest versions.</p>
+
+<p>If you don’t have Bundler installed, run <code class="language-plaintext highlighter-rouge">gem update jekyll</code>.</p>
+
+<p>The procedure is similar <a href="https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/#keeping-your-site-up-to-date-with-the-github-pages-gem">if you use the <code class="language-plaintext highlighter-rouge">github-pages</code>
+gem</a>.</p>
+
+      </article>
+    </div>
+    <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    
+      <h4>Getting Started</h4>
+      <ul>
+          <li><a href="/docs/">
+              Quickstart
+            </a>
+          </li>
+        
+          <li><a href="/docs/installation/">
+              Installation
+            </a>
+          </li>
+        
+          <li><a href="/docs/ruby-101/">
+              Ruby 101
+            </a>
+          </li>
+        
+          <li><a href="/docs/community/">
+              Community
+            </a>
+          </li>
+        
+          <li><a href="/docs/step-by-step/01-setup/">
+              Step by Step Tutorial
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Build</h4>
+      <ul>
+          <li><a href="/docs/usage/">
+              Command Line Usage
+            </a>
+          </li>
+        
+          <li><a href="/docs/configuration/">
+              Configuration
+            </a>
+          </li>
+        
+          <li><a href="/docs/rendering-process/">
+              Rendering Process
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Content</h4>
+      <ul>
+          <li><a href="/docs/pages/">
+              Pages
+            </a>
+          </li>
+        
+          <li><a href="/docs/posts/">
+              Posts
+            </a>
+          </li>
+        
+          <li><a href="/docs/front-matter/">
+              Front Matter
+            </a>
+          </li>
+        
+          <li><a href="/docs/collections/">
+              Collections
+            </a>
+          </li>
+        
+          <li><a href="/docs/datafiles/">
+              Data Files
+            </a>
+          </li>
+        
+          <li><a href="/docs/assets/">
+              Assets
+            </a>
+          </li>
+        
+          <li><a href="/docs/static-files/">
+              Static Files
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Site Structure</h4>
+      <ul>
+          <li><a href="/docs/structure/">
+              Directory Structure
+            </a>
+          </li>
+        
+          <li><a href="/docs/liquid/">
+              Liquid
+            </a>
+          </li>
+        
+          <li><a href="/docs/variables/">
+              Variables
+            </a>
+          </li>
+        
+          <li><a href="/docs/includes/">
+              Includes
+            </a>
+          </li>
+        
+          <li><a href="/docs/layouts/">
+              Layouts
+            </a>
+          </li>
+        
+          <li><a href="/docs/permalinks/">
+              Permalinks
+            </a>
+          </li>
+        
+          <li><a href="/docs/themes/">
+              Themes
+            </a>
+          </li>
+        
+          <li><a href="/docs/pagination/">
+              Pagination
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Guides</h4>
+      <ul>
+          <li><a href="/docs/plugins/">
+              Plugins
+            </a>
+          </li>
+        
+          <li><a href="/docs/migrations/">
+              Blog Migrations
+            </a>
+          </li>
+        
+          <liclass="current"><a href="/docs/upgrading/">
+              Upgrading
+            </a>
+          </li>
+        
+          <li><a href="/docs/deployment/">
+              Deployment
+            </a>
+          </li>
+        
+      </ul>
+    </aside>
+</div>
+<div class="clear"></div>
+  </div>
+</section>
+<footer>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <p>Jekyll is lovingly maintained by the <a href="/team/">core team</a> of volunteers. </p>
+      <p>The contents of this website are <br />&copy;&nbsp;2024 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT&nbsp;License</a>.</p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Proudly hosted by
+        <a href="https://github.com">
+          <img src="/img/footer-logo.png" width="100" height="30" alt="GitHub • Social coding">
+        </a>
+      </p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Jekyll is funded thanks to its
+        <a href="https://github.com/jekyll/jekyll#sponsors">
+          sponsors!
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+<script>
+/* Creates an anchor element with the given ID and link for the permalink*/
+const anchorForId = (id) => {
+  const anchor = document.createElement("a");
+  anchor.className = "header-link";
+  anchor.href = `#${id}`;
+  anchor.innerHTML = `<span class="sr-only">Permalink</span><i class="fa fa-link" aria-hidden="true"></i>`;
+  anchor.title = "Permalink";
+  return anchor;
+};
+
+/* Finds all headers of the specified level within the given element, and adds a permalink to each header*/
+const linkifyAnchors = (level, containingElement) => {
+  const headers = Array.from(containingElement.getElementsByTagName(`h${level}`));
+  headers.forEach((header) => {
+    if (header.id) {
+      header.appendChild(anchorForId(header.id));
+    }
+  });
+};
+
+/* Executes the function when the document is ready */
+document.onreadystatechange = () => {
+  if (document.readyState === "complete") {
+    const contentBlock = document.getElementsByClassName("docs")[0]
+      ?? document.getElementsByClassName("news")[0];
+    if (!contentBlock) { return; }
+    for (let level = 1; level <= 6; level++) {
+      linkifyAnchors(level, contentBlock);
+    }
+  }
+};
+</script>
+<!-- Google Analytics (https://www.google.com/analytics) -->
+  <script>
+    !function(j,e,k,y,l,L){j.GoogleAnalyticsObject=y,j[y]||(j[y]=function(){
+    (j[y].q=j[y].q||[]).push(arguments)}),j[y].l=+new Date,l=e.createElement(k),
+    L=e.getElementsByTagName(k)[0],l.src='https://www.google-analytics.com/analytics.js',
+    L.parentNode.insertBefore(l,L)}(window,document,'script','ga');
+
+    ga('create', 'UA-50755011-1', 'jekyllrb.com');
+    ga('send', 'pageview');
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script> docsearch({
+apiKey: '50fe39c839958dfad797000f33e2ec17',
+indexName: 'jekyllrb',
+inputSelector: '#docsearch-input',
+enhancedSearchInput: true,
+debug: false // Set debug to true if you want to inspect the dropdown
+});
+</script>
+<script>
+  const navigateToUrl = (select) => {
+    const url = select.value;
+    url && (window.location.href = url);
+  };
+  </script>
+</body>
+</html>

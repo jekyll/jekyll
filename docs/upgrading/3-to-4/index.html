@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
+  <link type="application/atom+xml" rel="alternate" href="/feed/release.xml" title="Jekyll releases posts" />
+  <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
+  <link rel="preload" href="/fonts/lato-v14-latin-300.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/lato-v14-latin-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/css/screen.css" as="style">
+  <link rel="stylesheet" href="/css/screen.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Upgrading from 3.x to 4.x | Jekyll • Simple, blog-aware, static sites</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Upgrading from 3.x to 4.x" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A few things have changed in Jekyll 4." />
+<meta property="og:description" content="A few things have changed in Jekyll 4." />
+<link rel="canonical" href="https://jekyllrb.com/docs/upgrading/3-to-4/" />
+<meta property="og:url" content="https://jekyllrb.com/docs/upgrading/3-to-4/" />
+<meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
+<meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-03-29T04:39:06-07:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
+<meta property="twitter:title" content="Upgrading from 3.x to 4.x" />
+<meta name="twitter:site" content="@jekyllrb" />
+<meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-03-29T04:39:06-07:00","datePublished":"2024-03-29T04:39:06-07:00","description":"A few things have changed in Jekyll 4.","headline":"Upgrading from 3.x to 4.x","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/upgrading/3-to-4/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/upgrading/3-to-4/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.min.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="wrap"><header>
+  <div class="flexbox">
+    <div class="center-on-mobiles">
+      <h1>
+        <a href="/" class="logo">
+          <span class="sr-only">Jekyll</span>
+          <img src="/img/logo-2x.png" width="140" height="65" alt="Jekyll Logo">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav hide-on-mobiles">
+      <ul>
+  <li><a href="/">Home</a></li>
+  <li class="current"><a href="/docs/">Docs</a></li>
+  <li><a href="/resources/">Resources</a></li>
+  <li><a href="/showcase/">Showcase</a></li>
+  <li><a href="/news/">News</a></li>
+  </ul>
+</nav>
+    <div class="search hide-on-mobiles">
+      <input type="text" id="docsearch-input" placeholder="Search the docs…" aria-label="Search"></div>
+    <div class="meta hide-on-mobiles">
+      <ul>
+        <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.3.3">v4.3.3</a></li>
+        <li><a href="https://github.com/jekyll/jekyll">GitHub</a></li>
+      </ul>
+    </div>
+  </div>
+  <nav class="mobile-nav show-on-mobiles">
+    <ul>
+  <li><a href="/">Home</a></li>
+    <li class="current" aria-current="page" ><a href="/docs/">Docs</a></li>
+    <li><a href="/resources/">Resources</a></li>
+    <li><a href="/news/">News</a></li>
+    <li><a href="https://github.com/jekyll/jekyll" target="_blank" rel="noopener">GitHub</a></li>
+</ul></nav>
+</header>
+<section class="docs">
+  <div class="grid">
+    <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select id="doc-nav" onchange="navigateToUrl(this)" aria-label="Select a page from the documentation">
+    <option value="">Navigate the docs…</option>
+    
+      <optgroup label="Getting Started">
+          <option value="/docs/">Quickstart</option>
+          <option value="/docs/installation/">Installation</option>
+          <option value="/docs/ruby-101/">Ruby 101</option>
+          <option value="/docs/community/">Community</option>
+          <option value="/docs/step-by-step/01-setup/">Step by Step Tutorial</option>
+      </optgroup>
+    
+      <optgroup label="Build">
+          <option value="/docs/usage/">Command Line Usage</option>
+          <option value="/docs/configuration/">Configuration</option>
+          <option value="/docs/rendering-process/">Rendering Process</option>
+      </optgroup>
+    
+      <optgroup label="Content">
+          <option value="/docs/pages/">Pages</option>
+          <option value="/docs/posts/">Posts</option>
+          <option value="/docs/front-matter/">Front Matter</option>
+          <option value="/docs/collections/">Collections</option>
+          <option value="/docs/datafiles/">Data Files</option>
+          <option value="/docs/assets/">Assets</option>
+          <option value="/docs/static-files/">Static Files</option>
+      </optgroup>
+    
+      <optgroup label="Site Structure">
+          <option value="/docs/structure/">Directory Structure</option>
+          <option value="/docs/liquid/">Liquid</option>
+          <option value="/docs/variables/">Variables</option>
+          <option value="/docs/includes/">Includes</option>
+          <option value="/docs/layouts/">Layouts</option>
+          <option value="/docs/permalinks/">Permalinks</option>
+          <option value="/docs/themes/">Themes</option>
+          <option value="/docs/pagination/">Pagination</option>
+      </optgroup>
+    
+      <optgroup label="Guides">
+          <option value="/docs/plugins/">Plugins</option>
+          <option value="/docs/migrations/">Blog Migrations</option>
+          <option value="/docs/upgrading/">Upgrading</option>
+          <option value="/docs/deployment/">Deployment</option>
+      </optgroup>
+    
+  </select>
+</div>
+<div class="unit four-fifths">
+      <article>
+        <div class="improve right hide-on-mobiles">
+          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/upgrading/3-to-4.md"><i
+             class="fa fa-pencil"></i> &nbsp;Improve this page</a>
+        </div>
+        <h1>Upgrading from 3.x to 4.x</h1>
+        <p>A few things have changed in Jekyll 4.</p>
+
+<p>Before we dive in, you need to have at least Ruby 2.5.0
+installed.</p>
+
+<p>Run the following in your terminal to check</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruby <span class="nt">-v</span>
+ruby 3.1.3p185 <span class="o">(</span>2022-11-24 revision 1a6b16756e<span class="o">)</span>
+</code></pre></div></div>
+
+<p>If you’re using a supported Ruby version &gt;= 2.5.0, go ahead
+and fetch the latest version of Jekyll:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem update jekyll
+</code></pre></div></div>
+
+<div class="note warning">
+  <h5><code>post_url</code> Tag and Baseurl</h5>
+  <p>&nbsp;</p>
+  <p>
+    The <code>post_url</code> tag now incorporates the <code>relative_url</code> filter within itself
+    and therefore automatically prepends your site's <code>baseurl</code> to the post's <code>url</code>
+    value.
+  </p>
+  <p>
+    Please ensure that you change all instances of the <code>post_url</code> usage as following:
+  </p>
+
+
+<figure class="highlight"><pre><code class="language-diff" data-lang="diff"><span class="gd">- {{ site.baseurl }}/{% post_url 2018-03-20-hello-world.markdown %}
+</span><span class="gi">+ {% post_url 2018-03-20-hello-world.markdown %}</span></code></pre></figure>
+
+</div>
+
+<h2 id="template-rendering">Template rendering</h2>
+
+<p>We’ve slightly altered the way Jekyll parses and renders your various templates
+to improve the overall build times. Jekyll now parses a template once, caches it
+internally and then renders the parsed template multiple times as required by
+your pages and documents.</p>
+
+<p>The downside to this is that some of the community-authored plugins may not work
+as they previously used to.</p>
+
+<h2 id="static-files-in-unrendered-collections">Static files in unrendered collections</h2>
+
+<p>Collections other than <code class="language-plaintext highlighter-rouge">posts</code> can contain static assets along with Markdown files.
+But if the collection has not been configured with metadata <code class="language-plaintext highlighter-rouge">output: true</code>, then
+neither its <em>documents</em> nor its <em>static assets</em> will be output to the destination
+directory.</p>
+
+<h2 id="for-plugin-authors">For plugin authors</h2>
+
+<ul>
+  <li>
+    <p>If your plugin depends on the following code: <code class="language-plaintext highlighter-rouge">site.liquid_renderer.file(path).parse(content)</code>,
+note that the return value (<code class="language-plaintext highlighter-rouge">template</code>, an instance of <em><code class="language-plaintext highlighter-rouge">Liquid::Template</code></em>), from that line will
+always be the <strong>same object</strong> for a given <code class="language-plaintext highlighter-rouge">path</code>. <br />
+The <em><code class="language-plaintext highlighter-rouge">template</code></em> instance is then rendered as previously, with respect to the <code class="language-plaintext highlighter-rouge">payload</code> passed to it.
+You’ll therefore have to ensure that <em><code class="language-plaintext highlighter-rouge">payload</code></em> is not memoized or cached in your plugin instance.</p>
+  </li>
+  <li>
+    <p>If its a requirement that <code class="language-plaintext highlighter-rouge">template</code> you get from the above step <em>be different</em> at all times,
+you can invoke <em><code class="language-plaintext highlighter-rouge">Liquid::Template</code></em> directly:</p>
+
+    <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">- template = site.liquid_renderer.file(path).parse(content)
+</span><span class="gi">+ template = Liquid::Template.parse(content)
+</span></code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="exclusion-changes">Exclusion changes</h2>
+
+<p>We’ve enhanced our default exclusion array.
+It now looks like the following:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># default excludes</span>
+<span class="na">exclude</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">.sass-cache/</span>
+<span class="pi">-</span> <span class="s">.jekyll-cache/</span>
+<span class="pi">-</span> <span class="s">gemfiles/</span>
+<span class="pi">-</span> <span class="s">Gemfile</span>
+<span class="pi">-</span> <span class="s">Gemfile.lock</span>
+<span class="pi">-</span> <span class="s">node_modules/</span>
+<span class="pi">-</span> <span class="s">vendor/bundle/</span>
+<span class="pi">-</span> <span class="s">vendor/cache/</span>
+<span class="pi">-</span> <span class="s">vendor/gems/</span>
+<span class="pi">-</span> <span class="s">vendor/ruby/</span>
+</code></pre></div></div>
+
+<p>What’s new is that this array <strong>does not get overridden by the <code class="language-plaintext highlighter-rouge">exclude</code> array
+in the user’s config file anymore</strong>. The user’s exclude entries simply get
+<strong>added</strong> to the above default array (if the entry isn’t already excluded).</p>
+
+<p>To forcibly “process” directories or files that have been excluded, list them
+in the <code class="language-plaintext highlighter-rouge">include</code> array instead:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># overrides your excluded items configuration and the default include array ([".htaccess"])</span>
+<span class="na">include</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">.htaccess</span>
+  <span class="pi">-</span> <span class="s">node_modules/uglifier/index.js</span>
+</code></pre></div></div>
+
+<p>The above configuration directs Jekyll to handle only
+<code class="language-plaintext highlighter-rouge">node_modules/uglifier/index.js</code> while ignoring every other file in the
+<code class="language-plaintext highlighter-rouge">node_modules</code> directory since that directory is “excluded” by default.</p>
+
+<p>Note that the default <code class="language-plaintext highlighter-rouge">include</code> array still gets overridden by the <code class="language-plaintext highlighter-rouge">include</code>
+array in your config file. So, be sure to add <code class="language-plaintext highlighter-rouge">.htaccess</code> to the list if you
+need that file to be present in the generated site.</p>
+
+<h2 id="kramdown-v2">Kramdown v2</h2>
+
+<p>Jekyll has dropped support for <code class="language-plaintext highlighter-rouge">kramdown-1.x</code> entirely.</p>
+
+<p>From <a href="https://kramdown.gettalong.org/news.html#kramdown-200-released"><code class="language-plaintext highlighter-rouge">v2.0</code> onwards</a>
+kramdown requires specific extensions to be additionally installed to use
+certain desired features outside of kramdown’s core functionality.</p>
+
+<p>Out of all the extensions listed in the report linked above, gem
+<code class="language-plaintext highlighter-rouge">kramdown-parser-gfm</code> is automatically installed along with Jekyll 4.0. The
+remaining extensions will have to be manually installed by the user depending on
+desired functionality, by listing the extension’s gem-name in their <code class="language-plaintext highlighter-rouge">Gemfile</code>.</p>
+
+<p>Notes:</p>
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">kramdown-converter-pdf</code> will be ignored by Jekyll Core. To have Jekyll convert Markdown to PDF
+you’ll have to depend on a plugin that subclasses <code class="language-plaintext highlighter-rouge">Jekyll::Converter</code> with the
+<a href="/docs/plugins/converters/">required methods</a>.</p>
+
+    <p>For example:</p>
+
+    <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">module</span> <span class="nn">Jekyll</span>
+  <span class="no">External</span><span class="p">.</span><span class="nf">require_with_graceful_fail</span> <span class="s2">"kramdown-converter-pdf"</span>
+
+  <span class="k">class</span> <span class="nc">Markdown2PDF</span> <span class="o">&lt;</span> <span class="no">Converter</span>
+    <span class="n">safe</span> <span class="kp">true</span>
+    <span class="n">priority</span> <span class="ss">:low</span>
+
+    <span class="k">def</span> <span class="nf">matches</span><span class="p">(</span><span class="n">ext</span><span class="p">)</span>
+      <span class="c1"># match only files that have an extension exactly ".markdown"</span>
+      <span class="n">ext</span> <span class="o">=~</span> <span class="sr">/^\.markdown$/</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+      <span class="no">Kramdown</span><span class="o">::</span><span class="no">Document</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">content</span><span class="p">).</span><span class="nf">to_pdf</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">output_ext</span>
+      <span class="s2">".pdf"</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Vendors that provide a versioned Jekyll Environment Image (e.g. Docker Image, GitHub Pages, etc)
+will have to manually whitelist kramdown’s extension gems in their distributions for Jekyll 4.0.</p>
+  </li>
+</ul>
+
+<h2 id="deprecated-configuration-options">Deprecated Configuration Options</h2>
+
+<p>Jekyll 4.0 has dropped support for all legacy configuration options that were deprecated over multiple
+releases in the previous series.</p>
+
+<p>To that end, we shall no longer output a deprecation warning when we encounter a legacy config key nor
+shall we gracefully assign their values to the newer counterparts. Depending on the key, it shall either
+be ignored or raise an <code class="language-plaintext highlighter-rouge">InvalidConfigurationError</code> error if the key is still valid but the associated
+value is not of the valid type.</p>
+
+      </article>
+    </div>
+    <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    
+      <h4>Getting Started</h4>
+      <ul>
+          <li><a href="/docs/">
+              Quickstart
+            </a>
+          </li>
+        
+          <li><a href="/docs/installation/">
+              Installation
+            </a>
+          </li>
+        
+          <li><a href="/docs/ruby-101/">
+              Ruby 101
+            </a>
+          </li>
+        
+          <li><a href="/docs/community/">
+              Community
+            </a>
+          </li>
+        
+          <li><a href="/docs/step-by-step/01-setup/">
+              Step by Step Tutorial
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Build</h4>
+      <ul>
+          <li><a href="/docs/usage/">
+              Command Line Usage
+            </a>
+          </li>
+        
+          <li><a href="/docs/configuration/">
+              Configuration
+            </a>
+          </li>
+        
+          <li><a href="/docs/rendering-process/">
+              Rendering Process
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Content</h4>
+      <ul>
+          <li><a href="/docs/pages/">
+              Pages
+            </a>
+          </li>
+        
+          <li><a href="/docs/posts/">
+              Posts
+            </a>
+          </li>
+        
+          <li><a href="/docs/front-matter/">
+              Front Matter
+            </a>
+          </li>
+        
+          <li><a href="/docs/collections/">
+              Collections
+            </a>
+          </li>
+        
+          <li><a href="/docs/datafiles/">
+              Data Files
+            </a>
+          </li>
+        
+          <li><a href="/docs/assets/">
+              Assets
+            </a>
+          </li>
+        
+          <li><a href="/docs/static-files/">
+              Static Files
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Site Structure</h4>
+      <ul>
+          <li><a href="/docs/structure/">
+              Directory Structure
+            </a>
+          </li>
+        
+          <li><a href="/docs/liquid/">
+              Liquid
+            </a>
+          </li>
+        
+          <li><a href="/docs/variables/">
+              Variables
+            </a>
+          </li>
+        
+          <li><a href="/docs/includes/">
+              Includes
+            </a>
+          </li>
+        
+          <li><a href="/docs/layouts/">
+              Layouts
+            </a>
+          </li>
+        
+          <li><a href="/docs/permalinks/">
+              Permalinks
+            </a>
+          </li>
+        
+          <li><a href="/docs/themes/">
+              Themes
+            </a>
+          </li>
+        
+          <li><a href="/docs/pagination/">
+              Pagination
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Guides</h4>
+      <ul>
+          <li><a href="/docs/plugins/">
+              Plugins
+            </a>
+          </li>
+        
+          <li><a href="/docs/migrations/">
+              Blog Migrations
+            </a>
+          </li>
+        
+          <li><a href="/docs/upgrading/">
+              Upgrading
+            </a>
+          </li>
+        
+          <li><a href="/docs/deployment/">
+              Deployment
+            </a>
+          </li>
+        
+      </ul>
+    </aside>
+</div>
+<div class="clear"></div>
+  </div>
+</section>
+<footer>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <p>Jekyll is lovingly maintained by the <a href="/team/">core team</a> of volunteers. </p>
+      <p>The contents of this website are <br />&copy;&nbsp;2024 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT&nbsp;License</a>.</p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Proudly hosted by
+        <a href="https://github.com">
+          <img src="/img/footer-logo.png" width="100" height="30" alt="GitHub • Social coding">
+        </a>
+      </p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Jekyll is funded thanks to its
+        <a href="https://github.com/jekyll/jekyll#sponsors">
+          sponsors!
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+<script>
+/* Creates an anchor element with the given ID and link for the permalink*/
+const anchorForId = (id) => {
+  const anchor = document.createElement("a");
+  anchor.className = "header-link";
+  anchor.href = `#${id}`;
+  anchor.innerHTML = `<span class="sr-only">Permalink</span><i class="fa fa-link" aria-hidden="true"></i>`;
+  anchor.title = "Permalink";
+  return anchor;
+};
+
+/* Finds all headers of the specified level within the given element, and adds a permalink to each header*/
+const linkifyAnchors = (level, containingElement) => {
+  const headers = Array.from(containingElement.getElementsByTagName(`h${level}`));
+  headers.forEach((header) => {
+    if (header.id) {
+      header.appendChild(anchorForId(header.id));
+    }
+  });
+};
+
+/* Executes the function when the document is ready */
+document.onreadystatechange = () => {
+  if (document.readyState === "complete") {
+    const contentBlock = document.getElementsByClassName("docs")[0]
+      ?? document.getElementsByClassName("news")[0];
+    if (!contentBlock) { return; }
+    for (let level = 1; level <= 6; level++) {
+      linkifyAnchors(level, contentBlock);
+    }
+  }
+};
+</script>
+<!-- Google Analytics (https://www.google.com/analytics) -->
+  <script>
+    !function(j,e,k,y,l,L){j.GoogleAnalyticsObject=y,j[y]||(j[y]=function(){
+    (j[y].q=j[y].q||[]).push(arguments)}),j[y].l=+new Date,l=e.createElement(k),
+    L=e.getElementsByTagName(k)[0],l.src='https://www.google-analytics.com/analytics.js',
+    L.parentNode.insertBefore(l,L)}(window,document,'script','ga');
+
+    ga('create', 'UA-50755011-1', 'jekyllrb.com');
+    ga('send', 'pageview');
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script> docsearch({
+apiKey: '50fe39c839958dfad797000f33e2ec17',
+indexName: 'jekyllrb',
+inputSelector: '#docsearch-input',
+enhancedSearchInput: true,
+debug: false // Set debug to true if you want to inspect the dropdown
+});
+</script>
+<script>
+  const navigateToUrl = (select) => {
+    const url = select.value;
+    url && (window.location.href = url);
+  };
+  </script>
+</body>
+</html>

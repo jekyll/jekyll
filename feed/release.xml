@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://jekyllrb.com/feed/release.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2024-03-29T04:39:06-07:00</updated><id>https://jekyllrb.com/feed/release.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites | Release</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 3.9.4 Released</title><link href="https://jekyllrb.com/news/2023/12/28/jekyll-3-9-4-released/" rel="alternate" type="text/html" title="Jekyll 3.9.4 Released" /><published>2023-12-28T14:45:05-08:00</published><updated>2023-12-28T14:45:05-08:00</updated><id>https://jekyllrb.com/news/2023/12/28/jekyll-3-9-4-released</id><content type="html" xml:base="https://jekyllrb.com/news/2023/12/28/jekyll-3-9-4-released/"><![CDATA[<p>Hey Jekyllers!</p>
+
+<p>This release, 3.9.4, is to bring Ruby 3.3 support to Jekyll. You can find
+the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
+
+<p>Happy Jekylling!</p>]]></content><author><name>parkr</name></author><category term="release" /><summary type="html"><![CDATA[Hey Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.3.3 Released</title><link href="https://jekyllrb.com/news/2023/12/27/jekyll-4-3-3-released/" rel="alternate" type="text/html" title="Jekyll 4.3.3 Released" /><published>2023-12-27T09:15:00-08:00</published><updated>2023-12-27T09:15:00-08:00</updated><id>https://jekyllrb.com/news/2023/12/27/jekyll-4-3-3-released</id><content type="html" xml:base="https://jekyllrb.com/news/2023/12/27/jekyll-4-3-3-released/"><![CDATA[<p>Hello Jekyllers!</p>
+
+<p>This is a very small release containing two things:</p>
+
+<ul>
+  <li>A fix for using Jekyll with Ruby 3.3 and the new <code class="language-plaintext highlighter-rouge">logger</code> gem included with that release.</li>
+  <li>A test fix for newer versions of Ruby for packagers that run the test suite
+ as part of their packaging process.</li>
+</ul>
+
+<p>Nothing new in the way of features for this release. You’ll need to wait for v4.4 for that. 😄</p>
+
+<p>Happy Jekylling!!</p>]]></content><author><name>mattr-</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 3.9.3 Released</title><link href="https://jekyllrb.com/news/2023/01/29/jekyll-3-9-3-released/" rel="alternate" type="text/html" title="Jekyll 3.9.3 Released" /><published>2023-01-29T18:30:22-08:00</published><updated>2023-01-29T18:30:22-08:00</updated><id>https://jekyllrb.com/news/2023/01/29/jekyll-3-9-3-released</id><content type="html" xml:base="https://jekyllrb.com/news/2023/01/29/jekyll-3-9-3-released/"><![CDATA[<p>Jekyll 3.9.3 is a bug fix release loosening version restrictions for
+dependencies <code class="language-plaintext highlighter-rouge">i18n</code> and <code class="language-plaintext highlighter-rouge">tzinfo</code> gems. You can now use Jekyll v3.9 with
+newer versions of these gems!</p>
+
+<p>More details in <a href="/docs/history/#v3-9-3">the full release notes</a>.</p>
+
+<p>Happy Jekylling!</p>]]></content><author><name>parkr</name></author><category term="release" /><summary type="html"><![CDATA[Jekyll 3.9.3 is a bug fix release loosening version restrictions for dependencies i18n and tzinfo gems. You can now use Jekyll v3.9 with newer versions of these gems!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.3.2 Released</title><link href="https://jekyllrb.com/news/2023/01/20/jekyll-4-3-2-released/" rel="alternate" type="text/html" title="Jekyll 4.3.2 Released" /><published>2023-01-20T09:30:00-08:00</published><updated>2023-01-20T09:30:00-08:00</updated><id>https://jekyllrb.com/news/2023/01/20/jekyll-4-3-2-released</id><content type="html" xml:base="https://jekyllrb.com/news/2023/01/20/jekyll-4-3-2-released/"><![CDATA[<p>Hello Jekyllers!</p>
+
+<p>This is a small release containing fixes for some issues that came to our attention after the
+release of v4.3.1:</p>
+<ul>
+  <li>Our <code class="language-plaintext highlighter-rouge">link</code> tag had a significant performance regression with the release of v4.3.0 solely due
+to a change related to <code class="language-plaintext highlighter-rouge">Jekyll::Site#each_site_file</code>. The new patch restores previous performance
+while maintaining the enhancements introduced in v4.3.0.</li>
+  <li>The tables printed out on running a build with the <code class="language-plaintext highlighter-rouge">--profile</code> did not stop including the
+misleading <code class="language-plaintext highlighter-rouge">TOTALS</code> row as advertised in the release-notes for v4.3.0. The row has been removed
+completely now.</li>
+  <li><code class="language-plaintext highlighter-rouge">jekyll-sass-converter-3.0.0</code> that shipped in the interim was not happy with our blank-site
+scaffolding (from running <code class="language-plaintext highlighter-rouge">jekyll new &lt;path&gt; --blank</code>) having a <code class="language-plaintext highlighter-rouge">main.scss</code> stylesheet template
+<em>import</em> a Sass partial <em>also named</em> <code class="language-plaintext highlighter-rouge">main.scss</code>. So the partial has been renamed to <code class="language-plaintext highlighter-rouge">base.scss</code>.</li>
+</ul>
+
+<p>That’s about it for this release. Depending on whether you use the features patched in this release,
+you may either wait for v4.4.0 (releasing in the near future) to update your Gemfile or, download
+the latest release right away! :)</p>
+
+<p>Happy Jekyllin’!!</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.3.1 Released</title><link href="https://jekyllrb.com/news/2022/10/26/jekyll-4-3-1-released/" rel="alternate" type="text/html" title="Jekyll 4.3.1 Released" /><published>2022-10-26T06:39:42-07:00</published><updated>2022-10-26T06:39:42-07:00</updated><id>https://jekyllrb.com/news/2022/10/26/jekyll-4-3-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2022/10/26/jekyll-4-3-1-released/"><![CDATA[<p>Hello Jekyllers!</p>
+
+<p>We’re shipping <code class="language-plaintext highlighter-rouge">v4.3.1</code> containing fixes for two issues with v4.3.0:</p>
+<ul>
+  <li>Jekyll now respects user-defined <code class="language-plaintext highlighter-rouge">name</code> attribute for collection documents when accessed in Liquid templates.</li>
+  <li>Revert the changes made to trigger incremental rebuilds when data files are changed.</li>
+</ul>
+
+<p>Thanks to the users who took the time to report the issues to us.
+Happy Jekyllin’</p>
+
+<p>P.S. Development towards v5 has taken a back seat as of now. I plan on releasing a v4.4.0 instead.
+That said, please feel free to comment on the <a href="https://github.com/jekyll/jekyll/issues/9156">tentative roadmap to v5</a>.</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.3.0 Released</title><link href="https://jekyllrb.com/news/2022/10/20/jekyll-4-3-0-released/" rel="alternate" type="text/html" title="Jekyll 4.3.0 Released" /><published>2022-10-20T08:20:22-07:00</published><updated>2022-10-20T08:20:22-07:00</updated><id>https://jekyllrb.com/news/2022/10/20/jekyll-4-3-0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2022/10/20/jekyll-4-3-0-released/"><![CDATA[<p>Hello Jekyllers!</p>
+
+<p>The Jekyll team is happy to announce the release of <code class="language-plaintext highlighter-rouge">v4.3.0</code> shipping with some nice improvements and bug-fixes.</p>
+
+<h2 id="improvements">Improvements</h2>
+
+<h3 id="dependencies">Dependencies</h3>
+
+<ul>
+  <li>Gem <code class="language-plaintext highlighter-rouge">webrick</code> is now a listed dependency. You no longer have to add the gem to your Gemfile when using Jekyll with
+Ruby 3.0 or newer.</li>
+  <li>You may now use Rouge v4 or continue using Rouge v3.x by explicitly mentioning the version in your Gemfile.</li>
+  <li>Support for gem <code class="language-plaintext highlighter-rouge">tzinfo</code> v2 and non-half-hour offsets have been added.</li>
+  <li>You will be able to use v3 of <code class="language-plaintext highlighter-rouge">jekyll-sass-converter</code> when it ships.</li>
+</ul>
+
+<h3 id="builds">Builds</h3>
+
+<ul>
+  <li>Added support for bundling and loading data files from within a theme-gem similar to existing theme-gem contents.</li>
+  <li>Changes to data files at source will now be respected during incremental builds.</li>
+  <li><code class="language-plaintext highlighter-rouge">site.static_files</code> now include static files within a collection.</li>
+  <li>You may now configure converters for CSV data.</li>
+  <li><code class="language-plaintext highlighter-rouge">.jekyll-cache</code> or its equivalent custom cache directory will be automatically ignored by Git.</li>
+  <li>Vendor the current latest mime-types dataset for use with local development server.</li>
+</ul>
+
+<h3 id="liquid-templates">Liquid Templates</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">basename</code> attribute of documents are now exposed to Liquid as <code class="language-plaintext highlighter-rouge">name</code>, for example <code class="language-plaintext highlighter-rouge">{{ page.name }}</code>. Excerpts delegate
+to associated document attribute.</li>
+  <li>Top-level variable <code class="language-plaintext highlighter-rouge">{{ theme }}</code> introduced to expose gemspec details of theme-gem. (Valid only when using theme-gem)</li>
+</ul>
+
+<h2 id="bug-fixes">Bug-fixes</h2>
+
+<p>Some noteworthy bug-fixes include:</p>
+
+<ul>
+  <li>Respect <code class="language-plaintext highlighter-rouge">BUNDLE_GEMFILE</code> when loading Jekyll plugins via Bundler.</li>
+  <li>Prevent loading versions older than kramdown-2.3.1 as a security measure.</li>
+  <li>Trigger livereloading even if the site has <em>no pages</em>.</li>
+  <li>Ensure the expected class of theme config is returned following a merger.</li>
+  <li>Enable BOM encoding only if configured encoding is ‘UTF-8’.</li>
+  <li>Respect server protocol while injecting livereload script.</li>
+  <li>The table output for <code class="language-plaintext highlighter-rouge">--profile</code> stops printing incorrect “TOTALS” row.</li>
+</ul>
+
+<p><a href="/docs/history/#v4-3-0">The full list of changes</a> may be perused if interested.</p>
+
+<p>As always, we are grateful to the many contributors that helped improve the project codebase and documentation:</p>
+
+<p><small>Ashwin Maroli, Frank Taillandier, Matt Rogers, Parker Moore, Kelvin M. Klann, Josh Soref, Youssef Boulkaid,
+Emily Grace Seville, Robert Martin, jaybe@jekyll, Ben Keith, Jonathan Darrer, Kaben, Mike Kasberg, Moncef Belyamani,
+Phil Ross, Sesh Sadasivam, Adam Bell, Alaz Tetik, Alex Malaszkiewicz, Alex Saveau, Andreas Deininger, Andrew Davis,
+Andrew Gutekanst, Andrii Abramov, Aram Akhavan, Atlas Cove, Attaphong Rattanaveerachanon, Ben Whetton, Chris Keefe,
+Clayton Smith, Craig H Maynard, Curious Cat, Daniel Haim, Daniel Kehoe, Daryl Hepting, David Bruant, David Zhang,
+Edson Jiménez, Eric Cousineau, Gary, Giuseppe Bertone, Ikko Ashimine, JJ, JT, Jeff Wilcox, Jeffrey Veen,
+Jesse van der Pluijm, John Losito, Kantanat-Stamp, Kirstin Heidler, Korbs, Laurence Andrews, Liam Bigelow, Maik Riechert,
+Meet Gor, Meg Gutshall, Michael Gerzabek, MichaelCordingley, Miguel Brandão, Nahin Khan, Nemo, Nicholas Paxford,
+Nick Coish, Otto Urpelainen, Parikshit87, Phil Kirlin, Qasim Qureshi, Ricardo N Feliciano, Rishi Raj Jain, SNVMK,
+SaintMalik, Sampath Sukesh Ravolaparthi, Shannon Kularathna, Shyam Mohan K, Takuya N, Tejas Bubane, Toshimaru, Tyler887,
+Vinhas Kevin, alena-ko, fauno, lm, lucafrance, nusu, shorty, なつき</small></p>
+
+<hr />
+
+<h3 id="announcement">Announcement</h3>
+
+<p>I would like to inform you that following this release, Jekyll will start developing towards a v5.0 milestone that will
+<strong>definitely contain breaking changes</strong>. I have set up a <a href="https://github.com/jekyll/jekyll/issues/9156">tentative roadmap at the GitHub repository</a> to give everyone
+a glimpse of the PROBABLE OUTCOME. Towards that end, we will no longer accept documentation fixes on <code class="language-plaintext highlighter-rouge">master</code>. The <code class="language-plaintext highlighter-rouge">4.3-stable</code>
+branch will be used to build and deploy the site for https://jekyllrb.com.</p>
+
+<p>Jekyll 3.x series is now under security-maintenance phase. Only security patches will be released when necessary.</p>
+
+<p>Jekyll 4.x series will continue receiving bug-fixes and security-patches only. Depending on the state of progress towards v5.0,
+there will be <em>at least</em> one minor version release serving as a transitionary version containing deprecations and bridge code
+to ease the eventual upgrade to v5.0.</p>
+
+<hr />
+
+<p>That is all for now.
+Happy Jekyllin’!!</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 3.9.2 Released</title><link href="https://jekyllrb.com/news/2022/03/27/jekyll-3-9-2-released/" rel="alternate" type="text/html" title="Jekyll 3.9.2 Released" /><published>2022-03-27T13:20:00-07:00</published><updated>2022-03-27T13:20:00-07:00</updated><id>https://jekyllrb.com/news/2022/03/27/jekyll-3-9-2-released</id><content type="html" xml:base="https://jekyllrb.com/news/2022/03/27/jekyll-3-9-2-released/"><![CDATA[<p>Hey Jekyllers,</p>
+
+<p>Quick bug-fix release for you all today:</p>
+
+<ol>
+  <li>Ruby 3.0 and 3.1 support :tada: (you will need to run <code class="language-plaintext highlighter-rouge">bundle add webrick</code> for <code class="language-plaintext highlighter-rouge">jekyll serve</code> to work)</li>
+  <li><code class="language-plaintext highlighter-rouge">jekyll serve</code> will no longer inject a charset into the MIME type for
+binary types</li>
+  <li>Incremental regeneration now handles includes in collection files
+correctly</li>
+</ol>
+
+<p>That’s all, Happy Jekylling!</p>]]></content><author><name>parkr</name></author><category term="release" /><summary type="html"><![CDATA[Hey Jekyllers,]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.2.2 Released</title><link href="https://jekyllrb.com/news/2022/03/03/jekyll-4-2-2-released/" rel="alternate" type="text/html" title="Jekyll 4.2.2 Released" /><published>2022-03-03T05:45:20-08:00</published><updated>2022-03-03T05:45:20-08:00</updated><id>https://jekyllrb.com/news/2022/03/03/jekyll-4-2-2-released</id><content type="html" xml:base="https://jekyllrb.com/news/2022/03/03/jekyll-4-2-2-released/"><![CDATA[<p>Hello Jekyllers!</p>
+
+<p>Jekyll 4.2.2 has been released. Unlike prior releases, this is a simple maintenance release and may be skipped.</p>
+
+<p>For those who are still curious about the current release, here is some technical context: The previous <code class="language-plaintext highlighter-rouge">jekyll-4.2.1</code> package was built and
+published using a Windows system. A side-effect of that action was that every file bundled into the gem ended up with Windows-style CRLF
+line-endings instead of Unix-style LF line-endings.</p>
+
+<p>For our end-users, this difference holds no significance. However, a third-party entity vendoring the release faced a roadblock. The executable
+program <code class="language-plaintext highlighter-rouge">jekyll</code> apparently misplaced the executable bit because of the change in line-endings.</p>
+
+<p>To that end, the Jekyll team decided to use the GitHub Actions service to build and publish releases. In-house plugins have already published
+releases via this route serving as trials. Henceforth, and unless explicitly reported, all Jekyll releases will be built on GitHub Actions’
+Ubuntu platform and published to Rubygems by @jekyllbot irrespective of the maintainer overseeing the release.</p>
+
+<p>That is all for now.
+Happy Jekyllin’!!</p>
+
+<p><em>P.S.: Jekyll 4.3.0 will be bringing you some new features very soon.. Also, our sass-converter plugin has been <a href="https://github.com/jekyll/jekyll-sass-converter/tree/v2.2.0#sass-embedded">enhanced</a> to support
+modern improvements to Sass.</em></p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.2.1 Released</title><link href="https://jekyllrb.com/news/2021/09/27/jekyll-4-2-1-released/" rel="alternate" type="text/html" title="Jekyll 4.2.1 Released" /><published>2021-09-27T02:15:46-07:00</published><updated>2021-09-27T02:15:46-07:00</updated><id>https://jekyllrb.com/news/2021/09/27/jekyll-4-2-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2021/09/27/jekyll-4-2-1-released/"><![CDATA[<p>Hello Jekyllers!</p>
+
+<p>The Jekyll team is happy to announce the release of <code class="language-plaintext highlighter-rouge">v4.2.1</code> which fixes a couple of
+regressions introduced in <code class="language-plaintext highlighter-rouge">v4.2.0</code> and another bug inherited from Jekyll 3.</p>
+
+<p>In <code class="language-plaintext highlighter-rouge">v4.2.0</code>, we decided to stop overriding <code class="language-plaintext highlighter-rouge">{{ site.url }}</code> with
+the <em>localhost</em> address when running the command <code class="language-plaintext highlighter-rouge">jekyll serve</code> with the default
+<em>development</em> mode. While the intent behind the change was to avoid forcing users to
+generate a <em>production build</em> separately by invoking <code class="language-plaintext highlighter-rouge">jekyll build</code>, it however had an
+unforeseen consequence — absolute URLs for assets now pointed to
+resources that were at times not yet been deployed to the configured <code class="language-plaintext highlighter-rouge">site.url</code>. That
+broke the users’ local development workflow.</p>
+
+<p><code class="language-plaintext highlighter-rouge">v4.2.0</code> also added a series of optimizations surrounding the generation of Liquid
+representation for a site’s standalone pages and layouts. However, that prevented
+<code class="language-plaintext highlighter-rouge">{{ page.content }}</code> and other mutable attributes from reflecting
+the latest state of the requested attribute, thereby breaking the render of all resources
+that were dependent on such mutable attributes.</p>
+
+<p>The last fix included in this release addresses the issue where incremental regeneration
+ignored changes to documents in collections when the site is configured to use a custom
+<code class="language-plaintext highlighter-rouge">collections_dir</code> for all collections.</p>
+
+<p>Special thanks to @benik for helping us understand the regression caused by the decision
+to stop overriding <code class="language-plaintext highlighter-rouge">site.url</code> and proposing to revert the change. Another special thanks
+to @pdmosses for helping us discover the regression surrounding Liquid representation of
+pages by providing with a test repository.</p>
+
+<div style="padding:8px 0 2px;text-align:center;background:rgba(240,0,0,0.1)">
+  :bouquet: <span style="margin:0 6px;font-size:0.75em;vertical-align:top">
+  Dedicated to our colleague Frank who passed away recently</span> :bouquet:
+</div>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 3.9.1 Released</title><link href="https://jekyllrb.com/news/2021/04/08/jekyll-3-9-1-released/" rel="alternate" type="text/html" title="Jekyll 3.9.1 Released" /><published>2021-04-08T07:51:12-07:00</published><updated>2021-04-08T07:51:12-07:00</updated><id>https://jekyllrb.com/news/2021/04/08/jekyll-3-9-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2021/04/08/jekyll-3-9-1-released/"><![CDATA[<p>This patch release of the 3.9 series is released to fix a bug where the
+<code class="language-plaintext highlighter-rouge">include</code> tag does not allow valid filename characters. For example, this
+would previously fail:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% include my-logo@2x.svg %}
+</code></pre></div></div>
+
+<p>This release adds support for the following characters in filenames:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">@</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-</code></li>
+  <li><code class="language-plaintext highlighter-rouge">(</code> and <code class="language-plaintext highlighter-rouge">)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">+</code></li>
+  <li><code class="language-plaintext highlighter-rouge">~</code></li>
+  <li><code class="language-plaintext highlighter-rouge">#</code></li>
+</ul>
+
+<p>Happy Jekylling!</p>]]></content><author><name>parkr</name></author><category term="release" /><summary type="html"><![CDATA[This patch release of the 3.9 series is released to fix a bug where the include tag does not allow valid filename characters. For example, this would previously fail:]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
+  <link type="application/atom+xml" rel="alternate" href="/feed/release.xml" title="Jekyll releases posts" />
+  <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
+  <link rel="preload" href="/fonts/lato-v14-latin-300.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/lato-v14-latin-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/css/screen.css" as="style">
+  <link rel="stylesheet" href="/css/screen.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Pagination | Jekyll • Simple, blog-aware, static sites</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Pagination" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="With many websites — especially blogs — it’s very common to break the main listing of posts up into smaller lists and display them over multiple pages. Jekyll offers a pagination plugin, so you can automatically generate the appropriate files and folders you need for paginated listings." />
+<meta property="og:description" content="With many websites — especially blogs — it’s very common to break the main listing of posts up into smaller lists and display them over multiple pages. Jekyll offers a pagination plugin, so you can automatically generate the appropriate files and folders you need for paginated listings." />
+<link rel="canonical" href="https://jekyllrb.com/docs/pagination/" />
+<meta property="og:url" content="https://jekyllrb.com/docs/pagination/" />
+<meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
+<meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-03-29T04:39:06-07:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
+<meta property="twitter:title" content="Pagination" />
+<meta name="twitter:site" content="@jekyllrb" />
+<meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-03-29T04:39:06-07:00","datePublished":"2024-03-29T04:39:06-07:00","description":"With many websites — especially blogs — it’s very common to break the main listing of posts up into smaller lists and display them over multiple pages. Jekyll offers a pagination plugin, so you can automatically generate the appropriate files and folders you need for paginated listings.","headline":"Pagination","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/pagination/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/pagination/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.min.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="wrap"><header>
+  <div class="flexbox">
+    <div class="center-on-mobiles">
+      <h1>
+        <a href="/" class="logo">
+          <span class="sr-only">Jekyll</span>
+          <img src="/img/logo-2x.png" width="140" height="65" alt="Jekyll Logo">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav hide-on-mobiles">
+      <ul>
+  <li><a href="/">Home</a></li>
+  <li class="current"><a href="/docs/">Docs</a></li>
+  <li><a href="/resources/">Resources</a></li>
+  <li><a href="/showcase/">Showcase</a></li>
+  <li><a href="/news/">News</a></li>
+  </ul>
+</nav>
+    <div class="search hide-on-mobiles">
+      <input type="text" id="docsearch-input" placeholder="Search the docs…" aria-label="Search"></div>
+    <div class="meta hide-on-mobiles">
+      <ul>
+        <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.3.3">v4.3.3</a></li>
+        <li><a href="https://github.com/jekyll/jekyll">GitHub</a></li>
+      </ul>
+    </div>
+  </div>
+  <nav class="mobile-nav show-on-mobiles">
+    <ul>
+  <li><a href="/">Home</a></li>
+    <li class="current" aria-current="page" ><a href="/docs/">Docs</a></li>
+    <li><a href="/resources/">Resources</a></li>
+    <li><a href="/news/">News</a></li>
+    <li><a href="https://github.com/jekyll/jekyll" target="_blank" rel="noopener">GitHub</a></li>
+</ul></nav>
+</header>
+<section class="docs">
+  <div class="grid">
+    <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select id="doc-nav" onchange="navigateToUrl(this)" aria-label="Select a page from the documentation">
+    <option value="">Navigate the docs…</option>
+    
+      <optgroup label="Getting Started">
+          <option value="/docs/">Quickstart</option>
+          <option value="/docs/installation/">Installation</option>
+          <option value="/docs/ruby-101/">Ruby 101</option>
+          <option value="/docs/community/">Community</option>
+          <option value="/docs/step-by-step/01-setup/">Step by Step Tutorial</option>
+      </optgroup>
+    
+      <optgroup label="Build">
+          <option value="/docs/usage/">Command Line Usage</option>
+          <option value="/docs/configuration/">Configuration</option>
+          <option value="/docs/rendering-process/">Rendering Process</option>
+      </optgroup>
+    
+      <optgroup label="Content">
+          <option value="/docs/pages/">Pages</option>
+          <option value="/docs/posts/">Posts</option>
+          <option value="/docs/front-matter/">Front Matter</option>
+          <option value="/docs/collections/">Collections</option>
+          <option value="/docs/datafiles/">Data Files</option>
+          <option value="/docs/assets/">Assets</option>
+          <option value="/docs/static-files/">Static Files</option>
+      </optgroup>
+    
+      <optgroup label="Site Structure">
+          <option value="/docs/structure/">Directory Structure</option>
+          <option value="/docs/liquid/">Liquid</option>
+          <option value="/docs/variables/">Variables</option>
+          <option value="/docs/includes/">Includes</option>
+          <option value="/docs/layouts/">Layouts</option>
+          <option value="/docs/permalinks/">Permalinks</option>
+          <option value="/docs/themes/">Themes</option>
+          <option value="/docs/pagination/">Pagination</option>
+      </optgroup>
+    
+      <optgroup label="Guides">
+          <option value="/docs/plugins/">Plugins</option>
+          <option value="/docs/migrations/">Blog Migrations</option>
+          <option value="/docs/upgrading/">Upgrading</option>
+          <option value="/docs/deployment/">Deployment</option>
+      </optgroup>
+    
+  </select>
+</div>
+<div class="unit four-fifths">
+      <article>
+        <div class="improve right hide-on-mobiles">
+          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/pagination.md"><i
+             class="fa fa-pencil"></i> &nbsp;Improve this page</a>
+        </div>
+        <h1>Pagination</h1>
+        <p>With many websites — especially blogs — it’s very common to
+break the main listing of posts up into smaller lists and display them over
+multiple pages. Jekyll offers a pagination plugin, so you can automatically
+generate the appropriate files and folders you need for paginated listings.</p>
+
+<p>For Jekyll 3 or higher, include the <code class="language-plaintext highlighter-rouge">jekyll-paginate</code> plugin in your
+Gemfile and in your <code class="language-plaintext highlighter-rouge">_config.yml</code> under <code class="language-plaintext highlighter-rouge">plugins</code>. For Jekyll 2, this is
+standard.</p>
+
+<div class="note info">
+  <h5>Pagination only works within HTML files</h5>
+  <p>
+    Pagination does not work from within Markdown files from
+    your Jekyll site. Pagination works when called from within the HTML
+    file, named <code>index.html</code>, which optionally may reside in and
+    produce pagination from within a subdirectory, via the
+    <code>paginate_path</code> configuration value.
+  </p>
+</div>
+
+<h2 id="enable-pagination">Enable pagination</h2>
+
+<p>To enable pagination for posts on your blog, add a line to the <code class="language-plaintext highlighter-rouge">_config.yml</code> file that
+specifies how many items should be displayed per page:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">paginate</span><span class="pi">:</span> <span class="m">5</span>
+</code></pre></div></div>
+
+<p>The number should be the maximum number of Posts you’d like to be displayed
+per-page in the generated site.</p>
+
+<p>You may also specify the destination of the pagination pages:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">paginate_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/blog/page:num/"</span>
+</code></pre></div></div>
+
+<p>This will read in <code class="language-plaintext highlighter-rouge">blog/index.html</code>, send it each pagination page in Liquid as
+<code class="language-plaintext highlighter-rouge">paginator</code> and write the output to <code class="language-plaintext highlighter-rouge">blog/page:num/</code>, where <code class="language-plaintext highlighter-rouge">:num</code> is the
+pagination page number, starting with <code class="language-plaintext highlighter-rouge">2</code>. <br />
+If a site has 12 posts and specifies <code class="language-plaintext highlighter-rouge">paginate: 5</code>, Jekyll will write <code class="language-plaintext highlighter-rouge">blog/index.html</code>
+with the first 5 posts, <code class="language-plaintext highlighter-rouge">blog/page2/index.html</code> with the next 5 posts and
+<code class="language-plaintext highlighter-rouge">blog/page3/index.html</code> with the last 2 posts into the destination directory.</p>
+
+<div class="note warning">
+  <h5>Don't set a permalink</h5>
+  <p>
+    Setting a permalink in the front matter of your blog page will cause
+    pagination to break. Just omit the permalink.
+  </p>
+</div>
+
+<div class="note info">
+  <h5>Pagination for categories, tags and collections</h5>
+  <p>
+    The more recent <a href="https://github.com/sverrirs/jekyll-paginate-v2">
+    jekyll-paginate-v2</a> plugin supports more features. See the
+    <a href="https://github.com/sverrirs/jekyll-paginate-v2/tree/master/examples">
+    pagination examples</a> in the repository. <strong>This plugin is not
+    supported by GitHub Pages</strong>.
+  </p>
+</div>
+
+<h2 id="liquid-attributes-available">Liquid Attributes Available</h2>
+
+<p>The pagination plugin exposes the <code class="language-plaintext highlighter-rouge">paginator</code> liquid object with the following
+attributes:</p>
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+      <td><p><code>paginator.page</code></p></td>
+      <td><p>The number of the current page</p></td>
+    </tr>
+  <tr>
+      <td><p><code>paginator.per_page</code></p></td>
+      <td><p>Number of posts per page</p></td>
+    </tr>
+  <tr>
+      <td><p><code>paginator.posts</code></p></td>
+      <td><p>Posts available for the current page</p></td>
+    </tr>
+  <tr>
+      <td><p><code>paginator.total_posts</code></p></td>
+      <td><p>Total number of posts</p></td>
+    </tr>
+  <tr>
+      <td><p><code>paginator.total_pages</code></p></td>
+      <td><p>Total number of pages</p></td>
+    </tr>
+  <tr>
+      <td><p><code>paginator.previous_page</code></p></td>
+      <td><p>The number of the previous page, or <code>nil</code> if no previous page exists</p></td>
+    </tr>
+  <tr>
+      <td><p><code>paginator.previous_page_path</code></p></td>
+      <td><p>The path to the previous page, or <code>nil</code> if no previous page exists</p></td>
+    </tr>
+  <tr>
+      <td><p><code>paginator.next_page</code></p></td>
+      <td><p>The number of the next page, or <code>nil</code> if no subsequent page exists</p></td>
+    </tr>
+  <tr>
+      <td><p><code>paginator.next_page_path</code></p></td>
+      <td><p>The path to the next page, or <code>nil</code> if no subsequent page exists</p></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="note info">
+  <h5>Pagination does not support tags or categories</h5>
+  <p>Pagination pages through every post in the <code>posts</code>
+  variable unless a post has <code>hidden: true</code> in its front matter.
+  It does not currently allow paging over groups of posts linked
+  by a common tag or category. It cannot include any collection of
+  documents because it is restricted to posts.</p>
+</div>
+
+<h2 id="render-the-paginated-posts">Render the paginated Posts</h2>
+
+<p>The next thing you need to do is to actually display your posts in a list using
+the <code class="language-plaintext highlighter-rouge">paginator</code> variable that will now be available to you. You’ll probably
+want to do this in one of the main pages of your site. Here’s one example of a
+simple way of rendering paginated Posts in a HTML file:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+layout: default
+title: My Blog
+---
+
+&lt;!-- This loops through the paginated posts --&gt;
+<span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">post</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">paginator</span><span class="p">.</span><span class="nv">posts</span><span class="w"> </span><span class="cp">%}</span>
+  &lt;h1&gt;&lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">post</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>"&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">post</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="cp">}}</span>&lt;/a&gt;&lt;/h1&gt;
+  &lt;p class="author"&gt;
+    &lt;span class="date"&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">post</span><span class="p">.</span><span class="nv">date</span><span class="w"> </span><span class="cp">}}</span>&lt;/span&gt;
+  &lt;/p&gt;
+  &lt;div class="content"&gt;
+    <span class="cp">{{</span><span class="w"> </span><span class="nv">post</span><span class="p">.</span><span class="nv">content</span><span class="w"> </span><span class="cp">}}</span>
+  &lt;/div&gt;
+<span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
+
+&lt;!-- Pagination links --&gt;
+&lt;div class="pagination"&gt;
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">if</span><span class="w"> </span><span class="nv">paginator</span><span class="p">.</span><span class="nv">previous_page</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">paginator</span><span class="p">.</span><span class="nv">previous_page_path</span><span class="w"> </span><span class="cp">}}</span>" class="previous"&gt;
+      Previous
+    &lt;/a&gt;
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">else</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;span class="previous"&gt;Previous&lt;/span&gt;
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">endif</span><span class="w"> </span><span class="cp">%}</span>
+  &lt;span class="page_number "&gt;
+    Page: <span class="cp">{{</span><span class="w"> </span><span class="nv">paginator</span><span class="p">.</span><span class="nv">page</span><span class="w"> </span><span class="cp">}}</span> of <span class="cp">{{</span><span class="w"> </span><span class="nv">paginator</span><span class="p">.</span><span class="nv">total_pages</span><span class="w"> </span><span class="cp">}}</span>
+  &lt;/span&gt;
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">if</span><span class="w"> </span><span class="nv">paginator</span><span class="p">.</span><span class="nv">next_page</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">paginator</span><span class="p">.</span><span class="nv">next_page_path</span><span class="w"> </span><span class="cp">}}</span>" class="next"&gt;Next&lt;/a&gt;
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">else</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;span class="next "&gt;Next&lt;/span&gt;
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">endif</span><span class="w"> </span><span class="cp">%}</span>
+&lt;/div&gt;
+</code></pre></div></div>
+
+<div class="note warning">
+  <h5>Beware the page one edge-case</h5>
+  <p>
+    Jekyll does not generate a ‘page1’ folder, so the above code will not work
+    when a <code>/page1</code> link is produced. See below for a way to handle
+    this if it’s a problem for you.
+  </p>
+</div>
+
+<p>The following HTML snippet should handle page one, and render a list of each
+page with links to all but the current page.</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">if</span><span class="w"> </span><span class="nv">paginator</span><span class="p">.</span><span class="nv">total_pages</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="cp">%}</span>
+&lt;div class="pagination"&gt;
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">if</span><span class="w"> </span><span class="nv">paginator</span><span class="p">.</span><span class="nv">previous_page</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">paginator</span><span class="p">.</span><span class="nv">previous_page_path</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">relative_url</span><span class="w"> </span><span class="cp">}}</span>"&gt;&amp;laquo; Prev&lt;/a&gt;
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">else</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;span&gt;&amp;laquo; Prev&lt;/span&gt;
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">endif</span><span class="w"> </span><span class="cp">%}</span>
+
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">page</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">..</span><span class="nv">paginator</span><span class="p">.</span><span class="nv">total_pages</span><span class="p">)</span><span class="w"> </span><span class="cp">%}</span>
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">if</span><span class="w"> </span><span class="nv">page</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nv">paginator</span><span class="p">.</span><span class="nv">page</span><span class="w"> </span><span class="cp">%}</span>
+      &lt;em&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">page</span><span class="w"> </span><span class="cp">}}</span>&lt;/em&gt;
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">elsif</span><span class="w"> </span><span class="nv">page</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="cp">%}</span>
+      &lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="s1">'/'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">relative_url</span><span class="w"> </span><span class="cp">}}</span>"&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">page</span><span class="w"> </span><span class="cp">}}</span>&lt;/a&gt;
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">else</span><span class="w"> </span><span class="cp">%}</span>
+      &lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">paginate_path</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">relative_url</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">replace</span><span class="p">:</span><span class="w"> </span><span class="s1">':num'</span><span class="p">,</span><span class="w"> </span><span class="nv">page</span><span class="w"> </span><span class="cp">}}</span>"&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">page</span><span class="w"> </span><span class="cp">}}</span>&lt;/a&gt;
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">endif</span><span class="w"> </span><span class="cp">%}</span>
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
+
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">if</span><span class="w"> </span><span class="nv">paginator</span><span class="p">.</span><span class="nv">next_page</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">paginator</span><span class="p">.</span><span class="nv">next_page_path</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">relative_url</span><span class="w"> </span><span class="cp">}}</span>"&gt;Next &amp;raquo;&lt;/a&gt;
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">else</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;span&gt;Next &amp;raquo;&lt;/span&gt;
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">endif</span><span class="w"> </span><span class="cp">%}</span>
+&lt;/div&gt;
+<span class="cp">{%</span><span class="w"> </span><span class="nt">endif</span><span class="w"> </span><span class="cp">%}</span>
+</code></pre></div></div>
+
+
+      </article>
+    </div>
+    <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    
+      <h4>Getting Started</h4>
+      <ul>
+          <li><a href="/docs/">
+              Quickstart
+            </a>
+          </li>
+        
+          <li><a href="/docs/installation/">
+              Installation
+            </a>
+          </li>
+        
+          <li><a href="/docs/ruby-101/">
+              Ruby 101
+            </a>
+          </li>
+        
+          <li><a href="/docs/community/">
+              Community
+            </a>
+          </li>
+        
+          <li><a href="/docs/step-by-step/01-setup/">
+              Step by Step Tutorial
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Build</h4>
+      <ul>
+          <li><a href="/docs/usage/">
+              Command Line Usage
+            </a>
+          </li>
+        
+          <li><a href="/docs/configuration/">
+              Configuration
+            </a>
+          </li>
+        
+          <li><a href="/docs/rendering-process/">
+              Rendering Process
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Content</h4>
+      <ul>
+          <li><a href="/docs/pages/">
+              Pages
+            </a>
+          </li>
+        
+          <li><a href="/docs/posts/">
+              Posts
+            </a>
+          </li>
+        
+          <li><a href="/docs/front-matter/">
+              Front Matter
+            </a>
+          </li>
+        
+          <li><a href="/docs/collections/">
+              Collections
+            </a>
+          </li>
+        
+          <li><a href="/docs/datafiles/">
+              Data Files
+            </a>
+          </li>
+        
+          <li><a href="/docs/assets/">
+              Assets
+            </a>
+          </li>
+        
+          <li><a href="/docs/static-files/">
+              Static Files
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Site Structure</h4>
+      <ul>
+          <li><a href="/docs/structure/">
+              Directory Structure
+            </a>
+          </li>
+        
+          <li><a href="/docs/liquid/">
+              Liquid
+            </a>
+          </li>
+        
+          <li><a href="/docs/variables/">
+              Variables
+            </a>
+          </li>
+        
+          <li><a href="/docs/includes/">
+              Includes
+            </a>
+          </li>
+        
+          <li><a href="/docs/layouts/">
+              Layouts
+            </a>
+          </li>
+        
+          <li><a href="/docs/permalinks/">
+              Permalinks
+            </a>
+          </li>
+        
+          <li><a href="/docs/themes/">
+              Themes
+            </a>
+          </li>
+        
+          <liclass="current"><a href="/docs/pagination/">
+              Pagination
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Guides</h4>
+      <ul>
+          <li><a href="/docs/plugins/">
+              Plugins
+            </a>
+          </li>
+        
+          <li><a href="/docs/migrations/">
+              Blog Migrations
+            </a>
+          </li>
+        
+          <li><a href="/docs/upgrading/">
+              Upgrading
+            </a>
+          </li>
+        
+          <li><a href="/docs/deployment/">
+              Deployment
+            </a>
+          </li>
+        
+      </ul>
+    </aside>
+</div>
+<div class="clear"></div>
+  </div>
+</section>
+<footer>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <p>Jekyll is lovingly maintained by the <a href="/team/">core team</a> of volunteers. </p>
+      <p>The contents of this website are <br />&copy;&nbsp;2024 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT&nbsp;License</a>.</p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Proudly hosted by
+        <a href="https://github.com">
+          <img src="/img/footer-logo.png" width="100" height="30" alt="GitHub • Social coding">
+        </a>
+      </p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Jekyll is funded thanks to its
+        <a href="https://github.com/jekyll/jekyll#sponsors">
+          sponsors!
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+<script>
+/* Creates an anchor element with the given ID and link for the permalink*/
+const anchorForId = (id) => {
+  const anchor = document.createElement("a");
+  anchor.className = "header-link";
+  anchor.href = `#${id}`;
+  anchor.innerHTML = `<span class="sr-only">Permalink</span><i class="fa fa-link" aria-hidden="true"></i>`;
+  anchor.title = "Permalink";
+  return anchor;
+};
+
+/* Finds all headers of the specified level within the given element, and adds a permalink to each header*/
+const linkifyAnchors = (level, containingElement) => {
+  const headers = Array.from(containingElement.getElementsByTagName(`h${level}`));
+  headers.forEach((header) => {
+    if (header.id) {
+      header.appendChild(anchorForId(header.id));
+    }
+  });
+};
+
+/* Executes the function when the document is ready */
+document.onreadystatechange = () => {
+  if (document.readyState === "complete") {
+    const contentBlock = document.getElementsByClassName("docs")[0]
+      ?? document.getElementsByClassName("news")[0];
+    if (!contentBlock) { return; }
+    for (let level = 1; level <= 6; level++) {
+      linkifyAnchors(level, contentBlock);
+    }
+  }
+};
+</script>
+<!-- Google Analytics (https://www.google.com/analytics) -->
+  <script>
+    !function(j,e,k,y,l,L){j.GoogleAnalyticsObject=y,j[y]||(j[y]=function(){
+    (j[y].q=j[y].q||[]).push(arguments)}),j[y].l=+new Date,l=e.createElement(k),
+    L=e.getElementsByTagName(k)[0],l.src='https://www.google-analytics.com/analytics.js',
+    L.parentNode.insertBefore(l,L)}(window,document,'script','ga');
+
+    ga('create', 'UA-50755011-1', 'jekyllrb.com');
+    ga('send', 'pageview');
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script> docsearch({
+apiKey: '50fe39c839958dfad797000f33e2ec17',
+indexName: 'jekyllrb',
+inputSelector: '#docsearch-input',
+enhancedSearchInput: true,
+debug: false // Set debug to true if you want to inspect the dropdown
+});
+</script>
+<script>
+  const navigateToUrl = (select) => {
+    const url = select.value;
+    url && (window.location.href = url);
+  };
+  </script>
+</body>
+</html>

@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
+  <link type="application/atom+xml" rel="alternate" href="/feed/release.xml" title="Jekyll releases posts" />
+  <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
+  <link rel="preload" href="/fonts/lato-v14-latin-300.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/lato-v14-latin-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/css/screen.css" as="style">
+  <link rel="stylesheet" href="/css/screen.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Configuration Options | Jekyll • Simple, blog-aware, static sites</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Configuration Options" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The tables below list the available settings for Jekyll, and the various options (specified in the configuration file) and flags (specified on the command-line) that control them." />
+<meta property="og:description" content="The tables below list the available settings for Jekyll, and the various options (specified in the configuration file) and flags (specified on the command-line) that control them." />
+<link rel="canonical" href="https://jekyllrb.com/docs/configuration/options/" />
+<meta property="og:url" content="https://jekyllrb.com/docs/configuration/options/" />
+<meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
+<meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-03-29T04:39:06-07:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
+<meta property="twitter:title" content="Configuration Options" />
+<meta name="twitter:site" content="@jekyllrb" />
+<meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-03-29T04:39:06-07:00","datePublished":"2024-03-29T04:39:06-07:00","description":"The tables below list the available settings for Jekyll, and the various options (specified in the configuration file) and flags (specified on the command-line) that control them.","headline":"Configuration Options","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/configuration/options/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/configuration/options/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.min.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="wrap"><header>
+  <div class="flexbox">
+    <div class="center-on-mobiles">
+      <h1>
+        <a href="/" class="logo">
+          <span class="sr-only">Jekyll</span>
+          <img src="/img/logo-2x.png" width="140" height="65" alt="Jekyll Logo">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav hide-on-mobiles">
+      <ul>
+  <li><a href="/">Home</a></li>
+  <li class="current"><a href="/docs/">Docs</a></li>
+  <li><a href="/resources/">Resources</a></li>
+  <li><a href="/showcase/">Showcase</a></li>
+  <li><a href="/news/">News</a></li>
+  </ul>
+</nav>
+    <div class="search hide-on-mobiles">
+      <input type="text" id="docsearch-input" placeholder="Search the docs…" aria-label="Search"></div>
+    <div class="meta hide-on-mobiles">
+      <ul>
+        <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.3.3">v4.3.3</a></li>
+        <li><a href="https://github.com/jekyll/jekyll">GitHub</a></li>
+      </ul>
+    </div>
+  </div>
+  <nav class="mobile-nav show-on-mobiles">
+    <ul>
+  <li><a href="/">Home</a></li>
+    <li class="current" aria-current="page" ><a href="/docs/">Docs</a></li>
+    <li><a href="/resources/">Resources</a></li>
+    <li><a href="/news/">News</a></li>
+    <li><a href="https://github.com/jekyll/jekyll" target="_blank" rel="noopener">GitHub</a></li>
+</ul></nav>
+</header>
+<section class="docs">
+  <div class="grid">
+    <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select id="doc-nav" onchange="navigateToUrl(this)" aria-label="Select a page from the documentation">
+    <option value="">Navigate the docs…</option>
+    
+      <optgroup label="Getting Started">
+          <option value="/docs/">Quickstart</option>
+          <option value="/docs/installation/">Installation</option>
+          <option value="/docs/ruby-101/">Ruby 101</option>
+          <option value="/docs/community/">Community</option>
+          <option value="/docs/step-by-step/01-setup/">Step by Step Tutorial</option>
+      </optgroup>
+    
+      <optgroup label="Build">
+          <option value="/docs/usage/">Command Line Usage</option>
+          <option value="/docs/configuration/">Configuration</option>
+          <option value="/docs/rendering-process/">Rendering Process</option>
+      </optgroup>
+    
+      <optgroup label="Content">
+          <option value="/docs/pages/">Pages</option>
+          <option value="/docs/posts/">Posts</option>
+          <option value="/docs/front-matter/">Front Matter</option>
+          <option value="/docs/collections/">Collections</option>
+          <option value="/docs/datafiles/">Data Files</option>
+          <option value="/docs/assets/">Assets</option>
+          <option value="/docs/static-files/">Static Files</option>
+      </optgroup>
+    
+      <optgroup label="Site Structure">
+          <option value="/docs/structure/">Directory Structure</option>
+          <option value="/docs/liquid/">Liquid</option>
+          <option value="/docs/variables/">Variables</option>
+          <option value="/docs/includes/">Includes</option>
+          <option value="/docs/layouts/">Layouts</option>
+          <option value="/docs/permalinks/">Permalinks</option>
+          <option value="/docs/themes/">Themes</option>
+          <option value="/docs/pagination/">Pagination</option>
+      </optgroup>
+    
+      <optgroup label="Guides">
+          <option value="/docs/plugins/">Plugins</option>
+          <option value="/docs/migrations/">Blog Migrations</option>
+          <option value="/docs/upgrading/">Upgrading</option>
+          <option value="/docs/deployment/">Deployment</option>
+      </optgroup>
+    
+  </select>
+</div>
+<div class="unit four-fifths">
+      <article>
+        <div class="improve right hide-on-mobiles">
+          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/configuration/options.md"><i
+             class="fa fa-pencil"></i> &nbsp;Improve this page</a>
+        </div>
+        <h1>Configuration Options</h1>
+        <p>The tables below list the available settings for Jekyll, and the various <code class="option">options</code> (specified in the configuration file) and <code class="flag">flags</code> (specified on the command-line) that control them.</p>
+
+<h3 id="global-configuration">Global Configuration</h3>
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Setting</th>
+      <th>
+        <span class="option">Options</span> and <span class="flag">Flags</span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Site source</strong>
+            
+          </p> 
+          <p class="description">Change the directory where Jekyll will read files</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">source: DIR</code></p>
+          
+            <p><code class="flag">-s, --source DIR</code></p>
+          
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Site destination</strong>
+            
+          </p> 
+          <p class="description">Change the directory where Jekyll will write files</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">destination: DIR</code></p>
+          
+            <p><code class="flag">-d, --destination DIR</code></p>
+          
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Safe</strong>
+            
+          </p> 
+          <p class="description">Disable <a href="/docs/plugins/">non-whitelisted plugins</a>, caching to disk, and ignore symbolic links.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">safe: BOOL</code></p>
+          
+            <p><code class="flag">--safe</code></p>
+          
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Disable disk cache</strong>
+            
+              <span class="version-badge" title="Introduced in v4.1.0">4.1.0</span>
+            
+          </p> 
+          <p class="description">Disable caching of content to disk in order to skip creating a <code>.jekyll-cache</code> or similar directory at the source to avoid interference with virtual environments and third-party directory watchers. Caching to disk is always disabled in <code>safe</code> mode.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">disable_disk_cache: BOOL</code></p>
+          
+            <p><code class="flag">--disable-disk-cache</code></p>
+          
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Ignore theme configuration</strong>
+            
+              <span class="version-badge" title="Introduced in v4.1.0">4.1.0</span>
+            
+          </p> 
+          <p class="description">Jekyll 4.0 started allowing themes to bundle a <code>_config.yml</code> to simplify theme-onboarding for new users. In the unfortunate situation that importing a bundled theme configuration messes up the merged site-configuration, the user can configure Jekyll to not import the theme-config entirely.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">ignore_theme_config: BOOL</code></p>
+          
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Exclude</strong>
+            
+          </p> 
+          <p class="description">Exclude directories and/or files from the conversion. These exclusions are relative to the site's source directory and cannot be outside the source directory. <br /> In Jekyll 3, the `exclude` configuration option replaces the default exclusion list. <br /> In Jekyll 4, user-provided entries get added to the default exclusion list instead and the `include` option can be used to override the default exclusion list entries. <br /> The default exclusions are found in <code>_config.yml</code> as created by <code>jekyll new</code>: <ul>
+  <li><code>.sass-cache/</code></li>
+  <li><code>.jekyll-cache/</code></li>
+  <li><code>gemfiles/</code></li>
+  <li><code>Gemfile</code></li>
+  <li><code>Gemfile.lock</code></li>
+  <li><code>node_modules/</code></li>
+  <li><code>vendor/bundle/</code></li>
+  <li><code>vendor/cache/</code></li>
+  <li><code>vendor/gems/</code></li>
+  <li><code>vendor/ruby/</code></li>
+</ul></p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">exclude: [DIR, FILE, ...]</code></p>
+          
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Include</strong>
+            
+          </p> 
+          <p class="description">Force inclusion of directories and/or files in the conversion. <code>.htaccess</code> is a good example since dotfiles are excluded by default. With Jekyll 4, the `include` configuration option entries override the `exclude` option entries.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">include: [DIR, FILE, ...]</code></p>
+          
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Keep files</strong>
+            
+          </p> 
+          <p class="description">When clobbering the site destination, keep the selected files. Useful for files that are not generated by jekyll; e.g. files or assets that are generated by your build tool. The paths are relative to the <code>destination</code>.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">keep_files: [DIR, FILE, ...]</code></p>
+          
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Time zone</strong>
+            
+          </p> 
+          <p class="description">Set the time zone for site generation. This sets the <code>TZ</code> environment variable, which Ruby uses to handle time and date creation and manipulation. Any entry from the <a href="https://en.wikipedia.org/wiki/Tz_database">IANA Time Zone Database</a> is valid, e.g. <code>America/New_York</code>. A list of all available values can be found <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"> here</a>. When serving on a local machine, the default time zone is set by your operating system. But when served on a remote host/server, the default time zone depends on the server's setting or location.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">timezone: TIMEZONE</code></p>
+          
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Encoding</strong>
+            
+          </p> 
+          <p class="description">Set the encoding of files by name (only available for Ruby 1.9 or later). The default value is <code>utf-8</code> starting in 2.0.0, and <code>nil</code> before 2.0.0, which will yield the Ruby default of <code>ASCII-8BIT</code>. Available encodings can be shown by the command <code>ruby -e 'puts Encoding::list.join("\n")'</code>.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">encoding: ENCODING</code></p>
+          
+        </td>
+      </tr>
+    
+    <tr>
+      <td>
+        <p class="name"><strong>Defaults</strong></p>
+        <p class="description">
+            Set defaults for <a href="/docs/front-matter/" title="front matter">front matter</a>
+            variables.
+        </p>
+      </td>
+      <td class="align-center">
+        <p>see <a href="/docs/configuration/front-matter-defaults/" title="details">below</a></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="note warning">
+  <h5>Destination folders are cleaned on site builds</h5>
+  <p>
+    The contents of <code>&lt;destination&gt;</code> are automatically
+    cleaned, by default, when the site is built. Files or folders that are not
+    created by your site will be removed. Some files could be retained
+    by specifying them within the <code>&lt;keep_files&gt;</code> configuration directive.
+  </p>
+  <p>
+    Do not use an important location for <code>&lt;destination&gt;</code>; instead, use it as
+    a staging area and copy files from there to your web server.
+  </p>
+</div>
+
+<h3 id="build-command-options">Build Command Options</h3>
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Setting</th>
+      <th><span class="option">Options</span> and <span class="flag">Flags</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Regeneration</strong>
+            
+          </p> 
+          <p class="description">Enable auto-regeneration of the site when files are modified.</p>
+        </td> 
+        <td class="align-center">
+          
+          <p><code class="flag">-w, --[no-]watch</code></p>
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Configuration</strong>
+            
+          </p> 
+          <p class="description">Specify config files instead of using <code>_config.yml</code> automatically. Settings in later files override settings in earlier files.</p>
+        </td> 
+        <td class="align-center">
+          
+          <p><code class="flag">--config FILE1[,FILE2,...]</code></p>
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Plugins</strong>
+            
+          </p> 
+          <p class="description">Specify plugin directories instead of using <code>_plugins/</code> automatically.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">plugins_dir: [ DIR1,... ]</code></p>
+          <p><code class="flag">-p, --plugins DIR1[,DIR2,...]</code></p>
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Layouts</strong>
+            
+          </p> 
+          <p class="description">Specify layout directory instead of using <code>_layouts/</code> automatically.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">layouts_dir: DIR</code></p>
+          <p><code class="flag">--layouts DIR</code></p>
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Drafts</strong>
+            
+          </p> 
+          <p class="description">Process and render draft posts.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">show_drafts: BOOL</code></p>
+          <p><code class="flag">-D, --drafts</code></p>
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Environment</strong>
+            
+          </p> 
+          <p class="description">Use a specific environment value in the build.</p>
+        </td> 
+        <td class="align-center">
+          
+          <p><code class="flag">JEKYLL_ENV=production</code></p>
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Future</strong>
+            
+          </p> 
+          <p class="description">Publish posts or collection documents with a future date.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">future: BOOL</code></p>
+          <p><code class="flag">--future</code></p>
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Unpublished</strong>
+            
+          </p> 
+          <p class="description">Render posts that were marked as unpublished.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">unpublished: BOOL</code></p>
+          <p><code class="flag">--unpublished</code></p>
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>LSI</strong>
+            
+          </p> 
+          <p class="description">Produce an index for related posts. Requires the <a href="https://jekyll.github.io/classifier-reborn/">classifier-reborn</a> plugin.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">lsi: BOOL</code></p>
+          <p><code class="flag">--lsi</code></p>
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Limit posts</strong>
+            
+          </p> 
+          <p class="description">Limit the number of posts to parse and publish.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">limit_posts: NUM</code></p>
+          <p><code class="flag">--limit_posts NUM</code></p>
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Force polling</strong>
+            
+          </p> 
+          <p class="description">Force watch to use polling.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">force_polling: BOOL</code></p>
+          <p><code class="flag">--force_polling</code></p>
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Verbose output</strong>
+            
+          </p> 
+          <p class="description">Print verbose output.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">verbose: BOOL</code></p>
+          <p><code class="flag">-V, --verbose</code></p>
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Silence output</strong>
+            
+          </p> 
+          <p class="description">Silence the normal output from Jekyll during a build.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">quiet: BOOL</code></p>
+          <p><code class="flag">-q, --quiet</code></p>
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Log level</strong>
+            
+          </p> 
+          <p class="description">Specify a log level among debug, info, warn, or error.</p>
+        </td> 
+        <td class="align-center">
+          
+          <p><code class="flag">JEKYLL_LOG_LEVEL=info</code></p>
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Incremental build</strong>
+            
+          </p> 
+          <p class="description">Enable the experimental <a href="/docs/configuration/incremental-regeneration/">incremental build</a> feature. Incremental build only re-builds posts and pages that have changed, resulting in significant performance improvements for large sites, but may also break site generation in certain cases.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">incremental: BOOL</code></p>
+          <p><code class="flag">-I, --incremental</code></p>
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Disable bundle require</strong>
+            
+          </p> 
+          <p class="description">Disables the need to require gems in `:jekyll_plugins` Gemfile</p>
+        </td> 
+        <td class="align-center">
+          
+          <p><code class="flag">JEKYLL_NO_BUNDLER_REQUIRE=true</code></p>
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Liquid profiler</strong>
+            
+          </p> 
+          <p class="description">Generate a Liquid rendering profile to help you identify performance bottlenecks.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">profile: BOOL</code></p>
+          <p><code class="flag">--profile</code></p>
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Strict front matter</strong>
+            
+          </p> 
+          <p class="description">Cause a build to fail if there is a YAML syntax error in a page's front matter.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">strict_front_matter: BOOL</code></p>
+          <p><code class="flag">--strict_front_matter</code></p>
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Base URL</strong>
+            
+          </p> 
+          <p class="description">Serve the website from the given base URL.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">baseurl: URL</code></p>
+          <p><code class="flag">-b, --baseurl URL</code></p>
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Trace</strong>
+            
+          </p> 
+          <p class="description">Show the full backtrace when an error occurs.</p>
+        </td> 
+        <td class="align-center">
+          
+          <p><code class="flag">-t, --trace</code></p>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+</div>
+
+<h3 id="serve-command-options">Serve Command Options</h3>
+
+<p>In addition to the options below, the <code class="language-plaintext highlighter-rouge">serve</code> sub-command can accept any of the options
+for the <code class="language-plaintext highlighter-rouge">build</code> sub-command, which are then applied to the site build which occurs right
+before your site is served.</p>
+
+<div class="mobile-side-scroller">
+<table>
+  <thead>
+    <tr>
+      <th>Setting</th>
+      <th><span class="option">Options</span> and <span class="flag">Flags</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Local server port</strong>
+            
+          </p> 
+          <p class="description">Listen on the given port. The default is `4000`.</p>
+        </td> 
+        <td class="align-center">
+          
+            <p><code class="option">port: PORT</code></p>
+          
+          
+            <p><code class="flag">-P, --port PORT</code></p>
+          
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Local server hostname</strong>
+            
+          </p> 
+          <p class="description">Listen at the given hostname. The default is `localhost`.</p>
+        </td> 
+        <td class="align-center">
+          
+            <p><code class="option">host: HOSTNAME</code></p>
+          
+          
+            <p><code class="flag">-H, --host HOSTNAME</code></p>
+          
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Live reload</strong>
+            
+          </p> 
+          <p class="description">Reload a page automatically on the browser when its content is edited.</p>
+        </td> 
+        <td class="align-center">
+          
+            <p><code class="option">livereload: BOOL</code></p>
+          
+          
+            <p><code class="flag">-l, --livereload</code></p>
+          
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Live reload ignore</strong>
+            
+          </p> 
+          <p class="description">File glob patterns for LiveReload to ignore.</p>
+        </td> 
+        <td class="align-center">
+          
+            <p><code class="option">livereload_ignore: [ GLOB1,... ]</code></p>
+          
+          
+            <p><code class="flag">--livereload-ignore GLOB1[,GLOB2,...]</code></p>
+          
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Live reload min/max delay</strong>
+            
+          </p> 
+          <p class="description">Minimum/Maximum delay before automatically reloading page.</p>
+        </td> 
+        <td class="align-center">
+          
+            <p>
+              
+                <code class="option">livereload_min_delay: SECONDS</code><br />
+              
+                <code class="option">livereload_max_delay: SECONDS</code><br />
+              
+            </p>
+          
+          
+            <p>
+            
+              <code class="flag">--livereload-min-delay SECONDS</code><br />
+            
+              <code class="flag">--livereload-max-delay SECONDS</code><br />
+            
+            </p>
+          
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Live reload port</strong>
+            
+          </p> 
+          <p class="description">Port for LiveReload to listen on.</p>
+        </td> 
+        <td class="align-center">
+          
+          
+            <p><code class="flag">--livereload-port PORT</code></p>
+          
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Open URL</strong>
+            
+          </p> 
+          <p class="description">Open the site's URL in the browser.</p>
+        </td> 
+        <td class="align-center">
+          
+            <p><code class="option">open_url: BOOL</code></p>
+          
+          
+            <p><code class="flag">-o, --open-url</code></p>
+          
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Detach</strong>
+            
+          </p> 
+          <p class="description">Detach the server from the terminal.</p>
+        </td> 
+        <td class="align-center">
+          
+            <p><code class="option">detach: BOOL</code></p>
+          
+          
+            <p><code class="flag">-B, --detach</code></p>
+          
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Skips the initial site build</strong>
+            
+          </p> 
+          <p class="description">Skips the initial site build which occurs before the server is started.</p>
+        </td> 
+        <td class="align-center">
+          
+            <p><code class="option">skip_initial_build: BOOL</code></p>
+          
+          
+            <p><code class="flag">--skip-initial-build</code></p>
+          
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>Show directory listing</strong>
+            
+          </p> 
+          <p class="description">Show a directory listing instead of loading your index file.</p>
+        </td> 
+        <td class="align-center">
+          
+            <p><code class="option">show_dir_listing: BOOL</code></p>
+          
+          
+            <p><code class="flag">--show-dir-listing</code></p>
+          
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>X.509 (SSL) private key</strong>
+            
+          </p> 
+          <p class="description">SSL Private Key, stored or symlinked in the site source.</p>
+        </td> 
+        <td class="align-center">
+          
+          
+            <p><code class="flag">--ssl-key</code></p>
+          
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
+            <strong>X.509 (SSL) certificate</strong>
+            
+          </p> 
+          <p class="description">SSL Public certificate, stored or symlinked in the site source.</p>
+        </td> 
+        <td class="align-center">
+          
+          
+            <p><code class="flag">--ssl-cert</code></p>
+          
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+</div>
+
+<div class="note warning">
+  <h5>Do not use tabs in configuration files</h5>
+  <p>
+    This will either lead to parsing errors, or Jekyll will revert to the
+    default settings. Use spaces instead.
+  </p>
+</div>
+
+      </article>
+    </div>
+    <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    
+      <h4>Getting Started</h4>
+      <ul>
+          <li><a href="/docs/">
+              Quickstart
+            </a>
+          </li>
+        
+          <li><a href="/docs/installation/">
+              Installation
+            </a>
+          </li>
+        
+          <li><a href="/docs/ruby-101/">
+              Ruby 101
+            </a>
+          </li>
+        
+          <li><a href="/docs/community/">
+              Community
+            </a>
+          </li>
+        
+          <li><a href="/docs/step-by-step/01-setup/">
+              Step by Step Tutorial
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Build</h4>
+      <ul>
+          <li><a href="/docs/usage/">
+              Command Line Usage
+            </a>
+          </li>
+        
+          <li><a href="/docs/configuration/">
+              Configuration
+            </a>
+          </li>
+        
+          <li><a href="/docs/rendering-process/">
+              Rendering Process
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Content</h4>
+      <ul>
+          <li><a href="/docs/pages/">
+              Pages
+            </a>
+          </li>
+        
+          <li><a href="/docs/posts/">
+              Posts
+            </a>
+          </li>
+        
+          <li><a href="/docs/front-matter/">
+              Front Matter
+            </a>
+          </li>
+        
+          <li><a href="/docs/collections/">
+              Collections
+            </a>
+          </li>
+        
+          <li><a href="/docs/datafiles/">
+              Data Files
+            </a>
+          </li>
+        
+          <li><a href="/docs/assets/">
+              Assets
+            </a>
+          </li>
+        
+          <li><a href="/docs/static-files/">
+              Static Files
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Site Structure</h4>
+      <ul>
+          <li><a href="/docs/structure/">
+              Directory Structure
+            </a>
+          </li>
+        
+          <li><a href="/docs/liquid/">
+              Liquid
+            </a>
+          </li>
+        
+          <li><a href="/docs/variables/">
+              Variables
+            </a>
+          </li>
+        
+          <li><a href="/docs/includes/">
+              Includes
+            </a>
+          </li>
+        
+          <li><a href="/docs/layouts/">
+              Layouts
+            </a>
+          </li>
+        
+          <li><a href="/docs/permalinks/">
+              Permalinks
+            </a>
+          </li>
+        
+          <li><a href="/docs/themes/">
+              Themes
+            </a>
+          </li>
+        
+          <li><a href="/docs/pagination/">
+              Pagination
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Guides</h4>
+      <ul>
+          <li><a href="/docs/plugins/">
+              Plugins
+            </a>
+          </li>
+        
+          <li><a href="/docs/migrations/">
+              Blog Migrations
+            </a>
+          </li>
+        
+          <li><a href="/docs/upgrading/">
+              Upgrading
+            </a>
+          </li>
+        
+          <li><a href="/docs/deployment/">
+              Deployment
+            </a>
+          </li>
+        
+      </ul>
+    </aside>
+</div>
+<div class="clear"></div>
+  </div>
+</section>
+<footer>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <p>Jekyll is lovingly maintained by the <a href="/team/">core team</a> of volunteers. </p>
+      <p>The contents of this website are <br />&copy;&nbsp;2024 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT&nbsp;License</a>.</p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Proudly hosted by
+        <a href="https://github.com">
+          <img src="/img/footer-logo.png" width="100" height="30" alt="GitHub • Social coding">
+        </a>
+      </p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Jekyll is funded thanks to its
+        <a href="https://github.com/jekyll/jekyll#sponsors">
+          sponsors!
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+<script>
+/* Creates an anchor element with the given ID and link for the permalink*/
+const anchorForId = (id) => {
+  const anchor = document.createElement("a");
+  anchor.className = "header-link";
+  anchor.href = `#${id}`;
+  anchor.innerHTML = `<span class="sr-only">Permalink</span><i class="fa fa-link" aria-hidden="true"></i>`;
+  anchor.title = "Permalink";
+  return anchor;
+};
+
+/* Finds all headers of the specified level within the given element, and adds a permalink to each header*/
+const linkifyAnchors = (level, containingElement) => {
+  const headers = Array.from(containingElement.getElementsByTagName(`h${level}`));
+  headers.forEach((header) => {
+    if (header.id) {
+      header.appendChild(anchorForId(header.id));
+    }
+  });
+};
+
+/* Executes the function when the document is ready */
+document.onreadystatechange = () => {
+  if (document.readyState === "complete") {
+    const contentBlock = document.getElementsByClassName("docs")[0]
+      ?? document.getElementsByClassName("news")[0];
+    if (!contentBlock) { return; }
+    for (let level = 1; level <= 6; level++) {
+      linkifyAnchors(level, contentBlock);
+    }
+  }
+};
+</script>
+<!-- Google Analytics (https://www.google.com/analytics) -->
+  <script>
+    !function(j,e,k,y,l,L){j.GoogleAnalyticsObject=y,j[y]||(j[y]=function(){
+    (j[y].q=j[y].q||[]).push(arguments)}),j[y].l=+new Date,l=e.createElement(k),
+    L=e.getElementsByTagName(k)[0],l.src='https://www.google-analytics.com/analytics.js',
+    L.parentNode.insertBefore(l,L)}(window,document,'script','ga');
+
+    ga('create', 'UA-50755011-1', 'jekyllrb.com');
+    ga('send', 'pageview');
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script> docsearch({
+apiKey: '50fe39c839958dfad797000f33e2ec17',
+indexName: 'jekyllrb',
+inputSelector: '#docsearch-input',
+enhancedSearchInput: true,
+debug: false // Set debug to true if you want to inspect the dropdown
+});
+</script>
+<script>
+  const navigateToUrl = (select) => {
+    const url = select.value;
+    url && (window.location.href = url);
+  };
+  </script>
+</body>
+</html>

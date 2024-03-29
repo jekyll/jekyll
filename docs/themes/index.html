@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
+  <link type="application/atom+xml" rel="alternate" href="/feed/release.xml" title="Jekyll releases posts" />
+  <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
+  <link rel="preload" href="/fonts/lato-v14-latin-300.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/lato-v14-latin-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/css/screen.css" as="style">
+  <link rel="stylesheet" href="/css/screen.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Themes | Jekyll • Simple, blog-aware, static sites</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Themes" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Jekyll has an extensive theme system that allows you to leverage community-maintained templates and styles to customize your site’s presentation. Jekyll themes specify plugins and package up assets, layouts, includes, and stylesheets in a way that can be overridden by your site’s content." />
+<meta property="og:description" content="Jekyll has an extensive theme system that allows you to leverage community-maintained templates and styles to customize your site’s presentation. Jekyll themes specify plugins and package up assets, layouts, includes, and stylesheets in a way that can be overridden by your site’s content." />
+<link rel="canonical" href="https://jekyllrb.com/docs/themes/" />
+<meta property="og:url" content="https://jekyllrb.com/docs/themes/" />
+<meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
+<meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-03-29T04:39:06-07:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
+<meta property="twitter:title" content="Themes" />
+<meta name="twitter:site" content="@jekyllrb" />
+<meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-03-29T04:39:06-07:00","datePublished":"2024-03-29T04:39:06-07:00","description":"Jekyll has an extensive theme system that allows you to leverage community-maintained templates and styles to customize your site’s presentation. Jekyll themes specify plugins and package up assets, layouts, includes, and stylesheets in a way that can be overridden by your site’s content.","headline":"Themes","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/themes/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/themes/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.min.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="wrap"><header>
+  <div class="flexbox">
+    <div class="center-on-mobiles">
+      <h1>
+        <a href="/" class="logo">
+          <span class="sr-only">Jekyll</span>
+          <img src="/img/logo-2x.png" width="140" height="65" alt="Jekyll Logo">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav hide-on-mobiles">
+      <ul>
+  <li><a href="/">Home</a></li>
+  <li class="current"><a href="/docs/">Docs</a></li>
+  <li><a href="/resources/">Resources</a></li>
+  <li><a href="/showcase/">Showcase</a></li>
+  <li><a href="/news/">News</a></li>
+  </ul>
+</nav>
+    <div class="search hide-on-mobiles">
+      <input type="text" id="docsearch-input" placeholder="Search the docs…" aria-label="Search">
+</div>
+    <div class="meta hide-on-mobiles">
+      <ul>
+        <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.3.3">v4.3.3</a></li>
+        <li><a href="https://github.com/jekyll/jekyll">GitHub</a></li>
+      </ul>
+    </div>
+  </div>
+  <nav class="mobile-nav show-on-mobiles">
+    <ul>
+  <li><a href="/">Home</a></li>
+    <li class="current" aria-current="page"><a href="/docs/">Docs</a></li>
+    <li><a href="/resources/">Resources</a></li>
+    <li><a href="/news/">News</a></li>
+    <li><a href="https://github.com/jekyll/jekyll" target="_blank" rel="noopener">GitHub</a></li>
+</ul></nav>
+</header>
+<section class="docs">
+  <div class="grid">
+    <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select id="doc-nav" onchange="navigateToUrl(this)" aria-label="Select a page from the documentation">
+    <option value="">Navigate the docs…</option>
+    
+      <optgroup label="Getting Started">
+          <option value="/docs/">Quickstart</option>
+          <option value="/docs/installation/">Installation</option>
+          <option value="/docs/ruby-101/">Ruby 101</option>
+          <option value="/docs/community/">Community</option>
+          <option value="/docs/step-by-step/01-setup/">Step by Step Tutorial</option>
+      </optgroup>
+    
+      <optgroup label="Build">
+          <option value="/docs/usage/">Command Line Usage</option>
+          <option value="/docs/configuration/">Configuration</option>
+          <option value="/docs/rendering-process/">Rendering Process</option>
+      </optgroup>
+    
+      <optgroup label="Content">
+          <option value="/docs/pages/">Pages</option>
+          <option value="/docs/posts/">Posts</option>
+          <option value="/docs/front-matter/">Front Matter</option>
+          <option value="/docs/collections/">Collections</option>
+          <option value="/docs/datafiles/">Data Files</option>
+          <option value="/docs/assets/">Assets</option>
+          <option value="/docs/static-files/">Static Files</option>
+      </optgroup>
+    
+      <optgroup label="Site Structure">
+          <option value="/docs/structure/">Directory Structure</option>
+          <option value="/docs/liquid/">Liquid</option>
+          <option value="/docs/variables/">Variables</option>
+          <option value="/docs/includes/">Includes</option>
+          <option value="/docs/layouts/">Layouts</option>
+          <option value="/docs/permalinks/">Permalinks</option>
+          <option value="/docs/themes/">Themes</option>
+          <option value="/docs/pagination/">Pagination</option>
+      </optgroup>
+    
+      <optgroup label="Guides">
+          <option value="/docs/plugins/">Plugins</option>
+          <option value="/docs/migrations/">Blog Migrations</option>
+          <option value="/docs/upgrading/">Upgrading</option>
+          <option value="/docs/deployment/">Deployment</option>
+      </optgroup>
+    
+  </select>
+</div>
+<div class="unit four-fifths">
+      <article>
+        <div class="improve right hide-on-mobiles">
+          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/themes.md"><i class="fa fa-pencil"></i>  Improve this page</a>
+        </div>
+        <h1>Themes</h1>
+        <p>Jekyll has an extensive theme system that allows you to leverage community-maintained templates and styles to customize your site’s presentation. Jekyll themes specify plugins and package up assets, layouts, includes, and stylesheets in a way that can be overridden by your site’s content.</p>
+
+<h2 id="pick-up-a-theme">Pick up a theme</h2>
+
+<p>You can find and preview themes on different galleries:</p>
+
+<ul>
+  <li><a href="https://github.com/topics/jekyll-theme">GitHub.com #jekyll-theme repos</a></li>
+  <li><a href="https://jamstackthemes.dev/ssg/jekyll/">jamstackthemes.dev</a></li>
+  <li><a href="http://jekyllthemes.org/">jekyllthemes.org</a></li>
+  <li><a href="https://jekyllthemes.io/">jekyllthemes.io</a></li>
+  <li><a href="https://jekyll-themes.com/">jekyll-themes.com</a></li>
+</ul>
+
+<p>See also: <a href="/resources/">resources</a>.</p>
+
+<h2 id="understanding-gem-based-themes">Understanding gem-based themes</h2>
+
+<p>When you <a href="/docs/">create a new Jekyll site</a> (by running the <code class="language-plaintext highlighter-rouge">jekyll new &lt;PATH&gt;</code> command), Jekyll installs a site that uses a gem-based theme called <a href="https://github.com/jekyll/minima">Minima</a>.</p>
+
+<p>With gem-based themes, some of the site’s directories (such as the <code class="language-plaintext highlighter-rouge">assets</code>, <code class="language-plaintext highlighter-rouge">_data</code>, <code class="language-plaintext highlighter-rouge">_layouts</code>, <code class="language-plaintext highlighter-rouge">_includes</code>, and <code class="language-plaintext highlighter-rouge">_sass</code> directories) are stored in the theme’s gem, hidden from your immediate view. Yet all of the necessary directories will be read and processed during Jekyll’s build process.</p>
+
+<p>In the case of Minima, you see only the following files in your Jekyll site directory:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── Gemfile
+├── Gemfile.lock
+├── _config.yml
+├── _posts
+│   └── 2016-12-04-welcome-to-jekyll.markdown
+├── about.markdown
+└── index.markdown
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">Gemfile</code> and <code class="language-plaintext highlighter-rouge">Gemfile.lock</code> files are used by Bundler to keep track of the required gems and gem versions you need to build your Jekyll site.</p>
+
+<p>Gem-based themes make it easier for theme developers to make updates available to anyone who has the theme gem. When there’s an update, theme developers push the update to RubyGems.</p>
+
+<p>If you have the theme gem, you can (if you desire) run <code class="language-plaintext highlighter-rouge">bundle update</code> to update all gems in your project. Or you can run <code class="language-plaintext highlighter-rouge">bundle update &lt;THEME&gt;</code>, replacing <code class="language-plaintext highlighter-rouge">&lt;THEME&gt;</code> with the theme name, such as <code class="language-plaintext highlighter-rouge">minima</code>, to just update the theme gem. Any new files or updates the theme developer has made (such as to stylesheets or includes) will be pulled into your project automatically.</p>
+
+<p>The goal of gem-based themes is to allow you to get all the benefits of a robust, continually updated theme without having all the theme’s files getting in your way and over-complicating what might be your primary focus: creating content.</p>
+
+<h2 id="overriding-theme-defaults">Overriding theme defaults</h2>
+
+<p>Jekyll themes set default data, layouts, includes, and stylesheets. However, you can override any of the theme defaults with your own site content.</p>
+
+<p>To replace layouts or includes in your theme, make a copy in your <code class="language-plaintext highlighter-rouge">_layouts</code> or <code class="language-plaintext highlighter-rouge">_includes</code> directory of the specific file you wish to modify, or create the file from scratch giving it the same name as the file you wish to override.</p>
+
+<p>For example, if your selected theme has a <code class="language-plaintext highlighter-rouge">page</code> layout, you can override the theme’s layout by creating your own <code class="language-plaintext highlighter-rouge">page</code> layout in the <code class="language-plaintext highlighter-rouge">_layouts</code> directory (that is, <code class="language-plaintext highlighter-rouge">_layouts/page.html</code>).</p>
+
+<p>To locate a theme’s files on your computer:</p>
+
+<ol>
+  <li>
+    <p>Run <code class="language-plaintext highlighter-rouge">bundle info --path</code> followed by the name of the theme’s gem, e.g., <code class="language-plaintext highlighter-rouge">bundle info --path minima</code> for Jekyll’s default theme.</p>
+
+    <p>This returns the location of the gem-based theme files. For example, the Minima theme’s files might be located in <code class="language-plaintext highlighter-rouge">/usr/local/lib/ruby/gems/2.6.0/gems/minima-2.5.1</code> on macOS.</p>
+  </li>
+  <li>
+    <p>Open the theme’s directory in Finder or Explorer:</p>
+
+    <div class="language-sh highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="c"># On MacOS</span>
+open <span class="si">$(</span>bundle info <span class="nt">--path</span> minima<span class="si">)</span>
+
+<span class="c"># On Windows</span>
+<span class="c"># First get the gem's installation path:</span>
+<span class="c">#</span>
+<span class="c">#   bundle info --path minima</span>
+<span class="c">#   =&gt; C:/Ruby26-x64/lib/ruby/gems/3.1.3/gems/minima-2.5.1</span>
+<span class="c">#</span>
+<span class="c"># then invoke explorer with above path, substituting `/` with `\`</span>
+explorer C:<span class="se">\R</span>uby26-x64<span class="se">\l</span>ib<span class="se">\r</span>uby<span class="se">\g</span>ems<span class="se">\3</span>.1.3<span class="se">\g</span>ems<span class="se">\m</span>inima-2.5.1
+
+<span class="c"># On Linux</span>
+xdg-open <span class="si">$(</span>bundle info <span class="nt">--path</span> minima<span class="si">)</span>
+</code></pre></div>    </div>
+
+    <p>A Finder or Explorer window opens showing the theme’s files and directories. The Minima theme gem contains these files:</p>
+
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>.
+├── LICENSE.txt
+├── README.md
+├── _includes
+│   ├── disqus_comments.html
+│   ├── footer.html
+│   ├── google-analytics.html
+│   ├── head.html
+│   ├── header.html
+│   ├── icon-github.html
+│   ├── icon-github.svg
+│   ├── icon-twitter.html
+│   └── icon-twitter.svg
+├── _layouts
+│   ├── default.html
+│   ├── home.html
+│   ├── page.html
+│   └── post.html
+├── _sass
+│   ├── minima
+│   │   ├── _base.scss
+│   │   ├── _layout.scss
+│   │   └── _syntax-highlighting.scss
+│   └── minima.scss
+└── assets
+    └── main.scss
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>With a clear understanding of the theme’s files, you can now override any theme file by creating a similarly named file in your Jekyll site directory.</p>
+
+<p>Let’s say, for a second example, you want to override Minima’s footer. In your Jekyll site, create an <code class="language-plaintext highlighter-rouge">_includes</code> folder and add a file in it called <code class="language-plaintext highlighter-rouge">footer.html</code>. Jekyll will now use your site’s <code class="language-plaintext highlighter-rouge">footer.html</code> file instead of the <code class="language-plaintext highlighter-rouge">footer.html</code> file from the Minima theme gem.</p>
+
+<p>To modify any stylesheet you must take the extra step of also copying the main sass file (<code class="language-plaintext highlighter-rouge">_sass/minima.scss</code> in the Minima theme) into the <code class="language-plaintext highlighter-rouge">_sass</code> directory in your site’s source.</p>
+
+<p>Jekyll will look first to your site’s content before looking to the theme’s defaults for any requested file in the following folders:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/assets</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/_data</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/_layouts</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/_includes</code></li>
+  <li><code class="language-plaintext highlighter-rouge">/_sass</code></li>
+</ul>
+
+<p>Note that making copies of theme files will prevent you from receiving any theme updates on those files. An alternative, to continue getting theme updates on all stylesheets, is to use higher specificity CSS selectors in your own additional, originally named CSS files.</p>
+
+<p class="note info">Refer to your selected theme’s documentation and source repository for more information on which files you can override.</p>
+
+<h3 id="themes-with-data-directory">Themes with <code class="language-plaintext highlighter-rouge">_data</code> directory<span class="version-badge" title="This feature is available starting version 4.3.0">4.3.0</span>
+</h3>
+
+<p>Starting with version 4.3.0, Jekyll also takes into account the <code class="language-plaintext highlighter-rouge">_data</code> directory of themes. This allows data to be distributed across themes.</p>
+
+<p>A typical example is text used within design elements.</p>
+
+<p>Imagine a theme provides the include file <code class="language-plaintext highlighter-rouge">testimonials.html</code>. This design element creates a new section on the page, and puts a h3 heading over the list of testimonials.</p>
+
+<p>A theme developer will probably formulate the heading in English and put it directly into the HTML source code.</p>
+
+<p>Consumers of the theme can copy the included file into their project and replace the heading there.</p>
+
+<p>With the consideration of the <code class="language-plaintext highlighter-rouge">_data</code> directory there is another solution for this standard task.</p>
+
+<p>Instead of entering the text directly into the design template, the designer adds a reference to a text catalog (e.g. <code class="language-plaintext highlighter-rouge">site.data.i18n.testimonials.header</code>) and create a file <code class="language-plaintext highlighter-rouge">_data/i18n/testimonials.yml</code> in the data directory of the theme.</p>
+
+<p>In this file the header is put under the key <code class="language-plaintext highlighter-rouge">header</code> and Jekyll takes care of the rest.</p>
+
+<p>For theme developers, this, at first sight, is of course a bigger effort than before.</p>
+
+<p>However, for the consumers of the theme, the customization is greatly simplified.</p>
+
+<p>Imagine the theme is used by a customer from Germany. In order for her to get the translated header for the testimonials design element in, she just has to create a data file in her project directory with the key <code class="language-plaintext highlighter-rouge">site.data.i18n.testimonials.header</code>, put the German translation or a header of her choice on top of it and the design element is already customized.</p>
+
+<p>She no longer has to copy the included file into her project directory, customize it there and, what weighs heaviest, waiver all updates of the theme, simply because the theme developer offered her the possibility to make changes to text modules centrally via text files.</p>
+
+<p class="note warning">Data files provide a high degree of flexibility. The place where theme developers put text modules may differ from that of the consumer of the theme which can cause unforeseen troubles!</p>
+
+<p>Related to above example the overriding key <code class="language-plaintext highlighter-rouge">site.data.i18n.testimonials.header</code> from the theme’s <code class="language-plaintext highlighter-rouge">_data/i18n/testimonials.yml</code> file on the consumer site can be located in three different locations:</p>
+
+<ul>
+  <li>
+<code class="language-plaintext highlighter-rouge">_data/i18n.yml</code> with key <code class="language-plaintext highlighter-rouge">testimonials.header</code>
+</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">_data/i18n/testimonials.yml</code> with key <code class="language-plaintext highlighter-rouge">header</code> (which mirrors the layout of the given example)</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">_data/i18n/testimonials/header.yml</code> without any key, the headline can go straight into the file</li>
+</ul>
+
+<p>Theme developers should have this ambiguity in mind, when supporting consumers that feel lost in setting their text modules for the design elements the theme provides.</p>
+
+<p class="note info">When using the data feature ask yourself, is the key that you introduce something that changes the behaviour of the theme when present or not, or is it just data that’s displayed anyway. If it’s changing the behaviour of the theme it should go into <code class="language-plaintext highlighter-rouge">site.config</code> otherwise it’s fine to be provided via <code class="language-plaintext highlighter-rouge">site.data</code>.</p>
+
+<p>Bundling data that modifies the behavior of a theme is considered an <strong>anti-pattern</strong> whose use is strongly discouraged. It is solely up to the author of the theme to ensure that every provided data can be easily overridden by the consumer of the theme if they desire to.</p>
+
+<h2 id="converting-gem-based-themes-to-regular-themes">Converting gem-based themes to regular themes</h2>
+
+<p>Suppose you want to get rid of the gem-based theme and convert it to a regular theme, where all files are present in your Jekyll site directory, with nothing stored in the theme gem.</p>
+
+<p>To do this, copy the files from the theme gem’s directory into your Jekyll site directory. (For example, copy them to <code class="language-plaintext highlighter-rouge">/myblog</code> if you created your Jekyll site at <code class="language-plaintext highlighter-rouge">/myblog</code>. See the previous section for details.)</p>
+
+<p>Then you must tell Jekyll about the plugins that were referenced by the theme. You can find these plugins in the theme’s gemspec file as runtime dependencies. If you were converting the Minima theme, for example, you might see:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">spec</span><span class="p">.</span><span class="nf">add_runtime_dependency</span> <span class="s2">"jekyll-feed"</span><span class="p">,</span> <span class="s2">"~&gt; 0.12"</span>
+<span class="n">spec</span><span class="p">.</span><span class="nf">add_runtime_dependency</span> <span class="s2">"jekyll-seo-tag"</span><span class="p">,</span> <span class="s2">"~&gt; 2.6"</span>
+</code></pre></div></div>
+
+<p>You should include these references in the <code class="language-plaintext highlighter-rouge">Gemfile</code> in one of two ways.</p>
+
+<p>You could list them individually in both <code class="language-plaintext highlighter-rouge">Gemfile</code> and <code class="language-plaintext highlighter-rouge">_config.yml</code>.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ./Gemfile</span>
+
+<span class="n">gem</span> <span class="s2">"jekyll-feed"</span><span class="p">,</span> <span class="s2">"~&gt; 0.12"</span>
+<span class="n">gem</span> <span class="s2">"jekyll-seo-tag"</span><span class="p">,</span> <span class="s2">"~&gt; 2.6"</span>
+</code></pre></div></div>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ./_config.yml</span>
+
+<span class="na">plugins</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">jekyll-feed</span>
+  <span class="pi">-</span> <span class="s">jekyll-seo-tag</span>
+</code></pre></div></div>
+
+<p>Or you could list them explicitly as Jekyll plugins in your Gemfile, and not update <code class="language-plaintext highlighter-rouge">_config.yml</code>, like this:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ./Gemfile</span>
+
+<span class="n">group</span> <span class="ss">:jekyll_plugins</span> <span class="k">do</span>
+  <span class="n">gem</span> <span class="s2">"jekyll-feed"</span><span class="p">,</span> <span class="s2">"~&gt; 0.12"</span>
+  <span class="n">gem</span> <span class="s2">"jekyll-seo-tag"</span><span class="p">,</span> <span class="s2">"~&gt; 2.6"</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>Either way, don’t forget to <code class="language-plaintext highlighter-rouge">bundle update</code>.</p>
+
+<p>If you’re publishing on GitHub Pages you should update only your <code class="language-plaintext highlighter-rouge">_config.yml</code> as GitHub Pages doesn’t load plugins via Bundler.</p>
+
+<p>Finally, remove references to the theme gem in <code class="language-plaintext highlighter-rouge">Gemfile</code> and configuration. For example, to remove <code class="language-plaintext highlighter-rouge">minima</code>:</p>
+
+<ul>
+  <li>Open <code class="language-plaintext highlighter-rouge">Gemfile</code> and remove <code class="language-plaintext highlighter-rouge">gem "minima", "~&gt; 2.5"</code>.</li>
+  <li>Open <code class="language-plaintext highlighter-rouge">_config.yml</code> and remove <code class="language-plaintext highlighter-rouge">theme: minima</code>.</li>
+</ul>
+
+<p>Now <code class="language-plaintext highlighter-rouge">bundle update</code> will no longer get updates for the theme gem.</p>
+
+<h2 id="installing-a-theme">Installing a gem-based theme</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">jekyll new &lt;PATH&gt;</code> command isn’t the only way to create a new Jekyll site with a gem-based theme. You can also find gem-based themes online and incorporate them into your Jekyll project.</p>
+
+<p>For example, search for <a href="https://rubygems.org/search?utf8=%E2%9C%93&amp;query=jekyll-theme">jekyll theme on RubyGems</a> to find other gem-based themes. (Note that not all themes are using <code class="language-plaintext highlighter-rouge">jekyll-theme</code> as a convention in the theme name.)</p>
+
+<p>To install a gem-based theme:</p>
+
+<ol>
+  <li>
+    <p>Add the theme gem to your site’s <code class="language-plaintext highlighter-rouge">Gemfile</code>:</p>
+
+    <div class="language-ruby highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="c1"># ./Gemfile</span>
+
+<span class="c1"># This is an example, declare the theme gem you want to use here</span>
+<span class="n">gem</span> <span class="s2">"jekyll-theme-minimal"</span>
+</code></pre></div>    </div>
+
+    <p>Or if you’ve started with the <code class="language-plaintext highlighter-rouge">jekyll new</code> command, replace <code class="language-plaintext highlighter-rouge">gem "minima", "~&gt; 2.0"</code> with the gem you want, e.g:</p>
+
+    <div class="language-diff highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code># ./Gemfile
+<span class="err">
+</span><span class="gd">- gem "minima", "~&gt; 2.5"
+</span><span class="gi">+ gem "jekyll-theme-minimal"
+</span></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Install the theme:</p>
+
+    <div class="language-sh highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>bundle <span class="nb">install</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Add the following to your site’s <code class="language-plaintext highlighter-rouge">_config.yml</code> to activate the theme:</p>
+
+    <div class="language-yaml highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="na">theme</span><span class="pi">:</span> <span class="s">jekyll-theme-minimal</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Build your site:</p>
+
+    <div class="language-sh highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>bundle <span class="nb">exec </span>jekyll serve
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p class="note info">You can have multiple themes listed in your site’s <code class="language-plaintext highlighter-rouge">Gemfile</code>, but only one theme can be selected in your site’s <code class="language-plaintext highlighter-rouge">_config.yml</code>.</p>
+
+<p>If you’re publishing your Jekyll site on <a href="https://pages.github.com/">GitHub Pages</a>, note that GitHub Pages supports only <a href="https://pages.github.com/themes/">some gem-based themes</a>. GitHub Pages also supports <a href="https://help.github.com/articles/adding-a-jekyll-theme-to-your-github-pages-site/#adding-a-jekyll-theme-in-your-sites-_configyml-file">using any theme hosted on GitHub</a> using the <code class="language-plaintext highlighter-rouge">remote_theme</code> configuration as if it were a gem-based theme.</p>
+
+<h2 id="creating-a-gem-based-theme">Creating a gem-based theme</h2>
+
+<p>If you’re a Jekyll theme developer (rather than a consumer of themes), you can package up your theme in RubyGems and allow users to install it through Bundler.</p>
+
+<p>If you’re unfamiliar with creating Ruby gems, don’t worry. Jekyll will help you scaffold a new theme with the <code class="language-plaintext highlighter-rouge">new-theme</code> command. Run <code class="language-plaintext highlighter-rouge">jekyll new-theme</code> with the theme name as an argument.</p>
+
+<p>Here is an example:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll new-theme jekyll-theme-awesome
+    create /path/to/jekyll-theme-awesome/_layouts
+    create /path/to/jekyll-theme-awesome/_includes
+    create /path/to/jekyll-theme-awesome/_sass
+    create /path/to/jekyll-theme-awesome/_layouts/page.html
+    create /path/to/jekyll-theme-awesome/_layouts/post.html
+    create /path/to/jekyll-theme-awesome/_layouts/default.html
+    create /path/to/jekyll-theme-awesome/Gemfile
+    create /path/to/jekyll-theme-awesome/jekyll-theme-awesome.gemspec
+    create /path/to/jekyll-theme-awesome/README.md
+    create /path/to/jekyll-theme-awesome/LICENSE.txt
+    initialize /path/to/jekyll-theme-awesome/.git
+    create /path/to/jekyll-theme-awesome/.gitignore
+Your new Jekyll theme, jekyll-theme-awesome, is ready <span class="k">for </span>you <span class="k">in</span> /path/to/jekyll-theme-awesome!
+For <span class="nb">help </span>getting started, <span class="nb">read</span> /path/to/jekyll-theme-awesome/README.md.
+</code></pre></div></div>
+
+<p>Add your template files in the corresponding folders. Then complete the <code class="language-plaintext highlighter-rouge">.gemspec</code> and the README files according to your needs.</p>
+
+<h3 id="layouts-and-includes">Layouts and includes</h3>
+
+<p>Theme layouts and includes work just like they work in any Jekyll site. Place layouts in your theme’s <code class="language-plaintext highlighter-rouge">/_layouts</code> folder, and place includes in your themes <code class="language-plaintext highlighter-rouge">/_includes</code> folder.</p>
+
+<p>For example, if your theme has a <code class="language-plaintext highlighter-rouge">/_layouts/page.html</code> file, and a page has <code class="language-plaintext highlighter-rouge">layout: page</code> in its front matter, Jekyll will first look to the site’s <code class="language-plaintext highlighter-rouge">_layouts</code> folder for the <code class="language-plaintext highlighter-rouge">page</code> layout, and if none exists, will use your theme’s <code class="language-plaintext highlighter-rouge">page</code> layout.</p>
+
+<h3 id="assets">Assets</h3>
+
+<p>Any file in <code class="language-plaintext highlighter-rouge">/assets</code> will be copied over to the user’s site upon build unless they have a file with the same relative path. You can ship any kind of asset here: SCSS, an image, a webfont, etc. These files behave like pages and static files in Jekyll:</p>
+
+<ul>
+  <li>If the file has <a href="/docs/front-matter/">front matter</a> at the top, it will be rendered.</li>
+  <li>If the file does not have front matter, it will simply be copied over into the resulting site.</li>
+</ul>
+
+<p>This allows theme creators to ship a default <code class="language-plaintext highlighter-rouge">/assets/styles.scss</code> file which their layouts can depend on as <code class="language-plaintext highlighter-rouge">/assets/styles.css</code>.</p>
+
+<p>All files in <code class="language-plaintext highlighter-rouge">/assets</code> will be output into the compiled site in the <code class="language-plaintext highlighter-rouge">/assets</code> folder just as you’d expect from using Jekyll on your sites.</p>
+
+<h3 id="stylesheets">Stylesheets</h3>
+
+<p>Your theme’s stylesheets should be placed in your theme’s <code class="language-plaintext highlighter-rouge">_sass</code> folder, again, just as you would when authoring a Jekyll site.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_sass
+└── jekyll-theme-awesome.scss
+</code></pre></div></div>
+
+<p>Your theme’s styles can be included in the user’s stylesheet using the <code class="language-plaintext highlighter-rouge">@import</code> directive.</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@import</span> <span class="s1">"{{ site.theme }}"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="theme-gem-dependencies350">Theme-gem dependencies<span class="version-badge" title="This feature is available starting version 3.5.0">3.5.0</span>
+</h3>
+<p>Jekyll will automatically require all whitelisted <code class="language-plaintext highlighter-rouge">runtime_dependencies</code> of your theme-gem even if they’re not explicitly included under the <code class="language-plaintext highlighter-rouge">plugins</code> array in the site’s config file. (Note: whitelisting is only required when building or serving with the <code class="language-plaintext highlighter-rouge">--safe</code> option.)</p>
+
+<p>With this, the end-user need not keep track of the plugins required to be included in their config file for their theme-gem to work as intended.</p>
+
+<h3 id="pre-configuring-theme-gems40">Pre-configuring Theme-gems<span class="version-badge" title="This feature is available starting version 4.0">4.0</span>
+</h3>
+<p>Jekyll will read-in a <code class="language-plaintext highlighter-rouge">_config.yml</code> at the root of the theme-gem and merge its data into the site’s existing configuration data.</p>
+
+<p>But unlike other entities loaded from within the theme, loading the config file comes with a few restrictions, as summarized below:</p>
+<ul>
+  <li>Jekyll’s default settings cannot be overridden by a theme-config. That <em>ball is still in the user’s court.</em>
+</li>
+  <li>The theme-config-file cannot be a symlink, irrespective of <code class="language-plaintext highlighter-rouge">safe mode</code> and whether the file pointed to by the symlink is a legitimate file within the theme-gem.</li>
+  <li>The theme-config should be a set of key-value pairs. An empty config file, a config file that simply <em>lists items</em> under a key, or a config file with just a simple string of text will simply be ignored silently. Users will not get a warning or any log output regarding this discrepancy.</li>
+  <li>Any settings defined by the theme-config can be overridden by the user.</li>
+</ul>
+
+<p>While this feature is to enable easier adoption of a theme, the restrictions ensure that a theme-config cannot affect the build in a concerning manner. Any plugins required by the theme will have to be listed manually by the user or provided by the theme’s <code class="language-plaintext highlighter-rouge">gemspec</code> file.</p>
+
+<p>This feature will let the theme-gem to work with <em>theme-specific config variables</em> out-of-the-box.</p>
+
+<h3 id="documenting-your-theme">Documenting your theme</h3>
+
+<p>Your theme should include a <code class="language-plaintext highlighter-rouge">/README.md</code> file, which explains how site authors can install and use your theme. What layouts are included? What includes? Do they need to add anything special to their site’s configuration file?</p>
+
+<h3 id="adding-a-screenshot">Adding a screenshot</h3>
+
+<p>Themes are visual. Show users what your theme looks like by including a screenshot as <code class="language-plaintext highlighter-rouge">/screenshot.png</code> within your theme’s repository where it can be retrieved programmatically. You can also include this screenshot within your theme’s documentation.</p>
+
+<h3 id="previewing-your-theme">Previewing your theme</h3>
+
+<p>To preview your theme as you’re authoring it, it may be helpful to add dummy content in, for example, <code class="language-plaintext highlighter-rouge">/index.html</code> and <code class="language-plaintext highlighter-rouge">/page.html</code> files. This will allow you to use the <code class="language-plaintext highlighter-rouge">jekyll build</code> and <code class="language-plaintext highlighter-rouge">jekyll serve</code> commands to preview your theme, just as you’d preview a Jekyll site.</p>
+
+<p class="note info">If you do preview your theme locally, be sure to add <code class="language-plaintext highlighter-rouge">/_site</code> to your theme’s <code class="language-plaintext highlighter-rouge">.gitignore</code> file to prevent the compiled site from also being included when you distribute your theme.</p>
+
+<h3 id="publishing-your-theme">Publishing your theme</h3>
+
+<p>Themes are published via <a href="https://rubygems.org">RubyGems.org</a>. You will need a RubyGems account, which you can <a href="https://rubygems.org/sign_up">create for free</a>.</p>
+
+<ol>
+  <li>
+    <p>First, you need to have it in a git repository:</p>
+
+    <div class="language-sh highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>git init <span class="c"># Only the first time</span>
+git add <span class="nt">-A</span>
+git commit <span class="nt">-m</span> <span class="s2">"Init commit"</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Next, package your theme, by running the following command, replacing <code class="language-plaintext highlighter-rouge">jekyll-theme-awesome</code> with the name of your theme:</p>
+
+    <div class="language-sh highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>gem build jekyll-theme-awesome.gemspec
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Finally, push your packaged theme up to the RubyGems service, by running the following command, again replacing <code class="language-plaintext highlighter-rouge">jekyll-theme-awesome</code> with the name of your theme:</p>
+
+    <div class="language-sh highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>gem push jekyll-theme-awesome-<span class="k">*</span>.gem
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>To release a new version of your theme, update the version number in the gemspec file, ( <code class="language-plaintext highlighter-rouge">jekyll-theme-awesome.gemspec</code> in this example ), and then repeat Steps 1 - 3 above. We recommend that you follow <a href="https://semver.org">Semantic Versioning</a> while bumping your theme-version.</p>
+  </li>
+</ol>
+
+      </article>
+    </div>
+    <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    
+      <h4>Getting Started</h4>
+      <ul>
+          <li>
+<a href="/docs/">
+              Quickstart
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/installation/">
+              Installation
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/ruby-101/">
+              Ruby 101
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/community/">
+              Community
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/step-by-step/01-setup/">
+              Step by Step Tutorial
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Build</h4>
+      <ul>
+          <li>
+<a href="/docs/usage/">
+              Command Line Usage
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/configuration/">
+              Configuration
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/rendering-process/">
+              Rendering Process
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Content</h4>
+      <ul>
+          <li>
+<a href="/docs/pages/">
+              Pages
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/posts/">
+              Posts
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/front-matter/">
+              Front Matter
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/collections/">
+              Collections
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/datafiles/">
+              Data Files
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/assets/">
+              Assets
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/static-files/">
+              Static Files
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Site Structure</h4>
+      <ul>
+          <li>
+<a href="/docs/structure/">
+              Directory Structure
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/liquid/">
+              Liquid
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/variables/">
+              Variables
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/includes/">
+              Includes
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/layouts/">
+              Layouts
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/permalinks/">
+              Permalinks
+            </a>
+          </li>
+        
+          <liclass><a href="/docs/themes/">
+              Themes
+            </a>
+          
+        
+          <li>
+<a href="/docs/pagination/">
+              Pagination
+            </a>
+          </li>
+        
+      </liclass>
+</ul>
+    
+      <h4>Guides</h4>
+      <ul>
+          <li>
+<a href="/docs/plugins/">
+              Plugins
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/migrations/">
+              Blog Migrations
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/upgrading/">
+              Upgrading
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/deployment/">
+              Deployment
+            </a>
+          </li>
+        
+      </ul>
+    </aside>
+</div>
+<div class="clear"></div>
+  </div>
+</section>
+<footer>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <p>Jekyll is lovingly maintained by the <a href="/team/">core team</a> of volunteers. </p>
+      <p>The contents of this website are <br>© 2024 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT License</a>.</p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Proudly hosted by
+        <a href="https://github.com">
+          <img src="/img/footer-logo.png" width="100" height="30" alt="GitHub • Social coding">
+        </a>
+      </p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Jekyll is funded thanks to its
+        <a href="https://github.com/jekyll/jekyll#sponsors">
+          sponsors!
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+<script>
+/* Creates an anchor element with the given ID and link for the permalink*/
+const anchorForId = (id) => {
+  const anchor = document.createElement("a");
+  anchor.className = "header-link";
+  anchor.href = `#${id}`;
+  anchor.innerHTML = `<span class="sr-only">Permalink</span><i class="fa fa-link" aria-hidden="true"></i>`;
+  anchor.title = "Permalink";
+  return anchor;
+};
+
+/* Finds all headers of the specified level within the given element, and adds a permalink to each header*/
+const linkifyAnchors = (level, containingElement) => {
+  const headers = Array.from(containingElement.getElementsByTagName(`h${level}`));
+  headers.forEach((header) => {
+    if (header.id) {
+      header.appendChild(anchorForId(header.id));
+    }
+  });
+};
+
+/* Executes the function when the document is ready */
+document.onreadystatechange = () => {
+  if (document.readyState === "complete") {
+    const contentBlock = document.getElementsByClassName("docs")[0]
+      ?? document.getElementsByClassName("news")[0];
+    if (!contentBlock) { return; }
+    for (let level = 1; level <= 6; level++) {
+      linkifyAnchors(level, contentBlock);
+    }
+  }
+};
+</script>
+<!-- Google Analytics (https://www.google.com/analytics) -->
+  <script>
+    !function(j,e,k,y,l,L){j.GoogleAnalyticsObject=y,j[y]||(j[y]=function(){
+    (j[y].q=j[y].q||[]).push(arguments)}),j[y].l=+new Date,l=e.createElement(k),
+    L=e.getElementsByTagName(k)[0],l.src='https://www.google-analytics.com/analytics.js',
+    L.parentNode.insertBefore(l,L)}(window,document,'script','ga');
+
+    ga('create', 'UA-50755011-1', 'jekyllrb.com');
+    ga('send', 'pageview');
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script> docsearch({
+apiKey: '50fe39c839958dfad797000f33e2ec17',
+indexName: 'jekyllrb',
+inputSelector: '#docsearch-input',
+enhancedSearchInput: true,
+debug: false // Set debug to true if you want to inspect the dropdown
+});
+</script>
+<script>
+  const navigateToUrl = (select) => {
+    const url = select.value;
+    url && (window.location.href = url);
+  };
+  </script>
+</body>
+</html>

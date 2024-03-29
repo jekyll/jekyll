@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
+  <link type="application/atom+xml" rel="alternate" href="/feed/release.xml" title="Jekyll releases posts" />
+  <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
+  <link rel="preload" href="/fonts/lato-v14-latin-300.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/lato-v14-latin-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/css/screen.css" as="style">
+  <link rel="stylesheet" href="/css/screen.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Becoming a Maintainer | Jekyll • Simple, blog-aware, static sites</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Becoming a Maintainer" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This guide is for contributors. These special people have contributed to one or more of Jekyll’s repositories, but do not yet have write access to any. You may find what is written here interesting, but it’s definitely not for everyone." />
+<meta property="og:description" content="This guide is for contributors. These special people have contributed to one or more of Jekyll’s repositories, but do not yet have write access to any. You may find what is written here interesting, but it’s definitely not for everyone." />
+<link rel="canonical" href="https://jekyllrb.com/docs/maintaining/becoming-a-maintainer/" />
+<meta property="og:url" content="https://jekyllrb.com/docs/maintaining/becoming-a-maintainer/" />
+<meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
+<meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-03-29T04:39:06-07:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
+<meta property="twitter:title" content="Becoming a Maintainer" />
+<meta name="twitter:site" content="@jekyllrb" />
+<meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-03-29T04:39:06-07:00","datePublished":"2024-03-29T04:39:06-07:00","description":"This guide is for contributors. These special people have contributed to one or more of Jekyll’s repositories, but do not yet have write access to any. You may find what is written here interesting, but it’s definitely not for everyone.","headline":"Becoming a Maintainer","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/maintaining/becoming-a-maintainer/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/maintaining/becoming-a-maintainer/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.min.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="wrap"><header>
+  <div class="flexbox">
+    <div class="center-on-mobiles">
+      <h1>
+        <a href="/" class="logo">
+          <span class="sr-only">Jekyll</span>
+          <img src="/img/logo-2x.png" width="140" height="65" alt="Jekyll Logo">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav hide-on-mobiles">
+      <ul>
+  <li><a href="/">Home</a></li>
+  <li class="current"><a href="/docs/">Docs</a></li>
+  <li><a href="/resources/">Resources</a></li>
+  <li><a href="/showcase/">Showcase</a></li>
+  <li><a href="/news/">News</a></li>
+  </ul>
+</nav>
+    <div class="search hide-on-mobiles">
+      <input type="text" id="docsearch-input" placeholder="Search the docs…" aria-label="Search">
+</div>
+    <div class="meta hide-on-mobiles">
+      <ul>
+        <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.3.3">v4.3.3</a></li>
+        <li><a href="https://github.com/jekyll/jekyll">GitHub</a></li>
+      </ul>
+    </div>
+  </div>
+  <nav class="mobile-nav show-on-mobiles">
+    <ul>
+  <li><a href="/">Home</a></li>
+    <li class="current" aria-current="page"><a href="/docs/">Docs</a></li>
+    <li><a href="/resources/">Resources</a></li>
+    <li><a href="/news/">News</a></li>
+    <li><a href="https://github.com/jekyll/jekyll" target="_blank" rel="noopener">GitHub</a></li>
+</ul></nav>
+</header>
+<section class="docs">
+  <div class="grid">
+    <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select id="doc-nav" onchange="navigateToUrl(this)" aria-label="Select a page from the documentation">
+    <option value="">Navigate the docs…</option>
+    
+      <optgroup label="Getting Started">
+          <option value="/docs/">Quickstart</option>
+          <option value="/docs/installation/">Installation</option>
+          <option value="/docs/ruby-101/">Ruby 101</option>
+          <option value="/docs/community/">Community</option>
+          <option value="/docs/step-by-step/01-setup/">Step by Step Tutorial</option>
+      </optgroup>
+    
+      <optgroup label="Build">
+          <option value="/docs/usage/">Command Line Usage</option>
+          <option value="/docs/configuration/">Configuration</option>
+          <option value="/docs/rendering-process/">Rendering Process</option>
+      </optgroup>
+    
+      <optgroup label="Content">
+          <option value="/docs/pages/">Pages</option>
+          <option value="/docs/posts/">Posts</option>
+          <option value="/docs/front-matter/">Front Matter</option>
+          <option value="/docs/collections/">Collections</option>
+          <option value="/docs/datafiles/">Data Files</option>
+          <option value="/docs/assets/">Assets</option>
+          <option value="/docs/static-files/">Static Files</option>
+      </optgroup>
+    
+      <optgroup label="Site Structure">
+          <option value="/docs/structure/">Directory Structure</option>
+          <option value="/docs/liquid/">Liquid</option>
+          <option value="/docs/variables/">Variables</option>
+          <option value="/docs/includes/">Includes</option>
+          <option value="/docs/layouts/">Layouts</option>
+          <option value="/docs/permalinks/">Permalinks</option>
+          <option value="/docs/themes/">Themes</option>
+          <option value="/docs/pagination/">Pagination</option>
+      </optgroup>
+    
+      <optgroup label="Guides">
+          <option value="/docs/plugins/">Plugins</option>
+          <option value="/docs/migrations/">Blog Migrations</option>
+          <option value="/docs/upgrading/">Upgrading</option>
+          <option value="/docs/deployment/">Deployment</option>
+      </optgroup>
+    
+  </select>
+</div>
+<div class="unit four-fifths">
+      <article>
+        <div class="improve right hide-on-mobiles">
+          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/maintaining/becoming-a-maintainer.md"><i class="fa fa-pencil"></i>  Improve this page</a>
+        </div>
+        <h1>Becoming a Maintainer</h1>
+        <p class="note info"><strong>This guide is for contributors.</strong> These special people have contributed to one or more of Jekyll’s repositories, but do not yet have write access to any. You may find what is written here interesting, but it’s definitely not for everyone.</p>
+
+<p>So you want to become a maintainer of a Jekyll project? We’d love to have you! Here are some things we like to see from community members before we promote them to maintainers.</p>
+
+<h2 id="1-use-jekyll">1. Use Jekyll</h2>
+
+<p>You want to maintain Jekyll? Use it often. Do weird things with it. Do normal things with it. Does it work? Does it have any weaknesses? Is there a gap in the product that you think should be filled?</p>
+
+<h2 id="2-help-triage-issues">2. Help Triage Issues</h2>
+
+<p>Watch the repository you’re interested in. Join <a href="https://teams.jekyllrb.com">an Affinity Team</a> and receive mentions regarding a particular interest area of the project. When you receive a notification for an issue that has not been triaged by a maintainer, dive in. Can you reproduce the issue? Can you determine the fix? <a href="../triaging-an-issue/">More tips on Triaging an Issue in our maintainer guide</a>. Every maintainer loves an issue that is resolved before they get to it. <img class="emoji" title=":smiley:" alt=":smiley:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f603.png" height="20" width="20"></p>
+
+<h2 id="3-write-documentation">3. Write Documentation</h2>
+
+<p>Good documentation means less confusion for our users and fewer issues to triage. Documentation is always in need of fixes and updates as we change the code. Read through the documentation during your normal usage of the product and submit changes as you feel they are necessary.</p>
+
+<h2 id="4-write-code">4. Write Code</h2>
+
+<p>As a maintainer, you will be reviewing pull requests which update code. You should feel comfortable with the Jekyll codebase enough to confidently review any pull request put forward. In order to become more comfortable, write some code of your own and send a pull request. A great place to start is with any issue labeled “bug” in the issue tracker. Write a test which replicates the problem and fails, then work on fixing the code such that the test passes.</p>
+
+<h2 id="5-review-pull-requests">5. Review Pull Requests</h2>
+
+<p>Start by reviewing one pull request a week. Leave detailed comments and <a href="../reviewing-a-pull-request/">follow our guide for reviewing pull requests</a>.</p>
+
+<h2 id="6-ask">6. Ask!</h2>
+
+<p>Open an issue describing your contributions to the project and why you wish to be a maintainer. Issues are nice because you can easily reference where you have demonstrated that you help triage issues, write code &amp; documentation, and review pull requests. You may also email any maintainer privately if you do not feel comfortable asking in the open.</p>
+
+<p>We would love to expand the team and look forward to many more community members becoming maintainers!</p>
+
+<h1 id="helping-out-elsewhere">Helping Out Elsewhere</h1>
+
+<p>In addition to maintainers of our core and plugin code, the Jekyll team is comprised of moderators for our forums. These helpful community members take a look at the topics posted to <a href="https://talk.jekyllrb.com">https://talk.jekyllrb.com</a> and ensure they are properly categorized and are acceptable under our Code of Conduct. If you would like to be a moderator, email one of the maintainers with links to where you have answered questions and a request to be added as a moderator. More help is always welcome.</p>
+
+      </article>
+    </div>
+    <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    
+      <h4>Getting Started</h4>
+      <ul>
+          <li>
+<a href="/docs/">
+              Quickstart
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/installation/">
+              Installation
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/ruby-101/">
+              Ruby 101
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/community/">
+              Community
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/step-by-step/01-setup/">
+              Step by Step Tutorial
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Build</h4>
+      <ul>
+          <li>
+<a href="/docs/usage/">
+              Command Line Usage
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/configuration/">
+              Configuration
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/rendering-process/">
+              Rendering Process
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Content</h4>
+      <ul>
+          <li>
+<a href="/docs/pages/">
+              Pages
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/posts/">
+              Posts
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/front-matter/">
+              Front Matter
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/collections/">
+              Collections
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/datafiles/">
+              Data Files
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/assets/">
+              Assets
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/static-files/">
+              Static Files
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Site Structure</h4>
+      <ul>
+          <li>
+<a href="/docs/structure/">
+              Directory Structure
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/liquid/">
+              Liquid
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/variables/">
+              Variables
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/includes/">
+              Includes
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/layouts/">
+              Layouts
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/permalinks/">
+              Permalinks
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/themes/">
+              Themes
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/pagination/">
+              Pagination
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Guides</h4>
+      <ul>
+          <li>
+<a href="/docs/plugins/">
+              Plugins
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/migrations/">
+              Blog Migrations
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/upgrading/">
+              Upgrading
+            </a>
+          </li>
+        
+          <li>
+<a href="/docs/deployment/">
+              Deployment
+            </a>
+          </li>
+        
+      </ul>
+    </aside>
+</div>
+<div class="clear"></div>
+  </div>
+</section>
+<footer>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <p>Jekyll is lovingly maintained by the <a href="/team/">core team</a> of volunteers. </p>
+      <p>The contents of this website are <br>© 2024 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT License</a>.</p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Proudly hosted by
+        <a href="https://github.com">
+          <img src="/img/footer-logo.png" width="100" height="30" alt="GitHub • Social coding">
+        </a>
+      </p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Jekyll is funded thanks to its
+        <a href="https://github.com/jekyll/jekyll#sponsors">
+          sponsors!
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+<script>
+/* Creates an anchor element with the given ID and link for the permalink*/
+const anchorForId = (id) => {
+  const anchor = document.createElement("a");
+  anchor.className = "header-link";
+  anchor.href = `#${id}`;
+  anchor.innerHTML = `<span class="sr-only">Permalink</span><i class="fa fa-link" aria-hidden="true"></i>`;
+  anchor.title = "Permalink";
+  return anchor;
+};
+
+/* Finds all headers of the specified level within the given element, and adds a permalink to each header*/
+const linkifyAnchors = (level, containingElement) => {
+  const headers = Array.from(containingElement.getElementsByTagName(`h${level}`));
+  headers.forEach((header) => {
+    if (header.id) {
+      header.appendChild(anchorForId(header.id));
+    }
+  });
+};
+
+/* Executes the function when the document is ready */
+document.onreadystatechange = () => {
+  if (document.readyState === "complete") {
+    const contentBlock = document.getElementsByClassName("docs")[0]
+      ?? document.getElementsByClassName("news")[0];
+    if (!contentBlock) { return; }
+    for (let level = 1; level <= 6; level++) {
+      linkifyAnchors(level, contentBlock);
+    }
+  }
+};
+</script>
+<!-- Google Analytics (https://www.google.com/analytics) -->
+  <script>
+    !function(j,e,k,y,l,L){j.GoogleAnalyticsObject=y,j[y]||(j[y]=function(){
+    (j[y].q=j[y].q||[]).push(arguments)}),j[y].l=+new Date,l=e.createElement(k),
+    L=e.getElementsByTagName(k)[0],l.src='https://www.google-analytics.com/analytics.js',
+    L.parentNode.insertBefore(l,L)}(window,document,'script','ga');
+
+    ga('create', 'UA-50755011-1', 'jekyllrb.com');
+    ga('send', 'pageview');
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script> docsearch({
+apiKey: '50fe39c839958dfad797000f33e2ec17',
+indexName: 'jekyllrb',
+inputSelector: '#docsearch-input',
+enhancedSearchInput: true,
+debug: false // Set debug to true if you want to inspect the dropdown
+});
+</script>
+<script>
+  const navigateToUrl = (select) => {
+    const url = select.value;
+    url && (window.location.href = url);
+  };
+  </script>
+</body>
+</html>

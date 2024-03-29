@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
+  <link type="application/atom+xml" rel="alternate" href="/feed/release.xml" title="Jekyll releases posts" />
+  <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
+  <link rel="preload" href="/fonts/lato-v14-latin-300.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/lato-v14-latin-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/css/screen.css" as="style">
+  <link rel="stylesheet" href="/css/screen.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Includes | Jekyll • Simple, blog-aware, static sites</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Includes" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The include tag allows you to include the content from another file stored in the _includes folder:" />
+<meta property="og:description" content="The include tag allows you to include the content from another file stored in the _includes folder:" />
+<link rel="canonical" href="https://jekyllrb.com/docs/includes/" />
+<meta property="og:url" content="https://jekyllrb.com/docs/includes/" />
+<meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
+<meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-03-29T04:39:06-07:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
+<meta property="twitter:title" content="Includes" />
+<meta name="twitter:site" content="@jekyllrb" />
+<meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-03-29T04:39:06-07:00","datePublished":"2024-03-29T04:39:06-07:00","description":"The include tag allows you to include the content from another file stored in the _includes folder:","headline":"Includes","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/includes/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/includes/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.min.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="wrap"><header>
+  <div class="flexbox">
+    <div class="center-on-mobiles">
+      <h1>
+        <a href="/" class="logo">
+          <span class="sr-only">Jekyll</span>
+          <img src="/img/logo-2x.png" width="140" height="65" alt="Jekyll Logo">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav hide-on-mobiles">
+      <ul>
+  <li><a href="/">Home</a></li>
+  <li class="current"><a href="/docs/">Docs</a></li>
+  <li><a href="/resources/">Resources</a></li>
+  <li><a href="/showcase/">Showcase</a></li>
+  <li><a href="/news/">News</a></li>
+  </ul>
+</nav>
+    <div class="search hide-on-mobiles">
+      <input type="text" id="docsearch-input" placeholder="Search the docs…" aria-label="Search"></div>
+    <div class="meta hide-on-mobiles">
+      <ul>
+        <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.3.3">v4.3.3</a></li>
+        <li><a href="https://github.com/jekyll/jekyll">GitHub</a></li>
+      </ul>
+    </div>
+  </div>
+  <nav class="mobile-nav show-on-mobiles">
+    <ul>
+  <li><a href="/">Home</a></li>
+    <li class="current" aria-current="page" ><a href="/docs/">Docs</a></li>
+    <li><a href="/resources/">Resources</a></li>
+    <li><a href="/news/">News</a></li>
+    <li><a href="https://github.com/jekyll/jekyll" target="_blank" rel="noopener">GitHub</a></li>
+</ul></nav>
+</header>
+<section class="docs">
+  <div class="grid">
+    <div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select id="doc-nav" onchange="navigateToUrl(this)" aria-label="Select a page from the documentation">
+    <option value="">Navigate the docs…</option>
+    
+      <optgroup label="Getting Started">
+          <option value="/docs/">Quickstart</option>
+          <option value="/docs/installation/">Installation</option>
+          <option value="/docs/ruby-101/">Ruby 101</option>
+          <option value="/docs/community/">Community</option>
+          <option value="/docs/step-by-step/01-setup/">Step by Step Tutorial</option>
+      </optgroup>
+    
+      <optgroup label="Build">
+          <option value="/docs/usage/">Command Line Usage</option>
+          <option value="/docs/configuration/">Configuration</option>
+          <option value="/docs/rendering-process/">Rendering Process</option>
+      </optgroup>
+    
+      <optgroup label="Content">
+          <option value="/docs/pages/">Pages</option>
+          <option value="/docs/posts/">Posts</option>
+          <option value="/docs/front-matter/">Front Matter</option>
+          <option value="/docs/collections/">Collections</option>
+          <option value="/docs/datafiles/">Data Files</option>
+          <option value="/docs/assets/">Assets</option>
+          <option value="/docs/static-files/">Static Files</option>
+      </optgroup>
+    
+      <optgroup label="Site Structure">
+          <option value="/docs/structure/">Directory Structure</option>
+          <option value="/docs/liquid/">Liquid</option>
+          <option value="/docs/variables/">Variables</option>
+          <option value="/docs/includes/">Includes</option>
+          <option value="/docs/layouts/">Layouts</option>
+          <option value="/docs/permalinks/">Permalinks</option>
+          <option value="/docs/themes/">Themes</option>
+          <option value="/docs/pagination/">Pagination</option>
+      </optgroup>
+    
+      <optgroup label="Guides">
+          <option value="/docs/plugins/">Plugins</option>
+          <option value="/docs/migrations/">Blog Migrations</option>
+          <option value="/docs/upgrading/">Upgrading</option>
+          <option value="/docs/deployment/">Deployment</option>
+      </optgroup>
+    
+  </select>
+</div>
+<div class="unit four-fifths">
+      <article>
+        <div class="improve right hide-on-mobiles">
+          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/_docs/includes.md"><i
+             class="fa fa-pencil"></i> &nbsp;Improve this page</a>
+        </div>
+        <h1>Includes</h1>
+        <p>The <code class="language-plaintext highlighter-rouge">include</code> tag allows you to include the content from another file stored in the <code class="language-plaintext highlighter-rouge">_includes</code> folder:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span>footer.html<span class="w"> </span><span class="cp">%}</span>
+</code></pre></div></div>
+
+<p>Jekyll will look for the referenced file (in this case, <code class="language-plaintext highlighter-rouge">footer.html</code>) in the <code class="language-plaintext highlighter-rouge">_includes</code> directory at the root of your source directory and insert its contents.</p>
+
+<h3 id="including-files-relative-to-another-file">Including files relative to another file</h3>
+
+<p>You can choose to include file fragments relative to the current file by using the <code class="language-plaintext highlighter-rouge">include_relative</code> tag:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">include_relative</span><span class="w"> </span>somedir/footer.html<span class="w"> </span><span class="cp">%}</span>
+</code></pre></div></div>
+
+<p>You won’t need to place your included content within the <code class="language-plaintext highlighter-rouge">_includes</code> directory. Instead,
+the inclusion is specifically relative to the file where the tag is being used. For example,
+if <code class="language-plaintext highlighter-rouge">_posts/2014-09-03-my-file.markdown</code> uses the <code class="language-plaintext highlighter-rouge">include_relative</code> tag, the included file
+must be within the <code class="language-plaintext highlighter-rouge">_posts</code> directory or one of its subdirectories.</p>
+
+<p>Note that you cannot use the <code class="language-plaintext highlighter-rouge">../</code> syntax to specify an include location that refers to a higher-level directory.</p>
+
+<p>All the other capabilities of the <code class="language-plaintext highlighter-rouge">include</code> tag are available to the <code class="language-plaintext highlighter-rouge">include_relative</code> tag,
+such as variables.</p>
+
+<h3 id="using-variables-names-for-the-include-file">Using variables names for the include file</h3>
+
+<p>The name of the file you want to embed can be specified as a variable instead of an actual file name. For example, suppose you defined a variable in your page’s front matter like this:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">My page</span>
+<span class="na">my_variable</span><span class="pi">:</span> <span class="s">footer_company_a.html</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<p>You could then reference that variable in your include:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">if</span><span class="w"> </span><span class="nv">page</span><span class="p">.</span><span class="nv">my_variable</span><span class="w"> </span><span class="cp">%}</span>
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span><span class="cp">{{</span><span class="w"> </span><span class="nv">page</span><span class="p">.</span><span class="nv">my_variable</span><span class="w"> </span><span class="cp">}}</span><span class="w"> </span><span class="cp">%}</span>
+<span class="cp">{%</span><span class="w"> </span><span class="nt">endif</span><span class="w"> </span><span class="cp">%}</span>
+</code></pre></div></div>
+
+<p>In this example, the include would insert the file <code class="language-plaintext highlighter-rouge">footer_company_a.html</code> from the <code class="language-plaintext highlighter-rouge">_includes/footer_company_a.html</code> directory.</p>
+
+<h3 id="passing-parameters-to-includes">Passing parameters to includes</h3>
+
+<p>You can also pass parameters to an include. For example, suppose you have a file called <code class="language-plaintext highlighter-rouge">note.html</code> in your <code class="language-plaintext highlighter-rouge">_includes</code> folder that contains this formatting:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div markdown="span" class="alert alert-info" role="alert"&gt;
+&lt;i class="fa fa-info-circle"&gt;&lt;/i&gt; &lt;b&gt;Note:&lt;/b&gt;
+<span class="cp">{{</span><span class="w"> </span><span class="nv">include</span><span class="p">.</span><span class="nv">content</span><span class="w"> </span><span class="cp">}}</span>
+&lt;/div&gt;
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">{{ include.content }}</code> is a parameter that gets populated when you call the include and specify a value for that parameter, like this:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span>note.html<span class="w"> </span><span class="na">content</span><span class="o">=</span><span class="s2">"This is my sample note."</span><span class="w"> </span><span class="cp">%}</span>
+</code></pre></div></div>
+
+<p>The value of <code class="language-plaintext highlighter-rouge">content</code> (which is <code class="language-plaintext highlighter-rouge">This is my sample note</code>) will be inserted into the <code class="language-plaintext highlighter-rouge">{{ include.content }}</code> parameter.</p>
+
+<p>Passing parameters to includes is especially helpful when you want to hide away complex formatting from your Markdown content.</p>
+
+<p>For example, suppose you have a special image syntax with complex formatting, and you don’t want your authors to remember the complex formatting. As a result, you decide to simplify the formatting by using an include with parameters. Here’s an example of the special image syntax you might want to populate with an include:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;figure&gt;</span>
+   <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://jekyllrb.com"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"logo.png"</span> <span class="na">style=</span><span class="s">"max-width: 200px;"</span>
+      <span class="na">alt=</span><span class="s">"Jekyll logo"</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;/a&gt;</span>
+   <span class="nt">&lt;figcaption&gt;</span>This is the Jekyll logo<span class="nt">&lt;/figcaption&gt;</span>
+<span class="nt">&lt;/figure&gt;</span>
+</code></pre></div></div>
+
+<p>You could templatize this content in your include and make each value available as a parameter, like this:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;figure&gt;
+   &lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">include</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>"&gt;
+   &lt;img src="<span class="cp">{{</span><span class="w"> </span><span class="nv">include</span><span class="p">.</span><span class="nv">file</span><span class="w"> </span><span class="cp">}}</span>" style="max-width: <span class="cp">{{</span><span class="w"> </span><span class="nv">include</span><span class="p">.</span><span class="nv">max-width</span><span class="w"> </span><span class="cp">}}</span>;"
+      alt="<span class="cp">{{</span><span class="w"> </span><span class="nv">include</span><span class="p">.</span><span class="nv">alt</span><span class="w"> </span><span class="cp">}}</span>"/&gt;
+   &lt;/a&gt;
+   &lt;figcaption&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">include</span><span class="p">.</span><span class="nv">caption</span><span class="w"> </span><span class="cp">}}</span>&lt;/figcaption&gt;
+&lt;/figure&gt;
+</code></pre></div></div>
+
+<p>This include contains 5 parameters:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">url</code></li>
+  <li><code class="language-plaintext highlighter-rouge">max-width</code></li>
+  <li><code class="language-plaintext highlighter-rouge">file</code></li>
+  <li><code class="language-plaintext highlighter-rouge">alt</code></li>
+  <li><code class="language-plaintext highlighter-rouge">caption</code></li>
+</ul>
+
+<p>Here’s an example that passes all the parameters to this include (the include file is named <code class="language-plaintext highlighter-rouge">image.html</code>):</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span>image.html<span class="w"> </span><span class="na">url</span><span class="o">=</span><span class="s2">"http://jekyllrb.com"</span><span class="w">
+</span><span class="na">max-width</span><span class="o">=</span><span class="s2">"200px"</span><span class="w"> </span><span class="na">file</span><span class="o">=</span><span class="s2">"logo.png"</span><span class="w"> </span><span class="na">alt</span><span class="o">=</span><span class="s2">"Jekyll logo"</span><span class="w">
+</span><span class="na">caption</span><span class="o">=</span><span class="s2">"This is the Jekyll logo."</span><span class="w"> </span><span class="cp">%}</span>
+</code></pre></div></div>
+
+<p>The result is the original HTML code shown earlier.</p>
+
+<p>To safeguard situations where users don’t supply a value for the parameter, you can use <a href="https://shopify.github.io/liquid/filters/default/">Liquid’s default filter</a>.</p>
+
+<p>Overall, you can create includes that act as templates for a variety of uses — inserting audio or video clips, alerts, special formatting, and more. Note that you should avoid using too many includes, as this will slow down the build time of your site. For example, don’t use includes every time you insert an image. (The above technique shows a use case for special images.)</p>
+
+<h3 id="passing-parameter-variables-to-includes">Passing parameter variables to includes</h3>
+
+<p>Suppose the parameter you want to pass to the include is a variable rather than a string. For example, you might be using <code class="language-plaintext highlighter-rouge">{{ site.product_name }}</code> to refer to every instance of your product rather than the actual hard-coded name. (In this case, your <code class="language-plaintext highlighter-rouge">_config.yml</code> file would have a key called <code class="language-plaintext highlighter-rouge">product_name</code> with a value of your product’s name.)</p>
+
+<p>The string you pass to your include parameter can’t contain curly braces. For example, you can’t pass a parameter that contains this: <code class="language-plaintext highlighter-rouge">"The latest version of {{ site.product_name }} is now available."</code></p>
+
+<p>If you want to include this variable in your parameter that you pass to an include, you need to store the entire parameter as a variable before passing it to the include. You can use <code class="language-plaintext highlighter-rouge">capture</code> tags to create the variable:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">capture</span><span class="w"> </span><span class="nv">download_note</span><span class="w"> </span><span class="cp">%}</span>
+The latest version of <span class="cp">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">product_name</span><span class="w"> </span><span class="cp">}}</span> is now available.
+<span class="cp">{%</span><span class="w"> </span><span class="nt">endcapture</span><span class="w"> </span><span class="cp">%}</span>
+</code></pre></div></div>
+
+<p>Then pass this captured variable into the parameter for the include. Omit the quotation marks around the parameter content because it’s no longer a string (it’s a variable):</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span>note.html<span class="w"> </span><span class="na">content</span><span class="o">=</span><span class="nv">download_note</span><span class="w"> </span><span class="cp">%}</span>
+</code></pre></div></div>
+
+
+      </article>
+    </div>
+    <div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    
+      <h4>Getting Started</h4>
+      <ul>
+          <li><a href="/docs/">
+              Quickstart
+            </a>
+          </li>
+        
+          <li><a href="/docs/installation/">
+              Installation
+            </a>
+          </li>
+        
+          <li><a href="/docs/ruby-101/">
+              Ruby 101
+            </a>
+          </li>
+        
+          <li><a href="/docs/community/">
+              Community
+            </a>
+          </li>
+        
+          <li><a href="/docs/step-by-step/01-setup/">
+              Step by Step Tutorial
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Build</h4>
+      <ul>
+          <li><a href="/docs/usage/">
+              Command Line Usage
+            </a>
+          </li>
+        
+          <li><a href="/docs/configuration/">
+              Configuration
+            </a>
+          </li>
+        
+          <li><a href="/docs/rendering-process/">
+              Rendering Process
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Content</h4>
+      <ul>
+          <li><a href="/docs/pages/">
+              Pages
+            </a>
+          </li>
+        
+          <li><a href="/docs/posts/">
+              Posts
+            </a>
+          </li>
+        
+          <li><a href="/docs/front-matter/">
+              Front Matter
+            </a>
+          </li>
+        
+          <li><a href="/docs/collections/">
+              Collections
+            </a>
+          </li>
+        
+          <li><a href="/docs/datafiles/">
+              Data Files
+            </a>
+          </li>
+        
+          <li><a href="/docs/assets/">
+              Assets
+            </a>
+          </li>
+        
+          <li><a href="/docs/static-files/">
+              Static Files
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Site Structure</h4>
+      <ul>
+          <li><a href="/docs/structure/">
+              Directory Structure
+            </a>
+          </li>
+        
+          <li><a href="/docs/liquid/">
+              Liquid
+            </a>
+          </li>
+        
+          <li><a href="/docs/variables/">
+              Variables
+            </a>
+          </li>
+        
+          <liclass="current"><a href="/docs/includes/">
+              Includes
+            </a>
+          </li>
+        
+          <li><a href="/docs/layouts/">
+              Layouts
+            </a>
+          </li>
+        
+          <li><a href="/docs/permalinks/">
+              Permalinks
+            </a>
+          </li>
+        
+          <li><a href="/docs/themes/">
+              Themes
+            </a>
+          </li>
+        
+          <li><a href="/docs/pagination/">
+              Pagination
+            </a>
+          </li>
+        
+      </ul>
+    
+      <h4>Guides</h4>
+      <ul>
+          <li><a href="/docs/plugins/">
+              Plugins
+            </a>
+          </li>
+        
+          <li><a href="/docs/migrations/">
+              Blog Migrations
+            </a>
+          </li>
+        
+          <li><a href="/docs/upgrading/">
+              Upgrading
+            </a>
+          </li>
+        
+          <li><a href="/docs/deployment/">
+              Deployment
+            </a>
+          </li>
+        
+      </ul>
+    </aside>
+</div>
+<div class="clear"></div>
+  </div>
+</section>
+<footer>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <p>Jekyll is lovingly maintained by the <a href="/team/">core team</a> of volunteers. </p>
+      <p>The contents of this website are <br />&copy;&nbsp;2024 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT&nbsp;License</a>.</p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Proudly hosted by
+        <a href="https://github.com">
+          <img src="/img/footer-logo.png" width="100" height="30" alt="GitHub • Social coding">
+        </a>
+      </p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Jekyll is funded thanks to its
+        <a href="https://github.com/jekyll/jekyll#sponsors">
+          sponsors!
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+<script>
+/* Creates an anchor element with the given ID and link for the permalink*/
+const anchorForId = (id) => {
+  const anchor = document.createElement("a");
+  anchor.className = "header-link";
+  anchor.href = `#${id}`;
+  anchor.innerHTML = `<span class="sr-only">Permalink</span><i class="fa fa-link" aria-hidden="true"></i>`;
+  anchor.title = "Permalink";
+  return anchor;
+};
+
+/* Finds all headers of the specified level within the given element, and adds a permalink to each header*/
+const linkifyAnchors = (level, containingElement) => {
+  const headers = Array.from(containingElement.getElementsByTagName(`h${level}`));
+  headers.forEach((header) => {
+    if (header.id) {
+      header.appendChild(anchorForId(header.id));
+    }
+  });
+};
+
+/* Executes the function when the document is ready */
+document.onreadystatechange = () => {
+  if (document.readyState === "complete") {
+    const contentBlock = document.getElementsByClassName("docs")[0]
+      ?? document.getElementsByClassName("news")[0];
+    if (!contentBlock) { return; }
+    for (let level = 1; level <= 6; level++) {
+      linkifyAnchors(level, contentBlock);
+    }
+  }
+};
+</script>
+<!-- Google Analytics (https://www.google.com/analytics) -->
+  <script>
+    !function(j,e,k,y,l,L){j.GoogleAnalyticsObject=y,j[y]||(j[y]=function(){
+    (j[y].q=j[y].q||[]).push(arguments)}),j[y].l=+new Date,l=e.createElement(k),
+    L=e.getElementsByTagName(k)[0],l.src='https://www.google-analytics.com/analytics.js',
+    L.parentNode.insertBefore(l,L)}(window,document,'script','ga');
+
+    ga('create', 'UA-50755011-1', 'jekyllrb.com');
+    ga('send', 'pageview');
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script> docsearch({
+apiKey: '50fe39c839958dfad797000f33e2ec17',
+indexName: 'jekyllrb',
+inputSelector: '#docsearch-input',
+enhancedSearchInput: true,
+debug: false // Set debug to true if you want to inspect the dropdown
+});
+</script>
+<script>
+  const navigateToUrl = (select) => {
+    const url = select.value;
+    url && (window.location.href = url);
+  };
+  </script>
+</body>
+</html>

@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link type="application/atom+xml" rel="alternate" href="https://jekyllrb.com/feed.xml" title="Jekyll • Simple, blog-aware, static sites" />
+  <link type="application/atom+xml" rel="alternate" href="/feed/release.xml" title="Jekyll releases posts" />
+  <link rel="alternate" type="application/atom+xml" title="Recent commits to Jekyll’s master branch" href="https://github.com/jekyll/jekyll/commits/master.atom">
+  <link rel="preload" href="/fonts/lato-v14-latin-300.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/lato-v14-latin-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/css/screen.css" as="style">
+  <link rel="stylesheet" href="/css/screen.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Convert an HTML site to Jekyll | Jekyll • Simple, blog-aware, static sites</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Convert an HTML site to Jekyll" />
+<meta name="author" content="tomjoht" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="If you’re looking for themes for your Jekyll site, you don’t have to restrict yourself to existing Jekyll themes. It’s pretty easy to convert almost any static HTML files into a Jekyll website." />
+<meta property="og:description" content="If you’re looking for themes for your Jekyll site, you don’t have to restrict yourself to existing Jekyll themes. It’s pretty easy to convert almost any static HTML files into a Jekyll website." />
+<link rel="canonical" href="https://jekyllrb.com/tutorials/convert-site-to-jekyll/" />
+<meta property="og:url" content="https://jekyllrb.com/tutorials/convert-site-to-jekyll/" />
+<meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
+<meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-02-10T21:58:56-08:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
+<meta property="twitter:title" content="Convert an HTML site to Jekyll" />
+<meta name="twitter:site" content="@jekyllrb" />
+<meta name="twitter:creator" content="@tomjoht" />
+<meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"tomjoht"},"dateModified":"2017-02-10T21:58:56-08:00","datePublished":"2017-02-10T21:58:56-08:00","description":"If you’re looking for themes for your Jekyll site, you don’t have to restrict yourself to existing Jekyll themes. It’s pretty easy to convert almost any static HTML files into a Jekyll website.","headline":"Convert an HTML site to Jekyll","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/tutorials/convert-site-to-jekyll/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"},"name":"tomjoht"},"url":"https://jekyllrb.com/tutorials/convert-site-to-jekyll/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.min.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="wrap"><header>
+  <div class="flexbox">
+    <div class="center-on-mobiles">
+      <h1>
+        <a href="/" class="logo">
+          <span class="sr-only">Jekyll</span>
+          <img src="/img/logo-2x.png" width="140" height="65" alt="Jekyll Logo">
+        </a>
+      </h1>
+    </div>
+    <nav class="main-nav hide-on-mobiles">
+      <ul>
+  <li><a href="/">Home</a></li>
+  <li><a href="/docs/">Docs</a></li>
+  <li><a href="/resources/">Resources</a></li>
+  <li><a href="/showcase/">Showcase</a></li>
+  <li><a href="/news/">News</a></li>
+  </ul>
+</nav>
+    <div class="search hide-on-mobiles">
+      <input type="text" id="docsearch-input" placeholder="Search the docs…" aria-label="Search"></div>
+    <div class="meta hide-on-mobiles">
+      <ul>
+        <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.3.3">v4.3.3</a></li>
+        <li><a href="https://github.com/jekyll/jekyll">GitHub</a></li>
+      </ul>
+    </div>
+  </div>
+  <nav class="mobile-nav show-on-mobiles">
+    <ul>
+  <li><a href="/">Home</a></li>
+    <li><a href="/docs/">Docs</a></li>
+    <li><a href="/resources/">Resources</a></li>
+    <li><a href="/news/">News</a></li>
+    <li><a href="https://github.com/jekyll/jekyll" target="_blank" rel="noopener">GitHub</a></li>
+</ul></nav>
+</header>
+<section class="docs">
+  <div class="grid"><div class="docs-nav-mobile unit whole show-on-mobiles">
+  <select id="tutorial-nav" onchange="navigateToUrl(this)" aria-label="Select a tutorial">
+    <option value="">Navigate the tutorials…</option>
+    <optgroup label="Tutorials">
+        <option value="/tutorials/home/">Tutorials</option>
+        <option value="/tutorials/video-walkthroughs/">Video Walkthroughs</option>
+        <option value="/tutorials/navigation/">Navigation</option>
+        <option value="/tutorials/orderofinterpretation/">Order of interpretation</option>
+        <option value="/tutorials/custom-404-page/">Custom 404 Page</option>
+        <option value="/tutorials/convert-site-to-jekyll/">Convert an HTML site to Jekyll</option>
+        <option value="/tutorials/using-jekyll-with-bundler/">Using Jekyll with Bundler</option>
+        <option value="/tutorials/csv-to-table/">Tabulate CSV Data</option>
+        </optgroup>
+    </select>
+</div><div class="unit four-fifths">
+      <article>
+        <header class="tutorial-header">
+          <div class="improve right hide-on-mobiles">
+            <a href="https://github.com/jekyll/jekyll/edit/master/docs/_tutorials/convert-site-to-jekyll.md"><i
+               class="fa fa-pencil"></i> &nbsp;Improve this page</a>
+          </div>
+          <h1 class="tutorial-title">Convert an HTML site to Jekyll</h1>
+          
+          
+            <div class="tutorial-meta">
+              <span class="tutorial-date">
+               10 February 2017
+              </span>
+              <a href="https://github.com/tomjoht" class="tutorial-author">
+                <img class="avatar avatar-small" alt="tomjoht" width="24" height="24" data-proofer-ignore="true" src="https://avatars1.githubusercontent.com/tomjoht?v=3&s=24" srcset="https://avatars1.githubusercontent.com/tomjoht?v=3&s=24 1x, https://avatars1.githubusercontent.com/tomjoht?v=3&s=48 2x, https://avatars1.githubusercontent.com/tomjoht?v=3&s=72 3x, https://avatars1.githubusercontent.com/tomjoht?v=3&s=96 4x" />
+                <span class="author-name">tomjoht</span>
+              </a>
+            </div>
+          
+        </header><p>If you’re looking for themes for your Jekyll site, you don’t have to restrict yourself to existing Jekyll themes. It’s pretty easy to convert almost any static HTML files into a Jekyll website.</p>
+
+<p>In many ways, any site that is currently a static site is <em>already</em> a Jekyll website. Jekyll just allows you to automate parts of the site (like inserting pages into templates, rendering lists for navigation, generating feeds and sitemaps, and more) as it processes the files.</p>
+
+<p>Understanding how to convert any HTML site into Jekyll templates will open your world to many more options for Jekyll themes. Instead of <a href="https://duckduckgo.com/?q=Jekyll+themes">searching online for  <em>Jekyll themes</em></a>, you can choose from the large variety of HTML templates for your site, quickly Jekyll-ize the HTML templates as you need to, and build the output with Jekyll.</p>
+
+<p>Although websites can have sophisticated features and controls, we’ll keep things simple in this tutorial.</p>
+
+<h2 id="what-is-a-jekyll-website">What is a Jekyll Website?</h2>
+
+<p>First, let’s start with a grounding in the basics. Stripping a Jekyll site down to an extremely basic level will help clarify what happens in a Jekyll site. If you haven’t already installed the jekyll gem, <a href="/docs/installation/">install it</a>.</p>
+
+<p>We’ll start with a <em>basic Jekyll site</em> consisting of three files:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── _config.yml
+├── _layouts
+│   └── default.html
+└── index.md
+</code></pre></div></div>
+
+<p>Manually create these three files in a folder called <code class="language-plaintext highlighter-rouge">my_jekyll_site</code> or whatever suits you the most, and place <code class="language-plaintext highlighter-rouge">default.html</code> inside a folder named <code class="language-plaintext highlighter-rouge">_layouts</code>.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">touch </span>_config.yml index.md default.html
+<span class="nb">mkdir </span>_layouts <span class="o">&amp;&amp;</span> <span class="nb">mv </span>default.html _layouts
+</code></pre></div></div>
+
+<p>Fire up your favorite editor, and populate the contents of the <code class="language-plaintext highlighter-rouge">default.html</code> and <code class="language-plaintext highlighter-rouge">index.md</code> files as follows:</p>
+
+<p><strong>_config.yml</strong></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">My Jekyll Website</span>
+</code></pre></div></div>
+
+<p><strong>_layouts/default.html</strong></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+     {{ content }}
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p><strong>index.md</strong></p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">My page</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">default</span>
+<span class="nn">---</span>
+
+<span class="gh"># {{ page.title }}</span>
+
+Content is written in <span class="p">[</span><span class="nv">Markdown</span><span class="p">](</span><span class="sx">https://learnxinyminutes.com/docs/markdown/</span><span class="p">)</span>.
+Plain text format allows you to focus on your <span class="gs">**content**</span>.
+
+&lt;!--
+You can use HTML elements in Markdown, such as the comment element, and they won't
+be affected by a markdown parser. However, if you create an HTML element in your
+markdown file, you cannot use markdown syntax within that element's contents.
+--&gt;
+</code></pre></div></div>
+
+<p>Now <code class="language-plaintext highlighter-rouge">cd</code> to <code class="language-plaintext highlighter-rouge">my_jekyll_site</code> and serve the site with the built-in server:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>my_jekyll_site
+jekyll serve
+</code></pre></div></div>
+
+<p class="note info">If you have a Gemfile, <a href="/docs/ruby-101/#bundler">use Bundler</a> by typing <code class="language-plaintext highlighter-rouge">bundle exec jekyll serve</code> instead.</p>
+
+<p>When you serve the site, you get a preview URL such as <code class="language-plaintext highlighter-rouge">http://127.0.0.1:4000/</code> (which is the same as <code class="language-plaintext highlighter-rouge">http://localhost:4000/</code>). The site’s files are built into the <code class="language-plaintext highlighter-rouge">_site</code> folder by default.</p>
+
+<p>This is a Jekyll site at the most basic functional level. Here’s what is happening:</p>
+
+<ul>
+  <li>The <code class="language-plaintext highlighter-rouge">_config.yml</code> file contains settings that Jekyll uses as it processes your site. An empty config file will use default values for building a Jekyll site. For example, to convert <a href="https://learnxinyminutes.com/docs/markdown/">Markdown</a> to HTML, Jekyll will automatically use the <a href="https://rubygems.org/gems/kramdown/">kramdown Markdown filter</a>, without any need to specify it.</li>
+  <li>Jekyll looks for files with <a href="/docs/front-matter/">front matter tags</a> (the two sets of dashed lines <code class="language-plaintext highlighter-rouge">---</code> like those in <code class="language-plaintext highlighter-rouge">index.md</code>) and processes the files (populating site variables, rendering any <a href="https://shopify.github.io/liquid/">Liquid</a>, and converting Markdown to HTML).</li>
+  <li>Jekyll pushes the content from all pages and posts into the <code class="language-plaintext highlighter-rouge">{{ content }}</code> variable in the layout specified (<code class="language-plaintext highlighter-rouge">default</code>) in the front matter tags.</li>
+  <li>The processed files get written as <code class="language-plaintext highlighter-rouge">.html</code> files in the <code class="language-plaintext highlighter-rouge">_site</code> directory.</li>
+</ul>
+
+<p>You can read more about how Jekyll processes the files in <a href="/tutorials/orderofinterpretation/">order of Interpretation</a>.</p>
+
+<p>With this basic understanding of how a Jekyll site works, you can convert almost any HTML theme for Jekyll. The following sections will take you through a step-by-step tutorial to do so.</p>
+
+<h2 id="1-create-a-template-for-your-default-layout">1. Create a template for your default layout</h2>
+
+<p>Find your HTML theme and save it as a <code class="language-plaintext highlighter-rouge">default</code> layout. If you’re converting or cloning an existing site, you can right-click the page and view the source code.</p>
+
+<p>For example, suppose you’re cloning your company site to create a documentation site with the same branding. Or suppose you have a personal site that you built with HTML and now want to make it a Jekyll site. Get the HTML source code for your site.</p>
+
+<p class="note info">Regardless of the site, do check the license and make sure you have permission to copy and use the code.</p>
+
+<p>Copy and paste the source code into a file called <code class="language-plaintext highlighter-rouge">default.html</code>. Put the <code class="language-plaintext highlighter-rouge">default.html</code> file inside the <code class="language-plaintext highlighter-rouge">_layouts</code> folder. This will be the default layout template for your pages and posts — that is, each page or post will use this layout when Jekyll builds the site.</p>
+
+<p>Note that in looking for templates, you want the HTML output of the template. If the template has PHP tags or other dynamic scripts, these dynamic elements will need to be converted to HTML or to <a href="https://shopify.github.io/liquid/">Liquid</a>. Liquid is <a href="/docs/liquid/">Jekyll templating system</a> to retrieve dynamic content.</p>
+
+<p>Open <code class="language-plaintext highlighter-rouge">default.html</code> into your browser locally to ensure the site looks and behaves like it does online. You will likely need to adjust CSS, JS, and image paths so they work.</p>
+
+<p>For example, if the paths were relative on the site you copied, you’ll need to either download the same assets into your Jekyll site or use absolute paths to the same assets in the cloud. (Syntax such as <code class="language-plaintext highlighter-rouge">src="//</code> requires a prefix such as <code class="language-plaintext highlighter-rouge">src="http://</code> to work in your local browser.)</p>
+
+<p>Jekyll provides some <a href="/docs/liquid/filters/">filters</a> to prepend a site URL before path. For example, you could preface your stylesheet like this:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{{</span><span class="w"> </span><span class="s2">"/assets/style.css"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">relative_url</span><span class="w"> </span><span class="cp">}}</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">relative_url</code> filter will prepend the <a href="https://byparker.com/blog/2014/clearing-up-confusion-around-baseurl/"><code class="language-plaintext highlighter-rouge">baseurl</code></a> value from your config file (as <code class="language-plaintext highlighter-rouge">blog</code> for instance) to the input. This is useful if your site is hosted at a subpath rather than at the root of the domain (for example, <code class="language-plaintext highlighter-rouge">http://mysite.com/blog/</code>).</p>
+
+<p>You can also use an <code class="language-plaintext highlighter-rouge">absolute_url</code> filter. This filter will prepend the <code class="language-plaintext highlighter-rouge">url</code> <em>and</em> <code class="language-plaintext highlighter-rouge">baseurl</code> value to the input:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{{</span><span class="w"> </span><span class="s2">"/assets/style.css"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">absolute_url</span><span class="w"> </span><span class="cp">}}</span>
+</code></pre></div></div>
+
+<p>Again, both <code class="language-plaintext highlighter-rouge">url</code> and <code class="language-plaintext highlighter-rouge">baseurl</code> can be defined in your site’s config file, like this:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">url</span><span class="pi">:</span> <span class="s">http://mysite.com</span>
+<span class="na">baseurl</span><span class="pi">:</span> <span class="s">/blog</span>
+</code></pre></div></div>
+
+<p>The result in the output will be <code class="language-plaintext highlighter-rouge">http://mysite.com/blog/assets/style.css</code>.</p>
+
+<p>Note that the <code class="language-plaintext highlighter-rouge">url</code> property of any page begins with a forward slash (<code class="language-plaintext highlighter-rouge">/</code>), so omit this at the end of your <code class="language-plaintext highlighter-rouge">url</code> or <code class="language-plaintext highlighter-rouge">baseurl</code> property.</p>
+
+<p>You don’t have to prepend filters to link paths like this. You could also use relative links across your entire site. However you decide to code the paths to your assets, make sure they render correctly.</p>
+
+<p>Does your local <code class="language-plaintext highlighter-rouge">default.html</code> page look good in your browser? Are all images, styles, and other elements showing up correctly? If so, great. Keep going. You can use this template as the layout for all your pages and posts or create as many templates as you need.</p>
+
+<p>In the next section, you’ll blank out the content of the layout and replace it with placeholder tags that get populated dynamically with your Jekyll pages.</p>
+
+<h2 id="2-identify-the-content-part-of-the-layout">2. Identify the content part of the layout</h2>
+
+<p>In <code class="language-plaintext highlighter-rouge">default.html</code>, find where the page content begins (usually at <code class="language-plaintext highlighter-rouge">h1</code> or <code class="language-plaintext highlighter-rouge">h2</code> tags). Replace the title that appears inside these tags with <code class="language-plaintext highlighter-rouge">{{ page.title }}</code>.</p>
+
+<p>Remove the content part (keep everything else: navigation menu, sidebar, footer, etc.) and replace it with <code class="language-plaintext highlighter-rouge">{{ content }}</code>.</p>
+
+<p>Check the layout again in your browser and make sure you didn’t corrupt or alter it up by inadvertently removing a crucial <code class="language-plaintext highlighter-rouge">div</code> tag or other element. The only change should be to the title and page content, which are now blanked out or showing the placeholder tag.</p>
+
+<h2 id="3-create-a-couple-of-files-with-front-matter-tags">3. Create a couple of files with front matter tags</h2>
+
+<p>Create a couple of files (<code class="language-plaintext highlighter-rouge">index.md</code> and <code class="language-plaintext highlighter-rouge">about.md</code>) in your root directory.</p>
+
+<p>In your <code class="language-plaintext highlighter-rouge">index.md</code> file, add some front matter tags containing a <code class="language-plaintext highlighter-rouge">title</code> and <code class="language-plaintext highlighter-rouge">layout</code> property, like this:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">Home</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">default</span>
+<span class="nn">---</span>
+
+Some page content here...
+</code></pre></div></div>
+
+<p>Create another page for testing called <code class="language-plaintext highlighter-rouge">about.md</code> with similar front matter tags.</p>
+
+<p class="note info">If you don’t specify a layout in your pages, Jekyll will simply render that page as an unstyled basic HTML page.</p>
+
+<h2 id="4-add-a-configuration-file">4. Add a configuration file</h2>
+
+<p>Add a <code class="language-plaintext highlighter-rouge">_config.yml</code> file in your root directory. In <code class="language-plaintext highlighter-rouge">_config.yml</code>, you can optionally specify the markdown filter you want. By default, the <a href="https://github.com/kramdown/parser-gfm">GitHub Flavored Markdown (GFM) processor</a> for <a href="https://kramdown.gettalong.org/">kramdown</a> is used. If no other filter is specified, your config file will automatically apply the following as a <a href="/docs/configuration/default/">default</a> setting:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">markdown</span><span class="pi">:</span> <span class="s">kramdown</span>
+<span class="na">kramdown</span><span class="pi">:</span>
+  <span class="na">input</span><span class="pi">:</span> <span class="s">GFM</span>
+</code></pre></div></div>
+
+<p>You can find additional <a href="/docs/configuration/markdown/">Markdown Options</a> in the Jekyll docs, though it’s unlikely that you’ll need them.</p>
+
+<h2 id="5-test-your-pages">5. Test your pages</h2>
+
+<p>Now run <code class="language-plaintext highlighter-rouge">jekyll serve</code> and toggle between your <code class="language-plaintext highlighter-rouge">index.html</code> and <code class="language-plaintext highlighter-rouge">about.html</code> pages. The default layout should load for both pages.</p>
+
+<p>You’ve now extracted your content out into separate files and defined a common layout for pages.</p>
+
+<p>You could define any number of layouts you want for pages. Then just identify the layout you want that particular page to use. For example:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">Sample page</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">homepage</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<p>This page would then use the <code class="language-plaintext highlighter-rouge">homepage.html</code> template in the <code class="language-plaintext highlighter-rouge">_layouts</code> folder.</p>
+
+<p>You can even set <a href="/docs/configuration/front-matter-defaults/">default front matter tags</a> for pages, posts, or <a href="/docs/collections/">collections</a> in your <code class="language-plaintext highlighter-rouge">_config.yml</code> file so that you don’t have to specify the layout in the front matter variables. Anyways, setting defaults is beyond the scope of this tutorial, let’s get back to work.</p>
+
+<h2 id="6-configure-site-variables">6. Configure site variables</h2>
+
+<p>You already configured the page title using <code class="language-plaintext highlighter-rouge">{{ page.title }}</code> tags. But there are more <code class="language-plaintext highlighter-rouge">title</code> tags to populate. Pages also have a <a href="https://moz.com/learn/seo/title-tag"><code class="language-plaintext highlighter-rouge">title</code></a> tag that appears in the browser tab or window. Typically you put the page title followed by the site title here.</p>
+
+<p>In your <code class="language-plaintext highlighter-rouge">default.html</code> layout, look for the <code class="language-plaintext highlighter-rouge">title</code> tags below your <code class="language-plaintext highlighter-rouge">head</code> tags:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;title&gt;ACME Website&lt;/title&gt;
+</code></pre></div></div>
+
+<p>Insert the following site variables:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;title&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">page</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="cp">}}</span> | <span class="cp">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="cp">}}</span>&lt;/title&gt;
+</code></pre></div></div>
+
+<p>Open <code class="language-plaintext highlighter-rouge">_config.yml</code> and add a <code class="language-plaintext highlighter-rouge">title</code> property for your site’s name.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">title</span><span class="pi">:</span> <span class="s">ACME Website</span>
+</code></pre></div></div>
+
+<p>Any properties you add in your <code class="language-plaintext highlighter-rouge">_config.yml</code> file are accessible through the <code class="language-plaintext highlighter-rouge">site</code> namespace. Similarly, any properties in your page’s front matter are accessible through the <code class="language-plaintext highlighter-rouge">page</code> namespace. Use dot notation after <code class="language-plaintext highlighter-rouge">site</code> or <code class="language-plaintext highlighter-rouge">page</code> to access the value.</p>
+
+<p>Stop your Jekyll server with <kbd>Ctrl</kbd> + <kbd>C</kbd> and restart it. Verify that the <code class="language-plaintext highlighter-rouge">title</code> tags are populating correctly.</p>
+
+<p class="note info">Every time you modify your config file, you have to restart Jekyll for the changes to take effect. When you modify other files, Jekyll automatically picks up the changes when it rebuilds.</p>
+
+<p>If you have other variables to populate in your site, rinse and repeat.</p>
+
+<h2 id="7-show-posts-on-a-page">7. Show posts on a page</h2>
+
+<p>It’s common to show a list of posts on the homepage. First, let’s create some posts so that we have something to showcase.</p>
+
+<p>Add some posts in a <code class="language-plaintext highlighter-rouge">_posts</code> folder following the standard <code class="language-plaintext highlighter-rouge">YYYY-MM-DD-title.md</code> post format:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">2017-01-02-my-first-post.md</code></li>
+  <li><code class="language-plaintext highlighter-rouge">2017-01-15-my-second-post.md</code></li>
+  <li><code class="language-plaintext highlighter-rouge">2017-02-08-my-third-post.md</code></li>
+</ul>
+
+<p>In each post, add some basic content:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">My First Post</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">default</span>
+<span class="nn">---</span>
+
+Some sample content...
+</code></pre></div></div>
+
+<p>Now let’s create a layout that will display the posts. Create a new file in <code class="language-plaintext highlighter-rouge">_layouts</code> called <code class="language-plaintext highlighter-rouge">home.html</code> and add the following logic:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+layout: default
+---
+
+<span class="cp">{{</span><span class="w"> </span><span class="nv">content</span><span class="w"> </span><span class="cp">}}</span>
+&lt;ul class="myposts"&gt;
+<span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">post</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">posts</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;li&gt;&lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">post</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>"&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">post</span><span class="p">.</span><span class="nv">title</span><span class="cp">}}</span>&lt;/a&gt;
+    &lt;span class="postDate"&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">post</span><span class="p">.</span><span class="nv">date</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">date</span><span class="p">:</span><span class="w"> </span><span class="s2">"%b %-d, %Y"</span><span class="w"> </span><span class="cp">}}</span>&lt;/span&gt;
+    &lt;/li&gt;
+<span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
+&lt;/ul&gt;
+</code></pre></div></div>
+
+<p>Create a file called <code class="language-plaintext highlighter-rouge">blog.md</code> in your root directory and specify the <code class="language-plaintext highlighter-rouge">home</code> layout:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">Blog</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">home</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<p>In this case, contents of <code class="language-plaintext highlighter-rouge">blog.md</code> will be pushed into the <code class="language-plaintext highlighter-rouge">{{ content }}</code> tag in the <code class="language-plaintext highlighter-rouge">home</code> layout. Then the <code class="language-plaintext highlighter-rouge">home</code> layout will be pushed into the <code class="language-plaintext highlighter-rouge">{{ content }}</code> tag of the <code class="language-plaintext highlighter-rouge">default</code> layout.</p>
+
+<h3 id="how-layouts-work">How layouts work</h3>
+
+<p>When a layout specifies another layout, it means the content of the first layout will be stuffed into the <code class="language-plaintext highlighter-rouge">{{ content }}</code> tag of the second layout. As an analogy, think of Russian dolls that fit into each other. Each layout fits into another layout that it specifies.</p>
+
+<p>The following diagram shows how layouts work in Jekyll:</p>
+
+<p><img src="../../img/jekylllayoutconcept.png" alt="Concept of Jekyll layouts" /></p>
+
+<p class="image-description">In this example, the content from a Markdown document <code class="language-plaintext highlighter-rouge">document.md</code> that specifies <code class="language-plaintext highlighter-rouge">layout: docs</code> gets pushed into the <code class="language-plaintext highlighter-rouge">{{ content }}</code> tag of the layout file <code class="language-plaintext highlighter-rouge">docs.html</code>. Because the <code class="language-plaintext highlighter-rouge">docs</code> layout itself specifies <code class="language-plaintext highlighter-rouge">layout: page</code>, the content from <code class="language-plaintext highlighter-rouge">docs.html</code> gets pushed into the <code class="language-plaintext highlighter-rouge">{{ content }}</code> tag in the layout file <code class="language-plaintext highlighter-rouge">page.html</code>. Finally because the <code class="language-plaintext highlighter-rouge">page</code> layout specifies <code class="language-plaintext highlighter-rouge">layout: default</code>, the content from <code class="language-plaintext highlighter-rouge">page.html</code> gets pushed into the <code class="language-plaintext highlighter-rouge">{{ content }}</code> tag of the layout file <code class="language-plaintext highlighter-rouge">default.html</code>.</p>
+
+<p>You don’t need multiple layouts. You could just use one: <code class="language-plaintext highlighter-rouge">default</code>. You have options for how you design your site. In general, it’s common to define one layout for pages and another layout for posts, but for both of these layouts to inherit the <code class="language-plaintext highlighter-rouge">default</code> template (which usually defines the top and bottom parts of the site).</p>
+
+<p>In your browser, go to <code class="language-plaintext highlighter-rouge">blog.html</code> and see the list of posts.
+Note that you don’t have to use the method described here. You could have simply added the <code class="language-plaintext highlighter-rouge">for</code> loop to any page, such as <code class="language-plaintext highlighter-rouge">index.md</code>, to display these posts. But given that you may have more complex logic for other features, it can be helpful to store your logic in templates separate from the page area where you frequently type your content.</p>
+
+<p class="note info">At minimum, a layout should contain <code class="language-plaintext highlighter-rouge">{{ content }}</code>, which acts as a receiver for the <em>content</em> to be rendered.</p>
+
+<h3 id="for-loops">For loops</h3>
+
+<p>By the way, let’s pause here to look at the <code class="language-plaintext highlighter-rouge">for</code> loop logic a little more closely. <a href="https://shopify.github.io/liquid/tags/iteration/">For loops in Liquid</a> are one of the most commonly used Liquid tags. <em>For loops</em> let you iterate through content in your Jekyll site and build out a result. The <code class="language-plaintext highlighter-rouge">for</code> loop also has <a href="https://help.shopify.com/themes/liquid/objects/for-loops">certain properties available</a> (like first or last iteration) based on the loop’s position in the loop as well.</p>
+
+<p>We’ve only scratched the surface of what you can do with <code class="language-plaintext highlighter-rouge">for</code> loops in retrieving posts. For example, if you wanted to display posts from a specific category, you could do so by adding a <code class="language-plaintext highlighter-rouge">categories</code> property to your post’s front matter and then look in those categories. Further, you could limit the number of results by adding a <code class="language-plaintext highlighter-rouge">limit</code> property. Here’s an example:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;ul class="myposts"&gt;
+<span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">post</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">categories</span><span class="p">.</span><span class="nv">podcasts</span><span class="w"> </span><span class="na">limit</span><span class="o">:</span><span class="mi">3</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;li&gt;&lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">post</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>"&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">post</span><span class="p">.</span><span class="nv">title</span><span class="cp">}}</span>&lt;/a&gt;
+    &lt;span class="postDate"&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">post</span><span class="p">.</span><span class="nv">date</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">date</span><span class="p">:</span><span class="w"> </span><span class="s2">"%b %-d, %Y"</span><span class="w"> </span><span class="cp">}}</span>&lt;/span&gt;
+    &lt;/li&gt;
+<span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
+&lt;/ul&gt;
+</code></pre></div></div>
+
+<p>This loop would get the latest three posts that have a category called <code class="language-plaintext highlighter-rouge">podcasts</code> in the front matter.</p>
+
+<h2 id="8-configure-navigation">8. Configure navigation</h2>
+
+<p>Now that you’ve configured posts, let’s configure page navigation. Most websites have some navigation either in the sidebar or header area.</p>
+
+<p>In this tutorial, we’ll assume you’ve got a simple list of pages you want to generate. If you only have a handful of pages, you could list them by using a <code class="language-plaintext highlighter-rouge">for</code> loop to iterate through the <code class="language-plaintext highlighter-rouge">site.pages</code> object and then order them by a front matter property.</p>
+
+<p>Identify the part of your code where the list of pages appears. Usually this is a <code class="language-plaintext highlighter-rouge">&lt;ul&gt;</code> element with various child <code class="language-plaintext highlighter-rouge">&lt;li&gt;</code> elements. Replace the code with the following:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;ul&gt;
+  <span class="cp">{%</span><span class="w"> </span><span class="nt">assign</span><span class="w"> </span><span class="nv">mypages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">pages</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">sort</span><span class="p">:</span><span class="w"> </span><span class="s2">"order"</span><span class="w"> </span><span class="cp">%}</span>
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">page</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">mypages</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;li&gt;&lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">page</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">absolute_url</span><span class="w"> </span><span class="cp">}}</span>"&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">page</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="cp">}}</span>&lt;/a&gt;&lt;/li&gt;
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
+&lt;/ul&gt;
+</code></pre></div></div>
+
+<p>This example assumes each page would have front matter containing both a <code class="language-plaintext highlighter-rouge">title</code> and <code class="language-plaintext highlighter-rouge">order</code> property like this:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">My page</span>
+<span class="na">order</span><span class="pi">:</span> <span class="m">2</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<p>Here the <code class="language-plaintext highlighter-rouge">order</code> property will define how the pages get sorted, with <code class="language-plaintext highlighter-rouge">1</code> appearing first in the list.</p>
+
+<p>You could also iterate through a list of pages that you maintain in a separate data file. This might be more appropriate if you have a lot of pages, or you have other properties about the pages you want to store.</p>
+
+<p>To manage page links this way, create a folder in your Jekyll project called <code class="language-plaintext highlighter-rouge">_data</code>. In this folder, create a file called e.g. <code class="language-plaintext highlighter-rouge">navigation.yml</code> with this content:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">title</span><span class="pi">:</span> <span class="s">Sample page </span><span class="m">1</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">/page-1-permalink/</span>
+
+<span class="pi">-</span> <span class="na">title</span><span class="pi">:</span> <span class="s">Sample page </span><span class="m">2</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">/page-2-permalink/</span>
+
+<span class="pi">-</span> <span class="na">title</span><span class="pi">:</span> <span class="s">Sample page </span><span class="m">3</span>
+  <span class="na">url</span><span class="pi">:</span> <span class="s">/page-3-permalink/</span>
+</code></pre></div></div>
+
+<p class="note info">If you never wrote any YAML before, you’ll get quickly familiar with it. Take a look at <a href="https://learnxinyminutes.com/docs/yaml/">what you can do with YAML</a>.</p>
+
+<p>You can store additional properties for each item in this data file as desired. Arrange the list items in the order you want them to appear.</p>
+
+<p>To print the list of pages from the data file, use code like this:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;ul&gt;
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">link</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">navigation</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;li&gt;&lt;a href="<span class="cp">{{</span><span class="w"> </span><span class="nv">link</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>"&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">link</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="cp">}}</span>&lt;/a&gt;&lt;/li&gt;
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
+&lt;/ul&gt;
+</code></pre></div></div>
+
+<p>If you have more sophisticated requirements around navigation, such as when building a documentation site, see the <a href="/tutorials/navigation/">detailed tutorial on navigation</a>.</p>
+
+<h2 id="9-simplify-your-site-with-includes">9. Simplify your site with includes</h2>
+
+<p>Let’s suppose your <code class="language-plaintext highlighter-rouge">default.html</code> file is massive and hard to work with. You can break up your layout by putting some of the HTML code in <em>include</em> files.</p>
+
+<p>Add a folder called <code class="language-plaintext highlighter-rouge">_includes</code> in your root directory. In that folder, add a file there called <code class="language-plaintext highlighter-rouge">sidebar.html</code>.</p>
+
+<p>Remove your sidebar code from your <code class="language-plaintext highlighter-rouge">default.html</code> layout and insert it into the <code class="language-plaintext highlighter-rouge">sidebar.html</code> file.</p>
+
+<p>Where the sidebar code previously existed in <code class="language-plaintext highlighter-rouge">default.html</code>, pull in your “include” like this:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span>sidebar.html<span class="w"> </span><span class="cp">%}</span>
+</code></pre></div></div>
+
+<p>You can break up other elements of your theme like this, such as your header or footer. Then you can apply these common elements to other layout files. This way you won’t have duplicate code.</p>
+
+<h2 id="10-rss-feed">10. RSS feed</h2>
+
+<p>Your Jekyll site needs an RSS feed. Here’s the <a href="http://www.w3schools.com/xml/xml_rss.asp">basic RSS feed syntax</a>. To create an RSS file in Jekyll, create a file called <code class="language-plaintext highlighter-rouge">feed.xml</code> in your root directory and add the following:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+layout: null
+---
+
+&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"&gt;
+
+    &lt;channel&gt;
+        &lt;title&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="cp">}}</span>&lt;/title&gt;
+        &lt;link&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>&lt;/link&gt;
+        &lt;atom:link href="<span class="cp">{{</span><span class="w"> </span><span class="nv">page</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">prepend</span><span class="p">:</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>" rel="self" type="application/rss+xml" /&gt;
+        &lt;description&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">description</span><span class="w"> </span><span class="cp">}}</span>&lt;/description&gt;
+        &lt;lastBuildDate&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">time</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">date_to_rfc822</span><span class="w"> </span><span class="cp">}}</span>&lt;/lastBuildDate&gt;
+        <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">post</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">posts</span><span class="w"> </span><span class="cp">%}</span>
+        &lt;item&gt;
+            &lt;title&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">post</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="cp">}}</span>&lt;/title&gt;
+            &lt;link&gt;
+                <span class="cp">{{</span><span class="w"> </span><span class="nv">post</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">prepend</span><span class="p">:</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>
+            &lt;/link&gt;
+            &lt;description&gt;
+                <span class="cp">{{</span><span class="w"> </span><span class="nv">post</span><span class="p">.</span><span class="nv">content</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">escape</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">truncate</span><span class="p">:</span><span class="w"> </span><span class="s1">'400'</span><span class="w"> </span><span class="cp">}}</span>
+            &lt;/description&gt;
+            &lt;pubDate&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">post</span><span class="p">.</span><span class="nv">date</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">date_to_rfc822</span><span class="w"> </span><span class="cp">}}</span>&lt;/pubDate&gt;
+            &lt;guid&gt;
+                <span class="cp">{{</span><span class="w"> </span><span class="nv">post</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">prepend</span><span class="p">:</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>
+            &lt;/guid&gt;
+        &lt;/item&gt;
+        <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;/channel&gt;
+&lt;/rss&gt;
+</code></pre></div></div>
+
+<p>Make sure your <code class="language-plaintext highlighter-rouge">_config.yml</code> file has properties for <code class="language-plaintext highlighter-rouge">title</code>, <code class="language-plaintext highlighter-rouge">url</code>, and <code class="language-plaintext highlighter-rouge">description</code>.</p>
+
+<p>This code uses a <code class="language-plaintext highlighter-rouge">for</code> loop to look through your last 20 posts. The content from the posts gets escaped and truncated to the last 400 characters using <a href="https://help.shopify.com/themes/liquid/filters">Liquid filters</a>.</p>
+
+<p>In your <code class="language-plaintext highlighter-rouge">default.html</code> layout, look for a reference to the RSS or Atom feed in your header, and replace it with a reference to the file you just created. For example:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;link rel="alternate" type="application/rss+xml"  href="<span class="cp">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">url</span><span class="w"> </span><span class="cp">}}</span>/feed.xml" title="<span class="cp">{{</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="cp">}}</span>"&gt;
+</code></pre></div></div>
+
+<p>You can also auto-generate your posts feed by adding a gem called <a href="https://help.github.com/articles/atom-rss-feeds-for-github-pages/"><code class="language-plaintext highlighter-rouge">jekyll-feed</code></a>. This gem will also work on GitHub Pages.</p>
+
+<h2 id="11-add-a-sitemap">11. Add a sitemap</h2>
+
+<p>Finally, add a <a href="https://www.sitemaps.org/protocol.html">site map</a>. Create a <code class="language-plaintext highlighter-rouge">sitemap.xml</code> file in your root directory and add this code:</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+layout: null
+search: exclude
+---
+
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">page</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">pages</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;url&gt;
+        &lt;loc&gt;<span class="cp">{{</span><span class="nv">page</span><span class="p">.</span><span class="nv">url</span><span class="cp">}}</span>&lt;/loc&gt;
+        &lt;lastmod&gt;<span class="cp">{{</span><span class="nv">site</span><span class="p">.</span><span class="nv">time</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">date</span><span class="p">:</span><span class="w"> </span><span class="s1">'%Y-%m-%d'</span><span class="w"> </span><span class="cp">}}</span>&lt;/lastmod&gt;
+        &lt;changefreq&gt;daily&lt;/changefreq&gt;
+        &lt;priority&gt;0.5&lt;/priority&gt;
+    &lt;/url&gt;
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
+
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">post</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">posts</span><span class="w"> </span><span class="cp">%}</span>
+    &lt;url&gt;
+        &lt;loc&gt;<span class="cp">{{</span><span class="nv">post</span><span class="p">.</span><span class="nv">url</span><span class="cp">}}</span>&lt;/loc&gt;
+        &lt;lastmod&gt;<span class="cp">{{</span><span class="nv">site</span><span class="p">.</span><span class="nv">time</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">date</span><span class="p">:</span><span class="w"> </span><span class="s1">'%Y-%m-%d'</span><span class="w"> </span><span class="cp">}}</span>&lt;/lastmod&gt;
+        &lt;changefreq&gt;daily&lt;/changefreq&gt;
+        &lt;priority&gt;0.5&lt;/priority&gt;
+    &lt;/url&gt;
+    <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
+
+&lt;/urlset&gt;
+</code></pre></div></div>
+
+<p>Again, we’re using a <code class="language-plaintext highlighter-rouge">for</code> loop here to iterate through all posts and pages to add them to the sitemap.</p>
+
+<p>You can also auto-generate your sitemap by adding a gem called <a href="https://help.github.com/articles/sitemaps-for-github-pages/"><code class="language-plaintext highlighter-rouge">jekyll-sitemap</code></a>. This gem will also work on GitHub Pages.</p>
+
+<h2 id="12-add-external-services">12. Add external services</h2>
+
+<p>For other services you might need (such as contact forms, search, comments, and more), <a href="https://serverless.css-tricks.com/services/major">look for third-party services</a>. We listed some <a href="/resources/#integrations">integrations on our resources page</a> but in todays’s world of SaaS and APis the list is endless.</p>
+
+<p>Your Jekyll pages consist of HTML, CSS, and JavaScript, so pretty much any code you need to embed will work without a problem.</p>
+
+<p>As you integrate code for these services, note that <strong>if a page in your Jekyll site doesn’t have front matter tags, Jekyll won’t process any of the content in that page.</strong> The page will just be passed to the <code class="language-plaintext highlighter-rouge">_site</code> folder when you build your site.</p>
+
+<p>If you do want Jekyll to process some page content (for example, to populate a variable that you define in your site’s config file), just add front matter tags to the page. If you don’t want any layout applied to the page, specify <code class="language-plaintext highlighter-rouge">layout: null</code> like this:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="kc">null</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+
+<h2 id="13-conclusion">13. Conclusion</h2>
+
+<p>Although websites can implement more sophisticated features and functionality, we’ve covered the basics in this tutorial. You now have a fully functional Jekyll site.</p>
+
+<p>To deploy your site, consider using <a href="https://pages.github.com/">GitHub Pages</a>, <a href="https://www.netlify.com/">Netlify</a>, <a href="https://vercel.com">Vercel</a>, <a href="https://render.com">Render</a>, <a href="https://aws.amazon.com/s3/">Amazon AWS S3</a> using the <a href="https://github.com/laurilehmijoki/s3_website">s3_website plugin</a>, or just FTP your files to your web server.</p>
+
+<p>You can also package your layouts, includes and assets into a Ruby <code class="language-plaintext highlighter-rouge">gem</code> and <a href="/docs/themes/">make it a Jekyll theme</a>.</p>
+
+<h2 id="additional-resources">Additional resources</h2>
+
+<p>Here are some additional tutorials on creating Jekyll sites:</p>
+
+<ul>
+  <li><a href="http://jekyll.tips/jekyll-casts/converting-a-static-site-to-jekyll/">Convert a static site to Jekyll</a></li>
+  <li><a href="https://css-tricks.com/building-a-jekyll-site-part-1-of-3/">Building a Jekyll Site – Part 1 of 3: Converting a Static Website To Jekyll</a></li>
+</ul>
+
+<div class="section-nav">
+    <div class="left align-right">
+        <a href="/tutorials/custom-404-page/" class="prev">Back</a>
+        </div>
+    <div class="right align-left">
+        <a href="/tutorials/using-jekyll-with-bundler/" class="next">Next</a>
+        </div>
+  </div>
+  <div class="clear"></div>
+  </article>
+    </div><div class="unit one-fifth hide-on-mobiles">
+  <aside>
+    <h4>Tutorials</h4>
+      <ul>
+      <li><a href="/tutorials/home/">Tutorials</a></li>
+      <li><a href="/tutorials/video-walkthroughs/">Video Walkthroughs</a></li>
+      <li><a href="/tutorials/navigation/">Navigation</a></li>
+      <li><a href="/tutorials/orderofinterpretation/">Order of interpretation</a></li>
+      <li><a href="/tutorials/custom-404-page/">Custom 404 Page</a></li>
+      <li class="current"><a href="/tutorials/convert-site-to-jekyll/">Convert an HTML site to Jekyll</a></li>
+      <li><a href="/tutorials/using-jekyll-with-bundler/">Using Jekyll with Bundler</a></li>
+      <li><a href="/tutorials/csv-to-table/">Tabulate CSV Data</a></li>
+      </ul>
+    </aside>
+</div>
+<div class="clear"></div>
+  </div>
+</section>
+<footer>
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <p>Jekyll is lovingly maintained by the <a href="/team/">core team</a> of volunteers. </p>
+      <p>The contents of this website are <br />&copy;&nbsp;2024 under the terms of the <a href="https://github.com/jekyll/jekyll/blob/master/LICENSE">MIT&nbsp;License</a>.</p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Proudly hosted by
+        <a href="https://github.com">
+          <img src="/img/footer-logo.png" width="100" height="30" alt="GitHub • Social coding">
+        </a>
+      </p>
+    </div>
+    <div class="unit two-thirds align-right center-on-mobiles">
+      <p>
+        Jekyll is funded thanks to its
+        <a href="https://github.com/jekyll/jekyll#sponsors">
+          sponsors!
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+<script>
+/* Creates an anchor element with the given ID and link for the permalink*/
+const anchorForId = (id) => {
+  const anchor = document.createElement("a");
+  anchor.className = "header-link";
+  anchor.href = `#${id}`;
+  anchor.innerHTML = `<span class="sr-only">Permalink</span><i class="fa fa-link" aria-hidden="true"></i>`;
+  anchor.title = "Permalink";
+  return anchor;
+};
+
+/* Finds all headers of the specified level within the given element, and adds a permalink to each header*/
+const linkifyAnchors = (level, containingElement) => {
+  const headers = Array.from(containingElement.getElementsByTagName(`h${level}`));
+  headers.forEach((header) => {
+    if (header.id) {
+      header.appendChild(anchorForId(header.id));
+    }
+  });
+};
+
+/* Executes the function when the document is ready */
+document.onreadystatechange = () => {
+  if (document.readyState === "complete") {
+    const contentBlock = document.getElementsByClassName("docs")[0]
+      ?? document.getElementsByClassName("news")[0];
+    if (!contentBlock) { return; }
+    for (let level = 1; level <= 6; level++) {
+      linkifyAnchors(level, contentBlock);
+    }
+  }
+};
+</script>
+<!-- Google Analytics (https://www.google.com/analytics) -->
+  <script>
+    !function(j,e,k,y,l,L){j.GoogleAnalyticsObject=y,j[y]||(j[y]=function(){
+    (j[y].q=j[y].q||[]).push(arguments)}),j[y].l=+new Date,l=e.createElement(k),
+    L=e.getElementsByTagName(k)[0],l.src='https://www.google-analytics.com/analytics.js',
+    L.parentNode.insertBefore(l,L)}(window,document,'script','ga');
+
+    ga('create', 'UA-50755011-1', 'jekyllrb.com');
+    ga('send', 'pageview');
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script> docsearch({
+apiKey: '50fe39c839958dfad797000f33e2ec17',
+indexName: 'jekyllrb',
+inputSelector: '#docsearch-input',
+enhancedSearchInput: true,
+debug: false // Set debug to true if you want to inspect the dropdown
+});
+</script>
+<script>
+  const navigateToUrl = (select) => {
+    const url = select.value;
+    url && (window.location.href = url);
+  };
+  </script>
+</body>
+</html>
