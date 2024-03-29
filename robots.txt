@@ -1,1 +1,1 @@
-Sitemap: https://jekyllrb.com/sitemap.xml
+Sitemap: /sitemap.xml
