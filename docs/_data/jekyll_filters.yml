@@ -86,7 +86,7 @@
 #
 
 - name: Where
-  description: Select all the objects in an array where the key has the given value.
+  description: Select all the objects in an array where the key has the given value. Single property expressions are not supported.
   examples:
     - input: '{{ site.members | where:"graduation_year","2014" }}'
       output:
