@@ -72,8 +72,6 @@ I hope you like it!
   </p>
 </div>
 
-## How filename and post title 
-
 ## Including images and resources
 
 At some point, you'll want to include images, downloads, or other
