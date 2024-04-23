@@ -190,8 +190,8 @@ module Jekyll
 
     def print_build_warning
       Jekyll.logger.warn "Warning:", "Excerpt modified in #{doc.relative_path}!"
-      Jekyll.logger.warn "", "Found a Liquid block containing the excerpt separator" \
-                         " #{doc.excerpt_separator.inspect}. "
+      Jekyll.logger.warn "", "Found a Liquid block containing the excerpt separator " \
+                             "#{doc.excerpt_separator.inspect}."
       Jekyll.logger.warn "", "The block has been modified with the appropriate closing tag."
       Jekyll.logger.warn "", "Feel free to define a custom excerpt or excerpt_separator in the"
       Jekyll.logger.warn "", "document's Front Matter if the generated excerpt is unsatisfactory."

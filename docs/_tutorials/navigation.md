@@ -637,11 +637,11 @@ First, we'll create an include that we can use for rendering the navigation tree
 ```liquid
 <ul>
   {% for item in include.nav %}
-    <li><a href="{{ item.url }}">{{ item.title }}</a></li>
-
-    {% if item.subnav %}
-      {% include nav.html nav=item.subnav %}
-    {% endif %}
+    <li><a href="{{ item.url }}">{{ item.title }}</a>
+      {% if item.subnav %}
+        {% include nav.html nav=item.subnav %}
+      {% endif %}
+    </li>
   {% endfor %}
 </ul>
 ```

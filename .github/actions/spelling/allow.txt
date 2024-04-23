@@ -1,0 +1,17 @@
+built-ins
+github
+hakiri
+https
+Linting
+Microsoft
+ssh
+Statictastic
+statictastic
+ubuntu
+Wikipedia
+workaround
+workaround
+workarounds
+WSL
+decapcms
+tina

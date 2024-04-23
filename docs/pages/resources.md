@@ -14,6 +14,7 @@ some of the most popular Jekyll resources.
 - [jamstackthemes.dev](https://jamstackthemes.dev/ssg/jekyll/)
 - [jekyllthemes.org](http://jekyllthemes.org/)
 - [jekyllthemes.io](https://jekyllthemes.io/)
+- [builtatlightspeed.com](https://builtatlightspeed.com/category/jekyll)
 
 See also: [docs/themes](/docs/themes/).
 
@@ -42,11 +43,10 @@ Use a SaaS service as a backend for functionality on your Jekyll site
 ### Content Management
   - [CloudCannon](https://cloudcannon.com/): The Cloud CMS for Jekyll
   - [Contentful](https://github.com/contentful/jekyll-contentful-data-import): Content infrastructure for digital teams
-  - [Forestry.io](https://forestry.io/): A free Git-based responsive CMS, with content modeling and instant previews.
-  - [Netlify CMS](https://www.netlifycms.org/): Open source content management for your Git workflow
+  - [TinaCMS.io](https://tina.io/): Tina is an open-source, Git-backed headless content management system (CMS) that empowers both developers and content creators to collaborate seamlessly on a single platform
+  - [Decap CMS](https://decapcms.org/): Decap CMS (formerly Netlify CMS) is an open source content management system for your Git workflow that enables you to provide editors with a friendly UI and intuitive workflows
   - [Siteleaf](https://www.siteleaf.com/): Built for developers, Loved by everyone
-  - [Statictastic](https://www.statictastic.com/): Static site hosting, publishing and content management for teams
-  - [Kentico Kontent](https://github.com/Kentico/kontent-jekyll): A headless CMS with full control over content presentation
+  - [Kentico Kontent](https://rubygems.org/gems/kontent-jekyll/): A headless CMS with full control over content presentation
 
 ### E-commerce
   - [MemberSpace](https://www.memberspace.com/integrations/jekyll-membership/): Add memberships and paywall functionality to a Jekyll site
@@ -71,7 +71,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [Algolia](https://blog.algolia.com/instant-search-blog-documentation-jekyll-plugin/): Add a powerful instant search to your Jekyll site
   - [Elastic Site Search](http://elastic.co/products/site-search/service?ultron=resources&blade=jekyll&hulk=referral): Another option for adding search to your Jekyll site, built on Elasticsearch
   - [Bonsai Search](https://docs.bonsai.io/article/217-jekyll): The easiest way to use Elasticsearch for your Jekyll site
-  - [CloudSh](https://cloudsh.com/generators/How-to-setup-search-on-Jekyll/): Website search with a few lines of JavaScript
+  - [CloudSh](https://cloudsh.com/generators/how-to-setup-search-on-jekyll/): Website search with a few lines of JavaScript
 
 ## Editors plugins
 
@@ -80,7 +80,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
 - [markdown-writer](https://atom.io/packages/markdown-writer): An Atom package for Jekyll. It can create new posts/drafts, manage tags/categories, insert link/images and add many useful key mappings.
 - [sublime-jekyll](https://github.com/23maverick23/sublime-jekyll): A Sublime Text package for Jekyll static sites. This package should help creating Jekyll sites and posts easier by providing access to key template tags and filters, as well as common completions and a current date/datetime command (for dating posts). You can install this package manually via GitHub, or via [Package Control](https://packagecontrol.io/packages/Jekyll).
 - [vim-jekyll](https://github.com/parkr/vim-jekyll): A vim plugin to generate new posts and run `jekyll build` all without leaving vim.
-- [WordPress2Jekyll](https://wordpress.org/plugins/wp2jekyll/): A WordPress plugin that allows you to use WordPress as your editor and (automatically) export content in to Jekyll. WordPress2Jekyll attempts to marry these two systems together in order to make a site that can be easily managed from all devices.
+- [WordPress2Jekyll](https://wordpress.org/plugins/wp2jekyll/): A WordPress plugin that allows you to use WordPress as your editor and (automatically) export content into Jekyll. WordPress2Jekyll attempts to marry these two systems together in order to make a site that can be easily managed from all devices.
 
 ## Posts
 
@@ -90,10 +90,10 @@ Use a SaaS service as a backend for functionality on your Jekyll site
 - [Adding Ajax pagination to Jekyll](https://eduardoboucas.com/blog/2014/11/05/adding-ajax-pagination-to-jekyll.html)
 - ['About this Website', by Carter Allen](http://cartera.me/2010/08/12/about-this-website/)
 
-  > "Jekyll is everything that I ever wanted in a blogging engine. Really. It isn't perfect, but what's excellent about it is that if there's something wrong, I know exactly how it works and how to fix it. It runs on the your machine only, and is essentially an added"build" step between you and the browser. I coded this entire site in TextMate using standard HTML5 and CSS3, and then at the end I added just a few little variables to the markup. Presto-chango, my site is built and I am at peace with the world."
+  > "Jekyll is everything that I ever wanted in a blogging engine. Really. It isn't perfect, but what's excellent about it is that if there's something wrong, I know exactly how it works and how to fix it. It runs on the your machine only, and is essentially an added "build" step between you and the browser. I coded this entire site in TextMate using standard HTML5 and CSS3, and then at the end I added just a few little variables to the markup. Presto-chango, my site is built and I am at peace with the world."
 
 - A way to [extend Jekyll](https://github.com/rfelix/jekyll_ext) without forking and modifying the Jekyll gem codebase and some [portable Jekyll extensions](https://github.com/rfelix/jekyll_ext/wiki/Extensions) that can be reused and shared.
-- [Using your Rails layouts in Jekyll](http://numbers.brighterplanet.com/2010/08/09/sharing-rails-views-with-jekyll)
+- [Using your Rails layouts in Jekyll](https://numbers.brighterplanet.com/2010/08/09/sharing-rails-views-with-jekyll)
 
 ## Forks
 

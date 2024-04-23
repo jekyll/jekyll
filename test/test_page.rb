@@ -384,8 +384,8 @@ class TestPage < JekyllUnitTest
 
           should "initialize excerpt eagerly but render only when needed" do
             test_page = Jekyll::Page.new(@configured_site, source_dir, "contacts", "foo.md")
-            assert_equal Jekyll::PageExcerpt, test_page.data["excerpt"].class
-            assert_equal String, test_page.excerpt.class
+            assert_instance_of Jekyll::PageExcerpt, test_page.data["excerpt"]
+            assert_instance_of String, test_page.excerpt
             assert_equal(
               "<h2 id=\"contact-information\">Contact Information</h2>\n",
               test_page.excerpt

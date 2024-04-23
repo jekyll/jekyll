@@ -1,5 +1,5 @@
 - name: Tom Preston Werner Blog
-  url: http://tom.preston-werner.com/
+  url: https://tom.preston-werner.com/
   image: tom-preston-werner.png
   categories:
     - personal
@@ -12,7 +12,7 @@
 #     - government
 
 - name: SiteLeaf
-  url: https://siteleaf.com
+  url: https://www.siteleaf.com/
   image: siteleaf.png
   categories:
     - software
@@ -26,7 +26,7 @@
     - marketing-site
 
 - name: Vesterheim Norwegian-American Museum
-  url: http://vesterheim.org/
+  url: https://vesterheim.org/
   image: vesterheim.png
   categories:
     - marketing-site
@@ -52,7 +52,7 @@
     - marketing-site
 
 - name: Bitcoin
-  url: https://bitcoin.org/en/
+  url: https://bitcoin.org/
   image: bitcoin.png
   categories:
     - software
@@ -127,7 +127,7 @@
     - government
 
 - name: U.S. Web Design Standards
-  url: https://standards.usa.gov/
+  url: https://designsystem.digital.gov/
   image: uswds.png
   categories:
     - government
@@ -139,7 +139,7 @@
     - marketing-site
 
 - name: Rehan Butt
-  url: http://rehanbutt.com/
+  url: https://rehanbutt.com/
   image: rehn.png
   categories:
     - personal
@@ -165,7 +165,7 @@
     - portfolio
 
 - name: Lattice
-  url: https://latticehq.com/
+  url: https://lattice.com/
   image: lattice.png
   categories:
     - software
@@ -178,25 +178,25 @@
     - other
 
 - name: Digital Democracy
-  url: http://www.digital-democracy.org/
+  url: https://www.digital-democracy.org/
   image: digital-democracy.png
   categories:
     - other
 
 - name: HTML Reference
-  url: http://htmlreference.io/
+  url: https://htmlreference.io/
   image: htmlreference.png
   categories:
     - documentation
 
 - name: CSS Reference
-  url: http://cssreference.io/
+  url: https://cssreference.io/
   image: cssreference.png
   categories:
     - documentation
 
 - name: Chain
-  url: https://chain.com/
+  url: https://www.chain.com/
   image: chain.png
   categories:
     - marketing-site
@@ -238,13 +238,6 @@
   categories:
     - government
 
-- name: GitHub On Demand Training
-  url: https://services.github.com/on-demand/
-  image: github-learning-lab.png
-  categories:
-    - software
-    - knowledgebase
-
 - name: TwitchCon
   url: https://www.twitchcon.com/
   image: twitchcon.png
@@ -253,13 +246,13 @@
     - conference
 
 - name: UN World Statistics
-  url: https://worldstatisticsday.org
+  url: https://worldstatisticsday.org/
   image: world-statistics-day.png
   categories:
     - government
 
 - name: Netflix Devices
-  url: https://devices.netflix.com/en/
+  url: https://devices.netflix.com/
   image: netflix.png
   categories:
     - marketing-site
@@ -272,7 +265,7 @@
     - documentation
 
 - name: Yeoman
-  url: http://yeoman.io/
+  url: https://yeoman.io/
   image: yeoman.png
   categories:
     - open-source
@@ -292,13 +285,6 @@
     - software
     - marketing-site
 
-- name: Ionic Framework
-  url: https://ionicframework.com/
-  image: ionic-framework.png
-  categories:
-    - software
-    - marketing-site
-
 - name: Spotify for Developers
   url: https://developer.spotify.com
   image: spotify-developers.png
@@ -308,14 +294,14 @@
     - software
 
 - name: Sketch
-  url: https://sketch.com/
+  url: https://www.sketch.com/
   image: sketch.png
   categories:
     - software
     - marketing-site
 
 - name: Ruby on Rails
-  url: http://rubyonrails.org/
+  url: https://rubyonrails.org/
   image: ruby-on-rails.png
   categories:
     - marketing-site

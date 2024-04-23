@@ -311,7 +311,7 @@ module Jekyll
           order = + 1
         else
           raise ArgumentError, "Invalid nils order: " \
-            "'#{nils}' is not a valid nils order. It must be 'first' or 'last'."
+                               "'#{nils}' is not a valid nils order. It must be 'first' or 'last'."
         end
 
         sort_input(input, property, order)
@@ -441,6 +441,14 @@ module Jekyll
       property.split(".").reduce(liquid_data) do |data, key|
         data.respond_to?(:[]) && data[key]
       end
+    rescue TypeError => e
+      msg = if liquid_data.is_a?(Array)
+              "Error accessing object (#{liquid_data.to_s[0...20]}) with given key. Expected an " \
+                "integer but got #{property.inspect} instead."
+            else
+              e.message
+            end
+      raise e, msg
     end
 
     FLOAT_LIKE   = %r!\A\s*-?(?:\d+\.?\d*|\.\d+)\s*\Z!.freeze
@@ -478,7 +486,7 @@ module Jekyll
     end
 
     # -----------   The following set of code was *adapted* from Liquid::If
-    # -----------   ref: https://git.io/vp6K6
+    # -----------   ref: https://github.com/Shopify/liquid/blob/ffb0ace30315bbcf3548a0383fab531452060ae8/lib/liquid/tags/if.rb#L84-L107
 
     # Parse a string to a Liquid Condition
     def parse_condition(exp)

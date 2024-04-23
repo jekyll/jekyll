@@ -14,10 +14,15 @@ Feature: Create sites
     And the test_blank/_sass directory should exist
     And the test_blank/assets/css directory should exist
     And the "test_blank/_layouts/default.html" file should exist
-    And the "test_blank/_sass/main.scss" file should exist
+    And the "test_blank/_sass/base.scss" file should exist
     And the "test_blank/assets/css/main.scss" file should exist
     And the "test_blank/_config.yml" file should exist
     And the "test_blank/index.md" file should exist
+    When I run jekyll build --source test_blank --destination test_blank/_site
+    Then I should get a zero exit status
+    And the test_blank/_site directory should exist
+    And I should see "Start developing" in "test_blank/_site/index.html"
+    And I should see "body {" in "test_blank/_site/assets/css/main.css"
 
   Scenario: Basic site
     Given I have an "index.html" file that contains "Basic Site"

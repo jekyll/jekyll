@@ -25,7 +25,7 @@ module Jekyll
         #   e.g. Eastern Standard Time (EST) that is 5Hrs. to the 'west' of Prime Meridian
         #   is denoted as:
         #     EST+5 (or) EST+05:00
-        # Reference: http://www.gnu.org/software/libc/manual/html_node/TZ-Variable.html
+        # Reference: https://www.gnu.org/software/libc/manual/html_node/TZ-Variable.html
         sign = offset.positive? ? "-" : "+"
 
         rational_hours = offset.abs.to_r / 3600

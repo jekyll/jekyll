@@ -15,6 +15,7 @@ Hello! This is where we document various processes for maintaining Jekyll. Being
 - [Avoiding burnout](avoiding-burnout/)
 - [Special Labels](special-labels/)
 - [Releasing a new version](releasing-a-new-version/)
+- [Releasing a new version off `*-stable` branches](releasing-off-stable-branches/)
 
 Interested in becoming a maintainer? Here is some documentation for **contributors**:
 

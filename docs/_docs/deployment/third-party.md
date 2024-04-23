@@ -4,12 +4,6 @@ permalink: /docs/deployment/third-party/
 ---
 
 
-## Aerobatic
-
-[Aerobatic](https://www.aerobatic.com) has custom domains, global CDN distribution, basic auth, CORS proxying, and a growing list of plugins all included.
-
-Automating the deployment of a Jekyll site is simple. See their [Jekyll docs](https://www.aerobatic.com/docs/static-site-generators/#jekyll) for more details. Your built `_site` folder is deployed to their highly-available, globally distributed hosting service.
-
 ## AWS Amplify
 
 The [AWS Amplify Console](https://console.amplify.aws) provides continuous deployment and hosting for modern web apps (single page apps and static site generators). Continuous deployment allows developers to deploy updates to their web app on every code commit to their Git repository. Hosting includes features such as globally available CDNs, 1-click custom domain setup + HTTPS, feature branch deployments, redirects, trailing slashes, and password protection.
@@ -41,11 +35,11 @@ The [Jekyll hosting tutorial](https://www.keycdn.com/support/jekyll-hosting) pro
 
 ## Kickster
 
-Use [Kickster](http://kickster.nielsenramon.com/) for automated deploys to GitHub Pages when using unsupported plugins on GitHub Pages.
+Use [Kickster](https://kickster.nielsenramon.com/) for automated deploys to GitHub Pages when using unsupported plugins on GitHub Pages.
 
-Kickster provides a basic Jekyll project setup packed with web best practises and useful optimization tools increasing your overall project quality. Kickster ships with automated and worry-free deployment scripts for GitHub Pages.
+Kickster provides a basic Jekyll project setup packed with web best practices and useful optimization tools increasing your overall project quality. Kickster ships with automated and worry-free deployment scripts for GitHub Pages.
 
-Install the Kickster gem and you are good to go. More documentation can here found [here](https://github.com/nielsenramon/kickster#kickster). If you do not want to use the gem or start a new project you can just copy paste the deployment scripts for [Travis CI](https://github.com/nielsenramon/kickster/tree/master/snippets/travis) or [Circle CI](https://github.com/nielsenramon/kickster#automated-deployment-with-circle-ci).
+Install the Kickster gem and you are good to go. More documentation can be found [here](https://github.com/nielsenramon/kickster#kickster). If you do not want to use the gem or start a new project you can just copy paste the deployment scripts for [Travis CI](https://github.com/nielsenramon/kickster/tree/master/snippets/travis) or [Circle CI](https://github.com/nielsenramon/kickster#automated-deployment-with-circle-ci).
 
 ## Netlify
 
@@ -78,3 +72,9 @@ Read this [Jekyll step-by-step guide](https://www.21yunbox.com/docs/#/deploy-jek
 ## Layer0
 
 [Layer0](https://www.layer0.co) is an all-in-one platform to develop, deploy, preview, experiment on, monitor, and run your headless frontend. It is focused on large, dynamic websites and best-in-class performance through EdgeJS (a JavaScript-based Content Delivery Network), predictive prefetching, and performance monitoring. Layer0 offers a free tier. Get started in just a few minutes by following [Layer0's guide to deploying Jekyll](https://docs.layer0.co/guides/jekyll).
+
+## Kinsta Application Hosting
+[Kinsta Application Hosting](https://kinsta.com/application-hosting) is a Cloud Platform designed to help your company and dev teams ship web projects faster and more efficiently. You can host your apps, databases, and sites all in one place. Easily connect with GitHub and automate deployments and get 24/7 support for all your favorite languages and frameworks.
+
+Read [this guide](https://kinsta.com/docs/jekyll-static-site-example/) to learn how to deploy Jekyll site on Kinsta.
+

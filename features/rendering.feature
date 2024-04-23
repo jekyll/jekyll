@@ -168,7 +168,7 @@ Feature: Rendering
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see ".foo-bar { color: red; }\n\n\/\*# sourceMappingURL=index.css.map \*\/" in "_site/index.css"
+    And I should see ".foo-bar {\n  color: red;\n}\n\n\/\*# sourceMappingURL=index.css.map \*\/" in "_site/index.css"
 
   Scenario: Not render liquid in CoffeeScript without explicitly including jekyll-coffeescript
     Given I have an "index.coffee" page with animal "cicada" that contains "hey='for {{page.animal}}'"

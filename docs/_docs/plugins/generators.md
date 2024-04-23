@@ -87,6 +87,7 @@ module SamplePlugin
     # Placeholders that are used in constructing page URL.
     def url_placeholders
       {
+        :path       => @dir,
         :category   => @dir,
         :basename   => basename,
         :output_ext => output_ext,

@@ -85,7 +85,7 @@ For example, suppose you have a special image syntax with complex formatting, an
 
 ```html
 <figure>
-   <a href="http://jekyllrb.com">
+   <a href="https://jekyllrb.com">
    <img src="logo.png" style="max-width: 200px;"
       alt="Jekyll logo" />
    </a>

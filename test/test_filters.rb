@@ -143,7 +143,7 @@ class TestFilters < JekyllUnitTest
 
     should "sassify with simple string" do
       assert_equal(
-        "p { color: #123456; }\n",
+        "p {\n  color: #123456;\n}",
         @filter.sassify(<<~SASS)
           $blue: #123456
           p
@@ -154,7 +154,7 @@ class TestFilters < JekyllUnitTest
 
     should "scssify with simple string" do
       assert_equal(
-        "p { color: #123456; }\n",
+        "p {\n  color: #123456;\n}",
         @filter.scssify("$blue:#123456; p{color: $blue}")
       )
     end
@@ -665,6 +665,7 @@ class TestFilters < JekyllUnitTest
       should "convert drop to json" do
         @filter.site.read
         expected = {
+          "name"          => "2008-02-02-published.markdown",
           "path"          => "_posts/2008-02-02-published.markdown",
           "previous"      => nil,
           "output"        => nil,
@@ -717,7 +718,7 @@ class TestFilters < JekyllUnitTest
           {
             "name" => name,
             :v     => 1,
-            :thing => M.new(:kay => "jewelers"),
+            :thing => M.new({:kay => "jewelers"}),
             :stuff => true,
           }
         end
@@ -956,6 +957,18 @@ class TestFilters < JekyllUnitTest
       should "always return an array if the object responds to 'select'" do
         results = @filter.where(SelectDummy.new, "obj", "1 == 1")
         assert_equal [], results
+      end
+
+      should "gracefully handle invalid property type" do
+        hash = {
+          "members" => { "name" => %w(John Jane Jimmy) },
+          "roles"   => %w(Admin Recruiter Manager),
+        }
+        err = assert_raises(TypeError) { @filter.where(hash, "name", "Jimmy") }
+        truncatd_arr_str = hash["roles"].to_liquid.to_s[0...20]
+        msg = "Error accessing object (#{truncatd_arr_str}) with given key. Expected an integer " \
+              'but got "name" instead.'
+        assert_equal msg, err.message
       end
     end
 

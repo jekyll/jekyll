@@ -9,7 +9,7 @@ members or recipes).
 
 The simplest way of adding a page is to add an HTML file in the root
 directory with a suitable filename. You can also write a page in Markdown using
-a `.md` extension which converts to HTML on build. For a site with
+a `.md` extension and front matter which converts to HTML on build. For a site with
 a homepage, an about page, and a contact page, here’s what the root directory
 and associated URLs might look like:
 
@@ -35,7 +35,6 @@ If you have a lot of pages, you can organize them into subfolders. The same subf
 
 You might want to have a particular folder structure for your source files that changes for the built site. With [permalinks](/docs/permalinks/) you have full control of the output URL.
 
-## Excerpts for pages
+## Excerpts for pages {%- include docs_version_badge.html version="4.1.1" -%}
 
-From Jekyll 4.1.1 onwards, one can *choose* to generate excerpts for their pages by setting `page_excerpts` to `true` in their
-config file.
+One can *choose* to generate excerpts for their pages by setting `page_excerpts` to `true` in their config file.

@@ -1,10 +1,10 @@
-- name: Site Source
+- name: Site source
   description: Change the directory where Jekyll will read files
   option: "source: DIR"
   flag: -s, --source DIR
 
 
-- name: Site Destination
+- name: Site destination
   description: Change the directory where Jekyll will write files
   option: "destination: DIR"
   flag: -d, --destination DIR
@@ -17,7 +17,7 @@
   flag: --safe
 
 
-- name: Disable Disk Cache
+- name: Disable disk cache
   version-badge: 4.1.0
   description: >-
     Disable caching of content to disk in order to skip creating a <code>.jekyll-cache</code> or similar directory at
@@ -40,13 +40,33 @@
   description: >-
     Exclude directories and/or files from the conversion. These exclusions are relative to the site's source directory
     and cannot be outside the source directory.
+    <br />
+    In Jekyll 3, the `exclude` configuration option replaces the default exclusion list.
+    <br />
+    In Jekyll 4, user-provided entries get added to the default exclusion list instead and the `include` option can be
+    used to override the default exclusion list entries.
+    <br />
+    The default exclusions are found in <code>_config.yml</code> as created by <code>jekyll new</code>:
+    <ul>
+      <li><code>.sass-cache/</code></li>
+      <li><code>.jekyll-cache/</code></li>
+      <li><code>gemfiles/</code></li>
+      <li><code>Gemfile</code></li>
+      <li><code>Gemfile.lock</code></li>
+      <li><code>node_modules/</code></li>
+      <li><code>vendor/bundle/</code></li>
+      <li><code>vendor/cache/</code></li>
+      <li><code>vendor/gems/</code></li>
+      <li><code>vendor/ruby/</code></li>
+    </ul>
   option: "exclude: [DIR, FILE, ...]"
 
 
 - name: Include
   description: >-
     Force inclusion of directories and/or files in the conversion. <code>.htaccess</code> is a good example since
-    dotfiles are excluded by default.
+    dotfiles are excluded by default. With Jekyll 4, the `include` configuration option entries override the
+    `exclude` option entries.
   option: "include: [DIR, FILE, ...]"
 
 
@@ -57,7 +77,7 @@
   option: "keep_files: [DIR, FILE, ...]"
 
 
-- name: Time Zone
+- name: Time zone
   description: >-
     Set the time zone for site generation. This sets the <code>TZ</code> environment variable, which Ruby uses to handle
     time and date creation and manipulation. Any entry from the

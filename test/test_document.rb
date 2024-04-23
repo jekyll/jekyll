@@ -159,6 +159,23 @@ class TestDocument < JekyllUnitTest
     should "output its relative path as path in Liquid" do
       assert_equal "_methods/configuration.md", @document.to_liquid["path"]
     end
+
+    context "when rendered with Liquid" do
+      should "respect the front matter definition" do
+        site = fixture_site("collections" => ["roles"]).tap(&:process)
+        docs = site.collections["roles"].docs
+
+        # Ruby context: doc.basename is aliased as doc.to_liquid["name"] by default.
+
+        document = docs.detect { |d| d.relative_path == "_roles/unnamed.md" }
+        assert_equal "unnamed.md", document.basename
+        assert_equal "unnamed.md", document.to_liquid["name"]
+
+        document = docs.detect { |d| d.relative_path == "_roles/named.md" }
+        assert_equal "named.md", document.basename
+        assert_equal "launcher", document.to_liquid["name"]
+      end
+    end
   end
 
   context "a document as part of a collection with front matter defaults" do
