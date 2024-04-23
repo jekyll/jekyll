@@ -10,7 +10,7 @@
               {{ item_page.menu_name | default: item_page.title }}
             </a>
           {% endcapture %}
-          <li{%- unless item_page.url != page.url -%} class="current"{%- endunless -%}>{{ item_html }}</li>
+          <li{% unless item_page.url != page.url %} class="current"{% endunless %}>{{ item_html }}</li>
         {% endfor %}
       </ul>
     {% endfor -%}
