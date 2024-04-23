@@ -1,10 +1,10 @@
 <div class="unit one-fifth hide-on-mobiles">
   <aside>
     <ul>
-      <li {%- if page.title == 'News' %} class="current" {%- endif %}>
+      <li {% if page.title == 'News' %} class="current" {% endif %}>
         <a href="{{ '/news/' | relative_url }}">All News</a>
       </li>
-      <li {%- if page.title == 'Releases' %} class="current" {%- endif %}>
+      <li {% if page.title == 'Releases' %} class="current" {% endif %}>
         <a href="{{ '/news/releases/' | relative_url }}">Jekyll Releases</a>
       </li>
     </ul>
@@ -23,7 +23,7 @@
     <ul>
     {% for post in site.posts -%}
       {% unless post.categories contains 'release' -%}
-      <li {%- if page.title == post.title %} class="current" {%- endif %}>
+      <li {% if page.title == post.title %} class="current" {% endif %}>
         <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
       </li>
       {% endunless -%}
