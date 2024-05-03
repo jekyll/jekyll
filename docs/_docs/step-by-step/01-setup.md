@@ -3,6 +3,8 @@ layout: step
 title: Setup
 menu_name: Step by Step Tutorial
 position: 1
+redirect_from:
+- /docs/step-by-step/
 ---
 Welcome to Jekyll's step-by-step tutorial. This tutorial takes
 you from having some front-end web development experience to building your
