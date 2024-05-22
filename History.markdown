@@ -82,6 +82,7 @@
   * Add support for upcoming logger 1.4.3 (#9392)
   * Fix typo in devcontainer.json (#9364)
   * Bump the minimum ruby version to 2.7 (#9525)
+  * Correct rubocop lint errors (#9600)
 
 ## 4.3.3 / 2023-12-27
 
