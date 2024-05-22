@@ -121,15 +121,15 @@ class TestCollections < JekyllUnitTest
     end
 
     should "create a Hash mapping label to Collection instance" do
-      assert @site.collections.is_a?(Hash)
+      assert_kind_of Hash, @site.collections
       refute_nil @site.collections["methods"]
-      assert @site.collections["methods"].is_a? Jekyll::Collection
+      assert_kind_of Jekyll::Collection, @site.collections["methods"]
     end
 
     should "collects docs in an array on the Collection object" do
-      assert @site.collections["methods"].docs.is_a? Array
+      assert_kind_of Array, @site.collections["methods"].docs
       @site.collections["methods"].docs.each do |doc|
-        assert doc.is_a? Jekyll::Document
+        assert_kind_of Jekyll::Document, doc
         # rubocop:disable Style/WordArray
         assert_includes %w(
           _methods/configuration.md

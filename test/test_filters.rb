@@ -691,7 +691,7 @@ class TestFilters < JekyllUnitTest
 
         next_doc = actual.delete("next")
         refute_nil next_doc
-        assert next_doc.is_a?(Hash), "doc.next should be an object"
+        assert_kind_of Hash, next_doc, "doc.next should be an object"
 
         assert_equal expected, actual
       end
@@ -802,22 +802,22 @@ class TestFilters < JekyllUnitTest
           assert_includes names, g["name"], "#{g["name"]} isn't a valid grouping."
           case g["name"]
           when "default"
-            assert(
-              g["items"].is_a?(Array),
+            assert_kind_of(
+              Array, g["items"],
               "The list of grouped items for 'default' is not an Array."
             )
             # adjust array.size to ignore symlinked page in Windows
             qty = Utils::Platforms.really_windows? ? 4 : 5
             assert_equal qty, g["items"].size
           when "nil"
-            assert(
-              g["items"].is_a?(Array),
+            assert_kind_of(
+              Array, g["items"],
               "The list of grouped items for 'nil' is not an Array."
             )
             assert_equal 2, g["items"].size
           when ""
-            assert(
-              g["items"].is_a?(Array),
+            assert_kind_of(
+              Array, g["items"],
               "The list of grouped items for '' is not an Array."
             )
             # adjust array.size to ignore symlinked page in Windows
@@ -1306,22 +1306,22 @@ class TestFilters < JekyllUnitTest
           assert_includes names, g["name"], "#{g["name"]} isn't a valid grouping."
           case g["name"]
           when "DEFAULT"
-            assert(
-              g["items"].is_a?(Array),
+            assert_kind_of(
+              Array, g["items"],
               "The list of grouped items for 'default' is not an Array."
             )
             # adjust array.size to ignore symlinked page in Windows
             qty = Utils::Platforms.really_windows? ? 4 : 5
             assert_equal qty, g["items"].size
           when "nil"
-            assert(
-              g["items"].is_a?(Array),
+            assert_kind_of(
+              Array, g["items"],
               "The list of grouped items for 'nil' is not an Array."
             )
             assert_equal 2, g["items"].size
           when ""
-            assert(
-              g["items"].is_a?(Array),
+            assert_kind_of(
+              Array, g["items"],
               "The list of grouped items for '' is not an Array."
             )
             # adjust array.size to ignore symlinked page in Windows

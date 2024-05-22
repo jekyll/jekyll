@@ -14,10 +14,10 @@ class TestExcerptDrop < JekyllUnitTest
     end
 
     should "have the right thing" do
-      assert @doc.is_a? Jekyll::Document
-      assert @doc_drop.is_a? Jekyll::Drops::DocumentDrop
-      assert @excerpt.is_a? Jekyll::Excerpt
-      assert @excerpt_drop.is_a? Jekyll::Drops::ExcerptDrop
+      assert_kind_of Jekyll::Document, @doc
+      assert_kind_of Jekyll::Drops::DocumentDrop, @doc_drop
+      assert_kind_of Jekyll::Excerpt, @excerpt
+      assert_kind_of Jekyll::Drops::ExcerptDrop, @excerpt_drop
     end
 
     should "not have an excerpt" do
