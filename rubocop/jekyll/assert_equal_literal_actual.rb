@@ -26,8 +26,11 @@ module RuboCop
       #     @alpha.omega
       #   )
       #
-      class AssertEqualLiteralActual < Cop
-        MSG = "Provide the 'expected value' as the first argument to `assert_equal`.".freeze
+      class AssertEqualLiteralActual < Base
+        extend AutoCorrector
+
+        MSG = "Provide the 'expected value' as the first argument to `assert_equal`."
+        RESTRICT_ON_SEND = %i[assert_equal].freeze
 
         SIMPLE_LITERALS = %i(
           true
@@ -61,12 +64,10 @@ module RuboCop
 
         def on_send(node)
           return unless literal_actual?(node) || literal_actual_with_msg?(node)
-          add_offense(node, location: :expression)
-        end
 
-        def autocorrect(node)
-          lambda do |corrector|
-            corrector.replace(node.loc.expression, replacement(node))
+          range = node.loc.expression
+          add_offense(range) do |corrector|
+            corrector.replace(range, replacement(node))
           end
         end
 
