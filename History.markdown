@@ -70,6 +70,7 @@
   * Fix Performance/StringIdentifierArgument violation in site.rb and allow activesupport 6 for windows tests (#9512)
   * Add csv to runtime dependency list (#9522)
   * Add a few more emeritus team members (#9535)
+  * Make custom cop inherit `RuboCop::Cop::Base` (#9597)
 
 ### Bug Fixes
 
