@@ -175,7 +175,7 @@ class TestExcerpt < JekyllUnitTest
     end
 
     should "be generated" do
-      assert @excerpt.is_a?(Jekyll::Excerpt)
+      assert_kind_of Jekyll::Excerpt, @excerpt
     end
 
     context "#content" do
@@ -203,7 +203,7 @@ class TestExcerpt < JekyllUnitTest
     should "be appended to as necessary and generated" do
       assert_includes @excerpt.content, "{% endraw %}"
       assert_includes @excerpt.content, "{% endhighlight %}"
-      assert @excerpt.is_a?(Jekyll::Excerpt)
+      assert_kind_of Jekyll::Excerpt, @excerpt
     end
   end
 
@@ -227,7 +227,7 @@ class TestExcerpt < JekyllUnitTest
       assert_includes @excerpt.content, "{%\n  endhighlight\n%}"
       refute_includes @excerpt.content, "{%\n  endraw\n%}\n\n{% endraw %}"
       refute_includes @excerpt.content, "{%\n  endhighlight\n%}\n\n{% endhighlight %}"
-      assert @excerpt.is_a?(Jekyll::Excerpt)
+      assert_kind_of Jekyll::Excerpt, @excerpt
     end
   end
 
@@ -245,7 +245,7 @@ class TestExcerpt < JekyllUnitTest
     should "be appended to as necessary and generated" do
       assert_includes @excerpt.content, "{% endfor %}"
       refute_includes @excerpt.content, "{% endfor %}\n\n{% endfor %}"
-      assert @excerpt.is_a?(Jekyll::Excerpt)
+      assert_kind_of Jekyll::Excerpt, @excerpt
     end
   end
 
@@ -263,7 +263,7 @@ class TestExcerpt < JekyllUnitTest
     should "not be appended to but generated as is" do
       assert_includes @excerpt.content, "{%- endfor -%}"
       refute_includes @excerpt.content, "{% endfor %}\n\n{% endfor %}"
-      assert @excerpt.is_a?(Jekyll::Excerpt)
+      assert_kind_of Jekyll::Excerpt, @excerpt
     end
   end
 
@@ -279,7 +279,7 @@ class TestExcerpt < JekyllUnitTest
 
     should "not be appended to but generated as is" do
       assert_includes @excerpt.content, "{{- xyzzy -}}"
-      assert @excerpt.is_a?(Jekyll::Excerpt)
+      assert_kind_of Jekyll::Excerpt, @excerpt
     end
   end
 
@@ -304,7 +304,7 @@ class TestExcerpt < JekyllUnitTest
       assert_includes @excerpt.content, "{% endunless %}"
       assert_includes @excerpt.content, "{% enddo_nothing %}"
       refute_includes @excerpt.content, "{% enddo_nothing_other %}"
-      assert @excerpt.is_a?(Jekyll::Excerpt)
+      assert_kind_of Jekyll::Excerpt, @excerpt
     end
   end
 end

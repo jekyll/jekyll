@@ -524,7 +524,7 @@ class TestDocument < JekyllUnitTest
     end
 
     should "be a static file" do
-      assert @document.is_a?(StaticFile)
+      assert_kind_of StaticFile, @document
     end
 
     should "be set to write" do

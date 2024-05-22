@@ -13,8 +13,8 @@ class TestUtils < JekyllUnitTest
     should "merge a drop into a hash" do
       data = { "page" => {} }
       merged = Utils.deep_merge_hashes(data, @site.site_payload)
-      assert merged.is_a? Hash
-      assert merged["site"].is_a? Drops::SiteDrop
+      assert_kind_of Hash, merged
+      assert_kind_of Drops::SiteDrop, merged["site"]
       assert_equal data["page"], merged["page"]
     end
 
@@ -22,8 +22,8 @@ class TestUtils < JekyllUnitTest
       data = { "page" => {} }
       assert_nil @site.site_payload["page"]
       merged = Utils.deep_merge_hashes(@site.site_payload, data)
-      assert merged.is_a? Drops::UnifiedPayloadDrop
-      assert merged["site"].is_a? Drops::SiteDrop
+      assert_kind_of Drops::UnifiedPayloadDrop, merged
+      assert_kind_of Drops::SiteDrop, merged["site"]
       assert_equal data["page"], merged["page"]
     end
   end
@@ -91,7 +91,7 @@ class TestUtils < JekyllUnitTest
 
   context "The \`Utils.parse_date\` method" do
     should "parse a properly formatted date" do
-      assert Utils.parse_date("2014-08-02 14:43:06 PDT").is_a? Time
+      assert_kind_of Time, Utils.parse_date("2014-08-02 14:43:06 PDT")
     end
 
     should "throw an error if the input contains no date data" do
