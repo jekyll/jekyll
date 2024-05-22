@@ -1,20 +1,19 @@
 # frozen_string_literal: true
 
-require "rubocop"
-
 module RuboCop
   module Cop
     module Jekyll
-      class NoPutsAllowed < Cop
-        MSG = "Avoid using `puts` to print things. Use `Jekyll.logger` instead.".freeze
+      class NoPutsAllowed < Base
+        MSG = "Avoid using `puts` to print things. Use `Jekyll.logger` instead."
+        RESTRICT_ON_SEND = %i[puts].freeze
 
         def_node_search :puts_called?, <<-PATTERN
-        (send nil? :puts _)
+          (send nil? :puts _)
         PATTERN
 
         def on_send(node)
           if puts_called?(node)
-            add_offense(node, :location => :selector)
+            add_offense(node.loc.selector)
           end
         end
       end
