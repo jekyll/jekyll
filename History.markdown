@@ -43,6 +43,7 @@
   * Make site search work again (#9530)
   * Jekyll docs template typo - All pages show &#34;Deployment&#34; (#9548)
   * Fixed: Wrong navigation style on the right side of news and docs pages (#9586)
+  * Add redirect for step-by-step tutorial (#9593)
 
 ### Development Fixes
 
