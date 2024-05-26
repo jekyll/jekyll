@@ -363,6 +363,7 @@ module Jekyll
       pages.each { |page| yield page }
       static_files.each { |file| yield(file) if file.write? }
       collections.each_value { |coll| coll.docs.each { |doc| yield(doc) if doc.write? } }
+      collections.each_value { |coll| coll.files.each { |doc| yield(doc) if doc.write? } }
     end
 
     # Returns the FrontmatterDefaults or creates a new FrontmatterDefaults
