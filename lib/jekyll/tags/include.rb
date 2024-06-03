@@ -16,18 +16,54 @@ module Jekyll
       VALID_FILENAME_CHARS = %r!^[\w/.\-()+~\#@]+$!.freeze
       INVALID_SEQUENCES = %r![./]{2,}!.freeze
 
+      class ParameterTokenList
+        def initialize(list)
+          @list = list.map! do |key, d_quoted, s_quoted, variable|
+            [
+              key,
+              d_quoted&.include?('\\"') ? d_quoted.gsub('\\"', '"') : d_quoted,
+              s_quoted&.include?("\\'") ? s_quoted.gsub("\\'", "'") : s_quoted,
+              variable,
+            ]
+          end
+          @variable = @list.any? { |token| token[3] }
+        end
+
+        def render(context)
+          @variable ? variable_hash(context) : static_hash
+        end
+
+        def static_hash
+          @static_hash ||= @list.each_with_object({}) do |(key, d_quoted, s_quoted, _), params|
+            params[key] = d_quoted || s_quoted
+          end
+        end
+
+        def variable_hash(context)
+          @list.each_with_object({}) do |(key, d_quoted, s_quoted, variable), params|
+            params[key] = d_quoted || s_quoted || context[variable]
+          end
+        end
+      end
+
       def initialize(tag_name, markup, tokens)
         super
         markup  = markup.strip
         matched = markup.match(VARIABLE_SYNTAX)
         if matched
-          @file = matched["variable"].strip
-          @params = matched["params"].strip
+          @file = matched["variable"].tap(&:strip!)
+          @params = matched["params"].tap(&:strip!)
         else
           @file, @params = markup.split(%r!\s+!, 2)
         end
-        validate_params if @params
+
         @tag_name = tag_name
+
+        @params = nil if @params == ""
+        return unless @params
+
+        validate_params
+        @param_tokens = ParameterTokenList.new(@params.scan(VALID_SYNTAX))
       end
 
       def syntax_example
@@ -35,19 +71,7 @@ module Jekyll
       end
 
       def parse_params(context)
-        params = {}
-        @params.scan(VALID_SYNTAX) do |key, d_quoted, s_quoted, variable|
-          value = if d_quoted
-                    d_quoted.include?('\\"') ? d_quoted.gsub('\\"', '"') : d_quoted
-                  elsif s_quoted
-                    s_quoted.include?("\\'") ? s_quoted.gsub("\\'", "'") : s_quoted
-                  elsif variable
-                    context[variable]
-                  end
-
-          params[key] = value
-        end
-        params
+        @param_tokens&.render(context)
       end
 
       def validate_file_name(file)
@@ -204,7 +228,7 @@ module Jekyll
         add_include_to_dependency(inclusion, context) if @site.config["incremental"]
 
         context.stack do
-          context["include"] = parse_params(context) if @params
+          context["include"] = @param_tokens.render(context) if @param_tokens
           inclusion.render(context)
         end
       end
