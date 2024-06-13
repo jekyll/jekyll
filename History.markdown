@@ -4,6 +4,7 @@
 
   * Allow marking specific highlighted lines via Liquid (#9138)
   * 3.9-stable: allow Pages to be Excerpted (#9550)
+  * Backport add-csv-dependency from #9522 to Jekyll 3 (#9616)
 
 ### Documentation
 
