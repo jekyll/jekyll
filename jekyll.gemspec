@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency("addressable",           "~> 2.4")
   s.add_runtime_dependency("colorator",             "~> 1.0")
+  s.add_runtime_dependency("csv",                   "~> 3.0")
   s.add_runtime_dependency("em-websocket",          "~> 0.5")
   s.add_runtime_dependency("i18n",                  ">= 0.7", "< 2")
   s.add_runtime_dependency("jekyll-sass-converter", "~> 1.0")
