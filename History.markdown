@@ -87,6 +87,7 @@
   * Bump the minimum ruby version to 2.7 (#9525)
   * Correct rubocop lint errors (#9600)
   * Fix inexistent layout warning for the default 404 page (#9589)
+  * 3.10-stable: Add webrick as a dependency (#9620)
 
 ## 4.3.3 / 2023-12-27
 
