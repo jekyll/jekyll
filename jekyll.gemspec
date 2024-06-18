@@ -43,6 +43,7 @@ Gem::Specification.new do |s|
   rouge_versions = ENV["ROUGE_VERSION"] ? ["~> #{ENV["ROUGE_VERSION"]}"] : [">= 1.7", "< 4"]
   s.add_runtime_dependency("rouge",                 *rouge_versions)
   s.add_runtime_dependency("safe_yaml",             "~> 1.0")
+  s.add_runtime_dependency("webrick",               ">= 1.0")
 
   # Depend on kramdown. For kramdown v2, extra gems are required.
   # https://kramdown.gettalong.org/news.html#kramdown-200-released
