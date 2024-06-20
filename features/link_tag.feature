@@ -61,7 +61,7 @@ Feature: Link Tag
     When I run jekyll build
     Then I should get a non-zero exit status
     And the _site directory should not exist
-    And I should see "Could not find document 'contact.md' in tag 'link'" in the build output
+    And I should see "Could not find resource 'contact.md' in tag 'link'" in the build output
 
   Scenario: Complex site with a variety of files
     Given I have an "index.md" page that contains "[About my projects]({% link about.md %})"

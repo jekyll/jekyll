@@ -207,6 +207,8 @@ module Jekyll
 
       Jekyll::Hooks.trigger :site, :pre_render, self, payload
 
+      Jekyll::Tags::Link.register_links(self)
+
       render_docs(payload)
       render_pages(payload)
 
