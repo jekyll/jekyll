@@ -1,3 +1,10 @@
+## 3.10.0 / 2024-06-23
+
+### Minor Enhancements
+
+  * Backport add-csv-dependency from #9522 to Jekyll 3 (#9616)
+  * 3.10-stable: Add webrick as a dependency (#9620)
+
 ## 3.9.5 / 2024-02-12
 
 ### Minor Enhancements
