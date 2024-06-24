@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2024-05-23T10:53:48-07:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 3.9.4 Released</title><link href="https://jekyllrb.com/news/2023/12/28/jekyll-3-9-4-released/" rel="alternate" type="text/html" title="Jekyll 3.9.4 Released" /><published>2023-12-28T14:45:05-08:00</published><updated>2023-12-28T14:45:05-08:00</updated><id>https://jekyllrb.com/news/2023/12/28/jekyll-3-9-4-released</id><content type="html" xml:base="https://jekyllrb.com/news/2023/12/28/jekyll-3-9-4-released/"><![CDATA[<p>Hey Jekyllers!</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2024-06-24T15:28:03-07:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 3.10.0 Released</title><link href="https://jekyllrb.com/news/2024/06/23/jekyll-3-10-0-released/" rel="alternate" type="text/html" title="Jekyll 3.10.0 Released" /><published>2024-06-23T21:56:58-07:00</published><updated>2024-06-23T21:56:58-07:00</updated><id>https://jekyllrb.com/news/2024/06/23/jekyll-3-10-0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2024/06/23/jekyll-3-10-0-released/"><![CDATA[<p>As Ruby continues to march on, the maintainers have made the decision to
+drop some previously-bundled gems. This release makes Jekyll depend
+directly on those gems so that whether your Ruby installation has them
+bundled or not, your experience can continue uninterrupted.</p>
+
+<p>More details <a href="/docs/history/#v3-10-0">are in the changelog</a>.</p>
+
+<p>Happy Jekylling!</p>]]></content><author><name>parkr</name></author><category term="release" /><summary type="html"><![CDATA[As Ruby continues to march on, the maintainers have made the decision to drop some previously-bundled gems. This release makes Jekyll depend directly on those gems so that whether your Ruby installation has them bundled or not, your experience can continue uninterrupted.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 3.9.4 Released</title><link href="https://jekyllrb.com/news/2023/12/28/jekyll-3-9-4-released/" rel="alternate" type="text/html" title="Jekyll 3.9.4 Released" /><published>2023-12-28T14:45:05-08:00</published><updated>2023-12-28T14:45:05-08:00</updated><id>https://jekyllrb.com/news/2023/12/28/jekyll-3-9-4-released</id><content type="html" xml:base="https://jekyllrb.com/news/2023/12/28/jekyll-3-9-4-released/"><![CDATA[<p>Hey Jekyllers!</p>
 
 <p>This release, 3.9.4, is to bring Ruby 3.3 support to Jekyll. You can find
 the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
@@ -224,35 +231,4 @@ Ubuntu platform and published to Rubygems by @jekyllbot irrespective of the main
 Happy Jekyllin’!!</p>
 
 <p><em>P.S.: Jekyll 4.3.0 will be bringing you some new features very soon.. Also, our sass-converter plugin has been <a href="https://github.com/jekyll/jekyll-sass-converter/tree/v2.2.0#sass-embedded">enhanced</a> to support
-modern improvements to Sass.</em></p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.2.1 Released</title><link href="https://jekyllrb.com/news/2021/09/27/jekyll-4-2-1-released/" rel="alternate" type="text/html" title="Jekyll 4.2.1 Released" /><published>2021-09-27T02:15:46-07:00</published><updated>2021-09-27T02:15:46-07:00</updated><id>https://jekyllrb.com/news/2021/09/27/jekyll-4-2-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2021/09/27/jekyll-4-2-1-released/"><![CDATA[<p>Hello Jekyllers!</p>
-
-<p>The Jekyll team is happy to announce the release of <code class="language-plaintext highlighter-rouge">v4.2.1</code> which fixes a couple of
-regressions introduced in <code class="language-plaintext highlighter-rouge">v4.2.0</code> and another bug inherited from Jekyll 3.</p>
-
-<p>In <code class="language-plaintext highlighter-rouge">v4.2.0</code>, we decided to stop overriding <code class="language-plaintext highlighter-rouge">{{ site.url }}</code> with
-the <em>localhost</em> address when running the command <code class="language-plaintext highlighter-rouge">jekyll serve</code> with the default
-<em>development</em> mode. While the intent behind the change was to avoid forcing users to
-generate a <em>production build</em> separately by invoking <code class="language-plaintext highlighter-rouge">jekyll build</code>, it however had an
-unforeseen consequence — absolute URLs for assets now pointed to
-resources that were at times not yet been deployed to the configured <code class="language-plaintext highlighter-rouge">site.url</code>. That
-broke the users’ local development workflow.</p>
-
-<p><code class="language-plaintext highlighter-rouge">v4.2.0</code> also added a series of optimizations surrounding the generation of Liquid
-representation for a site’s standalone pages and layouts. However, that prevented
-<code class="language-plaintext highlighter-rouge">{{ page.content }}</code> and other mutable attributes from reflecting
-the latest state of the requested attribute, thereby breaking the render of all resources
-that were dependent on such mutable attributes.</p>
-
-<p>The last fix included in this release addresses the issue where incremental regeneration
-ignored changes to documents in collections when the site is configured to use a custom
-<code class="language-plaintext highlighter-rouge">collections_dir</code> for all collections.</p>
-
-<p>Special thanks to @benik for helping us understand the regression caused by the decision
-to stop overriding <code class="language-plaintext highlighter-rouge">site.url</code> and proposing to revert the change. Another special thanks
-to @pdmosses for helping us discover the regression surrounding Liquid representation of
-pages by providing with a test repository.</p>
-
-<div style="padding:8px 0 2px;text-align:center;background:rgba(240,0,0,0.1)">
-  :bouquet: <span style="margin:0 6px;font-size:0.75em;vertical-align:top">
-  Dedicated to our colleague Frank who passed away recently</span> :bouquet:
-</div>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+modern improvements to Sass.</em></p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

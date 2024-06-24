@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://jekyllrb.com/feed/release.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2024-05-23T10:53:48-07:00</updated><id>https://jekyllrb.com/feed/release.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites | Release</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 3.9.4 Released</title><link href="https://jekyllrb.com/news/2023/12/28/jekyll-3-9-4-released/" rel="alternate" type="text/html" title="Jekyll 3.9.4 Released" /><published>2023-12-28T14:45:05-08:00</published><updated>2023-12-28T14:45:05-08:00</updated><id>https://jekyllrb.com/news/2023/12/28/jekyll-3-9-4-released</id><content type="html" xml:base="https://jekyllrb.com/news/2023/12/28/jekyll-3-9-4-released/"><![CDATA[<p>Hey Jekyllers!</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://jekyllrb.com/feed/release.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2024-06-24T15:28:03-07:00</updated><id>https://jekyllrb.com/feed/release.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites | Release</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 3.10.0 Released</title><link href="https://jekyllrb.com/news/2024/06/23/jekyll-3-10-0-released/" rel="alternate" type="text/html" title="Jekyll 3.10.0 Released" /><published>2024-06-23T21:56:58-07:00</published><updated>2024-06-23T21:56:58-07:00</updated><id>https://jekyllrb.com/news/2024/06/23/jekyll-3-10-0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2024/06/23/jekyll-3-10-0-released/"><![CDATA[<p>As Ruby continues to march on, the maintainers have made the decision to
+drop some previously-bundled gems. This release makes Jekyll depend
+directly on those gems so that whether your Ruby installation has them
+bundled or not, your experience can continue uninterrupted.</p>
+
+<p>More details <a href="/docs/history/#v3-10-0">are in the changelog</a>.</p>
+
+<p>Happy Jekylling!</p>]]></content><author><name>parkr</name></author><category term="release" /><summary type="html"><![CDATA[As Ruby continues to march on, the maintainers have made the decision to drop some previously-bundled gems. This release makes Jekyll depend directly on those gems so that whether your Ruby installation has them bundled or not, your experience can continue uninterrupted.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 3.9.4 Released</title><link href="https://jekyllrb.com/news/2023/12/28/jekyll-3-9-4-released/" rel="alternate" type="text/html" title="Jekyll 3.9.4 Released" /><published>2023-12-28T14:45:05-08:00</published><updated>2023-12-28T14:45:05-08:00</updated><id>https://jekyllrb.com/news/2023/12/28/jekyll-3-9-4-released</id><content type="html" xml:base="https://jekyllrb.com/news/2023/12/28/jekyll-3-9-4-released/"><![CDATA[<p>Hey Jekyllers!</p>
 
 <p>This release, 3.9.4, is to bring Ruby 3.3 support to Jekyll. You can find
 the details in <a href="/docs/history/#v3-9-4">the changelog</a>.</p>
@@ -198,22 +205,4 @@ pages by providing with a test repository.</p>
 <div style="padding:8px 0 2px;text-align:center;background:rgba(240,0,0,0.1)">
   :bouquet: <span style="margin:0 6px;font-size:0.75em;vertical-align:top">
   Dedicated to our colleague Frank who passed away recently</span> :bouquet:
-</div>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 3.9.1 Released</title><link href="https://jekyllrb.com/news/2021/04/08/jekyll-3-9-1-released/" rel="alternate" type="text/html" title="Jekyll 3.9.1 Released" /><published>2021-04-08T07:51:12-07:00</published><updated>2021-04-08T07:51:12-07:00</updated><id>https://jekyllrb.com/news/2021/04/08/jekyll-3-9-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2021/04/08/jekyll-3-9-1-released/"><![CDATA[<p>This patch release of the 3.9 series is released to fix a bug where the
-<code class="language-plaintext highlighter-rouge">include</code> tag does not allow valid filename characters. For example, this
-would previously fail:</p>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% include my-logo@2x.svg %}
-</code></pre></div></div>
-
-<p>This release adds support for the following characters in filenames:</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">@</code></li>
-  <li><code class="language-plaintext highlighter-rouge">-</code></li>
-  <li><code class="language-plaintext highlighter-rouge">(</code> and <code class="language-plaintext highlighter-rouge">)</code></li>
-  <li><code class="language-plaintext highlighter-rouge">+</code></li>
-  <li><code class="language-plaintext highlighter-rouge">~</code></li>
-  <li><code class="language-plaintext highlighter-rouge">#</code></li>
-</ul>
-
-<p>Happy Jekylling!</p>]]></content><author><name>parkr</name></author><category term="release" /><summary type="html"><![CDATA[This patch release of the 3.9 series is released to fix a bug where the include tag does not allow valid filename characters. For example, this would previously fail:]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+</div>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
