@@ -211,7 +211,6 @@ The complete list of available hooks:
         <p><code>:post_convert</code></p>
       </td>
       <td>
-        <p>After converting the post content, but before rendering the postlayout</p>
         <p>After converting the post content, but before rendering the post layout</p>
       </td>
     </tr>
