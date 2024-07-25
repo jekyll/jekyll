@@ -96,7 +96,7 @@ The complete list of available hooks:
       </td>
     </tr>
     <tr>
-      <td rowspan="5">
+      <td rowspan="6">
         <p><code>:pages</code></p>
         <p>Allows fine-grained control over all pages in the site</p>
       </td>
@@ -148,7 +148,7 @@ The complete list of available hooks:
       </td>
     </tr>
     <tr>
-      <td rowspan="5">
+      <td rowspan="6">
         <p><code>:documents</code></p>
         <p>Allows fine-grained control over all documents in the site including posts and documents in user-defined collections</p>
       </td>
@@ -203,7 +203,7 @@ The complete list of available hooks:
       </td>
     </tr>
     <tr>
-      <td rowspan="5">
+      <td rowspan="6">
         <p><code>:posts</code></p>
         <p>Allows fine-grained control over all posts in the site without affecting documents in user-defined collections</p>
       </td>
