@@ -46,6 +46,7 @@
   * Fixed: Wrong navigation style on the right side of news and docs pages (#9586)
   * Add redirect for step-by-step tutorial (#9593)
   * Add Jekyll 3.10.0 release post &amp; history (#9625)
+  * Fix minor docs error (#9641)
 
 ### Development Fixes
 
