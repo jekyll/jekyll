@@ -71,7 +71,7 @@ jobs:
     steps:
     - name: check-spelling
       id: spelling
-      uses: check-spelling/check-spelling@v0.0.21
+      uses: check-spelling/check-spelling@v0.0.22
       with:
         # This workflow runs in response to both `push` and `pull_request`, if there's an open `pull_request` in the same repository for a given branch, there's no reason to spend resources checking both the `push` and the `pull_request`, so this flag tells the action while running for the `push` to find the `pull_request` and stop working early:
         suppress_push_for_open_pull_request: 1
