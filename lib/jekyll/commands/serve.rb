@@ -71,7 +71,6 @@ module Jekyll
             end
 
             cmd.action do |_, opts|
-              opts["livereload_port"] ||= LIVERELOAD_PORT
               opts["serving"] = true
               opts["watch"]   = true unless opts.key?("watch")
 
@@ -94,6 +93,7 @@ module Jekyll
           opts = configuration_from_options(opts)
           destination = opts["destination"]
           if opts["livereload"]
+            opts["livereload_port"] ||= LIVERELOAD_PORT
             validate_options(opts)
             register_reload_hooks(opts)
           end
