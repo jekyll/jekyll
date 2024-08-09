@@ -10,6 +10,10 @@ on:
       - master
       - "*-stable"
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   ci:
     name: "Run Tests (${{ matrix.label }})"
@@ -37,11 +41,11 @@ jobs:
           ruby-version: ${{ matrix.ruby_version }}
           bundler-cache: true
       - name: Run Minitest based tests
-        run: bash script/test
+        run: script/test
       - name: Run Cucumber based tests
-        run: bash script/cucumber
+        run: script/cucumber
       - name: Generate and Build a new site
-        run: bash script/default-site
+        run: script/default-site
 
   xtras:
     name: "${{ matrix.job_name }} (Ruby ${{ matrix.ruby_version }})"
@@ -67,4 +71,4 @@ jobs:
           ruby-version: ${{ matrix.ruby_version }}
           bundler-cache: true
       - name: ${{ matrix.step_name }}
-        run: bash script/${{ matrix.script_file }}
+        run: script/${{ matrix.script_file }}
