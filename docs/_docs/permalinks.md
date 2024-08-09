@@ -57,7 +57,7 @@ Here's the full list of placeholders available:
   <tbody>
     <tr>
       <td>
-        <p><code>year</code></p>
+        <p><code>:year</code></p>
       </td>
       <td>
         <p>
@@ -68,7 +68,7 @@ Here's the full list of placeholders available:
     </tr>
     <tr>
       <td>
-        <p><code>short_year</code></p>
+        <p><code>:short_year</code></p>
       </td>
       <td>
         <p>
@@ -79,7 +79,7 @@ Here's the full list of placeholders available:
     </tr>
     <tr>
       <td>
-        <p><code>month</code></p>
+        <p><code>:month</code></p>
       </td>
       <td>
         <p>
@@ -90,7 +90,7 @@ Here's the full list of placeholders available:
     </tr>
     <tr>
       <td>
-        <p><code>i_month</code></p>
+        <p><code>:i_month</code></p>
       </td>
       <td>
         <p>
@@ -101,7 +101,7 @@ Here's the full list of placeholders available:
     </tr>
     <tr>
       <td>
-        <p><code>short_month</code></p>
+        <p><code>:short_month</code></p>
       </td>
       <td>
         <p>Three-letter month abbreviation, e.g. “Jan”.</p>
@@ -109,7 +109,7 @@ Here's the full list of placeholders available:
     </tr>
     <tr>
       <td>
-        <p><code>long_month</code></p>
+        <p><code>:long_month</code></p>
         <small>{% include docs_version_badge.html version="4.0" %}</small>
       </td>
       <td>
@@ -118,7 +118,7 @@ Here's the full list of placeholders available:
     </tr>
     <tr>
       <td>
-        <p><code>day</code></p>
+        <p><code>:day</code></p>
       </td>
       <td>
         <p>
@@ -129,7 +129,7 @@ Here's the full list of placeholders available:
     </tr>
     <tr>
       <td>
-        <p><code>i_day</code></p>
+        <p><code>:i_day</code></p>
       </td>
       <td>
         <p>
@@ -140,7 +140,7 @@ Here's the full list of placeholders available:
     </tr>
     <tr>
       <td>
-        <p><code>y_day</code></p>
+        <p><code>:y_day</code></p>
       </td>
       <td>
         <p>Ordinal day of the year from the post’s filename, with leading zeros. (001..366)</p>
@@ -148,7 +148,7 @@ Here's the full list of placeholders available:
     </tr>
     <tr>
       <td>
-        <p><code>w_year</code></p>
+        <p><code>:w_year</code></p>
         <small>{% include docs_version_badge.html version="4.0" %}</small>
       </td>
       <td>
@@ -157,7 +157,7 @@ Here's the full list of placeholders available:
     </tr>
     <tr>
       <td>
-        <p><code>week</code></p>
+        <p><code>:week</code></p>
         <small>{% include docs_version_badge.html version="4.0" %}</small>
       </td>
       <td>
@@ -166,7 +166,7 @@ Here's the full list of placeholders available:
     </tr>
     <tr>
       <td>
-        <p><code>w_day</code></p>
+        <p><code>:w_day</code></p>
         <small>{% include docs_version_badge.html version="4.0" %}</small>
       </td>
       <td>
@@ -175,7 +175,7 @@ Here's the full list of placeholders available:
     </tr>
     <tr>
       <td>
-        <p><code>short_day</code></p>
+        <p><code>:short_day</code></p>
         <small>{% include docs_version_badge.html version="4.0" %}</small>
       </td>
       <td>
@@ -184,7 +184,7 @@ Here's the full list of placeholders available:
     </tr>
     <tr>
       <td>
-        <p><code>long_day</code></p>
+        <p><code>:long_day</code></p>
         <small>{% include docs_version_badge.html version="4.0" %}</small>
       </td>
       <td>
@@ -193,7 +193,7 @@ Here's the full list of placeholders available:
     </tr>
     <tr>
       <td>
-        <p><code>hour</code></p>
+        <p><code>:hour</code></p>
       </td>
       <td>
         <p>
@@ -204,7 +204,7 @@ Here's the full list of placeholders available:
     </tr>
     <tr>
       <td>
-        <p><code>minute</code></p>
+        <p><code>:minute</code></p>
       </td>
       <td>
         <p>
@@ -214,7 +214,7 @@ Here's the full list of placeholders available:
     </tr>
     <tr>
       <td>
-        <p><code>second</code></p>
+        <p><code>:second</code></p>
       </td>
       <td>
         <p>
@@ -224,7 +224,7 @@ Here's the full list of placeholders available:
     </tr>
     <tr>
       <td>
-        <p><code>title</code></p>
+        <p><code>:title</code></p>
       </td>
       <td>
         <p>
@@ -235,7 +235,7 @@ Here's the full list of placeholders available:
     </tr>
     <tr>
       <td>
-        <p><code>slug</code></p>
+        <p><code>:slug</code></p>
       </td>
       <td>
         <p>
@@ -247,7 +247,7 @@ Here's the full list of placeholders available:
     </tr>
     <tr>
       <td>
-        <p><code>categories</code></p>
+        <p><code>:categories</code></p>
       </td>
       <td>
         <p>
@@ -260,7 +260,7 @@ Here's the full list of placeholders available:
     </tr>
     <tr>
       <td>
-        <p><code>slugified_categories</code></p>
+        <p><code>:slugified_categories</code></p>
         <small>{% include docs_version_badge.html version="4.1" %}</small>
       </td>
       <td>
