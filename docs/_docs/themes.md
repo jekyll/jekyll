@@ -1,5 +1,5 @@
 ---
-title: Themes
+title: Themesok
 permalink: /docs/themes/
 ---
 
