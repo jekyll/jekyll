@@ -1,4 +1,4 @@
----
+--- 
 title:  Command Line Usage
 permalink: /docs/usage/
 ---
