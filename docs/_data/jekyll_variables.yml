@@ -16,6 +16,9 @@ global:
     description: >-
       Layout specific information + the <a href="/docs/front-matter/">front matter</a>.
       Custom variables set via front matter in layouts will be available here.
+  - name: jekyll
+    description: >-
+      Jekyll-centric information will be available here. See below for details.
   - name: theme
     description: >-
       Theme-gem specific information as defined in the theme's gemspec. Useful for rendering
@@ -153,6 +156,12 @@ page:
     description: >-
       The previous post relative to the position of the current post in <code>site.posts</code>.
       Returns <code>nil</code> for the first entry.
+
+jekyll:
+  - name: jekyll.version
+    description: Version of Jekyll used to build the site.
+  - name: jekyll.environment
+    description: Value assigned to environment variable <code>JEKYLL_ENV</code> during a build.
 
 theme:
   - name: theme.root
