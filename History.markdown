@@ -48,6 +48,7 @@
   * Add Jekyll 3.10.0 release post &amp; history (#9625)
   * Fix minor docs error (#9641)
   * Update windows.md (#9644)
+  * Document keys of global variable `{{ jekyll }}` (#9653)
 
 ### Development Fixes
 
