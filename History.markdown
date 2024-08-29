@@ -76,6 +76,7 @@
   * Add csv to runtime dependency list (#9522)
   * Add a few more emeritus team members (#9535)
   * Make custom cop inherit `RuboCop::Cop::Base` (#9597)
+  * CI: Use JRuby 9.4.8.0 (#9654)
 
 ### Bug Fixes
 
