@@ -26,8 +26,8 @@ jobs:
             ruby_version: "3.1"
           - label: Ruby 3.2
             ruby_version: "3.2"
-          - label: JRuby 9.4.0.0
-            ruby_version: "jruby-9.4.0.0"
+          - label: JRuby 9.4.8.0
+            ruby_version: "jruby-9.4.8.0"
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
