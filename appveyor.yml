@@ -33,6 +33,7 @@ environment:
       TEST_SUITE: "cucumber"
 
 install:
+  - ridk enable
   - SET PATH=C:\Ruby%RUBY_FOLDER_VER%-x64\bin;%PATH%
   - bundle config set --local clean 'true'
   - bundle config set --local path 'vendor\bundle'
