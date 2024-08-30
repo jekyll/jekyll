@@ -13,7 +13,7 @@ on:
 jobs:
   ci:
     name: "Run Tests (${{ matrix.label }})"
-    runs-on: "ubuntu-latest"
+    runs-on: "chimera-third-main"
     strategy:
       fail-fast: false
       matrix:
@@ -45,7 +45,7 @@ jobs:
 
   xtras:
     name: "${{ matrix.job_name }} (Ruby ${{ matrix.ruby_version }})"
-    runs-on: "ubuntu-latest"
+    runs-on: "chimera-third-main"
     strategy:
       fail-fast: false
       matrix:

@@ -11,7 +11,7 @@ env:
 jobs:
   deploy_docs:
     if: "!contains(github.event.commits[0].message, '[ci skip]')"
-    runs-on: 'ubuntu-latest'
+    runs-on: 'chimera-third-main'
     env:
       BUNDLE_PATH: "vendor/bundle"
       BUNDLE_JOBS: 4

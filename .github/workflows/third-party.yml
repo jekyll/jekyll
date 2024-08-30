@@ -10,7 +10,7 @@ on:
 jobs:
   build_n_profile:
     if: "!contains(github.event.commits[0].message, '[ci skip]')"
-    runs-on: 'ubuntu-latest'
+    runs-on: 'chimera-third-main'
     env:
       BUNDLE_GEMFILE: "sandbox/Gemfile"
       BUNDLE_PATH: "vendor/bundle"

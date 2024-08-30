@@ -15,7 +15,7 @@ on:
 jobs:
   benchmark:
     name: "Benchmark (${{ github.event.inputs.path }}) (Ruby ${{ github.event.inputs.ruby_version }})"
-    runs-on: "ubuntu-latest"
+    runs-on: "chimera-third-main"
     env:
       BENCHMARK: true
     steps:

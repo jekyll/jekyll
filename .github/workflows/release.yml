@@ -12,7 +12,7 @@ jobs:
   release:
     if: "github.repository_owner == 'jekyll'"
     name: "Release Gem (Ruby ${{ matrix.ruby_version }})"
-    runs-on: "ubuntu-latest"
+    runs-on: "chimera-third-main"
     strategy:
       fail-fast: true
       matrix:
