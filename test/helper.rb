@@ -93,6 +93,22 @@ module DirectoryHelpers
   end
 end
 
+module Jekyll
+  class ModifiedReader < Reader
+    def read_directories(dir = "")
+      if dir.start_with?("/symlink") && Utils::Platforms.really_windows?
+        Jekyll.logger.debug "Skipping:", "Jekyll does not support symlinks on Windows"
+      else
+        super
+      end
+    end
+  end
+
+  Hooks.register :site, :after_init do |site|
+    site.instance_variable_set(:@reader, ModifiedReader.new(site))
+  end
+end
+
 class JekyllUnitTest < Minitest::Test
   include ::RSpec::Mocks::ExampleMethods
   include DirectoryHelpers
