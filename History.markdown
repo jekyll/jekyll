@@ -78,6 +78,7 @@
   * Add a few more emeritus team members (#9535)
   * Make custom cop inherit `RuboCop::Cop::Base` (#9597)
   * CI: Use JRuby 9.4.8.0 (#9654)
+  * Stop testing with Cucumber on JRuby (#9661)
 
 ### Bug Fixes
 
@@ -93,6 +94,7 @@
   * Correct rubocop lint errors (#9600)
   * Fix inexistent layout warning for the default 404 page (#9589)
   * 3.10-stable: Add webrick as a dependency (#9620)
+  * Relax version constraint on `wdm` in new Gemfile (#9662)
 
 ## 4.3.3 / 2023-12-27
 
