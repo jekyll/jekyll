@@ -26,8 +26,6 @@ jobs:
             ruby_version: "3.1"
           - label: Ruby 3.2
             ruby_version: "3.2"
-          - label: JRuby 9.4.8.0
-            ruby_version: "jruby-9.4.8.0"
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -44,24 +42,36 @@ jobs:
         run: bash script/default-site
 
   xtras:
-    name: "${{ matrix.job_name }} (Ruby ${{ matrix.ruby_version }})"
+    name: "${{ matrix.job_name }} (${{ matrix.setup_label }})"
     runs-on: "ubuntu-latest"
     strategy:
       fail-fast: false
       matrix:
         include:
+          - job_name: "Unit Test with JRuby"
+            setup_label: "JRuby 9.4.8.0"
+            step_name: "Run Minitest based tests"
+            script_file: "test"
+            ruby_version: "jruby-9.4.8.0"
+          - job_name: "Smoke Test with JRuby"
+            setup_label: "JRuby 9.4.8.0"
+            step_name: "Generate and Build a new site"
+            script_file: "default-site"
+            ruby_version: "jruby-9.4.8.0"
           - job_name: "Profile Docs Site"
+            setup_label: "Ruby 2.7"
             step_name: "Build and Profile docs site"
             script_file: "profile-docs"
             ruby_version: "2.7"
           - job_name: "Style Check"
+            setup_label: "Ruby 2.7"
             step_name: "Run RuboCop"
             script_file: "fmt"
             ruby_version: "2.7"
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-      - name: "Set up Ruby ${{ matrix.ruby_version }}"
+      - name: "Set up ${{ matrix.setup_label }}"
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby_version }}
