@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-09-05T23:10:38-07:00" />
+<meta property="article:published_time" content="2024-09-06T02:25:17-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Permalinks" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-09-05T23:10:38-07:00","datePublished":"2024-09-05T23:10:38-07:00","description":"Permalinks are the output path for your pages, posts, or collections. They allow you to structure the directories of your source code different from the directories in your output.","headline":"Permalinks","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/permalinks/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/permalinks/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-09-06T02:25:17-07:00","datePublished":"2024-09-06T02:25:17-07:00","description":"Permalinks are the output path for your pages, posts, or collections. They allow you to structure the directories of your source code different from the directories in your output.","headline":"Permalinks","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/permalinks/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/permalinks/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -184,7 +184,7 @@ aspects of the permalink style are ignored for the output.</p>
   <tbody>
     <tr>
       <td>
-        <p><code>year</code></p>
+        <p><code>:year</code></p>
       </td>
       <td>
         <p>
@@ -195,7 +195,7 @@ aspects of the permalink style are ignored for the output.</p>
     </tr>
     <tr>
       <td>
-        <p><code>short_year</code></p>
+        <p><code>:short_year</code></p>
       </td>
       <td>
         <p>
@@ -206,7 +206,7 @@ aspects of the permalink style are ignored for the output.</p>
     </tr>
     <tr>
       <td>
-        <p><code>month</code></p>
+        <p><code>:month</code></p>
       </td>
       <td>
         <p>
@@ -217,7 +217,7 @@ aspects of the permalink style are ignored for the output.</p>
     </tr>
     <tr>
       <td>
-        <p><code>i_month</code></p>
+        <p><code>:i_month</code></p>
       </td>
       <td>
         <p>
@@ -228,7 +228,7 @@ aspects of the permalink style are ignored for the output.</p>
     </tr>
     <tr>
       <td>
-        <p><code>short_month</code></p>
+        <p><code>:short_month</code></p>
       </td>
       <td>
         <p>Three-letter month abbreviation, e.g. “Jan”.</p>
@@ -236,7 +236,7 @@ aspects of the permalink style are ignored for the output.</p>
     </tr>
     <tr>
       <td>
-        <p><code>long_month</code></p>
+        <p><code>:long_month</code></p>
         <small><span class="version-badge" title="This feature is available starting version 4.0">4.0</span>
 </small>
       </td>
@@ -246,7 +246,7 @@ aspects of the permalink style are ignored for the output.</p>
     </tr>
     <tr>
       <td>
-        <p><code>day</code></p>
+        <p><code>:day</code></p>
       </td>
       <td>
         <p>
@@ -257,7 +257,7 @@ aspects of the permalink style are ignored for the output.</p>
     </tr>
     <tr>
       <td>
-        <p><code>i_day</code></p>
+        <p><code>:i_day</code></p>
       </td>
       <td>
         <p>
@@ -268,7 +268,7 @@ aspects of the permalink style are ignored for the output.</p>
     </tr>
     <tr>
       <td>
-        <p><code>y_day</code></p>
+        <p><code>:y_day</code></p>
       </td>
       <td>
         <p>Ordinal day of the year from the post’s filename, with leading zeros. (001..366)</p>
@@ -276,7 +276,7 @@ aspects of the permalink style are ignored for the output.</p>
     </tr>
     <tr>
       <td>
-        <p><code>w_year</code></p>
+        <p><code>:w_year</code></p>
         <small><span class="version-badge" title="This feature is available starting version 4.0">4.0</span>
 </small>
       </td>
@@ -286,7 +286,7 @@ aspects of the permalink style are ignored for the output.</p>
     </tr>
     <tr>
       <td>
-        <p><code>week</code></p>
+        <p><code>:week</code></p>
         <small><span class="version-badge" title="This feature is available starting version 4.0">4.0</span>
 </small>
       </td>
@@ -296,7 +296,7 @@ aspects of the permalink style are ignored for the output.</p>
     </tr>
     <tr>
       <td>
-        <p><code>w_day</code></p>
+        <p><code>:w_day</code></p>
         <small><span class="version-badge" title="This feature is available starting version 4.0">4.0</span>
 </small>
       </td>
@@ -306,7 +306,7 @@ aspects of the permalink style are ignored for the output.</p>
     </tr>
     <tr>
       <td>
-        <p><code>short_day</code></p>
+        <p><code>:short_day</code></p>
         <small><span class="version-badge" title="This feature is available starting version 4.0">4.0</span>
 </small>
       </td>
@@ -316,7 +316,7 @@ aspects of the permalink style are ignored for the output.</p>
     </tr>
     <tr>
       <td>
-        <p><code>long_day</code></p>
+        <p><code>:long_day</code></p>
         <small><span class="version-badge" title="This feature is available starting version 4.0">4.0</span>
 </small>
       </td>
@@ -326,7 +326,7 @@ aspects of the permalink style are ignored for the output.</p>
     </tr>
     <tr>
       <td>
-        <p><code>hour</code></p>
+        <p><code>:hour</code></p>
       </td>
       <td>
         <p>
@@ -337,7 +337,7 @@ aspects of the permalink style are ignored for the output.</p>
     </tr>
     <tr>
       <td>
-        <p><code>minute</code></p>
+        <p><code>:minute</code></p>
       </td>
       <td>
         <p>
@@ -347,7 +347,7 @@ aspects of the permalink style are ignored for the output.</p>
     </tr>
     <tr>
       <td>
-        <p><code>second</code></p>
+        <p><code>:second</code></p>
       </td>
       <td>
         <p>
@@ -357,7 +357,7 @@ aspects of the permalink style are ignored for the output.</p>
     </tr>
     <tr>
       <td>
-        <p><code>title</code></p>
+        <p><code>:title</code></p>
       </td>
       <td>
         <p>
@@ -368,7 +368,7 @@ aspects of the permalink style are ignored for the output.</p>
     </tr>
     <tr>
       <td>
-        <p><code>slug</code></p>
+        <p><code>:slug</code></p>
       </td>
       <td>
         <p>
@@ -380,7 +380,7 @@ aspects of the permalink style are ignored for the output.</p>
     </tr>
     <tr>
       <td>
-        <p><code>categories</code></p>
+        <p><code>:categories</code></p>
       </td>
       <td>
         <p>
@@ -393,7 +393,7 @@ aspects of the permalink style are ignored for the output.</p>
     </tr>
     <tr>
       <td>
-        <p><code>slugified_categories</code></p>
+        <p><code>:slugified_categories</code></p>
         <small><span class="version-badge" title="This feature is available starting version 4.1">4.1</span>
 </small>
       </td>
