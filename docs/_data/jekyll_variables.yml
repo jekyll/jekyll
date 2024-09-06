@@ -98,38 +98,43 @@ site:
 page:
   - name: page.content
     description: >-
-      The content of the Page, rendered or un-rendered depending upon
-      what Liquid is being processed and what <code>page</code> is.
+      The content of the Page, rendered or un-rendered depending upon what Liquid is being processed
+      and what <code>page</code> is.
   - name: page.title
     description: >-
-      The title of the Page.
+      The title of the Page or Document resource.
   - name: page.excerpt
     description: >-
-      The un-rendered excerpt of a document.
+      The un-rendered excerpt of a Page or Document. Can be overridden in the
+      <a href="/docs/front-matter/">front matter</a> and disabled atoomically by setting an empty
+      as <code>excerpt_separator</code> key either in the front matter of desired resource or
+      disable site-wide by setting the same as a top-level key in the config file.
   - name: page.url
     description: >-
       The URL of the Post without the domain, but with a leading slash, e.g.
       <code>/2008/12/14/my-post.html</code>
   - name: page.date
     description: >-
-      The Date assigned to the Post. This can be overridden in a Post’s front matter by specifying
+      The Date assigned to the Post. This can be overridden in a Post's front matter by specifying
       a new date/time in the format <code>YYYY-MM-DD HH:MM:SS</code> (assuming UTC), or
       <code>YYYY-MM-DD HH:MM:SS +/-TTTT</code> (to specify a time zone using an offset from UTC.
-      e.g. <code>2008-12-14 10:30:00 +0900</code>).
+      e.g. <code>2008-12-14 10:30:00 +0900</code>). Not applicable to Pages.
   - name: page.id
     description: >-
       An identifier unique to a document in a Collection or a Post (useful in RSS feeds). e.g.
-      <code>/2008/12/14/my-post</code><code>/my-collection/my-document</code>
+      <code>/2008/12/14/my-post</code><code>/my-collection/my-document</code>. Not applicable to
+      Pages.
   - name: page.categories
     description: >-
       The list of categories to which this post belongs. Categories are derived from the directory
       structure above the <code>_posts</code> directory. For example, a post at
       <code>/work/code/_posts/2008-12-24-closures.md</code> would have this field set to
       <code>['work', 'code']</code>. These can also be specified in the
-      <a href="/docs/front-matter/">front matter</a>.
+      <a href="/docs/front-matter/">front matter</a>. Note: Path-based categories may not work for
+      documents in user-defined collections.
   - name: page.collection
     description: >-
-      The label of the collection to which this document belongs. e.g. <code>posts</code> for a post, or
+      The label of the collection to which a Document belongs. e.g. <code>posts</code> for a post, or
       <code>puppies</code> for a document at path <code>_puppies/rover.md</code>. If not part of a
       collection, an empty string is returned.
   - name: page.tags
@@ -138,16 +143,29 @@ page:
       <a href="/docs/front-matter/">front matter</a>.
   - name: page.dir
     description: >-
-      The path between the source directory and the file of the post or page,  e.g.
-      <code>/pages/</code>.
-      This can be overridden by <code>permalink</code> in the <a href="/docs/front-matter/">front matter</a>.
+      The path between the source directory and the file of a page, e.g. <code>/pages/</code> when the page
+      is at path <code>pages/about.md</code> relative to the source directory. This is derived from the
+      <code>url</code> attribute of the page and can therefore be overridden via the <code>permalink</code>
+      key in the <a href="/docs/front-matter/">front matter</a>. NOTE: This variable is not applicable to
+      posts and documents in user-defined collections. Use the <code>categories</code> variable to get similar
+      info for posts.
   - name: page.name
     description: >-
       The filename of the post or page, e.g. <code>about.md</code>
   - name: page.path
     description: >-
-      The path to the raw post or page. Example usage: Linking back to the page or post’s source
-      on GitHub. This can be overridden in the <a href="/docs/front-matter/">front matter</a>.
+      The path to the raw post or page, relative to the source directory. Example usage: Using a combination
+      of the repository's blob URL and this page variable to get the full URL to the file in the repository.
+      This can be overridden in the <a href="/docs/front-matter/">front matter</a>.
+  - name: page.slug
+    description: >-
+      The filename of a Document resource without its extension (or date prefixes for a post). For example,
+      slug for a post at URL <code>/2017/02/22/my-new-post.html</code>, would be <code>my-new-post</code>.
+      Can be overridden in the <a href="/docs/front-matter/">front matter</a>.
+  - name: page.ext
+    description: >-
+      The file extension of a Document resource. For example, <code>.html</code>. Can be overridden in the
+      <a href="/docs/front-matter/">front matter</a>.
   - name: page.next
     description: >-
       The next post relative to the position of the current post in <code>site.posts</code>.
