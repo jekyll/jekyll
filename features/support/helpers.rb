@@ -18,6 +18,13 @@ class Paths
   def self.source_dir; SOURCE_DIR; end
 end
 
+class Platform
+  REF_FILE = File.expand_path("../../test/source/symlink-test/symlinked-file", __dir__)
+
+  def self.supports_symlink?; File.symlink?(REF_FILE); end
+end
+
+
 #
 
 def file_content_from_hash(input_hash)

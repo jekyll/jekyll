@@ -287,28 +287,28 @@ end
 
 #
 
-Then(%r!^I should (not )?see "(.*)" in "(.*)" if on Windows$!) do |negative, text, file|
+Then(%r!^I should (not )?see "(.*)" in "(.*)" if platform does not support symlinks$!) do |negative, text, file|
   step %(the "#{file}" file should exist)
   regexp = Regexp.new(text, Regexp::MULTILINE)
   if negative.nil? || negative.empty?
-    if Jekyll::Utils::Platforms.really_windows?
-      expect(file_contents(file)).to match regexp
-    else
+    if Platform.supports_symlink?
       expect(file_contents(file)).not_to match regexp
+    else
+      expect(file_contents(file)).to match regexp
     end
   end
 end
 
 #
 
-Then(%r!^I should (not )?see "(.*)" in "(.*)" unless Windows$!) do |negative, text, file|
+Then(%r!^I should (not )?see "(.*)" in "(.*)" if platform supports symlinks$!) do |negative, text, file|
   step %(the "#{file}" file should exist)
   regexp = Regexp.new(text, Regexp::MULTILINE)
   if negative.nil? || negative.empty?
-    if Jekyll::Utils::Platforms.really_windows?
-      expect(file_contents(file)).not_to match regexp
-    else
+    if Platform.supports_symlink?
       expect(file_contents(file)).to match regexp
+    else
+      expect(file_contents(file)).not_to match regexp
     end
   end
 end
