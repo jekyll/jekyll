@@ -1,15 +1,13 @@
 name: Third-Party Repository Profiling
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
     branches:
       - master
+
 jobs:
   build_n_profile:
-    if: "!contains(github.event.commits[0].message, '[ci skip]')"
+    if: "contains(github.event.commits[0].message, '[3P Profile]')"
     runs-on: 'ubuntu-latest'
     env:
       BUNDLE_GEMFILE: "sandbox/Gemfile"

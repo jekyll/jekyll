@@ -5,10 +5,14 @@ on:
     branches:
       - master
       - "*-stable"
+    paths-ignore:
+      - "docs/**"
   pull_request:
     branches:
       - master
       - "*-stable"
+    paths-ignore:
+      - "docs/**"
 
 jobs:
   ci:
