@@ -3,8 +3,53 @@
 ### Minor Enhancements
 
   * Allow marking specific highlighted lines via Liquid (#9138)
-  * 3.9-stable: allow Pages to be Excerpted (#9550)
-  * Backport add-csv-dependency from #9522 to Jekyll 3 (#9616)
+  * Add csv to runtime dependency list (#9522)
+  * Bump the minimum ruby version to 2.7 (#9525)
+
+### Bug Fixes
+
+  * Optimize default front matter using `File.fnmatch?` (#9185)
+  * Remove totals in profile table properly (#9186)
+  * Optimize `Site#each_site_file` (#9187)
+  * Rename sass partial created for new blank site (#9257)
+  * Fix `jekyll serve --detach` with jekyll-sass-converter 3.x (#9304)
+  * Handle TypeError from `where` filter gracefully (#9292)
+  * Add support for upcoming logger 1.4.3 (#9392)
+  * Fix typo in devcontainer.json (#9364)
+  * Correct rubocop lint errors (#9600)
+  * Fix inexistent layout warning for the default 404 page (#9589)
+  * Relax version constraint on `wdm` in new Gemfile (#9662)
+
+### Development Fixes
+
+  * Cleanup highlight tag (#9177)
+  * Run tests in utc (#9168)
+  * Lock Ruby in CI to v3.1.2 and bump JRuby to v9.4.0.0 (#9196)
+  * Update sass related tests for jekyll-sass-converter 3.x (#9223)
+  * Split `test/test_tags.rb` into multiple files (#9230)
+  * test: use hash explicitly for Struct initializer for ruby 3.2 (#9237)
+  * script/default-site: accept flags for `jekyll new` (#9259)
+  * Bump check-spelling/check-spelling from 0.0.20 to 0.0.21 (#9205)
+  * Use check-spelling/check-spelling@v0.0.21 (#9199)
+  * Bump RuboCop to v1.45.x (#9305)
+  * Bump Rubocop to version 1.48.x (#9326)
+  * Bump versions of ruby &amp; nodejs in devcontainer (#9360)
+  * Bump rubocop version to 1.52.x (#9361)
+  * Upgrade RuboCop to 1.54 (#9401)
+  * Add CodeQL workflow (#9397)
+  * Bump actions/checkout from 3 to 4 (#9442)
+  * Test suite uses shoulda-context only. (#9441)
+  * Keep activesupport at version 7.0.x (#9469)
+  * Bump Rubocop to 1.56.4 (#9459)
+  * Configure dependabot to handle rubygems dependencies (#9445)
+  * Update rubocop gem (#9476)
+  * Fix Performance/StringIdentifierArgument violation in site.rb and allow activesupport 6 for windows tests (#9512)
+  * Add a few more emeritus team members (#9535)
+  * Make custom cop inherit `RuboCop::Cop::Base` (#9597)
+  * CI: Use JRuby 9.4.8.0 (#9654)
+  * Stop testing with Cucumber on JRuby (#9661)
+  * Windows CI on GitHub Actions (#9659)
+  * Run GitHub Actions only if needed (#9664)
 
 ### Documentation
 
@@ -50,54 +95,6 @@
   * Update windows.md (#9644)
   * Document keys of global variable `{{ jekyll }}` (#9653)
   * Fix incorrect and inconsistent variables in the permalinks page (#9591)
-
-### Development Fixes
-
-  * Cleanup highlight tag (#9177)
-  * Run tests in utc (#9168)
-  * Lock Ruby in CI to v3.1.2 and bump JRuby to v9.4.0.0 (#9196)
-  * Update sass related tests for jekyll-sass-converter 3.x (#9223)
-  * Split `test/test_tags.rb` into multiple files (#9230)
-  * test: use hash explicitly for Struct initializer for ruby 3.2 (#9237)
-  * script/default-site: accept flags for `jekyll new` (#9259)
-  * Bump check-spelling/check-spelling from 0.0.20 to 0.0.21 (#9205)
-  * Use check-spelling/check-spelling@v0.0.21 (#9199)
-  * Bump RuboCop to v1.45.x (#9305)
-  * Bump Rubocop to version 1.48.x (#9326)
-  * Bump versions of ruby &amp; nodejs in devcontainer (#9360)
-  * Bump rubocop version to 1.52.x (#9361)
-  * Upgrade RuboCop to 1.54 (#9401)
-  * Add CodeQL workflow (#9397)
-  * Bump actions/checkout from 3 to 4 (#9442)
-  * Test suite uses shoulda-context only. (#9441)
-  * Keep activesupport at version 7.0.x (#9469)
-  * Bump Rubocop to 1.56.4 (#9459)
-  * Configure dependabot to handle rubygems dependencies (#9445)
-  * Update rubocop gem (#9476)
-  * Fix Performance/StringIdentifierArgument violation in site.rb and allow activesupport 6 for windows tests (#9512)
-  * Add csv to runtime dependency list (#9522)
-  * Add a few more emeritus team members (#9535)
-  * Make custom cop inherit `RuboCop::Cop::Base` (#9597)
-  * CI: Use JRuby 9.4.8.0 (#9654)
-  * Stop testing with Cucumber on JRuby (#9661)
-  * Windows CI on GitHub Actions (#9659)
-  * Run GitHub Actions only if needed (#9664)
-
-### Bug Fixes
-
-  * Optimize default front matter using `File.fnmatch?` (#9185)
-  * Remove totals in profile table properly (#9186)
-  * Optimize `Site#each_site_file` (#9187)
-  * Rename sass partial created for new blank site (#9257)
-  * Fix `jekyll serve --detach` with jekyll-sass-converter 3.x (#9304)
-  * Handle TypeError from `where` filter gracefully (#9292)
-  * Add support for upcoming logger 1.4.3 (#9392)
-  * Fix typo in devcontainer.json (#9364)
-  * Bump the minimum ruby version to 2.7 (#9525)
-  * Correct rubocop lint errors (#9600)
-  * Fix inexistent layout warning for the default 404 page (#9589)
-  * 3.10-stable: Add webrick as a dependency (#9620)
-  * Relax version constraint on `wdm` in new Gemfile (#9662)
 
 ## 4.3.3 / 2023-12-27
 
