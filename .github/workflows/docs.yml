@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    paths:
+      - "docs/**"
 
 env:
   RUBY_VERSION: 2.7

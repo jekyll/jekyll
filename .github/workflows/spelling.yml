@@ -34,12 +34,6 @@ name: Spell Check
 #   For background, see: https://github.com/check-spelling/check-spelling/wiki/Feature:-Update-with-deploy-key
 
 on:
-  push:
-    branches:
-      - master
-      - "*-stable"
-    tags-ignore:
-      - "**"
   # Switch from `pull_request_target` event to reduce distraction from comments
   # regarding errors reported in unmodified files.
   pull_request:
