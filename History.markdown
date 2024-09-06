@@ -80,6 +80,7 @@
   * CI: Use JRuby 9.4.8.0 (#9654)
   * Stop testing with Cucumber on JRuby (#9661)
   * Windows CI on GitHub Actions (#9659)
+  * Run GitHub Actions only if needed (#9664)
 
 ### Bug Fixes
 
