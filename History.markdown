@@ -49,6 +49,7 @@
   * Fix minor docs error (#9641)
   * Update windows.md (#9644)
   * Document keys of global variable `{{ jekyll }}` (#9653)
+  * Fix incorrect and inconsistent variables in the permalinks page (#9591)
 
 ### Development Fixes
 
