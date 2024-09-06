@@ -79,6 +79,7 @@
   * Make custom cop inherit `RuboCop::Cop::Base` (#9597)
   * CI: Use JRuby 9.4.8.0 (#9654)
   * Stop testing with Cucumber on JRuby (#9661)
+  * Windows CI on GitHub Actions (#9659)
 
 ### Bug Fixes
 
