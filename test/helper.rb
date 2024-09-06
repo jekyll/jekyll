@@ -93,6 +93,37 @@ module DirectoryHelpers
   end
 end
 
+module Jekyll
+  #
+  # --- NOTE: ---
+  #
+  # This monkey-patch was introduced because GitHub Actions on Windows acknowledges symlinked test
+  # file `test/source/symlink-test/symlinked-file-outside-source` but errors out since the linked
+  # location `/etc/passwd` does not exist on Windows.
+  #
+  # --- TODO: ---
+  #
+  # Consider having the `symlinked-file-outside-source` point to a file that is outside the
+  # `source_dir` (defaults to `test/source`) yet is certain to exist on tested platforms.
+  # For example, `jekyll.gemspec` is a good candidate.
+  #
+  # This monkey-patch will then no longer be necessary.
+  #
+  class ModifiedReader < Reader
+    def read_directories(dir = "")
+      if dir.start_with?("/symlink") && Utils::Platforms.really_windows?
+        Jekyll.logger.debug "Skipping:", "Jekyll does not support symlinks on Windows"
+      else
+        super
+      end
+    end
+  end
+
+  Hooks.register :site, :after_init do |site|
+    site.instance_variable_set(:@reader, ModifiedReader.new(site))
+  end
+end
+
 class JekyllUnitTest < Minitest::Test
   include ::RSpec::Mocks::ExampleMethods
   include DirectoryHelpers

@@ -12,27 +12,28 @@ on:
 
 jobs:
   ci:
-    name: "Run Tests (${{ matrix.label }})"
-    runs-on: "ubuntu-latest"
+    name: "Run Tests (${{ matrix.ruby.label }} on ${{ matrix.os.label }})"
+    runs-on: ${{ matrix.os.image }}
     strategy:
       fail-fast: false
       matrix:
-        include:
+        ruby:
           - label: Ruby 2.7
-            ruby_version: "2.7"
-          - label: Ruby 3.0
-            ruby_version: "3.0"
-          - label: Ruby 3.1
-            ruby_version: "3.1"
-          - label: Ruby 3.2
-            ruby_version: "3.2"
+            version: "2.7"
+          - label: Ruby 3.3
+            version: "3.3"
+        os:
+          - label: Linux
+            image: "ubuntu-latest"
+          - label: Windows
+            image: "windows-latest"
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-      - name: "Set up ${{ matrix.label }}"
+      - name: "Set up ${{ matrix.ruby.label }}"
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby_version }}
+          ruby-version: ${{ matrix.ruby.version }}
           bundler-cache: true
       - name: Run Minitest based tests
         run: bash script/test

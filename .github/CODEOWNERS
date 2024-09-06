@@ -65,8 +65,6 @@
 # @jekyll/stability
 Gemfile                              @jekyll/stability
 *.gemspec                            @jekyll/stability
-.travis.yml                          @jekyll/stability
-appveyor.yml                         @jekyll/stability
 /lib/jekyll/configuration.rb         @jekyll/stability
 /lib/jekyll/deprecator.rb            @jekyll/stability
 /lib/jekyll/frontmatter_defaults.rb  @jekyll/stability
