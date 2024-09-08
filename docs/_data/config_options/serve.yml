@@ -34,6 +34,7 @@
 
 - name: Live reload port
   description: Port for LiveReload to listen on.
+  option: "livereload_port: PORT"
   flag: "--livereload-port PORT"
 
 
