@@ -96,6 +96,7 @@
   * Document keys of global variable `{{ jekyll }}` (#9653)
   * Fix incorrect and inconsistent variables in the permalinks page (#9591)
   * Fix lapses in documentation of page variables (#9667)
+  * Add note about VSCode warning for SCSS files (#9609)
 
 ## 4.3.3 / 2023-12-27
 
