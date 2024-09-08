@@ -33,7 +33,9 @@
 
 
 - name: Live reload port
-  description: Port for LiveReload to listen on.
+  description: >-
+    Port for LiveReload to listen on.<br/><em>Ability to override via config file introduced in
+    <span class="version-badge">4.4.0</span></em>.
   option: "livereload_port: PORT"
   flag: "--livereload-port PORT"
 
