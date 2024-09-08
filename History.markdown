@@ -5,6 +5,7 @@
   * Allow marking specific highlighted lines via Liquid (#9138)
   * Add csv to runtime dependency list (#9522)
   * Bump the minimum ruby version to 2.7 (#9525)
+  * Acknowledge `livereload_port` from site config too (#9606)
 
 ### Bug Fixes
 
