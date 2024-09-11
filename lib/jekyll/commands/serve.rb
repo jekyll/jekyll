@@ -28,7 +28,7 @@ module Jekyll
                                      "the server is started.",],
           "livereload"           => ["-l", "--livereload",
                                      "Use LiveReload to automatically refresh browsers",],
-          "livereload_ignore"    => ["--livereload-ignore ignore GLOB1[,GLOB2[,...]]",
+          "livereload_ignore"    => ["--livereload-ignore GLOB1[,GLOB2[,...]]",
                                      Array,
                                      "Files for LiveReload to ignore. " \
                                      "Remember to quote the values so your shell " \
@@ -138,7 +138,6 @@ module Jekyll
           end
         end
 
-        # rubocop:disable Metrics/AbcSize
         def register_reload_hooks(opts)
           require_relative "serve/live_reload_reactor"
           @reload_reactor = LiveReloadReactor.new
@@ -160,7 +159,7 @@ module Jekyll
             if @changed_pages && @reload_reactor && @reload_reactor.running?
               ignore, @changed_pages = @changed_pages.partition do |p|
                 Array(opts["livereload_ignore"]).any? do |filter|
-                  File.fnmatch(filter, Jekyll.sanitized_path(p.relative_path))
+                  File.fnmatch(filter, p.relative_path)
                 end
               end
               Jekyll.logger.debug "LiveReload:", "Ignoring #{ignore.map(&:relative_path)}"
@@ -169,7 +168,6 @@ module Jekyll
             @changed_pages = nil
           end
         end
-        # rubocop:enable Metrics/AbcSize
 
         # Do a base pre-setup of WEBRick so that everything is in place
         # when we get ready to party, checking for an setting up an error page
