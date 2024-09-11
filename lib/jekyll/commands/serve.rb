@@ -28,7 +28,7 @@ module Jekyll
                                      "the server is started.",],
           "livereload"           => ["-l", "--livereload",
                                      "Use LiveReload to automatically refresh browsers",],
-          "livereload_ignore"    => ["--livereload-ignore ignore GLOB1[,GLOB2[,...]]",
+          "livereload_ignore"    => ["--livereload-ignore GLOB1[,GLOB2[,...]]",
                                      Array,
                                      "Files for LiveReload to ignore. " \
                                      "Remember to quote the values so your shell " \
