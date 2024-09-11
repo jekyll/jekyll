@@ -20,6 +20,7 @@
   * Correct rubocop lint errors (#9600)
   * Fix inexistent layout warning for the default 404 page (#9589)
   * Relax version constraint on `wdm` in new Gemfile (#9662)
+  * Fix `--livereload-ignore` option (#9570)
 
 ### Development Fixes
 
