@@ -100,6 +100,10 @@
   * Fix lapses in documentation of page variables (#9667)
   * Add note about VSCode warning for SCSS files (#9609)
 
+### Site Enhancements
+
+  * Extract markup for `Improve this page` into an inclusion (#9675)
+
 ## 4.3.3 / 2023-12-27
 
 ### Bug Fixes
