@@ -8,10 +8,7 @@ layout: default
     <div class="unit four-fifths">
       <article>
         <header class="tutorial-header">
-          <div class="improve right hide-on-mobiles">
-            <a href="https://github.com/jekyll/jekyll/edit/master/docs/{{ page.path }}"><i
-               class="fa fa-pencil"></i> &nbsp;Improve this page</a>
-          </div>
+          {% include improve_doc_link.html %}
           <h1 class="tutorial-title">{{ page.title }}</h1>
           {% assign author = page.author %}
           {% if author %}
