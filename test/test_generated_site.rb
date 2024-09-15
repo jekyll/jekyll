@@ -92,6 +92,42 @@ class TestGeneratedSite < JekyllUnitTest
       assert_equal 5, @site.posts.size
     end
 
+    should "generate posts that don't include drafts" do
+      assert_equal false, @site.posts.map(&:title).include?("Properties Draft")
+    end
+
+    should "ensure limit posts is 0 or more" do
+      assert_raises ArgumentError do
+        clear_dest
+        @site = fixture_site("limit_posts" => -1)
+      end
+    end
+
+    should "acceptable limit post is 0" do
+      clear_dest
+      assert(
+        fixture_site("limit_posts" => 0),
+        "Couldn't create a site with limit_posts=0."
+      )
+    end
+  end
+
+  context "generating limited posts with drafts" do
+    setup do
+      clear_dest
+      @site = fixture_site("limit_posts" => 5, "show_drafts" => true)
+      @site.process
+      @index = File.read(dest_dir("index.html"))
+    end
+
+    should "generate only the specified number of posts" do
+      assert_equal 5, @site.posts.size
+    end
+
+    should "generate posts that include drafts" do
+      assert_equal true, @site.posts.map(&:title).include?("Properties Draft")
+    end
+
     should "ensure limit posts is 0 or more" do
       assert_raises ArgumentError do
         clear_dest
