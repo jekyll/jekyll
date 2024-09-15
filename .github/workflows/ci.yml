@@ -18,8 +18,6 @@ jobs:
   ci:
     name: "Run Tests (${{ matrix.ruby.label }} on ${{ matrix.os.label }})"
     runs-on: ${{ matrix.os.image }}
-    env:
-      TZ: GMT
     strategy:
       fail-fast: false
       matrix:
