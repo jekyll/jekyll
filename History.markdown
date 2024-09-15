@@ -99,6 +99,7 @@
   * Fix incorrect and inconsistent variables in the permalinks page (#9591)
   * Fix lapses in documentation of page variables (#9667)
   * Add note about VSCode warning for SCSS files (#9609)
+  * docs: Fix incorrect parentheses (#9629)
 
 ### Site Enhancements
 
