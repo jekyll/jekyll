@@ -100,6 +100,7 @@
   * Fix lapses in documentation of page variables (#9667)
   * Add note about VSCode warning for SCSS files (#9609)
   * docs: Fix incorrect parentheses (#9629)
+  * docs: Fix of a bug in the pagination section (#8890)
 
 ### Site Enhancements
 
