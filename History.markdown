@@ -108,6 +108,17 @@
 
   * Extract markup for `Improve this page` into an inclusion (#9675)
 
+## 4.3.4 / 2024-09-16
+
+### Bug Fixes
+
+  * Backport #9662 for v4.3.x: Relax version constraint on wdm in new Gemfile (#9683)
+  * Backport #9680 for v4.3.x: Render theme-gem root only in development (#9684)
+
+### Development Fixes
+
+  * Sync workflows with counterparts on `master` (#9681)
+
 ## 4.3.3 / 2023-12-27
 
 ### Bug Fixes
