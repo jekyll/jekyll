@@ -1,5 +1,9 @@
 ## HEAD
 
+### Bug Fixes
+
+  * Backport #9662 for v4.3.x: Relax version constraint on wdm in new Gemfile (#9683)
+
 ### Development Fixes
 
   * Sync workflows with counterparts on `master` (#9681)
