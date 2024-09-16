@@ -13,7 +13,7 @@
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Releases | Jekyll • Simple, blog-aware, static sites</title>
-<meta name="generator" content="Jekyll v4.3.3" />
+<meta name="generator" content="Jekyll v4.3.4" />
 <meta property="og:title" content="Releases" />
 <meta name="author" content="all" />
 <meta property="og:locale" content="en_US" />
@@ -62,7 +62,7 @@
       <input type="text" id="docsearch-input" placeholder="Search the docs…" aria-label="Search"></div>
     <div class="meta hide-on-mobiles">
       <ul>
-        <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.3.3">v4.3.3</a></li>
+        <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.3.4">v4.3.4</a></li>
         <li><a href="https://github.com/jekyll/jekyll">GitHub</a></li>
       </ul>
     </div>
@@ -83,6 +83,7 @@
     <option value="">Navigate the blog…</option>
     <option value="/news/">Home</option>
     <optgroup label="posts">
+      <option value="/news/2024/09/16/jekyll-4-3-4-released/">Jekyll 4.3.4 Released</option>
       <option value="/news/2024/06/23/jekyll-3-10-0-released/">Jekyll 3.10.0 Released</option>
       <option value="/news/2023/12/28/jekyll-3-9-4-released/">Jekyll 3.9.4 Released</option>
       <option value="/news/2023/12/27/jekyll-4-3-3-released/">Jekyll 4.3.3 Released</option>
@@ -186,26 +187,48 @@
   </select>
 </div><div class="unit four-fifths"><article itemscope itemtype="http://schema.org/NewsArticle">
   <h2 itemprop="headline">
-    <a href="/news/2024/06/23/jekyll-3-10-0-released/">Jekyll 3.10.0 Released</a>
+    <a href="/news/2024/09/16/jekyll-4-3-4-released/">Jekyll 4.3.4 Released</a>
   </h2>
   <span class="post-category">
     <span class="label">release</span>
   </span>
   <div class="post-meta">
-    <span class="post-date" itemprop="datePublished" content="2024-06-23">23 Jun 2024</span>
-    <a class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person" target="_blank" href="https://github.com/parkr">
-      <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
+    <span class="post-date" itemprop="datePublished" content="2024-09-16">16 Sep 2024</span>
+    <a class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person" target="_blank" href="https://github.com/ashmaroli">
+      <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name" itemprop="name">ashmaroli</span>
     </a>
   </div>
-  <div class="post-content" itemprop="articleBody"><p>As Ruby continues to march on, the maintainers have made the decision to
-drop some previously-bundled gems. This release makes Jekyll depend
-directly on those gems so that whether your Ruby installation has them
-bundled or not, your experience can continue uninterrupted.</p>
+  <div class="post-content" itemprop="articleBody"><p>Hello Jekyllers!</p>
 
-<p>More details <a href="/docs/history/#v3-10-0">are in the changelog</a>.</p>
+<p>Publishing a small bug-fix release with the following patches:</p>
 
-<p>Happy Jekylling!</p>
+<ul>
+  <li>Relax version-constraint on gem <code class="language-plaintext highlighter-rouge">wdm</code> in Gemfile created by <code class="language-plaintext highlighter-rouge">jekyll new</code>.</li>
+  <li>Patch <code class="language-plaintext highlighter-rouge">Jekyll::Drops::ThemeDrop#root</code> to render absolute path to theme-gem only if <code class="language-plaintext highlighter-rouge">JEKYLL_ENV</code> is explicitly set
+to string <code class="language-plaintext highlighter-rouge">development</code>.</li>
+</ul>
+
+<p>That is all for now.
+Happy Jekyllin’!!</p>
 </div>
+</article>
+<article itemscope itemtype="http://schema.org/Article">
+  <div class="cell-left">
+    <span class="post-category">
+      <span class="label">release</span>
+    </span>
+  </div>
+  <div class="cell-right">
+    <div class="post-meta">
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2024/06/23/jekyll-3-10-0-released/" itemprop="url">Jekyll 3.10.0 Released</a>
+      </h2>
+      <span class="post-date" itemprop="datePublished" content="2024-06-23">23 Jun 2024</span>
+      <a href="https://github.com/parkr" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="parkr" width="24" height="24" data-proofer-ignore="true" src="https://avatars3.githubusercontent.com/parkr?v=3&s=24" srcset="https://avatars3.githubusercontent.com/parkr?v=3&s=24 1x, https://avatars3.githubusercontent.com/parkr?v=3&s=48 2x, https://avatars3.githubusercontent.com/parkr?v=3&s=72 3x, https://avatars3.githubusercontent.com/parkr?v=3&s=96 4x" /><span class="author-name" itemprop="name">parkr</span>
+      </a>
+    </div>
+  </div>
 </article>
 <article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
@@ -1751,6 +1774,9 @@ bundled or not, your experience can continue uninterrupted.</p>
     <h4>Recent Releases</h4>
     <ul>
       <li >
+        <a href="/news/2024/09/16/jekyll-4-3-4-released/">Version 4.3.4</a>
+      </li>
+      <li >
         <a href="/news/2024/06/23/jekyll-3-10-0-released/">Version 3.10.0</a>
       </li>
       <li >
@@ -1761,9 +1787,6 @@ bundled or not, your experience can continue uninterrupted.</p>
       </li>
       <li >
         <a href="/news/2023/01/29/jekyll-3-9-3-released/">Version 3.9.3</a>
-      </li>
-      <li >
-        <a href="/news/2023/01/20/jekyll-4-3-2-released/">Version 4.3.2</a>
       </li>
       <li>
         <a href="/docs/history/">History »</a>

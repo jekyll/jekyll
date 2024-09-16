@@ -1,4 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2024-09-16T08:41:27-07:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 3.10.0 Released</title><link href="https://jekyllrb.com/news/2024/06/23/jekyll-3-10-0-released/" rel="alternate" type="text/html" title="Jekyll 3.10.0 Released" /><published>2024-06-23T21:56:58-07:00</published><updated>2024-06-23T21:56:58-07:00</updated><id>https://jekyllrb.com/news/2024/06/23/jekyll-3-10-0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2024/06/23/jekyll-3-10-0-released/"><![CDATA[<p>As Ruby continues to march on, the maintainers have made the decision to
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2024-09-16T09:21:14-07:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 4.3.4 Released</title><link href="https://jekyllrb.com/news/2024/09/16/jekyll-4-3-4-released/" rel="alternate" type="text/html" title="Jekyll 4.3.4 Released" /><published>2024-09-16T09:04:22-07:00</published><updated>2024-09-16T09:04:22-07:00</updated><id>https://jekyllrb.com/news/2024/09/16/jekyll-4-3-4-released</id><content type="html" xml:base="https://jekyllrb.com/news/2024/09/16/jekyll-4-3-4-released/"><![CDATA[<p>Hello Jekyllers!</p>
+
+<p>Publishing a small bug-fix release with the following patches:</p>
+
+<ul>
+  <li>Relax version-constraint on gem <code class="language-plaintext highlighter-rouge">wdm</code> in Gemfile created by <code class="language-plaintext highlighter-rouge">jekyll new</code>.</li>
+  <li>Patch <code class="language-plaintext highlighter-rouge">Jekyll::Drops::ThemeDrop#root</code> to render absolute path to theme-gem only if <code class="language-plaintext highlighter-rouge">JEKYLL_ENV</code> is explicitly set
+to string <code class="language-plaintext highlighter-rouge">development</code>.</li>
+</ul>
+
+<p>That is all for now.
+Happy Jekyllin’!!</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 3.10.0 Released</title><link href="https://jekyllrb.com/news/2024/06/23/jekyll-3-10-0-released/" rel="alternate" type="text/html" title="Jekyll 3.10.0 Released" /><published>2024-06-23T21:56:58-07:00</published><updated>2024-06-23T21:56:58-07:00</updated><id>https://jekyllrb.com/news/2024/06/23/jekyll-3-10-0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2024/06/23/jekyll-3-10-0-released/"><![CDATA[<p>As Ruby continues to march on, the maintainers have made the decision to
 drop some previously-bundled gems. This release makes Jekyll depend
 directly on those gems so that whether your Ruby installation has them
 bundled or not, your experience can continue uninterrupted.</p>
@@ -212,23 +223,4 @@ binary types</li>
 correctly</li>
 </ol>
 
-<p>That’s all, Happy Jekylling!</p>]]></content><author><name>parkr</name></author><category term="release" /><summary type="html"><![CDATA[Hey Jekyllers,]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.2.2 Released</title><link href="https://jekyllrb.com/news/2022/03/03/jekyll-4-2-2-released/" rel="alternate" type="text/html" title="Jekyll 4.2.2 Released" /><published>2022-03-03T05:45:20-08:00</published><updated>2022-03-03T05:45:20-08:00</updated><id>https://jekyllrb.com/news/2022/03/03/jekyll-4-2-2-released</id><content type="html" xml:base="https://jekyllrb.com/news/2022/03/03/jekyll-4-2-2-released/"><![CDATA[<p>Hello Jekyllers!</p>
-
-<p>Jekyll 4.2.2 has been released. Unlike prior releases, this is a simple maintenance release and may be skipped.</p>
-
-<p>For those who are still curious about the current release, here is some technical context: The previous <code class="language-plaintext highlighter-rouge">jekyll-4.2.1</code> package was built and
-published using a Windows system. A side-effect of that action was that every file bundled into the gem ended up with Windows-style CRLF
-line-endings instead of Unix-style LF line-endings.</p>
-
-<p>For our end-users, this difference holds no significance. However, a third-party entity vendoring the release faced a roadblock. The executable
-program <code class="language-plaintext highlighter-rouge">jekyll</code> apparently misplaced the executable bit because of the change in line-endings.</p>
-
-<p>To that end, the Jekyll team decided to use the GitHub Actions service to build and publish releases. In-house plugins have already published
-releases via this route serving as trials. Henceforth, and unless explicitly reported, all Jekyll releases will be built on GitHub Actions’
-Ubuntu platform and published to Rubygems by @jekyllbot irrespective of the maintainer overseeing the release.</p>
-
-<p>That is all for now.
-Happy Jekyllin’!!</p>
-
-<p><em>P.S.: Jekyll 4.3.0 will be bringing you some new features very soon.. Also, our sass-converter plugin has been <a href="https://github.com/jekyll/jekyll-sass-converter/tree/v2.2.0#sass-embedded">enhanced</a> to support
-modern improvements to Sass.</em></p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<p>That’s all, Happy Jekylling!</p>]]></content><author><name>parkr</name></author><category term="release" /><summary type="html"><![CDATA[Hey Jekyllers,]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
