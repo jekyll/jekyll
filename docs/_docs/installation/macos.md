@@ -5,9 +5,7 @@ permalink: /docs/installation/macos/
 
 ## Supported macOS versions
 
-- Ventura (macOS 13)
-- Monterey (macOS 12)
-- Big Sur (macOS 11)
+We match [Homebrew's macOS requirements](https://docs.brew.sh/Installation#macos-requirements), which typically support the last 2 or 3 macOS versions.
 
 Older macOS versions might work, but we don't officially support them.
 
@@ -48,7 +46,7 @@ Jekyll on your Mac, or if you run into any issues, read that guide.
 Install `chruby` and `ruby-install` with Homebrew:
 
 ```sh
-brew install chruby ruby-install xz
+brew install chruby ruby-install
 ```
 
 Install the latest stable version of Ruby (supported by Jekyll):
