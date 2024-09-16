@@ -21,6 +21,7 @@
   * Fix inexistent layout warning for the default 404 page (#9589)
   * Relax version constraint on `wdm` in new Gemfile (#9662)
   * Fix `--livereload-ignore` option (#9570)
+  * Render theme-gem root only in development (#9680)
 
 ### Development Fixes
 
