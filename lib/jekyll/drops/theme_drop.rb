@@ -3,8 +3,11 @@
 module Jekyll
   module Drops
     class ThemeDrop < Drop
-      delegate_methods   :root
       delegate_method_as :runtime_dependencies, :dependencies
+
+      def root
+        @root ||= ENV["JEKYLL_ENV"] == "development" ? @obj.root : ""
+      end
 
       def authors
         @authors ||= gemspec.authors.join(", ")

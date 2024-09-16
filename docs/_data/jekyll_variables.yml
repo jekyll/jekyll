@@ -156,7 +156,9 @@ page:
 
 theme:
   - name: theme.root
-    description: Absolute path to the theme-gem.
+    description: >-
+      Absolute path to the theme-gem. Rendered only when environment variable <code>JEKYLL_ENV</code>
+      is set to <code>development</code>.
   - name: theme.authors
     description: Comma separated string composed of the authors of the theme-gem.
   - name: theme.description
