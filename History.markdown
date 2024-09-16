@@ -3,6 +3,7 @@
 ### Bug Fixes
 
   * Backport #9662 for v4.3.x: Relax version constraint on wdm in new Gemfile (#9683)
+  * Backport #9680 for v4.3.x: Render theme-gem root only in development (#9684)
 
 ### Development Fixes
 
