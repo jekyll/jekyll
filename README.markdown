@@ -1,8 +1,7 @@
 # [Jekyll](https://jekyllrb.com/)
 
 [![Gem Version](https://img.shields.io/gem/v/jekyll.svg)][ruby-gems]
-[![Linux Build Status](https://github.com/jekyll/jekyll/workflows/Continuous%20Integration/badge.svg)][ci-workflow]
-[![Windows Build status](https://img.shields.io/appveyor/ci/jekyll/jekyll/master.svg?label=Windows%20build)][appveyor]
+[![Build Status](https://github.com/jekyll/jekyll/workflows/Continuous%20Integration/badge.svg)][ci-workflow]
 [![Backers on Open Collective](https://opencollective.com/jekyll/backers/badge.svg)](#backers)
 [![Sponsors on Open Collective](https://opencollective.com/jekyll/sponsors/badge.svg)](#sponsors)
 

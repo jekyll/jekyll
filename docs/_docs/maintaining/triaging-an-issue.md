@@ -20,7 +20,7 @@ If the issue describes a feature request, ask:
 
 1. Is this a setting? [Settings are a crutch](http://ben.balter.com/2016/03/08/optimizing-for-power-users-and-edge-cases/#settings-are-a-crutch) for doing "the right thing". Settings usually point to a bad default or an edge case that could be solved easily with a plugin. Keep the :christmas_tree: of settings as small as possible so as not to reduce the usability of the product. We like the philosophy "decisions not options."
 2. Would at least 80% of users find it useful? If even a quarter of our users won't use it, it's very likely that the request doesn't fit our product's core goal.
-3. Is there another way to accomplish the end goal of the request? Most feature requests are due to bad documentation for or understanding of a pre-existing feature. See if you can clarify the end goal of the request. What is the user trying to do? Could they accomplish that goal through another feature we already support?
+3. Is there another way to accomplish the end goal of the request? Most feature requests are due to bad documentation for or understanding of a preexisting feature. See if you can clarify the end goal of the request. What is the user trying to do? Could they accomplish that goal through another feature we already support?
 4. Even if 80% of our users will use it, does it fit the core goal of our project? We are writing a tool for making static websites, not a swiss army knife for publishing more generally.
 
 Feel free to get others' opinions and ask questions of the issue author, but depending upon the answers to the questions above, it may be out of scope for our project.

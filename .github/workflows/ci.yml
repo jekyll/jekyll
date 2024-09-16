@@ -5,34 +5,39 @@ on:
     branches:
       - master
       - "*-stable"
+    paths-ignore:
+      - "docs/**"
   pull_request:
     branches:
       - master
       - "*-stable"
+    paths-ignore:
+      - "docs/**"
 
 jobs:
   ci:
-    name: "Run Tests (${{ matrix.label }})"
-    runs-on: "ubuntu-latest"
+    name: "Run Tests (${{ matrix.ruby.label }} on ${{ matrix.os.label }})"
+    runs-on: ${{ matrix.os.image }}
     strategy:
       fail-fast: false
       matrix:
-        include:
+        ruby:
           - label: Ruby 2.7
-            ruby_version: "2.7"
-          - label: Ruby 3.0
-            ruby_version: "3.0"
-          - label: Ruby 3.1.2
-            ruby_version: "3.1.2"
-          - label: JRuby 9.4.0.0
-            ruby_version: "jruby-9.4.0.0"
+            version: "2.7"
+          - label: Ruby 3.3
+            version: "3.3"
+        os:
+          - label: Linux
+            image: "ubuntu-latest"
+          - label: Windows
+            image: "windows-latest"
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
-      - name: "Set up ${{ matrix.label }}"
+        uses: actions/checkout@v4
+      - name: "Set up ${{ matrix.ruby.label }}"
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby_version }}
+          ruby-version: ${{ matrix.ruby.version }}
           bundler-cache: true
       - name: Run Minitest based tests
         run: bash script/test
@@ -42,24 +47,36 @@ jobs:
         run: bash script/default-site
 
   xtras:
-    name: "${{ matrix.job_name }} (Ruby ${{ matrix.ruby_version }})"
+    name: "${{ matrix.job_name }} (${{ matrix.setup_label }})"
     runs-on: "ubuntu-latest"
     strategy:
       fail-fast: false
       matrix:
         include:
+          - job_name: "Unit Test with JRuby"
+            setup_label: "JRuby 9.4.8.0"
+            step_name: "Run Minitest based tests"
+            script_file: "test"
+            ruby_version: "jruby-9.4.8.0"
+          - job_name: "Smoke Test with JRuby"
+            setup_label: "JRuby 9.4.8.0"
+            step_name: "Generate and Build a new site"
+            script_file: "default-site"
+            ruby_version: "jruby-9.4.8.0"
           - job_name: "Profile Docs Site"
+            setup_label: "Ruby 2.7"
             step_name: "Build and Profile docs site"
             script_file: "profile-docs"
             ruby_version: "2.7"
           - job_name: "Style Check"
+            setup_label: "Ruby 2.7"
             step_name: "Run RuboCop"
             script_file: "fmt"
             ruby_version: "2.7"
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
-      - name: "Set up Ruby ${{ matrix.ruby_version }}"
+        uses: actions/checkout@v4
+      - name: "Set up ${{ matrix.setup_label }}"
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby_version }}

@@ -78,7 +78,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
 - [markdown-writer](https://atom.io/packages/markdown-writer): An Atom package for Jekyll. It can create new posts/drafts, manage tags/categories, insert link/images and add many useful key mappings.
 - [sublime-jekyll](https://github.com/23maverick23/sublime-jekyll): A Sublime Text package for Jekyll static sites. This package should help creating Jekyll sites and posts easier by providing access to key template tags and filters, as well as common completions and a current date/datetime command (for dating posts). You can install this package manually via GitHub, or via [Package Control](https://packagecontrol.io/packages/Jekyll).
 - [vim-jekyll](https://github.com/parkr/vim-jekyll): A vim plugin to generate new posts and run `jekyll build` all without leaving vim.
-- [WordPress2Jekyll](https://wordpress.org/plugins/wp2jekyll/): A WordPress plugin that allows you to use WordPress as your editor and (automatically) export content in to Jekyll. WordPress2Jekyll attempts to marry these two systems together in order to make a site that can be easily managed from all devices.
+- [WordPress2Jekyll](https://wordpress.org/plugins/wp2jekyll/): A WordPress plugin that allows you to use WordPress as your editor and (automatically) export content into Jekyll. WordPress2Jekyll attempts to marry these two systems together in order to make a site that can be easily managed from all devices.
 
 ## Posts
 
