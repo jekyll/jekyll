@@ -159,3 +159,6 @@ mailto:[-a-zA-Z=;:/?%&0-9+@.]{3,}
 
 # ignore long runs of a single character:
 \b([A-Za-z])\g{-1}{3,}\b
+
+# ignore inline code
+`\w+`

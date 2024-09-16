@@ -13,3 +13,5 @@ workaround
 workaround
 workarounds
 WSL
+decapcms
+tina
