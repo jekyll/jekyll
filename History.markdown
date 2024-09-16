@@ -101,6 +101,7 @@
   * Add note about VSCode warning for SCSS files (#9609)
   * docs: Fix incorrect parentheses (#9629)
   * docs: Fix of a bug in the pagination section (#8890)
+  * Update current Ruby version renders and macOS docs (#9614)
 
 ### Site Enhancements
 
