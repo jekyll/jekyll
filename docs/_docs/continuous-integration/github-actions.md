@@ -29,6 +29,8 @@ If you are migrating from the standard flow but want to keep using a GitHub-host
   steps, use environment variables.
 - **Logging** --- The build log is visible and can be tweaked to be verbose, so it is much easier to
   debug errors using Actions.
+- **Caching** --- The `ruby/setup-ruby` action makes it possible to cache installed gems
+  automatically instead of having to download a jekyll-build-pages image each time.
 
 ## Workspace setup
 
