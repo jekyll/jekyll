@@ -22,12 +22,29 @@ class TestThemeDrop < JekyllUnitTest
         "dependencies" => [],
         "description"  => "This is a theme used to test Jekyll",
         "metadata"     => {},
-        "root"         => theme_dir,
+        "root"         => "",
         "version"      => "0.1.0",
       }
       expected.each_key do |key|
         assert @drop.key?(key)
         assert_equal expected[key], @drop[key]
+      end
+    end
+
+    should "render gem root only in development mode" do
+      with_env("JEKYLL_ENV", nil) do
+        drop = fixture_site("theme" => "test-theme").to_liquid.theme
+        assert_equal "", drop["root"]
+      end
+
+      with_env("JEKYLL_ENV", "development") do
+        drop = fixture_site("theme" => "test-theme").to_liquid.theme
+        assert_equal theme_dir, drop["root"]
+      end
+
+      with_env("JEKYLL_ENV", "production") do
+        drop = fixture_site("theme" => "test-theme").to_liquid.theme
+        assert_equal "", drop["root"]
       end
     end
   end
