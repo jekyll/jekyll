@@ -110,7 +110,8 @@ end
     <a href="https://pages.github.com/versions">whitelisted plugins</a>) for security reasons. Unfortunately, this means your plugins won't
     work if you’re deploying via GitHub Pages.<br><br>
     You can still use GitHub Pages to publish your site, but you’ll need to build the site locally and push the generated files to your
-    GitHub repository instead of the Jekyll source files.
+    GitHub repository instead of the Jekyll source files.<br><br>
+    A <a href="https://jekyllrb.com/docs/continuous-integration/github-actions/">workaround</a> is to use <a href="https://github.com/actions/starter-workflows/blob/main/pages/jekyll.yml">jekyll.yml</a> instead of the standard flow.
   </p>
 </div>
 
