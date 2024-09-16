@@ -18,6 +18,11 @@ with GitHub Pages you can use GitHub Actions.
   of your site.
 - **Themes** --- While using a custom theme is possible without Actions, it is now simpler.
 
+{: .note .info}
+If you are migrating from the standard flow but want to keep using a GitHub-hosted theme, add
+[jekyll-remote-theme][remote-theme] and [other dependencies][ghp-whitelist] to `_config.yml` and
+`Gemfile` and set the [correct repository][ghp-repo] in `_config.yml`.
+
 ### Workflow Management
 
 - **Customization** --- By creating a workflow file to run Actions, you can specify custom build
@@ -117,5 +122,7 @@ The workflow will build and deploy your site again.
 - [starter-workflows] is the official repository providing the workflow template used in this guide.
 
 [ghp-whitelist]: https://pages.github.com/versions/
+[remote-theme]: https://github.com/benbalter/jekyll-remote-theme
+[ghp-repo]: https://talk.jekyllrb.com/t/error-your-site-could-not-be-built-no-repo-name-found/5688/3
 [timeago-plugin]: https://rubygems.org/gems/jekyll-timeago
 [starter-workflows]: https://github.com/actions/starter-workflows/blob/main/pages/jekyll.yml
