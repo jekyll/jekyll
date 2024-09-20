@@ -2,11 +2,11 @@
 title: GitHub Actions
 ---
 
-When building a Jekyll site with GitHub Pages, the standard flow is restricted for security reasons
-and to make it simpler to get a site setup. For more control over the build and still host the site
-with GitHub Pages you can use GitHub Actions.
+When building a Jekyll site with GitHub Pages, the default GitHub Pages Jekyll workflow is restricted
+for security reasons and to make it simpler to get a site setup. For more control over the build and
+still host the site with GitHub Pages you can use the Jekyll workflow.
 
-## Advantages of using Actions
+## Advantages of using Jekyll workflow
 
 ### Control over gemset
 
@@ -20,8 +20,9 @@ with GitHub Pages you can use GitHub Actions.
 
 {: .note .info}
 If you are migrating from the standard flow but want to keep using a GitHub-hosted theme, add
-[jekyll-remote-theme][remote-theme] and [other dependencies][ghp-whitelist] to `_config.yml` and
-`Gemfile` and set the [correct repository][ghp-repo] in `_config.yml`.
+[jekyll-remote-theme][remote-theme] and any [related dependencies][ghp-whitelist] your theme
+previously automatically pulled in to `_config.yml` and `Gemfile` and set the
+[correct repository][ghp-repo] in `_config.yml`.
 
 ### Workflow Management
 
