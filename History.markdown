@@ -53,6 +53,7 @@
   * Stop testing with Cucumber on JRuby (#9661)
   * Windows CI on GitHub Actions (#9659)
   * Run GitHub Actions only if needed (#9664)
+  * Format `.rubocop.yml` via a rake task (#9687)
 
 ### Documentation
 
