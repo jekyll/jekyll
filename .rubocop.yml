@@ -56,6 +56,8 @@ Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
 Layout/EndAlignment:
   Severity: error
+Layout/EndOfLine:
+  Enabled: false
 Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
 Layout/FirstHashElementIndentation:
