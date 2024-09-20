@@ -25,6 +25,7 @@ class TestPathManager < JekyllUnitTest
           Jekyll::PathManager.sanitized_path(@source, "E:\\_config.yml")
         )
       end
+
       assert_equal(
         "#{@source}/_config.yml",
         Jekyll::PathManager.sanitized_path(@source, "//_config.yml")

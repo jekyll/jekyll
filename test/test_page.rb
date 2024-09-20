@@ -32,44 +32,52 @@ class TestPage < JekyllUnitTest
     context "processing pages" do
       should "create URL based on filename" do
         @page = setup_page("contacts.html")
+
         assert_equal "/contacts.html", @page.url
       end
 
       should "create proper URL from filename" do
         @page = setup_page("trailing-dots...md")
+
         assert_equal "/trailing-dots.html", @page.url
       end
 
       should "not published when published yaml is false" do
         @page = setup_page("unpublished.html")
+
         refute @page.published?
       end
 
       should "create URL with non-alphabetic characters" do
         @page = setup_page("+", "%# +.md")
+
         assert_equal "/+/%25%23%20+.html", @page.url
       end
 
       context "in a directory hierarchy" do
         should "create URL based on filename" do
           @page = setup_page("/contacts", "bar.html")
+
           assert_equal "/contacts/bar.html", @page.url
         end
 
         should "create index URL based on filename" do
           @page = setup_page("/contacts", "index.html")
+
           assert_equal "/contacts/", @page.url
         end
       end
 
       should "deal properly with extensions" do
         @page = setup_page("deal.with.dots.html")
+
         assert_equal ".html", @page.ext
       end
 
       should "deal properly with non-html extensions" do
         @page = setup_page("dynamic_page.php")
         @dest_file = dest_dir("dynamic_page.php")
+
         assert_equal ".php", @page.ext
         assert_equal "dynamic_page", @page.basename
         assert_equal "/dynamic_page.php", @page.url
@@ -127,27 +135,32 @@ class TestPage < JekyllUnitTest
 
         should "return dir correctly for index page" do
           @page = setup_page("index.html")
+
           assert_equal "/", @page.dir
         end
 
         context "in a directory hierarchy" do
           should "create url based on filename" do
             @page = setup_page("/contacts", "bar.html")
+
             assert_equal "/contacts/bar/", @page.url
           end
 
           should "create index URL based on filename" do
             @page = setup_page("/contacts", "index.html")
+
             assert_equal "/contacts/", @page.url
           end
 
           should "return dir correctly" do
             @page = setup_page("/contacts", "bar.html")
+
             assert_equal "/contacts/bar/", @page.dir
           end
 
           should "return dir correctly for index page" do
             @page = setup_page("/contacts", "index.html")
+
             assert_equal "/contacts/", @page.dir
           end
         end
@@ -161,6 +174,7 @@ class TestPage < JekyllUnitTest
         should "return url and destination correctly" do
           @page = setup_page("contacts.html")
           @dest_file = dest_dir("contacts.html")
+
           assert_equal "/contacts.html", @page.url
           assert_equal @dest_file, @page.destination(dest_dir)
         end
@@ -180,6 +194,7 @@ class TestPage < JekyllUnitTest
         should "return URL and destination correctly" do
           @page = setup_page("contacts.html")
           @dest_file = dest_dir("contacts/index.html")
+
           assert_equal "/contacts/", @page.url
           assert_equal @dest_file, @page.destination(dest_dir)
         end
@@ -193,6 +208,7 @@ class TestPage < JekyllUnitTest
         should "return URL and destination correctly" do
           @page = setup_page("contacts.html")
           @dest_file = dest_dir("contacts.html")
+
           assert_equal "/contacts.html", @page.url
           assert_equal @dest_file, @page.destination(dest_dir)
         end
@@ -206,6 +222,7 @@ class TestPage < JekyllUnitTest
         should "return URL and destination correctly" do
           @page = setup_page("contacts.html")
           @dest_file = dest_dir("contacts.html")
+
           assert_equal "/contacts", @page.url
           assert_equal @dest_file, @page.destination(dest_dir)
         end
@@ -214,6 +231,7 @@ class TestPage < JekyllUnitTest
       context "with any other permalink style" do
         should "return dir correctly" do
           @site.permalink_style = nil
+
           assert_equal "/", setup_page("contacts.html").dir
           assert_equal "/contacts/", setup_page("contacts/index.html").dir
           assert_equal "/contacts/", setup_page("contacts/bar.html").dir
@@ -230,13 +248,13 @@ class TestPage < JekyllUnitTest
       end
 
       should "return nil permalink if no permalink exists" do
-        @page = setup_page("")
-        assert_nil @page.permalink
+        assert_nil setup_page("").permalink
       end
 
       should "not be writable outside of destination" do
         unexpected = File.expand_path("../../../baddie.html", dest_dir)
-        File.delete unexpected if File.exist?(unexpected)
+        FileUtils.rm_f unexpected
+
         page = setup_page("exploit.md")
         do_render(page)
         page.write(dest_dir)
@@ -370,13 +388,11 @@ class TestPage < JekyllUnitTest
 
       context "read-in by default" do
         should "not initialize excerpts by default" do
-          page = setup_page("contacts", "foo.md")
-          assert_nil page.excerpt
+          assert_nil setup_page("contacts", "foo.md").excerpt
         end
 
         should "not expose an excerpt to Liquid templates by default" do
-          page = setup_page("/contacts", "bar.html")
-          assert_nil page.to_liquid["excerpt"]
+          assert_nil setup_page("/contacts", "bar.html").to_liquid["excerpt"]
         end
 
         context "in a site configured to generate page excerpts" do
@@ -384,6 +400,7 @@ class TestPage < JekyllUnitTest
 
           should "initialize excerpt eagerly but render only when needed" do
             test_page = Jekyll::Page.new(@configured_site, source_dir, "contacts", "foo.md")
+
             assert_instance_of Jekyll::PageExcerpt, test_page.data["excerpt"]
             assert_instance_of String, test_page.excerpt
             assert_equal(
@@ -394,11 +411,13 @@ class TestPage < JekyllUnitTest
 
           should "expose an excerpt to Liquid templates" do
             test_page = Jekyll::Page.new(@configured_site, source_dir, "/contacts", "bar.html")
+
             assert_equal "Contact Information\n", test_page.to_liquid["excerpt"]
           end
 
           should "not expose an excerpt for non-html pages" do
             test_page = Jekyll::Page.new(@configured_site, source_dir, "assets", "test-styles.scss")
+
             refute_equal ".half { width: 50%; }\n", test_page.to_liquid["excerpt"]
             assert_nil test_page.to_liquid["excerpt"]
           end
@@ -419,6 +438,7 @@ class TestPage < JekyllUnitTest
 
         should "expose an excerpt to Liquid templates if hardcoded" do
           @test_page.data["excerpt"] = "Test excerpt."
+
           assert_equal "Contact Information\n", @test_page.content
           assert_equal "Test excerpt.", @test_page.to_liquid["excerpt"]
         end

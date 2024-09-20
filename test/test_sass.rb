@@ -26,11 +26,13 @@ class TestSass < JekyllUnitTest
 
     should "register the SCSS converter" do
       message = "SCSS converter implementation should exist."
+
       refute !@site.find_converter_instance(Jekyll::Converters::Scss), message
     end
 
     should "register the Sass converter" do
       message = "Sass converter implementation should exist."
+
       refute !@site.find_converter_instance(Jekyll::Converters::Sass), message
     end
   end

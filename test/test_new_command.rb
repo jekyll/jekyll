@@ -32,13 +32,16 @@ class TestNewCommand < JekyllUnitTest
     should "create a new directory" do
       refute_exist @full_path
       capture_output { Jekyll::Commands::New.process(@args) }
+
       assert_exist @full_path
     end
 
     should "create a Gemfile" do
       gemfile = File.join(@full_path, "Gemfile")
+
       refute_exist @full_path
       capture_output { Jekyll::Commands::New.process(@args) }
+
       assert_exist gemfile
       assert_match(%r!gem "jekyll", "~> #{Jekyll::VERSION}"!o, File.read(gemfile))
       assert_match(%r!gem "github-pages"!, File.read(gemfile))
@@ -48,6 +51,7 @@ class TestNewCommand < JekyllUnitTest
       output = capture_output { Jekyll::Commands::New.process(@args) }
       success_message = "New jekyll site installed in #{@full_path.cyan}. "
       bundle_message = "Running bundle install in #{@full_path.cyan}... "
+
       assert_includes output, success_message
       assert_includes output, bundle_message
     end
@@ -94,6 +98,7 @@ class TestNewCommand < JekyllUnitTest
       blank_contents += %w(/_data /_drafts /_includes /_posts)
       output = capture_output { Jekyll::Commands::New.process(@args, "--blank") }
       bundle_message = "Running bundle install in #{@full_path.cyan}..."
+
       assert_same_elements blank_contents, dir_contents(@full_path)
       refute_includes output, bundle_message
     end
@@ -101,12 +106,14 @@ class TestNewCommand < JekyllUnitTest
     should "force created folder" do
       capture_output { Jekyll::Commands::New.process(@args) }
       output = capture_output { Jekyll::Commands::New.process(@args, "--force") }
+
       assert_match %r!New jekyll site installed in!, output
     end
 
     should "skip bundle install when opted to" do
       output = capture_output { Jekyll::Commands::New.process(@args, "--skip-bundle") }
       bundle_message = "Bundle install skipped."
+
       assert_includes output, bundle_message
     end
   end
@@ -124,6 +131,7 @@ class TestNewCommand < JekyllUnitTest
     should "create a new directory" do
       refute_exist @site_name_with_spaces
       capture_output { Jekyll::Commands::New.process(@multiple_args) }
+
       assert_exist @site_name_with_spaces
     end
   end

@@ -7,6 +7,7 @@ class TestThemeDataReader < JekyllUnitTest
     setup do
       @site = fixture_site("theme" => nil)
       @site.reader.read_data
+
       assert @site.data["greetings"]
       assert @site.data["categories"]["dairy"]
     end
@@ -21,6 +22,7 @@ class TestThemeDataReader < JekyllUnitTest
     setup do
       @site = fixture_site("theme" => "test-theme-skinny")
       @site.reader.read_data
+
       assert @site.data["greetings"]
       assert @site.data["categories"]["dairy"]
     end
@@ -35,6 +37,7 @@ class TestThemeDataReader < JekyllUnitTest
     setup do
       @site = fixture_site("theme" => "test-theme-w-empty-data")
       @site.reader.read_data
+
       assert @site.data["greetings"]
       assert @site.data["categories"]["dairy"]
     end
@@ -49,6 +52,7 @@ class TestThemeDataReader < JekyllUnitTest
     setup do
       @site = fixture_site("theme" => "test-theme")
       @site.reader.read_data
+
       assert @site.data["greetings"]
       assert @site.data["categories"]["dairy"]
       assert @site.data["cars"]
@@ -65,6 +69,7 @@ class TestThemeDataReader < JekyllUnitTest
     setup do
       @site = fixture_site("theme" => "test-theme")
       @site.reader.read_data
+
       assert @site.data["greetings"]
       assert @site.data["categories"]["dairy"]
       assert @site.data["cars"]
@@ -76,6 +81,7 @@ class TestThemeDataReader < JekyllUnitTest
       product_names  = @site.data["categories"]["dairy"]["products"].map do |product|
         product["name"]
       end
+
       expected_names.each do |expected_name|
         assert_includes product_names, expected_name
       end

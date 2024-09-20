@@ -19,6 +19,7 @@ class TestLogAdapter < JekyllUnitTest
     should "set the writers logging level" do
       subject = Jekyll::LogAdapter.new(LoggerDouble.new)
       subject.log_level = :error
+
       assert_equal Jekyll::LogAdapter::LOG_LEVELS[:error], subject.writer.level
     end
   end
@@ -27,27 +28,32 @@ class TestLogAdapter < JekyllUnitTest
     should "set the writers logging level to error when quiet" do
       subject = Jekyll::LogAdapter.new(LoggerDouble.new)
       subject.adjust_verbosity(:quiet => true)
+
       assert_equal Jekyll::LogAdapter::LOG_LEVELS[:error], subject.writer.level
     end
 
     should "set the writers logging level to debug when verbose" do
       subject = Jekyll::LogAdapter.new(LoggerDouble.new)
       subject.adjust_verbosity(:verbose => true)
+
       assert_equal Jekyll::LogAdapter::LOG_LEVELS[:debug], subject.writer.level
     end
 
     should "set the writers logging level to error when quiet and verbose are both set" do
       subject = Jekyll::LogAdapter.new(LoggerDouble.new)
       subject.adjust_verbosity(:quiet => true, :verbose => true)
+
       assert_equal Jekyll::LogAdapter::LOG_LEVELS[:error], subject.writer.level
     end
 
     should "not change the writer's logging level when neither verbose or quiet" do
       subject = Jekyll::LogAdapter.new(LoggerDouble.new)
       original_level = subject.writer.level
+
       refute_equal Jekyll::LogAdapter::LOG_LEVELS[:error], subject.writer.level
       refute_equal Jekyll::LogAdapter::LOG_LEVELS[:debug], subject.writer.level
       subject.adjust_verbosity(:quiet => false, :verbose => false)
+
       assert_equal original_level, subject.writer.level
     end
 
@@ -55,6 +61,7 @@ class TestLogAdapter < JekyllUnitTest
       writer = LoggerDouble.new
       logger = Jekyll::LogAdapter.new(writer, :debug)
       allow(writer).to receive(:debug).and_return(true)
+
       assert logger.adjust_verbosity
     end
   end
@@ -65,6 +72,7 @@ class TestLogAdapter < JekyllUnitTest
       logger = Jekyll::LogAdapter.new(writer, :debug)
       allow(writer).to receive(:debug)
         .with("topic ".rjust(20) + "log message").and_return(true)
+
       assert logger.debug("topic", "log message")
     end
   end
@@ -75,6 +83,7 @@ class TestLogAdapter < JekyllUnitTest
       logger = Jekyll::LogAdapter.new(writer, :info)
       allow(writer).to receive(:info)
         .with("topic ".rjust(20) + "log message").and_return(true)
+
       assert logger.info("topic", "log message")
     end
   end
@@ -85,6 +94,7 @@ class TestLogAdapter < JekyllUnitTest
       logger = Jekyll::LogAdapter.new(writer, :warn)
       allow(writer).to receive(:warn)
         .with("topic ".rjust(20) + "log message").and_return(true)
+
       assert logger.warn("topic", "log message")
     end
   end
@@ -95,6 +105,7 @@ class TestLogAdapter < JekyllUnitTest
       logger = Jekyll::LogAdapter.new(writer, :error)
       allow(writer).to receive(:error)
         .with("topic ".rjust(20) + "log message").and_return(true)
+
       assert logger.error("topic", "log message")
     end
   end
@@ -119,6 +130,7 @@ class TestLogAdapter < JekyllUnitTest
       logger.info(values[1])
       logger.warn(values[2])
       logger.error(values[3])
+
       assert_equal values.map { |value| "#{value} ".rjust(20) }, logger.messages
     end
   end
@@ -126,6 +138,7 @@ class TestLogAdapter < JekyllUnitTest
   context "#write_message?" do
     should "return false up to the desired logging level" do
       subject = Jekyll::LogAdapter.new(LoggerDouble.new, :warn)
+
       refute subject.write_message?(:debug), "Should not print debug messages"
       refute subject.write_message?(:info), "Should not print info messages"
       assert subject.write_message?(:warn), "Should print warn messages"

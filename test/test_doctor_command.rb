@@ -17,8 +17,10 @@ class TestDoctorCommand < JekyllUnitTest
       @site.process
       output = capture_stderr do
         ret = Jekyll::Commands::Doctor.urls_only_differ_by_case(@site)
+
         refute ret
       end
+
       assert_equal "", output
     end
 
@@ -31,8 +33,10 @@ class TestDoctorCommand < JekyllUnitTest
       @site.process
       output = capture_stderr do
         ret = Jekyll::Commands::Doctor.urls_only_differ_by_case(@site)
+
         assert ret
       end
+
       assert_includes output, "Warning: The following URLs only differ by case. On a case-" \
                               "insensitive file system one of the URLs will be overwritten by the " \
                               "other: #{dest_dir}/about/index.html, #{dest_dir}/About/index.html"

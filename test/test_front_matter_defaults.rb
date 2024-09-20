@@ -243,6 +243,7 @@ class TestFrontMatterDefaults < JekyllUnitTest
     should "parse date" do
       @site.process
       date = Time.parse("2015-01-01 00:00:01")
+
       assert(@site.pages.find { |page| page.data["date"] == date })
       assert(@site.posts.find { |page| page.data["date"] == date })
     end

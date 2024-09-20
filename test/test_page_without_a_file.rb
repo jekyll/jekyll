@@ -37,6 +37,7 @@ class TestPageWithoutAFile < JekyllUnitTest
         %w(lorem ipsum)       => "lorem/ipsum",
       }.each do |(dir, name), result|
         page = PageWithoutAFile.new(@site, @site.source, dir, name)
+
         assert_equal result, page.path
         assert_equal result, page.relative_path
         refute page.relative_path.frozen?
@@ -100,6 +101,7 @@ class TestPageWithoutAFile < JekyllUnitTest
 
       should "generate page url accordingly" do
         page = setup_page("properties.html")
+
         assert_equal "/properties", page.url
       end
     end
@@ -150,6 +152,7 @@ class TestPageWithoutAFile < JekyllUnitTest
         assert_nil @page.content
 
         @page.content = "{{ site.title }}"
+
         assert_equal "{{ site.title }}", @page.content
       end
 

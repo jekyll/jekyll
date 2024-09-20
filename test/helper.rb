@@ -51,11 +51,13 @@ Minitest::Reporters.use! [
 module Minitest::Assertions
   def assert_exist(filename, msg = nil)
     msg = message(msg) { "Expected '#{filename}' to exist" }
+
     assert_path_exists(filename, msg)
   end
 
   def refute_exist(filename, msg = nil)
     msg = message(msg) { "Expected '#{filename}' not to exist" }
+
     refute_path_exists(filename, msg)
   end
 end

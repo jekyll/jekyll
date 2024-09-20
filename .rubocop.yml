@@ -41,6 +41,8 @@ Jekyll/NoPutsAllowed:
 # ----------------------------------------
 Gemspec/DeprecatedAttributeAssignment:
   Enabled: true
+Gemspec/DevelopmentDependencies:
+  Enabled: false
 Gemspec/RequireMFA:
   Enabled: false
 
@@ -113,6 +115,10 @@ Lint/DuplicateBranch:
   Enabled: true
 Lint/DuplicateElsifCondition:
   Enabled: true
+Lint/DuplicateMagicComment:
+  Enabled: true
+Lint/DuplicateMatchPattern:
+  Enabled: true
 Lint/DuplicateRegexpCharacterClassElement:
   Enabled: true
 Lint/DuplicateRequire:
@@ -137,12 +143,16 @@ Lint/LambdaWithoutLiteralBlock:
   Enabled: true
 Lint/MissingSuper:
   Enabled: false
+Lint/MixedCaseRange:
+  Enabled: true
 Lint/MixedRegexpCaptureTypes:
   Enabled: false
 Lint/NestedPercentLiteral:
   Exclude:
   - test/test_site.rb
 Lint/NoReturnInBeginEndBlocks:
+  Enabled: true
+Lint/NonAtomicFileOperation:
   Enabled: true
 Lint/NumberedParameterAssignment:
   Enabled: true
@@ -154,7 +164,11 @@ Lint/RaiseException:
   Enabled: true
 Lint/RedundantDirGlobSort:
   Enabled: true
+Lint/RedundantRegexpQuantifiers:
+  Enabled: true
 Lint/RedundantSafeNavigation:
+  Enabled: true
+Lint/RefinementImportMethods:
   Enabled: true
 Lint/RequireRangeParentheses:
   Enabled: true
@@ -184,6 +198,10 @@ Lint/UnreachableLoop:
   Enabled: true
 Lint/UselessMethodDefinition:
   Enabled: true
+Lint/UselessRescue:
+  Enabled: true
+Lint/UselessRuby2Keywords:
+  Enabled: true
 Lint/UselessTimes:
   Enabled: true
 Lint/Void:
@@ -208,6 +226,8 @@ Metrics/ClassLength:
   - lib/jekyll/site.rb
   - test/**/*.rb
   Max: 240
+Metrics/CollectionLiteralLength:
+  Enabled: true
 Metrics/CyclomaticComplexity:
   Exclude:
   - lib/jekyll/commands/serve.rb
@@ -234,9 +254,19 @@ Minitest/AssertInDelta:
   Enabled: true
 Minitest/AssertKindOf:
   Enabled: true
+Minitest/AssertOperator:
+  Enabled: false
 Minitest/AssertOutput:
   Enabled: true
 Minitest/AssertPathExists:
+  Enabled: true
+Minitest/AssertPredicate:
+  Enabled: false
+Minitest/AssertRaisesCompoundBody:
+  Enabled: true
+Minitest/AssertRaisesWithRegexpArgument:
+  Enabled: true
+Minitest/AssertSame:
   Enabled: true
 Minitest/AssertSilent:
   Enabled: true
@@ -244,21 +274,51 @@ Minitest/AssertWithExpectedArgument:
   Enabled: true
 Minitest/AssertionInLifecycleHook:
   Enabled: true
+Minitest/DuplicateTestRun:
+  Enabled: true
+Minitest/EmptyLineBeforeAssertionMethods:
+  Enabled: true
+Minitest/LifecycleHooksOrder:
+  Enabled: true
 Minitest/LiteralAsActualArgument:
   Enabled: true
 Minitest/MultipleAssertions:
+  Enabled: true
+Minitest/NonExecutableTestMethod:
+  Enabled: true
+Minitest/NonPublicTestMethod:
+  Enabled: true
+Minitest/RedundantMessageArgument:
   Enabled: true
 Minitest/RefuteInDelta:
   Enabled: true
 Minitest/RefuteKindOf:
   Enabled: true
+Minitest/RefuteOperator:
+  Enabled: false
 Minitest/RefutePathExists:
   Enabled: true
+Minitest/RefutePredicate:
+  Enabled: false
+Minitest/RefuteSame:
+  Enabled: true
+Minitest/ReturnInTestMethod:
+  Enabled: true
+Minitest/SkipEnsure:
+  Enabled: true
+Minitest/SkipWithoutReason:
+  Enabled: true
+Minitest/TestFileName:
+  Enabled: true
+  Exclude:
+  - test/helper.rb
 Minitest/TestMethodName:
   Enabled: false
 Minitest/UnreachableAssertion:
   Enabled: true
 Minitest/UnspecifiedException:
+  Enabled: true
+Minitest/UselessAssertion:
   Enabled: true
 
 # Naming cops
@@ -292,6 +352,8 @@ Performance/CollectionLiteralInLoop:
 Performance/ConstantRegexp:
   Enabled: true
 Performance/MapCompact:
+  Enabled: true
+Performance/MapMethodChain:
   Enabled: true
 Performance/MethodObjectAsBlock:
   Enabled: true
@@ -347,6 +409,8 @@ Style/ArgumentsForwarding:
   Enabled: false
 Style/ArrayCoercion:
   Enabled: true
+Style/ArrayIntersect:
+  Enabled: true
 Style/BisectedAttrAccessor:
   Enabled: true
 Style/CaseLikeIf:
@@ -360,6 +424,10 @@ Style/CollectionCompact:
   Enabled: true
 Style/CombinableLoops:
   Enabled: true
+Style/ConcatArrayLiterals:
+  Enabled: true
+Style/DirEmpty:
+  Enabled: true
 Style/DocumentDynamicEvalDefinition:
   Enabled: true
 Style/Documentation:
@@ -372,12 +440,16 @@ Style/EndlessMethod:
   Enabled: true
 Style/EnvHome:
   Enabled: true
+Style/ExactRegexpMatch:
+  Enabled: true
 Style/ExplicitBlockArgument:
   Enabled: false
 Style/ExponentialNotation:
   Enabled: true
 Style/FetchEnvVar:
   Enabled: false
+Style/FileEmpty:
+  Enabled: true
 Style/FileRead:
   Enabled: false
 Style/FileWrite:
@@ -420,6 +492,8 @@ Style/MapCompactWithConditionalBlock:
   Enabled: true
 Style/MapToHash:
   Enabled: true
+Style/MapToSet:
+  Enabled: true
 Style/MinMaxComparison:
   Enabled: true
 Style/MixinUsage:
@@ -434,6 +508,12 @@ Style/NegatedIfElseCondition:
 Style/NestedFileDirname:
   Enabled: true
 Style/NilLambda:
+  Enabled: true
+Style/ObjectThen:
+  Enabled: true
+Style/OpenStructUse:
+  Enabled: true
+Style/OperatorMethodCall:
   Enabled: true
 Style/OptionalBooleanParameter:
   Enabled: true
@@ -452,17 +532,37 @@ Style/QuotedSymbols:
   Enabled: true
 Style/RedundantArgument:
   Enabled: true
+Style/RedundantArrayConstructor:
+  Enabled: true
 Style/RedundantAssignment:
+  Enabled: true
+Style/RedundantConstantBase:
+  Enabled: true
+Style/RedundantCurrentDirectoryInPath:
+  Enabled: true
+Style/RedundantDoubleSplatHashBraces:
+  Enabled: true
+Style/RedundantEach:
   Enabled: true
 Style/RedundantFetchBlock:
   Enabled: false
 Style/RedundantFileExtensionInRequire:
   Enabled: true
+Style/RedundantFilterChain:
+  Enabled: true
+Style/RedundantHeredocDelimiterQuotes:
+  Enabled: true
 Style/RedundantInitialize:
   Enabled: true
   Exclude:
   - lib/jekyll/plugin.rb
+Style/RedundantLineContinuation:
+  Enabled: true
+Style/RedundantRegexpArgument:
+  Enabled: true
 Style/RedundantRegexpCharacterClass:
+  Enabled: true
+Style/RedundantRegexpConstructor:
   Enabled: true
 Style/RedundantRegexpEscape:
   Enabled: true
@@ -470,17 +570,25 @@ Style/RedundantSelfAssignment:
   Enabled: true
 Style/RedundantSelfAssignmentBranch:
   Enabled: true
+Style/RedundantStringEscape:
+  Enabled: true
 Style/RegexpLiteral:
   EnforcedStyle: percent_r
 Style/RescueModifier:
   Enabled: false
+Style/ReturnNilInPredicateMethodDefinition:
+  Enabled: true
 Style/SafeNavigation:
   Exclude:
   - lib/jekyll/document.rb
   - lib/jekyll/page.rb
+Style/SelectByRegexp:
+  Enabled: true
 Style/SignalException:
   EnforcedStyle: only_raise
 Style/SingleArgumentDig:
+  Enabled: true
+Style/SingleLineDoEndBlock:
   Enabled: true
 Style/SlicingWithRange:
   Enabled: false
@@ -505,3 +613,5 @@ Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: consistent_comma
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
+Style/YAMLFileRead:
+  Enabled: true

@@ -95,6 +95,7 @@ class TestFilters < JekyllUnitTest
 
       should "escapes special characters when configured to do so" do
         kramdown = make_filter_mock(:kramdown => { :entity_output => :symbolic })
+
         assert_equal(
           "&ldquo;This filter&rsquo;s test&hellip;&rdquo;",
           kramdown.smartify(%q{"This filter's test..."})
@@ -246,8 +247,10 @@ class TestFilters < JekyllUnitTest
 
         should "not modify a time in-place when using filters" do
           t = Time.new(2004, 9, 15, 0, 2, 37, "+01:00")
+
           assert_equal 3600, t.utc_offset
           @filter.date_to_string(t)
+
           assert_equal 3600, t.utc_offset
         end
       end
@@ -406,11 +409,13 @@ class TestFilters < JekyllUnitTest
     context "absolute_url filter" do
       should "produce an absolute URL from a page URL" do
         page_url = "/about/my_favorite_page/"
+
         assert_equal "http://example.com/base#{page_url}", @filter.absolute_url(page_url)
       end
 
       should "ensure the leading slash" do
         page_url = "about/my_favorite_page/"
+
         assert_equal "http://example.com/base/#{page_url}", @filter.absolute_url(page_url)
       end
 
@@ -420,6 +425,7 @@ class TestFilters < JekyllUnitTest
           "url"     => "http://example.com",
           "baseurl" => "base"
         )
+
         assert_equal "http://example.com/base/#{page_url}", filter.absolute_url(page_url)
       end
 
@@ -429,6 +435,7 @@ class TestFilters < JekyllUnitTest
           "url"     => "",
           "baseurl" => "base"
         )
+
         assert_equal "/base/#{page_url}", filter.absolute_url(page_url)
       end
 
@@ -438,6 +445,7 @@ class TestFilters < JekyllUnitTest
           "url"     => nil,
           "baseurl" => "base"
         )
+
         assert_equal "/base/#{page_url}", filter.absolute_url(page_url)
       end
 
@@ -447,6 +455,7 @@ class TestFilters < JekyllUnitTest
           "url"     => "http://example.com",
           "baseurl" => nil
         )
+
         assert_equal "http://example.com/#{page_url}", filter.absolute_url(page_url)
       end
 
@@ -456,6 +465,7 @@ class TestFilters < JekyllUnitTest
           "url"     => "http://example.com",
           "baseurl" => "/base"
         )
+
         assert_equal "http://example.com/base", filter.absolute_url(page_url)
       end
 
@@ -465,6 +475,7 @@ class TestFilters < JekyllUnitTest
           "url"     => "http://example.com",
           "baseurl" => "/base"
         )
+
         assert_equal "http://example.com/base/", filter.absolute_url(page_url)
       end
 
@@ -474,6 +485,7 @@ class TestFilters < JekyllUnitTest
           "url"     => "http://example.com",
           "baseurl" => nil
         )
+
         assert_equal "http://example.com/", filter.absolute_url(page_url)
       end
 
@@ -483,6 +495,7 @@ class TestFilters < JekyllUnitTest
           "url"     => "http://example.com",
           "baseurl" => "/"
         )
+
         assert_equal "http://example.com/", filter.absolute_url(page_url)
       end
 
@@ -492,17 +505,20 @@ class TestFilters < JekyllUnitTest
           "url"     => "http://ümlaut.example.org/",
           "baseurl" => nil
         )
+
         assert_equal "http://xn--mlaut-jva.example.org/", filter.absolute_url(page_url)
       end
 
       should "not modify an absolute URL" do
         page_url = "http://example.com/"
+
         assert_equal "http://example.com/", @filter.absolute_url(page_url)
       end
 
       should "transform the input URL to a string" do
         page_url = "/my-page.html"
         filter = make_filter_mock("url" => Value.new(proc { "http://example.org" }))
+
         assert_equal "http://example.org#{page_url}", filter.absolute_url(page_url)
       end
 
@@ -523,6 +539,7 @@ class TestFilters < JekyllUnitTest
 
         should "make a url" do
           expected = "http://example.com/base/methods/configuration.html"
+
           assert_equal expected, @filter.absolute_url(@document)
         end
       end
@@ -531,22 +548,26 @@ class TestFilters < JekyllUnitTest
     context "relative_url filter" do
       should "produce a relative URL from a page URL" do
         page_url = "/about/my_favorite_page/"
+
         assert_equal "/base#{page_url}", @filter.relative_url(page_url)
       end
 
       should "ensure the leading slash between baseurl and input" do
         page_url = "about/my_favorite_page/"
+
         assert_equal "/base/#{page_url}", @filter.relative_url(page_url)
       end
 
       should "ensure the leading slash for the baseurl" do
         page_url = "about/my_favorite_page/"
         filter = make_filter_mock("baseurl" => "base")
+
         assert_equal "/base/#{page_url}", filter.relative_url(page_url)
       end
 
       should "normalize international URLs" do
         page_url = "错误.html"
+
         assert_equal "/base/%E9%94%99%E8%AF%AF.html", @filter.relative_url(page_url)
       end
 
@@ -556,6 +577,7 @@ class TestFilters < JekyllUnitTest
           "url"     => "http://example.com",
           "baseurl" => nil
         )
+
         assert_equal "/#{page_url}", filter.relative_url(page_url)
       end
 
@@ -565,6 +587,7 @@ class TestFilters < JekyllUnitTest
           "url"     => "http://example.com",
           "baseurl" => "/base"
         )
+
         assert_equal "/base", filter.relative_url(page_url)
       end
 
@@ -574,6 +597,7 @@ class TestFilters < JekyllUnitTest
           "url"     => "http://example.com",
           "baseurl" => "/base/"
         )
+
         assert_equal "/base/css/main.css", filter.relative_url(page_url)
       end
 
@@ -583,6 +607,7 @@ class TestFilters < JekyllUnitTest
           "url"     => "http://example.com",
           "baseurl" => "/base//"
         )
+
         refute_equal "/base/css/main.css", filter.relative_url(page_url)
       end
 
@@ -592,15 +617,18 @@ class TestFilters < JekyllUnitTest
           "url"     => "http://example.com",
           "baseurl" => "/"
         )
+
         assert_equal "/", filter.relative_url(page_url)
       end
 
       should "not return the url by reference" do
         filter = make_filter_mock(:baseurl => nil)
         page = Page.new(filter.site, test_dir("fixtures"), "", "front_matter.erb")
+
         assert_equal "/front_matter.erb", page.url
         url = filter.relative_url(page.url)
         url << "foo"
+
         assert_equal "/front_matter.erb", filter.relative_url(page.url)
         assert_equal "/front_matter.erb", page.url
       end
@@ -608,21 +636,25 @@ class TestFilters < JekyllUnitTest
       should "transform the input baseurl to a string" do
         page_url = "/my-page.html"
         filter = make_filter_mock("baseurl" => Value.new(proc { "/baseurl/" }))
+
         assert_equal "/baseurl#{page_url}", filter.relative_url(page_url)
       end
 
       should "transform protocol-relative url" do
         url = "//example.com/"
+
         assert_equal "/base//example.com/", @filter.relative_url(url)
       end
 
       should "not modify an absolute url with scheme" do
         url = "file:///file.html"
+
         assert_equal url, @filter.relative_url(url)
       end
 
       should "not normalize absolute international URLs" do
         url = "https://example.com/错误"
+
         assert_equal "https://example.com/错误", @filter.relative_url(url)
       end
     end
@@ -690,6 +722,7 @@ class TestFilters < JekyllUnitTest
         actual = JSON.parse(@filter.jsonify(@filter.site.docs_to_write.first.to_liquid))
 
         next_doc = actual.delete("next")
+
         refute_nil next_doc
         assert_kind_of Hash, next_doc, "doc.next should be an object"
 
@@ -703,6 +736,7 @@ class TestFilters < JekyllUnitTest
           "environment" => "development",
           "version"     => Jekyll::VERSION,
         }
+
         assert_equal expected, JSON.parse(actual)["jekyll"]
       end
 
@@ -748,6 +782,7 @@ class TestFilters < JekyllUnitTest
           },
         ]
         result = @filter.jsonify([T.new("Jeremiah"), T.new("Smathers")])
+
         assert_equal expected, JSON.parse(result)
       end
       # rubocop:enable Style/StructInheritance
@@ -789,6 +824,7 @@ class TestFilters < JekyllUnitTest
           ],
         }
         result = @filter.jsonify(my_hash)
+
         assert_equal expected, JSON.parse(result)
       end
     end
@@ -808,6 +844,7 @@ class TestFilters < JekyllUnitTest
             )
             # adjust array.size to ignore symlinked page in Windows
             qty = Utils::Platforms.really_windows? ? 4 : 5
+
             assert_equal qty, g["items"].size
           when "nil"
             assert_kind_of(
@@ -822,6 +859,7 @@ class TestFilters < JekyllUnitTest
             )
             # adjust array.size to ignore symlinked page in Windows
             qty = Utils::Platforms.really_windows? ? 19 : 21
+
             assert_equal qty, g["items"].size
           end
         end
@@ -829,6 +867,7 @@ class TestFilters < JekyllUnitTest
 
       should "include the size of each grouping" do
         grouping = @filter.group_by(@filter.site.pages, "layout")
+
         grouping.each do |g|
           assert_equal(
             g["items"].size,
@@ -844,6 +883,7 @@ class TestFilters < JekyllUnitTest
           { "name" => "Amy", "year" => 2016 },
           { "name" => "George", "year" => 2019 },
         ], "year")
+
         assert_equal "2016", grouping[0]["name"]
         assert_equal "2019", grouping[1]["name"]
       end
@@ -856,6 +896,7 @@ class TestFilters < JekyllUnitTest
 
       should "filter objects in a hash appropriately" do
         hash = { "a" => { "color"=>"red" }, "b" => { "color"=>"blue" } }
+
         assert_equal 1, @filter.where(hash, "color", "red").length
         assert_equal [{ "color"=>"red" }], @filter.where(hash, "color", "red")
       end
@@ -866,6 +907,7 @@ class TestFilters < JekyllUnitTest
 
       should "filter objects with null properties appropriately" do
         array = [{}, { "color" => nil }, { "color" => "" }, { "color" => "text" }]
+
         assert_equal 2, @filter.where(array, "color", nil).length
       end
 
@@ -876,6 +918,7 @@ class TestFilters < JekyllUnitTest
           { "value" => 24.625 },
           { "value" => "24.625" },
         ]
+
         assert_equal 2, @filter.where(array, "value", 24.625).length
         assert_equal 2, @filter.where(array, "value", 555).length
       end
@@ -886,6 +929,7 @@ class TestFilters < JekyllUnitTest
           "b" => { "tags"=>["x"] },
           "c" => { "tags"=>%w(y z) },
         }
+
         assert_equal 2, @filter.where(hash, "tags", "x").length
       end
 
@@ -895,6 +939,7 @@ class TestFilters < JekyllUnitTest
           "b" => { "tags"=>"x" },
           "c" => { "tags"=>%w(y z) },
         }
+
         assert_equal 2, @filter.where(hash, "tags", "x").length
       end
 
@@ -934,6 +979,7 @@ class TestFilters < JekyllUnitTest
           "b" => { "category"=>"wolf" },
           "c" => { "category"=>%w(bear lion) },
         }
+
         assert_equal 0, @filter.where(hash, "category", "ear").length
       end
 
@@ -945,17 +991,20 @@ class TestFilters < JekyllUnitTest
         }
 
         results = @filter.where(hash, "featured", "true")
+
         assert_equal 2, results.length
         assert_in_delta(9.2, results[0]["rating"])
         assert_in_delta(4.7, results[1]["rating"])
 
         results = @filter.where(hash, "rating", 4.7)
+
         assert_equal 1, results.length
         assert_in_delta(4.7, results[0]["rating"])
       end
 
       should "always return an array if the object responds to 'select'" do
         results = @filter.where(SelectDummy.new, "obj", "1 == 1")
+
         assert_equal [], results
       end
 
@@ -968,6 +1017,7 @@ class TestFilters < JekyllUnitTest
         truncatd_arr_str = hash["roles"].to_liquid.to_s[0...20]
         msg = "Error accessing object (#{truncatd_arr_str}) with given key. Expected an integer " \
               'but got "name" instead.'
+
         assert_equal msg, err.message
       end
     end
@@ -979,6 +1029,7 @@ class TestFilters < JekyllUnitTest
 
       should "filter objects in a hash appropriately" do
         hash = { "a" => { "color"=>"red" }, "b" => { "color"=>"blue" } }
+
         assert_equal 1, @filter.where_exp(hash, "item", "item.color == 'red'").length
         assert_equal(
           [{ "color"=>"red" }],
@@ -1022,6 +1073,7 @@ class TestFilters < JekyllUnitTest
           { "color" => "red",  "size" => "medium", "type" => "variable" },
           { "color" => "blue", "size" => "medium", "type" => "fixed" },
         ]
+
         assert_equal(
           [
             { "color" => "red", "size" => "large", "type" => "fixed" },
@@ -1040,11 +1092,13 @@ class TestFilters < JekyllUnitTest
         }
 
         results = @filter.where_exp(hash, "item", "item.featured == true")
+
         assert_equal 2, results.length
         assert_in_delta(9.2, results[0]["rating"])
         assert_in_delta(4.7, results[1]["rating"])
 
         results = @filter.where_exp(hash, "item", "item.rating == 4.7")
+
         assert_equal 1, results.length
         assert_in_delta(4.7, results[0]["rating"])
       end
@@ -1061,6 +1115,7 @@ class TestFilters < JekyllUnitTest
       ]
       should "filter with the contains operator over arrays" do
         results = @filter.where_exp(objects, "obj", "obj.groups contains 1")
+
         assert_equal 2, results.length
         assert_equal "a", results[0]["id"]
         assert_equal "d", results[1]["id"]
@@ -1068,6 +1123,7 @@ class TestFilters < JekyllUnitTest
 
       should "filter with the contains operator over hash keys" do
         results = @filter.where_exp(objects, "obj", "obj contains 'groups'")
+
         assert_equal 3, results.length
         assert_equal "a", results[0]["id"]
         assert_equal "b", results[1]["id"]
@@ -1078,12 +1134,14 @@ class TestFilters < JekyllUnitTest
         site = fixture_site.tap(&:read)
         posts = site.site_payload["site"]["posts"]
         results = @filter.where_exp(posts, "obj", "obj.title == 'Foo Bar'")
+
         assert_equal 1, results.length
         assert_equal site.posts.find { |p| p.title == "Foo Bar" }, results.first
       end
 
       should "always return an array if the object responds to 'select'" do
         results = @filter.where_exp(SelectDummy.new, "obj", "1 == 1")
+
         assert_equal [], results
       end
 
@@ -1092,6 +1150,7 @@ class TestFilters < JekyllUnitTest
         posts = @filter.site.site_payload["site"]["posts"]
         results = @filter.where_exp(posts, "post",
                                     "post.date > site.dont_show_posts_before")
+
         assert_equal posts.count { |p| p.date > @sample_time }, results.length
       end
     end
@@ -1103,6 +1162,7 @@ class TestFilters < JekyllUnitTest
 
       should "filter objects in a hash appropriately" do
         hash = { "a" => { "color" => "red" }, "b" => { "color" => "blue" } }
+
         assert_equal({ "color" => "red" }, @filter.find(hash, "color", "red"))
       end
 
@@ -1115,6 +1175,7 @@ class TestFilters < JekyllUnitTest
 
       should "filter objects with null properties appropriately" do
         array = [{}, { "color" => nil }, { "color" => "" }, { "color" => "text" }]
+
         assert_equal({}, @filter.find(array, "color", nil))
       end
 
@@ -1125,6 +1186,7 @@ class TestFilters < JekyllUnitTest
           { "value" => 24.625 },
           { "value" => "24.625" },
         ]
+
         assert_equal({ "value" => 24.625 }, @filter.find(array, "value", 24.625))
         assert_equal({ "value" => "555" }, @filter.find(array, "value", 555))
       end
@@ -1135,6 +1197,7 @@ class TestFilters < JekyllUnitTest
           "b" => { "tags" => ["x"] },
           "c" => { "tags" => %w(y z) },
         }
+
         assert_equal({ "tags" => %w(x y) }, @filter.find(hash, "tags", "x"))
       end
 
@@ -1144,6 +1207,7 @@ class TestFilters < JekyllUnitTest
           "b" => { "tags" => "x" },
           "c" => { "tags" => %w(y z) },
         }
+
         assert_equal({ "tags" => %w(x y) }, @filter.find(hash, "tags", "x"))
       end
 
@@ -1179,6 +1243,7 @@ class TestFilters < JekyllUnitTest
           "b" => { "category" => "wolf" },
           "c" => { "category" => %w(bear lion) },
         }
+
         assert_nil @filter.find(hash, "category", "ear")
       end
 
@@ -1190,9 +1255,11 @@ class TestFilters < JekyllUnitTest
         }
 
         result = @filter.find(hash, "featured", "true")
+
         assert_in_delta(9.2, result["rating"])
 
         result = @filter.find(hash, "rating", 4.7)
+
         assert_in_delta(4.7, result["rating"])
       end
     end
@@ -1204,6 +1271,7 @@ class TestFilters < JekyllUnitTest
 
       should "filter objects in a hash appropriately" do
         hash = { "a" => { "color"=>"red" }, "b" => { "color"=>"blue" } }
+
         assert_equal(
           { "color" => "red" },
           @filter.find_exp(hash, "item", "item.color == 'red'")
@@ -1240,6 +1308,7 @@ class TestFilters < JekyllUnitTest
           { "color" => "red",  "size" => "medium", "type" => "variable" },
           { "color" => "blue", "size" => "medium", "type" => "fixed" },
         ]
+
         assert_equal(
           { "color" => "red", "size" => "large", "type" => "fixed" },
           @filter.find_exp(
@@ -1256,9 +1325,11 @@ class TestFilters < JekyllUnitTest
         }
 
         result = @filter.find_exp(hash, "item", "item.featured == true")
+
         assert_in_delta(9.2, result["rating"])
 
         result = @filter.find_exp(hash, "item", "item.rating == 4.7")
+
         assert_in_delta(4.7, result["rating"])
       end
 
@@ -1274,11 +1345,13 @@ class TestFilters < JekyllUnitTest
       ]
       should "filter with the contains operator over arrays" do
         result = @filter.find_exp(objects, "obj", "obj.groups contains 1")
+
         assert_equal "a", result["id"]
       end
 
       should "filter with the contains operator over hash keys" do
         result = @filter.find_exp(objects, "obj", "obj contains 'groups'")
+
         assert_equal "a", result["id"]
       end
 
@@ -1286,6 +1359,7 @@ class TestFilters < JekyllUnitTest
         site = fixture_site.tap(&:read)
         posts = site.site_payload["site"]["posts"]
         result = @filter.find_exp(posts, "obj", "obj.title == 'Foo Bar'")
+
         assert_equal(result, site.posts.find { |p| p.title == "Foo Bar" })
       end
 
@@ -1293,6 +1367,7 @@ class TestFilters < JekyllUnitTest
         @filter.site.tap(&:read)
         posts  = @filter.site.site_payload["site"]["posts"]
         result = @filter.find_exp(posts, "post", "post.date > site.dont_show_posts_before")
+
         assert result.date > @sample_time
       end
     end
@@ -1312,6 +1387,7 @@ class TestFilters < JekyllUnitTest
             )
             # adjust array.size to ignore symlinked page in Windows
             qty = Utils::Platforms.really_windows? ? 4 : 5
+
             assert_equal qty, g["items"].size
           when "nil"
             assert_kind_of(
@@ -1326,6 +1402,7 @@ class TestFilters < JekyllUnitTest
             )
             # adjust array.size to ignore symlinked page in Windows
             qty = Utils::Platforms.really_windows? ? 19 : 21
+
             assert_equal qty, g["items"].size
           end
         end
@@ -1333,6 +1410,7 @@ class TestFilters < JekyllUnitTest
 
       should "include the size of each grouping" do
         groups = @filter.group_by_exp(@filter.site.pages, "page", "page.layout")
+
         groups.each do |g|
           assert_equal(
             g["items"].size,
@@ -1350,6 +1428,7 @@ class TestFilters < JekyllUnitTest
         ]
 
         result = @filter.group_by_exp(items, "item", "item.version | split: '.' | first")
+
         assert_equal 2, result.size
       end
 
@@ -1368,6 +1447,7 @@ class TestFilters < JekyllUnitTest
         items = %w(a b c d)
 
         result = @filter.group_by_exp(items, "item", "item")
+
         assert_equal 4, result.length
         assert_equal ["a"], result.first["items"]
       end
@@ -1376,6 +1456,7 @@ class TestFilters < JekyllUnitTest
         hash = { 1 => "a", 2 => "b", 3 => "c", 4 => "d" }
 
         result = @filter.group_by_exp(hash, "item", "item")
+
         assert_equal 4, result.length
       end
     end
@@ -1418,6 +1499,7 @@ class TestFilters < JekyllUnitTest
       end
       should "return sorted by property array with nils first" do
         ary = [{ "a" => 2 }, { "b" => 1 }, { "a" => 1 }]
+
         assert_equal [{ "b" => 1 }, { "a" => 1 }, { "a" => 2 }], @filter.sort(ary, "a")
         assert_equal @filter.sort(ary, "a"), @filter.sort(ary, "a", "first")
       end
@@ -1518,11 +1600,13 @@ class TestFilters < JekyllUnitTest
     context "sample filter" do
       should "return a random item from the array" do
         input = %w(hey there bernie)
+
         assert_includes input, @filter.sample(input)
       end
 
       should "allow sampling of multiple values (n > 1)" do
         input = %w(hey there bernie)
+
         @filter.sample(input, 2).each do |val|
           assert_includes input, val
         end

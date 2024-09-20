@@ -22,17 +22,20 @@ class TestSite < JekyllUnitTest
   context "configuring sites" do
     should "have an array for plugins by default" do
       site = Site.new default_configuration
+
       assert_equal [File.join(Dir.pwd, "_plugins")], site.plugins
     end
 
     should "look for plugins under the site directory by default" do
       site = Site.new(site_configuration)
+
       assert_equal [source_dir("_plugins")], site.plugins
     end
 
     should "have an array for plugins if passed as a string" do
       site = Site.new(site_configuration("plugins_dir" => "/tmp/plugins"))
       array = [temp_dir("plugins")]
+
       assert_equal array, site.plugins
     end
 
@@ -41,31 +44,37 @@ class TestSite < JekyllUnitTest
                         "plugins_dir" => ["/tmp/plugins", "/tmp/otherplugins"]
                       ))
       array = [temp_dir("plugins"), temp_dir("otherplugins")]
+
       assert_equal array, site.plugins
     end
 
     should "have an empty array for plugins if nothing is passed" do
       site = Site.new(site_configuration("plugins_dir" => []))
+
       assert_equal [], site.plugins
     end
 
     should "have the default for plugins if nil is passed" do
       site = Site.new(site_configuration("plugins_dir" => nil))
+
       assert_equal [source_dir("_plugins")], site.plugins
     end
 
     should "default baseurl to `nil`" do
       site = Site.new(default_configuration)
+
       assert_nil site.baseurl
     end
 
     should "expose baseurl passed in from config" do
       site = Site.new(site_configuration("baseurl" => "/blog"))
+
       assert_equal "/blog", site.baseurl
     end
 
     should "only include theme includes_path if the path exists" do
       site = fixture_site("theme" => "test-theme")
+
       assert_equal [source_dir("_includes"), theme_dir("_includes")],
                    site.includes_load_paths
 
@@ -73,22 +82,26 @@ class TestSite < JekyllUnitTest
       allow(File).to receive(:directory?).with(theme_dir("_layouts")).and_return(true)
       allow(File).to receive(:directory?).with(theme_dir("_includes")).and_return(false)
       site = fixture_site("theme" => "test-theme")
+
       assert_equal [source_dir("_includes")], site.includes_load_paths
     end
 
     should "configure cache_dir" do
       fixture_site.process
+
       assert File.directory?(source_dir(".jekyll-cache", "Jekyll", "Cache"))
       assert File.directory?(source_dir(".jekyll-cache", "Jekyll", "Cache", "Jekyll--Cache"))
     end
 
     should "use .jekyll-cache directory at source as cache_dir by default" do
       site = Site.new(default_configuration)
+
       assert_equal File.join(site.source, ".jekyll-cache"), site.cache_dir
     end
 
     should "have the cache_dir hidden from Git" do
       site = fixture_site
+
       assert_equal site.source, source_dir
       assert_exist source_dir(".jekyll-cache", ".gitignore")
       assert_equal(
@@ -99,6 +112,7 @@ class TestSite < JekyllUnitTest
 
     should "load config file from theme-gem as Jekyll::Configuration instance" do
       site = fixture_site("theme" => "test-theme")
+
       assert_instance_of Jekyll::Configuration, site.config
       assert_equal "Hello World", site.config["title"]
     end
@@ -106,6 +120,7 @@ class TestSite < JekyllUnitTest
     context "with a custom cache_dir configuration" do
       should "have the custom cache_dir hidden from Git" do
         site = fixture_site("cache_dir" => "../../custom-cache-dir")
+
         refute_exist File.expand_path("../../custom-cache-dir/.gitignore", site.source)
         assert_exist source_dir("custom-cache-dir", ".gitignore")
         assert_equal(
@@ -143,6 +158,7 @@ class TestSite < JekyllUnitTest
       @site = Site.new(site_configuration)
       @site.read
       @site.generate
+
       refute_equal 0, @site.pages.size
       assert_equal "hi", @site.file_read_opts[:secret_message]
     end
@@ -159,6 +175,7 @@ class TestSite < JekyllUnitTest
       before_time = @site.time
 
       @site.process
+
       assert_equal before_posts, @site.posts.length
       assert_equal before_layouts, @site.layouts.length
       assert_equal before_categories, @site.categories.length
@@ -182,6 +199,7 @@ class TestSite < JekyllUnitTest
       sleep 1
       @site.process
       mtime2 = File.stat(dest).mtime.to_i
+
       assert_equal mtime1, mtime2
 
       # simulate file modification by user
@@ -190,11 +208,13 @@ class TestSite < JekyllUnitTest
       sleep 1
       @site.process
       mtime3 = File.stat(dest).mtime.to_i
+
       refute_equal mtime2, mtime3 # must be regenerated!
 
       sleep 1
       @site.process
       mtime4 = File.stat(dest).mtime.to_i
+
       assert_equal mtime3, mtime4 # no modifications, so must be the same
     end
 
@@ -211,20 +231,24 @@ class TestSite < JekyllUnitTest
       sleep 1
       @site.process
       mtime2 = File.stat(dest).mtime.to_i
+
       assert_equal mtime1, mtime2
 
       # simulate destination file deletion
       File.unlink dest
+
       refute_path_exists(dest)
 
       sleep 1
       @site.process
       mtime3 = File.stat(dest).mtime.to_i
+
       assert_equal mtime2, mtime3 # must be regenerated and with original mtime!
 
       sleep 1
       @site.process
       mtime4 = File.stat(dest).mtime.to_i
+
       assert_equal mtime3, mtime4 # no modifications, so remain the same
     end
 
@@ -280,11 +304,13 @@ class TestSite < JekyllUnitTest
         # files in symlinked directories may appear twice
         sorted_pages.push("main.css.map", "main.scss", "symlinked-file").sort!
       end
+
       assert_equal sorted_pages, @site.pages.map(&:name).sort!
     end
 
     should "read posts" do
       posts = read_posts
+
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
     end
 
@@ -292,17 +318,20 @@ class TestSite < JekyllUnitTest
       with_image_as_post do
         posts = read_posts
         num_invalid_posts = @num_invalid_posts + 1
+
         assert_equal posts.size - num_invalid_posts, @site.posts.size
       end
     end
 
     should "read pages with YAML front matter" do
       abs_path = File.expand_path("about.html", @site.source)
+
       assert Utils.has_yaml_header?(abs_path)
     end
 
     should "enforce a strict 3-dash limit on the start of the YAML front matter" do
       abs_path = File.expand_path("pgp.key", @site.source)
+
       refute Utils.has_yaml_header?(abs_path)
     end
 
@@ -396,6 +425,7 @@ class TestSite < JekyllUnitTest
 
       should "remove orphaned files in destination" do
         @site.process
+
         refute_exist dest_dir("obsolete.html")
         refute_exist dest_dir("qux")
         refute_exist dest_dir("quux")
@@ -407,6 +437,7 @@ class TestSite < JekyllUnitTest
         config = site_configuration("keep_files" => %w(.svn))
         @site = Site.new(config)
         @site.process
+
         refute_exist dest_dir(".htpasswd")
         refute_exist dest_dir("obsolete.html")
         refute_exist dest_dir("qux")
@@ -468,6 +499,7 @@ class TestSite < JekyllUnitTest
     context "with an invalid markdown processor in the configuration" do
       should "not throw an error at initialization time" do
         bad_processor = "not a processor name"
+
         assert Site.new(site_configuration("markdown" => bad_processor))
       end
 
@@ -570,6 +602,7 @@ class TestSite < JekyllUnitTest
         site = Site.new(site_configuration("safe" => true))
         site.process
         file_content = SafeYAML.load_file(File.join(source_dir, "_data", "products.yml"))
+
         assert_equal site.data["products"], file_content
         assert_equal site.site_payload["site"]["data"]["products"], file_content
       end
@@ -613,16 +646,19 @@ class TestSite < JekyllUnitTest
         expect($stderr).not_to receive(:puts)
         expect($stdout).not_to receive(:puts)
         site = fixture_site("theme" => nil)
+
         assert_nil site.theme
       end
 
       should "set no theme if config is a hash" do
         output = capture_output do
           site = fixture_site("theme" => {})
+
           assert_nil site.theme
         end
         expected_msg = "Theme: value of 'theme' in config should be String to use " \
                        "gem-based themes, but got Hash\n"
+
         assert_includes output, expected_msg
       end
 
@@ -635,6 +671,7 @@ class TestSite < JekyllUnitTest
           end
         end
         site = fixture_site("theme" => "test-theme")
+
         assert_instance_of Jekyll::Theme, site.theme
         assert_equal "test-theme", site.theme.name
       end
@@ -679,6 +716,7 @@ class TestSite < JekyllUnitTest
         sleep 1
         @site.process
         mtime2 = File.stat(dest).mtime.to_i
+
         assert_equal mtime1, mtime2 # no modifications, so remain the same
 
         # simulate file modification by user
@@ -687,11 +725,13 @@ class TestSite < JekyllUnitTest
         sleep 1
         @site.process
         mtime3 = File.stat(dest).mtime.to_i
+
         refute_equal mtime2, mtime3 # must be regenerated
 
         sleep 1
         @site.process
         mtime4 = File.stat(dest).mtime.to_i
+
         assert_equal mtime3, mtime4 # no modifications, so remain the same
       end
 
@@ -704,12 +744,15 @@ class TestSite < JekyllUnitTest
 
         # simulate file modification by user
         File.unlink dest
+
         refute File.file?(dest)
 
         sleep 1 # sleep for 1 second, since mtimes have 1s resolution
         @site.process
+
         assert File.file?(dest)
         mtime2 = File.stat(dest).mtime.to_i
+
         refute_equal mtime1, mtime2 # must be regenerated
       end
     end
@@ -736,6 +779,7 @@ class TestSite < JekyllUnitTest
   context "site process phases" do
     should "return nil as documented" do
       site = fixture_site
+
       [:reset, :read, :generate, :render, :cleanup, :write].each do |phase|
         assert_nil site.send(phase)
       end
@@ -756,6 +800,7 @@ class TestSite < JekyllUnitTest
 
       visited_files = []
       site.each_site_file { |file| visited_files << file }
+
       assert_equal visited_files.count, visited_files.uniq.count
     end
   end
