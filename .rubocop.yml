@@ -1,35 +1,51 @@
----
-inherit_from: .rubocop_todo.yml
+# -----------------------------------------------------------------------------
+# This file has been formatted via a Rake Task configuring cops from
+# RuboCop v1.57.2.
+#
+# To add more cops, paste configurations at the end of the file and run
+# the rake task via `bundle exec rake rubocop:format_config`.
+# -----------------------------------------------------------------------------
+
+inherit_from: ".rubocop_todo.yml"
 
 require:
-  - rubocop-minitest
-  - rubocop-performance
-  - rubocop-rake
-  - rubocop-rspec
-  - ./rubocop/jekyll
+- "./rubocop/jekyll"
+- rubocop-minitest
+- rubocop-performance
+- rubocop-rake
+- rubocop-rspec
 
-Jekyll/NoPutsAllowed:
-  Exclude:
-    - rake/*.rake
-
+# Directive for all cops
 AllCops:
   TargetRubyVersion: 2.7
   Include:
-    - lib/**/*.rb
-    - test/**/*.rb
+  - lib/**/*.rb
+  - test/**/*.rb
   Exclude:
-    - bin/**/*
-    - exe/**/*
-    - benchmark/**/*
-    - script/**/*
-    - vendor/**/*
-    - tmp/**/*
+  - benchmark/**/*
+  - bin/**/*
+  - exe/**/*
+  - script/**/*
+  - tmp/**/*
+  - vendor/**/*
 
+# Configure custom cop
+Jekyll/NoPutsAllowed:
+  Exclude:
+  - rake/*.rake
+
+# Configure built-in cops
+# =======================
+
+# Gemspec cops
+# ----------------------------------------
 Gemspec/DeprecatedAttributeAssignment:
   Enabled: true
 Gemspec/RequireMFA:
   Enabled: false
 
+# Layout cops
+# ----------------------------------------
 Layout/BeginEndAlignment:
   Enabled: true
 Layout/EmptyComment:
@@ -54,10 +70,10 @@ Layout/LineEndStringConcatenationIndentation:
   Enabled: true
 Layout/LineLength:
   Exclude:
-    - !ruby/regexp /features\/.*.rb/
-    - Rakefile
-    - rake/*.rake
-    - Gemfile
+  - Gemfile
+  - Rakefile
+  - features/**/*.rb
+  - rake/**/*.rake
   Max: 100
   Severity: warning
 Layout/MultilineMethodCallIndentation:
@@ -71,8 +87,10 @@ Layout/SpaceBeforeBrackets:
 Layout/SpaceInsideHashLiteralBraces:
   Enabled: true
   Exclude:
-    - test/**/*.rb
+  - test/**/*.rb
 
+# Lint cops
+# ----------------------------------------
 Lint/AmbiguousAssignment:
   Enabled: true
 Lint/AmbiguousOperatorPrecedence:
@@ -84,7 +102,7 @@ Lint/BinaryOperatorWithIdenticalOperands:
 Lint/ConstantDefinitionInBlock:
   Enabled: true
   Exclude:
-    - test/**/*.rb
+  - test/**/*.rb
 Lint/ConstantOverwrittenInRescue:
   Enabled: true
 Lint/DeprecatedConstants:
@@ -123,7 +141,7 @@ Lint/MixedRegexpCaptureTypes:
   Enabled: false
 Lint/NestedPercentLiteral:
   Exclude:
-    - test/test_site.rb
+  - test/test_site.rb
 Lint/NoReturnInBeginEndBlocks:
   Enabled: true
 Lint/NumberedParameterAssignment:
@@ -170,28 +188,30 @@ Lint/UselessTimes:
   Enabled: true
 Lint/Void:
   Exclude:
-    - lib/jekyll/site.rb
+  - lib/jekyll/site.rb
 
+# Metrics cops
+# ----------------------------------------
 Metrics/AbcSize:
   Max: 23
 Metrics/BlockLength:
   Exclude:
-    - test/**/*.rb
-    - lib/jekyll/configuration.rb
-    - rake/*.rake
+  - lib/jekyll/configuration.rb
+  - rake/**/*.rake
+  - test/**/*.rb
 Metrics/ClassLength:
   Exclude:
-    - !ruby/regexp /features\/.*.rb$/
-    - !ruby/regexp /test\/.*.rb$/
-    - lib/jekyll/document.rb
-    - lib/jekyll/site.rb
-    - lib/jekyll/commands/serve.rb
-    - lib/jekyll/configuration.rb
+  - features/**/*.rb
+  - lib/jekyll/commands/serve.rb
+  - lib/jekyll/configuration.rb
+  - lib/jekyll/document.rb
+  - lib/jekyll/site.rb
+  - test/**/*.rb
   Max: 240
 Metrics/CyclomaticComplexity:
   Exclude:
-    - lib/jekyll/utils.rb
-    - lib/jekyll/commands/serve.rb
+  - lib/jekyll/commands/serve.rb
+  - lib/jekyll/utils.rb
   Max: 11
 Metrics/MethodLength:
   CountComments: false
@@ -199,18 +219,18 @@ Metrics/MethodLength:
   Severity: error
 Metrics/ModuleLength:
   Exclude:
-    - lib/jekyll/filters.rb
+  - lib/jekyll/filters.rb
   Max: 240
 Metrics/ParameterLists:
   Max: 4
 Metrics/PerceivedComplexity:
   Max: 13
 
+# Minitest cops
+# ----------------------------------------
 Minitest/AssertEmptyLiteral:
   Enabled: false
 Minitest/AssertInDelta:
-  Enabled: true
-Minitest/AssertionInLifecycleHook:
   Enabled: true
 Minitest/AssertKindOf:
   Enabled: true
@@ -222,10 +242,10 @@ Minitest/AssertSilent:
   Enabled: true
 Minitest/AssertWithExpectedArgument:
   Enabled: true
+Minitest/AssertionInLifecycleHook:
+  Enabled: true
 Minitest/LiteralAsActualArgument:
   Enabled: true
-Minitest/TestMethodName:
-  Enabled: false
 Minitest/MultipleAssertions:
   Enabled: true
 Minitest/RefuteInDelta:
@@ -234,23 +254,29 @@ Minitest/RefuteKindOf:
   Enabled: true
 Minitest/RefutePathExists:
   Enabled: true
+Minitest/TestMethodName:
+  Enabled: false
 Minitest/UnreachableAssertion:
   Enabled: true
 Minitest/UnspecifiedException:
   Enabled: true
 
+# Naming cops
+# ----------------------------------------
 Naming/FileName:
   Enabled: false
 Naming/HeredocDelimiterNaming:
   Exclude:
-    - test/**/*.rb
+  - test/**/*.rb
 Naming/MemoizedInstanceVariableName:
   Exclude:
-    - lib/jekyll/convertible.rb
-    - lib/jekyll/drops/site_drop.rb
-    - lib/jekyll/drops/unified_payload_drop.rb
-    - lib/jekyll/page_without_a_file.rb
+  - lib/jekyll/convertible.rb
+  - lib/jekyll/drops/site_drop.rb
+  - lib/jekyll/drops/unified_payload_drop.rb
+  - lib/jekyll/page_without_a_file.rb
 
+# Performance cops
+# ----------------------------------------
 Performance/AncestorsInclude:
   Enabled: false
 Performance/ArraySemiInfiniteRangeSlice:
@@ -288,23 +314,27 @@ Performance/StringIdentifierArgument:
 Performance/StringInclude:
   Enabled: true
   Exclude:
-    - lib/jekyll/utils/platforms.rb
+  - lib/jekyll/utils/platforms.rb
 Performance/Sum:
   Enabled: true
 
+# Security cops
+# ----------------------------------------
 Security/CompoundHash:
   Enabled: true
 Security/IoMethods:
   Enabled: true
 Security/MarshalLoad:
   Exclude:
-    - !ruby/regexp /test\/.*.rb$/
-    - lib/jekyll/regenerator.rb
+  - lib/jekyll/regenerator.rb
+  - test/**/*.rb
 Security/YAMLLoad:
   Exclude:
-    - !ruby/regexp /features\/.*.rb/
-    - !ruby/regexp /test\/.*.rb$/
+  - features/**/*.rb
+  - test/**/*.rb
 
+# Style cops
+# ----------------------------------------
 Style/AccessModifierDeclarations:
   Enabled: false
 Style/AccessorGrouping:
@@ -321,11 +351,9 @@ Style/BisectedAttrAccessor:
   Enabled: true
 Style/CaseLikeIf:
   Enabled: true
-Style/StringChars:
-  Enabled: true
 Style/ClassAndModuleChildren:
   Exclude:
-    - test/**/*.rb
+  - test/**/*.rb
 Style/ClassEqualityComparison:
   Enabled: true
 Style/CollectionCompact:
@@ -342,25 +370,25 @@ Style/EmptyHeredoc:
   Enabled: true
 Style/EndlessMethod:
   Enabled: true
+Style/EnvHome:
+  Enabled: true
 Style/ExplicitBlockArgument:
   Enabled: false
 Style/ExponentialNotation:
-  Enabled: true
-Style/EnvHome:
   Enabled: true
 Style/FetchEnvVar:
   Enabled: false
 Style/FileRead:
   Enabled: false
-Style/FormatStringToken:
-  Exclude:
-    - lib/jekyll/utils/ansi.rb
-    - lib/jekyll/liquid_renderer/table.rb
-    - lib/jekyll/profiler.rb
-Style/FrozenStringLiteralComment:
-  EnforcedStyle: always
 Style/FileWrite:
   Enabled: true
+Style/FormatStringToken:
+  Exclude:
+  - lib/jekyll/liquid_renderer/table.rb
+  - lib/jekyll/profiler.rb
+  - lib/jekyll/utils/ansi.rb
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: always
 Style/GlobalStdStream:
   Enabled: true
 Style/GuardClause:
@@ -396,7 +424,7 @@ Style/MinMaxComparison:
   Enabled: true
 Style/MixinUsage:
   Exclude:
-    - test/helper.rb
+  - test/helper.rb
 Style/ModuleFunction:
   Enabled: false
 Style/MultilineTernaryOperator:
@@ -410,16 +438,16 @@ Style/NilLambda:
 Style/OptionalBooleanParameter:
   Enabled: true
   Exclude:
-    - lib/jekyll/log_adapter.rb
+  - lib/jekyll/log_adapter.rb
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
     "%Q": "{}"
-    "%W": ()
+    "%W": "()"
     "%q": "{}"
     "%r": "!!"
-    "%s": ()
-    "%w": ()
-    "%x": ()
+    "%s": "()"
+    "%w": "()"
+    "%x": "()"
 Style/QuotedSymbols:
   Enabled: true
 Style/RedundantArgument:
@@ -433,7 +461,7 @@ Style/RedundantFileExtensionInRequire:
 Style/RedundantInitialize:
   Enabled: true
   Exclude:
-    - lib/jekyll/plugin.rb
+  - lib/jekyll/plugin.rb
 Style/RedundantRegexpCharacterClass:
   Enabled: true
 Style/RedundantRegexpEscape:
@@ -448,8 +476,8 @@ Style/RescueModifier:
   Enabled: false
 Style/SafeNavigation:
   Exclude:
-    - lib/jekyll/document.rb
-    - lib/jekyll/page.rb
+  - lib/jekyll/document.rb
+  - lib/jekyll/page.rb
 Style/SignalException:
   EnforcedStyle: only_raise
 Style/SingleArgumentDig:
@@ -458,11 +486,13 @@ Style/SlicingWithRange:
   Enabled: false
 Style/SoleNestedConditional:
   Enabled: true
+Style/StringChars:
+  Enabled: true
 Style/StringConcatenation:
   Enabled: true
   Exclude:
-    - lib/jekyll/commands/*.rb
-    - test/**/*.rb
+  - lib/jekyll/commands/*.rb
+  - test/**/*.rb
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/StringLiteralsInInterpolation:
