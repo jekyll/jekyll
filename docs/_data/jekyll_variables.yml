@@ -106,7 +106,7 @@ page:
   - name: page.excerpt
     description: >-
       The un-rendered excerpt of a Page or Document. Can be overridden in the
-      <a href="/docs/front-matter/">front matter</a> and disabled atoomically by setting an empty
+      <a href="/docs/front-matter/">front matter</a> and disabled automatically by setting an empty
       as <code>excerpt_separator</code> key either in the front matter of desired resource or
       disable site-wide by setting the same as a top-level key in the config file.
   - name: page.url
