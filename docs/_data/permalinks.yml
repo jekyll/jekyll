@@ -89,3 +89,51 @@ placeholders:
   - name: output_ext
     desc: >-
       Extension of the output file. (Included by default and usually unnecessary.)
+
+builtin_formats:
+  - name: date
+    format: "/:categories/:year/:month/:day/:title:output_ext"
+  - name: pretty
+    format: "/:categories/:year/:month/:day/:title/"
+  - name: ordinal
+    format: "/:categories/:year/:y_day/:title:output_ext"
+  - name: weekdate
+    intro_ver: "4.0"
+    format: "/:categories/:year/W:week/:short_day/:title:output_ext"
+    note: "<code>W</code> will be prefixed to the value of <code>:week</code>"
+  - name: none
+    format: "/:categories/:title:output_ext"
+
+types:
+  documents:
+    - name: collection
+      desc: >-
+        Label of the containing collection.
+    - name: path
+      desc: >-
+        Path to the document relative to the collection's directory, including base filename of the document.
+        However, does not include the file extension.
+    - name: name
+      desc: >-
+        The document's base filename but slugified: downcased and every sequence of non-alphanumeric character
+        (including spaces) replaced by a hyphen.
+    - name: title
+      desc: >-
+        Takes on the value of front matter key <code>slug</code> if defined for the document. Otherwise takes
+        on the string value generated from the document's base filename by piping through the <code>slugify</code>
+        filter method with <code>pretty</code> option.<br/>
+        Regardless of the value taken, the case of the alphabets are preserved instead of being replaced with
+        lowercase counterparts.
+    - name: output_ext
+      desc: >-
+        Extension of the output file. (Included by default and usually unnecessary.)
+  pages:
+    - name: path
+      desc: >-
+        Path between the source directory and the base filename of the page.
+    - name: basename
+      desc: >-
+        The page's base filename.
+    - name: output_ext
+      desc: >-
+        Extension of the output file. (Included by default and usually unnecessary.)

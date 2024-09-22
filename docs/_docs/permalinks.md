@@ -82,50 +82,22 @@ For posts, Jekyll also provides the following built-in styles for convenience:
     </tr>
   </thead>
   <tbody>
+    {%- for entry in site.data.permalinks.builtin_formats %}
     <tr>
-      <td>
-        <p><code>date</code></p>
+      <td><p><code>{{ entry.name }}</code></p>
+        {%- if entry.intro_ver -%}
+          <small>{% include docs_version_badge.html version = entry.intro_ver %}</small>
+        {%- endif -%}
       </td>
       <td>
-        <p><code>/:categories/:year/:month/:day/:title:output_ext</code></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p><code>pretty</code></p>
-      </td>
-      <td>
-        <p><code>/:categories/:year/:month/:day/:title/</code></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p><code>ordinal</code></p>
-      </td>
-      <td>
-        <p><code>/:categories/:year/:y_day/:title:output_ext</code></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p><code>weekdate</code></p>
-        <small>{% include docs_version_badge.html version="4.0" %}</small>
-      </td>
-      <td>
-        <p>
-          <code>/:categories/:year/W:week/:short_day/:title:output_ext</code><br/>
-          <small>(<code>W</code> will be prefixed to the value of <code>:week</code>)</small>
+        <p><code>{{ entry.format }}</code>
+        {%- if entry.note -%}<br/>
+          <small>({{ entry.note }})</small>
+        {%- endif -%}
         </p>
       </td>
     </tr>
-    <tr>
-      <td>
-        <p><code>none</code></p>
-      </td>
-      <td>
-        <p><code>/:categories/:title:output_ext</code></p>
-      </td>
-    </tr>
+    {%- endfor %}
   </tbody>
 </table>
 </div>
@@ -160,57 +132,12 @@ Collections have the following placeholders available:
     </tr>
   </thead>
   <tbody>
+    {%- for entry in site.data.permalinks.types.documents -%}
     <tr>
-      <td>
-        <p><code>:collection</code></p>
-      </td>
-      <td>
-        <p>Label of the containing collection.</p>
-      </td>
+      <td><p><code>:{{ entry.name }}</code></p></td>
+      <td><p>{{ entry.desc }}</p></td>
     </tr>
-    <tr>
-      <td>
-        <p><code>:path</code></p>
-      </td>
-      <td>
-        <p>
-          Path to the document relative to the collection's directory,
-          including base filename of the document.
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p><code>:name</code></p>
-      </td>
-      <td>
-        <p>The document's base filename, with every sequence of spaces
-        and non-alphanumeric characters replaced by a hyphen.</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p><code>:title</code></p>
-      </td>
-      <td>
-        <p>
-          The <code>:title</code> template variable will take the
-          <code>slug</code> <a href="/docs/front-matter/">front matter</a>
-          variable value if any is present in the document; if none is
-          defined then <code>:title</code> will be equivalent to
-          <code>:name</code>, aka the slug generated from the filename.
-          Preserves case from the source.
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p><code>:output_ext</code></p>
-      </td>
-      <td>
-        <p>Extension of the output file. (Included by default and usually unnecessary.)</p>
-      </td>
-    </tr>
+    {%- endfor -%}
   </tbody>
 </table>
 </div>
@@ -232,36 +159,12 @@ Pages have the following placeholders available:
     </tr>
   </thead>
   <tbody>
+    {%- for entry in site.data.permalinks.types.pages -%}
     <tr>
-      <td>
-        <p><code>:path</code></p>
-      </td>
-      <td>
-        <p>
-          Path to the page relative to the site's source directory, excluding
-          base filename of the page.
-        </p>
-      </td>
+      <td><p><code>:{{ entry.name }}</code></p></td>
+      <td><p>{{ entry.desc }}</p></td>
     </tr>
-    <tr>
-      <td>
-        <p><code>:basename</code></p>
-      </td>
-      <td>
-        <p>The page's base filename</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p><code>:output_ext</code></p>
-      </td>
-      <td>
-        <p>
-          Extension of the output file. (Included by default and usually
-          unnecessary.)
-        </p>
-      </td>
-    </tr>
+    {%- endfor -%}
   </tbody>
 </table>
 </div>
