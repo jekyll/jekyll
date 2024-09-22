@@ -109,8 +109,10 @@ end
     <code>--safe</code> option to disable plugins (with the exception of some
     <a href="https://pages.github.com/versions">whitelisted plugins</a>) for security reasons. Unfortunately, this means your plugins won't
     work if you’re deploying via GitHub Pages.<br><br>
-    You can still use GitHub Pages to publish your site, but you’ll need to build the site locally and push the generated files to your
-    GitHub repository instead of the Jekyll source files.
+    You can still use GitHub Pages to publish your site, but you'll need to either build the site locally and push the generated files to
+    your GitHub repository or use
+    <a href="{{ '/docs/continuous-integration/github-actions/' | relative_url }}" title="GitHub Actions">GitHub Actions</a> to host source
+    files on GitHub yet build and deploy with full control on GitHub Pages.
   </p>
 </div>
 
