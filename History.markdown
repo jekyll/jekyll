@@ -106,6 +106,7 @@
   * Update current Ruby version renders and macOS docs (#9614)
   * Improve docs around using GitHub Actions to build and deploy Jekyll sites (#9682)
   * Fix grammar in the description of `page.excerpt` variable (#9689)
+  * Render HTML tables at `/docs/permalinks/` using a data file (#9666)
 
 ### Site Enhancements
 
