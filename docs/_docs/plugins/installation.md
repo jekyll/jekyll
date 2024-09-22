@@ -112,7 +112,7 @@ end
     You can still use GitHub Pages to publish your site, but you'll need to either build the site locally and push the generated files to
     your GitHub repository or use
     <a href="{{ '/docs/continuous-integration/github-actions/' | relative_url }}" title="GitHub Actions">GitHub Actions</a> to host source
-    files yet build and deploy with full control on GitHub Pages.
+    files on GitHub yet build and deploy with full control on GitHub Pages.
   </p>
 </div>
 
