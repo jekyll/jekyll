@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-09-22T11:02:07-07:00" />
+<meta property="article:published_time" content="2024-09-22T11:22:31-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Permalinks" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-09-22T11:02:07-07:00","datePublished":"2024-09-22T11:02:07-07:00","description":"Permalinks are the output path for your pages, posts, or collections. They allow you to structure the directories of your source code different from the directories in your output.","headline":"Permalinks","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/permalinks/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/permalinks/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-09-22T11:22:31-07:00","datePublished":"2024-09-22T11:22:31-07:00","description":"Permalinks are the output path for your pages, posts, or collections. They allow you to structure the directories of your source code different from the directories in your output.","headline":"Permalinks","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/permalinks/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/permalinks/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -185,242 +185,99 @@ aspects of the permalink style are ignored for the output.</p>
   </thead>
   <tbody>
     <tr>
-      <td>
-        <p><code>:year</code></p>
-      </td>
-      <td>
-        <p>
-          Year from the post’s filename with four digits.
-          May be overridden via the document’s <code>date</code> front matter.
-        </p>
-      </td>
+      <td><p><code>:year</code></p></td>
+      <td><p>Year from the post's filename with four digits. May be overridden via the document's <code>date</code> front matter.</p></td>
     </tr>
     <tr>
-      <td>
-        <p><code>:short_year</code></p>
-      </td>
-      <td>
-        <p>
-          Year from the post’s filename without the century. (00..99)
-          May be overridden via the document’s <code>date</code> front matter.
-        </p>
-      </td>
+      <td><p><code>:short_year</code></p></td>
+      <td><p>Year from the post's filename without the century. (00..99) May be overridden via the document's <code>date</code> front matter.</p></td>
     </tr>
     <tr>
-      <td>
-        <p><code>:month</code></p>
-      </td>
-      <td>
-        <p>
-          Month from the post’s filename. (01..12)
-          May be overridden via the document’s <code>date</code> front matter.
-        </p>
-      </td>
+      <td><p><code>:month</code></p></td>
+      <td><p>Month from the post's filename. (01..12) May be overridden via the document's <code>date</code> front matter.</p></td>
     </tr>
     <tr>
-      <td>
-        <p><code>:i_month</code></p>
-      </td>
-      <td>
-        <p>
-          Month without leading zeros from the post’s filename. May be
-          overridden via the document’s <code>date</code> front matter.
-        </p>
-      </td>
+      <td><p><code>:i_month</code></p></td>
+      <td><p>Month without leading zeros from the post's filename. May be overridden via the document's <code>date</code> front matter.</p></td>
     </tr>
     <tr>
-      <td>
-        <p><code>:short_month</code></p>
-      </td>
-      <td>
-        <p>Three-letter month abbreviation, e.g. “Jan”.</p>
-      </td>
+      <td><p><code>:short_month</code></p></td>
+      <td><p>Three-letter month abbreviation, e.g. "Jan".</p></td>
     </tr>
     <tr>
-      <td>
-        <p><code>:long_month</code></p>
-        <small><span class="version-badge" title="This feature is available starting version 4.0">4.0</span>
-</small>
-      </td>
-      <td>
-        <p>Full month name, e.g. “January”.</p>
-      </td>
+      <td><p><code>:long_month</code></p><small><span class="version-badge" title="This feature is available starting version 4.0">4.0</span>
+</small></td>
+      <td><p>Full month name, e.g. "January".</p></td>
     </tr>
     <tr>
-      <td>
-        <p><code>:day</code></p>
-      </td>
-      <td>
-        <p>
-          Day of the month from the post’s filename. (01..31)
-          May be overridden via the document’s <code>date</code> front matter.
-        </p>
-      </td>
+      <td><p><code>:day</code></p></td>
+      <td><p>Day of the month from the post's filename. (01..31) May be overridden via the document's <code>date</code> front matter.</p></td>
     </tr>
     <tr>
-      <td>
-        <p><code>:i_day</code></p>
-      </td>
-      <td>
-        <p>
-          Day of the month without leading zeros from the post’s filename.
-          May be overridden via the document’s <code>date</code> front matter.
-        </p>
-      </td>
+      <td><p><code>:i_day</code></p></td>
+      <td><p>Day of the month without leading zeros from the post's filename. May be overridden via the document's <code>date</code> front matter.</p></td>
     </tr>
     <tr>
-      <td>
-        <p><code>:y_day</code></p>
-      </td>
-      <td>
-        <p>Ordinal day of the year from the post’s filename, with leading zeros. (001..366)</p>
-      </td>
+      <td><p><code>:y_day</code></p></td>
+      <td><p>Ordinal day of the year from the post's filename, with leading zeros. (001..366)</p></td>
     </tr>
     <tr>
-      <td>
-        <p><code>:w_year</code></p>
-        <small><span class="version-badge" title="This feature is available starting version 4.0">4.0</span>
-</small>
-      </td>
-      <td>
-        <p>Week year which may differ from the month year for up to three days at the start of January and end of December</p>
-      </td>
+      <td><p><code>:w_year</code></p><small><span class="version-badge" title="This feature is available starting version 4.0">4.0</span>
+</small></td>
+      <td><p>Week year which may differ from the month year for up to three days at the start of January and end of December</p></td>
     </tr>
     <tr>
-      <td>
-        <p><code>:week</code></p>
-        <small><span class="version-badge" title="This feature is available starting version 4.0">4.0</span>
-</small>
-      </td>
-      <td>
-        <p>Week number of the current year, starting with the first week having a majority of its days in January. (01..53)</p>
-      </td>
+      <td><p><code>:week</code></p><small><span class="version-badge" title="This feature is available starting version 4.0">4.0</span>
+</small></td>
+      <td><p>Week number of the current year, starting with the first week having a majority of its days in January. (01..53)</p></td>
     </tr>
     <tr>
-      <td>
-        <p><code>:w_day</code></p>
-        <small><span class="version-badge" title="This feature is available starting version 4.0">4.0</span>
-</small>
-      </td>
-      <td>
-        <p>Day of the week, starting with Monday. (1..7)</p>
-      </td>
+      <td><p><code>:w_day</code></p><small><span class="version-badge" title="This feature is available starting version 4.0">4.0</span>
+</small></td>
+      <td><p>Day of the week, starting with Monday. (1..7)</p></td>
     </tr>
     <tr>
-      <td>
-        <p><code>:short_day</code></p>
-        <small><span class="version-badge" title="This feature is available starting version 4.0">4.0</span>
-</small>
-      </td>
-      <td>
-        <p>Three-letter weekday abbreviation, e.g. “Sun”.</p>
-      </td>
+      <td><p><code>:short_day</code></p><small><span class="version-badge" title="This feature is available starting version 4.0">4.0</span>
+</small></td>
+      <td><p>Three-letter weekday abbreviation, e.g. "Sun".</p></td>
     </tr>
     <tr>
-      <td>
-        <p><code>:long_day</code></p>
-        <small><span class="version-badge" title="This feature is available starting version 4.0">4.0</span>
-</small>
-      </td>
-      <td>
-        <p>Weekday name, e.g. “Sunday”.</p>
-      </td>
+      <td><p><code>:long_day</code></p><small><span class="version-badge" title="This feature is available starting version 4.0">4.0</span>
+</small></td>
+      <td><p>Weekday name, e.g. "Sunday".</p></td>
     </tr>
     <tr>
-      <td>
-        <p><code>:hour</code></p>
-      </td>
-      <td>
-        <p>
-          Hour of the day, 24-hour clock, zero-padded from the post’s
-          <code>date</code> front matter. (00..23)
-        </p>
-      </td>
+      <td><p><code>:hour</code></p></td>
+      <td><p>Hour of the day, 24-hour clock, zero-padded from the post's <code>date</code> front matter. (00..23)</p></td>
     </tr>
     <tr>
-      <td>
-        <p><code>:minute</code></p>
-      </td>
-      <td>
-        <p>
-          Minute of the hour from the post’s <code>date</code> front matter. (00..59)
-        </p>
-      </td>
+      <td><p><code>:minute</code></p></td>
+      <td><p>Minute of the hour from the post's <code>date</code> front matter. (00..59)</p></td>
     </tr>
     <tr>
-      <td>
-        <p><code>:second</code></p>
-      </td>
-      <td>
-        <p>
-          Second of the minute from the post’s <code>date</code> front matter. (00..59)
-        </p>
-      </td>
+      <td><p><code>:second</code></p></td>
+      <td><p>Second of the minute from the post's <code>date</code> front matter. (00..59)</p></td>
     </tr>
     <tr>
-      <td>
-        <p><code>:title</code></p>
-      </td>
-      <td>
-        <p>
-            Title from the document’s filename. May be overridden via
-            the document’s <code>slug</code> front matter. Preserves case from the source.
-        </p>
-      </td>
+      <td><p><code>:title</code></p></td>
+      <td><p>Title from the document's filename. May be overridden via the document's <code>slug</code> front matter. Preserves case from the source.</p></td>
     </tr>
     <tr>
-      <td>
-        <p><code>:slug</code></p>
-      </td>
-      <td>
-        <p>
-            Slugified title from the document’s filename (any character
-            except numbers and letters is replaced as hyphen). May be
-            overridden via the document’s <code>slug</code> front matter.
-        </p>
-      </td>
+      <td><p><code>:slug</code></p></td>
+      <td><p>Slugified title from the document's filename (any character except numbers and letters is replaced as hyphen). May be overridden via the document's <code>slug</code> front matter.</p></td>
     </tr>
     <tr>
-      <td>
-        <p><code>:categories</code></p>
-      </td>
-      <td>
-        <p>
-          The specified categories for this post. If a post has multiple
-          categories, Jekyll will create a hierarchy (e.g. <code>/category1/category2</code>).
-          Also Jekyll automatically parses out double slashes in the URLs,
-          so if no categories are present, it will ignore this.
-        </p>
-      </td>
+      <td><p><code>:categories</code></p></td>
+      <td><p>The specified categories for this post. If a post has multiple categories, Jekyll will create a hierarchy (e.g. <code>/category1/category2</code>). Also Jekyll automatically parses out double slashes in the URLs, so if no categories are present, it will ignore this.</p></td>
     </tr>
     <tr>
-      <td>
-        <p><code>:slugified_categories</code></p>
-        <small><span class="version-badge" title="This feature is available starting version 4.1">4.1</span>
-</small>
-      </td>
-      <td>
-        <p>
-          The specified categories for this post but <em>slugified</em>. If a category is a
-          composite of multiple words, Jekyll will downcase all alphabets and replace any
-          non-alphanumeric character with a hyphen. (e.g. <code>"Work 2 Progress"</code>
-          will be converted into <code>"work-2-progress"</code>)
-        </p>
-        <p>
-          If a post has multiple categories, Jekyll will create a hierarchy
-          (e.g. <code>/work-2-progress/category2</code>).
-          Also Jekyll automatically parses out double slashes in the URLs,
-          so if no categories are present, it will ignore this.
-        </p>
-      </td>
+      <td><p><code>:slugified_categories</code></p><small><span class="version-badge" title="This feature is available starting version 4.1">4.1</span>
+</small></td>
+      <td><p>The specified categories for this post but <em>slugified</em>. If a category is a composite of multiple words, Jekyll will downcase all alphabets and replace any non-alphanumeric character with a hyphen. (e.g. <code>"Work 2 Progress"</code> will be converted into <code>"work-2-progress"</code>). If a post has multiple categories, Jekyll will create a hierarchy (e.g. <code>/work-2-progress/category2</code>). Also Jekyll automatically parses out double slashes in the URLs, so if no categories are present, it will ignore this.</p></td>
     </tr>
     <tr>
-      <td>
-        <p><code>:output_ext</code></p>
-      </td>
-      <td>
-        <p>Extension of the output file. (Included by default and usually unnecessary.)</p>
-      </td>
+      <td><p><code>:output_ext</code></p></td>
+      <td><p>Extension of the output file. (Included by default and usually unnecessary.)</p></td>
     </tr>
   </tbody>
 </table>
@@ -440,46 +297,33 @@ aspects of the permalink style are ignored for the output.</p>
   </thead>
   <tbody>
     <tr>
-      <td>
-        <p><code>date</code></p>
-      </td>
+      <td><p><code>date</code></p></td>
       <td>
         <p><code>/:categories/:year/:month/:day/:title:output_ext</code></p>
       </td>
     </tr>
     <tr>
-      <td>
-        <p><code>pretty</code></p>
-      </td>
+      <td><p><code>pretty</code></p></td>
       <td>
         <p><code>/:categories/:year/:month/:day/:title/</code></p>
       </td>
     </tr>
     <tr>
-      <td>
-        <p><code>ordinal</code></p>
-      </td>
+      <td><p><code>ordinal</code></p></td>
       <td>
         <p><code>/:categories/:year/:y_day/:title:output_ext</code></p>
       </td>
     </tr>
     <tr>
+      <td><p><code>weekdate</code></p><small><span class="version-badge" title="This feature is available starting version 4.0">4.0</span>
+</small></td>
       <td>
-        <p><code>weekdate</code></p>
-        <small><span class="version-badge" title="This feature is available starting version 4.0">4.0</span>
-</small>
-      </td>
-      <td>
-        <p>
-          <code>/:categories/:year/W:week/:short_day/:title:output_ext</code><br />
-          <small>(<code>W</code> will be prefixed to the value of <code>:week</code>)</small>
-        </p>
+        <p><code>/:categories/:year/W:week/:short_day/:title:output_ext</code><br />
+          <small>(<code>W</code> will be prefixed to the value of <code>:week</code>)</small></p>
       </td>
     </tr>
     <tr>
-      <td>
-        <p><code>none</code></p>
-      </td>
+      <td><p><code>none</code></p></td>
       <td>
         <p><code>/:categories/:title:output_ext</code></p>
       </td>
@@ -516,59 +360,22 @@ the global permalink in the collection configuration in <code class="language-pl
       <th>Description</th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <td>
-        <p><code>:collection</code></p>
-      </td>
-      <td>
-        <p>Label of the containing collection.</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p><code>:path</code></p>
-      </td>
-      <td>
-        <p>
-          Path to the document relative to the collection's directory,
-          including base filename of the document.
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p><code>:name</code></p>
-      </td>
-      <td>
-        <p>The document's base filename, with every sequence of spaces
-        and non-alphanumeric characters replaced by a hyphen.</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p><code>:title</code></p>
-      </td>
-      <td>
-        <p>
-          The <code>:title</code> template variable will take the
-          <code>slug</code> <a href="/docs/front-matter/">front matter</a>
-          variable value if any is present in the document; if none is
-          defined then <code>:title</code> will be equivalent to
-          <code>:name</code>, aka the slug generated from the filename.
-          Preserves case from the source.
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p><code>:output_ext</code></p>
-      </td>
-      <td>
-        <p>Extension of the output file. (Included by default and usually unnecessary.)</p>
-      </td>
-    </tr>
-  </tbody>
+  <tbody><tr>
+      <td><p><code>:collection</code></p></td>
+      <td><p>Label of the containing collection.</p></td>
+    </tr><tr>
+      <td><p><code>:path</code></p></td>
+      <td><p>Path to the document relative to the collection's directory, including base filename of the document. However, does not include the file extension.</p></td>
+    </tr><tr>
+      <td><p><code>:name</code></p></td>
+      <td><p>The document's base filename but slugified: downcased and every sequence of non-alphanumeric character (including spaces) replaced by a hyphen.</p></td>
+    </tr><tr>
+      <td><p><code>:title</code></p></td>
+      <td><p>Takes on the value of front matter key <code>slug</code> if defined for the document. Otherwise takes on the string value generated from the document's base filename by piping through the <code>slugify</code> filter method with <code>pretty</code> option.<br /> Regardless of the value taken, the case of the alphabets are preserved instead of being replaced with lowercase counterparts.</p></td>
+    </tr><tr>
+      <td><p><code>:output_ext</code></p></td>
+      <td><p>Extension of the output file. (Included by default and usually unnecessary.)</p></td>
+    </tr></tbody>
 </table>
 </div>
 
@@ -588,38 +395,16 @@ it will be ignored.</p>
       <th>Description</th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <td>
-        <p><code>:path</code></p>
-      </td>
-      <td>
-        <p>
-          Path to the page relative to the site's source directory, excluding
-          base filename of the page.
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p><code>:basename</code></p>
-      </td>
-      <td>
-        <p>The page's base filename</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p><code>:output_ext</code></p>
-      </td>
-      <td>
-        <p>
-          Extension of the output file. (Included by default and usually
-          unnecessary.)
-        </p>
-      </td>
-    </tr>
-  </tbody>
+  <tbody><tr>
+      <td><p><code>:path</code></p></td>
+      <td><p>Path between the source directory and the base filename of the page.</p></td>
+    </tr><tr>
+      <td><p><code>:basename</code></p></td>
+      <td><p>The page's base filename.</p></td>
+    </tr><tr>
+      <td><p><code>:output_ext</code></p></td>
+      <td><p>Extension of the output file. (Included by default and usually unnecessary.)</p></td>
+    </tr></tbody>
 </table>
 </div>
 
