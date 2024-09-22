@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-09-16T09:21:14-07:00" />
+<meta property="article:published_time" content="2024-09-22T05:26:13-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Plugins" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-09-16T09:21:14-07:00","datePublished":"2024-09-16T09:21:14-07:00","description":"Jekyll has built-in support for using plugins to extend the core functionality.","headline":"Plugins","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/plugins/installation/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/plugins/installation/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-09-22T05:26:13-07:00","datePublished":"2024-09-22T05:26:13-07:00","description":"Jekyll has built-in support for using plugins to extend the core functionality.","headline":"Plugins","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/plugins/installation/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/plugins/installation/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -237,8 +237,10 @@ file, the downside is the necessity to be mindful of what gems are included in t
     <code>--safe</code> option to disable plugins (with the exception of some
     <a href="https://pages.github.com/versions">whitelisted plugins</a>) for security reasons. Unfortunately, this means your plugins won't
     work if you’re deploying via GitHub Pages.<br /><br />
-    You can still use GitHub Pages to publish your site, but you’ll need to build the site locally and push the generated files to your
-    GitHub repository instead of the Jekyll source files.
+    You can still use GitHub Pages to publish your site, but you'll need to either build the site locally and push the generated files to
+    your GitHub repository or use
+    <a href="/docs/continuous-integration/github-actions/" title="GitHub Actions">GitHub Actions</a> to host source
+    files on GitHub yet build and deploy with full control on GitHub Pages.
   </p>
 </div>
 
