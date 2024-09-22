@@ -1,0 +1,139 @@
+placeholders:
+  - name: year
+    desc: >-
+      Year from the post's filename with four digits. May be overridden via the document's
+      <code>date</code> front matter.
+  - name: short_year
+    desc: >-
+      Year from the post's filename without the century. (00..99) May be overridden via the
+      document's <code>date</code> front matter.
+  - name: month
+    desc: >-
+      Month from the post's filename. (01..12) May be overridden via the document's
+      <code>date</code> front matter.
+  - name: i_month
+    desc: >-
+      Month without leading zeros from the post's filename. May be overridden via the document's
+      <code>date</code> front matter.
+  - name: short_month
+    desc: >-
+      Three-letter month abbreviation, e.g. "Jan".
+  - name: long_month
+    intro_ver: "4.0"
+    desc: >-
+      Full month name, e.g. "January".
+  - name: day
+    desc: >-
+      Day of the month from the post's filename. (01..31) May be overridden via the document's
+      <code>date</code> front matter.
+  - name: i_day
+    desc: >-
+      Day of the month without leading zeros from the post's filename. May be overridden via the
+      document's <code>date</code> front matter.
+  - name: y_day
+    desc: >-
+      Ordinal day of the year from the post's filename, with leading zeros. (001..366)
+  - name: w_year
+    intro_ver: "4.0"
+    desc: >-
+      Week year which may differ from the month year for up to three days at the start of January
+      and end of December
+  - name: week
+    intro_ver: "4.0"
+    desc: >-
+      Week number of the current year, starting with the first week having a majority of its days
+      in January. (01..53)
+  - name: w_day
+    intro_ver: "4.0"
+    desc: >-
+      Day of the week, starting with Monday. (1..7)
+  - name: short_day
+    intro_ver: "4.0"
+    desc: >-
+      Three-letter weekday abbreviation, e.g. "Sun".
+  - name: long_day
+    intro_ver: "4.0"
+    desc: >-
+      Weekday name, e.g. "Sunday".
+  - name: hour
+    desc: >-
+      Hour of the day, 24-hour clock, zero-padded from the post's <code>date</code> front matter. (00..23)
+  - name: minute
+    desc: >-
+      Minute of the hour from the post's <code>date</code> front matter. (00..59)
+  - name: second
+    desc: >-
+      Second of the minute from the post's <code>date</code> front matter. (00..59)
+  - name: title
+    desc: >-
+      Title from the document's filename. May be overridden via the document's
+      <code>slug</code> front matter. Preserves case from the source.
+  - name: slug
+    desc: >-
+      Slugified title from the document's filename (any character except numbers and letters is
+      replaced as hyphen). May be overridden via the document's <code>slug</code> front matter.
+  - name: categories
+    desc: >-
+      The specified categories for this post. If a post has multiple categories, Jekyll will create
+      a hierarchy (e.g. <code>/category1/category2</code>). Also Jekyll automatically parses out
+      double slashes in the URLs, so if no categories are present, it will ignore this.
+  - name: slugified_categories
+    intro_ver: "4.1"
+    desc: >-
+      The specified categories for this post but <em>slugified</em>. If a category is a composite of
+      multiple words, Jekyll will downcase all alphabets and replace any non-alphanumeric character
+      with a hyphen. (e.g. <code>"Work 2 Progress"</code> will be converted into
+      <code>"work-2-progress"</code>). If a post has multiple categories, Jekyll will create
+      a hierarchy (e.g. <code>/work-2-progress/category2</code>). Also Jekyll automatically parses
+      out double slashes in the URLs, so if no categories are present, it will ignore this.
+  - name: output_ext
+    desc: >-
+      Extension of the output file. (Included by default and usually unnecessary.)
+
+builtin_formats:
+  - name: date
+    format: "/:categories/:year/:month/:day/:title:output_ext"
+  - name: pretty
+    format: "/:categories/:year/:month/:day/:title/"
+  - name: ordinal
+    format: "/:categories/:year/:y_day/:title:output_ext"
+  - name: weekdate
+    intro_ver: "4.0"
+    format: "/:categories/:year/W:week/:short_day/:title:output_ext"
+    note: "<code>W</code> will be prefixed to the value of <code>:week</code>"
+  - name: none
+    format: "/:categories/:title:output_ext"
+
+types:
+  documents:
+    - name: collection
+      desc: >-
+        Label of the containing collection.
+    - name: path
+      desc: >-
+        Path to the document relative to the collection's directory, including base filename of the document.
+        However, does not include the file extension.
+    - name: name
+      desc: >-
+        The document's base filename but slugified: downcased and every sequence of non-alphanumeric character
+        (including spaces) replaced by a hyphen.
+    - name: title
+      desc: >-
+        Takes on the value of front matter key <code>slug</code> if defined for the document. Otherwise takes
+        on the string value generated from the document's base filename by piping through the <code>slugify</code>
+        filter method with <code>pretty</code> option.<br/>
+        Regardless of the value taken, the case of the alphabets are preserved instead of being replaced with
+        lowercase counterparts.
+    - name: output_ext
+      desc: >-
+        Extension of the output file. (Included by default and usually unnecessary.)
+  pages:
+    - name: path
+      desc: >-
+        Path between the source directory and the base filename of the page.
+    - name: basename
+      desc: >-
+        The page's base filename.
+    - name: output_ext
+      desc: >-
+        Extension of the output file. (Included by default and usually unnecessary.)
