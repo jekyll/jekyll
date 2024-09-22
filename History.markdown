@@ -104,6 +104,7 @@
   * docs: Fix incorrect parentheses (#9629)
   * docs: Fix of a bug in the pagination section (#8890)
   * Update current Ruby version renders and macOS docs (#9614)
+  * Improve docs around using GitHub Actions to build and deploy Jekyll sites (#9682)
 
 ### Site Enhancements
 
