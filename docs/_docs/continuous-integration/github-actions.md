@@ -2,27 +2,35 @@
 title: GitHub Actions
 ---
 
-When building a Jekyll site with GitHub Pages, the default GitHub Pages Jekyll workflow is restricted
-for security reasons and to make it simpler to get a site setup. For more control over the build and
-still host the site with GitHub Pages you can use the Jekyll workflow.
+When building a Jekyll site with GitHub Pages, Jekyll runs in an environment restricted for security
+reasons, yet containing numerous [whitelisted plugins and themes][ghp-whitelist] to make it simpler
+to get a site set up.
 
-## Advantages of using Jekyll workflow
+The only workaround to have control over the build environment and gemset yet use GitHub Pages to
+host the site was previously by building elsewhere and pushing the built directory contents to the
+`gh-pages` branch on your repository.
+
+However, GitHub now provides you with the option to use their in-house CI/CD product named
+*GitHub Actions* to *build and deploy (host)* your Jekyll site with complete control over the build
+environment and gemset.
+
+## Advantages of using Actions
 
 ### Control over gemset
 
-- **Jekyll version** --- Instead of using the classic GitHub Pages provided version at `3.9.3`, you
+- **Jekyll version** --- Instead of using the classic GitHub Pages-provided version at `3.9.3`, you
   can use any version of Jekyll you want. For example `{{site.version}}`, or point directly to the
-  repository.
-- **Plugins** --- You can use any Jekyll plugins irrespective of them being on the
-  [supported versions][ghp-whitelist] list, even `*.rb` files placed in the `_plugins` directory
-  of your site.
-- **Themes** --- While using a custom theme is possible without Actions, it is now simpler.
+  repository via the Gemfile.
+- **Plugins** --- You can use any Jekyll plugins irrespective of them being whitelisted by GitHub,
+  including any `*.rb` files placed in the `_plugins` directory of your site.
+- **Themes** --- While using a custom theme is possible without Actions, it is now possible to use
+  themes depending on features introduced in newer versions of Jekyll.
 
 {: .note .info}
-If you are migrating from the standard flow but want to keep using a GitHub-hosted theme, add
-[jekyll-remote-theme][remote-theme] and any [related dependencies][ghp-whitelist] your theme
-previously automatically pulled in to `_config.yml` and `Gemfile` and set the
-[correct repository][ghp-repo] in `_config.yml`.
+If you are migrating from the classic flow but want to keep using a GitHub-hosted theme, you may use
+the [jekyll-remote-theme][remote-theme] plugin, add any required dependencies of your theme
+(previously bundled by default) into your `_config.yml` and `Gemfile` and set the
+`remote_theme: <owner>/<repo_name>` theme repository slug correctly in your `_config.yml`.
 
 ### Workflow Management
 
@@ -31,7 +39,7 @@ previously automatically pulled in to `_config.yml` and `Gemfile` and set the
 - **Logging** --- The build log is visible and can be tweaked to be verbose, so it is much easier to
   debug errors using Actions.
 - **Caching** --- The `ruby/setup-ruby` action makes it possible to cache installed gems
-  automatically instead of having to download a jekyll-build-pages image each time.
+  automatically instead of having to download the bundle on each build.
 
 ## Workspace setup
 
@@ -39,7 +47,7 @@ The first and foremost requirement is a Jekyll project hosted at GitHub. Choose 
 project or follow the [quickstart]({{ '/docs/' | relative_url }}) and push the repository to GitHub
 if it is not hosted there already.
 
-The Jekyll site we'll be using for the rest of this page initially consists of just a `_config.yml`,
+The Jekyll site we'll be using for the rest of this page, initially consists of just a `_config.yml`,
 an `index.md` page and a `Gemfile`. The contents are respectively:
 
 ```yaml
@@ -126,6 +134,5 @@ The workflow will build and deploy your site again.
 
 [ghp-whitelist]: https://pages.github.com/versions/
 [remote-theme]: https://github.com/benbalter/jekyll-remote-theme
-[ghp-repo]: https://talk.jekyllrb.com/t/error-your-site-could-not-be-built-no-repo-name-found/5688/3
 [timeago-plugin]: https://rubygems.org/gems/jekyll-timeago
 [starter-workflows]: https://github.com/actions/starter-workflows/blob/main/pages/jekyll.yml
