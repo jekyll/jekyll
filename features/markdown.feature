@@ -32,3 +32,24 @@ Feature: Markdown
     And the _site directory should exist
     And I should see "Index" in "_site/index.html"
     And I should see "<h1 id=\"my-title\">My Title</h1>" in "_site/index.html"
+
+  Scenario: Syntax highlighting in Markdown
+    Given I have a "ruby_sample.md" page with content:
+      """
+      ```ruby
+      puts 'Hello World'
+      ```
+      """
+    And I have a "no_highlight_sample.md" page with content:
+      """
+      ```
+      puts 'Hello World'
+      ```
+      """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "<div class=\"language-ruby highlighter-rouge\" data-lang=\"ruby\">" in "_site/ruby_sample.html"
+    And I should see "<div class=\"highlight\"><pre class=\"highlight\"><code><span class=\"nb\">puts</span>" in "_site/ruby_sample.html"
+    But I should not see "data-lang" in "_site/no_highlight_sample.html"
+    And I should not see "<code><span class=\"nb\">puts</span>" in "_site/no_highlight_sample.html"

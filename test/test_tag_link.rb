@@ -29,7 +29,7 @@ class TestTagLink < TagUnitTest
 
     should "render markdown with rouge" do
       assert_match(
-        %(<div class="language-liquid highlighter-rouge">) +
+        %(<div class="language-liquid highlighter-rouge" data-lang="liquid">) +
           %(<div class="highlight"><pre class="highlight"><code>),
         @result
       )

@@ -1,6 +1,17 @@
 # frozen_string_literal: true
 
 module Kramdown
+  require "kramdown/converter/html"
+
+  class JekyllKD2HTML < Converter::Html
+    def add_syntax_highlighter_to_class_attr(attr, lang = nil)
+      super
+      return attr if lang.nil? || lang == "plaintext"
+
+      attr["data-lang"] = lang
+    end
+  end
+
   # A Kramdown::Document subclass meant to optimize memory usage from initializing
   # a kramdown document for parsing.
   #
@@ -59,7 +70,7 @@ module Kramdown
     # The implementation is basically an optimized version of core logic in
     # +Kramdown::Document#method_missing+ from kramdown-2.1.0.
     def to_html
-      output, warnings = Kramdown::Converter::Html.convert(@root, @options)
+      output, warnings = Kramdown::JekyllKD2HTML.convert(@root, @options)
       @warnings.concat(warnings)
       output
     end
