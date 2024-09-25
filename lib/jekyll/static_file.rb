@@ -106,7 +106,7 @@ module Jekyll
       self.class.mtimes[path] = mtime
 
       FileUtils.mkdir_p(File.dirname(dest_path))
-      FileUtils.rm_f(dest_path)
+      FileUtils.rm(dest_path) if File.exist?(dest_path)
       copy_file(dest_path)
 
       true

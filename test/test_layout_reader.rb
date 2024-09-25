@@ -12,7 +12,6 @@ class TestLayoutReader < JekyllUnitTest
 
     should "read layouts" do
       layouts = LayoutReader.new(@site).read
-
       assert_equal ["default", "simple", "post/simple"].sort, layouts.keys.sort
     end
 

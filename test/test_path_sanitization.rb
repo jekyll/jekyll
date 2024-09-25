@@ -9,7 +9,6 @@ class TestPathSanitization < JekyllUnitTest
       @dest   = "./_site/"
       allow(Dir).to receive(:pwd).and_return("C:/Users/xmr/Desktop/mpc-hc.org")
     end
-
     should "strip drive name from path" do
       assert_equal "C:/Users/xmr/Desktop/mpc-hc.org/_site",
                    Jekyll.sanitized_path(@source, @dest)
@@ -35,7 +34,6 @@ class TestPathSanitization < JekyllUnitTest
   should "strip extra slashes in questionable path" do
     subdir = "/files/"
     file_path = "/hi.txt"
-
     assert_equal source_dir("files", "hi.txt"),
                  Jekyll.sanitized_path(source_dir, "/#{subdir}/#{file_path}")
   end

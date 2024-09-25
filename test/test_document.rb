@@ -87,12 +87,10 @@ class TestDocument < JekyllUnitTest
       assert_equal "Collection#entries", parsed["previous"]["title"]
 
       next_doc = parsed["next"]
-
       assert_equal "_methods/escape-+ #%20[].md", next_doc["path"]
       assert_equal "Jekyll.escape", next_doc["title"]
 
       next_prev_doc = next_doc["previous"]
-
       assert_equal "Jekyll.configuration", next_prev_doc["title"]
       assert_equal "_methods/configuration.md", next_prev_doc["path"]
       assert_equal "_methods/escape-+ #%20[].md", next_prev_doc["next"]["path"]
@@ -104,7 +102,6 @@ class TestDocument < JekyllUnitTest
       assert_nil next_prev_doc["next"]["output"]
 
       next_next_doc = next_doc["next"]
-
       assert_equal "Jekyll.sanitized_path", next_next_doc["title"]
       assert_equal "_methods/sanitized_path.md", next_next_doc["path"]
       assert_equal "_methods/escape-+ #%20[].md", next_next_doc["previous"]["path"]
@@ -136,7 +133,6 @@ class TestDocument < JekyllUnitTest
         trailing_dots_doc = @site.posts.docs.detect do |d|
           d.relative_path == "_posts/2018-10-12-trailing-dots...markdown"
         end
-
         assert_equal "/2018/10/12/trailing-dots.html", trailing_dots_doc.url
       end
     end
@@ -172,12 +168,10 @@ class TestDocument < JekyllUnitTest
         # Ruby context: doc.basename is aliased as doc.to_liquid["name"] by default.
 
         document = docs.detect { |d| d.relative_path == "_roles/unnamed.md" }
-
         assert_equal "unnamed.md", document.basename
         assert_equal "unnamed.md", document.to_liquid["name"]
 
         document = docs.detect { |d| d.relative_path == "_roles/named.md" }
-
         assert_equal "named.md", document.basename
         assert_equal "launcher", document.to_liquid["name"]
       end
@@ -209,7 +203,6 @@ class TestDocument < JekyllUnitTest
 
     should "return front matter defaults via to_liquid" do
       hash = @document.to_liquid
-
       assert hash.key? "nested"
       assert_equal({ "key"=>"myval" }, hash["nested"])
     end
@@ -436,7 +429,6 @@ class TestDocument < JekyllUnitTest
 
     should "produce the right destination file if they have a slug" do
       dest_file = dest_dir("slides/so-what-is-jekyll-exactly.html")
-
       assert_equal dest_file, @document.destination(dest_dir)
     end
 
@@ -445,7 +437,6 @@ class TestDocument < JekyllUnitTest
     end
     should "produce the right destination file if they don't have a slug" do
       dest_file = dest_dir("slides/example-slide-5.html")
-
       assert_equal dest_file, @document_without_slug.destination(dest_dir)
     end
 
@@ -457,7 +448,6 @@ class TestDocument < JekyllUnitTest
     end
     should "produce the right destination file if they have a wild slug" do
       dest_file = dest_dir("/slides/Well,-so-what-is-Jekyll,-then.html")
-
       assert_equal dest_file, @document_with_strange_slug.destination(dest_dir)
     end
   end

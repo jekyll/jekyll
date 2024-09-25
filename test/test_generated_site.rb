@@ -34,7 +34,6 @@ class TestGeneratedSite < JekyllUnitTest
     should "hide unpublished posts" do
       published = Dir[dest_dir("publish_test/2008/02/02/*.html")].map \
         { |f| File.basename(f) }
-
       assert_equal 1, published.size
       assert_equal "published.html", published.first
     end
@@ -49,7 +48,6 @@ class TestGeneratedSite < JekyllUnitTest
 
     should "process a page with a folder permalink properly" do
       about = @site.pages.find { |page| page.name == "about.html" }
-
       assert_equal dest_dir("about", "index.html"), about.destination(dest_dir)
       assert_exist dest_dir("about", "index.html")
     end
@@ -103,7 +101,6 @@ class TestGeneratedSite < JekyllUnitTest
 
     should "acceptable limit post is 0" do
       clear_dest
-
       assert(
         fixture_site("limit_posts" => 0),
         "Couldn't create a site with limit_posts=0."

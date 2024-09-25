@@ -57,7 +57,6 @@ class TestURL < JekyllUnitTest
 
     should "handle UrlDrop as a placeholder in addition to a hash" do
       _, matching_doc = fixture_document("_methods/escape-+ #%20[].md")
-
       assert_equal "/methods/escape-+-20/escape-20.html", URL.new(
         :template     => "/methods/:title/:name:output_ext",
         :placeholders => matching_doc.url_placeholders
@@ -66,7 +65,6 @@ class TestURL < JekyllUnitTest
 
     should "check for key without trailing underscore" do
       _, matching_doc = fixture_document("_methods/configuration.md")
-
       assert_equal "/methods/configuration-configuration_methods_configuration", URL.new(
         :template     => "/methods/:name-:slug_:collection_:title",
         :placeholders => matching_doc.url_placeholders

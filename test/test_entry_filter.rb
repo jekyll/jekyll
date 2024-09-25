@@ -13,7 +13,6 @@ class TestEntryFilter < JekyllUnitTest
                 .baz.markdown foo.markdown~ .htaccess _posts _pages ~$benbalter.docx)
 
       entries = EntryFilter.new(@site).filter(ent1)
-
       assert_equal %w(foo.markdown bar.markdown baz.markdown .htaccess), entries
     end
 
@@ -33,7 +32,6 @@ class TestEntryFilter < JekyllUnitTest
       files = %w(index.html site.css .htaccess vendor)
 
       @site.exclude = excludes + ["exclude*"]
-
       assert_equal files, @site.reader.filter_entries(excludes + files + ["excludeA"])
     end
 
@@ -42,7 +40,6 @@ class TestEntryFilter < JekyllUnitTest
       files = %w(index.html vendor/css .htaccess)
 
       @site.exclude = excludes
-
       assert_equal files, @site.reader.filter_entries(excludes + files + ["css"])
     end
 
@@ -51,7 +48,6 @@ class TestEntryFilter < JekyllUnitTest
       files = %w(index.html .htaccess)
 
       @site.exclude = excludes
-
       assert_equal(
         files,
         @site.reader.filter_entries(
@@ -65,7 +61,6 @@ class TestEntryFilter < JekyllUnitTest
       files = %w(index.html _index.html .htaccess includeA)
 
       @site.include = includes
-
       assert_equal files, @site.reader.filter_entries(files)
     end
 
@@ -76,28 +71,24 @@ class TestEntryFilter < JekyllUnitTest
       @site.exclude = excludes
       @site.include = includes
       filtered_entries = EntryFilter.new(@site).filter(entries)
-
       assert_equal %w(README .htaccess), filtered_entries
     end
 
     should "keep safe symlink entries when safe mode enabled" do
       allow(File).to receive(:symlink?).with("symlink.js").and_return(true)
       files = %w(symlink.js)
-
       assert_equal files, @site.reader.filter_entries(files)
     end
 
     should "not filter symlink entries when safe mode disabled" do
       allow(File).to receive(:symlink?).with("symlink.js").and_return(true)
       files = %w(symlink.js)
-
       assert_equal files, @site.reader.filter_entries(files)
     end
 
     should "filter symlink pointing outside site source" do
       ent1 = %w(_includes/tmp)
       entries = EntryFilter.new(@site).filter(ent1)
-
       assert_equal %w(), entries
     end
 
@@ -117,7 +108,6 @@ class TestEntryFilter < JekyllUnitTest
       skip_if_windows "Jekyll does not currently support symlinks on Windows."
 
       @site.reader.read_directories("symlink-test")
-
       refute_equal [], @site.pages
       refute_equal [], @site.static_files
     end
@@ -146,14 +136,12 @@ class TestEntryFilter < JekyllUnitTest
 
     should "return false with all not match path" do
       data = ["a*", "b?"]
-
       refute @filter.glob_include?(data, "ca.txt")
       refute @filter.glob_include?(data, "ba.txt")
     end
 
     should "return true with match path" do
       data = ["a*", "b?", "**/a*"]
-
       assert @filter.glob_include?(data, "a.txt")
       assert @filter.glob_include?(data, "ba")
       assert @filter.glob_include?(data, "c/a/a.txt")
@@ -162,21 +150,18 @@ class TestEntryFilter < JekyllUnitTest
 
     should "match even if there is no leading slash" do
       data = ["vendor/bundle"]
-
       assert @filter.glob_include?(data, "/vendor/bundle")
       assert @filter.glob_include?(data, "vendor/bundle")
     end
 
     should "match even if there is no trailing slash" do
       data = ["/vendor/bundle/", "vendor/ruby"]
-
       assert @filter.glob_include?(data, "vendor/bundle/jekyll/lib/page.rb")
       assert @filter.glob_include?(data, "/vendor/ruby/lib/set.rb")
     end
 
     should "match directory only if there is trailing slash" do
       data = ["_glob_include_test/_is_dir/", "_glob_include_test/_not_dir/"]
-
       assert @filter.glob_include?(data, "_glob_include_test/_is_dir")
       assert @filter.glob_include?(data, "_glob_include_test/_is_dir/include_me.txt")
       refute @filter.glob_include?(data, "_glob_include_test/_not_dir")

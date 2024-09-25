@@ -56,7 +56,6 @@ class TestDrop < JekyllUnitTest
     should "not munge results for another Jekyll::Drops::Drop subclass" do
       fixture_ids = [:lipsum, :lipsum=, :foo]
       fixture_getter_names = %w(lipsum foo)
-
       fixture_ids.each { |id| assert_includes(@drop.class.instance_methods, id) }
 
       fixture_getter_names.each do |name|
@@ -79,13 +78,11 @@ class TestDrop < JekyllUnitTest
     context "mutations" do
       should "return mutations for #[]" do
         @drop["foo"] = "baz"
-
         assert_equal "baz", @drop["foo"]
       end
 
       should "return mutations for #invoke_drop" do
         @drop["foo"] = "baz"
-
         assert_equal "baz", @drop.invoke_drop("foo")
       end
     end
@@ -121,7 +118,6 @@ class TestDrop < JekyllUnitTest
         should "not change mutability when fetching" do
           assert @drop.class.mutable?
           @drop["foo"] = "baz"
-
           assert_equal "baz", @drop.fetch("foo")
           assert @drop.class.mutable?
         end
@@ -136,7 +132,6 @@ class TestDrop < JekyllUnitTest
 
         should "respond true for mutable keys" do
           @drop["bar"] = "baz"
-
           assert @drop.key? "bar"
         end
 

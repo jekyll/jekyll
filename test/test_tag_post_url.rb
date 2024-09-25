@@ -104,7 +104,6 @@ class TestTagPostUrl < TagUnitTest
                             "did not match a post using the new matching method of checking " \
                             "name (path-date-slug) equality. Please make sure that you change " \
                             "this tag to match the post's name exactly."
-
       assert_includes Jekyll.logger.messages, deprecation_warning
     end
   end

@@ -98,14 +98,12 @@ class TestCommandsServe < JekyllUnitTest
       content = @client.get_content(
         "http://#{opts["host"]}:#{opts["livereload_port"]}/livereload.js"
       )
-
       assert_match(%r!LiveReload.on!, content)
     end
 
     should "serve nothing else over HTTP on the default LiveReload port" do
       opts = serve(@standard_options)
       res = @client.get("http://#{opts["host"]}:#{opts["livereload_port"]}/")
-
       assert_equal(400, res.status_code)
       assert_match(%r!only serves livereload.js!, res.content)
     end
@@ -115,7 +113,6 @@ class TestCommandsServe < JekyllUnitTest
       content = @client.get_content(
         "http://#{opts["host"]}:#{opts["port"]}/#{opts["baseurl"]}/hello.html"
       )
-
       assert_match(
         %r!livereload.js\?snipver=1&amp;port=#{opts["livereload_port"]}!,
         content
@@ -131,7 +128,6 @@ class TestCommandsServe < JekyllUnitTest
       content = @client.get_content(
         "http://#{opts["host"]}:#{opts["port"]}/#{opts["baseurl"]}/hello.html"
       )
-
       assert_match(%r!&amp;mindelay=3!, content)
       assert_match(%r!&amp;maxdelay=1066!, content)
     end
@@ -203,7 +199,6 @@ class TestCommandsServe < JekyllUnitTest
 
       should "use empty directory index list when show_dir_listing is true" do
         opts = { "show_dir_listing" => true }
-
         assert_empty custom_opts(opts)[:DirectoryIndex]
       end
 
@@ -345,7 +340,6 @@ class TestCommandsServe < JekyllUnitTest
       assert_equal 0, process.exitstatus
 
       pid = re.match(output)["pid"].to_i
-
       assert pid > 1
 
       Process.kill 9, pid

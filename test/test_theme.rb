@@ -10,7 +10,6 @@ class TestTheme < JekyllUnitTest
   context "initializing" do
     should "normalize the theme name" do
       theme = Theme.new(" Test-Theme ")
-
       assert_equal "test-theme", theme.name
     end
 
@@ -33,14 +32,12 @@ class TestTheme < JekyllUnitTest
     [:assets, :_data, :_layouts, :_includes, :_sass].each do |folder|
       should "know the #{folder} path" do
         expected = theme_dir(folder.to_s)
-
         assert_equal expected, @theme.public_send("#{folder.to_s.tr("_", "")}_path")
       end
     end
 
     should "generate folder paths" do
       expected = theme_dir("_sass")
-
       assert_equal expected, @theme.send(:path_for, :_sass)
     end
 
@@ -57,7 +54,6 @@ class TestTheme < JekyllUnitTest
       skip_if_windows "Jekyll does not currently support symlinks on Windows."
 
       expected = theme_dir("_layouts")
-
       assert_equal expected, @theme.send(:path_for, :_symlink)
     end
   end

@@ -16,7 +16,6 @@ class TestConfiguration < JekyllUnitTest
 
     should "merge input over defaults" do
       result = Configuration.from("source" => "blah")
-
       refute_equal result["source"], Configuration::DEFAULTS["source"]
       assert_equal "blah", result["source"]
     end
@@ -31,7 +30,6 @@ class TestConfiguration < JekyllUnitTest
         "output"    => true,
         "permalink" => "/:categories/:year/:month/:day/:title:output_ext",
       } }
-
       assert_equal expected, result["collections"]
     end
 
@@ -58,7 +56,6 @@ class TestConfiguration < JekyllUnitTest
 
     should "always exclude Gemfile and related paths" do
       exclude = @config["exclude"]
-
       assert_includes exclude, "Gemfile"
       assert_includes exclude, "Gemfile.lock"
       assert_includes exclude, "gemfiles"
@@ -66,7 +63,6 @@ class TestConfiguration < JekyllUnitTest
 
     should "always exclude ruby vendor directories" do
       exclude = @config["exclude"]
-
       assert_includes exclude, "vendor/bundle/"
       assert_includes exclude, "vendor/cache/"
       assert_includes exclude, "vendor/gems/"
@@ -75,7 +71,6 @@ class TestConfiguration < JekyllUnitTest
 
     should "always exclude default cache directories" do
       exclude = @config["exclude"]
-
       assert_includes exclude, ".sass-cache"
       assert_includes exclude, ".jekyll-cache"
     end
@@ -84,16 +79,13 @@ class TestConfiguration < JekyllUnitTest
   context "#add_default_collections" do
     should "no-op if collections is nil" do
       result = Configuration[{ "collections" => nil }].add_default_collections
-
       assert_nil result["collections"]
     end
 
     should "turn an array into a hash" do
       result = Configuration[{ "collections" => %w(methods) }].add_default_collections
-
       assert_instance_of Hash, result["collections"]
       expected = { "posts" => { "output" => true }, "methods" => {} }
-
       assert_equal expected, result["collections"]
     end
 
@@ -119,7 +111,6 @@ class TestConfiguration < JekyllUnitTest
     should "forces posts to output" do
       result = Configuration[{ "collections" => { "posts" => { "output" => false } } }]
         .add_default_collections
-
       assert result["collections"]["posts"]["output"]
     end
   end
@@ -175,13 +166,11 @@ class TestConfiguration < JekyllUnitTest
     should "return .yaml if it exists but .yml does not" do
       allow(File).to receive(:exist?).with(source_dir("_config.yml")).and_return(false)
       allow(File).to receive(:exist?).with(source_dir("_config.yaml")).and_return(true)
-
       assert_equal [source_dir("_config.yaml")], @config.config_files(@no_override)
     end
 
     should "return .yml if both .yml and .yaml exist" do
       allow(File).to receive(:exist?).with(source_dir("_config.yml")).and_return(true)
-
       assert_equal [source_dir("_config.yml")], @config.config_files(@no_override)
     end
 
@@ -189,14 +178,12 @@ class TestConfiguration < JekyllUnitTest
       allow(File).to receive(:exist?).with(source_dir("_config.yml")).and_return(false)
       allow(File).to receive(:exist?).with(source_dir("_config.yaml")).and_return(false)
       allow(File).to receive(:exist?).with(source_dir("_config.toml")).and_return(true)
-
       assert_equal [source_dir("_config.toml")], @config.config_files(@no_override)
     end
 
     should "return .yml if both .yml and .toml exist" do
       allow(File).to receive(:exist?).with(source_dir("_config.yml")).and_return(true)
       allow(File).to receive(:exist?).with(source_dir("_config.toml")).and_return(true)
-
       assert_equal [source_dir("_config.yml")], @config.config_files(@no_override)
     end
 
@@ -238,7 +225,6 @@ class TestConfiguration < JekyllUnitTest
       Jekyll.logger.log_level = :warn
       read_config = @config.read_config_files(%w(empty.yml not_empty.yml))
       Jekyll.logger.log_level = :info
-
       assert_equal "bar", read_config["foo"]
     end
   end
@@ -299,14 +285,12 @@ class TestConfiguration < JekyllUnitTest
       allow($stderr).to receive(:puts).with(
         Colorator.yellow("Configuration file: none")
       )
-
       assert_equal site_configuration, Jekyll.configuration(test_config)
     end
 
     should "load configuration as hash" do
       allow(SafeYAML).to receive(:load_file).with(@path).and_return({})
       allow($stdout).to receive(:puts).with("Configuration file: #{@path}")
-
       assert_equal site_configuration, Jekyll.configuration(test_config)
     end
 
@@ -321,7 +305,6 @@ class TestConfiguration < JekyllUnitTest
       allow($stderr)
         .to receive(:puts)
         .and_return(Colorator.yellow("Configuration file: (INVALID) #{@path}"))
-
       assert_equal site_configuration, Jekyll.configuration(test_config)
     end
 
@@ -359,7 +342,6 @@ class TestConfiguration < JekyllUnitTest
     should "load default plus posts config if no config_file is set" do
       allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return({})
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
-
       assert_equal site_configuration, Jekyll.configuration(test_config)
     end
 
@@ -369,7 +351,6 @@ class TestConfiguration < JekyllUnitTest
         .with(@paths[:other])
         .and_return("baseurl" => "http://example.com")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
-
       assert_equal \
         site_configuration(
           "baseurl" => "http://example.com",
@@ -385,7 +366,6 @@ class TestConfiguration < JekyllUnitTest
         .with(@paths[:other])
         .and_return("baseurl" => "http://example.com")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
-
       assert_equal \
         site_configuration(
           "baseurl" => "http://example.com",
@@ -397,7 +377,6 @@ class TestConfiguration < JekyllUnitTest
     should "load default config if path passed is empty" do
       allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return({})
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
-
       assert_equal \
         site_configuration("config" => [@paths[:empty]]),
         Jekyll.configuration(test_config.merge("config" => [@paths[:empty]]))
@@ -405,7 +384,6 @@ class TestConfiguration < JekyllUnitTest
 
     should "successfully load a TOML file" do
       Jekyll.logger.log_level = :warn
-
       assert_equal \
         site_configuration(
           "baseurl" => "/you-beautiful-blog-you",
@@ -425,7 +403,6 @@ class TestConfiguration < JekyllUnitTest
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:toml]}")
-
       assert_equal(
         site_configuration(
           "config" => [@paths[:default], @paths[:other], @paths[:toml]]
@@ -453,7 +430,6 @@ class TestConfiguration < JekyllUnitTest
       allow($stdout)
         .to receive(:puts)
         .with("Configuration file: #{@paths[:other]}")
-
       assert_equal \
         site_configuration(
           "baseurl" => "http://example.com",
@@ -468,7 +444,6 @@ class TestConfiguration < JekyllUnitTest
   context "#add_default_collections" do
     should "not do anything if collections is nil" do
       conf = Configuration[default_configuration].tap { |c| c["collections"] = nil }
-
       assert_equal conf.add_default_collections, conf
       assert_nil conf.add_default_collections["collections"]
     end
@@ -477,7 +452,6 @@ class TestConfiguration < JekyllUnitTest
       conf = Configuration[default_configuration].tap do |c|
         c["collections"] = ["docs"]
       end
-
       assert_equal conf.add_default_collections, conf.merge(
         "collections" => {
           "docs"  => {},
@@ -493,7 +467,6 @@ class TestConfiguration < JekyllUnitTest
       conf = Configuration[default_configuration].tap do |c|
         c["collections"] = { "posts" => { "output" => false } }
       end
-
       assert_equal conf.add_default_collections, conf.merge(
         "collections" => {
           "posts" => {
@@ -506,7 +479,6 @@ class TestConfiguration < JekyllUnitTest
 
     should "set collections.posts.permalink if it's not set" do
       conf = Configuration[default_configuration]
-
       assert_equal conf.add_default_collections, conf.merge(
         "collections" => {
           "posts" => {
@@ -524,7 +496,6 @@ class TestConfiguration < JekyllUnitTest
           "posts" => { "permalink" => posts_permalink },
         }
       end
-
       assert_equal conf.add_default_collections, conf.merge(
         "collections" => {
           "posts" => {
@@ -547,7 +518,6 @@ class TestConfiguration < JekyllUnitTest
           source_dir("_config_folded.yml")
         )
       )
-
       assert_equal(
         "This string of text will ignore newlines till the next key.\n",
         config["folded_string"]
@@ -565,7 +535,6 @@ class TestConfiguration < JekyllUnitTest
           File.expand_path("../lib/site_template/_config.yml", File.dirname(__FILE__))
         )
       )
-
       assert_includes config["description"], "an awesome description"
       refute_includes config["description"], "\n"
     end

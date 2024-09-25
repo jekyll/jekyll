@@ -71,7 +71,7 @@ class TestRegenerator < JekyllUnitTest
       [@page, @post, @document, @asset_file].each do |item|
         if item.respond_to?(:destination)
           dest = item.destination(@site.dest)
-          FileUtils.rm_f(dest)
+          File.unlink(dest) if File.exist?(dest)
         end
       end
 
@@ -118,11 +118,9 @@ class TestRegenerator < JekyllUnitTest
       @regenerator.add_dependency(path, @layout_path)
 
       File.rename(@layout_path, @layout_path + ".tmp")
-
       refute_path_exists(@layout_path)
 
       @regenerator.clear_cache
-
       assert @regenerator.regenerate?(@post)
     end
   end
@@ -157,7 +155,6 @@ class TestRegenerator < JekyllUnitTest
 
       @regenerator.clear_cache
       expected = {}
-
       assert_equal expected, @regenerator.cache
     end
 
@@ -165,13 +162,11 @@ class TestRegenerator < JekyllUnitTest
       @regenerator.clear
       @regenerator.add(@path)
       @regenerator.write_metadata
-
       assert File.file?(source_dir(".jekyll-metadata"))
     end
 
     should "read from the metadata file" do
       @regenerator = Regenerator.new(@site)
-
       assert_equal File.mtime(@path), @regenerator.metadata[@path]["mtime"]
     end
 
@@ -182,7 +177,6 @@ class TestRegenerator < JekyllUnitTest
       File.write(metadata_file, @regenerator.metadata.to_yaml)
 
       @regenerator = Regenerator.new(@site)
-
       assert_equal File.mtime(@path), @regenerator.metadata[@path]["mtime"]
     end
 
@@ -193,7 +187,6 @@ class TestRegenerator < JekyllUnitTest
       end
 
       @regenerator = Regenerator.new(@site)
-
       assert_equal({}, @regenerator.metadata)
     end
 
@@ -202,7 +195,6 @@ class TestRegenerator < JekyllUnitTest
     should "be able to add a path to the metadata" do
       @regenerator.clear
       @regenerator.add(@path)
-
       assert_equal File.mtime(@path), @regenerator.metadata[@path]["mtime"]
       assert_equal [], @regenerator.metadata[@path]["deps"]
       assert @regenerator.cache[@path]
@@ -210,7 +202,6 @@ class TestRegenerator < JekyllUnitTest
 
     should "return true on nonexistent path" do
       @regenerator.clear
-
       assert @regenerator.add("/bogus/path.md")
       assert @regenerator.modified?("/bogus/path.md")
     end
@@ -218,7 +209,6 @@ class TestRegenerator < JekyllUnitTest
     should "be able to force a path to regenerate" do
       @regenerator.clear
       @regenerator.force(@path)
-
       assert @regenerator.cache[@path]
       assert @regenerator.modified?(@path)
     end
@@ -226,11 +216,9 @@ class TestRegenerator < JekyllUnitTest
     should "be able to clear metadata and cache" do
       @regenerator.clear
       @regenerator.add(@path)
-
       assert_equal 1, @regenerator.metadata.length
       assert_equal 1, @regenerator.cache.length
       @regenerator.clear
-
       assert_equal 0, @regenerator.metadata.length
       assert_equal 0, @regenerator.cache.length
     end
@@ -289,7 +277,6 @@ class TestRegenerator < JekyllUnitTest
       @regenerator = Regenerator.new(@site)
 
       @regenerator.add_dependency(@path, "new.dependency")
-
       assert_equal ["new.dependency"], @regenerator.metadata[@path]["deps"]
       assert @regenerator.modified?("new.dependency")
       assert @regenerator.modified?(@path)

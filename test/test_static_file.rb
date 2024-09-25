@@ -50,13 +50,11 @@ class TestStaticFile < JekyllUnitTest
 
     should "return a simple string on inspection" do
       static_file = setup_static_file("root", "dir", @filename)
-
       assert_equal "#<Jekyll::StaticFile @relative_path=\"dir/#{@filename}\">", static_file.inspect
     end
 
     should "have a source file path" do
       static_file = setup_static_file("root", "dir", @filename)
-
       assert_equal "root/dir/#{@filename}", static_file.path
     end
 
@@ -67,7 +65,6 @@ class TestStaticFile < JekyllUnitTest
 
     should "have a destination relative directory without a collection" do
       static_file = setup_static_file("root", "dir/subdir", "file.html")
-
       assert_nil static_file.type
       assert_equal "dir/subdir/file.html", static_file.url
       assert_equal "dir/subdir", static_file.destination_rel_dir
@@ -80,7 +77,6 @@ class TestStaticFile < JekyllUnitTest
         "file.html",
         "output" => true
       )
-
       assert_equal :foo, static_file.type
       assert_equal "/foo/dir/subdir/file.html", static_file.url
       assert_equal "/foo/dir/subdir", static_file.destination_rel_dir
@@ -93,7 +89,6 @@ class TestStaticFile < JekyllUnitTest
         "file.html",
         "output" => true, "permalink" => "/:path/"
       )
-
       assert_equal :foo, static_file.type
       assert_equal "/dir/subdir/file.html", static_file.url
       assert_equal "/dir/subdir", static_file.destination_rel_dir
@@ -101,7 +96,6 @@ class TestStaticFile < JekyllUnitTest
 
     should "be writable by default" do
       static_file = setup_static_file("root", "dir/subdir", "file.html")
-
       assert(static_file.write?,
              "static_file.write? should return true by default")
     end
@@ -117,7 +111,6 @@ class TestStaticFile < JekyllUnitTest
         "file.html",
         defaults
       )
-
       refute(static_file.write?,
              "static_file.write? should return false when _config.yml sets " \
              "`published: false`")
@@ -130,7 +123,6 @@ class TestStaticFile < JekyllUnitTest
       }]
 
       static_file = setup_static_file_with_defaults "", "", "file.pdf", defaults
-
       assert_equal "default", static_file.data["front-matter"]
     end
 
@@ -142,7 +134,6 @@ class TestStaticFile < JekyllUnitTest
 
       static_file = setup_static_file_with_defaults "", "", "file.pdf", defaults
       hash = static_file.to_liquid
-
       assert hash.key? "front-matter"
       assert_equal "default", hash["front-matter"]
     end
@@ -162,14 +153,12 @@ class TestStaticFile < JekyllUnitTest
     should "known if the source path is modified, when it is" do
       sleep 1
       modify_dummy_file(@filename)
-
       assert @static_file.modified?
     end
 
     should "known if the source path is modified, when it's not" do
       @static_file.write(dest_dir)
       sleep 1 # wait, else the times are still the same
-
       refute @static_file.modified?
     end
 
@@ -190,7 +179,6 @@ class TestStaticFile < JekyllUnitTest
         "path"          => "/static_file.txt",
         "collection"    => nil,
       }
-
       assert_equal expected, @static_file.to_liquid.to_h
     end
 

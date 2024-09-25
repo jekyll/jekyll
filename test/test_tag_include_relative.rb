@@ -100,7 +100,6 @@ class TestTagIncludeRelative < TagUnitTest
           render_content(content, "safe" => true)
         end
         @result ||= ""
-
         refute_match(%r!SYMLINK TEST!, @result)
       end
 

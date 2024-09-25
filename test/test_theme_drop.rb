@@ -34,19 +34,16 @@ class TestThemeDrop < JekyllUnitTest
     should "render gem root only in development mode" do
       with_env("JEKYLL_ENV", nil) do
         drop = fixture_site("theme" => "test-theme").to_liquid.theme
-
         assert_equal "", drop["root"]
       end
 
       with_env("JEKYLL_ENV", "development") do
         drop = fixture_site("theme" => "test-theme").to_liquid.theme
-
         assert_equal theme_dir, drop["root"]
       end
 
       with_env("JEKYLL_ENV", "production") do
         drop = fixture_site("theme" => "test-theme").to_liquid.theme
-
         assert_equal "", drop["root"]
       end
     end

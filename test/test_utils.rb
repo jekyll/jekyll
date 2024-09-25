@@ -13,7 +13,6 @@ class TestUtils < JekyllUnitTest
     should "merge a drop into a hash" do
       data = { "page" => {} }
       merged = Utils.deep_merge_hashes(data, @site.site_payload)
-
       assert_kind_of Hash, merged
       assert_kind_of Drops::SiteDrop, merged["site"]
       assert_equal data["page"], merged["page"]
@@ -21,10 +20,8 @@ class TestUtils < JekyllUnitTest
 
     should "merge a hash into a drop" do
       data = { "page" => {} }
-
       assert_nil @site.site_payload["page"]
       merged = Utils.deep_merge_hashes(@site.site_payload, data)
-
       assert_kind_of Drops::UnifiedPayloadDrop, merged
       assert_kind_of Drops::SiteDrop, merged["site"]
       assert_equal data["page"], merged["page"]
@@ -35,69 +32,58 @@ class TestUtils < JekyllUnitTest
     context "pluralized_array" do
       should "return empty array with no values" do
         data = {}
-
         assert_equal [], Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
       should "return empty array with no matching values" do
         data = { "foo" => "bar" }
-
         assert_equal [], Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
       should "return plural array with nil singular" do
         data = { "foo" => "bar", "tag" => nil, "tags" => %w(dog cat) }
-
         assert_equal %w(dog cat), Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
       should "return single value array with matching singular" do
         data = { "foo" => "bar", "tag" => "dog", "tags" => %w(dog cat) }
-
         assert_equal ["dog"], Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
       should "return single value array with matching singular with spaces" do
         data = { "foo" => "bar", "tag" => "dog cat", "tags" => %w(dog cat) }
-
         assert_equal ["dog cat"], Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
       should "return empty array with matching nil plural" do
         data = { "foo" => "bar", "tags" => nil }
-
         assert_equal [], Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
       should "return empty array with matching empty array" do
         data = { "foo" => "bar", "tags" => [] }
-
         assert_equal [], Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
       should "return single value array with matching plural with single string value" do
         data = { "foo" => "bar", "tags" => "dog" }
-
         assert_equal ["dog"], Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
       should "return multiple value array with matching plural with " \
              "single string value with spaces" do
         data = { "foo" => "bar", "tags" => "dog cat" }
-
         assert_equal %w(dog cat), Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
       should "return single value array with matching plural with single value array" do
         data = { "foo" => "bar", "tags" => ["dog"] }
-
         assert_equal ["dog"], Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
 
       should "return multiple value array with matching plural with " \
              "multiple value array" do
         data = { "foo" => "bar", "tags" => %w(dog cat) }
-
         assert_equal %w(dog cat), Utils.pluralized_array_from_hash(data, "tag", "tags")
       end
     end
@@ -196,7 +182,6 @@ class TestUtils < JekyllUnitTest
     should "not modify the original string" do
       title = "Quick-start guide"
       Utils.slugify(title)
-
       assert_equal "Quick-start guide", title
     end
 
@@ -303,7 +288,6 @@ class TestUtils < JekyllUnitTest
 
     should "records a warning in the log if the returned slug is empty" do
       expect(Jekyll.logger).to receive(:warn)
-
       assert_equal "", Utils.slugify("💎")
     end
   end
@@ -365,27 +349,23 @@ class TestUtils < JekyllUnitTest
     should "not apply pattern to the dir" do
       dir = "test/safe_glob_test["
       assert_equal [], Dir.glob(dir + "/*") unless jruby?
-
       assert_equal ["test/safe_glob_test[/find_me.txt"], Utils.safe_glob(dir, "*")
     end
 
     should "return the same data to #glob" do
       dir = "test"
-
       assert_equal Dir.glob(dir + "/*"), Utils.safe_glob(dir, "*")
       assert_equal Dir.glob(dir + "/**/*"), Utils.safe_glob(dir, "**/*")
     end
 
     should "return the same data to #glob if dir is not found" do
       dir = "dir_not_exist"
-
       assert_equal [], Utils.safe_glob(dir, "*")
       assert_equal Dir.glob(dir + "/*"), Utils.safe_glob(dir, "*")
     end
 
     should "return the same data to #glob if pattern is blank" do
       dir = "test"
-
       assert_equal [dir], Utils.safe_glob(dir, "")
       assert_equal Dir.glob(dir), Utils.safe_glob(dir, "")
       assert_equal Dir.glob(dir), Utils.safe_glob(dir, nil)
@@ -393,14 +373,12 @@ class TestUtils < JekyllUnitTest
 
     should "return the same data to #glob if flag is given" do
       dir = "test"
-
       assert_equal Dir.glob(dir + "/*", File::FNM_DOTMATCH),
                    Utils.safe_glob(dir, "*", File::FNM_DOTMATCH)
     end
 
     should "support pattern as an array to support windows" do
       dir = "test"
-
       assert_equal Dir.glob(dir + "/**/*"), Utils.safe_glob(dir, ["**", "*"])
     end
   end
@@ -408,19 +386,16 @@ class TestUtils < JekyllUnitTest
   context "The `Utils.has_yaml_header?` method" do
     should "accept files with YAML front matter" do
       file = source_dir("_posts", "2008-10-18-foo-bar.markdown")
-
       assert_equal "---\n", File.open(file, "rb") { |f| f.read(4) }
       assert Utils.has_yaml_header?(file)
     end
     should "accept files with extraneous spaces after YAML front matter" do
       file = source_dir("_posts", "2015-12-27-extra-spaces.markdown")
-
       assert_equal "---  \n", File.open(file, "rb") { |f| f.read(6) }
       assert Utils.has_yaml_header?(file)
     end
     should "reject pgp files and the like which resemble front matter" do
       file = source_dir("pgp.key")
-
       assert_equal "-----B", File.open(file, "rb") { |f| f.read(6) }
       refute Utils.has_yaml_header?(file)
     end
@@ -429,7 +404,6 @@ class TestUtils < JekyllUnitTest
   context "The `Utils.merged_file_read_opts` method" do
     should "ignore encoding if it's not there" do
       opts = Utils.merged_file_read_opts(nil, {})
-
       assert_nil opts["encoding"]
       assert_nil opts[:encoding]
     end
@@ -437,7 +411,6 @@ class TestUtils < JekyllUnitTest
     should "add bom to utf-encoding" do
       opts = { "encoding" => "utf-8", :encoding => "utf-8" }
       merged = Utils.merged_file_read_opts(nil, opts)
-
       assert_equal "bom|utf-8", merged["encoding"]
       assert_equal "bom|utf-8", merged[:encoding]
     end
@@ -445,7 +418,6 @@ class TestUtils < JekyllUnitTest
     should "not add bom to non-utf encoding" do
       opts = { "encoding" => "ISO-8859-1", :encoding => "ISO-8859-1" }
       merged = Utils.merged_file_read_opts(nil, opts)
-
       assert_equal "ISO-8859-1", merged["encoding"]
       assert_equal "ISO-8859-1", merged[:encoding]
     end
@@ -453,7 +425,6 @@ class TestUtils < JekyllUnitTest
     should "preserve bom in encoding" do
       opts = { "encoding" => "bom|another", :encoding => "bom|another" }
       merged = Utils.merged_file_read_opts(nil, opts)
-
       assert_equal "bom|another", merged["encoding"]
       assert_equal "bom|another", merged[:encoding]
     end

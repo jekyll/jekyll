@@ -181,7 +181,6 @@ class TestPluginManager < JekyllUnitTest
     )
     plugin_manager.conscientious_require
     site.process
-
     assert site.in_dest_dir("test.txt")
   end
 end

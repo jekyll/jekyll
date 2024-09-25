@@ -154,8 +154,6 @@ Lint/NestedPercentLiteral:
   - test/test_site.rb
 Lint/NoReturnInBeginEndBlocks:
   Enabled: true
-Lint/NonAtomicFileOperation:
-  Enabled: true
 Lint/NumberedParameterAssignment:
   Enabled: true
 Lint/OrAssignmentToConstant:
@@ -199,8 +197,6 @@ Lint/UnreachableCode:
 Lint/UnreachableLoop:
   Enabled: true
 Lint/UselessMethodDefinition:
-  Enabled: true
-Lint/UselessRescue:
   Enabled: true
 Lint/UselessRuby2Keywords:
   Enabled: true
@@ -264,8 +260,6 @@ Minitest/AssertPathExists:
   Enabled: true
 Minitest/AssertPredicate:
   Enabled: false
-Minitest/AssertRaisesCompoundBody:
-  Enabled: true
 Minitest/AssertRaisesWithRegexpArgument:
   Enabled: true
 Minitest/AssertSame:
@@ -279,7 +273,7 @@ Minitest/AssertionInLifecycleHook:
 Minitest/DuplicateTestRun:
   Enabled: true
 Minitest/EmptyLineBeforeAssertionMethods:
-  Enabled: true
+  Enabled: false
 Minitest/LifecycleHooksOrder:
   Enabled: true
 Minitest/LiteralAsActualArgument:
@@ -494,8 +488,6 @@ Style/MapCompactWithConditionalBlock:
   Enabled: true
 Style/MapToHash:
   Enabled: true
-Style/MapToSet:
-  Enabled: true
 Style/MinMaxComparison:
   Enabled: true
 Style/MixinUsage:
@@ -512,8 +504,6 @@ Style/NestedFileDirname:
 Style/NilLambda:
   Enabled: true
 Style/ObjectThen:
-  Enabled: true
-Style/OpenStructUse:
   Enabled: true
 Style/OperatorMethodCall:
   Enabled: true
@@ -584,8 +574,6 @@ Style/SafeNavigation:
   Exclude:
   - lib/jekyll/document.rb
   - lib/jekyll/page.rb
-Style/SelectByRegexp:
-  Enabled: true
 Style/SignalException:
   EnforcedStyle: only_raise
 Style/SingleArgumentDig:
@@ -615,5 +603,3 @@ Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: consistent_comma
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
-Style/YAMLFileRead:
-  Enabled: true

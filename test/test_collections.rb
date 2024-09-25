@@ -75,7 +75,6 @@ class TestCollections < JekyllUnitTest
     should "know whether it should be written or not" do
       refute @collection.write?
       @collection.metadata["output"] = true
-
       assert @collection.write?
       @collection.metadata.delete "output"
     end
@@ -89,7 +88,6 @@ class TestCollections < JekyllUnitTest
 
     should "contain only the default collections" do
       expected = {}
-
       refute_equal expected, @site.collections
       refute_nil @site.collections
     end
@@ -180,7 +178,6 @@ class TestCollections < JekyllUnitTest
 
     should "extract the configuration collection information as metadata" do
       expected = { "foo" => "bar", "baz" => "whoo" }
-
       assert_equal expected, @collection.metadata
     end
   end
@@ -222,7 +219,6 @@ class TestCollections < JekyllUnitTest
         _tutorials/extending-with-plugins.md
         _tutorials/graduation-day.md
       )
-
       refute_equal default_tutorials_array, @actual_array
       assert_equal tutorials_sorted_by_lesson_array, @actual_array
     end
@@ -271,7 +267,6 @@ class TestCollections < JekyllUnitTest
         _tutorials/graduation-day.md
         _tutorials/extending-with-plugins.md
       )
-
       refute_equal default_tutorials_array, @actual_array
       assert_equal tutorials_rearranged_in_config_array, @actual_array
     end

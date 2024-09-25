@@ -72,7 +72,6 @@ class TestExcerpt < JekyllUnitTest
 
       should "return its output if output present" do
         @excerpt.output = "Fake Output"
-
         assert_equal @excerpt.output, @excerpt.to_s
       end
     end
@@ -100,7 +99,6 @@ class TestExcerpt < JekyllUnitTest
       should "contain the proper page data to mimic the post liquid" do
         assert_equal "Post Excerpt with Layout", @excerpt.to_liquid["title"]
         url = "/bar/baz/z_category/mixedcase/2013/07/22/post-excerpt-with-layout.html"
-
         assert_equal url, @excerpt.to_liquid["url"]
         assert_equal Time.parse("2013-07-22"), @excerpt.to_liquid["date"]
         assert_equal %w(bar baz z_category MixedCase), @excerpt.to_liquid["categories"]
@@ -114,7 +112,6 @@ class TestExcerpt < JekyllUnitTest
       context "before render" do
         should "be the first paragraph of the page" do
           expected = "First paragraph with [link ref][link].\n\n[link]: https://jekyllrb.com/"
-
           assert_equal expected, @excerpt.content
         end
 
@@ -133,7 +130,6 @@ class TestExcerpt < JekyllUnitTest
         should "be the first paragraph of the page" do
           expected = "<p>First paragraph with <a href=\"https://jekyllrb.com/\">link " \
                      "ref</a>.</p>\n\n"
-
           assert_equal expected, @extracted_excerpt.output
         end
 
@@ -162,7 +158,6 @@ class TestExcerpt < JekyllUnitTest
           @rendered_post = @post.dup
           do_render(@rendered_post)
           output = @rendered_post.data["excerpt"].output
-
           4.times do |i|
             assert_includes output, "<a href=\"www.example.com/#{i}\">"
           end

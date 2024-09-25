@@ -50,7 +50,6 @@ class TestKramdown < JekyllUnitTest
 
     should "not break kramdown" do
       kramdown_doc = Kramdown::Document.new("# Some Header #", @config["kramdown"])
-
       assert_equal :class, kramdown_doc.options[:syntax_highlighter_opts][:css]
       assert_equal "lipsum", kramdown_doc.options[:syntax_highlighter_opts][:foobar]
     end
@@ -73,7 +72,6 @@ class TestKramdown < JekyllUnitTest
       MARKDOWN
       div_highlight = ">div.highlight"
       selector = "div.highlighter-rouge#{div_highlight}>pre.highlight>code"
-
       refute_empty(result.css(selector), result.to_html)
     end
 
@@ -118,7 +116,6 @@ class TestKramdown < JekyllUnitTest
     context "when asked to convert smart quotes" do
       should "convert" do
         converter = fixture_converter(@config)
-
         assert_match(
           %r!<p>(&#8220;|“)Pit(&#8217;|’)hy(&#8221;|”)</p>!,
           converter.convert(%("Pit'hy")).strip
@@ -133,7 +130,6 @@ class TestKramdown < JekyllUnitTest
           },
         }
         converter = fixture_converter(Utils.deep_merge_hashes(@config, override))
-
         assert_match %r!<p>(&#171;|«)Pit(&#8250;|›)hy(&#187;|»)</p>!, \
                      converter.convert(%("Pit'hy")).strip
       end
@@ -155,7 +151,6 @@ class TestKramdown < JekyllUnitTest
         MARKDOWN
 
         selector = "div.highlighter-coderay>div.CodeRay>div.code>pre"
-
         refute_empty result.css(selector)
       end
 
@@ -177,7 +172,6 @@ class TestKramdown < JekyllUnitTest
         MARKDOWN
 
         selector = "div.highlighter-coderay>div.CodeRay>div.code>pre"
-
         refute_empty result.css(selector), "pre tag should exist"
       end
     end
