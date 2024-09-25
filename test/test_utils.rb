@@ -3,7 +3,7 @@
 require "helper"
 
 class TestUtils < JekyllUnitTest
-  context "The \`Utils.deep_merge_hashes\` method" do
+  context "The `Utils.deep_merge_hashes` method" do
     setup do
       clear_dest
       @site = fixture_site
@@ -89,7 +89,7 @@ class TestUtils < JekyllUnitTest
     end
   end
 
-  context "The \`Utils.parse_date\` method" do
+  context "The `Utils.parse_date` method" do
     should "parse a properly formatted date" do
       assert_kind_of Time, Utils.parse_date("2014-08-02 14:43:06 PDT")
     end
@@ -128,7 +128,7 @@ class TestUtils < JekyllUnitTest
     end
   end
 
-  context "The \`Utils.slugify\` method" do
+  context "The `Utils.slugify` method" do
     should "return nil if passed nil" do
       assert_nil Utils.slugify(nil)
     rescue NoMethodError
@@ -292,7 +292,7 @@ class TestUtils < JekyllUnitTest
     end
   end
 
-  context "The \`Utils.titleize_slug\` method" do
+  context "The `Utils.titleize_slug` method" do
     should "capitalize all words and not drop any words" do
       assert_equal(
         "This Is A Long Title With Mixed Capitalization",
@@ -309,7 +309,7 @@ class TestUtils < JekyllUnitTest
     end
   end
 
-  context "The \`Utils.add_permalink_suffix\` method" do
+  context "The `Utils.add_permalink_suffix` method" do
     should "handle built-in permalink styles" do
       assert_equal(
         "/:basename/",
@@ -345,7 +345,7 @@ class TestUtils < JekyllUnitTest
     end
   end
 
-  context "The \`Utils.safe_glob\` method" do
+  context "The `Utils.safe_glob` method" do
     should "not apply pattern to the dir" do
       dir = "test/safe_glob_test["
       assert_equal [], Dir.glob(dir + "/*") unless jruby?
@@ -383,7 +383,7 @@ class TestUtils < JekyllUnitTest
     end
   end
 
-  context "The \`Utils.has_yaml_header?\` method" do
+  context "The `Utils.has_yaml_header?` method" do
     should "accept files with YAML front matter" do
       file = source_dir("_posts", "2008-10-18-foo-bar.markdown")
       assert_equal "---\n", File.open(file, "rb") { |f| f.read(4) }
@@ -401,7 +401,7 @@ class TestUtils < JekyllUnitTest
     end
   end
 
-  context "The \`Utils.merged_file_read_opts\` method" do
+  context "The `Utils.merged_file_read_opts` method" do
     should "ignore encoding if it's not there" do
       opts = Utils.merged_file_read_opts(nil, {})
       assert_nil opts["encoding"]

@@ -83,7 +83,7 @@ module Jekyll
     # Returns an array of strings, each string being the name of a gem name
     #   that is allowed to be used.
     def whitelist
-      @whitelist ||= Array[site.config["whitelist"]].flatten
+      @whitelist ||= [site.config["whitelist"]].flatten
     end
 
     # Require all .rb files if safe mode is off
