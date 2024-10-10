@@ -30,7 +30,7 @@ To do this, refer to the class (that you will configure in the next parts of thi
 ```liquid
 <nav>
   {% for item in site.data.navigation %}
-    <a href="{{ item.link }}" {% if page.url == item.link %}class="current"{% endif %}>{{ item.name }}</a>
+    <a href="{{ item.link }}"{% if page.url == item.link %} class="current"{% endif %}>{{ item.name }}</a>
   {% endfor %}
 </nav>
 ```
