@@ -107,6 +107,7 @@
   * Improve docs around using GitHub Actions to build and deploy Jekyll sites (#9682)
   * Fix grammar in the description of `page.excerpt` variable (#9689)
   * Render HTML tables at `/docs/permalinks/` using a data file (#9666)
+  * Fix HTML attribute separation whitespace placement in the Navigation include code of Assets step of the Step by Step Tutorial (#9695)
 
 ### Site Enhancements
 
