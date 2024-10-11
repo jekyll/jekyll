@@ -41,6 +41,11 @@
     Exclude directories and/or files from the conversion. These exclusions are relative to the site's source directory
     and cannot be outside the source directory.
     <br />
+    This configuration option also supports Ruby's <a href="https://ruby-doc.org/3.3.5/File.html#method-c-fnmatch"><code>File.fnmatch</code> filename globbing patterns</a> to match multiple entries to exclude.  For example, you can exclude all README.md files in your source tree from being included in your site by specifying the following `exclude` option entries:
+    <ul>
+      <li><code>README.md</code></li>
+      <li><code>**/README.md</code></li>
+    </ul>
     In Jekyll 3, the `exclude` configuration option replaces the default exclusion list.
     <br />
     In Jekyll 4, user-provided entries get added to the default exclusion list instead and the `include` option can be
@@ -65,7 +70,11 @@
 - name: Include
   description: >-
     Force inclusion of directories and/or files in the conversion. <code>.htaccess</code> is a good example since
-    dotfiles are excluded by default. With Jekyll 4, the `include` configuration option entries override the
+    dotfiles are excluded by default.
+    <br>
+    This configuration option also supports Ruby <a href="https://ruby-doc.org/3.3.5/File.html#method-c-fnmatch-3F"><code>File.fnmatch</code> filename globbing patterns</a> to match multiple entries to include, refer the `exclude` configuration option for more information.
+    <br>
+    With Jekyll 4, the `include` configuration option entries override the
     `exclude` option entries.
   option: "include: [DIR, FILE, ...]"
 
