@@ -112,6 +112,19 @@
   flag: --strict_front_matter
 
 
+- name: Web service URL
+  option: "url: SCHEME://HOST[:PORT]"
+  description: >-
+    The actual Web service address in your production environment, should include the following components:
+    <ol>
+      <li>Protocol scheme(e.g. <code>http://</code>)</li>
+      <li>Hostname or IP address(e.g. <code>example.org</code>)</li>
+      <li>(Optional) Number of the web service's listening port(e.g. <code>8080</code>)</li>
+    </ol>
+    The value of this configuration option should NOT have a trailing slash.  It will be concatenated with the <code>baseurl</code> to form the full URL to your Jekyll site.
+    <br>
+    The value of this configuration option can be accessed using the <code>site.url</code> <a href="https://jekyllrb.com/docs/variables/#site-variables">Site Variables</a>.
+
 - name: Base URL
   description: Serve the website from the given base URL.
   option: "baseurl: URL"
