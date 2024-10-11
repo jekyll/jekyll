@@ -127,8 +127,8 @@
 
 - name: Base URL
   description: Serve the website from the given base URL.
-  option: "baseurl: URL"
-  flag: -b, --baseurl URL
+  option: "baseurl: /PATH/TO/SITE"
+  flag: -b, --baseurl /PATH/TO/SITE
 
 
 - name: Trace
