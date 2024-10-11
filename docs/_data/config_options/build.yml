@@ -123,7 +123,7 @@
     </ol>
     The value of this configuration option should NOT have a trailing slash.  It will be concatenated with the <code>baseurl</code> to form the full URL to your Jekyll site.
     <br>
-    The value of this configuration option can be accessed using the <code>site.url</code> <a href="https://jekyllrb.com/docs/variables/#site-variables">Site Variables</a>.
+    The value of this configuration option can be accessed using the <code>site.url</code> <a href="https://jekyllrb.com/docs/variables/#site-variables">site variables</a>.
 
 - name: Base URL
   description: Serve the website from the given base URL.
