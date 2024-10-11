@@ -125,6 +125,7 @@
     <br>
     The value of this configuration option can be accessed using the <code>site.url</code> <a href="https://jekyllrb.com/docs/variables/#site-variables">site variables</a>.
 
+
 - name: Base URL
   description: Serve the website from the given base URL.
   option: "baseurl: /PATH/TO/SITE"
