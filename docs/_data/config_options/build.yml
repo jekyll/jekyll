@@ -119,7 +119,7 @@
     <ol>
       <li>Protocol scheme(e.g. <code>http://</code>)</li>
       <li>Hostname or IP address(e.g. <code>example.org</code>)</li>
-      <li>(Optional) Number of the web service's listening port(e.g. <code>8080</code>)</li>
+      <li>(Optional) Number of the web service's listening port(e.g. <code>:8080</code>)</li>
     </ol>
     The value of this configuration option should NOT have a trailing slash.  It will be concatenated with the <code>baseurl</code> to form the full URL to your Jekyll site.
     <br>
