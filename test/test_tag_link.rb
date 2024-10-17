@@ -78,7 +78,7 @@ class TestTagLink < TagUnitTest
         {% assign contacts_ext = 'html' %}
         {% link {{contacts_filename}}.{{contacts_ext}} %}
         {% assign info_path = 'info.md' %}
-        {% link {{\ info_path\ }} %}
+        {% link {{ info_path }} %}
         {% assign screen_css_path = '/css' %}
         {% link {{ screen_css_path }}/screen.css %}
       CONTENT
@@ -195,7 +195,7 @@ class TestTagLink < TagUnitTest
         ---
 
         {% assign non_existent_path = 'non-existent-collection-item' %}
-        {% link {{\ non_existent_path\ }} %}
+        {% link {{ non_existent_path }} %}
       CONTENT
 
       assert_raises ArgumentError do
