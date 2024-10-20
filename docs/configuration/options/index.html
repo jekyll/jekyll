@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-10-10T08:10:20-07:00" />
+<meta property="article:published_time" content="2024-10-20T07:23:28-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Configuration Options" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-10-10T08:10:20-07:00","datePublished":"2024-10-10T08:10:20-07:00","description":"The tables below list the available settings for Jekyll, and the various options (specified in the configuration file) and flags (specified on the command-line) that control them.","headline":"Configuration Options","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/configuration/options/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/configuration/options/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-10-20T07:23:28-07:00","datePublished":"2024-10-20T07:23:28-07:00","description":"The tables below list the available settings for Jekyll, and the various options (specified in the configuration file) and flags (specified on the command-line) that control them.","headline":"Configuration Options","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/configuration/options/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/configuration/options/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -238,7 +238,7 @@
             <strong>Exclude</strong>
             
           </p> 
-          <p class="description">Exclude directories and/or files from the conversion. These exclusions are relative to the site's source directory and cannot be outside the source directory. <br /> In Jekyll 3, the `exclude` configuration option replaces the default exclusion list. <br /> In Jekyll 4, user-provided entries get added to the default exclusion list instead and the `include` option can be used to override the default exclusion list entries. <br /> The default exclusions are found in <code>_config.yml</code> as created by <code>jekyll new</code>: <ul>
+          <p class="description">Exclude directories and/or files from the conversion. These exclusions are relative to the site's source directory and cannot be outside the source directory. <br /> This configuration option supports Ruby's <a href="https://ruby-doc.org/3.3.5/File.html#method-c-fnmatch"> <code>File.fnmatch</code> filename globbing patterns</a> to match multiple entries to exclude. For example, you can exclude multiple README.md files in your source tree from being included in your site by specifying the following <code>exclude</code> option entries: <code>["README.md", "**/README.md"]</code>. <br /> In Jekyll 3, the <code>exclude</code> configuration option replaces the default exclusion list. <br /> In Jekyll 4, user-provided entries get added to the default exclusion list instead and the <code>include</code> option can be used to override the default exclusion list entries. <br /> The default exclusions are found in <code>_config.yml</code> as created by <code>jekyll new</code>: <ul>
   <li><code>.sass-cache/</code></li>
   <li><code>.jekyll-cache/</code></li>
   <li><code>gemfiles/</code></li>
@@ -263,7 +263,7 @@
             <strong>Include</strong>
             
           </p> 
-          <p class="description">Force inclusion of directories and/or files in the conversion. <code>.htaccess</code> is a good example since dotfiles are excluded by default. With Jekyll 4, the `include` configuration option entries override the `exclude` option entries.</p>
+          <p class="description">Force inclusion of directories and/or files in the conversion. <code>.htaccess</code> is a good example since dotfiles are excluded by default. <br /> This configuration option supports Ruby's <a href="https://ruby-doc.org/3.3.5/File.html#method-c-fnmatch-3F"> <code>File.fnmatch</code> filename globbing patterns</a> to match multiple entries to include, refer the <code>exclude</code> configuration option for more information. <br /> With Jekyll 4, the <code>include</code> configuration option entries override the <code>exclude</code> option entries.</p>
         </td> 
         <td class="align-center">
           <p><code class="option">include: [DIR, FILE, ...]</code></p>
