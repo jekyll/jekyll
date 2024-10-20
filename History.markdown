@@ -110,6 +110,7 @@
   * Render HTML tables at `/docs/permalinks/` using a data file (#9666)
   * Fix HTML attribute separation whitespace placement in the Navigation include code of Assets step of the Step by Step Tutorial (#9695)
   * Fix missing glob matching pattern support description in the documentation of the `include` and `exclude` configuration options (#9697)
+  * Fix missing `url` configuration option documentation (#9699)
 
 ### Site Enhancements
 
