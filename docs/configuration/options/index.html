@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2024-10-20T07:23:28-07:00" />
+<meta property="article:published_time" content="2024-10-20T08:42:28-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Configuration Options" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-10-20T07:23:28-07:00","datePublished":"2024-10-20T07:23:28-07:00","description":"The tables below list the available settings for Jekyll, and the various options (specified in the configuration file) and flags (specified on the command-line) that control them.","headline":"Configuration Options","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/configuration/options/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/configuration/options/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-10-20T08:42:28-07:00","datePublished":"2024-10-20T08:42:28-07:00","description":"The tables below list the available settings for Jekyll, and the various options (specified in the configuration file) and flags (specified on the command-line) that control them.","headline":"Configuration Options","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/configuration/options/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/configuration/options/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -610,14 +610,28 @@
       <tr class="setting">
         <td>
           <p class="name">
+            <strong>Web Domain URL</strong>
+            
+          </p> 
+          <p class="description">The canonical URL of the root of your production deploy, composed of the following components:<br /> &nbsp; &nbsp;• &nbsp; Protocol scheme (e.g. <code>http://</code>)<br /> &nbsp; &nbsp;• &nbsp; Hostname or IP address (e.g. <code>example.org</code>)<br /> &nbsp; &nbsp;• &nbsp; <em>(Optional)</em> The port number of the server, prefixed with a colon (e.g. <code>:8080</code>)<br /> The value of this configuration option should NOT have a trailing slash. It will be appended with the <code>baseurl</code> to form the full URL to your Jekyll site when using the <a href="/docs/liquid/filters/">Liquid filter <code>absolute_url</code></a>.<br /> <strong>NOTE:</strong> This setting is automatically configured to the <strong>localhost URL</strong> when the <code>jekyll serve</code> command is invoked.</p>
+        </td> 
+        <td class="align-center">
+          <p><code class="option">url: SCHEME://HOST[:PORT]</code></p>
+          
+        </td>
+      </tr>
+    
+      <tr class="setting">
+        <td>
+          <p class="name">
             <strong>Base URL</strong>
             
           </p> 
-          <p class="description">Serve the website from the given base URL.</p>
+          <p class="description">Serve the website from the given base URL (the path between web-server or domain root and your landing page).</p>
         </td> 
         <td class="align-center">
-          <p><code class="option">baseurl: URL</code></p>
-          <p><code class="flag">-b, --baseurl URL</code></p>
+          <p><code class="option">baseurl: /PATH/TO/SITE</code></p>
+          <p><code class="flag">-b, --baseurl /PATH/TO/SITE</code></p>
         </td>
       </tr>
     
