@@ -401,7 +401,7 @@ module Jekyll
       case target
       when NilClass
         return true if property.nil?
-      when Liquid::Expression::MethodLiteral # `empty` or `blank`
+      when Liquid::Condition::MethodLiteral # `empty` or `blank`
         target = target.to_s
         return true if property == target || Array(property).join == target
       else
