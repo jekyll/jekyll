@@ -341,6 +341,26 @@
 
 #
 
+- name: Hash Filters
+  description: >-
+    hash_add_item and hash_remove_item add and remove items from a Hash.
+    These are <strong>NON-DESTRUCTIVE</strong>, i.e. they do not mutate the Hash. This may significantly
+    increase you memory utilization if extensively using these methods.
+    
+    hash_inject_item and hash_eject_item do the same but do mutate the Hash, and don't have the same
+    memory implication.
+  examples:
+    - input: '{{ data.store | hash_add_item: "key", "value" }}'
+      output: '{"existing" => "data", "key" => "value"}'
+    - input: '{{ data.store | hash_remove_item: "existing" }}'
+      output: '{}'
+    - input: '{{ data.store | hash_inject_item: "key", "value" }}'
+      output: '{"existing" => "data", "key" => "value"}'
+    - input: '{{ data.store | hash_eject_item: "existing" }}'
+      output: '{"key" => "value"}'
+
+#
+
 - name: Inspect
   description: Convert an object into its String representation for debugging.
   examples:
