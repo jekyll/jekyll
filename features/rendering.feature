@@ -243,23 +243,12 @@ Feature: Rendering
   Scenario: Render layout front matter data
     Given I have an "alpha.md" page with layout "orchard" that contains "item on sale: {{ layout.item }}"
     And I have an "beta.md" page with layout "bakery" that contains "item on sale: {{ layout.item }}"
-    And I have a _layouts directory
-    And I have an "_layouts/bakery.html" file with content:
-      """
-      ---
-      item: Carrot Cake
-      ---
-
-      {{ content }}
-      """
-    And I have an "_layouts/orchard.html" file with content:
-      """
-      ---
-      item: Granny Smith Apples
-      ---
-
-      {{ content }}
-      """
+    And I have a "bakery.html" layout with data:
+    | key  | value       |
+    | item | Carrot Cake |
+    And I have an "orchard.html" layout with data:
+    | key  | value               |
+    | item | Granny Smith Apples |
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
