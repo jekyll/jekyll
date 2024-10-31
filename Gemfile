@@ -4,6 +4,7 @@ source "https://rubygems.org"
 gemspec :name => "jekyll"
 
 group :test do
+  gem "activesupport", "< 7.1.0"
   gem "cucumber", "~> 5.1.2"
   gem "httpclient"
   gem "jekyll-coffeescript"
