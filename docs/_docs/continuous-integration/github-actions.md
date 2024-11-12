@@ -18,9 +18,9 @@ environment and gemset.
 
 ### Control over gemset
 
-- **Jekyll version** --- Instead of using the classic GitHub Pages-provided version at `3.9.3`, you
-  can use any version of Jekyll you want. For example `{{site.version}}`, or point directly to the
-  repository via the Gemfile.
+- **Jekyll version** --- Instead of using the classic GitHub Pages-provided version specified in
+  the [Dependency versions][ghp-whitelist] list, you can use any version of Jekyll you want. For example `{{site.version}}`,
+  or point directly to the repository via the Gemfile.
 - **Plugins** --- You can use any Jekyll plugins irrespective of them being whitelisted by GitHub,
   including any `*.rb` files placed in the `_plugins` directory of your site.
 - **Themes** --- While using a custom theme is possible without Actions, it is now possible to use
