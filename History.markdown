@@ -111,6 +111,7 @@
   * Fix HTML attribute separation whitespace placement in the Navigation include code of Assets step of the Step by Step Tutorial (#9695)
   * Fix missing glob matching pattern support description in the documentation of the `include` and `exclude` configuration options (#9697)
   * Fix missing `url` configuration option documentation (#9699)
+  * Link to GitHub Pages Dependency versions page instead of explicitly specifying Jekyll version (#9715)
 
 ### Site Enhancements
 
