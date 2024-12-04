@@ -55,6 +55,13 @@ sudo zypper install ruby-devel
 ```sh
 sudo swupd bundle-add ruby-basic
 ```
+
+### Void Linux
+
+```sh
+sudo xbps-install ruby ruby-devel
+```
+
 ## Install Jekyll
 
 Follow the instructions for [Ubuntu](../ubuntu/).
