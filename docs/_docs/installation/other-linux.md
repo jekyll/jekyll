@@ -50,6 +50,11 @@ sudo zypper install -t pattern devel_ruby devel_C_C++
 sudo zypper install ruby-devel
 ```
 
+### Void Linux
+```sh
+sudo xbps-install ruby ruby-devel gcc make 
+```
+
 ### Clear Linux
 
 ```sh
