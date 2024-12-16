@@ -26,7 +26,7 @@ Sites on GitHub Pages are powered by Jekyll behind the scenes, so if you’re lo
 
 ## GitLab Pages
 
-[GitLab Pages](https://about.gitlab.com/stages-devops-lifecycle/pages/) offers free hosting with custom domains. [Get started with Jekyll](https://docs.gitlab.com/ee/user/project/pages/getting_started_part_four.html#practical-example) and a fully customizable pipeline.
+[GitLab Pages](https://about.gitlab.com/stages-devops-lifecycle/pages/) offers free hosting with custom domains. [Get started with Jekyll](https://docs.gitlab.com/ee/user/project/pages/getting_started/pages_from_scratch.html) and a fully customizable pipeline.
 
 ## KeyCDN
 
