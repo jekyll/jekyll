@@ -55,6 +55,7 @@
   * Run GitHub Actions only if needed (#9664)
   * Format `.rubocop.yml` via a rake task (#9687)
   * Configure some new cops (#9688)
+  * Fix expected markup per WAI-ARIA requirements (#9737)
 
 ### Documentation
 
