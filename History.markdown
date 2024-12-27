@@ -1,3 +1,9 @@
+## HEAD
+
+### Development Fixes
+
+  * Backport #9737 for v4.3.x: Fix expected markup per WAI-ARIA requirements (#9738)
+
 ## 4.3.4 / 2024-09-16
 
 ### Bug Fixes
