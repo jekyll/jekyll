@@ -56,6 +56,7 @@
   * Format `.rubocop.yml` via a rake task (#9687)
   * Configure some new cops (#9688)
   * Fix expected markup per WAI-ARIA requirements (#9737)
+  * Add an optional `:rdoc` group of gems (#9742)
 
 ### Documentation
 
