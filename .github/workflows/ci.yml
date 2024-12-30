@@ -26,6 +26,8 @@ jobs:
             version: "2.7"
           - label: Ruby 3.3
             version: "3.3"
+          - label: Ruby 3.4
+            version: "3.4"
         os:
           - label: Linux
             image: "ubuntu-latest"
@@ -53,16 +55,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - job_name: "Unit Test with Ruby 3.4"
-            setup_label: "Ruby 3.4"
-            step_name: "Run Minitest based tests"
-            script_file: "test"
-            ruby_version: "3.4"
-          - job_name: "Generate and Build a new site with Ruby 3.4"
-            setup_label: "Ruby 3.4"
-            step_name: "Generate and Build a new site"
-            script_file: "default-site"
-            ruby_version: "3.4"
           - job_name: "Unit Test with JRuby"
             setup_label: "JRuby 9.4.8.0"
             step_name: "Run Minitest based tests"
