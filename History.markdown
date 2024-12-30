@@ -57,6 +57,7 @@
   * Configure some new cops (#9688)
   * Fix expected markup per WAI-ARIA requirements (#9737)
   * Add an optional `:rdoc` group of gems (#9742)
+  * Test `inspect` filter with custom object (#9743)
 
 ### Documentation
 
