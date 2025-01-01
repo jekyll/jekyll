@@ -76,13 +76,6 @@ group :jekyll_optional_dependencies do
   gem "kramdown-syntax-coderay"
   gem "matrix"
   gem "mime-types", "~> 3.0"
-  # Psych 5 has stopped bundling `libyaml` and expects it to be installed on the host system prior
-  # to being invoked.
-  # Since we don't have a direct dependency on the Psych gem (it gets included in the gem bundle as
-  # a dependency of the `rdoc` gem), lock psych gem to v4.x instead of installing `libyaml` in our
-  # development / CI environment.
-  gem "psych", "~> 4.0"
-  gem "rdoc", "~> 6.0"
   gem "tomlrb"
 
   platforms :ruby, :mswin, :mingw, :x64_mingw do
@@ -97,6 +90,18 @@ group :jekyll_optional_dependencies do
     gem "tzinfo", ENV["TZINFO_VERSION"] if ENV["TZINFO_VERSION"]
     gem "tzinfo-data"
   end
+end
+
+#
+
+group :rdoc, :optional => true do
+  # Psych 5 has stopped bundling `libyaml` and expects it to be installed on the host system prior
+  # to being invoked.
+  # Since we don't have a direct dependency on the Psych gem (it gets included in the gem bundle as
+  # a dependency of the `rdoc` gem), lock psych gem to v4.x instead of installing `libyaml` in our
+  # development / CI environment.
+  gem "psych", "~> 4.0"
+  gem "rdoc", "~> 6.0"
 end
 
 #
