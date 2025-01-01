@@ -10,10 +10,6 @@ The [AWS Amplify Console](https://console.amplify.aws) provides continuous deplo
 
 Read this [step-by-step guide](https://medium.com/@jameshamann/deploy-your-jekyll-site-using-aws-amplify-with-only-a-few-clicks-8f3dd8f26112) to deploy and host your Jekyll site on AWS Amplify.
 
-## Bip
-
-[Bip](https://bip.sh) provides zero downtime deployment, a global CDN, SSL, unlimited bandwidth and more for Jekyll websites. Deploy in seconds from the command line. [Visit the Bip website](https://bip.sh) for more information - which is also built with Jekyll.
-
 ## CloudCannon
 
 [CloudCannon](https://cloudcannon.com) has everything you need to build, host
