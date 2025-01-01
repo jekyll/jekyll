@@ -3,6 +3,7 @@
 ### Development Fixes
 
   * Backport #9737 for v4.3.x: Fix expected markup per WAI-ARIA requirements (#9738)
+  * Backport #9742 for v4.3.x: Add an optional `:rdoc` group of gems (#9744)
 
 ## 4.3.4 / 2024-09-16
 
