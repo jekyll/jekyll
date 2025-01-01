@@ -116,6 +116,7 @@
   * Fix missing `url` configuration option documentation (#9699)
   * Link to GitHub Pages Dependency versions page instead of explicitly specifying Jekyll version (#9715)
   * Fix broken link on third-party.md (#9704)
+  * Fix: remove inaccessible links and their descriptions (#9745)
 
 ### Site Enhancements
 
