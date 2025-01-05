@@ -22,7 +22,7 @@ module Jekyll
       end
 
       def print_test_case_name(test_case)
-        @io.print "\n#{test_case.location}  #{truncate(test_case.name)}  "
+        @io.print "\n#{test_case.location}  #{truncate(test_case.name).inspect}  "
         @io.flush
       end
 
@@ -45,12 +45,12 @@ module Jekyll
       end
 
       def timing_key(test_case)
-        "#{test_case.location} \t #{truncate(test_case.name)}"
+        "#{test_case.location} \t #{truncate(test_case.name).inspect}"
       end
 
       def truncate(input, max_len: 40)
         str = input.to_s
-        str.length > max_len ? "#{str[0..(max_len - 2)]}.." : str
+        str.length > max_len ? "#{str[0..(max_len - 2)]}..." : str
       end
     end
   end
