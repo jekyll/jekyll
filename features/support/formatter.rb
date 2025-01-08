@@ -18,12 +18,15 @@ module Jekyll
 
       def after_test_case(test_case)
         @timings[timing_key(test_case)] = Time.now - @timings[timing_key(test_case)]
-        @io.print format("  (%.3fs)", @timings[timing_key(test_case)])
       end
 
-      def print_test_case_name(test_case)
+      def print_test_case_info(test_case)
         @io.print "\n#{test_case.location}  #{truncate(test_case.name).inspect}  "
         @io.flush
+      end
+
+      def print_test_case_duration(test_case)
+        @io.print format("  (%.3fs)", @timings[timing_key(test_case)])
       end
 
       def print_worst_offenders
@@ -57,15 +60,21 @@ module Jekyll
 end
 
 InstallPlugin do |config|
+  progress_fmt = config.to_hash[:formats][0][0] == "progress"
   f = Jekyll::Cucumber::Formatter.new($stdout, $stderr)
 
   config.on_event :test_case_started do |event|
-    f.print_test_case_name(event.test_case)
-    f.before_test_case(event.test_case)
+    test_case = event.test_case
+
+    f.print_test_case_info(test_case) if progress_fmt
+    f.before_test_case(test_case)
   end
 
   config.on_event :test_case_finished do |event|
-    f.after_test_case(event.test_case)
+    test_case = event.test_case
+
+    f.after_test_case(test_case)
+    f.print_test_case_duration(test_case) if progress_fmt
   end
 
   config.on_event :test_run_finished do
