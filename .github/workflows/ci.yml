@@ -42,7 +42,7 @@ jobs:
       - name: Run Minitest based tests
         run: bash script/test
       - name: Run Cucumber based tests
-        run: bash script/cucumber
+        run: bash script/cucumber --color
       - name: Generate and Build a new site
         run: bash script/default-site
 
