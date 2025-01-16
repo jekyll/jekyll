@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 time ruby -S bundle exec cucumber \
-  --format progress --publish "$@"
+  --format progress --publish-quiet "$@"

@@ -1,222 +1,80 @@
 # frozen_string_literal: true
 
-require "fileutils"
-require "colorator"
-require "cucumber/formatter/console"
 require "cucumber/formatter/io"
 
 module Jekyll
   module Cucumber
     class Formatter
-      attr_accessor :indent, :runtime
-      include ::Cucumber::Formatter::Console
       include ::Cucumber::Formatter::Io
-      include FileUtils
 
-      CHARS = {
-        :failed    => "\u2718".red,
-        :pending   => "\u203D".yellow,
-        :undefined => "\u2718".red,
-        :passed    => "\u2714".green,
-        :skipped   => "\u203D".blue,
-      }.freeze
-
-      #
-
-      def initialize(runtime, path_or_io, options)
-        @runtime = runtime
-        @snippets_input = []
-        @io = ensure_io(path_or_io)
-        @prefixes = options[:prefixes] || {}
-        @delayed_messages = []
-        @options = options
-        @exceptions = []
-        @indent = 0
+      def initialize(path_or_io, error_stream)
+        @io = ensure_io(path_or_io, error_stream)
         @timings = {}
       end
 
-      #
-
-      def before_features(_features)
-        print_profile_information
+      def before_test_case(test_case)
+        @timings[timing_key(test_case)] = Time.now
       end
 
-      #
-
-      def after_features(features)
-        @io.puts
-        print_worst_offenders
-        print_summary(features)
+      def after_test_case(test_case)
+        @timings[timing_key(test_case)] = Time.now - @timings[timing_key(test_case)]
       end
 
-      #
-
-      def before_feature(_feature)
-        @exceptions = []
-        @indent = 0
-      end
-
-      #
-
-      def feature_element_timing_key(feature_element)
-        "\"#{feature_element.name}\" (#{feature_element.location})"
-      end
-
-      #
-
-      def before_feature_element(feature_element)
-        @indent = 2
-        @scenario_indent = 2
-        @timings[feature_element_timing_key(feature_element)] = Time.now
-      end
-
-      #
-
-      def after_feature_element(feature_element)
-        @timings[feature_element_timing_key(feature_element)] = Time.now - @timings[feature_element_timing_key(feature_element)]
-        @io.print " (#{@timings[feature_element_timing_key(feature_element)]}s)"
-      end
-
-      #
-
-      def tag_name(tag_name); end
-
-      def comment_line(comment_line); end
-
-      def after_tags(tags); end
-
-      #
-
-      def before_background(_background)
-        @scenario_indent = 2
-        @in_background = true
-        @indent = 2
-      end
-
-      #
-
-      def after_background(_background)
-        @in_background = nil
-      end
-
-      #
-
-      def background_name(keyword, name, source_line, indent)
-        print_feature_element_name(
-          keyword, name, source_line, indent
-        )
-      end
-
-      #
-
-      def scenario_name(keyword, name, source_line, indent)
-        print_feature_element_name(
-          keyword, name, source_line, indent
-        )
-      end
-
-      #
-
-      def before_step(step)
-        @current_step = step
-      end
-
-      #
-
-      # rubocop:disable Metrics/ParameterLists
-      def before_step_result(_keyword, _step_match, _multiline_arg, status, exception, \
-              _source_indent, background, _file_colon_line)
-
-        @hide_this_step = false
-        if exception
-          if @exceptions.include?(exception)
-            @hide_this_step = true
-            return
-          end
-
-          @exceptions << exception
-        end
-
-        if status != :failed && @in_background ^ background
-          @hide_this_step = true
-          return
-        end
-
-        @status = status
-      end
-
-      #
-
-      def step_name(_keyword, _step_match, status, _source_indent, _background, _file_colon_line)
-        @io.print CHARS[status]
-        @io.print " "
-      end
-      # rubocop:enable Metrics/ParameterLists
-
-      #
-
-      def exception(exception, status)
-        return if @hide_this_step
-
-        @io.puts
-        print_exception(exception, status, @indent)
+      def print_test_case_info(test_case)
+        @io.print "\n#{test_case.location}  #{truncate(test_case.name).inspect}  "
         @io.flush
       end
 
-      #
-
-      def after_test_step(test_step, result)
-        collect_snippet_data(
-          test_step, result
-        )
+      def print_test_case_duration(test_case)
+        @io.print format("  (%.3fs)", @timings[timing_key(test_case)])
       end
-
-      #
-
-      def print_feature_element_name(feature_element)
-        @io.print "\n#{feature_element.location}  Scenario: #{feature_element.name} "
-        @io.flush
-      end
-
-      #
-
-      def cell_prefix(status)
-        @prefixes[status]
-      end
-
-      #
 
       def print_worst_offenders
-        @io.puts
-        @io.puts "Worst offenders:"
-        @timings.sort_by { |_f, t| -t }.take(10).each do |(f, t)|
-          @io.puts "  #{t}s for #{f}"
-        end
-        @io.puts
+        @io.puts "\n\nWorst offenders:"
+
+        rows = @timings.sort_by { |_f, t| -t }.take(10).map! { |r| r[0].split(" \t ", 2).push(r[1]) }
+        padding = rows.max_by { |r| r[0].length }.first.length + 2
+        rows.each { |row| @io.puts format_row_data(row, padding) }
       end
 
-      #
+      private
 
-      def print_summary(features)
-        @io.puts
-        print_stats(features, @options)
-        print_snippets(@options)
-        print_passing_wip(@options)
+      def format_row_data(row, padding)
+        [
+          row[0].ljust(padding).rjust(padding + 2),
+          row[1].ljust(45),
+          format("(%.3fs)", row[2]),
+        ].join
+      end
+
+      def timing_key(test_case)
+        "#{test_case.location} \t #{truncate(test_case.name).inspect}"
+      end
+
+      def truncate(input, max_len: 40)
+        str = input.to_s
+        str.length > max_len ? "#{str[0..(max_len - 2)]}..." : str
       end
     end
   end
 end
 
-AfterConfiguration do |config|
-  f = Jekyll::Cucumber::Formatter.new(nil, $stdout, {})
+InstallPlugin do |config|
+  progress_fmt = config.to_hash[:formats][0][0] == "progress"
+  f = Jekyll::Cucumber::Formatter.new($stdout, $stderr)
 
   config.on_event :test_case_started do |event|
-    f.print_feature_element_name(event.test_case)
-    f.before_feature_element(event.test_case)
+    test_case = event.test_case
+
+    f.print_test_case_info(test_case) if progress_fmt
+    f.before_test_case(test_case)
   end
 
   config.on_event :test_case_finished do |event|
-    f.after_feature_element(event.test_case)
+    test_case = event.test_case
+
+    f.after_test_case(test_case)
+    f.print_test_case_duration(test_case) if progress_fmt
   end
 
   config.on_event :test_run_finished do
