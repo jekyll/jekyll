@@ -59,6 +59,7 @@
   * Add an optional `:rdoc` group of gems (#9742)
   * Test `inspect` filter with custom object (#9743)
   * Bump cucumber to v9 (#9747)
+  * Add Ruby 3.4 to CI matrix (#9740)
 
 ### Documentation
 
