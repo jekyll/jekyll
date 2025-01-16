@@ -6,6 +6,7 @@
   * Add csv to runtime dependency list (#9522)
   * Bump the minimum ruby version to 2.7 (#9525)
   * Acknowledge `livereload_port` from site config too (#9606)
+  * Add gem `base64` as runtime dependency (#9740)
 
 ### Bug Fixes
 
