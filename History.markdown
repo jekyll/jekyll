@@ -4,6 +4,7 @@
 
   * Backport #9737 for v4.3.x: Fix expected markup per WAI-ARIA requirements (#9738)
   * Backport #9742 for v4.3.x: Add an optional `:rdoc` group of gems (#9744)
+  * Backport #9747 for v4.3.x: Bump cucumber to v9 (#9752)
 
 ## 4.3.4 / 2024-09-16
 
