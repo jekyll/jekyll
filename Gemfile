@@ -21,6 +21,11 @@ group :test do
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
   gem "memory_profiler"
+
+  # Runtime dependency of gem `httpclient`. _Needed only in Ruby 3.4+_.
+  # Remove once gem `httpclient` ships with `mutex_m` listed as a dependency in its gemspec.
+  gem "mutex_m", "~> 0.3" if RUBY_VERSION >= "3.4"
+
   gem "nokogiri", "~> 1.7"
   gem "rspec"
   gem "rspec-mocks"
