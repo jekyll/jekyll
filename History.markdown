@@ -61,6 +61,7 @@
   * Test `inspect` filter with custom object (#9743)
   * Bump cucumber to v9 (#9747)
   * Add Ruby 3.4 to CI matrix (#9740)
+  * Remove unnecessary runtime dependency (#9753)
 
 ### Documentation
 
