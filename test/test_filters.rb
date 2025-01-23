@@ -34,6 +34,17 @@ class TestFilters < JekyllUnitTest
     def select; end
   end
 
+  class KeyValue
+    def initialize(key:, value:)
+      @key = key
+      @val = value
+    end
+
+    def inspect
+      "{#{@key.inspect}=>#{@val.inspect}}"
+    end
+  end
+
   context "filters" do
     setup do
       @sample_time = Time.utc(2013, 3, 27, 11, 22, 33)
@@ -1457,7 +1468,9 @@ class TestFilters < JekyllUnitTest
 
     context "inspect filter" do
       should "return a HTML-escaped string representation of an object" do
-        assert_equal "{&quot;&lt;a&gt;&quot;=&gt;1}", @filter.inspect("<a>" => 1)
+        hash_like_object = KeyValue.new(:key => "<a>", :value => 1)
+        assert_equal '{"<a>"=>1}', hash_like_object.inspect
+        assert_equal "{&quot;&lt;a&gt;&quot;=&gt;1}", @filter.inspect(hash_like_object)
       end
 
       should "quote strings" do

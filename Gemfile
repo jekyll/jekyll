@@ -16,11 +16,16 @@ end
 
 group :test do
   gem "activesupport", "< 7.1.0"
-  gem "cucumber", RUBY_VERSION >= "2.5" ? "~> 5.1.2" : "~> 4.1"
+  gem "cucumber", "~> 9.0"
   gem "httpclient"
   gem "jekyll_test_plugin"
   gem "jekyll_test_plugin_malicious"
   gem "memory_profiler"
+
+  # Runtime dependency of gem `httpclient`. _Needed only in Ruby 3.4+_.
+  # Remove once gem `httpclient` ships with `mutex_m` listed as a dependency in its gemspec.
+  gem "mutex_m", "~> 0.3" if RUBY_VERSION >= "3.4"
+
   gem "nokogiri", "~> 1.7"
   gem "rspec"
   gem "rspec-mocks"
@@ -76,13 +81,6 @@ group :jekyll_optional_dependencies do
   gem "kramdown-syntax-coderay"
   gem "matrix"
   gem "mime-types", "~> 3.0"
-  # Psych 5 has stopped bundling `libyaml` and expects it to be installed on the host system prior
-  # to being invoked.
-  # Since we don't have a direct dependency on the Psych gem (it gets included in the gem bundle as
-  # a dependency of the `rdoc` gem), lock psych gem to v4.x instead of installing `libyaml` in our
-  # development / CI environment.
-  gem "psych", "~> 4.0"
-  gem "rdoc", "~> 6.0"
   gem "tomlrb"
 
   platforms :ruby, :mswin, :mingw, :x64_mingw do
@@ -97,6 +95,18 @@ group :jekyll_optional_dependencies do
     gem "tzinfo", ENV["TZINFO_VERSION"] if ENV["TZINFO_VERSION"]
     gem "tzinfo-data"
   end
+end
+
+#
+
+group :rdoc, :optional => true do
+  # Psych 5 has stopped bundling `libyaml` and expects it to be installed on the host system prior
+  # to being invoked.
+  # Since we don't have a direct dependency on the Psych gem (it gets included in the gem bundle as
+  # a dependency of the `rdoc` gem), lock psych gem to v4.x instead of installing `libyaml` in our
+  # development / CI environment.
+  gem "psych", "~> 4.0"
+  gem "rdoc", "~> 6.0"
 end
 
 #

@@ -26,6 +26,8 @@ jobs:
             version: "2.7"
           - label: Ruby 3.3
             version: "3.3"
+          - label: Ruby 3.4
+            version: "3.4"
         os:
           - label: Linux
             image: "ubuntu-latest"
@@ -42,7 +44,7 @@ jobs:
       - name: Run Minitest based tests
         run: bash script/test
       - name: Run Cucumber based tests
-        run: bash script/cucumber
+        run: bash script/cucumber --color
       - name: Generate and Build a new site
         run: bash script/default-site
 

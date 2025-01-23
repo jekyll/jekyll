@@ -5,6 +5,8 @@
   * Allow marking specific highlighted lines via Liquid (#9138)
   * Add csv to runtime dependency list (#9522)
   * Bump the minimum ruby version to 2.7 (#9525)
+  * Acknowledge `livereload_port` from site config too (#9606)
+  * Add gem `base64` as runtime dependency (#9740)
 
 ### Bug Fixes
 
@@ -19,6 +21,8 @@
   * Correct rubocop lint errors (#9600)
   * Fix inexistent layout warning for the default 404 page (#9589)
   * Relax version constraint on `wdm` in new Gemfile (#9662)
+  * Fix `--livereload-ignore` option (#9570)
+  * Render theme-gem root only in development (#9680)
 
 ### Development Fixes
 
@@ -50,6 +54,14 @@
   * Stop testing with Cucumber on JRuby (#9661)
   * Windows CI on GitHub Actions (#9659)
   * Run GitHub Actions only if needed (#9664)
+  * Format `.rubocop.yml` via a rake task (#9687)
+  * Configure some new cops (#9688)
+  * Fix expected markup per WAI-ARIA requirements (#9737)
+  * Add an optional `:rdoc` group of gems (#9742)
+  * Test `inspect` filter with custom object (#9743)
+  * Bump cucumber to v9 (#9747)
+  * Add Ruby 3.4 to CI matrix (#9740)
+  * Remove unnecessary runtime dependency (#9753)
 
 ### Documentation
 
@@ -96,6 +108,34 @@
   * Document keys of global variable `{{ jekyll }}` (#9653)
   * Fix incorrect and inconsistent variables in the permalinks page (#9591)
   * Fix lapses in documentation of page variables (#9667)
+  * Add note about VSCode warning for SCSS files (#9609)
+  * docs: Fix incorrect parentheses (#9629)
+  * docs: Fix of a bug in the pagination section (#8890)
+  * Update current Ruby version renders and macOS docs (#9614)
+  * Improve docs around using GitHub Actions to build and deploy Jekyll sites (#9682)
+  * Fix grammar in the description of `page.excerpt` variable (#9689)
+  * Render HTML tables at `/docs/permalinks/` using a data file (#9666)
+  * Fix HTML attribute separation whitespace placement in the Navigation include code of Assets step of the Step by Step Tutorial (#9695)
+  * Fix missing glob matching pattern support description in the documentation of the `include` and `exclude` configuration options (#9697)
+  * Fix missing `url` configuration option documentation (#9699)
+  * Link to GitHub Pages Dependency versions page instead of explicitly specifying Jekyll version (#9715)
+  * Fix broken link on third-party.md (#9704)
+  * Fix: remove inaccessible links and their descriptions (#9745)
+
+### Site Enhancements
+
+  * Extract markup for `Improve this page` into an inclusion (#9675)
+
+## 4.3.4 / 2024-09-16
+
+### Bug Fixes
+
+  * Backport #9662 for v4.3.x: Relax version constraint on wdm in new Gemfile (#9683)
+  * Backport #9680 for v4.3.x: Render theme-gem root only in development (#9684)
+
+### Development Fixes
+
+  * Sync workflows with counterparts on `master` (#9681)
 
 ## 4.3.3 / 2023-12-27
 

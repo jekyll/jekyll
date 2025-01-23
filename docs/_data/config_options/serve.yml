@@ -17,7 +17,13 @@
 
 
 - name: Live reload ignore
-  description: File glob patterns for LiveReload to ignore.
+  description: >-
+    File glob patterns for LiveReload to ignore.<br /><br />
+    Ensure that patterns are quoted when passed via the command-line to deter your shell from
+    expanding them.<br /><br /><strong>Note:</strong> The given glob patterns are matched against
+    the <code>relative_path</code> attribute of the processed resource. In the event Jekyll
+    reloads a <em>relative_path</em> matching the pattern in spite of being quoted, try listing
+    the pattern(s) under the config file option key.
   option: "livereload_ignore: [ GLOB1,... ]"
   flag: "--livereload-ignore GLOB1[,GLOB2,...]"
 
@@ -33,7 +39,10 @@
 
 
 - name: Live reload port
-  description: Port for LiveReload to listen on.
+  description: >-
+    Port for LiveReload to listen on.<br/><em>Ability to override via config file introduced in
+    <span class="version-badge">4.4.0</span></em>.
+  option: "livereload_port: PORT"
   flag: "--livereload-port PORT"
 
 

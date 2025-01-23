@@ -212,40 +212,38 @@ h6:hover .header-link {
 /* Footer */
 
 footer {
-  background-color: #212121;
-  font-size: 16px;
-  padding-bottom: 5px;
-  color: #c0c0c0;
   margin-top: 40px;
+  padding-bottom: 5px;
+  font-size: 15px;
+  font-weight: 400;
+  color: #999999;
+  background-color: #212121;
 
   a {
-    color: #fff;
+    color: #dddddd;
 
     &:hover {
-
       img { opacity: 1; }
     }
   }
 
-  .align-right {
-
-    p { display: inline-block; }
-  }
+  p { margin-block: 12px }
 
   img {
     display: inline-block;
-    vertical-align: middle;
-    margin-left: 5px;
-    opacity: .8;
+    width: 84px;
+    height: auto;
+    margin-left: 2px;
     padding: 1px;
-    @include transition(opacity .2s);
+    vertical-align: bottom;
+    opacity: 0.5;
+    @include transition(opacity 0.2s);
   }
 }
 
 @media (max-width: 568px) {
   footer {
-    .one-third p { margin-bottom: 0; }
-    .two-thirds p { margin-top: -20px; }
+    p { margin-block: 6px }
   }
 }
 

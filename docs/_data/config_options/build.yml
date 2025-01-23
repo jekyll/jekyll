@@ -112,10 +112,27 @@
   flag: --strict_front_matter
 
 
+- name: Web Domain URL
+  option: "url: SCHEME://HOST[:PORT]"
+  description: >-
+    The canonical URL of the root of your production deploy, composed of the following components:<br>
+    &nbsp; &nbsp;• &nbsp; Protocol scheme (e.g. <code>http://</code>)<br>
+    &nbsp; &nbsp;• &nbsp; Hostname or IP address (e.g. <code>example.org</code>)<br>
+    &nbsp; &nbsp;• &nbsp; <em>(Optional)</em> The port number of the server, prefixed with a colon
+    (e.g. <code>:8080</code>)<br>
+    The value of this configuration option should NOT have a trailing slash. It will be appended
+    with the <code>baseurl</code> to form the full URL to your Jekyll site when using the
+    <a href="/docs/liquid/filters/">Liquid filter <code>absolute_url</code></a>.<br>
+    <strong>NOTE:</strong> This setting is automatically configured to the <strong>localhost URL</strong>
+    when the <code>jekyll serve</code> command is invoked.
+
+
 - name: Base URL
-  description: Serve the website from the given base URL.
-  option: "baseurl: URL"
-  flag: -b, --baseurl URL
+  description: >-
+    Serve the website from the given base URL (the path between web-server or domain root and your landing
+    page).
+  option: "baseurl: /PATH/TO/SITE"
+  flag: -b, --baseurl /PATH/TO/SITE
 
 
 - name: Trace

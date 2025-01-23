@@ -7,10 +7,7 @@ layout: default
     {% include docs_contents_mobile.html -%}
     <div class="unit four-fifths">
       <article>
-        <div class="improve right hide-on-mobiles">
-          <a data-proofer-ignore href="https://github.com/jekyll/jekyll/edit/master/docs/{{ page.path }}"><i
-             class="fa fa-pencil"></i> &nbsp;Improve this page</a>
-        </div>
+        {% include improve_doc_link.html %}
         <h1>{{ page.title }}</h1>
         {{ content }}
       </article>
