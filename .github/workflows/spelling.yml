@@ -79,7 +79,7 @@ jobs:
         use_magic_file: 1
         extra_dictionary_limit: 10
         extra_dictionaries:
-          cspell:software-terms/src/software-terms.txt
+          cspell:software-terms/software-terms.txt
           cspell:php/php.txt
           cspell:node/node.txt
           cspell:django/django.txt
