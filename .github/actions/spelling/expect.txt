@@ -614,7 +614,6 @@ subdir
 subdomain
 subfolder
 subfolderitems
-subfolders
 subnav
 subpages
 subpath
@@ -654,7 +653,6 @@ throughs
 Tidelift
 timeago
 timezone
-timezones
 titleize
 TLS
 tmm
@@ -693,7 +691,6 @@ uri
 url
 urlset
 username
-usernames
 usr
 utf
 utils
@@ -735,7 +732,6 @@ woff
 wordpress
 Workaround
 workflow
-workflows
 wsl
 www
 xcode
