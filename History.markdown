@@ -7,6 +7,7 @@
   * Bump the minimum ruby version to 2.7 (#9525)
   * Acknowledge `livereload_port` from site config too (#9606)
   * Add gem `base64` as runtime dependency (#9740)
+  * Add `json` as runtime_dependency (#9671)
 
 ### Bug Fixes
 
