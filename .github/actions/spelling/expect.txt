@@ -36,7 +36,6 @@ awscli
 backend
 backport
 backtick
-backticks
 barcamp
 baseurl
 bashrc
@@ -52,7 +51,6 @@ bitbucket
 blog
 Blogger
 blogging
-blogs
 bonafide
 Bou
 breadcrumbs
@@ -181,7 +179,6 @@ exe
 execjs
 extensionpack
 extname
-extnames
 exts
 favicon
 Fengyun
@@ -382,7 +379,6 @@ mergable
 Mertcan
 mertkahyaoglu
 metadata
-metadatas
 microdata
 microsoft
 mimetype
@@ -428,7 +424,6 @@ nakanishi
 namespace
 namespaced
 navbar
-navbars
 nbsp
 nearlyfreespeech
 nethack
@@ -468,7 +463,6 @@ pathawks
 Pathutil
 paywall
 pdf
-PDFs
 Pelykh
 permalink
 PHP
@@ -520,8 +514,6 @@ redgreen
 redhat
 refactor
 refactoring
-refactorings
-Refactors
 Refheap
 regen
 regex
@@ -564,7 +556,6 @@ Schwartzian
 scp
 screenshot
 scrollbar
-scrollbars
 scroller
 scss
 scssify
