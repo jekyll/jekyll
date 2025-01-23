@@ -89,5 +89,7 @@ jobs:
           cspell:fullstack/fullstack.txt
           cspell:filetypes/filetypes.txt
         check_extra_dictionaries: ''
+        dictionary_source_prefixes: >-
+          {"cspell": "https://raw.githubusercontent.com/check-spelling/cspell-dicts/v20241114/dictionaries/"}
 
 # This workflow has opted not to use comments (users can view the report in GitHub Step Summary)
