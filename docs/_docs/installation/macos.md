@@ -84,7 +84,7 @@ Next, read that same external guide for important notes about
 After installing Ruby with chruby, install the latest Jekyll gem:
 
 ```sh
-gem install jekyll
+gem install jekyll bundler
 ```
 
 ## Troubleshooting
