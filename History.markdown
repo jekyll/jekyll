@@ -63,6 +63,7 @@
   * Bump cucumber to v9 (#9747)
   * Add Ruby 3.4 to CI matrix (#9740)
   * Remove unnecessary runtime dependency (#9753)
+  * Bump `check-spelling/check-spelling` action (#9756)
 
 ### Documentation
 
