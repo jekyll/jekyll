@@ -8,6 +8,7 @@
   * Acknowledge `livereload_port` from site config too (#9606)
   * Add gem `base64` as runtime dependency (#9740)
   * Add `json` as runtime_dependency (#9671)
+  * Remove unnecessary constraint on gem `mercenary` (#9758)
 
 ### Bug Fixes
 
