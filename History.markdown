@@ -1,13 +1,13 @@
-## HEAD
+## 4.4.0 / 2025-01-27
 
 ### Minor Enhancements
 
   * Allow marking specific highlighted lines via Liquid (#9138)
-  * Add csv to runtime dependency list (#9522)
+  * Add gem `csv` to runtime dependency list (#9522)
   * Bump the minimum ruby version to 2.7 (#9525)
   * Acknowledge `livereload_port` from site config too (#9606)
   * Add gem `base64` as runtime dependency (#9740)
-  * Add `json` as runtime_dependency (#9671)
+  * Add gem `json` as runtime_dependency (#9671)
   * Remove unnecessary constraint on gem `mercenary` (#9758)
 
 ### Bug Fixes
