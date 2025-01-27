@@ -124,6 +124,7 @@
   * Link to GitHub Pages Dependency versions page instead of explicitly specifying Jekyll version (#9715)
   * Fix broken link on third-party.md (#9704)
   * Fix: remove inaccessible links and their descriptions (#9745)
+  * Add release post for v4.4.0 (#9759)
 
 ### Site Enhancements
 
