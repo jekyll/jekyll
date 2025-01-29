@@ -13,7 +13,7 @@
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>News | Jekyll • Simple, blog-aware, static sites</title>
-<meta name="generator" content="Jekyll v4.4.0" />
+<meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="News" />
 <meta name="author" content="all" />
 <meta property="og:locale" content="en_US" />
@@ -62,7 +62,7 @@
       <input type="text" id="docsearch-input" placeholder="Search the docs…" aria-label="Search"></div>
     <div class="meta hide-on-mobiles">
       <ul>
-        <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.4.0">v4.4.0</a></li>
+        <li><a href="https://github.com/jekyll/jekyll/releases/tag/v4.4.1">v4.4.1</a></li>
         <li><a href="https://github.com/jekyll/jekyll">GitHub</a></li>
       </ul>
     </div>
@@ -83,6 +83,7 @@
     <option value="">Navigate the blog…</option>
     <option value="/news/">Home</option>
     <optgroup label="posts">
+      <option value="/news/2025/01/29/jekyll-4-4-1-released/">Jekyll 4.4.1 Released</option>
       <option value="/news/2025/01/27/jekyll-4-4-0-released/">Jekyll 4.4.0 Released</option>
       <option value="/news/2024/09/16/jekyll-4-3-4-released/">Jekyll 4.3.4 Released</option>
       <option value="/news/2024/06/23/jekyll-3-10-0-released/">Jekyll 3.10.0 Released</option>
@@ -188,51 +189,38 @@
   </select>
 </div><div class="unit four-fifths"><article itemscope itemtype="http://schema.org/NewsArticle">
   <h2 itemprop="headline">
-    <a href="/news/2025/01/27/jekyll-4-4-0-released/">Jekyll 4.4.0 Released</a>
+    <a href="/news/2025/01/29/jekyll-4-4-1-released/">Jekyll 4.4.1 Released</a>
   </h2>
   <span class="post-category">
     <span class="label">release</span>
   </span>
   <div class="post-meta">
-    <span class="post-date" itemprop="datePublished" content="2025-01-27">27 Jan 2025</span>
+    <span class="post-date" itemprop="datePublished" content="2025-01-29">29 Jan 2025</span>
     <a class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person" target="_blank" href="https://github.com/ashmaroli">
       <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name" itemprop="name">ashmaroli</span>
     </a>
   </div>
-  <div class="post-content" itemprop="articleBody"><p>Greetings Jekyllers, Jekyll v4.4.0 has been published!</p>
-
-<p>This release comes with the following notable changes since v4.3.x:</p>
-
-<ul>
-  <li>Liquid tag <code class="language-plaintext highlighter-rouge">highlight</code> now allows marking specific lines in the code-block.</li>
-  <li>Allow customizing the port that the vendored livereload script listens to, either via command-line flag
-<code class="language-plaintext highlighter-rouge">--livereload-port NUM</code> or via setting desired value to key <code class="language-plaintext highlighter-rouge">livereload_port</code> in configuration file.</li>
-  <li>Acknowledge paths passed to CLI flag <code class="language-plaintext highlighter-rouge">--livereload-ignore</code> or list of paths defined under configuration key
-<code class="language-plaintext highlighter-rouge">livereload_ignore</code> in order prevent automatic browser-refreshes on change to those paths.</li>
-  <li>Support for Ruby versions older than Ruby 2.7.0 has been dropped. Regardless, we recommend using Ruby 3.2.0 or newer
-to reduce inconveniences with installing newer versions of various plugins for Jekyll.</li>
-  <li>In order to improve the out-of-the-box experience with newer versions of Ruby, we have added gems <code class="language-plaintext highlighter-rouge">base64</code>, <code class="language-plaintext highlighter-rouge">csv</code> as
-runtime-dependencies. Consequently, those gems will be automatically installed with Jekyll and made available for use
-on issuing <code class="language-plaintext highlighter-rouge">bundle exec jekyll &lt;command&gt;</code>. <em>Users on older versions of Jekyll will have to manually add the gems to
-their Gemfile to resolve dependency errors</em>.</li>
-  <li>Gem <code class="language-plaintext highlighter-rouge">json</code> has been added as a runtime-dependency as well to provide consistent behavior across different platforms and
-different Ruby versions.</li>
-  <li>Version constraint on <code class="language-plaintext highlighter-rouge">mercenary</code> gem has been relaxed to automatically allow future releases.</li>
-</ul>
-
-<p>Special thanks to my co-maintainers and members from our community who were instrumental in improving Jekyll codebase,
-documentation and development workflow since the release of v4.3:</p>
-
-<p>Akira Taguchi, Andy Coates, Daniel Haim, David Silveira, Gabriel B. Nunes, Gaelan Lloyd, Gourav Khunger, IFcoltransG,
-James Hoctor, Joe Mahoney, Joel Coffman, Jonas Jared Jacek, Jorge, Josh Soref, José Romero, Juan Vásquez, KenHV, Khalila,
-Koichi ITO, Krisztian Zsolt Sallai, Maciek Palmowski, Mamoru TASAKA, Matt Rogers, Michael Nordmeyer, Mike Slinn,
-Moncef Belyamani, Muhab Abdelreheem, Olle Jonsson, Olly Headey, Otto Liljalaakso, Parker Moore, QuinnG8, Ram Vasuthevan,
-Robert Austin, Robert Love, Sean M. Collins, Seth Falco, Seth Louis, Shruti Dalvi, Silent, Simon Wagar, Sutou Kouhei,
-Tomáš Hübelbauer, Valeriy Van, Virgil Ierubino, Vít Ondruch, William Entriken, William Underwood, a story, halorrr,
-iulianOnofrei (U-lee-aan), masaki, naoki kodama, nisbet-hubbard, plgagne, velle, waqarnazir, なつき and 林博仁 Buo-ren Lin</p>
-
-<p>Happy Jekyllin’!!</p>
+  <div class="post-content" itemprop="articleBody"><p>Publishing a patch release to restore existing behavior around defining front matter defaults
+where a scope with path containing glob patterns are lax in matching paths on disk.</p>
 </div>
+</article>
+<article itemscope itemtype="http://schema.org/Article">
+  <div class="cell-left">
+    <span class="post-category">
+      <span class="label">release</span>
+    </span>
+  </div>
+  <div class="cell-right">
+    <div class="post-meta">
+      <h2 class="post-title" itemprop="headline">
+        <a href="/news/2025/01/27/jekyll-4-4-0-released/" itemprop="url">Jekyll 4.4.0 Released</a>
+      </h2>
+      <span class="post-date" itemprop="datePublished" content="2025-01-27">27 Jan 2025</span>
+      <a href="https://github.com/ashmaroli" class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <img class="avatar avatar-small" alt="ashmaroli" width="24" height="24" data-proofer-ignore="true" src="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24" srcset="https://avatars0.githubusercontent.com/ashmaroli?v=3&s=24 1x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=48 2x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=72 3x, https://avatars0.githubusercontent.com/ashmaroli?v=3&s=96 4x" /><span class="author-name" itemprop="name">ashmaroli</span>
+      </a>
+    </div>
+  </div>
 </article>
 <article itemscope itemtype="http://schema.org/Article">
   <div class="cell-left">
@@ -2048,6 +2036,9 @@ iulianOnofrei (U-lee-aan), masaki, naoki kodama, nisbet-hubbard, plgagne, velle,
     <h4>Recent Releases</h4>
     <ul>
       <li >
+        <a href="/news/2025/01/29/jekyll-4-4-1-released/">Version 4.4.1</a>
+      </li>
+      <li >
         <a href="/news/2025/01/27/jekyll-4-4-0-released/">Version 4.4.0</a>
       </li>
       <li >
@@ -2058,9 +2049,6 @@ iulianOnofrei (U-lee-aan), masaki, naoki kodama, nisbet-hubbard, plgagne, velle,
       </li>
       <li >
         <a href="/news/2023/12/28/jekyll-3-9-4-released/">Version 3.9.4</a>
-      </li>
-      <li >
-        <a href="/news/2023/12/27/jekyll-4-3-3-released/">Version 4.3.3</a>
       </li>
       <li>
         <a href="/docs/history/">History »</a>

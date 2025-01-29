@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.0">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2025-01-27T07:28:25-08:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 4.4.0 Released</title><link href="https://jekyllrb.com/news/2025/01/27/jekyll-4-4-0-released/" rel="alternate" type="text/html" title="Jekyll 4.4.0 Released" /><published>2025-01-27T07:15:32-08:00</published><updated>2025-01-27T07:15:32-08:00</updated><id>https://jekyllrb.com/news/2025/01/27/jekyll-4-4-0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2025/01/27/jekyll-4-4-0-released/"><![CDATA[<p>Greetings Jekyllers, Jekyll v4.4.0 has been published!</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://jekyllrb.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jekyllrb.com/" rel="alternate" type="text/html" /><updated>2025-01-29T04:47:40-08:00</updated><id>https://jekyllrb.com/feed.xml</id><title type="html">Jekyll • Simple, blog-aware, static sites</title><subtitle>Transform your plain text into static websites and blogs</subtitle><entry><title type="html">Jekyll 4.4.1 Released</title><link href="https://jekyllrb.com/news/2025/01/29/jekyll-4-4-1-released/" rel="alternate" type="text/html" title="Jekyll 4.4.1 Released" /><published>2025-01-29T04:45:32-08:00</published><updated>2025-01-29T04:45:32-08:00</updated><id>https://jekyllrb.com/news/2025/01/29/jekyll-4-4-1-released</id><content type="html" xml:base="https://jekyllrb.com/news/2025/01/29/jekyll-4-4-1-released/"><![CDATA[<p>Publishing a patch release to restore existing behavior around defining front matter defaults
+where a scope with path containing glob patterns are lax in matching paths on disk.</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Publishing a patch release to restore existing behavior around defining front matter defaults where a scope with path containing glob patterns are lax in matching paths on disk.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.4.0 Released</title><link href="https://jekyllrb.com/news/2025/01/27/jekyll-4-4-0-released/" rel="alternate" type="text/html" title="Jekyll 4.4.0 Released" /><published>2025-01-27T07:15:32-08:00</published><updated>2025-01-27T07:15:32-08:00</updated><id>https://jekyllrb.com/news/2025/01/27/jekyll-4-4-0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2025/01/27/jekyll-4-4-0-released/"><![CDATA[<p>Greetings Jekyllers, Jekyll v4.4.0 has been published!</p>
 
 <p>This release comes with the following notable changes since v4.3.x:</p>
 
@@ -160,87 +161,4 @@ either of the files, or use complete relative path from the parent file.</p>
 Happy Jekyllin’</p>
 
 <p>P.S. Development towards v5 has taken a back seat as of now. I plan on releasing a v4.4.0 instead.
-That said, please feel free to comment on the <a href="https://github.com/jekyll/jekyll/issues/9156">tentative roadmap to v5</a>.</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Jekyll 4.3.0 Released</title><link href="https://jekyllrb.com/news/2022/10/20/jekyll-4-3-0-released/" rel="alternate" type="text/html" title="Jekyll 4.3.0 Released" /><published>2022-10-20T08:20:22-07:00</published><updated>2022-10-20T08:20:22-07:00</updated><id>https://jekyllrb.com/news/2022/10/20/jekyll-4-3-0-released</id><content type="html" xml:base="https://jekyllrb.com/news/2022/10/20/jekyll-4-3-0-released/"><![CDATA[<p>Hello Jekyllers!</p>
-
-<p>The Jekyll team is happy to announce the release of <code class="language-plaintext highlighter-rouge">v4.3.0</code> shipping with some nice improvements and bug-fixes.</p>
-
-<h2 id="improvements">Improvements</h2>
-
-<h3 id="dependencies">Dependencies</h3>
-
-<ul>
-  <li>Gem <code class="language-plaintext highlighter-rouge">webrick</code> is now a listed dependency. You no longer have to add the gem to your Gemfile when using Jekyll with
-Ruby 3.0 or newer.</li>
-  <li>You may now use Rouge v4 or continue using Rouge v3.x by explicitly mentioning the version in your Gemfile.</li>
-  <li>Support for gem <code class="language-plaintext highlighter-rouge">tzinfo</code> v2 and non-half-hour offsets have been added.</li>
-  <li>You will be able to use v3 of <code class="language-plaintext highlighter-rouge">jekyll-sass-converter</code> when it ships.</li>
-</ul>
-
-<h3 id="builds">Builds</h3>
-
-<ul>
-  <li>Added support for bundling and loading data files from within a theme-gem similar to existing theme-gem contents.</li>
-  <li>Changes to data files at source will now be respected during incremental builds.</li>
-  <li><code class="language-plaintext highlighter-rouge">site.static_files</code> now include static files within a collection.</li>
-  <li>You may now configure converters for CSV data.</li>
-  <li><code class="language-plaintext highlighter-rouge">.jekyll-cache</code> or its equivalent custom cache directory will be automatically ignored by Git.</li>
-  <li>Vendor the current latest mime-types dataset for use with local development server.</li>
-</ul>
-
-<h3 id="liquid-templates">Liquid Templates</h3>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">basename</code> attribute of documents are now exposed to Liquid as <code class="language-plaintext highlighter-rouge">name</code>, for example <code class="language-plaintext highlighter-rouge">{{ page.name }}</code>. Excerpts delegate
-to associated document attribute.</li>
-  <li>Top-level variable <code class="language-plaintext highlighter-rouge">{{ theme }}</code> introduced to expose gemspec details of theme-gem. (Valid only when using theme-gem)</li>
-</ul>
-
-<h2 id="bug-fixes">Bug-fixes</h2>
-
-<p>Some noteworthy bug-fixes include:</p>
-
-<ul>
-  <li>Respect <code class="language-plaintext highlighter-rouge">BUNDLE_GEMFILE</code> when loading Jekyll plugins via Bundler.</li>
-  <li>Prevent loading versions older than kramdown-2.3.1 as a security measure.</li>
-  <li>Trigger livereloading even if the site has <em>no pages</em>.</li>
-  <li>Ensure the expected class of theme config is returned following a merger.</li>
-  <li>Enable BOM encoding only if configured encoding is ‘UTF-8’.</li>
-  <li>Respect server protocol while injecting livereload script.</li>
-  <li>The table output for <code class="language-plaintext highlighter-rouge">--profile</code> stops printing incorrect “TOTALS” row.</li>
-</ul>
-
-<p><a href="/docs/history/#v4-3-0">The full list of changes</a> may be perused if interested.</p>
-
-<p>As always, we are grateful to the many contributors that helped improve the project codebase and documentation:</p>
-
-<p><small>Ashwin Maroli, Frank Taillandier, Matt Rogers, Parker Moore, Kelvin M. Klann, Josh Soref, Youssef Boulkaid,
-Emily Grace Seville, Robert Martin, jaybe@jekyll, Ben Keith, Jonathan Darrer, Kaben, Mike Kasberg, Moncef Belyamani,
-Phil Ross, Sesh Sadasivam, Adam Bell, Alaz Tetik, Alex Malaszkiewicz, Alex Saveau, Andreas Deininger, Andrew Davis,
-Andrew Gutekanst, Andrii Abramov, Aram Akhavan, Atlas Cove, Attaphong Rattanaveerachanon, Ben Whetton, Chris Keefe,
-Clayton Smith, Craig H Maynard, Curious Cat, Daniel Haim, Daniel Kehoe, Daryl Hepting, David Bruant, David Zhang,
-Edson Jiménez, Eric Cousineau, Gary, Giuseppe Bertone, Ikko Ashimine, JJ, JT, Jeff Wilcox, Jeffrey Veen,
-Jesse van der Pluijm, John Losito, Kantanat-Stamp, Kirstin Heidler, Korbs, Laurence Andrews, Liam Bigelow, Maik Riechert,
-Meet Gor, Meg Gutshall, Michael Gerzabek, MichaelCordingley, Miguel Brandão, Nahin Khan, Nemo, Nicholas Paxford,
-Nick Coish, Otto Urpelainen, Parikshit87, Phil Kirlin, Qasim Qureshi, Ricardo N Feliciano, Rishi Raj Jain, SNVMK,
-SaintMalik, Sampath Sukesh Ravolaparthi, Shannon Kularathna, Shyam Mohan K, Takuya N, Tejas Bubane, Toshimaru, Tyler887,
-Vinhas Kevin, alena-ko, fauno, lm, lucafrance, nusu, shorty, なつき</small></p>
-
-<hr />
-
-<h3 id="announcement">Announcement</h3>
-
-<p>I would like to inform you that following this release, Jekyll will start developing towards a v5.0 milestone that will
-<strong>definitely contain breaking changes</strong>. I have set up a <a href="https://github.com/jekyll/jekyll/issues/9156">tentative roadmap at the GitHub repository</a> to give everyone
-a glimpse of the PROBABLE OUTCOME. Towards that end, we will no longer accept documentation fixes on <code class="language-plaintext highlighter-rouge">master</code>. The <code class="language-plaintext highlighter-rouge">4.3-stable</code>
-branch will be used to build and deploy the site for https://jekyllrb.com.</p>
-
-<p>Jekyll 3.x series is now under security-maintenance phase. Only security patches will be released when necessary.</p>
-
-<p>Jekyll 4.x series will continue receiving bug-fixes and security-patches only. Depending on the state of progress towards v5.0,
-there will be <em>at least</em> one minor version release serving as a transitionary version containing deprecations and bridge code
-to ease the eventual upgrade to v5.0.</p>
-
-<hr />
-
-<p>That is all for now.
-Happy Jekyllin’!!</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+That said, please feel free to comment on the <a href="https://github.com/jekyll/jekyll/issues/9156">tentative roadmap to v5</a>.</p>]]></content><author><name>ashmaroli</name></author><category term="release" /><summary type="html"><![CDATA[Hello Jekyllers!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jekyllrb.com/img/jekyll-og.png" /><media:content medium="image" url="https://jekyllrb.com/img/jekyll-og.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
