@@ -109,7 +109,7 @@ module Jekyll
       sanitized_path = sanitize_path(path)
 
       if rel_scope_path.include?("*")
-        File.fnmatch?(strip_collections_dir(rel_scope_path), sanitized_path)
+        glob_scope(sanitized_path, rel_scope_path)
       else
         path_is_subpath?(sanitized_path, strip_collections_dir(rel_scope_path))
       end

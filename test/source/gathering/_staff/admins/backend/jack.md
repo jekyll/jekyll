@@ -1,3 +1,0 @@
----
-speciality: Ruby
----
