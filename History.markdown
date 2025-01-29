@@ -1,3 +1,9 @@
+## 4.4.1 / 2025-01-29
+
+### Bug Fixes
+
+  * Restore globbed path behavior in front matter defaults (#9762)
+
 ## 4.4.0 / 2025-01-27
 
 ### Minor Enhancements
