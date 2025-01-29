@@ -83,6 +83,7 @@ DCEU
 Debian
 defunkt
 delegators
+devcontainer
 digitalocean
 disqus
 ditaa
@@ -360,7 +361,7 @@ shingo
 shopify
 shortlinks
 shortlog
-Shoulda
+shoulda
 sieversii
 sigpipe
 Singhaniya
@@ -446,6 +447,7 @@ vnd
 vohedge
 vps
 vwochnik
+WAI
 wdm
 We'd
 webfonts
