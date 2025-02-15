@@ -61,33 +61,43 @@ module Jekyll
       def initialize(tag_name, post, tokens)
         super
         @orig_post = post.strip
-        begin
-          @post = PostComparer.new(@orig_post)
-        rescue StandardError => e
-          raise Jekyll::Errors::PostURLError, <<~MSG
-            Could not parse name of post "#{@orig_post}" in tag 'post_url'.
-             Make sure the post exists and the name is correct.
-             #{e.class}: #{e.message}
-          MSG
-        end
       end
 
       def render(context)
         @context = context
         site = context.registers[:site]
 
+        liquid_solved_orig_post = Liquid::Template.parse(@orig_post).render(context)
+        begin
+          post = PostComparer.new(liquid_solved_orig_post)
+        rescue StandardError => e
+          # if there is liquid rendering besides a simple constant, adds "(from input \"#{@orig_post}\")" to let
+          # maintainer know where and why it failed
+          if liquid_solved_orig_post == @orig_post
+            post_from_input_string = "\"#{liquid_solved_orig_post}\""
+          else
+            post_from_input_string = "\"#{liquid_solved_orig_post}\" (from input \"#{@orig_post}\")"
+          end
+                
+          raise Jekyll::Errors::PostURLError, <<~MSG
+            Could not parse name of post #{post_from_input_string} in tag 'post_url'.
+             Make sure the post exists and the name is correct.
+             #{e.class}: #{e.message}
+          MSG
+        end
+
         site.posts.docs.each do |document|
-          return relative_url(document) if @post == document
+          return relative_url(document) if post == document
         end
 
         # New matching method did not match, fall back to old method
         # with deprecation warning if this matches
 
         site.posts.docs.each do |document|
-          next unless @post.deprecated_equality document
+          next unless post.deprecated_equality document
 
           Jekyll::Deprecator.deprecation_message(
-            "A call to '{% post_url #{@post.name} %}' did not match a post using the new " \
+            "A call to '{% post_url #{post.name} %}' did not match a post using the new " \
             "matching method of checking name (path-date-slug) equality. Please make sure " \
             "that you change this tag to match the post's name exactly."
           )
