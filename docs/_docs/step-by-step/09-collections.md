@@ -175,17 +175,20 @@ collections:
     output: true
 
 defaults:
-  - scope:
+  -
+    scope:
       path: ""
       type: "authors"
     values:
       layout: "author"
-  - scope:
+  -
+    scope:
       path: ""
       type: "posts"
     values:
       layout: "post"
-  - scope:
+  -
+    scope:
       path: ""
     values:
       layout: "default"
