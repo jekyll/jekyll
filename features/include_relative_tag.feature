@@ -58,3 +58,22 @@ Feature: include_relative Tag
     Then I should get a zero exit status
     And the _site directory should exist
     And I should see "Welcome back Dear Reader!" in "_site/index.html"
+
+  Scenario: Include multiple files relative to a page at root
+    Given I have an "apple.md" page with foo "bar" that contains "{{ page.path }}, {{ page.foo }}"
+    And I have an "banana.md" page with content:
+      """
+        {% include_relative apple.md %}
+        {% include_relative cherry.md %}
+
+        {{ page.path }}
+      """
+    And I have an "cherry.md" page with foo "lipsum" that contains "{{ page.path }}, {{ page.foo }}"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "<p>apple.md, bar</p>" in "_site/apple.html"
+    And I should see "<hr />\n<p>foo: bar" in "_site/banana.html"
+    And I should see "<hr />\n<p>foo: lipsum" in "_site/banana.html"
+    And I should see "<p>cherry.md, lipsum</p>" in "_site/cherry.html"
+    But I should not see "foo: lipsum" in "_site/cherry.html"
