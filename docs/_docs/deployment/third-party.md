@@ -74,3 +74,7 @@ Read this [Jekyll step-by-step guide](https://www.21yunbox.com/docs/#/deploy-jek
 
 Read [this guide](https://kinsta.com/docs/jekyll-static-site-example/) to learn how to deploy Jekyll site on Kinsta.
 
+## Supranode
+
+[Supranode](https://supranode.com) offers customizable continuous deployment for static websites, featuring automatic HTTPS, a high-performance CDN, secret management, deployment previews, password protection, and more.
+
