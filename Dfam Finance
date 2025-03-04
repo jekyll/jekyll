@@ -1,0 +1,69 @@
+title: Dfam Finance
+email: azzialhaqqi@gmail.com
+description: >-
+  Dfam Finance adalah platform berita harian yang menyajikan informasi terkini seputar cryptocurrency, termasuk analisis fundamental, faktor yang mempengaruhi pergerakan harga, serta perkembangan terbaru di industri aset digital.
+baseurl: ""
+url: "https://yourgithubusername.github.io"
+theme: minima
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
+  - jekyll-ads
+
+# Konfigurasi default untuk postingan
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Dfam Finance Team"
+      comments: true
+      share: true
+
+# Navigasi utama
+navbar:
+  - title: "Home"
+    url: "/"
+  - title: "News"
+    url: "/news.html"
+  - title: "Market Analysis"
+    url: "/market-analysis.html"
+  - title: "Guides"
+    url: "/guides.html"
+  - title: "Price Tracker"
+    url: "/price-tracker.html"
+  - title: "Community"
+    url: "/community.html"
+  - title: "Advertise"
+    url: "/advertise.html"
+  - title: "About"
+    url: "/about.html"
+  - title: "Contact"
+    url: "/contact.html"
+
+# Fitur tambahan
+features:
+  - SEO Optimization
+  - Sitemap Auto-generation
+  - Pagination for Articles
+  - Social Media Sharing
+  - User Comments
+  - Cryptocurrency Price Tracking
+  - Community Forum
+  - Advertising System
+
+# Sistem Ads
+ads:
+  enabled: true
+  providers:
+    - Google AdSense
+    - Direct Ads
+  placement:
+    - sidebar
+    - header
+    - footer
+  contact_email: azzialhaqqi@gmail.com
