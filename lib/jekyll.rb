@@ -84,6 +84,7 @@ module Jekyll
   autoload :URL,                 "jekyll/url"
   autoload :Utils,               "jekyll/utils"
   autoload :VERSION,             "jekyll/version"
+  autoload :SEO,                 "jekyll/seo"
 
   # extensions
   require "jekyll/plugin"
@@ -193,3 +194,7 @@ require_all "jekyll/generators"
 require_all "jekyll/tags"
 
 require "jekyll-sass-converter"
+
+# Load SEO related modules
+require "jekyll/seo/tags"
+require "jekyll/generators/seo_generator"

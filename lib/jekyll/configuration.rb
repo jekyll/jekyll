@@ -75,6 +75,29 @@ module Jekyll
         "footnote_nr"   => 1,
         "show_warnings" => false,
       },
+
+      # SEO optimization
+      "seo"                 => {
+        "auto_analyze"     => true,
+        "generate_sitemap" => true,
+        "generate_robots"  => true,
+        "sitemap"          => {
+          "include_images"          => true,
+          "default_changefreq"      => "monthly",
+          "static_files_changefreq" => "monthly",
+          "static_files_priority"   => "0.3",
+          "exclude_extensions"      => ["css", "js", "json", "xml", "scss", "sass"],
+          "exclude_layouts"         => ["redirect", "sitemap", "feed"],
+        },
+        "robots"          => {
+          "include_sitemap" => true,
+          "disallow"        => []
+        },
+        "twitter"         => {},
+        "facebook"        => {},
+        "pinterest"       => {},
+        "linkedin"        => {}
+      },
     }.each_with_object(Configuration.new) { |(k, v), hsh| hsh[k] = v.freeze }.freeze
 
     class << self

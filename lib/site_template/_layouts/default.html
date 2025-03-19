@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% if page.title %}{{ page.title | escape }} | {{ site.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
+
+    <meta name="description" content="{{ page.description | default: site.description | escape }}">
+    <meta name="generator" content="Jekyll v{{ jekyll.version }}">
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+
+    <!-- Social Media Tags -->
+    {% social_media_tags %}
+
+    <!-- Structured Data -->
+    {% structured_data %}
+
+    <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
+    {% include head.html %}
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      {% include header.html %}
+
+      {{ content }}
+
+      {% include footer.html %}
+    </div>
+
+    <script src="{{ "/assets/js/scale.fix.js" | relative_url }}"></script>
+    {% include scripts.html %}
+  </body>
+</html>

@@ -13,7 +13,7 @@ Jekyll is a simple, blog-aware, static site generator perfect for personal, proj
 
 ## Philosophy
 
-Jekyll does what you tell it to do — no more, no less. It doesn't try to outsmart users by making bold assumptions, nor does it burden them with needless complexity and configuration. Put simply, Jekyll gets out of your way and allows you to concentrate on what truly matters: your content.
+Jekyll does what you tell it to do — no more, no less. It doesn't try to outsmart users by making bold assumptions, nor does it burden them with needless complexity and configuration. Put simply, Jekyll gets out of your way and allows you to concentrate on what truly matters: your content.
 
 See: [https://jekyllrb.com/philosophy](https://jekyllrb.com/philosophy)
 
@@ -34,6 +34,15 @@ See: [https://jekyllrb.com/philosophy](https://jekyllrb.com/philosophy)
 * Use the built-in [Liquid Extensions](https://jekyllrb.com/docs/templates/) to make your life easier
 * Use custom [Plugins](https://jekyllrb.com/docs/plugins/) to generate content specific to your site
 * Watch [video tutorials from Giraffe Academy](https://jekyllrb.com/tutorials/video-walkthroughs/)
+
+## Advanced Features
+
+* **SEO Optimization Framework**: New in this version, Jekyll includes a comprehensive SEO framework to help optimize your site for search engines
+  * Analyze content for SEO best practices
+  * Generate structured data (JSON-LD)
+  * Create optimized social media tags
+  * Build enhanced XML sitemaps
+  * For more details, see [SEO Documentation](docs/seo.md)
 
 ## Need help?
 
