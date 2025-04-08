@@ -20,7 +20,7 @@ bundle init
 bundle add jekyll
 ```
 
-Your Gemfile should look something like:
+Your `Gemfile` should look something like:
 
 ```ruby
 # frozen_string_literal: true
