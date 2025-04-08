@@ -3,6 +3,7 @@
 ### Documentation
 
   * Small documentation update for 09-collections.md (#9803)
+  * Update resources.md (#9802)
 
 ## 4.4.1 / 2025-01-29
 
