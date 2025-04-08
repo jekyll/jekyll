@@ -7,6 +7,7 @@ Microsoft
 ssh
 Statictastic
 statictastic
+supranode
 ubuntu
 Wikipedia
 workaround
