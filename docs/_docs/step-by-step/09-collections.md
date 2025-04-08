@@ -57,7 +57,7 @@ Ted has been eating fruit since he was baby.
 Let's add a page which lists all the authors on the site. Jekyll makes the
 collection available at `site.authors`.
 
-Create `staff.html` and iterate over `site.authors` to output all the staff:
+Create `staff.html` in the root directory and iterate over `site.authors` to output all the staff:
 
 {% raw %}
 ```liquid
