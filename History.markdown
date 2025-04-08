@@ -6,6 +6,10 @@
   * Update resources.md (#9802)
   * Add Supranode to third-party deployment guide (#9786)
 
+### Bug Fixes
+
+  * Avoid caching resource when called via `include_relative` tag (#9784)
+
 ## 4.4.1 / 2025-01-29
 
 ### Bug Fixes
