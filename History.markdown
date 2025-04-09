@@ -1,14 +1,15 @@
 ## HEAD
 
-### Documentation
-
-  * Small documentation update for 09-collections.md (#9803)
-  * Update resources.md (#9802)
-  * Add Supranode to third-party deployment guide (#9786)
-
 ### Bug Fixes
 
   * Avoid caching resource when called via `include_relative` tag (#9784)
+
+### Documentation
+
+  * Improve documentation on collections in step-by-step walkthrough (#9803)
+  * Add `https://form.taxi` as a third-party resource for forms (#9802)
+  * Add Supranode to third-party deployment guide (#9786)
+  * Document the need for a `Gemfile` in deployment step of step-by-step walkthrough (#9805)
 
 ## 4.4.1 / 2025-01-29
 
