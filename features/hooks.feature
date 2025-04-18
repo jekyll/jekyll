@@ -103,6 +103,27 @@ Feature: Hooks
     Then I should see "special" in "_site/page1.html"
     And I should not see "special" in "_site/page2.html"
 
+  Scenario: Modify the Markdown content of a page before it is converted
+    Given I have a _layouts directory
+    And I have a "_layouts/page.html" file with content:
+    """
+    <h3>Page heading</h3>
+    {{ content }}
+    """
+    And I have a "page.md" page with layout "page" that contains "### Heading"
+    And I have a _plugins directory
+    And I have a "_plugins/ext.rb" file with content:
+    """
+    Jekyll::Hooks.register :pages, :pre_convert do |page|
+      page.content = page.content.gsub('###', '####')
+    end
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "<h3>Page heading</h3>" in "_site/page.html"
+    And I should see "<h4 id=\"heading\">Heading</h4>" in "_site/page.html"
+
   Scenario: Modify the converted HTML content of a page before rendering layout
     Given I have a _layouts directory
     And I have a "_layouts/page.html" file with content:
@@ -190,6 +211,34 @@ Feature: Hooks
     When I run jekyll build
     Then I should see "old post" in "_site/2015/03/14/entry1.html"
     And I should see "new post" in "_site/2015/03/15/entry2.html"
+
+  Scenario: Modify the Markdown content of a post before it is converted
+    Given I have a _layouts directory
+    And I have a "_layouts/post.html" file with content:
+    """
+    <h3>Page heading</h3>
+    {{ content }}
+    """
+    And I have a _posts directory
+    And I have a "_posts/2016-01-01-example.md" file with content:
+    """
+    ---
+    layout: post
+    ---
+    ### Heading
+    """
+    And I have a _plugins directory
+    And I have a "_plugins/ext.rb" file with content:
+    """
+    Jekyll::Hooks.register :posts, :pre_convert do |post|
+      post.content = post.content.gsub('###', '####')
+    end
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "<h3>Page heading</h3>" in "_site/2016/01/01/example.html"
+    And I should see "<h4 id=\"heading\">Heading</h4>" in "_site/2016/01/01/example.html"
 
   Scenario: Modify the converted HTML content of a post before rendering layout
     Given I have a _layouts directory
@@ -327,6 +376,41 @@ Feature: Hooks
     And the _site directory should exist
     And I should see "all your base are belong to us" in "_site/index.html"
 
+  Scenario: Modify the Markdown content of a document before it is converted
+    Given I have a _layouts directory
+    And I have a "_layouts/meme.html" file with content:
+    """
+    <h3>Page heading</h3>
+    {{ content }}
+    """
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      memes:
+        output: true
+    """
+    And I have a _memes directory
+    And I have a "_memes/doc1.md" file with content:
+    """
+    ---
+    layout: meme
+    text: all your base
+    ---
+    ### {{ page.text }}
+    """
+    And I have a _plugins directory
+    And I have a "_plugins/ext.rb" file with content:
+    """
+    Jekyll::Hooks.register :documents, :pre_convert do |document|
+      document.content = document.content.gsub('###', '####')
+    end
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "<h3>Page heading</h3>" in "_site/memes/doc1.html"
+    And I should see "<h4 id=\"all-your-base\">all your base</h4>" in "_site/memes/doc1.html"
+
   Scenario: Modify the converted HTML content of a document before rendering layout
     Given I have a _layouts directory
     And I have a "_layouts/meme.html" file with content:
@@ -361,6 +445,51 @@ Feature: Hooks
     And the _site directory should exist
     And I should see "<h3>Page heading</h3>" in "_site/memes/doc1.html"
     And I should see "<h4 id=\"all-your-base\">all your base</h4>" in "_site/memes/doc1.html"
+
+  Scenario: Modify the Markdown content of document of a particular collection before it is converted
+    Given I have a _layouts directory
+    And I have a "_layouts/meme.html" file with content:
+    """
+    <h3>Page heading</h3>
+    {{ content }}
+    """
+    And I have a "_config.yml" file with content:
+    """
+    collections:
+      memes:
+        output: true
+    """
+    And I have a _memes directory
+    And I have a "_memes/doc1.md" file with content:
+    """
+    ---
+    layout: meme
+    text: all your base
+    ---
+    ### {{ page.text }}
+    """
+    And I have a _posts directory
+    And I have a "_posts/2016-01-01-example.md" file with content:
+    """
+    ---
+    layout: meme
+    text: all your base
+    ---
+    ### {{ page.text }}
+    """
+    And I have a _plugins directory
+    And I have a "_plugins/ext.rb" file with content:
+    """
+    Jekyll::Hooks.register :memes, :pre_convert do |document|
+      document.content = document.content.gsub('###', '####')
+    end
+    """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "<h3>Page heading</h3>" in "_site/memes/doc1.html"
+    And I should see "<h4 id=\"all-your-base\">all your base</h4>" in "_site/memes/doc1.html"
+    But I should see "<h3 id=\"all-your-base\">all your base</h3>" in "_site/2016/01/01/example.html"
 
   Scenario: Modify the converted HTML content of document of a particular collection before rendering layout
     Given I have a _layouts directory
