@@ -123,6 +123,44 @@ end
 
 #
 
+Given(%r!^I have the following (draft|post)s? with attachments:$!) do |type, table|
+  table.hashes.each do |input_hash|
+    title = slug(input_hash["title"])
+    parsed_date = Time.parse(input_hash["date"])
+    basename = type == "draft" ? title : "#{parsed_date.strftime("%Y-%m-%d")}-#{title}"
+    attachments = input_hash.delete("attachments").split(",")
+    attachment_dir = File.join("_#{type}s", basename)
+    FileUtils.mkdir_p(attachment_dir) unless attachments.empty?
+
+    File.write(File.join("_#{type}s", "#{basename}.md"), file_content_from_hash(input_hash))
+
+    attachments.each do |attch|
+      File.binwrite(File.join(attachment_dir, attch), Marshal.dump("staticfile".split))
+    end
+  end
+end
+
+#
+
+Given(%r!^I have the following (draft|post)s? with attachments inside (.*) directory:$!) do |type, folder, table|
+  table.hashes.each do |input_hash|
+    title = slug(input_hash["title"])
+    parsed_date = Time.parse(input_hash["date"])
+    basename = type == "draft" ? title : "#{parsed_date.strftime("%Y-%m-%d")}-#{title}"
+    attachments = input_hash.delete("attachments").split(",")
+    attachment_dir = File.join(folder, "_#{type}s", basename)
+    FileUtils.mkdir_p(attachment_dir) unless attachments.empty?
+
+    File.write(File.join(folder, "_#{type}s", "#{basename}.md"), file_content_from_hash(input_hash))
+
+    attachments.each do |attch|
+      File.binwrite(File.join(attachment_dir, attch), Marshal.dump("staticfile".split))
+    end
+  end
+end
+
+#
+
 Given(%r!^I have the following documents? under the (.*) collection:$!) do |folder, table|
   table.hashes.each do |input_hash|
     title = slug(input_hash["title"])
