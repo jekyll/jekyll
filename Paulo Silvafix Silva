@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SilvaFix – Garten & Heimservice</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #1a237e; /* azul marinho metalizado */
+      color: #ffffff;
+    }
+    header {
+      background-color: #1a237e;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background-color: #3949ab;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #fff;
+    }
+    section {
+      padding: 20px;
+    }
+    .image-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+    .image-gallery img {
+      max-width: 300px;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    footer {
+      background-color: #1a237e;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+    @media (max-width: 768px) {
+      nav a {
+        display: block;
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>SilvaFix – Garten & Heimservice</h1>
+    <p>Zuverlässige Hilfe für Ihr Zuhause und Ihren Garten</p>
+  </header>
+
+  <nav>
+    <a href="#services">Dienstleistungen</a>
+    <a href="#kontakt">Kontakt</a>
+    <a href="#standort">Standort</a>
+    <a href="#galerie">Bilder</a>
+  </nav>
+
+  <section id="services">
+    <h2>Dienstleistungen</h2>
+    <ul>
+      <li>Gartenpflege (Rasenmähen, Hecken schneiden, Unkraut entfernen)</li>
+      <li>Hausreparaturen (kleinere Reparaturen, Möbelmontage)</li>
+      <li>Winterdienst (Schneeräumung, Salzstreuen)</li>
+      <li>Reinigung (Fenster, Haus, Keller)</li>
+    </ul>
+  </section>
+
+  <section id="kontakt">
+    <h2>Kontakt</h2>
+    <p>Telefon: 076 324 69 21</p>
+    <p>Email: jokerdownhill1985@outlook.pt</p>
+    <p>WhatsApp: Verfügbar</p>
+  </section>
+
+  <section id="standort">
+    <h2>Standort</h2>
+    <p>Region Zürich – Embrach, Bülach und Umgebung</p>
+  </section>
+
+  <section id="galerie">
+    <h2>Bilder</h2>
+    <div class="image-gallery">
+      <img src="/mnt/data/web_OIP.jpg" alt="Hausservice">
+      <img src="/mnt/data/web_OIP (1).jpg" alt="Gartenarbeit">
+      <img src="/mnt/data/web_Snowblower-Will-not-Start-Tips-and-Tricks-to-Solve-Your-Problem-650x400.jpg" alt="Winterdienst">
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 SilvaFix – Garten & Heimservice</p>
+  </footer>
+</body>
+</html>
