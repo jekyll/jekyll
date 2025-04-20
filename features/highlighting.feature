@@ -28,8 +28,8 @@ Feature: Syntax Highlighting
       """
     When I run jekyll build
     Then I should get a zero exit-status
-    And I should see "<span class=\"hll\"><span class=\"k\">module</span> <span class=\"nn\">Jekyll</span>" in "_site/index.html"
-    And I should see "<span class=\"hll\">  <span class=\"k\">module</span> <span class=\"nn\">Tags</span>" in "_site/index.html"
+    And I should see "<div class=\"hll\"><span class=\"k\">module</span> <span class=\"nn\">Jekyll</span>" in "_site/index.html"
+    And I should see "<div class=\"hll\">  <span class=\"k\">module</span> <span class=\"nn\">Tags</span>" in "_site/index.html"
     And I should see "<span class=\"k\">class</span> <span class=\"nc\">HighlightBlock</span" in "_site/index.html"
 
   Scenario: marking a single line in a Ruby code block with invalid syntax
