@@ -12,7 +12,7 @@ module Jekyll
       def stream(tokens)
         token_lines(tokens).with_index(1) do |line_tokens, lineno|
           line = %(#{@delegate.format(line_tokens)}\n)
-          line = %(<div class="#{@mark_line_class}">#{line}</div>) if @mark_lines.include?(lineno)
+          line = %(<span class="#{@mark_line_class}">#{line}</span>) if @mark_lines.include?(lineno)
           yield line
         end
       end
