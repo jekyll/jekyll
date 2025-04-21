@@ -20,13 +20,17 @@ module Jekyll
     def initialize(doc, dir, name)
       @doc = doc
       @data = {
-        "categories" => doc.data["categories"]
+        "categories" => doc.data["categories"],
       }
       @name = name
       @basename = File.basename(name, ".*")
       @extname = File.extname(name)
       @relative_path = PathManager.join(dir, name)
       @path = site.in_source_dir(@relative_path)
+    end
+
+    def to_liquid
+      @to_liquid ||= Drops::AttachmentDrop.new(self)
     end
 
     def url
@@ -41,15 +45,6 @@ module Jekyll
       @destination[dest] ||= site.in_dest_dir(dest, Jekyll::URL.unescape_path(url))
     end
 
-    def to_liquid
-      to_liquid ||= Drops::AttachmentDrop.new(self)
-    end
-
-    def inspect
-      "#<#{self.class} #{name.inspect} for #{@doc.relative_path.inspect}>"
-    end
-    alias_method :to_s, :inspect
-
     def write(dest)
       dest_path = destination(dest)
       return if File.exist?(dest_path)
@@ -57,5 +52,10 @@ module Jekyll
       Jekyll.logger.info "Writing:", dest_path
       FileUtils.cp(path, dest_path)
     end
+
+    def inspect
+      "#<#{self.class} #{name.inspect} for #{@doc.relative_path.inspect}>"
+    end
+    alias_method :to_s, :inspect
   end
 end
