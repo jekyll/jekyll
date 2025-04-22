@@ -240,23 +240,6 @@ module Jekyll
           )
         end
 
-        def format_url(ssl_enabled, address, port, baseurl = nil)
-          format("%<prefix>s://%<address>s:%<port>i%<baseurl>s",
-                 :prefix  => ssl_enabled ? "https" : "http",
-                 :address => address,
-                 :port    => port,
-                 :baseurl => baseurl ? "#{baseurl}/" : "")
-        end
-
-        def default_url(opts)
-          config = configuration_from_options(opts)
-          format_url(
-            config["ssl_cert"] && config["ssl_key"],
-            config["host"] == "127.0.0.1" ? "localhost" : config["host"],
-            config["port"]
-          )
-        end
-
         def launch_browser(server, opts)
           address = server_address(server, opts)
           return system "start", address if Utils::Platforms.windows?

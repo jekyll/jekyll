@@ -227,7 +227,7 @@ class TestCommandsServe < JekyllUnitTest
 
       context "in development environment" do
         setup do
-          expect(Jekyll).to receive(:env).and_return("development")
+          expect(Jekyll).to receive(:env).and_return(nil, "development")
           expect(Jekyll::Commands::Serve).to receive(:start_up_webrick)
         end
         should "set the site url by default to `http://localhost:4000`" do
@@ -253,7 +253,7 @@ class TestCommandsServe < JekyllUnitTest
 
       context "not in development environment" do
         should "not update the site url" do
-          expect(Jekyll).to receive(:env).and_return("production")
+          expect(Jekyll).to receive(:env).twice.and_return("production")
           expect(Jekyll::Commands::Serve).to receive(:start_up_webrick)
           @merc.execute(:serve, "watch" => false, "url" => "https://jekyllrb.com/")
 

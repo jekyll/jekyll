@@ -27,6 +27,7 @@ module Jekyll
           Jekyll.logger.adjust_verbosity(options)
 
           options = configuration_from_options(options)
+          options["url"] = default_url(options) if Jekyll.env(nil) == "development"
           site = Jekyll::Site.new(options)
 
           if options.fetch("skip_initial_build", false)
