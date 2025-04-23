@@ -3,7 +3,7 @@ Feature: Post attachments
   I want to be able to have assets alongside my posts
   In order to slightly ease management of post-specific assets
 
-  Scenario: Post attachments in a standard site
+  Scenario: Attachments of posts in a standard site
     Given I have a _posts directory
     And I have the following posts with attachments:
       | title            | date       | content                 | attachments          |
@@ -22,3 +22,25 @@ Feature: Post attachments
     And the "_site/2009/03/27/pic070.png" file should exist
     And the "_site/movies/2019/03/27/cover.jpg" file should exist
     And the "_site/movies/2019/03/27/pic120.png" file should exist
+
+  Scenario: Attachments of drafts in a standard site
+    Given I have a _drafts directory
+    And I have the following drafts with attachments:
+      | title            | date       | content                 | attachments          |
+      | Star Wars        | 2009-03-27 | Luke, I am your father. | pic070.png,cover.jpg |
+      | Avengers-Endgame | 2019-03-27 | I am inevitable!        | screencap-001.png    |
+    And I have an "index.md" page with content:
+      """
+      <pre>
+      {% for post in site.posts -%}
+        {{ post.attachments | jsonify }}
+      {% endfor %}
+      </pre>
+      """
+    When I run jekyll build --drafts
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "\"path\":\"_drafts/avengers-endgame/screencap-001.png\"" in "_site/index.html"
+    And I should see "\"url\":\"/2019/03/27/screencap-001.png\"" in "_site/index.html"
+    And I should see "\"path\":\"_drafts/star-wars/cover.jpg\"" in "_site/index.html"
+    And I should see "\"url\":\"/2009/03/27/cover.jpg\"" in "_site/index.html"
