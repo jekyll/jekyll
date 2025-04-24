@@ -3,6 +3,7 @@
 ### Bug Fixes
 
   * Avoid caching resource when called via `include_relative` tag (#9784)
+  * Fix logs containing IPv6 URLs (#9813)
 
 ### Documentation
 
