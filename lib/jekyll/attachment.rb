@@ -47,7 +47,11 @@ module Jekyll
 
     def write(dest)
       dest_path = destination(dest)
-      return if File.exist?(dest_path)
+      if File.exist?(dest_path)
+        FileUtils.rm(dest_path)
+      else
+        FileUtils.mkdir_p(File.dirname(dest_path))
+      end
 
       Jekyll.logger.info "Writing:", dest_path
       FileUtils.cp(path, dest_path)
