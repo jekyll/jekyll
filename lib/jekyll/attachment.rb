@@ -34,10 +34,15 @@ module Jekyll
     end
 
     def url
-      @url ||= Jekyll::URL.new(
-        :template     => "/:categories/:year/:month/:day/",
-        :placeholders => Drops::UrlDrop.new(self)
-      ).to_s << name
+      @url ||= begin
+        base = Jekyll::URL.new(
+          :template     => "/:categories/:year/:month/:day/",
+          :placeholders => Drops::UrlDrop.new(self)
+        ).to_s
+        base << doc_title_from_path
+        base << "--"
+        base << name
+      end
     end
 
     def destination(dest)
@@ -61,5 +66,17 @@ module Jekyll
       "#<#{self.class} #{name.inspect} for #{@doc.relative_path.inspect}>"
     end
     alias_method :to_s, :inspect
+
+    private
+
+    POST_BASENAME_MATCHER = %r!(?:\d{2,4}-\d{1,2}-\d{1,2}-)+?(.*)!
+    private_constant :POST_BASENAME_MATCHER
+
+    def doc_title_from_path
+      cleaned_doc_basename = File.basename(doc.cleaned_relative_path, ".*")
+      return cleaned_doc_basename unless POST_BASENAME_MATCHER =~ cleaned_doc_basename
+
+      Regexp.last_match[1]
+    end
   end
 end
