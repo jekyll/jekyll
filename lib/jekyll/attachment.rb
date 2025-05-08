@@ -69,7 +69,7 @@ module Jekyll
 
     private
 
-    POST_BASENAME_MATCHER = %r!(?:\d{2,4}-\d{1,2}-\d{1,2}-)+?(.*)!
+    POST_BASENAME_MATCHER = %r!(?:\d{2,4}-\d{1,2}-\d{1,2}-)+?(.*)!.freeze
     private_constant :POST_BASENAME_MATCHER
 
     def doc_title_from_path
