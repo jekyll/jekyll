@@ -14,6 +14,17 @@ Feature: PostUrl Tag
     And the _site directory should exist
     And I should see "<p><a href=\"/2019/02/04/hello-world.html\">Welcome</a></p>" in "_site/index.html"
 
+  Scenario: A site that is using the defaults for permalink and mentioning the post via a liquid variable
+    Given I have a _posts directory
+    And I have the following post:
+      | title       | date       | content           |
+      | Hello World | 2019-02-04 | Lorem ipsum dolor |
+    And I have an "index.md" page that contains "{% assign value="2019-02-04-hello-world" %}[Welcome]({% post_url {{value}} %})"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "<p><a href=\"/2019/02/04/hello-world.html\">Welcome</a></p>" in "_site/index.html"
+
   Scenario: Site with site-wide custom permalink setting
     Given I have a _posts directory
     And I have the following posts:
