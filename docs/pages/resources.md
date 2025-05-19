@@ -42,7 +42,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
 ### Content Management
   - [CloudCannon](https://cloudcannon.com/): The Cloud CMS for Jekyll
   - [Contentful](https://github.com/contentful/jekyll-contentful-data-import): Content infrastructure for digital teams
-  - [GitCMS](https://gitcms.blog/jekyll-cms) - Chrome extension which turns GitHub into headless and git based CMS - built for content marketers and developers to collab together on content sites.
+  - [GitCMS](https://gitcms.blog/) - Chrome extension which turns GitHub into headless and git based CMS - built for content marketers and developers to collab together on content sites.
   - [TinaCMS.io](https://tina.io/): Tina is an open-source, Git-backed headless content management system (CMS) that empowers both developers and content creators to collaborate seamlessly on a single platform
   - [Decap CMS](https://decapcms.org/): Decap CMS (formerly Netlify CMS) is an open source content management system for your Git workflow that enables you to provide editors with a friendly UI and intuitive workflows
   - [Siteleaf](https://www.siteleaf.com/): Built for developers, Loved by everyone
