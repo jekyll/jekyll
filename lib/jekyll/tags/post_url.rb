@@ -67,13 +67,13 @@ module Jekyll
         @context = context
         site = context.registers[:site]
 
-        liquid_solved_orig_post = Liquid::Template.parse(@orig_post).render(context)
+        orig_post_expanded = expand_orig_post
 
         begin
-          post = PostComparer.new(liquid_solved_orig_post)
+          post = PostComparer.new(orig_post_expanded)
         rescue StandardError => e
           raise Jekyll::Errors::PostURLError,
-                could_not_parse_error_message(liquid_solved_orig_post, e)
+                could_not_parse_error_message(orig_post_expanded, e)
         end
 
         site.posts.docs.each do |document|
@@ -90,23 +90,31 @@ module Jekyll
           return relative_url(document)
         end
 
-        raise Jekyll::Errors::PostURLError, could_not_find_error_message(liquid_solved_orig_post)
+        raise Jekyll::Errors::PostURLError, could_not_find_error_message(orig_post_expanded)
       end
 
       private
 
+      def expand_orig_post
+        content = @orig_post
+        return content if content.nil? || content.empty?
+        return content unless content.include?("{%") || content.include?("{{")
+
+        Liquid::Template.parse(content).render(@context)
+      end
+
       # if there is liquid rendering besides a simple constant, adds
       # "(from input \"#{@orig_post}\")" to let maintainer know where and why it failed
-      def determine_post_string(liquid_solved_orig_post)
-        if liquid_solved_orig_post == @orig_post
-          "\"#{liquid_solved_orig_post}\""
+      def determine_post_string(orig_post_expanded)
+        if orig_post_expanded == @orig_post
+          "\"#{orig_post_expanded}\""
         else
-          "\"#{liquid_solved_orig_post}\" (from input \"#{@orig_post}\")"
+          "\"#{orig_post_expanded}\" (from input \"#{@orig_post}\")"
         end
       end
 
-      def could_not_parse_error_message(liquid_solved_orig_post, error)
-        post_from_input_string = determine_post_string(liquid_solved_orig_post)
+      def could_not_parse_error_message(orig_post_expanded, error)
+        post_from_input_string = determine_post_string(orig_post_expanded)
         <<~MSG
           Could not parse name of post #{post_from_input_string} in tag 'post_url'.
           Make sure the post exists and the name is correct.
@@ -114,8 +122,8 @@ module Jekyll
         MSG
       end
 
-      def could_not_find_error_message(liquid_solved_orig_post)
-        post_from_input_string = determine_post_string(liquid_solved_orig_post)
+      def could_not_find_error_message(orig_post_expanded)
+        post_from_input_string = determine_post_string(orig_post_expanded)
         <<~MSG
           Could not find post #{post_from_input_string} in tag 'post_url'.
           Make sure the post exists and the name is correct.
