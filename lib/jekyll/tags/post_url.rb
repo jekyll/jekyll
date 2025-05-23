@@ -62,19 +62,18 @@ module Jekyll
         super
         @orig_post = post.strip
 
-        @template = Liquid::Template.parse(@orig_post) if use_template?
+        @template = Liquid::Template.parse(@orig_post) if @orig_post.include?("{{")
       end
 
       def render(context)
         @context = context
         site = @context.registers[:site]
-        orig_post_expanded = expand_orig_post
+        orig_post_expanded = @template&.render(@context) || @orig_post
 
         begin
           post = PostComparer.new(orig_post_expanded)
         rescue StandardError => e
-          raise Jekyll::Errors::PostURLError,
-                could_not_parse_error_message(orig_post_expanded, e)
+          raise_markup_parse_error(orig_post_expanded, e)
         end
 
         site.posts.docs.each do |document|
@@ -87,27 +86,14 @@ module Jekyll
         site.posts.docs.each do |document|
           next unless post.deprecated_equality document
 
-          Jekyll::Deprecator.deprecation_message(create_deprecation_message(post.name))
+          deprecate_legacy_pattern(post.name)
           return relative_url(document)
         end
 
-        raise Jekyll::Errors::PostURLError, could_not_find_error_message(orig_post_expanded)
+        raise_unknown_post_error(orig_post_expanded)
       end
 
       private
-
-      def use_template?
-        content = @orig_post
-        return false if content.nil? || content.empty?
-
-        content.include?("{%") || content.include?("{{")
-      end
-
-      def expand_orig_post
-        return @orig_post if @template.nil?
-
-        @template.render(@context)
-      end
 
       # if there is liquid rendering besides a simple constant, adds
       # `(from input "#{@orig_post}")` giving the user some context.
@@ -119,27 +105,31 @@ module Jekyll
         end
       end
 
-      def could_not_parse_error_message(orig_post_expanded, error)
+      def raise_markup_parse_error(orig_post_expanded, error)
         post_from_input_string = determine_post_string(orig_post_expanded)
-        <<~MSG
+
+        raise Jekyll::Errors::PostURLError, <<~MSG
           Could not parse name of post #{post_from_input_string} in tag 'post_url'.
           Make sure the post exists and the name is correct.
           #{error.class}: #{error.message}
         MSG
       end
 
-      def could_not_find_error_message(orig_post_expanded)
+      def raise_unknown_post_error(orig_post_expanded)
         post_from_input_string = determine_post_string(orig_post_expanded)
-        <<~MSG
+
+        raise Jekyll::Errors::PostURLError, <<~MSG
           Could not find post #{post_from_input_string} in tag 'post_url'.
           Make sure the post exists and the name is correct.
         MSG
       end
 
-      def create_deprecation_message(post_name)
-        "A call to '{% post_url #{post_name} %}' did not match a post using the new " \
+      def deprecate_legacy_pattern(post_name)
+        Jekyll::Deprecator.deprecation_message(
+          "A call to '{% post_url #{post_name} %}' did not match a post using the new " \
           "matching method of checking name (path-date-slug) equality. Please make sure " \
           "that you change this tag to match the post's name exactly."
+        )
       end
     end
   end
