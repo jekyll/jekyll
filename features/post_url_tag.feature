@@ -25,7 +25,7 @@ Feature: PostUrl Tag
     And the _site directory should exist
     And I should see "<p><a href=\"/2019/02/04/hello-world.html\">Welcome</a></p>" in "_site/index.html"
 
-    Scenario: A site that is using the defaults for permalink and mentioning two posts via a liquid variable in a for tag
+  Scenario: A site that is using the defaults for permalink and mentioning two posts via a liquid variable in a for tag
     Given I have a _posts directory
     And I have the following post:
       | title       | date       | content           |
