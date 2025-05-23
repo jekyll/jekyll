@@ -67,9 +67,7 @@ module Jekyll
 
       def render(context)
         @context = context
-
         site = @context.registers[:site]
-
         orig_post_expanded = expand_orig_post
 
         begin
