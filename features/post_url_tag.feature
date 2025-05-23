@@ -19,11 +19,23 @@ Feature: PostUrl Tag
     And I have the following post:
       | title       | date       | content           |
       | Hello World | 2019-02-04 | Lorem ipsum dolor |
-    And I have an "index.md" page that contains "{% assign value="2019-02-04-hello-world" %}[Welcome]({% post_url {{value}} %})"
+    And I have an "index.md" page that contains "{% assign value='2019-02-04-hello-world' %}[Welcome]({% post_url {{value}} %})"
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
     And I should see "<p><a href=\"/2019/02/04/hello-world.html\">Welcome</a></p>" in "_site/index.html"
+
+    Scenario: A site that is using the defaults for permalink and mentioning two posts via a liquid variable in a for tag
+    Given I have a _posts directory
+    And I have the following post:
+      | title       | date       | content           |
+      | Hello World | 2019-02-04 | Lorem ipsum dolor |
+      | We Meet Again | 2019-02-05 | Alpha beta gamma  |
+    And I have an "index.md" page that contains "{% assign posts = '2019-02-04-hello-world;2019-02-05-we-meet-again' | split: ';' %}{%- for slug in posts -%}[{{slug}}]({% post_url {{slug}} %}){%- endfor -%}"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "<p><a href=\"/2019/02/04/hello-world.html\">2019-02-04-hello-world</a><a href=\"/2019/02/05/we-meet-again.html\">2019-02-05-we-meet-again</a></p>" in "_site/index.html"
 
   Scenario: Site with site-wide custom permalink setting
     Given I have a _posts directory

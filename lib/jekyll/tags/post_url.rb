@@ -61,18 +61,13 @@ module Jekyll
       def initialize(tag_name, post, tokens)
         super
         @orig_post = post.strip
+
+        @template = Liquid::Template.parse(@orig_post) if use_template?
       end
 
       def render(context)
-        return @rendered_value unless @rendered_value.nil?
-
         @context = context
-        first_rendering
-      end
 
-      private
-
-      def first_rendering
         site = @context.registers[:site]
 
         orig_post_expanded = expand_orig_post
@@ -85,10 +80,7 @@ module Jekyll
         end
 
         site.posts.docs.each do |document|
-          next unless post == document
-
-          @rendered_value = relative_url(document)
-          return @rendered_value
+          return relative_url(document) if post == document
         end
 
         # New matching method did not match, fall back to old method
@@ -98,19 +90,25 @@ module Jekyll
           next unless post.deprecated_equality document
 
           Jekyll::Deprecator.deprecation_message(create_deprecation_message(post.name))
-          @rendered_value = relative_url(document)
-          return @rendered_value
+          return relative_url(document)
         end
 
         raise Jekyll::Errors::PostURLError, could_not_find_error_message(orig_post_expanded)
       end
 
-      def expand_orig_post
-        content = @orig_post
-        return content if content.nil? || content.empty?
-        return content unless content.include?("{%") || content.include?("{{")
+      private
 
-        Liquid::Template.parse(content).render(@context)
+      def use_template?
+        content = @orig_post
+        return false if content.nil? || content.empty?
+
+        content.include?("{%") || content.include?("{{")
+      end
+
+      def expand_orig_post
+        return @orig_post if @template.nil?
+
+        @template.render(@context)
       end
 
       # if there is liquid rendering besides a simple constant, adds
