@@ -64,8 +64,16 @@ module Jekyll
       end
 
       def render(context)
+        return @rendered_value unless @rendered_value.nil?
+
         @context = context
-        site = context.registers[:site]
+        first_rendering
+      end
+
+      private
+
+      def first_rendering
+        site = @context.registers[:site]
 
         orig_post_expanded = expand_orig_post
 
@@ -77,7 +85,10 @@ module Jekyll
         end
 
         site.posts.docs.each do |document|
-          return relative_url(document) if post == document
+          next unless post == document
+
+          @rendered_value = relative_url(document)
+          return @rendered_value
         end
 
         # New matching method did not match, fall back to old method
@@ -87,13 +98,12 @@ module Jekyll
           next unless post.deprecated_equality document
 
           Jekyll::Deprecator.deprecation_message(create_deprecation_message(post.name))
-          return relative_url(document)
+          @rendered_value = relative_url(document)
+          return @rendered_value
         end
 
         raise Jekyll::Errors::PostURLError, could_not_find_error_message(orig_post_expanded)
       end
-
-      private
 
       def expand_orig_post
         content = @orig_post
