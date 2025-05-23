@@ -110,12 +110,12 @@ module Jekyll
       end
 
       # if there is liquid rendering besides a simple constant, adds
-      # "(from input \"#{@orig_post}\")" to let maintainer know where and why it failed
+      # `(from input "#{@orig_post}")` giving the user some context.
       def determine_post_string(orig_post_expanded)
         if orig_post_expanded == @orig_post
-          "\"#{orig_post_expanded}\""
+          orig_post_expanded.inspect
         else
-          "\"#{orig_post_expanded}\" (from input \"#{@orig_post}\")"
+          "#{orig_post_expanded.inspect} (from input #{@orig_post.inspect})"
         end
       end
 
