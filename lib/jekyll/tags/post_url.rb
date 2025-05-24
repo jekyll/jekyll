@@ -61,43 +61,75 @@ module Jekyll
       def initialize(tag_name, post, tokens)
         super
         @orig_post = post.strip
-        begin
-          @post = PostComparer.new(@orig_post)
-        rescue StandardError => e
-          raise Jekyll::Errors::PostURLError, <<~MSG
-            Could not parse name of post "#{@orig_post}" in tag 'post_url'.
-             Make sure the post exists and the name is correct.
-             #{e.class}: #{e.message}
-          MSG
-        end
+
+        @template = Liquid::Template.parse(@orig_post) if @orig_post.include?("{{")
       end
 
       def render(context)
         @context = context
-        site = context.registers[:site]
+        site = @context.registers[:site]
+        orig_post_expanded = @template&.render(@context) || @orig_post
+
+        begin
+          post = PostComparer.new(orig_post_expanded)
+        rescue StandardError => e
+          raise_markup_parse_error(orig_post_expanded, e)
+        end
 
         site.posts.docs.each do |document|
-          return relative_url(document) if @post == document
+          return relative_url(document) if post == document
         end
 
         # New matching method did not match, fall back to old method
         # with deprecation warning if this matches
 
         site.posts.docs.each do |document|
-          next unless @post.deprecated_equality document
+          next unless post.deprecated_equality document
 
-          Jekyll::Deprecator.deprecation_message(
-            "A call to '{% post_url #{@post.name} %}' did not match a post using the new " \
-            "matching method of checking name (path-date-slug) equality. Please make sure " \
-            "that you change this tag to match the post's name exactly."
-          )
+          deprecate_legacy_pattern(post.name)
           return relative_url(document)
         end
 
+        raise_unknown_post_error(orig_post_expanded)
+      end
+
+      private
+
+      # if there is liquid rendering besides a simple constant, adds
+      # `(from input "#{@orig_post}")` giving the user some context.
+      def determine_post_string(orig_post_expanded)
+        if orig_post_expanded == @orig_post
+          orig_post_expanded.inspect
+        else
+          "#{orig_post_expanded.inspect} (from input #{@orig_post.inspect})"
+        end
+      end
+
+      def raise_markup_parse_error(orig_post_expanded, error)
+        post_from_input_string = determine_post_string(orig_post_expanded)
+
         raise Jekyll::Errors::PostURLError, <<~MSG
-          Could not find post "#{@orig_post}" in tag 'post_url'.
+          Could not parse name of post #{post_from_input_string} in tag 'post_url'.
+          Make sure the post exists and the name is correct.
+          #{error.class}: #{error.message}
+        MSG
+      end
+
+      def raise_unknown_post_error(orig_post_expanded)
+        post_from_input_string = determine_post_string(orig_post_expanded)
+
+        raise Jekyll::Errors::PostURLError, <<~MSG
+          Could not find post #{post_from_input_string} in tag 'post_url'.
           Make sure the post exists and the name is correct.
         MSG
+      end
+
+      def deprecate_legacy_pattern(post_name)
+        Jekyll::Deprecator.deprecation_message(
+          "A call to '{% post_url #{post_name} %}' did not match a post using the new " \
+          "matching method of checking name (path-date-slug) equality. Please make sure " \
+          "that you change this tag to match the post's name exactly."
+        )
       end
     end
   end
