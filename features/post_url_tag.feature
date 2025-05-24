@@ -31,7 +31,13 @@ Feature: PostUrl Tag
       | title       | date       | content           |
       | Hello World | 2019-02-04 | Lorem ipsum dolor |
       | We Meet Again | 2019-02-05 | Alpha beta gamma  |
-    And I have an "index.md" page that contains "{% assign posts = '2019-02-04-hello-world;2019-02-05-we-meet-again' | split: ';' %}{%- for slug in posts -%}[{{slug}}]({% post_url {{slug}} %}){%- endfor -%}"
+    And I have an "index.md" page with content:
+    """
+    {% assign posts = '2019-02-04-hello-world;2019-02-05-we-meet-again' | split: ';' %}
+    {%- for slug in posts -%}
+      [{{slug}}]({% post_url {{slug}} %})
+    {%- endfor %}
+    """
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
