@@ -101,9 +101,10 @@ class TestTagPostUrl < TagUnitTest
 
     should "throw a deprecation warning" do
       deprecation_warning = "       Deprecation: A call to '{% post_url 2008-11-21-nested %}' " \
-                            "did not match a post using the new matching method of checking " \
-                            "name (path-date-slug) equality. Please make sure that you change " \
-                            "this tag to match the post's name exactly."
+                            "matched with post \"_posts/es/2008-11-21-nested.markdown\". This " \
+                            "ambiguous usage to link nested posts is no longer supported and " \
+                            "will be removed in v5.0. Prefer using " \
+                            "{% post_url /es/2008-11-21-nested %} instead."
       assert_includes Jekyll.logger.messages, deprecation_warning
     end
   end

@@ -3,34 +3,38 @@
 module Jekyll
   module Tags
     class PostComparer
-      MATCHER = %r!^(.+/)*(\d+-\d+-\d+)-(.*)$!.freeze
+      MATCHER = %r!\A(.+/)*?(\d{2,4}-\d{1,2}-\d{1,2})-([^/]*)\z!.freeze
 
       attr_reader :path, :date, :slug, :name
 
       def initialize(name)
         @name = name
 
-        all, @path, @date, @slug = *name.sub(%r!^/!, "").match(MATCHER)
+        all, @path, @date, @slug = *name.delete_prefix("/").match(MATCHER)
         unless all
           raise Jekyll::Errors::InvalidPostNameError,
                 "'#{name}' does not contain valid date and/or title."
         end
 
         basename_pattern = "#{date}-#{Regexp.escape(slug)}\\.[^.]+"
-        @name_regex = %r!^_posts/#{path}#{basename_pattern}|^#{path}_posts/?#{basename_pattern}!
+        @name_regex = %r!\A_posts/#{path}#{basename_pattern}|\A#{path}_posts/?#{basename_pattern}!
       end
 
       def post_date
-        @post_date ||= Utils.parse_date(
-          date,
-          "'#{date}' does not contain valid date and/or title."
-        )
+        @post_date ||= Utils.parse_date(date, "Path '#{name}' does not contain valid date.")
       end
 
+      # Returns `MatchData` or `nil`.
       def ==(other)
         other.relative_path.match(@name_regex)
       end
 
+      # Returns `true` or `false`.
+      def acceptable?(post)
+        @name_regex.match?(post.relative_path)
+      end
+
+      # Deprecated. To be removed in v5.0.
       def deprecated_equality(other)
         slug == post_slug(other) &&
           post_date.year  == other.date.year &&
@@ -40,9 +44,9 @@ module Jekyll
 
       private
 
-      # Construct the directory-aware post slug for a Jekyll::Post
+      # Construct the directory-aware post slug for a Jekyll::Document object.
       #
-      # other - the Jekyll::Post
+      # other - the Jekyll::Document object.
       #
       # Returns the post slug with the subdirectory (relative to _posts)
       def post_slug(other)
@@ -58,46 +62,68 @@ module Jekyll
     class PostUrl < Liquid::Tag
       include Jekyll::Filters::URLFilters
 
-      def initialize(tag_name, post, tokens)
+      def initialize(tag_name, markup, tokens)
         super
-        @orig_post = post.strip
+        @markup = markup.strip
+
         begin
-          @post = PostComparer.new(@orig_post)
-        rescue StandardError => e
-          raise Jekyll::Errors::PostURLError, <<~MSG
-            Could not parse name of post "#{@orig_post}" in tag 'post_url'.
-             Make sure the post exists and the name is correct.
-             #{e.class}: #{e.message}
-          MSG
+          @post_comparer = PostComparer.new(@markup)
+        rescue StandardError
+          raise_markup_parse_error
         end
+
+        # Deprecated instance_variables.
+        # To be removed in Jekyll v5.0.
+        @orig_post = @markup
+        @post = @post_comparer
       end
 
       def render(context)
         @context = context
         site = context.registers[:site]
 
-        site.posts.docs.each do |document|
-          return relative_url(document) if @post == document
+        # First pass-through.
+        site.posts.docs.each do |post|
+          return relative_url(post) if @post_comparer.acceptable?(post)
         end
 
-        # New matching method did not match, fall back to old method
-        # with deprecation warning if this matches
+        # First pass-through did not yield the requested post. Search again using legacy matching
+        # method. Log deprecation warning if a post is detected via this round.
+        site.posts.docs.each do |post|
+          next unless @post_comparer.deprecated_equality(post)
 
-        site.posts.docs.each do |document|
-          next unless @post.deprecated_equality document
-
-          Jekyll::Deprecator.deprecation_message(
-            "A call to '{% post_url #{@post.name} %}' did not match a post using the new " \
-            "matching method of checking name (path-date-slug) equality. Please make sure " \
-            "that you change this tag to match the post's name exactly."
+          log_legacy_usage_deprecation(
+            :rel_path         => post.relative_path,
+            :cleaned_rel_path => post.cleaned_relative_path.squeeze("/")
           )
-          return relative_url(document)
+          return relative_url(post)
         end
 
+        raise_post_not_found_error
+      end
+
+      private
+
+      def raise_markup_parse_error
         raise Jekyll::Errors::PostURLError, <<~MSG
-          Could not find post "#{@orig_post}" in tag 'post_url'.
-          Make sure the post exists and the name is correct.
+          Could not parse name of post #{@markup.inspect} in tag 'post_url'.
+          Make sure the correct name is given to the tag.
         MSG
+      end
+
+      def raise_post_not_found_error
+        raise Jekyll::Errors::PostURLError, <<~MSG
+          Could not find post #{@markup.inspect} in tag 'post_url'.
+          Make sure the post exists and the correct name is given to the tag.
+        MSG
+      end
+
+      def log_legacy_usage_deprecation(rel_path:, cleaned_rel_path:)
+        Jekyll::Deprecator.deprecation_message(
+          "A call to '{% post_url #{@markup} %}' matched with post #{rel_path.inspect}. " \
+          "This ambiguous usage to link nested posts is no longer supported and will be " \
+          "removed in v5.0. Prefer using {% post_url #{cleaned_rel_path} %} instead."
+        )
       end
     end
   end
