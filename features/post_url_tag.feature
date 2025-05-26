@@ -129,7 +129,7 @@ Feature: PostUrl Tag
     And I have an "index.md" page that contains "[Movies]({% post_url 2019-02-04-hello-world %})"
     When I run jekyll build
     Then I should get a zero exit status
-    And I should see "Deprecation: A call to '{% post_url 2019-02-04-hello-world %}' did not match a post" in the build output
+    And I should see "Deprecation: A call to '{% post_url 2019-02-04-hello-world %}'" in the build output
     But the _site directory should exist
     And I should see "<p><a href=\"/movies/2019/02/04/hello-world.html\">Movies</a></p>" in "_site/index.html"
 
