@@ -18,10 +18,10 @@ Feature: Post attachments
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And the "_site/2009/03/27/star-wars--cover.jpg" file should exist
-    And the "_site/2009/03/27/star-wars--pic070.png" file should exist
-    And the "_site/movies/2019/03/27/avengers-endgame--cover.jpg" file should exist
-    And the "_site/movies/2019/03/27/avengers-endgame--pic120.png" file should exist
+    And the "_site/2009/03/27/star-wars/cover.jpg" file should exist
+    And the "_site/2009/03/27/star-wars/pic070.png" file should exist
+    And the "_site/movies/2019/03/27/avengers-endgame/cover.jpg" file should exist
+    And the "_site/movies/2019/03/27/avengers-endgame/pic120.png" file should exist
 
   Scenario: Attachments of drafts in a standard site
     Given I have a _drafts directory
@@ -41,9 +41,9 @@ Feature: Post attachments
     Then I should get a zero exit status
     And the _site directory should exist
     And I should see "\"path\":\"_drafts/avengers-endgame/screencap-001.png\"" in "_site/index.html"
-    And I should see "\"url\":\"/2019/03/27/avengers-endgame--screencap-001.png\"" in "_site/index.html"
+    And I should see "\"url\":\"/2019/03/27/avengers-endgame/screencap-001.png\"" in "_site/index.html"
     And I should see "\"path\":\"_drafts/star-wars/cover.jpg\"" in "_site/index.html"
-    And I should see "\"url\":\"/2009/03/27/star-wars--cover.jpg\"" in "_site/index.html"
+    And I should see "\"url\":\"/2009/03/27/star-wars/cover.jpg\"" in "_site/index.html"
 
   Scenario: Attachments of posts in a site with custom permalink style
     Given I have a configuration file with "permalink" set to "/:categories/:title.html"
@@ -60,8 +60,8 @@ Feature: Post attachments
     Then I should get a zero exit status
     And the "_site/star-wars.html" file should exist
     And the "_site/avengers-endgame.html" file should exist
-    And the "_site/2009/03/27/star-wars--cover.jpg" file should exist
+    And the "_site/2009/03/27/star-wars/cover.jpg" file should exist
     And the "_site/movies/avengers-endgame.html" file should exist
-    And the "_site/movies/2019/03/27/avengers-endgame--cover.jpg" file should exist
+    And the "_site/movies/2019/03/27/avengers-endgame/cover.jpg" file should exist
     But the "_site/cover.jpg" file should not exist
     And the "_site/movies/cover.jpg" file should not exist

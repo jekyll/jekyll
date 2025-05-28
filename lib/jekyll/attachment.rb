@@ -13,7 +13,7 @@ module Jekyll
     extend Forwardable
 
     attr_reader :doc, :data, :name, :basename, :extname, :relative_path, :path
-    alias_method :basename_without_ext, :name
+    alias_method :basename_without_ext, :basename
 
     def_delegators :doc, :date, :site, :collection
 
@@ -40,7 +40,7 @@ module Jekyll
           :placeholders => Drops::UrlDrop.new(self)
         ).to_s
         base << doc_title_from_path
-        base << "--"
+        base << "/"
         base << name
       end
     end
