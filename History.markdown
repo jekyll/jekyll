@@ -13,6 +13,10 @@
   * Document the need for a `Gemfile` in deployment step of step-by-step walkthrough (#9805)
   * Add Azion to the 3rd party deployment docs (#9811)
 
+### Development Fixes
+
+  * Improve readability of `post_url` tag (#9829)
+
 ## 4.4.1 / 2025-01-29
 
 ### Bug Fixes
