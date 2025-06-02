@@ -3,14 +3,20 @@
 module Jekyll
   module Tags
     class PostComparer
-      MATCHER = %r!\A(.+/)*?(\d{2,4}-\d{1,2}-\d{1,2})-([^/]*)\z!.freeze
+      # Deprecated (soft; No interpreter warnings).
+      # To be removed in v5.0.
+      # Use private constant `POST_PATH_MATCHER` instead.
+      MATCHER = %r!^(.+/)*(\d+-\d+-\d+)-(.*)$!.freeze
+
+      POST_PATH_MATCHER = %r!\A(.+/)*?(\d{2,4}-\d{1,2}-\d{1,2})-([^/]*)\z!.freeze
+      private_constant :POST_PATH_MATCHER
 
       attr_reader :path, :date, :slug, :name
 
       def initialize(name)
         @name = name
 
-        all, @path, @date, @slug = *name.delete_prefix("/").match(MATCHER)
+        all, @path, @date, @slug = *name.delete_prefix("/").match(POST_PATH_MATCHER)
         unless all
           raise Jekyll::Errors::InvalidPostNameError,
                 "'#{name}' does not contain valid date and/or title."
@@ -27,11 +33,6 @@ module Jekyll
       # Returns `MatchData` or `nil`.
       def ==(other)
         other.relative_path.match(@name_regex)
-      end
-
-      # Returns `true` or `false`.
-      def acceptable?(post)
-        @name_regex.match?(post.relative_path)
       end
 
       # Deprecated. To be removed in v5.0.
@@ -84,7 +85,7 @@ module Jekyll
 
         # First pass-through.
         site.posts.docs.each do |post|
-          return relative_url(post) if @post_comparer.acceptable?(post)
+          return relative_url(post) if @post_comparer == post
         end
 
         # First pass-through did not yield the requested post. Search again using legacy matching
@@ -92,10 +93,7 @@ module Jekyll
         site.posts.docs.each do |post|
           next unless @post_comparer.deprecated_equality(post)
 
-          log_legacy_usage_deprecation(
-            :rel_path         => post.relative_path,
-            :cleaned_rel_path => post.cleaned_relative_path.squeeze("/")
-          )
+          log_legacy_usage_deprecation
           return relative_url(post)
         end
 
@@ -118,11 +116,11 @@ module Jekyll
         MSG
       end
 
-      def log_legacy_usage_deprecation(rel_path:, cleaned_rel_path:)
+      def log_legacy_usage_deprecation
         Jekyll::Deprecator.deprecation_message(
-          "A call to '{% post_url #{@markup} %}' matched with post #{rel_path.inspect}. " \
-          "This ambiguous usage to link nested posts is no longer supported and will be " \
-          "removed in v5.0. Prefer using {% post_url #{cleaned_rel_path} %} instead."
+          "A call to '{% post_url #{@markup} %}' did not match a post using the new matching " \
+          "method of checking name (path-date-slug) equality. Please make sure that you change " \
+          "this tag to match the post's name exactly."
         )
       end
     end
