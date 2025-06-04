@@ -71,6 +71,7 @@ module Jekyll
         # Deprecated instance_variables.
         # To be removed in Jekyll v5.0.
         @orig_post = @markup
+        @post = nil
       end
 
       def render(context)
@@ -83,6 +84,9 @@ module Jekyll
         rescue StandardError
           raise_markup_parse_error
         end
+        # For backwards compatibility only; deprecated instance_variable.
+        # To be removed in Jekyll v5.0.
+        @post = @post_comparer
 
         # First pass-through.
         site.posts.docs.each do |post|
@@ -120,8 +124,8 @@ module Jekyll
       def log_legacy_usage_deprecation
         Jekyll::Deprecator.deprecation_message(
           "A call to '{% post_url #{@resolved_markup} %}' did not match a post using the new " \
-          "matching method of checking name (path-date-slug) equality. Please make sure " \
-          "that you change this tag to match the post's name exactly."
+          "matching method of checking name (path-date-slug) equality. Please make sure that " \
+          "you change this tag to match the post's name exactly."
         )
       end
     end
