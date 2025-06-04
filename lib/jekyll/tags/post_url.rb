@@ -3,34 +3,39 @@
 module Jekyll
   module Tags
     class PostComparer
+      # Deprecated (soft; No interpreter warnings).
+      # To be removed in v5.0.
+      # Use private constant `POST_PATH_MATCHER` instead.
       MATCHER = %r!^(.+/)*(\d+-\d+-\d+)-(.*)$!.freeze
+
+      POST_PATH_MATCHER = %r!\A(.+/)*?(\d{2,4}-\d{1,2}-\d{1,2})-([^/]*)\z!.freeze
+      private_constant :POST_PATH_MATCHER
 
       attr_reader :path, :date, :slug, :name
 
       def initialize(name)
         @name = name
 
-        all, @path, @date, @slug = *name.sub(%r!^/!, "").match(MATCHER)
+        all, @path, @date, @slug = *name.delete_prefix("/").match(POST_PATH_MATCHER)
         unless all
           raise Jekyll::Errors::InvalidPostNameError,
                 "'#{name}' does not contain valid date and/or title."
         end
 
         basename_pattern = "#{date}-#{Regexp.escape(slug)}\\.[^.]+"
-        @name_regex = %r!^_posts/#{path}#{basename_pattern}|^#{path}_posts/?#{basename_pattern}!
+        @name_regex = %r!\A_posts/#{path}#{basename_pattern}|\A#{path}_posts/?#{basename_pattern}!
       end
 
       def post_date
-        @post_date ||= Utils.parse_date(
-          date,
-          "'#{date}' does not contain valid date and/or title."
-        )
+        @post_date ||= Utils.parse_date(date, "Path '#{name}' does not contain valid date.")
       end
 
+      # Returns `MatchData` or `nil`.
       def ==(other)
         other.relative_path.match(@name_regex)
       end
 
+      # Deprecated. To be removed in v5.0.
       def deprecated_equality(other)
         slug == post_slug(other) &&
           post_date.year  == other.date.year &&
@@ -40,9 +45,9 @@ module Jekyll
 
       private
 
-      # Construct the directory-aware post slug for a Jekyll::Post
+      # Construct the directory-aware post slug for a Jekyll::Document object.
       #
-      # other - the Jekyll::Post
+      # other - the Jekyll::Document object.
       #
       # Returns the post slug with the subdirectory (relative to _posts)
       def post_slug(other)
@@ -58,75 +63,63 @@ module Jekyll
     class PostUrl < Liquid::Tag
       include Jekyll::Filters::URLFilters
 
-      def initialize(tag_name, post, tokens)
+      def initialize(tag_name, markup, tokens)
         super
-        @orig_post = post.strip
+        @markup = markup.strip
+        @template = Liquid::Template.parse(@markup) if @markup.include?("{{")
 
-        @template = Liquid::Template.parse(@orig_post) if @orig_post.include?("{{")
+        # Deprecated instance_variables.
+        # To be removed in Jekyll v5.0.
+        @orig_post = @markup
       end
 
       def render(context)
         @context = context
-        site = @context.registers[:site]
-        orig_post_expanded = @template&.render(@context) || @orig_post
+        @resolved_markup = @template&.render(@context) || @markup
+        site = context.registers[:site]
 
         begin
-          post = PostComparer.new(orig_post_expanded)
-        rescue StandardError => e
-          raise_markup_parse_error(orig_post_expanded, e)
+          @post_comparer = PostComparer.new(@resolved_markup)
+        rescue StandardError
+          raise_markup_parse_error
         end
 
-        site.posts.docs.each do |document|
-          return relative_url(document) if post == document
+        # First pass-through.
+        site.posts.docs.each do |post|
+          return relative_url(post) if @post_comparer == post
         end
 
-        # New matching method did not match, fall back to old method
-        # with deprecation warning if this matches
+        # First pass-through did not yield the requested post. Search again using legacy matching
+        # method. Log deprecation warning if a post is detected via this round.
+        site.posts.docs.each do |post|
+          next unless @post_comparer.deprecated_equality(post)
 
-        site.posts.docs.each do |document|
-          next unless post.deprecated_equality document
-
-          deprecate_legacy_pattern(post.name)
-          return relative_url(document)
+          log_legacy_usage_deprecation
+          return relative_url(post)
         end
 
-        raise_unknown_post_error(orig_post_expanded)
+        raise_post_not_found_error
       end
 
       private
 
-      # if there is liquid rendering besides a simple constant, adds
-      # `(from input "#{@orig_post}")` giving the user some context.
-      def determine_post_string(orig_post_expanded)
-        if orig_post_expanded == @orig_post
-          orig_post_expanded.inspect
-        else
-          "#{orig_post_expanded.inspect} (from input #{@orig_post.inspect})"
-        end
-      end
-
-      def raise_markup_parse_error(orig_post_expanded, error)
-        post_from_input_string = determine_post_string(orig_post_expanded)
-
+      def raise_markup_parse_error
         raise Jekyll::Errors::PostURLError, <<~MSG
-          Could not parse name of post #{post_from_input_string} in tag 'post_url'.
-          Make sure the post exists and the name is correct.
-          #{error.class}: #{error.message}
+          Could not parse name of post #{@resolved_markup.inspect} in tag 'post_url'.
+          Make sure the correct name is given to the tag.
         MSG
       end
 
-      def raise_unknown_post_error(orig_post_expanded)
-        post_from_input_string = determine_post_string(orig_post_expanded)
-
+      def raise_post_not_found_error
         raise Jekyll::Errors::PostURLError, <<~MSG
-          Could not find post #{post_from_input_string} in tag 'post_url'.
-          Make sure the post exists and the name is correct.
+          Could not find post #{@resolved_markup.inspect} in tag 'post_url'.
+          Make sure the post exists and the correct name is given to the tag.
         MSG
       end
 
-      def deprecate_legacy_pattern(post_name)
+      def log_legacy_usage_deprecation
         Jekyll::Deprecator.deprecation_message(
-          "A call to '{% post_url #{post_name} %}' did not match a post using the new " \
+          "A call to '{% post_url #{@resolved_markup} %}' did not match a post using the new " \
           "matching method of checking name (path-date-slug) equality. Please make sure " \
           "that you change this tag to match the post's name exactly."
         )

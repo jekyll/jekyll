@@ -1,3 +1,22 @@
+## HEAD
+
+### Bug Fixes
+
+  * Avoid caching resource when called via `include_relative` tag (#9784)
+  * Fix logs containing IPv6 URLs (#9813)
+
+### Documentation
+
+  * Improve documentation on collections in step-by-step walkthrough (#9803)
+  * Add `https://form.taxi` as a third-party resource for forms (#9802)
+  * Add Supranode to third-party deployment guide (#9786)
+  * Document the need for a `Gemfile` in deployment step of step-by-step walkthrough (#9805)
+  * Add Azion to the 3rd party deployment docs (#9811)
+
+### Development Fixes
+
+  * Improve readability of `post_url` tag (#9829)
+
 ## 4.4.1 / 2025-01-29
 
 ### Bug Fixes
