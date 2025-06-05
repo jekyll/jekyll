@@ -12,6 +12,7 @@
   * Add Supranode to third-party deployment guide (#9786)
   * Document the need for a `Gemfile` in deployment step of step-by-step walkthrough (#9805)
   * Add Azion to the 3rd party deployment docs (#9811)
+  * Add ruby-erb prerequisite for Arch Linux installations (#9832)
 
 ### Development Fixes
 
