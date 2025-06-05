@@ -189,23 +189,24 @@ You can also use this tag to create a link to a post in Markdown as follows:
 ```
 {% endraw %}
 
-If you have a post in a variable, for example in a [datafile]({{ '/docs/datafiles/' | relative_url }}) `_data/cool_posts.yaml`:
+Now lets say you have a [datafile]({{ '/docs/datafiles/' | relative_url }}) `_data/cool_posts.yaml` used to keep track
+of certain posts that you intend to be listed as say *Cool Posts*:
 
 ```yaml
-- title: "Name of Link"
+- title: "An Awesome Post"
   slug: "2010-07-21-name-of-post"
-- title: "Another post"
+- title: "Another Awesome Post"
   slug: "2016-07-26-name-of-post"
 ```
 
-You can list all of them:
+You may list such posts using the `post_url` tag as well (from {%- include docs_version_badge.html version="4.5.0" -%}):
 
 {% raw %}
 ```liquid
 Cool posts:
 
 {%- for cool_post in site.data.cool_posts %}
-- [{{cool_post.title}}]({% post_url {{cool_post.slug}} %})
+- [{{ cool_post.title }}]({% post_url {{ cool_post.slug }} %})
 {%- endfor %}
 ```
 {% endraw %}
