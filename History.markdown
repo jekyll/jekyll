@@ -17,6 +17,10 @@
 
   * Improve readability of `post_url` tag (#9829)
 
+### Minor Enhancements
+
+  * feat: Allowing post_url tag to receive liquid variables (#9776)
+
 ## 4.4.1 / 2025-01-29
 
 ### Bug Fixes
