@@ -66,22 +66,27 @@ module Jekyll
       def initialize(tag_name, markup, tokens)
         super
         @markup = markup.strip
-
-        begin
-          @post_comparer = PostComparer.new(@markup)
-        rescue StandardError
-          raise_markup_parse_error
-        end
+        @template = Liquid::Template.parse(@markup) if @markup.include?("{{")
 
         # Deprecated instance_variables.
         # To be removed in Jekyll v5.0.
         @orig_post = @markup
-        @post = @post_comparer
+        @post = nil
       end
 
       def render(context)
         @context = context
+        @resolved_markup = @template&.render(@context) || @markup
         site = context.registers[:site]
+
+        begin
+          @post_comparer = PostComparer.new(@resolved_markup)
+        rescue StandardError
+          raise_markup_parse_error
+        end
+        # For backwards compatibility only; deprecated instance_variable.
+        # To be removed in Jekyll v5.0.
+        @post = @post_comparer
 
         # First pass-through.
         site.posts.docs.each do |post|
@@ -104,23 +109,23 @@ module Jekyll
 
       def raise_markup_parse_error
         raise Jekyll::Errors::PostURLError, <<~MSG
-          Could not parse name of post #{@markup.inspect} in tag 'post_url'.
+          Could not parse name of post #{@resolved_markup.inspect} in tag 'post_url'.
           Make sure the correct name is given to the tag.
         MSG
       end
 
       def raise_post_not_found_error
         raise Jekyll::Errors::PostURLError, <<~MSG
-          Could not find post #{@markup.inspect} in tag 'post_url'.
+          Could not find post #{@resolved_markup.inspect} in tag 'post_url'.
           Make sure the post exists and the correct name is given to the tag.
         MSG
       end
 
       def log_legacy_usage_deprecation
         Jekyll::Deprecator.deprecation_message(
-          "A call to '{% post_url #{@markup} %}' did not match a post using the new matching " \
-          "method of checking name (path-date-slug) equality. Please make sure that you change " \
-          "this tag to match the post's name exactly."
+          "A call to '{% post_url #{@resolved_markup} %}' did not match a post using the new " \
+          "matching method of checking name (path-date-slug) equality. Please make sure that " \
+          "you change this tag to match the post's name exactly."
         )
       end
     end
