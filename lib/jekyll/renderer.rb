@@ -231,7 +231,7 @@ module Jekyll
 
     def assign_layout_data!
       layout = layouts[document.data["layout"]]
-      payload["layout"] = layout.data if layout
+      payload["layout"] = Utils.deep_merge_hashes((payload["layout"] || {}), layout.data) if layout
     end
 
     def permalink_ext
