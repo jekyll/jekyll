@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2025-04-22T07:33:46-07:00" />
+<meta property="article:published_time" content="2025-06-05T07:51:46-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Tags Filters" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-04-22T07:33:46-07:00","datePublished":"2025-04-22T07:33:46-07:00","description":"All of the standard Liquid tags are supported. Jekyll has a few built in tags to help you build your site. You can also create your own tags using plugins.","headline":"Tags Filters","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/liquid/tags/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/liquid/tags/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-06-05T07:51:46-07:00","datePublished":"2025-06-05T07:51:46-07:00","description":"All of the standard Liquid tags are supported. Jekyll has a few built in tags to help you build your site. You can also create your own tags using plugins.","headline":"Tags Filters","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/liquid/tags/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/liquid/tags/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -291,6 +291,25 @@ the syntax highlighter styles into your <code class="language-plaintext highligh
 <p>You can also use this tag to create a link to a post in Markdown as follows:</p>
 
 <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Name of Link](<span class="cp">{%</span><span class="w"> </span><span class="nt">post_url</span><span class="w"> </span><span class="mi">2010</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">21</span><span class="o">-</span><span class="nv">name-of-post</span><span class="w"> </span><span class="cp">%}</span>)
+</code></pre></div></div>
+
+<p>Now lets say you have a <a href="/docs/datafiles/">datafile</a> <code class="language-plaintext highlighter-rouge">_data/cool_posts.yaml</code> used to keep track
+of certain posts that you intend to be listed as say <em>Cool Posts</em>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">An</span><span class="nv"> </span><span class="s">Awesome</span><span class="nv"> </span><span class="s">Post"</span>
+  <span class="na">slug</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2010-07-21-name-of-post"</span>
+<span class="pi">-</span> <span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Another</span><span class="nv"> </span><span class="s">Awesome</span><span class="nv"> </span><span class="s">Post"</span>
+  <span class="na">slug</span><span class="pi">:</span> <span class="s2">"</span><span class="s">2016-07-26-name-of-post"</span>
+</code></pre></div></div>
+
+<p>You may list such posts using the <code class="language-plaintext highlighter-rouge">post_url</code> tag as well (from<span class="version-badge" title="This feature is available starting version 4.5.0">4.5.0</span>
+):</p>
+
+<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cool posts:
+
+<span class="cp">{%-</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">cool_post</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">site</span><span class="p">.</span><span class="nv">data</span><span class="p">.</span><span class="nv">cool_posts</span><span class="w"> </span><span class="cp">%}</span>
+- [<span class="cp">{{</span><span class="w"> </span><span class="nv">cool_post</span><span class="p">.</span><span class="nv">title</span><span class="w"> </span><span class="cp">}}</span>](<span class="cp">{%</span><span class="w"> </span><span class="nt">post_url</span><span class="w"> </span><span class="cp">{{</span><span class="w"> </span><span class="nv">cool_post</span><span class="p">.</span><span class="nv">slug</span><span class="w"> </span><span class="cp">}}</span><span class="w"> </span><span class="cp">%}</span>)
+<span class="cp">{%-</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
 </code></pre></div></div>
 
 
