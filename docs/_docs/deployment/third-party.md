@@ -10,10 +10,6 @@ The [AWS Amplify Console](https://console.amplify.aws) provides continuous deplo
 
 Read this [step-by-step guide](https://medium.com/@jameshamann/deploy-your-jekyll-site-using-aws-amplify-with-only-a-few-clicks-8f3dd8f26112) to deploy and host your Jekyll site on AWS Amplify.
 
-## Bip
-
-[Bip](https://bip.sh) provides zero downtime deployment, a global CDN, SSL, unlimited bandwidth and more for Jekyll websites. Deploy in seconds from the command line. [Visit the Bip website](https://bip.sh) for more information - which is also built with Jekyll.
-
 ## CloudCannon
 
 [CloudCannon](https://cloudcannon.com) has everything you need to build, host
@@ -26,7 +22,7 @@ Sites on GitHub Pages are powered by Jekyll behind the scenes, so if you’re lo
 
 ## GitLab Pages
 
-[GitLab Pages](https://about.gitlab.com/stages-devops-lifecycle/pages/) offers free hosting with custom domains. [Get started with Jekyll](https://docs.gitlab.com/ee/user/project/pages/getting_started_part_four.html#practical-example) and a fully customizable pipeline.
+[GitLab Pages](https://about.gitlab.com/stages-devops-lifecycle/pages/) offers free hosting with custom domains. [Get started with Jekyll](https://docs.gitlab.com/ee/user/project/pages/getting_started/pages_from_scratch.html) and a fully customizable pipeline.
 
 ## KeyCDN
 
@@ -51,9 +47,9 @@ Read this [Jekyll step-by-step guide](https://www.netlify.com/blog/2020/04/02/a-
 
 [Render](https://render.com) provides zero config continuous deployment for static sites. The service is free under 100GB monthly bandwidth.
 
-## Hostman 
+## Hostman
 
-[Hostman](https://hostman.com) allows you to host websites for free with no configurations. Read [this guide](https://hostman.com/docs/jekyll) to deploy your Jekyll site on Hostman. 
+[Hostman](https://hostman.com) allows you to host websites for free with no configurations. Read [this guide](https://hostman.com/docs/jekyll) to deploy your Jekyll site on Hostman.
 
 ## Static Publisher
 
@@ -74,7 +70,17 @@ Read this [Jekyll step-by-step guide](https://www.21yunbox.com/docs/#/deploy-jek
 [Layer0](https://www.layer0.co) is an all-in-one platform to develop, deploy, preview, experiment on, monitor, and run your headless frontend. It is focused on large, dynamic websites and best-in-class performance through EdgeJS (a JavaScript-based Content Delivery Network), predictive prefetching, and performance monitoring. Layer0 offers a free tier. Get started in just a few minutes by following [Layer0's guide to deploying Jekyll](https://docs.layer0.co/guides/jekyll).
 
 ## Kinsta Application Hosting
+
 [Kinsta Application Hosting](https://kinsta.com/application-hosting) is a Cloud Platform designed to help your company and dev teams ship web projects faster and more efficiently. You can host your apps, databases, and sites all in one place. Easily connect with GitHub and automate deployments and get 24/7 support for all your favorite languages and frameworks.
 
 Read [this guide](https://kinsta.com/docs/jekyll-static-site-example/) to learn how to deploy Jekyll site on Kinsta.
 
+## Supranode
+
+[Supranode](https://supranode.com) offers customizable continuous deployment for static websites, featuring automatic HTTPS, a high-performance CDN, secret management, deployment previews, password protection, and more.
+
+## Azion
+
+[Azion](https://www.azion.com/en/) is an web platform that provides a wide range of services. It allows you to host static sites, including Jekyll-powered websites, with features like automatic HTTPS, custom domains, and real-time analytics. Azion's platform is designed for performance and scalability, making it an excellent choice for hosting global websites.
+
+In [this guide](https://www.azion.com/en/documentation/products/guides/jekyll-boilerplate/) you can learn how to deploy a Jekyll site on Azion.

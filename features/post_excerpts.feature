@@ -108,7 +108,7 @@ Feature: Post excerpts
     Then I should get a zero exit status
     And I should not see "Kramdown warning" in the build output
     But I should see exactly "<p>Install Jekyll</p>" in "_site/just-text-excerpt.html"
-    And I should see "<p>Alpha <sup id=\"fnref:1\" role=\"doc-noteref\"><a href=\"#fn:1\" class=\"footnote\" rel=\"footnote\">1</a></sup></p>" in "_site/text-and-footnote.html"
+    And I should see "<p>Alpha <sup id=\"fnref:1\"><a href=\"#fn:1\" class=\"footnote\" rel=\"footnote\" role=\"doc-noteref\">1</a></sup></p>" in "_site/text-and-footnote.html"
     And I should see "<p>Omega sigma <a href=\"#fnref:1\" class=\"reversefootnote\" role=\"doc-backlink\">&#8617;</a></p>" in "_site/text-and-footnote.html"
     And I should see "<p>Read <a href=\"docs.jekyll.com\">docs</a></p>" in "_site/text-and-reference-link.html"
     And I should see "<p>Check out <a href=\"jekyllrb.com\">jekyll</a></p>" in "_site/text-and-self-referencing-link.html"

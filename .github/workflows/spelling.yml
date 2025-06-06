@@ -65,18 +65,21 @@ jobs:
     steps:
     - name: check-spelling
       id: spelling
-      uses: check-spelling/check-spelling@v0.0.21
+      uses: check-spelling/check-spelling@v0.0.24
       with:
-        # This workflow runs in response to both `push` and `pull_request`, if there's an open `pull_request` in the same repository for a given branch, there's no reason to spend resources checking both the `push` and the `pull_request`, so this flag tells the action while running for the `push` to find the `pull_request` and stop working early:
+        # This workflow runs in response to both `push` and `pull_request`, if there's an open `pull_request` in the same repository
+        # for a given branch, there's no reason to spend resources checking both the `push` and the `pull_request`, so this flag tells
+        # the action while running for the `push` to find the `pull_request` and stop working early:
         suppress_push_for_open_pull_request: 1
         # The action will manage checking out the repository itself instead of requiring the workflow to use `actions/checkout...`:
         checkout: true
-        # If running without `: write`, posting a comment won't work, and for security `: write` permissions are left to a distinct (optional) job, here we skip trying to post a comment:
+        # If running without `: write`, posting a comment won't work, and for security `: write` permissions are left to a distinct
+        # (optional) job, here we skip trying to post a comment:
         post_comment: 0
         use_magic_file: 1
         extra_dictionary_limit: 10
         extra_dictionaries:
-          cspell:software-terms/src/software-terms.txt
+          cspell:software-terms/software-terms.txt
           cspell:php/php.txt
           cspell:node/node.txt
           cspell:django/django.txt
@@ -86,5 +89,7 @@ jobs:
           cspell:fullstack/fullstack.txt
           cspell:filetypes/filetypes.txt
         check_extra_dictionaries: ''
+        dictionary_source_prefixes: >-
+          {"cspell": "https://raw.githubusercontent.com/check-spelling/cspell-dicts/v20241114/dictionaries/"}
 
 # This workflow has opted not to use comments (users can view the report in GitHub Step Summary)

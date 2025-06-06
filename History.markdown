@@ -1,11 +1,44 @@
 ## HEAD
 
+### Bug Fixes
+
+  * Avoid caching resource when called via `include_relative` tag (#9784)
+  * Fix logs containing IPv6 URLs (#9813)
+
+### Documentation
+
+  * Improve documentation on collections in step-by-step walkthrough (#9803)
+  * Add `https://form.taxi` as a third-party resource for forms (#9802)
+  * Add Supranode to third-party deployment guide (#9786)
+  * Document the need for a `Gemfile` in deployment step of step-by-step walkthrough (#9805)
+  * Add Azion to the 3rd party deployment docs (#9811)
+  * Add ruby-erb prerequisite for Arch Linux installations (#9832)
+
+### Development Fixes
+
+  * Improve readability of `post_url` tag (#9829)
+
+### Minor Enhancements
+
+  * feat: Allowing post_url tag to receive liquid variables (#9776)
+
+## 4.4.1 / 2025-01-29
+
+### Bug Fixes
+
+  * Restore globbed path behavior in front matter defaults (#9762)
+
+## 4.4.0 / 2025-01-27
+
 ### Minor Enhancements
 
   * Allow marking specific highlighted lines via Liquid (#9138)
-  * Add csv to runtime dependency list (#9522)
+  * Add gem `csv` to runtime dependency list (#9522)
   * Bump the minimum ruby version to 2.7 (#9525)
   * Acknowledge `livereload_port` from site config too (#9606)
+  * Add gem `base64` as runtime dependency (#9740)
+  * Add gem `json` as runtime_dependency (#9671)
+  * Remove unnecessary constraint on gem `mercenary` (#9758)
 
 ### Bug Fixes
 
@@ -55,6 +88,13 @@
   * Run GitHub Actions only if needed (#9664)
   * Format `.rubocop.yml` via a rake task (#9687)
   * Configure some new cops (#9688)
+  * Fix expected markup per WAI-ARIA requirements (#9737)
+  * Add an optional `:rdoc` group of gems (#9742)
+  * Test `inspect` filter with custom object (#9743)
+  * Bump cucumber to v9 (#9747)
+  * Add Ruby 3.4 to CI matrix (#9740)
+  * Remove unnecessary runtime dependency (#9753)
+  * Bump `check-spelling/check-spelling` action (#9756)
 
 ### Documentation
 
@@ -111,6 +151,10 @@
   * Fix HTML attribute separation whitespace placement in the Navigation include code of Assets step of the Step by Step Tutorial (#9695)
   * Fix missing glob matching pattern support description in the documentation of the `include` and `exclude` configuration options (#9697)
   * Fix missing `url` configuration option documentation (#9699)
+  * Link to GitHub Pages Dependency versions page instead of explicitly specifying Jekyll version (#9715)
+  * Fix broken link on third-party.md (#9704)
+  * Fix: remove inaccessible links and their descriptions (#9745)
+  * Add release post for v4.4.0 (#9759)
 
 ### Site Enhancements
 
