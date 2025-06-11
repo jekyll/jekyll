@@ -18,15 +18,21 @@ module Jekyll
       end
 
       def render(context)
+        # Return cached result if already rendered for this context
+        return @rendered_value if @rendered_value && @cached_context == context
+
         @context = context
+        @cached_context = context
         site = context.registers[:site]
         relative_path = Liquid::Template.parse(@relative_path).render(context)
         relative_path_with_leading_slash = PathManager.join("", relative_path)
 
         site.each_site_file do |item|
-          return relative_url(item) if item.relative_path == relative_path
+          @rendered_value = relative_url(item) if item.relative_path == relative_path
+          return @rendered_value if @rendered_value
           # This takes care of the case for static files that have a leading /
-          return relative_url(item) if item.relative_path == relative_path_with_leading_slash
+          @rendered_value = relative_url(item) if item.relative_path == relative_path_with_leading_slash
+          return @rendered_value if @rendered_value
         end
 
         raise ArgumentError, <<~MSG
