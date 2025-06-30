@@ -63,7 +63,7 @@ module Jekyll
       when ".tsv"
         CSV.read(path, **tsv_config).map { |row| convert_row(row) }
       else
-        SafeYAML.load_file(path)
+        Jekyll::Utils.safe_load_yaml_file(path, :read_opts => site.file_read_opts)
       end
     end
 
