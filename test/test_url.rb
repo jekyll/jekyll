@@ -80,5 +80,12 @@ class TestURL < JekyllUnitTest
         ).to_s
       end
     end
+
+    should "ignore colons in placeholders" do
+      assert_equal "/foo/foo%20bar:foobar/", URL.new(
+        :template     => "/:x/:y/",
+        :placeholders => { :x => "foo", :y => "foo bar:foobar" }
+      ).to_s
+    end
   end
 end
