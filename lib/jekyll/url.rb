@@ -164,7 +164,7 @@ module Jekyll
       path = path.encode("utf-8")
       return path unless path.include?("%")
 
-      Addressable::URI.unencode_component(path)
+      Addressable::URI.unencode(path)
     end
   end
 end
