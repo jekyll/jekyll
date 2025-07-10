@@ -144,6 +144,9 @@ module Jekyll
       #   pct-encoded   = "%" HEXDIG HEXDIG
       #   sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
       #                 / "*" / "+" / "," / ";" / "="
+      #
+      # `Addressable::URI::CharacterClassesRegexps::PATH` is used to encode
+      # non-alphanumeric characters such as "[", "]", etc.
       Addressable::URI.encode_component(
         path,
         Addressable::URI::CharacterClassesRegexps::PATH
