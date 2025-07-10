@@ -87,5 +87,9 @@ class TestURL < JekyllUnitTest
         :placeholders => { :x => "foo", :y => "foo bar:foobar" }
       ).to_s
     end
+
+    should "unescape urls with colons" do
+      assert_equal "/foo/foo bar:foobar/", Jekyll::URL.unescape_path("/foo/foo%20bar:foobar/")
+    end
   end
 end
