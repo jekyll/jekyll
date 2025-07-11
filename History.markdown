@@ -4,6 +4,7 @@
 
   * Avoid caching resource when called via `include_relative` tag (#9784)
   * Fix logs containing IPv6 URLs (#9813)
+  * Do not treat colons in `url_placeholders` as URI delimiters (#9850)
 
 ### Documentation
 
