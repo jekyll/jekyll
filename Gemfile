@@ -3,6 +3,7 @@
 source "https://rubygems.org"
 gemspec :name => "jekyll"
 
+gem "liquid", ENV["LIQUID_VERSION"] unless ENV["LIQUID_VERSION"].to_s.empty?
 gem "rake", "~> 13.0"
 
 group :development do
@@ -85,7 +86,6 @@ group :jekyll_optional_dependencies do
 
   platforms :ruby, :mswin, :mingw, :x64_mingw do
     gem "classifier-reborn", "~> 2.2"
-    gem "liquid-c", "~> 4.0"
     gem "yajl-ruby", "~> 1.4"
   end
 

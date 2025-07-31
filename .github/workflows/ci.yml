@@ -16,7 +16,9 @@ on:
 
 jobs:
   ci:
-    name: "Run Tests (${{ matrix.ruby.label }} on ${{ matrix.os.label }})"
+    name: "Run Tests (${{ matrix.ruby.label }} with ${{ matrix.liquid.label }} on ${{ matrix.os.label }})"
+    env:
+      LIQUID_VERSION: ${{ matrix.liquid_version }}
     runs-on: ${{ matrix.os.image }}
     strategy:
       fail-fast: false
@@ -28,6 +30,11 @@ jobs:
             version: "3.3"
           - label: Ruby 3.4
             version: "3.4"
+        liquid:
+          - label: Liquid v4
+            version: "~> 4.0"
+          - label: Liquid v5
+            version: "~> 5.0"
         os:
           - label: Linux
             image: "ubuntu-latest"
