@@ -1,5 +1,5 @@
 
-puts "🧪 Testing Jekyll Contributions Online"
+puts "Testing Jekyll Contributions Online"
 puts "=" * 50
 
 
@@ -29,7 +29,7 @@ test_keys = ["string", :symbol, 123, { test: "hash" }]
 
 test_keys.each do |key|
   result = cache.hash(key)
-  puts "  ✅ Key: 
+  puts "   Key: 
 end
 
 
@@ -70,7 +70,7 @@ def mock_sanitize_path(base, path)
   
   
   if path.include?("../") || path.include?("..\\")
-    puts "    ⚠️  Potential directory traversal detected: 
+    puts "      Potential directory traversal detected: 
   end
   
   
