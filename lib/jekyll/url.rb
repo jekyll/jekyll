@@ -99,8 +99,10 @@ module Jekyll
 
         winner = pool.find { |key| @placeholders.key?(key) }
         if winner.nil?
+          available_keys = @placeholders.keys.sort
           raise NoMethodError,
                 "The URL template doesn't have #{pool.join(" or ")} keys. " \
+                "Available keys are: #{available_keys.join(", ")}. " \
                 "Check your permalink template!"
         end
 

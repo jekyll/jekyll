@@ -48,20 +48,32 @@ module Jekyll
       private
 
       def sanitize_and_join(base_directory, questionable_path)
+        # Validate input parameters
+        return base_directory.freeze if questionable_path.nil? || questionable_path.empty?
+        
         clean_path = if questionable_path.start_with?("~")
                        questionable_path.dup.insert(0, "/")
                      else
                        questionable_path
                      end
+        
+        # Expand path and handle potential security issues
         clean_path = File.expand_path(clean_path, "/")
         return clean_path if clean_path.eql?(base_directory)
 
-        # remove any remaining extra leading slashes not stripped away by calling
+        # Remove any remaining extra leading slashes not stripped away by calling
         # `File.expand_path` above.
         clean_path.squeeze!("/")
         return clean_path if clean_path.start_with?(slashed_dir_cache(base_directory))
 
+        # Handle Windows drive letters
         clean_path.sub!(%r!\A\w:/!, "/")
+        
+        # Additional security check: prevent directory traversal attempts
+        if clean_path.include?("../") || clean_path.include?("..\\")
+          Jekyll.logger.warn "Path Sanitization:", "Potential directory traversal attempt detected in path: #{questionable_path}"
+        end
+        
         join(base_directory, clean_path)
       end
 

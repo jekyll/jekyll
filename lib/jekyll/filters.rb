@@ -209,7 +209,9 @@ module Jekyll
     def where_exp(input, variable, expression)
       return input unless input.respond_to?(:select)
 
-      input = input.values if input.is_a?(Hash) # FIXME
+      # Convert Hash to Array efficiently while preserving original behavior
+      # Use values for Hash objects to maintain backward compatibility
+      input = input.is_a?(Hash) ? input.values : input
 
       condition = parse_condition(expression)
       @context.stack do
@@ -233,18 +235,23 @@ module Jekyll
     #
     # rubocop:disable Metrics/CyclomaticComplexity
     def find(input, property, value)
-      return input if !property || value.is_a?(Array) || value.is_a?(Hash)
+      # Early returns for invalid inputs
+      return input if property.nil? || property.to_s.empty?
+      return input if value.is_a?(Array) || value.is_a?(Hash)
       return input unless input.respond_to?(:find)
 
-      input    = input.values if input.is_a?(Hash)
+      # Convert Hash to Array efficiently
+      input = input.is_a?(Hash) ? input.values : input
+      return input if input.empty?
+      
       input_id = input.hash
 
-      # implement a hash based on method parameters to cache the end-result for given parameters.
+      # Implement a hash based on method parameters to cache the end-result for given parameters.
       @find_filter_cache ||= {}
       @find_filter_cache[input_id] ||= {}
       @find_filter_cache[input_id][property] ||= {}
 
-      # stash or retrieve results to return
+      # Stash or retrieve results to return
       # Since `enum.find` can return nil or false, we use a placeholder string "<__NO MATCH__>"
       #   to validate caching.
       result = @find_filter_cache[input_id][property][value] ||= input.find do |object|

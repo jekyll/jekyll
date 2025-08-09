@@ -74,9 +74,11 @@ module Jekyll
 
       case err
       when Errno::EACCES
-        Jekyll.logger.error "Theme error:", "Directory '#{folder}' is not accessible."
+        Jekyll.logger.error "Theme error:", "Directory '#{folder}' is not accessible. " \
+                                           "Please check file permissions and ensure the theme gem is properly installed."
       when Errno::ELOOP
-        Jekyll.logger.error "Theme error:", "Directory '#{folder}' includes a symbolic link loop."
+        Jekyll.logger.error "Theme error:", "Directory '#{folder}' includes a symbolic link loop. " \
+                                           "Please check your theme's directory structure for circular symbolic links."
       end
     end
 

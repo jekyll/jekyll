@@ -146,8 +146,21 @@ module Jekyll
     end
 
     # Given a key, return a SHA2 hash that can be used for caching this item to disk.
+    # Optimized to handle different key types efficiently.
     def hash(key)
-      Digest::SHA2.hexdigest(key).freeze
+      # Convert key to string efficiently based on type
+      key_string = case key
+                   when String
+                     key
+                   when Symbol
+                     key.to_s
+                   when Numeric
+                     key.to_s
+                   else
+                     key.inspect
+                   end
+      
+      Digest::SHA2.hexdigest(key_string).freeze
     end
 
     # Remove all this caches items from disk
