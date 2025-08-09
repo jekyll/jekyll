@@ -12,6 +12,6 @@ docker run --rm ^
   --volume="%CD%:/srv/jekyll" ^
   --workdir="/srv/jekyll" ^
   jekyll/jekyll:latest ^
-  bash -c "echo '📦 Installing dependencies...' && bundle install --quiet && echo '🧪 Running existing test suite...' && bundle exec rake test && echo '✅ Testing completed!'"
+  bash -c "echo 'Installing dependencies...' && bundle install --quiet && echo 'Running existing test suite...' && bundle exec rake test && echo 'Testing completed!'"
 
 echo 🎉 Docker testing finished!

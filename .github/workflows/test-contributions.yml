@@ -35,7 +35,7 @@ jobs:
       
     - name: Test our specific contributions
       run: |
-        echo "🧪 Testing contribution-specific functionality..."
+        echo " Testing contribution-specific functionality..."
         ruby -I lib -I test -e "
         require 'test/helper'
         
