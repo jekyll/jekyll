@@ -2,7 +2,7 @@
 REM Docker-based Jekyll testing script for Windows
 REM This allows testing without local Ruby/Bundle installation
 
-echo 🐳 Starting Jekyll Docker-based testing...
+echo Starting Jekyll Docker-based testing...
 
 REM Pull the official Jekyll Docker image
 docker pull jekyll/jekyll:latest

@@ -86,7 +86,7 @@ test_paths = [
 
 test_paths.each do |(base, path)|
   result = mock_sanitize_path(base, path)
-  puts "  ✅ Base: 
+  puts " Base: 
 end
 
 

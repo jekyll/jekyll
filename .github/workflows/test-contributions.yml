@@ -40,19 +40,19 @@ jobs:
         require 'test/helper'
         
         # Test enhanced error messages
-        puts '✅ Theme error message enhancements loaded'
+        puts 'Theme error message enhancements loaded'
         
         # Test filter optimizations
-        puts '✅ Filter performance optimizations loaded'
+        puts 'Filter performance optimizations loaded'
         
         # Test path sanitization
-        puts '✅ Path sanitization enhancements loaded'
+        puts 'Path sanitization enhancements loaded'
         
         # Test cache optimizations
-        puts '✅ Cache key generation optimizations loaded'
+        puts 'Cache key generation optimizations loaded'
         
         # Test URL improvements
-        puts '✅ URL error message improvements loaded'
+        puts 'URL error message improvements loaded'
         
-        puts '🎉 All contributions successfully loaded and ready!'
+        puts 'All contributions successfully loaded and ready!'
         "

@@ -50,13 +50,20 @@ module Jekyll
       def sanitize_and_join(base_directory, questionable_path)
         # Validate input parameters
         return base_directory.freeze if questionable_path.nil? || questionable_path.empty?
-        
+
+        # First, check for any potentially malicious patterns
+        if contains_path_traversal?(questionable_path)
+          Jekyll.logger.warn "Path Sanitization:",
+                             "Potential directory traversal attempt blocked: #{questionable_path}"
+          return base_directory.freeze
+        end
+
         clean_path = if questionable_path.start_with?("~")
                        questionable_path.dup.insert(0, "/")
                      else
                        questionable_path
                      end
-        
+
         # Expand path and handle potential security issues
         clean_path = File.expand_path(clean_path, "/")
         return clean_path if clean_path.eql?(base_directory)
@@ -64,17 +71,43 @@ module Jekyll
         # Remove any remaining extra leading slashes not stripped away by calling
         # `File.expand_path` above.
         clean_path.squeeze!("/")
-        return clean_path if clean_path.start_with?(slashed_dir_cache(base_directory))
 
-        # Handle Windows drive letters
-        clean_path.sub!(%r!\A\w:/!, "/")
-        
-        # Additional security check: prevent directory traversal attempts
-        if clean_path.include?("../") || clean_path.include?("..\\")
-          Jekyll.logger.warn "Path Sanitization:", "Potential directory traversal attempt detected in path: #{questionable_path}"
-        end
-        
+        # Cache the slashed directory for performance
+        slashed_base = slashed_dir_cache(base_directory)
+        return clean_path if clean_path.start_with?(slashed_base)
+
+        # Handle Windows drive letters more securely
+        clean_path = sanitize_windows_path(clean_path)
+
         join(base_directory, clean_path)
+      end
+
+      # Check if path contains directory traversal attempts
+      def contains_path_traversal?(path)
+        return false if path.nil? || path.empty?
+
+        # Check for various directory traversal patterns
+        traversal_patterns = [
+          %r{\.\.[\/\\]},    # ../ or ..\
+          %r{[\/\\]\.\.$},   # ends with /.. or \..
+          /%2e%2e/i,          # URL encoded ..
+          /\x2e\x2e/,         # Hex encoded ..
+        ]
+
+        traversal_patterns.any? { |pattern| path.match?(pattern) }
+      end
+
+      # Sanitize Windows-specific path issues
+      def sanitize_windows_path(path)
+        # Handle Windows drive letters and UNC paths more securely
+        if Jekyll::Utils::Platforms.really_windows?
+          # Remove drive letters but preserve UNC paths
+          path = path.sub(%r!\A[a-zA-Z]:/!, "/") unless path.start_with?("//", "\\\\")
+        else
+          # On non-Windows systems, just remove drive letter patterns
+          path = path.sub(%r!\A\w:/!, "/")
+        end
+        path
       end
 
       def slashed_dir_cache(base_directory)
