@@ -50,6 +50,7 @@ module Jekyll
           index.cgi
           index.xml
           index.json
+          index.jsonld
         ).freeze
 
         LIVERELOAD_PORT = 35_729
