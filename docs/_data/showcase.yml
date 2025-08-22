@@ -187,13 +187,6 @@
   categories:
     - marketing-site
 
-- name: "18F"
-  url: https://18f.gsa.gov/
-  image: 18f.png
-  categories:
-    - agency
-    - government
-
 - name: Development Seed
   url: https://developmentseed.org/
   image: development-seed.png
