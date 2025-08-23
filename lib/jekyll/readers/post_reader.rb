@@ -69,6 +69,9 @@ module Jekyll
       elsif !doc.content.valid_encoding?
         Jekyll.logger.debug "Skipping:", "#{doc.relative_path} is not valid UTF-8"
         false
+      elsif site.target != doc.data.fetch("target", site.target)
+        Jekyll.logger.debug "Skipping:", "#{doc.relative_path} does not belong to this site target"
+        false
       else
         publishable?(doc)
       end

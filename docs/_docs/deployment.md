@@ -9,3 +9,4 @@ Sites built using Jekyll can be deployed in a large number of ways due to the st
 * [Manually]({{ '/docs/deployment/manual/' | relative_url }})
 * [Automated]({{ '/docs/deployment/automated/' | relative_url }})
 * [Third Party]({{ '/docs/deployment/third-party/' | relative_url }})
+* [Multiple Sites and Target]({{ '/docs/deployment/multiple-sites' | relative_url }})
