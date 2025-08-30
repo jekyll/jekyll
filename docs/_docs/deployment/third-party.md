@@ -84,3 +84,9 @@ Read [this guide](https://kinsta.com/docs/jekyll-static-site-example/) to learn 
 [Azion](https://www.azion.com/en/) is an web platform that provides a wide range of services. It allows you to host static sites, including Jekyll-powered websites, with features like automatic HTTPS, custom domains, and real-time analytics. Azion's platform is designed for performance and scalability, making it an excellent choice for hosting global websites.
 
 In [this guide](https://www.azion.com/en/documentation/products/guides/jekyll-boilerplate/) you can learn how to deploy a Jekyll site on Azion.
+
+## CloudRay
+
+[CloudRay](https://cloudray.io) is a centralised platform that helps you manage your servers, organize Bash scripts, and automate deployment tasks across virtual machines and cloud servers.
+
+Read [this guide](https://cloudray.io/articles/how-to-deploy-your-jekyll-site) to learn how to deploy Jekyll site with CloudRay.
