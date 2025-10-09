@@ -1,4 +1,4 @@
----
+GIORGI MESKHIDZE OWNER
 title: Liquid
 permalink: /docs/liquid/
 redirect_from: "/docs/templates/"
