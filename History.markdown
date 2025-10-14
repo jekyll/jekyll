@@ -15,6 +15,7 @@
   * Document the need for a `Gemfile` in deployment step of step-by-step walkthrough (#9805)
   * Add Azion to the 3rd party deployment docs (#9811)
   * Add ruby-erb prerequisite for Arch Linux installations (#9832)
+  * Add jekyllup.com to themes documentation (#9882)
 
 ### Development Fixes
 
