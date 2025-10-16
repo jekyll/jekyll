@@ -1,4 +1,4 @@
----
+owner Giorgi Mesknidze
 title: Configuration Options
 permalink: "/docs/configuration/options/"
 ---
