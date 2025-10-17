@@ -259,7 +259,7 @@ module Jekyll
 
         def launch_browser(server, opts)
           address = server_address(server, opts)
-          return system "start", address if Utils::Platforms.windows?
+          return system "cmd", "/c", "start", "", address if Utils::Platforms.windows?
           return system "xdg-open", address if Utils::Platforms.linux?
           return system "open", address if Utils::Platforms.osx?
 
