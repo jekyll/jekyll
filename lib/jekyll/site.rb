@@ -6,7 +6,7 @@ module Jekyll
                   :file_read_opts, :future, :gems, :generators, :highlighter,
                   :include, :inclusions, :keep_files, :layouts, :limit_posts,
                   :lsi, :pages, :permalink_style, :plugin_manager, :plugins,
-                  :reader, :safe, :show_drafts, :static_files, :theme, :time,
+                  :reader, :safe, :target, :show_drafts, :static_files, :theme, :time,
                   :unpublished
 
     attr_reader :cache_dir, :config, :dest, :filter_cache, :includes_load_paths,
@@ -47,7 +47,7 @@ module Jekyll
     def config=(config)
       @config = config.clone
 
-      %w(safe lsi highlighter baseurl exclude include future unpublished
+      %w(safe lsi highlighter baseurl exclude include future unpublished target
          show_drafts limit_posts keep_files).each do |opt|
         send(:"#{opt}=", config[opt])
       end
@@ -360,7 +360,7 @@ module Jekyll
     end
 
     def each_site_file
-      pages.each { |page| yield page }
+      pages.each { |page| yield (page) if page.write? }
       static_files.each { |file| yield(file) if file.write? }
       collections.each_value { |coll| coll.docs.each { |doc| yield(doc) if doc.write? } }
     end
