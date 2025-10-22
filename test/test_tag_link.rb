@@ -203,4 +203,45 @@ class TestTagLink < TagUnitTest
       end
     end
   end
+
+  context "memoized links" do
+    setup do
+      @template = Liquid::Template.parse(<<~CONTENT
+        ---
+        title: test memoized link
+        ---
+        {% link {{ file_path }} %}
+      CONTENT
+      )
+
+      # Creamos un solo site que se reutilizará
+      @site = fixture_site(
+        "collections" => {
+          "methods" => { "output" => true },
+        }
+      )
+      CollectionReader.new(@site).read
+    end
+
+    should "use cache for same context" do
+      context = { "file_path" => "_methods/yaml_with_dots.md" }
+      output1 = @template.render!(context, registers: { site: @site })
+      output2 = @template.render!(context, registers: { site: @site })
+
+      assert_match %r!/methods/yaml_with_dots\.html!, output1
+      assert_equal output1, output2
+    end
+
+    should "not share cache between different contexts" do
+      context1 = { "file_path" => "_methods/configuration.md", "whatever" => 123 }
+      context2 = { "file_path" => "_methods/yaml_with_dots.md" }
+
+      output1 = @template.render!(context1, registers: { site: @site })
+      output2 = @template.render!(context2, registers: { site: @site })
+
+      assert_match %r!/methods/configuration\.html!, output1
+      assert_match %r!/methods/yaml_with_dots\.html!, output2
+      refute_equal output1, output2
+    end
+  end
 end
