@@ -88,6 +88,7 @@ module Jekyll
         # To be removed in Jekyll v5.0.
         @post = @post_comparer
 
+        # rubocop:disable Style/CombinableLoops
         # First pass-through.
         site.posts.docs.each do |post|
           return relative_url(post) if @post_comparer == post
@@ -101,6 +102,7 @@ module Jekyll
           log_legacy_usage_deprecation
           return relative_url(post)
         end
+        # rubocop:enable Style/CombinableLoops
 
         raise_post_not_found_error
       end
