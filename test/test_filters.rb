@@ -693,7 +693,6 @@ class TestFilters < JekyllUnitTest
           "layout"        => "default",
           "title"         => "Publish",
           "category"      => "publish_test",
-          "date"          => "2008-02-02 00:00:00 +0000",
           "slug"          => "published",
           "ext"           => ".markdown",
           "tags"          => [],
@@ -703,6 +702,13 @@ class TestFilters < JekyllUnitTest
         next_doc = actual.delete("next")
         refute_nil next_doc
         assert_kind_of Hash, next_doc, "doc.next should be an object"
+
+        # `date` is not equality checked against expected because it depends on the system timezone.
+        #   For the case of this test, date is rendered as "2008-02-02 00:00:00 +0000" in UTC timezone,
+        #   but in other systems it can be, eg, "2008-02-02 00:00:00 +0100" in CET timezone.
+        assert actual.key?("date"), "Expected 'date' key to be present in the JSON output"
+        assert actual["date"].start_with?("2008-02-02 00:00:00")
+        actual.delete("date")
 
         assert_equal expected, actual
       end
