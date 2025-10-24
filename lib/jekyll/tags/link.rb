@@ -29,11 +29,11 @@ module Jekyll
         relative_path_with_leading_slash = PathManager.join("", relative_path)
 
         site.each_site_file do |item|
-          if item.relative_path == relative_path ||
+          next unless item.relative_path == relative_path ||
             item.relative_path == relative_path_with_leading_slash
-            @rendered_cache[relative_path] = relative_url(item)
-            return @rendered_cache[relative_path]
-          end
+
+          @rendered_cache[relative_path] = relative_url(item)
+          return @rendered_cache[relative_path]
         end
 
         raise ArgumentError, <<~MSG
