@@ -362,8 +362,22 @@ end
 
 #
 
-Then(%r!^I should see today's time in "(.*)"$!) do |file|
-  step %(I should see "#{seconds_agnostic_time(Time.now)}" in "#{file}")
+Then(%r!^I should see today's time in "(.*)" with (\d+) seconds? tolerance$!) do |file, seconds|
+  seconds = seconds.to_i
+  build_time = Time.now
+  content = file_contents(file)
+  time_pattern = /(\d{4}-\d{2}-\d{2})\s+(\d+:\d{2}:\d{2})/
+  match_data = content.match(time_pattern)
+  expect(match_data).not_to be_nil, "No date-time pattern found in #{file}"
+  date_str, time_str = match_data.captures
+  file_time = Time.parse("#{date_str} #{time_str}")
+  time_difference = (build_time - file_time).abs
+  expect(time_difference).to be <= seconds, <<~MSG
+    Expected time in #{file} to be within #{seconds} seconds of build time.
+    Build time: #{build_time}
+    File time:  #{file_time}
+    Difference: #{time_difference} seconds
+  MSG
 end
 
 #
