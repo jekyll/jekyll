@@ -36,7 +36,7 @@ Feature: Site data
     When I run jekyll build
     Then I should get a zero exit status
     And the _site directory should exist
-    And I should see today's time in "_site/index.html" with 5 seconds tolerance
+    And I should see today's time in "_site/index.html"
 
   Scenario: Use site.posts variable for latest post
     Given I have a _posts directory

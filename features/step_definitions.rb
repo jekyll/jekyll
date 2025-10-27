@@ -362,8 +362,8 @@ end
 
 #
 
-Then(%r!^I should see today's time in "(.*)" with (\d+) seconds? tolerance$!) do |file, seconds|
-  seconds = seconds.to_i
+Then(%r!^I should see today's time in "(.*)"$!) do |file|
+  seconds = 3
   build_time = Time.now
   content = file_contents(file)
   date_time_pattern = /(\d{4}-\d{2}-\d{2}\s\d+:\d{2}:\d{2})/
