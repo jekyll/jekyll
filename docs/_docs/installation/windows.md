@@ -138,7 +138,7 @@ While `listen` has built-in support for UNIX systems, it may require an extra ge
 Add the following to the `Gemfile` for your site if you have issues with auto-regeneration on Windows alone:
 
 ```ruby
-gem "wdm", "~> 0.1.1", :install_if => Gem.win_platform?
+gem "wdm", "~> 0.2.0", :install_if => Gem.win_platform?
 ```
 
 You have to use a [Ruby+Devkit](https://rubyinstaller.org/downloads/) version of the RubyInstaller and install
