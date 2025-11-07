@@ -306,3 +306,10 @@
   categories:
     - marketing-site
     - documentation
+
+- name: Official Ruby Website
+  url: https://ruby-lang.org/
+  image: ruby-lang.png
+  categories:
+    - marketing-site
+    - documentation
