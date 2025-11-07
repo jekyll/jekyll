@@ -20,6 +20,7 @@
 ### Development Fixes
 
   * Improve readability of `post_url` tag (#9829)
+  * Fix flaky test that depends on current minute (#9889)
 
 ### Minor Enhancements
 
