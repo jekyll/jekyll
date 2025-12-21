@@ -69,7 +69,7 @@ Support this project by becoming a sponsor. Your logo will show up in this READM
 ### Contributors
 
 This project exists thanks to all the people who contribute.
-[![Jekyll Contributors](https://opencollective.com/jekyll/contributors.svg?width=890&button=false)](../../graphs/contributors)
+[![Jekyll Contributors](https://opencollective.com/jekyll/contributors.svg?width=890&&avatarHeight=24&limit=100&button=false)](../../graphs/contributors)
 
 ### Backers
 
