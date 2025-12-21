@@ -17,6 +17,7 @@
   * Add ruby-erb prerequisite for Arch Linux installations (#9832)
   * Add jekyllup.com to themes documentation (#9882)
   * docs: Update contributor badge in README to include avatar height and limit parameters (#9912)
+  * Update WDM (0.1.1 → 0.2.0) in the Windows docs (#9897)
 
 ### Development Fixes
 
