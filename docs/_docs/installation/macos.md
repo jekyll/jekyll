@@ -74,6 +74,8 @@ Quit and relaunch Terminal, then check that everything is working:
 ruby -v
 ```
 
+if ruby -v not showing the current_version, try `source ~/.zshrc` or `source ~/.base_profile` to refresh your configuration based on your current environment.
+
 It should show {{ site.data.ruby.current_version_output }} or a newer version.
 
 Next, read that same external guide for important notes about 
