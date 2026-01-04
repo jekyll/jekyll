@@ -2,12 +2,12 @@
 
 ## Supported Versions
 
-Security updates are applied to the latest MINOR version of Jekyll, and the version used by GitHub Pages, v3.9.x.
+Security updates are applied to the latest MINOR version of Jekyll, and the version used by GitHub Pages, v3.10.x.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 4.2.x   | :white_check_mark: |
-| 3.9.x   | :white_check_mark: |
+| 4.4.x   | :white_check_mark: |
+| 3.10.x   | :white_check_mark: |
 | < 3.9.x | :x:                |
 
 ## Reporting a Vulnerability
