@@ -47,6 +47,7 @@ video.
 outputs a relative URL for assets.
 * [jekyll-swfobject](https://github.com/sectore/jekyll-swfobject) embeds a SWF
 object.
+* [jekyll-pdf-embed](https://github.com/MihajloNesic/jekyll-pdf-embed) embeds PDF files to any page or post.
 
 ## Filters
 
