@@ -1,4 +1,4 @@
----
+jamariabrisby3-star.github.io---
 title: Installation
 description: Official guide to install Jekyll on macOS, GNU/Linux or Windows.
 permalink: /docs/installation/
