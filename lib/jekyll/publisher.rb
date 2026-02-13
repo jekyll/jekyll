@@ -11,13 +11,20 @@ module Jekyll
     end
 
     def hidden_in_the_future?(thing)
-      thing.respond_to?(:date) && !@site.future && thing.date.to_i > @site.time.to_i
+      thing.respond_to?(:date) &&
+        !@site.future &&
+        !collection_allows_future?(thing) &&
+        thing.date.to_i > @site.time.to_i
     end
 
     private
 
     def can_be_published?(thing)
       thing.data.fetch("published", true) || @site.unpublished
+    end
+
+    def collection_allows_future?(thing)
+      thing.respond_to?(:collection) && !!thing.collection.metadata["future"]
     end
   end
 end
