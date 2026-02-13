@@ -29,6 +29,7 @@
 ### Minor Enhancements
 
   * feat: Allowing post_url tag to receive liquid variables (#9776)
+  * Add .ruby-lsp to default excludes (#9914)
 
 ## 4.4.1 / 2025-01-29
 
