@@ -57,7 +57,7 @@ which hosts optimized versions of Ruby for Ubuntu.
 ```sh
 sudo apt-add-repository ppa:brightbox/ruby-ng
 sudo apt-get update
-sudo apt-get install ruby2.5 ruby2.5-dev build-essential dh-autoreconf
+sudo apt-get install ruby2.5 ruby2.5-dev build-essential dh-autoreconf zlib1g-dev libgdbm-dev
 ```
 
 Next, update your Ruby gems:
