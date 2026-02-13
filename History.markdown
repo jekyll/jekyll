@@ -6,6 +6,7 @@
   * Fix logs containing IPv6 URLs (#9813)
   * Do not treat colons in `url_placeholders` as URI delimiters (#9850)
   * Fix servlet do_GET header logic (#9867)
+  * Add logger to Gemfile for Ruby 4.0 (#9920)
 
 ### Documentation
 
