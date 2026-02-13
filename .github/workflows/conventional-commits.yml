@@ -1,0 +1,42 @@
+name: Enforce Conventional Commits
+
+permissions:
+  pull-request: read
+
+on:
+  pull_request_target:
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+    branches:
+      - master
+
+jobs:
+  enforce-conventional-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: amannn/action-semantic-pull-request@v5.5.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            perf
+            refactor
+            docs
+            style
+            test
+            chore
+          scopes: |
+            core
+            cli
+            commands
+            plugins
+            site
+            helpers
+            converters
+            filters
+            tags
+            drops
+            tests
+            docs
+          requireScope: false
