@@ -92,7 +92,7 @@ module Jekyll
       reader_config = config[config_key] || {}
 
       defaults = {
-        :converters => reader_config.fetch("csv_converters", []).map(&:to_sym),
+        :converters => reader_config.fetch("converters", []).map(&:to_sym),
         :headers    => reader_config.fetch("headers", true),
         :encoding   => reader_config.fetch("encoding", config["encoding"]),
       }
