@@ -65,6 +65,15 @@ module Jekyll
       else
         SafeYAML.load_file(path)
       end
+    rescue Psych::SyntaxError => e
+      Jekyll.logger.warn "YAML Exception reading #{path}: #{e.message}"
+      raise e if site.config["strict_front_matter"]
+    rescue CSV::MalformedCSVError => e
+      Jekyll.logger.warn "CSV Exception reading #{path}: #{e.message}"
+      raise e if site.config["strict_front_matter"]
+    rescue StandardError => e
+      Jekyll.logger.warn "Error reading file #{path}: #{e.message}"
+      raise e if site.config["strict_front_matter"]
     end
 
     def sanitize_filename(name)
