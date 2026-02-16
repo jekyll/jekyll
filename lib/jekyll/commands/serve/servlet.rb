@@ -102,7 +102,7 @@ module Jekyll
             <script>
               document.write(
                 '<script src="' + location.protocol + '//' +
-                (location.host || 'localhost').split(':')[0] +
+                (location.hostname || 'localhost') +
                 ':<%=@options["livereload_port"] %>/livereload.js?snipver=1<%= livereload_args %>"' +
                 '></' +
                 'script>');
