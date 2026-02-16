@@ -348,17 +348,20 @@ module Jekyll
     end
 
     # Determine whether this document should be written.
-    # Based on the Collection to which it belongs.
+    # Based on the Collection to which it belongs
+    # and site and document target.
     #
     # True if the document has a collection and if that collection's #write?
-    # method returns true, and if the site's Publisher will publish the document.
+    # method returns true, and if the site's Publisher will publish the document,
+    # and if the document's target matches the site target or is undefined.
     # False otherwise.
     #
     # rubocop:disable Naming/MemoizedInstanceVariableName
     def write?
       return @write_p if defined?(@write_p)
 
-      @write_p = collection&.write? && site.publisher.publish?(self)
+      @write_p = collection&.write? && site.publisher.publish?(self) &&
+        (site.target == data.fetch("target", site.target))
     end
     # rubocop:enable Naming/MemoizedInstanceVariableName
 
