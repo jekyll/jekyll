@@ -97,7 +97,6 @@ your browser. You should see "Hello World!".
 At this point, you might be thinking, "So what?". The only thing that happened was that Jekyll copied an
 HTML file from one place to another. 
 
-Patience, young grasshopper, there's
-still much to learn!
+Patience, there's still much to learn!
 
 Next. you'll learn about Liquid and templating.
