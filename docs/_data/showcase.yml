@@ -306,3 +306,10 @@
   categories:
     - marketing-site
     - documentation
+
+- name: wiki law
+  url: https://www.wiki.xin/
+  image: www-wiki-xin.png
+  categories:
+    - law-site
+    - documentation
