@@ -188,9 +188,18 @@ module Jekyll
 
     private
 
+    # Copy the file safely to its destination. If the site is running in safe
+    # mode or the jekyll environment is "production", symlinks will be
+    # dereferenced and the file content is deployed verbatim. For improved
+    # speed during development, symlinks are preserved otherwise. If a symlink
+    # is relative, it will be rewritten to target the absolute path to keep
+    # it pointing to the right location.
     def copy_file(dest_path)
       if @site.safe || Jekyll.env == "production"
         FileUtils.cp(path, dest_path)
+      elsif File.lstat(path).symlink?
+        abs_path = File.realpath(path)
+        FileUtils.ln_sf(abs_path, dest_path)
       else
         FileUtils.copy_entry(path, dest_path)
       end
