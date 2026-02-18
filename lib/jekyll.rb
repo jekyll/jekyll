@@ -27,17 +27,15 @@ require "logger"
 require "set"
 require "csv"
 require "json"
+require "psych"
 
 # 3rd party
 require "pathutil"
 require "addressable/uri"
-require "safe_yaml/load"
 require "liquid"
 require "kramdown"
 require "colorator"
 require "i18n"
-
-SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
   # internal requires
@@ -92,6 +90,7 @@ module Jekyll
   require "jekyll/command"
   require "jekyll/liquid_extensions"
   require "jekyll/filters"
+  require "jekyll/safe_yaml_deprecator"
 
   class << self
     # Public: Tells you which Jekyll environment you are building in so you can skip tasks

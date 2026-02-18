@@ -159,7 +159,7 @@ end
 Given(%r!^I have a configuration file with "(.*)" set to "(.*)"$!) do |key, value|
   config = \
     if source_dir.join("_config.yml").exist?
-      SafeYAML.load_file(source_dir.join("_config.yml"))
+      Jekyll::Utils.safe_load_yaml_file(source_dir.join("_config.yml"))
     else
       {}
     end

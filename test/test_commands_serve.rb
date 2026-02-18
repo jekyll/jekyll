@@ -143,7 +143,7 @@ class TestCommandsServe < JekyllUnitTest
         )
       end
       Jekyll.sites.clear
-      allow(SafeYAML).to receive(:load_file).and_return({})
+      allow(Jekyll::Utils).to receive(:safe_load_yaml_file).and_return({})
       allow(Jekyll::Commands::Build).to receive(:build).and_return("")
     end
     teardown do
