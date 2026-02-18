@@ -141,7 +141,7 @@ class TestRegenerator < JekyllUnitTest
     end
 
     should "store modification times" do
-      assert_equal File.mtime(@path), @regenerator.metadata[@path]["mtime"]
+      assert_equal File.mtime(@path), @regenerator.metadata[@path]["incremental_key"]
     end
 
     should "cache processed entries" do
@@ -167,7 +167,7 @@ class TestRegenerator < JekyllUnitTest
 
     should "read from the metadata file" do
       @regenerator = Regenerator.new(@site)
-      assert_equal File.mtime(@path), @regenerator.metadata[@path]["mtime"]
+      assert_equal File.mtime(@path), @regenerator.metadata[@path]["incremental_key"]
     end
 
     should "read legacy YAML metadata" do
@@ -177,7 +177,7 @@ class TestRegenerator < JekyllUnitTest
       File.write(metadata_file, @regenerator.metadata.to_yaml)
 
       @regenerator = Regenerator.new(@site)
-      assert_equal File.mtime(@path), @regenerator.metadata[@path]["mtime"]
+      assert_equal File.mtime(@path), @regenerator.metadata[@path]["incremental_key"]
     end
 
     should "not crash when reading corrupted marshal file" do
@@ -195,7 +195,7 @@ class TestRegenerator < JekyllUnitTest
     should "be able to add a path to the metadata" do
       @regenerator.clear
       @regenerator.add(@path)
-      assert_equal File.mtime(@path), @regenerator.metadata[@path]["mtime"]
+      assert_equal File.mtime(@path), @regenerator.metadata[@path]["incremental_key"]
       assert_equal [], @regenerator.metadata[@path]["deps"]
       assert @regenerator.cache[@path]
     end
@@ -262,11 +262,11 @@ class TestRegenerator < JekyllUnitTest
     should "regenerate if file is modified" do
       @regenerator.clear
       @regenerator.add(@path)
-      @regenerator.metadata[@path]["mtime"] = Time.at(0)
+      @regenerator.metadata[@path]["incremental_key"] = Time.at(0)
       @regenerator.write_metadata
       @regenerator = Regenerator.new(@site)
 
-      refute_same File.mtime(@path), @regenerator.metadata[@path]["mtime"]
+      refute_same File.mtime(@path), @regenerator.metadata[@path]["incremental_key"]
       assert @regenerator.modified?(@path)
     end
 
@@ -303,6 +303,43 @@ class TestRegenerator < JekyllUnitTest
       @regenerator.write_metadata
       @regenerator = Regenerator.new(@site)
 
+      assert @regenerator.modified?(@path)
+    end
+  end
+
+  context "using MD5 as the incremental_key" do
+    setup do
+      FileUtils.rm_rf(source_dir(".jekyll-metadata"))
+
+      @site = Site.new(Jekyll.configuration(
+                         "source"          => source_dir,
+                         "destination"     => dest_dir,
+                         "incremental"     => true,
+                         "incremental_key" => "md5"
+                       ))
+
+      @site.process
+      @path = @site.in_source_dir(@site.pages.first.path)
+      @regenerator = @site.regenerator
+    end
+
+    should "store MD5 file digests" do
+      assert_equal md5_digest(@path), @regenerator.metadata[@path]["incremental_key"]
+    end
+
+    should "read from the metadata file" do
+      @regenerator = Regenerator.new(@site)
+      assert_equal md5_digest(@path), @regenerator.metadata[@path]["incremental_key"]
+    end
+
+    should "regenerate if file is modified" do
+      @regenerator.clear
+      @regenerator.add(@path)
+      @regenerator.metadata[@path]["incremental_key"] = "old-md5"
+      @regenerator.write_metadata
+      @regenerator = Regenerator.new(@site)
+
+      refute_same md5_digest(@path), @regenerator.metadata[@path]["incremental_key"]
       assert @regenerator.modified?(@path)
     end
   end
