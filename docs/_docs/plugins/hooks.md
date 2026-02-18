@@ -23,7 +23,7 @@ defined for `:documents` can be utilized for individual collections only by invo
 in collection `_posts` and `:movies` for documents in collection `_movies`. In all cases, Jekyll calls your hooks with the owner object as the
 first callback parameter.
 
-Every registered hook owner supports the following events &mdash; `:post_init`, `:pre_render`, `:post_convert`, `:post_render`, `:post_write`
+Every registered hook owner supports the following events &mdash; `:post_init`, `:pre_render`, `:pre_convert`, `:post_convert`, `:post_render`, `:post_write`
 &mdash; however, the `:site` owner is set up to *respond* to *special event names*. Refer to the subsequent section for details.
 
 All `:pre_render` hooks and the `:site, :post_render` hook will also provide a `payload` hash as a second parameter. While in the case of
@@ -96,7 +96,7 @@ The complete list of available hooks:
       </td>
     </tr>
     <tr>
-      <td rowspan="5">
+      <td rowspan="6">
         <p><code>:pages</code></p>
         <p>Allows fine-grained control over all pages in the site</p>
       </td>
@@ -113,6 +113,14 @@ The complete list of available hooks:
       </td>
       <td>
         <p>Just before rendering a page</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:pre_convert</code></p>
+      </td>
+      <td>
+        <p>After parsing Liquid tags and variables, but before converting the page content</p>
       </td>
     </tr>
     <tr>
@@ -140,7 +148,7 @@ The complete list of available hooks:
       </td>
     </tr>
     <tr>
-      <td rowspan="5">
+      <td rowspan="6">
         <p><code>:documents</code></p>
         <p>Allows fine-grained control over all documents in the site including posts and documents in user-defined collections</p>
       </td>
@@ -157,6 +165,14 @@ The complete list of available hooks:
       </td>
       <td>
         <p>Just before rendering a document</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:pre_convert</code></p>
+      </td>
+      <td>
+        <p>After parsing Liquid tags and variables, but before converting the document content</p>
       </td>
     </tr>
     <tr>
@@ -187,7 +203,7 @@ The complete list of available hooks:
       </td>
     </tr>
     <tr>
-      <td rowspan="5">
+      <td rowspan="6">
         <p><code>:posts</code></p>
         <p>Allows fine-grained control over all posts in the site without affecting documents in user-defined collections</p>
       </td>
@@ -204,6 +220,14 @@ The complete list of available hooks:
       </td>
       <td>
         <p>Just before rendering a post</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>:pre_convert</code></p>
+      </td>
+      <td>
+        <p>After parsing Liquid tags and variables, but before converting the post content</p>
       </td>
     </tr>
     <tr>

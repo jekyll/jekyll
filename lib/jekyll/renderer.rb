@@ -75,10 +75,17 @@ module Jekyll
       }
 
       output = document.content
+
       if document.render_with_liquid?
         Jekyll.logger.debug "Rendering Liquid:", document.relative_path
         output = render_liquid(output, payload, info, document.path)
+        output = output.to_s
+        document.content = output
       end
+
+      Jekyll.logger.debug "Pre-Convert Hooks:", document.relative_path
+      document.trigger_hooks(:pre_convert)
+      output = document.content
 
       Jekyll.logger.debug "Rendering Markup:", document.relative_path
       output = convert(output.to_s)
