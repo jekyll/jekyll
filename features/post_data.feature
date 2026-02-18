@@ -58,6 +58,18 @@ Feature: Post data
     Then the _site directory should not exist
     And I should see "Document '_posts/2016-01-01-test.md' does not have a valid date in the YAML front matter." in the build output
 
+  Scenario: Use post.date variable with ISO date and time and timezone
+    Given I have a _posts directory
+    And I have a _layouts directory
+    And I have the following post:
+      | title     | date                      | layout | content                 |
+      | Star Wars | 2012-03-27T21:44:32-07:00 | simple | Luke, I am your father. |
+    And I have a simple layout that contains "Post ISO date and time: {{ page.date | date_to_xmlschema }}"
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "Post ISO date and time: 2012-03-27T21:44:32-07:00" in "_site/2012/03/27/star-wars.html"
+
   Scenario: Invalid date in filename
     Given I have a _posts directory
     And I have a "_posts/2016-22-01-test.md" page that contains "I have a bad date."
