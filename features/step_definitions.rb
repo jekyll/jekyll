@@ -86,6 +86,14 @@ end
 
 #
 
+Given(%r!^I have an? "(.*)" layout with data:$!) do |filename, table|
+  data = table.hashes.each_with_object({}) { |row, data| data[row["key"]] = SafeYAML.load(row["value"]) }
+  FileUtils.mkdir_p("_layouts")
+  File.write("_layouts/#{filename}", "#{YAML.dump(data)}---\n\n{{ content }}\n")
+end
+
+#
+
 Given(%r!^I have the following (draft|page|post)s?(?: (in|under) "([^"]+)")?:$!) do |status, direction, folder, table|
   table.hashes.each do |input_hash|
     title = slug(input_hash["title"])

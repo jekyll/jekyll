@@ -239,3 +239,18 @@ Feature: Rendering
     And I should not see "content\": \"__Hello World__" in "_site/test.json"
     But I should see "content\": \"<p>about.md</p>" in "_site/test.json"
     And I should see "content\": \"<p><strong>Hello World</strong></p>" in "_site/test.json"
+
+  Scenario: Render layout front matter data
+    Given I have an "alpha.md" page with layout "orchard" that contains "item on sale: {{ layout.item }}"
+    And I have an "beta.md" page with layout "bakery" that contains "item on sale: {{ layout.item }}"
+    And I have a "bakery.html" layout with data:
+    | key  | value       |
+    | item | Carrot Cake |
+    And I have an "orchard.html" layout with data:
+    | key  | value               |
+    | item | Granny Smith Apples |
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "item on sale: Granny Smith Apples" in "_site/alpha.html"
+    And I should see "item on sale: Carrot Cake" in "_site/beta.html"
