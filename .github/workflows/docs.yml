@@ -6,13 +6,17 @@ on:
       - master
     paths:
       - "docs/**"
+  schedule:
+    # Run weekly to keep dynamic content (e.g. copyright year) current
+    - cron: "0 0 * * 1"
+  workflow_dispatch:
 
 env:
   RUBY_VERSION: 2.7
 
 jobs:
   deploy_docs:
-    if: "!contains(github.event.commits[0].message, '[ci skip]')"
+    if: github.event_name != 'push' || !contains(github.event.commits[0].message, '[ci skip]')
     runs-on: 'ubuntu-latest'
     env:
       BUNDLE_PATH: "vendor/bundle"
@@ -45,10 +49,14 @@ jobs:
           : > .nojekyll
 
           git add --all
-          git -c user.name="${GITHUB_ACTOR}" -c user.email="${GITHUB_ACTOR}@users.noreply.github.com" \
-            commit --quiet \
-            --message "Deploy docs from ${GITHUB_SHA}" \
-            --message "$SOURCE_COMMIT"
-          git push
+          if git diff --cached --quiet; then
+            echo "No changes to deploy"
+          else
+            git -c user.name="${GITHUB_ACTOR}" -c user.email="${GITHUB_ACTOR}@users.noreply.github.com" \
+              commit --quiet \
+              --message "Deploy docs from ${GITHUB_SHA}" \
+              --message "$SOURCE_COMMIT"
+            git push
+          fi
 
           popd &>/dev/null
