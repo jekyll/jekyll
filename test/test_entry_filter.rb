@@ -74,6 +74,33 @@ class TestEntryFilter < JekyllUnitTest
       assert_equal %w(README .htaccess), filtered_entries
     end
 
+    should "not exclude a directory when an included path is nested within it" do
+      @site.exclude = %w(excluded_dir)
+      @site.include = %w(excluded_dir/included_subdir)
+
+      # excluded_dir should pass through so read_directories can recurse into it
+      filtered = @site.reader.filter_entries(%w(excluded_dir), source_dir)
+      assert_equal %w(excluded_dir), filtered
+    end
+
+    should "include static files in a subfolder of an excluded directory when that subfolder is
+      included" do
+      @site.exclude = %w(excluded_dir)
+      @site.include = %w(excluded_dir/included_subdir)
+
+      @site.reader.read_directories
+      included_paths = @site.static_files.map(&:relative_path)
+
+      # Files inside excluded_dir/included_subdir should be included
+      assert included_paths.any? { |p| p.include?("included_subdir") },
+             "Expected files from excluded_dir/included_subdir to be included,
+          got: #{included_paths.inspect}"
+      # Files directly in excluded_dir (not in included_subdir) should not be included
+      refute included_paths.any? { |p| p.match?(%r!\Aexcluded_dir/[^/]+\z!) },
+             "Expected files directly in excluded_dir to be excluded,
+          got: #{included_paths.inspect}"
+    end
+
     should "keep safe symlink entries when safe mode enabled" do
       allow(File).to receive(:symlink?).with("symlink.js").and_return(true)
       files = %w(symlink.js)
