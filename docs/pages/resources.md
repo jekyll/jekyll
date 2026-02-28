@@ -55,6 +55,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [Arengu](https://www.arengu.com)
   - [Getform](https://getform.io)
   - [99Inbound](https://www.99inbound.com)
+  - [fabform](https://fabform.io)
   - [Formcake](https://formcake.com)
   - [Formcarry](https://formcarry.com)
   - [Formingo](https://www.formingo.co/guides/jekyll?utm_source=github&utm_medium=jekyll-docs&utm_campaign=Jekyll%20Documentation)
