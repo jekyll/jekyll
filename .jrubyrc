@@ -1,3 +1,1159 @@
 backtrace.mask=true
 backtrace.color=true
 backtrace.style=mri
+#Requests::/Start::/:Build::/Script::/:build_script::/:starts ::/::BEGIN :'::On :start-on :,:; "-on'@PythonV3,":,
+"inputs :-/.plug-inns'@manifest :ENERGY_maifests'@zachry'Tyler'Wood'@administrater'@'.it'.git'.github.gists'@github .com/gists/secret/BITORE/((c)(r))/logging.user(self.user, "FGBBRefreshing stale feeds: ~SB%s/%s" % (
+stale_feeds.count(), all_feeds.count()))
+for sub in stale_feeds:
+sub.feed.fetch, -c'lang/Raven-1repo-sync'-with minstall $ -cd'@purl'{We{b-BaseUrl':Webh-H})ook'@"https://www.bitore.net":,
+document :
+notification :
+e-mail :Shining_120@yahoo.com:; Zachryiixixiwood'@gmail'.com :.paypal.org :_once =
+sub.feed.save()
+
+if stale_feeds:
+stale_feeds = list(set([f.feed_id for f in stale_feeds]))
+self.queue_new_feeds(new_feeds=stale_feeds)BITORE/BITORE_34173//BITORE_34173.1337//Manifest :
+Manifest :ENERGY_manifest'@def queue_new_feeds(self, new_feeds=None):
+if not new_feeds:
+new_feeds = UserSubscription.objects.filter(user=self.user,
+feed__fetched_once=False,
+active=True).values('feed_id')
+new_feeds = list(set([f['feed_id'] for f in new_feeds]))
+logging.user(self.user, "BBFW~SBQueueing NewFeeds: ~FC(%s) %s" % (len(new_feeds), new_feeds))
+size = 4
+publisher = Task.get_publisher(exchange="new_feeds")
+for t in (new_feeds[pos:pos + size] for pos in xrange(0, len(new_feeds), size)):
+NewFeeds.apply_async(args=(t,), queue="new_feeds", publisher=publisher)
+publisher.connection.close()
+def refresh_stale_feeds(self, exclude_new=False):
+stale_cutoff = datetime.datetime.now() - datetime.timedelta(days=7)
+stale_feeds = UserSubscription.objects.filter(user=self.user, active=True, feed__last_update__lte=stale_cutoff)
+if exclude_new:
+stale_feeds = stale_feeds.filter(feed__fetched_once=True)
+all_feeds = UserSubscription.objects.filter(user=self.user, active=True)
+
+logging.user(self.user, "~FG~BBRefreshing stale feeds: ~SB%s/%s" % (
+    stale_feeds.count(), all_feeds.count()))
+for sub in stale_feeds:
+    sub.feed.fetch, -c'lang/Raven.Kraken'@Purls'@https://www.paypal.org :_once = 
+    sub.feed.save()
+
+if stale_feeds:
+    stale_feeds = list(set([f.feed_id for f in stale_feeds]))
+    self.queue_new_feeds(new_feeds=stale_feeds)
+def send_new_user_email(self):
+if not self.user.email or not self.send_emails:
+return
+
+user    = self.user
+text    = render_to_string('mail/email_new_account.txt', locals())
+html    = render_to_string('mail/email_new_account.xhtml', locals())
+subject = "Welcome to NewsBlur, %s" % (self.user.username)
+msg     = EmailMultiAlternatives(subject, text, 
+                                 from_email='NewsBlur <%s>' % settings.HELLO_EMAIL,
+                                 to=['%s <%s>' % (user, user.email)])
+msg.attach_alternative(html, "text/html")
+msg.send(fail_silently=True)
+
+logging.user(self.user, "~BB~FM~SBSending email for new user: %s" % self.user.email)
+def send_new_premium_email(self, force=False):
+if not self.user.email or not self.send_emails:
+return
+
+if self.is_premium and not force:
+    return
+
+user    = self.user
+text    = render_to_string('mail/email_new_premium.txt', locals())
+html    = render_to_string('mail/email_new_premium.xhtml', locals())
+subject = "Thanks for going premium on NewsBlur!"
+msg     = EmailMultiAlternatives(subject, text, 
+                                 from_email='NewsBlur <%s>' % settings.HELLO_EMAIL,
+                                 to=['%s <%s>' % (user, user.email)])
+msg.attach_alternative(html, "text/html")
+msg.send(fail_silently=True)
+
+logging.user(self.user, "~BB~FM~SBSending email for new premium: %s" % self.user.email)
+def send_forgot_password_email(self, email=None):
+if not self.user.email and not email:
+print "Please provide an email address."
+return
+
+Actions
+Projects
+Security
+Insights
+Merge branch 'master' into social
+
+master:
+Changing copy on premium/feedchooser dialog.
+Styling errors on stripe payment form.
+Final stripe.js tweaks before launch.
+Adding Pay by Credit Card as an option to feed chooser dialog. Thus concludes Stripe.js integration. Time to launch!
+Styling the stripe.js background.
+Using correct kwargs for stripe signal.
+Wrapping up stripe.js form. Has validation, styling, and does the right thing for new subscriptions. Needs a link to the form, though.
+Setting up correct customer model for stripe webhook.
+Moving JS assets to bottom of the page for faster loadtimes.
+Fixing exception on missing param in feed address searching.
+Fixing recommendation date serialization bug.
+Fixing bugs around login with blank password using full password. Also fixing bug in signups with no username.
+Stripe.js payments using zebra. Adding zebra as a vendored dependency. Webhooks and views all in. Needs styling, custom username and email fields, and loads of testing.
+Adding error checking on requests in page fetching.
+Using a probability from redis to determine whether or not to skip a fetch.
+Allowing any password to be used on accounts with no password set.
+Adding paypal logo.
+Conflicts:
+assets.yml
+media/js/newsblur/reader/reader_feedchooser.js
+settings.py
+templates/base.html
+laddel/.tombale/pop-kernal /repositories/dispatch/Whisk'@migrations/0016_profile_stripe.py
+@@ -0,0 +1,85 @@
+
+encoding: utf-8
+import datetime
+from south.db import db
+from south.v2 import SchemaMigration
+from django.db import models
+
+class Migration(SchemaMigration):
+
+def forwards(self, orm):
+
+    # Adding field 'Profile.stripe_4_digits'
+    db.add_column('profile_profile', 'stripe_4_digits', self.gf('django.db.models.fields.CharField')(max_length=4, null=True, blank=True), keep_default=False)
+
+    # Adding field 'Profile.stripe_id'
+    db.add_column('profile_profile', 'stripe_id', self.gf('django.db.models.fields.CharField')(max_length=24, null=True, blank=True), keep_default=False)
+
+
+def backwards(self, orm):
+
+    # Deleting field 'Profile.stripe_4_digits'
+    db.delete_column('profile_profile', 'stripe_4_digits')
+
+    # Deleting field 'Profile.stripe_id'
+    db.delete_column('profile_profile', 'stripe_id')
+
+
+models = {
+    'auth.group': {
+        'Meta': {'object_name': 'Group'},
+        'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+        'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '80'}),
+        'permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'})
+    },
+    'auth.permission': {
+        'Meta': {'ordering': "('content_type__app_label', 'content_type__model', 'codename')", 'unique_together': "(('content_type', 'codename'),)", 'object_name': 'Permission'},
+        'codename': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+        'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']"}),
+        'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+        'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
+    },
+    'auth.user': {
+        'Meta': {'object_name': 'User'},
+        'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+        'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
+        'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
+        'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
+        'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+        'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+        'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+        'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+        'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+        'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
+        'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+        'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
+        'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
+    },
+    'contenttypes.contenttype': {
+        'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
+        'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+        'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+        'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+        'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+    },
+    'profile.profile': {
+        'Meta': {'object_name': 'Profile'},
+        'collapsed_folders': ('django.db.models.fields.TextField', [], {'default': "'[]'"}),
+        'feed_pane_size': ('django.db.models.fields.IntegerField', [], {'default': '240'}),
+        'hide_mobile': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+        'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+        'is_premium': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+        'last_seen_ip': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
+        'last_seen_on': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+        'preferences': ('django.db.models.fields.TextField', [], {'default': "'{}'"}),
+        'secret_token': ('django.db.models.fields.CharField', [], {'max_length': '12', 'null': 'True', 'blank': 'True'}),
+        'send_emails': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+        'stripe_4_digits': ('django.db.models.fields.CharField', [], {'max_length': '4', 'null': 'True', 'blank': 'True'}),
+        'stripe_id': ('django.db.models.fields.CharField', [], {'max_length': '24', 'null': 'True', 'blank': 'True'}),
+        'timezone': ('vendor.timezones.fields.TimeZoneField', [], {'default': "'America/New_York'", 'max_length': '100'}),
+        'tutorial_finished': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+        'user': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "'profile'", 'unique': 'True', 'to': "orm['auth.User']"}),
+        'view_settings': ('django.db.models.fields.TextField', [], {'default': "'{}'"})
+    }
+}
+
+complete_apps = ['profile']
+9
+apps/profile/models.py
+import datetime
+from django.db import models
+from django.db import IntegrityError
+from django.db.utils import DatabaseError
+from django.db.models.signals import post_save
+from django.conf import settings
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
+from django.core.mail import mail_admins
+from django.core.mail import EmailMultiAlternatives
+from django.core.urlresolvers import reverse
+from django.template.loader import render_to_string
+from celery.task import Task
+from apps.reader.models import UserSubscription
+from apps.rss_feeds.models import Feed
+from apps.rss_feeds.tasks import NewFeeds
+from utils import log as logging
+from utils.user_functions import generate_secret_token
+from vendor.timezones.fields import TimeZoneField
+from vendor.paypal.standard.ipn.signals import subscription_signup
+
+from zebra.signals import zebra_webhook_customer_subscription_created
+
+class Profile(models.Model):
+user = models.OneToOneField(User, unique=True, related_name="profile")
+is_premium = models.BooleanField(default=False)
+send_emails = models.BooleanField(default=True)
+preferences = models.TextField(default="{}")
+view_settings = models.TextField(default="{}")
+collapsed_folders = models.TextField(default="[]")
+feed_pane_size = models.IntegerField(default=240)
+tutorial_finished = models.BooleanField(default=False)
+has_trained_intelligence = models.BooleanField(default=False)
+hide_find_friends = models.BooleanField(default=False)
+hide_getting_started = models.BooleanField(default=False)
+hide_mobile = models.BooleanField(default=False)
+last_seen_on = models.DateTimeField(default=datetime.datetime.now)
+last_seen_ip = models.CharField(max_length=50, blank=True, null=True)
+timezone = TimeZoneField(default="America/New_York")
+secret_token = models.CharField(max_length=12, blank=True, null=True)
+stripe_4_digits = models.CharField(max_length=4, blank=True, null=True)
+stripe_id = models.CharField(max_length=24, blank=True, null=True)
+
+def __unicode__(self):
+    return "%s <%s> (Premium: %s)" % (self.user, self.user.email, self.is_premium)
+
+def save(self, *args, **kwargs):
+    if not self.secret_token:
+        self.secret_token = generate_secret_token(self.user.username, 12)
+    try:
+        super(Profile, self).save(*args, **kwargs)
+    except DatabaseError:
+        print " ---> Profile not saved. Table isn't there yet."
+
+def activate_premium(self):
+    self.send_new_premium_email()
+    
+    self.is_premium = True
+    self.save()
+    
+    subs = UserSubscription.objects.filter(user=self.user)
+    for sub in subs:
+        sub.active = True
+        try:
+            sub.save()
+            sub.feed.setup_feed_for_premium_subscribers()
+        except IntegrityError, Feed.DoesNotExist:
+            pass
+    
+    self.queue_new_feeds()
+    
+    logging.user(self.user, "~BY~SK~FW~SBNEW PREMIUM ACCOUNT! WOOHOO!!! ~FR%s subscriptions~SN!" % (subs.count()))
+    message = """Woohoo!
+User: %(user)s
+Feeds: %(feeds)s
+Sincerely,
+NewsBlur""" % {'user': self.user.username, 'feeds': subs.count()}
+mail_admins('New premium account', message, fail_silently=True)
+
+def queue_new_feeds(self, new_feeds=None):
+    if not new_feeds:
+        new_feeds = UserSubscription.objects.filter(user=self.user, 
+                                                    feed__fetched_once=False, 
+                                                    active=True).values('feed_id')
+        new_feeds = list(set([f['feed_id'] for f in new_feeds]))
+    logging.user(self.user, "~BB~FW~SBQueueing NewFeeds: ~FC(%s) %s" % (len(new_feeds), new_feeds))
+    size = 4
+    publisher = Task.get_publisher(exchange="new_feeds")
+    for t in (new_feeds[pos:pos + size] for pos in xrange(0, len(new_feeds), size)):
+        NewFeeds.apply_async(args=(t,), queue="new_feeds", publisher=publisher)
+    publisher.connection.close()   
+def refresh_stale_feeds(self, exclude_new=False):
+    stale_cutoff = datetime.datetime.now() - datetime.timedelta(days=7)
+    stale_feeds  = UserSubscription.objects.filter(user=self.user, active=True, feed__last_update__lte=stale_cutoff)
+    if exclude_new:
+        stale_feeds = stale_feeds.filter(feed__fetched_once=True)
+    all_feeds    = UserSubscription.objects.filter(user=self.user, active=True)
+    
+    logging.user(self.user, "~FG~BBRefreshing stale feeds: ~SB%s/%s" % (
+        stale_feeds.count(), all_feeds.count()))
+    for sub in stale_feeds:
+        sub.feed.fetched_once = False
+        sub.feed.save()
+    
+    if stale_feeds:
+        stale_feeds = list(set([f.feed_id for f in stale_feeds]))
+        self.queue_new_feeds(new_feeds=stale_feeds)
+
+def send_new_user_email(self):
+    if not self.user.email or not self.send_emails:
+        return
+    
+    user    = self.user
+    text    = render_to_string('mail/email_new_account.txt', locals())
+    html    = render_to_string('mail/email_new_account.xhtml', locals())
+    subject = "Welcome to NewsBlur, %s" % (self.user.username)
+    msg     = EmailMultiAlternatives(subject, text, 
+                                     from_email='NewsBlur <%s>' % settings.HELLO_EMAIL,
+                                     to=['%s <%s>' % (user, user.email)])
+    msg.attach_alternative(html, "text/html")
+    msg.send(fail_silently=True)
+    
+    logging.user(self.user, "~BB~FM~SBSending email for new user: %s" % self.user.email)
+
+def send_new_premium_email(self, force=False):
+    if not self.user.email or not self.send_emails:
+        return
+    
+    if self.is_premium and not force:
+        return
+    
+    user    = self.user
+    text    = render_to_string('mail/email_new_premium.txt', locals())
+    html    = render_to_string('mail/email_new_premium.xhtml', locals())
+    subject = "Thanks for going premium on NewsBlur!"
+    msg     = EmailMultiAlternatives(subject, text, 
+                                     from_email='NewsBlur <%s>' % settings.HELLO_EMAIL,
+                                     to=['%s <%s>' % (user, user.email)])
+    msg.attach_alternative(html, "text/html")
+    msg.send(fail_silently=True)
+    
+    logging.user(self.user, "~BB~FM~SBSending email for new premium: %s" % self.user.email)
+
+def send_forgot_password_email(self, email=None):
+    if not self.user.email and not email:
+        print "Please provide an email address."
+        return
+    
+    if not self.user.email and email:
+        self.user.email = email
+        self.user.save()
+    
+    user    = self.user
+    text    = render_to_string('mail/email_forgot_password.txt', locals())
+    html    = render_to_string('mail/email_forgot_password.xhtml', locals())
+    subject = "Forgot your password on NewsBlur?"
+    msg     = EmailMultiAlternatives(subject, text, 
+                                     from_email='NewsBlur <%s>' % settings.HELLO_EMAIL,
+                                     to=['%s <%s>' % (user, user.email)])
+    msg.attach_alternative(html, "text/html")
+    msg.send(fail_silently=True)
+    
+    logging.user(self.user, "~BB~FM~SBSending email for forgotten password: %s" % self.user.email)
+    
+def autologin_url(self, next=None):
+    return reverse('autologin', kwargs={
+        'username': self.user.username, 
+        'secret': self.secret_token
+    }) + ('?' + next + '=1' if next else '')
+def create_profile(sender, instance, created, **kwargs):
+if created:
+Profile.objects.create(user=instance)
+else:
+Profile.objects.get_or_create(user=instance)
+post_save.connect(create_profile, sender=User)
+def paypal_signup(sender, **kwargs):
+ipn_obj = sender
+user = User.objects.get(username=ipn_obj.custom)
+try:
+if not user.email:
+user.email = ipn_obj.payer_email
+user.save()
+except:
+pass
+user.profile.activate_premium()
+subscription_signup.connect(paypal_signup)
+
+def stripe_signup(sender, full_json, **kwargs):
+profile = Profile.objects.get(stripe_id=full_json['data']['object']['customer'])
+profile.activate_premium()
+zebra_webhook_customer_subscription_created.connect(stripe_signup)
+
+def change_password(user, old_password, new_password):
+user_db = authenticate(username=user.username, password=old_password)
+if user_db is None:
+return -1
+else:
+user_db.set_password(new_password)
+user_db.save()
+return 1
+1
+apps/profile/urls.py
+from django.conf.urls.defaults import *
+from apps.profile import views
+urlpatterns = patterns('',
+url(r'^get_preferences?/?', views.get_preference),
+url(r'^set_preference/?', views.set_preference),
+url(r'^set_account_settings/?', views.set_account_settings),
+url(r'^get_view_setting/?', views.get_view_setting),
+url(r'^set_view_setting/?', views.set_view_setting),
+url(r'^set_collapsed_folders/?', views.set_collapsed_folders),
+url(r'^paypal_form/?', views.paypal_form),
+url(r'^paypal_return/?', views.paypal_return, name='paypal-return'),
+url(r'^is_premium/?', views.profile_is_premium, name='profile-is-premium'),
+url(r'^paypal_ipn/?', include('paypal.standard.ipn.urls'), name='paypal-ipn'),
+url(r'^stripe_form/?', views.stripe_form, name='stripe-form'),
+)
+71
+apps/profile/views.py
+@@ -1,3 +1,4 @@
+import stripe
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.sites.models import Site
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
+from django.template import RequestContext
+from django.shortcuts import render_to_response
+from django.core.mail import mail_admins
+from utils import json_functions as json
+from vendor.paypal.standard.forms import PayPalPaymentsForm
+from utils.user_functions import ajax_login_required
+from django.conf import settings
+from apps.profile.models import Profile, change_password
+from apps.reader.models import UserSubscription
+from apps.profile.forms import StripePlusPaymentForm, PLANS
+from utils import json_functions as json
+from utils.user_functions import ajax_login_required
+from vendor.paypal.standard.forms import PayPalPaymentsForm
+
+SINGLE_FIELD_PREFS = ('timezone','feed_pane_size','tutorial_finished','hide_mobile','send_emails',
+'has_trained_intelligence', 'hide_find_friends', 'hide_getting_started',)
+SPECIAL_PREFERENCES = ('old_password', 'new_password',)
+@ajax_login_required
+@require_POST
+@json.json_view
+def set_preference(request):
+code = 1
+message = ''
+new_preferences = request.POST
+
+preferences = json.decode(request.user.profile.preferences)
+for preference_name, preference_value in new_preferences.items():
+    if preference_value in ['true','false']: preference_value = True if preference_value == 'true' else False
+    if preference_name in SINGLE_FIELD_PREFS:
+        setattr(request.user.profile, preference_name, preference_value)
+    else:
+        if preference_value in ["true", "false"]:
+            preference_value = True if preference_value == "true" else False
+        preferences[preference_name] = preference_value
+    
+request.user.profile.preferences = json.encode(preferences)
+request.user.profile.save()
+
+response = dict(code=code, message=message, new_preferences=new_preferences)
+return response
+@ajax_login_required
+@json.json_view
+def get_preference(request):
+code = 1
+preference_name = request.POST.get('preference')
+preferences = json.decode(request.user.profile.preferences)
+
+payload = preferences
+if preference_name:
+    payload = preferences.get(preference_name)
+    
+response = dict(code=code, payload=payload)
+return response
+@ajax_login_required
+@require_POST
+@json.json_view
+def set_account_settings(request):
+code = 1
+message = ''
+settings = request.POST
+post_settings = request.POST
+
+if settings['username'] and request.user.username != settings['username']:
+if post_settings['username'] and request.user.username != post_settings['username']:
+    try:
+        User.objects.get(username__iexact=settings['username'])
+        User.objects.get(username__iexact=post_settings['username'])
+    except User.DoesNotExist:
+        request.user.username = settings['username']
+        request.user.username = post_settings['username']
+        request.user.save()
+    else:
+        code = -1
+        message = "This username is already taken. Try something different."
+
+if request.user.email != settings['email']:
+    if not User.objects.filter(email=settings['email']).count():
+        request.user.email = settings['email']
+if request.user.email != post_settings['email']:
+    if not User.objects.filter(email=post_settings['email']).count():
+        request.user.email = post_settings['email']
+        request.user.save()
+    else:
+        code = -2
+        message = "This email is already being used by another account. Try something different."
+
+if code != -1 and (settings['old_password'] or settings['new_password']):
+    code = change_password(request.user, settings['old_password'], settings['new_password'])
+if code != -1 and (post_settings['old_password'] or post_settings['new_password']):
+    code = change_password(request.user, post_settings['old_password'], post_settings['new_password'])
+    if code == -3:
+        message = "Your old password is incorrect."
+
+payload = {
+    "username": request.user.username,
+    "email": request.user.email,
+}
+return dict(code=code, message=message, payload=payload)
+@ajax_login_required
+@require_POST
+@json.json_view
+def set_view_setting(request):
+code = 1
+feed_id = request.POST['feed_id']
+feed_view_setting = request.POST['feed_view_setting']
+
+view_settings = json.decode(request.user.profile.view_settings)
+view_settings[feed_id] = feed_view_setting
+request.user.profile.view_settings = json.encode(view_settings)
+request.user.profile.save()
+
+response = dict(code=code)
+return response
+@ajax_login_required
+@json.json_view
+def get_view_setting(request):
+code = 1
+feed_id = request.POST['feed_id']
+view_settings = json.decode(request.user.profile.view_settings)
+
+response = dict(code=code, payload=view_settings.get(feed_id))
+return response
+@ajax_login_required
+@require_POST
+@json.json_view
+def set_collapsed_folders(request):
+code = 1
+collapsed_folders = request.POST['collapsed_folders']
+
+request.user.profile.collapsed_folders = collapsed_folders
+request.user.profile.save()
+
+response = dict(code=code)
+return response
+@ajax_login_required
+def paypal_form(request):
+domain = Site.objects.get_current().domain
+
+paypal_dict = {
+    "cmd": "_xclick-subscriptions",
+    "business": "samuel@ofbrooklyn.com",
+    "a3": "12.00",                     # price 
+    "p3": 1,                           # duration of each unit (depends on unit)
+    "t3": "Y",                         # duration unit ("M for Month")
+    "src": "1",                        # make payments recur
+    "sra": "1",                        # reattempt payment on payment error
+    "no_note": "1",                    # remove extra notes (optional)
+    "item_name": "NewsBlur Premium Account",
+    "notify_url": "http://%s%s" % (domain, reverse('paypal-ipn')),
+    "return_url": "http://%s%s" % (domain, reverse('paypal-return')),
+    "cancel_return": "http://%s%s" % (domain, reverse('index')),
+    "custom": request.user.username,
+}
+# Create the instance.
+form = PayPalPaymentsForm(initial=paypal_dict, button_type="subscribe")
+# Output the button.
+return HttpResponse(form.render(), mimetype='text/html')
+def paypal_return(request):
+return render_to_response('reader/paypal_return.xhtml', {
+}, context_instance=RequestContext(request))
+
+@login_required
+def activate_premium(request):
+return HttpResponseRedirect(reverse('index'))
+
+@ajax_login_required
+@json.json_view
+def profile_is_premium(request):
+# Check tries
+code = 0
+retries = int(request.GET['retries'])
+profile = Profile.objects.get(user=request.user)
+
+subs = UserSubscription.objects.filter(user=request.user)
+total_subs = subs.count()
+activated_subs = subs.filter(active=True).count()
+
+if retries >= 30:
+    subject = "Premium activation failed: %s (%s/%s)" % (request.user, activated_subs, total_subs)
+    message = """User: %s (%s) -- Email: %s""" % (request.user.username, request.user.pk, request.user.email)
+    mail_admins(subject, message, fail_silently=True)
+    code = -1
+    request.user.profile.is_premium = True
+    request.user.profile.save()
+    
+return {
+    'is_premium': profile.is_premium,
+    'code': code,
+    'activated_subs': activated_subs,
+    'total_subs': total_subs,
+}
+@login_required
+def stripe_form(request):
+user = request.user
+success_updating = False
+stripe.api_key = settings.STRIPE_SECRET
+plan = int(request.GET.get('plan', 2))
+plan = PLANS[plan-1][0]
+
+if request.method == 'POST':
+    zebra_form = StripePlusPaymentForm(request.POST, email=user.email)
+    if zebra_form.is_valid():
+        user.email = zebra_form.cleaned_data['email']
+        user.save()
+
+        customer = stripe.Customer.create(**{
+            'card': zebra_form.cleaned_data['stripe_token'],
+            'plan': zebra_form.cleaned_data['plan'],
+            'email': user.email,
+            'description': user.username,
+        })
+
+        user.profile.strip_4_digits = zebra_form.cleaned_data['last_4_digits']
+        user.profile.stripe_id = customer.id
+        user.profile.save()
+
+        success_updating = True
+
+else:
+    zebra_form = StripePlusPaymentForm(email=user.email, plan=plan)
+
+if success_updating:
+    return render_to_response('reader/paypal_return.xhtml', 
+                              {}, context_instance=RequestContext(request))
+
+return render_to_response('profile/stripe_form.xhtml',
+    {
+      'zebra_form': zebra_form,
+      'publishable': settings.STRIPE_PUBLISHABLE,
+      'success_updating': success_updating,
+    },
+    context_instance=RequestContext(request)
+)
+36
+apps/reader/forms.py
+@@ -27,25 +27,29 @@ def clean(self):
+user = User.objects.filter(Q(username__iexact=username) | Q(email=username))
+if username and user:
+self.user_cache = authenticate(username=user[0].username, password=password)
+if self.user_cache is None:
+self.user_cache = authenticate(username=user[0].username, password="")
+if self.user_cache is None:
+email_username = User.objects.filter(email=username)
+if email_username:
+self.user_cache = authenticate(username=email_username[0].username, password=password)
+if self.user_cache is None:
+# logging.info(" ***> [%s] Bad Login: TRYING JK-LESS PASSWORD" % username)
+jkless_password = password.replace('j', '').replace('k', '')
+self.user_cache = authenticate(username=username, password=jkless_password)
+if self.user_cache is None:
+logging.info(" ***> [%s] Bad Login" % username)
+raise forms.ValidationError(("Whoopsy-daisy. Try again."))
+else:
+# Supreme fuck-up. Accidentally removed the letters J and K from
+# all user passwords. Re-save with correct password.
+logging.info(" ***> [%s] FIXING JK-LESS PASSWORD" % username)
+self.user_cache.set_password(password)
+self.user_cache.save()
+elif not self.user_cache.is_active:
+raise forms.ValidationError(("This account is inactive."))
+self.user_cache = authenticate(username=email_username[0].username, password="")
+if self.user_cache is None:
+# logging.info(" ***> [%s] Bad Login: TRYING JK-LESS PASSWORD" % username)
+jkless_password = password.replace('j', '').replace('k', '')
+self.user_cache = authenticate(username=username, password=jkless_password)
+if self.user_cache is None:
+logging.info(" ***> [%s] Bad Login" % username)
+raise forms.ValidationError(("Whoopsy-daisy. Try again."))
+else:
+# Supreme fuck-up. Accidentally removed the letters J and K from
+# all user passwords. Re-save with correct password.
+logging.info(" ***> [%s] FIXING JK-LESS PASSWORD" % username)
+self.user_cache.set_password(password)
+self.user_cache.save()
+if not self.user_cache.is_active:
+raise forms.ValidationError(("This account is inactive."))
+elif username and not user:
+raise forms.ValidationError(_("That username is not registered. Create an account with it instead."))
+
+@@ -93,8 +97,8 @@ def clean_email(self):
+return self.cleaned_data['email']
+
+def clean(self):
+    username = self.cleaned_data['username']
+    password = self.cleaned_data['password']
+    username = self.cleaned_data.get('username', '')
+    password = self.cleaned_data.get('password', '')
+    exists = User.objects.filter(username__iexact=username).count()
+    if exists:
+        user_auth = authenticate(username=username, password=password)
+1
+apps/rss_feeds/page_importer.py
+@@ -88,6 +88,7 @@ def fetch_page(self, urllib_fallback=False, requests_exception=None):
+LookupError,
+requests.packages.urllib3.exceptions.HTTPError), e:
+logging.debug(' ***> [%-30s] Page fetch failed using requests: %s' % (self.feed, e))
+mail_feed_error_to_admin(self.feed, e, locals())
+return self.fetch_page(urllib_fallback=True, requests_exception=e)
+except Exception, e:
+logging.debug('[%d] ! -------------------------' % (self.feed.id,))
+2
+apps/rss_feeds/tasks.py
+@@ -13,7 +13,7 @@ def run(self, feed_pks, **kwargs):
+
+    options = {
+        'fake': bool(MStatistics.get('fake_fetch')),
+        'quick': bool(MStatistics.get('quick_fetch')),
+        'quick': float(MStatistics.get('quick_fetch', 0)),
+    }
+
+    if not isinstance(feed_pks, list):
+5
+apps/rss_feeds/views.py
+@@ -20,8 +20,11 @@
+
+@json.json_view
+def search_feed(request):
+address = request.REQUEST['address']
+address = request.REQUEST.get('address')
+offset = int(request.REQUEST.get('offset', 0))
+if not address:
+return dict(code=-1, message="Please provide a URL/address.")
+
+feed = Feed.get_feed_from_url(address, create=False, aggressive=True, offset=offset)
+
+if feed:
+5
+assets.yml
+@@ -76,8 +76,9 @@ javascripts:
+- media/js/newsblur/models/*.js
+- media/js/newsblur/common/assetmodel.js
+- media/js/mobile/newsblur/mobile_workspace.js
+paypal:
+- media/js/newsblur/paypal/paypal_return.js
+payments:
+- media/js/newsblur/payments/paypal_return.js
+- media/js/newsblur/payments/stripe_form.js
+bookmarklet:
+- media/js/vendor/jquery-1.5.1.min.js
+- media/js/vendor/jquery.noConflict.js
+8
+fabfile.py
+@@ -71,7 +71,7 @@ def pull():
+run('git pull')
+
+def pre_deploy():
+compress_assets()
+compress_assets(bundle=True)
+
+def post_deploy():
+cleanup_assets()
+@@ -134,12 +134,14 @@ def celery():
+celery_stop()
+celery_start()
+
+@parallel
+def celery_stop():
+with cd(env.NEWSBLUR_PATH):
+run('sudo supervisorctl stop celery')
+with settings(warn_only=True):
+run('./utils/kill_celery.sh')
+
+@parallel
+def celery_start():
+with cd(env.NEWSBLUR_PATH):
+run('sudo supervisorctl start celery')
+@@ -149,7 +151,7 @@ def kill_celery():
+with cd(env.NEWSBLUR_PATH):
+run('ps aux | grep celeryd | egrep -v grep | awk '{print $2}' | sudo xargs kill -9')
+
+def compress_assets():
+def compress_assets(bundle=False):
+local('jammit -c assets.yml --base-url http://www.newsblur.com --output static')
+local('tar -czf static.tgz static/*')
+
+@@ -310,7 +312,7 @@ def setup_psycopg():
+
+def setup_python():
+sudo('easy_install -U pip')
+sudo('easy_install -U fabric django readline pyflakes iconv celery django-celery django-celery-with-redis django-compress South django-extensions pymongo BeautifulSoup pyyaml nltk==0.9.9 lxml oauth2 pytz boto seacucumber django_ses mongoengine redis requests')
+sudo('easy_install -U fabric django readline pyflakes iconv celery django-celery django-celery-with-redis django-compress South django-extensions pymongo stripe BeautifulSoup pyyaml nltk==0.9.9 lxml oauth2 pytz boto seacucumber django_ses mongoengine redis requests')
+
+put('config/pystartup.py', '.pystartup')
+with cd(os.path.join(env.NEWSBLUR_PATH, 'vendor/cjson')):
+3
+local_settings.py.template
+@@ -38,6 +38,9 @@ S3_ACCESS_KEY = 'XXX'
+S3_SECRET = 'SECRET'
+S3_BACKUP_BUCKET = 'newsblur_backups'
+
+STRIPE_SECRET = "YOUR-SECRET-API-KEY"
+STRIPE_PUBLISHABLE = "YOUR-PUBLISHABLE-API-KEY"
+
+=============
+= Databases =
+=============
+154
+media/css/payments.css
+@@ -0,0 +1,154 @@
+/* ========== /
+/ = Paypal = /
+/ ========== */
+
+.NB-paypal-return {
+margin: 176px 0 0;
+background-color: #D3E7BA;
+border-top: 1px solid #A0A0A0;
+border-bottom: 1px solid #A0A0A0;
+padding: 24px 0;
+background-image: linear-gradient(bottom, rgb(188,214,167) 0%, rgb(223,247,212) 100%);
+background-image: -moz-linear-gradient(bottom, rgb(188,214,167) 0%, rgb(223,247,212) 100%);
+background-image: -webkit-linear-gradient(bottom, rgb(188,214,167) 0%, rgb(223,247,212) 100%);
+background-image: -ms-linear-gradient(bottom, rgb(188,214,167) 0%, rgb(223,247,212) 100%);
+text-align: center;
+}
+
+.NB-paypal-return .NB-paypal-return-title {
+font-size: 36px;
+margin: 0 0 12px;
+color: #303030;
+text-shadow: 1px 1px 0 #FFF;
+text-transform: uppercase;
+}
+
+.NB-paypal-return .NB-paypal-return-subtitle {
+font-size: 24px;
+color: #324A15;
+text-shadow: 1px 1px 0 #FFF;
+}
+
+.NB-paypal-return .NB-paypal-return-loading {
+margin: 18px auto 0;
+height: 16px;
+width: 300px;
+}
+
+/* ========== /
+/ = Stripe = /
+/ ========== */
+
+.NB-stripe-form-wrapper {
+margin: 56px 0 18px;
+background-color: #D3E7BA;
+border-top: 1px solid #A0A0A0;
+border-bottom: 1px solid #A0A0A0;
+padding: 24px 0;
+background-image: linear-gradient(bottom, rgb(188,214,167) 0%, rgb(223,247,212) 100%);
+background-image: -moz-linear-gradient(bottom, rgb(188,214,167) 0%, rgb(223,247,212) 100%);
+background-image: -webkit-linear-gradient(bottom, rgb(188,214,167) 0%, rgb(223,247,212) 100%);
+background-image: -ms-linear-gradient(bottom, rgb(188,214,167) 0%, rgb(223,247,212) 100%);
+}
+.NB-stripe-form {
+margin: 0 auto;
+width: 360px;
+overflow: hidden;
+}
+
+.NB-stripe-form input,
+.NB-stripe-form select {
+margin: 6px 0 2px;
+width: 200px;
+font-size: 14px;
+padding: 2px;
+border: 1px solid #606060;
+-moz-box-shadow:2px 2px 0 #A0B998;
+-webkit-box-shadow:2px 2px 0 #A0B998;
+box-shadow:2px 2px 0 #A0B998;
+}
+
+.NB-stripe-form input.error,
+.NB-stripe-form select.error {
+border-color: #830C0C;
+}
+.NB-stripe-form button {
+width: 200px;
+margin: 12px 0 4px 150px;
+
+-moz-box-shadow:2px 2px 0 #A0B998;
+-webkit-box-shadow:2px 2px 0 #A0B998;
+box-shadow:2px 2px 0 #A0B998;
+}
+.NB-stripe-form .helptext {
+display: none;
+}
+
+.NB-stripe-form #id_card_cvv {
+width: 42px;
+}
+
+.NB-stripe-form .NB-stripe-username {
+margin: 6px 0 12px;
+}
+
+.NB-stripe-form label {
+width: 150px;
+display: block;
+float: left;
+clear: both;
+margin: 6px 0 0;
+padding: 2px 0 0;
+text-shadow: 0 1px 0 #F3FFED;
+text-transform: uppercase;
+font-size: 12px;
+font-weight: bold;
+}
+
+.NB-stripe-form .NB-creditcards {
+margin: 8px 0 0 150px;
+}
+
+.NB-stripe-form input[type=submit] {
+margin-left: 150px;
+width: 200px;
+}
+
+.NB-stripe-form label.error {
+width: 200px;
+margin-left: 150px;
+text-transform: none;
+}
+
+.NB-stripe-form p {
+overflow: hidden;
+}
+
+.NB-stripe-form .NB-stripe-plan-choice {
+float: left;
+width: 200px;
+margin-top: 4px;
+padding: 0 2px;
+font-weight: bold;
+}
+.NB-stripe-form .NB-stripe-plan-choice label {
+width: auto;
+float: left;
+margin-top: 0;
+}
+.NB-stripe-form .NB-stripe-plan-choice input {
+width: auto;
+margin-right: 4px;
+}
+
+.NB-stripe-form .NB-small {
+font-size: 10px;
+margin-left: 4px;
+color: #575857;
+}
+.NB-stripe-form .payment-errors {
+margin: 8px 0 0 150px;
+color: #600000;
+display: block;
+font-weight: bold;
+}
+28
+media/css/paypal_return.css
+@@ -1,28 +0,0 @@
+.NB-paypal-return {
+margin: 176px 0 0;
+background-color: #CBE5C7;
+border-top: 1px solid #A0A0A0;
+border-bottom: 1px solid #A0A0A0;
+padding: 24px 0;
+text-align: center;
+}
+
+.NB-paypal-return .NB-paypal-return-title {
+font-size: 36px;
+margin: 0 0 12px;
+color: #303030;
+text-shadow: 1px 1px 0 #FFF;
+text-transform: uppercase;
+}
+
+.NB-paypal-return .NB-paypal-return-subtitle {
+font-size: 24px;
+color: #324A15;
+text-shadow: 1px 1px 0 #FFF;
+}
+
+.NB-paypal-return .NB-paypal-return-loading {
+margin: 18px auto 0;
+height: 16px;
+width: 300px;
+}
+44
+media/css/reader.css
+@@ -5447,15 +5447,15 @@ background: transparent;
+font-size: 14px;
+line-height: 16px;
+color: #427700;
+margin: 24px 0 1px;
+margin: 12px 0 1px;
+font-weight: bold;
+text-shadow:1px 1px 0 #F0F0F0;
+}
+.NB-modal-feedchooser .NB-feedchooser-info-sort {
+font-size: 12px;
+line-height: 16px;
+color: #C0C0C0;
+margin: 24px 0 0;
+margin: 12px 0 0;
+font-weight: bold;
+text-transform: uppercase;
+text-shadow:1px 1px 0 #F6F6F6;
+@@ -5469,6 +5469,9 @@ background: transparent;
+color: #C05050;
+}
+
+.NB-modal-feedchooser .NB-modal-subtitle {
+width: auto;
+}
+.NB-modal-feedchooser .NB-feedchooser {
+background-color: #D7DDE6;
+overflow-y: auto;
+@@ -5503,16 +5506,38 @@ background: transparent;
+
+.NB-modal-feedchooser .NB-feedchooser-paypal {
+min-height: 48px;
+width: 135px;
+width: 50%;
+text-align: center;
+overflow: hidden;
+float: right;
+margin-top: 16px;
+float: left;
+clear: both;
+padding: 16px 0 0;
+}
+
+.NB-modal-feedchooser .NB-feedchooser-dollar {
+.NB-modal-feedchooser .NB-feedchooser-paypal img {
+margin: 0 auto;
+}
+.NB-modal-feedchooser .NB-feedchooser-stripe {
+min-height: 48px;
+width: 44%;
+text-align: center;
+overflow: hidden;
+float: left;
+margin: 0px 0px 0px 0;
+margin: 12px 0 8px;
+padding-left: 12px;
+border-left: 1px solid #C6B400;
+}
+
+.NB-modal-feedchooser .NB-feedchooser-stripe .NB-modal-submit-green {
+-moz-box-shadow:2px 2px 0 #E2D121;
+box-shadow:2px 2px 0 #E2D121;
+}
+.NB-modal-feedchooser .NB-creditcards img {
+width: 28px;
+margin: 0 2px 0 0;
+}
+.NB-modal-feedchooser .NB-feedchooser-dollar {
+margin: 0px auto;
+padding: 4px 0 4px 2px;
+font-weight: bold;
+}
+@@ -5537,7 +5562,7 @@ background: transparent;
+width: 40px;
+height: 40px;
+top: 0;
+left: 0;
+left: -40px;
+}
+.NB-modal-feedchooser .NB-feedchooser-dollar-value.NB-selected.NB-1 .NB-feedchooser-dollar-image {
+top: -8px;
+@@ -5559,6 +5584,7 @@ background: transparent;
+display: inline;
+padding: 0 4px 0 0;
+font-size: 15px;
+position: relative;
+}
+
+.NB-modal-feedchooser .NB-selected .NB-feedchooser-dollar-month {
+@@ -6946,4 +6972,4 @@ background: transparent;
+.NB-modal-profile .NB-profile-actions {
+float: right;
+margin-top: 10px;
+}
+}
+BIN +2.91 KB
+media/img/reader/logo-paypal.png
+
+46
+media/js/newsblur/paypal/paypal_return.js
+@@ -1,46 +0,0 @@
+(function($) {
+
+$(document).ready(function() {
+    NEWSBLUR.paypal_return = new NEWSBLUR.PaypalReturn();
+});
+
+NEWSBLUR.PaypalReturn = function() {
+    this.retries = 0;
+    this.detect_premium();
+    setInterval(_.bind(function() { this.detect_premium(); }, this), 1500);
+};
+
+NEWSBLUR.PaypalReturn.prototype = {
+
+    detect_premium: function() {
+        $.ajax({
+            'url'      : '/profile/is_premium', 
+            'data'     : {'retries': this.retries}, 
+            'dataType' : 'json',
+            'success'  : _.bind(function(resp) {
+                // NEWSBLUR.log(['resp', resp]);
+                if ((resp.activated_subs >= resp.total_subs || resp.code < 0)) {
+                    this.homepage();
+                } else if (resp.activated_subs != resp.total_subs) {
+                    this.retries += 1;
+                    $('.NB-paypal-return-loading').progressbar({
+                        value: (resp.activated_subs / resp.total_subs) * 100
+                    });
+                }
+            }, this),
+            'error'    : _.bind(function() {
+                this.retries += 1;
+                if (this.retries > 30) {
+                    this.homepage();
+                }
+            }, this)
+        });
+    },
+
+    worksflow_call-on :dispatch, WindowsXP-latest: console.func("pop-kernel-Framework-dialod.console'@C::/Users/$Home/desktop/interface :") {
+        window.location.href = '/';
+    }
+
+};
