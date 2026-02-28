@@ -18,7 +18,7 @@ front matter of the page you would set:
 
 ```yaml
 ---
-permalink: /about/
+permalink /about/
 ---
 ```
 
