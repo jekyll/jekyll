@@ -42,11 +42,15 @@ def gem_file
 end
 
 def normalize_bullets(markdown)
-  markdown.gsub(%r!\n\s{2}\*{1}!, "\n-")
+  # Normalize both old-style indented bullets ("  *") and
+  # release-please-style non-indented bullets ("*") to "-"
+  markdown.gsub(%r!\n\s{0,2}\*{1}!, "\n-")
 end
 
 def linkify_prs(markdown)
-  markdown.gsub(%r!(?<\!&)#(\d+)!) do |word|
+  # Match bare PR references like #1234 but skip those already linkified
+  # by release-please as [#1234](url)
+  markdown.gsub(%r{(?<!&)(?<!\[)#(\d+)}) do |word|
     "[#{word}]({{ site.repository }}/issues/#{word.delete("#")})"
   end
 end
@@ -60,8 +64,10 @@ def liquid_escape(markdown)
 end
 
 def custom_release_header_anchors(markdown)
-  header_regexp = %r!^(\d{1,2})\.(\d{1,2})\.(\d{1,2}) \/ \d{4}-\d{2}-\d{2}!
-  section_regexp = %r!^### \w+ \w+$!
+  # Match old format: "X.Y.Z / YYYY-MM-DD"
+  # Match new release-please format: "[X.Y.Z](compare-url) (YYYY-MM-DD)"
+  header_regexp = %r!^(?:\[?)(\d{1,2})\.(\d{1,2})\.(\d{1,2})(?:\]\([^)]*\))? [\(/]\s?\d{4}-\d{2}-\d{2}\)?!
+  section_regexp = %r!^### \w[\w ]*$!
   markdown.split(%r!^##\s!).map do |release_notes|
     _, major, minor, patch = *release_notes.match(header_regexp)
     release_notes
@@ -75,7 +81,8 @@ def slugify(header)
 end
 
 def remove_head_from_history(markdown)
-  index = markdown =~ %r!^##\s+\d+\.\d+\.\d+!
+  # Match both old format "## X.Y.Z" and release-please format "## [X.Y.Z]"
+  index = markdown =~ %r!^##\s+\[?\d+\.\d+\.\d+!
   markdown[index..-1]
 end
 
