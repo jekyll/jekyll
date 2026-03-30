@@ -183,6 +183,7 @@ jekyllized
 jekylllayoutconcept
 jekyllrb
 jekyllthemes
+jekyllup
 jemoji
 jmcglone
 johnreilly
