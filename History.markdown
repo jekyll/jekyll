@@ -25,6 +25,7 @@
 
   * Improve readability of `post_url` tag (#9829)
   * Fix flaky test that depends on current minute (#9889)
+  * build: fix broken CI on newer rubies (#9954)
 
 ### Minor Enhancements
 
