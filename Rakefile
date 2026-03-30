@@ -8,6 +8,7 @@ require "yaml"
 
 $LOAD_PATH.unshift File.expand_path("lib", __dir__)
 require "jekyll/version"
+require "bundler/gem_tasks"
 
 Dir.glob("rake/**.rake").each { |f| import f }
 
