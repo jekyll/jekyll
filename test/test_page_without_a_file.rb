@@ -64,7 +64,7 @@ class TestPageWithoutAFile < JekyllUnitTest
         assert_equal "All the properties.\n", regular_page["content"]
         assert_equal "properties.html", regular_page["name"]
 
-        basic_attrs = %w(dir name path url excerpt)
+        basic_attrs = %w(dir name path url)
         attrs = {
           "content"   => nil,
           "dir"       => "/",
