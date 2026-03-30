@@ -38,13 +38,6 @@ fi
 export TZ=UTC
 
 for ruby in $rubies; do
-  if [[ "$ruby" == "jruby" ]]
-  then
-    testopts=""
-  else
-    testopts="--profile"
-  fi
-
   if [[ $# -lt 1 ]]
   then
     set -x
