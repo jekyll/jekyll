@@ -35,7 +35,7 @@ else
 fi
 
 # Tests only pass when timezone offset is zero.
-TZ=UTC
+export TZ=UTC
 
 for ruby in $rubies; do
   if [[ "$ruby" == "jruby" ]]
@@ -53,6 +53,6 @@ for ruby in $rubies; do
    else
     set -x
     time $ruby -S bundle exec ruby -I test \
-      "$@" $testops
+      "$@" $testopts
   fi
 done
