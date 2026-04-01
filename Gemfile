@@ -99,12 +99,7 @@ end
 
 #
 
-group :rdoc, :optional => true do
-  # Psych 5 has stopped bundling `libyaml` and expects it to be installed on the host system prior
-  # to being invoked.
-  # Since we don't have a direct dependency on the Psych gem (it gets included in the gem bundle as
-  # a dependency of the `rdoc` gem), lock psych gem to v4.x instead of installing `libyaml` in our
-  # development / CI environment.
+group :development do
   gem "psych", "~> 4.0"
   gem "rdoc", "~> 6.0"
 end
