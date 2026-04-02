@@ -40,6 +40,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [Talkyard](https://blog-comments.talkyard.io/): Embedded comments for Jekyll and others (free and open source, or hosted serverless)
 
 ### Content Management
+  - [Pages CMS](https://pagescms.org/): Pages CMS is an open-source, Git-based CMS for static sites and apps. It lets you edit Hugo content stored in a GitHub repository through a web interface, with support for front matter fields, media management, rich text editing, etc.
   - [CloudCannon](https://cloudcannon.com/): The Cloud CMS for Jekyll
   - [Contentful](https://github.com/contentful/jekyll-contentful-data-import): Content infrastructure for digital teams
   - [TinaCMS.io](https://tina.io/): Tina is an open-source, Git-backed headless content management system (CMS) that empowers both developers and content creators to collaborate seamlessly on a single platform
