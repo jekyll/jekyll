@@ -44,6 +44,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [Contentful](https://github.com/contentful/jekyll-contentful-data-import): Content infrastructure for digital teams
   - [TinaCMS.io](https://tina.io/): Tina is an open-source, Git-backed headless content management system (CMS) that empowers both developers and content creators to collaborate seamlessly on a single platform
   - [Decap CMS](https://decapcms.org/): Decap CMS (formerly Netlify CMS) is an open source content management system for your Git workflow that enables you to provide editors with a friendly UI and intuitive workflows
+  - [GitCMS](https://gitcms.dev/): GitCMS is an AI-focused CMS for markdown-based content sites that brings together Content Agents for ChatGPT and Claude using MCP app, a friendly notion-like interface for non-technical team members, and a structured editorial publishing workflow. It is built for teams that want to manage blogs, documentation, changelogs, and other markdown content with the speed of AI assistance and the reliability of a review-driven publishing process.
   - [Siteleaf](https://www.siteleaf.com/): Built for developers, Loved by everyone
   - [Kentico Kontent](https://rubygems.org/gems/kontent-jekyll/): A headless CMS with full control over content presentation
 
