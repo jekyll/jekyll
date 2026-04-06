@@ -1,3 +1,5 @@
+# This workflow checks to ensure that all PR titles conform to the conventional
+# commit spec and use the correct type and scopes
 name: Conventional Commit Check
 
 permissions:
