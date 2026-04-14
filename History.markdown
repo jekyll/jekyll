@@ -20,6 +20,7 @@
   * docs: Update contributor badge in README to include avatar height and limit parameters (#9912)
   * Update WDM (0.1.1 → 0.2.0) in the Windows docs (#9897)
   * Bump supported versions (#9923)
+  * Add GitCMS to resources docs (#9960)
 
 ### Development Fixes
 
