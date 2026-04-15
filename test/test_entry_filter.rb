@@ -101,6 +101,41 @@ class TestEntryFilter < JekyllUnitTest
           got: #{included_paths.inspect}"
     end
 
+    should "not double-nest paths when included? and excluded? both call relative_to_source" do
+      @site.exclude = %w(excluded_dir)
+      @site.include = %w(excluded_dir/included_subdir)
+
+      # Simulate recursing into excluded_dir, where Dir["**/*"] yields bare relative entries
+      filter = EntryFilter.new(@site, source_dir("excluded_dir"))
+
+      # included? and excluded? each call relative_to_source independently on the
+      # same raw entry - no double-nesting occurs
+      assert filter.included?("included_subdir"),
+             "included_subdir should be recognized as included"
+      assert filter.included?("included_subdir/included.html"),
+             "nested file should be recognized as included via parent path"
+      refute filter.included?("excluded.html"),
+             "file outside included_subdir should not be included"
+
+      # excluded? uses the same relative_to_source call and should stay consistent
+      assert filter.excluded?("excluded.html"),
+             "non-included file should be excluded"
+
+      # filter combines both: excluded but also included entries pass through
+      filtered = filter.filter(%w(included_subdir excluded.html))
+      assert_includes filtered, "included_subdir"
+      refute_includes filtered, "excluded.html"
+
+      # Even with a contrived "../" entry, relative_to_source produces
+      # a consistent path for both included? and excluded?
+      assert_equal filter.send(:relative_to_source, "foo/../bar"),
+                   File.join(filter.base_directory, "foo/../bar")
+      # Both methods resolve against the same relative_to_source output,
+      # so no double-nesting occurs regardless of entry shape
+      refute filter.included?("foo/../included_subdir")
+      assert filter.excluded?("foo/../excluded.html")
+    end
+
     should "keep safe symlink entries when safe mode enabled" do
       allow(File).to receive(:symlink?).with("symlink.js").and_return(true)
       files = %w(symlink.js)
