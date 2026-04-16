@@ -1,6 +1,8 @@
-<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
-<script> docsearch({
-apiKey: '50fe39c839958dfad797000f33e2ec17',
+<script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js" integrity="sha256-B3bGKjxv7LblSTt9M3Vua3f7fFBrBoklWlCE+P/Dy0U=" crossorigin="anonymous"></script>
+<span id="docsearch-config" data-api-key="{{ site.docsearch.api_key | escape }}" hidden></span>
+<script>
+docsearch({
+apiKey: document.getElementById('docsearch-config').getAttribute('data-api-key'),
 indexName: 'jekyllrb',
 inputSelector: '#docsearch-input',
 enhancedSearchInput: true,
