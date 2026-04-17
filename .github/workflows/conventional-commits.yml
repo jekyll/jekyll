@@ -4,8 +4,8 @@
 # nice cheatsheet in a github gist at
 # https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13
 #
-# The types in this list conform to the spec. The scopes are custom to Jekyll
-# and can be changed if desired.
+# The types in this workflow match the spec. The scopes are custom to
+# Jekyll and can be changed if desired.
 name: Conventional Commit Check
 
 permissions:
