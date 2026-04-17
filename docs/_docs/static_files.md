@@ -80,7 +80,7 @@ defaults:
       image: true
 ```
 
-This assumes that your Jekyll site has a folder path of `assets/img` where  you have images (static files) stored. When Jekyll builds the site, it will treat each image as if it had the front matter value of `image: true`.
+This assumes that your Jekyll site has a folder path of `assets/img` where you have images (static files) stored. When Jekyll builds the site, it will treat each image as if it had the front matter value of `image: true`.
 
 Suppose you want to list all your image assets as contained in `assets/img`. You could use this for loop to look in the `static_files` object and get all static files that have this front matter property:
 
