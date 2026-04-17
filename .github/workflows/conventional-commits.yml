@@ -1,0 +1,50 @@
+# This workflow checks to ensure that all PR titles conform to the conventional
+# commit spec and use the correct type and scopes. The spec for conventional
+# commits can be found at https://www.conventionalcommits.org and there is a
+# nice cheatsheet in a github gist at
+# https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13
+#
+# The types in this workflow match the spec. The scopes are custom to
+# Jekyll and can be changed if desired.
+name: Conventional Commit Check
+
+permissions:
+  pull-requests: read
+
+on:
+  pull_request_target:
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+    branches:
+      - master
+
+jobs:
+  commit_lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: amannn/action-semantic-pull-request@v5.5.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            perf
+            refactor
+            docs
+            style
+            test
+            chore
+          scopes: |
+            core
+            cli
+            commands
+            plugins
+            site
+            helpers
+            converters
+            filters
+            tags
+            drops
+            tests
+            docs
+          requireScope: false
