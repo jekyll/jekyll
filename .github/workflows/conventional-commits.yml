@@ -1,5 +1,11 @@
 # This workflow checks to ensure that all PR titles conform to the conventional
-# commit spec and use the correct type and scopes
+# commit spec and use the correct type and scopes. The spec for conventional
+# commits can be found at https://www.conventionalcommits.org and there is a
+# nice cheatsheet in a github gist at
+# https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13
+#
+# The types in this list conform to the spec. The scopes are custom to Jekyll
+# and can be changed if desired.
 name: Conventional Commit Check
 
 permissions:
