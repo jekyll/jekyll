@@ -95,7 +95,7 @@ module Jekyll
     def generate_url_from_drop(template)
       template.gsub(%r!:([a-z_]+)!) do |match|
         name = Regexp.last_match(1)
-        pool = name.end_with?("_") ? [name, name.chomp!("_")] : [name]
+        pool = possible_keys(name)
 
         winner = pool.find { |key| @placeholders.key?(key) }
         if winner.nil?
