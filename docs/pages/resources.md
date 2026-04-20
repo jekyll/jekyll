@@ -15,6 +15,7 @@ some of the most popular Jekyll resources.
 - [jekyllthemes.org](http://jekyllthemes.org/)
 - [jekyllthemes.io](https://jekyllthemes.io/)
 - [builtatlightspeed.com](https://builtatlightspeed.com/category/jekyll)
+- [htmlrev.com](https://htmlrev.com/free-jekyll-templates.html)
 
 See also: [docs/themes](/docs/themes/).
 
