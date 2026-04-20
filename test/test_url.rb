@@ -71,6 +71,16 @@ class TestURL < JekyllUnitTest
       ).to_s
     end
 
+    should "prefer an exact UrlDrop key match with a trailing underscore" do
+      _, matching_doc = fixture_document("_methods/configuration.md")
+      matching_doc.url_placeholders["slug_"] = "trailing-underscore"
+
+      assert_equal "/trailing-underscore", URL.new(
+        :template     => "/:slug_",
+        :placeholders => matching_doc.url_placeholders
+      ).to_s
+    end
+
     should "raise custom error when URL placeholder doesn't have key" do
       _, matching_doc = fixture_document("_methods/escape-+ #%20[].md")
       assert_raises NoMethodError do
