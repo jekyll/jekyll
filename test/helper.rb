@@ -29,6 +29,7 @@ require "ostruct"
 require "minitest/autorun"
 require "minitest/reporters"
 require "minitest/profile"
+Minitest.register_plugin :profile if Minitest.respond_to?(:register_plugin)
 require "rspec/mocks"
 require_relative "../lib/jekyll"
 

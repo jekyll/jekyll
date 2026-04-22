@@ -40,11 +40,10 @@ module Jekyll
     # Returns a Set with the file paths
     def existing_files
       files = Set.new
-      regex = keep_file_regex
       dirs = keep_dirs
 
       Utils.safe_glob(site.in_dest_dir, ["**", "*"], File::FNM_DOTMATCH).each do |file|
-        next if HIDDEN_FILE_REGEX.match?(file) || regex.match?(file) || dirs.include?(file)
+        next if HIDDEN_FILE_REGEX.match?(file) || keep_file?(file) || dirs.include?(file)
 
         files << file
       end
@@ -94,18 +93,24 @@ module Jekyll
     #
     # Returns a Set with the directory paths
     def keep_dirs
-      site.keep_files.flat_map { |file| parent_dirs(site.in_dest_dir(file)) }.to_set
+      site.keep_files.flat_map do |pattern|
+        paths = Utils.safe_glob(site.dest, [pattern], File::FNM_DOTMATCH)
+        paths = [site.in_dest_dir(pattern)] if paths.empty?
+        paths.flat_map { |path| parent_dirs(path) }
+      end.to_set
     end
 
-    # Private: Creates a regular expression from the config's keep_files array
+    # Private: Returns true if the given file matches any pattern in keep_files.
+    # Supports glob patterns (*, **, ?, [...]), and also preserves all files
+    # under a matched directory path.
     #
-    # Examples
-    #   ['.git','.svn'] with site.dest "/myblog/_site" creates
-    #   the following regex: /\A\/myblog\/_site\/(\.git|\/.svn)/
-    #
-    # Returns the regular expression
-    def keep_file_regex
-      %r!\A#{Regexp.quote(site.dest)}/(#{Regexp.union(site.keep_files).source})!
+    # Returns a Boolean
+    def keep_file?(file)
+      relative = file.delete_prefix("#{site.dest}/")
+      site.keep_files.any? do |pattern|
+        File.fnmatch?(pattern, relative, File::FNM_PATHNAME | File::FNM_DOTMATCH) ||
+          relative.start_with?("#{pattern}/")
+      end
     end
   end
 end

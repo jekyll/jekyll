@@ -517,6 +517,7 @@ module Jekyll
       if safe || config["disable_disk_cache"]
         Jekyll::Cache.disable_disk_cache!
       else
+        Jekyll::Cache.enable_disk_cache!
         hide_cache_dir_from_git
       end
     end

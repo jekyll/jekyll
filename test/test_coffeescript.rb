@@ -2,6 +2,7 @@
 
 require "helper"
 
+# TODO: currently ignored in Rakefile
 class TestCoffeeScript < JekyllUnitTest
   context "converting CoffeeScript" do
     setup do

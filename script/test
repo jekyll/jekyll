@@ -42,7 +42,7 @@ for ruby in $rubies; do
   then
     set -x
     time $ruby -S bundle exec \
-      rake TESTOPTS=$testopts test
+      rake TESTOPTS="$testopts" test
    else
     set -x
     time $ruby -S bundle exec ruby -I test \
