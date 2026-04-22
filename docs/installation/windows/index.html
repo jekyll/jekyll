@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="Jekyll • Simple, blog-aware, static sites" />
 <meta property="og:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-04-14T10:58:22-07:00" />
+<meta property="article:published_time" content="2026-04-22T07:50:06-07:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://jekyllrb.com/img/jekyll-og.png" />
 <meta property="twitter:title" content="Jekyll on Windows" />
 <meta name="twitter:site" content="@jekyllrb" />
 <meta name="google-site-verification" content="onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-04-14T10:58:22-07:00","datePublished":"2026-04-14T10:58:22-07:00","description":"While Windows is not an officially-supported platform, it can be used to run Jekyll with the proper tweaks.","headline":"Jekyll on Windows","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/installation/windows/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/installation/windows/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-04-22T07:50:06-07:00","datePublished":"2026-04-22T07:50:06-07:00","description":"While Windows is not an officially-supported platform, it can be used to run Jekyll with the proper tweaks.","headline":"Jekyll on Windows","image":"https://jekyllrb.com/img/jekyll-og.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://jekyllrb.com/docs/installation/windows/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://jekyllrb.com/img/logo-2x.png"}},"url":"https://jekyllrb.com/docs/installation/windows/"}</script>
 <!-- End Jekyll SEO tag -->
 
   <!--[if lt IE 9]>
@@ -174,32 +174,9 @@ If the error persists, please open a <a href="https://github.com/oneclick/rubyin
 
 <p>Make sure all your packages and repositories are up to date. Open a new Command Prompt or PowerShell window and type <code class="language-plaintext highlighter-rouge">bash</code>.</p>
 
-<p>Your terminal should now be a Bash instance. Next, update your repository lists and packages:</p>
+<p>Your terminal should now be a Bash instance. Then, <a href="https://jekyllrb.com/docs/installation/ubuntu/">follow the installation procedure for Ubuntu</a>.</p>
 
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update <span class="nt">-y</span> <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt-get upgrade <span class="nt">-y</span>
-</code></pre></div></div>
-
-<p>Next, install Ruby. To do this, let’s use a repository from <a href="https://www.brightbox.com/docs/ruby/ubuntu/">BrightBox</a>,
-which hosts optimized versions of Ruby for Ubuntu.</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-add-repository ppa:brightbox/ruby-ng
-<span class="nb">sudo </span>apt-get update
-<span class="nb">sudo </span>apt-get <span class="nb">install </span>ruby2.5 ruby2.5-dev build-essential dh-autoreconf
-</code></pre></div></div>
-
-<p>Next, update your Ruby gems:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem update
-</code></pre></div></div>
-
-<p>Install Jekyll:</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem <span class="nb">install </span>jekyll bundler
-</code></pre></div></div>
-
-<p class="note info">No <code class="language-plaintext highlighter-rouge">sudo</code> here.</p>
-
-<p>Check your Jekyll version:</p>
+<p>Once this is done, check your Jekyll version:</p>
 
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll <span class="nt">-v</span>
 </code></pre></div></div>
