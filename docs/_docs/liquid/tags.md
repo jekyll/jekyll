@@ -36,6 +36,14 @@ end
 ```
 {% endraw %}
 
+This results in:
+
+{% highlight ruby %}
+def foo
+  puts 'foo'
+end
+{% endhighlight %}
+
 The argument to the `highlight` tag (`ruby` in the example above) is the
 language identifier. To find the appropriate identifier to use for the language
 you want to highlight, look for the “short name” on the [Rouge
@@ -66,6 +74,14 @@ end
 ```
 {% endraw %}
 
+This results in:
+
+{% highlight ruby linenos %}
+def foo
+  puts 'foo'
+end
+{% endhighlight %}
+
 ### Marking specific lines {%- include docs_version_badge.html version="4.4.0" -%}
 {: #marking-specific-lines }
 
@@ -84,7 +100,36 @@ end
 ```
 {% endraw %}
 
+This results in:
+
+{% highlight ruby mark_lines="1 2" %}
+def foo
+  puts 'foo'
+end
+{% endhighlight %}
+
 A default class name of `hll` will be applied to the marked lines.
+
+`mark_lines` can be used alongside argument `linenos` as well. For example,
+consider a combination of above examples:
+
+{% raw %}
+```liquid
+{% highlight ruby linenos mark_lines="1 2" %}
+def foo
+  puts 'foo'
+end
+{% endhighlight %}
+```
+{% endraw %}
+
+This results in:
+
+{% highlight ruby linenos mark_lines="1 2" %}
+def foo
+  puts 'foo'
+end
+{% endhighlight %}
 
 ### Stylesheets for syntax highlighting
 
