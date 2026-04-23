@@ -206,6 +206,10 @@ you don't have a proper JavaScript runtime. To solve this, either install
 `execjs` and `therubyracer` gems, or install `nodejs`. Check out
 [issue #2327](https://github.com/jekyll/jekyll/issues/2327) for more info.
 
+### Timeout Error
+
+If you get a timeout error after `bundle install`, disconnect your wifi, turn it on again after a minute, and see if that solves the timeout error.
+
 ## Problems running Jekyll
 
 ### macOS
