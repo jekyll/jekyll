@@ -183,9 +183,12 @@ module Jekyll
     # Whether the collection's documents ought to be written as individual
     #   files in the output.
     #
-    # Returns true if the 'write' metadata is true, false otherwise.
+    # Returns true if the 'write' metadata is true and
+    #   if the collection's target matches the site's target,
+    #   false otherwise.
     def write?
-      !!metadata.fetch("output", false)
+      !!metadata.fetch("output", false) &&
+        (site.target == metadata.fetch("target", site.target))
     end
 
     # The URL template to render collection's documents at.
@@ -217,7 +220,7 @@ module Jekyll
     def read_document(full_path)
       doc = Document.new(full_path, :site => site, :collection => self)
       doc.read
-      docs << doc if site.unpublished || doc.published?
+      docs << doc if (site.unpublished || doc.published?) && (site.target == doc.data.fetch("target", site.target))
     end
 
     def sort_docs!
