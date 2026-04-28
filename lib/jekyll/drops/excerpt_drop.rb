@@ -3,6 +3,10 @@
 module Jekyll
   module Drops
     class ExcerptDrop < DocumentDrop
+      def attachments
+        @obj.doc.attachments
+      end
+
       def layout
         @obj.doc.data["layout"]
       end
