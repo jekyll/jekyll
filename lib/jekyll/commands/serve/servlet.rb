@@ -77,7 +77,7 @@ module Jekyll
           @new_body.each do |line|
             if !@livereload_added && line["<head"]
               line.gsub!(HEAD_TAG_REGEX) do |match|
-                %(#{match}#{template.result(binding)})
+                %(#{match}#{live_reload_script})
               end
 
               @livereload_added = true
@@ -90,7 +90,7 @@ module Jekyll
         end
         # rubocop:enable Metrics/MethodLength
 
-        def template
+        def live_reload_script
           # Unclear what "snipver" does. Doc at
           # https://github.com/livereload/livereload-js states that the recommended
           # setting is 1.
@@ -98,16 +98,18 @@ module Jekyll
           # Complicated JavaScript to ensure that livereload.js is loaded from the
           # same origin as the page.  Mostly useful for dealing with the browser's
           # distinction between 'localhost' and 127.0.0.1
-          @template ||= ERB.new(<<~TEMPLATE)
+          port = @options["livereload_port"]
+          args = livereload_args
+          <<~SCRIPT
             <script>
               document.write(
                 '<script src="' + location.protocol + '//' +
                 (location.host || 'localhost').split(':')[0] +
-                ':<%=@options["livereload_port"] %>/livereload.js?snipver=1<%= livereload_args %>"' +
+                ':#{port}/livereload.js?snipver=1#{args}"' +
                 '></' +
                 'script>');
             </script>
-          TEMPLATE
+          SCRIPT
         end
 
         def livereload_args
@@ -194,7 +196,11 @@ module Jekyll
 
         def set_defaults
           hash_ = @jekyll_opts.fetch("webrick", {}).fetch("headers", {})
-          DEFAULTS.each_with_object(@headers = hash_) do |(key, val), hash|
+          sanitized = {}
+          hash_.each do |key, val|
+            sanitized[key.to_s.gsub(/[\r\n]/, "")] = val.to_s.gsub(/[\r\n]/, "")
+          end
+          DEFAULTS.each_with_object(@headers = sanitized) do |(key, val), hash|
             hash[key] = val unless hash.key?(key)
           end
         end
