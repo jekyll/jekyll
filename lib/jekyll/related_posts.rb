@@ -11,7 +11,7 @@ module Jekyll
     def initialize(post)
       @post = post
       @site = post.site
-      Jekyll::External.require_with_graceful_fail("classifier-reborn") if site.lsi
+      Jekyll::External.require_with_graceful_fail("classifier") if site.lsi
     end
 
     def build
@@ -27,7 +27,7 @@ module Jekyll
 
     def build_index
       self.class.lsi ||= begin
-        lsi = ClassifierReborn::LSI.new(:auto_rebuild => false)
+        lsi = Classifier::LSI.new(auto_rebuild: false, incremental: true)
         Jekyll.logger.info("Populating LSI...")
 
         site.posts.docs.each do |x|
