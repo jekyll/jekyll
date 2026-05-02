@@ -6,8 +6,6 @@
 # the rake task via `bundle exec rake rubocop:format_config`.
 # -----------------------------------------------------------------------------
 
-inherit_from: ".rubocop_todo.yml"
-
 require:
 - "./rubocop/jekyll"
 - rubocop-minitest
