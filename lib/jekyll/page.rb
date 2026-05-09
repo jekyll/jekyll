@@ -150,12 +150,20 @@ module Jekyll
     # dest - The String path to the destination dir.
     #
     # Returns the destination file path String.
-    def destination(dest)
+    def destination(dest, ext = output_ext)
       @destination ||= {}
-      @destination[dest] ||= begin
+      @destination[[dest, ext]] ||= begin
         path = site.in_dest_dir(dest, URL.unescape_path(url))
         path = File.join(path, "index") if url.end_with?("/")
-        path << output_ext unless path.end_with? output_ext
+        replace_output_ext(path, ext)
+      end
+    end
+
+    def replace_output_ext(path, ext)
+      if path.end_with?(output_ext)
+        path.delete_suffix(output_ext) << ext
+      else
+        path << ext unless path.end_with?(ext)
         path
       end
     end

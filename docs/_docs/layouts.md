@@ -99,6 +99,23 @@ The rendered output of this page is:
 </html>
 ```
 
+## Multiple output formats
+
+If multiple layout files share the same base name, Jekyll renders one output
+file for each layout extension. For example, a page with `layout: post` will
+render with both `_layouts/post.html` and `_layouts/post.json` when both files
+exist.
+
+The primary output keeps the extension assigned by the source file, such as
+`.html` for a Markdown file. Additional outputs use the matching layout
+extension and the same URL path. If the primary page is written to
+`/events/my-event/`, the JSON output is written to `/events/my-event/index.json`.
+
+When a format-specific layout inherits another layout, Jekyll uses the parent
+layout with the same extension when it exists. A single non-HTML layout file
+without sibling formats keeps the previous behavior and does not create an
+additional output file.
+
 ## Inheritance
 
 Layout inheritance is useful when you want to add something to an existing

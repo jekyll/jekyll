@@ -68,6 +68,8 @@ module Jekyll
     # Returns String rendered document output
     # rubocop: disable Metrics/AbcSize, Metrics/MethodLength
     def render_document
+      document.additional_outputs = {} if document.respond_to?(:additional_outputs=)
+
       info = {
         :registers        => { :site => site, :page => payload["page"] },
         :strict_filters   => liquid_options["strict_filters"],
@@ -90,7 +92,7 @@ module Jekyll
 
       if document.place_in_layout?
         Jekyll.logger.debug "Rendering Layout:", document.relative_path
-        output = place_in_layouts(output, payload, info)
+        output = place_in_layout_variants(output, payload, info)
       end
 
       output
@@ -152,7 +154,28 @@ module Jekyll
       layout = layouts[document.data["layout"].to_s]
       validate_layout(layout)
 
+      place_in_layout_chain(output, payload, info, layout)
+    end
+
+    def place_in_layout_variants(content, payload, info)
+      layout = layouts[document.data["layout"].to_s]
+      validate_layout(layout)
+      return content unless layout
+
+      variants = layout_variants_for(layout)
+      return place_in_layout_chain(content, payload, info, layout) if variants.one?
+
+      outputs = render_layout_variants(content, payload, info, variants)
+
+      document.additional_outputs = additional_outputs_for(outputs)
+      primary_output_for(outputs, layout)
+    end
+
+    def place_in_layout_chain(content, payload, info, layout)
+      output = content.dup
       used = Set.new([layout])
+      original_content = payload["content"]
+      original_layout = payload["layout"]
 
       # Reset the payload layout data to ensure it starts fresh for each page.
       payload["layout"] = nil
@@ -161,12 +184,15 @@ module Jekyll
         output = render_layout(output, layout, info)
         add_regenerator_dependencies(layout)
 
-        next unless (layout = site.layouts[layout.data["layout"]])
+        next unless (layout = next_layout_for(layout))
         break if used.include?(layout)
 
         used << layout
       end
       output
+    ensure
+      payload["content"] = original_content
+      payload["layout"] = original_layout
     end
 
     private
@@ -204,6 +230,43 @@ module Jekyll
         site.in_source_dir(document.path),
         layout.path
       )
+    end
+
+    def layout_variants_for(layout)
+      variants = site.layout_variants.fetch(document.data["layout"].to_s, [layout])
+      [layout, *(variants - [layout])]
+    end
+
+    def render_layout_variants(content, payload, info, variants)
+      variants.each_with_object({}) do |variant, result|
+        result[variant.ext] ||= with_layout_output_format(variant.ext) do
+          place_in_layout_chain(content, payload, info, variant)
+        end
+      end
+    end
+
+    def next_layout_for(layout)
+      name = layout.data["layout"]
+      return site.layouts[name] unless @layout_output_format
+
+      variants = site.layout_variants.fetch(name.to_s, [])
+      variants.find { |variant| variant.ext == @layout_output_format }
+    end
+
+    def with_layout_output_format(output_format)
+      original_output_format = @layout_output_format
+      @layout_output_format = output_format
+      yield
+    ensure
+      @layout_output_format = original_output_format
+    end
+
+    def additional_outputs_for(outputs)
+      outputs.reject { |ext, _| ext == output_ext }
+    end
+
+    def primary_output_for(outputs, layout)
+      outputs[output_ext] || outputs[layout.ext] || outputs.values.first
     end
 
     # Set page content to payload and assign pager if document has one.

@@ -640,6 +640,92 @@ class TestSite < JekyllUnitTest
       end
     end
 
+    context "rendering pages with multiple layout formats" do
+      setup do
+        clear_dest
+        FileUtils.rm_f(source_dir(".jekyll-metadata"))
+        File.write(
+          source_dir("_layouts", "multiformat.html"),
+          "---\nlayout: wrapper\n---\nHTML: {{ content | strip }}"
+        )
+        File.write(
+          source_dir("_layouts", "multiformat.ical"),
+          "---\nlayout: wrapper\n---\nICAL: {{ page.title }} {{ content | strip }}"
+        )
+        File.write(
+          source_dir("_layouts", "wrapper.html"),
+          "WRAPPED HTML: {{ content | strip }}"
+        )
+        File.write(
+          source_dir("_layouts", "wrapper.ical"),
+          "WRAPPED ICAL: {{ content | strip }}"
+        )
+        File.write(
+          source_dir("multiformat.md"),
+          "---\nlayout: multiformat\ntitle: Calendar Event\n---\nEvent body\n"
+        )
+        File.write(
+          source_dir("_layouts", "xmlonly.xml"),
+          "XML: {{ content | strip }}"
+        )
+        File.write(
+          source_dir("xmlonly.md"),
+          "---\nlayout: xmlonly\n---\nSingle layout body\n"
+        )
+      end
+
+      teardown do
+        FileUtils.rm_f(source_dir("_layouts", "multiformat.html"))
+        FileUtils.rm_f(source_dir("_layouts", "multiformat.ical"))
+        FileUtils.rm_f(source_dir("_layouts", "wrapper.html"))
+        FileUtils.rm_f(source_dir("_layouts", "wrapper.ical"))
+        FileUtils.rm_f(source_dir("_layouts", "xmlonly.xml"))
+        FileUtils.rm_f(source_dir("multiformat.md"))
+        FileUtils.rm_f(source_dir("xmlonly.md"))
+        FileUtils.rm_f(source_dir(".jekyll-metadata"))
+        clear_dest
+      end
+
+      should "write one output file for each layout format" do
+        site = fixture_site
+        site.process
+
+        assert_exist dest_dir("multiformat.html")
+        assert_exist dest_dir("multiformat.ical")
+        assert_match "WRAPPED HTML: HTML:", File.read(dest_dir("multiformat.html"))
+        assert_match "WRAPPED ICAL: ICAL: Calendar Event", File.read(dest_dir("multiformat.ical"))
+      end
+
+      should "not write an additional file for a single non-HTML layout" do
+        site = fixture_site
+        site.process
+
+        assert_exist dest_dir("xmlonly.html")
+        refute_exist dest_dir("xmlonly.xml")
+      end
+
+      should "preserve additional output files in incremental builds" do
+        site = fixture_site("incremental" => true)
+        site.process
+        site = fixture_site("incremental" => true)
+        site.process
+
+        assert_exist dest_dir("multiformat.html")
+        assert_exist dest_dir("multiformat.ical")
+      end
+
+      should "regenerate when an additional output file is missing" do
+        site = fixture_site("incremental" => true)
+        site.process
+        FileUtils.rm_f(dest_dir("multiformat.ical"))
+        site = fixture_site("incremental" => true)
+        site.process
+
+        assert_exist dest_dir("multiformat.html")
+        assert_exist dest_dir("multiformat.ical")
+      end
+    end
+
     context "with liquid profiling" do
       setup do
         @site = Site.new(site_configuration("profile" => true))

@@ -6,6 +6,7 @@ module Jekyll
     extend Forwardable
 
     attr_reader :path, :site, :extname, :collection, :type
+    attr_writer :additional_outputs
     attr_accessor :content, :output
 
     def_delegator :self, :read_post_data, :post_read
@@ -117,6 +118,10 @@ module Jekyll
     # Returns the output extension
     def output_ext
       renderer.output_ext
+    end
+
+    def additional_outputs
+      @additional_outputs ||= {}
     end
 
     # The base filename of the document, without the file extname.
@@ -256,17 +261,17 @@ module Jekyll
     # base_directory - the base path of the output directory
     #
     # Returns the full path to the output file of this document.
-    def destination(base_directory)
+    def destination(base_directory, ext = output_ext)
       @destination ||= {}
-      @destination[base_directory] ||= begin
+      @destination[[base_directory, ext]] ||= begin
         path = site.in_dest_dir(base_directory, URL.unescape_path(url))
-        if url.end_with? "/"
-          path = File.join(path, "index.html")
-        else
-          path << output_ext unless path.end_with? output_ext
-        end
-        path
+        url.end_with?("/") ? File.join(path, "index#{ext}") : replace_output_ext(path, ext)
       end
+    end
+
+    def destination_paths(base_directory)
+      ([destination(base_directory)] +
+        additional_output_exts.map { |ext| destination(base_directory, ext) }).uniq
     end
 
     # Write the generated Document file to the destination directory.
@@ -279,6 +284,7 @@ module Jekyll
       FileUtils.mkdir_p(File.dirname(path))
       Jekyll.logger.debug "Writing:", path
       File.write(path, output, :mode => "wb")
+      write_additional_outputs(dest, path)
 
       trigger_hooks(:post_write)
     end
@@ -477,6 +483,32 @@ module Jekyll
     def merge_defaults
       defaults = @site.frontmatter_defaults.all(relative_path, type)
       merge_data!(defaults, :source => "front matter defaults") unless defaults.empty?
+    end
+
+    def replace_output_ext(path, ext)
+      if path.end_with?(output_ext)
+        path.delete_suffix(output_ext) << ext
+      else
+        path << ext unless path.end_with?(ext)
+        path
+      end
+    end
+
+    def additional_output_exts
+      variants = site.layout_variants.fetch(data["layout"].to_s, [])
+      variant_exts = variants.size > 1 ? variants.map(&:ext) : []
+      (variant_exts + additional_outputs.keys).uniq - [output_ext]
+    end
+
+    def write_additional_outputs(dest, primary_path)
+      additional_outputs.each do |ext, content|
+        path = destination(dest, ext)
+        next if path == primary_path
+
+        FileUtils.mkdir_p(File.dirname(path))
+        Jekyll.logger.debug "Writing:", path
+        File.write(path, content, :mode => "wb")
+      end
     end
 
     def read_content(**opts)
