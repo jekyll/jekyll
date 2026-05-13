@@ -274,6 +274,37 @@ You can have multiple themes listed in your site's `Gemfile`, but only one theme
 
 If you're publishing your Jekyll site on [GitHub Pages](https://pages.github.com/), note that GitHub Pages supports only [some gem-based themes](https://pages.github.com/themes/). GitHub Pages also supports [using any theme hosted on GitHub](https://help.github.com/articles/adding-a-jekyll-theme-to-your-github-pages-site/#adding-a-jekyll-theme-in-your-sites-_configyml-file) using the `remote_theme` configuration as if it were a gem-based theme.
 
+## Installing a local theme {#installing-a-local-theme}
+
+You can keep a theme in your site repository without packaging it as a gem. Add
+the theme files to `_themes/<THEME_NAME>` and set `theme` in your `_config.yml`:
+
+```yml
+theme: my-theme
+```
+
+```sh
+.
+├── _config.yml
+├── _posts
+└── _themes
+    └── my-theme
+        ├── _includes
+        ├── _layouts
+        ├── _sass
+        ├── _data
+        └── assets
+```
+
+Jekyll first tries to load `theme` as a gem-based theme. If no matching theme
+gem is installed, Jekyll looks for `_themes/<THEME_NAME>`. A local theme uses
+the same directories as a gem-based theme: `assets`, `_data`, `_layouts`,
+`_includes`, and `_sass`. Files in your site still override files from the
+local theme.
+
+If `_themes/<THEME_NAME>` is not present, Jekyll also checks for a single
+`_theme` directory.
+
 ## Creating a gem-based theme
 
 If you're a Jekyll theme developer (rather than a consumer of themes), you can package up your theme in RubyGems and allow users to install it through Bundler.
