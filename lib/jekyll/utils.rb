@@ -17,6 +17,7 @@ module Jekyll
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^\\p{M}\\p{L}\\p{Nd}._~!$&'()+,;=@]+").freeze
     SLUGIFY_ASCII_REGEXP = Regexp.new("[^[A-Za-z0-9]]+").freeze
     OUTPUT_FORMAT_REGEXP = %r!\A[A-Za-z0-9][A-Za-z0-9_-]*\z!.freeze
+    HTML_OUTPUT_EXTENSIONS = %w(.html .htm .xhtml).freeze
 
     # Takes a slug and turns it into a simple title.
     def titleize_slug(slug)
@@ -24,11 +25,43 @@ module Jekyll
     end
 
     def output_exts(outputs)
+      return [] if outputs.nil? || outputs == false || output_exts_auto?(outputs)
+
       Array(outputs).filter_map do |output|
         output = output.to_s.delete_prefix(".")
-        next if output.empty? || output == "html" || !OUTPUT_FORMAT_REGEXP.match?(output)
+        ext = ".#{output}"
+        next if output.empty? || html_output_ext?(ext) || !OUTPUT_FORMAT_REGEXP.match?(output)
 
-        ".#{output}"
+        ext
+      end.uniq
+    end
+
+    def html_output_ext?(ext)
+      HTML_OUTPUT_EXTENSIONS.include?(ext.to_s.downcase)
+    end
+
+    def output_exts_auto?(outputs)
+      outputs.to_s == "auto"
+    end
+
+    def additional_output_exts(layouts, layout_name, outputs, primary_ext)
+      extnames = if output_exts_auto?(outputs)
+                   layout_variant_exts(layouts, layout_name)
+                 else
+                   output_exts(outputs)
+                 end
+
+      extnames.reject { |ext| ext == primary_ext }
+    end
+
+    def layout_variant_exts(layouts, layout_name)
+      return [] if layout_name.nil?
+
+      layouts.filter_map do |name, layout|
+        ext = layout.ext.to_s
+        next if ext.empty?
+
+        ext if name.to_s == "#{layout_name}#{ext}"
       end.uniq
     end
 

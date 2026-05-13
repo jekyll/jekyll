@@ -22,11 +22,7 @@ module Jekyll
     # A set of extensions that are considered HTML or HTML-like so we
     # should not alter them,  this includes .xhtml through XHTM5.
 
-    HTML_EXTENSIONS = %w(
-      .html
-      .xhtml
-      .htm
-    ).freeze
+    HTML_EXTENSIONS = Utils::HTML_OUTPUT_EXTENSIONS
 
     # Initialize a new Page.
     #
@@ -167,9 +163,9 @@ module Jekyll
     #
     # Returns an Array of destination file path Strings.
     def destination_paths(dest)
-      [destination(dest)] + additional_output_exts.map do |ext|
+      ([destination(dest)] + additional_output_exts.map do |ext|
         destination(dest, ext)
-      end
+      end).uniq
     end
 
     # Returns the object as a debug String.

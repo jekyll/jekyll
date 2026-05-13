@@ -280,9 +280,9 @@ module Jekyll
     #
     # Returns an Array of output file paths for this document.
     def destination_paths(base_directory)
-      [destination(base_directory)] + additional_output_exts.map do |ext|
+      ([destination(base_directory)] + additional_output_exts.map do |ext|
         destination(base_directory, ext)
-      end
+      end).uniq
     end
 
     # Write the generated Document file to the destination directory.
@@ -476,11 +476,13 @@ module Jekyll
     end
 
     def configured_additional_output_exts
+      return [] unless place_in_layout?
+
       requested_output_exts.select { |ext| site.layouts["#{data["layout"]}#{ext}"] }
     end
 
     def requested_output_exts
-      Utils.output_exts(data["outputs"]).reject { |ext| ext == output_ext }
+      Utils.additional_output_exts(site.layouts, data["layout"], data["outputs"], output_ext)
     end
 
     def replace_output_ext(path, ext)

@@ -2,6 +2,8 @@
 
 module Jekyll
   class Renderer
+    MISSING_PAYLOAD_VALUE = Object.new.freeze
+
     attr_reader :document, :site
     attr_writer :layouts, :payload
 
@@ -154,11 +156,18 @@ module Jekyll
       output = content.dup
       layout = layouts[layout_name.to_s]
       validate_layout(layout, layout_name)
+      format_ext ||= layout.ext if layout && !Utils.html_output_ext?(layout.ext)
 
+      preserve_payload_state do
+        # Reset the payload layout data to ensure it starts fresh for each page.
+        payload["layout"] = nil
+        output = render_layout_chain(output, layout, format_ext, info)
+      end
+      output
+    end
+
+    def render_layout_chain(output, layout, format_ext, info)
       used = Set.new([layout])
-
-      # Reset the payload layout data to ensure it starts fresh for each page.
-      payload["layout"] = nil
 
       while layout
         output = render_layout(output, layout, info)
@@ -169,6 +178,7 @@ module Jekyll
 
         used << layout
       end
+
       output
     end
 
@@ -205,7 +215,9 @@ module Jekyll
     end
 
     def requested_output_exts
-      Utils.output_exts(document.data["outputs"]).reject { |ext| ext == output_ext }
+      Utils.additional_output_exts(
+        layouts, document.data["layout"], document.data["outputs"], output_ext
+      )
     end
 
     def clear_additional_outputs
@@ -218,12 +230,28 @@ module Jekyll
       [layout_config, nil]
     end
 
+    def preserve_payload_state
+      previous_content = payload.key?("content") ? payload["content"] : MISSING_PAYLOAD_VALUE
+      previous_layout = payload.key?("layout") ? payload["layout"] : MISSING_PAYLOAD_VALUE
+
+      yield
+    ensure
+      restore_payload_value("content", previous_content)
+      restore_payload_value("layout", previous_layout)
+    end
+
+    def restore_payload_value(key, value)
+      return payload.delete(key) if value.equal?(MISSING_PAYLOAD_VALUE)
+
+      payload[key] = value
+    end
+
     def next_layout(layout_name, format_ext)
       return unless layout_name
 
-      return site.layouts["#{layout_name}#{format_ext}"] || site.layouts[layout_name] if format_ext
+      return layouts["#{layout_name}#{format_ext}"] || layouts[layout_name] if format_ext
 
-      site.layouts[layout_name]
+      layouts[layout_name]
     end
 
     # Render layout content into document.output
@@ -274,8 +302,10 @@ module Jekyll
     end
 
     def assign_layout_data!
+      payload["content"] = nil
+      payload["layout"] = nil
       layout = layouts[document.data["layout"]]
-      payload["layout"] = Utils.deep_merge_hashes(layout.data, payload["layout"] || {}) if layout
+      payload["layout"] = layout.data if layout
     end
 
     def permalink_ext

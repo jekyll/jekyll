@@ -263,11 +263,13 @@ module Jekyll
     end
 
     def configured_additional_output_exts
+      return [] unless place_in_layout?
+
       requested_output_exts.select { |ext| site.layouts["#{data["layout"]}#{ext}"] }
     end
 
     def requested_output_exts
-      Utils.output_exts(data["outputs"]).reject { |ext| ext == output_ext }
+      Utils.additional_output_exts(site.layouts, data["layout"], data["outputs"], output_ext)
     end
 
     def write_output(path, content)

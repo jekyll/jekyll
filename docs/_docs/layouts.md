@@ -124,11 +124,18 @@ the additional output is written to `/events/may/index.ics`.
 
 Additional outputs are explicit. Adding `_layouts/event.ics` does not change
 pages that only specify `layout: event`; those pages must also set `outputs`.
+Set `outputs: auto` to generate one output for each same-basename layout. For
+example, a page with `layout: event` and `outputs: auto` uses `_layouts/event.html`
+for the primary output and also writes outputs for sibling layouts such as
+`_layouts/event.ics`.
+
 You can use
-[front matter defaults](/docs/configuration/front-matter-defaults/) to enable an
-additional format for many pages at once. Requested output names must be simple
-extension names, such as `ics` or `json`. If the matching layout does not exist,
-Jekyll warns and skips that additional output.
+[front matter defaults](/docs/configuration/front-matter-defaults/) to enable
+`outputs: auto` or an additional format for many pages at once. Set
+`outputs: false` or `outputs: []` on a page to disable additional outputs there.
+Requested output names must be simple extension names, such as `ics` or `json`.
+If the matching layout does not exist, Jekyll warns and skips that additional
+output.
 
 ## Inheritance
 

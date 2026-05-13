@@ -66,7 +66,7 @@ module Jekyll
         return
       end
 
-      if !@layouts.key?(name) || (html_layout?(file) && @layouts[name].ext != ".html")
+      if !@layouts.key?(name) || (html_layout?(file) && !Utils.html_output_ext?(@layouts[name].ext))
         @layouts[name] = layout
       end
     end
@@ -76,7 +76,7 @@ module Jekyll
     end
 
     def html_layout?(file)
-      File.extname(file) == ".html"
+      Utils.html_output_ext?(File.extname(file))
     end
 
     def within(directory)
