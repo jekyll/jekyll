@@ -2,6 +2,8 @@
 
 module Jekyll
   class Renderer
+    MISSING_PAYLOAD_VALUE = Object.new.freeze
+
     attr_reader :document, :site
     attr_writer :layouts, :payload
 
@@ -88,9 +90,11 @@ module Jekyll
       document.trigger_hooks(:post_convert)
       output = document.content
 
+      clear_additional_outputs
+
       if document.place_in_layout?
         Jekyll.logger.debug "Rendering Layout:", document.relative_path
-        output = place_in_layouts(output, payload, info)
+        output = render_layout_outputs(output, payload, info)
       end
 
       output
@@ -140,32 +144,60 @@ module Jekyll
     # layout - the layout to check
     #
     # Returns Boolean true if the layout is invalid, false if otherwise
-    def invalid_layout?(layout)
-      !document.data["layout"].nil? && layout.nil? && !(document.is_a? Jekyll::Excerpt)
+    def invalid_layout?(layout, layout_name = document.data["layout"])
+      !layout_name.nil? && layout.nil? && !(document.is_a? Jekyll::Excerpt)
     end
 
     # Render layouts and place document content inside.
     #
     # Returns String rendered content
-    def place_in_layouts(content, payload, info)
+    def place_in_layouts(content, payload, info, layout_config = document.data["layout"])
+      layout_name, format_ext = layout_name_and_format(layout_config)
       output = content.dup
-      layout = layouts[document.data["layout"].to_s]
-      validate_layout(layout)
+      layout = layouts[layout_name.to_s]
+      validate_layout(layout, layout_name)
+      format_ext ||= layout.ext if layout && !Utils.html_output_ext?(layout.ext)
 
+      preserve_payload_state do
+        # Reset the payload layout data to ensure it starts fresh for each page.
+        payload["layout"] = nil
+        output = render_layout_chain(output, layout, format_ext, info)
+      end
+      output
+    end
+
+    def render_layout_chain(output, layout, format_ext, info)
       used = Set.new([layout])
-
-      # Reset the payload layout data to ensure it starts fresh for each page.
-      payload["layout"] = nil
 
       while layout
         output = render_layout(output, layout, info)
         add_regenerator_dependencies(layout)
 
-        next unless (layout = site.layouts[layout.data["layout"]])
+        next unless (layout = next_layout(layout.data["layout"], format_ext))
         break if used.include?(layout)
 
         used << layout
       end
+
+      output
+    end
+
+    def render_layout_outputs(content, payload, info)
+      layout_name = document.data["layout"]
+      return place_in_layouts(content, payload, info) if layout_name.nil?
+
+      output = place_in_layouts(content, payload, info, layout_name)
+      requested_output_exts.each do |ext|
+        format_layout_name = "#{layout_name}#{ext}"
+        layout = layouts[format_layout_name]
+        validate_layout(layout, format_layout_name)
+        next unless layout
+
+        document.additional_outputs[ext] = place_in_layouts(
+          content, payload, info, [format_layout_name, ext]
+        )
+      end
+
       output
     end
 
@@ -175,11 +207,51 @@ module Jekyll
     #
     # layout - the layout to check
     # Returns nothing
-    def validate_layout(layout)
-      return unless invalid_layout?(layout)
+    def validate_layout(layout, layout_name = document.data["layout"])
+      return unless invalid_layout?(layout, layout_name)
 
-      Jekyll.logger.warn "Build Warning:", "Layout '#{document.data["layout"]}' requested " \
+      Jekyll.logger.warn "Build Warning:", "Layout '#{layout_name}' requested " \
                                            "in #{document.relative_path} does not exist."
+    end
+
+    def requested_output_exts
+      Utils.additional_output_exts(
+        layouts, document.data["layout"], document.data["outputs"], output_ext
+      )
+    end
+
+    def clear_additional_outputs
+      document.additional_outputs.clear if document.respond_to?(:additional_outputs)
+    end
+
+    def layout_name_and_format(layout_config)
+      return layout_config if layout_config.is_a?(Array)
+
+      [layout_config, nil]
+    end
+
+    def preserve_payload_state
+      previous_content = payload.key?("content") ? payload["content"] : MISSING_PAYLOAD_VALUE
+      previous_layout = payload.key?("layout") ? payload["layout"] : MISSING_PAYLOAD_VALUE
+
+      yield
+    ensure
+      restore_payload_value("content", previous_content)
+      restore_payload_value("layout", previous_layout)
+    end
+
+    def restore_payload_value(key, value)
+      return payload.delete(key) if value.equal?(MISSING_PAYLOAD_VALUE)
+
+      payload[key] = value
+    end
+
+    def next_layout(layout_name, format_ext)
+      return unless layout_name
+
+      return layouts["#{layout_name}#{format_ext}"] || layouts[layout_name] if format_ext
+
+      layouts[layout_name]
     end
 
     # Render layout content into document.output
@@ -230,8 +302,10 @@ module Jekyll
     end
 
     def assign_layout_data!
+      payload["content"] = nil
+      payload["layout"] = nil
       layout = layouts[document.data["layout"]]
-      payload["layout"] = Utils.deep_merge_hashes(layout.data, payload["layout"] || {}) if layout
+      payload["layout"] = layout.data if layout
     end
 
     def permalink_ext
