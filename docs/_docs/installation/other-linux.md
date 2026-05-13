@@ -40,7 +40,7 @@ sudo emerge --ask --verbose jekyll
 ### ArchLinux
 
 ```sh
-sudo pacman -S ruby base-devel
+sudo pacman -S ruby base-devel ruby-erb
 ```
 
 ### OpenSUSE

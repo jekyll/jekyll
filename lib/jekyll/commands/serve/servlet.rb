@@ -160,9 +160,7 @@ module Jekyll
         def do_GET(req, res)
           rtn = super
 
-          if @jekyll_opts["livereload"]
-            return rtn if SkipAnalyzer.skip_processing?(req, res, @jekyll_opts)
-
+          if @jekyll_opts["livereload"] && !SkipAnalyzer.skip_processing?(req, res, @jekyll_opts)
             processor = BodyProcessor.new(res.body, @jekyll_opts)
             processor.process!
             res.body = processor.new_body

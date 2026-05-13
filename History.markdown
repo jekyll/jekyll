@@ -1,3 +1,39 @@
+## HEAD
+
+### Bug Fixes
+
+  * Avoid caching resource when called via `include_relative` tag (#9784)
+  * Fix logs containing IPv6 URLs (#9813)
+  * Do not treat colons in `url_placeholders` as URI delimiters (#9850)
+  * Fix servlet do_GET header logic (#9867)
+  * Add logger to Gemfile for Ruby 4.0 (#9920)
+
+### Documentation
+
+  * Improve documentation on collections in step-by-step walkthrough (#9803)
+  * Add `https://form.taxi` as a third-party resource for forms (#9802)
+  * Add Supranode to third-party deployment guide (#9786)
+  * Document the need for a `Gemfile` in deployment step of step-by-step walkthrough (#9805)
+  * Add Azion to the 3rd party deployment docs (#9811)
+  * Add ruby-erb prerequisite for Arch Linux installations (#9832)
+  * Add jekyllup.com to themes documentation (#9882)
+  * docs: Update contributor badge in README to include avatar height and limit parameters (#9912)
+  * Update WDM (0.1.1 → 0.2.0) in the Windows docs (#9897)
+  * Bump supported versions (#9923)
+  * Add GitCMS to resources docs (#9960)
+
+### Development Fixes
+
+  * Improve readability of `post_url` tag (#9829)
+  * Fix flaky test that depends on current minute (#9889)
+  * build: fix broken CI on newer rubies (#9954)
+
+### Minor Enhancements
+
+  * feat: Allowing post_url tag to receive liquid variables (#9776)
+  * Add .ruby-lsp to default excludes (#9914)
+  * Allow configuring future metadata for individual collections (#9925)
+
 ## 4.4.1 / 2025-01-29
 
 ### Bug Fixes

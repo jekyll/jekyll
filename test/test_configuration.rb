@@ -73,6 +73,7 @@ class TestConfiguration < JekyllUnitTest
       exclude = @config["exclude"]
       assert_includes exclude, ".sass-cache"
       assert_includes exclude, ".jekyll-cache"
+      assert_includes exclude, ".ruby-lsp"
     end
   end
 

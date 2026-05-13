@@ -1,3 +1,4 @@
+azion
 builtins
 github
 hakiri
@@ -7,6 +8,7 @@ Microsoft
 ssh
 Statictastic
 statictastic
+supranode
 ubuntu
 Wikipedia
 workaround

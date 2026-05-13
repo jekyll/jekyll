@@ -157,3 +157,37 @@ Feature: PostUrl Tag
     But the _site directory should exist
     And I should see "<p><a href=\"/cats%20and%20dogs/2019/02/04/hello-world.html\">Post 1</a></p>" in "_site/index.html"
     And I should see "<p><a href=\"/2019/02/05/hello-again.html\">Post 2</a></p>" in "_site/index.html"
+
+  Scenario: Calling for a post via a liquid variable
+    Given I have a _posts directory
+    And I have the following post:
+      | title       | date       | content           |
+      | Hello World | 2019-02-04 | Lorem ipsum dolor |
+    And I have an "index.md" page with content:
+      """
+      {% assign value='2019-02-04-hello-world' %}
+      [Welcome]({% post_url {{ value }} %})
+      """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "<p><a href=\"/2019/02/04/hello-world.html\">Welcome</a></p>" in "_site/index.html"
+
+  Scenario: Calling for posts via a liquid variable in a for tag
+    Given I have a _posts directory
+    And I have the following post:
+      | title         | date       | content           |
+      | Hello World   | 2019-02-04 | Lorem ipsum dolor |
+      | We Meet Again | 2019-02-05 | Alpha beta gamma  |
+    And I have an "index.md" page with content:
+      """
+      {% assign posts = '2019-02-04-hello-world;2019-02-05-we-meet-again' | split: ';' %}
+      {%- for slug in posts -%}
+        [{{ slug }}]({% post_url {{ slug }} %})
+      {%- endfor %}
+      """
+    When I run jekyll build
+    Then I should get a zero exit status
+    And the _site directory should exist
+    And I should see "<a href=\"/2019/02/04/hello-world.html\">2019-02-04-hello-world</a>" in "_site/index.html"
+    And I should see "<a href=\"/2019/02/05/we-meet-again.html\">2019-02-05-we-meet-again</a>" in "_site/index.html"

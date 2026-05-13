@@ -45,37 +45,9 @@ You must have [Windows Subsystem for Linux](https://msdn.microsoft.com/en-us/com
 
 Make sure all your packages and repositories are up to date. Open a new Command Prompt or PowerShell window and type `bash`.
 
-Your terminal should now be a Bash instance. Next, update your repository lists and packages:
+Your terminal should now be a Bash instance. Then, [follow the installation procedure for Ubuntu](https://jekyllrb.com/docs/installation/ubuntu/).
 
-```sh
-sudo apt-get update -y && sudo apt-get upgrade -y
-```
-
-Next, install Ruby. To do this, let's use a repository from [BrightBox](https://www.brightbox.com/docs/ruby/ubuntu/),
-which hosts optimized versions of Ruby for Ubuntu.
-
-```sh
-sudo apt-add-repository ppa:brightbox/ruby-ng
-sudo apt-get update
-sudo apt-get install ruby2.5 ruby2.5-dev build-essential dh-autoreconf
-```
-
-Next, update your Ruby gems:
-
-```sh
-gem update
-```
-
-Install Jekyll:
-
-```sh
-gem install jekyll bundler
-```
-
-{: .note .info}
-  No `sudo` here.
-
-Check your Jekyll version:
+Once this is done, check your Jekyll version:
 
 ```sh
 jekyll -v
@@ -138,7 +110,7 @@ While `listen` has built-in support for UNIX systems, it may require an extra ge
 Add the following to the `Gemfile` for your site if you have issues with auto-regeneration on Windows alone:
 
 ```ruby
-gem "wdm", "~> 0.1.1", :install_if => Gem.win_platform?
+gem "wdm", "~> 0.2.0", :install_if => Gem.win_platform?
 ```
 
 You have to use a [Ruby+Devkit](https://rubyinstaller.org/downloads/) version of the RubyInstaller and install

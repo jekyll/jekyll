@@ -243,7 +243,7 @@ module Jekyll
         def format_url(ssl_enabled, address, port, baseurl = nil)
           format("%<prefix>s://%<address>s:%<port>i%<baseurl>s",
                  :prefix  => ssl_enabled ? "https" : "http",
-                 :address => address,
+                 :address => address.include?(":") ? "[#{address}]" : address,
                  :port    => port,
                  :baseurl => baseurl ? "#{baseurl}/" : "")
         end

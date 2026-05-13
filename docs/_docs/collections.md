@@ -124,6 +124,16 @@ You can link to the generated page using the `url` attribute:
 ```
 {% endraw %}
 
+## Future
+
+You can configure a collection to show future items by setting the `future` metadata to `true` in the collection's configuration.
+
+```yaml
+collections:
+  staff_members:
+    future: true
+```
+
 ## Permalinks
 
 There are special [permalink variables for collections]({{ '/docs/permalinks/#collections' | relative_url }}) to
