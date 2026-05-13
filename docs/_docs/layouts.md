@@ -99,6 +99,37 @@ The rendered output of this page is:
 </html>
 ```
 
+## Multiple output formats
+
+Pages and documents can request additional output formats with the `outputs`
+front matter key. Jekyll keeps the normal `layout` output as the primary output
+and looks for matching layouts with the requested extensions.
+
+For example, this page uses `_layouts/event.html` for its HTML output and
+`_layouts/event.ics` for its calendar output:
+
+```markdown
+---
+title: Meetup
+layout: event
+outputs:
+  - ics
+---
+May meetup details
+```
+
+Jekyll writes the usual HTML file and an additional file with the `.ics`
+extension at the same URL path. With a pretty permalink such as `/events/may/`,
+the additional output is written to `/events/may/index.ics`.
+
+Additional outputs are explicit. Adding `_layouts/event.ics` does not change
+pages that only specify `layout: event`; those pages must also set `outputs`.
+You can use
+[front matter defaults](/docs/configuration/front-matter-defaults/) to enable an
+additional format for many pages at once. Requested output names must be simple
+extension names, such as `ics` or `json`. If the matching layout does not exist,
+Jekyll warns and skips that additional output.
+
 ## Inheritance
 
 Layout inheritance is useful when you want to add something to an existing

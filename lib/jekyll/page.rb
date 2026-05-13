@@ -148,15 +148,27 @@ module Jekyll
     # Obtain destination path.
     #
     # dest - The String path to the destination dir.
+    # ext  - The String extension for the output file.
     #
     # Returns the destination file path String.
-    def destination(dest)
+    def destination(dest, ext = output_ext)
       @destination ||= {}
-      @destination[dest] ||= begin
+      @destination[[dest, ext]] ||= begin
         path = site.in_dest_dir(dest, URL.unescape_path(url))
         path = File.join(path, "index") if url.end_with?("/")
-        path << output_ext unless path.end_with? output_ext
+        path = replace_output_ext(path, ext)
         path
+      end
+    end
+
+    # Obtain destination paths for the main and additional output files.
+    #
+    # dest - The String path to the destination dir.
+    #
+    # Returns an Array of destination file path Strings.
+    def destination_paths(dest)
+      [destination(dest)] + additional_output_exts.map do |ext|
+        destination(dest, ext)
       end
     end
 
@@ -198,6 +210,12 @@ module Jekyll
     end
 
     private
+
+    def replace_output_ext(path, ext)
+      return path if path.end_with?(ext)
+
+      path.delete_suffix(output_ext) << ext
+    end
 
     def generate_excerpt
       return unless generate_excerpt?

@@ -16,10 +16,20 @@ module Jekyll
     SLUGIFY_DEFAULT_REGEXP = Regexp.new("[^\\p{M}\\p{L}\\p{Nd}]+").freeze
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^\\p{M}\\p{L}\\p{Nd}._~!$&'()+,;=@]+").freeze
     SLUGIFY_ASCII_REGEXP = Regexp.new("[^[A-Za-z0-9]]+").freeze
+    OUTPUT_FORMAT_REGEXP = %r!\A[A-Za-z0-9][A-Za-z0-9_-]*\z!.freeze
 
     # Takes a slug and turns it into a simple title.
     def titleize_slug(slug)
       slug.split("-").map!(&:capitalize).join(" ")
+    end
+
+    def output_exts(outputs)
+      Array(outputs).filter_map do |output|
+        output = output.to_s.delete_prefix(".")
+        next if output.empty? || output == "html" || !OUTPUT_FORMAT_REGEXP.match?(output)
+
+        ".#{output}"
+      end.uniq
     end
 
     # Non-destructive version of deep_merge_hashes! See that method.
