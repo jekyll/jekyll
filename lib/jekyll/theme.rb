@@ -87,4 +87,38 @@ module Jekyll
             "The #{name} theme could not be found."
     end
   end
+
+  class LocalTheme < Theme
+    def self.from_site(site, name)
+      root = local_theme_root(site, name)
+      root && new(name, root)
+    end
+
+    def self.local_theme_root(site, name)
+      candidate = site.in_source_dir("_themes", name)
+      return File.realpath(candidate) if File.directory?(candidate)
+
+      fallback = site.in_source_dir("_theme")
+      File.realpath(fallback) if File.directory?(fallback)
+    rescue Errno::EACCES, Errno::ELOOP
+      nil
+    end
+
+    attr_reader :root
+
+    def initialize(name, root)
+      @name = name.downcase.strip
+      @root = root
+      Jekyll.logger.debug "Theme:", name
+      Jekyll.logger.debug "Theme source:", root
+    end
+
+    def version
+      nil
+    end
+
+    def runtime_dependencies
+      []
+    end
+  end
 end

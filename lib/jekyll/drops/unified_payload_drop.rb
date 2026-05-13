@@ -17,7 +17,9 @@ module Jekyll
       end
 
       def theme
-        @theme_drop ||= ThemeDrop.new(@obj.theme) if @obj.theme
+        return if @obj.theme.nil? || @obj.theme.is_a?(Jekyll::LocalTheme)
+
+        @theme_drop ||= ThemeDrop.new(@obj.theme)
       end
 
       private
