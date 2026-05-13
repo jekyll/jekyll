@@ -80,9 +80,7 @@ class TestDocument < JekyllUnitTest
     should "not mutate its data when resolving a fallback date" do
       refute @document.data.key?("date")
 
-      @document.data.each do
-        @document.to_liquid["date"]
-      end
+      @document.to_liquid["date"]
 
       refute @document.data.key?("date")
     end
