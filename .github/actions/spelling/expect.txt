@@ -35,7 +35,6 @@ breadcrumbs
 briandoll
 bridgetown
 bridgetownrb
-brightbox
 brighterplanet
 buddyworks
 builtatlightspeed
@@ -144,12 +143,14 @@ ghp
 ghpages
 giraffeacademy
 githubcom
+gitcms
 gitlab
 gjtorikian
 globbed
 gotcha
 Goulven
 gridism
+GPT
 GSo
 gsubbing
 hashbang
@@ -450,7 +451,6 @@ vps
 vwochnik
 WAI
 wdm
-We'd
 webfonts
 webhosting
 webmentions
