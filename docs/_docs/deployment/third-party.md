@@ -16,6 +16,12 @@ Read this [step-by-step guide](https://medium.com/@jameshamann/deploy-your-jekyl
 and update Jekyll websites. Take advantage of our global CDN, automated SSL,
 continuous deployment and [more](https://cloudcannon.com/features/).
 
+## DeployHQ
+
+[DeployHQ](https://www.deployhq.com) is a Git-based deployment service that builds your Jekyll site on its own infrastructure and transfers the rendered `_site/` directory to your own server over SSH, SFTP, FTP, or to cloud storage such as Amazon S3, Azure Blob Storage, or Rackspace Cloud Files. You connect a GitHub, GitLab, or Bitbucket repository, point each environment at a branch, and every push triggers a build.
+
+Build pipelines can run any shell command, so a typical Jekyll project runs `bundle install` followed by `bundle exec jekyll build` and ships the contents of `_site/` to your webroot. Each release is atomic, with one-click rollback, deploy hooks, and per-environment config-file injection — useful for keeping `_config.yml` overrides or `.env` values out of your repository. Multiple environments per project (for example staging and production mapped to different branches) are supported, and there is a free tier available at [deployhq.com/signup](https://www.deployhq.com/signup).
+
 ## GitHub Pages
 
 Sites on GitHub Pages are powered by Jekyll behind the scenes, so if you’re looking for a zero-hassle, zero-cost solution, GitHub Pages are a great way to [host your Jekyll-powered website for free](/docs/github-pages/).
