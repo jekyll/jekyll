@@ -259,11 +259,21 @@ module Jekyll
 
         def launch_browser(server, opts)
           address = server_address(server, opts)
-          return system "start", address if Utils::Platforms.windows?
-          return system "xdg-open", address if Utils::Platforms.linux?
-          return system "open", address if Utils::Platforms.osx?
-
-          Jekyll.logger.error "Refusing to launch browser. Platform launcher unknown."
+          unless address.start_with?("http://", "https://")
+            Jekyll.logger.error "Refusing to launch browser. Invalid address: #{address}"
+            return
+          end
+          launcher =
+            if Utils::Platforms.windows? then "start"
+            elsif Utils::Platforms.linux? then "xdg-open"
+            elsif Utils::Platforms.osx? then "open"
+            end
+          if launcher
+            pid = Process.spawn(launcher, address) # nosemgrep: ruby.lang.security.dangerous-exec.dangerous-exec
+            Process.detach(pid)
+          else
+            Jekyll.logger.error "Refusing to launch browser. Platform launcher unknown."
+          end
         end
 
         # Keep in our area with a thread or detach the server as requested
