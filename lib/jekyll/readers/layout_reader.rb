@@ -15,9 +15,11 @@ module Jekyll
           Layout.new(site, layout_directory, layout_file)
       end
 
-      theme_layout_entries.each do |layout_file|
-        @layouts[layout_name(layout_file)] ||= \
-          Layout.new(site, theme_layout_directory, layout_file)
+      site.themes.each do |theme|
+        theme_layout_entries(theme).each do |layout_file|
+          @layouts[layout_name(layout_file)] ||= \
+            Layout.new(site, theme.layouts_path, layout_file)
+        end
       end
 
       @layouts
@@ -37,8 +39,8 @@ module Jekyll
       entries_in layout_directory
     end
 
-    def theme_layout_entries
-      theme_layout_directory ? entries_in(theme_layout_directory) : []
+    def theme_layout_entries(theme)
+      theme.layouts_path ? entries_in(theme.layouts_path) : []
     end
 
     def entries_in(dir)

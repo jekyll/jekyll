@@ -409,6 +409,19 @@ module Jekyll
     def in_theme_dir(*paths)
       return nil unless theme
 
+      in_theme_dir_with_theme(theme, *paths)
+    end
+
+    # Public: Prefix a given path with the given theme's directory.
+    #
+    # theme - The Theme whose directory should be prefixed.
+    # paths - (optional) path elements to a file or directory within the
+    #         theme directory.
+    #
+    # Returns a path which is prefixed with the given theme's root directory.
+    def in_theme_dir_with_theme(theme, *paths)
+      return nil unless theme
+
       paths.reduce(theme.root) do |base, path|
         Jekyll.sanitized_path(base, path)
       end
@@ -447,6 +460,33 @@ module Jekyll
       @collections_path ||= dir_str.empty? ? source : in_source_dir(dir_str)
     end
 
+    # Public: The selected theme followed by its optional parent theme.
+    #
+    # Jekyll intentionally supports only one inheritance level. Keeping the
+    # hierarchy shallow makes resource provenance and theme upgrades
+    # predictable for both authors and users.
+    def themes
+      return [] unless theme
+      return @themes if @themes
+
+      parent_theme = theme.parent_theme
+      if parent_theme&.parent_theme
+        raise Jekyll::Errors::InvalidConfigurationError,
+              "Theme inheritance is limited to one parent: #{theme.name} cannot inherit from " \
+              "#{parent_theme.name}, because that theme already has a parent."
+      end
+
+      @themes = [theme, parent_theme].compact.freeze
+    end
+
+    # Public: Return the configured theme containing the given path.
+    def theme_containing(path)
+      expanded_path = File.expand_path(path)
+      themes.find do |candidate|
+        expanded_path == candidate.root || expanded_path.start_with?("#{candidate.root}/")
+      end
+    end
+
     # Public
     #
     # Returns the object as a debug String.
@@ -459,21 +499,21 @@ module Jekyll
     def load_theme_configuration(config)
       return config if config["ignore_theme_config"] == true
 
-      theme_config_file = in_theme_dir("_config.yml")
-      return config unless File.exist?(theme_config_file)
+      theme_config = themes.reverse.reduce({}) do |merged_config, configured_theme|
+        config_file = in_theme_dir_with_theme(configured_theme, "_config.yml")
+        next merged_config unless File.file?(config_file) && !File.symlink?(config_file)
 
-      # Bail out if the theme_config_file is a symlink file irrespective of safe mode
-      return config if File.symlink?(theme_config_file)
+        loaded_config = SafeYAML.load_file(config_file)
+        next merged_config unless loaded_config.is_a?(Hash)
 
-      theme_config = SafeYAML.load_file(theme_config_file)
-      return config unless theme_config.is_a?(Hash)
+        Jekyll.logger.info "Theme Config file:", config_file
 
-      Jekyll.logger.info "Theme Config file:", theme_config_file
+        # Theme config should not override Jekyll's defaults.
+        loaded_config.delete_if { |key, _| Configuration::DEFAULTS.key?(key) }
+        Utils.deep_merge_hashes(merged_config, loaded_config)
+      end
 
-      # theme_config should not be overriding Jekyll's defaults
-      theme_config.delete_if { |key, _| Configuration::DEFAULTS.key?(key) }
-
-      # Override theme_config with existing config and return the result.
+      # A child overrides its parent, and the site overrides both themes.
       # Additionally ensure we return a `Jekyll::Configuration` instance instead of a Hash.
       Utils.deep_merge_hashes(theme_config, config)
         .each_with_object(Jekyll::Configuration.new) do |(key, value), conf|
@@ -528,6 +568,7 @@ module Jekyll
 
     def configure_theme
       self.theme = nil
+      @themes = nil
       return if config["theme"].nil?
 
       self.theme =
@@ -542,7 +583,9 @@ module Jekyll
 
     def configure_include_paths
       @includes_load_paths = Array(in_source_dir(config["includes_dir"].to_s))
-      @includes_load_paths << theme.includes_path if theme&.includes_path
+      themes.each do |configured_theme|
+        @includes_load_paths << configured_theme.includes_path if configured_theme.includes_path
+      end
     end
 
     def configure_file_read_opts

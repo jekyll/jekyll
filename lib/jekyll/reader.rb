@@ -29,12 +29,11 @@ module Jekyll
     # Returns nothing.
     def read_data
       @site.data = DataReader.new(site).read(site.config["data_dir"])
-      return unless site.theme&.data_path
+      return unless site.theme
 
-      theme_data = DataReader.new(
-        site,
-        :in_source_dir => site.method(:in_theme_dir)
-      ).read(site.theme.data_path)
+      theme_data = site.themes.reverse.reduce({}) do |merged_data, theme|
+        Jekyll::Utils.deep_merge_hashes(merged_data, read_theme_data(theme))
+      end
       @site.data = Jekyll::Utils.deep_merge_hashes(theme_data, @site.data)
     end
 
@@ -157,6 +156,17 @@ module Jekyll
     end
 
     private
+
+    def read_theme_data(theme)
+      return {} unless theme.data_path
+
+      DataReader.new(
+        site,
+        :in_source_dir => lambda do |*paths|
+          site.in_theme_dir_with_theme(theme, *paths)
+        end
+      ).read(theme.data_path)
+    end
 
     # Internal
     #

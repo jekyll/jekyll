@@ -78,6 +78,31 @@ class TestPluginManager < JekyllUnitTest
     end
   end
 
+  context "require theme dependencies" do
+    should "load plugins from child and parent themes without loading the themes" do
+      child_theme = double(
+        :name                 => "child-theme",
+        :runtime_dependencies => [
+          Gem::Dependency.new("parent-theme"),
+          Gem::Dependency.new("child-plugin"),
+        ]
+      )
+      parent_theme = double(
+        :name                 => "parent-theme",
+        :runtime_dependencies => [
+          Gem::Dependency.new("jekyll"),
+          Gem::Dependency.new("parent-plugin"),
+        ]
+      )
+      site = double(:safe => false, :themes => [child_theme, parent_theme])
+
+      expect(Jekyll::External).to receive(:require_with_graceful_fail).with("child-plugin")
+      expect(Jekyll::External).to receive(:require_with_graceful_fail).with("parent-plugin")
+
+      PluginManager.new(site).require_theme_deps
+    end
+  end
+
   context "site is not marked as safe" do
     should "allow all plugins" do
       site = double(:safe => false)

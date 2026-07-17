@@ -23,9 +23,9 @@ module Jekyll
       @base = base
       @name = name
 
-      if site.theme && site.theme.layouts_path.eql?(base)
-        @base_dir = site.theme.root
-        @path = site.in_theme_dir(base, name)
+      if (theme = site.theme_containing(base))
+        @base_dir = theme.root
+        @path = site.in_theme_dir_with_theme(theme, base, name)
       else
         @base_dir = site.source
         @path = site.in_source_dir(base, name)
