@@ -28,6 +28,8 @@ jobs:
             version: "3.3"
           - label: Ruby 3.4
             version: "3.4"
+          - label: Ruby 4.0
+            version: "4.0"
         os:
           - label: Linux
             image: "ubuntu-latest"

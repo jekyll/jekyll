@@ -12,7 +12,8 @@ group :development do
   gem "pry-byebug" unless RUBY_ENGINE == "jruby"
 end
 
-#
+gem "rdoc", "~> 6.0"
+gem "ostruct"
 
 group :test do
   gem "activesupport", "< 7.1.0"
@@ -106,7 +107,6 @@ group :rdoc, :optional => true do
   # a dependency of the `rdoc` gem), lock psych gem to v4.x instead of installing `libyaml` in our
   # development / CI environment.
   gem "psych", "~> 4.0"
-  gem "rdoc", "~> 6.0"
 end
 
 #
