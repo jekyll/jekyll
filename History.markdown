@@ -34,6 +34,24 @@
   * Add .ruby-lsp to default excludes (#9914)
   * Allow configuring future metadata for individual collections (#9925)
 
+## [5.0.0](https://github.com/jekyll/jekyll/compare/v4.4.1...v5.0.0) (2026-08-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* Streamline the release process for Jekyll ([#9760](https://github.com/jekyll/jekyll/issues/9760))
+
+### Features
+
+* Allowing post_url tag to receive liquid variables ([#9776](https://github.com/jekyll/jekyll/issues/9776)) ([79a8e16](https://github.com/jekyll/jekyll/commit/79a8e16f22991c7c4a00b510ec599c17c14785f0))
+* Streamline the release process for Jekyll ([#9760](https://github.com/jekyll/jekyll/issues/9760)) ([5cf05d7](https://github.com/jekyll/jekyll/commit/5cf05d7d092f22b0229fd02f7879a2480d0d2618))
+
+
+### Bug Fixes
+
+* Run release-please workflow only in jekyll/jekyll repo ([#9969](https://github.com/jekyll/jekyll/issues/9969)) ([d68f76e](https://github.com/jekyll/jekyll/commit/d68f76e160fdc4e04905797226700d67f8149009))
+* update clean command to take account of the keep_files option ([#10007](https://github.com/jekyll/jekyll/issues/10007)) ([74d7513](https://github.com/jekyll/jekyll/commit/74d751339d3e534aa51d5d7b0640e9bd743509e4)), closes [#9607](https://github.com/jekyll/jekyll/issues/9607)
+
 ## 4.4.1 / 2025-01-29
 
 ### Bug Fixes
