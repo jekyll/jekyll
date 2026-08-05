@@ -45,7 +45,7 @@ First create a Sass file at `assets/css/styles.scss` with the following content:
 ```sass
 ---
 ---
-@import "main";
+@use "main";
 ```
 
 The empty front matter at the top tells Jekyll it needs to process the file. The
