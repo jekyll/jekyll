@@ -39,8 +39,8 @@ module Jekyll
       @base = base
       @dir  = dir
       @name = name
-      @path = if site.in_theme_dir(base) == base # we're in a theme
-                site.in_theme_dir(base, dir, name)
+      @path = if (theme = site.theme_containing(base))
+                site.in_theme_dir_with_theme(theme, base, dir, name)
               else
                 site.in_source_dir(base, dir, name)
               end

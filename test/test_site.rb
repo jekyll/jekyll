@@ -76,6 +76,30 @@ class TestSite < JekyllUnitTest
       assert_equal [source_dir("_includes")], site.includes_load_paths
     end
 
+    should "search child includes before parent includes" do
+      site = fixture_site("theme" => "test-theme-child")
+      child_includes = test_dir("fixtures", "test-theme-child", "_includes")
+
+      assert_equal [source_dir("_includes"), child_includes, theme_dir("_includes")],
+                   site.includes_load_paths
+    end
+
+    should "expose a child theme and its parent in precedence order" do
+      site = fixture_site("theme" => "test-theme-child")
+
+      assert_equal %w(test-theme-child test-theme), site.themes.map(&:name)
+    end
+
+    should "reject nested theme inheritance" do
+      site = fixture_site("theme" => nil)
+      grandparent = double(:name => "grandparent", :parent_theme => nil)
+      parent = double(:name => "parent", :parent_theme => grandparent)
+      site.theme = double(:name => "child", :parent_theme => parent)
+
+      error = assert_raises(Jekyll::Errors::InvalidConfigurationError) { site.themes }
+      assert_includes error.message, "limited to one parent"
+    end
+
     should "configure cache_dir" do
       fixture_site.process
       assert File.directory?(source_dir(".jekyll-cache", "Jekyll", "Cache"))
@@ -101,6 +125,20 @@ class TestSite < JekyllUnitTest
       site = fixture_site("theme" => "test-theme")
       assert_instance_of Jekyll::Configuration, site.config
       assert_equal "Hello World", site.config["title"]
+    end
+
+    should "merge parent, child, and site configuration in precedence order" do
+      site = fixture_site(
+        "theme"      => "test-theme-child",
+        "title"      => "Site Title",
+        "test_theme" => { "header_links" => false }
+      )
+
+      assert_equal "Site Title", site.config["title"]
+      assert_equal "child", site.config.dig("test_theme", "skin")
+      assert_equal "%b -d %Y", site.config.dig("test_theme", "date_format")
+      refute site.config.dig("test_theme", "header_links")
+      assert_equal "inherited from child", site.config["child_setting"]
     end
 
     context "with a custom cache_dir configuration" do
