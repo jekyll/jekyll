@@ -179,15 +179,19 @@ module Jekyll
     def existing_file_modified?(path)
       # If one of this file dependencies have been modified,
       # set the regeneration bit for both the dependency and the file to true
+      deps_modified = false
       metadata[path]["deps"].each do |dependency|
-        return cache[dependency] = cache[path] = true if modified?(dependency)
+        if modified?(dependency)
+          add(dependency)
+          deps_modified = true
+        end
       end
 
-      if File.exist?(path) && metadata[path]["mtime"].eql?(File.mtime(path))
+      if !deps_modified && File.exist?(path) && metadata[path]["mtime"].eql?(File.mtime(path))
         # If this file has not been modified, set the regeneration bit to false
         cache[path] = false
       else
-        # If it has been modified, set it to true
+        # If it or any of its deps have been modified, set it to true
         add(path)
       end
     end
