@@ -180,7 +180,7 @@ module Jekyll
     end
 
     def write?
-      true
+      site.config["target"] == data.fetch("target", site.config["target"])
     end
 
     def excerpt_separator

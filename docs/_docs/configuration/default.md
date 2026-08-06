@@ -43,6 +43,7 @@ show_drafts         : null
 limit_posts         : 0
 future              : false
 unpublished         : false
+target              : "default"
 
 # Plugins
 whitelist           : []
