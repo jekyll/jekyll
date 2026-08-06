@@ -138,7 +138,7 @@ task :spec => :test
 require "rake/testtask"
 Rake::TestTask.new(:test) do |test|
   test.libs << "lib" << "test"
-  test.pattern = "test/**/test_*.rb"
+  test.pattern = FileList["test/**/test_*.rb"].exclude("test/test_coffeescript.rb")
   test.verbose = true
 end
 

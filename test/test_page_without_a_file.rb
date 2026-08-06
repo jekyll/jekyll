@@ -85,7 +85,11 @@ class TestPageWithoutAFile < JekyllUnitTest
           # simply be nil.
           #
           if basic_attrs.include?(prop)
-            assert_equal value, @page[prop], "For Jekyll::PageWithoutAFile attribute '#{prop}':"
+            if value.nil?
+              assert_nil @page[prop], "For Jekyll::PageWithoutAFile attribute '#{prop}':"
+            else
+              assert_equal value, @page[prop], "For Jekyll::PageWithoutAFile attribute '#{prop}':"
+            end
           else
             assert_nil @page[prop]
           end

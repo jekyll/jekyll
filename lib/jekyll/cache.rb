@@ -21,6 +21,11 @@ module Jekyll
         @disk_cache_enabled = false
       end
 
+      # Enable Marshaling cached items to disk
+      def enable_disk_cache!
+        @disk_cache_enabled = true
+      end
+
       # Clear all caches
       def clear
         delete_cache_files
