@@ -10,7 +10,7 @@ file or on the command-line.
 <div class="note info">
   <h5>Be aware of directory paths</h5>
   <p>
-    In general, make directory path values in configuration keys like <code>plugins_dir</code> relative to the current working directory, not the site source. The <code>sass</code> configuration key is an exception, where values must be relative to the site source.
+    In general, make directory path values in configuration keys like <code>plugins_dir</code> relative to the site source, not the current working directory or the directory where `_config.yml` is located.
   </p>
 </div>
 
