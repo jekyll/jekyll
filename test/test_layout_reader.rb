@@ -15,6 +15,19 @@ class TestLayoutReader < JekyllUnitTest
       assert_equal ["default", "simple", "post/simple"].sort, layouts.keys.sort
     end
 
+    should "track layout variants that share a basename" do
+      File.write(source_dir("_layouts", "simple.ics"), "BEGIN:VCALENDAR\n{{ content }}")
+
+      layouts = LayoutReader.new(@site).read
+      layout_names = @site.layout_variants["simple"].map(&:name)
+      layout_names.sort!
+
+      assert_equal ["simple.html", "simple.ics"], layout_names
+      assert_equal ".html", layouts["simple"].ext
+    ensure
+      FileUtils.rm_f(source_dir("_layouts", "simple.ics"))
+    end
+
     context "when no _layouts directory exists in CWD" do
       should "know to use the layout directory relative to the site source" do
         assert_equal LayoutReader.new(@site).layout_directory, source_dir("_layouts")

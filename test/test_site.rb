@@ -640,6 +640,74 @@ class TestSite < JekyllUnitTest
       end
     end
 
+    context "rendering multiple layout formats" do
+      setup do
+        clear_dest
+        FileUtils.rm_f(source_dir(".jekyll-metadata"))
+        File.write(
+          source_dir("_layouts", "event.html"),
+          "---\nlayout: wrapper\n---\nHTML: {{ content | strip }}"
+        )
+        File.write(
+          source_dir("_layouts", "event.ics"),
+          "---\nlayout: wrapper\n---\nICS: {{ page.title }}"
+        )
+        File.write(source_dir("_layouts", "wrapper.html"), "WRAPPED HTML: {{ content | strip }}")
+        File.write(source_dir("_layouts", "wrapper.ics"), "WRAPPED ICS: {{ content | strip }}")
+        File.write(
+          source_dir("event.md"),
+          "---\nlayout: event\ntitle: Demo Event\n---\nEvent body\n"
+        )
+        File.write(source_dir("_layouts", "feed.xml"), "<feed>{{ content | strip }}</feed>")
+        File.write(source_dir("feed.md"), "---\nlayout: feed\n---\nFeed body\n")
+      end
+
+      teardown do
+        FileUtils.rm_f(source_dir("_layouts", "event.html"))
+        FileUtils.rm_f(source_dir("_layouts", "event.ics"))
+        FileUtils.rm_f(source_dir("_layouts", "wrapper.html"))
+        FileUtils.rm_f(source_dir("_layouts", "wrapper.ics"))
+        FileUtils.rm_f(source_dir("event.md"))
+        FileUtils.rm_f(source_dir("_layouts", "feed.xml"))
+        FileUtils.rm_f(source_dir("feed.md"))
+        FileUtils.rm_f(source_dir(".jekyll-metadata"))
+        clear_dest
+      end
+
+      should "write an output file for each layout extension" do
+        site = fixture_site
+        site.process
+
+        assert_exist dest_dir("event.html")
+        assert_exist dest_dir("event.ics")
+        assert_equal(
+          "WRAPPED HTML: HTML: <p>Event body</p>",
+          File.read(dest_dir("event.html")).strip
+        )
+        assert_equal "WRAPPED ICS: ICS: Demo Event", File.read(dest_dir("event.ics")).strip
+      end
+
+      should "not write an extra file for a single non-HTML layout" do
+        site = fixture_site
+        site.process
+
+        assert_exist dest_dir("feed.html")
+        refute_exist dest_dir("feed.xml")
+      end
+
+      should "preserve additional outputs in incremental builds" do
+        site = fixture_site("incremental" => true)
+        site.process
+        FileUtils.rm_f(dest_dir("event.ics"))
+
+        site = fixture_site("incremental" => true)
+        site.process
+
+        assert_exist dest_dir("event.html")
+        assert_exist dest_dir("event.ics")
+      end
+    end
+
     context "with liquid profiling" do
       setup do
         @site = Site.new(site_configuration("profile" => true))

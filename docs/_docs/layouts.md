@@ -99,6 +99,23 @@ The rendered output of this page is:
 </html>
 ```
 
+## Multiple output formats
+
+If multiple layouts share the same basename, Jekyll renders the document once
+for each layout extension. For example, a page with `layout: event` will use
+both `_layouts/event.html` and `_layouts/event.ics` when both files exist.
+
+The regular output keeps the extension assigned by the page or document, such
+as `.html` for Markdown. Additional outputs use the matching layout extension
+and the same URL path. If `event.md` writes `/event.html`, the additional
+iCalendar layout writes `/event.ics`.
+
+Format-specific layouts can inherit from format-specific parents. If
+`event.ics` has `layout: wrapper`, Jekyll will prefer `_layouts/wrapper.ics`
+for the iCalendar output when that layout exists. A single non-HTML layout
+without sibling layouts keeps the existing behavior and does not create an
+extra output file.
+
 ## Inheritance
 
 Layout inheritance is useful when you want to add something to an existing

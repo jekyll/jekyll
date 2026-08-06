@@ -7,19 +7,19 @@ module Jekyll
     def initialize(site)
       @site = site
       @layouts = {}
+      @layout_variants = Hash.new { |hash, key| hash[key] = [] }
     end
 
     def read
       layout_entries.each do |layout_file|
-        @layouts[layout_name(layout_file)] = \
-          Layout.new(site, layout_directory, layout_file)
+        add_layout(layout_directory, layout_file, :overwrite)
       end
 
       theme_layout_entries.each do |layout_file|
-        @layouts[layout_name(layout_file)] ||= \
-          Layout.new(site, theme_layout_directory, layout_file)
+        add_layout(theme_layout_directory, layout_file, :fallback)
       end
 
+      site.layout_variants = @layout_variants
       @layouts
     end
 
@@ -47,6 +47,25 @@ module Jekyll
         entries = EntryFilter.new(site).filter(Dir["**/*.*"])
       end
       entries
+    end
+
+    def add_layout(directory, layout_file, merge_strategy)
+      name = layout_name(layout_file)
+      layout = Layout.new(site, directory, layout_file)
+      variants = @layout_variants[name]
+      existing_index = variants.index { |variant| variant.ext == layout.ext }
+
+      if existing_index
+        variants[existing_index] = layout if merge_strategy == :overwrite
+      else
+        variants << layout
+      end
+
+      @layouts[name] = primary_layout_for(variants)
+    end
+
+    def primary_layout_for(layouts)
+      layouts.find { |layout| Page::HTML_EXTENSIONS.include?(layout.ext) } || layouts.first
     end
 
     def layout_name(file)
