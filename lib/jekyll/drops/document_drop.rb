@@ -14,7 +14,7 @@ module Jekyll
       delegate_method_as :relative_path, :path
       private delegate_method_as :data, :fallback_data
 
-      delegate_methods :id, :output, :content, :to_s, :relative_path, :url, :date
+      delegate_methods :id, :output, :content, :to_s, :relative_path, :url, :date, :attachments
       data_delegators "title", "categories", "tags"
 
       def collection

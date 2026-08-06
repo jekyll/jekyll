@@ -697,6 +697,7 @@ class TestFilters < JekyllUnitTest
           "slug"          => "published",
           "ext"           => ".markdown",
           "tags"          => [],
+          "attachments"   => [],
         }
         actual = JSON.parse(@filter.jsonify(@filter.site.docs_to_write.first.to_liquid))
 
