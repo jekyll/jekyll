@@ -20,7 +20,7 @@ Mercenary.program(:jekyll) do |p|
   p.option "source", "-s", "--source [DIR]", "Source directory (defaults to ./)"
   p.option "destination", "-d", "--destination [DIR]",
     "Destination directory (defaults to ./_site)"
-  p.option "safe", "--safe", "Safe mode (defaults to false)"
+  p.option "safe", "--safe", "Safe mode (only allows whitelisted plugins, defaults to false)"
   p.option "plugins_dir", "-p", "--plugins PLUGINS_DIR1[,PLUGINS_DIR2[,...]]", Array,
     "Plugins directory (defaults to ./_plugins)"
   p.option "layouts_dir", "--layouts DIR", String,
