@@ -29,7 +29,7 @@ module Jekyll
         regenerate_document?(document)
       else
         source_path = document.respond_to?(:path) ? document.path : nil
-        dest_path = document.destination(@site.dest) if document.respond_to?(:destination)
+        dest_path = destination_paths(document)
         source_modified_or_dest_missing?(source_path, dest_path)
       end
     end
@@ -74,7 +74,7 @@ module Jekyll
     #
     # returns a boolean
     def source_modified_or_dest_missing?(source_path, dest_path)
-      modified?(source_path) || (dest_path && !File.exist?(dest_path))
+      modified?(source_path) || missing_destination?(dest_path)
     end
 
     # Checks if a path's (or one of its dependencies)
@@ -140,6 +140,20 @@ module Jekyll
 
     private
 
+    def destination_paths(document)
+      return [] unless document.respond_to?(:destination)
+
+      if document.respond_to?(:destination_paths)
+        document.destination_paths(@site.dest)
+      else
+        [document.destination(@site.dest)]
+      end
+    end
+
+    def missing_destination?(dest_path)
+      Array(dest_path).any? { |path| path && !File.exist?(path) }
+    end
+
     # Read metadata from the metadata file, if no file is found,
     # initialize with an empty hash
     #
@@ -165,14 +179,14 @@ module Jekyll
     def regenerate_page?(document)
       document.asset_file? || document.data["regenerate"] ||
         source_modified_or_dest_missing?(
-          site.in_source_dir(document.relative_path), document.destination(@site.dest)
+          site.in_source_dir(document.relative_path), document.destination_paths(@site.dest)
         )
     end
 
     def regenerate_document?(document)
       !document.write? || document.data["regenerate"] ||
         source_modified_or_dest_missing?(
-          document.path, document.destination(@site.dest)
+          document.path, document.destination_paths(@site.dest)
         )
     end
 

@@ -57,7 +57,13 @@ module Jekyll
     # Returns a Set with the file paths
     def new_files
       @new_files ||= Set.new.tap do |files|
-        site.each_site_file { |item| files << item.destination(site.dest) }
+        site.each_site_file do |item|
+          if item.respond_to?(:destination_paths)
+            files.merge(item.destination_paths(site.dest))
+          else
+            files << item.destination(site.dest)
+          end
+        end
       end
     end
 
