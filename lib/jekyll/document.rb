@@ -12,7 +12,7 @@ module Jekyll
 
     YAML_FRONT_MATTER_REGEXP = %r!\A(---\s*\n.*?\n?)^((---|\.\.\.)\s*$\n?)!m.freeze
     DATELESS_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.[^.]+)$!.freeze
-    DATE_FILENAME_MATCHER = %r!^(?>.+/)*?(\d{2,4}-\d{1,2}-\d{1,2})-([^/]*)(\.[^.]+)$!.freeze
+    DATE_FILENAME_MATCHER = %r!^(?>.+/)*?(\d{2,4}-\d{1,2}-\d{1,2})(?:-([^/]*))?(\.[^.]+)$!.freeze
 
     SASS_FILE_EXTS = %w(.sass .scss).freeze
     YAML_FILE_EXTS = %w(.yaml .yml).freeze
@@ -511,13 +511,20 @@ module Jekyll
       if relative_path =~ DATE_FILENAME_MATCHER
         date, slug, ext = Regexp.last_match.captures
         modify_date(date)
+        # The regexp also captures naked dates with no page name. In that
+        # case, default to be an index page.
+        # NOTE: the + is needed to unfreeze the literal because of the gsub!
+        #       usage below.
+        slug ||= +"index"
       elsif relative_path =~ DATELESS_FILENAME_MATCHER
         slug, ext = Regexp.last_match.captures
+      else
+        # `slug` will be nil for documents without an extension since the regex patterns
+        # above tests for an extension as well.
+        # In such cases, assign `basename_without_ext` as the slug.
+        slug = basename_without_ext
+        ext = nil
       end
-      # `slug` will be nil for documents without an extension since the regex patterns
-      # above tests for an extension as well.
-      # In such cases, assign `basename_without_ext` as the slug.
-      slug ||= basename_without_ext
 
       # slugs shouldn't end with a period
       # `String#gsub!` removes all trailing periods (in comparison to `String#chomp!`)

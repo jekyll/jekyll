@@ -16,7 +16,7 @@ class TestGeneratedSite < JekyllUnitTest
     end
 
     should "ensure post count is as expected" do
-      assert_equal 59, @site.posts.size
+      assert_equal 60, @site.posts.size
     end
 
     should "insert site.posts into the index" do
@@ -64,6 +64,15 @@ class TestGeneratedSite < JekyllUnitTest
         end
       )
       assert_exist dest_dir("2017", "02", "05", "i-dont-like-zeroes.html")
+    end
+
+    should "include a post with no slug" do
+      refute_nil(
+        @site.posts.index do |post|
+          post.relative_path == "_posts/2019-05-05.md"
+        end
+      )
+      assert_exist dest_dir("2019", "05", "05", "index.html")
     end
 
     should "print a nice list of static files" do
