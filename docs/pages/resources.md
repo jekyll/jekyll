@@ -36,6 +36,7 @@ See also: [docs/themes](/docs/themes/).
 Use a SaaS service as a backend for functionality on your Jekyll site
 
 ### Comments
+  - [Zoomment](https://zoomment.com): Embedded comments and reactions for Jekyll and others (free and open source, or hosted serverless)
   - [Staticman](https://staticman.net): Add user-generated content to a Jekyll site (free and open source)
   - [Talkyard](https://blog-comments.talkyard.io/): Embedded comments for Jekyll and others (free and open source, or hosted serverless)
 
