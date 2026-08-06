@@ -7,6 +7,16 @@ class TestThemeDrop < JekyllUnitTest
     assert_nil fixture_site.to_liquid.theme
   end
 
+  should "not be initialized for local themes" do
+    theme_root = source_dir("_themes", "local-theme")
+    FileUtils.mkdir_p(File.join(theme_root, "_layouts"))
+    site = fixture_site("theme" => "local-theme")
+
+    assert_nil site.to_liquid.theme
+  ensure
+    FileUtils.rm_rf(source_dir("_themes"))
+  end
+
   context "a theme drop" do
     setup do
       @drop = fixture_site("theme" => "test-theme").to_liquid.theme

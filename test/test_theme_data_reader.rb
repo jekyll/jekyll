@@ -87,4 +87,23 @@ class TestThemeDataReader < JekyllUnitTest
       assert_equal "Design by FTC", @site.data["i18n"]["testimonials"]["footer"]
     end
   end
+
+  context "site with a local theme with data" do
+    setup do
+      theme_data_dir = source_dir("_themes", "local-theme", "_data")
+      FileUtils.mkdir_p(theme_data_dir)
+      File.write(File.join(theme_data_dir, "cars.yml"), "manufacturer: Volvo\n")
+      @site = fixture_site("theme" => "local-theme")
+      @site.reader.read_data
+    end
+
+    teardown do
+      FileUtils.rm_rf(source_dir("_themes"))
+    end
+
+    should "merge local theme data with source data" do
+      assert_equal "Volvo", @site.data["cars"]["manufacturer"]
+      assert_equal "Hello! I’m foo. And who are you?", @site.data["greetings"]["foo"]
+    end
+  end
 end

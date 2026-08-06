@@ -79,5 +79,25 @@ class TestLayoutReader < JekyllUnitTest
                "Should not read symlinked layout from theme"
       end
     end
+
+    context "with a local theme" do
+      setup do
+        @theme_root = source_dir("_themes", "local-theme")
+        FileUtils.mkdir_p(File.join(@theme_root, "_layouts"))
+        File.write(File.join(@theme_root, "_layouts", "local.html"), "Local theme layout")
+        @site = fixture_site("theme" => "local-theme")
+      end
+
+      teardown do
+        FileUtils.rm_rf(source_dir("_themes"))
+      end
+
+      should "read layouts from _themes" do
+        layouts = LayoutReader.new(@site).read
+
+        assert layouts.key?("local")
+        assert_equal "Local theme layout", layouts["local"].content
+      end
+    end
   end
 end

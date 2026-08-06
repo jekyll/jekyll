@@ -103,6 +103,20 @@ class TestSite < JekyllUnitTest
       assert_equal "Hello World", site.config["title"]
     end
 
+    should "load config file from local theme as Jekyll::Configuration instance" do
+      theme_root = source_dir("_themes", "local-theme")
+      FileUtils.mkdir_p(theme_root)
+      File.write(File.join(theme_root, "_config.yml"), "title: Local Theme\nlocal_theme: true\n")
+
+      site = fixture_site("theme" => "local-theme")
+
+      assert_instance_of Jekyll::Configuration, site.config
+      assert_equal "Local Theme", site.config["title"]
+      assert site.config["local_theme"]
+    ensure
+      FileUtils.rm_rf(source_dir("_themes"))
+    end
+
     context "with a custom cache_dir configuration" do
       should "have the custom cache_dir hidden from Git" do
         site = fixture_site("cache_dir" => "../../custom-cache-dir")
@@ -637,6 +651,19 @@ class TestSite < JekyllUnitTest
         site = fixture_site("theme" => "test-theme")
         assert_instance_of Jekyll::Theme, site.theme
         assert_equal "test-theme", site.theme.name
+      end
+
+      should "set a local theme when a theme gem is not installed" do
+        theme_root = source_dir("_themes", "local-theme")
+        FileUtils.mkdir_p(File.join(theme_root, "_layouts"))
+
+        site = fixture_site("theme" => "local-theme")
+
+        assert_instance_of Jekyll::LocalTheme, site.theme
+        assert_equal "local-theme", site.theme.name
+        assert_equal File.realpath(theme_root), site.theme.root
+      ensure
+        FileUtils.rm_rf(source_dir("_themes"))
       end
     end
 

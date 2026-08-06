@@ -75,6 +75,49 @@ class TestThemeAssetsReader < JekyllUnitTest
     end
   end
 
+  context "with a local theme" do
+    setup do
+      @theme_root = source_dir("_themes", "local-theme")
+      FileUtils.mkdir_p(File.join(@theme_root, "assets"))
+      File.write(File.join(@theme_root, "assets", "local.js"), "alert('local theme');")
+      @site = fixture_site("theme" => "local-theme")
+    end
+
+    teardown do
+      FileUtils.rm_rf(source_dir("_themes"))
+    end
+
+    should "read assets from _themes" do
+      @site.reset
+      ThemeAssetsReader.new(@site).read
+
+      assert_file_with_relative_path @site.static_files, "/assets/local.js"
+    end
+  end
+
+  context "with a local theme and site content at the same path" do
+    setup do
+      @theme_root = source_dir("_themes", "local-theme")
+      FileUtils.mkdir_p(File.join(@theme_root, "assets"))
+      File.write(File.join(@theme_root, "assets", "base.js"), "alert('local theme');")
+      @site = fixture_site("theme" => "local-theme")
+    end
+
+    teardown do
+      FileUtils.rm_rf(source_dir("_themes"))
+    end
+
+    should "not overwrite site content" do
+      @site.reset
+      @site.read
+
+      static_script = File.read(
+        @site.static_files.find { |f| f.relative_path == "/assets/base.js" }.path
+      )
+      assert_includes static_script, "alert(\"From your site.\");"
+    end
+  end
+
   context "symlinked theme" do
     should "not read assets from symlinked theme" do
       skip_if_windows "Jekyll does not currently support symlinks on Windows."
