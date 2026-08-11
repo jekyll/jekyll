@@ -78,8 +78,6 @@ module Jekyll
 
     # --
     # Check if a file is a symlink.
-    # NOTE: This can be converted to allowing even in safe,
-    #   since we use Pathutil#in_path? now.
     # --
     def symlink?(entry)
       site.safe && File.symlink?(entry) && symlink_outside_site_source?(entry)
