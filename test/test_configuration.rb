@@ -206,7 +206,7 @@ class TestConfiguration < JekyllUnitTest
     end
 
     should "not raise an error on empty files" do
-      allow(SafeYAML).to receive(:load_file).with(File.expand_path("empty.yml")).and_return(false)
+      allow(Jekyll::Utils).to receive(:safe_load_yaml_file).with(File.expand_path("empty.yml")).and_return(false)
       Jekyll.logger.log_level = :warn
       @config.read_config_file("empty.yml")
       Jekyll.logger.log_level = :info
@@ -219,8 +219,8 @@ class TestConfiguration < JekyllUnitTest
     end
 
     should "continue to read config files if one is empty" do
-      allow(SafeYAML).to receive(:load_file).with(File.expand_path("empty.yml")).and_return(false)
-      allow(SafeYAML).to receive(:load_file).with(File.expand_path("not_empty.yml")).and_return(
+      allow(Jekyll::Utils).to receive(:safe_load_yaml_file).with(File.expand_path("empty.yml")).and_return(false)
+      allow(Jekyll::Utils).to receive(:safe_load_yaml_file).with(File.expand_path("not_empty.yml")).and_return(
         "foo" => "bar"
       )
       Jekyll.logger.log_level = :warn
@@ -280,7 +280,7 @@ class TestConfiguration < JekyllUnitTest
     end
 
     should "fire warning with no _config.yml" do
-      allow(SafeYAML).to receive(:load_file).with(@path) do
+      allow(Jekyll::Utils).to receive(:safe_load_yaml_file).with(@path) do
         raise SystemCallError, "No such file or directory - #{@path}"
       end
       allow($stderr).to receive(:puts).with(
@@ -290,13 +290,13 @@ class TestConfiguration < JekyllUnitTest
     end
 
     should "load configuration as hash" do
-      allow(SafeYAML).to receive(:load_file).with(@path).and_return({})
+      allow(Jekyll::Utils).to receive(:safe_load_yaml_file).with(@path).and_return({})
       allow($stdout).to receive(:puts).with("Configuration file: #{@path}")
       assert_equal site_configuration, Jekyll.configuration(test_config)
     end
 
     should "fire warning with bad config" do
-      allow(SafeYAML).to receive(:load_file).with(@path).and_return([])
+      allow(Jekyll::Utils).to receive(:safe_load_yaml_file).with(@path).and_return([])
       allow($stderr)
         .to receive(:puts)
         .and_return(
@@ -310,7 +310,7 @@ class TestConfiguration < JekyllUnitTest
     end
 
     should "fire warning when user-specified config file isn't there" do
-      allow(SafeYAML).to receive(:load_file).with(@user_config) do
+      allow(Jekyll::Utils).to receive(:safe_load_yaml_file).with(@user_config) do
         raise SystemCallError, "No such file or directory - #{@user_config}"
       end
       allow($stderr)
@@ -326,7 +326,7 @@ class TestConfiguration < JekyllUnitTest
 
     should "not clobber YAML.load to the dismay of other libraries" do
       assert_equal :foo, YAML.load(":foo")
-      # as opposed to: assert_equal ':foo', SafeYAML.load(':foo')
+      # as opposed to: assert_equal ':foo', Jekyll::Utils.safe_load_yaml(':foo')
     end
   end
 
@@ -341,14 +341,14 @@ class TestConfiguration < JekyllUnitTest
     end
 
     should "load default plus posts config if no config_file is set" do
-      allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return({})
+      allow(Jekyll::Utils).to receive(:safe_load_yaml_file).with(@paths[:default]).and_return({})
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
       assert_equal site_configuration, Jekyll.configuration(test_config)
     end
 
     should "load different config if specified" do
-      allow(SafeYAML)
-        .to receive(:load_file)
+      allow(Jekyll::Utils)
+        .to receive(:safe_load_yaml_file)
         .with(@paths[:other])
         .and_return("baseurl" => "http://example.com")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
@@ -361,9 +361,9 @@ class TestConfiguration < JekyllUnitTest
     end
 
     should "load different config if specified with symbol key" do
-      allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return({})
-      allow(SafeYAML)
-        .to receive(:load_file)
+      allow(Jekyll::Utils).to receive(:safe_load_yaml_file).with(@paths[:default]).and_return({})
+      allow(Jekyll::Utils)
+        .to receive(:safe_load_yaml_file)
         .with(@paths[:other])
         .and_return("baseurl" => "http://example.com")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
@@ -376,7 +376,7 @@ class TestConfiguration < JekyllUnitTest
     end
 
     should "load default config if path passed is empty" do
-      allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return({})
+      allow(Jekyll::Utils).to receive(:safe_load_yaml_file).with(@paths[:default]).and_return({})
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
       assert_equal \
         site_configuration("config" => [@paths[:empty]]),
@@ -398,8 +398,8 @@ class TestConfiguration < JekyllUnitTest
     should "load multiple config files" do
       External.require_with_graceful_fail("tomlrb")
 
-      allow(SafeYAML).to receive(:load_file).with(@paths[:default]).and_return({})
-      allow(SafeYAML).to receive(:load_file).with(@paths[:other]).and_return({})
+      allow(Jekyll::Utils).to receive(:safe_load_yaml_file).with(@paths[:default]).and_return({})
+      allow(Jekyll::Utils).to receive(:safe_load_yaml_file).with(@paths[:other]).and_return({})
       allow(Tomlrb).to receive(:load_file).with(@paths[:toml]).and_return({})
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:default]}")
       allow($stdout).to receive(:puts).with("Configuration file: #{@paths[:other]}")
@@ -417,12 +417,12 @@ class TestConfiguration < JekyllUnitTest
     end
 
     should "load multiple config files and last config should win" do
-      allow(SafeYAML)
-        .to receive(:load_file)
+      allow(Jekyll::Utils)
+        .to receive(:safe_load_yaml_file)
         .with(@paths[:default])
         .and_return("baseurl" => "http://example.dev")
-      allow(SafeYAML)
-        .to receive(:load_file)
+      allow(Jekyll::Utils)
+        .to receive(:safe_load_yaml_file)
         .with(@paths[:other])
         .and_return("baseurl" => "http://example.com")
       allow($stdout)

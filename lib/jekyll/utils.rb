@@ -316,6 +316,20 @@ module Jekyll
       merged
     end
 
+    # Safely load YAML strings
+    def safe_load_yaml(yaml)
+      Psych.safe_load(yaml, :permitted_classes => [Date, Time], aliases: true)
+    rescue ArgumentError
+      # Psych versions < 3.1 had a different safe_load API and used
+      # problematic language.
+      Psych.safe_load(yaml, [Date, Time])
+    end
+
+    # Reads file contents and safely loads YAML
+    def safe_load_yaml_file(filename, read_opts = {})
+      safe_load_yaml(File.read(filename, **read_opts))
+    end
+
     private
 
     def merge_values(target, overwrite)

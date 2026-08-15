@@ -92,9 +92,9 @@ namespace :site do
   desc "Write the latest Jekyll version"
   task :latest_version do
     next if version =~ %r!(beta|rc|alpha)!i
-    require "safe_yaml/load"
+    require "jekyll/yaml"
     config_file = File.join(docs_folder, "_config.yml")
-    config = SafeYAML.load_file(config_file)
+    config = Jekyll::Utils.safe_load_yaml_file(config_file)
     config["version"] = version
     File.write(config_file, YAML.dump(config))
     File.open("#{docs_folder}/latest_version.txt", "wb") { |f| f.puts(version) }
