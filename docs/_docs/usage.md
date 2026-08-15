@@ -23,8 +23,11 @@ Here are some of the most common commands:
 
 * `jekyll new PATH` - Creates a new Jekyll site with default gem-based theme at specified path. The directories will be created as necessary.
 * `jekyll new PATH --blank` - Creates a new blank Jekyll site scaffold at specified path.
-* `jekyll build` or `jekyll b` - Performs a one off build your site to `./_site` (by default).
-* `jekyll serve` or `jekyll s` - Builds your site any time a source file changes and serves it locally.
+* `jekyll build` or `jekyll b` - Performs a one off build your site to `./_site` (by default)
+* `jekyll serve` or `jekyll s` - Builds your site any time a source file changes and serves it locally
+* `jekyll console` or `jekyll c` - Opens up an IRB console and lets you
+  inspect your site configuration and content "under the hood" using
+  Jekyll's native Ruby API.
 * `jekyll clean` - Removes all generated files: destination folder, metadata file, Sass and Jekyll caches.
 * `jekyll help` - Shows help, optionally for a given subcommand, e.g. `jekyll help build`.
 * `jekyll new-theme` - Creates a new Jekyll theme scaffold.
