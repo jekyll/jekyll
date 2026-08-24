@@ -56,6 +56,25 @@ class TestEntryFilter < JekyllUnitTest
       )
     end
 
+    should "filter files several directories below a wildcard exclude pattern" do
+      # A pattern like "**/nooo" is only tested against the full entry path in
+      # `EntryFilter#glob_include?`, not against any of its ancestor
+      # directories. Regular directory traversal (`Jekyll::Reader`) prunes a
+      # matching subdirectory before descending into it, so it never has to
+      # test a full nested path against a wildcard directory pattern -- but
+      # entries gathered via a single flat glob, like collection files via
+      # `Collection#entries`, must have this checked explicitly.
+      files = %w(index.html)
+
+      @site.exclude = ["**/nooo"]
+      assert_equal(
+        files,
+        @site.reader.filter_entries(
+          files + ["one/nooo", "one/nooo/unexpected.md"]
+        )
+      )
+    end
+
     should "not filter entries within include" do
       includes = %w(_index.html .htaccess include*)
       files = %w(index.html _index.html .htaccess includeA)
