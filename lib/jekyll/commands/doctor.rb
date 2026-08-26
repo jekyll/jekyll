@@ -129,7 +129,7 @@ module Jekyll
               next if allow_used_permalink?(thing)
 
               dest_path = thing.destination(site.dest)
-              (result[dest_path] ||= []) << thing.path
+              ((result[dest_path] ||= []) << thing.path).uniq!
             end
           end
         end
