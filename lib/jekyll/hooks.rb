@@ -24,6 +24,7 @@ module Jekyll
       :pages     => {
         :post_init    => [],
         :pre_render   => [],
+        :pre_convert  => [],
         :post_convert => [],
         :post_render  => [],
         :post_write   => [],
@@ -31,6 +32,7 @@ module Jekyll
       :posts     => {
         :post_init    => [],
         :pre_render   => [],
+        :pre_convert  => [],
         :post_convert => [],
         :post_render  => [],
         :post_write   => [],
@@ -38,6 +40,7 @@ module Jekyll
       :documents => {
         :post_init    => [],
         :pre_render   => [],
+        :pre_convert  => [],
         :post_convert => [],
         :post_render  => [],
         :post_write   => [],
@@ -72,6 +75,7 @@ module Jekyll
       @registry[owner] ||= {
         :post_init    => [],
         :pre_render   => [],
+        :pre_convert  => [],
         :post_convert => [],
         :post_render  => [],
         :post_write   => [],
