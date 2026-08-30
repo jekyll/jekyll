@@ -1,7 +1,7 @@
 ---
 layout: step
 title: Setup
-menu_name: Step by Step Tutorial
+menu_name: Step-by-Step Tutorial
 position: 1
 redirect_from:
 - /docs/step-by-step/
@@ -16,25 +16,25 @@ Jekyll is a Ruby gem. First, install Ruby on your machine.
 Go to [Installation]({{ '/docs/installation/' | relative_url }}) and follow the
 instructions for your operating system.
 
-With Ruby installed, install Jekyll from the terminal:
+* With Ruby installed, install Jekyll from the terminal:
 
 ```sh
 gem install jekyll bundler
 ```
 
-Create a new `Gemfile` to list your project's dependencies:
+* Create a new `Gemfile` to list your project's dependencies:
 
 ```sh
 bundle init
 ```
 
-Edit the `Gemfile` in a text editor and add jekyll as a dependency:
+* Edit the `Gemfile` in a text editor and add jekyll as a dependency:
 
 ```ruby
 gem "jekyll"
 ```
 
-Run `bundle` to install jekyll for your project.
+* Run `bundle` to install jekyll for your project.
 
 You can now prefix all jekyll commands listed in this tutorial with `bundle exec`
 to make sure you use the jekyll version defined in your `Gemfile`.
