@@ -16,13 +16,13 @@ Jekyll is a Ruby gem. First, install Ruby on your machine.
 Go to [Installation]({{ '/docs/installation/' | relative_url }}) and follow the
 instructions for your operating system.
 
-With Ruby installed, install Jekyll from the terminal:
+With Ruby installed, install Jekyll and [Bundler](https://bundler.io/) from the terminal:
 
 ```sh
 gem install jekyll bundler
 ```
 
-Create a new `Gemfile` to list your project's dependencies:
+Using Bundler, create a new `Gemfile` to list your project's dependencies:
 
 ```sh
 bundle init
@@ -34,10 +34,13 @@ Edit the `Gemfile` in a text editor and add jekyll as a dependency:
 gem "jekyll"
 ```
 
-Run `bundle` to install jekyll for your project.
+Run the `bundle` command to install jekyll for your project.
 
-You can now prefix all jekyll commands listed in this tutorial with `bundle exec`
-to make sure you use the jekyll version defined in your `Gemfile`.
+```sh
+bundle
+```
+
+You can now prefix all jekyll commands listed in this tutorial with `bundle exec`, which will use the jekyll version defined in your `Gemfile`.
 
 ## Create a site
 
