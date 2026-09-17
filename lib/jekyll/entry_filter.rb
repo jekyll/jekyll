@@ -105,13 +105,41 @@ module Jekyll
 
           File.fnmatch?(pattern_with_source, entry_with_source) ||
             entry_with_source.start_with?(pattern_with_source) ||
-            (pattern_with_source == "#{entry_with_source}/" if entry_is_directory)
+            (pattern_with_source == "#{entry_with_source}/" if entry_is_directory) ||
+            ancestor_directory_matches?(pattern_with_source, entry_with_source)
         when Regexp
           pattern.match?(entry_with_source)
         else
           false
         end
       end
+    end
+
+    private
+
+    # Checks whether any ancestor directory of `entry_with_source`, up to
+    # (but excluding) the site source root, matches the given glob pattern.
+    #
+    # `Jekyll::Reader` gets this pruning "for free" by walking the directory
+    # tree and testing each subdirectory name as it descends. Entries
+    # gathered via a single flat glob instead -- e.g. collection files, via
+    # `Collection#entries` -- are only ever tested against their full path,
+    # so a pattern like `**/nooo` never matched a file several directories
+    # below a `nooo` directory. This restores that pruning for those entries.
+    def ancestor_directory_matches?(pattern_with_source, entry_with_source)
+      source_root = site.source.chomp("/")
+      dir = File.dirname(entry_with_source)
+
+      while dir != source_root && dir != "." && dir != "/"
+        return true if File.fnmatch?(pattern_with_source, dir)
+
+        parent = File.dirname(dir)
+        break if parent == dir
+
+        dir = parent
+      end
+
+      false
     end
   end
 end
