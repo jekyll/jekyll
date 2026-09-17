@@ -11,6 +11,80 @@ class TestSite < JekyllUnitTest
     FileUtils.rm tmp_image_path
   end
 
+  def with_event_layouts(front_matter)
+    files = event_layout_files(front_matter)
+
+    files.each { |path, content| File.write(path, content) }
+    clear_dest
+    yield
+  ensure
+    FileUtils.rm_f(files&.keys)
+    clear_dest
+  end
+
+  def with_event_ics_layout(front_matter)
+    files = {
+      source_dir("_layouts", "event.ics") => "BEGIN:VCALENDAR\n{{ content }}",
+      source_dir("multiformat-event.md")  => <<~MARKDOWN,
+        ---
+        title: Multi-format Event
+        #{front_matter}
+        ---
+        Event body
+      MARKDOWN
+    }
+
+    files.each { |path, content| File.write(path, content) }
+    clear_dest
+    yield
+  ensure
+    FileUtils.rm_f(files&.keys)
+    clear_dest
+  end
+
+  def with_event_post
+    files = event_layout_files("layout: event\noutputs:\n  - ics\n")
+    files.delete(source_dir("multiformat-event.md"))
+    files[source_dir("_posts", "2026-05-13-multiformat-event.md")] = <<~MARKDOWN
+      ---
+      title: Multi-format Event
+      layout: event
+      outputs:
+        - ics
+      ---
+      Event body
+    MARKDOWN
+
+    files.each { |path, content| File.write(path, content) }
+    clear_dest
+    yield
+  ensure
+    FileUtils.rm_f(files&.keys)
+    clear_dest
+  end
+
+  def event_layout_files(front_matter)
+    {
+      source_dir("_layouts", "event.html") => <<~HTML,
+        HTML EVENT LAYOUT
+        {{ content }}
+      HTML
+      source_dir("_layouts", "event.ics")  => <<~ICS,
+        BEGIN:VCALENDAR
+        SUMMARY:{{ page.title }}
+        {{ content }}
+        END:VCALENDAR
+      ICS
+      source_dir("multiformat-event.md")   => <<~MARKDOWN,
+        ---
+        title: Multi-format Event
+        #{front_matter}
+        ---
+        Event body
+      MARKDOWN
+    }
+  end
+
   def read_posts
     @site.posts.docs.concat(PostReader.new(@site).read_posts(""))
     posts = Dir[source_dir("_posts", "**", "*")]
@@ -299,6 +373,492 @@ class TestSite < JekyllUnitTest
     should "read pages with YAML front matter" do
       abs_path = File.expand_path("about.html", @site.source)
       assert Utils.has_yaml_header?(abs_path)
+    end
+
+    context "with multi-format outputs" do
+      should "not write an event.ics output without outputs front matter" do
+        with_event_layouts("layout: event") do
+          clear_dest
+          FileUtils.mkdir_p(dest_dir)
+          File.write(dest_dir("multiformat-event.ics"), "stale")
+
+          @site.process
+
+          assert_exist dest_dir("multiformat-event.html")
+          refute_exist dest_dir("multiformat-event.ics")
+          assert_includes File.read(dest_dir("multiformat-event.html")), "HTML EVENT LAYOUT"
+          refute_includes File.read(dest_dir("multiformat-event.html")), "BEGIN:VCALENDAR"
+        end
+      end
+
+      should "write all sibling layout outputs when outputs is auto" do
+        front_matter = <<~YAML
+          layout: event
+          outputs: auto
+        YAML
+
+        with_event_layouts(front_matter) do
+          File.write(source_dir("_layouts", "event.json"), "JSON EVENT\n{{ content }}")
+          clear_dest
+          @site.process
+          page = @site.pages.find { |site_page| site_page.name == "multiformat-event.md" }
+
+          assert_exist dest_dir("multiformat-event.html")
+          assert_exist dest_dir("multiformat-event.ics")
+          assert_exist dest_dir("multiformat-event.json")
+          assert_includes File.read(dest_dir("multiformat-event.html")), "HTML EVENT LAYOUT"
+          assert_includes File.read(dest_dir("multiformat-event.ics")), "BEGIN:VCALENDAR"
+          assert_includes File.read(dest_dir("multiformat-event.json")), "JSON EVENT"
+          assert_equal [
+            dest_dir("multiformat-event.html"),
+            dest_dir("multiformat-event.ics"),
+            dest_dir("multiformat-event.json"),
+          ], page.destination_paths(dest_dir)
+        ensure
+          FileUtils.rm_f(source_dir("_layouts", "event.json"))
+        end
+      end
+
+      should "write sibling layout outputs from front matter defaults" do
+        with_event_layouts("layout: event") do
+          @site = Site.new(site_configuration(
+                             "defaults" => [{
+                               "scope"  => { "path" => "" },
+                               "values" => { "outputs" => "auto" },
+                             }]
+                           ))
+          clear_dest
+          @site.process
+
+          assert_exist dest_dir("multiformat-event.html")
+          assert_exist dest_dir("multiformat-event.ics")
+          assert_includes File.read(dest_dir("multiformat-event.ics")), "BEGIN:VCALENDAR"
+        end
+      end
+
+      should "allow a non-html layout as the primary layout by basename" do
+        with_event_ics_layout("layout: event") do
+          clear_dest
+          @site.process
+
+          assert_exist dest_dir("multiformat-event.html")
+          assert_includes File.read(dest_dir("multiformat-event.html")), "BEGIN:VCALENDAR"
+        end
+      end
+
+      should "write html and ics outputs when ics is requested" do
+        front_matter = <<~YAML
+          layout: event
+          outputs:
+            - ics
+        YAML
+
+        with_event_layouts(front_matter) do
+          clear_dest
+          @site.process
+
+          assert_exist dest_dir("multiformat-event.html")
+          assert_exist dest_dir("multiformat-event.ics")
+          assert_includes File.read(dest_dir("multiformat-event.html")), "HTML EVENT LAYOUT"
+          assert_includes File.read(dest_dir("multiformat-event.ics")), "BEGIN:VCALENDAR"
+        end
+      end
+
+      should "write a requested output when outputs is a string" do
+        with_event_layouts("layout: event\noutputs: ics\n") do
+          clear_dest
+          @site.process
+
+          assert_exist dest_dir("multiformat-event.html")
+          assert_exist dest_dir("multiformat-event.ics")
+          assert_includes File.read(dest_dir("multiformat-event.ics")), "BEGIN:VCALENDAR"
+        end
+      end
+
+      should "only write requested outputs when sibling layouts include other formats" do
+        front_matter = <<~YAML
+          layout: event
+          outputs:
+            - ics
+        YAML
+
+        with_event_layouts(front_matter) do
+          File.write(source_dir("_layouts", "event.json"), "{\"body\": {{ content | jsonify }}}")
+          clear_dest
+          @site.process
+
+          assert_exist dest_dir("multiformat-event.html")
+          assert_exist dest_dir("multiformat-event.ics")
+          refute_exist dest_dir("multiformat-event.json")
+        ensure
+          FileUtils.rm_f(source_dir("_layouts", "event.json"))
+        end
+      end
+
+      should "not write additional outputs when outputs is false" do
+        front_matter = <<~YAML
+          layout: event
+          outputs: false
+        YAML
+
+        with_event_layouts(front_matter) do
+          @site = Site.new(site_configuration(
+                             "defaults" => [{
+                               "scope"  => { "path" => "" },
+                               "values" => { "outputs" => "auto" },
+                             }]
+                           ))
+          clear_dest
+          @site.process
+          page = @site.pages.find { |site_page| site_page.name == "multiformat-event.md" }
+
+          assert_exist dest_dir("multiformat-event.html")
+          refute_exist dest_dir("multiformat-event.ics")
+          assert_equal [dest_dir("multiformat-event.html")], page.destination_paths(dest_dir)
+        end
+      end
+
+      should "not write additional outputs when outputs is empty" do
+        front_matter = <<~YAML
+          layout: event
+          outputs: []
+        YAML
+
+        with_event_layouts(front_matter) do
+          @site = Site.new(site_configuration(
+                             "defaults" => [{
+                               "scope"  => { "path" => "" },
+                               "values" => { "outputs" => "auto" },
+                             }]
+                           ))
+          clear_dest
+          @site.process
+          page = @site.pages.find { |site_page| site_page.name == "multiformat-event.md" }
+
+          assert_exist dest_dir("multiformat-event.html")
+          refute_exist dest_dir("multiformat-event.ics")
+          assert_equal [dest_dir("multiformat-event.html")], page.destination_paths(dest_dir)
+        end
+      end
+
+      should "not warn about html sibling layouts when auto output matches primary extension" do
+        front_matter = <<~YAML
+          layout: event
+          permalink: /calendar.ics
+          outputs: auto
+        YAML
+
+        with_event_layouts(front_matter) do
+          clear_dest
+          output = capture_stderr { @site.process }
+          page = @site.pages.find { |site_page| site_page.name == "multiformat-event.md" }
+
+          assert_exist dest_dir("calendar.ics")
+          refute_exist dest_dir("calendar.html")
+          refute_includes output, "Layout 'event.html' requested"
+          assert_equal [dest_dir("calendar.ics")], page.destination_paths(dest_dir)
+        end
+      end
+
+      should "not expose secondary layout state to the next page" do
+        files = {
+          source_dir("_layouts", "first.html") => <<~HTML,
+            ---
+            format: html
+            ---
+            FIRST HTML
+            {{ content }}
+          HTML
+          source_dir("_layouts", "first.ics")  => <<~ICS,
+            ---
+            format: ics
+            ---
+            FIRST ICS
+            {{ content }}
+          ICS
+          source_dir("_layouts", "plain.html") => "PLAIN\n{{ content }}",
+          source_dir("aaa-first.md")           => <<~MARKDOWN,
+            ---
+            title: First
+            layout: first
+            outputs:
+              - ics
+            ---
+            First body
+          MARKDOWN
+          source_dir("zzz-second.md")          => <<~MARKDOWN,
+            ---
+            title: Second
+            layout: plain
+            ---
+            Layout format: {{ layout.format }}
+            Leaked content: {{ content }}
+          MARKDOWN
+        }
+
+        files.each { |path, content| File.write(path, content) }
+        clear_dest
+        @site.process
+        second_output = File.read(dest_dir("zzz-second.html"))
+
+        refute_includes second_output, "ics"
+        refute_includes second_output, "FIRST ICS"
+      ensure
+        FileUtils.rm_f(files&.keys)
+        clear_dest
+      end
+
+      should "apply post render hooks to additional outputs" do
+        hook = proc do |document|
+          next unless document.data["title"] == "Multi-format Event"
+
+          document.output = "#{document.output}\nHOOKED"
+        end
+        Jekyll::Hooks.register :pages, :post_render, &hook
+
+        front_matter = <<~YAML
+          layout: event
+          outputs:
+            - ics
+        YAML
+
+        with_event_layouts(front_matter) do
+          clear_dest
+          @site.process
+
+          assert_includes File.read(dest_dir("multiformat-event.html")), "HOOKED"
+          assert_includes File.read(dest_dir("multiformat-event.ics")), "HOOKED"
+        end
+      ensure
+        registry = Jekyll::Hooks.instance_variable_get(:@registry)
+        priority = Jekyll::Hooks.instance_variable_get(:@hook_priority)
+        registry[:pages][:post_render].delete(hook)
+        priority.delete(hook)
+      end
+
+      should "prefer matching parent layouts for a non-html primary layout" do
+        files = {
+          source_dir("_layouts", "base.html") => "HTML BASE\n{{ content }}",
+          source_dir("_layouts", "base.ics")  => "ICS BASE\n{{ content }}",
+          source_dir("_layouts", "event.ics") => <<~ICS,
+            ---
+            layout: base
+            ---
+            ICS EVENT
+            {{ content }}
+          ICS
+          source_dir("multiformat-event.md")  => <<~MARKDOWN,
+            ---
+            title: Multi-format Event
+            layout: event
+            ---
+            Event body
+          MARKDOWN
+        }
+
+        files.each { |path, content| File.write(path, content) }
+        clear_dest
+        @site.process
+
+        assert_includes File.read(dest_dir("multiformat-event.html")), "ICS BASE"
+        refute_includes File.read(dest_dir("multiformat-event.html")), "HTML BASE"
+      ensure
+        FileUtils.rm_f(files&.keys)
+        clear_dest
+      end
+
+      should "not advertise additional output paths for pages without layouts" do
+        front_matter = <<~YAML
+          layout: none
+          outputs: auto
+        YAML
+
+        with_event_layouts(front_matter) do
+          clear_dest
+          @site.process
+          page = @site.pages.find { |site_page| site_page.name == "multiformat-event.md" }
+
+          assert_exist dest_dir("multiformat-event.html")
+          refute_exist dest_dir("multiformat-event.ics")
+          assert_equal [dest_dir("multiformat-event.html")], page.destination_paths(dest_dir)
+        end
+      end
+
+      should "render the original issue example with sibling layout formats" do
+        files = {
+          source_dir("_layouts", "post.html")            => "HTML POST\n{{ content }}",
+          source_dir("_layouts", "post.ical")            => "ICAL POST\n{{ content }}",
+          source_dir("_posts", "2026-05-13-calendar.md") => <<~MARKDOWN,
+            ---
+            title: Calendar Event
+            layout: post
+            outputs: auto
+            ---
+            Event body
+          MARKDOWN
+        }
+
+        files.each { |path, content| File.write(path, content) }
+        clear_dest
+        @site.process
+        post = @site.posts.docs.find { |site_post| site_post.data["title"] == "Calendar Event" }
+
+        assert_exist post.destination(dest_dir)
+        assert_exist post.destination(dest_dir, ".ical")
+        assert_includes File.read(post.destination(dest_dir)), "HTML POST"
+        assert_includes File.read(post.destination(dest_dir, ".ical")), "ICAL POST"
+      ensure
+        FileUtils.rm_f(files&.keys)
+        clear_dest
+      end
+
+      should "prefer matching parent layouts for requested outputs" do
+        files = {
+          source_dir("_layouts", "base.html")  => "HTML BASE\n{{ content }}",
+          source_dir("_layouts", "base.ics")   => "ICS BASE\n{{ content }}",
+          source_dir("_layouts", "event.html") => <<~HTML,
+            ---
+            layout: base
+            ---
+            HTML EVENT
+            {{ content }}
+          HTML
+          source_dir("_layouts", "event.ics")  => <<~ICS,
+            ---
+            layout: base
+            ---
+            ICS EVENT
+            {{ content }}
+          ICS
+          source_dir("multiformat-event.md")   => <<~MARKDOWN,
+            ---
+            title: Multi-format Event
+            layout: event
+            outputs:
+              - ics
+            ---
+            Event body
+          MARKDOWN
+        }
+
+        files.each { |path, content| File.write(path, content) }
+        clear_dest
+        @site.process
+
+        assert_includes File.read(dest_dir("multiformat-event.html")), "HTML BASE"
+        assert_includes File.read(dest_dir("multiformat-event.ics")), "ICS BASE"
+        refute_includes File.read(dest_dir("multiformat-event.ics")), "HTML BASE"
+      ensure
+        FileUtils.rm_f(files&.keys)
+        clear_dest
+      end
+
+      should "write requested outputs for posts" do
+        with_event_post do
+          clear_dest
+          @site.process
+          post = @site.posts.docs.find do |site_post|
+            site_post.data["title"] == "Multi-format Event"
+          end
+
+          post.destination_paths(dest_dir).each { |path| assert_exist path }
+          assert_includes File.read(post.destination(dest_dir)), "HTML EVENT LAYOUT"
+          assert_includes File.read(post.destination(dest_dir, ".ics")), "BEGIN:VCALENDAR"
+        end
+      end
+
+      should "write pretty permalink outputs with the requested extension" do
+        front_matter = <<~YAML
+          layout: event
+          permalink: /calendar/event/
+          outputs:
+            - ics
+        YAML
+
+        with_event_layouts(front_matter) do
+          clear_dest
+          @site.process
+
+          assert_exist dest_dir("calendar", "event", "index.html")
+          assert_exist dest_dir("calendar", "event", "index.ics")
+          assert_includes File.read(dest_dir("calendar", "event", "index.ics")),
+                          "BEGIN:VCALENDAR"
+        end
+      end
+
+      should "rewrite a missing requested output during incremental builds" do
+        front_matter = <<~YAML
+          layout: event
+          outputs:
+            - ics
+        YAML
+
+        with_event_layouts(front_matter) do
+          @site = Site.new(site_configuration("incremental" => true))
+          @site.process
+          FileUtils.rm_f(dest_dir("multiformat-event.ics"))
+
+          @site.process
+
+          assert_exist dest_dir("multiformat-event.ics")
+          assert_includes File.read(dest_dir("multiformat-event.ics")), "BEGIN:VCALENDAR"
+        end
+      end
+
+      should "warn when a requested output conflicts with another file" do
+        front_matter = <<~YAML
+          layout: event
+          outputs:
+            - ics
+        YAML
+
+        with_event_layouts(front_matter) do
+          conflict = source_dir("multiformat-event.ics")
+          File.write(conflict, "static calendar")
+          output = capture_stderr { @site.process }
+
+          assert_includes output, "Conflict:"
+          assert_includes output, dest_dir("multiformat-event.ics")
+        ensure
+          FileUtils.rm_f(conflict)
+        end
+      end
+
+      should "ignore output names that are not extension names" do
+        front_matter = <<~YAML
+          layout: event
+          outputs:
+            - ../ics
+            - json feed
+        YAML
+
+        with_event_layouts(front_matter) do
+          clear_dest
+          @site.process
+
+          assert_exist dest_dir("multiformat-event.html")
+          refute_exist dest_dir("multiformat-event.ics")
+        end
+      end
+
+      should "ignore output names that match the primary extension" do
+        front_matter = <<~YAML
+          layout: event
+          permalink: /calendar.ics
+          outputs:
+            - ics
+        YAML
+
+        with_event_layouts(front_matter) do
+          clear_dest
+          @site.process
+          page = @site.pages.find { |site_page| site_page.name == "multiformat-event.md" }
+
+          assert_equal [dest_dir("calendar.ics")], page.destination_paths(dest_dir)
+          assert_includes File.read(dest_dir("calendar.ics")), "HTML EVENT LAYOUT"
+          refute_includes File.read(dest_dir("calendar.ics")), "BEGIN:VCALENDAR"
+        end
+      end
     end
 
     should "enforce a strict 3-dash limit on the start of the YAML front matter" do

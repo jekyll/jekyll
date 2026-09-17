@@ -82,6 +82,39 @@ class TestRegenerator < JekyllUnitTest
       assert @regenerator.regenerate?(@document)
     end
 
+    should "accept a single destination path when checking for missing output" do
+      dest = dest_dir("regenerator-single-output.html")
+
+      FileUtils.mkdir_p(File.dirname(dest))
+      FileUtils.touch(dest)
+
+      refute @regenerator.send(:missing_destination?, dest)
+
+      FileUtils.rm_f(dest)
+      assert @regenerator.send(:missing_destination?, dest)
+    ensure
+      FileUtils.rm_f(dest)
+    end
+
+    should "accept multiple destination paths when checking for missing output" do
+      dests = [
+        dest_dir("regenerator-output.html"),
+        dest_dir("regenerator-output.ics"),
+      ]
+
+      dests.each do |dest|
+        FileUtils.mkdir_p(File.dirname(dest))
+        FileUtils.touch(dest)
+      end
+
+      refute @regenerator.send(:missing_destination?, dests)
+
+      FileUtils.rm_f(dests.last)
+      assert @regenerator.send(:missing_destination?, dests)
+    ensure
+      FileUtils.rm_f(dests)
+    end
+
     should "always regenerate asset files" do
       assert @regenerator.regenerate?(@asset_file)
     end

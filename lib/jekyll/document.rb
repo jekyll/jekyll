@@ -137,6 +137,10 @@ module Jekyll
       @renderer ||= Jekyll::Renderer.new(site, self)
     end
 
+    def additional_outputs
+      @additional_outputs ||= {}
+    end
+
     # Produces a "cleaned" relative path.
     # The "cleaned" relative path is the relative path without the extname
     #   and with the collection's directory removed as well.
@@ -254,19 +258,31 @@ module Jekyll
     # The full path to the output file.
     #
     # base_directory - the base path of the output directory
+    # ext            - the String extension for the output file
     #
     # Returns the full path to the output file of this document.
-    def destination(base_directory)
+    def destination(base_directory, ext = output_ext)
       @destination ||= {}
-      @destination[base_directory] ||= begin
+      @destination[[base_directory, ext]] ||= begin
         path = site.in_dest_dir(base_directory, URL.unescape_path(url))
-        if url.end_with? "/"
-          path = File.join(path, "index.html")
-        else
-          path << output_ext unless path.end_with? output_ext
-        end
+        path = if url.end_with? "/"
+                 File.join(path, "index#{ext}")
+               else
+                 replace_output_ext(path, ext)
+               end
         path
       end
+    end
+
+    # The full paths to the main and additional output files.
+    #
+    # base_directory - the base path of the output directory
+    #
+    # Returns an Array of output file paths for this document.
+    def destination_paths(base_directory)
+      ([destination(base_directory)] + additional_output_exts.map do |ext|
+        destination(base_directory, ext)
+      end).uniq
     end
 
     # Write the generated Document file to the destination directory.
@@ -275,10 +291,10 @@ module Jekyll
     #
     # Returns nothing.
     def write(dest)
-      path = destination(dest)
-      FileUtils.mkdir_p(File.dirname(path))
-      Jekyll.logger.debug "Writing:", path
-      File.write(path, output, :mode => "wb")
+      write_output(destination(dest), output)
+      additional_outputs.each do |ext, content|
+        write_output(destination(dest, ext), content)
+      end
 
       trigger_hooks(:post_write)
     end
@@ -454,6 +470,32 @@ module Jekyll
     end
 
     private
+
+    def additional_output_exts
+      (additional_outputs.keys + configured_additional_output_exts).uniq
+    end
+
+    def configured_additional_output_exts
+      return [] unless place_in_layout?
+
+      requested_output_exts.select { |ext| site.layouts["#{data["layout"]}#{ext}"] }
+    end
+
+    def requested_output_exts
+      Utils.additional_output_exts(site.layouts, data["layout"], data["outputs"], output_ext)
+    end
+
+    def replace_output_ext(path, ext)
+      return path if path.end_with?(ext)
+
+      path.delete_suffix(output_ext) << ext
+    end
+
+    def write_output(path, content)
+      FileUtils.mkdir_p(File.dirname(path))
+      Jekyll.logger.debug "Writing:", path
+      File.write(path, content, :mode => "wb")
+    end
 
     def merge_categories!(other)
       if other.key?("categories") && !other["categories"].nil?

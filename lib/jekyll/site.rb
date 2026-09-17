@@ -570,7 +570,20 @@ module Jekyll
 
       document.renderer.payload = payload
       document.output = document.renderer.run
+      trigger_post_render_hooks(document)
+    end
+
+    def trigger_post_render_hooks(document)
       document.trigger_hooks(:post_render)
+      return unless document.respond_to?(:additional_outputs)
+
+      primary_output = document.output
+      document.additional_outputs.transform_values! do |content|
+        document.output = content
+        document.trigger_hooks(:post_render)
+        document.output
+      end
+      document.output = primary_output
     end
   end
 end
