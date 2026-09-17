@@ -79,6 +79,41 @@ class TestTheme < JekyllUnitTest
     end
   end
 
+  context "local theme" do
+    setup do
+      @root = source_dir("_themes", "local-theme")
+      FileUtils.mkdir_p(File.join(@root, "_layouts"))
+    end
+
+    teardown do
+      FileUtils.rm_rf(source_dir("_themes"))
+      FileUtils.rm_rf(source_dir("_theme"))
+    end
+
+    should "load from _themes using the theme name" do
+      theme = LocalTheme.from_site(fixture_site("theme" => "local-theme"), "local-theme")
+
+      assert_instance_of Jekyll::LocalTheme, theme
+      assert_equal "local-theme", theme.name
+      assert_equal File.realpath(@root), theme.root
+      assert_nil theme.version
+      assert_empty theme.runtime_dependencies
+      assert_equal File.join(theme.root, "_layouts"), theme.layouts_path
+    end
+
+    should "fall back to a single _theme directory" do
+      FileUtils.rm_rf(source_dir("_themes"))
+      single_theme = source_dir("_theme")
+      FileUtils.mkdir_p(File.join(single_theme, "_sass"))
+      site = fixture_site("theme" => "single-theme")
+
+      theme = LocalTheme.from_site(site, "single-theme")
+
+      assert_equal File.realpath(single_theme), theme.root
+      assert_equal File.join(theme.root, "_sass"), theme.sass_path
+    end
+  end
+
   should "retrieve the gemspec" do
     assert_equal "test-theme-0.1.0", @theme.send(:gemspec).full_name
   end
