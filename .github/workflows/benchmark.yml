@@ -10,7 +10,7 @@ on:
       ruby_version:
         description: "Ruby version to use (via `ruby/setup-ruby@v1`) action."
         required: false
-        default: "2.7"
+        default: "3.4"
 
 jobs:
   benchmark:
