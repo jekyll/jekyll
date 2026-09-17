@@ -77,6 +77,14 @@ class TestDocument < JekyllUnitTest
       assert_equal Time.now.strftime("%Y/%m/%d"), @document.to_liquid["date"].strftime("%Y/%m/%d")
     end
 
+    should "not mutate its data when resolving a fallback date" do
+      refute @document.data.key?("date")
+
+      @document.to_liquid["date"]
+
+      refute @document.data.key?("date")
+    end
+
     should "be jsonify-able" do
       page_json = @document.to_liquid.to_json
       parsed = JSON.parse(page_json)
