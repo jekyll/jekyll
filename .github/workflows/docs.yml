@@ -8,7 +8,7 @@ on:
       - "docs/**"
 
 env:
-  RUBY_VERSION: 2.7
+  RUBY_VERSION: 3.4
 
 jobs:
   deploy_docs:

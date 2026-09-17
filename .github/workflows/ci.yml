@@ -22,10 +22,6 @@ jobs:
       fail-fast: false
       matrix:
         ruby:
-          - label: Ruby 2.7
-            version: "2.7"
-          - label: Ruby 3.3
-            version: "3.3"
           - label: Ruby 3.4
             version: "3.4"
         os:
@@ -66,15 +62,15 @@ jobs:
             script_file: "default-site"
             ruby_version: "jruby-9.4.8.0"
           - job_name: "Profile Docs Site"
-            setup_label: "Ruby 2.7"
+            setup_label: "Ruby 3.4"
             step_name: "Build and Profile docs site"
             script_file: "profile-docs"
-            ruby_version: "2.7"
+            ruby_version: "3.4"
           - job_name: "Style Check"
-            setup_label: "Ruby 2.7"
+            setup_label: "Ruby 3.4"
             step_name: "Run RuboCop"
             script_file: "fmt"
-            ruby_version: "2.7"
+            ruby_version: "3.4"
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
