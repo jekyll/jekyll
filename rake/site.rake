@@ -68,7 +68,11 @@ namespace :site do
   desc "Copy the Code of Conduct"
   task :conduct do
     front_matter = {
-      "redirect_from" => "/conduct/index.html",
+      # The README and the 3.0 and 3.1.1 release posts all link to /docs/conduct/,
+      # so the generated page keeps serving that URL instead of the slug derived
+      # from the source filename.
+      "permalink"     => "/docs/conduct/",
+      "redirect_from" => ["/conduct/index.html", "/docs/code_of_conduct/"],
       "editable"      => false,
     }
     siteify_file(".github/CODE_OF_CONDUCT.markdown", front_matter)
