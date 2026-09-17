@@ -12,7 +12,15 @@ group :development do
   gem "pry-byebug" unless RUBY_ENGINE == "jruby"
 end
 
-#
+# Gems `ostruct` and `rdoc` stopped being default gems in Ruby 3.5, so they have to be declared
+# explicitly to stay requirable under Bundler (`Rakefile` requires `rdoc`, `test/helper.rb`
+# requires `ostruct`). Rubies that still ship them as default gems are left alone -- notably JRuby,
+# whose bundled Bundler cannot override the `jar-dependencies` default gem that gem `psych`
+# (a transitive dependency of gem `rdoc`) pulls in.
+if RUBY_VERSION >= "3.5"
+  gem "ostruct", "~> 0.6"
+  gem "rdoc", "~> 6.0"
+end
 
 group :test do
   gem "activesupport", "< 7.1.0"
@@ -106,7 +114,6 @@ group :rdoc, :optional => true do
   # a dependency of the `rdoc` gem), lock psych gem to v4.x instead of installing `libyaml` in our
   # development / CI environment.
   gem "psych", "~> 4.0"
-  gem "rdoc", "~> 6.0"
 end
 
 #
