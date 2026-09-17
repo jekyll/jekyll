@@ -16,6 +16,8 @@
 
 module Jekyll
   module Convertible
+    attr_writer :additional_outputs
+
     # Returns the contents as a String.
     def to_s
       content || ""
@@ -87,6 +89,14 @@ module Jekyll
     #   e.g. ".html" for an HTML output file.
     def output_ext
       renderer.output_ext
+    end
+
+    def additional_outputs
+      @additional_outputs ||= {}
+    end
+
+    def destination_paths(dest)
+      ([destination(dest)] + additional_output_exts.map { |ext| destination(dest, ext) }).uniq
     end
 
     # Determine which converter to use based on this convertible's
@@ -224,6 +234,7 @@ module Jekyll
       FileUtils.mkdir_p(File.dirname(path))
       Jekyll.logger.debug "Writing:", path
       File.write(path, output, :mode => "wb")
+      write_additional_outputs(dest, path)
       Jekyll::Hooks.trigger hook_owner, :post_write, self
     end
 
@@ -252,6 +263,23 @@ module Jekyll
 
     def no_layout?
       data["layout"] == "none"
+    end
+
+    def additional_output_exts
+      variants = site.layout_variants.fetch(data["layout"].to_s, [])
+      variant_exts = variants.size > 1 ? variants.map(&:ext) : []
+      (variant_exts + additional_outputs.keys).uniq - [output_ext]
+    end
+
+    def write_additional_outputs(dest, primary_path)
+      additional_outputs.each do |ext, content|
+        path = destination(dest, ext)
+        next if path == primary_path
+
+        FileUtils.mkdir_p(File.dirname(path))
+        Jekyll.logger.debug "Writing:", path
+        File.write(path, content, :mode => "wb")
+      end
     end
   end
 end
