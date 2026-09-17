@@ -302,6 +302,39 @@ For help getting started, read /path/to/jekyll-theme-awesome/README.md.
 
 Add your template files in the corresponding folders. Then complete the `.gemspec` and the README files according to your needs.
 
+### Inheriting from another gem-based theme
+
+A gem-based theme can build on one other gem-based theme. This is useful when a child theme changes only a focused part of a stable parent theme and should continue receiving compatible parent updates.
+
+Declare the parent in both the child theme's gemspec metadata and its runtime dependencies:
+
+```ruby
+Gem::Specification.new do |spec|
+  # ...
+  spec.metadata["parent_theme"] = "jekyll-theme-base"
+  spec.add_runtime_dependency "jekyll-theme-base", "~> 2.3"
+end
+```
+
+Users install and select only the child theme:
+
+```yaml
+theme: jekyll-theme-child
+```
+
+Jekyll resolves layouts, includes, Sass partials, assets, data, and theme configuration in this order:
+
+1. the user's site;
+2. the selected child theme;
+3. the parent theme.
+
+Files and values found earlier in the list override matching resources found later. Runtime plugin dependencies from both themes are loaded, while the parent theme gem itself is treated as a theme rather than a plugin.
+
+Theme inheritance is intentionally limited to one parent. Jekyll reports an error when the declared parent is itself a child theme. Child theme authors should also use a suitably strict runtime dependency requirement so that incompatible parent releases are not selected during upgrades.
+
+{: .note .warning}
+Theme inheritance is available only for gem-based themes. It is not supported by the `remote_theme` plugin or the classic GitHub Pages build environment.
+
 ### Layouts and includes
 
 Theme layouts and includes work just like they work in any Jekyll site. Place layouts in your theme's `/_layouts` folder, and place includes in your themes `/_includes` folder.

@@ -87,4 +87,17 @@ class TestThemeDataReader < JekyllUnitTest
       assert_equal "Design by FTC", @site.data["i18n"]["testimonials"]["footer"]
     end
   end
+
+  context "site with a child theme" do
+    setup do
+      @site = fixture_site("theme" => "test-theme-child")
+      @site.reader.read_data
+    end
+
+    should "merge parent, child, and site data in precedence order" do
+      assert_equal "Hello! I’m foo. And who are you?", @site.data["greetings"]["foo"]
+      assert_equal "Child theme data", @site.data["greetings"]["child"]
+      assert_equal "Mercedes", @site.data["cars"]["manufacturer"]
+    end
+  end
 end

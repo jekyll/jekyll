@@ -66,6 +66,25 @@ class TestThemeAssetsReader < JekyllUnitTest
     end
   end
 
+  context "with a child theme" do
+    setup do
+      @site = fixture_site("theme" => "test-theme-child")
+      @site.reset
+      ThemeAssetsReader.new(@site).read
+    end
+
+    should "read child and parent assets" do
+      assert_file_with_relative_path @site.static_files, "/assets/child.js"
+      assert_file_with_relative_path @site.static_files, "/assets/img/logo.png"
+    end
+
+    should "prefer child assets over parent assets" do
+      base_script = @site.static_files.find { |file| file.relative_path == "/assets/base.js" }
+
+      assert_includes File.read(base_script.path), "From the child theme."
+    end
+  end
+
   context "with no theme" do
     should "not read any assets" do
       site = fixture_site("theme" => nil)
