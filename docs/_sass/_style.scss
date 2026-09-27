@@ -968,6 +968,21 @@ table#builtin-hooks {
   }
 }
 
+.highlight table {
+  margin: -0.5em -1em -1em;
+  background: initial;
+  border: none;
+  box-shadow: none;
+
+  td {
+    padding: 0.5em;
+    background: initial;
+    border: none;
+    box-shadow: none;
+    &.gutter { border-right: 1px solid rgba(255, 255, 255, 0.1) }
+  }
+}
+
 /* Note types */
 
 .note {
