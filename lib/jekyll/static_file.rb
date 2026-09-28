@@ -192,7 +192,23 @@ module Jekyll
       if @site.safe || Jekyll.env == "production"
         FileUtils.cp(path, dest_path)
       else
-        FileUtils.copy_entry(path, dest_path)
+        # copy_entry will copy symlink as a symlink, but if the symlink is
+        # relative, it will be pointing to the wrong location when copied
+        # as is to a new directory. Therefore, we detect symlinks and rewrite
+        # them to contain the absolute path.
+        if File.lstat(path).symlink?
+          abs_path = File.realpath(path)
+
+          # try to remove the existing destination symlink/file in case it exists
+          begin
+            File.unlink(dest_path)
+          rescue Errno::ENOENT
+          end
+
+          File.symlink(abs_path, dest_path)
+        else
+          FileUtils.copy_entry(path, dest_path)
+        end
       end
 
       unless File.symlink?(dest_path)
