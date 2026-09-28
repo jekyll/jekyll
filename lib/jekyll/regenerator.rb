@@ -67,6 +67,7 @@ module Jekyll
     # Returns nothing
     def clear_cache
       @cache = {}
+      @layout_paths = nil
     end
 
     # Checks if the source has been modified or the
@@ -164,16 +165,35 @@ module Jekyll
 
     def regenerate_page?(document)
       document.asset_file? || document.data["regenerate"] ||
-        source_modified_or_dest_missing?(
-          site.in_source_dir(document.relative_path), document.destination(@site.dest)
-        )
+        regenerate_layout_outputs?(document, site.in_source_dir(document.relative_path))
     end
 
     def regenerate_document?(document)
       !document.write? || document.data["regenerate"] ||
-        source_modified_or_dest_missing?(
-          document.path, document.destination(@site.dest)
-        )
+        regenerate_layout_outputs?(document, document.path)
+    end
+
+    def regenerate_layout_outputs?(document, source)
+      modified = source_modified_or_dest_missing?(source, document.destination(@site.dest))
+      entry = metadata[source]
+      changed = entry && entry["layout_paths"] != layout_paths
+      # Rebuild dependencies when formats disappear, so deleted layouts do not
+      # continue forcing regeneration on every subsequent build.
+      if changed
+        add(source)
+        entry = metadata[source]
+      end
+      entry["layout_paths"] = layout_paths if entry
+      missing = document.output_destinations(site.dest).any? { |path| !File.exist?(path) }
+      return false unless modified || changed || missing
+
+      force(source)
+    end
+
+    def layout_paths
+      @layout_paths ||= site.layout_variants.values.flat_map do |formats|
+        formats.values.map(&:path)
+      end.sort
     end
 
     def existing_file_modified?(path)

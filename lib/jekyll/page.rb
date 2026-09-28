@@ -3,6 +3,7 @@
 module Jekyll
   class Page
     include Convertible
+    include LayoutOutputs
 
     attr_writer :dir
     attr_accessor :basename, :content, :data, :ext, :name, :output, :pager, :site

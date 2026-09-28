@@ -43,7 +43,23 @@ module Jekyll
     #
     # Returns String the output extname including the leading period.
     def output_ext
-      @output_ext ||= (permalink_ext || converter_output_ext)
+      @output_ext ||= (permalink_ext || layout_output_ext || converter_output_ext)
+    end
+
+    def primary_layout
+      name = document.data["layout"].to_s
+      return layouts[name] unless document.place_in_layout?
+
+      layout_variants[output_ext] || layouts[name]
+    end
+
+    # Formats read from disk apply only while the reader's layout is in use.
+    # A plugin may replace the layout or provide a separate layouts collection.
+    def layout_variants(name = document.data["layout"].to_s)
+      return {} if @layouts && !@layouts.equal?(site.layouts)
+
+      variants = site.layout_variants[name] || {}
+      variants.value?(layouts[name]) ? variants : {}
     end
 
     # Prepare payload and render the document
@@ -51,6 +67,7 @@ module Jekyll
     # Returns String rendered document output
     def run
       Jekyll.logger.debug "Rendering:", document.relative_path
+      document.layout_outputs = {} if document.respond_to?(:layout_outputs=)
 
       assign_pages!
       assign_current_document!
@@ -90,6 +107,7 @@ module Jekyll
 
       if document.place_in_layout?
         Jekyll.logger.debug "Rendering Layout:", document.relative_path
+        render_alternate_layouts(output, info)
         output = place_in_layouts(output, payload, info)
       end
 
@@ -147,10 +165,10 @@ module Jekyll
     # Render layouts and place document content inside.
     #
     # Returns String rendered content
-    def place_in_layouts(content, payload, info)
+    def place_in_layouts(content, payload, info, layout = primary_layout)
       output = content.dup
-      layout = layouts[document.data["layout"].to_s]
       validate_layout(layout)
+      format = layout.ext if layout
 
       used = Set.new([layout])
 
@@ -161,7 +179,8 @@ module Jekyll
         output = render_layout(output, layout, info)
         add_regenerator_dependencies(layout)
 
-        next unless (layout = site.layouts[layout.data["layout"]])
+        parent = layout.data["layout"]
+        next unless (layout = layout_variants(parent)[format] || site.layouts[parent])
         break if used.include?(layout)
 
         used << layout
@@ -170,6 +189,20 @@ module Jekyll
     end
 
     private
+
+    def render_alternate_layouts(content, info)
+      return unless document.respond_to?(:alternate_layouts)
+
+      document.layout_outputs = {}
+      document.alternate_layouts.each do |layout|
+        document.layout_outputs[layout.ext] = place_in_layouts(content, payload, info, layout)
+      end
+    end
+
+    def layout_output_ext
+      name = document.data["layout"].to_s
+      layouts[name].ext if layout_variants.size > 1 && document.place_in_layout?
+    end
 
     # Checks if the layout specified in the document actually exists
     #
@@ -230,7 +263,7 @@ module Jekyll
     end
 
     def assign_layout_data!
-      layout = layouts[document.data["layout"]]
+      layout = primary_layout
       payload["layout"] = Utils.deep_merge_hashes(layout.data, payload["layout"] || {}) if layout
     end
 

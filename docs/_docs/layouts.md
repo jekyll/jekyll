@@ -123,6 +123,49 @@ layout: default
 
 Now posts can use this layout while the rest of the pages use the default.
 
+## Multiple output formats
+
+To publish the same page, post, or output collection document in several formats,
+create layouts with the same basename and different extensions. For example,
+`_layouts/event.html` and `_layouts/event.json` both apply to a document with
+`layout: event` in its front matter. Each layout receives the same converted
+`content` and the document's front matter through `page`.
+
+An HTML layout is preferred as the primary output (`.html`, then `.xhtml`, then
+`.htm`). If none exists, the last layout in filename order is primary. An explicit
+permalink extension selects the matching layout when available. The primary
+output continues to determine `page.url` and the document's
+`output` property. A layout with only one format keeps its existing behavior.
+
+Additional files replace the extension of the primary destination. For example:
+
+| Primary destination | Additional layout | Additional destination |
+|---------------------|-------------------|------------------------|
+| `events/launch.html` | `event.json`      | `events/launch.json`   |
+| `events/launch/index.html` | `event.json` | `events/launch/index.json` |
+
+The layout controls the output format; Jekyll does not automatically convert
+HTML into JSON or other formats. For example, `event.json` could contain:
+
+{% raw %}
+```liquid
+{
+  "title": {{ page.title | jsonify }},
+  "description": {{ content | strip_html | strip | jsonify }}
+}
+```
+{% endraw %}
+
+When a layout inherits another layout, Jekyll first looks for the parent with
+the same extension and otherwise uses the parent's primary layout. Site layouts
+override theme layouts of the same name and extension. Different extensions
+from the theme remain available.
+
+All formats take part in cleanup, incremental builds, and destination conflict
+warnings. Document hooks still run once for the document, and `post_render`
+hooks see the primary `output`. Plugins that need to modify additional rendered
+formats can access the document's `layout_outputs` hash, keyed by extension.
+
 ## Variables
 
 You can set front matter in layouts, the only difference is when you're

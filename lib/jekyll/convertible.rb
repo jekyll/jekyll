@@ -224,6 +224,7 @@ module Jekyll
       FileUtils.mkdir_p(File.dirname(path))
       Jekyll.logger.debug "Writing:", path
       File.write(path, output, :mode => "wb")
+      write_layout_outputs(dest) if respond_to?(:write_layout_outputs)
       Jekyll::Hooks.trigger hook_owner, :post_write, self
     end
 
