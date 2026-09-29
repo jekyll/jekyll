@@ -21,7 +21,22 @@ following metadata:
       <td><p><code>file.path</code></p></td>
       <td><p>
 
-        The relative path to the file, e.g. <code>/assets/img/image.jpg</code>
+        The path to the file relative to the source directory, e.g.
+        <code>/assets/img/image.jpg</code>. For a file inside a collection this
+        keeps the collection folder's leading underscore, e.g.
+        <code>/_members/alice/profile.jpg</code>, so it does not address the
+        written file &mdash; use <code>file.url</code> for that.
+
+      </p></td>
+    </tr>
+    <tr>
+      <td><p><code>file.url</code></p></td>
+      <td><p>
+
+        The path to the written file relative to the site root, e.g.
+        <code>/members/alice/profile.jpg</code> for a file in the
+        <code>members</code> collection. This is what you want when linking to
+        the file.
 
       </p></td>
     </tr>

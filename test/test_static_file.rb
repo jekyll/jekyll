@@ -178,8 +178,23 @@ class TestStaticFile < JekyllUnitTest
         "modified_time" => @static_file.modified_time,
         "path"          => "/static_file.txt",
         "collection"    => nil,
+        "url"           => "/static_file.txt",
       }
       assert_equal expected, @static_file.to_liquid.to_h
+    end
+
+    should "expose the destination url of a collection's static file to liquid" do
+      static_file = setup_static_file_with_collection(
+        "root",
+        "_foo/dir/subdir",
+        "file.html",
+        "output" => true
+      )
+      drop = static_file.to_liquid
+      # `path` stays the source-relative path, which keeps the collection folder's
+      # leading underscore and so cannot be used to link to the written file
+      assert_equal "_foo/dir/subdir/file.html", drop["path"]
+      assert_equal "/foo/dir/subdir/file.html", drop["url"]
     end
 
     should "jsonify its liquid drop instead of itself" do

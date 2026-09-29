@@ -4,7 +4,7 @@ module Jekyll
   module Drops
     class StaticFileDrop < Drop
       extend Forwardable
-      delegate_methods   :name, :extname, :modified_time, :basename
+      delegate_methods   :name, :extname, :modified_time, :basename, :url
       delegate_method_as :relative_path, :path
       delegate_method_as :type, :collection
 
