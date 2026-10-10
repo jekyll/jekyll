@@ -488,7 +488,7 @@ class TestSite < JekyllUnitTest
         site = Site.new(site_configuration)
         site.process
 
-        file_content = SafeYAML.load_file(File.join(source_dir, "_data", "members.yaml"))
+        file_content = Jekyll::Utils.safe_load_yaml_file(File.join(source_dir, "_data", "members.yaml"))
 
         assert_equal site.data["members"], file_content
         assert_equal site.site_payload["site"]["data"]["members"], file_content
@@ -509,7 +509,7 @@ class TestSite < JekyllUnitTest
         site = Site.new(site_configuration)
         site.process
 
-        file_content = SafeYAML.load_file(File.join(source_dir, "_data", "languages.yml"))
+        file_content = Jekyll::Utils.safe_load_yaml_file(File.join(source_dir, "_data", "languages.yml"))
 
         assert_equal site.data["languages"], file_content
         assert_equal site.site_payload["site"]["data"]["languages"], file_content
@@ -519,7 +519,7 @@ class TestSite < JekyllUnitTest
         site = Site.new(site_configuration)
         site.process
 
-        file_content = SafeYAML.load_file(File.join(source_dir, "_data", "members.json"))
+        file_content = Jekyll::Utils.safe_load_yaml_file(File.join(source_dir, "_data", "members.json"))
 
         assert_equal site.data["members"], file_content
         assert_equal site.site_payload["site"]["data"]["members"], file_content
@@ -529,7 +529,7 @@ class TestSite < JekyllUnitTest
         site = Site.new(site_configuration)
         site.process
 
-        file_content = SafeYAML.load_file(File.join(
+        file_content = Jekyll::Utils.safe_load_yaml_file(File.join(
                                             source_dir, "_data", "categories", "dairy.yaml"
                                           ))
 
@@ -544,7 +544,7 @@ class TestSite < JekyllUnitTest
         site = Site.new(site_configuration)
         site.process
 
-        file_content = SafeYAML.load_file(File.join(
+        file_content = Jekyll::Utils.safe_load_yaml_file(File.join(
                                             source_dir, "_data", "categories.01", "dairy.yaml"
                                           ))
 
@@ -559,7 +559,7 @@ class TestSite < JekyllUnitTest
         site = Site.new(site_configuration("safe" => false))
         site.process
 
-        file_content = SafeYAML.load_file(File.join(source_dir, "_data", "products.yml"))
+        file_content = Jekyll::Utils.safe_load_yaml_file(File.join(source_dir, "_data", "products.yml"))
 
         assert_equal site.data["products"], file_content
         assert_equal site.site_payload["site"]["data"]["products"], file_content
@@ -569,7 +569,7 @@ class TestSite < JekyllUnitTest
              "as they resolve to inside site.source" do
         site = Site.new(site_configuration("safe" => true))
         site.process
-        file_content = SafeYAML.load_file(File.join(source_dir, "_data", "products.yml"))
+        file_content = Jekyll::Utils.safe_load_yaml_file(File.join(source_dir, "_data", "products.yml"))
         assert_equal site.data["products"], file_content
         assert_equal site.site_payload["site"]["data"]["products"], file_content
       end
