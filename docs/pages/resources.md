@@ -54,6 +54,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
 
 ### Forms
   - [Arengu](https://www.arengu.com)
+  - [BootForm](https://bootform.com/docs/framework-jekyll)
   - [Forminit](https://forminit.com?utm_source=github&utm_medium=jekyll-docs)
   - [99Inbound](https://www.99inbound.com)
   - [Formcake](https://formcake.com)
