@@ -27,6 +27,15 @@ kramdown:
 
 Documentation for Kramdown parsers is available in the [Kramdown docs](https://kramdown.gettalong.org/parser/kramdown.html). If you use a Kramdown parser other than Kramdown or GFM, you'll need to add the gem for it.
 
+### Disabling Syntax Highlighting
+
+To disable syntax highlighting for Kramdown, set `syntax_highlighter` to `null`:
+
+```yaml
+kramdown:
+  syntax_highlighter: null
+```
+
 ### Syntax Highlighting (CodeRay)
 
 To use the [CodeRay](http://coderay.rubychan.de/) syntax highlighter with Kramdown, you  need to add a dependency on the `kramdown-syntax-coderay` gem. For example, `bundle add kramdown-syntax-coderay`. Then, you'll be able to specify CodeRay in your `syntax_highlighter` config:
