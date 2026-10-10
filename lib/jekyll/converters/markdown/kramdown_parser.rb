@@ -97,7 +97,7 @@ module Jekyll
         #   * Make sure `syntax_highlighter_opts` exists.
 
         def setup
-          @config["syntax_highlighter"] ||= highlighter
+          @config["syntax_highlighter"] = highlighter unless @config.key?("syntax_highlighter")
           @config["syntax_highlighter_opts"] ||= {}
           @config["syntax_highlighter_opts"]["default_lang"] ||= "plaintext"
           @config["syntax_highlighter_opts"]["guess_lang"] = @config["guess_lang"]
