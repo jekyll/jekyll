@@ -33,8 +33,8 @@ class TestDataReader < JekyllUnitTest
   context "with csv options set" do
     setup do
       reader_config = {
-        "csv_converters" => [:numeric],
-        "headers"        => false,
+        "converters" => [:numeric],
+        "headers"    => false,
       }
 
       @reader = DataReader.new(
