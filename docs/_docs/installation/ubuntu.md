@@ -29,4 +29,12 @@ Finally, install Jekyll and Bundler:
 gem install jekyll bundler
 ```
 
+## Possible additional gem after upgrade from Ubuntu 20.04 LTS to Ubuntu 22.04 LTS
+
+You may also need to install the `ffi` gem
+
+```sh
+gem install ffi
+```
+
 That's it! You're ready to start using Jekyll.
