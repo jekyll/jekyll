@@ -8,7 +8,9 @@ Jekyll is a [Ruby Gem]({{ '/docs/ruby-101/#gems' | relative_url }}) that can be 
 
 ## Requirements
 
-* [Ruby](https://www.ruby-lang.org/en/downloads/) version **{{ site.data.ruby.min_version }}** or higher, including all development headers (check your Ruby version using `ruby -v`)
+* [Ruby](https://www.ruby-lang.org/en/downloads/) version **{{ site.data.ruby.min_version }}** or higher, including all development headers.
+  * Check your Ruby version using `ruby -v`.
+  * In macOS, we don't recommend the preinstalled Ruby. [Read more details here.]({{ '/docs/installation/macos/#install-ruby' | relative_url }})
 * [RubyGems](https://rubygems.org/pages/download) (check your Gems version using `gem -v`)
 * [GCC](https://gcc.gnu.org/install/) and [Make](https://www.gnu.org/software/make/) (check versions using `gcc -v`,`g++ -v`,  and `make -v`)
 
