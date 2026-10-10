@@ -75,6 +75,20 @@ class TestKramdown < JekyllUnitTest
       refute_empty(result.css(selector), result.to_html)
     end
 
+    should "disable syntax highlighting when explicitly set to nil or false" do
+      [nil, false].each do |syntax_highlighter|
+        override = { "kramdown" => { "syntax_highlighter" => syntax_highlighter } }
+        converter = fixture_converter(Utils.deep_merge_hashes(@config, override))
+        result = nokogiri_fragment(converter.convert(<<~MARKDOWN))
+          ~~~ruby
+          puts "Hello World"
+          ~~~
+        MARKDOWN
+
+        assert_empty result.css("div.highlighter-rouge"), result.to_html
+      end
+    end
+
     context "when configured" do
       setup do
         @source = <<~TEXT
