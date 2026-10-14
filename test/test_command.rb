@@ -6,7 +6,7 @@ class TestCommand < JekyllUnitTest
   context "when calling .add_build_options" do
     should "add common options" do
       cmd = Object.new
-      mocks_expect(cmd).to receive(:option).at_least(:once)
+      expect(cmd).to receive(:option).at_least(:once)
       Command.add_build_options(cmd)
     end
   end
