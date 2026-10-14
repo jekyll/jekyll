@@ -15,7 +15,7 @@ module Jekyll
       private delegate_method_as :data, :fallback_data
 
       delegate_methods :id, :output, :content, :to_s, :relative_path, :url, :date
-      data_delegators "title", "categories", "tags"
+      data_delegators "title", "categories", "tags", :target
 
       def collection
         @obj.collection.label
