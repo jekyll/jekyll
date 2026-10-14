@@ -126,6 +126,8 @@ running a command. For example:
 ```sh
 JEKYLL_ENV=production bundle exec jekyll build
 ```
+{: .note .warning}
+If you are using Windows operating system, you need to instead set this variable in a command of its own: `set JEKYLL_ENV=production` Then start Jekyll like always.
 
 By default `JEKYLL_ENV` is development. The `JEKYLL_ENV` is available to you
 in liquid using `jekyll.environment`. So to only output the analytics script
