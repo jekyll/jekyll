@@ -51,6 +51,8 @@ Jekyll themes set default data, layouts, includes, and stylesheets. However, you
 
 To replace layouts or includes in your theme, make a copy in your `_layouts` or `_includes` directory of the specific file you wish to modify, or create the file from scratch giving it the same name as the file you wish to override.
 
+Many themes have customization hooks for common tasks, such as [adding CSS or color settings to Minima](https://github.com/jekyll/minima/tree/2.5-stable#customization). Make sure to check your theme's documentation, or use these hooks as you find them in the theme's code!
+
 For example, if your selected theme has a `page` layout, you can override the theme's layout by creating your own `page` layout in the `_layouts` directory (that is, `_layouts/page.html`).
 
 To locate a theme's files on your computer:
