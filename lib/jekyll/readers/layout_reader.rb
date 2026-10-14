@@ -10,16 +10,14 @@ module Jekyll
     end
 
     def read
-      layout_entries.each do |layout_file|
-        @layouts[layout_name(layout_file)] = \
-          Layout.new(site, layout_directory, layout_file)
+      variants = {}
+      read_variants(variants, theme_layout_entries, theme_layout_directory)
+      read_variants(variants, layout_entries, layout_directory)
+      variants.each do |name, formats|
+        preferred = Page::HTML_EXTENSIONS.find { |ext| formats.key?(ext) }
+        @layouts[name] = formats[preferred || formats.keys.max]
       end
-
-      theme_layout_entries.each do |layout_file|
-        @layouts[layout_name(layout_file)] ||= \
-          Layout.new(site, theme_layout_directory, layout_file)
-      end
-
+      site.layout_variants = variants
       @layouts
     end
 
@@ -32,6 +30,13 @@ module Jekyll
     end
 
     private
+
+    def read_variants(variants, entries, directory)
+      entries.each do |file|
+        formats = (variants[layout_name(file)] ||= {})
+        formats[File.extname(file)] = Layout.new(site, directory, file)
+      end
+    end
 
     def layout_entries
       entries_in layout_directory

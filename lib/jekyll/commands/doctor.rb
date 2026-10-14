@@ -128,8 +128,9 @@ module Jekyll
             site.each_site_file do |thing|
               next if allow_used_permalink?(thing)
 
-              dest_path = thing.destination(site.dest)
-              (result[dest_path] ||= []) << thing.path
+              output_destinations(thing, site.dest).each do |path|
+                (result[path] ||= []) << thing.path
+              end
             end
           end
         end
@@ -140,9 +141,16 @@ module Jekyll
 
         def case_insensitive_urls(things, destination)
           things.each_with_object({}) do |thing, memo|
-            dest = thing.destination(destination)
-            (memo[dest.downcase] ||= []) << dest
+            output_destinations(thing, destination).each do |dest|
+              (memo[dest.downcase] ||= []) << dest
+            end
           end
+        end
+
+        def output_destinations(thing, destination)
+          return thing.output_destinations(destination) if thing.respond_to?(:output_destinations)
+
+          [thing.destination(destination)]
         end
 
         def url_exists?(url)

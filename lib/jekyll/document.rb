@@ -3,6 +3,7 @@
 module Jekyll
   class Document
     include Comparable
+    include LayoutOutputs
     extend Forwardable
 
     attr_reader :path, :site, :extname, :collection, :type
@@ -279,6 +280,7 @@ module Jekyll
       FileUtils.mkdir_p(File.dirname(path))
       Jekyll.logger.debug "Writing:", path
       File.write(path, output, :mode => "wb")
+      write_layout_outputs(dest)
 
       trigger_hooks(:post_write)
     end

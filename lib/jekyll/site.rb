@@ -4,7 +4,7 @@ module Jekyll
   class Site
     attr_accessor :baseurl, :converters, :data, :drafts, :exclude,
                   :file_read_opts, :future, :gems, :generators, :highlighter,
-                  :include, :inclusions, :keep_files, :layouts, :limit_posts,
+                  :include, :inclusions, :keep_files, :layouts, :layout_variants, :limit_posts,
                   :lsi, :pages, :permalink_style, :plugin_manager, :plugins,
                   :reader, :safe, :show_drafts, :static_files, :theme, :time,
                   :unpublished
@@ -99,6 +99,7 @@ module Jekyll
                     Time.now
                   end
       self.layouts = {}
+      self.layout_variants = {}
       self.inclusions = {}
       self.pages = []
       self.static_files = []
