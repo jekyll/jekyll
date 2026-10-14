@@ -1488,6 +1488,30 @@ class TestFilters < JekyllUnitTest
       end
     end
 
+    context "hash_add_item filter" do
+      should "return a hash with a new item added to the end" do
+        assert_equal({"key" => "value"}, @filter.hash_add_item({}, "key", "value"))
+      end
+    end
+
+    context "hash_inject_item filter" do
+      should "return a hash with a new item added to the end" do
+        assert_equal({"key" => "value"}, @filter.hash_inject_item({}, "key", "value"))
+      end
+    end
+
+    context "hash_remove_item filter" do
+      should "return a hash with a new item added to the end" do
+        assert_equal({}, @filter.hash_remove_item({"key" => "value"}, "key"))
+      end
+    end
+
+    context "hash_eject_item filter" do
+      should "return a hash with a new item added to the end" do
+        assert_equal({}, @filter.hash_eject_item({"key" => "value"}, "key"))
+      end
+    end
+
     context "push filter" do
       should "return a new array with the element pushed to the end" do
         assert_equal %w(hi there bernie), @filter.push(%w(hi there), "bernie")
