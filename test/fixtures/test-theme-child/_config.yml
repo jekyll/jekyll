@@ -1,0 +1,4 @@
+title: Child Theme
+child_setting: inherited from child
+test_theme:
+  skin: child

@@ -26,6 +26,31 @@ class TestTheme < JekyllUnitTest
         Theme.new("foo").version
       end
     end
+
+    should "resolve a declared parent theme" do
+      theme = Theme.new("test-theme-child")
+
+      assert_equal "test-theme", theme.parent_theme.name
+      assert_equal theme_dir, theme.parent_theme.root
+    end
+
+    should "return nil when no parent theme is declared" do
+      assert_nil @theme.parent_theme
+    end
+
+    should "require a declared parent to be a runtime dependency" do
+      gemspec = double(
+        :full_gem_path        => test_dir("fixtures", "test-theme-child"),
+        :metadata             => { "parent_theme" => "test-theme" },
+        :runtime_dependencies => []
+      )
+      allow(Gem::Specification).to receive(:find_by_name).with("invalid-child").and_return(gemspec)
+
+      error = assert_raises(Jekyll::Errors::MissingDependencyException) do
+        Theme.new("invalid-child").parent_theme
+      end
+      assert_includes error.message, "does not list it as a runtime dependency"
+    end
   end
 
   context "path generation" do

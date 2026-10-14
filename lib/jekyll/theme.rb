@@ -3,6 +3,8 @@
 module Jekyll
   class Theme
     extend Forwardable
+    PARENT_THEME_METADATA_KEY = "parent_theme"
+
     attr_reader   :name
 
     def_delegator :gemspec, :version, :version
@@ -49,6 +51,24 @@ module Jekyll
 
     def runtime_dependencies
       gemspec.runtime_dependencies
+    end
+
+    # The single gem-based theme this theme builds upon.
+    #
+    # Theme authors must declare the parent both in the gemspec metadata and as
+    # a runtime dependency so that installing the child also installs its
+    # parent.
+    def parent_theme
+      parent_name = gemspec.metadata[PARENT_THEME_METADATA_KEY].to_s.downcase.strip
+      return if parent_name.empty?
+
+      unless runtime_dependencies.any? { |dependency| dependency.name == parent_name }
+        raise Jekyll::Errors::MissingDependencyException,
+              "The #{name} theme declares #{parent_name} as its parent theme, but does not " \
+              "list it as a runtime dependency."
+      end
+
+      @parent_theme ||= Jekyll::Theme.new(parent_name)
     end
 
     private

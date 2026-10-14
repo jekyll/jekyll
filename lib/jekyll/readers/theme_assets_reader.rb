@@ -9,24 +9,28 @@ module Jekyll
     end
 
     def read
-      return unless site.theme&.assets_path
+      return unless site.theme
 
-      Find.find(site.theme.assets_path) do |path|
-        next if File.directory?(path)
+      site.themes.each do |theme|
+        next unless theme.assets_path
 
-        if File.symlink?(path)
-          Jekyll.logger.warn "Theme reader:", "Ignored symlinked asset: #{path}"
-        else
-          read_theme_asset(path)
+        Find.find(theme.assets_path) do |path|
+          next if File.directory?(path)
+
+          if File.symlink?(path)
+            Jekyll.logger.warn "Theme reader:", "Ignored symlinked asset: #{path}"
+          else
+            read_theme_asset(theme, path)
+          end
         end
       end
     end
 
     private
 
-    def read_theme_asset(path)
-      base = site.theme.root
-      dir = File.dirname(path.sub("#{site.theme.root}/", ""))
+    def read_theme_asset(theme, path)
+      base = theme.root
+      dir = File.dirname(path.sub("#{theme.root}/", ""))
       name = File.basename(path)
 
       if Utils.has_yaml_header?(path)
