@@ -50,6 +50,11 @@ module Jekyll
       @priority || :normal
     end
 
+    # Plugin safety is a mechanism to restrict the allowed plugins when
+    # building a site. This is used for example by third party platforms
+    # such as Github Pages to securely build sites on their servers.
+    # More information in https://github.com/jekyll/jekyll/issues/9040#issuecomment-1166316988.
+    #
     # Get or set the safety of this plugin. When called without an argument
     # it returns the safety. When an argument is given, it will set the
     # safety.
