@@ -2,6 +2,11 @@
 title: Tags Filters
 permalink: "/docs/liquid/tags/"
 ---
+<div class="note warning">
+  <h5>Jekyll uses Liquid 4</h5>
+  <p>The <a href="https://shopify.github.io/liquid/">official Liquid documentation</a> refers to a newer version of Liquid than the one Jekyll uses. Some features described there (e.g. the <code>render</code> tag) may not be available in Jekyll.</p>
+</div>
+
 All of the standard Liquid
 [tags](https://shopify.github.io/liquid/tags/control-flow/) are supported.
 Jekyll has a few built in tags to help you build your site. You can also create
