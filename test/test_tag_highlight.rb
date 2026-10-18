@@ -129,11 +129,13 @@ class TestTagHighlight < TagUnitTest
 
       should "render markdown with rouge with line numbers" do
         assert_match(
-          %(<table class="rouge-table"><tbody>) +
-            %(<tr><td class="gutter gl">) +
-            %(<pre class="lineno">1\n</pre></td>) +
-            %(<td class="code"><pre>test\n</pre></td></tr>) +
-            %(</tbody></table>),
+          Regexp.new(
+            %(<table class="rouge-table"><tbody>) +
+              %(<tr><td class="gutter gl"( aria-hidden="true")?>) +
+              %(<pre class="lineno">1\n</pre></td>) +
+              %(<td class="code"><pre>test\n?</pre></td></tr>) +
+              %(</tbody></table>)
+          ),
           @result
         )
       end
@@ -226,14 +228,13 @@ class TestTagHighlight < TagUnitTest
       end
 
       should "should stop highlighting at boundary with rouge" do
-        expected = <<~EOS
+        expected = Regexp.new(<<~'EOS')
           <p>This is not yet highlighted</p>
 
-          <figure class="highlight"><pre><code class="language-php" data-lang="php"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-          </pre></td><td class="code"><pre><span class="n">test</span>
-          </pre></td></tr></tbody></table></code></pre></figure>
+          <figure class="highlight"><pre><code class="language-php" data-lang="php">(<span class="w">\n</span>)?<table class="rouge-table"><tbody><tr><td class="gutter gl"( aria-hidden="true")?><pre class="lineno">1
+          </pre></td><td class="code"><pre><span class="n">test</span>\n?</pre></td></tr></tbody></table></code></pre></figure>
 
-          <p>This should not be highlighted, right?</p>
+          <p>This should not be highlighted, right\?</p>
         EOS
         assert_match(expected, @result)
       end
