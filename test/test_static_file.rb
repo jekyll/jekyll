@@ -150,6 +150,26 @@ class TestStaticFile < JekyllUnitTest
       allow(File).to receive(:symlink?).and_call_original
     end
 
+    context "with a symlink" do
+      setup do
+        @linkname = "static_link.txt"
+        File.symlink(@filename, source_dir(@linkname))
+        @static_link = setup_static_file(@site.source, "", @linkname)
+      end
+
+      teardown do
+        remove_dummy_file(@linkname) if File.exist?(source_dir(@linkname))
+      end
+
+      should "rewrite relative symlinks to absolute symlinks" do
+        @static_link.write(dest_dir)
+        dest_link = File.join(dest_dir, @static_link.url)
+        assert File.lstat(dest_link).symlink?
+        target = File.readlink(dest_link)
+        assert_equal target, File.absolute_path(target)
+      end
+    end
+
     should "known if the source path is modified, when it is" do
       sleep 1
       modify_dummy_file(@filename)
