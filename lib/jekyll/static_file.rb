@@ -106,7 +106,9 @@ module Jekyll
       self.class.mtimes[path] = mtime
 
       FileUtils.mkdir_p(File.dirname(dest_path))
-      FileUtils.rm(dest_path) if File.exist?(dest_path)
+      # Remove the destination. Important if it's a dangling symlink left by a
+      # previous build; otherwise trying to overwrite it may result in an error.
+      FileUtils.rm_f(dest_path)
       copy_file(dest_path)
 
       true
@@ -191,6 +193,12 @@ module Jekyll
     def copy_file(dest_path)
       if @site.safe || Jekyll.env == "production"
         FileUtils.cp(path, dest_path)
+      elsif File.lstat(path).symlink?
+        # copy_entry will copy symlink as a symlink, but if the symlink is
+        # relative, it will be pointing to the wrong location when copied
+        # as is to a new directory. Therefore, we detect symlinks and rewrite
+        # them to contain the absolute path.
+        File.symlink(File.realpath(path), dest_path)
       else
         FileUtils.copy_entry(path, dest_path)
       end
