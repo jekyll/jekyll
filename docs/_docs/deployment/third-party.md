@@ -94,3 +94,8 @@ In [this guide](https://www.azion.com/en/documentation/products/guides/jekyll-bo
 ## harvis
 
 [harvis](https://harvis.dev) is zero-setup static hosting. Run `npx harvis` in your `_site` folder after `jekyll build` and it uploads the files as-is and prints a live URL — no account, no config. Run it again to update the same site. Free for small sites.
+
+## SnapDeploy
+
+[SnapDeploy](https://snapdeploy.dev) builds your site from a Dockerfile in the repository and serves it as a container: a Ruby stage runs `jekyll build` with every gem in your Gemfile (any plugin, any Ruby version), an nginx stage serves the result, and every push to the branch rebuilds it. There is a free tier with no credit card. [This guide](https://snapdeploy.dev/deploy-jekyll-site) has the two files you need.
+
