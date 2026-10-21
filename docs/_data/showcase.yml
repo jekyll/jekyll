@@ -306,3 +306,9 @@
   categories:
     - marketing-site
     - documentation
+
+- name: Kröner & Starke
+  url: https://kroener-starke.ch/
+  image: kroener-starke.png
+  categories:
+    - agency
