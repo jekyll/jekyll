@@ -300,7 +300,7 @@ module Jekyll
       Jekyll.logger.debug "Reading:", relative_path
 
       if yaml_file?
-        @data = SafeYAML.load_file(path)
+        @data = Jekyll::Utils.safe_load_yaml_file(path, :read_opts => site.file_read_opts)
       else
         begin
           merge_defaults
@@ -483,7 +483,7 @@ module Jekyll
       self.content = File.read(path, **Utils.merged_file_read_opts(site, opts))
       if content =~ YAML_FRONT_MATTER_REGEXP
         self.content = Regexp.last_match.post_match
-        data_file = SafeYAML.load(Regexp.last_match(1))
+        data_file = Jekyll::Utils.safe_load_yaml(Regexp.last_match(1))
         merge_data!(data_file, :source => "YAML front matter") if data_file
       end
     end
