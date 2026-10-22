@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 module Jekyll
+  module HighlightTagFormatters
+    autoload :HTMLTable, "jekyll/tags/highlight_formatters/html_table"
+    autoload :HTMLLineMarker, "jekyll/tags/highlight_formatters/html_line_marker"
+  end
+  private_constant :HighlightTagFormatters
+
   module Tags
     class HighlightBlock < Liquid::Block
       include Liquid::StandardFilters
@@ -91,9 +97,9 @@ module Jekyll
       end
 
       def line_highlighter_formatter(formatter)
-        Rouge::Formatters::HTMLLineHighlighter.new(
+        HighlightTagFormatters::HTMLLineMarker.new(
           formatter,
-          :highlight_lines => mark_lines
+          :mark_lines => mark_lines
         )
       end
 
@@ -106,7 +112,7 @@ module Jekyll
       end
 
       def table_formatter(formatter)
-        Rouge::Formatters::HTMLTable.new(
+        HighlightTagFormatters::HTMLTable.new(
           formatter,
           :css_class    => "highlight",
           :gutter_class => "gutter",
