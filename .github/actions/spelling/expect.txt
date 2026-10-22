@@ -145,6 +145,7 @@ ghpages
 giraffeacademy
 gitcms
 githubcom
+gitcms
 gitlab
 gjtorikian
 globbed
@@ -163,6 +164,7 @@ hostman
 htmlproofer
 Iaa
 ial
+ics
 iconset
 ified
 invokables
@@ -250,6 +252,7 @@ mkasberg
 mkd
 mkdn
 mkdown
+meetup
 modernizr
 mojombo
 moncefbelyamani

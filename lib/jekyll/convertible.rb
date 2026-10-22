@@ -220,11 +220,19 @@ module Jekyll
     #
     # Returns nothing.
     def write(dest)
-      path = destination(dest)
-      FileUtils.mkdir_p(File.dirname(path))
-      Jekyll.logger.debug "Writing:", path
-      File.write(path, output, :mode => "wb")
+      write_output(destination(dest), output)
+      additional_outputs.each do |ext, content|
+        write_output(destination(dest, ext), content)
+      end
       Jekyll::Hooks.trigger hook_owner, :post_write, self
+    end
+
+    def additional_outputs
+      @additional_outputs ||= {}
+    end
+
+    def additional_output_exts
+      (additional_outputs.keys + configured_additional_output_exts).uniq
     end
 
     # Accessor for data properties by Liquid.
@@ -252,6 +260,22 @@ module Jekyll
 
     def no_layout?
       data["layout"] == "none"
+    end
+
+    def configured_additional_output_exts
+      return [] unless place_in_layout?
+
+      requested_output_exts.select { |ext| site.layouts["#{data["layout"]}#{ext}"] }
+    end
+
+    def requested_output_exts
+      Utils.additional_output_exts(site.layouts, data["layout"], data["outputs"], output_ext)
+    end
+
+    def write_output(path, content)
+      FileUtils.mkdir_p(File.dirname(path))
+      Jekyll.logger.debug "Writing:", path
+      File.write(path, content, :mode => "wb")
     end
   end
 end

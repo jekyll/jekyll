@@ -15,6 +15,64 @@ class TestLayoutReader < JekyllUnitTest
       assert_equal ["default", "simple", "post/simple"].sort, layouts.keys.sort
     end
 
+    context "with a layout that has a non-HTML extension" do
+      setup do
+        File.write(source_dir("_layouts", "event.html"), "HTML EVENT")
+        File.write(source_dir("_layouts", "event.ics"), "BEGIN:VCALENDAR")
+      end
+
+      teardown do
+        FileUtils.rm_f(source_dir("_layouts", "event.html"))
+        FileUtils.rm_f(source_dir("_layouts", "event.ics"))
+      end
+
+      should "read the layout by its full filename" do
+        layouts = LayoutReader.new(@site).read
+
+        assert_includes layouts.keys, "event.ics"
+        assert_equal ".ics", layouts["event.ics"].ext
+        assert_equal ".html", layouts["event"].ext
+      end
+    end
+
+    context "with only a non-HTML layout" do
+      setup do
+        File.write(source_dir("_layouts", "calendar.ics"), "BEGIN:VCALENDAR")
+      end
+
+      teardown do
+        FileUtils.rm_f(source_dir("_layouts", "calendar.ics"))
+      end
+
+      should "read the layout by basename" do
+        layouts = LayoutReader.new(@site).read
+
+        assert_includes layouts.keys, "calendar.ics"
+        assert_equal ".ics", layouts["calendar"].ext
+      end
+    end
+
+    context "with a site format layout and a theme HTML layout" do
+      setup do
+        File.write(source_dir("_layouts", "theme-event.ics"), "BEGIN:VCALENDAR")
+        File.write(theme_dir("_layouts", "theme-event.html"), "HTML EVENT")
+      end
+
+      teardown do
+        FileUtils.rm_f(source_dir("_layouts", "theme-event.ics"))
+        FileUtils.rm_f(theme_dir("_layouts", "theme-event.html"))
+      end
+
+      should "keep the theme HTML layout as the primary layout" do
+        reader = LayoutReader.new(@site)
+        allow(reader).to receive(:theme_layout_directory).and_return(theme_dir("_layouts"))
+        layouts = reader.read
+
+        assert_equal ".html", layouts["theme-event"].ext
+        assert_equal ".ics", layouts["theme-event.ics"].ext
+      end
+    end
+
     context "when no _layouts directory exists in CWD" do
       should "know to use the layout directory relative to the site source" do
         assert_equal LayoutReader.new(@site).layout_directory, source_dir("_layouts")
