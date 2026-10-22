@@ -3,6 +3,7 @@ builtins
 github
 hakiri
 https
+jekyllex
 Linting
 Microsoft
 ssh
@@ -16,4 +17,5 @@ workaround
 workarounds
 WSL
 decapcms
+termux
 tina
