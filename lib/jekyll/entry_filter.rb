@@ -2,7 +2,7 @@
 
 module Jekyll
   class EntryFilter
-    attr_reader :site
+    attr_reader :site, :base_directory
 
     SPECIAL_LEADING_CHAR_REGEX = %r!\A#{Regexp.union([".", "_", "#", "~"])}!o.freeze
 
@@ -13,15 +13,12 @@ module Jekyll
       )
     end
 
-    def base_directory
-      @base_directory.to_s
-    end
-
     def derive_base_directory(site, base_dir)
       base_dir[site.source] = "" if base_dir.start_with?(site.source)
       base_dir
     end
 
+    # NOTE: Shouldn't this be a private method?
     def relative_to_source(entry)
       File.join(
         base_directory, entry
@@ -52,13 +49,11 @@ module Jekyll
     end
 
     def included?(entry)
-      glob_include?(site.include, entry) ||
-        glob_include?(site.include, File.basename(entry))
+      glob_include?(site.include, entry) || (entry.include?(File::Separator) && glob_include?(site.include, File.basename(entry)))
     end
 
     def special?(entry)
-      SPECIAL_LEADING_CHAR_REGEX.match?(entry) ||
-        SPECIAL_LEADING_CHAR_REGEX.match?(File.basename(entry))
+      SPECIAL_LEADING_CHAR_REGEX.match?(File.basename(entry))
     end
 
     def backup?(entry)
@@ -66,7 +61,7 @@ module Jekyll
     end
 
     def excluded?(entry)
-      glob_include?(site.exclude - site.include, relative_to_source(entry)).tap do |excluded|
+      glob_include?(excluded, relative_to_source(entry)).tap do |excluded|
         if excluded
           Jekyll.logger.debug(
             "EntryFilter:",
@@ -95,13 +90,14 @@ module Jekyll
     # Check if an entry matches a specific pattern.
     # Returns true if path matches against any glob pattern, else false.
     def glob_include?(enumerator, entry)
-      entry_with_source = PathManager.join(site.source, entry)
+      current_directory = PathManager.join(site.source, base_directory)
+      entry_with_source = PathManager.join(current_directory, entry)
       entry_is_directory = File.directory?(entry_with_source)
 
       enumerator.any? do |pattern|
         case pattern
         when String
-          pattern_with_source = PathManager.join(site.source, pattern)
+          pattern_with_source = PathManager.join(current_directory, pattern)
 
           File.fnmatch?(pattern_with_source, entry_with_source) ||
             entry_with_source.start_with?(pattern_with_source) ||
@@ -112,6 +108,12 @@ module Jekyll
           false
         end
       end
+    end
+
+    private
+
+    def excluded
+      @excluded ||= site.exclude - site.include
     end
   end
 end
