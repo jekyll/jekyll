@@ -219,6 +219,24 @@ module Jekyll
           Jekyll.logger.info "Server address:", server_address(@server, opts)
           launch_browser @server, opts if opts["open_url"]
           boot_or_detach @server, opts
+        rescue StandardError => e
+          server_error_message(e, opts["port"])
+        end
+
+        # Log exception from starting WEBRick and re-raise exception
+        def server_error_message(exception, port)
+          message = case exception
+                    when Errno::EADDRINUSE
+                      "Port '#{port}' is already in use."
+                    when Errno::EACCES
+                      "Access denied to port '#{port}'."
+                    else
+                      exception.to_s
+                    end
+
+          Jekyll.logger.error "Server Error:", message
+
+          raise exception
         end
 
         # Recreate NondisclosureName under utf-8 circumstance
