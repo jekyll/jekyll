@@ -25,6 +25,7 @@ A basic Jekyll site usually looks something like this:
 │   ├── _base.scss
 │   └── _layout.scss
 ├── _site
+├── _plugins
 ├── .jekyll-cache
 │   └── Jekyll
 │       └── Cache
@@ -161,6 +162,20 @@ An overview of what each of these does:
           This is where the generated site will be placed (by default) once
           Jekyll is done transforming it. It’s probably a good idea to add this
           to your <code>.gitignore</code> file.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>_plugins</code></p>
+      </td>
+      <td>
+        <p>
+          This directory is used to add custom plugins written in Ruby that extend
+          Jekyll’s functionality. You can create your own modules to define Liquid tags,
+          filters, or other features that are not included by default. Any .rb files 
+          placed inside _plugins are automatically loaded when Jekyll builds the site.
+          Learn <a href="{{ '/docs/plugins' | relative_url }}">how to work with plugins</a>.
         </p>
       </td>
     </tr>
