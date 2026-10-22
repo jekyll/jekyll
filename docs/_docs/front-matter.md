@@ -109,6 +109,17 @@ front matter of a page or post.
         </p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <p><code>title</code></p>
+      </td>
+      <td>
+        <p>
+          For posts, this sets the title used by Liquid and overrides the title
+          derived from the filename.
+        </p>
+      </td>
+    </tr>
   </tbody>
 </table>
 </div>
