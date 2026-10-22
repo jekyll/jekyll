@@ -123,6 +123,32 @@ end
 
 #
 
+Given(%r!^I have the following (draft|post)s? with attachments(?: inside (.*) directory)?:$!) do |type, folder, table|
+  table.hashes.each do |input_hash|
+    title = slug(input_hash["title"])
+    parsed_date = Time.parse(input_hash["date"])
+    basename = type == "draft" ? title : "#{parsed_date.strftime("%Y-%m-%d")}-#{title}"
+    attachments = input_hash.delete("attachments").split(",")
+
+    if folder
+      attachment_dir = File.join(folder, "_#{type}s", basename)
+      document_path = File.join(folder, "_#{type}s", "#{basename}.md")
+    else
+      attachment_dir = File.join("_#{type}s", basename)
+      document_path = File.join("_#{type}s", "#{basename}.md")
+    end
+
+    FileUtils.mkdir_p(attachment_dir) unless attachments.empty?
+    File.write(document_path, file_content_from_hash(input_hash))
+    attachment_content = Marshal.dump("staticfile".split)
+    attachments.each do |attch|
+      File.binwrite(File.join(attachment_dir, attch), attachment_content)
+    end
+  end
+end
+
+#
+
 Given(%r!^I have the following documents? under the (.*) collection:$!) do |folder, table|
   table.hashes.each do |input_hash|
     title = slug(input_hash["title"])

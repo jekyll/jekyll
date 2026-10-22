@@ -280,6 +280,7 @@ module Jekyll
       Jekyll.logger.debug "Writing:", path
       File.write(path, output, :mode => "wb")
 
+      attachments.each { |attch| attch.write(dest) }
       trigger_hooks(:post_write)
     end
 
@@ -306,6 +307,7 @@ module Jekyll
           merge_defaults
           read_content(**opts)
           read_post_data
+          read_attachments
         rescue StandardError => e
           handle_read_error(e)
         end
@@ -453,6 +455,10 @@ module Jekyll
       merge_data!({ "tags" => tags })
     end
 
+    def attachments
+      @attachments ||= []
+    end
+
     private
 
     def merge_categories!(other)
@@ -493,6 +499,23 @@ module Jekyll
       populate_categories
       populate_tags
       generate_excerpt
+    end
+
+    def read_attachments
+      return unless type == :posts
+
+      attachments_dir = relative_path[0..-extname.length - 1]
+      return unless File.directory?(attachments_dir)
+
+      require "jekyll/attachment"
+
+      Dir.chdir(attachments_dir) do
+        collection.entry_filter.filter(Dir.entries(".")).each do |entry|
+          next if File.directory?(entry)
+
+          attachments << Attachment.new(self, attachments_dir, entry)
+        end
+      end
     end
 
     def handle_read_error(error)
