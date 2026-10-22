@@ -52,7 +52,7 @@ module Jekyll
     end
 
     def included?(entry)
-      glob_include?(site.include, entry) ||
+      glob_include?(site.include, relative_to_source(entry)) ||
         glob_include?(site.include, File.basename(entry))
     end
 
@@ -66,11 +66,22 @@ module Jekyll
     end
 
     def excluded?(entry)
-      glob_include?(site.exclude - site.include, relative_to_source(entry)).tap do |excluded|
+      entry_relative = relative_to_source(entry)
+      entry_with_source = PathManager.join(site.source, entry_relative)
+
+      # Do not exclude a directory when an included path is nested within it
+      if File.directory?(entry_with_source)
+        slashed_path = "#{entry_with_source.chomp("/")}/"
+        return false if site.include.any? do |inc|
+                          PathManager.join(site.source, inc).start_with?(slashed_path)
+                        end
+      end
+
+      glob_include?(site.exclude - site.include, entry_relative).tap do |excluded|
         if excluded
           Jekyll.logger.debug(
             "EntryFilter:",
-            "excluded #{relative_to_source(entry)}"
+            "excluded #{entry_relative}"
           )
         end
       end
