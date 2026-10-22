@@ -58,13 +58,6 @@
     - software
     - marketing-site
 
-- name: Mapwize
-  url: https://www.mapwize.io/
-  image: mapwize.png
-  categories:
-    - software
-    - marketing-site
-
 - name: Auth0 Blog
   url: https://auth0.com/blog/
   image: auth0-blog.png
@@ -157,13 +150,6 @@
   categories:
     - documentation
 
-- name: Matt Grey
-  url: https://himatt.com/
-  image: matt-grey.png
-  categories:
-    - personal
-    - portfolio
-
 - name: Lattice
   url: https://lattice.com/
   image: lattice.png
@@ -200,19 +186,6 @@
   image: chain.png
   categories:
     - marketing-site
-
-- name: IBM MobileFirst Foundation
-  url: https://mobilefirstplatform.ibmcloud.com/
-  image: ibm-mobile-foundation.png
-  categories:
-    - documentation
-
-- name: "18F"
-  url: https://18f.gsa.gov/
-  image: 18f.png
-  categories:
-    - agency
-    - government
 
 - name: Development Seed
   url: https://developmentseed.org/
@@ -306,3 +279,11 @@
   categories:
     - marketing-site
     - documentation
+
+- name: ShapeGanic
+  url: https://shapeganic.com/
+  image: shapeganic.png
+  categories:
+    - software
+    - marketing-site
+    - blog
