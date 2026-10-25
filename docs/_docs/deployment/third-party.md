@@ -94,3 +94,9 @@ In [this guide](https://www.azion.com/en/documentation/products/guides/jekyll-bo
 ## harvis
 
 [harvis](https://harvis.dev) is zero-setup static hosting. Run `npx harvis` in your `_site` folder after `jekyll build` and it uploads the files as-is and prints a live URL — no account, no config. Run it again to update the same site. Free for small sites.
+
+## Pethost
+
+[Pethost](https://pethost.dev/) runs anything Docker runs, at one flat price for as many projects as fit. A Jekyll site deploys from a short Dockerfile, which builds it with `bundle exec jekyll build` and serves `_site`, with one command or on every GitHub push, with HTTPS and your own domain.
+
+Read [this guide](https://pethost.dev/blog/deploy-jekyll-site/) to deploy your Jekyll site on Pethost.
