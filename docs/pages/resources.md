@@ -35,6 +35,9 @@ See also: [docs/themes](/docs/themes/).
 
 Use a SaaS service as a backend for functionality on your Jekyll site
 
+### Chat
+  - [Asyntai](https://asyntai.com/documentation/integrations/jekyll/): AI chat assistant that answers visitors from your own site content, added with the jekyll-ai-chatbot gem
+
 ### Comments
   - [Staticman](https://staticman.net): Add user-generated content to a Jekyll site (free and open source)
   - [Talkyard](https://blog-comments.talkyard.io/): Embedded comments for Jekyll and others (free and open source, or hosted serverless)
