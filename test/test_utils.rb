@@ -394,6 +394,11 @@ class TestUtils < JekyllUnitTest
       assert_equal "---  \n", File.open(file, "rb") { |f| f.read(6) }
       assert Utils.has_yaml_header?(file)
     end
+    should "accept files with a UTF-8 byte order mark before the YAML front matter" do
+      file = source_dir("_encodings", "UTF8CRLFandBOM.md")
+      assert_equal "\xEF\xBB\xBF---".b, File.open(file, "rb") { |f| f.read(6) }
+      assert Utils.has_yaml_header?(file)
+    end
     should "reject pgp files and the like which resemble front matter" do
       file = source_dir("pgp.key")
       assert_equal "-----B", File.open(file, "rb") { |f| f.read(6) }

@@ -139,7 +139,7 @@ module Jekyll
     # Returns true if the YAML front matter is present.
     # rubocop: disable Naming/PredicateName
     def has_yaml_header?(file)
-      File.open(file, "rb", &:readline).match? %r!\A---\s*\r?\n!
+      File.open(file, "rb", &:readline).match? %r!\A(?:\xEF\xBB\xBF)?---\s*\r?\n!n
     rescue EOFError
       false
     end
