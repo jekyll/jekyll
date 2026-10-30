@@ -97,7 +97,7 @@ module Jekyll
         :encoding   => reader_config.fetch("encoding", config["encoding"]),
       }
 
-      defaults.merge(overrides)
+      Utils.merged_file_read_opts(nil, defaults.merge(overrides))
     end
 
     def config

@@ -28,6 +28,11 @@ class TestDataReader < JekyllUnitTest
     should "parse TSV normally" do
       assert_equal @parsed, @reader.read_data_file(File.expand_path("fixtures/sample.tsv", __dir__))
     end
+
+    should "strip a UTF-8 byte order mark from the CSV header" do
+      assert_equal @parsed,
+                   @reader.read_data_file(File.expand_path("fixtures/sample_with_bom.csv", __dir__))
+    end
   end
 
   context "with csv options set" do
