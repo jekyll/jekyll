@@ -56,15 +56,16 @@ module Jekyll
     def normalize_path(filename)
       @normalize_path ||= {}
       @normalize_path[filename] ||= begin
-        theme_dir = @site.theme&.root
+        theme = theme_for(filename)
+        theme_dir = theme&.root
         case filename
-        when %r!\A(#{Regexp.escape(@site.source)}/)(?<rest>.*)!io
+        when %r!\A(#{Regexp.escape(@site.source)}/)(?<rest>.*)!i
           Regexp.last_match(:rest)
         when %r!(/gems/.*)*/gems/(?<dirname>[^/]+)(?<rest>.*)!,
              %r!(?<dirname>[^/]+/lib)(?<rest>.*)!
           "#{Regexp.last_match(:dirname)}#{Regexp.last_match(:rest)}"
-        when theme_dir && %r!\A#{Regexp.escape(theme_dir)}/(?<rest>.*)!io
-          PathManager.join(@site.theme.basename, Regexp.last_match(:rest))
+        when theme_dir && %r!\A#{Regexp.escape(theme_dir)}/(?<rest>.*)!i
+          PathManager.join(theme.basename, Regexp.last_match(:rest))
         when %r!\A/(.*)!
           Regexp.last_match(1)
         else
@@ -75,6 +76,12 @@ module Jekyll
 
     def new_profile_hash
       Hash.new { |hash, key| hash[key] = 0 }
+    end
+
+    def theme_for(filename)
+      @site.theme&.inheritance_chain&.find do |layer|
+        filename.match?(%r!\A#{Regexp.escape(layer.root)}/!i)
+      end
     end
   end
 end

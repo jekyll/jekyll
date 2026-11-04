@@ -36,10 +36,13 @@ module Jekyll
     #
     # Returns false only if no dependencies have been specified, otherwise nothing.
     def require_theme_deps
-      return false unless site.theme.runtime_dependencies
+      themes = site.theme.inheritance_chain
+      dependencies = themes.flat_map { |layer| Array(layer.runtime_dependencies) }
+      return false if dependencies.empty?
 
-      site.theme.runtime_dependencies.each do |dep|
-        next if dep.name == "jekyll"
+      theme_names = themes.map(&:name)
+      dependencies.uniq(&:name).each do |dep|
+        next if dep.name == "jekyll" || theme_names.include?(dep.name)
 
         External.require_with_graceful_fail(dep.name) if plugin_allowed?(dep.name)
       end

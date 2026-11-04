@@ -29,13 +29,15 @@ module Jekyll
     # Returns nothing.
     def read_data
       @site.data = DataReader.new(site).read(site.config["data_dir"])
-      return unless site.theme&.data_path
+      site.theme&.inheritance_chain&.each do |layer|
+        next unless layer.data_path
 
-      theme_data = DataReader.new(
-        site,
-        :in_source_dir => site.method(:in_theme_dir)
-      ).read(site.theme.data_path)
-      @site.data = Jekyll::Utils.deep_merge_hashes(theme_data, @site.data)
+        theme_data = DataReader.new(
+          site,
+          :in_source_dir => layer.method(:in_theme_dir)
+        ).read(layer.data_path)
+        @site.data = Jekyll::Utils.deep_merge_hashes(theme_data, @site.data)
+      end
     end
 
     # Sorts posts, pages, and static files.

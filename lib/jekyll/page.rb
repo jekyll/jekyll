@@ -39,11 +39,7 @@ module Jekyll
       @base = base
       @dir  = dir
       @name = name
-      @path = if site.in_theme_dir(base) == base # we're in a theme
-                site.in_theme_dir(base, dir, name)
-              else
-                site.in_source_dir(base, dir, name)
-              end
+      @path = resolve_source_path(base, dir, name)
 
       process(name)
       read_yaml(PathManager.join(base, dir), name)
@@ -198,6 +194,11 @@ module Jekyll
     end
 
     private
+
+    def resolve_source_path(base, dir, name)
+      theme = site.theme&.inheritance_chain&.find { |layer| layer.in_theme_dir(base) == base }
+      theme ? theme.in_theme_dir(base, dir, name) : site.in_source_dir(base, dir, name)
+    end
 
     def generate_excerpt
       return unless generate_excerpt?

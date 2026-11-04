@@ -342,6 +342,43 @@ Jekyll will automatically require all whitelisted `runtime_dependencies` of your
 
 With this, the end-user need not keep track of the plugins required to be included in their config file for their theme-gem to work as intended.
 
+### Inheriting a gem-based theme
+
+A theme can build on an installed parent theme. Declare one parent explicitly in
+the child theme's gemspec, both as metadata and as a runtime dependency:
+
+```ruby
+spec.metadata["jekyll:parent_theme"] = "my-parent-theme"
+spec.add_runtime_dependency "my-parent-theme", "~> 1.0"
+```
+
+Users install the child theme as usual and name only the child in `_config.yml`:
+
+```yaml
+theme: my-child-theme
+```
+
+Jekyll looks for layouts, includes and assets in the site first, then the child,
+then its parent. A parent may itself inherit another gem-based theme. Each theme
+can declare only one parent; a missing parent, unsatisfied gem version,
+undeclared runtime dependency or inheritance cycle raises an error.
+
+Data hashes and permitted theme configuration are merged from parent to child to
+site, with the site taking precedence. The existing theme-configuration
+restrictions still apply to every layer: themes cannot override Jekyll defaults,
+and symlinked configuration files are ignored. `ignore_theme_config: true` skips
+configuration from all themes but does not disable inherited files.
+
+Parent Sass directories are available as fallbacks after the converter's existing
+lookup paths, including the child theme's Sass directory. Local Sass files and
+explicit user load paths retain their existing precedence. This also works in
+safe mode without adding arbitrary user paths to the trusted theme paths.
+
+Parent theme gems do not need Ruby entrypoints: they are resource layers, not
+plugins to `require`. Plugin dependencies from every theme layer still follow
+Jekyll's existing whitelist rules in safe mode. Inheritance applies to installed
+gem-based themes; it does not fetch themes or install dependencies during builds.
+
 ### Pre-configuring Theme-gems {%- include docs_version_badge.html version="4.0" -%}
 
 Jekyll will read-in a `_config.yml` at the root of the theme-gem and merge its data into the site's existing configuration data.

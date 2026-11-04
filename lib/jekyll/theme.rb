@@ -7,8 +7,14 @@ module Jekyll
 
     def_delegator :gemspec, :version, :version
 
-    def initialize(name)
+    def initialize(name, gemspec: nil, ancestors: [])
       @name = name.downcase.strip
+      @gemspec = gemspec if gemspec
+      @ancestors = ancestors
+      if ancestors.include?(@name)
+        raise Errors::FatalException,
+              "Theme inheritance cycle: #{(ancestors + [@name]).join(" -> ")}"
+      end
       Jekyll.logger.debug "Theme:", name
       Jekyll.logger.debug "Theme source:", root
     end
@@ -51,7 +57,49 @@ module Jekyll
       gemspec.runtime_dependencies
     end
 
+    def inheritance_chain
+      @inheritance_chain ||= [self] + (parent ? parent.inheritance_chain : [])
+    end
+
+    def parent
+      return @parent if defined?(@parent)
+
+      parent_name = gemspec.metadata["jekyll:parent_theme"]
+      return @parent = nil if parent_name.nil?
+
+      unless parent_name.is_a?(String) && !parent_name.strip.empty?
+        raise Errors::FatalException, "The #{name} parent theme must be a non-empty gem name."
+      end
+
+      parent_name = parent_name.downcase.strip
+      dependency = parent_dependency(parent_name)
+      parent_spec = Gem::Specification.find_by_name(parent_name, dependency.requirement)
+      @parent = Theme.new(parent_name, :gemspec => parent_spec, :ancestors => @ancestors + [name])
+    rescue Gem::LoadError
+      raise Errors::MissingDependencyException,
+            "The parent theme #{parent_name} required by #{name} could not be found."
+    end
+
+    def in_theme_dir(*paths)
+      paths.reduce(root) { |base, path| Jekyll.sanitized_path(base, path) }
+    end
+
+    # The Sass converter sanitizes user paths in safe mode. Installed parent
+    # themes, like its existing theme path, are trusted gem resource paths.
+    module SassPaths
+      def sass_load_paths
+        parents = site.theme.inheritance_chain.drop(1)
+        (super + parents.filter_map(&:sass_path)).uniq
+      end
+    end
+
     private
+
+    def parent_dependency(parent_name)
+      runtime_dependencies.find { |dep| dep.name == parent_name } ||
+        raise(Errors::FatalException,
+              "The #{name} parent theme #{parent_name} must be a runtime dependency.")
+    end
 
     def path_for(folder)
       path = realpath_for(folder)

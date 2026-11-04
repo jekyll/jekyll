@@ -35,6 +35,8 @@ group :test do
   gem "rubocop-rake"
   gem "rubocop-rspec"
   gem "test-dependency-theme", :path => File.expand_path("test/fixtures/test-dependency-theme", __dir__)
+  gem "test-child-theme", :path => File.expand_path("test/fixtures/test-child-theme", __dir__)
+  gem "test-parent-theme", :path => File.expand_path("test/fixtures/test-parent-theme", __dir__)
   gem "test-theme", :path => File.expand_path("test/fixtures/test-theme", __dir__)
   gem "test-theme-skinny", :path => File.expand_path("test/fixtures/test-theme-skinny", __dir__)
   gem "test-theme-symlink", :path => File.expand_path("test/fixtures/test-theme-symlink", __dir__)

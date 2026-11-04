@@ -1,0 +1,3 @@
+theme_options:
+  child_only: child-config
+  shared: child-config

@@ -1,0 +1,5 @@
+---
+---
+@import "palette";
+@import "parent-only";
+.inherited { color: $theme-color; width: $parent-size; }

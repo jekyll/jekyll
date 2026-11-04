@@ -131,6 +131,11 @@ module Jekyll
       plugin_manager.conscientious_require
 
       self.converters = instantiate_subclasses(Jekyll::Converter)
+      if theme&.parent
+        converters.grep(Jekyll::Converters::Scss).each do |converter|
+          converter.extend(Theme::SassPaths)
+        end
+      end
       self.generators = instantiate_subclasses(Jekyll::Generator)
     end
 
@@ -407,11 +412,7 @@ module Jekyll
     #
     # Returns a path which is prefixed with the theme root directory.
     def in_theme_dir(*paths)
-      return nil unless theme
-
-      paths.reduce(theme.root) do |base, path|
-        Jekyll.sanitized_path(base, path)
-      end
+      theme&.in_theme_dir(*paths)
     end
 
     # Public: Prefix a given path with the destination directory.
@@ -459,19 +460,11 @@ module Jekyll
     def load_theme_configuration(config)
       return config if config["ignore_theme_config"] == true
 
-      theme_config_file = in_theme_dir("_config.yml")
-      return config unless File.exist?(theme_config_file)
-
-      # Bail out if the theme_config_file is a symlink file irrespective of safe mode
-      return config if File.symlink?(theme_config_file)
-
-      theme_config = SafeYAML.load_file(theme_config_file)
-      return config unless theme_config.is_a?(Hash)
-
-      Jekyll.logger.info "Theme Config file:", theme_config_file
-
-      # theme_config should not be overriding Jekyll's defaults
-      theme_config.delete_if { |key, _| Configuration::DEFAULTS.key?(key) }
+      theme_config = {}
+      theme.inheritance_chain.reverse_each do |layer|
+        theme_config = Utils.deep_merge_hashes(theme_config, read_theme_configuration(layer))
+      end
+      return config if theme_config.empty?
 
       # Override theme_config with existing config and return the result.
       # Additionally ensure we return a `Jekyll::Configuration` instance instead of a Hash.
@@ -479,6 +472,17 @@ module Jekyll
         .each_with_object(Jekyll::Configuration.new) do |(key, value), conf|
           conf[key] = value
         end
+    end
+
+    def read_theme_configuration(layer)
+      path = layer.in_theme_dir("_config.yml")
+      return {} unless File.file?(path) && !File.symlink?(path)
+
+      values = SafeYAML.load_file(path)
+      return {} unless values.is_a?(Hash)
+
+      Jekyll.logger.info "Theme Config file:", path
+      values.reject { |key, _| Configuration::DEFAULTS.key?(key) }
     end
 
     # Limits the current posts; removes the posts which exceed the limit_posts
@@ -542,7 +546,9 @@ module Jekyll
 
     def configure_include_paths
       @includes_load_paths = Array(in_source_dir(config["includes_dir"].to_s))
-      @includes_load_paths << theme.includes_path if theme&.includes_path
+      theme&.inheritance_chain&.each do |layer|
+        @includes_load_paths << layer.includes_path if layer.includes_path
+      end
     end
 
     def configure_file_read_opts
