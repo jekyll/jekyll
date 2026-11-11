@@ -74,6 +74,7 @@ Use a SaaS service as a backend for functionality on your Jekyll site
   - [Elastic Site Search](http://elastic.co/products/site-search/service?ultron=resources&blade=jekyll&hulk=referral): Another option for adding search to your Jekyll site, built on Elasticsearch
   - [Bonsai Search](https://docs.bonsai.io/article/217-jekyll): The easiest way to use Elasticsearch for your Jekyll site
   - [CloudSh](https://cloudsh.com/generators/how-to-setup-search-on-jekyll/): Website search with a few lines of JavaScript
+  - [OneTag for Jekyll](https://github.com/fengyiqicoder/jekyll-onetag): Lets readers ask questions answered from your pages, and writes llms.txt; two includes, no plugin, works on GitHub Pages
 
 ## Editors plugins
 
