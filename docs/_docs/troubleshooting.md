@@ -162,7 +162,7 @@ Alternatively, Homebrew can be installed and used to set up Ruby. This can be
 done as follows:
 
 ```sh
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 Once Homebrew is installed, the second step is to run:
