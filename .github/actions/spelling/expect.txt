@@ -143,12 +143,14 @@ gettalong
 ghp
 ghpages
 giraffeacademy
+gitcms
 githubcom
 gitlab
 gjtorikian
 globbed
 gotcha
 Goulven
+GPT
 gridism
 GSo
 gsubbing

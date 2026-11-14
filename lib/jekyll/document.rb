@@ -84,7 +84,7 @@ module Jekyll
     #
     # Return document date string.
     def date
-      data["date"] ||= (draft? ? source_file_mtime : site.time)
+      data["date"] || fallback_date
     end
 
     # Return document file modification time in the form of a Time object.
@@ -538,6 +538,10 @@ module Jekyll
 
     def generate_excerpt
       data["excerpt"] ||= Jekyll::Excerpt.new(self) if generate_excerpt?
+    end
+
+    def fallback_date
+      @fallback_date ||= (draft? ? source_file_mtime : site.time)
     end
   end
 end
