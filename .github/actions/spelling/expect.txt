@@ -30,6 +30,7 @@ Blogger
 blogging
 blogs
 bonafide
+bootform
 Bou
 breadcrumbs
 briandoll
@@ -83,6 +84,7 @@ DCEU
 Debian
 defunkt
 delegators
+deployhq
 devcontainer
 digitalocean
 disqus
@@ -125,6 +127,7 @@ formcake
 formcarry
 formester
 formingo
+forminit
 formkeep
 formspark
 formspree
@@ -154,6 +157,7 @@ GPT
 gridism
 GSo
 gsubbing
+harvis
 hashbang
 henrik
 heroku
@@ -281,6 +285,7 @@ ngx
 nielsenramon
 noifniof
 notextile
+npx
 onebox
 oneclick
 opensource
@@ -322,6 +327,7 @@ pufuwozu
 pygments
 qrush
 Quaid
+Rackspace
 rackup
 razorops
 rdiscount
@@ -456,6 +462,7 @@ We'd
 webfonts
 webhosting
 webmentions
+webroot
 website
 wildcards
 willcodeforfoo
