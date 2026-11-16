@@ -29,7 +29,7 @@
   * build: fix broken CI on newer rubies (#9954)
 
 ### Minor Enhancements
-
+  * Support themes from a local `_themes` folder (#6199)
   * feat: Allowing post_url tag to receive liquid variables (#9776)
   * Add .ruby-lsp to default excludes (#9914)
   * Allow configuring future metadata for individual collections (#9925)
