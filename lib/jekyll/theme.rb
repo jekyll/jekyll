@@ -87,4 +87,69 @@ module Jekyll
             "The #{name} theme could not be found."
     end
   end
+
+    # A theme that lives in the "_themes" folder of a site's source instead of
+    # in an installed gem. The folder is expected to have the same structure as
+    # a gem-based theme: "_layouts", "_includes", "_sass", "assets" and "_data"
+    # subfolders are picked up exactly like they are for gem-based themes, and
+    # files in the site itself take precedence over files from the theme.
+    class LocalTheme < Theme
+          attr_reader :root
+
+          class << self
+                  # Public: Build a LocalTheme for the given theme name if a matching folder exists in the "_themes" folder of the site's source.
+                  #
+                  # source - the String path to the site's source folder.
+                  # name   - the String name of the theme from the site's config.
+                  #
+                  # Returns the LocalTheme, or nil if there is no matching folder.
+                  def from_source(source, name)
+                            root = theme_root(source, name)
+                            new(name, root) if root
+                  end
+
+                  private
+                  def theme_root(source, name)
+                            return unless valid_name?(name)
+
+                            path = File.join(source, "_themes", name.downcase.strip)
+                            File.realpath(path) if File.directory?(path)
+                  rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP
+                            nil
+                  end
+
+                  # Theme names double as folder names here, so they may not contain
+                  # anything that could point outside of the "_themes" folder.
+                  def valid_name?(name)
+                            name = name.downcase.strip
+                            !name.empty? && !name.start_with?(".") &&
+                              !name.include?("/") && !name.include?("\\")
+                  end
+          end
+
+          def initialize(name, root)
+                  @name = name.downcase.strip
+                  @root = root
+                  Jekyll.logger.debug "Theme:", name
+                  Jekyll.logger.debug "Theme source:", root
+          end
+
+          # A local theme is not backed by a gem, so it has no version.
+          def version
+                  nil
+          end
+
+          # A local theme is not backed by a gem, so it declares no runtime
+          # dependencies.
+          def runtime_dependencies
+                  []
+          end
+
+          private
+
+          # A local theme is not backed by a gem.
+          def gemspec
+                  nil
+          end
+    end
 end

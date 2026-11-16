@@ -538,6 +538,11 @@ module Jekyll
                                        "gem-based themes, but got #{config["theme"].class}"
           nil
         end
+    rescue Jekyll::Errors::MissingDependencyException
+              # The theme is not an installed gem. Fall back to a theme of the same
+              # name in the "_themes" folder of the site's source, if there is one.
+              self.theme = Jekyll::LocalTheme.from_source(source, config["theme"].to_s)
+              raise unless theme
     end
 
     def configure_include_paths
