@@ -45,6 +45,51 @@ If you have the theme gem, you can (if you desire) run `bundle update` to update
 
 The goal of gem-based themes is to allow you to get all the benefits of a robust, continually updated theme without having all the theme's files getting in your way and over-complicating what might be your primary focus: creating content.
 
+## Using a local theme
+
+A theme does not have to be installed as a gem. You can also keep the theme
+inside your site's source folder, in a `_themes` directory, and activate it
+with the same `theme` setting used for gem-based themes:
+
+```
+.
+├── _config.yml
+├── _posts
+└── _themes
+    └── my-theme
+        ├── _data
+        ├── _includes
+        ├── _layouts
+        ├── _sass
+        └── assets
+```
+
+```yaml
+#./_config.yml
+
+theme: my-theme
+```
+
+When Jekyll builds your site, it first looks for an installed gem with the
+name given in the `theme` setting. If no such gem exists, it looks for a
+folder with that name in the `_themes` directory of your site instead. If
+there is no gem and no local folder either, the build fails with an error
+telling you that the theme could not be found.
+
+A local theme works like a gem-based theme: its layouts, includes, data,
+stylesheets and assets are read during the build, and any file in your site
+with the same relative path overrides the theme's file, as described in
+[Overriding theme defaults](#overriding-theme-defaults) below. A `_config.yml`
+file at the root of the local theme folder is read as the theme's own
+configuration, just like with gem-based themes.
+
+Local themes are useful when you cannot install gems in your build
+environment, or when you want to keep the theme in the same repository as
+your site, for example to adapt an existing theme to your needs. Unlike
+gem-based themes, local themes are not updated through RubyGems, and they
+cannot declare runtime dependencies, so any plugins your theme relies on
+have to be installed by the site itself.
+
 ## Overriding theme defaults
 
 Jekyll themes set default data, layouts, includes, and stylesheets. However, you can override any of the theme defaults with your own site content.
