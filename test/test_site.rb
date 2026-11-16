@@ -638,6 +638,23 @@ class TestSite < JekyllUnitTest
         assert_instance_of Jekyll::Theme, site.theme
         assert_equal "test-theme", site.theme.name
       end
+
+              should "set a local theme if the theme is a folder in _themes" do
+                          theme_root = source_dir("_themes", "local-theme")
+                          FileUtils.mkdir_p(File.join(theme_root, "_layouts"))
+                          site = fixture_site("theme" => "local-theme")
+                          assert_instance_of Jekyll::LocalTheme, site.theme
+                          assert_equal "local-theme", site.theme.name
+                          assert_equal File.realpath(theme_root), site.theme.root
+                        ensure
+                          FileUtils.rm_rf(source_dir("_themes"))
+              end
+
+              should "raise an error if the theme cannot be found" do
+                          assert_raises Jekyll::Errors::MissingDependencyException do
+                                        fixture_site("theme" => "not-a-theme")
+                          end
+              end
     end
 
     context "with liquid profiling" do
