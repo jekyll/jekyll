@@ -10,19 +10,19 @@ module Jekyll
       end
 
       def authors
-        @authors ||= gemspec.authors.join(", ")
+        @authors ||= gemspec ? gemspec.authors.join(", ") : ""
       end
 
       def version
-        @version ||= gemspec.version.to_s
+        @version ||= gemspec ? gemspec.version.to_s : ""
       end
 
       def description
-        @description ||= gemspec.description || gemspec.summary
+        @description ||= gemspec ? (gemspec.description || gemspec.summary) : ""
       end
 
       def metadata
-        @metadata ||= gemspec.metadata
+        @metadata ||= gemspec ? gemspec.metadata : {}
       end
 
       private

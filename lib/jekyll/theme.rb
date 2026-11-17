@@ -87,4 +87,105 @@ module Jekyll
             "The #{name} theme could not be found."
     end
   end
+
+  # A theme that lives in the "_themes" folder of a site's source instead of in
+  # an installed gem. It has the same structure as a gem-based theme and is
+  # resolved through the existing `theme` configuration setting.
+  class LocalTheme < Theme
+    attr_reader :root
+
+    class << self
+      # Public: Build a LocalTheme for the given theme name if a matching folder
+      # exists in the "_themes" folder of the site's source.
+      #
+      # source - the String path to the site's source folder.
+      # name   - the String name of the theme from the site's config.
+      #
+      # Returns the LocalTheme, or nil if there is no matching folder.
+      def from_source(source, name)
+        return nil unless source
+
+        root = theme_root(source, name)
+        new(name, root) if root
+      end
+
+      # Compatibility with implementations that resolve a theme from a Site
+      # instance instead of from its source directory.
+      def from_site(site, name)
+        from_source(site&.source, name)
+      end
+
+      private
+
+      def theme_root(source, name)
+        return nil unless valid_name?(name)
+
+        themes_dir = File.join(source, "_themes")
+        theme_name = name.downcase.strip
+        path = File.join(themes_dir, theme_name)
+
+        resolved = resolved_path_within(path, themes_dir)
+        return resolved if resolved
+
+        # Fall back to a single "_theme" directory, as supported by some
+        # local-theme implementations. This directory is used as-is, so it
+        # must stay inside the site's source.
+        fallback = File.join(source, "_theme")
+        resolved_path_within(fallback, source)
+      rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP, ArgumentError
+        nil
+      end
+
+      # Resolve `path` and make sure the result stays inside `base`. This
+      # prevents a theme name or a symlink from pointing outside of the
+      # directory that is supposed to contain it.
+      def resolved_path_within(path, base)
+        return nil unless File.directory?(path)
+
+        base_real = File.realpath(base)
+        path_real = File.realpath(path)
+        return nil unless path_real == base_real ||
+          path_real.start_with?(base_real + File::SEPARATOR)
+
+        path_real
+      rescue Errno::ENOENT, Errno::EACCES, Errno::ELOOP, ArgumentError
+        nil
+      end
+
+      # Theme names double as folder names here, so they may not contain anything
+      # that could point outside of the "_themes" folder.
+      def valid_name?(name)
+        return false unless name.is_a?(String)
+
+        name = name.downcase.strip
+        !name.empty? && !name.start_with?(".") &&
+          !name.include?("/") && !name.include?("\\")
+      end
+    end
+
+    def initialize(name, root)
+      @name = name.downcase.strip
+      @root = root
+      Jekyll.logger.debug "Theme:", name
+      Jekyll.logger.debug "Theme source:", root
+    end
+
+    # A local theme is not backed by a gem, so it has no version.
+    def version
+      nil
+    end
+
+    # A local theme is not backed by a gem, so it declares no runtime
+    # dependencies.
+    def runtime_dependencies
+      []
+    end
+
+    private
+
+    # A local theme is not backed by a gem.
+    def gemspec
+      nil
+    end
+  end
 end
