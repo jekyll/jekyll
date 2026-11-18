@@ -89,7 +89,7 @@ module Jekyll
     # Check if given path is outside of current site's configured source directory.
     # --
     def symlink_outside_site_source?(entry)
-      !File.realpath(entry).start_with?(site.in_source_dir)
+      !PathManager.path_within?(entry, site.in_source_dir)
     end
 
     # Check if an entry matches a specific pattern.

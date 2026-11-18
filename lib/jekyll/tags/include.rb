@@ -166,7 +166,7 @@ module Jekyll
       end
 
       def realpath_prefixed_with?(path, dir)
-        File.exist?(path) && File.realpath(path).start_with?(dir)
+        File.exist?(path) && PathManager.path_within?(path, dir)
       rescue StandardError
         false
       end
@@ -228,7 +228,7 @@ module Jekyll
       end
 
       def realpath_prefixed_with?(path, dir)
-        File.realpath(path).start_with?(dir)
+        PathManager.path_within?(path, dir)
       rescue StandardError
         false
       end
