@@ -42,6 +42,32 @@ class TestTagInclude < TagUnitTest
           ex.message
         )
       end
+
+      should "not allow a symlink to a sibling dir prefixed with the includes dir" do
+        evil_dir = source_dir("_includes_evil")
+        link = source_dir("_includes", "prefix-link.txt")
+        FileUtils.mkdir_p(evil_dir)
+        File.write(File.join(evil_dir, "secret.txt"), "PREFIX-BYPASS-SECRET")
+        File.symlink("../_includes_evil/secret.txt", link)
+        begin
+          content = <<~CONTENT
+            ---
+            title: Include symlink prefix
+            ---
+
+            {% include prefix-link.txt %}
+
+          CONTENT
+          assert_raises IOError do
+            render_content(content, "safe" => true)
+          end
+          @result ||= ""
+          refute_match(%r!PREFIX-BYPASS-SECRET!, @result)
+        ensure
+          FileUtils.rm_f(link)
+          FileUtils.rm_rf(evil_dir)
+        end
+      end
     end
 
     context "with one parameter" do

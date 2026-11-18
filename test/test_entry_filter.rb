@@ -92,6 +92,24 @@ class TestEntryFilter < JekyllUnitTest
       assert_equal %w(), entries
     end
 
+    should "treat a symlink to a sibling <source><suffix> dir as outside source" do
+      # no support for symlinks on Windows
+      skip_if_windows "Jekyll does not currently support symlinks on Windows."
+
+      sibling = "#{source_dir}_secops_evil"
+      link = File.join(source_dir, "secops-sibling-link.txt")
+      FileUtils.mkdir_p(sibling)
+      File.write(File.join(sibling, "secret.txt"), "SIBLING-SECRET")
+      File.symlink(File.join(sibling, "secret.txt"), link)
+      begin
+        assert EntryFilter.new(@site).symlink_outside_site_source?(link),
+               "a symlink to a sibling <source><suffix> dir must be outside the source"
+      ensure
+        FileUtils.rm_f(link)
+        FileUtils.rm_rf(sibling)
+      end
+    end
+
     should "include only safe symlinks in safe mode" do
       # no support for symlinks on Windows
       skip_if_windows "Jekyll does not currently support symlinks on Windows."

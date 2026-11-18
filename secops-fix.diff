@@ -1,0 +1,128 @@
+diff --git a/lib/jekyll/entry_filter.rb b/lib/jekyll/entry_filter.rb
+index 4e70a5d..65f4057 100644
+--- a/lib/jekyll/entry_filter.rb
++++ b/lib/jekyll/entry_filter.rb
+@@ -89,7 +89,7 @@ module Jekyll
+     # Check if given path is outside of current site's configured source directory.
+     # --
+     def symlink_outside_site_source?(entry)
+-      !File.realpath(entry).start_with?(site.in_source_dir)
++      !PathManager.path_within?(entry, site.in_source_dir)
+     end
+ 
+     # Check if an entry matches a specific pattern.
+diff --git a/lib/jekyll/path_manager.rb b/lib/jekyll/path_manager.rb
+index 5d97522..f21b8d4 100644
+--- a/lib/jekyll/path_manager.rb
++++ b/lib/jekyll/path_manager.rb
+@@ -45,6 +45,22 @@ module Jekyll
+                                                                end
+       end
+ 
++      # Returns true if the real (symlink-resolved) location of +path+ is the
++      # +base_directory+ itself or is contained within it.
++      #
++      # This performs a separator-aware containment check rather than a plain
++      # `String#start_with?` comparison, which would incorrectly treat a sibling
++      # directory such as `/base_suffix` as being inside `/base`.
++      #
++      # Returns false if +path+ does not exist or cannot be resolved.
++      def path_within?(path, base_directory)
++        base = base_directory.to_s.chomp(File::SEPARATOR)
++        real = File.realpath(path)
++        real == base || real.start_with?("#{base}#{File::SEPARATOR}")
++      rescue StandardError
++        false
++      end
++
+       private
+ 
+       def sanitize_and_join(base_directory, questionable_path)
+diff --git a/lib/jekyll/tags/include.rb b/lib/jekyll/tags/include.rb
+index fa2e1f3..9f56de6 100644
+--- a/lib/jekyll/tags/include.rb
++++ b/lib/jekyll/tags/include.rb
+@@ -166,7 +166,7 @@ module Jekyll
+       end
+ 
+       def realpath_prefixed_with?(path, dir)
+-        File.exist?(path) && File.realpath(path).start_with?(dir)
++        File.exist?(path) && PathManager.path_within?(path, dir)
+       rescue StandardError
+         false
+       end
+@@ -228,7 +228,7 @@ module Jekyll
+       end
+ 
+       def realpath_prefixed_with?(path, dir)
+-        File.realpath(path).start_with?(dir)
++        PathManager.path_within?(path, dir)
+       rescue StandardError
+         false
+       end
+diff --git a/test/test_entry_filter.rb b/test/test_entry_filter.rb
+index 65d1d36..6281e01 100644
+--- a/test/test_entry_filter.rb
++++ b/test/test_entry_filter.rb
+@@ -92,6 +92,24 @@ class TestEntryFilter < JekyllUnitTest
+       assert_equal %w(), entries
+     end
+ 
++    should "treat a symlink to a sibling <source><suffix> dir as outside source" do
++      # no support for symlinks on Windows
++      skip_if_windows "Jekyll does not currently support symlinks on Windows."
++
++      sibling = "#{source_dir}_secops_evil"
++      link = File.join(source_dir, "secops-sibling-link.txt")
++      FileUtils.mkdir_p(sibling)
++      File.write(File.join(sibling, "secret.txt"), "SIBLING-SECRET")
++      File.symlink(File.join(sibling, "secret.txt"), link)
++      begin
++        assert EntryFilter.new(@site).symlink_outside_site_source?(link),
++               "a symlink to a sibling <source><suffix> dir must be outside the source"
++      ensure
++        FileUtils.rm_f(link)
++        FileUtils.rm_rf(sibling)
++      end
++    end
++
+     should "include only safe symlinks in safe mode" do
+       # no support for symlinks on Windows
+       skip_if_windows "Jekyll does not currently support symlinks on Windows."
+diff --git a/test/test_tag_include.rb b/test/test_tag_include.rb
+index 59fbb17..efbbded 100644
+--- a/test/test_tag_include.rb
++++ b/test/test_tag_include.rb
+@@ -42,6 +42,32 @@ class TestTagInclude < TagUnitTest
+           ex.message
+         )
+       end
++
++      should "not allow a symlink to a sibling dir prefixed with the includes dir" do
++        evil_dir = source_dir("_includes_evil")
++        link = source_dir("_includes", "prefix-link.txt")
++        FileUtils.mkdir_p(evil_dir)
++        File.write(File.join(evil_dir, "secret.txt"), "PREFIX-BYPASS-SECRET")
++        File.symlink("../_includes_evil/secret.txt", link)
++        begin
++          content = <<~CONTENT
++            ---
++            title: Include symlink prefix
++            ---
++
++            {% include prefix-link.txt %}
++
++          CONTENT
++          assert_raises IOError do
++            render_content(content, "safe" => true)
++          end
++          @result ||= ""
++          refute_match(%r!PREFIX-BYPASS-SECRET!, @result)
++        ensure
++          FileUtils.rm_f(link)
++          FileUtils.rm_rf(evil_dir)
++        end
++      end
+     end
+ 
+     context "with one parameter" do

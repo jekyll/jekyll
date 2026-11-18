@@ -45,6 +45,22 @@ module Jekyll
                                                                end
       end
 
+      # Returns true if the real (symlink-resolved) location of +path+ is the
+      # +base_directory+ itself or is contained within it.
+      #
+      # This performs a separator-aware containment check rather than a plain
+      # `String#start_with?` comparison, which would incorrectly treat a sibling
+      # directory such as `/base_suffix` as being inside `/base`.
+      #
+      # Returns false if +path+ does not exist or cannot be resolved.
+      def path_within?(path, base_directory)
+        base = base_directory.to_s.chomp(File::SEPARATOR)
+        real = File.realpath(path)
+        real == base || real.start_with?("#{base}#{File::SEPARATOR}")
+      rescue StandardError
+        false
+      end
+
       private
 
       def sanitize_and_join(base_directory, questionable_path)
