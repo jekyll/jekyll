@@ -187,9 +187,30 @@ h6:hover .header-link {
   opacity: 1;
 }
 
+@media (min-width: 700px) and (max-width: 875px) {
+  header .flexbox {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
+    align-items: center;
+    row-gap: 10px;
+    height: auto;
+
+    & > * { margin: 0 }
+    .center-on-mobiles { grid-row: span 2 }
+    .search { justify-self: start }
+  }
+}
+@media (max-width: 699px) {
+  header .flexbox {
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 10px;
+  }
+}
 @media (max-width: 580px) {
   header {
-    .flexbox { height: auto }
     .logo img { margin-top: 0 }
   }
 }
@@ -205,7 +226,7 @@ h6:hover .header-link {
     .hide-on-mobiles { display: none; }
   }
 }
-@media (max-width: 890px) {
+@media (max-width: 1060px) {
   .meta { display: none; }
 }
 
