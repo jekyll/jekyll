@@ -67,9 +67,7 @@ Read this [Jekyll step-by-step guide](https://www.netlify.com/blog/2020/04/02/a-
 
 ## 21YunBox
 
-[21YunBox](https://www.21yunbox.com) provides blazing fast Chinese CDN, Continuous Deployment, one click HTTPS and [much more](https://www.21yunbox.com/docs/), providing developers a hassle-free solution to launch their web projects in China.
-
-Read this [Jekyll step-by-step guide](https://www.21yunbox.com/docs/#/deploy-jekyll) to deploy your Jekyll site on 21YunBox.
+[21YunBox](https://www.21cloudbox.com/china-website-performance-optimizer.html) is an overlay that makes an existing Jekyll site work in mainland China: the 21YunBox Optimizer delivers the site inside China, and the 21YunBox team handles the ICP filing. Onboarding is done with the team after compliance verification.
 
 ## Layer0
 
