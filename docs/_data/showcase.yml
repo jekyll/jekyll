@@ -232,12 +232,6 @@
   categories:
     - government
 
-- name: Paris Call for Trust and Security in Cyberspace
-  url: https://pariscall.international/
-  image: appel-de-paris.png
-  categories:
-    - government
-
 - name: TwitchCon
   url: https://www.twitchcon.com/
   image: twitchcon.png
