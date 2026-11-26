@@ -25,6 +25,6 @@ Jekyll gets a lot of feature requests, non-reproducible bug reports, usage quest
 
 ---
 
-Thanks to https://gist.github.com/ryanflorence/124070e7c4b3839d4573 which influenced this document.
+Thanks to [https://gist.github.com/ryanflorence/124070e7c4b3839d4573](https://gist.github.com/ryanflorence/124070e7c4b3839d4573) which influenced this document.
 
 Thanks to [Homebrew's "Avoiding Burnout" document](https://github.com/Homebrew/brew/blob/master/docs/Maintainers-Avoiding-Burnout.md) for providing a perfect base for this document.
