@@ -41,6 +41,12 @@ language identifier. To find the appropriate identifier to use for the language
 you want to highlight, look for the “short name” on the [Rouge
 wiki](https://github.com/jayferd/rouge/wiki/List-of-supported-languages-and-lexers).
 
+Jekyll renders the Liquid `highlight` tag separately from fenced code blocks
+in Markdown. The HTML around the code can differ even when both use Rouge.
+With the default configuration, a highlighted Ruby example uses
+`<figure class="highlight">` as the Liquid tag's outer wrapper. A fenced Ruby
+example uses `<div class="language-ruby highlighter-rouge">`.
+
 <div class="note">
   <h5>Jekyll processes all Liquid filters in code blocks</h5>
   <p>If you are using a language that contains curly braces, you
