@@ -138,7 +138,7 @@ release workflow publishes the new tag.
 And then, if the workflow has completed successfully, you're done! :tada:
 Feel free to celebrate!
 
-If you have access to the [@jekyllrb](https://twitter.com/jekyllrb) Twitter account, you should tweet the release post from there. If not, just
+If you have access to the [@jekyllrb](https://x.com/jekyllrb) X account, you should post the release post from there. If not, just
 ask another maintainer to do it or to give you access.
 
 ### Build the docs
